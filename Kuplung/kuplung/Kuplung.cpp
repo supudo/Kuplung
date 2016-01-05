@@ -191,6 +191,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
             case SDL_WINDOWEVENT_SIZE_CHANGED:
                 Settings::Instance()->SDL_Window_Width = (int)ev->window.data1;
                 Settings::Instance()->SDL_Window_Height = (int)ev->window.data2;
+                Settings::Instance()->saveSettings();
                 break;
             default:
                 break;

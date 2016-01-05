@@ -84,6 +84,30 @@ std::string Settings::appFolder() {
 }
 
 void Settings::saveSettings() {
+    this->cfgUtils->writeInt("OpenGLMajorVersion", this->OpenGLMajorVersion);
+    this->cfgUtils->writeInt("OpenGLMinorVersion", this->OpenGLMinorVersion);
+    this->cfgUtils->writeInt("OpenGL_GLSL_Version", this->OpenGL_GLSL_Version);
+
+    this->cfgUtils->writeString("appVersion", this->appVersion);
+    this->cfgUtils->writeString("currentFolder", this->currentFolder);
+    this->cfgUtils->writeString("ShaderName", this->ShaderName);
+
+    this->cfgUtils->writeBool("showGrid", this->showGrid);
+    this->cfgUtils->writeBool("showLight", this->showLight);
+    this->cfgUtils->writeBool("showAxes", this->showAxes);
+    this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
+    this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);
+    this->cfgUtils->writeBool("logFileBrowser", this->logFileBrowser);
+
+    this->cfgUtils->writeInt("frameLog_Width", this->frameLog_Width);
+    this->cfgUtils->writeInt("frameLog_Height", this->frameLog_Height);
+
+    this->cfgUtils->writeInt("frameFileBrowser_Width", this->frameFileBrowser_Width);
+    this->cfgUtils->writeInt("frameFileBrowser_Height", this->frameFileBrowser_Height);
+
+    this->cfgUtils->writeInt("SDL_Window_Width", this->SDL_Window_Width);
+    this->cfgUtils->writeInt("SDL_Window_Height", this->SDL_Window_Height);
+
     this->cfgUtils->saveSettings();
 }
 
