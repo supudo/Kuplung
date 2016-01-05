@@ -45,7 +45,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showAboutKuplung = false;
     this->showAboutImgui = false;
     this->displaySceneStats = false;
-    this->showHeightmap = true;
+    this->showHeightmap = false;
     this->showEditor = false;
     this->newHeightmap = false;
     
