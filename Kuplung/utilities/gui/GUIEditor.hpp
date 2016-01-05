@@ -26,7 +26,7 @@ private:
     void logMessage(std::string logMessage);
     void compileShader();
 
-    std::string appPath, fileContents;
+    std::string appPath, fileContents, currentFileName;
     int positionX, positionY, width, height, shaderFileIndex;
     char guiEditorText[1024 * 16];
 };

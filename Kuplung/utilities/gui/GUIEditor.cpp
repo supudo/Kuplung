@@ -34,6 +34,7 @@ void GUIEditor::init(std::string appPath, int positionX, int positionY, int widt
     this->height = height;
     this->doLog = doLog;
     this->shaderFileIndex = 0;
+    this->currentFileName = "";
 }
 
 void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCompile, const char* title, bool* p_opened) {
@@ -56,18 +57,20 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
 
     ImGui::BeginChild("scrolling");
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
-    
-    //TODO: optimize for once per change, not every draw call
+
     if (this->shaderFileIndex > 0) {
-        std::string filePath = Settings::Instance()->appFolder() + "/shaders/" + GUIEditor_ShaderItems[this->shaderFileIndex];
-        std::FILE *fp = std::fopen(filePath.c_str(), "rb");
-        if (fp) {
-            std::fseek(fp, 0, SEEK_END);
-            this->fileContents.resize(std::ftell(fp));
-            std::rewind(fp);
-            std::fread(&this->fileContents[0], 1, this->fileContents.size(), fp);
-            std::fclose(fp);
-        }
+       if (this->currentFileName != GUIEditor_ShaderItems[this->shaderFileIndex]) {
+            this->currentFileName = GUIEditor_ShaderItems[this->shaderFileIndex];
+            std::string filePath = Settings::Instance()->appFolder() + "/shaders/" + GUIEditor_ShaderItems[this->shaderFileIndex];
+            std::FILE *fp = std::fopen(filePath.c_str(), "rb");
+            if (fp) {
+                std::fseek(fp, 0, SEEK_END);
+                this->fileContents.resize(std::ftell(fp));
+                std::rewind(fp);
+                std::fread(&this->fileContents[0], 1, this->fileContents.size(), fp);
+                std::fclose(fp);
+            }
+       }
     }
     else
         this->fileContents = "";
