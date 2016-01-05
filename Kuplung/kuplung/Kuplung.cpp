@@ -157,6 +157,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
                     }
 
                     this->gameIsRunning = true;
+                    this->sceneSelectedModelObject = -1;
 
                     this->initSceneGUI();
                 }
@@ -222,70 +223,10 @@ void Kuplung::onEvent(SDL_Event *ev) {
     }
     
     if (this->managerControls->mouseButton_LEFT) {
-        int width = Settings::Instance()->SDL_Window_Width;
-        int height = Settings::Instance()->SDL_Window_Height;
-
-//        int mX = this->managerControls->mousePosition.x;
-//        int mouseY = this->managerControls->mousePosition.y;
-//        int mY = Settings::Instance()->SDL_Window_Height - mouseY;
-//        
-//        glm::vec4 viewport = glm::vec4(0.0f, 0.0f, width, height);
-//        glm::vec3 win_near = glm::vec3(mX, mY, 0.0);
-//        glm::vec3 win_far = glm::vec3(mX, mY, 1.0);
-//
-//        printf("%i - %i --> ", mX, mY);
-//        for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-//            MeshModelFace *mmf = this->meshModelFaces[i];
-//            
-//            glm::mat4 matrixModelView = mmf->matrixModel * mmf->matrixCamera;
-//            glm::vec3 un_near = glm::unProject(win_near, matrixModelView, mmf->matrixProjection, viewport);
-//            glm::vec3 un_far = glm::unProject(win_far, matrixModelView, mmf->matrixProjection, viewport);
-//            
-//            glm::vec3 ray_position = un_near;
-//            glm::vec3 ray_direction = un_far - un_near;
-//            
-//            //glm::intersectRayTriangle(<#const genType &orig#>, <#const genType &dir#>, <#const genType &v0#>, <#const genType &v1#>, <#const genType &v2#>, <#genType &baryPosition#>);
-//        }
-//        printf("\n");
-        
-        /*
-        float x = (2 * this->managerControls->mousePosition.x) / Settings::Instance()->SDL_Window_Width - 1;
-        float y = (2 * this->managerControls->mousePosition.y) / Settings::Instance()->SDL_Window_Height - 1;
-        
-        glm::vec2 normalizedMouseCoordinates = glm::vec2(x, -y);
-        glm::vec4 clipCoordinates = glm::vec4(normalizedMouseCoordinates, -1.0f, 1.0f);
-
-        for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-            MeshModelFace *mmf = this->meshModelFaces[i];
-            glm::mat4 matrixModelView = mmf->matrixModel * mmf->matrixCamera;
-
-            glm::mat4 invertedProjectionMatrix = glm::inverse(mmf->matrixProjection);
-            glm::vec4 eyeCoordinates2 = invertedProjectionMatrix * clipCoordinates;
-            glm::vec4 eyeCoordinates = glm::vec4(eyeCoordinates2.x, eyeCoordinates2.y, -1.0f, 0.0f);
-
-            glm::mat4 invertedViewMatrix = glm::inverse(matrixModelView);
-            glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates;
-            glm::vec3 mouseRay = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
-            glm::vec3 worldRay = glm::normalize(mouseRay);
-            
-            glm::vec3 barycentricIntersect;
-            
-            bool doesIntersect = false;
-            //doesIntersect = glm::intersectRayTriangle(origin, normalize(dir), p1, p2, p3, barycentricIntersect);
-            
-            std::string msg = "Bary: ";
-            msg += std::to_string(barycentricIntersect.x) + " ";
-            msg += std::to_string(barycentricIntersect.y) + " ";
-            msg += std::to_string(barycentricIntersect.z);
-            msg += " Intersects: " + std::to_string(doesIntersect) + "n";
-            this->doLog(msg);
-        }
-        */
-        
         int mouse_x = this->managerControls->mousePosition.x;
         int mouse_y = this->managerControls->mousePosition.y;
 
-        glm::vec4 viewport = glm::vec4(0.0f, 0.0f, width, height);
+        glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
         glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
         
@@ -294,9 +235,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
         glm::vec3 direction = glm::normalize(farPoint - nearPoint);
         
         // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
-        int Object_Selected = -1;
-        float Closest_Object = -1;
-        glm::vec3 World_Start_Location;
+        float sceneClosestObject = -1;
+        this->sceneSelectedModelObject = -1;
 
         for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
@@ -315,7 +255,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
                     glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j-1] - Vertices[j-2], Vertices[j] - Vertices[j-2]));
                     
                     float nDotL = glm::dot(direction, face_normal);
-                    if (nDotL <= 0.0f ) { //if nDotL == 0 { Perpindicular } else if nDotL < 0 { SameDirection } else { OppositeDirection }
+                    if (nDotL <= 0.0f ) {
                         float distance = glm::dot(face_normal, (Vertices[j-2] - nearPoint)) / nDotL;
 
                         glm::vec3 p = nearPoint + distance * direction;
@@ -323,33 +263,16 @@ void Kuplung::onEvent(SDL_Event *ev) {
                         glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j-1], p - Vertices[j-1]);
                         glm::vec3 n3 = glm::cross(Vertices[j-2] - Vertices[j], p - Vertices[j]);
                         if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
-                            if (p.z > Closest_Object) {
-                                
-                                //I Create this "dragplane" to be used by my dragging function.
-                                //Drag_Plane[0] = (glm::vec3(Vertices[j-2].x, Vertices[j-2].y, p.z ));
-                                //Drag_Plane[1] = (glm::vec3(Vertices[j-1].x, Vertices[j-1].y, p.z ));
-                                //Drag_Plane[2] = (glm::vec3(Vertices[j].x  , Vertices[j].y  , p.z ));
-                                
-                                //This is the object the we selected in the scene
-                                Object_Selected = i;
-                                printf("[%i, %i] %i - %s\n", mouse_x, mouse_y, Object_Selected, mmf->oFace.materialID.c_str());
-                                
-                                //These are the coordinate the ray intersected the object
-                                World_Start_Location = p;
+                            if (p.z > sceneClosestObject) {
+                                this->sceneSelectedModelObject = i;
+                                this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + mmf->oFace.materialID);
                                 break;
-                                
                             }
                         }
                     }
                 }
             }
-            if (Object_Selected >= 0) { //If an object was intersected by the ray
-                //selectObject -> Simply sets the boolean "dragging" to true
-                //selectObject(Object_Selected, mouse_x, mouse_y);
-                //printf("[%i, %i] %i - %s\n", mouse_x, mouse_y, Object_Selected, mmf->oFace.materialID.c_str());
-            }
         }
-        //printf("---- Picking DONE!\n");
     }
 }
 
@@ -690,6 +613,7 @@ void Kuplung::doLog(std::string logMessage) {
 
 void Kuplung::guiClearScreen() {
     this->scene = {};
+    this->meshModelFaces = {};
     this->gui->hideSceneSettings();
     this->gui->hideSceneStats();
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {

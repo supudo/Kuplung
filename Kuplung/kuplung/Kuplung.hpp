@@ -64,6 +64,7 @@ private:
     // Variables
     bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed;
     glm::mat4 matrixProjection, matrixCamera;
+    int sceneSelectedModelObject;
 
     // Customs
     FBEntity objFile;
