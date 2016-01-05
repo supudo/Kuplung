@@ -7,13 +7,11 @@
 //
 
 #include "Kuplung.hpp"
+#include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtx/intersect.hpp>
-#include <fstream>
-
-// change 1
 
 #pragma mark - Cleanup
 
@@ -95,7 +93,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
     
     Settings::Instance()->SDL_Window_Width = screenWidth;
     Settings::Instance()->SDL_Window_Height = screenHeight;
-    
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         printf("Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError());
         success = false;
