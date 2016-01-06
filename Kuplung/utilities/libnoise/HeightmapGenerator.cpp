@@ -6,6 +6,9 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+
+// http://www.chadvernon.com/blog/resources/directx9/terrain-generation-with-a-heightmap/
+
 #include "HeightmapGenerator.hpp"
 #include "noise.h"
 #include "noiseutils.h"
