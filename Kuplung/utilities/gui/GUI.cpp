@@ -6,12 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifdef _WIN32
-#include <GL/glew.h>
-#else
-#include <OpenGL/gl3.h>
-#endif
-#include <SDL2/SDL_opengl.h>
+#include "utilities/gl/GLIncludes.h"
 #include <SDL2/SDL_syswm.h>
 #include <string>
 #include <sstream>

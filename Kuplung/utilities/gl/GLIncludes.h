@@ -14,10 +14,11 @@
 #ifdef _WIN32
 #include <GL/glew.h>
 #else
-#include <OpenGL/gl3.h>
-#include <OpenGL/glext.h>
+//#include <OpenGL/gl3.h>
+//#include <OpenGL/glext.h>
 #endif
 
+#define GL_GLEXT_PROTOTYPES 1
 #include <SDL2/SDL_opengl.h>
 
 #endif /* GLIncludes_h */
