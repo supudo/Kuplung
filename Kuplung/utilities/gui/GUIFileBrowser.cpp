@@ -197,8 +197,8 @@ std::string GUIFileBrowser::convertSize(size_t size) {
     static const char *SIZES[] = { "B", "KB", "MB", "GB" };
     int div = 0;
     size_t rem = 0;
-    
-    while (size >= 1024 && div < (sizeof SIZES / sizeof *SIZES)) {
+
+    while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
         rem = (size % 1024);
         div++;
         size /= 1024;
