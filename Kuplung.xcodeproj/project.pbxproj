@@ -630,9 +630,9 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.58.0/include/boost,
+					/usr/local/Cellar/boost/1.59.0/include/boost,
 					/usr/local/Cellar/glfw3/3.1.2/include,
-					/usr/local/Cellar/glew/1.12.0/include,
+					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
@@ -640,9 +640,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.58.0/lib,
+					/usr/local/Cellar/boost/1.59.0/lib,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
-					/usr/local/Cellar/glew/1.12.0/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
@@ -677,9 +677,9 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.58.0/include/boost,
+					/usr/local/Cellar/boost/1.59.0/include/boost,
 					/usr/local/Cellar/glfw3/3.1.2/include,
-					/usr/local/Cellar/glew/1.12.0/include,
+					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
@@ -687,9 +687,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.58.0/lib,
+					/usr/local/Cellar/boost/1.59.0/lib,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
-					/usr/local/Cellar/glew/1.12.0/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",

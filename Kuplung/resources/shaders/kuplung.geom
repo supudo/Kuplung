@@ -36,12 +36,6 @@ void main() {
         fs_textureCoord = gs_in[i].gs_textureCoord;
         fs_vertexNormal = gs_in[i].gs_vertexNormal;
         EmitVertex();
-
-        gl_Position = gl_in[i].gl_Position + vec4(1.0, 0.0, 0.0, 0.0);
-        fs_vertexPosition = gs_in[i].gs_vertexPosition;
-        fs_textureCoord = gs_in[i].gs_textureCoord;
-        fs_vertexNormal = gs_in[i].gs_vertexNormal;
-        EmitVertex();
     }
 
     EndPrimitive();
