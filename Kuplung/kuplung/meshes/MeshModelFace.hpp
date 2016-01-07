@@ -33,7 +33,7 @@ public:
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
-    
+
 private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
@@ -41,9 +41,9 @@ private:
 
     float so_fov, so_alpha;
     glm::vec3 so_lightPosition, so_lightDirection, so_lightColor;
-    
+
     GLUtils *glUtils;
-    
+
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry;
     GLuint glVAO;
@@ -54,7 +54,7 @@ private:
     GLuint glUniformAlphaBlending, glUniform_CameraPosition;
     GLuint glUniformLight_Position, glUniformLight_Direction;
     GLuint glUniform_ambientColor, glUniform_diffuseColor, glUniform_specularColor;
-    
+
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
 };

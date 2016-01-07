@@ -28,7 +28,7 @@ void main(void) {
 //    fragColor = vec4(texelColor.rgb, texelColor.a * u_alpha);
 
     // ---
-//    
+//
 //    vec3 norm = normalize(v_vertexNormal);
 //
 //    vec3 fragPos = vec3(u_MMatrix * vec4(v_vertexPosition, 1.0f));
@@ -36,33 +36,33 @@ void main(void) {
 //
 //    float diff = max(dot(norm, lightDirection), 0.0);
 //    vec3 diffuseColor = diff * u_lightColor;
-//    
+//
 //    vec3 processedColor = diffuseColor * texture(u_sampler, v_textureCoord).rgb;
 //    fragColor = vec4(processedColor, u_alpha);
 
     // ---
-    
+
     // Ambient
     float ambientStrength = 0.1f;
     vec3 ambient = ambientStrength * u_ambientColor;//u_diffuseColor;
-    
+
     // Diffuse
     vec3 norm = normalize(v_vertexNormal);
     vec3 lightDir = normalize(u_lightPosition - v_vertexPosition);
     float diff = max(dot(norm, lightDir), 0.0);
     vec3 diffuse = diff * u_diffuseColor;
-    
+
     // Specular
     float specularStrength = 0.5f;
     vec3 viewDir = normalize(u_cameraPosition - v_vertexPosition);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * u_specularColor;//u_diffuseColor;
-    
+
     // Refraction (Optical Density)
     //vec3 refraction = normalize(Refract(v_vertexPosition, norm, 1.20)); // u_refraction
     //vec3 refractionColor = mix(texture2D(Texture, v_textureCoord + refraction.xy * 0.1), fragColor, u_alpha).rgb;
-    
+
     // Final color
     vec3 processedColor = (ambient + diffuse + specular) * texture(u_sampler, v_textureCoord).rgb;
     //vec3 processedColor = (ambient + diffuse + specular) * texture(u_sampler, v_textureCoord + refraction.xy * 0.1).rgb;

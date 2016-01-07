@@ -39,18 +39,18 @@ void MeshModelFace::destroy() {
 //        glDeleteBuffers(1, &this->vboTextureShiness);
 //    if (this->vboTextureDissolve > 0)
 //        glDeleteBuffers(1, &this->vboTextureDissolve);
-    
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
     glDisableVertexAttribArray(this->glAttributeTextureCoord);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);
-    
+
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDeleteProgram(this->shaderProgram);
-    
+
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
-    
+
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -74,28 +74,28 @@ void MeshModelFace::setModel(objModelFace oFace) {
 
 bool MeshModelFace::initShaderProgram() {
     bool success = true;
-    
+
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
     std::string shaderVertexSource = readFile(shaderPath.c_str());
     shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
-    
+
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
     std::string shaderFragmentSource = readFile(shaderPath.c_str());
     shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
     const char *shader_fragment = shaderFragmentSource.c_str();
-    
+
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".geom";
     std::string shaderGeometrySource = readFile(shaderPath.c_str());
     shaderGeometrySource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderGeometrySource;
     const char *shader_geometry = shaderGeometrySource.c_str();
-    
+
     this->shaderProgram = glCreateProgram();
-    
+
     this->shaderVertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(this->shaderVertex, 1, &shader_vertex, NULL);
     glCompileShader(this->shaderVertex);
-    
+
     GLint isShaderVertexCompiled = GL_FALSE;
     glGetShaderiv(this->shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
     if (isShaderVertexCompiled != GL_TRUE) {
@@ -104,35 +104,37 @@ bool MeshModelFace::initShaderProgram() {
     }
     else {
         glAttachShader(this->shaderProgram, this->shaderVertex);
-        
-        this->shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(this->shaderFragment, 1, &shader_fragment, NULL);
-        glCompileShader(this->shaderFragment);
-        
-        GLint isShaderFragmentCompiled = GL_FALSE;
-        glGetShaderiv(this->shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
-        if (isShaderFragmentCompiled != GL_TRUE) {
-            this->doLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", this->shaderFragment));
-            this->glUtils->printShaderLog(this->shaderFragment);
+
+        this->shaderGeometry = glCreateShader(GL_GEOMETRY_SHADER);
+        glShaderSource(this->shaderGeometry, 1, &shader_geometry, NULL);
+        glCompileShader(this->shaderGeometry);
+
+        GLint isShaderGeometryCompiled = GL_FALSE;
+        glGetShaderiv(this->shaderGeometry, GL_COMPILE_STATUS, &isShaderGeometryCompiled);
+        if (isShaderGeometryCompiled != GL_TRUE) {
+            this->doLog(Settings::Instance()->string_format("Unable to compile geometry shader %d!\n", this->shaderGeometry));
+            this->glUtils->printShaderLog(this->shaderGeometry);
             return success = false;
         }
         else {
-            glAttachShader(this->shaderProgram, this->shaderFragment);
-            
-            this->shaderGeometry = glCreateShader(GL_GEOMETRY_SHADER);
-            glShaderSource(this->shaderGeometry, 1, &shader_geometry, NULL);
-            glCompileShader(this->shaderGeometry);
-            
-            GLint isShaderGeometryCompiled = GL_FALSE;
-            glGetShaderiv(this->shaderGeometry, GL_COMPILE_STATUS, &isShaderGeometryCompiled);
-            if (isShaderGeometryCompiled != GL_TRUE) {
-                this->doLog(Settings::Instance()->string_format("Unable to compile geometry shader %d!\n", this->shaderGeometry));
-                this->glUtils->printShaderLog(this->shaderGeometry);
+            glAttachShader(this->shaderProgram, this->shaderGeometry);
+
+            this->shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
+            glShaderSource(this->shaderFragment, 1, &shader_fragment, NULL);
+            glCompileShader(this->shaderFragment);
+
+            GLint isShaderFragmentCompiled = GL_FALSE;
+            glGetShaderiv(this->shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
+            if (isShaderFragmentCompiled != GL_TRUE) {
+                this->doLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", this->shaderFragment));
+                this->glUtils->printShaderLog(this->shaderFragment);
                 return success = false;
             }
             else {
+                glAttachShader(this->shaderProgram, this->shaderFragment);
+
                 glLinkProgram(this->shaderProgram);
-                
+
                 GLint programSuccess = GL_TRUE;
                 glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
                 if (programSuccess != GL_TRUE) {
@@ -144,7 +146,7 @@ bool MeshModelFace::initShaderProgram() {
                     this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
                     this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "a_textureCoord");
                     this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
-                    
+
                     this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "u_alpha");
                     this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "u_cameraPosition");
 
@@ -154,16 +156,16 @@ bool MeshModelFace::initShaderProgram() {
                     this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "u_ambientColor");
                     this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "u_diffuseColor");
                     this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "u_specularColor");
-                    
+
                     this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
                     this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MMatrix");
-                    
+
                     this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
                 }
             }
         }
     }
-    
+
     return success;
 }
 
@@ -195,7 +197,7 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
 
         if (this->oFace.faceMaterial.textures_diffuse.image != "") {
             std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
-            
+
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
             if (!tPixels)
@@ -208,7 +210,7 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                 glGenerateMipmap(GL_TEXTURE_2D);
-                
+
                 GLint textureFormat = 0;
                 switch (tChannels) {
                     case 1:
@@ -232,7 +234,7 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
             }
         }
     }
-    
+
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
@@ -268,22 +270,22 @@ void MeshModelFace::setOptionsLightColor(glm::vec3 lightColor) {
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
-        
+
         this->matrixProjection = matrixProjection;
         this->matrixCamera = matrixCamera;
         this->matrixModel = matrixModel;
         this->vecCameraPosition = vecCameraPosition;
-        
+
         // texture
         if (this->vboTextureDiffuse > 0)
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-        
+
         // drawing options
         //glEnable(GL_CULL_FACE);
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
         //glEnable(GL_CULL_FACE);
-        
+
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glUniformMMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
@@ -308,11 +310,11 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 
         glUniform3f(this->glUniformLight_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
         glUniform3f(this->glUniformLight_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
-        
+
         glUniform3f(this->glUniform_ambientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
         glUniform3f(this->glUniform_diffuseColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
         glUniform3f(this->glUniform_specularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
-        
+
         glUniform3f(this->glUniform_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
         // draw
@@ -323,7 +325,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         if (Settings::Instance()->wireframesMode)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(0);
-        
+
         // clear texture
         if (this->vboTextureDiffuse > 0)
             glBindTexture(GL_TEXTURE_2D, 0);
