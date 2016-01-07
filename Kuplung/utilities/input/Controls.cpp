@@ -13,11 +13,11 @@ void Controls::init(std::function<void(std::string)> doLog, SDL_Window* sdlWindo
     this->sdlWindow = sdlWindow;
 
     this->gameIsRunning = true;
-    
+
     this->mouseButton_LEFT = false;
     this->mouseButton_MIDDLE = false;
     this->mouseButton_RIGHT = false;
-    
+
     this->keyPressed_LALT = false;
     this->keyPressed_LSHIFT = false;
     this->keyPressed_LCTRL = false;
@@ -78,7 +78,7 @@ void Controls::handleKeyDown(SDL_Event* ev) {
     this->keyPressed_RCTRL = m & KMOD_RCTRL;
 
     if (ev->type == SDL_KEYDOWN) {
-        
+
         switch (ev->key.keysym.sym) {
             case SDLK_ESCAPE:
                 this->mouseButton_LEFT = false;

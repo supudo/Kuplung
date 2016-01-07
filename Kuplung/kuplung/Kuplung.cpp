@@ -189,6 +189,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
     this->gameIsRunning = this->managerControls->gameIsRunning;
 
+    // window resize
     if (ev->type == SDL_WINDOWEVENT) {
         switch (ev->window.event) {
             case SDL_WINDOWEVENT_SIZE_CHANGED:
@@ -201,6 +202,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
+    // FOV & zoom
     if (this->managerControls->keyPressed_LALT) {
         if (this->managerControls->mouseWheel.y < 0)
             this->gui->so_GUI_FOV += 4;
@@ -211,9 +213,11 @@ void Kuplung::onEvent(SDL_Event *ev) {
         if (this->gui->so_GUI_FOV < -180)
             this->gui->so_GUI_FOV = -180;
     }
+    else
+        this->gui->gui_item_settings[0][17].oValue += this->managerControls->mouseWheel.y;
 
+    // pan world
     if (this->managerControls->mouseButton_MIDDLE) {
-        // pan camera
         if (this->managerControls->mouseGoUp)
             this->gui->gui_item_settings[0][12].oValue += this->managerControls->yrel;
         else if (this->managerControls->mouseGoDown)
@@ -224,6 +228,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
             this->gui->gui_item_settings[0][13].oValue += this->managerControls->xrel;
     }
 
+    // picking
     if (this->managerControls->mouseButton_LEFT) {
         int mouse_x = this->managerControls->mousePosition.x;
         int mouse_y = this->managerControls->mousePosition.y;
