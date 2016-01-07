@@ -12,21 +12,15 @@ out vec2 fs_textureCoord;
 out vec3 fs_vertexNormal;
 
 void main() {
-    fs_vertexPosition = gs_in[0].gs_vertexPosition;
-    fs_textureCoord = gs_in[0].gs_textureCoord;
-    fs_vertexNormal = gs_in[0].gs_vertexNormal;
-
-//    gl_Position = gl_in[0].gl_Position;// + vec4(-1.0, 0.0, 0.0, 0.0);
-//    EmitVertex();
-//    gl_Position = gl_in[0].gl_Position;// + vec4(1.0, 0.0, 0.0, 0.0);
-//    EmitVertex();
-//    gl_Position = gl_in[0].gl_Position;// + vec4(0.0, 0.0, 0.0, 0.0);
-//    EmitVertex();
-
     int i;
     for (i = 0; i < gl_in.length(); i++)
     {
-        gl_Position = gl_in[i].gl_Position;// + vec4(-1.0, 0.0, 0.0, 0.0);
+        gl_Position = gl_in[i].gl_Position;// + vec4(-0.1, 0.0, 0.0, 0.0);
+
+        fs_vertexPosition = gs_in[i].gs_vertexPosition;
+        fs_textureCoord = gs_in[i].gs_textureCoord;
+        fs_vertexNormal = gs_in[i].gs_vertexNormal;
+
         EmitVertex();
     }
 
