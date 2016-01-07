@@ -143,24 +143,24 @@ bool MeshModelFace::initShaderProgram() {
                     return success = false;
                 }
                 else {
-                    this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-                    this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "a_textureCoord");
-                    this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
+                    this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
+                    this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
+                    this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
 
-                    this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "u_alpha");
-                    this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "u_cameraPosition");
+                    this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+                    this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-                    this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "u_lightPosition");
-                    this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "u_lightDirection");
+                    this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
+                    this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
 
-                    this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "u_ambientColor");
-                    this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "u_diffuseColor");
-                    this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "u_specularColor");
+                    this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
+                    this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
+                    this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
 
-                    this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-                    this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MMatrix");
+                    this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+                    this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
-                    this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
+                    this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
                 }
             }
         }
