@@ -12,10 +12,8 @@ out vec2 fs_textureCoord;
 out vec3 fs_vertexNormal;
 
 void main() {
-    int i;
-    for (i = 0; i < gl_in.length(); i++)
-    {
-        gl_Position = gl_in[i].gl_Position;// + vec4(-0.1, 0.0, 0.0, 0.0);
+    for (int i=0; i<gl_in.length(); i++) {
+        gl_Position = gl_in[i].gl_Position + vec4(-0.1, 0.1, 0.0, 0.0);
 
         fs_vertexPosition = gs_in[i].gs_vertexPosition;
         fs_textureCoord = gs_in[i].gs_textureCoord;
@@ -23,6 +21,5 @@ void main() {
 
         EmitVertex();
     }
-
     EndPrimitive();
 }
