@@ -75,98 +75,100 @@ void MeshModelFace::setModel(objModelFace oFace) {
 bool MeshModelFace::initShaderProgram() {
     bool success = true;
 
+    // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
     std::string shaderVertexSource = readFile(shaderPath.c_str());
     shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
 
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
-    shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
-    const char *shader_fragment = shaderFragmentSource.c_str();
+    // tessellation control shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tcs";
+    std::string shaderTessControlSource = readFile(shaderPath.c_str());
+    shaderTessControlSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessControlSource;
+    const char *shader_tess_control = shaderTessControlSource.c_str();
 
+    // tessellation evaluation shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tes";
+    std::string shaderTessEvalSource = readFile(shaderPath.c_str());
+    shaderTessEvalSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessEvalSource;
+    const char *shader_tess_eval = shaderTessEvalSource.c_str();
+
+    // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".geom";
     std::string shaderGeometrySource = readFile(shaderPath.c_str());
     shaderGeometrySource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderGeometrySource;
     const char *shader_geometry = shaderGeometrySource.c_str();
 
+    // fragment shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
+    std::string shaderFragmentSource = readFile(shaderPath.c_str());
+    shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
+    const char *shader_fragment = shaderFragmentSource.c_str();
+
     this->shaderProgram = glCreateProgram();
 
-    this->shaderVertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(this->shaderVertex, 1, &shader_vertex, NULL);
-    glCompileShader(this->shaderVertex);
+    if (this->compileShader(this->shaderVertex, GL_VERTEX_SHADER, shader_vertex)) {
+//        if (this->compileShader(this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control)) {
+//            if (this->compileShader(this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval)) {
+                if (this->compileShader(this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry)) {
+                    if (this->compileShader(this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment)) {
 
-    GLint isShaderVertexCompiled = GL_FALSE;
-    glGetShaderiv(this->shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
-    if (isShaderVertexCompiled != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Unable to compile vertex shader %d!\n", this->shaderVertex));
-        this->glUtils->printShaderLog(this->shaderVertex);
-    }
-    else {
-        glAttachShader(this->shaderProgram, this->shaderVertex);
+                        glLinkProgram(this->shaderProgram);
 
-        this->shaderGeometry = glCreateShader(GL_GEOMETRY_SHADER);
-        glShaderSource(this->shaderGeometry, 1, &shader_geometry, NULL);
-        glCompileShader(this->shaderGeometry);
+                        GLint programSuccess = GL_TRUE;
+                        glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
+                        if (programSuccess != GL_TRUE) {
+                            this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+                            this->glUtils->printProgramLog(this->shaderProgram);
+                            return success = false;
+                        }
+                        else {
+                            this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
+                            this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
+                            this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
+                            this->glGeomDisplacementLocation = this->glUtils->glGetAttribute(this->shaderProgram, "vs_displacementLocation");
 
-        GLint isShaderGeometryCompiled = GL_FALSE;
-        glGetShaderiv(this->shaderGeometry, GL_COMPILE_STATUS, &isShaderGeometryCompiled);
-        if (isShaderGeometryCompiled != GL_TRUE) {
-            this->doLog(Settings::Instance()->string_format("Unable to compile geometry shader %d!\n", this->shaderGeometry));
-            this->glUtils->printShaderLog(this->shaderGeometry);
-            return success = false;
-        }
-        else {
-            glAttachShader(this->shaderProgram, this->shaderGeometry);
+                            this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+                            this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-            this->shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
-            glShaderSource(this->shaderFragment, 1, &shader_fragment, NULL);
-            glCompileShader(this->shaderFragment);
+                            this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
+                            this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
 
-            GLint isShaderFragmentCompiled = GL_FALSE;
-            glGetShaderiv(this->shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
-            if (isShaderFragmentCompiled != GL_TRUE) {
-                this->doLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", this->shaderFragment));
-                this->glUtils->printShaderLog(this->shaderFragment);
-                return success = false;
-            }
-            else {
-                glAttachShader(this->shaderProgram, this->shaderFragment);
+                            this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
+                            this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
+                            this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
 
-                glLinkProgram(this->shaderProgram);
+                            this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+                            this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
-                GLint programSuccess = GL_TRUE;
-                glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
-                if (programSuccess != GL_TRUE) {
-                    this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
-                    this->glUtils->printProgramLog(this->shaderProgram);
-                    return success = false;
+                            this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
+                        }
+
+                    }
                 }
-                else {
-                    this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-                    this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-                    this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-
-                    this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
-                    this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
-
-                    this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
-                    this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
-
-                    this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
-                    this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
-                    this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
-
-                    this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
-                    this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
-
-                    this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
-                }
-            }
-        }
+//            }
+//        }
     }
 
     return success;
+}
+
+bool MeshModelFace::compileShader(GLuint &shader, GLenum shaderType, const char *shader_source) {
+    shader = glCreateShader(shaderType);
+
+    glShaderSource(shader, 1, &shader_source, NULL);
+    glCompileShader(shader);
+
+    GLint isShaderCompiled = GL_FALSE;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
+    if (isShaderCompiled != GL_TRUE) {
+        this->doLog(Settings::Instance()->string_format("Unable to compile shader %d!\n", shader));
+        this->glUtils->printShaderLog(shader);
+        return false;
+    }
+    else
+        glAttachShader(this->shaderProgram, shader);
+    return true;
 }
 
 void MeshModelFace::initBuffers(std::string assetsFolder) {
@@ -316,6 +318,8 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glUniform_specularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
 
         glUniform3f(this->glUniform_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
+
+        glUniform3f(this->glGeomDisplacementLocation, 0.5, 0.0, 0.0);
 
         // draw
         glBindVertexArray(this->glVAO);

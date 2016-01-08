@@ -36,6 +36,9 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
+
+    bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);
+
     int glslVersion;
     std::string shaderName;
 
@@ -45,7 +48,7 @@ private:
     GLUtils *glUtils;
 
     GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment, shaderGeometry;
+    GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboTextureColor, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureShiness, vboTextureDissolve;
@@ -54,6 +57,7 @@ private:
     GLuint glUniformAlphaBlending, glUniform_CameraPosition;
     GLuint glUniformLight_Position, glUniformLight_Direction;
     GLuint glUniform_ambientColor, glUniform_diffuseColor, glUniform_specularColor;
+    GLuint glGeomDisplacementLocation;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
