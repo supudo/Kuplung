@@ -110,6 +110,8 @@
 /* Begin PBXFileReference section */
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AB1A8E91C3BCA2200046B9F /* GLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIncludes.h; sourceTree = "<group>"; };
+		8AB250C71C3FBD50005C73C1 /* kuplung.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tcs; sourceTree = "<group>"; };
+		8AB250C81C3FBD5F005C73C1 /* kuplung.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tes; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
 		8AB6F0131C3A9BEE00665C40 /* MeshCoordinateSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MeshCoordinateSystem.cpp; sourceTree = "<group>"; };
@@ -393,6 +395,8 @@
 				8AB6F0A61C3AA1F900665C40 /* kuplung.frag */,
 				8AB6F0A71C3AA1F900665C40 /* kuplung.geom */,
 				8AB6F0A81C3AA1F900665C40 /* kuplung.vert */,
+				8AB250C71C3FBD50005C73C1 /* kuplung.tcs */,
+				8AB250C81C3FBD5F005C73C1 /* kuplung.tes */,
 				8AB6F0A91C3AA1F900665C40 /* light.frag */,
 				8AB6F0AA1C3AA1F900665C40 /* light.vert */,
 				8AB6F0AB1C3AA1F900665C40 /* terrain.frag */,

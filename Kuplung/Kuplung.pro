@@ -154,6 +154,8 @@ DISTFILES += \
     resources/shaders/kuplung.vert \
     resources/shaders/kuplung.geom \
     resources/shaders/kuplung.frag \
+    resources/shaders/kuplung.tcs \
+    resources/shaders/kuplung.tes \
     resources/shaders/light.vert \
     resources/shaders/light.frag \
     resources/shaders/terrain.vert \
