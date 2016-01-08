@@ -28,6 +28,7 @@ public:
     void setOptionsLightPosition(glm::vec3 lightPosition);
     void setOptionsLightDirection(glm::vec3 lightDirection);
     void setOptionsLightColor(glm::vec3 lightColor);
+    void setOptionsDisplacement(glm::vec3 displacement);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
     objModelFace oFace;
     int ModelID;
@@ -43,7 +44,7 @@ private:
     std::string shaderName;
 
     float so_fov, so_alpha;
-    glm::vec3 so_lightPosition, so_lightDirection, so_lightColor;
+    glm::vec3 so_lightPosition, so_lightDirection, so_lightColor, so_displacement;
 
     GLUtils *glUtils;
 

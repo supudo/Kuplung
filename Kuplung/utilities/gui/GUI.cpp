@@ -31,7 +31,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->quitApp = quitApp;
     this->processFile = processFile;
     this->newScene = newScene;
-    
+
     this->isLoadingOpen = false;
     this->showScreenshotWindow = false;
     this->logDebugInfo = true;
@@ -43,7 +43,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showHeightmap = false;
     this->showEditor = false;
     this->newHeightmap = false;
-    
+
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 50, posY = 50;
@@ -54,9 +54,9 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
-    
+
     this->gui_item_selected = 0;
-    
+
     this->isFrame = false;
     this->isProjection = true;
     this->fixedGridWorld = true;
@@ -135,12 +135,17 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        
+
         // translate
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        
+
+        // displacement
+        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
     }
@@ -194,7 +199,7 @@ void GUI::renderStart(bool isFrame) {
             if (ImGui::MenuItem("New"))
                 this->newScene();
             ImGui::MenuItem("Open", NULL, &showFileDialog);
-            
+
             if (ImGui::BeginMenu("Open Recent")) {
                 if (this->recentFiles.size() == 0)
                     ImGui::MenuItem("No recent files", NULL, false, false);
@@ -211,19 +216,19 @@ void GUI::renderStart(bool isFrame) {
                 }
                 ImGui::EndMenu();
             }
-            
+
             ImGui::Separator();
-            
+
             ImGui::MenuItem("Editor", NULL, &this->showEditor);
             ImGui::MenuItem("Screenshot", NULL, &this->showScreenshotWindow);
-            
+
             if (ImGui::BeginMenu("Settings")) {
                 ImGui::MenuItem("Show Log Window", NULL, &Settings::Instance()->logDebugInfo);
                 ImGui::Separator();
                 ImGui::MenuItem("Options", NULL, &this->showOptions);
                 ImGui::EndMenu();
             }
-            
+
             ImGui::Separator();
 #ifdef _WIN32
             if (ImGui::MenuItem("Quit", "Alt+F4"))
@@ -254,7 +259,7 @@ void GUI::renderStart(bool isFrame) {
                 ImGui::MenuItem("Hide Light", NULL, &Settings::Instance()->showLight);
             else
                 ImGui::MenuItem("Show Light", NULL, &Settings::Instance()->showLight);
-            
+
             if (Settings::Instance()->showAxes)
                 ImGui::MenuItem("Hide Axes", NULL, &Settings::Instance()->showAxes);
             else
@@ -275,48 +280,48 @@ void GUI::renderStart(bool isFrame) {
             ImGui::MenuItem("ImGui Demo Window", NULL, &this->showDemoWindow);
             ImGui::EndMenu();
         }
-        
+
         ImGui::Text("  --> %.1f FPS | %d vertices, %d indices (%d triangles)", ImGui::GetIO().Framerate, ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
-        
+
         ImGui::EndMainMenuBar();
     }
-    
+
     if (this->showFileDialog)
         this->dialogFileBrowser();
-    
+
     if (this->showScreenshotWindow)
         this->dialogScreenshot();
-    
+
     if (this->showEditor)
         this->dialogEditor();
-    
+
     if (Settings::Instance()->logDebugInfo)
         this->dialogLog();
-    
+
     if (this->showAppMetrics)
         this->dialogMetrics();
-    
+
     if (this->showAboutImgui)
         this->dialogAboutImGui();
-    
+
     if (this->showAboutKuplung)
         this->dialogAboutKuplung();
-    
+
     if (this->showOptions)
         this->dialogOptions();
-    
+
     if (this->displayGUIControls)
         this->dialogGUIControls();
-    
+
     if (this->displaySceneSettings)
         this->dialogSceneSettings();
-    
+
     if (this->displaySceneStats)
         this->dialogSceneStats();
-    
+
     if (this->showHeightmap)
         this->dialogHeightmap();
-    
+
     if (this->isLoadingOpen)
         ImGui::OpenPopup("Kuplung");
     if (ImGui::BeginPopupModal("Kuplung", &this->isLoadingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
@@ -325,7 +330,7 @@ void GUI::renderStart(bool isFrame) {
         ImGui::Text("\n\n");
         ImGui::EndPopup();
     }
-    
+
     if (this->showDemoWindow)
         ImGui::ShowTestWindow(&this->showDemoWindow);
 }
@@ -408,7 +413,7 @@ void GUI::dialogOptions() {
 
 void GUI::dialogHeightmap() {
     ImGui::Begin("Heightmap", &this->showHeightmap, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
-    
+
     if (this->newHeightmap) {
         int tChannels;
         unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
@@ -429,7 +434,7 @@ void GUI::dialogHeightmap() {
     ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight));
 
     ImGui::End();
-    
+
     this->newHeightmap = false;
 }
 
@@ -438,14 +443,14 @@ void GUI::dialogHeightmap() {
 void GUI::dialogGUIControls() {
     ImGui::SetNextWindowSize(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("GUI Controls", &this->displayGUIControls, ImGuiWindowFlags_ShowBorders);
-    
+
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset GUI Control Values"))
         this->resetValuesGUIControls();
     ImGui::PopStyleColor(3);
-    
+
     if (ImGui::CollapsingHeader("General")) {
         ImGui::Text("Field of view");
         ImGui::SliderFloat("FOV", &this->so_GUI_FOV, 0.0f, 180.0f);
@@ -462,7 +467,7 @@ void GUI::dialogGUIControls() {
         ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
     }
     ImGui::Separator();
-    
+
     const char* gui_items[] = { "Camera", "Grid", "Light", "Terrain" };
     ImGui::Combo("GUI Item", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
     if (this->gui_item_selected == 0 && ImGui::TreeNode("LookAt")) {
@@ -479,7 +484,7 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Up Z", &this->gui_item_settings[this->gui_item_selected][8].oValue, -10.0f, 10.0f);
         ImGui::TreePop();
     }
-    
+
     if (this->gui_item_selected == 2 && ImGui::TreeNode("Light Color")) {
         ImGui::TextColored(ImVec4(this->so_GUI_lightControls_red, this->so_GUI_lightControls_green, this->so_GUI_lightControls_blue, 1.0), "Preview");
         ImGui::SliderFloat("Red", &this->so_GUI_lightControls_red, 0.0f, 1.0f);
@@ -487,14 +492,14 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Blue", &this->so_GUI_lightControls_blue, 0.0f, 1.0f);
         ImGui::TreePop();
     }
-    
+
     if (this->gui_item_selected > 0 && ImGui::TreeNode("Scale")) {
         ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9].oValue, 0.0f, 1.0f);
         ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10].oValue, 0.0f, 1.0f);
         ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11].oValue, 0.0f, 1.0f);
         ImGui::TreePop();
     }
-    
+
     if (ImGui::TreeNode("Rotate")) {
         if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12].oAnimate))
             this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
@@ -532,7 +537,7 @@ void GUI::dialogGUIControls() {
         ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
         ImGui::TreePop();
     }
-    
+
     ImGui::End();
 }
 
@@ -558,7 +563,7 @@ void GUI::resetValuesGUIControls() {
 void GUI::dialogSceneSettings() {
     ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", &this->displaySceneSettings, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
-    
+
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -569,7 +574,7 @@ void GUI::dialogSceneSettings() {
     ImGui::TextColored(ImVec4(1, 1, 1, this->so_Alpha), "Alpha Blending");
     ImGui::SliderFloat("Alpha", &this->so_Alpha, 0.0f, 1.0f);
     ImGui::Separator();
-    
+
     int modelsCount = (int)this->sceneModels.size();
     const char* scene_items[modelsCount];
     for (int i=0; i<(int)this->sceneModels.size(); i++) {
@@ -598,7 +603,7 @@ void GUI::dialogSceneSettings() {
         ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2].oValue, 0.0f, 1.0f);
         ImGui::TreePop();
     }
-    
+
     if (ImGui::TreeNode("Rotate")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3].oAnimate))
             this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
@@ -619,26 +624,48 @@ void GUI::dialogSceneSettings() {
         ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5].oValue, 0.0f, 360.0f);
         ImGui::TreePop();
     }
-    
+
     if (ImGui::TreeNode("Translate")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6].oAnimate))
             this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by X");
         ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        
+
         if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7].oAnimate))
             this->animateValue(false, this->scene_item_selected, 7, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Y");
         ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        
+
         if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8].oAnimate))
             this->animateValue(false, this->scene_item_selected, 8, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Z");
         ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        
+
+        ImGui::TreePop();
+    }
+
+    if (ImGui::TreeNode("Displace")) {
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate displacement by X");
+        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 10, 0.05f, this->so_GUI_grid_size, true);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate displacement by Y");
+        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 11, 0.05f, this->so_GUI_grid_size, true);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate displacement by Z");
+        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+
         ImGui::TreePop();
     }
 
@@ -733,11 +760,11 @@ void GUI::ImGui_SDL2GL21_Implementation_RenderDrawLists() {
     glEnableClientState(GL_COLOR_ARRAY);
     glEnable(GL_TEXTURE_2D);
     //glUseProgram(0); // You may want this if using this code in an OpenGL 3+ context
-    
+
     ImGuiIO& io = ImGui::GetIO();
     float fb_height = io.DisplaySize.y * io.DisplayFramebufferScale.y;
     draw_data->ScaleClipRects(io.DisplayFramebufferScale);
-    
+
     glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
@@ -746,7 +773,7 @@ void GUI::ImGui_SDL2GL21_Implementation_RenderDrawLists() {
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
-    
+
 #define OFFSETOF(TYPE, ELEMENT) ((size_t)&(((TYPE *)0)->ELEMENT))
     for (int n=0; n<draw_data->CmdListsCount; n++) {
         const ImDrawList* cmd_list = draw_data->CmdLists[n];
@@ -769,7 +796,7 @@ void GUI::ImGui_SDL2GL21_Implementation_RenderDrawLists() {
         }
     }
 #undef OFFSETOF
-    
+
     glDisableClientState(GL_COLOR_ARRAY);
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
     glDisableClientState(GL_VERTEX_ARRAY);
@@ -818,22 +845,22 @@ bool GUI::ImGui_SDL2GL21_Implementation_ProcessEvent(SDL_Event* event) {
 
 bool GUI::ImGui_SDL2GL21_Implementation_CreateDeviceObjects() {
     ImGuiIO& io = ImGui::GetIO();
-    
+
     unsigned char* pixels;
     int width, height;
     io.Fonts->GetTexDataAsAlpha8(&pixels, &width, &height);
-    
+
     glGenTextures(1, &gui_FontTexture);
     glBindTexture(GL_TEXTURE_2D, gui_FontTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width, height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, pixels);
-    
+
     io.Fonts->TexID = (void *)(intptr_t)gui_FontTexture;
-    
+
     io.Fonts->ClearInputData();
     io.Fonts->ClearTexData();
-    
+
     return true;
 }
 
@@ -866,14 +893,14 @@ bool GUI::ImGui_SDL2GL21_Implementation_Init() {
     io.KeyMap[ImGuiKey_X] = SDLK_x;
     io.KeyMap[ImGuiKey_Y] = SDLK_y;
     io.KeyMap[ImGuiKey_Z] = SDLK_z;
-        
+
 #ifdef _WIN32
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
     io.ImeWindowHandle = wmInfo.info.win.window;
 #endif
-    
+
     return true;
 }
 
@@ -885,35 +912,35 @@ void GUI::ImGui_SDL2GL21_Implementation_Shutdown() {
 void GUI::ImGui_SDL2GL21_Implementation_NewFrame() {
     if (!gui_FontTexture)
         this->ImGui_SDL2GL21_Implementation_CreateDeviceObjects();
-    
+
     ImGuiIO& io = ImGui::GetIO();
-    
+
     int w, h;
     SDL_GetWindowSize(this->sdlWindow, &w, &h);
     io.DisplaySize = ImVec2((float)w, (float)h);
-    
+
     Uint32	time = SDL_GetTicks();
     double current_time = time / 1000.0;
     io.DeltaTime = gui_Time > 0.0 ? (float)(current_time - gui_Time) : (float)(1.0f/60.0f);
     gui_Time = current_time;
-    
+
     int mx, my;
     Uint32 mouseMask = SDL_GetMouseState(&mx, &my);
     if (SDL_GetWindowFlags(this->sdlWindow) & SDL_WINDOW_MOUSE_FOCUS)
         io.MousePos = ImVec2((float)mx, (float)my);
     else
         io.MousePos = ImVec2(-1,-1);
-    
+
     io.MouseDown[0] = gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
     io.MouseDown[1] = gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
     io.MouseDown[2] = gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
     gui_MousePressed[0] = gui_MousePressed[1] = gui_MousePressed[2] = false;
-    
+
     io.MouseWheel = gui_MouseWheel;
     gui_MouseWheel = 0.0f;
-    
+
     SDL_ShowCursor(io.MouseDrawCursor ? 0 : 1);
-    
+
     ImGui::NewFrame();
 }
 
@@ -936,7 +963,7 @@ void GUI::ImGui_SDL2GL32_Implementation_RenderDrawLists() {
     GLboolean last_enable_cull_face = glIsEnabled(GL_CULL_FACE);
     GLboolean last_enable_depth_test = glIsEnabled(GL_DEPTH_TEST);
     GLboolean last_enable_scissor_test = glIsEnabled(GL_SCISSOR_TEST);
-    
+
     glEnable(GL_BLEND);
     glBlendEquation(GL_FUNC_ADD);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -944,11 +971,11 @@ void GUI::ImGui_SDL2GL32_Implementation_RenderDrawLists() {
     glDisable(GL_DEPTH_TEST);
     glEnable(GL_SCISSOR_TEST);
     glActiveTexture(GL_TEXTURE0);
-    
+
     ImGuiIO& io = ImGui::GetIO();
     float fb_height = io.DisplaySize.y * io.DisplayFramebufferScale.y;
     draw_data->ScaleClipRects(io.DisplayFramebufferScale);
-    
+
     glViewport(0, 0, (GLsizei)io.DisplaySize.x, (GLsizei)io.DisplaySize.y);
     const float ortho_projection[4][4] =
     {
@@ -961,17 +988,17 @@ void GUI::ImGui_SDL2GL32_Implementation_RenderDrawLists() {
     glUniform1i(gui_AttribLocationTex, 0);
     glUniformMatrix4fv(gui_AttribLocationProjMtx, 1, GL_FALSE, &ortho_projection[0][0]);
     glBindVertexArray(gui_VaoHandle);
-    
+
     for (int n=0; n<draw_data->CmdListsCount; n++) {
         const ImDrawList* cmd_list = draw_data->CmdLists[n];
         const ImDrawIdx* idx_buffer_offset = 0;
-        
+
         glBindBuffer(GL_ARRAY_BUFFER, gui_VboHandle);
         glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.size() * sizeof(ImDrawVert), (GLvoid*)&cmd_list->VtxBuffer.front(), GL_STREAM_DRAW);
-        
+
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gui_ElementsHandle);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.size() * sizeof(ImDrawIdx), (GLvoid*)&cmd_list->IdxBuffer.front(), GL_STREAM_DRAW);
-        
+
         for (const ImDrawCmd* pcmd = cmd_list->CmdBuffer.begin(); pcmd != cmd_list->CmdBuffer.end(); pcmd++)
         {
             if (pcmd->UserCallback)
@@ -987,7 +1014,7 @@ void GUI::ImGui_SDL2GL32_Implementation_RenderDrawLists() {
             idx_buffer_offset += pcmd->ElemCount;
         }
     }
-    
+
     glUseProgram(last_program);
     glBindTexture(GL_TEXTURE_2D, last_texture);
     glBindBuffer(GL_ARRAY_BUFFER, last_array_buffer);
@@ -1023,14 +1050,14 @@ bool GUI::ImGui_SDL2GL32_Implementation_Init() {
     io.KeyMap[ImGuiKey_X] = SDLK_x;
     io.KeyMap[ImGuiKey_Y] = SDLK_y;
     io.KeyMap[ImGuiKey_Z] = SDLK_z;
-    
+
 #ifdef _WIN32
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
     SDL_GetWindowWMInfo(window, &wmInfo);
     io.ImeWindowHandle = wmInfo.info.win.window;
 #endif
-    
+
     return true;
 }
 
@@ -1042,34 +1069,34 @@ void GUI::ImGui_SDL2GL32_Implementation_Shutdown() {
 void GUI::ImGui_SDL2GL32_Implementation_NewFrame() {
     if (!gui_FontTexture)
         this->ImGui_SDL2GL32_Implementation_CreateDeviceObjects();
-    
+
     ImGuiIO& io = ImGui::GetIO();
-    
+
     int w, h;
     SDL_GetWindowSize(this->sdlWindow, &w, &h);
     io.DisplaySize = ImVec2((float)w, (float)h);
     io.DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
-    
+
     Uint32	time = SDL_GetTicks();
     double current_time = time / 1000.0;
     io.DeltaTime = gui_Time > 0.0 ? (float)(current_time - gui_Time) : (float)(1.0f / 60.0f);
     gui_Time = current_time;
-    
+
     int mx, my;
     Uint32 mouseMask = SDL_GetMouseState(&mx, &my);
     if (SDL_GetWindowFlags(this->sdlWindow) & SDL_WINDOW_MOUSE_FOCUS)
         io.MousePos = ImVec2((float)mx, (float)my);
     else
         io.MousePos = ImVec2(-1, -1);
-    
+
     io.MouseDown[0] = gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
     io.MouseDown[1] = gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
     io.MouseDown[2] = gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
     gui_MousePressed[0] = gui_MousePressed[1] = gui_MousePressed[2] = false;
-    
+
     io.MouseWheel = gui_MouseWheel;
     gui_MouseWheel = 0.0f;
-    
+
     SDL_ShowCursor(io.MouseDrawCursor ? 0 : 1);
     ImGui::NewFrame();
 }
@@ -1119,18 +1146,18 @@ void GUI::ImGui_SDL2GL32_Implementation_InvalidateDeviceObjects() {
     if (gui_ElementsHandle)
         glDeleteBuffers(1, &gui_ElementsHandle);
     gui_VaoHandle = gui_VboHandle = gui_ElementsHandle = 0;
-    
+
     glDetachShader(gui_ShaderHandle, gui_VertHandle);
     glDeleteShader(gui_VertHandle);
     gui_VertHandle = 0;
-    
+
     glDetachShader(gui_ShaderHandle, gui_FragHandle);
     glDeleteShader(gui_FragHandle);
     gui_FragHandle = 0;
-    
+
     glDeleteProgram(gui_ShaderHandle);
     gui_ShaderHandle = 0;
-    
+
     if (gui_FontTexture) {
         glDeleteTextures(1, &gui_FontTexture);
         ImGui::GetIO().Fonts->TexID = 0;
@@ -1143,7 +1170,7 @@ bool GUI::ImGui_SDL2GL32_Implementation_CreateDeviceObjects() {
     glGetIntegerv(GL_TEXTURE_BINDING_2D, &last_texture);
     glGetIntegerv(GL_ARRAY_BUFFER_BINDING, &last_array_buffer);
     glGetIntegerv(GL_VERTEX_ARRAY_BINDING, &last_vertex_array);
-    
+
     const GLchar *vertex_shader =
     "#version 330\n"
     "uniform mat4 ProjMtx;\n"
@@ -1158,7 +1185,7 @@ bool GUI::ImGui_SDL2GL32_Implementation_CreateDeviceObjects() {
     "	Frag_Color = Color;\n"
     "	gl_Position = ProjMtx * vec4(Position.xy,0,1);\n"
     "}\n";
-    
+
     const GLchar* fragment_shader =
     "#version 330\n"
     "uniform sampler2D Texture;\n"
@@ -1169,7 +1196,7 @@ bool GUI::ImGui_SDL2GL32_Implementation_CreateDeviceObjects() {
     "{\n"
     "	Out_Color = Frag_Color * texture( Texture, Frag_UV.st);\n"
     "}\n";
-    
+
     gui_ShaderHandle = glCreateProgram();
     gui_VertHandle = glCreateShader(GL_VERTEX_SHADER);
     gui_FragHandle = glCreateShader(GL_FRAGMENT_SHADER);
@@ -1180,53 +1207,53 @@ bool GUI::ImGui_SDL2GL32_Implementation_CreateDeviceObjects() {
     glAttachShader(gui_ShaderHandle, gui_VertHandle);
     glAttachShader(gui_ShaderHandle, gui_FragHandle);
     glLinkProgram(gui_ShaderHandle);
-    
+
     gui_AttribLocationTex = glGetUniformLocation(gui_ShaderHandle, "Texture");
     gui_AttribLocationProjMtx = glGetUniformLocation(gui_ShaderHandle, "ProjMtx");
     gui_AttribLocationPosition = glGetAttribLocation(gui_ShaderHandle, "Position");
     gui_AttribLocationUV = glGetAttribLocation(gui_ShaderHandle, "UV");
     gui_AttribLocationColor = glGetAttribLocation(gui_ShaderHandle, "Color");
-    
+
     glGenBuffers(1, &gui_VboHandle);
     glGenBuffers(1, &gui_ElementsHandle);
-    
+
     glGenVertexArrays(1, &gui_VaoHandle);
     glBindVertexArray(gui_VaoHandle);
     glBindBuffer(GL_ARRAY_BUFFER, gui_VboHandle);
     glEnableVertexAttribArray(gui_AttribLocationPosition);
     glEnableVertexAttribArray(gui_AttribLocationUV);
     glEnableVertexAttribArray(gui_AttribLocationColor);
-    
+
 #define OFFSETOF(TYPE, ELEMENT) ((size_t)&(((TYPE *)0)->ELEMENT))
     glVertexAttribPointer(gui_AttribLocationPosition, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, pos));
     glVertexAttribPointer(gui_AttribLocationUV, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, uv));
     glVertexAttribPointer(gui_AttribLocationColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, col));
 #undef OFFSETOF
-    
+
     this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
-    
+
     glBindTexture(GL_TEXTURE_2D, last_texture);
     glBindBuffer(GL_ARRAY_BUFFER, last_array_buffer);
     glBindVertexArray(last_vertex_array);
-    
+
     return true;
 }
 
 void GUI::ImGui_SDL2GL32_Implementation_CreateFontsTexture() {
     ImGuiIO& io = ImGui::GetIO();
-    
+
     unsigned char* pixels;
     int width, height;
     io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
-    
+
     glGenTextures(1, &gui_FontTexture);
     glBindTexture(GL_TEXTURE_2D, gui_FontTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
-    
+
     io.Fonts->TexID = (void *)(intptr_t)gui_FontTexture;
-    
+
     io.Fonts->ClearInputData();
     io.Fonts->ClearTexData();
 }

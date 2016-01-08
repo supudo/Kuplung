@@ -3,7 +3,7 @@ uniform mat4 vs_MVPMatrix;
 in vec3 vs_vertexPosition;
 in vec2 vs_textureCoord;
 in vec3 vs_vertexNormal;
-in vec3 vs_displacementLocation;
+uniform vec3 vs_displacementLocation;
 
 //out vec3 vso_vertexPosition;
 //out vec2 vso_textureCoord;

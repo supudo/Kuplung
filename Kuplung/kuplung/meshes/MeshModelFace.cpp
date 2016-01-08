@@ -126,7 +126,7 @@ bool MeshModelFace::initShaderProgram() {
                             this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
                             this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
                             this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-                            this->glGeomDisplacementLocation = this->glUtils->glGetAttribute(this->shaderProgram, "vs_displacementLocation");
+                            this->glGeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
 
                             this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
                             this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
@@ -267,6 +267,10 @@ void MeshModelFace::setOptionsLightColor(glm::vec3 lightColor) {
     this->so_lightColor = lightColor;
 }
 
+void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
+    this->so_displacement = displacement;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -319,7 +323,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 
         glUniform3f(this->glUniform_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
-        glUniform3f(this->glGeomDisplacementLocation, 0.5, 0.0, 0.0);
+        glUniform3f(this->glGeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
 
         // draw
         glBindVertexArray(this->glVAO);
