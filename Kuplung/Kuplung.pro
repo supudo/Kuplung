@@ -58,8 +58,8 @@ mac {
 }
 
 win32|win64 {
-  RC_FILE += resources/Kuplung.ico
-  #RC_ICONS += resources/Kuplung.ico
+  #RC_FILE += resources/Kuplung.ico
+  RC_ICONS += resources/Kuplung.ico
 
   LIBS += -L"C:\Boost\lib" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
   INCLUDEPATH += "C:\Boost\include\boost-1_60"
@@ -67,19 +67,19 @@ win32|win64 {
   LIBS += -L"D:\_Work\_Misc" -llibEGLd
   LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
 
-  INCLUDEPATH += "D:\_Projects\QT\Kuplung\external\glm"
+  INCLUDEPATH += "D:\_Work\glm"
 
   LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
   INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
 
-  LIBS += -L"D:\_Work\GLFW3\lib" -lGLFW3
-  INCLUDEPATH += "D:\_Work\GLFW3\include"
+  LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
+  INCLUDEPATH += "D:\_Work\GLFW\include"
 
-  LIBS += -L"D:\_Work\glew-1.13.0\lib\Release MX\Win32" -lglew32mx
-  INCLUDEPATH += "D:\_Work\glew-1.13.0\include"
+  LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
+  INCLUDEPATH += "D:\_Work\GLEW\include"
 
-  LIBS += -L"$$PWD\..\external\libnoise\lib" -llibnoise
-  INCLUDEPATH += "$$PWD\..\external\libnoise\headers"
+  LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
+  INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
 }
 
 OTHER_FILES += resources/*
