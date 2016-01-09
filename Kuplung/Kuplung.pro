@@ -68,14 +68,14 @@ win32|win64 {
 
   INCLUDEPATH += "D:\_Projects\QT\Kuplung\external\glm"
 
-  LIBS += -L"D:\_Projects\SDL2\_sdl2lib\SDL2-2.0.3\lib\x86" -lSDL2
-  INCLUDEPATH += "D:\_Projects\SDL2\_sdl2lib\SDL2-2.0.3\include"
+  LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
+  INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
 
   LIBS += -L"D:\_Work\GLFW3\lib" -lGLFW3
   INCLUDEPATH += "D:\_Work\GLFW3\include"
 
-  LIBS += -L"$$PWD\..\external\glew\lib\Release MX\Win32" -lglew32mx
-  INCLUDEPATH += "$$PWD\..\external\glew\include"
+  LIBS += -L"D:\_Work\glew-1.13.0\lib\Release MX\Win32" -lglew32mx
+  INCLUDEPATH += "D:\_Work\glew-1.13.0\include"
 
   LIBS += -L"$$PWD\..\external\libnoise\lib" -llibnoise
   INCLUDEPATH += "$$PWD\..\external\libnoise\headers"

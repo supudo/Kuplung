@@ -897,7 +897,7 @@ bool GUI::ImGui_SDL2GL21_Implementation_Init() {
 #ifdef _WIN32
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
-    SDL_GetWindowWMInfo(window, &wmInfo);
+    SDL_GetWindowWMInfo(this->sdlWindow, &wmInfo);
     io.ImeWindowHandle = wmInfo.info.win.window;
 #endif
 
@@ -1054,7 +1054,7 @@ bool GUI::ImGui_SDL2GL32_Implementation_Init() {
 #ifdef _WIN32
     SDL_SysWMinfo wmInfo;
     SDL_VERSION(&wmInfo.version);
-    SDL_GetWindowWMInfo(window, &wmInfo);
+    SDL_GetWindowWMInfo(this->sdlWindow, &wmInfo);
     io.ImeWindowHandle = wmInfo.info.win.window;
 #endif
 
