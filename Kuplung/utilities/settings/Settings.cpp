@@ -74,6 +74,9 @@ void Settings::initSettings() {
 #pragma mark - Public
 
 std::string Settings::appFolder() {
+#ifdef _WIN32
+    //TODO: Windows
+#else
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
     char folder[PATH_MAX];
@@ -81,6 +84,7 @@ std::string Settings::appFolder() {
         printf("Can't open bundle folder!\n");
     CFRelease(resourcesURL);
     return std::string(folder);
+#endif
 }
 
 void Settings::saveSettings() {
