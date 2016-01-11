@@ -152,6 +152,10 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         // shininess
         gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
 
+        // light factors
+        gos.oIndex += 1; gos.oValue = 0.5; setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 0.1; setts.push_back(gos);
+
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
     }
@@ -691,6 +695,22 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate shininess");
         ImGui::SameLine(); ImGui::SliderFloat("##103", &this->scene_item_settings[this->scene_item_selected][13].oValue, 0.0, 10.0);
+
+        ImGui::TreePop();
+    }
+
+    if (ImGui::TreeNode("Light factors")) {
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][14].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 14, 0.1f, 4.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate specular strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Specular", &this->scene_item_settings[this->scene_item_selected][14].oValue, 0.0, 4.0);
+
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][15].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 15, 0.1f, 4.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate ambient strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Ambient", &this->scene_item_settings[this->scene_item_selected][15].oValue, 0.0, 4.0);
 
         ImGui::TreePop();
     }

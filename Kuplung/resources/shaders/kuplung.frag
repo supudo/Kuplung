@@ -6,13 +6,14 @@ uniform float fs_shininess;
 
 uniform vec3 fs_lightPosition;
 uniform vec3 fs_lightDirection;
+uniform float fs_specularStrength;
+uniform float fs_ambientStrength;
 
 uniform vec3 fs_ambientColor;
 uniform vec3 fs_diffuseColor;
 uniform vec3 fs_specularColor;
 
 uniform vec3 fs_cameraPosition;
-
 uniform float fs_screenResX, fs_screenResY;
 
 in vec3 fs_vertexPosition;
@@ -28,8 +29,8 @@ void main(void) {
     vec3 processedColor = texturedColor.rgb;
 
     // Ambient
-    float ambientStrength = 0.1f;
-    vec3 ambient = ambientStrength * fs_ambientColor;//fs_diffuseColor;
+    float ambientStrength = fs_ambientStrength;//0.1f;
+    vec3 ambient = ambientStrength * fs_ambientColor; // fs_diffuseColor;
 
     // Diffuse
     vec3 norm = normalize(fs_vertexNormal);
@@ -38,7 +39,7 @@ void main(void) {
     vec3 diffuse = diff * fs_diffuseColor;
 
     // Specular
-    float specularStrength = 0.5f; // attenuation
+    float specularStrength = fs_specularStrength;//0.5f; // attenuation
     vec3 viewDir = normalize(fs_cameraPosition - fs_vertexPosition);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);

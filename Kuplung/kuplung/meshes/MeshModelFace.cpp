@@ -66,6 +66,8 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_lightColor = glm::vec3(0, 0, 0);
     this->so_refraction = this->oFace.faceMaterial.opticalDensity;
     this->so_shininess = this->oFace.faceMaterial.shininess;
+    this->so_strengthSpecular = 0.5;
+    this->so_strengthAmbient = 0.1;
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -138,6 +140,8 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
         this->glFS_OpticalDensity = this->glUtils->glGetUniform(this->shaderProgram, "fs_refraction");
         this->glFS_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "fs_shininess");
+        this->glFS_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularStrength");
+        this->glFS_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientStrength");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -266,6 +270,14 @@ void MeshModelFace::setOptionsShininess(float shininess) {
     this->so_shininess = shininess;
 }
 
+void MeshModelFace::setOptionsStrengthSpecular(float val) {
+    this->so_strengthSpecular = val;
+}
+
+void MeshModelFace::setOptionsStrengthAmbient(float val) {
+    this->so_strengthAmbient = val;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -315,6 +327,10 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // light
         glUniform3f(this->glFS_Light_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
         glUniform3f(this->glFS_Light_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
+
+        // light factors
+        glUniform1f(this->glFS_StrengthSpecular, this->so_strengthSpecular);
+        glUniform1f(this->glFS_StrengthAmbient, this->so_strengthAmbient);
 
         // colors
         glUniform3f(this->glFS_AmbientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
