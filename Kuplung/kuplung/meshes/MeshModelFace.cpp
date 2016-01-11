@@ -67,7 +67,8 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_refraction = this->oFace.faceMaterial.opticalDensity;
     this->so_shininess = this->oFace.faceMaterial.shininess;
     this->so_strengthSpecular = 0.5;
-    this->so_strengthAmbient = 0.1;
+    this->so_strengthAmbient = 0.5;
+    this->so_strengthDiffuse = 1.0;
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -142,6 +143,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "fs_shininess");
         this->glFS_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularStrength");
         this->glFS_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientStrength");
+        this->glFS_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseStrength");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -278,6 +280,10 @@ void MeshModelFace::setOptionsStrengthAmbient(float val) {
     this->so_strengthAmbient = val;
 }
 
+void MeshModelFace::setOptionsStrengthDiffuse(float val) {
+    this->so_strengthDiffuse = val;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -331,6 +337,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // light factors
         glUniform1f(this->glFS_StrengthSpecular, this->so_strengthSpecular);
         glUniform1f(this->glFS_StrengthAmbient, this->so_strengthAmbient);
+        glUniform1f(this->glFS_StrengthDiffuse, this->so_strengthDiffuse);
 
         // colors
         glUniform3f(this->glFS_AmbientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);

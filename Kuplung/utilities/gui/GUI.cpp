@@ -154,7 +154,8 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
 
         // light factors
         gos.oIndex += 1; gos.oValue = 0.5; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.1; setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 0.5; setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
@@ -711,6 +712,12 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate ambient strength");
         ImGui::SameLine(); ImGui::SliderFloat("Ambient", &this->scene_item_settings[this->scene_item_selected][15].oValue, 0.0, 4.0);
+
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][16].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 16, 0.1f, 6.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate diffuse strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Diffuse", &this->scene_item_settings[this->scene_item_selected][16].oValue, 0.0, 6.0);
 
         ImGui::TreePop();
     }

@@ -33,6 +33,7 @@ public:
     void setOptionsShininess(float shininess);
     void setOptionsStrengthSpecular(float val);
     void setOptionsStrengthAmbient(float val);
+    void setOptionsStrengthDiffuse(float val);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
     objModelFace oFace;
     int ModelID;
@@ -45,7 +46,7 @@ private:
     int glslVersion;
     std::string shaderName;
 
-    float so_fov, so_alpha, so_refraction, so_shininess, so_strengthSpecular, so_strengthAmbient;
+    float so_fov, so_alpha, so_refraction, so_shininess, so_strengthSpecular, so_strengthAmbient, so_strengthDiffuse;
     glm::vec3 so_lightPosition, so_lightDirection, so_lightColor, so_displacement;
 
     GLUtils *glUtils;
@@ -60,7 +61,7 @@ private:
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
     GLuint glGS_GeomDisplacementLocation;
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_OpticalDensity, glFS_Shininess;
-    GLuint glFS_StrengthSpecular, glFS_StrengthAmbient;
+    GLuint glFS_StrengthSpecular, glFS_StrengthAmbient, glFS_StrengthDiffuse;
     GLuint glFS_Light_Position, glFS_Light_Direction;
     GLuint glFS_AmbientColor, glFS_DiffuseColor, glFS_SpecularColor;
     GLuint glFS_ScreenResX, glFS_ScreenResY;

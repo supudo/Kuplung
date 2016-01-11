@@ -433,6 +433,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsShininess(this->gui->scene_item_settings[sis][13].oValue);
         mmf->setOptionsStrengthSpecular(this->gui->scene_item_settings[sis][14].oValue);
         mmf->setOptionsStrengthAmbient(this->gui->scene_item_settings[sis][15].oValue);
+        mmf->setOptionsStrengthDiffuse(this->gui->scene_item_settings[sis][16].oValue);
 
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
     }
