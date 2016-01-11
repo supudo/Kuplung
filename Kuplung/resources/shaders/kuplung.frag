@@ -2,6 +2,7 @@ uniform mat4 fs_MMatrix;
 uniform sampler2D fs_sampler;
 uniform float fs_alpha;
 uniform float fs_refraction;
+uniform float fs_shininess;
 
 uniform vec3 fs_lightPosition;
 uniform vec3 fs_lightDirection;
@@ -37,11 +38,12 @@ void main(void) {
     vec3 diffuse = diff * fs_diffuseColor;
 
     // Specular
-    float specularStrength = 0.5f;
+    float specularStrength = 0.5f; // attenuation
     vec3 viewDir = normalize(fs_cameraPosition - fs_vertexPosition);
     vec3 reflectDir = reflect(-lightDir, norm);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
-    vec3 specular = specularStrength * spec * fs_specularColor;//fs_diffuseColor;
+    vec3 specular = specularStrength * spec * fs_specularColor;
+//    specular = specularStrength * vec3(spec) * vec3(spec) * pow(max(0.0, dot(reflect(-fs_lightDirection, reflectDir), viewDir)), fs_shininess);
 
     if (fs_refraction > 1.0) {
         // Refraction (Optical Density)

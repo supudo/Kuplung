@@ -65,6 +65,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_alpha = -1;
     this->so_lightColor = glm::vec3(0, 0, 0);
     this->so_refraction = this->oFace.faceMaterial.opticalDensity;
+    this->so_shininess = this->oFace.faceMaterial.shininess;
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -136,6 +137,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
         this->glFS_OpticalDensity = this->glUtils->glGetUniform(this->shaderProgram, "fs_refraction");
+        this->glFS_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "fs_shininess");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -260,6 +262,10 @@ void MeshModelFace::setOptionsRefraction(float refraction) {
     this->so_refraction = refraction;
 }
 
+void MeshModelFace::setOptionsShininess(float shininess) {
+    this->so_shininess = shininess;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -322,6 +328,9 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform1f(this->glFS_OpticalDensity, this->so_refraction);
         glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
         glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
+
+        // Shininess
+        glUniform1f(this->glFS_Shininess, this->so_shininess);
 
         // draw
         glBindVertexArray(this->glVAO);
