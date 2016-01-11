@@ -15,23 +15,23 @@ void GLUtils::init(std::function<void(std::string)> doLog) {
 
 GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName, int glslVersion) {
     GLuint shaderProgram = 0;
-    
+
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderVertexName + ".vert";
     std::string shaderVertexSource = readFile(shaderPath.c_str());
     shaderVertexSource = "#version " + std::to_string(glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
-    
+
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderFragmentName + ".frag";
     std::string shaderFragmentSource = readFile(shaderPath.c_str());
     shaderFragmentSource = "#version " + std::to_string(glslVersion) + "\n" + shaderFragmentSource;
     const char *shader_fragment = shaderFragmentSource.c_str();
-    
+
     shaderProgram = glCreateProgram();
-    
+
     GLuint shaderVertex = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(shaderVertex, 1, &shader_vertex, NULL);
     glCompileShader(shaderVertex);
-    
+
     GLint isShaderVertexCompiled = GL_FALSE;
     glGetShaderiv(shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
     if (isShaderVertexCompiled != GL_TRUE) {
@@ -40,11 +40,11 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
     }
     else {
         glAttachShader(shaderProgram, shaderVertex);
-        
+
         GLuint shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(shaderFragment, 1, &shader_fragment, NULL);
         glCompileShader(shaderFragment);
-        
+
         GLint isShaderFragmentCompiled = GL_FALSE;
         glGetShaderiv(shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
         if (isShaderFragmentCompiled != GL_TRUE) {
@@ -54,7 +54,7 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
         else {
             glAttachShader(shaderProgram, shaderFragment);
             glLinkProgram(shaderProgram);
-            
+
             GLint programSuccess = GL_TRUE;
             glGetProgramiv(shaderProgram, GL_LINK_STATUS, &programSuccess);
             if (programSuccess != GL_TRUE) {
@@ -63,9 +63,29 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
             }
         }
     }
-    
+
     return shaderProgram;
 }
+
+bool GLUtils::compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source) {
+    shader = glCreateShader(shaderType);
+
+    glShaderSource(shader, 1, &shader_source, NULL);
+    glCompileShader(shader);
+
+    GLint isShaderCompiled = GL_FALSE;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
+    if (isShaderCompiled != GL_TRUE) {
+        this->doLog(Settings::Instance()->string_format("Unable to compile shader %d!\n", shader));
+        this->printShaderLog(shader);
+        return false;
+    }
+    else
+        glAttachShader(shaderProgram, shader);
+    return true;
+}
+
+#pragma mark - Variables
 
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
     GLint var = glGetAttribLocation(program, var_name);
@@ -80,6 +100,8 @@ GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
         this->glDoLog("Cannot fetch shader uniform - " + std::string(var_name));
     return var;
 }
+
+#pragma mark - Printing
 
 void GLUtils::printProgramLog(GLuint program) {
     if (glIsProgram(program)) {
@@ -102,7 +124,7 @@ void GLUtils::printShaderLog(GLuint shader) {
         int maxLength = infoLogLength;
         glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
         char* infoLog = new char[maxLength];
-        
+
         glGetShaderInfoLog(shader, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
             this->glDoLog(Settings::Instance()->string_format("%s\n", infoLog));
@@ -115,7 +137,7 @@ void GLUtils::printShaderLog(GLuint shader) {
 bool GLUtils::logOpenGLError(const char *file, int line) {
     GLenum err = glGetError();
     bool success = true;
-    
+
     while (err != GL_NO_ERROR) {
         std::string error;
         switch (err) {
@@ -155,7 +177,7 @@ bool GLUtils::logOpenGLError(const char *file, int line) {
         this->glDoLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
         err = glGetError();
     }
-    
+
     return success;
 }
 

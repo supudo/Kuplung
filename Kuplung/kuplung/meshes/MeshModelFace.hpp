@@ -38,8 +38,6 @@ public:
 private:
     std::function<void(std::string)> doLogFunc;
 
-    bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);
-
     int glslVersion;
     std::string shaderName;
 

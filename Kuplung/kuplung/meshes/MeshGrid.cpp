@@ -19,14 +19,14 @@ MeshGrid::~MeshGrid() {
 
 void MeshGrid::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
-    
+
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDeleteProgram(this->shaderProgram);
-    
+
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
-    
+
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -44,61 +44,40 @@ void MeshGrid::init(std::function<void(std::string)> doLog, std::string shaderNa
 
 bool MeshGrid::initShaderProgram() {
     bool success = true;
-    
+
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
     std::string shaderVertexSource = readFile(shaderPath.c_str());
     shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
-    
+
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
     std::string shaderFragmentSource = readFile(shaderPath.c_str());
     shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
     const char *shader_fragment = shaderFragmentSource.c_str();
-    
+
     this->shaderProgram = glCreateProgram();
-    
-    this->shaderVertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(this->shaderVertex, 1, &shader_vertex, NULL);
-    glCompileShader(this->shaderVertex);
-    
-    GLint isShaderVertexCompiled = GL_FALSE;
-    glGetShaderiv(this->shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
-    if (isShaderVertexCompiled != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Unable to compile vertex shader %d!\n", this->shaderVertex));
-        this->glUtils->printShaderLog(this->shaderVertex);
+
+    bool shaderCompilation = true;
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+
+    if (!shaderCompilation)
+        return false;
+
+    glLinkProgram(this->shaderProgram);
+
+    GLint programSuccess = GL_TRUE;
+    glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
+    if (programSuccess != GL_TRUE) {
+        this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+        this->glUtils->printProgramLog(this->shaderProgram);
+        return success = false;
     }
     else {
-        glAttachShader(this->shaderProgram, this->shaderVertex);
-        
-        this->shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(this->shaderFragment, 1, &shader_fragment, NULL);
-        glCompileShader(this->shaderFragment);
-        
-        GLint isShaderFragmentCompiled = GL_FALSE;
-        glGetShaderiv(this->shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
-        if (isShaderFragmentCompiled != GL_TRUE) {
-            this->doLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", this->shaderFragment));
-            this->glUtils->printShaderLog(this->shaderFragment);
-            return success = false;
-        }
-        else {
-            glAttachShader(this->shaderProgram, this->shaderFragment);
-            glLinkProgram(this->shaderProgram);
-            
-            GLint programSuccess = GL_TRUE;
-            glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
-            if (programSuccess != GL_TRUE) {
-                this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
-                this->glUtils->printProgramLog(this->shaderProgram);
-                return success = false;
-            }
-            else {
-                this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-                this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-            }
-        }
+        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
-    
+
     return success;
 }
 
@@ -129,7 +108,7 @@ void MeshGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices) * sizeof(GLfloat), Vertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
-    
+
     glBindVertexArray(0);
 }
 
@@ -138,26 +117,26 @@ void MeshGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
 void MeshGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
-        
+
         // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
         glLineWidth((GLfloat)2.5f);
-        
+
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-        
+
         // draw
         glBindVertexArray(this->glVAO);
-        
+
         for (int i = 0; i < this->gridSize; i++)
             glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
-        
+
         for (int i = 0; i < this->gridSize; i++)
             glDrawArrays(GL_LINE_STRIP, 0, this->gridSize);
 
         glBindVertexArray(0);
-        
+
         glUseProgram(0);
     }
 }

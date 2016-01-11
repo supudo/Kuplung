@@ -31,17 +31,18 @@ public:
     ~GLUtils();
     void init(std::function<void(std::string)> doLog);
     GLuint initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName, int glslVersion);
-    
+    bool compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
+
     void printProgramLog(GLuint program);
     void printShaderLog(GLuint shader);
     bool logOpenGLError(const char *file, int line);
     GLint glGetAttribute(GLuint program, const char* var_name);
     GLint glGetUniform(GLuint program, const char* var_name);
-    
+
 private:
     std::function<void(std::string)> doLog;
     std::string readFile(const char *filePath);
-    
+
     void glDoLog(std::string logMessage);
 };
 

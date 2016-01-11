@@ -107,68 +107,48 @@ bool MeshModelFace::initShaderProgram() {
 
     this->shaderProgram = glCreateProgram();
 
-    if (this->compileShader(this->shaderVertex, GL_VERTEX_SHADER, shader_vertex)) {
-//        if (this->compileShader(this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control)) {
-//            if (this->compileShader(this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval)) {
-                if (this->compileShader(this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry)) {
-                    if (this->compileShader(this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment)) {
+    bool shaderCompilation = true;
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    //shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    //shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
-                        glLinkProgram(this->shaderProgram);
+    if (!shaderCompilation)
+        return false;
 
-                        GLint programSuccess = GL_TRUE;
-                        glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
-                        if (programSuccess != GL_TRUE) {
-                            this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
-                            this->glUtils->printProgramLog(this->shaderProgram);
-                            return success = false;
-                        }
-                        else {
-                            this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-                            this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-                            this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-                            this->glGeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
+    glLinkProgram(this->shaderProgram);
 
-                            this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
-                            this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+    GLint programSuccess = GL_TRUE;
+    glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
+    if (programSuccess != GL_TRUE) {
+        this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+        this->glUtils->printProgramLog(this->shaderProgram);
+        return success = false;
+    }
+    else {
+        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
+        this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
+        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
+        this->glGeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
 
-                            this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
-                            this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
+        this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+        this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-                            this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
-                            this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
-                            this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
+        this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
+        this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
 
-                            this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
-                            this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
+        this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
+        this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
+        this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
 
-                            this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
-                        }
+        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+        this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
-                    }
-                }
-//            }
-//        }
+        this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
     }
 
     return success;
-}
-
-bool MeshModelFace::compileShader(GLuint &shader, GLenum shaderType, const char *shader_source) {
-    shader = glCreateShader(shaderType);
-
-    glShaderSource(shader, 1, &shader_source, NULL);
-    glCompileShader(shader);
-
-    GLint isShaderCompiled = GL_FALSE;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
-    if (isShaderCompiled != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Unable to compile shader %d!\n", shader));
-        this->glUtils->printShaderLog(shader);
-        return false;
-    }
-    else
-        glAttachShader(this->shaderProgram, shader);
-    return true;
 }
 
 void MeshModelFace::initBuffers(std::string assetsFolder) {
