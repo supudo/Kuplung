@@ -20,6 +20,7 @@ void main(void) {
 //    vso_vertexPosition = vs_vertexPosition;
 //    vso_textureCoord = vs_textureCoord;
 //    vso_vertexNormal = vs_vertexNormal;
+//    vso_displacementLocation = vs_displacementLocation;
 
     vs_out.gs_vertexPosition = vs_vertexPosition;
     vs_out.gs_textureCoord = vs_textureCoord;

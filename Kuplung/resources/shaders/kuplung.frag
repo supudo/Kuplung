@@ -60,8 +60,8 @@ void main(void) {
     vec3 specular = specularStrength * spec * fs_specularColor;//fs_diffuseColor;
 
     // Refraction (Optical Density)
-    //vec3 refraction = normalize(Refract(v_vertexPosition, norm, 1.20)); // u_refraction
-    //vec3 refractionColor = mix(texture2D(Texture, v_textureCoord + refraction.xy * 0.1), fragColor, u_alpha).rgb;
+//    vec3 refraction = normalize(Refract(fs_vertexPosition, norm, 1.20)); // fs_refraction
+//    vec3 refractionColor = mix(texture(Texture, fs_textureCoord + refraction.xy * 0.1), fragColor, fs_alpha).rgb;
 
     // Final color
     vec3 processedColor = (ambient + diffuse + specular) * texture(fs_sampler, fs_textureCoord).rgb;

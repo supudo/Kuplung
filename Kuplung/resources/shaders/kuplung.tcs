@@ -1,8 +1,8 @@
 layout(vertices = 3) out;
 
-in vec3 tcs_vertexPosition[];
-in vec2 tcs_textureCoord[];
-in vec3 tcs_vertexNormal[];
+in vec3 vso_vertexPosition[];
+in vec2 vso_textureCoord[];
+in vec3 vso_vertexNormal[];
 
 out vec3 tes_vertexPosition[];
 out vec2 tes_textureCoord[];
@@ -11,7 +11,7 @@ out vec3 tes_vertexNormal[];
 #define ID gl_InvocationID
 
 void main() {
-    tes_vertexPosition[ID] = tcs_vertexPosition[ID];
-    tes_textureCoord[ID] = tcs_textureCoord[ID];
-    tes_vertexNormal[ID] = tcs_vertexNormal[ID];
+    tes_vertexPosition[ID] = vso_vertexPosition[ID];
+    tes_textureCoord[ID] = vso_textureCoord[ID];
+    tes_vertexNormal[ID] = vso_vertexNormal[ID];
 }
