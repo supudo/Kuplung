@@ -23,13 +23,6 @@ void main() {
     EndPrimitive();
 
     for (int i=0; i<gl_in.length(); i++) {
-//        gl_Position = gl_in[i].gl_Position + vec4(5.0, 0.0, 0.0, 1.0);
-
-//        vec3 dl = gs_in[i].gs_displacementLocation;
-//        gl_Position = gl_in[i].gl_Position + vec4(dl[0], dl[1], dl[2], 1.0);
-
-//        gl_Position = gl_in[i].gl_Position + vec4(gs_in[i].gs_displacementLocation, 1.0);
-
         vec3 newPosition = gs_in[i].gs_displacementLocation.xyz;
         float dx = 1.0 + newPosition.x;
         float dy = 1.0 + newPosition.y;
