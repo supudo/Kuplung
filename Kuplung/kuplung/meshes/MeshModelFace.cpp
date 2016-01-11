@@ -40,9 +40,9 @@ void MeshModelFace::destroy() {
 //    if (this->vboTextureDissolve > 0)
 //        glDeleteBuffers(1, &this->vboTextureDissolve);
 
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
-    glDisableVertexAttribArray(this->glAttributeTextureCoord);
-    glDisableVertexAttribArray(this->glAttributeVertexNormal);
+    glDisableVertexAttribArray(this->glVS_VertexPosition);
+    glDisableVertexAttribArray(this->glFS_TextureCoord);
+    glDisableVertexAttribArray(this->glVS_VertexNormal);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -127,25 +127,25 @@ bool MeshModelFace::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-        this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-        this->glGeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
+        this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
+        this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
+        this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
+        this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
 
-        this->glUniformAlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
-        this->glUniform_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+        this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+        this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-        this->glUniformLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
-        this->glUniformLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
+        this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
+        this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
 
-        this->glUniform_ambientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
-        this->glUniform_diffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
-        this->glUniform_specularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
+        this->glFS_AmbientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
+        this->glFS_DiffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
+        this->glFS_SpecularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
 
-        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
-        this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
+        this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+        this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
-        this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
+        this->glFS_Sampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
     }
 
     return success;
@@ -159,23 +159,23 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, this->oFace.verticesCount * sizeof(GLfloat), &this->oFace.vertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(this->glVS_VertexPosition);
+    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
     glBufferData(GL_ARRAY_BUFFER, this->oFace.normalsCount * sizeof(GLfloat), &this->oFace.normals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexNormal);
-    glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(this->glVS_VertexNormal);
+    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // textures and colors
     if (this->oFace.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
         glBufferData(GL_ARRAY_BUFFER, this->oFace.texture_coordinates.size() * sizeof(GLfloat), &this->oFace.texture_coordinates[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeTextureCoord);
-        glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        glEnableVertexAttribArray(this->glFS_TextureCoord);
+        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         if (this->oFace.faceMaterial.textures_diffuse.image != "") {
             std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
@@ -273,8 +273,8 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         //glEnable(GL_CULL_FACE);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
-        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-        glUniformMatrix4fv(this->glUniformMMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+        glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         // blending
         if (this->oFace.faceMaterial.transparency < 1.0 || this->so_alpha < 1.0) {
@@ -282,28 +282,28 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             if (this->oFace.faceMaterial.transparency < 1.0)
-                glUniform1f(this->glUniformAlphaBlending, this->oFace.faceMaterial.transparency);
+                glUniform1f(this->glFS_AlphaBlending, this->oFace.faceMaterial.transparency);
             else
-                glUniform1f(this->glUniformAlphaBlending, this->so_alpha);
+                glUniform1f(this->glFS_AlphaBlending, this->so_alpha);
         }
         else {
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
             glDisable(GL_BLEND);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glUniform1f(this->glUniformAlphaBlending, 1.0);
+            glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
 
-        glUniform3f(this->glUniformLight_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
-        glUniform3f(this->glUniformLight_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
+        glUniform3f(this->glFS_Light_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
+        glUniform3f(this->glFS_Light_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
 
-        glUniform3f(this->glUniform_ambientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
-        glUniform3f(this->glUniform_diffuseColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
-        glUniform3f(this->glUniform_specularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
+        glUniform3f(this->glFS_AmbientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
+        glUniform3f(this->glFS_DiffuseColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
+        glUniform3f(this->glFS_SpecularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
 
-        glUniform3f(this->glUniform_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
+        glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
-        glUniform3f(this->glGeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
+        glUniform3f(this->glGS_GeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
 
         // draw
         glBindVertexArray(this->glVAO);

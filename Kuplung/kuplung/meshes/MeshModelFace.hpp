@@ -51,12 +51,13 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboTextureColor, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureShiness, vboTextureDissolve;
-    GLuint glUniformMVPMatrix, glUniformMMatrix;
-    GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
-    GLuint glUniformAlphaBlending, glUniform_CameraPosition;
-    GLuint glUniformLight_Position, glUniformLight_Direction;
-    GLuint glUniform_ambientColor, glUniform_diffuseColor, glUniform_specularColor;
-    GLuint glGeomDisplacementLocation;
+
+    GLuint glVS_MVPMatrix, glFS_MMatrix;
+    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
+    GLuint glGS_GeomDisplacementLocation;
+    GLuint glFS_AlphaBlending, glFS_CameraPosition;
+    GLuint glFS_Light_Position, glFS_Light_Direction;
+    GLuint glFS_AmbientColor, glFS_DiffuseColor, glFS_SpecularColor;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
