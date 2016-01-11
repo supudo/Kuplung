@@ -12,6 +12,8 @@ uniform vec3 fs_specularColor;
 
 uniform vec3 fs_cameraPosition;
 
+uniform float fs_screenResX, fs_screenResY;
+
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
 in vec3 fs_vertexNormal;
@@ -21,26 +23,8 @@ out vec4 fragColor;
 // https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
 
 void main(void) {
-//    fragColor = vec4(1.0, 0.0, 0.0, 1.0);
-//    fragColor = texture(fs_sampler, fs_textureCoord);
-//
-//    vec4 texelColor = texture(fs_sampler, fs_textureCoord);
-//    fragColor = vec4(texelColor.rgb, texelColor.a * fs_alpha);
-
-    // ---
-//
-//    vec3 norm = normalize(fs_vertexNormal);
-//
-//    vec3 fragPos = vec3(fs_MMatrix * vec4(fs_vertexPosition, 1.0f));
-//    vec3 lightDirection = normalize(fs_lightPosition - fragPos);
-//
-//    float diff = max(dot(norm, lightDirection), 0.0);
-//    vec3 diffuseColor = diff * fs_lightColor;
-//
-//    vec3 processedColor = diffuseColor * texture(fs_sampler, fs_textureCoord).rgb;
-//    fragColor = vec4(processedColor, fs_alpha);
-
-    // ---
+    vec4 texturedColor = texture(fs_sampler, fs_textureCoord);
+    vec3 processedColor = texturedColor.rgb;
 
     // Ambient
     float ambientStrength = 0.1f;
@@ -59,12 +43,17 @@ void main(void) {
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * fs_specularColor;//fs_diffuseColor;
 
-    // Refraction (Optical Density)
-//    vec3 refraction = normalize(Refract(fs_vertexPosition, norm, 1.20)); // fs_refraction
-//    vec3 refractionColor = mix(texture(Texture, fs_textureCoord + refraction.xy * 0.1), fragColor, fs_alpha).rgb;
+    if (fs_refraction > 1.0) {
+        // Refraction (Optical Density)
+        vec3 refraction = normalize(refract(fs_vertexPosition, norm, fs_refraction));
+        vec3 refractionColor = mix(texture(fs_sampler, fs_textureCoord + refraction.xy * 0.1), texturedColor, fs_alpha).rgb;
+        vec2 pixelTexCoords = vec2(gl_FragCoord.x / fs_screenResX, gl_FragCoord.y / fs_screenResY);
+        processedColor = (ambient + diffuse + specular) * texture(fs_sampler, pixelTexCoords + refraction.xy * 0.1).rgb;
+    }
+    else {
+        processedColor = (ambient + diffuse + specular) * texturedColor.rgb;
+    }
 
     // Final color
-    vec3 processedColor = (ambient + diffuse + specular) * texture(fs_sampler, fs_textureCoord).rgb;
-    //vec3 processedColor = (ambient + diffuse + specular) * texture(fs_sampler, vs_textureCoord + refraction.xy * 0.1).rgb;
     fragColor = vec4(processedColor, fs_alpha);
 }

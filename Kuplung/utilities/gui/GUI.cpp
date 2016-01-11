@@ -146,6 +146,9 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
 
+        // refraction
+        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
+
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
     }
@@ -665,6 +668,16 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate displacement by Z");
         ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+
+        ImGui::TreePop();
+    }
+
+    if (ImGui::TreeNode("Refraction")) {
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12].oAnimate))
+            this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate refraction");
+        ImGui::SameLine(); ImGui::SliderFloat("##103", &this->scene_item_settings[this->scene_item_selected][12].oValue, 0.0, 10.0);
 
         ImGui::TreePop();
     }

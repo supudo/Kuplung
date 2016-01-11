@@ -64,6 +64,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->glslVersion = glslVersion;
     this->so_alpha = -1;
     this->so_lightColor = glm::vec3(0, 0, 0);
+    this->so_refraction = this->oFace.faceMaterial.opticalDensity;
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -134,6 +135,7 @@ bool MeshModelFace::initShaderProgram() {
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+        this->glFS_OpticalDensity = this->glUtils->glGetUniform(this->shaderProgram, "fs_refraction");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -146,6 +148,9 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
         this->glFS_Sampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
+
+        this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
+        this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
     }
 
     return success;
@@ -251,6 +256,10 @@ void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
     this->so_displacement = displacement;
 }
 
+void MeshModelFace::setOptionsRefraction(float refraction) {
+    this->so_refraction = refraction;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -294,16 +303,25 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
             glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
 
+        // camera position
+        glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
+
+        // light
         glUniform3f(this->glFS_Light_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
         glUniform3f(this->glFS_Light_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
 
+        // colors
         glUniform3f(this->glFS_AmbientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
         glUniform3f(this->glFS_DiffuseColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
         glUniform3f(this->glFS_SpecularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
 
-        glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
-
+        // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
+
+        // Refraction
+        glUniform1f(this->glFS_OpticalDensity, this->so_refraction);
+        glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
+        glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
 
         // draw
         glBindVertexArray(this->glVAO);
