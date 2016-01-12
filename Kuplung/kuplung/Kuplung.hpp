@@ -56,7 +56,7 @@ private:
     const char *WINDOW_TITLE = "Kuplung";
     const int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
     const int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
-    
+
     // SDLs
     SDL_Window *gWindow = NULL;
     SDL_GLContext glContext;
@@ -65,6 +65,7 @@ private:
     bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed;
     glm::mat4 matrixProjection, matrixCamera;
     int sceneSelectedModelObject;
+    std::string selectedMaterialID;
 
     // Customs
     FBEntity objFile;

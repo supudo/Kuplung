@@ -27,7 +27,7 @@ out vec4 fragColor;
 // https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
 
 void main(void) {
-    if (fs_isBorder == 1.0) {
+    if (fs_isBorder > 0.0) {
         fragColor = vec4(1.0, 0.0, 0.0, 1.0);
     }
     else {

@@ -246,6 +246,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
         float sceneClosestObject = -1;
         this->sceneSelectedModelObject = -1;
+        this->selectedMaterialID = "";
 
         for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
@@ -274,7 +275,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
                         if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
                             if (p.z > sceneClosestObject) {
                                 this->sceneSelectedModelObject = i;
-                                this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + mmf->oFace.materialID);
+                                this->selectedMaterialID = mmf->oFace.materialID;
+                                this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
                                 break;
                             }
                         }
@@ -434,6 +436,9 @@ void Kuplung::renderScene() {
         mmf->setOptionsStrengthSpecular(this->gui->scene_item_settings[sis][14].oValue);
         mmf->setOptionsStrengthAmbient(this->gui->scene_item_settings[sis][15].oValue);
         mmf->setOptionsStrengthDiffuse(this->gui->scene_item_settings[sis][16].oValue);
+        mmf->setOptionsSelected(false);
+        if (this->selectedMaterialID == mmf->oFace.materialID)
+            mmf->setOptionsSelected(true);
 
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
     }

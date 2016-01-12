@@ -285,6 +285,10 @@ void MeshModelFace::setOptionsStrengthDiffuse(float val) {
     this->so_strengthDiffuse = val;
 }
 
+void MeshModelFace::setOptionsSelected(bool selectedYn) {
+    this->so_selectedYn = selectedYn;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -369,10 +373,36 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 }
 
 void MeshModelFace::outlineTwo() {
-    //glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
-    // draw
+    float scale = 1.1;
+    glm::mat4 mtxModel;
+
+    if (this->so_selectedYn) {
+        // outline
+        glDisable(GL_DEPTH_TEST);
+        glUniform1f(this->glVS_IsBorder, 1.0);
+
+        mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+        mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+
+        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+        glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+
+        this->drawOnly();
+    }
+
+    // model
+    glEnable(GL_DEPTH_TEST);
     glUniform1f(this->glVS_IsBorder, 0.0);
+
+    scale = 1.0;
+    mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+    mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+
+    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+    glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+
     this->drawOnly();
 }
 
