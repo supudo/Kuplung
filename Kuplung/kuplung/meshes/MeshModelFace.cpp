@@ -305,7 +305,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
 
         // drawing options
-        glEnable(GL_CULL_FACE);
+        //glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glFrontFace(GL_CCW);
 
@@ -375,7 +375,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 void MeshModelFace::outlineTwo() {
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
-    float scale = 1.1;
+    float scale;
     glm::mat4 mtxModel;
 
     if (this->so_selectedYn) {
@@ -383,6 +383,7 @@ void MeshModelFace::outlineTwo() {
         glDisable(GL_DEPTH_TEST);
         glUniform1f(this->glVS_IsBorder, 1.0);
 
+        scale = 1.05;
         mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
         mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
@@ -390,10 +391,10 @@ void MeshModelFace::outlineTwo() {
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
 
         this->drawOnly();
+        glEnable(GL_DEPTH_TEST);
     }
 
     // model
-    glEnable(GL_DEPTH_TEST);
     glUniform1f(this->glVS_IsBorder, 0.0);
 
     scale = 1.0;
