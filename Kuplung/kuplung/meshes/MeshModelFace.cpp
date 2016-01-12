@@ -144,6 +144,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularStrength");
         this->glFS_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientStrength");
         this->glFS_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseStrength");
+        this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -300,10 +301,9 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
 
         // drawing options
-        //glEnable(GL_CULL_FACE);
-        glCullFace(GL_FRONT);
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
         glFrontFace(GL_CCW);
-        //glEnable(GL_CULL_FACE);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -355,14 +355,10 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // Shininess
         glUniform1f(this->glFS_Shininess, this->so_shininess);
 
-        // draw
-        glBindVertexArray(this->glVAO);
-        if (Settings::Instance()->wireframesMode)
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
-        if (Settings::Instance()->wireframesMode)
-            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glBindVertexArray(0);
+        // outlining
+        //this->drawOnly();
+        //this->outlineOne();
+        this->outlineTwo();
 
         // clear texture
         if (this->vboTextureDiffuse > 0)
@@ -370,6 +366,61 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 
         glUseProgram(0);
     }
+}
+
+void MeshModelFace::outlineTwo() {
+    //glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+
+    // draw
+    glUniform1f(this->glVS_IsBorder, 0.0);
+    this->drawOnly();
+}
+
+void MeshModelFace::outlineOne() {
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+
+    // 1st pass
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
+    glStencilFunc(GL_ALWAYS, 1, 0xFF);
+    glStencilMask(0xFF);
+
+    // draw
+    glUniform1f(this->glVS_IsBorder, 0.0);
+    this->drawOnly();
+
+    // 2nd pass
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilMask(0x00);
+    glDisable(GL_DEPTH_TEST);
+    GLfloat scale = 1.1;
+
+    glUniform1f(this->glVS_IsBorder, 1.0);
+    matrixModel = glm::scale(matrixModel, glm::vec3(scale, scale, scale));
+    mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+    glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+
+    // draw
+    this->drawOnly();
+
+    glStencilMask(0xFF);
+    glDisable(GL_STENCIL_TEST);
+    glEnable(GL_DEPTH_TEST);
+}
+
+void MeshModelFace::drawOnly() {
+    glBindVertexArray(this->glVAO);
+    if (Settings::Instance()->wireframesMode)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    if (Settings::Instance()->wireframesMode)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glBindVertexArray(0);
 }
 
 #pragma mark - Utilities

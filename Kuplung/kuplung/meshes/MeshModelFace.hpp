@@ -42,6 +42,9 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
+    void drawOnly();
+    void outlineTwo();
+    void outlineOne();
 
     int glslVersion;
     std::string shaderName;
@@ -63,7 +66,7 @@ private:
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_OpticalDensity, glFS_Shininess;
     GLuint glFS_StrengthSpecular, glFS_StrengthAmbient, glFS_StrengthDiffuse;
     GLuint glFS_Light_Position, glFS_Light_Direction;
-    GLuint glFS_AmbientColor, glFS_DiffuseColor, glFS_SpecularColor;
+    GLuint glFS_AmbientColor, glFS_DiffuseColor, glFS_SpecularColor, glVS_IsBorder;
     GLuint glFS_ScreenResX, glFS_ScreenResY;
 
     std::string readFile(const char *filePath);

@@ -4,6 +4,7 @@ in vec3 vs_vertexPosition;
 in vec2 vs_textureCoord;
 in vec3 vs_vertexNormal;
 uniform vec3 vs_displacementLocation;
+uniform float vs_isBorder;
 
 //out vec3 vso_vertexPosition;
 //out vec2 vso_textureCoord;
@@ -14,6 +15,7 @@ out VS_OUT {
     vec2 gs_textureCoord;
     vec3 gs_vertexNormal;
     vec3 gs_displacementLocation;
+    float gs_isBorder;
 } vs_out;
 
 void main(void) {
@@ -26,6 +28,7 @@ void main(void) {
     vs_out.gs_textureCoord = vs_textureCoord;
     vs_out.gs_vertexNormal = vs_vertexNormal;
     vs_out.gs_displacementLocation = vs_displacementLocation;
+    vs_out.gs_isBorder = vs_isBorder;
 
     gl_Position = vs_MVPMatrix * vec4(vs_vertexPosition, 1.0);
 }

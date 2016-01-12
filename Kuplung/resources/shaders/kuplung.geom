@@ -6,18 +6,32 @@ in VS_OUT {
     vec2 gs_textureCoord;
     vec3 gs_vertexNormal;
     vec3 gs_displacementLocation;
+    float gs_isBorder;
 } gs_in[];
 
 out vec3 fs_vertexPosition;
 out vec2 fs_textureCoord;
 out vec3 fs_vertexNormal;
+out vec3 fs_outlineColor;
+out float fs_isBorder;
 
 void main() {
+//    for (int i=0; i<gl_in.length(); i++) {
+//        gl_Position = gl_in[i].gl_Position + vec4(-0.2, -0.2, -0.2, 1.0);
+//        fs_vertexPosition = gs_in[i].gs_vertexPosition;
+//        fs_textureCoord = gs_in[i].gs_textureCoord;
+//        fs_vertexNormal = gs_in[i].gs_vertexNormal;
+//        fs_isBorder = 1.0;
+//        EmitVertex();
+//    }
+//    EndPrimitive();
+
     for (int i=0; i<gl_in.length(); i++) {
         gl_Position = gl_in[i].gl_Position;
         fs_vertexPosition = gs_in[i].gs_vertexPosition;
         fs_textureCoord = gs_in[i].gs_textureCoord;
         fs_vertexNormal = gs_in[i].gs_vertexNormal;
+        fs_isBorder = gs_in[i].gs_isBorder;
         EmitVertex();
     }
     EndPrimitive();
@@ -32,6 +46,7 @@ void main() {
 
             fs_textureCoord = gs_in[i].gs_textureCoord;
             fs_vertexNormal = gs_in[i].gs_vertexNormal;
+            fs_isBorder = gs_in[i].gs_isBorder;
             EmitVertex();
         }
         EndPrimitive();
