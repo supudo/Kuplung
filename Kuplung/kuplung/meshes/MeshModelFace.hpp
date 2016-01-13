@@ -35,6 +35,7 @@ public:
     void setOptionsStrengthAmbient(float val);
     void setOptionsStrengthDiffuse(float val);
     void setOptionsSelected(bool selectedYn);
+    void setOptionsOutlineColor(glm::vec3 outlineColor);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
     objModelFace oFace;
     int ModelID;
@@ -52,7 +53,7 @@ private:
     std::string shaderName;
 
     float so_fov, so_alpha, so_refraction, so_shininess, so_strengthSpecular, so_strengthAmbient, so_strengthDiffuse;
-    glm::vec3 so_lightPosition, so_lightDirection, so_lightColor, so_displacement;
+    glm::vec3 so_lightPosition, so_lightDirection, so_lightColor, so_displacement, so_outlineColor;
     bool so_selectedYn;
 
     GLUtils *glUtils;
@@ -65,7 +66,7 @@ private:
 
     GLuint glVS_MVPMatrix, glFS_MMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
-    GLuint glGS_GeomDisplacementLocation;
+    GLuint glGS_GeomDisplacementLocation, glFS_OutlineColor;
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_OpticalDensity, glFS_Shininess;
     GLuint glFS_StrengthSpecular, glFS_StrengthAmbient, glFS_StrengthDiffuse;
     GLuint glFS_Light_Position, glFS_Light_Direction;

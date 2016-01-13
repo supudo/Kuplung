@@ -465,9 +465,11 @@ void GUI::dialogGUIControls() {
     if (ImGui::CollapsingHeader("General")) {
         ImGui::Text("Field of view");
         ImGui::SliderFloat("FOV", &this->so_GUI_FOV, 0.0f, 180.0f);
+        ImGui::Separator();
         ImGui::Text("Ratio");
         ImGui::SliderFloat("W", &this->so_GUI_ratio_w, 0.0f, 5.0f);
         ImGui::SliderFloat("H", &this->so_GUI_ratio_h, 0.0f, 5.0f);
+        ImGui::Separator();
         ImGui::Text("Planes");
         ImGui::SliderFloat("Close", &this->so_GUI_plane_close, 0.0f, 1.0f);
         ImGui::SliderFloat("Far", &this->so_GUI_plane_far, 0.0f, 100.0f);
@@ -476,6 +478,11 @@ void GUI::dialogGUIControls() {
         ImGui::SliderInt("Squares", &this->so_GUI_grid_size, 0, 100);
         ImGui::Separator();
         ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
+        ImGui::Separator();
+        ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color");
+        ImGui::SliderFloat("Red", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
     }
     ImGui::Separator();
 

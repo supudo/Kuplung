@@ -426,6 +426,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsSelected(false);
         if (this->selectedMaterialID == mmf->oFace.materialID)
             mmf->setOptionsSelected(true);
+        mmf->setOptionsOutlineColor(this->gui->so_GUI_outlineColor);
 
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
     }
@@ -450,6 +451,9 @@ void Kuplung::renderScene() {
 
 void Kuplung::initSceneGUI() {
     std::map<int, std::vector<float>> initialSettings = {};
+
+    // initial outline color
+    this->gui->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
 
     // camera
     initialSettings[0] = std::vector<float> {

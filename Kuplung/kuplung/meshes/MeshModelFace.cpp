@@ -69,6 +69,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_strengthSpecular = 0.5;
     this->so_strengthAmbient = 0.5;
     this->so_strengthDiffuse = 1.0;
+    this->so_outlineColor = glm::vec3(1.0, 0.0, 0.0);
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -145,6 +146,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientStrength");
         this->glFS_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseStrength");
         this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
+        this->glFS_OutlineColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -289,6 +291,10 @@ void MeshModelFace::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
+void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
+    this->so_outlineColor = outlineColor;
+}
+
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -359,6 +365,9 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // Shininess
         glUniform1f(this->glFS_Shininess, this->so_shininess);
 
+        // Outline color
+        glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
+
         // outlining
         //this->drawOnly();
         //this->outlineOne();
@@ -383,7 +392,7 @@ void MeshModelFace::outlineThree() {
     if (this->so_selectedYn) {
         glDisable(GL_DEPTH_TEST);
         glUniform1f(this->glVS_IsBorder, 1.0);
-        scale = 1.1;
+        scale = 1.01;
         mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
         mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

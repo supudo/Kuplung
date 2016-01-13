@@ -4,6 +4,7 @@ uniform float fs_alpha;
 uniform float fs_refraction;
 uniform float fs_shininess;
 
+uniform vec3 fs_outlineColor;
 uniform vec3 fs_lightPosition;
 uniform vec3 fs_lightDirection;
 uniform float fs_specularStrength;
@@ -28,7 +29,7 @@ out vec4 fragColor;
 
 void main(void) {
     if (fs_isBorder > 0.0) {
-        fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+        fragColor = vec4(fs_outlineColor, 1.0);
     }
     else {
         vec4 texturedColor = texture(fs_sampler, fs_textureCoord);
@@ -57,7 +58,7 @@ void main(void) {
             processedColor = (ambient + diffuse + specular) * texture(fs_sampler, pixelTexCoords + refraction.xy * 0.1).rgb;
         }
         else
-            processedColor = (ambient + diffuse + specular) * texturedColor.rgb;
+            processedColor = (ambient + diffuse + specular) * processedColor;
 
         // final color
         fragColor = vec4(processedColor, fs_alpha);

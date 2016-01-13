@@ -14,6 +14,7 @@
 #include <map>
 #include <string>
 #include <thread>
+#include <glm/glm.hpp>
 #include "imgui/imgui.h"
 #include "GUILog.hpp"
 #include "GUIScreenshot.hpp"
@@ -43,10 +44,10 @@ public:
     void ImGui_Implementation_RenderDrawLists();
     void setHeightmapImage(std::string heightmapImage);
     void setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile);
-    
+
     void showLoading();
     void hideLoading();
-    
+
     void initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings);
     void showGUIControls();
     void hideGUIControls();
@@ -54,9 +55,9 @@ public:
     void hideSceneSettings();
     void showSceneStats();
     void hideSceneStats();
-    
+
     bool isFrame, isProjection, fixedGridWorld, showHeightmap;
-    
+
     int gui_item_selected;
     std::map<int, std::vector<GUIObjectSetting>> gui_item_settings, gui_item_settings_default;
     int scene_item_selected;
@@ -65,10 +66,11 @@ public:
     float so_GUI_FOV = 45.0;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
     float so_GUI_lightControls_red = 1.0, so_GUI_lightControls_green = 1.0, so_GUI_lightControls_blue = 1.0;
+    glm::vec3 so_GUI_outlineColor;
     int so_GUI_grid_size = 10;
-    
+
     float so_Alpha = 1;
-    
+
 private:
     std::function<void()> quitApp;
     std::function<void(FBEntity)> processFile;
@@ -76,7 +78,7 @@ private:
     std::function<void(std::string, std::string)> doFileShaderCompile;
     std::map<int, std::string> sceneModels;
     std::string heightmapImage;
-    
+
     bool ImGui_SDL2GL21_Implementation_Init();
     void ImGui_SDL2GL21_Implementation_Shutdown();
     void ImGui_SDL2GL21_Implementation_NewFrame();
@@ -84,7 +86,7 @@ private:
     void ImGui_SDL2GL21_Implementation_InvalidateDeviceObjects();
     bool ImGui_SDL2GL21_Implementation_CreateDeviceObjects();
     void ImGui_SDL2GL21_Implementation_RenderDrawLists();
-    
+
     bool ImGui_SDL2GL32_Implementation_Init();
     void ImGui_SDL2GL32_Implementation_Shutdown();
     void ImGui_SDL2GL32_Implementation_NewFrame();
@@ -93,7 +95,7 @@ private:
     bool ImGui_SDL2GL32_Implementation_CreateDeviceObjects();
     void ImGui_SDL2GL32_Implementation_CreateFontsTexture();
     void ImGui_SDL2GL32_Implementation_RenderDrawLists();
-    
+
     void dialogScreenshot();
     void dialogLog();
     void dialogMetrics();
@@ -114,19 +116,19 @@ private:
     void fileEditorSaved(std::string fileName, std::string fileSource);
 
     void dialogSceneStats();
-    
+
     SDL_Window *sdlWindow;
     bool isGUIVisible, isLoadingOpen;
     bool logDebugInfo, showScreenshotWindow, showFileDialog, showOptions, showEditor;
     bool showAppMetrics, showAboutKuplung, showAboutImgui;
     bool displayGUIControls, displaySceneStats, displaySceneSettings;
     bool showDemoWindow, newHeightmap;
-    
+
     GUILog *windowLog;
     GUIScreenshot *windowScreenshot;
     GUIFileBrowser *windowFileBrowser;
     GUIEditor *fileEditor;
-    
+
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
