@@ -241,60 +241,6 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
     glBindVertexArray(0);
 }
 
-#pragma mark - Scene Options
-
-void MeshModelFace::setOptionsFOV(float fov) {
-    this->so_fov = fov;
-}
-
-void MeshModelFace::setOptionsAlpha(float alpha) {
-    this->so_alpha = alpha;
-}
-
-void MeshModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
-    this->so_lightPosition = lightPosition;
-}
-
-void MeshModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
-    this->so_lightDirection = lightDirection;
-}
-
-void MeshModelFace::setOptionsLightColor(glm::vec3 lightColor) {
-    this->so_lightColor = lightColor;
-}
-
-void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
-    this->so_displacement = displacement;
-}
-
-void MeshModelFace::setOptionsRefraction(float refraction) {
-    this->so_refraction = refraction;
-}
-
-void MeshModelFace::setOptionsShininess(float shininess) {
-    this->so_shininess = shininess;
-}
-
-void MeshModelFace::setOptionsStrengthSpecular(float val) {
-    this->so_strengthSpecular = val;
-}
-
-void MeshModelFace::setOptionsStrengthAmbient(float val) {
-    this->so_strengthAmbient = val;
-}
-
-void MeshModelFace::setOptionsStrengthDiffuse(float val) {
-    this->so_strengthDiffuse = val;
-}
-
-void MeshModelFace::setOptionsSelected(bool selectedYn) {
-    this->so_selectedYn = selectedYn;
-}
-
-void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
-    this->so_outlineColor = outlineColor;
-}
-
 #pragma mark - Render
 
 void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
@@ -491,6 +437,60 @@ void MeshModelFace::drawOnly() {
     if (Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     glBindVertexArray(0);
+}
+
+#pragma mark - Scene Options
+
+void MeshModelFace::setOptionsFOV(float fov) {
+    this->so_fov = fov;
+}
+
+void MeshModelFace::setOptionsAlpha(float alpha) {
+    this->so_alpha = alpha;
+}
+
+void MeshModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
+    this->so_lightPosition = lightPosition;
+}
+
+void MeshModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
+    this->so_lightDirection = lightDirection;
+}
+
+void MeshModelFace::setOptionsLightColor(glm::vec3 lightColor) {
+    this->so_lightColor = lightColor;
+}
+
+void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
+    this->so_displacement = displacement;
+}
+
+void MeshModelFace::setOptionsRefraction(float refraction) {
+    this->so_refraction = refraction;
+}
+
+void MeshModelFace::setOptionsShininess(float shininess) {
+    this->so_shininess = shininess;
+}
+
+void MeshModelFace::setOptionsStrengthSpecular(float val) {
+    this->so_strengthSpecular = val;
+}
+
+void MeshModelFace::setOptionsStrengthAmbient(float val) {
+    this->so_strengthAmbient = val;
+}
+
+void MeshModelFace::setOptionsStrengthDiffuse(float val) {
+    this->so_strengthDiffuse = val;
+}
+
+void MeshModelFace::setOptionsSelected(bool selectedYn) {
+    this->so_selectedYn = selectedYn;
+}
+
+void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
+    this->so_outlineColor = outlineColor;
 }
 
 #pragma mark - Utilities
