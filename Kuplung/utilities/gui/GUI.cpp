@@ -504,10 +504,10 @@ void GUI::dialogGUIControls() {
     }
 
     if (this->gui_item_selected == 2 && ImGui::TreeNode("Light Color")) {
-        ImGui::TextColored(ImVec4(this->so_GUI_lightControls_red, this->so_GUI_lightControls_green, this->so_GUI_lightControls_blue, 1.0), "Preview");
-        ImGui::SliderFloat("Red", &this->so_GUI_lightControls_red, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green", &this->so_GUI_lightControls_green, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue", &this->so_GUI_lightControls_blue, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->so_GUI_lightControls.r, this->so_GUI_lightControls.g, this->so_GUI_lightControls.b, 1.0), "Preview");
+        ImGui::SliderFloat("Red", &this->so_GUI_lightControls.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green", &this->so_GUI_lightControls.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue", &this->so_GUI_lightControls.b, 0.0f, 1.0f);
         ImGui::TreePop();
     }
 
@@ -560,9 +560,8 @@ void GUI::dialogGUIControls() {
 }
 
 void GUI::resetValuesGUIControls() {
-    this->so_GUI_lightControls_red = 1.0;
-    this->so_GUI_lightControls_green = 1.0;
-    this->so_GUI_lightControls_blue = 1.0;
+    this->so_GUI_lightControls = glm::vec3(1.0, 1.0, 1.0);
+    this->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;

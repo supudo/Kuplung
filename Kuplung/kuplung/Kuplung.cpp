@@ -416,7 +416,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsAlpha(this->gui->so_Alpha);
         mmf->setOptionsLightPosition(vLightPosition);
         mmf->setOptionsLightDirection(vLightDirection);
-        mmf->setOptionsLightColor(glm::vec3(this->gui->so_GUI_lightControls_red, this->gui->so_GUI_lightControls_green, this->gui->so_GUI_lightControls_blue));
+        mmf->setOptionsLightColor(this->gui->so_GUI_lightControls);
         mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9].oValue, this->gui->scene_item_settings[sis][10].oValue, this->gui->scene_item_settings[sis][11].oValue));
         mmf->setOptionsRefraction(this->gui->scene_item_settings[sis][12].oValue);
         mmf->setOptionsShininess(this->gui->scene_item_settings[sis][13].oValue);

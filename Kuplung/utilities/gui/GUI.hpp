@@ -65,8 +65,7 @@ public:
 
     float so_GUI_FOV = 45.0;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
-    float so_GUI_lightControls_red = 1.0, so_GUI_lightControls_green = 1.0, so_GUI_lightControls_blue = 1.0;
-    glm::vec3 so_GUI_outlineColor;
+    glm::vec3 so_GUI_lightControls, so_GUI_outlineColor;
     int so_GUI_grid_size = 10;
 
     float so_Alpha = 1;
