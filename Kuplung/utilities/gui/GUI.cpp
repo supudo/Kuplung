@@ -593,7 +593,7 @@ void GUI::dialogSceneSettings() {
     ImGui::PopStyleColor(3);
 
     ImGui::TextColored(ImVec4(1, 1, 1, this->so_Alpha), "Alpha Blending");
-    ImGui::SliderFloat("Alpha", &this->so_Alpha, 0.0f, 1.0f);
+    ImGui::SliderFloat("", &this->so_Alpha, 0.0f, 1.0f); // Alpha
     ImGui::Separator();
 
     int modelsCount = (int)this->sceneModels.size();
@@ -602,7 +602,7 @@ void GUI::dialogSceneSettings() {
         scene_items[i] = this->sceneModels[i].c_str();
     }
 
-    ImGui::Combo("Scene Model", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items)); // Scene Model
 
     if (ImGui::TreeNode("Scale")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0].oAnimate))
