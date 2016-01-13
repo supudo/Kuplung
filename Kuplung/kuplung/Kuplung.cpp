@@ -104,7 +104,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
         SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
-        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 4);
+        SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);//4);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, Settings::Instance()->OpenGLMajorVersion);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, Settings::Instance()->OpenGLMinorVersion);
@@ -349,19 +349,6 @@ void Kuplung::renderScene() {
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][15].oValue, this->gui->gui_item_settings[3][16].oValue, this->gui->gui_item_settings[3][17].oValue));
 
-    // grid
-    if (Settings::Instance()->showGrid) {
-        if ((this->gui->so_GUI_grid_size + 1) != this->sceneGridHorizontal->gridSize) {
-            this->sceneGridHorizontal->gridSize = this->gui->so_GUI_grid_size;
-            this->sceneGridVertical->gridSize = this->gui->so_GUI_grid_size;
-            this->sceneGridHorizontal->initBuffers(this->gui->so_GUI_grid_size + 1, true, 1);
-            this->sceneGridVertical->initBuffers(this->gui->so_GUI_grid_size + 1, false, 1);
-        }
-
-        this->sceneGridHorizontal->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
-        this->sceneGridVertical->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
-    }
-
     // lamp
     if (Settings::Instance()->showLight)
         this->meshLight->render(this->matrixProjection, this->matrixCamera, mtxModelLight);
@@ -441,6 +428,19 @@ void Kuplung::renderScene() {
             mmf->setOptionsSelected(true);
 
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
+    }
+
+    // grid
+    if (Settings::Instance()->showGrid) {
+        if ((this->gui->so_GUI_grid_size + 1) != this->sceneGridHorizontal->gridSize) {
+            this->sceneGridHorizontal->gridSize = this->gui->so_GUI_grid_size;
+            this->sceneGridVertical->gridSize = this->gui->so_GUI_grid_size;
+            this->sceneGridHorizontal->initBuffers(this->gui->so_GUI_grid_size + 1, true, 1);
+            this->sceneGridVertical->initBuffers(this->gui->so_GUI_grid_size + 1, false, 1);
+        }
+
+        this->sceneGridHorizontal->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
+        this->sceneGridVertical->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
     }
 
     this->processRunningThreads();

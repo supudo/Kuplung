@@ -44,6 +44,7 @@ public:
 private:
     std::function<void(std::string)> doLogFunc;
     void drawOnly();
+    void outlineThree();
     void outlineTwo();
     void outlineOne();
 
