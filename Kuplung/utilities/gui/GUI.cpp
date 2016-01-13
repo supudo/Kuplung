@@ -483,6 +483,9 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Red", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
+        ImGui::Separator();
+        ImGui::Text("Outline thickness");
+        ImGui::SliderFloat("Thickness", &this->so_outlineThickness, 1.01f, 2.0f);
     }
     ImGui::Separator();
 
@@ -569,6 +572,7 @@ void GUI::resetValuesGUIControls() {
     this->so_GUI_plane_close = 0.1f;
     this->so_GUI_plane_far = 100.0f;
     this->so_GUI_grid_size = 10;
+    this->so_outlineThickness = 1.01;
 
     for (int i=0; i<(int)this->gui_item_settings_default.size(); i++) {
         for (int j=0; j<(int)this->gui_item_settings[i].size(); j++) {

@@ -427,6 +427,7 @@ void Kuplung::renderScene() {
         if (this->selectedMaterialID == mmf->oFace.materialID)
             mmf->setOptionsSelected(true);
         mmf->setOptionsOutlineColor(this->gui->so_GUI_outlineColor);
+        mmf->setOptionsOutlineThickness(this->gui->so_outlineThickness);
 
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
     }

@@ -331,15 +331,13 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 void MeshModelFace::outlineThree() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
-    GLfloat scale;
 
     //mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
     if (this->so_selectedYn) {
         glDisable(GL_DEPTH_TEST);
         glUniform1f(this->glVS_IsBorder, 1.0);
-        scale = 1.01;
-        mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+        mtxModel = glm::scale(this->matrixModel, glm::vec3(this->so_outlineThickness, this->so_outlineThickness, this->so_outlineThickness));
         mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
@@ -349,8 +347,7 @@ void MeshModelFace::outlineThree() {
 
     // model draw
     glUniform1f(this->glVS_IsBorder, 0.0);
-    scale = 1.0;
-    mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+    mtxModel = glm::scale(this->matrixModel, glm::vec3(1.0, 1.0, 1.0));
     mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
     glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
@@ -491,6 +488,10 @@ void MeshModelFace::setOptionsSelected(bool selectedYn) {
 
 void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
     this->so_outlineColor = outlineColor;
+}
+
+void MeshModelFace::setOptionsOutlineThickness(float thickness) {
+    this->so_outlineThickness = thickness;
 }
 
 #pragma mark - Utilities

@@ -63,12 +63,10 @@ public:
     int scene_item_selected;
     std::map<int, std::vector<GUIObjectSetting>> scene_item_settings, scene_item_settings_default;
 
-    float so_GUI_FOV = 45.0;
+    float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
-    glm::vec3 so_GUI_lightControls, so_GUI_outlineColor;
     int so_GUI_grid_size = 10;
-
-    float so_Alpha = 1;
+    glm::vec3 so_GUI_lightControls, so_GUI_outlineColor;
 
 private:
     std::function<void()> quitApp;
