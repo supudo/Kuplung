@@ -160,6 +160,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
 
                     this->gameIsRunning = true;
                     this->sceneSelectedModelObject = -1;
+                    this->selectedMaterialID = "";
 
                     this->initSceneGUI();
                 }
@@ -200,6 +201,12 @@ void Kuplung::onEvent(SDL_Event *ev) {
             default:
                 break;
         }
+    }
+
+    // escape button
+    if (this->managerControls->keyPressed_ESC) {
+        this->sceneSelectedModelObject = -1;
+        this->selectedMaterialID = "";
     }
 
     // FOV & zoom
@@ -245,8 +252,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
         // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
         float sceneClosestObject = -1;
-        this->sceneSelectedModelObject = -1;
-        this->selectedMaterialID = "";
+        //this->sceneSelectedModelObject = -1;
+        //this->selectedMaterialID = "";
 
         for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
