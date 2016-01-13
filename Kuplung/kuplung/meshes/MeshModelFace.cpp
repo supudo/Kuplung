@@ -357,7 +357,6 @@ void MeshModelFace::outlineThree() {
 void MeshModelFace::outlineTwo() {
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
-    float scale;
     glm::mat4 mtxModel;
 
     if (this->so_selectedYn) {
@@ -365,8 +364,7 @@ void MeshModelFace::outlineTwo() {
         glDisable(GL_DEPTH_TEST);
         glUniform1f(this->glVS_IsBorder, 1.0);
 
-        scale = 1.05;
-        mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+        mtxModel = glm::scale(this->matrixModel, glm::vec3(this->so_outlineThickness, this->so_outlineThickness, this->so_outlineThickness));
         mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -379,8 +377,7 @@ void MeshModelFace::outlineTwo() {
     // model
     glUniform1f(this->glVS_IsBorder, 0.0);
 
-    scale = 1.0;
-    mtxModel = glm::scale(this->matrixModel, glm::vec3(scale, scale, scale));
+    mtxModel = glm::scale(this->matrixModel, glm::vec3(1.0, 1.0, 1.0));
     mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
     glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -410,10 +407,9 @@ void MeshModelFace::outlineOne() {
     glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
     glStencilMask(0x00);
     glDisable(GL_DEPTH_TEST);
-    GLfloat scale = 1.1;
 
     glUniform1f(this->glVS_IsBorder, 1.0);
-    matrixModel = glm::scale(matrixModel, glm::vec3(scale, scale, scale));
+    matrixModel = glm::scale(matrixModel, glm::vec3(this->so_outlineThickness, this->so_outlineThickness, this->so_outlineThickness));
     mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
     glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
