@@ -249,11 +249,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
         glm::vec3 direction = glm::normalize(farPoint - nearPoint);
 
         // http://schabby.de/picking-opengl-ray-tracing/
-
         // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
         float sceneClosestObject = -1;
-        //this->sceneSelectedModelObject = -1;
-        //this->selectedMaterialID = "";
 
         for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
