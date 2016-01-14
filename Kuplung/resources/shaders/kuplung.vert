@@ -1,10 +1,11 @@
 uniform mat4 vs_MVPMatrix;
 
+uniform vec3 vs_displacementLocation;
+uniform float vs_isBorder;
+
 in vec3 vs_vertexPosition;
 in vec2 vs_textureCoord;
 in vec3 vs_vertexNormal;
-uniform vec3 vs_displacementLocation;
-uniform float vs_isBorder;
 
 //out vec3 vso_vertexPosition;
 //out vec2 vso_textureCoord;

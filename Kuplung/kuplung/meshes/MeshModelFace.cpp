@@ -87,17 +87,17 @@ bool MeshModelFace::initShaderProgram() {
     shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
 
-    // tessellation control shader
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tcs";
-    std::string shaderTessControlSource = readFile(shaderPath.c_str());
-    shaderTessControlSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessControlSource;
-    const char *shader_tess_control = shaderTessControlSource.c_str();
+//    // tessellation control shader
+//    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tcs";
+//    std::string shaderTessControlSource = readFile(shaderPath.c_str());
+//    shaderTessControlSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessControlSource;
+//    const char *shader_tess_control = shaderTessControlSource.c_str();
 
-    // tessellation evaluation shader
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tes";
-    std::string shaderTessEvalSource = readFile(shaderPath.c_str());
-    shaderTessEvalSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessEvalSource;
-    const char *shader_tess_eval = shaderTessEvalSource.c_str();
+//    // tessellation evaluation shader
+//    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tes";
+//    std::string shaderTessEvalSource = readFile(shaderPath.c_str());
+//    shaderTessEvalSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessEvalSource;
+//    const char *shader_tess_eval = shaderTessEvalSource.c_str();
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".geom";
