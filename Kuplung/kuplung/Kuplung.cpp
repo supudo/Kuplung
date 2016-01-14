@@ -542,20 +542,20 @@ void Kuplung::initSceneGUI() {
     this->gui->setShaderEditor(std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1, std::placeholders::_2));
 
     // font
-    FBEntity fontFile;
-    fontFile.isFile = true;
-    fontFile.extension = ".fnt";
-    fontFile.title = "ui_font";
-    fontFile.path = Settings::Instance()->appFolder() + "/ui_font.fnt";
-    FontMap fm = this->fontParser->parse(fontFile);
+//    FBEntity fontFile;
+//    fontFile.isFile = true;
+//    fontFile.extension = ".fnt";
+//    fontFile.title = "ui_font";
+//    fontFile.path = Settings::Instance()->appFolder() + "/ui_font.fnt";
+//    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
-    FBEntity fileCube0;
-    fileCube0.isFile = true;
-    fileCube0.extension = ".obj";
-    fileCube0.title = "cube0.obj";
-    fileCube0.path = "/Users/supudo/Software/C++/Kuplung/_objects/cube0.obj";
-    this->guiProcessObjFile(fileCube0);
+    FBEntity fileTestbed;
+    fileTestbed.isFile = true;
+    fileTestbed.extension = ".obj";
+    fileTestbed.title = "ESS_Titan.obj";
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/ESS_Titan.obj";
+    this->guiProcessObjFile(fileTestbed);
 }
 
 #pragma mark - App GUI

@@ -36,7 +36,9 @@ void main() {
     }
     EndPrimitive();
 
-    if (gs_in[0].gs_displacementLocation != vec3(0.0, 0.0, 0.0)) {
+    if (gs_in[0].gs_displacementLocation.x != 0.0 &&
+        gs_in[0].gs_displacementLocation.y != 0.0 &&
+        gs_in[0].gs_displacementLocation.z != 0.0) {
         for (int i=0; i<gl_in.length(); i++) {
             vec3 newPosition = gs_in[i].gs_displacementLocation.xyz;
             float dx = 1.0 + newPosition.x;
