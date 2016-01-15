@@ -4,11 +4,13 @@ in vec3 vso_vertexPosition[];
 in vec2 vso_textureCoord[];
 in vec3 vso_vertexNormal[];
 in vec3 vso_displacementLocation[];
+in float vso_isBorder[];
 
 out vec3 tes_vertexPosition[];
 out vec2 tes_textureCoord[];
 out vec3 tes_vertexNormal[];
-out vec3 tes_vertexNormal[];
+out vec3 tes_displacementLocation[];
+out float tes_isBorder[];
 
 #define ID gl_InvocationID
 
@@ -17,4 +19,5 @@ void main() {
     tes_textureCoord[ID] = vso_textureCoord[ID];
     tes_vertexNormal[ID] = vso_vertexNormal[ID];
     tes_displacementLocation[ID] = vso_displacementLocation[ID];
+    tes_isBorder[ID] = vso_isBorder[ID];
 }
