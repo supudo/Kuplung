@@ -53,24 +53,9 @@ int Kuplung::run(int screenWidth, int screenHeight) {
             this->onEvent(&ev);
         }
 
-        //this->pickingTexture.EnableWriting();
-
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glClearColor(Settings::Instance()->guiClearColor.r, Settings::Instance()->guiClearColor.g, Settings::Instance()->guiClearColor.b, Settings::Instance()->guiClearColor.w);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-        // picking
-
-        //this->pickingEffect.Enable();
-
-//        for (unsigned int i=0 ; i<(int)ARRAY_SIZE_IN_ELEMENTS(m_worldPos) ; i++) {
-//            p.WorldPos(m_worldPos[i]);
-//            this->pickingEffect.SetObjectIndex(i);
-//            this->pickingEffect.SetWVP(p.GetWVPTrans());
-//            m_pMesh->Render(&this->pickingEffect);
-//        }
-
-        //this->pickingTexture.DisableWriting();
 
         // rendering
         this->gui->renderStart(true);
