@@ -39,13 +39,13 @@ void main(void) {
         vec3 processedColor = texturedColor.rgb;
 
         // Ambient
-        vec3 ambient = fs_ambientStrength * fs_ambientColor; // fs_diffuseColor;
+        vec3 ambient = fs_ambientStrength * fs_ambientColor;
 
         // Diffuse
         vec3 normalDirection = normalize(fs_vertexNormal);
         vec3 lightDir = normalize(fs_lightPosition - fs_vertexPosition);
         float diff = max(dot(normalDirection, lightDir), 0.0);
-        vec3 diffuse = fs_diffuseStrength * diff * fs_diffuseColor;
+        vec3 diffuse = fs_diffuseStrength * diff * fs_diffuseColor * fs_lightColor;
 
         // Specular
         vec3 viewDir = normalize(fs_cameraPosition - fs_vertexPosition);

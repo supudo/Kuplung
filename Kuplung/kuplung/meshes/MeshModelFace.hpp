@@ -68,7 +68,7 @@ private:
 
     GLuint glVS_MVPMatrix, glFS_MMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
-    GLuint glGS_GeomDisplacementLocation, glFS_OutlineColor;
+    GLuint glGS_GeomDisplacementLocation, glFS_OutlineColor, glFS_Light_Color;
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_OpticalDensity, glFS_Shininess;
     GLuint glFS_StrengthSpecular, glFS_StrengthAmbient, glFS_StrengthDiffuse;
     GLuint glFS_Light_Position, glFS_Light_Direction;

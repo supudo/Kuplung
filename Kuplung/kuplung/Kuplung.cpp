@@ -457,8 +457,9 @@ void Kuplung::renderScene() {
 void Kuplung::initSceneGUI() {
     std::map<int, std::vector<float>> initialSettings = {};
 
-    // initial outline color
+    // initial variables
     this->gui->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
+    this->gui->so_GUI_lightControls = glm::vec3(1.0, 1.0, 1.0);
 
     // camera
     initialSettings[0] = std::vector<float> {

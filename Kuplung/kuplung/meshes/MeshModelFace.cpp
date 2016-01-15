@@ -147,6 +147,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseStrength");
         this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
         this->glFS_OutlineColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
+        this->glFS_Light_Color = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightColor");
 
         this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
         this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
@@ -289,6 +290,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // light
         glUniform3f(this->glFS_Light_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
         glUniform3f(this->glFS_Light_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
+        glUniform3f(this->glFS_Light_Color, this->so_lightColor.r, this->so_lightColor.g, this->so_lightColor.b);
 
         // light factors
         glUniform1f(this->glFS_StrengthSpecular, this->so_strengthSpecular);
