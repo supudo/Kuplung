@@ -539,8 +539,8 @@ void Kuplung::initSceneGUI() {
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
-    fileTestbed.title = "cube0.obj";
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/cube0.obj";
+    fileTestbed.title = "rrobot_small.obj";
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/rrobot_small.obj";
     this->guiProcessObjFile(fileTestbed);
 }
 
