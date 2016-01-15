@@ -377,7 +377,7 @@ int objParser::getLineCount() {
 #endif
 
     std::ifstream inFile2(this->file.path.c_str());
-    int linesCount = std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim);
+    int linesCount = (int)std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim);
     inFile2.close();
     return linesCount;
 }
