@@ -338,6 +338,8 @@ void GUI::renderStart(bool isFrame) {
     if (ImGui::BeginPopupModal("Kuplung", &this->isLoadingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
         ImGui::Text("\n\n");
         ImGui::Text("    Processing ... \n");
+        if (this->loadingPercentage > 0.0)
+            ImGui::Text("       %0.2f%%         \n", this->loadingPercentage);
         ImGui::Text("\n\n");
         ImGui::EndPopup();
     }

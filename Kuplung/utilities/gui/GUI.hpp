@@ -67,6 +67,7 @@ public:
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
     int so_GUI_grid_size = 10;
     glm::vec3 so_GUI_lightControls, so_GUI_outlineColor;
+    float loadingPercentage;
 
 private:
     std::function<void()> quitApp;

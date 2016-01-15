@@ -47,6 +47,7 @@ private:
     void setupScene(FBEntity file);
     void initSceneGUI();
     void doLog(std::string logMessage);
+    void doProgress(float value);
     std::string readFile(const char *filePath);
     void processRunningThreads();
     void setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile);
@@ -66,6 +67,7 @@ private:
     glm::mat4 matrixProjection, matrixCamera;
     int sceneSelectedModelObject;
     std::string selectedMaterialID;
+    float objLoadingProgress;
 
     // Customs
     FBEntity objFile;

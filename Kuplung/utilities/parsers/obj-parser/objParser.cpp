@@ -7,8 +7,9 @@
 //
 
 #include "objParser.hpp"
-#include <sstream>
+#include <fstream>
 #include <numeric>
+#include <sstream>
 
 #pragma mark - Destructor
 
@@ -18,13 +19,15 @@ objParser::~objParser() {
 
 #pragma mark - Publics
 
-void objParser::init(std::function<void(std::string)> doLog) {
+void objParser::init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress) {
     this->scene = {};
     this->doLog = doLog;
+    this->doProgress = doProgress;
+    this->objFileLinesCount = 0;
 
     this->regex_comment = "^#.*";
     this->regex_whiteSpace = "\\s";
-    
+
     this->regex_objTitle = "^o.*";
     this->regex_geometricVertices = "^v\\s.*";
     this->regex_textureCoordinates = "^vt\\s.*";
@@ -35,7 +38,7 @@ void objParser::init(std::function<void(std::string)> doLog) {
     this->regex_materialFile = "^mtllib\\s.*";
     this->regex_useMaterial = "^usemtl\\s.*";
     this->regex_materialNew = "^newmtl\\s.*";
-    
+
     this->regex_materialAmbientColor = "^Ka\\s.*";
     this->regex_materialDiffuseColor = "^Kd\\s.*";
     this->regex_materialSpecularColor = "^Ks\\s.*";
@@ -68,7 +71,7 @@ objScene objParser::parse(FBEntity file) {
     this->scene.totalCountNormalVertices = 0;
     this->scene.totalCountIndices = 0;
     this->scene.totalCountFaces = 0;
-    
+
     std::FILE *fp = std::fopen(this->file.path.c_str(), "rb");
     if (fp) {
         std::string fileContents;
@@ -80,14 +83,17 @@ objScene objParser::parse(FBEntity file) {
 
         size_t pos = 0;
         std::string singleLine;
-        
+
         int indexModel = -1, indexFace = -1;
         int indicesCounter = 0;
-        
+
+        this->objFileLinesCount = this->getLineCount();
+        int linesProcessedCounter = 0;
+
         int modelID = 1, faceID = 1;
         while ((pos = fileContents.find(Settings::Instance()->newLineDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
-            
+
             if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
                 continue;
@@ -95,7 +101,7 @@ objScene objParser::parse(FBEntity file) {
 
             std::vector<std::string> lineElements = this->splitString(singleLine, this->regex_whiteSpace);
             lineElements.erase(lineElements.begin());
-            
+
             if (std::regex_match(singleLine, this->regex_objTitle) || std::regex_match(singleLine, this->regex_materialFile)) {
                 if (std::regex_match(singleLine, this->regex_objTitle)) {
                     objModel entityModel;
@@ -111,7 +117,7 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.models.push_back(entityModel);
                 }
             }
-            
+
             if (std::regex_match(singleLine, this->regex_materialFile))
                 this->scene.materials = this->loadMaterial(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_geometricVertices)) {
@@ -148,10 +154,10 @@ objScene objParser::parse(FBEntity file) {
             else if (std::regex_match(singleLine, this->regex_polygonalFaces)) {
                 std::vector<std::string> singleFaceElements = this->splitString(singleLine, this->regex_whiteSpace);
                 singleFaceElements.erase(singleFaceElements.begin());
-                
+
                 for (size_t i=0; i<singleFaceElements.size(); i++) {
                     std::vector<std::string> face = this->splitString(singleFaceElements[i], this->regex_polygonalFacesSingle);
-                    
+
                     int v_idx = (std::stoi(face[0]) - 1) * 3;
                     this->scene.models[indexModel].faces[indexFace].vertices.push_back(this->geometricVertices[v_idx + 0]);
                     this->scene.models[indexModel].faces[indexFace].vertices.push_back(this->geometricVertices[v_idx + 1]);
@@ -159,7 +165,7 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.totalCountGeometricVertices += 3;
                     this->scene.models[indexModel].verticesCount += 3;
                     this->scene.models[indexModel].faces[indexFace].verticesCount += 3;
-                    
+
                     if (this->textureCoordinates.size() > 0 && face[1] != "") {
                         int t_idx = (std::stoi(face[1]) - 1) * 2;
                         this->scene.models[indexModel].faces[indexFace].texture_coordinates.push_back(this->textureCoordinates[t_idx + 0]);
@@ -168,7 +174,7 @@ objScene objParser::parse(FBEntity file) {
                         this->scene.models[indexModel].textureCoordinatesCount += 2;
                         this->scene.models[indexModel].faces[indexFace].textureCoordinatesCount += 2;
                     }
-                    
+
                     int n_idx = (std::stoi(face[2]) - 1) * 3;
                     this->scene.models[indexModel].faces[indexFace].normals.push_back(this->vertexNormals[n_idx + 0]);
                     this->scene.models[indexModel].faces[indexFace].normals.push_back(this->vertexNormals[n_idx + 1]);
@@ -176,29 +182,32 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.totalCountNormalVertices += 3;
                     this->scene.models[indexModel].normalsCount += 3;
                     this->scene.models[indexModel].faces[indexFace].normalsCount += 3;
-                    
+
                     this->scene.models[indexModel].faces[indexFace].indices.push_back(indicesCounter);
                     indicesCounter += 1;
                     this->scene.totalCountIndices += 1;
                     this->scene.models[indexModel].faces[indexFace].indicesCount += 1;
                     this->scene.models[indexModel].indicesCount += 1;
-                    
+
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(1.0);
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(0.0);
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(0.0);
                 }
             }
-            
+
+            linesProcessedCounter += 1;
+            float progress = ((float)linesProcessedCounter / (float)this->objFileLinesCount) * 100.0;
+            this->doProgress(progress);
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
     }
-    
+
     for (size_t i=0; i<this->scene.models.size(); i++) {
         for (size_t j=0; j<this->scene.models[i].faces.size(); j++) {
             this->scene.models[i].faces[j].faceMaterial = this->findMaterial(this->scene.models[i].faces[j].materialID);
         }
     }
-    
+
     return this->scene;
 }
 
@@ -222,27 +231,27 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
         std::rewind(fp);
         std::fread(&fileContents[0], 1, fileContents.size(), fp);
         std::fclose(fp);
-        
+
         size_t pos = 0;
         std::string singleLine;
 
         int indexMaterial = -1;
-        
+
         while ((pos = fileContents.find(Settings::Instance()->newLineDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
             std::vector<std::string> lineElements = this->splitString(singleLine, this->regex_whiteSpace);
             lineElements.erase(lineElements.begin());
-            
+
             std::ostringstream cleanLineOS;
             //copy(lineElements.begin(), lineElements.end(), std::ostream_iterator<std::string>(cleanLineOS, " "));
             copy(lineElements.begin(), lineElements.end(), std::ostream_iterator<std::string>(cleanLineOS, ""));
             std::string cleanLine = cleanLineOS.str();
-            
+
             if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
                 continue;
             }
-            
+
             if (std::regex_match(singleLine, this->regex_materialNew)) {
                 objMaterial entityMaterial;
                 entityMaterial.materialID = std::accumulate(begin(lineElements), end(lineElements), entityMaterial.materialID);
@@ -253,7 +262,7 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 indexMaterial += 1;
                 materials.push_back(entityMaterial);
             }
-            
+
             if (std::regex_match(singleLine, this->regex_materialAmbientColor)) {
                 std::vector<float> points = this->string2float(lineElements);
                 materials[indexMaterial].ambient.r = points[0];
@@ -300,11 +309,11 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 materials[indexMaterial].textures_shininess = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDissolve))
                 materials[indexMaterial].textures_dissolve = this->parseTextureImage(cleanLine);
-            
+
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
     }
-    
+
     return materials;
 }
 
@@ -315,19 +324,19 @@ objMaterialImage objParser::parseTextureImage(std::string textureLine) {
     if (textureLine.find("-") != std::string::npos) {
         std::regex dash("-");
         std::vector<std::string> lineElements = this->splitString(textureLine, dash);
-        
+
         if (lineElements[0] == "")
             lineElements.erase(lineElements.begin());
-        
+
         std::vector<std::string> lastElements = this->splitString(lineElements[lineElements.size() - 1], this->regex_whiteSpace);
         materialImage.image = lastElements[lastElements.size() - 1];
         lastElements.erase(lastElements.end() - 1);
-        
+
         std::ostringstream lastCommandsOS;
         copy(lastElements.begin(), lastElements.end(), std::ostream_iterator<std::string>(lastCommandsOS, " "));
         std::string lastCommand = lastCommandsOS.str();
         lineElements[lineElements.size() - 1] = lastCommand;
-        
+
         for (size_t i=0; i<lineElements.size(); i++) {
             materialImage.commands.push_back("-" + lineElements[i]);
         }
@@ -355,4 +364,20 @@ std::vector<float> objParser::string2float(std::vector<std::string> strings) {
     }
     catch (const std::exception &) { }
     return floats;
+}
+
+int objParser::getLineCount() {
+    char delim;
+#ifdef _WIN32
+    delim = '\r\n';
+#elif defined macintosh // OS 9
+    delim = '\r';
+#else
+    delim = '\n';
+#endif
+
+    std::ifstream inFile2(this->file.path.c_str());
+    int linesCount = std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim);
+    inFile2.close();
+    return linesCount;
 }

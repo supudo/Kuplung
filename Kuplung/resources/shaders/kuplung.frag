@@ -5,8 +5,11 @@ uniform float fs_refraction;
 uniform float fs_shininess;
 
 uniform vec3 fs_outlineColor;
+uniform vec3 fs_lightColor;
+
 uniform vec3 fs_lightPosition;
 uniform vec3 fs_lightDirection;
+
 uniform float fs_specularStrength;
 uniform float fs_ambientStrength;
 uniform float fs_diffuseStrength;

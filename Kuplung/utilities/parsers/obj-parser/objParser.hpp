@@ -16,29 +16,32 @@
 class objParser {
 public:
     ~objParser();
-    void init(std::function<void(std::string)> doLog);
+    void init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress);
     objScene parse(FBEntity file);
     void destroy();
-    
+
 private:
     objScene scene;
 
     FBEntity file;
     std::function<void(std::string)> doLog;
+    std::function<void(float)> doProgress;
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
     std::vector<float> string2float(std::vector<std::string> strings);
+    int getLineCount();
 
     std::vector<objMaterial> loadMaterial(std::string materialFile);
     objMaterial findMaterial(std::string materialID);
     objMaterialImage parseTextureImage(std::string textureLine);
-    
+
     std::vector<float> geometricVertices, textureCoordinates, vertexNormals, spaceVertices, polygonalFaces;
-    
+    int objFileLinesCount;
+
     // comment line
     std::regex regex_comment;
     // whitespace
     std::regex regex_whiteSpace;
-    
+
     // current object name
     std::regex regex_objTitle;
     // vertex coordinates
@@ -57,10 +60,10 @@ private:
     std::regex regex_materialFile;
     // material name for the current object
     std::regex regex_useMaterial;
-    
+
     // material
     std::regex regex_materialNew;
-    
+
     // To specify the ambient reflectivity of the current material, you can use the "Ka" statement,
     // the "Ka spectral" statement, or the "Ka xyz" statement.
     std::regex regex_materialAmbientColor;

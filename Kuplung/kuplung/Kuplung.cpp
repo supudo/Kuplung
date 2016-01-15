@@ -144,7 +144,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
                     this->managerControls->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), this->gWindow);
 
                     this->parser = new objParser();
-                    this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1));
+                    this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
                     this->doLog("OBJ Parser Initialized.");
 
                     this->fontParser = new FNTParser();
@@ -553,8 +553,8 @@ void Kuplung::initSceneGUI() {
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
-    fileTestbed.title = "ESS_Titan.obj";
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/ESS_Titan.obj";
+    fileTestbed.title = "cube0.obj";
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/cube0.obj";
     this->guiProcessObjFile(fileTestbed);
 }
 
@@ -619,6 +619,11 @@ void Kuplung::processParsedObjFile() {
     }
 
     this->gui->hideLoading();
+}
+
+void Kuplung::doProgress(float value) {
+    this->objLoadingProgress = value;
+    this->gui->loadingPercentage = value;
 }
 
 void Kuplung::guiQuit() {
