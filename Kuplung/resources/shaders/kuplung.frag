@@ -1,10 +1,11 @@
 uniform mat4 fs_MMatrix;
 uniform sampler2D fs_sampler;
 uniform float fs_alpha;
+uniform vec3 fs_outlineColor;
+
 uniform float fs_refraction;
 uniform float fs_shininess;
 
-uniform vec3 fs_outlineColor;
 uniform vec3 fs_lightColor;
 
 uniform vec3 fs_lightPosition;
@@ -17,6 +18,23 @@ uniform float fs_diffuseStrength;
 uniform vec3 fs_ambientColor;
 uniform vec3 fs_diffuseColor;
 uniform vec3 fs_specularColor;
+
+struct Material {
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+
+    float shininess;
+};
+
+struct Light {
+    vec3 position;
+    vec3 direction;
+
+    vec3 ambient;
+    vec3 diffuse;
+    vec3 specular;
+};
 
 uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
