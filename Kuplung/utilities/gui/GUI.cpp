@@ -97,7 +97,7 @@ void GUI::recentFilesClear() {
 void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings) {
     for (int i=0; i<guiObjectsCount; i++) {
         std::vector<GUIObjectSetting> setts;
-        for (int j=0; j<18; j++) {
+        for (int j=0; j<21; j++) {
             GUIObjectSetting gos;
             gos.oIndex = j;
             gos.oAnimate = false;
@@ -148,14 +148,13 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
 
         // refraction
         gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
-
         // shininess
         gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
 
-        // light factors
-        gos.oIndex += 1; gos.oValue = 0.5; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.5; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
+        // material
+        gos.oIndex += 1; gos.oValue = 0.5; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 0.5; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
+        gos.oIndex += 1; gos.oValue = 1.0; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
@@ -508,14 +507,6 @@ void GUI::dialogGUIControls() {
         ImGui::TreePop();
     }
 
-    if (this->gui_item_selected == 2 && ImGui::TreeNode("Light Color")) {
-        ImGui::TextColored(ImVec4(this->so_GUI_lightControls.r, this->so_GUI_lightControls.g, this->so_GUI_lightControls.b, 1.0), "Preview");
-        ImGui::SliderFloat("Red", &this->so_GUI_lightControls.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green", &this->so_GUI_lightControls.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue", &this->so_GUI_lightControls.b, 0.0f, 1.0f);
-        ImGui::TreePop();
-    }
-
     if (this->gui_item_selected > 0 && ImGui::TreeNode("Scale")) {
         ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9].oValue, 0.0f, 1.0f);
         ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10].oValue, 0.0f, 1.0f);
@@ -561,12 +552,51 @@ void GUI::dialogGUIControls() {
         ImGui::TreePop();
     }
 
+    if (this->gui_item_selected == 2 && ImGui::TreeNode("Light")) {
+        ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient");
+        ImGui::SliderFloat("Red##001", &this->so_GUI_lightAmbient.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##002", &this->so_GUI_lightAmbient.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##003", &this->so_GUI_lightAmbient.b, 0.0f, 1.0f);
+
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18].oAnimate))
+            this->animateValue(false, this->gui_item_selected, 15, 0.1f, 4.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate ambient strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##01", &this->gui_item_settings[this->gui_item_selected][18].oValue, 0.0, 4.0);
+
+        ImGui::TextColored(ImVec4(this->so_GUI_lightDiffuse.r, this->so_GUI_lightDiffuse.g, this->so_GUI_lightDiffuse.b, 1.0), "Diffuse");
+        ImGui::SliderFloat("Red##004", &this->so_GUI_lightDiffuse.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##005", &this->so_GUI_lightDiffuse.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##006", &this->so_GUI_lightDiffuse.b, 0.0f, 1.0f);
+
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19].oAnimate))
+            this->animateValue(false, this->gui_item_selected, 19, 0.1f, 6.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate diffuse strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##02", &this->gui_item_settings[this->gui_item_selected][19].oValue, 0.0, 6.0);
+
+        ImGui::TextColored(ImVec4(this->so_GUI_lightSpecular.r, this->so_GUI_lightSpecular.g, this->so_GUI_lightSpecular.b, 1.0), "Specular");
+        ImGui::SliderFloat("Red##007", &this->so_GUI_lightSpecular.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##008", &this->so_GUI_lightSpecular.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##009", &this->so_GUI_lightSpecular.b, 0.0f, 1.0f);
+
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20].oAnimate))
+            this->animateValue(false, this->gui_item_selected, 20, 0.1f, 4.0, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate specular strength");
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##03", &this->gui_item_settings[this->gui_item_selected][20].oValue, 0.0, 4.0);
+
+        ImGui::TreePop();
+    }
+
     ImGui::End();
 }
 
 void GUI::resetValuesGUIControls() {
-    this->so_GUI_lightControls = glm::vec3(1.0, 1.0, 1.0);
     this->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
+    this->so_GUI_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
+    this->so_GUI_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
+    this->so_GUI_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;
@@ -692,44 +722,33 @@ void GUI::dialogSceneSettings() {
         ImGui::TreePop();
     }
 
-    if (ImGui::TreeNode("Refraction")) {
+    if (ImGui::TreeNode("Material")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12].oAnimate))
             this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate refraction");
-        ImGui::SameLine(); ImGui::SliderFloat("##103", &this->scene_item_settings[this->scene_item_selected][12].oValue, 1.0, 10.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12].oValue, 1.0, 10.0);
 
-        ImGui::TreePop();
-    }
-
-    if (ImGui::TreeNode("Shininess")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][13].oAnimate))
             this->animateValue(false, this->scene_item_selected, 13, 0.05f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate shininess");
-        ImGui::SameLine(); ImGui::SliderFloat("##103", &this->scene_item_settings[this->scene_item_selected][13].oValue, 0.0, 10.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Shininess", &this->scene_item_settings[this->scene_item_selected][13].oValue, 0.0, 10.0);
 
-        ImGui::TreePop();
-    }
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14].vValue.r, this->scene_item_settings[this->scene_item_selected][14].vValue.g, this->scene_item_settings[this->scene_item_selected][14].vValue.b, 1.0), "Ambient");
+        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][14].vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][14].vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][14].vValue.b, 0.0f, 1.0f);
 
-    if (ImGui::TreeNode("Light factors")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][14].oAnimate))
-            this->animateValue(false, this->scene_item_selected, 14, 0.1f, 4.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate specular strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Specular", &this->scene_item_settings[this->scene_item_selected][14].oValue, 0.0, 4.0);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15].vValue.r, this->scene_item_settings[this->scene_item_selected][15].vValue.g, this->scene_item_settings[this->scene_item_selected][15].vValue.b, 1.0), "Diffuse");
+        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][15].vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][15].vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][15].vValue.b, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][15].oAnimate))
-            this->animateValue(false, this->scene_item_selected, 15, 0.1f, 4.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate ambient strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Ambient", &this->scene_item_settings[this->scene_item_selected][15].oValue, 0.0, 4.0);
-
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][16].oAnimate))
-            this->animateValue(false, this->scene_item_selected, 16, 0.1f, 6.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate diffuse strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Diffuse", &this->scene_item_settings[this->scene_item_selected][16].oValue, 0.0, 6.0);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16].vValue.r, this->scene_item_settings[this->scene_item_selected][16].vValue.g, this->scene_item_settings[this->scene_item_selected][16].vValue.b, 1.0), "Specular");
+        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][16].vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][16].vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][16].vValue.b, 0.0f, 1.0f);
 
         ImGui::TreePop();
     }

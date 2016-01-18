@@ -21,22 +21,22 @@ public:
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
     bool initShaderProgram();
-    void initBuffers(int axis); // 0 = x, 1 = y, 2 = z
+    void initBuffers(); // 0 = x, 1 = y, 2 = z
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
-    
+
 private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
     std::string shaderName;
     int axisSize;
-    
+
     GLUtils *glUtils;
-    
+
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors;
     GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
-    
+
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
 };

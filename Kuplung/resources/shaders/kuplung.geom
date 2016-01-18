@@ -16,6 +16,9 @@ out vec3 fs_outlineColor;
 out float fs_isBorder;
 
 void main() {
+    // outlining
+    // http://prideout.net/blog/?p=54
+
     for (int i=0; i<gl_in.length(); i++) {
         gl_Position = gl_in[i].gl_Position;
         fs_vertexPosition = gs_in[i].gs_vertexPosition;

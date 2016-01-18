@@ -23,21 +23,35 @@ public:
     void setModel(objModelFace oFace);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+
+    // general options
     void setOptionsFOV(float fov);
     void setOptionsAlpha(float alpha);
+    void setOptionsDisplacement(glm::vec3 displacement);
+
+    // light
     void setOptionsLightPosition(glm::vec3 lightPosition);
     void setOptionsLightDirection(glm::vec3 lightDirection);
-    void setOptionsLightColor(glm::vec3 lightColor);
-    void setOptionsDisplacement(glm::vec3 displacement);
-    void setOptionsRefraction(float refraction);
-    void setOptionsShininess(float shininess);
-    void setOptionsStrengthSpecular(float val);
-    void setOptionsStrengthAmbient(float val);
-    void setOptionsStrengthDiffuse(float val);
+    void setOptionsLightAmbient(glm::vec3 lightColor);
+    void setOptionsLightDiffuse(glm::vec3 lightColor);
+    void setOptionsLightSpecular(glm::vec3 lightColor);
+    void setOptionsLightStrengthAmbient(float val);
+    void setOptionsLightStrengthDiffuse(float val);
+    void setOptionsLightStrengthSpecular(float val);
+
+    // material
+    void setOptionsMaterialShininess(float shininess);
+    void setOptionsMaterialRefraction(float refraction);
+    void setOptionsMaterialAmbient(glm::vec3 lightColor);
+    void setOptionsMaterialDiffuse(glm::vec3 lightColor);
+    void setOptionsMaterialSpecular(glm::vec3 lightColor);
+
+    // outlining
     void setOptionsSelected(bool selectedYn);
     void setOptionsOutlineColor(glm::vec3 outlineColor);
     void setOptionsOutlineThickness(float thickness);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+
     objModelFace oFace;
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
@@ -53,9 +67,23 @@ private:
     int glslVersion;
     std::string shaderName;
 
-    float so_fov, so_alpha, so_refraction, so_shininess, so_strengthSpecular, so_strengthAmbient, so_strengthDiffuse;
+    // general
+    float so_fov, so_alpha;
+    glm::vec3 so_displacement;
+
+    // outline
     float so_outlineThickness;
-    glm::vec3 so_lightPosition, so_lightDirection, so_lightColor, so_displacement, so_outlineColor;
+    glm::vec3 so_outlineColor;
+
+    // light
+    glm::vec3 so_lightPosition, so_lightDirection;
+    glm::vec3 so_lightAmbient, so_lightDiffuse, so_lightSpecular;
+    float so_lightStrengthAmbient, so_lightStrengthDiffuse, so_lightStrengthSpecular;
+
+    // material
+    float so_materialShininess, so_materialRefraction;
+    glm::vec3 so_materialAmbient, so_materialDiffuse, so_materialSpecular;
+
     bool so_selectedYn;
 
     GLUtils *glUtils;
@@ -68,12 +96,21 @@ private:
 
     GLuint glVS_MVPMatrix, glFS_MMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
-    GLuint glGS_GeomDisplacementLocation, glFS_OutlineColor, glFS_Light_Color;
-    GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_OpticalDensity, glFS_Shininess;
-    GLuint glFS_StrengthSpecular, glFS_StrengthAmbient, glFS_StrengthDiffuse;
-    GLuint glFS_Light_Position, glFS_Light_Direction;
-    GLuint glFS_AmbientColor, glFS_DiffuseColor, glFS_SpecularColor, glVS_IsBorder;
+
+    // general
+    GLuint glGS_GeomDisplacementLocation;
+    GLuint glFS_AlphaBlending, glFS_CameraPosition;
+    GLuint glFS_OutlineColor, glVS_IsBorder;
     GLuint glFS_ScreenResX, glFS_ScreenResY;
+
+    // light
+    GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
+    GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
+    GLuint glLight_Position, glLight_Direction;
+
+    // material
+    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular;
+    GLuint glMaterial_Shininess, glMaterial_Refraction;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

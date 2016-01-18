@@ -25,23 +25,22 @@ public:
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
     objModelFace oFace;
-    
+
 private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
     std::string shaderName;
-    
+
     GLUtils *glUtils;
-    
+
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboTextureColor, vboIndices;
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureShiness, vboTextureDissolve;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
+    GLuint vboTextureDiffuse;
     GLuint glUniformMVPMatrix;
     GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
-    GLuint glUniformAlphaBlending, glUniformLight_Position, glUniformLight_Intensity;
-    
+
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
 };

@@ -401,23 +401,36 @@ void Kuplung::renderScene() {
 
         mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][6].oValue, this->gui->scene_item_settings[sis][7].oValue, this->gui->scene_item_settings[sis][8].oValue));
 
+        // general
         mmf->setOptionsFOV(this->gui->so_GUI_FOV);
         mmf->setOptionsAlpha(this->gui->so_Alpha);
-        mmf->setOptionsLightPosition(vLightPosition);
-        mmf->setOptionsLightDirection(vLightDirection);
-        mmf->setOptionsLightColor(this->gui->so_GUI_lightControls);
         mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9].oValue, this->gui->scene_item_settings[sis][10].oValue, this->gui->scene_item_settings[sis][11].oValue));
-        mmf->setOptionsRefraction(this->gui->scene_item_settings[sis][12].oValue);
-        mmf->setOptionsShininess(this->gui->scene_item_settings[sis][13].oValue);
-        mmf->setOptionsStrengthSpecular(this->gui->scene_item_settings[sis][14].oValue);
-        mmf->setOptionsStrengthAmbient(this->gui->scene_item_settings[sis][15].oValue);
-        mmf->setOptionsStrengthDiffuse(this->gui->scene_item_settings[sis][16].oValue);
+
+        // outlining
         mmf->setOptionsSelected(false);
         if (this->selectedMaterialID == mmf->oFace.materialID)
             mmf->setOptionsSelected(true);
         mmf->setOptionsOutlineColor(this->gui->so_GUI_outlineColor);
         mmf->setOptionsOutlineThickness(this->gui->so_outlineThickness);
 
+        // light
+        mmf->setOptionsLightPosition(vLightPosition);
+        mmf->setOptionsLightDirection(vLightDirection);
+        mmf->setOptionsLightAmbient(this->gui->so_GUI_lightAmbient);
+        mmf->setOptionsLightDiffuse(this->gui->so_GUI_lightDiffuse);
+        printf("diffuse - %f, %f, %f\n", this->gui->so_GUI_lightDiffuse.r, this->gui->so_GUI_lightDiffuse.g, this->gui->so_GUI_lightDiffuse.b);
+        mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[2][18].oValue);
+        mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[2][19].oValue);
+        mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[2][20].oValue);
+
+        // material
+        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12].oValue);
+        mmf->setOptionsMaterialShininess(this->gui->scene_item_settings[sis][13].oValue);
+        mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][14].vValue);
+        mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][15].vValue);
+        mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][16].vValue);
+
+        // render
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
     }
 
@@ -444,7 +457,9 @@ void Kuplung::initSceneGUI() {
 
     // initial variables
     this->gui->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
-    this->gui->so_GUI_lightControls = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->so_GUI_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->so_GUI_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->so_GUI_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     // camera
     initialSettings[0] = std::vector<float> {
@@ -493,14 +508,17 @@ void Kuplung::initSceneGUI() {
         0, 1, 0,  // up
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
-        0, 0, 5  // translate
+        0, 0, 5,  // translate
+        1, 0, 0,  // ambient strength
+        1, 0, 0,  // diffuse strength
+        1, 0, 0  // specular strength
     };
 
     // axis
     this->sceneCoordinateSystem = new MeshCoordinateSystem();
     this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
     this->sceneCoordinateSystem->initShaderProgram();
-    this->sceneCoordinateSystem->initBuffers(0);
+    this->sceneCoordinateSystem->initBuffers();
 
     // terrain
     this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "terrain", Settings::Instance()->OpenGL_GLSL_Version);
@@ -539,8 +557,8 @@ void Kuplung::initSceneGUI() {
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
-    fileTestbed.title = "rrobot_small.obj";
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/rrobot_small.obj";
+    fileTestbed.title = "cube0.obj";
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/cube0.obj";
     this->guiProcessObjFile(fileTestbed);
 }
 

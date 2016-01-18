@@ -28,6 +28,7 @@ struct GUIObjectSetting {
     int oIndex;
     bool oAnimate;
     float oValue;
+    glm::vec3 vValue;
 };
 
 class GUI {
@@ -66,8 +67,12 @@ public:
     float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
     int so_GUI_grid_size = 10;
-    glm::vec3 so_GUI_lightControls, so_GUI_outlineColor;
+    glm::vec3 so_GUI_outlineColor;
     float loadingPercentage;
+
+    glm::vec3 so_GUI_lightAmbient, so_GUI_lightDiffuse, so_GUI_lightSpecular;
+    float so_GUI_lightAmbientStrength, so_GUI_lightDiffuseStrength, so_GUI_lightSpecularStrength;
+    glm::vec3 so_GUI_materialAmbient, so_GUI_materialDiffuse, so_GUI_materialSpecular;
 
 private:
     std::function<void()> quitApp;

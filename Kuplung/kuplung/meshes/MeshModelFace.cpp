@@ -63,13 +63,22 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
     this->so_alpha = -1;
-    this->so_lightColor = glm::vec3(0, 0, 0);
-    this->so_refraction = this->oFace.faceMaterial.opticalDensity;
-    this->so_shininess = this->oFace.faceMaterial.shininess;
-    this->so_strengthSpecular = 0.5;
-    this->so_strengthAmbient = 0.5;
-    this->so_strengthDiffuse = 1.0;
     this->so_outlineColor = glm::vec3(1.0, 0.0, 0.0);
+
+    // light
+    this->so_lightStrengthAmbient = 0.5;
+    this->so_lightStrengthDiffuse = 1.0;
+    this->so_lightStrengthSpecular = 0.5;
+    this->so_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
+    this->so_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
+    this->so_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
+
+    // material
+    this->so_materialShininess = this->oFace.faceMaterial.shininess;
+    this->so_materialRefraction = this->oFace.faceMaterial.opticalDensity;
+    this->so_materialAmbient = glm::vec3(1.0, 1.0, 1.0);
+    this->so_materialDiffuse = glm::vec3(1.0, 1.0, 1.0);
+    this->so_materialSpecular = glm::vec3(1.0, 1.0, 1.0);
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -136,25 +145,14 @@ bool MeshModelFace::initShaderProgram() {
         this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
         this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
+
+        // misc
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
-        this->glFS_OpticalDensity = this->glUtils->glGetUniform(this->shaderProgram, "fs_refraction");
-        this->glFS_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "fs_shininess");
-        this->glFS_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularStrength");
-        this->glFS_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientStrength");
-        this->glFS_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseStrength");
         this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
         this->glFS_OutlineColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
-        this->glFS_Light_Color = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightColor");
-
-        this->glFS_Light_Position = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightPosition");
-        this->glFS_Light_Direction = this->glUtils->glGetUniform(this->shaderProgram, "fs_lightDirection");
-
-        this->glFS_AmbientColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_ambientColor");
-        this->glFS_DiffuseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_diffuseColor");
-        this->glFS_SpecularColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_specularColor");
 
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
@@ -163,6 +161,26 @@ bool MeshModelFace::initShaderProgram() {
 
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
+
+        // light
+        this->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].position");
+        this->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].direction");
+
+        this->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].ambient");
+        this->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].diffuse");
+        this->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].specular");
+
+        this->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthAmbient");
+        this->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthDiffuse");
+        this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthSpecular");
+
+        // material
+        this->glMaterial_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "material.shininess");
+        this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
+
+        this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
+        this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
+        this->glMaterial_Specular = this->glUtils->glGetUniform(this->shaderProgram, "material.specular");
     }
 
     return success;
@@ -287,34 +305,34 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // camera position
         glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
-        // light
-        glUniform3f(this->glFS_Light_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
-        glUniform3f(this->glFS_Light_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
-        glUniform3f(this->glFS_Light_Color, this->so_lightColor.r, this->so_lightColor.g, this->so_lightColor.b);
+        // screen size
+        glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
+        glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
 
-        // light factors
-        glUniform1f(this->glFS_StrengthSpecular, this->so_strengthSpecular);
-        glUniform1f(this->glFS_StrengthAmbient, this->so_strengthAmbient);
-        glUniform1f(this->glFS_StrengthDiffuse, this->so_strengthDiffuse);
-
-        // colors
-        glUniform3f(this->glFS_AmbientColor, this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b);
-        glUniform3f(this->glFS_DiffuseColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
-        glUniform3f(this->glFS_SpecularColor, this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b);
+        // Outline color
+        glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
 
         // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
 
-        // Refraction
-        glUniform1f(this->glFS_OpticalDensity, this->so_refraction);
-        glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
-        glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
+        // light
+        glUniform3f(this->glLight_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
+        glUniform3f(this->glLight_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
+        // color
+        glUniform3f(this->glLight_Ambient, this->so_lightAmbient.r, this->so_lightAmbient.g, this->so_lightAmbient.b);
+        glUniform3f(this->glLight_Diffuse, this->so_lightDiffuse.r, this->so_lightDiffuse.g, this->so_lightDiffuse.b);
+        glUniform3f(this->glLight_Specular, this->so_lightSpecular.r, this->so_lightSpecular.g, this->so_lightSpecular.b);
+        // light factors
+        glUniform1f(this->glLight_StrengthAmbient, this->so_lightStrengthAmbient);
+        glUniform1f(this->glLight_StrengthDiffuse, this->so_lightStrengthDiffuse);
+        glUniform1f(this->glLight_StrengthSpecular, this->so_lightStrengthSpecular);
 
-        // Shininess
-        glUniform1f(this->glFS_Shininess, this->so_shininess);
-
-        // Outline color
-        glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
+        // material
+        glUniform1f(this->glMaterial_Shininess, this->so_materialShininess);
+        glUniform1f(this->glMaterial_Refraction, this->so_materialRefraction);
+        glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
+        glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
+        glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
 
         // outlining
         //this->drawOnly();
@@ -444,40 +462,8 @@ void MeshModelFace::setOptionsAlpha(float alpha) {
     this->so_alpha = alpha;
 }
 
-void MeshModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
-    this->so_lightPosition = lightPosition;
-}
-
-void MeshModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
-    this->so_lightDirection = lightDirection;
-}
-
-void MeshModelFace::setOptionsLightColor(glm::vec3 lightColor) {
-    this->so_lightColor = lightColor;
-}
-
 void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
     this->so_displacement = displacement;
-}
-
-void MeshModelFace::setOptionsRefraction(float refraction) {
-    this->so_refraction = refraction;
-}
-
-void MeshModelFace::setOptionsShininess(float shininess) {
-    this->so_shininess = shininess;
-}
-
-void MeshModelFace::setOptionsStrengthSpecular(float val) {
-    this->so_strengthSpecular = val;
-}
-
-void MeshModelFace::setOptionsStrengthAmbient(float val) {
-    this->so_strengthAmbient = val;
-}
-
-void MeshModelFace::setOptionsStrengthDiffuse(float val) {
-    this->so_strengthDiffuse = val;
 }
 
 void MeshModelFace::setOptionsSelected(bool selectedYn) {
@@ -490,6 +476,61 @@ void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
 
 void MeshModelFace::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
+}
+
+// light
+void MeshModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
+    this->so_lightPosition = lightPosition;
+}
+
+void MeshModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
+    this->so_lightDirection = lightDirection;
+}
+
+void MeshModelFace::setOptionsLightAmbient(glm::vec3 lightColor) {
+    this->so_lightAmbient = lightColor;
+}
+
+void MeshModelFace::setOptionsLightDiffuse(glm::vec3 lightColor) {
+    this->so_lightDiffuse = lightColor;
+}
+
+void MeshModelFace::setOptionsLightSpecular(glm::vec3 lightColor) {
+    this->so_lightSpecular = lightColor;
+}
+
+void MeshModelFace::setOptionsLightStrengthAmbient(float val) {
+    this->so_lightStrengthAmbient = val;
+}
+
+void MeshModelFace::setOptionsLightStrengthDiffuse(float val) {
+    this->so_lightStrengthDiffuse = val;
+}
+
+void MeshModelFace::setOptionsLightStrengthSpecular(float val) {
+    this->so_lightStrengthSpecular = val;
+}
+
+// material
+
+void MeshModelFace::setOptionsMaterialRefraction(float refraction) {
+    this->so_materialRefraction = refraction;
+}
+
+void MeshModelFace::setOptionsMaterialShininess(float shininess) {
+    this->so_materialShininess = shininess;
+}
+
+void MeshModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {
+    this->so_materialAmbient = lightColor;
+}
+
+void MeshModelFace::setOptionsMaterialDiffuse(glm::vec3 lightColor) {
+    this->so_materialDiffuse = lightColor;
+}
+
+void MeshModelFace::setOptionsMaterialSpecular(glm::vec3 lightColor) {
+    this->so_materialSpecular = lightColor;
 }
 
 #pragma mark - Utilities

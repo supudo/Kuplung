@@ -82,7 +82,7 @@ bool MeshCoordinateSystem::initShaderProgram() {
     return success;
 }
 
-void MeshCoordinateSystem::initBuffers(int axis) {
+void MeshCoordinateSystem::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
