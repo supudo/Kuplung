@@ -418,7 +418,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsLightDirection(vLightDirection);
         mmf->setOptionsLightAmbient(this->gui->so_GUI_lightAmbient);
         mmf->setOptionsLightDiffuse(this->gui->so_GUI_lightDiffuse);
-        printf("diffuse - %f, %f, %f\n", this->gui->so_GUI_lightDiffuse.r, this->gui->so_GUI_lightDiffuse.g, this->gui->so_GUI_lightDiffuse.b);
+        mmf->setOptionsLightSpecular(this->gui->so_GUI_lightSpecular);
         mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[2][18].oValue);
         mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[2][19].oValue);
         mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[2][20].oValue);

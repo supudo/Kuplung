@@ -163,16 +163,16 @@ bool MeshModelFace::initShaderProgram() {
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
 
         // light
-        this->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].position");
-        this->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].direction");
+        this->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].position");
+        this->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].direction");
 
-        this->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].ambient");
-        this->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].diffuse");
-        this->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].specular");
+        this->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].ambient");
+        this->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].diffuse");
+        this->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].specular");
 
-        this->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthAmbient");
-        this->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthDiffuse");
-        this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "pointLight[0].strengthSpecular");
+        this->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthAmbient");
+        this->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthDiffuse");
+        this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthSpecular");
 
         // material
         this->glMaterial_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "material.shininess");

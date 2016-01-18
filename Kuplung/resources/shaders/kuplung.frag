@@ -33,7 +33,7 @@ in float fs_isBorder;
 
 out vec4 fragColor;
 
-uniform Light pointLight[1];
+uniform Light directionalLight[1];
 uniform Material material;
 
 // https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
@@ -47,19 +47,19 @@ void main(void) {
         vec3 processedColor = texturedColor.rgb;
 
         // Ambient
-        vec3 ambient = pointLight[0].strengthAmbient * pointLight[0].ambient;
+        vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient;
 
         // Diffuse
         vec3 normalDirection = normalize(fs_vertexNormal);
-        vec3 lightDir = normalize(pointLight[0].position - fs_vertexPosition);
+        vec3 lightDir = normalize(directionalLight[0].position - fs_vertexPosition);
         float diff = max(dot(normalDirection, lightDir), 0.0);
-        vec3 diffuse = pointLight[0].strengthDiffuse * diff * pointLight[0].diffuse * processedColor;
+        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse * processedColor;
 
         // Specular
         vec3 viewDir = normalize(fs_cameraPosition - fs_vertexPosition);
-        vec3 reflectDir = reflect(-pointLight[0].direction, normalDirection);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), pointLight[0].strengthSpecular);
-        vec3 specular = pointLight[0].strengthSpecular * spec * pointLight[0].specular;
+        vec3 reflectDir = reflect(-directionalLight[0].direction, normalDirection);
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), directionalLight[0].strengthSpecular);
+        vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
 
         if (material.refraction > 1.0) {
             // Refraction (Optical Density)
