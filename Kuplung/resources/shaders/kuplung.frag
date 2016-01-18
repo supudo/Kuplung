@@ -46,19 +46,21 @@ void main(void) {
         vec4 texturedColor = texture(fs_sampler, fs_textureCoord);
         vec3 processedColor = texturedColor.rgb;
 
+        // misc
+        vec3 normalDirection = normalize(fs_vertexNormal);
+        vec3 lightDirection = normalize(directionalLight[0].position - fs_vertexPosition);
+        vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
+
         // Ambient
         vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient;
 
         // Diffuse
-        vec3 normalDirection = normalize(fs_vertexNormal);
-        vec3 lightDir = normalize(directionalLight[0].position - fs_vertexPosition);
-        float diff = max(dot(normalDirection, lightDir), 0.0);
-        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse * processedColor;
+        float diff = max(dot(normalDirection, lightDirection), 0.0);
+        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse;// * processedColor;
 
         // Specular
-        vec3 viewDir = normalize(fs_cameraPosition - fs_vertexPosition);
-        vec3 reflectDir = reflect(-directionalLight[0].direction, normalDirection);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), directionalLight[0].strengthSpecular);
+        vec3 reflectDirection = reflect(-directionalLight[0].direction, normalDirection);
+        float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLight[0].strengthSpecular);
         vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
 
         if (material.refraction > 1.0) {

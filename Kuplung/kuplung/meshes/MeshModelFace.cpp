@@ -334,6 +334,12 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
 
+//        printf("----------------------------------- \n");
+//        printf("%s - %f, %f, %f = %f, %f, %f\n",
+//               this->oFace.materialID.c_str(),
+//               this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b,
+//               this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
+
         // outlining
         //this->drawOnly();
         //this->outlineOne();

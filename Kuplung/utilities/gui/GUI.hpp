@@ -57,6 +57,9 @@ public:
     void showSceneStats();
     void hideSceneStats();
 
+    void setModelOSetting(int modelID, int settingID, glm::vec3 oValue);
+    void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
+
     bool isFrame, isProjection, fixedGridWorld, showHeightmap;
 
     int gui_item_selected;

@@ -126,6 +126,8 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         gos.oIndex = 0;
         gos.oAnimate = false;
 
+        //TODO: nulify each object !!!!
+
         // scale
         gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
         gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
@@ -161,6 +163,18 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     }
     this->sceneModels = scene_models;
     this->displaySceneSettings = true;
+}
+
+void GUI::setModelOSetting(int modelID, int settingID, glm::vec3 oValue) {
+}
+
+void GUI::setModelVSetting(int modelID, int settingID, glm::vec3 vValue) {
+//    std::vector<GUIObjectSetting> sett = this->scene_item_settings[modelID];
+//    GUIObjectSetting o = sett[settingID];
+//    o.vValue = vValue;
+
+    this->scene_item_settings[modelID][settingID].vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
+    this->scene_item_settings_default[modelID][settingID].vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
 }
 
 void GUI::hideSceneSettings() {
@@ -790,8 +804,8 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
 
 void GUI::resetValuesSceneSettings() {
     this->so_Alpha = 1;
-    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
-        for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
+    for (size_t i=0; i<this->scene_item_settings.size(); i++) {
+        for (size_t j=0; j<this->scene_item_settings[i].size(); j++) {
             this->scene_item_settings[i][j] = this->scene_item_settings_default[i][j];
         }
     }

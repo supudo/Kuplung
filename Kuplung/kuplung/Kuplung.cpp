@@ -429,6 +429,12 @@ void Kuplung::renderScene() {
         mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][14].vValue);
         mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][15].vValue);
         mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][16].vValue);
+        printf("%s - %f, %f, %f = %f, %f, %f\n",
+               mmf->oFace.materialID.c_str(),
+               mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b,
+               this->gui->scene_item_settings[sis][15].vValue.r,
+               this->gui->scene_item_settings[sis][15].vValue.g,
+               this->gui->scene_item_settings[sis][15].vValue.b);
 
         // render
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
@@ -557,8 +563,8 @@ void Kuplung::initSceneGUI() {
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
-    fileTestbed.title = "cube0.obj";
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/cube0.obj";
+    fileTestbed.title = "rrobot_small.obj";
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/rrobot_small.obj";
     this->guiProcessObjFile(fileTestbed);
 }
 
@@ -601,10 +607,10 @@ void Kuplung::processParsedObjFile() {
     this->doLog(this->objFile.title + " was parsed successfully.");
     this->gui->recentFilesAdd(this->objFile.title, this->objFile);
 
+    int scene_models_counter = 0;
     std::map<int, std::string> scene_models;
     for (int i=0; i<(int)this->scene.models.size(); i++) {
         objModel model = this->scene.models[i];
-        scene_models[i] = model.modelID;
         for (size_t j=0; j<model.faces.size(); j++) {
             MeshModelFace *mmf = new MeshModelFace();
             mmf->ModelID = i;
@@ -613,12 +619,20 @@ void Kuplung::processParsedObjFile() {
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
+            scene_models[scene_models_counter] = model.modelID + " - " + mmf->oFace.materialID;;
+            scene_models_counter += 1;
         }
     }
 
     // render scene stats
     if (this->scene.models.size() > 0) {
         this->gui->showSceneSettings(scene_models);
+        for (size_t i=0; i<this->meshModelFaces.size(); i++) {
+            MeshModelFace *mmf = this->meshModelFaces[i];
+            this->gui->setModelVSetting((int)i, 14, glm::vec3(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b));
+            this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b));
+            this->gui->setModelVSetting((int)i, 16, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));
+        }
         //this->gui->showSceneStats();
     }
 
