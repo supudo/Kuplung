@@ -559,7 +559,7 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Blue##003", &this->so_GUI_lightAmbient.b, 0.0f, 1.0f);
 
         if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18].oAnimate))
-            this->animateValue(false, this->gui_item_selected, 15, 0.1f, 4.0, false);
+            this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate ambient strength");
         ImGui::SameLine(); ImGui::SliderFloat("Strength##01", &this->gui_item_settings[this->gui_item_selected][18].oValue, 0.0, 4.0);
@@ -570,7 +570,7 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Blue##006", &this->so_GUI_lightDiffuse.b, 0.0f, 1.0f);
 
         if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19].oAnimate))
-            this->animateValue(false, this->gui_item_selected, 19, 0.1f, 6.0, false);
+            this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate diffuse strength");
         ImGui::SameLine(); ImGui::SliderFloat("Strength##02", &this->gui_item_settings[this->gui_item_selected][19].oValue, 0.0, 6.0);
@@ -581,7 +581,7 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Blue##009", &this->so_GUI_lightSpecular.b, 0.0f, 1.0f);
 
         if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20].oAnimate))
-            this->animateValue(false, this->gui_item_selected, 20, 0.1f, 4.0, false);
+            this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular strength");
         ImGui::SameLine(); ImGui::SliderFloat("Strength##03", &this->gui_item_settings[this->gui_item_selected][20].oValue, 0.0, 4.0);
