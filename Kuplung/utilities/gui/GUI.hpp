@@ -57,15 +57,15 @@ public:
     void showSceneStats();
     void hideSceneStats();
 
-    void setModelOSetting(int modelID, int settingID, glm::vec3 oValue);
+    void setModelOSetting(int modelID, int settingID, float oValue);
     void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
 
     bool isFrame, isProjection, fixedGridWorld, showHeightmap;
 
     int gui_item_selected;
-    std::map<int, std::vector<GUIObjectSetting>> gui_item_settings, gui_item_settings_default;
+    std::map<int, std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
     int scene_item_selected;
-    std::map<int, std::vector<GUIObjectSetting>> scene_item_settings, scene_item_settings_default;
+    std::map<int, std::vector<GUIObjectSetting*>> scene_item_settings, scene_item_settings_default;
 
     float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;

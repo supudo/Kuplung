@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/utilities/gui/GUI.cpp"
-            timestampString = "474837282.271725"
+            timestampString = "474839763.471173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "813"
-            endingLineNumber = "813"
-            landmarkName = "GUI::resetValuesSceneSettings()"
+            startingLineNumber = "836"
+            endingLineNumber = "836"
+            landmarkName = "GUI::dialogSceneStats()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

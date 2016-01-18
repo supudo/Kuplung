@@ -96,12 +96,12 @@ void GUI::recentFilesClear() {
 
 void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings) {
     for (int i=0; i<guiObjectsCount; i++) {
-        std::vector<GUIObjectSetting> setts;
+        std::vector<GUIObjectSetting*> setts;
         for (int j=0; j<21; j++) {
-            GUIObjectSetting gos;
-            gos.oIndex = j;
-            gos.oAnimate = false;
-            gos.oValue = initialSettings[i][j];
+            GUIObjectSetting* gos = new GUIObjectSetting();
+            gos->oIndex = j;
+            gos->oAnimate = false;
+            gos->oValue = initialSettings[i][j];
             setts.push_back(gos);
         }
         this->gui_item_settings[i] = setts;
@@ -119,44 +119,44 @@ void GUI::hideGUIControls() {
 
 void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->scene_item_selected = 0;
+    this->scene_item_settings = {};
+    this->scene_item_settings_default = {};
     for (int i=0; i<(int)scene_models.size(); i++) {
-        std::vector<GUIObjectSetting> setts = {};
+        std::vector<GUIObjectSetting*> setts = {};
 
-        GUIObjectSetting gos;
-        gos.oIndex = 0;
-        gos.oAnimate = false;
-
-        //TODO: nulify each object !!!!
+        GUIObjectSetting* gos = new GUIObjectSetting();
+        gos->oIndex = 0;
+        gos->oAnimate = false;
 
         // scale
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
 
         // rotate
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
 
         // translate
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
 
         // displacement
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
 
         // refraction
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
         // shininess
-        gos.oIndex += 1; gos.oValue = 1.0; setts.push_back(gos);
+        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
 
         // material
-        gos.oIndex += 1; gos.oValue = 0.5; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 0.5; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
-        gos.oIndex += 1; gos.oValue = 1.0; gos.vValue = glm::vec3(1, 1, 1); setts.push_back(gos);
+        GUIObjectSetting *gos2 = new GUIObjectSetting(); gos2->oIndex = 14; gos2->oAnimate = false; gos2->oValue = 0.5; gos2->vValue = glm::vec3(1, 1, 1); setts.push_back(gos2);
+        GUIObjectSetting *gos3 = new GUIObjectSetting(); gos3->oIndex = 15; gos3->oAnimate = false; gos3->oValue = 0.5; gos3->vValue = glm::vec3(gos3->oIndex, gos3->oIndex + i, gos3->oIndex + (i * 2)); setts.push_back(gos3);
+        GUIObjectSetting *gos4 = new GUIObjectSetting(); gos4->oIndex = 16; gos4->oAnimate = false; gos4->oValue = 1.0; gos4->vValue = glm::vec3(1, 1, 1); setts.push_back(gos4);
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
@@ -165,16 +165,16 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->displaySceneSettings = true;
 }
 
-void GUI::setModelOSetting(int modelID, int settingID, glm::vec3 oValue) {
+void GUI::setModelOSetting(int modelID, int settingID, float oValue) {
 }
 
 void GUI::setModelVSetting(int modelID, int settingID, glm::vec3 vValue) {
-//    std::vector<GUIObjectSetting> sett = this->scene_item_settings[modelID];
-//    GUIObjectSetting o = sett[settingID];
-//    o.vValue = vValue;
+//    std::vector<GUIObjectSetting*> sett = this->scene_item_settings[modelID];
+//    GUIObjectSetting* o = sett[settingID];
+//    o->vValue = vValue;
 
-    this->scene_item_settings[modelID][settingID].vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
-    this->scene_item_settings_default[modelID][settingID].vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
+    this->scene_item_settings[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
+    this->scene_item_settings_default[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
 }
 
 void GUI::hideSceneSettings() {
@@ -507,62 +507,62 @@ void GUI::dialogGUIControls() {
     const char* gui_items[] = { "Camera", "Grid", "Light", "Terrain" };
     ImGui::Combo("GUI Item", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
     if (this->gui_item_selected == 0 && ImGui::TreeNode("LookAt")) {
-        ImGui::SliderFloat("Eye X", &this->gui_item_settings[this->gui_item_selected][0].oValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Eye Y", &this->gui_item_settings[this->gui_item_selected][1].oValue, -100.0f, 10.0f);
-        ImGui::SliderFloat("Eye Z", &this->gui_item_settings[this->gui_item_selected][2].oValue, 0.0f, 90.0f);
+        ImGui::SliderFloat("Eye X", &this->gui_item_settings[this->gui_item_selected][0]->oValue, -10.0f, 10.0f);
+        ImGui::SliderFloat("Eye Y", &this->gui_item_settings[this->gui_item_selected][1]->oValue, -100.0f, 10.0f);
+        ImGui::SliderFloat("Eye Z", &this->gui_item_settings[this->gui_item_selected][2]->oValue, 0.0f, 90.0f);
         ImGui::Separator();
-        ImGui::SliderFloat("Center X", &this->gui_item_settings[this->gui_item_selected][3].oValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Center Y", &this->gui_item_settings[this->gui_item_selected][4].oValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Center Z", &this->gui_item_settings[this->gui_item_selected][5].oValue, 0.0f, 45.0f);
+        ImGui::SliderFloat("Center X", &this->gui_item_settings[this->gui_item_selected][3]->oValue, -10.0f, 10.0f);
+        ImGui::SliderFloat("Center Y", &this->gui_item_settings[this->gui_item_selected][4]->oValue, -10.0f, 10.0f);
+        ImGui::SliderFloat("Center Z", &this->gui_item_settings[this->gui_item_selected][5]->oValue, 0.0f, 45.0f);
         ImGui::Separator();
-        ImGui::SliderFloat("Up X", &this->gui_item_settings[this->gui_item_selected][6].oValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Up Y", &this->gui_item_settings[this->gui_item_selected][7].oValue, -1.0f, 1.0f);
-        ImGui::SliderFloat("Up Z", &this->gui_item_settings[this->gui_item_selected][8].oValue, -10.0f, 10.0f);
+        ImGui::SliderFloat("Up X", &this->gui_item_settings[this->gui_item_selected][6]->oValue, -10.0f, 10.0f);
+        ImGui::SliderFloat("Up Y", &this->gui_item_settings[this->gui_item_selected][7]->oValue, -1.0f, 1.0f);
+        ImGui::SliderFloat("Up Z", &this->gui_item_settings[this->gui_item_selected][8]->oValue, -10.0f, 10.0f);
         ImGui::TreePop();
     }
 
     if (this->gui_item_selected > 0 && ImGui::TreeNode("Scale")) {
-        ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9].oValue, 0.0f, 1.0f);
-        ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10].oValue, 0.0f, 1.0f);
-        ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11].oValue, 0.0f, 1.0f);
+        ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->oValue, 0.0f, 1.0f);
+        ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->oValue, 0.0f, 1.0f);
+        ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->oValue, 0.0f, 1.0f);
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Rotate")) {
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12].oAnimate))
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12].oValue, 0.0f, 360.0f);
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13].oAnimate))
+        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->oValue, 0.0f, 360.0f);
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13].oValue, 0.0f, 360.0f);
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14].oAnimate))
+        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->oValue, 0.0f, 360.0f);
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14].oValue, 0.0f, 360.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->oValue, 0.0f, 360.0f);
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Translate")) {
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15].oAnimate))
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16].oAnimate))
+        ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17].oAnimate))
+        ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
         ImGui::TreePop();
     }
 
@@ -572,33 +572,33 @@ void GUI::dialogGUIControls() {
         ImGui::SliderFloat("Green##002", &this->so_GUI_lightAmbient.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue##003", &this->so_GUI_lightAmbient.b, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18].oAnimate))
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate ambient strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##01", &this->gui_item_settings[this->gui_item_selected][18].oValue, 0.0, 4.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##01", &this->gui_item_settings[this->gui_item_selected][18]->oValue, 0.0, 4.0);
 
         ImGui::TextColored(ImVec4(this->so_GUI_lightDiffuse.r, this->so_GUI_lightDiffuse.g, this->so_GUI_lightDiffuse.b, 1.0), "Diffuse");
         ImGui::SliderFloat("Red##004", &this->so_GUI_lightDiffuse.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##005", &this->so_GUI_lightDiffuse.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue##006", &this->so_GUI_lightDiffuse.b, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19].oAnimate))
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate diffuse strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##02", &this->gui_item_settings[this->gui_item_selected][19].oValue, 0.0, 6.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##02", &this->gui_item_settings[this->gui_item_selected][19]->oValue, 0.0, 6.0);
 
         ImGui::TextColored(ImVec4(this->so_GUI_lightSpecular.r, this->so_GUI_lightSpecular.g, this->so_GUI_lightSpecular.b, 1.0), "Specular");
         ImGui::SliderFloat("Red##007", &this->so_GUI_lightSpecular.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##008", &this->so_GUI_lightSpecular.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue##009", &this->so_GUI_lightSpecular.b, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20].oAnimate))
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##03", &this->gui_item_settings[this->gui_item_selected][20].oValue, 0.0, 4.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Strength##03", &this->gui_item_settings[this->gui_item_selected][20]->oValue, 0.0, 4.0);
 
         ImGui::TreePop();
     }
@@ -651,118 +651,118 @@ void GUI::dialogSceneSettings() {
     ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items)); // Scene Model
 
     if (ImGui::TreeNode("Scale")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0].oAnimate))
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 0, 0.01f, 1.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate scale by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][0].oValue, 0.0f, 1.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][0]->oValue, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][1].oAnimate))
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][1]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 1, 0.01f, 1.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate scale by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][1].oValue, 0.0f, 1.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][1]->oValue, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][2].oAnimate))
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][2]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 2, 0.01f, 1.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate scale by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2].oValue, 0.0f, 1.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2]->oValue, 0.0f, 1.0f);
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Rotate")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3].oAnimate))
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##102", &this->scene_item_settings[this->scene_item_selected][3].oValue, 0.0f, 360.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("X##102", &this->scene_item_settings[this->scene_item_selected][3]->oValue, 0.0f, 360.0f);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][4].oAnimate))
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][4]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 4, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##102", &this->scene_item_settings[this->scene_item_selected][4].oValue, 0.0f, 360.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("Y##102", &this->scene_item_settings[this->scene_item_selected][4]->oValue, 0.0f, 360.0f);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][5].oAnimate))
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][5]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 5, 1.0f, 360.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate rotation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5].oValue, 0.0f, 360.0f);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5]->oValue, 0.0f, 360.0f);
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Translate")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6].oAnimate))
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7].oAnimate))
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 7, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8].oAnimate))
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 8, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate translation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Displace")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9].oAnimate))
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate displacement by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10].oAnimate))
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 10, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate displacement by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11].oAnimate))
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 11, 0.05f, this->so_GUI_grid_size, true);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate displacement by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11].oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11]->oValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
         ImGui::TreePop();
     }
 
     if (ImGui::TreeNode("Material")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12].oAnimate))
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate refraction");
-        ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12].oValue, 1.0, 10.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12]->oValue, 1.0, 10.0);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][13].oAnimate))
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][13]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 13, 0.05f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate shininess");
-        ImGui::SameLine(); ImGui::SliderFloat("Shininess", &this->scene_item_settings[this->scene_item_selected][13].oValue, 0.0, 10.0);
+        ImGui::SameLine(); ImGui::SliderFloat("Shininess", &this->scene_item_settings[this->scene_item_selected][13]->oValue, 0.0, 10.0);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14].vValue.r, this->scene_item_settings[this->scene_item_selected][14].vValue.g, this->scene_item_settings[this->scene_item_selected][14].vValue.b, 1.0), "Ambient");
-        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][14].vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][14].vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][14].vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Ambient");
+        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][14]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][14]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 0.0f, 1.0f);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15].vValue.r, this->scene_item_settings[this->scene_item_selected][15].vValue.g, this->scene_item_settings[this->scene_item_selected][15].vValue.b, 1.0), "Diffuse");
-        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][15].vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][15].vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][15].vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Diffuse");
+        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][15]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][15]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 0.0f, 1.0f);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16].vValue.r, this->scene_item_settings[this->scene_item_selected][16].vValue.g, this->scene_item_settings[this->scene_item_selected][16].vValue.b, 1.0), "Specular");
-        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][16].vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][16].vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][16].vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Specular");
+        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
 
         ImGui::TreePop();
     }
@@ -777,25 +777,25 @@ void GUI::animateValue(bool isGUI, int elementID, int sett_index, float step, fl
 
 void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus) {
     if (isGUI) {
-        while (this->gui_item_settings[elementID][sett_index].oAnimate) {
+        while (this->gui_item_settings[elementID][sett_index]->oAnimate) {
             if (this->isFrame) {
-                float v = this->gui_item_settings[elementID][sett_index].oValue;
+                float v = this->gui_item_settings[elementID][sett_index]->oValue;
                 v += step;
                 if (v > limit)
                     v = (doMinus ? -1 * limit : 0);
-                this->gui_item_settings[elementID][sett_index].oValue  = v;
+                this->gui_item_settings[elementID][sett_index]->oValue = v;
                 this->isFrame = false;
             }
         }
     }
     else {
-        while (this->scene_item_settings[elementID][sett_index].oAnimate) {
+        while (this->scene_item_settings[elementID][sett_index]->oAnimate) {
             if (this->isFrame) {
-                float v = this->scene_item_settings[elementID][sett_index].oValue;
+                float v = this->scene_item_settings[elementID][sett_index]->oValue;
                 v += step;
                 if (v > limit)
                     v = (doMinus ? -1 * limit : 0);
-                this->scene_item_settings[elementID][sett_index].oValue  = v;
+                this->scene_item_settings[elementID][sett_index]->oValue = v;
                 this->isFrame = false;
             }
         }
