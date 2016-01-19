@@ -113,6 +113,7 @@ private:
     void dialogHeightmap();
     void dialogEditor();
 
+    GUIObjectSetting* addSceneSettingsObject(int idx, float oValue, glm::vec3 vValue);
     void dialogGUIControls();
     void resetValuesGUIControls();
     void dialogSceneSettings();

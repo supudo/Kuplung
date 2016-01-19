@@ -46,6 +46,7 @@ public:
     void setOptionsMaterialAmbient(glm::vec3 lightColor);
     void setOptionsMaterialDiffuse(glm::vec3 lightColor);
     void setOptionsMaterialSpecular(glm::vec3 lightColor);
+    void setOptionsMaterialEmission(glm::vec3 lightColor);
 
     // outlining
     void setOptionsSelected(bool selectedYn);
@@ -82,7 +83,7 @@ private:
 
     // material
     float so_materialShininess, so_materialRefraction;
-    glm::vec3 so_materialAmbient, so_materialDiffuse, so_materialSpecular;
+    glm::vec3 so_materialAmbient, so_materialDiffuse, so_materialSpecular, so_materialEmission;
 
     bool so_selectedYn;
 
@@ -109,7 +110,7 @@ private:
     GLuint glLight_Position, glLight_Direction;
 
     // material
-    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular;
+    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_Emission;
     GLuint glMaterial_Shininess, glMaterial_Refraction;
 
     std::string readFile(const char *filePath);

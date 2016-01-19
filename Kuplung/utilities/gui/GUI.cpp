@@ -128,35 +128,38 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         gos->oIndex = 0;
         gos->oAnimate = false;
 
+        int idx = 0;
+
         // scale
-        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // rotate
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // translate
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // displacement
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
-        gos->oIndex += 1; gos->oValue = 0.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // refraction
-        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
         // shininess
-        gos->oIndex += 1; gos->oValue = 1.0; setts.push_back(gos);
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // material
-        GUIObjectSetting *gos2 = new GUIObjectSetting(); gos2->oIndex = 14; gos2->oAnimate = false; gos2->oValue = 0.5; gos2->vValue = glm::vec3(1, 1, 1); setts.push_back(gos2);
-        GUIObjectSetting *gos3 = new GUIObjectSetting(); gos3->oIndex = 15; gos3->oAnimate = false; gos3->oValue = 0.5; gos3->vValue = glm::vec3(gos3->oIndex, gos3->oIndex + i, gos3->oIndex + (i * 2)); setts.push_back(gos3);
-        GUIObjectSetting *gos4 = new GUIObjectSetting(); gos4->oIndex = 16; gos4->oAnimate = false; gos4->oValue = 1.0; gos4->vValue = glm::vec3(1, 1, 1); setts.push_back(gos4);
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts;
@@ -165,14 +168,21 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->displaySceneSettings = true;
 }
 
+GUIObjectSetting* GUI::addSceneSettingsObject(int idx, float oValue, glm::vec3 vValue) {
+    GUIObjectSetting *gos = new GUIObjectSetting();
+    gos->oIndex = idx;
+    gos->oAnimate = false;
+    gos->oValue = oValue;
+    gos->vValue = vValue;
+    return gos;
+}
+
 void GUI::setModelOSetting(int modelID, int settingID, float oValue) {
+    this->scene_item_settings[modelID][settingID]->oValue = oValue;
+    this->scene_item_settings_default[modelID][settingID]->oValue = oValue;
 }
 
 void GUI::setModelVSetting(int modelID, int settingID, glm::vec3 vValue) {
-//    std::vector<GUIObjectSetting*> sett = this->scene_item_settings[modelID];
-//    GUIObjectSetting* o = sett[settingID];
-//    o->vValue = vValue;
-
     this->scene_item_settings[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
     this->scene_item_settings_default[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
 }
@@ -763,6 +773,11 @@ void GUI::dialogSceneSettings() {
         ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
+
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][17]->vValue.r, this->scene_item_settings[this->scene_item_selected][17]->vValue.g, this->scene_item_settings[this->scene_item_selected][17]->vValue.b, 1.0), "Emission");
+        ImGui::SliderFloat("Red##110", &this->scene_item_settings[this->scene_item_selected][17]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##111", &this->scene_item_settings[this->scene_item_selected][17]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##112", &this->scene_item_settings[this->scene_item_selected][17]->vValue.b, 0.0f, 1.0f);
 
         ImGui::TreePop();
     }

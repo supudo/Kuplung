@@ -9,6 +9,7 @@ struct Material {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+    vec3 emission;
 
     float shininess;
     float refraction;
@@ -52,11 +53,11 @@ void main(void) {
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
 
         // Ambient
-        vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient;
+        vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient * material.ambient;
 
         // Diffuse
         float diff = max(dot(normalDirection, lightDirection), 0.0);
-        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse;// * processedColor;
+        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse * material.diffuse;// * processedColor;
 
         // Specular
         vec3 reflectDirection = reflect(-directionalLight[0].direction, normalDirection);
@@ -71,7 +72,7 @@ void main(void) {
             processedColor = (ambient + diffuse + specular) * texture(fs_sampler, pixelTexCoords + refraction.xy * 0.1).rgb;
         }
         else
-            processedColor = (ambient + diffuse + specular) * processedColor;
+            processedColor = (material.emission + ambient + diffuse + specular) * processedColor;
 
         // final color
         fragColor = vec4(processedColor, fs_alpha);

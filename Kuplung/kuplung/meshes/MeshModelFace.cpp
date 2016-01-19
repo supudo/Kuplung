@@ -79,6 +79,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_materialAmbient = glm::vec3(1.0, 1.0, 1.0);
     this->so_materialDiffuse = glm::vec3(1.0, 1.0, 1.0);
     this->so_materialSpecular = glm::vec3(1.0, 1.0, 1.0);
+    this->so_materialEmission = glm::vec3(0, 0, 0);
 }
 
 void MeshModelFace::setModel(objModelFace oFace) {
@@ -181,6 +182,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
         this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
         this->glMaterial_Specular = this->glUtils->glGetUniform(this->shaderProgram, "material.specular");
+        this->glMaterial_Emission = this->glUtils->glGetUniform(this->shaderProgram, "material.emission");
     }
 
     return success;
@@ -333,6 +335,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
+        glUniform3f(this->glMaterial_Emission, this->so_materialEmission.r, this->so_materialEmission.g, this->so_materialEmission.b);
 
         // outlining
         //this->drawOnly();
@@ -531,6 +534,10 @@ void MeshModelFace::setOptionsMaterialDiffuse(glm::vec3 lightColor) {
 
 void MeshModelFace::setOptionsMaterialSpecular(glm::vec3 lightColor) {
     this->so_materialSpecular = lightColor;
+}
+
+void MeshModelFace::setOptionsMaterialEmission(glm::vec3 lightColor) {
+    this->so_materialEmission = lightColor;
 }
 
 #pragma mark - Utilities
