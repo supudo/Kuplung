@@ -23,6 +23,12 @@ static int gui_AttribLocationPosition = 0, gui_AttribLocationUV = 0, gui_AttribL
 static unsigned int gui_VboHandle = 0, gui_VaoHandle = 0, gui_ElementsHandle = 0;
 ImVec4 clear_color = ImColor(114, 144, 154);
 
+#pragma mark - Destructor
+
+GUI::~GUI() {
+    this->destroy();
+}
+
 #pragma mark - Public
 
 void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<void(FBEntity)> processFile, std::function<void()> newScene) {
@@ -75,6 +81,40 @@ bool GUI::processEvent(SDL_Event *event) {
 }
 
 void GUI::destroy() {
+    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings.begin(); iter != this->scene_item_settings.end(); ++iter) {
+        std::vector<GUIObjectSetting*> setts = iter->second;
+        for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+            delete *settObj;
+        }
+    }
+
+    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings_default.begin(); iter != this->scene_item_settings_default.end(); ++iter) {
+        std::vector<GUIObjectSetting*> setts = iter->second;
+        for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+            delete *settObj;
+        }
+    }
+
+    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->gui_item_settings.begin(); iter != this->gui_item_settings.end(); ++iter) {
+        std::vector<GUIObjectSetting*> setts = iter->second;
+        for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+            delete *settObj;
+        }
+    }
+
+    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->gui_item_settings_default.begin(); iter != this->gui_item_settings_default.end(); ++iter) {
+        std::vector<GUIObjectSetting*> setts = iter->second;
+        for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+            delete *settObj;
+        }
+    }
+
+    this->scene_item_settings.clear();
+    this->scene_item_settings_default.clear();
+    this->gui_item_settings.clear();
+    this->gui_item_settings_default.clear();
+    this->sceneModels.clear();
+
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Shutdown();
     else
