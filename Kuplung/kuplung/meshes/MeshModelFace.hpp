@@ -96,7 +96,7 @@ private:
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureShiness, vboTextureDissolve;
 
     GLuint glVS_MVPMatrix, glFS_MMatrix;
-    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glFS_Sampler;
+    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal;
 
     // general
     GLuint glGS_GeomDisplacementLocation;
@@ -112,6 +112,8 @@ private:
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_Emission;
     GLuint glMaterial_Shininess, glMaterial_Refraction;
+    GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerColor;
+    GLuint glMaterial_SamplerSpecular, glMaterial_SamplerDissolve;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

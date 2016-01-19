@@ -158,8 +158,6 @@ bool MeshModelFace::initShaderProgram() {
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
 
-        this->glFS_Sampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_sampler");
-
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
 
@@ -183,6 +181,12 @@ bool MeshModelFace::initShaderProgram() {
         this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
         this->glMaterial_Specular = this->glUtils->glGetUniform(this->shaderProgram, "material.specular");
         this->glMaterial_Emission = this->glUtils->glGetUniform(this->shaderProgram, "material.emission");
+
+        this->glMaterial_SamplerAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_ambient");
+        this->glMaterial_SamplerDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_diffuse");
+        this->glMaterial_SamplerColor = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_color");
+        this->glMaterial_SamplerSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
+        this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
     }
 
     return success;
