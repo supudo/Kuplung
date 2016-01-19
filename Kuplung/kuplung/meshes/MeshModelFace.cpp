@@ -253,6 +253,7 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
                         break;
                 }
                 glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+                glUniform1i(this->glMaterial_SamplerDiffuse, 0);
                 stbi_image_free(tPixels);
             }
         }
@@ -276,10 +277,6 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         this->matrixCamera = matrixCamera;
         this->matrixModel = matrixModel;
         this->vecCameraPosition = vecCameraPosition;
-
-        // texture
-        if (this->vboTextureDiffuse > 0)
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
 
         // drawing options
         //glEnable(GL_CULL_FACE);
@@ -340,6 +337,9 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
         glUniform3f(this->glMaterial_Emission, this->so_materialEmission.r, this->so_materialEmission.g, this->so_materialEmission.b);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
 
         // outlining
         //this->drawOnly();
