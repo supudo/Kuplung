@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "836"
             endingLineNumber = "836"
-            landmarkName = "GUI::dialogSceneStats()"
+            landmarkName = "GUI::dialogSceneSettings()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

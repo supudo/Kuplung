@@ -137,15 +137,22 @@ void GUI::recentFilesClear() {
 void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings) {
     for (int i=0; i<guiObjectsCount; i++) {
         std::vector<GUIObjectSetting*> setts;
+        std::vector<GUIObjectSetting*> setts_default;
         for (int j=0; j<21; j++) {
             GUIObjectSetting* gos = new GUIObjectSetting();
             gos->oIndex = j;
             gos->oAnimate = false;
             gos->oValue = initialSettings[i][j];
             setts.push_back(gos);
+
+            GUIObjectSetting* gos_default = new GUIObjectSetting();
+            gos_default->oIndex = j;
+            gos_default->oAnimate = false;
+            gos_default->oValue = initialSettings[i][j];
+            setts_default.push_back(gos_default);
         }
         this->gui_item_settings[i] = setts;
-        this->gui_item_settings_default[i] = setts;
+        this->gui_item_settings_default[i] = setts_default;
     }
 }
 
@@ -163,46 +170,61 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->scene_item_settings_default = {};
     for (int i=0; i<(int)scene_models.size(); i++) {
         std::vector<GUIObjectSetting*> setts = {};
-
-        GUIObjectSetting* gos = new GUIObjectSetting();
-        gos->oIndex = 0;
-        gos->oAnimate = false;
+        std::vector<GUIObjectSetting*> setts_default = {};
 
         int idx = 0;
 
         // scale
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // rotate
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // translate
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // displacement
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // refraction
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
         // shininess
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // material
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
-        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
+        setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
         setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
 
         this->scene_item_settings[i] = setts;
-        this->scene_item_settings_default[i] = setts;
+        this->scene_item_settings_default[i] = setts_default;
     }
     this->sceneModels = scene_models;
     this->displaySceneSettings = true;
@@ -672,7 +694,8 @@ void GUI::resetValuesGUIControls() {
 
     for (int i=0; i<(int)this->gui_item_settings_default.size(); i++) {
         for (int j=0; j<(int)this->gui_item_settings[i].size(); j++) {
-            this->gui_item_settings[i][j] = this->gui_item_settings_default[i][j];
+            this->gui_item_settings[i][j]->oValue = this->gui_item_settings_default[i][j]->oValue;
+            this->gui_item_settings[i][j]->vValue = this->gui_item_settings_default[i][j]->vValue;
         }
     }
 }
@@ -861,7 +884,8 @@ void GUI::resetValuesSceneSettings() {
     this->so_Alpha = 1;
     for (size_t i=0; i<this->scene_item_settings.size(); i++) {
         for (size_t j=0; j<this->scene_item_settings[i].size(); j++) {
-            this->scene_item_settings[i][j] = this->scene_item_settings_default[i][j];
+            this->scene_item_settings[i][j]->oValue = this->scene_item_settings_default[i][j]->oValue;
+            this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
         }
     }
 }
