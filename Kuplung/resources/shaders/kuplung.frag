@@ -48,8 +48,6 @@ out vec4 fragColor;
 uniform Light directionalLight[1];
 uniform ModelMaterial material;
 
-// https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
-
 vec3 calculateAmbient() {
     if (material.has_texture_ambient) {
         vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
