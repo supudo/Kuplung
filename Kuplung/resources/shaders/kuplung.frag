@@ -10,7 +10,6 @@ struct ModelMaterial {
     vec3 specular;
     vec3 emission;
 
-    float shininess;
     float refraction;
     float specularExp;
 
@@ -76,10 +75,10 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
     vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
     if (material.has_texture_specular) {
         vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-        return specular * texturedColor_Specular.rgb * material.shininess;
+        return specular * texturedColor_Specular.rgb * material.refraction;
     }
     else
-        return specular * material.specular * material.shininess;
+        return specular * material.specular * material.refraction;
 }
 
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {

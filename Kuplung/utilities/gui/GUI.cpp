@@ -209,9 +209,6 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         // refraction
         setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
         setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
-        // shininess
-        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
-        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         // material
         setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1)));
