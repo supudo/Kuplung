@@ -187,6 +187,12 @@ bool MeshModelFace::initShaderProgram() {
         this->glMaterial_SamplerSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
         this->glMaterial_SamplerSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
         this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
+
+        this->glMaterial_HasTextureAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_ambient");
+        this->glMaterial_HasTextureDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_diffuse");
+        this->glMaterial_HasTextureSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specular");
+        this->glMaterial_HasTextureSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
+        this->glMaterial_HasTextureDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
     }
 
     return success;
@@ -499,34 +505,49 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glMaterial_Emission, this->so_materialEmission.r, this->so_materialEmission.g, this->so_materialEmission.b);
 
         if (this->vboTextureAmbient > 0) {
-            glUniform1i(this->glMaterial_SamplerAmbient, 0);
+            glUniform1i(this->glMaterial_SamplerAmbient, 1);
+            glUniform1i(this->glMaterial_HasTextureAmbient, true);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
         }
+        else
+            glUniform1i(this->glMaterial_HasTextureAmbient, 0);
 
         if (this->vboTextureDiffuse > 0) {
+            glUniform1i(this->glMaterial_HasTextureDiffuse, 1);
             glUniform1i(this->glMaterial_SamplerDiffuse, 1);
             glActiveTexture(GL_TEXTURE1);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
         }
+        else
+            glUniform1i(this->glMaterial_HasTextureDiffuse, 0);
 
         if (this->vboTextureSpecular > 0) {
+            glUniform1i(this->glMaterial_HasTextureSpecular, 1);
             glUniform1i(this->glMaterial_SamplerSpecular, 2);
             glActiveTexture(GL_TEXTURE2);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
         }
+        else
+            glUniform1i(this->glMaterial_HasTextureSpecular, 0);
 
         if (this->vboTextureSpecularExp > 0) {
+            glUniform1i(this->glMaterial_HasTextureSpecularExp, 1);
             glUniform1i(this->glMaterial_SamplerSpecularExp, 3);
             glActiveTexture(GL_TEXTURE3);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
         }
+        else
+            glUniform1i(this->glMaterial_HasTextureSpecularExp, 0);
 
         if (this->vboTextureDissolve > 0) {
+            glUniform1i(this->glMaterial_HasTextureDissolve, 1);
             glUniform1i(this->glMaterial_SamplerDissolve, 4);
             glActiveTexture(GL_TEXTURE4);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
         }
+        else
+            glUniform1i(this->glMaterial_HasTextureDissolve, 0);
 
         // outlining
         //this->drawOnly();

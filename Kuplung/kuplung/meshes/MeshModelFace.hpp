@@ -114,6 +114,8 @@ private:
     GLuint glMaterial_Shininess, glMaterial_Refraction;
     GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
     GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve;
+    GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
+    GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

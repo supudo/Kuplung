@@ -13,11 +13,17 @@ struct ModelMaterial {
     float shininess;
     float refraction;
 
-    sampler2D sampler_ambient; // map_Ka
-    sampler2D sampler_diffuse; // map_Kd
-    sampler2D sampler_specular; // map_Ks
-    sampler2D sampler_specularExp; // map_Ns
-    sampler2D sampler_dissolve; // map_d
+    sampler2D sampler_ambient;
+    sampler2D sampler_diffuse;
+    sampler2D sampler_specular;
+    sampler2D sampler_specularExp;
+    sampler2D sampler_dissolve;
+
+    bool has_texture_ambient;
+    bool has_texture_diffuse;
+    bool has_texture_specular;
+    bool has_texture_specularExp;
+    bool has_texture_dissolve;
 };
 
 struct Light {
@@ -44,13 +50,48 @@ uniform ModelMaterial material;
 
 // https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
 
+vec3 calculateAmbient() {
+    vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient * material.ambient;
+    return ambient;
+}
+
+vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
+    float diff = max(dot(normalDirection, lightDirection), 0.0);
+    vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse * material.diffuse;
+    return diffuse;
+}
+
+vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
+    vec3 reflectDirection = reflect(-directionalLight[0].direction, normalDirection);
+    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLight[0].strengthSpecular);
+    vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
+    return specular;
+}
+
+vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
+    vec3 refraction_normal = normalize(refract(fs_vertexPosition, normalDirection, material.refraction));
+    vec3 refractionColor = mix(texture(material.sampler_diffuse, fs_textureCoord + refraction_normal.xy * 0.1), texturedColor_Diffuse, fs_alpha).rgb;
+    vec2 pixelTexCoords = vec2(gl_FragCoord.x / fs_screenResX, gl_FragCoord.y / fs_screenResY);
+    vec3 refraction = texture(material.sampler_diffuse, pixelTexCoords + refraction_normal.xy * 0.1).rgb;
+    return refraction;
+}
+
 void main(void) {
     if (fs_isBorder > 0.0) {
         fragColor = vec4(fs_outlineColor, 1.0);
     }
     else {
+        vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        vec3 processedColor = texturedColor_Diffuse.rgb;
+        vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
+        vec4 texturedColor_SpecularExp = texture(material.sampler_specularExp, fs_textureCoord);
+        vec4 texturedColor_Dissolve = texture(material.sampler_dissolve, fs_textureCoord);
+
+        vec3 processedColor_Ambient = material.has_texture_ambient ? texturedColor_Ambient.rgb : material.ambient;
+        vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
+        vec3 processedColor_Specular = material.has_texture_specular ? texturedColor_Specular.rgb : material.specular;
+        vec3 processedColor_SpecularExp = texturedColor_SpecularExp.rgb;
+        vec3 processedColor_Dissolve = texturedColor_Dissolve.rgb;
 
         // misc
         vec3 normalDirection = normalize(fs_vertexNormal);
@@ -58,28 +99,22 @@ void main(void) {
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
 
         // Ambient
-        vec3 ambient = directionalLight[0].strengthAmbient * directionalLight[0].ambient * material.ambient;
+        vec3 ambient = calculateAmbient();
 
         // Diffuse
-        float diff = max(dot(normalDirection, lightDirection), 0.0);
-        vec3 diffuse = directionalLight[0].strengthDiffuse * diff * directionalLight[0].diffuse * material.diffuse;// * processedColor;
+        vec3 diffuse = calculateDiffuse(normalDirection, lightDirection);
 
         // Specular
-        vec3 reflectDirection = reflect(-directionalLight[0].direction, normalDirection);
-        float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLight[0].strengthSpecular);
-        vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
+        vec3 specular = calculateSpecular(normalDirection, viewDirection);
 
         if (material.refraction > 1.0) {
-            // Refraction (Optical Density)
-            vec3 refraction = normalize(refract(fs_vertexPosition, normalDirection, material.refraction));
-            vec3 refractionColor = mix(texture(material.sampler_diffuse, fs_textureCoord + refraction.xy * 0.1), texturedColor_Diffuse, fs_alpha).rgb;
-            vec2 pixelTexCoords = vec2(gl_FragCoord.x / fs_screenResX, gl_FragCoord.y / fs_screenResY);
-            processedColor = (ambient + diffuse + specular) * texture(material.sampler_diffuse, pixelTexCoords + refraction.xy * 0.1).rgb;
+            vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
+            processedColor_Diffuse = (ambient + diffuse + specular) * refraction;
         }
         else
-            processedColor = (material.emission + ambient + diffuse + specular) * processedColor;
+            processedColor_Diffuse = (material.emission + ambient + diffuse + specular) * processedColor_Diffuse;
 
         // final color
-        fragColor = vec4(processedColor, fs_alpha);
+        fragColor = vec4(processedColor_Diffuse, fs_alpha);
     }
 }
