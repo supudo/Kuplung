@@ -45,6 +45,7 @@ public:
     void ImGui_Implementation_RenderDrawLists();
     void setHeightmapImage(std::string heightmapImage);
     void setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile);
+    bool isMouseOnGUI();
 
     void showLoading();
     void hideLoading();

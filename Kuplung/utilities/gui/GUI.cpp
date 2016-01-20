@@ -224,6 +224,10 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
         setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
+        // illumination model
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts_default;
     }
@@ -279,6 +283,10 @@ void GUI::setHeightmapImage(std::string heightmapImage) {
 
 void GUI::setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile) {
     this->doFileShaderCompile = fileShaderCompile;
+}
+
+bool GUI::isMouseOnGUI() {
+    return ImGui::IsMouseHoveringAnyWindow();
 }
 
 #pragma mark - Rendering
@@ -703,7 +711,7 @@ void GUI::resetValuesGUIControls() {
 
 void GUI::dialogSceneSettings() {
     ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiSetCond_FirstUseEver);
-    ImGui::Begin("Scene Settings", &this->displaySceneSettings, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
+    ImGui::Begin("Scene Settings", &this->displaySceneSettings, ImGuiWindowFlags_ShowBorders);
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -844,6 +852,25 @@ void GUI::dialogSceneSettings() {
         ImGui::SliderFloat("Red##110", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##111", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
         ImGui::SliderFloat("Blue##112", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
+
+        ImGui::TreePop();
+    }
+
+    if (ImGui::TreeNode("Illumination")) {
+        const char* illum_models_items[] = {
+            "[0] Color on and Ambient off",
+            "[1] Color on and Ambient on",
+            "[2] Highlight on",
+            "[3] Reflection on and Ray trace on",
+            "[4] Transparency: Glass on\nReflection: Ray trace on",
+            "[5] Reflection: Fresnel on and Ray trace on",
+            "[6] Transparency: Refraction on\nReflection: Fresnel off and Ray trace on",
+            "[7]Transparency: Refraction on\nReflection: Fresnel on and Ray trace on",
+            "[8] Reflection on and Ray trace off",
+            "[9] Transparency: Glass on\nReflection: Ray trace off",
+            "[10] Casts shadows onto invisible surfaces"
+        };
+        ImGui::Combo("##987", &this->scene_item_selected, illum_models_items, IM_ARRAYSIZE(illum_models_items), 11);
 
         ImGui::TreePop();
     }

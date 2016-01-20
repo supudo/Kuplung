@@ -188,85 +188,87 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    // escape button
-    if (this->managerControls->keyPressed_ESC) {
-        this->sceneSelectedModelObject = -1;
-        this->selectedMaterialID = "";
-    }
+    if (!this->gui->isMouseOnGUI()) {
+        // escape button
+        if (this->managerControls->keyPressed_ESC) {
+            this->sceneSelectedModelObject = -1;
+            this->selectedMaterialID = "";
+        }
 
-    // FOV & zoom
-    if (this->managerControls->keyPressed_LALT) {
-        if (this->managerControls->mouseWheel.y < 0)
-            this->gui->so_GUI_FOV += 4;
-        if (this->managerControls->mouseWheel.y > 0)
-            this->gui->so_GUI_FOV -= 4;
-        if (this->gui->so_GUI_FOV > 180)
-            this->gui->so_GUI_FOV = 180;
-        if (this->gui->so_GUI_FOV < -180)
-            this->gui->so_GUI_FOV = -180;
-    }
-    else
-        this->gui->gui_item_settings[0][17]->oValue += this->managerControls->mouseWheel.y;
+        // FOV & zoom
+        if (this->managerControls->keyPressed_LALT) {
+            if (this->managerControls->mouseWheel.y < 0)
+                this->gui->so_GUI_FOV += 4;
+            if (this->managerControls->mouseWheel.y > 0)
+                this->gui->so_GUI_FOV -= 4;
+            if (this->gui->so_GUI_FOV > 180)
+                this->gui->so_GUI_FOV = 180;
+            if (this->gui->so_GUI_FOV < -180)
+                this->gui->so_GUI_FOV = -180;
+        }
+        else
+            this->gui->gui_item_settings[0][17]->oValue += this->managerControls->mouseWheel.y;
 
-    // pan world
-    if (this->managerControls->mouseButton_MIDDLE) {
-        if (this->managerControls->mouseGoUp)
-            this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
-        else if (this->managerControls->mouseGoDown)
-            this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
-        else if (this->managerControls->mouseGoLeft)
-            this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
-        else if (this->managerControls->mouseGoRight)
-            this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
-    }
+        // pan world
+        if (this->managerControls->mouseButton_MIDDLE) {
+            if (this->managerControls->mouseGoUp)
+                this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
+            else if (this->managerControls->mouseGoDown)
+                this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
+            else if (this->managerControls->mouseGoLeft)
+                this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
+            else if (this->managerControls->mouseGoRight)
+                this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
+        }
 
-    // picking
-    if (this->managerControls->mouseButton_LEFT) {
-        int mouse_x = this->managerControls->mousePosition.x;
-        int mouse_y = this->managerControls->mousePosition.y;
+        // picking
+        if (this->managerControls->mouseButton_LEFT) {
+            int mouse_x = this->managerControls->mousePosition.x;
+            int mouse_y = this->managerControls->mousePosition.y;
 
-        glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-        glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
-        glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
+            glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+            glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
+            glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
 
-        glm::vec3 nearPoint = glm::unProject(win_near, this->matrixCamera, this->matrixProjection, viewport);
-        glm::vec3 farPoint = glm::unProject(win_far, this->matrixCamera, this->matrixProjection, viewport);
-        glm::vec3 direction = glm::normalize(farPoint - nearPoint);
+            glm::vec3 nearPoint = glm::unProject(win_near, this->matrixCamera, this->matrixProjection, viewport);
+            glm::vec3 farPoint = glm::unProject(win_far, this->matrixCamera, this->matrixProjection, viewport);
+            glm::vec3 direction = glm::normalize(farPoint - nearPoint);
 
-        // http://schabby.de/picking-opengl-ray-tracing/
-        // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
-        float sceneClosestObject = -1;
+            // http://schabby.de/picking-opengl-ray-tracing/
+            // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
+            float sceneClosestObject = -1;
 
-        for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-            MeshModelFace *mmf = this->meshModelFaces[i];
-            std::vector<float> objVertices = mmf->oFace.vertices;
+            for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+                MeshModelFace *mmf = this->meshModelFaces[i];
+                std::vector<float> objVertices = mmf->oFace.vertices;
 
-            std::vector<glm::vec3> Vertices;
-            for (int j=0; j<(int)objVertices.size(); j++) {
-                if ((j + 1) % 3 == 0) {
-                    glm::vec3 v = glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]);
-                    Vertices.push_back(v);
+                std::vector<glm::vec3> Vertices;
+                for (int j=0; j<(int)objVertices.size(); j++) {
+                    if ((j + 1) % 3 == 0) {
+                        glm::vec3 v = glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]);
+                        Vertices.push_back(v);
+                    }
                 }
-            }
 
-            for (int j=0; j<(int)Vertices.size(); j++) {
-                if ((j + 1) % 3 == 0) {
-                    glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j-1] - Vertices[j-2], Vertices[j] - Vertices[j-2]));
+                for (int j=0; j<(int)Vertices.size(); j++) {
+                    if ((j + 1) % 3 == 0) {
+                        glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j-1] - Vertices[j-2], Vertices[j] - Vertices[j-2]));
 
-                    float nDotL = glm::dot(direction, face_normal);
-                    if (nDotL <= 0.0f ) {
-                        float distance = glm::dot(face_normal, (Vertices[j-2] - nearPoint)) / nDotL;
+                        float nDotL = glm::dot(direction, face_normal);
+                        if (nDotL <= 0.0f ) {
+                            float distance = glm::dot(face_normal, (Vertices[j-2] - nearPoint)) / nDotL;
 
-                        glm::vec3 p = nearPoint + distance * direction;
-                        glm::vec3 n1 = glm::cross(Vertices[j-1] - Vertices[j-2], p - Vertices[j-2]);
-                        glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j-1], p - Vertices[j-1]);
-                        glm::vec3 n3 = glm::cross(Vertices[j-2] - Vertices[j], p - Vertices[j]);
-                        if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
-                            if (p.z > sceneClosestObject) {
-                                this->sceneSelectedModelObject = i;
-                                this->selectedMaterialID = mmf->oFace.materialID;
-                                this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
-                                break;
+                            glm::vec3 p = nearPoint + distance * direction;
+                            glm::vec3 n1 = glm::cross(Vertices[j-1] - Vertices[j-2], p - Vertices[j-2]);
+                            glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j-1], p - Vertices[j-1]);
+                            glm::vec3 n3 = glm::cross(Vertices[j-2] - Vertices[j], p - Vertices[j]);
+                            if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
+                                if (p.z > sceneClosestObject) {
+                                    this->sceneSelectedModelObject = i;
+                                    this->selectedMaterialID = mmf->oFace.materialID;
+                                    this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
+                                    break;
+                                }
                             }
                         }
                     }
@@ -627,6 +629,7 @@ void Kuplung::processParsedObjFile() {
             MeshModelFace *mmf = this->meshModelFaces[i];
             this->gui->setModelOSetting((int)i, 12, mmf->oFace.faceMaterial.opticalDensity);
             this->gui->setModelOSetting((int)i, 17, mmf->oFace.faceMaterial.specularExp);
+            this->gui->setModelOSetting((int)i, 18, mmf->oFace.faceMaterial.illumination);
             this->gui->setModelVSetting((int)i, 13, glm::vec3(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b));
             this->gui->setModelVSetting((int)i, 14, glm::vec3(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b));
             this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));
