@@ -495,6 +495,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 
         // material
         glUniform1f(this->glMaterial_Refraction, this->so_materialRefraction);
+        glUniform1f(this->glMaterial_SpecularExp, this->so_materialSpecularExp);
         glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
@@ -724,8 +725,12 @@ void MeshModelFace::setOptionsLightStrengthSpecular(float val) {
 
 // material
 
-void MeshModelFace::setOptionsMaterialRefraction(float refraction) {
-    this->so_materialRefraction = refraction;
+void MeshModelFace::setOptionsMaterialRefraction(float val) {
+    this->so_materialRefraction = val;
+}
+
+void MeshModelFace::setOptionsMaterialSpecularExp(float val) {
+    this->so_materialSpecularExp = val;
 }
 
 void MeshModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {

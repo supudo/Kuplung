@@ -218,7 +218,11 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1)));
         setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(1, 1, 1))); idx += 1;
         setts.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
-        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 0.0, glm::vec3(0, 0, 0))); idx += 1;
+
+        // specular exp
+        setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts_default;
@@ -807,11 +811,19 @@ void GUI::dialogSceneSettings() {
     }
 
     if (ImGui::TreeNode("Material")) {
+        ImGui::Text("Refraction");
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
             this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate refraction");
-        ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12]->oValue, 1.0, 10.0);
+        ImGui::SameLine(); ImGui::SliderFloat("##101", &this->scene_item_settings[this->scene_item_selected][12]->oValue, 1.0, 10.0);
+
+        ImGui::Text("Specular Exponent");
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][17]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, 17, 10.0f, 1000, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate specular exponent");
+        ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->oValue, 0.0, 1000.0);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][13]->vValue.r, 0.0f, 1.0f);
