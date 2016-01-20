@@ -12,6 +12,7 @@ struct ModelMaterial {
 
     float refraction;
     float specularExp;
+    int illumination_model;
 
     sampler2D sampler_ambient;
     sampler2D sampler_diffuse;

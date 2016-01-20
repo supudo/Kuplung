@@ -207,18 +207,18 @@ void Kuplung::onEvent(SDL_Event *ev) {
                 this->gui->so_GUI_FOV = -180;
         }
         else
-            this->gui->gui_item_settings[0][17]->oValue += this->managerControls->mouseWheel.y;
+            this->gui->gui_item_settings[0][17]->fValue += this->managerControls->mouseWheel.y;
 
         // pan world
         if (this->managerControls->mouseButton_MIDDLE) {
             if (this->managerControls->mouseGoUp)
-                this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
+                this->gui->gui_item_settings[0][12]->fValue += this->managerControls->yrel;
             else if (this->managerControls->mouseGoDown)
-                this->gui->gui_item_settings[0][12]->oValue += this->managerControls->yrel;
+                this->gui->gui_item_settings[0][12]->fValue += this->managerControls->yrel;
             else if (this->managerControls->mouseGoLeft)
-                this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
+                this->gui->gui_item_settings[0][13]->fValue += this->managerControls->xrel;
             else if (this->managerControls->mouseGoRight)
-                this->gui->gui_item_settings[0][13]->oValue += this->managerControls->xrel;
+                this->gui->gui_item_settings[0][13]->fValue += this->managerControls->xrel;
         }
 
         // picking
@@ -285,17 +285,17 @@ void Kuplung::renderScene() {
     this->matrixProjection = glm::perspective(glm::radians(this->gui->so_GUI_FOV), this->gui->so_GUI_ratio_w / this->gui->so_GUI_ratio_h, this->gui->so_GUI_plane_close, this->gui->so_GUI_plane_far);
 
 //    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(0, 0, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][12]->oValue), glm::vec3(1, 0, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][13]->oValue), glm::vec3(0, 1, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][14]->oValue), glm::vec3(0, 0, 1));
+//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][12]->fValue), glm::vec3(1, 0, 0));
+//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][13]->fValue), glm::vec3(0, 1, 0));
+//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[0][14]->fValue), glm::vec3(0, 0, 1));
 //    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(0, 0, 0));
 //
-//    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(this->gui->gui_item_settings[0][15]->oValue, this->gui->gui_item_settings[0][16]->oValue, this->gui->gui_item_settings[0][17]->oValue));
+//    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(this->gui->gui_item_settings[0][15]->fValue, this->gui->gui_item_settings[0][16]->fValue, this->gui->gui_item_settings[0][17]->fValue));
 
     // camera
-    glm::vec3 mtxCamera_eye = glm::vec3(this->gui->gui_item_settings[0][0]->oValue, this->gui->gui_item_settings[0][1]->oValue, this->gui->gui_item_settings[0][2]->oValue);
-    glm::vec3 mtxCamera_center = glm::vec3(this->gui->gui_item_settings[0][3]->oValue, this->gui->gui_item_settings[0][4]->oValue, this->gui->gui_item_settings[0][5]->oValue);
-    glm::vec3 mtxCamera_up = glm::vec3(this->gui->gui_item_settings[0][6]->oValue, this->gui->gui_item_settings[0][7]->oValue, this->gui->gui_item_settings[0][8]->oValue);
+    glm::vec3 mtxCamera_eye = glm::vec3(this->gui->gui_item_settings[0][0]->fValue, this->gui->gui_item_settings[0][1]->fValue, this->gui->gui_item_settings[0][2]->fValue);
+    glm::vec3 mtxCamera_center = glm::vec3(this->gui->gui_item_settings[0][3]->fValue, this->gui->gui_item_settings[0][4]->fValue, this->gui->gui_item_settings[0][5]->fValue);
+    glm::vec3 mtxCamera_up = glm::vec3(this->gui->gui_item_settings[0][6]->fValue, this->gui->gui_item_settings[0][7]->fValue, this->gui->gui_item_settings[0][8]->fValue);
 
     if (this->gui->isProjection)
         this->matrixCamera = glm::lookAt(mtxCamera_eye, mtxCamera_center, mtxCamera_up);
@@ -303,42 +303,42 @@ void Kuplung::renderScene() {
         this->matrixCamera = glm::ortho(0.0f, (float)Settings::Instance()->SDL_Window_Width, 0.0f, (float)Settings::Instance()->SDL_Window_Height, this->gui->so_GUI_plane_close, this->gui->so_GUI_plane_far);
 
     glm::mat4 mtxModelGrid = glm::mat4(1.0);
-    mtxModelGrid = glm::scale(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[1][9]->oValue, this->gui->gui_item_settings[1][10]->oValue, this->gui->gui_item_settings[1][11]->oValue));
+    mtxModelGrid = glm::scale(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[1][9]->fValue, this->gui->gui_item_settings[1][10]->fValue, this->gui->gui_item_settings[1][11]->fValue));
     mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(0, 0, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][12]->oValue), glm::vec3(1, 0, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][13]->oValue), glm::vec3(0, 1, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][14]->oValue), glm::vec3(0, 0, 1));
+    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][12]->fValue), glm::vec3(1, 0, 0));
+    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][13]->fValue), glm::vec3(0, 1, 0));
+    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[1][14]->fValue), glm::vec3(0, 0, 1));
     mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(0, 0, 0));
-    mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[1][15]->oValue, this->gui->gui_item_settings[1][16]->oValue, this->gui->gui_item_settings[1][17]->oValue));
+    mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[1][15]->fValue, this->gui->gui_item_settings[1][16]->fValue, this->gui->gui_item_settings[1][17]->fValue));
 
-    this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(this->gui->gui_item_settings[0][15]->oValue, this->gui->gui_item_settings[0][16]->oValue, this->gui->gui_item_settings[0][17]->oValue));
+    this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(this->gui->gui_item_settings[0][15]->fValue, this->gui->gui_item_settings[0][16]->fValue, this->gui->gui_item_settings[0][17]->fValue));
     this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][12]->oValue), glm::vec3(1, 0, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][13]->oValue), glm::vec3(0, 1, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][14]->oValue), glm::vec3(0, 0, 1));
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][12]->fValue), glm::vec3(1, 0, 0));
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][13]->fValue), glm::vec3(0, 1, 0));
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[0][14]->fValue), glm::vec3(0, 0, 1));
     this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
 
     glm::mat4 mtxModelLight = glm::mat4(1.0);
     if (this->gui->fixedGridWorld)
         mtxModelLight = mtxModelGrid;
-    mtxModelLight = glm::scale(mtxModelLight, glm::vec3(this->gui->gui_item_settings[2][9]->oValue, this->gui->gui_item_settings[2][10]->oValue, this->gui->gui_item_settings[2][11]->oValue));
+    mtxModelLight = glm::scale(mtxModelLight, glm::vec3(this->gui->gui_item_settings[2][9]->fValue, this->gui->gui_item_settings[2][10]->fValue, this->gui->gui_item_settings[2][11]->fValue));
     mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][12]->oValue), glm::vec3(1, 0, 0));
-    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][13]->oValue), glm::vec3(0, 1, 0));
-    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][14]->oValue), glm::vec3(0, 0, 1));
+    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][12]->fValue), glm::vec3(1, 0, 0));
+    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][13]->fValue), glm::vec3(0, 1, 0));
+    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[2][14]->fValue), glm::vec3(0, 0, 1));
     mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-    mtxModelLight = glm::translate(mtxModelLight, glm::vec3(this->gui->gui_item_settings[2][15]->oValue, this->gui->gui_item_settings[2][16]->oValue, this->gui->gui_item_settings[2][17]->oValue));
+    mtxModelLight = glm::translate(mtxModelLight, glm::vec3(this->gui->gui_item_settings[2][15]->fValue, this->gui->gui_item_settings[2][16]->fValue, this->gui->gui_item_settings[2][17]->fValue));
 
     glm::mat4 mtxModelTerrain = glm::mat4(1.0);
     if (this->gui->fixedGridWorld)
         mtxModelTerrain = mtxModelGrid;
-    mtxModelTerrain = glm::scale(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][9]->oValue, this->gui->gui_item_settings[3][10]->oValue, this->gui->gui_item_settings[3][11]->oValue));
+    mtxModelTerrain = glm::scale(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][9]->fValue, this->gui->gui_item_settings[3][10]->fValue, this->gui->gui_item_settings[3][11]->fValue));
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][12]->oValue), glm::vec3(1, 0, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][13]->oValue), glm::vec3(0, 1, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][14]->oValue), glm::vec3(0, 0, 1));
+    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][12]->fValue), glm::vec3(1, 0, 0));
+    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][13]->fValue), glm::vec3(0, 1, 0));
+    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[3][14]->fValue), glm::vec3(0, 0, 1));
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
-    mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][15]->oValue, this->gui->gui_item_settings[3][16]->oValue, this->gui->gui_item_settings[3][17]->oValue));
+    mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][15]->fValue, this->gui->gui_item_settings[3][16]->fValue, this->gui->gui_item_settings[3][17]->fValue));
 
     // lamp
     if (Settings::Instance()->showLight)
@@ -355,9 +355,9 @@ void Kuplung::renderScene() {
         glViewport(axisX, axisY, axisW, axisH);
 
         glm::mat4 mtxModel = glm::mat4(1.0);
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][12]->oValue), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][13]->oValue), glm::vec3(0, 1, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][14]->oValue), glm::vec3(0, 0, 1));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][12]->fValue), glm::vec3(1, 0, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][13]->fValue), glm::vec3(0, 1, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[1][14]->fValue), glm::vec3(0, 0, 1));
         this->sceneCoordinateSystem->render(this->matrixProjection, this->matrixCamera, mtxModel);
 
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
@@ -368,9 +368,9 @@ void Kuplung::renderScene() {
         this->terrain->render(this->matrixProjection, this->matrixCamera, mtxModelTerrain);
 
     // light source
-    float px = mtxModelLight[3].x;//this->gui->gui_item_settings[2][15]->oValue;
-    float py = mtxModelLight[3].y;//this->gui->gui_item_settings[2][16]->oValue;
-    float pz = mtxModelLight[3].z;//this->gui->gui_item_settings[2][17]->oValue;
+    float px = mtxModelLight[3].x;//this->gui->gui_item_settings[2][15]->fValue;
+    float py = mtxModelLight[3].y;//this->gui->gui_item_settings[2][16]->fValue;
+    float pz = mtxModelLight[3].z;//this->gui->gui_item_settings[2][17]->fValue;
 
     glm::vec3 vLightPosition = glm::vec3(px, py, pz);
     glm::vec3 vLightDirection = glm::vec3(0, -2, 0);
@@ -393,20 +393,20 @@ void Kuplung::renderScene() {
         // reposition like the grid perspective
         mtxModel *= mtxModelGrid;
 
-        mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][0]->oValue, this->gui->scene_item_settings[sis][1]->oValue, this->gui->scene_item_settings[sis][2]->oValue));
+        mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][0]->fValue, this->gui->scene_item_settings[sis][1]->fValue, this->gui->scene_item_settings[sis][2]->fValue));
 
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][3]->oValue), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][4]->oValue), glm::vec3(0, 1, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][5]->oValue), glm::vec3(0, 0, 1));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][3]->fValue), glm::vec3(1, 0, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][4]->fValue), glm::vec3(0, 1, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][5]->fValue), glm::vec3(0, 0, 1));
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
-        mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][6]->oValue, this->gui->scene_item_settings[sis][7]->oValue, this->gui->scene_item_settings[sis][8]->oValue));
+        mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][6]->fValue, this->gui->scene_item_settings[sis][7]->fValue, this->gui->scene_item_settings[sis][8]->fValue));
 
         // general
         mmf->setOptionsFOV(this->gui->so_GUI_FOV);
         mmf->setOptionsAlpha(this->gui->so_Alpha);
-        mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9]->oValue, this->gui->scene_item_settings[sis][10]->oValue, this->gui->scene_item_settings[sis][11]->oValue));
+        mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9]->fValue, this->gui->scene_item_settings[sis][10]->fValue, this->gui->scene_item_settings[sis][11]->fValue));
 
         // outlining
         mmf->setOptionsSelected(false);
@@ -421,17 +421,18 @@ void Kuplung::renderScene() {
         mmf->setOptionsLightAmbient(this->gui->so_GUI_lightAmbient);
         mmf->setOptionsLightDiffuse(this->gui->so_GUI_lightDiffuse);
         mmf->setOptionsLightSpecular(this->gui->so_GUI_lightSpecular);
-        mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[2][18]->oValue);
-        mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[2][19]->oValue);
-        mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[2][20]->oValue);
+        mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[2][18]->fValue);
+        mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[2][19]->fValue);
+        mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[2][20]->fValue);
 
         // material
-        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12]->oValue);
-        mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[sis][17]->oValue);
+        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12]->fValue);
+        mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[sis][17]->fValue);
         mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][13]->vValue);
         mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][14]->vValue);
         mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][15]->vValue);
         mmf->setOptionsMaterialEmission(this->gui->scene_item_settings[sis][16]->vValue);
+        mmf->setOptionsMaterialIlluminationModel(this->gui->scene_item_settings[sis][18]->iValue);
 
         // render
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
@@ -627,9 +628,9 @@ void Kuplung::processParsedObjFile() {
         this->gui->showSceneSettings(scene_models);
         for (size_t i=0; i<this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
-            this->gui->setModelOSetting((int)i, 12, mmf->oFace.faceMaterial.opticalDensity);
-            this->gui->setModelOSetting((int)i, 17, mmf->oFace.faceMaterial.specularExp);
-            this->gui->setModelOSetting((int)i, 18, mmf->oFace.faceMaterial.illumination);
+            this->gui->setModelFSetting((int)i, 12, mmf->oFace.faceMaterial.opticalDensity);
+            this->gui->setModelFSetting((int)i, 17, mmf->oFace.faceMaterial.specularExp);
+            this->gui->setModelISetting((int)i, 18, mmf->oFace.faceMaterial.illumination);
             this->gui->setModelVSetting((int)i, 13, glm::vec3(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b));
             this->gui->setModelVSetting((int)i, 14, glm::vec3(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b));
             this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));

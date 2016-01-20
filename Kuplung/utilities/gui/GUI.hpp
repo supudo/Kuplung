@@ -27,7 +27,8 @@
 struct GUIObjectSetting {
     int oIndex;
     bool oAnimate;
-    float oValue;
+    int iValue;
+    float fValue;
     glm::vec3 vValue;
 };
 
@@ -58,7 +59,8 @@ public:
     void showSceneStats();
     void hideSceneStats();
 
-    void setModelOSetting(int modelID, int settingID, float oValue);
+    void setModelISetting(int modelID, int settingID, int iValue);
+    void setModelFSetting(int modelID, int settingID, float fValue);
     void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
 
     bool isFrame, isProjection, fixedGridWorld, showHeightmap;

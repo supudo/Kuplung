@@ -173,6 +173,7 @@ bool MeshModelFace::initShaderProgram() {
         // material
         this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
         this->glMaterial_SpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.specularExp");
+        this->glMaterial_IlluminationModel = this->glUtils->glGetUniform(this->shaderProgram, "material.illumination_model");
 
         this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
         this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
@@ -496,6 +497,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         // material
         glUniform1f(this->glMaterial_Refraction, this->so_materialRefraction);
         glUniform1f(this->glMaterial_SpecularExp, this->so_materialSpecularExp);
+        glUniform1i(this->glMaterial_IlluminationModel, this->so_materialIlluminationModel);
         glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
@@ -731,6 +733,10 @@ void MeshModelFace::setOptionsMaterialRefraction(float val) {
 
 void MeshModelFace::setOptionsMaterialSpecularExp(float val) {
     this->so_materialSpecularExp = val;
+}
+
+void MeshModelFace::setOptionsMaterialIlluminationModel(float val) {
+    this->so_materialIlluminationModel = val;
 }
 
 void MeshModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {
