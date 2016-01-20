@@ -35,8 +35,6 @@ void MeshModelFace::destroy() {
 //        glDeleteBuffers(1, &this->vboTextureDiffuse);
 //    if (this->vboTextureSpecular > 0)
 //        glDeleteBuffers(1, &this->vboTextureSpecular);
-//    if (this->vboTextureShiness > 0)
-//        glDeleteBuffers(1, &this->vboTextureShiness);
 //    if (this->vboTextureDissolve > 0)
 //        glDeleteBuffers(1, &this->vboTextureDissolve);
 
@@ -74,7 +72,6 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     // material
-    this->so_materialShininess = this->oFace.faceMaterial.specularExp;
     this->so_materialRefraction = this->oFace.faceMaterial.opticalDensity;
     this->so_materialAmbient = glm::vec3(1.0, 1.0, 1.0);
     this->so_materialDiffuse = glm::vec3(1.0, 1.0, 1.0);
@@ -174,8 +171,8 @@ bool MeshModelFace::initShaderProgram() {
         this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthSpecular");
 
         // material
-        this->glMaterial_Shininess = this->glUtils->glGetUniform(this->shaderProgram, "material.shininess");
         this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
+        this->glMaterial_SpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.specularExp");
 
         this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
         this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
@@ -497,7 +494,6 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform1f(this->glLight_StrengthSpecular, this->so_lightStrengthSpecular);
 
         // material
-        glUniform1f(this->glMaterial_Shininess, this->so_materialShininess);
         glUniform1f(this->glMaterial_Refraction, this->so_materialRefraction);
         glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
         glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
@@ -730,10 +726,6 @@ void MeshModelFace::setOptionsLightStrengthSpecular(float val) {
 
 void MeshModelFace::setOptionsMaterialRefraction(float refraction) {
     this->so_materialRefraction = refraction;
-}
-
-void MeshModelFace::setOptionsMaterialShininess(float shininess) {
-    this->so_materialShininess = shininess;
 }
 
 void MeshModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {

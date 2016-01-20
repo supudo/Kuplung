@@ -41,7 +41,6 @@ public:
     void setOptionsLightStrengthSpecular(float val);
 
     // material
-    void setOptionsMaterialShininess(float shininess);
     void setOptionsMaterialRefraction(float refraction);
     void setOptionsMaterialAmbient(glm::vec3 lightColor);
     void setOptionsMaterialDiffuse(glm::vec3 lightColor);
@@ -82,7 +81,7 @@ private:
     float so_lightStrengthAmbient, so_lightStrengthDiffuse, so_lightStrengthSpecular;
 
     // material
-    float so_materialShininess, so_materialRefraction;
+    float so_materialRefraction;
     glm::vec3 so_materialAmbient, so_materialDiffuse, so_materialSpecular, so_materialEmission;
 
     bool so_selectedYn;
@@ -110,8 +109,8 @@ private:
     GLuint glLight_Position, glLight_Direction;
 
     // material
-    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_Emission;
-    GLuint glMaterial_Shininess, glMaterial_Refraction;
+    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
+    GLuint glMaterial_Emission, glMaterial_Refraction;
     GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
     GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve;
     GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;

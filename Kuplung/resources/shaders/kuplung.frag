@@ -12,6 +12,7 @@ struct ModelMaterial {
 
     float shininess;
     float refraction;
+    float specularExp;
 
     sampler2D sampler_ambient;
     sampler2D sampler_diffuse;

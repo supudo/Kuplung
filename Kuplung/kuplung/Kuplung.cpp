@@ -425,11 +425,10 @@ void Kuplung::renderScene() {
 
         // material
         mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12]->oValue);
-        mmf->setOptionsMaterialShininess(this->gui->scene_item_settings[sis][13]->oValue);
-        mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][14]->vValue);
-        mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][15]->vValue);
-        mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][16]->vValue);
-        mmf->setOptionsMaterialEmission(this->gui->scene_item_settings[sis][17]->vValue);
+        mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][13]->vValue);
+        mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][14]->vValue);
+        mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][15]->vValue);
+        mmf->setOptionsMaterialEmission(this->gui->scene_item_settings[sis][16]->vValue);
 
         // render
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);

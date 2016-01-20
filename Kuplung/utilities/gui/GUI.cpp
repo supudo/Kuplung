@@ -816,31 +816,25 @@ void GUI::dialogSceneSettings() {
             ImGui::SetTooltip("Animate refraction");
         ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12]->oValue, 1.0, 10.0);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][13]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 13, 0.5f, 10, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate shininess");
-        ImGui::SameLine(); ImGui::SliderFloat("Shininess", &this->scene_item_settings[this->scene_item_selected][13]->oValue, 0.0, 10.0);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
+        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][13]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][13]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 0.0f, 1.0f);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Ambient");
-        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][14]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][14]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
+        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][14]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][14]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 0.0f, 1.0f);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Diffuse");
-        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][15]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][15]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
+        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][15]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][15]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 0.0f, 1.0f);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Specular");
-        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
-
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][17]->vValue.r, this->scene_item_settings[this->scene_item_selected][17]->vValue.g, this->scene_item_settings[this->scene_item_selected][17]->vValue.b, 1.0), "Emission");
-        ImGui::SliderFloat("Red##110", &this->scene_item_settings[this->scene_item_selected][17]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##111", &this->scene_item_settings[this->scene_item_selected][17]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##112", &this->scene_item_settings[this->scene_item_selected][17]->vValue.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
+        ImGui::SliderFloat("Red##110", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("Green##111", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("Blue##112", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
 
         ImGui::TreePop();
     }
