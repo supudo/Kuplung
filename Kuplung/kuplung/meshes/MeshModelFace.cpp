@@ -74,7 +74,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     // material
-    this->so_materialShininess = this->oFace.faceMaterial.shininess;
+    this->so_materialShininess = this->oFace.faceMaterial.specularExp;
     this->so_materialRefraction = this->oFace.faceMaterial.opticalDensity;
     this->so_materialAmbient = glm::vec3(1.0, 1.0, 1.0);
     this->so_materialDiffuse = glm::vec3(1.0, 1.0, 1.0);

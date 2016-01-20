@@ -817,7 +817,7 @@ void GUI::dialogSceneSettings() {
         ImGui::SameLine(); ImGui::SliderFloat("Refraction", &this->scene_item_settings[this->scene_item_selected][12]->oValue, 1.0, 10.0);
 
         if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][13]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 13, 0.05f, 10, false);
+            this->animateValue(false, this->scene_item_selected, 13, 0.5f, 10, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate shininess");
         ImGui::SameLine(); ImGui::SliderFloat("Shininess", &this->scene_item_settings[this->scene_item_selected][13]->oValue, 0.0, 10.0);

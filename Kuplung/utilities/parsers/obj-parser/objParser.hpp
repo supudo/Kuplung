@@ -76,7 +76,7 @@ private:
     // The emission constant color of the material
     std::regex regex_materialEmissionColor;
     // Specifies the specular exponent for the current material. This defines the focus of the specular highlight.
-    std::regex regex_materialShininess;
+    std::regex regex_materialSpecularExp;
     // Specifies the dissolve for the current material.  Tr or d, depending on the formats. Transperancy
     std::regex regex_materialTransperant1;
     std::regex regex_materialTransperant2;

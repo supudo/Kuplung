@@ -75,10 +75,10 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
     vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
     if (material.has_texture_specular) {
         vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-        return specular * texturedColor_Specular.rgb;
+        return specular * texturedColor_Specular.rgb * material.shininess;
     }
     else
-        return specular * material.specular;
+        return specular * material.specular * material.shininess;
 }
 
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {

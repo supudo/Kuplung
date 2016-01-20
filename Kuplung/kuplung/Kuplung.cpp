@@ -628,7 +628,6 @@ void Kuplung::processParsedObjFile() {
             this->gui->setModelVSetting((int)i, 14, glm::vec3(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b));
             this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b));
             this->gui->setModelVSetting((int)i, 16, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));
-            this->gui->setModelVSetting((int)i, 17, glm::vec3(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b));
         }
         //this->gui->showSceneStats();
     }

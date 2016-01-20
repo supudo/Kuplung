@@ -28,10 +28,10 @@ struct objMaterial {
 
     objMaterialColor ambient, diffuse, specular, emission;
 
-    float shininess;
+    float specularExp;
     float transparency;
     unsigned int illumination;
-    float opticalDensity;
+    float opticalDensity; // shininess
 
     objMaterialImage textures_ambient;
     objMaterialImage textures_diffuse;

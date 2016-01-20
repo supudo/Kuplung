@@ -43,7 +43,7 @@ void objParser::init(std::function<void(std::string)> doLog, std::function<void(
     this->regex_materialDiffuseColor = "^Kd\\s.*";
     this->regex_materialSpecularColor = "^Ks\\s.*";
     this->regex_materialEmissionColor = "^Ke\\s.*";
-    this->regex_materialShininess = "^Ns\\s.*";
+    this->regex_materialSpecularExp = "^Ns\\s.*";
     this->regex_materialTransperant1 = "^Tr\\s.*";
     this->regex_materialTransperant2 = "^d\\s.*";
     this->regex_materialOpticalDensity = "^Ni\\s.*";
@@ -255,7 +255,7 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
             if (std::regex_match(singleLine, this->regex_materialNew)) {
                 objMaterial entityMaterial;
                 entityMaterial.materialID = std::accumulate(begin(lineElements), end(lineElements), entityMaterial.materialID);
-                entityMaterial.shininess = -1.0;
+                entityMaterial.specularExp = -1.0;
                 entityMaterial.transparency = -1.0;
                 entityMaterial.illumination = -1.0;
                 entityMaterial.opticalDensity = -1.0;
@@ -291,8 +291,8 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 materials[indexMaterial].emission.b = points[2];
                 materials[indexMaterial].emission.a = 1.0;
             }
-            else if (std::regex_match(singleLine, this->regex_materialShininess))
-                materials[indexMaterial].shininess = std::stof(lineElements[0]);
+            else if (std::regex_match(singleLine, this->regex_materialSpecularExp))
+                materials[indexMaterial].specularExp = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialTransperant1) || std::regex_match(singleLine, this->regex_materialTransperant2))
                 materials[indexMaterial].transparency = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialOpticalDensity))
