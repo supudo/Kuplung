@@ -36,7 +36,7 @@ struct objMaterial {
     objMaterialImage textures_ambient;
     objMaterialImage textures_diffuse;
     objMaterialImage textures_specular;
-    objMaterialImage textures_shininess;
+    objMaterialImage textures_specularExp;
     objMaterialImage textures_dissolve;
 };
 
@@ -49,7 +49,7 @@ struct objModelFace {
     int normalsCount;
     int indicesCount;
     objMaterial faceMaterial;
-    
+
     std::vector<float> vertices;
     std::vector<float> texture_coordinates;
     std::vector<float> normals;
@@ -64,7 +64,7 @@ struct objModel {
     int textureCoordinatesCount;
     int normalsCount;
     int indicesCount;
-    
+
     std::vector<objModelFace> faces;
 };
 
@@ -74,7 +74,7 @@ struct objScene {
     int totalCountNormalVertices;
     int totalCountIndices;
     int totalCountFaces;
-    
+
     std::vector<objModel> models;
     std::vector<objMaterial> materials;
 };

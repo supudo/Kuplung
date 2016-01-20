@@ -306,7 +306,7 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecular))
                 materials[indexMaterial].textures_specular = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecularExp))
-                materials[indexMaterial].textures_shininess = this->parseTextureImage(cleanLine);
+                materials[indexMaterial].textures_specularExp = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDissolve))
                 materials[indexMaterial].textures_dissolve = this->parseTextureImage(cleanLine);
 

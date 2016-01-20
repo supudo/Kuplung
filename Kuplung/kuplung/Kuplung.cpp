@@ -555,11 +555,12 @@ void Kuplung::initSceneGUI() {
 //    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
+    std::string testObj = "cube0.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
-    fileTestbed.title = "rrobot_small.obj";
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/rrobot_small.obj";
+    fileTestbed.title = testObj;
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
     this->guiProcessObjFile(fileTestbed);
 }
 

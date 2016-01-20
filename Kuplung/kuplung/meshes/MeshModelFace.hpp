@@ -92,8 +92,8 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboTextureColor, vboIndices;
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureShiness, vboTextureDissolve;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
+    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
 
     GLuint glVS_MVPMatrix, glFS_MMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal;
@@ -112,8 +112,8 @@ private:
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_Emission;
     GLuint glMaterial_Shininess, glMaterial_Refraction;
-    GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerColor;
-    GLuint glMaterial_SamplerSpecular, glMaterial_SamplerDissolve;
+    GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
+    GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

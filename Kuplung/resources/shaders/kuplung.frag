@@ -4,7 +4,7 @@ uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
 uniform vec3 fs_outlineColor;
 
-struct Material {
+struct ModelMaterial {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -15,8 +15,8 @@ struct Material {
 
     sampler2D sampler_ambient; // map_Ka
     sampler2D sampler_diffuse; // map_Kd
-    sampler2D sampler_color; // map_Ks
-    sampler2D sampler_specular; // map_Ns
+    sampler2D sampler_specular; // map_Ks
+    sampler2D sampler_specularExp; // map_Ns
     sampler2D sampler_dissolve; // map_d
 };
 
@@ -40,7 +40,7 @@ in float fs_isBorder;
 out vec4 fragColor;
 
 uniform Light directionalLight[1];
-uniform Material material;
+uniform ModelMaterial material;
 
 // https://github.com/planetspace/Overlord/blob/master/Overlord/Rendering/Shaders/Default.frag
 

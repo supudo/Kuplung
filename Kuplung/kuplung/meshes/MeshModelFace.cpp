@@ -184,8 +184,8 @@ bool MeshModelFace::initShaderProgram() {
 
         this->glMaterial_SamplerAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_ambient");
         this->glMaterial_SamplerDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_diffuse");
-        this->glMaterial_SamplerColor = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_color");
         this->glMaterial_SamplerSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
+        this->glMaterial_SamplerSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
         this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
     }
 
@@ -218,6 +218,47 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
         glEnableVertexAttribArray(this->glFS_TextureCoord);
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
+        // ambient texture image
+        if (this->oFace.faceMaterial.textures_ambient.image != "") {
+            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_ambient.image;
+
+            int tWidth, tHeight, tChannels;
+            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+            if (!tPixels)
+                this->doLog("Can't load ambient texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+            else {
+                glGenTextures(1, &this->vboTextureAmbient);
+                glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glGenerateMipmap(GL_TEXTURE_2D);
+
+                GLint textureFormat = 0;
+                switch (tChannels) {
+                    case 1:
+                        textureFormat = GL_LUMINANCE;
+                        break;
+                    case 2:
+                        textureFormat = GL_LUMINANCE_ALPHA;
+                        break;
+                    case 3:
+                        textureFormat = GL_RGB;
+                        break;
+                    case 4:
+                        textureFormat = GL_RGBA;
+                        break;
+                    default:
+                        textureFormat = GL_RGB;
+                        break;
+                }
+                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+                stbi_image_free(tPixels);
+            }
+        }
+
+        // diffuse texture image
         if (this->oFace.faceMaterial.textures_diffuse.image != "") {
             std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
 
@@ -253,7 +294,126 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
                         break;
                 }
                 glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                glUniform1i(this->glMaterial_SamplerDiffuse, 0);
+                stbi_image_free(tPixels);
+            }
+        }
+
+        // specular texture image
+        if (this->oFace.faceMaterial.textures_specular.image != "") {
+            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specular.image;
+
+            int tWidth, tHeight, tChannels;
+            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+            if (!tPixels)
+                this->doLog("Can't load specular texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+            else {
+                glGenTextures(1, &this->vboTextureSpecular);
+                glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glGenerateMipmap(GL_TEXTURE_2D);
+
+                GLint textureFormat = 0;
+                switch (tChannels) {
+                    case 1:
+                        textureFormat = GL_LUMINANCE;
+                        break;
+                    case 2:
+                        textureFormat = GL_LUMINANCE_ALPHA;
+                        break;
+                    case 3:
+                        textureFormat = GL_RGB;
+                        break;
+                    case 4:
+                        textureFormat = GL_RGBA;
+                        break;
+                    default:
+                        textureFormat = GL_RGB;
+                        break;
+                }
+                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+                stbi_image_free(tPixels);
+            }
+        }
+
+        // specular-exp texture image
+        if (this->oFace.faceMaterial.textures_specularExp.image != "") {
+            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specularExp.image;
+
+            int tWidth, tHeight, tChannels;
+            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+            if (!tPixels)
+                this->doLog("Can't load specular-exp texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+            else {
+                glGenTextures(1, &this->vboTextureSpecularExp);
+                glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glGenerateMipmap(GL_TEXTURE_2D);
+
+                GLint textureFormat = 0;
+                switch (tChannels) {
+                    case 1:
+                        textureFormat = GL_LUMINANCE;
+                        break;
+                    case 2:
+                        textureFormat = GL_LUMINANCE_ALPHA;
+                        break;
+                    case 3:
+                        textureFormat = GL_RGB;
+                        break;
+                    case 4:
+                        textureFormat = GL_RGBA;
+                        break;
+                    default:
+                        textureFormat = GL_RGB;
+                        break;
+                }
+                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+                stbi_image_free(tPixels);
+            }
+        }
+
+        // dissolve texture image
+        if (this->oFace.faceMaterial.textures_dissolve.image != "") {
+            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_dissolve.image;
+
+            int tWidth, tHeight, tChannels;
+            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+            if (!tPixels)
+                this->doLog("Can't load dissolve texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+            else {
+                glGenTextures(1, &this->vboTextureDissolve);
+                glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                glGenerateMipmap(GL_TEXTURE_2D);
+
+                GLint textureFormat = 0;
+                switch (tChannels) {
+                    case 1:
+                        textureFormat = GL_LUMINANCE;
+                        break;
+                    case 2:
+                        textureFormat = GL_LUMINANCE_ALPHA;
+                        break;
+                    case 3:
+                        textureFormat = GL_RGB;
+                        break;
+                    case 4:
+                        textureFormat = GL_RGBA;
+                        break;
+                    default:
+                        textureFormat = GL_RGB;
+                        break;
+                }
+                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
                 stbi_image_free(tPixels);
             }
         }
@@ -338,8 +498,35 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
         glUniform3f(this->glMaterial_Emission, this->so_materialEmission.r, this->so_materialEmission.g, this->so_materialEmission.b);
 
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+        if (this->vboTextureAmbient > 0) {
+            glUniform1i(this->glMaterial_SamplerAmbient, 0);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
+        }
+
+        if (this->vboTextureDiffuse > 0) {
+            glUniform1i(this->glMaterial_SamplerDiffuse, 1);
+            glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+        }
+
+        if (this->vboTextureSpecular > 0) {
+            glUniform1i(this->glMaterial_SamplerSpecular, 2);
+            glActiveTexture(GL_TEXTURE2);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
+        }
+
+        if (this->vboTextureSpecularExp > 0) {
+            glUniform1i(this->glMaterial_SamplerSpecularExp, 3);
+            glActiveTexture(GL_TEXTURE3);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
+        }
+
+        if (this->vboTextureDissolve > 0) {
+            glUniform1i(this->glMaterial_SamplerDissolve, 4);
+            glActiveTexture(GL_TEXTURE4);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
+        }
 
         // outlining
         //this->drawOnly();
@@ -348,8 +535,8 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
         this->outlineThree();
 
         // clear texture
-        if (this->vboTextureDiffuse > 0)
-            glBindTexture(GL_TEXTURE_2D, 0);
+//        if (this->vboTextureDiffuse > 0)
+//            glBindTexture(GL_TEXTURE_2D, 0);
 
         glUseProgram(0);
     }
