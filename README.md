@@ -2,4 +2,4 @@
 
 C++/OpenGL Experiments - obj model viewer
 
-![Kuplung](http://github.com/supudo/Kuplung/screenshots/screenshot.png "Kuplung")
+![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot.png "Kuplung")
