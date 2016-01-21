@@ -863,14 +863,14 @@ void GUI::dialogSceneSettings() {
 
     if (ImGui::TreeNode("Illumination")) {
         const char* illum_models_items[] = {
-            "[0] Color on and Ambient off",
+            "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
             "[1] Color on and Ambient on",
             "[2] Highlight on",
             "[3] Reflection on and Ray trace on",
             "[4] Transparency: Glass on\nReflection: Ray trace on",
             "[5] Reflection: Fresnel on and Ray trace on",
             "[6] Transparency: Refraction on\nReflection: Fresnel off and Ray trace on",
-            "[7]Transparency: Refraction on\nReflection: Fresnel on and Ray trace on",
+            "[7] Transparency: Refraction on\nReflection: Fresnel on and Ray trace on",
             "[8] Reflection on and Ray trace off",
             "[9] Transparency: Glass on\nReflection: Ray trace off",
             "[10] Casts shadows onto invisible surfaces"

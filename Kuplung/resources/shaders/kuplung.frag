@@ -111,14 +111,19 @@ void main(void) {
         vec3 specular = calculateSpecular(normalDirection, viewDirection);
 
         // Refraction
+        vec3 processedColorRefraction = (material.emission + ambient + diffuse + specular);
         if (material.refraction > 1.0) {
             vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
-            processedColor_Diffuse = (material.emission + ambient + diffuse + specular) * refraction;
+            processedColorRefraction = processedColorRefraction * refraction;
         }
         else
-            processedColor_Diffuse = (material.emission + ambient + diffuse + specular) * processedColor_Diffuse;
+            processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
 
         // final color
-        fragColor = vec4(processedColor_Diffuse, fs_alpha);
+        if (material.illumination_model == 0)
+            fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
+        else
+            fragColor = vec4(processedColorRefraction, fs_alpha);
+
     }
 }
