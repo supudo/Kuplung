@@ -1,5 +1,7 @@
 # Kuplung
 
+[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung)
+
 C/C++/OpenGL Experiments - obj model viewer
 
 ## Using/Including
