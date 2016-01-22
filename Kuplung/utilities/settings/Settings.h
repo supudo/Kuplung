@@ -29,6 +29,7 @@ public:
     void saveSettings();
     std::string string_format(const std::string fmt_str, ...);
     std::string appFolder();
+    bool isAllowedFileExtension(std::string fileExtension);
 
     int OpenGLMajorVersion, OpenGLMinorVersion, OpenGL_GLSL_Version;
     std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile;
@@ -37,15 +38,15 @@ public:
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
-    
+
 private:
     Settings(){};
     Settings(Settings const&){};
     Settings& operator=(Settings const&);
     static Settings* m_pInstance;
-    
+
     void initSettings();
-    
+
     ConfigUtils *cfgUtils;
 };
 

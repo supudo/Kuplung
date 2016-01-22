@@ -133,3 +133,8 @@ std::string Settings::string_format(const std::string fmt_str, ...) {
     }
     return std::string(formatted.get());
 }
+
+bool Settings::isAllowedFileExtension(std::string fileExtension) {
+    std::string allowedExtensions[] = {".obj"};
+    return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
+}

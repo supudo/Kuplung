@@ -31,10 +31,10 @@ void GUIFileBrowser::draw(const char* title, bool* p_opened) {
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
         ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
-    
+
     if (this->positionX > 0 && this->positionY > 0)
         ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
-    
+
     ImGui::Begin(title, p_opened);
     ImGui::Text("Select OBJ file");
     ImGui::Separator();
@@ -43,11 +43,10 @@ void GUIFileBrowser::draw(const char* title, bool* p_opened) {
 
     ImGui::BeginChild("scrolling");
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
-    
-    
+
     // Basic columns
     ImGui::Columns(4, "fileColumns");
-    
+
     ImGui::Separator();
     ImGui::Text("ID");
     ImGui::NextColumn();
@@ -58,16 +57,16 @@ void GUIFileBrowser::draw(const char* title, bool* p_opened) {
     ImGui::Text("Last Modified");
     ImGui::NextColumn();
     ImGui::Separator();
-    
+
     ImGui::SetColumnOffset(1, 40);
 
     this->drawFiles();
-    
+
     ImGui::Columns(1);
-    
+
     ImGui::Separator();
     ImGui::Spacing();
-    
+
     ImGui::PopStyleVar();
     ImGui::EndChild();
     ImGui::End();
@@ -82,7 +81,7 @@ void GUIFileBrowser::drawFiles() {
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
         std::string filePath = iter->first;
         FBEntity entity = iter->second;
-        
+
         char label[32];
         sprintf(label, "%i", i);
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
@@ -95,31 +94,22 @@ void GUIFileBrowser::drawFiles() {
             }
         }
         ImGui::NextColumn();
-        
-        std::string allowedExtensions[] = {".obj"};
-        bool isAllowedExtension = std::find(std::begin(allowedExtensions), std::end(allowedExtensions), entity.extension) != std::end(allowedExtensions);
-        if (isAllowedExtension) {
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "%s", entity.title.c_str()); ImGui::NextColumn();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "%s", entity.size.c_str()); ImGui::NextColumn();
-            ImGui::TextColored(ImVec4(1.0f, 0.0f, 0.0f, 1.0f), "%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
-        }
-        else {
-            ImGui::Text("%s", entity.title.c_str()); ImGui::NextColumn();
-            ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
-            ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
-        }
-        
+
+        ImGui::Text("%s", entity.title.c_str()); ImGui::NextColumn();
+        ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
+        ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
+
         i += 1;
     }
 }
 
 std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string filePath) {
     std::map<std::string, FBEntity> folderContents;
-    
+
     if (this->log)
         this->logMessage("-- Listing folder contents : " + filePath);
     fs::path currentPath(filePath);
-    
+
     if (fs::is_directory(currentPath)) {
         Settings::Instance()->currentFolder = currentPath.string();
 
@@ -133,21 +123,23 @@ std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string fi
         }
 
         fs::directory_iterator iteratorEnd;
+        bool isAllowedFileExtension;
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 bool dotFile = iteratorFolder->path().filename().string().compare(0, 1, ".") == 0;
                 fs::file_status fileStatus = iteratorFolder->status();
-                if ((fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus)) && !dotFile) {
+                isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
+                if (isAllowedFileExtension && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus)) && !dotFile) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;
                     else if (fs::is_regular_file(fileStatus))
                         entity.isFile = true;
-                    
+
                     entity.title = iteratorFolder->path().filename().string();
                     if (!entity.isFile)
                         entity.title = "<" + entity.title + ">";
-                    
+
                     entity.extension = iteratorFolder->path().extension().string();
 
                     entity.path = iteratorFolder->path().string();
@@ -170,7 +162,7 @@ std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string fi
                     entity.modifiedDate = mds;
 
                     folderContents[entity.path] = entity;
-                    
+
                     if (entity.isFile)
                         this->logMessage(entity.title);
                     else
@@ -183,7 +175,7 @@ std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string fi
         }
     }
     this->logMessage("-- Folder contents end.");
-    
+
     return folderContents;
 }
 
@@ -203,7 +195,7 @@ std::string GUIFileBrowser::convertSize(size_t size) {
         div++;
         size /= 1024;
     }
-    
+
     double size_d = (float)size + (float)rem / 1024.0;
     std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
     return result;
