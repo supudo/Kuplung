@@ -127,8 +127,8 @@ vec4 celShadingColor() {
         sf = step(0.5, sf);
 
     vec3 celAmbient = material.ambient * directionalLight[0].specular * directionalLight[0].strengthSpecular;
-    vec3 celDiffuse = df * material.diffuse * directionalLight[0].diffuse * directionalLight[0].strengthDiffuse;
-    vec3 celSpecular = sf * material.specular * directionalLight[0].specular * directionalLight[0].strengthSpecular;
+    vec3 celDiffuse = df * material.diffuse;// * directionalLight[0].diffuse * directionalLight[0].strengthDiffuse;
+    vec3 celSpecular = sf * material.specular;// * directionalLight[0].specular * directionalLight[0].strengthSpecular;
 
     vec3 color = celAmbient + celDiffuse + celSpecular;
 

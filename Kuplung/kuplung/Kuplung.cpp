@@ -558,7 +558,7 @@ void Kuplung::initSceneGUI() {
 //    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
-    std::string testObj = "cube0.obj";
+    std::string testObj = "trefoil.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
