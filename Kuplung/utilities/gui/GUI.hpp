@@ -63,7 +63,7 @@ public:
     void setModelFSetting(int modelID, int settingID, float fValue);
     void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
 
-    bool isFrame, isProjection, fixedGridWorld, showHeightmap;
+    bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
 
     int gui_item_selected;
     std::map<int, std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
@@ -129,7 +129,7 @@ private:
     void dialogSceneStats();
 
     SDL_Window *sdlWindow;
-    bool isGUIVisible, isLoadingOpen;
+    bool isGUIVisible;
     bool logDebugInfo, showScreenshotWindow, showFileDialog, showOptions, showEditor;
     bool showAppMetrics, showAboutKuplung, showAboutImgui;
     bool displayGUIControls, displaySceneStats, displaySceneSettings;

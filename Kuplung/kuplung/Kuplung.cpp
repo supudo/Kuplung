@@ -187,7 +187,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    if (!this->gui->isMouseOnGUI()) {
+    if (!this->gui->isMouseOnGUI() && !this->gui->isLoadingOpen) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
