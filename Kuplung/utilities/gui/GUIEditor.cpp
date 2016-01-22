@@ -38,7 +38,7 @@ void GUIEditor::init(std::string appPath, int positionX, int positionY, int widt
     this->currentFileName = "";
 }
 
-void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCompile, const char* title, bool* p_opened) {
+void GUIEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
     this->doFileShaderCompile = fileShaderCompile;
 
     if (this->width > 0 && this->height > 0)
@@ -70,6 +70,8 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
                 std::rewind(fp);
                 std::fread(&this->fileContents[0], 1, this->fileContents.size(), fp);
                 std::fclose(fp);
+                if (!this->fileContents.empty())
+                    strcpy(this->guiEditorText, this->fileContents.c_str());
             }
        }
     }
@@ -77,11 +79,7 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
         this->fileContents = "";
 
     int lines = ImGui::GetWindowHeight() / ImGui::GetTextLineHeight();
-
-    if (!this->fileContents.empty()) {
-        strcpy(this->guiEditorText, this->fileContents.c_str());
-        ImGui::InputTextMultiline("##source", this->guiEditorText, IM_ARRAYSIZE(this->guiEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
-    }
+    ImGui::InputTextMultiline("##source", this->guiEditorText, IM_ARRAYSIZE(this->guiEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
 
     ImGui::PopStyleVar();
 
@@ -98,8 +96,9 @@ void GUIEditor::compileShader() {
         if (!shaderSource.empty()) {
             std::string shaderFile = Settings::Instance()->appFolder() + "/shaders/" + GUIEditor_ShaderItems[this->shaderFileIndex];
             std::ofstream fileWrite(shaderFile);
-            fileWrite << this->fileContents;
-            this->doFileShaderCompile(GUIEditor_ShaderItems[this->shaderFileIndex], shaderSource);
+            fileWrite << shaderSource;
+            fileWrite.close();
+            this->doFileShaderCompile(GUIEditor_ShaderItems[this->shaderFileIndex]);
         }
     }
 }

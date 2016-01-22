@@ -45,7 +45,7 @@ public:
     void recentFilesClear();
     void ImGui_Implementation_RenderDrawLists();
     void setHeightmapImage(std::string heightmapImage);
-    void setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile);
+    void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     bool isMouseOnGUI();
 
     void showLoading();
@@ -85,7 +85,7 @@ private:
     std::function<void()> quitApp;
     std::function<void(FBEntity)> processFile;
     std::function<void()> newScene;
-    std::function<void(std::string, std::string)> doFileShaderCompile;
+    std::function<void(std::string)> doFileShaderCompile;
     std::map<int, std::string> sceneModels;
     std::string heightmapImage;
 
@@ -124,7 +124,7 @@ private:
     void resetValuesSceneSettings();
     void animateValue(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
-    void fileEditorSaved(std::string fileName, std::string fileSource);
+    void fileEditorSaved(std::string fileName);
 
     void dialogSceneStats();
 

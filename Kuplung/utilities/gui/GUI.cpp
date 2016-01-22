@@ -287,7 +287,7 @@ void GUI::setHeightmapImage(std::string heightmapImage) {
     }
 }
 
-void GUI::setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile) {
+void GUI::setShaderEditor(std::function<void(std::string)> fileShaderCompile) {
     this->doFileShaderCompile = fileShaderCompile;
 }
 
@@ -473,11 +473,11 @@ void GUI::dialogScreenshot() {
 }
 
 void GUI::dialogEditor() {
-    this->fileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1, std::placeholders::_2), "Editor", &this->showEditor);
+    this->fileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1), "Editor", &this->showEditor);
 }
 
-void GUI::fileEditorSaved(std::string fileName, std::string fileSource) {
-    this->doFileShaderCompile(fileName, fileSource);
+void GUI::fileEditorSaved(std::string fileName) {
+    this->doFileShaderCompile(fileName);
 }
 
 void GUI::dialogLog() {

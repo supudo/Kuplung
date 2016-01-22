@@ -58,10 +58,10 @@ void Settings::initSettings() {
 
     m_pInstance->frameFileBrowser_Width = m_pInstance->cfgUtils->readInt("frameFileBrowser_Width");
     m_pInstance->frameFileBrowser_Height = m_pInstance->cfgUtils->readInt("frameFileBrowser_Height");
-    
+
     m_pInstance->guiClearColor = {70.0 / 255.0, 70.0 / 255.0, 70.0 / 255.0, 255.0 / 255.0};
     m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
-    
+
 #ifdef _WIN32
     m_pInstance->newLineDelimiter = "\r\n";
 #elif defined macintosh // OS 9

@@ -50,8 +50,8 @@ private:
     void doProgress(float value);
     std::string readFile(const char *filePath);
     void processRunningThreads();
-    void setShaderEditor(std::function<void(std::string, std::string)> fileShaderCompile);
-    void guiEditorshaderCompiled(std::string fileName, std::string fileSource);
+    void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
+    void guiEditorshaderCompiled(std::string fileName);
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";

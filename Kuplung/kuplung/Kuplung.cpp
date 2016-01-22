@@ -7,7 +7,6 @@
 //
 
 #include "Kuplung.hpp"
-#include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
@@ -548,7 +547,7 @@ void Kuplung::initSceneGUI() {
     this->lightDot->initShaderProgram();
 
     // GUI Editor - shader compilation
-    this->gui->setShaderEditor(std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1, std::placeholders::_2));
+    this->gui->setShaderEditor(std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1));
 
     // font
 //    FBEntity fontFile;
@@ -678,31 +677,18 @@ void Kuplung::guiClearScreen() {
     }
 }
 
-void Kuplung::guiEditorshaderCompiled(std::string fileName, std::string fileSource) {
-    std::string filePath = Settings::Instance()->appFolder() + "/" + fileName;
-
-#ifdef _WIN32
-    std::string nlDelimiter = "\r\n";
-#elif defined macintosh // OS 9
-    std::string nlDelimiter = "\r";
-#else
-    std::string nlDelimiter = "\n";
-#endif
-    std::ofstream out(filePath);
-    out << fileSource;
-    out.close();
-
+void Kuplung::guiEditorshaderCompiled(std::string fileName) {
     if (fileName.compare(0, 9, "kuplung") == 0) {
     }
     else if (fileName.compare(0, 5, "light") == 0) {
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
-        this->sceneGridHorizontal = new MeshGrid();
+        this->sceneGridHorizontal->destroy();
         this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
         this->sceneGridHorizontal->initShaderProgram();
         this->sceneGridHorizontal->initBuffers(20, true, 1);
 
-        this->sceneGridVertical = new MeshGrid();
+        this->sceneGridVertical->destroy();
         this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
         this->sceneGridVertical->initShaderProgram();
         this->sceneGridVertical->initBuffers(20, false, 1);

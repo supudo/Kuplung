@@ -18,11 +18,11 @@
 class GUIEditor {
 public:
     void init(std::string appPath, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog);
-    void draw(std::function<void(std::string, std::string)> fileShaderCompile, const char* title, bool* p_opened = NULL);
-    
+    void draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened = NULL);
+
 private:
     std::function<void(std::string)> doLog;
-    std::function<void(std::string, std::string)> doFileShaderCompile;
+    std::function<void(std::string)> doFileShaderCompile;
     void logMessage(std::string logMessage);
     void compileShader();
 
