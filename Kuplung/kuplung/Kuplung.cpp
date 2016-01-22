@@ -681,6 +681,17 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
     if (fileName.compare(0, 9, "kuplung") == 0) {
     }
     else if (fileName.compare(0, 5, "light") == 0) {
+        FBEntity file;
+        file.isFile = true;
+        file.extension = ".obj";
+        file.title = "light";
+        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
+        objScene sceneGUILight = this->parser->parse(file);
+        this->meshLight->destroy();
+        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
+        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
+        this->meshLight->initShaderProgram();
+        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
         this->sceneGridHorizontal->destroy();
@@ -694,9 +705,20 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
         this->sceneGridVertical->initBuffers(20, false, 1);
     }
     else if (fileName.compare(0, 4, "axis") == 0) {
+        this->sceneCoordinateSystem->destroy();
+        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
+        this->sceneCoordinateSystem->initShaderProgram();
+        this->sceneCoordinateSystem->initBuffers();
     }
     else if (fileName.compare(0, 4, "dots") == 0) {
+        this->lightDot->destroy();
+        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
+        this->lightDot->initShaderProgram();
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
+        this->terrain->destroy();
+        this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "terrain", Settings::Instance()->OpenGL_GLSL_Version);
+        this->terrain->initShaderProgram();
+        this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
 }
