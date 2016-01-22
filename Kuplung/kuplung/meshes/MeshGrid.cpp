@@ -52,6 +52,7 @@ bool MeshGrid::initShaderProgram() {
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
     std::string shaderFragmentSource = readFile(shaderPath.c_str());
+    printf("%s\n", shaderFragmentSource.c_str());
     shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
     const char *shader_fragment = shaderFragmentSource.c_str();
 

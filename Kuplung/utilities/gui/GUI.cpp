@@ -49,6 +49,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showHeightmap = false;
     this->showEditor = false;
     this->newHeightmap = false;
+    this->scene_celShading = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -726,7 +727,10 @@ void GUI::dialogSceneSettings() {
     ImGui::PopStyleColor(3);
 
     ImGui::TextColored(ImVec4(1, 1, 1, this->so_Alpha), "Alpha Blending");
-    ImGui::SliderFloat("", &this->so_Alpha, 0.0f, 1.0f); // Alpha
+    ImGui::SliderFloat("", &this->so_Alpha, 0.0f, 1.0f);
+    ImGui::Separator();
+
+    ImGui::Checkbox("Cel Shading", &this->scene_celShading);
     ImGui::Separator();
 
     int modelsCount = (int)this->sceneModels.size();

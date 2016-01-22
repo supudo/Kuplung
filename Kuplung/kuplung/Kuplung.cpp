@@ -407,6 +407,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsFOV(this->gui->so_GUI_FOV);
         mmf->setOptionsAlpha(this->gui->so_Alpha);
         mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9]->fValue, this->gui->scene_item_settings[sis][10]->fValue, this->gui->scene_item_settings[sis][11]->fValue));
+        mmf->setOptionsCelShading(this->gui->scene_celShading);
 
         // outlining
         mmf->setOptionsSelected(false);

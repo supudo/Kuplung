@@ -148,6 +148,7 @@ bool MeshModelFace::initShaderProgram() {
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+        this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
         this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
         this->glFS_OutlineColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
@@ -469,6 +470,9 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
             glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
 
+        // cel-shading
+        glUniform1i(this->glFS_CelShading, this->so_celShading);
+
         // camera position
         glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
@@ -505,7 +509,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
 
         if (this->vboTextureAmbient > 0) {
             glUniform1i(this->glMaterial_SamplerAmbient, 1);
-            glUniform1i(this->glMaterial_HasTextureAmbient, true);
+            glUniform1i(this->glMaterial_HasTextureAmbient, 1);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
         }
@@ -674,6 +678,10 @@ void MeshModelFace::setOptionsFOV(float fov) {
 
 void MeshModelFace::setOptionsAlpha(float alpha) {
     this->so_alpha = alpha;
+}
+
+void MeshModelFace::setOptionsCelShading(bool val) {
+    this->so_celShading = val;
 }
 
 void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {

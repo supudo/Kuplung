@@ -3,6 +3,7 @@ uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
 uniform vec3 fs_outlineColor;
+uniform bool fs_celShading;
 
 struct ModelMaterial {
     vec3 ambient;
@@ -88,6 +89,52 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
     return refraction;
 }
 
+float stepmix(float edge0, float edge1, float E, float x) {
+    float T = clamp(0.5 * (x - edge0 + E) / E, 0.0, 1.0);
+    return mix(edge0, edge1, T);
+}
+
+vec4 celShadingColor() {
+    vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
+
+    vec3 N = normalize(eyeSpaceNormal);
+    vec3 L = normalize(directionalLight[0].position);
+    vec3 Eye = vec3(0, 0, 1);
+    vec3 H = normalize(L + Eye);
+
+    float df = max(0.0, dot(N, L));
+    float sf = max(0.0, dot(N, H));
+    sf = pow(sf, material.refraction);
+
+    const float A = 0.1;
+    const float B = 0.3;
+    const float C = 0.6;
+    const float D = 1.0;
+    float E = fwidth(df);
+
+    if (df > A - E && df < A + E) df = stepmix(A, B, E, df);
+    else if (df > B - E && df < B + E) df = stepmix(B, C, E, df);
+    else if (df > C - E && df < C + E) df = stepmix(C, D, E, df);
+    else if (df < A) df = 0.0;
+    else if (df < B) df = B;
+    else if (df < C) df = C;
+    else df = D;
+
+    E = fwidth(sf);
+    if (sf > 0.5 - E && sf < 0.5 + E)
+        sf = smoothstep(0.5 - E, 0.5 + E, sf);
+    else
+        sf = step(0.5, sf);
+
+    vec3 celAmbient = material.ambient * directionalLight[0].specular * directionalLight[0].strengthSpecular;
+    vec3 celDiffuse = df * material.diffuse * directionalLight[0].diffuse * directionalLight[0].strengthDiffuse;
+    vec3 celSpecular = sf * material.specular * directionalLight[0].specular * directionalLight[0].strengthSpecular;
+
+    vec3 color = celAmbient + celDiffuse + celSpecular;
+
+    return vec4(color, fs_alpha);
+}
+
 void main(void) {
     if (fs_isBorder > 0.0) {
         fragColor = vec4(fs_outlineColor, 1.0);
@@ -120,10 +167,13 @@ void main(void) {
             processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
 
         // final color
-        if (material.illumination_model == 0)
-            fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
-        else
-            fragColor = vec4(processedColorRefraction, fs_alpha);
-
+        if (fs_celShading) // cel-shading
+            fragColor = celShadingColor();
+        else {
+            if (material.illumination_model == 0)
+                fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
+            else
+                fragColor = vec4(processedColorRefraction, fs_alpha);
+        }
     }
 }

@@ -9,8 +9,8 @@
 #ifndef MeshModelFace_hpp
 #define MeshModelFace_hpp
 
-#include <functional>
 #include <glm/gtc/matrix_transform.hpp>
+#include <functional>
 #include "utilities/gl/GLIncludes.h"
 #include "utilities/parsers/obj-parser/objObjects.h"
 #include "utilities/gl/GLUtils.hpp"
@@ -29,6 +29,7 @@ public:
     void setOptionsFOV(float fov);
     void setOptionsAlpha(float alpha);
     void setOptionsDisplacement(glm::vec3 displacement);
+    void setOptionsCelShading(bool val);
 
     // light
     void setOptionsLightPosition(glm::vec3 lightPosition);
@@ -71,6 +72,7 @@ private:
 
     // general
     float so_fov, so_alpha;
+    bool so_celShading;
     glm::vec3 so_displacement;
 
     // outline
@@ -101,7 +103,7 @@ private:
 
     // general
     GLuint glGS_GeomDisplacementLocation;
-    GLuint glFS_AlphaBlending, glFS_CameraPosition;
+    GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLuint glFS_OutlineColor, glVS_IsBorder;
     GLuint glFS_ScreenResX, glFS_ScreenResY;
 

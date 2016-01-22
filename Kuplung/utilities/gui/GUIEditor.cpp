@@ -7,6 +7,7 @@
 //
 
 #include "GUIEditor.hpp"
+#include <fstream>
 #include "imgui/imgui_internal.h"
 
 const char* GUIEditor_ShaderItems[] = {
@@ -44,10 +45,10 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
         ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
-    
+
     if (this->positionX > 0 && this->positionY > 0)
         ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
-    
+
     ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
 
     ImGui::Combo("Shader##", &this->shaderFileIndex, GUIEditor_ShaderItems, IM_ARRAYSIZE(GUIEditor_ShaderItems));
@@ -76,17 +77,17 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
         this->fileContents = "";
 
     int lines = ImGui::GetWindowHeight() / ImGui::GetTextLineHeight();
-    
+
     if (!this->fileContents.empty()) {
         strcpy(this->guiEditorText, this->fileContents.c_str());
         ImGui::InputTextMultiline("##source", this->guiEditorText, IM_ARRAYSIZE(this->guiEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
     }
 
     ImGui::PopStyleVar();
-    
+
     ImGui::Separator();
     ImGui::Spacing();
-    
+
     ImGui::EndChild();
     ImGui::End();
 }
@@ -94,8 +95,12 @@ void GUIEditor::draw(std::function<void(std::string, std::string)> fileShaderCom
 void GUIEditor::compileShader() {
     if (this->shaderFileIndex > 0) {
         std::string shaderSource = std::string(this->guiEditorText);
-        if (!shaderSource.empty())
+        if (!shaderSource.empty()) {
+            std::string shaderFile = Settings::Instance()->appFolder() + "/shaders/" + GUIEditor_ShaderItems[this->shaderFileIndex];
+            std::ofstream fileWrite(shaderFile);
+            fileWrite << this->fileContents;
             this->doFileShaderCompile(GUIEditor_ShaderItems[this->shaderFileIndex], shaderSource);
+        }
     }
 }
 
