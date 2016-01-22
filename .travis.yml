@@ -9,3 +9,8 @@ compiler:
 
 before_install:
   - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glfw3 sdl2 glm boost; fi
+
+script:
+  - qmake -project
+  - qmake Kuplung.pro
+  - make
