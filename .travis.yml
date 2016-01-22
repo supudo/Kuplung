@@ -7,9 +7,10 @@ compiler:
   - clang
 
 before_install:
-  - if [ $TRAVIS_OS_NAME == osx ]; then export CXXFLAGS="-std=c++0x -stdlib=libc++" && brew update && brew install glfw3 sdl2 glm qt5 && brew link --force qt5 && brew upgrade boost && brew cleanup boost; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glfw3 sdl2 glm qt5 && brew link --force qt5 && brew upgrade boost && brew cleanup boost; fi
 
 script:
+  - export CXXFLAGS="-std=c++0x -stdlib=libc++" 
   - qmake -project
   - qmake Kuplung.pro -r -spec macx-clang CONFIG+=x86_64
   - make
