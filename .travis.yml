@@ -18,6 +18,9 @@ before_install:
     export LFLAGS="-stdlib=libc++ -mmacosx-version-min=10.7 -arch x86_64"
     ; fi
 
+install:
+  - export CXX="-std=c++11 -stdlib=libc++"; fi
+
 before_script:
   - qmake -project
   - qmake Kuplung.pro -r -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
@@ -37,5 +40,6 @@ script:
       && CPPFLAGS=-I$QTDIR/include
       ;
     fi
+  - export CXX="-std=c++11 -stdlib=libc++"
   - make clean
   - make
