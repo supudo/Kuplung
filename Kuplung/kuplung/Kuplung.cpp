@@ -512,10 +512,8 @@ void Kuplung::initSceneGUI() {
         0, 1, 0,  // up
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
-        0, 0, 5,  // translate
-        1, 0, 0,  // ambient strength
-        1, 0, 0,  // diffuse strength
-        1, 0, 0  // specular strength
+        0, 0, 5,  // translate // 17
+        1, 1, 1  // ambient, diffuse and specular strength
     };
 
     // axis
