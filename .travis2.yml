@@ -1,0 +1,45 @@
+language: cpp
+
+os:
+  - osx
+
+compiler:
+  - gcc
+  - clang
+
+before_install:
+  - if [ $TRAVIS_OS_NAME == osx ]; then
+    brew update
+    && brew install glfw3 sdl2 glm qt5
+    && brew link --force qt5
+    && brew upgrade boost && brew cleanup boost; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then
+    export CXXFLAGS="-std=c++11 -stdlib=libc++"
+    export LFLAGS="-stdlib=libc++ -mmacosx-version-min=10.7 -arch x86_64"
+    ; fi
+
+install:
+  - export CXX="-std=c++11 -stdlib=libc++"; fi
+
+before_script:
+  - qmake -project
+  - qmake Kuplung.pro -r -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
+  # - qmake Kuplung.pro
+
+script:
+  # - if [ $TRAVIS_OS_NAME == osx ]; then
+  #     if [ ${CC} = gcc ]; then
+  #         export CXX=g++-4.8
+  #         export CC=gcc-4.8 ; 
+  #     fi ;
+  # fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then
+      QTDIR="/usr/local/opt/qt5"
+      && PATH="$QTDIR/bin:$PATH"
+      && LDFLAGS=-L$QTDIR/lib
+      && CPPFLAGS=-I$QTDIR/include
+      ;
+    fi
+  - export CXX="-std=c++11 -stdlib=libc++"
+  - make clean
+  - make
