@@ -23,20 +23,21 @@ MeshModelFace::~MeshModelFace() {
 }
 
 void MeshModelFace::destroy() {
-//    glDeleteBuffers(1, &this->vboVertices);
-//    glDeleteBuffers(1, &this->vboNormals);
-//    glDeleteBuffers(1, &this->vboTextureCoordinates);
-//    glDeleteBuffers(1, &this->vboTextureColor);
-//    glDeleteBuffers(1, &this->vboIndices);
-//
-//    if (this->vboTextureAmbient > 0)
-//        glDeleteBuffers(1, &this->vboTextureAmbient);
-//    if (this->vboTextureDiffuse > 0)
-//        glDeleteBuffers(1, &this->vboTextureDiffuse);
-//    if (this->vboTextureSpecular > 0)
-//        glDeleteBuffers(1, &this->vboTextureSpecular);
-//    if (this->vboTextureDissolve > 0)
-//        glDeleteBuffers(1, &this->vboTextureDissolve);
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboTextureCoordinates);
+    glDeleteBuffers(1, &this->vboIndices);
+
+    if (this->vboTextureAmbient > 0)
+        glDeleteBuffers(1, &this->vboTextureAmbient);
+    if (this->vboTextureDiffuse > 0)
+        glDeleteBuffers(1, &this->vboTextureDiffuse);
+    if (this->vboTextureSpecular > 0)
+        glDeleteBuffers(1, &this->vboTextureSpecular);
+    if (this->vboTextureSpecularExp > 0)
+        glDeleteBuffers(1, &this->vboTextureSpecularExp);
+    if (this->vboTextureDissolve > 0)
+        glDeleteBuffers(1, &this->vboTextureDissolve);
 
     glDisableVertexAttribArray(this->glVS_VertexPosition);
     glDisableVertexAttribArray(this->glFS_TextureCoord);
@@ -44,12 +45,20 @@ void MeshModelFace::destroy() {
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
+    glDetachShader(this->shaderProgram, this->shaderGeometry);
+//    glDetachShader(this->shaderProgram, this->shaderTessControl);
+//    glDetachShader(this->shaderProgram, this->shaderTessEval);
     glDeleteProgram(this->shaderProgram);
 
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
+    glDeleteShader(this->shaderGeometry);
+//    glDeleteShader(this->shaderTessControl);
+//    glDeleteShader(this->shaderTessEval);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->oFace = {};
 }
 
 #pragma mark - Initialization

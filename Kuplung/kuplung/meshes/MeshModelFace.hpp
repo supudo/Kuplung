@@ -92,12 +92,14 @@ private:
 
     GLUtils *glUtils;
 
+    // program, shaders, VAO, VBO
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
 
+    // variables
     GLuint glVS_MVPMatrix, glFS_MMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal;
 

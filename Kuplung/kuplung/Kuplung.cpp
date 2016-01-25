@@ -155,14 +155,13 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
 }
 
 void Kuplung::initFolders() {
-    char *data_path = NULL;
-    char *base_path = SDL_GetBasePath();
-    if (base_path)
-        data_path = base_path;
-    else
-        data_path = SDL_strdup("./");
-    Settings::Instance()->currentFolder = data_path;
-    //Settings::Instance()->currentFolder = "/Users/supudo/Software/WebGL/Hypersuit/_project/objects";
+//    char *data_path = NULL;
+//    char *base_path = SDL_GetBasePath();
+//    if (base_path)
+//        data_path = base_path;
+//    else
+//        data_path = SDL_strdup("./");
+//    Settings::Instance()->currentFolder = data_path;
     Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects";
 }
 
@@ -512,7 +511,7 @@ void Kuplung::initSceneGUI() {
         0, 1, 0,  // up
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
-        0, 0, 5,  // translate // 17
+        0, 0, 5,  // translate
         1, 1, 1  // ambient, diffuse and specular strength
     };
 

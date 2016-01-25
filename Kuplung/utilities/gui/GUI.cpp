@@ -227,7 +227,7 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
 
         // illumination model
         setts.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
-        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0))); idx += 1;
+        setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, glm::vec3(0, 0, 0)));
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts_default;
