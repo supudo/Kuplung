@@ -921,8 +921,8 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
 
 void GUI::resetValuesSceneSettings() {
     this->so_Alpha = 1;
-    for (size_t i=0; i<this->scene_item_settings.size(); i++) {
-        for (size_t j=0; j<this->scene_item_settings[i].size(); j++) {
+    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
+        for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
             this->scene_item_settings[i][j]->fValue = this->scene_item_settings_default[i][j]->fValue;
             this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
         }
