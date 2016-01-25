@@ -3,8 +3,8 @@ language: cpp
 os:
   - osx
 
-compiler:
-  - clang
+# compiler:
+#   - clang
 
 matrix:
   include:
@@ -18,17 +18,11 @@ matrix:
       env: COMPILER=clang++-3.7
 
 before_install:
-  - if [ $TRAVIS_OS_NAME == osx ]; then
-    brew update
-    && brew install glm; fi
-  - if [ $TRAVIS_OS_NAME == osx ]; then
-    export CXXFLAGS="-std=c++11 -stdlib=libc++"
-    export LFLAGS="-stdlib=libc++ -mmacosx-version-min=10.7 -arch x86_64"
-    ; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glm; fi
 
 script:
   - qmake -project
-  - qmake Kuplung.pro -r -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
+  - qmake Kuplung.pro -r CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
   - if [ $TRAVIS_OS_NAME == osx ]; then
       QTDIR="/usr/local/opt/qt5"
       && PATH="$QTDIR/bin:$PATH"
@@ -36,6 +30,5 @@ script:
       && CPPFLAGS=-I$QTDIR/include
       ;
     fi
-  - export CXX="-std=c++11 -stdlib=libc++"
   - make clean
   - make
