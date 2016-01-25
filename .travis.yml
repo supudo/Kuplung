@@ -6,6 +6,12 @@ os:
 compiler:
   - clang
 
+env:
+  - LDFLAGS =  -L/usr/local/opt/qt5/lib
+  - CPPFLAGS = -I/usr/local/opt/qt5/include
+  - std = c++11
+  - stdlib = libc++
+
 before_install:
   - if [ $TRAVIS_OS_NAME == osx ]; then
     brew update
