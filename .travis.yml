@@ -21,15 +21,15 @@ before_install:
 before_script:
   - qmake -project
   - qmake Kuplung.pro -r -spec macx-clang CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
-#  - qmake Kuplung.pro
+  # - qmake Kuplung.pro
 
 script:
-  - if [ $TRAVIS_OS_NAME == osx ]; then
-      if [[ ${CC} = gcc ]]; then
-          export CXX=g++-4.8
-          export CC=gcc-4.8
-      ; fi
-  ; fi
+  # - if [ $TRAVIS_OS_NAME == osx ]; then
+  #     if [ ${CC} = gcc ]; then
+  #         export CXX=g++-4.8
+  #         export CC=gcc-4.8 ; 
+  #     fi ;
+  # fi
   - if [ $TRAVIS_OS_NAME == osx ]; then
       QTDIR="/usr/local/opt/qt5"
       && PATH="$QTDIR/bin:$PATH"
