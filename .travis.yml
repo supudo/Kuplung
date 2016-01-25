@@ -7,7 +7,7 @@ compiler:
   - gcc
 
 before_install:
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install gcc glfw3 sdl2 glm qt5 && brew link --force qt5 && brew upgrade boost && brew cleanup boost; fi
+  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glfw3 sdl2 glm qt5 && brew link --force qt5 && brew upgrade boost && brew cleanup boost; fi
   - if [ $TRAVIS_OS_NAME == osx ]; then export CXXFLAGS="-std=c++11 -stdlib=libc++"; fi
   - if [ "$CXX" = "g++" ]; then export CXX="g++-4.8" CC="gcc-5"; fi
 
