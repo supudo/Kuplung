@@ -5,6 +5,7 @@ CONFIG += app_bundle
 CONFIG -= console
 CONFIG -= qt
 
+QMAKE_CXXFLAGS += -std=c++11
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
 QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter

@@ -512,7 +512,7 @@ void Kuplung::initSceneGUI() {
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
         0, 0, 5,  // translate
-        1, 1, 1  // ambient, diffuse and specular strength
+        0.4, 1, 1  // ambient, diffuse and specular strength
     };
 
     // axis
@@ -555,7 +555,7 @@ void Kuplung::initSceneGUI() {
 //    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
-    std::string testObj = "trefoil.obj";
+    std::string testObj = "_red_planet.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
