@@ -75,7 +75,7 @@ private:
     GUI *gui;
     objParser *parser;
     FNTParser *fontParser;
-    objScene scene;
+    std::vector<objScene> scenes;
     std::vector<MeshModelFace*> meshModelFaces;
     MeshLight* meshLight;
     MeshGrid* sceneGridHorizontal;

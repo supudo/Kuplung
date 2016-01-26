@@ -391,21 +391,24 @@ void Kuplung::renderScene() {
         // reposition like the grid perspective
         mtxModel *= mtxModelGrid;
 
+        // scale
         mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][0]->fValue, this->gui->scene_item_settings[sis][1]->fValue, this->gui->scene_item_settings[sis][2]->fValue));
 
+        // rotate
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
         mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][3]->fValue), glm::vec3(1, 0, 0));
         mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][4]->fValue), glm::vec3(0, 1, 0));
         mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][5]->fValue), glm::vec3(0, 0, 1));
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
+        // translate
         mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][6]->fValue, this->gui->scene_item_settings[sis][7]->fValue, this->gui->scene_item_settings[sis][8]->fValue));
 
         // general
         mmf->setOptionsFOV(this->gui->so_GUI_FOV);
         mmf->setOptionsAlpha(this->gui->so_Alpha);
         mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9]->fValue, this->gui->scene_item_settings[sis][10]->fValue, this->gui->scene_item_settings[sis][11]->fValue));
-        mmf->setOptionsCelShading(this->gui->scene_celShading);
+        mmf->setOptionsCelShading(this->gui->scene_item_settings[sis][19]->bValue);
 
         // outlining
         mmf->setOptionsSelected(false);
@@ -579,8 +582,8 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
         this->objFile = file;
         this->gui->showLoading();
 
-        if (this->scene.totalCountGeometricVertices > 0)
-            this->guiClearScreen();
+//        if (this->scene.totalCountGeometricVertices > 0)
+//            this->guiClearScreen();
 
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
@@ -594,7 +597,7 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
 
 void Kuplung::processObjFileAsync(FBEntity file) {
     //std::this_thread::sleep_for(std::chrono::seconds(5));
-    this->scene = this->parser->parse(file);
+    this->scenes.push_back(this->parser->parse(file));
     this->objFile = file;
     this->objParserThreadFinished = true;
 }
@@ -603,25 +606,29 @@ void Kuplung::processParsedObjFile() {
     this->doLog(this->objFile.title + " was parsed successfully.");
     this->gui->recentFilesAdd(this->objFile.title, this->objFile);
 
+    this->meshModelFaces = {};
     int scene_models_counter = 0;
     std::map<int, std::string> scene_models;
-    for (int i=0; i<(int)this->scene.models.size(); i++) {
-        objModel model = this->scene.models[i];
-        for (size_t j=0; j<model.faces.size(); j++) {
-            MeshModelFace *mmf = new MeshModelFace();
-            mmf->ModelID = i;
-            mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
-            mmf->setModel(model.faces[j]);
-            mmf->initShaderProgram();
-            mmf->initBuffers(Settings::Instance()->currentFolder);
-            this->meshModelFaces.push_back(mmf);
-            scene_models[scene_models_counter] = model.modelID + " - " + mmf->oFace.materialID;;
-            scene_models_counter += 1;
+    for (int s=0; s<(int)this->scenes.size(); s++) {
+        objScene scene = this->scenes[s];
+        for (int i=0; i<(int)scene.models.size(); i++) {
+            objModel model = scene.models[i];
+            for (size_t j=0; j<model.faces.size(); j++) {
+                MeshModelFace *mmf = new MeshModelFace();
+                mmf->ModelID = i;
+                mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+                mmf->setModel(model.faces[j]);
+                mmf->initShaderProgram();
+                mmf->initBuffers(Settings::Instance()->currentFolder);
+                this->meshModelFaces.push_back(mmf);
+                scene_models[scene_models_counter] = model.modelID + " - " + mmf->oFace.materialID;;
+                scene_models_counter += 1;
+            }
         }
     }
 
     // render scene stats
-    if (this->scene.models.size() > 0) {
+    if (this->meshModelFaces.size() > 0) {
         this->gui->showSceneSettings(scene_models);
         for (size_t i=0; i<this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
@@ -664,7 +671,7 @@ void Kuplung::doLog(std::string logMessage) {
 }
 
 void Kuplung::guiClearScreen() {
-    this->scene = {};
+    this->scenes = {};
     this->meshModelFaces = {};
     this->gui->hideSceneSettings();
     this->gui->hideSceneStats();

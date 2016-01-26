@@ -29,6 +29,7 @@ struct GUIObjectSetting {
     bool oAnimate;
     int iValue;
     float fValue;
+    bool bValue;
     glm::vec3 vValue;
 };
 
@@ -72,7 +73,6 @@ public:
 
     float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
-    bool scene_celShading;
     int so_GUI_grid_size = 10;
     glm::vec3 so_GUI_outlineColor;
     float loadingPercentage;
@@ -117,7 +117,9 @@ private:
     void dialogHeightmap();
     void dialogEditor();
 
-    GUIObjectSetting* addSceneSettingsObject(int idx, float oValue, glm::vec3 vValue);
+    GUIObjectSetting* addSceneSettingsObjectF(int idx, float fValue);
+    GUIObjectSetting* addSceneSettingsObjectB(int idx, bool bValue);
+    GUIObjectSetting* addSceneSettingsObjectV(int idx, glm::vec3 vValue);
     void dialogGUIControls();
     void resetValuesGUIControls();
     void dialogSceneSettings();
