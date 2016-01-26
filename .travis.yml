@@ -1,10 +1,5 @@
 language: cpp
-
-os:
-  - osx
-
-# compiler:
-#   - clang
+os: osx
 
 matrix:
   include:
@@ -21,12 +16,11 @@ before_install:
   - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glm; fi
 
 script:
-  - pwd
   - qmake -project
   - qmake Kuplung.pro -r CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
   - if [ $TRAVIS_OS_NAME == osx ]; then
       QTDIR="/usr/local/opt/qt5"
-      && PATH="$QTDIR/bin:/home/travis/build/supudo/Kuplung/Kuplung:$PATH"
+      && PATH="$QTDIR/bin:$PATH"
       && LDFLAGS=-L$QTDIR/lib
       && CPPFLAGS=-I$QTDIR/include
       ;
