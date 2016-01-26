@@ -31,4 +31,5 @@ script:
       ;
     fi
   - make clean
+  - cd Kuplung
   - make
