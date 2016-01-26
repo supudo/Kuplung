@@ -40,24 +40,18 @@ mac {
   QMAKE_BUNDLE_DATA += MediaFiles
 
   LIBS += -framework cocoa -framework OpenGL
-  LIBS += -llibboost_system -llibboost_filesystem -lSDL2 -lGLFW3
+
+  LIBS += -L/usr/local/Cellar/boost/1.60.0_1/lib -lboost_system -lboost_filesystem
+  INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_1/include
+
   LIBS += -L/usr/local/Cellar/glm/0.9.7.1/lib
+  INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.1/include
 
-  INCLUDEPATH += -I"$$PWD"
-  INCLUDEPATH += -I/usr/local/include
-  INCLUDEPATH += -L/usr/local/Cellar/glm/0.9.7.1/include
+  LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
+  INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
 
-#  LIBS += -L/usr/local/Cellar/boost/1.60.0_1/lib -lboost_system -lboost_filesystem
-#  INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_1/include
-
-#  LIBS += -L/usr/local/Cellar/glm/0.9.7.1/lib
-#  INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.1/include
-
-#  LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
-#  INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
-
-#  LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
-#  INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
+  LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
+  INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
 
   LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
   INCLUDEPATH += "$$PWD/../external/libnoise/headers"

@@ -11,7 +11,7 @@
 #include "FNTParser.hpp"
 #include <sstream>
 #include <fstream>
-#include <boost/algorithm/string.hpp>
+//#include <boost/algorithm/string.hpp>
 
 FNTParser::~FNTParser() {
     this->destroy();
@@ -22,10 +22,10 @@ void FNTParser::destroy() {
 
 void FNTParser::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
-    
+
     this->regex_whiteSpace = "\\s";
     this->regex_equals = "=";
-    
+
     this->regex_info = "^info.*";
     this->regex_common = "^common.*";
     this->regex_page = "^page.*";
@@ -35,32 +35,32 @@ void FNTParser::init(std::function<void(std::string)> doLog) {
 
 FontMap FNTParser::parse(FBEntity file) {
     this->fm = {};
-    
+
     std::ifstream ifs(file.path.c_str());
     if (ifs.good()) {
-    
+
         while (!ifs.eof()) {
             unsigned int i = 0;
             std::stringstream lineStream;
             std::string tag, pair, key, value;
             std::string line;
-            
+
             std::getline(ifs, line);
             lineStream << line;
             lineStream >> tag;
-            
+
             if (tag == "info") {
                 std::vector<std::string> lineElements = this->splitString(line, this->regex_equals);
                 if (lineElements.size() >= 2) {
                     std::size_t found = lineElements[1].rfind(" ");
                     std::string fontName = lineElements[1].substr(0, found);
-                    boost::erase_all(fontName, "\"");
-                    this->fm.fontName = fontName;
-                    std::string nf = "info font=\"" + fontName + "\" ";
-                    boost::erase_all(line, nf);
+//                    boost::erase_all(fontName, "\"");
+//                    this->fm.fontName = fontName;
+//                    std::string nf = "info font=\"" + fontName + "\" ";
+//                    boost::erase_all(line, nf);
                     break;
                 }
-                
+
                 //font="Apple Braille" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=2,2,2,2 spacing=2,2
                 while (!lineStream.eof()) {
                     lineStream >> pair;
@@ -69,7 +69,7 @@ FontMap FNTParser::parse(FBEntity file) {
                     value = pair.substr(i + 1);
                     std::stringstream converter;
                     converter << value;
-                    
+
                     if (key == "size")
                         converter >> this->fm.size;
                     else if (key == "bold")
@@ -117,7 +117,7 @@ FontMap FNTParser::parse(FBEntity file) {
                     value = pair.substr(i + 1);
                     std::stringstream converter;
                     converter << value;
-                    
+
                     if (key == "lineHeight")
                         converter >> this->fm.lineHeight;
                     else if (key == "base")
@@ -141,11 +141,11 @@ FontMap FNTParser::parse(FBEntity file) {
                     value = pair.substr(i + 1);
                     std::stringstream converter;
                     converter << value;
-                    
+
                     if (key == "id")
                         converter >> this->fm.pageid;
                     else if (key == "file") {
-                        boost::erase_all(value, "\"");
+//                        boost::erase_all(value, "\"");
                         this->fm.file = value;
                     }
                 }
@@ -159,7 +159,7 @@ FontMap FNTParser::parse(FBEntity file) {
                     value = pair.substr(i + 1);
                     std::stringstream converter;
                     converter << value;
-                    
+
                     if (key == "count")
                         converter >> this->fm.count;
                 }
@@ -174,7 +174,7 @@ FontMap FNTParser::parse(FBEntity file) {
                     value = pair.substr(i + 1);
                     std::stringstream converter;
                     converter << value;
-                    
+
                     if (key == "id")
                         converter >> fmc.id;
                     else if (key == "x")
@@ -202,7 +202,7 @@ FontMap FNTParser::parse(FBEntity file) {
             }
         }
     }
-    
+
     return this->fm;
 }
 
