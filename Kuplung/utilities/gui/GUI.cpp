@@ -329,18 +329,6 @@ void GUI::renderStart(bool isFrame) {
             }
 
             ImGui::Separator();
-
-            ImGui::MenuItem("Editor", NULL, &this->showEditor);
-            ImGui::MenuItem("Screenshot", NULL, &this->showScreenshotWindow);
-
-            if (ImGui::BeginMenu("Settings")) {
-                ImGui::MenuItem("Show Log Window", NULL, &Settings::Instance()->logDebugInfo);
-                ImGui::Separator();
-                ImGui::MenuItem("Options", NULL, &this->showOptions);
-                ImGui::EndMenu();
-            }
-
-            ImGui::Separator();
 #ifdef _WIN32
             if (ImGui::MenuItem("Quit", "Alt+F4"))
 #else
@@ -351,16 +339,11 @@ void GUI::renderStart(bool isFrame) {
         }
 
         if (ImGui::BeginMenu("Scene")) {
-            if (this->isProjection)
-                ImGui::MenuItem("Projection perspective", NULL, &this->isProjection);
-            else
-                ImGui::MenuItem("Orthographic perspective", NULL, &this->isProjection);
+            ImGui::MenuItem("Display Terrain", NULL, &this->showHeightmap);
+            ImGui::EndMenu();
+        }
 
-            if (Settings::Instance()->wireframesMode)
-                ImGui::MenuItem("Wireframes mode", NULL, &Settings::Instance()->wireframesMode);
-            else
-                ImGui::MenuItem("Fill mode", NULL, &Settings::Instance()->wireframesMode);
-
+        if (ImGui::BeginMenu("View")) {
             if (Settings::Instance()->showGrid)
                 ImGui::MenuItem("Hide Grid", NULL, &Settings::Instance()->showGrid);
             else
@@ -377,9 +360,14 @@ void GUI::renderStart(bool isFrame) {
                 ImGui::MenuItem("Show Axes", NULL, &Settings::Instance()->showAxes);
             ImGui::Separator();
             ImGui::MenuItem("GUI Controls", NULL, &this->displayGUIControls);
-            ImGui::MenuItem("Scene Settings", NULL, &this->displaySceneSettings);
+            ImGui::MenuItem("Scene Controls", NULL, &this->displaySceneSettings);
+            ImGui::Separator();
+            ImGui::MenuItem("Show Log Window", NULL, &Settings::Instance()->logDebugInfo);
+            ImGui::MenuItem("Editor", NULL, &this->showEditor);
+            ImGui::MenuItem("Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem("Scene Statistics", NULL, &this->displaySceneStats);
-            ImGui::MenuItem("Display Terrain", NULL, &this->showHeightmap);
+            ImGui::Separator();
+            ImGui::MenuItem("Options", NULL, &this->showOptions);
             ImGui::EndMenu();
         }
 
