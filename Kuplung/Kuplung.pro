@@ -43,6 +43,7 @@ mac {
   LIBS += -llibboost_system -llibboost_filesystem -lSDL2 -lGLFW3
   LIBS += -L/usr/local/Cellar/glm/0.9.7.1/lib
 
+  INCLUDEPATH += -I"$$PWD"
   INCLUDEPATH += -I/usr/local/include
   INCLUDEPATH += -L/usr/local/Cellar/glm/0.9.7.1/include
 
