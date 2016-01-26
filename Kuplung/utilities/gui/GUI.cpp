@@ -218,7 +218,7 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
         setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
         setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
         setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1; // 0
+        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
 
         // specular exp
         setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
@@ -226,11 +226,15 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
 
         // illumination model
         setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
 
         // cel-shading
         setts.push_back(this->addSceneSettingsObjectB(idx, false));
         setts_default.push_back(this->addSceneSettingsObjectB(idx, false)); idx += 1;
+
+        // alpha
+        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0));
 
         this->scene_item_settings[i] = setts;
         this->scene_item_settings_default[i] = setts_default;
@@ -576,6 +580,7 @@ void GUI::dialogGUIControls() {
         this->resetValuesGUIControls();
     ImGui::PopStyleColor(3);
 
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
     if (ImGui::CollapsingHeader("General")) {
         ImGui::Text("Field of view");
         ImGui::SliderFloat("FOV", &this->so_GUI_FOV, 0.0f, 180.0f);
@@ -701,6 +706,7 @@ void GUI::dialogGUIControls() {
 
         ImGui::TreePop();
     }
+    ImGui::PopItemWidth();
 
     ImGui::End();
 }
@@ -737,11 +743,6 @@ void GUI::dialogSceneSettings() {
     if (ImGui::Button("Reset Scene Settings Values"))
         this->resetValuesSceneSettings();
     ImGui::PopStyleColor(3);
-
-    ImGui::TextColored(ImVec4(1, 1, 1, this->so_Alpha), "Alpha Blending");
-    ImGui::SliderFloat("", &this->so_Alpha, 0.0f, 1.0f);
-    ImGui::Separator();
-
     ImGui::Separator();
 
     int modelsCount = (int)this->sceneModels.size();
@@ -750,9 +751,16 @@ void GUI::dialogSceneSettings() {
         scene_items[i] = this->sceneModels[i].c_str();
     }
 
-    ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items)); // Scene Model
+    // Scene Model
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.85f);
+    ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
 
+    // cel shading
     ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
+
+    // alpha
+    ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
+    ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
 
     if (ImGui::TreeNode("Scale")) {
         if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
@@ -884,18 +892,19 @@ void GUI::dialogSceneSettings() {
             "[1] Color on and Ambient on",
             "[2] Highlight on",
             "[3] Reflection on and Ray trace on",
-            "[4] Transparency: Glass on\nReflection: Ray trace on",
-            "[5] Reflection: Fresnel on and Ray trace on",
-            "[6] Transparency: Refraction on\nReflection: Fresnel off and Ray trace on",
-            "[7] Transparency: Refraction on\nReflection: Fresnel on and Ray trace on",
-            "[8] Reflection on and Ray trace off",
-            "[9] Transparency: Glass on\nReflection: Ray trace off",
+            "[4] Transparency: Glass on\n    Reflection: Ray trace on",
+            "[5] Reflection: Fresnel on\n    Ray trace on",
+            "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
+            "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
+            "[8] Reflection on\n    Ray trace off",
+            "[9] Transparency: Glass on\n    Reflection: Ray trace off",
             "[10] Casts shadows onto invisible surfaces"
         };
         ImGui::Combo("##987", &this->scene_item_settings[this->scene_item_selected][18]->iValue, illum_models_items, IM_ARRAYSIZE(illum_models_items));
 
         ImGui::TreePop();
     }
+    ImGui::PopItemWidth();
 
     ImGui::End();
 }
