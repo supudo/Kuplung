@@ -21,6 +21,7 @@ before_install:
   - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glm; fi
 
 script:
+  - pwd
   - qmake -project
   - qmake Kuplung.pro -r CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
   - if [ $TRAVIS_OS_NAME == osx ]; then
@@ -31,5 +32,4 @@ script:
       ;
     fi
   - make clean
-  - cd Kuplung
   - make
