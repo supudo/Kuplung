@@ -558,7 +558,7 @@ void Kuplung::initSceneGUI() {
 //    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
-    std::string testObj = "_red_planet.obj";
+    std::string testObj = "skylab.obj"; // _red_planet
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";

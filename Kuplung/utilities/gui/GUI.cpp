@@ -458,11 +458,11 @@ void GUI::renderStart(bool isFrame) {
     if (this->isLoadingOpen)
         ImGui::OpenPopup("Kuplung");
     if (ImGui::BeginPopupModal("Kuplung", &this->isLoadingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
-        ImGui::Text("\n\n");
-        ImGui::Text("    Processing ... \n");
-        if (this->loadingPercentage > 0.0)
-            ImGui::Text("       %0.2f%%         \n", this->loadingPercentage);
-        ImGui::Text("\n\n");
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+        ImGui::Text("Processing ... %0.2f%%\n", this->loadingPercentage);
+        ImGui::ProgressBar(this->loadingPercentage / 100.0, ImVec2(0.0f, 0.0f));
+        ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
+        ImGui::PopStyleColor(1);
         ImGui::EndPopup();
     }
 
