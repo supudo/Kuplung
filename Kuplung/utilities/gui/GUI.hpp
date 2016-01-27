@@ -56,6 +56,7 @@ public:
     void showGUIControls();
     void hideGUIControls();
     void showSceneSettings(std::map<int, std::string> scene_models);
+    void addSceneModelSettings(std::string sceneModel);
     void hideSceneSettings();
     void showSceneStats();
     void hideSceneStats();
@@ -64,7 +65,9 @@ public:
     void setModelFSetting(int modelID, int settingID, float fValue);
     void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
 
+    std::map<int, std::string> sceneModels;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
+    bool displayGUIControls, displaySceneStats, displaySceneSettings;
 
     int gui_item_selected;
     std::map<int, std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
@@ -86,7 +89,6 @@ private:
     std::function<void(FBEntity)> processFile;
     std::function<void()> newScene;
     std::function<void(std::string)> doFileShaderCompile;
-    std::map<int, std::string> sceneModels;
     std::string heightmapImage;
 
     bool ImGui_SDL2GL21_Implementation_Init();
@@ -134,7 +136,6 @@ private:
     bool isGUIVisible;
     bool logDebugInfo, showScreenshotWindow, showFileDialog, showOptions, showEditor;
     bool showAppMetrics, showAboutKuplung, showAboutImgui;
-    bool displayGUIControls, displaySceneStats, displaySceneSettings;
     bool showDemoWindow, newHeightmap;
 
     GUILog *windowLog;

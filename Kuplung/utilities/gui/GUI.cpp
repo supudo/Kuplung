@@ -243,6 +243,82 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->displaySceneSettings = true;
 }
 
+void GUI::addSceneModelSettings(std::string sceneModel) {
+    std::vector<GUIObjectSetting*> setts = {};
+    std::vector<GUIObjectSetting*> setts_default = {};
+
+    int idx = 0;
+
+    // scale
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // rotate
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // translate
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // displacement
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // refraction
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // material
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
+
+    // specular exp
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // illumination model
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+
+    // cel-shading
+    setts.push_back(this->addSceneSettingsObjectB(idx, false));
+    setts_default.push_back(this->addSceneSettingsObjectB(idx, false)); idx += 1;
+
+    // alpha
+    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+
+    idx = (int)this->scene_item_settings.size();
+    this->scene_item_settings[idx] = setts;
+    this->scene_item_settings_default[idx] = setts_default;
+
+    idx = (int)this->sceneModels.size();
+    this->sceneModels[idx] = sceneModel;
+}
+
 GUIObjectSetting* GUI::addSceneSettingsObjectF(int idx, float fValue) {
     GUIObjectSetting *gos = new GUIObjectSetting();
     gos->oIndex = idx;
@@ -752,7 +828,7 @@ void GUI::dialogSceneSettings() {
     }
 
     // Scene Model
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.85f);
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
 
     // cel shading

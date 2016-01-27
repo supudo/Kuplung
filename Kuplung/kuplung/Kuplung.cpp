@@ -607,30 +607,28 @@ void Kuplung::processParsedObjFile() {
 
     // TODO: preserve already loaded model settings by preserving the models collections
 
-    this->meshModelFaces = {};
-    int scene_models_counter = 0;
-    std::map<int, std::string> scene_models;
-    for (int s=0; s<(int)this->scenes.size(); s++) {
-        objScene scene = this->scenes[s];
-        for (int i=0; i<(int)scene.models.size(); i++) {
-            objModel model = scene.models[i];
-            for (size_t j=0; j<model.faces.size(); j++) {
-                MeshModelFace *mmf = new MeshModelFace();
-                mmf->ModelID = i;
-                mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
-                mmf->setModel(model.faces[j]);
-                mmf->initShaderProgram();
-                mmf->initBuffers(Settings::Instance()->currentFolder);
-                this->meshModelFaces.push_back(mmf);
-                scene_models[scene_models_counter] = "[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID;;
-                scene_models_counter += 1;
-            }
+    std::map<int, std::string> scene_models = this->gui->sceneModels;
+    int scene_models_counter = ((int)scene_models.size() == 0) ? 0 : (int)scene_models.size();
+    objScene scene = this->scenes[this->scenes.size() - 1];
+    for (int i=0; i<(int)scene.models.size(); i++) {
+        objModel model = scene.models[i];
+        for (size_t j=0; j<model.faces.size(); j++) {
+            MeshModelFace *mmf = new MeshModelFace();
+            mmf->ModelID = i;
+            mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+            mmf->setModel(model.faces[j]);
+            mmf->initShaderProgram();
+            mmf->initBuffers(Settings::Instance()->currentFolder);
+            this->meshModelFaces.push_back(mmf);
+            scene_models[scene_models_counter] = "[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID;
+            this->gui->addSceneModelSettings(scene_models[scene_models_counter]);
+            scene_models_counter += 1;
         }
     }
 
     // render scene stats
     if (this->meshModelFaces.size() > 0) {
-        this->gui->showSceneSettings(scene_models);
+        this->gui->scene_item_selected = 0;
         for (size_t i=0; i<this->meshModelFaces.size(); i++) {
             MeshModelFace *mmf = this->meshModelFaces[i];
             this->gui->setModelFSetting((int)i, 12, mmf->oFace.faceMaterial.opticalDensity);
@@ -641,6 +639,7 @@ void Kuplung::processParsedObjFile() {
             this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));
             this->gui->setModelVSetting((int)i, 16, glm::vec3(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b));
         }
+        this->gui->displaySceneSettings = true;
         //this->gui->showSceneStats();
     }
 
@@ -674,6 +673,11 @@ void Kuplung::doLog(std::string logMessage) {
 void Kuplung::guiClearScreen() {
     this->scenes = {};
     this->meshModelFaces = {};
+    this->scenes.clear();
+    this->objFiles.clear();
+    this->gui->sceneModels.clear();
+    this->gui->scene_item_settings.clear();
+    this->gui->scene_item_settings_default.clear();
     this->gui->hideSceneSettings();
     this->gui->hideSceneStats();
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
