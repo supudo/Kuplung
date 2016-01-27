@@ -605,8 +605,6 @@ void Kuplung::processParsedObjFile() {
     this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
     this->gui->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
-    std::map<int, std::string> scene_models = this->gui->sceneModels;
-    int scene_models_counter = ((int)scene_models.size() == 0) ? 0 : (int)scene_models.size();
     objScene scene = this->scenes[this->scenes.size() - 1];
     for (int i=0; i<(int)scene.models.size(); i++) {
         objModel model = scene.models[i];
@@ -618,9 +616,7 @@ void Kuplung::processParsedObjFile() {
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
-            scene_models[scene_models_counter] = "[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID;
-            this->gui->addSceneModelSettings(scene_models[scene_models_counter]);
-            scene_models_counter += 1;
+            this->gui->addSceneModelSettings("[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID);
         }
     }
 
