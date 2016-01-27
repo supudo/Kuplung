@@ -946,6 +946,7 @@ void GUI::resetValuesSceneSettings() {
     for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
         for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
             this->scene_item_settings[i][j]->fValue = this->scene_item_settings_default[i][j]->fValue;
+            this->scene_item_settings[i][j]->bValue = this->scene_item_settings_default[i][j]->bValue;
             this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
         }
     }

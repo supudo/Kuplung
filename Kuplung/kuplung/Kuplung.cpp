@@ -606,6 +606,8 @@ void Kuplung::processParsedObjFile() {
     this->doLog(this->objFile.title + " was parsed successfully.");
     this->gui->recentFilesAdd(this->objFile.title, this->objFile);
 
+    // TODO: preserve already loaded model settings by preserving the models collections
+
     this->meshModelFaces = {};
     int scene_models_counter = 0;
     std::map<int, std::string> scene_models;
