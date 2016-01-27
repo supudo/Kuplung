@@ -164,18 +164,7 @@ void GUI::hideGUIControls() {
     this->displayGUIControls = true;
 }
 
-void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
-    this->scene_item_selected = 0;
-    this->scene_item_settings = {};
-    this->scene_item_settings_default = {};
-    for (int i=0; i<(int)scene_models.size(); i++) {
-        this->addSceneModelSettings(scene_models[i]);
-    }
-    this->sceneModels = scene_models;
-    this->displaySceneSettings = true;
-}
-
-void GUI::addSceneModelSettings(std::string sceneModel) {
+void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount) {
     std::vector<GUIObjectSetting*> setts = {};
     std::vector<GUIObjectSetting*> setts_default = {};
 
@@ -247,8 +236,17 @@ void GUI::addSceneModelSettings(std::string sceneModel) {
     this->scene_item_settings[idx] = setts;
     this->scene_item_settings_default[idx] = setts_default;
 
-    idx = (int)this->sceneModels.size();
-    this->sceneModels[idx] = sceneModel;
+    //idx = (int)this->sceneModels.size();
+    //this->sceneModels[idx] = modelID;
+
+    GUISceneObject gso;
+    gso.objFile = objFile;
+    gso.modelID = modelID;
+    gso.materialID = materialID;
+    gso.verticesCount = verticesCount;
+    gso.normalsCount = normalsCount;
+    gso.indicesCount = indicesCount;
+    this->sceneModels.push_back(gso);
 }
 
 GUIObjectSetting* GUI::addSceneSettingsObjectF(int idx, float fValue) {
@@ -756,7 +754,7 @@ void GUI::dialogSceneSettings() {
     int modelsCount = (int)this->sceneModels.size();
     const char* scene_items[modelsCount];
     for (int i=0; i<(int)this->sceneModels.size(); i++) {
-        scene_items[i] = this->sceneModels[i].c_str();
+        scene_items[i] = this->sceneModels[i].modelID.c_str();
     }
 
     // Scene Model

@@ -616,7 +616,7 @@ void Kuplung::processParsedObjFile() {
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
-            this->gui->addSceneModelSettings("[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID);
+            this->gui->addSceneModelSettings(scene.objFile, model.modelID, mmf->oFace.materialID, mmf->oFace.verticesCount, mmf->oFace.normalsCount, mmf->oFace.indicesCount);
         }
     }
 

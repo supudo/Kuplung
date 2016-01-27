@@ -33,6 +33,15 @@ struct GUIObjectSetting {
     glm::vec3 vValue;
 };
 
+struct GUISceneObject {
+    std::string objFile;
+    std::string modelID;
+    std::string materialID;
+    int verticesCount;
+    int normalsCount;
+    int indicesCount;
+};
+
 class GUI {
 public:
     ~GUI();
@@ -55,8 +64,7 @@ public:
     void initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings);
     void showGUIControls();
     void hideGUIControls();
-    void showSceneSettings(std::map<int, std::string> scene_models);
-    void addSceneModelSettings(std::string sceneModel);
+    void addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount);
     void hideSceneSettings();
     void showSceneStats();
     void hideSceneStats();
@@ -65,7 +73,8 @@ public:
     void setModelFSetting(int modelID, int settingID, float fValue);
     void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
 
-    std::map<int, std::string> sceneModels;
+    //std::map<int, std::string> sceneModels;
+    std::vector<GUISceneObject> sceneModels;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
     bool displayGUIControls, displaySceneStats, displaySceneSettings;
 
