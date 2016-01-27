@@ -238,9 +238,6 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
     this->scene_item_settings[idx] = setts;
     this->scene_item_settings_default[idx] = setts_default;
 
-    //idx = (int)this->sceneModels.size();
-    //this->sceneModels[idx] = modelID;
-
     GUISceneObject gso;
     gso.objFile = objFile;
     gso.modelID = modelID;
@@ -257,7 +254,8 @@ GUIObjectSetting* GUI::addSceneSettingsObjectF(int idx, float fValue) {
     gos->oAnimate = false;
     gos->fValue = fValue;
     gos->bValue = true;
-    gos->vValue = glm::vec3(0, 0, 0);
+    gos->vValue = glm::vec4(0, 0, 0, 1);
+    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
@@ -267,17 +265,19 @@ GUIObjectSetting* GUI::addSceneSettingsObjectB(int idx, bool bValue) {
     gos->oAnimate = false;
     gos->fValue = 0.0;
     gos->bValue = bValue;
-    gos->vValue = glm::vec3(0, 0, 0);
+    gos->vValue = glm::vec4(0, 0, 0, 1);
+    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
-GUIObjectSetting* GUI::addSceneSettingsObjectV(int idx, glm::vec3 vValue) {
+GUIObjectSetting* GUI::addSceneSettingsObjectV(int idx, glm::vec4 vValue) {
     GUIObjectSetting *gos = new GUIObjectSetting();
     gos->oIndex = idx;
     gos->oAnimate = false;
     gos->fValue = 0.0;
     gos->bValue = true;
     gos->vValue = vValue;
+    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
@@ -291,9 +291,9 @@ void GUI::setModelFSetting(int modelID, int settingID, float fValue) {
     this->scene_item_settings_default[modelID][settingID]->fValue = fValue;
 }
 
-void GUI::setModelVSetting(int modelID, int settingID, glm::vec3 vValue) {
-    this->scene_item_settings[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
-    this->scene_item_settings_default[modelID][settingID]->vValue = glm::vec3(vValue.r, vValue.g, vValue.b);
+void GUI::setModelVSetting(int modelID, int settingID, glm::vec4 vValue) {
+    this->scene_item_settings[modelID][settingID]->vValue = glm::vec4(vValue.r, vValue.g, vValue.b, vValue.a);
+    this->scene_item_settings_default[modelID][settingID]->vValue = glm::vec4(vValue.r, vValue.g, vValue.b, vValue.a);
 }
 
 void GUI::hideSceneSettings() {
@@ -899,6 +899,9 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular exponent");
         ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
+
+        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->gValue), "Ambient");
+        ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->gValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][13]->vValue.r, 0.0f, 1.0f);

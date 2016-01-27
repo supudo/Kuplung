@@ -432,10 +432,10 @@ void Kuplung::renderScene() {
         // material
         mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12]->fValue);
         mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[sis][17]->fValue);
-        mmf->setOptionsMaterialAmbient(this->gui->scene_item_settings[sis][13]->vValue);
-        mmf->setOptionsMaterialDiffuse(this->gui->scene_item_settings[sis][14]->vValue);
-        mmf->setOptionsMaterialSpecular(this->gui->scene_item_settings[sis][15]->vValue);
-        mmf->setOptionsMaterialEmission(this->gui->scene_item_settings[sis][16]->vValue);
+        mmf->setOptionsMaterialAmbient(glm::vec3(this->gui->scene_item_settings[sis][13]->vValue));
+        mmf->setOptionsMaterialDiffuse(glm::vec3(this->gui->scene_item_settings[sis][14]->vValue));
+        mmf->setOptionsMaterialSpecular(glm::vec3(this->gui->scene_item_settings[sis][15]->vValue));
+        mmf->setOptionsMaterialEmission(glm::vec3(this->gui->scene_item_settings[sis][16]->vValue));
         mmf->setOptionsMaterialIlluminationModel(this->gui->scene_item_settings[sis][18]->iValue);
 
         // render
@@ -630,10 +630,10 @@ void Kuplung::processParsedObjFile() {
             this->gui->setModelFSetting((int)i, 12, mmf->oFace.faceMaterial.opticalDensity);
             this->gui->setModelFSetting((int)i, 17, mmf->oFace.faceMaterial.specularExp);
             this->gui->setModelISetting((int)i, 18, mmf->oFace.faceMaterial.illumination);
-            this->gui->setModelVSetting((int)i, 13, glm::vec3(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b));
-            this->gui->setModelVSetting((int)i, 14, glm::vec3(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b));
-            this->gui->setModelVSetting((int)i, 15, glm::vec3(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b));
-            this->gui->setModelVSetting((int)i, 16, glm::vec3(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b));
+            this->gui->setModelVSetting((int)i, 13, glm::vec4(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b, mmf->oFace.faceMaterial.ambient.a));
+            this->gui->setModelVSetting((int)i, 14, glm::vec4(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b, mmf->oFace.faceMaterial.diffuse.a));
+            this->gui->setModelVSetting((int)i, 15, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
+            this->gui->setModelVSetting((int)i, 16, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
         }
         this->gui->displaySceneSettings = true;
         //this->gui->showSceneStats();

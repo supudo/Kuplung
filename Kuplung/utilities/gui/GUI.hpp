@@ -30,7 +30,8 @@ struct GUIObjectSetting {
     int iValue;
     float fValue;
     bool bValue;
-    glm::vec3 vValue;
+    glm::vec4 vValue;
+    ImVec4 gValue;
 };
 
 struct GUISceneObject {
@@ -71,7 +72,7 @@ public:
 
     void setModelISetting(int modelID, int settingID, int iValue);
     void setModelFSetting(int modelID, int settingID, float fValue);
-    void setModelVSetting(int modelID, int settingID, glm::vec3 vValue);
+    void setModelVSetting(int modelID, int settingID, glm::vec4 vValue);
 
     //std::map<int, std::string> sceneModels;
     std::vector<GUISceneObject> sceneModels;
@@ -130,7 +131,7 @@ private:
 
     GUIObjectSetting* addSceneSettingsObjectF(int idx, float fValue);
     GUIObjectSetting* addSceneSettingsObjectB(int idx, bool bValue);
-    GUIObjectSetting* addSceneSettingsObjectV(int idx, glm::vec3 vValue);
+    GUIObjectSetting* addSceneSettingsObjectV(int idx, glm::vec4 vValue);
     void dialogGUIControls();
     void resetValuesGUIControls();
     void dialogSceneSettings();
