@@ -579,7 +579,6 @@ void Kuplung::processRunningThreads() {
 
 void Kuplung::guiProcessObjFile(FBEntity file) {
     if (this->hasEnding(file.title, ".obj")) {
-        this->objFile = file;
         this->gui->showLoading();
 
 //        if (this->scene.totalCountGeometricVertices > 0)
@@ -598,13 +597,13 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
 void Kuplung::processObjFileAsync(FBEntity file) {
     //std::this_thread::sleep_for(std::chrono::seconds(5));
     this->scenes.push_back(this->parser->parse(file));
-    this->objFile = file;
+    this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
 
 void Kuplung::processParsedObjFile() {
-    this->doLog(this->objFile.title + " was parsed successfully.");
-    this->gui->recentFilesAdd(this->objFile.title, this->objFile);
+    this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
+    this->gui->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
     // TODO: preserve already loaded model settings by preserving the models collections
 
@@ -623,7 +622,7 @@ void Kuplung::processParsedObjFile() {
                 mmf->initShaderProgram();
                 mmf->initBuffers(Settings::Instance()->currentFolder);
                 this->meshModelFaces.push_back(mmf);
-                scene_models[scene_models_counter] = model.modelID + " - " + mmf->oFace.materialID;;
+                scene_models[scene_models_counter] = "[" + scene.objFile + "] " + model.modelID + " - " + mmf->oFace.materialID;;
                 scene_models_counter += 1;
             }
         }

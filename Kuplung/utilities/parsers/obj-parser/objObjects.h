@@ -77,6 +77,8 @@ struct objScene {
 
     std::vector<objModel> models;
     std::vector<objMaterial> materials;
+
+    std::string objFile;
 };
 
 #endif /* objObjects_h */

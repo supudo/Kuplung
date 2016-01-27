@@ -81,6 +81,8 @@ objScene objParser::parse(FBEntity file) {
         std::fread(&fileContents[0], 1, fileContents.size(), fp);
         std::fclose(fp);
 
+        this->scene.objFile = this->file.title;
+
         size_t pos = 0;
         std::string singleLine;
 

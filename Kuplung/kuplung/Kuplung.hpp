@@ -70,7 +70,7 @@ private:
     float objLoadingProgress;
 
     // Customs
-    FBEntity objFile;
+    std::vector<FBEntity> objFiles;
     Controls *managerControls;
     GUI *gui;
     objParser *parser;
