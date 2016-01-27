@@ -169,75 +169,7 @@ void GUI::showSceneSettings(std::map<int, std::string> scene_models) {
     this->scene_item_settings = {};
     this->scene_item_settings_default = {};
     for (int i=0; i<(int)scene_models.size(); i++) {
-        std::vector<GUIObjectSetting*> setts = {};
-        std::vector<GUIObjectSetting*> setts_default = {};
-
-        int idx = 0;
-
-        // scale
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // rotate
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // translate
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // displacement
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // refraction
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // material
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-        setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-
-        // specular exp
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // illumination model
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-
-        // cel-shading
-        setts.push_back(this->addSceneSettingsObjectB(idx, false));
-        setts_default.push_back(this->addSceneSettingsObjectB(idx, false)); idx += 1;
-
-        // alpha
-        setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-        setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-
-        this->scene_item_settings[i] = setts;
-        this->scene_item_settings_default[i] = setts_default;
+        this->addSceneModelSettings(scene_models[i]);
     }
     this->sceneModels = scene_models;
     this->displaySceneSettings = true;
