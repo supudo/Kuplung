@@ -138,16 +138,18 @@ void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>>
     for (int i=0; i<guiObjectsCount; i++) {
         std::vector<GUIObjectSetting*> setts;
         std::vector<GUIObjectSetting*> setts_default;
-        for (int j=0; j<21; j++) {
+        for (int j=0; j<22; j++) {
             GUIObjectSetting* gos = new GUIObjectSetting();
             gos->oIndex = j;
             gos->oAnimate = false;
+            gos->bValue = true;
             gos->fValue = initialSettings[i][j];
             setts.push_back(gos);
 
             GUIObjectSetting* gos_default = new GUIObjectSetting();
             gos_default->oIndex = j;
             gos_default->oAnimate = false;
+            gos_default->bValue = true;
             gos_default->fValue = initialSettings[i][j];
             setts_default.push_back(gos_default);
         }
@@ -630,6 +632,11 @@ void GUI::dialogGUIControls() {
 
     const char* gui_items[] = { "Camera", "Grid", "Light", "Terrain" };
     ImGui::Combo("GUI Item", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    ImGui::Separator();
+
+    if (this->gui_item_selected == 2)
+        ImGui::Checkbox("Show Lamp", &Settings::Instance()->showLight);
+
     if (this->gui_item_selected == 0 && ImGui::TreeNode("LookAt")) {
         ImGui::SliderFloat("Eye X", &this->gui_item_settings[this->gui_item_selected][0]->fValue, -10.0f, 10.0f);
         ImGui::SliderFloat("Eye Y", &this->gui_item_settings[this->gui_item_selected][1]->fValue, -100.0f, 10.0f);
@@ -690,9 +697,7 @@ void GUI::dialogGUIControls() {
         ImGui::TreePop();
     }
 
-    if (this->gui_item_selected == 2 && ImGui::TreeNode("Light")) {
-        //ImGui::Checkbox("Hide Lamp rendering", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate);
-
+    if (this->gui_item_selected == 2 && ImGui::TreeNode("Colors")) {
         ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient");
         ImGui::SliderFloat("Red##001", &this->so_GUI_lightAmbient.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##002", &this->so_GUI_lightAmbient.g, 0.0f, 1.0f);

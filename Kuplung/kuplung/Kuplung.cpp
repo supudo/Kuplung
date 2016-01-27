@@ -338,10 +338,6 @@ void Kuplung::renderScene() {
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
     mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[3][15]->fValue, this->gui->gui_item_settings[3][16]->fValue, this->gui->gui_item_settings[3][17]->fValue));
 
-    // lamp
-    if (Settings::Instance()->showLight)
-        this->meshLight->render(this->matrixProjection, this->matrixCamera, mtxModelLight);
-
     // axes
     if (Settings::Instance()->showAxes) {
         float axisW = 120;
@@ -374,11 +370,17 @@ void Kuplung::renderScene() {
     glm::vec3 vLightDirection = glm::vec3(0, -2, 0);
     glm::vec3 vCameraPosition = glm::vec3(this->matrixCamera[3].x,this->matrixCamera[3].y, this->matrixCamera[3].z);
 
-    // light dot
-    glm::mat4 mtxModelDot = mtxModelLight;
-    mtxModelDot = glm::rotate(mtxModelDot, glm::radians(90.0f), glm::vec3(1, 0, 0));
-    this->lightDot->initBuffers(glm::vec3(0, 0, 0), vLightDirection, true);
-    this->lightDot->render(this->matrixProjection, this->matrixCamera, mtxModelDot);
+    // light object
+    if (Settings::Instance()->showLight) {
+        // lamp
+        this->meshLight->render(this->matrixProjection, this->matrixCamera, mtxModelLight);
+
+        // direction line
+        glm::mat4 mtxModelDot = mtxModelLight;
+        mtxModelDot = glm::rotate(mtxModelDot, glm::radians(90.0f), glm::vec3(1, 0, 0));
+        this->lightDot->initBuffers(glm::vec3(0, 0, 0), vLightDirection, true);
+        this->lightDot->render(this->matrixProjection, this->matrixCamera, mtxModelDot);
+    }
 
     // scene models
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
