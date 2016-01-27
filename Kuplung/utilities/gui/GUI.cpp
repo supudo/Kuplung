@@ -255,7 +255,6 @@ GUIObjectSetting* GUI::addSceneSettingsObjectF(int idx, float fValue) {
     gos->fValue = fValue;
     gos->bValue = true;
     gos->vValue = glm::vec4(0, 0, 0, 1);
-    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
@@ -266,7 +265,6 @@ GUIObjectSetting* GUI::addSceneSettingsObjectB(int idx, bool bValue) {
     gos->fValue = 0.0;
     gos->bValue = bValue;
     gos->vValue = glm::vec4(0, 0, 0, 1);
-    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
@@ -277,7 +275,6 @@ GUIObjectSetting* GUI::addSceneSettingsObjectV(int idx, glm::vec4 vValue) {
     gos->fValue = 0.0;
     gos->bValue = true;
     gos->vValue = vValue;
-    gos->gValue = ImVec4(1, 1, 1, 1);
     return gos;
 }
 
@@ -698,38 +695,32 @@ void GUI::dialogGUIControls() {
     }
 
     if (this->gui_item_selected == 2 && ImGui::TreeNode("Colors")) {
-        ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient");
-        ImGui::SliderFloat("Red##001", &this->so_GUI_lightAmbient.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##002", &this->so_GUI_lightAmbient.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##003", &this->so_GUI_lightAmbient.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient & Strength");
+        ImGui::ColorEdit4("##104Ambient", (float*)&this->so_GUI_lightAmbient, true);
 
         if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate ambient strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##01", &this->gui_item_settings[this->gui_item_selected][18]->fValue, 0.0, 4.0);
+        ImGui::SameLine(); ImGui::SliderFloat("##01", &this->gui_item_settings[this->gui_item_selected][18]->fValue, 0.0, 4.0);
 
-        ImGui::TextColored(ImVec4(this->so_GUI_lightDiffuse.r, this->so_GUI_lightDiffuse.g, this->so_GUI_lightDiffuse.b, 1.0), "Diffuse");
-        ImGui::SliderFloat("Red##004", &this->so_GUI_lightDiffuse.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##005", &this->so_GUI_lightDiffuse.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##006", &this->so_GUI_lightDiffuse.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->so_GUI_lightDiffuse.r, this->so_GUI_lightDiffuse.g, this->so_GUI_lightDiffuse.b, 1.0), "Diffuse & Strength");
+        ImGui::ColorEdit4("##105Diffuse", (float*)&this->so_GUI_lightDiffuse, true);
 
         if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate diffuse strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##02", &this->gui_item_settings[this->gui_item_selected][19]->fValue, 0.0, 6.0);
+        ImGui::SameLine(); ImGui::SliderFloat("##02", &this->gui_item_settings[this->gui_item_selected][19]->fValue, 0.0, 6.0);
 
-        ImGui::TextColored(ImVec4(this->so_GUI_lightSpecular.r, this->so_GUI_lightSpecular.g, this->so_GUI_lightSpecular.b, 1.0), "Specular");
-        ImGui::SliderFloat("Red##007", &this->so_GUI_lightSpecular.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##008", &this->so_GUI_lightSpecular.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##009", &this->so_GUI_lightSpecular.b, 0.0f, 1.0f);
+        ImGui::TextColored(ImVec4(this->so_GUI_lightSpecular.r, this->so_GUI_lightSpecular.g, this->so_GUI_lightSpecular.b, 1.0), "Specular & Strength");
+        ImGui::ColorEdit4("##106Specular", (float*)&this->so_GUI_lightSpecular, true);
 
         if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular strength");
-        ImGui::SameLine(); ImGui::SliderFloat("Strength##03", &this->gui_item_settings[this->gui_item_selected][20]->fValue, 0.0, 4.0);
+        ImGui::SameLine(); ImGui::SliderFloat("##03", &this->gui_item_settings[this->gui_item_selected][20]->fValue, 0.0, 4.0);
 
         ImGui::TreePop();
     }
@@ -900,28 +891,17 @@ void GUI::dialogSceneSettings() {
             ImGui::SetTooltip("Animate specular exponent");
         ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
 
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->gValue), "Ambient");
-        ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->gValue, true);
-
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
-        ImGui::SliderFloat("Red##101", &this->scene_item_settings[this->scene_item_selected][13]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##102", &this->scene_item_settings[this->scene_item_selected][13]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##103", &this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 0.0f, 1.0f);
+        ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
-        ImGui::SliderFloat("Red##104", &this->scene_item_settings[this->scene_item_selected][14]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##105", &this->scene_item_settings[this->scene_item_selected][14]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##106", &this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 0.0f, 1.0f);
+        ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
-        ImGui::SliderFloat("Red##107", &this->scene_item_settings[this->scene_item_selected][15]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##108", &this->scene_item_settings[this->scene_item_selected][15]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##109", &this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 0.0f, 1.0f);
+        ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
-        ImGui::SliderFloat("Red##110", &this->scene_item_settings[this->scene_item_selected][16]->vValue.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green##111", &this->scene_item_settings[this->scene_item_selected][16]->vValue.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue##112", &this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 0.0f, 1.0f);
+        ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
 
         ImGui::TreePop();
     }

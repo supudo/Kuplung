@@ -31,7 +31,6 @@ struct GUIObjectSetting {
     float fValue;
     bool bValue;
     glm::vec4 vValue;
-    ImVec4 gValue;
 };
 
 struct GUISceneObject {
