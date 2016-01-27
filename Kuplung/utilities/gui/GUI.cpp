@@ -582,35 +582,49 @@ void GUI::dialogGUIControls() {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-    if (ImGui::Button("Reset GUI Control Values"))
+    if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0)))
         this->resetValuesGUIControls();
     ImGui::PopStyleColor(3);
 
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
     if (ImGui::CollapsingHeader("General")) {
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.92f);
         ImGui::Text("Field of view");
-        ImGui::SliderFloat("FOV", &this->so_GUI_FOV, 0.0f, 180.0f);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("FOV");
+        ImGui::SliderFloat("##104", &this->so_GUI_FOV, 0.0f, 180.0f);
         ImGui::Separator();
         ImGui::Text("Ratio");
-        ImGui::SliderFloat("W", &this->so_GUI_ratio_w, 0.0f, 5.0f);
-        ImGui::SliderFloat("H", &this->so_GUI_ratio_h, 0.0f, 5.0f);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("W & H");
+        ImGui::SliderFloat("##105", &this->so_GUI_ratio_w, 0.0f, 5.0f);
+        ImGui::SliderFloat("##106", &this->so_GUI_ratio_h, 0.0f, 5.0f);
         ImGui::Separator();
         ImGui::Text("Planes");
-        ImGui::SliderFloat("Close", &this->so_GUI_plane_close, 0.0f, 1.0f);
-        ImGui::SliderFloat("Far", &this->so_GUI_plane_far, 0.0f, 100.0f);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Far & Close");
+        ImGui::SliderFloat("##107", &this->so_GUI_plane_close, 0.0f, 1.0f);
+        ImGui::SliderFloat("##108", &this->so_GUI_plane_far, 0.0f, 100.0f);
         ImGui::Separator();
         ImGui::Text("Grid size");
-        ImGui::SliderInt("Squares", &this->so_GUI_grid_size, 0, 100);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Squares");
+        ImGui::SliderInt("##109", &this->so_GUI_grid_size, 0, 100);
         ImGui::Separator();
         ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
         ImGui::Separator();
         ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color");
-        ImGui::SliderFloat("Red", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("Green", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("Blue", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("RGB format");
+        ImGui::SliderFloat("##110", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
+        ImGui::SliderFloat("##111", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
+        ImGui::SliderFloat("##112", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
         ImGui::Separator();
         ImGui::Text("Outline thickness");
-        ImGui::SliderFloat("Thickness", &this->so_outlineThickness, 1.01f, 2.0f);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Thickness");
+        ImGui::SliderFloat("##103", &this->so_outlineThickness, 1.01f, 2.0f);
+        ImGui::PopItemWidth();
     }
     ImGui::Separator();
 
@@ -677,6 +691,8 @@ void GUI::dialogGUIControls() {
     }
 
     if (this->gui_item_selected == 2 && ImGui::TreeNode("Light")) {
+        //ImGui::Checkbox("Hide Lamp rendering", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate);
+
         ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient");
         ImGui::SliderFloat("Red##001", &this->so_GUI_lightAmbient.r, 0.0f, 1.0f);
         ImGui::SliderFloat("Green##002", &this->so_GUI_lightAmbient.g, 0.0f, 1.0f);
@@ -746,7 +762,7 @@ void GUI::dialogSceneSettings() {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-    if (ImGui::Button("Reset Scene Settings Values"))
+    if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0)))
         this->resetValuesSceneSettings();
     ImGui::PopStyleColor(3);
     ImGui::Separator();

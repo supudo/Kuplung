@@ -195,7 +195,11 @@ void MeshLight::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
         // draw
         glBindVertexArray(this->glVAO);
+
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+        //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
         glBindVertexArray(0);
 
         // clear texture
