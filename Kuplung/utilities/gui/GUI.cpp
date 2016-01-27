@@ -760,7 +760,17 @@ void GUI::dialogSceneSettings() {
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::Separator();
 
+    GUISceneObject gso = this->sceneModels[this->scene_item_selected];
+    ImGui::Text("OBJ File - %s", gso.objFile.c_str());
+    ImGui::Text("Model - %s", gso.modelID.c_str());
+    ImGui::Text("Material - %s", gso.materialID.c_str());
+    ImGui::Text("Vertices - %i", gso.verticesCount);
+    ImGui::Text("Normal - %i", gso.normalsCount);
+    ImGui::Text("Indices - %i", gso.indicesCount);
+
+    ImGui::Separator();
     // cel shading
     ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
 
