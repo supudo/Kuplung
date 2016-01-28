@@ -19,6 +19,14 @@
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui_internal.h" // ImSaturate
 
+void GUIColorPicker::show(const char* title, bool* p_opened, float* col, bool show_alpha) {
+    ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+
+    this->ColorPicker4(col, show_alpha);
+
+    ImGui::End();
+}
+
 bool GUIColorPicker::ColorPicker4(float* col, bool show_alpha) {
     ImGuiIO& io = ImGui::GetIO();
     ImGuiStyle& style = ImGui::GetStyle();

@@ -630,10 +630,10 @@ void Kuplung::processParsedObjFile() {
             this->gui->setModelSetting((int)i, 12, 1, mmf->oFace.faceMaterial.opticalDensity);
             this->gui->setModelSetting((int)i, 17, 1, mmf->oFace.faceMaterial.specularExp);
             this->gui->setModelSetting((int)i, 18, 1, mmf->oFace.faceMaterial.illumination);
-            this->gui->setModelSetting((int)i, 13, 1, 1, true, glm::vec4(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b, mmf->oFace.faceMaterial.ambient.a));
-            this->gui->setModelSetting((int)i, 14, 1, 1, true, glm::vec4(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b, mmf->oFace.faceMaterial.diffuse.a));
-            this->gui->setModelSetting((int)i, 15, 1, 1, true, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
-            this->gui->setModelSetting((int)i, 16, 1, 1, true, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
+            this->gui->setModelSetting((int)i, 13, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b, mmf->oFace.faceMaterial.ambient.a));
+            this->gui->setModelSetting((int)i, 14, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b, mmf->oFace.faceMaterial.diffuse.a));
+            this->gui->setModelSetting((int)i, 15, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
+            this->gui->setModelSetting((int)i, 16, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
         }
         this->gui->displaySceneSettings = true;
         //this->gui->showSceneStats();

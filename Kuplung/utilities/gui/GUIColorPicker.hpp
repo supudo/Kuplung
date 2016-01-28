@@ -11,6 +11,7 @@
 
 class GUIColorPicker {
 public:
+    void show(const char* title, bool* p_opened, float* col, bool show_alpha);
     bool ColorPicker4(float* col, bool show_alpha);
     bool ColorPicker3(float col[3]);
 };

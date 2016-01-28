@@ -868,23 +868,37 @@ void GUI::dialogSceneSettings() {
             ImGui::SetTooltip("Animate specular exponent");
         ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
 
-        // TODO: add color picker icon
-        if (ImGui::Button("Color Picker", ImVec2(0, 0)))
-            this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
-        if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
-            this->colorPicker->ColorPicker4((float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
-
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##101", ImVec2(0, 0)))
+            this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
+        if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
+            this->colorPicker->show("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
         ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##102", ImVec2(0, 0)))
+            this->scene_item_settings[this->scene_item_selected][14]->bValue = !this->scene_item_settings[this->scene_item_selected][14]->bValue;
+        if (this->scene_item_settings[this->scene_item_selected][14]->bValue)
+            this->colorPicker->show("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
         ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##103", ImVec2(0, 0)))
+            this->scene_item_settings[this->scene_item_selected][15]->bValue = !this->scene_item_settings[this->scene_item_selected][15]->bValue;
+        if (this->scene_item_settings[this->scene_item_selected][15]->bValue)
+            this->colorPicker->show("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
         ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##104", ImVec2(0, 0)))
+            this->scene_item_settings[this->scene_item_selected][16]->bValue = !this->scene_item_settings[this->scene_item_selected][16]->bValue;
+        if (this->scene_item_settings[this->scene_item_selected][16]->bValue)
+            this->colorPicker->show("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
 
         ImGui::TreePop();
     }
