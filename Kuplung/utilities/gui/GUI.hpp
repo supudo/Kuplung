@@ -6,8 +6,8 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef gui_hpp
-#define gui_hpp
+#ifndef GUI_hpp
+#define GUI_hpp
 
 #include <SDL2/SDL.h>
 #include <functional>
@@ -20,6 +20,7 @@
 #include "GUIScreenshot.hpp"
 #include "GUIFileBrowser.hpp"
 #include "GUIEditor.hpp"
+#include "GUIColorPicker.hpp"
 
 #define STBI_FAILURE_USERMSG
 #include "utilities/stb/stb_image.h"
@@ -64,14 +65,12 @@ public:
     void initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings);
     void showGUIControls();
     void hideGUIControls();
-    void addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount);
     void hideSceneSettings();
     void showSceneStats();
     void hideSceneStats();
 
-    void setModelISetting(int modelID, int settingID, int iValue);
-    void setModelFSetting(int modelID, int settingID, float fValue);
-    void setModelVSetting(int modelID, int settingID, glm::vec4 vValue);
+    void addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID, int verticesCount, int normalsCount, int indicesCount);
+    void setModelSetting(int modelID, int settingID, int iValue = 0, float fValue = 0, bool bValue = true, glm::vec4 vValue = glm::vec4(1, 1, 1, 1));
 
     //std::map<int, std::string> sceneModels;
     std::vector<GUISceneObject> sceneModels;
@@ -128,9 +127,7 @@ private:
     void dialogHeightmap();
     void dialogEditor();
 
-    GUIObjectSetting* addSceneSettingsObjectF(int idx, float fValue);
-    GUIObjectSetting* addSceneSettingsObjectB(int idx, bool bValue);
-    GUIObjectSetting* addSceneSettingsObjectV(int idx, glm::vec4 vValue);
+    GUIObjectSetting* addSceneSettingsObject(int idx, float fValue = 1.0f, bool bValue = true, glm::vec4 vValue = glm::vec4(1.0, 1.0, 1.0, 1.0));
     void dialogGUIControls();
     void resetValuesGUIControls();
     void dialogSceneSettings();
@@ -151,10 +148,11 @@ private:
     GUIScreenshot *windowScreenshot;
     GUIFileBrowser *windowFileBrowser;
     GUIEditor *fileEditor;
+    GUIColorPicker *colorPicker;
 
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
 };
 
-#endif /* gui_hpp */
+#endif /* GUI_hpp */

@@ -57,6 +57,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->windowLog = new GUILog();
     this->windowScreenshot = new GUIScreenshot();
     this->windowFileBrowser = new GUIFileBrowser();
+    this->colorPicker = new GUIColorPicker();
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
@@ -173,66 +174,66 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
     int idx = 0;
 
     // scale
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // rotate
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // translate
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // displacement
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // refraction
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // material
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
-    setts.push_back(this->addSceneSettingsObjectF(idx, 0.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
 
     // specular exp
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // illumination model
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
 
     // cel-shading
-    setts.push_back(this->addSceneSettingsObjectB(idx, false));
-    setts_default.push_back(this->addSceneSettingsObjectB(idx, false)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0, false));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0, false)); idx += 1;
 
     // alpha
-    setts.push_back(this->addSceneSettingsObjectF(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObjectF(idx, 1.0));
+    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0));
 
     idx = (int)this->scene_item_settings.size();
     this->scene_item_settings[idx] = setts;
@@ -248,49 +249,25 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
     this->sceneModels.push_back(gso);
 }
 
-GUIObjectSetting* GUI::addSceneSettingsObjectF(int idx, float fValue) {
+GUIObjectSetting* GUI::addSceneSettingsObject(int idx, float fValue, bool bValue, glm::vec4 vValue) {
     GUIObjectSetting *gos = new GUIObjectSetting();
     gos->oIndex = idx;
     gos->oAnimate = false;
     gos->fValue = fValue;
-    gos->bValue = true;
-    gos->vValue = glm::vec4(0, 0, 0, 1);
-    return gos;
-}
-
-GUIObjectSetting* GUI::addSceneSettingsObjectB(int idx, bool bValue) {
-    GUIObjectSetting *gos = new GUIObjectSetting();
-    gos->oIndex = idx;
-    gos->oAnimate = false;
-    gos->fValue = 0.0;
     gos->bValue = bValue;
-    gos->vValue = glm::vec4(0, 0, 0, 1);
-    return gos;
-}
-
-GUIObjectSetting* GUI::addSceneSettingsObjectV(int idx, glm::vec4 vValue) {
-    GUIObjectSetting *gos = new GUIObjectSetting();
-    gos->oIndex = idx;
-    gos->oAnimate = false;
-    gos->fValue = 0.0;
-    gos->bValue = true;
     gos->vValue = vValue;
     return gos;
 }
 
-void GUI::setModelISetting(int modelID, int settingID, int iValue) {
+void GUI::setModelSetting(int modelID, int settingID, int iValue, float fValue, bool bValue, glm::vec4 vValue) {
     this->scene_item_settings[modelID][settingID]->iValue = iValue;
-    this->scene_item_settings_default[modelID][settingID]->iValue = iValue;
-}
-
-void GUI::setModelFSetting(int modelID, int settingID, float fValue) {
     this->scene_item_settings[modelID][settingID]->fValue = fValue;
+    this->scene_item_settings[modelID][settingID]->bValue = bValue;
+    this->scene_item_settings[modelID][settingID]->vValue = vValue;
+    this->scene_item_settings_default[modelID][settingID]->iValue = iValue;
     this->scene_item_settings_default[modelID][settingID]->fValue = fValue;
-}
-
-void GUI::setModelVSetting(int modelID, int settingID, glm::vec4 vValue) {
-    this->scene_item_settings[modelID][settingID]->vValue = glm::vec4(vValue.r, vValue.g, vValue.b, vValue.a);
-    this->scene_item_settings_default[modelID][settingID]->vValue = glm::vec4(vValue.r, vValue.g, vValue.b, vValue.a);
+    this->scene_item_settings_default[modelID][settingID]->bValue = bValue;
+    this->scene_item_settings_default[modelID][settingID]->vValue = vValue;
 }
 
 void GUI::hideSceneSettings() {
@@ -890,6 +867,12 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular exponent");
         ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
+
+        // TODO: add color picker icon
+        if (ImGui::Button("Color Picker", ImVec2(0, 0)))
+            this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
+        if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
+            this->colorPicker->ColorPicker4((float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);

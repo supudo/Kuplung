@@ -105,6 +105,7 @@ SOURCES += main.cpp \
     utilities/gui/GUIFileBrowser.cpp \
     utilities/gui/GUILog.cpp \
     utilities/gui/GUIScreenshot.cpp \
+    utilities/gui/GUIColorPicker.cpp \
     utilities/input/Controls.cpp \
     utilities/libnoise/HeightmapGenerator.cpp \
     utilities/libnoise/noiseutils.cpp \
@@ -131,6 +132,7 @@ HEADERS += \
     utilities/gui/GUIFileBrowser.hpp \
     utilities/gui/GUILog.hpp \
     utilities/gui/GUIScreenshot.hpp \
+    utilities/gui/GUIColorPicker.hpp \
     utilities/input/Controls.hpp \
     utilities/libnoise/HeightmapGenerator.hpp \
     utilities/libnoise/noiseutils.h \
