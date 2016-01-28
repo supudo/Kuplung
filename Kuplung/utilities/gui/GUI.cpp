@@ -367,7 +367,7 @@ void GUI::renderStart(bool isFrame) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem(ICON_FA_FILE_O " New"))
                 this->newScene();
-            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open", "...", &showFileDialog);
+            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open ...", NULL, &showFileDialog);
 
             if (ImGui::BeginMenu(ICON_FA_FILES_O " Open Recent")) {
                 if (this->recentFiles.size() == 0)
