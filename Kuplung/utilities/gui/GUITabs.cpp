@@ -26,8 +26,8 @@ namespace ImGui {
         const ImVec4 colorActive =  style.Colors[ImGuiCol_ButtonActive];
         const ImVec4 colorHover =   style.Colors[ImGuiCol_ButtonHovered];
         const ImVec4 colorText =   style.Colors[ImGuiCol_Text];
-        style.ItemSpacing.x =       1;
-        style.ItemSpacing.y =       1;
+        style.ItemSpacing.x =       10;
+        style.ItemSpacing.y =       10;
         const ImVec4 colorSelectedTab(color.x,color.y,color.z,color.w*0.5f);
         const ImVec4 colorSelectedTabHovered(colorHover.x,colorHover.y,colorHover.z,colorHover.w*0.5f);
         const ImVec4 colorSelectedTabText(colorText.x*0.8f,colorText.y*0.8f,colorText.z*0.6f,colorText.w*0.8f);

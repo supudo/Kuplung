@@ -817,7 +817,6 @@ void GUI::dialogSceneSettings() {
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
-    ImGui::Separator();
 
     GUISceneObject gso = this->sceneModels[this->scene_item_selected];
     ImGui::Text("OBJ File - %s", gso.objFile.c_str());
@@ -827,200 +826,203 @@ void GUI::dialogSceneSettings() {
     ImGui::Text("Normal - %i", gso.normalsCount);
     ImGui::Text("Indices - %i", gso.indicesCount);
 
-//    static const char* tabNames[] = {ICON_MD_3D_ROTATION, ICON_FA_ARROWS, };
-//    static const int numTabs = sizeof(tabNames)/sizeof(tabNames[0]);
-//    static const char* tabTooltips[numTabs] = {ICON_MD_COLORIZE,"Texture","Particle","Physics"};
-//    static int tabItemOrdering[numTabs] = {0,1,2,3};
-//    static int selectedTab = 0;
-//    static int optionalHoveredTab = 0;
-//    ImGui::TabLabels(numTabs,tabNames,selectedTab,tabTooltips,true,&optionalHoveredTab,&tabItemOrdering[0],true,true);
-//    ImGui::Text("\nTab Page For Tab: \"%s\" here.\n", tabNames[selectedTab]);
-//    if (optionalHoveredTab >= 0)
-//        ImGui::Text("Mouse is hovering Tab Label: \"%s\".\n\n",tabNames[optionalHoveredTab]);
+    ImGui::Text("");
+
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+    const char* tabNames[] = {ICON_MD_TRANSFORM, ICON_MD_PHOTO_SIZE_SELECT_SMALL, ICON_MD_3D_ROTATION, ICON_FA_ARROWS, ICON_MD_TOLL, ICON_MD_FORMAT_PAINT, ICON_MD_LIGHTBULB_OUTLINE};
+    const int numTabs = sizeof(tabNames)/sizeof(tabNames[0]);
+    const char* tabTooltips[numTabs] = {"General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination"};
+    int tabItemOrdering[numTabs] = {0, 1, 2, 3, 4, 5, 6};
+    static int GUIScene_selectedTab = 0;
+    static int GUIScene_optionalHoveredTab = 0;
+    ImGui::TabLabels(numTabs, tabNames, GUIScene_selectedTab, tabTooltips, true, &GUIScene_optionalHoveredTab, &tabItemOrdering[0], false, false);
+
+    ImGui::PopStyleColor(3);
 
     ImGui::Separator();
-    // cel shading
-    ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
 
-    // alpha
-    ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
-    ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
+    switch (GUIScene_selectedTab) {
+        case 0: {
+            // cel shading
+            ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
 
-    if (ImGui::TreeNode("Scale")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 0, 0.01f, 1.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate scale by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][0]->fValue, 0.0f, 1.0f);
+            // alpha
+            ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
+            ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
+            break;
+        }
+        case 1: {
+            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 0, 0.01f, 1.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate scale by X");
+            ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][0]->fValue, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][1]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 1, 0.01f, 1.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate scale by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][1]->fValue, 0.0f, 1.0f);
+            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][1]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 1, 0.01f, 1.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate scale by Y");
+            ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][1]->fValue, 0.0f, 1.0f);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][2]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 2, 0.01f, 1.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate scale by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2]->fValue, 0.0f, 1.0f);
-        ImGui::TreePop();
-    }
+            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][2]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 2, 0.01f, 1.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate scale by Z");
+            ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2]->fValue, 0.0f, 1.0f);
+            break;
+        }
+        case 2: {
+            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate rotation by X");
+            ImGui::SameLine(); ImGui::SliderFloat("X##102", &this->scene_item_settings[this->scene_item_selected][3]->fValue, 0.0f, 360.0f);
 
-    if (ImGui::TreeNode("Rotate")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##102", &this->scene_item_settings[this->scene_item_selected][3]->fValue, 0.0f, 360.0f);
+            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][4]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 4, 1.0f, 360.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate rotation by Y");
+            ImGui::SameLine(); ImGui::SliderFloat("Y##102", &this->scene_item_settings[this->scene_item_selected][4]->fValue, 0.0f, 360.0f);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][4]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 4, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##102", &this->scene_item_settings[this->scene_item_selected][4]->fValue, 0.0f, 360.0f);
+            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][5]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 5, 1.0f, 360.0, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate rotation by Z");
+            ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5]->fValue, 0.0f, 360.0f);
+            break;
+        }
+        case 3: {
+            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate translation by X");
+            ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][5]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 5, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5]->fValue, 0.0f, 360.0f);
-        ImGui::TreePop();
-    }
+            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 7, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate translation by Y");
+            ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-    if (ImGui::TreeNode("Translate")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 8, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate translation by Z");
+            ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            break;
+        }
+        case 4: {
+            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate displacement by X");
+            ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 7, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 10, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate displacement by Y");
+            ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 8, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 11, 0.05f, this->so_GUI_grid_size, true);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate displacement by Z");
+            ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            break;
+        }
+        case 5: {
+            ImGui::Text("Refraction");
+            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate refraction");
+            ImGui::SameLine(); ImGui::SliderFloat("##101", &this->scene_item_settings[this->scene_item_selected][12]->fValue, 1.0, 10.0);
 
-        ImGui::TreePop();
-    }
+            ImGui::Text("Specular Exponent");
+            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][17]->oAnimate))
+                this->animateValue(false, this->scene_item_selected, 17, 10.0f, 1000, false);
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Animate specular exponent");
+            ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
 
-    if (ImGui::TreeNode("Displace")) {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate displacement by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
+            ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
+            ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+            if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
+                this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
+            ImGui::PopStyleColor(4);
+            if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
+                this->colorPicker->show("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
 
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 10, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate displacement by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
+            ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
+            ImGui::SameLine();
 
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 11, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate displacement by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+            if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
+                this->scene_item_settings[this->scene_item_selected][14]->bValue = !this->scene_item_settings[this->scene_item_selected][14]->bValue;
+            ImGui::PopStyleColor(4);
 
-        ImGui::TreePop();
-    }
+            if (this->scene_item_settings[this->scene_item_selected][14]->bValue)
+                this->colorPicker->show("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
 
-    if (ImGui::TreeNode("Material")) {
-        ImGui::Text("Refraction");
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate refraction");
-        ImGui::SameLine(); ImGui::SliderFloat("##101", &this->scene_item_settings[this->scene_item_selected][12]->fValue, 1.0, 10.0);
+            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
+            ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
+            ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+            if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
+                this->scene_item_settings[this->scene_item_selected][15]->bValue = !this->scene_item_settings[this->scene_item_selected][15]->bValue;
+            ImGui::PopStyleColor(4);
+            if (this->scene_item_settings[this->scene_item_selected][15]->bValue)
+                this->colorPicker->show("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
 
-        ImGui::Text("Specular Exponent");
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][17]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, 17, 10.0f, 1000, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate specular exponent");
-        ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
-
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
-        ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
-            this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
-        ImGui::PopStyleColor(4);
-        if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
-            this->colorPicker->show("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
-
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
-        ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
-        ImGui::SameLine();
-
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
-            this->scene_item_settings[this->scene_item_selected][14]->bValue = !this->scene_item_settings[this->scene_item_selected][14]->bValue;
-        ImGui::PopStyleColor(4);
-
-        if (this->scene_item_settings[this->scene_item_selected][14]->bValue)
-            this->colorPicker->show("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
-
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
-        ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
-            this->scene_item_settings[this->scene_item_selected][15]->bValue = !this->scene_item_settings[this->scene_item_selected][15]->bValue;
-        ImGui::PopStyleColor(4);
-        if (this->scene_item_settings[this->scene_item_selected][15]->bValue)
-            this->colorPicker->show("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
-
-        ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
-        ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##104", ImVec2(0, 0)))
-            this->scene_item_settings[this->scene_item_selected][16]->bValue = !this->scene_item_settings[this->scene_item_selected][16]->bValue;
-        ImGui::PopStyleColor(4);
-        if (this->scene_item_settings[this->scene_item_selected][16]->bValue)
-            this->colorPicker->show("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
-
-        ImGui::TreePop();
-    }
-
-    if (ImGui::TreeNode("Illumination")) {
-        const char* illum_models_items[] = {
-            "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
-            "[1] Color on and Ambient on",
-            "[2] Highlight on",
-            "[3] Reflection on and Ray trace on",
-            "[4] Transparency: Glass on\n    Reflection: Ray trace on",
-            "[5] Reflection: Fresnel on\n    Ray trace on",
-            "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
-            "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
-            "[8] Reflection on\n    Ray trace off",
-            "[9] Transparency: Glass on\n    Reflection: Ray trace off",
-            "[10] Casts shadows onto invisible surfaces"
-        };
-        ImGui::Combo("##987", &this->scene_item_settings[this->scene_item_selected][18]->iValue, illum_models_items, IM_ARRAYSIZE(illum_models_items));
-
-        ImGui::TreePop();
+            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
+            ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
+            ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+            if (ImGui::Button(ICON_MD_COLORIZE "##104", ImVec2(0, 0)))
+                this->scene_item_settings[this->scene_item_selected][16]->bValue = !this->scene_item_settings[this->scene_item_selected][16]->bValue;
+            ImGui::PopStyleColor(4);
+            if (this->scene_item_settings[this->scene_item_selected][16]->bValue)
+                this->colorPicker->show("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
+            break;
+        }
+        case 6: {
+            const char* illum_models_items[] = {
+                "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
+                "[1] Color on and Ambient on",
+                "[2] Highlight on",
+                "[3] Reflection on and Ray trace on",
+                "[4] Transparency: Glass on\n    Reflection: Ray trace on",
+                "[5] Reflection: Fresnel on\n    Ray trace on",
+                "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
+                "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
+                "[8] Reflection on\n    Ray trace off",
+                "[9] Transparency: Glass on\n    Reflection: Ray trace off",
+                "[10] Casts shadows onto invisible surfaces"
+            };
+            ImGui::Combo("##987", &this->scene_item_settings[this->scene_item_selected][18]->iValue, illum_models_items, IM_ARRAYSIZE(illum_models_items));
+            break;
+        }
+        default:
+            break;
     }
     ImGui::PopItemWidth();
 
