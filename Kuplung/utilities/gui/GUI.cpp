@@ -14,6 +14,7 @@
 #include "GUI.hpp"
 #include "IconsFontAwesome.h"
 #include "IconsMaterialDesign.h"
+#include "GUITabs.hpp"
 
 static double gui_Time = 0.0f;
 static bool gui_MousePressed[3] = { false, false, false };
@@ -244,8 +245,8 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
     setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
 
     // specular exp
-    setts.push_back(this->addSceneSettingsObject(idx, 1.0));
-    setts_default.push_back(this->addSceneSettingsObject(idx, 1.0)); idx += 1;
+    setts.push_back(this->addSceneSettingsObject(idx, 0.0));
+    setts_default.push_back(this->addSceneSettingsObject(idx, 0.0)); idx += 1;
 
     // illumination model
     setts.push_back(this->addSceneSettingsObject(idx, 1.0));
@@ -308,7 +309,7 @@ void GUI::addSceneLight() {
     GUILightObject *glo_specular = new GUILightObject();
     glo_specular->colorPickerOpen = false;
     glo_specular->color = glm::vec3(1, 1, 1);
-    glo_specular->strength = 1.0;
+    glo_specular->strength = 0.0;
 
     GUISceneLight *gsl = new GUISceneLight();
     gsl->ambient = glo_ambient;
@@ -777,7 +778,7 @@ void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
     this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
     this->sceneLights[0]->diffuse = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
-    this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
+    this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 0.0, /*.color=*/ glm::vec3(1, 1, 1) });
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;
@@ -825,6 +826,17 @@ void GUI::dialogSceneSettings() {
     ImGui::Text("Vertices - %i", gso.verticesCount);
     ImGui::Text("Normal - %i", gso.normalsCount);
     ImGui::Text("Indices - %i", gso.indicesCount);
+
+//    static const char* tabNames[] = {ICON_MD_3D_ROTATION, ICON_FA_ARROWS, };
+//    static const int numTabs = sizeof(tabNames)/sizeof(tabNames[0]);
+//    static const char* tabTooltips[numTabs] = {ICON_MD_COLORIZE,"Texture","Particle","Physics"};
+//    static int tabItemOrdering[numTabs] = {0,1,2,3};
+//    static int selectedTab = 0;
+//    static int optionalHoveredTab = 0;
+//    ImGui::TabLabels(numTabs,tabNames,selectedTab,tabTooltips,true,&optionalHoveredTab,&tabItemOrdering[0],true,true);
+//    ImGui::Text("\nTab Page For Tab: \"%s\" here.\n", tabNames[selectedTab]);
+//    if (optionalHoveredTab >= 0)
+//        ImGui::Text("Mouse is hovering Tab Label: \"%s\".\n\n",tabNames[optionalHoveredTab]);
 
     ImGui::Separator();
     // cel shading
