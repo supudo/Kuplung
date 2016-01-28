@@ -50,6 +50,8 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showEditor = false;
     this->newHeightmap = false;
 
+    this->sceneLights = {};
+
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 50, posY = 50;
@@ -268,6 +270,30 @@ void GUI::setModelSetting(int modelID, int settingID, int iValue, float fValue, 
     this->scene_item_settings_default[modelID][settingID]->fValue = fValue;
     this->scene_item_settings_default[modelID][settingID]->bValue = bValue;
     this->scene_item_settings_default[modelID][settingID]->vValue = vValue;
+}
+
+void GUI::addSceneLight() {
+    GUILightObject *glo_ambient = new GUILightObject();
+    glo_ambient->colorPickerOpen = false;
+    glo_ambient->color = glm::vec3(1, 1, 1);
+    glo_ambient->strength = 1.0;
+
+    GUILightObject *glo_diffuse = new GUILightObject();
+    glo_diffuse->colorPickerOpen = false;
+    glo_diffuse->color = glm::vec3(1, 1, 1);
+    glo_diffuse->strength = 1.0;
+
+    GUILightObject *glo_specular = new GUILightObject();
+    glo_specular->colorPickerOpen = false;
+    glo_specular->color = glm::vec3(1, 1, 1);
+    glo_specular->strength = 1.0;
+
+    GUISceneLight *gsl = new GUISceneLight();
+    gsl->ambient = glo_ambient;
+    gsl->diffuse = glo_diffuse;
+    gsl->specular = glo_specular;
+
+    this->sceneLights.push_back(gsl);
 }
 
 void GUI::hideSceneSettings() {
@@ -672,8 +698,13 @@ void GUI::dialogGUIControls() {
     }
 
     if (this->gui_item_selected == 2 && ImGui::TreeNode("Colors")) {
-        ImGui::TextColored(ImVec4(this->so_GUI_lightAmbient.r, this->so_GUI_lightAmbient.g, this->so_GUI_lightAmbient.b, 1.0), "Ambient & Strength");
-        ImGui::ColorEdit4("##104Ambient", (float*)&this->so_GUI_lightAmbient, true);
+        ImGui::TextColored(ImVec4(this->sceneLights[0]->ambient->color.r, this->sceneLights[0]->ambient->color.g, this->sceneLights[0]->ambient->color.b, 1.0), "Ambient & Strength");
+        ImGui::ColorEdit4("##104Ambient", (float*)&this->sceneLights[0]->ambient->color, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##101", ImVec2(0, 0)))
+            this->sceneLights[0]->ambient->colorPickerOpen = !this->sceneLights[0]->ambient->colorPickerOpen;
+        if (this->sceneLights[0]->ambient->colorPickerOpen)
+            this->colorPicker->show("Ambient Color", &this->sceneLights[0]->ambient->colorPickerOpen, (float*)&this->sceneLights[0]->ambient->color, true);
 
         if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
@@ -681,8 +712,13 @@ void GUI::dialogGUIControls() {
             ImGui::SetTooltip("Animate ambient strength");
         ImGui::SameLine(); ImGui::SliderFloat("##01", &this->gui_item_settings[this->gui_item_selected][18]->fValue, 0.0, 4.0);
 
-        ImGui::TextColored(ImVec4(this->so_GUI_lightDiffuse.r, this->so_GUI_lightDiffuse.g, this->so_GUI_lightDiffuse.b, 1.0), "Diffuse & Strength");
-        ImGui::ColorEdit4("##105Diffuse", (float*)&this->so_GUI_lightDiffuse, true);
+        ImGui::TextColored(ImVec4(this->sceneLights[0]->diffuse->color.r, this->sceneLights[0]->diffuse->color.g, this->sceneLights[0]->diffuse->color.b, 1.0), "Diffuse & Strength");
+        ImGui::ColorEdit4("##105Diffuse", (float*)&this->sceneLights[0]->diffuse->color, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##102", ImVec2(0, 0)))
+            this->sceneLights[0]->diffuse->colorPickerOpen = !this->sceneLights[0]->diffuse->colorPickerOpen;
+        if (this->sceneLights[0]->diffuse->colorPickerOpen)
+            this->colorPicker->show("Diffuse Color", &this->sceneLights[0]->diffuse->colorPickerOpen, (float*)&this->sceneLights[0]->diffuse->color, true);
 
         if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
@@ -690,8 +726,13 @@ void GUI::dialogGUIControls() {
             ImGui::SetTooltip("Animate diffuse strength");
         ImGui::SameLine(); ImGui::SliderFloat("##02", &this->gui_item_settings[this->gui_item_selected][19]->fValue, 0.0, 6.0);
 
-        ImGui::TextColored(ImVec4(this->so_GUI_lightSpecular.r, this->so_GUI_lightSpecular.g, this->so_GUI_lightSpecular.b, 1.0), "Specular & Strength");
-        ImGui::ColorEdit4("##106Specular", (float*)&this->so_GUI_lightSpecular, true);
+        ImGui::TextColored(ImVec4(this->sceneLights[0]->specular->color.r, this->sceneLights[0]->specular->color.g, this->sceneLights[0]->specular->color.b, 1.0), "Specular & Strength");
+        ImGui::ColorEdit4("##106Specular", (float*)&this->sceneLights[0]->specular->color, true);
+        ImGui::SameLine();
+        if (ImGui::Button("X##103", ImVec2(0, 0)))
+            this->sceneLights[0]->specular->colorPickerOpen = !this->sceneLights[0]->specular->colorPickerOpen;
+        if (this->sceneLights[0]->specular->colorPickerOpen)
+            this->colorPicker->show("Specular Color", &this->sceneLights[0]->specular->colorPickerOpen, (float*)&this->sceneLights[0]->specular->color, true);
 
         if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20]->oAnimate))
             this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
@@ -708,9 +749,9 @@ void GUI::dialogGUIControls() {
 
 void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
-    this->so_GUI_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
-    this->so_GUI_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
-    this->so_GUI_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
+    this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
+    this->sceneLights[0]->diffuse = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
+    this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;

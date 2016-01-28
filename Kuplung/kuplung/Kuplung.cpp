@@ -422,9 +422,10 @@ void Kuplung::renderScene() {
         // light
         mmf->setOptionsLightPosition(vLightPosition);
         mmf->setOptionsLightDirection(vLightDirection);
-        mmf->setOptionsLightAmbient(this->gui->so_GUI_lightAmbient);
-        mmf->setOptionsLightDiffuse(this->gui->so_GUI_lightDiffuse);
-        mmf->setOptionsLightSpecular(this->gui->so_GUI_lightSpecular);
+
+        mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->ambient->color);
+        mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->diffuse->color);
+        mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->specular->color);
         mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[2][18]->fValue);
         mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[2][19]->fValue);
         mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[2][20]->fValue);
@@ -465,9 +466,11 @@ void Kuplung::initSceneGUI() {
 
     // initial variables
     this->gui->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
-    this->gui->so_GUI_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
-    this->gui->so_GUI_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
-    this->gui->so_GUI_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
+
+    this->gui->addSceneLight();
+    this->gui->sceneLights[0]->ambient->color = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->sceneLights[0]->diffuse->color = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->sceneLights[0]->specular->color = glm::vec3(1.0, 1.0, 1.0);
 
     // camera
     initialSettings[0] = std::vector<float> {

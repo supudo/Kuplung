@@ -54,6 +54,7 @@
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
+		8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -191,6 +192,8 @@
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8AD104051C05C489008CE831 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIColorPicker.cpp; sourceTree = "<group>"; };
+		8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIColorPicker.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +285,8 @@
 				8AB6F0431C3A9BEE00665C40 /* GUILog.hpp */,
 				8AB6F0441C3A9BEE00665C40 /* GUIScreenshot.cpp */,
 				8AB6F0451C3A9BEE00665C40 /* GUIScreenshot.hpp */,
+				8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */,
+				8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */,
 				8AB6F0C21C3AA48E00665C40 /* ImGui */,
 			);
 			path = gui;
@@ -516,6 +521,7 @@
 				8AB6F07C1C3A9BEE00665C40 /* noiseutils.cpp in Sources */,
 				8AB6F06E1C3A9BEE00665C40 /* MeshModelFace.cpp in Sources */,
 				8AB6F07B1C3A9BEE00665C40 /* HeightmapGenerator.cpp in Sources */,
+				8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */,
 				8AB6F0761C3A9BEE00665C40 /* GUIScreenshot.cpp in Sources */,
 				8AB6F07E1C3A9BEE00665C40 /* STLParser.cpp in Sources */,
 				8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */,

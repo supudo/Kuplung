@@ -43,6 +43,18 @@ struct GUISceneObject {
     int indicesCount;
 };
 
+struct GUILightObject {
+    bool colorPickerOpen;
+    float strength;
+    glm::vec3 color;
+};
+
+struct GUISceneLight {
+    GUILightObject *ambient;
+    GUILightObject *diffuse;
+    GUILightObject *specular;
+};
+
 class GUI {
 public:
     ~GUI();
@@ -72,6 +84,8 @@ public:
     void addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID, int verticesCount, int normalsCount, int indicesCount);
     void setModelSetting(int modelID, int settingID, int iValue = 0, float fValue = 0, bool bValue = true, glm::vec4 vValue = glm::vec4(1, 1, 1, 1));
 
+    void addSceneLight();
+
     //std::map<int, std::string> sceneModels;
     std::vector<GUISceneObject> sceneModels;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
@@ -88,9 +102,8 @@ public:
     glm::vec3 so_GUI_outlineColor;
     float loadingPercentage;
 
-    glm::vec3 so_GUI_lightAmbient, so_GUI_lightDiffuse, so_GUI_lightSpecular;
-    float so_GUI_lightAmbientStrength, so_GUI_lightDiffuseStrength, so_GUI_lightSpecularStrength;
-    glm::vec3 so_GUI_materialAmbient, so_GUI_materialDiffuse, so_GUI_materialSpecular;
+    int sceneLightsSelected;
+    std::vector<GUISceneLight*> sceneLights;
 
 private:
     std::function<void()> quitApp;
