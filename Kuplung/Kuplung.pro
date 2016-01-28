@@ -36,6 +36,7 @@ mac {
   MediaFiles.files = resources/Kuplung_Settings.ini
   MediaFiles.files += resources/Kuplung.icns
   MediaFiles.files += resources/gui
+  MediaFiles.files += resources/fonts
   MediaFiles.files += resources/shaders
   MediaFiles.path = Contents/Resources
   QMAKE_BUNDLE_DATA += MediaFiles
@@ -85,6 +86,7 @@ win32|win64 {
 
 OTHER_FILES += resources/*
 OTHER_FILES += resources/gui/*
+OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
 
 SOURCES += main.cpp \
@@ -133,6 +135,7 @@ HEADERS += \
     utilities/gui/GUILog.hpp \
     utilities/gui/GUIScreenshot.hpp \
     utilities/gui/GUIColorPicker.hpp \
+    utilities/gui/IconsFontAwesome.h \
     utilities/input/Controls.hpp \
     utilities/libnoise/HeightmapGenerator.hpp \
     utilities/libnoise/noiseutils.h \
@@ -149,6 +152,7 @@ HEADERS += \
     utilities/gl/GLIncludes.h
 
 DISTFILES += \
+    resources/fonts/fontawesome-webfont \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/dots.vert \

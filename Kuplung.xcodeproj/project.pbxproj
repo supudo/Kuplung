@@ -35,25 +35,26 @@
 		8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */; };
 		8AB6F0B31C3AA27D00665C40 /* ui_font.fnt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09C1C3AA1F900665C40 /* ui_font.fnt */; };
 		8AB6F0B41C3AA27D00665C40 /* ui_font.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09D1C3AA1F900665C40 /* ui_font.png */; };
-		8AB6F0B51C3AA29100665C40 /* axis.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A01C3AA1F900665C40 /* axis.frag */; };
-		8AB6F0B61C3AA29100665C40 /* axis.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A11C3AA1F900665C40 /* axis.vert */; };
-		8AB6F0B71C3AA29100665C40 /* dots.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A21C3AA1F900665C40 /* dots.frag */; };
-		8AB6F0B81C3AA29100665C40 /* dots.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A31C3AA1F900665C40 /* dots.vert */; };
-		8AB6F0B91C3AA29100665C40 /* grid.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A41C3AA1F900665C40 /* grid.frag */; };
-		8AB6F0BA1C3AA29100665C40 /* grid.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A51C3AA1F900665C40 /* grid.vert */; };
-		8AB6F0BB1C3AA29100665C40 /* kuplung.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A61C3AA1F900665C40 /* kuplung.frag */; };
-		8AB6F0BC1C3AA29100665C40 /* kuplung.geom in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A71C3AA1F900665C40 /* kuplung.geom */; };
-		8AB6F0BD1C3AA29100665C40 /* kuplung.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A81C3AA1F900665C40 /* kuplung.vert */; };
-		8AB6F0BE1C3AA29100665C40 /* light.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0A91C3AA1F900665C40 /* light.frag */; };
-		8AB6F0BF1C3AA29100665C40 /* light.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0AA1C3AA1F900665C40 /* light.vert */; };
-		8AB6F0C01C3AA29100665C40 /* terrain.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0AB1C3AA1F900665C40 /* terrain.frag */; };
-		8AB6F0C11C3AA29100665C40 /* terrain.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0AC1C3AA1F900665C40 /* terrain.vert */; };
+		8AB6F0B51C3AA29100665C40 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A01C3AA1F900665C40 /* axis.frag */; };
+		8AB6F0B61C3AA29100665C40 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A11C3AA1F900665C40 /* axis.vert */; };
+		8AB6F0B71C3AA29100665C40 /* dots.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A21C3AA1F900665C40 /* dots.frag */; };
+		8AB6F0B81C3AA29100665C40 /* dots.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A31C3AA1F900665C40 /* dots.vert */; };
+		8AB6F0B91C3AA29100665C40 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A41C3AA1F900665C40 /* grid.frag */; };
+		8AB6F0BA1C3AA29100665C40 /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A51C3AA1F900665C40 /* grid.vert */; };
+		8AB6F0BB1C3AA29100665C40 /* kuplung.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A61C3AA1F900665C40 /* kuplung.frag */; };
+		8AB6F0BC1C3AA29100665C40 /* kuplung.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A71C3AA1F900665C40 /* kuplung.geom */; };
+		8AB6F0BD1C3AA29100665C40 /* kuplung.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A81C3AA1F900665C40 /* kuplung.vert */; };
+		8AB6F0BE1C3AA29100665C40 /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A91C3AA1F900665C40 /* light.frag */; };
+		8AB6F0BF1C3AA29100665C40 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AA1C3AA1F900665C40 /* light.vert */; };
+		8AB6F0C01C3AA29100665C40 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AB1C3AA1F900665C40 /* terrain.frag */; };
+		8AB6F0C11C3AA29100665C40 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AC1C3AA1F900665C40 /* terrain.vert */; };
 		8AB6F0C91C3AA48E00665C40 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0C41C3AA48E00665C40 /* imgui.cpp */; };
 		8AB6F0CA1C3AA48E00665C40 /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0C61C3AA48E00665C40 /* imgui_demo.cpp */; };
 		8AB6F0CB1C3AA48E00665C40 /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0C71C3AA48E00665C40 /* imgui_draw.cpp */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
+		8AF7F0531C5A5D3D0015AC8D /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */; };
 		8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */; };
 /* End PBXBuildFile section */
 
@@ -72,26 +73,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8AC5748C1C3549F800069C7D /* CopyFiles */ = {
+		8AC5748C1C3549F800069C7D /* Copy Files */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
-				8AB6F0B51C3AA29100665C40 /* axis.frag in CopyFiles */,
-				8AB6F0B61C3AA29100665C40 /* axis.vert in CopyFiles */,
-				8AB6F0B71C3AA29100665C40 /* dots.frag in CopyFiles */,
-				8AB6F0B81C3AA29100665C40 /* dots.vert in CopyFiles */,
-				8AB6F0B91C3AA29100665C40 /* grid.frag in CopyFiles */,
-				8AB6F0BA1C3AA29100665C40 /* grid.vert in CopyFiles */,
-				8AB6F0BB1C3AA29100665C40 /* kuplung.frag in CopyFiles */,
-				8AB6F0BC1C3AA29100665C40 /* kuplung.geom in CopyFiles */,
-				8AB6F0BD1C3AA29100665C40 /* kuplung.vert in CopyFiles */,
-				8AB6F0BE1C3AA29100665C40 /* light.frag in CopyFiles */,
-				8AB6F0BF1C3AA29100665C40 /* light.vert in CopyFiles */,
-				8AB6F0C01C3AA29100665C40 /* terrain.frag in CopyFiles */,
-				8AB6F0C11C3AA29100665C40 /* terrain.vert in CopyFiles */,
+				8AB6F0B51C3AA29100665C40 /* axis.frag in Copy Files */,
+				8AB6F0B61C3AA29100665C40 /* axis.vert in Copy Files */,
+				8AB6F0B71C3AA29100665C40 /* dots.frag in Copy Files */,
+				8AB6F0B81C3AA29100665C40 /* dots.vert in Copy Files */,
+				8AB6F0B91C3AA29100665C40 /* grid.frag in Copy Files */,
+				8AB6F0BA1C3AA29100665C40 /* grid.vert in Copy Files */,
+				8AB6F0BB1C3AA29100665C40 /* kuplung.frag in Copy Files */,
+				8AB6F0BC1C3AA29100665C40 /* kuplung.geom in Copy Files */,
+				8AB6F0BD1C3AA29100665C40 /* kuplung.vert in Copy Files */,
+				8AB6F0BE1C3AA29100665C40 /* light.frag in Copy Files */,
+				8AB6F0BF1C3AA29100665C40 /* light.vert in Copy Files */,
+				8AB6F0C01C3AA29100665C40 /* terrain.frag in Copy Files */,
+				8AB6F0C11C3AA29100665C40 /* terrain.vert in Copy Files */,
 			);
+			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		8AC828AE1BF5FEE7009C74E0 /* Copy Files */ = {
@@ -104,6 +106,16 @@
 				8AB6F0931C3A9C4400665C40 /* Kuplung_Settings.ini in Copy Files */,
 			);
 			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AD236621C5A4F950001E934 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = fonts;
+			dstSubfolderSpec = 7;
+			files = (
+				8AF7F0531C5A5D3D0015AC8D /* fontawesome-webfont.ttf in CopyFiles */,
+			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -192,6 +204,7 @@
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8AD104051C05C489008CE831 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIColorPicker.cpp; sourceTree = "<group>"; };
 		8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIColorPicker.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -367,6 +380,7 @@
 		8AB6F0971C3AA1F900665C40 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				8AD236601C5A4F880001E934 /* fonts */,
 				8AB6F0981C3AA1F900665C40 /* gui */,
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
@@ -460,6 +474,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8AD236601C5A4F880001E934 /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -471,7 +493,8 @@
 				8AC828AD1BF5FEE7009C74E0 /* Frameworks */,
 				8AC828AE1BF5FEE7009C74E0 /* Copy Files */,
 				8AC5748B1C3549F700069C7D /* CopyFiles */,
-				8AC5748C1C3549F800069C7D /* CopyFiles */,
+				8AC5748C1C3549F800069C7D /* Copy Files */,
+				8AD236621C5A4F950001E934 /* CopyFiles */,
 			);
 			buildRules = (
 			);

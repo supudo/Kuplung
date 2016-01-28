@@ -12,6 +12,7 @@
 #include <sstream>
 #include "utilities/settings/Settings.h"
 #include "GUI.hpp"
+#include "IconsFontAwesome.h"
 
 static double gui_Time = 0.0f;
 static bool gui_MousePressed[3] = { false, false, false };
@@ -69,6 +70,16 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->isFrame = false;
     this->isProjection = true;
     this->fixedGridWorld = true;
+
+    // icon font
+    std::string symFont = Settings::Instance()->appFolder() + "/fonts/fontawesome-webfont.ttf";
+    ImGuiIO& io = ImGui::GetIO();
+    io.Fonts->AddFontDefault();
+    static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+    ImFontConfig icons_config;
+    icons_config.MergeMode = true;
+    icons_config.PixelSnapH = true;
+    io.Fonts->AddFontFromFileTTF(symFont.c_str(), 14.0f, &icons_config, icons_ranges);
 
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Init();
@@ -343,11 +354,11 @@ void GUI::renderStart(bool isFrame) {
 
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {
-            if (ImGui::MenuItem("New"))
+            if (ImGui::MenuItem(ICON_FA_FILE_O " New"))
                 this->newScene();
-            ImGui::MenuItem("Open", NULL, &showFileDialog);
+            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open", "...", &showFileDialog);
 
-            if (ImGui::BeginMenu("Open Recent")) {
+            if (ImGui::BeginMenu(ICON_FA_FILES_O " Open Recent")) {
                 if (this->recentFiles.size() == 0)
                     ImGui::MenuItem("No recent files", NULL, false, false);
                 else {
@@ -366,53 +377,42 @@ void GUI::renderStart(bool isFrame) {
 
             ImGui::Separator();
 #ifdef _WIN32
-            if (ImGui::MenuItem("Quit", "Alt+F4"))
+            if (ImGui::MenuItem(ICON_FA_POWER_OFF " Quit", "Alt+F4"))
 #else
-            if (ImGui::MenuItem("Quit", "Cmd+Q"))
+            if (ImGui::MenuItem(ICON_FA_POWER_OFF " Quit", "Cmd+Q"))
 #endif
                 this->quitApp();
             ImGui::EndMenu();
         }
 
         if (ImGui::BeginMenu("Scene")) {
-            ImGui::MenuItem("Display Terrain", NULL, &this->showHeightmap);
+            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
             ImGui::EndMenu();
         }
 
         if (ImGui::BeginMenu("View")) {
-            if (Settings::Instance()->showGrid)
-                ImGui::MenuItem("Hide Grid", NULL, &Settings::Instance()->showGrid);
-            else
-                ImGui::MenuItem("Show Grid", NULL, &Settings::Instance()->showGrid);
-
-            if (Settings::Instance()->showLight)
-                ImGui::MenuItem("Hide Light", NULL, &Settings::Instance()->showLight);
-            else
-                ImGui::MenuItem("Show Light", NULL, &Settings::Instance()->showLight);
-
-            if (Settings::Instance()->showAxes)
-                ImGui::MenuItem("Hide Axes", NULL, &Settings::Instance()->showAxes);
-            else
-                ImGui::MenuItem("Show Axes", NULL, &Settings::Instance()->showAxes);
+            ImGui::MenuItem(Settings::Instance()->showGrid ? ICON_FA_TOGGLE_ON " Hide Grid" : ICON_FA_TOGGLE_OFF " Show Grid", NULL, &Settings::Instance()->showGrid);
+            ImGui::MenuItem(Settings::Instance()->showLight ? ICON_FA_TOGGLE_ON " Hide Light" : ICON_FA_TOGGLE_OFF " Show Light", NULL, &Settings::Instance()->showLight);
+            ImGui::MenuItem(Settings::Instance()->showAxes ? ICON_FA_TOGGLE_ON " Hide Axes" : ICON_FA_TOGGLE_OFF " Show Axes", NULL, &Settings::Instance()->showAxes);
             ImGui::Separator();
-            ImGui::MenuItem("GUI Controls", NULL, &this->displayGUIControls);
-            ImGui::MenuItem("Scene Controls", NULL, &this->displaySceneSettings);
+            ImGui::MenuItem(this->displayGUIControls ? ICON_FA_TOGGLE_ON " GUI Controls" : ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->displayGUIControls);
+            ImGui::MenuItem(this->displaySceneSettings ? ICON_FA_TOGGLE_ON " Scene Controls" : ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->displaySceneSettings);
             ImGui::Separator();
-            ImGui::MenuItem("Show Log Window", NULL, &Settings::Instance()->logDebugInfo);
-            ImGui::MenuItem("Editor", NULL, &this->showEditor);
-            ImGui::MenuItem("Screenshot", NULL, &this->showScreenshotWindow);
-            ImGui::MenuItem("Scene Statistics", NULL, &this->displaySceneStats);
+            ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo);
+            ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showEditor);
+            ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
+            ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->displaySceneStats);
             ImGui::Separator();
-            ImGui::MenuItem("Options", NULL, &this->showOptions);
+            ImGui::MenuItem(ICON_FA_COG " Options", NULL, &this->showOptions);
             ImGui::EndMenu();
         }
 
         if (ImGui::BeginMenu("Help")) {
-            ImGui::MenuItem("Metrics", NULL, &this->showAppMetrics);
-            ImGui::MenuItem("About ImGui", NULL, &this->showAboutImgui);
-            ImGui::MenuItem("About Kuplung", NULL, &this->showAboutKuplung);
+            ImGui::MenuItem(ICON_FA_INFO " Metrics", NULL, &this->showAppMetrics);
+            ImGui::MenuItem(ICON_FA_INFO_CIRCLE " About ImGui", NULL, &this->showAboutImgui);
+            ImGui::MenuItem(ICON_FA_INFO_CIRCLE " About Kuplung", NULL, &this->showAboutKuplung);
             ImGui::Separator();
-            ImGui::MenuItem("ImGui Demo Window", NULL, &this->showDemoWindow);
+            ImGui::MenuItem("   ImGui Demo Window", NULL, &this->showDemoWindow);
             ImGui::EndMenu();
         }
 
@@ -908,6 +908,8 @@ void GUI::dialogSceneSettings() {
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate specular exponent");
         ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
+
+        ImGui::Text(ICON_FA_CROP);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
