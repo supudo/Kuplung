@@ -136,6 +136,7 @@ HEADERS += \
     utilities/gui/GUIScreenshot.hpp \
     utilities/gui/GUIColorPicker.hpp \
     utilities/gui/IconsFontAwesome.h \
+    utilities/gui/IconsMaterialDesign.h \
     utilities/input/Controls.hpp \
     utilities/libnoise/HeightmapGenerator.hpp \
     utilities/libnoise/noiseutils.h \
@@ -152,7 +153,8 @@ HEADERS += \
     utilities/gl/GLIncludes.h
 
 DISTFILES += \
-    resources/fonts/fontawesome-webfont \
+    resources/fonts/fontawesome-webfont.ttf \
+    resources/fonts/material-icons-regular.ttf \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/dots.vert \

@@ -13,6 +13,7 @@
 #include "utilities/settings/Settings.h"
 #include "GUI.hpp"
 #include "IconsFontAwesome.h"
+#include "IconsMaterialDesign.h"
 
 static double gui_Time = 0.0f;
 static bool gui_MousePressed[3] = { false, false, false };
@@ -72,14 +73,24 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fixedGridWorld = true;
 
     // icon font
-    std::string symFont = Settings::Instance()->appFolder() + "/fonts/fontawesome-webfont.ttf";
     ImGuiIO& io = ImGui::GetIO();
     io.Fonts->AddFontDefault();
-    static const ImWchar icons_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
-    ImFontConfig icons_config;
-    icons_config.MergeMode = true;
-    icons_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(symFont.c_str(), 14.0f, &icons_config, icons_ranges);
+
+    // http://fortawesome.github.io/Font-Awesome/icons/
+    std::string faFont = Settings::Instance()->appFolder() + "/fonts/fontawesome-webfont.ttf";
+    static const ImWchar fa_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+    ImFontConfig fa_config;
+    fa_config.MergeMode = true;
+    fa_config.PixelSnapH = true;
+    io.Fonts->AddFontFromFileTTF(faFont.c_str(), 14.0f, &fa_config, fa_ranges);
+
+    // https://design.google.com/icons/
+    std::string gmFont = Settings::Instance()->appFolder() + "/fonts/material-icons-regular.ttf";
+    static const ImWchar gm_ranges[] = { ICON_MIN_MD, ICON_MAX_MD, 0 };
+    ImFontConfig gm_config;
+    gm_config.MergeMode = true;
+    gm_config.PixelSnapH = true;
+    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 14.0f, &gm_config, gm_ranges);
 
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Init();
@@ -701,8 +712,13 @@ void GUI::dialogGUIControls() {
         ImGui::TextColored(ImVec4(this->sceneLights[0]->ambient->color.r, this->sceneLights[0]->ambient->color.g, this->sceneLights[0]->ambient->color.b, 1.0), "Ambient & Strength");
         ImGui::ColorEdit4("##104Ambient", (float*)&this->sceneLights[0]->ambient->color, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##101", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
             this->sceneLights[0]->ambient->colorPickerOpen = !this->sceneLights[0]->ambient->colorPickerOpen;
+        ImGui::PopStyleColor(4);
         if (this->sceneLights[0]->ambient->colorPickerOpen)
             this->colorPicker->show("Ambient Color", &this->sceneLights[0]->ambient->colorPickerOpen, (float*)&this->sceneLights[0]->ambient->color, true);
 
@@ -715,8 +731,13 @@ void GUI::dialogGUIControls() {
         ImGui::TextColored(ImVec4(this->sceneLights[0]->diffuse->color.r, this->sceneLights[0]->diffuse->color.g, this->sceneLights[0]->diffuse->color.b, 1.0), "Diffuse & Strength");
         ImGui::ColorEdit4("##105Diffuse", (float*)&this->sceneLights[0]->diffuse->color, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##102", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
             this->sceneLights[0]->diffuse->colorPickerOpen = !this->sceneLights[0]->diffuse->colorPickerOpen;
+        ImGui::PopStyleColor(4);
         if (this->sceneLights[0]->diffuse->colorPickerOpen)
             this->colorPicker->show("Diffuse Color", &this->sceneLights[0]->diffuse->colorPickerOpen, (float*)&this->sceneLights[0]->diffuse->color, true);
 
@@ -729,8 +750,13 @@ void GUI::dialogGUIControls() {
         ImGui::TextColored(ImVec4(this->sceneLights[0]->specular->color.r, this->sceneLights[0]->specular->color.g, this->sceneLights[0]->specular->color.b, 1.0), "Specular & Strength");
         ImGui::ColorEdit4("##106Specular", (float*)&this->sceneLights[0]->specular->color, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##103", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
             this->sceneLights[0]->specular->colorPickerOpen = !this->sceneLights[0]->specular->colorPickerOpen;
+        ImGui::PopStyleColor(4);
         if (this->sceneLights[0]->specular->colorPickerOpen)
             this->colorPicker->show("Specular Color", &this->sceneLights[0]->specular->colorPickerOpen, (float*)&this->sceneLights[0]->specular->color, true);
 
@@ -912,32 +938,54 @@ void GUI::dialogSceneSettings() {
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
         ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##101", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
             this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
+        ImGui::PopStyleColor(4);
         if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
             this->colorPicker->show("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
         ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##102", ImVec2(0, 0)))
+
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
             this->scene_item_settings[this->scene_item_selected][14]->bValue = !this->scene_item_settings[this->scene_item_selected][14]->bValue;
+        ImGui::PopStyleColor(4);
+
         if (this->scene_item_settings[this->scene_item_selected][14]->bValue)
             this->colorPicker->show("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
         ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##103", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
             this->scene_item_settings[this->scene_item_selected][15]->bValue = !this->scene_item_settings[this->scene_item_selected][15]->bValue;
+        ImGui::PopStyleColor(4);
         if (this->scene_item_settings[this->scene_item_selected][15]->bValue)
             this->colorPicker->show("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
 
         ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
         ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
         ImGui::SameLine();
-        if (ImGui::Button(ICON_FA_CROSSHAIRS "##104", ImVec2(0, 0)))
+        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+        if (ImGui::Button(ICON_MD_COLORIZE "##104", ImVec2(0, 0)))
             this->scene_item_settings[this->scene_item_selected][16]->bValue = !this->scene_item_settings[this->scene_item_selected][16]->bValue;
+        ImGui::PopStyleColor(4);
         if (this->scene_item_settings[this->scene_item_selected][16]->bValue)
             this->colorPicker->show("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
 
