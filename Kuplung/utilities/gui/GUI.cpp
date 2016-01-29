@@ -53,6 +53,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showEditor = false;
     this->newHeightmap = false;
     this->outlineColorPickerOpen = false;
+    this->deleteYnSceneModel = false;
 
     this->sceneLights = {};
 
@@ -1046,7 +1047,31 @@ void GUI::dialogSceneSettings() {
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     //ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
     ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    // TODO: object actions menu
+    if (ImGui::BeginPopupContextItem("Actions")) {
+        if (ImGui::MenuItem("Rename")) {
+
+        }
+        if (ImGui::MenuItem("Duplicate")) {
+
+        }
+        if (ImGui::MenuItem("Delete"))
+            this->deleteYnSceneModel = true;
+        ImGui::EndPopup();
+    }
     ImGui::PopItemWidth();
+
+    if (this->deleteYnSceneModel)
+        ImGui::OpenPopup("Delete?");
+    if (ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::Text("Are you sure you want to delete this model?");
+
+        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->deleteYnSceneModel = false; }
+        ImGui::SameLine();
+        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->deleteYnSceneModel = false; }
+
+        ImGui::EndPopup();
+    }
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     GUISceneObject gso = this->sceneModels[this->scene_item_selected];

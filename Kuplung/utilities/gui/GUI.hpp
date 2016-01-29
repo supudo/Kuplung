@@ -172,7 +172,7 @@ private:
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
-    bool outlineColorPickerOpen;
+    bool outlineColorPickerOpen, deleteYnSceneModel;
 };
 
 #endif /* GUI_hpp */
