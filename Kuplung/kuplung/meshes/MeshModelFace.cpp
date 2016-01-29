@@ -70,7 +70,7 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
     this->so_alpha = -1;
-    this->so_outlineColor = glm::vec3(1.0, 0.0, 0.0);
+    this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
     // light
     this->so_lightStrengthAmbient = 0.5;
@@ -701,7 +701,7 @@ void MeshModelFace::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void MeshModelFace::setOptionsOutlineColor(glm::vec3 outlineColor) {
+void MeshModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 

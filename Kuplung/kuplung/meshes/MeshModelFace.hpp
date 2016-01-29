@@ -52,7 +52,7 @@ public:
 
     // outlining
     void setOptionsSelected(bool selectedYn);
-    void setOptionsOutlineColor(glm::vec3 outlineColor);
+    void setOptionsOutlineColor(glm::vec4 outlineColor);
     void setOptionsOutlineThickness(float thickness);
 
     objModelFace oFace;
@@ -77,7 +77,7 @@ private:
 
     // outline
     float so_outlineThickness;
-    glm::vec3 so_outlineColor;
+    glm::vec4 so_outlineColor;
 
     // light
     glm::vec3 so_lightPosition, so_lightDirection;

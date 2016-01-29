@@ -636,8 +636,7 @@ void GUI::dialogGUIControls() {
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     switch (this->gui_item_selected) {
         case 0: {
-            ImGui::Text("Field of view"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("FOV");
-            ImGui::SliderFloat("##104", &this->so_GUI_FOV, 0.0f, 180.0f);
+            this->addControlsSlider("Field of view", 1, 0.0f, 180.0f, false, NULL, &this->so_GUI_FOV);
             ImGui::Separator();
 
             ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
@@ -657,7 +656,7 @@ void GUI::dialogGUIControls() {
             ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
             ImGui::Separator();
 
-            ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("RGB format");
+            ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, this->so_GUI_outlineColor.a), "Outline color"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("RGB format");
             ImGui::ColorEdit4("##101OutlineColor", (float*)&this->so_GUI_outlineColor, true);
             ImGui::SameLine();
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
@@ -1018,8 +1017,22 @@ void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string ani
     }
 }
 
+void GUI::addControlsSlider(std::string title, int idx, float step, float limit, bool showAnimate, bool* animate, float* sliderValue) {
+    ImGui::Text("%s", title.c_str());
+    if (showAnimate) {
+        std::string c_id = "##00" + std::to_string(idx);
+        if (ImGui::Checkbox(c_id.c_str(), *(&animate)))
+            this->animateValue(false, this->scene_item_selected, idx, step, limit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s", title.c_str());
+        ImGui::SameLine();
+    }
+    std::string s_id = "##10" + std::to_string(idx);
+    ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 1.0, limit);
+}
+
 void GUI::resetValuesGUIControls() {
-    this->so_GUI_outlineColor = glm::vec3(1.0, 0.0, 0.0);
+    this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
     this->sceneLights[0]->diffuse = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
     this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 0.0, /*.color=*/ glm::vec3(1, 1, 1) });
@@ -1125,19 +1138,13 @@ void GUI::dialogSceneSettings() {
         }
         case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
-            ImGui::Text("Refraction");
-            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate refraction");
-            ImGui::SameLine(); ImGui::SliderFloat("##101", &this->scene_item_settings[this->scene_item_selected][12]->fValue, 1.0, 10.0);
 
-            ImGui::Text("Specular Exponent");
-            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][17]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 17, 10.0f, 1000, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate specular exponent");
-            ImGui::SameLine(); ImGui::SliderFloat("##202", &this->scene_item_settings[this->scene_item_selected][17]->fValue, 0.0, 1000.0);
+            this->addControlsSlider("Refraction", 12, 0.05f, 10.0f, true,
+                                    &this->scene_item_settings[this->scene_item_selected][12]->oAnimate,
+                                    &this->scene_item_settings[this->scene_item_selected][12]->fValue);
+            this->addControlsSlider("Specular Exponent", 17, 10.0f, 1000.0f, true,
+                                    &this->scene_item_settings[this->scene_item_selected][17]->oAnimate,
+                                    &this->scene_item_settings[this->scene_item_selected][17]->fValue);
 
             ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
             ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
