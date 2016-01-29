@@ -152,8 +152,9 @@ private:
     void dialogSceneStats();
 
     void addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit);
-    void addControlsSlider(std::string title, int idx, float step, float limit, bool showAnimate, bool* animate, float* sliderValue);
-    void addControlColor(std::string title, glm::vec4* vValue, bool* bValue);
+    void addControlsSlider(std::string title, int idx, bool isGUI, float step, float limit, bool showAnimate, bool* animate, float* sliderValue);
+    void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
+    void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
 
     SDL_Window *sdlWindow;
     bool isGUIVisible;
