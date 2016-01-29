@@ -997,6 +997,25 @@ void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string ani
             ImGui::SetTooltip("Animate %s by Z", animate.c_str());
         ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][z]->fValue, 0.0f, animateLimit);
     }
+    else {
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][x]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, x, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by X", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][x]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][y]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, y, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][y]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][z]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, z, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][z]->fValue, 0.0f, animateLimit);
+    }
 }
 
 void GUI::resetValuesGUIControls() {
@@ -1086,86 +1105,22 @@ void GUI::dialogSceneSettings() {
         }
         case 1: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
-            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 0, 0.01f, 1.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate scale by X");
-            ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][0]->fValue, 0.0f, 1.0f);
-
-            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][1]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 1, 0.01f, 1.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate scale by Y");
-            ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][1]->fValue, 0.0f, 1.0f);
-
-            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][2]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 2, 0.01f, 1.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate scale by Z");
-            ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][2]->fValue, 0.0f, 1.0f);
+            this->addControlsXYZ(false, 0, 1, 2, "scale", 0.01f, 1.0f);
             break;
         }
         case 2: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
-            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate rotation by X");
-            ImGui::SameLine(); ImGui::SliderFloat("X##102", &this->scene_item_settings[this->scene_item_selected][3]->fValue, 0.0f, 360.0f);
-
-            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][4]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 4, 1.0f, 360.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate rotation by Y");
-            ImGui::SameLine(); ImGui::SliderFloat("Y##102", &this->scene_item_settings[this->scene_item_selected][4]->fValue, 0.0f, 360.0f);
-
-            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][5]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 5, 1.0f, 360.0, false);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate rotation by Z");
-            ImGui::SameLine(); ImGui::SliderFloat("Z##102", &this->scene_item_settings[this->scene_item_selected][5]->fValue, 0.0f, 360.0f);
+            this->addControlsXYZ(false, 3, 4, 5, "rotation", 1.0f, 360.0f);
             break;
         }
         case 3: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
-            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate translation by X");
-            ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][6]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-
-            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][7]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 7, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate translation by Y");
-            ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][7]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-
-            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][8]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 8, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate translation by Z");
-            ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][8]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            this->addControlsXYZ(false, 6, 7, 8, "translation", 0.05f, this->so_GUI_grid_size);
             break;
         }
         case 4: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
-            if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate displacement by X");
-            ImGui::SameLine(); ImGui::SliderFloat("X##103", &this->scene_item_settings[this->scene_item_selected][9]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-
-            if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][10]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 10, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate displacement by Y");
-            ImGui::SameLine(); ImGui::SliderFloat("Y##103", &this->scene_item_settings[this->scene_item_selected][10]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-
-            if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][11]->oAnimate))
-                this->animateValue(false, this->scene_item_selected, 11, 0.05f, this->so_GUI_grid_size, true);
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Animate displacement by Z");
-            ImGui::SameLine(); ImGui::SliderFloat("Z##103", &this->scene_item_settings[this->scene_item_selected][11]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+            this->addControlsXYZ(false, 9, 10, 11, "displacement", 0.05f, this->so_GUI_grid_size);
             break;
         }
         case 5: {
