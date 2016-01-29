@@ -853,50 +853,17 @@ void GUI::dialogGUIControls() {
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
-                    // scale
-                    ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
-                    ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
-                    ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
+                    this->addControlsXYZ(true, 9, 10, 11, "scale", 0.01f, 1.0f);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    // rotate
-                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by X");
-                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
-                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by Y");
-                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
-                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by Z");
-                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    this->addControlsXYZ(true, 12, 13, 14, "rotation", 1.0f, 360.0f);
                     break;
                 }
                 case 3: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    // translate
-                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by X");
-                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by Y");
-                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by Z");
-                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    this->addControlsXYZ(true, 15, 16, 17, "translation", 0.05f, this->so_GUI_grid_size);
                     break;
                 }
                 case 4: {
@@ -986,50 +953,17 @@ void GUI::dialogGUIControls() {
             switch (this->selectedTabGUITerrain) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
-                    // scale
-                    ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
-                    ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
-                    ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
+                    this->addControlsXYZ(true, 9, 10, 11, "rotation", 0.01f, 1.0f);
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    // rotate
-                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by X");
-                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
-                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by Y");
-                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
-                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate rotation by Z");
-                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    this->addControlsXYZ(true, 12, 13, 14, "rotation", 1.0f, 360.0f);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    // translate
-                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by X");
-                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by Y");
-                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
-                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
-                    if (ImGui::IsItemHovered())
-                        ImGui::SetTooltip("Animate translation by Z");
-                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    this->addControlsXYZ(true, 15, 16, 17, "rotation", 1.0f, 360.0f);
                     break;
                 }
                 default:
@@ -1041,6 +975,28 @@ void GUI::dialogGUIControls() {
     ImGui::PopItemWidth();
 
     ImGui::End();
+}
+
+void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit) {
+    if (isGuiControl) {
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][x]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, x, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by X", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][x]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][y]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, y, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][y]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][z]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, z, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][z]->fValue, 0.0f, animateLimit);
+    }
 }
 
 void GUI::resetValuesGUIControls() {

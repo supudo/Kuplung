@@ -151,6 +151,8 @@ private:
 
     void dialogSceneStats();
 
+    void addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit);
+
     SDL_Window *sdlWindow;
     bool isGUIVisible;
     bool logDebugInfo, showScreenshotWindow, showFileDialog, showOptions, showEditor;
