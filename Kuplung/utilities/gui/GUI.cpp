@@ -1057,7 +1057,7 @@ void GUI::dialogSceneSettings() {
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals count:"); ImGui::SameLine(); ImGui::Text("%i", gso.normalsCount);
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices count:"); ImGui::SameLine(); ImGui::Text("%i", gso.indicesCount);
 
-    ImGui::Text("");
+    ImGui::Separator();
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
