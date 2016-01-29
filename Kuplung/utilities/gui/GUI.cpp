@@ -628,10 +628,15 @@ void GUI::dialogGUIControls() {
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
 
     const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
-    ImGui::Combo("##111", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    //ImGui::Combo("##111", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    //ImGui::Text("GUI Objects");
+    ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    ImGui::PopItemWidth();
+
+    ImGui::Separator();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     switch (this->gui_item_selected) {
@@ -661,8 +666,6 @@ void GUI::dialogGUIControls() {
             break;
         }
         case 1: {
-            ImGui::Text("");
-
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -739,8 +742,6 @@ void GUI::dialogGUIControls() {
             break;
         }
         case 2: {
-            ImGui::Text("");
-
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -809,8 +810,6 @@ void GUI::dialogGUIControls() {
             break;
         }
         case 3: {
-            ImGui::Text("");
-
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -870,8 +869,6 @@ void GUI::dialogGUIControls() {
             break;
         }
         case 4: {
-            ImGui::Text("");
-
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
