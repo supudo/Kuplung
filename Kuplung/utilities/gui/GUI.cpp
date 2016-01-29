@@ -1031,6 +1031,23 @@ void GUI::addControlsSlider(std::string title, int idx, float step, float limit,
     ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 1.0, limit);
 }
 
+void GUI::addControlColor(std::string title, glm::vec4* vValue, bool* bValue) {
+    std::string ce_id = "##101" + title;
+    std::string icon_id = ICON_MD_COLORIZE + ce_id;
+    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, (*(&vValue))->a), "%s", title.c_str());
+    ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true);
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+    if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
+        *bValue = !*bValue;
+    ImGui::PopStyleColor(4);
+    if (*bValue)
+        this->colorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+}
+
 void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
@@ -1110,7 +1127,6 @@ void GUI::dialogSceneSettings() {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
             // cel shading
             ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
-
             // alpha
             ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
             ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
@@ -1138,67 +1154,12 @@ void GUI::dialogSceneSettings() {
         }
         case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
-
-            this->addControlsSlider("Refraction", 12, 0.05f, 10.0f, true,
-                                    &this->scene_item_settings[this->scene_item_selected][12]->oAnimate,
-                                    &this->scene_item_settings[this->scene_item_selected][12]->fValue);
-            this->addControlsSlider("Specular Exponent", 17, 10.0f, 1000.0f, true,
-                                    &this->scene_item_settings[this->scene_item_selected][17]->oAnimate,
-                                    &this->scene_item_settings[this->scene_item_selected][17]->fValue);
-
-            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][13]->vValue.r, this->scene_item_settings[this->scene_item_selected][13]->vValue.g, this->scene_item_settings[this->scene_item_selected][13]->vValue.b, 1.0), "Ambient");
-            ImGui::ColorEdit4("##101Ambient", (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
-            ImGui::SameLine();
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-            if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
-                this->scene_item_settings[this->scene_item_selected][13]->bValue = !this->scene_item_settings[this->scene_item_selected][13]->bValue;
-            ImGui::PopStyleColor(4);
-            if (this->scene_item_settings[this->scene_item_selected][13]->bValue)
-                this->colorPicker->show("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][13]->vValue, true);
-
-            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][14]->vValue.r, this->scene_item_settings[this->scene_item_selected][14]->vValue.g, this->scene_item_settings[this->scene_item_selected][14]->vValue.b, 1.0), "Diffuse");
-            ImGui::ColorEdit4("##102Diffuse", (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
-            ImGui::SameLine();
-
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-            if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
-                this->scene_item_settings[this->scene_item_selected][14]->bValue = !this->scene_item_settings[this->scene_item_selected][14]->bValue;
-            ImGui::PopStyleColor(4);
-
-            if (this->scene_item_settings[this->scene_item_selected][14]->bValue)
-                this->colorPicker->show("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][14]->vValue, true);
-
-            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][15]->vValue.r, this->scene_item_settings[this->scene_item_selected][15]->vValue.g, this->scene_item_settings[this->scene_item_selected][15]->vValue.b, 1.0), "Specular");
-            ImGui::ColorEdit4("##103Specular", (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
-            ImGui::SameLine();
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-            if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
-                this->scene_item_settings[this->scene_item_selected][15]->bValue = !this->scene_item_settings[this->scene_item_selected][15]->bValue;
-            ImGui::PopStyleColor(4);
-            if (this->scene_item_settings[this->scene_item_selected][15]->bValue)
-                this->colorPicker->show("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][15]->vValue, true);
-
-            ImGui::TextColored(ImVec4(this->scene_item_settings[this->scene_item_selected][16]->vValue.r, this->scene_item_settings[this->scene_item_selected][16]->vValue.g, this->scene_item_settings[this->scene_item_selected][16]->vValue.b, 1.0), "Emission");
-            ImGui::ColorEdit4("##104Emission", (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
-            ImGui::SameLine();
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-            if (ImGui::Button(ICON_MD_COLORIZE "##104", ImVec2(0, 0)))
-                this->scene_item_settings[this->scene_item_selected][16]->bValue = !this->scene_item_settings[this->scene_item_selected][16]->bValue;
-            ImGui::PopStyleColor(4);
-            if (this->scene_item_settings[this->scene_item_selected][16]->bValue)
-                this->colorPicker->show("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->bValue, (float*)&this->scene_item_settings[this->scene_item_selected][16]->vValue, true);
+            this->addControlsSlider("Refraction", 12, 0.05f, 10.0f, true, &this->scene_item_settings[this->scene_item_selected][12]->oAnimate, &this->scene_item_settings[this->scene_item_selected][12]->fValue);
+            this->addControlsSlider("Specular Exponent", 17, 10.0f, 1000.0f, true, &this->scene_item_settings[this->scene_item_selected][17]->oAnimate, &this->scene_item_settings[this->scene_item_selected][17]->fValue);
+            this->addControlColor("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->vValue, &this->scene_item_settings[this->scene_item_selected][13]->bValue);
+            this->addControlColor("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->vValue, &this->scene_item_settings[this->scene_item_selected][14]->bValue);
+            this->addControlColor("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->vValue, &this->scene_item_settings[this->scene_item_selected][15]->bValue);
+            this->addControlColor("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->vValue, &this->scene_item_settings[this->scene_item_selected][16]->bValue);
             break;
         }
         case 6: {

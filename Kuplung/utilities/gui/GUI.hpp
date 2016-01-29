@@ -153,6 +153,7 @@ private:
 
     void addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit);
     void addControlsSlider(std::string title, int idx, float step, float limit, bool showAnimate, bool* animate, float* sliderValue);
+    void addControlColor(std::string title, glm::vec4* vValue, bool* bValue);
 
     SDL_Window *sdlWindow;
     bool isGUIVisible;
