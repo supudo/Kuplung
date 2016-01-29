@@ -69,7 +69,10 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->gui_item_selected = 0;
     this->selectedTabScene = 0;
-    this->selectedTabGUI = 0;
+    this->selectedTabGUICamera = 0;
+    this->selectedTabGUIGrid = 0;
+    this->selectedTabGUILight = 0;
+    this->selectedTabGUITerrain = 0;
 
     this->isFrame = false;
     this->isProjection = true;
@@ -163,6 +166,27 @@ void GUI::recentFilesClear() {
 }
 
 void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings) {
+    // TODO: fix settings properly!!!!
+    std::vector<GUIObjectSetting*> setts;
+    std::vector<GUIObjectSetting*> setts_default;
+    for (int j=0; j<22; j++) {
+        GUIObjectSetting* gos = new GUIObjectSetting();
+        gos->oIndex = j;
+        gos->oAnimate = false;
+        gos->bValue = true;
+        gos->fValue = 0.0;
+        setts.push_back(gos);
+
+        GUIObjectSetting* gos_default = new GUIObjectSetting();
+        gos_default->oIndex = j;
+        gos_default->oAnimate = false;
+        gos_default->bValue = true;
+        gos_default->fValue = 0.0;
+        setts_default.push_back(gos_default);
+    }
+    this->gui_item_settings[0] = setts;
+    this->gui_item_settings_default[0] = setts_default;
+
     for (int i=0; i<guiObjectsCount; i++) {
         std::vector<GUIObjectSetting*> setts;
         std::vector<GUIObjectSetting*> setts_default;
@@ -181,8 +205,8 @@ void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>>
             gos_default->fValue = initialSettings[i][j];
             setts_default.push_back(gos_default);
         }
-        this->gui_item_settings[i] = setts;
-        this->gui_item_settings_default[i] = setts_default;
+        this->gui_item_settings[i + 1] = setts;
+        this->gui_item_settings_default[i + 1] = setts_default;
     }
 }
 
@@ -601,176 +625,418 @@ void GUI::dialogGUIControls() {
     if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0)))
         this->resetValuesGUIControls();
     ImGui::PopStyleColor(3);
+    ImGui::Separator();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
-    if (ImGui::CollapsingHeader("General")) {
-        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.92f);
-        ImGui::Text("Field of view");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("FOV");
-        ImGui::SliderFloat("##104", &this->so_GUI_FOV, 0.0f, 180.0f);
-        ImGui::Separator();
-        ImGui::Text("Ratio");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("W & H");
-        ImGui::SliderFloat("##105", &this->so_GUI_ratio_w, 0.0f, 5.0f);
-        ImGui::SliderFloat("##106", &this->so_GUI_ratio_h, 0.0f, 5.0f);
-        ImGui::Separator();
-        ImGui::Text("Planes");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Far & Close");
-        ImGui::SliderFloat("##107", &this->so_GUI_plane_close, 0.0f, 1.0f);
-        ImGui::SliderFloat("##108", &this->so_GUI_plane_far, 0.0f, 100.0f);
-        ImGui::Separator();
-        ImGui::Text("Grid size");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Squares");
-        ImGui::SliderInt("##109", &this->so_GUI_grid_size, 0, 100);
-        ImGui::Separator();
-        ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
-        ImGui::Separator();
-        ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("RGB format");
-        ImGui::SliderFloat("##110", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
-        ImGui::SliderFloat("##111", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
-        ImGui::SliderFloat("##112", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
-        ImGui::Separator();
-        ImGui::Text("Outline thickness");
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Thickness");
-        ImGui::SliderFloat("##103", &this->so_outlineThickness, 1.01f, 2.0f);
-        ImGui::PopItemWidth();
+
+    const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
+    ImGui::Combo("##111", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+
+    switch (this->gui_item_selected) {
+        case 0: {
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.92f);
+            ImGui::Text("Field of view");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("FOV");
+            ImGui::SliderFloat("##104", &this->so_GUI_FOV, 0.0f, 180.0f);
+            ImGui::Separator();
+            ImGui::Text("Ratio");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("W & H");
+            ImGui::SliderFloat("##105", &this->so_GUI_ratio_w, 0.0f, 5.0f);
+            ImGui::SliderFloat("##106", &this->so_GUI_ratio_h, 0.0f, 5.0f);
+            ImGui::Separator();
+            ImGui::Text("Planes");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Far & Close");
+            ImGui::SliderFloat("##107", &this->so_GUI_plane_close, 0.0f, 1.0f);
+            ImGui::SliderFloat("##108", &this->so_GUI_plane_far, 0.0f, 100.0f);
+            ImGui::Separator();
+            ImGui::Text("Grid size");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Squares");
+            ImGui::SliderInt("##109", &this->so_GUI_grid_size, 0, 100);
+            ImGui::Separator();
+            ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
+            ImGui::Separator();
+            ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("RGB format");
+            ImGui::SliderFloat("##110", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
+            ImGui::SliderFloat("##111", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
+            ImGui::SliderFloat("##112", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
+            ImGui::Separator();
+            ImGui::Text("Outline thickness");
+            if (ImGui::IsItemHovered())
+                ImGui::SetTooltip("Thickness");
+            ImGui::SliderFloat("##103", &this->so_outlineThickness, 1.01f, 2.0f);
+            ImGui::PopItemWidth();
+            break;
+        }
+        case 1: {
+            ImGui::Text("");
+
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+            const char* tabsGUICamera[] = {
+                "\n" ICON_MD_REMOVE_RED_EYE,
+                "\n" ICON_MD_3D_ROTATION,
+                "\n" ICON_MD_OPEN_WITH,
+            };
+            const char* tabsLabelsGUICamera[] = { "Look At", "Rotate", "Translate" };
+            const int numTabsGUICamera = sizeof(tabsGUICamera) / sizeof(tabsGUICamera[0]);
+            ImGui::TabLabels(numTabsGUICamera, tabsGUICamera, this->selectedTabGUICamera, ImVec2(30.0, 30.0), tabsLabelsGUICamera);
+            ImGui::PopStyleColor(3);
+
+            ImGui::Separator();
+
+            switch (this->selectedTabGUICamera) {
+                case 0: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Look-At matrix");
+                    ImGui::SliderFloat("Eye X", &this->gui_item_settings[this->gui_item_selected][0]->fValue, -10.0f, 10.0f);
+                    ImGui::SliderFloat("Eye Y", &this->gui_item_settings[this->gui_item_selected][1]->fValue, -100.0f, 10.0f);
+                    ImGui::SliderFloat("Eye Z", &this->gui_item_settings[this->gui_item_selected][2]->fValue, 0.0f, 90.0f);
+                    ImGui::Separator();
+                    ImGui::SliderFloat("Center X", &this->gui_item_settings[this->gui_item_selected][3]->fValue, -10.0f, 10.0f);
+                    ImGui::SliderFloat("Center Y", &this->gui_item_settings[this->gui_item_selected][4]->fValue, -10.0f, 10.0f);
+                    ImGui::SliderFloat("Center Z", &this->gui_item_settings[this->gui_item_selected][5]->fValue, 0.0f, 45.0f);
+                    ImGui::Separator();
+                    ImGui::SliderFloat("Up X", &this->gui_item_settings[this->gui_item_selected][6]->fValue, -10.0f, 10.0f);
+                    ImGui::SliderFloat("Up Y", &this->gui_item_settings[this->gui_item_selected][7]->fValue, -1.0f, 1.0f);
+                    ImGui::SliderFloat("Up Z", &this->gui_item_settings[this->gui_item_selected][8]->fValue, -10.0f, 10.0f);
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    break;
+                }
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case 2: {
+            ImGui::Text("");
+
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+            const char* tabsGUIGrid[] = {
+                "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+                "\n" ICON_MD_3D_ROTATION,
+                "\n" ICON_MD_OPEN_WITH,
+            };
+            const char* tabsLabelsGUIGrid[] = { "Scale", "Rotate", "Translate" };
+            const int numTabsGUIGrid = sizeof(tabsGUIGrid) / sizeof(tabsGUIGrid[0]);
+            ImGui::TabLabels(numTabsGUIGrid, tabsGUIGrid, this->selectedTabGUIGrid, ImVec2(30.0, 30.0), tabsLabelsGUIGrid);
+            ImGui::PopStyleColor(3);
+
+            ImGui::Separator();
+
+            switch (this->selectedTabGUIGrid) {
+                case 0: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
+                    ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    break;
+                }
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case 3: {
+            ImGui::Text("");
+
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+            const char* tabsGUILight[] = {
+                "\n" ICON_MD_TRANSFORM,
+                "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+                "\n" ICON_MD_3D_ROTATION,
+                "\n" ICON_MD_OPEN_WITH,
+                "\n" ICON_MD_COLOR_LENS,
+            };
+            const char* tabsLabelsGUILight[] = { "General", "Scale", "Rotate", "Translate", "Colors" };
+            const int numTabsGUILight = sizeof(tabsGUILight) / sizeof(tabsGUILight[0]);
+            ImGui::TabLabels(numTabsGUILight, tabsGUILight, this->selectedTabGUILight, ImVec2(30.0, 30.0), tabsLabelsGUILight);
+            ImGui::PopStyleColor(3);
+
+            ImGui::Separator();
+
+            switch (this->selectedTabGUILight) {
+                case 0: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
+                    // show lamp object
+                    ImGui::Checkbox("Show Lamp", &Settings::Instance()->showLight);
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
+                    // scale
+                    ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
+                    break;
+                }
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    // rotate
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    break;
+                }
+                case 3: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
+                    // translate
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    break;
+                }
+                case 4: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Light colors");
+                    // colors
+                    ImGui::TextColored(ImVec4(this->sceneLights[0]->ambient->color.r, this->sceneLights[0]->ambient->color.g, this->sceneLights[0]->ambient->color.b, 1.0), "Ambient & Strength");
+                    ImGui::ColorEdit4("##104Ambient", (float*)&this->sceneLights[0]->ambient->color, true);
+                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+                    if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
+                        this->sceneLights[0]->ambient->colorPickerOpen = !this->sceneLights[0]->ambient->colorPickerOpen;
+                    ImGui::PopStyleColor(4);
+                    if (this->sceneLights[0]->ambient->colorPickerOpen)
+                        this->colorPicker->show("Ambient Color", &this->sceneLights[0]->ambient->colorPickerOpen, (float*)&this->sceneLights[0]->ambient->color, true);
+
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate ambient strength");
+                    ImGui::SameLine(); ImGui::SliderFloat("##01", &this->gui_item_settings[this->gui_item_selected][18]->fValue, 0.0, 4.0);
+
+                    ImGui::TextColored(ImVec4(this->sceneLights[0]->diffuse->color.r, this->sceneLights[0]->diffuse->color.g, this->sceneLights[0]->diffuse->color.b, 1.0), "Diffuse & Strength");
+                    ImGui::ColorEdit4("##105Diffuse", (float*)&this->sceneLights[0]->diffuse->color, true);
+                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+                    if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
+                        this->sceneLights[0]->diffuse->colorPickerOpen = !this->sceneLights[0]->diffuse->colorPickerOpen;
+                    ImGui::PopStyleColor(4);
+                    if (this->sceneLights[0]->diffuse->colorPickerOpen)
+                        this->colorPicker->show("Diffuse Color", &this->sceneLights[0]->diffuse->colorPickerOpen, (float*)&this->sceneLights[0]->diffuse->color, true);
+
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate diffuse strength");
+                    ImGui::SameLine(); ImGui::SliderFloat("##02", &this->gui_item_settings[this->gui_item_selected][19]->fValue, 0.0, 6.0);
+
+                    ImGui::TextColored(ImVec4(this->sceneLights[0]->specular->color.r, this->sceneLights[0]->specular->color.g, this->sceneLights[0]->specular->color.b, 1.0), "Specular & Strength");
+                    ImGui::ColorEdit4("##106Specular", (float*)&this->sceneLights[0]->specular->color, true);
+                    ImGui::SameLine();
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+                    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+                    if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
+                        this->sceneLights[0]->specular->colorPickerOpen = !this->sceneLights[0]->specular->colorPickerOpen;
+                    ImGui::PopStyleColor(4);
+                    if (this->sceneLights[0]->specular->colorPickerOpen)
+                        this->colorPicker->show("Specular Color", &this->sceneLights[0]->specular->colorPickerOpen, (float*)&this->sceneLights[0]->specular->color, true);
+
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate specular strength");
+                    ImGui::SameLine(); ImGui::SliderFloat("##03", &this->gui_item_settings[this->gui_item_selected][20]->fValue, 0.0, 4.0);                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case 4: {
+            ImGui::Text("");
+
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+            const char* tabsGUITerrain[] = {
+                "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+                "\n" ICON_MD_3D_ROTATION,
+                "\n" ICON_MD_OPEN_WITH,
+            };
+            const char* tabsLabelsGUITerrain[] = { "Scale", "Rotate", "Translate" };
+            const int numTabsGUITerrain = sizeof(tabsGUITerrain) / sizeof(tabsGUITerrain[0]);
+            ImGui::TabLabels(numTabsGUITerrain, tabsGUITerrain, this->selectedTabGUITerrain, ImVec2(30.0, 30.0), tabsLabelsGUITerrain);
+            ImGui::PopStyleColor(3);
+
+            ImGui::Separator();
+
+            switch (this->selectedTabGUITerrain) {
+                case 0: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
+                    // scale
+                    ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
+                    ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    // rotate
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate rotation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
+                    break;
+                }
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
+                    // translate
+                    if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by X");
+                    ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Y");
+                    ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
+                        this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
+                    if (ImGui::IsItemHovered())
+                        ImGui::SetTooltip("Animate translation by Z");
+                    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
     }
-    ImGui::Separator();
 
-    const char* gui_items[] = { "Camera", "Grid", "Light", "Terrain" };
-    ImGui::Combo("GUI Item", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
-    ImGui::Separator();
-
-    if (this->gui_item_selected == 2)
-        ImGui::Checkbox("Show Lamp", &Settings::Instance()->showLight);
-
-    if (this->gui_item_selected == 0 && ImGui::TreeNode("LookAt")) {
-        ImGui::SliderFloat("Eye X", &this->gui_item_settings[this->gui_item_selected][0]->fValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Eye Y", &this->gui_item_settings[this->gui_item_selected][1]->fValue, -100.0f, 10.0f);
-        ImGui::SliderFloat("Eye Z", &this->gui_item_settings[this->gui_item_selected][2]->fValue, 0.0f, 90.0f);
-        ImGui::Separator();
-        ImGui::SliderFloat("Center X", &this->gui_item_settings[this->gui_item_selected][3]->fValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Center Y", &this->gui_item_settings[this->gui_item_selected][4]->fValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Center Z", &this->gui_item_settings[this->gui_item_selected][5]->fValue, 0.0f, 45.0f);
-        ImGui::Separator();
-        ImGui::SliderFloat("Up X", &this->gui_item_settings[this->gui_item_selected][6]->fValue, -10.0f, 10.0f);
-        ImGui::SliderFloat("Up Y", &this->gui_item_settings[this->gui_item_selected][7]->fValue, -1.0f, 1.0f);
-        ImGui::SliderFloat("Up Z", &this->gui_item_settings[this->gui_item_selected][8]->fValue, -10.0f, 10.0f);
-        ImGui::TreePop();
-    }
-
-    if (this->gui_item_selected > 0 && ImGui::TreeNode("Scale")) {
-        ImGui::SliderFloat("X##1", &this->gui_item_settings[this->gui_item_selected][9]->fValue, 0.0f, 1.0f);
-        ImGui::SliderFloat("Y##1", &this->gui_item_settings[this->gui_item_selected][10]->fValue, 0.0f, 1.0f);
-        ImGui::SliderFloat("Z##1", &this->gui_item_settings[this->gui_item_selected][11]->fValue, 0.0f, 1.0f);
-        ImGui::TreePop();
-    }
-
-    if (ImGui::TreeNode("Rotate")) {
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][12]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 12, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][12]->fValue, 0.0f, 360.0f);
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][13]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 13, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][13]->fValue, 0.0f, 360.0f);
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][14]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 14, 1.0f, 360.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate rotation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][14]->fValue, 0.0f, 360.0f);
-        ImGui::TreePop();
-    }
-
-    if (ImGui::TreeNode("Translate")) {
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][15]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 15, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by X");
-        ImGui::SameLine(); ImGui::SliderFloat("X##3", &this->gui_item_settings[this->gui_item_selected][15]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][16]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 16, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by Y");
-        ImGui::SameLine(); ImGui::SliderFloat("Y##3", &this->gui_item_settings[this->gui_item_selected][16]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][17]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 17, 0.05f, this->so_GUI_grid_size, true);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate translation by Z");
-        ImGui::SameLine(); ImGui::SliderFloat("Z##3", &this->gui_item_settings[this->gui_item_selected][17]->fValue, -1 * this->so_GUI_grid_size, this->so_GUI_grid_size);
-        ImGui::TreePop();
-    }
-
-    if (this->gui_item_selected == 2 && ImGui::TreeNode("Colors")) {
-        ImGui::TextColored(ImVec4(this->sceneLights[0]->ambient->color.r, this->sceneLights[0]->ambient->color.g, this->sceneLights[0]->ambient->color.b, 1.0), "Ambient & Strength");
-        ImGui::ColorEdit4("##104Ambient", (float*)&this->sceneLights[0]->ambient->color, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##101", ImVec2(0, 0)))
-            this->sceneLights[0]->ambient->colorPickerOpen = !this->sceneLights[0]->ambient->colorPickerOpen;
-        ImGui::PopStyleColor(4);
-        if (this->sceneLights[0]->ambient->colorPickerOpen)
-            this->colorPicker->show("Ambient Color", &this->sceneLights[0]->ambient->colorPickerOpen, (float*)&this->sceneLights[0]->ambient->color, true);
-
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][18]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 18, 0.1f, 4.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate ambient strength");
-        ImGui::SameLine(); ImGui::SliderFloat("##01", &this->gui_item_settings[this->gui_item_selected][18]->fValue, 0.0, 4.0);
-
-        ImGui::TextColored(ImVec4(this->sceneLights[0]->diffuse->color.r, this->sceneLights[0]->diffuse->color.g, this->sceneLights[0]->diffuse->color.b, 1.0), "Diffuse & Strength");
-        ImGui::ColorEdit4("##105Diffuse", (float*)&this->sceneLights[0]->diffuse->color, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##102", ImVec2(0, 0)))
-            this->sceneLights[0]->diffuse->colorPickerOpen = !this->sceneLights[0]->diffuse->colorPickerOpen;
-        ImGui::PopStyleColor(4);
-        if (this->sceneLights[0]->diffuse->colorPickerOpen)
-            this->colorPicker->show("Diffuse Color", &this->sceneLights[0]->diffuse->colorPickerOpen, (float*)&this->sceneLights[0]->diffuse->color, true);
-
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][19]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 19, 0.1f, 6.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate diffuse strength");
-        ImGui::SameLine(); ImGui::SliderFloat("##02", &this->gui_item_settings[this->gui_item_selected][19]->fValue, 0.0, 6.0);
-
-        ImGui::TextColored(ImVec4(this->sceneLights[0]->specular->color.r, this->sceneLights[0]->specular->color.g, this->sceneLights[0]->specular->color.b, 1.0), "Specular & Strength");
-        ImGui::ColorEdit4("##106Specular", (float*)&this->sceneLights[0]->specular->color, true);
-        ImGui::SameLine();
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-        ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-        if (ImGui::Button(ICON_MD_COLORIZE "##103", ImVec2(0, 0)))
-            this->sceneLights[0]->specular->colorPickerOpen = !this->sceneLights[0]->specular->colorPickerOpen;
-        ImGui::PopStyleColor(4);
-        if (this->sceneLights[0]->specular->colorPickerOpen)
-            this->colorPicker->show("Specular Color", &this->sceneLights[0]->specular->colorPickerOpen, (float*)&this->sceneLights[0]->specular->color, true);
-
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][20]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, 20, 0.1f, 4.0, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate specular strength");
-        ImGui::SameLine(); ImGui::SliderFloat("##03", &this->gui_item_settings[this->gui_item_selected][20]->fValue, 0.0, 4.0);
-
-        ImGui::TreePop();
-    }
     ImGui::PopItemWidth();
 
     ImGui::End();
@@ -834,7 +1100,7 @@ void GUI::dialogSceneSettings() {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
 
-    const char* sceneTabs[] = {
+    const char* tabsScene[] = {
         "\n" ICON_MD_TRANSFORM,
         "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
         "\n" ICON_MD_3D_ROTATION,
@@ -843,9 +1109,9 @@ void GUI::dialogSceneSettings() {
         "\n" ICON_MD_FORMAT_PAINT,
         "\n" ICON_MD_LIGHTBULB_OUTLINE,
     };
-    const char* sceneTabsLabels[] = { "General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination" };
-    const int sceneNumTabs = sizeof(sceneTabs) / sizeof(sceneTabs[0]);
-    ImGui::TabLabels(sceneNumTabs, sceneTabs, this->selectedTabScene, ImVec2(30.0, 30.0), sceneTabsLabels);
+    const char* tabsLabelsScene[] = { "General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination" };
+    const int numTabsScene = sizeof(tabsScene) / sizeof(tabsScene[0]);
+    ImGui::TabLabels(numTabsScene, tabsScene, this->selectedTabScene, ImVec2(30.0, 30.0), tabsLabelsScene);
     ImGui::PopStyleColor(3);
 
     ImGui::Separator();
