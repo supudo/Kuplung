@@ -1043,16 +1043,19 @@ void GUI::dialogSceneSettings() {
     }
 
     // Scene Model
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
-    ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
+    //ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::PopItemWidth();
 
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     GUISceneObject gso = this->sceneModels[this->scene_item_selected];
-    ImGui::Text("OBJ File - %s", gso.objFile.c_str());
-    ImGui::Text("Model - %s", gso.modelID.c_str());
-    ImGui::Text("Material - %s", gso.materialID.c_str());
-    ImGui::Text("Vertices - %i", gso.verticesCount);
-    ImGui::Text("Normal - %i", gso.normalsCount);
-    ImGui::Text("Indices - %i", gso.indicesCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", gso.objFile.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", gso.modelID.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", gso.materialID.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices count:"); ImGui::SameLine(); ImGui::Text("%i", gso.verticesCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals count:"); ImGui::SameLine(); ImGui::Text("%i", gso.normalsCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices count:"); ImGui::SameLine(); ImGui::Text("%i", gso.indicesCount);
 
     ImGui::Text("");
 
