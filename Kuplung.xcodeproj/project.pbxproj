@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A66FC2B1C5A8AAD0048168F /* GUITabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A66FC291C5A8AAD0048168F /* GUITabs.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0131C3A9BEE00665C40 /* MeshCoordinateSystem.cpp */; };
 		8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0151C3A9BEE00665C40 /* MeshDot.cpp */; };
@@ -123,6 +124,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A66FC291C5A8AAD0048168F /* GUITabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUITabs.cpp; sourceTree = "<group>"; };
+		8A66FC2A1C5A8AAD0048168F /* GUITabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUITabs.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AB1A8E91C3BCA2200046B9F /* GLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIncludes.h; sourceTree = "<group>"; };
 		8AB250C71C3FBD50005C73C1 /* kuplung.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tcs; sourceTree = "<group>"; };
@@ -305,6 +308,8 @@
 				8AB6F0451C3A9BEE00665C40 /* GUIScreenshot.hpp */,
 				8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */,
 				8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */,
+				8A66FC291C5A8AAD0048168F /* GUITabs.cpp */,
+				8A66FC2A1C5A8AAD0048168F /* GUITabs.hpp */,
 				8AC241AE1C5A6F0200C7C391 /* IconsFontAwesome.h */,
 				8AC241AF1C5A6F0200C7C391 /* IconsMaterialDesign.h */,
 				8AB6F0C21C3AA48E00665C40 /* ImGui */,
@@ -555,6 +560,7 @@
 				8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */,
 				8AB6F0761C3A9BEE00665C40 /* GUIScreenshot.cpp in Sources */,
 				8AB6F07E1C3A9BEE00665C40 /* STLParser.cpp in Sources */,
+				8A66FC2B1C5A8AAD0048168F /* GUITabs.cpp in Sources */,
 				8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */,
 				8AB6F0721C3A9BEE00665C40 /* GUI.cpp in Sources */,
 				8AB6F0C91C3AA48E00665C40 /* imgui.cpp in Sources */,

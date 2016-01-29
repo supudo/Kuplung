@@ -91,7 +91,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     ImFontConfig gm_config;
     gm_config.MergeMode = true;
     gm_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 14.0f, &gm_config, gm_ranges);
+    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 22.0f, &gm_config, gm_ranges);
 
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Init();
@@ -832,14 +832,21 @@ void GUI::dialogSceneSettings() {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
 
-    const char* tabNames[] = {ICON_MD_TRANSFORM, ICON_MD_PHOTO_SIZE_SELECT_SMALL, ICON_MD_3D_ROTATION, ICON_FA_ARROWS, ICON_MD_TOLL, ICON_MD_FORMAT_PAINT, ICON_MD_LIGHTBULB_OUTLINE};
-    const int numTabs = sizeof(tabNames)/sizeof(tabNames[0]);
-    const char* tabTooltips[numTabs] = {"General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination"};
-    int tabItemOrdering[numTabs] = {0, 1, 2, 3, 4, 5, 6};
+    const char* sceneTabNames[] = {
+        "\n" ICON_MD_TRANSFORM,
+        "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+        "\n" ICON_MD_3D_ROTATION,
+        "\n" ICON_MD_OPEN_WITH,
+        "\n" ICON_MD_TOLL,
+        "\n" ICON_MD_FORMAT_PAINT,
+        "\n" ICON_MD_LIGHTBULB_OUTLINE
+    };
+    const int sceneNumTabs = sizeof(sceneTabNames) / sizeof(sceneTabNames[0]);
+    const char* sceneTabTooltips[sceneNumTabs] = {"General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination"};
+    int tabItemOrdering[sceneNumTabs] = {0, 1, 2, 3, 4, 5, 6};
     static int GUIScene_selectedTab = 0;
     static int GUIScene_optionalHoveredTab = 0;
-    ImGui::TabLabels(numTabs, tabNames, GUIScene_selectedTab, tabTooltips, true, &GUIScene_optionalHoveredTab, &tabItemOrdering[0], false, false);
-
+    ImGui::TabLabels(sceneNumTabs, sceneTabNames, GUIScene_selectedTab, ImVec2(30.0, 30.0), sceneTabTooltips, true, &GUIScene_optionalHoveredTab, &tabItemOrdering[0]);
     ImGui::PopStyleColor(3);
 
     ImGui::Separator();
