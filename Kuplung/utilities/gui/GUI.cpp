@@ -68,6 +68,8 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
     this->gui_item_selected = 0;
+    this->selectedTabScene = 0;
+    this->selectedTabGUI = 0;
 
     this->isFrame = false;
     this->isProjection = true;
@@ -832,27 +834,25 @@ void GUI::dialogSceneSettings() {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
 
-    const char* sceneTabNames[] = {
+    const char* sceneTabs[] = {
         "\n" ICON_MD_TRANSFORM,
         "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
         "\n" ICON_MD_3D_ROTATION,
         "\n" ICON_MD_OPEN_WITH,
         "\n" ICON_MD_TOLL,
         "\n" ICON_MD_FORMAT_PAINT,
-        "\n" ICON_MD_LIGHTBULB_OUTLINE
+        "\n" ICON_MD_LIGHTBULB_OUTLINE,
     };
-    const int sceneNumTabs = sizeof(sceneTabNames) / sizeof(sceneTabNames[0]);
-    const char* sceneTabTooltips[sceneNumTabs] = {"General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination"};
-    int tabItemOrdering[sceneNumTabs] = {0, 1, 2, 3, 4, 5, 6};
-    static int GUIScene_selectedTab = 0;
-    static int GUIScene_optionalHoveredTab = 0;
-    ImGui::TabLabels(sceneNumTabs, sceneTabNames, GUIScene_selectedTab, ImVec2(30.0, 30.0), sceneTabTooltips, true, &GUIScene_optionalHoveredTab, &tabItemOrdering[0]);
+    const char* sceneTabsLabels[] = { "General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination" };
+    const int sceneNumTabs = sizeof(sceneTabs) / sizeof(sceneTabs[0]);
+    ImGui::TabLabels(sceneNumTabs, sceneTabs, this->selectedTabScene, ImVec2(30.0, 30.0), sceneTabsLabels);
     ImGui::PopStyleColor(3);
 
     ImGui::Separator();
 
-    switch (GUIScene_selectedTab) {
+    switch (this->selectedTabScene) {
         case 0: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
             // cel shading
             ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
 
@@ -862,6 +862,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 1: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
             if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][0]->oAnimate))
                 this->animateValue(false, this->scene_item_selected, 0, 0.01f, 1.0, false);
             if (ImGui::IsItemHovered())
@@ -882,6 +883,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 2: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
             if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][3]->oAnimate))
                 this->animateValue(false, this->scene_item_selected, 3, 1.0f, 360.0, false);
             if (ImGui::IsItemHovered())
@@ -902,6 +904,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 3: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
             if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][6]->oAnimate))
                 this->animateValue(false, this->scene_item_selected, 6, 0.05f, this->so_GUI_grid_size, true);
             if (ImGui::IsItemHovered())
@@ -922,6 +925,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 4: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
             if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][9]->oAnimate))
                 this->animateValue(false, this->scene_item_selected, 9, 0.05f, this->so_GUI_grid_size, true);
             if (ImGui::IsItemHovered())
@@ -942,6 +946,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 5: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
             ImGui::Text("Refraction");
             if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][12]->oAnimate))
                 this->animateValue(false, this->scene_item_selected, 12, 0.05f, 10, false);
@@ -1012,6 +1017,7 @@ void GUI::dialogSceneSettings() {
             break;
         }
         case 6: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Illumination type");
             const char* illum_models_items[] = {
                 "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
                 "[1] Color on and Ambient on",

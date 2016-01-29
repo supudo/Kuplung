@@ -166,6 +166,7 @@ private:
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
+    int selectedTabScene, selectedTabGUI;
 };
 
 #endif /* GUI_hpp */

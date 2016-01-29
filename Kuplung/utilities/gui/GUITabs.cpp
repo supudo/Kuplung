@@ -18,7 +18,7 @@ namespace ImGui {
      * pOptionalClosedTabIndex (requires allowTabClosingThroughMMB): out variable (int pointer) that returns the index of the closed tab in last call or -1.
      * pOptionalClosedTabIndexInsideItemOrdering: same as above, but index of the pOptionalItemOrdering array.
     */
-    IMGUI_API bool TabLabels(int numTabs, const char** tabLabels, int& selectedIndex, ImVec2 btn_size, const char** tabLabelTooltips, bool wrapMode, int *pOptionalHoveredIndex, int* pOptionalItemOrdering, bool allowTabReorder, bool allowTabClosingThroughMMB, int *pOptionalClosedTabIndex, int *pOptionalClosedTabIndexInsideItemOrdering) {
+    IMGUI_API bool TabLabels(int numTabs, const char** tabLabels, int& selectedIndex, ImVec2 btnSize, const char** tabLabelTooltips, bool wrapMode, int *pOptionalHoveredIndex, int* pOptionalItemOrdering, bool allowTabReorder, bool allowTabClosingThroughMMB, int *pOptionalClosedTabIndex, int *pOptionalClosedTabIndexInsideItemOrdering) {
         ImGuiStyle& style = ImGui::GetStyle();
 
         const ImVec2 itemSpacing = style.ItemSpacing;
@@ -78,7 +78,7 @@ namespace ImGui {
             }
             // Draw the button
             ImGui::PushID(i);   // otherwise two tabs with the same name would clash.
-            if (ImGui::Button(tabLabels[i], btn_size))   {selection_changed = (selectedIndex!=i);newSelectedIndex = i;}
+            if (ImGui::Button(tabLabels[i], btnSize))   {selection_changed = (selectedIndex!=i);newSelectedIndex = i;}
             ImGui::PopID();
             if (i == selectedIndex) {
                 // Reset the style
