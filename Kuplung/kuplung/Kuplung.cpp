@@ -545,7 +545,7 @@ void Kuplung::initSceneGUI() {
     this->gui->initGUIControls(4, initialSettings);
     this->gui->showGUIControls();
     this->gui->setHeightmapImage(this->terrain->heightmapImage);
-    this->gui->gui_item_selected = 1;
+    this->gui->gui_item_selected = 3;
 
     // dot
     this->lightDot = new MeshDot();

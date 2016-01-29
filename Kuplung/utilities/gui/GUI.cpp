@@ -52,6 +52,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showHeightmap = false;
     this->showEditor = false;
     this->newHeightmap = false;
+    this->outlineColorPickerOpen = false;
 
     this->sceneLights = {};
 
@@ -632,45 +633,46 @@ void GUI::dialogGUIControls() {
     const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
     ImGui::Combo("##111", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
 
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     switch (this->gui_item_selected) {
         case 0: {
-            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.92f);
-            ImGui::Text("Field of view");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("FOV");
+            ImGui::Text("Field of view"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("FOV");
             ImGui::SliderFloat("##104", &this->so_GUI_FOV, 0.0f, 180.0f);
             ImGui::Separator();
-            ImGui::Text("Ratio");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("W & H");
-            ImGui::SliderFloat("##105", &this->so_GUI_ratio_w, 0.0f, 5.0f);
-            ImGui::SliderFloat("##106", &this->so_GUI_ratio_h, 0.0f, 5.0f);
+
+            ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
+            ImGui::SliderFloat("W##105", &this->so_GUI_ratio_w, 0.0f, 5.0f);
+            ImGui::SliderFloat("H##106", &this->so_GUI_ratio_h, 0.0f, 5.0f);
             ImGui::Separator();
-            ImGui::Text("Planes");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Far & Close");
-            ImGui::SliderFloat("##107", &this->so_GUI_plane_close, 0.0f, 1.0f);
-            ImGui::SliderFloat("##108", &this->so_GUI_plane_far, 0.0f, 100.0f);
+
+            ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
+            ImGui::SliderFloat("Far##107", &this->so_GUI_plane_close, 0.0f, 1.0f);
+            ImGui::SliderFloat("Close##108", &this->so_GUI_plane_far, 0.0f, 100.0f);
             ImGui::Separator();
-            ImGui::Text("Grid size");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Squares");
+
+            ImGui::Text("Grid size"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Squares");
             ImGui::SliderInt("##109", &this->so_GUI_grid_size, 0, 100);
             ImGui::Separator();
+
             ImGui::Checkbox("Grid fixed with World", &this->fixedGridWorld);
             ImGui::Separator();
-            ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("RGB format");
-            ImGui::SliderFloat("##110", &this->so_GUI_outlineColor.r, 0.0f, 1.0f);
-            ImGui::SliderFloat("##111", &this->so_GUI_outlineColor.g, 0.0f, 1.0f);
-            ImGui::SliderFloat("##112", &this->so_GUI_outlineColor.b, 0.0f, 1.0f);
+
+            ImGui::TextColored(ImVec4(this->so_GUI_outlineColor.r, this->so_GUI_outlineColor.g, this->so_GUI_outlineColor.b, 1.0), "Outline color"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("RGB format");
+            ImGui::ColorEdit4("##101OutlineColor", (float*)&this->so_GUI_outlineColor, true);
+            ImGui::SameLine();
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+            ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+            if (ImGui::Button(ICON_MD_COLORIZE "##101OC", ImVec2(0, 0)))
+                this->outlineColorPickerOpen = !this->outlineColorPickerOpen;
+            ImGui::PopStyleColor(4);
+            if (this->outlineColorPickerOpen)
+                this->colorPicker->show("Outline Color", &this->outlineColorPickerOpen, (float*)&this->so_GUI_outlineColor, true);
             ImGui::Separator();
-            ImGui::Text("Outline thickness");
-            if (ImGui::IsItemHovered())
-                ImGui::SetTooltip("Thickness");
+
+            ImGui::Text("Outline thickness"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Thickness");
             ImGui::SliderFloat("##103", &this->so_outlineThickness, 1.01f, 2.0f);
-            ImGui::PopItemWidth();
             break;
         }
         case 1: {
@@ -1036,7 +1038,6 @@ void GUI::dialogGUIControls() {
             break;
         }
     }
-
     ImGui::PopItemWidth();
 
     ImGui::End();
