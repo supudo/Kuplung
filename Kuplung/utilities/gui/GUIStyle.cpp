@@ -27,7 +27,9 @@ void GUIStyle::save(ImGuiStyle& style) {
     this->saveStyles(Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
-void GUIStyle::load(std::string styleFilePath) {
+ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
+   ImGuiStyle& style = ImGui::GetStyle();
+
     std::FILE *fp = std::fopen(styleFilePath.c_str(), "rb");
     if (fp) {
         std::string fileContents;
@@ -62,27 +64,68 @@ void GUIStyle::load(std::string styleFilePath) {
                 else
                     opValue = "";
 
-                try {
-                    // style.sizes.TouchExtraPadding = 0.000000, 0.000000
-                    // style.sizes.IndentSpacing = 22.000000
-                    // style.Colors[ImGuiCol_Text] = 0.900000, 0.900000, 0.900000, 1.000000
+                boost::replace_all(opKey, "style.rendering.", "");
+                boost::replace_all(opKey, "style.sizes.", "");
+                boost::replace_all(opKey, "style.colors.", "");
+                boost::trim_right(opKey);
+                boost::trim_right(opValue);
 
-                    // rendering
-                    std::string style_k = opKey;
-                    boost::replace_all(style_k, "style.rendering.", "");
+                try {
+                    if (opKey == "AntiAliasedLines")
+                        style.AntiAliasedLines = std::stoi(opValue) != 0;
+                    else if (opKey == "AntiAliasedShapes")
+                        style.AntiAliasedShapes = std::stoi(opValue) != 0;
+                    else if (opKey == "CurveTessellationTol")
+                        style.CurveTessellationTol = std::stof(opValue);
+                    else if (opKey == "Alpha")
+                        style.Alpha = std::stof(opValue);
+                    else if (opKey == "WindowFillAlphaDefault")
+                        style.WindowFillAlphaDefault = std::stof(opValue);
+
+                    else if (opKey == "WindowPadding")
+                        style.WindowPadding = this->tov2(opValue);
+                    else if (opKey == "WindowRounding")
+                        style.WindowRounding = std::stof(opValue);
+                    else if (opKey == "ChildWindowRounding")
+                        style.ChildWindowRounding = std::stof(opValue);
+                    else if (opKey == "FramePadding")
+                        style.FramePadding = this->tov2(opValue);
+                    else if (opKey == "FrameRounding")
+                        style.FrameRounding = std::stof(opValue);
+                    else if (opKey == "ItemSpacing")
+                        style.ItemSpacing = this->tov2(opValue);
+                    else if (opKey == "ItemInnerSpacing")
+                        style.ItemInnerSpacing = this->tov2(opValue);
+                    else if (opKey == "TouchExtraPadding")
+                        style.TouchExtraPadding = this->tov2(opValue);
+                    else if (opKey == "IndentSpacing")
+                        style.IndentSpacing = std::stof(opValue);
+                    else if (opKey == "ScrollbarSize")
+                        style.ScrollbarSize = std::stof(opValue);
+                    else if (opKey == "ScrollbarRounding")
+                        style.ScrollbarRounding = std::stof(opValue);
+                    else if (opKey == "GrabMinSize")
+                        style.GrabMinSize = std::stof(opValue);
+                    else if (opKey == "GrabRounding")
+                        style.GrabRounding = std::stof(opValue);
+
+                    else
+                        style.Colors[std::stoi(opKey)] = this->tov4(opValue);
                 }
                 catch (...) {
-                    this->doLog("[GUI Style] Can't load default GUI styles!");
+                    this->doLog("[GUI Style] Can't load default GUI styles - [" + opKey + "] with value [" + opValue + "]!");
                 }
             }
 
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
     }
+
+    return style;
 }
 
-void GUIStyle::loadDefault() {
-    this->load(Settings::Instance()->appFolder() + "/KuplungStyleDefault.style");
+ImGuiStyle&  GUIStyle::loadDefault() {
+    return this->load(Settings::Instance()->appFolder() + "/KuplungStyleDefault.style");
 }
 
 void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
@@ -94,11 +137,11 @@ void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.rendering.AntiAliasedLines = " + std::to_string(style.AntiAliasedLines) + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.rendering.AntiAliasedShapes = " + std::to_string(style.AntiAliasedShapes) + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.rendering.CurveTessellationTol = " + std::to_string(style.CurveTessellationTol) + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.rendering.Alpha = " + std::to_string(style.Alpha) + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.rendering.WindowFillAlphaDefault = " + std::to_string(style.WindowFillAlphaDefault) + Settings::Instance()->newLineDelimiter;
+    style_txt += "AntiAliasedLines = " + std::to_string(style.AntiAliasedLines) + Settings::Instance()->newLineDelimiter;
+    style_txt += "AntiAliasedShapes = " + std::to_string(style.AntiAliasedShapes) + Settings::Instance()->newLineDelimiter;
+    style_txt += "CurveTessellationTol = " + std::to_string(style.CurveTessellationTol) + Settings::Instance()->newLineDelimiter;
+    style_txt += "Alpha = " + std::to_string(style.Alpha) + Settings::Instance()->newLineDelimiter;
+    style_txt += "WindowFillAlphaDefault = " + std::to_string(style.WindowFillAlphaDefault) + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Sizes" + Settings::Instance()->newLineDelimiter;
@@ -119,7 +162,8 @@ void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
 
     style_txt += "# Colors" + Settings::Instance()->newLineDelimiter;
     for (int i = 0; i < ImGuiCol_COUNT; i++) {
-        style_txt += "style.Colors[ImGuiCol_" + std::string(ImGui::GetStyleColName(i)) + "] = ";
+        //style_txt += "style.Colors[ImGuiCol_" + std::string(ImGui::GetStyleColName(i)) + " = ";
+        style_txt += "style.colors." + std::to_string(i) + " = ";
         style_txt += std::to_string(style.Colors[i].x) + ", " + std::to_string(style.Colors[i].y) + ", " + std::to_string(style.Colors[i].z) + ", " + std::to_string(style.Colors[i].w) + Settings::Instance()->newLineDelimiter;
     }
 
@@ -135,4 +179,14 @@ std::vector<std::string> GUIStyle::splitString(const std::string &s, std::regex 
     for ( ; iter != end; ++iter)
         elements.push_back(*iter);
     return elements;
+}
+
+ImVec4 GUIStyle::tov4(std::string opValue) {
+    std::vector<std::string> values = this->splitString(opValue, std::regex(","));
+    return ImVec4(std::stof(values[0]), std::stof(values[1]), std::stof(values[2]), std::stof(values[3]));
+}
+
+ImVec2 GUIStyle::tov2(std::string opValue) {
+    std::vector<std::string> values = this->splitString(opValue, std::regex(","));
+    return ImVec2(std::stof(values[0]), std::stof(values[1]));
 }

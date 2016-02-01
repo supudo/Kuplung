@@ -608,7 +608,7 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         const ImGuiStyle def;
         if (ImGui::Button("Load default style")) {
             style = ref ? *ref : def;
-            this->guiStyle->loadDefault();
+            style = this->guiStyle->loadDefault();
         }
         if (ref) {
             ImGui::SameLine();
