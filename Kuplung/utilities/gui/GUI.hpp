@@ -87,7 +87,6 @@ public:
 
     void addSceneLight();
 
-    //std::map<int, std::string> sceneModels;
     std::vector<GUISceneObject> sceneModels;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
     bool displayGUIControls, displaySceneStats, displaySceneSettings;
@@ -141,6 +140,9 @@ private:
     void dialogOptions(ImGuiStyle* ref = NULL);
     void dialogHeightmap();
     void dialogEditor();
+
+    void contextModelRename();
+    void contextModelDelete();
 
     GUIObjectSetting* addSceneSettingsObject(int idx, float fValue = 1.0f, bool bValue = true, glm::vec4 vValue = glm::vec4(1.0, 1.0, 1.0, 1.0));
     void dialogGUIControls();

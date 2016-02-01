@@ -1143,6 +1143,36 @@ void GUI::resetValuesGUIControls() {
     }
 }
 
+void GUI::contextModelRename() {
+    ImGui::OpenPopup("Rename");
+
+    ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+
+    ImGui::Text("Type the new model name:");
+
+    static char buf1[128] = "";
+    ImGui::InputText("", buf1, 128);
+
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+    ImGui::SameLine();
+    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+
+    ImGui::EndPopup();
+}
+
+void GUI::contextModelDelete() {
+    ImGui::OpenPopup("Delete?");
+    ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+
+    ImGui::Text("Are you sure you want to delete this model?");
+
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
+    ImGui::SameLine();
+    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
+
+    ImGui::EndPopup();
+}
+
 void GUI::dialogSceneSettings() {
     ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", &this->displaySceneSettings, ImGuiWindowFlags_ShowBorders);
@@ -1163,46 +1193,22 @@ void GUI::dialogSceneSettings() {
 
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-    //ImGui::Combo("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
     ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
     // TODO: object actions menu
     if (ImGui::BeginPopupContextItem("Actions")) {
-        if (ImGui::MenuItem("Rename"))
-            this->cmenu_renameModel = true;
+        ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
         }
-        if (ImGui::MenuItem("Delete"))
-            this->cmenu_deleteYn = true;
+        ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
         ImGui::EndPopup();
     }
     ImGui::PopItemWidth();
 
     if (this->cmenu_renameModel)
-        ImGui::OpenPopup("Rename");
-    if (ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::Text("Type the new model name:");
-
-        static char buf1[128] = "";
-        ImGui::InputText("", buf1, 128);
-
-        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
-        ImGui::SameLine();
-        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
-
-        ImGui::EndPopup();
-    }
+        this->contextModelRename();
 
     if (this->cmenu_deleteYn)
-        ImGui::OpenPopup("Delete?");
-    if (ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
-        ImGui::Text("Are you sure you want to delete this model?");
-
-        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
-        ImGui::SameLine();
-        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
-
-        ImGui::EndPopup();
-    }
+        this->contextModelDelete();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     GUISceneObject gso = this->sceneModels[this->scene_item_selected];
