@@ -136,6 +136,7 @@ private:
     void dialogAboutImGui();
     void dialogAboutKuplung();
     void dialogFileBrowser();
+    void dialogStyleBrowser();
     void dialogFileBrowserProcessFile(FBEntity file);
     void dialogOptions(ImGuiStyle* ref = NULL);
     void dialogHeightmap();
@@ -159,7 +160,7 @@ private:
 
     SDL_Window *sdlWindow;
     bool isGUIVisible;
-    bool logDebugInfo, showScreenshotWindow, showFileDialog, showOptions, showEditor;
+    bool logDebugInfo, showScreenshotWindow, showFileDialog, showStyleDialog, showOptions, showEditor;
     bool showAppMetrics, showAboutKuplung, showAboutImgui;
     bool showDemoWindow, newHeightmap;
 

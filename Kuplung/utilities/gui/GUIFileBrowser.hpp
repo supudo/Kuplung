@@ -18,8 +18,9 @@
 class GUIFileBrowser {
 public:
     void init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile);
+    void setStyleBrowser(bool isStyle);
     void draw(const char* title, bool* p_opened = NULL);
-    
+
 private:
     std::map<std::string, FBEntity> getFolderContents(std::string filePath);
     std::function<void(std::string)> doLog;
@@ -31,7 +32,7 @@ private:
     std::string convertSize(size_t size);
     double roundOff(double n);
 
-    bool log;
+    bool log, isStyleBrowser;
     int positionX, positionY, width, height;
 };
 

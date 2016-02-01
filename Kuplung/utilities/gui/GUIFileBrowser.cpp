@@ -24,6 +24,11 @@ void GUIFileBrowser::init(bool log, int positionX, int positionY, int width, int
     this->height = height;
     this->doLog = doLog;
     this->processFile = processFile;
+    this->isStyleBrowser = false;
+}
+
+void GUIFileBrowser::setStyleBrowser(bool isStyle) {
+    this->isStyleBrowser = isStyle;
 }
 
 void GUIFileBrowser::draw(const char* title, bool* p_opened) {
@@ -129,6 +134,8 @@ std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string fi
                 bool dotFile = iteratorFolder->path().filename().string().compare(0, 1, ".") == 0;
                 fs::file_status fileStatus = iteratorFolder->status();
                 isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
+                if (this->isStyleBrowser)
+                    isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
                 if (isAllowedFileExtension && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus)) && !dotFile) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))

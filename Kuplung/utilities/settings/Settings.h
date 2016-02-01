@@ -30,6 +30,7 @@ public:
     std::string string_format(const std::string fmt_str, ...);
     std::string appFolder();
     bool isAllowedFileExtension(std::string fileExtension);
+    bool isAllowedStyleExtension(std::string fileExtension);
 
     int OpenGLMajorVersion, OpenGLMinorVersion, OpenGL_GLSL_Version;
     std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile;

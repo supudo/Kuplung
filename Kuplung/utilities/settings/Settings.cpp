@@ -138,3 +138,8 @@ bool Settings::isAllowedFileExtension(std::string fileExtension) {
     std::string allowedExtensions[] = {".obj"};
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
+
+bool Settings::isAllowedStyleExtension(std::string fileExtension) {
+    std::string allowedExtensions[] = {".style"};
+    return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
+}

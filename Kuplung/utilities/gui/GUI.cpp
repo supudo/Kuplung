@@ -48,6 +48,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showScreenshotWindow = false;
     this->logDebugInfo = true;
     this->showFileDialog = false;
+    this->showStyleDialog = false;
     this->showAppMetrics = false;
     this->showAboutKuplung = false;
     this->showAboutImgui = false;
@@ -67,13 +68,17 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->windowLog = new GUILog();
     this->windowScreenshot = new GUIScreenshot();
+
     this->windowFileBrowser = new GUIFileBrowser();
+    this->windowFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI::doLog, this, std::placeholders::_1), std::bind(&GUI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+
     this->colorPicker = new GUIColorPicker();
 
     this->guiStyle = new GUIStyle();
     this->guiStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
     this->guiStyle->saveDefault(style);
+    style = this->guiStyle->loadCurrent();
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
@@ -473,6 +478,9 @@ void GUI::renderStart(bool isFrame) {
     if (this->showFileDialog)
         this->dialogFileBrowser();
 
+    if (this->showStyleDialog)
+        this->dialogStyleBrowser();
+
     if (this->showScreenshotWindow)
         this->dialogScreenshot();
 
@@ -529,16 +537,21 @@ void GUI::renderEnd() {
 #pragma mark - Dialogs
 
 void GUI::dialogFileBrowser() {
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
-    int posX = 50, posY = 50;
-    this->windowFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI::doLog, this, std::placeholders::_1), std::bind(&GUI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->windowFileBrowser->setStyleBrowser(false);
     this->windowFileBrowser->draw("File Browser", &this->showFileDialog);
 }
 
+void GUI::dialogStyleBrowser() {
+    this->windowFileBrowser->setStyleBrowser(true);
+    this->windowFileBrowser->draw("Open Style", &this->showStyleDialog);
+}
+
 void GUI::dialogFileBrowserProcessFile(FBEntity file) {
-    this->showFileDialog = false;
+    if (this->showStyleDialog)
+        this->guiStyle->load(file.path);
     this->processFile(file);
+    this->showFileDialog = false;
+    this->showStyleDialog = false;
 }
 
 void GUI::dialogScreenshot() {
@@ -606,18 +619,21 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         ImGuiStyle& style = ImGui::GetStyle();
 
         const ImGuiStyle def;
-        if (ImGui::Button("Load default style")) {
+        if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
             this->guiStyle->save(style);
         }
         if (ref) {
             ImGui::SameLine();
-            if (ImGui::Button("Save Style")) {
+            if (ImGui::Button("Save")) {
                 *ref = style;
                 this->guiStyle->save(style);
             }
         }
+        ImGui::SameLine();
+        if (ImGui::Button("Load"))
+            this->showStyleDialog = true;
 
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
 

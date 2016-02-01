@@ -128,6 +128,10 @@ ImGuiStyle&  GUIStyle::loadDefault() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyleDefault.style");
 }
 
+ImGuiStyle& GUIStyle::loadCurrent() {
+    return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
+}
+
 void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 

@@ -19,6 +19,7 @@ public:
     void init(std::function<void(std::string)> doLog);
     void saveDefault(ImGuiStyle& style);
     void save(ImGuiStyle& style);
+    ImGuiStyle& loadCurrent();
     ImGuiStyle& load(std::string styleFilePath);
     ImGuiStyle& loadDefault();
 
