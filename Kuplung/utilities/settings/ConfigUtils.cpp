@@ -21,7 +21,6 @@ ConfigUtils::~ConfigUtils() {
 void ConfigUtils::init(std::string appFolder) {
     this->configFile = appFolder + "/Kuplung_Settings.ini";
     this->regex_comment = "^#.*";
-    this->regex_whiteSpace = "\\s";
     this->regex_equalsSign = "=";
     this->readFile();
 }
@@ -102,15 +101,15 @@ void ConfigUtils::readFile() {
         std::rewind(fp);
         std::fread(&fileContents[0], 1, fileContents.size(), fp);
         std::fclose(fp);
-        
+
         size_t pos = 0;
         std::string singleLine;
-        
+
         this->configData = {};
-        
+
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
-            
+
             if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 continue;
@@ -129,7 +128,7 @@ void ConfigUtils::readFile() {
                     opValue = "";
                 this->configData[opKey] = opValue;
             }
-            
+
             fileContents.erase(0, pos + nlDelimiter.length());
         }
     }

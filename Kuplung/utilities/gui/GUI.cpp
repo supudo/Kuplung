@@ -8,6 +8,9 @@
 
 #include "utilities/gl/GLIncludes.h"
 #include <SDL2/SDL_syswm.h>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 #include <string>
 #include <sstream>
 #include "utilities/settings/Settings.h"
@@ -53,7 +56,8 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->showEditor = false;
     this->newHeightmap = false;
     this->outlineColorPickerOpen = false;
-    this->deleteYnSceneModel = false;
+    this->cmenu_deleteYn = false;
+    this->cmenu_renameModel = false;
 
     this->sceneLights = {};
 
@@ -65,6 +69,11 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->windowScreenshot = new GUIScreenshot();
     this->windowFileBrowser = new GUIFileBrowser();
     this->colorPicker = new GUIColorPicker();
+
+    this->guiStyle = new GUIStyle();
+    this->guiStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    ImGuiStyle& style = ImGui::GetStyle();
+    this->guiStyle->saveDefault(style);
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
@@ -483,7 +492,7 @@ void GUI::renderStart(bool isFrame) {
         this->dialogAboutKuplung();
 
     if (this->showOptions)
-        this->dialogOptions();
+        this->dialogOptions(&ImGui::GetStyle());
 
     if (this->displayGUIControls)
         this->dialogGUIControls();
@@ -581,10 +590,102 @@ void GUI::dialogAboutKuplung() {
     ImGui::End();
 }
 
-void GUI::dialogOptions() {
-    ImGui::Begin("Options", &this->showOptions, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
-    if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
-        Settings::Instance()->saveSettings();
+void GUI::dialogOptions(ImGuiStyle* ref) {
+    ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
+
+    ImGui::Begin("Options", &this->showOptions, ImGuiWindowFlags_ShowBorders);
+
+    if (ImGui::TreeNode("General")) {
+        if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
+            Settings::Instance()->saveSettings();
+        ImGui::TreePop();
+    }
+
+    if (ImGui::TreeNode("Style")) {
+        ImGuiStyle& style = ImGui::GetStyle();
+
+        const ImGuiStyle def;
+        if (ImGui::Button("Load default style")) {
+            style = ref ? *ref : def;
+            this->guiStyle->loadDefault();
+        }
+        if (ref) {
+            ImGui::SameLine();
+            if (ImGui::Button("Save Style")) {
+                *ref = style;
+                this->guiStyle->save(style);
+            }
+        }
+
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
+
+        if (ImGui::TreeNode("Rendering")) {
+            ImGui::Checkbox("Anti-aliased lines", &style.AntiAliasedLines);
+            ImGui::Checkbox("Anti-aliased shapes", &style.AntiAliasedShapes);
+            ImGui::PushItemWidth(100);
+            ImGui::DragFloat("Curve Tessellation Tolerance", &style.CurveTessellationTol, 0.02f, 0.10f, FLT_MAX, NULL, 2.0f);
+            if (style.CurveTessellationTol < 0.0f)
+                style.CurveTessellationTol = 0.10f;
+            ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f");
+            ImGui::DragFloat("Window Fill Alpha Default", &style.WindowFillAlphaDefault, 0.005f, 0.0f, 1.0f, "%.2f");
+            ImGui::PopItemWidth();
+            ImGui::TreePop();
+        }
+
+        if (ImGui::TreeNode("Sizes")) {
+            ImGui::SliderFloat2("WindowPadding", (float*)&style.WindowPadding, 0.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat("WindowRounding", &style.WindowRounding, 0.0f, 16.0f, "%.0f");
+            ImGui::SliderFloat("ChildWindowRounding", &style.ChildWindowRounding, 0.0f, 16.0f, "%.0f");
+            ImGui::SliderFloat2("FramePadding", (float*)&style.FramePadding, 0.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat("FrameRounding", &style.FrameRounding, 0.0f, 16.0f, "%.0f");
+            ImGui::SliderFloat2("ItemSpacing", (float*)&style.ItemSpacing, 0.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat2("ItemInnerSpacing", (float*)&style.ItemInnerSpacing, 0.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat2("TouchExtraPadding", (float*)&style.TouchExtraPadding, 0.0f, 10.0f, "%.0f");
+            ImGui::SliderFloat("IndentSpacing", &style.IndentSpacing, 0.0f, 30.0f, "%.0f");
+            ImGui::SliderFloat("ScrollbarSize", &style.ScrollbarSize, 1.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat("ScrollbarRounding", &style.ScrollbarRounding, 0.0f, 16.0f, "%.0f");
+            ImGui::SliderFloat("GrabMinSize", &style.GrabMinSize, 1.0f, 20.0f, "%.0f");
+            ImGui::SliderFloat("GrabRounding", &style.GrabRounding, 0.0f, 16.0f, "%.0f");
+            ImGui::TreePop();
+        }
+
+        if (ImGui::TreeNode("Colors")) {
+            static ImGuiColorEditMode edit_mode = ImGuiColorEditMode_RGB;
+            ImGui::RadioButton("RGB", &edit_mode, ImGuiColorEditMode_RGB);
+            ImGui::SameLine();
+            ImGui::RadioButton("HSV", &edit_mode, ImGuiColorEditMode_HSV);
+            ImGui::SameLine();
+            ImGui::RadioButton("HEX", &edit_mode, ImGuiColorEditMode_HEX);
+
+            static ImGuiTextFilter filter;
+            filter.Draw("Filter colors", 200);
+
+            ImGui::BeginChild("#colors", ImVec2(0, 300), true);
+            ImGui::PushItemWidth(-160);
+            ImGui::ColorEditMode(edit_mode);
+            for (int i = 0; i < ImGuiCol_COUNT; i++) {
+                const char* name = ImGui::GetStyleColName(i);
+                if (!filter.PassFilter(name))
+                    continue;
+                ImGui::PushID(i);
+                ImGui::ColorEdit4(name, (float*)&style.Colors[i], true);
+                if (memcmp(&style.Colors[i], (ref ? &ref->Colors[i] : &def.Colors[i]), sizeof(ImVec4)) != 0) {
+                    ImGui::SameLine(); if (ImGui::Button("Revert")) style.Colors[i] = ref ? ref->Colors[i] : def.Colors[i];
+                    if (ref) { ImGui::SameLine(); if (ImGui::Button("Save")) ref->Colors[i] = style.Colors[i]; }
+                }
+                ImGui::PopID();
+            }
+            ImGui::PopItemWidth();
+            ImGui::EndChild();
+
+            ImGui::TreePop();
+        }
+
+        ImGui::PopItemWidth();
+        ImGui::TreePop();
+    }
+
     ImGui::End();
 }
 
@@ -1049,26 +1150,39 @@ void GUI::dialogSceneSettings() {
     ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
     // TODO: object actions menu
     if (ImGui::BeginPopupContextItem("Actions")) {
-        if (ImGui::MenuItem("Rename")) {
-
-        }
+        if (ImGui::MenuItem("Rename"))
+            this->cmenu_renameModel = true;
         if (ImGui::MenuItem("Duplicate")) {
-
         }
         if (ImGui::MenuItem("Delete"))
-            this->deleteYnSceneModel = true;
+            this->cmenu_deleteYn = true;
         ImGui::EndPopup();
     }
     ImGui::PopItemWidth();
 
-    if (this->deleteYnSceneModel)
+    if (this->cmenu_renameModel)
+        ImGui::OpenPopup("Rename");
+    if (ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
+        ImGui::Text("Type the new model name:");
+
+        static char buf1[128] = "";
+        ImGui::InputText("", buf1, 128);
+
+        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+        ImGui::SameLine();
+        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+
+        ImGui::EndPopup();
+    }
+
+    if (this->cmenu_deleteYn)
         ImGui::OpenPopup("Delete?");
     if (ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize)) {
         ImGui::Text("Are you sure you want to delete this model?");
 
-        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->deleteYnSceneModel = false; }
+        if (ImGui::Button("OK", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
         ImGui::SameLine();
-        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->deleteYnSceneModel = false; }
+        if (ImGui::Button("Cancel", ImVec2(120,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
 
         ImGui::EndPopup();
     }

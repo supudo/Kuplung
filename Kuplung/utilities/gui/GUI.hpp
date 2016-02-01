@@ -21,6 +21,7 @@
 #include "GUIFileBrowser.hpp"
 #include "GUIEditor.hpp"
 #include "GUIColorPicker.hpp"
+#include "GUIStyle.hpp"
 
 #define STBI_FAILURE_USERMSG
 #include "utilities/stb/stb_image.h"
@@ -136,7 +137,7 @@ private:
     void dialogAboutKuplung();
     void dialogFileBrowser();
     void dialogFileBrowserProcessFile(FBEntity file);
-    void dialogOptions();
+    void dialogOptions(ImGuiStyle* ref = NULL);
     void dialogHeightmap();
     void dialogEditor();
 
@@ -167,12 +168,13 @@ private:
     GUIFileBrowser *windowFileBrowser;
     GUIEditor *fileEditor;
     GUIColorPicker *colorPicker;
+    GUIStyle *guiStyle;
 
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
-    bool outlineColorPickerOpen, deleteYnSceneModel;
+    bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
 };
 
 #endif /* GUI_hpp */

@@ -28,15 +28,14 @@ public:
     void writeInt(std::string configKey, int configValue);
     void writeFloat(std::string configKey, float configValue);
     void writeString(std::string configKey, std::string configValue);
-    
+
 private:
     std::string configFile;
     std::map<std::string, std::string> configData;
-    
+
     std::regex regex_comment;
-    std::regex regex_whiteSpace;
     std::regex regex_equalsSign;
-    
+
     void readFile();
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
 };
