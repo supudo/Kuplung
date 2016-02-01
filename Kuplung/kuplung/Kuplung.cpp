@@ -94,6 +94,8 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, Settings::Instance()->OpenGLMinorVersion);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
+        SDL_SetHint(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, "1");
+
         SDL_DisplayMode current;
         SDL_GetCurrentDisplayMode(0, &current);
 
