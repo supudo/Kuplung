@@ -1146,6 +1146,7 @@ void GUI::contextModelRename() {
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Type the new model name:");
+    ImGui::Text("(%s)", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
 
     static char buf1[128] = "";
     ImGui::InputText("", buf1, 128);
