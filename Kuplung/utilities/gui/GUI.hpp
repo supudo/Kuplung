@@ -60,7 +60,7 @@ class GUI {
 public:
     ~GUI();
     void init(SDL_Window *window, std::function<void()> quitApp, std::function<void(FBEntity)> processFile, std::function<void()> newScene);
-    void setContextMenuModel(std::function<void(int)> deleteModel);
+    void setContextMenuModel(std::function<void(int)> deleteModel, std::function<void(int, std::string)> renameModel);
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame);
     void renderEnd();
@@ -112,6 +112,7 @@ private:
     std::function<void()> newScene;
     std::function<void(std::string)> doFileShaderCompile;
     std::function<void(int)> contextMenuDeleteModelFunc;
+    std::function<void(int, std::string)> contextMenuRenameModelFunc;
 
     bool ImGui_SDL2GL21_Implementation_Init();
     void ImGui_SDL2GL21_Implementation_Shutdown();

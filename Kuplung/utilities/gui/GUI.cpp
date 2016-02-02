@@ -112,8 +112,9 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
         this->ImGui_SDL2GL21_Implementation_Init();
 }
 
-void GUI::setContextMenuModel(std::function<void(int)> deleteModel) {
+void GUI::setContextMenuModel(std::function<void(int)> deleteModel, std::function<void(int, std::string)> renameModel) {
     this->contextMenuDeleteModelFunc = deleteModel;
+    this->contextMenuRenameModelFunc = renameModel;
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -1149,7 +1150,11 @@ void GUI::contextModelRename() {
     static char buf1[128] = "";
     ImGui::InputText("", buf1, 128);
 
-    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
+        this->contextMenuRenameModelFunc(this->contextMenuModelSelected, std::string(buf1));
+        ImGui::CloseCurrentPopup();
+        this->cmenu_renameModel = false;
+    }
     ImGui::SameLine();
     if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
 
@@ -1165,7 +1170,7 @@ void GUI::contextModelDelete() {
     ImGui::Text("%s\n", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        this->contextMenuDeleteModelFunc(0);
+        this->contextMenuDeleteModelFunc(this->contextMenuModelSelected);
         ImGui::CloseCurrentPopup();
         this->cmenu_deleteYn = false;
     }

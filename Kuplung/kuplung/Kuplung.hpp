@@ -36,11 +36,8 @@ private:
     void initFolders();
     void destroy();
     void onEvent(SDL_Event* ev);
-    void guiQuit();
-    void guiProcessObjFile(FBEntity file);
     void processObjFileAsync(FBEntity file);
     void processParsedObjFile();
-    void guiClearScreen();
     void objParserLog(std::string logMessage);
     bool hasEnding(std::string const &fullString, std::string const &ending);
     void renderScene();
@@ -51,7 +48,13 @@ private:
     std::string readFile(const char *filePath);
     void processRunningThreads();
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
+
+    void guiQuit();
+    void guiProcessObjFile(FBEntity file);
+    void guiClearScreen();
     void guiEditorshaderCompiled(std::string fileName);
+    void guiModelDelete(int selectedModel);
+    void guiModelRename(int selectedModel, std::string newName);
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";
