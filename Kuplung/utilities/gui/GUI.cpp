@@ -19,16 +19,6 @@
 #include "IconsMaterialDesign.h"
 #include "GUITabs.hpp"
 
-static double gui_Time = 0.0f;
-static bool gui_MousePressed[3] = { false, false, false };
-static float gui_MouseWheel = 0.0f;
-static GLuint gui_FontTexture = 0;
-static int gui_ShaderHandle = 0, gui_VertHandle = 0, gui_FragHandle = 0;
-static int gui_AttribLocationTex = 0, gui_AttribLocationProjMtx = 0;
-static int gui_AttribLocationPosition = 0, gui_AttribLocationUV = 0, gui_AttribLocationColor = 0;
-static unsigned int gui_VboHandle = 0, gui_VaoHandle = 0, gui_ElementsHandle = 0;
-ImVec4 clear_color = ImColor(114, 144, 154);
-
 #pragma mark - Destructor
 
 GUI::~GUI() {
@@ -1463,15 +1453,15 @@ bool GUI::ImGui_SDL2GL21_Implementation_ProcessEvent(SDL_Event* event) {
     switch (event->type) {
         case SDL_MOUSEWHEEL: {
             if (event->wheel.y > 0)
-                gui_MouseWheel = 1;
+                this->gui_MouseWheel = 1;
             if (event->wheel.y < 0)
-                gui_MouseWheel = -1;
+                this->gui_MouseWheel = -1;
             return true;
         }
         case SDL_MOUSEBUTTONDOWN: {
-            if (event->button.button == SDL_BUTTON_LEFT) gui_MousePressed[0] = true;
-            if (event->button.button == SDL_BUTTON_RIGHT) gui_MousePressed[1] = true;
-            if (event->button.button == SDL_BUTTON_MIDDLE) gui_MousePressed[2] = true;
+            if (event->button.button == SDL_BUTTON_LEFT) this->gui_MousePressed[0] = true;
+            if (event->button.button == SDL_BUTTON_RIGHT) this->gui_MousePressed[1] = true;
+            if (event->button.button == SDL_BUTTON_MIDDLE) this->gui_MousePressed[2] = true;
             return true;
         }
         case SDL_TEXTINPUT: {
@@ -1499,13 +1489,13 @@ bool GUI::ImGui_SDL2GL21_Implementation_CreateDeviceObjects() {
     int width, height;
     io.Fonts->GetTexDataAsAlpha8(&pixels, &width, &height);
 
-    glGenTextures(1, &gui_FontTexture);
-    glBindTexture(GL_TEXTURE_2D, gui_FontTexture);
+    glGenTextures(1, &this->gui_FontTexture);
+    glBindTexture(GL_TEXTURE_2D, this->gui_FontTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, width, height, 0, GL_ALPHA, GL_UNSIGNED_BYTE, pixels);
 
-    io.Fonts->TexID = (void *)(intptr_t)gui_FontTexture;
+    io.Fonts->TexID = (void *)(intptr_t)this->gui_FontTexture;
 
     io.Fonts->ClearInputData();
     io.Fonts->ClearTexData();
@@ -1514,10 +1504,10 @@ bool GUI::ImGui_SDL2GL21_Implementation_CreateDeviceObjects() {
 }
 
 void GUI::ImGui_SDL2GL21_Implementation_InvalidateDeviceObjects() {
-    if (gui_FontTexture) {
-        glDeleteTextures(1, &gui_FontTexture);
+    if (this->gui_FontTexture) {
+        glDeleteTextures(1, &this->gui_FontTexture);
         ImGui::GetIO().Fonts->TexID = 0;
-        gui_FontTexture = 0;
+        this->gui_FontTexture = 0;
     }
 }
 
@@ -1559,7 +1549,7 @@ void GUI::ImGui_SDL2GL21_Implementation_Shutdown() {
 }
 
 void GUI::ImGui_SDL2GL21_Implementation_NewFrame() {
-    if (!gui_FontTexture)
+    if (!this->gui_FontTexture)
         this->ImGui_SDL2GL21_Implementation_CreateDeviceObjects();
 
     ImGuiIO& io = ImGui::GetIO();
@@ -1570,8 +1560,8 @@ void GUI::ImGui_SDL2GL21_Implementation_NewFrame() {
 
     Uint32	time = SDL_GetTicks();
     double current_time = time / 1000.0;
-    io.DeltaTime = gui_Time > 0.0 ? (float)(current_time - gui_Time) : (float)(1.0f/60.0f);
-    gui_Time = current_time;
+    io.DeltaTime = this->gui_Time > 0.0 ? (float)(current_time - this->gui_Time) : (float)(1.0f/60.0f);
+    this->gui_Time = current_time;
 
     int mx, my;
     Uint32 mouseMask = SDL_GetMouseState(&mx, &my);
@@ -1580,13 +1570,13 @@ void GUI::ImGui_SDL2GL21_Implementation_NewFrame() {
     else
         io.MousePos = ImVec2(-1,-1);
 
-    io.MouseDown[0] = gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
-    io.MouseDown[1] = gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
-    io.MouseDown[2] = gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
-    gui_MousePressed[0] = gui_MousePressed[1] = gui_MousePressed[2] = false;
+    io.MouseDown[0] = this->gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
+    io.MouseDown[1] = this->gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
+    io.MouseDown[2] = this->gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
+    this->gui_MousePressed[0] = this->gui_MousePressed[1] = this->gui_MousePressed[2] = false;
 
-    io.MouseWheel = gui_MouseWheel;
-    gui_MouseWheel = 0.0f;
+    io.MouseWheel = this->gui_MouseWheel;
+    this->gui_MouseWheel = 0.0f;
 
     SDL_ShowCursor(io.MouseDrawCursor ? 0 : 1);
 
@@ -1633,19 +1623,19 @@ void GUI::ImGui_SDL2GL32_Implementation_RenderDrawLists() {
         { 0.0f,                  0.0f,                  -1.0f, 0.0f },
         {-1.0f,                  1.0f,                   0.0f, 1.0f },
     };
-    glUseProgram(gui_ShaderHandle);
-    glUniform1i(gui_AttribLocationTex, 0);
-    glUniformMatrix4fv(gui_AttribLocationProjMtx, 1, GL_FALSE, &ortho_projection[0][0]);
-    glBindVertexArray(gui_VaoHandle);
+    glUseProgram(this->gui_ShaderHandle);
+    glUniform1i(this->gui_AttribLocationTex, 0);
+    glUniformMatrix4fv(this->gui_AttribLocationProjMtx, 1, GL_FALSE, &ortho_projection[0][0]);
+    glBindVertexArray(this->gui_VaoHandle);
 
     for (int n=0; n<draw_data->CmdListsCount; n++) {
         const ImDrawList* cmd_list = draw_data->CmdLists[n];
         const ImDrawIdx* idx_buffer_offset = 0;
 
-        glBindBuffer(GL_ARRAY_BUFFER, gui_VboHandle);
+        glBindBuffer(GL_ARRAY_BUFFER, this->gui_VboHandle);
         glBufferData(GL_ARRAY_BUFFER, (GLsizeiptr)cmd_list->VtxBuffer.size() * sizeof(ImDrawVert), (GLvoid*)&cmd_list->VtxBuffer.front(), GL_STREAM_DRAW);
 
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, gui_ElementsHandle);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->gui_ElementsHandle);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, (GLsizeiptr)cmd_list->IdxBuffer.size() * sizeof(ImDrawIdx), (GLvoid*)&cmd_list->IdxBuffer.front(), GL_STREAM_DRAW);
 
         for (const ImDrawCmd* pcmd = cmd_list->CmdBuffer.begin(); pcmd != cmd_list->CmdBuffer.end(); pcmd++)
@@ -1716,7 +1706,7 @@ void GUI::ImGui_SDL2GL32_Implementation_Shutdown() {
 }
 
 void GUI::ImGui_SDL2GL32_Implementation_NewFrame() {
-    if (!gui_FontTexture)
+    if (!this->gui_FontTexture)
         this->ImGui_SDL2GL32_Implementation_CreateDeviceObjects();
 
     ImGuiIO& io = ImGui::GetIO();
@@ -1728,8 +1718,8 @@ void GUI::ImGui_SDL2GL32_Implementation_NewFrame() {
 
     Uint32	time = SDL_GetTicks();
     double current_time = time / 1000.0;
-    io.DeltaTime = gui_Time > 0.0 ? (float)(current_time - gui_Time) : (float)(1.0f / 60.0f);
-    gui_Time = current_time;
+    io.DeltaTime = this->gui_Time > 0.0 ? (float)(current_time - this->gui_Time) : (float)(1.0f / 60.0f);
+    this->gui_Time = current_time;
 
     int mx, my;
     Uint32 mouseMask = SDL_GetMouseState(&mx, &my);
@@ -1738,13 +1728,13 @@ void GUI::ImGui_SDL2GL32_Implementation_NewFrame() {
     else
         io.MousePos = ImVec2(-1, -1);
 
-    io.MouseDown[0] = gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
-    io.MouseDown[1] = gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
-    io.MouseDown[2] = gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
-    gui_MousePressed[0] = gui_MousePressed[1] = gui_MousePressed[2] = false;
+    io.MouseDown[0] = this->gui_MousePressed[0] || (mouseMask & SDL_BUTTON(SDL_BUTTON_LEFT)) != 0;
+    io.MouseDown[1] = this->gui_MousePressed[1] || (mouseMask & SDL_BUTTON(SDL_BUTTON_RIGHT)) != 0;
+    io.MouseDown[2] = this->gui_MousePressed[2] || (mouseMask & SDL_BUTTON(SDL_BUTTON_MIDDLE)) != 0;
+    this->gui_MousePressed[0] = this->gui_MousePressed[1] = this->gui_MousePressed[2] = false;
 
-    io.MouseWheel = gui_MouseWheel;
-    gui_MouseWheel = 0.0f;
+    io.MouseWheel = this->gui_MouseWheel;
+    this->gui_MouseWheel = 0.0f;
 
     SDL_ShowCursor(io.MouseDrawCursor ? 0 : 1);
     ImGui::NewFrame();
@@ -1755,18 +1745,18 @@ bool GUI::ImGui_SDL2GL32_Implementation_ProcessEvent(SDL_Event* event) {
     switch (event->type) {
         case SDL_MOUSEWHEEL: {
             if (event->wheel.y > 0)
-                gui_MouseWheel = 1;
+                this->gui_MouseWheel = 1;
             if (event->wheel.y < 0)
-                gui_MouseWheel = -1;
+                this->gui_MouseWheel = -1;
             return true;
         }
         case SDL_MOUSEBUTTONDOWN: {
             if (event->button.button == SDL_BUTTON_LEFT)
-                gui_MousePressed[0] = true;
+                this->gui_MousePressed[0] = true;
             if (event->button.button == SDL_BUTTON_RIGHT)
-                gui_MousePressed[1] = true;
+                this->gui_MousePressed[1] = true;
             if (event->button.button == SDL_BUTTON_MIDDLE)
-                gui_MousePressed[2] = true;
+                this->gui_MousePressed[2] = true;
             return true;
         }
         case SDL_TEXTINPUT: {
@@ -1788,29 +1778,29 @@ bool GUI::ImGui_SDL2GL32_Implementation_ProcessEvent(SDL_Event* event) {
 }
 
 void GUI::ImGui_SDL2GL32_Implementation_InvalidateDeviceObjects() {
-    if (gui_VaoHandle)
-        glDeleteVertexArrays(1, &gui_VaoHandle);
-    if (gui_VboHandle)
-        glDeleteBuffers(1, &gui_VboHandle);
-    if (gui_ElementsHandle)
-        glDeleteBuffers(1, &gui_ElementsHandle);
-    gui_VaoHandle = gui_VboHandle = gui_ElementsHandle = 0;
+    if (this->gui_VaoHandle)
+        glDeleteVertexArrays(1, &this->gui_VaoHandle);
+    if (this->gui_VboHandle)
+        glDeleteBuffers(1, &this->gui_VboHandle);
+    if (this->gui_ElementsHandle)
+        glDeleteBuffers(1, &this->gui_ElementsHandle);
+    this->gui_VaoHandle = this->gui_VboHandle = this->gui_ElementsHandle = 0;
 
-    glDetachShader(gui_ShaderHandle, gui_VertHandle);
-    glDeleteShader(gui_VertHandle);
-    gui_VertHandle = 0;
+    glDetachShader(this->gui_ShaderHandle, this->gui_VertHandle);
+    glDeleteShader(this->gui_VertHandle);
+    this->gui_VertHandle = 0;
 
-    glDetachShader(gui_ShaderHandle, gui_FragHandle);
-    glDeleteShader(gui_FragHandle);
-    gui_FragHandle = 0;
+    glDetachShader(this->gui_ShaderHandle, this->gui_FragHandle);
+    glDeleteShader(this->gui_FragHandle);
+    this->gui_FragHandle = 0;
 
-    glDeleteProgram(gui_ShaderHandle);
-    gui_ShaderHandle = 0;
+    glDeleteProgram(this->gui_ShaderHandle);
+    this->gui_ShaderHandle = 0;
 
-    if (gui_FontTexture) {
-        glDeleteTextures(1, &gui_FontTexture);
+    if (this->gui_FontTexture) {
+        glDeleteTextures(1, &this->gui_FontTexture);
         ImGui::GetIO().Fonts->TexID = 0;
-        gui_FontTexture = 0;
+        this->gui_FontTexture = 0;
     }
 }
 
@@ -1846,37 +1836,37 @@ bool GUI::ImGui_SDL2GL32_Implementation_CreateDeviceObjects() {
     "	Out_Color = Frag_Color * texture( Texture, Frag_UV.st);\n"
     "}\n";
 
-    gui_ShaderHandle = glCreateProgram();
-    gui_VertHandle = glCreateShader(GL_VERTEX_SHADER);
-    gui_FragHandle = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(gui_VertHandle, 1, &vertex_shader, 0);
-    glShaderSource(gui_FragHandle, 1, &fragment_shader, 0);
-    glCompileShader(gui_VertHandle);
-    glCompileShader(gui_FragHandle);
-    glAttachShader(gui_ShaderHandle, gui_VertHandle);
-    glAttachShader(gui_ShaderHandle, gui_FragHandle);
-    glLinkProgram(gui_ShaderHandle);
+    this->gui_ShaderHandle = glCreateProgram();
+    this->gui_VertHandle = glCreateShader(GL_VERTEX_SHADER);
+    this->gui_FragHandle = glCreateShader(GL_FRAGMENT_SHADER);
+    glShaderSource(this->gui_VertHandle, 1, &vertex_shader, 0);
+    glShaderSource(this->gui_FragHandle, 1, &fragment_shader, 0);
+    glCompileShader(this->gui_VertHandle);
+    glCompileShader(this->gui_FragHandle);
+    glAttachShader(this->gui_ShaderHandle, this->gui_VertHandle);
+    glAttachShader(this->gui_ShaderHandle, this->gui_FragHandle);
+    glLinkProgram(this->gui_ShaderHandle);
 
-    gui_AttribLocationTex = glGetUniformLocation(gui_ShaderHandle, "Texture");
-    gui_AttribLocationProjMtx = glGetUniformLocation(gui_ShaderHandle, "ProjMtx");
-    gui_AttribLocationPosition = glGetAttribLocation(gui_ShaderHandle, "Position");
-    gui_AttribLocationUV = glGetAttribLocation(gui_ShaderHandle, "UV");
-    gui_AttribLocationColor = glGetAttribLocation(gui_ShaderHandle, "Color");
+    this->gui_AttribLocationTex = glGetUniformLocation(this->gui_ShaderHandle, "Texture");
+    this->gui_AttribLocationProjMtx = glGetUniformLocation(this->gui_ShaderHandle, "ProjMtx");
+    this->gui_AttribLocationPosition = glGetAttribLocation(this->gui_ShaderHandle, "Position");
+    this->gui_AttribLocationUV = glGetAttribLocation(this->gui_ShaderHandle, "UV");
+    this->gui_AttribLocationColor = glGetAttribLocation(this->gui_ShaderHandle, "Color");
 
-    glGenBuffers(1, &gui_VboHandle);
-    glGenBuffers(1, &gui_ElementsHandle);
+    glGenBuffers(1, &this->gui_VboHandle);
+    glGenBuffers(1, &this->gui_ElementsHandle);
 
-    glGenVertexArrays(1, &gui_VaoHandle);
-    glBindVertexArray(gui_VaoHandle);
-    glBindBuffer(GL_ARRAY_BUFFER, gui_VboHandle);
-    glEnableVertexAttribArray(gui_AttribLocationPosition);
-    glEnableVertexAttribArray(gui_AttribLocationUV);
-    glEnableVertexAttribArray(gui_AttribLocationColor);
+    glGenVertexArrays(1, &this->gui_VaoHandle);
+    glBindVertexArray(this->gui_VaoHandle);
+    glBindBuffer(GL_ARRAY_BUFFER, this->gui_VboHandle);
+    glEnableVertexAttribArray(this->gui_AttribLocationPosition);
+    glEnableVertexAttribArray(this->gui_AttribLocationUV);
+    glEnableVertexAttribArray(this->gui_AttribLocationColor);
 
 #define OFFSETOF(TYPE, ELEMENT) ((size_t)&(((TYPE *)0)->ELEMENT))
-    glVertexAttribPointer(gui_AttribLocationPosition, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, pos));
-    glVertexAttribPointer(gui_AttribLocationUV, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, uv));
-    glVertexAttribPointer(gui_AttribLocationColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, col));
+    glVertexAttribPointer(this->gui_AttribLocationPosition, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, pos));
+    glVertexAttribPointer(this->gui_AttribLocationUV, 2, GL_FLOAT, GL_FALSE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, uv));
+    glVertexAttribPointer(this->gui_AttribLocationColor, 4, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(ImDrawVert), (GLvoid*)OFFSETOF(ImDrawVert, col));
 #undef OFFSETOF
 
     this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
@@ -1895,13 +1885,13 @@ void GUI::ImGui_SDL2GL32_Implementation_CreateFontsTexture() {
     int width, height;
     io.Fonts->GetTexDataAsRGBA32(&pixels, &width, &height);
 
-    glGenTextures(1, &gui_FontTexture);
-    glBindTexture(GL_TEXTURE_2D, gui_FontTexture);
+    glGenTextures(1, &this->gui_FontTexture);
+    glBindTexture(GL_TEXTURE_2D, this->gui_FontTexture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-    io.Fonts->TexID = (void *)(intptr_t)gui_FontTexture;
+    io.Fonts->TexID = (void *)(intptr_t)this->gui_FontTexture;
 
     io.Fonts->ClearInputData();
     io.Fonts->ClearTexData();

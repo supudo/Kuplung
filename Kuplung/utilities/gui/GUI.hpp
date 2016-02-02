@@ -180,6 +180,15 @@ private:
     int heightmapWidth, heightmapHeight, contextMenuModelSelected;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
+
+    double gui_Time = 0.0f;
+    bool gui_MousePressed[3] = { false, false, false };
+    float gui_MouseWheel = 0.0f;
+    GLuint gui_FontTexture = 0;
+    int gui_ShaderHandle = 0, gui_VertHandle = 0, gui_FragHandle = 0;
+    int gui_AttribLocationTex = 0, gui_AttribLocationProjMtx = 0;
+    int gui_AttribLocationPosition = 0, gui_AttribLocationUV = 0, gui_AttribLocationColor = 0;
+    unsigned int gui_VboHandle = 0, gui_VaoHandle = 0, gui_ElementsHandle = 0;
 };
 
 #endif /* GUI_hpp */
