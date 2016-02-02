@@ -60,6 +60,7 @@ class GUI {
 public:
     ~GUI();
     void init(SDL_Window *window, std::function<void()> quitApp, std::function<void(FBEntity)> processFile, std::function<void()> newScene);
+    void setContextMenuModel(std::function<void(int)> deleteModel);
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame);
     void renderEnd();
@@ -110,7 +111,7 @@ private:
     std::function<void(FBEntity)> processFile;
     std::function<void()> newScene;
     std::function<void(std::string)> doFileShaderCompile;
-    std::string heightmapImage;
+    std::function<void(int)> contextMenuDeleteModelFunc;
 
     bool ImGui_SDL2GL21_Implementation_Init();
     void ImGui_SDL2GL21_Implementation_Shutdown();
@@ -173,9 +174,10 @@ private:
     GUIColorPicker *colorPicker;
     GUIStyle *guiStyle;
 
+    std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
-    int heightmapWidth, heightmapHeight;
+    int heightmapWidth, heightmapHeight, contextMenuModelSelected;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
 };

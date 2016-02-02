@@ -15,15 +15,15 @@
 // TODO: expose ID in api?
 // TODO: massage, cleanup
 
-#include "imgui/imgui.h"
+#include "ImGui/imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui/imgui_internal.h" // ImSaturate
 
+// ImGui picker
+
 void GUIColorPicker::show(const char* title, bool* p_opened, float* col, bool show_alpha) {
     ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
-
     this->ColorPicker4(col, show_alpha);
-
     ImGui::End();
 }
 

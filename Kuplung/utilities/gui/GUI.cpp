@@ -83,7 +83,9 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
-    this->gui_item_selected = 0;
+    this->gui_item_selected = -1;
+    this->scene_item_selected = -1;
+    this->contextMenuModelSelected = -1;
     this->selectedTabScene = 0;
     this->selectedTabGUICamera = 0;
     this->selectedTabGUIGrid = 0;
@@ -118,6 +120,10 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
         this->ImGui_SDL2GL32_Implementation_Init();
     else
         this->ImGui_SDL2GL21_Implementation_Init();
+}
+
+void GUI::setContextMenuModel(std::function<void(int)> deleteModel) {
+    this->contextMenuDeleteModelFunc = deleteModel;
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -1164,9 +1170,16 @@ void GUI::contextModelDelete() {
     ImGui::OpenPopup("Delete?");
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
-    ImGui::Text("Are you sure you want to delete this model?");
+    if (this->contextMenuModelSelected >= 0)
+        ImGui::Text("Are you sure you want to delete this model - %s?", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
+    else
+        ImGui::Text("XXX");
 
-    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
+        this->contextMenuDeleteModelFunc(0);
+        ImGui::CloseCurrentPopup();
+        this->cmenu_deleteYn = false;
+    }
     ImGui::SameLine();
     if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
 
@@ -1193,8 +1206,7 @@ void GUI::dialogSceneSettings() {
 
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-    ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
-    // TODO: object actions menu
+    ImGui::ListBox("", &this->contextMenuModelSelected, scene_items, IM_ARRAYSIZE(scene_items));
     if (ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {

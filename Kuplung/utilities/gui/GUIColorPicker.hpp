@@ -9,6 +9,8 @@
 #ifndef GUIColorPicker_hpp
 #define GUIColorPicker_hpp
 
+#include "ImGui/imgui.h"
+
 class GUIColorPicker {
 public:
     void show(const char* title, bool* p_opened, float* col, bool show_alpha);
