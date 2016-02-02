@@ -1158,12 +1158,11 @@ void GUI::contextModelRename() {
 
 void GUI::contextModelDelete() {
     ImGui::OpenPopup("Delete?");
+
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
-    if (this->contextMenuModelSelected >= 0)
-        ImGui::Text("Are you sure you want to delete this model - %s?", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
-    else
-        ImGui::Text("XXX");
+    ImGui::Text("Are you sure you want to delete this model?\n");
+    ImGui::Text("%s\n", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
         this->contextMenuDeleteModelFunc(0);
@@ -1197,7 +1196,7 @@ void GUI::dialogSceneSettings() {
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::ListBox("", &this->contextMenuModelSelected, scene_items, IM_ARRAYSIZE(scene_items));
-    if (ImGui::BeginPopupContextItem("Actions")) {
+    if (this->contextMenuModelSelected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
         }
