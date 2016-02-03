@@ -1177,16 +1177,22 @@ void GUI::contextModelRename() {
     ImGui::Text("Type the new model name:");
     ImGui::Text("(%s)", this->sceneModels[this->scene_item_selected].modelID.c_str());
 
-    static char buf1[128] = "";
-    ImGui::InputText("", buf1, 128);
+    if (this->guiModelRenameText[0] == '\0')
+        strcpy(this->guiModelRenameText, this->sceneModels[this->scene_item_selected].modelID.c_str());
+    ImGui::InputText("", this->guiModelRenameText, sizeof(this->guiModelRenameText));
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        this->contextMenuRenameModelFunc(this->scene_item_selected, std::string(buf1));
+        this->contextMenuRenameModelFunc(this->scene_item_selected, std::string(this->guiModelRenameText));
         ImGui::CloseCurrentPopup();
         this->cmenu_renameModel = false;
+        this->guiModelRenameText[0] = '\0';
     }
     ImGui::SameLine();
-    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_renameModel = false; }
+    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) {
+        ImGui::CloseCurrentPopup();
+        this->cmenu_renameModel = false;
+        this->guiModelRenameText[0] = '\0';
+    }
 
     ImGui::EndPopup();
 }

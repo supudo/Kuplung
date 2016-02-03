@@ -735,8 +735,6 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 }
 
 void Kuplung::guiModelDelete(int selectedModel) {
-    MeshModelFace *mmf = this->meshModelFaces[selectedModel];
-    this->doLog("[Kuplung] Model was deleted " + mmf->oFace.materialID);
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->gui->removeSceneModelSettings(selectedModel);
 }
