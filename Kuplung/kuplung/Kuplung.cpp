@@ -390,31 +390,29 @@ void Kuplung::renderScene() {
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         MeshModelFace* mmf = this->meshModelFaces[i];
 
-        int sis = mmf->ModelIndex;//mmf->ModelID;
-
         glm::mat4 mtxModel = glm::mat4(1.0);
 
         // reposition like the grid perspective
         mtxModel *= mtxModelGrid;
 
         // scale
-        mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][0]->fValue, this->gui->scene_item_settings[sis][1]->fValue, this->gui->scene_item_settings[sis][2]->fValue));
+        mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[i][0]->fValue, this->gui->scene_item_settings[i][1]->fValue, this->gui->scene_item_settings[i][2]->fValue));
 
         // rotate
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][3]->fValue), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][4]->fValue), glm::vec3(0, 1, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[sis][5]->fValue), glm::vec3(0, 0, 1));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][3]->fValue), glm::vec3(1, 0, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][4]->fValue), glm::vec3(0, 1, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][5]->fValue), glm::vec3(0, 0, 1));
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
         // translate
-        mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[sis][6]->fValue, this->gui->scene_item_settings[sis][7]->fValue, this->gui->scene_item_settings[sis][8]->fValue));
+        mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[i][6]->fValue, this->gui->scene_item_settings[i][7]->fValue, this->gui->scene_item_settings[i][8]->fValue));
 
         // general
         mmf->setOptionsFOV(this->gui->so_GUI_FOV);
-        mmf->setOptionsAlpha(this->gui->scene_item_settings[sis][20]->fValue);
-        mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[sis][9]->fValue, this->gui->scene_item_settings[sis][10]->fValue, this->gui->scene_item_settings[sis][11]->fValue));
-        mmf->setOptionsCelShading(this->gui->scene_item_settings[sis][19]->bValue);
+        mmf->setOptionsAlpha(this->gui->scene_item_settings[i][20]->fValue);
+        mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[i][9]->fValue, this->gui->scene_item_settings[i][10]->fValue, this->gui->scene_item_settings[i][11]->fValue));
+        mmf->setOptionsCelShading(this->gui->scene_item_settings[i][19]->bValue);
 
         // outlining
         mmf->setOptionsSelected(false);
@@ -435,13 +433,13 @@ void Kuplung::renderScene() {
         mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[3][20]->fValue);
 
         // material
-        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[sis][12]->fValue);
-        mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[sis][17]->fValue);
-        mmf->setOptionsMaterialAmbient(glm::vec3(this->gui->scene_item_settings[sis][13]->vValue));
-        mmf->setOptionsMaterialDiffuse(glm::vec3(this->gui->scene_item_settings[sis][14]->vValue));
-        mmf->setOptionsMaterialSpecular(glm::vec3(this->gui->scene_item_settings[sis][15]->vValue));
-        mmf->setOptionsMaterialEmission(glm::vec3(this->gui->scene_item_settings[sis][16]->vValue));
-        mmf->setOptionsMaterialIlluminationModel(this->gui->scene_item_settings[sis][18]->iValue);
+        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[i][12]->fValue);
+        mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[i][17]->fValue);
+        mmf->setOptionsMaterialAmbient(glm::vec3(this->gui->scene_item_settings[i][13]->vValue));
+        mmf->setOptionsMaterialDiffuse(glm::vec3(this->gui->scene_item_settings[i][14]->vValue));
+        mmf->setOptionsMaterialSpecular(glm::vec3(this->gui->scene_item_settings[i][15]->vValue));
+        mmf->setOptionsMaterialEmission(glm::vec3(this->gui->scene_item_settings[i][16]->vValue));
+        mmf->setOptionsMaterialIlluminationModel(this->gui->scene_item_settings[i][18]->iValue);
 
         // render
         mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
@@ -466,7 +464,7 @@ void Kuplung::renderScene() {
 #pragma mark - Scene GUI
 
 void Kuplung::initSceneGUI() {
-    std::map<int, std::vector<float>> initialSettings = {};
+    std::vector<std::vector<float>> initialSettings = {};
 
     // initial variables
     this->gui->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
@@ -477,14 +475,14 @@ void Kuplung::initSceneGUI() {
     this->gui->sceneLights[0]->specular->color = glm::vec3(1.0, 1.0, 1.0);
 
     // camera
-    initialSettings[0] = std::vector<float> {
+    initialSettings.push_back(std::vector<float> {
         0, 0, 3, // eye
         0, 0, 0, // center
         0, 1, 0,  // up
         1, 1, 1,  // scale
         -71, -36, 0, // rotate
         0, 0, -10  // translate
-    };
+    });
 
     // grid
     this->sceneGridHorizontal = new MeshGrid();
@@ -496,14 +494,14 @@ void Kuplung::initSceneGUI() {
     this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
     this->sceneGridVertical->initShaderProgram();
     this->sceneGridVertical->initBuffers(20, false, 1);
-    initialSettings[1] = std::vector<float> {
+    initialSettings.push_back(std::vector<float> {
         1, 1, 1, // eye
         0, 0, 0, // center
         0, 1, 0,  // up
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
         0, 0, 0  // translate
-    };
+    });
 
     // light
     FBEntity file;
@@ -517,7 +515,7 @@ void Kuplung::initSceneGUI() {
     this->meshLight->setModel(sceneGUI.models[0].faces[0]);
     this->meshLight->initShaderProgram();
     this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
-    initialSettings[2] = std::vector<float> {
+    initialSettings.push_back(std::vector<float> {
         1, 1, 1, // eye
         0, 0, 0, // center
         0, 1, 0,  // up
@@ -525,7 +523,7 @@ void Kuplung::initSceneGUI() {
         0, 0, 0,  // rotate
         0, 0, 5,  // translate
         0.4, 1, 0.0  // ambient, diffuse and specular strength
-    };
+    });
 
     // axis
     this->sceneCoordinateSystem = new MeshCoordinateSystem();
@@ -537,14 +535,14 @@ void Kuplung::initSceneGUI() {
     this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "terrain", Settings::Instance()->OpenGL_GLSL_Version);
     this->terrain->initShaderProgram();
     this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
-    initialSettings[3] = std::vector<float> {
+    initialSettings.push_back(std::vector<float> {
         1, 1, 1, // eye
         0, 0, 0, // center
         0, 1, 0,  // up
         1, 1, 1,  // scale
         0, 0, 0,  // rotate
         0, 0, 5  // translate
-    };
+    });
 
     this->gui->initGUIControls(4, initialSettings);
     this->gui->showGUIControls();

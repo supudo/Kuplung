@@ -76,7 +76,7 @@ public:
     void showLoading();
     void hideLoading();
 
-    void initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings);
+    void initGUIControls(int guiObjectsCount, std::vector<std::vector<float>> initialSettings);
     void showGUIControls();
     void hideGUIControls();
     void hideSceneSettings();
@@ -94,9 +94,9 @@ public:
     bool displayGUIControls, displaySceneStats, displaySceneSettings;
 
     int gui_item_selected;
-    std::map<int, std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
+    std::vector<std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
     int scene_item_selected;
-    std::map<int, std::vector<GUIObjectSetting*>> scene_item_settings, scene_item_settings_default;
+    std::vector<std::vector<GUIObjectSetting*>> scene_item_settings, scene_item_settings_default;
 
     float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
     float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
@@ -179,7 +179,7 @@ private:
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
-    int heightmapWidth, heightmapHeight, contextMenuModelSelected;
+    int heightmapWidth, heightmapHeight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
 

@@ -75,7 +75,6 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
-    this->contextMenuModelSelected = -1;
     this->selectedTabScene = 0;
     this->selectedTabGUICamera = 0;
     this->selectedTabGUIGrid = 0;
@@ -125,29 +124,29 @@ bool GUI::processEvent(SDL_Event *event) {
 }
 
 void GUI::destroy() {
-    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings.begin(); iter != this->scene_item_settings.end(); ++iter) {
-        std::vector<GUIObjectSetting*> setts = iter->second;
+    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
+        std::vector<GUIObjectSetting*> setts = this->scene_item_settings.at(i);
         for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
             delete *settObj;
         }
     }
 
-    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings_default.begin(); iter != this->scene_item_settings_default.end(); ++iter) {
-        std::vector<GUIObjectSetting*> setts = iter->second;
+    for (int i=0; i<(int)this->scene_item_settings_default.size(); i++) {
+        std::vector<GUIObjectSetting*> setts = this->scene_item_settings_default.at(i);
         for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
             delete *settObj;
         }
     }
 
-    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->gui_item_settings.begin(); iter != this->gui_item_settings.end(); ++iter) {
-        std::vector<GUIObjectSetting*> setts = iter->second;
+    for (int i=0; i<(int)this->gui_item_settings.size(); i++) {
+        std::vector<GUIObjectSetting*> setts = this->gui_item_settings.at(i);
         for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
             delete *settObj;
         }
     }
 
-    for (std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->gui_item_settings_default.begin(); iter != this->gui_item_settings_default.end(); ++iter) {
-        std::vector<GUIObjectSetting*> setts = iter->second;
+    for (int i=0; i<(int)this->gui_item_settings_default.size(); i++) {
+        std::vector<GUIObjectSetting*> setts = this->gui_item_settings_default.at(i);
         for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
             delete *settObj;
         }
@@ -178,8 +177,8 @@ void GUI::recentFilesClear() {
     this->recentFiles.clear();
 }
 
-void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>> initialSettings) {
-    // TODO: fix settings properly!!!!
+void GUI::initGUIControls(int guiObjectsCount, std::vector<std::vector<float>> initialSettings) {
+    // general settings holder
     std::vector<GUIObjectSetting*> setts;
     std::vector<GUIObjectSetting*> setts_default;
     for (int j=0; j<22; j++) {
@@ -197,9 +196,10 @@ void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>>
         gos_default->fValue = 0.0;
         setts_default.push_back(gos_default);
     }
-    this->gui_item_settings[0] = setts;
-    this->gui_item_settings_default[0] = setts_default;
+    this->gui_item_settings.push_back(setts);
+    this->gui_item_settings_default.push_back(setts_default);
 
+    // GUI objects
     for (int i=0; i<guiObjectsCount; i++) {
         std::vector<GUIObjectSetting*> setts;
         std::vector<GUIObjectSetting*> setts_default;
@@ -218,8 +218,8 @@ void GUI::initGUIControls(int guiObjectsCount, std::map<int, std::vector<float>>
             gos_default->fValue = initialSettings[i][j];
             setts_default.push_back(gos_default);
         }
-        this->gui_item_settings[i + 1] = setts;
-        this->gui_item_settings_default[i + 1] = setts_default;
+        this->gui_item_settings.push_back(setts);
+        this->gui_item_settings_default.push_back(setts_default);
     }
 }
 
@@ -232,38 +232,33 @@ void GUI::hideGUIControls() {
 }
 
 void GUI::removeSceneModelSettings(int idx) {
-    //this->scene_item_settings.erase(idx);
-    std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings.begin();
-    while (iter != this->scene_item_settings.end()) {
-        if (iter->first == idx) {
-            std::vector<GUIObjectSetting*> setts = iter->second;
-            for (int i=0; i<(int)setts.size(); i++) {
-                GUIObjectSetting *gos = setts[i];
-                delete gos;
+    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
+        if (i == idx) {
+            std::vector<GUIObjectSetting*> setts = this->scene_item_settings.at(i);
+            for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+                delete *settObj;
             }
-            this->scene_item_settings.erase(iter);
+            this->scene_item_settings.erase(this->scene_item_settings.begin() + idx);
             break;
         }
-        else
-            ++iter;
     }
 
-    std::map<int, std::vector<GUIObjectSetting*>>::iterator iter_def = this->scene_item_settings_default.begin();
-    while (iter_def != this->scene_item_settings_default.end()) {
-        if (iter_def->first == idx) {
-            std::vector<GUIObjectSetting*> setts = iter->second;
-            for (int i=0; i<(int)setts.size(); i++) {
-                GUIObjectSetting *gos = setts[i];
-                delete gos;
+    for (int i=0; i<(int)this->scene_item_settings_default.size(); i++) {
+        if (i == idx) {
+            std::vector<GUIObjectSetting*> setts = this->scene_item_settings_default.at(i);
+            for (std::vector<GUIObjectSetting*>::iterator settObj = setts.begin(); settObj != setts.end(); ++settObj) {
+                delete *settObj;
             }
-            this->scene_item_settings_default.erase(iter_def);
+            this->scene_item_settings_default.erase(this->scene_item_settings_default.begin() + idx);
             break;
         }
-        else
-            ++iter_def;
     }
 
     this->sceneModels.erase(this->sceneModels.begin() + idx);
+    if (this->sceneModels.size() == 0) {
+        this->hideSceneSettings();
+        this->hideSceneStats();
+    }
 }
 
 void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount) {
@@ -334,9 +329,8 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
     setts.push_back(this->addSceneSettingsObject(idx, 1.0));
     setts_default.push_back(this->addSceneSettingsObject(idx, 1.0));
 
-    idx = (int)this->scene_item_settings.size();
-    this->scene_item_settings[idx] = setts;
-    this->scene_item_settings_default[idx] = setts_default;
+    this->scene_item_settings.push_back(setts);
+    this->scene_item_settings_default.push_back(setts_default);
 
     GUISceneObject gso;
     gso.objFile = objFile;
@@ -1181,13 +1175,13 @@ void GUI::contextModelRename() {
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Type the new model name:");
-    ImGui::Text("(%s)", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
+    ImGui::Text("(%s)", this->sceneModels[this->scene_item_selected].modelID.c_str());
 
     static char buf1[128] = "";
     ImGui::InputText("", buf1, 128);
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        this->contextMenuRenameModelFunc(this->contextMenuModelSelected, std::string(buf1));
+        this->contextMenuRenameModelFunc(this->scene_item_selected, std::string(buf1));
         ImGui::CloseCurrentPopup();
         this->cmenu_renameModel = false;
     }
@@ -1203,10 +1197,10 @@ void GUI::contextModelDelete() {
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Are you sure you want to delete this model?\n");
-    ImGui::Text("%s\n", this->sceneModels[this->contextMenuModelSelected].modelID.c_str());
+    ImGui::Text("%s\n", this->sceneModels[this->scene_item_selected].modelID.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        this->contextMenuDeleteModelFunc(this->contextMenuModelSelected);
+        this->contextMenuDeleteModelFunc(this->scene_item_selected);
         ImGui::CloseCurrentPopup();
         this->cmenu_deleteYn = false;
     }
@@ -1236,8 +1230,8 @@ void GUI::dialogSceneSettings() {
 
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-    ImGui::ListBox("", &this->contextMenuModelSelected, scene_items, IM_ARRAYSIZE(scene_items));
-    if (this->contextMenuModelSelected > -1 && ImGui::BeginPopupContextItem("Actions")) {
+    ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
         }
@@ -1382,9 +1376,10 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
 }
 
 void GUI::resetValuesSceneSettings() {
-    this->so_Alpha = 1;
     for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
         for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
+            this->scene_item_settings[i][j]->oAnimate = false;
+            this->scene_item_settings[i][j]->iValue = this->scene_item_settings_default[i][j]->iValue;
             this->scene_item_settings[i][j]->fValue = this->scene_item_settings_default[i][j]->fValue;
             this->scene_item_settings[i][j]->bValue = this->scene_item_settings_default[i][j]->bValue;
             this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
