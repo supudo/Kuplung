@@ -142,6 +142,7 @@ objScene objParser::parse(FBEntity file) {
                 objModelFace entityFace;
                 entityFace.ID = faceID;
                 entityFace.ModelTitle = this->scene.models[indexModel].modelID;
+                entityFace.objFile = this->scene.objFile;
                 entityFace.ModelID = this->scene.models[indexModel].ID;
                 entityFace.materialID = std::accumulate(begin(lineElements), end(lineElements), entityFace.materialID);
                 entityFace.verticesCount = 0;

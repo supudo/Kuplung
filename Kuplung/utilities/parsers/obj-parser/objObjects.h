@@ -44,6 +44,7 @@ struct objModelFace {
     int ID;
     int ModelID;
     std::string ModelTitle;
+    std::string objFile;
     std::string materialID;
     int verticesCount;
     int textureCoordinatesCount;

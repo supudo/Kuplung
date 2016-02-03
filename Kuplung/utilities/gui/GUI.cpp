@@ -156,7 +156,6 @@ void GUI::destroy() {
     this->scene_item_settings_default.clear();
     this->gui_item_settings.clear();
     this->gui_item_settings_default.clear();
-    this->sceneModels.clear();
 
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Shutdown();
@@ -254,14 +253,13 @@ void GUI::removeSceneModelSettings(int idx) {
         }
     }
 
-    this->sceneModels.erase(this->sceneModels.begin() + idx);
-    if (this->sceneModels.size() == 0) {
+    if ((*this->meshModelFaces).size() == 0) {
         this->hideSceneSettings();
         this->hideSceneStats();
     }
 }
 
-void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount) {
+void GUI::addSceneModelSettings() {
     std::vector<GUIObjectSetting*> setts = {};
     std::vector<GUIObjectSetting*> setts_default = {};
 
@@ -331,15 +329,6 @@ void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::s
 
     this->scene_item_settings.push_back(setts);
     this->scene_item_settings_default.push_back(setts_default);
-
-    GUISceneObject gso;
-    gso.objFile = objFile;
-    gso.modelID = modelID;
-    gso.materialID = materialID;
-    gso.verticesCount = verticesCount;
-    gso.normalsCount = normalsCount;
-    gso.indicesCount = indicesCount;
-    this->sceneModels.push_back(gso);
 }
 
 GUIObjectSetting* GUI::addSceneSettingsObject(int idx, float fValue, bool bValue, glm::vec4 vValue) {
@@ -1254,13 +1243,13 @@ void GUI::dialogSceneSettings() {
         this->contextModelDelete();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
-    GUISceneObject gso = this->sceneModels[this->scene_item_selected];
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", gso.objFile.c_str());
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", gso.modelID.c_str());
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", gso.materialID.c_str());
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices count:"); ImGui::SameLine(); ImGui::Text("%i", gso.verticesCount);
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals count:"); ImGui::SameLine(); ImGui::Text("%i", gso.normalsCount);
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices count:"); ImGui::SameLine(); ImGui::Text("%i", gso.indicesCount);
+    MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected];
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.objFile.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.ModelTitle.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.materialID.c_str());
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.verticesCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.normalsCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.indicesCount);
 
     ImGui::Separator();
 

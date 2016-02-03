@@ -624,7 +624,7 @@ void Kuplung::processParsedObjFile() {
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
-            this->gui->addSceneModelSettings(scene.objFile, model.modelID, mmf->oFace.materialID, mmf->oFace.verticesCount, mmf->oFace.normalsCount, mmf->oFace.indicesCount);
+            this->gui->addSceneModelSettings();
         }
     }
 
@@ -679,7 +679,6 @@ void Kuplung::guiClearScreen() {
     this->meshModelFaces = {};
     this->scenes.clear();
     this->objFiles.clear();
-    this->gui->sceneModels.clear();
     this->gui->scene_item_settings.clear();
     this->gui->scene_item_settings_default.clear();
     this->gui->hideSceneSettings();
