@@ -111,11 +111,6 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
         this->ImGui_SDL2GL21_Implementation_Init();
 }
 
-void GUI::setContextMenuModel(std::function<void(int)> deleteModel, std::function<void(int, std::string)> renameModel) {
-    this->contextMenuDeleteModelFunc = deleteModel;
-    this->contextMenuRenameModelFunc = renameModel;
-}
-
 bool GUI::processEvent(SDL_Event *event) {
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         return this->ImGui_SDL2GL32_Implementation_ProcessEvent(event);
@@ -1172,7 +1167,6 @@ void GUI::contextModelRename() {
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
         (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle = std::string(this->guiModelRenameText);
-        this->contextMenuRenameModelFunc(this->scene_item_selected, std::string(this->guiModelRenameText));
         ImGui::CloseCurrentPopup();
         this->cmenu_renameModel = false;
         this->guiModelRenameText[0] = '\0';
@@ -1196,7 +1190,8 @@ void GUI::contextModelDelete() {
     ImGui::Text("(%s)", (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        this->contextMenuDeleteModelFunc(this->scene_item_selected);
+        (*this->meshModelFaces).erase((*this->meshModelFaces).begin() + this->scene_item_selected);
+        this->removeSceneModelSettings(this->scene_item_selected);
         ImGui::CloseCurrentPopup();
         this->cmenu_deleteYn = false;
     }

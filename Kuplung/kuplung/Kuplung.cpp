@@ -121,8 +121,6 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
                                     std::bind(&Kuplung::guiQuit, this),
                                     std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1),
                                     std::bind(&Kuplung::guiClearScreen, this));
-                    this->gui->setContextMenuModel(std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
-                                                   std::bind(&Kuplung::guiModelRename, this, std::placeholders::_1, std::placeholders::_2));
                     this->doLog("Window initialized.");
 
                     this->initFolders();
@@ -738,8 +736,4 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->gui->removeSceneModelSettings(selectedModel);
-}
-
-void Kuplung::guiModelRename(int selectedModel, std::string newName) {
-    //this->meshModelFaces[selectedModel]->oFace.ModelTitle = newName;
 }
