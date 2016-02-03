@@ -56,7 +56,7 @@ public:
     void setOptionsOutlineThickness(float thickness);
 
     objModelFace oFace;
-    int ModelID;
+    int ModelID, ModelIndex;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
 

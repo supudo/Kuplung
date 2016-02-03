@@ -390,7 +390,7 @@ void Kuplung::renderScene() {
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         MeshModelFace* mmf = this->meshModelFaces[i];
 
-        int sis = i;//mmf->ModelID;
+        int sis = mmf->ModelIndex;//mmf->ModelID;
 
         glm::mat4 mtxModel = glm::mat4(1.0);
 
@@ -737,8 +737,10 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 }
 
 void Kuplung::guiModelDelete(int selectedModel) {
-//    MeshModelFace *mmf = this->meshModelFaces[selectedModel];
-//    this->doLog("[Kuplung] Model was deleted " + mmf->oFace.materialID);
+    MeshModelFace *mmf = this->meshModelFaces[selectedModel];
+    this->doLog("[Kuplung] Model was deleted " + mmf->oFace.materialID);
+    this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
+    this->gui->removeSceneModelSettings(selectedModel);
 }
 
 void Kuplung::guiModelRename(int selectedModel, std::string newName) {

@@ -231,6 +231,41 @@ void GUI::hideGUIControls() {
     this->displayGUIControls = true;
 }
 
+void GUI::removeSceneModelSettings(int idx) {
+    //this->scene_item_settings.erase(idx);
+    std::map<int, std::vector<GUIObjectSetting*>>::iterator iter = this->scene_item_settings.begin();
+    while (iter != this->scene_item_settings.end()) {
+        if (iter->first == idx) {
+            std::vector<GUIObjectSetting*> setts = iter->second;
+            for (int i=0; i<(int)setts.size(); i++) {
+                GUIObjectSetting *gos = setts[i];
+                delete gos;
+            }
+            this->scene_item_settings.erase(iter);
+            break;
+        }
+        else
+            ++iter;
+    }
+
+    std::map<int, std::vector<GUIObjectSetting*>>::iterator iter_def = this->scene_item_settings_default.begin();
+    while (iter_def != this->scene_item_settings_default.end()) {
+        if (iter_def->first == idx) {
+            std::vector<GUIObjectSetting*> setts = iter->second;
+            for (int i=0; i<(int)setts.size(); i++) {
+                GUIObjectSetting *gos = setts[i];
+                delete gos;
+            }
+            this->scene_item_settings_default.erase(iter_def);
+            break;
+        }
+        else
+            ++iter_def;
+    }
+
+    this->sceneModels.erase(this->sceneModels.begin() + idx);
+}
+
 void GUI::addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID,int verticesCount, int normalsCount, int indicesCount) {
     std::vector<GUIObjectSetting*> setts = {};
     std::vector<GUIObjectSetting*> setts_default = {};

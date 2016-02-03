@@ -84,6 +84,7 @@ public:
     void hideSceneStats();
 
     void addSceneModelSettings(std::string objFile, std::string modelID, std::string materialID, int verticesCount, int normalsCount, int indicesCount);
+    void removeSceneModelSettings(int idx);
     void setModelSetting(int modelID, int settingID, int iValue = 0, float fValue = 0, bool bValue = true, glm::vec4 vValue = glm::vec4(1, 1, 1, 1));
 
     void addSceneLight();
