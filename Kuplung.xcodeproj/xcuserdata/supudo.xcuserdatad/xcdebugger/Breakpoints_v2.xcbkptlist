@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1377"
             endingLineNumber = "1377"
-            landmarkName = "GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus)"
+            landmarkName = "GUI::resetValuesSceneSettings()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
