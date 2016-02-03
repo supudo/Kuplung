@@ -1175,13 +1175,14 @@ void GUI::contextModelRename() {
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Type the new model name:");
-    ImGui::Text("(%s)", this->sceneModels[this->scene_item_selected].modelID.c_str());
+    ImGui::Text("(%s)", (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle.c_str());
 
     if (this->guiModelRenameText[0] == '\0')
-        strcpy(this->guiModelRenameText, this->sceneModels[this->scene_item_selected].modelID.c_str());
+        strcpy(this->guiModelRenameText, (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle.c_str());
     ImGui::InputText("", this->guiModelRenameText, sizeof(this->guiModelRenameText));
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
+        (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle = std::string(this->guiModelRenameText);
         this->contextMenuRenameModelFunc(this->scene_item_selected, std::string(this->guiModelRenameText));
         ImGui::CloseCurrentPopup();
         this->cmenu_renameModel = false;
@@ -1203,7 +1204,7 @@ void GUI::contextModelDelete() {
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Are you sure you want to delete this model?\n");
-    ImGui::Text("%s\n", this->sceneModels[this->scene_item_selected].modelID.c_str());
+    ImGui::Text("(%s)", (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
         this->contextMenuDeleteModelFunc(this->scene_item_selected);
@@ -1228,10 +1229,10 @@ void GUI::dialogSceneSettings() {
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
-    int modelsCount = (int)this->sceneModels.size();
-    const char* scene_items[modelsCount];
-    for (int i=0; i<(int)this->sceneModels.size(); i++) {
-        scene_items[i] = this->sceneModels[i].modelID.c_str();
+    const char* scene_items[this->meshModelFaces->size()];
+    for (size_t i=0; i<this->meshModelFaces->size(); i++) {
+        MeshModelFace *mmf = (*this->meshModelFaces)[i];
+        scene_items[i] = mmf->oFace.ModelTitle.c_str();
     }
 
     // Scene Model

@@ -628,6 +628,8 @@ void Kuplung::processParsedObjFile() {
         }
     }
 
+    this->gui->meshModelFaces = &this->meshModelFaces;
+
     // render scene stats
     if (this->meshModelFaces.size() > 0) {
         this->gui->scene_item_selected = 0;
@@ -740,6 +742,5 @@ void Kuplung::guiModelDelete(int selectedModel) {
 }
 
 void Kuplung::guiModelRename(int selectedModel, std::string newName) {
-    MeshModelFace *mmf = this->meshModelFaces[selectedModel];
-    this->doLog("[Kuplung] Model - " + mmf->oFace.materialID + ", was renamed to - " + newName);
+    //this->meshModelFaces[selectedModel]->oFace.ModelTitle = newName;
 }

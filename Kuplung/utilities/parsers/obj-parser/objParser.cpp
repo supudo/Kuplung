@@ -141,6 +141,7 @@ objScene objParser::parse(FBEntity file) {
             else if (std::regex_match(singleLine, this->regex_useMaterial)) {
                 objModelFace entityFace;
                 entityFace.ID = faceID;
+                entityFace.ModelTitle = this->scene.models[indexModel].modelID;
                 entityFace.ModelID = this->scene.models[indexModel].ID;
                 entityFace.materialID = std::accumulate(begin(lineElements), end(lineElements), entityFace.materialID);
                 entityFace.verticesCount = 0;

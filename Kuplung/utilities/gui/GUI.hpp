@@ -22,6 +22,7 @@
 #include "GUIEditor.hpp"
 #include "GUIColorPicker.hpp"
 #include "GUIStyle.hpp"
+#include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
 #include "utilities/stb/stb_image.h"
@@ -89,6 +90,7 @@ public:
 
     void addSceneLight();
 
+    std::vector<MeshModelFace*> * meshModelFaces;
     std::vector<GUISceneObject> sceneModels;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
     bool displayGUIControls, displaySceneStats, displaySceneSettings;

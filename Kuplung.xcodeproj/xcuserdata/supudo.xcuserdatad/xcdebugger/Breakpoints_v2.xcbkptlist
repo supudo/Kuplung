@@ -10,12 +10,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/utilities/gui/GUI.cpp"
-            timestampString = "476195410.434167"
+            timestampString = "476211978.276253"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1375"
-            endingLineNumber = "1375"
-            landmarkName = "GUI::resetValuesSceneSettings()"
+            startingLineNumber = "1377"
+            endingLineNumber = "1377"
+            landmarkName = "GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/kuplung/Kuplung.cpp"
+            timestampString = "476209522.889112"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "391"
+            endingLineNumber = "391"
+            landmarkName = "Kuplung::renderScene()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

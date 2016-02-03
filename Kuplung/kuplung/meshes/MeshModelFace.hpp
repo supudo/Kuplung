@@ -17,6 +17,7 @@
 
 class MeshModelFace {
 public:
+    MeshModelFace();
     ~MeshModelFace();
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
