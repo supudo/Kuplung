@@ -9,7 +9,7 @@
 #ifndef GUIColorPicker_hpp
 #define GUIColorPicker_hpp
 
-#include "ImGui/imgui.h"
+#include "utilities/gui/ImGui/imgui.h"
 
 class GUIColorPicker {
 public:

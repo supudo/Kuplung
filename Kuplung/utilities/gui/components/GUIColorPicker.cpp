@@ -15,9 +15,9 @@
 // TODO: expose ID in api?
 // TODO: massage, cleanup
 
-#include "ImGui/imgui.h"
+#include "utilities/gui/ImGui/imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui/imgui_internal.h" // ImSaturate
+#include "utilities/gui/imgui/imgui_internal.h" // ImSaturate
 
 // ImGui picker
 

@@ -9,7 +9,7 @@
 #ifndef GUIEditor_hpp
 #define GUIEditor_hpp
 
-#include "imgui/imgui.h"
+#include "utilities/gui/imgui/imgui.h"
 #include <functional>
 #include <map>
 #include <string>

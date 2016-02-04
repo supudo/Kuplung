@@ -10,9 +10,9 @@
 #define GUIScreenshot_hpp
 
 #define _CRT_SECURE_NO_WARNINGS
-#include "imgui/imgui.h"
+#include "utilities/gui/imgui/imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
-#include "imgui/imgui_internal.h"
+#include "utilities/gui/imgui/imgui_internal.h"
 
 #include <GLFW/glfw3.h>
 

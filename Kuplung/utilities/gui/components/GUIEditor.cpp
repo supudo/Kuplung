@@ -8,7 +8,7 @@
 
 #include "GUIEditor.hpp"
 #include <fstream>
-#include "imgui/imgui_internal.h"
+#include "utilities/gui/imgui/imgui_internal.h"
 
 const char* GUIEditor_ShaderItems[] = {
     "-- Select app shader --",

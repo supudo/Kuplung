@@ -16,12 +16,12 @@
 #include <thread>
 #include <glm/glm.hpp>
 #include "imgui/imgui.h"
-#include "GUILog.hpp"
-#include "GUIScreenshot.hpp"
-#include "GUIFileBrowser.hpp"
-#include "GUIEditor.hpp"
-#include "GUIColorPicker.hpp"
-#include "GUIStyle.hpp"
+#include "components/GUILog.hpp"
+#include "components/GUIScreenshot.hpp"
+#include "components/GUIFileBrowser.hpp"
+#include "components/GUIEditor.hpp"
+#include "components/GUIColorPicker.hpp"
+#include "components/GUIStyle.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG

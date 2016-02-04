@@ -103,13 +103,13 @@ SOURCES += main.cpp \
     utilities/gui/ImGui/imgui_demo.cpp \
     utilities/gui/ImGui/imgui_draw.cpp \
     utilities/gui/GUI.cpp \
-    utilities/gui/GUIEditor.cpp \
-    utilities/gui/GUIFileBrowser.cpp \
-    utilities/gui/GUILog.cpp \
-    utilities/gui/GUIScreenshot.cpp \
-    utilities/gui/GUIColorPicker.cpp \
-    utilities/gui/GUITabs.cpp \
-    utilities/gui/GUIStyle.cpp \
+    utilities/gui/components/GUIEditor.cpp \
+    utilities/gui/components/GUIFileBrowser.cpp \
+    utilities/gui/components/GUILog.cpp \
+    utilities/gui/components/GUIScreenshot.cpp \
+    utilities/gui/components/GUIColorPicker.cpp \
+    utilities/gui/components/GUITabs.cpp \
+    utilities/gui/components/GUIStyle.cpp \
     utilities/input/Controls.cpp \
     utilities/libnoise/HeightmapGenerator.cpp \
     utilities/libnoise/noiseutils.cpp \
@@ -133,15 +133,15 @@ HEADERS += \
     utilities/gui/ImGui/imgui.h \
     utilities/gui/ImGui/imgui_internal.h \
     utilities/gui/GUI.hpp \
-    utilities/gui/GUIEditor.hpp \
-    utilities/gui/GUIFileBrowser.hpp \
-    utilities/gui/GUILog.hpp \
-    utilities/gui/GUIScreenshot.hpp \
-    utilities/gui/GUIColorPicker.hpp \
-    utilities/gui/GUITabs.hpp \
-    utilities/gui/GUIStyle.hpp \
-    utilities/gui/IconsFontAwesome.h \
-    utilities/gui/IconsMaterialDesign.h \
+    utilities/gui/components/GUIEditor.hpp \
+    utilities/gui/components/GUIFileBrowser.hpp \
+    utilities/gui/components/GUILog.hpp \
+    utilities/gui/components/GUIScreenshot.hpp \
+    utilities/gui/components/GUIColorPicker.hpp \
+    utilities/gui/components/GUITabs.hpp \
+    utilities/gui/components/GUIStyle.hpp \
+    utilities/gui/components/IconsFontAwesome.h \
+    utilities/gui/components/IconsMaterialDesign.h \
     utilities/input/Controls.hpp \
     utilities/libnoise/HeightmapGenerator.hpp \
     utilities/libnoise/noiseutils.h \

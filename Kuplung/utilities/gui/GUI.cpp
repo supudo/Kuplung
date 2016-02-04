@@ -15,9 +15,9 @@
 #include <sstream>
 #include "utilities/settings/Settings.h"
 #include "GUI.hpp"
-#include "IconsFontAwesome.h"
-#include "IconsMaterialDesign.h"
-#include "GUITabs.hpp"
+#include "utilities/gui/components/IconsFontAwesome.h"
+#include "utilities/gui/components/IconsMaterialDesign.h"
+#include "utilities/gui/components/GUITabs.hpp"
 
 #pragma mark - Destructor
 

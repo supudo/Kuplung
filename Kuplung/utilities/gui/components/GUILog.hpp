@@ -9,7 +9,7 @@
 #ifndef GUILog_hpp
 #define GUILog_hpp
 
-#include "imgui/imgui.h"
+#include "utilities/gui/imgui/imgui.h"
 
 class GUILog {
 public:

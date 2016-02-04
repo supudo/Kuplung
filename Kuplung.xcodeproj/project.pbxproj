@@ -16,7 +16,6 @@
 		8A25B2B01C63899400464402 /* Inconsolata-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A51C63897D00464402 /* Inconsolata-Regular.ttf */; };
 		8A25B2B21C63899400464402 /* UbuntuMono-R.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A71C63897D00464402 /* UbuntuMono-R.ttf */; };
 		8A33DAF41C63AF9D007296D8 /* Karla-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A33DAF31C63AF97007296D8 /* Karla-Regular.ttf */; };
-		8A66FC2B1C5A8AAD0048168F /* GUITabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A66FC291C5A8AAD0048168F /* GUITabs.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0131C3A9BEE00665C40 /* MeshCoordinateSystem.cpp */; };
 		8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0151C3A9BEE00665C40 /* MeshDot.cpp */; };
@@ -27,10 +26,6 @@
 		8AB6F0701C3A9BEE00665C40 /* FNTParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0361C3A9BEE00665C40 /* FNTParser.cpp */; };
 		8AB6F0711C3A9BEE00665C40 /* GLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0391C3A9BEE00665C40 /* GLUtils.cpp */; };
 		8AB6F0721C3A9BEE00665C40 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F03C1C3A9BEE00665C40 /* GUI.cpp */; };
-		8AB6F0731C3A9BEE00665C40 /* GUIEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F03E1C3A9BEE00665C40 /* GUIEditor.cpp */; };
-		8AB6F0741C3A9BEE00665C40 /* GUIFileBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0401C3A9BEE00665C40 /* GUIFileBrowser.cpp */; };
-		8AB6F0751C3A9BEE00665C40 /* GUILog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0421C3A9BEE00665C40 /* GUILog.cpp */; };
-		8AB6F0761C3A9BEE00665C40 /* GUIScreenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0441C3A9BEE00665C40 /* GUIScreenshot.cpp */; };
 		8AB6F07A1C3A9BEE00665C40 /* Controls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F04E1C3A9BEE00665C40 /* Controls.cpp */; };
 		8AB6F07B1C3A9BEE00665C40 /* HeightmapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0511C3A9BEE00665C40 /* HeightmapGenerator.cpp */; };
 		8AB6F07C1C3A9BEE00665C40 /* noiseutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0531C3A9BEE00665C40 /* noiseutils.cpp */; };
@@ -64,9 +59,14 @@
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
-		8AD9CE941C5F4FEC0096B0BD /* GUIStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AD9CE921C5F4FEC0096B0BD /* GUIStyle.cpp */; };
 		8AF7F0531C5A5D3D0015AC8D /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */; };
-		8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */; };
+		8AFF28891C63C504004724ED /* GUIColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28791C63C504004724ED /* GUIColorPicker.cpp */; };
+		8AFF288A1C63C504004724ED /* GUIEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287B1C63C504004724ED /* GUIEditor.cpp */; };
+		8AFF288B1C63C504004724ED /* GUIFileBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */; };
+		8AFF288C1C63C504004724ED /* GUILog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287F1C63C504004724ED /* GUILog.cpp */; };
+		8AFF288D1C63C504004724ED /* GUIScreenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28811C63C504004724ED /* GUIScreenshot.cpp */; };
+		8AFF288E1C63C504004724ED /* GUIStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28831C63C504004724ED /* GUIStyle.cpp */; };
+		8AFF288F1C63C504004724ED /* GUITabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28851C63C504004724ED /* GUITabs.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -150,8 +150,6 @@
 		8A25B2A51C63897D00464402 /* Inconsolata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-Regular.ttf"; sourceTree = "<group>"; };
 		8A25B2A71C63897D00464402 /* UbuntuMono-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-R.ttf"; sourceTree = "<group>"; };
 		8A33DAF31C63AF97007296D8 /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
-		8A66FC291C5A8AAD0048168F /* GUITabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUITabs.cpp; sourceTree = "<group>"; };
-		8A66FC2A1C5A8AAD0048168F /* GUITabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUITabs.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AB1A8E91C3BCA2200046B9F /* GLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIncludes.h; sourceTree = "<group>"; };
 		8AB250C71C3FBD50005C73C1 /* kuplung.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tcs; sourceTree = "<group>"; };
@@ -176,14 +174,6 @@
 		8AB6F03A1C3A9BEE00665C40 /* GLUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLUtils.hpp; sourceTree = "<group>"; };
 		8AB6F03C1C3A9BEE00665C40 /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = "<group>"; };
 		8AB6F03D1C3A9BEE00665C40 /* GUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUI.hpp; sourceTree = "<group>"; };
-		8AB6F03E1C3A9BEE00665C40 /* GUIEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIEditor.cpp; sourceTree = "<group>"; };
-		8AB6F03F1C3A9BEE00665C40 /* GUIEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIEditor.hpp; sourceTree = "<group>"; };
-		8AB6F0401C3A9BEE00665C40 /* GUIFileBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIFileBrowser.cpp; sourceTree = "<group>"; };
-		8AB6F0411C3A9BEE00665C40 /* GUIFileBrowser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIFileBrowser.hpp; sourceTree = "<group>"; };
-		8AB6F0421C3A9BEE00665C40 /* GUILog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUILog.cpp; sourceTree = "<group>"; };
-		8AB6F0431C3A9BEE00665C40 /* GUILog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUILog.hpp; sourceTree = "<group>"; };
-		8AB6F0441C3A9BEE00665C40 /* GUIScreenshot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIScreenshot.cpp; sourceTree = "<group>"; };
-		8AB6F0451C3A9BEE00665C40 /* GUIScreenshot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIScreenshot.hpp; sourceTree = "<group>"; };
 		8AB6F04E1C3A9BEE00665C40 /* Controls.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Controls.cpp; sourceTree = "<group>"; };
 		8AB6F04F1C3A9BEE00665C40 /* Controls.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Controls.hpp; sourceTree = "<group>"; };
 		8AB6F0511C3A9BEE00665C40 /* HeightmapGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HeightmapGenerator.cpp; sourceTree = "<group>"; };
@@ -230,18 +220,28 @@
 		8AB6F0C61C3AA48E00665C40 /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
 		8AB6F0C71C3AA48E00665C40 /* imgui_draw.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_draw.cpp; sourceTree = "<group>"; };
 		8AB6F0C81C3AA48E00665C40 /* imgui_internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imgui_internal.h; sourceTree = "<group>"; };
-		8AC241AE1C5A6F0200C7C391 /* IconsFontAwesome.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconsFontAwesome.h; sourceTree = "<group>"; };
-		8AC241AF1C5A6F0200C7C391 /* IconsMaterialDesign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IconsMaterialDesign.h; sourceTree = "<group>"; };
 		8AC241B01C5A6F1500C7C391 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8AD104051C05C489008CE831 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		8AD9CE921C5F4FEC0096B0BD /* GUIStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIStyle.cpp; sourceTree = "<group>"; };
-		8AD9CE931C5F4FEC0096B0BD /* GUIStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIStyle.hpp; sourceTree = "<group>"; };
 		8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
-		8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUIColorPicker.cpp; sourceTree = "<group>"; };
-		8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUIColorPicker.hpp; sourceTree = "<group>"; };
+		8AFF28791C63C504004724ED /* GUIColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIColorPicker.cpp; path = components/GUIColorPicker.cpp; sourceTree = "<group>"; };
+		8AFF287A1C63C504004724ED /* GUIColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIColorPicker.hpp; path = components/GUIColorPicker.hpp; sourceTree = "<group>"; };
+		8AFF287B1C63C504004724ED /* GUIEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIEditor.cpp; path = components/GUIEditor.cpp; sourceTree = "<group>"; };
+		8AFF287C1C63C504004724ED /* GUIEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIEditor.hpp; path = components/GUIEditor.hpp; sourceTree = "<group>"; };
+		8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIFileBrowser.cpp; path = components/GUIFileBrowser.cpp; sourceTree = "<group>"; };
+		8AFF287E1C63C504004724ED /* GUIFileBrowser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIFileBrowser.hpp; path = components/GUIFileBrowser.hpp; sourceTree = "<group>"; };
+		8AFF287F1C63C504004724ED /* GUILog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUILog.cpp; path = components/GUILog.cpp; sourceTree = "<group>"; };
+		8AFF28801C63C504004724ED /* GUILog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUILog.hpp; path = components/GUILog.hpp; sourceTree = "<group>"; };
+		8AFF28811C63C504004724ED /* GUIScreenshot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIScreenshot.cpp; path = components/GUIScreenshot.cpp; sourceTree = "<group>"; };
+		8AFF28821C63C504004724ED /* GUIScreenshot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIScreenshot.hpp; path = components/GUIScreenshot.hpp; sourceTree = "<group>"; };
+		8AFF28831C63C504004724ED /* GUIStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIStyle.cpp; path = components/GUIStyle.cpp; sourceTree = "<group>"; };
+		8AFF28841C63C504004724ED /* GUIStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIStyle.hpp; path = components/GUIStyle.hpp; sourceTree = "<group>"; };
+		8AFF28851C63C504004724ED /* GUITabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUITabs.cpp; path = components/GUITabs.cpp; sourceTree = "<group>"; };
+		8AFF28861C63C504004724ED /* GUITabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUITabs.hpp; path = components/GUITabs.hpp; sourceTree = "<group>"; };
+		8AFF28871C63C504004724ED /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsFontAwesome.h; path = components/IconsFontAwesome.h; sourceTree = "<group>"; };
+		8AFF28881C63C504004724ED /* IconsMaterialDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsMaterialDesign.h; path = components/IconsMaterialDesign.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,23 +325,8 @@
 			children = (
 				8AB6F03C1C3A9BEE00665C40 /* GUI.cpp */,
 				8AB6F03D1C3A9BEE00665C40 /* GUI.hpp */,
-				8AD9CE921C5F4FEC0096B0BD /* GUIStyle.cpp */,
-				8AD9CE931C5F4FEC0096B0BD /* GUIStyle.hpp */,
-				8AB6F03E1C3A9BEE00665C40 /* GUIEditor.cpp */,
-				8AB6F03F1C3A9BEE00665C40 /* GUIEditor.hpp */,
-				8AB6F0401C3A9BEE00665C40 /* GUIFileBrowser.cpp */,
-				8AB6F0411C3A9BEE00665C40 /* GUIFileBrowser.hpp */,
-				8AB6F0421C3A9BEE00665C40 /* GUILog.cpp */,
-				8AB6F0431C3A9BEE00665C40 /* GUILog.hpp */,
-				8AB6F0441C3A9BEE00665C40 /* GUIScreenshot.cpp */,
-				8AB6F0451C3A9BEE00665C40 /* GUIScreenshot.hpp */,
-				8AFF24C61C5A3D8E0030F9A1 /* GUIColorPicker.cpp */,
-				8AFF24C71C5A3D8E0030F9A1 /* GUIColorPicker.hpp */,
-				8A66FC291C5A8AAD0048168F /* GUITabs.cpp */,
-				8A66FC2A1C5A8AAD0048168F /* GUITabs.hpp */,
-				8AC241AE1C5A6F0200C7C391 /* IconsFontAwesome.h */,
-				8AC241AF1C5A6F0200C7C391 /* IconsMaterialDesign.h */,
 				8AB6F0C21C3AA48E00665C40 /* ImGui */,
+				8AFF28781C63C4FA004724ED /* components */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -533,6 +518,29 @@
 			path = fonts;
 			sourceTree = "<group>";
 		};
+		8AFF28781C63C4FA004724ED /* components */ = {
+			isa = PBXGroup;
+			children = (
+				8AFF28791C63C504004724ED /* GUIColorPicker.cpp */,
+				8AFF287A1C63C504004724ED /* GUIColorPicker.hpp */,
+				8AFF287B1C63C504004724ED /* GUIEditor.cpp */,
+				8AFF287C1C63C504004724ED /* GUIEditor.hpp */,
+				8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */,
+				8AFF287E1C63C504004724ED /* GUIFileBrowser.hpp */,
+				8AFF287F1C63C504004724ED /* GUILog.cpp */,
+				8AFF28801C63C504004724ED /* GUILog.hpp */,
+				8AFF28811C63C504004724ED /* GUIScreenshot.cpp */,
+				8AFF28821C63C504004724ED /* GUIScreenshot.hpp */,
+				8AFF28831C63C504004724ED /* GUIStyle.cpp */,
+				8AFF28841C63C504004724ED /* GUIStyle.hpp */,
+				8AFF28851C63C504004724ED /* GUITabs.cpp */,
+				8AFF28861C63C504004724ED /* GUITabs.hpp */,
+				8AFF28871C63C504004724ED /* IconsFontAwesome.h */,
+				8AFF28881C63C504004724ED /* IconsMaterialDesign.h */,
+			);
+			name = components;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -592,31 +600,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8AFF288F1C63C504004724ED /* GUITabs.cpp in Sources */,
 				8AB6F07C1C3A9BEE00665C40 /* noiseutils.cpp in Sources */,
 				8AB6F06E1C3A9BEE00665C40 /* MeshModelFace.cpp in Sources */,
 				8AB6F07B1C3A9BEE00665C40 /* HeightmapGenerator.cpp in Sources */,
-				8AD9CE941C5F4FEC0096B0BD /* GUIStyle.cpp in Sources */,
-				8AFF24C81C5A3D8E0030F9A1 /* GUIColorPicker.cpp in Sources */,
-				8AB6F0761C3A9BEE00665C40 /* GUIScreenshot.cpp in Sources */,
+				8AFF288E1C63C504004724ED /* GUIStyle.cpp in Sources */,
 				8AB6F07E1C3A9BEE00665C40 /* STLParser.cpp in Sources */,
-				8A66FC2B1C5A8AAD0048168F /* GUITabs.cpp in Sources */,
+				8AFF288C1C63C504004724ED /* GUILog.cpp in Sources */,
 				8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */,
 				8AB6F0721C3A9BEE00665C40 /* GUI.cpp in Sources */,
+				8AFF28891C63C504004724ED /* GUIColorPicker.cpp in Sources */,
 				8AB6F0C91C3AA48E00665C40 /* imgui.cpp in Sources */,
 				8AB6F0CB1C3AA48E00665C40 /* imgui_draw.cpp in Sources */,
 				8AB6F06F1C3A9BEE00665C40 /* MeshTerrain.cpp in Sources */,
+				8AFF288B1C63C504004724ED /* GUIFileBrowser.cpp in Sources */,
+				8AFF288A1C63C504004724ED /* GUIEditor.cpp in Sources */,
 				8AB6F07A1C3A9BEE00665C40 /* Controls.cpp in Sources */,
-				8AB6F0751C3A9BEE00665C40 /* GUILog.cpp in Sources */,
 				8AB6F06D1C3A9BEE00665C40 /* MeshLight.cpp in Sources */,
 				8AB6F0711C3A9BEE00665C40 /* GLUtils.cpp in Sources */,
 				8AB6F07D1C3A9BEE00665C40 /* objParser.cpp in Sources */,
 				8AB6F0CA1C3AA48E00665C40 /* imgui_demo.cpp in Sources */,
-				8AB6F0741C3A9BEE00665C40 /* GUIFileBrowser.cpp in Sources */,
 				8AB6F06C1C3A9BEE00665C40 /* MeshGrid.cpp in Sources */,
+				8AFF288D1C63C504004724ED /* GUIScreenshot.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8AB6F0701C3A9BEE00665C40 /* FNTParser.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
-				8AB6F0731C3A9BEE00665C40 /* GUIEditor.cpp in Sources */,
 				8AB6F0801C3A9BEE00665C40 /* Settings.cpp in Sources */,
 				8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */,
 				8AB6F07F1C3A9BEE00665C40 /* ConfigUtils.cpp in Sources */,
