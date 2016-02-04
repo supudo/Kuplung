@@ -17,14 +17,14 @@ void GUIStyle::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
 }
 
-void GUIStyle::saveDefault(ImGuiStyle& style) {
+void GUIStyle::saveDefault(int selectedFont, ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
-        this->saveStyles(defaultStyleFile, style);
+        this->saveStyles(selectedFont, defaultStyleFile, style);
 }
 
-void GUIStyle::save(ImGuiStyle& style) {
-    this->saveStyles(Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
+void GUIStyle::save(int selectedFont, ImGuiStyle& style) {
+    this->saveStyles(selectedFont, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
 ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
@@ -71,7 +71,9 @@ ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
                 boost::trim_right(opValue);
 
                 try {
-                    if (opKey == "AntiAliasedLines")
+                    if (opKey == "Font")
+                        Settings::Instance()->uiSelectedFont = std::stoi(opValue);
+                    else if (opKey == "AntiAliasedLines")
                         style.AntiAliasedLines = std::stoi(opValue) != 0;
                     else if (opKey == "AntiAliasedShapes")
                         style.AntiAliasedShapes = std::stoi(opValue) != 0;
@@ -132,12 +134,15 @@ ImGuiStyle& GUIStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
+void GUIStyle::saveStyles(int selectedFont, std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;
     style_txt += "# You can export/import style between different applications/users" + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
+
+    style_txt += "# Font" + Settings::Instance()->newLineDelimiter;
+    style_txt += "Font = " + std::to_string(selectedFont) + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;

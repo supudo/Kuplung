@@ -67,7 +67,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->guiStyle = new GUIStyle();
     this->guiStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
-    this->guiStyle->saveDefault(style);
+    this->guiStyle->saveDefault(0, style);
     style = this->guiStyle->loadCurrent();
 
     this->fileEditor = new GUIEditor();
@@ -80,6 +80,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->selectedTabGUIGrid = 0;
     this->selectedTabGUILight = 0;
     this->selectedTabGUITerrain = 0;
+    this->guiSelectedFont = 0;
 
     this->isFrame = false;
     this->isProjection = true;
@@ -619,26 +620,25 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
 
     ImGui::Begin("Options", &this->showOptions, ImGuiWindowFlags_ShowBorders);
 
-    if (ImGui::TreeNode("General")) {
+    if (ImGui::CollapsingHeader("General")) {
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
-        ImGui::TreePop();
     }
 
-    if (ImGui::TreeNode("Style")) {
+    if (ImGui::CollapsingHeader("Look & Feel", NULL, true, true)) {
         ImGuiStyle& style = ImGui::GetStyle();
 
         const ImGuiStyle def;
         if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
-            this->guiStyle->save(style);
+            this->guiStyle->save(0, style);
         }
         if (ref) {
             ImGui::SameLine();
             if (ImGui::Button("Save")) {
                 *ref = style;
-                this->guiStyle->save(style);
+                this->guiStyle->save(this->guiSelectedFont, style);
             }
         }
         ImGui::SameLine();
@@ -646,6 +646,15 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
             this->showStyleDialog = true;
 
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
+
+        if (ImGui::TreeNode("Font")) {
+            ImFontAtlas* atlas = ImGui::GetIO().Fonts;
+            for (int i = 0; i < atlas->Fonts.Size; i++) {
+                ImFont* font = atlas->Fonts[i];
+                ImGui::Selectable((font->ConfigData ? font->ConfigData[0].Name : "<Default>"), (i == this->guiSelectedFont ? true : false));
+            }
+            ImGui::TreePop();
+        }
 
         if (ImGui::TreeNode("Rendering")) {
             ImGui::Checkbox("Anti-aliased lines", &style.AntiAliasedLines);
@@ -710,7 +719,6 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         }
 
         ImGui::PopItemWidth();
-        ImGui::TreePop();
     }
 
     ImGui::End();

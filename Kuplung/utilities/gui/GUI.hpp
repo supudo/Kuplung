@@ -172,6 +172,7 @@ private:
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
+    int guiSelectedFont;
 
     double gui_Time = 0.0f;
     bool gui_MousePressed[3] = { false, false, false };
