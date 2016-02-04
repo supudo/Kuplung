@@ -1213,6 +1213,37 @@ void GUI::dialogSceneSettings() {
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
+//    std::string modelName;
+//    std::map<std::string, std::vector<MeshModelFace*>> tree;
+//    for (size_t i=0; i<this->meshModelFaces->size(); i++) {
+//        MeshModelFace *mmf = (*this->meshModelFaces)[i];
+//        if (modelName != mmf->oFace.ModelTitle) {
+//            modelName = mmf->oFace.ModelTitle;
+//        }
+//        tree[modelName].push_back(mmf);
+//    }
+
+//    int c = 0;
+//    typedef std::map<std::string, std::vector<MeshModelFace*>>::iterator it_type;
+//    for (it_type iter = tree.begin(); iter != tree.end(); iter++) {
+//        std::string objFile = iter->first;
+//        std::vector<MeshModelFace*> models = iter->second;
+
+//        if (ImGui::TreeNode(objFile.c_str())) {
+//            for (int i=0; i<(int)models.size(); i++) {
+//                MeshModelFace *mmf = models[i];
+
+//                const bool item_selected = (c == this->scene_item_selected);
+
+//                if (ImGui::Selectable(mmf->oFace.materialID.c_str(), item_selected))
+//                    this->scene_item_selected = c;
+
+//                c += 1;
+//            }
+//            ImGui::TreePop();
+//        }
+//    }
+
     const char* scene_items[this->meshModelFaces->size()];
     for (size_t i=0; i<this->meshModelFaces->size(); i++) {
         MeshModelFace *mmf = (*this->meshModelFaces)[i];
