@@ -10,6 +10,7 @@
 #define Settings_h
 
 #include <string>
+#include <vector>
 #include "ConfigUtils.hpp"
 
 #define BOOST_FILESYSTEM_NO_DEPRECATED
@@ -39,7 +40,9 @@ public:
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
-    int uiSelectedFont;
+    int UIFontIndex;
+
+    std::vector<std::string> Fonts;
 
 private:
     Settings(){};

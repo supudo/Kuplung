@@ -49,6 +49,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->outlineColorPickerOpen = false;
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
+    this->needsFontChange = false;
 
     this->sceneLights = {};
 
@@ -80,36 +81,17 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->selectedTabGUIGrid = 0;
     this->selectedTabGUILight = 0;
     this->selectedTabGUITerrain = 0;
-    this->guiSelectedFont = 0;
 
     this->isFrame = false;
     this->isProjection = true;
     this->fixedGridWorld = true;
 
-    // icon font
-    ImGuiIO& io = ImGui::GetIO();
-    io.Fonts->AddFontDefault();
-
-    // http://fortawesome.github.io/Font-Awesome/icons/
-    std::string faFont = Settings::Instance()->appFolder() + "/fonts/fontawesome-webfont.ttf";
-    static const ImWchar fa_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
-    ImFontConfig fa_config;
-    fa_config.MergeMode = true;
-    fa_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(faFont.c_str(), 14.0f, &fa_config, fa_ranges);
-
-    // https://design.google.com/icons/
-    std::string gmFont = Settings::Instance()->appFolder() + "/fonts/material-icons-regular.ttf";
-    static const ImWchar gm_ranges[] = { ICON_MIN_MD, ICON_MAX_MD, 0 };
-    ImFontConfig gm_config;
-    gm_config.MergeMode = true;
-    gm_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 22.0f, &gm_config, gm_ranges);
-
     if (Settings::Instance()->OpenGLMajorVersion > 2)
         this->ImGui_SDL2GL32_Implementation_Init();
     else
         this->ImGui_SDL2GL21_Implementation_Init();
+
+    this->loadFonts();
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -541,6 +523,16 @@ void GUI::renderStart(bool isFrame) {
 }
 
 void GUI::renderEnd() {
+    if (this->needsFontChange) {
+        ImGuiIO& io = ImGui::GetIO();
+        io.Fonts->Clear();
+        this->loadFonts();
+        if (Settings::Instance()->OpenGLMajorVersion > 2)
+            this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
+        else
+            this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
+    }
+
     ImGui::Render();
     this->ImGui_Implementation_RenderDrawLists();
 }
@@ -614,6 +606,36 @@ void GUI::dialogAboutKuplung() {
     ImGui::End();
 }
 
+void GUI::loadFonts() {
+    ImGuiIO& io = ImGui::GetIO();
+
+    if (Settings::Instance()->UIFontIndex > 0) {
+        std::string fontName = Settings::Instance()->Fonts[Settings::Instance()->UIFontIndex - 1];
+        std::string fontFile = Settings::Instance()->appFolder() + "/fonts/" + fontName + ".ttf";
+        io.Fonts->AddFontFromFileTTF(fontFile.c_str(), 14.0f);
+    }
+    else
+        io.Fonts->AddFontDefault();
+
+    // http://fortawesome.github.io/Font-Awesome/icons/
+    std::string faFont = Settings::Instance()->appFolder() + "/fonts/fontawesome-webfont.ttf";
+    static const ImWchar fa_ranges[] = { ICON_MIN_FA, ICON_MAX_FA, 0 };
+    ImFontConfig fa_config;
+    fa_config.MergeMode = true;
+    fa_config.PixelSnapH = true;
+    io.Fonts->AddFontFromFileTTF(faFont.c_str(), 14.0f, &fa_config, fa_ranges);
+
+    // https://design.google.com/icons/
+    std::string gmFont = Settings::Instance()->appFolder() + "/fonts/material-icons-regular.ttf";
+    static const ImWchar gm_ranges[] = { ICON_MIN_MD, ICON_MAX_MD, 0 };
+    ImFontConfig gm_config;
+    gm_config.MergeMode = true;
+    gm_config.PixelSnapH = true;
+    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 22.0f, &gm_config, gm_ranges);
+
+    this->needsFontChange = false;
+}
+
 void GUI::dialogOptions(ImGuiStyle* ref) {
     ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
@@ -633,12 +655,14 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
             this->guiStyle->save(0, style);
+            this->needsFontChange = true;
         }
         if (ref) {
             ImGui::SameLine();
             if (ImGui::Button("Save")) {
                 *ref = style;
-                this->guiStyle->save(this->guiSelectedFont, style);
+                this->guiStyle->save(Settings::Instance()->UIFontIndex, style);
+                this->needsFontChange = true;
             }
         }
         ImGui::SameLine();
@@ -648,10 +672,11 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
 
         if (ImGui::TreeNode("Font")) {
-            ImFontAtlas* atlas = ImGui::GetIO().Fonts;
-            for (int i = 0; i < atlas->Fonts.Size; i++) {
-                ImFont* font = atlas->Fonts[i];
-                ImGui::Selectable((font->ConfigData ? font->ConfigData[0].Name : "<Default>"), (i == this->guiSelectedFont ? true : false));
+            if (ImGui::Selectable(" - < Default >", (0 == Settings::Instance()->UIFontIndex ? true : false)))
+                Settings::Instance()->UIFontIndex = 0;
+            for (int i = 0; i < (int)Settings::Instance()->Fonts.size(); i++) {
+                if (ImGui::Selectable(std::string(" - " + Settings::Instance()->Fonts[i]).c_str(), ((i + 1) == Settings::Instance()->UIFontIndex ? true : false)))
+                    Settings::Instance()->UIFontIndex = (i + 1);
             }
             ImGui::TreePop();
         }

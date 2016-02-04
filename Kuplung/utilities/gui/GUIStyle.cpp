@@ -72,7 +72,7 @@ ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
 
                 try {
                     if (opKey == "Font")
-                        Settings::Instance()->uiSelectedFont = std::stoi(opValue);
+                        Settings::Instance()->UIFontIndex = std::stoi(opValue);
                     else if (opKey == "AntiAliasedLines")
                         style.AntiAliasedLines = std::stoi(opValue) != 0;
                     else if (opKey == "AntiAliasedShapes")

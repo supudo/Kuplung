@@ -6,11 +6,11 @@ CONFIG -= console
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -std=c++11
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
-#QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
+QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
 
 CONFIG(debug, debug|release) {
   TARGET = kuplung
@@ -116,7 +116,8 @@ SOURCES += main.cpp \
     utilities/parsers/obj-parser/objParser.cpp \
     utilities/parsers/stl-parser/STLParser.cpp \
     utilities/settings/ConfigUtils.cpp \
-    utilities/settings/Settings.cpp
+    utilities/settings/Settings.cpp \
+    utilities/settings/FontsList.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -149,16 +150,25 @@ HEADERS += \
     utilities/parsers/stl-parser/STLParser.hpp \
     utilities/settings/ConfigUtils.hpp \
     utilities/settings/Settings.h \
+    utilities/settings/FontsList.h \
     utilities/stb/stb_image.h \
     utilities/stb/stb_image_write.h \
     utilities/stb/stb_rect_pack.h \
     utilities/stb/stb_textedit.h \
     utilities/stb/stb_truetype.h \
-    utilities/gl/GLIncludes.h
+    utilities/gl/GLIncludes.h \
+    utilities/settings/FontsList.hpp
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+    resources/fonts/Anonymous Pro.ttf \
+    resources/fonts/DroidSans.ttf \
+    resources/fonts/FiraMono Regular.ttf \
+    resources/fonts/Hack-Regular.ttf \
+    resources/fonts/Inconsolata-Regular.ttf \
+    resources/fonts/UbuntuMono-R.ttf \
+    resources/fonts/Karla-Regular.ttf \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/dots.vert \

@@ -144,6 +144,7 @@ private:
     void animateValue(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void fileEditorSaved(std::string fileName);
+    void loadFonts();
 
     void dialogSceneStats();
 
@@ -172,7 +173,7 @@ private:
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
-    int guiSelectedFont;
+    bool needsFontChange;
 
     double gui_Time = 0.0f;
     bool gui_MousePressed[3] = { false, false, false };

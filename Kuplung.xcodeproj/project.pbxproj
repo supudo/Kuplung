@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
+		8A25B29C1C63893D00464402 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A25B29A1C63893D00464402 /* FontsList.cpp */; };
+		8A25B2A91C63899400464402 /* Anonymous Pro.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B29E1C63897D00464402 /* Anonymous Pro.ttf */; };
+		8A25B2AA1C63899400464402 /* DroidSans.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B29F1C63897D00464402 /* DroidSans.ttf */; };
+		8A25B2AC1C63899400464402 /* FiraMono Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A11C63897D00464402 /* FiraMono Regular.ttf */; };
+		8A25B2AE1C63899400464402 /* Hack-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A31C63897D00464402 /* Hack-Regular.ttf */; };
+		8A25B2B01C63899400464402 /* Inconsolata-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A51C63897D00464402 /* Inconsolata-Regular.ttf */; };
+		8A25B2B21C63899400464402 /* UbuntuMono-R.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25B2A71C63897D00464402 /* UbuntuMono-R.ttf */; };
+		8A33DAF41C63AF9D007296D8 /* Karla-Regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A33DAF31C63AF97007296D8 /* Karla-Regular.ttf */; };
 		8A66FC2B1C5A8AAD0048168F /* GUITabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A66FC291C5A8AAD0048168F /* GUITabs.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0131C3A9BEE00665C40 /* MeshCoordinateSystem.cpp */; };
@@ -29,7 +38,6 @@
 		8AB6F07E1C3A9BEE00665C40 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F05B1C3A9BEE00665C40 /* STLParser.cpp */; };
 		8AB6F07F1C3A9BEE00665C40 /* ConfigUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F05E1C3A9BEE00665C40 /* ConfigUtils.cpp */; };
 		8AB6F0801C3A9BEE00665C40 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0611C3A9BEE00665C40 /* Settings.cpp */; };
-		8AB6F0931C3A9C4400665C40 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0601C3A9BEE00665C40 /* Kuplung_Settings.ini */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
 		8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09A1C3AA1F900665C40 /* light.obj */; };
@@ -106,7 +114,7 @@
 			dstSubfolderSpec = 7;
 			files = (
 				8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */,
-				8AB6F0931C3A9C4400665C40 /* Kuplung_Settings.ini in Copy Files */,
+				8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -119,12 +127,29 @@
 			files = (
 				8AF7F0531C5A5D3D0015AC8D /* fontawesome-webfont.ttf in CopyFiles */,
 				8AC241B11C5A6F1800C7C391 /* material-icons-regular.ttf in CopyFiles */,
+				8A25B2A91C63899400464402 /* Anonymous Pro.ttf in CopyFiles */,
+				8A25B2AA1C63899400464402 /* DroidSans.ttf in CopyFiles */,
+				8A25B2AC1C63899400464402 /* FiraMono Regular.ttf in CopyFiles */,
+				8A25B2AE1C63899400464402 /* Hack-Regular.ttf in CopyFiles */,
+				8A25B2B01C63899400464402 /* Inconsolata-Regular.ttf in CopyFiles */,
+				8A25B2B21C63899400464402 /* UbuntuMono-R.ttf in CopyFiles */,
+				8A33DAF41C63AF9D007296D8 /* Karla-Regular.ttf in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
+		8A25B29A1C63893D00464402 /* FontsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontsList.cpp; sourceTree = "<group>"; };
+		8A25B29B1C63893D00464402 /* FontsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontsList.hpp; sourceTree = "<group>"; };
+		8A25B29E1C63897D00464402 /* Anonymous Pro.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Anonymous Pro.ttf"; sourceTree = "<group>"; };
+		8A25B29F1C63897D00464402 /* DroidSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = DroidSans.ttf; sourceTree = "<group>"; };
+		8A25B2A11C63897D00464402 /* FiraMono Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FiraMono Regular.ttf"; sourceTree = "<group>"; };
+		8A25B2A31C63897D00464402 /* Hack-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Hack-Regular.ttf"; sourceTree = "<group>"; };
+		8A25B2A51C63897D00464402 /* Inconsolata-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inconsolata-Regular.ttf"; sourceTree = "<group>"; };
+		8A25B2A71C63897D00464402 /* UbuntuMono-R.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "UbuntuMono-R.ttf"; sourceTree = "<group>"; };
+		8A33DAF31C63AF97007296D8 /* Karla-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Karla-Regular.ttf"; sourceTree = "<group>"; };
 		8A66FC291C5A8AAD0048168F /* GUITabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUITabs.cpp; sourceTree = "<group>"; };
 		8A66FC2A1C5A8AAD0048168F /* GUITabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUITabs.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -172,7 +197,6 @@
 		8AB6F05C1C3A9BEE00665C40 /* STLParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STLParser.hpp; sourceTree = "<group>"; };
 		8AB6F05E1C3A9BEE00665C40 /* ConfigUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigUtils.cpp; sourceTree = "<group>"; };
 		8AB6F05F1C3A9BEE00665C40 /* ConfigUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ConfigUtils.hpp; sourceTree = "<group>"; };
-		8AB6F0601C3A9BEE00665C40 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
 		8AB6F0611C3A9BEE00665C40 /* Settings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Settings.cpp; sourceTree = "<group>"; };
 		8AB6F0621C3A9BEE00665C40 /* Settings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Settings.h; sourceTree = "<group>"; };
 		8AB6F0641C3A9BEE00665C40 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
@@ -375,9 +399,10 @@
 			children = (
 				8AB6F05E1C3A9BEE00665C40 /* ConfigUtils.cpp */,
 				8AB6F05F1C3A9BEE00665C40 /* ConfigUtils.hpp */,
-				8AB6F0601C3A9BEE00665C40 /* Kuplung_Settings.ini */,
 				8AB6F0611C3A9BEE00665C40 /* Settings.cpp */,
 				8AB6F0621C3A9BEE00665C40 /* Settings.h */,
+				8A25B29A1C63893D00464402 /* FontsList.cpp */,
+				8A25B29B1C63893D00464402 /* FontsList.hpp */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -402,6 +427,7 @@
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
+				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
 			);
 			path = resources;
@@ -496,6 +522,13 @@
 			children = (
 				8AF7F0521C5A5D360015AC8D /* fontawesome-webfont.ttf */,
 				8AC241B01C5A6F1500C7C391 /* material-icons-regular.ttf */,
+				8A25B29E1C63897D00464402 /* Anonymous Pro.ttf */,
+				8A25B29F1C63897D00464402 /* DroidSans.ttf */,
+				8A25B2A11C63897D00464402 /* FiraMono Regular.ttf */,
+				8A25B2A31C63897D00464402 /* Hack-Regular.ttf */,
+				8A25B2A51C63897D00464402 /* Inconsolata-Regular.ttf */,
+				8A25B2A71C63897D00464402 /* UbuntuMono-R.ttf */,
+				8A33DAF31C63AF97007296D8 /* Karla-Regular.ttf */,
 			);
 			path = fonts;
 			sourceTree = "<group>";
@@ -587,6 +620,7 @@
 				8AB6F0801C3A9BEE00665C40 /* Settings.cpp in Sources */,
 				8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */,
 				8AB6F07F1C3A9BEE00665C40 /* ConfigUtils.cpp in Sources */,
+				8A25B29C1C63893D00464402 /* FontsList.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
