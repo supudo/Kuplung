@@ -66,17 +66,20 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->componentColorPicker = new ColorPicker();
 
+    this->componentFileEditor = new Editor();
+    this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
+
     this->windowStyle = new DialogStyle();
     this->windowStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
     this->windowStyle->saveDefault(style);
     style = this->windowStyle->loadCurrent();
 
-    this->componentFileEditor = new Editor();
-    this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
-
     this->windowOptions = new DialogOptions();
     this->windowOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+
+    this->windowGUIControls = new DialogGUIControls();
+    this->windowGUIControls->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;

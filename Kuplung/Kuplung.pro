@@ -103,6 +103,7 @@ SOURCES += main.cpp \
     utilities/gui/ImGui/imgui_demo.cpp \
     utilities/gui/ImGui/imgui_draw.cpp \
     utilities/gui/GUI.cpp \
+    utilities/gui/implementation/SDL2OpenGL32.cpp \
     utilities/gui/components/Editor.cpp \
     utilities/gui/components/FileBrowser.cpp \
     utilities/gui/components/Log.cpp \
@@ -111,6 +112,7 @@ SOURCES += main.cpp \
     utilities/gui/components/Tabs.cpp \
     utilities/gui/dialogs/DialogStyle.cpp \
     utilities/gui/dialogs/DialogOptions.cpp \
+    utilities/gui/dialogs/DialogGUIControls.cpp \
     utilities/input/Controls.cpp \
     utilities/libnoise/HeightmapGenerator.cpp \
     utilities/libnoise/noiseutils.cpp \
@@ -133,7 +135,9 @@ HEADERS += \
     utilities/gui/ImGui/imconfig.h \
     utilities/gui/ImGui/imgui.h \
     utilities/gui/ImGui/imgui_internal.h \
+    utilities/gui/Objects.h \
     utilities/gui/GUI.hpp \
+    utilities/gui/implementation/SDL2OpenGL32.hpp \
     utilities/gui/components/Editor.hpp \
     utilities/gui/components/FileBrowser.hpp \
     utilities/gui/components/Log.hpp \
@@ -142,6 +146,7 @@ HEADERS += \
     utilities/gui/components/Tabs.hpp \
     utilities/gui/dialogs/DialogStyle.hpp \
     utilities/gui/dialogs/DialogOptions.hpp \
+    utilities/gui/dialogs/DialogGUIControls.hpp \
     utilities/gui/components/IconsFontAwesome.h \
     utilities/gui/components/IconsMaterialDesign.h \
     utilities/input/Controls.hpp \

@@ -15,6 +15,7 @@
 #include <string>
 #include <thread>
 #include <glm/glm.hpp>
+#include "utilities/gui/Objects.h"
 #include "utilities/gui/imgui/imgui.h"
 #include "utilities/gui/components/Log.hpp"
 #include "utilities/gui/components/Screenshot.hpp"
@@ -23,31 +24,12 @@
 #include "utilities/gui/components/ColorPicker.hpp"
 #include "utilities/gui/dialogs/DialogStyle.hpp"
 #include "utilities/gui/dialogs/DialogOptions.hpp"
+#include "utilities/gui/dialogs/DialogGUIControls.hpp"
+#include "utilities/gui/implementation/SDL2OpenGL32.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
 #include "utilities/stb/stb_image.h"
-
-struct GUIObjectSetting {
-    int oIndex;
-    bool oAnimate;
-    int iValue;
-    float fValue;
-    bool bValue;
-    glm::vec4 vValue;
-};
-
-struct GUILightObject {
-    bool colorPickerOpen;
-    float strength;
-    glm::vec3 color;
-};
-
-struct GUISceneLight {
-    GUILightObject *ambient;
-    GUILightObject *diffuse;
-    GUILightObject *specular;
-};
 
 class GUI {
 public:
@@ -166,6 +148,7 @@ private:
     ColorPicker *componentColorPicker;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
+    DialogGUIControls *windowGUIControls;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
