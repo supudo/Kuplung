@@ -21,8 +21,8 @@
 #include "components/GUIFileBrowser.hpp"
 #include "components/GUIEditor.hpp"
 #include "components/GUIColorPicker.hpp"
-#include "components/GUIStyle.hpp"
-#include "components/GUIOptions.hpp"
+#include "dialogs/DialogStyle.hpp"
+#include "dialogs/DialogOptions.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
@@ -164,8 +164,8 @@ private:
     GUIFileBrowser *windowFileBrowser;
     GUIEditor *fileEditor;
     GUIColorPicker *colorPicker;
-    GUIStyle *guiStyle;
-    GUIOptions *guiOptions;
+    DialogStyle *wStyle;
+    DialogOptions *wOptions;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;

@@ -1,20 +1,20 @@
 //
-//  GUIStyle.hpp
+//  DialogStyle.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 2/1/16.
 //  Copyright © 2016 supudo.net. All rights reserved.
 //
 
-#ifndef GUIStyle_hpp
-#define GUIStyle_hpp
+#ifndef DialogStyle_hpp
+#define DialogStyle_hpp
 
 #include <regex>
 #include <string>
 #include <vector>
 #include "utilities/gui/ImGui/imgui.h"
 
-class GUIStyle {
+class DialogStyle {
 public:
     void init(std::function<void(std::string)> doLog);
     void saveDefault(ImGuiStyle& style);
@@ -32,4 +32,4 @@ private:
     ImVec2 tov2(std::string opValue);
 };
 
-#endif /* GUIStyle_hpp */
+#endif /* DialogStyle_hpp */

@@ -66,17 +66,17 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->colorPicker = new GUIColorPicker();
 
-    this->guiStyle = new GUIStyle();
-    this->guiStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->wStyle = new DialogStyle();
+    this->wStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
-    this->guiStyle->saveDefault(style);
-    style = this->guiStyle->loadCurrent();
+    this->wStyle->saveDefault(style);
+    style = this->wStyle->loadCurrent();
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
-    this->guiOptions = new GUIOptions();
-    this->guiOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->wOptions = new DialogOptions();
+    this->wOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -95,7 +95,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     else
         this->ImGui_SDL2GL21_Implementation_Init();
 
-    this->guiOptions->loadFonts(&this->needsFontChange);
+    this->wOptions->loadFonts(&this->needsFontChange);
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -528,7 +528,7 @@ void GUI::renderStart(bool isFrame) {
 
 void GUI::renderEnd() {
     if (this->needsFontChange) {
-        this->guiOptions->loadFonts(&this->needsFontChange);
+        this->wOptions->loadFonts(&this->needsFontChange);
         if (Settings::Instance()->OpenGLMajorVersion > 2)
             this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
         else
@@ -553,7 +553,7 @@ void GUI::dialogStyleBrowser() {
 
 void GUI::dialogFileBrowserProcessFile(FBEntity file) {
     if (this->showStyleDialog)
-        this->guiStyle->load(file.path);
+        this->wStyle->load(file.path);
     this->processFile(file);
     this->showFileDialog = false;
     this->showStyleDialog = false;
@@ -609,7 +609,7 @@ void GUI::dialogAboutKuplung() {
 }
 
 void GUI::dialogOptions(ImGuiStyle* ref) {
-    this->guiOptions->showOptionsWindow(ref, this->guiStyle, &this->showOptions, &this->needsFontChange);
+    this->wOptions->showOptionsWindow(ref, this->wStyle, &this->showOptions, &this->needsFontChange);
 }
 
 void GUI::dialogHeightmap() {

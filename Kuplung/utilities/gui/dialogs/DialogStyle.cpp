@@ -1,33 +1,33 @@
 //
-//  GUIStyle.cpp
+//  DialogStyle.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 2/1/16.
 //  Copyright © 2016 supudo.net. All rights reserved.
 //
 
-#include "GUIStyle.hpp"
+#include "DialogStyle.hpp"
 #include <fstream>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include "utilities/settings/Settings.h"
 
-void GUIStyle::init(std::function<void(std::string)> doLog) {
+void DialogStyle::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
 }
 
-void GUIStyle::saveDefault(ImGuiStyle& style) {
+void DialogStyle::saveDefault(ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
         this->saveStyles("-", "14.00", defaultStyleFile, style);
 }
 
-void GUIStyle::save(std::string fontfile, std::string fontsize, ImGuiStyle& style) {
+void DialogStyle::save(std::string fontfile, std::string fontsize, ImGuiStyle& style) {
     this->saveStyles(fontfile, fontsize, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
-ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
+ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
    ImGuiStyle& style = ImGui::GetStyle();
 
     std::FILE *fp = std::fopen(styleFilePath.c_str(), "rb");
@@ -128,15 +128,15 @@ ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
     return style;
 }
 
-ImGuiStyle&  GUIStyle::loadDefault() {
+ImGuiStyle& DialogStyle::loadDefault() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyleDefault.style");
 }
 
-ImGuiStyle& GUIStyle::loadCurrent() {
+ImGuiStyle& DialogStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void GUIStyle::saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style) {
+void DialogStyle::saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;
@@ -184,7 +184,7 @@ void GUIStyle::saveStyles(std::string fontfile, std::string fontsize, std::strin
     out.close();
 }
 
-std::vector<std::string> GUIStyle::splitString(const std::string &s, std::regex delimiter) {
+std::vector<std::string> DialogStyle::splitString(const std::string &s, std::regex delimiter) {
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
@@ -195,12 +195,12 @@ std::vector<std::string> GUIStyle::splitString(const std::string &s, std::regex 
     return elements;
 }
 
-ImVec4 GUIStyle::tov4(std::string opValue) {
+ImVec4 DialogStyle::tov4(std::string opValue) {
     std::vector<std::string> values = this->splitString(opValue, std::regex(","));
     return ImVec4(std::stof(values[0]), std::stof(values[1]), std::stof(values[2]), std::stof(values[3]));
 }
 
-ImVec2 GUIStyle::tov2(std::string opValue) {
+ImVec2 DialogStyle::tov2(std::string opValue) {
     std::vector<std::string> values = this->splitString(opValue, std::regex(","));
     return ImVec2(std::stof(values[0]), std::stof(values[1]));
 }

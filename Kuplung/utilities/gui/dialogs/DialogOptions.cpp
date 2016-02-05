@@ -1,29 +1,29 @@
 //
-//  GUIOptions.cpp
-// Kuplung
+//  DialogOptions.cpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 11/17/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUIOptions.hpp"
+#include "DialogOptions.hpp"
 #include "utilities/gui/ImGui/imgui_internal.h"
 #include "utilities/gui/components/IconsFontAwesome.h"
 #include "utilities/gui/components/IconsMaterialDesign.h"
 #include "utilities/settings/Settings.h"
 
-void GUIOptions::init(std::function<void(std::string)> doLog) {
+void DialogOptions::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
 
     this->fontLister = new FontsList();
-    this->fontLister->init(std::bind(&GUIOptions::logMessage, this, std::placeholders::_1));
+    this->fontLister->init(std::bind(&DialogOptions::logMessage, this, std::placeholders::_1));
     this->fontLister->getFonts();
 
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
-    this->optionsFontSizeSelected = fontLister->getSelectedFontSize();
+    this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
 }
 
-void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_opened, bool* needsFontChange) {
+void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool* p_opened, bool* needsFontChange) {
     ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
 
@@ -40,8 +40,8 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_
         const ImGuiStyle def;
         if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
-            style = guiStyle->loadDefault();
-            guiStyle->save("-", "14.00", style);
+            style = wStyle->loadDefault();
+            wStyle->save("-", "14.00", style);
             optionsFontSelected = 0;
             optionsFontSizeSelected = 1;
             Settings::Instance()->UIFontFileIndex = 0;
@@ -57,7 +57,7 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_
                     font = fontLister->fonts[optionsFontSelected - 1].path;
                 std::string fontSize = std::string(this->fontLister->fontSizes[optionsFontSizeSelected]);
                 Settings::Instance()->UIFontSize = std::stof(fontSize);
-                guiStyle->save(font, fontSize, style);
+                wStyle->save(font, fontSize, style);
                 *needsFontChange = true;
             }
         }
@@ -152,7 +152,7 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_
     ImGui::End();
 }
 
-void GUIOptions::loadFonts(bool* needsFontChange) {
+void DialogOptions::loadFonts(bool* needsFontChange) {
     ImGuiIO& io = ImGui::GetIO();
 
     io.Fonts->Clear();
@@ -186,6 +186,6 @@ void GUIOptions::loadFonts(bool* needsFontChange) {
     *needsFontChange = false;
 }
 
-void GUIOptions::logMessage(std::string message) {
-    this->doLog("[GUIOptions] " + message);
+void DialogOptions::logMessage(std::string message) {
+    this->doLog("[DialogOptions] " + message);
 }
