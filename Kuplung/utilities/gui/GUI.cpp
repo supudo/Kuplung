@@ -8,6 +8,7 @@
 
 #include "utilities/gl/GLIncludes.h"
 #include <SDL2/SDL_syswm.h>
+#include <boost/algorithm/string/replace.hpp>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -74,10 +75,11 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
+    this->optionsFontSelected = -1;
     this->fontLister = new FontsList();
     this->fontLister->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
-    this->fontLister->getBundleFonts();
-    this->fontLister->getSystemFonts();
+    this->fontLister->getFonts();
+    this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -86,6 +88,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->selectedTabGUIGrid = 0;
     this->selectedTabGUILight = 0;
     this->selectedTabGUITerrain = 0;
+    this->optionsFontSize = 0;
 
     this->isFrame = false;
     this->isProjection = true;
@@ -614,7 +617,12 @@ void GUI::dialogAboutKuplung() {
 void GUI::loadFonts() {
     ImGuiIO& io = ImGui::GetIO();
 
-    if (this->fontLister->fontFileExists(Settings::Instance()->UIFontFile))
+    if (this->optionsFontSelected == 0)
+        Settings::Instance()->UIFontFile = "";
+    else if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[this->optionsFontSelected].path))
+        Settings::Instance()->UIFontFile = this->fontLister->fonts[this->optionsFontSelected].path;
+
+    if (Settings::Instance()->UIFontFile != "" && Settings::Instance()->UIFontFile != "-")
         io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), 14.0f);
     else
         io.Fonts->AddFontDefault();
@@ -656,14 +664,19 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
-            this->guiStyle->save(style);
+            this->guiStyle->save("-", style);
+            this->optionsFontSelected = 0;
+            Settings::Instance()->UIFontFileIndex = 0;
             this->needsFontChange = true;
         }
         if (ref) {
             ImGui::SameLine();
             if (ImGui::Button("Save")) {
                 *ref = style;
-                this->guiStyle->save(style);
+                std::string font = "-";
+                if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[this->optionsFontSelected].path))
+                    font = this->fontLister->fonts[this->optionsFontSelected - 1].path;
+                this->guiStyle->save(font, style);
                 this->needsFontChange = true;
             }
         }
@@ -671,30 +684,21 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         if (ImGui::Button("Load"))
             this->showStyleDialog = true;
 
-        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
         if (ImGui::TreeNode("Font")) {
-            if (ImGui::TreeNode("Bundled Fonts")) {
-                if (ImGui::Selectable(" - < Default >", (Settings::Instance()->UIFontFile.empty() ? true : false)))
-                    Settings::Instance()->UIFontFile = "";
-                for (std::map<std::string, std::string>::iterator iter = this->fontLister->bundleFonts.begin(); iter != this->fontLister->bundleFonts.end(); ++iter) {
-                    bool selected = iter->first == Settings::Instance()->UIFontFile;
-                    if (ImGui::Selectable(std::string(" - " + iter->second).c_str(), (selected ? true : false)))
-                        Settings::Instance()->UIFontFile = iter->first;
-                }
-                ImGui::TreePop();
+            const char* fonts[this->fontLister->fonts.size() + 1];
+            fonts[0] = " - < Default Font > ";
+            for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
+                fonts[j] = this->fontLister->fonts[i].title.c_str();
             }
-
-            if (ImGui::TreeNode("System Fonts")) {
-                for (std::map<std::string, std::string>::iterator iter = this->fontLister->systemFonts.begin(); iter != this->fontLister->systemFonts.end(); ++iter) {
-                    bool selected = iter->first == Settings::Instance()->UIFontFile;
-                    if (ImGui::Selectable(std::string(" - " + iter->second).c_str(), (selected ? true : false)))
-                        Settings::Instance()->UIFontFile = iter->first;
-                }
-                ImGui::TreePop();
-            }
+            ImGui::Combo("", &this->optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
             ImGui::TreePop();
         }
+
+        ImGui::PopItemWidth();
+
+        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
 
         if (ImGui::TreeNode("Rendering")) {
             ImGui::Checkbox("Anti-aliased lines", &style.AntiAliasedLines);
@@ -808,8 +812,6 @@ void GUI::dialogGUIControls() {
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
 
     const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
-    //ImGui::Combo("##111", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
-    //ImGui::Text("GUI Objects");
     ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
     ImGui::PopItemWidth();
 

@@ -11,17 +11,16 @@
 
 #include <functional>
 #include <string>
-#include <map>
+#include <vector>
+#include "Settings.h"
 
 class FontsList {
 public:
     void init(std::function<void(std::string)> doLog);
-    void getBundleFonts();
-    void getSystemFonts();
     bool fontFileExists(std::string font);
+    void getFonts();
 
-    std::map<std::string, std::string> bundleFonts;
-    std::map<std::string, std::string> systemFonts;
+    std::vector<FBEntity> fonts;
 
 private:
     std::function<void(std::string)> doLog;

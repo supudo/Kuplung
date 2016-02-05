@@ -25,63 +25,63 @@ CONFIG(release, debug|release) {
 }
 
 mac {
-  QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
 
-  QMAKE_INFO_PLIST = Info.plist
+    QMAKE_INFO_PLIST = Info.plist
 
-  plist.path = "$$DESTDIR/$$join(TARGET,,,.app)/Contents"
-  plist.files = Info.plist
-  INSTALLS += plist
+    plist.path = "$$DESTDIR/$$join(TARGET,,,.app)/Contents"
+    plist.files = Info.plist
+    INSTALLS += plist
 
-  MediaFiles.files = resources/Kuplung_Settings.ini
-  MediaFiles.files += resources/Kuplung.icns
-  MediaFiles.files += resources/gui
-  MediaFiles.files += resources/fonts
-  MediaFiles.files += resources/shaders
-  MediaFiles.path = Contents/Resources
-  QMAKE_BUNDLE_DATA += MediaFiles
+    MediaFiles.files = resources/Kuplung_Settings.ini
+    MediaFiles.files += resources/Kuplung.icns
+    MediaFiles.files += resources/gui
+    MediaFiles.files += resources/fonts
+    MediaFiles.files += resources/shaders
+    MediaFiles.path = Contents/Resources
+    QMAKE_BUNDLE_DATA += MediaFiles
 
-  LIBS += -framework cocoa -framework OpenGL
+    LIBS += -framework cocoa -framework OpenGL
 
-  LIBS += -L/usr/local/Cellar/boost/1.60.0_1/lib -lboost_system -lboost_filesystem
-  INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_1/include
+    LIBS += -L/usr/local/Cellar/boost/1.60.0_1/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_1/include
 
-  LIBS += -L/usr/local/Cellar/glm/0.9.7.1/lib
-  INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.1/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.7.1/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.1/include
 
-  LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
-  INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
+    LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
+    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
 
-  LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
-  INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
+    LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
+    INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
 
-  LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
-  INCLUDEPATH += "$$PWD/../external/libnoise/headers"
+    LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
+    INCLUDEPATH += "$$PWD/../external/libnoise/headers"
 }
 
 win32|win64 {
-  #RC_FILE += resources/Kuplung.ico
-  RC_ICONS += resources/Kuplung.ico
+    #RC_FILE += resources/Kuplung.ico
+    RC_ICONS += resources/Kuplung.ico
 
-  LIBS += -L"C:\Boost\lib" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
-  INCLUDEPATH += "C:\Boost\include\boost-1_60"
+    LIBS += -L"C:\Boost\lib" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
+    INCLUDEPATH += "C:\Boost\include\boost-1_60"
 
-  LIBS += -L"D:\_Work\_Misc" -llibEGLd
-  LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
+    LIBS += -L"D:\_Work\_Misc" -llibEGLd
+    LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
 
-  INCLUDEPATH += "D:\_Work\glm"
+    INCLUDEPATH += "D:\_Work\glm"
 
-  LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
-  INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
+    LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
+    INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
 
-  LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
-  INCLUDEPATH += "D:\_Work\GLFW\include"
+    LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
+    INCLUDEPATH += "D:\_Work\GLFW\include"
 
-  LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
-  INCLUDEPATH += "D:\_Work\GLEW\include"
+    LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
+    INCLUDEPATH += "D:\_Work\GLEW\include"
 
-  LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
-  INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
+    LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
+    INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
 }
 
 OTHER_FILES += resources/*
@@ -162,13 +162,6 @@ HEADERS += \
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
-    resources/fonts/Anonymous Pro.ttf \
-    resources/fonts/DroidSans.ttf \
-    resources/fonts/FiraMono Regular.ttf \
-    resources/fonts/Hack-Regular.ttf \
-    resources/fonts/Inconsolata-Regular.ttf \
-    resources/fonts/UbuntuMono-R.ttf \
-    resources/fonts/Karla-Regular.ttf \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/dots.vert \

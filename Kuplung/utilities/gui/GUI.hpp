@@ -171,7 +171,7 @@ private:
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
-    int heightmapWidth, heightmapHeight;
+    int heightmapWidth, heightmapHeight, optionsFontSelected, optionsFontSize;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel, needsFontChange;
     char guiModelRenameText[256];

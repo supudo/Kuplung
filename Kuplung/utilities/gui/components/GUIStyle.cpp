@@ -20,11 +20,11 @@ void GUIStyle::init(std::function<void(std::string)> doLog) {
 void GUIStyle::saveDefault(ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
-        this->saveStyles(defaultStyleFile, style);
+        this->saveStyles("-", defaultStyleFile, style);
 }
 
-void GUIStyle::save(ImGuiStyle& style) {
-    this->saveStyles(Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
+void GUIStyle::save(std::string fontfile, ImGuiStyle& style) {
+    this->saveStyles(fontfile, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
 ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
@@ -134,7 +134,7 @@ ImGuiStyle& GUIStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
+void GUIStyle::saveStyles(std::string fontfile, std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;
@@ -142,7 +142,7 @@ void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Font" + Settings::Instance()->newLineDelimiter;
-    style_txt += "Font = " + Settings::Instance()->UIFontFile + Settings::Instance()->newLineDelimiter;
+    style_txt += "Font = " + fontfile + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;
@@ -185,8 +185,10 @@ std::vector<std::string> GUIStyle::splitString(const std::string &s, std::regex 
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
-    for ( ; iter != end; ++iter)
+    for ( ; iter != end; ++iter) {
+
         elements.push_back(*iter);
+    }
     return elements;
 }
 

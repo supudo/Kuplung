@@ -26,12 +26,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/utilities/gui/GUI.cpp"
-            timestampString = "476363411.960515"
+            timestampString = "476379414.010817"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "614"
-            endingLineNumber = "614"
-            landmarkName = "GUI::loadFonts()"
+            startingLineNumber = "665"
+            endingLineNumber = "665"
+            landmarkName = "GUI::dialogOptions(ImGuiStyle* ref)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/utilities/gui/GUI.cpp"
+            timestampString = "476379520.206698"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "675"
+            endingLineNumber = "675"
+            landmarkName = "GUI::dialogOptions(ImGuiStyle* ref)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
