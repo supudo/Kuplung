@@ -16,13 +16,15 @@
 
 class GUIOptions {
 public:
-    void init(std::function<void(std::string)> doLog, FontsList *fontLister);
-    void showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsList *fontLister, bool* p_opened = NULL, bool* needsFontChange = NULL);
-    void loadFonts(FontsList *fontLister, bool* needsFontChange = NULL);
+    void init(std::function<void(std::string)> doLog);
+    void showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_opened = NULL, bool* needsFontChange = NULL);
+    void loadFonts(bool* needsFontChange = NULL);
 
 private:
     std::function<void(std::string)> doLog;
     void logMessage(std::string message);
+
+    FontsList *fontLister;
 
     int optionsFontSelected, optionsFontSizeSelected;
 };

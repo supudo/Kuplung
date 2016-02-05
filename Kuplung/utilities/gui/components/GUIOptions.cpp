@@ -12,14 +12,18 @@
 #include "utilities/gui/components/IconsMaterialDesign.h"
 #include "utilities/settings/Settings.h"
 
-void GUIOptions::init(std::function<void(std::string)> doLog, FontsList *fontLister) {
+void GUIOptions::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
+
+    this->fontLister = new FontsList();
+    this->fontLister->init(std::bind(&GUIOptions::logMessage, this, std::placeholders::_1));
+    this->fontLister->getFonts();
 
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
     this->optionsFontSizeSelected = fontLister->getSelectedFontSize();
 }
 
-void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsList *fontLister, bool* p_opened, bool* needsFontChange) {
+void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, bool* p_opened, bool* needsFontChange) {
     ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
 
@@ -49,9 +53,9 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsLis
             if (ImGui::Button("Save")) {
                 *ref = style;
                 std::string font = "-";
-                if (optionsFontSelected > 0 && fontLister->fontFileExists(fontLister->fonts[optionsFontSelected].path))
+                if (optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[optionsFontSelected].path))
                     font = fontLister->fonts[optionsFontSelected - 1].path;
-                std::string fontSize = std::string(fontLister->fontSizes[optionsFontSizeSelected]);
+                std::string fontSize = std::string(this->fontLister->fontSizes[optionsFontSizeSelected]);
                 Settings::Instance()->UIFontSize = std::stof(fontSize);
                 guiStyle->save(font, fontSize, style);
                 *needsFontChange = true;
@@ -62,10 +66,10 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsLis
             *p_opened = true;
 
         if (ImGui::TreeNode("Font")) {
-            const char* fonts[fontLister->fonts.size() + 1];
+            const char* fonts[this->fontLister->fonts.size() + 1];
             fonts[0] = " - < Default Font > ";
-            for (int i = 0, j = 1; i < (int)fontLister->fonts.size(); i++, j++) {
-                fonts[j] = fontLister->fonts[i].title.c_str();
+            for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
+                fonts[j] = this->fontLister->fonts[i].title.c_str();
             }
             ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.60f);
             ImGui::Combo("##001", &optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
@@ -73,7 +77,7 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsLis
 
             ImGui::SameLine();
             ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.30f);
-            ImGui::Combo("##002", &optionsFontSizeSelected, fontLister->fontSizes, IM_ARRAYSIZE(fontLister->fontSizes));
+            ImGui::Combo("##002", &optionsFontSizeSelected, this->fontLister->fontSizes, IM_ARRAYSIZE(this->fontLister->fontSizes));
             ImGui::PopItemWidth();
             ImGui::TreePop();
         }
@@ -148,15 +152,15 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsLis
     ImGui::End();
 }
 
-void GUIOptions::loadFonts(FontsList *fontLister, bool* needsFontChange) {
+void GUIOptions::loadFonts(bool* needsFontChange) {
     ImGuiIO& io = ImGui::GetIO();
 
     io.Fonts->Clear();
 
-    if (optionsFontSelected == 0)
+    if (this->optionsFontSelected == 0)
         Settings::Instance()->UIFontFile = "";
-    else if (optionsFontSelected > 0 && fontLister->fontFileExists(fontLister->fonts[optionsFontSelected].path))
-        Settings::Instance()->UIFontFile = fontLister->fonts[optionsFontSelected].path;
+    else if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[this->optionsFontSelected].path))
+        Settings::Instance()->UIFontFile = this->fontLister->fonts[this->optionsFontSelected].path;
 
     if (Settings::Instance()->UIFontFile != "" && Settings::Instance()->UIFontFile != "-")
         io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), Settings::Instance()->UIFontSize);

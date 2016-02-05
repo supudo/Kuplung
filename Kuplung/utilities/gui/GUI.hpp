@@ -23,7 +23,6 @@
 #include "components/GUIColorPicker.hpp"
 #include "components/GUIStyle.hpp"
 #include "components/GUIOptions.hpp"
-#include "utilities/settings/FontsList.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
@@ -167,7 +166,6 @@ private:
     GUIColorPicker *colorPicker;
     GUIStyle *guiStyle;
     GUIOptions *guiOptions;
-    FontsList *fontLister;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
