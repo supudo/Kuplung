@@ -78,11 +78,9 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fontLister = new FontsList();
     this->fontLister->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     this->fontLister->getFonts();
-    this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
-    this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
 
     this->guiOptions = new GUIOptions();
-    this->guiOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->guiOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1), this->fontLister);
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -101,7 +99,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     else
         this->ImGui_SDL2GL21_Implementation_Init();
 
-    this->guiOptions->loadFonts(this->fontLister, this->optionsFontSelected, &this->needsFontChange);
+    this->guiOptions->loadFonts(this->fontLister, &this->needsFontChange);
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -534,7 +532,7 @@ void GUI::renderStart(bool isFrame) {
 
 void GUI::renderEnd() {
     if (this->needsFontChange) {
-        this->guiOptions->loadFonts(this->fontLister, this->optionsFontSelected, &this->needsFontChange);
+        this->guiOptions->loadFonts(this->fontLister, &this->needsFontChange);
         if (Settings::Instance()->OpenGLMajorVersion > 2)
             this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
         else
@@ -615,7 +613,7 @@ void GUI::dialogAboutKuplung() {
 }
 
 void GUI::dialogOptions(ImGuiStyle* ref) {
-    this->guiOptions->showOptionsWindow(ref, this->guiStyle, this->fontLister, this->optionsFontSelected, this->optionsFontSizeSelected, &this->showOptions, &this->needsFontChange);
+    this->guiOptions->showOptionsWindow(ref, this->guiStyle, this->fontLister, &this->showOptions, &this->needsFontChange);
 }
 
 void GUI::dialogHeightmap() {

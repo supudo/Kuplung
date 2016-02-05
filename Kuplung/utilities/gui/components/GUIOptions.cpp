@@ -12,11 +12,14 @@
 #include "utilities/gui/components/IconsMaterialDesign.h"
 #include "utilities/settings/Settings.h"
 
-void GUIOptions::init(std::function<void(std::string)> doLog) {
+void GUIOptions::init(std::function<void(std::string)> doLog, FontsList *fontLister) {
     this->doLog = doLog;
+
+    this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
+    this->optionsFontSizeSelected = fontLister->getSelectedFontSize();
 }
 
-void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsList *fontLister, int& optionsFontSelected, int& optionsFontSizeSelected, bool* p_opened, bool* needsFontChange) {
+void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsList *fontLister, bool* p_opened, bool* needsFontChange) {
     ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
 
@@ -145,7 +148,7 @@ void GUIOptions::showOptionsWindow(ImGuiStyle* ref, GUIStyle *guiStyle, FontsLis
     ImGui::End();
 }
 
-void GUIOptions::loadFonts(FontsList *fontLister, int& optionsFontSelected, bool* needsFontChange) {
+void GUIOptions::loadFonts(FontsList *fontLister, bool* needsFontChange) {
     ImGuiIO& io = ImGui::GetIO();
 
     io.Fonts->Clear();
