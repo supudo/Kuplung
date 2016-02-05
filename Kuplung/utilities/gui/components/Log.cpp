@@ -6,22 +6,22 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUILog.hpp"
+#include "utilities/gui/components/Log.hpp"
 #include "utilities/settings/Settings.h"
 
-void GUILog::init(int positionX, int positionY, int width, int height) {
+void Log::init(int positionX, int positionY, int width, int height) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
     this->height = height;
 }
 
-void GUILog::clear() {
+void Log::clear() {
     this->Buf.clear();
     this->LineOffsets.clear();
 }
 
-void GUILog::addToLog(const char* fmt, ...) {
+void Log::addToLog(const char* fmt, ...) {
     int old_size = this->Buf.size();
     va_list args;
     va_start(args, fmt);
@@ -33,7 +33,7 @@ void GUILog::addToLog(const char* fmt, ...) {
     this->ScrollToBottom = true;
 }
 
-void GUILog::draw(const char* title, bool* p_opened) {
+void Log::draw(const char* title, bool* p_opened) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -54,7 +54,7 @@ void GUILog::draw(const char* title, bool* p_opened) {
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
     if (copy)
         ImGui::LogToClipboard();
-    
+
     if (this->Filter.IsActive()) {
         const char* buf_begin = this->Buf.begin();
         const char* line = buf_begin;
@@ -67,7 +67,7 @@ void GUILog::draw(const char* title, bool* p_opened) {
     }
     else
         ImGui::TextUnformatted(this->Buf.begin());
-    
+
     if (this->ScrollToBottom)
         ImGui::SetScrollHere(1.0f);
     this->ScrollToBottom = false;

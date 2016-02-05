@@ -1,17 +1,17 @@
 //
-//  GUILog.hpp
+//  Log.hpp
 // Kuplung
 //
 //  Created by Sergey Petrov on 11/17/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef GUILog_hpp
-#define GUILog_hpp
+#ifndef Log_hpp
+#define Log_hpp
 
 #include "utilities/gui/imgui/imgui.h"
 
-class GUILog {
+class Log {
 public:
     void init(int positionX, int positionY, int width, int height);
     void clear();
@@ -27,4 +27,4 @@ private:
     int positionX, positionY, width, height;
 };
 
-#endif /* GUILog_hpp */
+#endif /* Log_hpp */

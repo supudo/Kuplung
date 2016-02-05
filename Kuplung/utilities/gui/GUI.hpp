@@ -15,14 +15,14 @@
 #include <string>
 #include <thread>
 #include <glm/glm.hpp>
-#include "imgui/imgui.h"
-#include "components/GUILog.hpp"
-#include "components/GUIScreenshot.hpp"
-#include "components/GUIFileBrowser.hpp"
-#include "components/GUIEditor.hpp"
-#include "components/GUIColorPicker.hpp"
-#include "dialogs/DialogStyle.hpp"
-#include "dialogs/DialogOptions.hpp"
+#include "utilities/gui/imgui/imgui.h"
+#include "utilities/gui/components/Log.hpp"
+#include "utilities/gui/components/Screenshot.hpp"
+#include "utilities/gui/components/FileBrowser.hpp"
+#include "utilities/gui/components/Editor.hpp"
+#include "utilities/gui/components/ColorPicker.hpp"
+#include "utilities/gui/dialogs/DialogStyle.hpp"
+#include "utilities/gui/dialogs/DialogOptions.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
@@ -159,13 +159,13 @@ private:
     bool showAppMetrics, showAboutKuplung, showAboutImgui;
     bool showDemoWindow, newHeightmap;
 
-    GUILog *windowLog;
-    GUIScreenshot *windowScreenshot;
-    GUIFileBrowser *windowFileBrowser;
-    GUIEditor *fileEditor;
-    GUIColorPicker *colorPicker;
-    DialogStyle *wStyle;
-    DialogOptions *wOptions;
+    Log *componentLog;
+    Screenshot *componentScreenshot;
+    FileBrowser *componentFileBrowser;
+    Editor *componentFileEditor;
+    ColorPicker *componentColorPicker;
+    DialogStyle *windowStyle;
+    DialogOptions *windowOptions;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;

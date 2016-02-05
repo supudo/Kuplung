@@ -6,7 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUITabs.hpp"
+#include "utilities/gui/components/Tabs.hpp"
 
 namespace ImGui {
 

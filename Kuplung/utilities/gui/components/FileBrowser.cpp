@@ -6,7 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUIFileBrowser.hpp"
+#include "utilities/gui/components/FileBrowser.hpp"
 #include <ctime>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
@@ -16,7 +16,7 @@
 
 namespace fs = boost::filesystem;
 
-void GUIFileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -27,11 +27,11 @@ void GUIFileBrowser::init(bool log, int positionX, int positionY, int width, int
     this->isStyleBrowser = false;
 }
 
-void GUIFileBrowser::setStyleBrowser(bool isStyle) {
+void FileBrowser::setStyleBrowser(bool isStyle) {
     this->isStyleBrowser = isStyle;
 }
 
-void GUIFileBrowser::draw(const char* title, bool* p_opened) {
+void FileBrowser::draw(const char* title, bool* p_opened) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -79,7 +79,7 @@ void GUIFileBrowser::draw(const char* title, bool* p_opened) {
 
 #pragma mark - Private
 
-void GUIFileBrowser::drawFiles() {
+void FileBrowser::drawFiles() {
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder);
     int i = 0;
     static int selected = -1;
@@ -108,7 +108,7 @@ void GUIFileBrowser::drawFiles() {
     }
 }
 
-std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string filePath) {
+std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string filePath) {
     std::map<std::string, FBEntity> folderContents;
 
     if (this->log)
@@ -186,13 +186,13 @@ std::map<std::string, FBEntity> GUIFileBrowser::getFolderContents(std::string fi
     return folderContents;
 }
 
-std::string GUIFileBrowser::convertToString(double num) {
+std::string FileBrowser::convertToString(double num) {
     std::ostringstream convert;
     convert << num;
     return convert.str();
 }
 
-std::string GUIFileBrowser::convertSize(size_t size) {
+std::string FileBrowser::convertSize(size_t size) {
     static const char *SIZES[] = { "B", "KB", "MB", "GB" };
     int div = 0;
     size_t rem = 0;
@@ -208,14 +208,14 @@ std::string GUIFileBrowser::convertSize(size_t size) {
     return result;
 }
 
-double GUIFileBrowser::roundOff(double n) {
+double FileBrowser::roundOff(double n) {
     double d = n * 100.0;
     int i = d + 0.5;
     d = (float)i / 100.0;
     return d;
 }
 
-void GUIFileBrowser::logMessage(std::string logMessage) {
+void FileBrowser::logMessage(std::string logMessage) {
     if (this->log)
         this->doLog("[GUIFileBrowser] " + logMessage);
 }

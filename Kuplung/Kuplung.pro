@@ -103,12 +103,12 @@ SOURCES += main.cpp \
     utilities/gui/ImGui/imgui_demo.cpp \
     utilities/gui/ImGui/imgui_draw.cpp \
     utilities/gui/GUI.cpp \
-    utilities/gui/components/GUIEditor.cpp \
-    utilities/gui/components/GUIFileBrowser.cpp \
-    utilities/gui/components/GUILog.cpp \
-    utilities/gui/components/GUIScreenshot.cpp \
-    utilities/gui/components/GUIColorPicker.cpp \
-    utilities/gui/components/GUITabs.cpp \
+    utilities/gui/components/Editor.cpp \
+    utilities/gui/components/FileBrowser.cpp \
+    utilities/gui/components/Log.cpp \
+    utilities/gui/components/Screenshot.cpp \
+    utilities/gui/components/ColorPicker.cpp \
+    utilities/gui/components/Tabs.cpp \
     utilities/gui/dialogs/DialogStyle.cpp \
     utilities/gui/dialogs/DialogOptions.cpp \
     utilities/input/Controls.cpp \
@@ -134,12 +134,12 @@ HEADERS += \
     utilities/gui/ImGui/imgui.h \
     utilities/gui/ImGui/imgui_internal.h \
     utilities/gui/GUI.hpp \
-    utilities/gui/components/GUIEditor.hpp \
-    utilities/gui/components/GUIFileBrowser.hpp \
-    utilities/gui/components/GUILog.hpp \
-    utilities/gui/components/GUIScreenshot.hpp \
-    utilities/gui/components/GUIColorPicker.hpp \
-    utilities/gui/components/GUITabs.hpp \
+    utilities/gui/components/Editor.hpp \
+    utilities/gui/components/FileBrowser.hpp \
+    utilities/gui/components/Log.hpp \
+    utilities/gui/components/Screenshot.hpp \
+    utilities/gui/components/ColorPicker.hpp \
+    utilities/gui/components/Tabs.hpp \
     utilities/gui/dialogs/DialogStyle.hpp \
     utilities/gui/dialogs/DialogOptions.hpp \
     utilities/gui/components/IconsFontAwesome.h \

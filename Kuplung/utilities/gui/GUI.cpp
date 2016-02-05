@@ -18,7 +18,7 @@
 #include "GUI.hpp"
 #include "utilities/gui/components/IconsFontAwesome.h"
 #include "utilities/gui/components/IconsMaterialDesign.h"
-#include "utilities/gui/components/GUITabs.hpp"
+#include "utilities/gui/components/Tabs.hpp"
 
 #pragma mark - Destructor
 
@@ -58,25 +58,25 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 50, posY = 50;
 
-    this->windowLog = new GUILog();
-    this->windowScreenshot = new GUIScreenshot();
+    this->componentLog = new Log();
+    this->componentScreenshot = new Screenshot();
 
-    this->windowFileBrowser = new GUIFileBrowser();
-    this->windowFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI::doLog, this, std::placeholders::_1), std::bind(&GUI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->componentFileBrowser = new FileBrowser();
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI::doLog, this, std::placeholders::_1), std::bind(&GUI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
 
-    this->colorPicker = new GUIColorPicker();
+    this->componentColorPicker = new ColorPicker();
 
-    this->wStyle = new DialogStyle();
-    this->wStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->windowStyle = new DialogStyle();
+    this->windowStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
-    this->wStyle->saveDefault(style);
-    style = this->wStyle->loadCurrent();
+    this->windowStyle->saveDefault(style);
+    style = this->windowStyle->loadCurrent();
 
-    this->fileEditor = new GUIEditor();
-    this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->componentFileEditor = new Editor();
+    this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
-    this->wOptions = new DialogOptions();
-    this->wOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->windowOptions = new DialogOptions();
+    this->windowOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -95,7 +95,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     else
         this->ImGui_SDL2GL21_Implementation_Init();
 
-    this->wOptions->loadFonts(&this->needsFontChange);
+    this->windowOptions->loadFonts(&this->needsFontChange);
 }
 
 bool GUI::processEvent(SDL_Event *event) {
@@ -147,7 +147,7 @@ void GUI::destroy() {
 
 void GUI::doLog(std::string logMessage) {
     printf("%s\n", logMessage.c_str());
-    this->windowLog->addToLog("%s\n", logMessage.c_str());
+    this->componentLog->addToLog("%s\n", logMessage.c_str());
 }
 
 void GUI::recentFilesAdd(std::string title, FBEntity file) {
@@ -528,7 +528,7 @@ void GUI::renderStart(bool isFrame) {
 
 void GUI::renderEnd() {
     if (this->needsFontChange) {
-        this->wOptions->loadFonts(&this->needsFontChange);
+        this->windowOptions->loadFonts(&this->needsFontChange);
         if (Settings::Instance()->OpenGLMajorVersion > 2)
             this->ImGui_SDL2GL32_Implementation_CreateFontsTexture();
         else
@@ -542,29 +542,29 @@ void GUI::renderEnd() {
 #pragma mark - Dialogs
 
 void GUI::dialogFileBrowser() {
-    this->windowFileBrowser->setStyleBrowser(false);
-    this->windowFileBrowser->draw("File Browser", &this->showFileDialog);
+    this->componentFileBrowser->setStyleBrowser(false);
+    this->componentFileBrowser->draw("File Browser", &this->showFileDialog);
 }
 
 void GUI::dialogStyleBrowser() {
-    this->windowFileBrowser->setStyleBrowser(true);
-    this->windowFileBrowser->draw("Open Style", &this->showStyleDialog);
+    this->componentFileBrowser->setStyleBrowser(true);
+    this->componentFileBrowser->draw("Open Style", &this->showStyleDialog);
 }
 
 void GUI::dialogFileBrowserProcessFile(FBEntity file) {
     if (this->showStyleDialog)
-        this->wStyle->load(file.path);
+        this->windowStyle->load(file.path);
     this->processFile(file);
     this->showFileDialog = false;
     this->showStyleDialog = false;
 }
 
 void GUI::dialogScreenshot() {
-    this->windowScreenshot->ShowScreenshotsWindow(&this->showScreenshotWindow);
+    this->componentScreenshot->ShowScreenshotsWindow(&this->showScreenshotWindow);
 }
 
 void GUI::dialogEditor() {
-    this->fileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1), "Editor", &this->showEditor);
+    this->componentFileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1), "Editor", &this->showEditor);
 }
 
 void GUI::fileEditorSaved(std::string fileName) {
@@ -576,8 +576,8 @@ void GUI::dialogLog() {
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = windowWidth - Settings::Instance()->frameLog_Width - 10;
     int posY = windowHeight - Settings::Instance()->frameLog_Height - 10;
-    this->windowLog->init(posX, posY, Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height);
-    this->windowLog->draw("Log Window");
+    this->componentLog->init(posX, posY, Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height);
+    this->componentLog->draw("Log Window");
 }
 
 void GUI::dialogMetrics() {
@@ -609,7 +609,7 @@ void GUI::dialogAboutKuplung() {
 }
 
 void GUI::dialogOptions(ImGuiStyle* ref) {
-    this->wOptions->showOptionsWindow(ref, this->wStyle, &this->showOptions, &this->needsFontChange);
+    this->windowOptions->showOptionsWindow(ref, this->windowStyle, &this->showOptions, &this->needsFontChange);
 }
 
 void GUI::dialogHeightmap() {
@@ -1005,7 +1005,7 @@ void GUI::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);
     if (*bValue)
-        this->colorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
 }
 
 void GUI::addControlColor4(std::string title, glm::vec4* vValue, bool* bValue) {
@@ -1022,7 +1022,7 @@ void GUI::addControlColor4(std::string title, glm::vec4* vValue, bool* bValue) {
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);
     if (*bValue)
-        this->colorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
 }
 
 void GUI::resetValuesGUIControls() {

@@ -1,5 +1,5 @@
 //
-//  GUIFileBrowser.hpp
+//  FileBrowser.hpp
 // Kuplung
 //
 //  Created by Sergey Petrov on 11/18/15.
@@ -15,7 +15,7 @@
 #include <string>
 #include "utilities/settings/Settings.h"
 
-class GUIFileBrowser {
+class FileBrowser {
 public:
     void init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile);
     void setStyleBrowser(bool isStyle);

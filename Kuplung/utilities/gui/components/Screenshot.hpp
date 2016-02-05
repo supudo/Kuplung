@@ -1,13 +1,13 @@
 //
-//  GUIScreenshot.hpp
+//  Screenshot.hpp
 // Kuplung
 //
 //  Created by Sergey Petrov on 11/17/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef GUIScreenshot_hpp
-#define GUIScreenshot_hpp
+#ifndef Screenshot_hpp
+#define Screenshot_hpp
 
 #define _CRT_SECURE_NO_WARNINGS
 #include "utilities/gui/imgui/imgui.h"
@@ -16,9 +16,9 @@
 
 #include <GLFW/glfw3.h>
 
-class GUIScreenshot {
+class Screenshot {
 public:
     void ShowScreenshotsWindow(bool* open);
 };
 
-#endif /* GUIScreenshot_hpp */
+#endif /* Screenshot_hpp */

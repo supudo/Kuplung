@@ -1,12 +1,12 @@
 //
-//  GUIColorPicker.cpp
-// Kuplung
+//  ColorPicker.cpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 11/17/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUIColorPicker.hpp"
+#include "utilities/gui/components/ColorPicker.hpp"
 
 // [src] https://github.com/ocornut/imgui/issues/346
 // v2.36
@@ -21,13 +21,13 @@
 
 // ImGui picker
 
-void GUIColorPicker::show(const char* title, bool* p_opened, float* col, bool show_alpha) {
+void ColorPicker::show(const char* title, bool* p_opened, float* col, bool show_alpha) {
     ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
     this->ColorPicker4(col, show_alpha);
     ImGui::End();
 }
 
-bool GUIColorPicker::ColorPicker4(float* col, bool show_alpha) {
+bool ColorPicker::ColorPicker4(float* col, bool show_alpha) {
     ImGuiIO& io = ImGui::GetIO();
     ImGuiStyle& style = ImGui::GetStyle();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -137,6 +137,6 @@ bool GUIColorPicker::ColorPicker4(float* col, bool show_alpha) {
     return value_changed;
 }
 
-bool GUIColorPicker::ColorPicker3(float col[3]) {
+bool ColorPicker::ColorPicker3(float col[3]) {
     return ColorPicker4(col, false);
 }

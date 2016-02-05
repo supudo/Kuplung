@@ -1,13 +1,13 @@
 //
-//  GUIEditor.hpp
+//  Editor.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/25/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef GUIEditor_hpp
-#define GUIEditor_hpp
+#ifndef Editor_hpp
+#define Editor_hpp
 
 #include "utilities/gui/imgui/imgui.h"
 #include <functional>
@@ -15,7 +15,7 @@
 #include <string>
 #include "utilities/settings/Settings.h"
 
-class GUIEditor {
+class Editor {
 public:
     void init(std::string appPath, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog);
     void draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened = NULL);
@@ -31,4 +31,4 @@ private:
     char guiEditorText[1024 * 16];
 };
 
-#endif /* GUIEditor_hpp */
+#endif /* Editor_hpp */

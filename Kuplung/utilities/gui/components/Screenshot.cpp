@@ -6,11 +6,11 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUIScreenshot.hpp"
+#include "utilities/gui/components/Screenshot.hpp"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "utilities/stb/stb_image_write.h"
 
-void GUIScreenshot::ShowScreenshotsWindow(bool* open) {
+void Screenshot::ShowScreenshotsWindow(bool* open) {
     if (!ImGui::Begin("Screenshots", open)) {
         ImGui::End();
         return;

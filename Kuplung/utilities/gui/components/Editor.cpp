@@ -6,7 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "GUIEditor.hpp"
+#include "utilities/gui/components/Editor.hpp"
 #include <fstream>
 #include "utilities/gui/imgui/imgui_internal.h"
 
@@ -27,7 +27,7 @@ const char* GUIEditor_ShaderItems[] = {
     "terrain.frag"
 };
 
-void GUIEditor::init(std::string appPath, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog) {
+void Editor::init(std::string appPath, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog) {
     this->appPath = appPath;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -38,7 +38,7 @@ void GUIEditor::init(std::string appPath, int positionX, int positionY, int widt
     this->currentFileName = "";
 }
 
-void GUIEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
+void Editor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
     this->doFileShaderCompile = fileShaderCompile;
 
     if (this->width > 0 && this->height > 0)
@@ -90,7 +90,7 @@ void GUIEditor::draw(std::function<void(std::string)> fileShaderCompile, const c
     ImGui::End();
 }
 
-void GUIEditor::compileShader() {
+void Editor::compileShader() {
     if (this->shaderFileIndex > 0) {
         std::string shaderSource = std::string(this->guiEditorText);
         if (!shaderSource.empty()) {
@@ -105,6 +105,6 @@ void GUIEditor::compileShader() {
 
 #pragma mark - Private
 
-void GUIEditor::logMessage(std::string logMessage) {
+void Editor::logMessage(std::string logMessage) {
     this->doLog("[GUIEditor] " + logMessage);
 }
