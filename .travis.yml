@@ -11,6 +11,11 @@ matrix:
           packages:
             - clang-3.7
       env: COMPILER=clang++-3.7
+  exclude:
+    - os: linux
+      compiler: clang
+    - os: osx
+      compiler: gcc
 
 before_install:
   - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glm; fi

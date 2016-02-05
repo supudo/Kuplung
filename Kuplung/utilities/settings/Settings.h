@@ -34,15 +34,12 @@ public:
     bool isAllowedStyleExtension(std::string fileExtension);
 
     int OpenGLMajorVersion, OpenGLMinorVersion, OpenGL_GLSL_Version;
-    std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile;
+    std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile, UIFontFile;
     bool showGrid, showLight, showAxes, wireframesMode, logDebugInfo, logFileBrowser;
     Color guiClearColor;
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
-    int UIFontIndex;
-
-    std::vector<std::string> Fonts;
 
 private:
     Settings(){};

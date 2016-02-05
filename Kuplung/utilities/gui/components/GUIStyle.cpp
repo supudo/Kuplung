@@ -17,14 +17,14 @@ void GUIStyle::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
 }
 
-void GUIStyle::saveDefault(int selectedFont, ImGuiStyle& style) {
+void GUIStyle::saveDefault(ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
-        this->saveStyles(selectedFont, defaultStyleFile, style);
+        this->saveStyles(defaultStyleFile, style);
 }
 
-void GUIStyle::save(int selectedFont, ImGuiStyle& style) {
-    this->saveStyles(selectedFont, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
+void GUIStyle::save(ImGuiStyle& style) {
+    this->saveStyles(Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
 ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
@@ -72,7 +72,7 @@ ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
 
                 try {
                     if (opKey == "Font")
-                        Settings::Instance()->UIFontIndex = std::stoi(opValue);
+                        Settings::Instance()->UIFontFile = opValue;
                     else if (opKey == "AntiAliasedLines")
                         style.AntiAliasedLines = std::stoi(opValue) != 0;
                     else if (opKey == "AntiAliasedShapes")
@@ -134,7 +134,7 @@ ImGuiStyle& GUIStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void GUIStyle::saveStyles(int selectedFont, std::string styleFilePath, ImGuiStyle& style) {
+void GUIStyle::saveStyles(std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;
@@ -142,7 +142,7 @@ void GUIStyle::saveStyles(int selectedFont, std::string styleFilePath, ImGuiStyl
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Font" + Settings::Instance()->newLineDelimiter;
-    style_txt += "Font = " + std::to_string(selectedFont) + Settings::Instance()->newLineDelimiter;
+    style_txt += "Font = " + Settings::Instance()->UIFontFile + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;

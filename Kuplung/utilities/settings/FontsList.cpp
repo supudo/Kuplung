@@ -7,15 +7,98 @@
 //
 
 #include "FontsList.hpp"
+#include <boost/algorithm/string/replace.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/path.hpp>
+#include "utilities/settings/Settings.h"
 
-std::vector<std::string> FontsList::getSystemFonts() {
-    std::vector<std::string> systemFonts;
-#ifdef defined(_WIN32)
-    // ..
-#elif defined(_APPLE_) && defined(_MACH_)
+namespace fs = boost::filesystem;
 
-#else defined(linux) || defined(__linux)
-    // ..
+void FontsList::init(std::function<void(std::string)> doLog) {
+    this->doLog = doLog;
+    this->bundleFonts.clear();
+    this->systemFonts.clear();
+}
+
+void FontsList::getBundleFonts() {
+    std::string fontsAdditionalPath = Settings::Instance()->appFolder() + "/fonts/";
+    fs::path currentPath(fontsAdditionalPath);
+
+    if (fs::is_directory(currentPath)) {
+        fs::directory_iterator iteratorEnd;
+        for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
+            try {
+                std::string fileExtension = iteratorFolder->path().extension().string();
+                fs::file_status fileStatus = iteratorFolder->status();
+                if (fileExtension == ".ttf" && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus))) {
+                    std::string filePath = fontsAdditionalPath + "/" + iteratorFolder->path().filename().string();
+                    std::string fileName = iteratorFolder->path().filename().string();
+                    boost::replace_all(fileName, ".ttf", "");
+                    this->bundleFonts[filePath] = fileName;
+                }
+            }
+            catch (const std::exception & ex) {
+                this->logMessage(iteratorFolder->path().filename().string() + " " + ex.what());
+            }
+        }
+    }
+}
+
+void FontsList::getSystemFonts() {
+#ifdef _WIN32
+    return this->loadFontsWindows();
+#elif __APPLE__
+    return this->loadFontsOSX();
+#elif linux || __linux
+    return this->loadFontsNix();
+#else
+    return {};
 #endif
-    return systemFonts;
+}
+
+bool FontsList::fontFileExists(std::string font) {
+    return boost::filesystem::exists(font);
+}
+
+void FontsList::loadFontsOSX() {
+    //| /System/Library/Fonts - Fonts necessary for the system. Do not touch these.
+    //| /Library/Fonts - Additional fonts that can be used by all users. This is generally where fonts go if they are to be used by other applications.
+    //| ~/Library/Fonts - Fonts specific to each user.
+    //| /Network/Library/Fonts - Fonts shared for users on a network.
+
+    std::string fontsAdditionalPath = "/Library/Fonts";
+    fs::path currentPath(fontsAdditionalPath);
+
+    if (fs::is_directory(currentPath)) {
+        fs::directory_iterator iteratorEnd;
+        for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
+            try {
+                std::string fileExtension = iteratorFolder->path().extension().string();
+                fs::file_status fileStatus = iteratorFolder->status();
+                if (fileExtension == ".ttf" && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus))) {
+                    std::string filePath = fontsAdditionalPath + "/" + iteratorFolder->path().filename().string();
+                    std::string fileName = iteratorFolder->path().filename().string();
+                    boost::replace_all(fileName, ".ttf", "");
+                    this->systemFonts[filePath] = fileName;
+                }
+            }
+            catch (const std::exception & ex) {
+                this->logMessage(iteratorFolder->path().filename().string() + " " + ex.what());
+            }
+        }
+    }
+}
+
+void FontsList::loadFontsWindows() {
+    //| %WINDIR%\fonts
+}
+
+void FontsList::loadFontsNix() {
+    //| /usr/share/fonts
+    //| /usr/local/share/fonts
+    //| ~/.fonts
+}
+
+void FontsList::logMessage(std::string logMessage) {
+    this->doLog("[FontsList] " + logMessage);
 }

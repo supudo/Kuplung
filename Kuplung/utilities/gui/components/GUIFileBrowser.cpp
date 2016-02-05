@@ -217,5 +217,5 @@ double GUIFileBrowser::roundOff(double n) {
 
 void GUIFileBrowser::logMessage(std::string logMessage) {
     if (this->log)
-        this->doLog(logMessage);
+        this->doLog("[GUIFileBrowser] " + logMessage);
 }

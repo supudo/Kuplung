@@ -68,11 +68,16 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->guiStyle = new GUIStyle();
     this->guiStyle->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
-    this->guiStyle->saveDefault(0, style);
+    this->guiStyle->saveDefault(style);
     style = this->guiStyle->loadCurrent();
 
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
+
+    this->fontLister = new FontsList();
+    this->fontLister->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
+    this->fontLister->getBundleFonts();
+    this->fontLister->getSystemFonts();
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -609,11 +614,8 @@ void GUI::dialogAboutKuplung() {
 void GUI::loadFonts() {
     ImGuiIO& io = ImGui::GetIO();
 
-    if (Settings::Instance()->UIFontIndex > 0) {
-        std::string fontName = Settings::Instance()->Fonts[Settings::Instance()->UIFontIndex - 1];
-        std::string fontFile = Settings::Instance()->appFolder() + "/fonts/" + fontName + ".ttf";
-        io.Fonts->AddFontFromFileTTF(fontFile.c_str(), 14.0f);
-    }
+    if (this->fontLister->fontFileExists(Settings::Instance()->UIFontFile))
+        io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), 14.0f);
     else
         io.Fonts->AddFontDefault();
 
@@ -654,14 +656,14 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
-            this->guiStyle->save(0, style);
+            this->guiStyle->save(style);
             this->needsFontChange = true;
         }
         if (ref) {
             ImGui::SameLine();
             if (ImGui::Button("Save")) {
                 *ref = style;
-                this->guiStyle->save(Settings::Instance()->UIFontIndex, style);
+                this->guiStyle->save(style);
                 this->needsFontChange = true;
             }
         }
@@ -672,11 +674,24 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.55f);
 
         if (ImGui::TreeNode("Font")) {
-            if (ImGui::Selectable(" - < Default >", (0 == Settings::Instance()->UIFontIndex ? true : false)))
-                Settings::Instance()->UIFontIndex = 0;
-            for (int i = 0; i < (int)Settings::Instance()->Fonts.size(); i++) {
-                if (ImGui::Selectable(std::string(" - " + Settings::Instance()->Fonts[i]).c_str(), ((i + 1) == Settings::Instance()->UIFontIndex ? true : false)))
-                    Settings::Instance()->UIFontIndex = (i + 1);
+            if (ImGui::TreeNode("Bundled Fonts")) {
+                if (ImGui::Selectable(" - < Default >", (Settings::Instance()->UIFontFile.empty() ? true : false)))
+                    Settings::Instance()->UIFontFile = "";
+                for (std::map<std::string, std::string>::iterator iter = this->fontLister->bundleFonts.begin(); iter != this->fontLister->bundleFonts.end(); ++iter) {
+                    bool selected = iter->first == Settings::Instance()->UIFontFile;
+                    if (ImGui::Selectable(std::string(" - " + iter->second).c_str(), (selected ? true : false)))
+                        Settings::Instance()->UIFontFile = iter->first;
+                }
+                ImGui::TreePop();
+            }
+
+            if (ImGui::TreeNode("System Fonts")) {
+                for (std::map<std::string, std::string>::iterator iter = this->fontLister->systemFonts.begin(); iter != this->fontLister->systemFonts.end(); ++iter) {
+                    bool selected = iter->first == Settings::Instance()->UIFontFile;
+                    if (ImGui::Selectable(std::string(" - " + iter->second).c_str(), (selected ? true : false)))
+                        Settings::Instance()->UIFontFile = iter->first;
+                }
+                ImGui::TreePop();
             }
             ImGui::TreePop();
         }

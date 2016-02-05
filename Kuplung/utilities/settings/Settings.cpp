@@ -42,7 +42,7 @@ void Settings::initSettings() {
     m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
     m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
     m_pInstance->ShaderName = m_pInstance->cfgUtils->readString("ShaderName");
-    m_pInstance->UIFontIndex = m_pInstance->cfgUtils->readInt("UIFontIndex");
+    m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
 
     m_pInstance->showGrid = m_pInstance->cfgUtils->readBool("showGrid");
     m_pInstance->showLight = m_pInstance->cfgUtils->readBool("showLight");
@@ -62,16 +62,6 @@ void Settings::initSettings() {
 
     m_pInstance->guiClearColor = {70.0 / 255.0, 70.0 / 255.0, 70.0 / 255.0, 255.0 / 255.0};
     m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
-
-    m_pInstance->Fonts = {
-        "Anonymous Pro",
-        "DroidSans",
-        "FiraMono Regular",
-        "Hack-Regular",
-        "Inconsolata-Regular",
-        "UbuntuMono-R",
-        "Karla-Regular"
-    };
 
 #ifdef _WIN32
     m_pInstance->newLineDelimiter = "\r\n";
@@ -106,7 +96,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("appVersion", this->appVersion);
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
     this->cfgUtils->writeString("ShaderName", this->ShaderName);
-    this->cfgUtils->writeInt("UIFontIndex", this->UIFontIndex);
+    this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
 
     this->cfgUtils->writeBool("showGrid", this->showGrid);
     this->cfgUtils->writeBool("showLight", this->showLight);

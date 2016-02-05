@@ -9,12 +9,26 @@
 #ifndef FontsList_hpp
 #define FontsList_hpp
 
+#include <functional>
 #include <string>
-#include <vector>
+#include <map>
 
 class FontsList {
 public:
-    std::vector<std::string> getSystemFonts();
+    void init(std::function<void(std::string)> doLog);
+    void getBundleFonts();
+    void getSystemFonts();
+    bool fontFileExists(std::string font);
+
+    std::map<std::string, std::string> bundleFonts;
+    std::map<std::string, std::string> systemFonts;
+
+private:
+    std::function<void(std::string)> doLog;
+    void logMessage(std::string logMessage);
+    void loadFontsOSX();
+    void loadFontsWindows();
+    void loadFontsNix();
 };
 
 #endif /* FontsList_hpp */

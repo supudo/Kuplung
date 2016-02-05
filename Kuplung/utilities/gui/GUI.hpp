@@ -22,6 +22,7 @@
 #include "components/GUIEditor.hpp"
 #include "components/GUIColorPicker.hpp"
 #include "components/GUIStyle.hpp"
+#include "utilities/settings/FontsList.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
@@ -165,15 +166,15 @@ private:
     GUIEditor *fileEditor;
     GUIColorPicker *colorPicker;
     GUIStyle *guiStyle;
+    FontsList *fontLister;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
     GLuint vboTexHeightmap;
     int heightmapWidth, heightmapHeight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
-    bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel;
+    bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel, needsFontChange;
     char guiModelRenameText[256];
-    bool needsFontChange;
 
     double gui_Time = 0.0f;
     bool gui_MousePressed[3] = { false, false, false };
