@@ -150,14 +150,13 @@ HEADERS += \
     utilities/parsers/stl-parser/STLParser.hpp \
     utilities/settings/ConfigUtils.hpp \
     utilities/settings/Settings.h \
-    utilities/settings/FontsList.h \
+    utilities/settings/FontsList.hpp \
     utilities/stb/stb_image.h \
     utilities/stb/stb_image_write.h \
     utilities/stb/stb_rect_pack.h \
     utilities/stb/stb_textedit.h \
     utilities/stb/stb_truetype.h \
-    utilities/gl/GLIncludes.h \
-    utilities/settings/FontsList.hpp
+    utilities/gl/GLIncludes.h
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
