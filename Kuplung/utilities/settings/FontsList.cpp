@@ -7,6 +7,7 @@
 //
 
 #include "FontsList.hpp"
+#include <stdio.h>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
@@ -21,6 +22,15 @@ void FontsList::init(std::function<void(std::string)> doLog) {
 
 bool FontsList::fontFileExists(std::string font) {
     return boost::filesystem::exists(font);
+}
+
+int FontsList::getSelectedFontSize() {
+    for (int i=0; i<(int)sizeof(this->fontSizes); i++) {
+        if (atof(this->fontSizes[i]) == Settings::Instance()->UIFontSize) {
+            return i;
+        }
+    }
+    return 0;
 }
 
 void FontsList::getFonts() {

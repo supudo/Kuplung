@@ -41,6 +41,7 @@ public:
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
     int UIFontFileIndex;
+    float UIFontSize;
 
 private:
     Settings(){};

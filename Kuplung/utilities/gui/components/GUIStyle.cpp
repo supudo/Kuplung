@@ -20,11 +20,11 @@ void GUIStyle::init(std::function<void(std::string)> doLog) {
 void GUIStyle::saveDefault(ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
-        this->saveStyles("-", defaultStyleFile, style);
+        this->saveStyles("-", "14.00", defaultStyleFile, style);
 }
 
-void GUIStyle::save(std::string fontfile, ImGuiStyle& style) {
-    this->saveStyles(fontfile, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
+void GUIStyle::save(std::string fontfile, std::string fontsize, ImGuiStyle& style) {
+    this->saveStyles(fontfile, fontsize, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
 ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
@@ -73,6 +73,8 @@ ImGuiStyle& GUIStyle::load(std::string styleFilePath) {
                 try {
                     if (opKey == "Font")
                         Settings::Instance()->UIFontFile = opValue;
+                    else if (opKey == "FontSize")
+                        Settings::Instance()->UIFontSize = std::stof(opValue);
                     else if (opKey == "AntiAliasedLines")
                         style.AntiAliasedLines = std::stoi(opValue) != 0;
                     else if (opKey == "AntiAliasedShapes")
@@ -134,7 +136,7 @@ ImGuiStyle& GUIStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void GUIStyle::saveStyles(std::string fontfile, std::string styleFilePath, ImGuiStyle& style) {
+void GUIStyle::saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;
@@ -143,6 +145,7 @@ void GUIStyle::saveStyles(std::string fontfile, std::string styleFilePath, ImGui
 
     style_txt += "# Font" + Settings::Instance()->newLineDelimiter;
     style_txt += "Font = " + fontfile + Settings::Instance()->newLineDelimiter;
+    style_txt += "FontSize = " + fontsize + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;

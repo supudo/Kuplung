@@ -75,11 +75,11 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->fileEditor = new GUIEditor();
     this->fileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&GUI::doLog, this, std::placeholders::_1));
 
-    this->optionsFontSelected = -1;
     this->fontLister = new FontsList();
     this->fontLister->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
     this->fontLister->getFonts();
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
+    this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
@@ -88,7 +88,6 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->selectedTabGUIGrid = 0;
     this->selectedTabGUILight = 0;
     this->selectedTabGUITerrain = 0;
-    this->optionsFontSize = 0;
 
     this->isFrame = false;
     this->isProjection = true;
@@ -623,7 +622,7 @@ void GUI::loadFonts() {
         Settings::Instance()->UIFontFile = this->fontLister->fonts[this->optionsFontSelected].path;
 
     if (Settings::Instance()->UIFontFile != "" && Settings::Instance()->UIFontFile != "-")
-        io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), 14.0f);
+        io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), Settings::Instance()->UIFontSize);
     else
         io.Fonts->AddFontDefault();
 
@@ -633,7 +632,7 @@ void GUI::loadFonts() {
     ImFontConfig fa_config;
     fa_config.MergeMode = true;
     fa_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(faFont.c_str(), 14.0f, &fa_config, fa_ranges);
+    io.Fonts->AddFontFromFileTTF(faFont.c_str(), Settings::Instance()->UIFontSize, &fa_config, fa_ranges);
 
     // https://design.google.com/icons/
     std::string gmFont = Settings::Instance()->appFolder() + "/fonts/material-icons-regular.ttf";
@@ -641,7 +640,7 @@ void GUI::loadFonts() {
     ImFontConfig gm_config;
     gm_config.MergeMode = true;
     gm_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), 22.0f, &gm_config, gm_ranges);
+    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), Settings::Instance()->UIFontSize + 8.00, &gm_config, gm_ranges);
 
     this->needsFontChange = false;
 }
@@ -664,9 +663,11 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         if (ImGui::Button("Default")) {
             style = ref ? *ref : def;
             style = this->guiStyle->loadDefault();
-            this->guiStyle->save("-", style);
+            this->guiStyle->save("-", "14.00", style);
             this->optionsFontSelected = 0;
+            this->optionsFontSizeSelected = 1;
             Settings::Instance()->UIFontFileIndex = 0;
+            Settings::Instance()->UIFontSize = 14.00;
             this->needsFontChange = true;
         }
         if (ref) {
@@ -676,7 +677,9 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
                 std::string font = "-";
                 if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[this->optionsFontSelected].path))
                     font = this->fontLister->fonts[this->optionsFontSelected - 1].path;
-                this->guiStyle->save(font, style);
+                std::string fontSize = std::string(this->fontLister->fontSizes[this->optionsFontSizeSelected]);
+                Settings::Instance()->UIFontSize = std::stof(fontSize);
+                this->guiStyle->save(font, fontSize, style);
                 this->needsFontChange = true;
             }
         }
@@ -684,7 +687,6 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
         if (ImGui::Button("Load"))
             this->showStyleDialog = true;
 
-        ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
         if (ImGui::TreeNode("Font")) {
             const char* fonts[this->fontLister->fonts.size() + 1];
@@ -692,11 +694,16 @@ void GUI::dialogOptions(ImGuiStyle* ref) {
             for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
                 fonts[j] = this->fontLister->fonts[i].title.c_str();
             }
-            ImGui::Combo("", &this->optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.60f);
+            ImGui::Combo("##001", &this->optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
+            ImGui::PopItemWidth();
+
+            ImGui::SameLine();
+            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.30f);
+            ImGui::Combo("##002", &this->optionsFontSizeSelected, this->fontLister->fontSizes, IM_ARRAYSIZE(this->fontLister->fontSizes));
+            ImGui::PopItemWidth();
             ImGui::TreePop();
         }
-
-        ImGui::PopItemWidth();
 
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
 

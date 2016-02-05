@@ -43,6 +43,7 @@ void Settings::initSettings() {
     m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
     m_pInstance->ShaderName = m_pInstance->cfgUtils->readString("ShaderName");
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
+    m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
 
     m_pInstance->showGrid = m_pInstance->cfgUtils->readBool("showGrid");
     m_pInstance->showLight = m_pInstance->cfgUtils->readBool("showLight");
@@ -99,6 +100,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
     this->cfgUtils->writeString("ShaderName", this->ShaderName);
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
+    this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
 
     this->cfgUtils->writeBool("showGrid", this->showGrid);
     this->cfgUtils->writeBool("showLight", this->showLight);
