@@ -22,6 +22,7 @@
 #include "components/GUIEditor.hpp"
 #include "components/GUIColorPicker.hpp"
 #include "components/GUIStyle.hpp"
+#include "components/GUIOptions.hpp"
 #include "utilities/settings/FontsList.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
@@ -145,7 +146,6 @@ private:
     void animateValue(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void fileEditorSaved(std::string fileName);
-    void loadFonts();
 
     void dialogSceneStats();
 
@@ -166,6 +166,7 @@ private:
     GUIEditor *fileEditor;
     GUIColorPicker *colorPicker;
     GUIStyle *guiStyle;
+    GUIOptions *guiOptions;
     FontsList *fontLister;
 
     std::string heightmapImage;

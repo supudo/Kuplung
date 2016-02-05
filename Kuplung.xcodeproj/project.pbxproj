@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A25B29C1C63893D00464402 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A25B29A1C63893D00464402 /* FontsList.cpp */; };
+		8A2610D81C65199800B5364F /* GUIOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2610D61C65199800B5364F /* GUIOptions.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
@@ -129,6 +130,8 @@
 		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
 		8A25B29A1C63893D00464402 /* FontsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontsList.cpp; sourceTree = "<group>"; };
 		8A25B29B1C63893D00464402 /* FontsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontsList.hpp; sourceTree = "<group>"; };
+		8A2610D61C65199800B5364F /* GUIOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIOptions.cpp; path = components/GUIOptions.cpp; sourceTree = "<group>"; };
+		8A2610D71C65199800B5364F /* GUIOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIOptions.hpp; path = components/GUIOptions.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
@@ -507,6 +510,8 @@
 				8AFF28841C63C504004724ED /* GUIStyle.hpp */,
 				8AFF28851C63C504004724ED /* GUITabs.cpp */,
 				8AFF28861C63C504004724ED /* GUITabs.hpp */,
+				8A2610D61C65199800B5364F /* GUIOptions.cpp */,
+				8A2610D71C65199800B5364F /* GUIOptions.hpp */,
 				8AFF28871C63C504004724ED /* IconsFontAwesome.h */,
 				8AFF28881C63C504004724ED /* IconsMaterialDesign.h */,
 			);
@@ -594,6 +599,7 @@
 				8AB6F0CA1C3AA48E00665C40 /* imgui_demo.cpp in Sources */,
 				8AB6F06C1C3A9BEE00665C40 /* MeshGrid.cpp in Sources */,
 				8AFF288D1C63C504004724ED /* GUIScreenshot.cpp in Sources */,
+				8A2610D81C65199800B5364F /* GUIOptions.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8AB6F0701C3A9BEE00665C40 /* FNTParser.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,

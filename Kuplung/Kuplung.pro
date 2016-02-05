@@ -110,6 +110,7 @@ SOURCES += main.cpp \
     utilities/gui/components/GUIColorPicker.cpp \
     utilities/gui/components/GUITabs.cpp \
     utilities/gui/components/GUIStyle.cpp \
+    utilities/gui/components/GUIOptions.cpp \
     utilities/input/Controls.cpp \
     utilities/libnoise/HeightmapGenerator.cpp \
     utilities/libnoise/noiseutils.cpp \
@@ -140,6 +141,7 @@ HEADERS += \
     utilities/gui/components/GUIColorPicker.hpp \
     utilities/gui/components/GUITabs.hpp \
     utilities/gui/components/GUIStyle.hpp \
+    utilities/gui/components/GUIOptions.hpp \
     utilities/gui/components/IconsFontAwesome.h \
     utilities/gui/components/IconsMaterialDesign.h \
     utilities/input/Controls.hpp \
