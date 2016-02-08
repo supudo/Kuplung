@@ -24,7 +24,6 @@
 #include "utilities/gui/components/ColorPicker.hpp"
 #include "utilities/gui/dialogs/DialogStyle.hpp"
 #include "utilities/gui/dialogs/DialogOptions.hpp"
-#include "utilities/gui/dialogs/DialogControls.hpp"
 #include "utilities/gui/implementation/SDL2OpenGL32.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
@@ -64,7 +63,7 @@ public:
 
     std::vector<MeshModelFace*> * meshModelFaces;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
-    bool displayGUIControls, displaySceneStats, displaySceneSettings;
+    bool displayGUIControls, displaySceneStats, displaySceneControls;
 
     int gui_item_selected;
     std::vector<std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
@@ -105,7 +104,7 @@ private:
     void dialogGUIControls();
     void resetValuesGUIControls();
     void dialogSceneSettings();
-    void resetValuesSceneSettings();
+    void resetValuesSceneControls();
     void animateValue(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void animateValueAsync(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus);
     void fileEditorSaved(std::string fileName);
@@ -132,7 +131,6 @@ private:
     ColorPicker *componentColorPicker;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
-    DialogControls *windowGUIControls;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;

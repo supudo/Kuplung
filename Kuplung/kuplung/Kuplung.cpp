@@ -641,7 +641,7 @@ void Kuplung::processParsedObjFile() {
             this->gui->setModelSetting((int)i, 15, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
             this->gui->setModelSetting((int)i, 16, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
         }
-        this->gui->displaySceneSettings = true;
+        this->gui->displaySceneControls = true;
         //this->gui->showSceneStats();
     }
 

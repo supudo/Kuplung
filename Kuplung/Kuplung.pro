@@ -112,7 +112,6 @@ SOURCES += main.cpp \
     utilities/gui/components/Tabs.cpp \
     utilities/gui/dialogs/DialogStyle.cpp \
     utilities/gui/dialogs/DialogOptions.cpp \
-    utilities/gui/dialogs/DialogControls.cpp \
     utilities/input/Controls.cpp \
     utilities/libnoise/HeightmapGenerator.cpp \
     utilities/libnoise/noiseutils.cpp \
@@ -146,7 +145,6 @@ HEADERS += \
     utilities/gui/components/Tabs.hpp \
     utilities/gui/dialogs/DialogStyle.hpp \
     utilities/gui/dialogs/DialogOptions.hpp \
-    utilities/gui/dialogs/DialogControls.hpp \
     utilities/gui/components/IconsFontAwesome.h \
     utilities/gui/components/IconsMaterialDesign.h \
     utilities/input/Controls.hpp \
