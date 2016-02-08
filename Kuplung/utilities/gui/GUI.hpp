@@ -24,7 +24,7 @@
 #include "utilities/gui/components/ColorPicker.hpp"
 #include "utilities/gui/dialogs/DialogStyle.hpp"
 #include "utilities/gui/dialogs/DialogOptions.hpp"
-#include "utilities/gui/dialogs/DialogGUIControls.hpp"
+#include "utilities/gui/dialogs/DialogControls.hpp"
 #include "utilities/gui/implementation/SDL2OpenGL32.hpp"
 #include "kuplung/meshes/MeshModelFace.hpp"
 
@@ -132,7 +132,7 @@ private:
     ColorPicker *componentColorPicker;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
-    DialogGUIControls *windowGUIControls;
+    DialogControls *windowGUIControls;
 
     std::string heightmapImage;
     std::map <std::string, FBEntity> recentFiles;
