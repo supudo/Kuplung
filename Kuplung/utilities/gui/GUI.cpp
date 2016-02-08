@@ -20,13 +20,9 @@
 #include "utilities/gui/components/IconsMaterialDesign.h"
 #include "utilities/gui/components/Tabs.hpp"
 
-#pragma mark - Destructor
-
 GUI::~GUI() {
     this->destroy();
 }
-
-#pragma mark - Public
 
 void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<void(FBEntity)> processFile, std::function<void()> newScene) {
     this->isGUIVisible = false;
@@ -387,8 +383,6 @@ bool GUI::isMouseOnGUI() {
     return ImGui::IsMouseHoveringAnyWindow();
 }
 
-#pragma mark - Rendering
-
 void GUI::renderStart(bool isFrame) {
     this->isFrame = isFrame;
 
@@ -527,107 +521,7 @@ void GUI::renderEnd() {
     this->imguiImplementation->ImGui_Implementation_RenderDrawLists();
 }
 
-#pragma mark - Dialogs
-
-void GUI::dialogFileBrowser() {
-    this->componentFileBrowser->setStyleBrowser(false);
-    this->componentFileBrowser->draw("File Browser", &this->showFileDialog);
-}
-
-void GUI::dialogStyleBrowser() {
-    this->componentFileBrowser->setStyleBrowser(true);
-    this->componentFileBrowser->draw("Open Style", &this->showStyleDialog);
-}
-
-void GUI::dialogFileBrowserProcessFile(FBEntity file) {
-    if (this->showStyleDialog)
-        this->windowStyle->load(file.path);
-    this->processFile(file);
-    this->showFileDialog = false;
-    this->showStyleDialog = false;
-}
-
-void GUI::dialogScreenshot() {
-    this->componentScreenshot->ShowScreenshotsWindow(&this->showScreenshotWindow);
-}
-
-void GUI::dialogEditor() {
-    this->componentFileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1), "Editor", &this->showEditor);
-}
-
-void GUI::fileEditorSaved(std::string fileName) {
-    this->doFileShaderCompile(fileName);
-}
-
-void GUI::dialogLog() {
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
-    int posX = windowWidth - Settings::Instance()->frameLog_Width - 10;
-    int posY = windowHeight - Settings::Instance()->frameLog_Height - 10;
-    this->componentLog->init(posX, posY, Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height);
-    this->componentLog->draw("Log Window");
-}
-
-void GUI::dialogMetrics() {
-    ImGui::ShowMetricsWindow(&this->showAppMetrics);
-}
-
-void GUI::dialogAboutImGui() {
-    ImGui::SetNextWindowPosCenter();
-    ImGui::Begin("About ImGui", &this->showAboutImgui, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("ImGui %s", ImGui::GetVersion());
-    ImGui::Separator();
-    ImGui::Text("By Omar Cornut and all github contributors.");
-    ImGui::Text("ImGui is licensed under the MIT License, see LICENSE for more information.");
-    ImGui::End();
-}
-
-void GUI::dialogAboutKuplung() {
-    ImGui::SetNextWindowPosCenter();
-    ImGui::Begin("About Kuplung", &this->showAboutKuplung, ImGuiWindowFlags_AlwaysAutoResize);
-    ImGui::Text("Kuplung %s", Settings::Instance()->appVersion.c_str());
-    ImGui::Separator();
-    ImGui::Text("By supudo.net + github.com/supudo");
-    ImGui::Text("Whatever license...");
-    ImGui::Separator();
-    ImGui::Text("Hold mouse wheel to rotate around");
-    ImGui::Text("Left Alt + Mouse wheel to increase/decrease the FOV");
-    ImGui::Text("Left Shift + Mouse wheel to increase/decrease the FOV");
-    ImGui::End();
-}
-
-void GUI::dialogOptions(ImGuiStyle* ref) {
-    this->windowOptions->showOptionsWindow(ref, this->windowStyle, &this->showOptions, &this->needsFontChange);
-}
-
-void GUI::dialogHeightmap() {
-    ImGui::Begin("Heightmap", &this->showHeightmap, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
-
-    if (this->newHeightmap) {
-        int tChannels;
-        unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
-        if (!tPixels)
-            this->doLog("Can't load diffuse texture image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
-        else {
-            glGenTextures(1, &this->vboTexHeightmap);
-            glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->heightmapWidth, this->heightmapHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
-            glGenerateMipmap(GL_TEXTURE_2D);
-            stbi_image_free(tPixels);
-        }
-    }
-    ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight));
-
-    ImGui::End();
-
-    this->newHeightmap = false;
-}
-
-#pragma mark - Scene GUI dialogs
+#pragma mark - GUI controls
 
 void GUI::dialogGUIControls() {
     ImGui::SetNextWindowSize(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
@@ -923,96 +817,6 @@ void GUI::dialogGUIControls() {
     ImGui::End();
 }
 
-void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit) {
-    if (isGuiControl) {
-        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][x]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, x, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by X", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][x]->fValue, 0.0f, animateLimit);
-
-        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][y]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, y, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][y]->fValue, 0.0f, animateLimit);
-
-        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][z]->oAnimate))
-            this->animateValue(true, this->gui_item_selected, z, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][z]->fValue, 0.0f, animateLimit);
-    }
-    else {
-        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][x]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, x, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by X", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][x]->fValue, 0.0f, animateLimit);
-
-        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][y]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, y, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][y]->fValue, 0.0f, animateLimit);
-
-        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][z]->oAnimate))
-            this->animateValue(false, this->scene_item_selected, z, animateStep, animateLimit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
-        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][z]->fValue, 0.0f, animateLimit);
-    }
-}
-
-void GUI::addControlsSlider(std::string title, int idx, bool isGUI, float step, float limit, bool showAnimate, bool* animate, float* sliderValue) {
-    if (title != "")
-        ImGui::Text("%s", title.c_str());
-    if (showAnimate) {
-        std::string c_id = "##00" + std::to_string(idx);
-        if (ImGui::Checkbox(c_id.c_str(), *(&animate)))
-            this->animateValue(isGUI, (isGUI ? this->gui_item_selected : this->scene_item_selected), idx, step, limit, false);
-        if (ImGui::IsItemHovered())
-            ImGui::SetTooltip("Animate %s", title.c_str());
-        ImGui::SameLine();
-    }
-    std::string s_id = "##10" + std::to_string(idx);
-    ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 0.0, limit);
-}
-
-void GUI::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
-    std::string ce_id = "##101" + title;
-    std::string icon_id = ICON_MD_COLORIZE + ce_id;
-    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, 255.0), "%s", title.c_str());
-    ImGui::ColorEdit3(ce_id.c_str(), (float*)&(*vValue));
-    ImGui::SameLine();
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-    if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
-        *bValue = !*bValue;
-    ImGui::PopStyleColor(4);
-    if (*bValue)
-        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
-}
-
-void GUI::addControlColor4(std::string title, glm::vec4* vValue, bool* bValue) {
-    std::string ce_id = "##101" + title;
-    std::string icon_id = ICON_MD_COLORIZE + ce_id;
-    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, (*(&vValue))->a), "%s", title.c_str());
-    ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true);
-    ImGui::SameLine();
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
-    if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
-        *bValue = !*bValue;
-    ImGui::PopStyleColor(4);
-    if (*bValue)
-        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
-}
-
 void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
@@ -1034,6 +838,8 @@ void GUI::resetValuesGUIControls() {
         }
     }
 }
+
+#pragma mark - Models context menu
 
 void GUI::contextModelRename() {
     ImGui::OpenPopup("Rename");
@@ -1083,6 +889,8 @@ void GUI::contextModelDelete() {
     ImGui::EndPopup();
 }
 
+#pragma mark - Scene controls
+
 void GUI::dialogSceneSettings() {
     ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", &this->displaySceneControls, ImGuiWindowFlags_ShowBorders);
@@ -1107,6 +915,9 @@ void GUI::dialogSceneSettings() {
     if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
+            MeshModelFace *mmf2 = (*this->meshModelFaces)[this->scene_item_selected]->clone();
+            (*this->meshModelFaces).push_back(mmf2);
+            this->addSceneModelSettings();
         }
         ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
         ImGui::EndPopup();
@@ -1216,6 +1027,230 @@ void GUI::dialogSceneSettings() {
     ImGui::End();
 }
 
+void GUI::resetValuesSceneControls() {
+    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
+        for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
+            this->scene_item_settings[i][j]->oAnimate = false;
+            this->scene_item_settings[i][j]->iValue = this->scene_item_settings_default[i][j]->iValue;
+            this->scene_item_settings[i][j]->fValue = this->scene_item_settings_default[i][j]->fValue;
+            this->scene_item_settings[i][j]->bValue = this->scene_item_settings_default[i][j]->bValue;
+            this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
+        }
+    }
+}
+
+#pragma mark - Simple dialogs
+
+void GUI::dialogSceneStats() {
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
+    int posX = 10;
+    int posY = windowHeight - 164;
+    ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
+    ImGui::Begin("Scene Stats", &this->displaySceneStats, ImVec2(0, 0), 0.3f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
+    ImGui::Text("OpenGL version: %i.%i (%s)", Settings::Instance()->OpenGLMajorVersion, Settings::Instance()->OpenGLMinorVersion, glGetString(GL_VERSION));
+    ImGui::Text("GLSL version: %i.%i (%s)", (Settings::Instance()->OpenGL_GLSL_Version / 100), (Settings::Instance()->OpenGL_GLSL_Version % 100), glGetString(GL_SHADING_LANGUAGE_VERSION));
+    ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
+    ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
+    ImGui::Separator();
+    ImGui::Text("Mouse Position: (%.1f, %.1f)", ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y);
+    ImGui::Separator();
+    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+    ImGui::Text("%d vertices, %d indices (%d triangles)", ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
+    ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
+    ImGui::End();
+}
+
+void GUI::dialogFileBrowser() {
+    this->componentFileBrowser->setStyleBrowser(false);
+    this->componentFileBrowser->draw("File Browser", &this->showFileDialog);
+}
+
+void GUI::dialogStyleBrowser() {
+    this->componentFileBrowser->setStyleBrowser(true);
+    this->componentFileBrowser->draw("Open Style", &this->showStyleDialog);
+}
+
+void GUI::dialogFileBrowserProcessFile(FBEntity file) {
+    if (this->showStyleDialog)
+        this->windowStyle->load(file.path);
+    this->processFile(file);
+    this->showFileDialog = false;
+    this->showStyleDialog = false;
+}
+
+void GUI::dialogScreenshot() {
+    this->componentScreenshot->ShowScreenshotsWindow(&this->showScreenshotWindow);
+}
+
+void GUI::dialogEditor() {
+    this->componentFileEditor->draw(std::bind(&GUI::fileEditorSaved, this, std::placeholders::_1), "Editor", &this->showEditor);
+}
+
+void GUI::fileEditorSaved(std::string fileName) {
+    this->doFileShaderCompile(fileName);
+}
+
+void GUI::dialogLog() {
+    int windowWidth, windowHeight;
+    SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
+    int posX = windowWidth - Settings::Instance()->frameLog_Width - 10;
+    int posY = windowHeight - Settings::Instance()->frameLog_Height - 10;
+    this->componentLog->init(posX, posY, Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height);
+    this->componentLog->draw("Log Window");
+}
+
+void GUI::dialogMetrics() {
+    ImGui::ShowMetricsWindow(&this->showAppMetrics);
+}
+
+void GUI::dialogAboutImGui() {
+    ImGui::SetNextWindowPosCenter();
+    ImGui::Begin("About ImGui", &this->showAboutImgui, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("ImGui %s", ImGui::GetVersion());
+    ImGui::Separator();
+    ImGui::Text("By Omar Cornut and all github contributors.");
+    ImGui::Text("ImGui is licensed under the MIT License, see LICENSE for more information.");
+    ImGui::End();
+}
+
+void GUI::dialogAboutKuplung() {
+    ImGui::SetNextWindowPosCenter();
+    ImGui::Begin("About Kuplung", &this->showAboutKuplung, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("Kuplung %s", Settings::Instance()->appVersion.c_str());
+    ImGui::Separator();
+    ImGui::Text("By supudo.net + github.com/supudo");
+    ImGui::Text("Whatever license...");
+    ImGui::Separator();
+    ImGui::Text("Hold mouse wheel to rotate around");
+    ImGui::Text("Left Alt + Mouse wheel to increase/decrease the FOV");
+    ImGui::Text("Left Shift + Mouse wheel to increase/decrease the FOV");
+    ImGui::End();
+}
+
+void GUI::dialogOptions(ImGuiStyle* ref) {
+    this->windowOptions->showOptionsWindow(ref, this->windowStyle, &this->showOptions, &this->needsFontChange);
+}
+
+void GUI::dialogHeightmap() {
+    ImGui::Begin("Heightmap", &this->showHeightmap, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
+
+    if (this->newHeightmap) {
+        int tChannels;
+        unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
+        if (!tPixels)
+            this->doLog("Can't load diffuse texture image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
+        else {
+            glGenTextures(1, &this->vboTexHeightmap);
+            glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->heightmapWidth, this->heightmapHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+            glGenerateMipmap(GL_TEXTURE_2D);
+            stbi_image_free(tPixels);
+        }
+    }
+    ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight));
+
+    ImGui::End();
+
+    this->newHeightmap = false;
+}
+
+#pragma mark - ImGui Helpers
+
+void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit) {
+    if (isGuiControl) {
+        if (ImGui::Checkbox("##1", &this->gui_item_settings[this->gui_item_selected][x]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, x, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by X", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("X##2", &this->gui_item_settings[this->gui_item_selected][x]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##2", &this->gui_item_settings[this->gui_item_selected][y]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, y, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Y##2", &this->gui_item_settings[this->gui_item_selected][y]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##3", &this->gui_item_settings[this->gui_item_selected][z]->oAnimate))
+            this->animateValue(true, this->gui_item_selected, z, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Z##2", &this->gui_item_settings[this->gui_item_selected][z]->fValue, 0.0f, animateLimit);
+    }
+    else {
+        if (ImGui::Checkbox("##1", &this->scene_item_settings[this->scene_item_selected][x]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, x, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by X", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("X##101", &this->scene_item_settings[this->scene_item_selected][x]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##2", &this->scene_item_settings[this->scene_item_selected][y]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, y, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Y", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Y##101", &this->scene_item_settings[this->scene_item_selected][y]->fValue, 0.0f, animateLimit);
+
+        if (ImGui::Checkbox("##3", &this->scene_item_settings[this->scene_item_selected][z]->oAnimate))
+            this->animateValue(false, this->scene_item_selected, z, animateStep, animateLimit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s by Z", animate.c_str());
+        ImGui::SameLine(); ImGui::SliderFloat("Z##101", &this->scene_item_settings[this->scene_item_selected][z]->fValue, 0.0f, animateLimit);
+    }
+}
+
+void GUI::addControlsSlider(std::string title, int idx, bool isGUI, float step, float limit, bool showAnimate, bool* animate, float* sliderValue) {
+    if (title != "")
+        ImGui::Text("%s", title.c_str());
+    if (showAnimate) {
+        std::string c_id = "##00" + std::to_string(idx);
+        if (ImGui::Checkbox(c_id.c_str(), *(&animate)))
+            this->animateValue(isGUI, (isGUI ? this->gui_item_selected : this->scene_item_selected), idx, step, limit, false);
+        if (ImGui::IsItemHovered())
+            ImGui::SetTooltip("Animate %s", title.c_str());
+        ImGui::SameLine();
+    }
+    std::string s_id = "##10" + std::to_string(idx);
+    ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 0.0, limit);
+}
+
+void GUI::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
+    std::string ce_id = "##101" + title;
+    std::string icon_id = ICON_MD_COLORIZE + ce_id;
+    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, 255.0), "%s", title.c_str());
+    ImGui::ColorEdit3(ce_id.c_str(), (float*)&(*vValue));
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+    if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
+        *bValue = !*bValue;
+    ImGui::PopStyleColor(4);
+    if (*bValue)
+        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+}
+
+void GUI::addControlColor4(std::string title, glm::vec4* vValue, bool* bValue) {
+    std::string ce_id = "##101" + title;
+    std::string icon_id = ICON_MD_COLORIZE + ce_id;
+    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, (*(&vValue))->a), "%s", title.c_str());
+    ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true);
+    ImGui::SameLine();
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+    if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
+        *bValue = !*bValue;
+    ImGui::PopStyleColor(4);
+    if (*bValue)
+        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+}
+
 void GUI::animateValue(bool isGUI, int elementID, int sett_index, float step, float limit, bool doMinus) {
     std::thread animThread(&GUI::animateValueAsync, this, isGUI, elementID, sett_index, step, limit, doMinus);
     animThread.detach();
@@ -1246,36 +1281,4 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
             }
         }
     }
-}
-
-void GUI::resetValuesSceneControls() {
-    for (int i=0; i<(int)this->scene_item_settings.size(); i++) {
-        for (int j=0; j<(int)this->scene_item_settings[i].size(); j++) {
-            this->scene_item_settings[i][j]->oAnimate = false;
-            this->scene_item_settings[i][j]->iValue = this->scene_item_settings_default[i][j]->iValue;
-            this->scene_item_settings[i][j]->fValue = this->scene_item_settings_default[i][j]->fValue;
-            this->scene_item_settings[i][j]->bValue = this->scene_item_settings_default[i][j]->bValue;
-            this->scene_item_settings[i][j]->vValue = this->scene_item_settings_default[i][j]->vValue;
-        }
-    }
-}
-
-void GUI::dialogSceneStats() {
-    int windowWidth, windowHeight;
-    SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
-    int posX = 10;
-    int posY = windowHeight - 164;
-    ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
-    ImGui::Begin("Scene Stats", &this->displaySceneStats, ImVec2(0, 0), 0.3f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
-    ImGui::Text("OpenGL version: %i.%i (%s)", Settings::Instance()->OpenGLMajorVersion, Settings::Instance()->OpenGLMinorVersion, glGetString(GL_VERSION));
-    ImGui::Text("GLSL version: %i.%i (%s)", (Settings::Instance()->OpenGL_GLSL_Version / 100), (Settings::Instance()->OpenGL_GLSL_Version % 100), glGetString(GL_SHADING_LANGUAGE_VERSION));
-    ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
-    ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
-    ImGui::Separator();
-    ImGui::Text("Mouse Position: (%.1f, %.1f)", ImGui::GetIO().MousePos.x, ImGui::GetIO().MousePos.y);
-    ImGui::Separator();
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-    ImGui::Text("%d vertices, %d indices (%d triangles)", ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
-    ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
-    ImGui::End();
 }

@@ -19,6 +19,26 @@
 MeshModelFace::MeshModelFace() {
 }
 
+MeshModelFace* MeshModelFace::clone() {
+    MeshModelFace *mmf = new MeshModelFace();
+
+    mmf->matrixCamera = this->matrixCamera;
+    mmf->matrixModel = this->matrixModel;
+    mmf->matrixProjection = this->matrixProjection;
+
+    mmf->ModelID = this->ModelID;
+    mmf->oFace = this->oFace;
+
+    mmf->vecCameraPosition = this->vecCameraPosition;
+
+    mmf->init(std::bind(&MeshModelFace::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+    mmf->setModel(mmf->oFace);
+    mmf->initShaderProgram();
+    mmf->initBuffers(Settings::Instance()->currentFolder);
+
+    return mmf;
+}
+
 #pragma mark - Destroy
 
 MeshModelFace::~MeshModelFace() {
