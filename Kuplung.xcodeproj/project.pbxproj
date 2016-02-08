@@ -9,9 +9,17 @@
 /* Begin PBXBuildFile section */
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A25B29C1C63893D00464402 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A25B29A1C63893D00464402 /* FontsList.cpp */; };
-		8A2610D81C65199800B5364F /* GUIOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2610D61C65199800B5364F /* GUIOptions.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
+		8A8F79441C68D3E80092CFFA /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F79381C68D3E80092CFFA /* ColorPicker.cpp */; };
+		8A8F79451C68D3E80092CFFA /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F793A1C68D3E80092CFFA /* Editor.cpp */; };
+		8A8F79461C68D3E80092CFFA /* FileBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F793C1C68D3E80092CFFA /* FileBrowser.cpp */; };
+		8A8F79471C68D3E80092CFFA /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F793E1C68D3E80092CFFA /* Log.cpp */; };
+		8A8F79481C68D3E80092CFFA /* Screenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F79401C68D3E80092CFFA /* Screenshot.cpp */; };
+		8A8F79491C68D3E80092CFFA /* Tabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F79421C68D3E80092CFFA /* Tabs.cpp */; };
+		8A8F794F1C68D3FF0092CFFA /* DialogOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F794B1C68D3FF0092CFFA /* DialogOptions.cpp */; };
+		8A8F79501C68D3FF0092CFFA /* DialogStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F794D1C68D3FF0092CFFA /* DialogStyle.cpp */; };
+		8A8F79541C68D4140092CFFA /* SDL2OpenGL32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8F79521C68D4140092CFFA /* SDL2OpenGL32.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0131C3A9BEE00665C40 /* MeshCoordinateSystem.cpp */; };
 		8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0151C3A9BEE00665C40 /* MeshDot.cpp */; };
@@ -54,13 +62,6 @@
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
-		8AFF28891C63C504004724ED /* GUIColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28791C63C504004724ED /* GUIColorPicker.cpp */; };
-		8AFF288A1C63C504004724ED /* GUIEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287B1C63C504004724ED /* GUIEditor.cpp */; };
-		8AFF288B1C63C504004724ED /* GUIFileBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */; };
-		8AFF288C1C63C504004724ED /* GUILog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF287F1C63C504004724ED /* GUILog.cpp */; };
-		8AFF288D1C63C504004724ED /* GUIScreenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28811C63C504004724ED /* GUIScreenshot.cpp */; };
-		8AFF288E1C63C504004724ED /* GUIStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28831C63C504004724ED /* GUIStyle.cpp */; };
-		8AFF288F1C63C504004724ED /* GUITabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFF28851C63C504004724ED /* GUITabs.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,10 +131,27 @@
 		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
 		8A25B29A1C63893D00464402 /* FontsList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontsList.cpp; sourceTree = "<group>"; };
 		8A25B29B1C63893D00464402 /* FontsList.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FontsList.hpp; sourceTree = "<group>"; };
-		8A2610D61C65199800B5364F /* GUIOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIOptions.cpp; path = components/GUIOptions.cpp; sourceTree = "<group>"; };
-		8A2610D71C65199800B5364F /* GUIOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIOptions.hpp; path = components/GUIOptions.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
+		8A8F79381C68D3E80092CFFA /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ColorPicker.cpp; path = components/ColorPicker.cpp; sourceTree = "<group>"; };
+		8A8F79391C68D3E80092CFFA /* ColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ColorPicker.hpp; path = components/ColorPicker.hpp; sourceTree = "<group>"; };
+		8A8F793A1C68D3E80092CFFA /* Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Editor.cpp; path = components/Editor.cpp; sourceTree = "<group>"; };
+		8A8F793B1C68D3E80092CFFA /* Editor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Editor.hpp; path = components/Editor.hpp; sourceTree = "<group>"; };
+		8A8F793C1C68D3E80092CFFA /* FileBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FileBrowser.cpp; path = components/FileBrowser.cpp; sourceTree = "<group>"; };
+		8A8F793D1C68D3E80092CFFA /* FileBrowser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = FileBrowser.hpp; path = components/FileBrowser.hpp; sourceTree = "<group>"; };
+		8A8F793E1C68D3E80092CFFA /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Log.cpp; path = components/Log.cpp; sourceTree = "<group>"; };
+		8A8F793F1C68D3E80092CFFA /* Log.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Log.hpp; path = components/Log.hpp; sourceTree = "<group>"; };
+		8A8F79401C68D3E80092CFFA /* Screenshot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Screenshot.cpp; path = components/Screenshot.cpp; sourceTree = "<group>"; };
+		8A8F79411C68D3E80092CFFA /* Screenshot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Screenshot.hpp; path = components/Screenshot.hpp; sourceTree = "<group>"; };
+		8A8F79421C68D3E80092CFFA /* Tabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tabs.cpp; path = components/Tabs.cpp; sourceTree = "<group>"; };
+		8A8F79431C68D3E80092CFFA /* Tabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Tabs.hpp; path = components/Tabs.hpp; sourceTree = "<group>"; };
+		8A8F794B1C68D3FF0092CFFA /* DialogOptions.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DialogOptions.cpp; path = dialogs/DialogOptions.cpp; sourceTree = "<group>"; };
+		8A8F794C1C68D3FF0092CFFA /* DialogOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DialogOptions.hpp; path = dialogs/DialogOptions.hpp; sourceTree = "<group>"; };
+		8A8F794D1C68D3FF0092CFFA /* DialogStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DialogStyle.cpp; path = dialogs/DialogStyle.cpp; sourceTree = "<group>"; };
+		8A8F794E1C68D3FF0092CFFA /* DialogStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DialogStyle.hpp; path = dialogs/DialogStyle.hpp; sourceTree = "<group>"; };
+		8A8F79521C68D4140092CFFA /* SDL2OpenGL32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDL2OpenGL32.cpp; path = implementation/SDL2OpenGL32.cpp; sourceTree = "<group>"; };
+		8A8F79531C68D4140092CFFA /* SDL2OpenGL32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SDL2OpenGL32.hpp; path = implementation/SDL2OpenGL32.hpp; sourceTree = "<group>"; };
+		8A8F79551C68D4190092CFFA /* Objects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Objects.h; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AB1A8E91C3BCA2200046B9F /* GLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIncludes.h; sourceTree = "<group>"; };
 		8AB250C71C3FBD50005C73C1 /* kuplung.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tcs; sourceTree = "<group>"; };
@@ -208,20 +226,6 @@
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8AD104051C05C489008CE831 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
-		8AFF28791C63C504004724ED /* GUIColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIColorPicker.cpp; path = components/GUIColorPicker.cpp; sourceTree = "<group>"; };
-		8AFF287A1C63C504004724ED /* GUIColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIColorPicker.hpp; path = components/GUIColorPicker.hpp; sourceTree = "<group>"; };
-		8AFF287B1C63C504004724ED /* GUIEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIEditor.cpp; path = components/GUIEditor.cpp; sourceTree = "<group>"; };
-		8AFF287C1C63C504004724ED /* GUIEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIEditor.hpp; path = components/GUIEditor.hpp; sourceTree = "<group>"; };
-		8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIFileBrowser.cpp; path = components/GUIFileBrowser.cpp; sourceTree = "<group>"; };
-		8AFF287E1C63C504004724ED /* GUIFileBrowser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIFileBrowser.hpp; path = components/GUIFileBrowser.hpp; sourceTree = "<group>"; };
-		8AFF287F1C63C504004724ED /* GUILog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUILog.cpp; path = components/GUILog.cpp; sourceTree = "<group>"; };
-		8AFF28801C63C504004724ED /* GUILog.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUILog.hpp; path = components/GUILog.hpp; sourceTree = "<group>"; };
-		8AFF28811C63C504004724ED /* GUIScreenshot.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIScreenshot.cpp; path = components/GUIScreenshot.cpp; sourceTree = "<group>"; };
-		8AFF28821C63C504004724ED /* GUIScreenshot.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIScreenshot.hpp; path = components/GUIScreenshot.hpp; sourceTree = "<group>"; };
-		8AFF28831C63C504004724ED /* GUIStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUIStyle.cpp; path = components/GUIStyle.cpp; sourceTree = "<group>"; };
-		8AFF28841C63C504004724ED /* GUIStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUIStyle.hpp; path = components/GUIStyle.hpp; sourceTree = "<group>"; };
-		8AFF28851C63C504004724ED /* GUITabs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUITabs.cpp; path = components/GUITabs.cpp; sourceTree = "<group>"; };
-		8AFF28861C63C504004724ED /* GUITabs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUITabs.hpp; path = components/GUITabs.hpp; sourceTree = "<group>"; };
 		8AFF28871C63C504004724ED /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsFontAwesome.h; path = components/IconsFontAwesome.h; sourceTree = "<group>"; };
 		8AFF28881C63C504004724ED /* IconsMaterialDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IconsMaterialDesign.h; path = components/IconsMaterialDesign.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -239,6 +243,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A8F794A1C68D3F40092CFFA /* dialogs */ = {
+			isa = PBXGroup;
+			children = (
+				8A8F794B1C68D3FF0092CFFA /* DialogOptions.cpp */,
+				8A8F794C1C68D3FF0092CFFA /* DialogOptions.hpp */,
+				8A8F794D1C68D3FF0092CFFA /* DialogStyle.cpp */,
+				8A8F794E1C68D3FF0092CFFA /* DialogStyle.hpp */,
+			);
+			name = dialogs;
+			sourceTree = "<group>";
+		};
+		8A8F79511C68D40D0092CFFA /* implementation */ = {
+			isa = PBXGroup;
+			children = (
+				8A8F79521C68D4140092CFFA /* SDL2OpenGL32.cpp */,
+				8A8F79531C68D4140092CFFA /* SDL2OpenGL32.hpp */,
+			);
+			name = implementation;
+			sourceTree = "<group>";
+		};
 		8AB6F00F1C3A9BEE00665C40 /* kuplung */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,10 +329,13 @@
 		8AB6F03B1C3A9BEE00665C40 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				8AFF28781C63C4FA004724ED /* components */,
+				8A8F794A1C68D3F40092CFFA /* dialogs */,
 				8AB6F03C1C3A9BEE00665C40 /* GUI.cpp */,
 				8AB6F03D1C3A9BEE00665C40 /* GUI.hpp */,
 				8AB6F0C21C3AA48E00665C40 /* ImGui */,
-				8AFF28781C63C4FA004724ED /* components */,
+				8A8F79511C68D40D0092CFFA /* implementation */,
+				8A8F79551C68D4190092CFFA /* Objects.h */,
 			);
 			path = gui;
 			sourceTree = "<group>";
@@ -366,10 +393,10 @@
 			children = (
 				8AB6F05E1C3A9BEE00665C40 /* ConfigUtils.cpp */,
 				8AB6F05F1C3A9BEE00665C40 /* ConfigUtils.hpp */,
-				8AB6F0611C3A9BEE00665C40 /* Settings.cpp */,
-				8AB6F0621C3A9BEE00665C40 /* Settings.h */,
 				8A25B29A1C63893D00464402 /* FontsList.cpp */,
 				8A25B29B1C63893D00464402 /* FontsList.hpp */,
+				8AB6F0611C3A9BEE00665C40 /* Settings.cpp */,
+				8AB6F0621C3A9BEE00665C40 /* Settings.h */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -377,8 +404,8 @@
 		8AB6F0631C3A9BEE00665C40 /* stb */ = {
 			isa = PBXGroup;
 			children = (
-				8AB6F0641C3A9BEE00665C40 /* stb_image.h */,
 				8AB6F0651C3A9BEE00665C40 /* stb_image_write.h */,
+				8AB6F0641C3A9BEE00665C40 /* stb_image.h */,
 				8AB6F0661C3A9BEE00665C40 /* stb_rect_pack.h */,
 				8AB6F0671C3A9BEE00665C40 /* stb_textedit.h */,
 				8AB6F0681C3A9BEE00665C40 /* stb_truetype.h */,
@@ -393,8 +420,8 @@
 				8AB6F0981C3AA1F900665C40 /* gui */,
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
-				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
+				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
 			);
 			path = resources;
@@ -423,9 +450,9 @@
 				8AB6F0A51C3AA1F900665C40 /* grid.vert */,
 				8AB6F0A61C3AA1F900665C40 /* kuplung.frag */,
 				8AB6F0A71C3AA1F900665C40 /* kuplung.geom */,
-				8AB6F0A81C3AA1F900665C40 /* kuplung.vert */,
 				8AB250C71C3FBD50005C73C1 /* kuplung.tcs */,
 				8AB250C81C3FBD5F005C73C1 /* kuplung.tes */,
+				8AB6F0A81C3AA1F900665C40 /* kuplung.vert */,
 				8AB6F0A91C3AA1F900665C40 /* light.frag */,
 				8AB6F0AA1C3AA1F900665C40 /* light.vert */,
 				8AB6F0AB1C3AA1F900665C40 /* terrain.frag */,
@@ -467,10 +494,10 @@
 		8AC828B21BF5FEE7009C74E0 /* Kuplung */ = {
 			isa = PBXGroup;
 			children = (
-				8AC828B31BF5FEE7009C74E0 /* main.cpp */,
 				8AB6F00F1C3A9BEE00665C40 /* kuplung */,
-				8AB6F0341C3A9BEE00665C40 /* utilities */,
+				8AC828B31BF5FEE7009C74E0 /* main.cpp */,
 				8AB6F0971C3AA1F900665C40 /* resources */,
+				8AB6F0341C3A9BEE00665C40 /* utilities */,
 			);
 			path = Kuplung;
 			sourceTree = "<group>";
@@ -496,24 +523,20 @@
 		8AFF28781C63C4FA004724ED /* components */ = {
 			isa = PBXGroup;
 			children = (
-				8AFF28791C63C504004724ED /* GUIColorPicker.cpp */,
-				8AFF287A1C63C504004724ED /* GUIColorPicker.hpp */,
-				8AFF287B1C63C504004724ED /* GUIEditor.cpp */,
-				8AFF287C1C63C504004724ED /* GUIEditor.hpp */,
-				8AFF287D1C63C504004724ED /* GUIFileBrowser.cpp */,
-				8AFF287E1C63C504004724ED /* GUIFileBrowser.hpp */,
-				8AFF287F1C63C504004724ED /* GUILog.cpp */,
-				8AFF28801C63C504004724ED /* GUILog.hpp */,
-				8AFF28811C63C504004724ED /* GUIScreenshot.cpp */,
-				8AFF28821C63C504004724ED /* GUIScreenshot.hpp */,
-				8AFF28831C63C504004724ED /* GUIStyle.cpp */,
-				8AFF28841C63C504004724ED /* GUIStyle.hpp */,
-				8AFF28851C63C504004724ED /* GUITabs.cpp */,
-				8AFF28861C63C504004724ED /* GUITabs.hpp */,
-				8A2610D61C65199800B5364F /* GUIOptions.cpp */,
-				8A2610D71C65199800B5364F /* GUIOptions.hpp */,
+				8A8F79381C68D3E80092CFFA /* ColorPicker.cpp */,
+				8A8F79391C68D3E80092CFFA /* ColorPicker.hpp */,
+				8A8F793A1C68D3E80092CFFA /* Editor.cpp */,
+				8A8F793B1C68D3E80092CFFA /* Editor.hpp */,
+				8A8F793C1C68D3E80092CFFA /* FileBrowser.cpp */,
+				8A8F793D1C68D3E80092CFFA /* FileBrowser.hpp */,
 				8AFF28871C63C504004724ED /* IconsFontAwesome.h */,
 				8AFF28881C63C504004724ED /* IconsMaterialDesign.h */,
+				8A8F793E1C68D3E80092CFFA /* Log.cpp */,
+				8A8F793F1C68D3E80092CFFA /* Log.hpp */,
+				8A8F79401C68D3E80092CFFA /* Screenshot.cpp */,
+				8A8F79411C68D3E80092CFFA /* Screenshot.hpp */,
+				8A8F79421C68D3E80092CFFA /* Tabs.cpp */,
+				8A8F79431C68D3E80092CFFA /* Tabs.hpp */,
 			);
 			name = components;
 			sourceTree = "<group>";
@@ -577,31 +600,32 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8AFF288F1C63C504004724ED /* GUITabs.cpp in Sources */,
 				8AB6F07C1C3A9BEE00665C40 /* noiseutils.cpp in Sources */,
+				8A8F79501C68D3FF0092CFFA /* DialogStyle.cpp in Sources */,
 				8AB6F06E1C3A9BEE00665C40 /* MeshModelFace.cpp in Sources */,
 				8AB6F07B1C3A9BEE00665C40 /* HeightmapGenerator.cpp in Sources */,
-				8AFF288E1C63C504004724ED /* GUIStyle.cpp in Sources */,
+				8A8F794F1C68D3FF0092CFFA /* DialogOptions.cpp in Sources */,
 				8AB6F07E1C3A9BEE00665C40 /* STLParser.cpp in Sources */,
-				8AFF288C1C63C504004724ED /* GUILog.cpp in Sources */,
 				8AB6F06B1C3A9BEE00665C40 /* MeshDot.cpp in Sources */,
 				8AB6F0721C3A9BEE00665C40 /* GUI.cpp in Sources */,
-				8AFF28891C63C504004724ED /* GUIColorPicker.cpp in Sources */,
 				8AB6F0C91C3AA48E00665C40 /* imgui.cpp in Sources */,
+				8A8F79541C68D4140092CFFA /* SDL2OpenGL32.cpp in Sources */,
+				8A8F79491C68D3E80092CFFA /* Tabs.cpp in Sources */,
 				8AB6F0CB1C3AA48E00665C40 /* imgui_draw.cpp in Sources */,
 				8AB6F06F1C3A9BEE00665C40 /* MeshTerrain.cpp in Sources */,
-				8AFF288B1C63C504004724ED /* GUIFileBrowser.cpp in Sources */,
-				8AFF288A1C63C504004724ED /* GUIEditor.cpp in Sources */,
 				8AB6F07A1C3A9BEE00665C40 /* Controls.cpp in Sources */,
 				8AB6F06D1C3A9BEE00665C40 /* MeshLight.cpp in Sources */,
+				8A8F79461C68D3E80092CFFA /* FileBrowser.cpp in Sources */,
 				8AB6F0711C3A9BEE00665C40 /* GLUtils.cpp in Sources */,
 				8AB6F07D1C3A9BEE00665C40 /* objParser.cpp in Sources */,
 				8AB6F0CA1C3AA48E00665C40 /* imgui_demo.cpp in Sources */,
+				8A8F79441C68D3E80092CFFA /* ColorPicker.cpp in Sources */,
+				8A8F79471C68D3E80092CFFA /* Log.cpp in Sources */,
+				8A8F79481C68D3E80092CFFA /* Screenshot.cpp in Sources */,
 				8AB6F06C1C3A9BEE00665C40 /* MeshGrid.cpp in Sources */,
-				8AFF288D1C63C504004724ED /* GUIScreenshot.cpp in Sources */,
-				8A2610D81C65199800B5364F /* GUIOptions.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8AB6F0701C3A9BEE00665C40 /* FNTParser.cpp in Sources */,
+				8A8F79451C68D3E80092CFFA /* Editor.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8AB6F0801C3A9BEE00665C40 /* Settings.cpp in Sources */,
 				8AB6F06A1C3A9BEE00665C40 /* MeshCoordinateSystem.cpp in Sources */,
