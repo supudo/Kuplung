@@ -634,6 +634,7 @@ void GUI::dialogHeightmap() {
 
 void GUI::dialogGUIControls() {
     this->windowGUIControls->showGUIControls(&this->displayGUIControls,
+                                             std::bind(&GUI::resetValuesGUIControls, this),
                                              &this->isFrame,
                                              this->gui_item_settings,
                                              this->sceneLights,
@@ -652,7 +653,7 @@ void GUI::dialogGUIControls() {
                                              &this->selectedTabGUIGrid,
                                              &this->selectedTabGUILight,
                                              &this->selectedTabGUITerrain,
-                                             &this->sceneLightsSelected);
+                                             &this->showHeightmap);
 }
 
 void GUI::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit) {

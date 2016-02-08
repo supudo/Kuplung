@@ -24,6 +24,7 @@ void DialogControls::logMessage(std::string message) {
 }
 
 void DialogControls::showGUIControls(bool* displayGUIControls,
+                                     std::function<void()> resetValuesGUIControls,
                                      bool* isFameParent,
                                      std::vector<std::vector<GUIObjectSetting*>> gui_item_settings,
                                      std::vector<GUISceneLight*> sceneLights,
@@ -42,7 +43,7 @@ void DialogControls::showGUIControls(bool* displayGUIControls,
                                      int* selectedTabGUIGrid,
                                      int* selectedTabGUILight,
                                      int* selectedTabGUITerrain,
-                                     int* sceneLightsSelected) {
+                                     bool* showHeightmap) {
     this->isFrame = isFameParent;
     this->gui_item_settings = gui_item_settings;
     this->gui_item_selected = gui_item_selected;
@@ -54,14 +55,21 @@ void DialogControls::showGUIControls(bool* displayGUIControls,
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0)))
-        this->resetValuesGUIControls();
+        resetValuesGUIControls();
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
 
-    const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
-    ImGui::ListBox("", &(*gui_item_selected), gui_items, IM_ARRAYSIZE(gui_items));
+    if (*showHeightmap) {
+        const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
+        ImGui::ListBox("", &(*gui_item_selected), gui_items, IM_ARRAYSIZE(gui_items));
+    }
+    else {
+        const char* gui_items[] = { "General", "Camera", "Grid", "Light" };
+        ImGui::ListBox("", &(*gui_item_selected), gui_items, IM_ARRAYSIZE(gui_items));
+    }
+
     ImGui::PopItemWidth();
 
     ImGui::Separator();
@@ -344,28 +352,6 @@ void DialogControls::showGUIControls(bool* displayGUIControls,
     ImGui::PopItemWidth();
 
     ImGui::End();
-}
-
-void DialogControls::resetValuesGUIControls() {
-//    this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-//    this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
-//    this->sceneLights[0]->diffuse = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
-//    this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 0.0, /*.color=*/ glm::vec3(1, 1, 1) });
-
-//    this->so_GUI_FOV = 45.0;
-//    this->so_GUI_ratio_w = 4.0f;
-//    this->so_GUI_ratio_h = 3.0f;
-//    this->so_GUI_plane_close = 0.1f;
-//    this->so_GUI_plane_far = 100.0f;
-//    this->so_GUI_grid_size = 10;
-//    this->so_outlineThickness = 1.01;
-
-//    for (int i=0; i<(int)this->gui_item_settings_default.size(); i++) {
-//        for (int j=0; j<(int)this->gui_item_settings[i].size(); j++) {
-//            this->gui_item_settings[i][j]->fValue = this->gui_item_settings_default[i][j]->fValue;
-//            this->gui_item_settings[i][j]->vValue = this->gui_item_settings_default[i][j]->vValue;
-//        }
-//    }
 }
 
 void DialogControls::addControlsXYZ(bool isGuiControl, int x, int y, int z, std::string animate, float animateStep, float animateLimit) {

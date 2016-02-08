@@ -10,6 +10,7 @@
 #define Kuplung_hpp
 
 #include <thread>
+
 #include "utilities/gl/GLIncludes.h"
 
 #include "utilities/settings/Settings.h"

@@ -22,6 +22,7 @@ class DialogControls {
 public:
     void init(std::function<void(std::string)> doLog);
     void showGUIControls(bool* displayGUIControls,
+                         std::function<void()> resetValuesGUIControls,
                          bool* isFameParent,
                          std::vector<std::vector<GUIObjectSetting*>> gui_item_settings,
                          std::vector<GUISceneLight*> sceneLights,
@@ -40,8 +41,7 @@ public:
                          int* selectedTabGUIGrid,
                          int* selectedTabGUILight,
                          int* selectedTabGUITerrain,
-                         int* sceneLightsSelected);
-    void resetValuesGUIControls();
+                         bool* showHeightmap);
 
 private:
     std::function<void(std::string)> doLog;
@@ -63,6 +63,14 @@ private:
     std::vector<std::vector<GUIObjectSetting*>> gui_item_settings, gui_item_settings_default;
     int* scene_item_selected;
     std::vector<std::vector<GUIObjectSetting*>> scene_item_settings, scene_item_settings_default;
+
+    int sceneLightsSelected;
+    std::vector<GUISceneLight*> sceneLights;
+
+    float so_GUI_FOV = 45.0, so_Alpha = 1, so_outlineThickness = 1.01;
+    float so_GUI_ratio_w = 4.0f, so_GUI_ratio_h = 3.0f, so_GUI_plane_close = 0.1f, so_GUI_plane_far = 100.0f;
+    int so_GUI_grid_size = 10;
+    glm::vec4 so_GUI_outlineColor;
 };
 
 #endif /* DialogControls_hpp */
