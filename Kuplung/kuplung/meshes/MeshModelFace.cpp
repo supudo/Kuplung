@@ -19,8 +19,10 @@
 MeshModelFace::MeshModelFace() {
 }
 
-MeshModelFace* MeshModelFace::clone() {
+MeshModelFace* MeshModelFace::clone(int modelID) {
     MeshModelFace *mmf = new MeshModelFace();
+
+    mmf->ModelID = modelID;
 
     mmf->matrixCamera = this->matrixCamera;
     mmf->matrixModel = this->matrixModel;

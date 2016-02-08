@@ -915,9 +915,18 @@ void GUI::dialogSceneSettings() {
     if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
-            MeshModelFace *mmf2 = (*this->meshModelFaces)[this->scene_item_selected]->clone();
-            (*this->meshModelFaces).push_back(mmf2);
+            MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected]->clone((*this->meshModelFaces).size() + 1);
+            (*this->meshModelFaces).push_back(mmf);
             this->addSceneModelSettings();
+
+            int i = (int)this->scene_item_settings.size() - 1;
+            this->setModelSetting((int)i, 12, 1, mmf->oFace.faceMaterial.opticalDensity);
+            this->setModelSetting((int)i, 17, 1, mmf->oFace.faceMaterial.specularExp);
+            this->setModelSetting((int)i, 18, 1, mmf->oFace.faceMaterial.illumination);
+            this->setModelSetting((int)i, 13, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b, mmf->oFace.faceMaterial.ambient.a));
+            this->setModelSetting((int)i, 14, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b, mmf->oFace.faceMaterial.diffuse.a));
+            this->setModelSetting((int)i, 15, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
+            this->setModelSetting((int)i, 16, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
         }
         ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
         ImGui::EndPopup();

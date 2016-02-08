@@ -19,7 +19,7 @@ class MeshModelFace {
 public:
     MeshModelFace();
     ~MeshModelFace();
-    MeshModelFace* clone();
+    MeshModelFace* clone(int modelID);
 
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
