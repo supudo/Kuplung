@@ -12,8 +12,9 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <functional>
 #include "utilities/gl/GLIncludes.h"
-#include "utilities/parsers/obj-parser/objObjects.h"
 #include "utilities/gl/GLUtils.hpp"
+#include "utilities/gui/Objects.h"
+#include "utilities/parsers/obj-parser/objObjects.h"
 
 class MeshModelFace {
 public:
@@ -37,6 +38,7 @@ public:
     // light
     void setOptionsLightPosition(glm::vec3 lightPosition);
     void setOptionsLightDirection(glm::vec3 lightDirection);
+    //void setOptionsLight(GUISceneLight* lightObject);
     void setOptionsLightAmbient(glm::vec3 lightColor);
     void setOptionsLightDiffuse(glm::vec3 lightColor);
     void setOptionsLightSpecular(glm::vec3 lightColor);

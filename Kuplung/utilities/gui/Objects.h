@@ -20,23 +20,28 @@ struct GUIObjectSetting {
     glm::vec4 vValue;
 };
 
-typedef enum GUILightType {
-    GUILightType_Point = 0,
-    GUILightType_Sun = 1
-} GUILightType;
+typedef enum LightType {
+    LightType_Point = 0,
+    LightType_Sun = 1
+} LightType;
 
-struct GUILightObject {
+struct LightObject {
     bool colorPickerOpen, doAnimation;
     float strength;
     glm::vec3 color;
 };
 
-struct GUISceneLight {
+struct SceneLightCoordinate {
+    bool doAnimation;
+    float coordinate;
+};
+
+struct SceneLight {
     std::string lightTitle;
-    GUILightType lightType;
-    GUILightObject *ambient;
-    GUILightObject *diffuse;
-    GUILightObject *specular;
+    LightType lightType;
+    SceneLightCoordinate *positionX, *positionY, *positionZ;
+    SceneLightCoordinate *directionX, *directionY, *directionZ;
+    LightObject *ambient, *diffuse, *specular;
 };
 
 #endif /* Objects_hpp */

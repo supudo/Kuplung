@@ -59,7 +59,7 @@ public:
     void removeSceneModelSettings(int idx);
     void setModelSetting(int modelID, int settingID, int iValue = 0, float fValue = 0, bool bValue = true, glm::vec4 vValue = glm::vec4(1, 1, 1, 1));
 
-    void addSceneLight(std::string lightTitle, GUILightType type);
+    void addSceneLight(std::string lightTitle, LightType type);
 
     std::vector<MeshModelFace*> * meshModelFaces;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
@@ -77,7 +77,7 @@ public:
     float loadingPercentage;
 
     int sceneLightsSelected;
-    std::vector<GUISceneLight*> sceneLights;
+    std::vector<SceneLight*> sceneLights;
 
 private:
     std::function<void()> quitApp;
@@ -117,9 +117,12 @@ private:
     void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
     void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
 
-    void addControlsSliderLights(std::string title, int idx, GUILightObject* light);
-    void animateValueLights(GUILightObject* light);
-    void animateValueAsyncLights(GUILightObject* light);
+    void addControlsXYZLights(SceneLight* light);
+    void addControlsSliderLights(std::string title, int idx, LightObject* light);
+    void animateValueLights(LightObject* light);
+    void animateValueAsyncLights(LightObject* light);
+    void animateValueLightsCoordinate(SceneLightCoordinate* coordinate);
+    void animateValueAsyncLightsCoordinate(SceneLightCoordinate* coordinate);
 
     SDL_Window *sdlWindow;
     bool isGUIVisible;

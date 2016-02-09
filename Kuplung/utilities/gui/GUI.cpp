@@ -325,20 +325,20 @@ void GUI::setModelSetting(int modelID, int settingID, int iValue, float fValue, 
     this->scene_item_settings_default[modelID][settingID]->vValue = vValue;
 }
 
-void GUI::addSceneLight(std::string lightTitle, GUILightType type) {
-    GUILightObject *glo_ambient = new GUILightObject();
+void GUI::addSceneLight(std::string lightTitle, LightType type) {
+    LightObject *glo_ambient = new LightObject();
     glo_ambient->colorPickerOpen = false;
     glo_ambient->color = glm::vec3(1, 1, 1);
     glo_ambient->strength = 0.3;
     glo_ambient->doAnimation = false;
 
-    GUILightObject *glo_diffuse = new GUILightObject();
+    LightObject *glo_diffuse = new LightObject();
     glo_diffuse->colorPickerOpen = false;
     switch (type) {
-        case GUILightType_Point:
+        case LightType_Point:
             glo_diffuse->color = glm::vec3(1, 1, 1);
             break;
-        case GUILightType_Sun:
+        case LightType_Sun:
             glo_diffuse->color = glm::vec3(0, 0, 0);
             break;
         default:
@@ -347,15 +347,45 @@ void GUI::addSceneLight(std::string lightTitle, GUILightType type) {
     glo_diffuse->strength = 1.0;
     glo_diffuse->doAnimation = false;
 
-    GUILightObject *glo_specular = new GUILightObject();
+    LightObject *glo_specular = new LightObject();
     glo_specular->colorPickerOpen = false;
     glo_specular->color = glm::vec3(1, 1, 1);
     glo_specular->strength = 0.0;
     glo_specular->doAnimation = false;
 
-    GUISceneLight *gsl = new GUISceneLight();
+    SceneLightCoordinate *pos_x = new SceneLightCoordinate();
+    pos_x->doAnimation = false;
+    pos_x->coordinate = 0;
+
+    SceneLightCoordinate *pos_y = new SceneLightCoordinate();
+    pos_y->doAnimation = false;
+    pos_y->coordinate = -2;
+
+    SceneLightCoordinate *pos_z = new SceneLightCoordinate();
+    pos_z->doAnimation = false;
+    pos_z->coordinate = 0;
+
+    SceneLightCoordinate *dir_x = new SceneLightCoordinate();
+    dir_x->doAnimation = false;
+    dir_x->coordinate = 0;
+
+    SceneLightCoordinate *dir_y = new SceneLightCoordinate();
+    dir_y->doAnimation = false;
+    dir_y->coordinate = -2;
+
+    SceneLightCoordinate *dir_z = new SceneLightCoordinate();
+    dir_z->doAnimation = false;
+    dir_z->coordinate = 0;
+
+    SceneLight *gsl = new SceneLight();
     gsl->lightTitle = lightTitle;
     gsl->lightType = type;
+    gsl->positionX = pos_x;
+    gsl->positionY = pos_y;
+    gsl->positionZ = pos_z;
+    gsl->directionX = pos_x;
+    gsl->directionY = pos_y;
+    gsl->directionZ = pos_z;
     gsl->ambient = glo_ambient;
     gsl->diffuse = glo_diffuse;
     gsl->specular = glo_specular;
@@ -441,9 +471,9 @@ void GUI::renderStart(bool isFrame) {
             ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
                 if (ImGui::MenuItem(ICON_FA_LIGHTBULB_O " Point"))
-                    this->addSceneLight("Point Light " + std::to_string((int)this->sceneLights.size()), GUILightType_Point);
+                    this->addSceneLight("Point Light " + std::to_string((int)this->sceneLights.size()), LightType_Point);
                 if (ImGui::MenuItem(ICON_FA_SUN_O " Sun"))
-                    this->addSceneLight("Sun Light " + std::to_string((int)this->sceneLights.size()), GUILightType_Sun);
+                    this->addSceneLight("Sun Light " + std::to_string((int)this->sceneLights.size()), LightType_Sun);
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
@@ -879,13 +909,15 @@ void GUI::dialogGUIControls() {
                 }
                 case 3: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->addControlsXYZ(true, 15, 16, 17, "translation", 0.05f, this->so_GUI_grid_size);
+                    //this->addControlsXYZ(true, 15, 16, 17, "translation", 0.05f, this->so_GUI_grid_size);
+                    SceneLight *light = this->sceneLights[this->sceneLightsSelected];
+                    this->addControlsXYZLights(light);
                     break;
                 }
                 case 4: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Light colors");
 
-                    GUISceneLight *light = this->sceneLights[this->sceneLightsSelected];
+                    SceneLight *light = this->sceneLights[this->sceneLightsSelected];
 
                     this->addControlColor3("Ambient Color", &light->ambient->color, &light->ambient->colorPickerOpen);
                     this->addControlsSliderLights("Ambient Strength", 1, light->ambient);
@@ -951,7 +983,7 @@ void GUI::dialogGUIControls() {
 void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->sceneLights.clear();
-    this->addSceneLight("Point Light", GUILightType_Point);
+    this->addSceneLight("Point Light", LightType_Point);
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;
@@ -1361,19 +1393,6 @@ void GUI::addControlsSlider(std::string title, int idx, bool isGUI, float step, 
     ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 0.0, limit);
 }
 
-void GUI::addControlsSliderLights(std::string title, int idx, GUILightObject* light) {
-    if (title != "")
-        ImGui::Text("%s", title.c_str());
-    std::string c_id = "##00" + std::to_string(idx);
-    if (ImGui::Checkbox(c_id.c_str(), &light->doAnimation))
-        this->animateValueLights(light);
-    if (ImGui::IsItemHovered())
-        ImGui::SetTooltip("Animate %s", title.c_str());
-    ImGui::SameLine();
-    std::string s_id = "##10" + std::to_string(idx);
-    ImGui::SliderFloat(s_id.c_str(), &light->strength, 0.0, 1.0);
-}
-
 void GUI::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
     std::string ce_id = "##101" + title;
     std::string icon_id = ICON_MD_COLORIZE + ce_id;
@@ -1440,12 +1459,47 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
     }
 }
 
-void GUI::animateValueLights(GUILightObject* light) {
+#pragma mark - ImGui Helpers - Lights
+
+void GUI::addControlsXYZLights(SceneLight* light) {
+    if (ImGui::Checkbox("##1", &light->positionX->doAnimation))
+        this->animateValueLightsCoordinate(light->positionX);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip("Animate by X");
+    ImGui::SameLine(); ImGui::SliderFloat("X##1", &light->positionX->coordinate, (-1 * this->so_GUI_grid_size), this->so_GUI_grid_size);
+
+    if (ImGui::Checkbox("##2", &light->positionY->doAnimation))
+        this->animateValueLightsCoordinate(light->positionY);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip("Animate by Y");
+    ImGui::SameLine(); ImGui::SliderFloat("Y##2", &light->positionY->coordinate, (-1 * this->so_GUI_grid_size), this->so_GUI_grid_size);
+
+    if (ImGui::Checkbox("##3", &light->positionZ->doAnimation))
+        this->animateValueLightsCoordinate(light->positionZ);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip("Animate by Z");
+    ImGui::SameLine(); ImGui::SliderFloat("Z##3", &light->positionZ->coordinate, (-1 * this->so_GUI_grid_size), this->so_GUI_grid_size);
+}
+
+void GUI::addControlsSliderLights(std::string title, int idx, LightObject* light) {
+    if (title != "")
+        ImGui::Text("%s", title.c_str());
+    std::string c_id = "##00" + std::to_string(idx);
+    if (ImGui::Checkbox(c_id.c_str(), &light->doAnimation))
+        this->animateValueLights(light);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip("Animate %s", title.c_str());
+    ImGui::SameLine();
+    std::string s_id = "##10" + std::to_string(idx);
+    ImGui::SliderFloat(s_id.c_str(), &light->strength, 0.0, 1.0);
+}
+
+void GUI::animateValueLights(LightObject* light) {
     std::thread animThreadLight(&GUI::animateValueAsyncLights, this, light);
     animThreadLight.detach();
 }
 
-void GUI::animateValueAsyncLights(GUILightObject* light) {
+void GUI::animateValueAsyncLights(LightObject* light) {
     while (light->doAnimation) {
         if (this->isFrame) {
             float v = light->strength;
@@ -1453,6 +1507,24 @@ void GUI::animateValueAsyncLights(GUILightObject* light) {
             if (v > 1.0)
                 v = -1.0;
             light->strength = v;
+            this->isFrame = false;
+        }
+    }
+}
+
+void GUI::animateValueLightsCoordinate(SceneLightCoordinate* coordinate) {
+    std::thread animThreadLightCoordinate(&GUI::animateValueAsyncLightsCoordinate, this, coordinate);
+    animThreadLightCoordinate.detach();
+}
+
+void GUI::animateValueAsyncLightsCoordinate(SceneLightCoordinate* coordinate) {
+    while (coordinate->doAnimation) {
+        if (this->isFrame) {
+            float v = coordinate->coordinate;
+            v += 0.05;
+            if (v > this->so_GUI_grid_size)
+                v = (-1 * this->so_GUI_grid_size);
+            coordinate->coordinate = v;
             this->isFrame = false;
         }
     }
