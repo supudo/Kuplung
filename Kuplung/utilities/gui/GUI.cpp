@@ -428,7 +428,7 @@ void GUI::renderStart(bool isFrame) {
             ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
             ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
-                if (ImGui::MenuItem("Point")) {
+                if (ImGui::MenuItem(ICON_FA_LIGHTBULB_O " Point")) {
                     this->addSceneLight();
                     int idx = (int)this->sceneLights.size() - 1;
                     this->sceneLights[idx]->lightType = GUILightType_Point;
