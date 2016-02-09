@@ -537,8 +537,14 @@ void GUI::dialogGUIControls() {
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
 
-    const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
-    ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    if (this->showHeightmap) {
+        const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
+        ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    }
+    else {
+        const char* gui_items[] = { "General", "Camera", "Grid", "Light" };
+        ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    }
     ImGui::PopItemWidth();
 
     ImGui::Separator();
@@ -905,8 +911,7 @@ void GUI::dialogSceneSettings() {
 
     const char* scene_items[this->meshModelFaces->size()];
     for (size_t i=0; i<this->meshModelFaces->size(); i++) {
-        MeshModelFace *mmf = (*this->meshModelFaces)[i];
-        scene_items[i] = mmf->oFace.ModelTitle.c_str();
+        scene_items[i] = (*this->meshModelFaces)[i]->oFace.ModelTitle.c_str();
     }
 
     // Scene Model
