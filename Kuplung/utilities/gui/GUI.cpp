@@ -79,6 +79,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
 
     this->gui_item_selected = -1;
     this->scene_item_selected = -1;
+    this->sceneLightsSelected = -1;
     this->selectedTabScene = 0;
     this->selectedTabGUICamera = 0;
     this->selectedTabGUIGrid = 0;
@@ -336,11 +337,13 @@ void GUI::addSceneLight() {
     glo_diffuse->strength = 1.0;
 
     GUILightObject *glo_specular = new GUILightObject();
-    glo_specular->colorPickerOpen = false;
+        glo_specular->colorPickerOpen = false;
     glo_specular->color = glm::vec3(1, 1, 1);
     glo_specular->strength = 0.0;
 
     GUISceneLight *gsl = new GUISceneLight();
+    gsl->lightTitle = "Point Light";
+    gsl->lightType = GUILightType_Point;
     gsl->ambient = glo_ambient;
     gsl->diffuse = glo_diffuse;
     gsl->specular = glo_specular;
@@ -535,17 +538,68 @@ void GUI::dialogGUIControls() {
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
+    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-
-    if (this->showHeightmap) {
-        const char* gui_items[] = { "General", "Camera", "Grid", "Light", "Terrain" };
-        ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
+    ImGui::BeginChild("Global Items", ImVec2(0, 130), true);
+    for (int i=0; i<4; i++) {
+        switch (i) {
+            case 0: {
+                ImGui::Indent();
+                if (ImGui::Selectable("General", this->gui_item_selected == i)) {
+                    this->gui_item_selected = i;
+                    this->sceneLightsSelected = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            case 1: {
+                ImGui::Indent();
+                if (ImGui::Selectable("Camera", this->gui_item_selected == i)) {
+                    this->gui_item_selected = i;
+                    this->sceneLightsSelected = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            case 2: {
+                ImGui::Indent();
+                if (ImGui::Selectable("Grid", this->gui_item_selected == i)) {
+                    this->gui_item_selected = i;
+                    this->sceneLightsSelected = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            case 3: {
+                if (ImGui::TreeNode("Lights")) {
+                    for (int j = 0; j<(int)this->sceneLights.size(); j++) {
+                        std::string lt = this->sceneLights[j]->lightTitle;
+                        ImGui::Bullet();
+                        if (ImGui::Selectable(lt.c_str(), this->sceneLightsSelected == j)) {
+                            this->sceneLightsSelected = j;
+                            this->gui_item_selected = 3;
+                        }
+                    }
+                    ImGui::TreePop();
+                }
+                break;
+            }
+            case 4: {
+                ImGui::Indent();
+                if (ImGui::Selectable("Terrain", this->gui_item_selected == i)) {
+                    this->gui_item_selected = i;
+                    this->sceneLightsSelected = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            default:
+                break;
+        }
     }
-    else {
-        const char* gui_items[] = { "General", "Camera", "Grid", "Light" };
-        ImGui::ListBox("", &this->gui_item_selected, gui_items, IM_ARRAYSIZE(gui_items));
-    }
+    ImGui::EndChild();
     ImGui::PopItemWidth();
+    ImGui::PopStyleColor();
 
     ImGui::Separator();
 
@@ -764,13 +818,15 @@ void GUI::dialogGUIControls() {
                 case 4: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Light colors");
 
-                    this->addControlColor3("Ambient Color", &this->sceneLights[0]->ambient->color, &this->sceneLights[0]->ambient->colorPickerOpen);
+                    GUISceneLight *light = this->sceneLights[this->sceneLightsSelected];
+
+                    this->addControlColor3("Ambient Color", &light->ambient->color, &light->ambient->colorPickerOpen);
                     this->addControlsSlider("Ambient Strength", 18, true, 0.1f, 1.0f, true, &this->gui_item_settings[this->gui_item_selected][18]->oAnimate, &this->gui_item_settings[this->gui_item_selected][18]->fValue);
 
-                    this->addControlColor3("Diffuse Color", &this->sceneLights[0]->diffuse->color, &this->sceneLights[0]->diffuse->colorPickerOpen);
+                    this->addControlColor3("Diffuse Color", &light->diffuse->color, &light->diffuse->colorPickerOpen);
                     this->addControlsSlider("Diffuse Strength", 19, true, 0.1f, 4.0f, true, &this->gui_item_settings[this->gui_item_selected][19]->oAnimate, &this->gui_item_settings[this->gui_item_selected][19]->fValue);
 
-                    this->addControlColor3("Specular Color", &this->sceneLights[0]->specular->color, &this->sceneLights[0]->specular->colorPickerOpen);
+                    this->addControlColor3("Specular Color", &light->specular->color, &light->specular->colorPickerOpen);
                     this->addControlsSlider("Specular Strength", 20, true, 0.1f, 4.0f, true, &this->gui_item_settings[this->gui_item_selected][20]->oAnimate, &this->gui_item_settings[this->gui_item_selected][20]->fValue);
                     break;
                 }
@@ -920,7 +976,7 @@ void GUI::dialogSceneSettings() {
     if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
-            MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected]->clone((*this->meshModelFaces).size() + 1);
+            MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected]->clone((int)(*this->meshModelFaces).size() + 1);
             (*this->meshModelFaces).push_back(mmf);
             this->addSceneModelSettings();
 
