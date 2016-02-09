@@ -468,6 +468,8 @@ void Kuplung::initSceneGUI() {
     this->gui->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
     this->gui->addSceneLight();
+    this->gui->sceneLights[0]->lightType = GUILightType_Point;
+    this->gui->sceneLights[0]->lightTitle = "Point Light 0";
     this->gui->sceneLights[0]->ambient->color = glm::vec3(1.0, 1.0, 1.0);
     this->gui->sceneLights[0]->diffuse->color = glm::vec3(1.0, 1.0, 1.0);
     this->gui->sceneLights[0]->specular->color = glm::vec3(1.0, 1.0, 1.0);

@@ -99,6 +99,7 @@ private:
 
     void contextModelRename();
     void contextModelDelete();
+    void contextLightDelete();
 
     GUIObjectSetting* addSceneSettingsObject(int idx, float fValue = 1.0f, bool bValue = true, glm::vec4 vValue = glm::vec4(1.0, 1.0, 1.0, 1.0));
     void dialogGUIControls();
@@ -138,6 +139,7 @@ private:
     int heightmapWidth, heightmapHeight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     bool outlineColorPickerOpen, cmenu_deleteYn, cmenu_renameModel, needsFontChange;
+    bool cmenuLight_deleteYn;
     char guiModelRenameText[256];
 };
 

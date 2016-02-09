@@ -426,6 +426,28 @@ void GUI::renderStart(bool isFrame) {
 
         if (ImGui::BeginMenu("Scene")) {
             ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
+            ImGui::Separator();
+            if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
+                if (ImGui::MenuItem("Point")) {
+                    this->addSceneLight();
+                    int idx = (int)this->sceneLights.size() - 1;
+                    this->sceneLights[idx]->lightType = GUILightType_Point;
+                    this->sceneLights[idx]->lightTitle = "Point Light " + std::to_string(idx);
+                    this->sceneLights[idx]->ambient->color = glm::vec3(0.0, 0.0, 0.0);
+                    this->sceneLights[idx]->diffuse->color = glm::vec3(1.0, 1.0, 1.0);
+                    this->sceneLights[idx]->specular->color = glm::vec3(1.0, 1.0, 1.0);
+                }
+                if (ImGui::MenuItem(ICON_FA_SUN_O " Sun")) {
+                    this->addSceneLight();
+                    int idx = (int)this->sceneLights.size() - 1;
+                    this->sceneLights[idx]->lightType = GUILightType_Sun;
+                    this->sceneLights[idx]->lightTitle = std::string(ICON_FA_SUN_O) + " Sun " + std::to_string(idx);
+                    this->sceneLights[idx]->ambient->color = glm::vec3(1.0, 1.0, 1.0);
+                    this->sceneLights[idx]->diffuse->color = glm::vec3(0.0, 0.0, 0.0);
+                    this->sceneLights[idx]->specular->color = glm::vec3(0.0, 0.0, 0.0);
+                }
+                ImGui::EndMenu();
+            }
             ImGui::EndMenu();
         }
 
@@ -526,7 +548,52 @@ void GUI::renderEnd() {
 
 #pragma mark - GUI controls
 
+void GUI::contextLightDelete() {
+    ImGui::OpenPopup("Delete?");
+
+    ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+
+    ImGui::Text("Are you sure you want to delete this model?\n");
+    ImGui::Text("(%s)", (*this->meshModelFaces)[this->scene_item_selected]->oFace.ModelTitle.c_str());
+
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
+        (*this->meshModelFaces).erase((*this->meshModelFaces).begin() + this->scene_item_selected);
+        this->removeSceneModelSettings(this->scene_item_selected);
+        ImGui::CloseCurrentPopup();
+        this->cmenu_deleteYn = false;
+    }
+    ImGui::SameLine();
+    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
+
+    ImGui::EndPopup();
+}
+
 void GUI::dialogGUIControls() {
+//    ImGui::Begin("Splitter test");
+
+//    static float w = 200.0f;
+//    static float h = 300.0f;
+//    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0,0));
+//    ImGui::BeginChild("child1", ImVec2(w, h), true);
+//    ImGui::EndChild();
+//    ImGui::SameLine();
+//    ImGui::InvisibleButton("vsplitter", ImVec2(8.0f,h));
+//    if (ImGui::IsItemActive())
+//        w += ImGui::GetIO().MouseDelta.x;
+//    ImGui::SameLine();
+//    ImGui::BeginChild("child2", ImVec2(0, h), true);
+//    ImGui::EndChild();
+//    ImGui::InvisibleButton("hsplitter", ImVec2(-1,8.0f));
+//    if (ImGui::IsItemActive())
+//        h += ImGui::GetIO().MouseDelta.y;
+//    ImGui::BeginChild("child3", ImVec2(0,0), true);
+//    ImGui::EndChild();
+//    ImGui::PopStyleVar();
+
+//    ImGui::End();
+
+
+
     ImGui::SetNextWindowSize(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("GUI Controls", &this->displayGUIControls, ImGuiWindowFlags_ShowBorders);
 
@@ -538,6 +605,7 @@ void GUI::dialogGUIControls() {
     ImGui::PopStyleColor(3);
     ImGui::Separator();
 
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::BeginChild("Global Items", ImVec2(0, 130), true);
@@ -600,6 +668,7 @@ void GUI::dialogGUIControls() {
     ImGui::EndChild();
     ImGui::PopItemWidth();
     ImGui::PopStyleColor();
+    ImGui::PopStyleVar();
 
     ImGui::Separator();
 
@@ -967,12 +1036,16 @@ void GUI::dialogSceneSettings() {
 
     const char* scene_items[this->meshModelFaces->size()];
     for (size_t i=0; i<this->meshModelFaces->size(); i++) {
+        std::string t = std::string(ICON_FA_CUBE) + " " + (*this->meshModelFaces)[i]->oFace.ModelTitle;
+        // ICON_FA_CUBE
         scene_items[i] = (*this->meshModelFaces)[i]->oFace.ModelTitle.c_str();
     }
 
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::ListBox("", &this->scene_item_selected, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::PopStyleVar();
     if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {

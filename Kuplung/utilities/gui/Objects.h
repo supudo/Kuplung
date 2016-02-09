@@ -22,10 +22,7 @@ struct GUIObjectSetting {
 
 typedef enum GUILightType {
     GUILightType_Point = 0,
-    GUILightType_Sun = 1,
-    GUILightType_Spot = 2,
-    GUILightType_Hemi = 3,
-    GUILightType_Area = 41
+    GUILightType_Sun = 1
 } GUILightType;
 
 struct GUILightObject {
