@@ -59,7 +59,7 @@ public:
     void removeSceneModelSettings(int idx);
     void setModelSetting(int modelID, int settingID, int iValue = 0, float fValue = 0, bool bValue = true, glm::vec4 vValue = glm::vec4(1, 1, 1, 1));
 
-    void addSceneLight();
+    void addSceneLight(std::string lightTitle, GUILightType type);
 
     std::vector<MeshModelFace*> * meshModelFaces;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
@@ -116,6 +116,10 @@ private:
     void addControlsSlider(std::string title, int idx, bool isGUI, float step, float limit, bool showAnimate, bool* animate, float* sliderValue);
     void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
     void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
+
+    void addControlsSliderLights(std::string title, int idx, GUILightObject* light);
+    void animateValueLights(GUILightObject* light);
+    void animateValueAsyncLights(GUILightObject* light);
 
     SDL_Window *sdlWindow;
     bool isGUIVisible;

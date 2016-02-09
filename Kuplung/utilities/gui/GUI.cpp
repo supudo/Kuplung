@@ -77,7 +77,7 @@ void GUI::init(SDL_Window *window, std::function<void()> quitApp, std::function<
     this->windowOptions = new DialogOptions();
     this->windowOptions->init(std::bind(&GUI::doLog, this, std::placeholders::_1));
 
-    this->gui_item_selected = -1;
+    this->gui_item_selected = 0;
     this->scene_item_selected = -1;
     this->sceneLightsSelected = -1;
     this->selectedTabScene = 0;
@@ -325,25 +325,37 @@ void GUI::setModelSetting(int modelID, int settingID, int iValue, float fValue, 
     this->scene_item_settings_default[modelID][settingID]->vValue = vValue;
 }
 
-void GUI::addSceneLight() {
+void GUI::addSceneLight(std::string lightTitle, GUILightType type) {
     GUILightObject *glo_ambient = new GUILightObject();
     glo_ambient->colorPickerOpen = false;
     glo_ambient->color = glm::vec3(1, 1, 1);
-    glo_ambient->strength = 1.0;
+    glo_ambient->strength = 0.3;
+    glo_ambient->doAnimation = false;
 
     GUILightObject *glo_diffuse = new GUILightObject();
     glo_diffuse->colorPickerOpen = false;
-    glo_diffuse->color = glm::vec3(1, 1, 1);
+    switch (type) {
+        case GUILightType_Point:
+            glo_diffuse->color = glm::vec3(1, 1, 1);
+            break;
+        case GUILightType_Sun:
+            glo_diffuse->color = glm::vec3(0, 0, 0);
+            break;
+        default:
+            break;
+    }
     glo_diffuse->strength = 1.0;
+    glo_diffuse->doAnimation = false;
 
     GUILightObject *glo_specular = new GUILightObject();
-        glo_specular->colorPickerOpen = false;
+    glo_specular->colorPickerOpen = false;
     glo_specular->color = glm::vec3(1, 1, 1);
     glo_specular->strength = 0.0;
+    glo_specular->doAnimation = false;
 
     GUISceneLight *gsl = new GUISceneLight();
-    gsl->lightTitle = "Point Light";
-    gsl->lightType = GUILightType_Point;
+    gsl->lightTitle = lightTitle;
+    gsl->lightType = type;
     gsl->ambient = glo_ambient;
     gsl->diffuse = glo_diffuse;
     gsl->specular = glo_specular;
@@ -428,24 +440,10 @@ void GUI::renderStart(bool isFrame) {
             ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
             ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
-                if (ImGui::MenuItem(ICON_FA_LIGHTBULB_O " Point")) {
-                    this->addSceneLight();
-                    int idx = (int)this->sceneLights.size() - 1;
-                    this->sceneLights[idx]->lightType = GUILightType_Point;
-                    this->sceneLights[idx]->lightTitle = "Point Light " + std::to_string(idx);
-                    this->sceneLights[idx]->ambient->color = glm::vec3(0.0, 0.0, 0.0);
-                    this->sceneLights[idx]->diffuse->color = glm::vec3(1.0, 1.0, 1.0);
-                    this->sceneLights[idx]->specular->color = glm::vec3(1.0, 1.0, 1.0);
-                }
-                if (ImGui::MenuItem(ICON_FA_SUN_O " Sun")) {
-                    this->addSceneLight();
-                    int idx = (int)this->sceneLights.size() - 1;
-                    this->sceneLights[idx]->lightType = GUILightType_Sun;
-                    this->sceneLights[idx]->lightTitle = std::string(ICON_FA_SUN_O) + " Sun " + std::to_string(idx);
-                    this->sceneLights[idx]->ambient->color = glm::vec3(1.0, 1.0, 1.0);
-                    this->sceneLights[idx]->diffuse->color = glm::vec3(0.0, 0.0, 0.0);
-                    this->sceneLights[idx]->specular->color = glm::vec3(0.0, 0.0, 0.0);
-                }
+                if (ImGui::MenuItem(ICON_FA_LIGHTBULB_O " Point"))
+                    this->addSceneLight("Point Light " + std::to_string((int)this->sceneLights.size()), GUILightType_Point);
+                if (ImGui::MenuItem(ICON_FA_SUN_O " Sun"))
+                    this->addSceneLight("Sun Light " + std::to_string((int)this->sceneLights.size()), GUILightType_Sun);
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
@@ -890,13 +888,13 @@ void GUI::dialogGUIControls() {
                     GUISceneLight *light = this->sceneLights[this->sceneLightsSelected];
 
                     this->addControlColor3("Ambient Color", &light->ambient->color, &light->ambient->colorPickerOpen);
-                    this->addControlsSlider("Ambient Strength", 18, true, 0.1f, 1.0f, true, &this->gui_item_settings[this->gui_item_selected][18]->oAnimate, &this->gui_item_settings[this->gui_item_selected][18]->fValue);
+                    this->addControlsSliderLights("Ambient Strength", 1, light->ambient);
 
                     this->addControlColor3("Diffuse Color", &light->diffuse->color, &light->diffuse->colorPickerOpen);
-                    this->addControlsSlider("Diffuse Strength", 19, true, 0.1f, 4.0f, true, &this->gui_item_settings[this->gui_item_selected][19]->oAnimate, &this->gui_item_settings[this->gui_item_selected][19]->fValue);
+                    this->addControlsSliderLights("Diffuse Strength", 2, light->diffuse);
 
                     this->addControlColor3("Specular Color", &light->specular->color, &light->specular->colorPickerOpen);
-                    this->addControlsSlider("Specular Strength", 20, true, 0.1f, 4.0f, true, &this->gui_item_settings[this->gui_item_selected][20]->oAnimate, &this->gui_item_settings[this->gui_item_selected][20]->fValue);
+                    this->addControlsSliderLights("Specular Strength", 3, light->specular);
                     break;
                 }
                 default:
@@ -942,6 +940,8 @@ void GUI::dialogGUIControls() {
             }
             break;
         }
+        default:
+            break;
     }
     ImGui::PopItemWidth();
 
@@ -950,9 +950,8 @@ void GUI::dialogGUIControls() {
 
 void GUI::resetValuesGUIControls() {
     this->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-    this->sceneLights[0]->ambient = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
-    this->sceneLights[0]->diffuse = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1, 1, 1) });
-    this->sceneLights[0]->specular = new GUILightObject({ /*.colorPickerOpen=*/ false, /*.strength=*/ 0.0, /*.color=*/ glm::vec3(1, 1, 1) });
+    this->sceneLights.clear();
+    this->addSceneLight("Point Light", GUILightType_Point);
 
     this->so_GUI_FOV = 45.0;
     this->so_GUI_ratio_w = 4.0f;
@@ -1104,66 +1103,68 @@ void GUI::dialogSceneSettings() {
 
     ImGui::Separator();
 
-    switch (this->selectedTabScene) {
-        case 0: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
-            // cel shading
-            ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
-            // alpha
-            ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
-            ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
-            break;
+    if ((int)this->scene_item_settings.size() > this->scene_item_selected) {
+        switch (this->selectedTabScene) {
+            case 0: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
+                // cel shading
+                ImGui::Checkbox("Cel Shading", &this->scene_item_settings[this->scene_item_selected][19]->bValue);
+                // alpha
+                ImGui::TextColored(ImVec4(1, 1, 1, this->scene_item_settings[this->scene_item_selected][20]->fValue), "Alpha Blending");
+                ImGui::SliderFloat("", &this->scene_item_settings[this->scene_item_selected][20]->fValue, 0.0f, 1.0f);
+                break;
+            }
+            case 1: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
+                this->addControlsXYZ(false, 0, 1, 2, "scale", 0.01f, 1.0f);
+                break;
+            }
+            case 2: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
+                this->addControlsXYZ(false, 3, 4, 5, "rotation", 1.0f, 360.0f);
+                break;
+            }
+            case 3: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
+                this->addControlsXYZ(false, 6, 7, 8, "translation", 0.05f, this->so_GUI_grid_size);
+                break;
+            }
+            case 4: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
+                this->addControlsXYZ(false, 9, 10, 11, "displacement", 0.05f, this->so_GUI_grid_size);
+                break;
+            }
+            case 5: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
+                this->addControlsSlider("Refraction", 12, false, 0.05f, 10.0f, true, &this->scene_item_settings[this->scene_item_selected][12]->oAnimate, &this->scene_item_settings[this->scene_item_selected][12]->fValue);
+                this->addControlsSlider("Specular Exponent", 17, false, 10.0f, 1000.0f, true, &this->scene_item_settings[this->scene_item_selected][17]->oAnimate, &this->scene_item_settings[this->scene_item_selected][17]->fValue);
+                this->addControlColor4("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->vValue, &this->scene_item_settings[this->scene_item_selected][13]->bValue);
+                this->addControlColor4("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->vValue, &this->scene_item_settings[this->scene_item_selected][14]->bValue);
+                this->addControlColor4("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->vValue, &this->scene_item_settings[this->scene_item_selected][15]->bValue);
+                this->addControlColor4("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->vValue, &this->scene_item_settings[this->scene_item_selected][16]->bValue);
+                break;
+            }
+            case 6: {
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Illumination type");
+                const char* illum_models_items[] = {
+                    "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
+                    "[1] Color on and Ambient on",
+                    "[2] Highlight on",
+                    "[3] Reflection on and Ray trace on",
+                    "[4] Transparency: Glass on\n    Reflection: Ray trace on",
+                    "[5] Reflection: Fresnel on\n    Ray trace on",
+                    "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
+                    "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
+                    "[8] Reflection on\n    Ray trace off",
+                    "[9] Transparency: Glass on\n    Reflection: Ray trace off",
+                    "[10] Casts shadows onto invisible surfaces"
+                };
+                ImGui::Combo("##987", &this->scene_item_settings[this->scene_item_selected][18]->iValue, illum_models_items, IM_ARRAYSIZE(illum_models_items));
+                break;
+            }
+            default:
+                break;
         }
-        case 1: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
-            this->addControlsXYZ(false, 0, 1, 2, "scale", 0.01f, 1.0f);
-            break;
-        }
-        case 2: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
-            this->addControlsXYZ(false, 3, 4, 5, "rotation", 1.0f, 360.0f);
-            break;
-        }
-        case 3: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
-            this->addControlsXYZ(false, 6, 7, 8, "translation", 0.05f, this->so_GUI_grid_size);
-            break;
-        }
-        case 4: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
-            this->addControlsXYZ(false, 9, 10, 11, "displacement", 0.05f, this->so_GUI_grid_size);
-            break;
-        }
-        case 5: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
-            this->addControlsSlider("Refraction", 12, false, 0.05f, 10.0f, true, &this->scene_item_settings[this->scene_item_selected][12]->oAnimate, &this->scene_item_settings[this->scene_item_selected][12]->fValue);
-            this->addControlsSlider("Specular Exponent", 17, false, 10.0f, 1000.0f, true, &this->scene_item_settings[this->scene_item_selected][17]->oAnimate, &this->scene_item_settings[this->scene_item_selected][17]->fValue);
-            this->addControlColor4("Ambient Color", &this->scene_item_settings[this->scene_item_selected][13]->vValue, &this->scene_item_settings[this->scene_item_selected][13]->bValue);
-            this->addControlColor4("Diffuse Color", &this->scene_item_settings[this->scene_item_selected][14]->vValue, &this->scene_item_settings[this->scene_item_selected][14]->bValue);
-            this->addControlColor4("Specular Color", &this->scene_item_settings[this->scene_item_selected][15]->vValue, &this->scene_item_settings[this->scene_item_selected][15]->bValue);
-            this->addControlColor4("Emission Color", &this->scene_item_settings[this->scene_item_selected][16]->vValue, &this->scene_item_settings[this->scene_item_selected][16]->bValue);
-            break;
-        }
-        case 6: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Illumination type");
-            const char* illum_models_items[] = {
-                "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
-                "[1] Color on and Ambient on",
-                "[2] Highlight on",
-                "[3] Reflection on and Ray trace on",
-                "[4] Transparency: Glass on\n    Reflection: Ray trace on",
-                "[5] Reflection: Fresnel on\n    Ray trace on",
-                "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
-                "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
-                "[8] Reflection on\n    Ray trace off",
-                "[9] Transparency: Glass on\n    Reflection: Ray trace off",
-                "[10] Casts shadows onto invisible surfaces"
-            };
-            ImGui::Combo("##987", &this->scene_item_settings[this->scene_item_selected][18]->iValue, illum_models_items, IM_ARRAYSIZE(illum_models_items));
-            break;
-        }
-        default:
-            break;
     }
     ImGui::PopItemWidth();
 
@@ -1351,13 +1352,26 @@ void GUI::addControlsSlider(std::string title, int idx, bool isGUI, float step, 
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), *(&animate)))
-            this->animateValue(isGUI, (isGUI ? this->gui_item_selected : this->scene_item_selected), idx, step, limit, false);
+            this->animateValue(isGUI, (isGUI ? 0 : 1), idx, step, limit, false);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();
     }
     std::string s_id = "##10" + std::to_string(idx);
     ImGui::SliderFloat(s_id.c_str(), *(&sliderValue), 0.0, limit);
+}
+
+void GUI::addControlsSliderLights(std::string title, int idx, GUILightObject* light) {
+    if (title != "")
+        ImGui::Text("%s", title.c_str());
+    std::string c_id = "##00" + std::to_string(idx);
+    if (ImGui::Checkbox(c_id.c_str(), &light->doAnimation))
+        this->animateValueLights(light);
+    if (ImGui::IsItemHovered())
+        ImGui::SetTooltip("Animate %s", title.c_str());
+    ImGui::SameLine();
+    std::string s_id = "##10" + std::to_string(idx);
+    ImGui::SliderFloat(s_id.c_str(), &light->strength, 0.0, 1.0);
 }
 
 void GUI::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
@@ -1422,6 +1436,24 @@ void GUI::animateValueAsync(bool isGUI, int elementID, int sett_index, float ste
                 this->scene_item_settings[elementID][sett_index]->fValue = v;
                 this->isFrame = false;
             }
+        }
+    }
+}
+
+void GUI::animateValueLights(GUILightObject* light) {
+    std::thread animThreadLight(&GUI::animateValueAsyncLights, this, light);
+    animThreadLight.detach();
+}
+
+void GUI::animateValueAsyncLights(GUILightObject* light) {
+    while (light->doAnimation) {
+        if (this->isFrame) {
+            float v = light->strength;
+            v += 0.05;
+            if (v > 1.0)
+                v = -1.0;
+            light->strength = v;
+            this->isFrame = false;
         }
     }
 }

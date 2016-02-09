@@ -26,7 +26,7 @@ typedef enum GUILightType {
 } GUILightType;
 
 struct GUILightObject {
-    bool colorPickerOpen;
+    bool colorPickerOpen, doAnimation;
     float strength;
     glm::vec3 color;
 };

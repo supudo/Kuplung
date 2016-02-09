@@ -423,12 +423,13 @@ void Kuplung::renderScene() {
         mmf->setOptionsLightPosition(vLightPosition);
         mmf->setOptionsLightDirection(vLightDirection);
 
+        // light colors
         mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->ambient->color);
-        mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->diffuse->color);
-        mmf->setOptionsLightAmbient(this->gui->sceneLights[0]->specular->color);
-        mmf->setOptionsLightStrengthAmbient(this->gui->gui_item_settings[3][18]->fValue);
-        mmf->setOptionsLightStrengthDiffuse(this->gui->gui_item_settings[3][19]->fValue);
-        mmf->setOptionsLightStrengthSpecular(this->gui->gui_item_settings[3][20]->fValue);
+        mmf->setOptionsLightDiffuse(this->gui->sceneLights[0]->diffuse->color);
+        mmf->setOptionsLightSpecular(this->gui->sceneLights[0]->specular->color);
+        mmf->setOptionsLightStrengthAmbient(this->gui->sceneLights[0]->ambient->strength);
+        mmf->setOptionsLightStrengthDiffuse(this->gui->sceneLights[0]->diffuse->strength);
+        mmf->setOptionsLightStrengthSpecular(this->gui->sceneLights[0]->specular->strength);
 
         // material
         mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[i][12]->fValue);
@@ -466,13 +467,7 @@ void Kuplung::initSceneGUI() {
 
     // initial variables
     this->gui->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-
-    this->gui->addSceneLight();
-    this->gui->sceneLights[0]->lightType = GUILightType_Point;
-    this->gui->sceneLights[0]->lightTitle = "Point Light 0";
-    this->gui->sceneLights[0]->ambient->color = glm::vec3(1.0, 1.0, 1.0);
-    this->gui->sceneLights[0]->diffuse->color = glm::vec3(1.0, 1.0, 1.0);
-    this->gui->sceneLights[0]->specular->color = glm::vec3(1.0, 1.0, 1.0);
+    this->gui->addSceneLight("Point Light", GUILightType_Point);
 
     // camera
     initialSettings.push_back(std::vector<float> {
@@ -547,7 +542,6 @@ void Kuplung::initSceneGUI() {
     this->gui->initGUIControls(4, initialSettings);
     this->gui->showGUIControls();
     this->gui->setHeightmapImage(this->terrain->heightmapImage);
-    this->gui->gui_item_selected = 3;
 
     // dot
     this->lightDot = new MeshDot();
@@ -566,7 +560,7 @@ void Kuplung::initSceneGUI() {
 //    FontMap fm = this->fontParser->parse(fontFile);
 
     // testbed
-    std::string testObj = "planet_all.obj";
+    std::string testObj = "cube0.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
