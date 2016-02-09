@@ -1,13 +1,13 @@
 //
-//  MeshCoordinateSystem.hpp
-// Kuplung
+//  WorldGrid.hpp
+//  Kuplung
 //
-//  Created by Sergey Petrov on 12/14/15.
+//  Created by Sergey Petrov on 12/5/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef MeshCoordinateSystem_hpp
-#define MeshCoordinateSystem_hpp
+#ifndef WorldGrid_hpp
+#define WorldGrid_hpp
 
 #include <functional>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,30 +15,30 @@
 #include "utilities/parsers/obj-parser/objObjects.h"
 #include "utilities/gl/GLUtils.hpp"
 
-class MeshCoordinateSystem {
+class WorldGrid {
 public:
-    ~MeshCoordinateSystem();
+    ~WorldGrid();
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
     bool initShaderProgram();
-    void initBuffers(); // 0 = x, 1 = y, 2 = z
+    void initBuffers(int gridSize, bool isHorizontal, float unitSize);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    int gridSize;
 
 private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
     std::string shaderName;
-    int axisSize;
 
     GLUtils *glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboColors;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
+    GLuint glVAO, vboVertices;
+    GLuint glAttributeVertexPosition, glUniformMVPMatrix;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
 };
 
-#endif /* MeshCoordinateSystem_hpp */
+#endif /* WorldGrid_hpp */

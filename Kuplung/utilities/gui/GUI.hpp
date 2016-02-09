@@ -25,7 +25,7 @@
 #include "utilities/gui/dialogs/DialogStyle.hpp"
 #include "utilities/gui/dialogs/DialogOptions.hpp"
 #include "utilities/gui/implementation/SDL2OpenGL32.hpp"
-#include "kuplung/meshes/MeshModelFace.hpp"
+#include "kuplung/meshes/ModelFace.hpp"
 
 #define STBI_FAILURE_USERMSG
 #include "utilities/stb/stb_image.h"
@@ -61,7 +61,7 @@ public:
 
     void addSceneLight(std::string lightTitle, LightType type);
 
-    std::vector<MeshModelFace*> * meshModelFaces;
+    std::vector<ModelFace*> * meshModelFaces;
     bool isFrame, isProjection, fixedGridWorld, showHeightmap, isLoadingOpen;
     bool displayGUIControls, displaySceneStats, displaySceneControls;
 

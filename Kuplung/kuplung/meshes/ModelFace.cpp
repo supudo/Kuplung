@@ -1,12 +1,12 @@
 //
-//  MeshModelFace.cpp
-// Kuplung
+//  ModelFace.cpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "MeshModelFace.hpp"
+#include "ModelFace.hpp"
 #include <fstream>
 
 #define STBI_FAILURE_USERMSG
@@ -16,11 +16,11 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-MeshModelFace::MeshModelFace() {
+ModelFace::ModelFace() {
 }
 
-MeshModelFace* MeshModelFace::clone(int modelID) {
-    MeshModelFace *mmf = new MeshModelFace();
+ModelFace* ModelFace::clone(int modelID) {
+    ModelFace *mmf = new ModelFace();
 
     mmf->ModelID = modelID;
 
@@ -33,7 +33,7 @@ MeshModelFace* MeshModelFace::clone(int modelID) {
 
     mmf->vecCameraPosition = this->vecCameraPosition;
 
-    mmf->init(std::bind(&MeshModelFace::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+    mmf->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
     mmf->setModel(mmf->oFace);
     mmf->initShaderProgram();
     mmf->initBuffers(Settings::Instance()->currentFolder);
@@ -43,11 +43,11 @@ MeshModelFace* MeshModelFace::clone(int modelID) {
 
 #pragma mark - Destroy
 
-MeshModelFace::~MeshModelFace() {
+ModelFace::~ModelFace() {
     this->destroy();
 }
 
-void MeshModelFace::destroy() {
+void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);
@@ -88,10 +88,10 @@ void MeshModelFace::destroy() {
 
 #pragma mark - Initialization
 
-void MeshModelFace::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void ModelFace::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&MeshModelFace::doLog, this, std::placeholders::_1));
+    this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
     this->so_alpha = -1;
@@ -113,13 +113,13 @@ void MeshModelFace::init(std::function<void(std::string)> doLog, std::string sha
     this->so_materialEmission = glm::vec3(0, 0, 0);
 }
 
-void MeshModelFace::setModel(objModelFace oFace) {
+void ModelFace::setModel(objModelFace oFace) {
     this->oFace = oFace;
 }
 
 #pragma mark - Public
 
-bool MeshModelFace::initShaderProgram() {
+bool ModelFace::initShaderProgram() {
     bool success = true;
 
     // vertex shader
@@ -231,7 +231,7 @@ bool MeshModelFace::initShaderProgram() {
     return success;
 }
 
-void MeshModelFace::initBuffers(std::string assetsFolder) {
+void ModelFace::initBuffers(std::string assetsFolder) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -468,7 +468,7 @@ void MeshModelFace::initBuffers(std::string assetsFolder) {
 
 #pragma mark - Render
 
-void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
+void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -600,7 +600,7 @@ void MeshModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
     }
 }
 
-void MeshModelFace::outlineThree() {
+void ModelFace::outlineThree() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
 
@@ -626,7 +626,7 @@ void MeshModelFace::outlineThree() {
     this->drawOnly();
 }
 
-void MeshModelFace::outlineTwo() {
+void ModelFace::outlineTwo() {
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
     glm::mat4 mtxModel;
@@ -658,7 +658,7 @@ void MeshModelFace::outlineTwo() {
     this->drawOnly();
 }
 
-void MeshModelFace::outlineOne() {
+void ModelFace::outlineOne() {
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
     // 1st pass
@@ -694,7 +694,7 @@ void MeshModelFace::outlineOne() {
     glEnable(GL_DEPTH_TEST);
 }
 
-void MeshModelFace::drawOnly() {
+void ModelFace::drawOnly() {
     glBindVertexArray(this->glVAO);
     if (Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -706,100 +706,100 @@ void MeshModelFace::drawOnly() {
 
 #pragma mark - Scene Options
 
-void MeshModelFace::setOptionsFOV(float fov) {
+void ModelFace::setOptionsFOV(float fov) {
     this->so_fov = fov;
 }
 
-void MeshModelFace::setOptionsAlpha(float alpha) {
+void ModelFace::setOptionsAlpha(float alpha) {
     this->so_alpha = alpha;
 }
 
-void MeshModelFace::setOptionsCelShading(bool val) {
+void ModelFace::setOptionsCelShading(bool val) {
     this->so_celShading = val;
 }
 
-void MeshModelFace::setOptionsDisplacement(glm::vec3 displacement) {
+void ModelFace::setOptionsDisplacement(glm::vec3 displacement) {
     this->so_displacement = displacement;
 }
 
-void MeshModelFace::setOptionsSelected(bool selectedYn) {
+void ModelFace::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void MeshModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
+void ModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 
-void MeshModelFace::setOptionsOutlineThickness(float thickness) {
+void ModelFace::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
 }
 
 // light
-void MeshModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
+void ModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
     this->so_lightPosition = lightPosition;
 }
 
-void MeshModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
+void ModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
     this->so_lightDirection = lightDirection;
 }
 
-void MeshModelFace::setOptionsLightAmbient(glm::vec3 lightColor) {
+void ModelFace::setOptionsLightAmbient(glm::vec3 lightColor) {
     this->so_lightAmbient = lightColor;
 }
 
-void MeshModelFace::setOptionsLightDiffuse(glm::vec3 lightColor) {
+void ModelFace::setOptionsLightDiffuse(glm::vec3 lightColor) {
     this->so_lightDiffuse = lightColor;
 }
 
-void MeshModelFace::setOptionsLightSpecular(glm::vec3 lightColor) {
+void ModelFace::setOptionsLightSpecular(glm::vec3 lightColor) {
     this->so_lightSpecular = lightColor;
 }
 
-void MeshModelFace::setOptionsLightStrengthAmbient(float val) {
+void ModelFace::setOptionsLightStrengthAmbient(float val) {
     this->so_lightStrengthAmbient = val;
 }
 
-void MeshModelFace::setOptionsLightStrengthDiffuse(float val) {
+void ModelFace::setOptionsLightStrengthDiffuse(float val) {
     this->so_lightStrengthDiffuse = val;
 }
 
-void MeshModelFace::setOptionsLightStrengthSpecular(float val) {
+void ModelFace::setOptionsLightStrengthSpecular(float val) {
     this->so_lightStrengthSpecular = val;
 }
 
 // material
 
-void MeshModelFace::setOptionsMaterialRefraction(float val) {
+void ModelFace::setOptionsMaterialRefraction(float val) {
     this->so_materialRefraction = val;
 }
 
-void MeshModelFace::setOptionsMaterialSpecularExp(float val) {
+void ModelFace::setOptionsMaterialSpecularExp(float val) {
     this->so_materialSpecularExp = val;
 }
 
-void MeshModelFace::setOptionsMaterialIlluminationModel(float val) {
+void ModelFace::setOptionsMaterialIlluminationModel(float val) {
     this->so_materialIlluminationModel = val;
 }
 
-void MeshModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {
+void ModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {
     this->so_materialAmbient = lightColor;
 }
 
-void MeshModelFace::setOptionsMaterialDiffuse(glm::vec3 lightColor) {
+void ModelFace::setOptionsMaterialDiffuse(glm::vec3 lightColor) {
     this->so_materialDiffuse = lightColor;
 }
 
-void MeshModelFace::setOptionsMaterialSpecular(glm::vec3 lightColor) {
+void ModelFace::setOptionsMaterialSpecular(glm::vec3 lightColor) {
     this->so_materialSpecular = lightColor;
 }
 
-void MeshModelFace::setOptionsMaterialEmission(glm::vec3 lightColor) {
+void ModelFace::setOptionsMaterialEmission(glm::vec3 lightColor) {
     this->so_materialEmission = lightColor;
 }
 
 #pragma mark - Utilities
 
-std::string MeshModelFace::readFile(const char *filePath) {
+std::string ModelFace::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
@@ -815,6 +815,6 @@ std::string MeshModelFace::readFile(const char *filePath) {
     return content;
 }
 
-void MeshModelFace::doLog(std::string logMessage) {
-    this->doLogFunc("[MeshModelFace] " + logMessage);
+void ModelFace::doLog(std::string logMessage) {
+    this->doLogFunc("[ModelFace] " + logMessage);
 }

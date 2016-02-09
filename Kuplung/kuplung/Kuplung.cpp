@@ -20,7 +20,7 @@ Kuplung::~Kuplung() {
 
 void Kuplung::destroy() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        MeshModelFace *mmf = this->meshModelFaces[i];
+        ModelFace *mmf = this->meshModelFaces[i];
         mmf->destroy();
     }
 
@@ -137,7 +137,7 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
                     this->fontParser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1));
                     this->doLog("Font Parser Initialized.");
 
-                    this->terrain = new MeshTerrain();
+                    this->terrain = new Terrain();
 
                     if (SDL_GL_SetSwapInterval(1) < 0) {
                         printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
@@ -239,7 +239,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
             float sceneClosestObject = -1;
 
             for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-                MeshModelFace *mmf = this->meshModelFaces[i];
+                ModelFace *mmf = this->meshModelFaces[i];
                 std::vector<float> objVertices = mmf->oFace.vertices;
 
                 std::vector<glm::vec3> Vertices;
@@ -395,7 +395,7 @@ void Kuplung::renderScene() {
 
     // scene models
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-        MeshModelFace* mmf = this->meshModelFaces[i];
+        ModelFace* mmf = this->meshModelFaces[i];
 
         glm::mat4 mtxModel = glm::mat4(1.0);
 
@@ -510,12 +510,12 @@ void Kuplung::initSceneGUI() {
     });
 
     // grid
-    this->sceneGridHorizontal = new MeshGrid();
+    this->sceneGridHorizontal = new WorldGrid();
     this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
     this->sceneGridHorizontal->initShaderProgram();
     this->sceneGridHorizontal->initBuffers(20, true, 1);
 
-    this->sceneGridVertical = new MeshGrid();
+    this->sceneGridVertical = new WorldGrid();
     this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
     this->sceneGridVertical->initShaderProgram();
     this->sceneGridVertical->initBuffers(20, false, 1);
@@ -535,7 +535,7 @@ void Kuplung::initSceneGUI() {
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
     objScene sceneGUI = this->parser->parse(file);
-    this->meshLight = new MeshLight();
+    this->meshLight = new Light();
     this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
     this->meshLight->setModel(sceneGUI.models[0].faces[0]);
     this->meshLight->initShaderProgram();
@@ -551,7 +551,7 @@ void Kuplung::initSceneGUI() {
     });
 
     // axis
-    this->sceneCoordinateSystem = new MeshCoordinateSystem();
+    this->sceneCoordinateSystem = new CoordinateSystem();
     this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
     this->sceneCoordinateSystem->initShaderProgram();
     this->sceneCoordinateSystem->initBuffers();
@@ -574,7 +574,7 @@ void Kuplung::initSceneGUI() {
     this->gui->setHeightmapImage(this->terrain->heightmapImage);
 
     // dot
-    this->lightDot = new MeshDot();
+    this->lightDot = new Dot();
     this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
     this->lightDot->initShaderProgram();
 
@@ -641,7 +641,7 @@ void Kuplung::processParsedObjFile() {
     for (int i=0; i<(int)scene.models.size(); i++) {
         objModel model = scene.models[i];
         for (size_t j=0; j<model.faces.size(); j++) {
-            MeshModelFace *mmf = new MeshModelFace();
+            ModelFace *mmf = new ModelFace();
             mmf->ModelID = i;
             mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
             mmf->setModel(model.faces[j]);
@@ -658,7 +658,7 @@ void Kuplung::processParsedObjFile() {
     if (this->meshModelFaces.size() > 0) {
         this->gui->scene_item_selected = 0;
         for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-            MeshModelFace *mmf = this->meshModelFaces[i];
+            ModelFace *mmf = this->meshModelFaces[i];
             this->gui->setModelSetting((int)i, 12, 1, mmf->oFace.faceMaterial.opticalDensity);
             this->gui->setModelSetting((int)i, 17, 1, mmf->oFace.faceMaterial.specularExp);
             this->gui->setModelSetting((int)i, 18, 1, mmf->oFace.faceMaterial.illumination);
@@ -708,7 +708,7 @@ void Kuplung::guiClearScreen() {
     this->gui->hideSceneSettings();
     this->gui->hideSceneStats();
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        MeshModelFace *mmf = this->meshModelFaces[i];
+        ModelFace *mmf = this->meshModelFaces[i];
         mmf->destroy();
     }
 }

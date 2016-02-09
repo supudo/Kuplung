@@ -19,12 +19,12 @@
 #include "utilities/input/Controls.hpp"
 #include "utilities/font-parser/FNTParser.hpp"
 
-#include "meshes/MeshModelFace.hpp"
-#include "meshes/MeshLight.hpp"
-#include "meshes/MeshGrid.hpp"
-#include "meshes/MeshCoordinateSystem.hpp"
-#include "meshes/MeshDot.hpp"
-#include "meshes/MeshTerrain.hpp"
+#include "meshes/ModelFace.hpp"
+#include "meshes/Light.hpp"
+#include "meshes/WorldGrid.hpp"
+#include "meshes/CoordinateSystem.hpp"
+#include "meshes/Dot.hpp"
+#include "meshes/Terrain.hpp"
 
 class Kuplung {
 public:
@@ -80,13 +80,14 @@ private:
     objParser *parser;
     FNTParser *fontParser;
     std::vector<objScene> scenes;
-    std::vector<MeshModelFace*> meshModelFaces;
-    MeshLight* meshLight;
-    MeshGrid* sceneGridHorizontal;
-    MeshGrid* sceneGridVertical;
-    MeshCoordinateSystem* sceneCoordinateSystem;
-    MeshDot* lightDot;
-    MeshTerrain *terrain;
+    std::vector<ModelFace*> meshModelFaces;
+
+    Light* meshLight;
+    WorldGrid* sceneGridHorizontal;
+    WorldGrid* sceneGridVertical;
+    CoordinateSystem* sceneCoordinateSystem;
+    Dot* lightDot;
+    Terrain *terrain;
 };
 
 #endif /* Kuplung_hpp */

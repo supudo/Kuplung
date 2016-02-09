@@ -1,13 +1,13 @@
 //
-//  MeshModelFace.hpp
-// Kuplung
+//  ModelFace.hpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef MeshModelFace_hpp
-#define MeshModelFace_hpp
+#ifndef ModelFace_hpp
+#define ModelFace_hpp
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <functional>
@@ -16,11 +16,11 @@
 #include "utilities/gui/Objects.h"
 #include "utilities/parsers/obj-parser/objObjects.h"
 
-class MeshModelFace {
+class ModelFace {
 public:
-    MeshModelFace();
-    ~MeshModelFace();
-    MeshModelFace* clone(int modelID);
+    ModelFace();
+    ~ModelFace();
+    ModelFace* clone(int modelID);
 
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
@@ -131,4 +131,4 @@ private:
     void doLog(std::string logMessage);
 };
 
-#endif /* MeshModelFace_hpp */
+#endif /* ModelFace_hpp */

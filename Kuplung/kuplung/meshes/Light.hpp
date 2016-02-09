@@ -1,13 +1,13 @@
 //
-//  MeshLight.hpp
-// Kuplung
+//  Light.hpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 12/3/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef MeshLight_hpp
-#define MeshLight_hpp
+#ifndef Light_hpp
+#define Light_hpp
 
 #include <functional>
 #include <glm/gtc/matrix_transform.hpp>
@@ -15,9 +15,9 @@
 #include "utilities/parsers/obj-parser/objObjects.h"
 #include "utilities/gl/GLUtils.hpp"
 
-class MeshLight {
+class Light {
 public:
-    ~MeshLight();
+    ~Light();
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
     void setModel(objModelFace oFace);
@@ -45,4 +45,4 @@ private:
     void doLog(std::string logMessage);
 };
 
-#endif /* MeshLight_hpp */
+#endif /* Light_hpp */

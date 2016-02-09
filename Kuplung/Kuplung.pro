@@ -91,12 +91,12 @@ OTHER_FILES += resources/shaders/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
-    kuplung/meshes/MeshCoordinateSystem.cpp \
-    kuplung/meshes/MeshDot.cpp \
-    kuplung/meshes/MeshGrid.cpp \
-    kuplung/meshes/MeshLight.cpp \
-    kuplung/meshes/MeshModelFace.cpp \
-    kuplung/meshes/MeshTerrain.cpp \
+    kuplung/meshes/CoordinateSystem.cpp \
+    kuplung/meshes/Dot.cpp \
+    kuplung/meshes/WorldGrid.cpp \
+    kuplung/meshes/Light.cpp \
+    kuplung/meshes/ModelFace.cpp \
+    kuplung/meshes/Terrain.cpp \
     utilities/font-parser/FNTParser.cpp \
     utilities/gl/GLUtils.cpp \
     utilities/gui/ImGui/imgui.cpp \
@@ -123,12 +123,12 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
-    kuplung/meshes/MeshCoordinateSystem.hpp \
-    kuplung/meshes/MeshDot.hpp \
-    kuplung/meshes/MeshGrid.hpp \
-    kuplung/meshes/MeshLight.hpp \
-    kuplung/meshes/MeshModelFace.hpp \
-    kuplung/meshes/MeshTerrain.hpp \
+    kuplung/meshes/CoordinateSystem.hpp \
+    kuplung/meshes/Dot.hpp \
+    kuplung/meshes/WorldGrid.hpp \
+    kuplung/meshes/Light.hpp \
+    kuplung/meshes/ModelFace.hpp \
+    kuplung/meshes/Terrain.hpp \
     utilities/font-parser/FNTParser.hpp \
     utilities/gl/GLUtils.hpp \
     utilities/gui/ImGui/imconfig.h \

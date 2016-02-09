@@ -1,23 +1,23 @@
 //
-//  MeshCoordinateSystem.cpp
-// Kuplung
+//  WorldGrid.cpp
+//  Kuplung
 //
-//  Created by Sergey Petrov on 12/14/15.
+//  Created by Sergey Petrov on 12/5/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "MeshCoordinateSystem.hpp"
+#include "WorldGrid.hpp"
 #include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #pragma mark - Destroy
 
-MeshCoordinateSystem::~MeshCoordinateSystem() {
+WorldGrid::~WorldGrid() {
     this->destroy();
 }
 
-void MeshCoordinateSystem::destroy() {
+void WorldGrid::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -32,17 +32,17 @@ void MeshCoordinateSystem::destroy() {
 
 #pragma mark - Initialization
 
-void MeshCoordinateSystem::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void WorldGrid::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&MeshCoordinateSystem::doLog, this, std::placeholders::_1));
+    this->glUtils->init(std::bind(&WorldGrid::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
 }
 
 #pragma mark - Public
 
-bool MeshCoordinateSystem::initShaderProgram() {
+bool WorldGrid::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
@@ -76,79 +76,64 @@ bool MeshCoordinateSystem::initShaderProgram() {
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_axisColor");
     }
 
     return success;
 }
 
-void MeshCoordinateSystem::initBuffers() {
+void WorldGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->axisSize = 6;
-    GLfloat g_vertex_buffer_data[] = {
-        // X
-        -100, 0, 0,
-        100, 0, 0,
+    this->gridSize = gridSize;
+    float gridMinus = this->gridSize / 2;
+    GridMeshPoint2D Vertices[this->gridSize][this->gridSize];
 
-        // Y
-        0, -100, 0,
-        0, 100, 0,
-
-        // Z
-        0, 0, -100,
-        0, 0, 100
-    };
-
-    GLfloat g_color_buffer_data[] = {
-        // X - red
-        1.0f, 0.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 0.0f, 1.0f,
-
-        // Y - green
-        0.0f, 1.0f, 0.0f, 1.0f,
-        0.0f, 1.0f, 0.0f, 1.0f,
-
-        // Z - blue
-        0.0f, 0.0f, 1.0f, 1.0f,
-        0.0f, 0.0f, 1.0f, 1.0f
-    };
+    for (int i = 0; i < this->gridSize; i++) {
+        for (int j = 0; j < this->gridSize; j++) {
+            if (isHorizontal) {
+                Vertices[i][j].y = (i - gridMinus) * unitSize;
+                Vertices[i][j].x = (j - gridMinus) * unitSize;
+            }
+            else {
+                Vertices[i][j].x = (i - gridMinus) * unitSize;
+                Vertices[i][j].y = (j - gridMinus) * unitSize;
+            }
+        }
+    }
 
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data) * sizeof(GLfloat), g_vertex_buffer_data, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices) * sizeof(GLfloat), Vertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-    // colors
-    glGenBuffers(1, &this->vboColors);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data) * sizeof(GLfloat), g_color_buffer_data, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeColor);
-    glVertexAttribPointer(this->glAttributeColor, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
     glBindVertexArray(0);
 }
 
 #pragma mark - Render
 
-void MeshCoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
         // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
-        glLineWidth((GLfloat)5.5f);
+        glLineWidth((GLfloat)2.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw
         glBindVertexArray(this->glVAO);
-        glDrawArrays(GL_LINES, 0, this->axisSize);
+
+        for (int i = 0; i < this->gridSize; i++)
+            glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
+
+        for (int i = 0; i < this->gridSize; i++)
+            glDrawArrays(GL_LINE_STRIP, 0, this->gridSize);
 
         glBindVertexArray(0);
 
@@ -158,7 +143,7 @@ void MeshCoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCa
 
 #pragma mark - Utilities
 
-std::string MeshCoordinateSystem::readFile(const char *filePath) {
+std::string WorldGrid::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
@@ -174,6 +159,6 @@ std::string MeshCoordinateSystem::readFile(const char *filePath) {
     return content;
 }
 
-void MeshCoordinateSystem::doLog(std::string logMessage) {
-    this->doLogFunc("[MeshCoordinateSystem] " + logMessage);
+void WorldGrid::doLog(std::string logMessage) {
+    this->doLogFunc("[WorldGrid] " + logMessage);
 }

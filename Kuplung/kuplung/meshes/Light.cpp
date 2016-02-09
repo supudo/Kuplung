@@ -1,12 +1,12 @@
 //
-//  MeshLight.cpp
-// Kuplung
+//  Light.cpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 12/3/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "MeshLight.hpp"
+#include "Light.hpp"
 
 #include <fstream>
 
@@ -18,11 +18,11 @@
 
 #pragma mark - Destroy
 
-MeshLight::~MeshLight() {
+Light::~Light() {
     this->destroy();
 }
 
-void MeshLight::destroy() {
+void Light::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
     glDisableVertexAttribArray(this->glAttributeTextureCoord);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);
@@ -39,21 +39,21 @@ void MeshLight::destroy() {
 
 #pragma mark - Initialization
 
-void MeshLight::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void Light::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&MeshLight::doLog, this, std::placeholders::_1));
+    this->glUtils->init(std::bind(&Light::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
 }
 
-void MeshLight::setModel(objModelFace oFace) {
+void Light::setModel(objModelFace oFace) {
     this->oFace = oFace;
 }
 
 #pragma mark - Public
 
-bool MeshLight::initShaderProgram() {
+bool Light::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
@@ -101,7 +101,7 @@ bool MeshLight::initShaderProgram() {
     return success;
 }
 
-void MeshLight::initBuffers(std::string assetsFolder) {
+void Light::initBuffers(std::string assetsFolder) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -177,7 +177,7 @@ void MeshLight::initBuffers(std::string assetsFolder) {
 
 #pragma mark - Render
 
-void MeshLight::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -212,7 +212,7 @@ void MeshLight::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
 #pragma mark - Utilities
 
-std::string MeshLight::readFile(const char *filePath) {
+std::string Light::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
@@ -228,6 +228,6 @@ std::string MeshLight::readFile(const char *filePath) {
     return content;
 }
 
-void MeshLight::doLog(std::string logMessage) {
-    this->doLogFunc("[MeshLight] " + logMessage);
+void Light::doLog(std::string logMessage) {
+    this->doLogFunc("[Light] " + logMessage);
 }

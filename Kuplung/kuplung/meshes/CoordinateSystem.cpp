@@ -1,23 +1,23 @@
 //
-//  MeshTerrain.cpp
-// Kuplung
+//  CoordinateSystem.cpp
+//  Kuplung
 //
-//  Created by Sergey Petrov on 12/22/15.
+//  Created by Sergey Petrov on 12/14/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "MeshTerrain.hpp"
+#include "CoordinateSystem.hpp"
 #include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #pragma mark - Destroy
 
-MeshTerrain::~MeshTerrain() {
+CoordinateSystem::~CoordinateSystem() {
     this->destroy();
 }
 
-void MeshTerrain::destroy() {
+void CoordinateSystem::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -32,18 +32,17 @@ void MeshTerrain::destroy() {
 
 #pragma mark - Initialization
 
-void MeshTerrain::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void CoordinateSystem::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&MeshTerrain::doLog, this, std::placeholders::_1));
+    this->glUtils->init(std::bind(&CoordinateSystem::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
-    this->terrainGenerator = new HeightmapGenerator();
 }
 
 #pragma mark - Public
 
-bool MeshTerrain::initShaderProgram() {
+bool CoordinateSystem::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
@@ -76,65 +75,81 @@ bool MeshTerrain::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_color");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_axisColor");
     }
-
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDisable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     return success;
 }
 
-void MeshTerrain::initBuffers(std::string assetsFolder) {
+void CoordinateSystem::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->terrainGenerator->generateTerrain(assetsFolder, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, 0);
-    this->heightmapImage = this->terrainGenerator->heightmapImage;
+    this->axisSize = 6;
+    GLfloat g_vertex_buffer_data[] = {
+        // X
+        -100, 0, 0,
+        100, 0, 0,
+
+        // Y
+        0, -100, 0,
+        0, 100, 0,
+
+        // Z
+        0, 0, -100,
+        0, 0, 100
+    };
+
+    GLfloat g_color_buffer_data[] = {
+        // X - red
+        1.0f, 0.0f, 0.0f, 1.0f,
+        1.0f, 0.0f, 0.0f, 1.0f,
+
+        // Y - green
+        0.0f, 1.0f, 0.0f, 1.0f,
+        0.0f, 1.0f, 0.0f, 1.0f,
+
+        // Z - blue
+        0.0f, 0.0f, 1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f
+    };
 
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->vertices.size() * sizeof(GLfloat), &this->terrainGenerator->vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data) * sizeof(GLfloat), g_vertex_buffer_data, GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // colors
     glGenBuffers(1, &this->vboColors);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->colors.size() * sizeof(GLfloat), &this->terrainGenerator->colors[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data) * sizeof(GLfloat), g_color_buffer_data, GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeColor);
     glVertexAttribPointer(this->glAttributeColor, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
-
-    // indices
-    glGenBuffers(1, &this->vboIndices);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->terrainGenerator->indices.size() * sizeof(GLuint), &this->terrainGenerator->indices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
 
 #pragma mark - Render
 
-void MeshTerrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
         // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
-        //glEnable(GL_CULL_FACE);
+        glLineWidth((GLfloat)5.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw
         glBindVertexArray(this->glVAO);
-        glDrawElements(GL_TRIANGLES, (int)this->terrainGenerator->indices.size(), GL_UNSIGNED_INT, nullptr);
-        //glDrawArrays(GL_LINES, 0, (int)this->terrainGenerator->vertices.size());
+        glDrawArrays(GL_LINES, 0, this->axisSize);
+
         glBindVertexArray(0);
 
         glUseProgram(0);
@@ -143,7 +158,7 @@ void MeshTerrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm
 
 #pragma mark - Utilities
 
-std::string MeshTerrain::readFile(const char *filePath) {
+std::string CoordinateSystem::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
@@ -159,6 +174,6 @@ std::string MeshTerrain::readFile(const char *filePath) {
     return content;
 }
 
-void MeshTerrain::doLog(std::string logMessage) {
-    this->doLogFunc("[MeshTerrain] " + logMessage);
+void CoordinateSystem::doLog(std::string logMessage) {
+    this->doLogFunc("[CoordinateSystem] " + logMessage);
 }

@@ -1079,7 +1079,7 @@ void GUI::dialogSceneSettings() {
     if (this->scene_item_selected > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate")) {
-            MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected]->clone((int)(*this->meshModelFaces).size() + 1);
+            ModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected]->clone((int)(*this->meshModelFaces).size() + 1);
             (*this->meshModelFaces).push_back(mmf);
             this->addSceneModelSettings();
 
@@ -1104,7 +1104,7 @@ void GUI::dialogSceneSettings() {
         this->contextModelDelete();
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
-    MeshModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected];
+    ModelFace *mmf = (*this->meshModelFaces)[this->scene_item_selected];
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.objFile.c_str());
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.ModelTitle.c_str());
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.materialID.c_str());
