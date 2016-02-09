@@ -545,7 +545,7 @@ void GUI::dialogGUIControls() {
         switch (i) {
             case 0: {
                 ImGui::Indent();
-                if (ImGui::Selectable("General", this->gui_item_selected == i)) {
+                if (ImGui::Selectable(ICON_FA_ASTERISK " General", this->gui_item_selected == i)) {
                     this->gui_item_selected = i;
                     this->sceneLightsSelected = -1;
                 }
@@ -554,7 +554,7 @@ void GUI::dialogGUIControls() {
             }
             case 1: {
                 ImGui::Indent();
-                if (ImGui::Selectable("Camera", this->gui_item_selected == i)) {
+                if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera", this->gui_item_selected == i)) {
                     this->gui_item_selected = i;
                     this->sceneLightsSelected = -1;
                 }
@@ -563,7 +563,7 @@ void GUI::dialogGUIControls() {
             }
             case 2: {
                 ImGui::Indent();
-                if (ImGui::Selectable("Grid", this->gui_item_selected == i)) {
+                if (ImGui::Selectable(ICON_FA_BARS " Grid", this->gui_item_selected == i)) {
                     this->gui_item_selected = i;
                     this->sceneLightsSelected = -1;
                 }
@@ -571,7 +571,7 @@ void GUI::dialogGUIControls() {
                 break;
             }
             case 3: {
-                if (ImGui::TreeNode("Lights")) {
+                if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
                     for (int j = 0; j<(int)this->sceneLights.size(); j++) {
                         std::string lt = this->sceneLights[j]->lightTitle;
                         ImGui::Bullet();
