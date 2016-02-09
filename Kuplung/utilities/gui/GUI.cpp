@@ -359,11 +359,11 @@ void GUI::addSceneLight(std::string lightTitle, LightType type) {
 
     SceneLightCoordinate *pos_y = new SceneLightCoordinate();
     pos_y->doAnimation = false;
-    pos_y->coordinate = -2;
+    pos_y->coordinate = 0;
 
     SceneLightCoordinate *pos_z = new SceneLightCoordinate();
     pos_z->doAnimation = false;
-    pos_z->coordinate = 0;
+    pos_z->coordinate = 5;
 
     SceneLightCoordinate *dir_x = new SceneLightCoordinate();
     dir_x->doAnimation = false;
@@ -383,9 +383,9 @@ void GUI::addSceneLight(std::string lightTitle, LightType type) {
     gsl->positionX = pos_x;
     gsl->positionY = pos_y;
     gsl->positionZ = pos_z;
-    gsl->directionX = pos_x;
-    gsl->directionY = pos_y;
-    gsl->directionZ = pos_z;
+    gsl->directionX = dir_x;
+    gsl->directionY = dir_y;
+    gsl->directionZ = dir_z;
     gsl->ambient = glo_ambient;
     gsl->diffuse = glo_diffuse;
     gsl->specular = glo_specular;
@@ -909,7 +909,6 @@ void GUI::dialogGUIControls() {
                 }
                 case 3: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    //this->addControlsXYZ(true, 15, 16, 17, "translation", 0.05f, this->so_GUI_grid_size);
                     SceneLight *light = this->sceneLights[this->sceneLightsSelected];
                     this->addControlsXYZLights(light);
                     break;

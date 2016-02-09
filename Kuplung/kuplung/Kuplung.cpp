@@ -376,9 +376,9 @@ void Kuplung::renderScene() {
             mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][13]->fValue), glm::vec3(0, 1, 0));
             mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][14]->fValue), glm::vec3(0, 0, 1));
             mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][15]->fValue, this->gui->gui_item_settings[3][16]->fValue, this->gui->gui_item_settings[3][17]->fValue));
+            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(light->positionX->coordinate, light->positionY->coordinate, light->positionZ->coordinate));
 
-            glm::vec3 vLightDirection = glm::vec3(light->positionX->coordinate, light->positionY->coordinate, light->positionZ->coordinate);
+            glm::vec3 vLightDirection = glm::vec3(light->directionX->coordinate, light->directionY->coordinate, light->directionZ->coordinate);
 
             // lamp
             this->meshLight->render(this->matrixProjection, this->matrixCamera, mtxModelLight);
