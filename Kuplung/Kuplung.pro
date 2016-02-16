@@ -105,7 +105,6 @@ SOURCES += main.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
     kuplung/settings/FontsList.cpp \
-    kuplung/ui/GUI.cpp \
     kuplung/ui/UI.cpp \
     kuplung/ui/UIHelpers.cpp \
     kuplung/ui/implementation/SDL2OpenGL32.cpp \
@@ -149,7 +148,6 @@ HEADERS += \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \
     kuplung/ui/Objects.h \
-    kuplung/ui/GUI.hpp \
     kuplung/ui/UI.hpp \
     kuplung/ui/UIHelpers.hpp \
     kuplung/ui/implementation/SDL2OpenGL32.hpp \
