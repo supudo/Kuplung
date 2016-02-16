@@ -11,9 +11,9 @@
 
 #include <functional>
 #include <glm/gtc/matrix_transform.hpp>
-#include "utilities/gl/GLIncludes.h"
-#include "utilities/gl/GLUtils.hpp"
-#include "utilities/libnoise/HeightmapGenerator.hpp"
+#include "kuplung/utilities/gl/GLIncludes.h"
+#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/terrain/HeightmapGenerator.hpp"
 
 class Terrain {
 public:

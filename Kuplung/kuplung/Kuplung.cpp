@@ -24,7 +24,7 @@ void Kuplung::destroy() {
         mmf->destroy();
     }
 
-    this->gui->destroy();
+    this->managerUI->destroy();
     this->parser->destroy();
 
     SDL_GL_DeleteContext(this->glContext);
@@ -57,9 +57,9 @@ int Kuplung::run(int screenWidth, int screenHeight) {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // rendering
-        this->gui->renderStart(true);
+        this->managerUI->renderStart(true);
         this->renderScene();
-        this->gui->renderEnd();
+        this->managerUI->renderEnd();
 
         SDL_GL_SwapWindow(this->gWindow);
 
@@ -116,22 +116,30 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
                     success = false;
                 }
                 else {
-                    this->gui = new GUI();
-                    this->gui->init(gWindow,
-                                    std::bind(&Kuplung::guiQuit, this),
-                                    std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1),
-                                    std::bind(&Kuplung::guiClearScreen, this));
-                    this->doLog("Window initialized.");
+                    this->parser = new FileModelManager();
+                    this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
+
+                    this->managerObjects = new ObjectsManager(this->parser);
+                    this->managerObjects->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
+                    this->managerObjects->resetPropertiesSystem();
+
+                    this->managerUI = new UI();
+                    this->managerUI->init(gWindow,
+                                          this->managerObjects,
+                                          std::bind(&Kuplung::guiQuit, this),
+                                          std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiClearScreen, this),
+                                          std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1));
+                    this->doLog("UI initialized.");
+
+                    this->managerObjects->loadSystemModels();
 
                     this->initFolders();
                     this->doLog("App initialized.");
 
                     this->managerControls = new Controls();
                     this->managerControls->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), this->gWindow);
-
-                    this->parser = new objParser();
-                    this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
-                    this->doLog("OBJ Parser Initialized.");
+                    this->doLog("Input Control Manager initialized.");
 
                     this->fontParser = new FNTParser();
                     this->fontParser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1));
@@ -170,7 +178,7 @@ void Kuplung::initFolders() {
 #pragma mark - Event processing
 
 void Kuplung::onEvent(SDL_Event *ev) {
-    this->gui->processEvent(ev);
+    this->managerUI->processEvent(ev);
     this->managerControls->processEvents(ev);
 
     this->gameIsRunning = this->managerControls->gameIsRunning;
@@ -188,7 +196,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    if (!this->gui->isMouseOnGUI() && !this->gui->isLoadingOpen) {
+    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isLoadingOpen) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
@@ -198,27 +206,27 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // FOV & zoom
         if (this->managerControls->keyPressed_LALT) {
             if (this->managerControls->mouseWheel.y < 0)
-                this->gui->so_GUI_FOV += 4;
+                this->managerObjects->Setting_FOV += 4;
             if (this->managerControls->mouseWheel.y > 0)
-                this->gui->so_GUI_FOV -= 4;
-            if (this->gui->so_GUI_FOV > 180)
-                this->gui->so_GUI_FOV = 180;
-            if (this->gui->so_GUI_FOV < -180)
-                this->gui->so_GUI_FOV = -180;
+                this->managerObjects->Setting_FOV -= 4;
+            if (this->managerObjects->Setting_FOV > 180)
+                this->managerObjects->Setting_FOV = 180;
+            if (this->managerObjects->Setting_FOV < -180)
+                this->managerObjects->Setting_FOV = -180;
         }
         else
-            this->gui->gui_item_settings[1][17]->fValue += this->managerControls->mouseWheel.y;
+            this->managerObjects->camera->positionZ->point += this->managerControls->mouseWheel.y;
 
         // pan world
         if (this->managerControls->mouseButton_MIDDLE) {
             if (this->managerControls->mouseGoUp)
-                this->gui->gui_item_settings[1][12]->fValue += this->managerControls->yrel;
+                this->managerObjects->camera->rotateX->point += this->managerControls->yrel;
             else if (this->managerControls->mouseGoDown)
-                this->gui->gui_item_settings[1][12]->fValue += this->managerControls->yrel;
+                this->managerObjects->camera->rotateX->point += this->managerControls->yrel;
             else if (this->managerControls->mouseGoLeft)
-                this->gui->gui_item_settings[1][13]->fValue += this->managerControls->xrel;
+                this->managerObjects->camera->rotateY->point += this->managerControls->xrel;
             else if (this->managerControls->mouseGoRight)
-                this->gui->gui_item_settings[1][13]->fValue += this->managerControls->xrel;
+                this->managerObjects->camera->rotateY->point += this->managerControls->xrel;
         }
 
         // picking
@@ -230,8 +238,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
             glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
             glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
 
-            glm::vec3 nearPoint = glm::unProject(win_near, this->matrixCamera, this->matrixProjection, viewport);
-            glm::vec3 farPoint = glm::unProject(win_far, this->matrixCamera, this->matrixProjection, viewport);
+            glm::vec3 nearPoint = glm::unProject(win_near, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+            glm::vec3 farPoint = glm::unProject(win_far, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
             glm::vec3 direction = glm::normalize(farPoint - nearPoint);
 
             // http://schabby.de/picking-opengl-ray-tracing/
@@ -281,210 +289,48 @@ void Kuplung::onEvent(SDL_Event *ev) {
 #pragma mark - Rendering
 
 void Kuplung::renderScene() {
-    // projection
-    this->matrixProjection = glm::perspective(glm::radians(this->gui->so_GUI_FOV), this->gui->so_GUI_ratio_w / this->gui->so_GUI_ratio_h, this->gui->so_GUI_plane_close, this->gui->so_GUI_plane_far);
+    this->managerObjects->render();
 
-//    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(0, 0, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[1][12]->fValue), glm::vec3(1, 0, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[1][13]->fValue), glm::vec3(0, 1, 0));
-//    this->matrixProjection = glm::rotate(this->matrixProjection, glm::radians(this->gui->gui_item_settings[1][14]->fValue), glm::vec3(0, 0, 1));
-//    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(0, 0, 0));
-//
-//    this->matrixProjection = glm::translate(this->matrixProjection, glm::vec3(this->gui->gui_item_settings[1][15]->fValue, this->gui->gui_item_settings[1][16]->fValue, this->gui->gui_item_settings[1][17]->fValue));
-
-    // camera
-    glm::vec3 mtxCamera_eye = glm::vec3(this->gui->gui_item_settings[1][0]->fValue, this->gui->gui_item_settings[1][1]->fValue, this->gui->gui_item_settings[1][2]->fValue);
-    glm::vec3 mtxCamera_center = glm::vec3(this->gui->gui_item_settings[1][3]->fValue, this->gui->gui_item_settings[1][4]->fValue, this->gui->gui_item_settings[1][5]->fValue);
-    glm::vec3 mtxCamera_up = glm::vec3(this->gui->gui_item_settings[1][6]->fValue, this->gui->gui_item_settings[1][7]->fValue, this->gui->gui_item_settings[1][8]->fValue);
-
-    if (this->gui->isProjection)
-        this->matrixCamera = glm::lookAt(mtxCamera_eye, mtxCamera_center, mtxCamera_up);
-    else
-        this->matrixCamera = glm::ortho(0.0f, (float)Settings::Instance()->SDL_Window_Width, 0.0f, (float)Settings::Instance()->SDL_Window_Height, this->gui->so_GUI_plane_close, this->gui->so_GUI_plane_far);
-
-    glm::mat4 mtxModelGrid = glm::mat4(1.0);
-    mtxModelGrid = glm::scale(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[2][9]->fValue, this->gui->gui_item_settings[2][10]->fValue, this->gui->gui_item_settings[2][11]->fValue));
-    mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(0, 0, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[2][12]->fValue), glm::vec3(1, 0, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[2][13]->fValue), glm::vec3(0, 1, 0));
-    mtxModelGrid = glm::rotate(mtxModelGrid, glm::radians(this->gui->gui_item_settings[2][14]->fValue), glm::vec3(0, 0, 1));
-    mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(0, 0, 0));
-    mtxModelGrid = glm::translate(mtxModelGrid, glm::vec3(this->gui->gui_item_settings[2][15]->fValue, this->gui->gui_item_settings[2][16]->fValue, this->gui->gui_item_settings[2][17]->fValue));
-
-    this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(this->gui->gui_item_settings[1][15]->fValue, this->gui->gui_item_settings[1][16]->fValue, this->gui->gui_item_settings[1][17]->fValue));
-    this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[1][12]->fValue), glm::vec3(1, 0, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[1][13]->fValue), glm::vec3(0, 1, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->gui->gui_item_settings[1][14]->fValue), glm::vec3(0, 0, 1));
-    this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
-
-//    glm::mat4 mtxModelLight = glm::mat4(1.0);
-//    if (this->gui->fixedGridWorld)
-//        mtxModelLight = mtxModelGrid;
-//    mtxModelLight = glm::scale(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][9]->fValue, this->gui->gui_item_settings[3][10]->fValue, this->gui->gui_item_settings[3][11]->fValue));
-//    mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-//    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][12]->fValue), glm::vec3(1, 0, 0));
-//    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][13]->fValue), glm::vec3(0, 1, 0));
-//    mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][14]->fValue), glm::vec3(0, 0, 1));
-//    mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-//    mtxModelLight = glm::translate(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][15]->fValue, this->gui->gui_item_settings[3][16]->fValue, this->gui->gui_item_settings[3][17]->fValue));
-
-    glm::mat4 mtxModelTerrain = glm::mat4(1.0);
-    if (this->gui->fixedGridWorld)
-        mtxModelTerrain = mtxModelGrid;
-    mtxModelTerrain = glm::scale(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[4][9]->fValue, this->gui->gui_item_settings[4][10]->fValue, this->gui->gui_item_settings[4][11]->fValue));
-    mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[4][12]->fValue), glm::vec3(1, 0, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[4][13]->fValue), glm::vec3(0, 1, 0));
-    mtxModelTerrain = glm::rotate(mtxModelTerrain, glm::radians(this->gui->gui_item_settings[4][14]->fValue), glm::vec3(0, 0, 1));
-    mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(0, 0, 0));
-    mtxModelTerrain = glm::translate(mtxModelTerrain, glm::vec3(this->gui->gui_item_settings[4][15]->fValue, this->gui->gui_item_settings[4][16]->fValue, this->gui->gui_item_settings[4][17]->fValue));
-
-    // axes
-    if (Settings::Instance()->showAxes) {
-        float axisW = 120;
-        float axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
-
-        float axisX = 10;
-        float axisY = 10;
-
-        glViewport(axisX, axisY, axisW, axisH);
-
-        glm::mat4 mtxModel = glm::mat4(1.0);
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[2][12]->fValue), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[2][13]->fValue), glm::vec3(0, 1, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->gui_item_settings[2][14]->fValue), glm::vec3(0, 0, 1));
-        this->sceneCoordinateSystem->render(this->matrixProjection, this->matrixCamera, mtxModel);
-
-        glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-    }
-
-    // terrain
-    if (this->gui->showHeightmap)
-        this->terrain->render(this->matrixProjection, this->matrixCamera, mtxModelTerrain);
-
-    // light object
-    if (Settings::Instance()->showLight) {
-        for (int i=0; i<(int)this->gui->sceneLights.size(); i++) {
-            SceneLight *light = this->gui->sceneLights[i];
-            glm::mat4 mtxModelLight = glm::mat4(1.0);
-            if (this->gui->fixedGridWorld)
-                mtxModelLight = mtxModelGrid;
-            mtxModelLight = glm::scale(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][9]->fValue, this->gui->gui_item_settings[3][10]->fValue, this->gui->gui_item_settings[3][11]->fValue));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][12]->fValue), glm::vec3(1, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][13]->fValue), glm::vec3(0, 1, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][14]->fValue), glm::vec3(0, 0, 1));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(light->positionX->coordinate, light->positionY->coordinate, light->positionZ->coordinate));
-
-            glm::vec3 vLightDirection = glm::vec3(light->directionX->coordinate, light->directionY->coordinate, light->directionZ->coordinate);
-
-            // lamp
-            this->meshLight->render(this->matrixProjection, this->matrixCamera, mtxModelLight);
-
-            // direction line
-            glm::mat4 mtxModelDot = mtxModelLight;
-            mtxModelDot = glm::rotate(mtxModelDot, glm::radians(90.0f), glm::vec3(1, 0, 0));
-            this->lightDot->initBuffers(glm::vec3(0, 0, 0), vLightDirection, true);
-            this->lightDot->render(this->matrixProjection, this->matrixCamera, mtxModelDot);
-        }
-    }
-
-    glm::vec3 vCameraPosition = glm::vec3(this->matrixCamera[3].x,this->matrixCamera[3].y, this->matrixCamera[3].z);
-
-    // scene models
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace* mmf = this->meshModelFaces[i];
 
         glm::mat4 mtxModel = glm::mat4(1.0);
 
         // reposition like the grid perspective
-        mtxModel *= mtxModelGrid;
+        if (this->managerObjects->Setting_FixedGridWorld)
+            mtxModel *= this->managerObjects->grid->matrixModel;
 
         // scale
-        mtxModel = glm::scale(mtxModel, glm::vec3(this->gui->scene_item_settings[i][0]->fValue, this->gui->scene_item_settings[i][1]->fValue, this->gui->scene_item_settings[i][2]->fValue));
+        mtxModel = glm::scale(mtxModel, glm::vec3(mmf->scaleX->point, mmf->scaleY->point, mmf->scaleZ->point));
 
         // rotate
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][3]->fValue), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][4]->fValue), glm::vec3(0, 1, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(this->gui->scene_item_settings[i][5]->fValue), glm::vec3(0, 0, 1));
+        mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(0, 1, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
         // translate
-        mtxModel = glm::translate(mtxModel, glm::vec3(this->gui->scene_item_settings[i][6]->fValue, this->gui->scene_item_settings[i][7]->fValue, this->gui->scene_item_settings[i][8]->fValue));
+        mtxModel = glm::translate(mtxModel, glm::vec3(mmf->positionX->point, mmf->positionY->point, mmf->positionZ->point));
 
         // general
-        mmf->setOptionsFOV(this->gui->so_GUI_FOV);
-        mmf->setOptionsAlpha(this->gui->scene_item_settings[i][20]->fValue);
-        mmf->setOptionsDisplacement(glm::vec3(this->gui->scene_item_settings[i][9]->fValue, this->gui->scene_item_settings[i][10]->fValue, this->gui->scene_item_settings[i][11]->fValue));
-        mmf->setOptionsCelShading(this->gui->scene_item_settings[i][19]->bValue);
+        mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
 
         // outlining
-        mmf->setOptionsSelected(false);
-        if (this->selectedMaterialID == mmf->oFace.materialID)
-            mmf->setOptionsSelected(true);
-        mmf->setOptionsOutlineColor(this->gui->so_GUI_outlineColor);
-        mmf->setOptionsOutlineThickness(this->gui->so_outlineThickness);
+        mmf->setOptionsSelected(this->selectedMaterialID == mmf->oFace.materialID);
+        mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
+        mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
 
-        for (int i=0; i<(int)this->gui->sceneLights.size(); i++) {
-            SceneLight *light = this->gui->sceneLights[i];
-            glm::mat4 mtxModelLight = glm::mat4(1.0);
-            if (this->gui->fixedGridWorld)
-                mtxModelLight = mtxModelGrid;
-            mtxModelLight = glm::scale(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][9]->fValue, this->gui->gui_item_settings[3][10]->fValue, this->gui->gui_item_settings[3][11]->fValue));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][12]->fValue), glm::vec3(1, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][13]->fValue), glm::vec3(0, 1, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(this->gui->gui_item_settings[3][14]->fValue), glm::vec3(0, 0, 1));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(this->gui->gui_item_settings[3][15]->fValue, this->gui->gui_item_settings[3][16]->fValue, this->gui->gui_item_settings[3][17]->fValue));
-
-            float px = mtxModelLight[3].x;//this->gui->gui_item_settings[3][15]->fValue;
-            float py = mtxModelLight[3].y;//this->gui->gui_item_settings[3][16]->fValue;
-            float pz = mtxModelLight[3].z;//this->gui->gui_item_settings[3][17]->fValue;
-
-            glm::vec3 vLightDirection = glm::vec3(light->positionX->coordinate, light->positionY->coordinate, light->positionZ->coordinate);
-            glm::vec3 vLightPosition = glm::vec3(px, py, pz);
-
-            // light
-            mmf->setOptionsLightPosition(vLightPosition);
-            mmf->setOptionsLightDirection(vLightDirection);
-
-            // light colors
-            mmf->setOptionsLightAmbient(this->gui->sceneLights[i]->ambient->color);
-            mmf->setOptionsLightDiffuse(this->gui->sceneLights[i]->diffuse->color);
-            mmf->setOptionsLightSpecular(this->gui->sceneLights[i]->specular->color);
-            mmf->setOptionsLightStrengthAmbient(this->gui->sceneLights[i]->ambient->strength);
-            mmf->setOptionsLightStrengthDiffuse(this->gui->sceneLights[i]->diffuse->strength);
-            mmf->setOptionsLightStrengthSpecular(this->gui->sceneLights[i]->specular->strength);
-        }
-
-        // material
-        mmf->setOptionsMaterialRefraction(this->gui->scene_item_settings[i][12]->fValue);
-        mmf->setOptionsMaterialSpecularExp(this->gui->scene_item_settings[i][17]->fValue);
-        mmf->setOptionsMaterialAmbient(glm::vec3(this->gui->scene_item_settings[i][13]->vValue));
-        mmf->setOptionsMaterialDiffuse(glm::vec3(this->gui->scene_item_settings[i][14]->vValue));
-        mmf->setOptionsMaterialSpecular(glm::vec3(this->gui->scene_item_settings[i][15]->vValue));
-        mmf->setOptionsMaterialEmission(glm::vec3(this->gui->scene_item_settings[i][16]->vValue));
-        mmf->setOptionsMaterialIlluminationModel(this->gui->scene_item_settings[i][18]->iValue);
+        // lights
+        mmf->lightSources = this->managerObjects->lightSources;
 
         // render
-        mmf->render(this->matrixProjection, this->matrixCamera, mtxModel, vCameraPosition);
-    }
-
-    // grid
-    if (Settings::Instance()->showGrid) {
-        if ((this->gui->so_GUI_grid_size + 1) != this->sceneGridHorizontal->gridSize) {
-            this->sceneGridHorizontal->gridSize = this->gui->so_GUI_grid_size;
-            this->sceneGridVertical->gridSize = this->gui->so_GUI_grid_size;
-            this->sceneGridHorizontal->initBuffers(this->gui->so_GUI_grid_size + 1, true, 1);
-            this->sceneGridVertical->initBuffers(this->gui->so_GUI_grid_size + 1, false, 1);
-        }
-
-        this->sceneGridHorizontal->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
-        this->sceneGridVertical->render(this->matrixProjection, this->matrixCamera, mtxModelGrid);
+        mmf->render(this->managerObjects->matrixProjection,
+                    this->managerObjects->camera->matrixCamera,
+                    mtxModel,
+                    this->managerObjects->camera->cameraPosition,
+                    this->managerObjects->Setting_FixedGridWorld,
+                    this->managerObjects->grid->matrixModel);
     }
 
     this->processRunningThreads();
@@ -493,101 +339,11 @@ void Kuplung::renderScene() {
 #pragma mark - Scene GUI
 
 void Kuplung::initSceneGUI() {
-    std::vector<std::vector<float>> initialSettings = {};
-
-    // initial variables
-    this->gui->so_GUI_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-    this->gui->addSceneLight("Point Light", LightType_Point);
-
-    // camera
-    initialSettings.push_back(std::vector<float> {
-        0, 0, 3, // eye
-        0, 0, 0, // center
-        0, 1, 0,  // up
-        1, 1, 1,  // scale
-        -71, -36, 0, // rotate
-        0, 0, -10  // translate
-    });
-
-    // grid
-    this->sceneGridHorizontal = new WorldGrid();
-    this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
-    this->sceneGridHorizontal->initShaderProgram();
-    this->sceneGridHorizontal->initBuffers(20, true, 1);
-
-    this->sceneGridVertical = new WorldGrid();
-    this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
-    this->sceneGridVertical->initShaderProgram();
-    this->sceneGridVertical->initBuffers(20, false, 1);
-    initialSettings.push_back(std::vector<float> {
-        1, 1, 1, // eye
-        0, 0, 0, // center
-        0, 1, 0,  // up
-        1, 1, 1,  // scale
-        0, 0, 0,  // rotate
-        0, 0, 0  // translate
-    });
-
-    // light
-    FBEntity file;
-    file.isFile = true;
-    file.extension = ".obj";
-    file.title = "light";
-    file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-    objScene sceneGUI = this->parser->parse(file);
-    this->meshLight = new Light();
-    this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
-    this->meshLight->setModel(sceneGUI.models[0].faces[0]);
-    this->meshLight->initShaderProgram();
-    this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
-    initialSettings.push_back(std::vector<float> {
-        1, 1, 1, // eye
-        0, 0, 0, // center
-        0, 1, 0,  // up
-        1, 1, 1,  // scale
-        0, 0, 0,  // rotate
-        0, 0, 5,  // translate
-        0.4, 1, 0.0  // ambient, diffuse and specular strength
-    });
-
-    // axis
-    this->sceneCoordinateSystem = new CoordinateSystem();
-    this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
-    this->sceneCoordinateSystem->initShaderProgram();
-    this->sceneCoordinateSystem->initBuffers();
-
-    // terrain
-    this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "terrain", Settings::Instance()->OpenGL_GLSL_Version);
-    this->terrain->initShaderProgram();
-    this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
-    initialSettings.push_back(std::vector<float> {
-        1, 1, 1, // eye
-        0, 0, 0, // center
-        0, 1, 0,  // up
-        1, 1, 1,  // scale
-        0, 0, 0,  // rotate
-        0, 0, 5  // translate
-    });
-
-    this->gui->initGUIControls(4, initialSettings);
-    this->gui->showGUIControls();
-    this->gui->setHeightmapImage(this->terrain->heightmapImage);
-
-    // dot
-    this->lightDot = new Dot();
-    this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
-    this->lightDot->initShaderProgram();
-
-    // GUI Editor - shader compilation
-    this->gui->setShaderEditor(std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1));
-
-    // font
-//    FBEntity fontFile;
-//    fontFile.isFile = true;
-//    fontFile.extension = ".fnt";
-//    fontFile.title = "ui_font";
-//    fontFile.path = Settings::Instance()->appFolder() + "/ui_font.fnt";
-//    FontMap fm = this->fontParser->parse(fontFile);
+    this->managerObjects->initCamera();
+    this->managerObjects->initGrid();
+    this->managerObjects->initAxisSystem();
+    this->managerObjects->addLight(LightSourceType_Point);
+    this->managerUI->showControlsGUI = true;
 
     // testbed
     std::string testObj = "cube0.obj";
@@ -603,7 +359,7 @@ void Kuplung::initSceneGUI() {
 
 void Kuplung::processRunningThreads() {
     if (this->objParserThreadFinished && !this->objParserThreadProcessed) {
-        this->gui->hideLoading();
+        this->managerUI->hideLoading();
         this->processParsedObjFile();
         this->objParserThreadProcessed = true;
     }
@@ -611,11 +367,7 @@ void Kuplung::processRunningThreads() {
 
 void Kuplung::guiProcessObjFile(FBEntity file) {
     if (this->hasEnding(file.title, ".obj")) {
-        this->gui->showLoading();
-
-//        if (this->scene.totalCountGeometricVertices > 0)
-//            this->guiClearScreen();
-
+        this->managerUI->showLoading();
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
         std::thread objParserThread(&Kuplung::processObjFileAsync, this, file);
@@ -627,7 +379,6 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
 }
 
 void Kuplung::processObjFileAsync(FBEntity file) {
-    //std::this_thread::sleep_for(std::chrono::seconds(5));
     this->scenes.push_back(this->parser->parse(file));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
@@ -635,7 +386,7 @@ void Kuplung::processObjFileAsync(FBEntity file) {
 
 void Kuplung::processParsedObjFile() {
     this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
-    this->gui->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
+    this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
     objScene scene = this->scenes[this->scenes.size() - 1];
     for (int i=0; i<(int)scene.models.size(); i++) {
@@ -645,38 +396,26 @@ void Kuplung::processParsedObjFile() {
             mmf->ModelID = i;
             mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
             mmf->setModel(model.faces[j]);
+            mmf->initModelProperties();
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
-            this->gui->addSceneModelSettings();
         }
     }
 
-    this->gui->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->meshModelFaces = &this->meshModelFaces;
 
-    // render scene stats
     if (this->meshModelFaces.size() > 0) {
-        this->gui->scene_item_selected = 0;
-        for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-            ModelFace *mmf = this->meshModelFaces[i];
-            this->gui->setModelSetting((int)i, 12, 1, mmf->oFace.faceMaterial.opticalDensity);
-            this->gui->setModelSetting((int)i, 17, 1, mmf->oFace.faceMaterial.specularExp);
-            this->gui->setModelSetting((int)i, 18, 1, mmf->oFace.faceMaterial.illumination);
-            this->gui->setModelSetting((int)i, 13, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.ambient.r, mmf->oFace.faceMaterial.ambient.g, mmf->oFace.faceMaterial.ambient.b, mmf->oFace.faceMaterial.ambient.a));
-            this->gui->setModelSetting((int)i, 14, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.diffuse.r, mmf->oFace.faceMaterial.diffuse.g, mmf->oFace.faceMaterial.diffuse.b, mmf->oFace.faceMaterial.diffuse.a));
-            this->gui->setModelSetting((int)i, 15, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.specular.r, mmf->oFace.faceMaterial.specular.g, mmf->oFace.faceMaterial.specular.b, mmf->oFace.faceMaterial.specular.a));
-            this->gui->setModelSetting((int)i, 16, 1, 1, false, glm::vec4(mmf->oFace.faceMaterial.emission.r, mmf->oFace.faceMaterial.emission.g, mmf->oFace.faceMaterial.emission.b, mmf->oFace.faceMaterial.emission.a));
-        }
-        this->gui->displaySceneControls = true;
-        //this->gui->showSceneStats();
+        this->managerUI->showControlsModels = true;
+        //this->managerUI->showSceneStats = true;
     }
 
-    this->gui->hideLoading();
+    this->managerUI->hideLoading();
 }
 
 void Kuplung::doProgress(float value) {
     this->objLoadingProgress = value;
-    this->gui->loadingPercentage = value;
+    this->managerUI->loadingPercentage = value;
 }
 
 void Kuplung::guiQuit() {
@@ -694,8 +433,8 @@ bool Kuplung::hasEnding(std::string const &fullString, std::string const &ending
 }
 
 void Kuplung::doLog(std::string logMessage) {
-    if (this->gui)
-        this->gui->doLog(logMessage);
+    if (this->managerUI)
+        this->managerUI->doLog(logMessage);
 }
 
 void Kuplung::guiClearScreen() {
@@ -703,10 +442,10 @@ void Kuplung::guiClearScreen() {
     this->meshModelFaces = {};
     this->scenes.clear();
     this->objFiles.clear();
-    this->gui->scene_item_settings.clear();
-    this->gui->scene_item_settings_default.clear();
-    this->gui->hideSceneSettings();
-    this->gui->hideSceneStats();
+//    this->managerUI->scene_item_settings.clear();
+//    this->managerUI->scene_item_settings_default.clear();
+//    this->managerUI->hideSceneSettings();
+//    this->managerUI->hideSceneStats();
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         mmf->destroy();
@@ -717,39 +456,39 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
     if (fileName.compare(0, 9, "kuplung") == 0) {
     }
     else if (fileName.compare(0, 5, "light") == 0) {
-        FBEntity file;
-        file.isFile = true;
-        file.extension = ".obj";
-        file.title = "light";
-        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-        objScene sceneGUILight = this->parser->parse(file);
-        this->meshLight->destroy();
-        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
-        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
-        this->meshLight->initShaderProgram();
-        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
+//        FBEntity file;
+//        file.isFile = true;
+//        file.extension = ".obj";
+//        file.title = "light";
+//        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
+//        objScene sceneGUILight = this->parser->parse(file);
+//        this->meshLight->destroy();
+//        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
+//        this->meshLight->initShaderProgram();
+//        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
-        this->sceneGridHorizontal->destroy();
-        this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
-        this->sceneGridHorizontal->initShaderProgram();
-        this->sceneGridHorizontal->initBuffers(20, true, 1);
+//        this->sceneGridHorizontal->destroy();
+//        this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneGridHorizontal->initShaderProgram();
+//        this->sceneGridHorizontal->initBuffers(20, true, 1);
 
-        this->sceneGridVertical->destroy();
-        this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
-        this->sceneGridVertical->initShaderProgram();
-        this->sceneGridVertical->initBuffers(20, false, 1);
+//        this->sceneGridVertical->destroy();
+//        this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneGridVertical->initShaderProgram();
+//        this->sceneGridVertical->initBuffers(20, false, 1);
     }
     else if (fileName.compare(0, 4, "axis") == 0) {
-        this->sceneCoordinateSystem->destroy();
-        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
-        this->sceneCoordinateSystem->initShaderProgram();
-        this->sceneCoordinateSystem->initBuffers();
+//        this->sceneCoordinateSystem->destroy();
+//        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneCoordinateSystem->initShaderProgram();
+//        this->sceneCoordinateSystem->initBuffers();
     }
     else if (fileName.compare(0, 4, "dots") == 0) {
-        this->lightDot->destroy();
-        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
-        this->lightDot->initShaderProgram();
+//        this->lightDot->destroy();
+//        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->lightDot->initShaderProgram();
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
         this->terrain->destroy();
@@ -761,5 +500,5 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 
 void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
-    this->gui->removeSceneModelSettings(selectedModel);
+//    this->managerUI->removeSceneModelSettings(selectedModel);
 }

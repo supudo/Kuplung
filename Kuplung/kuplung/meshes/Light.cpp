@@ -11,7 +11,7 @@
 #include <fstream>
 
 #define STBI_FAILURE_USERMSG
-#include "utilities/stb/stb_image.h"
+#include "kuplung/utilities/stb/stb_image.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>

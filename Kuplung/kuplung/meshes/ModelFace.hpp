@@ -11,10 +11,12 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <functional>
-#include "utilities/gl/GLIncludes.h"
-#include "utilities/gl/GLUtils.hpp"
-#include "utilities/gui/Objects.h"
-#include "utilities/parsers/obj-parser/objObjects.h"
+#include "kuplung/utilities/gl/GLIncludes.h"
+#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/ui/Objects.h"
+#include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/objects/ObjectDefinitions.h"
+#include "kuplung/objects/subs/LightSource.hpp"
 
 class ModelFace {
 public:
@@ -27,33 +29,12 @@ public:
     void setModel(objModelFace oFace);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+    void initProperties();
+    void initModelProperties();
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, bool fixedWithGrid, glm::mat4 matrixGrid);
 
     // general options
     void setOptionsFOV(float fov);
-    void setOptionsAlpha(float alpha);
-    void setOptionsDisplacement(glm::vec3 displacement);
-    void setOptionsCelShading(bool val);
-
-    // light
-    void setOptionsLightPosition(glm::vec3 lightPosition);
-    void setOptionsLightDirection(glm::vec3 lightDirection);
-    //void setOptionsLight(GUISceneLight* lightObject);
-    void setOptionsLightAmbient(glm::vec3 lightColor);
-    void setOptionsLightDiffuse(glm::vec3 lightColor);
-    void setOptionsLightSpecular(glm::vec3 lightColor);
-    void setOptionsLightStrengthAmbient(float val);
-    void setOptionsLightStrengthDiffuse(float val);
-    void setOptionsLightStrengthSpecular(float val);
-
-    // material
-    void setOptionsMaterialRefraction(float val);
-    void setOptionsMaterialSpecularExp(float val);
-    void setOptionsMaterialIlluminationModel(float val);
-    void setOptionsMaterialAmbient(glm::vec3 lightColor);
-    void setOptionsMaterialDiffuse(glm::vec3 lightColor);
-    void setOptionsMaterialSpecular(glm::vec3 lightColor);
-    void setOptionsMaterialEmission(glm::vec3 lightColor);
 
     // outlining
     void setOptionsSelected(bool selectedYn);
@@ -64,6 +45,26 @@ public:
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
+    std::vector<LightSource*> lightSources;
+
+    bool Setting_CelShading;
+    float Setting_Alpha;
+    ObjectEye *Settings_Eye;
+    ObjectCoordinate *positionX, *positionY, *positionZ;
+    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
+    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+    ObjectCoordinate *displaceX, *displaceY, *displaceZ;
+    ObjectCoordinate *Setting_MaterialRefraction;
+    ObjectCoordinate *Setting_MaterialSpecularExp;
+
+    // light
+    glm::vec3 Setting_LightPosition, Setting_LightDirection;
+    glm::vec3 Setting_LightAmbient, Setting_LightDiffuse, Setting_LightSpecular;
+    float Setting_LightStrengthAmbient, Setting_LightStrengthDiffuse, Setting_LightStrengthSpecular;
+
+    // material
+    int materialIlluminationModel;
+    MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
 private:
     std::function<void(std::string)> doLogFunc;
@@ -76,22 +77,11 @@ private:
     std::string shaderName;
 
     // general
-    float so_fov, so_alpha;
-    bool so_celShading;
-    glm::vec3 so_displacement;
+    float so_fov;
 
     // outline
     float so_outlineThickness;
     glm::vec4 so_outlineColor;
-
-    // light
-    glm::vec3 so_lightPosition, so_lightDirection;
-    glm::vec3 so_lightAmbient, so_lightDiffuse, so_lightSpecular;
-    float so_lightStrengthAmbient, so_lightStrengthDiffuse, so_lightStrengthSpecular;
-
-    // material
-    float so_materialRefraction, so_materialSpecularExp, so_materialIlluminationModel;
-    glm::vec3 so_materialAmbient, so_materialDiffuse, so_materialSpecular, so_materialEmission;
 
     bool so_selectedYn;
 

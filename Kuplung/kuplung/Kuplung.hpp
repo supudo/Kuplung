@@ -10,21 +10,15 @@
 #define Kuplung_hpp
 
 #include <thread>
-
-#include "utilities/gl/GLIncludes.h"
-
-#include "utilities/settings/Settings.h"
-#include "utilities/gui/GUI.hpp"
-#include "utilities/parsers/obj-parser/objParser.hpp"
-#include "utilities/input/Controls.hpp"
-#include "utilities/font-parser/FNTParser.hpp"
-
-#include "meshes/ModelFace.hpp"
-#include "meshes/Light.hpp"
-#include "meshes/WorldGrid.hpp"
-#include "meshes/CoordinateSystem.hpp"
-#include "meshes/Dot.hpp"
-#include "meshes/Terrain.hpp"
+#include "kuplung/utilities/gl/GLIncludes.h"
+#include "kuplung/settings/Settings.h"
+#include "kuplung/ui/UI.hpp"
+#include "kuplung/utilities/parsers/FileModelManager.hpp"
+#include "kuplung/utilities/input/Controls.hpp"
+#include "kuplung/utilities/font-parser/FNTParser.hpp"
+#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/Terrain.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 class Kuplung {
 public:
@@ -57,6 +51,8 @@ private:
     void guiModelDelete(int selectedModel);
     void guiModelRename(int selectedModel, std::string newName);
 
+    ObjectsManager *managerObjects;
+
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";
     const int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
@@ -68,25 +64,21 @@ private:
 
     // Variables
     bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed;
-    glm::mat4 matrixProjection, matrixCamera;
     int sceneSelectedModelObject;
     std::string selectedMaterialID;
     float objLoadingProgress;
 
+    //objParser *parser;
+    FileModelManager *parser;
+
     // Customs
     std::vector<FBEntity> objFiles;
     Controls *managerControls;
-    GUI *gui;
-    objParser *parser;
+    UI *managerUI;
     FNTParser *fontParser;
     std::vector<objScene> scenes;
     std::vector<ModelFace*> meshModelFaces;
 
-    Light* meshLight;
-    WorldGrid* sceneGridHorizontal;
-    WorldGrid* sceneGridVertical;
-    CoordinateSystem* sceneCoordinateSystem;
-    Dot* lightDot;
     Terrain *terrain;
 };
 

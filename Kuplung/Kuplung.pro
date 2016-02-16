@@ -92,76 +92,97 @@ OTHER_FILES += resources/shaders/*
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
     kuplung/meshes/CoordinateSystem.cpp \
-    kuplung/meshes/Dot.cpp \
     kuplung/meshes/WorldGrid.cpp \
     kuplung/meshes/Light.cpp \
+    kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
     kuplung/meshes/Terrain.cpp \
-    utilities/font-parser/FNTParser.cpp \
-    utilities/gl/GLUtils.cpp \
-    utilities/gui/ImGui/imgui.cpp \
-    utilities/gui/ImGui/imgui_demo.cpp \
-    utilities/gui/ImGui/imgui_draw.cpp \
-    utilities/gui/GUI.cpp \
-    utilities/gui/implementation/SDL2OpenGL32.cpp \
-    utilities/gui/components/Editor.cpp \
-    utilities/gui/components/FileBrowser.cpp \
-    utilities/gui/components/Log.cpp \
-    utilities/gui/components/Screenshot.cpp \
-    utilities/gui/components/ColorPicker.cpp \
-    utilities/gui/components/Tabs.cpp \
-    utilities/gui/dialogs/DialogStyle.cpp \
-    utilities/gui/dialogs/DialogOptions.cpp \
-    utilities/input/Controls.cpp \
-    utilities/libnoise/HeightmapGenerator.cpp \
-    utilities/libnoise/noiseutils.cpp \
-    utilities/parsers/obj-parser/objParser.cpp \
-    utilities/parsers/stl-parser/STLParser.cpp \
-    utilities/settings/ConfigUtils.cpp \
-    utilities/settings/Settings.cpp \
-    utilities/settings/FontsList.cpp
+    kuplung/objects/ObjectsManager.cpp \
+    kuplung/objects/subs/Camera.cpp \
+    kuplung/objects/subs/Grid.cpp \
+    kuplung/objects/subs/Axis.cpp \
+    kuplung/objects/subs/LightSource.cpp \
+    kuplung/settings/ConfigUtils.cpp \
+    kuplung/settings/Settings.cpp \
+    kuplung/settings/FontsList.cpp \
+    kuplung/ui/GUI.cpp \
+    kuplung/ui/UI.cpp \
+    kuplung/ui/UIHelpers.cpp \
+    kuplung/ui/implementation/SDL2OpenGL32.cpp \
+    kuplung/ui/components/Editor.cpp \
+    kuplung/ui/components/FileBrowser.cpp \
+    kuplung/ui/components/Log.cpp \
+    kuplung/ui/components/Screenshot.cpp \
+    kuplung/ui/components/ColorPicker.cpp \
+    kuplung/ui/components/Tabs.cpp \
+    kuplung/ui/dialogs/DialogStyle.cpp \
+    kuplung/ui/dialogs/DialogOptions.cpp \
+    kuplung/ui/dialogs/DialogControlsGUI.cpp \
+    kuplung/ui/dialogs/DialogControlsModels.cpp \
+    kuplung/terrain/HeightmapGenerator.cpp \
+    kuplung/utilities/font-parser/FNTParser.cpp \
+    kuplung/utilities/gl/GLUtils.cpp \
+    kuplung/utilities/imgui/imgui.cpp \
+    kuplung/utilities/imgui/imgui_demo.cpp \
+    kuplung/utilities/imgui/imgui_draw.cpp \
+    kuplung/utilities/input/Controls.cpp \
+    kuplung/utilities/libnoise/noiseutils.cpp \
+    kuplung/utilities/parsers/FileModelManager.cpp \
+    kuplung/utilities/parsers/obj-parser/objParser.cpp \
+    kuplung/utilities/parsers/stl-parser/STLParser.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
     kuplung/meshes/CoordinateSystem.hpp \
-    kuplung/meshes/Dot.hpp \
     kuplung/meshes/WorldGrid.hpp \
     kuplung/meshes/Light.hpp \
+    kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
     kuplung/meshes/Terrain.hpp \
-    utilities/font-parser/FNTParser.hpp \
-    utilities/gl/GLUtils.hpp \
-    utilities/gui/ImGui/imconfig.h \
-    utilities/gui/ImGui/imgui.h \
-    utilities/gui/ImGui/imgui_internal.h \
-    utilities/gui/Objects.h \
-    utilities/gui/GUI.hpp \
-    utilities/gui/implementation/SDL2OpenGL32.hpp \
-    utilities/gui/components/Editor.hpp \
-    utilities/gui/components/FileBrowser.hpp \
-    utilities/gui/components/Log.hpp \
-    utilities/gui/components/Screenshot.hpp \
-    utilities/gui/components/ColorPicker.hpp \
-    utilities/gui/components/Tabs.hpp \
-    utilities/gui/dialogs/DialogStyle.hpp \
-    utilities/gui/dialogs/DialogOptions.hpp \
-    utilities/gui/components/IconsFontAwesome.h \
-    utilities/gui/components/IconsMaterialDesign.h \
-    utilities/input/Controls.hpp \
-    utilities/libnoise/HeightmapGenerator.hpp \
-    utilities/libnoise/noiseutils.h \
-    utilities/parsers/obj-parser/objObjects.h \
-    utilities/parsers/obj-parser/objParser.hpp \
-    utilities/parsers/stl-parser/STLParser.hpp \
-    utilities/settings/ConfigUtils.hpp \
-    utilities/settings/Settings.h \
-    utilities/settings/FontsList.hpp \
-    utilities/stb/stb_image.h \
-    utilities/stb/stb_image_write.h \
-    utilities/stb/stb_rect_pack.h \
-    utilities/stb/stb_textedit.h \
-    utilities/stb/stb_truetype.h \
-    utilities/gl/GLIncludes.h
+    kuplung/objects/ObjectDefinitions.h \
+    kuplung/objects/ObjectsManager.hpp \
+    kuplung/objects/subs/Camera.hpp \
+    kuplung/objects/subs/Grid.hpp \
+    kuplung/objects/subs/Axis.hpp \
+    kuplung/objects/subs/LightSource.hpp \
+    kuplung/settings/ConfigUtils.hpp \
+    kuplung/settings/Settings.h \
+    kuplung/settings/FontsList.hpp \
+    kuplung/ui/Objects.h \
+    kuplung/ui/GUI.hpp \
+    kuplung/ui/UI.hpp \
+    kuplung/ui/UIHelpers.hpp \
+    kuplung/ui/implementation/SDL2OpenGL32.hpp \
+    kuplung/ui/components/Editor.hpp \
+    kuplung/ui/components/FileBrowser.hpp \
+    kuplung/ui/components/Log.hpp \
+    kuplung/ui/components/Screenshot.hpp \
+    kuplung/ui/components/ColorPicker.hpp \
+    kuplung/ui/components/Tabs.hpp \
+    kuplung/ui/dialogs/DialogStyle.hpp \
+    kuplung/ui/dialogs/DialogOptions.hpp \
+    kuplung/ui/dialogs/DialogControlsGUI.hpp \
+    kuplung/ui/dialogs/DialogControlsModels.hpp \
+    kuplung/ui/iconfonts/IconsFontAwesome.h \
+    kuplung/ui/iconfonts/IconsMaterialDesign.h \
+    kuplung/terrain/HeightmapGenerator.hpp \
+    kuplung/utilities/font-parser/FNTParser.hpp \
+    kuplung/utilities/gl/GLUtils.hpp \
+    kuplung/utilities/imgui/imconfig.h \
+    kuplung/utilities/imgui/imgui.h \
+    kuplung/utilities/imgui/imgui_internal.h \
+    kuplung/utilities/input/Controls.hpp \
+    kuplung/utilities/libnoise/noiseutils.h \
+    kuplung/utilities/parsers/FileModelManager.hpp \
+    kuplung/utilities/parsers/ModelObject.h \
+    kuplung/utilities/parsers/obj-parser/objParser.hpp \
+    kuplung/utilities/parsers/stl-parser/STLParser.hpp \
+    kuplung/utilities/stb/stb_image.h \
+    kuplung/utilities/stb/stb_image_write.h \
+    kuplung/utilities/stb/stb_rect_pack.h \
+    kuplung/utilities/stb/stb_textedit.h \
+    kuplung/utilities/stb/stb_truetype.h \
+    kuplung/utilities/gl/GLIncludes.h
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

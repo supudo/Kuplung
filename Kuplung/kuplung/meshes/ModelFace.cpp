@@ -11,7 +11,7 @@
 
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
-#include "utilities/stb/stb_image.h"
+#include "kuplung/utilities/stb/stb_image.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -94,27 +94,119 @@ void ModelFace::init(std::function<void(std::string)> doLog, std::string shaderN
     this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
-    this->so_alpha = -1;
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
     // light
-    this->so_lightStrengthAmbient = 0.5;
-    this->so_lightStrengthDiffuse = 1.0;
-    this->so_lightStrengthSpecular = 0.5;
-    this->so_lightAmbient = glm::vec3(1.0, 1.0, 1.0);
-    this->so_lightDiffuse = glm::vec3(1.0, 1.0, 1.0);
-    this->so_lightSpecular = glm::vec3(1.0, 1.0, 1.0);
+    this->Setting_LightStrengthAmbient = 0.5;
+    this->Setting_LightStrengthDiffuse = 1.0;
+    this->Setting_LightStrengthSpecular = 0.5;
+    this->Setting_LightAmbient = glm::vec3(1.0, 1.0, 1.0);
+    this->Setting_LightDiffuse = glm::vec3(1.0, 1.0, 1.0);
+    this->Setting_LightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     // material
-    this->so_materialRefraction = this->oFace.faceMaterial.opticalDensity;
-    this->so_materialAmbient = glm::vec3(1.0, 1.0, 1.0);
-    this->so_materialDiffuse = glm::vec3(1.0, 1.0, 1.0);
-    this->so_materialSpecular = glm::vec3(1.0, 1.0, 1.0);
-    this->so_materialEmission = glm::vec3(0, 0, 0);
+    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->oFace.faceMaterial.opticalDensity });
+    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
 }
 
 void ModelFace::setModel(objModelFace oFace) {
     this->oFace = oFace;
+}
+
+void ModelFace::initModelProperties() {
+    this->Setting_CelShading = false;
+    this->Setting_Alpha = 1.0f;
+
+    this->Settings_Eye = new ObjectEye();
+    this->Settings_Eye->View_Eye = glm::vec3(1.0, 1.0, 1.0);
+    this->Settings_Eye->View_Center = glm::vec3(0.0, 0.0, 0.0);
+    this->Settings_Eye->View_Up = glm::vec3(0.0, 1.0, 0.0);
+
+    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->matrixModel = glm::mat4(1.0);
+
+    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->oFace.faceMaterial.opticalDensity });
+    this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->oFace.faceMaterial.specularExp });
+
+    this->Setting_LightPosition = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightDirection = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightAmbient = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightDiffuse = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightSpecular = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightStrengthAmbient = 1.0;
+    this->Setting_LightStrengthDiffuse = 1.0;
+    this->Setting_LightStrengthSpecular = 1.0;
+
+    this->materialIlluminationModel = 1;
+
+    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b) });
+    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b) });
+    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b) });
+    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.emission.r, this->oFace.faceMaterial.emission.g, this->oFace.faceMaterial.emission.b) });
+}
+
+void ModelFace::initProperties() {
+    this->Setting_CelShading = false;
+    this->Setting_Alpha = 1.0f;
+
+    this->Settings_Eye = new ObjectEye();
+    this->Settings_Eye->View_Eye = glm::vec3(1.0, 1.0, 1.0);
+    this->Settings_Eye->View_Center = glm::vec3(0.0, 0.0, 0.0);
+    this->Settings_Eye->View_Up = glm::vec3(0.0, 1.0, 0.0);
+
+    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->matrixModel = glm::mat4(1.0);
+
+    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 100.0 });
+
+    this->Setting_LightPosition = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightDirection = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightAmbient = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightDiffuse = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightSpecular = glm::vec3(0.0, 0.0, 0.0);
+    this->Setting_LightStrengthAmbient = 1.0;
+    this->Setting_LightStrengthDiffuse = 1.0;
+    this->Setting_LightStrengthSpecular = 1.0;
+
+    this->materialIlluminationModel = 1;
+    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
 }
 
 #pragma mark - Public
@@ -468,7 +560,7 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
 #pragma mark - Render
 
-void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
+void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, bool fixedWithGrid, glm::mat4 matrixGrid) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -487,14 +579,14 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         // blending
-        if (this->oFace.faceMaterial.transparency < 1.0 || this->so_alpha < 1.0) {
+        if (this->oFace.faceMaterial.transparency < 1.0 || this->Setting_Alpha < 1.0) {
             glDisable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
             if (this->oFace.faceMaterial.transparency < 1.0)
                 glUniform1f(this->glFS_AlphaBlending, this->oFace.faceMaterial.transparency);
             else
-                glUniform1f(this->glFS_AlphaBlending, this->so_alpha);
+                glUniform1f(this->glFS_AlphaBlending, this->Setting_Alpha);
         }
         else {
             glEnable(GL_DEPTH_TEST);
@@ -505,7 +597,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         }
 
         // cel-shading
-        glUniform1i(this->glFS_CelShading, this->so_celShading);
+        glUniform1i(this->glFS_CelShading, this->Setting_CelShading);
 
         // camera position
         glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
@@ -518,28 +610,47 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
 
         // geometry shader displacement
-        glUniform3f(this->glGS_GeomDisplacementLocation, this->so_displacement.x, this->so_displacement.y, this->so_displacement.z);
+        glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
 
-        // light
-        glUniform3f(this->glLight_Position, this->so_lightPosition.x, this->so_lightPosition.y, this->so_lightPosition.z);
-        glUniform3f(this->glLight_Direction, this->so_lightDirection.x, this->so_lightDirection.y, this->so_lightDirection.z);
-        // color
-        glUniform3f(this->glLight_Ambient, this->so_lightAmbient.r, this->so_lightAmbient.g, this->so_lightAmbient.b);
-        glUniform3f(this->glLight_Diffuse, this->so_lightDiffuse.r, this->so_lightDiffuse.g, this->so_lightDiffuse.b);
-        glUniform3f(this->glLight_Specular, this->so_lightSpecular.r, this->so_lightSpecular.g, this->so_lightSpecular.b);
-        // light factors
-        glUniform1f(this->glLight_StrengthAmbient, this->so_lightStrengthAmbient);
-        glUniform1f(this->glLight_StrengthDiffuse, this->so_lightStrengthDiffuse);
-        glUniform1f(this->glLight_StrengthSpecular, this->so_lightStrengthSpecular);
+        // lights
+        //for (size_t j=0; j<this->lightSources.size(); j++) {
+        for (size_t j=0; j<1; j++) {
+            LightSource *light = this->lightSources[j];
+            glm::mat4 mtxModelLight = glm::mat4(1.0);
+
+            if (fixedWithGrid)
+                mtxModelLight = matrixGrid;
+
+            mtxModelLight = glm::scale(mtxModelLight, glm::vec3(light->scaleX->point, light->scaleY->point, light->scaleZ->point));
+            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
+            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateX->point), glm::vec3(1, 0, 0));
+            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateY->point), glm::vec3(0, 1, 0));
+            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateZ->point), glm::vec3(0, 0, 1));
+            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
+            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(light->positionX->point, light->positionY->point, light->positionZ->point));
+
+            // light
+            glUniform3f(this->glLight_Position, light->positionX->point, light->positionY->point, light->positionZ->point);
+            //glUniform3f(this->glLight_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
+            glUniform3f(this->glLight_Direction, mtxModelLight[3].x, mtxModelLight[3].y, mtxModelLight[3].z);
+            // color
+            glUniform3f(this->glLight_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
+            glUniform3f(this->glLight_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
+            glUniform3f(this->glLight_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+            // light factors
+            glUniform1f(this->glLight_StrengthAmbient, light->ambient->strength);
+            glUniform1f(this->glLight_StrengthDiffuse, light->diffuse->strength);
+            glUniform1f(this->glLight_StrengthSpecular, light->specular->strength);
+        }
 
         // material
-        glUniform1f(this->glMaterial_Refraction, this->so_materialRefraction);
-        glUniform1f(this->glMaterial_SpecularExp, this->so_materialSpecularExp);
-        glUniform1i(this->glMaterial_IlluminationModel, this->so_materialIlluminationModel);
-        glUniform3f(this->glMaterial_Ambient, this->so_materialAmbient.r, this->so_materialAmbient.g, this->so_materialAmbient.b);
-        glUniform3f(this->glMaterial_Diffuse, this->so_materialDiffuse.r, this->so_materialDiffuse.g, this->so_materialDiffuse.b);
-        glUniform3f(this->glMaterial_Specular, this->so_materialSpecular.r, this->so_materialSpecular.g, this->so_materialSpecular.b);
-        glUniform3f(this->glMaterial_Emission, this->so_materialEmission.r, this->so_materialEmission.g, this->so_materialEmission.b);
+        glUniform1f(this->glMaterial_Refraction, this->Setting_MaterialRefraction->point);
+        glUniform1f(this->glMaterial_SpecularExp, this->Setting_MaterialSpecularExp->point);
+        glUniform1i(this->glMaterial_IlluminationModel, this->materialIlluminationModel);
+        glUniform3f(this->glMaterial_Ambient, this->materialAmbient->color.r, this->materialAmbient->color.g, this->materialAmbient->color.b);
+        glUniform3f(this->glMaterial_Diffuse, this->materialDiffuse->color.r, this->materialDiffuse->color.g, this->materialDiffuse->color.b);
+        glUniform3f(this->glMaterial_Specular, this->materialSpecular->color.r, this->materialSpecular->color.g, this->materialSpecular->color.b);
+        glUniform3f(this->glMaterial_Emission, this->materialEmission->color.r, this->materialEmission->color.g, this->materialEmission->color.b);
 
         if (this->vboTextureAmbient > 0) {
             glUniform1i(this->glMaterial_SamplerAmbient, 1);
@@ -710,18 +821,6 @@ void ModelFace::setOptionsFOV(float fov) {
     this->so_fov = fov;
 }
 
-void ModelFace::setOptionsAlpha(float alpha) {
-    this->so_alpha = alpha;
-}
-
-void ModelFace::setOptionsCelShading(bool val) {
-    this->so_celShading = val;
-}
-
-void ModelFace::setOptionsDisplacement(glm::vec3 displacement) {
-    this->so_displacement = displacement;
-}
-
 void ModelFace::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
@@ -732,69 +831,6 @@ void ModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
 
 void ModelFace::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
-}
-
-// light
-void ModelFace::setOptionsLightPosition(glm::vec3 lightPosition) {
-    this->so_lightPosition = lightPosition;
-}
-
-void ModelFace::setOptionsLightDirection(glm::vec3 lightDirection) {
-    this->so_lightDirection = lightDirection;
-}
-
-void ModelFace::setOptionsLightAmbient(glm::vec3 lightColor) {
-    this->so_lightAmbient = lightColor;
-}
-
-void ModelFace::setOptionsLightDiffuse(glm::vec3 lightColor) {
-    this->so_lightDiffuse = lightColor;
-}
-
-void ModelFace::setOptionsLightSpecular(glm::vec3 lightColor) {
-    this->so_lightSpecular = lightColor;
-}
-
-void ModelFace::setOptionsLightStrengthAmbient(float val) {
-    this->so_lightStrengthAmbient = val;
-}
-
-void ModelFace::setOptionsLightStrengthDiffuse(float val) {
-    this->so_lightStrengthDiffuse = val;
-}
-
-void ModelFace::setOptionsLightStrengthSpecular(float val) {
-    this->so_lightStrengthSpecular = val;
-}
-
-// material
-
-void ModelFace::setOptionsMaterialRefraction(float val) {
-    this->so_materialRefraction = val;
-}
-
-void ModelFace::setOptionsMaterialSpecularExp(float val) {
-    this->so_materialSpecularExp = val;
-}
-
-void ModelFace::setOptionsMaterialIlluminationModel(float val) {
-    this->so_materialIlluminationModel = val;
-}
-
-void ModelFace::setOptionsMaterialAmbient(glm::vec3 lightColor) {
-    this->so_materialAmbient = lightColor;
-}
-
-void ModelFace::setOptionsMaterialDiffuse(glm::vec3 lightColor) {
-    this->so_materialDiffuse = lightColor;
-}
-
-void ModelFace::setOptionsMaterialSpecular(glm::vec3 lightColor) {
-    this->so_materialSpecular = lightColor;
-}
-
-void ModelFace::setOptionsMaterialEmission(glm::vec3 lightColor) {
-    this->so_materialEmission = lightColor;
 }
 
 #pragma mark - Utilities
