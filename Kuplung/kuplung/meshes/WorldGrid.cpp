@@ -85,19 +85,41 @@ void WorldGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
+//    this->gridSize = gridSize;
+//    float gridMinus = this->gridSize / 2;
+//    GridMeshPoint2D verticesData[this->gridSize][this->gridSize];
+
+//    for (int i = 0; i < this->gridSize; i++) {
+//        for (int j = 0; j < this->gridSize; j++) {
+//            if (isHorizontal) {
+//                verticesData[i][j].y = (i - gridMinus) * unitSize;
+//                verticesData[i][j].x = (j - gridMinus) * unitSize;
+//            }
+//            else {
+//                verticesData[i][j].x = (i - gridMinus) * unitSize;
+//                verticesData[i][j].y = (j - gridMinus) * unitSize;
+//            }
+
+//            //printf("[%i, %i], x = %f, y = %f\n", i, j, verticesData[i][j].x, verticesData[i][j].y);
+//        }
+//    }
+
     this->gridSize = gridSize;
     float gridMinus = this->gridSize / 2;
-    GridMeshPoint2D Vertices[this->gridSize][this->gridSize];
-
-    for (int i = 0; i < this->gridSize; i++) {
+    GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
+    bool h;
+    for (int i = 0; i < (this->gridSize * 2); i++) {
         for (int j = 0; j < this->gridSize; j++) {
-            if (isHorizontal) {
-                Vertices[i][j].y = (i - gridMinus) * unitSize;
-                Vertices[i][j].x = (j - gridMinus) * unitSize;
+            h = true;
+            if (i >= this->gridSize)
+                h = false;
+            if (h) {
+                verticesData[i][j].y = (i - gridMinus) * unitSize;
+                verticesData[i][j].x = (j - gridMinus) * unitSize;
             }
             else {
-                Vertices[i][j].x = (i - gridMinus) * unitSize;
-                Vertices[i][j].y = (j - gridMinus) * unitSize;
+                verticesData[i][j].x = (i - this->gridSize - gridMinus) * unitSize;
+                verticesData[i][j].y = (j - gridMinus) * unitSize;
             }
         }
     }
@@ -105,7 +127,7 @@ void WorldGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices) * sizeof(GLfloat), Vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
@@ -129,7 +151,7 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         // draw
         glBindVertexArray(this->glVAO);
 
-        for (int i = 0; i < this->gridSize; i++)
+        for (int i = 0; i < this->gridSize * 2; i++)
             glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
 
         for (int i = 0; i < this->gridSize; i++)

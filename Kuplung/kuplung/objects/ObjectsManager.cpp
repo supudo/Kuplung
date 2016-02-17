@@ -50,6 +50,11 @@ void ObjectsManager::render() {
 
     this->camera->render(this->Setting_PlaneClose, this->Setting_PlaneFar);
 
+    if ((this->Setting_GridSize + 1) != this->grid->gridSize) {
+        this->grid->gridSize = this->Setting_GridSize;
+        this->grid->reinitBuffers(this->Setting_GridSize);
+    }
+
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 

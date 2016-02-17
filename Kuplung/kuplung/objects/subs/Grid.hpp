@@ -22,10 +22,12 @@ public:
 
     void destroy();
     void initProperties(int size);
+    void reinitBuffers(int gs);
     void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera);
 
     std::string title;
     std::string description;
+    int gridSize;
 
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;

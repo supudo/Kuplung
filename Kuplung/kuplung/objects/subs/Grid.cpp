@@ -27,11 +27,12 @@ void Grid::destroy() {
     delete this->rotateZ;
 
     this->sceneGridHorizontal->destroy();
-    this->sceneGridVertical->destroy();
+//    this->sceneGridVertical->destroy();
 }
 
 Grid::Grid(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description) {
     this->funcLog = doLog;
+    this->gridSize = 10;
 }
 
 void Grid::initProperties(int size) {
@@ -59,10 +60,20 @@ void Grid::initProperties(int size) {
     this->sceneGridHorizontal->initShaderProgram();
     this->sceneGridHorizontal->initBuffers(size, true, 1);
 
-    this->sceneGridVertical = new WorldGrid();
-    this->sceneGridVertical->init(std::bind(&Grid::logMessage, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
-    this->sceneGridVertical->initShaderProgram();
-    this->sceneGridVertical->initBuffers(size, false, 1);
+//    this->sceneGridVertical = new WorldGrid();
+//    this->sceneGridVertical->init(std::bind(&Grid::logMessage, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//    this->sceneGridVertical->initShaderProgram();
+//    this->sceneGridVertical->initBuffers(size, false, 1);
+}
+
+void Grid::reinitBuffers(int gs) {
+    this->gridSize = gs;
+    this->sceneGridHorizontal->initBuffers(this->gridSize, true, 1);
+
+//    this->sceneGridVertical = new WorldGrid();
+//    this->sceneGridVertical->init(std::bind(&Grid::logMessage, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//    this->sceneGridVertical->initShaderProgram();
+//    this->sceneGridVertical->initBuffers(size, false, 1);
 }
 
 void Grid::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera) {
@@ -80,7 +91,7 @@ void Grid::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera) {
 
     if (Settings::Instance()->showGrid) {
         this->sceneGridHorizontal->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
-        this->sceneGridVertical->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
+//        this->sceneGridVertical->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
     }
 }
 
