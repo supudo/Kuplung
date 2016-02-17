@@ -15,10 +15,10 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/objects/subs/Camera.hpp"
+#include "kuplung/meshes/Camera.hpp"
+#include "kuplung/meshes/Light.hpp"
 #include "kuplung/meshes/CoordinateSystem.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
-#include "kuplung/objects/subs/LightSource.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
 class ObjectsManager {
@@ -38,7 +38,7 @@ public:
     void initAxisSystem();
 
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
-    std::vector<LightSource*> lightSources;
+    std::vector<Light*> lightSources;
 
     FileModelManager *fileParser;
     Camera* camera;

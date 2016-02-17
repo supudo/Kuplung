@@ -16,7 +16,7 @@
 #include "kuplung/ui/Objects.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/objects/subs/LightSource.hpp"
+#include "kuplung/meshes/Light.hpp"
 
 class ModelFace {
 public:
@@ -45,7 +45,7 @@ public:
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
-    std::vector<LightSource*> lightSources;
+    std::vector<Light*> lightSources;
 
     bool Setting_CelShading;
     float Setting_Alpha;

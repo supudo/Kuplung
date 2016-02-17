@@ -1,55 +1,48 @@
 //
-//  CoordinateSystem.hpp
+//  LightLamp.hpp
 //  Kuplung
 //
-//  Created by Sergey Petrov on 12/14/15.
+//  Created by Sergey Petrov on 12/3/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef CoordinateSystem_hpp
-#define CoordinateSystem_hpp
+#ifndef LightLamp_hpp
+#define LightLamp_hpp
 
 #include <functional>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
-#include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
-class CoordinateSystem {
+class LightLamp {
 public:
-    ~CoordinateSystem();
+    ~LightLamp();
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
-    void initProperties();
+    void setModel(objModelFace oFace);
     bool initShaderProgram();
-    void initBuffers(); // 0 = x, 1 = y, 2 = z
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
-
-    bool showAxis;
-
-    ObjectEye *eyeSettings;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
-    glm::mat4 matrixModel;
+    void initBuffers(std::string assetsFolder);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    objModelFace oFace;
 
 private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
     std::string shaderName;
-    int axisSize;
 
     GLUtils *glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboColors;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
+    GLuint glVAO;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
+    GLuint vboTextureDiffuse;
+    GLuint glUniformMVPMatrix;
+    GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
 };
 
-#endif /* CoordinateSystem_hpp */
+#endif /* LightLamp_hpp */

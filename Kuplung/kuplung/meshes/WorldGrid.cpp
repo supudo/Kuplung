@@ -52,29 +52,11 @@ void WorldGrid::init(std::function<void(std::string)> doLog, std::string shaderN
     this->glUtils->init(std::bind(&WorldGrid::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
-
-    this->gridSize = 10;
-    this->eyeSettings = new ObjectEye();
-    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
-
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-
-    this->matrixModel = glm::mat4(1.0);
+    this->initProperties(10);
 }
 
 void WorldGrid::initProperties(int size) {
+    this->showGrid = true;
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
     this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
@@ -174,7 +156,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 #pragma mark - Render
 
 void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
-    if (this->glVAO > 0 && Settings::Instance()->showGrid) {
+    if (this->glVAO > 0 && this->showGrid) {
         glUseProgram(this->shaderProgram);
 
         this->matrixProjection = matrixProjection;

@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 class Light {
@@ -21,10 +22,27 @@ public:
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
     void setModel(objModelFace oFace);
+    void initProperties();
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
     objModelFace oFace;
+
+    std::string title;
+    std::string description;
+    LightSourceType type;
+    bool showLampObject, showLampDirection;
+
+    ObjectEye *eyeSettings;
+    ObjectCoordinate *positionX, *positionY, *positionZ;
+    ObjectCoordinate *directionX, *directionY, *directionZ;
+    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
+    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+    MaterialColor *ambient, *diffuse, *specular;
+
+    glm::mat4 matrixProjection;
+    glm::mat4 matrixCamera;
+    glm::mat4 matrixModel;
 
 private:
     std::function<void(std::string)> doLogFunc;

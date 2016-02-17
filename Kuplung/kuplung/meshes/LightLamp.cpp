@@ -1,12 +1,12 @@
 //
-//  Light.cpp
+//  LightLamp.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/3/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "Light.hpp"
+#include "LightLamp.hpp"
 
 #include <fstream>
 
@@ -18,11 +18,11 @@
 
 #pragma mark - Destroy
 
-Light::~Light() {
+LightLamp::~LightLamp() {
     this->destroy();
 }
 
-void Light::destroy() {
+void LightLamp::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
     glDisableVertexAttribArray(this->glAttributeTextureCoord);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);
@@ -39,55 +39,21 @@ void Light::destroy() {
 
 #pragma mark - Initialization
 
-void Light::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void LightLamp::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&Light::doLog, this, std::placeholders::_1));
+    this->glUtils->init(std::bind(&LightLamp::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
-
-    this->initProperties();
 }
 
-void Light::setModel(objModelFace oFace) {
+void LightLamp::setModel(objModelFace oFace) {
     this->oFace = oFace;
-}
-
-void Light::initProperties() {
-    this->showLampObject = true;
-    this->showLampDirection = true;
-
-    this->eyeSettings = new ObjectEye();
-    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
-
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 5.0 });
-
-    this->directionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->directionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -2.0 });
-    this->directionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
-
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-
-    this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-
-    this->matrixModel = glm::mat4(1.0);
 }
 
 #pragma mark - Public
 
-bool Light::initShaderProgram() {
+bool LightLamp::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
@@ -135,7 +101,7 @@ bool Light::initShaderProgram() {
     return success;
 }
 
-void Light::initBuffers(std::string assetsFolder) {
+void LightLamp::initBuffers(std::string assetsFolder) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -211,34 +177,9 @@ void Light::initBuffers(std::string assetsFolder) {
 
 #pragma mark - Render
 
-void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld) {
-    if (this->glVAO > 0 && this->showLampObject) {
+void LightLamp::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+    if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = matrixProjection;
-        this->matrixCamera = matrixCamera;
-
-        this->matrixModel = glm::mat4(1.0);
-        if (fixedGridWorld)
-            this->matrixModel = mtxGrid;
-        this->matrixModel = glm::scale(this->matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateX->point), glm::vec3(1, 0, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
-
-//        glm::vec3 vLightDirection = glm::vec3(this->directionX->point, this->directionY->point, this->directionZ->point);
-
-//        // lamp
-//        this->meshLight->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
-
-//        // direction line
-//        glm::mat4 mtxModelDot = this->matrixModel;
-//        mtxModelDot = glm::rotate(mtxModelDot, glm::radians(90.0f), glm::vec3(1, 0, 0));
-//        this->meshLightRay->initBuffers(glm::vec3(0, 0, 0), vLightDirection, true);
-//        this->meshLightRay->render(this->matrixProjection, this->matrixCamera, mtxModelDot);
 
         // texture
         if (this->vboTextureDiffuse > 0)
@@ -271,7 +212,7 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
 
 #pragma mark - Utilities
 
-std::string Light::readFile(const char *filePath) {
+std::string LightLamp::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
@@ -287,6 +228,6 @@ std::string Light::readFile(const char *filePath) {
     return content;
 }
 
-void Light::doLog(std::string logMessage) {
-    this->doLogFunc("[Light] " + logMessage);
+void LightLamp::doLog(std::string logMessage) {
+    this->doLogFunc("[LightLamp] " + logMessage);
 }

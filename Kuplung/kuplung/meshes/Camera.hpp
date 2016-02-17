@@ -13,19 +13,15 @@
 #include <functional>
 #include <string>
 #include "kuplung/settings/Settings.h"
-#include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 
 class Camera {
 public:
-    Camera(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description);
+    Camera(std::function<void(std::string)> doLog);
 
     void destroy();
     void initProperties();
     void render(float Setting_PlaneClose, float Setting_PlaneFar);
-
-    std::string title;
-    std::string description;
 
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;

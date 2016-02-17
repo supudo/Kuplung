@@ -49,6 +49,8 @@ void CoordinateSystem::init(std::function<void(std::string)> doLog, std::string 
 }
 
 void CoordinateSystem::initProperties() {
+    this->showAxis = true;
+
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
     this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
@@ -156,7 +158,7 @@ void CoordinateSystem::initBuffers() {
 #pragma mark - Render
 
 void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
-    if (this->glVAO > 0 && Settings::Instance()->showAxes) {
+    if (this->glVAO > 0 && this->showAxis) {
         glUseProgram(this->shaderProgram);
 
         this->matrixProjection = matrixProjection;

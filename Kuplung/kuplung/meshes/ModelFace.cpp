@@ -615,7 +615,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         // lights
         //for (size_t j=0; j<this->lightSources.size(); j++) {
         for (size_t j=0; j<1; j++) {
-            LightSource *light = this->lightSources[j];
+            Light *light = this->lightSources[j];
             glm::mat4 mtxModelLight = glm::mat4(1.0);
 
             if (fixedWithGrid)

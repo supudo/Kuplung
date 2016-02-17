@@ -35,7 +35,7 @@ public:
 
     int OpenGLMajorVersion, OpenGLMinorVersion, OpenGL_GLSL_Version;
     std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile, UIFontFile;
-    bool showGrid, showLight, showAxes, wireframesMode, logDebugInfo, logFileBrowser;
+    bool wireframesMode, logDebugInfo, logFileBrowser;
     Color guiClearColor;
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;

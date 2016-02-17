@@ -141,10 +141,8 @@ void UI::renderStart(bool isFrame) {
         }
 
         if (ImGui::BeginMenu("View")) {
-            ImGui::MenuItem(Settings::Instance()->showGrid ? ICON_FA_TOGGLE_ON " Hide Grid" : ICON_FA_TOGGLE_OFF " Show Grid", NULL, &Settings::Instance()->showGrid);
-            ImGui::MenuItem(Settings::Instance()->showLight ? ICON_FA_TOGGLE_ON " Hide Light" : ICON_FA_TOGGLE_OFF " Show Light", NULL, &Settings::Instance()->showLight);
-            ImGui::MenuItem(Settings::Instance()->showAxes ? ICON_FA_TOGGLE_ON " Hide Axes" : ICON_FA_TOGGLE_OFF " Show Axes", NULL, &Settings::Instance()->showAxes);
-            ImGui::Separator();
+            //ImGui::MenuItem(Settings::Instance()->showAxes ? ICON_FA_TOGGLE_ON " Hide Axes" : ICON_FA_TOGGLE_OFF " Show Axes", NULL, &Settings::Instance()->showAxes);
+            //ImGui::Separator();
             ImGui::MenuItem(this->showControlsGUI ? ICON_FA_TOGGLE_ON " GUI Controls" : ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->showControlsGUI);
             ImGui::MenuItem(this->showControlsModels ? ICON_FA_TOGGLE_ON " Scene Controls" : ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->showControlsModels);
             ImGui::Separator();

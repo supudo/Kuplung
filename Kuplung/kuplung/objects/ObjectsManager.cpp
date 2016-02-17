@@ -96,7 +96,7 @@ void ObjectsManager::resetPropertiesModels() {
  *
  */
 void ObjectsManager::initCamera() {
-    this->camera = new Camera(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Camera", "Default Camera");
+    this->camera = new Camera(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
     this->camera->initProperties();
 }
 
@@ -178,10 +178,16 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
         }
     }
 
-    LightSource *ls = new LightSource(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), this->systemModels["lamp"], type, objectTitle, objectDescription);
-    ls->initModels();
-    ls->initProperties();
-    this->lightSources.push_back(ls);
+    Light *lightObject = new Light();
+    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
+    lightObject->title = objectTitle;
+    lightObject->description = objectDescription;
+    lightObject->type = type;
+    lightObject->setModel(this->systemModels["lamp"].models[0].faces[0]);
+    lightObject->initShaderProgram();
+    lightObject->initBuffers(std::string(Settings::Instance()->appFolder()));
+
+    this->lightSources.push_back(lightObject);
 }
 
 /*

@@ -27,7 +27,7 @@ void Camera::destroy() {
     delete this->rotateZ;
 }
 
-Camera::Camera(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description) {
+Camera::Camera(std::function<void(std::string)> doLog) {
     this->funcLog = doLog;
 }
 

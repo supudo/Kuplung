@@ -45,9 +45,6 @@ void Settings::initSettings() {
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
 
-    m_pInstance->showGrid = m_pInstance->cfgUtils->readBool("showGrid");
-    m_pInstance->showLight = m_pInstance->cfgUtils->readBool("showLight");
-    m_pInstance->showAxes = m_pInstance->cfgUtils->readBool("showAxes");
     m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
     m_pInstance->logFileBrowser = m_pInstance->cfgUtils->readBool("logFileBrowser");
@@ -102,9 +99,6 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
 
-    this->cfgUtils->writeBool("showGrid", this->showGrid);
-    this->cfgUtils->writeBool("showLight", this->showLight);
-    this->cfgUtils->writeBool("showAxes", this->showAxes);
     this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);
     this->cfgUtils->writeBool("logFileBrowser", this->logFileBrowser);

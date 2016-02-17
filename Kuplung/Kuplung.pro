@@ -94,12 +94,12 @@ SOURCES += main.cpp \
     kuplung/meshes/CoordinateSystem.cpp \
     kuplung/meshes/WorldGrid.cpp \
     kuplung/meshes/Light.cpp \
+    kuplung/meshes/Camera.cpp \
+    kuplung/meshes/LightLamp.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
     kuplung/meshes/Terrain.cpp \
     kuplung/objects/ObjectsManager.cpp \
-    kuplung/objects/subs/Camera.cpp \
-    kuplung/objects/subs/LightSource.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
     kuplung/settings/FontsList.cpp \
@@ -133,13 +133,13 @@ HEADERS += \
     kuplung/meshes/CoordinateSystem.hpp \
     kuplung/meshes/WorldGrid.hpp \
     kuplung/meshes/Light.hpp \
+    kuplung/meshes/Camera.hpp \
+    kuplung/meshes/LightLamp.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
     kuplung/meshes/Terrain.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
-    kuplung/objects/subs/Camera.hpp \
-    kuplung/objects/subs/LightSource.hpp \
     kuplung/settings/ConfigUtils.hpp \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \

@@ -204,6 +204,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::SliderInt("##109", &this->managerObjects->Setting_GridSize, 0, 100);
                     ImGui::Separator();
                     ImGui::Checkbox("Grid fixed with World", &this->managerObjects->Setting_FixedGridWorld);
+                    ImGui::Checkbox("Show Grid", &this->managerObjects->grid->showGrid);
                     ImGui::Separator();
                     break;
                 }
@@ -256,7 +257,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
                     // show lamp object
-                    ImGui::Checkbox("Show Lamp", &Settings::Instance()->showLight);
+                    ImGui::Checkbox("Show Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
+                    ImGui::Checkbox("Show Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
                     break;
                 }
                 case 1: {
