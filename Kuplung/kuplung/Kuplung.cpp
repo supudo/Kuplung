@@ -121,7 +121,6 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
 
                     this->managerObjects = new ObjectsManager(this->parser);
                     this->managerObjects->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
-                    this->managerObjects->resetPropertiesSystem();
 
                     this->managerUI = new UI();
                     this->managerUI->init(gWindow,

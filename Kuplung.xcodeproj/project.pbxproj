@@ -32,7 +32,6 @@
 		8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70711C6CACB40085CAE5 /* Tabs.cpp */; };
 		8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70741C6CACB40085CAE5 /* DialogOptions.cpp */; };
 		8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70761C6CACB40085CAE5 /* DialogStyle.cpp */; };
-		8A6E70AE1C6CACB40085CAE5 /* GUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70781C6CACB40085CAE5 /* GUI.cpp */; };
 		8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */; };
 		8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E707E1C6CACB40085CAE5 /* UI.cpp */; };
 		8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70821C6CACB40085CAE5 /* FNTParser.cpp */; };
@@ -188,8 +187,6 @@
 		8A6E70751C6CACB40085CAE5 /* DialogOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogOptions.hpp; sourceTree = "<group>"; };
 		8A6E70761C6CACB40085CAE5 /* DialogStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogStyle.cpp; sourceTree = "<group>"; };
 		8A6E70771C6CACB40085CAE5 /* DialogStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogStyle.hpp; sourceTree = "<group>"; };
-		8A6E70781C6CACB40085CAE5 /* GUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GUI.cpp; sourceTree = "<group>"; };
-		8A6E70791C6CACB40085CAE5 /* GUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GUI.hpp; sourceTree = "<group>"; };
 		8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDL2OpenGL32.cpp; sourceTree = "<group>"; };
 		8A6E707C1C6CACB40085CAE5 /* SDL2OpenGL32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SDL2OpenGL32.hpp; sourceTree = "<group>"; };
 		8A6E707D1C6CACB40085CAE5 /* Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Objects.h; sourceTree = "<group>"; };
@@ -322,8 +319,6 @@
 				8A1AFB201C71FC3F004888D8 /* iconfonts */,
 				8A6E70641C6CACB40085CAE5 /* components */,
 				8A6E70731C6CACB40085CAE5 /* dialogs */,
-				8A6E70781C6CACB40085CAE5 /* GUI.cpp */,
-				8A6E70791C6CACB40085CAE5 /* GUI.hpp */,
 				8A6E707A1C6CACB40085CAE5 /* implementation */,
 				8A6E707D1C6CACB40085CAE5 /* Objects.h */,
 				8A6E707E1C6CACB40085CAE5 /* UI.cpp */,
@@ -704,7 +699,6 @@
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
-				8A6E70AE1C6CACB40085CAE5 /* GUI.cpp in Sources */,
 				8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
