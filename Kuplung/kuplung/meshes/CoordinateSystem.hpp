@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 class CoordinateSystem {
@@ -20,9 +21,17 @@ public:
     ~CoordinateSystem();
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void initProperties();
     bool initShaderProgram();
     void initBuffers(); // 0 = x, 1 = y, 2 = z
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
+
+    ObjectEye *eyeSettings;
+    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+
+    glm::mat4 matrixProjection;
+    glm::mat4 matrixCamera;
+    glm::mat4 matrixModel;
 
 private:
     std::function<void(std::string)> doLogFunc;

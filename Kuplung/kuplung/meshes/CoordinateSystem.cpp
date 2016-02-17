@@ -18,6 +18,12 @@ CoordinateSystem::~CoordinateSystem() {
 }
 
 void CoordinateSystem::destroy() {
+    delete this->eyeSettings;
+
+    delete this->rotateX;
+    delete this->rotateY;
+    delete this->rotateZ;
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -38,6 +44,21 @@ void CoordinateSystem::init(std::function<void(std::string)> doLog, std::string 
     this->glUtils->init(std::bind(&CoordinateSystem::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
+
+    this->initProperties();
+}
+
+void CoordinateSystem::initProperties() {
+    this->eyeSettings = new ObjectEye();
+    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
+    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
+    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->matrixModel = glm::mat4(1.0);
 }
 
 #pragma mark - Public
@@ -134,16 +155,32 @@ void CoordinateSystem::initBuffers() {
 
 #pragma mark - Render
 
-void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
-    if (this->glVAO > 0) {
+void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
+    if (this->glVAO > 0 && Settings::Instance()->showAxes) {
         glUseProgram(this->shaderProgram);
+
+        this->matrixProjection = matrixProjection;
+        this->matrixCamera = matrixCamera;
+
+        float axisW = 120;
+        float axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
+
+        float axisX = 10;
+        float axisY = 10;
+
+        glViewport(axisX, axisY, axisW, axisH);
+
+        this->matrixModel = glm::mat4(1.0);
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateX->point), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
 
         // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
         glLineWidth((GLfloat)5.5f);
 
-        glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
+        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw
@@ -153,6 +190,8 @@ void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera
         glBindVertexArray(0);
 
         glUseProgram(0);
+
+        glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     }
 }
 

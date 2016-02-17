@@ -99,8 +99,6 @@ SOURCES += main.cpp \
     kuplung/meshes/Terrain.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/subs/Camera.cpp \
-    kuplung/objects/subs/Grid.cpp \
-    kuplung/objects/subs/Axis.cpp \
     kuplung/objects/subs/LightSource.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
@@ -141,8 +139,6 @@ HEADERS += \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/subs/Camera.hpp \
-    kuplung/objects/subs/Grid.hpp \
-    kuplung/objects/subs/Axis.hpp \
     kuplung/objects/subs/LightSource.hpp \
     kuplung/settings/ConfigUtils.hpp \
     kuplung/settings/Settings.h \

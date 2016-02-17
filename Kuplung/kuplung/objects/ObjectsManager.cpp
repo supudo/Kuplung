@@ -52,7 +52,7 @@ void ObjectsManager::render() {
 
     if ((this->Setting_GridSize + 1) != this->grid->gridSize) {
         this->grid->gridSize = this->Setting_GridSize;
-        this->grid->reinitBuffers(this->Setting_GridSize);
+        this->grid->initBuffers(this->Setting_GridSize, 1);
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
@@ -80,6 +80,8 @@ void ObjectsManager::resetPropertiesSystem() {
         this->camera->initProperties();
     if (this->grid)
         this->grid->initProperties(this->Setting_GridSize);
+    if (this->axisSystem)
+        this->axisSystem->initProperties();
     for (size_t i=0; i<this->lightSources.size(); i++) {
         this->lightSources[i]->initProperties();
     }
@@ -104,8 +106,11 @@ void ObjectsManager::initCamera() {
  *
  */
 void ObjectsManager::initGrid() {
-    this->grid = new Grid(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Grid", "Default Grid");
-    this->grid->initProperties(10);
+    this->grid = new WorldGrid();
+    this->grid->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+    this->grid->initShaderProgram();
+    this->grid->initBuffers(10, 1);
+
 }
 
 /*
@@ -114,8 +119,10 @@ void ObjectsManager::initGrid() {
  *
  */
 void ObjectsManager::initAxisSystem() {
-    this->axisSystem = new Axis(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Axis Window", "Default Axis Windos");
-    this->axisSystem->initProperties();
+    this->axisSystem = new CoordinateSystem();
+    this->axisSystem->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
+    this->axisSystem->initShaderProgram();
+    this->axisSystem->initBuffers();
 }
 
 /*

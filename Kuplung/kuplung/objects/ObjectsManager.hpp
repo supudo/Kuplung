@@ -16,8 +16,8 @@
 #include <glm/glm.hpp>
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/objects/subs/Camera.hpp"
-#include "kuplung/objects/subs/Axis.hpp"
-#include "kuplung/objects/subs/Grid.hpp"
+#include "kuplung/meshes/CoordinateSystem.hpp"
+#include "kuplung/meshes/WorldGrid.hpp"
 #include "kuplung/objects/subs/LightSource.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
@@ -42,8 +42,8 @@ public:
 
     FileModelManager *fileParser;
     Camera* camera;
-    Grid* grid;
-    Axis* axisSystem;
+    WorldGrid* grid;
+    CoordinateSystem* axisSystem;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;

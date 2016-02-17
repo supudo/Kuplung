@@ -18,6 +18,20 @@ WorldGrid::~WorldGrid() {
 }
 
 void WorldGrid::destroy() {
+    delete this->eyeSettings;
+
+    delete this->positionX;
+    delete this->positionY;
+    delete this->positionZ;
+
+    delete this->scaleX;
+    delete this->scaleY;
+    delete this->scaleZ;
+
+    delete this->rotateX;
+    delete this->rotateY;
+    delete this->rotateZ;
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -38,6 +52,47 @@ void WorldGrid::init(std::function<void(std::string)> doLog, std::string shaderN
     this->glUtils->init(std::bind(&WorldGrid::doLog, this, std::placeholders::_1));
     this->shaderName = shaderName;
     this->glslVersion = glslVersion;
+
+    this->gridSize = 10;
+    this->eyeSettings = new ObjectEye();
+    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
+    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
+    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
+
+    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->matrixModel = glm::mat4(1.0);
+}
+
+void WorldGrid::initProperties(int size) {
+    this->eyeSettings = new ObjectEye();
+    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
+    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
+    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
+
+    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0 });
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
+    this->matrixModel = glm::mat4(1.0);
 }
 
 #pragma mark - Public
@@ -81,33 +136,15 @@ bool WorldGrid::initShaderProgram() {
     return success;
 }
 
-void WorldGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
+void WorldGrid::initBuffers(int gridSize, float unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
-
-//    this->gridSize = gridSize;
-//    float gridMinus = this->gridSize / 2;
-//    GridMeshPoint2D verticesData[this->gridSize][this->gridSize];
-
-//    for (int i = 0; i < this->gridSize; i++) {
-//        for (int j = 0; j < this->gridSize; j++) {
-//            if (isHorizontal) {
-//                verticesData[i][j].y = (i - gridMinus) * unitSize;
-//                verticesData[i][j].x = (j - gridMinus) * unitSize;
-//            }
-//            else {
-//                verticesData[i][j].x = (i - gridMinus) * unitSize;
-//                verticesData[i][j].y = (j - gridMinus) * unitSize;
-//            }
-
-//            //printf("[%i, %i], x = %f, y = %f\n", i, j, verticesData[i][j].x, verticesData[i][j].y);
-//        }
-//    }
 
     this->gridSize = gridSize;
     float gridMinus = this->gridSize / 2;
     GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
     bool h;
+
     for (int i = 0; i < (this->gridSize * 2); i++) {
         for (int j = 0; j < this->gridSize; j++) {
             h = true;
@@ -136,9 +173,21 @@ void WorldGrid::initBuffers(int gridSize, bool isHorizontal, float unitSize) {
 
 #pragma mark - Render
 
-void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
-    if (this->glVAO > 0) {
+void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
+    if (this->glVAO > 0 && Settings::Instance()->showGrid) {
         glUseProgram(this->shaderProgram);
+
+        this->matrixProjection = matrixProjection;
+        this->matrixCamera = matrixCamera;
+
+        this->matrixModel = glm::mat4(1.0);
+        this->matrixModel = glm::scale(this->matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateX->point), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
         // drawing options
         glCullFace(GL_FRONT);

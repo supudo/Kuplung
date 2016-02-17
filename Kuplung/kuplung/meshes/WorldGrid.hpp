@@ -13,6 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 class WorldGrid {
@@ -21,9 +22,19 @@ public:
     void destroy();
     void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
     bool initShaderProgram();
-    void initBuffers(int gridSize, bool isHorizontal, float unitSize);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void initBuffers(int gridSize, float unitSize);
+    void initProperties(int size);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     int gridSize;
+
+    ObjectEye *eyeSettings;
+    ObjectCoordinate *positionX, *positionY, *positionZ;
+    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
+    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+
+    glm::mat4 matrixProjection;
+    glm::mat4 matrixCamera;
+    glm::mat4 matrixModel;
 
 private:
     std::function<void(std::string)> doLogFunc;
