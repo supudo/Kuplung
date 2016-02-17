@@ -44,11 +44,13 @@ LightSource::LightSource(std::function<void(std::string)> doLog, objScene obj, L
     this->type = type;
     this->title = title;
     this->description = description;
-    this->initProperties();
+    this->objModel = obj;
+}
 
+void LightSource::initModels() {
     this->meshLight = new Light();
     this->meshLight->init(std::bind(&LightSource::logMessage, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
-    this->meshLight->setModel(obj.models[0].faces[0]);
+    this->meshLight->setModel(this->objModel.models[0].faces[0]);
     this->meshLight->initShaderProgram();
     this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
 

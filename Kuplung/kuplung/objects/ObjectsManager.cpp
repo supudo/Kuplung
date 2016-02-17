@@ -90,6 +90,7 @@ void ObjectsManager::resetPropertiesModels() {
  */
 void ObjectsManager::initCamera() {
     this->camera = new Camera(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Camera", "Default Camera");
+    this->camera->initProperties();
 }
 
 /*
@@ -99,6 +100,7 @@ void ObjectsManager::initCamera() {
  */
 void ObjectsManager::initGrid() {
     this->grid = new Grid(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Grid", "Default Grid");
+    this->grid->initProperties(10);
 }
 
 /*
@@ -108,6 +110,7 @@ void ObjectsManager::initGrid() {
  */
 void ObjectsManager::initAxisSystem() {
     this->axisSystem = new Axis(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), {}, "Axis Window", "Default Axis Windos");
+    this->axisSystem->initProperties();
 }
 
 /*
@@ -164,6 +167,8 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     }
 
     LightSource *ls = new LightSource(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), this->systemModels["lamp"], type, objectTitle, objectDescription);
+    ls->initModels();
+    ls->initProperties();
     this->lightSources.push_back(ls);
 }
 

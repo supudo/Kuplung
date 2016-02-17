@@ -32,7 +32,6 @@ void Grid::destroy() {
 
 Grid::Grid(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description) {
     this->funcLog = doLog;
-    this->initProperties(10);
 }
 
 void Grid::initProperties(int size) {

@@ -23,6 +23,7 @@ public:
 
     void destroy();
     void initProperties();
+    void initModels();
     void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
 
     std::string title;
@@ -45,6 +46,7 @@ private:
 
     void logMessage(std::string message);
 
+    objScene objModel;
     Light* meshLight;
     LightRay* meshLightRay;
 };

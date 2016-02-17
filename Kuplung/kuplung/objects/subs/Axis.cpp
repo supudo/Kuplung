@@ -23,7 +23,6 @@ void Axis::destroy() {
 
 Axis::Axis(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description) {
     this->funcLog = doLog;
-    this->initProperties();
 }
 
 void Axis::initProperties() {

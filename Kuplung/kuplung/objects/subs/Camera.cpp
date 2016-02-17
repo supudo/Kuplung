@@ -29,7 +29,6 @@ void Camera::destroy() {
 
 Camera::Camera(std::function<void(std::string)> doLog, objScene obj, std::string title, std::string description) {
     this->funcLog = doLog;
-    this->initProperties();
 }
 
 void Camera::initProperties() {
