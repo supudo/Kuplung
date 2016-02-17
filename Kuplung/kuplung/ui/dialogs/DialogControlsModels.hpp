@@ -28,7 +28,6 @@ private:
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
 
-    std::vector<std::vector<GUIObjectSetting*>> modelsSettings, modelsSettingsDefault;
     bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
     int selectedObject;
