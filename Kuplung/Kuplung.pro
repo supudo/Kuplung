@@ -95,7 +95,6 @@ SOURCES += main.cpp \
     kuplung/meshes/WorldGrid.cpp \
     kuplung/meshes/Light.cpp \
     kuplung/meshes/Camera.cpp \
-    kuplung/meshes/LightLamp.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
     kuplung/meshes/Terrain.cpp \
@@ -134,7 +133,6 @@ HEADERS += \
     kuplung/meshes/WorldGrid.hpp \
     kuplung/meshes/Light.hpp \
     kuplung/meshes/Camera.hpp \
-    kuplung/meshes/LightLamp.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
     kuplung/meshes/Terrain.hpp \

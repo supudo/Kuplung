@@ -125,6 +125,8 @@ bool Light::initShaderProgram() {
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
 
         this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
+        this->glUniformUseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_useColor");
+        this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -252,13 +254,12 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
+        glUniform1i(this->glUniformUseColor, 0);
+        glUniform3f(this->glUniformColor, 1.0, 0.0, 0.0);
+
         // draw
         glBindVertexArray(this->glVAO);
-
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
-        //glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
         glBindVertexArray(0);
 
         // clear texture

@@ -48,6 +48,7 @@ private:
     std::function<void(std::string)> doLogFunc;
     int glslVersion;
     std::string shaderName;
+    float x, y, z;
 
     GLUtils *glUtils;
 
@@ -58,6 +59,7 @@ private:
     GLuint vboTextureDiffuse;
     GLuint glUniformMVPMatrix;
     GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
+    GLuint glUniformUseColor, glUniformColor;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);
