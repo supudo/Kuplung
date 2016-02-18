@@ -345,13 +345,13 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsGUI = true;
 
     // testbed
-    std::string testObj = "cube0.obj";
-    FBEntity fileTestbed;
-    fileTestbed.isFile = true;
-    fileTestbed.extension = ".obj";
-    fileTestbed.title = testObj;
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
-    this->guiProcessObjFile(fileTestbed);
+//    std::string testObj = "cube0.obj";
+//    FBEntity fileTestbed;
+//    fileTestbed.isFile = true;
+//    fileTestbed.extension = ".obj";
+//    fileTestbed.title = testObj;
+//    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
+//    this->guiProcessObjFile(fileTestbed);
 }
 
 #pragma mark - App GUI
@@ -441,10 +441,6 @@ void Kuplung::guiClearScreen() {
     this->meshModelFaces = {};
     this->scenes.clear();
     this->objFiles.clear();
-//    this->managerUI->scene_item_settings.clear();
-//    this->managerUI->scene_item_settings_default.clear();
-//    this->managerUI->hideSceneSettings();
-//    this->managerUI->hideSceneStats();
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         mmf->destroy();
@@ -499,5 +495,4 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 
 void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
-//    this->managerUI->removeSceneModelSettings(selectedModel);
 }
