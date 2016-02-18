@@ -45,8 +45,6 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
     const char* scene_items[meshModelFaces->size()];
     for (size_t i=0; i<meshModelFaces->size(); i++) {
-        std::string t = std::string(ICON_FA_CUBE) + " " + (*meshModelFaces)[i]->oFace.ModelTitle;
-        // ICON_FA_CUBE
         scene_items[i] = (*meshModelFaces)[i]->oFace.ModelTitle.c_str();
     }
 
