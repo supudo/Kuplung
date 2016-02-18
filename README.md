@@ -13,4 +13,4 @@ C/C++/OpenGL Experiments - obj model viewer
 
 Done with QT Creator and Xcode
 
-![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot.png "Kuplung")
+![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
