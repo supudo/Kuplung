@@ -23,7 +23,6 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
     this->selectedTabGUICamera = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
-    this->showMaterialEditor = false;
 
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
@@ -151,7 +150,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
             if (ImGui::Button("Material Editor"))
-                this->showMaterialEditor = true;
+                (*meshModelFaces)[this->selectedObject]->showMaterialEditor = true;
             this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
             this->helperUI->addControlsSlider("Specular Exponent", 13, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
             this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[this->selectedObject]->materialAmbient->color, &(*meshModelFaces)[this->selectedObject]->materialAmbient->colorPickerOpen);
@@ -185,8 +184,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     ImGui::EndChild();
 
-    if (this->showMaterialEditor)
-        this->componentMaterialEditor->draw(&this->showMaterialEditor);
+    if ((*meshModelFaces)[this->selectedObject]->showMaterialEditor)
+        this->componentMaterialEditor->draw(&(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     ImGui::End();
 }

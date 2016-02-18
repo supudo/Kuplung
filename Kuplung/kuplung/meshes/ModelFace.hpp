@@ -64,6 +64,7 @@ public:
 
     // material
     int materialIlluminationModel;
+    bool showMaterialEditor;
     MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
 private:

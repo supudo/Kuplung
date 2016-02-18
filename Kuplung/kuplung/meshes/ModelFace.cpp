@@ -96,6 +96,8 @@ void ModelFace::init(std::function<void(std::string)> doLog, std::string shaderN
     this->glslVersion = glslVersion;
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
+    this->showMaterialEditor = false;
+
     // light
     this->Setting_LightStrengthAmbient = 0.5;
     this->Setting_LightStrengthDiffuse = 1.0;
@@ -119,6 +121,7 @@ void ModelFace::setModel(objModelFace oFace) {
 void ModelFace::initModelProperties() {
     this->Setting_CelShading = false;
     this->Setting_Alpha = 1.0f;
+    this->showMaterialEditor = false;
 
     this->Settings_Eye = new ObjectEye();
     this->Settings_Eye->View_Eye = glm::vec3(1.0, 1.0, 1.0);

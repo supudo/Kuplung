@@ -34,7 +34,6 @@ private:
     int selectedObject;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
     float heightTopPanel = 170.0f;
-    bool showMaterialEditor;
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
