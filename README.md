@@ -2,7 +2,7 @@
 
 C/C++/OpenGL Experiments - obj model viewer
 
-## Using/Including
+###### Using/Including
 
 - [ImGui](https://github.com/ocornut/imgui)
 - [STB libs](https://github.com/nothings/stb)
@@ -11,13 +11,14 @@ C/C++/OpenGL Experiments - obj model viewer
 - [SDL2](https://www.libsdl.org/)
 - [libnosie](http://libnoise.sourceforge.net/)
 
-Done with QT Creator and Xcode
+###### IDE
+QT Creator and Xcode for convinient debugging
 
-![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
-
-# TODO
+###### TODO
 
 - Model material node editor
 - Memory inspector
 - Adding basic shapes
 - Grid to act as a glass surface (simulating reflection)
+
+![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
