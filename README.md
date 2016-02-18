@@ -14,3 +14,10 @@ C/C++/OpenGL Experiments - obj model viewer
 Done with QT Creator and Xcode
 
 ![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
+
+# TODO
+
+- Model material node editor
+- Memory inspector
+- Adding basic shapes
+- Grid to act as a glass surface (simulating reflection)
