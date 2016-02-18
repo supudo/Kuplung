@@ -19,6 +19,8 @@
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
+		8A54F1191C7609DC00B93D18 /* MaterialEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F1171C7609DC00B93D18 /* MaterialEditor.cpp */; };
+		8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F11A1C760A0F00B93D18 /* Camera.cpp */; };
 		8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70531C6CAC960085CAE5 /* LightRay.cpp */; };
 		8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */; };
 		8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70591C6CACAC0085CAE5 /* FontsList.cpp */; };
@@ -64,8 +66,6 @@
 		8AB6F0BF1C3AA29100665C40 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AA1C3AA1F900665C40 /* light.vert */; };
 		8AB6F0C01C3AA29100665C40 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AB1C3AA1F900665C40 /* terrain.frag */; };
 		8AB6F0C11C3AA29100665C40 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AC1C3AA1F900665C40 /* terrain.vert */; };
-		8ABA1CFE1C6CF6ED0090746A /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA1CF71C6CF6ED0090746A /* Camera.cpp */; };
-		8ABA1D001C6CF6ED0090746A /* LightSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABA1CFB1C6CF6ED0090746A /* LightSource.cpp */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
@@ -159,6 +159,10 @@
 		8A1AFB291C71FC58004888D8 /* DialogControlsModels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsModels.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
+		8A54F1171C7609DC00B93D18 /* MaterialEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MaterialEditor.cpp; sourceTree = "<group>"; };
+		8A54F1181C7609DC00B93D18 /* MaterialEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MaterialEditor.hpp; sourceTree = "<group>"; };
+		8A54F11A1C760A0F00B93D18 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		8A54F11B1C760A0F00B93D18 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		8A6E70531C6CAC960085CAE5 /* LightRay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightRay.cpp; sourceTree = "<group>"; };
 		8A6E70541C6CAC960085CAE5 /* LightRay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightRay.hpp; sourceTree = "<group>"; };
 		8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigUtils.cpp; sourceTree = "<group>"; };
@@ -242,10 +246,6 @@
 		8AB6F0AC1C3AA1F900665C40 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
-		8ABA1CF71C6CF6ED0090746A /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = subs/Camera.cpp; sourceTree = "<group>"; };
-		8ABA1CF81C6CF6ED0090746A /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Camera.hpp; path = subs/Camera.hpp; sourceTree = "<group>"; };
-		8ABA1CFB1C6CF6ED0090746A /* LightSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightSource.cpp; path = subs/LightSource.cpp; sourceTree = "<group>"; };
-		8ABA1CFC1C6CF6ED0090746A /* LightSource.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LightSource.hpp; path = subs/LightSource.hpp; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -268,7 +268,6 @@
 		8A0364751C6B71D9001489C8 /* objects */ = {
 			isa = PBXGroup;
 			children = (
-				8ABA1CF41C6CF6E50090746A /* subs */,
 				8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */,
 				8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */,
 				8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */,
@@ -334,6 +333,8 @@
 				8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */,
 				8A6E706D1C6CACB40085CAE5 /* Log.cpp */,
 				8A6E706E1C6CACB40085CAE5 /* Log.hpp */,
+				8A54F1171C7609DC00B93D18 /* MaterialEditor.cpp */,
+				8A54F1181C7609DC00B93D18 /* MaterialEditor.hpp */,
 				8A6E706F1C6CACB40085CAE5 /* Screenshot.cpp */,
 				8A6E70701C6CACB40085CAE5 /* Screenshot.hpp */,
 				8A6E70711C6CACB40085CAE5 /* Tabs.cpp */,
@@ -490,6 +491,8 @@
 		8AB6F0121C3A9BEE00665C40 /* meshes */ = {
 			isa = PBXGroup;
 			children = (
+				8A54F11A1C760A0F00B93D18 /* Camera.cpp */,
+				8A54F11B1C760A0F00B93D18 /* Camera.hpp */,
 				8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */,
 				8A03647E1C6B71EC001489C8 /* CoordinateSystem.hpp */,
 				8A0364811C6B71EC001489C8 /* Light.cpp */,
@@ -552,17 +555,6 @@
 				8AB6F0AC1C3AA1F900665C40 /* terrain.vert */,
 			);
 			path = shaders;
-			sourceTree = "<group>";
-		};
-		8ABA1CF41C6CF6E50090746A /* subs */ = {
-			isa = PBXGroup;
-			children = (
-				8ABA1CF71C6CF6ED0090746A /* Camera.cpp */,
-				8ABA1CF81C6CF6ED0090746A /* Camera.hpp */,
-				8ABA1CFB1C6CF6ED0090746A /* LightSource.cpp */,
-				8ABA1CFC1C6CF6ED0090746A /* LightSource.hpp */,
-			);
-			name = subs;
 			sourceTree = "<group>";
 		};
 		8AC828A71BF5FEE7009C74E0 = {
@@ -670,10 +662,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */,
+				8A54F1191C7609DC00B93D18 /* MaterialEditor.cpp in Sources */,
 				8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */,
 				8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
-				8ABA1CFE1C6CF6ED0090746A /* Camera.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
@@ -683,7 +675,6 @@
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
 				8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */,
 				8A0364891C6B71EC001489C8 /* CoordinateSystem.cpp in Sources */,
-				8ABA1D001C6CF6ED0090746A /* LightSource.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
@@ -702,6 +693,7 @@
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,
 				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
+				8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
 				8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,

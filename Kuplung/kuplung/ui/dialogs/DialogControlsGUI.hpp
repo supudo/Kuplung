@@ -26,6 +26,7 @@ private:
     int selectedObject;
     int selectedObjectLight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
+    float heightTopPanel = 170.0f;
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;

@@ -16,6 +16,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/ui/components/MaterialEditor.hpp"
 
 class DialogControlsModels {
 public:
@@ -32,9 +33,12 @@ private:
     char guiModelRenameText[256];
     int selectedObject;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
+    float heightTopPanel = 170.0f;
+    bool showMaterialEditor;
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
+    MaterialEditor *componentMaterialEditor;
 };
 
 #endif /* DialogControlsModels_hpp */

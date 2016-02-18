@@ -23,9 +23,10 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
     this->selectedTabGUICamera = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
-
+    this->showMaterialEditor = false;
 
     this->helperUI = new UIHelpers();
+    this->componentMaterialEditor = new MaterialEditor();
 }
 
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
@@ -41,8 +42,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         }
     }
     ImGui::PopStyleColor(3);
-    ImGui::Separator();
 
+    ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
     const char* scene_items[meshModelFaces->size()];
     for (size_t i=0; i<meshModelFaces->size(); i++) {
         std::string t = std::string(ICON_FA_CUBE) + " " + (*meshModelFaces)[i]->oFace.ModelTitle;
@@ -53,8 +54,9 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     // Scene Model
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::ListBox("", &this->selectedObject, scene_items, IM_ARRAYSIZE(scene_items));
-    ImGui::PopStyleVar();
+    ImGui::PopStyleVar(2);
     if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate"))
@@ -69,6 +71,13 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     if (this->cmenu_deleteYn)
         this->contextModelDelete(meshModelFaces);
+    ImGui::EndChild();
+
+    ImGui::InvisibleButton("splitter", ImVec2(-1, 8.0f));
+    if (ImGui::IsItemActive())
+        this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
+
+    ImGui::BeginChild("Properties Pane", ImVec2(0,0), true);
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
@@ -141,6 +150,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         }
         case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
+            if (ImGui::Button("Material Editor"))
+                this->showMaterialEditor = true;
             this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
             this->helperUI->addControlsSlider("Specular Exponent", 13, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
             this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[this->selectedObject]->materialAmbient->color, &(*meshModelFaces)[this->selectedObject]->materialAmbient->colorPickerOpen);
@@ -171,6 +182,11 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             break;
     }
     ImGui::PopItemWidth();
+
+    ImGui::EndChild();
+
+    if (this->showMaterialEditor)
+        this->componentMaterialEditor->draw(&this->showMaterialEditor);
 
     ImGui::End();
 }

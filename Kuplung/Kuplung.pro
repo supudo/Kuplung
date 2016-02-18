@@ -111,6 +111,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/Screenshot.cpp \
     kuplung/ui/components/ColorPicker.cpp \
     kuplung/ui/components/Tabs.cpp \
+    kuplung/ui/components/MaterialEditor.cpp \
     kuplung/ui/dialogs/DialogStyle.cpp \
     kuplung/ui/dialogs/DialogOptions.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
@@ -151,6 +152,7 @@ HEADERS += \
     kuplung/ui/components/Screenshot.hpp \
     kuplung/ui/components/ColorPicker.hpp \
     kuplung/ui/components/Tabs.hpp \
+    kuplung/ui/components/MaterialEditor.hpp \
     kuplung/ui/dialogs/DialogStyle.hpp \
     kuplung/ui/dialogs/DialogOptions.hpp \
     kuplung/ui/dialogs/DialogControlsGUI.hpp \

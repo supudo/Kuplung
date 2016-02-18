@@ -35,12 +35,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0)))
         this->managerObjects->resetPropertiesSystem();
     ImGui::PopStyleColor(3);
-    ImGui::Separator();
 
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-    ImGui::BeginChild("Global Items", ImVec2(0, 130), true);
+    ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
     for (int i=0; i<4; i++) {
         switch (i) {
             case 0: {
@@ -101,7 +100,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PopStyleColor();
     ImGui::PopStyleVar();
 
-    ImGui::Separator();
+    ImGui::InvisibleButton("splitter", ImVec2(-1, 8.0f));
+    if (ImGui::IsItemActive())
+        this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
+
+    ImGui::BeginChild("Properties Pane", ImVec2(0,0), true);
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     switch (this->selectedObject) {
@@ -305,6 +308,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
     }
     ImGui::PopItemWidth();
+
+    ImGui::EndChild();
 
     ImGui::End();
 }
