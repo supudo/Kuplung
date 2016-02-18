@@ -155,13 +155,13 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
                 "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
                 "[1] Color on and Ambient on",
                 "[2] Highlight on",
-                "[3] Reflection on and Ray trace on",
-                "[4] Transparency: Glass on\n    Reflection: Ray trace on",
-                "[5] Reflection: Fresnel on\n    Ray trace on",
-                "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Ray trace on",
-                "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Ray trace on",
-                "[8] Reflection on\n    Ray trace off",
-                "[9] Transparency: Glass on\n    Reflection: Ray trace off",
+                "[3] Reflection on and Raytrace on",
+                "[4] Transparency: Glass on\n    Reflection: Raytrace on",
+                "[5] Reflection: Fresnel on\n    Raytrace on",
+                "[6] Transparency: Refraction on\n    Reflection: Fresnel off\n    Raytrace on",
+                "[7] Transparency: Refraction on\n    Reflection: Fresnel on\n    Raytrace on",
+                "[8] Reflection on\n    Raytrace off",
+                "[9] Transparency: Glass on\n    Reflection: Raytrace off",
                 "[10] Casts shadows onto invisible surfaces"
             };
             ImGui::Combo("##987", &(*meshModelFaces)[this->selectedObject]->materialIlluminationModel, illum_models_items, IM_ARRAYSIZE(illum_models_items));

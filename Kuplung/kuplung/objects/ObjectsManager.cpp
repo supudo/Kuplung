@@ -43,6 +43,8 @@ void ObjectsManager::init(std::function<void(std::string)> doLog, std::function<
 
     this->lightSources.clear();
     this->systemModels.clear();
+
+    this->resetSettings();
 }
 
 void ObjectsManager::render() {
@@ -63,7 +65,7 @@ void ObjectsManager::render() {
     }
 }
 
-void ObjectsManager::resetPropertiesSystem() {
+void ObjectsManager::resetSettings() {
     this->Setting_FOV = 45.0;
     this->Setting_Alpha = 1;
     this->Setting_OutlineThickness = 1.01;
@@ -75,6 +77,10 @@ void ObjectsManager::resetPropertiesSystem() {
     this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_FixedGridWorld = true;
     this->Setting_OutlineColorPickerOpen = false;
+}
+
+void ObjectsManager::resetPropertiesSystem() {
+    this->resetSettings();
 
     if (this->camera)
         this->camera->initProperties();

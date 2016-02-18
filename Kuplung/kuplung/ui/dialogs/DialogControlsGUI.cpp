@@ -205,6 +205,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Separator();
                     ImGui::Checkbox("Grid fixed with World", &this->managerObjects->Setting_FixedGridWorld);
                     ImGui::Checkbox("Show Grid", &this->managerObjects->grid->showGrid);
+                    ImGui::Checkbox("Act as mirror", &this->managerObjects->grid->actAsMirror);
                     ImGui::Separator();
                     break;
                 }

@@ -286,16 +286,16 @@ bool ModelFace::initShaderProgram() {
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
 
         // light
-        this->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].position");
-        this->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].direction");
+        this->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].position");
+        this->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].direction");
 
-        this->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].ambient");
-        this->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].diffuse");
-        this->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].specular");
+        this->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].ambient");
+        this->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].diffuse");
+        this->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].specular");
 
-        this->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthAmbient");
-        this->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthDiffuse");
-        this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLight[0].strengthSpecular");
+        this->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].strengthAmbient");
+        this->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].strengthDiffuse");
+        this->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "directionalLights[0].strengthSpecular");
 
         // material
         this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
@@ -613,8 +613,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
 
         // lights
-        //for (size_t j=0; j<this->lightSources.size(); j++) {
-        for (size_t j=0; j<1; j++) {
+        for (size_t j=0; j<this->lightSources.size(); j++) {
             Light *light = this->lightSources[j];
             glm::mat4 mtxModelLight = glm::mat4(1.0);
 

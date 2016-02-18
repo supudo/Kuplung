@@ -32,6 +32,7 @@ public:
     void render();
     void resetPropertiesSystem();
     void resetPropertiesModels();
+    void resetSettings();
 
     void initCamera();
     void initGrid();

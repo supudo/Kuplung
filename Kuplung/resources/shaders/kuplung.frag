@@ -47,32 +47,32 @@ in float fs_isBorder;
 
 out vec4 fragColor;
 
-uniform Light directionalLight[1];
+uniform Light directionalLights[1];
 uniform ModelMaterial material;
 
 vec3 calculateAmbient() {
     if (material.has_texture_ambient) {
         vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
-        return directionalLight[0].strengthAmbient * directionalLight[0].ambient * texturedColor_Ambient.rgb;
+        return directionalLights[0].strengthAmbient * directionalLights[0].ambient * texturedColor_Ambient.rgb;
     }
     else
-        return directionalLight[0].strengthAmbient * directionalLight[0].ambient * material.ambient;
+        return directionalLights[0].strengthAmbient * directionalLights[0].ambient * material.ambient;
 }
 
 vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
     float lambertFactor = max(dot(lightDirection, normalDirection), 0.0);
     if (material.has_texture_diffuse) {
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        return directionalLight[0].strengthDiffuse * lambertFactor * directionalLight[0].diffuse * texturedColor_Diffuse.rgb;
+        return directionalLights[0].strengthDiffuse * lambertFactor * directionalLights[0].diffuse * texturedColor_Diffuse.rgb;
     }
     else
-        return directionalLight[0].strengthDiffuse * lambertFactor * directionalLight[0].diffuse * material.diffuse;
+        return directionalLights[0].strengthDiffuse * lambertFactor * directionalLights[0].diffuse * material.diffuse;
 }
 
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
-    vec3 reflectDirection = reflect(-directionalLight[0].direction, normalDirection);
-    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLight[0].strengthSpecular);
-    vec3 specular = directionalLight[0].strengthSpecular * spec * directionalLight[0].specular;
+    vec3 reflectDirection = reflect(-directionalLights[0].direction, normalDirection);
+    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[0].strengthSpecular);
+    vec3 specular = directionalLights[0].strengthSpecular * spec * directionalLights[0].specular;
     if (material.has_texture_specular) {
         vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
         return specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
@@ -98,7 +98,7 @@ vec4 celShadingColor() {
     vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
 
     vec3 N = normalize(eyeSpaceNormal);
-    vec3 L = normalize(directionalLight[0].position);
+    vec3 L = normalize(directionalLights[0].position);
     vec3 Eye = vec3(0, 0, 1);
     vec3 H = normalize(L + Eye);
 
@@ -126,9 +126,9 @@ vec4 celShadingColor() {
     else
         sf = step(0.5, sf);
 
-    vec3 celAmbient = material.ambient * directionalLight[0].specular * directionalLight[0].strengthSpecular;
-    vec3 celDiffuse = df * material.diffuse;// * directionalLight[0].diffuse * directionalLight[0].strengthDiffuse;
-    vec3 celSpecular = sf * material.specular;// * directionalLight[0].specular * directionalLight[0].strengthSpecular;
+    vec3 celAmbient = material.ambient * directionalLights[0].specular * directionalLights[0].strengthSpecular;
+    vec3 celDiffuse = df * material.diffuse;// * directionalLights[0].diffuse * directionalLights[0].strengthDiffuse;
+    vec3 celSpecular = sf * material.specular;// * directionalLights[0].specular * directionalLights[0].strengthSpecular;
 
     vec3 color = celAmbient + celDiffuse + celSpecular;
 
@@ -136,16 +136,15 @@ vec4 celShadingColor() {
 }
 
 void main(void) {
-    if (fs_isBorder > 0.0) {
+    if (fs_isBorder > 0.0)
         fragColor = vec4(fs_outlineColor, 1.0);
-    }
     else {
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
         vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
 
         // misc
         vec3 normalDirection = normalize(fs_vertexNormal);
-        vec3 lightDirection = normalize(directionalLight[0].position - fs_vertexPosition);
+        vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
 
         // Ambient

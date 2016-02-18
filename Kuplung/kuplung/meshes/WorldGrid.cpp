@@ -57,6 +57,8 @@ void WorldGrid::init(std::function<void(std::string)> doLog, std::string shaderN
 
 void WorldGrid::initProperties(int size) {
     this->showGrid = true;
+    this->actAsMirror = false;
+
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
     this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);

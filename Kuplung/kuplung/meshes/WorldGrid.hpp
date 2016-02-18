@@ -27,7 +27,7 @@ public:
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     int gridSize;
 
-    bool showGrid;
+    bool showGrid, actAsMirror;
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
