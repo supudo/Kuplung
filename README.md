@@ -2,7 +2,7 @@
 
 C/C++/OpenGL Experiments - obj model viewer
 
-###### Using/Including
+#### Using/Including
 
 - [ImGui](https://github.com/ocornut/imgui)
 - [STB libs](https://github.com/nothings/stb)
@@ -11,10 +11,10 @@ C/C++/OpenGL Experiments - obj model viewer
 - [SDL2](https://www.libsdl.org/)
 - [libnosie](http://libnoise.sourceforge.net/)
 
-###### IDE
+#### IDE
 QT Creator and Xcode for convinient debugging
 
-###### TODO
+#### TODO
 
 - Model material node editor
 - Memory inspector
