@@ -28,7 +28,7 @@ struct ModelMaterial {
     bool has_texture_dissolve;
 };
 
-struct Light {
+struct LightSource {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -47,38 +47,112 @@ in float fs_isBorder;
 
 out vec4 fragColor;
 
-uniform Light directionalLights[1];
+#define NR_POINT_LIGHTS 1
+
+uniform LightSource directionalLights[NR_POINT_LIGHTS];
 uniform ModelMaterial material;
 
+vec3 calculateAmbient();
+vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection);
+vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection);
+vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
+float stepmix(float edge0, float edge1, float E, float x);
+vec4 celShadingColor();
+
+void main(void) {
+    if (fs_isBorder > 0.0)
+        fragColor = vec4(fs_outlineColor, 1.0);
+    else {
+        vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
+        vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
+
+        // misc
+        vec3 normalDirection = normalize(fs_vertexNormal);
+        vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
+        //vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
+        vec3 lightDirection;
+        for (int i=0; i<NR_POINT_LIGHTS; i++)
+            lightDirection += normalize(directionalLights[i].position - fs_vertexPosition);
+
+        // Ambient
+        vec3 ambient = calculateAmbient();
+
+        // Diffuse
+        vec3 diffuse = calculateDiffuse(normalDirection, lightDirection);
+
+        // Specular
+        vec3 specular = calculateSpecular(normalDirection, viewDirection);
+
+        // Refraction
+        vec3 processedColorRefraction = (material.emission + ambient + diffuse + specular);
+        if (material.refraction > 1.0) {
+            vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
+            processedColorRefraction = processedColorRefraction * refraction;
+        }
+        else
+            processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
+
+        // final color
+        if (fs_celShading) // cel-shading
+            fragColor = celShadingColor();
+        else {
+            if (material.illumination_model == 0)
+                fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
+            else
+                fragColor = vec4(processedColorRefraction, fs_alpha);
+        }
+    }
+}
+
+//
+//
+// Color calculations
+//
+//
+
 vec3 calculateAmbient() {
+    vec3 result;
     if (material.has_texture_ambient) {
         vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
-        return directionalLights[0].strengthAmbient * directionalLights[0].ambient * texturedColor_Ambient.rgb;
+        for (int i=0; i<NR_POINT_LIGHTS; i++)
+            result += (directionalLights[i].strengthAmbient * directionalLights[i].ambient * texturedColor_Ambient.rgb);
     }
-    else
-        return directionalLights[0].strengthAmbient * directionalLights[0].ambient * material.ambient;
+    else {
+        for (int i=0; i<NR_POINT_LIGHTS; i++)
+            result += directionalLights[i].strengthAmbient * directionalLights[i].ambient * material.ambient;
+    }
+    return result;
 }
 
 vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
+    vec3 result;
     float lambertFactor = max(dot(lightDirection, normalDirection), 0.0);
     if (material.has_texture_diffuse) {
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        return directionalLights[0].strengthDiffuse * lambertFactor * directionalLights[0].diffuse * texturedColor_Diffuse.rgb;
+        for (int i=0; i<NR_POINT_LIGHTS; i++)
+            result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * texturedColor_Diffuse.rgb;
     }
-    else
-        return directionalLights[0].strengthDiffuse * lambertFactor * directionalLights[0].diffuse * material.diffuse;
+    else {
+        for (int i=0; i<NR_POINT_LIGHTS; i++)
+            result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * material.diffuse;
+    }
+    return result;
 }
 
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
-    vec3 reflectDirection = reflect(-directionalLights[0].direction, normalDirection);
-    float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[0].strengthSpecular);
-    vec3 specular = directionalLights[0].strengthSpecular * spec * directionalLights[0].specular;
-    if (material.has_texture_specular) {
-        vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-        return specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+    vec3 result;
+    for (int i=0; i<NR_POINT_LIGHTS; i++) {
+        vec3 reflectDirection = reflect(-directionalLights[i].direction, normalDirection);
+        float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[i].strengthSpecular);
+        vec3 specular = directionalLights[i].strengthSpecular * spec * directionalLights[i].specular;
+        if (material.has_texture_specular) {
+            vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
+            result += specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+        }
+        else
+            result += specular * material.specular * material.refraction * material.specularExp;
     }
-    else
-        return specular * material.specular * material.refraction * material.specularExp;
+    return result;
 }
 
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
@@ -89,10 +163,11 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
     return refraction;
 }
 
-float stepmix(float edge0, float edge1, float E, float x) {
-    float T = clamp(0.5 * (x - edge0 + E) / E, 0.0, 1.0);
-    return mix(edge0, edge1, T);
-}
+//
+//
+// Cel shading
+//
+//
 
 vec4 celShadingColor() {
     vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
@@ -126,7 +201,9 @@ vec4 celShadingColor() {
     else
         sf = step(0.5, sf);
 
-    vec3 celAmbient = material.ambient * directionalLights[0].specular * directionalLights[0].strengthSpecular;
+    vec3 celAmbient;
+    for (int i=0; i<NR_POINT_LIGHTS; i++)
+        celAmbient += material.ambient * directionalLights[i].specular * directionalLights[i].strengthSpecular;
     vec3 celDiffuse = df * material.diffuse;// * directionalLights[0].diffuse * directionalLights[0].strengthDiffuse;
     vec3 celSpecular = sf * material.specular;// * directionalLights[0].specular * directionalLights[0].strengthSpecular;
 
@@ -135,44 +212,13 @@ vec4 celShadingColor() {
     return vec4(color, fs_alpha);
 }
 
-void main(void) {
-    if (fs_isBorder > 0.0)
-        fragColor = vec4(fs_outlineColor, 1.0);
-    else {
-        vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
+//
+//
+// Utilities
+//
+//
 
-        // misc
-        vec3 normalDirection = normalize(fs_vertexNormal);
-        vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
-        vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
-
-        // Ambient
-        vec3 ambient = calculateAmbient();
-
-        // Diffuse
-        vec3 diffuse = calculateDiffuse(normalDirection, lightDirection);
-
-        // Specular
-        vec3 specular = calculateSpecular(normalDirection, viewDirection);
-
-        // Refraction
-        vec3 processedColorRefraction = (material.emission + ambient + diffuse + specular);
-        if (material.refraction > 1.0) {
-            vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
-            processedColorRefraction = processedColorRefraction * refraction;
-        }
-        else
-            processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
-
-        // final color
-        if (fs_celShading) // cel-shading
-            fragColor = celShadingColor();
-        else {
-            if (material.illumination_model == 0)
-                fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
-            else
-                fragColor = vec4(processedColorRefraction, fs_alpha);
-        }
-    }
+float stepmix(float edge0, float edge1, float E, float x) {
+    float T = clamp(0.5 * (x - edge0 + E) / E, 0.0, 1.0);
+    return mix(edge0, edge1, T);
 }

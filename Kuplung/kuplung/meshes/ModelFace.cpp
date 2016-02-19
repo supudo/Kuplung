@@ -618,27 +618,16 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         // lights
         for (size_t j=0; j<this->lightSources.size(); j++) {
             Light *light = this->lightSources[j];
-            glm::mat4 mtxModelLight = glm::mat4(1.0);
-
-            if (fixedWithGrid)
-                mtxModelLight = matrixGrid;
-
-            mtxModelLight = glm::scale(mtxModelLight, glm::vec3(light->scaleX->point, light->scaleY->point, light->scaleZ->point));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateX->point), glm::vec3(1, 0, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateY->point), glm::vec3(0, 1, 0));
-            mtxModelLight = glm::rotate(mtxModelLight, glm::radians(light->rotateZ->point), glm::vec3(0, 0, 1));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(0, 0, 0));
-            mtxModelLight = glm::translate(mtxModelLight, glm::vec3(light->positionX->point, light->positionY->point, light->positionZ->point));
 
             // light
-            glUniform3f(this->glLight_Position, light->positionX->point, light->positionY->point, light->positionZ->point);
-            //glUniform3f(this->glLight_Direction, light->directionX->point, light->directionY->point, light->directionZ->point);
-            glUniform3f(this->glLight_Direction, mtxModelLight[3].x, mtxModelLight[3].y, mtxModelLight[3].z);
+            glUniform3f(this->glLight_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+            glUniform3f(this->glLight_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+
             // color
             glUniform3f(this->glLight_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
             glUniform3f(this->glLight_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
             glUniform3f(this->glLight_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+
             // light factors
             glUniform1f(this->glLight_StrengthAmbient, light->ambient->strength);
             glUniform1f(this->glLight_StrengthDiffuse, light->diffuse->strength);
