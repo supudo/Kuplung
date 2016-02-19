@@ -129,7 +129,7 @@ void UI::renderStart(bool isFrame) {
 
         if (ImGui::BeginMenu("Scene")) {
 //            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
-            ImGui::Separator();
+//            ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
                 if (ImGui::MenuItem(ICON_FA_LIGHTBULB_O " Point"))
                     this->managerObjects->addLight(LightSourceType_Point);
