@@ -1,3 +1,5 @@
+#version 410
+
 in vec4 v_axisColor;
 
 out vec4 fragColor;

@@ -1,3 +1,5 @@
+#version 410
+
 uniform sampler2D u_sampler;
 uniform bool fs_useColor;
 uniform vec3 fs_color;

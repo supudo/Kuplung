@@ -1,3 +1,5 @@
+#version 410
+
 uniform mat4 u_MVPMatrix;
 
 in vec3 a_vertexPosition;
