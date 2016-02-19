@@ -184,7 +184,10 @@ vec4 celShadingColor() {
     vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
 
     vec3 N = normalize(eyeSpaceNormal);
-    vec3 L = normalize(directionalLights[0].position);
+    vec3 L;
+    for (int i=0; i<NR_POINT_LIGHTS; i++)
+        if (directionalLights[i].inUse)
+            L += normalize(directionalLights[i].position);
     vec3 Eye = vec3(0, 0, 1);
     vec3 H = normalize(L + Eye);
 
