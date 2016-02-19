@@ -291,6 +291,8 @@ bool ModelFace::initShaderProgram() {
         // light
         for (int i=0; i<this->GLSL_LightSource_Number; i++) {
             ModelFace_LightSource *f = new ModelFace_LightSource();
+            f->glLight_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
+
             f->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].position").c_str());
             f->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
 
@@ -625,6 +627,8 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
                 Light *light = this->lightSources[j];
                 ModelFace_LightSource *f = this->mfLights[j];
 
+                glUniform1i(f->glLight_InUse, 1);
+
                 // light
                 glUniform3f(f->glLight_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
                 glUniform3f(f->glLight_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
@@ -642,10 +646,12 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         }
 
         if ((int)this->lightSources.size() < this->GLSL_LightSource_Number) {
-            glm::vec3 defLight = glm::vec3(0.05f, 0.05f, 0.05f);
-            float defLightStrength = 0.05f;
+            glm::vec3 defLight = glm::vec3(0.0f, 0.0f, 0.0f);
+            float defLightStrength = 0.0f;
             for (int j=(int)this->lightSources.size(); j<this->GLSL_LightSource_Number; j++) {
                 ModelFace_LightSource *f = this->mfLights[j];
+
+                glUniform1i(f->glLight_InUse, 0);
 
                 // light
                 glUniform3f(f->glLight_Direction, defLight.x, defLight.y, defLight.z);

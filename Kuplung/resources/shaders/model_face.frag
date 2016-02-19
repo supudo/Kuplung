@@ -31,6 +31,8 @@ struct ModelMaterial {
 };
 
 struct LightSource {
+    bool inUse;
+
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
@@ -74,7 +76,8 @@ void main(void) {
         //vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
         vec3 lightDirection;
         for (int i=0; i<NR_POINT_LIGHTS; i++)
-            lightDirection += normalize(directionalLights[i].position - fs_vertexPosition);
+            if (directionalLights[i].inUse)
+                lightDirection += normalize(directionalLights[i].position - fs_vertexPosition);
 
         // Ambient
         vec3 ambient = calculateAmbient();
@@ -117,11 +120,13 @@ vec3 calculateAmbient() {
     if (material.has_texture_ambient) {
         vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
         for (int i=0; i<NR_POINT_LIGHTS; i++)
-            result += (directionalLights[i].strengthAmbient * directionalLights[i].ambient * texturedColor_Ambient.rgb);
+            if (directionalLights[i].inUse)
+                result += (directionalLights[i].strengthAmbient * directionalLights[i].ambient * texturedColor_Ambient.rgb);
     }
     else {
         for (int i=0; i<NR_POINT_LIGHTS; i++)
-            result += directionalLights[i].strengthAmbient * directionalLights[i].ambient * material.ambient;
+            if (directionalLights[i].inUse)
+                result += directionalLights[i].strengthAmbient * directionalLights[i].ambient * material.ambient;
     }
     return result;
 }
@@ -132,11 +137,13 @@ vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
     if (material.has_texture_diffuse) {
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
         for (int i=0; i<NR_POINT_LIGHTS; i++)
-            result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * texturedColor_Diffuse.rgb;
+            if (directionalLights[i].inUse)
+                result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * texturedColor_Diffuse.rgb;
     }
     else {
         for (int i=0; i<NR_POINT_LIGHTS; i++)
-            result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * material.diffuse;
+            if (directionalLights[i].inUse)
+                result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * material.diffuse;
     }
     return result;
 }
@@ -144,15 +151,17 @@ vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
     vec3 result;
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
-        vec3 reflectDirection = reflect(-directionalLights[i].direction, normalDirection);
-        float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[i].strengthSpecular);
-        vec3 specular = directionalLights[i].strengthSpecular * spec * directionalLights[i].specular;
-        if (material.has_texture_specular) {
-            vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-            result += specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+        if (directionalLights[i].inUse) {
+            vec3 reflectDirection = reflect(-directionalLights[i].direction, normalDirection);
+            float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[i].strengthSpecular);
+            vec3 specular = directionalLights[i].strengthSpecular * spec * directionalLights[i].specular;
+            if (material.has_texture_specular) {
+                vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
+                result += specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+            }
+            else
+                result += specular * material.specular * material.refraction * material.specularExp;
         }
-        else
-            result += specular * material.specular * material.refraction * material.specularExp;
     }
     return result;
 }
@@ -205,7 +214,8 @@ vec4 celShadingColor() {
 
     vec3 celAmbient;
     for (int i=0; i<NR_POINT_LIGHTS; i++)
-        celAmbient += material.ambient * directionalLights[i].specular * directionalLights[i].strengthSpecular;
+        if (directionalLights[i].inUse)
+            celAmbient += material.ambient * directionalLights[i].specular * directionalLights[i].strengthSpecular;
     vec3 celDiffuse = df * material.diffuse;// * directionalLights[0].diffuse * directionalLights[0].strengthDiffuse;
     vec3 celSpecular = sf * material.specular;// * directionalLights[0].specular * directionalLights[0].strengthSpecular;
 

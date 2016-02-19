@@ -74,6 +74,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
                     for (int j=0; j<(int)this->managerObjects->lightSources.size(); j++) {
                         ImGui::Bullet();
+                        //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
                         if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
                             this->selectedObjectLight = j;
                             this->selectedObject = 3;

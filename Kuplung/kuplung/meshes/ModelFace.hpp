@@ -20,6 +20,7 @@
 #include "kuplung/meshes/Light.hpp"
 
 struct ModelFace_LightSource {
+    GLuint glLight_InUse;
     GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
     GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
     GLuint glLight_Position, glLight_Direction;
