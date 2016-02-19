@@ -38,11 +38,7 @@ void Kuplung::destroy() {
 #pragma mark - run
 
 int Kuplung::run() {
-    return this->run(Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-}
-
-int Kuplung::run(int screenWidth, int screenHeight) {
-    if (!this->init(screenWidth, screenHeight))
+    if (!this->init())
         return 1;
 
     SDL_Event ev;
@@ -72,11 +68,8 @@ int Kuplung::run(int screenWidth, int screenHeight) {
 
 #pragma mark - Init
 
-bool Kuplung::init(int screenWidth, int screenHeight) {
+bool Kuplung::init() {
     bool success = true;
-
-    Settings::Instance()->SDL_Window_Width = screenWidth;
-    Settings::Instance()->SDL_Window_Height = screenHeight;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         printf("Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError());
@@ -90,8 +83,8 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLEBUFFERS, 1);
         SDL_GL_SetAttribute(SDL_GL_MULTISAMPLESAMPLES, 16);//4);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, Settings::Instance()->OpenGLMajorVersion);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, Settings::Instance()->OpenGLMinorVersion);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         SDL_SetHint(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, "1");
@@ -99,7 +92,12 @@ bool Kuplung::init(int screenWidth, int screenHeight) {
         SDL_DisplayMode current;
         SDL_GetCurrentDisplayMode(0, &current);
 
-        this->gWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, screenWidth, screenHeight, Settings::Instance()->SDL_Window_Flags);
+        if (Settings::Instance()->SDL_Window_Height == 0)
+            Settings::Instance()->SDL_Window_Height = current.h;
+        if (Settings::Instance()->SDL_Window_Width == 0)
+            Settings::Instance()->SDL_Window_Width = current.w - 100;
+
+        this->gWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags);
         if (this->gWindow == NULL) {
             printf("Error: Window could not be created! SDL Error: %s\n", SDL_GetError());
             success = false;
@@ -393,7 +391,7 @@ void Kuplung::processParsedObjFile() {
         for (size_t j=0; j<model.faces.size(); j++) {
             ModelFace *mmf = new ModelFace();
             mmf->ModelID = i;
-            mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+            mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
             mmf->setModel(model.faces[j]);
             mmf->initModelProperties();
             mmf->initShaderProgram();
@@ -458,36 +456,36 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 //        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
 //        objScene sceneGUILight = this->parser->parse(file);
 //        this->meshLight->destroy();
-//        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 //        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
 //        this->meshLight->initShaderProgram();
 //        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
 //        this->sceneGridHorizontal->destroy();
-//        this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 //        this->sceneGridHorizontal->initShaderProgram();
 //        this->sceneGridHorizontal->initBuffers(20, true, 1);
 
 //        this->sceneGridVertical->destroy();
-//        this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 //        this->sceneGridVertical->initShaderProgram();
 //        this->sceneGridVertical->initBuffers(20, false, 1);
     }
     else if (fileName.compare(0, 4, "axis") == 0) {
 //        this->sceneCoordinateSystem->destroy();
-//        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 //        this->sceneCoordinateSystem->initShaderProgram();
 //        this->sceneCoordinateSystem->initBuffers();
     }
     else if (fileName.compare(0, 4, "dots") == 0) {
 //        this->lightDot->destroy();
-//        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "dots", Settings::Instance()->OpenGL_GLSL_Version);
+//        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 //        this->lightDot->initShaderProgram();
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
         this->terrain->destroy();
-        this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), "terrain", Settings::Instance()->OpenGL_GLSL_Version);
+        this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
         this->terrain->initShaderProgram();
         this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
     }

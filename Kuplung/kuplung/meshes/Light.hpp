@@ -20,7 +20,7 @@ class Light {
 public:
     ~Light();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     void setModel(objModelFace oFace);
     void initProperties();
     bool initShaderProgram();
@@ -46,8 +46,6 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
-    int glslVersion;
-    std::string shaderName;
     float x, y, z;
 
     GLUtils *glUtils;

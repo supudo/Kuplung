@@ -32,12 +32,10 @@ void Terrain::destroy() {
 
 #pragma mark - Initialization
 
-void Terrain::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void Terrain::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
     this->glUtils->init(std::bind(&Terrain::doLog, this, std::placeholders::_1));
-    this->shaderName = shaderName;
-    this->glslVersion = glslVersion;
     this->terrainGenerator = new HeightmapGenerator();
 }
 
@@ -46,15 +44,13 @@ void Terrain::init(std::function<void(std::string)> doLog, std::string shaderNam
 bool Terrain::initShaderProgram() {
     bool success = true;
 
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
-    std::string shaderVertexSource = readFile(shaderPath.c_str());
-    shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
-    const char *shader_vertex = shaderVertexSource.c_str();
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/terrain.vert";
+    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    const char *shader_vertex = shaderSourceVertex.c_str();
 
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
-    shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
-    const char *shader_fragment = shaderFragmentSource.c_str();
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/terrain.frag";
+    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 

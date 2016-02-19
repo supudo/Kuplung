@@ -19,15 +19,13 @@ class LightRay {
 public:
     ~LightRay();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     bool initShaderProgram();
     void initBuffers(glm::vec3 position, glm::vec3 direction, bool simple);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
 
 private:
     std::function<void(std::string)> doLogFunc;
-    int glslVersion;
-    std::string shaderName;
     int axisSize;
     float x, y, z;
 

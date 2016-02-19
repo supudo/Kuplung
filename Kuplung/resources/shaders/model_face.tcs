@@ -1,3 +1,5 @@
+#version 410
+
 layout(vertices = 3) out;
 
 in vec3 vso_vertexPosition[];

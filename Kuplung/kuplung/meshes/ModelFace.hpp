@@ -9,14 +9,33 @@
 #ifndef ModelFace_hpp
 #define ModelFace_hpp
 
-#include <glm/gtc/matrix_transform.hpp>
 #include <functional>
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/ui/Objects.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/Light.hpp"
+
+struct GLSL_LightSource {
+    glm::vec3 ambient;
+    glm::vec3 diffuse;
+    glm::vec3 specular;
+    float strengthAmbient;
+    float strengthDiffuse;
+    float strengthSpecular;
+
+    glm::vec3 position;
+    glm::vec3 direction;
+};
+
+struct MF_LightSource {
+    GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
+    GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
+    GLuint glLight_Position, glLight_Direction;
+};
 
 class ModelFace {
 public:
@@ -25,7 +44,7 @@ public:
     ModelFace* clone(int modelID);
 
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     void setModel(objModelFace oFace);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
@@ -74,16 +93,9 @@ private:
     void outlineTwo();
     void outlineOne();
 
-    int glslVersion;
-    std::string shaderName;
-
-    // general
     float so_fov;
-
-    // outline
     float so_outlineThickness;
     glm::vec4 so_outlineColor;
-
     bool so_selectedYn;
 
     GLUtils *glUtils;
@@ -109,6 +121,8 @@ private:
     GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
     GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
     GLuint glLight_Position, glLight_Direction;
+    int GLSL_LightSource_Number;
+    std::vector<GLSL_LightSource *> glslLights;
 
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;

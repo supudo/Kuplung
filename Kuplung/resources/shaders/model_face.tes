@@ -1,3 +1,5 @@
+#version 410
+
 layout(triangles, equal_spacing, cw) in;
 
 uniform mat4 vs_MVPMatrix;

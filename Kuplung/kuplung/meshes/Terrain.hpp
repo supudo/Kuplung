@@ -19,7 +19,7 @@ class Terrain {
 public:
     ~Terrain();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
@@ -27,8 +27,6 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
-    int glslVersion;
-    std::string shaderName;
 
     GLUtils *glUtils;
     HeightmapGenerator *terrainGenerator;

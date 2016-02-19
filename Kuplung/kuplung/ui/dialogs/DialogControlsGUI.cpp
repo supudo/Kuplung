@@ -26,7 +26,8 @@ void DialogControlsGUI::init(ObjectsManager *managerObjects, std::function<void(
 }
 
 void DialogControlsGUI::render(bool* show, bool* isFrame) {
-    ImGui::SetNextWindowSize(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));

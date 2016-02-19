@@ -13,18 +13,14 @@ void GLUtils::init(std::function<void(std::string)> doLog) {
     this->doLog = doLog;
 }
 
-GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName, int glslVersion) {
+GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName) {
     GLuint shaderProgram = 0;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderVertexName + ".vert";
-    std::string shaderVertexSource = readFile(shaderPath.c_str());
-    shaderVertexSource = "#version " + std::to_string(glslVersion) + "\n" + shaderVertexSource;
-    const char *shader_vertex = shaderVertexSource.c_str();
+    const char *shader_vertex = readFile(shaderPath.c_str()).c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderFragmentName + ".frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
-    shaderFragmentSource = "#version " + std::to_string(glslVersion) + "\n" + shaderFragmentSource;
-    const char *shader_fragment = shaderFragmentSource.c_str();
+    const char *shader_fragment = readFile(shaderPath.c_str()).c_str();
 
     shaderProgram = glCreateProgram();
 

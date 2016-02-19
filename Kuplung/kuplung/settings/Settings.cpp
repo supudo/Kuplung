@@ -35,13 +35,8 @@ void Settings::initSettings() {
     this->cfgUtils = new ConfigUtils();
     this->cfgUtils->init(Settings::Instance()->appFolder());
 
-    m_pInstance->OpenGLMajorVersion = m_pInstance->cfgUtils->readInt("OpenGLMajorVersion");
-    m_pInstance->OpenGLMinorVersion = m_pInstance->cfgUtils->readInt("OpenGLMinorVersion");
-    m_pInstance->OpenGL_GLSL_Version = m_pInstance->cfgUtils->readInt("OpenGL_GLSL_Version");
-
     m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
     m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
-    m_pInstance->ShaderName = m_pInstance->cfgUtils->readString("ShaderName");
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
 
@@ -89,13 +84,8 @@ std::string Settings::appFolder() {
 }
 
 void Settings::saveSettings() {
-    this->cfgUtils->writeInt("OpenGLMajorVersion", this->OpenGLMajorVersion);
-    this->cfgUtils->writeInt("OpenGLMinorVersion", this->OpenGLMinorVersion);
-    this->cfgUtils->writeInt("OpenGL_GLSL_Version", this->OpenGL_GLSL_Version);
-
     this->cfgUtils->writeString("appVersion", this->appVersion);
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
-    this->cfgUtils->writeString("ShaderName", this->ShaderName);
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
 

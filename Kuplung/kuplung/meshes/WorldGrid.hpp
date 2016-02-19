@@ -20,7 +20,7 @@ class WorldGrid {
 public:
     ~WorldGrid();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     bool initShaderProgram();
     void initBuffers(int gridSize, float unitSize);
     void initProperties(int size);
@@ -39,8 +39,6 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
-    int glslVersion;
-    std::string shaderName;
 
     GLUtils *glUtils;
 

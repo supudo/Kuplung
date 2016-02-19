@@ -33,8 +33,7 @@ public:
     bool isAllowedFileExtension(std::string fileExtension);
     bool isAllowedStyleExtension(std::string fileExtension);
 
-    int OpenGLMajorVersion, OpenGLMinorVersion, OpenGL_GLSL_Version;
-    std::string appVersion, currentFolder, newLineDelimiter, ShaderName, SettingsFile, UIFontFile;
+    std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
     bool wireframesMode, logDebugInfo, logFileBrowser;
     Color guiClearColor;
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;

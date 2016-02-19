@@ -32,12 +32,10 @@ void LightRay::destroy() {
 
 #pragma mark - Initialization
 
-void LightRay::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void LightRay::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
     this->glUtils->init(std::bind(&LightRay::doLog, this, std::placeholders::_1));
-    this->shaderName = shaderName;
-    this->glslVersion = glslVersion;
 }
 
 #pragma mark - Public
@@ -45,14 +43,12 @@ void LightRay::init(std::function<void(std::string)> doLog, std::string shaderNa
 bool LightRay::initShaderProgram() {
     bool success = true;
 
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.vert";
     std::string shaderVertexSource = readFile(shaderPath.c_str());
-    shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
     const char *shader_vertex = shaderVertexSource.c_str();
 
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.frag";
     std::string shaderFragmentSource = readFile(shaderPath.c_str());
-    shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
     const char *shader_fragment = shaderFragmentSource.c_str();
 
     this->shaderProgram = glCreateProgram();

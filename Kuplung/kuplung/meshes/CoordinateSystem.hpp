@@ -20,7 +20,7 @@ class CoordinateSystem {
 public:
     ~CoordinateSystem();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion);
+    void init(std::function<void(std::string)> doLog);
     void initProperties();
     bool initShaderProgram();
     void initBuffers(); // 0 = x, 1 = y, 2 = z
@@ -37,8 +37,6 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
-    int glslVersion;
-    std::string shaderName;
     int axisSize;
 
     GLUtils *glUtils;

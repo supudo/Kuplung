@@ -30,7 +30,7 @@ class GLUtils {
 public:
     ~GLUtils();
     void init(std::function<void(std::string)> doLog);
-    GLuint initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName, int glslVersion);
+    GLuint initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName);
     bool compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
 
     void printProgramLog(GLuint program);

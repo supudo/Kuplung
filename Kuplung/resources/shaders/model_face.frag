@@ -1,3 +1,5 @@
+#version 410
+
 uniform mat4 fs_MMatrix;
 uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
@@ -47,7 +49,7 @@ in float fs_isBorder;
 
 out vec4 fragColor;
 
-#define NR_POINT_LIGHTS 1
+#define NR_POINT_LIGHTS 8
 
 uniform LightSource directionalLights[NR_POINT_LIGHTS];
 uniform ModelMaterial material;

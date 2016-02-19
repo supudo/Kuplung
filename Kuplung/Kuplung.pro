@@ -183,15 +183,15 @@ DISTFILES += \
     resources/fonts/material-icons-regular.ttf \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
-    resources/shaders/dots.vert \
-    resources/shaders/dots.frag \
+    resources/shaders/light_ray.vert \
+    resources/shaders/light_ray.frag \
     resources/shaders/grid.vert \
     resources/shaders/grid.frag \
-    resources/shaders/kuplung.vert \
-    resources/shaders/kuplung.geom \
-    resources/shaders/kuplung.frag \
-    resources/shaders/kuplung.tcs \
-    resources/shaders/kuplung.tes \
+    resources/shaders/model_face.vert \
+    resources/shaders/model_face.geom \
+    resources/shaders/model_face.frag \
+    resources/shaders/model_face.tcs \
+    resources/shaders/model_face.tes \
     resources/shaders/light.vert \
     resources/shaders/light.frag \
     resources/shaders/terrain.vert \

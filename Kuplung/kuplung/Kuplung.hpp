@@ -24,10 +24,9 @@ class Kuplung {
 public:
     ~Kuplung();
     int run();
-    int run(int width, int height);
 
 private:
-    bool init(int width, int height);
+    bool init();
     void initFolders();
     void destroy();
     void onEvent(SDL_Event* ev);

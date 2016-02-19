@@ -113,7 +113,7 @@ void ObjectsManager::initCamera() {
  */
 void ObjectsManager::initGrid() {
     this->grid = new WorldGrid();
-    this->grid->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "grid", Settings::Instance()->OpenGL_GLSL_Version);
+    this->grid->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
     this->grid->initShaderProgram();
     this->grid->initBuffers(10, 1);
 
@@ -126,7 +126,7 @@ void ObjectsManager::initGrid() {
  */
 void ObjectsManager::initAxisSystem() {
     this->axisSystem = new CoordinateSystem();
-    this->axisSystem->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "axis", Settings::Instance()->OpenGL_GLSL_Version);
+    this->axisSystem->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
 }
@@ -185,7 +185,7 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     }
 
     Light *lightObject = new Light();
-    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), "light", Settings::Instance()->OpenGL_GLSL_Version);
+    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
     lightObject->title = objectTitle;
     lightObject->description = objectDescription;
     lightObject->type = type;

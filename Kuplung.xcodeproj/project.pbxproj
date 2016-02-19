@@ -46,6 +46,21 @@
 		8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */; };
 		8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709A1C6CACB40085CAE5 /* objParser.cpp */; };
 		8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709D1C6CACB40085CAE5 /* STLParser.cpp */; };
+		8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
+		8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
+		8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
+		8AA5EDF91C773E0B009F1F52 /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEA1C773DF8009F1F52 /* grid.vert */; };
+		8AA5EDFA1C773E0B009F1F52 /* light_ray.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */; };
+		8AA5EDFB1C773E0B009F1F52 /* light_ray.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */; };
+		8AA5EDFC1C773E0B009F1F52 /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDED1C773DF8009F1F52 /* light.frag */; };
+		8AA5EDFD1C773E0B009F1F52 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEE1C773DF8009F1F52 /* light.vert */; };
+		8AA5EDFE1C773E0B009F1F52 /* model_face.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEF1C773DF8009F1F52 /* model_face.frag */; };
+		8AA5EDFF1C773E0B009F1F52 /* model_face.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF01C773DF8009F1F52 /* model_face.geom */; };
+		8AA5EE001C773E0B009F1F52 /* model_face.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF11C773DF8009F1F52 /* model_face.tcs */; };
+		8AA5EE011C773E0B009F1F52 /* model_face.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF21C773DF8009F1F52 /* model_face.tes */; };
+		8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
+		8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
+		8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
@@ -53,19 +68,6 @@
 		8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */; };
 		8AB6F0B31C3AA27D00665C40 /* ui_font.fnt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09C1C3AA1F900665C40 /* ui_font.fnt */; };
 		8AB6F0B41C3AA27D00665C40 /* ui_font.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09D1C3AA1F900665C40 /* ui_font.png */; };
-		8AB6F0B51C3AA29100665C40 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A01C3AA1F900665C40 /* axis.frag */; };
-		8AB6F0B61C3AA29100665C40 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A11C3AA1F900665C40 /* axis.vert */; };
-		8AB6F0B71C3AA29100665C40 /* dots.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A21C3AA1F900665C40 /* dots.frag */; };
-		8AB6F0B81C3AA29100665C40 /* dots.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A31C3AA1F900665C40 /* dots.vert */; };
-		8AB6F0B91C3AA29100665C40 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A41C3AA1F900665C40 /* grid.frag */; };
-		8AB6F0BA1C3AA29100665C40 /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A51C3AA1F900665C40 /* grid.vert */; };
-		8AB6F0BB1C3AA29100665C40 /* kuplung.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A61C3AA1F900665C40 /* kuplung.frag */; };
-		8AB6F0BC1C3AA29100665C40 /* kuplung.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A71C3AA1F900665C40 /* kuplung.geom */; };
-		8AB6F0BD1C3AA29100665C40 /* kuplung.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A81C3AA1F900665C40 /* kuplung.vert */; };
-		8AB6F0BE1C3AA29100665C40 /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0A91C3AA1F900665C40 /* light.frag */; };
-		8AB6F0BF1C3AA29100665C40 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AA1C3AA1F900665C40 /* light.vert */; };
-		8AB6F0C01C3AA29100665C40 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AB1C3AA1F900665C40 /* terrain.frag */; };
-		8AB6F0C11C3AA29100665C40 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AC1C3AA1F900665C40 /* terrain.vert */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
@@ -92,19 +94,21 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
-				8AB6F0B51C3AA29100665C40 /* axis.frag in Copy Files */,
-				8AB6F0B61C3AA29100665C40 /* axis.vert in Copy Files */,
-				8AB6F0B71C3AA29100665C40 /* dots.frag in Copy Files */,
-				8AB6F0B81C3AA29100665C40 /* dots.vert in Copy Files */,
-				8AB6F0B91C3AA29100665C40 /* grid.frag in Copy Files */,
-				8AB6F0BA1C3AA29100665C40 /* grid.vert in Copy Files */,
-				8AB6F0BB1C3AA29100665C40 /* kuplung.frag in Copy Files */,
-				8AB6F0BC1C3AA29100665C40 /* kuplung.geom in Copy Files */,
-				8AB6F0BD1C3AA29100665C40 /* kuplung.vert in Copy Files */,
-				8AB6F0BE1C3AA29100665C40 /* light.frag in Copy Files */,
-				8AB6F0BF1C3AA29100665C40 /* light.vert in Copy Files */,
-				8AB6F0C01C3AA29100665C40 /* terrain.frag in Copy Files */,
-				8AB6F0C11C3AA29100665C40 /* terrain.vert in Copy Files */,
+				8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */,
+				8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */,
+				8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */,
+				8AA5EDF91C773E0B009F1F52 /* grid.vert in Copy Files */,
+				8AA5EDFA1C773E0B009F1F52 /* light_ray.frag in Copy Files */,
+				8AA5EDFB1C773E0B009F1F52 /* light_ray.vert in Copy Files */,
+				8AA5EDFC1C773E0B009F1F52 /* light.frag in Copy Files */,
+				8AA5EDFD1C773E0B009F1F52 /* light.vert in Copy Files */,
+				8AA5EDFE1C773E0B009F1F52 /* model_face.frag in Copy Files */,
+				8AA5EDFF1C773E0B009F1F52 /* model_face.geom in Copy Files */,
+				8AA5EE001C773E0B009F1F52 /* model_face.tcs in Copy Files */,
+				8AA5EE011C773E0B009F1F52 /* model_face.tes in Copy Files */,
+				8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */,
+				8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */,
+				8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,8 +226,21 @@
 		8A6E70A31C6CACB40085CAE5 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
 		8A6E70A41C6CACB40085CAE5 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
-		8AB250C71C3FBD50005C73C1 /* kuplung.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tcs; sourceTree = "<group>"; };
-		8AB250C81C3FBD5F005C73C1 /* kuplung.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = kuplung.tes; sourceTree = "<group>"; };
+		8AA5EDE71C773DF8009F1F52 /* axis.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.frag; sourceTree = "<group>"; };
+		8AA5EDE81C773DF8009F1F52 /* axis.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.vert; sourceTree = "<group>"; };
+		8AA5EDE91C773DF8009F1F52 /* grid.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grid.frag; sourceTree = "<group>"; };
+		8AA5EDEA1C773DF8009F1F52 /* grid.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grid.vert; sourceTree = "<group>"; };
+		8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_ray.frag; sourceTree = "<group>"; };
+		8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_ray.vert; sourceTree = "<group>"; };
+		8AA5EDED1C773DF8009F1F52 /* light.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.frag; sourceTree = "<group>"; };
+		8AA5EDEE1C773DF8009F1F52 /* light.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.vert; sourceTree = "<group>"; };
+		8AA5EDEF1C773DF8009F1F52 /* model_face.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.frag; sourceTree = "<group>"; };
+		8AA5EDF01C773DF8009F1F52 /* model_face.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.geom; sourceTree = "<group>"; };
+		8AA5EDF11C773DF8009F1F52 /* model_face.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_face.tcs; sourceTree = "<group>"; };
+		8AA5EDF21C773DF8009F1F52 /* model_face.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = model_face.tes; sourceTree = "<group>"; };
+		8AA5EDF31C773DF8009F1F52 /* model_face.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.vert; sourceTree = "<group>"; };
+		8AA5EDF41C773DF8009F1F52 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
+		8AA5EDF51C773DF8009F1F52 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
 		8AB6F0991C3AA1F900665C40 /* light.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light.mtl; sourceTree = "<group>"; };
@@ -231,19 +248,6 @@
 		8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = light_texture.jpg; sourceTree = "<group>"; };
 		8AB6F09C1C3AA1F900665C40 /* ui_font.fnt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ui_font.fnt; sourceTree = "<group>"; };
 		8AB6F09D1C3AA1F900665C40 /* ui_font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ui_font.png; sourceTree = "<group>"; };
-		8AB6F0A01C3AA1F900665C40 /* axis.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.frag; sourceTree = "<group>"; };
-		8AB6F0A11C3AA1F900665C40 /* axis.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.vert; sourceTree = "<group>"; };
-		8AB6F0A21C3AA1F900665C40 /* dots.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = dots.frag; sourceTree = "<group>"; };
-		8AB6F0A31C3AA1F900665C40 /* dots.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = dots.vert; sourceTree = "<group>"; };
-		8AB6F0A41C3AA1F900665C40 /* grid.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grid.frag; sourceTree = "<group>"; };
-		8AB6F0A51C3AA1F900665C40 /* grid.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grid.vert; sourceTree = "<group>"; };
-		8AB6F0A61C3AA1F900665C40 /* kuplung.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = kuplung.frag; sourceTree = "<group>"; };
-		8AB6F0A71C3AA1F900665C40 /* kuplung.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = kuplung.geom; sourceTree = "<group>"; };
-		8AB6F0A81C3AA1F900665C40 /* kuplung.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = kuplung.vert; sourceTree = "<group>"; };
-		8AB6F0A91C3AA1F900665C40 /* light.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.frag; sourceTree = "<group>"; };
-		8AB6F0AA1C3AA1F900665C40 /* light.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light.vert; sourceTree = "<group>"; };
-		8AB6F0AB1C3AA1F900665C40 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
-		8AB6F0AC1C3AA1F900665C40 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -538,21 +542,21 @@
 		8AB6F09F1C3AA1F900665C40 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
-				8AB6F0A01C3AA1F900665C40 /* axis.frag */,
-				8AB6F0A11C3AA1F900665C40 /* axis.vert */,
-				8AB6F0A21C3AA1F900665C40 /* dots.frag */,
-				8AB6F0A31C3AA1F900665C40 /* dots.vert */,
-				8AB6F0A41C3AA1F900665C40 /* grid.frag */,
-				8AB6F0A51C3AA1F900665C40 /* grid.vert */,
-				8AB6F0A61C3AA1F900665C40 /* kuplung.frag */,
-				8AB6F0A71C3AA1F900665C40 /* kuplung.geom */,
-				8AB250C71C3FBD50005C73C1 /* kuplung.tcs */,
-				8AB250C81C3FBD5F005C73C1 /* kuplung.tes */,
-				8AB6F0A81C3AA1F900665C40 /* kuplung.vert */,
-				8AB6F0A91C3AA1F900665C40 /* light.frag */,
-				8AB6F0AA1C3AA1F900665C40 /* light.vert */,
-				8AB6F0AB1C3AA1F900665C40 /* terrain.frag */,
-				8AB6F0AC1C3AA1F900665C40 /* terrain.vert */,
+				8AA5EDE71C773DF8009F1F52 /* axis.frag */,
+				8AA5EDE81C773DF8009F1F52 /* axis.vert */,
+				8AA5EDE91C773DF8009F1F52 /* grid.frag */,
+				8AA5EDEA1C773DF8009F1F52 /* grid.vert */,
+				8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */,
+				8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */,
+				8AA5EDED1C773DF8009F1F52 /* light.frag */,
+				8AA5EDEE1C773DF8009F1F52 /* light.vert */,
+				8AA5EDEF1C773DF8009F1F52 /* model_face.frag */,
+				8AA5EDF01C773DF8009F1F52 /* model_face.geom */,
+				8AA5EDF11C773DF8009F1F52 /* model_face.tcs */,
+				8AA5EDF21C773DF8009F1F52 /* model_face.tes */,
+				8AA5EDF31C773DF8009F1F52 /* model_face.vert */,
+				8AA5EDF41C773DF8009F1F52 /* terrain.frag */,
+				8AA5EDF51C773DF8009F1F52 /* terrain.vert */,
 			);
 			path = shaders;
 			sourceTree = "<group>";

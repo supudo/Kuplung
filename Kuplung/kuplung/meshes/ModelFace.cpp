@@ -13,7 +13,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-#include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 ModelFace::ModelFace() {
@@ -31,9 +30,16 @@ ModelFace* ModelFace::clone(int modelID) {
     mmf->ModelID = this->ModelID;
     mmf->oFace = this->oFace;
 
+    mmf->so_fov = this->so_fov;
+    mmf->so_outlineThickness = this->so_outlineThickness;
+    mmf->so_outlineColor = this->so_outlineColor;
+
     mmf->vecCameraPosition = this->vecCameraPosition;
 
-    mmf->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1), Settings::Instance()->ShaderName, Settings::Instance()->OpenGL_GLSL_Version);
+    mmf->GLSL_LightSource_Number = this->GLSL_LightSource_Number;
+    mmf->glslLights = this->glslLights;
+
+    mmf->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     mmf->setModel(mmf->oFace);
     mmf->initShaderProgram();
     mmf->initBuffers(Settings::Instance()->currentFolder);
@@ -88,12 +94,10 @@ void ModelFace::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFace::init(std::function<void(std::string)> doLog, std::string shaderName, int glslVersion) {
+void ModelFace::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
     this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
-    this->shaderName = shaderName;
-    this->glslVersion = glslVersion;
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
     this->showMaterialEditor = false;
@@ -218,34 +222,29 @@ bool ModelFace::initShaderProgram() {
     bool success = true;
 
     // vertex shader
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".vert";
-    std::string shaderVertexSource = readFile(shaderPath.c_str());
-    shaderVertexSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderVertexSource;
-    const char *shader_vertex = shaderVertexSource.c_str();
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
+    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    const char *shader_vertex = shaderSourceVertex.c_str();
 
 //    // tessellation control shader
-//    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tcs";
-//    std::string shaderTessControlSource = readFile(shaderPath.c_str());
-//    shaderTessControlSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessControlSource;
-//    const char *shader_tess_control = shaderTessControlSource.c_str();
+//    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+//    std::string shaderSourceTCS = readFile(shaderPath.c_str());
+//    const char *shader_tess_control = shaderSourceTCS.c_str();
 
 //    // tessellation evaluation shader
-//    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".tes";
-//    std::string shaderTessEvalSource = readFile(shaderPath.c_str());
-//    shaderTessEvalSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderTessEvalSource;
-//    const char *shader_tess_eval = shaderTessEvalSource.c_str();
+//    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+//    std::string shaderSourceTES = readFile(shaderPath.c_str());
+//    const char *shader_tess_eval = shaderSourceTES.c_str();
 
     // geometry shader
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".geom";
-    std::string shaderGeometrySource = readFile(shaderPath.c_str());
-    shaderGeometrySource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderGeometrySource;
-    const char *shader_geometry = shaderGeometrySource.c_str();
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
+    std::string shaderSourceGeometry = readFile(shaderPath.c_str());
+    const char *shader_geometry = shaderSourceGeometry.c_str();
 
     // fragment shader
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + this->shaderName + ".frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
-    shaderFragmentSource = "#version " + std::to_string(this->glslVersion) + "\n" + shaderFragmentSource;
-    const char *shader_fragment = shaderFragmentSource.c_str();
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
+    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 

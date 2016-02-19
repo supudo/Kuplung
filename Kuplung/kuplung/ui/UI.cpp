@@ -318,8 +318,8 @@ void UI::dialogSceneStats() {
     int posY = windowHeight - 164;
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Stats", &this->showSceneStats, ImVec2(0, 0), 0.3f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
-    ImGui::Text("OpenGL version: %i.%i (%s)", Settings::Instance()->OpenGLMajorVersion, Settings::Instance()->OpenGLMinorVersion, glGetString(GL_VERSION));
-    ImGui::Text("GLSL version: %i.%i (%s)", (Settings::Instance()->OpenGL_GLSL_Version / 100), (Settings::Instance()->OpenGL_GLSL_Version % 100), glGetString(GL_SHADING_LANGUAGE_VERSION));
+    ImGui::Text("OpenGL version: 4.1 (%s)", glGetString(GL_VERSION));
+    ImGui::Text("GLSL version: 4.10 (%s)", glGetString(GL_SHADING_LANGUAGE_VERSION));
     ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));
     ImGui::Text("Renderer: %s", glGetString(GL_RENDERER));
     ImGui::Separator();

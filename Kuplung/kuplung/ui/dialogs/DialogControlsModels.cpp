@@ -29,7 +29,8 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
 }
 
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
-    ImGui::SetNextWindowPos(ImVec2(10, 30), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
 
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));

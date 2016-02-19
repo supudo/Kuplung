@@ -1,3 +1,5 @@
+#version 410
+
 uniform mat4 vs_MVPMatrix;
 
 uniform vec3 vs_displacementLocation;
