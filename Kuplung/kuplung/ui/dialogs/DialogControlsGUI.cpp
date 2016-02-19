@@ -10,6 +10,7 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/ui/components/Tabs.hpp"
+#include "kuplung/utilities/imgui/imgui_internal.h"
 
 void DialogControlsGUI::init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
     this->managerObjects = managerObjects;
@@ -71,16 +72,34 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 break;
             }
             case 3: {
-                if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
-                    for (int j=0; j<(int)this->managerObjects->lightSources.size(); j++) {
-                        ImGui::Bullet();
-                        //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
-                        if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
-                            this->selectedObjectLight = j;
-                            this->selectedObject = 3;
+                if (this->managerObjects->lightSources.size() == 0) {
+                    ImGui::Indent();
+                    ImGui::Text(ICON_FA_LIGHTBULB_O " Lights");
+                    ImGui::Unindent();
+                }
+                else {
+                    if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
+                        for (int j=0; j<(int)this->managerObjects->lightSources.size(); j++) {
+                            std::string title = this->managerObjects->lightSources[j]->title;
+                            ImGui::Bullet();
+
+//                            if (ImGui::TreeNode((void*)(intptr_t)i, "%s", this->managerObjects->lightSources[j]->title.c_str())) {
+//                                this->selectedObjectLight = j;
+//                                this->selectedObject = 3;
+//                                ImGui::SameLine();
+//                                if (ImGui::SmallButton(ICON_FA_TIMES ""))
+//                                    printf("Child %d pressed", i);
+//                                ImGui::TreePop();
+//                            }
+
+                            //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
+                            if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
+                                this->selectedObjectLight = j;
+                                this->selectedObject = 3;
+                            }
                         }
+                        ImGui::TreePop();
                     }
-                    ImGui::TreePop();
                 }
                 break;
             }
@@ -265,6 +284,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     // show lamp object
                     ImGui::Checkbox("Show Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
                     ImGui::Checkbox("Show Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
+                    if (ImGui::Button("Delete Light Source")) {
+                        this->selectedObject = 0;
+                        this->managerObjects->lightSources.erase(this->managerObjects->lightSources.begin() + this->selectedObjectLight);
+                        this->selectedObjectLight = -1;
+                    }
                     break;
                 }
                 case 1: {
