@@ -121,9 +121,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PopStyleColor();
     ImGui::PopStyleVar();
 
+    ImGui::GetIO().MouseDrawCursor = true;
     ImGui::InvisibleButton("splitter", ImVec2(-1, 8.0f));
     if (ImGui::IsItemActive())
         this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
+    if (ImGui::IsItemHovered())
+        ImGui::SetMouseCursor(3);
+    else
+        ImGui::GetIO().MouseDrawCursor = false;
 
     ImGui::BeginChild("Properties Pane", ImVec2(0,0), true);
 

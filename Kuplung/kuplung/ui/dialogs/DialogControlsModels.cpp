@@ -29,7 +29,7 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
 }
 
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
-    ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
 
@@ -71,9 +71,12 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         this->contextModelDelete(meshModelFaces);
     ImGui::EndChild();
 
+    ImGui::GetIO().MouseDrawCursor = true;
     ImGui::InvisibleButton("splitter", ImVec2(-1, 8.0f));
     if (ImGui::IsItemActive())
         this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
+    if (ImGui::IsItemHovered())
+        ImGui::SetMouseCursor(3);
 
     ImGui::BeginChild("Properties Pane", ImVec2(0,0), true);
 
