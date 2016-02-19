@@ -19,19 +19,7 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/Light.hpp"
 
-struct GLSL_LightSource {
-    glm::vec3 ambient;
-    glm::vec3 diffuse;
-    glm::vec3 specular;
-    float strengthAmbient;
-    float strengthDiffuse;
-    float strengthSpecular;
-
-    glm::vec3 position;
-    glm::vec3 direction;
-};
-
-struct MF_LightSource {
+struct ModelFace_LightSource {
     GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
     GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
     GLuint glLight_Position, glLight_Direction;
@@ -118,11 +106,8 @@ private:
     GLuint glFS_ScreenResX, glFS_ScreenResY;
 
     // light
-    GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
-    GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
-    GLuint glLight_Position, glLight_Direction;
     int GLSL_LightSource_Number;
-    std::vector<GLSL_LightSource *> glslLights;
+    std::vector<ModelFace_LightSource *> mfLights;
 
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
