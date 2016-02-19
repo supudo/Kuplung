@@ -293,10 +293,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     this->helperUI->addControlColor3("Ambient Color", &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->color, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->colorPickerOpen);
                     this->helperUI->addControlsSlider("Ambient Strength", 19, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->strength, true, isFrame);
 
-                    this->helperUI->addControlColor3("Diffuse Color", &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->color, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->animate);
+                    this->helperUI->addControlColor3("Diffuse Color", &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->color, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->colorPickerOpen);
                     this->helperUI->addControlsSlider("Diffuse Strength", 20, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->strength, true, isFrame);
 
-                    this->helperUI->addControlColor3("Specular Color", &this->managerObjects->lightSources[this->selectedObjectLight]->specular->color, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->animate);
+                    this->helperUI->addControlColor3("Specular Color", &this->managerObjects->lightSources[this->selectedObjectLight]->specular->color, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->colorPickerOpen);
                     this->helperUI->addControlsSlider("Specular Strength", 21, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->strength, true, isFrame);
                     break;
                 }
