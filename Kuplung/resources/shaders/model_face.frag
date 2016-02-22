@@ -36,6 +36,7 @@ struct LightSource {
     vec3 ambient;
     vec3 diffuse;
     vec3 specular;
+
     float strengthAmbient;
     float strengthDiffuse;
     float strengthSpecular;

@@ -162,6 +162,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             break;
         }
         case 6: {
+            // https://en.wikipedia.org/wiki/List_of_common_shading_algorithms
+            // https://renderman.pixar.com/view/cook-torrance-shader
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Illumination type");
             const char* illum_models_items[] = {
                 "[0] Color on and Ambient off",  // "Shaderless" option in Blender, under "Shading" in Material tab
