@@ -118,34 +118,28 @@ void main(void) {
 
 vec3 calculateAmbient() {
     vec3 result;
-    if (material.has_texture_ambient) {
-        vec4 texturedColor_Ambient = texture(material.sampler_ambient, fs_textureCoord);
-        for (int i=0; i<NR_POINT_LIGHTS; i++)
-            if (directionalLights[i].inUse)
-                result += (directionalLights[i].strengthAmbient * directionalLights[i].ambient * texturedColor_Ambient.rgb);
-    }
-    else {
-        for (int i=0; i<NR_POINT_LIGHTS; i++)
-            if (directionalLights[i].inUse)
-                result += directionalLights[i].strengthAmbient * directionalLights[i].ambient * material.ambient;
-    }
+    vec3 materialAmbient;
+    if (material.has_texture_ambient)
+        materialAmbient = texture(material.sampler_ambient, fs_textureCoord).rgb;
+    else
+        materialAmbient = material.ambient;
+    for (int i=0; i<NR_POINT_LIGHTS; i++)
+        if (directionalLights[i].inUse)
+            result += directionalLights[i].strengthAmbient * directionalLights[i].ambient * materialAmbient;
     return result;
 }
 
 vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
     vec3 result;
     float lambertFactor = max(dot(lightDirection, normalDirection), 0.0);
-    if (material.has_texture_diffuse) {
-        vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        for (int i=0; i<NR_POINT_LIGHTS; i++)
-            if (directionalLights[i].inUse)
-                result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * texturedColor_Diffuse.rgb;
-    }
-    else {
-        for (int i=0; i<NR_POINT_LIGHTS; i++)
-            if (directionalLights[i].inUse)
-                result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * material.diffuse;
-    }
+    vec3 materialDiffuse;
+    if (material.has_texture_diffuse)
+        materialDiffuse = texture(material.sampler_diffuse, fs_textureCoord).rgb;
+    else
+        materialDiffuse = material.diffuse;
+    for (int i=0; i<NR_POINT_LIGHTS; i++)
+        if (directionalLights[i].inUse)
+            result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * materialDiffuse;
     return result;
 }
 
