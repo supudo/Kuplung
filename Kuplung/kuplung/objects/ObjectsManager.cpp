@@ -52,7 +52,7 @@ void ObjectsManager::render() {
 
     this->camera->render(this->Setting_PlaneClose, this->Setting_PlaneFar);
 
-    if ((this->Setting_GridSize + 1) != this->grid->gridSize) {
+    if (this->Setting_GridSize != this->grid->gridSize) {
         this->grid->gridSize = this->Setting_GridSize;
         this->grid->initBuffers(this->Setting_GridSize, 1);
     }

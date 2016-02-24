@@ -44,8 +44,11 @@ private:
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices;
+    GLuint glVAO, vboVertices, vboNormals, vboIndices;
     GLuint glAttributeVertexPosition, glUniformMVPMatrix;
+    std::vector<unsigned int> indices;
+
+    bool actAsMirrorNeedsChange;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

@@ -77,10 +77,8 @@ public:
 
 private:
     std::function<void(std::string)> doLogFunc;
+    void drawOutline();
     void drawOnly();
-    void outlineThree();
-    void outlineTwo();
-    void outlineOne();
 
     float so_fov;
     float so_outlineThickness;

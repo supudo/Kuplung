@@ -724,10 +724,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
             glUniform1i(this->glMaterial_HasTextureDissolve, 0);
 
         // outlining
-        //this->drawOnly();
-        //this->outlineOne();
-        //this->outlineTwo();
-        this->outlineThree();
+        this->drawOutline();
 
         // clear texture
 //        if (this->vboTextureDiffuse > 0)
@@ -737,7 +734,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     }
 }
 
-void ModelFace::outlineThree() {
+void ModelFace::drawOutline() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
 
@@ -761,74 +758,6 @@ void ModelFace::outlineThree() {
     glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
     this->drawOnly();
-}
-
-void ModelFace::outlineTwo() {
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-
-    glm::mat4 mtxModel;
-
-    if (this->so_selectedYn) {
-        // outline
-        glDisable(GL_DEPTH_TEST);
-        glUniform1f(this->glVS_IsBorder, 1.0);
-
-        mtxModel = glm::scale(this->matrixModel, glm::vec3(this->so_outlineThickness, this->so_outlineThickness, this->so_outlineThickness));
-        mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
-
-        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-        glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
-
-        this->drawOnly();
-        glEnable(GL_DEPTH_TEST);
-    }
-
-    // model
-    glUniform1f(this->glVS_IsBorder, 0.0);
-
-    mtxModel = glm::scale(this->matrixModel, glm::vec3(1.0, 1.0, 1.0));
-    mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
-
-    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-    glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
-
-    this->drawOnly();
-}
-
-void ModelFace::outlineOne() {
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-
-    // 1st pass
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glEnable(GL_STENCIL_TEST);
-    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-
-    glStencilFunc(GL_ALWAYS, 1, 0xFF);
-    glStencilMask(0xFF);
-
-    // draw
-    glUniform1f(this->glVS_IsBorder, 0.0);
-    this->drawOnly();
-
-    // 2nd pass
-    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-    glStencilMask(0x00);
-    glDisable(GL_DEPTH_TEST);
-
-    glUniform1f(this->glVS_IsBorder, 1.0);
-    matrixModel = glm::scale(matrixModel, glm::vec3(this->so_outlineThickness, this->so_outlineThickness, this->so_outlineThickness));
-    mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-    glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-    glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
-
-    // draw
-    this->drawOnly();
-
-    glStencilMask(0xFF);
-    glDisable(GL_STENCIL_TEST);
-    glEnable(GL_DEPTH_TEST);
 }
 
 void ModelFace::drawOnly() {

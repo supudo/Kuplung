@@ -32,6 +32,10 @@ void WorldGrid::destroy() {
     delete this->rotateY;
     delete this->rotateZ;
 
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboIndices);
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -56,6 +60,7 @@ void WorldGrid::init(std::function<void(std::string)> doLog) {
 void WorldGrid::initProperties(int size) {
     this->showGrid = true;
     this->actAsMirror = false;
+    this->actAsMirrorNeedsChange = true;
 
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
@@ -120,33 +125,66 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->gridSize = gridSize;
-    float gridMinus = this->gridSize / 2;
-    GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
-    bool h;
+    if (!this->actAsMirror) {
+        this->actAsMirrorNeedsChange = true;
+        this->gridSize = gridSize;
+        float gridMinus = this->gridSize / 2;
+        GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
+        bool h;
 
-    for (int i = 0; i < (this->gridSize * 2); i++) {
-        for (int j = 0; j < this->gridSize; j++) {
-            h = true;
-            if (i >= this->gridSize)
-                h = false;
-            if (h) {
-                verticesData[i][j].y = (i - gridMinus) * unitSize;
-                verticesData[i][j].x = (j - gridMinus) * unitSize;
-            }
-            else {
-                verticesData[i][j].x = (i - this->gridSize - gridMinus) * unitSize;
-                verticesData[i][j].y = (j - gridMinus) * unitSize;
+        this->indices.clear();
+        for (int i = 0; i < (this->gridSize * 2); i++) {
+            for (int j = 0; j < this->gridSize; j++) {
+                h = true;
+                if (i >= this->gridSize)
+                    h = false;
+                if (h) {
+                    verticesData[i][j].y = (i - gridMinus) * unitSize;
+                    verticesData[i][j].x = (j - gridMinus) * unitSize;
+                }
+                else {
+                    verticesData[i][j].x = (i - this->gridSize - gridMinus) * unitSize;
+                    verticesData[i][j].y = (j - gridMinus) * unitSize;
+                }
             }
         }
-    }
 
-    // vertices
-    glGenBuffers(1, &this->vboVertices);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        // vertices
+        glGenBuffers(1, &this->vboVertices);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeVertexPosition);
+        glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    }
+    else {
+        this->actAsMirrorNeedsChange = false;
+
+        float planePoint = (float)(this->gridSize / 2);
+        GLfloat verticesData[18] = {
+            planePoint, planePoint, 0.0,
+            planePoint, -1 * planePoint, 0.0,
+            -1 * planePoint, -1 * planePoint, 0.0,
+            -1 * planePoint, planePoint, 0.0,
+            planePoint, planePoint, 0.0,
+            -1 * planePoint, -1 * planePoint, 0.0
+        };
+
+        GLuint indicesData[6] = {
+            0, 1, 2, 3, 4, 5
+        };
+
+        // vertices
+        glGenBuffers(1, &this->vboVertices);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeVertexPosition);
+        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+        // indices
+        glGenBuffers(1, &this->vboIndices);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesData) * sizeof(GLuint), indicesData, GL_STATIC_DRAW);
+    }
 
     glBindVertexArray(0);
 }
@@ -169,10 +207,6 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-        glLineWidth((GLfloat)2.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -180,11 +214,24 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         // draw
         glBindVertexArray(this->glVAO);
 
-        for (int i = 0; i < this->gridSize * 2; i++)
-            glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
+        if (this->actAsMirror && this->actAsMirrorNeedsChange)
+            this->initBuffers(this->gridSize, 1.0);
+        else if (!this->actAsMirror && !this->actAsMirrorNeedsChange)
+            this->initBuffers(this->gridSize, 1.0);
 
-        for (int i = 0; i < this->gridSize; i++)
-            glDrawArrays(GL_LINE_STRIP, 0, this->gridSize);
+        glFrontFace(GL_CCW);
+        glCullFace(GL_BACK);
+        glLineWidth((GLfloat)2.5f);
+
+        if (this->actAsMirror)
+            glDrawElements(GL_TRIANGLES, sizeof(this->indices), GL_UNSIGNED_INT, nullptr);
+        else {
+            for (int i = 0; i < this->gridSize * 2; i++)
+                glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
+
+            for (int i = 0; i < this->gridSize; i++)
+                glDrawArrays(GL_LINE_STRIP, 0, this->gridSize);
+        }
 
         glBindVertexArray(0);
 
