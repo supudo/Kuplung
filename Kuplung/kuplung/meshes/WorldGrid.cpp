@@ -115,6 +115,8 @@ bool WorldGrid::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glAttributeVertexNormal = this->glUtils->glGetUniform(this->shaderProgram, "a_vertexNormal");
+        this->glAttributeActAsMirror = this->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
 
@@ -207,7 +209,6 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
-
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
@@ -223,12 +224,14 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         glCullFace(GL_BACK);
         glLineWidth((GLfloat)2.5f);
 
-        if (this->actAsMirror)
+        if (this->actAsMirror) {
+            glUniform1i(this->glAttributeActAsMirror, 1);
             glDrawElements(GL_TRIANGLES, sizeof(this->indices), GL_UNSIGNED_INT, nullptr);
+        }
         else {
+            glUniform1i(this->glAttributeActAsMirror, 0);
             for (int i = 0; i < this->gridSize * 2; i++)
                 glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
-
             for (int i = 0; i < this->gridSize; i++)
                 glDrawArrays(GL_LINE_STRIP, 0, this->gridSize);
         }
