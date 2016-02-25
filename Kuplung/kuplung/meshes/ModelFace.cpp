@@ -692,25 +692,15 @@ void ModelFace::relfectionRenderFBO() {
 
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
-    // Use the program that we previously created
     glUseProgram(this->shaderProgram);
 
-    // Set the modelview projection matrix that we calculated above
-    // in our vertex shader
     glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
     glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
     glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
-    // Bind our vertex array object
     glBindVertexArray(this->glVAO);
-
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-
-    // Cull front faces now that everything is flipped
-    // with our inverted reflection transformation matrix
     glCullFace(GL_FRONT);
-
-    // Draw our object
     glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
@@ -724,7 +714,6 @@ void ModelFace::relfectionRenderMirror() {
         //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         //glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
-        // Use our shader for reflections
         glUseProgram(this->shaderProgramReflection);
 
         glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -50.0, -250.0));
@@ -733,20 +722,12 @@ void ModelFace::relfectionRenderMirror() {
         glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
         glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        // The normal matrix needs to be the inverse transpose of the top left 3x3 portion of the modelview matrix
-        // We don't need to calculate the inverse transpose matrix here because this will always be an orthonormal matrix
-        //   thus the the inverse tranpose is the same thing
+        // The inverse transpose of the top left 3x3 portion of the modelview matrix
         glm::mat3 matrixNormal = glm::mat3(mtxModel);
 
-        // Set the normal matrix for our shader to use
         glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
-
-        // Bind the texture we rendered-to above (i.e. the reflection texture)
         glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
-
-        // Generate mipmaps from the rendered-to base level. Mipmaps reduce shimmering pixels due to better filtering
         glGenerateMipmap(GL_TEXTURE_2D);
-
         glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
     }
 }
