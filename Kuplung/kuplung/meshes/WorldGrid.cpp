@@ -33,7 +33,6 @@ void WorldGrid::destroy() {
     delete this->rotateZ;
 
     glDeleteBuffers(1, &this->vboVertices);
-    glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboIndices);
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
@@ -115,7 +114,6 @@ bool WorldGrid::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->glAttributeVertexNormal = this->glUtils->glGetUniform(this->shaderProgram, "a_vertexNormal");
         this->glAttributeActAsMirror = this->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }

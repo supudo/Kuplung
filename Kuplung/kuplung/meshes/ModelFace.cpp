@@ -222,6 +222,9 @@ void ModelFace::initProperties() {
 bool ModelFace::initShaderProgram() {
     bool success = true;
 
+    // init FBO
+    this->fboDefault = 0;
+
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
@@ -567,10 +570,62 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     glBindVertexArray(0);
 }
 
+#pragma mark - Reflection
+
+void ModelFace::relfectionRender() {
+//    // Bind our refletion FBO and render our scene
+//    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
+
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//    glViewport(0, 0, 500, 500);
+
+//    mtxLoadPerspective(projection, 90, (float)_reflectWidth / (float)_reflectHeight,5.0,10000);
+
+//    mtxLoadIdentity(modelView);
+
+//    // Invert Y so that everything is rendered up-side-down
+//    // as it should with a reflection
+//    mtxScaleApply(modelView, 1, -1, 1);
+//    mtxTranslateApply(modelView, 0, 300, -800);
+//    mtxRotateXApply(modelView, -90.0f);
+//    mtxRotateApply(modelView, _characterAngle, 0.7, 0.3, 1);
+
+//    mtxMultiply(mvp, projection, modelView);
+
+//    // Use the program that we previously created
+//    glUseProgram(_characterPrgName);
+
+//    // Set the modelview projection matrix that we calculated above
+//    // in our vertex shader
+//    glUniformMatrix4fv(_characterMvpUniformIdx, 1, GL_FALSE, mvp);
+
+//    // Bind our vertex array object
+//    glBindVertexArray(_characterVAOName);
+
+//    // Bind the texture to be used
+//    glBindTexture(GL_TEXTURE_2D, _characterTexName);
+
+//    // Cull front faces now that everything is flipped
+//    // with our inverted reflection transformation matrix
+//    glCullFace(GL_FRONT);
+
+//    // Draw our object
+//    glDrawElements(GL_TRIANGLES, _characterNumElements, _characterElementType, 0);
+
+//    // Bind our default FBO to render to the screen
+//    glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
+
+//    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+}
+
 #pragma mark - Render
 
 void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, bool fixedWithGrid, glm::mat4 matrixGrid) {
     if (this->glVAO > 0) {
+        this->relfectionRender();
+
+        glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
+
         glUseProgram(this->shaderProgram);
 
         this->matrixProjection = matrixProjection;

@@ -44,8 +44,8 @@ private:
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboNormals, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeVertexNormal, glAttributeActAsMirror;
+    GLuint glVAO, vboVertices, vboIndices;
+    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror;
     std::vector<unsigned int> indices;
 
     bool actAsMirrorNeedsChange;

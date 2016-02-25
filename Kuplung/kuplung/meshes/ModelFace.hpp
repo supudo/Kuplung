@@ -80,6 +80,9 @@ private:
     void drawOutline();
     void drawOnly();
 
+    void reflectionInit();
+    void relfectionRender();
+
     float so_fov;
     float so_outlineThickness;
     glm::vec4 so_outlineColor;
@@ -93,6 +96,15 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
+
+    // FBO
+    GLuint fboDefault, fboReflection;
+
+    // reflection objects
+    GLenum reflectQuadPrimType, reflectQuadElementType;
+    GLuint quadNumElements, reflectVAOName, reflectTexName;
+    GLuint reflectWidth, reflectHeight, reflectPrgName;
+    GLint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
     GLuint glVS_MVPMatrix, glFS_MMatrix;
