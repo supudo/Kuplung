@@ -18,6 +18,7 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/Light.hpp"
+#include "kuplung/meshes/WorldGrid.hpp"
 
 struct ModelFace_LightSource {
     GLuint glLight_InUse;
@@ -39,7 +40,7 @@ public:
     void initBuffers(std::string assetsFolder);
     void initProperties();
     void initModelProperties();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid);
 
     // general options
     void setOptionsFOV(float fov);
@@ -89,6 +90,7 @@ private:
     float so_outlineThickness;
     glm::vec4 so_outlineColor;
     bool so_selectedYn;
+    WorldGrid *grid;
 
     GLUtils *glUtils;
 

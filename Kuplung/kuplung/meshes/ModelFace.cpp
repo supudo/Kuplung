@@ -70,6 +70,20 @@ void ModelFace::destroy() {
     if (this->vboTextureDissolve > 0)
         glDeleteBuffers(1, &this->vboTextureDissolve);
 
+    GLint param;
+    GLuint objName;
+    glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
+    if (GL_RENDERBUFFER == param) {
+        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+        objName = ((GLuint*)(&param))[0];
+        glDeleteRenderbuffers(1, &objName);
+    }
+    else if(GL_TEXTURE == param) {
+        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+        objName = ((GLuint*)(&param))[0];
+        glDeleteTextures(1, &objName);
+    }
+
     glDisableVertexAttribArray(this->glVS_VertexPosition);
     glDisableVertexAttribArray(this->glFS_TextureCoord);
     glDisableVertexAttribArray(this->glVS_VertexNormal);
@@ -663,20 +677,29 @@ bool ModelFace::reflectionInit() {
 
 #pragma mark - Render
 
-void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
+void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
     this->vecCameraPosition = vecCameraPosition;
+    this->grid = grid;
     // drawing options
 
     //glEnable(GL_CULL_FACE);
 //    glCullFace(GL_BACK);
 //    glFrontFace(GL_CCW);
 
-    this->relfectionRenderFBO();
+    if (this->grid->actAsMirror)
+        this->relfectionRenderFBO();
+
+    if (!this->grid->actAsMirror) {
+        glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
+        glBindVertexArray(this->glVAO);
+    }
     this->renderModel();
-    this->relfectionRenderMirror();
+
+    if (this->grid->actAsMirror)
+        this->relfectionRenderMirror();
 
     glUseProgram(0);
     glBindVertexArray(0);
@@ -738,7 +761,7 @@ void ModelFace::relfectionRenderMirror() {
     //glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
     glGenerateMipmap(GL_TEXTURE_2D);
-    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 }
 
 void ModelFace::renderModel() {
