@@ -325,9 +325,7 @@ void Kuplung::renderScene() {
         mmf->render(this->managerObjects->matrixProjection,
                     this->managerObjects->camera->matrixCamera,
                     mtxModel,
-                    this->managerObjects->camera->cameraPosition,
-                    this->managerObjects->Setting_FixedGridWorld,
-                    this->managerObjects->grid->matrixModel);
+                    this->managerObjects->camera->cameraPosition);
     }
 
     this->processRunningThreads();

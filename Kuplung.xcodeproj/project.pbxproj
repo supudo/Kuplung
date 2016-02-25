@@ -46,6 +46,8 @@
 		8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */; };
 		8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709A1C6CACB40085CAE5 /* objParser.cpp */; };
 		8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709D1C6CACB40085CAE5 /* STLParser.cpp */; };
+		8A7F386D1C7F28EB004D4520 /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
+		8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
 		8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
 		8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
 		8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
@@ -109,6 +111,8 @@
 				8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */,
 				8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */,
 				8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */,
+				8A7F386D1C7F28EB004D4520 /* reflection.frag in Copy Files */,
+				8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +229,8 @@
 		8A6E70A21C6CACB40085CAE5 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
 		8A6E70A31C6CACB40085CAE5 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
 		8A6E70A41C6CACB40085CAE5 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		8A7F386B1C7F28E8004D4520 /* reflection.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.frag; sourceTree = "<group>"; };
+		8A7F386C1C7F28E8004D4520 /* reflection.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.vert; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AA5EDE71C773DF8009F1F52 /* axis.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.frag; sourceTree = "<group>"; };
 		8AA5EDE81C773DF8009F1F52 /* axis.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.vert; sourceTree = "<group>"; };
@@ -555,6 +561,8 @@
 				8AA5EDF11C773DF8009F1F52 /* model_face.tcs */,
 				8AA5EDF21C773DF8009F1F52 /* model_face.tes */,
 				8AA5EDF31C773DF8009F1F52 /* model_face.vert */,
+				8A7F386B1C7F28E8004D4520 /* reflection.frag */,
+				8A7F386C1C7F28E8004D4520 /* reflection.vert */,
 				8AA5EDF41C773DF8009F1F52 /* terrain.frag */,
 				8AA5EDF51C773DF8009F1F52 /* terrain.vert */,
 			);

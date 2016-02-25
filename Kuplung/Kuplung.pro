@@ -192,6 +192,8 @@ DISTFILES += \
     resources/shaders/model_face.frag \
     resources/shaders/model_face.tcs \
     resources/shaders/model_face.tes \
+    resources/shaders/reflection.vert \
+    resources/shaders/reflection.frag \
     resources/shaders/light.vert \
     resources/shaders/light.frag \
     resources/shaders/terrain.vert \

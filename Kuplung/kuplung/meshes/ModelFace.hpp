@@ -39,7 +39,7 @@ public:
     void initBuffers(std::string assetsFolder);
     void initProperties();
     void initModelProperties();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, bool fixedWithGrid, glm::mat4 matrixGrid);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
 
     // general options
     void setOptionsFOV(float fov);
@@ -80,8 +80,10 @@ private:
     void drawOutline();
     void drawOnly();
 
-    void reflectionInit();
-    void relfectionRender();
+    bool reflectionInit();
+    void renderModel(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+    void relfectionRenderFBO();
+    void relfectionRenderMirror();
 
     float so_fov;
     float so_outlineThickness;
@@ -90,21 +92,20 @@ private:
 
     GLUtils *glUtils;
 
-    // program, shaders, VAO, VBO
+    // model objects
+    GLuint fboDefault;
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
 
-    // FBO
-    GLuint fboDefault, fboReflection;
-
     // reflection objects
-    GLenum reflectQuadPrimType, reflectQuadElementType;
-    GLuint quadNumElements, reflectVAOName, reflectTexName;
-    GLuint reflectWidth, reflectHeight, reflectPrgName;
-    GLint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
+    GLuint fboReflection;
+    GLuint shaderProgramReflection;
+    GLuint shaderVertexReflection, shaderFragmentReflection;
+    GLuint reflectVAO, reflectTexName, reflectWidth, reflectHeight;
+    GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
     GLuint glVS_MVPMatrix, glFS_MMatrix;
