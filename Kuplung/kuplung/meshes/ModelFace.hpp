@@ -81,7 +81,7 @@ private:
     void drawOnly();
 
     bool reflectionInit();
-    void renderModel(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+    void renderModel();
     void relfectionRenderFBO();
     void relfectionRenderMirror();
 

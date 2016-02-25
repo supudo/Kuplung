@@ -9,9 +9,9 @@ const vec4 tintColor = vec4(0.0, 0.0, 1.0, 1.0);
 // Amount of tint to apply
 const float tintFactor = 0.2;
 
-in vec3       varNormal;
-in vec3       varEyeDir;
-out vec4      fragColor;
+in vec3 varNormal;
+in vec3 varEyeDir;
+out vec4 fragColor;
 
 uniform sampler2D diffuseTexture;
 

@@ -668,9 +668,14 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
     this->vecCameraPosition = vecCameraPosition;
+    // drawing options
+
+    //glEnable(GL_CULL_FACE);
+//    glCullFace(GL_BACK);
+//    glFrontFace(GL_CCW);
 
     this->relfectionRenderFBO();
-    this->renderModel(matrixProjection, matrixCamera, matrixModel, vecCameraPosition);
+    this->renderModel();
     this->relfectionRenderMirror();
 
     glUseProgram(0);
@@ -683,67 +688,66 @@ void ModelFace::relfectionRenderFBO() {
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
-    glm::mat3 matrixNormal = glm::mat3(1.0);
+//    glm::mat4 mtxModel = this->matrixModel;
+//    mtxModel = glm::scale(mtxModel, glm::vec3(1, -1, -1));
+//    mtxModel = glm::translate(mtxModel, glm::vec3(0, 300, -800));
+//    mtxModel = glm::rotate(mtxModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+
     glm::mat4 mtxModel = this->matrixModel;
 
-    mtxModel = glm::scale(mtxModel, glm::vec3(1, -1, -1));
-    mtxModel = glm::translate(mtxModel, glm::vec3(0, 300, -800));
-    mtxModel = glm::rotate(mtxModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+    this->matrixModel = glm::scale(this->matrixModel, glm::vec3(1, -1, -1));
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 2.5, -2.5));
+    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
     glUseProgram(this->shaderProgram);
 
-    glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
     glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-    glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
     glBindVertexArray(this->glVAO);
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
     glCullFace(GL_FRONT);
     glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
+    this->matrixModel = mtxModel;
+//    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 1.5, -4.5));
+//    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+//    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(45.0f), glm::vec3(0.7, 0.3, 1));
+
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
 }
 
 void ModelFace::relfectionRenderMirror() {
-    if (this->reflectVAO) {
-        glBindVertexArray(this->reflectVAO);
+    glBindVertexArray(this->reflectVAO);
+    glUseProgram(this->shaderProgramReflection);
 
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //glViewport(0, 0, this->reflectWidth, this->reflectHeight);
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
-        glUseProgram(this->shaderProgramReflection);
+    glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
-        glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -50.0, -250.0));
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+    glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
+    glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
-        glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+    // The inverse transpose of the top left 3x3 portion of the modelview matrix
+    glm::mat3 matrixNormal = glm::mat3(mtxModel);
+    glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
-        // The inverse transpose of the top left 3x3 portion of the modelview matrix
-        glm::mat3 matrixNormal = glm::mat3(mtxModel);
-
-        glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
-        glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
-    }
+    //glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
+    glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 }
 
-void ModelFace::renderModel(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
+void ModelFace::renderModel() {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        // drawing options
-        //glEnable(GL_CULL_FACE);
-        glCullFace(GL_BACK);
-        glFrontFace(GL_CCW);
-
-        glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
+        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-        glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+        glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
 
         // blending
         if (this->oFace.faceMaterial.transparency < 1.0 || this->Setting_Alpha < 1.0) {
@@ -767,7 +771,7 @@ void ModelFace::renderModel(glm::mat4 matrixProjection, glm::mat4 matrixCamera, 
         glUniform1i(this->glFS_CelShading, this->Setting_CelShading);
 
         // camera position
-        glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
+        glUniform3f(this->glFS_CameraPosition, this->vecCameraPosition.x, this->vecCameraPosition.y, this->vecCameraPosition.z);
 
         // screen size
         glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
@@ -894,8 +898,6 @@ void ModelFace::drawOutline() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
 
-    //mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-
     if (this->so_selectedYn) {
         glDisable(GL_DEPTH_TEST);
         glUniform1f(this->glVS_IsBorder, 1.0);
@@ -917,13 +919,13 @@ void ModelFace::drawOutline() {
 }
 
 void ModelFace::drawOnly() {
-    glBindVertexArray(this->glVAO);
     if (Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
     glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+
     if (Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glBindVertexArray(0);
 }
 
 #pragma mark - Scene Options

@@ -4,8 +4,8 @@ uniform mat4 modelViewMatrix;
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
 
-in vec3  inNormal;
-in vec4  inPosition;
+in vec3 inNormal;
+in vec4 inPosition;
 out vec3 varNormal;
 out vec3 varEyeDir;
 
