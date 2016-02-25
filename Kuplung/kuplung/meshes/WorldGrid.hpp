@@ -26,6 +26,7 @@ public:
     void initProperties(int size);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     int gridSize;
+    float transparency;
 
     bool showGrid, actAsMirror;
     ObjectEye *eyeSettings;
@@ -45,7 +46,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror;
+    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha;
     std::vector<unsigned int> indices;
 
     bool actAsMirrorNeedsChange;

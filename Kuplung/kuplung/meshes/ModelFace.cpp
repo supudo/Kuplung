@@ -683,29 +683,29 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     this->matrixModel = matrixModel;
     this->vecCameraPosition = vecCameraPosition;
     this->grid = grid;
-    // drawing options
 
-    //glEnable(GL_CULL_FACE);
-//    glCullFace(GL_BACK);
-//    glFrontFace(GL_CCW);
-
-    if (this->grid->actAsMirror)
-        this->relfectionRenderFBO();
+    if (this->grid->actAsMirror) {
+        glCullFace(GL_FRONT);
+        this->renderReflectFBO();
+    }
 
     if (!this->grid->actAsMirror) {
+        //glEnable(GL_CULL_FACE);
+        glCullFace(GL_BACK);
+        glFrontFace(GL_CCW);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
         glBindVertexArray(this->glVAO);
     }
     this->renderModel();
 
     if (this->grid->actAsMirror)
-        this->relfectionRenderMirror();
+        this->renderMirrorSurface();
 
     glUseProgram(0);
     glBindVertexArray(0);
 }
 
-void ModelFace::relfectionRenderFBO() {
+void ModelFace::renderReflectFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
 
     //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -741,7 +741,7 @@ void ModelFace::relfectionRenderFBO() {
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
 }
 
-void ModelFace::relfectionRenderMirror() {
+void ModelFace::renderMirrorSurface() {
     glBindVertexArray(this->reflectVAO);
     glUseProgram(this->shaderProgramReflection);
 
@@ -761,7 +761,7 @@ void ModelFace::relfectionRenderMirror() {
     //glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
     glGenerateMipmap(GL_TEXTURE_2D);
-    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 }
 
 void ModelFace::renderModel() {

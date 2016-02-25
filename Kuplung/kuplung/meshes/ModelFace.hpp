@@ -83,8 +83,8 @@ private:
 
     bool reflectionInit();
     void renderModel();
-    void relfectionRenderFBO();
-    void relfectionRenderMirror();
+    void renderReflectFBO();
+    void renderMirrorSurface();
 
     float so_fov;
     float so_outlineThickness;

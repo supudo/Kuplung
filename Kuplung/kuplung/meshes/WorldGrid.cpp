@@ -58,8 +58,9 @@ void WorldGrid::init(std::function<void(std::string)> doLog) {
 
 void WorldGrid::initProperties(int size) {
     this->showGrid = true;
-    this->actAsMirror = false;
+    this->actAsMirror = true;
     this->actAsMirrorNeedsChange = true;
+    this->transparency = 0.0;
 
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
@@ -115,6 +116,7 @@ bool WorldGrid::initShaderProgram() {
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glAttributeActAsMirror = this->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
+        this->glAttributeAlpha = this->glUtils->glGetUniform(this->shaderProgram, "a_alpha");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
 
@@ -128,6 +130,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
     if (!this->actAsMirror) {
         this->actAsMirrorNeedsChange = true;
         this->gridSize = gridSize;
+
         float gridMinus = this->gridSize / 2;
         GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
         bool h;
@@ -218,16 +221,30 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         else if (!this->actAsMirror && !this->actAsMirrorNeedsChange)
             this->initBuffers(this->gridSize, 1.0);
 
-        glFrontFace(GL_CCW);
-        glCullFace(GL_BACK);
-        glLineWidth((GLfloat)2.5f);
 
         if (this->actAsMirror) {
+            glDisable(GL_DEPTH_TEST);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+
+            glUniform1f(this->glAttributeAlpha, this->transparency);
             glUniform1i(this->glAttributeActAsMirror, 1);
+
             glDrawElements(GL_TRIANGLES, sizeof(this->indices), GL_UNSIGNED_INT, nullptr);
         }
         else {
+            glFrontFace(GL_CCW);
+            glCullFace(GL_BACK);
+            glLineWidth((GLfloat)2.5f);
+
+            glEnable(GL_DEPTH_TEST);
+            glDepthFunc(GL_LESS);
+            glDisable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+            glUniform1f(this->glAttributeAlpha, 1.0);
             glUniform1i(this->glAttributeActAsMirror, 0);
+
             for (int i = 0; i < this->gridSize * 2; i++)
                 glDrawArrays(GL_LINE_STRIP, this->gridSize * i, this->gridSize);
             for (int i = 0; i < this->gridSize; i++)
