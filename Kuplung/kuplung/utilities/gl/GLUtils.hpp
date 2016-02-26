@@ -38,6 +38,7 @@ public:
     bool logOpenGLError(const char *file, int line);
     GLint glGetAttribute(GLuint program, const char* var_name);
     GLint glGetUniform(GLuint program, const char* var_name);
+    GLsizei getGLTypeSize(GLenum type);
 
 private:
     std::function<void(std::string)> doLog;
