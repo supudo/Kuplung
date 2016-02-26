@@ -598,6 +598,64 @@ bool ModelFace::reflectionInit() {
     this->reflectWidth = 512;
     this->reflectHeight = 512;
 
+    glGenVertexArrays(1, &this->glVAOReflect);
+    glBindVertexArray(this->glVAOReflect);
+
+    float planePoint = 5;
+    this->dataVertices = {
+        planePoint, planePoint, 0.0,
+        planePoint, -1 * planePoint, 0.0,
+        -1 * planePoint, -1 * planePoint, 0.0,
+        -1 * planePoint, planePoint, 0.0,
+        planePoint, planePoint, 0.0,
+        -1 * planePoint, -1 * planePoint, 0.0
+    };
+
+    this->dataTexCoords = {
+        0.0f,  1.0f,
+        1.0f,  1.0f,
+        1.0f,  0.0f,
+        0.0f,  0.0f
+    };
+
+    this->dataNormals = {
+        0.0f, 0.0f, 1.0,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+        0.0f, 0.0f, 1.0f,
+    };
+
+    this->dataIndices = {
+        0, 1, 2,
+        3, 4, 5
+    };
+
+    // vertices
+    glGenBuffers(1, &this->vboVerticesReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboVerticesReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // normals
+    glGenBuffers(1, &this->vboNormalsReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboNormalsReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataNormals.size() * sizeof(GLfloat), &this->dataNormals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // texture coordinates
+    glGenBuffers(1, &this->vboTextureCoordinatesReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinatesReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataTexCoords.size() * sizeof(GLfloat), &this->dataTexCoords[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+
+    // indices
+    glGenBuffers(1, &this->vboIndicesReflect);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndicesReflect);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+
     GLuint colorTexture;
 
     // Create a texture object to apply to model
@@ -732,7 +790,7 @@ void ModelFace::renderReflectFBO() {
 }
 
 void ModelFace::renderMirrorSurface() {
-    glBindVertexArray(this->reflectVAO);
+    glBindVertexArray(this->glVAOReflect);
     glUseProgram(this->shaderProgramReflection);
 
     glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
@@ -747,7 +805,8 @@ void ModelFace::renderMirrorSurface() {
 
     glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glGenerateMipmap(GL_TEXTURE_2D);
-    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
     this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 

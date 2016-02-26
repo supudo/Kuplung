@@ -136,6 +136,8 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         bool h;
 
         this->dataVertices.clear();
+        this->dataTexCoords.clear();
+        this->dataNormals.clear();
         this->dataIndices.clear();
         for (int i = 0; i < (this->gridSize * 2); i++) {
             for (int j = 0; j < this->gridSize; j++) {
@@ -174,9 +176,23 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
             -1 * planePoint, -1 * planePoint, 0.0
         };
 
-        //GLuint indicesData[6] = {
+        this->dataTexCoords = {
+            0.0f,  1.0f,
+            1.0f,  1.0f,
+            1.0f,  0.0f,
+            0.0f,  0.0f
+        };
+
+        this->dataNormals = {
+            0.0f, 0.0f, 1.0,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+            0.0f, 0.0f, 1.0f,
+        };
+
         this->dataIndices = {
-            0, 1, 2, 3, 4, 5
+            0, 1, 2,
+            3, 4, 5
         };
 
         // vertices

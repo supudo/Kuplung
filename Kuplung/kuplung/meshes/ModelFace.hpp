@@ -91,22 +91,26 @@ private:
     glm::vec4 so_outlineColor;
     bool so_selectedYn;
     WorldGrid *grid;
+    std::vector<GLfloat> dataVertices;
+    std::vector<GLfloat> dataTexCoords;
+    std::vector<GLfloat> dataNormals;
+    std::vector<GLuint> dataIndices;
 
     GLUtils *glUtils;
 
     // model objects
-    GLuint fboDefault;
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
-    GLuint glVAO;
+    GLuint fboDefault, glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
 
     // reflection objects
-    GLuint fboReflection;
     GLuint shaderProgramReflection;
     GLuint shaderVertexReflection, shaderFragmentReflection;
-    GLuint reflectVAO, reflectTexName, reflectWidth, reflectHeight;
+    GLuint fboReflection, glVAOReflect;
+    GLuint vboVerticesReflect, vboNormalsReflect, vboTextureCoordinatesReflect, vboIndicesReflect;
+    GLuint reflectTexName, reflectWidth, reflectHeight;
     GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables

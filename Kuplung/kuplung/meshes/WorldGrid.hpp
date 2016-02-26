@@ -39,6 +39,8 @@ public:
     glm::mat4 matrixModel;
 
     std::vector<GLfloat> dataVertices;
+    std::vector<GLfloat> dataTexCoords;
+    std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
 
 private:
