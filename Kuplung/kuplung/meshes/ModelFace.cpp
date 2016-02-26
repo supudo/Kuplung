@@ -59,6 +59,11 @@ void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboTextureCoordinates);
     glDeleteBuffers(1, &this->vboIndices);
 
+    glDeleteBuffers(1, &this->vboVerticesReflect);
+    glDeleteBuffers(1, &this->vboNormalsReflect);
+    glDeleteBuffers(1, &this->vboTextureCoordinatesReflect);
+    glDeleteBuffers(1, &this->vboIndicesReflect);
+
     if (this->vboTextureAmbient > 0)
         glDeleteBuffers(1, &this->vboTextureAmbient);
     if (this->vboTextureDiffuse > 0)
