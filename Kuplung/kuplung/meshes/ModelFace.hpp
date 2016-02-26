@@ -55,6 +55,10 @@ public:
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
     std::vector<Light*> lightSources;
+    std::vector<GLfloat> dataVertices;
+    std::vector<GLfloat> dataTexCoords;
+    std::vector<GLfloat> dataNormals;
+    std::vector<GLuint> dataIndices;
 
     bool Setting_CelShading;
     float Setting_Alpha;
@@ -91,10 +95,6 @@ private:
     glm::vec4 so_outlineColor;
     bool so_selectedYn;
     WorldGrid *grid;
-    std::vector<GLfloat> dataVertices;
-    std::vector<GLfloat> dataTexCoords;
-    std::vector<GLfloat> dataNormals;
-    std::vector<GLuint> dataIndices;
 
     GLUtils *glUtils;
 

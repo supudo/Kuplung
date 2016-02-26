@@ -389,6 +389,13 @@ void Kuplung::processParsedObjFile() {
         objModel model = scene.models[i];
         for (size_t j=0; j<model.faces.size(); j++) {
             ModelFace *mmf = new ModelFace();
+
+            // relfection area
+            mmf->dataVertices = this->managerObjects->grid->dataVertices;
+            mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+            mmf->dataNormals = this->managerObjects->grid->dataNormals;
+            mmf->dataIndices = this->managerObjects->grid->dataIndices;
+
             mmf->ModelID = i;
             mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
             mmf->setModel(model.faces[j]);

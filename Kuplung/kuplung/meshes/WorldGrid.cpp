@@ -184,10 +184,10 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         };
 
         this->dataNormals = {
-            0.0f, 0.0f, 1.0,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
-            0.0f, 0.0f, 1.0f,
+            0.0f, 1.0f, 0.0,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
         };
 
         this->dataIndices = {

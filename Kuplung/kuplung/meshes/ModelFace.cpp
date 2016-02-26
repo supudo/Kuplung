@@ -601,34 +601,34 @@ bool ModelFace::reflectionInit() {
     glGenVertexArrays(1, &this->glVAOReflect);
     glBindVertexArray(this->glVAOReflect);
 
-    float planePoint = 5;
-    this->dataVertices = {
-        planePoint, planePoint, 0.0,
-        planePoint, -1 * planePoint, 0.0,
-        -1 * planePoint, -1 * planePoint, 0.0,
-        -1 * planePoint, planePoint, 0.0,
-        planePoint, planePoint, 0.0,
-        -1 * planePoint, -1 * planePoint, 0.0
-    };
+//    float planePoint = 5;
+//    this->dataVertices = {
+//        planePoint, planePoint, 0.0,
+//        planePoint, -1 * planePoint, 0.0,
+//        -1 * planePoint, -1 * planePoint, 0.0,
+//        -1 * planePoint, planePoint, 0.0,
+//        planePoint, planePoint, 0.0,
+//        -1 * planePoint, -1 * planePoint, 0.0
+//    };
 
-    this->dataTexCoords = {
-        0.0f,  1.0f,
-        1.0f,  1.0f,
-        1.0f,  0.0f,
-        0.0f,  0.0f
-    };
+//    this->dataTexCoords = {
+//        0.0f,  1.0f,
+//        1.0f,  1.0f,
+//        1.0f,  0.0f,
+//        0.0f,  0.0f
+//    };
 
-    this->dataNormals = {
-        0.0f, 0.0f, 1.0,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-        0.0f, 0.0f, 1.0f,
-    };
+//    this->dataNormals = {
+//        0.0f, 0.0f, 1.0,
+//        0.0f, 0.0f, 1.0f,
+//        0.0f, 0.0f, 1.0f,
+//        0.0f, 0.0f, 1.0f,
+//    };
 
-    this->dataIndices = {
-        0, 1, 2,
-        3, 4, 5
-    };
+//    this->dataIndices = {
+//        0, 1, 2,
+//        3, 4, 5
+//    };
 
     // vertices
     glGenBuffers(1, &this->vboVerticesReflect);
