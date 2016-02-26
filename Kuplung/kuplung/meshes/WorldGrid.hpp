@@ -38,6 +38,9 @@ public:
     glm::mat4 matrixCamera;
     glm::mat4 matrixModel;
 
+    std::vector<GLfloat> dataVertices;
+    std::vector<GLuint> dataIndices;
+
 private:
     std::function<void(std::string)> doLogFunc;
 
@@ -47,7 +50,6 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices;
     GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha;
-    std::vector<unsigned int> indices;
 
     bool actAsMirrorNeedsChange;
 

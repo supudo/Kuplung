@@ -135,7 +135,8 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
         bool h;
 
-        this->indices.clear();
+        this->dataVertices.clear();
+        this->dataIndices.clear();
         for (int i = 0; i < (this->gridSize * 2); i++) {
             for (int j = 0; j < this->gridSize; j++) {
                 h = true;
@@ -163,7 +164,8 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         this->actAsMirrorNeedsChange = false;
 
         float planePoint = (float)(this->gridSize / 2);
-        GLfloat verticesData[18] = {
+
+        this->dataVertices = {
             planePoint, planePoint, 0.0,
             planePoint, -1 * planePoint, 0.0,
             -1 * planePoint, -1 * planePoint, 0.0,
@@ -172,21 +174,22 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
             -1 * planePoint, -1 * planePoint, 0.0
         };
 
-        GLuint indicesData[6] = {
+        //GLuint indicesData[6] = {
+        this->dataIndices = {
             0, 1, 2, 3, 4, 5
         };
 
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeVertexPosition);
         glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indicesData) * sizeof(GLuint), indicesData, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
     }
 
     glBindVertexArray(0);
@@ -232,7 +235,7 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
 
             glDepthMask(GL_FALSE);
 
-            glDrawElements(GL_TRIANGLES, sizeof(this->indices), GL_UNSIGNED_INT, nullptr);
+            glDrawElements(GL_TRIANGLES, sizeof(this->dataIndices), GL_UNSIGNED_INT, nullptr);
 
             glDepthMask(GL_TRUE);
 
