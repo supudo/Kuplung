@@ -9,15 +9,15 @@ const vec4 tintColor = vec4(0.0, 0.0, 1.0, 1.0);
 // Amount of tint to apply
 const float tintFactor = 0.2;
 
-in vec3 varNormal;
-in vec3 varEyeDir;
+in vec3 fs_normal;
+in vec3 fs_eyeDirection;
 out vec4 fragColor;
 
 uniform sampler2D diffuseTexture;
 
 void main (void) {
     // Compute reflection vector
-    vec3 reflectDir = reflect(varEyeDir, varNormal);
+    vec3 reflectDir = reflect(fs_eyeDirection, fs_normal);
 
     // Compute altitude and azimuth angles
     vec2 texcoord;

@@ -689,9 +689,9 @@ bool ModelFace::reflectionInit() {
         return false;
     }
     else {
-        this->reflectModelViewUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "modelViewMatrix");
-        this->reflectProjectionUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "modelViewProjectionMatrix");
-        this->reflectNormalMatrixUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "normalMatrix");
+        this->reflectModelViewUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewMatrix");
+        this->reflectProjectionUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewProjectionMatrix");
+        this->reflectNormalMatrixUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_normalMatrix");
     }
 
     return true;
