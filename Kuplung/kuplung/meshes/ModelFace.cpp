@@ -690,7 +690,6 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     }
 
     if (!this->grid->actAsMirror) {
-        //glEnable(GL_CULL_FACE);
         glCullFace(GL_BACK);
         glFrontFace(GL_CCW);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
@@ -708,13 +707,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 void ModelFace::renderReflectFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
 
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glViewport(0, 0, this->reflectWidth, this->reflectHeight);
-
-//    glm::mat4 mtxModel = this->matrixModel;
-//    mtxModel = glm::scale(mtxModel, glm::vec3(1, -1, -1));
-//    mtxModel = glm::translate(mtxModel, glm::vec3(0, 300, -800));
-//    mtxModel = glm::rotate(mtxModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
 
     glm::mat4 mtxModel = this->matrixModel;
 
@@ -733,9 +726,6 @@ void ModelFace::renderReflectFBO() {
     glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
     this->matrixModel = mtxModel;
-//    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 1.5, -4.5));
-//    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-//    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(45.0f), glm::vec3(0.7, 0.3, 1));
 
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
@@ -744,9 +734,6 @@ void ModelFace::renderReflectFBO() {
 void ModelFace::renderMirrorSurface() {
     glBindVertexArray(this->reflectVAO);
     glUseProgram(this->shaderProgramReflection);
-
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    //glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
     glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
@@ -758,10 +745,9 @@ void ModelFace::renderMirrorSurface() {
     glm::mat3 matrixNormal = glm::mat3(mtxModel);
     glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
-    //glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
-    glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+    glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glGenerateMipmap(GL_TEXTURE_2D);
-    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
     this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 
