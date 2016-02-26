@@ -303,7 +303,7 @@ void Kuplung::renderScene() {
         // rotate
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
         mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
-        mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(0, 1, 0));
+        mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateY->point), glm::vec3(0, 1, 0));
         mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
         mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
