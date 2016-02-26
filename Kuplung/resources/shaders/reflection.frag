@@ -16,17 +16,17 @@ out vec4 fragColor;
 uniform sampler2D diffuseTexture;
 
 void main (void) {
-    // Compute reflection vector
+    // reflection vector
     vec3 reflectDir = reflect(fs_eyeDirection, fs_normal);
 
-    // Compute altitude and azimuth angles
+    // altitude and azimuth angles
     vec2 texcoord;
 
     texcoord.y = dot(normalize(reflectDir), Yunitvec);
     reflectDir.y = 0.0;
     texcoord.x = dot(normalize(reflectDir), Xunitvec) * 0.5;
 
-    // Translate index values into proper range
+    // translate index values into proper range
     if (reflectDir.z >= 0.0)
         texcoord = (texcoord + 1.0) * 0.5;
     else {

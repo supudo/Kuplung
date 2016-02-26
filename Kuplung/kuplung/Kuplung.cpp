@@ -342,7 +342,7 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsGUI = true;
 
     // testbed
-    std::string testObj = "cube0.obj";
+    std::string testObj = "planet_system.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";

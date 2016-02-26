@@ -8,12 +8,12 @@
 
 #include "ModelFace.hpp"
 #include <fstream>
+#include <boost/filesystem.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
-
-#include <glm/gtc/type_ptr.hpp>
 
 ModelFace::ModelFace() {
 }
@@ -385,7 +385,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // ambient texture image
         if (this->oFace.faceMaterial.textures_ambient.image != "") {
-            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_ambient.image;
+            std::string matImageLocal = this->oFace.faceMaterial.textures_ambient.image;
+            if (!boost::filesystem::exists(matImageLocal))
+                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_ambient.image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -425,7 +427,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // diffuse texture image
         if (this->oFace.faceMaterial.textures_diffuse.image != "") {
-            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
+            std::string matImageLocal = this->oFace.faceMaterial.textures_diffuse.image;
+            if (!boost::filesystem::exists(matImageLocal))
+                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -465,7 +469,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // specular texture image
         if (this->oFace.faceMaterial.textures_specular.image != "") {
-            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specular.image;
+            std::string matImageLocal = this->oFace.faceMaterial.textures_specular.image;
+            if (!boost::filesystem::exists(matImageLocal))
+                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specular.image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -505,7 +511,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // specular-exp texture image
         if (this->oFace.faceMaterial.textures_specularExp.image != "") {
-            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specularExp.image;
+            std::string matImageLocal = this->oFace.faceMaterial.textures_specularExp.image;
+            if (!boost::filesystem::exists(matImageLocal))
+                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specularExp.image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -545,7 +553,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // dissolve texture image
         if (this->oFace.faceMaterial.textures_dissolve.image != "") {
-            std::string matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_dissolve.image;
+            std::string matImageLocal = this->oFace.faceMaterial.textures_dissolve.image;
+            if (!boost::filesystem::exists(matImageLocal))
+                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_dissolve.image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -733,8 +743,13 @@ void ModelFace::renderReflectFBO() {
     glm::mat4 mtxModel = this->matrixModel;
 
     this->matrixModel = glm::scale(this->matrixModel, glm::vec3(1, -1, -1));
-    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 2.5, -2.5));
+
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
     this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 2.5, -2.5));
+
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
     glUseProgram(this->shaderProgram);
@@ -757,6 +772,7 @@ void ModelFace::renderMirrorSurface() {
     glUseProgram(this->shaderProgramReflection);
 
     glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
+    mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
 
     glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
