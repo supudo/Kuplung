@@ -656,30 +656,23 @@ bool ModelFace::reflectionInit() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndicesReflect);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
+    // texture
     GLuint colorTexture;
-
-    // Create a texture object to apply to model
     glGenTextures(1, &colorTexture);
     glBindTexture(GL_TEXTURE_2D, colorTexture);
-
-    // Set up filter and wrap modes for this texture object
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    // Mipmap generation is not accelerated on iOS so we cannot enable trilinear filtering
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-
-    // Allocate a texture image with which we can render to
-    // Pass NULL for the data parameter since we don't need to load image data.
-    // We will be generating the image by rendering to this texture
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->reflectWidth, this->reflectHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 
+    // depth buffer
     GLuint depthRenderbuffer;
     glGenRenderbuffers(1, &depthRenderbuffer);
     glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this->reflectWidth, this->reflectHeight);
 
+    // frame buffer
     glGenFramebuffers(1, &this->fboReflection);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
@@ -692,12 +685,12 @@ bool ModelFace::reflectionInit() {
 
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
 
+    // reflection texture
     GLint iReflectTexName;
-
     glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &iReflectTexName);
-
     this->reflectTexName = ((GLuint*)(&iReflectTexName))[0];
 
+    // shaders
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -764,7 +757,6 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
 void ModelFace::renderReflectFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
-
     glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
     glm::mat4 mtxModel = this->matrixModel;
