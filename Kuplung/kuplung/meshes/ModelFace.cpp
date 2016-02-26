@@ -805,8 +805,10 @@ void ModelFace::renderMirrorSurface() {
 
     glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glGenerateMipmap(GL_TEXTURE_2D);
-    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
     glDrawElements(GL_TRIANGLES, this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
+
+    // rendering the grid again - this fixes the z-depth for transparency with the objects and the grid intersecting them ....
+    // TODO: find the proper way to handle this!!!
     this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 
