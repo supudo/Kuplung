@@ -761,7 +761,8 @@ void ModelFace::renderMirrorSurface() {
     //glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
     glGenerateMipmap(GL_TEXTURE_2D);
-    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    //glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 
 void ModelFace::renderModel() {

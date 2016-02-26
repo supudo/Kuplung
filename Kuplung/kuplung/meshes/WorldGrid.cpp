@@ -60,7 +60,7 @@ void WorldGrid::initProperties(int size) {
     this->showGrid = true;
     this->actAsMirror = true;
     this->actAsMirrorNeedsChange = true;
-    this->transparency = 0.0;
+    this->transparency = 0.5;
 
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
@@ -223,14 +223,21 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
 
 
         if (this->actAsMirror) {
-            glDisable(GL_DEPTH_TEST);
+            glEnable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
 
             glUniform1f(this->glAttributeAlpha, this->transparency);
             glUniform1i(this->glAttributeActAsMirror, 1);
 
+            glDepthMask(GL_FALSE);
+
             glDrawElements(GL_TRIANGLES, sizeof(this->indices), GL_UNSIGNED_INT, nullptr);
+
+            glDepthMask(GL_TRUE);
+
+            glDisable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
         }
         else {
             glFrontFace(GL_CCW);
