@@ -224,7 +224,6 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         else if (!this->actAsMirror && !this->actAsMirrorNeedsChange)
             this->initBuffers(this->gridSize, 1.0);
 
-
         if (this->actAsMirror) {
             glEnable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
