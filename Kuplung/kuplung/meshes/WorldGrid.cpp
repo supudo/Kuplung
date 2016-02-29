@@ -58,7 +58,7 @@ void WorldGrid::init(std::function<void(std::string)> doLog) {
 
 void WorldGrid::initProperties(int size) {
     this->showGrid = true;
-    this->actAsMirror = true;
+    this->actAsMirror = false;
     this->actAsMirrorNeedsChange = true;
     this->transparency = 0.5;
 

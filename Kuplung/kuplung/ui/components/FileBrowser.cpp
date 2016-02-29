@@ -131,12 +131,11 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string fileP
         bool isAllowedFileExtension;
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
-                bool dotFile = iteratorFolder->path().filename().string().compare(0, 1, ".") == 0;
                 fs::file_status fileStatus = iteratorFolder->status();
                 isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
                 if (this->isStyleBrowser)
                     isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
-                if (isAllowedFileExtension && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus)) && !dotFile) {
+                if (isAllowedFileExtension || fs::is_directory(fileStatus)) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;
