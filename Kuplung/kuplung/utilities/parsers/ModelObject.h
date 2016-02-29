@@ -14,6 +14,15 @@
 #include <vector>
 #include <string>
 
+typedef enum objMaterialImageType {
+    objMaterialImageType_Ambient,
+    objMaterialImageType_Diffuse,
+    objMaterialImageType_Specular,
+    objMaterialImageType_SpecularExp,
+    objMaterialImageType_Dissolve,
+    objMaterialImageType_Bump
+} objMaterialImageType;
+
 struct objMaterialImage {
     std::string image;
     std::vector<std::string> commands;

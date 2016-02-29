@@ -408,214 +408,19 @@ void ModelFace::initBuffers(std::string assetsFolder) {
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         // ambient texture image
-        if (this->oFace.faceMaterial.textures_ambient.image != "") {
-            std::string matImageLocal = this->oFace.faceMaterial.textures_ambient.image;
-            if (!boost::filesystem::exists(matImageLocal))
-                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_ambient.image;
-
-            int tWidth, tHeight, tChannels;
-            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-            if (!tPixels)
-                this->doLog("Can't load ambient texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
-            else {
-                glGenTextures(1, &this->vboTextureAmbient);
-                glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glGenerateMipmap(GL_TEXTURE_2D);
-
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                stbi_image_free(tPixels);
-            }
-        }
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_ambient, objMaterialImageType_Bump, &this->vboTextureAmbient);
 
         // diffuse texture image
-        if (this->oFace.faceMaterial.textures_diffuse.image != "") {
-            std::string matImageLocal = this->oFace.faceMaterial.textures_diffuse.image;
-            if (!boost::filesystem::exists(matImageLocal))
-                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_diffuse.image;
-
-            int tWidth, tHeight, tChannels;
-            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-            if (!tPixels)
-                this->doLog("Can't load diffuse texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()) + " (" + assetsFolder + ")");
-            else {
-                glGenTextures(1, &this->vboTextureDiffuse);
-                glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glGenerateMipmap(GL_TEXTURE_2D);
-
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                stbi_image_free(tPixels);
-            }
-        }
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_diffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
 
         // specular texture image
-        if (this->oFace.faceMaterial.textures_specular.image != "") {
-            std::string matImageLocal = this->oFace.faceMaterial.textures_specular.image;
-            if (!boost::filesystem::exists(matImageLocal))
-                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specular.image;
-
-            int tWidth, tHeight, tChannels;
-            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-            if (!tPixels)
-                this->doLog("Can't load specular texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
-            else {
-                glGenTextures(1, &this->vboTextureSpecular);
-                glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glGenerateMipmap(GL_TEXTURE_2D);
-
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                stbi_image_free(tPixels);
-            }
-        }
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_specular, objMaterialImageType_Specular, &this->vboTextureSpecular);
 
         // specular-exp texture image
-        if (this->oFace.faceMaterial.textures_specularExp.image != "") {
-            std::string matImageLocal = this->oFace.faceMaterial.textures_specularExp.image;
-            if (!boost::filesystem::exists(matImageLocal))
-                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_specularExp.image;
-
-            int tWidth, tHeight, tChannels;
-            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-            if (!tPixels)
-                this->doLog("Can't load specular-exp texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
-            else {
-                glGenTextures(1, &this->vboTextureSpecularExp);
-                glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glGenerateMipmap(GL_TEXTURE_2D);
-
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                stbi_image_free(tPixels);
-            }
-        }
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_specularExp, objMaterialImageType_SpecularExp, &this->vboTextureSpecularExp);
 
         // dissolve texture image
-        if (this->oFace.faceMaterial.textures_dissolve.image != "") {
-            std::string matImageLocal = this->oFace.faceMaterial.textures_dissolve.image;
-            if (!boost::filesystem::exists(matImageLocal))
-                matImageLocal = assetsFolder + "/" + this->oFace.faceMaterial.textures_dissolve.image;
-
-            int tWidth, tHeight, tChannels;
-            unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-            if (!tPixels)
-                this->doLog("Can't load dissolve texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
-            else {
-                glGenTextures(1, &this->vboTextureDissolve);
-                glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                glGenerateMipmap(GL_TEXTURE_2D);
-
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-                stbi_image_free(tPixels);
-            }
-        }
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_dissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
     }
 
     // indices
@@ -624,6 +429,49 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->oFace.indicesCount * sizeof(GLuint), &this->oFace.indices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
+}
+
+void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+    if (materialImage.image != "") {
+        std::string matImageLocal = materialImage.image;
+        if (!boost::filesystem::exists(matImageLocal))
+            matImageLocal = assetsFolder + "/" + materialImage.image;
+
+        int tWidth, tHeight, tChannels;
+        unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+        if (!tPixels)
+            this->doLog("Can't load texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+        else {
+            glGenTextures(1, vboObject);
+            glBindTexture(GL_TEXTURE_2D, *vboObject);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            glGenerateMipmap(GL_TEXTURE_2D);
+
+            GLint textureFormat = 0;
+            switch (tChannels) {
+                case 1:
+                    textureFormat = GL_LUMINANCE;
+                    break;
+                case 2:
+                    textureFormat = GL_LUMINANCE_ALPHA;
+                    break;
+                case 3:
+                    textureFormat = GL_RGB;
+                    break;
+                case 4:
+                    textureFormat = GL_RGBA;
+                    break;
+                default:
+                    textureFormat = GL_RGB;
+                    break;
+            }
+            glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+            stbi_image_free(tPixels);
+        }
+    }
 }
 
 #pragma mark - Reflection

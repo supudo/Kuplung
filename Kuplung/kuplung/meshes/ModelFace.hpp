@@ -90,6 +90,7 @@ private:
     void renderModel();
     void renderReflectFBO();
     void renderMirrorSurface();
+    void loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
     float so_fov;
     float so_outlineThickness;
@@ -105,6 +106,7 @@ private:
     GLuint fboDefault, glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
+    GLuint vboTextureBump;
 
     // reflection objects
     GLuint shaderProgramReflection;
