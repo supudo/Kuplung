@@ -795,9 +795,21 @@ void ModelFace::renderMirrorSurface() {
     glBindVertexArray(this->glVAOReflect);
     glUseProgram(this->shaderProgramReflection);
 
-    glm::mat4 mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
-    mtxModel = glm::translate(this->matrixModel, glm::vec3(0.0, -5.0, -2.5));
+    glm::mat4 mtxModel = this->matrixModel;
+    mtxModel *= this->grid->matrixModel;
+
+    // rotate
+    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateX), glm::vec3(1, 0, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateY), glm::vec3(0, 1, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateZ), glm::vec3(0, 0, 1));
+    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+
+    // translate - glm::vec3(0.0, -5.0, -2.5)
+    mtxModel = glm::translate(mtxModel, glm::vec3(this->grid->mirrorSurface->translateX, this->grid->mirrorSurface->translateY, this->grid->mirrorSurface->translateZ));
+
     glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+    //mvpMatrix = this->grid->matrixProjection * this->grid->matrixCamera * this->grid->matrixModel;
 
     glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
     glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

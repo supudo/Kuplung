@@ -238,6 +238,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     if (this->managerObjects->grid->actAsMirror)
                         this->helperUI->addControlsSliderSameLine("Alpha##999", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->grid->transparency, false, isFrame);
                     ImGui::Separator();
+                    if (this->managerObjects->grid->actAsMirror) {
+                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move mirror by axis");
+                        this->helperUI->addControlsSliderSameLine("X", 71, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateX, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Y", 81, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateY, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Z", 91, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateZ, true, isFrame);
+                        ImGui::Separator();
+                        ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate mirror around axis");
+                        this->helperUI->addControlsSliderSameLine("X", 41, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateX, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Y", 51, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateY, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Z", 61, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateZ, true, isFrame);
+                    }
                     break;
                 }
                 case 1: {

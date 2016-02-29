@@ -80,6 +80,15 @@ void WorldGrid::initProperties(int size) {
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
 
     this->matrixModel = glm::mat4(1.0);
+
+    this->mirrorSurface = new MirrorSurface();
+
+    this->mirrorSurface->translateX = 0.0;
+    this->mirrorSurface->translateY = 5.0;
+    this->mirrorSurface->translateZ = -5.0;
+    this->mirrorSurface->rotateX = 90.0f;
+    this->mirrorSurface->rotateY = 0.0f;
+    this->mirrorSurface->rotateZ = 0.0f;
 }
 
 #pragma mark - Public

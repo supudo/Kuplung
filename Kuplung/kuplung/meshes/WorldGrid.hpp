@@ -16,6 +16,11 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
+struct MirrorSurface {
+    float translateX,translateY, translateZ;
+    float rotateX, rotateY, rotateZ;
+};
+
 class WorldGrid {
 public:
     ~WorldGrid();
@@ -28,6 +33,7 @@ public:
     int gridSize;
     float transparency;
 
+    MirrorSurface *mirrorSurface;
     bool showGrid, actAsMirror;
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;
