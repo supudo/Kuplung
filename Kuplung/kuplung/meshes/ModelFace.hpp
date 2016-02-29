@@ -50,6 +50,7 @@ public:
     void setOptionsOutlineColor(glm::vec4 outlineColor);
     void setOptionsOutlineThickness(float thickness);
 
+    bool glUseTessellation;
     objModelFace oFace;
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;

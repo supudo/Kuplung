@@ -27,6 +27,7 @@ ModelFace* ModelFace::clone(int modelID) {
     mmf->matrixModel = this->matrixModel;
     mmf->matrixProjection = this->matrixProjection;
 
+    mmf->glUseTessellation = this->glUseTessellation;
     mmf->ModelID = this->ModelID;
     mmf->oFace = this->oFace;
 
@@ -75,18 +76,25 @@ void ModelFace::destroy() {
     if (this->vboTextureDissolve > 0)
         glDeleteBuffers(1, &this->vboTextureDissolve);
 
-    GLint param;
-    GLuint objName;
-    glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
-    if (GL_RENDERBUFFER == param) {
-        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-        objName = ((GLuint*)(&param))[0];
-        glDeleteRenderbuffers(1, &objName);
-    }
-    else if(GL_TEXTURE == param) {
-        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-        objName = ((GLuint*)(&param))[0];
-        glDeleteTextures(1, &objName);
+    GLint maxColorAttachments = 1;
+    glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
+    GLint colorAttachment;
+    GLenum att = GL_COLOR_ATTACHMENT0;
+    for (colorAttachment = 0; colorAttachment < maxColorAttachments; colorAttachment++) {
+        att += colorAttachment;
+        GLint param;
+        GLuint objName;
+        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
+        if (GL_RENDERBUFFER == param) {
+            glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+            objName = ((GLuint*)(&param))[0];
+            glDeleteRenderbuffers(1, &objName);
+        }
+        else if (GL_TEXTURE == param) {
+            glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+            objName = ((GLuint*)(&param))[0];
+            glDeleteTextures(1, &objName);
+        }
     }
 
     glDisableVertexAttribArray(this->glVS_VertexPosition);
@@ -96,15 +104,19 @@ void ModelFace::destroy() {
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDetachShader(this->shaderProgram, this->shaderGeometry);
-//    glDetachShader(this->shaderProgram, this->shaderTessControl);
-//    glDetachShader(this->shaderProgram, this->shaderTessEval);
+    if (this->glUseTessellation) {
+        glDetachShader(this->shaderProgram, this->shaderTessControl);
+        glDetachShader(this->shaderProgram, this->shaderTessEval);
+    }
     glDeleteProgram(this->shaderProgram);
 
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
     glDeleteShader(this->shaderGeometry);
-//    glDeleteShader(this->shaderTessControl);
-//    glDeleteShader(this->shaderTessEval);
+    if (this->glUseTessellation) {
+        glDeleteShader(this->shaderTessControl);
+        glDeleteShader(this->shaderTessEval);
+    }
 
     glDetachShader(this->shaderProgramReflection, this->shaderVertexReflection);
     glDetachShader(this->shaderProgramReflection, this->shaderFragmentReflection);
@@ -125,6 +137,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
 
+    this->glUseTessellation = false;
     this->showMaterialEditor = false;
     this->GLSL_LightSource_Number = 8;
 
@@ -255,15 +268,19 @@ bool ModelFace::initShaderProgram() {
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
-//    // tessellation control shader
-//    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-//    std::string shaderSourceTCS = readFile(shaderPath.c_str());
-//    const char *shader_tess_control = shaderSourceTCS.c_str();
+    const char *shader_tess_control;
+    const char *shader_tess_eval;
+    if (this->glUseTessellation) {
+        // tessellation control shader
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+        std::string shaderSourceTCS = readFile(shaderPath.c_str());
+        shader_tess_control = shaderSourceTCS.c_str();
 
-//    // tessellation evaluation shader
-//    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-//    std::string shaderSourceTES = readFile(shaderPath.c_str());
-//    const char *shader_tess_eval = shaderSourceTES.c_str();
+        // tessellation evaluation shader
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+        std::string shaderSourceTES = readFile(shaderPath.c_str());
+        shader_tess_eval = shaderSourceTES.c_str();
+    }
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
@@ -279,8 +296,10 @@ bool ModelFace::initShaderProgram() {
 
     bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-//    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
-//    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    if (this->glUseTessellation) {
+        shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
+        shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    }
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
