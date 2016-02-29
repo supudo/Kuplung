@@ -421,6 +421,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // dissolve texture image
         this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_dissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
+
+        // bump map texture
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_bump, objMaterialImageType_Bump, &this->vboTextureBump);
     }
 
     // indices
@@ -439,8 +442,32 @@ void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialI
 
         int tWidth, tHeight, tChannels;
         unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-        if (!tPixels)
-            this->doLog("Can't load texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+        if (!tPixels) {
+            std::string texName = "";
+            switch (type) {
+                case objMaterialImageType_Ambient:
+                    texName = "ambient";
+                    break;
+                case objMaterialImageType_Diffuse:
+                    texName = "diffuse";
+                    break;
+                case objMaterialImageType_Specular:
+                    texName = "specular";
+                    break;
+                case objMaterialImageType_SpecularExp:
+                    texName = "specularExp";
+                    break;
+                case objMaterialImageType_Dissolve:
+                    texName = "dissolve";
+                    break;
+                case objMaterialImageType_Bump:
+                    texName = "bump";
+                    break;
+                default:
+                    break;
+            }
+            this->doLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+        }
         else {
             glGenTextures(1, vboObject);
             glBindTexture(GL_TEXTURE_2D, *vboObject);
