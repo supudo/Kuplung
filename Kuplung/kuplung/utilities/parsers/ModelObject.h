@@ -38,6 +38,7 @@ struct objMaterial {
     objMaterialImage textures_specular;
     objMaterialImage textures_specularExp;
     objMaterialImage textures_dissolve;
+    objMaterialImage textures_bump;
 };
 
 struct objModelFace {

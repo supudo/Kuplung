@@ -49,7 +49,8 @@ void objParser::init(std::function<void(std::string)> doLog, std::function<void(
     this->regex_materialOpticalDensity = "^Ni\\s.*";
     this->regex_materialIllumination = "^illum\\s.*";
     this->regex_materialTextureAmbient = "^map_Ka\\s.*";
-    this->regex_materialTextureDensity = "^map_Kd\\s.*";
+    this->regex_materialTextureDiffuse = "^map_Kd\\s.*";
+    this->regex_materialTextureBump = "^map_Bump\\s.*";
     this->regex_materialTextureSpecular = "^map_Ks\\s.*";
     this->regex_materialTextureSpecularExp = "^map_Ns\\s.*";
     this->regex_materialTextureDissolve = "^map_d\\s.*";
@@ -305,7 +306,7 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 materials[indexMaterial].illumination = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialTextureAmbient))
                 materials[indexMaterial].textures_ambient = this->parseTextureImage(cleanLine);
-            else if (std::regex_match(singleLine, this->regex_materialTextureDensity))
+            else if (std::regex_match(singleLine, this->regex_materialTextureDiffuse))
                 materials[indexMaterial].textures_diffuse = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecular))
                 materials[indexMaterial].textures_specular = this->parseTextureImage(cleanLine);
@@ -313,6 +314,8 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 materials[indexMaterial].textures_specularExp = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDissolve))
                 materials[indexMaterial].textures_dissolve = this->parseTextureImage(cleanLine);
+            else if (std::regex_match(singleLine, this->regex_materialTextureBump))
+                materials[indexMaterial].textures_bump = this->parseTextureImage(cleanLine);
 
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
