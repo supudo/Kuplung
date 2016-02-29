@@ -458,7 +458,7 @@ void ModelFace::initBuffers(std::string assetsFolder) {
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
             if (!tPixels)
-                this->doLog("Can't load diffuse texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+                this->doLog("Can't load diffuse texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()) + " (" + assetsFolder + ")");
             else {
                 glGenTextures(1, &this->vboTextureDiffuse);
                 glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
