@@ -368,12 +368,14 @@ bool ModelFace::initShaderProgram() {
         this->glMaterial_SamplerSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
         this->glMaterial_SamplerSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
         this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
+        this->glMaterial_SamplerBump = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_bump");
 
         this->glMaterial_HasTextureAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_ambient");
         this->glMaterial_HasTextureDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_diffuse");
         this->glMaterial_HasTextureSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specular");
         this->glMaterial_HasTextureSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
         this->glMaterial_HasTextureDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
+        this->glMaterial_HasTextureBump = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_bump");
     }
 
     success |= this->reflectionInit();
@@ -845,6 +847,15 @@ void ModelFace::renderModel() {
         }
         else
             glUniform1i(this->glMaterial_HasTextureDissolve, 0);
+
+        if (this->vboTextureBump > 0) {
+            glUniform1i(this->glMaterial_HasTextureBump, 1);
+            glUniform1i(this->glMaterial_SamplerBump, 5);
+            glActiveTexture(GL_TEXTURE5);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureBump);
+        }
+        else
+            glUniform1i(this->glMaterial_HasTextureBump, 0);
 
         // outlining
         this->drawOutline();

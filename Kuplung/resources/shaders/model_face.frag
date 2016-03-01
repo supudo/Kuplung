@@ -22,12 +22,14 @@ struct ModelMaterial {
     sampler2D sampler_specular;
     sampler2D sampler_specularExp;
     sampler2D sampler_dissolve;
+    sampler2D sampler_bump;
 
     bool has_texture_ambient;
     bool has_texture_diffuse;
     bool has_texture_specular;
     bool has_texture_specularExp;
     bool has_texture_dissolve;
+    bool has_texture_bump;
 };
 
 struct LightSource {
