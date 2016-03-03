@@ -7,6 +7,7 @@ uniform mat4 vs_MVPMatrix;
 in vec3 tes_vertexPosition[];
 in vec2 tes_textureCoord[];
 in vec3 tes_vertexNormal[];
+in vec3 tes_tangent[];
 in vec3 tes_displacementLocation[];
 in float tes_isBorder[];
 
@@ -14,6 +15,7 @@ out VS_OUT {
     vec3 gs_vertexPosition;
     vec2 gs_textureCoord;
     vec3 gs_vertexNormal;
+    vec3 gs_tangent;
     vec3 gs_displacementLocation;
     float gs_isBorder;
 } vs_out;
@@ -34,6 +36,7 @@ void main() {
 
     vs_out.gs_textureCoord = interpolate2D(tes_textureCoord[0], tes_textureCoord[1], tes_textureCoord[2]);
     vs_out.gs_vertexNormal = interpolate3D(tes_vertexNormal[0], tes_vertexNormal[1], tes_vertexNormal[2]);
+    vs_out.gs_tangent = interpolate3D(tes_tangent[0], tes_tangent[1], tes_tangent[2]);
     vs_out.gs_displacementLocation = interpolate3D(tes_displacementLocation[0], tes_displacementLocation[1], tes_displacementLocation[2]);
     vs_out.gs_isBorder = tes_isBorder[0];
 }

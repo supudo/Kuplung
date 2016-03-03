@@ -169,7 +169,7 @@ void Kuplung::initFolders() {
 //    else
 //        data_path = SDL_strdup("./");
 //    Settings::Instance()->currentFolder = data_path;
-    Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects/_bump";
+    Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects";
 }
 
 #pragma mark - Event processing
@@ -342,12 +342,12 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsGUI = true;
 
     // testbed
-    std::string testObj = "brick_wall.obj";
+    std::string testObj = "cube0_bump.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";
     fileTestbed.title = testObj;
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/_bump/" + testObj;
+    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
     this->guiProcessObjFile(fileTestbed);
 }
 

@@ -1,6 +1,7 @@
 #version 410
 
 uniform mat4 fs_MMatrix;
+uniform mat4 fs_WorldMatrix;
 uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
@@ -50,6 +51,7 @@ struct LightSource {
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
 in vec3 fs_vertexNormal;
+in vec3 fs_tangent;
 in float fs_isBorder;
 
 out vec4 fragColor;
@@ -59,12 +61,25 @@ out vec4 fragColor;
 uniform LightSource directionalLights[NR_POINT_LIGHTS];
 uniform ModelMaterial material;
 
+// =================================================
+//
+// definitions
+//
+// =================================================
+
 vec3 calculateAmbient();
 vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection);
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection);
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
 vec4 celShadingColor();
+vec3 calculateBumpedNormal();
+
+// =================================================
+//
+// main()
+//
+// =================================================
 
 void main(void) {
     if (fs_isBorder > 0.0)
@@ -73,8 +88,14 @@ void main(void) {
         vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
         vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
 
+        vec3 fragmentNormal;
+        if (material.has_texture_bump)
+            fragmentNormal = calculateBumpedNormal();
+        else
+            fragmentNormal = fs_vertexNormal;
+
         // misc
-        vec3 normalDirection = normalize(fs_vertexNormal);
+        vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
         //vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
         vec3 lightDirection;
@@ -112,11 +133,36 @@ void main(void) {
     }
 }
 
+// =================================================
 //
+// Bump map
 //
-// Color calculations
+// =================================================
+
+vec3 calculateBumpedNormal() {
+    vec3 vertexNormal = normalize(fs_vertexNormal);
+
+    vec3 vertexTangent = normalize(fs_tangent);
+    vertexTangent = normalize(vertexTangent - dot(vertexTangent, vertexNormal) * vertexNormal);
+
+    vec3 vertexBitangent = cross(vertexTangent, vertexNormal);
+
+    vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).xyz;
+    vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0, 1.0, 1.0);
+
+    vec3 vertexNewNormal;
+    mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
+    vertexNewNormal = TBN * vertexBumpMapNormal;
+    vertexNewNormal = normalize(vertexNewNormal);
+
+    return vertexNewNormal;
+}
+
+// =================================================
 //
+// Ambient color
 //
+// =================================================
 
 vec3 calculateAmbient() {
     vec3 result;
@@ -131,6 +177,12 @@ vec3 calculateAmbient() {
     return result;
 }
 
+// =================================================
+//
+// Diffuse color
+//
+// =================================================
+
 vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
     vec3 result;
     float lambertFactor = max(dot(lightDirection, normalDirection), 0.0);
@@ -144,6 +196,12 @@ vec3 calculateDiffuse(vec3 normalDirection, vec3 lightDirection) {
             result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * materialDiffuse;
     return result;
 }
+
+// =================================================
+//
+// Specular color
+//
+// =================================================
 
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
     vec3 result;
@@ -163,6 +221,12 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
     return result;
 }
 
+// =================================================
+//
+// Refraction
+//
+// =================================================
+
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
     vec3 refraction_normal = normalize(refract(fs_vertexPosition, normalDirection, material.refraction));
     vec3 refractionColor = mix(texture(material.sampler_diffuse, fs_textureCoord + refraction_normal.xy * 0.1), texturedColor_Diffuse, fs_alpha).rgb;
@@ -171,11 +235,11 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
     return refraction;
 }
 
+// =================================================
 //
+// CelShading
 //
-// Cel shading
-//
-//
+// =================================================
 
 vec4 celShadingColor() {
     vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
@@ -223,12 +287,6 @@ vec4 celShadingColor() {
 
     return vec4(color, fs_alpha);
 }
-
-//
-//
-// Utilities
-//
-//
 
 float stepmix(float edge0, float edge1, float E, float x) {
     float T = clamp(0.5 * (x - edge0 + E) / E, 0.0, 1.0);

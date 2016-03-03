@@ -13,6 +13,7 @@
 
 #ifdef _WIN32
 #include <GL/glew.h>
+#include <SDL2/SDL_syswm.h>
 #else
 //#include <OpenGL/gl3.h>
 //#include <OpenGL/glext.h>

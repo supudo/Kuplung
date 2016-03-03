@@ -7,6 +7,7 @@ in VS_OUT {
     vec3 gs_vertexPosition;
     vec2 gs_textureCoord;
     vec3 gs_vertexNormal;
+    vec3 gs_tangent;
     vec3 gs_displacementLocation;
     float gs_isBorder;
 } gs_in[];
@@ -14,6 +15,7 @@ in VS_OUT {
 out vec3 fs_vertexPosition;
 out vec2 fs_textureCoord;
 out vec3 fs_vertexNormal;
+out vec3 fs_tangent;
 out vec3 fs_outlineColor;
 out float fs_isBorder;
 
@@ -26,6 +28,7 @@ void main() {
         fs_vertexPosition = gs_in[i].gs_vertexPosition;
         fs_textureCoord = gs_in[i].gs_textureCoord;
         fs_vertexNormal = gs_in[i].gs_vertexNormal;
+        fs_tangent = gs_in[i].gs_tangent;
         fs_isBorder = gs_in[i].gs_isBorder;
         EmitVertex();
     }
@@ -44,6 +47,7 @@ void main() {
             fs_vertexPosition = gs_in[i].gs_vertexPosition;
             fs_textureCoord = gs_in[i].gs_textureCoord;
             fs_vertexNormal = gs_in[i].gs_vertexNormal;
+            fs_tangent = gs_in[i].gs_tangent;
             fs_isBorder = gs_in[i].gs_isBorder;
             EmitVertex();
         }

@@ -19,6 +19,7 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/Light.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
+#include "kuplung/utilities/maths/Maths.hpp"
 
 struct ModelFace_LightSource {
     GLuint glLight_InUse;
@@ -99,12 +100,13 @@ private:
     WorldGrid *grid;
 
     GLUtils *glUtils;
+    Maths *mathHelper;
 
     // model objects
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint fboDefault, glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
     GLuint vboTextureBump;
 
@@ -117,8 +119,8 @@ private:
     GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
-    GLuint glVS_MVPMatrix, glFS_MMatrix;
-    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal;
+    GLuint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix;
+    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent;
 
     // general
     GLuint glGS_GeomDisplacementLocation;

@@ -63,7 +63,7 @@ win32|win64 {
     #RC_FILE += resources/Kuplung.ico
     RC_ICONS += resources/Kuplung.ico
 
-    LIBS += -L"C:\Boost\lib" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
+    LIBS += -L"C:\Boost\lib-mingw" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
     INCLUDEPATH += "C:\Boost\include\boost-1_60"
 
     LIBS += -L"D:\_Work\_Misc" -llibEGLd
@@ -124,6 +124,7 @@ SOURCES += main.cpp \
     kuplung/utilities/imgui/imgui_draw.cpp \
     kuplung/utilities/input/Controls.cpp \
     kuplung/utilities/libnoise/noiseutils.cpp \
+    kuplung/utilities/maths/Maths.cpp \
     kuplung/utilities/parsers/FileModelManager.cpp \
     kuplung/utilities/parsers/obj-parser/objParser.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp
@@ -167,6 +168,7 @@ HEADERS += \
     kuplung/utilities/imgui/imgui_internal.h \
     kuplung/utilities/input/Controls.hpp \
     kuplung/utilities/libnoise/noiseutils.h \
+    kuplung/utilities/maths/Maths.hpp \
     kuplung/utilities/parsers/FileModelManager.hpp \
     kuplung/utilities/parsers/ModelObject.h \
     kuplung/utilities/parsers/obj-parser/objParser.hpp \

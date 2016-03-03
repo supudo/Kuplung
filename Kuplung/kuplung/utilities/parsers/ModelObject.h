@@ -13,6 +13,7 @@
 
 #include <vector>
 #include <string>
+#include <glm/glm.hpp>
 
 typedef enum objMaterialImageType {
     objMaterialImageType_Ambient,
@@ -63,8 +64,14 @@ struct objModelFace {
     objMaterial faceMaterial;
 
     std::vector<float> vertices;
+    std::vector<glm::vec3> vectors_vertices;
+
     std::vector<float> texture_coordinates;
+    std::vector<glm::vec2> vectors_texture_coordinates;
+
     std::vector<float> normals;
+    std::vector<glm::vec3> vectors_normals;
+
     std::vector<unsigned int> indices;
     std::vector<float> solidColor;
 };

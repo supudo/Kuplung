@@ -59,6 +59,7 @@ void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);
     glDeleteBuffers(1, &this->vboIndices);
+    glDeleteBuffers(1, &this->vboTangents);
 
     glDeleteBuffers(1, &this->vboVerticesReflect);
     glDeleteBuffers(1, &this->vboNormalsReflect);
@@ -135,8 +136,9 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
     this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
-    this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    this->mathHelper = new Maths();
 
+    this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->glUseTessellation = false;
     this->showMaterialEditor = false;
     this->GLSL_LightSource_Number = 8;
@@ -319,6 +321,7 @@ bool ModelFace::initShaderProgram() {
         this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
         this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
+        this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
 
         // misc
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
@@ -331,6 +334,7 @@ bool ModelFace::initShaderProgram() {
 
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_MMatrix");
+        this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
 
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
@@ -432,6 +436,17 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->oFace.indicesCount * sizeof(GLuint), &this->oFace.indices[0], GL_STATIC_DRAW);
+
+    std::vector<glm::vec3> tangents;
+    std::vector<glm::vec3> bitangents;
+    this->mathHelper->computeTangentBasis(this->oFace.vectors_vertices, this->oFace.vectors_texture_coordinates, this->oFace.vectors_normals, tangents, bitangents);
+
+    // tangents
+    glGenBuffers(1, &this->vboTangents);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
+    glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(this->glVS_Tangent);
+    glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     glBindVertexArray(0);
 }
@@ -711,6 +726,9 @@ void ModelFace::renderModel() {
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+
+        glm::mat4 matrixWorld = this->matrixModel;//glm::mat4(1.0);
+        glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
         // blending
         if (this->oFace.faceMaterial.transparency < 1.0 || this->Setting_Alpha < 1.0) {
