@@ -10,6 +10,7 @@
 #define STLParser_hpp
 
 #include "kuplung/settings/Settings.h"
+#include <functional>
 
 class STLParser {
 public:

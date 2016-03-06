@@ -12,6 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include <regex>
+#include <functional>
 
 class objParser {
 public:

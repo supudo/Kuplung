@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{12862F08-F685-376E-A79B-A6E04DAEF58E}</ProjectGuid>
+    <RootNamespace>kuplung</RootNamespace>
+    <Keyword>Qt4VSv1.0</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <PlatformToolSet>v140</PlatformToolSet>
+    <OutputDirectory>release\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>release\</IntermediateDirectory>
+    <PrimaryOutput>kuplung</PrimaryOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <PlatformToolSet>v140</PlatformToolSet>
+    <OutputDirectory>debug\</OutputDirectory>
+    <ATLMinimizesCRunTimeLibraryUsage>false</ATLMinimizesCRunTimeLibraryUsage>
+    <CharacterSet>NotSet</CharacterSet>
+    <ConfigurationType>Application</ConfigurationType>
+    <IntermediateDirectory>debug\</IntermediateDirectory>
+    <PrimaryOutput>kuplung</PrimaryOutput>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings" />
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">kuplung</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</IgnoreImportLibrary>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(Platform)\$(Configuration)\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">kuplung</TargetName>
+    <IgnoreImportLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</IgnoreImportLibrary>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>D:\_Projects\Kuplung\Kuplung;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>D:\_Projects\Kuplung\Kuplung;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;C:\Boost\include\boost-1_60;..\..\..\..\_Work\glm;..\..\..\..\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include;..\..\..\..\_Work\GLFW\include;..\..\..\..\_Work\GLEW\include;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-std=c++11 -Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>release\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>None</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\Boost\lib-mingw\libboost_system-vc140-mt-1_60.lib;C:\Boost\lib-mingw\libboost_filesystem-vc140-mt-gd-1_60.lib;$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;SDL2.lib;GLFW3.lib;"D:\_Work\GLEW\lib\Release MX\Win32\glew32mx.lib";D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Boost\lib-mingw;D:\_Work\_Misc;D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib;D:\_Work\GLFW\lib-mingw;D:\_Work\GLEW\lib\Release MX\Win32;D:\_Projects\Kuplung\external\libnoise\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <LinkIncremental>false</LinkIncremental>
+      <OutputFile>$(OutDir)\kuplung.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>.;C:\Boost\include\boost-1_60;..\..\..\..\_Work\glm;..\..\..\..\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include;..\..\..\..\_Work\GLFW\include;..\..\..\..\_Work\GLEW\include;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>-std=c++11 -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
+      <AssemblerListingLocation>debug\</AssemblerListingLocation>
+      <BrowseInformation>false</BrowseInformation>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <Optimization>MaxSpeed</Optimization>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessToFile>false</PreprocessToFile>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TreatWChar_tAsBuiltInType>true</TreatWChar_tAsBuiltInType>
+      <WarningLevel>Level3</WarningLevel>
+      <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>C:\Boost\lib-mingw\libboost_system-vc140-mt-1_60.lib;C:\Boost\lib-mingw\libboost_filesystem-vc140-mt-gd-1_60.lib;$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;SDL2.lib;GLFW3.lib;"D:\_Work\GLEW\lib\Release MX\Win32\glew32mx.lib";D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Boost\lib-mingw;D:\_Work\_Misc;D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib;D:\_Work\GLFW\lib-mingw;D:\_Work\GLEW\lib\Release MX\Win32;D:\_Projects\Kuplung\external\libnoise\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreImportLibrary>true</IgnoreImportLibrary>
+      <OutputFile>$(OutDir)\kuplung.exe</OutputFile>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <SubSystem>Windows</SubSystem>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </Link>
+    <Midl>
+      <DefaultCharType>Unsigned</DefaultCharType>
+      <EnableErrorChecks>None</EnableErrorChecks>
+      <WarningLevel>0</WarningLevel>
+    </Midl>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_WINDOWS;UNICODE;WIN32;WIN64;_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Kuplung\kuplung\meshes\Camera.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\ColorPicker.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\settings\ConfigUtils.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\input\Controls.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\CoordinateSystem.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogControlsModels.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogOptions.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogStyle.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\Editor.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\font-parser\FNTParser.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\FileBrowser.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\FileModelManager.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\settings\FontsList.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\gl\GLUtils.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\terrain\HeightmapGenerator.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\Kuplung.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\Light.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\LightRay.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\Log.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\MaterialEditor.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\maths\Maths.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\ModelFace.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\objects\ObjectsManager.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\SDL2OpenGL32.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\Screenshot.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\settings\Settings.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\Tabs.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\Terrain.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\UI.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\WorldGrid.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_demo.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_draw.cpp" />
+    <ClCompile Include="..\Kuplung\main.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\libnoise\noiseutils.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Kuplung\kuplung\meshes\Camera.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\ColorPicker.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\settings\ConfigUtils.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\input\Controls.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\CoordinateSystem.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\dialogs\DialogControlsModels.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\dialogs\DialogOptions.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\dialogs\DialogStyle.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\Editor.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\font-parser\FNTParser.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\FileBrowser.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\FileModelManager.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\settings\FontsList.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\gl\GLIncludes.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\gl\GLUtils.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\terrain\HeightmapGenerator.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsFontAwesome.h" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h" />
+    <ClInclude Include="..\Kuplung\kuplung\Kuplung.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\Light.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\LightRay.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\Log.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\MaterialEditor.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\maths\Maths.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\ModelFace.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\ModelObject.h" />
+    <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\Objects.h" />
+    <ClInclude Include="..\Kuplung\kuplung\objects\ObjectsManager.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\SDL2OpenGL32.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\Screenshot.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\settings\Settings.h" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\Tabs.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\Terrain.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\UI.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\meshes\WorldGrid.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imconfig.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_internal.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\libnoise\noiseutils.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\stb\stb_image.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\stb\stb_image_write.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\stb\stb_rect_pack.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\stb\stb_textedit.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\stb\stb_truetype.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Kuplung\resources\shaders\axis.frag" />
+    <None Include="..\Kuplung\resources\shaders\axis.vert" />
+    <None Include="..\Kuplung\resources\fonts\fontawesome-webfont.ttf" />
+    <None Include="..\Kuplung\resources\shaders\grid.frag" />
+    <None Include="..\Kuplung\resources\shaders\grid.vert" />
+    <None Include="..\Kuplung\resources\shaders\light.frag" />
+    <None Include="..\Kuplung\resources\shaders\light.vert" />
+    <None Include="..\Kuplung\resources\shaders\light_ray.frag" />
+    <None Include="..\Kuplung\resources\shaders\light_ray.vert" />
+    <None Include="..\Kuplung\resources\fonts\material-icons-regular.ttf" />
+    <None Include="..\Kuplung\resources\shaders\model_face.frag" />
+    <None Include="..\Kuplung\resources\shaders\model_face.geom" />
+    <None Include="..\Kuplung\resources\shaders\model_face.tcs" />
+    <None Include="..\Kuplung\resources\shaders\model_face.tes" />
+    <None Include="..\Kuplung\resources\shaders\model_face.vert" />
+    <None Include="..\Kuplung\resources\shaders\reflection.frag" />
+    <None Include="..\Kuplung\resources\shaders\reflection.vert" />
+    <None Include="..\Kuplung\resources\shaders\terrain.frag" />
+    <None Include="..\Kuplung\resources\shaders\terrain.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="D:\_Projects\Kuplung\Kuplung\VS2015\kuplung_resource.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="Qt 5.5 MSVC2013 64bit" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

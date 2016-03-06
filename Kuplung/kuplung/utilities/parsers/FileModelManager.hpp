@@ -13,6 +13,7 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/utilities/parsers/obj-parser/objParser.hpp"
 #include "kuplung/utilities/parsers/stl-parser/STLParser.hpp"
+#include <functional>
 
 class FileModelManager {
 public:

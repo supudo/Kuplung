@@ -53,7 +53,7 @@ void Settings::initSettings() {
     m_pInstance->frameFileBrowser_Width = m_pInstance->cfgUtils->readInt("frameFileBrowser_Width");
     m_pInstance->frameFileBrowser_Height = m_pInstance->cfgUtils->readInt("frameFileBrowser_Height");
 
-    m_pInstance->guiClearColor = {70.0 / 255.0, 70.0 / 255.0, 70.0 / 255.0, 255.0 / 255.0};
+    m_pInstance->guiClearColor = {70.0f / 255.0f, 70.0f / 255.0f, 70.0f / 255.0f, 255.0f / 255.0f};
     m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
 
     m_pInstance->UIFontFileIndex = 0;
@@ -72,6 +72,7 @@ void Settings::initSettings() {
 std::string Settings::appFolder() {
 #ifdef _WIN32
     //TODO: Windows
+    return "";
 #else
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);

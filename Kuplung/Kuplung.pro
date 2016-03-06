@@ -6,11 +6,6 @@ CONFIG -= console
 CONFIG -= qt
 
 QMAKE_CXXFLAGS += -std=c++11
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
-QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
 
 CONFIG(debug, debug|release) {
   TARGET = kuplung
@@ -25,6 +20,12 @@ CONFIG(release, debug|release) {
 }
 
 mac {
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
 
     QMAKE_INFO_PLIST = Info.plist

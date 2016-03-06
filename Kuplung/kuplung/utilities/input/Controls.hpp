@@ -11,6 +11,7 @@
 
 #include <SDL2/SDL.h>
 #include "kuplung/settings/Settings.h"
+#include <functional>
 
 struct ControlPoint {
     int x, y;

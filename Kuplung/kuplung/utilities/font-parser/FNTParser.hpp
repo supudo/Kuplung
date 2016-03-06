@@ -11,6 +11,7 @@
 
 #include <regex>
 #include "kuplung/settings/Settings.h"
+#include <functional>
 
 struct FontMapCharacter {
     int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
