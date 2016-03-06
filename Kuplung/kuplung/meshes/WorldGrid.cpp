@@ -141,7 +141,8 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         this->gridSize = gridSize;
 
         float gridMinus = this->gridSize / 2;
-        GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
+        //GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
+        std::vector<GridMeshPoint2D> verticesData;
         bool h;
 
         this->dataVertices.clear();
@@ -154,12 +155,16 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                 if (i >= this->gridSize)
                     h = false;
                 if (h) {
-                    verticesData[i][j].y = (i - gridMinus) * unitSize;
-                    verticesData[i][j].x = (j - gridMinus) * unitSize;
+                    GridMeshPoint2D p;
+                    p.x = (j - gridMinus) * unitSize;
+                    p.y = (i - gridMinus) * unitSize;
+                    verticesData.push_back(p);
                 }
                 else {
-                    verticesData[i][j].x = (i - this->gridSize - gridMinus) * unitSize;
-                    verticesData[i][j].y = (j - gridMinus) * unitSize;
+                    GridMeshPoint2D p;
+                    p.x = (i - this->gridSize - gridMinus) * unitSize;
+                    p.y = (j - gridMinus) * unitSize;
+                    verticesData.push_back(p);
                 }
             }
         }
@@ -167,7 +172,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(verticesData) * sizeof(GLfloat), verticesData, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(GridMeshPoint2D) * sizeof(GLfloat), &verticesData[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeVertexPosition);
         glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
     }
