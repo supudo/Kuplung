@@ -32,3 +32,9 @@ Makefile*
 #QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*
+
+# VS 2015
+*.tlog
+VS2015/packages/*
+VS2015/Kuplung.VC.opendb
+VS2015/Kuplung.sdf

@@ -66,13 +66,20 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             *p_opened = true;
 
         if (ImGui::TreeNode("Font")) {
-            const char* fonts[this->fontLister->fonts.size() + 1];
-            fonts[0] = " - < Default Font > ";
+            //const char* fonts[this->fontLister->fonts.size() + 1];
+            //fonts[0] = " - < Default Font > ";
+            //for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
+            //    fonts[j] = this->fontLister->fonts[i].title.c_str();
+            //}
+            std::string f1 = " - < Default Font > ";
+            std::vector<const char*> fonts;
+            fonts.push_back(f1.c_str());
             for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
-                fonts[j] = this->fontLister->fonts[i].title.c_str();
+                fonts.push_back(this->fontLister->fonts[i].title.c_str());
             }
             ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.60f);
-            ImGui::Combo("##001", &optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
+            //ImGui::Combo("##001", &optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
+            ImGui::Combo("##001", &optionsFontSelected, &fonts[0], (int)(this->fontLister->fonts.size() + 1));
             ImGui::PopItemWidth();
 
             ImGui::SameLine();

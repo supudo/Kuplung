@@ -5,8 +5,6 @@ CONFIG += app_bundle
 CONFIG -= console
 CONFIG -= qt
 
-QMAKE_CXXFLAGS += -std=c++11
-
 CONFIG(debug, debug|release) {
   TARGET = kuplung
   OBJECTS_DIR = debug
@@ -20,6 +18,7 @@ CONFIG(release, debug|release) {
 }
 
 mac {
+    QMAKE_CXXFLAGS += -std=c++11
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
@@ -61,28 +60,28 @@ mac {
 }
 
 win32|win64 {
-    #RC_FILE += resources/Kuplung.ico
-    RC_ICONS += resources/Kuplung.ico
+#    RC_FILE += resources/Kuplung.ico
+#    RC_ICONS += resources/Kuplung.ico
 
-    LIBS += -L"C:\Boost\lib-mingw" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
-    INCLUDEPATH += "C:\Boost\include\boost-1_60"
+#    LIBS += -L"C:\Boost\lib-mingw" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
+#    INCLUDEPATH += "C:\Boost\include\boost-1_60"
 
-    LIBS += -L"D:\_Work\_Misc" -llibEGLd
-    LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
+#    LIBS += -L"D:\_Work\_Misc" -llibEGLd
+#    LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
 
-    INCLUDEPATH += "D:\_Work\glm"
+#    INCLUDEPATH += "D:\_Work\glm"
 
-    LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
-    INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
+#    LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
+#    INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
 
-    LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
-    INCLUDEPATH += "D:\_Work\GLFW\include"
+#    LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
+#    INCLUDEPATH += "D:\_Work\GLFW\include"
 
-    LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
-    INCLUDEPATH += "D:\_Work\GLEW\include"
+#    LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
+#    INCLUDEPATH += "D:\_Work\GLEW\include"
 
-    LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
-    INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
+#    LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
+#    INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
 }
 
 OTHER_FILES += resources/*

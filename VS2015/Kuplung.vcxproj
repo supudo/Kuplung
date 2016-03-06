@@ -62,7 +62,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;C:\Boost\include\boost-1_60;..\..\..\..\_Work\glm;..\..\..\..\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include;..\..\..\..\_Work\GLFW\include;..\..\..\..\_Work\GLEW\include;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-std=c++11 -Zc:strictStrings -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>release\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -80,8 +80,8 @@
       <WarningLevel>Level3</WarningLevel>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Boost\lib-mingw\libboost_system-vc140-mt-1_60.lib;C:\Boost\lib-mingw\libboost_filesystem-vc140-mt-gd-1_60.lib;$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;SDL2.lib;GLFW3.lib;"D:\_Work\GLEW\lib\Release MX\Win32\glew32mx.lib";D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Boost\lib-mingw;D:\_Work\_Misc;D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib;D:\_Work\GLFW\lib-mingw;D:\_Work\GLEW\lib\Release MX\Win32;D:\_Projects\Kuplung\external\libnoise\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -103,7 +103,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;C:\Boost\include\boost-1_60;..\..\..\..\_Work\glm;..\..\..\..\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include;..\..\..\..\_Work\GLFW\include;..\..\..\..\_Work\GLEW\include;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>.;..\external\libnoise\headers;C:\Qt\5.5\msvc2013_64\mkspecs\win32-msvc2013;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>-std=c++11 -w34100 -w34189 -w44996 %(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>debug\</AssemblerListingLocation>
       <BrowseInformation>false</BrowseInformation>
@@ -121,8 +121,8 @@
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>C:\Boost\lib-mingw\libboost_system-vc140-mt-1_60.lib;C:\Boost\lib-mingw\libboost_filesystem-vc140-mt-gd-1_60.lib;$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;SDL2.lib;GLFW3.lib;"D:\_Work\GLEW\lib\Release MX\Win32\glew32mx.lib";D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(QTDIR)\lib;C:\Boost\lib-mingw;D:\_Work\_Misc;D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib;D:\_Work\GLFW\lib-mingw;D:\_Work\GLEW\lib\Release MX\Win32;D:\_Projects\Kuplung\external\libnoise\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(QTDIR)\lib\libEGLd.lib;$(QTDIR)\lib\libGLESv2d.lib;D:\_Projects\Kuplung\external\libnoise\lib\libnoise.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(QTDIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>"/MANIFESTDEPENDENCY:type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' publicKeyToken='6595b64144ccf1df' language='*' processorArchitecture='*'" %(AdditionalOptions)</AdditionalOptions>
       <DataExecutionPrevention>true</DataExecutionPrevention>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -253,15 +253,38 @@
     <None Include="..\Kuplung\resources\shaders\reflection.vert" />
     <None Include="..\Kuplung\resources\shaders\terrain.frag" />
     <None Include="..\Kuplung\resources\shaders\terrain.vert" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="D:\_Projects\Kuplung\Kuplung\VS2015\kuplung_resource.rc" />
+    <ResourceCompile Include="D:\_Projects\Kuplung\VS2015\kuplung_resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
-  <ImportGroup Label="ExtensionTargets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="packages\glm.0.9.7.1\build\native\glm.targets" Condition="Exists('packages\glm.0.9.7.1\build\native\glm.targets')" />
+    <Import Project="packages\boost.1.60.0.0\build\native\boost.targets" Condition="Exists('packages\boost.1.60.0.0\build\native\boost.targets')" />
+    <Import Project="packages\glfw.redist.3.1.2\build\native\glfw.redist.targets" Condition="Exists('packages\glfw.redist.3.1.2\build\native\glfw.redist.targets')" />
+    <Import Project="packages\glfw.3.1.2\build\native\glfw.targets" Condition="Exists('packages\glfw.3.1.2\build\native\glfw.targets')" />
+    <Import Project="packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets" Condition="Exists('packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets')" />
+    <Import Project="packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets" Condition="Exists('packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets')" />
+    <Import Project="packages\glew.redist.1.9.0.1\build\native\glew.redist.targets" Condition="Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" />
+    <Import Project="packages\glew.1.9.0.1\build\native\glew.targets" Condition="Exists('packages\glew.1.9.0.1\build\native\glew.targets')" />
+  </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties UicDir=".\GeneratedFiles" RccDir=".\GeneratedFiles" Qt5Version_x0020_x64="Qt 5.5 MSVC2013 64bit" />
     </VisualStudio>
   </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\glm.0.9.7.1\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glm.0.9.7.1\build\native\glm.targets'))" />
+    <Error Condition="!Exists('packages\boost.1.60.0.0\build\native\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\boost.1.60.0.0\build\native\boost.targets'))" />
+    <Error Condition="!Exists('packages\glfw.redist.3.1.2\build\native\glfw.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glfw.redist.3.1.2\build\native\glfw.redist.targets'))" />
+    <Error Condition="!Exists('packages\glfw.3.1.2\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glfw.3.1.2\build\native\glfw.targets'))" />
+    <Error Condition="!Exists('packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sdl2.v140.redist.2.0.4\build\native\sdl2.v140.redist.targets'))" />
+    <Error Condition="!Exists('packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\sdl2.v140.2.0.4\build\native\sdl2.v140.targets'))" />
+    <Error Condition="!Exists('packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.redist.1.9.0.1\build\native\glew.redist.targets'))" />
+    <Error Condition="!Exists('packages\glew.1.9.0.1\build\native\glew.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\glew.1.9.0.1\build\native\glew.targets'))" />
+  </Target>
 </Project>
