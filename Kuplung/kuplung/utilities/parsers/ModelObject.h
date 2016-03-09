@@ -26,6 +26,8 @@ typedef enum objMaterialImageType {
 
 struct objMaterialImage {
     std::string image;
+    int width, height;
+    bool useTexture;
     std::vector<std::string> commands;
 };
 

@@ -18,6 +18,7 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
+
     this->selectedObject = 0;
     this->selectedTabScene = -1;
     this->selectedTabGUICamera = -1;
@@ -90,9 +91,42 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.objFile.c_str());
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.ModelTitle.c_str());
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.materialID.c_str());
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.verticesCount);
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.normalsCount);
-    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices count:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.indicesCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.verticesCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.normalsCount);
+    ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.indicesCount);
+
+    if (mmf->oFace.faceMaterial.textures_ambient.image != "" ||
+        mmf->oFace.faceMaterial.textures_diffuse.image != "" ||
+        mmf->oFace.faceMaterial.textures_dissolve.image != "" ||
+        mmf->oFace.faceMaterial.textures_specular.image != "" ||
+        mmf->oFace.faceMaterial.textures_specularExp.image != "") {
+        ImGui::Separator();
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Textures");
+    }
+    if (mmf->oFace.faceMaterial.textures_ambient.image != "") {
+        std::string t = "Ambient: " + mmf->oFace.faceMaterial.textures_ambient.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_ambient.useTexture);
+    }
+    if (mmf->oFace.faceMaterial.textures_diffuse.image != "") {
+        std::string t = "Diffuse: " + mmf->oFace.faceMaterial.textures_diffuse.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_diffuse.useTexture);
+    }
+    if (mmf->oFace.faceMaterial.textures_dissolve.image != "") {
+        std::string t = "Dissolve: " + mmf->oFace.faceMaterial.textures_dissolve.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_dissolve.useTexture);
+    }
+    if (mmf->oFace.faceMaterial.textures_bump.image != "") {
+        std::string t = "Bump: " + mmf->oFace.faceMaterial.textures_bump.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_bump.useTexture);
+    }
+    if (mmf->oFace.faceMaterial.textures_specular.image != "") {
+        std::string t = "Specular: " + mmf->oFace.faceMaterial.textures_specular.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_specular.useTexture);
+    }
+    if (mmf->oFace.faceMaterial.textures_specularExp.image != "") {
+        std::string t = "Specular Exp: " + mmf->oFace.faceMaterial.textures_specularExp.image;
+        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_specularExp.useTexture);
+    }
 
     ImGui::Separator();
 

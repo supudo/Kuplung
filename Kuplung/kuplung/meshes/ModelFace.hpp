@@ -106,7 +106,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
     GLuint fboDefault, glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
     GLuint vboTextureBump;
 
@@ -120,7 +120,7 @@ private:
 
     // variables
     GLuint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix;
-    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent;
+    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
     GLuint glGS_GeomDisplacementLocation;

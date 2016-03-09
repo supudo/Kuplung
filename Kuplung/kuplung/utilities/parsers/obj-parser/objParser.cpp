@@ -359,6 +359,11 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
 
 objMaterialImage objParser::parseTextureImage(std::string textureLine) {
     objMaterialImage materialImage;
+
+    materialImage.height = 0;
+    materialImage.width = 0;
+    materialImage.useTexture = true;
+
     if (textureLine.find("-") != std::string::npos) {
         std::regex dash("-");
         std::vector<std::string> lineElements = this->splitString(textureLine, dash);
@@ -381,6 +386,7 @@ objMaterialImage objParser::parseTextureImage(std::string textureLine) {
     }
     else
         materialImage.image = textureLine;
+
     return materialImage;
 }
 

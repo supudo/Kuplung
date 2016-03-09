@@ -342,7 +342,8 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsGUI = true;
 
     // testbed
-    std::string testObj = "cube0_bump.obj";
+    //std::string testObj = "bump_cube0.obj";
+    std::string testObj = "bump_cylinder.obj";
     FBEntity fileTestbed;
     fileTestbed.isFile = true;
     fileTestbed.extension = ".obj";

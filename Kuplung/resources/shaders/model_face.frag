@@ -52,6 +52,7 @@ in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
 in vec3 fs_vertexNormal;
 in vec3 fs_tangent;
+in vec3 fs_bitangent;
 in float fs_isBorder;
 
 out vec4 fragColor;
@@ -130,6 +131,7 @@ void main(void) {
             else
                 fragColor = vec4(processedColorRefraction, fs_alpha);
         }
+        //fragColor = vec4(fragmentNormal, fs_alpha);
     }
 }
 
@@ -142,18 +144,29 @@ void main(void) {
 vec3 calculateBumpedNormal() {
     vec3 vertexNormal = normalize(fs_vertexNormal);
 
+    mat3 mtxMV = mat3(fs_MMatrix);
+
     vec3 vertexTangent = normalize(fs_tangent);
     vertexTangent = normalize(vertexTangent - dot(vertexTangent, vertexNormal) * vertexNormal);
 
     vec3 vertexBitangent = cross(vertexTangent, vertexNormal);
 
-    vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).xyz;
+    //vec3 vertexBumpMapNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
+    vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).rgb;
     vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0, 1.0, 1.0);
 
     vec3 vertexNewNormal;
     mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
     vertexNewNormal = TBN * vertexBumpMapNormal;
     vertexNewNormal = normalize(vertexNewNormal);
+
+
+//    fragmentNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
+//    fragmentNormal = 2.0 * fragmentNormal - 1.0;
+//    fragmentNormal = normalize(fragmentNormal);
+//    vec3 l = normalize(directionalLights[0].direction);
+//    cosTheta = clamp(dot(fragmentNormal, l), 0,1);
+
 
     return vertexNewNormal;
 }
@@ -210,9 +223,14 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
             vec3 reflectDirection = reflect(-directionalLights[i].direction, normalDirection);
             float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[i].strengthSpecular);
             vec3 specular = directionalLights[i].strengthSpecular * spec * directionalLights[i].specular;
+
+            vec3 specMapColor = vec3(1.0, 1.0, 1.0);
+            if (material.has_texture_specular)
+                specMapColor = texture(material.sampler_specular, fs_textureCoord).rgb;
+
             if (material.has_texture_specular) {
                 vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-                result += specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+                result += specMapColor * specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
             }
             else
                 result += specular * material.specular * material.refraction * material.specularExp;

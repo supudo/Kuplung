@@ -60,6 +60,7 @@ void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboTextureCoordinates);
     glDeleteBuffers(1, &this->vboIndices);
     glDeleteBuffers(1, &this->vboTangents);
+    glDeleteBuffers(1, &this->vboBitangents);
 
     glDeleteBuffers(1, &this->vboVerticesReflect);
     glDeleteBuffers(1, &this->vboNormalsReflect);
@@ -322,6 +323,7 @@ bool ModelFace::initShaderProgram() {
         this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
         this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
+        this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         // misc
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
@@ -447,6 +449,13 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_Tangent);
     glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // bitangents
+    glGenBuffers(1, &this->vboBitangents);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
+    glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(this->glVS_Bitangent);
+    glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     glBindVertexArray(0);
 }
@@ -821,7 +830,7 @@ void ModelFace::renderModel() {
         glUniform3f(this->glMaterial_Specular, this->materialSpecular->color.r, this->materialSpecular->color.g, this->materialSpecular->color.b);
         glUniform3f(this->glMaterial_Emission, this->materialEmission->color.r, this->materialEmission->color.g, this->materialEmission->color.b);
 
-        if (this->vboTextureAmbient > 0) {
+        if (this->vboTextureAmbient > 0 && this->oFace.faceMaterial.textures_ambient.useTexture) {
             glUniform1i(this->glMaterial_SamplerAmbient, 1);
             glUniform1i(this->glMaterial_HasTextureAmbient, 1);
             glActiveTexture(GL_TEXTURE0);
@@ -830,7 +839,7 @@ void ModelFace::renderModel() {
         else
             glUniform1i(this->glMaterial_HasTextureAmbient, 0);
 
-        if (this->vboTextureDiffuse > 0) {
+        if (this->vboTextureDiffuse > 0 && this->oFace.faceMaterial.textures_diffuse.useTexture) {
             glUniform1i(this->glMaterial_HasTextureDiffuse, 1);
             glUniform1i(this->glMaterial_SamplerDiffuse, 1);
             glActiveTexture(GL_TEXTURE1);
@@ -839,7 +848,7 @@ void ModelFace::renderModel() {
         else
             glUniform1i(this->glMaterial_HasTextureDiffuse, 0);
 
-        if (this->vboTextureSpecular > 0) {
+        if (this->vboTextureSpecular > 0 && this->oFace.faceMaterial.textures_specular.useTexture) {
             glUniform1i(this->glMaterial_HasTextureSpecular, 1);
             glUniform1i(this->glMaterial_SamplerSpecular, 2);
             glActiveTexture(GL_TEXTURE2);
@@ -848,7 +857,7 @@ void ModelFace::renderModel() {
         else
             glUniform1i(this->glMaterial_HasTextureSpecular, 0);
 
-        if (this->vboTextureSpecularExp > 0) {
+        if (this->vboTextureSpecularExp > 0 && this->oFace.faceMaterial.textures_specularExp.useTexture) {
             glUniform1i(this->glMaterial_HasTextureSpecularExp, 1);
             glUniform1i(this->glMaterial_SamplerSpecularExp, 3);
             glActiveTexture(GL_TEXTURE3);
@@ -857,7 +866,7 @@ void ModelFace::renderModel() {
         else
             glUniform1i(this->glMaterial_HasTextureSpecularExp, 0);
 
-        if (this->vboTextureDissolve > 0) {
+        if (this->vboTextureDissolve > 0 && this->oFace.faceMaterial.textures_dissolve.useTexture) {
             glUniform1i(this->glMaterial_HasTextureDissolve, 1);
             glUniform1i(this->glMaterial_SamplerDissolve, 4);
             glActiveTexture(GL_TEXTURE4);
@@ -866,7 +875,7 @@ void ModelFace::renderModel() {
         else
             glUniform1i(this->glMaterial_HasTextureDissolve, 0);
 
-        if (this->vboTextureBump > 0) {
+        if (this->vboTextureBump > 0 && this->oFace.faceMaterial.textures_bump.useTexture) {
             glUniform1i(this->glMaterial_HasTextureBump, 1);
             glUniform1i(this->glMaterial_SamplerBump, 5);
             glActiveTexture(GL_TEXTURE5);
