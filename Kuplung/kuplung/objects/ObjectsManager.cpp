@@ -140,20 +140,14 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     std::string objectTitle = "";
     if (title == "") {
         switch (type) {
-            case LightSourceType_Area:
-                objectTitle = "Area";
-                break;
-            case LightSourceType_Hemi:
-                objectTitle = "Hemi";
+            case LightSourceType_Directional:
+                objectTitle = "Directional";
                 break;
             case LightSourceType_Point:
                 objectTitle = "Point";
                 break;
             case LightSourceType_Spot:
                 objectTitle = "Spot";
-                break;
-            case LightSourceType_Sun:
-                objectTitle = "Sun";
                 break;
             default:
                 break;
@@ -164,20 +158,14 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     std::string objectDescription = "";
     if (description == "") {
         switch (type) {
-            case LightSourceType_Area:
+            case LightSourceType_Directional:
                 objectDescription = "Directional area light source";
-                break;
-            case LightSourceType_Hemi:
-                objectDescription = "180 degree constant light source";
                 break;
             case LightSourceType_Point:
                 objectDescription = "Omnidirectional point light source";
                 break;
             case LightSourceType_Spot:
                 objectDescription = "Directional cone light source";
-                break;
-            case LightSourceType_Sun:
-                objectDescription = "Constant direction parallel ray light source";
                 break;
             default:
                 break;

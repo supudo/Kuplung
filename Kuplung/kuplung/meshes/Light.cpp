@@ -76,6 +76,12 @@ void Light::initProperties() {
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
 
+    this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->lLiteral = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+
     this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });

@@ -21,11 +21,26 @@
 #include "kuplung/meshes/WorldGrid.hpp"
 #include "kuplung/utilities/maths/Maths.hpp"
 
-struct ModelFace_LightSource {
-    GLuint glLight_InUse;
-    GLuint glLight_Ambient, glLight_Diffuse, glLight_Specular;
-    GLuint glLight_StrengthAmbient, glLight_StrengthDiffuse, glLight_StrengthSpecular;
-    GLuint glLight_Position, glLight_Direction;
+struct ModelFace_LightSource_Directional {
+    GLuint gl_InUse;
+    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+    GLuint gl_Position, gl_Direction;
+};
+
+struct ModelFace_LightSource_Point {
+    GLuint gl_InUse;
+    GLuint gl_Position;
+    GLuint gl_Constant, gl_Linear, gl_Quadratic;
+    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
+};
+
+struct ModelFace_LightSource_Spot {
+    GLuint gl_InUse;
+    GLuint gl_Position, gl_Direction;
+    GLuint gl_CutOff, gl_OuterCutOff;
+    GLuint gl_Constant, gl_Linear, gl_Quadratic;
+    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
 };
 
 class ModelFace {
@@ -129,8 +144,10 @@ private:
     GLuint glFS_ScreenResX, glFS_ScreenResY;
 
     // light
-    int GLSL_LightSource_Number;
-    std::vector<ModelFace_LightSource *> mfLights;
+    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+    std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
+    std::vector<ModelFace_LightSource_Point *> mfLights_Point;
+    std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;

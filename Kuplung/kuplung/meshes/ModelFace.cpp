@@ -37,8 +37,12 @@ ModelFace* ModelFace::clone(int modelID) {
 
     mmf->vecCameraPosition = this->vecCameraPosition;
 
-    mmf->GLSL_LightSource_Number = this->GLSL_LightSource_Number;
-    mmf->mfLights = this->mfLights;
+    mmf->GLSL_LightSourceNumber_Directional = this->GLSL_LightSourceNumber_Directional;
+    mmf->GLSL_LightSourceNumber_Point = this->GLSL_LightSourceNumber_Point;
+    mmf->GLSL_LightSourceNumber_Spot = this->GLSL_LightSourceNumber_Spot;
+    mmf->mfLights_Directional = this->mfLights_Directional;
+    mmf->mfLights_Point = this->mfLights_Point;
+    mmf->mfLights_Spot = this->mfLights_Spot;
 
     mmf->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     mmf->setModel(mmf->oFace);
@@ -144,7 +148,9 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->glUseTessellation = false;
     this->showMaterialEditor = false;
-    this->GLSL_LightSource_Number = 8;
+    this->GLSL_LightSourceNumber_Directional = 8;
+    this->GLSL_LightSourceNumber_Point = 4;
+    this->GLSL_LightSourceNumber_Spot = 4;
 
     // light
     this->Setting_LightStrengthAmbient = 0.5;
@@ -339,22 +345,61 @@ bool ModelFace::initShaderProgram() {
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
 
-        // light
-        for (int i=0; i<this->GLSL_LightSource_Number; i++) {
-            ModelFace_LightSource *f = new ModelFace_LightSource();
-            f->glLight_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
+        // light - directional
+        for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
+            ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
+            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
-            f->glLight_Position = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].position").c_str());
-            f->glLight_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
+            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].position").c_str());
+            f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
 
-            f->glLight_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
-            f->glLight_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
-            f->glLight_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
+            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
 
-            f->glLight_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-            f->glLight_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-            f->glLight_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
-            this->mfLights.push_back(f);
+            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+            this->mfLights_Directional.push_back(f);
+        }
+
+        // light - point
+        for (int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
+            ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
+            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
+            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
+
+            f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].constant").c_str());
+            f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].linear").c_str());
+            f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
+
+            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].specular").c_str());
+
+            this->mfLights_Point.push_back(f);
+        }
+
+        // light - spot
+        for (int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
+            ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
+            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
+
+            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].position").c_str());
+            f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].direction").c_str());
+
+            f->gl_CutOff = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
+            f->gl_OuterCutOff = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
+
+            f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].constant").c_str());
+            f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].linear").c_str());
+            f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
+
+            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].specular").c_str());
+
+            this->mfLights_Spot.push_back(f);
         }
 
         // material
@@ -599,51 +644,158 @@ void ModelFace::renderModel() {
         // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
 
-        // lights
+        // lights - directional
+        int lightsCount_Directional = 0;
         for (int j=0; j<(int)this->lightSources.size(); j++) {
-            if (j < this->GLSL_LightSource_Number) {
-                Light *light = this->lightSources[j];
-                ModelFace_LightSource *f = this->mfLights[j];
+            Light *light = this->lightSources[j];
+            if (light->type == LightSourceType_Directional && j < this->GLSL_LightSourceNumber_Directional) {
+                ModelFace_LightSource_Directional *f = this->mfLights_Directional[j];
 
-                glUniform1i(f->glLight_InUse, 1);
+                glUniform1i(f->gl_InUse, 1);
 
                 // light
-                glUniform3f(f->glLight_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
-                glUniform3f(f->glLight_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+                glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+                glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
                 // color
-                glUniform3f(f->glLight_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
-                glUniform3f(f->glLight_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
-                glUniform3f(f->glLight_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+                glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
+                glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
+                glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
 
                 // light factors
-                glUniform1f(f->glLight_StrengthAmbient, light->ambient->strength);
-                glUniform1f(f->glLight_StrengthDiffuse, light->diffuse->strength);
-                glUniform1f(f->glLight_StrengthSpecular, light->specular->strength);
+                glUniform1f(f->gl_StrengthAmbient, light->ambient->strength);
+                glUniform1f(f->gl_StrengthDiffuse, light->diffuse->strength);
+                glUniform1f(f->gl_StrengthSpecular, light->specular->strength);
+
+                lightsCount_Directional += 1;
             }
         }
 
-        if ((int)this->lightSources.size() < this->GLSL_LightSource_Number) {
+        if ((int)this->lightSources.size() < this->GLSL_LightSourceNumber_Directional) {
             glm::vec3 defLight = glm::vec3(0.0f, 0.0f, 0.0f);
             float defLightStrength = 0.0f;
-            for (int j=(int)this->lightSources.size(); j<this->GLSL_LightSource_Number; j++) {
-                ModelFace_LightSource *f = this->mfLights[j];
+            for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+                ModelFace_LightSource_Directional *f = this->mfLights_Directional[j];
 
-                glUniform1i(f->glLight_InUse, 0);
+                glUniform1i(f->gl_InUse, 0);
 
                 // light
-                glUniform3f(f->glLight_Direction, defLight.x, defLight.y, defLight.z);
-                glUniform3f(f->glLight_Position, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Direction, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
 
                 // color
-                glUniform3f(f->glLight_Ambient, defLight.x, defLight.y, defLight.z);
-                glUniform3f(f->glLight_Diffuse, defLight.x, defLight.y, defLight.z);
-                glUniform3f(f->glLight_Specular, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
 
                 // light factors
-                glUniform1f(f->glLight_StrengthAmbient, defLightStrength);
-                glUniform1f(f->glLight_StrengthDiffuse, defLightStrength);
-                glUniform1f(f->glLight_StrengthSpecular, defLightStrength);
+                glUniform1f(f->gl_StrengthAmbient, defLightStrength);
+                glUniform1f(f->gl_StrengthDiffuse, defLightStrength);
+                glUniform1f(f->gl_StrengthSpecular, defLightStrength);
+            }
+        }
+
+        // lights - point
+        int lightsCount_Point = 0;
+        for (int j=0; j<(int)this->lightSources.size(); j++) {
+            Light *light = this->lightSources[j];
+            if (light->type == LightSourceType_Point && j < this->GLSL_LightSourceNumber_Point) {
+                ModelFace_LightSource_Point *f = this->mfLights_Point[j];
+
+                glUniform1i(f->gl_InUse, 1);
+
+                // light
+                glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+
+                // factors
+                glUniform1f(f->gl_Constant, light->lConstant->point);
+                glUniform1f(f->gl_Linear, light->lLiteral->point);
+                glUniform1f(f->gl_Quadratic, light->lQuadratic->point);
+
+                // color
+                glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
+                glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
+                glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+
+                lightsCount_Point += 1;
+            }
+        }
+
+        if ((int)this->lightSources.size() < this->GLSL_LightSourceNumber_Point) {
+            glm::vec3 defLight = glm::vec3(0.0f, 0.0f, 0.0f);
+            float defLightVal = 0.0f;
+            for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+                ModelFace_LightSource_Point *f = this->mfLights_Point[j];
+
+                glUniform1i(f->gl_InUse, 0);
+
+                // light
+                glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
+
+                // factors
+                glUniform1f(f->gl_Constant, defLightVal);
+                glUniform1f(f->gl_Linear, defLightVal);
+                glUniform1f(f->gl_Quadratic, defLightVal);
+
+                // color
+                glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
+            }
+        }
+
+        // lights - spot
+        int lightsCount_Spot = 0;
+        for (int j=0; j<(int)this->lightSources.size(); j++) {
+            Light *light = this->lightSources[j];
+            if (light->type == LightSourceType_Spot && j < this->GLSL_LightSourceNumber_Spot) {
+                ModelFace_LightSource_Spot *f = this->mfLights_Spot[j];
+
+                glUniform1i(f->gl_InUse, 1);
+
+                // light
+                glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
+                glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+
+                // cutoff
+                glUniform1f(f->gl_CutOff, light->lCutOff->point);
+                glUniform1f(f->gl_OuterCutOff, light->lOuterCutOff->point);
+
+                // factors
+                glUniform1f(f->gl_Constant, light->lConstant->point);
+                glUniform1f(f->gl_Linear, light->lLiteral->point);
+                glUniform1f(f->gl_Quadratic, light->lQuadratic->point);
+
+                // color
+                glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
+                glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
+                glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+
+                lightsCount_Spot += 1;
+            }
+        }
+
+        if ((int)this->lightSources.size() < this->GLSL_LightSourceNumber_Spot) {
+            glm::vec3 defLight = glm::vec3(0.0f, 0.0f, 0.0f);
+            float defLightVal = 0.0f;
+            for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+                ModelFace_LightSource_Spot *f = this->mfLights_Spot[j];
+
+                glUniform1i(f->gl_InUse, 0);
+
+                // light
+                glUniform3f(f->gl_Direction, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
+
+                // factors
+                glUniform1f(f->gl_Constant, defLightVal);
+                glUniform1f(f->gl_Linear, defLightVal);
+                glUniform1f(f->gl_Quadratic, defLightVal);
+
+                // color
+                glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
+                glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
             }
         }
 

@@ -39,6 +39,8 @@ public:
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
     MaterialColor *ambient, *diffuse, *specular;
+    ObjectCoordinate *lCutOff, *lOuterCutOff;
+    ObjectCoordinate *lConstant, *lLiteral, *lQuadratic;
 
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;

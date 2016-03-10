@@ -24,11 +24,9 @@ struct ObjectEye {
 };
 
 typedef enum LightSourceType {
+    LightSourceType_Directional,
     LightSourceType_Point,
-    LightSourceType_Sun,
-    LightSourceType_Spot,
-    LightSourceType_Hemi,
-    LightSourceType_Area
+    LightSourceType_Spot
 } LightSourceType;
 
 struct MaterialColor {
