@@ -98,7 +98,6 @@ void main(void) {
         // misc
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
-        //vec3 lightDirection = normalize(directionalLights[0].position - fs_vertexPosition);
         vec3 lightDirection;
         for (int i=0; i<NR_POINT_LIGHTS; i++)
             if (directionalLights[i].inUse)
@@ -131,7 +130,6 @@ void main(void) {
             else
                 fragColor = vec4(processedColorRefraction, fs_alpha);
         }
-        //fragColor = vec4(fragmentNormal, fs_alpha);
     }
 }
 
@@ -159,14 +157,6 @@ vec3 calculateBumpedNormal() {
     mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
     vertexNewNormal = TBN * vertexBumpMapNormal;
     vertexNewNormal = normalize(vertexNewNormal);
-
-
-//    fragmentNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
-//    fragmentNormal = 2.0 * fragmentNormal - 1.0;
-//    fragmentNormal = normalize(fragmentNormal);
-//    vec3 l = normalize(directionalLights[0].direction);
-//    cosTheta = clamp(dot(fragmentNormal, l), 0,1);
-
 
     return vertexNewNormal;
 }
@@ -224,13 +214,9 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
             float spec = pow(max(dot(viewDirection, reflectDirection), 0.0), directionalLights[i].strengthSpecular);
             vec3 specular = directionalLights[i].strengthSpecular * spec * directionalLights[i].specular;
 
-            vec3 specMapColor = vec3(1.0, 1.0, 1.0);
-            if (material.has_texture_specular)
-                specMapColor = texture(material.sampler_specular, fs_textureCoord).rgb;
-
             if (material.has_texture_specular) {
                 vec4 texturedColor_Specular = texture(material.sampler_specular, fs_textureCoord);
-                result += specMapColor * specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
+                result += specular * texturedColor_Specular.rgb * material.refraction * material.specularExp;
             }
             else
                 result += specular * material.specular * material.refraction * material.specularExp;

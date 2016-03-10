@@ -102,6 +102,8 @@ void ModelFace::destroy() {
     glDisableVertexAttribArray(this->glVS_VertexPosition);
     glDisableVertexAttribArray(this->glFS_TextureCoord);
     glDisableVertexAttribArray(this->glVS_VertexNormal);
+    glDisableVertexAttribArray(this->glVS_Tangent);
+    glDisableVertexAttribArray(this->glVS_Bitangent);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -271,20 +273,6 @@ bool ModelFace::initShaderProgram() {
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
-    const char *shader_tess_control;
-    const char *shader_tess_eval;
-    if (this->glUseTessellation) {
-        // tessellation control shader
-        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-        std::string shaderSourceTCS = readFile(shaderPath.c_str());
-        shader_tess_control = shaderSourceTCS.c_str();
-
-        // tessellation evaluation shader
-        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-        std::string shaderSourceTES = readFile(shaderPath.c_str());
-        shader_tess_eval = shaderSourceTES.c_str();
-    }
-
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
     std::string shaderSourceGeometry = readFile(shaderPath.c_str());
@@ -300,6 +288,16 @@ bool ModelFace::initShaderProgram() {
     bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
     if (this->glUseTessellation) {
+        // tessellation control shader
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+        std::string shaderSourceTCS = readFile(shaderPath.c_str());
+        const char *shader_tess_control = shaderSourceTCS.c_str();
+
+        // tessellation evaluation shader
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+        std::string shaderSourceTES = readFile(shaderPath.c_str());
+        const char *shader_tess_eval = shaderSourceTES.c_str();
+
         shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
         shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
     }
@@ -527,111 +525,6 @@ void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialI
     }
 }
 
-#pragma mark - Reflection
-
-bool ModelFace::reflectionInit() {
-    this->reflectWidth = 512;
-    this->reflectHeight = 512;
-
-    glGenVertexArrays(1, &this->glVAOReflect);
-    glBindVertexArray(this->glVAOReflect);
-
-    // vertices
-    glGenBuffers(1, &this->vboVerticesReflect);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboVerticesReflect);
-    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-    // normals
-    glGenBuffers(1, &this->vboNormalsReflect);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboNormalsReflect);
-    glBufferData(GL_ARRAY_BUFFER, this->dataNormals.size() * sizeof(GLfloat), &this->dataNormals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(1);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-    // texture coordinates
-    glGenBuffers(1, &this->vboTextureCoordinatesReflect);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinatesReflect);
-    glBufferData(GL_ARRAY_BUFFER, this->dataTexCoords.size() * sizeof(GLfloat), &this->dataTexCoords[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
-
-    // indices
-    glGenBuffers(1, &this->vboIndicesReflect);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndicesReflect);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
-
-    // texture
-    GLuint colorTexture;
-    glGenTextures(1, &colorTexture);
-    glBindTexture(GL_TEXTURE_2D, colorTexture);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->reflectWidth, this->reflectHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-
-    // depth buffer
-    GLuint depthRenderbuffer;
-    glGenRenderbuffers(1, &depthRenderbuffer);
-    glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this->reflectWidth, this->reflectHeight);
-
-    // frame buffer
-    glGenFramebuffers(1, &this->fboReflection);
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        this->doLog("Failed to make complete framebuffer object " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
-        return false;
-    }
-
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
-
-    // reflection texture
-    GLint iReflectTexName;
-    glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &iReflectTexName);
-    this->reflectTexName = ((GLuint*)(&iReflectTexName))[0];
-
-    // shaders
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
-    const char *shader_vertex = shaderSourceVertex.c_str();
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
-    const char *shader_fragment = shaderSourceFragment.c_str();
-
-    this->shaderProgramReflection = glCreateProgram();
-
-    bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderVertexReflection, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderFragmentReflection, GL_FRAGMENT_SHADER, shader_fragment);
-
-    if (!shaderCompilation)
-        return false;
-
-    glLinkProgram(this->shaderProgramReflection);
-
-    GLint programSuccess = GL_TRUE;
-    glGetProgramiv(this->shaderProgramReflection, GL_LINK_STATUS, &programSuccess);
-    if (programSuccess != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Error linking reflection program %d!\n", this->shaderProgramReflection));
-        this->glUtils->printProgramLog(this->shaderProgramReflection);
-        return false;
-    }
-    else {
-        this->reflectModelViewUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewMatrix");
-        this->reflectProjectionUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewProjectionMatrix");
-        this->reflectNormalMatrixUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_normalMatrix");
-    }
-
-    return true;
-}
-
 #pragma mark - Render
 
 void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid) {
@@ -659,73 +552,6 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
     glUseProgram(0);
     glBindVertexArray(0);
-}
-
-void ModelFace::renderReflectFBO() {
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
-    glViewport(0, 0, this->reflectWidth, this->reflectHeight);
-
-    glm::mat4 mtxModel = this->matrixModel;
-
-    this->matrixModel = glm::scale(this->matrixModel, glm::vec3(1, -1, -1));
-
-    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-
-    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 2.5, -2.5));
-
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-
-    glUseProgram(this->shaderProgram);
-
-    glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-
-    glBindVertexArray(this->glVAO);
-    glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-    glCullFace(GL_FRONT);
-    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
-
-    this->matrixModel = mtxModel;
-
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
-    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-}
-
-void ModelFace::renderMirrorSurface() {
-    glBindVertexArray(this->glVAOReflect);
-    glUseProgram(this->shaderProgramReflection);
-
-    glm::mat4 mtxModel = this->matrixModel;
-    mtxModel *= this->grid->matrixModel;
-
-    // rotate
-    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateX), glm::vec3(1, 0, 0));
-    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateY), glm::vec3(0, 1, 0));
-    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateZ), glm::vec3(0, 0, 1));
-    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-
-    // translate - glm::vec3(0.0, -5.0, -2.5)
-    mtxModel = glm::translate(mtxModel, glm::vec3(this->grid->mirrorSurface->translateX, this->grid->mirrorSurface->translateY, this->grid->mirrorSurface->translateZ));
-
-    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
-    //mvpMatrix = this->grid->matrixProjection * this->grid->matrixCamera * this->grid->matrixModel;
-
-    glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
-    glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-
-    // The inverse transpose of the top left 3x3 portion of the modelview matrix
-    glm::mat3 matrixNormal = glm::mat3(mtxModel);
-    glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
-
-    glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
-    glGenerateMipmap(GL_TEXTURE_2D);
-    glDrawElements(GL_TRIANGLES, this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
-
-    // rendering the grid again - this fixes the z-depth for transparency with the objects and the grid intersecting them ....
-    // TODO: find the proper way to handle this!!!
-    this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 
 void ModelFace::renderModel() {
@@ -925,6 +751,178 @@ void ModelFace::drawOnly() {
 
     if (Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
+
+#pragma mark - Reflection
+
+bool ModelFace::reflectionInit() {
+    this->reflectWidth = 512;
+    this->reflectHeight = 512;
+
+    glGenVertexArrays(1, &this->glVAOReflect);
+    glBindVertexArray(this->glVAOReflect);
+
+    // vertices
+    glGenBuffers(1, &this->vboVerticesReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboVerticesReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // normals
+    glGenBuffers(1, &this->vboNormalsReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboNormalsReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataNormals.size() * sizeof(GLfloat), &this->dataNormals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // texture coordinates
+    glGenBuffers(1, &this->vboTextureCoordinatesReflect);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinatesReflect);
+    glBufferData(GL_ARRAY_BUFFER, this->dataTexCoords.size() * sizeof(GLfloat), &this->dataTexCoords[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+
+    // indices
+    glGenBuffers(1, &this->vboIndicesReflect);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndicesReflect);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+
+    // texture
+    GLuint colorTexture;
+    glGenTextures(1, &colorTexture);
+    glBindTexture(GL_TEXTURE_2D, colorTexture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->reflectWidth, this->reflectHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+
+    // depth buffer
+    GLuint depthRenderbuffer;
+    glGenRenderbuffers(1, &depthRenderbuffer);
+    glBindRenderbuffer(GL_RENDERBUFFER, depthRenderbuffer);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT16, this->reflectWidth, this->reflectHeight);
+
+    // frame buffer
+    glGenFramebuffers(1, &this->fboReflection);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, colorTexture, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
+
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        this->doLog("Failed to make complete framebuffer object " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
+        return false;
+    }
+
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
+
+    // reflection texture
+    GLint iReflectTexName;
+    glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &iReflectTexName);
+    this->reflectTexName = ((GLuint*)(&iReflectTexName))[0];
+
+    // shaders
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.vert";
+    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    const char *shader_vertex = shaderSourceVertex.c_str();
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.frag";
+    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    const char *shader_fragment = shaderSourceFragment.c_str();
+
+    this->shaderProgramReflection = glCreateProgram();
+
+    bool shaderCompilation = true;
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderVertexReflection, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderFragmentReflection, GL_FRAGMENT_SHADER, shader_fragment);
+
+    if (!shaderCompilation)
+        return false;
+
+    glLinkProgram(this->shaderProgramReflection);
+
+    GLint programSuccess = GL_TRUE;
+    glGetProgramiv(this->shaderProgramReflection, GL_LINK_STATUS, &programSuccess);
+    if (programSuccess != GL_TRUE) {
+        this->doLog(Settings::Instance()->string_format("Error linking reflection program %d!\n", this->shaderProgramReflection));
+        this->glUtils->printProgramLog(this->shaderProgramReflection);
+        return false;
+    }
+    else {
+        this->reflectModelViewUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewMatrix");
+        this->reflectProjectionUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_modelViewProjectionMatrix");
+        this->reflectNormalMatrixUniformIdx = glGetUniformLocation(this->shaderProgramReflection, "vs_normalMatrix");
+    }
+
+    return true;
+}
+
+void ModelFace::renderReflectFBO() {
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
+    glViewport(0, 0, this->reflectWidth, this->reflectHeight);
+
+    glm::mat4 mtxModel = this->matrixModel;
+
+    this->matrixModel = glm::scale(this->matrixModel, glm::vec3(1, -1, -1));
+
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+    this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+
+    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 2.5, -2.5));
+
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+
+    glUseProgram(this->shaderProgram);
+
+    glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+
+    glBindVertexArray(this->glVAO);
+    glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+    glCullFace(GL_FRONT);
+    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+
+    this->matrixModel = mtxModel;
+
+    glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
+    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+}
+
+void ModelFace::renderMirrorSurface() {
+    glBindVertexArray(this->glVAOReflect);
+    glUseProgram(this->shaderProgramReflection);
+
+    glm::mat4 mtxModel = this->matrixModel;
+    mtxModel *= this->grid->matrixModel;
+
+    // rotate
+    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateX), glm::vec3(1, 0, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateY), glm::vec3(0, 1, 0));
+    mtxModel = glm::rotate(mtxModel, glm::radians(this->grid->mirrorSurface->rotateZ), glm::vec3(0, 0, 1));
+    mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+
+    // translate - glm::vec3(0.0, -5.0, -2.5)
+    mtxModel = glm::translate(mtxModel, glm::vec3(this->grid->mirrorSurface->translateX, this->grid->mirrorSurface->translateY, this->grid->mirrorSurface->translateZ));
+
+    glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+    //mvpMatrix = this->grid->matrixProjection * this->grid->matrixCamera * this->grid->matrixModel;
+
+    glUniformMatrix4fv(this->reflectModelViewUniformIdx, 1, GL_FALSE, glm::value_ptr(mtxModel));
+    glUniformMatrix4fv(this->reflectProjectionUniformIdx, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+
+    // The inverse transpose of the top left 3x3 portion of the modelview matrix
+    glm::mat3 matrixNormal = glm::mat3(mtxModel);
+    glUniformMatrix3fv(this->reflectNormalMatrixUniformIdx, 1, GL_FALSE, glm::value_ptr(matrixNormal));
+
+    glBindTexture(GL_TEXTURE_2D, this->reflectTexName);
+    glGenerateMipmap(GL_TEXTURE_2D);
+    glDrawElements(GL_TRIANGLES, (int)this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
+
+    // rendering the grid again - this fixes the z-depth for transparency with the objects and the grid intersecting them ....
+    // TODO: find the proper way to handle this!!!
+    this->grid->render(this->matrixProjection, this->matrixCamera);
 }
 
 #pragma mark - Scene Options
