@@ -77,7 +77,7 @@ public:
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
 
-    bool Setting_CelShading;
+    bool Setting_CelShading, Setting_Wireframe;
     float Setting_Alpha;
     ObjectEye *Settings_Eye;
     ObjectCoordinate *positionX, *positionY, *positionZ;

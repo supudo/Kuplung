@@ -11,6 +11,8 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/ui/components/Tabs.hpp"
+#include <boost/filesystem.hpp>
+#include "kuplung/utilities/stb/stb_image.h"
 
 void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
     this->managerObjects = managerObjects;
@@ -18,6 +20,23 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
+
+    this->showTextureWindow_Ambient = false;
+    this->showTexture_Ambient = false;
+    this->showTextureWindow_Diffuse = false;
+    this->showTexture_Diffuse = false;
+    this->showTextureWindow_Dissolve = false;
+    this->showTexture_Dissolve = false;
+    this->showTextureWindow_Bump = false;
+    this->showTexture_Bump = false;
+    this->showTextureWindow_Specular = false;
+    this->showTexture_Specular = false;
+    this->showTextureWindow_SpecularExp = false;
+    this->showTexture_SpecularExp = false;
+
+    this->textureAmbient_Width = this->textureAmbient_Height = this->textureDiffuse_Width = this->textureDiffuse_Height = 0;
+    this->textureDissolve_Width = this->textureDissolve_Height = this->textureBump_Width = this->textureBump_Height = 0;
+    this->textureSpecular_Width = this->textureSpecular_Height = this->textureSpecularExp_Width = this->textureSpecularExp_Height = 0;
 
     this->selectedObject = 0;
     this->selectedTabScene = -1;
@@ -27,6 +46,72 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
 
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
+}
+
+void DialogControlsModels::showTextureImage(std::string imageFile, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+    title = title + " Texture";
+    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
+    if (*genTexture)
+        this->createTextureBuffer(imageFile, vboBuffer, width, height);
+    ImGui::Image((ImTextureID)(intptr_t)*vboBuffer, ImVec2(*width, *height));
+    ImGui::Separator();
+    if (!boost::filesystem::exists(imageFile))
+        imageFile = Settings::Instance()->currentFolder + "/" + imageFile;
+    ImGui::Text("%s", imageFile.c_str());
+    ImGui::End();
+    *genTexture = false;
+}
+
+void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height) {
+    if (!boost::filesystem::exists(imageFile))
+        imageFile = Settings::Instance()->currentFolder + "/" + imageFile;
+    int tChannels;
+    unsigned char* tPixels = stbi_load(imageFile.c_str(), width, height, &tChannels, 0);
+    if (!tPixels)
+        this->funcDoLog("Can't load bump texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
+    else {
+        glGenTextures(1, vboBuffer);
+        glBindTexture(GL_TEXTURE_2D, *vboBuffer);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        GLint textureFormat = 0;
+        switch (tChannels) {
+            case 1:
+                textureFormat = GL_LUMINANCE;
+                break;
+            case 2:
+                textureFormat = GL_LUMINANCE_ALPHA;
+                break;
+            case 3:
+                textureFormat = GL_RGB;
+                break;
+            case 4:
+                textureFormat = GL_RGBA;
+                break;
+            default:
+                textureFormat = GL_RGB;
+                break;
+        }
+        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, *width, *height, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        stbi_image_free(tPixels);
+    }
+}
+
+void DialogControlsModels::showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image) {
+    ImGui::Checkbox(chkLabel.c_str(), useTexture);
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("%s", ("Show/Hide " + title + " Texture").c_str());
+    ImGui::SameLine();
+    std::string btnLabel = ICON_FA_EYE;
+    btnLabel += chkLabel;
+    if (ImGui::Button(btnLabel.c_str())) {
+        *showWindow = !*showWindow;
+        *loadTexture = true;
+    }
+    ImGui::SameLine();
+    ImGui::Text("%s: %s", title.c_str(), image.c_str());
 }
 
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
@@ -104,29 +189,71 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Textures");
     }
     if (mmf->oFace.faceMaterial.textures_ambient.image != "") {
-        std::string t = "Ambient: " + mmf->oFace.faceMaterial.textures_ambient.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_ambient.useTexture);
+        this->showTextureLine("##001",
+                              "Ambient",
+                              &mmf->oFace.faceMaterial.textures_ambient.useTexture,
+                              &this->showTextureWindow_Ambient,
+                              &this->showTexture_Ambient,
+                              mmf->oFace.faceMaterial.textures_ambient.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_diffuse.image != "") {
-        std::string t = "Diffuse: " + mmf->oFace.faceMaterial.textures_diffuse.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_diffuse.useTexture);
+        this->showTextureLine("##002",
+                              "Diffuse",
+                              &mmf->oFace.faceMaterial.textures_diffuse.useTexture,
+                              &this->showTextureWindow_Diffuse,
+                              &this->showTexture_Diffuse,
+                              mmf->oFace.faceMaterial.textures_diffuse.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_dissolve.image != "") {
-        std::string t = "Dissolve: " + mmf->oFace.faceMaterial.textures_dissolve.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_dissolve.useTexture);
+        this->showTextureLine("##003",
+                              "Dissolve",
+                              &mmf->oFace.faceMaterial.textures_dissolve.useTexture,
+                              &this->showTextureWindow_Dissolve,
+                              &this->showTexture_Dissolve,
+                              mmf->oFace.faceMaterial.textures_dissolve.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_bump.image != "") {
-        std::string t = "Bump: " + mmf->oFace.faceMaterial.textures_bump.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_bump.useTexture);
+        this->showTextureLine("##004",
+                              "Bump",
+                              &mmf->oFace.faceMaterial.textures_bump.useTexture,
+                              &this->showTextureWindow_Bump,
+                              &this->showTexture_Bump,
+                              mmf->oFace.faceMaterial.textures_bump.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_specular.image != "") {
-        std::string t = "Specular: " + mmf->oFace.faceMaterial.textures_specular.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_specular.useTexture);
+        this->showTextureLine("##005",
+                              "Specular",
+                              &mmf->oFace.faceMaterial.textures_specular.useTexture,
+                              &this->showTextureWindow_Specular,
+                              &this->showTexture_Specular,
+                              mmf->oFace.faceMaterial.textures_specular.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_specularExp.image != "") {
-        std::string t = "Specular Exp: " + mmf->oFace.faceMaterial.textures_specularExp.image;
-        ImGui::Checkbox(t.c_str(), &mmf->oFace.faceMaterial.textures_specularExp.useTexture);
+        this->showTextureLine("##006",
+                              "SpecularExp",
+                              &mmf->oFace.faceMaterial.textures_specularExp.useTexture,
+                              &this->showTextureWindow_SpecularExp,
+                              &this->showTexture_SpecularExp,
+                              mmf->oFace.faceMaterial.textures_specularExp.image.c_str());
     }
+
+    if (this->showTextureWindow_Ambient)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_ambient.image, "Ambient", &this->showTextureWindow_Ambient, &this->showTexture_Ambient, &this->vboTextureAmbient, &this->textureAmbient_Width, &this->textureAmbient_Height);
+
+    if (this->showTextureWindow_Diffuse)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_diffuse.image, "Diffuse", &this->showTextureWindow_Diffuse, &this->showTexture_Diffuse, &this->vboTextureDiffuse, &this->textureDiffuse_Width, &this->textureDiffuse_Height);
+
+    if (this->showTextureWindow_Dissolve)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_dissolve.image, "Dissolve", &this->showTextureWindow_Dissolve, &this->showTexture_Dissolve, &this->vboTextureDissolve, &this->textureDissolve_Width, &this->textureDissolve_Height);
+
+    if (this->showTextureWindow_Bump)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_bump.image, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
+
+    if (this->showTextureWindow_Specular)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_specular.image, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
+
+    if (this->showTextureWindow_SpecularExp)
+        this->showTextureImage(mmf->oFace.faceMaterial.textures_specularExp.image, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
 
     ImGui::Separator();
 
@@ -155,6 +282,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
             // cel shading
             ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[this->selectedObject]->Setting_CelShading);
+            ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
             // alpha
             ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
             ImGui::SliderFloat("", &(*meshModelFaces)[this->selectedObject]->Setting_Alpha, 0.0f, 1.0f);

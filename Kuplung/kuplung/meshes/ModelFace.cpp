@@ -174,6 +174,7 @@ void ModelFace::setModel(objModelFace oFace) {
 
 void ModelFace::initModelProperties() {
     this->Setting_CelShading = false;
+    this->Setting_Wireframe = false;
     this->Setting_Alpha = 1.0f;
     this->showMaterialEditor = false;
 
@@ -898,12 +899,12 @@ void ModelFace::drawOutline() {
 }
 
 void ModelFace::drawOnly() {
-    if (Settings::Instance()->wireframesMode)
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
-    if (Settings::Instance()->wireframesMode)
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 

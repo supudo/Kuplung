@@ -28,12 +28,26 @@ private:
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
+    void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
+    void showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image);
 
     bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
     int selectedObject;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
     float heightTopPanel = 170.0f;
+
+    bool showTextureWindow_Ambient, showTexture_Ambient, showTextureWindow_Diffuse, showTexture_Diffuse;
+    bool showTextureWindow_Dissolve, showTexture_Dissolve, showTextureWindow_Bump, showTexture_Bump;
+    bool showTextureWindow_Specular, showTexture_Specular, showTextureWindow_SpecularExp, showTexture_SpecularExp;
+
+    int textureAmbient_Width, textureAmbient_Height, textureDiffuse_Width, textureDiffuse_Height;
+    int textureDissolve_Width, textureDissolve_Height, textureBump_Width, textureBump_Height;
+    int textureSpecular_Width, textureSpecular_Height, textureSpecularExp_Width, textureSpecularExp_Height;
+
+    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump, vboTextureSpecular, vboTextureSpecularExp;
+
+    void showTextureImage(std::string imageFile, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
