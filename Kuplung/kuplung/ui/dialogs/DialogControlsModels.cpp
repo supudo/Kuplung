@@ -14,7 +14,8 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
+    this->sdlWindow = sdlWindow;
     this->managerObjects = managerObjects;
     this->funcDoLog = doLog;
 
@@ -48,16 +49,52 @@ void DialogControlsModels::init(ObjectsManager *managerObjects, std::function<vo
     this->componentMaterialEditor = new MaterialEditor();
 }
 
-void DialogControlsModels::showTextureImage(std::string imageFile, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
-    title = title + " Texture";
-    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_ShowBorders);
+void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+    int wWidth, wHeight, tWidth, tHeight, posX, posY;
+    SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
+
+    std::string img = "";
+    if (type == 0)
+        img = mmf->oFace.faceMaterial.textures_ambient.image;
+    else if (type == 1)
+        img = mmf->oFace.faceMaterial.textures_diffuse.image;
+    else if (type == 2)
+        img = mmf->oFace.faceMaterial.textures_dissolve.image;
+    else if (type == 3)
+        img = mmf->oFace.faceMaterial.textures_bump.image;
+    else if (type == 4)
+        img = mmf->oFace.faceMaterial.textures_specular.image;
+    else
+        img = mmf->oFace.faceMaterial.textures_specularExp.image;
+
     if (*genTexture)
-        this->createTextureBuffer(imageFile, vboBuffer, width, height);
-    ImGui::Image((ImTextureID)(intptr_t)*vboBuffer, ImVec2(*width, *height));
+        this->createTextureBuffer(img, vboBuffer, width, height);
+
+    tWidth = *width + 20;
+    if (tWidth > wWidth)
+        tWidth = wWidth - 20;
+
+    tHeight = *height + 20;
+    if (tHeight > wHeight)
+        tHeight = wHeight - 40;
+
+    ImGuiWindow *gw = ImGui::GetCurrentWindow();
+    posX = gw->Pos.x + gw->Rect().GetWidth()  + 20;
+    posY = 20;
+
+    ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
+
+    title = title + " Texture";
+    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders);
+
+    ImGui::Text("Image: %s", img.c_str());
+    ImGui::Text("Image dimensions: %i x %i", *width, *height);
+
     ImGui::Separator();
-    if (!boost::filesystem::exists(imageFile))
-        imageFile = Settings::Instance()->currentFolder + "/" + imageFile;
-    ImGui::Text("%s", imageFile.c_str());
+
+    ImGui::Image((ImTextureID)(intptr_t)*vboBuffer, ImVec2(*width, *height));
+
     ImGui::End();
     *genTexture = false;
 }
@@ -238,22 +275,22 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     }
 
     if (this->showTextureWindow_Ambient)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_ambient.image, "Ambient", &this->showTextureWindow_Ambient, &this->showTexture_Ambient, &this->vboTextureAmbient, &this->textureAmbient_Width, &this->textureAmbient_Height);
+        this->showTextureImage(mmf, 0, "Ambient", &this->showTextureWindow_Ambient, &this->showTexture_Ambient, &this->vboTextureAmbient, &this->textureAmbient_Width, &this->textureAmbient_Height);
 
     if (this->showTextureWindow_Diffuse)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_diffuse.image, "Diffuse", &this->showTextureWindow_Diffuse, &this->showTexture_Diffuse, &this->vboTextureDiffuse, &this->textureDiffuse_Width, &this->textureDiffuse_Height);
+        this->showTextureImage(mmf, 1, "Diffuse", &this->showTextureWindow_Diffuse, &this->showTexture_Diffuse, &this->vboTextureDiffuse, &this->textureDiffuse_Width, &this->textureDiffuse_Height);
 
     if (this->showTextureWindow_Dissolve)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_dissolve.image, "Dissolve", &this->showTextureWindow_Dissolve, &this->showTexture_Dissolve, &this->vboTextureDissolve, &this->textureDissolve_Width, &this->textureDissolve_Height);
+        this->showTextureImage(mmf, 2, "Dissolve", &this->showTextureWindow_Dissolve, &this->showTexture_Dissolve, &this->vboTextureDissolve, &this->textureDissolve_Width, &this->textureDissolve_Height);
 
     if (this->showTextureWindow_Bump)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_bump.image, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
+        this->showTextureImage(mmf, 3, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
 
     if (this->showTextureWindow_Specular)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_specular.image, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
+        this->showTextureImage(mmf, 4, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
 
     if (this->showTextureWindow_SpecularExp)
-        this->showTextureImage(mmf->oFace.faceMaterial.textures_specularExp.image, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
+        this->showTextureImage(mmf, 5, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
 
     ImGui::Separator();
 

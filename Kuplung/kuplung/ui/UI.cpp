@@ -77,7 +77,7 @@ void UI::init(SDL_Window *window, ObjectsManager *managerObjects, std::function<
     this->controlsGUI->init(this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
 
     this->controlsModels = new DialogControlsModels();
-    this->controlsModels->init(this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
+    this->controlsModels->init(this->sdlWindow, this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
 }
 
 void UI::doLog(std::string message) {

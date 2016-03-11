@@ -20,7 +20,7 @@
 
 class DialogControlsModels {
 public:
-    void init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog);
+    void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog);
     void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
 
 private:
@@ -28,8 +28,8 @@ private:
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
-    void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
-    void showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image);
+
+    SDL_Window* sdlWindow;
 
     bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
@@ -47,7 +47,9 @@ private:
 
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump, vboTextureSpecular, vboTextureSpecularExp;
 
-    void showTextureImage(std::string imageFile, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
+    void showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image);
+    void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
+    void showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
