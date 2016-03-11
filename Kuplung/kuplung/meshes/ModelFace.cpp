@@ -711,7 +711,7 @@ void ModelFace::renderModel() {
 
                 // factors
                 glUniform1f(f->gl_Constant, light->lConstant->point);
-                glUniform1f(f->gl_Linear, light->lLiteral->point);
+                glUniform1f(f->gl_Linear, light->lLinear->point);
                 glUniform1f(f->gl_Quadratic, light->lQuadratic->point);
 
                 // color
@@ -765,7 +765,7 @@ void ModelFace::renderModel() {
 
                 // factors
                 glUniform1f(f->gl_Constant, light->lConstant->point);
-                glUniform1f(f->gl_Linear, light->lLiteral->point);
+                glUniform1f(f->gl_Linear, light->lLinear->point);
                 glUniform1f(f->gl_Quadratic, light->lQuadratic->point);
 
                 // color

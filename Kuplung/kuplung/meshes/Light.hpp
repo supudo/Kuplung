@@ -40,7 +40,7 @@ public:
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
     MaterialColor *ambient, *diffuse, *specular;
     ObjectCoordinate *lCutOff, *lOuterCutOff;
-    ObjectCoordinate *lConstant, *lLiteral, *lQuadratic;
+    ObjectCoordinate *lConstant, *lLinear, *lQuadratic;
     bool showInWire;
 
     glm::mat4 matrixProjection;

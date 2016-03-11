@@ -79,9 +79,14 @@ uniform ModelMaterial material;
 //
 // =================================================
 
+vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+vec3 calculateLightSpot(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+
 vec3 calculateAmbient();
 vec3 calculateDiffuse(vec3 normalDirection);
 vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection);
+
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
 vec4 celShadingColor();
@@ -97,9 +102,16 @@ void main(void) {
     if (fs_isBorder > 0.0)
         fragColor = vec4(fs_outlineColor, 1.0);
     else {
-        vec4 texturedColor_Diffuse = texture(material.sampler_diffuse, fs_textureCoord);
-        vec3 processedColor_Diffuse = material.has_texture_diffuse ? texturedColor_Diffuse.rgb : material.diffuse;
+        // ambient color/texture
+        vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
 
+        // diffuse color/texture
+        vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
+
+        // spoecular color/texture
+        vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
+
+        // bump map normal vector
         vec3 fragmentNormal;
         if (material.has_texture_bump)
             fragmentNormal = calculateBumpedNormal();
@@ -110,23 +122,23 @@ void main(void) {
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
 
-        // Ambient
-        vec3 ambient = calculateAmbient();
+        // directional lights color
+        vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
-        // Diffuse
-        vec3 diffuse = calculateDiffuse(normalDirection);
+        // point lights color
+        vec3 lightsPoint = calculateLightPoint(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
-        // Specular
-        vec3 specular = calculateSpecular(normalDirection, viewDirection);
+        // spot lights color
+        vec3 lightsSpot = calculateLightSpot(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // Refraction
-        vec3 processedColorRefraction = (material.emission + ambient + diffuse + specular);
+        vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);
         if (material.refraction > 1.0) {
-            vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
+            vec3 refraction = calculateRefraction(normalDirection, processedColor_Diffuse);
             processedColorRefraction = processedColorRefraction * refraction;
         }
         else
-            processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
+            processedColorRefraction = processedColorRefraction * processedColor_Diffuse.rgb;
 
         // final color
         if (fs_celShading) // cel-shading
@@ -137,7 +149,126 @@ void main(void) {
             else
                 fragColor = vec4(processedColorRefraction, fs_alpha);
         }
+
+//        // Ambient
+//        vec3 ambient = calculateAmbient();
+
+//        // Diffuse
+//        vec3 diffuse = calculateDiffuse(normalDirection);
+
+//        // Specular
+//        vec3 specular = calculateSpecular(normalDirection, viewDirection);
+
+//        // Refraction
+//        vec3 processedColorRefraction = (material.emission + ambient + diffuse + specular);
+//        if (material.refraction > 1.0) {
+//            vec3 refraction = calculateRefraction(normalDirection, texturedColor_Diffuse);
+//            processedColorRefraction = processedColorRefraction * refraction;
+//        }
+//        else
+//            processedColorRefraction = processedColorRefraction * processedColor_Diffuse;
+
+//        // final color
+//        if (fs_celShading) // cel-shading
+//            fragColor = celShadingColor();
+//        else {
+//            if (material.illumination_model == 0)
+//                fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
+//            else
+//                fragColor = vec4(processedColorRefraction, fs_alpha);
+//        }
     }
+}
+
+// =================================================
+//
+// Lights
+//
+// =================================================
+
+vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+    vec3 result;
+    for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
+        if (directionalLights[i].inUse) {
+            vec3 directionLight = normalize(directionalLights[i].direction);
+
+            // Diffuse shading - lambert factor
+            float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
+
+            // Specular shading
+            vec3 reflectDir = reflect(-directionLight, directionNormal);
+            float specularFactor = pow(max(dot(directionView, reflectDir), 0.0), material.refraction);
+
+            // Combine results
+            vec3 ambient = directionalLights[i].strengthAmbient * directionalLights[i].ambient * colorAmbient.rgb;
+            vec3 diffuse = directionalLights[i].strengthDiffuse * directionalLights[i].diffuse * lambertFactor * colorDiffuse.rgb;
+            vec3 specular = directionalLights[i].strengthSpecular * directionalLights[i].specular * specularFactor * colorSpecular.rgb;
+
+            result += ambient + diffuse + specular;
+        }
+    }
+    return result;
+}
+
+vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+    vec3 result;
+    for (int i=0; i<NR_POINT_LIGHTS; i++) {
+        if (pointLights[i].inUse) {
+            vec3 directionLight = normalize(pointLights[i].position - fs_vertexPosition);
+
+            // Diffuse shading - lambert factor
+            float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
+
+            // Specular shading
+            vec3 directionReflection = reflect(-directionLight, directionNormal);
+            float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
+
+            // Attenuation
+            float lightDistance = length(pointLights[i].position - fs_vertexPosition);
+            float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
+
+            // Combine results
+            vec3 ambient = pointLights[i].ambient * attenuation * colorAmbient.rgb;
+            vec3 diffuse = pointLights[i].diffuse * lambertFactor * attenuation * colorDiffuse.rgb;
+            vec3 specular = pointLights[i].specular * specularFactor * attenuation * colorSpecular.rgb;
+
+            result += ambient + diffuse + specular;
+        }
+    }
+    return result;
+}
+
+vec3 calculateLightSpot(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+    vec3 result;
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
+        if (spotLights[i].inUse) {
+            vec3 directionLight = normalize(spotLights[i].position - fs_vertexPosition);
+
+            // Diffuse shading - lambert factor
+            float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
+
+            // Specular shading
+            vec3 directionReflection = reflect(-directionLight, directionNormal);
+            float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
+
+            // Attenuation
+            float lightDistance = length(spotLights[i].position - fs_vertexPosition);
+            float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * lightDistance + spotLights[i].quadratic * (lightDistance * lightDistance));
+
+            // Spotlight intensity
+            float theta = dot(directionLight, normalize(-spotLights[i].direction));
+            float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
+            float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
+
+            // Combine results
+            vec3 ambient = spotLights[i].ambient * attenuation * intensity * colorAmbient.rgb;
+            vec3 diffuse = spotLights[i].diffuse * lambertFactor * attenuation * intensity * colorDiffuse.rgb;
+            vec3 specular = spotLights[i].specular * specularFactor * attenuation * intensity * colorSpecular.rgb;
+
+            result += ambient + diffuse + specular;
+        }
+    }
+    return result;
 }
 
 // =================================================
