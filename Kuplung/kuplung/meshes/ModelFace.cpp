@@ -350,7 +350,6 @@ bool ModelFace::initShaderProgram() {
             ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
-            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].position").c_str());
             f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
 
             f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
@@ -660,7 +659,6 @@ void ModelFace::renderModel() {
 
                 // light
                 glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
-                glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
                 // color
                 glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
@@ -686,7 +684,6 @@ void ModelFace::renderModel() {
 
                 // light
                 glUniform3f(f->gl_Direction, defLight.x, defLight.y, defLight.z);
-                glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
 
                 // color
                 glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);

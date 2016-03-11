@@ -338,8 +338,8 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initCamera();
     this->managerObjects->initGrid();
     this->managerObjects->initAxisSystem();
-    //this->managerObjects->addLight(LightSourceType_Directional);
-    this->managerObjects->addLight(LightSourceType_Point);
+    this->managerObjects->addLight(LightSourceType_Directional);
+    //this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);
     this->managerUI->showControlsGUI = true;
 

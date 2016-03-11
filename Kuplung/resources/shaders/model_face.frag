@@ -35,7 +35,7 @@ struct ModelMaterial {
 
 struct LightSource_Directional {
     bool inUse;
-    vec3 position, direction;
+    vec3 direction;
     vec3 ambient, diffuse, specular;
     float strengthAmbient, strengthDiffuse, strengthSpecular;
 };
@@ -221,8 +221,8 @@ vec3 calculateDiffuse(vec3 normalDirection) {
         materialDiffuse = material.diffuse;
     for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
         if (directionalLights[i].inUse) {
-            vec3 lightDirection = normalize(directionalLights[i].position - fs_vertexPosition);
-            float lambertFactor = max(dot(lightDirection, normalDirection), 0.0);
+            vec3 lightDirection = normalize(directionalLights[i].direction);
+            float lambertFactor = max(dot(normalDirection, lightDirection), 0.0);
             result += directionalLights[i].strengthDiffuse * lambertFactor * directionalLights[i].diffuse * materialDiffuse;
         }
     }
@@ -318,7 +318,7 @@ vec4 celShadingColor() {
     vec3 L;
     for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++)
         if (directionalLights[i].inUse)
-            L += normalize(directionalLights[i].position);
+            L += normalize(directionalLights[i].direction);
     vec3 Eye = vec3(0, 0, 1);
     vec3 H = normalize(L + Eye);
 
