@@ -41,6 +41,7 @@ public:
     MaterialColor *ambient, *diffuse, *specular;
     ObjectCoordinate *lCutOff, *lOuterCutOff;
     ObjectCoordinate *lConstant, *lLiteral, *lQuadratic;
+    bool showInWire;
 
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;

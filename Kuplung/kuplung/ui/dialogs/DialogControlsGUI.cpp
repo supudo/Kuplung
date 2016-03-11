@@ -301,9 +301,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             switch (this->selectedTabGUILight) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
+                    ImGui::Text("%s", this->managerObjects->lightSources[this->selectedObjectLight]->description.c_str());
                     // show lamp object
                     ImGui::Checkbox("Show Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
                     ImGui::Checkbox("Show Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
+                    ImGui::Checkbox("Show Wire", &this->managerObjects->lightSources[this->selectedObjectLight]->showInWire);
                     if (ImGui::Button("Delete Light Source")) {
                         this->selectedObject = 0;
                         this->managerObjects->lightSources.erase(this->managerObjects->lightSources.begin() + this->selectedObjectLight);
@@ -343,6 +345,28 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                     this->helperUI->addControlColor3("Specular Color", &this->managerObjects->lightSources[this->selectedObjectLight]->specular->color, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->colorPickerOpen);
                     this->helperUI->addControlsSlider("Specular Intensity", 21, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->strength, true, isFrame);
+
+                    switch (this->managerObjects->lightSources[this->selectedObjectLight]->type) {
+                        case LightSourceType_Point: {
+                            ImGui::Separator();
+                            this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lLiteral->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lLiteral->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
+                            break;
+                        }
+                        case LightSourceType_Spot: {
+                            ImGui::Separator();
+                            this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lLiteral->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lLiteral->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
+                            this->helperUI->addControlsSlider("CutOff", 25, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lCutOff->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lCutOff->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Outer CutOff", 26, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lOuterCutOff->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lOuterCutOff->point, true, isFrame);
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+
                     break;
                 }
                 default:

@@ -54,6 +54,7 @@ void Light::setModel(objModelFace oFace) {
 void Light::initProperties() {
     this->showLampObject = true;
     this->showLampDirection = true;
+    this->showInWire = true;
 
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
@@ -256,12 +257,18 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        glUniform1i(this->glUniformUseColor, 0);
-        glUniform3f(this->glUniformColor, 1.0, 0.0, 0.0);
+        if (this->vboTextureDiffuse == 0) {
+            glUniform1i(this->glUniformUseColor, 1);
+            glUniform3f(this->glUniformColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
+        }
 
         // draw
         glBindVertexArray(this->glVAO);
+        if (this->showInWire)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+        if (this->showInWire)
+            glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(0);
 
         // clear texture

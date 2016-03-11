@@ -482,23 +482,28 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->oFace.indicesCount * sizeof(GLuint), &this->oFace.indices[0], GL_STATIC_DRAW);
 
-    std::vector<glm::vec3> tangents;
-    std::vector<glm::vec3> bitangents;
-    this->mathHelper->computeTangentBasis(this->oFace.vectors_vertices, this->oFace.vectors_texture_coordinates, this->oFace.vectors_normals, tangents, bitangents);
+    if (this->oFace.faceMaterial.textures_bump.image != "" &&
+        this->oFace.vectors_vertices.size() > 0 &&
+        this->oFace.vectors_texture_coordinates.size() > 0 &&
+        this->oFace.vectors_normals.size() > 0) {
+        std::vector<glm::vec3> tangents;
+        std::vector<glm::vec3> bitangents;
+        this->mathHelper->computeTangentBasis(this->oFace.vectors_vertices, this->oFace.vectors_texture_coordinates, this->oFace.vectors_normals, tangents, bitangents);
 
-    // tangents
-    glGenBuffers(1, &this->vboTangents);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
-    glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glVS_Tangent);
-    glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        // tangents
+        glGenBuffers(1, &this->vboTangents);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
+        glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glVS_Tangent);
+        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
-    // bitangents
-    glGenBuffers(1, &this->vboBitangents);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
-    glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glVS_Bitangent);
-    glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        // bitangents
+        glGenBuffers(1, &this->vboBitangents);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
+        glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glVS_Bitangent);
+        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    }
 
     glBindVertexArray(0);
 }
@@ -758,8 +763,8 @@ void ModelFace::renderModel() {
                 glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
                 // cutoff
-                glUniform1f(f->gl_CutOff, light->lCutOff->point);
-                glUniform1f(f->gl_OuterCutOff, light->lOuterCutOff->point);
+                glUniform1f(f->gl_CutOff, glm::cos(glm::radians(light->lCutOff->point)));
+                glUniform1f(f->gl_OuterCutOff, glm::cos(glm::radians(light->lOuterCutOff->point)));
 
                 // factors
                 glUniform1f(f->gl_Constant, light->lConstant->point);

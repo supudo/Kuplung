@@ -191,6 +191,18 @@ vec3 calculateAmbient() {
             result += pointLights[i].ambient * materialAmbient * attenuation;
         }
     }
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
+        if (spotLights[i].inUse) {
+            float lightDistance = length(spotLights[i].position - fs_vertexPosition);
+            float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * lightDistance + spotLights[i].quadratic * (lightDistance * lightDistance));
+
+            float theta = dot(spotLights[i].direction, normalize(-spotLights[i].direction));
+            float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
+            float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
+
+            result += pointLights[i].ambient * materialAmbient * attenuation * intensity;
+        }
+    }
     return result;
 }
 
@@ -219,6 +231,18 @@ vec3 calculateDiffuse(vec3 normalDirection) {
             float lightDistance = length(pointLights[i].position - fs_vertexPosition);
             float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
             result += pointLights[i].diffuse * materialDiffuse * attenuation;
+        }
+    }
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
+        if (spotLights[i].inUse) {
+            float lightDistance = length(spotLights[i].position - fs_vertexPosition);
+            float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * lightDistance + spotLights[i].quadratic * (lightDistance * lightDistance));
+
+            float theta = dot(spotLights[i].direction, normalize(-spotLights[i].direction));
+            float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
+            float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
+
+            result += pointLights[i].diffuse * materialDiffuse * attenuation * intensity;
         }
     }
     return result;
@@ -250,6 +274,18 @@ vec3 calculateSpecular(vec3 normalDirection, vec3 viewDirection) {
             float lightDistance = length(pointLights[i].position - fs_vertexPosition);
             float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
             result += pointLights[i].specular * materialSpecular * attenuation;
+        }
+    }
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
+        if (spotLights[i].inUse) {
+            float lightDistance = length(spotLights[i].position - fs_vertexPosition);
+            float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * lightDistance + spotLights[i].quadratic * (lightDistance * lightDistance));
+
+            float theta = dot(spotLights[i].direction, normalize(-spotLights[i].direction));
+            float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
+            float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
+
+            result += pointLights[i].specular * materialSpecular * attenuation * intensity;
         }
     }
     return result;
