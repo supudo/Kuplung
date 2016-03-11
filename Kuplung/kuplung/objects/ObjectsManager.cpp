@@ -141,11 +141,6 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
     lightObject->type = type;
     switch (type) {
-        case LightSourceType_Sun:
-            lightObject->title = ((title == "") ? "Sun " + std::to_string((int)this->lightSources.size() + 1) : title);
-            lightObject->description = ((description == "") ? "Constant direction parallel ray light source" : description);
-            lightObject->setModel(this->systemModels["light_sun"].models[0].faces[0]);
-            break;
         case LightSourceType_Directional:
             lightObject->title = ((title == "") ? "Directional " + std::to_string((int)this->lightSources.size() + 1) : title);
             lightObject->description = ((description == "") ? "Directional area light source" : description);
@@ -160,11 +155,6 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
             lightObject->title = ((title == "") ? "Spot " + std::to_string((int)this->lightSources.size() + 1) : title);
             lightObject->description = ((description == "") ? "Directional cone light source" : description);
             lightObject->setModel(this->systemModels["light_spot"].models[0].faces[0]);
-            break;
-        case LightSourceType_Hemi:
-            lightObject->title = ((title == "") ? "Hemi " + std::to_string((int)this->lightSources.size() + 1) : title);
-            lightObject->description = ((description == "") ? "180 degree constant light source" : description);
-            lightObject->setModel(this->systemModels["light_hemi"].models[0].faces[0]);
             break;
         default:
             lightObject->setModel(this->systemModels["lamp"].models[0].faces[0]);
@@ -190,10 +180,6 @@ void ObjectsManager::loadSystemModels() {
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
     this->systemModels["lamp"] = this->fileParser->parse(file);
 
-    file.title = "light_sun";
-    file.path = Settings::Instance()->appFolder() + "/gui/light_sun.obj";
-    this->systemModels["light_sun"] = this->fileParser->parse(file);
-
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
     this->systemModels["light_directional"] = this->fileParser->parse(file);
@@ -205,10 +191,6 @@ void ObjectsManager::loadSystemModels() {
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
     this->systemModels["light_spot"] = this->fileParser->parse(file);
-
-    file.title = "light_hemi";
-    file.path = Settings::Instance()->appFolder() + "/gui/light_hemi.obj";
-    this->systemModels["light_hemi"] = this->fileParser->parse(file);
 }
 
 void ObjectsManager::logMessage(std::string message) {

@@ -33,21 +33,21 @@ struct ModelMaterial {
     bool has_texture_bump;
 };
 
-struct DirectionalLightSource {
+struct LightSource_Directional {
     bool inUse;
     vec3 position, direction;
     vec3 ambient, diffuse, specular;
     float strengthAmbient, strengthDiffuse, strengthSpecular;
 };
 
-struct PointLightSource {
+struct LightSource_Point {
     bool inUse;
     vec3 position;
     float constant, linear, quadratic;
     vec3 ambient, diffuse, specular;
 };
 
-struct SpotLightSource {
+struct LightSource_Spot {
     bool inUse;
     vec3 position, direction;
     float cutOff, outerCutOff;
@@ -68,9 +68,9 @@ out vec4 fragColor;
 #define NR_POINT_LIGHTS 4
 #define NR_SPOT_LIGHTS 4
 
-uniform DirectionalLightSource directionalLights[NR_DIRECTIONAL_LIGHTS];
-uniform PointLightSource pointLights[NR_POINT_LIGHTS];
-uniform SpotLightSource spotLights[NR_SPOT_LIGHTS];
+uniform LightSource_Directional directionalLights[NR_DIRECTIONAL_LIGHTS];
+uniform LightSource_Point pointLights[NR_POINT_LIGHTS];
+uniform LightSource_Spot spotLights[NR_SPOT_LIGHTS];
 uniform ModelMaterial material;
 
 // =================================================

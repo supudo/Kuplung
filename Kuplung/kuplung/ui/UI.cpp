@@ -131,16 +131,12 @@ void UI::renderStart(bool isFrame) {
 //            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
 //            ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
-                if (ImGui::MenuItem("Sun"))
-                    this->managerObjects->addLight(LightSourceType_Sun);
-                if (ImGui::MenuItem("Directional"))
+                if (ImGui::MenuItem("Directional (Sun)"))
                     this->managerObjects->addLight(LightSourceType_Directional);
-                if (ImGui::MenuItem("Point"))
+                if (ImGui::MenuItem("Point (Light bulb)"))
                     this->managerObjects->addLight(LightSourceType_Point);
-                if (ImGui::MenuItem("Spot"))
+                if (ImGui::MenuItem("Spot (Flashlight)"))
                     this->managerObjects->addLight(LightSourceType_Spot);
-                if (ImGui::MenuItem("Hemi"))
-                    this->managerObjects->addLight(LightSourceType_Hemi);
                 ImGui::EndMenu();
             }
             ImGui::EndMenu();
