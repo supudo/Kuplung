@@ -167,10 +167,15 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::PopStyleColor(3);
 
     ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
-    const char* scene_items[meshModelFaces->size()];
-    for (size_t i=0; i<meshModelFaces->size(); i++) {
-        scene_items[i] = (*meshModelFaces)[i]->oFace.ModelTitle.c_str();
-    }
+
+    std::vector<const char*> scene_items;
+    for (size_t i=0; i<meshModelFaces->size(); i++)
+        scene_items.push_back((*meshModelFaces)[i]->oFace.ModelTitle.c_str());
+
+//    const char* scene_items[meshModelFaces->size()];
+//    for (size_t i=0; i<meshModelFaces->size(); i++) {
+//        scene_items[i] = (*meshModelFaces)[i]->oFace.ModelTitle.c_str();
+//    }
 //    std::vector<const char*> scene_items;
 //    for (size_t i = 0; i<meshModelFaces->size(); i++) {
 //        scene_items.push_back((*meshModelFaces)[i]->oFace.ModelTitle.c_str());
@@ -180,7 +185,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
-    ImGui::ListBox("", &this->selectedObject, scene_items, IM_ARRAYSIZE(scene_items));
+    ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
+    //ImGui::ListBox("", &this->selectedObject, scene_items, IM_ARRAYSIZE(scene_items));
     //ImGui::Combo("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
     ImGui::PopStyleVar(2);
     if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
