@@ -115,6 +115,8 @@ void main(void) {
         else
             fragmentNormal = fs_vertexNormal;
 
+        fragmentNormal = fs_vertexNormal;
+
         // misc
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);

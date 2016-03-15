@@ -37,7 +37,7 @@ void main(void) {
 
     vs_out.gs_vertexPosition = vs_vertexPosition;
     vs_out.gs_textureCoord = vs_textureCoord;
-    vs_out.gs_vertexNormal = vs_vertexNormal;
+    vs_out.gs_vertexNormal = (vs_WorldMatrix * vec4(vs_vertexNormal, 0.0)).xyz;
     vs_out.gs_tangent = (vs_WorldMatrix * vec4(vs_tangent, 0.0)).xyz;
     vs_out.gs_bitangent = (vs_WorldMatrix * vec4(vs_bitangent, 0.0)).xyz;
     vs_out.gs_displacementLocation = vs_displacementLocation;
