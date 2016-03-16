@@ -159,7 +159,7 @@ void main(void) {
 // =================================================
 
 vec3 calculateBumpedNormal() {
-    vec3 vertexNormal = normalize(fs_vertexNormal);
+    vec3 vertexNormal = fs_vertexNormal;
 
     mat3 mtxMV = mat3(fs_MMatrix);
 
@@ -170,7 +170,7 @@ vec3 calculateBumpedNormal() {
 
     //vec3 vertexBumpMapNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
     vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).rgb;
-    vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0, 1.0, 1.0);
+    vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0);
 
     vec3 vertexNewNormal;
     mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
