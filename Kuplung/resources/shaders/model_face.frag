@@ -159,7 +159,7 @@ void main(void) {
 // =================================================
 
 vec3 calculateBumpedNormal() {
-    vec3 vertexNormal = fs_vertexNormal;
+    vec3 vertexNormal = normalize(fs_vertexNormal);
 
     mat3 mtxMV = mat3(fs_MMatrix);
 
