@@ -80,8 +80,8 @@ uniform ModelMaterial material;
 // =================================================
 
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
-vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
-vec3 calculateLightSpot(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 
 vec4 celShadingColor();
 vec3 calculateBumpedNormal();
@@ -123,10 +123,10 @@ void main(void) {
         vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // point lights color
-        vec3 lightsPoint = calculateLightPoint(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsPoint = calculateLightPoint(fs_vertexPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // spot lights color
-        vec3 lightsSpot = calculateLightSpot(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsSpot = calculateLightSpot(fs_vertexPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // Refraction
         vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);
@@ -217,11 +217,11 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
 //
 // =================================================
 
-vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
     vec3 result;
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
-            vec3 directionLight = normalize(pointLights[i].position - fs_vertexPosition);
+            vec3 directionLight = normalize(pointLights[i].position - fragmentPosition);
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
@@ -231,7 +231,7 @@ vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmb
             float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
 
             // Attenuation
-            float lightDistance = length(pointLights[i].position - fs_vertexPosition);
+            float lightDistance = length(pointLights[i].position - fragmentPosition);
             float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
 
             // Combine results
@@ -251,11 +251,11 @@ vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmb
 //
 // =================================================
 
-vec3 calculateLightSpot(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
     vec3 result;
     for (int i=0; i<NR_SPOT_LIGHTS; i++) {
         if (spotLights[i].inUse) {
-            vec3 directionLight = normalize(spotLights[i].position - fs_vertexPosition);
+            vec3 directionLight = normalize(spotLights[i].position - fragmentPosition);
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
@@ -265,7 +265,7 @@ vec3 calculateLightSpot(vec3 directionNormal, vec3 directionView, vec4 colorAmbi
             float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
 
             // Attenuation
-            float lightDistance = length(spotLights[i].position - fs_vertexPosition);
+            float lightDistance = length(spotLights[i].position - fragmentPosition);
             float attenuation = 1.0f / (spotLights[i].constant + spotLights[i].linear * lightDistance + spotLights[i].quadratic * (lightDistance * lightDistance));
 
             // Spotlight intensity
