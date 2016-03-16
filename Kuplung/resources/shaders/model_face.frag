@@ -1,6 +1,6 @@
 #version 410
 
-uniform mat4 fs_MMatrix;
+uniform mat4 fs_ModelMatrix;
 uniform mat4 fs_WorldMatrix;
 uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
@@ -118,7 +118,7 @@ void main(void) {
         // misc
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
-        vec3 fragmentPosition = vec3(fs_MMatrix * vec4(fs_vertexPosition, 1.0f));
+        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
 
         // directional lights color
         vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
@@ -161,7 +161,7 @@ void main(void) {
 vec3 calculateBumpedNormal() {
     vec3 vertexNormal = normalize(fs_vertexNormal);
 
-    mat3 mtxMV = mat3(fs_MMatrix);
+    mat3 mtxMV = mat3(fs_ModelMatrix);
 
     vec3 vertexTangent = normalize(fs_tangent);
     vertexTangent = normalize(vertexTangent - dot(vertexTangent, vertexNormal) * vertexNormal);
@@ -304,7 +304,7 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse) {
 // =================================================
 
 vec4 celShadingColor() {
-    vec3 eyeSpaceNormal = mat3(fs_MMatrix) * fs_vertexNormal;
+    vec3 eyeSpaceNormal = mat3(fs_ModelMatrix) * fs_vertexNormal;
 
     vec3 N = normalize(eyeSpaceNormal);
     vec3 L;
