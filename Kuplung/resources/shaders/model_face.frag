@@ -137,6 +137,10 @@ void main(void) {
         else
             processedColorRefraction = processedColorRefraction * processedColor_Diffuse.rgb;
 
+        // TODO: fix?
+        if (material.has_texture_specular)
+            processedColorRefraction *= processedColor_Specular.rgb;
+
         // final color
         if (fs_celShading) // cel-shading
             fragColor = celShadingColor();
@@ -193,8 +197,8 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
 
             // Specular shading
-            vec3 reflectDir = reflect(-directionLight, directionNormal);
-            float specularFactor = pow(max(dot(directionView, reflectDir), 0.0), material.refraction);
+            vec3 directionReflection = reflect(-directionLight, directionNormal);
+            float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
 
             // Combine results
             vec3 ambient = directionalLights[i].strengthAmbient * directionalLights[i].ambient * colorAmbient.rgb;
@@ -218,6 +222,7 @@ vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmb
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
             vec3 directionLight = normalize(pointLights[i].position - fs_vertexPosition);
+            //vec3 directionLight = pointLights[i].position;
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
