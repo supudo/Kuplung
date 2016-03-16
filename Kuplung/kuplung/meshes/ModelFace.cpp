@@ -735,65 +735,16 @@ void ModelFace::renderModel() {
             }
         }
 
-        glm::vec3 defLight = glm::vec3(0.0f, 0.0f, 0.0f);
-        float defLightVal = 0.0f;
-
         for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
-            ModelFace_LightSource_Directional *f = this->mfLights_Directional[j];
-
-            glUniform1i(f->gl_InUse, 0);
-
-            // light
-            glUniform3f(f->gl_Direction, defLight.x, defLight.y, defLight.z);
-
-            // color
-            glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
-
-            // light factors
-            glUniform1f(f->gl_StrengthAmbient, defLightVal);
-            glUniform1f(f->gl_StrengthDiffuse, defLightVal);
-            glUniform1f(f->gl_StrengthSpecular, defLightVal);
+            glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
         }
 
         for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
-            ModelFace_LightSource_Point *f = this->mfLights_Point[j];
-
-            glUniform1i(f->gl_InUse, 0);
-
-            // light
-            glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
-
-            // factors
-            glUniform1f(f->gl_Constant, defLightVal);
-            glUniform1f(f->gl_Linear, defLightVal);
-            glUniform1f(f->gl_Quadratic, defLightVal);
-
-            // color
-            glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
+            glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
         }
 
         for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
-            ModelFace_LightSource_Spot *f = this->mfLights_Spot[j];
-
-            glUniform1i(f->gl_InUse, 0);
-
-            // light
-            glUniform3f(f->gl_Direction, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Position, defLight.x, defLight.y, defLight.z);
-
-            // factors
-            glUniform1f(f->gl_Constant, defLightVal);
-            glUniform1f(f->gl_Linear, defLightVal);
-            glUniform1f(f->gl_Quadratic, defLightVal);
-
-            // color
-            glUniform3f(f->gl_Ambient, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Diffuse, defLight.x, defLight.y, defLight.z);
-            glUniform3f(f->gl_Specular, defLight.x, defLight.y, defLight.z);
+            glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
         }
 
         // material

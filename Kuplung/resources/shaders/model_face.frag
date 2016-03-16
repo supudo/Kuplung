@@ -222,7 +222,6 @@ vec3 calculateLightPoint(vec3 directionNormal, vec3 directionView, vec4 colorAmb
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
             vec3 directionLight = normalize(pointLights[i].position - fs_vertexPosition);
-            //vec3 directionLight = pointLights[i].position;
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, directionLight), 0.0);

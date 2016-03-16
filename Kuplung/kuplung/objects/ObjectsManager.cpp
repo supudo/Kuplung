@@ -138,7 +138,7 @@ void ObjectsManager::initAxisSystem() {
  */
 void ObjectsManager::addLight(LightSourceType type, std::string title, std::string description) {
     Light *lightObject = new Light();
-    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
+    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), type);
     lightObject->type = type;
     switch (type) {
         case LightSourceType_Directional:

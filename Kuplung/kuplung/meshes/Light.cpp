@@ -39,19 +39,19 @@ void Light::destroy() {
 
 #pragma mark - Initialization
 
-void Light::init(std::function<void(std::string)> doLog) {
+void Light::init(std::function<void(std::string)> doLog, LightSourceType type) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
     this->glUtils->init(std::bind(&Light::doLog, this, std::placeholders::_1));
 
-    this->initProperties();
+    this->initProperties(type);
 }
 
 void Light::setModel(objModelFace oFace) {
     this->oFace = oFace;
 }
 
-void Light::initProperties() {
+void Light::initProperties(LightSourceType type) {
     this->showLampObject = true;
     this->showLampDirection = true;
     this->showInWire = true;
@@ -77,11 +77,11 @@ void Light::initProperties() {
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
-    this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.1f });
-    this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.1f });
-    this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.1f });
+    this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+    this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.9f });
+    this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
+    this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -180.0f });
+    this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 160.0f });
 
     this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });

@@ -20,9 +20,9 @@ class Light {
 public:
     ~Light();
     void destroy();
-    void init(std::function<void(std::string)> doLog);
+    void init(std::function<void(std::string)> doLog, LightSourceType type);
     void setModel(objModelFace oFace);
-    void initProperties();
+    void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
