@@ -118,7 +118,7 @@ void main(void) {
         // misc
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
-        vec3 fragmentPosition = fs_vertexPosition;
+        vec3 fragmentPosition = vec3(fs_MMatrix * vec4(fs_vertexPosition, 1.0f));
 
         // directional lights color
         vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
