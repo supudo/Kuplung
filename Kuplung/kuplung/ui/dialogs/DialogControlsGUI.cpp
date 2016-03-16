@@ -214,7 +214,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
 
             const char* tabsGUIGrid[] = {
-                "\n" ICON_FA_ASTERISK,
+                "\n" ICON_MD_TRANSFORM,
                 "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
                 "\n" ICON_MD_3D_ROTATION,
                 "\n" ICON_MD_OPEN_WITH,
