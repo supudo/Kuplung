@@ -54,9 +54,9 @@ void CoordinateSystem::initProperties() {
     this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
     this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0 });
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     this->matrixModel = glm::mat4(1.0);
 }
