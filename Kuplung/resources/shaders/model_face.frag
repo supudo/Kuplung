@@ -145,12 +145,10 @@ void main(void) {
         // final color
         if (fs_celShading) // cel-shading
             fragColor = celShadingColor();
-        else {
-            if (material.illumination_model == 0)
-                fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
-            else
-                fragColor = vec4(processedColorRefraction, fs_alpha);
-        }
+        else if (material.illumination_model == 0)
+            fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
+        else
+            fragColor = vec4(processedColorRefraction, fs_alpha);
     }
 }
 

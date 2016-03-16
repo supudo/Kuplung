@@ -612,7 +612,7 @@ void ModelFace::renderModel() {
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
 
-        glm::mat4 matrixWorld = this->matrixModel;//glm::mat4(1.0);
+        glm::mat4 matrixWorld = this->matrixModel;
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
         // blending
