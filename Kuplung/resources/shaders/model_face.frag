@@ -113,20 +113,21 @@ void main(void) {
         if (material.has_texture_bump)
             fragmentNormal = calculateBumpedNormal();
         else
-            fragmentNormal = fs_vertexNormal;
+            fragmentNormal = normalize(fs_vertexNormal);
 
         // misc
         vec3 normalDirection = normalize(fragmentNormal);
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
+        vec3 fragmentPosition = fs_vertexPosition;
 
         // directional lights color
         vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // point lights color
-        vec3 lightsPoint = calculateLightPoint(fs_vertexPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsPoint = calculateLightPoint(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // spot lights color
-        vec3 lightsSpot = calculateLightSpot(fs_vertexPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // Refraction
         vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);

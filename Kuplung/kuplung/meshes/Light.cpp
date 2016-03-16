@@ -77,9 +77,22 @@ void Light::initProperties(LightSourceType type) {
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
-    this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.9f });
-    this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
+    switch (type) {
+        case LightSourceType_Point: {
+            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
+            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
+            break;
+        }
+        case LightSourceType_Spot: {
+            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.9f });
+            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
+            break;
+        }
+        default:
+            break;
+    }
     this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -180.0f });
     this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 160.0f });
 
