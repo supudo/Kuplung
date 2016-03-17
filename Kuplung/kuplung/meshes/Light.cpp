@@ -81,7 +81,7 @@ void Light::initProperties(LightSourceType type) {
         case LightSourceType_Point: {
             this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
             this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
-            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
+            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.05f });
             break;
         }
         case LightSourceType_Spot: {

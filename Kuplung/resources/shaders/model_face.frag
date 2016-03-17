@@ -116,7 +116,7 @@ void main(void) {
             fragmentNormal = normalize(fs_vertexNormal);
 
         // misc
-        vec3 normalDirection = normalize(fragmentNormal);
+        vec3 normalDirection = fragmentNormal;
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
         vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
 
@@ -159,7 +159,7 @@ void main(void) {
 // =================================================
 
 vec3 calculateBumpedNormal() {
-    vec3 vertexNormal = normalize(fs_vertexNormal);
+    vec3 vertexNormal = normalize(-fs_vertexNormal);
 
     mat3 mtxMV = mat3(fs_ModelMatrix);
 
@@ -193,10 +193,10 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
             vec3 directionLight = normalize(directionalLights[i].direction);
 
             // Diffuse shading - lambert factor
-            float lambertFactor = max(dot(directionNormal, directionLight), 0.0);
+            float lambertFactor = max(dot(directionNormal, -directionLight), 0.0);
 
             // Specular shading
-            vec3 directionReflection = reflect(-directionLight, directionNormal);
+            vec3 directionReflection = normalize(reflect(-directionLight, directionNormal));
             float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), material.refraction);
 
             // Combine results
