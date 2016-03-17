@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0027961C9ABE1300BBFFC6 /* model_face_effects.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */; };
+		8A0027971C9ABE1700BBFFC6 /* model_face_lights.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */; };
+		8A0027981C9ABE1E00BBFFC6 /* model_face_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */; };
+		8A0027991C9ABE2000BBFFC6 /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
+		8A00279A1C9ABE2300BBFFC6 /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A0364891C6B71EC001489C8 /* CoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */; };
 		8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364811C6B71EC001489C8 /* Light.cpp */; };
@@ -114,6 +119,11 @@
 				8AA5EDFC1C773E0B009F1F52 /* light.frag in Copy Files */,
 				8AA5EDFD1C773E0B009F1F52 /* light.vert in Copy Files */,
 				8AA5EDFE1C773E0B009F1F52 /* model_face.frag in Copy Files */,
+				8A0027961C9ABE1300BBFFC6 /* model_face_effects.frag in Copy Files */,
+				8A0027971C9ABE1700BBFFC6 /* model_face_lights.frag in Copy Files */,
+				8A0027981C9ABE1E00BBFFC6 /* model_face_mapping.frag in Copy Files */,
+				8A0027991C9ABE2000BBFFC6 /* model_face_misc.frag in Copy Files */,
+				8A00279A1C9ABE2300BBFFC6 /* model_face_vars.frag in Copy Files */,
 				8AA5EDFF1C773E0B009F1F52 /* model_face.geom in Copy Files */,
 				8AA5EE001C773E0B009F1F52 /* model_face.tcs in Copy Files */,
 				8AA5EE011C773E0B009F1F52 /* model_face.tes in Copy Files */,
@@ -152,6 +162,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_effects.frag; sourceTree = "<group>"; };
+		8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_lights.frag; sourceTree = "<group>"; };
+		8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_mapping.frag; sourceTree = "<group>"; };
+		8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_misc.frag; sourceTree = "<group>"; };
+		8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_vars.frag; sourceTree = "<group>"; };
 		8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDefinitions.h; sourceTree = "<group>"; };
 		8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectsManager.cpp; sourceTree = "<group>"; };
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
@@ -585,6 +600,11 @@
 				8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */,
 				8AA5EDED1C773DF8009F1F52 /* light.frag */,
 				8AA5EDEE1C773DF8009F1F52 /* light.vert */,
+				8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */,
+				8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */,
+				8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */,
+				8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */,
+				8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */,
 				8AA5EDEF1C773DF8009F1F52 /* model_face.frag */,
 				8AA5EDF01C773DF8009F1F52 /* model_face.geom */,
 				8AA5EDF11C773DF8009F1F52 /* model_face.tcs */,

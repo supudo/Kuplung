@@ -1,5 +1,7 @@
 #version 410
 
+// in's
+
 uniform mat4 fs_ModelMatrix;
 uniform mat4 fs_WorldMatrix;
 uniform vec3 fs_cameraPosition;
@@ -7,6 +9,18 @@ uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
 uniform vec3 fs_outlineColor;
 uniform bool fs_celShading;
+
+in vec3 fs_vertexPosition;
+in vec2 fs_textureCoord;
+in vec3 fs_vertexNormal0;
+in vec3 fs_vertexNormal;
+in vec3 fs_tangent0;
+in vec3 fs_tangent;
+in vec3 fs_bitangent0;
+in vec3 fs_bitangent;
+in float fs_isBorder;
+
+// structs
 
 struct ModelMaterial {
     vec3 ambient;
@@ -57,17 +71,13 @@ struct LightSource_Spot {
     float strengthAmbient, strengthDiffuse, strengthSpecular;
 };
 
-in vec3 fs_vertexPosition;
-in vec2 fs_textureCoord;
-in vec3 fs_vertexNormal0;
-in vec3 fs_vertexNormal;
-in vec3 fs_tangent0;
-in vec3 fs_tangent;
-in vec3 fs_bitangent0;
-in vec3 fs_bitangent;
-in float fs_isBorder;
+struct Effect_GaussianBlur {
+    float gauss_w;
+    float gauss_radius;
+    int gauss_mode;
+};
 
-out vec4 fragColor;
+// lights & mats
 
 #define NR_DIRECTIONAL_LIGHTS 8
 #define NR_POINT_LIGHTS 4
@@ -78,11 +88,18 @@ uniform LightSource_Point pointLights[NR_POINT_LIGHTS];
 uniform LightSource_Spot spotLights[NR_SPOT_LIGHTS];
 uniform ModelMaterial material;
 
-// =================================================
-//
-// definitions
-//
-// =================================================
+// effect vars
+
+uniform Effect_GaussianBlur effect_GBlur;
+
+// calculated vars
+
+float diffuse_texture_width = textureSize(material.sampler_diffuse, 0).r; //texture width
+float diffuse_texture_height = textureSize(material.sampler_diffuse, 0).g; //texture height
+vec2 texel = vec2(1.0 / diffuse_texture_width, 1.0 / diffuse_texture_height);
+vec2 dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height));
+
+// functions
 
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
@@ -93,3 +110,7 @@ vec3 calculateBumpedNormal();
 
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
+
+// out color
+
+out vec4 fragColor;

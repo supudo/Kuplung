@@ -302,9 +302,10 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         "\n" ICON_MD_OPEN_WITH,
         "\n" ICON_MD_TOLL,
         "\n" ICON_MD_FORMAT_PAINT,
+        "\n" ICON_MD_BLUR_ON,
         "\n" ICON_MD_LIGHTBULB_OUTLINE,
     };
-    const char* tabsLabelsScene[] = { "General", "Scale", "Rotate", "Translate", "Displace", "Material", "Illumination" };
+    const char* tabsLabelsScene[] = { "General", "Scale", "Rotate", "Translate", "Displace", "Material", "Effects", "Illumination" };
     const int numTabsScene = sizeof(tabsScene) / sizeof(tabsScene[0]);
     ImGui::TabLabels(numTabsScene, tabsScene, this->selectedTabScene, ImVec2(30.0, 30.0), tabsLabelsScene);
     ImGui::PopStyleColor(3);
@@ -363,6 +364,16 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             break;
         }
         case 6: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Effects");
+            ImGui::Text("Gaussian Blur");
+            const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
+            ImGui::Combo("Mode##228", &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
+            this->helperUI->addControlsSlider("Radius", 14, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
+            this->helperUI->addControlsSlider("Width", 15, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
+            ImGui::Separator();
+            break;
+        }
+        case 7: {
             // https://en.wikipedia.org/wiki/List_of_common_shading_algorithms
             // https://renderman.pixar.com/view/cook-torrance-shader
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Illumination type");

@@ -99,6 +99,10 @@ public:
     bool showMaterialEditor;
     MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
+    // effects
+    int Effect_GBlur_Mode;
+    ObjectCoordinate *Effect_GBlur_Radius, *Effect_GBlur_Width;
+
 private:
     std::function<void(std::string)> doLogFunc;
     void drawOutline();
@@ -158,6 +162,9 @@ private:
     GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump;
     GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
     GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump;
+
+    // effects - gaussian blur
+    GLuint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

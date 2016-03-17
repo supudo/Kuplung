@@ -193,6 +193,7 @@ DISTFILES += \
     resources/shaders/model_face_effects.vert \
     resources/shaders/model_face_lights.vert \
     resources/shaders/model_face_mapping.vert \
+    resources/shaders/model_face_misc.vert \
     resources/shaders/model_face_vars.vert \
     resources/shaders/model_face.geom \
     resources/shaders/model_face.frag \

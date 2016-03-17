@@ -38,8 +38,14 @@ void main(void) {
         // spot lights color
         vec3 lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
+
         // Refraction
         vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);
+        if (effect_GBlur.gauss_mode > -1) {
+            // effects - gaussian blur
+            vec4 effect_GBlur_Color = effect_gaussian_blur();
+            processedColorRefraction += effect_GBlur_Color.rgb;
+        }
         if (material.refraction > 1.0) {
             vec3 refraction = calculateRefraction(normalDirection, processedColor_Diffuse);
             processedColorRefraction = processedColorRefraction * refraction;

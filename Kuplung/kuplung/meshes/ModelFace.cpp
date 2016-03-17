@@ -166,6 +166,11 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+
+    // effects
+    this->Effect_GBlur_Mode = -1;
+    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
 void ModelFace::setModel(objModelFace oFace) {
@@ -219,6 +224,11 @@ void ModelFace::initModelProperties() {
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.emission.r, this->oFace.faceMaterial.emission.g, this->oFace.faceMaterial.emission.b) });
+
+
+    this->Effect_GBlur_Mode = -1;
+    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
 void ModelFace::initProperties() {
@@ -265,6 +275,10 @@ void ModelFace::initProperties() {
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+
+    this->Effect_GBlur_Mode = -1;
+    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
 #pragma mark - Public
@@ -297,6 +311,9 @@ bool ModelFace::initShaderProgram() {
     shaderSourceFragment += readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
+    shaderSourceFragment += readFile(shaderPath.c_str());
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_misc.frag";
     shaderSourceFragment += readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
@@ -445,6 +462,11 @@ bool ModelFace::initShaderProgram() {
         this->glMaterial_HasTextureSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
         this->glMaterial_HasTextureDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
         this->glMaterial_HasTextureBump = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_bump");
+
+        // effects - gaussian blur
+        this->glEffect_GB_W = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_w");
+        this->glEffect_GB_Radius = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_radius");
+        this->glEffect_GB_Mode = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_mode");
     }
 
     success |= this->reflectionInit();
@@ -839,6 +861,11 @@ void ModelFace::renderModel() {
         }
         else
             glUniform1i(this->glMaterial_HasTextureBump, 0);
+
+        // effects - gaussian blur
+        glUniform1i(this->glEffect_GB_Mode, this->Effect_GBlur_Mode - 1);
+        glUniform1f(this->glEffect_GB_W, this->Effect_GBlur_Width->point);
+        glUniform1f(this->glEffect_GB_Radius, this->Effect_GBlur_Radius->point);
 
         // outlining
         this->drawOutline();
