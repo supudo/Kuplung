@@ -285,9 +285,23 @@ bool ModelFace::initShaderProgram() {
     std::string shaderSourceGeometry = readFile(shaderPath.c_str());
     const char *shader_geometry = shaderSourceGeometry.c_str();
 
-    // fragment shader
+    // fragment shader - parts
+    std::string shaderSourceFragment;
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_vars.frag";
+    shaderSourceFragment = readFile(shaderPath.c_str());
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_effects.frag";
+    shaderSourceFragment += readFile(shaderPath.c_str());
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_lights.frag";
+    shaderSourceFragment += readFile(shaderPath.c_str());
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
+    shaderSourceFragment += readFile(shaderPath.c_str());
+
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    shaderSourceFragment += readFile(shaderPath.c_str());
+
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();

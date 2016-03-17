@@ -190,6 +190,10 @@ DISTFILES += \
     resources/shaders/grid.vert \
     resources/shaders/grid.frag \
     resources/shaders/model_face.vert \
+    resources/shaders/model_face_effects.vert \
+    resources/shaders/model_face_lights.vert \
+    resources/shaders/model_face_mapping.vert \
+    resources/shaders/model_face_vars.vert \
     resources/shaders/model_face.geom \
     resources/shaders/model_face.frag \
     resources/shaders/model_face.tcs \
