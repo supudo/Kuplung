@@ -21,8 +21,11 @@ in vec3 vs_bitangent;
 out VS_OUT {
     vec3 gs_vertexPosition;
     vec2 gs_textureCoord;
+    vec3 gs_vertexNormal0;
     vec3 gs_vertexNormal;
+    vec3 gs_tangent0;
     vec3 gs_tangent;
+    vec3 gs_bitangent0;
     vec3 gs_bitangent;
     vec3 gs_displacementLocation;
     float gs_isBorder;
@@ -37,8 +40,11 @@ void main(void) {
 
     vs_out.gs_vertexPosition = vs_vertexPosition;
     vs_out.gs_textureCoord = vs_textureCoord;
+    vs_out.gs_vertexNormal0 = vs_vertexNormal;
     vs_out.gs_vertexNormal = (vs_WorldMatrix * vec4(vs_vertexNormal, 0.0)).xyz;
+    vs_out.gs_tangent0 = vs_tangent;
     vs_out.gs_tangent = (vs_WorldMatrix * vec4(vs_tangent, 0.0)).xyz;
+    vs_out.gs_bitangent0 = vs_bitangent;
     vs_out.gs_bitangent = (vs_WorldMatrix * vec4(vs_bitangent, 0.0)).xyz;
     vs_out.gs_displacementLocation = vs_displacementLocation;
     vs_out.gs_isBorder = vs_isBorder;

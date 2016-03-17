@@ -377,6 +377,9 @@ bool ModelFace::initShaderProgram() {
             f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
             f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].specular").c_str());
 
+            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
             this->mfLights_Point.push_back(f);
         }
 
@@ -399,6 +402,9 @@ bool ModelFace::initShaderProgram() {
             f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
             f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].specular").c_str());
 
+            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
             this->mfLights_Spot.push_back(f);
         }
 
@@ -698,6 +704,11 @@ void ModelFace::renderModel() {
                         glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
                         glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
 
+                        // light factors
+                        glUniform1f(f->gl_StrengthAmbient, light->ambient->strength);
+                        glUniform1f(f->gl_StrengthDiffuse, light->diffuse->strength);
+                        glUniform1f(f->gl_StrengthSpecular, light->specular->strength);
+
                         lightsCount_Point += 1;
                     }
                     break;
@@ -725,6 +736,11 @@ void ModelFace::renderModel() {
                         glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
                         glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
                         glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+
+                        // light factors
+                        glUniform1f(f->gl_StrengthAmbient, light->ambient->strength);
+                        glUniform1f(f->gl_StrengthDiffuse, light->diffuse->strength);
+                        glUniform1f(f->gl_StrengthSpecular, light->specular->strength);
 
                         lightsCount_Spot += 1;
                     }

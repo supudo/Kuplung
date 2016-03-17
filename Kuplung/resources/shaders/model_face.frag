@@ -45,6 +45,7 @@ struct LightSource_Point {
     vec3 position;
     float constant, linear, quadratic;
     vec3 ambient, diffuse, specular;
+    float strengthAmbient, strengthDiffuse, strengthSpecular;
 };
 
 struct LightSource_Spot {
@@ -53,12 +54,16 @@ struct LightSource_Spot {
     float cutOff, outerCutOff;
     float constant, linear, quadratic;
     vec3 ambient, diffuse, specular;
+    float strengthAmbient, strengthDiffuse, strengthSpecular;
 };
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
+in vec3 fs_vertexNormal0;
 in vec3 fs_vertexNormal;
+in vec3 fs_tangent0;
 in vec3 fs_tangent;
+in vec3 fs_bitangent0;
 in vec3 fs_bitangent;
 in float fs_isBorder;
 
@@ -159,23 +164,34 @@ void main(void) {
 // =================================================
 
 vec3 calculateBumpedNormal() {
-    vec3 vertexNormal = normalize(-fs_vertexNormal);
+    mat3 normalMatrix = transpose(inverse(mat3(fs_ModelMatrix)));
+    vec3 Normal = normalize(normalMatrix * fs_vertexNormal0);
+    vec3 T = normalize(normalMatrix * fs_tangent0);
+    vec3 B = normalize(normalMatrix * fs_bitangent0);
+    vec3 N = normalize(normalMatrix * fs_vertexNormal0);
+    mat3 TBN = transpose(mat3(T, B, N));
 
-    mat3 mtxMV = mat3(fs_ModelMatrix);
+    vec3 vertexNewNormal = Normal;
+    vertexNewNormal = texture(material.sampler_bump, fs_textureCoord).rgb;
+    vertexNewNormal = normalize(vertexNewNormal * 2.0 - 1.0);
 
-    vec3 vertexTangent = normalize(fs_tangent);
-    vertexTangent = normalize(vertexTangent - dot(vertexTangent, vertexNormal) * vertexNormal);
+//    vec3 vertexNormal = normalize(-fs_vertexNormal);
 
-    vec3 vertexBitangent = cross(vertexTangent, vertexNormal);
+//    mat3 mtxMV = mat3(fs_ModelMatrix);
 
-    //vec3 vertexBumpMapNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
-    vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).rgb;
-    vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0);
+//    vec3 vertexTangent = normalize(fs_tangent);
+//    vertexTangent = normalize(vertexTangent - dot(vertexTangent, vertexNormal) * vertexNormal);
 
-    vec3 vertexNewNormal;
-    mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
-    vertexNewNormal = TBN * vertexBumpMapNormal;
-    vertexNewNormal = normalize(vertexNewNormal);
+//    vec3 vertexBitangent = cross(vertexTangent, vertexNormal);
+
+//    //vec3 vertexBumpMapNormal = texture(material.sampler_bump, vec2(fs_textureCoord.x, -fs_textureCoord.y)).rgb;
+//    vec3 vertexBumpMapNormal = texture(material.sampler_bump, fs_textureCoord).rgb;
+//    vertexBumpMapNormal = 2.0 * vertexBumpMapNormal - vec3(1.0);
+
+//    vec3 vertexNewNormal;
+//    //mat3 TBN = mat3(vertexTangent, vertexBitangent, vertexNormal);
+//    vertexNewNormal = TBN * vertexBumpMapNormal;
+//    vertexNewNormal = normalize(vertexNewNormal);
 
     return vertexNewNormal;
 }
@@ -234,9 +250,9 @@ vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 direc
             float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
 
             // Combine results
-            vec3 ambient = pointLights[i].ambient * attenuation * colorAmbient.rgb;
-            vec3 diffuse = pointLights[i].diffuse * lambertFactor * attenuation * colorDiffuse.rgb;
-            vec3 specular = pointLights[i].specular * specularFactor * attenuation * colorSpecular.rgb;
+            vec3 ambient = pointLights[i].strengthAmbient * pointLights[i].ambient * attenuation * colorAmbient.rgb;
+            vec3 diffuse = pointLights[i].strengthDiffuse * pointLights[i].diffuse * lambertFactor * attenuation * colorDiffuse.rgb;
+            vec3 specular = pointLights[i].strengthSpecular * pointLights[i].specular * specularFactor * attenuation * colorSpecular.rgb;
 
             result += ambient + diffuse + specular;
         }
@@ -273,9 +289,9 @@ vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 direct
             float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
 
             // Combine results
-            vec3 ambient = spotLights[i].ambient * attenuation * intensity * colorAmbient.rgb;
-            vec3 diffuse = spotLights[i].diffuse * lambertFactor * attenuation * intensity * colorDiffuse.rgb;
-            vec3 specular = spotLights[i].specular * specularFactor * attenuation * intensity * colorSpecular.rgb;
+            vec3 ambient = spotLights[i].strengthAmbient * spotLights[i].ambient * attenuation * intensity * colorAmbient.rgb;
+            vec3 diffuse = spotLights[i].strengthDiffuse * spotLights[i].diffuse * lambertFactor * attenuation * intensity * colorDiffuse.rgb;
+            vec3 specular = spotLights[i].strengthSpecular * spotLights[i].specular * specularFactor * attenuation * intensity * colorSpecular.rgb;
 
             result += ambient + diffuse + specular;
         }

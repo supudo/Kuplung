@@ -23,9 +23,9 @@
 
 struct ModelFace_LightSource_Directional {
     GLuint gl_InUse;
+    GLuint gl_Direction;
     GLuint gl_Ambient, gl_Diffuse, gl_Specular;
     GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
-    GLuint gl_Direction;
 };
 
 struct ModelFace_LightSource_Point {
@@ -33,6 +33,7 @@ struct ModelFace_LightSource_Point {
     GLuint gl_Position;
     GLuint gl_Constant, gl_Linear, gl_Quadratic;
     GLuint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 struct ModelFace_LightSource_Spot {
@@ -41,6 +42,7 @@ struct ModelFace_LightSource_Spot {
     GLuint gl_CutOff, gl_OuterCutOff;
     GLuint gl_Constant, gl_Linear, gl_Quadratic;
     GLuint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 class ModelFace {
