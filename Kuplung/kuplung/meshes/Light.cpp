@@ -54,7 +54,7 @@ void Light::setModel(objModelFace oFace) {
 void Light::initProperties(LightSourceType type) {
     this->showLampObject = true;
     this->showLampDirection = true;
-    this->showInWire = true;
+    this->showInWire = false;
 
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
@@ -86,7 +86,7 @@ void Light::initProperties(LightSourceType type) {
         }
         case LightSourceType_Spot: {
             this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.9f });
+            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
             this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
             break;
         }
@@ -136,6 +136,7 @@ bool Light::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
         this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "a_textureCoord");
 
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
