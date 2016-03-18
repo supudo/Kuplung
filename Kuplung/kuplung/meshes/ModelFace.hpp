@@ -99,9 +99,13 @@ public:
     bool showMaterialEditor;
     MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
-    // effects
+    // effects - gaussian blur
     int Effect_GBlur_Mode;
     ObjectCoordinate *Effect_GBlur_Radius, *Effect_GBlur_Width;
+
+    // effects - bloom
+    bool Effect_Bloom_doBloom;
+    float Effect_Bloom_WeightA, Effect_Bloom_WeightB, Effect_Bloom_WeightC, Effect_Bloom_WeightD, Effect_Bloom_Vignette, Effect_Bloom_VignetteAtt;
 
 private:
     std::function<void(std::string)> doLogFunc;
@@ -165,6 +169,8 @@ private:
 
     // effects - gaussian blur
     GLuint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
+    // effects - bloom
+    GLuint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

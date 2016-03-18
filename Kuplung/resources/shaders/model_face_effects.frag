@@ -41,3 +41,25 @@ vec4 effect_gaussian_blur() {
     else
         return effect_gauss_filter_v(material.sampler_diffuse, w, radius, depth);
 }
+
+// =================================================
+//
+// Bloom
+//
+// =================================================
+
+vec4 effect_bloom() {
+   vec3 color = texture(material.sampler_diffuse, fs_textureCoord.st).rgb;
+   vec3 b1 = texture(material.sampler_ambient, fs_textureCoord.st).rgb * effect_Bloom.bloom_WeightA;
+   vec3 b2 = texture(material.sampler_specular, fs_textureCoord.st).rgb * effect_Bloom.bloom_WeightB;
+   vec3 b3 = texture(material.sampler_specularExp, fs_textureCoord.st).rgb * effect_Bloom.bloom_WeightC;
+   vec3 b4 = texture(material.sampler_dissolve, fs_textureCoord.st).rgb * effect_Bloom.bloom_WeightD;
+
+   vec3 bloom =  (b1 + b2 + b3 + b4);
+   float x = fs_textureCoord.x;
+   float y = fs_textureCoord.y;
+   float attenuateX = 1.0 - effect_Bloom.bloom_VignetteAtt * (1 - smoothstep(0.0, effect_Bloom.bloom_Vignette, x) + smoothstep(1 - effect_Bloom.bloom_Vignette, 1.0, x));
+   float attenuateY = 1.0 - effect_Bloom.bloom_VignetteAtt * (1 - smoothstep(0.0, effect_Bloom.bloom_Vignette, y) + smoothstep(1 - effect_Bloom.bloom_Vignette, 1.0, y));
+
+   return vec4(color + bloom * attenuateX * attenuateY, 1);
+}

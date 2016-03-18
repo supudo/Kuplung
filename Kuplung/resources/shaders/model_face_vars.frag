@@ -77,6 +77,16 @@ struct Effect_GaussianBlur {
     int gauss_mode;
 };
 
+struct Effect_Bloom {
+    bool doBloom;
+    float bloom_WeightA;
+    float bloom_WeightB;
+    float bloom_WeightC;
+    float bloom_WeightD;
+    float bloom_Vignette;
+    float bloom_VignetteAtt;
+};
+
 // lights & mats
 
 #define NR_DIRECTIONAL_LIGHTS 8
@@ -91,6 +101,7 @@ uniform ModelMaterial material;
 // effect vars
 
 uniform Effect_GaussianBlur effect_GBlur;
+uniform Effect_Bloom effect_Bloom;
 
 // calculated vars
 

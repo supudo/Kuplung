@@ -225,10 +225,17 @@ void ModelFace::initModelProperties() {
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.emission.r, this->oFace.faceMaterial.emission.g, this->oFace.faceMaterial.emission.b) });
 
-
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+
+    this->Effect_Bloom_doBloom = false;
+    this->Effect_Bloom_WeightA = 0.0f;
+    this->Effect_Bloom_WeightB = 0.0f;
+    this->Effect_Bloom_WeightC = 0.0f;
+    this->Effect_Bloom_WeightD = 0.0f;
+    this->Effect_Bloom_Vignette = 0.0f;
+    this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
 void ModelFace::initProperties() {
@@ -279,6 +286,14 @@ void ModelFace::initProperties() {
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+
+    this->Effect_Bloom_doBloom = false;
+    this->Effect_Bloom_WeightA = 0.0f;
+    this->Effect_Bloom_WeightB = 0.0f;
+    this->Effect_Bloom_WeightC = 0.0f;
+    this->Effect_Bloom_WeightD = 0.0f;
+    this->Effect_Bloom_Vignette = 0.0f;
+    this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
 #pragma mark - Public
@@ -467,6 +482,15 @@ bool ModelFace::initShaderProgram() {
         this->glEffect_GB_W = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_w");
         this->glEffect_GB_Radius = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_radius");
         this->glEffect_GB_Mode = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_mode");
+
+        // effects - bloom
+        this->glEffect_Bloom_doBloom = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.doBloom");
+        this->glEffect_Bloom_WeightA = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightA");
+        this->glEffect_Bloom_WeightB = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightB");
+        this->glEffect_Bloom_WeightC = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightC");
+        this->glEffect_Bloom_WeightD = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightD");
+        this->glEffect_Bloom_Vignette = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_Vignette");
+        this->glEffect_Bloom_VignetteAtt = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_VignetteAtt");
     }
 
     success |= this->reflectionInit();
@@ -866,6 +890,16 @@ void ModelFace::renderModel() {
         glUniform1i(this->glEffect_GB_Mode, this->Effect_GBlur_Mode - 1);
         glUniform1f(this->glEffect_GB_W, this->Effect_GBlur_Width->point);
         glUniform1f(this->glEffect_GB_Radius, this->Effect_GBlur_Radius->point);
+
+        // effects - bloom
+        // TODO: Bloom effect
+        glUniform1i(this->glEffect_Bloom_doBloom, this->Effect_Bloom_doBloom);
+        glUniform1f(this->glEffect_Bloom_WeightA, this->Effect_Bloom_WeightA);
+        glUniform1f(this->glEffect_Bloom_WeightB, this->Effect_Bloom_WeightB);
+        glUniform1f(this->glEffect_Bloom_WeightC, this->Effect_Bloom_WeightC);
+        glUniform1f(this->glEffect_Bloom_WeightD, this->Effect_Bloom_WeightD);
+        glUniform1f(this->glEffect_Bloom_Vignette, this->Effect_Bloom_Vignette);
+        glUniform1f(this->glEffect_Bloom_VignetteAtt, this->Effect_Bloom_VignetteAtt);
 
         // outlining
         this->drawOutline();
