@@ -98,7 +98,7 @@ void Light::initProperties(LightSourceType type) {
 
     this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
 
     this->matrixModel = glm::mat4(1.0);
 }
