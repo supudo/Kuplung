@@ -1,3 +1,5 @@
+// https://github.com/kmkolasinski/AwesomeBump/blob/master/Sources/resources/filters_3d.frag
+
 // =================================================
 //
 // Gaussian Blur
