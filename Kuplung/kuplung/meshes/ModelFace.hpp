@@ -100,6 +100,9 @@ public:
     bool showMaterialEditor;
     MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
+    // mapping
+    bool Setting_ParallaxMapping;
+
     // effects - gaussian blur
     int Effect_GBlur_Mode;
     ObjectCoordinate *Effect_GBlur_Radius, *Effect_GBlur_Width;
@@ -167,6 +170,7 @@ private:
     GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
     GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
     GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
+    GLuint glMaterial_ParallaxMapping;
 
     // effects - gaussian blur
     GLuint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;

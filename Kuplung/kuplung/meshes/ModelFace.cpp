@@ -171,6 +171,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Setting_ParallaxMapping = false;
 
     // effects
     this->Effect_GBlur_Mode = -1;
@@ -224,6 +225,7 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthSpecular = 1.0;
 
     this->materialIlluminationModel = 1;
+    this->Setting_ParallaxMapping = false;
 
     this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b) });
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b) });
@@ -284,6 +286,7 @@ void ModelFace::initProperties() {
     this->Setting_LightStrengthSpecular = 1.0;
 
     this->materialIlluminationModel = 1;
+    this->Setting_ParallaxMapping = false;
     this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
@@ -397,6 +400,8 @@ bool ModelFace::initShaderProgram() {
 
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
+
+        this->glMaterial_ParallaxMapping = this->glUtils->glGetUniform(this->shaderProgram, "fs_userParallaxMapping");
 
         // light - directional
         for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
@@ -723,6 +728,8 @@ void ModelFace::renderModel() {
 
         // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
+
+        glUniform1i(this->glMaterial_ParallaxMapping, this->Setting_ParallaxMapping);
 
         // lights
         int lightsCount_Directional = 0;

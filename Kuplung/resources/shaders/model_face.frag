@@ -14,7 +14,7 @@ void main(void) {
         vec3 normalDirection = fs_vertexNormal;
 
         // Parallax mapping coordinates
-        if (material.has_texture_displacement) {
+        if (fs_userParallaxMapping) {
             vec3 T = normalize(mat3(fs_ModelMatrix) * fs_tangent0);
             vec3 B = normalize(mat3(fs_ModelMatrix) * fs_bitangent0);
             vec3 N = normalize(mat3(fs_ModelMatrix) * fs_vertexNormal0);

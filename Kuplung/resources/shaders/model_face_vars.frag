@@ -9,6 +9,7 @@ uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
 uniform vec3 fs_outlineColor;
 uniform bool fs_celShading;
+uniform bool fs_userParallaxMapping;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
