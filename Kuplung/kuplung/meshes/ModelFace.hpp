@@ -96,6 +96,7 @@ public:
 
     // material
     int materialIlluminationModel;
+    ObjectCoordinate* displacementHeightScale;
     bool showMaterialEditor;
     MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
 
@@ -133,7 +134,7 @@ private:
     GLuint fboDefault, glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
-    GLuint vboTextureBump;
+    GLuint vboTextureBump, vboTextureDisplacement;
 
     // reflection objects
     GLuint shaderProgramReflection;
@@ -161,11 +162,11 @@ private:
 
     // material
     GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
-    GLuint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel;
+    GLuint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel, glMaterial_HeightScale;
     GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
-    GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump;
+    GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
     GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
-    GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump;
+    GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
 
     // effects - gaussian blur
     GLuint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;

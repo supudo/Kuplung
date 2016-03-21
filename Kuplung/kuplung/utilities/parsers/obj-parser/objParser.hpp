@@ -96,6 +96,8 @@ private:
     std::regex regex_materialTextureDiffuse;
     // Bump map
     std::regex regex_materialTextureBump;
+    // Displacement map
+    std::regex regex_materialTextureDisplacement;
     // Specifies that a color texture file or color procedural texture file is linked to the specular reflectivity of the material.
     // During rendering, the map_Ks value is multiplied by the Ks value.
     std::regex regex_materialTextureSpecular;

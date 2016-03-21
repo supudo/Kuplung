@@ -81,6 +81,10 @@ void ModelFace::destroy() {
         glDeleteBuffers(1, &this->vboTextureSpecularExp);
     if (this->vboTextureDissolve > 0)
         glDeleteBuffers(1, &this->vboTextureDissolve);
+    if (this->vboTextureBump > 0)
+        glDeleteBuffers(1, &this->vboTextureBump);
+    if (this->vboTextureDisplacement > 0)
+        glDeleteBuffers(1, &this->vboTextureDisplacement);
 
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
@@ -166,6 +170,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     // effects
     this->Effect_GBlur_Mode = -1;
@@ -224,6 +229,7 @@ void ModelFace::initModelProperties() {
     this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b) });
     this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.specular.r, this->oFace.faceMaterial.specular.g, this->oFace.faceMaterial.specular.b) });
     this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.emission.r, this->oFace.faceMaterial.emission.g, this->oFace.faceMaterial.emission.b) });
+    this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -458,6 +464,7 @@ bool ModelFace::initShaderProgram() {
         this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
         this->glMaterial_SpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.specularExp");
         this->glMaterial_IlluminationModel = this->glUtils->glGetUniform(this->shaderProgram, "material.illumination_model");
+        this->glMaterial_HeightScale = this->glUtils->glGetUniform(this->shaderProgram, "material.heightScale");
 
         this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
         this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
@@ -470,6 +477,7 @@ bool ModelFace::initShaderProgram() {
         this->glMaterial_SamplerSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
         this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
         this->glMaterial_SamplerBump = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_bump");
+        this->glMaterial_SamplerDisplacement = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_displacement");
 
         this->glMaterial_HasTextureAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_ambient");
         this->glMaterial_HasTextureDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_diffuse");
@@ -477,6 +485,7 @@ bool ModelFace::initShaderProgram() {
         this->glMaterial_HasTextureSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
         this->glMaterial_HasTextureDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
         this->glMaterial_HasTextureBump = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_bump");
+        this->glMaterial_HasTextureDisplacement = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_displacement");
 
         // effects - gaussian blur
         this->glEffect_GB_W = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_w");
@@ -827,6 +836,7 @@ void ModelFace::renderModel() {
         glUniform1f(this->glMaterial_Refraction, this->Setting_MaterialRefraction->point);
         glUniform1f(this->glMaterial_SpecularExp, this->Setting_MaterialSpecularExp->point);
         glUniform1i(this->glMaterial_IlluminationModel, this->materialIlluminationModel);
+        glUniform1f(this->glMaterial_HeightScale, this->displacementHeightScale->point);
         glUniform3f(this->glMaterial_Ambient, this->materialAmbient->color.r, this->materialAmbient->color.g, this->materialAmbient->color.b);
         glUniform3f(this->glMaterial_Diffuse, this->materialDiffuse->color.r, this->materialDiffuse->color.g, this->materialDiffuse->color.b);
         glUniform3f(this->glMaterial_Specular, this->materialSpecular->color.r, this->materialSpecular->color.g, this->materialSpecular->color.b);
@@ -885,6 +895,15 @@ void ModelFace::renderModel() {
         }
         else
             glUniform1i(this->glMaterial_HasTextureBump, 0);
+
+        if (this->vboTextureDisplacement > 0 && this->oFace.faceMaterial.textures_displacement.useTexture) {
+            glUniform1i(this->glMaterial_HasTextureDisplacement, 1);
+            glUniform1i(this->glMaterial_SamplerDisplacement, 6);
+            glActiveTexture(GL_TEXTURE6);
+            glBindTexture(GL_TEXTURE_2D, this->vboTextureDisplacement);
+        }
+        else
+            glUniform1i(this->glMaterial_HasTextureDisplacement, 0);
 
         // effects - gaussian blur
         glUniform1i(this->glEffect_GB_Mode, this->Effect_GBlur_Mode - 1);

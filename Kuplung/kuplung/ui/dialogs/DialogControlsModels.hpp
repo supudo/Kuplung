@@ -39,13 +39,16 @@ private:
 
     bool showTextureWindow_Ambient, showTexture_Ambient, showTextureWindow_Diffuse, showTexture_Diffuse;
     bool showTextureWindow_Dissolve, showTexture_Dissolve, showTextureWindow_Bump, showTexture_Bump;
+    bool showTextureWindow_Displacement, showTexture_Displacement;
     bool showTextureWindow_Specular, showTexture_Specular, showTextureWindow_SpecularExp, showTexture_SpecularExp;
 
     int textureAmbient_Width, textureAmbient_Height, textureDiffuse_Width, textureDiffuse_Height;
     int textureDissolve_Width, textureDissolve_Height, textureBump_Width, textureBump_Height;
+    int textureDisplacement_Width, textureDisplacement_Height;
     int textureSpecular_Width, textureSpecular_Height, textureSpecularExp_Width, textureSpecularExp_Height;
 
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump, vboTextureSpecular, vboTextureSpecularExp;
+    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump;
+    GLuint vboTextureDisplacement, vboTextureSpecular, vboTextureSpecularExp;
 
     void showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image);
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);

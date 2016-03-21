@@ -63,6 +63,8 @@ void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::strin
     else if (type == 3)
         img = mmf->oFace.faceMaterial.textures_bump.image;
     else if (type == 4)
+        img = mmf->oFace.faceMaterial.textures_displacement.image;
+    else if (type == 5)
         img = mmf->oFace.faceMaterial.textures_specular.image;
     else
         img = mmf->oFace.faceMaterial.textures_specularExp.image;
@@ -254,8 +256,16 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
                               &this->showTexture_Bump,
                               mmf->oFace.faceMaterial.textures_bump.image.c_str());
     }
-    if (mmf->oFace.faceMaterial.textures_specular.image != "") {
+    if (mmf->oFace.faceMaterial.textures_displacement.image != "") {
         this->showTextureLine("##005",
+                              "Height",
+                              &mmf->oFace.faceMaterial.textures_displacement.useTexture,
+                              &this->showTextureWindow_Displacement,
+                              &this->showTexture_Displacement,
+                              mmf->oFace.faceMaterial.textures_displacement.image.c_str());
+    }
+    if (mmf->oFace.faceMaterial.textures_specular.image != "") {
+        this->showTextureLine("##006",
                               "Specular",
                               &mmf->oFace.faceMaterial.textures_specular.useTexture,
                               &this->showTextureWindow_Specular,
@@ -263,7 +273,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
                               mmf->oFace.faceMaterial.textures_specular.image.c_str());
     }
     if (mmf->oFace.faceMaterial.textures_specularExp.image != "") {
-        this->showTextureLine("##006",
+        this->showTextureLine("##007",
                               "SpecularExp",
                               &mmf->oFace.faceMaterial.textures_specularExp.useTexture,
                               &this->showTextureWindow_SpecularExp,
@@ -283,11 +293,14 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     if (this->showTextureWindow_Bump)
         this->showTextureImage(mmf, 3, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
 
+    if (this->showTextureWindow_Displacement)
+        this->showTextureImage(mmf, 4, "Height", &this->showTextureWindow_Displacement, &this->showTexture_Displacement, &this->vboTextureDisplacement, &this->textureDisplacement_Width, &this->textureDisplacement_Height);
+
     if (this->showTextureWindow_Specular)
-        this->showTextureImage(mmf, 4, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
+        this->showTextureImage(mmf, 5, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
 
     if (this->showTextureWindow_SpecularExp)
-        this->showTextureImage(mmf, 5, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
+        this->showTextureImage(mmf, 6, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
 
     ImGui::Separator();
 
@@ -361,6 +374,10 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             this->helperUI->addControlColor3("Diffuse Color", &(*meshModelFaces)[this->selectedObject]->materialDiffuse->color, &(*meshModelFaces)[this->selectedObject]->materialDiffuse->colorPickerOpen);
             this->helperUI->addControlColor3("Specular Color", &(*meshModelFaces)[this->selectedObject]->materialSpecular->color, &(*meshModelFaces)[this->selectedObject]->materialSpecular->colorPickerOpen);
             this->helperUI->addControlColor3("Emission Color", &(*meshModelFaces)[this->selectedObject]->materialEmission->color, &(*meshModelFaces)[this->selectedObject]->materialEmission->colorPickerOpen);
+            if (mmf->oFace.faceMaterial.textures_displacement.useTexture) {
+                ImGui::Separator();
+                this->helperUI->addControlsSlider("Height", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);
+            }
             break;
         }
         case 6: {
@@ -369,18 +386,18 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             ImGui::Text("Gaussian Blur");
             const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
             ImGui::Combo("Mode##228", &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
-            this->helperUI->addControlsSlider("Radius", 14, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
-            this->helperUI->addControlsSlider("Width", 15, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
+            this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
+            this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
             ImGui::Separator();
 
 //            ImGui::Text("Bloom");
 //            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_doBloom);
-//            this->helperUI->addControlsSlider("Ambient", 16, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightA, false, isFrame);
-//            this->helperUI->addControlsSlider("Specular", 17, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightB, false, isFrame);
-//            this->helperUI->addControlsSlider("Specular Exp", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightC, false, isFrame);
-//            this->helperUI->addControlsSlider("Dissolve", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightD, false, isFrame);
-//            this->helperUI->addControlsSlider("Vignette", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_Vignette, false, isFrame);
-//            this->helperUI->addControlsSlider("Vignette Attenuation", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
+//            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightA, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightB, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightC, false, isFrame);
+//            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightD, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_Vignette, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
 //            ImGui::Separator();
             break;
         }

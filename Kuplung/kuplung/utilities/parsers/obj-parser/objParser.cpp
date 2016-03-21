@@ -51,6 +51,7 @@ void objParser::init(std::function<void(std::string)> doLog, std::function<void(
     this->regex_materialTextureAmbient = "^map_Ka\\s.*";
     this->regex_materialTextureDiffuse = "^map_Kd\\s.*";
     this->regex_materialTextureBump = "^map_Bump\\s.*";
+    this->regex_materialTextureDisplacement = "^disp\\s.*";
     this->regex_materialTextureSpecular = "^map_Ks\\s.*";
     this->regex_materialTextureSpecularExp = "^map_Ns\\s.*";
     this->regex_materialTextureDissolve = "^map_d\\s.*";
@@ -347,6 +348,8 @@ std::vector<objMaterial> objParser::loadMaterial(std::string materialFile) {
                 materials[indexMaterial].textures_dissolve = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureBump))
                 materials[indexMaterial].textures_bump = this->parseTextureImage(cleanLine);
+            else if (std::regex_match(singleLine, this->regex_materialTextureDisplacement))
+                materials[indexMaterial].textures_displacement = this->parseTextureImage(cleanLine);
 
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }

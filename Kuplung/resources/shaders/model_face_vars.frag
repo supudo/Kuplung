@@ -31,6 +31,7 @@ struct ModelMaterial {
     float refraction;
     float specularExp;
     int illumination_model;
+    float heightScale;
 
     sampler2D sampler_ambient;
     sampler2D sampler_diffuse;
@@ -38,6 +39,7 @@ struct ModelMaterial {
     sampler2D sampler_specularExp;
     sampler2D sampler_dissolve;
     sampler2D sampler_bump;
+    sampler2D sampler_displacement;
 
     bool has_texture_ambient;
     bool has_texture_diffuse;
@@ -45,6 +47,7 @@ struct ModelMaterial {
     bool has_texture_specularExp;
     bool has_texture_dissolve;
     bool has_texture_bump;
+    bool has_texture_displacement;
 };
 
 struct LightSource_Directional {
@@ -107,8 +110,8 @@ uniform Effect_Bloom effect_Bloom;
 
 float diffuse_texture_width = textureSize(material.sampler_diffuse, 0).r; //texture width
 float diffuse_texture_height = textureSize(material.sampler_diffuse, 0).g; //texture height
-vec2 texel = vec2(1.0 / diffuse_texture_width, 1.0 / diffuse_texture_height);
-vec2 dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height));
+//vec2 diffuse_texel = vec2(1.0 / diffuse_texture_width, 1.0 / diffuse_texture_height);
+vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height));
 
 // functions
 

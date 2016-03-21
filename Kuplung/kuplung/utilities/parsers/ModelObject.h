@@ -51,6 +51,7 @@ struct objMaterial {
     objMaterialImage textures_specularExp;
     objMaterialImage textures_dissolve;
     objMaterialImage textures_bump;
+    objMaterialImage textures_displacement;
 };
 
 struct objModelFace {
