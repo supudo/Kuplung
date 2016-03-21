@@ -369,6 +369,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             if (ImGui::Button("Material Editor"))
                 (*meshModelFaces)[this->selectedObject]->showMaterialEditor = true;
             ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[this->selectedObject]->Setting_ParallaxMapping);
+            ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[this->selectedObject]->Setting_UseTessellation);
             this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
             this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
             this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[this->selectedObject]->materialAmbient->color, &(*meshModelFaces)[this->selectedObject]->materialAmbient->colorPickerOpen);

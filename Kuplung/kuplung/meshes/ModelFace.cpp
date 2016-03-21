@@ -27,7 +27,7 @@ ModelFace* ModelFace::clone(int modelID) {
     mmf->matrixModel = this->matrixModel;
     mmf->matrixProjection = this->matrixProjection;
 
-    mmf->glUseTessellation = this->glUseTessellation;
+    mmf->Setting_UseTessellation = this->Setting_UseTessellation;
     mmf->ModelID = this->ModelID;
     mmf->oFace = this->oFace;
 
@@ -116,7 +116,7 @@ void ModelFace::destroy() {
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDetachShader(this->shaderProgram, this->shaderGeometry);
-    if (this->glUseTessellation) {
+    if (this->Setting_UseTessellation) {
         glDetachShader(this->shaderProgram, this->shaderTessControl);
         glDetachShader(this->shaderProgram, this->shaderTessEval);
     }
@@ -125,7 +125,7 @@ void ModelFace::destroy() {
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
     glDeleteShader(this->shaderGeometry);
-    if (this->glUseTessellation) {
+    if (this->Setting_UseTessellation) {
         glDeleteShader(this->shaderTessControl);
         glDeleteShader(this->shaderTessEval);
     }
@@ -150,7 +150,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->mathHelper = new Maths();
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-    this->glUseTessellation = false;
+    this->Setting_UseTessellation = false;
     this->showMaterialEditor = false;
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
@@ -349,7 +349,7 @@ bool ModelFace::initShaderProgram() {
 
     bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    if (this->glUseTessellation) {
+    if (this->Setting_UseTessellation) {
         // tessellation control shader
         shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
         std::string shaderSourceTCS = readFile(shaderPath.c_str());
