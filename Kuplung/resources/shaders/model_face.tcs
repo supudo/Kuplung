@@ -2,30 +2,46 @@
 
 layout(vertices = 3) out;
 
-in vec3 vso_vertexPosition[];
-in vec2 vso_textureCoord[];
-in vec3 vso_vertexNormal[];
-in vec3 vso_tangent[];
-in vec3 vso_bitangent[];
-in vec3 vso_displacementLocation[];
-in float vso_isBorder[];
+#define ID gl_InvocationID
+
+in vec3 tcs_vertexPosition[];
+in vec2 tcs_textureCoord[];
+in vec3 tcs_vertexNormal0[];
+in vec3 tcs_vertexNormal[];
+in vec3 tcs_tangent0[];
+in vec3 tcs_tangent[];
+in vec3 tcs_bitangent0[];
+in vec3 tcs_bitangent[];
+in vec3 tcs_displacementLocation[];
+in float tcs_isBorder[];
 
 out vec3 tes_vertexPosition[];
 out vec2 tes_textureCoord[];
+out vec3 tes_vertexNormal0[];
 out vec3 tes_vertexNormal[];
+out vec3 tes_tangent0[];
 out vec3 tes_tangent[];
+out vec3 tes_bitangent0[];
 out vec3 tes_bitangent[];
 out vec3 tes_displacementLocation[];
 out float tes_isBorder[];
 
-#define ID gl_InvocationID
-
 void main() {
-    tes_vertexPosition[ID] = vso_vertexPosition[ID];
-    tes_textureCoord[ID] = vso_textureCoord[ID];
-    tes_vertexNormal[ID] = vso_vertexNormal[ID];
-    tes_tangent[ID] = vso_tangent[ID];
-    tes_bitangent[ID] = vso_bitangent[ID];
-    tes_displacementLocation[ID] = vso_displacementLocation[ID];
-    tes_isBorder[ID] = vso_isBorder[ID];
+    tes_vertexPosition[ID] = tcs_vertexPosition[ID];
+    tes_textureCoord[ID] = tcs_textureCoord[ID];
+    tes_vertexNormal0[ID] = tcs_vertexNormal0[ID];
+    tes_vertexNormal[ID] = tcs_vertexNormal[ID];
+    tes_tangent0[ID] = tcs_tangent0[ID];
+    tes_tangent[ID] = tcs_tangent[ID];
+    tes_bitangent0[ID] = tcs_bitangent0[ID];
+    tes_bitangent[ID] = tcs_bitangent[ID];
+    tes_displacementLocation[ID] = tcs_displacementLocation[ID];
+    tes_isBorder[ID] = tcs_isBorder[ID];
+
+    if (ID == 0) {
+        gl_TessLevelInner[0] = 1.0;
+        gl_TessLevelOuter[0] = 1.0;
+        gl_TessLevelOuter[1] = 1.0;
+        gl_TessLevelOuter[2] = 1.0;
+    }
 }
