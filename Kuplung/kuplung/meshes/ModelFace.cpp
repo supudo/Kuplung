@@ -382,6 +382,8 @@ bool ModelFace::initShaderProgram() {
         return success = false;
     }
     else {
+        glPatchParameteri(GL_PATCH_VERTICES, 3);
+
         this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
         this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
@@ -975,12 +977,7 @@ void ModelFace::drawOnly() {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    if (this->Setting_UseTessellation) {
-        glPatchParameteri(GL_PATCH_VERTICES, 3);
-        glDrawElements(GL_PATCHES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
-    }
-    else
-        glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements((this->Setting_UseTessellation ? GL_PATCHES : GL_TRIANGLES), this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
