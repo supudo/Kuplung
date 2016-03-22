@@ -1,6 +1,6 @@
 #version 410 core
 
-layout(vertices = 6) out;
+layout(vertices = 3) out;
 
 #define ID gl_InvocationID
 
