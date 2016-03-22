@@ -371,7 +371,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[this->selectedObject]->Setting_ParallaxMapping);
             ImGui::Separator();
             ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[this->selectedObject]->Setting_UseTessellation);
-            this->helperUI->addControlsIntegerSlider("Level", 24, 0, 10, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevel);
+            this->helperUI->addControlsIntegerSlider("Level", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevel);
             ImGui::Separator();
             this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
             this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
