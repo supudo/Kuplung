@@ -21,7 +21,8 @@ typedef enum objMaterialImageType {
     objMaterialImageType_Specular,
     objMaterialImageType_SpecularExp,
     objMaterialImageType_Dissolve,
-    objMaterialImageType_Bump
+    objMaterialImageType_Bump,
+    objMaterialImageType_Displacement
 } objMaterialImageType;
 
 struct objMaterialImage {

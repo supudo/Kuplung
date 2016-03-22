@@ -563,6 +563,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
         // bump map texture
         this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_bump, objMaterialImageType_Bump, &this->vboTextureBump);
+
+        // displacement map texture
+        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_displacement, objMaterialImageType_Displacement, &this->vboTextureDisplacement);
     }
 
     // indices
@@ -624,6 +627,9 @@ void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialI
                     break;
                 case objMaterialImageType_Bump:
                     texName = "bump";
+                    break;
+                case objMaterialImageType_Displacement:
+                    texName = "displacement";
                     break;
                 default:
                     break;

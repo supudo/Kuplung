@@ -13,6 +13,7 @@ in vec3 gs_bitangent0[3];
 in vec3 gs_bitangent[3];
 in vec3 gs_displacementLocation[3];
 in float gs_isBorder[3];
+in float gs_height[3];
 
 out vec3 fs_vertexPosition;
 out vec2 fs_textureCoord;

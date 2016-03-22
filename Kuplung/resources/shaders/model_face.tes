@@ -53,6 +53,7 @@ struct ModelMaterial {
     bool has_texture_bump;
     bool has_texture_displacement;
 };
+
 uniform ModelMaterial material;
 
 vec3 interpolate3D(vec3 v0, vec3 v1, vec3 v2) {
