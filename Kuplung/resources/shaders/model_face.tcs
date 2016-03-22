@@ -5,7 +5,6 @@ layout(vertices = 3) out;
 #define ID gl_InvocationID
 
 uniform mat4 vs_MVPMatrix;
-uniform mat4 vs_MVMatrix;
 uniform mat3 vs_normalMatrix;
 uniform float tcs_TessellationLevel;
 

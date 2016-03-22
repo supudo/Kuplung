@@ -977,7 +977,6 @@ void ModelFace::drawOnly() {
 
     if (this->Setting_UseTessellation) {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
-        //glDrawArrays(GL_PATCHES, 0, this->oFace.indicesCount);
         glDrawElements(GL_PATCHES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
     }
     else
