@@ -42,10 +42,10 @@ void main() {
     tes_displacementLocation[ID] = tcs_displacementLocation[ID];
     tes_isBorder[ID] = tcs_isBorder[ID];
 
-    //if (ID == 0) {
+    if (ID == 0) {
         gl_TessLevelInner[0] = tcs_TessellationLevel;
         gl_TessLevelOuter[0] = tcs_TessellationLevel;
         gl_TessLevelOuter[1] = tcs_TessellationLevel;
         gl_TessLevelOuter[2] = tcs_TessellationLevel;
-    //}
+    }
 }
