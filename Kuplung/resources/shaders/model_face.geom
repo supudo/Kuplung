@@ -3,8 +3,6 @@
 layout(triangles) in;
 layout(triangle_strip, max_vertices = 6) out;
 
-uniform mat4 vs_MVMatrix;
-
 in vec3 gs_vertexPosition[3];
 in vec2 gs_textureCoord[3];
 in vec3 gs_vertexNormal0[3];
@@ -51,10 +49,9 @@ void main() {
         gs_displacementLocation[0].z > 0.0) {
         for (int i=0; i<gl_in.length(); i++) {
             vec3 newPosition = gs_displacementLocation[i].xyz;
-            float dx = 1.0 + newPosition.x;
-            float dy = 1.0 + newPosition.y;
-            float dz = 1.0 + newPosition.z;
-            vec4 eyeVec = vs_MVMatrix * vec4(dx, dy, dz, 1.0);
+            float dx = newPosition.x;
+            float dy = newPosition.y;
+            float dz = newPosition.z;
             gl_Position = gl_in[i].gl_Position + vec4(dx, dy, dz, 1.0);
 
             fs_vertexPosition = gs_vertexPosition[i];
