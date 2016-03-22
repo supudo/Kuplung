@@ -379,6 +379,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             }
             this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
             this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
+            ImGui::Separator();
             this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[this->selectedObject]->materialAmbient->color, &(*meshModelFaces)[this->selectedObject]->materialAmbient->colorPickerOpen);
             this->helperUI->addControlColor3("Diffuse Color", &(*meshModelFaces)[this->selectedObject]->materialDiffuse->color, &(*meshModelFaces)[this->selectedObject]->materialDiffuse->colorPickerOpen);
             this->helperUI->addControlColor3("Specular Color", &(*meshModelFaces)[this->selectedObject]->materialSpecular->color, &(*meshModelFaces)[this->selectedObject]->materialSpecular->colorPickerOpen);
