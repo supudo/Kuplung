@@ -16,8 +16,8 @@ vec3 calculateBumpedNormal(vec2 textureCoordinate) {
 // =================================================
 
 vec2 calculateParallaxMapping(vec2 texCoords, vec3 viewDir) {
-    // float height =  texture(material.sampler_displacement, texCoords).r;
-    // return texCoords - viewDir.xy * (height * material.heightScale);
+    //float height =  texture(material.sampler_displacement, texCoords).r;
+    //return texCoords - viewDir.xy * (height * material.heightScale);
 
     // number of depth layers
     const float minLayers = 8;
@@ -35,7 +35,7 @@ vec2 calculateParallaxMapping(vec2 texCoords, vec3 viewDir) {
     vec2 deltaTexCoords = P / numLayers;
 
     // get initial values
-    vec2  currentTexCoords = texCoords;
+    vec2 currentTexCoords = texCoords;
     float currentDepthMapValue = texture(material.sampler_displacement, currentTexCoords).r;
 
     while (currentLayerDepth < currentDepthMapValue) {
@@ -52,7 +52,7 @@ vec2 calculateParallaxMapping(vec2 texCoords, vec3 viewDir) {
     vec2 prevTexCoords = currentTexCoords + deltaTexCoords;
 
     // get depth after and before collision for linear interpolation
-    float afterDepth  = currentDepthMapValue - currentLayerDepth;
+    float afterDepth = currentDepthMapValue - currentLayerDepth;
     float beforeDepth = texture(material.sampler_displacement, prevTexCoords).r - currentLayerDepth + layerDepth;
 
     // interpolation of texture coordinates
@@ -60,5 +60,5 @@ vec2 calculateParallaxMapping(vec2 texCoords, vec3 viewDir) {
     vec2 finalTexCoords = prevTexCoords * weight + currentTexCoords * (1.0 - weight);
 
     return finalTexCoords;
-    // return currentTexCoords;
+    //return currentTexCoords;
 }
