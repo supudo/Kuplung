@@ -150,7 +150,8 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->mathHelper = new Maths();
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
-    this->Setting_UseTessellation = false;
+    this->Setting_UseTessellation = true;
+    this->Setting_TessellationLevel = 1;
     this->showMaterialEditor = false;
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
@@ -223,6 +224,7 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
+    this->Setting_TessellationLevel = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -284,6 +286,7 @@ void ModelFace::initProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
+    this->Setting_TessellationLevel = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -385,8 +388,8 @@ bool ModelFace::initShaderProgram() {
         this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
-        // misc
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
+        this->glTCS_TessellationLevel = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevel");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
@@ -397,6 +400,8 @@ bool ModelFace::initShaderProgram() {
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
         this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
+        this->glFS_MVMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVMatrix");
+        this->glVS_NormalMatrix = glGetUniformLocation(this->shaderProgram, "vs_normalMatrix");
 
         this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
         this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
@@ -691,6 +696,9 @@ void ModelFace::renderModel() {
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+        glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera * this->matrixModel));
+        glm::mat3 matrixNormal = glm::mat3(this->matrixModel);
+        glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
         glm::mat4 matrixWorld = this->matrixModel;
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
@@ -712,6 +720,9 @@ void ModelFace::renderModel() {
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
+
+        // tessellation level
+        glUniform1f(this->glTCS_TessellationLevel, (float)this->Setting_TessellationLevel);
 
         // cel-shading
         glUniform1i(this->glFS_CelShading, this->Setting_CelShading);
@@ -964,7 +975,13 @@ void ModelFace::drawOnly() {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    if (this->Setting_UseTessellation) {
+        glPatchParameteri(GL_PATCH_VERTICES, 3);
+        //glDrawArrays(GL_PATCHES, 0, this->oFace.indicesCount);
+        glDrawElements(GL_PATCHES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    }
+    else
+        glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

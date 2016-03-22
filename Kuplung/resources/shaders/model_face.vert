@@ -12,42 +12,28 @@ in vec3 vs_vertexNormal;
 in vec3 vs_tangent;
 in vec3 vs_bitangent;
 
-//out vec3 vso_vertexPosition;
-//out vec2 vso_textureCoord;
-//out vec3 vso_vertexNormal;
-//out vec3 vso_displacementLocation;
-//out float vso_isBorder;
-
-out VS_OUT {
-    vec3 gs_vertexPosition;
-    vec2 gs_textureCoord;
-    vec3 gs_vertexNormal0;
-    vec3 gs_vertexNormal;
-    vec3 gs_tangent0;
-    vec3 gs_tangent;
-    vec3 gs_bitangent0;
-    vec3 gs_bitangent;
-    vec3 gs_displacementLocation;
-    float gs_isBorder;
-} vs_out;
+out vec3 tcs_vertexPosition;
+out vec2 tcs_textureCoord;
+out vec3 tcs_vertexNormal0;
+out vec3 tcs_vertexNormal;
+out vec3 tcs_tangent0;
+out vec3 tcs_tangent;
+out vec3 tcs_bitangent0;
+out vec3 tcs_bitangent;
+out vec3 tcs_displacementLocation;
+out float tcs_isBorder;
 
 void main(void) {
-//    vso_vertexPosition = vs_vertexPosition;
-//    vso_textureCoord = vs_textureCoord;
-//    vso_vertexNormal = vs_vertexNormal;
-//    vso_displacementLocation = vs_displacementLocation;
-//    vso_isBorder = vs_isBorder;
-
-    vs_out.gs_vertexPosition = vs_vertexPosition;
-    vs_out.gs_textureCoord = vs_textureCoord;
-    vs_out.gs_vertexNormal0 = vs_vertexNormal;
-    vs_out.gs_vertexNormal = (vs_WorldMatrix * vec4(vs_vertexNormal, 0.0)).xyz;
-    vs_out.gs_tangent0 = vs_tangent;
-    vs_out.gs_tangent = (vs_WorldMatrix * vec4(vs_tangent, 0.0)).xyz;
-    vs_out.gs_bitangent0 = vs_bitangent;
-    vs_out.gs_bitangent = (vs_WorldMatrix * vec4(vs_bitangent, 0.0)).xyz;
-    vs_out.gs_displacementLocation = vs_displacementLocation;
-    vs_out.gs_isBorder = vs_isBorder;
+    tcs_vertexPosition = vs_vertexPosition;
+    tcs_textureCoord = vs_textureCoord;
+    tcs_vertexNormal0 = vs_vertexNormal;
+    tcs_vertexNormal = (vs_WorldMatrix * vec4(vs_vertexNormal, 0.0)).xyz;
+    tcs_tangent0 = vs_tangent;
+    tcs_tangent = (vs_WorldMatrix * vec4(vs_tangent, 0.0)).xyz;
+    tcs_bitangent0 = vs_bitangent;
+    tcs_bitangent = (vs_WorldMatrix * vec4(vs_bitangent, 0.0)).xyz;
+    tcs_displacementLocation = vs_displacementLocation;
+    tcs_isBorder = vs_isBorder;
 
     gl_Position = vs_MVPMatrix * vec4(vs_vertexPosition, 1.0);
 }

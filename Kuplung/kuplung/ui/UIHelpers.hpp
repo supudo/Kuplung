@@ -24,6 +24,7 @@ public:
 
     void addControlsXYZ(std::string property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit);
     void addControlsSlider(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    void addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue);
     void addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
     void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
     void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
@@ -33,7 +34,6 @@ private:
 
     void animateValue(bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float limit, bool doMinus);
     void animateValueAsync(bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float limit, bool doMinus);
-
 };
 
 #endif /* UIHelpers_hpp */

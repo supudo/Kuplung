@@ -4,6 +4,11 @@ layout(vertices = 3) out;
 
 #define ID gl_InvocationID
 
+uniform mat4 vs_MVPMatrix;
+uniform mat4 vs_MVMatrix;
+uniform mat3 vs_normalMatrix;
+uniform float tcs_TessellationLevel;
+
 in vec3 tcs_vertexPosition[];
 in vec2 tcs_textureCoord[];
 in vec3 tcs_vertexNormal0[];
@@ -39,9 +44,9 @@ void main() {
     tes_isBorder[ID] = tcs_isBorder[ID];
 
     if (ID == 0) {
-        gl_TessLevelInner[0] = 1.0;
-        gl_TessLevelOuter[0] = 1.0;
-        gl_TessLevelOuter[1] = 1.0;
-        gl_TessLevelOuter[2] = 1.0;
+        gl_TessLevelInner[0] = tcs_TessellationLevel;
+        gl_TessLevelOuter[0] = tcs_TessellationLevel;
+        gl_TessLevelOuter[1] = tcs_TessellationLevel;
+        gl_TessLevelOuter[2] = tcs_TessellationLevel;
     }
 }

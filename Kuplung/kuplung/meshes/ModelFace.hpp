@@ -68,7 +68,6 @@ public:
     void setOptionsOutlineColor(glm::vec4 outlineColor);
     void setOptionsOutlineThickness(float thickness);
 
-    bool Setting_UseTessellation;
     objModelFace oFace;
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
@@ -79,8 +78,9 @@ public:
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
 
-    bool Setting_CelShading, Setting_Wireframe;
+    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation;
     float Setting_Alpha;
+    int Setting_TessellationLevel;
     ObjectEye *Settings_Eye;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
@@ -148,7 +148,7 @@ private:
     GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
-    GLuint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix;
+    GLuint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
@@ -156,6 +156,7 @@ private:
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLuint glFS_OutlineColor, glVS_IsBorder;
     GLuint glFS_ScreenResX, glFS_ScreenResY;
+    GLuint glTCS_TessellationLevel;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
