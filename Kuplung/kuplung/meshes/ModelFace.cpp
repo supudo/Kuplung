@@ -10,6 +10,7 @@
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_inverse.hpp>
 
 #define STBI_FAILURE_USERMSG
 #define STB_IMAGE_IMPLEMENTATION
@@ -697,9 +698,13 @@ void ModelFace::renderModel() {
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
-        glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera * this->matrixModel));
-        glm::mat3 matrixNormal = glm::mat3(this->matrixModel);
+
+        glm::mat4 matrixModelView = this->matrixCamera * this->matrixModel;
+        glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(matrixModelView));
+
+        glm::mat3 matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixModel * this->matrixCamera));
         glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
         glm::mat4 matrixWorld = this->matrixModel;
