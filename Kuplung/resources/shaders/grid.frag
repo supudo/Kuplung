@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 
 uniform bool a_actAsMirror;
 uniform float a_alpha;

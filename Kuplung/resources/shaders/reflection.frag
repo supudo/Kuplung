@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 
 const vec3 xUnitVec = vec3(1.0, 0.0, 0.0);
 const vec3 yUnitVec = vec3(0.0, 1.0, 0.0);

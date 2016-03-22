@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 
 uniform mat4 vs_MVPMatrix;
 uniform mat4 vs_WorldMatrix;

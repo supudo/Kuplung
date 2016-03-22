@@ -1,4 +1,4 @@
-#version 410
+#version 410 core
 
 uniform sampler2D u_sampler;
 uniform bool fs_useColor;
