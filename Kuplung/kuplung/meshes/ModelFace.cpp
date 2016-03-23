@@ -152,7 +152,8 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UseTessellation = true;
-    this->Setting_TessellationLevel = 1;
+    this->Setting_TessellationLevelIn = 1;
+    this->Setting_TessellationLevelOut = 1;
     this->showMaterialEditor = false;
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
@@ -225,7 +226,8 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
-    this->Setting_TessellationLevel = 1;
+    this->Setting_TessellationLevelIn = 1;
+    this->Setting_TessellationLevelOut = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -287,7 +289,8 @@ void ModelFace::initProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
-    this->Setting_TessellationLevel = 1;
+    this->Setting_TessellationLevelIn = 1;
+    this->Setting_TessellationLevelOut = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -392,7 +395,8 @@ bool ModelFace::initShaderProgram() {
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
-        this->glTCS_TessellationLevel = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevel");
+        this->glTCS_TessellationLevelIn = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelIn");
+        this->glTCS_TessellationLevelOut = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelOut");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
@@ -735,7 +739,8 @@ void ModelFace::renderModel() {
         }
 
         // tessellation level
-        glUniform1f(this->glTCS_TessellationLevel, (float)this->Setting_TessellationLevel);
+        glUniform1f(this->glTCS_TessellationLevelIn, (float)this->Setting_TessellationLevelIn);
+        glUniform1f(this->glTCS_TessellationLevelOut, (float)this->Setting_TessellationLevelOut);
 
         // cel-shading
         glUniform1i(this->glFS_CelShading, this->Setting_CelShading);

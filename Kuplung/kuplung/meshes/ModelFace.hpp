@@ -80,7 +80,7 @@ public:
 
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation;
     float Setting_Alpha;
-    int Setting_TessellationLevel;
+    int Setting_TessellationLevelIn, Setting_TessellationLevelOut;
     ObjectEye *Settings_Eye;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
@@ -156,7 +156,7 @@ private:
     GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLuint glFS_OutlineColor, glVS_IsBorder;
     GLuint glFS_ScreenResX, glFS_ScreenResY;
-    GLuint glTCS_TessellationLevel;
+    GLuint glTCS_TessellationLevelIn, glTCS_TessellationLevelOut;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
