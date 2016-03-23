@@ -26,6 +26,7 @@ out vec3 gs_bitangent0;
 out vec3 gs_bitangent;
 out vec3 gs_displacementLocation;
 out float gs_isBorder;
+out float gs_height;
 
 struct ModelMaterial {
     vec3 ambient;
@@ -77,9 +78,10 @@ void main() {
     gs_displacementLocation = interpolate3D(tes_displacementLocation[0], tes_displacementLocation[1], tes_displacementLocation[2]);
     gs_isBorder = tes_isBorder[0];
 
+    gs_height = 1.0;
     if (tcs_UseTessellation && material.has_texture_displacement) {
-        float height = texture(material.sampler_displacement, gs_textureCoord).x;
-        position += gs_vertexNormal0 * height * material.heightScale;
+        gs_height = texture(material.sampler_displacement, gs_textureCoord).x;
+        position += gs_vertexNormal0 * gs_height * material.heightScale;
     }
     gs_vertexPosition = position;
 

@@ -1,10 +1,12 @@
 #version 410 core
 
 layout(triangles) in;
-layout(triangle_strip, max_vertices = 3) out;
+layout(triangle_strip, max_vertices = 6) out;
 
 uniform mat4 vs_MVPMatrix;
 uniform mat4 vs_MVMatrix;
+uniform bool tcs_UseTessellation;
+uniform int tcs_TessellationSubdivision;
 
 in vec3 gs_vertexPosition[3];
 in vec2 gs_textureCoord[3];
