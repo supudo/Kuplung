@@ -55,7 +55,7 @@ public:
     void draw(ModelFace *face, bool* p_opened = NULL);
 
 private:
-    void initFaceMaterial(ModelFace *face);
+    void initMaterialNodes(ModelFace *face);
 
     std::map<int, MaterialEditor_Node*> nodes;
     ImVector<MaterialEditor_NodeLink> links;

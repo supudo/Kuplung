@@ -31,13 +31,13 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::Begin("Material Editor", p_opened, ImGuiWindowFlags_ShowBorders);
 
     if (!this->inited)
-        this->initFaceMaterial(face);
+        this->initMaterialNodes(face);
 
     // Draw a list of nodes on the left side
     bool open_context_menu = false;
     int node_hovered_in_list = -1;
     int node_hovered_in_scene = -1;
-    ImGui::BeginChild("node_list", ImVec2(100,0));
+    ImGui::BeginChild("node_list", ImVec2(100, 0));
     ImGui::Text("Nodes");
     ImGui::Separator();
     for (std::map<int, MaterialEditor_Node*>::iterator iter = this->nodes.begin(); iter != this->nodes.end(); ++iter) {
@@ -60,13 +60,13 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 
     // Create our child canvas
-    ImGui::Text("Hold middle mouse button to scroll (%.2f,%.2f)", this->scrolling.x, this->scrolling.y);
-    ImGui::SameLine(ImGui::GetWindowWidth()-100);
+    ImGui::Text("Hold middle mouse button to scroll (%.2f, %.2f)", this->scrolling.x, this->scrolling.y);
+    ImGui::SameLine(ImGui::GetWindowWidth() - 100);
     ImGui::Checkbox("Show grid", &this->show_grid);
-    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1,1));
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0,0));
-    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60,60,70,200));
-    ImGui::BeginChild("scrolling_region", ImVec2(0,0), true, ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoMove);
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
+    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(120.0f);
 
     ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
@@ -75,14 +75,14 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     // Display grid
     if (this->show_grid) {
-        ImU32 GRID_COLOR = ImColor(200,200,200,40);
+        ImU32 GRID_COLOR = ImColor(200, 200, 200, 40);
         float GRID_SZ = 64.0f;
         ImVec2 win_pos = ImGui::GetCursorScreenPos();
         ImVec2 canvas_sz = ImGui::GetWindowSize();
-        for (float x = fmodf(offset.x,GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
-            draw_list->AddLine(ImVec2(x,0.0f)+win_pos, ImVec2(x,canvas_sz.y)+win_pos, GRID_COLOR);
-        for (float y = fmodf(offset.y,GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
-            draw_list->AddLine(ImVec2(0.0f,y)+win_pos, ImVec2(canvas_sz.x,y)+win_pos, GRID_COLOR);
+        for (float x = fmodf(offset.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+            draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+        for (float y = fmodf(offset.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+            draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
     }
 
     // Display links
@@ -93,7 +93,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         MaterialEditor_Node* node_out = this->nodes[link->OutputIdx];
         ImVec2 p1 = offset + node_inp->GetOutputSlotPos(link->InputSlot);
         ImVec2 p2 = offset + node_out->GetInputSlotPos(link->OutputSlot);
-        draw_list->AddBezierCurve(p1, p1+ImVec2(+50,0), p2+ImVec2(-50,0), p2, ImColor(200,200,100), 3.0f);
+        draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, ImColor(200, 200, 100), 3.0f);
     }
 
     // Display nodes
@@ -131,13 +131,13 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         if (node_moving_active && ImGui::IsMouseDragging(0))
             node->Pos = node->Pos + ImGui::GetIO().MouseDelta;
 
-        ImU32 node_bg_color = (node_hovered_in_list == node->ID || node_hovered_in_scene == node->ID || (node_hovered_in_list == -1 && this->node_selected == node->ID)) ? ImColor(75,75,75) : ImColor(60,60,60);
+        ImU32 node_bg_color = (node_hovered_in_list == node->ID || node_hovered_in_scene == node->ID || (node_hovered_in_list == -1 && this->node_selected == node->ID)) ? ImColor(75, 75, 75) : ImColor(60, 60, 60);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
-        draw_list->AddRect(node_rect_min, node_rect_max, ImColor(100,100,100), 4.0f);
+        draw_list->AddRect(node_rect_min, node_rect_max, ImColor(100, 100, 100), 4.0f);
         for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++)
-            draw_list->AddCircleFilled(offset + node->GetInputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150,150,150,150));
+            draw_list->AddCircleFilled(offset + node->GetInputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
         for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++)
-            draw_list->AddCircleFilled(offset + node->GetOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150,150,150,150));
+            draw_list->AddCircleFilled(offset + node->GetOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
 
         ImGui::PopID();
     }
@@ -157,7 +157,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     }
 
     // Draw context menu
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8,8));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(8, 8));
     if (ImGui::BeginPopup("context_menu")) {
         MaterialEditor_Node* node = this->node_selected != -1 ? this->nodes[this->node_selected] : NULL;
         ImVec2 scene_pos = ImGui::GetMousePosOnOpeningCurrentPopup() - offset;
@@ -170,7 +170,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         }
         else {
             if (ImGui::MenuItem("Add"))
-                this->nodes[(int)this->nodes.size()] = new MaterialEditor_Node(this->nodes.size(), MaterialEditor_NodeType_Color, "New node", scene_pos, 0.5f, ImColor(100,100,200), 2, 2);
+                this->nodes[(int)this->nodes.size()] = new MaterialEditor_Node((int)this->nodes.size(), MaterialEditor_NodeType_Color, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2);
             if (ImGui::MenuItem("Paste", NULL, false, false)) {}
         }
         ImGui::EndPopup();
@@ -190,13 +190,13 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::End();
 }
 
-void MaterialEditor::initFaceMaterial(ModelFace *face) {
+void MaterialEditor::initMaterialNodes(ModelFace *face) {
     int materialNodesCounter = 0;
     int slotsCounter = 0;
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "")
-        this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Image, "Ambient Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_ambient.image);
+        this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Image, "Ambient Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.image);
     else {
         float r = face->oFace.faceMaterial.ambient.r;
         float g = face->oFace.faceMaterial.ambient.g;
@@ -209,7 +209,7 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     nodePosition.y += 80;
     if (face->oFace.faceMaterial.textures_diffuse.image != "")
-        this->nodes[1] = new MaterialEditor_Node(1, MaterialEditor_NodeType_Image, "Diffuse Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_diffuse.image);
+        this->nodes[1] = new MaterialEditor_Node(1, MaterialEditor_NodeType_Image, "Diffuse Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.image);
     else {
         float r = face->oFace.faceMaterial.diffuse.r;
         float g = face->oFace.faceMaterial.diffuse.g;
@@ -222,7 +222,7 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
         nodePosition.y += 80;
-        this->nodes[2] = new MaterialEditor_Node(2, MaterialEditor_NodeType_Image, "Dissolve Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_dissolve.image);
+        this->nodes[2] = new MaterialEditor_Node(2, MaterialEditor_NodeType_Image, "Dissolve Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.image);
         this->links.push_back(MaterialEditor_NodeLink(2, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -230,7 +230,7 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     nodePosition.y += 80;
     if (face->oFace.faceMaterial.textures_specular.image != "")
-        this->nodes[3] = new MaterialEditor_Node(3, MaterialEditor_NodeType_Image, "Specular Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_specular.image);
+        this->nodes[3] = new MaterialEditor_Node(3, MaterialEditor_NodeType_Image, "Specular Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.image);
     else {
         float r = face->oFace.faceMaterial.specular.r;
         float g = face->oFace.faceMaterial.specular.g;
@@ -243,7 +243,7 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
         nodePosition.y += 80;
-        this->nodes[4] = new MaterialEditor_Node(4, MaterialEditor_NodeType_Image, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_specularExp.image);
+        this->nodes[4] = new MaterialEditor_Node(4, MaterialEditor_NodeType_Image, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.image);
         this->links.push_back(MaterialEditor_NodeLink(4, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -251,7 +251,7 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
         nodePosition.y += 80;
-        this->nodes[5] = new MaterialEditor_Node(5, MaterialEditor_NodeType_Image, "Bump Map", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_bump.image);
+        this->nodes[5] = new MaterialEditor_Node(5, MaterialEditor_NodeType_Image, "Bump Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.image);
         this->links.push_back(MaterialEditor_NodeLink(5, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -259,14 +259,13 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
         nodePosition.y += 80;
-        this->nodes[6] = new MaterialEditor_Node(6, MaterialEditor_NodeType_Image, "Displacement Map", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_displacement.image);
+        this->nodes[6] = new MaterialEditor_Node(6, MaterialEditor_NodeType_Image, "Displacement Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.image);
         this->links.push_back(MaterialEditor_NodeLink(6, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
     }
 
-    float fc_y = nodePosition.y / 2;
-    this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270.0, fc_y), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
+    this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
 
     this->inited = true;
 }
