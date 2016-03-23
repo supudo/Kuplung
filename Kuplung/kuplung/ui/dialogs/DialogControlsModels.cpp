@@ -372,8 +372,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             ImGui::Separator();
             ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[this->selectedObject]->Setting_UseTessellation);
             ImGui::Checkbox("Culling", &(*meshModelFaces)[this->selectedObject]->Setting_UseCullFace);
-            this->helperUI->addControlsIntegerSlider("In", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevelIn);
-            this->helperUI->addControlsIntegerSlider("Out", 25, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevelOut);
+            this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationSubdivision);
             ImGui::Separator();
             if (mmf->oFace.faceMaterial.textures_displacement.useTexture) {
                 this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);

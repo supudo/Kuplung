@@ -115,21 +115,17 @@ void ModelFace::destroy() {
     glDisableVertexAttribArray(this->glVS_Bitangent);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
-    glDetachShader(this->shaderProgram, this->shaderFragment);
+    glDetachShader(this->shaderProgram, this->shaderTessControl);
+    glDetachShader(this->shaderProgram, this->shaderTessEval);
     glDetachShader(this->shaderProgram, this->shaderGeometry);
-    if (this->Setting_UseTessellation) {
-        glDetachShader(this->shaderProgram, this->shaderTessControl);
-        glDetachShader(this->shaderProgram, this->shaderTessEval);
-    }
+    glDetachShader(this->shaderProgram, this->shaderFragment);
     glDeleteProgram(this->shaderProgram);
 
     glDeleteShader(this->shaderVertex);
-    glDeleteShader(this->shaderFragment);
+    glDeleteShader(this->shaderTessControl);
+    glDeleteShader(this->shaderTessEval);
     glDeleteShader(this->shaderGeometry);
-    if (this->Setting_UseTessellation) {
-        glDeleteShader(this->shaderTessControl);
-        glDeleteShader(this->shaderTessEval);
-    }
+    glDeleteShader(this->shaderFragment);
 
     glDetachShader(this->shaderProgramReflection, this->shaderVertexReflection);
     glDetachShader(this->shaderProgramReflection, this->shaderFragmentReflection);
@@ -153,8 +149,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UseCullFace = false;
     this->Setting_UseTessellation = true;
-    this->Setting_TessellationLevelIn = 1;
-    this->Setting_TessellationLevelOut = 1;
+    this->Setting_TessellationSubdivision = 1;
     this->showMaterialEditor = false;
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
@@ -227,8 +222,7 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
-    this->Setting_TessellationLevelIn = 1;
-    this->Setting_TessellationLevelOut = 1;
+    this->Setting_TessellationSubdivision = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -290,8 +284,7 @@ void ModelFace::initProperties() {
     this->Setting_LightStrengthAmbient = 1.0;
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
-    this->Setting_TessellationLevelIn = 1;
-    this->Setting_TessellationLevelOut = 1;
+    this->Setting_TessellationSubdivision = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;
@@ -326,6 +319,16 @@ bool ModelFace::initShaderProgram() {
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
+    // tessellation control shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+    std::string shaderSourceTCS = readFile(shaderPath.c_str());
+    const char *shader_tess_control = shaderSourceTCS.c_str();
+
+    // tessellation evaluation shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+    std::string shaderSourceTES = readFile(shaderPath.c_str());
+    const char *shader_tess_eval = shaderSourceTES.c_str();
+
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
     std::string shaderSourceGeometry = readFile(shaderPath.c_str());
@@ -357,20 +360,8 @@ bool ModelFace::initShaderProgram() {
 
     bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    if (this->Setting_UseTessellation) {
-        // tessellation control shader
-        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-        std::string shaderSourceTCS = readFile(shaderPath.c_str());
-        const char *shader_tess_control = shaderSourceTCS.c_str();
-
-        // tessellation evaluation shader
-        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-        std::string shaderSourceTES = readFile(shaderPath.c_str());
-        const char *shader_tess_eval = shaderSourceTES.c_str();
-
-        shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
-        shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
-    }
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
@@ -398,8 +389,7 @@ bool ModelFace::initShaderProgram() {
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
         this->glTCS_UseTessellation = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
-        this->glTCS_TessellationLevelIn = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelIn");
-        this->glTCS_TessellationLevelOut = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelOut");
+        this->glTCS_TessellationSubdivision = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationSubdivision");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
@@ -744,8 +734,7 @@ void ModelFace::renderModel() {
         // tessellation
         glUniform1i(this->glTCS_UseCullFace, this->Setting_UseCullFace);
         glUniform1i(this->glTCS_UseTessellation, this->Setting_UseTessellation);
-        glUniform1f(this->glTCS_TessellationLevelIn, (float)this->Setting_TessellationLevelIn);
-        glUniform1f(this->glTCS_TessellationLevelOut, (float)this->Setting_TessellationLevelOut);
+        glUniform1i(this->glTCS_TessellationSubdivision, this->Setting_TessellationSubdivision);
 
         // cel-shading
         glUniform1i(this->glFS_CelShading, this->Setting_CelShading);
@@ -998,7 +987,8 @@ void ModelFace::drawOnly() {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    glDrawElements((this->Setting_UseTessellation ? GL_PATCHES : GL_TRIANGLES), this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    //glDrawElements((this->Setting_UseTessellation ? GL_PATCHES : GL_TRIANGLES), this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+    glDrawElements(GL_PATCHES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
 
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

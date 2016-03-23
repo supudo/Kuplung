@@ -77,7 +77,7 @@ void main() {
     gs_displacementLocation = interpolate3D(tes_displacementLocation[0], tes_displacementLocation[1], tes_displacementLocation[2]);
     gs_isBorder = tes_isBorder[0];
 
-    if (material.has_texture_displacement) {
+    if (tcs_UseTessellation && material.has_texture_displacement) {
         float height = texture(material.sampler_displacement, gs_textureCoord).x;
         position += gs_vertexNormal0 * height * material.heightScale;
     }
