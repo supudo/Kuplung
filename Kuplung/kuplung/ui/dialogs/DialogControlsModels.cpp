@@ -440,7 +440,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::EndChild();
 
     if ((*meshModelFaces)[this->selectedObject]->showMaterialEditor)
-        this->componentMaterialEditor->draw(&(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
+        this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     ImGui::End();
 }
