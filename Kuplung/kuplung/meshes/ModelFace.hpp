@@ -78,7 +78,7 @@ public:
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
 
-    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation;
+    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
     int Setting_TessellationLevelIn, Setting_TessellationLevelOut;
     ObjectEye *Settings_Eye;
@@ -152,11 +152,9 @@ private:
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
-    GLuint glGS_GeomDisplacementLocation;
-    GLuint glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
-    GLuint glFS_OutlineColor, glVS_IsBorder;
-    GLuint glFS_ScreenResX, glFS_ScreenResY;
-    GLuint glTCS_TessellationLevelIn, glTCS_TessellationLevelOut;
+    GLuint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
+    GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glTCS_UseCullFace;
+    GLuint glTCS_UseTessellation, glTCS_TessellationLevelIn, glTCS_TessellationLevelOut;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;

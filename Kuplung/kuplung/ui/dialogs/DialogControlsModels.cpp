@@ -371,6 +371,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
             ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[this->selectedObject]->Setting_ParallaxMapping);
             ImGui::Separator();
             ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[this->selectedObject]->Setting_UseTessellation);
+            ImGui::Checkbox("Culling", &(*meshModelFaces)[this->selectedObject]->Setting_UseCullFace);
             this->helperUI->addControlsIntegerSlider("In", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevelIn);
             this->helperUI->addControlsIntegerSlider("Out", 25, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationLevelOut);
             ImGui::Separator();

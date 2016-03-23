@@ -151,6 +151,7 @@ void ModelFace::init(std::function<void(std::string)> doLog) {
     this->mathHelper = new Maths();
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    this->Setting_UseCullFace = false;
     this->Setting_UseTessellation = true;
     this->Setting_TessellationLevelIn = 1;
     this->Setting_TessellationLevelOut = 1;
@@ -395,6 +396,8 @@ bool ModelFace::initShaderProgram() {
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
+        this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
+        this->glTCS_UseTessellation = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
         this->glTCS_TessellationLevelIn = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelIn");
         this->glTCS_TessellationLevelOut = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationLevelOut");
 
@@ -738,7 +741,9 @@ void ModelFace::renderModel() {
             glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
 
-        // tessellation level
+        // tessellation
+        glUniform1i(this->glTCS_UseCullFace, this->Setting_UseCullFace);
+        glUniform1i(this->glTCS_UseTessellation, this->Setting_UseTessellation);
         glUniform1f(this->glTCS_TessellationLevelIn, (float)this->Setting_TessellationLevelIn);
         glUniform1f(this->glTCS_TessellationLevelOut, (float)this->Setting_TessellationLevelOut);
 

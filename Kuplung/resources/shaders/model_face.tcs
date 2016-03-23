@@ -7,6 +7,9 @@ layout(vertices = 3) out;
 uniform mat4 vs_MVPMatrix;
 uniform mat4 vs_MVMatrix;
 uniform mat3 vs_normalMatrix;
+
+uniform bool tcs_UseTessellation;
+uniform bool tcs_UseCullFace;
 uniform float tcs_TessellationLevelOut;
 uniform float tcs_TessellationLevelIn;
 
@@ -55,10 +58,39 @@ void main() {
     tes_isBorder[ID] = tcs_isBorder[ID];
 
     if (ID == 0) {
-        gl_TessLevelInner[0] = tcs_TessellationLevelIn;
-        gl_TessLevelOuter[0] = tcs_TessellationLevelOut;
-        gl_TessLevelOuter[1] = tcs_TessellationLevelOut;
-        gl_TessLevelOuter[2] = tcs_TessellationLevelOut;
+        if (!tcs_UseTessellation) {
+            gl_TessLevelInner[0] = tcs_TessellationLevelIn;
+            gl_TessLevelOuter[0] = tcs_TessellationLevelOut;
+            gl_TessLevelOuter[1] = tcs_TessellationLevelOut;
+            gl_TessLevelOuter[2] = tcs_TessellationLevelOut;
+        }
+        else {
+//            gl_TessLevelInner[0] = tcs_TessellationLevelIn;
+//            gl_TessLevelOuter[0] = tcs_TessellationLevelOut;
+//            gl_TessLevelOuter[1] = tcs_TessellationLevelOut;
+//            gl_TessLevelOuter[2] = tcs_TessellationLevelOut;
+            vec4 ss0 = project(tcs_vertexPosition[0]);
+            vec4 ss1 = project(tcs_vertexPosition[1]);
+            vec4 ss2 = project(tcs_vertexPosition[2]);
+            float e0 = level(ss1, ss2);
+            float e1 = level(ss0, ss2);
+            float e2 = level(ss1, ss0);
+
+            vec3 normal = vs_normalMatrix * cross(tcs_vertexPosition[2] - tcs_vertexPosition[0] , tcs_vertexPosition[1] - tcs_vertexPosition[0]);
+            vec4 eyePos = vs_MVMatrix * vec4(tcs_vertexPosition[0], 1);
+            float dtv = dot(normalize(normal), normalize(eyePos.xyz));
+
+            if (dtv < -0.0 && tcs_UseCullFace) {
+                e0 = 0;
+                e1 = 0;
+                e2 = 0;
+            }
+
+            gl_TessLevelInner[0] = (e0 + e1 + e2) / 3;
+            gl_TessLevelOuter[0] = e0;
+            gl_TessLevelOuter[1] = e1;
+            gl_TessLevelOuter[2] = e2;
+        }
     }
 
 //    if (ID == 0) {

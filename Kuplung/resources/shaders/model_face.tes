@@ -3,6 +3,7 @@
 layout(triangles, equal_spacing, ccw) in;
 
 uniform mat4 vs_MVPMatrix;
+uniform bool tcs_UseTessellation;
 
 in vec3 tes_vertexPosition[];
 in vec2 tes_textureCoord[];
