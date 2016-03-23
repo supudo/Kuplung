@@ -191,7 +191,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 }
 
 void MaterialEditor::initFaceMaterial(ModelFace *face) {
-    int materialNodes = 0;
+    int materialNodesCounter = 0;
+    int slotsCounter = 0;
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "")
@@ -202,8 +203,9 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
         float b = face->oFace.faceMaterial.ambient.b;
         this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Color, "Ambient Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1);
     }
-    this->links.push_back(MaterialEditor_NodeLink(0, 0, 999, 0));
-    materialNodes += 1;
+    this->links.push_back(MaterialEditor_NodeLink(0, 0, 999, slotsCounter));
+    materialNodesCounter += 1;
+    slotsCounter += 1;
 
     nodePosition.y += 80;
     if (face->oFace.faceMaterial.textures_diffuse.image != "")
@@ -214,14 +216,16 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
         float b = face->oFace.faceMaterial.diffuse.b;
         this->nodes[1] = new MaterialEditor_Node(1, MaterialEditor_NodeType_Color, "Diffuse Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1);
     }
-    this->links.push_back(MaterialEditor_NodeLink(1, 0, 999, 1));
-    materialNodes += 1;
+    this->links.push_back(MaterialEditor_NodeLink(1, 0, 999, slotsCounter));
+    materialNodesCounter += 1;
+    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
         nodePosition.y += 80;
         this->nodes[2] = new MaterialEditor_Node(2, MaterialEditor_NodeType_Image, "Dissolve Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_dissolve.image);
-        this->links.push_back(MaterialEditor_NodeLink(2, 0, 999, 2));
-        materialNodes += 1;
+        this->links.push_back(MaterialEditor_NodeLink(2, 0, 999, slotsCounter));
+        materialNodesCounter += 1;
+        slotsCounter += 1;
     }
 
     nodePosition.y += 80;
@@ -233,31 +237,36 @@ void MaterialEditor::initFaceMaterial(ModelFace *face) {
         float b = face->oFace.faceMaterial.specular.b;
         this->nodes[3] = new MaterialEditor_Node(3, MaterialEditor_NodeType_Color, "Specular Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1);
     }
-    this->links.push_back(MaterialEditor_NodeLink(3, 0, 999, 3));
-    materialNodes += 1;
+    this->links.push_back(MaterialEditor_NodeLink(3, 0, 999, slotsCounter));
+    materialNodesCounter += 1;
+    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
         nodePosition.y += 80;
         this->nodes[4] = new MaterialEditor_Node(4, MaterialEditor_NodeType_Image, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_specularExp.image);
-        this->links.push_back(MaterialEditor_NodeLink(4, 0, 999, 4));
-        materialNodes += 1;
+        this->links.push_back(MaterialEditor_NodeLink(4, 0, 999, slotsCounter));
+        materialNodesCounter += 1;
+        slotsCounter += 1;
     }
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
         nodePosition.y += 80;
         this->nodes[5] = new MaterialEditor_Node(5, MaterialEditor_NodeType_Image, "Bump Map", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_bump.image);
-        this->links.push_back(MaterialEditor_NodeLink(5, 0, 999, 5));
-        materialNodes += 1;
+        this->links.push_back(MaterialEditor_NodeLink(5, 0, 999, slotsCounter));
+        materialNodesCounter += 1;
+        slotsCounter += 1;
     }
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
         nodePosition.y += 80;
         this->nodes[6] = new MaterialEditor_Node(6, MaterialEditor_NodeType_Image, "Displacement Map", nodePosition, 0.5f, ImColor(255,100,100), 0, 1, face->oFace.faceMaterial.textures_displacement.image);
-        this->links.push_back(MaterialEditor_NodeLink(6, 0, 999, 6));
-        materialNodes += 1;
+        this->links.push_back(MaterialEditor_NodeLink(6, 0, 999, slotsCounter));
+        materialNodesCounter += 1;
+        slotsCounter += 1;
     }
 
-    this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270, 80), 1.0f, ImColor(0, 200, 100), materialNodes, 1);
+    float fc_y = nodePosition.y / 2;
+    this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270.0, fc_y), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
 
     this->inited = true;
 }
