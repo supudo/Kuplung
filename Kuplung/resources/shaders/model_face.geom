@@ -1,7 +1,7 @@
 #version 410 core
 
 layout(triangles) in;
-layout(triangle_strip, max_vertices = 6) out;
+layout(triangle_strip, max_vertices = 3) out;
 
 uniform mat4 vs_MVPMatrix;
 uniform mat4 vs_MVMatrix;
