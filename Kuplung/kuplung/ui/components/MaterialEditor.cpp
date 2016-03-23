@@ -8,6 +8,8 @@
 
 #include "kuplung/ui/components/MaterialEditor.hpp"
 #include <math.h>
+#include "kuplung/ui/iconfonts/IconsFontAwesome.h"
+#include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 
 // Creating a node graph editor for ImGui
 // Quick demo, not production code! This is more of a demo of how to use ImGui to create custom stuff.
@@ -107,9 +109,20 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         bool old_any_active = ImGui::IsAnyItemActive();
         ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
         ImGui::BeginGroup(); // Lock horizontal position
-        ImGui::Text("%s", node->Name);
-        ImGui::SliderFloat("##value", &node->Value, 0.0f, 1.0f, "Alpha %.2f");
-        ImGui::ColorEdit3("##color", &node->Color.x);
+        ImGui::TextColored(ImColor(255, 0, 0), "%s", node->Name);
+        switch (node->NodeType) {
+            case MaterialEditor_NodeType_Color: {
+                ImGui::SliderFloat("##value", &node->Value, 0.0f, 1.0f, "Alpha %.2f");
+                ImGui::ColorEdit3("##color", &node->Color.x);
+                break;
+            }
+            case MaterialEditor_NodeType_Image: {
+                ImGui::Text("%s", node->TextureFilename.c_str());
+                break;
+            }
+            default:
+                break;
+        }
         ImGui::EndGroup();
 
         // Save the size of what we have emitted and whether any of the widgets are being used
@@ -196,7 +209,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "")
-        this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Image, "Ambient Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.image);
+        this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Image, "Ambient Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image);
     else {
         float r = face->oFace.faceMaterial.ambient.r;
         float g = face->oFace.faceMaterial.ambient.g;
@@ -209,7 +222,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     nodePosition.y += 80;
     if (face->oFace.faceMaterial.textures_diffuse.image != "")
-        this->nodes[1] = new MaterialEditor_Node(1, MaterialEditor_NodeType_Image, "Diffuse Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.image);
+        this->nodes[1] = new MaterialEditor_Node(1, MaterialEditor_NodeType_Image, "Diffuse Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
     else {
         float r = face->oFace.faceMaterial.diffuse.r;
         float g = face->oFace.faceMaterial.diffuse.g;
@@ -222,7 +235,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
         nodePosition.y += 80;
-        this->nodes[2] = new MaterialEditor_Node(2, MaterialEditor_NodeType_Image, "Dissolve Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.image);
+        this->nodes[2] = new MaterialEditor_Node(2, MaterialEditor_NodeType_Image, "Dissolve Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
         this->links.push_back(MaterialEditor_NodeLink(2, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -230,7 +243,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     nodePosition.y += 80;
     if (face->oFace.faceMaterial.textures_specular.image != "")
-        this->nodes[3] = new MaterialEditor_Node(3, MaterialEditor_NodeType_Image, "Specular Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.image);
+        this->nodes[3] = new MaterialEditor_Node(3, MaterialEditor_NodeType_Image, "Specular Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image);
     else {
         float r = face->oFace.faceMaterial.specular.r;
         float g = face->oFace.faceMaterial.specular.g;
@@ -243,7 +256,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
         nodePosition.y += 80;
-        this->nodes[4] = new MaterialEditor_Node(4, MaterialEditor_NodeType_Image, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.image);
+        this->nodes[4] = new MaterialEditor_Node(4, MaterialEditor_NodeType_Image, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
         this->links.push_back(MaterialEditor_NodeLink(4, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -251,7 +264,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
         nodePosition.y += 80;
-        this->nodes[5] = new MaterialEditor_Node(5, MaterialEditor_NodeType_Image, "Bump Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.image);
+        this->nodes[5] = new MaterialEditor_Node(5, MaterialEditor_NodeType_Image, "Bump Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image);
         this->links.push_back(MaterialEditor_NodeLink(5, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -259,7 +272,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
         nodePosition.y += 80;
-        this->nodes[6] = new MaterialEditor_Node(6, MaterialEditor_NodeType_Image, "Displacement Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.image);
+        this->nodes[6] = new MaterialEditor_Node(6, MaterialEditor_NodeType_Image, "Displacement Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image);
         this->links.push_back(MaterialEditor_NodeLink(6, 0, 999, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;

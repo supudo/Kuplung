@@ -235,16 +235,6 @@ objScene objParser::parse(FBEntity file) {
         }
     }
 
-//    for (int i=0; i<(int)this->scene.models.size(); i++) {
-//        for (int j=0; j<(int)this->scene.models[i].faces.size(); j++) {
-//            objModelFace f = this->scene.models[i].faces[j];
-//            for (int k=0; k<(int)f.vectors_vertices.size(); k++) {
-//                glm::vec3 v = f.vectors_vertices[k];
-//                printf("vector = %f - %f - %f\n", v.x, v.y, v.z);
-//            }
-//        }
-//    }
-
     return this->scene;
 }
 
@@ -389,6 +379,10 @@ objMaterialImage objParser::parseTextureImage(std::string textureLine) {
     }
     else
         materialImage.image = textureLine;
+
+    std::regex pathSeparator("/");
+    std::vector<std::string> fileElements = this->splitString(materialImage.image, pathSeparator);
+    materialImage.filename = fileElements[fileElements.size() - 1];
 
     return materialImage;
 }

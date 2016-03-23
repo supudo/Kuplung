@@ -25,9 +25,9 @@ struct MaterialEditor_Node {
     float Value;
     ImVec4 Color;
     int InputsCount, OutputsCount;
-    std::string TextureImage;
+    std::string TextureFilename, TextureImage;
 
-    MaterialEditor_Node(int id, MaterialEditor_NodeType nodeType, const char* name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureImage="") {
+    MaterialEditor_Node(int id, MaterialEditor_NodeType nodeType, const char* name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename = "", std::string textureImage="") {
         ID = id;
         NodeType = nodeType;
         strncpy(Name, name, 31);
@@ -37,6 +37,7 @@ struct MaterialEditor_Node {
         Color = color;
         InputsCount = inputs_count;
         OutputsCount = outputs_count;
+        TextureFilename = textureFilename;
         TextureImage = textureImage;
     }
 
