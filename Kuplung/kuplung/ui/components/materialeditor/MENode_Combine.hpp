@@ -18,7 +18,6 @@ public:
     void init(int id, const char* name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename = "", std::string textureImage="");
 
     int ID;
-    MaterialEditor_NodeType NodeType;
     char Name[32];
     ImVec2 Pos, Size;
     float Value;

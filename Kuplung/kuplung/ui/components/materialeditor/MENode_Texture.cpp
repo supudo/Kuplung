@@ -17,4 +17,14 @@ static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return Im
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 void MENode_Texture::init(int id, const char* name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+    this->ID = id;
+    strncpy(this->Name, name, 31);
+    this->Name[31] = 0;
+    this->Pos = pos;
+    this->Value = value;
+    this->Color = color;
+    this->InputsCount = inputs_count;
+    this->OutputsCount = outputs_count;
+    this->TextureFilename = textureFilename;
+    this->TextureImage = textureImage;
 }
