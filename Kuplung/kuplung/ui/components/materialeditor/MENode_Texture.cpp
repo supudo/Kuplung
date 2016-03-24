@@ -23,9 +23,21 @@ MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, floa
 void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
+
+    ImGui::SetNextTreeNodeOpened(this->IsExpanded, ImGuiSetCond_Always);
+    if (ImGui::TreeNode(this, "%s", "")) {
+        ImGui::TreePop();
+        this->IsExpanded = true;
+    }
+    else
+        this->IsExpanded = false;
+    ImGui::SameLine(0,0);
     ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
-    //ImGui::InputText("", this->nodeImagePathText, sizeof(this->nodeImagePathText));
-    //this->guiModelRenameText[0] = '\0';
-    ImGui::Text("%s", this->TextureFilename.c_str());
+
+    if (this->IsExpanded) {
+        ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
+        ImGui::Text("%s", this->TextureFilename.c_str());
+    }
+
     ImGui::EndGroup();
 }

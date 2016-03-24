@@ -27,6 +27,7 @@ void MENode::init(int id, MaterialEditor_NodeType nodeType, std::string name, co
     this->OutputsCount = outputs_count;
     this->TextureFilename = textureFilename;
     this->TextureImage = textureImage;
+    this->IsExpanded = true;
 }
 
 void MENode::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {

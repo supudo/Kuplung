@@ -26,6 +26,7 @@ public:
     ImVec2 Pos, Size;
     float Value;
     ImVec4 Color;
+    bool IsExpanded;
 };
 
 #endif /* MENode_hpp */

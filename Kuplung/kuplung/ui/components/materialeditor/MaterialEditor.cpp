@@ -99,6 +99,9 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     }
 
     // Display nodes
+    ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(1,1,1,0));
+    ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(1,1,1,0));
+    ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1,1,1,0));
     for (size_t i=0; i<this->nodes.size(); i++) {
         MENode* node = (MENode*)this->nodes[i];
         ImGui::PushID(node->ID);
@@ -131,13 +134,19 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         ImU32 node_bg_color = (node_hovered_in_list == node->ID || node_hovered_in_scene == node->ID || (node_hovered_in_list == -1 && this->node_selected == node->ID)) ? ImColor(75, 75, 75) : ImColor(60, 60, 60);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
         draw_list->AddRect(node_rect_min, node_rect_max, ImColor(100, 100, 100), 4.0f);
-        for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++)
+        for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++) {
             draw_list->AddCircleFilled(offset + node->GetInputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
-        for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++)
+            if (ImGui::IsItemHovered()) {
+                printf("%i\n", slot_idx);
+            }
+        }
+        for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++) {
             draw_list->AddCircleFilled(offset + node->GetOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
+        }
 
         ImGui::PopID();
     }
+    ImGui::PopStyleColor(3);
     draw_list->ChannelsMerge();
 
     // Open context menu
@@ -268,9 +277,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
     zeroNode->Pos = ImVec2(270.0, nodePosition.y / 2);
-    zeroNode->InputsCount = materialNodesCounter;
-    //this->nodes.push_back(new MENode_Combine(0, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 0));
-    //this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
+    zeroNode->InputsCount = materialNodesCounter - 1;
 
     this->inited = true;
 }
