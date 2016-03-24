@@ -20,6 +20,11 @@ public:
 private:
     bool showTextureWindow, loadTexture;
     char filePath[256];
+    GLuint vboBuffer;
+    int textureWidth, textureHeight;
+
+    void showImage();
+    void createTextureBuffer(int* width, int* height);
 };
 
 #endif /* MENode_Texture_hpp */
