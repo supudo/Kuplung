@@ -34,9 +34,8 @@ void MENode_Combine::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
     ImGui::SameLine(0,0);
     ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
 
-    if (this->IsExpanded) {
+    if (this->IsExpanded)
         ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
-    }
 
     ImGui::EndGroup();
 }

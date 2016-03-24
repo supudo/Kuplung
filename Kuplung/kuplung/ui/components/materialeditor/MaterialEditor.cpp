@@ -276,7 +276,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
-    zeroNode->Pos = ImVec2(270.0, nodePosition.y / 2);
+    zeroNode->Pos = ImVec2(300.0, nodePosition.y / 2);
     zeroNode->InputsCount = materialNodesCounter - 1;
 
     this->inited = true;

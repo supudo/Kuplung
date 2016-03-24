@@ -18,6 +18,9 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 
 MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
     MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
+    this->showTextureWindow = false;
+    this->loadTexture = false;
+    strcpy(this->filePath, this->TextureImage.c_str());
 }
 
 void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
@@ -36,7 +39,20 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
 
     if (this->IsExpanded) {
         ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
-        ImGui::Text("%s", this->TextureFilename.c_str());
+
+        std::string btnLabel = ICON_FA_EYE;
+        if (ImGui::Button(btnLabel.c_str())) {
+            this->showTextureWindow = !this->showTextureWindow;
+            this->loadTexture = true;
+        }
+        ImGui::SameLine();
+        ImGui::InputText("", this->filePath, sizeof(this->filePath), ImGuiInputTextFlags_ReadOnly);
+        ImGui::SameLine();
+        float bw = ImGui::CalcTextSize("...").x + 10;
+        ImGui::PushItemWidth(bw);
+        if (ImGui::Button("...")) {
+        }
+        ImGui::PopItemWidth();
     }
 
     ImGui::EndGroup();
