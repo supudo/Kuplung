@@ -111,7 +111,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
         // Save the size of what we have emitted and whether any of the widgets are being used
         bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
-        node->Size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING + (node->ID == 999 ? ImVec2(0, 40) : ImVec2(0,0));
+        node->Size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING + (node->ID == 0 ? ImVec2(0, 40) : ImVec2(0,0));
         ImVec2 node_rect_max = node_rect_min + node->Size;
 
         // Display node box
@@ -167,10 +167,10 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         }
         else {
             if (ImGui::MenuItem("Add Color"))
-                this->nodes[(int)this->nodes.size() + 1] = new MENode_Color((int)this->nodes.size() + 1, "Color", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1);
-            if (ImGui::MenuItem("Add Texture"))
-                this->nodes[(int)this->nodes.size() + 1] = new MENode_Texture((int)this->nodes.size() + 1, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 1, 1);
-            if (ImGui::MenuItem("Paste", NULL, false, false)) {}
+                this->nodes.push_back(new MENode_Color((int)this->nodes.size() + 1, "Color", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
+            else if (ImGui::MenuItem("Add Texture"))
+                this->nodes.push_back(new MENode_Texture((int)this->nodes.size() + 1, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 1, 1));
+            //if (ImGui::MenuItem("Paste", NULL, false, false)) {}
         }
         ImGui::EndPopup();
     }
