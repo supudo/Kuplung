@@ -282,7 +282,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         slotsCounter += 1;
     }
 
-    this->nodes[999] = new MENode_Combine(999, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
+    this->nodes[999] = new MENode_Combine(999, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 0);
     //this->nodes[999] = new MaterialEditor_Node(999, MaterialEditor_NodeType_Color, "fragColor", ImVec2(270.0, nodePosition.y / 2), 1.0f, ImColor(0, 200, 100), materialNodesCounter, 1);
 
     this->inited = true;
