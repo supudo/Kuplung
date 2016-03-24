@@ -1,13 +1,13 @@
 //
-//  MaterialEditor.hpp
+//  MaterialEditorData.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/17/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef MaterialEditor_hpp
-#define MaterialEditor_hpp
+#ifndef MaterialEditorData_hpp
+#define MaterialEditorData_hpp
 
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/ModelFace.hpp"
@@ -51,19 +51,4 @@ struct MaterialEditor_NodeLink {
     MaterialEditor_NodeLink(int input_idx, int input_slot, int output_idx, int output_slot) { InputIdx = input_idx; InputSlot = input_slot; OutputIdx = output_idx; OutputSlot = output_slot; }
 };
 
-class MaterialEditor {
-public:
-    void draw(ModelFace *face, bool* p_opened = NULL);
-
-private:
-    void initMaterialNodes(ModelFace *face);
-
-    std::map<int, MaterialEditor_Node*> nodes;
-    ImVector<MaterialEditor_NodeLink> links;
-    bool inited = false;
-    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
-    bool show_grid = true;
-    int node_selected = -1;
-};
-
-#endif /* MaterialEditor_hpp */
+#endif /* MaterialEditorData_hpp */

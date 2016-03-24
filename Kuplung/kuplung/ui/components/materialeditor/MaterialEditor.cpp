@@ -6,7 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "kuplung/ui/components/MaterialEditor.hpp"
+#include "kuplung/ui/components/materialeditor/MaterialEditor.hpp"
 #include <math.h>
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
@@ -117,6 +117,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 break;
             }
             case MaterialEditor_NodeType_Image: {
+                //ImGui::InputText("", this->nodeImagePathText, sizeof(this->nodeImagePathText));
+                //this->guiModelRenameText[0] = '\0';
                 ImGui::Text("%s", node->TextureFilename.c_str());
                 break;
             }
@@ -183,7 +185,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         }
         else {
             if (ImGui::MenuItem("Add"))
-                this->nodes[(int)this->nodes.size()] = new MaterialEditor_Node((int)this->nodes.size(), MaterialEditor_NodeType_Color, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2);
+                this->nodes[(int)this->nodes.size() + 1] = new MaterialEditor_Node((int)this->nodes.size() + 1, MaterialEditor_NodeType_Color, "New node", scene_pos, 0.5f, ImColor(100, 100, 200), 2, 2);
             if (ImGui::MenuItem("Paste", NULL, false, false)) {}
         }
         ImGui::EndPopup();

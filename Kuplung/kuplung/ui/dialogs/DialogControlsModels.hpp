@@ -16,7 +16,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
-#include "kuplung/ui/components/MaterialEditor.hpp"
+#include "kuplung/ui/components/materialeditor/MaterialEditor.hpp"
 
 class DialogControlsModels {
 public:
