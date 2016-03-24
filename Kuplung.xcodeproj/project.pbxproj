@@ -22,6 +22,7 @@
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
+		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
@@ -192,6 +193,8 @@
 		8A1AFB271C71FC58004888D8 /* DialogControlsGUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsGUI.hpp; sourceTree = "<group>"; };
 		8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogControlsModels.cpp; sourceTree = "<group>"; };
 		8A1AFB291C71FC58004888D8 /* DialogControlsModels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsModels.hpp; sourceTree = "<group>"; };
+		8A1CBAD01CA3EFA7000A171D /* MENode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode.cpp; path = materialeditor/MENode.cpp; sourceTree = "<group>"; };
+		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -684,6 +687,8 @@
 				8ABC5C401CA3DEC00024F816 /* MENode_Combine.hpp */,
 				8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */,
 				8ABC5C421CA3DEC00024F816 /* MENode_Texture.hpp */,
+				8A1CBAD01CA3EFA7000A171D /* MENode.cpp */,
+				8A1CBAD11CA3EFA7000A171D /* MENode.hpp */,
 			);
 			name = materialeditor;
 			sourceTree = "<group>";
@@ -773,6 +778,7 @@
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
+				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A03648C1C6B71EC001489C8 /* ModelFace.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
