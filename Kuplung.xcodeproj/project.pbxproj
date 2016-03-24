@@ -79,6 +79,9 @@
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
 		8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09A1C3AA1F900665C40 /* light.obj */; };
 		8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */; };
+		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
+		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
+		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
@@ -284,6 +287,12 @@
 		8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = light_texture.jpg; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
+		8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Color.cpp; path = materialeditor/MENode_Color.cpp; sourceTree = "<group>"; };
+		8ABC5C3E1CA3DEC00024F816 /* MENode_Color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Color.hpp; path = materialeditor/MENode_Color.hpp; sourceTree = "<group>"; };
+		8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Combine.cpp; path = materialeditor/MENode_Combine.cpp; sourceTree = "<group>"; };
+		8ABC5C401CA3DEC00024F816 /* MENode_Combine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Combine.hpp; path = materialeditor/MENode_Combine.hpp; sourceTree = "<group>"; };
+		8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Texture.cpp; path = materialeditor/MENode_Texture.cpp; sourceTree = "<group>"; };
+		8ABC5C421CA3DEC00024F816 /* MENode_Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Texture.hpp; path = materialeditor/MENode_Texture.hpp; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -669,6 +678,12 @@
 				8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */,
 				8AD91DAB1CA3D989004674BC /* MaterialEditor.hpp */,
 				8AD91DAC1CA3D989004674BC /* MaterialEditorData.h */,
+				8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */,
+				8ABC5C3E1CA3DEC00024F816 /* MENode_Color.hpp */,
+				8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */,
+				8ABC5C401CA3DEC00024F816 /* MENode_Combine.hpp */,
+				8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */,
+				8ABC5C421CA3DEC00024F816 /* MENode_Texture.hpp */,
 			);
 			name = materialeditor;
 			sourceTree = "<group>";
@@ -743,14 +758,17 @@
 				8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */,
 				8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */,
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
+				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
 				8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */,
 				8A0364891C6B71EC001489C8 /* CoordinateSystem.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
+				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
 				8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
+				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */,
