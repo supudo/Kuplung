@@ -24,6 +24,7 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
     QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
 
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
 
@@ -112,6 +113,9 @@ SOURCES += main.cpp \
     kuplung/ui/components/ColorPicker.cpp \
     kuplung/ui/components/Tabs.cpp \
     kuplung/ui/components/materialeditor/MaterialEditor.cpp \
+    kuplung/ui/components/materialeditor/MENode_Color.cpp \
+    kuplung/ui/components/materialeditor/MENode_Combine.cpp \
+    kuplung/ui/components/materialeditor/MENode_Texture.cpp \
     kuplung/ui/dialogs/DialogStyle.cpp \
     kuplung/ui/dialogs/DialogOptions.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
@@ -155,6 +159,9 @@ HEADERS += \
     kuplung/ui/components/Tabs.hpp \
     kuplung/ui/components/materialeditor/MaterialEditorData.h \
     kuplung/ui/components/materialeditor/MaterialEditor.hpp \
+    kuplung/ui/components/materialeditor/MENode_Color.hpp \
+    kuplung/ui/components/materialeditor/MENode_Combine.hpp \
+    kuplung/ui/components/materialeditor/MENode_Texture.hpp \
     kuplung/ui/dialogs/DialogStyle.hpp \
     kuplung/ui/dialogs/DialogOptions.hpp \
     kuplung/ui/dialogs/DialogControlsGUI.hpp \
