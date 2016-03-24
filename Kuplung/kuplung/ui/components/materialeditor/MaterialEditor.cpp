@@ -217,6 +217,10 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         float g = face->oFace.faceMaterial.ambient.g;
         float b = face->oFace.faceMaterial.ambient.b;
         this->nodes[0] = new MaterialEditor_Node(0, MaterialEditor_NodeType_Color, "Ambient Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1);
+
+        this->menodes[0] = new MENode_Color(0, "Ambient Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1);
+        MENode_Color *n = (MENode_Color*)this->menodes[0];
+        n->GetInputSlotPos(0);
     }
     this->links.push_back(MaterialEditor_NodeLink(0, 0, 999, slotsCounter));
     materialNodesCounter += 1;

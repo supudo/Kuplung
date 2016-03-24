@@ -13,8 +13,9 @@
 #include "kuplung/meshes/ModelFace.hpp"
 
 typedef enum MaterialEditor_NodeType {
-    MaterialEditor_NodeType_Color = 0,
-    MaterialEditor_NodeType_Image = 1
+    MaterialEditor_NodeType_Combine,
+    MaterialEditor_NodeType_Color,
+    MaterialEditor_NodeType_Image
 } MaterialEditor_NodeType;
 
 struct MaterialEditor_Node {

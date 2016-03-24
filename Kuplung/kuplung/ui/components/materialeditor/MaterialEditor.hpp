@@ -12,6 +12,10 @@
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
+#include "kuplung/ui/components/materialeditor/MENode.hpp"
+#include "kuplung/ui/components/materialeditor/MENode_Color.hpp"
+#include "kuplung/ui/components/materialeditor/MENode_Combine.hpp"
+#include "kuplung/ui/components/materialeditor/MENode_Texture.hpp"
 
 class MaterialEditor {
 public:
@@ -20,6 +24,7 @@ public:
 private:
     void initMaterialNodes(ModelFace *face);
 
+    std::map<int, MENode*> menodes;
     std::map<int, MaterialEditor_Node*> nodes;
     ImVector<MaterialEditor_NodeLink> links;
     bool inited = false;
