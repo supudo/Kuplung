@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/ui/components/materialeditor/MaterialEditor.cpp"
-            timestampString = "480507582.969687"
+            timestampString = "480523329.265441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
+            startingLineNumber = "104"
+            endingLineNumber = "104"
             landmarkName = "MaterialEditor::draw(ModelFace *face, bool* p_opened)"
             landmarkType = "5">
          </BreakpointContent>
