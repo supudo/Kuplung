@@ -107,27 +107,6 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         // Display node contents first
         draw_list->ChannelsSetCurrent(1); // Foreground
         bool old_any_active = ImGui::IsAnyItemActive();
-        switch (node->NodeType) {
-            case MaterialEditor_NodeType_Color: {
-//                ImGui::SliderFloat("##value", &node->Value, 0.0f, 1.0f, "Alpha %.2f");
-//                ImGui::ColorEdit3("##color", &node->Color.x);
-                //node->draw(node_rect_min, NODE_WINDOW_PADDING);
-                node = (MENode_Color*)node;
-                break;
-            }
-            case MaterialEditor_NodeType_Image: {
-//                ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
-//                ImGui::BeginGroup(); // Lock horizontal position
-//                ImGui::TextColored(ImColor(255, 0, 0), "%s", node->Name.c_str());
-//                //ImGui::InputText("", this->nodeImagePathText, sizeof(this->nodeImagePathText));
-//                //this->guiModelRenameText[0] = '\0';
-//                ImGui::Text("%s", node->TextureFilename.c_str());
-//                ImGui::EndGroup();
-                break;
-            }
-            default:
-                break;
-        }
         node->draw(node_rect_min, NODE_WINDOW_PADDING);
 
         // Save the size of what we have emitted and whether any of the widgets are being used

@@ -19,3 +19,13 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
     MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
+
+void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+    ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
+    ImGui::BeginGroup();
+    ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
+    //ImGui::InputText("", this->nodeImagePathText, sizeof(this->nodeImagePathText));
+    //this->guiModelRenameText[0] = '\0';
+    ImGui::Text("%s", this->TextureFilename.c_str());
+    ImGui::EndGroup();
+}

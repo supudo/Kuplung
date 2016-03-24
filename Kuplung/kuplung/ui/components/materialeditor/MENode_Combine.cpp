@@ -19,3 +19,10 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 MENode_Combine::MENode_Combine(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
     MENode::init(id, MaterialEditor_NodeType_Combine, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
+
+void MENode_Combine::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+    ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
+    ImGui::BeginGroup();
+    ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
+    ImGui::EndGroup();
+}
