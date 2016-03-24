@@ -24,8 +24,8 @@ public:
 private:
     void initMaterialNodes(ModelFace *face);
 
-    std::map<int, MENode*> menodes;
-    std::map<int, MaterialEditor_Node*> nodes;
+    std::map<int, MENode*> nodes;
+    //std::map<int, MaterialEditor_Node*> nodes;
     ImVector<MaterialEditor_NodeLink> links;
     bool inited = false;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
