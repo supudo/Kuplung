@@ -223,7 +223,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "") {
         this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image));
-        nodePosition.y += 100;
+        nodePosition.y += (this->style_ShowImages ? 100 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.ambient.r;
@@ -238,7 +238,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_diffuse.image != "") {
         this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image));
-        nodePosition.y += 180;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.diffuse.r;
@@ -252,16 +252,16 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
-        nodePosition.y += 180;
         this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image));
         this->links.push_back(MaterialEditor_NodeLink(2, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_specular.image != "") {
         this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image));
-        nodePosition.y += 180;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.specular.r;
@@ -279,7 +279,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
-        nodePosition.y += 180;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
@@ -287,7 +287,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
-        nodePosition.y += 180;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
@@ -295,7 +295,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
-        nodePosition.y += 180;
+        nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
