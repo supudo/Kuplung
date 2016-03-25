@@ -19,6 +19,7 @@
 
 class MaterialEditor {
 public:
+    void init();
     void draw(ModelFace *face, bool* p_opened = NULL);
 
 private:
@@ -32,6 +33,9 @@ private:
     int node_selected = -1;
 
     char nodeImagePathText[256];
+
+    ImColor style_LinkColor;
+    float style_LinkThickness;
 };
 
 #endif /* MaterialEditor_hpp */

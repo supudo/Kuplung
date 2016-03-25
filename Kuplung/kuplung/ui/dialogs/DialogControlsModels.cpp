@@ -47,6 +47,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
 
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
+    this->componentMaterialEditor->init();
 }
 
 void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
