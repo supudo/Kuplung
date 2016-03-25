@@ -72,8 +72,8 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
         if (ImGui::Button("..."))
             this->showFileBrowser = true;
 
-        if (showPreview)
-            ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100, 100));
+        if (showPreview && ImGui::ImageButton((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100, 100)))
+            this->showTextureWindow = !this->showTextureWindow;
 
         ImGui::PopItemWidth();
     }

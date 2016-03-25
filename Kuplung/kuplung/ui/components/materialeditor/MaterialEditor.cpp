@@ -29,7 +29,7 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 void MaterialEditor::init() {
     this->style_LinkColor = ImColor(200, 200, 100);
     this->style_LinkThickness = 3.0f;
-    this->style_ShowImages = true;
+    this->style_ShowImages = false;
 }
 
 void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
