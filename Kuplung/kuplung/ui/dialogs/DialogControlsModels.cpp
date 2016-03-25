@@ -88,7 +88,7 @@ void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::strin
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
 
     title = title + " Texture";
-    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders);
+    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
 
     ImGui::Text("Image: %s", img.c_str());
     ImGui::Text("Image dimensions: %i x %i", *width, *height);

@@ -34,6 +34,8 @@ MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, floa
                                      std::bind(&MENode_Texture::doLog, this, std::placeholders::_1),
                                      std::bind(&MENode_Texture::dialogFileBrowserProcessFile, this, std::placeholders::_1));
     this->componentFileBrowser->setImageBrowser(true);
+
+    this->createTextureBuffer(&this->textureWidth, &this->textureHeight);
 }
 
 void MENode_Texture::initBase(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
@@ -69,6 +71,9 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
         ImGui::PushItemWidth(bw);
         if (ImGui::Button("..."))
             this->showFileBrowser = true;
+
+        ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100, 100));
+
         ImGui::PopItemWidth();
     }
 
@@ -102,14 +107,13 @@ void MENode_Texture::showImage() {
     if (tHeight > wHeight)
         tHeight = wHeight - 40;
 
-    ImGuiWindow *gw = ImGui::GetCurrentWindow();
-    posX = gw->Pos.x + gw->Rect().GetWidth()  + 20;
+    posX = ImGui::GetMousePos().x + 20;
     posY = 20;
 
     ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Image", &this->showTextureWindow, ImGuiWindowFlags_ShowBorders);
+    ImGui::Begin("Image", &this->showTextureWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
 
     ImGui::Text("%s", this->TextureFilename.c_str());
     ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);
