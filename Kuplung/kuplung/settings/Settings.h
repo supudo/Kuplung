@@ -32,7 +32,10 @@ public:
     std::string appFolder();
     bool isAllowedFileExtension(std::string fileExtension);
     bool isAllowedStyleExtension(std::string fileExtension);
+    bool isAllowedImageExtension(std::string fileExtension);
+    void setLogFunc(std::function<void(std::string)> doLog);
 
+    std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
     bool wireframesMode, logDebugInfo, logFileBrowser;
     Color guiClearColor;

@@ -19,6 +19,7 @@ class FileBrowser {
 public:
     void init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile);
     void setStyleBrowser(bool isStyle);
+    void setImageBrowser(bool isImage);
     void draw(const char* title, bool* p_opened = NULL);
 
 private:
@@ -32,7 +33,7 @@ private:
     std::string convertSize(size_t size);
     double roundOff(double n);
 
-    bool log, isStyleBrowser;
+    bool log, isStyleBrowser, isImageBrowser;
     int positionX, positionY, width, height;
 };
 

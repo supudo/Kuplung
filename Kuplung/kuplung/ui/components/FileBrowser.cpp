@@ -29,6 +29,12 @@ void FileBrowser::init(bool log, int positionX, int positionY, int width, int he
 
 void FileBrowser::setStyleBrowser(bool isStyle) {
     this->isStyleBrowser = isStyle;
+    this->isImageBrowser = false;
+}
+
+void FileBrowser::setImageBrowser(bool isImage) {
+    this->isImageBrowser = isImage;
+    this->isStyleBrowser = false;
 }
 
 void FileBrowser::draw(const char* title, bool* p_opened) {
@@ -84,7 +90,6 @@ void FileBrowser::drawFiles() {
     int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
-        std::string filePath = iter->first;
         FBEntity entity = iter->second;
 
         char label[32];
@@ -135,6 +140,8 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string fileP
                 isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
                 if (this->isStyleBrowser)
                     isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
+                else if (this->isImageBrowser)
+                    isAllowedFileExtension = Settings::Instance()->isAllowedImageExtension(iteratorFolder->path().extension().string());
                 if (isAllowedFileExtension || fs::is_directory(fileStatus)) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))

@@ -20,12 +20,24 @@ static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return Im
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
-    MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
+    this->initBase(id, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
     this->showTextureWindow = false;
+    this->showFileBrowser = false;
     this->loadTexture = false;
     this->textureWidth = 0;
     this->textureHeight = 0;
     strcpy(this->filePath, this->TextureImage.c_str());
+
+    this->componentFileBrowser = new FileBrowser();
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
+                                     Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
+                                     std::bind(&MENode_Texture::doLog, this, std::placeholders::_1),
+                                     std::bind(&MENode_Texture::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->componentFileBrowser->setImageBrowser(true);
+}
+
+void MENode_Texture::initBase(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+    MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
 void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
@@ -55,8 +67,8 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
         ImGui::SameLine();
         float bw = ImGui::CalcTextSize("...").x + 10;
         ImGui::PushItemWidth(bw);
-        if (ImGui::Button("...")) {
-        }
+        if (ImGui::Button("..."))
+            this->showFileBrowser = true;
         ImGui::PopItemWidth();
     }
 
@@ -64,6 +76,9 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
 
     if (this->showTextureWindow)
         this->showImage();
+
+    if (this->showFileBrowser)
+        this->componentFileBrowser->draw("File Browser", &this->showFileBrowser);
 }
 
 void MENode_Texture::showImage() {
@@ -111,7 +126,7 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
     int tChannels;
     unsigned char* tPixels = stbi_load(this->TextureImage.c_str(), width, height, &tChannels, 0);
     if (!tPixels)
-        printf("Can't load texture image - %s with error - %s", this->TextureImage.c_str(), stbi_failure_reason());
+        this->doLog("Can't load texture image - " + this->TextureImage + " with error - " + std::string(stbi_failure_reason()));
     else {
         glGenTextures(1, &this->vboBuffer);
         glBindTexture(GL_TEXTURE_2D, this->vboBuffer);
@@ -141,4 +156,16 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(tPixels);
     }
+}
+
+void MENode_Texture::dialogFileBrowserProcessFile(FBEntity file) {
+    this->showFileBrowser = false;
+    this->TextureImage = file.path;
+    this->TextureFilename = file.title;
+    strcpy(this->filePath, this->TextureImage.c_str());
+    this->initBase(this->ID, this->Name, this->Pos, this->Value, this->Color, this->InputsCount, this->OutputsCount, this->TextureFilename, this->TextureImage);
+}
+
+void MENode_Texture::doLog(std::string logMessage) {
+    Settings::Instance()->funcDoLog("[MENode_Texture] " + logMessage);
 }

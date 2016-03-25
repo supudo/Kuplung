@@ -134,3 +134,12 @@ bool Settings::isAllowedStyleExtension(std::string fileExtension) {
     std::string allowedExtensions[] = {".style"};
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
+
+bool Settings::isAllowedImageExtension(std::string fileExtension) {
+    std::string allowedExtensions[] = {".png", ".jpg", ".bmp", ".jpeg", ".tga"};
+    return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
+}
+
+void Settings::setLogFunc(std::function<void(std::string)> doLog) {
+    this->funcDoLog = doLog;
+}

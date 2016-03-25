@@ -114,6 +114,8 @@ bool Kuplung::init() {
                     success = false;
                 }
                 else {
+                    Settings::Instance()->setLogFunc(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+
                     this->parser = new FileModelManager();
                     this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
