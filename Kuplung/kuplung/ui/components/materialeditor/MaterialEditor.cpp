@@ -30,6 +30,7 @@ void MaterialEditor::init() {
     this->style_LinkColor = ImColor(200, 200, 100);
     this->style_LinkThickness = 3.0f;
     this->style_ShowImages = false;
+    this->panelWidth_Nodes = 100.0f;
 }
 
 void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
@@ -45,7 +46,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     bool open_context_menu = false;
     int node_hovered_in_list = -1;
     int node_hovered_in_scene = -1;
-    ImGui::BeginChild("node_list", ImVec2(100, 0));
+    ImGui::BeginChild("node_list", ImVec2(this->panelWidth_Nodes, 0));
     ImGui::Text("Nodes");
     ImGui::Separator();
     for (size_t i=0; i<this->nodes.size(); i++) {
@@ -62,6 +63,20 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::EndChild();
 
     ImGui::SameLine();
+
+    ImGui::GetIO().MouseDrawCursor = true;
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::Button("###splitterNodes", ImVec2(8.0f, -1));
+    ImGui::PopStyleColor(3);
+    if (ImGui::IsItemActive())
+        this->panelWidth_Nodes += ImGui::GetIO().MouseDelta.x;
+    if (ImGui::IsItemHovered())
+        ImGui::SetMouseCursor(4);
+
+    ImGui::SameLine();
+
     ImGui::BeginGroup();
 
     const float NODE_SLOT_RADIUS = 4.0f;

@@ -37,6 +37,7 @@ private:
     ImColor style_LinkColor;
     float style_LinkThickness;
     bool style_ShowImages;
+    float panelWidth_Nodes;
 };
 
 #endif /* MaterialEditor_hpp */
