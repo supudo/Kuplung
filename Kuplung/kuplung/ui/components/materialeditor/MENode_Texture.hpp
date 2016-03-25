@@ -16,7 +16,7 @@
 class MENode_Texture: public MENode {
 public:
     MENode_Texture(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename="", std::string textureImage="");
-    virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING);
+    virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview);
 
 private:
     bool showTextureWindow, loadTexture, showFileBrowser;

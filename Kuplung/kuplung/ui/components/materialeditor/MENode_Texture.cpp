@@ -42,7 +42,7 @@ void MENode_Texture::initBase(int id, std::string name, const ImVec2& pos, float
     MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
-void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
 
@@ -72,7 +72,8 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
         if (ImGui::Button("..."))
             this->showFileBrowser = true;
 
-        ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100, 100));
+        if (showPreview)
+            ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(100, 100));
 
         ImGui::PopItemWidth();
     }

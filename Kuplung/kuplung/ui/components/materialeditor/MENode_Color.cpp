@@ -20,7 +20,7 @@ MENode_Color::MENode_Color(int id, std::string name, const ImVec2& pos, float va
     MENode::init(id, MaterialEditor_NodeType_Color, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
-void MENode_Color::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+void MENode_Color::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
 

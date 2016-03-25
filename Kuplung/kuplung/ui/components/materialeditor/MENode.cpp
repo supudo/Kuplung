@@ -30,7 +30,7 @@ void MENode::init(int id, MaterialEditor_NodeType nodeType, std::string name, co
     this->IsExpanded = true;
 }
 
-void MENode::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+void MENode::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
     ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());

@@ -20,7 +20,7 @@ MENode_Combine::MENode_Combine(int id, std::string name, const ImVec2& pos, floa
     MENode::init(id, MaterialEditor_NodeType_Combine, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
-void MENode_Combine::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
+void MENode_Combine::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
 

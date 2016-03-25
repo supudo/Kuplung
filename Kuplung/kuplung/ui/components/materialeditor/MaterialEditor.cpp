@@ -29,6 +29,7 @@ static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return Im
 void MaterialEditor::init() {
     this->style_LinkColor = ImColor(200, 200, 100);
     this->style_LinkThickness = 3.0f;
+    this->style_ShowImages = true;
 }
 
 void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
@@ -68,6 +69,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     // Create our child canvas
     ImGui::Text("Hold middle mouse button to scroll (%.2f, %.2f)", this->scrolling.x, this->scrolling.y);
+    ImGui::SameLine(ImGui::GetWindowWidth() - 220);
+    ImGui::Checkbox("Show images", &this->style_ShowImages);
     ImGui::SameLine(ImGui::GetWindowWidth() - 100);
     ImGui::Checkbox("Show grid", &this->show_grid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
@@ -126,7 +129,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         // Display node contents first
         draw_list->ChannelsSetCurrent(1); // Foreground
         bool old_any_active = ImGui::IsAnyItemActive();
-        node->draw(node_rect_min, NODE_WINDOW_PADDING);
+        node->draw(node_rect_min, NODE_WINDOW_PADDING, this->style_ShowImages);
 
         // Save the size of what we have emitted and whether any of the widgets are being used
         bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
@@ -219,14 +222,14 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Ambient Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image));
         nodePosition.y += 100;
     }
     else {
         float r = face->oFace.faceMaterial.ambient.r;
         float g = face->oFace.faceMaterial.ambient.g;
         float b = face->oFace.faceMaterial.ambient.b;
-        this->nodes.push_back(new MENode_Color(materialNodesCounter, "Ambient Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1));
+        this->nodes.push_back(new MENode_Color(materialNodesCounter, "Ambient Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
         nodePosition.y += 80;
     }
     this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
@@ -234,14 +237,14 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_diffuse.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image));
         nodePosition.y += 180;
     }
     else {
         float r = face->oFace.faceMaterial.diffuse.r;
         float g = face->oFace.faceMaterial.diffuse.g;
         float b = face->oFace.faceMaterial.diffuse.b;
-        this->nodes.push_back(new MENode_Color(1, "Diffuse Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1));
+        this->nodes.push_back(new MENode_Color(1, "Diffuse Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
         nodePosition.y += 80;
     }
     this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
@@ -250,21 +253,21 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
         nodePosition.y += 180;
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image));
         this->links.push_back(MaterialEditor_NodeLink(2, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
     }
 
     if (face->oFace.faceMaterial.textures_specular.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Specular Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image));
         nodePosition.y += 180;
     }
     else {
         float r = face->oFace.faceMaterial.specular.r;
         float g = face->oFace.faceMaterial.specular.g;
         float b = face->oFace.faceMaterial.specular.b;
-        this->nodes.push_back(new MENode_Color(3, "Specular Color", nodePosition, 0.5f, ImColor(r, g, b), 0, 1));
+        this->nodes.push_back(new MENode_Color(3, "Specular Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
         nodePosition.y += 80;
     }
     this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
@@ -272,7 +275,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "SpecularExp Texture", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image));
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -280,7 +283,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Bump Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image));
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
@@ -288,7 +291,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Displacement Map", nodePosition, 0.5f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image));
+        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image));
         this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
