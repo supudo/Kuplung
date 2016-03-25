@@ -74,11 +74,14 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING) {
 
     ImGui::EndGroup();
 
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4, 4));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(4, 4));
     if (this->showTextureWindow)
         this->showImage();
 
     if (this->showFileBrowser)
         this->componentFileBrowser->draw("File Browser", &this->showFileBrowser);
+    ImGui::PopStyleVar(2);
 }
 
 void MENode_Texture::showImage() {
