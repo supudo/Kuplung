@@ -162,7 +162,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-    if (ImGui::Button("Reset values to default", ImVec2(ImGui::GetWindowWidth() * 0.94f, 0))) {
+    if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
         for (size_t i=0; i<meshModelFaces->size(); i++) {
             (*meshModelFaces)[i]->initModelProperties();
         }
@@ -176,7 +176,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
         scene_items.push_back((*meshModelFaces)[i]->oFace.ModelTitle.c_str());
 
     // Scene Model
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
+    ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
@@ -200,13 +200,17 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::EndChild();
 
     ImGui::GetIO().MouseDrawCursor = true;
-    ImGui::InvisibleButton("splitter", ImVec2(-1, 8.0f));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
+    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::Button("###splitterModels", ImVec2(-1, 8.0f));
+    ImGui::PopStyleColor(3);
     if (ImGui::IsItemActive())
         this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
     if (ImGui::IsItemHovered())
         ImGui::SetMouseCursor(3);
 
-    ImGui::BeginChild("Properties Pane", ImVec2(0,0), true);
+    ImGui::BeginChild("Properties Pane", ImVec2(0,0), false);
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
