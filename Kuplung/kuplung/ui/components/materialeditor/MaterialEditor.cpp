@@ -115,10 +115,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     draw_list->ChannelsSetCurrent(0); // Background
     for (size_t i = 0; i < this->links.size(); i++) {
         MELink* link = this->links[i];
-        MENode* node_out = link->NodeOutput;
-        MENode* node_in = link->NodeInput;
-        ImVec2 p1 = offset + node_out->GetOutputSlotPos(link->SlotOutput);
-        ImVec2 p2 = offset + node_in->GetInputSlotPos(link->SlotInput);
+        ImVec2 p1 = offset + link->NodeOutput->GetOutputSlotPos(link->SlotOutput);
+        ImVec2 p2 = offset + link->NodeInput->GetInputSlotPos(link->SlotInput);
         draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, this->style_LinkColor, this->style_LinkThickness);
     }
 
