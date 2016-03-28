@@ -182,18 +182,21 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
         draw_list->AddRect(node_rect_min, node_rect_max, ImColor(100, 100, 100), 4.0f);
         ImVec2 connectorScreenPos;
+
         for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++) {
             connectorScreenPos = offset + node->GetInputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
             if (!isNodeDragging && std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
-                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
+                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.inputSlotIndex != -1) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeOutput == this->dragNode.node && this->dragNode.outputSlotIndex == link->SlotOutput)
+                        if (link->NodeInput == node && link->SlotInput == slot_idx)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
                     isDraggingForLinks = false;
+                    this->dragNode.node = NULL;
+                    this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
                 }
                 else if (isDraggingForLinks && !isDragNodeValid) {
                     this->dragNode.node = node;
@@ -203,18 +206,21 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 }
             }
         }
+
         for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++) {
             connectorScreenPos = offset + node->GetOutputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
             if (!isNodeDragging && std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
-                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
+                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.outputSlotIndex != -1) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeInput == this->dragNode.node && this->dragNode.outputSlotIndex == link->SlotInput)
+                        if (link->NodeOutput == node && link->SlotOutput == slot_idx)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
                     isDraggingForLinks = false;
+                    this->dragNode.node = NULL;
+                    this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
                 }
                 else if (isDraggingForLinks && !isDragNodeValid) {
                     this->dragNode.node = node;
@@ -224,10 +230,6 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 }
             }
         }
-//        if (!isDraggingForLinks && !this->dragNode.isValid()) {
-//            this->dragNode.node = NULL;
-//            this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
-//        }
 
         ImGui::PopID();
     }
@@ -385,7 +387,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
-    zeroNode->Pos = ImVec2(300.0, nodePosition.y / 2);
+    //zeroNode->Pos = ImVec2(400.0, nodePosition.y / 2);
+    zeroNode->Pos = ImVec2(400.0, 100);
     zeroNode->InputsCount = materialNodesCounter - 1;
 
     this->links.clear();
