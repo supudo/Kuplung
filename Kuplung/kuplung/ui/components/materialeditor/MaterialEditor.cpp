@@ -194,6 +194,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                             this->links.erase(this->links.begin() + link_idx);
                         if (link->NodeInput == node && slot_idx == link->SlotInput)
                             this->links.erase(this->links.begin() + link_idx);
+                        if (link->NodeInput == node && slot_idx == link->SlotOutput)
+                            this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
                     isDraggingForLinks = false;
@@ -219,6 +221,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                         if (link->NodeOutput == node && link->SlotOutput == slot_idx)
                             this->links.erase(this->links.begin() + link_idx);
                         if (link->NodeInput == node && slot_idx == link->SlotInput)
+                            this->links.erase(this->links.begin() + link_idx);
+                        if (link->NodeInput == node && slot_idx == link->SlotOutput)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
