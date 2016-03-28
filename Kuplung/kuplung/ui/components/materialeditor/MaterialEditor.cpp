@@ -183,26 +183,20 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
             connectorScreenPos = offset + node->GetInputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
             if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
-                if (isDraggingForLinks && !isDragNodeValid) {
+                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
+                    for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
+                        MELink* link = this->links[link_idx];
+                        if (link->NodeInput == this->dragNode.node)
+                            this->links.erase(this->links.begin() + link_idx);
+                    }
+                    this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
+                    isDraggingForLinks = false;
+                }
+                else if (isDraggingForLinks && !isDragNodeValid) {
                     this->dragNode.node = node;
                     this->dragNode.outputSlotIndex = slot_idx;
                     this->dragNode.inputSlotIndex = -1;
                     this->dragNode.pos = mouseScreenPos;
-                    printf("[IN] Start dragging = %s - %i\n", node->Name.c_str(), slot_idx);
-                }
-                else if (isDragNodeValid && this->dragNode.node != node) {
-//                    if (this->dragNode.outputSlotIndex != -1) {
-//                        for (int link_idx = 0; link_idx < links.size(); link_idx++ ) {
-//                            MaterialEditor_NodeLink& link = this->links[link_idx];
-//                            if (link.OutputIdx == this->dragNode.node && this->dragNode.outputSlotIndex == link.OutputSlot)   {
-//                        if (linkCallback) linkCallback(link,LS_DELETED,*this);
-//                        // remove link
-//                        if (link_idx+1 < links.size()) link = links[links.size()-1];    // swap with the last link
-//                        links.resize(links.size()-1);
-//                        --link_idx;
-//                        }
-//                        }
-//                    }
                 }
             }
         }
@@ -210,12 +204,20 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
             connectorScreenPos = offset + node->GetOutputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
             if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
-                if (isDraggingForLinks && !isDragNodeValid) {
+                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
+                    for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
+                        MELink* link = this->links[link_idx];
+                        if (link->NodeOutput == this->dragNode.node)
+                            this->links.erase(this->links.begin() + link_idx);
+                    }
+                    this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
+                    isDraggingForLinks = false;
+                }
+                else if (isDraggingForLinks && !isDragNodeValid) {
                     this->dragNode.node = node;
                     this->dragNode.outputSlotIndex = -1;
                     this->dragNode.inputSlotIndex = slot_idx;
                     this->dragNode.pos = mouseScreenPos;
-                    printf("[OUT] Start dragging = %s - %i\n", node->Name.c_str(), slot_idx);
                 }
             }
         }
@@ -229,10 +231,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::PopStyleColor(3);
     draw_list->ChannelsMerge();
 
-    if (!isDraggingForLinks) {
+    if (!isDraggingForLinks)
         this->dragNode.node = NULL;
-        printf("Quit dragging.\n");
-    }
 
     // Open context menu
     if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1)) {
