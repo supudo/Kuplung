@@ -186,7 +186,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeInput == this->dragNode.node)
+                        if (link->NodeOutput == this->dragNode.node && this->dragNode.outputSlotIndex == link->SlotOutput)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
@@ -207,7 +207,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeOutput == this->dragNode.node)
+                        if (link->NodeInput == this->dragNode.node && this->dragNode.outputSlotIndex == link->SlotInput)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
@@ -384,6 +384,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
     zeroNode->Pos = ImVec2(300.0, nodePosition.y / 2);
     zeroNode->InputsCount = materialNodesCounter - 1;
+
+    this->links.clear();
 
     this->inited = true;
 }
