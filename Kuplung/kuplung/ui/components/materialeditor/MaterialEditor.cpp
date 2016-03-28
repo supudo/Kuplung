@@ -126,6 +126,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     const bool cantDragAnything = isMouseDraggingForScrolling;
     bool isDraggingForLinks = !cantDragAnything && ImGui::IsMouseDragging(0, 0.0f);
     bool isDragNodeValid = this->dragNode.isValid();
+    bool isNodeDragging = false;
     const ImVec2 link_cp(10, 0);
 
     // Display dragging links
@@ -172,8 +173,10 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         bool node_moving_active = ImGui::IsItemActive();
         if (node_widgets_active || node_moving_active)
             this->node_selected = node->ID;
-        if (node_moving_active && ImGui::IsMouseDragging(0))
+        if (node_moving_active && ImGui::IsMouseDragging(0)) {
             node->Pos = node->Pos + ImGui::GetIO().MouseDelta;
+            isNodeDragging = true;
+        }
 
         ImU32 node_bg_color = (node_hovered_in_list == node->ID || node_hovered_in_scene == node->ID || (node_hovered_in_list == -1 && this->node_selected == node->ID)) ? ImColor(75, 75, 75) : ImColor(60, 60, 60);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
@@ -182,7 +185,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++) {
             connectorScreenPos = offset + node->GetInputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
-            if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
+            if (!isNodeDragging && std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
@@ -203,7 +206,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++) {
             connectorScreenPos = offset + node->GetOutputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
-            if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
+            if (!isNodeDragging && std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
