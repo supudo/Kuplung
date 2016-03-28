@@ -12,10 +12,20 @@
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
+#include "kuplung/ui/components/materialeditor/MELink.hpp"
 #include "kuplung/ui/components/materialeditor/MENode.hpp"
 #include "kuplung/ui/components/materialeditor/MENode_Color.hpp"
 #include "kuplung/ui/components/materialeditor/MENode_Combine.hpp"
 #include "kuplung/ui/components/materialeditor/MENode_Texture.hpp"
+
+struct DragNode {
+    ImVec2 pos;
+    MENode* node;
+    int inputSlotIndex, outputSlotIndex;
+    DragNode() : node(NULL), inputSlotIndex(-1), outputSlotIndex(-1) {}
+    bool isValid() const { return node && (inputSlotIndex >= 0 || outputSlotIndex >= 0); }
+    void reset() { *this = DragNode(); }
+};
 
 class MaterialEditor {
 public:
@@ -26,7 +36,7 @@ private:
     void initMaterialNodes(ModelFace *face);
 
     std::vector<MENode*> nodes;
-    ImVector<MaterialEditor_NodeLink> links;
+    std::vector<MELink*> links;
     bool inited = false;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool show_grid = true;
@@ -34,6 +44,7 @@ private:
 
     char nodeImagePathText[256];
 
+    DragNode dragNode;
     ImColor style_LinkColor;
     float style_LinkThickness;
     bool style_ShowImages;

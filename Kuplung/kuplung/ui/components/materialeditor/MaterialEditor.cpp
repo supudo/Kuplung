@@ -10,6 +10,7 @@
 #include <math.h>
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
+#include "kuplung/utilities/imgui/imgui_internal.h"
 
 // Creating a node graph editor for ImGui
 // Quick demo, not production code! This is more of a demo of how to use ImGui to create custom stuff.
@@ -79,7 +80,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     ImGui::BeginGroup();
 
-    const float NODE_SLOT_RADIUS = 4.0f;
+    const float NODE_SLOT_RADIUS = 6.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
 
     // Create our child canvas
@@ -112,25 +113,36 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     // Display links
     draw_list->ChannelsSetCurrent(0); // Background
-    for (int link_idx = 0; link_idx < this->links.Size; link_idx++) {
-        MaterialEditor_NodeLink* link = &this->links[link_idx];
-        MENode* node_inp = (MENode*)this->nodes.at(link->InputIdx);
-        MENode* node_out = (MENode*)this->nodes.at(link->OutputIdx);
-        ImVec2 p1 = offset + node_inp->GetOutputSlotPos(link->InputSlot);
-        ImVec2 p2 = offset + node_out->GetInputSlotPos(link->OutputSlot);
+    for (size_t i = 0; i < this->links.size(); i++) {
+        MELink* link = this->links[i];
+        MENode* node_out = link->NodeOutput;
+        MENode* node_in = link->NodeInput;
+        ImVec2 p1 = offset + node_out->GetOutputSlotPos(link->SlotOutput);
+        ImVec2 p2 = offset + node_in->GetInputSlotPos(link->SlotInput);
         draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, this->style_LinkColor, this->style_LinkThickness);
     }
 
-//    const ImGuiIO io = ImGui::GetIO();
-//    MENode *dragNode = this->nodes[1];
+    bool isMouseDraggingForScrolling = ImGui::IsMouseDragging(2, 0.0f);
+    const ImGuiIO io = ImGui::GetIO();
+    const ImVec2 mouseScreenPos = io.MousePos;
+    const bool cantDragAnything = isMouseDraggingForScrolling;
+    bool isDraggingForLinks = !cantDragAnything && ImGui::IsMouseDragging(0, 0.0f);
+    bool isDragNodeValid = this->dragNode.isValid();
+    const ImVec2 link_cp(10, 0);
 
     // Display dragging links
-//    const ImVec2 link_cp(100, 0);
-//    if (ImGui::IsMouseHoveringWindow() && ImGui::IsMouseDragging(0, 0.0f)) {
-//        ImVec2 p1 = offset + dragNode->GetOutputSlotPos(0);
-//        const ImVec2& p2 = io.MousePos;
-//        draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness);
-//    }
+    if (isDraggingForLinks && this->dragNode.node != NULL) {
+        if (this->dragNode.inputSlotIndex != -1) {
+            ImVec2 p1 = offset + this->dragNode.node->GetOutputSlotPos(this->dragNode.inputSlotIndex);
+            const ImVec2& p2 = mouseScreenPos;
+            draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+        }
+        else if (this->dragNode.outputSlotIndex != -1) {
+            const ImVec2& p1 = mouseScreenPos;
+            ImVec2 p2 = offset + this->dragNode.node->GetInputSlotPos(this->dragNode.outputSlotIndex);
+            draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
+        }
+    }
 
     // Display nodes
     ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(1,1,1,0));
@@ -168,17 +180,61 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         ImU32 node_bg_color = (node_hovered_in_list == node->ID || node_hovered_in_scene == node->ID || (node_hovered_in_list == -1 && this->node_selected == node->ID)) ? ImColor(75, 75, 75) : ImColor(60, 60, 60);
         draw_list->AddRectFilled(node_rect_min, node_rect_max, node_bg_color, 4.0f);
         draw_list->AddRect(node_rect_min, node_rect_max, ImColor(100, 100, 100), 4.0f);
+        ImVec2 connectorScreenPos;
         for (int slot_idx = 0; slot_idx < node->InputsCount; slot_idx++) {
-            draw_list->AddCircleFilled(offset + node->GetInputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
+            connectorScreenPos = offset + node->GetInputSlotPos(slot_idx);
+            draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
+            if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
+                if (isDraggingForLinks && !isDragNodeValid) {
+                    this->dragNode.node = node;
+                    this->dragNode.outputSlotIndex = slot_idx;
+                    this->dragNode.inputSlotIndex = -1;
+                    this->dragNode.pos = mouseScreenPos;
+                    printf("[IN] Start dragging = %s - %i\n", node->Name.c_str(), slot_idx);
+                }
+                else if (isDragNodeValid && this->dragNode.node != node) {
+//                    if (this->dragNode.outputSlotIndex != -1) {
+//                        for (int link_idx = 0; link_idx < links.size(); link_idx++ ) {
+//                            MaterialEditor_NodeLink& link = this->links[link_idx];
+//                            if (link.OutputIdx == this->dragNode.node && this->dragNode.outputSlotIndex == link.OutputSlot)   {
+//                        if (linkCallback) linkCallback(link,LS_DELETED,*this);
+//                        // remove link
+//                        if (link_idx+1 < links.size()) link = links[links.size()-1];    // swap with the last link
+//                        links.resize(links.size()-1);
+//                        --link_idx;
+//                        }
+//                        }
+//                    }
+                }
+            }
         }
         for (int slot_idx = 0; slot_idx < node->OutputsCount; slot_idx++) {
-            draw_list->AddCircleFilled(offset + node->GetOutputSlotPos(slot_idx), NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
+            connectorScreenPos = offset + node->GetOutputSlotPos(slot_idx);
+            draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
+            if (std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
+                if (isDraggingForLinks && !isDragNodeValid) {
+                    this->dragNode.node = node;
+                    this->dragNode.outputSlotIndex = -1;
+                    this->dragNode.inputSlotIndex = slot_idx;
+                    this->dragNode.pos = mouseScreenPos;
+                    printf("[OUT] Start dragging = %s - %i\n", node->Name.c_str(), slot_idx);
+                }
+            }
         }
+//        if (!isDraggingForLinks && !this->dragNode.isValid()) {
+//            this->dragNode.node = NULL;
+//            this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
+//        }
 
         ImGui::PopID();
     }
     ImGui::PopStyleColor(3);
     draw_list->ChannelsMerge();
+
+    if (!isDraggingForLinks) {
+        this->dragNode.node = NULL;
+        printf("Quit dragging.\n");
+    }
 
     // Open context menu
     if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1)) {
@@ -230,84 +286,98 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 }
 
 void MaterialEditor::initMaterialNodes(ModelFace *face) {
-    this->nodes.push_back(new MENode_Combine(0, "fragColor", ImVec2(270.0, 0), 1.0f, ImColor(0, 200, 100), 0, 0));
+    MENode_Combine* node0 = new MENode_Combine(0, "fragColor", ImVec2(270.0, 0), 1.0f, ImColor(0, 200, 100), 0, 0);
+    this->nodes.push_back(node0);
 
     int materialNodesCounter = 1;
     int slotsCounter = 0;
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 100 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.ambient.r;
         float g = face->oFace.faceMaterial.ambient.g;
         float b = face->oFace.faceMaterial.ambient.b;
-        this->nodes.push_back(new MENode_Color(materialNodesCounter, "Ambient Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
+        MENode_Color* node = new MENode_Color(materialNodesCounter, "Ambient Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += 80;
     }
-    this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
     materialNodesCounter += 1;
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_diffuse.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.diffuse.r;
         float g = face->oFace.faceMaterial.diffuse.g;
         float b = face->oFace.faceMaterial.diffuse.b;
-        this->nodes.push_back(new MENode_Color(1, "Diffuse Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
+        MENode_Color* node = new MENode_Color(1, "Diffuse Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += 80;
     }
-    this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
     materialNodesCounter += 1;
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image));
-        this->links.push_back(MaterialEditor_NodeLink(2, 0, 0, slotsCounter));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_specular.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
     else {
         float r = face->oFace.faceMaterial.specular.r;
         float g = face->oFace.faceMaterial.specular.g;
         float b = face->oFace.faceMaterial.specular.b;
-        this->nodes.push_back(new MENode_Color(3, "Specular Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1));
+        MENode_Color* node = new MENode_Color(3, "Specular Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += 80;
     }
-    this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
     materialNodesCounter += 1;
     slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image));
-        this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image));
-        this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
-        this->nodes.push_back(new MENode_Texture(materialNodesCounter, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image));
-        this->links.push_back(MaterialEditor_NodeLink(materialNodesCounter, 0, 0, slotsCounter));
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image);
+        this->nodes.push_back(node);
+        this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
         slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);

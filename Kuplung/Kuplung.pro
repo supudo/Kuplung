@@ -113,6 +113,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/ColorPicker.cpp \
     kuplung/ui/components/Tabs.cpp \
     kuplung/ui/components/materialeditor/MaterialEditor.cpp \
+    kuplung/ui/components/materialeditor/MELink.cpp \
     kuplung/ui/components/materialeditor/MENode.cpp \
     kuplung/ui/components/materialeditor/MENode_Color.cpp \
     kuplung/ui/components/materialeditor/MENode_Combine.cpp \
@@ -160,6 +161,7 @@ HEADERS += \
     kuplung/ui/components/Tabs.hpp \
     kuplung/ui/components/materialeditor/MaterialEditorData.h \
     kuplung/ui/components/materialeditor/MaterialEditor.hpp \
+    kuplung/ui/components/materialeditor/MELink.hpp \
     kuplung/ui/components/materialeditor/MENode.hpp \
     kuplung/ui/components/materialeditor/MENode_Color.hpp \
     kuplung/ui/components/materialeditor/MENode_Combine.hpp \
