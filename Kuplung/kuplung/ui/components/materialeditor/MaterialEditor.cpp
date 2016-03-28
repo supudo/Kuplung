@@ -190,7 +190,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.inputSlotIndex != -1) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeInput == node && link->SlotInput == slot_idx)
+                        if (link->NodeInput == node && slot_idx == link->SlotInput)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
@@ -214,7 +214,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.outputSlotIndex != -1) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeOutput == node && link->SlotOutput == slot_idx)
+                        if (link->NodeInput == node && link->SlotInput == slot_idx)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
@@ -222,7 +222,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                     this->dragNode.node = NULL;
                     this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
                 }
-                else if (isDraggingForLinks && !isDragNodeValid) {
+                if (isDraggingForLinks && !isDragNodeValid) {
                     this->dragNode.node = node;
                     this->dragNode.outputSlotIndex = -1;
                     this->dragNode.inputSlotIndex = slot_idx;
