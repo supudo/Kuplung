@@ -44,6 +44,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->selectedTabGUICamera = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
+    this->selectedTabPanel = 0;
 
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
@@ -159,6 +160,44 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
 
+    ImGui::BeginChild("tabs_list", ImVec2(-1, this->panelHeight_Tabs));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
+    const char* tabsPanels[] = {
+        "\n  " ICON_MD_BUILD "  ",
+        "\n  " ICON_MD_ADD "  "
+    };
+    const char* tabsPanelsLabels[] = { "Models", "Create" };
+    const int numTabsPanels = sizeof(tabsPanels) / sizeof(tabsPanels[0]);
+    ImGui::TabLabels(numTabsPanels, tabsPanels, this->selectedTabPanel, ImVec2(50.0, 30.0), tabsPanelsLabels);
+
+    ImGui::PopStyleColor(3);
+    ImGui::EndChild();
+
+    ImGui::BeginGroup();
+
+    switch (this->selectedTabPanel) {
+        case 0:
+            this->drawModels(isFrame, meshModelFaces);
+            break;
+        case 1:
+            this->drawCreate();
+            break;
+        default:
+            break;
+    }
+
+    ImGui::EndGroup();
+
+    if ((*meshModelFaces)[this->selectedObject]->showMaterialEditor)
+        this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
+
+    ImGui::End();
+}
+
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -443,13 +482,19 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::PopItemWidth();
 
     ImGui::EndChild();
-
-    if ((*meshModelFaces)[this->selectedObject]->showMaterialEditor)
-        this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
-
-    ImGui::End();
 }
 
+void DialogControlsModels::drawCreate() {
+    ImGui::Button("Plane", ImVec2(-1, 0));
+    ImGui::Button("Cube", ImVec2(-1, 0));
+    ImGui::Button("UV Sphere", ImVec2(-1, 0));
+    ImGui::Button("Ico Sphere", ImVec2(-1, 0));
+    ImGui::Button("Cylinder", ImVec2(-1, 0));
+    ImGui::Button("Tube", ImVec2(-1, 0));
+    ImGui::Button("Cone", ImVec2(-1, 0));
+    ImGui::Button("Thorus", ImVec2(-1, 0));
+    ImGui::Button("Monkey Head", ImVec2(-1, 0));
+}
 
 void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshModelFaces) {
     ImGui::OpenPopup("Rename");

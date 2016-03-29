@@ -26,6 +26,9 @@ public:
 private:
     std::function<void(std::string)> funcDoLog;
 
+    void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
+    void drawCreate();
+
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
 
@@ -34,8 +37,9 @@ private:
     bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
     int selectedObject;
-    int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
+    int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabPanel;
     float heightTopPanel = 170.0f;
+    float panelHeight_Tabs = 36.0f;
 
     bool showTextureWindow_Ambient, showTexture_Ambient, showTextureWindow_Diffuse, showTexture_Diffuse;
     bool showTextureWindow_Dissolve, showTexture_Dissolve, showTextureWindow_Bump, showTexture_Bump;
