@@ -190,11 +190,9 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                 if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.inputSlotIndex != -1) {
                     for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
                         MELink* link = this->links[link_idx];
-                        if (link->NodeOutput == node && link->SlotOutput == slot_idx)
+                        if (link->NodeOutput == this->dragNode.node)
                             this->links.erase(this->links.begin() + link_idx);
-                        if (link->NodeInput == node && slot_idx == link->SlotInput)
-                            this->links.erase(this->links.begin() + link_idx);
-                        if (link->NodeInput == node && slot_idx == link->SlotOutput)
+                        if (link->NodeOutput == node && link->SlotInput == this->dragNode.inputSlotIndex)
                             this->links.erase(this->links.begin() + link_idx);
                     }
                     this->links.push_back(new MELink(this->dragNode.node, this->dragNode.inputSlotIndex, node, slot_idx));
@@ -202,7 +200,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
                     this->dragNode.node = NULL;
                     this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
                 }
-                else if (isDraggingForLinks && !isDragNodeValid) {
+                else if (isDraggingForLinks && !isDragNodeValid && node->ID > 0) {
                     this->dragNode.node = node;
                     this->dragNode.outputSlotIndex = slot_idx;
                     this->dragNode.inputSlotIndex = -1;
@@ -215,22 +213,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
             connectorScreenPos = offset + node->GetOutputSlotPos(slot_idx);
             draw_list->AddCircleFilled(connectorScreenPos, NODE_SLOT_RADIUS, ImColor(150, 150, 150, 150));
             if (!isNodeDragging && std::abs(mouseScreenPos.x - connectorScreenPos.x) < NODE_SLOT_RADIUS && std::abs(mouseScreenPos.y - connectorScreenPos.y) < NODE_SLOT_RADIUS) {
-                if (isDraggingForLinks && isDragNodeValid && this->dragNode.node != node && this->dragNode.outputSlotIndex != -1) {
-                    for (size_t link_idx = 0; link_idx < this->links.size(); link_idx++) {
-                        MELink* link = this->links[link_idx];
-                        if (link->NodeOutput == node && link->SlotOutput == slot_idx)
-                            this->links.erase(this->links.begin() + link_idx);
-                        if (link->NodeInput == node && slot_idx == link->SlotInput)
-                            this->links.erase(this->links.begin() + link_idx);
-                        if (link->NodeInput == node && slot_idx == link->SlotOutput)
-                            this->links.erase(this->links.begin() + link_idx);
-                    }
-                    this->links.push_back(new MELink(node, slot_idx, this->dragNode.node, this->dragNode.outputSlotIndex));
-                    isDraggingForLinks = false;
-                    this->dragNode.node = NULL;
-                    this->dragNode.inputSlotIndex = this->dragNode.outputSlotIndex = -1;
-                }
-                if (isDraggingForLinks && !isDragNodeValid) {
+                if (isDraggingForLinks && !isDragNodeValid && node->ID > 0) {
                     this->dragNode.node = node;
                     this->dragNode.outputSlotIndex = -1;
                     this->dragNode.inputSlotIndex = slot_idx;
@@ -276,7 +259,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
             if (ImGui::MenuItem("Add Color"))
                 this->nodes.push_back(new MENode_Color((int)this->nodes.size() + 1, "Color", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
             else if (ImGui::MenuItem("Add Texture"))
-                this->nodes.push_back(new MENode_Texture((int)this->nodes.size() + 1, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 1, 1));
+                this->nodes.push_back(new MENode_Texture((int)this->nodes.size() + 1, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
             //if (ImGui::MenuItem("Paste", NULL, false, false)) {}
         }
         ImGui::EndPopup();
@@ -320,7 +303,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += 80;
     }
     materialNodesCounter += 1;
-    slotsCounter += 1;
+//    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_diffuse.image != "") {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
@@ -338,14 +321,14 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += 80;
     }
     materialNodesCounter += 1;
-    slotsCounter += 1;
+//    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
-        slotsCounter += 1;
+//        slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
@@ -365,14 +348,14 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += 80;
     }
     materialNodesCounter += 1;
-    slotsCounter += 1;
+//    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
-        slotsCounter += 1;
+//        slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
@@ -381,7 +364,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
-        slotsCounter += 1;
+//        slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
@@ -390,16 +373,13 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
-        slotsCounter += 1;
+//        slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 80);
     }
 
     MENode_Combine* zeroNode = (MENode_Combine*)this->nodes.at(0);
-    //zeroNode->Pos = ImVec2(400.0, nodePosition.y / 2);
-    zeroNode->Pos = ImVec2(400.0, 100);
-    zeroNode->InputsCount = materialNodesCounter - 1;
-
-    this->links.clear();
+    zeroNode->Pos = ImVec2(400.0, nodePosition.y / 2);
+    zeroNode->InputsCount = 1;//materialNodesCounter - 1;
 
     this->inited = true;
 }
