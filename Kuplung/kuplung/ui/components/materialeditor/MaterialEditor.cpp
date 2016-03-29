@@ -80,11 +80,13 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     ImGui::BeginGroup();
 
+    const float ItemWidth = 140.0f;
     const float NODE_SLOT_RADIUS = 6.0f;
     const ImVec2 NODE_WINDOW_PADDING(8.0f, 8.0f);
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
 
     // Create our child canvas
-    ImGui::Text("Hold middle mouse button to scroll (%.2f, %.2f)", this->scrolling.x, this->scrolling.y);
+    ImGui::Text("Hold mouse wheel to scroll (%.2f, %.2f), scroll MMB to zoom", this->scrolling.x, this->scrolling.y);
     ImGui::SameLine(ImGui::GetWindowWidth() - 220);
     ImGui::Checkbox("Show images", &this->style_ShowImages);
     ImGui::SameLine(ImGui::GetWindowWidth() - 100);
@@ -93,7 +95,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoMove);
-    ImGui::PushItemWidth(120.0f);
+    ImGui::PushItemWidth(ItemWidth);
 
     ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -111,7 +113,6 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGuiState& g = *GImGui;
 
     // Zoom
-    ImGuiWindow* window = ImGui::GetCurrentWindow();
     float new_font_scale = ImClamp(window->FontWindowScale + g.IO.MouseWheel * 0.10f, 0.50f, 2.50f);
     if (io.MouseClicked[2])
         new_font_scale = 1.f;   // MMB = RESET ZOOM
@@ -162,7 +163,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(1,1,1,0));
     ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1,1,1,0));
 
-    const float baseNodeWidth = 140.0f * window->FontWindowScale;
+    const float baseNodeWidth = ItemWidth * window->FontWindowScale;
     float currentNodeWidth = baseNodeWidth;
     ImGui::PushItemWidth(currentNodeWidth);
 
