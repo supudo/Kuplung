@@ -122,7 +122,33 @@ void MENode_Texture::showImage() {
     ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Image", &this->showTextureWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+    std::string title;
+    switch (this->TextureType) {
+        case MaterialEditor_TextureType_Ambient:
+            title = "Ambient Image";
+            break;
+        case MaterialEditor_TextureType_Diffuse:
+            title = "Diffuse Image";
+            break;
+        case MaterialEditor_TextureType_Dissolve:
+            title = "Dissolve Image";
+            break;
+        case MaterialEditor_TextureType_Bump:
+            title = "Bump Map";
+            break;
+        case MaterialEditor_TextureType_Specular:
+            title = "Specular Map";
+            break;
+        case MaterialEditor_TextureType_SpecularExp:
+            title = "SpecularExp Map";
+            break;
+        case MaterialEditor_TextureType_Displacement:
+            title = "Displacement Map";
+            break;
+        default:
+            break;
+    }
+    ImGui::Begin(title.c_str(), &this->showTextureWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
 
     ImGui::Text("%s", this->TextureFilename.c_str());
     ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);
@@ -180,6 +206,7 @@ void MENode_Texture::dialogFileBrowserProcessFile(FBEntity file) {
     this->TextureFilename = file.title;
     strcpy(this->filePath, this->TextureImage.c_str());
     this->initBase(this->ID, this->Name, this->Pos, this->Value, this->Color, this->InputsCount, this->OutputsCount, this->TextureFilename, this->TextureImage);
+    this->createTextureBuffer(&this->textureWidth, &this->textureHeight);
 }
 
 void MENode_Texture::doLog(std::string logMessage) {
