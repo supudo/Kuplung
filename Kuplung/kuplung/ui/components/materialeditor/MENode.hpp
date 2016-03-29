@@ -16,10 +16,10 @@
 class MENode {
 public:
     void init(int id, MaterialEditor_NodeType nodeType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename = "", std::string textureImage="");
-    virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview);
+    virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview, float scale);
 
-    ImVec2 GetInputSlotPos(int slot_no) const;
-    ImVec2 GetOutputSlotPos(int slot_no) const;
+    ImVec2 GetInputSlotPos(int slot_no, float scale=1.0f) const;
+    ImVec2 GetOutputSlotPos(int slot_no, float scale=1.0f) const;
 
     int ID, InputsCount, OutputsCount, NodeType;
     std::string Name, TextureFilename, TextureImage;

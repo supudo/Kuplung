@@ -30,17 +30,17 @@ void MENode::init(int id, MaterialEditor_NodeType nodeType, std::string name, co
     this->IsExpanded = true;
 }
 
-void MENode::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview) {
+void MENode::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview, float scale) {
     ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui::BeginGroup();
     ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
     ImGui::EndGroup();
 }
 
-ImVec2 MENode::GetInputSlotPos(int slot_no) const {
-    return ImVec2(Pos.x, Pos.y + Size.y * ((float)slot_no + 1) / ((float)InputsCount + 1));
+ImVec2 MENode::GetInputSlotPos(int slot_no, float scale) const {
+    return ImVec2(Pos.x * scale, Pos.y * scale + Size.y * ((float)slot_no + 1) / ((float)InputsCount + 1));
 }
 
-ImVec2 MENode::GetOutputSlotPos(int slot_no) const {
-    return ImVec2(Pos.x + Size.x, Pos.y + Size.y * ((float)slot_no + 1) / ((float)OutputsCount + 1));
+ImVec2 MENode::GetOutputSlotPos(int slot_no, float scale) const {
+    return ImVec2(Pos.x * scale + Size.x, Pos.y * scale + Size.y * ((float)slot_no + 1) / ((float)OutputsCount + 1));
 }

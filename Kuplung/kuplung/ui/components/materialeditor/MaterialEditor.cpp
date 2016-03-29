@@ -99,10 +99,32 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
     draw_list->ChannelsSplit(2);
 
+    // States
+    bool isMouseDraggingForScrolling = ImGui::IsMouseDragging(2, 0.0f);
+    const ImGuiIO io = ImGui::GetIO();
+    const ImVec2 mouseScreenPos = io.MousePos;
+    const bool cantDragAnything = isMouseDraggingForScrolling;
+    bool isDraggingForLinks = !cantDragAnything && ImGui::IsMouseDragging(0, 0.0f);
+    bool isDragNodeValid = this->dragNode.isValid();
+    bool isNodeDragging = false;
+    const ImVec2 link_cp(10, 0);
+    ImGuiState& g = *GImGui;
+
+    // Zoom
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    float new_font_scale = ImClamp(window->FontWindowScale + g.IO.MouseWheel * 0.10f, 0.50f, 2.50f);
+    if (io.MouseClicked[2])
+        new_font_scale = 1.f;   // MMB = RESET ZOOM
+    float scale = new_font_scale / window->FontWindowScale;
+    if (scale != 1)	{
+        this->scrolling = ImVec2(this->scrolling.x * scale, this->scrolling.y * scale);
+        window->FontWindowScale = new_font_scale;
+    }
+
     // Display grid
     if (this->show_grid) {
         ImU32 GRID_COLOR = ImColor(200, 200, 200, 40);
-        float GRID_SZ = 64.0f;
+        float GRID_SZ = 64.0f * window->FontWindowScale;
         ImVec2 win_pos = ImGui::GetCursorScreenPos();
         ImVec2 canvas_sz = ImGui::GetWindowSize();
         for (float x = fmodf(offset.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
@@ -113,32 +135,24 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
     // Display links
     draw_list->ChannelsSetCurrent(0); // Background
+    ImVec2 link_size = ImVec2(50 * window->FontWindowScale, 0);
     for (size_t i = 0; i < this->links.size(); i++) {
         MELink* link = this->links[i];
         ImVec2 p1 = offset + link->NodeOutput->GetOutputSlotPos(link->SlotOutput);
         ImVec2 p2 = offset + link->NodeInput->GetInputSlotPos(link->SlotInput);
-        draw_list->AddBezierCurve(p1, p1 + ImVec2(+50, 0), p2 + ImVec2(-50, 0), p2, this->style_LinkColor, this->style_LinkThickness);
+        draw_list->AddBezierCurve(p1, p1 + link_size, p2 - link_size, p2, this->style_LinkColor, this->style_LinkThickness);
     }
-
-    bool isMouseDraggingForScrolling = ImGui::IsMouseDragging(2, 0.0f);
-    const ImGuiIO io = ImGui::GetIO();
-    const ImVec2 mouseScreenPos = io.MousePos;
-    const bool cantDragAnything = isMouseDraggingForScrolling;
-    bool isDraggingForLinks = !cantDragAnything && ImGui::IsMouseDragging(0, 0.0f);
-    bool isDragNodeValid = this->dragNode.isValid();
-    bool isNodeDragging = false;
-    const ImVec2 link_cp(10, 0);
 
     // Display dragging links
     if (isDraggingForLinks && this->dragNode.node != NULL) {
         if (this->dragNode.inputSlotIndex != -1) {
-            ImVec2 p1 = offset + this->dragNode.node->GetOutputSlotPos(this->dragNode.inputSlotIndex);
+            ImVec2 p1 = offset + this->dragNode.node->GetOutputSlotPos(this->dragNode.inputSlotIndex, window->FontWindowScale);
             const ImVec2& p2 = mouseScreenPos;
             draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
         }
         else if (this->dragNode.outputSlotIndex != -1) {
             const ImVec2& p1 = mouseScreenPos;
-            ImVec2 p2 = offset + this->dragNode.node->GetInputSlotPos(this->dragNode.outputSlotIndex);
+            ImVec2 p2 = offset + this->dragNode.node->GetInputSlotPos(this->dragNode.outputSlotIndex, window->FontWindowScale);
             draw_list->AddBezierCurve(p1, p1 + link_cp, p2 - link_cp, p2, this->style_LinkColor, this->style_LinkThickness, 0);
         }
     }
@@ -147,6 +161,11 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
     ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(1,1,1,0));
     ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(1,1,1,0));
     ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(1,1,1,0));
+
+    const float baseNodeWidth = 140.0f * window->FontWindowScale;
+    float currentNodeWidth = baseNodeWidth;
+    ImGui::PushItemWidth(currentNodeWidth);
+
     for (size_t i=0; i<this->nodes.size(); i++) {
         MENode* node = (MENode*)this->nodes[i];
         ImGui::PushID(node->ID);
@@ -155,11 +174,12 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         // Display node contents first
         draw_list->ChannelsSetCurrent(1); // Foreground
         bool old_any_active = ImGui::IsAnyItemActive();
-        node->draw(node_rect_min, NODE_WINDOW_PADDING, this->style_ShowImages);
+        node->draw(node_rect_min, NODE_WINDOW_PADDING, this->style_ShowImages, window->FontWindowScale);
 
         // Save the size of what we have emitted and whether any of the widgets are being used
         bool node_widgets_active = (!old_any_active && ImGui::IsAnyItemActive());
-        node->Size = ImGui::GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING + (node->ID == 0 ? ImVec2(0, 40) : ImVec2(0,0));
+        ImVec2 ns_scale = ImVec2(ImGui::GetItemRectSize().x * window->FontWindowScale, ImGui::GetItemRectSize().y * window->FontWindowScale);
+        node->Size = ns_scale + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING + (node->ID == 0 ? ImVec2(0, 40) : ImVec2(0,0));
         ImVec2 node_rect_max = node_rect_min + node->Size;
 
         // Display node box
@@ -174,7 +194,8 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
         if (node_widgets_active || node_moving_active)
             this->node_selected = node->ID;
         if (node_moving_active && ImGui::IsMouseDragging(0)) {
-            node->Pos = node->Pos + ImGui::GetIO().MouseDelta;
+            ImVec2 np_scale = ImVec2(io.MouseDelta.x / window->FontWindowScale, io.MouseDelta.y / window->FontWindowScale);
+            node->Pos = node->Pos + np_scale;
             isNodeDragging = true;
         }
 
@@ -224,6 +245,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
 
         ImGui::PopID();
     }
+    ImGui::PopItemWidth();
     ImGui::PopStyleColor(3);
     draw_list->ChannelsMerge();
 
