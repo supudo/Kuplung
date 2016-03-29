@@ -346,14 +346,15 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsGUI = true;
 
     // testbed
-    //std::string testObj = "bump_cube0.obj";
-    std::string testObj = "bump_cylinder.obj";
-    FBEntity fileTestbed;
-    fileTestbed.isFile = true;
-    fileTestbed.extension = ".obj";
-    fileTestbed.title = testObj;
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
-    this->guiProcessObjFile(fileTestbed);
+//    //std::string testObj = "bump_cube0.obj";
+//    std::string testObj = "bump_cylinder.obj";
+//    FBEntity fileTestbed;
+//    fileTestbed.isFile = true;
+//    fileTestbed.extension = ".obj";
+//    fileTestbed.title = testObj;
+//    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
+//    this->guiProcessObjFile(fileTestbed);
+    this->managerUI->showControlsModels = true;
 }
 
 #pragma mark - App GUI

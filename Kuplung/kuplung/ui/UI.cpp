@@ -201,7 +201,7 @@ void UI::renderStart(bool isFrame) {
     if (this->showControlsGUI)
         this->dialogControlsGUI();
 
-    if (this->showControlsModels && meshModelFaces->size() > 0)
+    if (this->showControlsModels)// && meshModelFaces != NULL && meshModelFaces->size() > 0)
         this->dialogControlsModels();
 
     if (this->showSceneStats)

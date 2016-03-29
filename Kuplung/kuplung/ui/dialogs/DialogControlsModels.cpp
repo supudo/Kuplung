@@ -44,7 +44,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->selectedTabGUICamera = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
-    this->selectedTabPanel = 0;
+    this->selectedTabPanel = 1;
 
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
@@ -180,7 +180,10 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     switch (this->selectedTabPanel) {
         case 0:
-            this->drawModels(isFrame, meshModelFaces);
+            if (meshModelFaces != NULL)
+                this->drawModels(isFrame, meshModelFaces);
+            else
+                ImGui::TextColored(ImVec4(255, 0, 0, 255), "No models in the current scene.");
             break;
         case 1:
             this->drawCreate();
@@ -191,7 +194,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     ImGui::EndGroup();
 
-    if ((*meshModelFaces)[this->selectedObject]->showMaterialEditor)
+    if (meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
         this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     ImGui::End();
@@ -494,6 +497,12 @@ void DialogControlsModels::drawCreate() {
     ImGui::Button("Cone", ImVec2(-1, 0));
     ImGui::Button("Thorus", ImVec2(-1, 0));
     ImGui::Button("Monkey Head", ImVec2(-1, 0));
+
+    ImGui::Separator();
+
+    ImGui::Button("Directional (Sun)", ImVec2(-1, 0));
+    ImGui::Button("Point (Light bulb)", ImVec2(-1, 0));
+    ImGui::Button("Spot (Flashlight)", ImVec2(-1, 0));
 }
 
 void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshModelFaces) {
