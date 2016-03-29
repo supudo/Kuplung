@@ -18,9 +18,14 @@ typedef enum MaterialEditor_NodeType {
     MaterialEditor_NodeType_Image
 } MaterialEditor_NodeType;
 
-//struct MaterialEditor_NodeLink {
-//    int InputIdx, InputSlot, OutputIdx, OutputSlot;
-//    MaterialEditor_NodeLink(int input_idx, int input_slot, int output_idx, int output_slot) { InputIdx = input_idx; InputSlot = input_slot; OutputIdx = output_idx; OutputSlot = output_slot; }
-//};
+typedef enum MaterialEditor_TextureType {
+    MaterialEditor_TextureType_Ambient,
+    MaterialEditor_TextureType_Diffuse,
+    MaterialEditor_TextureType_Dissolve,
+    MaterialEditor_TextureType_Bump,
+    MaterialEditor_TextureType_Specular,
+    MaterialEditor_TextureType_SpecularExp,
+    MaterialEditor_TextureType_Displacement
+} MaterialEditor_TextureType;
 
 #endif /* MaterialEditorData_hpp */

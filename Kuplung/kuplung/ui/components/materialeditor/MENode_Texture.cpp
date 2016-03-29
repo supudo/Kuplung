@@ -19,13 +19,14 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
-MENode_Texture::MENode_Texture(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+MENode_Texture::MENode_Texture(int id, MaterialEditor_TextureType texType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
     this->initBase(id, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
     this->showTextureWindow = false;
     this->showFileBrowser = false;
     this->loadTexture = false;
     this->textureWidth = 0;
     this->textureHeight = 0;
+    this->TextureType = texType;
     strcpy(this->filePath, this->TextureImage.c_str());
 
     this->componentFileBrowser = new FileBrowser();
@@ -58,6 +59,13 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
 
     if (this->IsExpanded) {
         ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
+
+        ImGui::PushStyleColor(ImGuiCol_Header, ImVec4(0.4, 0.4, 0.9, 0.45));
+        ImGui::PushStyleColor(ImGuiCol_HeaderActive, ImVec4(0.53, 0.53, 0.87, 0.8));
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, ImVec4(0.45, 0.45, 0.9, 0.8));
+        const char* texture_type_items[] = { "Ambient", "Diffuse", "Dissolve", "Bump", "Specular", "SpecularExp", "Displacement" };
+        ImGui::Combo("##987", &this->TextureType, texture_type_items, IM_ARRAYSIZE(texture_type_items));
+        ImGui::PopStyleColor(3);
 
         std::string btnLabel = ICON_FA_EYE;
         if (ImGui::Button(btnLabel.c_str())) {
