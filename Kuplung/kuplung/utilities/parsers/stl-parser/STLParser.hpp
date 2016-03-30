@@ -10,19 +10,15 @@
 #define STLParser_hpp
 
 #include "kuplung/settings/Settings.h"
-#include <functional>
 
 class STLParser {
 public:
     ~STLParser();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     void parse(FBEntity file);
     void destroy();
 
     std::vector<float> vertices, normals;
-
-private:
-    std::function<void(std::string)> doLog;
 };
 
 #endif /* STLParser_hpp */

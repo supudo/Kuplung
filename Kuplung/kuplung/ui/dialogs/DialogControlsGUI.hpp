@@ -17,12 +17,10 @@
 
 class DialogControlsGUI {
 public:
-    void init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog);
+    void init(ObjectsManager *managerObjects);
     void render(bool* show, bool* isFrame);
 
 private:
-    std::function<void(std::string)> funcDoLog;
-
     int selectedObject;
     int selectedObjectLight;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;

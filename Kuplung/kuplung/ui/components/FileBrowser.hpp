@@ -17,21 +17,20 @@
 
 class FileBrowser {
 public:
-    void init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile);
+    void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity)> processFile);
     void setStyleBrowser(bool isStyle);
     void setImageBrowser(bool isImage);
     void draw(const char* title, bool* p_opened = NULL);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(std::string filePath);
-    std::function<void(std::string)> doLog;
     std::function<void(FBEntity)> processFile;
 
     void drawFiles();
-    void logMessage(std::string logMessage);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);
+    void logMessage(std::string logMessage);
 
     bool log, isStyleBrowser, isImageBrowser;
     int positionX, positionY, width, height;

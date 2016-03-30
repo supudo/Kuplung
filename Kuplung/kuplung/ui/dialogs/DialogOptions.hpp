@@ -16,14 +16,11 @@
 
 class DialogOptions {
 public:
-    void init(std::function<void(std::string)> doLog);
+    void init();
     void showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool* p_opened = NULL, bool* needsFontChange = NULL);
     void loadFonts(bool* needsFontChange = NULL);
 
 private:
-    std::function<void(std::string)> doLog;
-    void logMessage(std::string message);
-
     FontsList *fontLister;
 
     int optionsFontSelected, optionsFontSizeSelected;

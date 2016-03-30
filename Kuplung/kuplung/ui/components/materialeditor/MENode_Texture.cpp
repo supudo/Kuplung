@@ -32,7 +32,6 @@ MENode_Texture::MENode_Texture(int id, MaterialEditor_TextureType texType, std::
     this->componentFileBrowser = new FileBrowser();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
                                      Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
-                                     std::bind(&MENode_Texture::doLog, this, std::placeholders::_1),
                                      std::bind(&MENode_Texture::dialogFileBrowserProcessFile, this, std::placeholders::_1));
     this->componentFileBrowser->setImageBrowser(true);
 

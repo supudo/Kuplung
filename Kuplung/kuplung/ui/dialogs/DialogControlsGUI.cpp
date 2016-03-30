@@ -12,9 +12,8 @@
 #include "kuplung/ui/components/Tabs.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 
-void DialogControlsGUI::init(ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
+void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->managerObjects = managerObjects;
-    this->funcDoLog = doLog;
 
     this->selectedObject = 0;
     this->selectedObjectLight = 0;

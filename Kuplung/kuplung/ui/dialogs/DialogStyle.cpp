@@ -13,10 +13,6 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/settings/Settings.h"
 
-void DialogStyle::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
-}
-
 void DialogStyle::saveDefault(ImGuiStyle& style) {
     std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
     if (!boost::filesystem::exists(defaultStyleFile))
@@ -117,7 +113,7 @@ ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
                         style.Colors[std::stoi(opKey)] = this->tov4(opValue);
                 }
                 catch (...) {
-                    this->doLog("[GUI Style] Can't load default GUI styles - [" + opKey + "] with value [" + opValue + "]!");
+                    Settings::Instance()->funcDoLog("[GUI Style] Can't load default GUI styles - [" + opKey + "] with value [" + opValue + "]!");
                 }
             }
 
@@ -189,7 +185,6 @@ std::vector<std::string> DialogStyle::splitString(const std::string &s, std::reg
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
     for ( ; iter != end; ++iter) {
-
         elements.push_back(*iter);
     }
     return elements;

@@ -12,12 +12,10 @@
 #include <regex>
 #include <string>
 #include <vector>
-#include <functional>
 #include "kuplung/utilities/ImGui/imgui.h"
 
 class DialogStyle {
 public:
-    void init(std::function<void(std::string)> doLog);
     void saveDefault(ImGuiStyle& style);
     void save(std::string fontfile, std::string fontsize, ImGuiStyle& style);
     ImGuiStyle& loadCurrent();
@@ -25,8 +23,6 @@ public:
     ImGuiStyle& loadDefault();
 
 private:
-    std::function<void(std::string)> doLog;
-
     void saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style);
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
     ImVec4 tov4(std::string opValue);

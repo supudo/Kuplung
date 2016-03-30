@@ -22,7 +22,7 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
     this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
     //this->parserSTL = new STLParser();
-    //this->parserSTL->init(std::bind(&FileModelManager::logMessage, this, std::placeholders::_1), std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+    //this->parserSTL->init(sstd::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 
 objScene FileModelManager::parse(FBEntity file) {

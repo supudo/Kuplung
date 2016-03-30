@@ -27,13 +27,12 @@ const char* GUIEditor_ShaderItems[] = {
     "terrain.frag"
 };
 
-void Editor::init(std::string appPath, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog) {
+void Editor::init(std::string appPath, int positionX, int positionY, int width, int height) {
     this->appPath = appPath;
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
     this->height = height;
-    this->doLog = doLog;
     this->shaderFileIndex = 0;
     this->currentFileName = "";
 }
@@ -101,10 +100,4 @@ void Editor::compileShader() {
             this->doFileShaderCompile(GUIEditor_ShaderItems[this->shaderFileIndex]);
         }
     }
-}
-
-#pragma mark - Private
-
-void Editor::logMessage(std::string logMessage) {
-    this->doLog("[GUIEditor] " + logMessage);
 }

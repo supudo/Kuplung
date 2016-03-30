@@ -10,14 +10,13 @@
 #define FontsList_hpp
 
 #include <algorithm>
-#include <functional>
 #include <string>
 #include <vector>
 #include "Settings.h"
 
 class FontsList {
 public:
-    void init(std::function<void(std::string)> doLog);
+    void init();
     bool fontFileExists(std::string font);
     void getFonts();
     int getSelectedFontSize();
@@ -26,8 +25,6 @@ public:
     const char* fontSizes[11] = {"12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32"};
 
 private:
-    std::function<void(std::string)> doLog;
-    void logMessage(std::string logMessage);
     void loadFontsOSX();
     void loadFontsWindows();
     void loadFontsNix();

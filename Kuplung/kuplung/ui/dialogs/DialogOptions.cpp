@@ -12,11 +12,9 @@
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/settings/Settings.h"
 
-void DialogOptions::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
-
+void DialogOptions::init() {
     this->fontLister = new FontsList();
-    this->fontLister->init(std::bind(&DialogOptions::logMessage, this, std::placeholders::_1));
+    this->fontLister->init();
     this->fontLister->getFonts();
 
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
@@ -191,8 +189,4 @@ void DialogOptions::loadFonts(bool* needsFontChange) {
     io.Fonts->AddFontFromFileTTF(gmFont.c_str(), Settings::Instance()->UIFontSize + 8.00, &gm_config, gm_ranges);
 
     *needsFontChange = false;
-}
-
-void DialogOptions::logMessage(std::string message) {
-    this->doLog("[DialogOptions] " + message);
 }

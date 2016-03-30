@@ -16,13 +16,12 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(std::string)> doLog, std::function<void(FBEntity)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
     this->height = height;
-    this->doLog = doLog;
     this->processFile = processFile;
     this->isStyleBrowser = false;
 }
@@ -223,5 +222,5 @@ double FileBrowser::roundOff(double n) {
 
 void FileBrowser::logMessage(std::string logMessage) {
     if (this->log)
-        this->doLog("[GUIFileBrowser] " + logMessage);
+        Settings::Instance()->funcDoLog("[GUIFileBrowser] " + logMessage);
 }

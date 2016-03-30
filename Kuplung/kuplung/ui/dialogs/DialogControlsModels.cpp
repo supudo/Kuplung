@@ -14,10 +14,9 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog, std::function<void(ShapeType)> addShape) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape) {
     this->sdlWindow = sdlWindow;
     this->managerObjects = managerObjects;
-    this->funcDoLog = doLog;
     this->funcAddShape = addShape;
 
     this->cmenu_deleteYn = false;
@@ -110,7 +109,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
     int tChannels;
     unsigned char* tPixels = stbi_load(imageFile.c_str(), width, height, &tChannels, 0);
     if (!tPixels)
-        this->funcDoLog("Can't load bump texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
+        Settings::Instance()->funcDoLog("Can't load bump texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
     else {
         glGenTextures(1, vboBuffer);
         glBindTexture(GL_TEXTURE_2D, *vboBuffer);

@@ -64,28 +64,27 @@ void UI::init(SDL_Window *window,
     this->componentScreenshot = new Screenshot();
 
     this->componentFileBrowser = new FileBrowser();
-    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::doLog, this, std::placeholders::_1), std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
 
     this->componentFileEditor = new Editor();
-    this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100, std::bind(&UI::doLog, this, std::placeholders::_1));
+    this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
 
     this->windowStyle = new DialogStyle();
-    this->windowStyle->init(std::bind(&UI::doLog, this, std::placeholders::_1));
     ImGuiStyle& style = ImGui::GetStyle();
     this->windowStyle->saveDefault(style);
     style = this->windowStyle->loadCurrent();
 
     this->windowOptions = new DialogOptions();
-    this->windowOptions->init(std::bind(&UI::doLog, this, std::placeholders::_1));
+    this->windowOptions->init();
     this->imguiImplementation->ImGui_Implementation_Init();
 
     this->windowOptions->loadFonts(&this->needsFontChange);
 
     this->controlsGUI = new DialogControlsGUI();
-    this->controlsGUI->init(this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
+    this->controlsGUI->init(this->managerObjects);
 
     this->controlsModels = new DialogControlsModels();
-    this->controlsModels->init(this->sdlWindow, this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1), this->funcAddShape);
+    this->controlsModels->init(this->sdlWindow, this->managerObjects, this->funcAddShape);
 }
 
 void UI::doLog(std::string message) {

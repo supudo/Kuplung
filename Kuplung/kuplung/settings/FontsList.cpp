@@ -15,8 +15,7 @@
 
 namespace fs = boost::filesystem;
 
-void FontsList::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
+void FontsList::init() {
     this->fonts.clear();
 }
 
@@ -75,7 +74,7 @@ void FontsList::loadFontsOSX() {
                 }
             }
             catch (const std::exception & ex) {
-                this->logMessage(iteratorFolder->path().filename().string() + " " + ex.what());
+                Settings::Instance()->funcDoLog(iteratorFolder->path().filename().string() + " " + ex.what());
             }
         }
     }
@@ -91,6 +90,3 @@ void FontsList::loadFontsNix() {
     //| ~/.fonts
 }
 
-void FontsList::logMessage(std::string logMessage) {
-    this->doLog("[FontsList] " + logMessage);
-}

@@ -15,8 +15,7 @@ STLParser::~STLParser() {
 void STLParser::destroy() {
 }
 
-void STLParser::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
+void STLParser::init() {
 }
 
 void STLParser::parse(FBEntity file) {
