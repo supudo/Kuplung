@@ -45,7 +45,7 @@ ModelFace* ModelFace::clone(int modelID) {
     mmf->mfLights_Point = this->mfLights_Point;
     mmf->mfLights_Spot = this->mfLights_Spot;
 
-    mmf->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
+    mmf->init();
     mmf->setModel(mmf->oFace);
     mmf->initShaderProgram();
     mmf->initBuffers(Settings::Instance()->currentFolder);
@@ -140,10 +140,8 @@ void ModelFace::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFace::init(std::function<void(std::string)> doLog) {
-    this->doLogFunc = doLog;
+void ModelFace::init() {
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&ModelFace::doLog, this, std::placeholders::_1));
     this->mathHelper = new Maths();
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
@@ -373,7 +371,7 @@ bool ModelFace::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
@@ -631,7 +629,7 @@ void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialI
                 default:
                     break;
             }
-            this->doLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+            Settings::Instance()->funcDoLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
         }
         else {
             glGenTextures(1, vboObject);
@@ -1052,7 +1050,7 @@ bool ModelFace::reflectionInit() {
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, depthRenderbuffer);
 
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
-        this->doLog("Failed to make complete framebuffer object " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
+        Settings::Instance()->funcDoLog("Failed to make complete framebuffer object " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
         return false;
     }
 
@@ -1086,7 +1084,7 @@ bool ModelFace::reflectionInit() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgramReflection, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Error linking reflection program %d!\n", this->shaderProgramReflection));
+        Settings::Instance()->funcDoLog("Error linking reflection program " + std::to_string(this->shaderProgramReflection) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgramReflection);
         return false;
     }
@@ -1190,7 +1188,7 @@ std::string ModelFace::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        this->doLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";
@@ -1200,8 +1198,4 @@ std::string ModelFace::readFile(const char *filePath) {
     }
     fileStream.close();
     return content;
-}
-
-void ModelFace::doLog(std::string logMessage) {
-    this->doLogFunc("[ModelFace] " + logMessage);
 }

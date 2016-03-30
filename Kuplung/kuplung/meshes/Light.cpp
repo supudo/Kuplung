@@ -39,11 +39,8 @@ void Light::destroy() {
 
 #pragma mark - Initialization
 
-void Light::init(std::function<void(std::string)> doLog, LightSourceType type) {
-    this->doLogFunc = doLog;
+void Light::init(LightSourceType type) {
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&Light::doLog, this, std::placeholders::_1));
-
     this->initProperties(type);
 }
 
@@ -130,7 +127,7 @@ bool Light::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
@@ -186,7 +183,7 @@ void Light::initBuffers(std::string assetsFolder) {
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
             if (!tPixels)
-                this->doLog("Can't load diffuse texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+                Settings::Instance()->funcDoLog("Can't load diffuse texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
             else {
                 glGenTextures(1, &this->vboTextureDiffuse);
                 glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
@@ -299,7 +296,7 @@ std::string Light::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        this->doLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";
@@ -309,8 +306,4 @@ std::string Light::readFile(const char *filePath) {
     }
     fileStream.close();
     return content;
-}
-
-void Light::doLog(std::string logMessage) {
-    this->doLogFunc("[Light] " + logMessage);
 }

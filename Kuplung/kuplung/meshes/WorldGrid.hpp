@@ -9,7 +9,6 @@
 #ifndef WorldGrid_hpp
 #define WorldGrid_hpp
 
-#include <functional>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
@@ -25,7 +24,7 @@ class WorldGrid {
 public:
     ~WorldGrid();
     void destroy();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     bool initShaderProgram();
     void initBuffers(int gridSize, float unitSize);
     void initProperties(int size);
@@ -50,8 +49,6 @@ public:
     std::vector<GLuint> dataIndices;
 
 private:
-    std::function<void(std::string)> doLogFunc;
-
     GLUtils *glUtils;
 
     GLuint shaderProgram;
@@ -62,7 +59,6 @@ private:
     bool actAsMirrorNeedsChange;
 
     std::string readFile(const char *filePath);
-    void doLog(std::string logMessage);
 };
 
 #endif /* WorldGrid_hpp */

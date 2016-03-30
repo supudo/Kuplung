@@ -27,10 +27,6 @@ void Camera::destroy() {
     delete this->rotateZ;
 }
 
-Camera::Camera(std::function<void(std::string)> doLog) {
-    this->funcLog = doLog;
-}
-
 void Camera::initProperties() {
     this->eyeSettings = new ObjectEye();
     this->eyeSettings->View_Eye = glm::vec3(0.0, 0.0, 3.0);
@@ -65,8 +61,4 @@ void Camera::render(float Setting_PlaneClose, float Setting_PlaneFar) {
     this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
 
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
-}
-
-void Camera::logMessage(std::string message) {
-    this->funcLog("[Camera] " + message);
 }

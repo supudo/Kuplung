@@ -37,8 +37,7 @@ void ObjectsManager::destroy() {
     }
 }
 
-void ObjectsManager::init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress) {
-    this->funcLog = doLog;
+void ObjectsManager::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 
     this->lightSources.clear();
@@ -102,7 +101,7 @@ void ObjectsManager::resetPropertiesModels() {
  *
  */
 void ObjectsManager::initCamera() {
-    this->camera = new Camera(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
+    this->camera = new Camera();
     this->camera->initProperties();
 }
 
@@ -113,7 +112,7 @@ void ObjectsManager::initCamera() {
  */
 void ObjectsManager::initGrid() {
     this->grid = new WorldGrid();
-    this->grid->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
+    this->grid->init();
     this->grid->initShaderProgram();
     this->grid->initBuffers(10, 1);
 
@@ -126,7 +125,7 @@ void ObjectsManager::initGrid() {
  */
 void ObjectsManager::initAxisSystem() {
     this->axisSystem = new CoordinateSystem();
-    this->axisSystem->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1));
+    this->axisSystem->init();
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
 }
@@ -138,7 +137,7 @@ void ObjectsManager::initAxisSystem() {
  */
 void ObjectsManager::addLight(LightSourceType type, std::string title, std::string description) {
     Light *lightObject = new Light();
-    lightObject->init(std::bind(&ObjectsManager::logMessage, this, std::placeholders::_1), type);
+    lightObject->init(type);
     lightObject->type = type;
     switch (type) {
         case LightSourceType_Directional:
@@ -191,8 +190,4 @@ void ObjectsManager::loadSystemModels() {
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
     this->systemModels["light_spot"] = this->fileParser->parse(file);
-}
-
-void ObjectsManager::logMessage(std::string message) {
-    this->funcLog("[ObjectsManager] " + message);
 }

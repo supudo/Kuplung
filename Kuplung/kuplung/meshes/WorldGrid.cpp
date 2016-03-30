@@ -49,10 +49,8 @@ void WorldGrid::destroy() {
 
 #pragma mark - Initialization
 
-void WorldGrid::init(std::function<void(std::string)> doLog) {
-    this->doLogFunc = doLog;
+void WorldGrid::init() {
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&WorldGrid::doLog, this, std::placeholders::_1));
     this->initProperties(10);
 }
 
@@ -118,7 +116,7 @@ bool WorldGrid::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
@@ -302,7 +300,7 @@ std::string WorldGrid::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        this->doLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";
@@ -312,8 +310,4 @@ std::string WorldGrid::readFile(const char *filePath) {
     }
     fileStream.close();
     return content;
-}
-
-void WorldGrid::doLog(std::string logMessage) {
-    this->doLogFunc("[WorldGrid] " + logMessage);
 }

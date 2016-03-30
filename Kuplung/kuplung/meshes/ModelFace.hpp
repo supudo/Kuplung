@@ -9,7 +9,6 @@
 #ifndef ModelFace_hpp
 #define ModelFace_hpp
 
-#include <functional>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
@@ -52,7 +51,7 @@ public:
     ModelFace* clone(int modelID);
 
     void destroy();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     void setModel(objModelFace oFace);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
@@ -112,7 +111,6 @@ public:
     float Effect_Bloom_WeightA, Effect_Bloom_WeightB, Effect_Bloom_WeightC, Effect_Bloom_WeightD, Effect_Bloom_Vignette, Effect_Bloom_VignetteAtt;
 
 private:
-    std::function<void(std::string)> doLogFunc;
     void drawOutline();
     void drawOnly();
 

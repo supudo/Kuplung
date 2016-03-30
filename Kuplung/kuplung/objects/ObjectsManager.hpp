@@ -27,7 +27,7 @@ public:
     ObjectsManager(FileModelManager *parser);
 
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress);
+    void init(std::function<void(float)> doProgress);
     void loadSystemModels();
     void render();
     void resetPropertiesSystem();
@@ -57,10 +57,8 @@ public:
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false;
 
 private:
-    std::function<void(std::string)> funcLog;
     std::function<void(float)> funcProgress;
 
-    void logMessage(std::string message);
     std::map<std::string, objScene> systemModels;
 };
 

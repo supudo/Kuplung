@@ -10,15 +10,12 @@
 #define Camera_hpp
 
 #include <glm/glm.hpp>
-#include <functional>
 #include <string>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 
 class Camera {
 public:
-    Camera(std::function<void(std::string)> doLog);
-
     void destroy();
     void initProperties();
     void render(float Setting_PlaneClose, float Setting_PlaneFar);
@@ -30,11 +27,6 @@ public:
 
     glm::vec3 cameraPosition;
     glm::mat4 matrixCamera;
-
-private:
-    std::function<void(std::string)> funcLog;
-
-    void logMessage(std::string message);
 };
 
 #endif /* Camera_hpp */

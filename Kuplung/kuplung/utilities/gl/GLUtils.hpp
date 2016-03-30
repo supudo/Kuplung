@@ -9,7 +9,6 @@
 #ifndef GLUtils_hpp
 #define GLUtils_hpp
 
-#include <functional>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
 
@@ -29,7 +28,6 @@ struct GridMeshPoint3D
 class GLUtils {
 public:
     ~GLUtils();
-    void init(std::function<void(std::string)> doLog);
     GLuint initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName);
     bool compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
 
@@ -41,10 +39,7 @@ public:
     GLsizei getGLTypeSize(GLenum type);
 
 private:
-    std::function<void(std::string)> doLog;
     std::string readFile(const char *filePath);
-
-    void glDoLog(std::string logMessage);
 };
 
 #endif /* GLUtils_hpp */

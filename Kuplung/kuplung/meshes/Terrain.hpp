@@ -9,7 +9,6 @@
 #ifndef Terrain_hpp
 #define Terrain_hpp
 
-#include <functional>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
@@ -19,15 +18,13 @@ class Terrain {
 public:
     ~Terrain();
     void destroy();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
     std::string heightmapImage;
 
 private:
-    std::function<void(std::string)> doLogFunc;
-
     GLUtils *glUtils;
     HeightmapGenerator *terrainGenerator;
 
@@ -38,7 +35,6 @@ private:
     GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeColor;
 
     std::string readFile(const char *filePath);
-    void doLog(std::string logMessage);
 };
 
 #endif /* Terrain_hpp */

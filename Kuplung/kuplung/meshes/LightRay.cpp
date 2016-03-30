@@ -35,7 +35,6 @@ void LightRay::destroy() {
 void LightRay::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
     this->glUtils = new GLUtils();
-    this->glUtils->init(std::bind(&LightRay::doLog, this, std::placeholders::_1));
 }
 
 #pragma mark - Public

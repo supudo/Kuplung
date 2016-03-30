@@ -120,7 +120,7 @@ bool Kuplung::init() {
                     this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->managerObjects = new ObjectsManager(this->parser);
-                    this->managerObjects->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
+                    this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->managerUI = new UI();
                     this->managerUI->init(gWindow,
@@ -449,7 +449,7 @@ void Kuplung::processParsedObjFile() {
             mmf->dataIndices = this->managerObjects->grid->dataIndices;
 
             mmf->ModelID = i;
-            mmf->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+            mmf->init();
             mmf->setModel(model.faces[j]);
             mmf->initModelProperties();
             mmf->initShaderProgram();
@@ -514,36 +514,36 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 //        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
 //        objScene sceneGUILight = this->parser->parse(file);
 //        this->meshLight->destroy();
-//        this->meshLight->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+//        this->meshLight->init();
 //        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
 //        this->meshLight->initShaderProgram();
 //        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
 //        this->sceneGridHorizontal->destroy();
-//        this->sceneGridHorizontal->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+//        this->sceneGridHorizontal->init();
 //        this->sceneGridHorizontal->initShaderProgram();
 //        this->sceneGridHorizontal->initBuffers(20, true, 1);
 
 //        this->sceneGridVertical->destroy();
-//        this->sceneGridVertical->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+//        this->sceneGridVertical->init();
 //        this->sceneGridVertical->initShaderProgram();
 //        this->sceneGridVertical->initBuffers(20, false, 1);
     }
     else if (fileName.compare(0, 4, "axis") == 0) {
 //        this->sceneCoordinateSystem->destroy();
-//        this->sceneCoordinateSystem->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+//        this->sceneCoordinateSystem->init();
 //        this->sceneCoordinateSystem->initShaderProgram();
 //        this->sceneCoordinateSystem->initBuffers();
     }
     else if (fileName.compare(0, 4, "dots") == 0) {
 //        this->lightDot->destroy();
-//        this->lightDot->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+//        this->lightDot->init();
 //        this->lightDot->initShaderProgram();
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
         this->terrain->destroy();
-        this->terrain->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+        this->terrain->init();
         this->terrain->initShaderProgram();
         this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
     }

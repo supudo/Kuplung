@@ -9,10 +9,6 @@
 #include "GLUtils.hpp"
 #include <fstream>
 
-void GLUtils::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
-}
-
 GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName) {
     GLuint shaderProgram = 0;
 
@@ -31,7 +27,7 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
     GLint isShaderVertexCompiled = GL_FALSE;
     glGetShaderiv(shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
     if (isShaderVertexCompiled != GL_TRUE) {
-        this->glDoLog(Settings::Instance()->string_format("Unable to compile vertex shader %d!\n", shaderVertex));
+        Settings::Instance()->funcDoLog("Unable to compile vertex shader " + std::to_string(shaderVertex) + "!");
         this->printShaderLog(shaderVertex);
     }
     else {
@@ -44,7 +40,7 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
         GLint isShaderFragmentCompiled = GL_FALSE;
         glGetShaderiv(shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
         if (isShaderFragmentCompiled != GL_TRUE) {
-            this->glDoLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", shaderFragment));
+            Settings::Instance()->funcDoLog("Unable to compile fragment shader " + std::to_string(shaderFragment) + "!");
             this->printShaderLog(shaderFragment);
         }
         else {
@@ -54,7 +50,7 @@ GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shad
             GLint programSuccess = GL_TRUE;
             glGetProgramiv(shaderProgram, GL_LINK_STATUS, &programSuccess);
             if (programSuccess != GL_TRUE) {
-                this->glDoLog(Settings::Instance()->string_format("Error linking program %d!\n", shaderProgram));
+                Settings::Instance()->funcDoLog("Error linking program " + std::to_string(shaderProgram) + "!");
                 this->printProgramLog(shaderProgram);
             }
         }
@@ -72,7 +68,7 @@ bool GLUtils::compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shader
     GLint isShaderCompiled = GL_FALSE;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
     if (isShaderCompiled != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Unable to compile shader %d!\n", shader));
+        Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
         this->printShaderLog(shader);
         return false;
     }
@@ -86,14 +82,14 @@ bool GLUtils::compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shader
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
     GLint var = glGetAttribLocation(program, var_name);
     if (var == -1)
-        this->glDoLog("Cannot fetch shader attribute - " + std::string(var_name));
+        Settings::Instance()->funcDoLog("Cannot fetch shader attribute " + std::string(var_name) + "!");
     return var;
 }
 
 GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
     GLint var = glGetUniformLocation(program, var_name);
     if (var == -1)
-        this->glDoLog("Cannot fetch shader uniform - " + std::string(var_name));
+        Settings::Instance()->funcDoLog("Cannot fetch shader uniform - " + std::string(var_name));
     return var;
 }
 
@@ -107,11 +103,11 @@ void GLUtils::printProgramLog(GLuint program) {
         char* infoLog = new char[ maxLength ];
         glGetProgramInfoLog(program, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
-            this->glDoLog(Settings::Instance()->string_format("%s\n", infoLog));
+            Settings::Instance()->funcDoLog(infoLog);
         delete[] infoLog;
     }
     else
-        this->glDoLog(Settings::Instance()->string_format("Name %d is not a program\n", program));
+        Settings::Instance()->funcDoLog("Name " + std::to_string(program) + " is not a program!");
 }
 
 void GLUtils::printShaderLog(GLuint shader) {
@@ -123,11 +119,11 @@ void GLUtils::printShaderLog(GLuint shader) {
 
         glGetShaderInfoLog(shader, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
-            this->glDoLog(Settings::Instance()->string_format("%s\n", infoLog));
+            Settings::Instance()->funcDoLog(infoLog);
         delete[] infoLog;
     }
     else
-        this->glDoLog(Settings::Instance()->string_format("Name %d is not a shader\n", shader));
+        Settings::Instance()->funcDoLog("Name " + std::to_string(shader) + " is not a shader!");
 }
 
 bool GLUtils::logOpenGLError(const char *file, int line) {
@@ -170,7 +166,7 @@ bool GLUtils::logOpenGLError(const char *file, int line) {
                 break;
         }
         success = false;
-        this->glDoLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
+        Settings::Instance()->funcDoLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
         err = glGetError();
     }
 
@@ -199,18 +195,11 @@ GLsizei GLUtils::getGLTypeSize(GLenum type) {
 
 #pragma mark - Utilities
 
-void GLUtils::glDoLog(std::string logMessage) {
-    if (this->doLog)
-        this->doLog(logMessage);
-    else
-        printf("%s\n", logMessage.c_str());
-}
-
 std::string GLUtils::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        this->glDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";

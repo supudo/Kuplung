@@ -9,7 +9,6 @@
 #ifndef CoordinateSystem_hpp
 #define CoordinateSystem_hpp
 
-#include <functional>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
@@ -20,7 +19,7 @@ class CoordinateSystem {
 public:
     ~CoordinateSystem();
     void destroy();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     void initProperties();
     bool initShaderProgram();
     void initBuffers(); // 0 = x, 1 = y, 2 = z
@@ -36,7 +35,6 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    std::function<void(std::string)> doLogFunc;
     int axisSize;
 
     GLUtils *glUtils;
@@ -47,7 +45,6 @@ private:
     GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
 
     std::string readFile(const char *filePath);
-    void doLog(std::string logMessage);
 };
 
 #endif /* CoordinateSystem_hpp */

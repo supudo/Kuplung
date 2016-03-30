@@ -9,7 +9,6 @@
 #ifndef Light_hpp
 #define Light_hpp
 
-#include <functional>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
@@ -20,7 +19,7 @@ class Light {
 public:
     ~Light();
     void destroy();
-    void init(std::function<void(std::string)> doLog, LightSourceType type);
+    void init(LightSourceType type);
     void setModel(objModelFace oFace);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
@@ -48,7 +47,6 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    std::function<void(std::string)> doLogFunc;
     float x, y, z;
 
     GLUtils *glUtils;
@@ -63,7 +61,6 @@ private:
     GLuint glUniformUseColor, glUniformColor;
 
     std::string readFile(const char *filePath);
-    void doLog(std::string logMessage);
 };
 
 #endif /* Light_hpp */
