@@ -33,7 +33,6 @@ private:
     void onEvent(SDL_Event* ev);
     void processObjFileAsync(FBEntity file);
     void processParsedObjFile();
-    void objParserLog(std::string logMessage);
     bool hasEnding(std::string const &fullString, std::string const &ending);
     void renderScene();
     void setupScene(FBEntity file);

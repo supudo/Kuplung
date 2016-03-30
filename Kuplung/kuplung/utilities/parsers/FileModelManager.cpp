@@ -15,12 +15,11 @@ FileModelManager::~FileModelManager() {
 void FileModelManager::destroy() {
 }
 
-void FileModelManager::init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress) {
-    this->funcLog = doLog;
+void FileModelManager::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 
     this->parserOBJ = new objParser();
-    this->parserOBJ->init(std::bind(&FileModelManager::logMessage, this, std::placeholders::_1), std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+    this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
     //this->parserSTL = new STLParser();
     //this->parserSTL->init(std::bind(&FileModelManager::logMessage, this, std::placeholders::_1), std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
@@ -29,10 +28,6 @@ void FileModelManager::init(std::function<void(std::string)> doLog, std::functio
 objScene FileModelManager::parse(FBEntity file) {
     //if (file.extension == ".obj")
         return this->parserOBJ->parse(file);
-}
-
-void FileModelManager::logMessage(std::string message) {
-    this->funcLog("[FileModelManager] " + message);
 }
 
 void FileModelManager::doProgress(float value) {

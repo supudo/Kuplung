@@ -20,9 +20,7 @@ FNTParser::~FNTParser() {
 void FNTParser::destroy() {
 }
 
-void FNTParser::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
-
+void FNTParser::init() {
     this->regex_whiteSpace = "\\s";
     this->regex_equals = "=";
 
@@ -207,13 +205,6 @@ FontMap FNTParser::parse(FBEntity file) {
 }
 
 #pragma mark - Utils
-
-void FNTParser::logMessage(std::string log) {
-    if (this->doLog)
-        this->doLog(log);
-    else
-        printf("%s", log.c_str());
-}
 
 std::vector<std::string> FNTParser::splitString(const std::string &s, std::regex delimiter) {
     std::vector<std::string> elements;

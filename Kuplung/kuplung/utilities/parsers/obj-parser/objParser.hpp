@@ -17,7 +17,7 @@
 class objParser {
 public:
     ~objParser();
-    void init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress);
+    void init(std::function<void(float)> doProgress);
     objScene parse(FBEntity file);
     void destroy();
 
@@ -25,7 +25,6 @@ private:
     objScene scene;
 
     FBEntity file;
-    std::function<void(std::string)> doLog;
     std::function<void(float)> doProgress;
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
     std::vector<float> string2float(std::vector<std::string> strings);

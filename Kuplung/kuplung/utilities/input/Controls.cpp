@@ -8,8 +8,7 @@
 
 #include "Controls.hpp"
 
-void Controls::init(std::function<void(std::string)> doLog, SDL_Window* sdlWindow) {
-    this->doLogFunc = doLog;
+void Controls::init(SDL_Window* sdlWindow) {
     this->sdlWindow = sdlWindow;
 
     this->gameIsRunning = true;

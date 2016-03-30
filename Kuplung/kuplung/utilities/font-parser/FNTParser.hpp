@@ -11,7 +11,6 @@
 
 #include <regex>
 #include "kuplung/settings/Settings.h"
-#include <functional>
 
 struct FontMapCharacter {
     int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
@@ -33,15 +32,12 @@ struct FontMap {
 class FNTParser {
 public:
     ~FNTParser();
-    void init(std::function<void(std::string)> doLog);
+    void init();
     FontMap parse(FBEntity file);
     void destroy();
 
 private:
     FontMap fm;
-
-    std::function<void(std::string)> doLog;
-    void logMessage(std::string log);
 
     std::regex regex_whiteSpace; // whitespace
     std::regex regex_equals; // equals

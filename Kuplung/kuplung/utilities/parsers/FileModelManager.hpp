@@ -19,18 +19,15 @@ class FileModelManager {
 public:
     ~FileModelManager();
     void destroy();
-    void init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress);
+    void init(std::function<void(float)> doProgress);
     objScene parse(FBEntity file);
 
 private:
-    std::function<void(std::string)> funcLog;
     std::function<void(float)> funcProgress;
     void doProgress(float value);
 
     objParser *parserOBJ;
     STLParser *parserSTL;
-
-    void logMessage(std::string message);
 };
 
 #endif /* FileModelManager_hpp */

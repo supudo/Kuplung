@@ -19,9 +19,8 @@ objParser::~objParser() {
 
 #pragma mark - Publics
 
-void objParser::init(std::function<void(std::string)> doLog, std::function<void(float)> doProgress) {
+void objParser::init(std::function<void(float)> doProgress) {
     this->scene = {};
-    this->doLog = doLog;
     this->doProgress = doProgress;
     this->objFileLinesCount = 0;
 

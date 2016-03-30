@@ -11,7 +11,6 @@
 
 #include <SDL2/SDL.h>
 #include "kuplung/settings/Settings.h"
-#include <functional>
 
 struct ControlPoint {
     int x, y;
@@ -20,7 +19,7 @@ struct ControlPoint {
 class Controls {
 public:
     ~Controls();
-    void init(std::function<void(std::string)> doLog, SDL_Window* sdlWindow);
+    void init(SDL_Window* sdlWindow);
     void processEvents(SDL_Event* ev);
 
     bool gameIsRunning, keyPressed_ESC;
@@ -36,7 +35,6 @@ public:
     ControlPoint mouseWheel, mousePosition;
 
 private:
-    std::function<void(std::string)> doLogFunc;
     SDL_Window* sdlWindow;
 
     void handleInput(SDL_Event* ev);

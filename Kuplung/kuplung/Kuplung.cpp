@@ -117,7 +117,7 @@ bool Kuplung::init() {
                     Settings::Instance()->setLogFunc(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 
                     this->parser = new FileModelManager();
-                    this->parser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
+                    this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->managerObjects = new ObjectsManager(this->parser);
                     this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
@@ -139,11 +139,11 @@ bool Kuplung::init() {
                     this->doLog("App initialized.");
 
                     this->managerControls = new Controls();
-                    this->managerControls->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1), this->gWindow);
+                    this->managerControls->init(this->gWindow);
                     this->doLog("Input Control Manager initialized.");
 
                     this->fontParser = new FNTParser();
-                    this->fontParser->init(std::bind(&Kuplung::objParserLog, this, std::placeholders::_1));
+                    this->fontParser->init();
                     this->doLog("Font Parser Initialized.");
 
                     this->terrain = new Terrain();
@@ -173,7 +173,6 @@ void Kuplung::initFolders() {
 //    else
 //        data_path = SDL_strdup("./");
 //    Settings::Instance()->currentFolder = data_path;
-    Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects";
 }
 
 #pragma mark - Event processing
@@ -475,10 +474,6 @@ void Kuplung::doProgress(float value) {
 
 void Kuplung::guiQuit() {
     this->gameIsRunning = false;
-}
-
-void Kuplung::objParserLog(std::string logMessage) {
-    this->doLog(logMessage);
 }
 
 bool Kuplung::hasEnding(std::string const &fullString, std::string const &ending) {
