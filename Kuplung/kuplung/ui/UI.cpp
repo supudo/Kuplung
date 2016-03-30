@@ -18,13 +18,21 @@ UI::~UI() {
 void UI::destroy() {
 }
 
-void UI::init(SDL_Window *window, ObjectsManager *managerObjects, std::function<void()> quitApp, std::function<void(FBEntity)> processFile, std::function<void()> newScene, std::function<void(std::string)> fileShaderCompile) {
+void UI::init(SDL_Window *window,
+              ObjectsManager *managerObjects,
+              std::function<void()> quitApp,
+              std::function<void(FBEntity)> processFile,
+              std::function<void()> newScene,
+              std::function<void(std::string)> fileShaderCompile,
+              std::function<void(ShapeType)> addShape
+              ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
     this->funcQuitApp = quitApp;
     this->funcProcessFile = processFile;
     this->funcNewScene = newScene;
     this->funcFileShaderCompile = fileShaderCompile;
+    this->funcAddShape = addShape;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -77,7 +85,7 @@ void UI::init(SDL_Window *window, ObjectsManager *managerObjects, std::function<
     this->controlsGUI->init(this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
 
     this->controlsModels = new DialogControlsModels();
-    this->controlsModels->init(this->sdlWindow, this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1));
+    this->controlsModels->init(this->sdlWindow, this->managerObjects, std::bind(&UI::doLog, this, std::placeholders::_1), this->funcAddShape);
 }
 
 void UI::doLog(std::string message) {

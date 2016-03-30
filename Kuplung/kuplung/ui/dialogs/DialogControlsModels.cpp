@@ -14,10 +14,11 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog, std::function<void(ShapeType)> addShape) {
     this->sdlWindow = sdlWindow;
     this->managerObjects = managerObjects;
     this->funcDoLog = doLog;
+    this->funcAddShape = addShape;
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
@@ -488,15 +489,16 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 }
 
 void DialogControlsModels::drawCreate() {
-    ImGui::Button("Plane", ImVec2(-1, 0));
-    ImGui::Button("Cube", ImVec2(-1, 0));
-    ImGui::Button("UV Sphere", ImVec2(-1, 0));
-    ImGui::Button("Ico Sphere", ImVec2(-1, 0));
-    ImGui::Button("Cylinder", ImVec2(-1, 0));
-    ImGui::Button("Tube", ImVec2(-1, 0));
-    ImGui::Button("Cone", ImVec2(-1, 0));
-    ImGui::Button("Thorus", ImVec2(-1, 0));
-    ImGui::Button("Monkey Head", ImVec2(-1, 0));
+    if (ImGui::Button("Cone", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cone);
+    if (ImGui::Button("Cube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cube);
+    if (ImGui::Button("Cylinder", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cylinder);
+    if (ImGui::Button("Grid", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Grid);
+    if (ImGui::Button("Ico Sphere", ImVec2(-1, 0))) this->funcAddShape(ShapeType_IcoSphere);
+    if (ImGui::Button("Plane", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Plane);
+    if (ImGui::Button("Torus", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Torus);
+    if (ImGui::Button("Tube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Tube);
+    if (ImGui::Button("UV Sphere", ImVec2(-1, 0))) this->funcAddShape(ShapeType_UVSphere);
+    if (ImGui::Button("Monkey Head", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MonkeyHead);
 
     ImGui::Separator();
 

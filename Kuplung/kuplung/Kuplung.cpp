@@ -128,7 +128,9 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiQuit, this),
                                           std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiClearScreen, this),
-                                          std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1));
+                                          std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::addShape, this, std::placeholders::_1)
+                                          );
                     this->doLog("UI initialized.");
 
                     this->managerObjects->loadSystemModels();
@@ -355,6 +357,50 @@ void Kuplung::initSceneGUI() {
 //    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
 //    this->guiProcessObjFile(fileTestbed);
     this->managerUI->showControlsModels = true;
+}
+
+void Kuplung::addShape(ShapeType type) {
+    std::string shapeName = "";
+    switch (type) {
+        case ShapeType_Cone:
+            shapeName = "cone";
+            break;
+        case ShapeType_Cube:
+            shapeName = "cube";
+            break;
+        case ShapeType_Cylinder:
+            shapeName = "cylinder";
+            break;
+        case ShapeType_Grid:
+            shapeName = "grid";
+            break;
+        case ShapeType_IcoSphere:
+            shapeName = "IcoSphere";
+            break;
+        case ShapeType_MonkeyHead:
+            shapeName = "monkey_head";
+            break;
+        case ShapeType_Plane:
+            shapeName = "plane";
+            break;
+        case ShapeType_Torus:
+            shapeName = "torus";
+            break;
+        case ShapeType_Tube:
+            shapeName = "tube";
+            break;
+        case ShapeType_UVSphere:
+            shapeName = "uv_sphere";
+            break;
+        default:
+            break;
+    }
+    FBEntity shapeFile;
+    shapeFile.isFile = true;
+    shapeFile.extension = ".obj";
+    shapeFile.title = shapeName + ".obj";
+    shapeFile.path = Settings::Instance()->appFolder() + "/shapes/" + shapeName + ".obj";
+    this->guiProcessObjFile(shapeFile);
 }
 
 #pragma mark - App GUI

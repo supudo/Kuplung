@@ -39,6 +39,7 @@ mac {
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
+    MediaFiles.files += resources/shapes
     MediaFiles.path = Contents/Resources
     QMAKE_BUNDLE_DATA += MediaFiles
 
@@ -89,6 +90,7 @@ OTHER_FILES += resources/*
 OTHER_FILES += resources/gui/*
 OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
+OTHER_FILES += resources/shapes/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
@@ -190,11 +192,32 @@ HEADERS += \
     kuplung/utilities/stb/stb_rect_pack.h \
     kuplung/utilities/stb/stb_textedit.h \
     kuplung/utilities/stb/stb_truetype.h \
-    kuplung/utilities/gl/GLIncludes.h
+    kuplung/utilities/gl/GLIncludes.h \
+    kuplung/utilities/shapes/Shapes.h
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+    resources/shapes/cone.mtl \
+    resources/shapes/cone.obj \
+    resources/shapes/cube.mtl \
+    resources/shapes/cube.obj \
+    resources/shapes/cylinder.mtl \
+    resources/shapes/cylinder.obj \
+    resources/shapes/grid.mtl \
+    resources/shapes/grid.obj \
+    resources/shapes/ico_sphere.mtl \
+    resources/shapes/ico_sphere.obj \
+    resources/shapes/monkey_head.mtl \
+    resources/shapes/monkey_head.obj \
+    resources/shapes/plane.mtl \
+    resources/shapes/plane.obj \
+    resources/shapes/torus.mtl \
+    resources/shapes/torus.obj \
+    resources/shapes/tube.mtl \
+    resources/shapes/tube.obj \
+    resources/shapes/uv_sphere.mtl \
+    resources/shapes/uv_sphere.obj \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/light_ray.vert \

@@ -23,6 +23,7 @@
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
 #include "kuplung/ui/dialogs/DialogControlsModels.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/utilities/shapes/Shapes.h"
 
 class UI {
 public:
@@ -33,7 +34,9 @@ public:
               std::function<void()> quitApp,
               std::function<void(FBEntity)> processFile,
               std::function<void()> newScene,
-              std::function<void(std::string)> fileShaderCompile);
+              std::function<void(std::string)> fileShaderCompile,
+              std::function<void(ShapeType)> addShape
+              );
 
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame);
@@ -59,6 +62,7 @@ private:
     std::function<void(FBEntity)> funcProcessFile;
     std::function<void()> funcNewScene;
     std::function<void(std::string)> funcFileShaderCompile;
+    std::function<void(ShapeType)> funcAddShape;
 
     void dialogFileBrowserProcessFile(FBEntity file);
     void fileShaderEditorSaved(std::string fileName);

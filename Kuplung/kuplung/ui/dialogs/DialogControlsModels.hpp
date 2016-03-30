@@ -17,14 +17,16 @@
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditor.hpp"
+#include "kuplung/utilities/shapes/Shapes.h"
 
 class DialogControlsModels {
 public:
-    void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog);
+    void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(std::string)> doLog, std::function<void(ShapeType)> addShape);
     void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
 
 private:
     std::function<void(std::string)> funcDoLog;
+    std::function<void(ShapeType)> funcAddShape;
 
     void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
     void drawCreate();

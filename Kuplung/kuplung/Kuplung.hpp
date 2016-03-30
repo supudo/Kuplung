@@ -19,6 +19,7 @@
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/meshes/Terrain.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/utilities/shapes/Shapes.h"
 
 class Kuplung {
 public:
@@ -42,6 +43,7 @@ private:
     std::string readFile(const char *filePath);
     void processRunningThreads();
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
+    void addShape(ShapeType type);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file);
