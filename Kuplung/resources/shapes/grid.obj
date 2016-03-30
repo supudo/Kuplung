@@ -1,7 +1,7 @@
 # Blender v2.76 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib grid.mtl
-o Grid_Grid.001
+o Grid
 v 1.000000 -1.000000 0.000000
 v 1.000000 -0.777778 0.000000
 v 1.000000 -0.555556 0.000000

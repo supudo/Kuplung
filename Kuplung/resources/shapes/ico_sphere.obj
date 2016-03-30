@@ -1,7 +1,7 @@
 # Blender v2.76 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib ico_sphere.mtl
-o Icosphere_Icosphere.001
+o Ico Sphere
 v 0.000000 0.000000 -1.000000
 v 0.525725 0.723607 -0.447220
 v 0.850649 -0.276388 -0.447220
