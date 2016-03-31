@@ -74,6 +74,10 @@ void Light::initProperties(LightSourceType type) {
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
+    this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+
     switch (type) {
         case LightSourceType_Point: {
             this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -244,6 +248,12 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
+
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
 
 //        glm::vec3 vLightDirection = glm::vec3(this->directionX->point, this->directionY->point, this->directionZ->point);
 

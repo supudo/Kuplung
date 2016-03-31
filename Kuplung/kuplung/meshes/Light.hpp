@@ -37,6 +37,7 @@ public:
     ObjectCoordinate *directionX, *directionY, *directionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+    ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
     MaterialColor *ambient, *diffuse, *specular;
     ObjectCoordinate *lCutOff, *lOuterCutOff;
     ObjectCoordinate *lConstant, *lLinear, *lQuadratic;

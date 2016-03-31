@@ -324,10 +324,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     break;
                 }
                 case 2: {
-                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Around axis");
                     this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateX->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateY->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateZ->point, true, isFrame);
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Around center");
+                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 case 3: {
