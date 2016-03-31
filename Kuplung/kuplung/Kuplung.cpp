@@ -234,6 +234,26 @@ void Kuplung::onEvent(SDL_Event *ev) {
             int mouse_x = this->managerControls->mousePosition.x;
             int mouse_y = this->managerControls->mousePosition.y;
 
+            // Color picking
+            PixelDataPoint p = this->managerObjects->camera->getClickData(mouse_x, mouse_y, Settings::Instance()->SDL_Window_Height);
+            this->doLog(Settings::Instance()->string_format("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u", mouse_x, mouse_y, p.color[0], p.color[1], p.color[2], p.color[3], p.depth, p.index));
+
+            // ----- picking
+//            glm::vec3 rayDirection = this->managerObjects->camera->createRay(
+//                                         this->managerControls->mousePosition.x,
+//                                         this->managerControls->mousePosition.y,
+//                                         this->managerObjects->Setting_FOV,
+//                                         this->managerObjects->Setting_RatioWidth / this->managerObjects->Setting_RatioHeight,
+//                                         this->managerObjects->Setting_PlaneClose,
+//                                         this->managerObjects->Setting_PlaneFar
+//            );
+
+//            // Values you might be interested:
+//            float someDistance = 1.0;
+//            glm::vec3 rayEndPosition = this->managerObjects->camera->cameraPosition + rayDirection * someDistance;
+//            this->doLog(Settings::Instance()->string_format("PICKED @ %f - %f - %f", rayEndPosition.x, rayEndPosition.y, rayEndPosition.z));
+
+            // ----- picking
             glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
             glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
             glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
@@ -282,6 +302,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
                     }
                 }
             }
+
         }
     }
 }

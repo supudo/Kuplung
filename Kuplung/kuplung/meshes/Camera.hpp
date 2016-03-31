@@ -19,6 +19,8 @@ public:
     void destroy();
     void initProperties();
     void render(float Setting_PlaneClose, float Setting_PlaneFar);
+    glm::vec3 createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far);
+    PixelDataPoint getClickData(int x, int y, int height);
 
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;

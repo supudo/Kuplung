@@ -11,6 +11,13 @@
 
 #include <glm/glm.hpp>
 #include <string>
+#include "kuplung/utilities/gl/GLIncludes.h"
+
+struct PixelDataPoint {
+    GLbyte color[4];
+    GLfloat depth;
+    GLuint index;
+};
 
 struct ObjectCoordinate {
     bool animate;

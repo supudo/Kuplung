@@ -62,3 +62,29 @@ void Camera::render(float Setting_PlaneClose, float Setting_PlaneFar) {
 
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }
+
+glm::vec3 Camera::createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far) {
+    // these positions must be in range [-1, 1] (!!!), not [0, width] and [0, height]
+    float mouseX = mouse_x / (Settings::Instance()->SDL_Window_Width * 0.5f) - 1.0f;
+    float mouseY = mouse_y / (Settings::Instance()->SDL_Window_Height * 0.5f) - 1.0f;
+
+    glm::mat4 proj = glm::perspective(fov, ratio, near, far);
+
+    glm::vec3 cameraDirection = glm::vec3();
+    glm::vec3 cameraUpVector = glm::vec3(0, 0, 1);
+    glm::mat4 view = glm::lookAt(glm::vec3(0.0f), cameraDirection, cameraUpVector);
+
+    glm::mat4 invVP = glm::inverse(proj * view);
+    glm::vec4 screenPos = glm::vec4(mouseX, -mouseY, 1.0f, 1.0f);
+    glm::vec4 worldPos = invVP * screenPos;
+
+    return glm::normalize(glm::vec3(worldPos));
+}
+
+PixelDataPoint Camera::getClickData(int x, int y, int height) {
+    PixelDataPoint p;
+    glReadPixels(x, height - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, p.color);
+    glReadPixels(x, height - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &p.depth);
+    glReadPixels(x, height - y - 1, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &p.index);
+    return p;
+}
