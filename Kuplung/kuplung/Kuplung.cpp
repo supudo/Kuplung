@@ -268,27 +268,18 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
             for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
                 ModelFace *mmf = this->meshModelFaces[i];
-                std::vector<float> objVertices = mmf->oFace.vertices;
-
-                std::vector<glm::vec3> Vertices;
-                for (int j=0; j<(int)objVertices.size(); j++) {
+                std::vector<glm::vec3> Vertices = mmf->oFace.vectors_vertices;
+                for (int j=0; j<(int)mmf->oFace.vectors_vertices.size(); j++) {
                     if ((j + 1) % 3 == 0) {
-                        glm::vec3 v = glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]);
-                        Vertices.push_back(v);
-                    }
-                }
-
-                for (int j=0; j<(int)Vertices.size(); j++) {
-                    if ((j + 1) % 3 == 0) {
-                        glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j-1] - Vertices[j-2], Vertices[j] - Vertices[j-2]));
+                        glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j - 1] - Vertices[j - 2], Vertices[j] - Vertices[j - 2]));
 
                         float nDotL = glm::dot(direction, face_normal);
                         if (nDotL <= 0.0f ) {
-                            float distance = glm::dot(face_normal, (Vertices[j-2] - nearPoint)) / nDotL;
+                            float distance = glm::dot(face_normal, (Vertices[j - 2] - nearPoint)) / nDotL;
 
                             glm::vec3 p = nearPoint + distance * direction;
-                            glm::vec3 n1 = glm::cross(Vertices[j-1] - Vertices[j-2], p - Vertices[j-2]);
-                            glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j-1], p - Vertices[j-1]);
+                            glm::vec3 n1 = glm::cross(Vertices[j-1] - Vertices[j - 2], p - Vertices[j - 2]);
+                            glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j - 1], p - Vertices[j - 1]);
                             glm::vec3 n3 = glm::cross(Vertices[j-2] - Vertices[j], p - Vertices[j]);
                             if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
                                 if (p.z > sceneClosestObject) {
