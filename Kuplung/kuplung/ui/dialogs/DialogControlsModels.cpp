@@ -385,9 +385,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
         }
         case 1: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
-            this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, 1.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
-            this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, 1.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
-            this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, 1.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
+            this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
             break;
         }
         case 2: {
