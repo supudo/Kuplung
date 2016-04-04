@@ -18,6 +18,7 @@
 #include "kuplung/meshes/Camera.hpp"
 #include "kuplung/meshes/Light.hpp"
 #include "kuplung/meshes/CoordinateSystem.hpp"
+#include "kuplung/meshes/Skybox.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
@@ -37,6 +38,7 @@ public:
     void initCamera();
     void initGrid();
     void initAxisSystem();
+    void initSkybox();
 
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
     std::vector<Light*> lightSources;
@@ -45,6 +47,7 @@ public:
     Camera* camera;
     WorldGrid* grid;
     CoordinateSystem* axisSystem;
+    Skybox* skybox;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;

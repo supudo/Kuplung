@@ -32,6 +32,7 @@ void ObjectsManager::destroy() {
     this->camera->destroy();
     this->grid->destroy();
     this->axisSystem->destroy();
+    this->skybox->destroy();
     for (size_t i=0; i<this->lightSources.size(); i++) {
         this->lightSources[i]->destroy();
     }
@@ -62,6 +63,9 @@ void ObjectsManager::render() {
     for (size_t i=0; i<this->lightSources.size(); i++) {
         this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
     }
+
+    glm::mat4 matrixView = glm::lookAt(this->camera->eyeSettings->View_Eye, this->camera->eyeSettings->View_Center, this->camera->eyeSettings->View_Up);
+    this->skybox->render(matrixView, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
 }
 
 void ObjectsManager::resetSettings() {
@@ -128,6 +132,17 @@ void ObjectsManager::initAxisSystem() {
     this->axisSystem->init();
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
+}
+
+/*
+ *
+ * Skybox
+ *
+ */
+void ObjectsManager::initSkybox() {
+    this->skybox = new Skybox();
+    if (!this->skybox->init())
+        Settings::Instance()->funcDoLog("Skybox cannot be initialized!");
 }
 
 /*

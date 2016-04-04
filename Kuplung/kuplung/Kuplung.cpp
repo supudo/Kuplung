@@ -268,19 +268,35 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
             for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
                 ModelFace *mmf = this->meshModelFaces[i];
-                std::vector<glm::vec3> Vertices = mmf->oFace.vectors_vertices;
-                for (int j=0; j<(int)mmf->oFace.vectors_vertices.size(); j++) {
+                std::vector<glm::vec3> vertices;
+
+//                std::vector<float> objVertices = mmf->oFace.vertices;
+//                for (size_t j=0; j<objVertices.size(); j++) {
+//                    if ((j + 1) % 3 == 0)
+//                        vertices.push_back(glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]));
+//                }
+
+                glm::mat4 m = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
+                for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
+                    float x = mmf->oFace.vectors_vertices[j].x;
+                    float y = mmf->oFace.vectors_vertices[j].y;
+                    float z = mmf->oFace.vectors_vertices[j].z;
+                    glm::vec4 v = m * glm::vec4(x, y, z, 1.0);
+                    vertices.push_back(glm::vec3(v.x, v.y, v.z));
+                }
+
+                for (size_t j=0; j<vertices.size(); j++) {
                     if ((j + 1) % 3 == 0) {
-                        glm::vec3 face_normal = glm::normalize(glm::cross(Vertices[j - 1] - Vertices[j - 2], Vertices[j] - Vertices[j - 2]));
+                        glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
 
                         float nDotL = glm::dot(direction, face_normal);
-                        if (nDotL <= 0.0f ) {
-                            float distance = glm::dot(face_normal, (Vertices[j - 2] - nearPoint)) / nDotL;
+                        if (nDotL <= 0.0f) {
+                            float distance = glm::dot(face_normal, (vertices[j - 2] - nearPoint)) / nDotL;
 
                             glm::vec3 p = nearPoint + distance * direction;
-                            glm::vec3 n1 = glm::cross(Vertices[j-1] - Vertices[j - 2], p - Vertices[j - 2]);
-                            glm::vec3 n2 = glm::cross(Vertices[j] - Vertices[j - 1], p - Vertices[j - 1]);
-                            glm::vec3 n3 = glm::cross(Vertices[j-2] - Vertices[j], p - Vertices[j]);
+                            glm::vec3 n1 = glm::cross(vertices[j - 1] - vertices[j - 2], p - vertices[j - 2]);
+                            glm::vec3 n2 = glm::cross(vertices[j] - vertices[j - 1], p - vertices[j - 1]);
+                            glm::vec3 n3 = glm::cross(vertices[j - 2] - vertices[j], p - vertices[j]);
                             if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
                                 if (p.z > sceneClosestObject) {
                                     this->sceneSelectedModelObject = i;
@@ -353,6 +369,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initCamera();
     this->managerObjects->initGrid();
     this->managerObjects->initAxisSystem();
+    this->managerObjects->initSkybox();
     //this->managerObjects->addLight(LightSourceType_Directional);
     this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);

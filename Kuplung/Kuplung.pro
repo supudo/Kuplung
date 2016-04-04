@@ -40,6 +40,7 @@ mac {
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
     MediaFiles.files += resources/shapes
+    MediaFiles.files += resources/skybox
     MediaFiles.path = Contents/Resources
     QMAKE_BUNDLE_DATA += MediaFiles
 
@@ -91,6 +92,7 @@ OTHER_FILES += resources/gui/*
 OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
 OTHER_FILES += resources/shapes/*
+OTHER_FILES += resources/skybox/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
@@ -100,6 +102,7 @@ SOURCES += main.cpp \
     kuplung/meshes/Camera.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
+    kuplung/meshes/Skybox.cpp \
     kuplung/meshes/Terrain.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -145,6 +148,7 @@ HEADERS += \
     kuplung/meshes/Camera.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
+    kuplung/meshes/Skybox.hpp \
     kuplung/meshes/Terrain.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
@@ -239,4 +243,18 @@ DISTFILES += \
     resources/shaders/light.vert \
     resources/shaders/light.frag \
     resources/shaders/terrain.vert \
-    resources/shaders/terrain.frag
+    resources/shaders/terrain.frag \
+    resources/shaders/skybox.vert \
+    resources/shaders/skybox.frag \
+    resources/skybox/fire_planet_back.jpg \
+    resources/skybox/fire_planet_bottom.jpg \
+    resources/skybox/fire_planet_front.jpg \
+    resources/skybox/fire_planet_left.jpg \
+    resources/skybox/fire_planet_right.jpg \
+    resources/skybox/fire_planet_top.jpg \
+    resources/skybox/lake_mountain_back.jpg \
+    resources/skybox/lake_mountain_bottom.jpg \
+    resources/skybox/lake_mountain_front.jpg \
+    resources/skybox/lake_mountain_left.jpg \
+    resources/skybox/lake_mountain_right.jpg \
+    resources/skybox/lake_mountain_top.jpg

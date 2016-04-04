@@ -34,6 +34,12 @@
 		8A43AD831C92FAE4000A35FB /* light_spot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7D1C92FACC000A35FB /* light_spot.mtl */; };
 		8A43AD841C92FAE4000A35FB /* light_spot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7E1C92FACC000A35FB /* light_spot.obj */; };
 		8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F11A1C760A0F00B93D18 /* Camera.cpp */; };
+		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
+		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
+		8A673C9A1CB2950D004236AC /* lake_mountain_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C941CB294FE004236AC /* lake_mountain_front.jpg */; };
+		8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C951CB294FE004236AC /* lake_mountain_left.jpg */; };
+		8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C961CB294FE004236AC /* lake_mountain_right.jpg */; };
+		8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C971CB294FE004236AC /* lake_mountain_top.jpg */; };
 		8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70531C6CAC960085CAE5 /* LightRay.cpp */; };
 		8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */; };
 		8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70591C6CACAC0085CAE5 /* FontsList.cpp */; };
@@ -81,6 +87,26 @@
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
 		8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09A1C3AA1F900665C40 /* light.obj */; };
 		8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */; };
+		8AB917881CAEA7E9002988C2 /* cone.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917731CAEA7CC002988C2 /* cone.mtl */; };
+		8AB917891CAEA7E9002988C2 /* cone.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917741CAEA7CC002988C2 /* cone.obj */; };
+		8AB9178A1CAEA7E9002988C2 /* cube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917751CAEA7CC002988C2 /* cube.mtl */; };
+		8AB9178B1CAEA7E9002988C2 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917761CAEA7CC002988C2 /* cube.obj */; };
+		8AB9178C1CAEA7E9002988C2 /* cylinder.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917771CAEA7CC002988C2 /* cylinder.mtl */; };
+		8AB9178D1CAEA7E9002988C2 /* cylinder.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917781CAEA7CC002988C2 /* cylinder.obj */; };
+		8AB9178E1CAEA7E9002988C2 /* grid.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917791CAEA7CC002988C2 /* grid.mtl */; };
+		8AB9178F1CAEA7E9002988C2 /* grid.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177A1CAEA7CC002988C2 /* grid.obj */; };
+		8AB917901CAEA7E9002988C2 /* ico_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */; };
+		8AB917911CAEA7E9002988C2 /* ico_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */; };
+		8AB917921CAEA7E9002988C2 /* monkey_head.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */; };
+		8AB917931CAEA7E9002988C2 /* monkey_head.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */; };
+		8AB917941CAEA7E9002988C2 /* plane.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177F1CAEA7CC002988C2 /* plane.mtl */; };
+		8AB917951CAEA7E9002988C2 /* plane.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917801CAEA7CC002988C2 /* plane.obj */; };
+		8AB917961CAEA7E9002988C2 /* torus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917811CAEA7CC002988C2 /* torus.mtl */; };
+		8AB917971CAEA7E9002988C2 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917821CAEA7CC002988C2 /* torus.obj */; };
+		8AB917981CAEA7E9002988C2 /* tube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917831CAEA7CC002988C2 /* tube.mtl */; };
+		8AB917991CAEA7E9002988C2 /* tube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917841CAEA7CC002988C2 /* tube.obj */; };
+		8AB9179A1CAEA7E9002988C2 /* uv_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */; };
+		8AB9179B1CAEA7E9002988C2 /* uv_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917861CAEA7CC002988C2 /* uv_sphere.obj */; };
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
 		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
@@ -88,9 +114,47 @@
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
 		8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */; };
+		8AECC0701CB273E90096AE7A /* fire_planet_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */; };
+		8AECC0711CB273E90096AE7A /* fire_planet_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */; };
+		8AECC0721CB273E90096AE7A /* fire_planet_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */; };
+		8AECC0731CB273E90096AE7A /* fire_planet_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */; };
+		8AECC0741CB273E90096AE7A /* fire_planet_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */; };
+		8AECC0751CB273E90096AE7A /* fire_planet_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */; };
+		8AECC0781CB274060096AE7A /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AECC0761CB274060096AE7A /* Skybox.cpp */; };
+		8AECC07B1CB274810096AE7A /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
+		8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8AB917871CAEA7D6002988C2 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = shapes;
+			dstSubfolderSpec = 7;
+			files = (
+				8AB917881CAEA7E9002988C2 /* cone.mtl in CopyFiles */,
+				8AB917891CAEA7E9002988C2 /* cone.obj in CopyFiles */,
+				8AB9178A1CAEA7E9002988C2 /* cube.mtl in CopyFiles */,
+				8AB9178B1CAEA7E9002988C2 /* cube.obj in CopyFiles */,
+				8AB9178C1CAEA7E9002988C2 /* cylinder.mtl in CopyFiles */,
+				8AB9178D1CAEA7E9002988C2 /* cylinder.obj in CopyFiles */,
+				8AB9178E1CAEA7E9002988C2 /* grid.mtl in CopyFiles */,
+				8AB9178F1CAEA7E9002988C2 /* grid.obj in CopyFiles */,
+				8AB917901CAEA7E9002988C2 /* ico_sphere.mtl in CopyFiles */,
+				8AB917911CAEA7E9002988C2 /* ico_sphere.obj in CopyFiles */,
+				8AB917921CAEA7E9002988C2 /* monkey_head.mtl in CopyFiles */,
+				8AB917931CAEA7E9002988C2 /* monkey_head.obj in CopyFiles */,
+				8AB917941CAEA7E9002988C2 /* plane.mtl in CopyFiles */,
+				8AB917951CAEA7E9002988C2 /* plane.obj in CopyFiles */,
+				8AB917961CAEA7E9002988C2 /* torus.mtl in CopyFiles */,
+				8AB917971CAEA7E9002988C2 /* torus.obj in CopyFiles */,
+				8AB917981CAEA7E9002988C2 /* tube.mtl in CopyFiles */,
+				8AB917991CAEA7E9002988C2 /* tube.obj in CopyFiles */,
+				8AB9179A1CAEA7E9002988C2 /* uv_sphere.mtl in CopyFiles */,
+				8AB9179B1CAEA7E9002988C2 /* uv_sphere.obj in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8AC5748B1C3549F700069C7D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +201,8 @@
 				8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */,
 				8A7F386D1C7F28EB004D4520 /* reflection.frag in Copy Files */,
 				8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */,
+				8AECC07B1CB274810096AE7A /* skybox.frag in Copy Files */,
+				8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -161,6 +227,27 @@
 			files = (
 				8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */,
 				8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8AECC06F1CB273DA0096AE7A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = skybox;
+			dstSubfolderSpec = 7;
+			files = (
+				8AECC0701CB273E90096AE7A /* fire_planet_back.jpg in CopyFiles */,
+				8AECC0711CB273E90096AE7A /* fire_planet_bottom.jpg in CopyFiles */,
+				8AECC0721CB273E90096AE7A /* fire_planet_front.jpg in CopyFiles */,
+				8AECC0731CB273E90096AE7A /* fire_planet_left.jpg in CopyFiles */,
+				8AECC0741CB273E90096AE7A /* fire_planet_right.jpg in CopyFiles */,
+				8AECC0751CB273E90096AE7A /* fire_planet_top.jpg in CopyFiles */,
+				8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */,
+				8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */,
+				8A673C9A1CB2950D004236AC /* lake_mountain_front.jpg in CopyFiles */,
+				8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */,
+				8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */,
+				8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -210,6 +297,12 @@
 		8A43AD7E1C92FACC000A35FB /* light_spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.obj; sourceTree = "<group>"; };
 		8A54F11A1C760A0F00B93D18 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		8A54F11B1C760A0F00B93D18 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
+		8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_bottom.jpg; path = skybox/lake_mountain_bottom.jpg; sourceTree = "<group>"; };
+		8A673C941CB294FE004236AC /* lake_mountain_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_front.jpg; path = skybox/lake_mountain_front.jpg; sourceTree = "<group>"; };
+		8A673C951CB294FE004236AC /* lake_mountain_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_left.jpg; path = skybox/lake_mountain_left.jpg; sourceTree = "<group>"; };
+		8A673C961CB294FE004236AC /* lake_mountain_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_right.jpg; path = skybox/lake_mountain_right.jpg; sourceTree = "<group>"; };
+		8A673C971CB294FE004236AC /* lake_mountain_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_top.jpg; path = skybox/lake_mountain_top.jpg; sourceTree = "<group>"; };
 		8A6E70531C6CAC960085CAE5 /* LightRay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightRay.cpp; sourceTree = "<group>"; };
 		8A6E70541C6CAC960085CAE5 /* LightRay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightRay.hpp; sourceTree = "<group>"; };
 		8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigUtils.cpp; sourceTree = "<group>"; };
@@ -293,6 +386,26 @@
 		8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = light_texture.jpg; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
+		8AB917731CAEA7CC002988C2 /* cone.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.mtl; path = shapes/cone.mtl; sourceTree = "<group>"; };
+		8AB917741CAEA7CC002988C2 /* cone.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.obj; path = shapes/cone.obj; sourceTree = "<group>"; };
+		8AB917751CAEA7CC002988C2 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = shapes/cube.mtl; sourceTree = "<group>"; };
+		8AB917761CAEA7CC002988C2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = shapes/cube.obj; sourceTree = "<group>"; };
+		8AB917771CAEA7CC002988C2 /* cylinder.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.mtl; path = shapes/cylinder.mtl; sourceTree = "<group>"; };
+		8AB917781CAEA7CC002988C2 /* cylinder.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.obj; path = shapes/cylinder.obj; sourceTree = "<group>"; };
+		8AB917791CAEA7CC002988C2 /* grid.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.mtl; path = shapes/grid.mtl; sourceTree = "<group>"; };
+		8AB9177A1CAEA7CC002988C2 /* grid.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.obj; path = shapes/grid.obj; sourceTree = "<group>"; };
+		8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.mtl; path = shapes/ico_sphere.mtl; sourceTree = "<group>"; };
+		8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.obj; path = shapes/ico_sphere.obj; sourceTree = "<group>"; };
+		8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.mtl; path = shapes/monkey_head.mtl; sourceTree = "<group>"; };
+		8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.obj; path = shapes/monkey_head.obj; sourceTree = "<group>"; };
+		8AB9177F1CAEA7CC002988C2 /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.mtl; path = shapes/plane.mtl; sourceTree = "<group>"; };
+		8AB917801CAEA7CC002988C2 /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.obj; path = shapes/plane.obj; sourceTree = "<group>"; };
+		8AB917811CAEA7CC002988C2 /* torus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.mtl; path = shapes/torus.mtl; sourceTree = "<group>"; };
+		8AB917821CAEA7CC002988C2 /* torus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.obj; path = shapes/torus.obj; sourceTree = "<group>"; };
+		8AB917831CAEA7CC002988C2 /* tube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.mtl; path = shapes/tube.mtl; sourceTree = "<group>"; };
+		8AB917841CAEA7CC002988C2 /* tube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.obj; path = shapes/tube.obj; sourceTree = "<group>"; };
+		8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.mtl; path = shapes/uv_sphere.mtl; sourceTree = "<group>"; };
+		8AB917861CAEA7CC002988C2 /* uv_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.obj; path = shapes/uv_sphere.obj; sourceTree = "<group>"; };
 		8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Color.cpp; path = materialeditor/MENode_Color.cpp; sourceTree = "<group>"; };
 		8ABC5C3E1CA3DEC00024F816 /* MENode_Color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Color.hpp; path = materialeditor/MENode_Color.hpp; sourceTree = "<group>"; };
 		8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Combine.cpp; path = materialeditor/MENode_Combine.cpp; sourceTree = "<group>"; };
@@ -306,6 +419,16 @@
 		8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaterialEditor.cpp; path = materialeditor/MaterialEditor.cpp; sourceTree = "<group>"; };
 		8AD91DAB1CA3D989004674BC /* MaterialEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MaterialEditor.hpp; path = materialeditor/MaterialEditor.hpp; sourceTree = "<group>"; };
 		8AD91DAC1CA3D989004674BC /* MaterialEditorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialEditorData.h; path = materialeditor/MaterialEditorData.h; sourceTree = "<group>"; };
+		8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_back.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_back.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_bottom.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_bottom.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_front.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_front.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_left.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_left.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_right.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_right.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_top.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_top.jpg"; sourceTree = SOURCE_ROOT; };
+		8AECC0761CB274060096AE7A /* Skybox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Skybox.cpp; sourceTree = "<group>"; };
+		8AECC0771CB274060096AE7A /* Skybox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Skybox.hpp; sourceTree = "<group>"; };
+		8AECC0791CB274610096AE7A /* skybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.frag; sourceTree = "<group>"; };
+		8AECC07A1CB274610096AE7A /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -566,6 +689,8 @@
 				8A6E70541C6CAC960085CAE5 /* LightRay.hpp */,
 				8A0364831C6B71EC001489C8 /* ModelFace.cpp */,
 				8A0364841C6B71EC001489C8 /* ModelFace.hpp */,
+				8AECC0761CB274060096AE7A /* Skybox.cpp */,
+				8AECC0771CB274060096AE7A /* Skybox.hpp */,
 				8A0364851C6B71EC001489C8 /* Terrain.cpp */,
 				8A0364861C6B71EC001489C8 /* Terrain.hpp */,
 				8A0364871C6B71EC001489C8 /* WorldGrid.cpp */,
@@ -584,6 +709,8 @@
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
+				8AB917721CAEA7B9002988C2 /* shapes */,
+				8AECC0681CB273CD0096AE7A /* skybox */,
 			);
 			path = resources;
 			sourceTree = "<group>";
@@ -627,10 +754,39 @@
 				8AA5EDF31C773DF8009F1F52 /* model_face.vert */,
 				8A7F386B1C7F28E8004D4520 /* reflection.frag */,
 				8A7F386C1C7F28E8004D4520 /* reflection.vert */,
+				8AECC0791CB274610096AE7A /* skybox.frag */,
+				8AECC07A1CB274610096AE7A /* skybox.vert */,
 				8AA5EDF41C773DF8009F1F52 /* terrain.frag */,
 				8AA5EDF51C773DF8009F1F52 /* terrain.vert */,
 			);
 			path = shaders;
+			sourceTree = "<group>";
+		};
+		8AB917721CAEA7B9002988C2 /* shapes */ = {
+			isa = PBXGroup;
+			children = (
+				8AB917731CAEA7CC002988C2 /* cone.mtl */,
+				8AB917741CAEA7CC002988C2 /* cone.obj */,
+				8AB917751CAEA7CC002988C2 /* cube.mtl */,
+				8AB917761CAEA7CC002988C2 /* cube.obj */,
+				8AB917771CAEA7CC002988C2 /* cylinder.mtl */,
+				8AB917781CAEA7CC002988C2 /* cylinder.obj */,
+				8AB917791CAEA7CC002988C2 /* grid.mtl */,
+				8AB9177A1CAEA7CC002988C2 /* grid.obj */,
+				8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */,
+				8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */,
+				8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */,
+				8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */,
+				8AB9177F1CAEA7CC002988C2 /* plane.mtl */,
+				8AB917801CAEA7CC002988C2 /* plane.obj */,
+				8AB917811CAEA7CC002988C2 /* torus.mtl */,
+				8AB917821CAEA7CC002988C2 /* torus.obj */,
+				8AB917831CAEA7CC002988C2 /* tube.mtl */,
+				8AB917841CAEA7CC002988C2 /* tube.obj */,
+				8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */,
+				8AB917861CAEA7CC002988C2 /* uv_sphere.obj */,
+			);
+			name = shapes;
 			sourceTree = "<group>";
 		};
 		8AC828A71BF5FEE7009C74E0 = {
@@ -698,6 +854,25 @@
 			name = materialeditor;
 			sourceTree = "<group>";
 		};
+		8AECC0681CB273CD0096AE7A /* skybox */ = {
+			isa = PBXGroup;
+			children = (
+				8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */,
+				8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */,
+				8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */,
+				8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */,
+				8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */,
+				8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */,
+				8A673C921CB294FE004236AC /* lake_mountain_back.jpg */,
+				8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */,
+				8A673C941CB294FE004236AC /* lake_mountain_front.jpg */,
+				8A673C951CB294FE004236AC /* lake_mountain_left.jpg */,
+				8A673C961CB294FE004236AC /* lake_mountain_right.jpg */,
+				8A673C971CB294FE004236AC /* lake_mountain_top.jpg */,
+			);
+			name = skybox;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -711,6 +886,8 @@
 				8AC5748B1C3549F700069C7D /* CopyFiles */,
 				8AC5748C1C3549F800069C7D /* Copy Files */,
 				8AD236621C5A4F950001E934 /* CopyFiles */,
+				8AB917871CAEA7D6002988C2 /* CopyFiles */,
+				8AECC06F1CB273DA0096AE7A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -780,6 +957,7 @@
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
+				8AECC0781CB274060096AE7A /* Skybox.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
@@ -901,7 +1079,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/include,
 					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
-					/usr/local/Cellar/glm/0.9.7.1/include,
+					/usr/local/Cellar/glm/0.9.7.4/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -911,7 +1089,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
-					/usr/local/Cellar/glm/0.9.7.1/lib,
+					/usr/local/Cellar/glm/0.9.7.4/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 				);
 				OTHER_LDFLAGS = (
@@ -948,7 +1126,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/include,
 					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
-					/usr/local/Cellar/glm/0.9.7.1/include,
+					/usr/local/Cellar/glm/0.9.7.4/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -958,7 +1136,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
-					/usr/local/Cellar/glm/0.9.7.1/lib,
+					/usr/local/Cellar/glm/0.9.7.4/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 				);
 				OTHER_LDFLAGS = (
