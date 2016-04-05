@@ -18,8 +18,6 @@ CoordinateSystem::~CoordinateSystem() {
 }
 
 void CoordinateSystem::destroy() {
-    delete this->eyeSettings;
-
     delete this->rotateX;
     delete this->rotateY;
     delete this->rotateZ;
@@ -46,11 +44,6 @@ void CoordinateSystem::init() {
 
 void CoordinateSystem::initProperties() {
     this->showAxis = true;
-
-    this->eyeSettings = new ObjectEye();
-    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
 
     this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });

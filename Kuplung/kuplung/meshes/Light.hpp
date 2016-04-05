@@ -32,7 +32,6 @@ public:
     LightSourceType type;
     bool showLampObject, showLampDirection;
 
-    ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *directionX, *directionY, *directionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;

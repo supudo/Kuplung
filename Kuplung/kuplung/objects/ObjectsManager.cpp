@@ -50,7 +50,7 @@ void ObjectsManager::init(std::function<void(float)> doProgress) {
 void ObjectsManager::render() {
     this->matrixProjection = glm::perspective(glm::radians(this->Setting_FOV), this->Setting_RatioWidth / this->Setting_RatioHeight, this->Setting_PlaneClose, this->Setting_PlaneFar);
 
-    this->camera->render(this->Setting_PlaneClose, this->Setting_PlaneFar);
+    this->camera->render();
 
     if (this->Setting_GridSize != this->grid->gridSize) {
         this->grid->gridSize = this->Setting_GridSize;

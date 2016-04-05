@@ -26,8 +26,6 @@ public:
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
 
     bool showAxis;
-
-    ObjectEye *eyeSettings;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
 
     glm::mat4 matrixProjection;

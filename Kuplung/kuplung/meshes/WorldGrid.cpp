@@ -18,8 +18,6 @@ WorldGrid::~WorldGrid() {
 }
 
 void WorldGrid::destroy() {
-    delete this->eyeSettings;
-
     delete this->positionX;
     delete this->positionY;
     delete this->positionZ;
@@ -59,11 +57,6 @@ void WorldGrid::initProperties(int size) {
     this->actAsMirror = false;
     this->actAsMirrorNeedsChange = true;
     this->transparency = 0.5;
-
-    this->eyeSettings = new ObjectEye();
-    this->eyeSettings->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
 
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });

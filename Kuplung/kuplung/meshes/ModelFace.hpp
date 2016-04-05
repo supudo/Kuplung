@@ -80,7 +80,6 @@ public:
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
     int Setting_TessellationSubdivision;
-    ObjectEye *Settings_Eye;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;

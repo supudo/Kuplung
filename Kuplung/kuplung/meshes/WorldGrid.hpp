@@ -34,7 +34,6 @@ public:
 
     MirrorSurface *mirrorSurface;
     bool showGrid, actAsMirror;
-    ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;

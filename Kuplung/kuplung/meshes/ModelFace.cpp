@@ -137,7 +137,6 @@ void ModelFace::destroy() {
 
     this->oFace = {};
 
-    delete this->Settings_Eye;
     delete this->positionX;
     delete this->positionY;
     delete this->positionZ;
@@ -209,11 +208,6 @@ void ModelFace::initModelProperties() {
     this->Setting_Alpha = 1.0f;
     this->showMaterialEditor = false;
 
-    this->Settings_Eye = new ObjectEye();
-    this->Settings_Eye->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->Settings_Eye->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->Settings_Eye->View_Up = glm::vec3(0.0, 1.0, 0.0);
-
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -270,11 +264,6 @@ void ModelFace::initModelProperties() {
 void ModelFace::initProperties() {
     this->Setting_CelShading = false;
     this->Setting_Alpha = 1.0f;
-
-    this->Settings_Eye = new ObjectEye();
-    this->Settings_Eye->View_Eye = glm::vec3(1.0, 1.0, 1.0);
-    this->Settings_Eye->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->Settings_Eye->View_Up = glm::vec3(0.0, 1.0, 0.0);
 
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
