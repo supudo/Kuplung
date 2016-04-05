@@ -377,9 +377,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                     ImGui::Separator();
 
-                    this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
-                    this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->point, true, isFrame);
-                    this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
+                    if (this->managerObjects->lightSources[this->selectedObjectLight]->type != LightSourceType_Directional) {
+                        this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
+                        this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->point, true, isFrame);
+                        this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
+                    }
 
                     switch (this->managerObjects->lightSources[this->selectedObjectLight]->type) {
                         case LightSourceType_Point: {

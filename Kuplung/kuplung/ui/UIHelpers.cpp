@@ -26,7 +26,7 @@ void UIHelpers::addControlsSlider(std::string title, int idx, float step, float 
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
-        if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
+        if (animatedFlag != NULL && ImGui::Checkbox(c_id.c_str(), animatedFlag))
             this->animateValue(isFrame, animatedFlag, animatedValue, step, limit, doMinus);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
