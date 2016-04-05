@@ -136,6 +136,29 @@ void ModelFace::destroy() {
     glDeleteVertexArrays(1, &this->glVAO);
 
     this->oFace = {};
+
+    delete this->Settings_Eye;
+    delete this->positionX;
+    delete this->positionY;
+    delete this->positionZ;
+    delete this->scaleX;
+    delete this->scaleY;
+    delete this->scaleZ;
+    delete this->rotateX;
+    delete this->rotateY;
+    delete this->rotateZ;
+    delete this->displaceX;
+    delete this->displaceY;
+    delete this->displaceZ;
+    delete this->Setting_MaterialRefraction;
+    delete this->Setting_MaterialSpecularExp;
+    delete this->displacementHeightScale;
+    delete this->materialAmbient;
+    delete this->materialDiffuse;
+    delete this->materialSpecular;
+    delete this->materialEmission;
+    delete this->Effect_GBlur_Radius;
+    delete this->Effect_GBlur_Width;
 }
 
 #pragma mark - Initialization
