@@ -37,8 +37,12 @@ void Camera::initProperties() {
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -10.0f });
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -71.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -36.0f });
+//    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -71.0f });
+//    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -36.0f });
+//    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 10.0f });
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 330.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });

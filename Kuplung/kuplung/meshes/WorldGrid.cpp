@@ -66,7 +66,7 @@ void WorldGrid::initProperties(int size) {
     this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
     this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 90.0f });
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
@@ -234,7 +234,7 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
-        glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
+        glm::mat4 mvpMatrix = matrixProjection * matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw
