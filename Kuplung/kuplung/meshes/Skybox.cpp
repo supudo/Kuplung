@@ -40,7 +40,7 @@ void Skybox::destroy() {
 
 #pragma mark - Initialization
 
-bool Skybox::init() {
+bool Skybox::init(int gridSize) {
     this->glUtils = new GLUtils();
 
     // vertex shader
@@ -72,7 +72,8 @@ bool Skybox::init() {
         return false;
     }
 
-    this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
+    this->glVS_MatrixView = this->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixView");
+    this->glVS_MatrixProjection = this->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixProjection");
     this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
 
     glGenVertexArrays(1, &this->glVAO);
@@ -124,7 +125,7 @@ bool Skybox::init() {
     };
 
     for (size_t i=0; i<skyboxVertices.size(); i++) {
-        skyboxVertices[i] *= 10.0;
+        skyboxVertices[i] *= gridSize * 10.0;
     }
 
     // vertices
@@ -202,9 +203,10 @@ void Skybox::render(glm::mat4 matrixView, float plane_close, float plane_far, fl
 
         glDepthFunc(GL_LEQUAL);
 
+        glUniformMatrix4fv(this->glVS_MatrixView, 1, GL_FALSE, glm::value_ptr(matrixView));
+
         glm::mat4 matrixProjection = glm::perspective(fov, (float)Settings::Instance()->SDL_Window_Width / (float)Settings::Instance()->SDL_Window_Height, plane_close, plane_far);
-        glm::mat4 matrixMV = matrixProjection * matrixView;
-        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(matrixMV));
+        glUniformMatrix4fv(this->glVS_MatrixProjection, 1, GL_FALSE, glm::value_ptr(matrixProjection));
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
 

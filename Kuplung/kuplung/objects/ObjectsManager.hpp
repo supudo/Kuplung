@@ -32,7 +32,6 @@ public:
     void loadSystemModels();
     void render();
     void resetPropertiesSystem();
-    void resetPropertiesModels();
     void resetSettings();
 
     void initCamera();

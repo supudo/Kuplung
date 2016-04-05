@@ -55,6 +55,7 @@ void ObjectsManager::render() {
     if (this->Setting_GridSize != this->grid->gridSize) {
         this->grid->gridSize = this->Setting_GridSize;
         this->grid->initBuffers(this->Setting_GridSize, 1);
+        this->skybox->init(this->Setting_GridSize);
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
@@ -65,6 +66,7 @@ void ObjectsManager::render() {
     }
 
     glm::mat4 matrixView = glm::lookAt(this->camera->eyeSettings->View_Eye, this->camera->eyeSettings->View_Center, this->camera->eyeSettings->View_Up);
+    matrixView = this->camera->matrixCamera;
     this->skybox->render(matrixView, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
 }
 
@@ -94,9 +96,6 @@ void ObjectsManager::resetPropertiesSystem() {
     for (size_t i=0; i<this->lightSources.size(); i++) {
         this->lightSources[i]->initProperties();
     }
-}
-
-void ObjectsManager::resetPropertiesModels() {
 }
 
 /*
@@ -141,7 +140,7 @@ void ObjectsManager::initAxisSystem() {
  */
 void ObjectsManager::initSkybox() {
     this->skybox = new Skybox();
-    if (!this->skybox->init())
+    if (!this->skybox->init(this->Setting_GridSize))
         Settings::Instance()->funcDoLog("Skybox cannot be initialized!");
 }
 

@@ -194,9 +194,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateX->animate, &this->managerObjects->camera->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateY->animate, &this->managerObjects->camera->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateZ->animate, &this->managerObjects->camera->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateX->animate, &this->managerObjects->camera->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateY->animate, &this->managerObjects->camera->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateZ->animate, &this->managerObjects->camera->rotateZ->point, true, isFrame);
                     ImGui::Separator();
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
                     this->helperUI->addControlsSliderSameLine("X", 16, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterX->animate, &this->managerObjects->camera->rotateCenterX->point, true, isFrame);

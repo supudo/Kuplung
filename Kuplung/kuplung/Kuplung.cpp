@@ -209,6 +209,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
                 this->managerObjects->Setting_FOV += 4;
             if (this->managerControls->mouseWheel.y > 0)
                 this->managerObjects->Setting_FOV -= 4;
+
             if (this->managerObjects->Setting_FOV > 180)
                 this->managerObjects->Setting_FOV = 180;
             if (this->managerObjects->Setting_FOV < -180)
@@ -221,12 +222,21 @@ void Kuplung::onEvent(SDL_Event *ev) {
         if (this->managerControls->mouseButton_MIDDLE) {
             if (this->managerControls->mouseGoUp)
                 this->managerObjects->camera->rotateX->point += this->managerControls->yrel;
-            else if (this->managerControls->mouseGoDown)
+            if (this->managerControls->mouseGoDown)
                 this->managerObjects->camera->rotateX->point += this->managerControls->yrel;
-            else if (this->managerControls->mouseGoLeft)
+            if (this->managerObjects->camera->rotateX->point > 360.0f)
+                this->managerObjects->camera->rotateX->point = 0.0f;
+            if (this->managerObjects->camera->rotateX->point < 0.0f)
+                this->managerObjects->camera->rotateX->point = 360.0f;
+
+            if (this->managerControls->mouseGoLeft)
                 this->managerObjects->camera->rotateY->point += this->managerControls->xrel;
-            else if (this->managerControls->mouseGoRight)
+            if (this->managerControls->mouseGoRight)
                 this->managerObjects->camera->rotateY->point += this->managerControls->xrel;
+            if (this->managerObjects->camera->rotateY->point > 360.0f)
+                this->managerObjects->camera->rotateY->point = 0.0f;
+            if (this->managerObjects->camera->rotateY->point < 0.0f)
+                this->managerObjects->camera->rotateY->point = 360.0f;
         }
 
         // picking
