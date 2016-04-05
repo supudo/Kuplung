@@ -66,7 +66,6 @@ void Camera::render() {
 }
 
 glm::vec3 Camera::createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far) {
-    // these positions must be in range [-1, 1] (!!!), not [0, width] and [0, height]
     float mouseX = mouse_x / (Settings::Instance()->SDL_Window_Width * 0.5f) - 1.0f;
     float mouseY = mouse_y / (Settings::Instance()->SDL_Window_Height * 0.5f) - 1.0f;
 
