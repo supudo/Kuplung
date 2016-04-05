@@ -21,6 +21,10 @@ void Camera::destroy() {
     delete this->rotateX;
     delete this->rotateY;
     delete this->rotateZ;
+
+    delete this->rotateCenterX;
+    delete this->rotateCenterY;
+    delete this->rotateCenterZ;
 }
 
 void Camera::initProperties() {
@@ -37,6 +41,10 @@ void Camera::initProperties() {
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -36.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
+    this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+
     this->matrixCamera = glm::mat4(1.0);
 }
 
@@ -49,6 +57,10 @@ void Camera::render() {
     this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
     this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
     this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
+
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
+    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
 
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }

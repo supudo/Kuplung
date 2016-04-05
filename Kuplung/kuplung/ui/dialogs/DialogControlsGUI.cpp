@@ -197,13 +197,18 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateX->animate, &this->managerObjects->camera->rotateX->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateY->animate, &this->managerObjects->camera->rotateY->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateZ->animate, &this->managerObjects->camera->rotateZ->point, true, isFrame);
+                    ImGui::Separator();
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
+                    this->helperUI->addControlsSliderSameLine("X", 16, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterX->animate, &this->managerObjects->camera->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 17, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterY->animate, &this->managerObjects->camera->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 18, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterZ->animate, &this->managerObjects->camera->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 16, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionX->animate, &this->managerObjects->camera->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 17, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionY->animate, &this->managerObjects->camera->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 18, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionZ->animate, &this->managerObjects->camera->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 19, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionX->animate, &this->managerObjects->camera->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 20, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionY->animate, &this->managerObjects->camera->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 21, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionZ->animate, &this->managerObjects->camera->positionZ->point, true, isFrame);
                     break;
                 }
                 default:
