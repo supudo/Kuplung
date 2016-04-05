@@ -10,15 +10,19 @@
 #define STLParser_hpp
 
 #include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/parsers/ModelObject.h"
 
 class STLParser {
 public:
     ~STLParser();
-    void init();
-    void parse(FBEntity file);
+    void init(std::function<void(float)> doProgress);
+    objScene parse(FBEntity file);
     void destroy();
 
     std::vector<float> vertices, normals;
+
+private:
+    std::function<void(float)> funcProgress;
 };
 
 #endif /* STLParser_hpp */

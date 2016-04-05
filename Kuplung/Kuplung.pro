@@ -58,6 +58,9 @@ mac {
     LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
 
+    LIBS += -L/usr/local/Cellar/assimp/3.2/lib -lAssimp
+    INCLUDEPATH += /usr/local/Cellar/assimp/3.2/include
+
     LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
     INCLUDEPATH += "$$PWD/../external/libnoise/headers"
 }
@@ -138,7 +141,8 @@ SOURCES += main.cpp \
     kuplung/utilities/maths/Maths.cpp \
     kuplung/utilities/parsers/FileModelManager.cpp \
     kuplung/utilities/parsers/obj-parser/objParser.cpp \
-    kuplung/utilities/parsers/stl-parser/STLParser.cpp
+    kuplung/utilities/parsers/stl-parser/STLParser.cpp \
+    kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -191,6 +195,7 @@ HEADERS += \
     kuplung/utilities/parsers/ModelObject.h \
     kuplung/utilities/parsers/obj-parser/objParser.hpp \
     kuplung/utilities/parsers/stl-parser/STLParser.hpp \
+    kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp \
     kuplung/utilities/stb/stb_image.h \
     kuplung/utilities/stb/stb_image_write.h \
     kuplung/utilities/stb/stb_rect_pack.h \

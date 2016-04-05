@@ -15,8 +15,10 @@ STLParser::~STLParser() {
 void STLParser::destroy() {
 }
 
-void STLParser::init() {
+void STLParser::init(std::function<void(float)> doProgress) {
+    this->funcProgress = doProgress;
 }
 
-void STLParser::parse(FBEntity file) {
+objScene STLParser::parse(FBEntity file) {
+    return {};
 }

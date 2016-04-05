@@ -465,7 +465,7 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
 }
 
 void Kuplung::processObjFileAsync(FBEntity file) {
-    this->scenes.push_back(this->parser->parse(file));
+    this->scenes.push_back(this->parser->parse(file, false));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
