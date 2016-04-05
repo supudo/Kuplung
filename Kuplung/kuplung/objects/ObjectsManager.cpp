@@ -65,9 +65,7 @@ void ObjectsManager::render() {
         this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
     }
 
-    glm::mat4 matrixView = glm::lookAt(this->camera->eyeSettings->View_Eye, this->camera->eyeSettings->View_Center, this->camera->eyeSettings->View_Up);
-    matrixView = this->camera->matrixCamera;
-    this->skybox->render(matrixView, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
+    this->skybox->render(this->camera->matrixCamera, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
 }
 
 void ObjectsManager::resetSettings() {

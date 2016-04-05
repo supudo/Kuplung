@@ -89,8 +89,8 @@ void Light::initProperties(LightSourceType type) {
     this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
     this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 180.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f }); // -71.0f
+    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f }); // -36.0f
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });

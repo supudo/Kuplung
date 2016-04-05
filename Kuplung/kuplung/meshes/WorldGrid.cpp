@@ -66,7 +66,7 @@ void WorldGrid::initProperties(int size) {
     this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
     this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 90.0f });
+    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -90.0f });
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
