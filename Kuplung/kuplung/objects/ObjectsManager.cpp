@@ -65,6 +65,10 @@ void ObjectsManager::render() {
         this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
     }
 
+    if (this->Setting_Skybox != this->skybox->Setting_Skybox_Item) {
+        this->skybox->initBuffers();
+        this->Setting_Skybox = this->skybox->Setting_Skybox_Item;
+    }
     this->skybox->render(this->camera->matrixCamera, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
 }
 
@@ -138,7 +142,8 @@ void ObjectsManager::initAxisSystem() {
  */
 void ObjectsManager::initSkybox() {
     this->skybox = new Skybox();
-    if (!this->skybox->init(this->Setting_GridSize))
+    this->skybox->init(this->Setting_GridSize);
+    if (!this->skybox->initBuffers())
         Settings::Instance()->funcDoLog("Skybox cannot be initialized!");
 }
 

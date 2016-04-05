@@ -257,4 +257,10 @@ DISTFILES += \
     resources/skybox/lake_mountain_front.jpg \
     resources/skybox/lake_mountain_left.jpg \
     resources/skybox/lake_mountain_right.jpg \
-    resources/skybox/lake_mountain_top.jpg
+    resources/skybox/lake_mountain_top.jpg \
+    resources/skybox/stormydays_right.jpg \
+    resources/skybox/stormydays_left.jpg \
+    resources/skybox/stormydays_top.jpg \
+    resources/skybox/stormydays_bottom.jpg \
+    resources/skybox/stormydays_back.jpg \
+    resources/skybox/stormydays_front.jpg

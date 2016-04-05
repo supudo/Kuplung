@@ -40,9 +40,50 @@ void Skybox::destroy() {
 
 #pragma mark - Initialization
 
-bool Skybox::init(int gridSize) {
+void Skybox::init(int gridSize) {
     this->glUtils = new GLUtils();
 
+    this->gridSize = gridSize;
+    this->Setting_Skybox_Item = 2;
+
+    Skybox_Item si_LakeMountain;
+    si_LakeMountain.title = "Lake Mountain";
+    si_LakeMountain.images = {
+        "lake_mountain_right.jpg",
+        "lake_mountain_left.jpg",
+        "lake_mountain_top.jpg",
+        "lake_mountain_bottom.jpg",
+        "lake_mountain_back.jpg",
+        "lake_mountain_front.jpg"
+    };
+    this->skyboxItems.push_back(si_LakeMountain);
+
+    Skybox_Item si_FirePlanet;
+    si_FirePlanet.title = "Fire Planet";
+    si_FirePlanet.images = {
+        "fire_planet_right.jpg",
+        "fire_planet_left.jpg",
+        "fire_planet_top.jpg",
+        "fire_planet_bottom.jpg",
+        "fire_planet_back.jpg",
+        "fire_planet_front.jpg"
+    };
+    this->skyboxItems.push_back(si_FirePlanet);
+
+    Skybox_Item si_StormyDays;
+    si_StormyDays.title = "Stormy Days";
+    si_StormyDays.images = {
+        "stormydays_right.jpg",
+        "stormydays_left.jpg",
+        "stormydays_top.jpg",
+        "stormydays_bottom.jpg",
+        "stormydays_back.jpg",
+        "stormydays_front.jpg"
+    };
+    this->skyboxItems.push_back(si_StormyDays);
+}
+
+bool Skybox::initBuffers() {
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/skybox.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
@@ -136,21 +177,12 @@ bool Skybox::init(int gridSize) {
     glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // skybox textures
-    std::vector<std::string> skybox_images = {
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_right.jpg",
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_left.jpg",
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_top.jpg",
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_bottom.jpg",
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_back.jpg",
-        Settings::Instance()->appFolder() + "/skybox/lake_mountain_front.jpg"
-    };
-
     glGenTextures(1, &this->vboTexture);
     glActiveTexture(GL_TEXTURE0);
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
-    for (size_t i=0 ; i<skybox_images.size(); i++) {
-        std::string image = skybox_images[i];
+    for (size_t i=0 ; i<this->skyboxItems[this->Setting_Skybox_Item].images.size(); i++) {
+        std::string image = Settings::Instance()->appFolder() + "/skybox/" + this->skyboxItems[this->Setting_Skybox_Item].images[i];
 
         int tWidth, tHeight, tChannels;
         unsigned char* tPixels = stbi_load(image.c_str(), &tWidth, &tHeight, &tChannels, 0);

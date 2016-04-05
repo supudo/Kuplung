@@ -13,16 +13,22 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
-#include "kuplung/meshes/Camera.hpp"
+#include "kuplung/objects/ObjectDefinitions.h"
 
 class Skybox {
 public:
     ~Skybox();
     void destroy();
-    bool init(int gridSize);
+    void init(int gridSize);
+    bool initBuffers();
     void render(glm::mat4 matrixView, float plane_close, float plane_far, float fov);
 
+    std::vector<Skybox_Item> skyboxItems;
+    int Setting_Skybox_Item;
+
 private:
+    int gridSize;
+
     GLUtils *glUtils;
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices, vboTexture;

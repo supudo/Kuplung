@@ -43,4 +43,9 @@ struct MaterialColor {
     glm::vec3 color;
 };
 
+struct Skybox_Item {
+    std::string title;
+    std::vector<std::string> images;
+};
+
 #endif /* ObjectDefinitions_h */
