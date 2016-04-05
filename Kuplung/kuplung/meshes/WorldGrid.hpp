@@ -45,6 +45,7 @@ public:
     std::vector<GLfloat> dataVertices;
     std::vector<GLfloat> dataTexCoords;
     std::vector<GLfloat> dataNormals;
+    std::vector<GLfloat> dataColors;
     std::vector<GLuint> dataIndices;
 
 private:
@@ -52,8 +53,8 @@ private:
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha;
+    GLuint glVAO, vboVertices, vboColors, vboIndices;
+    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha, glAttributeColor;
 
     bool actAsMirrorNeedsChange;
 

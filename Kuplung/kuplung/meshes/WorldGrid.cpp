@@ -32,6 +32,7 @@ void WorldGrid::destroy() {
 
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboIndices);
+    glDeleteBuffers(1, &this->vboColors);
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
@@ -118,6 +119,7 @@ bool WorldGrid::initShaderProgram() {
         this->glAttributeActAsMirror = this->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
         this->glAttributeAlpha = this->glUtils->glGetUniform(this->shaderProgram, "a_alpha");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "fs_color");
     }
 
     return success;
@@ -139,6 +141,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         this->dataVertices.clear();
         this->dataTexCoords.clear();
         this->dataNormals.clear();
+        this->dataColors.clear();
         this->dataIndices.clear();
         for (int i = 0; i < (this->gridSize * 2); i++) {
             for (int j = 0; j < this->gridSize; j++) {
@@ -150,12 +153,32 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                     p.x = (j - gridMinus) * unitSize;
                     p.y = (i - gridMinus) * unitSize;
                     verticesData.push_back(p);
+                    if (p.y == 0) {
+                        this->dataColors.push_back(1.0f);
+                        this->dataColors.push_back(0.0f);
+                        this->dataColors.push_back(0.0f);
+                    }
+                    else {
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                    }
                 }
                 else {
                     GridMeshPoint2D p;
                     p.x = (i - this->gridSize - gridMinus) * unitSize;
                     p.y = (j - gridMinus) * unitSize;
                     verticesData.push_back(p);
+                    if (p.x == 0) {
+                        this->dataColors.push_back(0.0f);
+                        this->dataColors.push_back(0.0f);
+                        this->dataColors.push_back(1.0f);
+                    }
+                    else {
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                    }
                 }
             }
         }
@@ -166,6 +189,13 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(GridMeshPoint2D) * sizeof(GLfloat), &verticesData[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeVertexPosition);
         glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+
+        // colors
+        glGenBuffers(1, &this->vboColors);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
+        glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeColor);
+        glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
     }
     else {
         this->actAsMirrorNeedsChange = false;
@@ -189,10 +219,17 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         };
 
         this->dataNormals = {
-            0.0f, 1.0f, 0.0,
             0.0f, 1.0f, 0.0f,
             0.0f, 1.0f, 0.0f,
             0.0f, 1.0f, 0.0f,
+            0.0f, 1.0f, 0.0f,
+        };
+
+        this->dataColors = {
+            0.7f, 0.7f, 0.7f,
+            0.7f, 0.7f, 0.7f,
+            0.7f, 0.7f, 0.7f,
+            0.7f, 0.7f, 0.7f,
         };
 
         this->dataIndices = {
@@ -206,6 +243,13 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeVertexPosition);
         glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+        // colors
+        glGenBuffers(1, &this->vboColors);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
+        glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeColor);
+        glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
