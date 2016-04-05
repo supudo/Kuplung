@@ -123,6 +123,10 @@ bool Skybox::init() {
         1.0f, -1.0f, 1.0f
     };
 
+    for (size_t i=0; i<skyboxVertices.size(); i++) {
+        skyboxVertices[i] *= 10.0;
+    }
+
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);

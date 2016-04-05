@@ -35,6 +35,31 @@ void Light::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    delete this->eyeSettings;
+    delete this->positionX;
+    delete this->positionY;
+    delete this->positionZ;
+    delete this->directionX;
+    delete this->directionY;
+    delete this->directionZ;
+    delete this->scaleX;
+    delete this->scaleY;
+    delete this->scaleZ;
+    delete this->rotateX;
+    delete this->rotateY;
+    delete this->rotateZ;
+    delete this->rotateCenterX;
+    delete this->rotateCenterY;
+    delete this->rotateCenterZ;
+    delete this->ambient;
+    delete this->diffuse;
+    delete this->specular;
+    delete this->lCutOff;
+    delete this->lOuterCutOff;
+    delete this->lConstant;
+    delete this->lLinear;
+    delete this->lQuadratic;
 }
 
 #pragma mark - Initialization
