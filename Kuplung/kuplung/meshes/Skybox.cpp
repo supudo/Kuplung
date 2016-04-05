@@ -44,7 +44,7 @@ void Skybox::init(int gridSize) {
     this->glUtils = new GLUtils();
 
     this->gridSize = gridSize;
-    this->Setting_Skybox_Item = 2;
+    this->Setting_Skybox_Item = 0;
 
     Skybox_Item si_LakeMountain;
     si_LakeMountain.title = "Lake Mountain";
