@@ -190,11 +190,6 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.x, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.y, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.z, true, isFrame);
-                    ImGui::Separator();
-                    ImGui::Text("Rotate around center");
-                    this->helperUI->addControlsSliderSameLine("X", 10, 1.0f, 0.0f, 360.0f, false, NULL, &this->managerObjects->camera->rotateCenterX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 11, 1.0f, 0.0f, 360.0f, false, NULL, &this->managerObjects->camera->rotateCenterY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 12, 1.0f, 0.0f, 360.0f, false, NULL, &this->managerObjects->camera->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 case 1: {

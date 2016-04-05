@@ -24,9 +24,7 @@ public:
 
     ObjectEye *eyeSettings;
     ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-    ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
 
     glm::vec3 cameraPosition;
     glm::mat4 matrixCamera;

@@ -18,17 +18,9 @@ void Camera::destroy() {
     delete this->positionY;
     delete this->positionZ;
 
-    delete this->scaleX;
-    delete this->scaleY;
-    delete this->scaleZ;
-
     delete this->rotateX;
     delete this->rotateY;
     delete this->rotateZ;
-
-    delete this->rotateCenterX;
-    delete this->rotateCenterY;
-    delete this->rotateCenterZ;
 }
 
 void Camera::initProperties() {
@@ -41,17 +33,9 @@ void Camera::initProperties() {
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -10.0f });
 
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-
     this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -71.0f });
     this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -36.0f });
     this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
     this->matrixCamera = glm::mat4(1.0);
 }
