@@ -126,7 +126,7 @@ bool Kuplung::init() {
                     this->managerUI->init(gWindow,
                                           this->managerObjects,
                                           std::bind(&Kuplung::guiQuit, this),
-                                          std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiClearScreen, this),
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1)
@@ -439,7 +439,7 @@ void Kuplung::addShape(ShapeType type) {
     shapeFile.extension = ".obj";
     shapeFile.title = shapeName + ".obj";
     shapeFile.path = Settings::Instance()->appFolder() + "/shapes/" + shapeName + ".obj";
-    this->guiProcessObjFile(shapeFile);
+    this->guiProcessObjFile(shapeFile, FileBrowser_ParserType_Own);
 }
 
 #pragma mark - App GUI
@@ -452,12 +452,12 @@ void Kuplung::processRunningThreads() {
     }
 }
 
-void Kuplung::guiProcessObjFile(FBEntity file) {
+void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
     if (this->hasEnding(file.title, ".obj")) {
         this->managerUI->showLoading();
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
-        std::thread objParserThread(&Kuplung::processObjFileAsync, this, file);
+        std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, type);
         objParserThread.detach();
         this->doLog("Starting parsing OBJ " + file.title);
     }
@@ -465,8 +465,8 @@ void Kuplung::guiProcessObjFile(FBEntity file) {
         this->doLog("!!! You have to select .obj file !!!");
 }
 
-void Kuplung::processObjFileAsync(FBEntity file) {
-    this->scenes.push_back(this->parser->parse(file, false));
+void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
+    this->scenes.push_back(this->parser->parse(file, type));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }

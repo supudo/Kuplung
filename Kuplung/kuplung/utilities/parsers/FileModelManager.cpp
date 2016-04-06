@@ -31,17 +31,23 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
     this->parserAssimp->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 
-objScene FileModelManager::parse(FBEntity file, bool useOwn) {
-    if (useOwn) {
-        if (file.extension == ".obj")
-            return this->parserOBJ->parse(file);
-        else if (file.extension == ".stl")
-            return this->parserOBJ->parse(file);
-        else
+objScene FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
+    switch (type) {
+        case FileBrowser_ParserType_Own: {
+            if (file.extension == ".obj")
+                return this->parserOBJ->parse(file);
+            else if (file.extension == ".stl")
+                return this->parserOBJ->parse(file);
+            break;
+        }
+        case FileBrowser_ParserType_Assimp: {
+            return this->parserAssimp->parse(file);
+            break;
+        }
+        default:
             return {};
+            break;
     }
-    else
-        return this->parserAssimp->parse(file);
 }
 
 void FileModelManager::doProgress(float value) {

@@ -194,17 +194,17 @@ void ObjectsManager::loadSystemModels() {
     file.extension = ".obj";
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-    this->systemModels["lamp"] = this->fileParser->parse(file, true);
+    this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
 
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
-    this->systemModels["light_directional"] = this->fileParser->parse(file, true);
+    this->systemModels["light_directional"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
 
     file.title = "light_point";
     file.path = Settings::Instance()->appFolder() + "/gui/light_point.obj";
-    this->systemModels["light_point"] = this->fileParser->parse(file, true);
+    this->systemModels["light_point"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
 
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
-    this->systemModels["light_spot"] = this->fileParser->parse(file, true);
+    this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
 }

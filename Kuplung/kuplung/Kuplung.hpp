@@ -31,7 +31,7 @@ private:
     void initFolders();
     void destroy();
     void onEvent(SDL_Event* ev);
-    void processObjFileAsync(FBEntity file);
+    void processObjFileAsync(FBEntity file, FileBrowser_ParserType type);
     void processParsedObjFile();
     bool hasEnding(std::string const &fullString, std::string const &ending);
     void renderScene();
@@ -45,7 +45,7 @@ private:
     void addShape(ShapeType type);
 
     void guiQuit();
-    void guiProcessObjFile(FBEntity file);
+    void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
     void guiClearScreen();
     void guiEditorshaderCompiled(std::string fileName);
     void guiModelDelete(int selectedModel);

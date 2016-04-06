@@ -14,6 +14,7 @@
 #include "kuplung/utilities/parsers/obj-parser/objParser.hpp"
 #include "kuplung/utilities/parsers/stl-parser/STLParser.hpp"
 #include "kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp"
+#include "kuplung/ui/components/FileBrowser.hpp"
 #include <functional>
 
 class FileModelManager {
@@ -21,7 +22,7 @@ public:
     ~FileModelManager();
     void destroy();
     void init(std::function<void(float)> doProgress);
-    objScene parse(FBEntity file, bool useOwn);
+    objScene parse(FBEntity file, FileBrowser_ParserType type);
 
 private:
     std::function<void(float)> funcProgress;

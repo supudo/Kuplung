@@ -16,7 +16,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -24,6 +24,7 @@ void FileBrowser::init(bool log, int positionX, int positionY, int width, int he
     this->height = height;
     this->processFile = processFile;
     this->isStyleBrowser = false;
+    this->openWithOwn = true;
 }
 
 void FileBrowser::setStyleBrowser(bool isStyle) {
@@ -49,6 +50,8 @@ void FileBrowser::draw(const char* title, bool* p_opened) {
     ImGui::Text("Select OBJ file");
     ImGui::Separator();
     ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
+    ImGui::Separator();
+    ImGui::Checkbox("Open with Kuplung parser (unckech for Assimp)", &this->openWithOwn);
     ImGui::Separator();
 
     ImGui::BeginChild("scrolling");
@@ -96,7 +99,7 @@ void FileBrowser::drawFiles() {
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile)
-                this->processFile(entity);
+                this->processFile(entity, (this->openWithOwn ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp));
             else {
                 Settings::Instance()->currentFolder = entity.path;
                 this->drawFiles();

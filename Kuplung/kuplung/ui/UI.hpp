@@ -32,7 +32,7 @@ public:
     void init(SDL_Window *window,
               ObjectsManager *managerObjects,
               std::function<void()> quitApp,
-              std::function<void(FBEntity)> processFile,
+              std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape
@@ -59,12 +59,12 @@ public:
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
-    std::function<void(FBEntity)> funcProcessFile;
+    std::function<void(FBEntity, FileBrowser_ParserType)> funcProcessFile;
     std::function<void()> funcNewScene;
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
 
-    void dialogFileBrowserProcessFile(FBEntity file);
+    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
     void fileShaderEditorSaved(std::string fileName);
 
     void dialogFileBrowser();

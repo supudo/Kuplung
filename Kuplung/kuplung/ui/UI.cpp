@@ -21,7 +21,7 @@ void UI::destroy() {
 void UI::init(SDL_Window *window,
               ObjectsManager *managerObjects,
               std::function<void()> quitApp,
-              std::function<void(FBEntity)> processFile,
+              std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape
@@ -64,7 +64,7 @@ void UI::init(SDL_Window *window,
     this->componentScreenshot = new Screenshot();
 
     this->componentFileBrowser = new FileBrowser();
-    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileEditor = new Editor();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
@@ -115,7 +115,7 @@ void UI::renderStart(bool isFrame) {
                         std::string title = iter->first;
                         FBEntity file = iter->second;
                         if (ImGui::MenuItem(title.c_str(), NULL, false, true))
-                            this->funcProcessFile(file);
+                            this->funcProcessFile(file, FileBrowser_ParserType_Own);
                     }
                     ImGui::Separator();
                     if (ImGui::MenuItem("Clear recent files", NULL, false))
@@ -348,10 +348,10 @@ void UI::dialogControlsModels() {
     this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces);
 }
 
-void UI::dialogFileBrowserProcessFile(FBEntity file) {
+void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
-    this->funcProcessFile(file);
+    this->funcProcessFile(file, type);
     this->showDialogFile = false;
     this->showDialogStyle = false;
 }
