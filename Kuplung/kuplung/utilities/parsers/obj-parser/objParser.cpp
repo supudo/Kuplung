@@ -218,14 +218,6 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(1.0);
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(0.0);
                     this->scene.models[indexModel].faces[indexFace].solidColor.push_back(0.0);
-
-//                    float v1 = this->geometricVertices[v_idx + 0];
-//                    float v2 = this->geometricVertices[v_idx + 1];
-//                    float v3 = this->geometricVertices[v_idx + 2];
-//                    float n1 = this->vertexNormals[v_idx + 0];
-//                    float n2 = this->vertexNormals[n_idx + 1];
-//                    float n3 = this->vertexNormals[n_idx + 2];
-//                    printf("%f, %f, %f, %f, %f, %f, %i,\n", v1, v2, v3, n1, n2, n3, (indicesCounter - 1));
                 }
             }
 

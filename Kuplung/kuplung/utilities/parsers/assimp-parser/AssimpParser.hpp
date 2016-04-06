@@ -31,7 +31,7 @@ private:
     objScene scene;
     Assimp::Importer parser;
 
-    int indexModel = -1, indexFace = -1, indicesCounter = 0, modelID = 1, faceID = 1;
+    int indexModel = -1, indexFace = -1, indexMaterial = -1, indicesCounter = 0, modelID = 1, faceID = 1;
     std::vector<glm::vec3> vectorsVertices, vectorsNormals;
     std::vector<glm::vec2> vectorsTextureCoordinates;
     std::vector<objMaterialImage> textures_loaded;

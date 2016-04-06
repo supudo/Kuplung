@@ -113,6 +113,37 @@ void static printObjScene(objScene obj) {
     printf("this->scene.totalCountNormalVertices = %i\n", obj.totalCountNormalVertices);
     printf("this->scene.totalCountTextureCoordinates = %i\n", obj.totalCountTextureCoordinates);
 
+    printf("--------------------------\n");
+    printf("MATERIALS :\n");
+    for (size_t i=0; i<obj.materials.size(); i++) {
+        objMaterial material = obj.materials[i];
+        printf("    material.ID = %s\n", material.materialID.c_str());
+        printf("    material.illumination = %i\n", material.illumination);
+        printf("    material.opticalDensity = %f\n", material.opticalDensity);
+        printf("    material.specularExp = %f\n", material.specularExp);
+        printf("    material.transparency = %f\n", material.transparency);
+        printf("    material.ambient = %f, %f, %f\n", material.ambient.r, material.ambient.g, material.ambient.b);
+        printf("    material.diffuse = %f, %f, %f\n", material.diffuse.r, material.diffuse.g, material.diffuse.b);
+        printf("    material.emission = %f, %f, %f\n", material.emission.r, material.emission.g, material.emission.b);
+        printf("    material.specular = %f, %f, %f\n", material.specular.r, material.specular.g, material.specular.b);
+        printf("    material.textures_ambient.filename = %s\n", material.textures_ambient.filename.c_str());
+        printf("    material.textures_ambient.image = %s\n", material.textures_ambient.image.c_str());
+        printf("    material.textures_diffuse.filename = %s\n", material.textures_diffuse.filename.c_str());
+        printf("    material.textures_diffuse.image = %s\n", material.textures_diffuse.image.c_str());
+        printf("    material.textures_bump.filename = %s\n", material.textures_bump.filename.c_str());
+        printf("    material.textures_bump.image = %s\n", material.textures_bump.image.c_str());
+        printf("    material.textures_displacement.filename = %s\n", material.textures_displacement.filename.c_str());
+        printf("    material.textures_displacement.image = %s\n", material.textures_displacement.image.c_str());
+        printf("    material.textures_dissolve.filename = %s\n", material.textures_dissolve.filename.c_str());
+        printf("    material.textures_dissolve.image = %s\n", material.textures_dissolve.image.c_str());
+        printf("    material.textures_specular.filename = %s\n", material.textures_specular.filename.c_str());
+        printf("    material.textures_specular.image = %s\n", material.textures_specular.image.c_str());
+        printf("    material.textures_specularExp.filename = %s\n", material.textures_specularExp.filename.c_str());
+        printf("    material.textures_specularExp.image = %s\n", material.textures_specularExp.image.c_str());
+        printf("--------------------------\n");
+    }
+
+    printf("--------------------------\n");
     printf("MODELS :\n");
     for (size_t i=0; i<obj.models.size(); i++) {
         objModel model = obj.models[i];
@@ -142,21 +173,21 @@ void static printObjScene(objScene obj) {
             printf("        face.faceMaterial.illumination = %i\n", face.faceMaterial.illumination);
             printf("        face.faceMaterial.opticalDensity = %f\n", face.faceMaterial.opticalDensity);
             printf("        face.faceMaterial.specularExp = %f\n", face.faceMaterial.specularExp);
-            printf("        fface.faceMaterial.transparency = %f\n", face.faceMaterial.transparency);
+            printf("        face.faceMaterial.transparency = %f\n", face.faceMaterial.transparency);
             printf("        face.faceMaterial.textures_ambient.filename = %s\n", face.faceMaterial.textures_ambient.filename.c_str());
-            printf("        fface.faceMaterial.textures_ambient.image = %s\n", face.faceMaterial.textures_ambient.image.c_str());
+            printf("        face.faceMaterial.textures_ambient.image = %s\n", face.faceMaterial.textures_ambient.image.c_str());
             printf("        face.faceMaterial.textures_diffuse.filename = %s\n", face.faceMaterial.textures_diffuse.filename.c_str());
-            printf("        fface.faceMaterial.textures_diffuse.image = %s\n", face.faceMaterial.textures_diffuse.image.c_str());
+            printf("        face.faceMaterial.textures_diffuse.image = %s\n", face.faceMaterial.textures_diffuse.image.c_str());
             printf("        face.faceMaterial.textures_bump.filename = %s\n", face.faceMaterial.textures_bump.filename.c_str());
-            printf("        fface.faceMaterial.textures_bump.image = %s\n", face.faceMaterial.textures_bump.image.c_str());
+            printf("        face.faceMaterial.textures_bump.image = %s\n", face.faceMaterial.textures_bump.image.c_str());
             printf("        face.faceMaterial.textures_displacement.filename = %s\n", face.faceMaterial.textures_displacement.filename.c_str());
-            printf("        fface.faceMaterial.textures_displacement.image = %s\n", face.faceMaterial.textures_displacement.image.c_str());
+            printf("        face.faceMaterial.textures_displacement.image = %s\n", face.faceMaterial.textures_displacement.image.c_str());
             printf("        face.faceMaterial.textures_dissolve.filename = %s\n", face.faceMaterial.textures_dissolve.filename.c_str());
-            printf("        fface.faceMaterial.textures_dissolve.image = %s\n", face.faceMaterial.textures_dissolve.image.c_str());
+            printf("        face.faceMaterial.textures_dissolve.image = %s\n", face.faceMaterial.textures_dissolve.image.c_str());
             printf("        face.faceMaterial.textures_specular.filename = %s\n", face.faceMaterial.textures_specular.filename.c_str());
-            printf("        fface.faceMaterial.textures_specular.image = %s\n", face.faceMaterial.textures_specular.image.c_str());
+            printf("        face.faceMaterial.textures_specular.image = %s\n", face.faceMaterial.textures_specular.image.c_str());
             printf("        face.faceMaterial.textures_specularExp.filename = %s\n", face.faceMaterial.textures_specularExp.filename.c_str());
-            printf("        fface.faceMaterial.textures_specularExp.image = %s\n", face.faceMaterial.textures_specularExp.image.c_str());
+            printf("        face.faceMaterial.textures_specularExp.image = %s\n", face.faceMaterial.textures_specularExp.image.c_str());
         }
     }
 }

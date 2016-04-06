@@ -30,6 +30,7 @@ objScene AssimpParser::parse(FBEntity file) {
 
     this->indexModel = -1;
     this->indexFace = -1;
+    this->indexMaterial = -1;
     this->indicesCounter = 0;
     this->modelID = 1;
     this->faceID = 1;
@@ -92,6 +93,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
     this->scene.models[this->indexModel].faces.push_back(entityFace);
     this->scene.totalCountFaces += 1;
     this->indexFace += 1;
+    this->faceID += 1;
 
     this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices.insert(
         end(this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices),
@@ -167,11 +169,23 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         entityFace.materialID = std::string(materialName.C_Str());
 
         objMaterial entityMaterial;
-        entityMaterial.materialID = "";
-        entityMaterial.specularExp = -1.0;
-        entityMaterial.transparency = -1.0;
-        entityMaterial.illumination = -1.0;
-        entityMaterial.opticalDensity = -1.0;
+        this->indexMaterial += 1;
+        entityMaterial.materialID = std::string(materialName.C_Str());
+        material->Get(AI_MATKEY_SHININESS_STRENGTH, entityMaterial.specularExp);
+        material->Get(AI_MATKEY_OPACITY, entityMaterial.transparency);
+        // TODO: get illumination model
+        entityMaterial.illumination = 2;
+        material->Get(AI_MATKEY_SHININESS, entityMaterial.opticalDensity);
+
+        aiColor3D color;
+        material->Get(AI_MATKEY_COLOR_AMBIENT, color);
+        entityMaterial.ambient = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
+        entityMaterial.diffuse = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        material->Get(AI_MATKEY_COLOR_SPECULAR, color);
+        entityMaterial.specular = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        material->Get(AI_MATKEY_COLOR_EMISSIVE, color);
+        entityMaterial.emission = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
 
         // 1. Diffuse maps
         std::vector<objMaterialImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
@@ -193,7 +207,8 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         if (heightMaps.size() > 0)
             entityMaterial.textures_displacement = heightMaps[0];
 
-        entityFace.faceMaterial = entityMaterial;
+        this->scene.models[this->indexModel].faces[this->indexFace].faceMaterial = entityMaterial;
+        this->scene.materials.push_back(entityMaterial);
     }
 
     entityFace.solidColor.push_back(1.0);
@@ -220,7 +235,7 @@ std::vector<objMaterialImage> AssimpParser::loadMaterialTextures(aiMaterial* mat
         if (!skip) {   // If texture hasn't been loaded already, load it
             objMaterialImage texture;
             texture.filename = std::string(str.C_Str());
-            texture.image = "";
+            texture.image = std::string(str.C_Str());
             texture.height = 0;
             texture.width = 0;
             texture.useTexture = true;
