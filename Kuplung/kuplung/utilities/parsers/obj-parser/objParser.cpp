@@ -241,13 +241,6 @@ objScene objParser::parse(FBEntity file) {
             this->scene.models[i].faces[j].faceMaterial = this->findMaterial(this->scene.models[i].faces[j].materialID);
         }
     }
-
-//    printf("this->scene.objFile = %s\n", this->scene.objFile);
-//    printf("this->scene.totalCountFaces = %i\n", this->scene.totalCountFaces);
-//    printf("this->scene.totalCountGeometricVertices = %i\n", this->scene.totalCountGeometricVertices);
-//    printf("this->scene.totalCountIndices = %i\n", this->scene.totalCountIndices);
-//    printf("this->scene.totalCountNormalVertices = %i\n", this->scene.totalCountNormalVertices);
-//    printf("this->scene.totalCountTextureCoordinates = %i\n", this->scene.totalCountTextureCoordinates);
     for (size_t i=0; i<this->scene.models.size(); i++) {
         for (size_t j=0; j<this->scene.models[i].faces.size(); j++) {
             this->scene.models[i].faces[j].faceMaterial = this->findMaterial(this->scene.models[i].faces[j].materialID);

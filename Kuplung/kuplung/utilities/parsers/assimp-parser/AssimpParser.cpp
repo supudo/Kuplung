@@ -43,7 +43,7 @@ objScene AssimpParser::parse(FBEntity file) {
     this->scene.totalCountNormalVertices = 0;
     this->scene.totalCountIndices = 0;
     this->scene.totalCountFaces = 0;
-    this->scene.objFile = file.path;
+    this->scene.objFile = file.title;
 
     this->processNode(scene->mRootNode, scene);
 
@@ -89,9 +89,9 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
     entityFace.normalsCount = 0;
     entityFace.indicesCount = 0;
     entityFace.solidColor = {};
-
     this->scene.models[this->indexModel].faces.push_back(entityFace);
     this->scene.totalCountFaces += 1;
+    this->indexFace += 1;
 
     this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices.insert(
         end(this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices),
