@@ -166,13 +166,14 @@ bool Kuplung::init() {
 }
 
 void Kuplung::initFolders() {
-//    char *data_path = NULL;
-//    char *base_path = SDL_GetBasePath();
-//    if (base_path)
-//        data_path = base_path;
-//    else
-//        data_path = SDL_strdup("./");
-//    Settings::Instance()->currentFolder = data_path;
+    char *data_path = NULL;
+    char *base_path = SDL_GetBasePath();
+    if (base_path)
+        data_path = base_path;
+    else
+        data_path = SDL_strdup("./");
+    Settings::Instance()->currentFolder = data_path;
+    Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects";
 }
 
 #pragma mark - Event processing

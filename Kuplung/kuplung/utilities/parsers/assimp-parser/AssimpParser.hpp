@@ -11,6 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/utilities/gl/GLIncludes.h"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -27,7 +28,18 @@ public:
 private:
     std::function<void(float)> funcProgress;
 
+    objScene scene;
     Assimp::Importer parser;
+
+    int indexModel = -1, indexFace = -1, indicesCounter = 0, modelID = 1, faceID = 1;
+    std::vector<glm::vec3> vectorsVertices, vectorsNormals;
+    std::vector<glm::vec2> vectorsTextureCoordinates;
+    std::vector<objMaterialImage> textures_loaded;
+
+    void processNode(aiNode* node, const aiScene* scene);
+    objModelFace processMesh(aiMesh* mesh, const aiScene* scene);
+    std::vector<objMaterialImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+    objMaterial findMaterial(std::string materialID);
 };
 
 #endif /* AssimpParser_hpp */
