@@ -45,9 +45,9 @@ objScene FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
             break;
         }
         default:
-            return {};
             break;
     }
+    return {};
 }
 
 void FileModelManager::doProgress(float value) {

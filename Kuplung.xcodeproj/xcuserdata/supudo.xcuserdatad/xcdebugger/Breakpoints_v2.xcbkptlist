@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/Kuplung.cpp"
-            timestampString = "481641090.165673"
+            filePath = "Kuplung/kuplung/utilities/parsers/obj-parser/objParser.cpp"
+            timestampString = "481642988.565942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "442"
-            endingLineNumber = "442"
-            landmarkName = "Kuplung::addShape(ShapeType type)"
+            startingLineNumber = "257"
+            endingLineNumber = "257"
+            landmarkName = "objParser::parse(FBEntity file)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,13 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/Kuplung.cpp"
-            timestampString = "481641110.604629"
+            filePath = "Kuplung/kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp"
+            timestampString = "481643108.746202"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "469"
-            endingLineNumber = "469"
-            landmarkName = "Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type)"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "AssimpParser::parse(FBEntity file)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
