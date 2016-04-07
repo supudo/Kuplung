@@ -38,7 +38,7 @@ private:
 
     void processNode(aiNode* node, const aiScene* scene);
     objModelFace processMesh(aiMesh* mesh, const aiScene* scene);
-    std::vector<objMaterialImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName);
+    std::vector<objMaterialImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type);
     objMaterial findMaterial(std::string materialID);
 };
 

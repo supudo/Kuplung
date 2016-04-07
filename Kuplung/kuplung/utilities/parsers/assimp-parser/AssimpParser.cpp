@@ -189,25 +189,40 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         material->Get(AI_MATKEY_COLOR_EMISSIVE, color);
         this->scene.materials[this->indexMaterial].emission = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
 
-        // 1. Diffuse maps
-        std::vector<objMaterialImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
+        // ambient
+        std::vector<objMaterialImage> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT);
+        if (ambientMaps.size() > 0)
+            this->scene.materials[this->indexMaterial].textures_ambient = ambientMaps[0];
+
+        // diffuse
+        std::vector<objMaterialImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE);
         if (diffuseMaps.size() > 0)
             this->scene.materials[this->indexMaterial].textures_diffuse = diffuseMaps[0];
 
-        // 2. Specular maps
-        std::vector<objMaterialImage> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
+        // specular
+        std::vector<objMaterialImage> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR);
         if (specularMaps.size() > 0)
             this->scene.materials[this->indexMaterial].textures_specular = specularMaps[0];
 
-        // 3. Normal maps
-        std::vector<objMaterialImage> normalMaps = this->loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
+        // specular exp
+        std::vector<objMaterialImage> specularExpMaps = this->loadMaterialTextures(material, aiTextureType_SHININESS);
+        if (specularExpMaps.size() > 0)
+            this->scene.materials[this->indexMaterial].textures_specularExp = specularExpMaps[0];
+
+        // dissolve
+        std::vector<objMaterialImage> dissolveMaps = this->loadMaterialTextures(material, aiTextureType_OPACITY);
+        if (dissolveMaps.size() > 0)
+            this->scene.materials[this->indexMaterial].textures_dissolve = dissolveMaps[0];
+
+        // normal/bump
+        std::vector<objMaterialImage> normalMaps = this->loadMaterialTextures(material, aiTextureType_HEIGHT);
         if (normalMaps.size() > 0)
             this->scene.materials[this->indexMaterial].textures_bump = normalMaps[0];
 
-        // 4. Height maps
-        std::vector<objMaterialImage> heightMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
-        if (heightMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_displacement = heightMaps[0];
+        // displacement
+        std::vector<objMaterialImage> displacementMaps = this->loadMaterialTextures(material, aiTextureType_DISPLACEMENT);
+        if (displacementMaps.size() > 0)
+            this->scene.materials[this->indexMaterial].textures_displacement = displacementMaps[0];
 
         entityFace.faceMaterial = entityMaterial;
     }
@@ -220,7 +235,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
     return entityFace;
 }
 
-std::vector<objMaterialImage> AssimpParser::loadMaterialTextures(aiMaterial* mat, aiTextureType type, std::string typeName) {
+std::vector<objMaterialImage> AssimpParser::loadMaterialTextures(aiMaterial* mat, aiTextureType type) {
     std::vector<objMaterialImage> textures;
     for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
