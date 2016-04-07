@@ -20,18 +20,17 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
 }
 
 objScene AssimpParser::parse(FBEntity file) {
-    Settings::Instance()->funcDoLog("[Assimp] Start..." + file.title);
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         Settings::Instance()->funcDoLog("[Assimp] Parse error : " + std::string(this->parser.GetErrorString()));
         return this->scene;
     }
-    Settings::Instance()->funcDoLog("[Assimp] End - " + std::to_string(scene->mNumMeshes));
 
     this->indexModel = -1;
     this->indexFace = -1;
     this->indexMaterial = -1;
     this->indicesCounter = 0;
+    this->meshCounter = 0;
     this->modelID = 1;
     this->faceID = 1;
     this->vectorsVertices = {};
@@ -72,6 +71,8 @@ void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
         this->indexFace = -1;
         this->modelID += 1;
         entityModel.faces.push_back(this->processMesh(mesh, scene));
+        this->meshCounter += 1;
+        this->funcProgress(((float)this->meshCounter / (float)scene->mNumMeshes) * 100.0);
     }
     for (GLuint i=0; i<node->mNumChildren; i++) {
         this->processNode(node->mChildren[i], scene);

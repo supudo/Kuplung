@@ -122,108 +122,110 @@ bool Skybox::initBuffers() {
     this->glVS_MatrixProjection = this->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixProjection");
     this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
 
-    glGenVertexArrays(1, &this->glVAO);
-    glBindVertexArray(this->glVAO);
+    if (this->Setting_Skybox_Item > 0) {
+        glGenVertexArrays(1, &this->glVAO);
+        glBindVertexArray(this->glVAO);
 
-    std::vector<GLfloat> skyboxVertices = {
-        // Positions
-        -1.0f, 1.0f, -1.0f,
-        -1.0f, -1.0f, -1.0f,
-        1.0f, -1.0f, -1.0f,
-        1.0f, -1.0f, -1.0f,
-        1.0f, 1.0f, -1.0f,
-        -1.0f, 1.0f, -1.0f,
+        std::vector<GLfloat> skyboxVertices = {
+            // Positions
+            -1.0f, 1.0f, -1.0f,
+            -1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
 
-        -1.0f, -1.0f, 1.0f,
-        -1.0f, -1.0f, -1.0f,
-        -1.0f, 1.0f, -1.0f,
-        -1.0f, 1.0f, -1.0f,
-        -1.0f, 1.0f, 1.0f,
-        -1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
 
-        1.0f, -1.0f, -1.0f,
-        1.0f, -1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, -1.0f,
-        1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
 
-        -1.0f, -1.0f, 1.0f,
-        -1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,
-        1.0f, -1.0f, 1.0f,
-        -1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f,
+            -1.0f, -1.0f, 1.0f,
 
-        -1.0f, 1.0f, -1.0f,
-        1.0f, 1.0f, -1.0f,
-        1.0f, 1.0f, 1.0f,
-        1.0f, 1.0f, 1.0f,
-        -1.0f, 1.0f, 1.0f,
-        -1.0f, 1.0f, -1.0f,
+            -1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, -1.0f,
+            1.0f, 1.0f, 1.0f,
+            1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, 1.0f,
+            -1.0f, 1.0f, -1.0f,
 
-        -1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f, 1.0f,
-        1.0f, -1.0f, -1.0f,
-        1.0f, -1.0f, -1.0f,
-        -1.0f, -1.0f, 1.0f,
-        1.0f, -1.0f, 1.0f
-    };
+            -1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, -1.0f,
+            1.0f, -1.0f, -1.0f,
+            -1.0f, -1.0f, 1.0f,
+            1.0f, -1.0f, 1.0f
+        };
 
-    for (size_t i=0; i<skyboxVertices.size(); i++) {
-        skyboxVertices[i] *= gridSize * 10.0;
-    }
-
-    // vertices
-    glGenBuffers(1, &this->vboVertices);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, skyboxVertices.size() * sizeof(GLfloat), &skyboxVertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glVS_VertexPosition);
-    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-    // skybox textures
-    glGenTextures(1, &this->vboTexture);
-    glActiveTexture(GL_TEXTURE0);
-
-    glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
-    for (size_t i=0 ; i<this->skyboxItems[this->Setting_Skybox_Item].images.size(); i++) {
-        std::string image = Settings::Instance()->appFolder() + "/skybox/" + this->skyboxItems[this->Setting_Skybox_Item].images[i];
-
-        int tWidth, tHeight, tChannels;
-        unsigned char* tPixels = stbi_load(image.c_str(), &tWidth, &tHeight, &tChannels, 0);
-        if (!tPixels)
-            Settings::Instance()->funcDoLog("Can't load Skybox texture image - " + image + " with error - " + std::string(stbi_failure_reason()));
-        else {
-            GLint textureFormat = 0;
-            switch (tChannels) {
-                case 1:
-                    textureFormat = GL_LUMINANCE;
-                    break;
-                case 2:
-                    textureFormat = GL_LUMINANCE_ALPHA;
-                    break;
-                case 3:
-                    textureFormat = GL_RGB;
-                    break;
-                case 4:
-                    textureFormat = GL_RGBA;
-                    break;
-                default:
-                    textureFormat = GL_RGB;
-                    break;
-            }
-            glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tPixels);
-            stbi_image_free(tPixels);
+        for (size_t i=0; i<skyboxVertices.size(); i++) {
+            skyboxVertices[i] *= gridSize * 10.0;
         }
-    }
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
 
-    glBindVertexArray(0);
+        // vertices
+        glGenBuffers(1, &this->vboVertices);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
+        glBufferData(GL_ARRAY_BUFFER, skyboxVertices.size() * sizeof(GLfloat), &skyboxVertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glVS_VertexPosition);
+        glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+        // skybox textures
+        glGenTextures(1, &this->vboTexture);
+        glActiveTexture(GL_TEXTURE0);
+
+        glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
+        for (size_t i=0 ; i<this->skyboxItems[this->Setting_Skybox_Item].images.size(); i++) {
+            std::string image = Settings::Instance()->appFolder() + "/skybox/" + this->skyboxItems[this->Setting_Skybox_Item].images[i];
+
+            int tWidth, tHeight, tChannels;
+            unsigned char* tPixels = stbi_load(image.c_str(), &tWidth, &tHeight, &tChannels, 0);
+            if (!tPixels)
+                Settings::Instance()->funcDoLog("Can't load Skybox texture image - " + image + " with error - " + std::string(stbi_failure_reason()));
+            else {
+                GLint textureFormat = 0;
+                switch (tChannels) {
+                    case 1:
+                        textureFormat = GL_LUMINANCE;
+                        break;
+                    case 2:
+                        textureFormat = GL_LUMINANCE_ALPHA;
+                        break;
+                    case 3:
+                        textureFormat = GL_RGB;
+                        break;
+                    case 4:
+                        textureFormat = GL_RGBA;
+                        break;
+                    default:
+                        textureFormat = GL_RGB;
+                        break;
+                }
+                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tPixels);
+                stbi_image_free(tPixels);
+            }
+        }
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+
+        glBindVertexArray(0);
+    }
 
     return true;
 }
