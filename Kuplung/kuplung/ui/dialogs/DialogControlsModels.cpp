@@ -200,6 +200,15 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::End();
 }
 
+bool DialogControlsModels::checkRootNode(std::vector<const char*> scenes_items, int selectedItem) {
+    std::string haystack = std::string(scenes_items[selectedItem]);
+    std::string needle = ICON_FA_LEMON_O " ";
+    if (haystack.compare(0, needle.length(), needle) == 0)
+        return true;
+    else
+        return false;
+}
+
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -224,28 +233,19 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
 
-//    int items_counter = 0;
-//    std::vector<std::string> scenes_items;
-//    for (size_t i=0; i<scenes->size(); i++) {
-//        objScene s = (*scenes)[i];
-//        scenes_items.push_back(s.objFile.c_str());
-//        items_counter += 1;
+    std::vector<const char*> scenes_items;
+    for (size_t i=0; i<scenes->size(); i++) {
+        scenes_items.push_back((ICON_FA_LEMON_O " " + (*scenes)[i].objFile).c_str());
+        for (size_t j=0; j<(*scenes)[i].models.size(); j++) {
+            objModel m = (*scenes)[i].models[j];
+            for (size_t k=0; k<m.faces.size(); k++) {
+                scenes_items.push_back(("    " ICON_FA_CUBE " " + m.faces[k].ModelTitle).c_str());
+            }
+        }
+    }
+    ImGui::ListBox("", &this->selectedObject, &scenes_items[0], (int)scenes_items.size());
 
-//        for (size_t j=0; j<s.models.size(); j++) {
-//            objModel m = s.models[j];
-
-//            for (size_t k=0; k<m.faces.size(); k++) {
-//                objModelFace f = m.faces[k];
-//                scenes_items.push_back(("    " + f.ModelTitle).c_str());
-//                items_counter += 1;
-//            }
-
-//        }
-
-//    }
-//    ImGui::ListBox("", &this->selectedObject, &scenes_items[0], items_counter);
-
-    ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
+    //ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);
     if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
