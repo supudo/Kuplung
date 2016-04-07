@@ -414,7 +414,7 @@ void Kuplung::addShape(ShapeType type) {
             shapeName = "grid";
             break;
         case ShapeType_IcoSphere:
-            shapeName = "IcoSphere";
+            shapeName = "ico_sphere";
             break;
         case ShapeType_MonkeyHead:
             shapeName = "monkey_head";
