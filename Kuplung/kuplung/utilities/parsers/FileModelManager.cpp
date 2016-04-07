@@ -48,7 +48,7 @@ objScene FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
         default:
             break;
     }
-    printObjScene(obj);
+    //printObjScene(obj);
     return obj;
 }
 

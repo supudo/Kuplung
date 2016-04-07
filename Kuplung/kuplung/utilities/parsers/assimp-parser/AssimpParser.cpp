@@ -90,23 +90,22 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
     entityFace.normalsCount = 0;
     entityFace.indicesCount = 0;
     entityFace.solidColor = {};
-    this->scene.models[this->indexModel].faces.push_back(entityFace);
     this->scene.totalCountFaces += 1;
     this->indexFace += 1;
     this->faceID += 1;
 
-    this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices.insert(
-        end(this->scene.models[this->indexModel].faces[this->indexFace].vectors_vertices),
+    entityFace.vectors_vertices.insert(
+        end(entityFace.vectors_vertices),
         begin(this->vectorsVertices),
         end(this->vectorsVertices)
      );
-    this->scene.models[this->indexModel].faces[this->indexFace].vectors_texture_coordinates.insert(
-        end(this->scene.models[this->indexModel].faces[this->indexFace].vectors_texture_coordinates),
+    entityFace.vectors_texture_coordinates.insert(
+        end(entityFace.vectors_texture_coordinates),
         begin(this->vectorsTextureCoordinates),
         end(this->vectorsTextureCoordinates)
      );
-    this->scene.models[this->indexModel].faces[this->indexFace].vectors_normals.insert(
-        end(this->scene.models[this->indexModel].faces[this->indexFace].vectors_normals),
+    entityFace.vectors_normals.insert(
+        end(entityFace.vectors_normals),
         begin(this->vectorsNormals),
         end(this->vectorsNormals)
      );
@@ -123,7 +122,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         entityFace.vectors_vertices.push_back(vector);
         this->scene.totalCountGeometricVertices += 3;
         this->scene.models[this->indexModel].verticesCount += 3;
-        this->scene.models[this->indexModel].faces[this->indexFace].verticesCount += 3;
+        entityFace.verticesCount += 3;
 
         // Normals
         vector = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
@@ -133,7 +132,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         entityFace.vectors_normals.push_back(vector);
         this->scene.totalCountNormalVertices += 3;
         this->scene.models[this->indexModel].normalsCount += 3;
-        this->scene.models[this->indexModel].faces[this->indexFace].normalsCount += 3;
+        entityFace.normalsCount += 3;
 
         // Texture coordinates
         if (mesh->mTextureCoords[0]) {
@@ -143,7 +142,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
             entityFace.vectors_texture_coordinates.push_back(vec);
             this->scene.totalCountTextureCoordinates += 2;
             this->scene.models[this->indexModel].textureCoordinatesCount += 2;
-            this->scene.models[this->indexModel].faces[this->indexFace].textureCoordinatesCount += 2;
+            entityFace.textureCoordinatesCount += 2;
         }
     }
 
@@ -155,7 +154,7 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
             entityFace.indices.push_back(face.mIndices[j]);
             this->indicesCounter += 1;
             this->scene.totalCountIndices += 1;
-            this->scene.models[this->indexModel].faces[this->indexFace].indicesCount += 1;
+            entityFace.indicesCount += 1;
             this->scene.models[this->indexModel].indicesCount += 1;
         }
     }
@@ -171,49 +170,51 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         objMaterial entityMaterial;
         this->indexMaterial += 1;
         entityMaterial.materialID = std::string(materialName.C_Str());
-        material->Get(AI_MATKEY_SHININESS_STRENGTH, entityMaterial.specularExp);
-        material->Get(AI_MATKEY_OPACITY, entityMaterial.transparency);
+        this->scene.materials.push_back(entityMaterial);
+
+        material->Get(AI_MATKEY_SHININESS_STRENGTH, this->scene.materials[this->indexMaterial].specularExp);
+        material->Get(AI_MATKEY_OPACITY, this->scene.materials[this->indexMaterial].transparency);
         // TODO: get illumination model
-        entityMaterial.illumination = 2;
-        material->Get(AI_MATKEY_SHININESS, entityMaterial.opticalDensity);
+        this->scene.materials[this->indexMaterial].illumination = 2;
+        material->Get(AI_MATKEY_SHININESS, this->scene.materials[this->indexMaterial].opticalDensity);
 
         aiColor3D color;
         material->Get(AI_MATKEY_COLOR_AMBIENT, color);
-        entityMaterial.ambient = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        this->scene.materials[this->indexMaterial].ambient = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
         material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-        entityMaterial.diffuse = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        this->scene.materials[this->indexMaterial].diffuse = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
         material->Get(AI_MATKEY_COLOR_SPECULAR, color);
-        entityMaterial.specular = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        this->scene.materials[this->indexMaterial].specular = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
         material->Get(AI_MATKEY_COLOR_EMISSIVE, color);
-        entityMaterial.emission = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        this->scene.materials[this->indexMaterial].emission = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
 
         // 1. Diffuse maps
         std::vector<objMaterialImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE, "texture_diffuse");
         if (diffuseMaps.size() > 0)
-            entityMaterial.textures_diffuse = diffuseMaps[0];
+            this->scene.materials[this->indexMaterial].textures_diffuse = diffuseMaps[0];
 
         // 2. Specular maps
         std::vector<objMaterialImage> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR, "texture_specular");
         if (specularMaps.size() > 0)
-            entityMaterial.textures_specular = specularMaps[0];
+            this->scene.materials[this->indexMaterial].textures_specular = specularMaps[0];
 
         // 3. Normal maps
         std::vector<objMaterialImage> normalMaps = this->loadMaterialTextures(material, aiTextureType_HEIGHT, "texture_normal");
         if (normalMaps.size() > 0)
-            entityMaterial.textures_bump = normalMaps[0];
+            this->scene.materials[this->indexMaterial].textures_bump = normalMaps[0];
 
         // 4. Height maps
         std::vector<objMaterialImage> heightMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT, "texture_height");
         if (heightMaps.size() > 0)
-            entityMaterial.textures_displacement = heightMaps[0];
+            this->scene.materials[this->indexMaterial].textures_displacement = heightMaps[0];
 
-        this->scene.models[this->indexModel].faces[this->indexFace].faceMaterial = entityMaterial;
-        this->scene.materials.push_back(entityMaterial);
+        entityFace.faceMaterial = entityMaterial;
     }
 
     entityFace.solidColor.push_back(1.0);
     entityFace.solidColor.push_back(0.0);
     entityFace.solidColor.push_back(0.0);
+    this->scene.models[this->indexModel].faces.push_back(entityFace);
 
     return entityFace;
 }

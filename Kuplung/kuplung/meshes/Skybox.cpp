@@ -46,6 +46,11 @@ void Skybox::init(int gridSize) {
     this->gridSize = gridSize;
     this->Setting_Skybox_Item = 0;
 
+    Skybox_Item si_None;
+    si_None.title = "-- No box --";
+    si_None.images = { "", "", "", "", "", ""};
+    this->skyboxItems.push_back(si_None);
+
     Skybox_Item si_LakeMountain;
     si_LakeMountain.title = "Lake Mountain";
     si_LakeMountain.images = {
@@ -226,7 +231,7 @@ bool Skybox::initBuffers() {
 #pragma mark - Render
 
 void Skybox::render(glm::mat4 matrixView, float plane_close, float plane_far, float fov) {
-    if (this->glVAO > 0) {
+    if (this->glVAO > 0 && this->Setting_Skybox_Item > 0) {
         glBindVertexArray(this->glVAO);
         glUseProgram(this->shaderProgram);
 
