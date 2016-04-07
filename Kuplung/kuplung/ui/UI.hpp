@@ -49,7 +49,8 @@ public:
     void showLoading();
     void hideLoading();
 
-    std::vector<ModelFace*> * meshModelFaces;
+    std::vector<ModelFace*> *meshModelFaces;
+    std::vector<objScene> *scenes;
     bool isFrame;
     bool isLoadingOpen;
     bool showControlsGUI;

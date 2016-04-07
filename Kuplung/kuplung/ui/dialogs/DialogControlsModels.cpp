@@ -155,7 +155,7 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, std::string tit
     ImGui::Text("%s: %s", title.c_str(), image.c_str());
 }
 
-void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
+void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
@@ -181,7 +181,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     switch (this->selectedTabPanel) {
         case 0:
             if (meshModelFaces != NULL)
-                this->drawModels(isFrame, meshModelFaces);
+                this->drawModels(isFrame, meshModelFaces, scenes);
             else
                 ImGui::TextColored(ImVec4(255, 0, 0, 255), "No models in the current scene.");
             break;
@@ -200,7 +200,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::End();
 }
 
-void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -222,6 +222,28 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
+
+//    int items_counter = 0;
+//    std::vector<std::string> scenes_items;
+//    for (size_t i=0; i<scenes->size(); i++) {
+//        objScene s = (*scenes)[i];
+//        scenes_items.push_back(s.objFile.c_str());
+//        items_counter += 1;
+
+//        for (size_t j=0; j<s.models.size(); j++) {
+//            objModel m = s.models[j];
+
+//            for (size_t k=0; k<m.faces.size(); k++) {
+//                objModelFace f = m.faces[k];
+//                scenes_items.push_back(("    " + f.ModelTitle).c_str());
+//                items_counter += 1;
+//            }
+
+//        }
+
+//    }
+//    ImGui::ListBox("", &this->selectedObject, &scenes_items[0], items_counter);
+
     ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);

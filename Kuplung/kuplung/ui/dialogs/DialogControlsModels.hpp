@@ -22,12 +22,12 @@
 class DialogControlsModels {
 public:
     void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape);
-    void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
+    void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
 
 private:
     std::function<void(ShapeType)> funcAddShape;
 
-    void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces);
+    void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
     void drawCreate();
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);

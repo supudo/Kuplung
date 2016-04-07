@@ -498,6 +498,7 @@ void Kuplung::processParsedObjFile() {
     }
 
     this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->scenes = &this->scenes;
 
     if (this->meshModelFaces.size() > 0) {
         this->managerUI->showControlsModels = true;
