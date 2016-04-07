@@ -214,8 +214,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
     ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
 
     std::vector<const char*> scene_items;
-    for (size_t i=0; i<meshModelFaces->size(); i++)
+    for (size_t i=0; i<meshModelFaces->size(); i++) {
         scene_items.push_back((*meshModelFaces)[i]->oFace.ModelTitle.c_str());
+    }
 
     // Scene Model
     ImGui::PushItemWidth(-1);
