@@ -39,6 +39,7 @@ void Settings::initSettings() {
     m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
+    m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
 
     m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
@@ -89,6 +90,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
+    this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
 
     this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);

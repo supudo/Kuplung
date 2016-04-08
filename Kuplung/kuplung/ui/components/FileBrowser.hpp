@@ -16,7 +16,7 @@
 #include "kuplung/settings/Settings.h"
 
 typedef enum FileBrowser_ParserType {
-    FileBrowser_ParserType_Own,
+    FileBrowser_ParserType_Own = 0,
     FileBrowser_ParserType_Assimp
 } FileBrowser_ParserType;
 

@@ -30,6 +30,10 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
     if (ImGui::CollapsingHeader("General")) {
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
+
+        const char* parserItems[] = {"Own", "Assimp"};
+        if (ImGui::Combo("Model Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+            Settings::Instance()->saveSettings();
     }
 
     if (ImGui::CollapsingHeader("Look & Feel", NULL, true, true)) {
