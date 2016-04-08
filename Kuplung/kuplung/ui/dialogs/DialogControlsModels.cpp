@@ -401,7 +401,15 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
         }
         case 3: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
+
+//            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
             this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionX->animate, &(*meshModelFaces)[this->selectedObject]->positionX->point, true, isFrame);
+//            ImGui::PopItemWidth();
+//            ImGui::SameLine();
+//            ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.35f);
+//            ImGui::InputFloat("##0001", &(*meshModelFaces)[this->selectedObject]->positionX->point, -1.0f, -1.0f, 3);
+//            ImGui::PopItemWidth();
+
             this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionY->animate, &(*meshModelFaces)[this->selectedObject]->positionY->point, true, isFrame);
             this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionZ->animate, &(*meshModelFaces)[this->selectedObject]->positionZ->point, true, isFrame);
             break;
