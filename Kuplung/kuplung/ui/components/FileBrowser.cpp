@@ -7,6 +7,7 @@
 //
 
 #include "kuplung/ui/components/FileBrowser.hpp"
+#include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
@@ -24,7 +25,6 @@ void FileBrowser::init(bool log, int positionX, int positionY, int width, int he
     this->height = height;
     this->processFile = processFile;
     this->isStyleBrowser = false;
-    this->openWithOwn = true;
 }
 
 void FileBrowser::setStyleBrowser(bool isStyle) {
@@ -51,7 +51,12 @@ void FileBrowser::draw(const char* title, bool* p_opened) {
     ImGui::Separator();
     ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
     ImGui::Separator();
-    ImGui::Checkbox("Open with Kuplung parser (unckech for Assimp)", &this->openWithOwn);
+
+    ImGui::Text("Mode File Parser:"); ImGui::SameLine();
+    const char* parserItems[] = {"Own", "Assimp"};
+    if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+        Settings::Instance()->saveSettings();
+
     ImGui::Separator();
 
     ImGui::BeginChild("scrolling");
@@ -99,7 +104,7 @@ void FileBrowser::drawFiles() {
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile)
-                this->processFile(entity, (this->openWithOwn ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp));
+                this->processFile(entity, (Settings::Instance()->ModelFileParser == 0 ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp));
             else {
                 Settings::Instance()->currentFolder = entity.path;
                 this->drawFiles();

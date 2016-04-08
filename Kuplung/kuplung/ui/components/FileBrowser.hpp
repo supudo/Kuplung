@@ -37,7 +37,7 @@ private:
     double roundOff(double n);
     void logMessage(std::string logMessage);
 
-    bool log, isStyleBrowser, isImageBrowser, openWithOwn;
+    bool log, isStyleBrowser, isImageBrowser;
     int positionX, positionY, width, height;
 };
 
