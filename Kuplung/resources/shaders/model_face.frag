@@ -45,13 +45,19 @@ void main(void) {
             fragmentNormal = normalize(fragmentNormal);
 
         // directional lights color
-        vec3 lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsDirectional = vec3(1.0);
+        if (directionalLights.length() > 0)
+            lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // point lights color
-        vec3 lightsPoint = calculateLightPoint(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsPoint = vec3(1.0);
+        if (pointLights.length() > 0)
+            lightsPoint = calculateLightPoint(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // spot lights color
-        vec3 lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+        vec3 lightsSpot = vec3(1.0);
+        if (spotLights.length() > 0)
+            lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // Refraction
         vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);
@@ -83,5 +89,10 @@ void main(void) {
             fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
         else
             fragColor = vec4(processedColorRefraction, fs_alpha);
+
+        if (directionalLights.length() > 0.0)
+            fragColor = vec4(1.0, 0.0, 0.0, fs_alpha);
+        else
+            fragColor = vec4(directionalLights.length(), pointLights.length(), spotLights.length(), fs_alpha);
     }
 }

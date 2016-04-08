@@ -860,17 +860,17 @@ void ModelFace::renderModel() {
             }
         }
 
-        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
-            glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
-        }
+//        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+//            glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
+//        }
 
-        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
-            glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
-        }
+//        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+//            glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
+//        }
 
-        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
-            glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
-        }
+//        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+//            glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
+//        }
 
         // material
         glUniform1f(this->glMaterial_Refraction, this->Setting_MaterialRefraction->point);
