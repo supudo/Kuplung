@@ -29,8 +29,6 @@ private:
 
     void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
     void drawCreate();
-    bool isRootNode(std::vector<const char*> scenes_items, int selectedItem);
-    int getConvertedSelectedObject(std::vector<const char*> scenes_items);
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
