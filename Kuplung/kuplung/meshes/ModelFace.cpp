@@ -239,7 +239,7 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthSpecular = 1.0;
     this->Setting_TessellationSubdivision = 1;
 
-    this->materialIlluminationModel = 1;
+    this->materialIlluminationModel = this->oFace.faceMaterial.illumination;
     this->Setting_ParallaxMapping = false;
 
     this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(this->oFace.faceMaterial.ambient.r, this->oFace.faceMaterial.ambient.g, this->oFace.faceMaterial.ambient.b) });
@@ -860,17 +860,17 @@ void ModelFace::renderModel() {
             }
         }
 
-//        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
-//            glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
-//        }
+        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+            glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
+        }
 
-//        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
-//            glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
-//        }
+        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+            glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
+        }
 
-//        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
-//            glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
-//        }
+        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+            glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
+        }
 
         // material
         glUniform1f(this->glMaterial_Refraction, this->Setting_MaterialRefraction->point);

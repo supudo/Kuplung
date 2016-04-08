@@ -173,11 +173,34 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
         entityMaterial.materialID = std::string(materialName.C_Str());
         this->scene.materials.push_back(entityMaterial);
 
-        material->Get(AI_MATKEY_SHININESS_STRENGTH, this->scene.materials[this->indexMaterial].specularExp);
+        float shininess = 0.0f;
+        material->Get(AI_MATKEY_SHININESS, shininess); // Ns
+        // Assimp still multiples the exp 4 times ....
+        this->scene.materials[this->indexMaterial].specularExp = shininess / 4.0f;
+
+        float shininessStrength = 0.0f;
+        material->Get(AI_MATKEY_REFRACTI, shininessStrength); // Ni
+        this->scene.materials[this->indexMaterial].opticalDensity = shininessStrength;
+
+//        printf("---- %s\n", materialName.C_Str());
+//        float t = 0.0f;
+//        material->Get(AI_MATKEY_SHININESS_STRENGTH, t);
+//        printf("AI_MATKEY_SHININESS_STRENGTH = %f\n", t);
+//        material->Get(AI_MATKEY_OPACITY, t);
+//        printf("AI_MATKEY_OPACITY = %f\n", t);
+//        material->Get(AI_MATKEY_REFLECTIVITY, t);
+//        printf("AI_MATKEY_REFLECTIVITY = %f\n", t);
+//        material->Get(AI_MATKEY_REFRACTI, t);
+//        printf("AI_MATKEY_REFRACTI = %f\n", t);
+//        material->Get(AI_MATKEY_SHININESS, t);
+//        printf("AI_MATKEY_SHININESS = %f\n", t);
+//        material->Get(AI_MATKEY_SHININESS_STRENGTH, t);
+//        printf("AI_MATKEY_SHININESS_STRENGTH = %f\n", t);
+
         material->Get(AI_MATKEY_OPACITY, this->scene.materials[this->indexMaterial].transparency);
-        // TODO: get illumination model
-        this->scene.materials[this->indexMaterial].illumination = 2;
-        material->Get(AI_MATKEY_SHININESS, this->scene.materials[this->indexMaterial].opticalDensity);
+        int illum_mode = 0;
+        material->Get(AI_MATKEY_SHADING_MODEL, illum_mode);
+        this->scene.materials[this->indexMaterial].illumination = illum_mode;
 
         aiColor3D color;
         material->Get(AI_MATKEY_COLOR_AMBIENT, color);

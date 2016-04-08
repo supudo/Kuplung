@@ -5,8 +5,8 @@
 // =================================================
 
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
-    vec3 result;
-    for (int i=0; i<directionalLights.length(); i++) {
+    vec3 result = vec3(1.0, 1.0, 1.0);
+    for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
         if (directionalLights[i].inUse) {
             vec3 directionLight = normalize(directionalLights[i].direction);
 
@@ -35,8 +35,8 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
 // =================================================
 
 vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
-    vec3 result;
-    for (int i=0; i<pointLights.length(); i++) {
+    vec3 result = vec3(1.0, 1.0, 1.0);
+    for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
             vec3 directionLight = normalize(pointLights[i].position - fragmentPosition);
 
@@ -69,8 +69,8 @@ vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 direc
 // =================================================
 
 vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
-    vec3 result;
-    for (int i=0; i<spotLights.length(); i++) {
+    vec3 result = vec3(1.0, 1.0, 1.0);
+    for (int i=0; i<NR_SPOT_LIGHTS; i++) {
         if (spotLights[i].inUse) {
             vec3 directionLight = normalize(spotLights[i].position - fragmentPosition);
 
