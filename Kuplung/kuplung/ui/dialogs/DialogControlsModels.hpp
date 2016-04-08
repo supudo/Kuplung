@@ -21,11 +21,12 @@
 
 class DialogControlsModels {
 public:
-    void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape);
+    void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight);
     void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
 
 private:
     std::function<void(ShapeType)> funcAddShape;
+    std::function<void(LightSourceType)> funcAddLight;
 
     void drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
     void drawCreate();

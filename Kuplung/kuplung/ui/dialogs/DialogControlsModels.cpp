@@ -14,10 +14,11 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight) {
     this->sdlWindow = sdlWindow;
     this->managerObjects = managerObjects;
     this->funcAddShape = addShape;
+    this->funcAddLight = addLight;
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
@@ -514,9 +515,9 @@ void DialogControlsModels::drawCreate() {
 
     ImGui::Separator();
 
-    ImGui::Button("Directional (Sun)", ImVec2(-1, 0));
-    ImGui::Button("Point (Light bulb)", ImVec2(-1, 0));
-    ImGui::Button("Spot (Flashlight)", ImVec2(-1, 0));
+    if (ImGui::Button("Directional (Sun)", ImVec2(-1, 0))) this->funcAddLight(LightSourceType_Directional);
+    if (ImGui::Button("Point (Light bulb)", ImVec2(-1, 0))) this->funcAddLight(LightSourceType_Point);
+    if (ImGui::Button("Spot (Flashlight)", ImVec2(-1, 0))) this->funcAddLight(LightSourceType_Spot);
 }
 
 void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshModelFaces) {

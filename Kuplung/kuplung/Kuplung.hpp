@@ -43,6 +43,7 @@ private:
     void processRunningThreads();
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
+    void addLight(LightSourceType type);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);

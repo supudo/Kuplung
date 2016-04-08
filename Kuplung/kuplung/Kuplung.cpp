@@ -129,7 +129,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiClearScreen, this),
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::addShape, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::addShape, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::addLight, this, std::placeholders::_1)
                                           );
                     this->doLog("UI initialized.");
 
@@ -382,7 +383,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initAxisSystem();
     this->managerObjects->initSkybox();
     //this->managerObjects->addLight(LightSourceType_Directional);
-    this->managerObjects->addLight(LightSourceType_Point);
+    //this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);
     this->managerUI->showControlsGUI = true;
 
@@ -440,6 +441,10 @@ void Kuplung::addShape(ShapeType type) {
     shapeFile.title = shapeName + ".obj";
     shapeFile.path = Settings::Instance()->appFolder() + "/shapes/" + shapeName + ".obj";
     this->guiProcessObjFile(shapeFile, FileBrowser_ParserType_Own);
+}
+
+void Kuplung::addLight(LightSourceType type) {
+    this->managerObjects->addLight(type);
 }
 
 #pragma mark - App GUI
