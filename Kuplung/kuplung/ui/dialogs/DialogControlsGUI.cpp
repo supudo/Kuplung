@@ -340,9 +340,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
-                    this->helperUI->addControlsSliderSameLine("X", 10, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 11, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 12, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 10, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 11, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 12, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
