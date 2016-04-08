@@ -197,7 +197,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isLoadingOpen) {
+    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
@@ -454,7 +454,7 @@ void Kuplung::processRunningThreads() {
 
 void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
     if (this->hasEnding(file.title, ".obj")) {
-        this->managerUI->showLoading();
+        this->managerUI->showParsing();
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
         std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, type);
@@ -505,12 +505,12 @@ void Kuplung::processParsedObjFile() {
         //this->managerUI->showSceneStats = true;
     }
 
-    this->managerUI->hideLoading();
+    this->managerUI->hideParsing();
 }
 
 void Kuplung::doProgress(float value) {
     this->objLoadingProgress = value;
-    this->managerUI->loadingPercentage = value;
+    this->managerUI->parsingPercentage = value;
 }
 
 void Kuplung::guiQuit() {

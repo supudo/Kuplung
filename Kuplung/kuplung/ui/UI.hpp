@@ -46,16 +46,18 @@ public:
     void recentFilesAdd(std::string title, FBEntity file);
     void recentFilesClear();
     bool isMouseOnGUI();
+    void showParsing();
+    void hideParsing();
     void showLoading();
     void hideLoading();
 
     std::vector<ModelFace*> *meshModelFaces;
     std::vector<objScene> *scenes;
     bool isFrame;
-    bool isLoadingOpen;
+    bool isParsingOpen, isLoadingOpen;
     bool showControlsGUI;
     bool showControlsModels;
-    float loadingPercentage;
+    float parsingPercentage;
 
 private:
     SDL_Window *sdlWindow;

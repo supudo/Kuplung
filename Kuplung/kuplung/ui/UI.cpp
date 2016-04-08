@@ -36,7 +36,8 @@ void UI::init(SDL_Window *window,
 
     this->isFrame = false;
     this->isLoadingOpen = false;
-    this->loadingPercentage = 0.0f;
+    this->isParsingOpen = false;
+    this->parsingPercentage = 0.0f;
 
     this->recentFiles.clear();
     this->needsFontChange = false;
@@ -214,14 +215,21 @@ void UI::renderStart(bool isFrame) {
     if (this->showSceneStats)
         this->dialogSceneStats();
 
-    if (this->isLoadingOpen)
-        ImGui::OpenPopup("Kuplung");
-    if (ImGui::BeginPopupModal("Kuplung", &this->isLoadingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
+    if (this->isParsingOpen)
+        ImGui::OpenPopup("Kuplung Parsing");
+    if (ImGui::BeginPopupModal("Kuplung Parsing", &this->isParsingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
         ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-        ImGui::Text("Processing ... %0.2f%%\n", this->loadingPercentage);
-        ImGui::ProgressBar(this->loadingPercentage / 100.0, ImVec2(0.0f, 0.0f));
+        ImGui::Text("Processing ... %0.2f%%\n", this->parsingPercentage);
+        ImGui::ProgressBar(this->parsingPercentage / 100.0, ImVec2(0.0f, 0.0f));
         ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
         ImGui::PopStyleColor(1);
+        ImGui::EndPopup();
+    }
+
+    if (this->isLoadingOpen)
+        ImGui::OpenPopup("Kuplung Loading");
+    if (ImGui::BeginPopupModal("Kuplung Loading", &this->isLoadingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
+        ImGui::Text("Rendering ... \n");
         ImGui::EndPopup();
     }
 
@@ -249,6 +257,14 @@ void UI::recentFilesClear() {
 
 bool UI::isMouseOnGUI() {
     return ImGui::IsMouseHoveringAnyWindow();
+}
+
+void UI::showParsing() {
+    this->isParsingOpen = true;
+}
+
+void UI::hideParsing() {
+    this->isParsingOpen = false;
 }
 
 void UI::showLoading() {
