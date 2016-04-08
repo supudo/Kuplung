@@ -206,6 +206,15 @@ bool DialogControlsModels::isRootNode(std::vector<const char*> scenes_items, int
         return false;
 }
 
+int DialogControlsModels::getConvertedSelectedObject(std::vector<const char*> scene_items) {
+    int convertedSelectedObject = 0;
+    for (int i=0; i<this->selectedObject; i++) {
+        if (!this->isRootNode(scene_items, i))
+            convertedSelectedObject += 1;
+    }
+    return convertedSelectedObject;
+}
+
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -219,31 +228,35 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 
     ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
 
-    std::vector<const char*> scene_items;
-    for (size_t i=0; i<meshModelFaces->size(); i++) {
-        scene_items.push_back((ICON_FA_CUBE " " + (*meshModelFaces)[i]->oFace.ModelTitle).c_str());
-    }
-
     // Scene Model
     ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
 
-    std::vector<const char*> scenes_items;
+    std::vector<const char*> scene_items;
 
+    std::vector<std::string> s_s_items;
     for (size_t i=0; i<scenes->size(); i++) {
-        scenes_items.push_back((ICON_FA_LEMON_O " " + (*scenes)[i].objFile).c_str());
+        s_s_items.push_back(ICON_FA_LEMON_O " " + (*scenes)[i].objFile);
         for (size_t j=0; j<(*scenes)[i].models.size(); j++) {
             objModel m = (*scenes)[i].models[j];
             for (size_t k=0; k<m.faces.size(); k++) {
-                scenes_items.push_back(("    " ICON_FA_CUBE " " + m.faces[k].ModelTitle).c_str());
+                s_s_items.push_back("    " ICON_FA_CUBE " " + m.faces[k].ModelTitle);
             }
         }
     }
-    ImGui::ListBox("", &this->selectedObject, &scenes_items[0], (int)scenes_items.size());
 
-    //ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
+    for (size_t i=0; i<s_s_items.size(); i++) {
+        scene_items.push_back(s_s_items[i].c_str());
+    }
+    ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)scene_items.size());
+
+
+//    for (size_t i=0; i<meshModelFaces->size(); i++) {
+//        scene_items.push_back((ICON_FA_CUBE " " + (*meshModelFaces)[i]->oFace.ModelTitle).c_str());
+//    }
+//    ImGui::ListBox("", &this->selectedObject, &scene_items[0], (int)meshModelFaces->size());
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);
     if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
@@ -276,8 +289,12 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
     ImGui::BeginChild("Properties Pane", ImVec2(0,0), false);
 
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
-    if (!this->isRootNode(scenes_items, this->selectedObject)) {
-        ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
+    if (this->isRootNode(scene_items, this->selectedObject)) {
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Group:"); ImGui::SameLine(); ImGui::Text("%s", scene_items[this->selectedObject]);
+    }
+    else {
+        int convertedSelectedObject = this->getConvertedSelectedObject(scene_items);
+        ModelFace *mmf = (*meshModelFaces)[convertedSelectedObject];
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.objFile.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.ModelTitle.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.materialID.c_str());
@@ -398,66 +415,66 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
             case 0: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
                 // cel shading
-                ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[this->selectedObject]->Setting_CelShading);
-                ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
+                ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[convertedSelectedObject]->Setting_CelShading);
+                ImGui::Checkbox("Wireframe", &(*meshModelFaces)[convertedSelectedObject]->Setting_Wireframe);
                 // alpha
-                ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
-                ImGui::SliderFloat("", &(*meshModelFaces)[this->selectedObject]->Setting_Alpha, 0.0f, 1.0f);
+                ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[convertedSelectedObject]->Setting_Alpha), "Alpha Blending");
+                ImGui::SliderFloat("", &(*meshModelFaces)[convertedSelectedObject]->Setting_Alpha, 0.0f, 1.0f);
                 break;
             }
             case 1: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
-                this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[convertedSelectedObject]->scaleX->animate, &(*meshModelFaces)[convertedSelectedObject]->scaleX->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[convertedSelectedObject]->scaleY->animate, &(*meshModelFaces)[convertedSelectedObject]->scaleY->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[convertedSelectedObject]->scaleZ->animate, &(*meshModelFaces)[convertedSelectedObject]->scaleZ->point, false, isFrame);
                 break;
             }
             case 2: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
-                this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateX->animate, &(*meshModelFaces)[this->selectedObject]->rotateX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateY->animate, &(*meshModelFaces)[this->selectedObject]->rotateY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateZ->animate, &(*meshModelFaces)[this->selectedObject]->rotateZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[convertedSelectedObject]->rotateX->animate, &(*meshModelFaces)[convertedSelectedObject]->rotateX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[convertedSelectedObject]->rotateY->animate, &(*meshModelFaces)[convertedSelectedObject]->rotateY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[convertedSelectedObject]->rotateZ->animate, &(*meshModelFaces)[convertedSelectedObject]->rotateZ->point, true, isFrame);
                 break;
             }
             case 3: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
-                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionX->animate, &(*meshModelFaces)[this->selectedObject]->positionX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionY->animate, &(*meshModelFaces)[this->selectedObject]->positionY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionZ->animate, &(*meshModelFaces)[this->selectedObject]->positionZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->positionX->animate, &(*meshModelFaces)[convertedSelectedObject]->positionX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->positionY->animate, &(*meshModelFaces)[convertedSelectedObject]->positionY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->positionZ->animate, &(*meshModelFaces)[convertedSelectedObject]->positionZ->point, true, isFrame);
                 break;
             }
             case 4: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
-                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceX->animate, &(*meshModelFaces)[this->selectedObject]->displaceX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceY->animate, &(*meshModelFaces)[this->selectedObject]->displaceY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceZ->animate, &(*meshModelFaces)[this->selectedObject]->displaceZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->displaceX->animate, &(*meshModelFaces)[convertedSelectedObject]->displaceX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->displaceY->animate, &(*meshModelFaces)[convertedSelectedObject]->displaceY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[convertedSelectedObject]->displaceZ->animate, &(*meshModelFaces)[convertedSelectedObject]->displaceZ->point, true, isFrame);
                 break;
             }
             case 5: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
                 if (ImGui::Button("Material Editor"))
-                    (*meshModelFaces)[this->selectedObject]->showMaterialEditor = true;
-                ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[this->selectedObject]->Setting_ParallaxMapping);
+                    (*meshModelFaces)[convertedSelectedObject]->showMaterialEditor = true;
+                ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[convertedSelectedObject]->Setting_ParallaxMapping);
                 ImGui::Separator();
-                ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[this->selectedObject]->Setting_UseTessellation);
-                if ((*meshModelFaces)[this->selectedObject]->Setting_UseTessellation) {
-                    ImGui::Checkbox("Culling", &(*meshModelFaces)[this->selectedObject]->Setting_UseCullFace);
-                    this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationSubdivision);
+                ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[convertedSelectedObject]->Setting_UseTessellation);
+                if ((*meshModelFaces)[convertedSelectedObject]->Setting_UseTessellation) {
+                    ImGui::Checkbox("Culling", &(*meshModelFaces)[convertedSelectedObject]->Setting_UseCullFace);
+                    this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[convertedSelectedObject]->Setting_TessellationSubdivision);
                     ImGui::Separator();
                     if (mmf->oFace.faceMaterial.textures_displacement.useTexture) {
-                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);
+                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[convertedSelectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[convertedSelectedObject]->displacementHeightScale->point, false, isFrame);
                         ImGui::Separator();
                     }
                 }
                 else
                     ImGui::Separator();
-                this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialRefraction->point, true, isFrame);
-                this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[this->selectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
+                this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[convertedSelectedObject]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[convertedSelectedObject]->Setting_MaterialRefraction->point, true, isFrame);
+                this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[convertedSelectedObject]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[convertedSelectedObject]->Setting_MaterialSpecularExp->point, true, isFrame);
                 ImGui::Separator();
-                this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[this->selectedObject]->materialAmbient->color, &(*meshModelFaces)[this->selectedObject]->materialAmbient->colorPickerOpen);
-                this->helperUI->addControlColor3("Diffuse Color", &(*meshModelFaces)[this->selectedObject]->materialDiffuse->color, &(*meshModelFaces)[this->selectedObject]->materialDiffuse->colorPickerOpen);
-                this->helperUI->addControlColor3("Specular Color", &(*meshModelFaces)[this->selectedObject]->materialSpecular->color, &(*meshModelFaces)[this->selectedObject]->materialSpecular->colorPickerOpen);
-                this->helperUI->addControlColor3("Emission Color", &(*meshModelFaces)[this->selectedObject]->materialEmission->color, &(*meshModelFaces)[this->selectedObject]->materialEmission->colorPickerOpen);
+                this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[convertedSelectedObject]->materialAmbient->color, &(*meshModelFaces)[convertedSelectedObject]->materialAmbient->colorPickerOpen);
+                this->helperUI->addControlColor3("Diffuse Color", &(*meshModelFaces)[convertedSelectedObject]->materialDiffuse->color, &(*meshModelFaces)[convertedSelectedObject]->materialDiffuse->colorPickerOpen);
+                this->helperUI->addControlColor3("Specular Color", &(*meshModelFaces)[convertedSelectedObject]->materialSpecular->color, &(*meshModelFaces)[convertedSelectedObject]->materialSpecular->colorPickerOpen);
+                this->helperUI->addControlColor3("Emission Color", &(*meshModelFaces)[convertedSelectedObject]->materialEmission->color, &(*meshModelFaces)[convertedSelectedObject]->materialEmission->colorPickerOpen);
                 break;
             }
             case 6: {
@@ -465,19 +482,19 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 
                 ImGui::Text("Gaussian Blur");
                 const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
-                ImGui::Combo("Mode##228", &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
-                this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
-                this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
+                ImGui::Combo("Mode##228", &(*meshModelFaces)[convertedSelectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
+                this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[convertedSelectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[convertedSelectedObject]->Effect_GBlur_Radius->point, true, isFrame);
+                this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[convertedSelectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[convertedSelectedObject]->Effect_GBlur_Width->point, true, isFrame);
                 ImGui::Separator();
 
     //            ImGui::Text("Bloom");
-    //            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_doBloom);
-    //            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightA, false, isFrame);
-    //            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightB, false, isFrame);
-    //            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightC, false, isFrame);
-    //            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightD, false, isFrame);
-    //            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_Vignette, false, isFrame);
-    //            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
+    //            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_doBloom);
+    //            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_WeightA, false, isFrame);
+    //            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_WeightB, false, isFrame);
+    //            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_WeightC, false, isFrame);
+    //            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_WeightD, false, isFrame);
+    //            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_Vignette, false, isFrame);
+    //            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[convertedSelectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
     //            ImGui::Separator();
                 break;
             }
@@ -498,15 +515,15 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                     "[9] Transparency: Glass on\n    Reflection: Raytrace off",
                     "[10] Casts shadows onto invisible surfaces"
                 };
-                ImGui::Combo("##987", &(*meshModelFaces)[this->selectedObject]->materialIlluminationModel, illum_models_items, IM_ARRAYSIZE(illum_models_items));
+                ImGui::Combo("##987", &(*meshModelFaces)[convertedSelectedObject]->materialIlluminationModel, illum_models_items, IM_ARRAYSIZE(illum_models_items));
                 break;
             }
             default:
                 break;
         }
 
-        if (meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
-            this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
+        if (meshModelFaces != NULL && (*meshModelFaces)[convertedSelectedObject]->showMaterialEditor)
+            this->componentMaterialEditor->draw((*meshModelFaces)[convertedSelectedObject], &(*meshModelFaces)[convertedSelectedObject]->showMaterialEditor);
     }
 
     ImGui::PopItemWidth();
