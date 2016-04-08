@@ -197,7 +197,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen) {
+    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen && !this->managerUI->isLoadingOpen) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
@@ -446,7 +446,6 @@ void Kuplung::addShape(ShapeType type) {
 
 void Kuplung::processRunningThreads() {
     if (this->objParserThreadFinished && !this->objParserThreadProcessed) {
-        this->managerUI->hideLoading();
         this->processParsedObjFile();
         this->objParserThreadProcessed = true;
     }
@@ -473,6 +472,8 @@ void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
 
 void Kuplung::processParsedObjFile() {
     this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
+    this->managerUI->hideParsing();
+    this->managerUI->showLoading();
     this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
     objScene scene = this->scenes[this->scenes.size() - 1];
@@ -505,7 +506,7 @@ void Kuplung::processParsedObjFile() {
         //this->managerUI->showSceneStats = true;
     }
 
-    this->managerUI->hideParsing();
+    this->managerUI->hideLoading();
 }
 
 void Kuplung::doProgress(float value) {
