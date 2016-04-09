@@ -101,7 +101,6 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             if (style.CurveTessellationTol < 0.0f)
                 style.CurveTessellationTol = 0.10f;
             ImGui::DragFloat("Global Alpha", &style.Alpha, 0.005f, 0.20f, 1.0f, "%.2f");
-            ImGui::DragFloat("Window Fill Alpha Default", &style.WindowFillAlphaDefault, 0.005f, 0.0f, 1.0f, "%.2f");
             ImGui::PopItemWidth();
             ImGui::TreePop();
         }

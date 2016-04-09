@@ -79,8 +79,6 @@ ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
                         style.CurveTessellationTol = std::stof(opValue);
                     else if (opKey == "Alpha")
                         style.Alpha = std::stof(opValue);
-                    else if (opKey == "WindowFillAlphaDefault")
-                        style.WindowFillAlphaDefault = std::stof(opValue);
 
                     else if (opKey == "WindowPadding")
                         style.WindowPadding = this->tov2(opValue);
@@ -149,7 +147,6 @@ void DialogStyle::saveStyles(std::string fontfile, std::string fontsize, std::st
     style_txt += "AntiAliasedShapes = " + std::to_string(style.AntiAliasedShapes) + Settings::Instance()->newLineDelimiter;
     style_txt += "CurveTessellationTol = " + std::to_string(style.CurveTessellationTol) + Settings::Instance()->newLineDelimiter;
     style_txt += "Alpha = " + std::to_string(style.Alpha) + Settings::Instance()->newLineDelimiter;
-    style_txt += "WindowFillAlphaDefault = " + std::to_string(style.WindowFillAlphaDefault) + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
 
     style_txt += "# Sizes" + Settings::Instance()->newLineDelimiter;
