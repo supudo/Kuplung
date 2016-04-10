@@ -14,6 +14,15 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
+const GLenum SkyboxTextureCubemap[6] = {
+    GL_TEXTURE_CUBE_MAP_POSITIVE_X, // Right
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_X, // Left
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Y, // Top
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Y, // Bottom
+    GL_TEXTURE_CUBE_MAP_POSITIVE_Z, // Back
+    GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, // Front
+};
+
 #pragma mark - Destroy
 
 Skybox::~Skybox() {
@@ -213,7 +222,7 @@ bool Skybox::initBuffers() {
                         textureFormat = GL_RGB;
                         break;
                 }
-                glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tPixels);
+                glTexImage2D(SkyboxTextureCubemap[i], 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tPixels);
                 stbi_image_free(tPixels);
             }
         }
