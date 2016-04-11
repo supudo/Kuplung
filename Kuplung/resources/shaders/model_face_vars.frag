@@ -8,6 +8,7 @@ uniform vec3 fs_cameraPosition;
 uniform float fs_screenResX, fs_screenResY;
 uniform float fs_alpha;
 uniform vec3 fs_outlineColor;
+uniform vec3 fs_UIAmbient;
 uniform bool fs_celShading;
 uniform bool fs_userParallaxMapping;
 

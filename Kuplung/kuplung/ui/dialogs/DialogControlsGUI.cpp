@@ -41,7 +41,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<6; i++) {
         switch (i) {
             case 0: {
                 ImGui::Indent();
@@ -72,7 +72,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 3: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_TREE " Skybox", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_SUN_O " Ambient Light", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -80,6 +80,15 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 break;
             }
             case 4: {
+                ImGui::Indent();
+                if (ImGui::Selectable(ICON_FA_TREE " Skybox", this->selectedObject == i)) {
+                    this->selectedObject = i;
+                    this->selectedObjectLight = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            case 5: {
                 if (this->managerObjects->lightSources.size() == 0) {
                     ImGui::Indent();
                     ImGui::Text(ICON_FA_LIGHTBULB_O " Lights");
@@ -93,7 +102,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
 //                            if (ImGui::TreeNode((void*)(intptr_t)i, "%s", this->managerObjects->lightSources[j]->title.c_str())) {
 //                                this->selectedObjectLight = j;
-//                                this->selectedObject = 4;
+//                                this->selectedObject = 5;
 //                                ImGui::SameLine();
 //                                if (ImGui::SmallButton(ICON_FA_TIMES ""))
 //                                    printf("Child %d pressed", i);
@@ -103,7 +112,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                             //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
                             if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
                                 this->selectedObjectLight = j;
-                                this->selectedObject = 4;
+                                this->selectedObject = 5;
                             }
                         }
                         ImGui::TreePop();
@@ -111,7 +120,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 break;
             }
-            case 5: {
+            case 6: {
                 ImGui::Indent();
                 if (ImGui::Selectable("Terrain", this->selectedObject == i)) {
                     this->selectedObject = i;
@@ -297,6 +306,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 3: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scene Ambient Light");
+            this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.r, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.g, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.b, true, isFrame);
+            break;
+        }
+        case 4: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Skybox");
             std::vector<const char*> skybox_items;
             for (size_t i=0; i<this->managerObjects->skybox->skyboxItems.size(); i++)
@@ -304,7 +320,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Combo("##987", &this->managerObjects->skybox->Setting_Skybox_Item, &skybox_items[0], (int)skybox_items.size());
             break;
         }
-        case 4: {
+        case 5: {
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -402,6 +418,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 default:
                     break;
             }
+            break;
+        }
+        case 6: {
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
             break;
         }
         default:

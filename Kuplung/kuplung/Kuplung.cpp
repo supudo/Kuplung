@@ -369,7 +369,8 @@ void Kuplung::renderScene() {
                     this->managerObjects->camera->matrixCamera,
                     mtxModel,
                     this->managerObjects->camera->cameraPosition,
-                    this->managerObjects->grid);
+                    this->managerObjects->grid,
+                    this->managerObjects->Setting_UIAmbientLight);
     }
 
     this->processRunningThreads();

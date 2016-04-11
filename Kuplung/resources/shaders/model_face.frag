@@ -45,22 +45,22 @@ void main(void) {
             fragmentNormal = normalize(fragmentNormal);
 
         // directional lights color
-        vec3 lightsDirectional = vec3(1.0);
+        vec3 lightsDirectional = vec3(0.0);
         if (directionalLights.length() > 0)
             lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // point lights color
-        vec3 lightsPoint = vec3(1.0);
+        vec3 lightsPoint = vec3(0.0);
         if (pointLights.length() > 0)
             lightsPoint = calculateLightPoint(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // spot lights color
-        vec3 lightsSpot = vec3(1.0);
+        vec3 lightsSpot = vec3(0.0);
         if (spotLights.length() > 0)
             lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
         // Refraction
-        vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot);
+        vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot + fs_UIAmbient);
         if (effect_GBlur.gauss_mode > -1) {
             // effects - gaussian blur
             vec4 effect_GBlur_Color = effect_gaussian_blur();

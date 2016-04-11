@@ -56,6 +56,7 @@ public:
     float Setting_PlaneClose = 0.1f, Setting_PlaneFar = 100.0f;
     int Setting_GridSize = 10, Setting_Skybox = 0;
     glm::vec4 Setting_OutlineColor;
+    glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false;
 
 private:

@@ -57,7 +57,7 @@ public:
     void initBuffers(std::string assetsFolder);
     void initProperties();
     void initModelProperties();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
     // general options
     void setOptionsFOV(float fov);
@@ -123,6 +123,7 @@ private:
     float so_outlineThickness;
     glm::vec4 so_outlineColor;
     bool so_selectedYn;
+    glm::vec3 uiAmbientLight;
     WorldGrid *grid;
 
     GLUtils *glUtils;
@@ -150,8 +151,8 @@ private:
 
     // general
     GLuint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
-    GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glTCS_UseCullFace;
-    GLuint glTCS_UseTessellation, glTCS_TessellationSubdivision;
+    GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
+    GLuint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;

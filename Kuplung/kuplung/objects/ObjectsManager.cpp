@@ -82,6 +82,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_PlaneFar = 100.0f;
     this->Setting_GridSize = 10;
     this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
+    this->Setting_UIAmbientLight = glm::vec3(1.0f);
     this->Setting_FixedGridWorld = true;
     this->Setting_OutlineColorPickerOpen = false;
 }
