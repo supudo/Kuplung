@@ -12,7 +12,7 @@ void main(void) {
         vec3 lightDirection = vec3(0.0, 0.0, 5.0);
         vec3 directionLight = normalize(lightDirection);
         float lambertFactor = max(dot(v_vertexNormal, -directionLight), 0.0);
-        vec3 light = 0.7 * vec3(0.7) * lambertFactor;
+        vec3 light = 0.6 * vec3(0.6) * lambertFactor;
         fragColor = vec4(fs_color + light, 1.0);
     }
     else

@@ -8,7 +8,7 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
     vec3 result = vec3(0.0);
     for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
         if (directionalLights[i].inUse) {
-            vec3 directionLight = normalize(directionalLights[i].direction);
+            vec3 directionLight = normalize(-1.0 * directionalLights[i].direction);
 
             // Diffuse shading - lambert factor
             float lambertFactor = max(dot(directionNormal, -directionLight), 0.0);
