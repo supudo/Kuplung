@@ -97,17 +97,26 @@ void Light::initProperties(LightSourceType type) {
     this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
+    this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+
     switch (type) {
+        case LightSourceType_Directional: {
+            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+            break;
+        }
         case LightSourceType_Point: {
             this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
             this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
             this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.05f });
+            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
             break;
         }
         case LightSourceType_Spot: {
             this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
             this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
             this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
+            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
             break;
         }
         default:
@@ -115,10 +124,6 @@ void Light::initProperties(LightSourceType type) {
     }
     this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -180.0f });
     this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 160.0f });
-
-    this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
 
     this->matrixModel = glm::mat4(1.0);
 }
