@@ -243,12 +243,25 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
         // picking
         if (this->managerControls->mouseButton_LEFT) {
-            int mouse_x = this->managerControls->mousePosition.x;
-            int mouse_y = this->managerControls->mousePosition.y;
+//            int mouse_x = this->managerControls->mousePosition.x;
+//            int mouse_y = this->managerControls->mousePosition.y;
 
-            // Color picking
-            PixelDataPoint p = this->managerObjects->camera->getClickData(mouse_x, mouse_y, Settings::Instance()->SDL_Window_Height);
-            this->doLog(Settings::Instance()->string_format("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u", mouse_x, mouse_y, p.color[0], p.color[1], p.color[2], p.color[3], p.depth, p.index));
+//            // Color picking
+//            PixelDataPoint p = this->managerObjects->camera->getClickData(mouse_x, mouse_y, Settings::Instance()->SDL_Window_Height);
+//            this->doLog(Settings::Instance()->string_format("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u", mouse_x, mouse_y, p.color[0], p.color[1], p.color[2], p.color[3], p.depth, p.index));
+
+//            // ----- picking
+//            glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+//            glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
+//            glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
+
+//            glm::vec3 nearPoint = glm::unProject(win_near, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+//            glm::vec3 farPoint = glm::unProject(win_far, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+//            glm::vec3 direction = glm::normalize(farPoint - nearPoint);
+
+//            // http://schabby.de/picking-opengl-ray-tracing/
+//            // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
+//            float sceneClosestObject = -1;
 
             // ----- picking
 //            glm::vec3 rayDirection = this->managerObjects->camera->createRay(
@@ -263,67 +276,97 @@ void Kuplung::onEvent(SDL_Event *ev) {
 //            // Values you might be interested:
 //            float someDistance = 1.0;
 //            glm::vec3 rayEndPosition = this->managerObjects->camera->cameraPosition + rayDirection * someDistance;
+//            this->doLog(Settings::Instance()->string_format("[Ray Direction] @ %f - %f - %f", rayDirection.x, rayDirection.y, rayDirection.z));
 //            this->doLog(Settings::Instance()->string_format("PICKED @ %f - %f - %f", rayEndPosition.x, rayEndPosition.y, rayEndPosition.z));
 
             // ----- picking
-            glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-            glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
-            glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
+//            glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+//            glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
+//            glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
 
-            glm::vec3 nearPoint = glm::unProject(win_near, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
-            glm::vec3 farPoint = glm::unProject(win_far, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
-            glm::vec3 direction = glm::normalize(farPoint - nearPoint);
+//            glm::vec3 nearPoint = glm::unProject(win_near, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+//            glm::vec3 farPoint = glm::unProject(win_far, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+//            glm::vec3 direction = glm::normalize(farPoint - nearPoint);
 
-            // http://schabby.de/picking-opengl-ray-tracing/
-            // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
-            float sceneClosestObject = -1;
+//            // http://schabby.de/picking-opengl-ray-tracing/
+//            // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
+//            float sceneClosestObject = -1;
 
-            for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-                ModelFace *mmf = this->meshModelFaces[i];
-                std::vector<glm::vec3> vertices;
+//            for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+//                ModelFace *mmf = this->meshModelFaces[i];
+//                std::vector<glm::vec3> vertices;
 
-//                std::vector<float> objVertices = mmf->oFace.vertices;
-//                for (size_t j=0; j<objVertices.size(); j++) {
-//                    if ((j + 1) % 3 == 0)
-//                        vertices.push_back(glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]));
+// //                std::vector<float> objVertices = mmf->oFace.vertices;
+// //                for (size_t j=0; j<objVertices.size(); j++) {
+// //                    if ((j + 1) % 3 == 0)
+// //                        vertices.push_back(glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]));
+// //                }
+
+//                glm::mat4 m = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
+//                for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
+//                    float x = mmf->oFace.vectors_vertices[j].x;
+//                    float y = mmf->oFace.vectors_vertices[j].y;
+//                    float z = mmf->oFace.vectors_vertices[j].z;
+//                    glm::vec4 v = m * glm::vec4(x, y, z, 1.0);
+//                    vertices.push_back(glm::vec3(v.x, v.y, v.z));
 //                }
 
-                glm::mat4 m = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
-                for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
-                    float x = mmf->oFace.vectors_vertices[j].x;
-                    float y = mmf->oFace.vectors_vertices[j].y;
-                    float z = mmf->oFace.vectors_vertices[j].z;
-                    glm::vec4 v = m * glm::vec4(x, y, z, 1.0);
-                    vertices.push_back(glm::vec3(v.x, v.y, v.z));
-                }
+//                for (size_t j=0; j<vertices.size(); j++) {
+//                    if ((j + 1) % 3 == 0) {
+//                        glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
 
-                for (size_t j=0; j<vertices.size(); j++) {
-                    if ((j + 1) % 3 == 0) {
-                        glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
+//                        float nDotL = glm::dot(direction, face_normal);
+//                        if (nDotL <= 0.0f) {
+//                            float distance = glm::dot(face_normal, (vertices[j - 2] - nearPoint)) / nDotL;
 
-                        float nDotL = glm::dot(direction, face_normal);
-                        if (nDotL <= 0.0f) {
-                            float distance = glm::dot(face_normal, (vertices[j - 2] - nearPoint)) / nDotL;
-
-                            glm::vec3 p = nearPoint + distance * direction;
-                            glm::vec3 n1 = glm::cross(vertices[j - 1] - vertices[j - 2], p - vertices[j - 2]);
-                            glm::vec3 n2 = glm::cross(vertices[j] - vertices[j - 1], p - vertices[j - 1]);
-                            glm::vec3 n3 = glm::cross(vertices[j - 2] - vertices[j], p - vertices[j]);
-                            if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
-                                if (p.z > sceneClosestObject) {
-                                    this->sceneSelectedModelObject = i;
-                                    this->selectedMaterialID = mmf->oFace.materialID;
-                                    this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+//                            glm::vec3 p = nearPoint + distance * direction;
+//                            glm::vec3 n1 = glm::cross(vertices[j - 1] - vertices[j - 2], p - vertices[j - 2]);
+//                            glm::vec3 n2 = glm::cross(vertices[j] - vertices[j - 1], p - vertices[j - 1]);
+//                            glm::vec3 n3 = glm::cross(vertices[j - 2] - vertices[j], p - vertices[j]);
+//                            if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
+//                                if (p.z > sceneClosestObject) {
+//                                    this->sceneSelectedModelObject = i;
+//                                    this->selectedMaterialID = mmf->oFace.materialID;
+//                                    this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
+//                                    break;
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
 
         }
     }
+}
+
+bool Kuplung::rayPicking(ModelFace* face, glm::mat4 modelMatrix) {
+    bool result = false;
+
+    int mouse_x = this->managerControls->mousePosition.x;
+    int mouse_y = this->managerControls->mousePosition.y;
+
+    glm::vec3 vFrom = glm::vec3(0.0f);
+    glm::vec3 vTo = glm::vec3(0.0f);
+
+    glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+    glm::vec3 win_near = glm::vec3(mouse_x, Settings::Instance()->SDL_Window_Height - mouse_y, 0.0);
+    glm::vec3 nearPoint = glm::unProject(win_near, this->managerObjects->camera->matrixCamera, this->managerObjects->matrixProjection, viewport);
+    vTo = nearPoint;
+
+    float fx = this->managerObjects->camera->positionX->point;
+    float fy = this->managerObjects->camera->positionY->point;
+    float fz = this->managerObjects->camera->positionZ->point;
+    vFrom = glm::vec3(fx, fy, fz);
+
+    this->doLog(Settings::Instance()->string_format("%f, %f, %f <--------> %f, %f, %f\n", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
+    RayLine *rl = new RayLine();
+    rl->init();
+    rl->initShaderProgram();
+    rl->initBuffers(vFrom, vTo);
+    this->rayLines.push_back(rl);
+
+    return result;
 }
 
 #pragma mark - Rendering
@@ -357,7 +400,14 @@ void Kuplung::renderScene() {
         mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
 
         // outlining
-        mmf->setOptionsSelected(this->selectedMaterialID == mmf->oFace.materialID);
+//        mmf->setOptionsSelected(this->selectedMaterialID == mmf->oFace.materialID);
+        if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen && !this->managerUI->isLoadingOpen && this->managerControls->mouseButton_LEFT) {
+            if (this->rayPicking(mmf, mtxModel))
+                mmf->setOptionsSelected(true);
+            else
+                mmf->setOptionsSelected(false);
+        }
+
         mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
         mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
 
@@ -372,6 +422,9 @@ void Kuplung::renderScene() {
                     this->managerObjects->grid,
                     this->managerObjects->Setting_UIAmbientLight);
     }
+
+    for (size_t i=0; i<this->rayLines.size(); i++)
+        this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
 
     this->processRunningThreads();
 }

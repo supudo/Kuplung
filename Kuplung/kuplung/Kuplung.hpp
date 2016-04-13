@@ -17,6 +17,7 @@
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/RayLine.hpp"
 #include "kuplung/meshes/Terrain.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
@@ -44,6 +45,7 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
+    bool rayPicking(ModelFace* face, glm::mat4 modelMatrix);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
@@ -79,6 +81,7 @@ private:
     FNTParser *fontParser;
     std::vector<objScene> scenes;
     std::vector<ModelFace*> meshModelFaces;
+    std::vector<RayLine*> rayLines;
 
     Terrain *terrain;
 };

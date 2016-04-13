@@ -41,6 +41,9 @@
 		8A43AD821C92FAE4000A35FB /* light_point.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7C1C92FACC000A35FB /* light_point.obj */; };
 		8A43AD831C92FAE4000A35FB /* light_spot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7D1C92FACC000A35FB /* light_spot.mtl */; };
 		8A43AD841C92FAE4000A35FB /* light_spot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7E1C92FACC000A35FB /* light_spot.obj */; };
+		8A48C3241CBE8B650076F4F6 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
+		8A48C3251CBE8B650076F4F6 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
+		8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A48C3261CBE8B780076F4F6 /* RayLine.cpp */; };
 		8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F11A1C760A0F00B93D18 /* Camera.cpp */; };
 		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
 		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
@@ -193,6 +196,8 @@
 				8AA5EDF91C773E0B009F1F52 /* grid.vert in Copy Files */,
 				8AA5EDFA1C773E0B009F1F52 /* light_ray.frag in Copy Files */,
 				8AA5EDFB1C773E0B009F1F52 /* light_ray.vert in Copy Files */,
+				8A48C3241CBE8B650076F4F6 /* ray_line.frag in Copy Files */,
+				8A48C3251CBE8B650076F4F6 /* ray_line.vert in Copy Files */,
 				8AA5EDFC1C773E0B009F1F52 /* light.frag in Copy Files */,
 				8AA5EDFD1C773E0B009F1F52 /* light.vert in Copy Files */,
 				8AA5EDFE1C773E0B009F1F52 /* model_face.frag in Copy Files */,
@@ -318,6 +323,10 @@
 		8A43AD7C1C92FACC000A35FB /* light_point.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_point.obj; sourceTree = "<group>"; };
 		8A43AD7D1C92FACC000A35FB /* light_spot.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.mtl; sourceTree = "<group>"; };
 		8A43AD7E1C92FACC000A35FB /* light_spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.obj; sourceTree = "<group>"; };
+		8A48C3221CBE8B530076F4F6 /* ray_line.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.frag; sourceTree = "<group>"; };
+		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
+		8A48C3261CBE8B780076F4F6 /* RayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayLine.cpp; sourceTree = "<group>"; };
+		8A48C3271CBE8B780076F4F6 /* RayLine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayLine.hpp; sourceTree = "<group>"; };
 		8A54F11A1C760A0F00B93D18 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		8A54F11B1C760A0F00B93D18 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
@@ -723,6 +732,8 @@
 				8A6E70541C6CAC960085CAE5 /* LightRay.hpp */,
 				8A0364831C6B71EC001489C8 /* ModelFace.cpp */,
 				8A0364841C6B71EC001489C8 /* ModelFace.hpp */,
+				8A48C3261CBE8B780076F4F6 /* RayLine.cpp */,
+				8A48C3271CBE8B780076F4F6 /* RayLine.hpp */,
 				8AECC0761CB274060096AE7A /* Skybox.cpp */,
 				8AECC0771CB274060096AE7A /* Skybox.hpp */,
 				8A0364851C6B71EC001489C8 /* Terrain.cpp */,
@@ -786,6 +797,8 @@
 				8AA5EDF11C773DF8009F1F52 /* model_face.tcs */,
 				8AA5EDF21C773DF8009F1F52 /* model_face.tes */,
 				8AA5EDF31C773DF8009F1F52 /* model_face.vert */,
+				8A48C3221CBE8B530076F4F6 /* ray_line.frag */,
+				8A48C3231CBE8B530076F4F6 /* ray_line.vert */,
 				8A7F386B1C7F28E8004D4520 /* reflection.frag */,
 				8A7F386C1C7F28E8004D4520 /* reflection.vert */,
 				8AECC0791CB274610096AE7A /* skybox.frag */,
@@ -1019,6 +1032,7 @@
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
 				8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
+				8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
 			);

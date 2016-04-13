@@ -105,6 +105,7 @@ SOURCES += main.cpp \
     kuplung/meshes/Camera.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
+    kuplung/meshes/RayLine.cpp \
     kuplung/meshes/Skybox.cpp \
     kuplung/meshes/Terrain.cpp \
     kuplung/objects/ObjectsManager.cpp \
@@ -152,6 +153,7 @@ HEADERS += \
     kuplung/meshes/Camera.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
+    kuplung/meshes/RayLine.hpp \
     kuplung/meshes/Skybox.hpp \
     kuplung/meshes/Terrain.hpp \
     kuplung/objects/ObjectDefinitions.h \
@@ -231,6 +233,8 @@ DISTFILES += \
     resources/shaders/axis.frag \
     resources/shaders/light_ray.vert \
     resources/shaders/light_ray.frag \
+    resources/shaders/ray_line.vert \
+    resources/shaders/ray_line.frag \
     resources/shaders/grid.vert \
     resources/shaders/grid.frag \
     resources/shaders/model_face.vert \

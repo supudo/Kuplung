@@ -75,8 +75,8 @@ glm::vec3 Camera::createRay(float mouse_x, float mouse_y, float fov, float ratio
 
     glm::mat4 proj = glm::perspective(fov, ratio, near, far);
 
-    glm::vec3 cameraDirection = glm::vec3();
-    glm::vec3 cameraUpVector = glm::vec3(0, 0, 1);
+    glm::vec3 cameraDirection = glm::vec3(this->matrixCamera[2].x, this->matrixCamera[2].y, this->matrixCamera[2].z);
+    glm::vec3 cameraUpVector = this->eyeSettings->View_Up;
     glm::mat4 view = glm::lookAt(glm::vec3(0.0f), cameraDirection, cameraUpVector);
 
     glm::mat4 invVP = glm::inverse(proj * view);
