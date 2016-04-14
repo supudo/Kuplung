@@ -265,25 +265,35 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 case 0: {
                     ImGui::Checkbox("Show Camera", &this->managerObjects->cameraModel->showCameraObject);
                     ImGui::Checkbox("Show Wire", &this->managerObjects->cameraModel->showInWire);
+                    ImGui::Separator();
+                    ImGui::Text("Inner Light Direction");
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionX->animate, &this->managerObjects->cameraModel->innerLightDirectionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionY->animate, &this->managerObjects->cameraModel->innerLightDirectionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionZ->animate, &this->managerObjects->cameraModel->innerLightDirectionZ->point, true, isFrame);
+                    ImGui::Separator();
+                    ImGui::Text("Model Color");
+                    this->helperUI->addControlsSliderSameLine("X", 13, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorR->animate, &this->managerObjects->cameraModel->colorR->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 14, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorG->animate, &this->managerObjects->cameraModel->colorG->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 15, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorB->animate, &this->managerObjects->cameraModel->colorB->point, true, isFrame);
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionX->animate, &this->managerObjects->cameraModel->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionY->animate, &this->managerObjects->cameraModel->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionZ->animate, &this->managerObjects->cameraModel->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 4, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionX->animate, &this->managerObjects->cameraModel->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionY->animate, &this->managerObjects->cameraModel->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionZ->animate, &this->managerObjects->cameraModel->positionZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateX->animate, &this->managerObjects->cameraModel->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateY->animate, &this->managerObjects->cameraModel->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateZ->animate, &this->managerObjects->cameraModel->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateX->animate, &this->managerObjects->cameraModel->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateY->animate, &this->managerObjects->cameraModel->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateZ->animate, &this->managerObjects->cameraModel->rotateZ->point, true, isFrame);
                     ImGui::Separator();
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
-                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterX->animate, &this->managerObjects->cameraModel->rotateCenterX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterY->animate, &this->managerObjects->cameraModel->rotateCenterY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterZ->animate, &this->managerObjects->cameraModel->rotateCenterZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 10, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterX->animate, &this->managerObjects->cameraModel->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 11, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterY->animate, &this->managerObjects->cameraModel->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 12, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterZ->animate, &this->managerObjects->cameraModel->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 default:

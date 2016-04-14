@@ -31,6 +31,8 @@ public:
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
     ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
+    ObjectCoordinate *innerLightDirectionX, *innerLightDirectionY, *innerLightDirectionZ;
+    ObjectCoordinate *colorR, *colorG, *colorB;
     bool showCameraObject, showInWire;
 
     glm::mat4 matrixProjection;
@@ -44,7 +46,7 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
+    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glUniformInnerLightDirection, glUniformColor;
 
     std::string readFile(const char *filePath);
 };

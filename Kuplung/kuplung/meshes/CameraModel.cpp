@@ -26,7 +26,16 @@ void CameraModel::destroy() {
     delete this->rotateCenterY;
     delete this->rotateCenterZ;
 
+    delete this->innerLightDirectionX;
+    delete this->innerLightDirectionY;
+    delete this->innerLightDirectionZ;
+
+    delete this->colorR;
+    delete this->colorG;
+    delete this->colorB;
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(this->glAttributeVertexNormal);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -60,11 +69,19 @@ void CameraModel::initProperties() {
     this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 35.0f });
     this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
+    this->innerLightDirectionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+    this->innerLightDirectionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.055f });
+    this->innerLightDirectionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.206f });
+
+    this->colorR = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
+    this->colorG = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
+    this->colorB = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
+
     this->matrixCamera = glm::mat4(1.0);
     this->matrixModel = glm::mat4(1.0);
 
     this->showCameraObject = true;
-    this->showInWire = true;
+    this->showInWire = false;
 }
 
 bool CameraModel::initShaderProgram() {
@@ -98,8 +115,10 @@ bool CameraModel::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
+        this->glUniformInnerLightDirection = this->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -120,6 +139,13 @@ void CameraModel::initBuffers() {
     glBufferData(GL_ARRAY_BUFFER, this->oFace.verticesCount * sizeof(GLfloat), &this->oFace.vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // normals
+    glGenBuffers(1, &this->vboNormals);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
+    glBufferData(GL_ARRAY_BUFFER, this->oFace.normalsCount * sizeof(GLfloat), &this->oFace.normals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(this->glAttributeVertexNormal);
+    glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // indices
     glGenBuffers(1, &this->vboIndices);
@@ -157,7 +183,8 @@ void CameraModel::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        glUniform3f(this->glUniformColor, 0.0f, 0.0f, 0.0f);
+        glUniform3f(this->glUniformColor, this->colorR->point, this->colorG->point, this->colorB->point);
+        glUniform3f(this->glUniformInnerLightDirection, this->innerLightDirectionX->point, this->innerLightDirectionY->point, this->innerLightDirectionZ->point);
 
         // draw
         glBindVertexArray(this->glVAO);
