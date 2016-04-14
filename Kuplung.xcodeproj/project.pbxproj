@@ -41,6 +41,10 @@
 		8A43AD821C92FAE4000A35FB /* light_point.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7C1C92FACC000A35FB /* light_point.obj */; };
 		8A43AD831C92FAE4000A35FB /* light_spot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7D1C92FACC000A35FB /* light_spot.mtl */; };
 		8A43AD841C92FAE4000A35FB /* light_spot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7E1C92FACC000A35FB /* light_spot.obj */; };
+		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
+		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
+		8A47F71D1CBF745200699CAC /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
+		8A47F71E1CBF745200699CAC /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
 		8A48C3241CBE8B650076F4F6 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
 		8A48C3251CBE8B650076F4F6 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
 		8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A48C3261CBE8B780076F4F6 /* RayLine.cpp */; };
@@ -93,6 +97,7 @@
 		8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
 		8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
 		8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
+		8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
@@ -172,6 +177,8 @@
 			dstPath = gui;
 			dstSubfolderSpec = 7;
 			files = (
+				8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */,
+				8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */,
 				8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */,
 				8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */,
 				8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */,
@@ -192,6 +199,8 @@
 			files = (
 				8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */,
 				8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */,
+				8A47F71D1CBF745200699CAC /* camera.frag in Copy Files */,
+				8A47F71E1CBF745200699CAC /* camera.vert in Copy Files */,
 				8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */,
 				8AA5EDF91C773E0B009F1F52 /* grid.vert in Copy Files */,
 				8AA5EDFA1C773E0B009F1F52 /* light_ray.frag in Copy Files */,
@@ -323,6 +332,10 @@
 		8A43AD7C1C92FACC000A35FB /* light_point.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_point.obj; sourceTree = "<group>"; };
 		8A43AD7D1C92FACC000A35FB /* light_spot.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.mtl; sourceTree = "<group>"; };
 		8A43AD7E1C92FACC000A35FB /* light_spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.obj; sourceTree = "<group>"; };
+		8A47F7171CBF741800699CAC /* camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.mtl; sourceTree = "<group>"; };
+		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
+		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
+		8A47F71C1CBF744800699CAC /* camera.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.vert; sourceTree = "<group>"; };
 		8A48C3221CBE8B530076F4F6 /* ray_line.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.frag; sourceTree = "<group>"; };
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
 		8A48C3261CBE8B780076F4F6 /* RayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayLine.cpp; sourceTree = "<group>"; };
@@ -411,6 +424,8 @@
 		8AA5EDF31C773DF8009F1F52 /* model_face.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.vert; sourceTree = "<group>"; };
 		8AA5EDF41C773DF8009F1F52 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
 		8AA5EDF51C773DF8009F1F52 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
+		8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraModel.cpp; sourceTree = "<group>"; };
+		8AB31F751CBF7DF500E6CE51 /* CameraModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraModel.hpp; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
 		8AB6F0991C3AA1F900665C40 /* light.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light.mtl; sourceTree = "<group>"; };
@@ -724,6 +739,8 @@
 			children = (
 				8A54F11A1C760A0F00B93D18 /* Camera.cpp */,
 				8A54F11B1C760A0F00B93D18 /* Camera.hpp */,
+				8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */,
+				8AB31F751CBF7DF500E6CE51 /* CameraModel.hpp */,
 				8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */,
 				8A03647E1C6B71EC001489C8 /* CoordinateSystem.hpp */,
 				8A0364811C6B71EC001489C8 /* Light.cpp */,
@@ -763,6 +780,8 @@
 		8AB6F0981C3AA1F900665C40 /* gui */ = {
 			isa = PBXGroup;
 			children = (
+				8A47F7171CBF741800699CAC /* camera.mtl */,
+				8A47F7181CBF741800699CAC /* camera.obj */,
 				8AB6F0991C3AA1F900665C40 /* light.mtl */,
 				8AB6F09A1C3AA1F900665C40 /* light.obj */,
 				8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */,
@@ -781,6 +800,8 @@
 			children = (
 				8AA5EDE71C773DF8009F1F52 /* axis.frag */,
 				8AA5EDE81C773DF8009F1F52 /* axis.vert */,
+				8A47F71B1CBF744800699CAC /* camera.frag */,
+				8A47F71C1CBF744800699CAC /* camera.vert */,
 				8AA5EDE91C773DF8009F1F52 /* grid.frag */,
 				8AA5EDEA1C773DF8009F1F52 /* grid.vert */,
 				8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */,
@@ -1014,6 +1035,7 @@
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8AECC0781CB274060096AE7A /* Skybox.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
+				8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */,
 				8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,

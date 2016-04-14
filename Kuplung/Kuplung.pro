@@ -103,6 +103,7 @@ SOURCES += main.cpp \
     kuplung/meshes/WorldGrid.cpp \
     kuplung/meshes/Light.cpp \
     kuplung/meshes/Camera.cpp \
+    kuplung/meshes/CameraModel.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
     kuplung/meshes/RayLine.cpp \
@@ -151,6 +152,7 @@ HEADERS += \
     kuplung/meshes/WorldGrid.hpp \
     kuplung/meshes/Light.hpp \
     kuplung/meshes/Camera.hpp \
+    kuplung/meshes/CameraModel.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
     kuplung/meshes/RayLine.hpp \
@@ -231,6 +233,8 @@ DISTFILES += \
     resources/shapes/uv_sphere.obj \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
+    resources/shaders/camera.vert \
+    resources/shaders/camera.frag \
     resources/shaders/light_ray.vert \
     resources/shaders/light_ray.frag \
     resources/shaders/ray_line.vert \

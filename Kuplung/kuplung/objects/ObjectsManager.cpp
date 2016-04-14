@@ -30,6 +30,7 @@ ObjectsManager::~ObjectsManager() {
 void ObjectsManager::destroy() {
     this->fileParser->destroy();
     this->camera->destroy();
+    this->cameraModel->destroy();
     this->grid->destroy();
     this->axisSystem->destroy();
     this->skybox->destroy();
@@ -60,6 +61,8 @@ void ObjectsManager::render() {
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
+
+    this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
 
     for (size_t i=0; i<this->lightSources.size(); i++) {
         this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
@@ -92,6 +95,8 @@ void ObjectsManager::resetPropertiesSystem() {
 
     if (this->camera)
         this->camera->initProperties();
+    if (this->cameraModel)
+        this->cameraModel->initProperties();
     if (this->grid)
         this->grid->initProperties(this->Setting_GridSize);
     if (this->axisSystem)
@@ -121,7 +126,19 @@ void ObjectsManager::initGrid() {
     this->grid->init();
     this->grid->initShaderProgram();
     this->grid->initBuffers(10, 1);
+}
 
+/*
+ *
+ * Camera Model
+ *
+ */
+void ObjectsManager::initCameraModel() {
+    this->cameraModel = new CameraModel();
+    this->cameraModel->initProperties();
+    this->cameraModel->initShaderProgram();
+    this->cameraModel->setModel(this->systemModels["camera"].models[0].faces[0]);
+    this->cameraModel->initBuffers();
 }
 
 /*
@@ -208,4 +225,8 @@ void ObjectsManager::loadSystemModels() {
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
     this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
+
+    file.title = "camera";
+    file.path = Settings::Instance()->appFolder() + "/gui/camera.obj";
+    this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Own);
 }

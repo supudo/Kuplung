@@ -16,6 +16,7 @@
 #include <glm/glm.hpp>
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/Camera.hpp"
+#include "kuplung/meshes/CameraModel.hpp"
 #include "kuplung/meshes/Light.hpp"
 #include "kuplung/meshes/CoordinateSystem.hpp"
 #include "kuplung/meshes/Skybox.hpp"
@@ -35,6 +36,7 @@ public:
     void resetSettings();
 
     void initCamera();
+    void initCameraModel();
     void initGrid();
     void initAxisSystem();
     void initSkybox();
@@ -44,6 +46,7 @@ public:
 
     FileModelManager *fileParser;
     Camera* camera;
+    CameraModel* cameraModel;
     WorldGrid* grid;
     CoordinateSystem* axisSystem;
     Skybox* skybox;

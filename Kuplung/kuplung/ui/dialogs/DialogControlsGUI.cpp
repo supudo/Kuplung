@@ -19,6 +19,7 @@ void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->selectedObjectLight = 0;
     this->selectedTabScene = -1;
     this->selectedTabGUICamera = -1;
+    this->selectedTabGUICameraModel = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
 
@@ -41,7 +42,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
-    for (int i=0; i<6; i++) {
+    for (int i=0; i<7; i++) {
         switch (i) {
             case 0: {
                 ImGui::Indent();
@@ -54,7 +55,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 1: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_EYE " Camera", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -63,7 +64,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 2: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_BARS " Grid", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera Model", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -72,7 +73,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 3: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_SUN_O " Ambient Light", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_BARS " Grid", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -81,7 +82,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 4: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_TREE " Skybox", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_SUN_O " Ambient Light", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -89,6 +90,15 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 break;
             }
             case 5: {
+                ImGui::Indent();
+                if (ImGui::Selectable(ICON_FA_TREE " Skybox", this->selectedObject == i)) {
+                    this->selectedObject = i;
+                    this->selectedObjectLight = -1;
+                }
+                ImGui::Unindent();
+                break;
+            }
+            case 6: {
                 if (this->managerObjects->lightSources.size() == 0) {
                     ImGui::Indent();
                     ImGui::Text(ICON_FA_LIGHTBULB_O " Lights");
@@ -102,7 +112,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
 //                            if (ImGui::TreeNode((void*)(intptr_t)i, "%s", this->managerObjects->lightSources[j]->title.c_str())) {
 //                                this->selectedObjectLight = j;
-//                                this->selectedObject = 5;
+//                                this->selectedObject = 6;
 //                                ImGui::SameLine();
 //                                if (ImGui::SmallButton(ICON_FA_TIMES ""))
 //                                    printf("Child %d pressed", i);
@@ -112,7 +122,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                             //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
                             if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
                                 this->selectedObjectLight = j;
-                                this->selectedObject = 5;
+                                this->selectedObject = 6;
                             }
                         }
                         ImGui::TreePop();
@@ -120,7 +130,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 break;
             }
-            case 6: {
+            case 7: {
                 ImGui::Indent();
                 if (ImGui::Selectable("Terrain", this->selectedObject == i)) {
                     this->selectedObject = i;
@@ -239,6 +249,53 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
 
+            const char* tabsGUICameraModel[] = {
+                "\n" ICON_MD_TRANSFORM,
+                "\n" ICON_MD_OPEN_WITH,
+                "\n" ICON_MD_3D_ROTATION,
+            };
+            const char* tabsLabelsGUICameraModel[] = { "General", "Position", "Rotate" };
+            const int numTabsGUICameraModel = sizeof(tabsGUICameraModel) / sizeof(tabsGUICameraModel[0]);
+            ImGui::TabLabels(numTabsGUICameraModel, tabsGUICameraModel, this->selectedTabGUICameraModel, ImVec2(30.0, 30.0), tabsLabelsGUICameraModel);
+            ImGui::PopStyleColor(3);
+
+            ImGui::Separator();
+
+            switch (this->selectedTabGUICameraModel) {
+                case 0: {
+                    ImGui::Checkbox("Show Camera", &this->managerObjects->cameraModel->showCameraObject);
+                    ImGui::Checkbox("Show Wire", &this->managerObjects->cameraModel->showInWire);
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionX->animate, &this->managerObjects->cameraModel->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionY->animate, &this->managerObjects->cameraModel->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionZ->animate, &this->managerObjects->cameraModel->positionZ->point, true, isFrame);
+                    break;
+                }
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
+                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateX->animate, &this->managerObjects->cameraModel->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateY->animate, &this->managerObjects->cameraModel->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateZ->animate, &this->managerObjects->cameraModel->rotateZ->point, true, isFrame);
+                    ImGui::Separator();
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
+                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterX->animate, &this->managerObjects->cameraModel->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterY->animate, &this->managerObjects->cameraModel->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterZ->animate, &this->managerObjects->cameraModel->rotateCenterZ->point, true, isFrame);
+                    break;
+                }
+                default:
+                    break;
+            }
+            break;
+        }
+        case 3: {
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+
             const char* tabsGUIGrid[] = {
                 "\n" ICON_MD_TRANSFORM,
                 "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
@@ -305,14 +362,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             break;
         }
-        case 3: {
+        case 4: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scene Ambient Light");
             this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.r, true, isFrame);
             this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.g, true, isFrame);
             this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.b, true, isFrame);
             break;
         }
-        case 4: {
+        case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Skybox");
             std::vector<const char*> skybox_items;
             for (size_t i=0; i<this->managerObjects->skybox->skyboxItems.size(); i++)
@@ -320,7 +377,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Combo("##987", &this->managerObjects->skybox->Setting_Skybox_Item, &skybox_items[0], (int)skybox_items.size());
             break;
         }
-        case 5: {
+        case 6: {
             ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
             ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
             ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -420,7 +477,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             break;
         }
-        case 6: {
+        case 7: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
             break;
         }

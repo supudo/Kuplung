@@ -23,7 +23,7 @@ public:
 private:
     int selectedObject;
     int selectedObjectLight;
-    int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight;
+    int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight;
     float heightTopPanel = 170.0f;
 
     ObjectsManager *managerObjects;
