@@ -40,9 +40,10 @@ public:
               );
 
     bool processEvent(SDL_Event *event);
-    void renderStart(bool isFrame);
+    void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
     void doLog(std::string message);
+    void setSceneSelectedModelObject(int sceneSelectedModelObject);
 
     void recentFilesAdd(std::string title, FBEntity file);
     void recentFilesClear();
@@ -83,7 +84,7 @@ private:
     void dialogOptions(ImGuiStyle* ref = NULL);
     void dialogSceneStats();
     void dialogControlsGUI();
-    void dialogControlsModels();
+    void dialogControlsModels(int * sceneSelectedModelObject);
 
     SDL2OpenGL32 *imguiImplementation;
     ObjectsManager *managerObjects;

@@ -1,7 +1,7 @@
 # Blender v2.76 (sub 0) OBJ File: ''
 # www.blender.org
 mtllib triangle.mtl
-o Plane
+o Triangle
 v 1.000000 -1.000000 0.000000
 v 1.000000 1.000000 0.000000
 v -1.000000 1.000000 0.000000

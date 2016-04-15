@@ -57,7 +57,7 @@ int Kuplung::run() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
         // rendering
-        this->managerUI->renderStart(true);
+        this->managerUI->renderStart(true, &this->sceneSelectedModelObject);
         this->renderScene();
         this->managerUI->renderEnd();
 
@@ -208,6 +208,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
+            this->managerUI->setSceneSelectedModelObject(-1);
             this->rayLines.clear();
             this->rayPicker->rayLines = this->rayLines;
         }

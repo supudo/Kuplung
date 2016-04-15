@@ -22,7 +22,9 @@
 class DialogControlsModels {
 public:
     void init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight);
-    void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes);
+    void render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes, int * sceneSelectedModelObject);
+
+    int selectedObject;
 
 private:
     std::function<void(ShapeType)> funcAddShape;
@@ -38,7 +40,6 @@ private:
 
     bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
-    int selectedObject;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabPanel;
     float heightTopPanel = 170.0f;
     float panelHeight_Tabs = 36.0f;

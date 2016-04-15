@@ -95,11 +95,15 @@ void UI::doLog(std::string message) {
     this->componentLog->addToLog("%s\n", message.c_str());
 }
 
+void UI::setSceneSelectedModelObject(int sceneSelectedModelObject) {
+    this->controlsModels->selectedObject = sceneSelectedModelObject;
+}
+
 bool UI::processEvent(SDL_Event *event) {
     return this->imguiImplementation->ImGui_Implementation_ProcessEvent(event);
 }
 
-void UI::renderStart(bool isFrame) {
+void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     this->isFrame = isFrame;
 
     this->imguiImplementation->ImGui_Implementation_NewFrame();
@@ -212,7 +216,7 @@ void UI::renderStart(bool isFrame) {
         this->dialogControlsGUI();
 
     if (this->showControlsModels)// && meshModelFaces != NULL && meshModelFaces->size() > 0)
-        this->dialogControlsModels();
+        this->dialogControlsModels(sceneSelectedModelObject);
 
     if (this->showSceneStats)
         this->dialogSceneStats();
@@ -362,8 +366,8 @@ void UI::dialogControlsGUI() {
     this->controlsGUI->render(&this->showControlsGUI, &this->isFrame);
 }
 
-void UI::dialogControlsModels() {
-    this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, this->scenes);
+void UI::dialogControlsModels(int * sceneSelectedModelObject) {
+    this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, this->scenes, sceneSelectedModelObject);
 }
 
 void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {
