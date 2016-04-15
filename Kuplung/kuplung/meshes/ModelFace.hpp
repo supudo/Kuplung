@@ -77,6 +77,7 @@ public:
     std::vector<GLfloat> dataTexCoords;
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
+    BoundingBox *boundingBox;
 
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace, Setting_ShowBoundingBox;
     float Setting_Alpha;
@@ -129,7 +130,6 @@ private:
 
     GLUtils *glUtils;
     Maths *mathHelper;
-    BoundingBox *boundingBox;
 
     // model objects
     GLuint shaderProgram;

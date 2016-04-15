@@ -21,21 +21,28 @@ class RayPicking {
 public:
     ~RayPicking();
     void init(ObjectsManager *managerObjects, Controls *managerControls, std::function<void(std::string)> doLog);
-    void selectModel(std::vector<ModelFace*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject, std::string *selectedMaterialID);
+    void setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
+    void selectModel(std::vector<ModelFace*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject);
+
+    std::vector<RayLine*> rayLines;
 
     void pick1();
     void pick2();
     void pick3();
     void pick4();
     void pick5();
+    void pick6();
+    void pick7();
 
 private:
     std::function<void(std::string)> doLog;
     ObjectsManager *managerObjects;
     Controls *managerControls;
 
+    glm::mat4 matrixProjection;
+    glm::mat4 matrixCamera;
+
     std::vector<ModelFace*> meshModelFaces;
-    std::vector<RayLine*> rayLines;
     int sceneSelectedModelObject;
     std::string selectedMaterialID;
 
@@ -45,6 +52,22 @@ private:
     glm::vec4 getEyeCoordinates(glm::vec4& coordinates);
     glm::vec3 getWorldCoordinates(glm::vec4& coordinates);
     bool isInTriangle(glm::vec3 origin, glm::vec3 dir, glm::vec3 p1, glm::vec3 p2, glm::vec3 p3);
+    void ScreenPosToWorldRay(
+        int mouseX, int mouseY,             // Mouse position, in pixels, from bottom-left corner of the window
+        int screenWidth, int screenHeight,  // Window size, in pixels
+        glm::mat4 ViewMatrix,               // Camera position and orientation
+        glm::mat4 ProjectionMatrix,         // Camera parameters (ratio, field of view, near and far planes)
+        glm::vec3& out_origin,              // Ouput : Origin of the ray. /!\ Starts at the near plane, so if you want the ray to start at the camera's position instead, ignore this.
+        glm::vec3& out_direction            // Ouput : Direction, in world space, of the ray that goes "through" the mouse.
+    );
+    bool TestRayOBBIntersection(
+        glm::vec3 ray_origin,        // Ray origin, in world space
+        glm::vec3 ray_direction,     // Ray direction (NOT target position!), in world space. Must be normalize()'d.
+        glm::vec3 aabb_min,          // Minimum X,Y,Z coords of the mesh when not transformed at all.
+        glm::vec3 aabb_max,          // Maximum X,Y,Z coords. Often aabb_min*-1 if your mesh is centered, but it's not always the case.
+        glm::mat4 ModelMatrix,       // Transformation applied to the mesh (which will thus be also applied to its bounding box)
+        float& intersection_distance // Output : distance between ray_origin and the intersection with the OBB
+    );
 };
 
 #endif /* RayPicking_hpp */

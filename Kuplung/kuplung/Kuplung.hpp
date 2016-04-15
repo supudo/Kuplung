@@ -69,7 +69,6 @@ private:
     // Variables
     bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed;
     int sceneSelectedModelObject;
-    std::string selectedMaterialID;
     float objLoadingProgress;
 
     //objParser *parser;

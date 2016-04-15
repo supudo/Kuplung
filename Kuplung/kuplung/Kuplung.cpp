@@ -160,16 +160,11 @@ bool Kuplung::init() {
 
                     this->gameIsRunning = true;
                     this->sceneSelectedModelObject = -1;
-                    this->selectedMaterialID = "";
 
                     this->initSceneGUI();
 
                     this->rayPicker = new RayPicking();
-                    this->rayPicker->init(this->managerObjects,
-                                          this->managerControls,
-                                          std::bind(&Kuplung::doLog, this, std::placeholders::_1)
-                                          );
-
+                    this->rayPicker->init(this->managerObjects, this->managerControls, std::bind(&Kuplung::doLog, this, std::placeholders::_1));
                 }
             }
         }
@@ -213,8 +208,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             this->sceneSelectedModelObject = -1;
-            this->selectedMaterialID = "";
             this->rayLines.clear();
+            this->rayPicker->rayLines = this->rayLines;
         }
 
         // FOV & zoom
@@ -254,8 +249,10 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
 
         // picking
-        if (this->managerControls->mouseButton_LEFT)
-            this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, &this->selectedMaterialID);
+        if (this->managerControls->mouseButton_LEFT) {
+            this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
+            this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject);
+        }
     }
 }
 
@@ -290,7 +287,7 @@ void Kuplung::renderScene() {
         mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
 
         // outlining
-        mmf->setOptionsSelected(this->selectedMaterialID == mmf->oFace.materialID);
+        mmf->setOptionsSelected(this->sceneSelectedModelObject == i);
         mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
         mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
 
