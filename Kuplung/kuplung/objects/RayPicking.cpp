@@ -68,7 +68,7 @@ void RayPicking::pick7() {
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f\n", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
+                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
             }
         }
