@@ -58,28 +58,16 @@ void RayPicking::pick7() {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-                glm::vec3 tp1 = mmf->oFace.vectors_vertices[j];
-                glm::vec3 tp2 = mmf->oFace.vectors_vertices[j - 1];
-                glm::vec3 tp3 = mmf->oFace.vectors_vertices[j - 2];
-
-                this->doLog(Settings::Instance()->string_format("P1 - 1 = %f, %f, %f\n", tp1.x, tp1.y, tp1.z));
-
-                glm::vec4 tp01 = mmf->boundingBox->matrixTransform * glm::vec4(tp1, 1.0);
-                glm::vec4 tp02 = mmf->boundingBox->matrixTransform * glm::vec4(tp2, 1.0);
-                glm::vec4 tp03 = mmf->boundingBox->matrixTransform * glm::vec4(tp3, 1.0);
-
-                tp1 = glm::vec3(tp01.x, tp01.y, tp01.z);
-                tp2 = glm::vec3(tp02.x, tp02.y, tp02.z);
-                tp3 = glm::vec3(tp03.x, tp03.y, tp03.z);
-
-                this->doLog(Settings::Instance()->string_format("P1 - 2 = %f, %f, %f\n", tp1.x, tp1.y, tp1.z));
+                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
+                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
+                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
+                glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
+                glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
+                glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
 
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-//                    this->doLog(Settings::Instance()->string_format("P1 = %f, %f, %f\n", tp1.x, tp1.y, tp1.z));
-//                    this->doLog(Settings::Instance()->string_format("P2 = %f, %f, %f\n", tp2.x, tp2.y, tp2.z));
-//                    this->doLog(Settings::Instance()->string_format("P3 = %f, %f, %f\n", tp3.x, tp3.y, tp3.z));
                     this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f\n", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
             }

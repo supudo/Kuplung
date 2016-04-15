@@ -195,7 +195,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     ImGui::EndGroup();
 
-    if (meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
+    if (this->selectedObject > -1 && meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
         this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     *sceneSelectedModelObject = this->selectedObject;
