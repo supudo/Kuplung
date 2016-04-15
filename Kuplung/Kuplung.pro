@@ -106,10 +106,12 @@ SOURCES += main.cpp \
     kuplung/meshes/CameraModel.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
+    kuplung/meshes/BoundingBox.cpp \
     kuplung/meshes/RayLine.cpp \
     kuplung/meshes/Skybox.cpp \
     kuplung/meshes/Terrain.cpp \
     kuplung/objects/ObjectsManager.cpp \
+    kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
     kuplung/settings/FontsList.cpp \
@@ -155,11 +157,13 @@ HEADERS += \
     kuplung/meshes/CameraModel.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
+    kuplung/meshes/BoundingBox.hpp \
     kuplung/meshes/RayLine.hpp \
     kuplung/meshes/Skybox.hpp \
     kuplung/meshes/Terrain.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
+    kuplung/objects/RayPicking.hpp \
     kuplung/settings/ConfigUtils.hpp \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \
@@ -225,6 +229,8 @@ DISTFILES += \
     resources/shapes/monkey_head.obj \
     resources/shapes/plane.mtl \
     resources/shapes/plane.obj \
+    resources/shapes/triangle.mtl \
+    resources/shapes/triangle.obj \
     resources/shapes/torus.mtl \
     resources/shapes/torus.obj \
     resources/shapes/tube.mtl \
@@ -259,6 +265,8 @@ DISTFILES += \
     resources/shaders/terrain.frag \
     resources/shaders/skybox.vert \
     resources/shaders/skybox.frag \
+    resources/shaders/bounding_box.vert \
+    resources/shaders/bounding_box.frag \
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \
     resources/skybox/fire_planet_front.jpg \

@@ -95,22 +95,6 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
     this->indexFace += 1;
     this->faceID += 1;
 
-    entityFace.vectors_vertices.insert(
-        end(entityFace.vectors_vertices),
-        begin(this->vectorsVertices),
-        end(this->vectorsVertices)
-     );
-    entityFace.vectors_texture_coordinates.insert(
-        end(entityFace.vectors_texture_coordinates),
-        begin(this->vectorsTextureCoordinates),
-        end(this->vectorsTextureCoordinates)
-     );
-    entityFace.vectors_normals.insert(
-        end(entityFace.vectors_normals),
-        begin(this->vectorsNormals),
-        end(this->vectorsNormals)
-     );
-
     // Walk through each of the mesh's vertices
     for (GLuint i=0; i<mesh->mNumVertices; i++) {
         glm::vec3 vector;

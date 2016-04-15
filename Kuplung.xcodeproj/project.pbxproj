@@ -48,6 +48,12 @@
 		8A48C3241CBE8B650076F4F6 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
 		8A48C3251CBE8B650076F4F6 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
 		8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A48C3261CBE8B780076F4F6 /* RayLine.cpp */; };
+		8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */; };
+		8A5128CF1CC0CC4D00BE0600 /* triangle.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */; };
+		8A5128D01CC0CC4D00BE0600 /* triangle.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CE1CC0CC3F00BE0600 /* triangle.obj */; };
+		8A5128D31CC0CC6E00BE0600 /* bounding_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D11CC0CC6600BE0600 /* bounding_box.frag */; };
+		8A5128D41CC0CC6E00BE0600 /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
+		8A5128D71CC0CC8800BE0600 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128D51CC0CC8800BE0600 /* BoundingBox.cpp */; };
 		8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F11A1C760A0F00B93D18 /* Camera.cpp */; };
 		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
 		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
@@ -150,6 +156,8 @@
 			files = (
 				8AB917881CAEA7E9002988C2 /* cone.mtl in CopyFiles */,
 				8AB917891CAEA7E9002988C2 /* cone.obj in CopyFiles */,
+				8A5128CF1CC0CC4D00BE0600 /* triangle.mtl in CopyFiles */,
+				8A5128D01CC0CC4D00BE0600 /* triangle.obj in CopyFiles */,
 				8AB9178A1CAEA7E9002988C2 /* cube.mtl in CopyFiles */,
 				8AB9178B1CAEA7E9002988C2 /* cube.obj in CopyFiles */,
 				8AB9178C1CAEA7E9002988C2 /* cylinder.mtl in CopyFiles */,
@@ -199,6 +207,8 @@
 			files = (
 				8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */,
 				8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */,
+				8A5128D31CC0CC6E00BE0600 /* bounding_box.frag in Copy Files */,
+				8A5128D41CC0CC6E00BE0600 /* bounding_box.vert in Copy Files */,
 				8A47F71D1CBF745200699CAC /* camera.frag in Copy Files */,
 				8A47F71E1CBF745200699CAC /* camera.vert in Copy Files */,
 				8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */,
@@ -340,6 +350,14 @@
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
 		8A48C3261CBE8B780076F4F6 /* RayLine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayLine.cpp; sourceTree = "<group>"; };
 		8A48C3271CBE8B780076F4F6 /* RayLine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayLine.hpp; sourceTree = "<group>"; };
+		8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayPicking.cpp; sourceTree = "<group>"; };
+		8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayPicking.hpp; sourceTree = "<group>"; };
+		8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.mtl; path = shapes/triangle.mtl; sourceTree = "<group>"; };
+		8A5128CE1CC0CC3F00BE0600 /* triangle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.obj; path = shapes/triangle.obj; sourceTree = "<group>"; };
+		8A5128D11CC0CC6600BE0600 /* bounding_box.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bounding_box.frag; sourceTree = "<group>"; };
+		8A5128D21CC0CC6600BE0600 /* bounding_box.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bounding_box.vert; sourceTree = "<group>"; };
+		8A5128D51CC0CC8800BE0600 /* BoundingBox.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BoundingBox.cpp; sourceTree = "<group>"; };
+		8A5128D61CC0CC8800BE0600 /* BoundingBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BoundingBox.hpp; sourceTree = "<group>"; };
 		8A54F11A1C760A0F00B93D18 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		8A54F11B1C760A0F00B93D18 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
@@ -498,6 +516,8 @@
 				8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */,
 				8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */,
 				8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */,
+				8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */,
+				8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */,
 			);
 			path = objects;
 			sourceTree = "<group>";
@@ -737,6 +757,8 @@
 		8AB6F0121C3A9BEE00665C40 /* meshes */ = {
 			isa = PBXGroup;
 			children = (
+				8A5128D51CC0CC8800BE0600 /* BoundingBox.cpp */,
+				8A5128D61CC0CC8800BE0600 /* BoundingBox.hpp */,
 				8A54F11A1C760A0F00B93D18 /* Camera.cpp */,
 				8A54F11B1C760A0F00B93D18 /* Camera.hpp */,
 				8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */,
@@ -800,6 +822,8 @@
 			children = (
 				8AA5EDE71C773DF8009F1F52 /* axis.frag */,
 				8AA5EDE81C773DF8009F1F52 /* axis.vert */,
+				8A5128D11CC0CC6600BE0600 /* bounding_box.frag */,
+				8A5128D21CC0CC6600BE0600 /* bounding_box.vert */,
 				8A47F71B1CBF744800699CAC /* camera.frag */,
 				8A47F71C1CBF744800699CAC /* camera.vert */,
 				8AA5EDE91C773DF8009F1F52 /* grid.frag */,
@@ -849,6 +873,8 @@
 				8AB917801CAEA7CC002988C2 /* plane.obj */,
 				8AB917811CAEA7CC002988C2 /* torus.mtl */,
 				8AB917821CAEA7CC002988C2 /* torus.obj */,
+				8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */,
+				8A5128CE1CC0CC3F00BE0600 /* triangle.obj */,
 				8AB917831CAEA7CC002988C2 /* tube.mtl */,
 				8AB917841CAEA7CC002988C2 /* tube.obj */,
 				8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */,
@@ -1009,6 +1035,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */,
 				8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */,
 				8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */,
 				8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */,
@@ -1037,6 +1064,7 @@
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */,
 				8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */,
+				8A5128D71CC0CC8800BE0600 /* BoundingBox.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,

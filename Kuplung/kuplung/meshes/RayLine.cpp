@@ -148,7 +148,6 @@ void RayLine::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);
         glDisable(GL_BLEND);
-        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
         glDrawArrays(GL_LINE_STRIP, 0, 2);
 

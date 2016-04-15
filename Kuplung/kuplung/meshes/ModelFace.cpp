@@ -605,6 +605,10 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     }
 
     glBindVertexArray(0);
+
+    this->boundingBox = new BoundingBox();
+    this->boundingBox->initShaderProgram();
+    this->boundingBox->initBuffers(this->oFace);
 }
 
 void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject) {
@@ -705,6 +709,8 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
     glUseProgram(0);
     glBindVertexArray(0);
+
+    this->boundingBox->render(matrixProjection, matrixCamera, this->matrixModel);
 }
 
 void ModelFace::renderModel() {

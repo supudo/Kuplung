@@ -19,6 +19,7 @@
 #include "kuplung/meshes/Light.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
 #include "kuplung/utilities/maths/Maths.hpp"
+#include "kuplung/meshes/BoundingBox.hpp"
 
 struct ModelFace_LightSource_Directional {
     GLuint gl_InUse;
@@ -128,6 +129,7 @@ private:
 
     GLUtils *glUtils;
     Maths *mathHelper;
+    BoundingBox *boundingBox;
 
     // model objects
     GLuint shaderProgram;

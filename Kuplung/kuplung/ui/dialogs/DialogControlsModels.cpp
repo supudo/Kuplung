@@ -502,6 +502,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 void DialogControlsModels::drawCreate() {
     // https://developer.apple.com/library/mac/samplecode/OpenGLFilterBasicsCocoa/Listings/Sources_Models_Torus_Classes_OpenGLTorusGenerator_cpp.html
 
+    if (ImGui::Button("Triangle", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Triangle);
     if (ImGui::Button("Cone", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cone);
     if (ImGui::Button("Cube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cube);
     if (ImGui::Button("Cylinder", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cylinder);

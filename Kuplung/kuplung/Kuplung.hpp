@@ -20,6 +20,7 @@
 #include "kuplung/meshes/RayLine.hpp"
 #include "kuplung/meshes/Terrain.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/objects/RayPicking.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
 class Kuplung {
@@ -45,7 +46,6 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
-    bool rayPicking(ModelFace* face, glm::mat4 modelMatrix);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
@@ -55,6 +55,7 @@ private:
     void guiModelRename(int selectedModel, std::string newName);
 
     ObjectsManager *managerObjects;
+    RayPicking *rayPicker;
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";
