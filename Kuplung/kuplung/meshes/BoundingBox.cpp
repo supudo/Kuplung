@@ -149,31 +149,20 @@ void BoundingBox::initBuffers(objModelFace oFace) {
 
 #pragma mark - Render
 
-void BoundingBox::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void BoundingBox::render(glm::mat4 matrixMVP, glm::vec4 outlineColor) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        glm::mat4 mtx = matrixProjection * matrixCamera * matrixModel * this->matrixTransform;
+        glm::mat4 mtx = matrixMVP * this->matrixTransform;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mtx));
 
-        glUniform3f(this->glUniformColor, 0.0, 0.0, 0.0);
+        glUniform3f(this->glUniformColor, outlineColor.r, outlineColor.g, outlineColor.b);
 
         glBindVertexArray(this->glVAO);
-//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, 0);
-//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, (GLvoid*)(4 * sizeof(GLuint)));
-//        glDrawElements(GL_LINES, 8, GL_UNSIGNED_SHORT, (GLvoid*)(8 * sizeof(GLuint)));
 
-        int sz = 4;
-
-//        for (int i = 0; i < sz * 2; i++)
-//            glDrawArrays(GL_LINE_STRIP, sz * i, sz);
-//        for (int i = 0; i < sz; i++)
-//            glDrawArrays(GL_LINES, 0, sz);
-
-//        for (int i = 0; i < sz; i++)
-//            glDrawArrays(GL_LINES, 0, sz);
-
-        glDrawElements(GL_LINE_LOOP, (int)this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, (GLvoid*)(4 * sizeof(GLuint)));
+        glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, (GLvoid*)(8 * sizeof(GLuint)));
 
         glBindVertexArray(0);
 

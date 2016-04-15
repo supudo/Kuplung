@@ -22,7 +22,7 @@ public:
     void destroy();
     bool initShaderProgram();
     void initBuffers(objModelFace oFace);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void render(glm::mat4 matrixMVP, glm::vec4 outlineColor);
     objModelFace oFace;
 
     glm::mat4 matrixProjection;
