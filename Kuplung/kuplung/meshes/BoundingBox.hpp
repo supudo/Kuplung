@@ -33,6 +33,9 @@ public:
 private:
     GLUtils *glUtils;
 
+    std::vector<GLfloat> dataVertices;
+    std::vector<GLuint> dataIndices;
+
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;

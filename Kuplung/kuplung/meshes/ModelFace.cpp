@@ -174,6 +174,7 @@ void ModelFace::init() {
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
+    this->Setting_ShowBoundingBox = true;
 
     // light
     this->Setting_LightStrengthAmbient = 0.5;
@@ -710,7 +711,8 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     glUseProgram(0);
     glBindVertexArray(0);
 
-    this->boundingBox->render(matrixProjection, matrixCamera, this->matrixModel);
+    if (this->Setting_ShowBoundingBox)
+        this->boundingBox->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
 }
 
 void ModelFace::renderModel() {

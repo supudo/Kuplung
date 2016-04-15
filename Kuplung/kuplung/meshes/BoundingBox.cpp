@@ -93,34 +93,31 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     // Cube 1x1x1, centered on origin
 
     // vertices
-    GLfloat vertices[] = {
-      -0.5, -0.5, -0.5, 1.0,
-       0.5, -0.5, -0.5, 1.0,
-       0.5,  0.5, -0.5, 1.0,
-      -0.5,  0.5, -0.5, 1.0,
-      -0.5, -0.5,  0.5, 1.0,
-       0.5, -0.5,  0.5, 1.0,
-       0.5,  0.5,  0.5, 1.0,
-      -0.5,  0.5,  0.5, 1.0,
+    this->dataVertices = {
+        -0.5, -0.5, -0.5, 1.0,
+         0.5, -0.5, -0.5, 1.0,
+         0.5,  0.5, -0.5, 1.0,
+        -0.5,  0.5, -0.5, 1.0,
+        -0.5, -0.5,  0.5, 1.0,
+         0.5, -0.5,  0.5, 1.0,
+         0.5,  0.5,  0.5, 1.0,
+        -0.5,  0.5,  0.5, 1.0
     };
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices) * sizeof(GLfloat), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
 
     // indices
-    GLushort indices[] = {
+    this->dataIndices = {
         0, 1, 2, 3,
         4, 5, 6, 7,
         0, 4, 1, 5, 2, 6, 3, 7
     };
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    //glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices) * sizeof(GLushort), indices, GL_STATIC_DRAW);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
     GLfloat min_x, max_x, min_y, max_y, min_z, max_z;
     min_x = max_x = this->oFace.vectors_vertices[0].x;
@@ -135,7 +132,7 @@ void BoundingBox::initBuffers(objModelFace oFace) {
         if (this->oFace.vectors_vertices[i].z > max_z) max_z = this->oFace.vectors_vertices[i].z;
     }
 
-    float padding = 0.1f;
+    float padding = 0.01f;
     min_x = (min_x > 0) ? min_x + padding : min_x - padding;
     max_x = (max_x > 0) ? max_x + padding : max_x - padding;
     min_y = (min_y > 0) ? min_y + padding : min_y - padding;
@@ -147,8 +144,6 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     glm::vec3 center = glm::vec3((min_x + max_x) / 2, (min_y + max_y) / 2, (min_z + max_z) / 2);
     this->matrixTransform = glm::scale(glm::mat4(1), size) * glm::translate(glm::mat4(1), center);
 
-    printf("Bounding box: %f, %f, %f - %f, %f, %f\n", min_x, min_y, min_z, max_x, max_y, max_z);
-
     glBindVertexArray(0);
 }
 
@@ -158,21 +153,27 @@ void BoundingBox::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        glm::mat4 mtx = matrixModel * this->matrixTransform;
+        glm::mat4 mtx = matrixProjection * matrixCamera * matrixModel * this->matrixTransform;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mtx));
 
         glUniform3f(this->glUniformColor, 0.0, 0.0, 0.0);
 
         glBindVertexArray(this->glVAO);
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, 0);
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, (GLvoid*)(4 * sizeof(GLushort)));
-        glDrawElements(GL_LINES, 8, GL_UNSIGNED_SHORT, (GLvoid*)(8 * sizeof(GLushort)));
+//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, 0);
+//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_SHORT, (GLvoid*)(4 * sizeof(GLuint)));
+//        glDrawElements(GL_LINES, 8, GL_UNSIGNED_SHORT, (GLvoid*)(8 * sizeof(GLuint)));
 
-//        int sz = 4;
+        int sz = 4;
+
 //        for (int i = 0; i < sz * 2; i++)
 //            glDrawArrays(GL_LINE_STRIP, sz * i, sz);
 //        for (int i = 0; i < sz; i++)
 //            glDrawArrays(GL_LINES, 0, sz);
+
+//        for (int i = 0; i < sz; i++)
+//            glDrawArrays(GL_LINES, 0, sz);
+
+        glDrawElements(GL_LINE_LOOP, (int)this->dataIndices.size(), GL_UNSIGNED_INT, nullptr);
 
         glBindVertexArray(0);
 

@@ -78,7 +78,7 @@ public:
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
 
-    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
+    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace, Setting_ShowBoundingBox;
     float Setting_Alpha;
     int Setting_TessellationSubdivision;
     ObjectCoordinate *positionX, *positionY, *positionZ;
