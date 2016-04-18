@@ -22,6 +22,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
+#include "kuplung/utilities/export/Exporter.hpp"
 
 class Kuplung {
 public:
@@ -53,6 +54,7 @@ private:
     void guiEditorshaderCompiled(std::string fileName);
     void guiModelDelete(int selectedModel);
     void guiModelRename(int selectedModel, std::string newName);
+    void guiSceneExport(FBEntity file);
 
     ObjectsManager *managerObjects;
     RayPicking *rayPicker;
@@ -79,6 +81,7 @@ private:
     Controls *managerControls;
     UI *managerUI;
     FNTParser *fontParser;
+    Exporter *managerExporter;
     std::vector<objScene> scenes;
     std::vector<ModelFace*> meshModelFaces;
     std::vector<RayLine*> rayLines;

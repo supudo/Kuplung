@@ -25,7 +25,8 @@ void UI::init(SDL_Window *window,
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
-              std::function<void(LightSourceType)> addLight
+              std::function<void(LightSourceType)> addLight,
+              std::function<void(FBEntity file)> exportScene
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -35,6 +36,7 @@ void UI::init(SDL_Window *window,
     this->funcFileShaderCompile = fileShaderCompile;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
+    this->funcExportScene = exportScene;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -55,6 +57,7 @@ void UI::init(SDL_Window *window,
     this->showAboutImgui = false;
     this->showAboutKuplung = false;
     this->showDemoWindow = false;
+    this->showFileExporter = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -68,6 +71,9 @@ void UI::init(SDL_Window *window,
 
     this->componentFileBrowser = new FileBrowser();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+
+    this->componentSceneExport = new SceneExport();
+    this->componentSceneExport->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogSceneExportProcessFile, this, std::placeholders::_1));
 
     this->componentFileEditor = new Editor();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
@@ -128,6 +134,11 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     if (ImGui::MenuItem("Clear recent files", NULL, false))
                         this->recentFilesClear();
                 }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu(ICON_FA_FLOPPY_O " Export")) {
+                ImGui::MenuItem("Wavefron (.OBJ)", NULL, &this->showFileExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
                 ImGui::EndMenu();
             }
 
@@ -221,6 +232,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->showSceneStats)
         this->dialogSceneStats();
 
+    if (this->showFileExporter)
+        this->dialogSceneExport();
+
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
     if (ImGui::BeginPopupModal("Kuplung Parsing", &this->isParsingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
@@ -282,6 +296,10 @@ void UI::hideLoading() {
 }
 
 #pragma mark - Private Methods
+
+void UI::dialogSceneExport() {
+    this->componentSceneExport->draw("Export Scene", &this->showFileExporter);
+}
 
 void UI::dialogFileBrowser() {
     this->componentFileBrowser->setStyleBrowser(false);
@@ -376,6 +394,11 @@ void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type
     this->funcProcessFile(file, type);
     this->showDialogFile = false;
     this->showDialogStyle = false;
+}
+
+void UI::dialogSceneExportProcessFile(FBEntity file) {
+    this->funcExportScene(file);
+    this->showFileExporter = false;
 }
 
 void UI::fileShaderEditorSaved(std::string fileName) {

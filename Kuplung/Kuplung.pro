@@ -120,6 +120,7 @@ SOURCES += main.cpp \
     kuplung/ui/implementation/SDL2OpenGL32.cpp \
     kuplung/ui/components/Editor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
+    kuplung/ui/components/SceneExport.cpp \
     kuplung/ui/components/Log.cpp \
     kuplung/ui/components/Screenshot.cpp \
     kuplung/ui/components/ColorPicker.cpp \
@@ -146,7 +147,9 @@ SOURCES += main.cpp \
     kuplung/utilities/parsers/FileModelManager.cpp \
     kuplung/utilities/parsers/obj-parser/objParser.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
-    kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp
+    kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
+    kuplung/utilities/export/Exporter.cpp \
+    kuplung/utilities/export/ExporterOBJ.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -173,6 +176,7 @@ HEADERS += \
     kuplung/ui/implementation/SDL2OpenGL32.hpp \
     kuplung/ui/components/Editor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
+    kuplung/ui/components/SceneExport.hpp \
     kuplung/ui/components/Log.hpp \
     kuplung/ui/components/Screenshot.hpp \
     kuplung/ui/components/ColorPicker.hpp \
@@ -210,7 +214,9 @@ HEADERS += \
     kuplung/utilities/stb/stb_textedit.h \
     kuplung/utilities/stb/stb_truetype.h \
     kuplung/utilities/gl/GLIncludes.h \
-    kuplung/utilities/shapes/Shapes.h
+    kuplung/utilities/shapes/Shapes.h \
+    kuplung/utilities/export/Exporter.hpp \
+    kuplung/utilities/export/ExporterOBJ.hpp
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

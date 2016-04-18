@@ -134,7 +134,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiClearScreen, this),
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::addLight, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::addLight, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1)
                                           );
                     this->doLog("UI initialized.");
 
@@ -165,6 +166,9 @@ bool Kuplung::init() {
 
                     this->rayPicker = new RayPicking();
                     this->rayPicker->init(this->managerObjects, this->managerControls, std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+
+                    this->managerExporter = new Exporter();
+                    this->managerExporter->init();
                 }
             }
         }
@@ -535,4 +539,8 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 
 void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
+}
+
+void Kuplung::guiSceneExport(FBEntity file) {
+    this->managerExporter->exportScene(file, this->meshModelFaces);
 }

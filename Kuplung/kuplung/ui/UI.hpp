@@ -17,6 +17,7 @@
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
+#include "kuplung/ui/components/SceneExport.hpp"
 #include "kuplung/ui/components/Editor.hpp"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
@@ -36,7 +37,8 @@ public:
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
-              std::function<void(LightSourceType)> addLight
+              std::function<void(LightSourceType)> addLight,
+              std::function<void(FBEntity file)> exportScene
               );
 
     bool processEvent(SDL_Event *event);
@@ -69,8 +71,10 @@ private:
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
     std::function<void(LightSourceType)> funcAddLight;
+    std::function<void(FBEntity file)> funcExportScene;
 
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
+    void dialogSceneExportProcessFile(FBEntity file);
     void fileShaderEditorSaved(std::string fileName);
 
     void dialogFileBrowser();
@@ -85,12 +89,14 @@ private:
     void dialogSceneStats();
     void dialogControlsGUI();
     void dialogControlsModels(int * sceneSelectedModelObject);
+    void dialogSceneExport();
 
     SDL2OpenGL32 *imguiImplementation;
     ObjectsManager *managerObjects;
     Log *componentLog;
     Screenshot *componentScreenshot;
     FileBrowser *componentFileBrowser;
+    SceneExport *componentSceneExport;
     Editor *componentFileEditor;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
@@ -110,6 +116,7 @@ private:
     bool showAboutImgui;
     bool showAboutKuplung;
     bool showDemoWindow;
+    bool showFileExporter;
 };
 
 #endif /* UI_hpp */
