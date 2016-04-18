@@ -60,10 +60,10 @@ void SceneExport::draw(const char* title, bool* p_opened) {
     ImGui::BeginChild("scrolling");
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
 
-    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.80f);
+    ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
     ImGui::Text("File Name: ");
     ImGui::InputText("", this->fileName, sizeof(this->fileName));
-    ImGui::SameLine(0, 10.0);
+    ImGui::SameLine(0, 10);
     if (ImGui::Button("Save")) {
         FBEntity file;
         file.extension = "";
@@ -73,8 +73,10 @@ void SceneExport::draw(const char* title, bool* p_opened) {
         file.size = "";
         file.title = std::string(this->fileName);
         Settings::Instance()->currentFolder = this->currentFolder;
+        Settings::Instance()->saveSettings();
         this->funcExportFile(file);
     }
+    ImGui::SameLine(0, 10);
     if (ImGui::Button("New Folder"))
         this->showNewFolderModel = true;
     ImGui::PopItemWidth();
