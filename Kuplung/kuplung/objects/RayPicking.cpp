@@ -52,23 +52,22 @@ void RayPicking::pick7() {
     this->rayLines.push_back(rl);
     this->doLog(Settings::Instance()->string_format("[RAY] %f, %f, %f <--------> %f, %f, %f", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
 
-    this->sceneSelectedModelObject = -1;
-    this->selectedMaterialID = "";
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
-                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
-                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
+                glm::vec4 tp01 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
+                glm::vec4 tp02 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
+                glm::vec4 tp03 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
                 glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
                 glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
                 glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
 
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
+                //if (glm::intersectRayPlane(vFrom, ray_direction, planeOriginal, planeNormal, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
+                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s @ %f, %f, %f", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
             }
         }
@@ -108,7 +107,6 @@ void RayPicking::pick6() {
             mmf->matrixModel * mmf->boundingBox->matrixTransform,
             intersection_distance)) {
             this->sceneSelectedModelObject = i;
-            this->selectedMaterialID = mmf->oFace.materialID;
             this->doLog(Settings::Instance()->string_format("INTERSECTION - %i\n", this->sceneSelectedModelObject));
             break;
         }
@@ -304,8 +302,6 @@ void RayPicking::pick5() {
     glm::vec3 out_direction = glm::normalize(lRayDir_world);
     glm::vec3 out_end = out_origin + out_direction * 1000.0f;
 
-    this->sceneSelectedModelObject = -1;
-    this->selectedMaterialID = "";
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
@@ -317,7 +313,6 @@ void RayPicking::pick5() {
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(out_origin, out_direction, tp1, tp2, tp3, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-                    this->selectedMaterialID = mmf->oFace.materialID;
                     this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f\n", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
             }
@@ -348,8 +343,6 @@ void RayPicking::pick4() {
     rl->initBuffers(vFrom, vTo);
     this->rayLines.push_back(rl);
 
-    this->sceneSelectedModelObject = -1;
-    this->selectedMaterialID = "";
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
@@ -361,7 +354,6 @@ void RayPicking::pick4() {
                 glm::vec3 intersectionPoint;
                 if (this->isInTriangle(nearPoint, worldRay, tp1, tp2, tp3)) {
                     this->sceneSelectedModelObject = i;
-                    this->selectedMaterialID = mmf->oFace.materialID;
                     this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f\n", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
             }
@@ -400,8 +392,6 @@ void RayPicking::pick3() {
     this->rayLines.push_back(rl);
     this->doLog(Settings::Instance()->string_format("%f, %f, %f <--------> %f, %f, %f", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
 
-    this->sceneSelectedModelObject = -1;
-    this->selectedMaterialID = "";
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
@@ -419,7 +409,6 @@ void RayPicking::pick3() {
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(nearPoint, rayDirection, triangle_p1, triangle_p2, triangle_p3, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-                    this->selectedMaterialID = mmf->oFace.materialID;
                     this->doLog(test);
                     this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! %s @ %f, %f, %f", mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
@@ -526,8 +515,7 @@ void RayPicking::pick2() {
                     if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
                         if (p.z > sceneClosestObject) {
                             this->sceneSelectedModelObject = i;
-                            this->selectedMaterialID = mmf->oFace.materialID;
-                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
+                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = " + std::to_string(this->sceneSelectedModelObject));
                             break;
                         }
                     }
@@ -591,8 +579,7 @@ void RayPicking::pick1() {
                     if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
                         if (p.z > sceneClosestObject) {
                             this->sceneSelectedModelObject = i;
-                            this->selectedMaterialID = mmf->oFace.materialID;
-                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = [" + std::to_string(this->sceneSelectedModelObject) + "] - " + this->selectedMaterialID);
+                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = " + std::to_string(this->sceneSelectedModelObject));
                             break;
                         }
                     }

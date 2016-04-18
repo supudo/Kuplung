@@ -44,7 +44,6 @@ private:
 
     std::vector<ModelFace*> meshModelFaces;
     int sceneSelectedModelObject;
-    std::string selectedMaterialID;
 
     void destroy();
 

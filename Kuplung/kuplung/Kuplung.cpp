@@ -253,6 +253,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         if (this->managerControls->mouseButton_LEFT) {
             this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
             this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject);
+            this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
         }
     }
 }
