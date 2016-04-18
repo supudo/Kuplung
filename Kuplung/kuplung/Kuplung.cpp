@@ -177,14 +177,27 @@ bool Kuplung::init() {
 }
 
 void Kuplung::initFolders() {
-    char *data_path = NULL;
-    char *base_path = SDL_GetBasePath();
-    if (base_path)
-        data_path = base_path;
-    else
-        data_path = SDL_strdup("./");
-    Settings::Instance()->currentFolder = data_path;
-    Settings::Instance()->currentFolder = "/Users/supudo/Software/C++/Kuplung/_objects";
+//    char *data_path = NULL;
+//    char *base_path = SDL_GetBasePath();
+//    if (base_path)
+//        data_path = base_path;
+//    else
+//        data_path = SDL_strdup("./");
+//    Settings::Instance()->currentFolder = data_path;
+
+#ifdef _WIN32
+    char const *hdrive = getenv("HOMEDRIVE");
+    char const *hpath = getenv("HOMEPATH");
+    std::string homeFolder = std::string(hdrive) + "/" + std::string(hpath);
+#elif defined macintosh // OS 9
+    char const *hpath = getenv("HOME");
+    std::string homeFolder = std::string(hpath);
+#else
+    char const *hpath = getenv("HOME");
+    std::string homeFolder = std::string(hpath);
+#endif
+    if (Settings::Instance()->currentFolder == "")
+        Settings::Instance()->currentFolder = homeFolder;
 }
 
 #pragma mark - Event processing
@@ -421,41 +434,44 @@ void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
 }
 
 void Kuplung::processParsedObjFile() {
-    this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
-    this->managerUI->hideParsing();
-    this->managerUI->showLoading();
-    this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
+    if (this->objFiles.size() > 0) {
+        this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
+        this->managerUI->hideParsing();
+        this->managerUI->showLoading();
+        this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
-    objScene scene = this->scenes[this->scenes.size() - 1];
-    for (int i=0; i<(int)scene.models.size(); i++) {
-        objModel model = scene.models[i];
-        for (size_t j=0; j<model.faces.size(); j++) {
-            ModelFace *mmf = new ModelFace();
+        objScene scene = this->scenes[this->scenes.size() - 1];
+        for (int i=0; i<(int)scene.models.size(); i++) {
+            objModel model = scene.models[i];
+            for (size_t j=0; j<model.faces.size(); j++) {
+                ModelFace *mmf = new ModelFace();
 
-            // relfection area
-            mmf->dataVertices = this->managerObjects->grid->dataVertices;
-            mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
-            mmf->dataNormals = this->managerObjects->grid->dataNormals;
-            mmf->dataIndices = this->managerObjects->grid->dataIndices;
+                // relfection area
+                mmf->dataVertices = this->managerObjects->grid->dataVertices;
+                mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+                mmf->dataNormals = this->managerObjects->grid->dataNormals;
+                mmf->dataIndices = this->managerObjects->grid->dataIndices;
 
-            mmf->ModelID = i;
-            mmf->init();
-            mmf->setModel(model.faces[j]);
-            mmf->initModelProperties();
-            mmf->initShaderProgram();
-            mmf->initBuffers(Settings::Instance()->currentFolder);
-            this->meshModelFaces.push_back(mmf);
+                mmf->ModelID = i;
+                mmf->init();
+                mmf->setModel(model.faces[j]);
+                mmf->initModelProperties();
+                mmf->initShaderProgram();
+                mmf->initBuffers(Settings::Instance()->currentFolder);
+                this->meshModelFaces.push_back(mmf);
+            }
+        }
+
+        this->managerUI->meshModelFaces = &this->meshModelFaces;
+        this->managerUI->scenes = &this->scenes;
+
+        if (this->meshModelFaces.size() > 0) {
+            this->managerUI->showControlsModels = true;
+            //this->managerUI->showSceneStats = true;
         }
     }
 
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
-    this->managerUI->scenes = &this->scenes;
-
-    if (this->meshModelFaces.size() > 0) {
-        this->managerUI->showControlsModels = true;
-        //this->managerUI->showSceneStats = true;
-    }
-
+    this->managerUI->hideParsing();
     this->managerUI->hideLoading();
 }
 

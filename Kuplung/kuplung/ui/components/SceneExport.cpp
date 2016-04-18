@@ -72,6 +72,7 @@ void SceneExport::draw(const char* title, bool* p_opened) {
         file.path = this->currentFolder;
         file.size = "";
         file.title = std::string(this->fileName);
+        Settings::Instance()->currentFolder = this->currentFolder;
         this->funcExportFile(file);
     }
     if (ImGui::Button("New Folder"))

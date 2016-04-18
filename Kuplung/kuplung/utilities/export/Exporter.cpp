@@ -18,6 +18,7 @@ void Exporter::destroy() {
 
 void Exporter::init() {
     this->exporterOBJ = new ExporterOBJ();
+    this->exporterOBJ->init();
 }
 
 void Exporter::exportScene(FBEntity file, std::vector<ModelFace*> faces) {

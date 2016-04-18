@@ -17,9 +17,6 @@ void ExporterOBJ::destroy() {
 }
 
 void ExporterOBJ::init() {
-}
-
-void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
 #ifdef _WIN32
     this->nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -27,6 +24,9 @@ void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
 #else
     this->nlDelimiter = "\n";
 #endif
+}
+
+void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
     this->exportFile = file;
     this->exportGeometry(faces);
     this->exportMaterials(faces);

@@ -9,7 +9,6 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
-#include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iostream>
@@ -103,8 +102,10 @@ void FileBrowser::drawFiles() {
         sprintf(label, "%i", i);
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
-            if (entity.isFile)
+            if (entity.isFile) {
                 this->processFile(entity, (Settings::Instance()->ModelFileParser == 0 ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp));
+                Settings::Instance()->saveSettings();
+            }
             else {
                 Settings::Instance()->currentFolder = entity.path;
                 this->drawFiles();
@@ -149,7 +150,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string fileP
                     isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
                 else if (this->isImageBrowser)
                     isAllowedFileExtension = Settings::Instance()->isAllowedImageExtension(iteratorFolder->path().extension().string());
-                if (isAllowedFileExtension || fs::is_directory(fileStatus)) {
+                if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;
@@ -231,4 +232,11 @@ double FileBrowser::roundOff(double n) {
 void FileBrowser::logMessage(std::string logMessage) {
     if (this->log)
         Settings::Instance()->funcDoLog("[GUIFileBrowser] " + logMessage);
+}
+
+bool FileBrowser::isHidden(const fs::path &p) {
+    std::string name = p.filename().string();
+    if (name == ".." || name == "."  || name[0] == '.')
+       return true;
+    return false;
 }

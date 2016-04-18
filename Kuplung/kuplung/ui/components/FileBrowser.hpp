@@ -9,11 +9,12 @@
 #ifndef FileBrowser_hpp
 #define FileBrowser_hpp
 
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/imgui/imgui.h"
 #include <functional>
 #include <map>
 #include <string>
-#include "kuplung/settings/Settings.h"
+#include <boost/filesystem.hpp>
 
 typedef enum FileBrowser_ParserType {
     FileBrowser_ParserType_Own = 0,
@@ -36,6 +37,7 @@ private:
     std::string convertSize(size_t size);
     double roundOff(double n);
     void logMessage(std::string logMessage);
+    bool isHidden(const boost::filesystem::path &p);
 
     bool log, isStyleBrowser, isImageBrowser;
     int positionX, positionY, width, height;

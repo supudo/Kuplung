@@ -89,6 +89,8 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("appVersion", this->appVersion);
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
+
+
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
     this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
 
