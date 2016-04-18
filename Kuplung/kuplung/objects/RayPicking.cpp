@@ -65,7 +65,6 @@ void RayPicking::pick7() {
 
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
-                //if (glm::intersectRayPlane(vFrom, ray_direction, planeOriginal, planeNormal, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
                     this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s @ %f, %f, %f", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
@@ -300,7 +299,7 @@ void RayPicking::pick5() {
 
     glm::vec3 out_origin = glm::vec3(lRayStart_world);
     glm::vec3 out_direction = glm::normalize(lRayDir_world);
-    glm::vec3 out_end = out_origin + out_direction * 1000.0f;
+//    /glm::vec3 out_end = out_origin + out_direction * 1000.0f;
 
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
