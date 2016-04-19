@@ -67,6 +67,8 @@ private:
         glm::mat4 ModelMatrix,       // Transformation applied to the mesh (which will thus be also applied to its bounding box)
         float& intersection_distance // Output : distance between ray_origin and the intersection with the OBB
     );
+    float fixSign(float num);
+    glm::vec3 fixSignVector(glm::vec3 v);
 };
 
 #endif /* RayPicking_hpp */

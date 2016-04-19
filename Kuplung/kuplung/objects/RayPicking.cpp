@@ -36,6 +36,8 @@ void RayPicking::pick7() {
         vFrom,
         ray_direction
     );
+    vFrom = this->fixSignVector(vFrom);
+    ray_direction = this->fixSignVector(ray_direction);
 
     glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
     glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
@@ -56,12 +58,28 @@ void RayPicking::pick7() {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-                glm::vec4 tp01 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
-                glm::vec4 tp02 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
-                glm::vec4 tp03 = mmf->matrixProjection * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
-                glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
-                glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
-                glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
+                glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
+                glm::vec3 v2 = this->fixSignVector(mmf->oFace.vectors_vertices[j - 1]);
+                glm::vec3 v3 = this->fixSignVector(mmf->oFace.vectors_vertices[j - 2]);
+
+                std::string vertices = "";
+                vertices += Settings::Instance()->string_format("[%f, %f, %f]", v1.x, v1.y, v1.z);
+                vertices += Settings::Instance()->string_format(" [%f, %f, %f]", v2.x, v2.y, v2.z);
+                vertices += Settings::Instance()->string_format(" [%f, %f, %f]", v3.x, v3.y, v3.z);
+
+                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(v1, 1.0);
+                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(v2, 1.0);
+                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(v3, 1.0);
+                glm::vec3 tp1 = this->fixSignVector(glm::vec3(tp01.x, -tp01.z, tp01.y));
+                glm::vec3 tp2 = this->fixSignVector(glm::vec3(tp02.x, -tp02.z, tp02.y));
+                glm::vec3 tp3 = this->fixSignVector(glm::vec3(tp03.x, -tp03.z, tp03.y));
+
+                vertices += "\n";
+                vertices += Settings::Instance()->string_format("[%f, %f, %f]", tp1.x, tp1.y, tp1.z);
+                vertices += Settings::Instance()->string_format(" [%f, %f, %f]", tp2.x, tp2.y, tp2.z);
+                vertices += Settings::Instance()->string_format(" [%f, %f, %f]", tp3.x, tp3.y, tp3.z);
+                vertices += "\n-----------\n";
+                printf("%s\n", vertices.c_str());
 
                 glm::vec3 intersectionPoint;
                 if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
@@ -604,4 +622,15 @@ void RayPicking::init(ObjectsManager *managerObjects, Controls *managerControls,
 void RayPicking::setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
+}
+
+float RayPicking::fixSign(float num) {
+    if ((num < 0.0f) && (-log10(std::abs(num)) > FLT_EPSILON))
+        return -num;
+    else
+        return num;
+}
+
+glm::vec3 RayPicking::fixSignVector(glm::vec3 v) {
+    return glm::vec3(this->fixSign(v.x), this->fixSign(v.y), this->fixSign(v.z));
 }
