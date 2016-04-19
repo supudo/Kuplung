@@ -35,8 +35,6 @@ private:
     objMaterialImage parseTextureImage(std::string textureLine);
 
     std::vector<float> geometricVertices, textureCoordinates, vertexNormals, spaceVertices, polygonalFaces;
-    std::vector<glm::vec2> vectorsTextureCoordinates;
-    std::vector<glm::vec3> vectorsVertices, vectorsNormals;
     int objFileLinesCount;
 
     // comment line

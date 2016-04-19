@@ -62,11 +62,8 @@ void objParser::destroy() {
 objScene objParser::parse(FBEntity file) {
     this->file = file;
     this->geometricVertices = {};
-    this->vectorsVertices = {};
     this->textureCoordinates = {};
-    this->vectorsTextureCoordinates = {};
     this->vertexNormals = {};
-    this->vectorsNormals = {};
     this->spaceVertices = {};
     this->polygonalFaces = {};
     this->scene = {};
@@ -129,17 +126,15 @@ objScene objParser::parse(FBEntity file) {
             else if (std::regex_match(singleLine, this->regex_geometricVertices)) {
                 std::vector<float> points = this->string2float(lineElements);
                 this->geometricVertices.insert(end(this->geometricVertices), begin(points), end(points));
-                this->vectorsVertices.push_back(glm::vec3(points[0], points[1], points[2]));
+                //this->vectorsVertices.push_back(glm::vec3(points[0], points[1], points[2]));
             }
             else if (std::regex_match(singleLine, this->regex_textureCoordinates)) {
                 std::vector<float> points = this->string2float(lineElements);
                 this->textureCoordinates.insert(end(this->textureCoordinates), begin(points), end(points));
-                this->vectorsTextureCoordinates.push_back(glm::vec2(points[0], points[1]));
             }
             else if (std::regex_match(singleLine, this->regex_vertexNormals)) {
                 std::vector<float> points = this->string2float(lineElements);
                 this->vertexNormals.insert(end(this->vertexNormals), begin(points), end(points));
-                this->vectorsNormals.push_back(glm::vec3(points[0], points[1], points[2]));
             }
             else if (std::regex_match(singleLine, this->regex_spaceVertices)) {
                 std::vector<float> points = this->string2float(lineElements);
@@ -161,21 +156,6 @@ objScene objParser::parse(FBEntity file) {
                 faceID += 1;
                 this->scene.models[indexModel].faces.push_back(entityFace);
                 this->scene.totalCountFaces += 1;
-                this->scene.models[indexModel].faces[indexFace].vectors_vertices.insert(
-                    end(this->scene.models[indexModel].faces[indexFace].vectors_vertices),
-                    begin(this->vectorsVertices),
-                    end(this->vectorsVertices)
-                 );
-                this->scene.models[indexModel].faces[indexFace].vectors_texture_coordinates.insert(
-                    end(this->scene.models[indexModel].faces[indexFace].vectors_texture_coordinates),
-                    begin(this->vectorsTextureCoordinates),
-                    end(this->vectorsTextureCoordinates)
-                 );
-                this->scene.models[indexModel].faces[indexFace].vectors_normals.insert(
-                    end(this->scene.models[indexModel].faces[indexFace].vectors_normals),
-                    begin(this->vectorsNormals),
-                    end(this->vectorsNormals)
-                 );
             }
             else if (std::regex_match(singleLine, this->regex_polygonalFaces)) {
                 std::vector<std::string> singleFaceElements = this->splitString(singleLine, this->regex_whiteSpace);
@@ -191,6 +171,8 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.totalCountGeometricVertices += 3;
                     this->scene.models[indexModel].verticesCount += 3;
                     this->scene.models[indexModel].faces[indexFace].verticesCount += 3;
+                    glm::vec3 v_v = glm::vec3(this->geometricVertices[v_idx + 0], this->geometricVertices[v_idx + 1], this->geometricVertices[v_idx + 2]);
+                    this->scene.models[indexModel].faces[indexFace].vectors_vertices.push_back(v_v);
 
                     if (this->textureCoordinates.size() > 0 && face[1] != "") {
                         int t_idx = (std::stoi(face[1]) - 1) * 2;
@@ -199,6 +181,8 @@ objScene objParser::parse(FBEntity file) {
                         this->scene.totalCountTextureCoordinates += 2;
                         this->scene.models[indexModel].textureCoordinatesCount += 2;
                         this->scene.models[indexModel].faces[indexFace].textureCoordinatesCount += 2;
+                        glm::vec2 v_tc = glm::vec2(this->textureCoordinates[t_idx + 0], this->textureCoordinates[t_idx + 1]);
+                        this->scene.models[indexModel].faces[indexFace].vectors_texture_coordinates.push_back(v_tc);
                     }
 
                     int n_idx = (std::stoi(face[2]) - 1) * 3;
@@ -208,6 +192,8 @@ objScene objParser::parse(FBEntity file) {
                     this->scene.totalCountNormalVertices += 3;
                     this->scene.models[indexModel].normalsCount += 3;
                     this->scene.models[indexModel].faces[indexFace].normalsCount += 3;
+                    glm::vec3 v_n = glm::vec3(this->vertexNormals[n_idx + 0], this->vertexNormals[n_idx + 1], this->vertexNormals[n_idx + 2]);
+                    this->scene.models[indexModel].faces[indexFace].vectors_normals.push_back(v_n);
 
                     this->scene.models[indexModel].faces[indexFace].indices.push_back(indicesCounter);
                     indicesCounter += 1;
