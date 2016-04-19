@@ -56,6 +56,28 @@ void RayPicking::pick7() {
 
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
+//        for (size_t j=0; j<mmf->oFace.vertices.size(); j++) {
+//            if ((j + 1) % 3 == 0) {
+//                glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
+
+//                float nDotL = glm::dot(direction, face_normal);
+//                if (nDotL <= 0.0f) {
+//                    float distance = glm::dot(face_normal, (vertices[j - 2] - nearPoint)) / nDotL;
+
+//                    glm::vec3 p = nearPoint + distance * direction;
+//                    glm::vec3 n1 = glm::cross(vertices[j - 1] - vertices[j - 2], p - vertices[j - 2]);
+//                    glm::vec3 n2 = glm::cross(vertices[j] - vertices[j - 1], p - vertices[j - 1]);
+//                    glm::vec3 n3 = glm::cross(vertices[j - 2] - vertices[j], p - vertices[j]);
+//                    if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
+//                        if (p.z > sceneClosestObject) {
+//                            this->sceneSelectedModelObject = i;
+//                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = " + std::to_string(this->sceneSelectedModelObject));
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
                 glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
@@ -562,23 +584,22 @@ void RayPicking::pick1() {
     // http://stackoverflow.com/questions/27891036/dragging-3-dimensional-objects-with-c-and-opengl
     float sceneClosestObject = -1;
 
+    RayLine *rl = new RayLine();
+    rl->init();
+    rl->initShaderProgram();
+    rl->initBuffers(nearPoint, direction * 1000.0f);
+    this->rayLines.push_back(rl);
+
     for (int i=0; i<(int)meshModelFaces.size(); i++) {
         ModelFace *mmf = meshModelFaces[i];
         std::vector<glm::vec3> vertices;
 
-//                std::vector<float> objVertices = mmf->oFace.vertices;
-//                for (size_t j=0; j<objVertices.size(); j++) {
-//                    if ((j + 1) % 3 == 0)
-//                        vertices.push_back(glm::vec3(objVertices[j], objVertices[j - 1], objVertices[j - 2]));
-//                }
-
-        glm::mat4 m = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
+        glm::mat4 m = mmf->matrixModel;
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             float x = mmf->oFace.vectors_vertices[j].x;
             float y = mmf->oFace.vectors_vertices[j].y;
             float z = mmf->oFace.vectors_vertices[j].z;
-            glm::vec4 v = m * glm::vec4(x, y, z, 1.0);
-            vertices.push_back(glm::vec3(v.x, v.y, v.z));
+            vertices.push_back(glm::vec3(m * glm::vec4(x, -z, y, 1.0)));
         }
 
         for (size_t j=0; j<vertices.size(); j++) {
