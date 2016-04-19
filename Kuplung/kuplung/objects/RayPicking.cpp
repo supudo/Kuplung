@@ -57,30 +57,6 @@ void RayPicking::pick7() {
 //    float sceneClosestObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
-//        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
-//            if ((j + 1) % 3 == 0) {
-//                glm::vec3 face_normal = glm::normalize(glm::cross(mmf->oFace.vectors_vertices[j - 1] - mmf->oFace.vectors_vertices[j - 2], mmf->oFace.vectors_vertices[j] - mmf->oFace.vectors_vertices[j - 2]));
-
-//                float nDotL = glm::dot(ray_direction, face_normal);
-//                if (nDotL <= 0.0f) {
-//                    float distance = glm::dot(face_normal, (mmf->oFace.vectors_vertices[j - 2] - vFrom)) / nDotL;
-
-//                    glm::vec3 p = vFrom + distance * ray_direction;
-//                    glm::vec3 n1 = glm::cross(mmf->oFace.vectors_vertices[j - 1] - mmf->oFace.vectors_vertices[j - 2], p - mmf->oFace.vectors_vertices[j - 2]);
-//                    glm::vec3 n2 = glm::cross(mmf->oFace.vectors_vertices[j] - mmf->oFace.vectors_vertices[j - 1], p - mmf->oFace.vectors_vertices[j - 1]);
-//                    glm::vec3 n3 = glm::cross(mmf->oFace.vectors_vertices[j - 2] - mmf->oFace.vectors_vertices[j], p - mmf->oFace.vectors_vertices[j]);
-//                    if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
-//                        if (p.z > sceneClosestObject) {
-//                            this->sceneSelectedModelObject = i;
-//                            this->doLog("RayCast @ [" + std::to_string(mouse_x) + ", " + std::to_string(mouse_y) + "] = " + std::to_string(this->sceneSelectedModelObject));
-//                            break;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
                 glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
