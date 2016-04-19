@@ -54,20 +54,21 @@ void RayPicking::pick7() {
     this->rayLines.push_back(rl);
     this->doLog(Settings::Instance()->string_format("[RAY] %f, %f, %f <--------> %f, %f, %f", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
 
+//    float sceneClosestObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
-//        for (size_t j=0; j<mmf->oFace.vertices.size(); j++) {
+//        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
 //            if ((j + 1) % 3 == 0) {
-//                glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
+//                glm::vec3 face_normal = glm::normalize(glm::cross(mmf->oFace.vectors_vertices[j - 1] - mmf->oFace.vectors_vertices[j - 2], mmf->oFace.vectors_vertices[j] - mmf->oFace.vectors_vertices[j - 2]));
 
-//                float nDotL = glm::dot(direction, face_normal);
+//                float nDotL = glm::dot(ray_direction, face_normal);
 //                if (nDotL <= 0.0f) {
-//                    float distance = glm::dot(face_normal, (vertices[j - 2] - nearPoint)) / nDotL;
+//                    float distance = glm::dot(face_normal, (mmf->oFace.vectors_vertices[j - 2] - vFrom)) / nDotL;
 
-//                    glm::vec3 p = nearPoint + distance * direction;
-//                    glm::vec3 n1 = glm::cross(vertices[j - 1] - vertices[j - 2], p - vertices[j - 2]);
-//                    glm::vec3 n2 = glm::cross(vertices[j] - vertices[j - 1], p - vertices[j - 1]);
-//                    glm::vec3 n3 = glm::cross(vertices[j - 2] - vertices[j], p - vertices[j]);
+//                    glm::vec3 p = vFrom + distance * ray_direction;
+//                    glm::vec3 n1 = glm::cross(mmf->oFace.vectors_vertices[j - 1] - mmf->oFace.vectors_vertices[j - 2], p - mmf->oFace.vectors_vertices[j - 2]);
+//                    glm::vec3 n2 = glm::cross(mmf->oFace.vectors_vertices[j] - mmf->oFace.vectors_vertices[j - 1], p - mmf->oFace.vectors_vertices[j - 1]);
+//                    glm::vec3 n3 = glm::cross(mmf->oFace.vectors_vertices[j - 2] - mmf->oFace.vectors_vertices[j], p - mmf->oFace.vectors_vertices[j]);
 //                    if (glm::dot(face_normal, n1) >= 0.0f && glm::dot(face_normal, n2) >= 0.0f && glm::dot(face_normal, n3) >= 0.0f) {
 //                        if (p.z > sceneClosestObject) {
 //                            this->sceneSelectedModelObject = i;
@@ -78,6 +79,8 @@ void RayPicking::pick7() {
 //                }
 //            }
 //        }
+
+
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
                 glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
@@ -572,6 +575,15 @@ void RayPicking::pick1() {
     PixelDataPoint p = this->managerObjects->camera->getClickData(mouse_x, mouse_y, Settings::Instance()->SDL_Window_Height);
     this->doLog(Settings::Instance()->string_format("Clicked on pixel %d, %d, color %02hhx%02hhx%02hhx%02hhx, depth %f, stencil index %u", mouse_x, mouse_y, p.color[0], p.color[1], p.color[2], p.color[3], p.depth, p.index));
 
+    glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
+    glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
+    glm::vec4 eyeCoordinates = this->getEyeCoordinates(clipCoordinates);
+
+    glm::mat4 invertedViewMatrix = glm::inverse(this->managerObjects->camera->matrixCamera);
+    glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates;
+    glm::vec3 vTo = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
+
+
     glm::vec4 viewport = glm::vec4(0.0f, 0.0f, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     glm::vec3 win_near = glm::vec3(mouse_x, mouse_y, 0.0);
     glm::vec3 win_far = glm::vec3(mouse_x, mouse_y, 1.0);
@@ -587,21 +599,13 @@ void RayPicking::pick1() {
     RayLine *rl = new RayLine();
     rl->init();
     rl->initShaderProgram();
-    rl->initBuffers(nearPoint, direction * 1000.0f);
+    rl->initBuffers(nearPoint, vTo * this->managerObjects->Setting_PlaneFar);
     this->rayLines.push_back(rl);
+    farPoint = vTo * this->managerObjects->Setting_PlaneFar;
 
     for (int i=0; i<(int)meshModelFaces.size(); i++) {
         ModelFace *mmf = meshModelFaces[i];
-        std::vector<glm::vec3> vertices;
-
-        glm::mat4 m = mmf->matrixModel;
-        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
-            float x = mmf->oFace.vectors_vertices[j].x;
-            float y = mmf->oFace.vectors_vertices[j].y;
-            float z = mmf->oFace.vectors_vertices[j].z;
-            vertices.push_back(glm::vec3(m * glm::vec4(x, -z, y, 1.0)));
-        }
-
+        std::vector<glm::vec3> vertices = mmf->oFace.vectors_vertices;
         for (size_t j=0; j<vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
                 glm::vec3 face_normal = glm::normalize(glm::cross(vertices[j - 1] - vertices[j - 2], vertices[j] - vertices[j - 2]));
