@@ -38,40 +38,117 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
 
     std::string objFaces = "";
-    int faceCounter = 1;
-    int normalsCounter = 1;
-
+    std::string objNormals = "";
+    int triangleCounter = 0, pointCounter = 0;
+    int indexVertex = 0, indexNormal = 0;
+    std::vector<glm::vec3> vectorVertices;
     for (int i=0; i<(int)faces.size(); i++) {
-        ModelFace *mmf = faces[i];
-        fileContents += "o " + mmf->oFace.ModelTitle + nlDelimiter;
-        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
+        fileContents += "o " + faces[i]->oFace.ModelTitle + nlDelimiter;
+        objFaces = "";
+        for (size_t j=0; j<faces[i]->oFace.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-                glm::vec4 tp01 = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
-                glm::vec4 tp02 = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
-                glm::vec4 tp03 = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
-                glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
-                glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
-                glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
+                float v1 = faces[i]->oFace.vertices[j];
+                float v2 = faces[i]->oFace.vertices[j - 1];
+                float v3 = faces[i]->oFace.vertices[j - 2];
+                fileContents += Settings::Instance()->string_format("v %f %f %f", v1, v2, v3) + this->nlDelimiter;
+                vectorVertices.push_back(glm::vec3(v1, v2, v3));
+                pointCounter += 1;
+                indexVertex += 1;
+                if ((triangleCounter + 1) % 3 == 0) {
+                    glm::vec3 p1 = vectorVertices[pointCounter];
+                    glm::vec3 p2 = vectorVertices[pointCounter - 1];
+                    glm::vec3 p3 = vectorVertices[pointCounter - 2];
+                    triangleCounter = 0;
 
-                std::string singleFace;
-                fileContents += Settings::Instance()->string_format("v %f %f %f", tp1.x, tp1.y, tp1.z) + this->nlDelimiter;
-                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-                fileContents += Settings::Instance()->string_format("v %f %f %f", tp2.x, tp2.y, tp2.z) + this->nlDelimiter;
-                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-                fileContents += Settings::Instance()->string_format("v %f %f %f", tp3.x, tp3.y, tp3.z) + this->nlDelimiter;
-                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-                objFaces += "f " + singleFace + this->nlDelimiter;
+                    glm::vec3 n = glm::normalize(glm::cross(p3 - p1, p2 - p1));
+                    objNormals += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
+                    indexNormal += 1;
+
+                    std::string singleFace = "f";
+                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex - 2, indexNormal);
+                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex - 1, indexNormal);
+                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex, indexNormal);
+                    objFaces += singleFace + this->nlDelimiter;
+                }
+                triangleCounter += 1;
             }
         }
-        for (size_t j=0; j<mmf->oFace.vectors_normals.size(); j++) {
-            glm::vec3 n = mmf->oFace.vectors_normals[j];
-            fileContents += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
-            normalsCounter += 1;
-        }
-        fileContents += "usemtl " + mmf->oFace.materialID + this->nlDelimiter;
+        fileContents += objNormals;
+        fileContents += "usemtl " + faces[i]->oFace.materialID + this->nlDelimiter;
         fileContents += "s off" + this->nlDelimiter;
         fileContents += objFaces;
     }
+
+
+    // method 2
+//    std::string objFaces = "";
+//    std::string objNormals = "";
+//    int faceCounter = 1;
+//    int normalsCounter = 1;
+
+//    for (int i=0; i<(int)faces.size(); i++) {
+//        ModelFace *mmf = faces[i];
+//        fileContents += "o " + mmf->oFace.ModelTitle + nlDelimiter;
+
+//        for (size_t j=0; j<mmf->oFace.vertices.size(); j++) {
+//            if ((j + 1) % 3 == 0 || (mmf->oFace.vertices.size() - j) < 3) {
+//                float v1 = mmf->oFace.vertices[j];
+//                float v2 = mmf->oFace.vertices[j - 1];
+//                float v3 = mmf->oFace.vertices[j - 2];
+//                fileContents += Settings::Instance()->string_format("v %f %f %f", v1, v2, v3) + this->nlDelimiter;
+
+//                glm::vec3 n = glm::normalize(glm::cross(v3 - v1, v2 - v1));
+//                objNormals += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
+//                normalsCounter += 1;
+
+//                faceCounter += 1;
+//            }
+//        }
+
+//        fileContents += "usemtl " + mmf->oFace.materialID + this->nlDelimiter;
+//        fileContents += "s off" + this->nlDelimiter;
+//        fileContents += objFaces;
+//    }
+
+
+
+    // method 1
+//    for (int i=0; i<(int)faces.size(); i++) {
+//        ModelFace *mmf = faces[i];
+//        fileContents += "o " + mmf->oFace.ModelTitle + nlDelimiter;
+//        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
+//            glm::vec3 v = mmf->oFace.vectors_vertices[j];
+//            printf("[%i] - %f, %f, %f\n", (int)j, v.x, v.y, v.z);
+//            if ((j + 1) % 3 == 0) {
+//                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
+//                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
+//                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
+//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp01.x, tp01.y, tp01.z);
+//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp02.x, tp02.y, tp02.z);
+//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp03.x, tp03.y, tp03.z);
+//                glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
+//                glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
+//                glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
+
+//                std::string singleFace;
+//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp1.x, tp1.y, tp1.z) + this->nlDelimiter;
+//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
+//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp2.x, tp2.y, tp2.z) + this->nlDelimiter;
+//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
+//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp3.x, tp3.y, tp3.z) + this->nlDelimiter;
+//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
+//                objFaces += "f " + singleFace + this->nlDelimiter;
+//            }
+//        }
+//        for (size_t j=0; j<mmf->oFace.vectors_normals.size(); j++) {
+//            glm::vec3 n = mmf->oFace.vectors_normals[j];
+//            fileContents += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
+//            normalsCounter += 1;
+//        }
+//        fileContents += "usemtl " + mmf->oFace.materialID + this->nlDelimiter;
+//        fileContents += "s off" + this->nlDelimiter;
+//        fileContents += objFaces;
+//    }
     fileContents += this->nlDelimiter;
 
     if (fileContents != "")
@@ -121,10 +198,10 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFace*> faces) {
 }
 
 void ExporterOBJ::saveFile(std::string fileContents, std::string fileName) {
-    printf("--------------------------------------------------------\n");
-    printf("%s\n", fileName.c_str());
-    printf("%s\n", fileContents.c_str());
-    printf("--------------------------------------------------------\n");
+//    printf("--------------------------------------------------------\n");
+//    printf("%s\n", fileName.c_str());
+//    printf("%s\n", fileContents.c_str());
+//    printf("--------------------------------------------------------\n");
 
     std::ofstream out(fileName);
     out << fileContents;
