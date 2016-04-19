@@ -69,6 +69,7 @@ private:
     );
     float fixSign(float num);
     glm::vec3 fixSignVector(glm::vec3 v);
+    int rayIntersectsTriangle(float *p, float *d, float *v0, float *v1, float *v2);
 };
 
 #endif /* RayPicking_hpp */

@@ -106,17 +106,85 @@ void RayPicking::pick7() {
                 vertices += "\n-----------\n";
                 printf("%s\n", vertices.c_str());
 
-                glm::vec3 intersectionPoint;
-                if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
+                float vvFrom[3] = {vFrom.x, vFrom.y, vFrom.z};
+                float vray_direction[3] = {ray_direction.x, ray_direction.y, ray_direction.z};
+                float vtp1[3] = {tp1.x, tp1.y, tp1.z};
+                float vtp2[3] = {tp2.x, tp2.y, tp2.z};
+                float vtp3[3] = {tp3.x, tp3.y, tp3.z};
+                if (this->rayIntersectsTriangle(vvFrom, vray_direction, vtp1, vtp2, vtp3)) {
                     this->sceneSelectedModelObject = i;
-                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s @ %f, %f, %f", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
+                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str()));
                 }
+//                glm::vec3 intersectionPoint;
+//                if (glm::intersectLineTriangle(vFrom, ray_direction, tp1, tp2, tp3, intersectionPoint)) {
+//                    this->sceneSelectedModelObject = i;
+//                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s @ %f, %f, %f", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
+//                }
             }
         }
     }
 }
 
+#define vector(a,b,c) \
+    (a)[0] = (b)[0] - (c)[0];	\
+    (a)[1] = (b)[1] - (c)[1];	\
+    (a)[2] = (b)[2] - (c)[2];
+
+#define crossProduct(a,b,c) \
+    (a)[0] = (b)[1] * (c)[2] - (c)[1] * (b)[2]; \
+    (a)[1] = (b)[2] * (c)[0] - (c)[2] * (b)[0]; \
+    (a)[2] = (b)[0] * (c)[1] - (c)[0] * (b)[1];
+
+#define innerProduct(v,q) \
+        ((v)[0] * (q)[0] + \
+        (v)[1] * (q)[1] + \
+        (v)[2] * (q)[2])
+
+int RayPicking::rayIntersectsTriangle(float *p, float *d, float *v0, float *v1, float *v2) {
+    float e1[3], e2[3], h[3], s[3], q[3];
+    float a, f, u, v;
+
+    vector(e1, v1, v0);
+    vector(e2, v2, v0);
+
+    crossProduct(h, d, e2);
+    a = innerProduct(e1, h);
+
+    this->doLog(Settings::Instance()->string_format("XXXX = %f\n", a));
+
+   if (a > -0.00001 && a < 0.00001)
+        return(false);
+
+    f = 1/a;
+    vector(s, p, v0);
+    u = f * (innerProduct(s, h));
+
+    if (u < 0.0 || u > 1.0)
+        return(false);
+
+    crossProduct(q, s, e1);
+    v = f * innerProduct(d, q);
+
+    if (v < 0.0 || u + v > 1.0)
+        return(false);
+
+    // at this stage we can compute t to find out where
+    // the intersection point is on the line
+    float t = f * innerProduct(e2, q);
+
+    if (t > 0.00001) // ray intersection
+        return(true);
+
+    else // this means that there is a line intersection
+         // but not a ray intersection
+         return (false);
+}
+
 void RayPicking::pick6() {
+
+    int mouse_x = this->managerControls->mousePosition.x;
+    int mouse_y = this->managerControls->mousePosition.y;
+
     glm::vec3 ray_origin;
     glm::vec3 ray_direction;
     this->ScreenPosToWorldRay(
@@ -127,12 +195,22 @@ void RayPicking::pick6() {
         ray_origin,
         ray_direction
     );
+    ray_origin = this->fixSignVector(ray_origin);
+    ray_direction = this->fixSignVector(ray_direction);
 
-//    RayLine *rl = new RayLine();
-//    rl->init();
-//    rl->initShaderProgram();
-//    rl->initBuffers(ray_origin, ray_direction);
-//    this->rayLines.push_back(rl);
+    glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
+    glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
+    glm::vec4 eyeCoordinates = this->getEyeCoordinates(clipCoordinates);
+
+    glm::mat4 invertedViewMatrix = glm::inverse(this->managerObjects->camera->matrixCamera);
+    glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates * this->managerObjects->Setting_PlaneFar;
+    glm::vec3 vTo = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
+
+    RayLine *rl = new RayLine();
+    rl->init();
+    rl->initShaderProgram();
+    rl->initBuffers(ray_origin, vTo * 1000.0f);
+    this->rayLines.push_back(rl);
 
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFace* mmf = this->meshModelFaces[i];
@@ -146,7 +224,7 @@ void RayPicking::pick6() {
             ray_direction,
             aabb_min,
             aabb_max,
-            mmf->matrixModel * mmf->boundingBox->matrixTransform,
+            mmf->matrixModel,
             intersection_distance)) {
             this->sceneSelectedModelObject = i;
             this->doLog(Settings::Instance()->string_format("INTERSECTION - %i\n", this->sceneSelectedModelObject));
