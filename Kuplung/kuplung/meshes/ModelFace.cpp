@@ -732,7 +732,7 @@ void ModelFace::renderModel() {
         glm::mat4 matrixModelView = this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(matrixModelView));
 
-        glm::mat3 matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixModel * this->matrixCamera));
+        glm::mat3 matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixCamera * this->matrixModel));
         glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
         glm::mat4 matrixWorld = this->matrixModel;

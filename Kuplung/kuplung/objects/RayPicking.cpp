@@ -50,7 +50,7 @@ void RayPicking::pick7() {
     rl->initShaderProgram();
     rl->initBuffers(vFrom, vTo * this->managerObjects->Setting_PlaneFar);
     this->rayLines.push_back(rl);
-    this->doLog(Settings::Instance()->string_format("[RAY] %f, %f, %f <--------> %f, %f, %f", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
+    //this->doLog(Settings::Instance()->string_format("[RAY] %f, %f, %f <--------> %f, %f, %f", vFrom.x, vFrom.y, vFrom.z, vTo.x, vTo.y, vTo.z));
 
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
