@@ -713,6 +713,9 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
     if (this->Setting_ShowBoundingBox && this->so_selectedYn) {
         glm::mat4 matrixBB = glm::mat4(1.0);
+        matrixBB *= this->matrixProjection;
+        matrixBB *= this->matrixCamera;
+        matrixBB *= this->matrixModel;
         this->boundingBox->render(matrixBB, this->so_outlineColor);
     }
 }
