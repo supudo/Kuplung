@@ -22,7 +22,7 @@ public:
     void init(SDL_Window* sdlWindow);
     void processEvents(SDL_Event* ev);
 
-    bool gameIsRunning, keyPressed_ESC;
+    bool gameIsRunning, keyPressed_ESC, keyPressed_DELETE;
 
     bool mouseButton_LEFT, mouseButton_MIDDLE, mouseButton_RIGHT;
     bool mouseGoLeft, mouseGoRight, mouseGoUp, mouseGoDown;

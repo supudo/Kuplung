@@ -13,6 +13,7 @@ void Controls::init(SDL_Window* sdlWindow) {
 
     this->gameIsRunning = true;
     this->keyPressed_ESC = false;
+    this->keyPressed_DELETE = false;
 
     this->mouseButton_LEFT = false;
     this->mouseButton_MIDDLE = false;
@@ -71,6 +72,7 @@ void Controls::handleInput(SDL_Event* ev) {
 void Controls::handleKeyDown(SDL_Event* ev) {
     SDL_Keymod m = SDL_GetModState();
     this->keyPressed_ESC = false;
+    this->keyPressed_DELETE = false;
     this->keyPressed_LALT = m & KMOD_LALT;
     this->keyPressed_LSHIFT = m & KMOD_LSHIFT;
     this->keyPressed_LCTRL = m & KMOD_LCTRL;
@@ -80,8 +82,9 @@ void Controls::handleKeyDown(SDL_Event* ev) {
 
     if (ev->type == SDL_KEYDOWN) {
         switch (ev->key.keysym.sym) {
-            case SDLK_ESCAPE:
+            case SDLK_ESCAPE: {
                 this->keyPressed_ESC = true;
+                this->keyPressed_DELETE = false;
                 this->mouseButton_LEFT = false;
                 this->mouseButton_MIDDLE = false;
                 this->mouseButton_RIGHT = false;
@@ -90,6 +93,19 @@ void Controls::handleKeyDown(SDL_Event* ev) {
                 this->mouseGoUp = false;
                 this->mouseGoDown = false;
                 break;
+            }
+            case SDLK_DELETE: {
+                this->keyPressed_ESC = false;
+                this->keyPressed_DELETE = true;
+                this->mouseButton_LEFT = false;
+                this->mouseButton_MIDDLE = false;
+                this->mouseButton_RIGHT = false;
+                this->mouseGoLeft = false;
+                this->mouseGoRight = false;
+                this->mouseGoUp = false;
+                this->mouseGoDown = false;
+                break;
+            }
         }
     }
 }

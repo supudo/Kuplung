@@ -230,6 +230,9 @@ void Kuplung::onEvent(SDL_Event *ev) {
             this->rayPicker->rayLines = this->rayLines;
         }
 
+        if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
+            this->guiModelDelete(this->sceneSelectedModelObject);
+
         // FOV & zoom
         if (this->managerControls->keyPressed_LALT) {
             if (this->managerControls->mouseWheel.y < 0)
