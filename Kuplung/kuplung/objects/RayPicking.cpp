@@ -72,10 +72,8 @@ void RayPicking::pick7() {
                 std::string intersectionStr = "";
                 if (glm::intersectLineTriangle(vFrom, vTo * this->managerObjects->Setting_PlaneFar, tp1, tp2, tp3, intersectionPoint)) {
                     this->sceneSelectedModelObject = i;
-                    intersectionStr += Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str());
+                    this->doLog(Settings::Instance()->string_format("!!!! HIT !!!! [%i] %s -- %f, %f, %f", this->sceneSelectedModelObject, mmf->oFace.ModelTitle.c_str(), intersectionPoint.x, intersectionPoint.y, intersectionPoint.z));
                 }
-                intersectionStr += Settings::Instance()->string_format(" -- %f, %f, %f", intersectionPoint.x, intersectionPoint.y, intersectionPoint.z);
-                this->doLog(intersectionStr);
             }
         }
     }

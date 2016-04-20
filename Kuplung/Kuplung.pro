@@ -35,6 +35,7 @@ mac {
     INSTALLS += plist
 
     MediaFiles.files = resources/Kuplung_Settings.ini
+    MediaFiles.files += resources/Kuplung_RecentFiles.ini
     MediaFiles.files += resources/Kuplung.icns
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
@@ -168,6 +169,7 @@ HEADERS += \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
     kuplung/settings/ConfigUtils.hpp \
+    kuplung/settings/SettingsStructs.h \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \
     kuplung/ui/Objects.h \

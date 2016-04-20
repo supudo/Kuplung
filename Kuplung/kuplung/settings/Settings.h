@@ -12,17 +12,9 @@
 #include <string>
 #include <vector>
 #include "ConfigUtils.hpp"
+#include "SettingsStructs.h"
 
 #define BOOST_FILESYSTEM_NO_DEPRECATED
-
-struct Color {
-    float r, g, b, w;
-};
-
-struct FBEntity {
-    bool isFile;
-    std::string path, title, extension, modifiedDate, size;
-};
 
 class Settings {
 public:
@@ -34,6 +26,8 @@ public:
     bool isAllowedStyleExtension(std::string fileExtension);
     bool isAllowedImageExtension(std::string fileExtension);
     void setLogFunc(std::function<void(std::string)> doLog);
+    void saveRecentFiles(std::map <std::string, FBEntity> recentFiles);
+    std::map <std::string, FBEntity> loadRecentFiles();
 
     std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;

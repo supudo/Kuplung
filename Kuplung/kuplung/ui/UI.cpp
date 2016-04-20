@@ -269,10 +269,12 @@ void UI::renderEnd() {
 
 void UI::recentFilesAdd(std::string title, FBEntity file) {
     this->recentFiles[title] = file;
+    Settings::Instance()->saveRecentFiles(this->recentFiles);
 }
 
 void UI::recentFilesClear() {
     this->recentFiles.clear();
+    Settings::Instance()->saveRecentFiles(this->recentFiles);
 }
 
 bool UI::isMouseOnGUI() {

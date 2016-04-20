@@ -344,6 +344,8 @@ void Kuplung::initSceneGUI() {
     //this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);
     this->managerUI->showControlsGUI = true;
+    this->managerUI->showControlsModels = true;
+    this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
 
     // testbed
 //    //std::string testObj = "bump_cube0.obj";
@@ -354,7 +356,6 @@ void Kuplung::initSceneGUI() {
 //    fileTestbed.title = testObj;
 //    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
 //    this->guiProcessObjFile(fileTestbed);
-    this->managerUI->showControlsModels = true;
 }
 
 void Kuplung::addShape(ShapeType type) {

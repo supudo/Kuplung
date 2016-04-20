@@ -62,6 +62,7 @@ public:
     bool showControlsGUI;
     bool showControlsModels;
     float parsingPercentage;
+    std::map <std::string, FBEntity> recentFiles;
 
 private:
     SDL_Window *sdlWindow;
@@ -103,7 +104,6 @@ private:
     DialogControlsGUI *controlsGUI;
     DialogControlsModels *controlsModels;
 
-    std::map <std::string, FBEntity> recentFiles;
     bool needsFontChange;
 
     bool showDialogStyle;

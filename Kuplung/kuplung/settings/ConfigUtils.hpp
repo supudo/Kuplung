@@ -12,6 +12,9 @@
 #include <map>
 #include <regex>
 #include <string>
+#include <vector>
+#include <map>
+#include "SettingsStructs.h"
 
 class ConfigUtils {
 public:
@@ -29,8 +32,11 @@ public:
     void writeFloat(std::string configKey, float configValue);
     void writeString(std::string configKey, std::string configValue);
 
+    void saveRecentFiles(std::map <std::string, FBEntity> recentFiles);
+    std::map <std::string, FBEntity> loadRecentFiles();
+
 private:
-    std::string configFile;
+    std::string configFile, recentFilesFile;
     std::map<std::string, std::string> configData;
 
     std::regex regex_comment;

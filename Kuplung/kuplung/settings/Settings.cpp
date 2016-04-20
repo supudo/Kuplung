@@ -147,3 +147,11 @@ bool Settings::isAllowedImageExtension(std::string fileExtension) {
 void Settings::setLogFunc(std::function<void(std::string)> doLog) {
     this->funcDoLog = doLog;
 }
+
+void Settings::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) {
+    this->cfgUtils->saveRecentFiles(recentFiles);
+}
+
+std::map <std::string, FBEntity> Settings::loadRecentFiles() {
+    return this->cfgUtils->loadRecentFiles();
+}
