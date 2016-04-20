@@ -119,30 +119,29 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
-    GLfloat min_x, max_x, min_y, max_y, min_z, max_z;
-    min_x = max_x = this->oFace.vectors_vertices[0].x;
-    min_y = max_y = this->oFace.vectors_vertices[0].y;
-    min_z = max_z = this->oFace.vectors_vertices[0].z;
+    this->min_x = this->max_x = this->oFace.vectors_vertices[0].x;
+    this->min_y = this->max_y = this->oFace.vectors_vertices[0].y;
+    this->min_z = this->max_z = this->oFace.vectors_vertices[0].z;
     for (unsigned int i = 0; i < this->oFace.vectors_vertices.size(); i++) {
-        if (this->oFace.vectors_vertices[i].x < min_x) min_x = this->oFace.vectors_vertices[i].x;
-        if (this->oFace.vectors_vertices[i].x > max_x) max_x = this->oFace.vectors_vertices[i].x;
-        if (this->oFace.vectors_vertices[i].y < min_y) min_y = this->oFace.vectors_vertices[i].y;
-        if (this->oFace.vectors_vertices[i].y > max_y) max_y = this->oFace.vectors_vertices[i].y;
-        if (this->oFace.vectors_vertices[i].z < min_z) min_z = this->oFace.vectors_vertices[i].z;
-        if (this->oFace.vectors_vertices[i].z > max_z) max_z = this->oFace.vectors_vertices[i].z;
+        if (this->oFace.vectors_vertices[i].x < this->min_x) this->min_x = this->oFace.vectors_vertices[i].x;
+        if (this->oFace.vectors_vertices[i].x > this->max_x) this->max_x = this->oFace.vectors_vertices[i].x;
+        if (this->oFace.vectors_vertices[i].y < this->min_y) this->min_y = this->oFace.vectors_vertices[i].y;
+        if (this->oFace.vectors_vertices[i].y > this->max_y) this->max_y = this->oFace.vectors_vertices[i].y;
+        if (this->oFace.vectors_vertices[i].z < this->min_z) this->min_z = this->oFace.vectors_vertices[i].z;
+        if (this->oFace.vectors_vertices[i].z > this->max_z) this->max_z = this->oFace.vectors_vertices[i].z;
     }
 
     float padding = 0.01f;
-    min_x = (min_x > 0) ? min_x + padding : min_x - padding;
-    max_x = (max_x > 0) ? max_x + padding : max_x - padding;
-    min_y = (min_y > 0) ? min_y + padding : min_y - padding;
-    max_y = (max_y > 0) ? max_y + padding : max_y - padding;
-    min_z = (min_z > 0) ? min_z + padding : min_z - padding;
-    max_z = (max_z > 0) ? max_z + padding : max_z - padding;
+    this->min_x = (this->min_x > 0) ? this->min_x + padding : this->min_x - padding;
+    this->max_x = (this->max_x > 0) ? this->max_x + padding : this->max_x - padding;
+    this->min_y = (this->min_y > 0) ? this->min_y + padding : this->min_y - padding;
+    this->max_y = (this->max_y > 0) ? this->max_y + padding : this->max_y - padding;
+    this->min_z = (this->min_z > 0) ? this->min_z + padding : this->min_z - padding;
+    this->max_z = (this->max_z > 0) ? this->max_z + padding : this->max_z - padding;
 
-    glm::vec3 size = glm::vec3(max_x - min_x, max_y - min_y, max_z - min_z);
-    glm::vec3 center = glm::vec3((min_x + max_x) / 2, (min_y + max_y) / 2, (min_z + max_z) / 2);
-    this->matrixTransform = glm::scale(glm::mat4(1), size) * glm::translate(glm::mat4(1), center);
+    this->size = glm::vec3(this->max_x - this->min_x, this->max_y - this->min_y, this->max_z - this->min_z);
+    this->center = glm::vec3((this->min_x + this->max_x) / 2, (this->min_y + this->max_y) / 2, (this->min_z + this->max_z) / 2);
+    this->matrixTransform = glm::scale(glm::mat4(1), this->size) * glm::translate(glm::mat4(1), this->center);
 
     glBindVertexArray(0);
 }

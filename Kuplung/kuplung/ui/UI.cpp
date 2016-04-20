@@ -191,7 +191,15 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::EndMenu();
         }
 
-        ImGui::Text("  --> %.1f FPS | %d vertices, %d indices (%d triangles)", ImGui::GetIO().Framerate, ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
+        //ImGui::Text("  --> %.1f FPS | %d vertices, %d indices (%d triangles)", ImGui::GetIO().Framerate, ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
+        ImGui::Text("  --> %.1f FPS | %d objs, %d verts, %d indices (%d tris, %d faces)",
+                    ImGui::GetIO().Framerate,
+                    Settings::Instance()->sceneCountObjects,
+                    Settings::Instance()->sceneCountVertices,
+                    Settings::Instance()->sceneCountIndices,
+                    Settings::Instance()->sceneCountTriangles,
+                    Settings::Instance()->sceneCountFaces
+                    );
 
         ImGui::EndMainMenuBar();
     }

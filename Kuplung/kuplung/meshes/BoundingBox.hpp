@@ -30,6 +30,9 @@ public:
     glm::mat4 matrixModel;
     glm::mat4 matrixTransform;
 
+    GLfloat min_x, max_x, min_y, max_y, min_z, max_z;
+    glm::vec3 size, center;
+
 private:
     GLUtils *glUtils;
 

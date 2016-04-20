@@ -283,6 +283,10 @@ void Kuplung::onEvent(SDL_Event *ev) {
 void Kuplung::renderScene() {
     this->managerObjects->render();
 
+    int cVertices = 0;
+    int cIndices = 0;
+    int cTriangles = 0;
+    int cFaces = 0;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace* mmf = this->meshModelFaces[i];
 
@@ -323,7 +327,17 @@ void Kuplung::renderScene() {
                     this->managerObjects->camera->cameraPosition,
                     this->managerObjects->grid,
                     this->managerObjects->Setting_UIAmbientLight);
+
+        cVertices += (int)mmf->oFace.vectors_vertices.size();
+        cIndices += mmf->oFace.indicesCount;
+        cTriangles += cVertices / 3;
+        cFaces += cTriangles / 2;
     }
+    Settings::Instance()->sceneCountObjects = (int)this->meshModelFaces.size();
+    Settings::Instance()->sceneCountVertices = cVertices;
+    Settings::Instance()->sceneCountIndices = cIndices;
+    Settings::Instance()->sceneCountTriangles = cTriangles;
+    Settings::Instance()->sceneCountFaces = cFaces;
 
     for (size_t i=0; i<this->rayLines.size(); i++) {
         this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);

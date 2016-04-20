@@ -38,6 +38,7 @@ public:
     int frameFileBrowser_Width, frameFileBrowser_Height;
     int UIFontFileIndex, ModelFileParser;
     float UIFontSize;
+    int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
 
 private:
     Settings(){};

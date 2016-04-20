@@ -59,6 +59,12 @@ void Settings::initSettings() {
 
     m_pInstance->UIFontFileIndex = 0;
 
+    m_pInstance->sceneCountObjects = 0;
+    m_pInstance->sceneCountVertices = 0;
+    m_pInstance->sceneCountIndices = 0;
+    m_pInstance->sceneCountTriangles = 0;
+    m_pInstance->sceneCountFaces = 0;
+
 #ifdef _WIN32
     m_pInstance->newLineDelimiter = "\r\n";
 #elif defined macintosh // OS 9
