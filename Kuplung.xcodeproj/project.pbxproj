@@ -21,6 +21,7 @@
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A05DE401CB521C600EA0B4D /* AssimpParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A05DE3E1CB521C600EA0B4D /* AssimpParser.cpp */; };
 		8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */; };
+		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
@@ -250,6 +251,7 @@
 			files = (
 				8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */,
 				8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */,
+				8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -317,6 +319,8 @@
 		8A05DE3E1CB521C600EA0B4D /* AssimpParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssimpParser.cpp; path = "assimp-parser/AssimpParser.cpp"; sourceTree = "<group>"; };
 		8A05DE3F1CB521C600EA0B4D /* AssimpParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AssimpParser.hpp; path = "assimp-parser/AssimpParser.hpp"; sourceTree = "<group>"; };
 		8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.2.0.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.2/lib/libassimp.3.2.0.dylib; sourceTree = "<group>"; };
+		8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsStructs.h; sourceTree = "<group>"; };
+		8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8A175AD61CA93EB900A4E46B /* MELink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MELink.cpp; path = materialeditor/MELink.cpp; sourceTree = "<group>"; };
 		8A175AD71CA93EB900A4E46B /* MELink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MELink.hpp; path = materialeditor/MELink.hpp; sourceTree = "<group>"; };
 		8A1AFB211C71FC3F004888D8 /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsFontAwesome.h; sourceTree = "<group>"; };
@@ -578,6 +582,7 @@
 				8A6E705A1C6CACAC0085CAE5 /* FontsList.hpp */,
 				8A6E705B1C6CACAC0085CAE5 /* Settings.cpp */,
 				8A6E705C1C6CACAC0085CAE5 /* Settings.h */,
+				8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */,
 			);
 			path = settings;
 			sourceTree = "<group>";
@@ -814,6 +819,7 @@
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
+				8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
 				8AB917721CAEA7B9002988C2 /* shapes */,
