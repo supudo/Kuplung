@@ -93,6 +93,7 @@ objScene objParser::parse(FBEntity file) {
         this->objFileLinesCount = this->getLineCount();
         int linesProcessedCounter = 0;
 
+        std::vector<std::string> rawFaces;
         int modelID = 1, faceID = 1;
         while ((pos = fileContents.find(Settings::Instance()->newLineDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
