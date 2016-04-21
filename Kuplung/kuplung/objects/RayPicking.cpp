@@ -64,9 +64,9 @@ void RayPicking::pick7() {
                 glm::vec4 tp02 = mmf->matrixModel * glm::vec4(v2, 1.0);
                 glm::vec4 tp03 = mmf->matrixModel * glm::vec4(v3, 1.0);
 
-                glm::vec3 tp1 = this->fixSignVector(glm::vec3(tp01.x, tp01.y, -tp01.z));
-                glm::vec3 tp2 = this->fixSignVector(glm::vec3(tp02.x, tp02.y, -tp02.z));
-                glm::vec3 tp3 = this->fixSignVector(glm::vec3(tp03.x, tp03.y, -tp03.z));
+                glm::vec3 tp1 = this->fixSignVector(glm::vec3(tp01.x, tp01.y, tp01.z));
+                glm::vec3 tp2 = this->fixSignVector(glm::vec3(tp02.x, tp02.y, tp02.z));
+                glm::vec3 tp3 = this->fixSignVector(glm::vec3(tp03.x, tp03.y, tp03.z));
 
                 glm::vec3 intersectionPoint;
                 std::string intersectionStr = "";

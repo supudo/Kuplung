@@ -742,8 +742,6 @@ void ModelFace::renderModel() {
         glm::mat4 matrixWorld = this->matrixModel;
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("obj center - %f, %f, %f\n", this->positionX->point, this->positionY->point, this->positionZ->point));
-
         // blending
         if (this->oFace.faceMaterial.transparency < 1.0 || this->Setting_Alpha < 1.0) {
             glDisable(GL_DEPTH_TEST);

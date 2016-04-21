@@ -34,7 +34,7 @@ void Camera::initProperties() {
     this->eyeSettings->View_Eye = glm::vec3(0.0, 0.0, 3.0);
     this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
     //this->eyeSettings->View_Up = glm::vec3(0.0, 1.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, FLT_EPSILON, 1.0);
+    this->eyeSettings->View_Up = glm::vec3(0.0, FLT_EPSILON, 1.0); // TODO: doesn't work with 0.0, can't figure why
 
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
