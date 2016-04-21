@@ -171,8 +171,8 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                     verticesData.push_back(p);
                     if (p.x == 0) {
                         this->dataColors.push_back(0.0f);
-                        this->dataColors.push_back(0.0f);
                         this->dataColors.push_back(1.0f);
+                        this->dataColors.push_back(0.0f);
                     }
                     else {
                         this->dataColors.push_back(0.7f);

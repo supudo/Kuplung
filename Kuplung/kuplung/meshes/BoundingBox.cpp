@@ -142,6 +142,7 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     this->size = glm::vec3(this->max_x - this->min_x, this->max_y - this->min_y, this->max_z - this->min_z);
     this->center = glm::vec3((this->min_x + this->max_x) / 2, (this->min_y + this->max_y) / 2, (this->min_z + this->max_z) / 2);
     this->matrixTransform = glm::scale(glm::mat4(1), this->size) * glm::translate(glm::mat4(1), this->center);
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("center - %f, %f, %f\n", this->center.x, this->center.y, this->center.z));
 
     glBindVertexArray(0);
 }

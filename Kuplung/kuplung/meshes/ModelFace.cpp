@@ -611,9 +611,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->oFace);
 
-    this->positionX->point = this->boundingBox->center.x;
-    this->positionY->point = this->boundingBox->center.y;
-    this->positionZ->point = this->boundingBox->center.z;
+//    this->positionX->point = this->boundingBox->center.x;
+//    this->positionY->point = this->boundingBox->center.y;
+//    this->positionZ->point = this->boundingBox->center.z;
 }
 
 void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject) {
