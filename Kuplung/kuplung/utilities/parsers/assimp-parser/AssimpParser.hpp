@@ -28,6 +28,7 @@ public:
 private:
     std::function<void(float)> funcProgress;
 
+    FBEntity file;
     objScene scene;
     Assimp::Importer parser;
 

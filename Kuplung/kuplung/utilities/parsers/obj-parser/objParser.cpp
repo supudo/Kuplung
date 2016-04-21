@@ -10,6 +10,8 @@
 #include <fstream>
 #include <numeric>
 #include <sstream>
+#include <boost/filesystem.hpp>
+#include <boost/algorithm/string.hpp>
 
 #pragma mark - Destructor
 
@@ -370,6 +372,16 @@ objMaterialImage objParser::parseTextureImage(std::string textureLine) {
     }
     else
         materialImage.image = textureLine;
+
+    std::string folderPath = this->file.path;
+    boost::replace_all(folderPath, this->file.title, "");
+#ifdef _WIN32
+    if (!boost::filesystem::exists(materialImage.image))
+        materialImage.image = folderPath + "/" + materialImage.image;
+#else
+    if (!boost::filesystem::exists(materialImage.image))
+        materialImage.image = folderPath + "/" + materialImage.image;
+#endif
 
     std::regex pathSeparator("/");
     std::vector<std::string> fileElements = this->splitString(materialImage.image, pathSeparator);

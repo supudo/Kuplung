@@ -7,6 +7,8 @@
 //
 
 #include "AssimpParser.hpp"
+#include <boost/algorithm/string.hpp>
+#include <boost/filesystem.hpp>
 
 AssimpParser::~AssimpParser() {
     this->destroy();
@@ -20,6 +22,7 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
 }
 
 objScene AssimpParser::parse(FBEntity file) {
+    this->file = file;
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         Settings::Instance()->funcDoLog("[Assimp] Parse error : " + std::string(this->parser.GetErrorString()));
@@ -260,6 +263,17 @@ std::vector<objMaterialImage> AssimpParser::loadMaterialTextures(aiMaterial* mat
             objMaterialImage texture;
             texture.filename = std::string(str.C_Str());
             texture.image = std::string(str.C_Str());
+
+            std::string folderPath = this->file.path;
+            boost::replace_all(folderPath, this->file.title, "");
+        #ifdef _WIN32
+            if (!boost::filesystem::exists(texture.image))
+                texture.image = folderPath + "/" + texture.image;
+        #else
+            if (!boost::filesystem::exists(texture.image))
+                texture.image = folderPath + "/" + texture.image;
+        #endif
+
             texture.height = 0;
             texture.width = 0;
             texture.useTexture = true;
