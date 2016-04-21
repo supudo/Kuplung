@@ -25,9 +25,6 @@ public:
     void render(glm::mat4 matrixMVP, glm::vec4 outlineColor);
     objModelFace oFace;
 
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
-    glm::mat4 matrixModel;
     glm::mat4 matrixTransform;
 
     GLfloat min_x, max_x, min_y, max_y, min_z, max_z;

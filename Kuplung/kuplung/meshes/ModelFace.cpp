@@ -715,7 +715,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     glBindVertexArray(0);
 
     if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
-        glm::mat4 matrixBB = glm::mat4(1.0);
+        glm::mat4 matrixBB = glm::mat4(1.0f);
         matrixBB *= this->matrixProjection;
         matrixBB *= this->matrixCamera;
         matrixBB *= this->matrixModel;

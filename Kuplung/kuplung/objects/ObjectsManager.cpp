@@ -78,7 +78,7 @@ void ObjectsManager::render() {
 void ObjectsManager::resetSettings() {
     this->Setting_FOV = 45.0;
     this->Setting_Alpha = 1;
-    this->Setting_OutlineThickness = 1.01;
+    this->Setting_OutlineThickness = 0.0f;
     this->Setting_RatioWidth = 4.0f;
     this->Setting_RatioHeight = 3.0f;
     this->Setting_PlaneClose = 0.1f;
