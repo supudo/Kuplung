@@ -174,7 +174,6 @@ void ModelFace::init() {
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
-    this->Setting_ShowBoundingBox = true;
 
     // light
     this->Setting_LightStrengthAmbient = 0.5;
@@ -611,9 +610,9 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->oFace);
 
-//    this->positionX->point = this->boundingBox->center.x;
-//    this->positionY->point = this->boundingBox->center.y;
-//    this->positionZ->point = this->boundingBox->center.z;
+    this->positionX->point = this->boundingBox->center.x;
+    this->positionY->point = this->boundingBox->center.y;
+    this->positionZ->point = this->boundingBox->center.z;
 }
 
 void ModelFace::loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject) {
@@ -715,7 +714,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     glUseProgram(0);
     glBindVertexArray(0);
 
-    if (this->Setting_ShowBoundingBox && this->so_selectedYn) {
+    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
         glm::mat4 matrixBB = glm::mat4(1.0);
         matrixBB *= this->matrixProjection;
         matrixBB *= this->matrixCamera;

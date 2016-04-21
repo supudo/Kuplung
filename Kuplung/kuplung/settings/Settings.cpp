@@ -48,6 +48,10 @@ void Settings::initSettings() {
     m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
     m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
 
+    m_pInstance->ShowBoundingBox = m_pInstance->cfgUtils->readBool("ShowBoundingBox");
+    m_pInstance->BoundingBoxPadding = m_pInstance->cfgUtils->readFloat("BoundingBoxPadding");
+    m_pInstance->BoundingBoxRefresh = false;
+
     m_pInstance->frameLog_Width = m_pInstance->cfgUtils->readInt("frameLog_Width");
     m_pInstance->frameLog_Height = m_pInstance->cfgUtils->readInt("frameLog_Height");
 
@@ -96,13 +100,15 @@ void Settings::saveSettings() {
     this->cfgUtils->writeString("currentFolder", this->currentFolder);
     this->cfgUtils->writeString("UIFontFile", this->UIFontFile);
 
-
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
     this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
 
     this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);
     this->cfgUtils->writeBool("logFileBrowser", this->logFileBrowser);
+
+    this->cfgUtils->writeBool("ShowBoundingBox", this->ShowBoundingBox);
+    this->cfgUtils->writeFloat("BoundingBoxPadding", this->BoundingBoxPadding);
 
     this->cfgUtils->writeInt("frameLog_Width", this->frameLog_Width);
     this->cfgUtils->writeInt("frameLog_Height", this->frameLog_Height);

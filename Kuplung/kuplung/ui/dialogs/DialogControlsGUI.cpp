@@ -181,6 +181,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             this->helperUI->addControlColor4("Outline Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
             this->helperUI->addControlsSlider("Outline Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
+            ImGui::Separator();
+
+            if (ImGui::Checkbox("Show Bounding Box", &Settings::Instance()->ShowBoundingBox))
+                Settings::Instance()->saveSettings();
+            if (this->helperUI->addControlsSlider("Bounding Box Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
+                Settings::Instance()->BoundingBoxRefresh = true;
+                Settings::Instance()->saveSettings();
+            }
             break;
         }
         case 1: {

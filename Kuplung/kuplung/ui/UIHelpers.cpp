@@ -21,7 +21,7 @@ void UIHelpers::addControlsXYZ(std::string property, bool showAnimate, bool doMi
     this->addControlsSlider(property + " Z", 3, step, min, limit, showAnimate, animatedFlag, animatedValue, doMinus, isFrame);
 }
 
-void UIHelpers::addControlsSlider(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsSlider(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
@@ -33,17 +33,17 @@ void UIHelpers::addControlsSlider(std::string title, int idx, float step, float 
         ImGui::SameLine();
     }
     std::string s_id = "##10" + std::to_string(idx);
-    ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
+    return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-void UIHelpers::addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue) {
+bool UIHelpers::addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
-    ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
+    return ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-void UIHelpers::addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
@@ -53,7 +53,7 @@ void UIHelpers::addControlsSliderSameLine(std::string title, int idx, float step
         ImGui::SameLine();
     }
     std::string s_id = title + "##10" + std::to_string(idx);
-    ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
+    return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
 void UIHelpers::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {

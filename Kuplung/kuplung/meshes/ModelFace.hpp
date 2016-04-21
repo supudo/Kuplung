@@ -79,7 +79,7 @@ public:
     std::vector<GLuint> dataIndices;
     BoundingBox *boundingBox;
 
-    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace, Setting_ShowBoundingBox;
+    bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
     int Setting_TessellationSubdivision;
     ObjectCoordinate *positionX, *positionY, *positionZ;

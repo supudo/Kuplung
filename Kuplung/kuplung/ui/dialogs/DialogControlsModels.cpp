@@ -384,7 +384,6 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                 // cel shading
                 ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[this->selectedObject]->Setting_CelShading);
                 ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
-                ImGui::Checkbox("Bounding Box", &(*meshModelFaces)[this->selectedObject]->Setting_ShowBoundingBox);
                 // alpha
                 ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
                 ImGui::SliderFloat("", &(*meshModelFaces)[this->selectedObject]->Setting_Alpha, 0.0f, 1.0f);

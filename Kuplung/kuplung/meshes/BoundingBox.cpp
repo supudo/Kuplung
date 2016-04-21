@@ -131,7 +131,7 @@ void BoundingBox::initBuffers(objModelFace oFace) {
         if (this->oFace.vectors_vertices[i].z > this->max_z) this->max_z = this->oFace.vectors_vertices[i].z;
     }
 
-    float padding = 0.01f;
+    float padding = Settings::Instance()->BoundingBoxPadding;
     this->min_x = (this->min_x > 0) ? this->min_x + padding : this->min_x - padding;
     this->max_x = (this->max_x > 0) ? this->max_x + padding : this->max_x - padding;
     this->min_y = (this->min_y > 0) ? this->min_y + padding : this->min_y - padding;
@@ -142,14 +142,17 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     this->size = glm::vec3(this->max_x - this->min_x, this->max_y - this->min_y, this->max_z - this->min_z);
     this->center = glm::vec3((this->min_x + this->max_x) / 2, (this->min_y + this->max_y) / 2, (this->min_z + this->max_z) / 2);
     this->matrixTransform = glm::scale(glm::mat4(1), this->size) * glm::translate(glm::mat4(1), this->center);
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("BB center - %f, %f, %f\n", this->center.x, this->center.y, this->center.z));
 
     glBindVertexArray(0);
+
+    Settings::Instance()->BoundingBoxRefresh = false;
 }
 
 #pragma mark - Render
 
 void BoundingBox::render(glm::mat4 matrixMVP, glm::vec4 outlineColor) {
+    if (Settings::Instance()->BoundingBoxRefresh)
+        this->initBuffers(this->oFace);
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

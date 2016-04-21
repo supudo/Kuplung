@@ -31,13 +31,13 @@ public:
 
     std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
-    bool wireframesMode, logDebugInfo, logFileBrowser;
+    bool wireframesMode, logDebugInfo, logFileBrowser, ShowBoundingBox, BoundingBoxRefresh;
     Color guiClearColor;
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
     int UIFontFileIndex, ModelFileParser;
-    float UIFontSize;
+    float UIFontSize, BoundingBoxPadding;
     int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
 
 private:
