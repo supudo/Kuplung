@@ -32,7 +32,8 @@ void ObjectsManager::destroy() {
     this->camera->destroy();
     this->cameraModel->destroy();
     this->grid->destroy();
-    this->axisHelpers->destroy();
+    this->axisHelpers_yMinus->destroy();
+    this->axisHelpers_yPlus->destroy();
     this->axisSystem->destroy();
     this->skybox->destroy();
     for (size_t i=0; i<this->lightSources.size(); i++) {
@@ -58,11 +59,16 @@ void ObjectsManager::render() {
         this->grid->gridSize = this->Setting_GridSize;
         this->grid->initBuffers(this->Setting_GridSize, 1);
         this->skybox->init(this->Setting_GridSize);
+        this->axisHelpers_yMinus->initBuffers();
+        this->axisHelpers_yPlus->initBuffers();
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
-    if (this->Setting_ShowAxisHelpers)
-        this->axisHelpers->render(this->matrixProjection, this->camera->matrixCamera, this->Setting_GridSize);
+    if (this->Setting_ShowAxisHelpers) {
+        int gridSize = this->Setting_GridSize;
+        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, - gridSize / 2, 0));
+        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, gridSize / 2, 0));
+    }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
     this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
@@ -163,11 +169,17 @@ void ObjectsManager::initAxisSystem() {
  *
  */
 void ObjectsManager::initAxisHelpers() {
-    this->axisHelpers = new AxisHelpers();
-    this->axisHelpers->init();
-    this->axisHelpers->setModel(this->systemModels["axis_y_plus"].models[0].faces[0]);
-    this->axisHelpers->initShaderProgram();
-    this->axisHelpers->initBuffers();
+    this->axisHelpers_yMinus = new AxisHelpers();
+    this->axisHelpers_yMinus->init();
+    this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"].models[0].faces[0]);
+    this->axisHelpers_yMinus->initShaderProgram();
+    this->axisHelpers_yMinus->initBuffers();
+
+    this->axisHelpers_yPlus = new AxisHelpers();
+    this->axisHelpers_yPlus->init();
+    this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"].models[0].faces[0]);
+    this->axisHelpers_yPlus->initShaderProgram();
+    this->axisHelpers_yPlus->initBuffers();
 }
 
 /*

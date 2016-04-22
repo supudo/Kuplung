@@ -102,7 +102,7 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, int gridSize) {
+void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, float rotation, glm::vec3 position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -110,8 +110,8 @@ void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, int gridS
         this->matrixCamera = mtxCamera;
 
         this->matrixModel = glm::mat4(1.0);
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, gridSize / 2, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(rotation), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::translate(this->matrixModel, position);
 
         // drawing options
         glCullFace(GL_FRONT);

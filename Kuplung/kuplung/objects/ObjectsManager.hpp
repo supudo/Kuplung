@@ -50,9 +50,10 @@ public:
     Camera* camera;
     CameraModel* cameraModel;
     WorldGrid* grid;
-    AxisHelpers *axisHelpers;
     MiniAxis* axisSystem;
     Skybox* skybox;
+    AxisHelpers *axisHelpers_yMinus;
+    AxisHelpers *axisHelpers_yPlus;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;
