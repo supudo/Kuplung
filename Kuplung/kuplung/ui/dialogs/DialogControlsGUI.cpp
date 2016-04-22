@@ -176,7 +176,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
             ImGui::SliderFloat("Far##107", &this->managerObjects->Setting_PlaneClose, 0.0f, 1.0f);
-            ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 100.0f);
+            ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
             ImGui::Separator();
 
             ImGui::Checkbox("Show Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
