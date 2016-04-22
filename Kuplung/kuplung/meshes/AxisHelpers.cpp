@@ -75,11 +75,6 @@ bool AxisHelpers::initShaderProgram() {
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
 
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDisable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     return success;
 }
 
@@ -102,7 +97,7 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, float rotation, glm::vec3 position) {
+void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -110,7 +105,7 @@ void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, float rot
         this->matrixCamera = mtxCamera;
 
         this->matrixModel = glm::mat4(1.0);
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(rotation), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, position);
 
         // drawing options
