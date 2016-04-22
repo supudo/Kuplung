@@ -63,11 +63,13 @@ void RayPicking::pick() {
     glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates;
     glm::vec3 vTo = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
 
-    RayLine *rl = new RayLine();
-    rl->init();
-    rl->initShaderProgram();
-    rl->initBuffers(vFrom, vTo * this->managerObjects->Setting_PlaneFar);
-    this->rayLines.push_back(rl);
+    if (Settings::Instance()->showPickRays) {
+        RayLine *rl = new RayLine();
+        rl->init();
+        rl->initShaderProgram();
+        rl->initBuffers(vFrom, vTo * this->managerObjects->Setting_PlaneFar);
+        this->rayLines.push_back(rl);
+    }
 
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];

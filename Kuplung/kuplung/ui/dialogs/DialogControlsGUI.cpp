@@ -180,6 +180,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Separator();
 
             ImGui::Checkbox("Show Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
+            ImGui::Checkbox("Show Pick Rays", &Settings::Instance()->showPickRays);
             ImGui::Separator();
 
             this->helperUI->addControlColor4("Outline Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
