@@ -131,10 +131,9 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 
     if (!this->actAsMirror) {
         this->actAsMirrorNeedsChange = true;
-        this->gridSize = gridSize;
+        this->gridSize = ((gridSize % 2 == 0) ? gridSize + 1 : gridSize);
 
         float gridMinus = this->gridSize / 2;
-        //GridMeshPoint2D verticesData[this->gridSize * 2][this->gridSize];
         std::vector<GridMeshPoint2D> verticesData;
         bool h;
 
