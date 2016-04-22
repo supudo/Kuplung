@@ -74,11 +74,11 @@ void ObjectsManager::render() {
         float y = this->camera->positionY->point;
         float z = this->camera->positionZ->point;
         this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- gridSize / 2 - 1, 0, 0), x, y, z);
-        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(gridSize / 2, 0, 0), x, y, z);
+        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(gridSize / 2 - 1, 0, 0), x, y, z);
         this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - gridSize / 2 - 1, 0), x, y, z);
-        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, gridSize / 2, 0), x, y, z);
+        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, gridSize / 2 - 1, 0), x, y, z);
         this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - gridSize / 2 - 1), x, y, z);
-        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, gridSize / 2), x, y, z);
+        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, gridSize / 2 - 1), x, y, z);
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
