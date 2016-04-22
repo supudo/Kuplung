@@ -69,16 +69,13 @@ void ObjectsManager::render() {
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
     if (this->Setting_ShowAxisHelpers) {
-        int gridSize = this->Setting_GridSize;
-        float x = this->camera->positionX->point;
-        float y = this->camera->positionY->point;
-        float z = this->camera->positionZ->point;
-        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- gridSize / 2 - 1, 0, 0), x, y, z);
-        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(gridSize / 2 - 1, 0, 0), x, y, z);
-        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - gridSize / 2 - 1, 0), x, y, z);
-        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, gridSize / 2 - 1, 0), x, y, z);
-        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - gridSize / 2 - 1), x, y, z);
-        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, gridSize / 2 - 1), x, y, z);
+        int ahPosition = this->Setting_GridSize / 2;
+        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- ahPosition - 1, 0, 0));
+        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(ahPosition - 1, 0, 0));
+        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - ahPosition - 1, 0));
+        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, ahPosition - 1, 0));
+        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - ahPosition - 1));
+        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition - 1));
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 

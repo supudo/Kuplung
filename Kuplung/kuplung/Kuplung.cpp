@@ -530,39 +530,12 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
     if (fileName.compare(0, 9, "kuplung") == 0) {
     }
     else if (fileName.compare(0, 5, "light") == 0) {
-//        FBEntity file;
-//        file.isFile = true;
-//        file.extension = ".obj";
-//        file.title = "light";
-//        file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-//        objScene sceneGUILight = this->parser->parse(file);
-//        this->meshLight->destroy();
-//        this->meshLight->init();
-//        this->meshLight->setModel(sceneGUILight.models[0].faces[0]);
-//        this->meshLight->initShaderProgram();
-//        this->meshLight->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
     else if (fileName.compare(0, 4, "grid") == 0) {
-//        this->sceneGridHorizontal->destroy();
-//        this->sceneGridHorizontal->init();
-//        this->sceneGridHorizontal->initShaderProgram();
-//        this->sceneGridHorizontal->initBuffers(20, true, 1);
-
-//        this->sceneGridVertical->destroy();
-//        this->sceneGridVertical->init();
-//        this->sceneGridVertical->initShaderProgram();
-//        this->sceneGridVertical->initBuffers(20, false, 1);
     }
     else if (fileName.compare(0, 4, "axis") == 0) {
-//        this->sceneCoordinateSystem->destroy();
-//        this->sceneCoordinateSystem->init();
-//        this->sceneCoordinateSystem->initShaderProgram();
-//        this->sceneCoordinateSystem->initBuffers();
     }
     else if (fileName.compare(0, 4, "dots") == 0) {
-//        this->lightDot->destroy();
-//        this->lightDot->init();
-//        this->lightDot->initShaderProgram();
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
         this->terrain->destroy();
