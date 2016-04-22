@@ -32,6 +32,7 @@ void ObjectsManager::destroy() {
     this->camera->destroy();
     this->cameraModel->destroy();
     this->grid->destroy();
+    this->axisHelpers->destroy();
     this->axisSystem->destroy();
     this->skybox->destroy();
     for (size_t i=0; i<this->lightSources.size(); i++) {
@@ -60,6 +61,8 @@ void ObjectsManager::render() {
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
+    if (this->Setting_ShowAxisHelpers)
+        this->axisHelpers->render(this->matrixProjection, this->camera->matrixCamera, this->Setting_GridSize);
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
     this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
@@ -88,6 +91,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_UIAmbientLight = glm::vec3(1.0f);
     this->Setting_FixedGridWorld = true;
     this->Setting_OutlineColorPickerOpen = false;
+    this->Setting_ShowAxisHelpers = true;
 }
 
 void ObjectsManager::resetPropertiesSystem() {
@@ -147,10 +151,23 @@ void ObjectsManager::initCameraModel() {
  *
  */
 void ObjectsManager::initAxisSystem() {
-    this->axisSystem = new CoordinateSystem();
+    this->axisSystem = new MiniAxis();
     this->axisSystem->init();
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
+}
+
+/*
+ *
+ * Axis Helpers
+ *
+ */
+void ObjectsManager::initAxisHelpers() {
+    this->axisHelpers = new AxisHelpers();
+    this->axisHelpers->init();
+    this->axisHelpers->setModel(this->systemModels["axis_y_plus"].models[0].faces[0]);
+    this->axisHelpers->initShaderProgram();
+    this->axisHelpers->initBuffers();
 }
 
 /*
@@ -206,10 +223,10 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
  *
  */
 void ObjectsManager::loadSystemModels() {
-    // lamp
     FBEntity file;
     file.isFile = true;
     file.extension = ".obj";
+
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
     this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
@@ -229,4 +246,12 @@ void ObjectsManager::loadSystemModels() {
     file.title = "camera";
     file.path = Settings::Instance()->appFolder() + "/gui/camera.obj";
     this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
+    file.title = "y_plus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_plus.obj";
+    this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
+    file.title = "y_minus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_minus.obj";
+    this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
 }

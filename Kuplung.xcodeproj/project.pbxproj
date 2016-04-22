@@ -13,7 +13,6 @@
 		8A0027991C9ABE2000BBFFC6 /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
 		8A00279A1C9ABE2300BBFFC6 /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
-		8A0364891C6B71EC001489C8 /* CoordinateSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */; };
 		8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364811C6B71EC001489C8 /* Light.cpp */; };
 		8A03648C1C6B71EC001489C8 /* ModelFace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364831C6B71EC001489C8 /* ModelFace.cpp */; };
 		8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364851C6B71EC001489C8 /* Terrain.cpp */; };
@@ -136,6 +135,14 @@
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
 		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
+		8ABFC1EC1CC92AF100FBCF08 /* y_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */; };
+		8ABFC1ED1CC92AF100FBCF08 /* y_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */; };
+		8ABFC1EE1CC92AF100FBCF08 /* y_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */; };
+		8ABFC1EF1CC92AF100FBCF08 /* y_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */; };
+		8ABFC1F21CC92B4500FBCF08 /* MiniAxis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABFC1F01CC92B4500FBCF08 /* MiniAxis.cpp */; };
+		8ABFC1F51CC92BB300FBCF08 /* AxisHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABFC1F31CC92BB300FBCF08 /* AxisHelpers.cpp */; };
+		8ABFC1F81CC92C1600FBCF08 /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
+		8ABFC1F91CC92C1600FBCF08 /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
@@ -180,6 +187,19 @@
 				8AB917991CAEA7E9002988C2 /* tube.obj in CopyFiles */,
 				8AB9179A1CAEA7E9002988C2 /* uv_sphere.mtl in CopyFiles */,
 				8AB9179B1CAEA7E9002988C2 /* uv_sphere.obj in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8ABFC1EB1CC92AE200FBCF08 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = axis_helpers;
+			dstSubfolderSpec = 7;
+			files = (
+				8ABFC1EC1CC92AF100FBCF08 /* y_minus.mtl in CopyFiles */,
+				8ABFC1ED1CC92AF100FBCF08 /* y_minus.obj in CopyFiles */,
+				8ABFC1EE1CC92AF100FBCF08 /* y_plus.mtl in CopyFiles */,
+				8ABFC1EF1CC92AF100FBCF08 /* y_plus.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +259,8 @@
 				8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */,
 				8AECC07B1CB274810096AE7A /* skybox.frag in Copy Files */,
 				8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */,
+				8ABFC1F81CC92C1600FBCF08 /* axis_helpers.frag in Copy Files */,
+				8ABFC1F91CC92C1600FBCF08 /* axis_helpers.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,8 +327,6 @@
 		8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDefinitions.h; sourceTree = "<group>"; };
 		8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectsManager.cpp; sourceTree = "<group>"; };
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
-		8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CoordinateSystem.cpp; sourceTree = "<group>"; };
-		8A03647E1C6B71EC001489C8 /* CoordinateSystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CoordinateSystem.hpp; sourceTree = "<group>"; };
 		8A0364811C6B71EC001489C8 /* Light.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Light.cpp; sourceTree = "<group>"; };
 		8A0364821C6B71EC001489C8 /* Light.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Light.hpp; sourceTree = "<group>"; };
 		8A0364831C6B71EC001489C8 /* ModelFace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFace.cpp; sourceTree = "<group>"; };
@@ -490,6 +510,16 @@
 		8ABC5C401CA3DEC00024F816 /* MENode_Combine.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Combine.hpp; path = materialeditor/MENode_Combine.hpp; sourceTree = "<group>"; };
 		8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Texture.cpp; path = materialeditor/MENode_Texture.cpp; sourceTree = "<group>"; };
 		8ABC5C421CA3DEC00024F816 /* MENode_Texture.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Texture.hpp; path = materialeditor/MENode_Texture.hpp; sourceTree = "<group>"; };
+		8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = y_minus.mtl; path = axis_helpers/y_minus.mtl; sourceTree = "<group>"; };
+		8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = y_minus.obj; path = axis_helpers/y_minus.obj; sourceTree = "<group>"; };
+		8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = y_plus.mtl; path = axis_helpers/y_plus.mtl; sourceTree = "<group>"; };
+		8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = y_plus.obj; path = axis_helpers/y_plus.obj; sourceTree = "<group>"; };
+		8ABFC1F01CC92B4500FBCF08 /* MiniAxis.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MiniAxis.cpp; sourceTree = "<group>"; };
+		8ABFC1F11CC92B4500FBCF08 /* MiniAxis.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MiniAxis.hpp; sourceTree = "<group>"; };
+		8ABFC1F31CC92BB300FBCF08 /* AxisHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AxisHelpers.cpp; sourceTree = "<group>"; };
+		8ABFC1F41CC92BB300FBCF08 /* AxisHelpers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AxisHelpers.hpp; sourceTree = "<group>"; };
+		8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis_helpers.frag; sourceTree = "<group>"; };
+		8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis_helpers.vert; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -785,18 +815,20 @@
 		8AB6F0121C3A9BEE00665C40 /* meshes */ = {
 			isa = PBXGroup;
 			children = (
+				8ABFC1F31CC92BB300FBCF08 /* AxisHelpers.cpp */,
+				8ABFC1F41CC92BB300FBCF08 /* AxisHelpers.hpp */,
 				8A5128D51CC0CC8800BE0600 /* BoundingBox.cpp */,
 				8A5128D61CC0CC8800BE0600 /* BoundingBox.hpp */,
 				8A54F11A1C760A0F00B93D18 /* Camera.cpp */,
 				8A54F11B1C760A0F00B93D18 /* Camera.hpp */,
 				8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */,
 				8AB31F751CBF7DF500E6CE51 /* CameraModel.hpp */,
-				8A03647D1C6B71EC001489C8 /* CoordinateSystem.cpp */,
-				8A03647E1C6B71EC001489C8 /* CoordinateSystem.hpp */,
 				8A0364811C6B71EC001489C8 /* Light.cpp */,
 				8A0364821C6B71EC001489C8 /* Light.hpp */,
 				8A6E70531C6CAC960085CAE5 /* LightRay.cpp */,
 				8A6E70541C6CAC960085CAE5 /* LightRay.hpp */,
+				8ABFC1F01CC92B4500FBCF08 /* MiniAxis.cpp */,
+				8ABFC1F11CC92B4500FBCF08 /* MiniAxis.hpp */,
 				8A0364831C6B71EC001489C8 /* ModelFace.cpp */,
 				8A0364841C6B71EC001489C8 /* ModelFace.hpp */,
 				8A48C3261CBE8B780076F4F6 /* RayLine.cpp */,
@@ -814,12 +846,13 @@
 		8AB6F0971C3AA1F900665C40 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				8ABFC1E61CC92AD400FBCF08 /* axis_helpers */,
 				8AD236601C5A4F880001E934 /* fonts */,
 				8AB6F0981C3AA1F900665C40 /* gui */,
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
-				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */,
+				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
 				8AB917721CAEA7B9002988C2 /* shapes */,
@@ -849,6 +882,8 @@
 		8AB6F09F1C3AA1F900665C40 /* shaders */ = {
 			isa = PBXGroup;
 			children = (
+				8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */,
+				8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */,
 				8AA5EDE71C773DF8009F1F52 /* axis.frag */,
 				8AA5EDE81C773DF8009F1F52 /* axis.vert */,
 				8A5128D11CC0CC6600BE0600 /* bounding_box.frag */,
@@ -910,6 +945,17 @@
 				8AB917861CAEA7CC002988C2 /* uv_sphere.obj */,
 			);
 			name = shapes;
+			sourceTree = "<group>";
+		};
+		8ABFC1E61CC92AD400FBCF08 /* axis_helpers */ = {
+			isa = PBXGroup;
+			children = (
+				8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */,
+				8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */,
+				8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */,
+				8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */,
+			);
+			name = axis_helpers;
 			sourceTree = "<group>";
 		};
 		8AC828A71BF5FEE7009C74E0 = {
@@ -1018,6 +1064,7 @@
 				8AD236621C5A4F950001E934 /* CopyFiles */,
 				8AB917871CAEA7D6002988C2 /* CopyFiles */,
 				8AECC06F1CB273DA0096AE7A /* CopyFiles */,
+				8ABFC1EB1CC92AE200FBCF08 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1066,6 +1113,7 @@
 			files = (
 				8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */,
 				8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */,
+				8ABFC1F51CC92BB300FBCF08 /* AxisHelpers.cpp in Sources */,
 				8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */,
 				8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
@@ -1080,7 +1128,6 @@
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
 				8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */,
-				8A0364891C6B71EC001489C8 /* CoordinateSystem.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
@@ -1109,6 +1156,7 @@
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
+				8ABFC1F21CC92B4500FBCF08 /* MiniAxis.cpp in Sources */,
 				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
 				8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,

@@ -1,23 +1,23 @@
 //
-//  CoordinateSystem.cpp
+//  MiniAxis.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/14/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "CoordinateSystem.hpp"
+#include "MiniAxis.hpp"
 #include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
 #pragma mark - Destroy
 
-CoordinateSystem::~CoordinateSystem() {
+MiniAxis::~MiniAxis() {
     this->destroy();
 }
 
-void CoordinateSystem::destroy() {
+void MiniAxis::destroy() {
     delete this->rotateX;
     delete this->rotateY;
     delete this->rotateZ;
@@ -36,13 +36,13 @@ void CoordinateSystem::destroy() {
 
 #pragma mark - Initialization
 
-void CoordinateSystem::init() {
+void MiniAxis::init() {
     this->glUtils = new GLUtils();
 
     this->initProperties();
 }
 
-void CoordinateSystem::initProperties() {
+void MiniAxis::initProperties() {
     this->showAxis = true;
 
     this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -54,7 +54,7 @@ void CoordinateSystem::initProperties() {
 
 #pragma mark - Public
 
-bool CoordinateSystem::initShaderProgram() {
+bool MiniAxis::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/axis.vert";
@@ -92,7 +92,7 @@ bool CoordinateSystem::initShaderProgram() {
     return success;
 }
 
-void CoordinateSystem::initBuffers() {
+void MiniAxis::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -144,7 +144,7 @@ void CoordinateSystem::initBuffers() {
 
 #pragma mark - Render
 
-void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
+void MiniAxis::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
     if (this->glVAO > 0 && this->showAxis) {
         glUseProgram(this->shaderProgram);
 
@@ -186,7 +186,7 @@ void CoordinateSystem::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera
 
 #pragma mark - Utilities
 
-std::string CoordinateSystem::readFile(const char *filePath) {
+std::string MiniAxis::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {

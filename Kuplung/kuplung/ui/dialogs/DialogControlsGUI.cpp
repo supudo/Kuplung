@@ -179,6 +179,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 100.0f);
             ImGui::Separator();
 
+            ImGui::Checkbox("Show Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
+            ImGui::Separator();
+
             this->helperUI->addControlColor4("Outline Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
             this->helperUI->addControlsSlider("Outline Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
             ImGui::Separator();

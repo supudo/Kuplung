@@ -42,6 +42,7 @@ mac {
     MediaFiles.files += resources/shaders
     MediaFiles.files += resources/shapes
     MediaFiles.files += resources/skybox
+    MediaFiles.files += resources/axis_helpers
     MediaFiles.path = Contents/Resources
     QMAKE_BUNDLE_DATA += MediaFiles
 
@@ -97,10 +98,12 @@ OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
 OTHER_FILES += resources/shapes/*
 OTHER_FILES += resources/skybox/*
+OTHER_FILES += resources/axis_helpers/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
-    kuplung/meshes/CoordinateSystem.cpp \
+    kuplung/meshes/MiniAxis.cpp \
+    kuplung/meshes/AxisHelpers.cpp \
     kuplung/meshes/WorldGrid.cpp \
     kuplung/meshes/Light.cpp \
     kuplung/meshes/Camera.cpp \
@@ -154,7 +157,8 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
-    kuplung/meshes/CoordinateSystem.hpp \
+    kuplung/meshes/MiniAxis.hpp \
+    kuplung/meshes/AxisHelpers.hpp \
     kuplung/meshes/WorldGrid.hpp \
     kuplung/meshes/Light.hpp \
     kuplung/meshes/Camera.hpp \
@@ -223,6 +227,10 @@ HEADERS += \
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+    resources/axis_helpers/y_minus.obj \
+    resources/axis_helpers/y_minus.mtl \
+    resources/axis_helpers/y_plus.obj \
+    resources/axis_helpers/y_plus.mtl \
     resources/shapes/cone.mtl \
     resources/shapes/cone.obj \
     resources/shapes/cube.mtl \
@@ -247,6 +255,8 @@ DISTFILES += \
     resources/shapes/uv_sphere.obj \
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
+    resources/shaders/axis_helpers.vert \
+    resources/shaders/axis_helpers.frag \
     resources/shaders/camera.vert \
     resources/shaders/camera.frag \
     resources/shaders/light_ray.vert \

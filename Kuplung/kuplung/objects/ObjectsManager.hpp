@@ -18,7 +18,8 @@
 #include "kuplung/meshes/Camera.hpp"
 #include "kuplung/meshes/CameraModel.hpp"
 #include "kuplung/meshes/Light.hpp"
-#include "kuplung/meshes/CoordinateSystem.hpp"
+#include "kuplung/meshes/AxisHelpers.hpp"
+#include "kuplung/meshes/MiniAxis.hpp"
 #include "kuplung/meshes/Skybox.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
@@ -39,6 +40,7 @@ public:
     void initCameraModel();
     void initGrid();
     void initAxisSystem();
+    void initAxisHelpers();
     void initSkybox();
 
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
@@ -48,7 +50,8 @@ public:
     Camera* camera;
     CameraModel* cameraModel;
     WorldGrid* grid;
-    CoordinateSystem* axisSystem;
+    AxisHelpers *axisHelpers;
+    MiniAxis* axisSystem;
     Skybox* skybox;
 
     glm::mat4 matrixProjection;
@@ -60,7 +63,7 @@ public:
     int Setting_GridSize = 10, Setting_Skybox = 0;
     glm::vec4 Setting_OutlineColor;
     glm::vec3 Setting_UIAmbientLight;
-    bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false;
+    bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
 
 private:
     std::function<void(float)> funcProgress;
