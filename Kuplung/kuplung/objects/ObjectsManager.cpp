@@ -32,8 +32,12 @@ void ObjectsManager::destroy() {
     this->camera->destroy();
     this->cameraModel->destroy();
     this->grid->destroy();
+    this->axisHelpers_xMinus->destroy();
+    this->axisHelpers_xPlus->destroy();
     this->axisHelpers_yMinus->destroy();
     this->axisHelpers_yPlus->destroy();
+    this->axisHelpers_zMinus->destroy();
+    this->axisHelpers_zPlus->destroy();
     this->axisSystem->destroy();
     this->skybox->destroy();
     for (size_t i=0; i<this->lightSources.size(); i++) {

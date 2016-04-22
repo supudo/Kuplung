@@ -57,6 +57,7 @@ private:
     GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha, glAttributeColor;
 
     bool actAsMirrorNeedsChange;
+    int gridSizeVertex;
 
     std::string readFile(const char *filePath);
 };
