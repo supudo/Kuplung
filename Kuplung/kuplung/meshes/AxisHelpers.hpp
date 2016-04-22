@@ -24,7 +24,7 @@ public:
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position);
+    void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position, float x, float y, float z);
     objModelFace oFace;
 
     glm::mat4 matrixProjection;
