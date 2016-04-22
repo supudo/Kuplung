@@ -59,15 +59,23 @@ void ObjectsManager::render() {
         this->grid->gridSize = this->Setting_GridSize;
         this->grid->initBuffers(this->Setting_GridSize, 1);
         this->skybox->init(this->Setting_GridSize);
+        this->axisHelpers_xMinus->initBuffers();
+        this->axisHelpers_xPlus->initBuffers();
         this->axisHelpers_yMinus->initBuffers();
         this->axisHelpers_yPlus->initBuffers();
+        this->axisHelpers_zMinus->initBuffers();
+        this->axisHelpers_zPlus->initBuffers();
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera);
     if (this->Setting_ShowAxisHelpers) {
         int gridSize = this->Setting_GridSize;
+        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(- gridSize / 2, 0, 0));
+        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(gridSize / 2, 0, 0));
         this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, - gridSize / 2, 0));
         this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, gridSize / 2, 0));
+        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, 0, - gridSize / 2));
+        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, -90.0f, glm::vec3(0, 0, gridSize / 2));
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
@@ -169,6 +177,18 @@ void ObjectsManager::initAxisSystem() {
  *
  */
 void ObjectsManager::initAxisHelpers() {
+    this->axisHelpers_xMinus = new AxisHelpers();
+    this->axisHelpers_xMinus->init();
+    this->axisHelpers_xMinus->setModel(this->systemModels["axis_x_minus"].models[0].faces[0]);
+    this->axisHelpers_xMinus->initShaderProgram();
+    this->axisHelpers_xMinus->initBuffers();
+
+    this->axisHelpers_xPlus = new AxisHelpers();
+    this->axisHelpers_xPlus->init();
+    this->axisHelpers_xPlus->setModel(this->systemModels["axis_x_plus"].models[0].faces[0]);
+    this->axisHelpers_xPlus->initShaderProgram();
+    this->axisHelpers_xPlus->initBuffers();
+
     this->axisHelpers_yMinus = new AxisHelpers();
     this->axisHelpers_yMinus->init();
     this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"].models[0].faces[0]);
@@ -180,6 +200,18 @@ void ObjectsManager::initAxisHelpers() {
     this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"].models[0].faces[0]);
     this->axisHelpers_yPlus->initShaderProgram();
     this->axisHelpers_yPlus->initBuffers();
+
+    this->axisHelpers_zMinus = new AxisHelpers();
+    this->axisHelpers_zMinus->init();
+    this->axisHelpers_zMinus->setModel(this->systemModels["axis_z_minus"].models[0].faces[0]);
+    this->axisHelpers_zMinus->initShaderProgram();
+    this->axisHelpers_zMinus->initBuffers();
+
+    this->axisHelpers_zPlus = new AxisHelpers();
+    this->axisHelpers_zPlus->init();
+    this->axisHelpers_zPlus->setModel(this->systemModels["axis_z_plus"].models[0].faces[0]);
+    this->axisHelpers_zPlus->initShaderProgram();
+    this->axisHelpers_zPlus->initBuffers();
 }
 
 /*
@@ -259,6 +291,14 @@ void ObjectsManager::loadSystemModels() {
     file.path = Settings::Instance()->appFolder() + "/gui/camera.obj";
     this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
 
+    file.title = "x_plus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_plus.obj";
+    this->systemModels["axis_x_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
+    file.title = "x_minus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_minus.obj";
+    this->systemModels["axis_x_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
     file.title = "y_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_plus.obj";
     this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
@@ -266,4 +306,12 @@ void ObjectsManager::loadSystemModels() {
     file.title = "y_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_minus.obj";
     this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
+    file.title = "z_plus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_plus.obj";
+    this->systemModels["axis_z_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+
+    file.title = "z_minus";
+    file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_minus.obj";
+    this->systemModels["axis_z_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
 }

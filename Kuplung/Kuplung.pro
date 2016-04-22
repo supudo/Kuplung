@@ -227,10 +227,18 @@ HEADERS += \
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+    resources/axis_helpers/x_minus.obj \
+    resources/axis_helpers/x_minus.mtl \
+    resources/axis_helpers/x_plus.obj \
+    resources/axis_helpers/x_plus.mtl \
     resources/axis_helpers/y_minus.obj \
     resources/axis_helpers/y_minus.mtl \
     resources/axis_helpers/y_plus.obj \
     resources/axis_helpers/y_plus.mtl \
+    resources/axis_helpers/z_minus.obj \
+    resources/axis_helpers/z_minus.mtl \
+    resources/axis_helpers/z_plus.obj \
+    resources/axis_helpers/z_plus.mtl \
     resources/shapes/cone.mtl \
     resources/shapes/cone.obj \
     resources/shapes/cube.mtl \

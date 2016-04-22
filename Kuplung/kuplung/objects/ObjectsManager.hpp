@@ -52,8 +52,7 @@ public:
     WorldGrid* grid;
     MiniAxis* axisSystem;
     Skybox* skybox;
-    AxisHelpers *axisHelpers_yMinus;
-    AxisHelpers *axisHelpers_yPlus;
+    AxisHelpers *axisHelpers_xMinus, *axisHelpers_xPlus, *axisHelpers_yMinus, *axisHelpers_yPlus, *axisHelpers_zMinus, *axisHelpers_zPlus;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;

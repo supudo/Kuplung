@@ -58,6 +58,18 @@
 		8A5128D41CC0CC6E00BE0600 /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
 		8A5128D71CC0CC8800BE0600 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128D51CC0CC8800BE0600 /* BoundingBox.cpp */; };
 		8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A54F11A1C760A0F00B93D18 /* Camera.cpp */; };
+		8A55D3301CCA2E730004712D /* x_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D3281CCA2E620004712D /* x_minus.mtl */; };
+		8A55D3311CCA2E730004712D /* x_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D3291CCA2E620004712D /* x_minus.obj */; };
+		8A55D3321CCA2E730004712D /* x_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32A1CCA2E620004712D /* x_plus.mtl */; };
+		8A55D3331CCA2E730004712D /* x_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32B1CCA2E620004712D /* x_plus.obj */; };
+		8A55D3341CCA2E730004712D /* y_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */; };
+		8A55D3351CCA2E730004712D /* y_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */; };
+		8A55D3361CCA2E730004712D /* y_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */; };
+		8A55D3371CCA2E730004712D /* y_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */; };
+		8A55D3381CCA2E730004712D /* z_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32C1CCA2E620004712D /* z_minus.mtl */; };
+		8A55D3391CCA2E730004712D /* z_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32D1CCA2E620004712D /* z_minus.obj */; };
+		8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32E1CCA2E620004712D /* z_plus.mtl */; };
+		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
 		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
 		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
 		8A673C9A1CB2950D004236AC /* lake_mountain_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C941CB294FE004236AC /* lake_mountain_front.jpg */; };
@@ -135,10 +147,6 @@
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
 		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
-		8ABFC1EC1CC92AF100FBCF08 /* y_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */; };
-		8ABFC1ED1CC92AF100FBCF08 /* y_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */; };
-		8ABFC1EE1CC92AF100FBCF08 /* y_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */; };
-		8ABFC1EF1CC92AF100FBCF08 /* y_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */; };
 		8ABFC1F21CC92B4500FBCF08 /* MiniAxis.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABFC1F01CC92B4500FBCF08 /* MiniAxis.cpp */; };
 		8ABFC1F51CC92BB300FBCF08 /* AxisHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABFC1F31CC92BB300FBCF08 /* AxisHelpers.cpp */; };
 		8ABFC1F81CC92C1600FBCF08 /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
@@ -196,10 +204,18 @@
 			dstPath = axis_helpers;
 			dstSubfolderSpec = 7;
 			files = (
-				8ABFC1EC1CC92AF100FBCF08 /* y_minus.mtl in CopyFiles */,
-				8ABFC1ED1CC92AF100FBCF08 /* y_minus.obj in CopyFiles */,
-				8ABFC1EE1CC92AF100FBCF08 /* y_plus.mtl in CopyFiles */,
-				8ABFC1EF1CC92AF100FBCF08 /* y_plus.obj in CopyFiles */,
+				8A55D3301CCA2E730004712D /* x_minus.mtl in CopyFiles */,
+				8A55D3311CCA2E730004712D /* x_minus.obj in CopyFiles */,
+				8A55D3321CCA2E730004712D /* x_plus.mtl in CopyFiles */,
+				8A55D3331CCA2E730004712D /* x_plus.obj in CopyFiles */,
+				8A55D3341CCA2E730004712D /* y_minus.mtl in CopyFiles */,
+				8A55D3351CCA2E730004712D /* y_minus.obj in CopyFiles */,
+				8A55D3361CCA2E730004712D /* y_plus.mtl in CopyFiles */,
+				8A55D3371CCA2E730004712D /* y_plus.obj in CopyFiles */,
+				8A55D3381CCA2E730004712D /* z_minus.mtl in CopyFiles */,
+				8A55D3391CCA2E730004712D /* z_minus.obj in CopyFiles */,
+				8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */,
+				8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -393,6 +409,14 @@
 		8A5128D61CC0CC8800BE0600 /* BoundingBox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = BoundingBox.hpp; sourceTree = "<group>"; };
 		8A54F11A1C760A0F00B93D18 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		8A54F11B1C760A0F00B93D18 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		8A55D3281CCA2E620004712D /* x_minus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = x_minus.mtl; path = axis_helpers/x_minus.mtl; sourceTree = "<group>"; };
+		8A55D3291CCA2E620004712D /* x_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = x_minus.obj; path = axis_helpers/x_minus.obj; sourceTree = "<group>"; };
+		8A55D32A1CCA2E620004712D /* x_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = x_plus.mtl; path = axis_helpers/x_plus.mtl; sourceTree = "<group>"; };
+		8A55D32B1CCA2E620004712D /* x_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = x_plus.obj; path = axis_helpers/x_plus.obj; sourceTree = "<group>"; };
+		8A55D32C1CCA2E620004712D /* z_minus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_minus.mtl; path = axis_helpers/z_minus.mtl; sourceTree = "<group>"; };
+		8A55D32D1CCA2E620004712D /* z_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_minus.obj; path = axis_helpers/z_minus.obj; sourceTree = "<group>"; };
+		8A55D32E1CCA2E620004712D /* z_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.mtl; path = axis_helpers/z_plus.mtl; sourceTree = "<group>"; };
+		8A55D32F1CCA2E620004712D /* z_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.obj; path = axis_helpers/z_plus.obj; sourceTree = "<group>"; };
 		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
 		8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_bottom.jpg; path = skybox/lake_mountain_bottom.jpg; sourceTree = "<group>"; };
 		8A673C941CB294FE004236AC /* lake_mountain_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_front.jpg; path = skybox/lake_mountain_front.jpg; sourceTree = "<group>"; };
@@ -950,10 +974,18 @@
 		8ABFC1E61CC92AD400FBCF08 /* axis_helpers */ = {
 			isa = PBXGroup;
 			children = (
+				8A55D3281CCA2E620004712D /* x_minus.mtl */,
+				8A55D3291CCA2E620004712D /* x_minus.obj */,
+				8A55D32A1CCA2E620004712D /* x_plus.mtl */,
+				8A55D32B1CCA2E620004712D /* x_plus.obj */,
 				8ABFC1E71CC92ADD00FBCF08 /* y_minus.mtl */,
 				8ABFC1E81CC92ADD00FBCF08 /* y_minus.obj */,
 				8ABFC1E91CC92ADD00FBCF08 /* y_plus.mtl */,
 				8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */,
+				8A55D32C1CCA2E620004712D /* z_minus.mtl */,
+				8A55D32D1CCA2E620004712D /* z_minus.obj */,
+				8A55D32E1CCA2E620004712D /* z_plus.mtl */,
+				8A55D32F1CCA2E620004712D /* z_plus.obj */,
 			);
 			name = axis_helpers;
 			sourceTree = "<group>";
