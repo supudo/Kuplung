@@ -147,7 +147,7 @@ void ObjectsManager::initGrid() {
     this->grid = new WorldGrid();
     this->grid->init();
     this->grid->initShaderProgram();
-    this->grid->initBuffers(10, 1);
+    this->grid->initBuffers(this->Setting_GridSize, 1);
 }
 
 /*
