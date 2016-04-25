@@ -71,6 +71,7 @@ void RayPicking::pick() {
         this->rayLines.push_back(rl);
     }
 
+    this->sceneSelectedModelObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
@@ -98,7 +99,7 @@ void RayPicking::pick() {
                 glm::vec3 aabb_max = glm::vec3(mmf->boundingBox->max_x, mmf->boundingBox->max_y, mmf->boundingBox->max_z);
                 if (this->testRayOBBIntersection(vFrom, vTo, aabb_min, aabb_max, mmf->matrixModel, id)) {
                     this->sceneSelectedModelObject = i;
-                    this->doLog(Settings::Instance()->string_format("[Pick] %s", mmf->oFace.ModelTitle.c_str()));
+                    //this->doLog(Settings::Instance()->string_format("[Pick] %s", mmf->oFace.ModelTitle.c_str()));
                 }
             }
         }
