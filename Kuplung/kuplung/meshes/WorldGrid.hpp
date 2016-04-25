@@ -58,6 +58,7 @@ private:
 
     bool actAsMirrorNeedsChange;
     int gridSizeVertex;
+    int zIndex;
 
     std::string readFile(const char *filePath);
 };

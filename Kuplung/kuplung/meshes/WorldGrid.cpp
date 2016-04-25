@@ -137,25 +137,25 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         if (this->gridSizeVertex % 2 == 0)
             this->gridSizeVertex += 1;
 
-        int gridMinus = this->gridSizeVertex / 2;
-        std::vector<GridMeshPoint2D> verticesData;
-        bool h;
-
         this->dataVertices.clear();
         this->dataTexCoords.clear();
         this->dataNormals.clear();
         this->dataColors.clear();
         this->dataIndices.clear();
 
+        int gridMinus = this->gridSizeVertex / 2;
+        std::vector<GridMeshPoint3D> verticesData;
+        bool h;
         for (int i = 0; i < (this->gridSizeVertex * 2); i++) {
             for (int j = 0; j < this->gridSizeVertex; j++) {
                 h = true;
                 if (i >= this->gridSizeVertex)
                     h = false;
                 if (h) {
-                    GridMeshPoint2D p;
+                    GridMeshPoint3D p;
                     p.x = (j - gridMinus) * unitSize;
                     p.y = (i - gridMinus) * unitSize;
+                    p.z = 0;
                     verticesData.push_back(p);
                     if (p.y == 0) {
                         this->dataColors.push_back(1.0f);
@@ -169,9 +169,10 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                     }
                 }
                 else {
-                    GridMeshPoint2D p;
+                    GridMeshPoint3D p;
                     p.x = (i - this->gridSizeVertex - gridMinus) * unitSize;
                     p.y = (j - gridMinus) * unitSize;
+                    p.z = 0;
                     verticesData.push_back(p);
                     if (p.x == 0) {
                         this->dataColors.push_back(0.0f);
@@ -187,12 +188,32 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
             }
         }
 
+        this->zIndex = (int)verticesData.size();
+
+        GridMeshPoint3D p_z_0;
+        p_z_0.x = 0.0f;
+        p_z_0.y = 0.0f;
+        p_z_0.z = -1.0f * (float)gridMinus;
+        verticesData.push_back(p_z_0);
+        this->dataColors.push_back(0.0f);
+        this->dataColors.push_back(0.0f);
+        this->dataColors.push_back(1.0f);
+
+        GridMeshPoint3D p_z_1;
+        p_z_1.x = 0.0f;
+        p_z_1.y = 0.0f;
+        p_z_1.z = (float)gridMinus;
+        verticesData.push_back(p_z_1);
+        this->dataColors.push_back(0.0f);
+        this->dataColors.push_back(0.0f);
+        this->dataColors.push_back(1.0f);
+
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(GridMeshPoint2D) * sizeof(GLfloat), &verticesData[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(GridMeshPoint3D) * sizeof(GLfloat), &verticesData[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // colors
         glGenBuffers(1, &this->vboColors);
@@ -200,6 +221,11 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeColor);
         glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+        // indices
+        glGenBuffers(1, &this->vboIndices);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
     }
     else {
         this->actAsMirrorNeedsChange = false;
@@ -293,24 +319,7 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         else if (!this->actAsMirror && !this->actAsMirrorNeedsChange)
             this->initBuffers(this->gridSize, 1.0);
 
-        if (this->actAsMirror) {
-            glEnable(GL_DEPTH_TEST);
-            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-            glEnable(GL_BLEND);
-
-            glUniform1f(this->glAttributeAlpha, this->transparency);
-            glUniform1i(this->glAttributeActAsMirror, 1);
-
-            glDepthMask(GL_FALSE);
-
-            glDrawElements(GL_TRIANGLES, sizeof(this->dataIndices), GL_UNSIGNED_INT, nullptr);
-
-            glDepthMask(GL_TRUE);
-
-            glDisable(GL_BLEND);
-            glEnable(GL_DEPTH_TEST);
-        }
-        else {
+        if (!this->actAsMirror) {
             glFrontFace(GL_CCW);
             glCullFace(GL_BACK);
             glLineWidth((GLfloat)2.5f);
@@ -327,6 +336,24 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
                 glDrawArrays(GL_LINE_STRIP, this->gridSizeVertex * i, this->gridSizeVertex);
             for (int i = 0; i < this->gridSizeVertex; i++)
                 glDrawArrays(GL_LINE_STRIP, 0, this->gridSizeVertex);
+            glDrawArrays(GL_LINES, this->zIndex, 2);
+        }
+        else {
+            glEnable(GL_DEPTH_TEST);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);
+
+            glUniform1f(this->glAttributeAlpha, this->transparency);
+            glUniform1i(this->glAttributeActAsMirror, 1);
+
+            glDepthMask(GL_FALSE);
+
+            glDrawElements(GL_TRIANGLES, sizeof(this->dataIndices), GL_UNSIGNED_INT, nullptr);
+
+            glDepthMask(GL_TRUE);
+
+            glDisable(GL_BLEND);
+            glEnable(GL_DEPTH_TEST);
         }
 
         glBindVertexArray(0);
