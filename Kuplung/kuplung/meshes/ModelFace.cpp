@@ -1202,7 +1202,7 @@ void ModelFace::renderMirrorSurface() {
 
     // rendering the grid again - this fixes the z-depth for transparency with the objects and the grid intersecting them ....
     // TODO: find the proper way to handle this!!!
-    this->grid->render(this->matrixProjection, this->matrixCamera);
+    this->grid->render(this->matrixProjection, this->matrixCamera, false);
 }
 
 #pragma mark - Scene Options

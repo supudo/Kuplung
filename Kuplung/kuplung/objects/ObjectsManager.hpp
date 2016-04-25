@@ -64,6 +64,7 @@ public:
     glm::vec4 Setting_OutlineColor;
     glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
+    bool Settings_ShowZAxis = true;
 
 private:
     std::function<void(float)> funcProgress;

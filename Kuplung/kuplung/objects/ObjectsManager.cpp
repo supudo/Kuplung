@@ -71,7 +71,7 @@ void ObjectsManager::render() {
         this->axisHelpers_zPlus->initBuffers();
     }
 
-    this->grid->render(this->matrixProjection, this->camera->matrixCamera);
+    this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
     if (this->Setting_ShowAxisHelpers) {
         int ahPosition = this->Setting_GridSize / 2;
         this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- ahPosition - 1, 0, 0));
@@ -110,6 +110,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_FixedGridWorld = true;
     this->Setting_OutlineColorPickerOpen = false;
     this->Setting_ShowAxisHelpers = true;
+    this->Settings_ShowZAxis = true;
 }
 
 void ObjectsManager::resetPropertiesSystem() {

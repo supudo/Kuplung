@@ -292,7 +292,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 
 #pragma mark - Render
 
-void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
+void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool showZAxis) {
     if (this->glVAO > 0 && this->showGrid) {
         glUseProgram(this->shaderProgram);
 
@@ -336,7 +336,8 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
                 glDrawArrays(GL_LINE_STRIP, this->gridSizeVertex * i, this->gridSizeVertex);
             for (int i = 0; i < this->gridSizeVertex; i++)
                 glDrawArrays(GL_LINE_STRIP, 0, this->gridSizeVertex);
-            glDrawArrays(GL_LINES, this->zIndex, 2);
+            if (showZAxis)
+                glDrawArrays(GL_LINES, this->zIndex, 2);
         }
         else {
             glEnable(GL_DEPTH_TEST);

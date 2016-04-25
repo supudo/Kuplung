@@ -180,6 +180,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Separator();
 
             ImGui::Checkbox("Show Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
+            ImGui::Checkbox("Show Z Axis", &this->managerObjects->Settings_ShowZAxis);
             ImGui::Checkbox("Show Pick Rays", &Settings::Instance()->showPickRays);
             ImGui::Separator();
 

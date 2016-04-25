@@ -28,7 +28,7 @@ public:
     bool initShaderProgram();
     void initBuffers(int gridSize, float unitSize);
     void initProperties(int size);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool showZAxis);
     int gridSize;
     float transparency;
 
