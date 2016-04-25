@@ -58,7 +58,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->componentFileBrowser = new FileBrowser();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
                                      Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
-                                     std::bind(&DialogControlsModels::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+                                     std::bind(&DialogControlsModels::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
     this->componentFileBrowser->setImageBrowser(true);
 }
 
@@ -223,7 +223,7 @@ void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
         this->componentFileBrowser->draw("File Browser", &this->showFileBrowser, mtType);
 }
 
-void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file) {
+void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file, int texType) {
     this->showFileBrowser = false;
     this->TextureImage = file.path;
     this->TextureFilename = file.title;
@@ -231,9 +231,52 @@ void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file) {
 
     if (this->TextureImage != "" && this->selectedObject > -1) {
         ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
-        mmf->oFace.faceMaterial.textures_diffuse.useTexture = true;
-        mmf->oFace.faceMaterial.textures_diffuse.image = this->TextureImage;
-        mmf->oFace.faceMaterial.textures_diffuse.filename = this->TextureFilename;
+        switch (texType) {
+            case MaterialTextureType_Ambient: {
+                mmf->oFace.faceMaterial.textures_ambient.useTexture = true;
+                mmf->oFace.faceMaterial.textures_ambient.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_ambient.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_Bump: {
+                mmf->oFace.faceMaterial.textures_bump.useTexture = true;
+                mmf->oFace.faceMaterial.textures_bump.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_bump.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_Diffuse: {
+                mmf->oFace.faceMaterial.textures_diffuse.useTexture = true;
+                mmf->oFace.faceMaterial.textures_diffuse.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_diffuse.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_Displacement: {
+                mmf->oFace.faceMaterial.textures_displacement.useTexture = true;
+                mmf->oFace.faceMaterial.textures_displacement.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_displacement.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_Dissolve: {
+                mmf->oFace.faceMaterial.textures_dissolve.useTexture = true;
+                mmf->oFace.faceMaterial.textures_dissolve.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_dissolve.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_Specular: {
+                mmf->oFace.faceMaterial.textures_specular.useTexture = true;
+                mmf->oFace.faceMaterial.textures_specular.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_specular.filename = this->TextureFilename;
+                break;
+            }
+            case MaterialTextureType_SpecularExp: {
+                mmf->oFace.faceMaterial.textures_specularExp.useTexture = true;
+                mmf->oFace.faceMaterial.textures_specularExp.image = this->TextureImage;
+                mmf->oFace.faceMaterial.textures_specularExp.filename = this->TextureFilename;
+                break;
+            }
+            default:
+                break;
+        }
         mmf->initBuffersAgain = true;
     }
 }

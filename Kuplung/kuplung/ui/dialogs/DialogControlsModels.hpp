@@ -36,7 +36,7 @@ private:
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
-    void dialogFileBrowserProcessFile(FBEntity file);
+    void dialogFileBrowserProcessFile(FBEntity file, int texType);
 
     SDL_Window* sdlWindow;
 
