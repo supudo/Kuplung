@@ -19,7 +19,7 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
-MENode_Texture::MENode_Texture(int id, MaterialEditor_TextureType texType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+MENode_Texture::MENode_Texture(int id, MaterialTextureType texType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
     this->initBase(id, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
     this->showTextureWindow = false;
     this->showFileBrowser = false;
@@ -123,25 +123,25 @@ void MENode_Texture::showImage() {
 
     std::string title;
     switch (this->TextureType) {
-        case MaterialEditor_TextureType_Ambient:
+        case MaterialTextureType_Ambient:
             title = "Ambient Image";
             break;
-        case MaterialEditor_TextureType_Diffuse:
+        case MaterialTextureType_Diffuse:
             title = "Diffuse Image";
             break;
-        case MaterialEditor_TextureType_Dissolve:
+        case MaterialTextureType_Dissolve:
             title = "Dissolve Image";
             break;
-        case MaterialEditor_TextureType_Bump:
+        case MaterialTextureType_Bump:
             title = "Bump Map";
             break;
-        case MaterialEditor_TextureType_Specular:
+        case MaterialTextureType_Specular:
             title = "Specular Map";
             break;
-        case MaterialEditor_TextureType_SpecularExp:
+        case MaterialTextureType_SpecularExp:
             title = "SpecularExp Map";
             break;
-        case MaterialEditor_TextureType_Displacement:
+        case MaterialTextureType_Displacement:
             title = "Displacement Map";
             break;
         default:

@@ -34,14 +34,16 @@ void MaterialEditor::init() {
     this->panelWidth_Nodes = 100.0f;
 }
 
-void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
+void MaterialEditor::draw(int selectedModelID, ModelFace *face, bool* p_opened) {
     ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
 
     ImGui::Begin("Material Editor", p_opened, ImGuiWindowFlags_ShowBorders);
 
-    if (!this->inited)
+    if (!this->inited || this->selectedModelID != selectedModelID) {
         this->initMaterialNodes(face);
+        this->selectedModelID = selectedModelID;
+    }
 
     // Draw a list of nodes on the left side
     bool open_context_menu = false;
@@ -282,7 +284,7 @@ void MaterialEditor::draw(ModelFace *face, bool* p_opened) {
             if (ImGui::MenuItem("Add Color"))
                 this->nodes.push_back(new MENode_Color((int)this->nodes.size() + 1, "Color", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
             else if (ImGui::MenuItem("Add Texture"))
-                this->nodes.push_back(new MENode_Texture((int)this->nodes.size() + 1, MaterialEditor_TextureType_Diffuse, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
+                this->nodes.push_back(new MENode_Texture((int)this->nodes.size() + 1, MaterialTextureType_Diffuse, "Texture", scene_pos, 0.5f, ImColor(100, 100, 200), 0, 1));
             //if (ImGui::MenuItem("Paste", NULL, false, false)) {}
         }
         ImGui::EndPopup();
@@ -311,7 +313,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 
     ImVec2 nodePosition = ImVec2(40, 50);
     if (face->oFace.faceMaterial.textures_ambient.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Ambient, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Ambient, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 100 : 80);
@@ -328,8 +330,9 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
+    printf("face->oFace.faceMaterial.textures_diffuse.image = %s\n", face->oFace.faceMaterial.textures_diffuse.image.c_str());
     if (face->oFace.faceMaterial.textures_diffuse.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Diffuse, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Diffuse, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
@@ -347,7 +350,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 //    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_dissolve.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Dissolve, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Dissolve, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -356,7 +359,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     if (face->oFace.faceMaterial.textures_specular.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Specular, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Specular, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
@@ -374,7 +377,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
 //    slotsCounter += 1;
 
     if (face->oFace.faceMaterial.textures_specularExp.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_SpecularExp, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_SpecularExp, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -383,7 +386,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     if (face->oFace.faceMaterial.textures_bump.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Bump, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Bump, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -392,7 +395,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     }
 
     if (face->oFace.faceMaterial.textures_displacement.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialEditor_TextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image);
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;

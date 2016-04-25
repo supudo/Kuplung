@@ -16,7 +16,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, int)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -36,7 +36,7 @@ void FileBrowser::setImageBrowser(bool isImage) {
     this->isStyleBrowser = false;
 }
 
-void FileBrowser::draw(const char* title, bool* p_opened) {
+void FileBrowser::draw(const char* title, bool* p_opened, int TextureType) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -77,7 +77,7 @@ void FileBrowser::draw(const char* title, bool* p_opened) {
 
     ImGui::SetColumnOffset(1, 40);
 
-    this->drawFiles();
+    this->drawFiles(TextureType);
 
     ImGui::Columns(1);
 
@@ -91,7 +91,7 @@ void FileBrowser::draw(const char* title, bool* p_opened) {
 
 #pragma mark - Private
 
-void FileBrowser::drawFiles() {
+void FileBrowser::drawFiles(int TextureType) {
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder);
     int i = 0;
     static int selected = -1;
@@ -103,12 +103,12 @@ void FileBrowser::drawFiles() {
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile) {
-                this->processFile(entity, (Settings::Instance()->ModelFileParser == 0 ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp));
+                this->processFile(entity, (Settings::Instance()->ModelFileParser == 0 ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp), TextureType);
                 Settings::Instance()->saveSettings();
             }
             else {
                 Settings::Instance()->currentFolder = entity.path;
-                this->drawFiles();
+                this->drawFiles(TextureType);
             }
         }
         ImGui::NextColumn();

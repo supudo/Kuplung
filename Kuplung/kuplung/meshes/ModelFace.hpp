@@ -68,6 +68,7 @@ public:
     void setOptionsOutlineColor(glm::vec4 outlineColor);
     void setOptionsOutlineThickness(float thickness);
 
+    bool initBuffersAgain;
     objModelFace oFace;
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
@@ -121,6 +122,7 @@ private:
     void renderMirrorSurface();
     void loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
+    std::string assetsFolder;
     float so_fov;
     float so_outlineThickness;
     glm::vec4 so_outlineColor;

@@ -30,14 +30,15 @@ struct DragNode {
 class MaterialEditor {
 public:
     void init();
-    void draw(ModelFace *face, bool* p_opened = NULL);
+    void draw(int selectedModelID, ModelFace *face, bool* p_opened = NULL);
 
 private:
     void initMaterialNodes(ModelFace *face);
 
+    bool inited = false;
+    int selectedModelID;
     std::vector<MENode*> nodes;
     std::vector<MELink*> links;
-    bool inited = false;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     bool show_grid = true;
     int node_selected = -1;

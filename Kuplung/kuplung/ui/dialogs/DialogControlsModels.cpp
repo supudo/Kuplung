@@ -22,6 +22,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
+    this->showFileBrowser = false;
 
     this->showTextureWindow_Ambient = false;
     this->showTexture_Ambient = false;
@@ -35,6 +36,9 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->showTexture_Specular = false;
     this->showTextureWindow_SpecularExp = false;
     this->showTexture_SpecularExp = false;
+
+    this->TextureImage = "";
+    this->TextureFilename = "";
 
     this->textureAmbient_Width = this->textureAmbient_Height = this->textureDiffuse_Width = this->textureDiffuse_Height = 0;
     this->textureDissolve_Width = this->textureDissolve_Height = this->textureBump_Width = this->textureBump_Height = 0;
@@ -50,6 +54,12 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->helperUI = new UIHelpers();
     this->componentMaterialEditor = new MaterialEditor();
     this->componentMaterialEditor->init();
+
+    this->componentFileBrowser = new FileBrowser();
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
+                                     Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
+                                     std::bind(&DialogControlsModels::dialogFileBrowserProcessFile, this, std::placeholders::_1));
+    this->componentFileBrowser->setImageBrowser(true);
 }
 
 void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
@@ -196,14 +206,40 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::EndGroup();
 
     if (this->selectedObject > -1 && meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
-        this->componentMaterialEditor->draw((*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
+        this->componentMaterialEditor->draw(this->selectedObject, (*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     *sceneSelectedModelObject = this->selectedObject;
 
     ImGui::End();
 }
 
+void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
+    std::string btnLabel = ICON_FA_EYE " Add Texture";
+    btnLabel += " " + Kuplung_getTextureName(mtType);
+    if (ImGui::Button(btnLabel.c_str()))
+        this->showFileBrowser = true;
+
+    if (this->showFileBrowser)
+        this->componentFileBrowser->draw("File Browser", &this->showFileBrowser, mtType);
+}
+
+void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file) {
+    this->showFileBrowser = false;
+    this->TextureImage = file.path;
+    this->TextureFilename = file.title;
+    strcpy(this->filePath, this->TextureImage.c_str());
+
+    if (this->TextureImage != "" && this->selectedObject > -1) {
+        ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
+        mmf->oFace.faceMaterial.textures_diffuse.useTexture = true;
+        mmf->oFace.faceMaterial.textures_diffuse.image = this->TextureImage;
+        mmf->oFace.faceMaterial.textures_diffuse.filename = this->TextureFilename;
+        mmf->initBuffersAgain = true;
+    }
+}
+
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
+    this->meshModelFaces = meshModelFaces;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
@@ -293,6 +329,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                                   &this->showTexture_Diffuse,
                                   mmf->oFace.faceMaterial.textures_diffuse.image.c_str());
         }
+        // TODO: add texture coordinates - unwrap
+//        else
+//            this->showTextureAdd(MaterialTextureType_Diffuse);
         if (mmf->oFace.faceMaterial.textures_dissolve.image != "") {
             this->showTextureLine("##003",
                                   "Dissolve",

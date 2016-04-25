@@ -18,14 +18,4 @@ typedef enum MaterialEditor_NodeType {
     MaterialEditor_NodeType_Image
 } MaterialEditor_NodeType;
 
-typedef enum MaterialEditor_TextureType {
-    MaterialEditor_TextureType_Ambient,
-    MaterialEditor_TextureType_Diffuse,
-    MaterialEditor_TextureType_Dissolve,
-    MaterialEditor_TextureType_Bump,
-    MaterialEditor_TextureType_Specular,
-    MaterialEditor_TextureType_SpecularExp,
-    MaterialEditor_TextureType_Displacement
-} MaterialEditor_TextureType;
-
 #endif /* MaterialEditorData_hpp */

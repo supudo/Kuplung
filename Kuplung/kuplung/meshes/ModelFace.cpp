@@ -166,6 +166,8 @@ void ModelFace::init() {
     this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
 
+    this->initBuffersAgain = false;
+
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UseCullFace = false;
     this->Setting_UseTessellation = true;
@@ -529,6 +531,7 @@ bool ModelFace::initShaderProgram() {
 }
 
 void ModelFace::initBuffers(std::string assetsFolder) {
+    this->assetsFolder = assetsFolder;
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -555,25 +558,25 @@ void ModelFace::initBuffers(std::string assetsFolder) {
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         // ambient texture image
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_ambient, objMaterialImageType_Bump, &this->vboTextureAmbient);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_ambient, objMaterialImageType_Bump, &this->vboTextureAmbient);
 
         // diffuse texture image
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_diffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_diffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
 
         // specular texture image
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_specular, objMaterialImageType_Specular, &this->vboTextureSpecular);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_specular, objMaterialImageType_Specular, &this->vboTextureSpecular);
 
         // specular-exp texture image
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_specularExp, objMaterialImageType_SpecularExp, &this->vboTextureSpecularExp);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_specularExp, objMaterialImageType_SpecularExp, &this->vboTextureSpecularExp);
 
         // dissolve texture image
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_dissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_dissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
 
         // bump map texture
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_bump, objMaterialImageType_Bump, &this->vboTextureBump);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_bump, objMaterialImageType_Bump, &this->vboTextureBump);
 
         // displacement map texture
-        this->loadTexture(assetsFolder, this->oFace.faceMaterial.textures_displacement, objMaterialImageType_Displacement, &this->vboTextureDisplacement);
+        this->loadTexture(this->assetsFolder, this->oFace.faceMaterial.textures_displacement, objMaterialImageType_Displacement, &this->vboTextureDisplacement);
     }
 
     // indices
@@ -609,6 +612,8 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->oFace);
+
+    this->initBuffersAgain = false;
 
 //    this->positionX->point = this->boundingBox->center.x;
 //    this->positionY->point = this->boundingBox->center.y;
@@ -694,6 +699,9 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     this->vecCameraPosition = vecCameraPosition;
     this->grid = grid;
     this->uiAmbientLight = uiAmbientLight;
+
+    if (this->initBuffersAgain)
+        this->initBuffers(this->assetsFolder);
 
     if (this->grid->actAsMirror) {
         glCullFace(GL_FRONT);

@@ -105,7 +105,7 @@ struct objScene {
     std::string objFile;
 };
 
-void static printObjScene(objScene obj) {
+void static Kuplung_printObjScene(objScene obj) {
     printf("this->scene.objFile = %s\n", obj.objFile.c_str());
     printf("this->scene.totalCountFaces = %i\n", obj.totalCountFaces);
     printf("this->scene.totalCountGeometricVertices = %i\n", obj.totalCountGeometricVertices);
