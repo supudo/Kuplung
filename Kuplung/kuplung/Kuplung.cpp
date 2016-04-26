@@ -331,7 +331,7 @@ void Kuplung::renderScene() {
         cVertices += (int)mmf->oFace.vectors_vertices.size();
         cIndices += mmf->oFace.indicesCount;
         cTriangles += cVertices / 3;
-        cFaces += cTriangles / 2;
+        cFaces += cVertices / 3 / 2;
     }
     Settings::Instance()->sceneCountObjects = (int)this->meshModelFaces.size();
     Settings::Instance()->sceneCountVertices = cVertices;
