@@ -14,6 +14,7 @@ FileModelManager::~FileModelManager() {
 
 void FileModelManager::destroy() {
     this->parserOBJ->destroy();
+    this->parserOBJ2->destroy();
     this->parserSTL->destroy();
     this->parserAssimp->destroy();
 }
@@ -23,6 +24,9 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
 
     this->parserOBJ = new objParser();
     this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+
+    this->parserOBJ2 = new objParser2();
+    this->parserOBJ2->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
     this->parserSTL = new STLParser();
     this->parserSTL->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
@@ -36,7 +40,7 @@ objScene FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
     switch (type) {
         case FileBrowser_ParserType_Own: {
             if (file.extension == ".obj")
-                obj = this->parserOBJ->parse(file);
+                obj = this->parserOBJ2->parse(file);
             else if (file.extension == ".stl")
                 obj = this->parserOBJ->parse(file);
             break;

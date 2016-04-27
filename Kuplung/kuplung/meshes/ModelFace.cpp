@@ -538,14 +538,16 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->oFace.verticesCount * sizeof(GLfloat), &this->oFace.vertices[0], GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, this->oFace.verticesCount * sizeof(GLfloat), &this->oFace.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->oFace.vectors_vertices.size() * sizeof(glm::vec3), &this->oFace.vectors_vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexPosition);
     glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->oFace.normalsCount * sizeof(GLfloat), &this->oFace.normals[0], GL_STATIC_DRAW);
+    //glBufferData(GL_ARRAY_BUFFER, this->oFace.normalsCount * sizeof(GLfloat), &this->oFace.normals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->oFace.vectors_normals.size() * sizeof(glm::vec3), &this->oFace.vectors_normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexNormal);
     glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
@@ -553,7 +555,8 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     if (this->oFace.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->oFace.texture_coordinates.size() * sizeof(GLfloat), &this->oFace.texture_coordinates[0], GL_STATIC_DRAW);
+        //glBufferData(GL_ARRAY_BUFFER, this->oFace.texture_coordinates.size() * sizeof(GLfloat), &this->oFace.texture_coordinates[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->oFace.vectors_texture_coordinates.size() * sizeof(glm::vec2), &this->oFace.vectors_texture_coordinates[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glFS_TextureCoord);
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
