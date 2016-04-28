@@ -69,7 +69,7 @@ public:
 private:
     std::function<void(float)> funcProgress;
 
-    std::map<std::string, objScene> systemModels;
+    std::map<std::string, MeshModel> systemModels;
 };
 
 #endif /* ObjectsManager_hpp */

@@ -396,7 +396,7 @@ void UI::dialogControlsGUI() {
 }
 
 void UI::dialogControlsModels(int * sceneSelectedModelObject) {
-    this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, this->scenes, sceneSelectedModelObject);
+    this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, sceneSelectedModelObject);
 }
 
 void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {

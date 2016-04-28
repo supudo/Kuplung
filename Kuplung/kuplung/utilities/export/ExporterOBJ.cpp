@@ -43,13 +43,13 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     int indexVertex = 0, indexNormal = 0;
     std::vector<glm::vec3> vectorVertices;
     for (int i=0; i<(int)faces.size(); i++) {
-        fileContents += "o " + faces[i]->oFace.ModelTitle + nlDelimiter;
+        fileContents += "o " + faces[i]->meshModel.ModelTitle + nlDelimiter;
         objFaces = "";
-        for (size_t j=0; j<faces[i]->oFace.vertices.size(); j++) {
+        for (size_t j=0; j<faces[i]->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-                float v1 = faces[i]->oFace.vertices[j];
-                float v2 = faces[i]->oFace.vertices[j - 1];
-                float v3 = faces[i]->oFace.vertices[j - 2];
+                float v1 = faces[i]->meshModel.vertices[j].x;
+                float v2 = faces[i]->meshModel.vertices[j].y;
+                float v3 = faces[i]->meshModel.vertices[j].z;
                 fileContents += Settings::Instance()->string_format("v %f %f %f", v1, v2, v3) + this->nlDelimiter;
                 vectorVertices.push_back(glm::vec3(v1, v2, v3));
                 pointCounter += 1;
@@ -74,7 +74,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
             }
         }
         fileContents += objNormals;
-        fileContents += "usemtl " + faces[i]->oFace.materialID + this->nlDelimiter;
+        fileContents += "usemtl " + faces[i]->meshModel.MaterialTitle + this->nlDelimiter;
         fileContents += "s off" + this->nlDelimiter;
         fileContents += objFaces;
     }
@@ -164,32 +164,32 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFace*> faces) {
 
     for (int i=0; i<(int)faces.size(); i++) {
         ModelFace *mmf = faces[i];
-        objMaterial mat = mmf->oFace.faceMaterial;
-        fileContents += "newmtl " + mat.materialID + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("Ns %f", mat.specularExp) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("Ka %f %f %f", mat.ambient.r, mat.ambient.g, mat.ambient.b) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("Kd %f %f %f", mat.diffuse.r, mat.diffuse.g, mat.diffuse.b) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("Ks %f %f %f", mat.specular.r, mat.specular.g, mat.specular.b) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("Ke %f %f %f", mat.emission.r, mat.emission.g, mat.emission.b) + this->nlDelimiter;
-        if (mat.opticalDensity >= 0.0f)
-            fileContents += Settings::Instance()->string_format("Ni %f", mat.opticalDensity) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("d %f", mat.transparency) + this->nlDelimiter;
-        fileContents += Settings::Instance()->string_format("illum %i", mat.illumination) + this->nlDelimiter;
+        MeshModelMaterial mat = mmf->meshModel.ModelMaterial;
+        fileContents += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("Ns %f", mat.SpecularExp) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("Ka %f %f %f", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("Kd %f %f %f", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("Ks %f %f %f", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("Ke %f %f %f", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
+        if (mat.OpticalDensity >= 0.0f)
+            fileContents += Settings::Instance()->string_format("Ni %f", mat.OpticalDensity) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("d %f", mat.Transparency) + this->nlDelimiter;
+        fileContents += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
 
-        if (mat.textures_ambient.image != "")
-            fileContents += "map_Ka " + mat.textures_ambient.image + this->nlDelimiter;
-        if (mat.textures_diffuse.image != "")
-            fileContents += "map_Kd " + mat.textures_diffuse.image + this->nlDelimiter;
-        if (mat.textures_dissolve.image != "")
-            fileContents += "map_d " + mat.textures_dissolve.image + this->nlDelimiter;
-        if (mat.textures_bump.image != "")
-            fileContents += "map_Bump " + mat.textures_bump.image + this->nlDelimiter;
-        if (mat.textures_displacement.image != "")
-            fileContents += "disp " + mat.textures_displacement.image + this->nlDelimiter;
-        if (mat.textures_specular.image != "")
-            fileContents += "map_Ks " + mat.textures_specular.image + this->nlDelimiter;
-        if (mat.textures_specularExp.image != "")
-            fileContents += "map_Ns " + mat.textures_specularExp.image + this->nlDelimiter;
+        if (mat.TextureAmbient.Image != "")
+            fileContents += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;
+        if (mat.TextureDiffuse.Image != "")
+            fileContents += "map_Kd " + mat.TextureDiffuse.Image + this->nlDelimiter;
+        if (mat.TextureDissolve.Image != "")
+            fileContents += "map_d " + mat.TextureDissolve.Image + this->nlDelimiter;
+        if (mat.TextureBump.Image != "")
+            fileContents += "map_Bump " + mat.TextureBump.Image + this->nlDelimiter;
+        if (mat.TextureDisplacement.Image != "")
+            fileContents += "disp " + mat.TextureDisplacement.Image + this->nlDelimiter;
+        if (mat.TextureSpecular.Image != "")
+            fileContents += "map_Ks " + mat.TextureSpecular.Image + this->nlDelimiter;
+        if (mat.TextureSpecularExp.Image != "")
+            fileContents += "map_Ns " + mat.TextureSpecularExp.Image + this->nlDelimiter;
     }
     fileContents += this->nlDelimiter;
 

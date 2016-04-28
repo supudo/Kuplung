@@ -20,12 +20,12 @@ class AxisHelpers {
 public:
     void destroy();
     void init();
-    void setModel(objModelFace oFace);
+    void setModel(MeshModel meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
     void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position);
-    objModelFace oFace;
+    MeshModel meshModel;
 
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;

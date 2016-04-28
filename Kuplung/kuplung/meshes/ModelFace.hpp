@@ -53,7 +53,7 @@ public:
 
     void destroy();
     void init();
-    void setModel(objModelFace oFace);
+    void setModel(MeshModel meshModel);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void initProperties();
@@ -69,7 +69,7 @@ public:
     void setOptionsOutlineThickness(float thickness);
 
     bool initBuffersAgain;
-    objModelFace oFace;
+    MeshModel meshModel;
     int ModelID;
     glm::mat4 matrixProjection, matrixCamera, matrixModel;
     glm::vec3 vecCameraPosition;
@@ -120,7 +120,7 @@ private:
     void renderModel();
     void renderReflectFBO();
     void renderMirrorSurface();
-    void loadTexture(std::string assetsFolder, objMaterialImage materialImage, objMaterialImageType type, GLuint* vboObject);
+    void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
     std::string assetsFolder;
     float so_fov;

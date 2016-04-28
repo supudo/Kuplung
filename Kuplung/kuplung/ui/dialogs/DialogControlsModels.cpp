@@ -68,19 +68,19 @@ void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::strin
 
     std::string img = "";
     if (type == 0)
-        img = mmf->oFace.faceMaterial.textures_ambient.image;
+        img = mmf->meshModel.ModelMaterial.TextureAmbient.Image;
     else if (type == 1)
-        img = mmf->oFace.faceMaterial.textures_diffuse.image;
+        img = mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
     else if (type == 2)
-        img = mmf->oFace.faceMaterial.textures_dissolve.image;
+        img = mmf->meshModel.ModelMaterial.TextureDissolve.Image;
     else if (type == 3)
-        img = mmf->oFace.faceMaterial.textures_bump.image;
+        img = mmf->meshModel.ModelMaterial.TextureBump.Image;
     else if (type == 4)
-        img = mmf->oFace.faceMaterial.textures_displacement.image;
+        img = mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
     else if (type == 5)
-        img = mmf->oFace.faceMaterial.textures_specular.image;
+        img = mmf->meshModel.ModelMaterial.TextureSpecular.Image;
     else
-        img = mmf->oFace.faceMaterial.textures_specularExp.image;
+        img = mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
 
     if (*genTexture)
         this->createTextureBuffer(img, vboBuffer, width, height);
@@ -166,7 +166,7 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, std::string tit
     ImGui::Text("%s: %s", title.c_str(), image.c_str());
 }
 
-void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes, int * sceneSelectedModelObject) {
+void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
@@ -192,7 +192,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     switch (this->selectedTabPanel) {
         case 0:
             if (meshModelFaces != NULL)
-                this->drawModels(isFrame, meshModelFaces, scenes);
+                this->drawModels(isFrame, meshModelFaces);
             else
                 ImGui::TextColored(ImVec4(255, 0, 0, 255), "No models in the current scene.");
             break;
@@ -233,45 +233,45 @@ void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file, int texTy
         ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
         switch (texType) {
             case MaterialTextureType_Ambient: {
-                mmf->oFace.faceMaterial.textures_ambient.useTexture = true;
-                mmf->oFace.faceMaterial.textures_ambient.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_ambient.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_Bump: {
-                mmf->oFace.faceMaterial.textures_bump.useTexture = true;
-                mmf->oFace.faceMaterial.textures_bump.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_bump.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureBump.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureBump.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_Diffuse: {
-                mmf->oFace.faceMaterial.textures_diffuse.useTexture = true;
-                mmf->oFace.faceMaterial.textures_diffuse.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_diffuse.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_Displacement: {
-                mmf->oFace.faceMaterial.textures_displacement.useTexture = true;
-                mmf->oFace.faceMaterial.textures_displacement.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_displacement.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_Dissolve: {
-                mmf->oFace.faceMaterial.textures_dissolve.useTexture = true;
-                mmf->oFace.faceMaterial.textures_dissolve.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_dissolve.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_Specular: {
-                mmf->oFace.faceMaterial.textures_specular.useTexture = true;
-                mmf->oFace.faceMaterial.textures_specular.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_specular.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->TextureFilename;
                 break;
             }
             case MaterialTextureType_SpecularExp: {
-                mmf->oFace.faceMaterial.textures_specularExp.useTexture = true;
-                mmf->oFace.faceMaterial.textures_specularExp.image = this->TextureImage;
-                mmf->oFace.faceMaterial.textures_specularExp.filename = this->TextureFilename;
+                mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
+                mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->TextureImage;
+                mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->TextureFilename;
                 break;
             }
             default:
@@ -281,7 +281,7 @@ void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file, int texTy
     }
 }
 
-void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces, std::vector<objScene> *scenes) {
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
     this->meshModelFaces = meshModelFaces;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -297,7 +297,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 
     std::vector<const char*> scene_items;
     for (size_t i=0; i<meshModelFaces->size(); i++) {
-        scene_items.push_back((*meshModelFaces)[i]->oFace.ModelTitle.c_str());
+        scene_items.push_back((*meshModelFaces)[i]->meshModel.ModelTitle.c_str());
     }
 
     // Scene Model
@@ -341,79 +341,81 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
 
     if (this->selectedObject > -1) {
         ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.objFile.c_str());
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.ModelTitle.c_str());
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->oFace.materialID.c_str());
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.verticesCount);
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.normalsCount);
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->oFace.indicesCount);
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.File.title.c_str());
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.ModelTitle.c_str());
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.MaterialTitle.c_str());
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countVertices);
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countNormals);
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countIndices);
 
-        if (mmf->oFace.faceMaterial.textures_ambient.image != "" ||
-            mmf->oFace.faceMaterial.textures_diffuse.image != "" ||
-            mmf->oFace.faceMaterial.textures_dissolve.image != "" ||
-            mmf->oFace.faceMaterial.textures_specular.image != "" ||
-            mmf->oFace.faceMaterial.textures_specularExp.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureAmbient.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureDiffuse.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureBump.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureDisplacement.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureDissolve.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureSpecular.Image != "" ||
+            mmf->meshModel.ModelMaterial.TextureSpecularExp.Image != "") {
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 0, 0, 255), "Textures");
         }
-        if (mmf->oFace.faceMaterial.textures_ambient.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureAmbient.Image != "") {
             this->showTextureLine("##001",
                                   "Ambient",
-                                  &mmf->oFace.faceMaterial.textures_ambient.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture,
                                   &this->showTextureWindow_Ambient,
                                   &this->showTexture_Ambient,
-                                  mmf->oFace.faceMaterial.textures_ambient.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureAmbient.Image.c_str());
         }
-        if (mmf->oFace.faceMaterial.textures_diffuse.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
             this->showTextureLine("##002",
                                   "Diffuse",
-                                  &mmf->oFace.faceMaterial.textures_diffuse.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture,
                                   &this->showTextureWindow_Diffuse,
                                   &this->showTexture_Diffuse,
-                                  mmf->oFace.faceMaterial.textures_diffuse.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureDiffuse.Image.c_str());
         }
         // TODO: add texture coordinates - unwrap
 //        else
 //            this->showTextureAdd(MaterialTextureType_Diffuse);
-        if (mmf->oFace.faceMaterial.textures_dissolve.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureDissolve.Image != "") {
             this->showTextureLine("##003",
                                   "Dissolve",
-                                  &mmf->oFace.faceMaterial.textures_dissolve.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture,
                                   &this->showTextureWindow_Dissolve,
                                   &this->showTexture_Dissolve,
-                                  mmf->oFace.faceMaterial.textures_dissolve.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureDissolve.Image.c_str());
         }
-        if (mmf->oFace.faceMaterial.textures_bump.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureBump.Image != "") {
             this->showTextureLine("##004",
                                   "Bump",
-                                  &mmf->oFace.faceMaterial.textures_bump.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureBump.UseTexture,
                                   &this->showTextureWindow_Bump,
                                   &this->showTexture_Bump,
-                                  mmf->oFace.faceMaterial.textures_bump.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureBump.Image.c_str());
         }
-        if (mmf->oFace.faceMaterial.textures_displacement.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureDisplacement.Image != "") {
             this->showTextureLine("##005",
                                   "Height",
-                                  &mmf->oFace.faceMaterial.textures_displacement.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture,
                                   &this->showTextureWindow_Displacement,
                                   &this->showTexture_Displacement,
-                                  mmf->oFace.faceMaterial.textures_displacement.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureDisplacement.Image.c_str());
         }
-        if (mmf->oFace.faceMaterial.textures_specular.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureSpecular.Image != "") {
             this->showTextureLine("##006",
                                   "Specular",
-                                  &mmf->oFace.faceMaterial.textures_specular.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture,
                                   &this->showTextureWindow_Specular,
                                   &this->showTexture_Specular,
-                                  mmf->oFace.faceMaterial.textures_specular.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureSpecular.Image.c_str());
         }
-        if (mmf->oFace.faceMaterial.textures_specularExp.image != "") {
+        if (mmf->meshModel.ModelMaterial.TextureSpecularExp.Image != "") {
             this->showTextureLine("##007",
                                   "SpecularExp",
-                                  &mmf->oFace.faceMaterial.textures_specularExp.useTexture,
+                                  &mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture,
                                   &this->showTextureWindow_SpecularExp,
                                   &this->showTexture_SpecularExp,
-                                  mmf->oFace.faceMaterial.textures_specularExp.image.c_str());
+                                  mmf->meshModel.ModelMaterial.TextureSpecularExp.Image.c_str());
         }
 
         if (this->showTextureWindow_Ambient)
@@ -518,7 +520,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                     ImGui::Checkbox("Culling", &(*meshModelFaces)[this->selectedObject]->Setting_UseCullFace);
                     this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationSubdivision);
                     ImGui::Separator();
-                    if (mmf->oFace.faceMaterial.textures_displacement.useTexture) {
+                    if (mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
                         this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);
                         ImGui::Separator();
                     }
@@ -613,14 +615,14 @@ void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshMode
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Type the new model name:");
-    ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->oFace.ModelTitle.c_str());
+    ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
 
     if (this->guiModelRenameText[0] == '\0')
-        strcpy(this->guiModelRenameText, (*meshModelFaces)[this->selectedObject]->oFace.ModelTitle.c_str());
+        strcpy(this->guiModelRenameText, (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
     ImGui::InputText("", this->guiModelRenameText, sizeof(this->guiModelRenameText));
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        (*meshModelFaces)[this->selectedObject]->oFace.ModelTitle = std::string(this->guiModelRenameText);
+        (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle = std::string(this->guiModelRenameText);
         ImGui::CloseCurrentPopup();
         this->cmenu_renameModel = false;
         this->guiModelRenameText[0] = '\0';
@@ -641,7 +643,7 @@ void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshMode
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
     ImGui::Text("Are you sure you want to delete this model?\n");
-    ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->oFace.ModelTitle.c_str());
+    ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
         (*meshModelFaces).erase((*meshModelFaces).begin() + this->selectedObject);

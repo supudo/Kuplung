@@ -25,6 +25,8 @@ typedef enum objMaterialImageType {
     objMaterialImageType_Displacement
 } objMaterialImageType;
 
+/*
+
 struct objMaterialImage {
     std::string filename;
     std::string image;
@@ -192,6 +194,8 @@ void static Kuplung_printObjScene(objScene obj) {
     }
 }
 
+*/
+
 struct MeshMaterialTextureImage {
     std::string Filename;
     std::string Image;
@@ -210,13 +214,13 @@ struct MeshModelMaterial {
     unsigned int IlluminationMode;
     float OpticalDensity;
 
-    MeshMaterialTextureImage textures_ambient;
-    MeshMaterialTextureImage textures_diffuse;
-    MeshMaterialTextureImage textures_specular;
-    MeshMaterialTextureImage textures_specularExp;
-    MeshMaterialTextureImage textures_dissolve;
-    MeshMaterialTextureImage textures_bump;
-    MeshMaterialTextureImage textures_displacement;
+    MeshMaterialTextureImage TextureAmbient;
+    MeshMaterialTextureImage TextureDiffuse;
+    MeshMaterialTextureImage TextureSpecular;
+    MeshMaterialTextureImage TextureSpecularExp;
+    MeshMaterialTextureImage TextureDissolve;
+    MeshMaterialTextureImage TextureBump;
+    MeshMaterialTextureImage TextureDisplacement;
 };
 
 struct MeshModel {
@@ -266,13 +270,13 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models) {
         printf("model.ModelMaterial.OpticalDensity = %f\n", m.ModelMaterial.OpticalDensity);
         printf("model.ModelMaterial.IlluminationMode = %i\n", m.ModelMaterial.IlluminationMode);
 
-        printf("model.ModelMaterial.textures_ambient.Filename = %s\n", m.ModelMaterial.textures_ambient.Filename.c_str());
-        printf("model.ModelMaterial.textures_diffuse.Filename = %s\n", m.ModelMaterial.textures_diffuse.Filename.c_str());
-        printf("model.ModelMaterial.textures_specular.Filename = %s\n", m.ModelMaterial.textures_specular.Filename.c_str());
-        printf("model.ModelMaterial.textures_specularExp.Filename = %s\n", m.ModelMaterial.textures_specularExp.Filename.c_str());
-        printf("model.ModelMaterial.textures_dissolve.Filename = %s\n", m.ModelMaterial.textures_dissolve.Filename.c_str());
-        printf("model.ModelMaterial.textures_bump.Filename = %s\n", m.ModelMaterial.textures_bump.Filename.c_str());
-        printf("model.ModelMaterial.textures_displacement.Filename = %s\n", m.ModelMaterial.textures_displacement.Filename.c_str());
+        printf("model.ModelMaterial.textures_ambient.Filename = %s\n", m.ModelMaterial.TextureAmbient.Filename.c_str());
+        printf("model.ModelMaterial.textures_diffuse.Filename = %s\n", m.ModelMaterial.TextureDiffuse.Filename.c_str());
+        printf("model.ModelMaterial.textures_specular.Filename = %s\n", m.ModelMaterial.TextureSpecular.Filename.c_str());
+        printf("model.ModelMaterial.textures_specularExp.Filename = %s\n", m.ModelMaterial.TextureSpecularExp.Filename.c_str());
+        printf("model.ModelMaterial.textures_dissolve.Filename = %s\n", m.ModelMaterial.TextureDissolve.Filename.c_str());
+        printf("model.ModelMaterial.textures_bump.Filename = %s\n", m.ModelMaterial.TextureBump.Filename.c_str());
+        printf("model.ModelMaterial.textures_displacement.Filename = %s\n", m.ModelMaterial.TextureDisplacement.Filename.c_str());
     }
 }
 

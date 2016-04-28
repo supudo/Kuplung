@@ -16,7 +16,7 @@ class STLParser {
 public:
     ~STLParser();
     void init(std::function<void(float)> doProgress);
-    objScene parse(FBEntity file);
+    std::vector<MeshModel> parse(FBEntity file);
     void destroy();
 
     std::vector<float> vertices, normals;

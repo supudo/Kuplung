@@ -68,8 +68,8 @@ void Light::init(LightSourceType type) {
     this->initProperties(type);
 }
 
-void Light::setModel(objModelFace oFace) {
-    this->oFace = oFace;
+void Light::setModel(MeshModel meshModel) {
+    this->meshModel = meshModel;
 }
 
 void Light::initProperties(LightSourceType type) {
@@ -186,27 +186,27 @@ void Light::initBuffers(std::string assetsFolder) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->oFace.verticesCount * sizeof(GLfloat), &this->oFace.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countVertices * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->oFace.normalsCount * sizeof(GLfloat), &this->oFace.normals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countNormals * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexNormal);
     glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // textures and colors
-    if (this->oFace.texture_coordinates.size() > 0) {
+    if (this->meshModel.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->oFace.texture_coordinates.size() * sizeof(GLfloat), &this->oFace.texture_coordinates[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->meshModel.texture_coordinates.size() * sizeof(glm::vec3), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeTextureCoord);
         glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
-        if (this->oFace.faceMaterial.textures_diffuse.image != "") {
-            std::string matImageLocal = assetsFolder + "/gui/" + this->oFace.faceMaterial.textures_diffuse.image;
+        if (this->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
+            std::string matImageLocal = assetsFolder + "/gui/" + this->meshModel.ModelMaterial.TextureDiffuse.Image;
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -248,7 +248,7 @@ void Light::initBuffers(std::string assetsFolder) {
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->oFace.indicesCount * sizeof(GLuint), &this->oFace.indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshModel.countIndices * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
@@ -304,14 +304,14 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
 
         if (this->vboTextureDiffuse == 0) {
             glUniform1i(this->glUniformUseColor, 1);
-            glUniform3f(this->glUniformColor, this->oFace.faceMaterial.diffuse.r, this->oFace.faceMaterial.diffuse.g, this->oFace.faceMaterial.diffuse.b);
+            glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);
         }
 
         // draw
         glBindVertexArray(this->glVAO);
         if (this->showInWire)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glDrawElements(GL_TRIANGLES, this->oFace.indicesCount, GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
         if (this->showInWire)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(0);

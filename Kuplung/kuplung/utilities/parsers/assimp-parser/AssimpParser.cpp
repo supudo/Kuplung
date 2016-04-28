@@ -21,12 +21,12 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 }
 
-objScene AssimpParser::parse(FBEntity file) {
+std::vector<MeshModel> AssimpParser::parse(FBEntity file) {
     this->file = file;
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         Settings::Instance()->funcDoLog("[Assimp] Parse error : " + std::string(this->parser.GetErrorString()));
-        return this->scene;
+        return this->models;
     }
 
     this->indexModel = -1;
@@ -39,41 +39,17 @@ objScene AssimpParser::parse(FBEntity file) {
     this->vectorsVertices = {};
     this->vectorsTextureCoordinates = {};
     this->vectorsTextureCoordinates = {};
-    this->scene = {};
-    this->scene.materials = {};
-    this->scene.totalCountGeometricVertices = 0;
-    this->scene.totalCountTextureCoordinates = 0;
-    this->scene.totalCountNormalVertices = 0;
-    this->scene.totalCountIndices = 0;
-    this->scene.totalCountFaces = 0;
-    this->scene.objFile = file.title;
 
     this->processNode(scene->mRootNode, scene);
 
-    for (size_t i=0; i<this->scene.models.size(); i++) {
-        for (size_t j=0; j<this->scene.models[i].faces.size(); j++) {
-            this->scene.models[i].faces[j].faceMaterial = this->findMaterial(this->scene.models[i].faces[j].materialID);
-        }
-    }
-
-    return this->scene;
+    return this->models;
 }
 
 void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
     for (GLuint i=0; i<node->mNumMeshes; i++) {
         aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-        objModel entityModel;
-        entityModel.ID = this->modelID;
-        entityModel.modelID = std::string(node->mName.C_Str());
-        entityModel.verticesCount = 0;
-        entityModel.textureCoordinatesCount = 0;
-        entityModel.normalsCount = 0;
-        entityModel.indicesCount = 0;
-        this->scene.models.push_back(entityModel);
-        this->indexModel += 1;
-        this->indexFace = -1;
-        this->modelID += 1;
-        entityModel.faces.push_back(this->processMesh(mesh, scene));
+        std::string modelTitle = std::string(node->mName.C_Str());
+        this->models.push_back(this->processMesh(mesh, scene, modelTitle));
         this->meshCounter += 1;
         this->funcProgress(((float)this->meshCounter / (float)scene->mNumMeshes) * 100.0);
     }
@@ -82,68 +58,38 @@ void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
     }
 }
 
-objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
-    objModelFace entityFace;
-    entityFace.ID = this->faceID;
-    entityFace.ModelTitle = this->scene.models[this->indexModel].modelID;
-    entityFace.objFile = this->scene.objFile;
-    entityFace.ModelID = this->scene.models[this->indexModel].ID;
-    entityFace.materialID = "";
-    entityFace.verticesCount = 0;
-    entityFace.textureCoordinatesCount = 0;
-    entityFace.normalsCount = 0;
-    entityFace.indicesCount = 0;
-    entityFace.solidColor = {};
-    this->scene.totalCountFaces += 1;
-    this->indexFace += 1;
-    this->faceID += 1;
+MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::string modelTitle) {
+    MeshModel entityModel;
+    entityModel.ID = this->indexModel;
+    entityModel.ModelTitle = modelTitle;
+    entityModel.countVertices = 0;
+    entityModel.countTextureCoordinates = 0;
+    entityModel.countNormals = 0;
+    entityModel.countIndices = 0;
 
     // Walk through each of the mesh's vertices
     for (GLuint i=0; i<mesh->mNumVertices; i++) {
-        glm::vec3 vector;
-
         // vertices
-        vector = glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z);
-        entityFace.vertices.push_back(vector.x);
-        entityFace.vertices.push_back(vector.y);
-        entityFace.vertices.push_back(vector.z);
-        entityFace.vectors_vertices.push_back(vector);
-        this->scene.totalCountGeometricVertices += 3;
-        this->scene.models[this->indexModel].verticesCount += 3;
-        entityFace.verticesCount += 3;
+        entityModel.vertices.push_back(glm::vec3(mesh->mVertices[i].x, mesh->mVertices[i].y, mesh->mVertices[i].z));
+        entityModel.countVertices += 3;
 
         // Normals
-        vector = glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z);
-        entityFace.normals.push_back(vector.x);
-        entityFace.normals.push_back(vector.y);
-        entityFace.normals.push_back(vector.z);
-        entityFace.vectors_normals.push_back(vector);
-        this->scene.totalCountNormalVertices += 3;
-        this->scene.models[this->indexModel].normalsCount += 3;
-        entityFace.normalsCount += 3;
+        entityModel.normals.push_back(glm::vec3(mesh->mNormals[i].x, mesh->mNormals[i].y, mesh->mNormals[i].z));
+        entityModel.countNormals += 3;
 
         // Texture coordinates
         if (mesh->mTextureCoords[0]) {
-            glm::vec2 vec = glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y);
-            entityFace.texture_coordinates.push_back(vec.x);
-            entityFace.texture_coordinates.push_back(vec.y);
-            entityFace.vectors_texture_coordinates.push_back(vec);
-            this->scene.totalCountTextureCoordinates += 2;
-            this->scene.models[this->indexModel].textureCoordinatesCount += 2;
-            entityFace.textureCoordinatesCount += 2;
+            entityModel.texture_coordinates.push_back(glm::vec2(mesh->mTextureCoords[0][i].x, mesh->mTextureCoords[0][i].y));
+            entityModel.countTextureCoordinates += 2;
         }
     }
 
     // Indices
     for (GLuint i=0; i<mesh->mNumFaces; i++) {
         aiFace face = mesh->mFaces[i];
-        // Retrieve all indices of the face and store them in the indices vector
         for (GLuint j=0; j<face.mNumIndices; j++) {
-            entityFace.indices.push_back(face.mIndices[j]);
-            this->indicesCounter += 1;
-            this->scene.totalCountIndices += 1;
-            entityFace.indicesCount += 1;
-            this->scene.models[this->indexModel].indicesCount += 1;
+            entityModel.indices.push_back(face.mIndices[j]);
+            entityModel.countIndices += 1;
         }
     }
 
@@ -153,142 +99,112 @@ objModelFace AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene) {
 
         aiString materialName;
         material->Get(AI_MATKEY_NAME, materialName);
-        entityFace.materialID = std::string(materialName.C_Str());
+        entityModel.MaterialTitle = std::string(materialName.C_Str());
 
-        objMaterial entityMaterial;
+        MeshModelMaterial entityMaterial;
         this->indexMaterial += 1;
-        entityMaterial.materialID = std::string(materialName.C_Str());
-        this->scene.materials.push_back(entityMaterial);
+        entityMaterial.MaterialTitle = std::string(materialName.C_Str());
 
         float shininess = 0.0f;
         material->Get(AI_MATKEY_SHININESS, shininess); // Ns
-        // Assimp still multiples the exp 4 times ....
-        this->scene.materials[this->indexMaterial].specularExp = shininess / 4.0f;
+        entityMaterial.SpecularExp = shininess / 4.0f; // Assimp still multiples the exp 4 times ....
 
-        float shininessStrength = 0.0f;
-        material->Get(AI_MATKEY_REFRACTI, shininessStrength); // Ni
-        this->scene.materials[this->indexMaterial].opticalDensity = shininessStrength;
-
-//        printf("---- %s\n", materialName.C_Str());
-//        float t = 0.0f;
-//        material->Get(AI_MATKEY_SHININESS_STRENGTH, t);
-//        printf("AI_MATKEY_SHININESS_STRENGTH = %f\n", t);
-//        material->Get(AI_MATKEY_OPACITY, t);
-//        printf("AI_MATKEY_OPACITY = %f\n", t);
-//        material->Get(AI_MATKEY_REFLECTIVITY, t);
-//        printf("AI_MATKEY_REFLECTIVITY = %f\n", t);
-//        material->Get(AI_MATKEY_REFRACTI, t);
-//        printf("AI_MATKEY_REFRACTI = %f\n", t);
-//        material->Get(AI_MATKEY_SHININESS, t);
-//        printf("AI_MATKEY_SHININESS = %f\n", t);
-//        material->Get(AI_MATKEY_SHININESS_STRENGTH, t);
-//        printf("AI_MATKEY_SHININESS_STRENGTH = %f\n", t);
-
-        material->Get(AI_MATKEY_OPACITY, this->scene.materials[this->indexMaterial].transparency);
-        int illum_mode = 0;
-        material->Get(AI_MATKEY_SHADING_MODEL, illum_mode);
-        this->scene.materials[this->indexMaterial].illumination = illum_mode;
+        material->Get(AI_MATKEY_REFRACTI, entityMaterial.OpticalDensity); // Ni
+        material->Get(AI_MATKEY_OPACITY, entityMaterial.Transparency);
+        material->Get(AI_MATKEY_SHADING_MODEL, entityMaterial.IlluminationMode);
 
         aiColor3D color;
+
         material->Get(AI_MATKEY_COLOR_AMBIENT, color);
-        this->scene.materials[this->indexMaterial].ambient = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        entityMaterial.AmbientColor = glm::vec3(color.r, color.g, color.b);
+
         material->Get(AI_MATKEY_COLOR_DIFFUSE, color);
-        this->scene.materials[this->indexMaterial].diffuse = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        entityMaterial.DiffuseColor = glm::vec3(color.r, color.g, color.b);
+
         material->Get(AI_MATKEY_COLOR_SPECULAR, color);
-        this->scene.materials[this->indexMaterial].specular = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        entityMaterial.SpecularColor = glm::vec3(color.r, color.g, color.b);
+
         material->Get(AI_MATKEY_COLOR_EMISSIVE, color);
-        this->scene.materials[this->indexMaterial].emission = { /*.r=*/ color.r, /*.g=*/ color.g, /*.b=*/ color.b, /*.a=*/ 1.0f };
+        entityMaterial.EmissionColor = glm::vec3(color.r, color.g, color.b);
 
         // ambient
-        std::vector<objMaterialImage> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT);
+        std::vector<MeshMaterialTextureImage> ambientMaps = this->loadMaterialTextures(material, aiTextureType_AMBIENT);
         if (ambientMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_ambient = ambientMaps[0];
+            entityMaterial.TextureAmbient = ambientMaps[0];
 
         // diffuse
-        std::vector<objMaterialImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE);
+        std::vector<MeshMaterialTextureImage> diffuseMaps = this->loadMaterialTextures(material, aiTextureType_DIFFUSE);
         if (diffuseMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_diffuse = diffuseMaps[0];
+            entityMaterial.TextureDiffuse = diffuseMaps[0];
 
         // specular
-        std::vector<objMaterialImage> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR);
+        std::vector<MeshMaterialTextureImage> specularMaps = this->loadMaterialTextures(material, aiTextureType_SPECULAR);
         if (specularMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_specular = specularMaps[0];
+            entityMaterial.TextureSpecular = specularMaps[0];
 
         // specular exp
-        std::vector<objMaterialImage> specularExpMaps = this->loadMaterialTextures(material, aiTextureType_SHININESS);
+        std::vector<MeshMaterialTextureImage> specularExpMaps = this->loadMaterialTextures(material, aiTextureType_SHININESS);
         if (specularExpMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_specularExp = specularExpMaps[0];
+            entityMaterial.TextureSpecularExp = specularExpMaps[0];
 
         // dissolve
-        std::vector<objMaterialImage> dissolveMaps = this->loadMaterialTextures(material, aiTextureType_OPACITY);
+        std::vector<MeshMaterialTextureImage> dissolveMaps = this->loadMaterialTextures(material, aiTextureType_OPACITY);
         if (dissolveMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_dissolve = dissolveMaps[0];
+            entityMaterial.TextureDissolve = dissolveMaps[0];
 
         // normal/bump
-        std::vector<objMaterialImage> normalMaps = this->loadMaterialTextures(material, aiTextureType_HEIGHT);
+        std::vector<MeshMaterialTextureImage> normalMaps = this->loadMaterialTextures(material, aiTextureType_HEIGHT);
         if (normalMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_bump = normalMaps[0];
+            entityMaterial.TextureBump = normalMaps[0];
 
         // displacement
-        std::vector<objMaterialImage> displacementMaps = this->loadMaterialTextures(material, aiTextureType_DISPLACEMENT);
+        std::vector<MeshMaterialTextureImage> displacementMaps = this->loadMaterialTextures(material, aiTextureType_DISPLACEMENT);
         if (displacementMaps.size() > 0)
-            this->scene.materials[this->indexMaterial].textures_displacement = displacementMaps[0];
+            entityMaterial.TextureDisplacement = displacementMaps[0];
 
-        entityFace.faceMaterial = entityMaterial;
+        entityModel.ModelMaterial = entityMaterial;
     }
 
-    entityFace.solidColor.push_back(1.0);
-    entityFace.solidColor.push_back(0.0);
-    entityFace.solidColor.push_back(0.0);
-    this->scene.models[this->indexModel].faces.push_back(entityFace);
+    this->indexModel += 1;
 
-    return entityFace;
+    return entityModel;
 }
 
-std::vector<objMaterialImage> AssimpParser::loadMaterialTextures(aiMaterial* mat, aiTextureType type) {
-    std::vector<objMaterialImage> textures;
+std::vector<MeshMaterialTextureImage> AssimpParser::loadMaterialTextures(aiMaterial* mat, aiTextureType type) {
+    std::vector<MeshMaterialTextureImage> textures;
     for (GLuint i = 0; i < mat->GetTextureCount(type); i++) {
         aiString str;
         mat->GetTexture(type, i, &str);
-        // Check if texture was loaded before and if so, continue to next iteration: skip loading a new texture
         GLboolean skip = false;
-        for (GLuint j = 0; j < textures_loaded.size(); j++) {
-            if (this->textures_loaded[j].filename == std::string(str.C_Str())) {
+        for (GLuint j = 0; j < this->textures_loaded.size(); j++) {
+            if (this->textures_loaded[j].Filename == std::string(str.C_Str())) {
                 textures.push_back(this->textures_loaded[j]);
-                skip = true; // A texture with the same filepath has already been loaded, continue to next one. (optimization)
+                skip = true;
                 break;
             }
         }
-        if (!skip) {   // If texture hasn't been loaded already, load it
-            objMaterialImage texture;
-            texture.filename = std::string(str.C_Str());
-            texture.image = std::string(str.C_Str());
+        if (!skip) {
+            MeshMaterialTextureImage texture;
+            texture.Filename = std::string(str.C_Str());
+            texture.Image = std::string(str.C_Str());
 
             std::string folderPath = this->file.path;
             boost::replace_all(folderPath, this->file.title, "");
         #ifdef _WIN32
-            if (!boost::filesystem::exists(texture.image))
-                texture.image = folderPath + "/" + texture.image;
+            if (!boost::filesystem::exists(texture.Image))
+                texture.Image = folderPath + "/" + texture.Image;
         #else
-            if (!boost::filesystem::exists(texture.image))
-                texture.image = folderPath + "/" + texture.image;
+            if (!boost::filesystem::exists(texture.Image))
+                texture.Image = folderPath + "/" + texture.Image;
         #endif
 
-            texture.height = 0;
-            texture.width = 0;
-            texture.useTexture = true;
-            texture.commands = {};
+            texture.Height = 0;
+            texture.Width = 0;
+            texture.UseTexture = true;
+            texture.Commands = {};
             textures.push_back(texture);
             this->textures_loaded.push_back(texture);  // Store it as texture loaded for entire model, to ensure we won't unnecesery load duplicate textures.
         }
     }
     return textures;
-}
-
-objMaterial AssimpParser::findMaterial(std::string materialID) {
-    for (size_t i=0; i<this->scene.materials.size(); i++) {
-        if (materialID == this->scene.materials[i].materialID)
-            return this->scene.materials[i];
-    }
-    return {};
 }

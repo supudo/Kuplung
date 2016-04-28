@@ -149,7 +149,7 @@ SOURCES += main.cpp \
     kuplung/utilities/libnoise/noiseutils.cpp \
     kuplung/utilities/maths/Maths.cpp \
     kuplung/utilities/parsers/FileModelManager.cpp \
-    kuplung/utilities/parsers/obj-parser/objParser.cpp \
+#    kuplung/utilities/parsers/obj-parser/objParser.cpp \
     kuplung/utilities/parsers/obj-parser2/objParser2.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
@@ -212,7 +212,7 @@ HEADERS += \
     kuplung/utilities/maths/Maths.hpp \
     kuplung/utilities/parsers/FileModelManager.hpp \
     kuplung/utilities/parsers/ModelObject.h \
-    kuplung/utilities/parsers/obj-parser/objParser.hpp \
+#    kuplung/utilities/parsers/obj-parser/objParser.hpp \
     kuplung/utilities/parsers/obj-parser2/objParser2.hpp \
     kuplung/utilities/parsers/stl-parser/STLParser.hpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp \

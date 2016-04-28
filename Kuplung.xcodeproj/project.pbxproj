@@ -18,7 +18,6 @@
 		8A03648D1C6B71EC001489C8 /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364851C6B71EC001489C8 /* Terrain.cpp */; };
 		8A03648E1C6B71EC001489C8 /* WorldGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364871C6B71EC001489C8 /* WorldGrid.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
-		8A05DE401CB521C600EA0B4D /* AssimpParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A05DE3E1CB521C600EA0B4D /* AssimpParser.cpp */; };
 		8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */; };
 		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
@@ -99,8 +98,6 @@
 		8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70901C6CACB40085CAE5 /* Controls.cpp */; };
 		8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70931C6CACB40085CAE5 /* noiseutils.cpp */; };
 		8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */; };
-		8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709A1C6CACB40085CAE5 /* objParser.cpp */; };
-		8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E709D1C6CACB40085CAE5 /* STLParser.cpp */; };
 		8A7F386D1C7F28EB004D4520 /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
 		8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
 		8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
@@ -353,8 +350,6 @@
 		8A0364871C6B71EC001489C8 /* WorldGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WorldGrid.cpp; sourceTree = "<group>"; };
 		8A0364881C6B71EC001489C8 /* WorldGrid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = WorldGrid.hpp; sourceTree = "<group>"; };
 		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
-		8A05DE3E1CB521C600EA0B4D /* AssimpParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssimpParser.cpp; path = "assimp-parser/AssimpParser.cpp"; sourceTree = "<group>"; };
-		8A05DE3F1CB521C600EA0B4D /* AssimpParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AssimpParser.hpp; path = "assimp-parser/AssimpParser.hpp"; sourceTree = "<group>"; };
 		8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.2.0.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.2/lib/libassimp.3.2.0.dylib; sourceTree = "<group>"; };
 		8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsStructs.h; sourceTree = "<group>"; };
 		8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
@@ -473,10 +468,6 @@
 		8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileModelManager.cpp; sourceTree = "<group>"; };
 		8A6E70971C6CACB40085CAE5 /* FileModelManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileModelManager.hpp; sourceTree = "<group>"; };
 		8A6E70981C6CACB40085CAE5 /* ModelObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelObject.h; sourceTree = "<group>"; };
-		8A6E709A1C6CACB40085CAE5 /* objParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = objParser.cpp; sourceTree = "<group>"; };
-		8A6E709B1C6CACB40085CAE5 /* objParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = objParser.hpp; sourceTree = "<group>"; };
-		8A6E709D1C6CACB40085CAE5 /* STLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = STLParser.cpp; sourceTree = "<group>"; };
-		8A6E709E1C6CACB40085CAE5 /* STLParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = STLParser.hpp; sourceTree = "<group>"; };
 		8A6E70A01C6CACB40085CAE5 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		8A6E70A11C6CACB40085CAE5 /* stb_image_write.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image_write.h; sourceTree = "<group>"; };
 		8A6E70A21C6CACB40085CAE5 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
@@ -590,15 +581,6 @@
 				8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */,
 			);
 			path = objects;
-			sourceTree = "<group>";
-		};
-		8A05DE3D1CB521C000EA0B4D /* assimp-parser */ = {
-			isa = PBXGroup;
-			children = (
-				8A05DE3E1CB521C600EA0B4D /* AssimpParser.cpp */,
-				8A05DE3F1CB521C600EA0B4D /* AssimpParser.hpp */,
-			);
-			name = "assimp-parser";
 			sourceTree = "<group>";
 		};
 		8A1AFB201C71FC3F004888D8 /* iconfonts */ = {
@@ -784,33 +766,12 @@
 		8A6E70951C6CACB40085CAE5 /* parsers */ = {
 			isa = PBXGroup;
 			children = (
-				8A05DE3D1CB521C000EA0B4D /* assimp-parser */,
 				8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */,
 				8A6E70971C6CACB40085CAE5 /* FileModelManager.hpp */,
 				8A6E70981C6CACB40085CAE5 /* ModelObject.h */,
-				8A6E70991C6CACB40085CAE5 /* obj-parser */,
 				8ADA690B1CCF8D7800A4444B /* obj-parser2 */,
-				8A6E709C1C6CACB40085CAE5 /* stl-parser */,
 			);
 			path = parsers;
-			sourceTree = "<group>";
-		};
-		8A6E70991C6CACB40085CAE5 /* obj-parser */ = {
-			isa = PBXGroup;
-			children = (
-				8A6E709A1C6CACB40085CAE5 /* objParser.cpp */,
-				8A6E709B1C6CACB40085CAE5 /* objParser.hpp */,
-			);
-			path = "obj-parser";
-			sourceTree = "<group>";
-		};
-		8A6E709C1C6CACB40085CAE5 /* stl-parser */ = {
-			isa = PBXGroup;
-			children = (
-				8A6E709D1C6CACB40085CAE5 /* STLParser.cpp */,
-				8A6E709E1C6CACB40085CAE5 /* STLParser.hpp */,
-			);
-			path = "stl-parser";
 			sourceTree = "<group>";
 		};
 		8A6E709F1C6CACB40085CAE5 /* stb */ = {
@@ -1172,12 +1133,10 @@
 				8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */,
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
-				8A6E70BA1C6CACB40085CAE5 /* STLParser.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8ADA690E1CCF8D8400A4444B /* objParser2.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
-				8A05DE401CB521C600EA0B4D /* AssimpParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
 				8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */,
@@ -1206,7 +1165,6 @@
 				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
 				8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
-				8A6E70B91C6CACB40085CAE5 /* objParser.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
 				8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,

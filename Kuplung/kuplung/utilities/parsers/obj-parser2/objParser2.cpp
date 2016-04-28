@@ -66,10 +66,6 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
     this->vectorTextureCoordinates = {};
     this->vectorIndices = {};
 
-    time_t t = time(0);
-    struct tm * now = localtime(&t);
-    printf("[objParser2] START %i:%i %i\n", now->tm_hour, now->tm_min, now->tm_sec);
-
     std::ifstream ifs(this->file.path.c_str());
     if (!ifs.is_open()) {
         Settings::Instance()->funcDoLog("Cannot open .obj file" + this->file.path + "!");
@@ -198,10 +194,6 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
 
     ifs.close();
 
-    time_t t2 = time(0);
-    struct tm * now2 = localtime(&t2);
-    printf("[objParser2] END %i:%i %i\n", now2->tm_hour, now2->tm_min, now2->tm_sec);
-
     return this->models;
 }
 
@@ -296,31 +288,31 @@ void objParser2::loadMaterialFile(std::string materialFile) {
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureAmbient)) {
             boost::replace_first(singleLine, this->id_materialTextureAmbient, "");
-            this->materials[currentMaterialTitle].textures_ambient = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureAmbient = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureBump)) {
             boost::replace_first(singleLine, this->id_materialTextureBump, "");
-            this->materials[currentMaterialTitle].textures_bump = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureBump = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureDiffuse)) {
             boost::replace_first(singleLine, this->id_materialTextureDiffuse, "");
-            this->materials[currentMaterialTitle].textures_diffuse = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureDiffuse = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureDisplacement)) {
             boost::replace_first(singleLine, this->id_materialTextureDisplacement, "");
-            this->materials[currentMaterialTitle].textures_displacement = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureDisplacement = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureDissolve)) {
             boost::replace_first(singleLine, this->id_materialTextureDissolve, "");
-            this->materials[currentMaterialTitle].textures_dissolve = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureDissolve = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureSpecular)) {
             boost::replace_first(singleLine, this->id_materialTextureSpecular, "");
-            this->materials[currentMaterialTitle].textures_specular = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureSpecular = this->parseTextureImage(singleLine);
         }
         else if (boost::starts_with(singleLine, this->id_materialTextureSpecularExp)) {
             boost::replace_first(singleLine, this->id_materialTextureSpecularExp, "");
-            this->materials[currentMaterialTitle].textures_specularExp = this->parseTextureImage(singleLine);
+            this->materials[currentMaterialTitle].TextureSpecularExp = this->parseTextureImage(singleLine);
         }
     }
 }

@@ -21,12 +21,12 @@ class CameraModel {
 public:
     void destroy();
     void init();
-    void setModel(objModelFace oFace);
+    void setModel(MeshModel meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
     void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
-    objModelFace oFace;
+    MeshModel meshModel;
 
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;

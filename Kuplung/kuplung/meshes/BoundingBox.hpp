@@ -21,9 +21,9 @@ public:
     ~BoundingBox();
     void destroy();
     bool initShaderProgram();
-    void initBuffers(objModelFace oFace);
+    void initBuffers(MeshModel meshModel);
     void render(glm::mat4 matrixMVP, glm::vec4 outlineColor);
-    objModelFace oFace;
+    MeshModel meshModel;
 
     glm::mat4 matrixTransform;
 

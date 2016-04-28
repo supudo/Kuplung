@@ -84,8 +84,8 @@ bool BoundingBox::initShaderProgram() {
     return success;
 }
 
-void BoundingBox::initBuffers(objModelFace oFace) {
-    this->oFace = oFace;
+void BoundingBox::initBuffers(MeshModel meshModel) {
+    this->meshModel = meshModel;
 
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
@@ -119,16 +119,16 @@ void BoundingBox::initBuffers(objModelFace oFace) {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
-    this->min_x = this->max_x = this->oFace.vectors_vertices[0].x;
-    this->min_y = this->max_y = this->oFace.vectors_vertices[0].y;
-    this->min_z = this->max_z = this->oFace.vectors_vertices[0].z;
-    for (unsigned int i = 0; i < this->oFace.vectors_vertices.size(); i++) {
-        if (this->oFace.vectors_vertices[i].x < this->min_x) this->min_x = this->oFace.vectors_vertices[i].x;
-        if (this->oFace.vectors_vertices[i].x > this->max_x) this->max_x = this->oFace.vectors_vertices[i].x;
-        if (this->oFace.vectors_vertices[i].y < this->min_y) this->min_y = this->oFace.vectors_vertices[i].y;
-        if (this->oFace.vectors_vertices[i].y > this->max_y) this->max_y = this->oFace.vectors_vertices[i].y;
-        if (this->oFace.vectors_vertices[i].z < this->min_z) this->min_z = this->oFace.vectors_vertices[i].z;
-        if (this->oFace.vectors_vertices[i].z > this->max_z) this->max_z = this->oFace.vectors_vertices[i].z;
+    this->min_x = this->max_x = this->meshModel.vertices[0].x;
+    this->min_y = this->max_y = this->meshModel.vertices[0].y;
+    this->min_z = this->max_z = this->meshModel.vertices[0].z;
+    for (unsigned int i = 0; i < this->meshModel.vertices.size(); i++) {
+        if (this->meshModel.vertices[i].x < this->min_x) this->min_x = this->meshModel.vertices[i].x;
+        if (this->meshModel.vertices[i].x > this->max_x) this->max_x = this->meshModel.vertices[i].x;
+        if (this->meshModel.vertices[i].y < this->min_y) this->min_y = this->meshModel.vertices[i].y;
+        if (this->meshModel.vertices[i].y > this->max_y) this->max_y = this->meshModel.vertices[i].y;
+        if (this->meshModel.vertices[i].z < this->min_z) this->min_z = this->meshModel.vertices[i].z;
+        if (this->meshModel.vertices[i].z > this->max_z) this->max_z = this->meshModel.vertices[i].z;
     }
 
     float padding = Settings::Instance()->BoundingBoxPadding;
@@ -152,7 +152,7 @@ void BoundingBox::initBuffers(objModelFace oFace) {
 
 void BoundingBox::render(glm::mat4 matrixMVP, glm::vec4 outlineColor) {
     if (Settings::Instance()->BoundingBoxRefresh)
-        this->initBuffers(this->oFace);
+        this->initBuffers(this->meshModel);
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

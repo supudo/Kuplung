@@ -74,7 +74,7 @@ void RayPicking::pick() {
     this->sceneSelectedModelObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFace *mmf = this->meshModelFaces[i];
-        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
+        for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
 //                glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
 //                glm::vec3 v2 = this->fixSignVector(mmf->oFace.vectors_vertices[j - 1]);

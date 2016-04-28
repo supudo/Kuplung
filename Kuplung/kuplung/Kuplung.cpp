@@ -328,8 +328,8 @@ void Kuplung::renderScene() {
                     this->managerObjects->grid,
                     this->managerObjects->Setting_UIAmbientLight);
 
-        cVertices += (int)mmf->oFace.vectors_vertices.size();
-        cIndices += mmf->oFace.indicesCount;
+        cVertices += mmf->meshModel.countVertices;
+        cIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
         cTriangles += cVertices / 3;
         cFaces += cTriangles / 2;
     }
@@ -447,7 +447,8 @@ void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
 }
 
 void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
-    this->scenes.push_back(this->parser->parse(file, type));
+    std::vector<MeshModel> newModels = this->parser->parse(file, type);
+    this->meshModels.insert(end(this->meshModels), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
@@ -459,30 +460,24 @@ void Kuplung::processParsedObjFile() {
         this->managerUI->showLoading();
         this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
-        objScene scene = this->scenes[this->scenes.size() - 1];
-        for (int i=0; i<(int)scene.models.size(); i++) {
-            objModel model = scene.models[i];
-            for (size_t j=0; j<model.faces.size(); j++) {
-                ModelFace *mmf = new ModelFace();
+        for (size_t i=0; i<this->meshModels.size(); i++) {
+            MeshModel model = this->meshModels[i];
+            ModelFace *mmf = new ModelFace();
+            mmf->dataVertices = this->managerObjects->grid->dataVertices;
+            mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+            mmf->dataNormals = this->managerObjects->grid->dataNormals;
+            mmf->dataIndices = this->managerObjects->grid->dataIndices;
 
-                // relfection area
-                mmf->dataVertices = this->managerObjects->grid->dataVertices;
-                mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
-                mmf->dataNormals = this->managerObjects->grid->dataNormals;
-                mmf->dataIndices = this->managerObjects->grid->dataIndices;
-
-                mmf->ModelID = i;
-                mmf->init();
-                mmf->setModel(model.faces[j]);
-                mmf->initModelProperties();
-                mmf->initShaderProgram();
-                mmf->initBuffers(Settings::Instance()->currentFolder);
-                this->meshModelFaces.push_back(mmf);
-            }
+            mmf->ModelID = (int)i;
+            mmf->init();
+            mmf->setModel(model);
+            mmf->initModelProperties();
+            mmf->initShaderProgram();
+            mmf->initBuffers(Settings::Instance()->currentFolder);
+            this->meshModelFaces.push_back(mmf);
         }
 
         this->managerUI->meshModelFaces = &this->meshModelFaces;
-        this->managerUI->scenes = &this->scenes;
 
         if (this->meshModelFaces.size() > 0) {
             this->managerUI->showControlsModels = true;
@@ -515,15 +510,13 @@ void Kuplung::doLog(std::string logMessage) {
 }
 
 void Kuplung::guiClearScreen() {
-    this->scenes = {};
-    this->meshModelFaces = {};
-    this->scenes.clear();
+    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
+        this->meshModelFaces[i]->destroy();
+    }
+    this->meshModels.clear();
+    this->meshModelFaces.clear();
     this->objFiles.clear();
     this->rayLines.clear();
-    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFace *mmf = this->meshModelFaces[i];
-        mmf->destroy();
-    }
 }
 
 void Kuplung::guiEditorshaderCompiled(std::string fileName) {
@@ -546,7 +539,9 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
 }
 
 void Kuplung::guiModelDelete(int selectedModel) {
+    this->meshModelFaces[selectedModel]->destroy();
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
+    this->meshModels.erase(this->meshModels.begin() + selectedModel);
 }
 
 void Kuplung::guiSceneExport(FBEntity file) {

@@ -20,12 +20,12 @@ public:
     ~Light();
     void destroy();
     void init(LightSourceType type);
-    void setModel(objModelFace oFace);
+    void setModel(MeshModel meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
-    objModelFace oFace;
+    MeshModel meshModel;
 
     std::string title;
     std::string description;

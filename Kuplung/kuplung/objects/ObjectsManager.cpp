@@ -160,7 +160,7 @@ void ObjectsManager::initCameraModel() {
     this->cameraModel = new CameraModel();
     this->cameraModel->initProperties();
     this->cameraModel->initShaderProgram();
-    this->cameraModel->setModel(this->systemModels["camera"].models[0].faces[0]);
+    this->cameraModel->setModel(this->systemModels["camera"]);
     this->cameraModel->initBuffers();
 }
 
@@ -184,37 +184,37 @@ void ObjectsManager::initAxisSystem() {
 void ObjectsManager::initAxisHelpers() {
     this->axisHelpers_xMinus = new AxisHelpers();
     this->axisHelpers_xMinus->init();
-    this->axisHelpers_xMinus->setModel(this->systemModels["axis_x_minus"].models[0].faces[0]);
+    this->axisHelpers_xMinus->setModel(this->systemModels["axis_x_minus"]);
     this->axisHelpers_xMinus->initShaderProgram();
     this->axisHelpers_xMinus->initBuffers();
 
     this->axisHelpers_xPlus = new AxisHelpers();
     this->axisHelpers_xPlus->init();
-    this->axisHelpers_xPlus->setModel(this->systemModels["axis_x_plus"].models[0].faces[0]);
+    this->axisHelpers_xPlus->setModel(this->systemModels["axis_x_plus"]);
     this->axisHelpers_xPlus->initShaderProgram();
     this->axisHelpers_xPlus->initBuffers();
 
     this->axisHelpers_yMinus = new AxisHelpers();
     this->axisHelpers_yMinus->init();
-    this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"].models[0].faces[0]);
+    this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"]);
     this->axisHelpers_yMinus->initShaderProgram();
     this->axisHelpers_yMinus->initBuffers();
 
     this->axisHelpers_yPlus = new AxisHelpers();
     this->axisHelpers_yPlus->init();
-    this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"].models[0].faces[0]);
+    this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"]);
     this->axisHelpers_yPlus->initShaderProgram();
     this->axisHelpers_yPlus->initBuffers();
 
     this->axisHelpers_zMinus = new AxisHelpers();
     this->axisHelpers_zMinus->init();
-    this->axisHelpers_zMinus->setModel(this->systemModels["axis_z_minus"].models[0].faces[0]);
+    this->axisHelpers_zMinus->setModel(this->systemModels["axis_z_minus"]);
     this->axisHelpers_zMinus->initShaderProgram();
     this->axisHelpers_zMinus->initBuffers();
 
     this->axisHelpers_zPlus = new AxisHelpers();
     this->axisHelpers_zPlus->init();
-    this->axisHelpers_zPlus->setModel(this->systemModels["axis_z_plus"].models[0].faces[0]);
+    this->axisHelpers_zPlus->setModel(this->systemModels["axis_z_plus"]);
     this->axisHelpers_zPlus->initShaderProgram();
     this->axisHelpers_zPlus->initBuffers();
 }
@@ -244,20 +244,20 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
         case LightSourceType_Directional:
             lightObject->title = ((title == "") ? "Directional " + std::to_string((int)this->lightSources.size() + 1) : title);
             lightObject->description = ((description == "") ? "Directional area light source" : description);
-            lightObject->setModel(this->systemModels["light_directional"].models[0].faces[0]);
+            lightObject->setModel(this->systemModels["light_directional"]);
             break;
         case LightSourceType_Point:
             lightObject->title = ((title == "") ? "Point " + std::to_string((int)this->lightSources.size() + 1) : title);
             lightObject->description = ((description == "") ? "Omnidirectional point light source" : description);
-            lightObject->setModel(this->systemModels["light_point"].models[0].faces[0]);
+            lightObject->setModel(this->systemModels["light_point"]);
             break;
         case LightSourceType_Spot:
             lightObject->title = ((title == "") ? "Spot " + std::to_string((int)this->lightSources.size() + 1) : title);
             lightObject->description = ((description == "") ? "Directional cone light source" : description);
-            lightObject->setModel(this->systemModels["light_spot"].models[0].faces[0]);
+            lightObject->setModel(this->systemModels["light_spot"]);
             break;
         default:
-            lightObject->setModel(this->systemModels["lamp"].models[0].faces[0]);
+            lightObject->setModel(this->systemModels["lamp"]);
             break;
     }
     lightObject->initShaderProgram();
@@ -278,45 +278,45 @@ void ObjectsManager::loadSystemModels() {
 
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-    this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
-    this->systemModels["light_directional"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["light_directional"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "light_point";
     file.path = Settings::Instance()->appFolder() + "/gui/light_point.obj";
-    this->systemModels["light_point"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["light_point"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
-    this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "camera";
     file.path = Settings::Instance()->appFolder() + "/gui/camera.obj";
-    this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "x_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_plus.obj";
-    this->systemModels["axis_x_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_x_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "x_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_minus.obj";
-    this->systemModels["axis_x_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_x_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "y_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_plus.obj";
-    this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "y_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_minus.obj";
-    this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "z_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_plus.obj";
-    this->systemModels["axis_z_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_z_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 
     file.title = "z_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_minus.obj";
-    this->systemModels["axis_z_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Assimp);
+    this->systemModels["axis_z_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
 }

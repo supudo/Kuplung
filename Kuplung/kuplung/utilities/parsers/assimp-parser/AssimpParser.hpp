@@ -20,7 +20,7 @@ class AssimpParser {
 public:
     ~AssimpParser();
     void init(std::function<void(float)> doProgress);
-    objScene parse(FBEntity file);
+    std::vector<MeshModel> parse(FBEntity file);
     void destroy();
 
     std::vector<float> vertices, normals;
@@ -29,18 +29,17 @@ private:
     std::function<void(float)> funcProgress;
 
     FBEntity file;
-    objScene scene;
+    std::vector<MeshModel> models;
     Assimp::Importer parser;
 
     int indexModel = -1, indexFace = -1, indexMaterial = -1, indicesCounter = 0, modelID = 1, faceID = 1, meshCounter = 0;
     std::vector<glm::vec3> vectorsVertices, vectorsNormals;
     std::vector<glm::vec2> vectorsTextureCoordinates;
-    std::vector<objMaterialImage> textures_loaded;
+    std::vector<MeshMaterialTextureImage> textures_loaded;
 
     void processNode(aiNode* node, const aiScene* scene);
-    objModelFace processMesh(aiMesh* mesh, const aiScene* scene);
-    std::vector<objMaterialImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type);
-    objMaterial findMaterial(std::string materialID);
+    MeshModel processMesh(aiMesh* mesh, const aiScene* scene, std::string modelTitle);
+    std::vector<MeshMaterialTextureImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type);
 };
 
 #endif /* AssimpParser_hpp */

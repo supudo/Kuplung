@@ -11,7 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
-#include "kuplung/utilities/parsers/obj-parser/objParser.hpp"
+//#include "kuplung/utilities/parsers/obj-parser/objParser.hpp"
 #include "kuplung/utilities/parsers/obj-parser2/objParser2.hpp"
 #include "kuplung/utilities/parsers/stl-parser/STLParser.hpp"
 #include "kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp"
@@ -23,13 +23,13 @@ public:
     ~FileModelManager();
     void destroy();
     void init(std::function<void(float)> doProgress);
-    objScene parse(FBEntity file, FileBrowser_ParserType type);
+    std::vector<MeshModel> parse(FBEntity file, FileBrowser_ParserType type);
 
 private:
     std::function<void(float)> funcProgress;
     void doProgress(float value);
 
-    objParser *parserOBJ;
+    //objParser *parserOBJ;
     objParser2 *parserOBJ2;
     STLParser *parserSTL;
     AssimpParser *parserAssimp;

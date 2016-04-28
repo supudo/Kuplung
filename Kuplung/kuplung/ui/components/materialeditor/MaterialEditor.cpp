@@ -312,16 +312,16 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     int slotsCounter = 0;
 
     ImVec2 nodePosition = ImVec2(40, 50);
-    if (face->oFace.faceMaterial.textures_ambient.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Ambient, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_ambient.filename, face->oFace.faceMaterial.textures_ambient.image);
+    if (face->meshModel.ModelMaterial.TextureAmbient.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Ambient, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureAmbient.Filename, face->meshModel.ModelMaterial.TextureAmbient.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 100 : 80);
     }
     else {
-        float r = face->oFace.faceMaterial.ambient.r;
-        float g = face->oFace.faceMaterial.ambient.g;
-        float b = face->oFace.faceMaterial.ambient.b;
+        float r = face->meshModel.ModelMaterial.AmbientColor.r;
+        float g = face->meshModel.ModelMaterial.AmbientColor.g;
+        float b = face->meshModel.ModelMaterial.AmbientColor.b;
         MENode_Color* node = new MENode_Color(materialNodesCounter, "Ambient Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -330,17 +330,16 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    printf("face->oFace.faceMaterial.textures_diffuse.image = %s\n", face->oFace.faceMaterial.textures_diffuse.image.c_str());
-    if (face->oFace.faceMaterial.textures_diffuse.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Diffuse, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_diffuse.filename, face->oFace.faceMaterial.textures_diffuse.image);
+    if (face->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Diffuse, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDiffuse.Filename, face->meshModel.ModelMaterial.TextureDiffuse.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
     else {
-        float r = face->oFace.faceMaterial.diffuse.r;
-        float g = face->oFace.faceMaterial.diffuse.g;
-        float b = face->oFace.faceMaterial.diffuse.b;
+        float r = face->meshModel.ModelMaterial.DiffuseColor.r;
+        float g = face->meshModel.ModelMaterial.DiffuseColor.g;
+        float b = face->meshModel.ModelMaterial.DiffuseColor.b;
         MENode_Color* node = new MENode_Color(1, "Diffuse Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -349,8 +348,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    if (face->oFace.faceMaterial.textures_dissolve.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Dissolve, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_dissolve.filename, face->oFace.faceMaterial.textures_dissolve.image);
+    if (face->meshModel.ModelMaterial.TextureDissolve.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Dissolve, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDissolve.Filename, face->meshModel.ModelMaterial.TextureDissolve.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -358,16 +357,16 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->oFace.faceMaterial.textures_specular.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Specular, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specular.filename, face->oFace.faceMaterial.textures_specular.image);
+    if (face->meshModel.ModelMaterial.TextureSpecular.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Specular, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureSpecular.Filename, face->meshModel.ModelMaterial.TextureSpecular.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
     else {
-        float r = face->oFace.faceMaterial.specular.r;
-        float g = face->oFace.faceMaterial.specular.g;
-        float b = face->oFace.faceMaterial.specular.b;
+        float r = face->meshModel.ModelMaterial.SpecularColor.r;
+        float g = face->meshModel.ModelMaterial.SpecularColor.g;
+        float b = face->meshModel.ModelMaterial.SpecularColor.b;
         MENode_Color* node = new MENode_Color(3, "Specular Color", nodePosition, 1.0f, ImColor(r, g, b), 0, 1);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -376,8 +375,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    if (face->oFace.faceMaterial.textures_specularExp.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_SpecularExp, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_specularExp.filename, face->oFace.faceMaterial.textures_specularExp.image);
+    if (face->meshModel.ModelMaterial.TextureSpecularExp.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_SpecularExp, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureSpecularExp.Filename, face->meshModel.ModelMaterial.TextureSpecularExp.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -385,8 +384,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->oFace.faceMaterial.textures_bump.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Bump, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_bump.filename, face->oFace.faceMaterial.textures_bump.image);
+    if (face->meshModel.ModelMaterial.TextureBump.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Bump, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureBump.Filename, face->meshModel.ModelMaterial.TextureBump.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
@@ -394,8 +393,8 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->oFace.faceMaterial.textures_displacement.image != "") {
-        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->oFace.faceMaterial.textures_displacement.filename, face->oFace.faceMaterial.textures_displacement.image);
+    if (face->meshModel.ModelMaterial.TextureDisplacement.Image != "") {
+        MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDisplacement.Filename, face->meshModel.ModelMaterial.TextureDisplacement.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
         materialNodesCounter += 1;
