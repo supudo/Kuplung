@@ -1,13 +1,13 @@
 //
-//  objParser.hpp
+//  objParser2.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/19/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef objParser_hpp
-#define objParser_hpp
+#ifndef objParser2_hpp
+#define objParser2_hpp
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
@@ -22,9 +22,9 @@ struct PackedVertex{
     };
 };
 
-class objParser {
+class objParser2 {
 public:
-    ~objParser();
+    ~objParser2();
     void init(std::function<void(float)> doProgress);
     std::vector<MeshModel> parse(FBEntity file);
     void destroy();
@@ -107,4 +107,4 @@ private:
     std::string id_materialTextureDissolve;
 };
 
-#endif /* objParser_hpp */
+#endif /* objParser2_hpp */

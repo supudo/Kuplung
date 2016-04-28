@@ -1,12 +1,12 @@
 //
-//  objParser.cpp
+//  objParser2.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/19/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "objParser.hpp"
+#include "objParser2.hpp"
 #include <fstream>
 #include <numeric>
 #include <sstream>
@@ -17,16 +17,16 @@
 
 #pragma mark - Destructor
 
-objParser::~objParser() {
+objParser2::~objParser2() {
     this->destroy();
 }
 
-void objParser::destroy() {
+void objParser2::destroy() {
 }
 
 #pragma mark - Publics
 
-void objParser::init(std::function<void(float)> doProgress) {
+void objParser2::init(std::function<void(float)> doProgress) {
     this->doProgress = doProgress;
     this->objFileLinesCount = 0;
 
@@ -58,7 +58,7 @@ void objParser::init(std::function<void(float)> doProgress) {
     this->id_materialTextureDissolve = "map_d ";
 }
 
-std::vector<MeshModel> objParser::parse(FBEntity file) {
+std::vector<MeshModel> objParser2::parse(FBEntity file) {
     this->file = file;
     this->models = {};
     this->vectorVertices = {};
@@ -195,7 +195,7 @@ std::vector<MeshModel> objParser::parse(FBEntity file) {
 
 #pragma mark - Helpers
 
-bool objParser::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result) {
+bool objParser2::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result) {
     std::map<PackedVertex, unsigned int>::iterator it = vertexToOutIndex.find(packed);
     if (it == vertexToOutIndex.end())
         return false;
@@ -205,7 +205,7 @@ bool objParser::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVert
     }
 }
 
-void objParser::loadMaterialFile(std::string materialFile) {
+void objParser2::loadMaterialFile(std::string materialFile) {
     this->materials.clear();
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
@@ -313,7 +313,7 @@ void objParser::loadMaterialFile(std::string materialFile) {
     }
 }
 
-MeshMaterialTextureImage objParser::parseTextureImage(std::string textureLine) {
+MeshMaterialTextureImage objParser2::parseTextureImage(std::string textureLine) {
     MeshMaterialTextureImage materialImage;
 
     materialImage.Height = 0;
@@ -358,7 +358,7 @@ MeshMaterialTextureImage objParser::parseTextureImage(std::string textureLine) {
     return materialImage;
 }
 
-std::vector<std::string> objParser::splitString(const std::string &s, std::string delimiter) {
+std::vector<std::string> objParser2::splitString(const std::string &s, std::string delimiter) {
     std::vector<std::string> elements;
     boost::split(elements, s, boost::is_any_of(delimiter));
     return elements;

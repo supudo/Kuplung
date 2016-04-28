@@ -1,12 +1,12 @@
 //
-//  objParserX.cpp
+//  objParser1.cpp
 // Kuplung
 //
 //  Created by Sergey Petrov on 11/19/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "objParserX.hpp"
+#include "objParser1.hpp"
 #include <fstream>
 #include <numeric>
 #include <sstream>
@@ -15,13 +15,13 @@
 
 #pragma mark - Destructor
 
-objParserX::~objParserX() {
+objParser1::~objParser1() {
     this->destroy();
 }
 
 #pragma mark - Publics
 
-void objParserX::init(std::function<void(float)> doProgress) {
+void objParser1::init(std::function<void(float)> doProgress) {
     this->models = {};
     this->materials = {};
     this->doProgress = doProgress;
@@ -59,10 +59,10 @@ void objParserX::init(std::function<void(float)> doProgress) {
     this->regex_materialTextureDissolve = "^map_d\\s.*";
 }
 
-void objParserX::destroy() {
+void objParser1::destroy() {
 }
 
-std::vector<MeshModel> objParserX::parse(FBEntity file) {
+std::vector<MeshModel> objParser1::parse(FBEntity file) {
     this->file = file;
     this->geometricVertices = {};
     this->textureCoordinates = {};
@@ -186,7 +186,7 @@ std::vector<MeshModel> objParserX::parse(FBEntity file) {
     return this->models;
 }
 
-MeshModelMaterial objParserX::findMaterial(std::string materialID) {
+MeshModelMaterial objParser1::findMaterial(std::string materialID) {
     for (size_t i=0; i<this->materials.size(); i++) {
         if (materialID == this->materials[i].MaterialTitle)
             return this->materials[i];
@@ -194,7 +194,7 @@ MeshModelMaterial objParserX::findMaterial(std::string materialID) {
     return {};
 }
 
-std::vector<MeshModelMaterial> objParserX::loadMaterial(std::string materialFile) {
+std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string materialFile) {
     std::vector<MeshModelMaterial> materials;
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
@@ -294,7 +294,7 @@ std::vector<MeshModelMaterial> objParserX::loadMaterial(std::string materialFile
 
 #pragma mark - Helpers
 
-MeshMaterialTextureImage objParserX::parseTextureImage(std::string textureLine) {
+MeshMaterialTextureImage objParser1::parseTextureImage(std::string textureLine) {
     MeshMaterialTextureImage materialImage;
 
     materialImage.Height = 0;
@@ -341,7 +341,7 @@ MeshMaterialTextureImage objParserX::parseTextureImage(std::string textureLine) 
     return materialImage;
 }
 
-std::vector<std::string> objParserX::splitString(const std::string &s, std::regex delimiter) {
+std::vector<std::string> objParser1::splitString(const std::string &s, std::regex delimiter) {
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
@@ -350,7 +350,7 @@ std::vector<std::string> objParserX::splitString(const std::string &s, std::rege
     return elements;
 }
 
-std::vector<float> objParserX::string2float(std::vector<std::string> strings) {
+std::vector<float> objParser1::string2float(std::vector<std::string> strings) {
     std::vector<float> floats;
     try {
         for (size_t i=0; i<strings.size(); i++) {
@@ -361,7 +361,7 @@ std::vector<float> objParserX::string2float(std::vector<std::string> strings) {
     return floats;
 }
 
-int objParserX::getLineCount() {
+int objParser1::getLineCount() {
     char delim;
 #ifdef _WIN32
     delim = '\r\n';

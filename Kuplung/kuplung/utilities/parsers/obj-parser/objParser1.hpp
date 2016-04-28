@@ -1,22 +1,22 @@
 //
-//  objParserX.hpp
+//  objParser1.hpp
 // Kuplung
 //
 //  Created by Sergey Petrov on 11/19/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef objParserX_hpp
-#define objParserX_hpp
+#ifndef objParser1_hpp
+#define objParser1_hpp
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include <regex>
 #include <functional>
 
-class objParserX {
+class objParser1 {
 public:
-    ~objParserX();
+    ~objParser1();
     void init(std::function<void(float)> doProgress);
     std::vector<MeshModel> parse(FBEntity file);
     void destroy();
@@ -107,4 +107,4 @@ private:
     std::regex regex_materialTextureDissolve;
 };
 
-#endif /* objParserX_hpp */
+#endif /* objParser1_hpp */

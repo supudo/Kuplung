@@ -13,8 +13,8 @@ FileModelManager::~FileModelManager() {
 }
 
 void FileModelManager::destroy() {
-    this->parserOBJ->destroy();
-    this->parserXOBJ->destroy();
+    this->parserOBJ2->destroy();
+    this->parserOBJ1->destroy();
     this->parserSTL->destroy();
     this->parserAssimp->destroy();
 }
@@ -22,11 +22,11 @@ void FileModelManager::destroy() {
 void FileModelManager::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 
-    this->parserOBJ = new objParser();
-    this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+    this->parserOBJ1 = new objParser1();
+    this->parserOBJ1->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
-    this->parserXOBJ = new objParserX();
-    this->parserXOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+    this->parserOBJ2 = new objParser2();
+    this->parserOBJ2->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
     this->parserSTL = new STLParser();
     this->parserSTL->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
@@ -40,13 +40,13 @@ std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_Parser
     switch (type) {
         case FileBrowser_ParserType_Own1: {
             if (file.extension == ".obj")
-                meshModels = this->parserXOBJ->parse(file);
+                meshModels = this->parserOBJ1->parse(file);
             else if (file.extension == ".stl")
                 meshModels = this->parserSTL->parse(file);
             break;
         }
         case FileBrowser_ParserType_Own2: {
-            meshModels = this->parserOBJ->parse(file);
+            meshModels = this->parserOBJ2->parse(file);
             break;
         }
         case FileBrowser_ParserType_Assimp: {
