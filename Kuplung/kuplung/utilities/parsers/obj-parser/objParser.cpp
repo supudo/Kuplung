@@ -75,6 +75,10 @@ objScene objParser::parse(FBEntity file) {
     this->scene.totalCountIndices = 0;
     this->scene.totalCountFaces = 0;
 
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    printf("[objParser] START %i:%i %i\n", now->tm_hour, now->tm_min, now->tm_sec);
+
     std::FILE *fp = std::fopen(this->file.path.c_str(), "rb");
     if (fp) {
         std::string fileContents;
@@ -227,6 +231,10 @@ objScene objParser::parse(FBEntity file) {
             this->scene.models[i].faces[j].faceMaterial = this->findMaterial(this->scene.models[i].faces[j].materialID);
         }
     }
+
+    time_t t2 = time(0);
+    struct tm * now2 = localtime(&t2);
+    printf("[objParser] END %i:%i %i\n", now2->tm_hour, now2->tm_min, now2->tm_sec);
 
     return this->scene;
 }

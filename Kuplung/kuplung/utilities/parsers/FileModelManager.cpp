@@ -39,8 +39,10 @@ objScene FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
     objScene obj = {};
     switch (type) {
         case FileBrowser_ParserType_Own: {
-            if (file.extension == ".obj")
-                obj = this->parserOBJ2->parse(file);
+            if (file.extension == ".obj") {
+                obj = this->parserOBJ->parse(file);
+                this->parserOBJ2->parse(file);
+            }
             else if (file.extension == ".stl")
                 obj = this->parserOBJ->parse(file);
             break;
