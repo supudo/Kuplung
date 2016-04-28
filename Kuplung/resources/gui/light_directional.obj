@@ -1,7 +1,7 @@
 # Blender v2.76 (sub 0) OBJ File: 'light_directional.blend'
 # www.blender.org
 mtllib light_directional.mtl
-o Sphere
+o LightDirectional
 v 0.000000 -0.195090 0.980785
 v 0.000000 -0.382683 0.923880
 v 0.000000 -0.555570 0.831470
@@ -1018,7 +1018,7 @@ vn 0.223000 -0.417300 -0.881000
 vn 0.223100 -0.417300 0.881000
 vn 0.097600 -0.990400 0.097500
 vn 0.097600 -0.990400 -0.097600
-usemtl MaterialLightSun
+usemtl MaterialLightDirectional
 s off
 f 13//1 28//1 29//1
 f 6//2 21//2 22//2

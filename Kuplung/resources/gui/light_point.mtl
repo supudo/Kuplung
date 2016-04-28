@@ -1,7 +1,7 @@
 # Blender MTL File: 'light_point.blend'
 # Material Count: 1
 
-newmtl MaterialPoint
+newmtl MaterialLightPoint
 Ns 96.078431
 Ka 1.000000 1.000000 1.000000
 Kd 0.356161 0.356161 0.356161

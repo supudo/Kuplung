@@ -65,7 +65,7 @@ struct MeshModel {
     std::vector<unsigned int> indices;
 };
 
-void static Kuplung_printObjModels(std::vector<MeshModel> models) {
+void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices) {
     for (size_t i=0; i<models.size(); i++) {
         MeshModel m = models[i];
         printf("model.ID = %i\n", m.ID);
@@ -76,14 +76,16 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models) {
         printf("model.MaterialTitle = %s\n", m.MaterialTitle.c_str());
         printf("model.ModelTitle = %s\n", m.ModelTitle.c_str());
 
-        printf("m.geometry :\n");
-        for (size_t j=0; j<m.indices.size(); j++) {
-            int idx = m.indices[j];
-            std::string geom = Settings::Instance()->string_format("index = %i ---> ", idx);
-            geom += Settings::Instance()->string_format("vertex = [%f, %f, %f]", m.vertices[idx].x, m.vertices[idx].y, m.vertices[idx].z);
-            geom += Settings::Instance()->string_format(", uv = [%f, %f]", m.texture_coordinates[idx].x, m.texture_coordinates[idx].y);
-            geom += Settings::Instance()->string_format(", normal = [%f, %f, %f]", m.normals[idx].x, m.normals[idx].y, m.normals[idx].z);
-            printf("%s\n", geom.c_str());
+        if (byIndices) {
+            printf("m.geometry :\n");
+            for (size_t j=0; j<m.indices.size(); j++) {
+                int idx = m.indices[j];
+                std::string geom = Settings::Instance()->string_format("index = %i ---> ", idx);
+                geom += Settings::Instance()->string_format("vertex = [%f, %f, %f]", m.vertices[idx].x, m.vertices[idx].y, m.vertices[idx].z);
+                geom += Settings::Instance()->string_format(", uv = [%f, %f]", m.texture_coordinates[idx].x, m.texture_coordinates[idx].y);
+                geom += Settings::Instance()->string_format(", normal = [%f, %f, %f]", m.normals[idx].x, m.normals[idx].y, m.normals[idx].z);
+                printf("%s\n", geom.c_str());
+            }
         }
 
         printf("model.ModelMaterial.MaterialID = %i\n", m.ModelMaterial.MaterialID);
@@ -107,6 +109,7 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models) {
         printf("model.ModelMaterial.textures_bump.Filename = %s\n", m.ModelMaterial.TextureBump.Filename.c_str());
         printf("model.ModelMaterial.textures_displacement.Filename = %s\n", m.ModelMaterial.TextureDisplacement.Filename.c_str());
     }
+    printf("\n--------\n");
 }
 
 #endif /* ModelObject_h */

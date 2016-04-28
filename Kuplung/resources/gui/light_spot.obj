@@ -1,7 +1,7 @@
 # Blender v2.76 (sub 0) OBJ File: 'light_spot.blend'
 # www.blender.org
 mtllib light_spot.mtl
-o Cone.001
+o LightSpot
 v -0.400000 0.000000 -0.457554
 v -0.392314 0.078036 -0.457554
 v -0.369552 0.153073 -0.457554
@@ -358,7 +358,7 @@ vn -0.668500 -0.548600 -0.502100
 vn -0.762700 -0.407700 -0.502100
 vn -0.860700 0.084800 -0.502100
 vn -0.827600 -0.251000 -0.502100
-usemtl (null)
+usemtl MaterialLightSpot
 s off
 f 32//1 10//1 33//1
 f 1//2 10//2 2//2
