@@ -13,8 +13,7 @@ FileModelManager::~FileModelManager() {
 }
 
 void FileModelManager::destroy() {
-    //this->parserOBJ->destroy();
-    this->parserOBJ2->destroy();
+    this->parserOBJ->destroy();
     this->parserSTL->destroy();
     this->parserAssimp->destroy();
 }
@@ -22,11 +21,8 @@ void FileModelManager::destroy() {
 void FileModelManager::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 
-    //this->parserOBJ = new objParser();
-    //this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
-
-    this->parserOBJ2 = new objParser2();
-    this->parserOBJ2->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+    this->parserOBJ = new objParser();
+    this->parserOBJ->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 
     this->parserSTL = new STLParser();
     this->parserSTL->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
@@ -40,8 +36,7 @@ std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_Parser
     switch (type) {
         case FileBrowser_ParserType_Own: {
             if (file.extension == ".obj") {
-                //obj = this->parserOBJ->parse(file);
-                meshModels = this->parserOBJ2->parse(file);
+                meshModels = this->parserOBJ->parse(file);
             }
             else if (file.extension == ".stl")
                 meshModels = this->parserSTL->parse(file);

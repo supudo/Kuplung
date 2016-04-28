@@ -1,6 +1,6 @@
 //
 //  objParser.hpp
-// Kuplung
+//  Kuplung
 //
 //  Created by Sergey Petrov on 11/19/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
@@ -11,99 +11,110 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
-#include <regex>
 #include <functional>
+
+struct PackedVertex{
+    glm::vec3 position;
+    glm::vec2 uv;
+    glm::vec3 normal;
+    bool operator<(const PackedVertex that) const{
+        return memcmp((void*)this, (void*)&that, sizeof(PackedVertex))>0;
+    };
+};
 
 class objParser {
 public:
     ~objParser();
     void init(std::function<void(float)> doProgress);
-    objScene parse(FBEntity file);
+    std::vector<MeshModel> parse(FBEntity file);
     void destroy();
 
 private:
-    objScene scene;
-
     FBEntity file;
     std::function<void(float)> doProgress;
-    std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
-    std::vector<float> string2float(std::vector<std::string> strings);
-    int getLineCount();
-
-    std::vector<objMaterial> loadMaterial(std::string materialFile);
-    objMaterial findMaterial(std::string materialID);
-    objMaterialImage parseTextureImage(std::string textureLine);
-
-    std::vector<float> geometricVertices, textureCoordinates, vertexNormals, spaceVertices, polygonalFaces;
     int objFileLinesCount;
 
-    // comment line
-    std::regex regex_comment;
-    // whitespace
-    std::regex regex_whiteSpace;
+    std::vector<MeshModel> models;
+    std::map<std::string, MeshModelMaterial> materials;
+    std::vector<glm::vec3> vectorVertices, vectorNormals;
+    std::vector<glm::vec2> vectorTextureCoordinates;
+    std::vector<unsigned int> vectorIndices;
+
+    void loadMaterialFile(std::string materialFile);
+    MeshMaterialTextureImage parseTextureImage(std::string textureLine);
+    std::vector<std::string> splitString(const std::string &s, std::string delimiter);
+
+    void fixIndices(
+        std::vector<glm::vec3> & in_vertices,
+        std::vector<glm::vec2> & in_uvs,
+        std::vector<glm::vec3> & in_normals,
+        std::vector<unsigned int> & out_indices,
+        std::vector<glm::vec3> & out_vertices,
+        std::vector<glm::vec2> & out_uvs,
+        std::vector<glm::vec3> & out_normals
+    );
+    bool getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result);
 
     // current object name
-    std::regex regex_objTitle;
+    std::string id_objTitle;
     // vertex coordinates
-    std::regex regex_geometricVertices;
+    std::string id_geometricVertices;
     // texture coordinates
-    std::regex regex_textureCoordinates;
+    std::string id_textureCoordinates;
     // normals
-    std::regex regex_vertexNormals;
+    std::string id_vertexNormals;
     // space vertices
-    std::regex regex_spaceVertices;
+    std::string id_spaceVertices;
     // polygon faces
-    std::regex regex_polygonalFaces;
-    // face separation
-    std::regex regex_polygonalFacesSingle;
+    std::string id_face;
     // material file
-    std::regex regex_materialFile;
+    std::string id_materialFile;
     // material name for the current object
-    std::regex regex_useMaterial;
+    std::string id_useMaterial;
 
     // material
-    std::regex regex_materialNew;
+    std::string id_materialNew;
 
     // To specify the ambient reflectivity of the current material, you can use the "Ka" statement,
     // the "Ka spectral" statement, or the "Ka xyz" statement.
-    std::regex regex_materialAmbientColor;
+    std::string id_materialAmbientColor;
     // To specify the diffuse reflectivity of the current material, you can use the "Kd" statement,
     // the "Kd spectral" statement, or the "Kd xyz" statement.
-    std::regex regex_materialDiffuseColor;
+    std::string id_materialDiffuseColor;
     // To specify the specular reflectivity of the current material, you can use the "Ks" statement,
     // the "Ks spectral" statement, or the "Ks xyz" statement.
-    std::regex regex_materialSpecularColor;
+    std::string id_materialSpecularColor;
     // The emission constant color of the material
-    std::regex regex_materialEmissionColor;
+    std::string id_materialEmissionColor;
     // Specifies the specular exponent for the current material. This defines the focus of the specular highlight.
-    std::regex regex_materialSpecularExp;
+    std::string id_materialSpecularExp;
     // Specifies the dissolve for the current material.  Tr or d, depending on the formats. Transperancy
-    std::regex regex_materialTransperant1;
-    std::regex regex_materialTransperant2;
+    std::string id_materialTransperant1;
+    std::string id_materialTransperant2;
     // Specifies the optical density for the surface. This is also known as index of refraction.
-    std::regex regex_materialOpticalDensity;
+    std::string id_materialOpticalDensity;
     // The "illum" statement specifies the illumination model to use in the material.
     // Illumination models are mathematical equations that represent various material lighting and shading effects.
-    std::regex regex_materialIllumination;
+    std::string id_materialIllumination;
     // Specifies that a color texture file or a color procedural texture file is applied to the ambient reflectivity of the material.
     // During rendering, the "map_Ka" value is multiplied by the "Ka" value.
-    std::regex regex_materialTextureAmbient;
+    std::string id_materialTextureAmbient;
     // Specifies that a color texture file or color procedural texture file is linked to the diffuse reflectivity of the material.
     // During rendering, the map_Kd value is multiplied by the Kd value.
-    std::regex regex_materialTextureDiffuse;
+    std::string id_materialTextureDiffuse;
     // Bump map
-    std::regex regex_materialTextureBump;
+    std::string id_materialTextureBump;
     // Displacement map
-    std::regex regex_materialTextureDisplacement;
+    std::string id_materialTextureDisplacement;
     // Specifies that a color texture file or color procedural texture file is linked to the specular reflectivity of the material.
     // During rendering, the map_Ks value is multiplied by the Ks value.
-    std::regex regex_materialTextureSpecular;
+    std::string id_materialTextureSpecular;
     // Specifies that a scalar texture file or scalar procedural texture file is linked to the specular exponent of the material.
     // During rendering, the map_Ns value is multiplied by the Ns value.
-    std::regex regex_materialTextureSpecularExp;
+    std::string id_materialTextureSpecularExp;
     // Specifies that a scalar texture file or scalar procedural texture file is linked to the dissolve of the material.
     // During rendering, the map_d value is multiplied by the d value.
-    std::regex regex_materialTextureDissolve;
+    std::string id_materialTextureDissolve;
 };
 
 #endif /* objParser_hpp */
