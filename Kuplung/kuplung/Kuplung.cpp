@@ -412,12 +412,27 @@ void Kuplung::addShape(ShapeType type) {
         default:
             break;
     }
+    FileBrowser_ParserType t;
+    switch (Settings::Instance()->ModelFileParser) {
+        case 0:
+            t = FileBrowser_ParserType_Own1;
+            break;
+        case 1:
+            t = FileBrowser_ParserType_Own2;
+            break;
+        case 2:
+            t = FileBrowser_ParserType_Assimp;
+            break;
+        default:
+            t = FileBrowser_ParserType_Assimp;
+            break;
+    }
     FBEntity shapeFile;
     shapeFile.isFile = true;
     shapeFile.extension = ".obj";
     shapeFile.title = shapeName + ".obj";
     shapeFile.path = Settings::Instance()->appFolder() + "/shapes/" + shapeName + ".obj";
-    this->guiProcessObjFile(shapeFile, FileBrowser_ParserType_Own);
+    this->guiProcessObjFile(shapeFile, t);
 }
 
 void Kuplung::addLight(LightSourceType type) {

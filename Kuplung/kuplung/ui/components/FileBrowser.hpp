@@ -17,8 +17,9 @@
 #include <boost/filesystem.hpp>
 
 typedef enum FileBrowser_ParserType {
-    FileBrowser_ParserType_Own = 0,
-    FileBrowser_ParserType_Assimp
+    FileBrowser_ParserType_Own1 = 0,
+    FileBrowser_ParserType_Own2 = 1,
+    FileBrowser_ParserType_Assimp = 2
 } FileBrowser_ParserType;
 
 class FileBrowser {

@@ -278,45 +278,45 @@ void ObjectsManager::loadSystemModels() {
 
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-    this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["lamp"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
-    this->systemModels["light_directional"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["light_directional"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "light_point";
     file.path = Settings::Instance()->appFolder() + "/gui/light_point.obj";
-    this->systemModels["light_point"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["light_point"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "light_spot";
     file.path = Settings::Instance()->appFolder() + "/gui/light_spot.obj";
-    this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["light_spot"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "camera";
     file.path = Settings::Instance()->appFolder() + "/gui/camera.obj";
-    this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["camera"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "x_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_plus.obj";
-    this->systemModels["axis_x_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_x_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "x_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/x_minus.obj";
-    this->systemModels["axis_x_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_x_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "y_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_plus.obj";
-    this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_y_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "y_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/y_minus.obj";
-    this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_y_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "z_plus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_plus.obj";
-    this->systemModels["axis_z_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_z_plus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
     file.title = "z_minus";
     file.path = Settings::Instance()->appFolder() + "/axis_helpers/z_minus.obj";
-    this->systemModels["axis_z_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own)[0];
+    this->systemModels["axis_z_minus"] = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 }

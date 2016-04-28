@@ -52,7 +52,7 @@ void FileBrowser::draw(const char* title, bool* p_opened, int TextureType) {
     ImGui::Separator();
 
     ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-    const char* parserItems[] = {"Own", "Assimp"};
+    const char* parserItems[] = {"Own 1.0", "Own 2.0", "Assimp"};
     if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
         Settings::Instance()->saveSettings();
 
@@ -103,7 +103,22 @@ void FileBrowser::drawFiles(int TextureType) {
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile) {
-                this->processFile(entity, (Settings::Instance()->ModelFileParser == 0 ? FileBrowser_ParserType_Own : FileBrowser_ParserType_Assimp), TextureType);
+                FileBrowser_ParserType t;
+                switch (Settings::Instance()->ModelFileParser) {
+                    case 0:
+                        t = FileBrowser_ParserType_Own1;
+                        break;
+                    case 1:
+                        t = FileBrowser_ParserType_Own2;
+                        break;
+                    case 2:
+                        t = FileBrowser_ParserType_Assimp;
+                        break;
+                    default:
+                        t = FileBrowser_ParserType_Assimp;
+                        break;
+                }
+                this->processFile(entity, t, TextureType);
                 Settings::Instance()->saveSettings();
             }
             else {

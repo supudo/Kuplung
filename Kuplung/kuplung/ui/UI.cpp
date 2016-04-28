@@ -128,7 +128,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                         std::string title = iter->first;
                         FBEntity file = iter->second;
                         if (ImGui::MenuItem(title.c_str(), NULL, false, true))
-                            this->funcProcessFile(file, FileBrowser_ParserType_Own);
+                            this->funcProcessFile(file, FileBrowser_ParserType_Own1);
                     }
                     ImGui::Separator();
                     if (ImGui::MenuItem("Clear recent files", NULL, false))

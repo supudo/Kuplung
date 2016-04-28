@@ -31,7 +31,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
 
-        const char* parserItems[] = {"Own", "Assimp"};
+        const char* parserItems[] = {"Own 1.0", "Own 2.0", "Assimp"};
         if (ImGui::Combo("Model Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
             Settings::Instance()->saveSettings();
     }

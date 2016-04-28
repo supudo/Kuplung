@@ -87,6 +87,25 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
                 printf("%s\n", geom.c_str());
             }
         }
+        else {
+            std::string verts;
+            for (size_t j=0; j<m.vertices.size(); j++) {
+                verts += Settings::Instance()->string_format("[%f, %f, %f], ", m.vertices[j].x, m.vertices[j].y, m.vertices[j].z);
+            }
+            printf("m.vertices : %s\n", verts.c_str());
+
+            std::string uvs;
+            for (size_t j=0; j<m.texture_coordinates.size(); j++) {
+                uvs += Settings::Instance()->string_format("[%f, %f], ", m.texture_coordinates[j].x, m.texture_coordinates[j].y);
+            }
+            printf("m.uvs : %s\n", uvs.c_str());
+
+            std::string normals;
+            for (size_t j=0; j<m.normals.size(); j++) {
+                normals += Settings::Instance()->string_format("[%f, %f, %f], ", m.normals[j].x, m.normals[j].y, m.normals[j].z);
+            }
+            printf("m.normals : %s\n", normals.c_str());
+        }
 
         printf("model.ModelMaterial.MaterialID = %i\n", m.ModelMaterial.MaterialID);
         printf("model.ModelMaterial.MaterialTitle = %s\n", m.ModelMaterial.MaterialTitle.c_str());

@@ -149,13 +149,8 @@ std::vector<MeshModel> objParser::parse(FBEntity file) {
                 this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[0] - 1]);
                 this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[1] - 1]);
                 this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[2] - 1]);
+                this->models[currentModelID].countTextureCoordinates += 3;
             }
-            else {
-                this->models[currentModelID].texture_coordinates.push_back(glm::vec2(0.0f));
-                this->models[currentModelID].texture_coordinates.push_back(glm::vec2(0.0f));
-                this->models[currentModelID].texture_coordinates.push_back(glm::vec2(0.0f));
-            }
-            this->models[currentModelID].countTextureCoordinates += 3;
 
             this->models[currentModelID].normals.push_back(vVertices[normalIndex[0] - 1]);
             this->models[currentModelID].normals.push_back(vVertices[normalIndex[1] - 1]);
@@ -170,7 +165,7 @@ std::vector<MeshModel> objParser::parse(FBEntity file) {
         std::vector<glm::vec3> outVertices, outNormals;
         std::vector<glm::vec2> outTextureCoordinates;
         for (size_t j=0; j<m.vertices.size(); j++) {
-            PackedVertex packed = { m.vertices[j], m.texture_coordinates[j], m.normals[j] };
+            PackedVertex packed = { m.vertices[j], (m.texture_coordinates.size() > 0) ? m.texture_coordinates[j] : glm::vec2(0.0f), m.normals[j] };
 
             unsigned int index;
             bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
@@ -178,7 +173,8 @@ std::vector<MeshModel> objParser::parse(FBEntity file) {
                 m.indices.push_back(index);
             else {
                 outVertices.push_back(m.vertices[j]);
-                outTextureCoordinates.push_back(m.texture_coordinates[j]);
+                if (m.texture_coordinates.size() > 0)
+                    outTextureCoordinates.push_back(m.texture_coordinates[j]);
                 outNormals.push_back(m.normals[j]);
                 unsigned int newIndex = (unsigned int)outVertices.size() - 1;
                 m.indices.push_back(newIndex);
