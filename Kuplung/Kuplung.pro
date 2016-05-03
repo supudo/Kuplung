@@ -48,8 +48,8 @@ mac {
 
     LIBS += -framework cocoa -framework OpenGL
 
-    LIBS += -L/usr/local/Cellar/boost/1.60.0_1/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_1/include
+    LIBS += -L/usr/local/Cellar/boost/1.60.0_2/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_2/include
 
     LIBS += -L/usr/local/Cellar/glm/0.9.7.4/lib
     INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.4/include
