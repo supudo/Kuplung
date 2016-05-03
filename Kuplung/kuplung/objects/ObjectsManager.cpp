@@ -276,7 +276,7 @@ void ObjectsManager::loadSystemModels() {
     file.isFile = true;
     file.extension = ".obj";
 
-    FileBrowser_ParserType parserType = FileBrowser_ParserType_Own1;
+    FileBrowser_ParserType parserType = FileBrowser_ParserType_Own2;
 
     file.title = "light";
     file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
@@ -285,6 +285,13 @@ void ObjectsManager::loadSystemModels() {
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
     this->systemModels["light_directional"] = this->fileParser->parse(file, parserType)[0];
+
+    file.title = "cube0";
+    file.path = Settings::Instance()->appFolder() + "/shapes/cube.obj";
+    printf("---- objParser1 ----- \n");
+    Kuplung_printObjModels(this->fileParser->parse(file, FileBrowser_ParserType_Own1), false);
+    printf("---- objParser2 ----- \n");
+    Kuplung_printObjModels(this->fileParser->parse(file, FileBrowser_ParserType_Own2), false);
 
     file.title = "light_point";
     file.path = Settings::Instance()->appFolder() + "/gui/light_point.obj";

@@ -157,8 +157,8 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             this->models[currentModelID].normals.push_back(vVertices[normalIndex[2] - 1]);
             this->models[currentModelID].countNormals += 3;
 
-            this->models[currentModelID].indices.push_back(this->models[currentModelID].countIndices);
-            this->models[currentModelID].countIndices += 1;
+//            this->models[currentModelID].indices.push_back(this->models[currentModelID].countIndices);
+//            this->models[currentModelID].countIndices += 1;
         }
     }
 

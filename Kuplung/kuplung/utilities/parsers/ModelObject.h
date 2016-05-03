@@ -69,10 +69,10 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
     for (size_t i=0; i<models.size(); i++) {
         MeshModel m = models[i];
         printf("model.ID = %i\n", m.ID);
-        printf("model.countIndices = %i\n", m.countIndices);
-        printf("model.countNormals = %i\n", m.countNormals);
-        printf("model.countTextureCoordinates = %i\n", m.countTextureCoordinates);
-        printf("model.countVertices = %i\n", m.countVertices);
+        printf("model.countIndices = %i (%i)\n", m.countIndices, ((*std::max_element(m.indices.begin(), m.indices.end())) + 1));
+        printf("model.countNormals = %i (%i)\n", m.countNormals, (m.countNormals * 3));
+        printf("model.countTextureCoordinates = %i (%i)\n", m.countTextureCoordinates, (m.countTextureCoordinates * 2));
+        printf("model.countVertices = %i (%i)\n", m.countVertices, (m.countVertices * 3));
         printf("model.MaterialTitle = %s\n", m.MaterialTitle.c_str());
         printf("model.ModelTitle = %s\n", m.ModelTitle.c_str());
 
