@@ -286,11 +286,6 @@ void ObjectsManager::loadSystemModels() {
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";
     this->systemModels["light_directional"] = this->fileParser->parse(file, parserType)[0];
 
-    printf("---- objParser1 ----- \n");
-    Kuplung_printObjModels(this->fileParser->parse(file, FileBrowser_ParserType_Own1), false);
-    printf("---- objParser2 ----- \n");
-    Kuplung_printObjModels(this->fileParser->parse(file, FileBrowser_ParserType_Own2), false);
-
     file.title = "light_point";
     file.path = Settings::Instance()->appFolder() + "/gui/light_point.obj";
     this->systemModels["light_point"] = this->fileParser->parse(file, parserType)[0];
