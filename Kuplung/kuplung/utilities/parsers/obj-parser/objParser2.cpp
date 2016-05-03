@@ -72,6 +72,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
         return {};
     }
 
+    std::vector<unsigned int> indexModels, indexVertices, indexTexture, indexNormals;
     std::vector<glm::vec3> vVertices, vNormals;
     std::vector<glm::vec2> vTextureCoordinates;
 
@@ -139,27 +140,42 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
                     return this->models;
                 }
             }
-
-            this->models[currentModelID].vertices.push_back(vVertices[vertexIndex[0] - 1]);
-            this->models[currentModelID].vertices.push_back(vVertices[vertexIndex[1] - 1]);
-            this->models[currentModelID].vertices.push_back(vVertices[vertexIndex[2] - 1]);
-            this->models[currentModelID].countVertices += 3;
-
-            if (matches == 9) {
-                this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[0] - 1]);
-                this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[1] - 1]);
-                this->models[currentModelID].texture_coordinates.push_back(vTextureCoordinates[uvIndex[2] - 1]);
-                this->models[currentModelID].countTextureCoordinates += 3;
-            }
-
-            this->models[currentModelID].normals.push_back(vVertices[normalIndex[0] - 1]);
-            this->models[currentModelID].normals.push_back(vVertices[normalIndex[1] - 1]);
-            this->models[currentModelID].normals.push_back(vVertices[normalIndex[2] - 1]);
-            this->models[currentModelID].countNormals += 3;
-
-//            this->models[currentModelID].indices.push_back(this->models[currentModelID].countIndices);
-//            this->models[currentModelID].countIndices += 1;
+            indexModels.push_back(currentModelID);
+            indexModels.push_back(currentModelID);
+            indexModels.push_back(currentModelID);
+            indexVertices.push_back(vertexIndex[0]);
+            indexVertices.push_back(vertexIndex[1]);
+            indexVertices.push_back(vertexIndex[2]);
+            indexTexture.push_back(uvIndex[0]);
+            indexTexture.push_back(uvIndex[1]);
+            indexTexture.push_back(uvIndex[2]);
+            indexNormals.push_back(normalIndex[0]);
+            indexNormals.push_back(normalIndex[1]);
+            indexNormals.push_back(normalIndex[2]);
         }
+    }
+
+    for (unsigned int i=0; i<indexVertices.size(); i++) {
+        unsigned int modelIndex = indexModels[i];
+        unsigned int vertexIndex = indexVertices[i];
+        unsigned int normalIndex = indexNormals[i];
+
+        glm::vec3 vertex = vVertices[vertexIndex - 1];
+        glm::vec3 normal = vNormals[normalIndex - 1];
+
+        this->models[modelIndex].vertices.push_back(vertex);
+        this->models[modelIndex].countVertices += 1;
+        this->models[modelIndex].normals.push_back(normal);
+        this->models[modelIndex].countNormals += 1;
+
+        if (vTextureCoordinates.size() > 0) {
+            unsigned int uvIndex = indexTexture[i];
+            glm::vec2 uv = vTextureCoordinates[uvIndex - 1];
+            this->models[modelIndex].texture_coordinates.push_back(uv);
+            this->models[modelIndex].countTextureCoordinates += 1;
+        }
+        else
+            this->models[modelIndex].countTextureCoordinates = 0;
     }
 
     std::map<PackedVertex, unsigned int> vertexToOutIndex;
