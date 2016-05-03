@@ -500,7 +500,6 @@ void Kuplung::processParsedObjFile() {
             //this->managerUI->showSceneStats = true;
         }
     }
-
     this->managerUI->hideParsing();
     this->managerUI->hideLoading();
 }

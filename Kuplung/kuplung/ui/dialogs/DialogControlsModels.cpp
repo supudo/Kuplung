@@ -45,7 +45,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->textureDissolve_Width = this->textureDissolve_Height = this->textureBump_Width = this->textureBump_Height = 0;
     this->textureSpecular_Width = this->textureSpecular_Height = this->textureSpecularExp_Width = this->textureSpecularExp_Height = 0;
 
-    this->selectedObject = 0;
+    this->selectedObject = -1;
     this->selectedTabScene = -1;
     this->selectedTabGUICamera = -1;
     this->selectedTabGUIGrid = -1;
@@ -206,7 +206,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     ImGui::EndGroup();
 
-    if (this->selectedObject > -1 && meshModelFaces != NULL && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
+    if (this->selectedObject > -1 && meshModelFaces != NULL && (int)(*meshModelFaces).size() > this->selectedObject && (*meshModelFaces)[this->selectedObject]->showMaterialEditor)
         this->componentMaterialEditor->draw(this->selectedObject, (*meshModelFaces)[this->selectedObject], &(*meshModelFaces)[this->selectedObject]->showMaterialEditor);
 
     *sceneSelectedModelObject = this->selectedObject;

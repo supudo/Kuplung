@@ -155,56 +155,58 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
         }
     }
 
-    for (unsigned int i=0; i<indexVertices.size(); i++) {
-        unsigned int modelIndex = indexModels[i];
-        unsigned int vertexIndex = indexVertices[i];
-        unsigned int normalIndex = indexNormals[i];
+    if (this->models.size() > 0) {
+        for (unsigned int i=0; i<indexVertices.size(); i++) {
+            unsigned int modelIndex = indexModels[i];
+            unsigned int vertexIndex = indexVertices[i];
+            unsigned int normalIndex = indexNormals[i];
 
-        glm::vec3 vertex = vVertices[vertexIndex - 1];
-        glm::vec3 normal = vNormals[normalIndex - 1];
+            glm::vec3 vertex = vVertices[vertexIndex - 1];
+            glm::vec3 normal = vNormals[normalIndex - 1];
 
-        this->models[modelIndex].vertices.push_back(vertex);
-        this->models[modelIndex].countVertices += 1;
-        this->models[modelIndex].normals.push_back(normal);
-        this->models[modelIndex].countNormals += 1;
+            this->models[modelIndex].vertices.push_back(vertex);
+            this->models[modelIndex].countVertices += 1;
+            this->models[modelIndex].normals.push_back(normal);
+            this->models[modelIndex].countNormals += 1;
 
-        if (vTextureCoordinates.size() > 0) {
-            unsigned int uvIndex = indexTexture[i];
-            glm::vec2 uv = vTextureCoordinates[uvIndex - 1];
-            this->models[modelIndex].texture_coordinates.push_back(uv);
-            this->models[modelIndex].countTextureCoordinates += 1;
-        }
-        else
-            this->models[modelIndex].countTextureCoordinates = 0;
-    }
-
-    std::map<PackedVertex, unsigned int> vertexToOutIndex;
-    for (size_t i=0; i<this->models.size(); i++) {
-        MeshModel m = this->models[i];
-        std::vector<glm::vec3> outVertices, outNormals;
-        std::vector<glm::vec2> outTextureCoordinates;
-        for (size_t j=0; j<m.vertices.size(); j++) {
-            PackedVertex packed = { m.vertices[j], (m.texture_coordinates.size() > 0) ? m.texture_coordinates[j] : glm::vec2(0.0f), m.normals[j] };
-
-            unsigned int index;
-            bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
-            if (found)
-                m.indices.push_back(index);
-            else {
-                outVertices.push_back(m.vertices[j]);
-                if (m.texture_coordinates.size() > 0)
-                    outTextureCoordinates.push_back(m.texture_coordinates[j]);
-                outNormals.push_back(m.normals[j]);
-                unsigned int newIndex = (unsigned int)outVertices.size() - 1;
-                m.indices.push_back(newIndex);
-                vertexToOutIndex[packed] = newIndex;
+            if (vTextureCoordinates.size() > 0) {
+                unsigned int uvIndex = indexTexture[i];
+                glm::vec2 uv = vTextureCoordinates[uvIndex - 1];
+                this->models[modelIndex].texture_coordinates.push_back(uv);
+                this->models[modelIndex].countTextureCoordinates += 1;
             }
+            else
+                this->models[modelIndex].countTextureCoordinates = 0;
         }
-        this->models[i].vertices = outVertices;
-        this->models[i].texture_coordinates = outTextureCoordinates;
-        this->models[i].normals = outNormals;
-        this->models[i].indices = m.indices;
-        this->models[i].countIndices = (int)m.indices.size();
+
+        std::map<PackedVertex, unsigned int> vertexToOutIndex;
+        for (size_t i=0; i<this->models.size(); i++) {
+            MeshModel m = this->models[i];
+            std::vector<glm::vec3> outVertices, outNormals;
+            std::vector<glm::vec2> outTextureCoordinates;
+            for (size_t j=0; j<m.vertices.size(); j++) {
+                PackedVertex packed = { m.vertices[j], (m.texture_coordinates.size() > 0) ? m.texture_coordinates[j] : glm::vec2(0.0f), m.normals[j] };
+
+                unsigned int index;
+                bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
+                if (found)
+                    m.indices.push_back(index);
+                else {
+                    outVertices.push_back(m.vertices[j]);
+                    if (m.texture_coordinates.size() > 0)
+                        outTextureCoordinates.push_back(m.texture_coordinates[j]);
+                    outNormals.push_back(m.normals[j]);
+                    unsigned int newIndex = (unsigned int)outVertices.size() - 1;
+                    m.indices.push_back(newIndex);
+                    vertexToOutIndex[packed] = newIndex;
+                }
+            }
+            this->models[i].vertices = outVertices;
+            this->models[i].texture_coordinates = outTextureCoordinates;
+            this->models[i].normals = outNormals;
+            this->models[i].indices = m.indices;
+            this->models[i].countIndices = (int)m.indices.size();
+        }
     }
 
     ifs.close();
