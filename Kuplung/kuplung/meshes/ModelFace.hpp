@@ -56,6 +56,7 @@ public:
     void setModel(MeshModel meshModel);
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
+    void initBoundingBox();
     void initProperties();
     void initModelProperties();
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);

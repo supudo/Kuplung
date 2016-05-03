@@ -129,8 +129,24 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     for (std::map<std::string, FBEntity>::iterator iter = this->recentFiles.begin(); iter != this->recentFiles.end(); ++iter) {
                         std::string title = iter->first;
                         FBEntity file = iter->second;
-                        if (ImGui::MenuItem(title.c_str(), NULL, false, true))
-                            this->funcProcessFile(file, FileBrowser_ParserType_Own1);
+                        if (ImGui::MenuItem(title.c_str(), NULL, false, true)) {
+                            FileBrowser_ParserType t;
+                            switch (Settings::Instance()->ModelFileParser) {
+                                case 0:
+                                    t = FileBrowser_ParserType_Own1;
+                                    break;
+                                case 1:
+                                    t = FileBrowser_ParserType_Own2;
+                                    break;
+                                case 2:
+                                    t = FileBrowser_ParserType_Assimp;
+                                    break;
+                                default:
+                                    t = FileBrowser_ParserType_Assimp;
+                                    break;
+                            }
+                            this->funcProcessFile(file, t);
+                        }
                     }
                     ImGui::Separator();
                     if (ImGui::MenuItem("Clear recent files", NULL, false))

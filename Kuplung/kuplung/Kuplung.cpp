@@ -277,9 +277,9 @@ void Kuplung::onEvent(SDL_Event *ev) {
             else if (this->managerControls->mouseGoRight)
                 this->managerObjects->camera->positionX->point += 0.1;
             else if (this->managerControls->mouseGoUp)
-                this->managerObjects->camera->positionY->point -= 0.1;
-            else if (this->managerControls->mouseGoDown)
                 this->managerObjects->camera->positionY->point += 0.1;
+            else if (this->managerControls->mouseGoDown)
+                this->managerObjects->camera->positionY->point -= 0.1;
         }
 
         // picking
@@ -499,6 +499,7 @@ void Kuplung::processParsedObjFile() {
             mmf->ModelID = (int)i;
             mmf->init();
             mmf->setModel(model);
+            mmf->initBoundingBox();
             mmf->initModelProperties();
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);

@@ -621,15 +621,13 @@ void ModelFace::initBuffers(std::string assetsFolder) {
 
     glBindVertexArray(0);
 
+    this->initBuffersAgain = false;
+}
+
+void ModelFace::initBoundingBox() {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
-
-    this->initBuffersAgain = false;
-
-//    this->positionX->point = this->boundingBox->center.x;
-//    this->positionY->point = this->boundingBox->center.y;
-//    this->positionZ->point = this->boundingBox->center.z;
 }
 
 void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
