@@ -35,7 +35,6 @@
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
-		8A3EFB381CD2660700DDAC4F /* objParserX.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3EFB361CD2660700DDAC4F /* objParserX.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
 		8A43AD7F1C92FAE4000A35FB /* light_directional.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD791C92FACC000A35FB /* light_directional.mtl */; };
@@ -76,6 +75,8 @@
 		8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C951CB294FE004236AC /* lake_mountain_left.jpg */; };
 		8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C961CB294FE004236AC /* lake_mountain_right.jpg */; };
 		8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C971CB294FE004236AC /* lake_mountain_top.jpg */; };
+		8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A21CD27B9E002CB119 /* objParser1.cpp */; };
+		8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A41CD27B9E002CB119 /* objParser2.cpp */; };
 		8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70531C6CAC960085CAE5 /* LightRay.cpp */; };
 		8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */; };
 		8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70591C6CACAC0085CAE5 /* FontsList.cpp */; };
@@ -151,7 +152,6 @@
 		8ABFC1F91CC92C1600FBCF08 /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
 		8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2913D1CD2455000A631C1 /* AssimpParser.cpp */; };
 		8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC291421CD2456800A631C1 /* STLParser.cpp */; };
-		8AC291471CD2456F00A631C1 /* objParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC291451CD2456F00A631C1 /* objParser.cpp */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
@@ -382,8 +382,6 @@
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
-		8A3EFB361CD2660700DDAC4F /* objParserX.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParserX.cpp; path = "obj-parser/objParserX.cpp"; sourceTree = "<group>"; };
-		8A3EFB371CD2660700DDAC4F /* objParserX.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParserX.hpp; path = "obj-parser/objParserX.hpp"; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
 		8A43AD791C92FACC000A35FB /* light_directional.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_directional.mtl; sourceTree = "<group>"; };
@@ -424,6 +422,10 @@
 		8A673C951CB294FE004236AC /* lake_mountain_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_left.jpg; path = skybox/lake_mountain_left.jpg; sourceTree = "<group>"; };
 		8A673C961CB294FE004236AC /* lake_mountain_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_right.jpg; path = skybox/lake_mountain_right.jpg; sourceTree = "<group>"; };
 		8A673C971CB294FE004236AC /* lake_mountain_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_top.jpg; path = skybox/lake_mountain_top.jpg; sourceTree = "<group>"; };
+		8A6B61A21CD27B9E002CB119 /* objParser1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser1.cpp; path = "obj-parser/objParser1.cpp"; sourceTree = "<group>"; };
+		8A6B61A31CD27B9E002CB119 /* objParser1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParser1.hpp; path = "obj-parser/objParser1.hpp"; sourceTree = "<group>"; };
+		8A6B61A41CD27B9E002CB119 /* objParser2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser2.cpp; path = "obj-parser/objParser2.cpp"; sourceTree = "<group>"; };
+		8A6B61A51CD27B9E002CB119 /* objParser2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParser2.hpp; path = "obj-parser/objParser2.hpp"; sourceTree = "<group>"; };
 		8A6E70531C6CAC960085CAE5 /* LightRay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightRay.cpp; sourceTree = "<group>"; };
 		8A6E70541C6CAC960085CAE5 /* LightRay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = LightRay.hpp; sourceTree = "<group>"; };
 		8A6E70571C6CACAC0085CAE5 /* ConfigUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ConfigUtils.cpp; sourceTree = "<group>"; };
@@ -545,8 +547,6 @@
 		8AC2913E1CD2455000A631C1 /* AssimpParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AssimpParser.hpp; path = "assimp-parser/AssimpParser.hpp"; sourceTree = "<group>"; };
 		8AC291421CD2456800A631C1 /* STLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STLParser.cpp; path = "stl-parser/STLParser.cpp"; sourceTree = "<group>"; };
 		8AC291431CD2456800A631C1 /* STLParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = STLParser.hpp; path = "stl-parser/STLParser.hpp"; sourceTree = "<group>"; };
-		8AC291451CD2456F00A631C1 /* objParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser.cpp; path = "obj-parser/objParser.cpp"; sourceTree = "<group>"; };
-		8AC291461CD2456F00A631C1 /* objParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParser.hpp; path = "obj-parser/objParser.hpp"; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -978,10 +978,10 @@
 		8AC291401CD2455C00A631C1 /* obj-parser */ = {
 			isa = PBXGroup;
 			children = (
-				8AC291451CD2456F00A631C1 /* objParser.cpp */,
-				8AC291461CD2456F00A631C1 /* objParser.hpp */,
-				8A3EFB361CD2660700DDAC4F /* objParserX.cpp */,
-				8A3EFB371CD2660700DDAC4F /* objParserX.hpp */,
+				8A6B61A21CD27B9E002CB119 /* objParser1.cpp */,
+				8A6B61A31CD27B9E002CB119 /* objParser1.hpp */,
+				8A6B61A41CD27B9E002CB119 /* objParser2.cpp */,
+				8A6B61A51CD27B9E002CB119 /* objParser2.hpp */,
 			);
 			name = "obj-parser";
 			sourceTree = "<group>";
@@ -1152,7 +1152,6 @@
 				8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */,
 				8ABFC1F51CC92BB300FBCF08 /* AxisHelpers.cpp in Sources */,
 				8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */,
-				8AC291471CD2456F00A631C1 /* objParser.cpp in Sources */,
 				8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
@@ -1168,6 +1167,7 @@
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
+				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
@@ -1191,6 +1191,7 @@
 				8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
 				8A03648E1C6B71EC001489C8 /* WorldGrid.cpp in Sources */,
+				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
@@ -1202,7 +1203,6 @@
 				8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
-				8A3EFB381CD2660700DDAC4F /* objParserX.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

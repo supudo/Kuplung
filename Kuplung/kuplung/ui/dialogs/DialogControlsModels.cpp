@@ -14,11 +14,12 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
     this->sdlWindow = sdlWindow;
     this->managerObjects = managerObjects;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
+    this->funcDeleteModel = deleteModel;
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
@@ -646,7 +647,7 @@ void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshMode
     ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
-        (*meshModelFaces).erase((*meshModelFaces).begin() + this->selectedObject);
+        this->funcDeleteModel(this->selectedObject);
         ImGui::CloseCurrentPopup();
         this->cmenu_deleteYn = false;
     }

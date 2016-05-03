@@ -26,7 +26,8 @@ void UI::init(SDL_Window *window,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
-              std::function<void(FBEntity file)> exportScene
+              std::function<void(FBEntity file)> exportScene,
+              std::function<void(int)> deleteModel
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -37,6 +38,7 @@ void UI::init(SDL_Window *window,
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
     this->funcExportScene = exportScene;
+    this->funcDeleteModel = deleteModel;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -93,7 +95,7 @@ void UI::init(SDL_Window *window,
     this->controlsGUI->init(this->managerObjects);
 
     this->controlsModels = new DialogControlsModels();
-    this->controlsModels->init(this->sdlWindow, this->managerObjects, this->funcAddShape, this->funcAddLight);
+    this->controlsModels->init(this->sdlWindow, this->managerObjects, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
 }
 
 void UI::doLog(std::string message) {

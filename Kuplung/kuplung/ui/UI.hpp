@@ -38,7 +38,8 @@ public:
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
-              std::function<void(FBEntity file)> exportScene
+              std::function<void(FBEntity file)> exportScene,
+              std::function<void(int)> deleteModel
               );
 
     bool processEvent(SDL_Event *event);
@@ -72,6 +73,7 @@ private:
     std::function<void(ShapeType)> funcAddShape;
     std::function<void(LightSourceType)> funcAddLight;
     std::function<void(FBEntity file)> funcExportScene;
+    std::function<void(int)> funcDeleteModel;
 
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogSceneExportProcessFile(FBEntity file);

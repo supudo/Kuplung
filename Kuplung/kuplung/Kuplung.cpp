@@ -135,7 +135,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addLight, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1)
                                           );
                     this->doLog("UI initialized.");
 
@@ -557,6 +558,7 @@ void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces[selectedModel]->destroy();
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->meshModels.erase(this->meshModels.begin() + selectedModel);
+    this->managerUI->meshModelFaces = &this->meshModelFaces;
 }
 
 void Kuplung::guiSceneExport(FBEntity file) {
