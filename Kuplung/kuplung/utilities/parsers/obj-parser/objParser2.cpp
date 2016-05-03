@@ -162,34 +162,34 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
         }
     }
 
-//    std::map<PackedVertex, unsigned int> vertexToOutIndex;
-//    for (size_t i=0; i<this->models.size(); i++) {
-//        MeshModel m = this->models[i];
-//        std::vector<glm::vec3> outVertices, outNormals;
-//        std::vector<glm::vec2> outTextureCoordinates;
-//        for (size_t j=0; j<m.vertices.size(); j++) {
-//            PackedVertex packed = { m.vertices[j], (m.texture_coordinates.size() > 0) ? m.texture_coordinates[j] : glm::vec2(0.0f), m.normals[j] };
+    std::map<PackedVertex, unsigned int> vertexToOutIndex;
+    for (size_t i=0; i<this->models.size(); i++) {
+        MeshModel m = this->models[i];
+        std::vector<glm::vec3> outVertices, outNormals;
+        std::vector<glm::vec2> outTextureCoordinates;
+        for (size_t j=0; j<m.vertices.size(); j++) {
+            PackedVertex packed = { m.vertices[j], (m.texture_coordinates.size() > 0) ? m.texture_coordinates[j] : glm::vec2(0.0f), m.normals[j] };
 
-//            unsigned int index;
-//            bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
-//            if (found)
-//                m.indices.push_back(index);
-//            else {
-//                outVertices.push_back(m.vertices[j]);
-//                if (m.texture_coordinates.size() > 0)
-//                    outTextureCoordinates.push_back(m.texture_coordinates[j]);
-//                outNormals.push_back(m.normals[j]);
-//                unsigned int newIndex = (unsigned int)outVertices.size() - 1;
-//                m.indices.push_back(newIndex);
-//                vertexToOutIndex[packed] = newIndex;
-//            }
-//        }
-//        this->models[i].vertices = outVertices;
-//        this->models[i].texture_coordinates = outTextureCoordinates;
-//        this->models[i].normals = outNormals;
-//        this->models[i].indices = m.indices;
-//        this->models[i].countIndices = (int)m.indices.size();
-//    }
+            unsigned int index;
+            bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
+            if (found)
+                m.indices.push_back(index);
+            else {
+                outVertices.push_back(m.vertices[j]);
+                if (m.texture_coordinates.size() > 0)
+                    outTextureCoordinates.push_back(m.texture_coordinates[j]);
+                outNormals.push_back(m.normals[j]);
+                unsigned int newIndex = (unsigned int)outVertices.size() - 1;
+                m.indices.push_back(newIndex);
+                vertexToOutIndex[packed] = newIndex;
+            }
+        }
+        this->models[i].vertices = outVertices;
+        this->models[i].texture_coordinates = outTextureCoordinates;
+        this->models[i].normals = outNormals;
+        this->models[i].indices = m.indices;
+        this->models[i].countIndices = (int)m.indices.size();
+    }
 
     ifs.close();
 
