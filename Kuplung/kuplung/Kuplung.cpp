@@ -570,6 +570,8 @@ void Kuplung::guiModelDelete(int selectedModel) {
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->meshModels.erase(this->meshModels.begin() + selectedModel);
     this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->sceneSelectedModelObject = -1;
+    this->managerUI->setSceneSelectedModelObject(-1);
 }
 
 void Kuplung::guiSceneExport(FBEntity file) {
