@@ -140,7 +140,7 @@ void BoundingBox::initBuffers(MeshModel meshModel) {
     this->max_z = (this->max_z > 0) ? this->max_z + padding : this->max_z - padding;
 
     this->size = glm::vec3(this->max_x - this->min_x, this->max_y - this->min_y, this->max_z - this->min_z);
-    this->center = glm::vec3((this->min_x + this->max_x) / 2, (this->min_y + this->max_y) / 2, (this->min_z + this->max_z) / 2);
+    this->center = glm::vec3((this->min_x + this->max_x) / 2, (this->min_y + this->max_y) / 2, (this->min_z + this->max_z) / 2) * .5f;
     this->matrixTransform = glm::scale(glm::mat4(1), this->size) * glm::translate(glm::mat4(1), this->center);
 
     glBindVertexArray(0);
@@ -156,8 +156,8 @@ void BoundingBox::render(glm::mat4 matrixMVP, glm::vec4 outlineColor) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        glm::mat4 mtx = matrixMVP * this->matrixTransform;
-        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mtx));
+        glm::mat4 mtxModel = matrixMVP * this->matrixTransform;
+        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
 
         glUniform3f(this->glUniformColor, outlineColor.r, outlineColor.g, outlineColor.b);
 
