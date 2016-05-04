@@ -739,8 +739,8 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         matrixBB *= this->matrixModel;
         this->boundingBox->render(matrixBB, this->so_outlineColor);
 
-        glm::mat4 m = matrixBB * this->boundingBox->matrixTransform;
-        printf("BB / MF = [%f, %f, %f] - [%f, %f, %f]\n", m[3].x, m[3].y, m[3].z, matrixBB[3].x, matrixBB[3].y, matrixBB[3].z);
+//        glm::mat4 m = matrixBB * this->boundingBox->matrixTransform;
+//        printf("BB / MF = [%f, %f, %f] - [%f, %f, %f]\n", m[3].x, m[3].y, m[3].z, matrixBB[3].x, matrixBB[3].y, matrixBB[3].z);
     }
 }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Kuplung::onEvent(SDL_Event*):Kuplung.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "&#10;                    glm::vec4 x = x0 * m[0] + y0 * m[4] + z0 * m[8] + m[12]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
