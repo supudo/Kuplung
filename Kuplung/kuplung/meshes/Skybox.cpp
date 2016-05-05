@@ -204,24 +204,24 @@ bool Skybox::initBuffers() {
             if (!tPixels)
                 Settings::Instance()->funcDoLog("Can't load Skybox texture image - " + image + " with error - " + std::string(stbi_failure_reason()));
             else {
-                GLint textureFormat = 0;
-                switch (tChannels) {
-                    case 1:
-                        textureFormat = GL_LUMINANCE;
-                        break;
-                    case 2:
-                        textureFormat = GL_LUMINANCE_ALPHA;
-                        break;
-                    case 3:
-                        textureFormat = GL_RGB;
-                        break;
-                    case 4:
-                        textureFormat = GL_RGBA;
-                        break;
-                    default:
-                        textureFormat = GL_RGB;
-                        break;
-                }
+//                GLint textureFormat = 0;
+//                switch (tChannels) {
+//                    case 1:
+//                        textureFormat = GL_LUMINANCE;
+//                        break;
+//                    case 2:
+//                        textureFormat = GL_LUMINANCE_ALPHA;
+//                        break;
+//                    case 3:
+//                        textureFormat = GL_RGB;
+//                        break;
+//                    case 4:
+//                        textureFormat = GL_RGBA;
+//                        break;
+//                    default:
+//                        textureFormat = GL_RGB;
+//                        break;
+//                }
                 glTexImage2D(SkyboxTextureCubemap[i], 0, GL_RGB, tWidth, tHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, tPixels);
                 stbi_image_free(tPixels);
             }

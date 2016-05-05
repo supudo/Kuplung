@@ -397,7 +397,7 @@ void MaterialEditor::initMaterialNodes(ModelFace *face) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDisplacement.Filename, face->meshModel.ModelMaterial.TextureDisplacement.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
-        materialNodesCounter += 1;
+//        materialNodesCounter += 1;
 //        slotsCounter += 1;
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }

@@ -161,7 +161,7 @@ namespace ImGui {
             pOptionalItemOrdering[draggingTabTargetIndex] = pOptionalItemOrdering[draggingTabIndex];
             pOptionalItemOrdering[draggingTabIndex] = tmp;
             //fprintf(stderr,"%d %d\n",draggingTabIndex,draggingTabTargetIndex);
-            draggingTabTargetIndex = draggingTabIndex = -1;
+//            draggingTabTargetIndex = draggingTabIndex = -1;
         }
 
         // Reset draggingTabIndex if necessary

@@ -84,7 +84,7 @@ std::vector<MeshModel> objParser1::parse(FBEntity file) {
         size_t pos = 0;
         std::string singleLine;
 
-        int indexModel = -1, indexFace = -1;
+        int indexModel = -1;
         int indicesCounter = 0;
 
         this->objFileLinesCount = this->getLineCount();
@@ -112,7 +112,6 @@ std::vector<MeshModel> objParser1::parse(FBEntity file) {
                     entityModel.countNormals = 0;
                     entityModel.countIndices = 0;
                     indexModel += 1;
-                    indexFace = -1;
                     modelID += 1;
                     this->models.push_back(entityModel);
                 }
