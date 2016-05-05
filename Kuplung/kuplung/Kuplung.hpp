@@ -82,7 +82,7 @@ private:
     UI *managerUI;
     FNTParser *fontParser;
     Exporter *managerExporter;
-    std::vector<MeshModel> meshModels;
+    std::vector<MeshModel> meshModels, meshModelsNew;
     std::vector<ModelFace*> meshModelFaces;
     std::vector<RayLine*> rayLines;
 

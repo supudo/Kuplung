@@ -475,7 +475,7 @@ void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
 
 void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
     std::vector<MeshModel> newModels = this->parser->parse(file, type);
-    this->meshModels.insert(end(this->meshModels), begin(newModels), end(newModels));
+    this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
@@ -487,8 +487,8 @@ void Kuplung::processParsedObjFile() {
         this->managerUI->showLoading();
         this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
-        for (size_t i=0; i<this->meshModels.size(); i++) {
-            MeshModel model = this->meshModels[i];
+        for (size_t i=0; i<this->meshModelsNew.size(); i++) {
+            MeshModel model = this->meshModelsNew[i];
             ModelFace *mmf = new ModelFace();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;
             mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
@@ -503,7 +503,9 @@ void Kuplung::processParsedObjFile() {
             mmf->initShaderProgram();
             mmf->initBuffers(Settings::Instance()->currentFolder);
             this->meshModelFaces.push_back(mmf);
+            this->meshModels.push_back(model);
         }
+        this->meshModelsNew.clear();
 
         this->managerUI->meshModelFaces = &this->meshModelFaces;
 
@@ -541,6 +543,7 @@ void Kuplung::guiClearScreen() {
         this->meshModelFaces[i]->destroy();
     }
     this->meshModels.clear();
+    this->meshModelsNew.clear();
     this->meshModelFaces.clear();
     this->objFiles.clear();
     this->rayLines.clear();
