@@ -40,7 +40,7 @@ public:
               std::function<void(LightSourceType)> addLight,
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
-              std::function<void()> renderScene
+              std::function<void(FBEntity file)> renderScene
               );
 
     bool processEvent(SDL_Event *event);
@@ -75,10 +75,10 @@ private:
     std::function<void(LightSourceType)> funcAddLight;
     std::function<void(FBEntity file)> funcExportScene;
     std::function<void(int)> funcDeleteModel;
-    std::function<void()> funcRenderScene;
+    std::function<void(FBEntity file)> funcRenderScene;
 
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
-    void dialogSceneExportProcessFile(FBEntity file);
+    void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string fileName);
 
     void dialogFileBrowser();
@@ -93,7 +93,7 @@ private:
     void dialogSceneStats();
     void dialogControlsGUI();
     void dialogControlsModels(int * sceneSelectedModelObject);
-    void dialogSceneExport();
+    void dialogFileSave(FileSaverOperation type);
 
     SDL2OpenGL32 *imguiImplementation;
     ObjectsManager *managerObjects;
@@ -119,7 +119,8 @@ private:
     bool showAboutImgui;
     bool showAboutKuplung;
     bool showDemoWindow;
-    bool showFileSaver;
+    bool showOBJExporter;
+    bool showImageSave;
 };
 
 #endif /* UI_hpp */

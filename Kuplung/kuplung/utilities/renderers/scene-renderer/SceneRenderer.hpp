@@ -16,7 +16,7 @@ public:
     ~SceneRenderer();
     void init();
     void destroy();
-    void renderImage(std::string filename);
+    void renderImage(FBEntity file);
 };
 
 #endif /* SceneRenderer_hpp */

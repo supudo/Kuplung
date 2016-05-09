@@ -19,13 +19,13 @@ void SceneRenderer::destroy() {
 void SceneRenderer::init() {
 }
 
-void SceneRenderer::renderImage(std::string filename) {
+void SceneRenderer::renderImage(FBEntity file) {
     int screenStats[4];
     glGetIntegerv(GL_VIEWPORT, screenStats);
     int width = screenStats[2];
     int height = screenStats[3];
 
-    SDL_Surface * image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
+    SDL_Surface *image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
 
     glReadBuffer(GL_FRONT);
     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
@@ -45,6 +45,8 @@ void SceneRenderer::renderImage(std::string filename) {
     }
     free(temp_row);
 
-    SDL_SaveBMP(image, filename.c_str());
+    std::string f = file.path + "/" + file.title + ".bmp";
+
+    SDL_SaveBMP(image, f.c_str());
     SDL_FreeSurface(image);
 }

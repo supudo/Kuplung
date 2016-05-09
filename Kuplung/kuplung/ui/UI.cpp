@@ -28,7 +28,7 @@ void UI::init(SDL_Window *window,
               std::function<void(LightSourceType)> addLight,
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
-              std::function<void()> renderScene
+              std::function<void(FBEntity file)> renderScene
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -61,7 +61,8 @@ void UI::init(SDL_Window *window,
     this->showAboutImgui = false;
     this->showAboutKuplung = false;
     this->showDemoWindow = false;
-    this->showFileSaver = false;
+    this->showOBJExporter = false;
+    this->showImageSave = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -77,7 +78,7 @@ void UI::init(SDL_Window *window,
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileSaver = new FileSaver();
-    this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogSceneExportProcessFile, this, std::placeholders::_1));
+    this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileEditor = new Editor();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
@@ -158,7 +159,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu(ICON_FA_FLOPPY_O " Export")) {
-                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showFileSaver, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
                 ImGui::EndMenu();
             }
 
@@ -185,8 +186,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
             ImGui::Separator();
-            if (ImGui::MenuItem("Render Image"))
-                this->funcRenderScene();
+            ImGui::MenuItem("Render Image", NULL, &this->showImageSave);
             ImGui::EndMenu();
         }
 
@@ -264,8 +264,11 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->showSceneStats)
         this->dialogSceneStats();
 
-    if (this->showFileSaver)
-        this->dialogSceneExport();
+    if (this->showOBJExporter)
+        this->dialogFileSave(FileSaverOperation_Exporter);
+
+    if (this->showImageSave)
+        this->dialogFileSave(FileSaverOperation_Renderer);
 
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
@@ -331,8 +334,8 @@ void UI::hideLoading() {
 
 #pragma mark - Private Methods
 
-void UI::dialogSceneExport() {
-    this->componentFileSaver->draw("Export Scene", &this->showFileSaver);
+void UI::dialogFileSave(FileSaverOperation operation) {
+    this->componentFileSaver->draw("Export Scene", operation, &this->showOBJExporter);
 }
 
 void UI::dialogFileBrowser() {
@@ -430,12 +433,21 @@ void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type
     this->showDialogStyle = false;
 }
 
-void UI::dialogSceneExportProcessFile(FBEntity file) {
-    this->funcExportScene(file);
-    this->showFileSaver = false;
+void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {
+    switch (operation) {
+        case FileSaverOperation_Exporter:
+            this->funcExportScene(file);
+            break;
+        case FileSaverOperation_Renderer:
+            this->funcRenderScene(file);
+            break;
+        default:
+            break;
+    }
+        this->showOBJExporter = false;
+    this->showImageSave = false;
 }
 
 void UI::fileShaderEditorSaved(std::string fileName) {
     this->funcFileShaderCompile(fileName);
 }
-

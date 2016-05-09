@@ -22,7 +22,7 @@ public:
     ~ImageRenderer();
     void init();
     void destroy();
-    void renderImage(ImageRendererType type);
+    void renderImage(ImageRendererType type, FBEntity file);
 
 private:
     SceneRenderer *rendererScene;

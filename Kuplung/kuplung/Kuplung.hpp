@@ -56,7 +56,7 @@ private:
     void guiModelDelete(int selectedModel);
     void guiModelRename(int selectedModel, std::string newName);
     void guiSceneExport(FBEntity file);
-    void guiRenderScene();
+    void guiRenderScene(FBEntity file);
 
     ObjectsManager *managerObjects;
     RayPicking *rayPicker;

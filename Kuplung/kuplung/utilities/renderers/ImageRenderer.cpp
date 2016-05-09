@@ -20,8 +20,7 @@ void ImageRenderer::init() {
     this->rendererScene->init();
 }
 
-void ImageRenderer::renderImage(ImageRendererType type) {
-    std::string filename = Settings::Instance()->currentFolder + "/screenshot.bmp";
+void ImageRenderer::renderImage(ImageRendererType type, FBEntity file) {
     if (type == ImageRendererType_Scene)
-        this->rendererScene->renderImage(filename);
+        this->rendererScene->renderImage(file);
 }

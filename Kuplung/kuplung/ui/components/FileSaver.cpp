@@ -17,18 +17,18 @@
 
 namespace fs = boost::filesystem;
 
-void FileSaver::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity)> exportFile) {
+void FileSaver::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileSaverOperation)> saveFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
     this->height = height;
-    this->funcExportFile = exportFile;
+    this->funcFileSave = saveFile;
     this->panelWidth_FileOptions = 200.0f;
     this->currentFolder = Settings::Instance()->currentFolder;
     this->showNewFolderModel = false;
 }
 
-void FileSaver::draw(const char* title, bool* p_opened) {
+void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -74,7 +74,7 @@ void FileSaver::draw(const char* title, bool* p_opened) {
         file.title = std::string(this->fileName);
         Settings::Instance()->currentFolder = this->currentFolder;
         Settings::Instance()->saveSettings();
-        this->funcExportFile(file);
+        this->funcFileSave(file, type);
     }
     ImGui::SameLine(0, 10);
     if (ImGui::Button("New Folder"))

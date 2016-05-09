@@ -15,14 +15,19 @@
 #include <string>
 #include "kuplung/settings/Settings.h"
 
+typedef enum FileSaverOperation {
+    FileSaverOperation_Exporter,
+    FileSaverOperation_Renderer
+} FileSaverOperation;
+
 class FileSaver {
 public:
-    void init(int positionX, int positionY, int width, int height, std::function<void(FBEntity)> exportFile);
-    void draw(const char* title, bool* p_opened = NULL);
+    void init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileSaverOperation)> saveFile);
+    void draw(const char* title, FileSaverOperation type, bool* p_opened = NULL);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(std::string filePath);
-    std::function<void(FBEntity)> funcExportFile;
+    std::function<void(FBEntity, FileSaverOperation)> funcFileSave;
 
     void drawFiles();
     std::string convertToString(double num);
