@@ -154,7 +154,9 @@ SOURCES += main.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
     kuplung/utilities/export/Exporter.cpp \
-    kuplung/utilities/export/ExporterOBJ.cpp
+    kuplung/utilities/export/ExporterOBJ.cpp \
+    kuplung/utilities/renderers/ImageRenderer.cpp \
+    kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -224,7 +226,9 @@ HEADERS += \
     kuplung/utilities/gl/GLIncludes.h \
     kuplung/utilities/shapes/Shapes.h \
     kuplung/utilities/export/Exporter.hpp \
-    kuplung/utilities/export/ExporterOBJ.hpp
+    kuplung/utilities/export/ExporterOBJ.hpp \
+    kuplung/utilities/renderers/ImageRenderer.hpp \
+    kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

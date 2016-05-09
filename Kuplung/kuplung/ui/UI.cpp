@@ -27,7 +27,8 @@ void UI::init(SDL_Window *window,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
               std::function<void(FBEntity file)> exportScene,
-              std::function<void(int)> deleteModel
+              std::function<void(int)> deleteModel,
+              std::function<void()> renderScene
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -39,6 +40,7 @@ void UI::init(SDL_Window *window,
     this->funcAddLight = addLight;
     this->funcExportScene = exportScene;
     this->funcDeleteModel = deleteModel;
+    this->funcRenderScene = renderScene;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -156,7 +158,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu(ICON_FA_FLOPPY_O " Export")) {
-                ImGui::MenuItem("Wavefron (.OBJ)", NULL, &this->showFileExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showFileExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
                 ImGui::EndMenu();
             }
 
@@ -182,6 +184,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     this->managerObjects->addLight(LightSourceType_Spot);
                 ImGui::EndMenu();
             }
+            ImGui::Separator();
+            if (ImGui::MenuItem("Render Image"))
+                this->funcRenderScene();
             ImGui::EndMenu();
         }
 

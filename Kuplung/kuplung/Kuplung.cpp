@@ -136,7 +136,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addLight, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiRenderScene, this)
                                           );
                     this->doLog("UI initialized.");
 
@@ -170,6 +171,9 @@ bool Kuplung::init() {
 
                     this->managerExporter = new Exporter();
                     this->managerExporter->init();
+
+                    this->imageRenderer = new ImageRenderer();
+                    this->imageRenderer->init();
                 }
             }
         }
@@ -579,4 +583,8 @@ void Kuplung::guiModelDelete(int selectedModel) {
 
 void Kuplung::guiSceneExport(FBEntity file) {
     this->managerExporter->exportScene(file, this->meshModelFaces);
+}
+
+void Kuplung::guiRenderScene() {
+    this->imageRenderer->renderImage(ImageRendererType_Scene);
 }
