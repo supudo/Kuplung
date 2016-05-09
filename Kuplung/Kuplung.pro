@@ -124,7 +124,7 @@ SOURCES += main.cpp \
     kuplung/ui/implementation/SDL2OpenGL32.cpp \
     kuplung/ui/components/Editor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
-    kuplung/ui/components/SceneExport.cpp \
+    kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/Log.cpp \
     kuplung/ui/components/Screenshot.cpp \
     kuplung/ui/components/ColorPicker.cpp \
@@ -185,7 +185,7 @@ HEADERS += \
     kuplung/ui/implementation/SDL2OpenGL32.hpp \
     kuplung/ui/components/Editor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
-    kuplung/ui/components/SceneExport.hpp \
+    kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/Log.hpp \
     kuplung/ui/components/Screenshot.hpp \
     kuplung/ui/components/ColorPicker.hpp \

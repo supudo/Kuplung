@@ -1,12 +1,12 @@
 //
-//  SceneExport.cpp
-// Kuplung
+//  FileSaver.cpp
+//  Kuplung
 //
 //  Created by Sergey Petrov on 11/18/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "kuplung/ui/components/SceneExport.hpp"
+#include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
 #include <boost/filesystem.hpp>
@@ -17,7 +17,7 @@
 
 namespace fs = boost::filesystem;
 
-void SceneExport::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity)> exportFile) {
+void FileSaver::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity)> exportFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -28,7 +28,7 @@ void SceneExport::init(int positionX, int positionY, int width, int height, std:
     this->showNewFolderModel = false;
 }
 
-void SceneExport::draw(const char* title, bool* p_opened) {
+void FileSaver::draw(const char* title, bool* p_opened) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -113,7 +113,7 @@ void SceneExport::draw(const char* title, bool* p_opened) {
 
 #pragma mark - Private
 
-void SceneExport::modalNewFolder() {
+void FileSaver::modalNewFolder() {
     ImGui::OpenPopup("New Folder");
     ImGui::BeginPopupModal("New Folder", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
@@ -128,7 +128,7 @@ void SceneExport::modalNewFolder() {
         if (!boost::filesystem::exists(newDir)) {
             boost::filesystem::path dir(newDir);
             if (!boost::filesystem::create_directory(dir))
-                Settings::Instance()->funcDoLog("[SceneExporter] Cannot create new folder!");
+                Settings::Instance()->funcDoLog("[FileSaver] Cannot create new folder!");
         }
         ImGui::CloseCurrentPopup();
         this->showNewFolderModel = false;
@@ -144,7 +144,7 @@ void SceneExport::modalNewFolder() {
     ImGui::EndPopup();
 }
 
-void SceneExport::drawFiles() {
+void FileSaver::drawFiles() {
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(this->currentFolder);
     int i = 0;
     static int selected = -1;
@@ -162,7 +162,7 @@ void SceneExport::drawFiles() {
     }
 }
 
-std::map<std::string, FBEntity> SceneExport::getFolderContents(std::string filePath) {
+std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePath) {
     std::map<std::string, FBEntity> folderContents;
 
     fs::path currentPath(filePath);
@@ -227,13 +227,13 @@ std::map<std::string, FBEntity> SceneExport::getFolderContents(std::string fileP
     return folderContents;
 }
 
-std::string SceneExport::convertToString(double num) {
+std::string FileSaver::convertToString(double num) {
     std::ostringstream convert;
     convert << num;
     return convert.str();
 }
 
-std::string SceneExport::convertSize(size_t size) {
+std::string FileSaver::convertSize(size_t size) {
     static const char *SIZES[] = { "B", "KB", "MB", "GB" };
     int div = 0;
     size_t rem = 0;
@@ -249,7 +249,7 @@ std::string SceneExport::convertSize(size_t size) {
     return result;
 }
 
-double SceneExport::roundOff(double n) {
+double FileSaver::roundOff(double n) {
     double d = n * 100.0;
     int i = d + 0.5;
     d = (float)i / 100.0;

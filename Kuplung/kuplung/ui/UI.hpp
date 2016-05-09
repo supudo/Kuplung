@@ -17,7 +17,7 @@
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
-#include "kuplung/ui/components/SceneExport.hpp"
+#include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/Editor.hpp"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
@@ -100,7 +100,7 @@ private:
     Log *componentLog;
     Screenshot *componentScreenshot;
     FileBrowser *componentFileBrowser;
-    SceneExport *componentSceneExport;
+    FileSaver *componentFileSaver;
     Editor *componentFileEditor;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
@@ -119,7 +119,7 @@ private:
     bool showAboutImgui;
     bool showAboutKuplung;
     bool showDemoWindow;
-    bool showFileExporter;
+    bool showFileSaver;
 };
 
 #endif /* UI_hpp */

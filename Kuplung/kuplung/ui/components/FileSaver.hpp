@@ -1,13 +1,13 @@
 //
-//  SceneExport.hpp
+//  FileSaver.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/18/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef SceneExport_hpp
-#define SceneExport_hpp
+#ifndef FileSaver_hpp
+#define FileSaver_hpp
 
 #include "kuplung/utilities/imgui/imgui.h"
 #include <functional>
@@ -15,7 +15,7 @@
 #include <string>
 #include "kuplung/settings/Settings.h"
 
-class SceneExport {
+class FileSaver {
 public:
     void init(int positionX, int positionY, int width, int height, std::function<void(FBEntity)> exportFile);
     void draw(const char* title, bool* p_opened = NULL);
@@ -38,4 +38,4 @@ private:
     int positionX, positionY, width, height;
 };
 
-#endif /* SceneExport_hpp */
+#endif /* FileSaver_hpp */
