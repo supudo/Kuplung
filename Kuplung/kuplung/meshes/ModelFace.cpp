@@ -335,9 +335,6 @@ void ModelFace::initProperties() {
 bool ModelFace::initShaderProgram() {
     bool success = true;
 
-    // init FBO
-    this->fboDefault = 0;
-
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
