@@ -72,20 +72,20 @@ void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboTextureCoordinatesReflect);
     glDeleteBuffers(1, &this->vboIndicesReflect);
 
-    if (this->vboTextureAmbient > 0)
-        glDeleteBuffers(1, &this->vboTextureAmbient);
-    if (this->vboTextureDiffuse > 0)
-        glDeleteBuffers(1, &this->vboTextureDiffuse);
-    if (this->vboTextureSpecular > 0)
-        glDeleteBuffers(1, &this->vboTextureSpecular);
-    if (this->vboTextureSpecularExp > 0)
-        glDeleteBuffers(1, &this->vboTextureSpecularExp);
-    if (this->vboTextureDissolve > 0)
-        glDeleteBuffers(1, &this->vboTextureDissolve);
-    if (this->vboTextureBump > 0)
-        glDeleteBuffers(1, &this->vboTextureBump);
-    if (this->vboTextureDisplacement > 0)
-        glDeleteBuffers(1, &this->vboTextureDisplacement);
+//    if (this->vboTextureAmbient > 0)
+//        glDeleteBuffers(1, &this->vboTextureAmbient);
+//    if (this->vboTextureDiffuse > 0)
+//        glDeleteBuffers(1, &this->vboTextureDiffuse);
+//    if (this->vboTextureSpecular > 0)
+//        glDeleteBuffers(1, &this->vboTextureSpecular);
+//    if (this->vboTextureSpecularExp > 0)
+//        glDeleteBuffers(1, &this->vboTextureSpecularExp);
+//    if (this->vboTextureDissolve > 0)
+//        glDeleteBuffers(1, &this->vboTextureDissolve);
+//    if (this->vboTextureBump > 0)
+//        glDeleteBuffers(1, &this->vboTextureBump);
+//    if (this->vboTextureDisplacement > 0)
+//        glDeleteBuffers(1, &this->vboTextureDisplacement);
 
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
