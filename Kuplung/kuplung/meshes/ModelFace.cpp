@@ -108,6 +108,9 @@ void ModelFace::destroy() {
         }
     }
 
+    glDeleteFramebuffers(1, &this->fboDefault);
+    glDeleteFramebuffers(1, &this->fboReflection);
+
     glDisableVertexAttribArray(this->glVS_VertexPosition);
     glDisableVertexAttribArray(this->glFS_TextureCoord);
     glDisableVertexAttribArray(this->glVS_VertexNormal);
