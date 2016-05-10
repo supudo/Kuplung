@@ -26,6 +26,36 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> *meshMode
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
+    SDL_Surface *image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
+
+    glReadBuffer(GL_FRONT);
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+
+    // flip vertically
+    int index;
+    void* temp_row;
+    int height_div_2;
+    temp_row = (void *)malloc(image->pitch);
+    if(NULL == temp_row)
+        Settings::Instance()->funcDoLog("Not enough memory for image inversion");
+    height_div_2 = (int) (image->h * .5);
+    for (index = 0; index < height_div_2; index++) {
+        memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
+        memcpy((Uint8 *)(image->pixels) + image->pitch * index, (Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), image->pitch);
+        memcpy((Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), temp_row, image->pitch);
+    }
+    free(temp_row);
+
+    std::string f = file.path + "/" + file.title + ".bmp";
+
+    SDL_SaveBMP(image, f.c_str());
+    SDL_FreeSurface(image);
+}
+
+void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects) {
+    int width = Settings::Instance()->SDL_Window_Width;
+    int height = Settings::Instance()->SDL_Window_Height;
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError()));
     else {

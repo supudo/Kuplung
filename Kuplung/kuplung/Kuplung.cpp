@@ -591,7 +591,11 @@ void Kuplung::guiSceneExport(FBEntity file) {
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {
+    this->managerObjects->renderSkybox();
+    this->renderSceneModels();
+    SDL_GL_SwapWindow(this->gWindow);
+
     this->imageRenderer->renderImage(ImageRendererType_Scene, file, &this->meshModelFaces, this->managerObjects);
-    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
-        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
+//    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
+//        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }
