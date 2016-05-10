@@ -109,6 +109,7 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> meshModel
                         glReadBuffer(GL_FRONT);
                         glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 
+                        // flip vertically
                         int index;
                         void* temp_row;
                         int height_div_2;
