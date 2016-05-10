@@ -93,6 +93,10 @@ void ObjectsManager::render() {
         this->skybox->initBuffers();
         this->Setting_Skybox = this->skybox->Setting_Skybox_Item;
     }
+    this->renderSkybox();
+}
+
+void ObjectsManager::renderSkybox() {
     this->skybox->render(this->camera->matrixCamera, this->Setting_PlaneClose, this->Setting_PlaneFar, this->Setting_FOV);
 }
 

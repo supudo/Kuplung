@@ -60,6 +60,7 @@ public:
     void initProperties();
     void initModelProperties();
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
+    void renderModel();
 
     // general options
     void setOptionsFOV(float fov);
@@ -119,7 +120,6 @@ private:
     void drawOnly();
 
     bool reflectionInit();
-    void renderModel();
     void renderReflectFBO();
     void renderMirrorSurface();
     void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);

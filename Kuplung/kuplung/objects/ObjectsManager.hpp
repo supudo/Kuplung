@@ -33,6 +33,7 @@ public:
     void init(std::function<void(float)> doProgress);
     void loadSystemModels();
     void render();
+    void renderSkybox();
     void resetPropertiesSystem();
     void resetSettings();
 

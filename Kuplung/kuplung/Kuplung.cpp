@@ -592,6 +592,6 @@ void Kuplung::guiSceneExport(FBEntity file) {
 
 void Kuplung::guiRenderScene(FBEntity file) {
     this->imageRenderer->renderImage(ImageRendererType_Scene, file, &this->meshModelFaces, this->managerObjects);
-//    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
-//        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
+    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
+        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }
