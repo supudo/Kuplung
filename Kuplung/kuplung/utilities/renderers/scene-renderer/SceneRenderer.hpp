@@ -10,13 +10,16 @@
 #define SceneRenderer_hpp
 
 #include "kuplung/settings/Settings.h"
+#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class SceneRenderer {
 public:
     ~SceneRenderer();
     void init();
     void destroy();
-    void renderImage(FBEntity file);
+    void renderImage(FBEntity file, std::vector<ModelFace*> meshModelFaces, ObjectsManager *managerObjects);
 };
 
 #endif /* SceneRenderer_hpp */

@@ -80,6 +80,7 @@ public:
     std::vector<GLfloat> dataNormals;
     std::vector<GLuint> dataIndices;
     BoundingBox *boundingBox;
+    std::string assetsFolder;
 
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
@@ -123,7 +124,6 @@ private:
     void renderMirrorSurface();
     void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
-    std::string assetsFolder;
     float so_fov;
     float so_outlineThickness;
     glm::vec4 so_outlineColor;

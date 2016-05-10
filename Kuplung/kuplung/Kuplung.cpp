@@ -101,7 +101,7 @@ bool Kuplung::init() {
         if (Settings::Instance()->SDL_Window_Width == 0)
             Settings::Instance()->SDL_Window_Width = current.w - 100;
 
-        this->gWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags);
+        this->gWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags | SDL_WINDOW_ALLOW_HIGHDPI);
         if (this->gWindow == NULL) {
             printf("Error: Window could not be created! SDL Error: %s\n", SDL_GetError());
             success = false;
@@ -300,6 +300,16 @@ void Kuplung::onEvent(SDL_Event *ev) {
 void Kuplung::renderScene() {
     this->managerObjects->render();
 
+    this->renderSceneModels();
+
+    for (size_t i=0; i<this->rayLines.size(); i++) {
+        this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
+    }
+
+    this->processRunningThreads();
+}
+
+void Kuplung::renderSceneModels() {
     int cVertices = 0;
     int cIndices = 0;
     int cTriangles = 0;
@@ -355,12 +365,6 @@ void Kuplung::renderScene() {
     Settings::Instance()->sceneCountIndices = cIndices;
     Settings::Instance()->sceneCountTriangles = cTriangles;
     Settings::Instance()->sceneCountFaces = cFaces;
-
-    for (size_t i=0; i<this->rayLines.size(); i++) {
-        this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
-    }
-
-    this->processRunningThreads();
 }
 
 #pragma mark - Scene GUI
@@ -586,5 +590,7 @@ void Kuplung::guiSceneExport(FBEntity file) {
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {
-    this->imageRenderer->renderImage(ImageRendererType_Scene, file);
+    this->imageRenderer->renderImage(ImageRendererType_Scene, file, this->meshModelFaces, this->managerObjects);
+    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
+        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }

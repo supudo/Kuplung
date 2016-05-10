@@ -25,7 +25,6 @@
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
-		8A1FB1861CC50DBE00ADADD0 /* SceneExport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1FB1841CC50DBE00ADADD0 /* SceneExport.cpp */; };
 		8A25A6741CB41A64003161D1 /* stormydays_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */; };
 		8A25A6751CB41A64003161D1 /* stormydays_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */; };
 		8A25A6761CB41A64003161D1 /* stormydays_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6701CB41A51003161D1 /* stormydays_front.jpg */; };
@@ -75,6 +74,9 @@
 		8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C951CB294FE004236AC /* lake_mountain_left.jpg */; };
 		8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C961CB294FE004236AC /* lake_mountain_right.jpg */; };
 		8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C971CB294FE004236AC /* lake_mountain_top.jpg */; };
+		8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */; };
+		8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */; };
+		8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */; };
 		8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A21CD27B9E002CB119 /* objParser1.cpp */; };
 		8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A41CD27B9E002CB119 /* objParser2.cpp */; };
 		8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70531C6CAC960085CAE5 /* LightRay.cpp */; };
@@ -368,8 +370,6 @@
 		8A1AFB291C71FC58004888D8 /* DialogControlsModels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsModels.hpp; sourceTree = "<group>"; };
 		8A1CBAD01CA3EFA7000A171D /* MENode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode.cpp; path = materialeditor/MENode.cpp; sourceTree = "<group>"; };
 		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
-		8A1FB1841CC50DBE00ADADD0 /* SceneExport.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SceneExport.cpp; sourceTree = "<group>"; };
-		8A1FB1851CC50DBE00ADADD0 /* SceneExport.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SceneExport.hpp; sourceTree = "<group>"; };
 		8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_back.jpg; path = skybox/stormydays_back.jpg; sourceTree = "<group>"; };
 		8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_bottom.jpg; path = skybox/stormydays_bottom.jpg; sourceTree = "<group>"; };
 		8A25A6701CB41A51003161D1 /* stormydays_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_front.jpg; path = skybox/stormydays_front.jpg; sourceTree = "<group>"; };
@@ -422,6 +422,12 @@
 		8A673C951CB294FE004236AC /* lake_mountain_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_left.jpg; path = skybox/lake_mountain_left.jpg; sourceTree = "<group>"; };
 		8A673C961CB294FE004236AC /* lake_mountain_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_right.jpg; path = skybox/lake_mountain_right.jpg; sourceTree = "<group>"; };
 		8A673C971CB294FE004236AC /* lake_mountain_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_top.jpg; path = skybox/lake_mountain_top.jpg; sourceTree = "<group>"; };
+		8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRenderer.cpp; path = renderers/ImageRenderer.cpp; sourceTree = "<group>"; };
+		8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageRenderer.hpp; path = renderers/ImageRenderer.hpp; sourceTree = "<group>"; };
+		8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneRenderer.cpp; path = "renderers/scene-renderer/SceneRenderer.cpp"; sourceTree = "<group>"; };
+		8A6999311CE0FB86009F8D56 /* SceneRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SceneRenderer.hpp; path = "renderers/scene-renderer/SceneRenderer.hpp"; sourceTree = "<group>"; };
+		8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSaver.cpp; sourceTree = "<group>"; };
+		8A6999341CE0FBA2009F8D56 /* FileSaver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileSaver.hpp; sourceTree = "<group>"; };
 		8A6B61A21CD27B9E002CB119 /* objParser1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser1.cpp; path = "obj-parser/objParser1.cpp"; sourceTree = "<group>"; };
 		8A6B61A31CD27B9E002CB119 /* objParser1.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParser1.hpp; path = "obj-parser/objParser1.hpp"; sourceTree = "<group>"; };
 		8A6B61A41CD27B9E002CB119 /* objParser2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser2.cpp; path = "obj-parser/objParser2.cpp"; sourceTree = "<group>"; };
@@ -621,6 +627,25 @@
 			path = maths;
 			sourceTree = "<group>";
 		};
+		8A69992B1CE0FB6F009F8D56 /* renderers */ = {
+			isa = PBXGroup;
+			children = (
+				8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */,
+				8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */,
+				8A69992F1CE0FB7E009F8D56 /* scene-renderer */,
+			);
+			name = renderers;
+			sourceTree = "<group>";
+		};
+		8A69992F1CE0FB7E009F8D56 /* scene-renderer */ = {
+			isa = PBXGroup;
+			children = (
+				8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */,
+				8A6999311CE0FB86009F8D56 /* SceneRenderer.hpp */,
+			);
+			name = "scene-renderer";
+			sourceTree = "<group>";
+		};
 		8A6E70561C6CACAC0085CAE5 /* settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -669,11 +694,11 @@
 				8A6E70681C6CACB40085CAE5 /* Editor.hpp */,
 				8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */,
 				8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */,
+				8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */,
+				8A6999341CE0FBA2009F8D56 /* FileSaver.hpp */,
 				8A6E706D1C6CACB40085CAE5 /* Log.cpp */,
 				8A6E706E1C6CACB40085CAE5 /* Log.hpp */,
 				8AD91DA91CA3D980004674BC /* materialeditor */,
-				8A1FB1841CC50DBE00ADADD0 /* SceneExport.cpp */,
-				8A1FB1851CC50DBE00ADADD0 /* SceneExport.hpp */,
 				8A6E706F1C6CACB40085CAE5 /* Screenshot.cpp */,
 				8A6E70701C6CACB40085CAE5 /* Screenshot.hpp */,
 				8A6E70711C6CACB40085CAE5 /* Tabs.cpp */,
@@ -717,6 +742,7 @@
 				8A6E70921C6CACB40085CAE5 /* libnoise */,
 				8A3CECF71C85B217005CB98D /* maths */,
 				8A6E70951C6CACB40085CAE5 /* parsers */,
+				8A69992B1CE0FB6F009F8D56 /* renderers */,
 				8A6E709F1C6CACB40085CAE5 /* stb */,
 			);
 			path = utilities;
@@ -1159,11 +1185,11 @@
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */,
-				8A1FB1861CC50DBE00ADADD0 /* SceneExport.cpp in Sources */,
 				8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */,
 				8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */,
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
+				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
@@ -1193,6 +1219,7 @@
 				8A03648E1C6B71EC001489C8 /* WorldGrid.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
+				8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
 				8ABFC1F21CC92B4500FBCF08 /* MiniAxis.cpp in Sources */,
@@ -1200,6 +1227,7 @@
 				8A54F11C1C760A0F00B93D18 /* Camera.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
+				8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */,
 				8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,

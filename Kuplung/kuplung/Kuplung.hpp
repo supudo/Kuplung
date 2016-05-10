@@ -39,6 +39,7 @@ private:
     void processParsedObjFile();
     bool hasEnding(std::string const &fullString, std::string const &ending);
     void renderScene();
+    void renderSceneModels();
     void setupScene(FBEntity file);
     void initSceneGUI();
     void doLog(std::string logMessage);
