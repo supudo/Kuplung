@@ -22,11 +22,11 @@ void SceneRenderer::destroy() {
 void SceneRenderer::init() {
 }
 
-void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> meshModelFaces, ObjectsManager *managerObjects) {
+void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: SDL could not initialize! SDL Error: %s\n", SDL_GetError()));
     else {
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
@@ -39,6 +39,8 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> meshModel
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
+
+        SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "1");
 
         SDL_DisplayMode current;
         SDL_GetCurrentDisplayMode(0, &current);
@@ -100,7 +102,47 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> meshModel
                         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
                         // render models
-                        // ...
+                        for (int i=0; i<(int)(*meshModelFaces).size(); i++) {
+                            ModelFace* mmf = (*meshModelFaces)[i];
+
+                            glm::mat4 mtxModel = glm::mat4(1.0);
+
+                            // reposition like the grid perspective
+                            if (managerObjects->Setting_FixedGridWorld)
+                                mtxModel *= managerObjects->grid->matrixModel;
+
+                            // scale
+                            mtxModel = glm::scale(mtxModel, glm::vec3(mmf->scaleX->point, mmf->scaleY->point, mmf->scaleZ->point));
+
+                            // rotate
+                            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+                            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
+                            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateY->point), glm::vec3(0, 1, 0));
+                            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
+                            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+
+                            // translate
+                            mtxModel = glm::translate(mtxModel, glm::vec3(mmf->positionX->point, mmf->positionY->point, mmf->positionZ->point));
+
+                            // general
+                            mmf->setOptionsFOV(managerObjects->Setting_FOV);
+
+                            // outlining
+                            mmf->setOptionsSelected(0);
+                            mmf->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
+                            mmf->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
+
+                            // lights
+                            mmf->lightSources = managerObjects->lightSources;
+
+                            // render
+                            mmf->render(managerObjects->matrixProjection,
+                                        managerObjects->camera->matrixCamera,
+                                        mtxModel,
+                                        managerObjects->camera->cameraPosition,
+                                        managerObjects->grid,
+                                        managerObjects->Setting_UIAmbientLight);
+                        }
 
                         SDL_GL_SwapWindow(gWindow);
 

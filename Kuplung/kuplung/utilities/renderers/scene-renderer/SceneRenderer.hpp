@@ -19,7 +19,7 @@ public:
     ~SceneRenderer();
     void init();
     void destroy();
-    void renderImage(FBEntity file, std::vector<ModelFace*> meshModelFaces, ObjectsManager *managerObjects);
+    void renderImage(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects);
 };
 
 #endif /* SceneRenderer_hpp */

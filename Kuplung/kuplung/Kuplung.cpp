@@ -92,6 +92,7 @@ bool Kuplung::init() {
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         SDL_SetHint(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, "1");
+        SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "1");
 
         SDL_DisplayMode current;
         SDL_GetCurrentDisplayMode(0, &current);
@@ -590,7 +591,7 @@ void Kuplung::guiSceneExport(FBEntity file) {
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {
-    this->imageRenderer->renderImage(ImageRendererType_Scene, file, this->meshModelFaces, this->managerObjects);
-    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
-        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
+    this->imageRenderer->renderImage(ImageRendererType_Scene, file, &this->meshModelFaces, this->managerObjects);
+//    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
+//        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }
