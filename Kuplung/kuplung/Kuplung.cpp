@@ -348,6 +348,16 @@ void Kuplung::renderSceneModels() {
         // lights
         mmf->lightSources = this->managerObjects->lightSources;
 
+        // skins
+        mmf->Setting_ModelViewSkin = this->managerObjects->viewModelSkin;
+        mmf->solidLightSkin_MaterialColor = this->managerObjects->SolidLight_MaterialColor;
+        mmf->solidLightSkin_Ambient = this->managerObjects->SolidLight_Ambient;
+        mmf->solidLightSkin_Diffuse = this->managerObjects->SolidLight_Diffuse;
+        mmf->solidLightSkin_Specular = this->managerObjects->SolidLight_Specular;
+        mmf->solidLightSkin_Ambient_Strength = this->managerObjects->SolidLight_Ambient_Strength;
+        mmf->solidLightSkin_Diffuse_Strength = this->managerObjects->SolidLight_Diffuse_Strength;
+        mmf->solidLightSkin_Specular_Strength = this->managerObjects->SolidLight_Specular_Strength;
+
         // render
         mmf->render(this->managerObjects->matrixProjection,
                     this->managerObjects->camera->matrixCamera,

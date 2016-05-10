@@ -11,6 +11,7 @@ uniform vec3 fs_outlineColor;
 uniform vec3 fs_UIAmbient;
 uniform bool fs_celShading;
 uniform bool fs_userParallaxMapping;
+uniform int fs_modelViewSkin;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
@@ -103,6 +104,10 @@ uniform LightSource_Point pointLights[NR_POINT_LIGHTS];
 uniform LightSource_Spot spotLights[NR_SPOT_LIGHTS];
 uniform ModelMaterial material;
 
+// solid skin
+uniform LightSource_Directional solidSkin_Light;
+uniform vec3 solidSkin_materialColor;
+
 // effect vars
 
 uniform Effect_GaussianBlur effect_GBlur;
@@ -117,6 +122,7 @@ vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height)
 
 // functions
 
+vec3 calculateLightSolid(vec3 directionNormal, vec3 directionView);
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);

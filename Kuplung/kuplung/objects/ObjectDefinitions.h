@@ -13,6 +13,13 @@
 #include <string>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
+typedef enum ViewModelSkin {
+    ViewModelSkin_Solid,
+    ViewModelSkin_Material,
+    ViewModelSkin_Texture,
+    ViewModelSkin_Wireframe
+} ViewModelSkin;
+
 typedef enum LightSourceType {
     LightSourceType_Directional,
     LightSourceType_Point,

@@ -93,6 +93,11 @@ public:
     ObjectCoordinate *Setting_MaterialRefraction;
     ObjectCoordinate *Setting_MaterialSpecularExp;
 
+    // view skin
+    ViewModelSkin Setting_ModelViewSkin;
+    glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
+    float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
+
     // light
     glm::vec3 Setting_LightPosition, Setting_LightDirection;
     glm::vec3 Setting_LightAmbient, Setting_LightDiffuse, Setting_LightSpecular;
@@ -157,7 +162,11 @@ private:
     // general
     GLuint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
-    GLuint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision;
+    GLuint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
+
+    // view skin
+    ModelFace_LightSource_Directional *solidLight;
+    GLuint glFS_solidSkin_materialColor;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;

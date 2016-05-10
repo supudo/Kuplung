@@ -1,5 +1,30 @@
 // =================================================
 //
+// Lights - Solid Light
+//
+// =================================================
+
+vec3 calculateLightSolid(vec3 directionNormal, vec3 directionView) {
+    vec3 directionLight = normalize(-1.0 * solidSkin_Light.direction);
+
+    // Diffuse shading - lambert factor
+    float lambertFactor = max(dot(directionNormal, -directionLight), 0.0);
+
+    // Specular shading
+    float materialRefraction = 1.0;
+    vec3 directionReflection = normalize(reflect(-directionLight, directionNormal));
+    float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), materialRefraction);
+
+    // Combine results
+    vec3 ambient = solidSkin_Light.strengthAmbient * solidSkin_Light.ambient * solidSkin_materialColor;
+    vec3 diffuse = solidSkin_Light.strengthDiffuse * solidSkin_Light.diffuse * lambertFactor * solidSkin_materialColor;
+    vec3 specular = solidSkin_Light.strengthSpecular * solidSkin_Light.specular * specularFactor * solidSkin_materialColor;
+
+    return ambient + diffuse + specular;
+}
+
+// =================================================
+//
 // Lights - Directional (Sun)
 //
 // =================================================

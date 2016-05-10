@@ -82,7 +82,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 4: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_SUN_O " Ambient Light", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_SUN_O " Scene Lights", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -390,6 +390,20 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.r, true, isFrame);
             this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.g, true, isFrame);
             this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.b, true, isFrame);
+            ImGui::Separator();
+
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Solid Skin");
+            this->helperUI->addControlColor3("Light - Ambient", &this->managerObjects->SolidLight_Ambient, &this->managerObjects->SolidLight_Ambient_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 4, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Ambient_Strength, true, isFrame);
+
+            this->helperUI->addControlColor3("Light - Diffuse", &this->managerObjects->SolidLight_Diffuse, &this->managerObjects->SolidLight_Diffuse_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 5, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Diffuse_Strength, true, isFrame);
+
+            this->helperUI->addControlColor3("Light - Specular", &this->managerObjects->SolidLight_Specular, &this->managerObjects->SolidLight_Specular_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 6, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Specular_Strength, true, isFrame);
+
+            this->helperUI->addControlColor3("Material Color", &this->managerObjects->SolidLight_MaterialColor, &this->managerObjects->SolidLight_MaterialColor_ColorPicker);
+            ImGui::Separator();
             break;
         }
         case 5: {

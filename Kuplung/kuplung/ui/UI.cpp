@@ -186,6 +186,18 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
             ImGui::Separator();
+            if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Model Skin")) {
+                if (ImGui::MenuItem("Solid"))
+                    this->managerObjects->viewModelSkin = ViewModelSkin_Solid;
+                if (ImGui::MenuItem("Material"))
+                    this->managerObjects->viewModelSkin = ViewModelSkin_Material;
+                if (ImGui::MenuItem("Texture"))
+                    this->managerObjects->viewModelSkin = ViewModelSkin_Texture;
+                if (ImGui::MenuItem("Wireframe"))
+                    this->managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
+                ImGui::EndMenu();
+            }
+            ImGui::Separator();
             ImGui::MenuItem("Render Image", NULL, &this->showImageSave);
             ImGui::EndMenu();
         }

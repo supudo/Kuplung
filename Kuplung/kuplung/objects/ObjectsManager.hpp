@@ -67,6 +67,11 @@ public:
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
     bool Settings_ShowZAxis = true;
 
+    ViewModelSkin viewModelSkin;
+    glm::vec3 SolidLight_MaterialColor, SolidLight_Ambient, SolidLight_Diffuse, SolidLight_Specular;
+    float SolidLight_Ambient_Strength, SolidLight_Diffuse_Strength, SolidLight_Specular_Strength;
+    bool SolidLight_MaterialColor_ColorPicker, SolidLight_Ambient_ColorPicker, SolidLight_Diffuse_ColorPicker, SolidLight_Specular_ColorPicker;
+
 private:
     std::function<void(float)> funcProgress;
 

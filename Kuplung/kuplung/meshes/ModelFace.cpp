@@ -436,6 +436,18 @@ bool ModelFace::initShaderProgram() {
 
         this->glMaterial_ParallaxMapping = this->glUtils->glGetUniform(this->shaderProgram, "fs_userParallaxMapping");
 
+        this->gl_ModelViewSkin = this->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
+        this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
+        this->solidLight = new ModelFace_LightSource_Directional();
+        this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
+        this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
+        this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
+        this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
+        this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
+        this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
+        this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
+        this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
+
         // light - directional
         for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
             ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
@@ -802,12 +814,27 @@ void ModelFace::renderModel() {
         glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
 
         // ambient color for editor
-        glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
+        //glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
+        glUniform3f(this->glFS_UIAmbient, 0.0f, 0.0f, 0.0f);
 
         // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
 
+        // mapping
         glUniform1i(this->glMaterial_ParallaxMapping, this->Setting_ParallaxMapping);
+
+        // render skin
+        glUniform1i(this->gl_ModelViewSkin, this->Setting_ModelViewSkin);
+        glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
+
+        glUniform1i(this->solidLight->gl_InUse, 1);
+        glUniform3f(this->solidLight->gl_Direction, 0.0f, 0.0f, 0.0f);
+        glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
+        glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
+        glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);
+        glUniform1f(this->solidLight->gl_StrengthAmbient, this->solidLightSkin_Ambient_Strength);
+        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->solidLightSkin_Diffuse_Strength);
+        glUniform1f(this->solidLight->gl_StrengthSpecular, this->solidLightSkin_Specular_Strength);
 
         // lights
         int lightsCount_Directional = 0;
