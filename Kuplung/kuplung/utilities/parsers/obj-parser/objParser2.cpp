@@ -362,12 +362,13 @@ MeshMaterialTextureImage objParser2::parseTextureImage(std::string textureLine) 
     }
     else
         materialImage.Image = textureLine;
+    boost::algorithm::trim(materialImage.Image);
 
     std::string folderPath = this->file.path;
     boost::replace_all(folderPath, this->file.title, "");
 #ifdef _WIN32
-    if (!boost::filesystem::exists(materialImage.image))
-        materialImage.image = folderPath + "/" + materialImage.image;
+    if (!boost::filesystem::exists(materialImage.Image))
+        materialImage.Image = folderPath + "/" + materialImage.Image;
 #else
     if (!boost::filesystem::exists(materialImage.Image))
         materialImage.Image = folderPath + "/" + materialImage.Image;
