@@ -828,7 +828,7 @@ void ModelFace::renderModel() {
         glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
 
         glUniform1i(this->solidLight->gl_InUse, 1);
-        glUniform3f(this->solidLight->gl_Direction, 0.0f, 0.0f, 0.0f);
+        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
         glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
         glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
         glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);
@@ -851,6 +851,7 @@ void ModelFace::renderModel() {
 
                         // light
                         glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
+                        //printf("%f, %f, %f\n", light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
 
                         // color
                         glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);

@@ -10,12 +10,8 @@ void main(void) {
     else {
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
         vec3 normalDirection = fs_vertexNormal;
-        if (fs_modelViewSkin < 0) { // solid
-
-            vec3 solidLightColor = vec3(0.0);
-            solidLightColor += calculateLightSolid(normalDirection, viewDirection);
-            //solidLightColor += fs_UIAmbient;
-
+        if (fs_modelViewSkin == 0) { // solid
+            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection);
             fragColor = vec4(solidLightColor, fs_alpha);
         }
         else { // full render
