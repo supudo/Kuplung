@@ -187,13 +187,13 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
             ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Model Skin")) {
-                if (ImGui::MenuItem("Solid"))
+                if (ImGui::MenuItem("Solid", NULL, managerObjects->viewModelSkin == ViewModelSkin_Solid))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Solid;
-                if (ImGui::MenuItem("Material"))
+                if (ImGui::MenuItem("Material", NULL, managerObjects->viewModelSkin == ViewModelSkin_Material))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Material;
-                if (ImGui::MenuItem("Texture"))
+                if (ImGui::MenuItem("Texture", NULL, managerObjects->viewModelSkin == ViewModelSkin_Texture))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Texture;
-                if (ImGui::MenuItem("Wireframe"))
+                if (ImGui::MenuItem("Wireframe", NULL, managerObjects->viewModelSkin == ViewModelSkin_Wireframe))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
                 ImGui::EndMenu();
             }
@@ -203,8 +203,6 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         }
 
         if (ImGui::BeginMenu("View")) {
-            //ImGui::MenuItem(Settings::Instance()->showAxes ? ICON_FA_TOGGLE_ON " Hide Axes" : ICON_FA_TOGGLE_OFF " Show Axes", NULL, &Settings::Instance()->showAxes);
-            //ImGui::Separator();
             ImGui::MenuItem(this->showControlsGUI ? ICON_FA_TOGGLE_ON " GUI Controls" : ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->showControlsGUI);
             ImGui::MenuItem(this->showControlsModels ? ICON_FA_TOGGLE_ON " Scene Controls" : ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->showControlsModels);
             ImGui::Separator();
