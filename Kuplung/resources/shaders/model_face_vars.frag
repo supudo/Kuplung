@@ -122,7 +122,7 @@ vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height)
 
 // functions
 
-vec3 calculateLightSolid(vec3 directionNormal, vec3 directionView);
+vec3 calculateLightSolid(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);

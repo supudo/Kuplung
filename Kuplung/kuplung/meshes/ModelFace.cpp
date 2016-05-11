@@ -814,8 +814,7 @@ void ModelFace::renderModel() {
         glUniform3f(this->glFS_OutlineColor, this->so_outlineColor.r, this->so_outlineColor.g, this->so_outlineColor.b);
 
         // ambient color for editor
-        //glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
-        glUniform3f(this->glFS_UIAmbient, 0.0f, 0.0f, 0.0f);
+        glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
 
         // geometry shader displacement
         glUniform3f(this->glGS_GeomDisplacementLocation, this->displaceX->point, this->displaceY->point, this->displaceZ->point);
@@ -1067,13 +1066,13 @@ void ModelFace::drawOutline() {
 }
 
 void ModelFace::drawOnly() {
-    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     //glDrawElements((this->Setting_UseTessellation ? GL_PATCHES : GL_TRIANGLES), this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
     glDrawElements(GL_PATCHES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
 
-    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode)
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 

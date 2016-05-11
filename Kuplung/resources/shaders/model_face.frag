@@ -10,12 +10,32 @@ void main(void) {
     else {
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
         vec3 normalDirection = fs_vertexNormal;
+        vec2 textureCoords = fs_textureCoord;
         if (fs_modelViewSkin == 0) { // solid
-            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection);
+            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, vec4(solidSkin_materialColor, 1.0), vec4(solidSkin_materialColor, 1.0), vec4(solidSkin_materialColor, 1.0));
+            solidLightColor += fs_UIAmbient;
             fragColor = vec4(solidLightColor, fs_alpha);
         }
+        else if (fs_modelViewSkin == 1) { // material
+            vec4 processedColor_Ambient = vec4(material.ambient, 1.0);
+            vec4 processedColor_Diffuse = vec4(material.diffuse, 1.0);
+            vec4 processedColor_Specular = vec4(material.specular, 1.0);
+            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+            solidLightColor += fs_UIAmbient;
+            fragColor = vec4(solidLightColor, fs_alpha);
+        }
+        else if (fs_modelViewSkin == 2) { // texture
+            vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, textureCoords) : vec4(solidSkin_materialColor, 1.0));
+            vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, textureCoords) : vec4(solidSkin_materialColor, 1.0));
+            vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, textureCoords) : vec4(solidSkin_materialColor, 1.0));
+            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+            solidLightColor += fs_UIAmbient;
+            fragColor = vec4(solidLightColor, fs_alpha);
+        }
+        else if (fs_modelViewSkin == 3) { // wireframe
+            fragColor = vec4(1.0);
+        }
         else { // full render
-            vec2 textureCoords = fs_textureCoord;
             vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
 
             // Parallax mapping coordinates
