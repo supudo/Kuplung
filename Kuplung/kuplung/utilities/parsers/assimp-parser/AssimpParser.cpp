@@ -23,6 +23,7 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
 
 std::vector<MeshModel> AssimpParser::parse(FBEntity file) {
     this->file = file;
+    this->models.clear();
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
     if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         Settings::Instance()->funcDoLog("[Assimp] Parse error : " + std::string(this->parser.GetErrorString()));
