@@ -115,7 +115,6 @@ void ObjectsManager::resetSettings() {
     this->Setting_OutlineColorPickerOpen = false;
     this->Setting_ShowAxisHelpers = true;
     this->Settings_ShowZAxis = true;
-    this->viewModelSkin = ViewModelSkin_Solid;
     this->SolidLight_MaterialColor = glm::vec3(0.7);
     this->SolidLight_Ambient = glm::vec3(1.0);
     this->SolidLight_Diffuse = glm::vec3(1.0);

@@ -17,7 +17,8 @@ typedef enum ViewModelSkin {
     ViewModelSkin_Solid,
     ViewModelSkin_Material,
     ViewModelSkin_Texture,
-    ViewModelSkin_Wireframe
+    ViewModelSkin_Wireframe,
+    ViewModelSkin_Rendered
 } ViewModelSkin;
 
 typedef enum LightSourceType {

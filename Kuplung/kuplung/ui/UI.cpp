@@ -195,6 +195,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     this->managerObjects->viewModelSkin = ViewModelSkin_Texture;
                 if (ImGui::MenuItem("Wireframe", NULL, managerObjects->viewModelSkin == ViewModelSkin_Wireframe))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
+                if (ImGui::MenuItem("Rendered", NULL, managerObjects->viewModelSkin == ViewModelSkin_Rendered))
+                    this->managerObjects->viewModelSkin = ViewModelSkin_Rendered;
                 ImGui::EndMenu();
             }
             ImGui::Separator();

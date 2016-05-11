@@ -35,7 +35,7 @@ void main(void) {
         else if (fs_modelViewSkin == 3) { // wireframe
             fragColor = vec4(1.0);
         }
-        else { // full render
+        else if (fs_modelViewSkin == 4) { // full render
             vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
 
             // Parallax mapping coordinates
@@ -115,5 +115,7 @@ void main(void) {
             else
                 fragColor = vec4(processedColorRefraction, fs_alpha);
         }
+        else
+            fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);
     }
 }
