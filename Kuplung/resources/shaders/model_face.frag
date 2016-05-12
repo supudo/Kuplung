@@ -11,6 +11,14 @@ void main(void) {
         vec3 viewDirection = normalize(fs_cameraPosition - fs_vertexPosition);
         vec3 normalDirection = fs_vertexNormal;
         vec2 textureCoords = fs_textureCoord;
+
+        // bump map normal vector
+        vec3 fragmentNormal;
+        if (material.has_texture_bump)
+            fragmentNormal = calculateBumpedNormal(textureCoords);
+        else
+            fragmentNormal = normalize(normalDirection);
+
         if (fs_modelViewSkin == 0) { // solid
             vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, vec4(solidSkin_materialColor, 1.0), vec4(solidSkin_materialColor, 1.0), vec4(solidSkin_materialColor, 1.0));
             solidLightColor += fs_UIAmbient;
@@ -28,8 +36,7 @@ void main(void) {
             vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, textureCoords) : vec4(solidSkin_materialColor, 1.0));
             vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, textureCoords) : vec4(solidSkin_materialColor, 1.0));
             vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, textureCoords) : vec4(solidSkin_materialColor, 1.0));
-            vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
-            solidLightColor += fs_UIAmbient;
+            vec3 solidLightColor = calculateLightSolid(fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
             fragColor = vec4(solidLightColor, fs_alpha);
         }
         else if (fs_modelViewSkin == 3) { // wireframe
@@ -59,30 +66,23 @@ void main(void) {
             // diffuse color/texture
             vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, textureCoords) : vec4(material.diffuse, 1.0));
 
-            // spoecular color/texture
+            // specular color/texture
             vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, textureCoords) : vec4(material.specular, 1.0));
-
-            // bump map normal vector
-            vec3 fragmentNormal;
-            if (material.has_texture_bump)
-                fragmentNormal = calculateBumpedNormal(textureCoords);
-            else
-                fragmentNormal = normalize(fragmentNormal);
 
             // directional lights color
             vec3 lightsDirectional = vec3(0.0);
             if (directionalLights.length() > 0)
-                lightsDirectional = calculateLightDirectional(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+                lightsDirectional = calculateLightDirectional(fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
             // point lights color
             vec3 lightsPoint = vec3(0.0);
             if (pointLights.length() > 0)
-                lightsPoint = calculateLightPoint(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+                lightsPoint = calculateLightPoint(fragmentPosition, fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
             // spot lights color
             vec3 lightsSpot = vec3(0.0);
             if (spotLights.length() > 0)
-                lightsSpot = calculateLightSpot(fragmentPosition, normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
+                lightsSpot = calculateLightSpot(fragmentPosition, fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
             // Refraction
             vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot + fs_UIAmbient);
@@ -97,7 +97,7 @@ void main(void) {
                 processedColorRefraction += effect_Bloom_Color.rgb;
             }
             if (material.refraction > 1.0) {
-                vec3 refraction = calculateRefraction(normalDirection, processedColor_Diffuse);
+                vec3 refraction = calculateRefraction(fragmentNormal, processedColor_Diffuse);
                 processedColorRefraction = processedColorRefraction * refraction;
             }
             else
