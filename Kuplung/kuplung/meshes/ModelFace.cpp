@@ -417,6 +417,7 @@ bool ModelFace::initShaderProgram() {
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
         this->glTCS_UseTessellation = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
         this->glTCS_TessellationSubdivision = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationSubdivision");
+        this->glVS_DisplacementMap = this->glUtils->glGetUniform(this->shaderProgram, "vs_materialDisplacementMap");
 
         this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
         this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
@@ -1011,6 +1012,7 @@ void ModelFace::renderModel() {
         if (this->vboTextureDisplacement > 0 && this->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureDisplacement, 1);
             glUniform1i(this->glMaterial_SamplerDisplacement, 6);
+            glUniform1i(this->glVS_DisplacementMap, 6);
             glActiveTexture(GL_TEXTURE6);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDisplacement);
         }
