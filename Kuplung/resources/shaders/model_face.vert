@@ -6,8 +6,6 @@ uniform mat4 vs_WorldMatrix;
 uniform vec3 vs_displacementLocation;
 uniform float vs_isBorder;
 
-uniform sampler2D vs_materialDisplacementMap;
-
 in vec3 vs_vertexPosition;
 in vec2 vs_textureCoord;
 in vec3 vs_vertexNormal;
@@ -38,9 +36,4 @@ void main(void) {
     tcs_isBorder = vs_isBorder;
 
     gl_Position = vs_MVPMatrix * vec4(vs_vertexPosition, 1.0);
-
-//    vec4 dv = texture(vs_materialDisplacementMap, vs_textureCoord);
-//    float df = 0.30 * dv.x + 0.59 * dv.y + 0.11 * dv.z;
-//    vec4 newVertexPos = vec4(vs_vertexNormal * df * 100.0, 0.0) + vec4(vs_vertexPosition, 1.0);
-//    gl_Position = vs_MVPMatrix * newVertexPos;
 }

@@ -163,7 +163,6 @@ private:
     GLuint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLuint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
-    GLuint glVS_DisplacementMap;
 
     // view skin
     ModelFace_LightSource_Directional *solidLight;
