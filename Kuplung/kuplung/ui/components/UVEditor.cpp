@@ -70,13 +70,26 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(3/7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(3/7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Apply Texture")) {
+        std::vector<glm::vec2> uvs;
+        uvs.push_back(glm::vec2(1.0, 0.0));
+        uvs.push_back(glm::vec2(1.0, 1.0));
+        uvs.push_back(glm::vec2(0.0, 1.0));
+        uvs.push_back(glm::vec2(0.0, 0.0));
+
         std::vector<glm::vec2> textureCoordinates;
-        textureCoordinates.push_back(glm::vec2(1.0, 0.0));
-        textureCoordinates.push_back(glm::vec2(1.0, 1.0));
-        textureCoordinates.push_back(glm::vec2(0.0, 1.0));
-        textureCoordinates.push_back(glm::vec2(0.0, 0.0));
-        this->texturePath = this->textureImage;
-        this->funcProcessTexture(this->mmf, this->textureType, this->texturePath, textureCoordinates);
+        for (int i=0; i<this->mmf->meshModel.countIndices; i++) {
+            if (i % 2 == 0) {
+                textureCoordinates.push_back(uvs[3]);
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[2]);
+            }
+            else {
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[1]);
+                textureCoordinates.push_back(uvs[2]);
+            }
+        }
+        this->funcProcessTexture(this->mmf, this->textureType, this->textureImage, textureCoordinates);
     }
     ImGui::PopStyleColor(3);
 
