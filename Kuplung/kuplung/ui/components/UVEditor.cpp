@@ -120,29 +120,18 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         draw_list->ChannelsSetCurrent(1);
 
-        ImColor uvColor = ImColor(255, 112, 0);
+        for (size_t i=0; i<this->uvPoints.size(); i++) {
+            UVPoint p = this->uvPoints[i];
+            p.position = p.position + offset;
+            draw_list->AddCircleFilled(p.position, p.radius, p.color);
+        }
 
-        // top-left
-        connectorScreenPos = ImVec2(10.0, 14.0);
-        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
-        // top-right
-        connectorScreenPos = ImVec2(this->textureWidth, 14.0);
-        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
-        // bottom-left
-        connectorScreenPos = ImVec2(10.0, this->textureHeight);
-        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
-        // bottom-right
-        connectorScreenPos = ImVec2(this->textureWidth, this->textureHeight);
-        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
-
-        // top-left to top-right
-        draw_list->AddLine(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, 14.0) + offset, uvColor);
-        // top-left to bottom-left
-        draw_list->AddLine(ImVec2(10.0, 14.0) + offset, ImVec2(10.0, this->textureHeight) + offset, uvColor);
-        // bottom-left to bottom-right
-        draw_list->AddLine(ImVec2(10.0, this->textureHeight) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, uvColor);
-        // top-right to bottom-right
-        draw_list->AddLine(ImVec2(this->textureWidth, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, uvColor);
+        for (size_t i=0; i<this->uvLines.size(); i++) {
+            UVLine l = this->uvLines[i];
+            l.positionX = l.positionX + offset;
+            l.positionY = l.positionY + offset;
+            draw_list->AddLine(l.positionX, l.positionY, l.color);
+        }
 
         // add overlay
         draw_list->AddRectFilled(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
@@ -202,5 +191,65 @@ void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserTyp
         stbi_image_free(tPixels);
 
         this->textureLoaded = true;
+
+        this->projectSquare();
     }
+}
+
+void UVEditor::projectSquare() {
+    this->uvPoints.clear();
+    this->uvLines.clear();
+
+    ImColor pColor = ImColor(255, 112, 0);
+    float pRadius = 5.0f;
+
+    // vertices
+    UVPoint p_top_left;
+    p_top_left.color = pColor;
+    p_top_left.radius = pRadius;
+    p_top_left.position = ImVec2(10.0, 14.0);
+    this->uvPoints.push_back(p_top_left);
+
+    UVPoint p_top_right;
+    p_top_right.color = pColor;
+    p_top_right.radius = pRadius;
+    p_top_right.position = ImVec2(this->textureWidth, 14.0);
+    this->uvPoints.push_back(p_top_right);
+
+    UVPoint p_bottom_left;
+    p_bottom_left.color = pColor;
+    p_bottom_left.radius = pRadius;
+    p_bottom_left.position = ImVec2(10.0, this->textureHeight);
+    this->uvPoints.push_back(p_bottom_left);
+
+    UVPoint p_bottom_right;
+    p_bottom_right.color = pColor;
+    p_bottom_right.radius = pRadius;
+    p_bottom_right.position = ImVec2(this->textureWidth, this->textureHeight);
+    this->uvPoints.push_back(p_bottom_right);
+
+    // lines
+    UVLine l_top_left_to_right;
+    l_top_left_to_right.positionX = ImVec2(10.0, 14.0);
+    l_top_left_to_right.positionY = ImVec2(this->textureWidth, 14.0);
+    l_top_left_to_right.color = pColor;
+    this->uvLines.push_back(l_top_left_to_right);
+
+    UVLine l_top_left_to_bottom_right;
+    l_top_left_to_bottom_right.positionX = ImVec2(10.0, 14.0);
+    l_top_left_to_bottom_right.positionY = ImVec2(10.0, this->textureHeight);
+    l_top_left_to_bottom_right.color = pColor;
+    this->uvLines.push_back(l_top_left_to_bottom_right);
+
+    UVLine l_bottom_left_to_bottom_right;
+    l_bottom_left_to_bottom_right.positionX = ImVec2(10.0, this->textureHeight);
+    l_bottom_left_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
+    l_bottom_left_to_bottom_right.color = pColor;
+    this->uvLines.push_back(l_bottom_left_to_bottom_right);
+
+    UVLine l_top_right_to_bottom_right;
+    l_top_right_to_bottom_right.positionX = ImVec2(this->textureWidth, 14.0);
+    l_top_right_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
+    l_top_right_to_bottom_right.color = pColor;
+    this->uvLines.push_back(l_top_right_to_bottom_right);
 }

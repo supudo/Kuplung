@@ -19,6 +19,17 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
 
+struct UVPoint {
+    ImVec2 position;
+    ImColor color;
+    float radius;
+};
+
+struct UVLine {
+    ImVec2 positionX, positionY;
+    ImColor color;
+};
+
 class UVEditor {
 public:
     void init(int positionX, int positionY, int width, int height);
@@ -37,9 +48,13 @@ private:
     GLuint vboTexture;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
 
+    std::vector<UVPoint> uvPoints;
+    std::vector<UVLine> uvLines;
+
     FileBrowser *componentFileBrowser;
 
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType);
+    void projectSquare();
 };
 
 #endif /* UVEditor_hpp */
