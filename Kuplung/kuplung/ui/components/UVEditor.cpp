@@ -113,21 +113,23 @@ void UVEditor::draw(const char* title, bool* p_opened) {
         ImDrawList* draw_list = ImGui::GetWindowDrawList();
         draw_list->ChannelsSplit(2);
 
+        // texture image
         draw_list->ChannelsSetCurrent(0);
         connectorScreenPos = ImVec2(10.0, 10.0);
         ImVec2 bb_min = connectorScreenPos + offset;
         ImVec2 bb_max = ImVec2(this->textureWidth, this->textureHeight) + offset;
         draw_list->AddImage((ImTextureID)(intptr_t)this->vboTexture, bb_min, bb_max);
-        //ImGui::Image((ImTextureID)(intptr_t)this->vboTexture, ImVec2(this->textureWidth, this->textureHeight));
 
         draw_list->ChannelsSetCurrent(1);
 
+        // points
         for (size_t i=0; i<this->uvPoints.size(); i++) {
             UVPoint p = this->uvPoints[i];
             p.position = p.position + offset;
             draw_list->AddCircleFilled(p.position, p.radius, p.color);
         }
 
+        // lines
         for (size_t i=0; i<this->uvLines.size(); i++) {
             UVLine l = this->uvLines[i];
             l.positionX = l.positionX + offset;
@@ -149,53 +151,6 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
     if (this->showFileBrowser)
         this->componentFileBrowser->draw("File Browser", &this->showFileBrowser, this->textureType);
-}
-
-void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {
-    this->showFileBrowser = false;
-    this->textureImage = file.path;
-    this->textureFilename = file.title;
-    strcpy(this->filePath, this->textureImage.c_str());
-
-    if (!boost::filesystem::exists(this->textureImage))
-        this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
-    int tChannels;
-    unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
-    if (!tPixels)
-        Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
-    else {
-        glGenTextures(1, &this->vboTexture);
-        glBindTexture(GL_TEXTURE_2D, this->vboTexture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        GLint textureFormat = 0;
-        switch (tChannels) {
-            case 1:
-                textureFormat = GL_LUMINANCE;
-                break;
-            case 2:
-                textureFormat = GL_LUMINANCE_ALPHA;
-                break;
-            case 3:
-                textureFormat = GL_RGB;
-                break;
-            case 4:
-                textureFormat = GL_RGBA;
-                break;
-            default:
-                textureFormat = GL_RGB;
-                break;
-        }
-        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->textureWidth, this->textureHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        stbi_image_free(tPixels);
-
-        this->textureLoaded = true;
-
-        this->projectSquare();
-    }
 }
 
 void UVEditor::projectSquare() {
@@ -254,4 +209,51 @@ void UVEditor::projectSquare() {
     l_top_right_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
     l_top_right_to_bottom_right.color = pColor;
     this->uvLines.push_back(l_top_right_to_bottom_right);
+}
+
+void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {
+    this->showFileBrowser = false;
+    this->textureImage = file.path;
+    this->textureFilename = file.title;
+    strcpy(this->filePath, this->textureImage.c_str());
+
+    if (!boost::filesystem::exists(this->textureImage))
+        this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
+    int tChannels;
+    unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
+    if (!tPixels)
+        Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
+    else {
+        glGenTextures(1, &this->vboTexture);
+        glBindTexture(GL_TEXTURE_2D, this->vboTexture);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        GLint textureFormat = 0;
+        switch (tChannels) {
+            case 1:
+                textureFormat = GL_LUMINANCE;
+                break;
+            case 2:
+                textureFormat = GL_LUMINANCE_ALPHA;
+                break;
+            case 3:
+                textureFormat = GL_RGB;
+                break;
+            case 4:
+                textureFormat = GL_RGBA;
+                break;
+            default:
+                textureFormat = GL_RGB;
+                break;
+        }
+        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->textureWidth, this->textureHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        stbi_image_free(tPixels);
+
+        this->textureLoaded = true;
+
+        this->projectSquare();
+    }
 }
