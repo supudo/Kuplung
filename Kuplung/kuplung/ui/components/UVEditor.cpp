@@ -9,6 +9,10 @@
 #include "kuplung/ui/components/UVEditor.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/utilities/stb/stb_image.h"
+#include "kuplung/utilities/imgui/imgui_internal.h"
+
+static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
+static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->positionX = positionX;
@@ -101,8 +105,53 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         ImGui::Separator();
 
-        ImGui::Image((ImTextureID)(intptr_t)this->vboTexture, ImVec2(this->textureWidth, this->textureHeight));
+        ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
+        ImVec2 connectorScreenPos = ImVec2(0, 0);
+
+        ImDrawList* draw_list = ImGui::GetWindowDrawList();
+        draw_list->ChannelsSplit(2);
+
+        draw_list->ChannelsSetCurrent(0);
+        connectorScreenPos = ImVec2(10.0, 10.0);
+        ImVec2 bb_min = connectorScreenPos + offset;
+        ImVec2 bb_max = ImVec2(this->textureWidth, this->textureHeight) + offset;
+        draw_list->AddImage((ImTextureID)(intptr_t)this->vboTexture, bb_min, bb_max);
+        //ImGui::Image((ImTextureID)(intptr_t)this->vboTexture, ImVec2(this->textureWidth, this->textureHeight));
+
+        draw_list->ChannelsSetCurrent(1);
+
+        ImColor uvColor = ImColor(255, 112, 0);
+
+        // top-left
+        connectorScreenPos = ImVec2(10.0, 14.0);
+        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
+        // top-right
+        connectorScreenPos = ImVec2(this->textureWidth, 14.0);
+        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
+        // bottom-left
+        connectorScreenPos = ImVec2(10.0, this->textureHeight);
+        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
+        // bottom-right
+        connectorScreenPos = ImVec2(this->textureWidth, this->textureHeight);
+        draw_list->AddCircleFilled(connectorScreenPos + offset, 5.0f, uvColor);
+
+        // top-left to top-right
+        draw_list->AddLine(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, 14.0) + offset, uvColor);
+        // top-left to bottom-left
+        draw_list->AddLine(ImVec2(10.0, 14.0) + offset, ImVec2(10.0, this->textureHeight) + offset, uvColor);
+        // bottom-left to bottom-right
+        draw_list->AddLine(ImVec2(10.0, this->textureHeight) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, uvColor);
+        // top-right to bottom-right
+        draw_list->AddLine(ImVec2(this->textureWidth, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, uvColor);
+
+        // add overlay
+        draw_list->AddRectFilled(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
+
+        draw_list->ChannelsMerge();
     }
+
+    if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
+        this->scrolling = this->scrolling - ImGui::GetIO().MouseDelta;
 
     ImGui::EndChild();
     ImGui::End();

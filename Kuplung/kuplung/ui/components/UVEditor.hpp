@@ -35,6 +35,7 @@ private:
     char filePath[256];
     MaterialTextureType textureType;
     GLuint vboTexture;
+    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
 
     FileBrowser *componentFileBrowser;
 
