@@ -395,13 +395,13 @@ void Kuplung::initSceneGUI() {
     this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
 
     // testbed
-    std::string testObj = "brick_wall.obj";
-    FBEntity fileTestbed;
-    fileTestbed.isFile = true;
-    fileTestbed.extension = ".obj";
-    fileTestbed.title = testObj;
-    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
-    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
+//    std::string testObj = "brick_wall.obj";
+//    FBEntity fileTestbed;
+//    fileTestbed.isFile = true;
+//    fileTestbed.extension = ".obj";
+//    fileTestbed.title = testObj;
+//    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
+//    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 }
 
 void Kuplung::addShape(ShapeType type) {

@@ -21,6 +21,7 @@
 		8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */; };
 		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
+		8A1A57021CEA1C71003A9E48 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1A57001CEA1C71003A9E48 /* UVEditor.cpp */; };
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
@@ -360,6 +361,8 @@
 		8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8A175AD61CA93EB900A4E46B /* MELink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MELink.cpp; path = materialeditor/MELink.cpp; sourceTree = "<group>"; };
 		8A175AD71CA93EB900A4E46B /* MELink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MELink.hpp; path = materialeditor/MELink.hpp; sourceTree = "<group>"; };
+		8A1A57001CEA1C71003A9E48 /* UVEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UVEditor.cpp; sourceTree = "<group>"; };
+		8A1A57011CEA1C71003A9E48 /* UVEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UVEditor.hpp; sourceTree = "<group>"; };
 		8A1AFB211C71FC3F004888D8 /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsFontAwesome.h; sourceTree = "<group>"; };
 		8A1AFB221C71FC3F004888D8 /* IconsMaterialDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsMaterialDesign.h; sourceTree = "<group>"; };
 		8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIHelpers.cpp; sourceTree = "<group>"; };
@@ -703,6 +706,8 @@
 				8A6E70701C6CACB40085CAE5 /* Screenshot.hpp */,
 				8A6E70711C6CACB40085CAE5 /* Tabs.cpp */,
 				8A6E70721C6CACB40085CAE5 /* Tabs.hpp */,
+				8A1A57001CEA1C71003A9E48 /* UVEditor.cpp */,
+				8A1A57011CEA1C71003A9E48 /* UVEditor.hpp */,
 			);
 			path = components;
 			sourceTree = "<group>";
@@ -1231,6 +1236,7 @@
 				8A48C3281CBE8B780076F4F6 /* RayLine.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
+				8A1A57021CEA1C71003A9E48 /* UVEditor.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

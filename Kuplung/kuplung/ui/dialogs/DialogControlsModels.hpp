@@ -18,7 +18,7 @@
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditor.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
-#include "kuplung/ui/components/FileBrowser.hpp"
+#include "kuplung/ui/components/UVEditor.hpp"
 
 class DialogControlsModels {
 public:
@@ -41,12 +41,11 @@ private:
 
     void contextModelRename(std::vector<ModelFace*> * meshModelFaces);
     void contextModelDelete(std::vector<ModelFace*> * meshModelFaces);
-    void dialogFileBrowserProcessFile(FBEntity file, int texType);
 
     SDL_Window* sdlWindow;
 
     std::vector<ModelFace*> * meshModelFaces;
-    bool cmenu_deleteYn, cmenu_renameModel, showFileBrowser;
+    bool cmenu_deleteYn, cmenu_renameModel;
     char guiModelRenameText[256];
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabPanel;
     float heightTopPanel = 170.0f;
@@ -58,6 +57,7 @@ private:
     bool showTextureWindow_Dissolve, showTexture_Dissolve, showTextureWindow_Bump, showTexture_Bump;
     bool showTextureWindow_Displacement, showTexture_Displacement;
     bool showTextureWindow_Specular, showTexture_Specular, showTextureWindow_SpecularExp, showTexture_SpecularExp;
+    bool showUVEditor;
 
     int textureAmbient_Width, textureAmbient_Height, textureDiffuse_Width, textureDiffuse_Height;
     int textureDissolve_Width, textureDissolve_Height, textureBump_Width, textureBump_Height;
@@ -71,11 +71,12 @@ private:
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
     void showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
     void showTextureAdd(MaterialTextureType mtType);
+    void processTexture(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::vector<glm::vec2> textureCoordinates);
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
     MaterialEditor *componentMaterialEditor;
-    FileBrowser *componentFileBrowser;
+    UVEditor *componentUVEditor;
 };
 
 #endif /* DialogControlsModels_hpp */

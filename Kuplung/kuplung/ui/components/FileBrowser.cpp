@@ -16,7 +16,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, int)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -36,7 +36,7 @@ void FileBrowser::setImageBrowser(bool isImage) {
     this->isStyleBrowser = false;
 }
 
-void FileBrowser::draw(const char* title, bool* p_opened, int TextureType) {
+void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType TextureType) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -91,7 +91,7 @@ void FileBrowser::draw(const char* title, bool* p_opened, int TextureType) {
 
 #pragma mark - Private
 
-void FileBrowser::drawFiles(int TextureType) {
+void FileBrowser::drawFiles(MaterialTextureType TextureType) {
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder);
     int i = 0;
     static int selected = -1;

@@ -98,7 +98,7 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
             for (size_t j=0; j<m.texture_coordinates.size(); j++) {
                 uvs += Settings::Instance()->string_format("[%f, %f], ", m.texture_coordinates[j].x, m.texture_coordinates[j].y);
             }
-            printf("m.uvs : %s\n", uvs.c_str());
+            printf("m.texture_coordinates : %s\n", uvs.c_str());
 
             std::string normals;
             for (size_t j=0; j<m.normals.size(); j++) {

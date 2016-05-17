@@ -23,7 +23,6 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
-    this->showFileBrowser = false;
 
     this->showTextureWindow_Ambient = false;
     this->showTexture_Ambient = false;
@@ -37,6 +36,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->showTexture_Specular = false;
     this->showTextureWindow_SpecularExp = false;
     this->showTexture_SpecularExp = false;
+    this->showUVEditor = false;
 
     this->TextureImage = "";
     this->TextureFilename = "";
@@ -56,11 +56,8 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->componentMaterialEditor = new MaterialEditor();
     this->componentMaterialEditor->init();
 
-    this->componentFileBrowser = new FileBrowser();
-    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
-                                     Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
-                                     std::bind(&DialogControlsModels::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
-    this->componentFileBrowser->setImageBrowser(true);
+    this->componentUVEditor = new UVEditor();
+    this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
 }
 
 void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
@@ -121,7 +118,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
     int tChannels;
     unsigned char* tPixels = stbi_load(imageFile.c_str(), width, height, &tChannels, 0);
     if (!tPixels)
-        Settings::Instance()->funcDoLog("Can't load bump texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
+        Settings::Instance()->funcDoLog("Can't load texture image - " + imageFile + " with error - " + std::string(stbi_failure_reason()));
     else {
         glGenTextures(1, vboBuffer);
         glBindTexture(GL_TEXTURE_2D, *vboBuffer);
@@ -217,69 +214,35 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
     std::string btnLabel = ICON_FA_EYE " Add Texture";
     btnLabel += " " + Kuplung_getTextureName(mtType);
-    if (ImGui::Button(btnLabel.c_str()))
-        this->showFileBrowser = true;
+    if (ImGui::Button(btnLabel.c_str())) {
+        this->showUVEditor = true;
+        this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "",
+                std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+    }
 
-    if (this->showFileBrowser)
-        this->componentFileBrowser->draw("File Browser", &this->showFileBrowser, mtType);
+    if (this->showUVEditor)
+        this->componentUVEditor->draw("UV Editor", &this->showUVEditor);
 }
 
-void DialogControlsModels::dialogFileBrowserProcessFile(FBEntity file, int texType) {
-    this->showFileBrowser = false;
-    this->TextureImage = file.path;
-    this->TextureFilename = file.title;
-    strcpy(this->filePath, this->TextureImage.c_str());
-
-    if (this->TextureImage != "" && this->selectedObject > -1) {
-        ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
-        switch (texType) {
-            case MaterialTextureType_Ambient: {
-                mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_Bump: {
-                mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureBump.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureBump.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_Diffuse: {
-                mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_Displacement: {
-                mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_Dissolve: {
-                mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_Specular: {
-                mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->TextureFilename;
-                break;
-            }
-            case MaterialTextureType_SpecularExp: {
-                mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
-                mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->TextureImage;
-                mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->TextureFilename;
-                break;
-            }
-            default:
-                break;
-        }
-        mmf->initBuffersAgain = true;
+void DialogControlsModels::processTexture(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::vector<glm::vec2> textureCoordinates) {
+    this->showUVEditor = false;
+    (*this->meshModelFaces)[this->selectedObject]->meshModel.texture_coordinates = textureCoordinates;
+    (*this->meshModelFaces)[this->selectedObject]->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+    switch (texType) {
+        case MaterialTextureType_Ambient:
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = texturePath;
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
+            break;
+        case MaterialTextureType_Diffuse:
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = texturePath;
+            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
+            break;
+        default:
+            break;
     }
+    (*this->meshModelFaces)[this->selectedObject]->initBuffersAgain = true;
 }
 
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
@@ -359,6 +322,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 0, 0, 255), "Textures");
         }
+
         if (mmf->meshModel.ModelMaterial.TextureAmbient.Image != "") {
             this->showTextureLine("##001",
                                   "Ambient",
@@ -376,8 +340,8 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                                   mmf->meshModel.ModelMaterial.TextureDiffuse.Image.c_str());
         }
         // TODO: add texture coordinates - unwrap
-//        else
-//            this->showTextureAdd(MaterialTextureType_Diffuse);
+        else
+            this->showTextureAdd(MaterialTextureType_Diffuse);
         if (mmf->meshModel.ModelMaterial.TextureDissolve.Image != "") {
             this->showTextureLine("##003",
                                   "Dissolve",

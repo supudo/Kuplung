@@ -11,6 +11,7 @@
 
 #include <glm/glm.hpp>
 #include <string>
+#include <vector>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 typedef enum ViewModelSkin {
@@ -28,6 +29,7 @@ typedef enum LightSourceType {
 } LightSourceType;
 
 typedef enum MaterialTextureType {
+    MaterialTextureType_Undefined,
     MaterialTextureType_Ambient,
     MaterialTextureType_Diffuse,
     MaterialTextureType_Dissolve,
