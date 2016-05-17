@@ -54,13 +54,14 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
     ImGui::BeginChild("UVEditor");
 
-    std::string btnLabel = ICON_FA_EYE " Select " + Kuplung_getTextureName(this->textureType) + " Texture Image";
+    std::string btnLabel = ICON_FA_EYE " Browse ...";
     if (ImGui::Button(btnLabel.c_str()))
         this->showFileBrowser = true;
 
     ImGui::SameLine();
 
-    if (ImGui::Button("Clear Selected Texture")) {
+    btnLabel = ICON_FA_TIMES " Clear";
+    if (ImGui::Button(btnLabel.c_str())) {
         this->textureLoaded = false;
         this->textureFilename = "";
         this->textureImage = "";
@@ -69,11 +70,12 @@ void UVEditor::draw(const char* title, bool* p_opened) {
         this->textureWidth = 1;
     }
 
-    ImGui::SameLine(ImGui::GetWindowWidth() * 0.85);
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(3/7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(3/7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(3/7.0f, 0.8f, 0.8f));
-    if (ImGui::Button("Apply Texture")) {
+    ImGui::SameLine(ImGui::GetWindowWidth() * 0.88);
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(3 / 7.0f, 0.6f, 0.6f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(3 / 7.0f, 0.7f, 0.7f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(3 / 7.0f, 0.8f, 0.8f));
+    btnLabel = ICON_FA_CHECK " Apply ";
+    if (ImGui::Button(btnLabel.c_str())) {
         std::vector<glm::vec2> uvs;
         uvs.push_back(glm::vec2(1.0, 0.0));
         uvs.push_back(glm::vec2(1.0, 1.0));
