@@ -217,39 +217,75 @@ void UVEditor::projectSquare() {
 }
 
 void UVEditor::processTextureCoordinates() {
-    std::vector<glm::vec2> uvs;
-    uvs.push_back(glm::vec2(1.0, 0.0));
-    uvs.push_back(glm::vec2(1.0, 1.0));
-    uvs.push_back(glm::vec2(0.0, 1.0));
-    uvs.push_back(glm::vec2(0.0, 0.0));
+    if (this->uvUnwrappingType > 0) {
+        std::vector<glm::vec2> uvs;
+        uvs.push_back(glm::vec2(1.0, 0.0));
+        uvs.push_back(glm::vec2(1.0, 1.0));
+        uvs.push_back(glm::vec2(0.0, 1.0));
+        uvs.push_back(glm::vec2(0.0, 0.0));
 
-    std::vector<glm::vec2> textureCoordinates;
-    for (int i=0; i<this->mmf->meshModel.countVertices; i++) {
-        if (this->mmf->meshModel.countVertices / 2) {
-            textureCoordinates.push_back(uvs[0]);
-            textureCoordinates.push_back(uvs[1]);
-            textureCoordinates.push_back(uvs[2]);
+        std::vector<glm::vec2> textureCoordinates;
+        for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
+            if (this->mmf->meshModel.countVertices / 6) {
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[1]);
+                textureCoordinates.push_back(uvs[2]);
+            }
+            else {
+                textureCoordinates.push_back(uvs[3]);
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[2]);
+            }
         }
-        else {
-            textureCoordinates.push_back(uvs[3]);
-            textureCoordinates.push_back(uvs[0]);
-            textureCoordinates.push_back(uvs[2]);
+
+        this->mmf->meshModel.texture_coordinates = textureCoordinates;
+        this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+        switch (this->textureType) {
+            case MaterialTextureType_Ambient:
+                this->mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_Bump:
+                this->mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureBump.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureBump.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_Diffuse:
+                this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_Displacement:
+                this->mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_Dissolve:
+                this->mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_Specular:
+                this->mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->textureImage;
+                break;
+            case MaterialTextureType_SpecularExp:
+                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
+                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->textureImage;
+                break;
+            default:
+                break;
         }
-    }
 
-    this->mmf->meshModel.texture_coordinates = textureCoordinates;
-    this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
-    switch (this->textureType) {
-        case MaterialTextureType_Diffuse:
-            this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
-            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
-            break;
-        default:
-            break;
-    }
+        this->mmf->initBuffersAgain = true;
 
-    this->mmf->initBuffersAgain = true;
+//        std::vector<MeshModel> mm;
+//        mm.push_back(this->mmf->meshModel);
+//        Kuplung_printObjModels(mm, false);
+    }
 
     this->funcProcessTexture(this->mmf);
 }
