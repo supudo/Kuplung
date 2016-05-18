@@ -106,7 +106,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         // texture image
         draw_list->ChannelsSetCurrent(0);
-        connectorScreenPos = ImVec2(10.0, 10.0);
+        connectorScreenPos = ImVec2(0.0, 0.0);
         ImVec2 bb_min = connectorScreenPos + offset;
         ImVec2 bb_max = ImVec2(this->textureWidth, this->textureHeight) + offset;
         draw_list->AddImage((ImTextureID)(intptr_t)this->vboTexture, bb_min, bb_max);
@@ -143,7 +143,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         // add overlay
         if (this->uvPoints.size() > 0)
-            draw_list->AddRectFilled(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
+            draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
 
         draw_list->ChannelsMerge();
     }
@@ -165,23 +165,26 @@ void UVEditor::projectSquare() {
     ImColor pColor = ImColor(255, 112, 0);
     float pRadius = 5.0f;
 
+    float ox = 0.0;//10.0;
+    float oy = 0.0;//14.0;
+
     // vertices
     UVPoint p_top_left;
     p_top_left.color = pColor;
     p_top_left.radius = pRadius;
-    p_top_left.position = ImVec2(10.0, 14.0);
+    p_top_left.position = ImVec2(ox, oy);
     this->uvPoints.push_back(p_top_left);
 
     UVPoint p_top_right;
     p_top_right.color = pColor;
     p_top_right.radius = pRadius;
-    p_top_right.position = ImVec2(this->textureWidth, 14.0);
+    p_top_right.position = ImVec2(this->textureWidth, oy);
     this->uvPoints.push_back(p_top_right);
 
     UVPoint p_bottom_left;
     p_bottom_left.color = pColor;
     p_bottom_left.radius = pRadius;
-    p_bottom_left.position = ImVec2(10.0, this->textureHeight);
+    p_bottom_left.position = ImVec2(ox, this->textureHeight);
     this->uvPoints.push_back(p_bottom_left);
 
     UVPoint p_bottom_right;
@@ -192,25 +195,25 @@ void UVEditor::projectSquare() {
 
     // lines
     UVLine l_top_left_to_right;
-    l_top_left_to_right.positionX = ImVec2(10.0, 14.0);
-    l_top_left_to_right.positionY = ImVec2(this->textureWidth, 14.0);
+    l_top_left_to_right.positionX = ImVec2(ox, oy);
+    l_top_left_to_right.positionY = ImVec2(this->textureWidth, oy);
     l_top_left_to_right.color = pColor;
     this->uvLines.push_back(l_top_left_to_right);
 
     UVLine l_top_left_to_bottom_right;
-    l_top_left_to_bottom_right.positionX = ImVec2(10.0, 14.0);
-    l_top_left_to_bottom_right.positionY = ImVec2(10.0, this->textureHeight);
+    l_top_left_to_bottom_right.positionX = ImVec2(ox, oy);
+    l_top_left_to_bottom_right.positionY = ImVec2(oy, this->textureHeight);
     l_top_left_to_bottom_right.color = pColor;
     this->uvLines.push_back(l_top_left_to_bottom_right);
 
     UVLine l_bottom_left_to_bottom_right;
-    l_bottom_left_to_bottom_right.positionX = ImVec2(10.0, this->textureHeight);
+    l_bottom_left_to_bottom_right.positionX = ImVec2(ox, this->textureHeight);
     l_bottom_left_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
     l_bottom_left_to_bottom_right.color = pColor;
     this->uvLines.push_back(l_bottom_left_to_bottom_right);
 
     UVLine l_top_right_to_bottom_right;
-    l_top_right_to_bottom_right.positionX = ImVec2(this->textureWidth, 14.0);
+    l_top_right_to_bottom_right.positionX = ImVec2(this->textureWidth, oy);
     l_top_right_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
     l_top_right_to_bottom_right.color = pColor;
     this->uvLines.push_back(l_top_right_to_bottom_right);
@@ -219,10 +222,12 @@ void UVEditor::projectSquare() {
 void UVEditor::processTextureCoordinates() {
     if (this->uvUnwrappingType > 0) {
         std::vector<glm::vec2> uvs;
-        uvs.push_back(glm::vec2(1.0, 0.0));
-        uvs.push_back(glm::vec2(1.0, 1.0));
-        uvs.push_back(glm::vec2(0.0, 1.0));
-        uvs.push_back(glm::vec2(0.0, 0.0));
+        for (size_t i=0; i<this->uvPoints.size(); i++) {
+            UVPoint p = this->uvPoints[i];
+            float x = p.position.x / (float)this->textureWidth;
+            float y = p.position.y / (float)this->textureHeight;
+            uvs.push_back(glm::vec2(x, y));
+        }
 
         std::vector<glm::vec2> textureCoordinates;
         for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
@@ -245,36 +250,50 @@ void UVEditor::processTextureCoordinates() {
                 this->mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureAmbient.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureAmbient.Height = this->textureHeight;
                 break;
             case MaterialTextureType_Bump:
                 this->mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureBump.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureBump.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureBump.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureBump.Height = this->textureHeight;
                 break;
             case MaterialTextureType_Diffuse:
                 this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Height = this->textureHeight;
                 break;
             case MaterialTextureType_Displacement:
                 this->mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Height = this->textureHeight;
                 break;
             case MaterialTextureType_Dissolve:
                 this->mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureDissolve.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureDissolve.Height = this->textureHeight;
                 break;
             case MaterialTextureType_Specular:
                 this->mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureSpecular.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureSpecular.Height = this->textureHeight;
                 break;
             case MaterialTextureType_SpecularExp:
                 this->mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
                 this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->textureImage;
                 this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->textureImage;
+                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Width = this->textureWidth;
+                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Height = this->textureHeight;
                 break;
             default:
                 break;
@@ -282,9 +301,9 @@ void UVEditor::processTextureCoordinates() {
 
         this->mmf->initBuffersAgain = true;
 
-//        std::vector<MeshModel> mm;
-//        mm.push_back(this->mmf->meshModel);
-//        Kuplung_printObjModels(mm, false);
+        std::vector<MeshModel> mm;
+        mm.push_back(this->mmf->meshModel);
+        Kuplung_printObjModels(mm, false);
     }
 
     this->funcProcessTexture(this->mmf);
@@ -332,5 +351,6 @@ void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserTyp
         stbi_image_free(tPixels);
 
         this->textureLoaded = true;
+        this->uvUnwrappingTypePrev = -1;
     }
 }
