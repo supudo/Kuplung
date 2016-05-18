@@ -23,6 +23,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->textureHeight = -1;
     this->showFileBrowser = false;
     this->textureLoaded = false;
+    this->uvUnwrappingTypePrev = -1;
     this->texturePath = "";
     this->textureImage = "";
     this->textureFilename = "";
@@ -112,6 +113,19 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         draw_list->ChannelsSetCurrent(1);
 
+        if (this->uvUnwrappingType != this->uvUnwrappingTypePrev) {
+            switch (this->uvUnwrappingType) {
+                case 1:
+                    this->projectSquare();
+                    break;
+                default:
+                    this->uvPoints.clear();
+                    this->uvLines.clear();
+                    break;
+            }
+            this->uvUnwrappingTypePrev = this->uvUnwrappingType;
+        }
+
         // points
         for (size_t i=0; i<this->uvPoints.size(); i++) {
             UVPoint p = this->uvPoints[i];
@@ -128,7 +142,8 @@ void UVEditor::draw(const char* title, bool* p_opened) {
         }
 
         // add overlay
-        draw_list->AddRectFilled(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
+        if (this->uvPoints.size() > 0)
+            draw_list->AddRectFilled(ImVec2(10.0, 14.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
 
         draw_list->ChannelsMerge();
     }
@@ -209,8 +224,8 @@ void UVEditor::processTextureCoordinates() {
     uvs.push_back(glm::vec2(0.0, 0.0));
 
     std::vector<glm::vec2> textureCoordinates;
-    for (int i=0; i<this->mmf->meshModel.countIndices / 3; i++) {
-        if (i < 6) {
+    for (int i=0; i<36; i++) {
+        if (i < 18) {
             textureCoordinates.push_back(uvs[0]);
             textureCoordinates.push_back(uvs[1]);
             textureCoordinates.push_back(uvs[2]);
@@ -311,7 +326,5 @@ void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserTyp
         stbi_image_free(tPixels);
 
         this->textureLoaded = true;
-
-        this->projectSquare();
     }
 }

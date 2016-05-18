@@ -56,7 +56,7 @@ private:
     MaterialTextureType textureType;
     GLuint vboTexture;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
-    int uvUnwrappingType;
+    int uvUnwrappingType, uvUnwrappingTypePrev;
 
     std::vector<UVPoint> uvPoints;
     std::vector<UVLine> uvLines;
