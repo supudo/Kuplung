@@ -26,6 +26,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->texturePath = "";
     this->textureImage = "";
     this->textureFilename = "";
+    this->uvUnwrappingType = 0;
 
     this->componentFileBrowser = new FileBrowser();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
@@ -75,29 +76,18 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(3 / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(3 / 7.0f, 0.8f, 0.8f));
     btnLabel = ICON_FA_CHECK " Apply ";
-    if (ImGui::Button(btnLabel.c_str())) {
-        std::vector<glm::vec2> uvs;
-        uvs.push_back(glm::vec2(1.0, 0.0));
-        uvs.push_back(glm::vec2(1.0, 1.0));
-        uvs.push_back(glm::vec2(0.0, 1.0));
-        uvs.push_back(glm::vec2(0.0, 0.0));
-
-        std::vector<glm::vec2> textureCoordinates;
-        for (int i=0; i<this->mmf->meshModel.countIndices; i++) {
-            if (i % 2 == 0) {
-                textureCoordinates.push_back(uvs[3]);
-                textureCoordinates.push_back(uvs[0]);
-                textureCoordinates.push_back(uvs[2]);
-            }
-            else {
-                textureCoordinates.push_back(uvs[0]);
-                textureCoordinates.push_back(uvs[1]);
-                textureCoordinates.push_back(uvs[2]);
-            }
-        }
-        this->funcProcessTexture(this->mmf, this->textureType, this->textureImage, textureCoordinates);
-    }
+    if (ImGui::Button(btnLabel.c_str()))
+        this->processTextureCoordinates();
     ImGui::PopStyleColor(3);
+
+    const char* mapping_items[] = {
+        "-- Select Unwrapping Method --",
+        "Square",
+        "Cube",
+        "Cylinder",
+        "Sphere"
+    };
+    ImGui::Combo("##002", &this->uvUnwrappingType, mapping_items, IM_ARRAYSIZE(mapping_items));
 
     ImGui::Separator();
 
@@ -209,6 +199,71 @@ void UVEditor::projectSquare() {
     l_top_right_to_bottom_right.positionY = ImVec2(this->textureWidth, this->textureHeight);
     l_top_right_to_bottom_right.color = pColor;
     this->uvLines.push_back(l_top_right_to_bottom_right);
+}
+
+void UVEditor::processTextureCoordinates() {
+    std::vector<glm::vec2> uvs;
+    uvs.push_back(glm::vec2(1.0, 0.0));
+    uvs.push_back(glm::vec2(1.0, 1.0));
+    uvs.push_back(glm::vec2(0.0, 1.0));
+    uvs.push_back(glm::vec2(0.0, 0.0));
+
+    std::vector<glm::vec2> textureCoordinates;
+    for (int i=0; i<this->mmf->meshModel.countIndices / 3; i++) {
+        if (i < 6) {
+            textureCoordinates.push_back(uvs[0]);
+            textureCoordinates.push_back(uvs[1]);
+            textureCoordinates.push_back(uvs[2]);
+        }
+        else {
+            textureCoordinates.push_back(uvs[3]);
+            textureCoordinates.push_back(uvs[0]);
+            textureCoordinates.push_back(uvs[2]);
+        }
+    }
+
+    std::map<PackedVertex2, unsigned int> vertexToOutIndex;
+    std::vector<glm::vec3> outVertices, outNormals;
+    std::vector<glm::vec2> outTextureCoordinates;
+    MeshModel m = this->mmf->meshModel;
+    for (size_t j=0; j<m.vertices.size(); j++) {
+        PackedVertex2 packed = { m.vertices[j], textureCoordinates[j], m.normals[j] };
+
+        unsigned int index;
+        bool found = this->getSimilarVertexIndex2(packed, vertexToOutIndex, index);
+        if (found)
+            m.indices.push_back(index);
+        else {
+            outVertices.push_back(m.vertices[j]);
+            outTextureCoordinates.push_back(textureCoordinates[j]);
+            outNormals.push_back(m.normals[j]);
+            unsigned int newIndex = (unsigned int)outVertices.size() - 1;
+            m.indices.push_back(newIndex);
+            vertexToOutIndex[packed] = newIndex;
+        }
+    }
+    m.vertices = outVertices;
+    m.texture_coordinates = outTextureCoordinates;
+    m.normals = outNormals;
+    m.indices = m.indices;
+    m.countIndices = (int)m.indices.size();
+
+    this->mmf->meshModel.texture_coordinates.clear();
+    std::vector<MeshModel> mm;
+    mm.push_back(m);
+    Kuplung_printObjModels(mm, false);
+
+    this->funcProcessTexture(this->mmf, this->textureType, this->textureImage, textureCoordinates);
+}
+
+bool UVEditor::getSimilarVertexIndex2(PackedVertex2 & packed, std::map<PackedVertex2, unsigned int> & vertexToOutIndex, unsigned int & result) {
+    std::map<PackedVertex2, unsigned int>::iterator it = vertexToOutIndex.find(packed);
+    if (it == vertexToOutIndex.end())
+        return false;
+    else {
+        result = it->second;
+        return true;
+    }
 }
 
 void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {

@@ -30,6 +30,15 @@ struct UVLine {
     ImColor color;
 };
 
+struct PackedVertex2 {
+    glm::vec3 position;
+    glm::vec2 uv;
+    glm::vec3 normal;
+    bool operator<(const PackedVertex2 that) const{
+        return memcmp((void*)this, (void*)&that, sizeof(PackedVertex2))>0;
+    };
+};
+
 class UVEditor {
 public:
     void init(int positionX, int positionY, int width, int height);
@@ -47,14 +56,17 @@ private:
     MaterialTextureType textureType;
     GLuint vboTexture;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
+    int uvUnwrappingType;
 
     std::vector<UVPoint> uvPoints;
     std::vector<UVLine> uvLines;
 
     FileBrowser *componentFileBrowser;
 
-    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType);
+    void processTextureCoordinates();
     void projectSquare();
+    bool getSimilarVertexIndex2(PackedVertex2 & packed, std::map<PackedVertex2, unsigned int> & vertexToOutIndex, unsigned int & result);
+    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType);
 };
 
 #endif /* UVEditor_hpp */
