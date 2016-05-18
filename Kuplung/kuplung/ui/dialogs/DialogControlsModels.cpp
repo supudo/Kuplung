@@ -226,22 +226,23 @@ void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
 
 void DialogControlsModels::processTexture(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::vector<glm::vec2> textureCoordinates) {
     this->showUVEditor = false;
-    (*this->meshModelFaces)[this->selectedObject]->meshModel.texture_coordinates = textureCoordinates;
-    (*this->meshModelFaces)[this->selectedObject]->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
-    switch (texType) {
-        case MaterialTextureType_Ambient:
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = texturePath;
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
-            break;
-        case MaterialTextureType_Diffuse:
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = texturePath;
-            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
-            break;
-        default:
-            break;
-    }
+//    (*this->meshModelFaces)[this->selectedObject]->meshModel.texture_coordinates = textureCoordinates;
+//    (*this->meshModelFaces)[this->selectedObject]->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+//    switch (texType) {
+//        case MaterialTextureType_Ambient:
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = texturePath;
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
+//            break;
+//        case MaterialTextureType_Diffuse:
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = texturePath;
+//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
+//            break;
+//        default:
+//            break;
+//    }
+    (*this->meshModelFaces)[this->selectedObject] = mmf;
     (*this->meshModelFaces)[this->selectedObject]->initBuffersAgain = true;
 }
 
@@ -511,15 +512,15 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                 this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
                 ImGui::Separator();
 
-    //            ImGui::Text("Bloom");
-    //            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_doBloom);
-    //            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightA, false, isFrame);
-    //            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightB, false, isFrame);
-    //            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightC, false, isFrame);
-    //            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightD, false, isFrame);
-    //            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_Vignette, false, isFrame);
-    //            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
-    //            ImGui::Separator();
+//            ImGui::Text("Bloom");
+//            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_doBloom);
+//            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightA, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightB, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightC, false, isFrame);
+//            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_WeightD, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_Vignette, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_VignetteAtt, false, isFrame);
+//            ImGui::Separator();
                 break;
             }
             case 7: {

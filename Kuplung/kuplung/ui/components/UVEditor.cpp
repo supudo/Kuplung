@@ -225,32 +225,35 @@ void UVEditor::processTextureCoordinates() {
     std::map<PackedVertex2, unsigned int> vertexToOutIndex;
     std::vector<glm::vec3> outVertices, outNormals;
     std::vector<glm::vec2> outTextureCoordinates;
-    MeshModel m = this->mmf->meshModel;
-    for (size_t j=0; j<m.vertices.size(); j++) {
-        PackedVertex2 packed = { m.vertices[j], textureCoordinates[j], m.normals[j] };
+    for (size_t j=0; j<this->mmf->meshModel.vertices.size(); j++) {
+        PackedVertex2 packed = { this->mmf->meshModel.vertices[j], textureCoordinates[j], this->mmf->meshModel.normals[j] };
 
         unsigned int index;
         bool found = this->getSimilarVertexIndex2(packed, vertexToOutIndex, index);
         if (found)
-            m.indices.push_back(index);
+            this->mmf->meshModel.indices.push_back(index);
         else {
-            outVertices.push_back(m.vertices[j]);
+            outVertices.push_back(this->mmf->meshModel.vertices[j]);
             outTextureCoordinates.push_back(textureCoordinates[j]);
-            outNormals.push_back(m.normals[j]);
+            outNormals.push_back(this->mmf->meshModel.normals[j]);
             unsigned int newIndex = (unsigned int)outVertices.size() - 1;
-            m.indices.push_back(newIndex);
+            this->mmf->meshModel.indices.push_back(newIndex);
             vertexToOutIndex[packed] = newIndex;
         }
     }
-    m.vertices = outVertices;
-    m.texture_coordinates = outTextureCoordinates;
-    m.normals = outNormals;
-    m.indices = m.indices;
-    m.countIndices = (int)m.indices.size();
+    this->mmf->meshModel.vertices = outVertices;
+    this->mmf->meshModel.texture_coordinates = outTextureCoordinates;
+    this->mmf->meshModel.countTextureCoordinates = (int)outTextureCoordinates.size();
+    this->mmf->meshModel.normals = outNormals;
+    this->mmf->meshModel.indices = this->mmf->meshModel.indices;
+    this->mmf->meshModel.countIndices = (int)this->mmf->meshModel.indices.size();
 
-    this->mmf->meshModel.texture_coordinates.clear();
+    this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+    this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
+    this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+
     std::vector<MeshModel> mm;
-    mm.push_back(m);
+    mm.push_back(this->mmf->meshModel);
     Kuplung_printObjModels(mm, false);
 
     this->funcProcessTexture(this->mmf, this->textureType, this->textureImage, textureCoordinates);
