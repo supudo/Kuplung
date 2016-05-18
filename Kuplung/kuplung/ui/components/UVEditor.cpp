@@ -37,7 +37,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
 
 }
 
-void UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFace*, MaterialTextureType, std::string, std::vector<glm::vec2>)> processTexture) {
+void UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFace*)> processTexture) {
     this->mmf = mmf;
     this->textureType = texType;
     this->texturePath = texturePath;
@@ -224,8 +224,8 @@ void UVEditor::processTextureCoordinates() {
     uvs.push_back(glm::vec2(0.0, 0.0));
 
     std::vector<glm::vec2> textureCoordinates;
-    for (int i=0; i<36; i++) {
-        if (i < 18) {
+    for (int i=0; i<this->mmf->meshModel.countVertices; i++) {
+        if (this->mmf->meshModel.countVertices / 2) {
             textureCoordinates.push_back(uvs[0]);
             textureCoordinates.push_back(uvs[1]);
             textureCoordinates.push_back(uvs[2]);
@@ -237,51 +237,21 @@ void UVEditor::processTextureCoordinates() {
         }
     }
 
-    std::map<PackedVertex2, unsigned int> vertexToOutIndex;
-    std::vector<glm::vec3> outVertices, outNormals;
-    std::vector<glm::vec2> outTextureCoordinates;
-    for (size_t j=0; j<this->mmf->meshModel.vertices.size(); j++) {
-        PackedVertex2 packed = { this->mmf->meshModel.vertices[j], textureCoordinates[j], this->mmf->meshModel.normals[j] };
-
-        unsigned int index;
-        bool found = this->getSimilarVertexIndex2(packed, vertexToOutIndex, index);
-        if (found)
-            this->mmf->meshModel.indices.push_back(index);
-        else {
-            outVertices.push_back(this->mmf->meshModel.vertices[j]);
-            outTextureCoordinates.push_back(textureCoordinates[j]);
-            outNormals.push_back(this->mmf->meshModel.normals[j]);
-            unsigned int newIndex = (unsigned int)outVertices.size() - 1;
-            this->mmf->meshModel.indices.push_back(newIndex);
-            vertexToOutIndex[packed] = newIndex;
-        }
+    this->mmf->meshModel.texture_coordinates = textureCoordinates;
+    this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+    switch (this->textureType) {
+        case MaterialTextureType_Diffuse:
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+            break;
+        default:
+            break;
     }
-    this->mmf->meshModel.vertices = outVertices;
-    this->mmf->meshModel.texture_coordinates = outTextureCoordinates;
-    this->mmf->meshModel.countTextureCoordinates = (int)outTextureCoordinates.size();
-    this->mmf->meshModel.normals = outNormals;
-    this->mmf->meshModel.indices = this->mmf->meshModel.indices;
-    this->mmf->meshModel.countIndices = (int)this->mmf->meshModel.indices.size();
 
-    this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-    this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
-    this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+    this->mmf->initBuffersAgain = true;
 
-    std::vector<MeshModel> mm;
-    mm.push_back(this->mmf->meshModel);
-    Kuplung_printObjModels(mm, false);
-
-    this->funcProcessTexture(this->mmf, this->textureType, this->textureImage, textureCoordinates);
-}
-
-bool UVEditor::getSimilarVertexIndex2(PackedVertex2 & packed, std::map<PackedVertex2, unsigned int> & vertexToOutIndex, unsigned int & result) {
-    std::map<PackedVertex2, unsigned int>::iterator it = vertexToOutIndex.find(packed);
-    if (it == vertexToOutIndex.end())
-        return false;
-    else {
-        result = it->second;
-        return true;
-    }
+    this->funcProcessTexture(this->mmf);
 }
 
 void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {

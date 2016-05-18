@@ -216,34 +216,16 @@ void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
     btnLabel += " " + Kuplung_getTextureName(mtType);
     if (ImGui::Button(btnLabel.c_str())) {
         this->showUVEditor = true;
-        this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "",
-                std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+        this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
     }
 
     if (this->showUVEditor)
         this->componentUVEditor->draw("UV Editor", &this->showUVEditor);
 }
 
-void DialogControlsModels::processTexture(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::vector<glm::vec2> textureCoordinates) {
+void DialogControlsModels::processTexture(ModelFace *mmf) {
     this->showUVEditor = false;
-//    (*this->meshModelFaces)[this->selectedObject]->meshModel.texture_coordinates = textureCoordinates;
-//    (*this->meshModelFaces)[this->selectedObject]->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
-//    switch (texType) {
-//        case MaterialTextureType_Ambient:
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = texturePath;
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
-//            break;
-//        case MaterialTextureType_Diffuse:
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = texturePath;
-//            (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Filename = texturePath;
-//            break;
-//        default:
-//            break;
-//    }
     (*this->meshModelFaces)[this->selectedObject] = mmf;
-    (*this->meshModelFaces)[this->selectedObject]->initBuffersAgain = true;
 }
 
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {

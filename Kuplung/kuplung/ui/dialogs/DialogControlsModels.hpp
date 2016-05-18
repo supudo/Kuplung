@@ -71,7 +71,7 @@ private:
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
     void showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
     void showTextureAdd(MaterialTextureType mtType);
-    void processTexture(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::vector<glm::vec2> textureCoordinates);
+    void processTexture(ModelFace *mmf);
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
