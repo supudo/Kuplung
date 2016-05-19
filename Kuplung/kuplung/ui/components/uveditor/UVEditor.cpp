@@ -316,9 +316,9 @@ void UVEditor::processTextureCoordinates() {
 
         this->mmf->initBuffersAgain = true;
 
-        std::vector<MeshModel> mm;
-        mm.push_back(this->mmf->meshModel);
-        Kuplung_printObjModels(mm, false);
+//        std::vector<MeshModel> mm;
+//        mm.push_back(this->mmf->meshModel);
+//        Kuplung_printObjModels(mm, false);
     }
 
     this->funcProcessTexture(this->mmf);
