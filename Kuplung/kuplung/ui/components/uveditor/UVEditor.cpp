@@ -143,9 +143,6 @@ void UVEditor::draw(const char* title, bool* p_opened) {
         draw_list->ChannelsSetCurrent(1);
 
         if (this->uvPoints.size() > 0) {
-            // add overlay
-            draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, this->overlayColor);
-
             const ImGuiIO io = ImGui::GetIO();
             const ImVec2 mouseScreenPos = io.MousePos;
 
@@ -176,6 +173,9 @@ void UVEditor::draw(const char* title, bool* p_opened) {
                 l.positionY = l.positionY + offset;
                 draw_list->AddLine(l.positionX, l.positionY, l.color);
             }
+
+            // add overlay
+            draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, this->overlayColor);
         }
     }
 
