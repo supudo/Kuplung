@@ -51,10 +51,10 @@ private:
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     int uvUnwrappingType, uvUnwrappingTypePrev;
     ImColor pColor = ImColor(255, 112, 0);
+    ImColor overlayColor = ImColor(255, 112, 0, 100);
     float pRadius = 5.0f;
-    UVPoint dragVertex;
 
-    std::vector<UVPoint> uvPoints;
+    std::vector<UVPoint *> uvPoints;
     std::vector<UVLine> uvLines;
 
     FileBrowser *componentFileBrowser;

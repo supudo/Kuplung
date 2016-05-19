@@ -6,7 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "kuplung/ui/components/UVEditor.hpp"
+#include "kuplung/ui/components/uveditor/UVEditor.hpp"
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/utilities/stb/stb_image.h"
 #include "kuplung/utilities/imgui/imgui_internal.h"
@@ -91,40 +91,39 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     ImGui::Combo("##002", &this->uvUnwrappingType, mapping_items, IM_ARRAYSIZE(mapping_items));
 
     ImGui::Separator();
+    ImGui::Text("Image: %s", (this->textureImage == "" ? "" : this->textureImage.c_str()));
+    if (this->textureWidth > 0 && this->textureHeight > 0)
+        ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);
+    else
+        ImGui::Text("Image dimensions: ");
+
+    ImGui::Separator();
+
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
+    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
+
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    ImDrawList* draw_list = ImGui::GetWindowDrawList();
+    ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
+
+    // grid
+    ImU32 GRID_COLOR = ImColor(200, 200, 200, 40);
+    float GRID_SZ = 64.0f * window->FontWindowScale;
+    ImVec2 win_pos = ImGui::GetCursorScreenPos();
+    ImVec2 canvas_sz = ImGui::GetWindowSize();
+    for (float x = fmodf(offset.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
+        draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
+    for (float y = fmodf(offset.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
+        draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
 
     if (this->textureImage != "") {
-        ImGui::Text("Image: %s", this->textureImage.c_str());
-        ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);
-
-        ImGui::Separator();
-
-        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-        ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
-        ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
-
-        ImGuiWindow* window = ImGui::GetCurrentWindow();
-        ImDrawList* draw_list = ImGui::GetWindowDrawList();
-        ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
-
-        // grid
-        ImU32 GRID_COLOR = ImColor(200, 200, 200, 40);
-        float GRID_SZ = 64.0f * window->FontWindowScale;
-        ImVec2 win_pos = ImGui::GetCursorScreenPos();
-        ImVec2 canvas_sz = ImGui::GetWindowSize();
-        for (float x = fmodf(offset.x, GRID_SZ); x < canvas_sz.x; x += GRID_SZ)
-            draw_list->AddLine(ImVec2(x, 0.0f) + win_pos, ImVec2(x, canvas_sz.y) + win_pos, GRID_COLOR);
-        for (float y = fmodf(offset.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
-            draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
-
-        ImVec2 connectorScreenPos = ImVec2(0, 0);
-
         draw_list->ChannelsSplit(2);
 
         // texture image
         draw_list->ChannelsSetCurrent(0);
-        connectorScreenPos = ImVec2(0.0, 0.0);
-        ImVec2 bb_min = connectorScreenPos + offset;
+        ImVec2 bb_min = offset;
         ImVec2 bb_max = ImVec2(this->textureWidth, this->textureHeight) + offset;
         draw_list->AddImage((ImTextureID)(intptr_t)this->vboTexture, bb_min, bb_max);
 
@@ -150,22 +149,19 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
            // points
             for (size_t i=0; i<this->uvPoints.size(); i++) {
-                UVPoint p = this->uvPoints[i];
-                p.position = p.position + offset;
-
-                if (std::abs(mouseScreenPos.x - p.position.x) < this->pRadius && std::abs(mouseScreenPos.y - p.position.y) < this->pRadius) {
-                    if (isVertexDragging && p.isDragging && this->dragVertex.ID == p.ID) {
-                        isVertexDragging = false;
-                        p.isDragging = false;
-                        this->dragVertex = {};
+                UVPoint *p = this->uvPoints[i];
+                ImVec2 vPosition = p->position + offset;
+                if (std::abs(mouseScreenPos.x - vPosition.x) < this->pRadius && std::abs(mouseScreenPos.y - vPosition.y) < this->pRadius) {
+                    if (isVertexDragging) {
+                        vPosition = mouseScreenPos;
+                        p->isDragging = true;
+                        p->position = vPosition;
+                        printf("new position [%i] = %f + %f\n", p->ID, p->position.x, p->position.y);
                     }
-                    else if (isVertexDragging && !p.isDragging && this->dragVertex.ID != p.ID) {
-                        p.isDragging = true;
-                        p.position = mouseScreenPos;
-                        this->dragVertex = p;
-                    }
+                    else
+                        p->isDragging = false;
                 }
-                draw_list->AddCircleFilled(p.position, p.radius, p.color);
+                draw_list->AddCircleFilled(vPosition, p->radius, p->color);
             }
 
             // lines
@@ -177,22 +173,18 @@ void UVEditor::draw(const char* title, bool* p_opened) {
             }
 
             // add overlay
-            if (this->uvPoints.size() > 0)
-                draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, ImColor(255, 112, 0, 100));
-
-            if (!isVertexDragging)
-                this->dragVertex = {};
+            draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, this->overlayColor);
         }
-
-        draw_list->ChannelsMerge();
-
-        if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
-            this->scrolling = this->scrolling - ImGui::GetIO().MouseDelta;
-
-        ImGui::EndChild();
-        ImGui::PopStyleColor();
-        ImGui::PopStyleVar(2);
     }
+
+    draw_list->ChannelsMerge();
+
+    if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
+        this->scrolling = this->scrolling - ImGui::GetIO().MouseDelta;
+
+    ImGui::EndChild();
+    ImGui::PopStyleColor();
+    ImGui::PopStyleVar(2);
 
     ImGui::EndChild();
     ImGui::End();
@@ -209,36 +201,36 @@ void UVEditor::projectSquare() {
     float oy = 0.0;//14.0;
 
     // vertices
-    UVPoint p_top_left;
-    p_top_left.ID = 1;
-    p_top_left.color = this->pColor;
-    p_top_left.radius = this->pRadius;
-    p_top_left.position = ImVec2(ox, oy);
-    p_top_left.isDragging = false;
+    UVPoint *p_top_left = new UVPoint();
+    p_top_left->ID = 1;
+    p_top_left->color = this->pColor;
+    p_top_left->radius = this->pRadius;
+    p_top_left->position = ImVec2(ox, oy);
+    p_top_left->isDragging = false;
     this->uvPoints.push_back(p_top_left);
 
-    UVPoint p_top_right;
-    p_top_right.ID = 2;
-    p_top_right.color = this->pColor;
-    p_top_right.radius = this->pRadius;
-    p_top_right.position = ImVec2(this->textureWidth, oy);
-    p_top_right.isDragging = false;
+    UVPoint *p_top_right = new UVPoint();
+    p_top_right->ID = 2;
+    p_top_right->color = this->pColor;
+    p_top_right->radius = this->pRadius;
+    p_top_right->position = ImVec2(this->textureWidth, oy);
+    p_top_right->isDragging = false;
     this->uvPoints.push_back(p_top_right);
 
-    UVPoint p_bottom_left;
-    p_bottom_left.ID = 3;
-    p_bottom_left.color = this->pColor;
-    p_bottom_left.radius = this->pRadius;
-    p_bottom_left.position = ImVec2(ox, this->textureHeight);
-    p_bottom_left.isDragging = false;
+    UVPoint *p_bottom_left = new UVPoint();
+    p_bottom_left->ID = 3;
+    p_bottom_left->color = this->pColor;
+    p_bottom_left->radius = this->pRadius;
+    p_bottom_left->position = ImVec2(ox, this->textureHeight);
+    p_bottom_left->isDragging = false;
     this->uvPoints.push_back(p_bottom_left);
 
-    UVPoint p_bottom_right;
-    p_bottom_right.ID = 4;
-    p_bottom_right.color = this->pColor;
-    p_bottom_right.radius = this->pRadius;
-    p_bottom_right.position = ImVec2(this->textureWidth, this->textureHeight);
-    p_bottom_right.isDragging = false;
+    UVPoint *p_bottom_right = new UVPoint();
+    p_bottom_right->ID = 4;
+    p_bottom_right->color = this->pColor;
+    p_bottom_right->radius = this->pRadius;
+    p_bottom_right->position = ImVec2(this->textureWidth, this->textureHeight);
+    p_bottom_right->isDragging = false;
     this->uvPoints.push_back(p_bottom_right);
 
     // lines
@@ -271,9 +263,9 @@ void UVEditor::processTextureCoordinates() {
     if (this->uvUnwrappingType > 0) {
         std::vector<glm::vec2> uvs;
         for (size_t i=0; i<this->uvPoints.size(); i++) {
-            UVPoint p = this->uvPoints[i];
-            float x = p.position.x / (float)this->textureWidth;
-            float y = p.position.y / (float)this->textureHeight;
+            UVPoint *p = this->uvPoints[i];
+            float x = p->position.x / (float)this->textureWidth;
+            float y = p->position.y / (float)this->textureHeight;
             uvs.push_back(glm::vec2(x, y));
         }
 
@@ -362,6 +354,9 @@ void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserTyp
     this->textureImage = file.path;
     this->textureFilename = file.title;
     strcpy(this->filePath, this->textureImage.c_str());
+
+    this->textureWidth = 0;
+    this->textureHeight = 0;
 
     if (!boost::filesystem::exists(this->textureImage))
         this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
