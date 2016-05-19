@@ -20,9 +20,11 @@
 #include "kuplung/meshes/ModelFace.hpp"
 
 struct UVPoint {
+    int ID;
     ImVec2 position;
     ImColor color;
     float radius;
+    bool isDragging;
 };
 
 struct UVLine {
@@ -48,6 +50,9 @@ private:
     GLuint vboTexture;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     int uvUnwrappingType, uvUnwrappingTypePrev;
+    ImColor pColor = ImColor(255, 112, 0);
+    float pRadius = 5.0f;
+    UVPoint dragVertex;
 
     std::vector<UVPoint> uvPoints;
     std::vector<UVLine> uvLines;

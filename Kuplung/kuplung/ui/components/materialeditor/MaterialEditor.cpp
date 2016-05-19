@@ -96,7 +96,7 @@ void MaterialEditor::draw(int selectedModelID, ModelFace *face, bool* p_opened) 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
-    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar|ImGuiWindowFlags_NoMove);
+    ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(ItemWidth);
 
     ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
