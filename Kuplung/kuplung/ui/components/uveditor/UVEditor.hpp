@@ -18,14 +18,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
-
-struct UVPoint {
-    int ID;
-    ImVec2 position;
-    ImColor color;
-    float radius;
-    bool isDragging;
-};
+#include "kuplung/ui/components/uveditor/UVPoint.hpp"
 
 struct UVLine {
     ImVec2 positionX, positionY;
@@ -50,7 +43,8 @@ private:
     GLuint vboTexture;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
     int uvUnwrappingType, uvUnwrappingTypePrev;
-    ImColor pColor = ImColor(255, 112, 0);
+    ImColor pColor = ImColor(255, 24, 0);
+    ImColor lColor = ImColor(255, 112, 0);
     ImColor overlayColor = ImColor(255, 112, 0, 100);
     float pRadius = 5.0f;
 
