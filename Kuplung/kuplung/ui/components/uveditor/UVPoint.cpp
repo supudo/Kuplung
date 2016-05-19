@@ -8,9 +8,6 @@
 
 #include "kuplung/ui/components/uveditor/UVPoint.hpp"
 
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
-static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
-
 UVPoint::UVPoint(int id, ImVec2 position, ImColor color, float radius) {
     this->ID = id;
     this->position = position;
