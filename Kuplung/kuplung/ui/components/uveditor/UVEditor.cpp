@@ -146,7 +146,6 @@ void UVEditor::draw(const char* title, bool* p_opened) {
             // add overlay
             draw_list->AddRectFilled(ImVec2(0.0, 0.0) + offset, ImVec2(this->textureWidth, this->textureHeight) + offset, this->overlayColor);
 
-            bool isVertexDragging = false;//!ImGui::IsMouseDragging(2, 0.0f) && ImGui::IsMouseDragging(0, 0.0f);
             const ImGuiIO io = ImGui::GetIO();
             const ImVec2 mouseScreenPos = io.MousePos;
 
@@ -165,7 +164,6 @@ void UVEditor::draw(const char* title, bool* p_opened) {
                 if (p->isDragging == true && ImGui::IsMouseDragging(0)) {
                     ImVec2 np_scale = ImVec2(io.MouseDelta.x / window->FontWindowScale, io.MouseDelta.y / window->FontWindowScale);
                     p->position = p->position + np_scale;
-                    isVertexDragging = true;
                 }
 
                 ImGui::PopID();
