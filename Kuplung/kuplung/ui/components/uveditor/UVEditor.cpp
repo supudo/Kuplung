@@ -290,65 +290,65 @@ void UVEditor::processTextureCoordinatesSquare() {
             uvs.push_back(glm::vec2(x, y));
         }
 
-        std::vector<glm::vec3> uniqueNormals;
-        for (size_t i=0; i<this->mmf->meshModel.normals.size(); i++) {
-            if (std::find(uniqueNormals.begin(), uniqueNormals.end(), this->mmf->meshModel.normals[i]) == uniqueNormals.end())
-                uniqueNormals.push_back(this->mmf->meshModel.normals[i]);
-        }
+//        std::vector<glm::vec3> uniqueNormals;
+//        for (size_t i=0; i<this->mmf->meshModel.normals.size(); i++) {
+//            if (std::find(uniqueNormals.begin(), uniqueNormals.end(), this->mmf->meshModel.normals[i]) == uniqueNormals.end())
+//                uniqueNormals.push_back(this->mmf->meshModel.normals[i]);
+//        }
 
-        std::vector<std::vector<glm::vec3>> triangles;
-        std::vector<glm::vec3> triangle;
-        int tCounter = 1;
-        for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
-            glm::vec3 p = this->mmf->meshModel.vertices[i];
-            glm::vec3 n = this->mmf->meshModel.normals[this->mmf->meshModel.indices[i]];
-            triangle.push_back(p);
-            if (tCounter % 3 == 0) {
-                triangle.push_back(n);
-                triangles.push_back(triangle);
-                triangle.clear();
-                tCounter = 1;
-            }
-            else
-                tCounter += 1;
-        }
+//        std::vector<std::vector<glm::vec3>> triangles;
+//        std::vector<glm::vec3> triangle;
+//        int tCounter = 1;
+//        for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
+//            glm::vec3 p = this->mmf->meshModel.vertices[i];
+//            glm::vec3 n = this->mmf->meshModel.normals[this->mmf->meshModel.indices[i]];
+//            triangle.push_back(p);
+//            if (tCounter % 3 == 0) {
+//                triangle.push_back(n);
+//                triangles.push_back(triangle);
+//                triangle.clear();
+//                tCounter = 1;
+//            }
+//            else
+//                tCounter += 1;
+//        }
 
-        printf("-------------------------------------------------------\n");
+//        printf("-------------------------------------------------------\n");
+
+//        std::vector<glm::vec2> textureCoordinates;
+//        for (size_t i=0; i<triangles.size(); i++) {
+//            std::vector<glm::vec3> t = triangles[i];
+//            glm::vec3 p1 = t[0];
+//            glm::vec3 p2 = t[1];
+//            glm::vec3 p3 = t[2];
+//            glm::vec3 n = t[3];
+
+//            printf("[%i] = [%.2f, %.2f, %.2f] ---- [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f]\n",
+//                   (int)i,
+//                   n.x, n.y, n.z,
+//                   p1.x, p1.y, p1.z,
+//                   p2.x, p2.y, p2.z,
+//                   p3.x, p3.y, p3.z);
+//        }
+//        this->mmf->meshModel.texture_coordinates = textureCoordinates;
+//        this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
 
         std::vector<glm::vec2> textureCoordinates;
-        for (size_t i=0; i<triangles.size(); i++) {
-            std::vector<glm::vec3> t = triangles[i];
-            glm::vec3 p1 = t[0];
-            glm::vec3 p2 = t[1];
-            glm::vec3 p3 = t[2];
-            glm::vec3 n = t[3];
-
-            printf("[%i] = [%.2f, %.2f, %.2f] ---- [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f]\n",
-                   (int)i,
-                   n.x, n.y, n.z,
-                   p1.x, p1.y, p1.z,
-                   p2.x, p2.y, p2.z,
-                   p3.x, p3.y, p3.z);
+        int maxIndice = ((*std::max_element(this->mmf->meshModel.indices.begin(), this->mmf->meshModel.indices.end())) + 1);
+        for (int i=0; i<maxIndice / 3; i++) {
+            if (i < (maxIndice / 2)) {
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[1]);
+                textureCoordinates.push_back(uvs[2]);
+            }
+            else {
+                textureCoordinates.push_back(uvs[3]);
+                textureCoordinates.push_back(uvs[0]);
+                textureCoordinates.push_back(uvs[2]);
+            }
         }
-
         this->mmf->meshModel.texture_coordinates = textureCoordinates;
         this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
-
-//            std::vector<glm::vec2> textureCoordinates;
-//            for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
-//                if (this->mmf->meshModel.countVertices / 6) {
-//                    textureCoordinates.push_back(uvs[0]);
-//                    textureCoordinates.push_back(uvs[1]);
-//                    textureCoordinates.push_back(uvs[2]);
-//                }
-//                else {
-//                    textureCoordinates.push_back(uvs[3]);
-//                    textureCoordinates.push_back(uvs[0]);
-//                    textureCoordinates.push_back(uvs[2]);
-//                }
-//            }
-//            this->mmf->meshModel.texture_coordinates = textureCoordinates;
-//            this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
     }
 
     switch (this->textureType) {
