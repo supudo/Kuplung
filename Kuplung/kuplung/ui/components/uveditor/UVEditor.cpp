@@ -236,30 +236,32 @@ void UVEditor::projectSquare() {
 
 void UVEditor::processTextureCoordinates() {
     if (this->uvUnwrappingType > 0) {
-        std::vector<glm::vec2> uvs;
-        for (size_t i=0; i<this->uvPoints.size(); i++) {
-            UVPoint *p = this->uvPoints[i];
-            float x = p->position.x / (float)this->textureWidth;
-            float y = p->position.y / (float)this->textureHeight;
-            uvs.push_back(glm::vec2(x, y));
+        if (this->uvPoints.size() > 0) {
+            std::vector<glm::vec2> uvs;
+            for (size_t i=0; i<this->uvPoints.size(); i++) {
+                UVPoint *p = this->uvPoints[i];
+                float x = p->position.x / (float)this->textureWidth;
+                float y = p->position.y / (float)this->textureHeight;
+                uvs.push_back(glm::vec2(x, y));
+            }
+
+            std::vector<glm::vec2> textureCoordinates;
+            for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
+                if (this->mmf->meshModel.countVertices / 6) {
+                    textureCoordinates.push_back(uvs[0]);
+                    textureCoordinates.push_back(uvs[1]);
+                    textureCoordinates.push_back(uvs[2]);
+                }
+                else {
+                    textureCoordinates.push_back(uvs[3]);
+                    textureCoordinates.push_back(uvs[0]);
+                    textureCoordinates.push_back(uvs[2]);
+                }
+            }
+            this->mmf->meshModel.texture_coordinates = textureCoordinates;
+            this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
         }
 
-        std::vector<glm::vec2> textureCoordinates;
-        for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
-            if (this->mmf->meshModel.countVertices / 6) {
-                textureCoordinates.push_back(uvs[0]);
-                textureCoordinates.push_back(uvs[1]);
-                textureCoordinates.push_back(uvs[2]);
-            }
-            else {
-                textureCoordinates.push_back(uvs[3]);
-                textureCoordinates.push_back(uvs[0]);
-                textureCoordinates.push_back(uvs[2]);
-            }
-        }
-
-        this->mmf->meshModel.texture_coordinates = textureCoordinates;
-        this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
         switch (this->textureType) {
             case MaterialTextureType_Ambient:
                 this->mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;

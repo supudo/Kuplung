@@ -60,58 +60,6 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerOb
     this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
 }
 
-void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
-    int wWidth, wHeight, tWidth, tHeight, posX, posY;
-    SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
-
-    std::string img = "";
-    if (type == 0)
-        img = mmf->meshModel.ModelMaterial.TextureAmbient.Image;
-    else if (type == 1)
-        img = mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
-    else if (type == 2)
-        img = mmf->meshModel.ModelMaterial.TextureDissolve.Image;
-    else if (type == 3)
-        img = mmf->meshModel.ModelMaterial.TextureBump.Image;
-    else if (type == 4)
-        img = mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
-    else if (type == 5)
-        img = mmf->meshModel.ModelMaterial.TextureSpecular.Image;
-    else
-        img = mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
-
-    if (*genTexture)
-        this->createTextureBuffer(img, vboBuffer, width, height);
-
-    tWidth = *width + 20;
-    if (tWidth > wWidth)
-        tWidth = wWidth - 20;
-
-    tHeight = *height + 20;
-    if (tHeight > wHeight)
-        tHeight = wHeight - 40;
-
-    ImGuiWindow *gw = ImGui::GetCurrentWindow();
-    posX = gw->Pos.x + gw->Rect().GetWidth()  + 20;
-    posY = 20;
-
-    ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
-    ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
-
-    title = title + " Texture";
-    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
-
-    ImGui::Text("Image: %s", img.c_str());
-    ImGui::Text("Image dimensions: %i x %i", *width, *height);
-
-    ImGui::Separator();
-
-    ImGui::Image((ImTextureID)(intptr_t)*vboBuffer, ImVec2(*width, *height));
-
-    ImGui::End();
-    *genTexture = false;
-}
-
 void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height) {
     if (!boost::filesystem::exists(imageFile))
         imageFile = Settings::Instance()->currentFolder + "/" + imageFile;
@@ -222,6 +170,58 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
         this->showTextureAdd(texType);
 }
 
+void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+    int wWidth, wHeight, tWidth, tHeight, posX, posY;
+    SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
+
+    std::string img = "";
+    if (type == 0)
+        img = mmf->meshModel.ModelMaterial.TextureAmbient.Image;
+    else if (type == 1)
+        img = mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
+    else if (type == 2)
+        img = mmf->meshModel.ModelMaterial.TextureDissolve.Image;
+    else if (type == 3)
+        img = mmf->meshModel.ModelMaterial.TextureBump.Image;
+    else if (type == 4)
+        img = mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
+    else if (type == 5)
+        img = mmf->meshModel.ModelMaterial.TextureSpecular.Image;
+    else
+        img = mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
+
+    if (*genTexture)
+        this->createTextureBuffer(img, vboBuffer, width, height);
+
+    tWidth = *width + 20;
+    if (tWidth > wWidth)
+        tWidth = wWidth - 20;
+
+    tHeight = *height + 20;
+    if (tHeight > wHeight)
+        tHeight = wHeight - 40;
+
+    ImGuiWindow *gw = ImGui::GetCurrentWindow();
+    posX = gw->Pos.x + gw->Rect().GetWidth()  + 20;
+    posY = 20;
+
+    ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
+
+    title = title + " Texture";
+    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+
+    ImGui::Text("Image: %s", img.c_str());
+    ImGui::Text("Image dimensions: %i x %i", *width, *height);
+
+    ImGui::Separator();
+
+    ImGui::Image((ImTextureID)(intptr_t)*vboBuffer, ImVec2(*width, *height));
+
+    ImGui::End();
+    *genTexture = false;
+}
+
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
@@ -270,8 +270,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 }
 
 void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
-    std::string btnLabel = ICON_FA_EYE " Add Texture";
-    btnLabel += " " + Kuplung_getTextureName(mtType);
+    std::string btnLabel = ICON_FA_EYE " Add Texture" + " " + Kuplung_getTextureName(mtType);
     if (ImGui::Button(btnLabel.c_str())) {
         this->showUVEditor = true;
         this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
