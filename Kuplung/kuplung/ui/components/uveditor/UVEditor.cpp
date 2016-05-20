@@ -296,8 +296,10 @@ void UVEditor::processTextureCoordinates() {
             int tCounter = 1;
             for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
                 glm::vec3 p = this->mmf->meshModel.vertices[i];
+                glm::vec3 n = this->mmf->meshModel.normals[this->mmf->meshModel.indices[i]];
                 triangle.push_back(p);
                 if (tCounter % 3 == 0) {
+                    triangle.push_back(n);
                     triangles.push_back(triangle);
                     triangle.clear();
                     tCounter = 1;
@@ -306,20 +308,24 @@ void UVEditor::processTextureCoordinates() {
                     tCounter += 1;
             }
 
+            printf("-------------------------------------------------------\n");
+
             std::vector<glm::vec2> textureCoordinates;
             for (size_t i=0; i<triangles.size(); i++) {
                 std::vector<glm::vec3> t = triangles[i];
-                if (i < triangles.size() / 2) {
-                    textureCoordinates.push_back(uvs[0]);
-                    textureCoordinates.push_back(uvs[1]);
-                    textureCoordinates.push_back(uvs[2]);
-                }
-                else {
-                    textureCoordinates.push_back(uvs[3]);
-                    textureCoordinates.push_back(uvs[0]);
-                    textureCoordinates.push_back(uvs[2]);
-                }
+                glm::vec3 p1 = t[0];
+                glm::vec3 p2 = t[1];
+                glm::vec3 p3 = t[2];
+                glm::vec3 n = t[3];
+
+                printf("[%i] = [%.2f, %.2f, %.2f] ---- [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f]\n",
+                       (int)i,
+                       n.x, n.y, n.z,
+                       p1.x, p1.y, p1.z,
+                       p2.x, p2.y, p2.z,
+                       p3.x, p3.y, p3.z);
             }
+
             this->mmf->meshModel.texture_coordinates = textureCoordinates;
             this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
 
@@ -401,50 +407,52 @@ void UVEditor::processTextureCoordinates() {
         Kuplung_printObjModels(mm, false);
     }
 
-    //this->funcProcessTexture(this->mmf);
+    this->funcProcessTexture(this->mmf);
 }
 
 void UVEditor::initTextureBuffer() {
     this->textureWidth = 0;
     this->textureHeight = 0;
 
-    if (!boost::filesystem::exists(this->textureImage))
-        this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
-    int tChannels;
-    unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
-    if (!tPixels)
-        Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
-    else {
-        glGenTextures(1, &this->vboTexture);
-        glBindTexture(GL_TEXTURE_2D, this->vboTexture);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        GLint textureFormat = 0;
-        switch (tChannels) {
-            case 1:
-                textureFormat = GL_LUMINANCE;
-                break;
-            case 2:
-                textureFormat = GL_LUMINANCE_ALPHA;
-                break;
-            case 3:
-                textureFormat = GL_RGB;
-                break;
-            case 4:
-                textureFormat = GL_RGBA;
-                break;
-            default:
-                textureFormat = GL_RGB;
-                break;
-        }
-        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->textureWidth, this->textureHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
-        glGenerateMipmap(GL_TEXTURE_2D);
-        stbi_image_free(tPixels);
+    if (this->textureImage != "") {
+        if (!boost::filesystem::exists(this->textureImage))
+            this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
+        int tChannels;
+        unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);
+        if (!tPixels)
+            Settings::Instance()->funcDoLog("[UVEditor] Can't load texture image - " + this->textureImage + " with error - " + std::string(stbi_failure_reason()));
+        else {
+            glGenTextures(1, &this->vboTexture);
+            glBindTexture(GL_TEXTURE_2D, this->vboTexture);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            GLint textureFormat = 0;
+            switch (tChannels) {
+                case 1:
+                    textureFormat = GL_LUMINANCE;
+                    break;
+                case 2:
+                    textureFormat = GL_LUMINANCE_ALPHA;
+                    break;
+                case 3:
+                    textureFormat = GL_RGB;
+                    break;
+                case 4:
+                    textureFormat = GL_RGBA;
+                    break;
+                default:
+                    textureFormat = GL_RGB;
+                    break;
+            }
+            glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->textureWidth, this->textureHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+            glGenerateMipmap(GL_TEXTURE_2D);
+            stbi_image_free(tPixels);
 
-        this->textureLoaded = true;
-        this->uvUnwrappingTypePrev = -1;
+            this->textureLoaded = true;
+            this->uvUnwrappingTypePrev = -1;
+        }
     }
 }
 
