@@ -42,6 +42,52 @@ void UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string
     this->textureType = texType;
     this->texturePath = texturePath;
     this->funcProcessTexture = processTexture;
+
+    FBEntity file;
+    file.isFile = true;
+    file.modifiedDate = "";
+    file.size = "";
+    file.extension = "";
+    switch (texType) {
+        case MaterialTextureType_Ambient: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureAmbient.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureAmbient.Image;
+            break;
+        }
+        case MaterialTextureType_Diffuse: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
+            break;
+        }
+        case MaterialTextureType_Dissolve: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureDissolve.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureDissolve.Image;
+            break;
+        }
+        case MaterialTextureType_Bump: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureBump.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureBump.Image;
+            break;
+        }
+        case MaterialTextureType_Specular: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureSpecular.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureSpecular.Image;
+            break;
+        }
+        case MaterialTextureType_SpecularExp: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
+            break;
+        }
+        case MaterialTextureType_Displacement: {
+            file.title = this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
+            file.path = this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
+            break;
+        }
+        default:
+            break;
+    }
+    this->dialogFileBrowserProcessFile(file, FileBrowser_ParserType_Own2, this->textureType);
 }
 
 void UVEditor::draw(const char* title, bool* p_opened) {
@@ -326,12 +372,7 @@ void UVEditor::processTextureCoordinates() {
     this->funcProcessTexture(this->mmf);
 }
 
-void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {
-    this->showFileBrowser = false;
-    this->textureImage = file.path;
-    this->textureFilename = file.title;
-    strcpy(this->filePath, this->textureImage.c_str());
-
+void UVEditor::initTextureBuffer() {
     this->textureWidth = 0;
     this->textureHeight = 0;
 
@@ -373,4 +414,12 @@ void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserTyp
         this->textureLoaded = true;
         this->uvUnwrappingTypePrev = -1;
     }
+}
+
+void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {
+    this->showFileBrowser = false;
+    this->textureImage = file.path;
+    this->textureFilename = file.title;
+    strcpy(this->filePath, this->textureImage.c_str());
+    this->initTextureBuffer();
 }

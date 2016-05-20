@@ -70,7 +70,6 @@ private:
     void showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture);
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
     void showTextureImage(ModelFace* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
-    void showTextureEdit(MaterialTextureType mtType);
     void processTexture(ModelFace *mmf);
 
     ObjectsManager *managerObjects;

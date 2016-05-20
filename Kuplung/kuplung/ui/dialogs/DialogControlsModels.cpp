@@ -198,16 +198,21 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
             *loadTexture = true;
         }
         ImGui::SameLine();
-        if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str())) {
-        }
+        if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str()))
+            this->showUVEditor = true;
         ImGui::SameLine();
         size_t f = image.find_last_of("/");
         if (f != std::string::npos)
             image = image.substr(f + 1);
         ImGui::Text("%s: %s", title.c_str(), image.c_str());
     }
-    else
-        this->showTextureEdit(texType);
+    else {
+        std::string btnLabel = ICON_FA_EYE " Add Texture " + Kuplung_getTextureName(texType);
+        if (ImGui::Button(btnLabel.c_str())) {
+            this->showUVEditor = true;
+            this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], texType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
+        }
+    }
 }
 
 void DialogControlsModels::showTextureImage(ModelFace* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
@@ -306,18 +311,10 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     *sceneSelectedModelObject = this->selectedObject;
 
-    ImGui::End();
-}
-
-void DialogControlsModels::showTextureEdit(MaterialTextureType mtType) {
-    std::string btnLabel = ICON_FA_EYE " Add Texture " + Kuplung_getTextureName(mtType);
-    if (ImGui::Button(btnLabel.c_str())) {
-        this->showUVEditor = true;
-        this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
-    }
-
     if (this->showUVEditor)
         this->componentUVEditor->draw("UV Editor", &this->showUVEditor);
+
+    ImGui::End();
 }
 
 void DialogControlsModels::processTexture(ModelFace *mmf) {
