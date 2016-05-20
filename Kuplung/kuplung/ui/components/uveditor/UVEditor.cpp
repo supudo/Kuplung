@@ -87,7 +87,7 @@ void UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string
         default:
             break;
     }
-    this->dialogFileBrowserProcessFile(file, FileBrowser_ParserType_Own2, this->textureType);
+    this->dialogFileBrowserProcessFile(file, (FileBrowser_ParserType)Settings::Instance()->ModelFileParser, this->textureType);
 }
 
 void UVEditor::draw(const char* title, bool* p_opened) {
