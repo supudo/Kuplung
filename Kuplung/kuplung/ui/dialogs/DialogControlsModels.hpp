@@ -67,7 +67,7 @@ private:
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump;
     GLuint vboTextureDisplacement, vboTextureSpecular, vboTextureSpecularExp;
 
-    void showTextureLine(std::string chkLabel, std::string title, bool* useTexture, bool* showWindow, bool* loadTexture, std::string image);
+    void showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture);
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
     void showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
     void showTextureAdd(MaterialTextureType mtType);
