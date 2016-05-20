@@ -51,8 +51,8 @@ void ObjectsManager::init(std::function<void(float)> doProgress) {
     this->lightSources.clear();
     this->systemModels.clear();
 
-    //this->viewModelSkin = ViewModelSkin_Rendered;
-    this->viewModelSkin = ViewModelSkin_Texture;
+    this->viewModelSkin = ViewModelSkin_Rendered;
+    //this->viewModelSkin = ViewModelSkin_Texture;
 
     this->resetSettings();
 }

@@ -291,9 +291,25 @@ void UVEditor::processTextureCoordinates() {
                 uvs.push_back(glm::vec2(x, y));
             }
 
+            std::vector<std::vector<glm::vec3>> triangles;
+            std::vector<glm::vec3> triangle;
+            int tCounter = 1;
+            for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
+                glm::vec3 p = this->mmf->meshModel.vertices[i];
+                triangle.push_back(p);
+                if (tCounter % 3 == 0) {
+                    triangles.push_back(triangle);
+                    triangle.clear();
+                    tCounter = 1;
+                }
+                else
+                    tCounter += 1;
+            }
+
             std::vector<glm::vec2> textureCoordinates;
-            for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
-                if (this->mmf->meshModel.countVertices / 6) {
+            for (size_t i=0; i<triangles.size(); i++) {
+                std::vector<glm::vec3> t = triangles[i];
+                if (i < triangles.size() / 2) {
                     textureCoordinates.push_back(uvs[0]);
                     textureCoordinates.push_back(uvs[1]);
                     textureCoordinates.push_back(uvs[2]);
@@ -306,6 +322,22 @@ void UVEditor::processTextureCoordinates() {
             }
             this->mmf->meshModel.texture_coordinates = textureCoordinates;
             this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+
+//            std::vector<glm::vec2> textureCoordinates;
+//            for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
+//                if (this->mmf->meshModel.countVertices / 6) {
+//                    textureCoordinates.push_back(uvs[0]);
+//                    textureCoordinates.push_back(uvs[1]);
+//                    textureCoordinates.push_back(uvs[2]);
+//                }
+//                else {
+//                    textureCoordinates.push_back(uvs[3]);
+//                    textureCoordinates.push_back(uvs[0]);
+//                    textureCoordinates.push_back(uvs[2]);
+//                }
+//            }
+//            this->mmf->meshModel.texture_coordinates = textureCoordinates;
+//            this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
         }
 
         switch (this->textureType) {
@@ -364,12 +396,12 @@ void UVEditor::processTextureCoordinates() {
 
         this->mmf->initBuffersAgain = true;
 
-//        std::vector<MeshModel> mm;
-//        mm.push_back(this->mmf->meshModel);
-//        Kuplung_printObjModels(mm, false);
+        std::vector<MeshModel> mm;
+        mm.push_back(this->mmf->meshModel);
+        Kuplung_printObjModels(mm, false);
     }
 
-    this->funcProcessTexture(this->mmf);
+    //this->funcProcessTexture(this->mmf);
 }
 
 void UVEditor::initTextureBuffer() {

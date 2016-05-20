@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/ui/dialogs/DialogControlsModels.cpp"
-            timestampString = "485427836.938654"
+            filePath = "Kuplung/kuplung/ui/components/uveditor/UVEditor.cpp"
+            timestampString = "485442182.923785"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "222"
-            endingLineNumber = "222"
-            landmarkName = "DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::function&lt;void(ModelFace*)&gt; processTexture)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

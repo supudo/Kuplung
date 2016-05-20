@@ -198,8 +198,10 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
             *loadTexture = true;
         }
         ImGui::SameLine();
-        if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str()))
+        if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str())) {
+            this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], texType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
             this->showUVEditor = true;
+        }
         ImGui::SameLine();
         size_t f = image.find_last_of("/");
         if (f != std::string::npos)
