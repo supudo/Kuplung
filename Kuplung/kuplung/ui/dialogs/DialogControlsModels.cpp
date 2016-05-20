@@ -154,11 +154,51 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
         ImGui::SameLine();
         if (ImGui::Button((ICON_FA_TIMES + chkLabel).c_str())) {
             *loadTexture = false;
+            switch (texType) {
+                case MaterialTextureType_Ambient: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = "";
+                    break;
+                }
+                case MaterialTextureType_Dissolve: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.Image = "";
+                    break;
+                }
+                case MaterialTextureType_Bump: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.Image = "";
+                    break;
+                }
+                case MaterialTextureType_Specular: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.Image = "";
+                    break;
+                }
+                case MaterialTextureType_SpecularExp: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.Image = "";
+                    break;
+                }
+                case MaterialTextureType_Displacement: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.Image = "";
+                    break;
+                }
+                default: {
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = false;
+                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = "";
+                    break;
+                }
+            }
         }
         ImGui::SameLine();
         if (ImGui::Button((ICON_FA_EYE + chkLabel).c_str())) {
             *showWindow = !*showWindow;
             *loadTexture = true;
+        }
+        ImGui::SameLine();
+        if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str())) {
         }
         ImGui::SameLine();
         size_t f = image.find_last_of("/");
@@ -167,25 +207,25 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
         ImGui::Text("%s: %s", title.c_str(), image.c_str());
     }
     else
-        this->showTextureAdd(texType);
+        this->showTextureEdit(texType);
 }
 
-void DialogControlsModels::showTextureImage(ModelFace* mmf, int type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+void DialogControlsModels::showTextureImage(ModelFace* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
     int wWidth, wHeight, tWidth, tHeight, posX, posY;
     SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
 
     std::string img = "";
-    if (type == 0)
+    if (type == MaterialTextureType_Ambient)
         img = mmf->meshModel.ModelMaterial.TextureAmbient.Image;
-    else if (type == 1)
+    else if (type == MaterialTextureType_Diffuse)
         img = mmf->meshModel.ModelMaterial.TextureDiffuse.Image;
-    else if (type == 2)
+    else if (type == MaterialTextureType_Dissolve)
         img = mmf->meshModel.ModelMaterial.TextureDissolve.Image;
-    else if (type == 3)
+    else if (type == MaterialTextureType_Bump)
         img = mmf->meshModel.ModelMaterial.TextureBump.Image;
-    else if (type == 4)
+    else if (type == MaterialTextureType_Displacement)
         img = mmf->meshModel.ModelMaterial.TextureDisplacement.Image;
-    else if (type == 5)
+    else if (type == MaterialTextureType_Specular)
         img = mmf->meshModel.ModelMaterial.TextureSpecular.Image;
     else
         img = mmf->meshModel.ModelMaterial.TextureSpecularExp.Image;
@@ -269,8 +309,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::End();
 }
 
-void DialogControlsModels::showTextureAdd(MaterialTextureType mtType) {
-    std::string btnLabel = ICON_FA_EYE " Add Texture" + " " + Kuplung_getTextureName(mtType);
+void DialogControlsModels::showTextureEdit(MaterialTextureType mtType) {
+    std::string btnLabel = ICON_FA_EYE " Add Texture " + Kuplung_getTextureName(mtType);
     if (ImGui::Button(btnLabel.c_str())) {
         this->showUVEditor = true;
         this->componentUVEditor->setModel((*this->meshModelFaces)[this->selectedObject], mtType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
@@ -372,25 +412,25 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
         this->showTextureLine("##007", MaterialTextureType_SpecularExp, &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp);
 
         if (this->showTextureWindow_Ambient)
-            this->showTextureImage(mmf, 0, "Ambient", &this->showTextureWindow_Ambient, &this->showTexture_Ambient, &this->vboTextureAmbient, &this->textureAmbient_Width, &this->textureAmbient_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Ambient, "Ambient", &this->showTextureWindow_Ambient, &this->showTexture_Ambient, &this->vboTextureAmbient, &this->textureAmbient_Width, &this->textureAmbient_Height);
 
         if (this->showTextureWindow_Diffuse)
-            this->showTextureImage(mmf, 1, "Diffuse", &this->showTextureWindow_Diffuse, &this->showTexture_Diffuse, &this->vboTextureDiffuse, &this->textureDiffuse_Width, &this->textureDiffuse_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Diffuse, "Diffuse", &this->showTextureWindow_Diffuse, &this->showTexture_Diffuse, &this->vboTextureDiffuse, &this->textureDiffuse_Width, &this->textureDiffuse_Height);
 
         if (this->showTextureWindow_Dissolve)
-            this->showTextureImage(mmf, 2, "Dissolve", &this->showTextureWindow_Dissolve, &this->showTexture_Dissolve, &this->vboTextureDissolve, &this->textureDissolve_Width, &this->textureDissolve_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Dissolve, "Dissolve", &this->showTextureWindow_Dissolve, &this->showTexture_Dissolve, &this->vboTextureDissolve, &this->textureDissolve_Width, &this->textureDissolve_Height);
 
         if (this->showTextureWindow_Bump)
-            this->showTextureImage(mmf, 3, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Bump, "Bump", &this->showTextureWindow_Bump, &this->showTexture_Bump, &this->vboTextureBump, &this->textureBump_Width, &this->textureBump_Height);
 
         if (this->showTextureWindow_Displacement)
-            this->showTextureImage(mmf, 4, "Height", &this->showTextureWindow_Displacement, &this->showTexture_Displacement, &this->vboTextureDisplacement, &this->textureDisplacement_Width, &this->textureDisplacement_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Displacement, "Height", &this->showTextureWindow_Displacement, &this->showTexture_Displacement, &this->vboTextureDisplacement, &this->textureDisplacement_Width, &this->textureDisplacement_Height);
 
         if (this->showTextureWindow_Specular)
-            this->showTextureImage(mmf, 5, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
+            this->showTextureImage(mmf, MaterialTextureType_Specular, "Specular", &this->showTextureWindow_Specular, &this->showTexture_Specular, &this->vboTextureSpecular, &this->textureSpecular_Width, &this->textureSpecular_Height);
 
         if (this->showTextureWindow_SpecularExp)
-            this->showTextureImage(mmf, 6, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
+            this->showTextureImage(mmf, MaterialTextureType_SpecularExp, "SpecularExp", &this->showTextureWindow_SpecularExp, &this->showTexture_SpecularExp, &this->vboTextureSpecularExp, &this->textureSpecularExp_Width, &this->textureSpecularExp_Height);
 
         ImGui::Separator();
 
