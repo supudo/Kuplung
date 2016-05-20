@@ -25,6 +25,14 @@ struct UVLine {
     ImColor color;
 };
 
+typedef enum UVUnwrappingMethod {
+    UVUnwrappingMethod_None,
+    UVUnwrappingMethod_Default,
+    UVUnwrappingMethod_Cube,
+    UVUnwrappingMethod_Cylinder,
+    UVUnwrappingMethod_Sphere
+} UVUnwrappingMethod;
+
 class UVEditor {
 public:
     void init(int positionX, int positionY, int width, int height);
@@ -53,10 +61,11 @@ private:
 
     FileBrowser *componentFileBrowser;
 
-    void processTextureCoordinates();
     void projectSquare();
     void initTextureBuffer();
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType);
+    void processTextureCoordinates();
+    void processTextureCoordinatesSquare();
 };
 
 #endif /* UVEditor_hpp */

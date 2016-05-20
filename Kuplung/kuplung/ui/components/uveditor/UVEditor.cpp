@@ -23,11 +23,11 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->textureHeight = -1;
     this->showFileBrowser = false;
     this->textureLoaded = false;
+    this->uvUnwrappingType = UVUnwrappingMethod_None;
     this->uvUnwrappingTypePrev = -1;
     this->texturePath = "";
     this->textureImage = "";
     this->textureFilename = "";
-    this->uvUnwrappingType = 0;
 
     this->componentFileBrowser = new FileBrowser();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
@@ -169,7 +169,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
         if (this->uvUnwrappingType != this->uvUnwrappingTypePrev) {
             switch (this->uvUnwrappingType) {
-                case 1:
+                case UVUnwrappingMethod_Default:
                     this->projectSquare();
                     break;
                 default:
@@ -280,54 +280,59 @@ void UVEditor::projectSquare() {
     this->uvLines.push_back(l_top_right_to_bottom_right);
 }
 
-void UVEditor::processTextureCoordinates() {
-    if (this->uvUnwrappingType > 0) {
-        if (this->uvPoints.size() > 0) {
-            std::vector<glm::vec2> uvs;
-            for (size_t i=0; i<this->uvPoints.size(); i++) {
-                UVPoint *p = this->uvPoints[i];
-                float x = p->position.x / (float)this->textureWidth;
-                float y = p->position.y / (float)this->textureHeight;
-                uvs.push_back(glm::vec2(x, y));
+void UVEditor::processTextureCoordinatesSquare() {
+    if (this->uvPoints.size() > 0) {
+        std::vector<glm::vec2> uvs;
+        for (size_t i=0; i<this->uvPoints.size(); i++) {
+            UVPoint *p = this->uvPoints[i];
+            float x = p->position.x / (float)this->textureWidth;
+            float y = p->position.y / (float)this->textureHeight;
+            uvs.push_back(glm::vec2(x, y));
+        }
+
+        std::vector<glm::vec3> uniqueNormals;
+        for (size_t i=0; i<this->mmf->meshModel.normals.size(); i++) {
+            if (std::find(uniqueNormals.begin(), uniqueNormals.end(), this->mmf->meshModel.normals[i]) == uniqueNormals.end())
+                uniqueNormals.push_back(this->mmf->meshModel.normals[i]);
+        }
+
+        std::vector<std::vector<glm::vec3>> triangles;
+        std::vector<glm::vec3> triangle;
+        int tCounter = 1;
+        for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
+            glm::vec3 p = this->mmf->meshModel.vertices[i];
+            glm::vec3 n = this->mmf->meshModel.normals[this->mmf->meshModel.indices[i]];
+            triangle.push_back(p);
+            if (tCounter % 3 == 0) {
+                triangle.push_back(n);
+                triangles.push_back(triangle);
+                triangle.clear();
+                tCounter = 1;
             }
+            else
+                tCounter += 1;
+        }
 
-            std::vector<std::vector<glm::vec3>> triangles;
-            std::vector<glm::vec3> triangle;
-            int tCounter = 1;
-            for (size_t i=0; i<this->mmf->meshModel.indices.size(); i++) {
-                glm::vec3 p = this->mmf->meshModel.vertices[i];
-                glm::vec3 n = this->mmf->meshModel.normals[this->mmf->meshModel.indices[i]];
-                triangle.push_back(p);
-                if (tCounter % 3 == 0) {
-                    triangle.push_back(n);
-                    triangles.push_back(triangle);
-                    triangle.clear();
-                    tCounter = 1;
-                }
-                else
-                    tCounter += 1;
-            }
+        printf("-------------------------------------------------------\n");
 
-            printf("-------------------------------------------------------\n");
+        std::vector<glm::vec2> textureCoordinates;
+        for (size_t i=0; i<triangles.size(); i++) {
+            std::vector<glm::vec3> t = triangles[i];
+            glm::vec3 p1 = t[0];
+            glm::vec3 p2 = t[1];
+            glm::vec3 p3 = t[2];
+            glm::vec3 n = t[3];
 
-            std::vector<glm::vec2> textureCoordinates;
-            for (size_t i=0; i<triangles.size(); i++) {
-                std::vector<glm::vec3> t = triangles[i];
-                glm::vec3 p1 = t[0];
-                glm::vec3 p2 = t[1];
-                glm::vec3 p3 = t[2];
-                glm::vec3 n = t[3];
+            printf("[%i] = [%.2f, %.2f, %.2f] ---- [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f]\n",
+                   (int)i,
+                   n.x, n.y, n.z,
+                   p1.x, p1.y, p1.z,
+                   p2.x, p2.y, p2.z,
+                   p3.x, p3.y, p3.z);
+        }
 
-                printf("[%i] = [%.2f, %.2f, %.2f] ---- [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f] / [%.2f, %.2f, %.2f]\n",
-                       (int)i,
-                       n.x, n.y, n.z,
-                       p1.x, p1.y, p1.z,
-                       p2.x, p2.y, p2.z,
-                       p3.x, p3.y, p3.z);
-            }
-
-            this->mmf->meshModel.texture_coordinates = textureCoordinates;
-            this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
+        this->mmf->meshModel.texture_coordinates = textureCoordinates;
+        this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
 
 //            std::vector<glm::vec2> textureCoordinates;
 //            for (int i=0; i<this->mmf->meshModel.countVertices / 3; i++) {
@@ -344,67 +349,79 @@ void UVEditor::processTextureCoordinates() {
 //            }
 //            this->mmf->meshModel.texture_coordinates = textureCoordinates;
 //            this->mmf->meshModel.countTextureCoordinates = (int)textureCoordinates.size();
-        }
+    }
 
-        switch (this->textureType) {
-            case MaterialTextureType_Ambient:
-                this->mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureAmbient.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureAmbient.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_Bump:
-                this->mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureBump.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureBump.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureBump.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureBump.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_Diffuse:
-                this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureDiffuse.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_Displacement:
-                this->mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureDisplacement.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_Dissolve:
-                this->mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureDissolve.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureDissolve.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_Specular:
-                this->mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureSpecular.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureSpecular.Height = this->textureHeight;
-                break;
-            case MaterialTextureType_SpecularExp:
-                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
-                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->textureImage;
-                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Width = this->textureWidth;
-                this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Height = this->textureHeight;
-                break;
-            default:
-                break;
-        }
+    switch (this->textureType) {
+        case MaterialTextureType_Ambient:
+            this->mmf->meshModel.ModelMaterial.TextureAmbient.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureAmbient.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureAmbient.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureAmbient.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureAmbient.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_Bump:
+            this->mmf->meshModel.ModelMaterial.TextureBump.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureBump.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureBump.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureBump.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureBump.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_Diffuse:
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureDiffuse.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_Displacement:
+            this->mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureDisplacement.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDisplacement.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDisplacement.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureDisplacement.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_Dissolve:
+            this->mmf->meshModel.ModelMaterial.TextureDissolve.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureDissolve.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDissolve.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureDissolve.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureDissolve.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_Specular:
+            this->mmf->meshModel.ModelMaterial.TextureSpecular.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureSpecular.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureSpecular.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureSpecular.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureSpecular.Height = this->textureHeight;
+            break;
+        case MaterialTextureType_SpecularExp:
+            this->mmf->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = true;
+            this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Image = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Filename = this->textureImage;
+            this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Width = this->textureWidth;
+            this->mmf->meshModel.ModelMaterial.TextureSpecularExp.Height = this->textureHeight;
+            break;
+        default:
+            break;
+    }
 
-        this->mmf->initBuffersAgain = true;
+    this->mmf->initBuffersAgain = true;
 
-        std::vector<MeshModel> mm;
-        mm.push_back(this->mmf->meshModel);
-        Kuplung_printObjModels(mm, false);
+    std::vector<MeshModel> mm;
+    mm.push_back(this->mmf->meshModel);
+    Kuplung_printObjModels(mm, false);
+}
+
+void UVEditor::processTextureCoordinates() {
+    switch (this->uvUnwrappingType) {
+        case UVUnwrappingMethod_Default:
+            this->processTextureCoordinatesSquare();
+            break;
+        default:
+            break;
+    }
+    if (this->uvUnwrappingType > 0) {
+
     }
 
     this->funcProcessTexture(this->mmf);
@@ -451,7 +468,7 @@ void UVEditor::initTextureBuffer() {
             stbi_image_free(tPixels);
 
             this->textureLoaded = true;
-            this->uvUnwrappingTypePrev = -1;
+            this->uvUnwrappingTypePrev = UVUnwrappingMethod_None;
         }
     }
 }
