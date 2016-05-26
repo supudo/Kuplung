@@ -16,10 +16,8 @@ QT Creator and Xcode for convinient debugging
 
 #### TODO
 
-- Model material node editor
+- Model material editor
 - Memory inspector
 - Grid to act as a glass surface (simulating reflection)
-- Ray Picking
-- World Coordinates
 
 ![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
