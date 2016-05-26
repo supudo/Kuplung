@@ -97,7 +97,7 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position) {
+void AxisHelpers::render(Camera *camera, glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -107,15 +107,15 @@ void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4
         this->matrixModel = glm::mat4(1.0);
         if (fixedGridWorld)
             this->matrixModel = mtxGrid;
-        this->matrixModel = mtxGrid;
 
         this->matrixModel = glm::translate(this->matrixModel, position);
+
+        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
         // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
 
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);
