@@ -566,6 +566,7 @@ void Kuplung::guiClearScreen() {
     this->meshModelFaces.clear();
     this->objFiles.clear();
     this->rayLines.clear();
+    this->managerUI->setSceneSelectedModelObject(-1);
 }
 
 void Kuplung::guiEditorshaderCompiled(std::string fileName) {
