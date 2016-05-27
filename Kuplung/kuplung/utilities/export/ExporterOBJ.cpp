@@ -54,11 +54,8 @@ int ExporterOBJ::findInMap2(std::map<int, glm::vec2> m, glm::vec2 v) {
     return -1;
 }
 
-void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
-    std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
-    fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
-    fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
-
+std::string ExporterOBJ::exportMesh(MeshModel model) {
+    std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
 
     std::map<int, glm::vec3> uniqueVertices;
@@ -66,66 +63,73 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     std::map<int, glm::vec3> uniqueNormals;
     int vCounter = 1, vtCounter = 1, vnCounter = 1;
 
-    for (size_t i=0; i<faces.size(); i++) {
-        MeshModel model = faces[i]->meshModel;
-        fileContents += this->nlDelimiter;
-        fileContents += "o " + model.ModelTitle + this->nlDelimiter;
-        for (size_t j=0; j<model.indices.size(); j++) {
-            int idx = model.indices[j];
-            glm::vec3 vertex = model.vertices[idx];
-            glm::vec2 texture_coordinate;
-            if (model.texture_coordinates.size() > 0)
-                texture_coordinate = model.texture_coordinates[idx];
-            glm::vec3 normal = model.normals[idx];
+    meshData += this->nlDelimiter;
+    meshData += "o " + model.ModelTitle + this->nlDelimiter;
+    for (size_t j=0; j<model.indices.size(); j++) {
+        int idx = model.indices[j];
+        glm::vec3 vertex = model.vertices[idx];
+        glm::vec2 texture_coordinate;
+        if (model.texture_coordinates.size() > 0)
+            texture_coordinate = model.texture_coordinates[idx];
+        glm::vec3 normal = model.normals[idx];
 
-            if (this->findInMap3(uniqueVertices, vertex) == -1) {
-                uniqueVertices[vCounter] = vertex;
-                vCounter += 1;
-                v += "v " + std::to_string(vertex.x) + " " + std::to_string(vertex.y) + " " + std::to_string(vertex.z) + this->nlDelimiter;
-            }
-
-            if (model.texture_coordinates.size() > 0 && this->findInMap2(uniqueTextureCoordinates, texture_coordinate) == -1) {
-                uniqueTextureCoordinates[vtCounter] = texture_coordinate;
-                vtCounter += 1;
-                vt += "vt " + std::to_string(texture_coordinate.x) + " " + std::to_string(texture_coordinate.y) + this->nlDelimiter;
-            }
-
-            if (this->findInMap3(uniqueNormals, normal) == -1) {
-                uniqueNormals[vnCounter] = normal;
-                vnCounter += 1;
-                vn += "vn " + std::to_string(normal.x) + " " + std::to_string(normal.y) + " " + std::to_string(normal.z) + this->nlDelimiter;
-            }
+        if (this->findInMap3(uniqueVertices, vertex) == -1) {
+            uniqueVertices[vCounter] = vertex;
+            vCounter += 1;
+            v += "v " + std::to_string(vertex.x) + " " + std::to_string(vertex.y) + " " + std::to_string(vertex.z) + this->nlDelimiter;
         }
 
-        fileContents += v;
-        fileContents += vt;
-        fileContents += vn;
+        if (model.texture_coordinates.size() > 0 && this->findInMap2(uniqueTextureCoordinates, texture_coordinate) == -1) {
+            uniqueTextureCoordinates[vtCounter] = texture_coordinate;
+            vtCounter += 1;
+            vt += "vt " + std::to_string(texture_coordinate.x) + " " + std::to_string(texture_coordinate.y) + this->nlDelimiter;
+        }
+
+        if (this->findInMap3(uniqueNormals, normal) == -1) {
+            uniqueNormals[vnCounter] = normal;
+            vnCounter += 1;
+            vn += "vn " + std::to_string(normal.x) + " " + std::to_string(normal.y) + " " + std::to_string(normal.z) + this->nlDelimiter;
+        }
     }
 
+    meshData += v;
+    meshData += vt;
+    meshData += vn;
+
+    std::string triangleFace = "";
+    for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
+        int j = model.indices[(int)k];
+
+        int v = this->findInMap3(uniqueVertices, model.vertices[j]) + 1;
+        int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
+
+        int vt = -1;
+        if (model.texture_coordinates.size() > 0)
+            vt = this->findInMap2(uniqueTextureCoordinates, model.texture_coordinates[j]);
+
+        triangleFace += " " + std::to_string(v) + "/" + (vt > -1 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
+
+        if (vCounter % 3 == 0) {
+            f += "f" + triangleFace + this->nlDelimiter;
+            triangleFace = "";
+        }
+    }
+
+    meshData += "usemtl " + model.MaterialTitle + this->nlDelimiter;
+    meshData += "s off" + this->nlDelimiter;
+    meshData += f;
+
+    return meshData;
+}
+
+void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
+    std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
+    fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
+    fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
+
     for (size_t i=0; i<faces.size(); i++) {
         MeshModel model = faces[i]->meshModel;
-        std::string triangleFace = "";
-        for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
-            int j = model.indices[(int)k];
-
-            int v = this->findInMap3(uniqueVertices, model.vertices[j]) + 1;
-            int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
-
-            int vt = -1;
-            if (model.texture_coordinates.size() > 0)
-                vt = this->findInMap2(uniqueTextureCoordinates, model.texture_coordinates[j]);
-
-            triangleFace += " " + std::to_string(v) + "/" + (vt > -1 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
-
-            if (vCounter % 3 == 0) {
-                f += "f" + triangleFace + this->nlDelimiter;
-                triangleFace = "";
-            }
-        }
-
-        fileContents += "usemtl " + model.MaterialTitle + this->nlDelimiter;
-        fileContents += "s off" + this->nlDelimiter;
-        fileContents += f;
+        fileContents += this->exportMesh(model);
     }
     fileContents += this->nlDelimiter;
 

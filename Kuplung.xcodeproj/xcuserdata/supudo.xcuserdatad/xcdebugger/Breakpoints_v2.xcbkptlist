@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/utilities/export/ExporterOBJ.cpp"
-            timestampString = "486051672.728485"
+            timestampString = "486053935.104235"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "114"
-            endingLineNumber = "114"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
             landmarkName = "ExporterOBJ::exportGeometry(std::vector&lt;ModelFace*&gt; faces)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/utilities/export/ExporterOBJ.cpp"
-            timestampString = "486051706.986977"
+            timestampString = "486053970.500874"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "ExporterOBJ::exportGeometry(std::vector&lt;ModelFace*&gt; faces)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/kuplung/utilities/export/ExporterOBJ.cpp"
+            timestampString = "486053971.324098"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "ExporterOBJ::exportGeometry(std::vector&lt;ModelFace*&gt; faces)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/kuplung/utilities/export/ExporterOBJ.cpp"
+            timestampString = "486054044.939378"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "ExporterOBJ::exportGeometry(std::vector&lt;ModelFace*&gt; faces)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/kuplung/utilities/export/ExporterOBJ.cpp"
+            timestampString = "486054047.692127"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "ExporterOBJ::exportGeometry(std::vector&lt;ModelFace*&gt; faces)"
             landmarkType = "5">
          </BreakpointContent>
