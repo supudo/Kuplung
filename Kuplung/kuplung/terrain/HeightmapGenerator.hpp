@@ -16,11 +16,11 @@ class HeightmapGenerator {
 public:
     ~HeightmapGenerator();
     void initPosition();
-    void generateTerrain(std::string assetsFolder, int screenWidth, int screenHeight, double offsetHorizontal, double offsetVertical);
+    void generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical);
     std::vector<float> vertices, colors;
     std::vector<int> indices;
     std::string heightmapImage;
-    
+
 private:
     double position_x1;
     double position_x2;

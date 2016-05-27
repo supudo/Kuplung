@@ -26,7 +26,7 @@ void HeightmapGenerator::initPosition() {
     this->position_y2 = 5.0;
 }
 
-void HeightmapGenerator::generateTerrain(std::string assetsFolder, int screenWidth, int screenHeight, double offsetHorizontal, double offsetVertical) {
+void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical) {
     this->position_x1 += offsetHorizontal;
     this->position_x2 += offsetHorizontal;
     this->position_y1 += offsetVertical;
@@ -39,7 +39,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int screenWid
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
-    //heightMapBuilder.SetDestSize(screenWidth, screenHeight);
+    //heightMapBuilder.SetDestSize(Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     heightMapBuilder.SetDestSize(140, 140);
     heightMapBuilder.SetBounds(2.0, 6.0, 1.0, 5.0);
     //heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
@@ -61,13 +61,27 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int screenWid
 //    renderer.AddGradientPoint(1.0000, utils::Color(255, 255, 255, 255)); // snow
     renderer.Render();
 
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+
+    int year = now->tm_year + 1900;
+    int month = now->tm_mon + 1;
+    int day = now->tm_mday;
+    int hour = now->tm_hour;
+    int minute = now->tm_min;
+    int seconds = now->tm_sec;
+
+    std::string fileSuffix = std::to_string(year) + std::to_string(month) + std::to_string(day) +
+                             std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
+    std::string filename = "terrain_heightmap_" + fileSuffix + ".bmp";
+    this->heightmapImage = assetsFolder + "/" + filename;
+
     // write image
     boost::replace_all(assetsFolder, "Kuplung.app/Contents/Resources", "");
     utils::WriterBMP writer;
     writer.SetSourceImage(image);
-    writer.SetDestFilename(assetsFolder + "/terrain_heightmap.bmp");
+    writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
-    this->heightmapImage = assetsFolder + "/terrain_heightmap.bmp";
 
     // vertices, colors, indices
     int heightmapHeight = heightMap.GetHeight();
