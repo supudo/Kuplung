@@ -106,16 +106,16 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
         MeshModel model = faces[i]->meshModel;
         std::string triangleFace = "";
         for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
-            int j = model.indices[k];
+            int j = model.indices[(int)k];
 
             int v = this->findInMap3(uniqueVertices, model.vertices[j]) + 1;
             int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
 
-            int vt = 0;
+            int vt = -1;
             if (model.texture_coordinates.size() > 0)
                 vt = this->findInMap2(uniqueTextureCoordinates, model.texture_coordinates[j]);
 
-            triangleFace += " " + std::to_string(v) + "/" + (vt > 0 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
+            triangleFace += " " + std::to_string(v) + "/" + (vt > -1 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
 
             if (vCounter % 3 == 0) {
                 f += "f" + triangleFace + this->nlDelimiter;
