@@ -32,128 +32,121 @@ void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
     this->exportMaterials(faces);
 }
 
+int ExporterOBJ::findInMap3(std::map<int, glm::vec3> m, glm::vec3 v) {
+    std::map<int, glm::vec3>::const_iterator it;
+    int c = 0;
+    for (it = m.begin(); it != m.end(); ++it) {
+        if (it->second == v)
+            return c;
+        c += 1;
+    }
+    return -1;
+}
+
+int ExporterOBJ::findInMap2(std::map<int, glm::vec2> m, glm::vec2 v) {
+    std::map<int, glm::vec2>::const_iterator it;
+    int c = 0;
+    for (it = m.begin(); it != m.end(); ++it) {
+        if (it->second == v)
+            return c;
+        c += 1;
+    }
+    return -1;
+}
+
 void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
 
-    std::string objFaces = "";
-    std::string objNormals = "";
-    int triangleCounter = 0, pointCounter = 0;
-    int indexVertex = 0, indexNormal = 0;
-    std::vector<glm::vec3> vectorVertices;
-    for (int i=0; i<(int)faces.size(); i++) {
+    std::string v(""), vt(""), vn(""), f("");
+
+    std::map<int, glm::vec3> uniqueVertices;
+    std::map<int, glm::vec2> uniqueTextureCoordinates;
+    std::map<int, glm::vec3> uniqueNormals;
+    int vCounter = 1, vtCounter = 1, vnCounter = 1;
+
+    for (size_t i=0; i<faces.size(); i++) {
         MeshModel model = faces[i]->meshModel;
-        fileContents += "o " + model.ModelTitle + nlDelimiter;
-        objFaces = "";
-        for (size_t j=0; j<model.vertices.size(); j++) {
-            if ((j + 1) % 3 == 0) {
-                float v1 = model.vertices[j].x;
-                float v2 = model.vertices[j].y;
-                float v3 = model.vertices[j].z;
-                fileContents += Settings::Instance()->string_format("v %f %f %f", v1, v2, v3) + this->nlDelimiter;
-                vectorVertices.push_back(glm::vec3(v1, v2, v3));
-                pointCounter += 1;
-                indexVertex += 1;
-                if ((triangleCounter + 1) % 3 == 0) {
-                    glm::vec3 p1 = vectorVertices[pointCounter];
-                    glm::vec3 p2 = vectorVertices[pointCounter - 1];
-                    glm::vec3 p3 = vectorVertices[pointCounter - 2];
-                    triangleCounter = 0;
+        fileContents += this->nlDelimiter;
+        fileContents += "o " + model.ModelTitle + this->nlDelimiter;
+        for (size_t j=0; j<model.indices.size(); j++) {
+            int idx = model.indices[j];
+            glm::vec3 vertex = model.vertices[idx];
+            glm::vec2 texture_coordinate;
+            if (model.texture_coordinates.size() > 0)
+                texture_coordinate = model.texture_coordinates[idx];
+            glm::vec3 normal = model.normals[idx];
 
-                    glm::vec3 n = glm::normalize(glm::cross(p3 - p1, p2 - p1));
-                    objNormals += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
-                    indexNormal += 1;
+            if (this->findInMap3(uniqueVertices, vertex) == -1) {
+                uniqueVertices[vCounter] = vertex;
+                vCounter += 1;
+                v += "v " + std::to_string(vertex.x) + " " + std::to_string(vertex.y) + " " + std::to_string(vertex.z) + this->nlDelimiter;
+            }
 
-                    std::string singleFace = "f";
-                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex - 2, indexNormal);
-                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex - 1, indexNormal);
-                    singleFace += Settings::Instance()->string_format(" %i//%i", indexVertex, indexNormal);
-                    objFaces += singleFace + this->nlDelimiter;
-                }
-                triangleCounter += 1;
+            if (model.texture_coordinates.size() > 0 && this->findInMap2(uniqueTextureCoordinates, texture_coordinate) == -1) {
+                uniqueTextureCoordinates[vtCounter] = texture_coordinate;
+                vtCounter += 1;
+                vt += "vt " + std::to_string(texture_coordinate.x) + " " + std::to_string(texture_coordinate.y) + this->nlDelimiter;
+            }
+
+            if (this->findInMap3(uniqueNormals, normal) == -1) {
+                uniqueNormals[vnCounter] = normal;
+                vnCounter += 1;
+                vn += "vn " + std::to_string(normal.x) + " " + std::to_string(normal.y) + " " + std::to_string(normal.z) + this->nlDelimiter;
             }
         }
-        fileContents += objNormals;
-        fileContents += "usemtl " + model.MaterialTitle + this->nlDelimiter;
-        fileContents += "s off" + this->nlDelimiter;
-        fileContents += objFaces;
+
+        fileContents += v;
+        fileContents += vt;
+        fileContents += vn;
     }
 
+    for (size_t i=0; i<faces.size(); i++) {
+        MeshModel model = faces[i]->meshModel;
+        std::string triangleFace = "";
+        for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
+            int j = model.indices[k];
 
-    // method 2
-//    std::string objFaces = "";
-//    std::string objNormals = "";
-//    int faceCounter = 1;
-//    int normalsCounter = 1;
+            int v = this->findInMap3(uniqueVertices, model.vertices[j]) + 1;
+            int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
 
-//    for (int i=0; i<(int)faces.size(); i++) {
-//        ModelFace *mmf = faces[i];
-//        fileContents += "o " + mmf->oFace.ModelTitle + nlDelimiter;
+            int vt = 0;
+            if (model.texture_coordinates.size() > 0)
+                vt = this->findInMap2(uniqueTextureCoordinates, model.texture_coordinates[j]);
 
-//        for (size_t j=0; j<mmf->oFace.vertices.size(); j++) {
-//            if ((j + 1) % 3 == 0 || (mmf->oFace.vertices.size() - j) < 3) {
-//                float v1 = mmf->oFace.vertices[j];
-//                float v2 = mmf->oFace.vertices[j - 1];
-//                float v3 = mmf->oFace.vertices[j - 2];
-//                fileContents += Settings::Instance()->string_format("v %f %f %f", v1, v2, v3) + this->nlDelimiter;
+            triangleFace += " " + std::to_string(v) + "/" + (vt > 0 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
 
-//                glm::vec3 n = glm::normalize(glm::cross(v3 - v1, v2 - v1));
-//                objNormals += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
-//                normalsCounter += 1;
+            if (vCounter % 3 == 0) {
+                f += "f" + triangleFace + this->nlDelimiter;
+                triangleFace = "";
+            }
+        }
 
-//                faceCounter += 1;
-//            }
-//        }
-
-//        fileContents += "usemtl " + mmf->oFace.materialID + this->nlDelimiter;
-//        fileContents += "s off" + this->nlDelimiter;
-//        fileContents += objFaces;
-//    }
-
-
-
-    // method 1
-//    for (int i=0; i<(int)faces.size(); i++) {
-//        ModelFace *mmf = faces[i];
-//        fileContents += "o " + mmf->oFace.ModelTitle + nlDelimiter;
-//        for (size_t j=0; j<mmf->oFace.vectors_vertices.size(); j++) {
-//            glm::vec3 v = mmf->oFace.vectors_vertices[j];
-//            printf("[%i] - %f, %f, %f\n", (int)j, v.x, v.y, v.z);
-//            if ((j + 1) % 3 == 0) {
-//                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j], 1.0);
-//                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 1], 1.0);
-//                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(mmf->oFace.vectors_vertices[j - 2], 1.0);
-//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp01.x, tp01.y, tp01.z);
-//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp02.x, tp02.y, tp02.z);
-//                printf("-- [%i] - %f, %f, %f\n", (int)j, tp03.x, tp03.y, tp03.z);
-//                glm::vec3 tp1 = glm::vec3(tp01.x, -tp01.z, tp01.y);
-//                glm::vec3 tp2 = glm::vec3(tp02.x, -tp02.z, tp02.y);
-//                glm::vec3 tp3 = glm::vec3(tp03.x, -tp03.z, tp03.y);
-
-//                std::string singleFace;
-//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp1.x, tp1.y, tp1.z) + this->nlDelimiter;
-//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp2.x, tp2.y, tp2.z) + this->nlDelimiter;
-//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-//                fileContents += Settings::Instance()->string_format("v %f %f %f", tp3.x, tp3.y, tp3.z) + this->nlDelimiter;
-//                singleFace += std::to_string(faceCounter) + "//" + std::to_string(normalsCounter) + " "; faceCounter += 1;
-//                objFaces += "f " + singleFace + this->nlDelimiter;
-//            }
-//        }
-//        for (size_t j=0; j<mmf->oFace.vectors_normals.size(); j++) {
-//            glm::vec3 n = mmf->oFace.vectors_normals[j];
-//            fileContents += Settings::Instance()->string_format("vn %f %f %f", n.x, n.y, n.z) + this->nlDelimiter;
-//            normalsCounter += 1;
-//        }
-//        fileContents += "usemtl " + mmf->oFace.materialID + this->nlDelimiter;
-//        fileContents += "s off" + this->nlDelimiter;
-//        fileContents += objFaces;
-//    }
+        fileContents += "usemtl " + model.MaterialTitle + this->nlDelimiter;
+        fileContents += "s off" + this->nlDelimiter;
+        fileContents += f;
+    }
     fileContents += this->nlDelimiter;
 
-    if (fileContents != "")
-        this->saveFile(fileContents, this->exportFile.path + "/" + this->exportFile.title + ".obj");
+    if (fileContents != "") {
+        time_t t = time(0);
+        struct tm * now = localtime(&t);
+
+        int year = now->tm_year + 1900;
+        int month = now->tm_mon + 1;
+        int day = now->tm_mday;
+        int hour = now->tm_hour;
+        int minute = now->tm_min;
+        int seconds = now->tm_sec;
+
+        std::string fileSuffix = "_" +
+                                 std::to_string(year) + std::to_string(month) + std::to_string(day) +
+                                 std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
+
+        fileSuffix = "";
+        this->saveFile(fileContents, this->exportFile.path + "/" + this->exportFile.title + fileSuffix + ".obj");
+    }
 }
 
 void ExporterOBJ::exportMaterials(std::vector<ModelFace*> faces) {

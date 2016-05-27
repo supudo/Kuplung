@@ -13,7 +13,7 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include <functional>
 
-struct PackedVertex{
+struct PackedVertex {
     glm::vec3 position;
     glm::vec2 uv;
     glm::vec3 normal;

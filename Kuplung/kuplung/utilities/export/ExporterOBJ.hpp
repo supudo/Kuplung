@@ -23,6 +23,8 @@ private:
     void exportGeometry(std::vector<ModelFace*> faces);
     void exportMaterials(std::vector<ModelFace*> faces);
     void saveFile(std::string fileContents, std::string fileName);
+    int findInMap3(std::map<int, glm::vec3> m, glm::vec3 v);
+    int findInMap2(std::map<int, glm::vec2> m, glm::vec2 v);
 
     FBEntity exportFile;
     std::string nlDelimiter;
