@@ -387,6 +387,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initAxisSystem();
     this->managerObjects->initAxisHelpers();
     this->managerObjects->initSkybox();
+    this->managerObjects->initTerrain();
     //this->managerObjects->addLight(LightSourceType_Directional);
     //this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);

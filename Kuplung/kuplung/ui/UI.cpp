@@ -174,7 +174,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         }
 
         if (ImGui::BeginMenu("Scene")) {
-//            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showHeightmap);
+//            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showTerrain);
 //            ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
                 if (ImGui::MenuItem("Directional (Sun)"))
@@ -186,7 +186,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
             ImGui::Separator();
-            if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Model Skin")) {
+            if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Scene Rendering")) {
                 if (ImGui::MenuItem("Solid", NULL, managerObjects->viewModelSkin == ViewModelSkin_Solid))
                     this->managerObjects->viewModelSkin = ViewModelSkin_Solid;
                 if (ImGui::MenuItem("Material", NULL, managerObjects->viewModelSkin == ViewModelSkin_Material))

@@ -12,6 +12,9 @@
 #include "kuplung/ui/components/Tabs.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 
+#define STBI_FAILURE_USERMSG
+#include "kuplung/utilities/stb/stb_image.h"
+
 void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->managerObjects = managerObjects;
 
@@ -22,6 +25,10 @@ void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->selectedTabGUICameraModel = -1;
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
+    this->selectedTabGUITerrain = -1;
+
+    this->heightmapWidth = 0;
+    this->heightmapHeight = 0;
 
     this->helperUI = new UIHelpers();
 }
@@ -42,7 +49,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
-    for (int i=0; i<7; i++) {
+    for (int i=0; i<8; i++) {
         switch (i) {
             case 0: {
                 ImGui::Indent();
@@ -109,17 +116,6 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         for (int j=0; j<(int)this->managerObjects->lightSources.size(); j++) {
                             std::string title = this->managerObjects->lightSources[j]->title;
                             ImGui::Bullet();
-
-//                            if (ImGui::TreeNode((void*)(intptr_t)i, "%s", this->managerObjects->lightSources[j]->title.c_str())) {
-//                                this->selectedObjectLight = j;
-//                                this->selectedObject = 6;
-//                                ImGui::SameLine();
-//                                if (ImGui::SmallButton(ICON_FA_TIMES ""))
-//                                    printf("Child %d pressed", i);
-//                                ImGui::TreePop();
-//                            }
-
-                            //std::string title = ICON_FA_TIMES " -- " + this->managerObjects->lightSources[j]->title;
                             if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
                                 this->selectedObjectLight = j;
                                 this->selectedObject = 6;
@@ -132,7 +128,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 7: {
                 ImGui::Indent();
-                if (ImGui::Selectable("Terrain", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_ALIGN_CENTER "Terrain", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -516,6 +512,30 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         }
         case 7: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
+            ImGui::Checkbox("Show Terrain", &this->managerObjects->showTerrain);
+            if (this->managerObjects->showTerrain) {
+                if (this->newHeightmap && this->heightmapImage != "") {
+                    int tChannels;
+                    unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
+                    if (!tPixels)
+                        Settings::Instance()->funcDoLog("Can't load heightmap preview image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
+                    else {
+                        glGenTextures(1, &this->vboTexHeightmap);
+                        glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->heightmapWidth, this->heightmapHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+                        glGenerateMipmap(GL_TEXTURE_2D);
+                        stbi_image_free(tPixels);
+                    }
+                }
+                ImGui::Separator();
+                ImGui::Text("Heightmap");
+                ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight));
+                this->newHeightmap = false;
+            }
             break;
         }
         default:
@@ -526,4 +546,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::EndChild();
 
     ImGui::End();
+
+    this->setHeightmapImage(this->managerObjects->heightmapImage);
+}
+
+void DialogControlsGUI::setHeightmapImage(std::string heightmapImage) {
+    if (this->heightmapImage != heightmapImage) {
+        this->heightmapImage = heightmapImage;
+        this->newHeightmap = true;
+    }
 }

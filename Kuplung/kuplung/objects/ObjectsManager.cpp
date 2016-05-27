@@ -103,6 +103,11 @@ void ObjectsManager::render() {
         this->Setting_Skybox = this->skybox->Setting_Skybox_Item;
     }
     this->renderSkybox();
+
+    if (this->showTerrain) {
+        this->terrain->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
+        this->heightmapImage = this->terrain->heightmapImage;
+    }
 }
 
 void ObjectsManager::renderSkybox() {
@@ -134,6 +139,7 @@ void ObjectsManager::resetSettings() {
     this->SolidLight_Ambient_ColorPicker = false;
     this->SolidLight_Diffuse_ColorPicker = false;
     this->SolidLight_Specular_ColorPicker = false;
+    this->showTerrain = false;
 }
 
 void ObjectsManager::resetPropertiesSystem() {
@@ -252,6 +258,18 @@ void ObjectsManager::initSkybox() {
     this->skybox->init(this->Setting_GridSize);
     if (!this->skybox->initBuffers())
         Settings::Instance()->funcDoLog("Skybox cannot be initialized!");
+}
+
+/*
+ *
+ * Terrain
+ *
+ */
+void ObjectsManager::initTerrain() {
+    this->terrain = new Terrain();
+    this->terrain->init();
+    this->terrain->initShaderProgram();
+    this->terrain->initBuffers(Settings::Instance()->currentFolder);
 }
 
 /*

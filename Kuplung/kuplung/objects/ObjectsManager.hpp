@@ -22,6 +22,7 @@
 #include "kuplung/meshes/MiniAxis.hpp"
 #include "kuplung/meshes/Skybox.hpp"
 #include "kuplung/meshes/WorldGrid.hpp"
+#include "kuplung/meshes/Terrain.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
 class ObjectsManager {
@@ -43,6 +44,7 @@ public:
     void initAxisSystem();
     void initAxisHelpers();
     void initSkybox();
+    void initTerrain();
 
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
     std::vector<Light*> lightSources;
@@ -54,6 +56,7 @@ public:
     MiniAxis* axisSystem;
     Skybox* skybox;
     AxisHelpers *axisHelpers_xMinus, *axisHelpers_xPlus, *axisHelpers_yMinus, *axisHelpers_yPlus, *axisHelpers_zMinus, *axisHelpers_zPlus;
+    Terrain *terrain;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;
@@ -71,6 +74,9 @@ public:
     glm::vec3 SolidLight_MaterialColor, SolidLight_Ambient, SolidLight_Diffuse, SolidLight_Specular;
     float SolidLight_Ambient_Strength, SolidLight_Diffuse_Strength, SolidLight_Specular_Strength;
     bool SolidLight_MaterialColor_ColorPicker, SolidLight_Ambient_ColorPicker, SolidLight_Diffuse_ColorPicker, SolidLight_Specular_ColorPicker;
+
+    bool showTerrain;
+    std::string heightmapImage;
 
 private:
     std::function<void(float)> funcProgress;

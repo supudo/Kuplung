@@ -23,11 +23,17 @@ public:
 private:
     int selectedObject;
     int selectedObjectLight;
-    int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight;
+    int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
     float heightTopPanel = 170.0f;
 
     ObjectsManager *managerObjects;
     UIHelpers *helperUI;
+
+    void setHeightmapImage(std::string heightmapImage);
+    std::string heightmapImage;
+    int heightmapWidth, heightmapHeight;
+    GLuint vboTexHeightmap;
+    bool newHeightmap;
 };
 
 #endif /* DialogControlsGUI_hpp */
