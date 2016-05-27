@@ -355,7 +355,12 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate"))
             (*meshModelFaces).push_back((*meshModelFaces)[this->selectedObject]->clone((int)(*meshModelFaces).size() + 1));
-        ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
+        //ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
+        if (ImGui::BeginMenu("Delete")) {
+            if (ImGui::MenuItem("OK"))
+                this->funcDeleteModel(this->selectedObject);
+            ImGui::EndMenu();
+        }
         ImGui::EndPopup();
     }
     ImGui::PopItemWidth();
@@ -630,12 +635,14 @@ void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshMode
 }
 
 void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshModelFaces) {
+//    ImGui::SetNextWindowPos(ImGui::GetIO().MouseClickedPos[0]);
+
     ImGui::OpenPopup("Delete?");
 
     ImGui::BeginPopupModal("Delete?", NULL, ImGuiWindowFlags_AlwaysAutoResize);
 
-    ImGui::Text("Are you sure you want to delete this model?\n");
-    ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
+    ImGui::Text("Are you sure?\n");
+    //ImGui::Text("(%s)", (*meshModelFaces)[this->selectedObject]->meshModel.ModelTitle.c_str());
 
     if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f,0))) {
         this->funcDeleteModel(this->selectedObject);
@@ -643,7 +650,10 @@ void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshMode
         this->cmenu_deleteYn = false;
     }
     ImGui::SameLine();
-    if (ImGui::Button("Cancel", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) { ImGui::CloseCurrentPopup(); this->cmenu_deleteYn = false; }
+    if (ImGui::Button("No", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) {
+        ImGui::CloseCurrentPopup();
+        this->cmenu_deleteYn = false;
+    }
 
     ImGui::EndPopup();
 }
