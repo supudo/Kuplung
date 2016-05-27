@@ -533,7 +533,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 ImGui::Separator();
                 ImGui::Text("Heightmap");
-                ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight));
+                ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
                 this->newHeightmap = false;
             }
             break;

@@ -76,8 +76,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     std::string filename = "terrain_heightmap_" + fileSuffix + ".bmp";
     this->heightmapImage = assetsFolder + "/" + filename;
 
-    // write image
+#ifdef _WIN32
+#else
     boost::replace_all(assetsFolder, "Kuplung.app/Contents/Resources", "");
+#endif
     utils::WriterBMP writer;
     writer.SetSourceImage(image);
     writer.SetDestFilename(this->heightmapImage);
