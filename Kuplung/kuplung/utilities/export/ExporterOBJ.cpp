@@ -128,8 +128,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
 
     for (size_t i=0; i<faces.size(); i++) {
-        MeshModel model = faces[i]->meshModel;
-        fileContents += this->exportMesh(model);
+        fileContents += this->exportMesh(faces[i]->meshModel);
     }
     fileContents += this->nlDelimiter;
 
