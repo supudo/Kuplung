@@ -539,7 +539,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this->heightmapWidth, this->heightmapHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->heightmapWidth, this->heightmapHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
                         glGenerateMipmap(GL_TEXTURE_2D);
                         stbi_image_free(tPixels);
                     }
