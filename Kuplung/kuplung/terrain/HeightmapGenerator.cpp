@@ -15,6 +15,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <boost/algorithm/string/replace.hpp>
+#include <fstream>
 
 HeightmapGenerator::~HeightmapGenerator() {
 }
@@ -114,24 +115,42 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->colors.clear();
     this->indices.clear();
 
+//    std::string grapher = "";
+
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
-            float hmValue = heightMap.GetValue(x, y);
+            float hmValue = heightMap.GetValue(x, y) * 10;
 
-            glm::vec3 vertex = glm::vec3(x, (y * hmValue + x), y);
-            vertex = vertex / 40.0f;
-            this->vertices.push_back(vertex);
+            glm::vec3 vertex1 = glm::vec3(x, hmValue, y);
+            glm::vec3 vertex2 = glm::vec3(x + 1, hmValue, y);
+            glm::vec3 vertex3 = glm::vec3(x + 1, y + 1, hmValue);
+            this->vertices.push_back(vertex1 / 10.0f);
+            this->vertices.push_back(vertex2 / 10.0f);
+            this->vertices.push_back(vertex3 / 10.0f);
+
+//            grapher += Settings::Instance()->string_format("%f,%f,%f;%f,%f,%f;%f,%f,%f\n",
+//                   vertex1.x, vertex1.y, vertex1.z,
+//                   vertex3.x, vertex2.y, vertex2.z,
+//                   vertex2.x, vertex3.y, vertex3.z);
 
             glm::vec3 normal = glm::vec3(0);
+            this->normals.push_back(normal);
+            this->normals.push_back(normal);
             this->normals.push_back(normal);
 
             float c = -0.15f + (hmValue / 256.0f);
             glm::vec3 color = glm::vec3(0.0f, 0.0f, c);
+            this->colors.push_back(color);
+            this->colors.push_back(color);
             this->colors.push_back(color);
 
             this->indices.push_back(vertIndex);
             vertIndex += 1;
         }
     }
+
+//    std::ofstream out(assetsFolder + "/terrain.txt");
+//    out << grapher;
+//    out.close();
 }
