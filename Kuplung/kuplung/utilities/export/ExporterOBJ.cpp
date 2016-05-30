@@ -54,7 +54,8 @@ int ExporterOBJ::findInMap2(std::map<int, glm::vec2> m, glm::vec2 v) {
     return -1;
 }
 
-std::string ExporterOBJ::exportMesh(MeshModel model) {
+std::string ExporterOBJ::exportMesh(ModelFace *face) {
+    MeshModel model = face->meshModel;
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
 
@@ -72,6 +73,9 @@ std::string ExporterOBJ::exportMesh(MeshModel model) {
         if (model.texture_coordinates.size() > 0)
             texture_coordinate = model.texture_coordinates[idx];
         glm::vec3 normal = model.normals[idx];
+
+        glm::vec3 facePosition = glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        vertex = vertex + facePosition;
 
         if (this->findInMap3(uniqueVertices, vertex) == -1) {
             uniqueVertices[vCounter] = vertex;
@@ -100,7 +104,10 @@ std::string ExporterOBJ::exportMesh(MeshModel model) {
     for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
         int j = model.indices[(int)k];
 
-        int v = this->findInMap3(uniqueVertices, model.vertices[j]) + 1;
+        glm::vec3 facePosition = glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        glm::vec3 vertex = model.vertices[j] + facePosition;
+
+        int v = this->findInMap3(uniqueVertices, vertex) + 1;
         int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
 
         int vt = -1;
@@ -128,7 +135,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
 
     for (size_t i=0; i<faces.size(); i++) {
-        fileContents += this->exportMesh(faces[i]->meshModel);
+        fileContents += this->exportMesh(faces[i]);
     }
     fileContents += this->nlDelimiter;
 
