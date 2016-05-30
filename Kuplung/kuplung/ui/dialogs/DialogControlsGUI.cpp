@@ -520,7 +520,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Checkbox("Show Terrain", &this->managerObjects->showTerrain);
             if (this->managerObjects->showTerrain) {
                 ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
-                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 6, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
+                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
                 this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
                 this->helperUI->addControlsFloatSlider("Persistence", 3, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
             }

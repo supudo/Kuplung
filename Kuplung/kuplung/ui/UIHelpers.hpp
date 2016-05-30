@@ -30,6 +30,11 @@ public:
     bool addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
     void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
     void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
+    bool addControlsDrag(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    bool addControlsIntegerDrag(std::string title, int idx, int min, int limit, int* animatedValue);
+    bool addControlsFloatDrag(std::string title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsFloatDragSameLine(std::string title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsDragSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
 
 private:
     ColorPicker *componentColorPicker;
