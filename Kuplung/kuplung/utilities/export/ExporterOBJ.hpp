@@ -29,6 +29,11 @@ private:
 
     FBEntity exportFile;
     std::string nlDelimiter;
+
+    std::map<int, glm::vec3> uniqueVertices;
+    std::map<int, glm::vec2> uniqueTextureCoordinates;
+    std::map<int, glm::vec3> uniqueNormals;
+    int vCounter = 1, vtCounter = 1, vnCounter = 1;
 };
 
 #endif /* ExporterOBJ_hpp */
