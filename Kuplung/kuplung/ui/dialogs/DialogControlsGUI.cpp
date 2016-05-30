@@ -170,9 +170,12 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
             ImGui::SliderFloat("W##105", &this->managerObjects->Setting_RatioWidth, 0.0f, 5.0f);
             ImGui::SliderFloat("H##106", &this->managerObjects->Setting_RatioHeight, 0.0f, 5.0f);
+//            this->helperUI->addControlsFloatSliderSameLine("W", 105, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
+//            this->helperUI->addControlsFloatSliderSameLine("H", 106, 0.0f, 5.0f, &this->managerObjects->Setting_RatioHeight);
             ImGui::Separator();
 
             ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
+            this->helperUI->addControlsFloatSliderSameLine("W", 201, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
             ImGui::SliderFloat("Far##107", &this->managerObjects->Setting_PlaneClose, 0.0f, 1.0f);
             ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
             ImGui::Separator();
