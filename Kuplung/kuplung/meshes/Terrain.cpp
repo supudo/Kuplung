@@ -18,7 +18,13 @@ Terrain::~Terrain() {
 }
 
 void Terrain::destroy() {
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboColors);
+    glDeleteBuffers(1, &this->vboIndices);
+
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(this->glAttributeVertexNormal);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -71,6 +77,7 @@ bool Terrain::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
         this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_color");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
@@ -93,16 +100,23 @@ void Terrain::initBuffers(std::string assetsFolder) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->vertices.size() * sizeof(GLfloat), &this->terrainGenerator->vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->vertices.size() * sizeof(glm::vec3), &this->terrainGenerator->vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // normals
+    glGenBuffers(1, &this->vboNormals);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
+    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->normals.size() * sizeof(glm::vec3), &this->terrainGenerator->normals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(this->glAttributeVertexNormal);
+    glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // colors
     glGenBuffers(1, &this->vboColors);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->colors.size() * sizeof(GLfloat), &this->terrainGenerator->colors[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->colors.size() * sizeof(glm::vec3), &this->terrainGenerator->colors[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeColor);
-    glVertexAttribPointer(this->glAttributeColor, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // indices
     glGenBuffers(1, &this->vboIndices);

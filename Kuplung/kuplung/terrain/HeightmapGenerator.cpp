@@ -53,10 +53,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
-    //heightMapBuilder.SetDestSize(Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+//    heightMapBuilder.SetDestSize(Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     heightMapBuilder.SetDestSize(140, 140);
     heightMapBuilder.SetBounds(2.0, 6.0, 1.0, 5.0);
-    //heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
+//    heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
     heightMapBuilder.Build();
 
     // render
@@ -109,30 +109,29 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     int heightmapHeight = heightMap.GetHeight();
     int heightmapWidth = heightMap.GetWidth();
 
-    this->vertices = {};
-    this->colors = {};
-    this->indices = {};
+    this->vertices.clear();
+    this->normals.clear();
+    this->colors.clear();
+    this->indices.clear();
 
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
-
             float hmValue = heightMap.GetValue(x, y);
 
-            this->vertices.push_back(x);
-            this->vertices.push_back(y * hmValue + x);
-            this->vertices.push_back(y);
+            glm::vec3 vertex = glm::vec3(x, (y * hmValue + x), y);
+            vertex = vertex / 40.0f;
+            this->vertices.push_back(vertex);
 
-            float color = -0.15f + (hmValue / 256.0f);
+            glm::vec3 normal = glm::vec3(0);
+            this->normals.push_back(normal);
 
-            this->colors.push_back(0.0);
-            this->colors.push_back(0.0);
+            float c = -0.15f + (hmValue / 256.0f);
+            glm::vec3 color = glm::vec3(0.0f, 0.0f, c);
             this->colors.push_back(color);
-            this->colors.push_back(1.0);
 
             this->indices.push_back(vertIndex);
             vertIndex += 1;
-
         }
     }
 }

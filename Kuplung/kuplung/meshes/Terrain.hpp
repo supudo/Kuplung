@@ -31,8 +31,8 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
-    GLuint vboVertices, vboColors, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeColor;
+    GLuint vboVertices, vboNormals, vboColors, vboIndices;
+    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
 
     std::string readFile(const char *filePath);
 };
