@@ -68,14 +68,11 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     meshData += "o " + model.ModelTitle + this->nlDelimiter;
     for (size_t j=0; j<model.indices.size(); j++) {
         int idx = model.indices[j];
-        glm::vec3 vertex = model.vertices[idx];
+        glm::vec3 vertex = model.vertices[idx] + glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
         glm::vec2 texture_coordinate;
         if (model.texture_coordinates.size() > 0)
             texture_coordinate = model.texture_coordinates[idx];
         glm::vec3 normal = model.normals[idx];
-
-        glm::vec3 facePosition = glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
-        vertex = vertex + facePosition;
 
         if (this->findInMap3(uniqueVertices, vertex) == -1) {
             uniqueVertices[vCounter] = vertex;
@@ -104,9 +101,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
         int j = model.indices[(int)k];
 
-        glm::vec3 facePosition = glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
-        glm::vec3 vertex = model.vertices[j] + facePosition;
-
+        glm::vec3 vertex = model.vertices[j] + glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
         int v = this->findInMap3(uniqueVertices, vertex) + 1;
         int vn = this->findInMap3(uniqueNormals, model.normals[j]) + 1;
 
