@@ -8,6 +8,7 @@
 
 #include "ExporterOBJ.hpp"
 #include <fstream>
+#include <glm/gtx/matrix_decompose.hpp>
 
 ExporterOBJ::~ExporterOBJ() {
     this->destroy();
@@ -59,11 +60,26 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
 
+    glm::vec3 scale;
+    glm::quat rotation;
+    glm::vec3 translation;
+    glm::vec3 skew;
+    glm::vec4 perspective;
+    glm::decompose(face->matrixModel, scale, rotation, translation, skew, perspective);
+
     meshData += this->nlDelimiter;
     meshData += "o " + model.ModelTitle + this->nlDelimiter;
     for (size_t j=0; j<model.indices.size(); j++) {
         int idx = model.indices[j];
-        glm::vec3 vertex = model.vertices[idx] + glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        glm::vec3 vertex = model.vertices[idx];
+        vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        //vertex += glm::vec3(face->matrixModel[3].x, face->matrixModel[3].y, face->matrixModel[3].z);
+
+//        printf("%i = [%f, %f, %f] = [%f, %f, %f] = [%f, %f, %f]\n", j,
+//               vertex.x, vertex.y, vertex.z,
+//               face->positionX->point, face->positionY->point, face->positionZ->point,
+//               face->matrixModel[2].x, face->matrixModel[2].y, face->matrixModel[2].z);
+
         glm::vec2 texture_coordinate;
         if (model.texture_coordinates.size() > 0)
             texture_coordinate = model.texture_coordinates[idx];
@@ -96,7 +112,10 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
         int j = model.indices[(int)k];
 
-        glm::vec3 vertex = model.vertices[j] + glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        glm::vec3 vertex = model.vertices[j];
+        vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+//        vertex += glm::vec3(face->matrixModel[3].x, face->matrixModel[3].y, face->matrixModel[3].z);
+
         int v = this->findInMap3(this->uniqueVertices, vertex) + 1;
         int vn = this->findInMap3(this->uniqueNormals, model.normals[j]) + 1;
 
