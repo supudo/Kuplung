@@ -74,6 +74,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
         glm::vec3 vertex = model.vertices[idx];
         vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
         vertex = vertex * rotation;
+        vertex = vertex * scale;
 
         glm::vec2 texture_coordinate;
         if (model.texture_coordinates.size() > 0)
@@ -110,6 +111,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
         glm::vec3 vertex = model.vertices[j];
         vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
         vertex = vertex * rotation;
+        vertex = vertex * scale;
 
         int v = this->findInMap3(this->uniqueVertices, vertex) + 1;
         int vn = this->findInMap3(this->uniqueNormals, model.normals[j]) + 1;
