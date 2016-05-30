@@ -35,6 +35,7 @@ void Terrain::destroy() {
 void Terrain::init() {
     this->glUtils = new GLUtils();
     this->terrainGenerator = new HeightmapGenerator();
+    this->terrainGenerator->initSettings();
 }
 
 #pragma mark - Public

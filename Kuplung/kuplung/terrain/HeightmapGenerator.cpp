@@ -24,6 +24,16 @@ void HeightmapGenerator::initPosition() {
     this->position_x2 = 10.0;
     this->position_y1 = 1.0;
     this->position_y2 = 5.0;
+
+    this->Setting_Octaves = 6;
+    this->Setting_Frequency = 1.0f;
+    this->Setting_Persistence = 0.5f;
+}
+
+void HeightmapGenerator::initSettings() {
+    this->Setting_Octaves = 1;
+    this->Setting_Frequency = 1.0f;
+    this->Setting_Persistence = 1.0f;
 }
 
 void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical) {
@@ -33,6 +43,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->position_y2 += offsetVertical;
 
     module::Perlin perlinNoiser;
+
+    perlinNoiser.SetOctaveCount(this->Setting_Octaves);
+    perlinNoiser.SetFrequency((double)this->Setting_Frequency);
+    perlinNoiser.SetPersistence((double)this->Setting_Persistence);
 
     // heightmap
     utils::NoiseMap heightMap;
@@ -75,6 +89,12 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
                              std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
     std::string filename = "terrain_heightmap_" + fileSuffix + ".bmp";
     this->heightmapImage = assetsFolder + "/" + filename;
+
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = %i, F = %f, P = %f] = %s",
+                                                                        this->Setting_Octaves,
+                                                                        (double)this->Setting_Frequency,
+                                                                        (double)this->Setting_Persistence,
+                                                                        this->heightmapImage.c_str()));
 
 #ifdef _WIN32
 #else

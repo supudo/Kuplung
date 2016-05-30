@@ -37,6 +37,7 @@ public:
     void renderSkybox();
     void resetPropertiesSystem();
     void resetSettings();
+    void generateTerrain();
 
     void initCamera();
     void initCameraModel();

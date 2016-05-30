@@ -23,10 +23,10 @@ public:
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
     std::string heightmapImage;
+    HeightmapGenerator *terrainGenerator;
 
 private:
     GLUtils *glUtils;
-    HeightmapGenerator *terrainGenerator;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

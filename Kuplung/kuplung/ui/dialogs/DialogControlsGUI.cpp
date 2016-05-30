@@ -30,6 +30,8 @@ void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->heightmapWidth = 0;
     this->heightmapHeight = 0;
 
+    this->generateNewTerrain = false;
+
     this->helperUI = new UIHelpers();
 }
 
@@ -513,6 +515,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         case 7: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
             ImGui::Checkbox("Show Terrain", &this->managerObjects->showTerrain);
+            if (this->managerObjects->showTerrain) {
+                ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
+                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 6, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
+                this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
+                this->helperUI->addControlsFloatSlider("Persistence", 3, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
+            }
+
+            if (this->generateNewTerrain) {
+                this->managerObjects->generateTerrain();
+                this->generateNewTerrain = false;
+            }
             if (this->managerObjects->showTerrain) {
                 if (this->newHeightmap && this->heightmapImage != "") {
                     int tChannels;

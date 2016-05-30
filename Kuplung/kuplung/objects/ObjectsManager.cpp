@@ -105,6 +105,8 @@ void ObjectsManager::render() {
     this->renderSkybox();
 
     if (this->showTerrain) {
+        if (this->heightmapImage == "")
+            this->generateTerrain();
         this->terrain->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
         this->heightmapImage = this->terrain->heightmapImage;
     }
@@ -269,6 +271,9 @@ void ObjectsManager::initTerrain() {
     this->terrain = new Terrain();
     this->terrain->init();
     this->terrain->initShaderProgram();
+}
+
+void ObjectsManager::generateTerrain() {
     this->terrain->initBuffers(Settings::Instance()->currentFolder);
 }
 

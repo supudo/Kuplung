@@ -33,7 +33,7 @@ private:
     std::string heightmapImage;
     int heightmapWidth, heightmapHeight;
     GLuint vboTexHeightmap;
-    bool newHeightmap;
+    bool newHeightmap, generateNewTerrain;
 };
 
 #endif /* DialogControlsGUI_hpp */
