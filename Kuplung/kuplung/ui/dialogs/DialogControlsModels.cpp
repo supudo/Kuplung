@@ -467,7 +467,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
                 ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
                 // alpha
                 ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
-                ImGui::SliderFloat("", &(*meshModelFaces)[this->selectedObject]->Setting_Alpha, 0.0f, 1.0f);
+                this->helperUI->addControlsFloatSlider("", 1, 0.0f, 1.0f, &(*meshModelFaces)[this->selectedObject]->Setting_Alpha);
                 break;
             }
             case 1: {
