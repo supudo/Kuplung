@@ -25,6 +25,7 @@ public:
     int Setting_Octaves;
     float Setting_Frequency;
     float Setting_Persistence;
+    bool Setting_ColorTerrain;
 
 private:
     double position_x1;
