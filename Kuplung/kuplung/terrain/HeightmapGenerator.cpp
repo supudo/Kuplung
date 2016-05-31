@@ -54,7 +54,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
-//    heightMapBuilder.SetDestSize(Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     heightMapBuilder.SetDestSize(140, 140);
     heightMapBuilder.SetBounds(2.0, 6.0, 1.0, 5.0);
 //    heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
@@ -139,8 +138,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->normals.push_back(normal);
             this->normals.push_back(normal);
 
-            float c = -0.15f + (hmValue / 256.0f);
-            glm::vec3 color = glm::vec3(0.0f, 0.0f, c);
+            utils::Color c = image.GetValue(x, y);
+            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             this->colors.push_back(color);
             this->colors.push_back(color);
             this->colors.push_back(color);
