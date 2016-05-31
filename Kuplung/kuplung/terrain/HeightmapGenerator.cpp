@@ -123,24 +123,34 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->colors.clear();
     this->indices.clear();
 
-    std::string grapher = "";
+//    std::string grapher = "";
 
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10;
 
-            glm::vec3 vertex1 = glm::vec3(x, hmValue, y);
-            glm::vec3 vertex2 = glm::vec3(x + 1, hmValue, y);
-            glm::vec3 vertex3 = glm::vec3(x + 1, y + 1, hmValue);
-            this->vertices.push_back(vertex1 / 10.0f);
-            this->vertices.push_back(vertex2 / 10.0f);
-            this->vertices.push_back(vertex3 / 10.0f);
+            glm::vec3 v1 = glm::vec3(x, y, hmValue);
+            glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);
+            glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
+            this->vertices.push_back(v1 / 10.0f);
+            this->vertices.push_back(v2 / 10.0f);
+            this->vertices.push_back(v3 / 10.0f);
 
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   vertex1.x, vertex1.y, vertex1.z,
-                   vertex3.x, vertex2.y, vertex2.z,
-                   vertex2.x, vertex3.y, vertex3.z);
+            this->indices.push_back(vertIndex);
+            vertIndex += 1;
+
+            glm::vec3 v4 = glm::vec3(x, y, hmValue);
+            glm::vec3 v5 = glm::vec3(x, y + 1, hmValue);
+            glm::vec3 v6 = glm::vec3(x + 1, y + 1, hmValue);
+            this->vertices.push_back(v4 / 10.0f);
+            this->vertices.push_back(v5 / 10.0f);
+            this->vertices.push_back(v6 / 10.0f);
+
+//            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+//                   v1.x, v1.y, v1.z,
+//                   v3.x, v2.y, v2.z,
+//                   v2.x, v3.y, v3.z);
 
             glm::vec3 normal = glm::vec3(0);
             this->normals.push_back(normal);
@@ -158,7 +168,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
         }
     }
 
-    std::ofstream out(assetsFolder + "/terrain.txt");
-    out << grapher;
-    out.close();
+//    std::ofstream out(assetsFolder + "/terrain.txt");
+//    out << grapher;
+//    out.close();
 }
