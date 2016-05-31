@@ -195,12 +195,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             glm::vec2 uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
 
     // triangle 1
-            glm::vec3 point(
-                        float(cos(2 * pi * x * ss) * sin(pi * y * rr)),
-                        float(sin(-pi_2 + pi * y * rr)),
-                        float(sin(2 * pi * x * ss) * sin(pi * y * rr))
-                    );
-
             glm::vec3 v1 = glm::vec3(x, y, hmValue);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
