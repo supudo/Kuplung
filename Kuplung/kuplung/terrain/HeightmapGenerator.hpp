@@ -10,6 +10,7 @@
 #define HeightmapGenerator_hpp
 
 #include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/parsers/ModelObject.h"
 #include <glm/common.hpp>
 
 class HeightmapGenerator {
@@ -26,6 +27,7 @@ public:
     float Setting_Frequency;
     float Setting_Persistence;
     bool Setting_ColorTerrain;
+    MeshModel modelTerrain;
 
 private:
     double position_x1;

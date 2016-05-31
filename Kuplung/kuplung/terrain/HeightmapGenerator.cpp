@@ -126,51 +126,99 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
 
 //    std::string grapher = "";
 
+    this->modelTerrain = {};
+
+    this->modelTerrain.countIndices = 0;
+    this->modelTerrain.countNormals = 0;
+    this->modelTerrain.countTextureCoordinates = 0;
+    this->modelTerrain.countVertices = 0;
+    this->modelTerrain.ID = 1;
+    this->modelTerrain.MaterialTitle = "MaterialTerrain";
+    this->modelTerrain.ModelTitle = "Terrain";
+
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10;
+            utils::Color c = image.GetValue(x, y);
+            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
+            // triangle 1
             glm::vec3 v1 = glm::vec3(x, y, hmValue);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
             this->vertices.push_back(v1 / 10.0f);
             this->vertices.push_back(v2 / 10.0f);
             this->vertices.push_back(v3 / 10.0f);
-            this->indices.push_back(vertIndex);
-            vertIndex += 1;
+            this->modelTerrain.countVertices += 3;
+            this->modelTerrain.vertices.push_back(v1 / 10.0f);
+            this->modelTerrain.vertices.push_back(v2 / 10.0f);
+            this->modelTerrain.vertices.push_back(v3 / 10.0f);
 
             glm::vec3 n1 = glm::cross(v2 - v1, v3 - v1);
             this->normals.push_back(n1);
             this->normals.push_back(n1);
             this->normals.push_back(n1);
+            this->modelTerrain.countNormals += 3;
+            this->modelTerrain.normals.push_back(n1);
+            this->modelTerrain.normals.push_back(n1);
+            this->modelTerrain.normals.push_back(n1);
 
+            this->indices.push_back(vertIndex);
+            vertIndex += 1;
+            this->modelTerrain.countIndices += 1;
+            this->modelTerrain.indices.push_back(vertIndex);
+
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+
+            // triangle 2
             glm::vec3 v4 = glm::vec3(x, y, hmValue);
             glm::vec3 v5 = glm::vec3(x, y + 1, hmValue);
             glm::vec3 v6 = glm::vec3(x + 1, y + 1, hmValue);
             this->vertices.push_back(v4 / 10.0f);
             this->vertices.push_back(v5 / 10.0f);
             this->vertices.push_back(v6 / 10.0f);
-            this->indices.push_back(vertIndex);
-            vertIndex += 1;
+            this->modelTerrain.countVertices += 3;
+            this->modelTerrain.vertices.push_back(v4 / 10.0f);
+            this->modelTerrain.vertices.push_back(v5 / 10.0f);
+            this->modelTerrain.vertices.push_back(v6 / 10.0f);
 
             glm::vec3 n2 = glm::cross(v5 - v4, v6 - v4);
             this->normals.push_back(n2);
             this->normals.push_back(n2);
             this->normals.push_back(n2);
+            this->modelTerrain.countNormals += 3;
+            this->modelTerrain.normals.push_back(n2);
+            this->modelTerrain.normals.push_back(n2);
+            this->modelTerrain.normals.push_back(n2);
+
+            this->indices.push_back(vertIndex);
+            vertIndex += 1;
+            this->modelTerrain.countIndices += 1;
+            this->modelTerrain.indices.push_back(vertIndex);
+
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+            this->colors.push_back(color);
 
 //            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
 //                   v1.x, v1.y, v1.z,
 //                   v3.x, v2.y, v2.z,
 //                   v2.x, v3.y, v3.z);
-
-            utils::Color c = image.GetValue(x, y);
-            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            this->colors.push_back(color);
-            this->colors.push_back(color);
-            this->colors.push_back(color);
         }
     }
+
+    MeshModelMaterial material;
+    material.MaterialID = 1;
+    material.MaterialTitle = "MaterialTerrain";
+    material.AmbientColor = glm::vec3(0.7f);
+    material.DiffuseColor = glm::vec3(0.7f);
+    material.IlluminationMode = 2;
+    material.OpticalDensity = 1.0;
+    material.Transparency = 1.0f;
+    this->modelTerrain.ModelMaterial = material;
 
 //    std::ofstream out(assetsFolder + "/terrain.txt");
 //    out << grapher;
