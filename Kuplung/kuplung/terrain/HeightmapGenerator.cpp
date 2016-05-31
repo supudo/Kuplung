@@ -57,7 +57,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
-    heightMapBuilder.SetDestSize(140, 140);
+    heightMapBuilder.SetDestSize(20, 20);
     heightMapBuilder.SetBounds(2.0, 6.0, 1.0, 5.0);
 //    heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
     heightMapBuilder.Build();
@@ -124,7 +124,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->colors.clear();
     this->indices.clear();
 
-//    std::string grapher = "";
+    std::string grapher = "";
 
     this->modelTerrain = {};
 
@@ -136,14 +136,71 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->modelTerrain.MaterialTitle = "MaterialTerrain";
     this->modelTerrain.ModelTitle = "Terrain";
 
+    static const double pi = glm::pi<double>();
+    static const double pi_2 = glm::half_pi<double>();
+
+    const float rr = 1.0f / float(heightmapHeight - 1);
+    const float ss = 1.0f / float(heightmapWidth - 1);
+
+    /*
+    // sphere generation
+    std::vector<float> hmValues;
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10;
+            hmValues.push_back(hmValue);
+
             utils::Color c = image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            glm::vec2 uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
 
             // triangle 1
+            glm::vec3 point(
+                        float(cos(2 * pi * x * ss) * sin(pi * y * rr)),
+                        float(sin(-pi_2 + pi * y * rr)),
+                        float(sin(2 * pi * x * ss) * sin(pi * y * rr))
+                    );
+
+            this->vertices.push_back(point * hmValue);
+            this->modelTerrain.countVertices += 1;
+            this->modelTerrain.vertices.push_back(point * hmValue);
+
+            uv = glm::vec2(x * ss, y * rr);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.countTextureCoordinates += 1;
+
+            this->normals.push_back(point);
+            this->modelTerrain.countNormals += 1;
+
+            this->indices.push_back(vertIndex);
+            vertIndex += 1;
+            this->modelTerrain.countIndices += 1;
+            this->modelTerrain.indices.push_back(vertIndex);
+
+            this->colors.push_back(color);
+
+            grapher += Settings::Instance()->string_format(" %f,%f,%f \n", point.x, point.y, point.z);
+        }
+    }
+    */
+
+    int vertIndex = 0;
+    for (int y=0; y<heightmapHeight; ++y) {
+        for (int x=0; x<heightmapWidth; ++x) {
+            float hmValue = heightMap.GetValue(x, y) * 10;
+
+            utils::Color c = image.GetValue(x, y);
+            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            glm::vec2 uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
+
+    // triangle 1
+            glm::vec3 point(
+                        float(cos(2 * pi * x * ss) * sin(pi * y * rr)),
+                        float(sin(-pi_2 + pi * y * rr)),
+                        float(sin(2 * pi * x * ss) * sin(pi * y * rr))
+                    );
+
             glm::vec3 v1 = glm::vec3(x, y, hmValue);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
@@ -154,6 +211,12 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.vertices.push_back(v1 / 10.0f);
             this->modelTerrain.vertices.push_back(v2 / 10.0f);
             this->modelTerrain.vertices.push_back(v3 / 10.0f);
+
+            uv = glm::vec2(x * ss, y * rr);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.countTextureCoordinates += 3;
 
             glm::vec3 n1 = glm::cross(v2 - v1, v3 - v1);
             this->normals.push_back(n1);
@@ -173,17 +236,22 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->colors.push_back(color);
             this->colors.push_back(color);
 
-            // triangle 2
+    // triangle 2
             glm::vec3 v4 = glm::vec3(x, y, hmValue);
             glm::vec3 v5 = glm::vec3(x, y + 1, hmValue);
             glm::vec3 v6 = glm::vec3(x + 1, y + 1, hmValue);
             this->vertices.push_back(v4 / 10.0f);
-            this->vertices.push_back(v5 / 10.0f);
             this->vertices.push_back(v6 / 10.0f);
+            this->vertices.push_back(v5 / 10.0f);
             this->modelTerrain.countVertices += 3;
             this->modelTerrain.vertices.push_back(v4 / 10.0f);
             this->modelTerrain.vertices.push_back(v5 / 10.0f);
             this->modelTerrain.vertices.push_back(v6 / 10.0f);
+
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.texture_coordinates.push_back(uv);
+            this->modelTerrain.countTextureCoordinates += 3;
 
             glm::vec3 n2 = glm::cross(v5 - v4, v6 - v4);
             this->normals.push_back(n2);
@@ -203,10 +271,15 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->colors.push_back(color);
             this->colors.push_back(color);
 
-//            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-//                   v1.x, v1.y, v1.z,
-//                   v3.x, v2.y, v2.z,
-//                   v2.x, v3.y, v3.z);
+            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                   v1.x, v1.y, v1.z,
+                   v3.x, v2.y, v2.z,
+                   v2.x, v3.y, v3.z);
+
+            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                   v4.x, v4.y, v4.z,
+                   v5.x, v5.y, v5.z,
+                   v6.x, v6.y, v6.z);
         }
     }
 
@@ -218,9 +291,16 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     material.IlluminationMode = 2;
     material.OpticalDensity = 1.0;
     material.Transparency = 1.0f;
+    MeshMaterialTextureImage textureDiffuse;
+    textureDiffuse.Image = this->heightmapImage;
+    textureDiffuse.Filename = this->heightmapImage;
+    textureDiffuse.Width = heightmapWidth;
+    textureDiffuse.Height = heightmapHeight;
+    textureDiffuse.UseTexture = true;
+    material.TextureDiffuse = textureDiffuse;
     this->modelTerrain.ModelMaterial = material;
 
-//    std::ofstream out(assetsFolder + "/terrain.txt");
-//    out << grapher;
-//    out.close();
+    std::ofstream out(assetsFolder + "/terrain.txt");
+    out << grapher;
+    out.close();
 }

@@ -404,7 +404,7 @@ void Kuplung::initSceneGUI() {
 //    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
 //    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 
-//    // terrain as object
+    // terrain as object
 //    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 1.0, 1.0);
 //    ModelFace *mmf = new ModelFace();
 //    mmf->dataVertices = this->managerObjects->grid->dataVertices;
