@@ -31,7 +31,7 @@ public:
 
     std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
-    bool wireframesMode, logDebugInfo, logFileBrowser, ShowBoundingBox, BoundingBoxRefresh, showPickRays;
+    bool wireframesMode, logDebugInfo, logFileBrowser, ShowBoundingBox, BoundingBoxRefresh, showPickRays, Terrain_HeightmapImageHistory;
     Color guiClearColor;
     int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
     int frameLog_Width, frameLog_Height;

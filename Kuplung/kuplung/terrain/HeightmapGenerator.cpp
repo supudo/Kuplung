@@ -79,19 +79,24 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     }
     renderer.Render();
 
-    time_t t = time(0);
-    struct tm * now = localtime(&t);
+    std::string filename;
+    if (Settings::Instance()->Terrain_HeightmapImageHistory) {
+        time_t t = time(0);
+        struct tm * now = localtime(&t);
 
-    int year = now->tm_year + 1900;
-    int month = now->tm_mon + 1;
-    int day = now->tm_mday;
-    int hour = now->tm_hour;
-    int minute = now->tm_min;
-    int seconds = now->tm_sec;
+        int year = now->tm_year + 1900;
+        int month = now->tm_mon + 1;
+        int day = now->tm_mday;
+        int hour = now->tm_hour;
+        int minute = now->tm_min;
+        int seconds = now->tm_sec;
 
-    std::string fileSuffix = std::to_string(year) + std::to_string(month) + std::to_string(day) +
-                             std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
-    std::string filename = "terrain_heightmap_" + fileSuffix + ".bmp";
+        std::string fileSuffix = std::to_string(year) + std::to_string(month) + std::to_string(day) +
+                                 std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
+        filename = "terrain_heightmap_" + fileSuffix + ".bmp";
+    }
+    else
+        filename = "terrain_heightmap.bmp";
     this->heightmapImage = assetsFolder + "/" + filename;
 
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = %i, F = %f, P = %f] = %s",

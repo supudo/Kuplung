@@ -45,6 +45,7 @@ void Settings::initSettings() {
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
     m_pInstance->logFileBrowser = m_pInstance->cfgUtils->readBool("logFileBrowser");
     m_pInstance->showPickRays = m_pInstance->cfgUtils->readBool("showPickRays");
+    m_pInstance->Terrain_HeightmapImageHistory = m_pInstance->cfgUtils->readBool("Terrain_HeightmapImageHistory");
 
     m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
     m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
@@ -108,6 +109,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);
     this->cfgUtils->writeBool("logFileBrowser", this->logFileBrowser);
     this->cfgUtils->writeBool("showPickRays", this->showPickRays);
+    this->cfgUtils->writeBool("Terrain_HeightmapImageHistory", this->Terrain_HeightmapImageHistory);
 
     this->cfgUtils->writeBool("ShowBoundingBox", this->ShowBoundingBox);
     this->cfgUtils->writeFloat("BoundingBoxPadding", this->BoundingBoxPadding);
