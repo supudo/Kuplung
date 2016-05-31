@@ -529,6 +529,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             if (this->generateNewTerrain) {
                 this->managerObjects->generateTerrain();
+                this->heightmapImage = this->managerObjects->terrain->heightmapImage;
+                this->newHeightmap = true;
                 this->generateNewTerrain = false;
             }
             if (this->managerObjects->showTerrain) {
@@ -544,7 +546,25 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this->heightmapWidth, this->heightmapHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+                        GLuint textureFormat = 0;
+                        switch (tChannels) {
+                            case 1:
+                                textureFormat = GL_LUMINANCE;
+                                break;
+                            case 2:
+                                textureFormat = GL_LUMINANCE_ALPHA;
+                                break;
+                            case 3:
+                                textureFormat = GL_RGB;
+                                break;
+                            case 4:
+                                textureFormat = GL_RGBA;
+                                break;
+                            default:
+                                textureFormat = GL_RGB;
+                                break;
+                        }
+                        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->heightmapWidth, this->heightmapHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
                         glGenerateMipmap(GL_TEXTURE_2D);
                         stbi_image_free(tPixels);
                     }

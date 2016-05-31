@@ -18,7 +18,7 @@ public:
     ~HeightmapGenerator();
     void initPosition();
     void initSettings();
-    void generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical);
+    void generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical, int width, int height);
     std::vector<glm::vec3> vertices, normals, colors;
     std::vector<int> indices;
     std::string heightmapImage;

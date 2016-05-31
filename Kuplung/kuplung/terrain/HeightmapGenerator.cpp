@@ -6,7 +6,6 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-
 // http://www.chadvernon.com/blog/resources/directx9/terrain-generation-with-a-heightmap/
 // http://www.rastertek.com/tertut02.html
 
@@ -27,20 +26,20 @@ void HeightmapGenerator::initPosition() {
     this->position_y1 = 1.0;
     this->position_y2 = 5.0;
 
-    this->Setting_Octaves = 6;
-    this->Setting_Frequency = 1.0f;
+    this->Setting_Octaves = 3;
+    this->Setting_Frequency = 2.0f;
     this->Setting_Persistence = 0.5f;
-    this->Setting_ColorTerrain = false;
+    this->Setting_ColorTerrain = true;
 }
 
 void HeightmapGenerator::initSettings() {
-    this->Setting_Octaves = 1;
-    this->Setting_Frequency = 1.0f;
-    this->Setting_Persistence = 1.0f;
-    this->Setting_ColorTerrain = false;
+    this->Setting_Octaves = 3;
+    this->Setting_Frequency = 2.0f;
+    this->Setting_Persistence = 0.5f;
+    this->Setting_ColorTerrain = true;
 }
 
-void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical) {
+void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical, int width, int height) {
     this->position_x1 += offsetHorizontal;
     this->position_x2 += offsetHorizontal;
     this->position_y1 += offsetVertical;
@@ -49,16 +48,16 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     module::Perlin perlinNoiser;
 
     perlinNoiser.SetOctaveCount(this->Setting_Octaves);
-    perlinNoiser.SetFrequency((double)this->Setting_Frequency);
-    perlinNoiser.SetPersistence((double)this->Setting_Persistence);
+    perlinNoiser.SetFrequency(double(this->Setting_Frequency));
+    perlinNoiser.SetPersistence(double(this->Setting_Persistence));
 
     // heightmap
     utils::NoiseMap heightMap;
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
-    heightMapBuilder.SetDestSize(20, 20);
-    heightMapBuilder.SetBounds(2.0, 6.0, 1.0, 5.0);
+    heightMapBuilder.SetDestSize(width, height);
+    heightMapBuilder.SetBounds(0.0, 1.0, 0.0, 1.0);
 //    heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
     heightMapBuilder.Build();
 
@@ -102,8 +101,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
 
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = %i, F = %f, P = %f] = %s",
                                                                         this->Setting_Octaves,
-                                                                        (double)this->Setting_Frequency,
-                                                                        (double)this->Setting_Persistence,
+                                                                        double(this->Setting_Frequency),
+                                                                        double(this->Setting_Persistence),
                                                                         this->heightmapImage.c_str()));
 
 #ifdef _WIN32
@@ -116,6 +115,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     writer.WriteDestFile();
 
     // vertices, colors, indices
+
     int heightmapHeight = heightMap.GetHeight();
     int heightmapWidth = heightMap.GetWidth();
 
@@ -136,14 +136,14 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     this->modelTerrain.MaterialTitle = "MaterialTerrain";
     this->modelTerrain.ModelTitle = "Terrain";
 
-    static const double pi = glm::pi<double>();
-    static const double pi_2 = glm::half_pi<double>();
-
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
 
     /*
     // sphere generation
+    static const double pi = glm::pi<double>();
+    static const double pi_2 = glm::half_pi<double>();
+
     std::vector<float> hmValues;
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
@@ -185,26 +185,27 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     }
     */
 
+    float divisionCoeficient = 10.0f;
     int vertIndex = 0;
-    for (int y=0; y<heightmapHeight; ++y) {
+    for (int y=0; y<heightmapHeight * 3; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10;
 
             utils::Color c = image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            glm::vec2 uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
+            glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
 
     // triangle 1
             glm::vec3 v1 = glm::vec3(x, y, hmValue);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
-            this->vertices.push_back(v1 / 10.0f);
-            this->vertices.push_back(v2 / 10.0f);
-            this->vertices.push_back(v3 / 10.0f);
+            this->vertices.push_back(v1 / divisionCoeficient);
+            this->vertices.push_back(v2 / divisionCoeficient);
+            this->vertices.push_back(v3 / divisionCoeficient);
             this->modelTerrain.countVertices += 3;
-            this->modelTerrain.vertices.push_back(v1 / 10.0f);
-            this->modelTerrain.vertices.push_back(v2 / 10.0f);
-            this->modelTerrain.vertices.push_back(v3 / 10.0f);
+            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
 
             uv = glm::vec2(x * ss, y * rr);
             this->modelTerrain.texture_coordinates.push_back(uv);
@@ -230,17 +231,22 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->colors.push_back(color);
             this->colors.push_back(color);
 
+            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                   v1.x, v1.y, v1.z,
+                   v3.x, v2.y, v2.z,
+                   v2.x, v3.y, v3.z);
+
     // triangle 2
             glm::vec3 v4 = glm::vec3(x, y, hmValue);
             glm::vec3 v5 = glm::vec3(x, y + 1, hmValue);
             glm::vec3 v6 = glm::vec3(x + 1, y + 1, hmValue);
-            this->vertices.push_back(v4 / 10.0f);
-            this->vertices.push_back(v6 / 10.0f);
-            this->vertices.push_back(v5 / 10.0f);
+            this->vertices.push_back(v4 / divisionCoeficient);
+            this->vertices.push_back(v6 / divisionCoeficient);
+            this->vertices.push_back(v5 / divisionCoeficient);
             this->modelTerrain.countVertices += 3;
-            this->modelTerrain.vertices.push_back(v4 / 10.0f);
-            this->modelTerrain.vertices.push_back(v5 / 10.0f);
-            this->modelTerrain.vertices.push_back(v6 / 10.0f);
+            this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v5 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v6 / divisionCoeficient);
 
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
@@ -264,11 +270,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->colors.push_back(color);
             this->colors.push_back(color);
             this->colors.push_back(color);
-
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v1.x, v1.y, v1.z,
-                   v3.x, v2.y, v2.z,
-                   v2.x, v3.y, v3.z);
 
             grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
                    v4.x, v4.y, v4.z,
