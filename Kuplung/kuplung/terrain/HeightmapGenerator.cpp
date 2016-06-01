@@ -197,6 +197,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
 
+            // counter clockwise direction
             glm::vec3 v1 = glm::vec3(x, y, hmValue);// * balanceCoeficient);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);// * balanceCoeficient);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
