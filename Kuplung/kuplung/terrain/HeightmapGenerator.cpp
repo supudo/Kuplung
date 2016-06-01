@@ -184,6 +184,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     float balanceCoeficient = 0.5f;
     float divisionCoeficient = 10.0f;
     int vertIndex = 0;
+    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+
     for (int y=0; y<heightmapHeight * 3; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10.0f;
@@ -194,10 +196,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             uv = glm::vec2(x * ss, y * rr);
 
             // counter clockwise direction
-            glm::vec3 v1 = glm::vec3(x, y, hmValue * balanceCoeficient);
-            glm::vec3 v2 = glm::vec3(x + 1, y, hmValue * balanceCoeficient);
-            glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
-            glm::vec3 v4 = glm::vec3(x, y + 1, hmValue);
+            glm::vec3 v1 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
+            glm::vec3 v2 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue * balanceCoeficient);
+            glm::vec3 v3 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue);
+            glm::vec3 v4 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue);
             glm::vec3 n = glm::cross(v2 - v1, v3 - v1);
 
     // triangle 1
