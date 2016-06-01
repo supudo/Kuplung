@@ -204,30 +204,32 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v1 / divisionCoeficient);
             this->vertices.push_back(v2 / divisionCoeficient);
             this->vertices.push_back(v3 / divisionCoeficient);
-            this->modelTerrain.countVertices += 3;
-            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
 
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
+
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+
+            this->indices.push_back(vertIndex);
+
+            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
+            this->modelTerrain.countVertices += 3;
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.countTextureCoordinates += 3;
-
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-            this->normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
             this->modelTerrain.countNormals += 3;
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-
-            this->indices.push_back(vertIndex);
             this->modelTerrain.indices.push_back(vertIndex);
             this->modelTerrain.countIndices += 1;
+
             vertIndex += 1;
 
             this->colors.push_back(color);
@@ -243,30 +245,32 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v1 / divisionCoeficient);
             this->vertices.push_back(v3 / divisionCoeficient);
             this->vertices.push_back(v4 / divisionCoeficient);
-            this->modelTerrain.countVertices += 3;
-            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
 
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
+
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+
+            this->indices.push_back(vertIndex);
+
+            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
+            this->modelTerrain.countVertices += 3;
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.countTextureCoordinates += 3;
-
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-            this->normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
             this->modelTerrain.countNormals += 3;
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-
-            this->indices.push_back(vertIndex);
             this->modelTerrain.indices.push_back(vertIndex);
             this->modelTerrain.countIndices += 1;
+
             vertIndex += 1;
 
             this->colors.push_back(color);
