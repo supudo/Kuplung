@@ -522,13 +522,6 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
                 ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
-                ImGui::Separator();
-                this->helperUI->addControlsIntegerSliderSameLine("W", 4, 10, 256, &this->managerObjects->Setting_TerrainWidth);
-                this->helperUI->addControlsIntegerSliderSameLine("H", 5, 10, 256, &this->managerObjects->Setting_TerrainHeight);
-                ImGui::Separator();
-                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
-                this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
-                this->helperUI->addControlsFloatSlider("Persistence", 3, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
             }
 
             if (this->generateNewTerrain) {
@@ -537,6 +530,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 this->newHeightmap = true;
                 this->generateNewTerrain = false;
             }
+
             if (this->managerObjects->showTerrain) {
                 if (this->newHeightmap && this->heightmapImage != "") {
                     int tChannels;
@@ -577,6 +571,16 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Text("Heightmap");
                 ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
                 this->newHeightmap = false;
+            }
+
+            if (this->managerObjects->showTerrain) {
+                ImGui::Separator();
+                this->helperUI->addControlsIntegerSliderSameLine("W", 4, 10, 256, &this->managerObjects->Setting_TerrainWidth);
+                this->helperUI->addControlsIntegerSliderSameLine("H", 5, 10, 256, &this->managerObjects->Setting_TerrainHeight);
+                ImGui::Separator();
+                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
+                this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
+                this->helperUI->addControlsFloatSlider("Persistence", 3, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
             }
             break;
         }
