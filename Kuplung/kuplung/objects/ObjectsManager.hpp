@@ -66,6 +66,7 @@ public:
     float Setting_RatioWidth = 4.0f, Setting_RatioHeight = 3.0f;
     float Setting_PlaneClose = 0.1f, Setting_PlaneFar = 100.0f;
     int Setting_GridSize = 30, Setting_Skybox = 0;
+    int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
     glm::vec4 Setting_OutlineColor;
     glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;

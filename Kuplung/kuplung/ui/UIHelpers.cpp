@@ -43,6 +43,16 @@ bool UIHelpers::addControlsIntegerSlider(std::string title, int idx, int min, in
     return ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
+bool UIHelpers::addControlsIntegerSliderSameLine(std::string title, int idx, int min, int limit, int* animatedValue) {
+    std::string s_id = "##10" + std::to_string(idx);
+    bool result = ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
+    if (title != "") {
+        ImGui::SameLine();
+        ImGui::Text("%s", title.c_str());
+    }
+    return result;
+}
+
 bool UIHelpers::addControlsFloatSlider(std::string title, int idx, float min, float limit, float* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());

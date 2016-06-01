@@ -27,6 +27,7 @@ public:
     bool addControlsFloatSlider(std::string title, int idx, float min, float limit, float* animatedValue);
     bool addControlsFloatSliderSameLine(std::string title, int idx, float min, float limit, float* animatedValue);
     bool addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue);
+    bool addControlsIntegerSliderSameLine(std::string title, int idx, int min, int limit, int* animatedValue);
     bool addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
     void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
     void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);

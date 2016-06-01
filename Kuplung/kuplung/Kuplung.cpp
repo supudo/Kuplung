@@ -622,10 +622,6 @@ void Kuplung::guiEditorshaderCompiled(std::string fileName) {
     else if (fileName.compare(0, 4, "dots") == 0) {
     }
     else if (fileName.compare(0, 7, "terrain") == 0) {
-        this->terrain->destroy();
-        this->terrain->init();
-        this->terrain->initShaderProgram();
-        this->terrain->initBuffers(std::string(Settings::Instance()->appFolder()));
     }
 }
 

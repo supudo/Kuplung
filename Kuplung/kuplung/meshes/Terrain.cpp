@@ -100,11 +100,11 @@ bool Terrain::initShaderProgram() {
     return success;
 }
 
-void Terrain::initBuffers(std::string assetsFolder) {
+void Terrain::initBuffers(std::string assetsFolder, int width, int height) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->terrainGenerator->generateTerrain(assetsFolder, 0, 0, 100, 100);
+    this->terrainGenerator->generateTerrain(assetsFolder, 0, 0, width, height);
     this->heightmapImage = this->terrainGenerator->heightmapImage;
 
     // vertices

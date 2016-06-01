@@ -125,6 +125,8 @@ void ObjectsManager::resetSettings() {
     this->Setting_PlaneClose = 0.1f;
     this->Setting_PlaneFar = 100.0f;
     this->Setting_GridSize = 30;
+    this->Setting_TerrainWidth = 100;
+    this->Setting_TerrainHeight = 100;
     this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UIAmbientLight = glm::vec3(0.2f);
     this->Setting_FixedGridWorld = true;
@@ -274,7 +276,7 @@ void ObjectsManager::initTerrain() {
 }
 
 void ObjectsManager::generateTerrain() {
-    this->terrain->initBuffers(Settings::Instance()->currentFolder);
+    this->terrain->initBuffers(Settings::Instance()->currentFolder, this->Setting_TerrainWidth, this->Setting_TerrainHeight);
 }
 
 /*
