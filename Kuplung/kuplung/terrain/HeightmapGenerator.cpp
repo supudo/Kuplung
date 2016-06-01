@@ -53,7 +53,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
     heightMapBuilder.SetDestSize(width, height);
-//    heightMapBuilder.SetBounds(0.0, 1.0, 0.0, 1.0);
     heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
     heightMapBuilder.Build();
 
