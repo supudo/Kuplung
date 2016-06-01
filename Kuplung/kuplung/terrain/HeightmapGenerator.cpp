@@ -196,15 +196,14 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             utils::Color c = image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
+            uv = glm::vec2(x * ss, y * rr);
 
             // counter clockwise direction
             glm::vec3 v1 = glm::vec3(x, y, hmValue * balanceCoeficient);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue * balanceCoeficient);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
-
-            glm::vec3 v4 = v1;
-            glm::vec3 v5 = v3;
-            glm::vec3 v6 = glm::vec3(x, y + 1, hmValue);
+            glm::vec3 v4 = glm::vec3(x, y + 1, hmValue);
+            glm::vec3 n = glm::cross(v2 - v1, v3 - v1);
 
     // triangle 1
             this->vertices.push_back(v1 / divisionCoeficient);
@@ -215,7 +214,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
             this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
 
-            uv = glm::vec2(x * ss, y * rr);
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
@@ -224,14 +222,13 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.countTextureCoordinates += 3;
 
-            glm::vec3 n1 = glm::cross(v2 - v1, v3 - v1);
-            this->normals.push_back(n1);
-            this->normals.push_back(n1);
-            this->normals.push_back(n1);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
             this->modelTerrain.countNormals += 3;
-            this->modelTerrain.normals.push_back(n1);
-            this->modelTerrain.normals.push_back(n1);
-            this->modelTerrain.normals.push_back(n1);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
 
             this->indices.push_back(vertIndex);
             this->modelTerrain.indices.push_back(vertIndex);
@@ -248,13 +245,13 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
                    v2.x, v3.y, v3.z);
 
     // triangle 2
+            this->vertices.push_back(v1 / divisionCoeficient);
+            this->vertices.push_back(v3 / divisionCoeficient);
             this->vertices.push_back(v4 / divisionCoeficient);
-            this->vertices.push_back(v5 / divisionCoeficient);
-            this->vertices.push_back(v6 / divisionCoeficient);
             this->modelTerrain.countVertices += 3;
+            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
+            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
             this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v5 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v6 / divisionCoeficient);
 
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
@@ -264,14 +261,13 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.countTextureCoordinates += 3;
 
-            glm::vec3 n2 = glm::cross(v5 - v4, v6 - v4);
-            this->normals.push_back(n2);
-            this->normals.push_back(n2);
-            this->normals.push_back(n2);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
             this->modelTerrain.countNormals += 3;
-            this->modelTerrain.normals.push_back(n2);
-            this->modelTerrain.normals.push_back(n2);
-            this->modelTerrain.normals.push_back(n2);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
+            this->modelTerrain.normals.push_back(n);
 
             this->indices.push_back(vertIndex);
             this->modelTerrain.indices.push_back(vertIndex);
@@ -283,9 +279,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->colors.push_back(color);
 
             grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v4.x, v4.y, v4.z,
-                   v5.x, v5.y, v5.z,
-                   v6.x, v6.y, v6.z);
+                   v1.x, v1.y, v1.z,
+                   v3.x, v3.y, v3.z,
+                   v4.x, v4.y, v4.z);
         }
     }
 
