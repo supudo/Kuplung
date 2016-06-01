@@ -26,8 +26,7 @@ class HeightmapGenerator {
 public:
     ~HeightmapGenerator();
     void initPosition();
-    void initSettings();
-    void generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical, int width, int height);
+    void generateTerrain(std::string assetsFolder, int width, int height);
 
     std::vector<glm::vec3> vertices, normals, colors;
     std::vector<glm::vec2> uvs;
@@ -35,16 +34,16 @@ public:
     std::string heightmapImage;
 
     int Setting_Octaves;
-    float Setting_Frequency;
-    float Setting_Persistence;
+    float Setting_Frequency, Setting_Persistence;
     bool Setting_ColorTerrain;
+    float Setting_OffsetHorizontal, Setting_OffsetVertical;
     MeshModel modelTerrain;
 
 private:
-    double position_x1;
-    double position_x2;
-    double position_y1;
-    double position_y2;
+    float position_x1;
+    float position_x2;
+    float position_y1;
+    float position_y2;
 
     bool getSimilarVertexIndex(PackedTerrainPoint & packed, std::map<PackedTerrainPoint, unsigned int> & vertexToOutIndex, unsigned int & result);
 };

@@ -62,7 +62,7 @@ bool UIHelpers::addControlsFloatSlider(std::string title, int idx, float min, fl
 
 bool UIHelpers::addControlsFloatSliderSameLine(std::string title, int idx, float min, float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
-    bool result = ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
+    bool result = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit, "%.03f");
     if (title != "") {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());

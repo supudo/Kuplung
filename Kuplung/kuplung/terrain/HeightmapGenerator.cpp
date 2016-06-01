@@ -21,29 +21,25 @@ HeightmapGenerator::~HeightmapGenerator() {
 }
 
 void HeightmapGenerator::initPosition() {
-    this->position_x1 = 6.0;
-    this->position_x2 = 10.0;
-    this->position_y1 = 1.0;
-    this->position_y2 = 5.0;
+    this->position_x1 = 0.0f;
+    this->position_x2 = 1.0f;
+    this->position_y1 = 0.0f;
+    this->position_y2 = 1.0f;
 
     this->Setting_Octaves = 3;
     this->Setting_Frequency = 2.0f;
     this->Setting_Persistence = 0.5f;
     this->Setting_ColorTerrain = true;
+
+    this->Setting_OffsetHorizontal = 0.0f;
+    this->Setting_OffsetVertical = 0.0f;
 }
 
-void HeightmapGenerator::initSettings() {
-    this->Setting_Octaves = 3;
-    this->Setting_Frequency = 2.0f;
-    this->Setting_Persistence = 0.5f;
-    this->Setting_ColorTerrain = true;
-}
-
-void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical, int width, int height) {
-    this->position_x1 += offsetHorizontal;
-    this->position_x2 += offsetHorizontal;
-    this->position_y1 += offsetVertical;
-    this->position_y2 += offsetVertical;
+void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, int height) {
+    this->position_x1 += this->Setting_OffsetHorizontal;
+    this->position_x2 += this->Setting_OffsetHorizontal;
+    this->position_y1 += this->Setting_OffsetVertical;
+    this->position_y2 += this->Setting_OffsetVertical;
 
     module::Perlin perlinNoiser;
 
@@ -57,8 +53,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     heightMapBuilder.SetSourceModule(perlinNoiser);
     heightMapBuilder.SetDestNoiseMap(heightMap);
     heightMapBuilder.SetDestSize(width, height);
-    heightMapBuilder.SetBounds(0.0, 1.0, 0.0, 1.0);
-//    heightMapBuilder.SetBounds(this->position_x1, this->position_x2, this->position_y1, this->position_y2);
+//    heightMapBuilder.SetBounds(0.0, 1.0, 0.0, 1.0);
+    heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
     heightMapBuilder.Build();
 
     // render

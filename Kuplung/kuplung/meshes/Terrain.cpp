@@ -46,7 +46,7 @@ void Terrain::destroy() {
 void Terrain::init() {
     this->glUtils = new GLUtils();
     this->terrainGenerator = new HeightmapGenerator();
-    this->terrainGenerator->initSettings();
+    this->terrainGenerator->initPosition();
 
     this->Setting_UseTexture = false;
 }
@@ -104,7 +104,7 @@ void Terrain::initBuffers(std::string assetsFolder, int width, int height) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->terrainGenerator->generateTerrain(assetsFolder, 0, 0, width, height);
+    this->terrainGenerator->generateTerrain(assetsFolder, width, height);
     this->heightmapImage = this->terrainGenerator->heightmapImage;
 
     // vertices

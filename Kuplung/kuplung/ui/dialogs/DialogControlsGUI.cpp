@@ -575,12 +575,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             if (this->managerObjects->showTerrain) {
                 ImGui::Separator();
-                this->helperUI->addControlsIntegerSliderSameLine("W", 4, 10, 256, &this->managerObjects->Setting_TerrainWidth);
-                this->helperUI->addControlsIntegerSliderSameLine("H", 5, 10, 256, &this->managerObjects->Setting_TerrainHeight);
+                ImGui::Text("Map Dimensions");
+                this->helperUI->addControlsIntegerSliderSameLine("X", 1, 10, 256, &this->managerObjects->Setting_TerrainWidth);
+                this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 10, 256, &this->managerObjects->Setting_TerrainHeight);
                 ImGui::Separator();
-                this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
-                this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
-                this->helperUI->addControlsFloatSlider("Persistence", 3, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
+                ImGui::Text("Terrain Map Offset");
+                this->helperUI->addControlsFloatSliderSameLine("X", 3, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
+                this->helperUI->addControlsFloatSliderSameLine("Y", 4, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
+                ImGui::Separator();
+                this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
+                this->helperUI->addControlsFloatSlider("Frequency", 6, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
+                this->helperUI->addControlsFloatSlider("Persistence", 7, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
             }
             break;
         }
