@@ -286,6 +286,30 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
         }
     }
 
+//    std::map<PackedTerrainPoint, unsigned int> vertexToOutIndex;
+//    std::vector<glm::vec3> outVertices, outNormals;
+//    std::vector<glm::vec2> outTextureCoordinates;
+//    for (size_t i=0; i<this->vertices.size(); i++) {
+//        PackedTerrainPoint packed = { this->vertices[i], this->uvs[i], this->normals[i] };
+
+//        unsigned int index;
+//        bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
+//        if (found)
+//            this->indices.push_back(index);
+//        else {
+//            outVertices.push_back(this->vertices[i]);
+//            outTextureCoordinates.push_back(this->uvs[i]);
+//            outNormals.push_back(this->normals[i]);
+//            unsigned int newIndex = (unsigned int)outVertices.size() - 1;
+//            this->indices.push_back(newIndex);
+//            vertexToOutIndex[packed] = newIndex;
+//        }
+//    }
+//    this->vertices = outVertices;
+//    this->uvs = outTextureCoordinates;
+//    this->normals = outNormals;
+//    this->indices = this->indices;
+
     MeshModelMaterial material;
     material.MaterialID = 1;
     material.MaterialTitle = "MaterialTerrain";
@@ -306,4 +330,14 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     std::ofstream out(assetsFolder + "/terrain.txt");
     out << grapher;
     out.close();
+}
+
+bool HeightmapGenerator::getSimilarVertexIndex(PackedTerrainPoint & packed, std::map<PackedTerrainPoint, unsigned int> & vertexToOutIndex, unsigned int & result) {
+    std::map<PackedTerrainPoint, unsigned int>::iterator it = vertexToOutIndex.find(packed);
+    if (it == vertexToOutIndex.end())
+        return false;
+    else {
+        result = it->second;
+        return true;
+    }
 }
