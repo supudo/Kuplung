@@ -25,14 +25,17 @@ public:
     std::string heightmapImage;
     HeightmapGenerator *terrainGenerator;
 
+    bool Setting_UseTexture;
+
 private:
     GLUtils *glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboColors, vboIndices;
+    GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
     GLint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
+    GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
     std::string readFile(const char *filePath);
 };

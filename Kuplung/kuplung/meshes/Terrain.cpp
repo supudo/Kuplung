@@ -11,6 +11,9 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#define STBI_FAILURE_USERMSG
+#include "kuplung/utilities/stb/stb_image.h"
+
 #pragma mark - Destroy
 
 Terrain::~Terrain() {
@@ -20,10 +23,12 @@ Terrain::~Terrain() {
 void Terrain::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboTextureCoordinates);
     glDeleteBuffers(1, &this->vboColors);
     glDeleteBuffers(1, &this->vboIndices);
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(this->glAttributeTextureCoord);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -42,6 +47,8 @@ void Terrain::init() {
     this->glUtils = new GLUtils();
     this->terrainGenerator = new HeightmapGenerator();
     this->terrainGenerator->initSettings();
+
+    this->Setting_UseTexture = false;
 }
 
 #pragma mark - Public
@@ -78,6 +85,9 @@ bool Terrain::initShaderProgram() {
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
+        this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "a_textureCoord");
+        this->glUniformHasTexture = this->glUtils->glGetUniform(this->shaderProgram, "has_texture");
+        this->glUniformSamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
         this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_color");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
@@ -111,6 +121,49 @@ void Terrain::initBuffers(std::string assetsFolder) {
     glEnableVertexAttribArray(this->glAttributeVertexNormal);
     glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
+    // texture
+    glGenBuffers(1, &this->vboTextureCoordinates);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
+    glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->uvs.size() * sizeof(glm::vec2), &this->terrainGenerator->uvs[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(this->glAttributeTextureCoord);
+    glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    //this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
+
+    std::string matImageLocal = this->terrainGenerator->heightmapImage;
+    int tWidth, tHeight, tChannels;
+    unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
+    if (!tPixels)
+        Settings::Instance()->funcDoLog("Can't load terrain texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
+    else {
+        glGenTextures(1, &this->vboTextureDiffuse);
+        glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        GLint textureFormat = 0;
+        switch (tChannels) {
+            case 1:
+                textureFormat = GL_LUMINANCE;
+                break;
+            case 2:
+                textureFormat = GL_LUMINANCE_ALPHA;
+                break;
+            case 3:
+                textureFormat = GL_RGB;
+                break;
+            case 4:
+                textureFormat = GL_RGBA;
+                break;
+            default:
+                textureFormat = GL_RGB;
+                break;
+        }
+        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+        stbi_image_free(tPixels);
+    }
+
     // colors
     glGenBuffers(1, &this->vboColors);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
@@ -139,6 +192,11 @@ void Terrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::ma
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+
+        glUniform1i(this->glUniformHasTexture, this->Setting_UseTexture);
+        glUniform1i(this->glUniformSamplerTexture, 1);
+        glActiveTexture(GL_TEXTURE1);
+        glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
 
         // draw
         glBindVertexArray(this->glVAO);

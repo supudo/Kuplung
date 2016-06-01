@@ -20,6 +20,7 @@ public:
     void initSettings();
     void generateTerrain(std::string assetsFolder, double offsetHorizontal, double offsetVertical, int width, int height);
     std::vector<glm::vec3> vertices, normals, colors;
+    std::vector<glm::vec2> uvs;
     std::vector<int> indices;
     std::string heightmapImage;
 

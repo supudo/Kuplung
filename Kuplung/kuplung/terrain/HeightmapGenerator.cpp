@@ -120,6 +120,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     int heightmapWidth = heightMap.GetWidth();
 
     this->vertices.clear();
+    this->uvs.clear();
     this->normals.clear();
     this->colors.clear();
     this->indices.clear();
@@ -209,6 +210,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
 
             uv = glm::vec2(x * ss, y * rr);
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
@@ -249,6 +253,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.vertices.push_back(v5 / divisionCoeficient);
             this->modelTerrain.vertices.push_back(v6 / divisionCoeficient);
 
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);

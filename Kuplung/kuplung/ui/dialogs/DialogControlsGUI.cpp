@@ -520,7 +520,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Checkbox("Show Terrain", &this->managerObjects->showTerrain);
             if (this->managerObjects->showTerrain) {
                 ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
-                ImGui::Checkbox("Color Terrain", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
+                ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
+                ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
                 ImGui::Separator();
                 this->helperUI->addControlsIntegerSlider("Octaves", 1, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
                 this->helperUI->addControlsFloatSlider("Frequency", 2, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
