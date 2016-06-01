@@ -405,7 +405,7 @@ void Kuplung::initSceneGUI() {
 //    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 
     // terrain as object
-//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 1.0, 1.0);
+//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 1.0, 1.0, 140, 140);
 //    ModelFace *mmf = new ModelFace();
 //    mmf->dataVertices = this->managerObjects->grid->dataVertices;
 //    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;

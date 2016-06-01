@@ -185,19 +185,20 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
     }
     */
 
+    float balanceCoeficient = 0.5f;
     float divisionCoeficient = 10.0f;
     int vertIndex = 0;
     for (int y=0; y<heightmapHeight * 3; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
-            float hmValue = heightMap.GetValue(x, y) * 10;
+            float hmValue = heightMap.GetValue(x, y) * 10.0f;
 
             utils::Color c = image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
 
     // triangle 1
-            glm::vec3 v1 = glm::vec3(x, y, hmValue * 0.5);
-            glm::vec3 v2 = glm::vec3(x + 1, y, hmValue * 0.5);
+            glm::vec3 v1 = glm::vec3(x, y, hmValue * balanceCoeficient);
+            glm::vec3 v2 = glm::vec3(x + 1, y, hmValue * balanceCoeficient);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
             this->vertices.push_back(v1 / divisionCoeficient);
             this->vertices.push_back(v2 / divisionCoeficient);
@@ -223,9 +224,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.normals.push_back(n1);
 
             this->indices.push_back(vertIndex);
-            vertIndex += 1;
-            this->modelTerrain.countIndices += 1;
             this->modelTerrain.indices.push_back(vertIndex);
+            this->modelTerrain.countIndices += 1;
+            vertIndex += 1;
 
             this->colors.push_back(color);
             this->colors.push_back(color);
@@ -237,12 +238,12 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
                    v2.x, v3.y, v3.z);
 
     // triangle 2
-            glm::vec3 v4 = glm::vec3(x, y, hmValue * 0.5);
-            glm::vec3 v5 = glm::vec3(x, y + 1, hmValue);
-            glm::vec3 v6 = glm::vec3(x + 1, y + 1, hmValue);
+            glm::vec3 v4 = glm::vec3(x, y, hmValue * balanceCoeficient);
+            glm::vec3 v5 = glm::vec3(x + 1, y + 1, hmValue);
+            glm::vec3 v6 = glm::vec3(x, y + 1, hmValue);
             this->vertices.push_back(v4 / divisionCoeficient);
-            this->vertices.push_back(v6 / divisionCoeficient);
             this->vertices.push_back(v5 / divisionCoeficient);
+            this->vertices.push_back(v6 / divisionCoeficient);
             this->modelTerrain.countVertices += 3;
             this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
             this->modelTerrain.vertices.push_back(v5 / divisionCoeficient);
@@ -263,9 +264,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             this->modelTerrain.normals.push_back(n2);
 
             this->indices.push_back(vertIndex);
-            vertIndex += 1;
-            this->modelTerrain.countIndices += 1;
             this->modelTerrain.indices.push_back(vertIndex);
+            this->modelTerrain.countIndices += 1;
+            vertIndex += 1;
 
             this->colors.push_back(color);
             this->colors.push_back(color);

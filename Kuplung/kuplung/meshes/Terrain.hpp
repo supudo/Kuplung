@@ -32,7 +32,7 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboColors, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
+    GLint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
 
     std::string readFile(const char *filePath);
 };

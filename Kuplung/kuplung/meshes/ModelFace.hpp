@@ -22,27 +22,27 @@
 #include "kuplung/meshes/BoundingBox.hpp"
 
 struct ModelFace_LightSource_Directional {
-    GLuint gl_InUse;
-    GLuint gl_Direction;
-    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+    GLint gl_InUse;
+    GLint gl_Direction;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 struct ModelFace_LightSource_Point {
-    GLuint gl_InUse;
-    GLuint gl_Position;
-    GLuint gl_Constant, gl_Linear, gl_Quadratic;
-    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+    GLint gl_InUse;
+    GLint gl_Position;
+    GLint gl_Constant, gl_Linear, gl_Quadratic;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 struct ModelFace_LightSource_Spot {
-    GLuint gl_InUse;
-    GLuint gl_Position, gl_Direction;
-    GLuint gl_CutOff, gl_OuterCutOff;
-    GLuint gl_Constant, gl_Linear, gl_Quadratic;
-    GLuint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLuint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+    GLint gl_InUse;
+    GLint gl_Position, gl_Direction;
+    GLint gl_CutOff, gl_OuterCutOff;
+    GLint gl_Constant, gl_Linear, gl_Quadratic;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 class ModelFace {
@@ -156,17 +156,17 @@ private:
     GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
-    GLuint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
+    GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
     GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
-    GLuint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
-    GLuint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
-    GLuint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
+    GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
+    GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
+    GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
 
     // view skin
     ModelFace_LightSource_Directional *solidLight;
-    GLuint glFS_solidSkin_materialColor;
+    GLint glFS_solidSkin_materialColor;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
@@ -175,18 +175,18 @@ private:
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // material
-    GLuint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
-    GLuint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel, glMaterial_HeightScale;
-    GLuint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
-    GLuint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
-    GLuint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
-    GLuint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
-    GLuint glMaterial_ParallaxMapping;
+    GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
+    GLint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel, glMaterial_HeightScale;
+    GLint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
+    GLint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
+    GLint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
+    GLint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
+    GLint glMaterial_ParallaxMapping;
 
     // effects - gaussian blur
-    GLuint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
+    GLint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
     // effects - bloom
-    GLuint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
+    GLint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
 
     std::string readFile(const char *filePath);
     void doLog(std::string logMessage);

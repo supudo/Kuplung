@@ -141,7 +141,7 @@ void ObjectsManager::resetSettings() {
     this->SolidLight_Ambient_ColorPicker = false;
     this->SolidLight_Diffuse_ColorPicker = false;
     this->SolidLight_Specular_ColorPicker = false;
-    this->showTerrain = true;
+    this->showTerrain = false;
 }
 
 void ObjectsManager::resetPropertiesSystem() {
