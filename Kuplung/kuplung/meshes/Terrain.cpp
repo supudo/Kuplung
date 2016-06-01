@@ -104,7 +104,7 @@ void Terrain::initBuffers(std::string assetsFolder) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->terrainGenerator->generateTerrain(assetsFolder, 0, 0, 100, 100);
+    this->terrainGenerator->generateTerrain(assetsFolder, 0, 0, 12, 12);
     this->heightmapImage = this->terrainGenerator->heightmapImage;
 
     // vertices
