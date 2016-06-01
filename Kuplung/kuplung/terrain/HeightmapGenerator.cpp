@@ -197,10 +197,15 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
 
-    // triangle 1
             glm::vec3 v1 = glm::vec3(x, y, hmValue);// * balanceCoeficient);
             glm::vec3 v2 = glm::vec3(x + 1, y, hmValue);// * balanceCoeficient);
             glm::vec3 v3 = glm::vec3(x + 1, y + 1, hmValue);
+
+            glm::vec3 v4 = v1;//glm::vec3(x, y, hmValue);// * balanceCoeficient);
+            glm::vec3 v5 = v3;//glm::vec3(x + 1, y + 1, hmValue);
+            glm::vec3 v6 = glm::vec3(x, y + 1, hmValue);
+
+    // triangle 1
             this->vertices.push_back(v1 / divisionCoeficient);
             this->vertices.push_back(v2 / divisionCoeficient);
             this->vertices.push_back(v3 / divisionCoeficient);
@@ -242,9 +247,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, double offset
                    v2.x, v3.y, v3.z);
 
     // triangle 2
-            glm::vec3 v4 = v1;//glm::vec3(x, y, hmValue);// * balanceCoeficient);
-            glm::vec3 v5 = v3;//glm::vec3(x + 1, y + 1, hmValue);
-            glm::vec3 v6 = glm::vec3(x, y + 1, hmValue);
             this->vertices.push_back(v4 / divisionCoeficient);
             this->vertices.push_back(v5 / divisionCoeficient);
             this->vertices.push_back(v6 / divisionCoeficient);
