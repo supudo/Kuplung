@@ -49,6 +49,8 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
+    void exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces);
+    void exportSceneFinished();
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
@@ -72,7 +74,7 @@ private:
     SDL_GLContext glContext;
 
     // Variables
-    bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed;
+    bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed, exporterThreadFinished;
     int sceneSelectedModelObject;
     float objLoadingProgress;
 

@@ -171,7 +171,7 @@ bool Kuplung::init() {
                     this->rayPicker->init(this->managerObjects, this->managerControls, std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 
                     this->managerExporter = new Exporter();
-                    this->managerExporter->init();
+                    this->managerExporter->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->imageRenderer = new ImageRenderer();
                     this->imageRenderer->init();
@@ -499,6 +499,8 @@ void Kuplung::processRunningThreads() {
         this->processParsedObjFile();
         this->objParserThreadProcessed = true;
     }
+    if (this->exporterThreadFinished)
+        this->exportSceneFinished();
 }
 
 void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
@@ -519,6 +521,23 @@ void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
+}
+
+void Kuplung::guiSceneExport(FBEntity file) {
+//    this->managerExporter->exportScene(file, this->meshModelFaces);
+    this->managerUI->showExporting();
+    this->exporterThreadFinished = false;
+    std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces);
+    exporterThread.detach();
+}
+
+void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces) {
+    this->managerExporter->exportScene(file, meshModelFaces);
+    this->exporterThreadFinished = true;
+}
+
+void Kuplung::exportSceneFinished() {
+    this->managerUI->hideExporting();
 }
 
 void Kuplung::processParsedObjFile() {
@@ -617,10 +636,6 @@ void Kuplung::guiModelDelete(int selectedModel) {
     this->managerUI->meshModelFaces = &this->meshModelFaces;
     this->sceneSelectedModelObject = -1;
     this->managerUI->setSceneSelectedModelObject(-1);
-}
-
-void Kuplung::guiSceneExport(FBEntity file) {
-    this->managerExporter->exportScene(file, this->meshModelFaces);
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {

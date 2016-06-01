@@ -16,10 +16,12 @@ class ExporterOBJ {
 public:
     ~ExporterOBJ();
     void destroy();
-    void init();
+    void init(std::function<void(float)> doProgress);
     void exportToFile(FBEntity file, std::vector<ModelFace*> faces);
 
 private:
+    std::function<void(float)> funcProgress;
+
     void exportGeometry(std::vector<ModelFace*> faces);
     void exportMaterials(std::vector<ModelFace*> faces);
     void saveFile(std::string fileContents, std::string fileName);

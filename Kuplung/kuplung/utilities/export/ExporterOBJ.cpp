@@ -17,7 +17,8 @@ ExporterOBJ::~ExporterOBJ() {
 void ExporterOBJ::destroy() {
 }
 
-void ExporterOBJ::init() {
+void ExporterOBJ::init(std::function<void(float)> doProgress) {
+    this->funcProgress = doProgress;
 #ifdef _WIN32
     this->nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -67,6 +68,10 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     glm::vec4 perspective;
     glm::decompose(face->matrixModel, scale, rotation, translation, skew, perspective);
 
+    this->funcProgress(0.0f);
+    int totalProgress = int(model.indices.size()) * 2;
+    float progressCounter = 0.0f;
+
     meshData += this->nlDelimiter;
     meshData += "o " + model.ModelTitle + this->nlDelimiter;
     for (size_t j=0; j<model.indices.size(); j++) {
@@ -98,6 +103,11 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
             this->vnCounter += 1;
             vn += "vn " + std::to_string(normal.x) + " " + std::to_string(normal.y) + " " + std::to_string(normal.z) + this->nlDelimiter;
         }
+
+        progressCounter += 1;
+
+        float progress = (progressCounter / (float)totalProgress) * 100.0;
+        this->funcProgress(progress);
     }
 
     meshData += v;
@@ -126,6 +136,9 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
             f += "f" + triangleFace + this->nlDelimiter;
             triangleFace = "";
         }
+
+        float progress = (progressCounter / (float)totalProgress) * 100.0;
+        this->funcProgress(progress);
     }
 
     meshData += "usemtl " + model.MaterialTitle + this->nlDelimiter;

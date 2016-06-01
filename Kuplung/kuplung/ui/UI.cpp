@@ -45,6 +45,7 @@ void UI::init(SDL_Window *window,
     this->isFrame = false;
     this->isLoadingOpen = false;
     this->isParsingOpen = false;
+    this->isExportingOpen = false;
     this->parsingPercentage = 0.0f;
 
     this->recentFiles.clear();
@@ -300,6 +301,17 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::EndPopup();
     }
 
+    if (this->isExportingOpen)
+        ImGui::OpenPopup("Kuplung Exporting");
+    if (ImGui::BeginPopupModal("Kuplung Exporting", &this->isExportingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+        ImGui::Text("Exporting ... %0.2f%%\n", this->parsingPercentage);
+        ImGui::ProgressBar(this->parsingPercentage / 100.0, ImVec2(0.0f, 0.0f));
+        ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
+        ImGui::PopStyleColor(1);
+        ImGui::EndPopup();
+    }
+
     if (this->showDemoWindow)
         ImGui::ShowTestWindow(&this->showDemoWindow);
 }
@@ -342,6 +354,14 @@ void UI::showLoading() {
 
 void UI::hideLoading() {
     this->isLoadingOpen = false;
+}
+
+void UI::showExporting() {
+    this->isExportingOpen = true;
+}
+
+void UI::hideExporting() {
+    this->isExportingOpen = false;
 }
 
 #pragma mark - Private Methods

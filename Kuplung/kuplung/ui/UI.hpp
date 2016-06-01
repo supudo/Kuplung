@@ -56,10 +56,12 @@ public:
     void hideParsing();
     void showLoading();
     void hideLoading();
+    void showExporting();
+    void hideExporting();
 
     std::vector<ModelFace*> *meshModelFaces;
     bool isFrame;
-    bool isParsingOpen, isLoadingOpen;
+    bool isParsingOpen, isLoadingOpen, isExportingOpen;
     bool showControlsGUI;
     bool showControlsModels;
     float parsingPercentage;

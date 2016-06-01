@@ -16,9 +16,9 @@ void Exporter::destroy() {
     this->exporterOBJ->destroy();
 }
 
-void Exporter::init() {
+void Exporter::init(std::function<void(float)> doProgress) {
     this->exporterOBJ = new ExporterOBJ();
-    this->exporterOBJ->init();
+    this->exporterOBJ->init(doProgress);
 }
 
 void Exporter::exportScene(FBEntity file, std::vector<ModelFace*> faces) {
