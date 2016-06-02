@@ -142,7 +142,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
 
     for (int y=0; y<heightmapHeight * 3; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
-            float hmValue = heightMap.GetValue(x, y) * 10.0f;
+            float hmValue = 0.0f;//heightMap.GetValue(x, y) * 10.0f;
 
             utils::Color c = image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
