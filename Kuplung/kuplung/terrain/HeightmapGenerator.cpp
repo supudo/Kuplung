@@ -150,7 +150,24 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             uv = glm::vec2(x * ss, y * rr);
 
             // counter clockwise direction
-            glm::vec3 v0 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
+            //
+            //   ^
+            //   |   10 --- 11 ---- 12 ---- 13 ----- 14
+            //   |   | \     | \     | \     | \     |
+            //   |   |  \    |  \    |  \    |  \    |
+            //   |   |   \   |   \   |   \   |   \   |
+            //   |   |    \  |    \  |    \  |    \  |
+            //   |   3 ----- 2 ----- 5 ----- 7 ----- 9
+            //   |   | \     | \     | \     | \     |
+            //   |   |  \    |  \    |  \    |  \    |
+            //   |   |   \   |   \   |   \   |   \   |
+            //   Y   |    \  |    \  |    \  |    \  |
+            //   |   0 ----- 1 ----- 4 ----- 6 ----- 8
+            //   |
+            //   0---X---------------------------------->
+            //
+            //
+           glm::vec3 v0 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
             glm::vec3 v1 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue * balanceCoeficient);
             glm::vec3 v2 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue);
             glm::vec3 v3 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue);
