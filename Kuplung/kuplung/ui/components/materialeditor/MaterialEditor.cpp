@@ -112,7 +112,7 @@ void MaterialEditor::draw(int selectedModelID, ModelFace *face, bool* p_opened) 
     bool isDragNodeValid = this->dragNode.isValid();
     bool isNodeDragging = false;
     const ImVec2 link_cp(10, 0);
-    ImGuiState& g = *GImGui;
+    ImGuiContext& g = *GImGui;
 
     // Zoom
     float new_font_scale = ImClamp(window->FontWindowScale + g.IO.MouseWheel * 0.10f, 0.50f, 2.50f);

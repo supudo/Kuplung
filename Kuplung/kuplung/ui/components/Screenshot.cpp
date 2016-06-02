@@ -16,7 +16,7 @@ void Screenshot::ShowScreenshotsWindow(bool* open) {
         return;
     }
 
-    ImGuiState& g = *GImGui;
+    ImGuiContext& g = *GImGui;
 
     static ImGuiStorage storage;
     static float border = 16.0f;

@@ -141,8 +141,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     float worldCenter = 0;//-1.0f * heightmapWidth / 2.0f;
 
     glm::vec3 v0, v1, v2, v3, n;
-    //for (int y=0; y<heightmapHeight * 3; ++y) {
-    for (int y=0; y<3; ++y) {
+    for (int y=0; y<heightmapHeight * 3; ++y) {
+    //for (int y=0; y<3; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
             float hmValue = heightMap.GetValue(x, y) * 10.0f;
 
