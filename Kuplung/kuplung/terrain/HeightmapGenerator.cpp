@@ -135,6 +135,132 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
 
+    float balanceCoeficient = 1.0f;
+    float divisionCoeficient = 10.0f;
+    int vertIndex = 0;
+    float worldCenter = 0;//-1.0f * heightmapWidth / 2.0f;
+
+    for (int y=0; y<heightmapHeight * 3; ++y) {
+        for (int x=0; x<heightmapWidth; ++x) {
+            float hmValue = heightMap.GetValue(x, y) * 10.0f;
+
+            utils::Color c = image.GetValue(x, y);
+            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
+            uv = glm::vec2(x * ss, y * rr);
+
+            // counter clockwise direction
+            glm::vec3 v0 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
+            glm::vec3 v1 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue * balanceCoeficient);
+            glm::vec3 v2 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue);
+            glm::vec3 v3 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue);
+            glm::vec3 n = glm::cross(v1 - v0, v2 - v0);
+
+    // triangle 1
+            this->vertices.push_back(v0 / divisionCoeficient);
+            this->vertices.push_back(v1 / divisionCoeficient);
+            this->vertices.push_back(v2 / divisionCoeficient);
+
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+
+            this->indices.push_back(vertIndex);
+
+//            this->modelTerrain.vertices.push_back(v0 / divisionCoeficient);
+//            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
+//            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
+//            this->modelTerrain.countVertices += 3;
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.countTextureCoordinates += 3;
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.countNormals += 3;
+//            this->modelTerrain.indices.push_back(vertIndex);
+//            this->modelTerrain.countIndices += 1;
+
+            vertIndex += 1;
+
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+
+            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                   v0.x, v0.y, v0.z,
+                   v1.x, v1.y, v1.z,
+                   v2.x, v2.y, v2.z);
+
+    // triangle 2
+            this->vertices.push_back(v0 / divisionCoeficient);
+            this->vertices.push_back(v2 / divisionCoeficient);
+            this->vertices.push_back(v3 / divisionCoeficient);
+
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+            this->uvs.push_back(uv);
+
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+            this->normals.push_back(n);
+
+            this->indices.push_back(vertIndex);
+
+//            this->modelTerrain.vertices.push_back(v0 / divisionCoeficient);
+//            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
+//            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
+//            this->modelTerrain.countVertices += 3;
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.texture_coordinates.push_back(uv);
+//            this->modelTerrain.countTextureCoordinates += 3;
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.normals.push_back(n);
+//            this->modelTerrain.countNormals += 3;
+//            this->modelTerrain.indices.push_back(vertIndex);
+//            this->modelTerrain.countIndices += 1;
+
+            vertIndex += 1;
+
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+            this->colors.push_back(color);
+
+            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                   v0.x, v0.y, v0.z,
+                   v2.x, v2.y, v2.z,
+                   v3.x, v3.y, v3.z);
+        }
+    }
+
+    MeshModelMaterial material;
+    material.MaterialID = 1;
+    material.MaterialTitle = "MaterialTerrain";
+    material.AmbientColor = glm::vec3(0.7f);
+    material.DiffuseColor = glm::vec3(0.7f);
+    material.IlluminationMode = 2;
+    material.OpticalDensity = 1.0;
+    material.Transparency = 1.0f;
+    MeshMaterialTextureImage textureDiffuse;
+    textureDiffuse.Image = this->heightmapImage;
+    textureDiffuse.Filename = this->heightmapImage;
+    textureDiffuse.Width = heightmapWidth;
+    textureDiffuse.Height = heightmapHeight;
+    textureDiffuse.UseTexture = true;
+    material.TextureDiffuse = textureDiffuse;
+    this->modelTerrain.ModelMaterial = material;
+
+    std::ofstream out(assetsFolder + "/terrain.txt");
+    out << grapher;
+    out.close();
+
     /*
     // sphere generation
     static const double pi = glm::pi<double>();
@@ -180,164 +306,4 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
         }
     }
     */
-
-    float balanceCoeficient = 1.0f;
-    float divisionCoeficient = 10.0f;
-    int vertIndex = 0;
-    float worldCenter = 0;//-1.0f * heightmapWidth / 2.0f;
-
-    for (int y=0; y<heightmapHeight * 3; ++y) {
-        for (int x=0; x<heightmapWidth; ++x) {
-            float hmValue = heightMap.GetValue(x, y) * 10.0f;
-
-            utils::Color c = image.GetValue(x, y);
-            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            glm::vec2 uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
-            uv = glm::vec2(x * ss, y * rr);
-
-            // counter clockwise direction
-            glm::vec3 v1 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
-            glm::vec3 v2 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue * balanceCoeficient);
-            glm::vec3 v3 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue);
-            glm::vec3 v4 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue);
-            glm::vec3 n = glm::cross(v2 - v1, v3 - v1);
-
-    // triangle 1
-            this->vertices.push_back(v1 / divisionCoeficient);
-            this->vertices.push_back(v2 / divisionCoeficient);
-            this->vertices.push_back(v3 / divisionCoeficient);
-
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-
-            this->indices.push_back(vertIndex);
-
-//            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
-//            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
-//            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
-//            this->modelTerrain.countVertices += 3;
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.countTextureCoordinates += 3;
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.countNormals += 3;
-//            this->modelTerrain.indices.push_back(vertIndex);
-//            this->modelTerrain.countIndices += 1;
-
-            vertIndex += 1;
-
-            this->colors.push_back(color);
-            this->colors.push_back(color);
-            this->colors.push_back(color);
-
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v1.x, v1.y, v1.z,
-                   v3.x, v2.y, v2.z,
-                   v2.x, v3.y, v3.z);
-
-    // triangle 2
-            this->vertices.push_back(v1 / divisionCoeficient);
-            this->vertices.push_back(v3 / divisionCoeficient);
-            this->vertices.push_back(v4 / divisionCoeficient);
-
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-            this->normals.push_back(n);
-
-            this->indices.push_back(vertIndex);
-
-//            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
-//            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
-//            this->modelTerrain.vertices.push_back(v4 / divisionCoeficient);
-//            this->modelTerrain.countVertices += 3;
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.texture_coordinates.push_back(uv);
-//            this->modelTerrain.countTextureCoordinates += 3;
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.normals.push_back(n);
-//            this->modelTerrain.countNormals += 3;
-//            this->modelTerrain.indices.push_back(vertIndex);
-//            this->modelTerrain.countIndices += 1;
-
-            vertIndex += 1;
-
-            this->colors.push_back(color);
-            this->colors.push_back(color);
-            this->colors.push_back(color);
-
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v1.x, v1.y, v1.z,
-                   v3.x, v3.y, v3.z,
-                   v4.x, v4.y, v4.z);
-        }
-    }
-
-//    std::map<PackedTerrainPoint, unsigned int> vertexToOutIndex;
-//    std::vector<glm::vec3> outVertices, outNormals;
-//    std::vector<glm::vec2> outTextureCoordinates;
-//    for (size_t i=0; i<this->vertices.size(); i++) {
-//        PackedTerrainPoint packed = { this->vertices[i], this->uvs[i], this->normals[i] };
-
-//        unsigned int index;
-//        bool found = this->getSimilarVertexIndex(packed, vertexToOutIndex, index);
-//        if (found)
-//            this->indices.push_back(index);
-//        else {
-//            outVertices.push_back(this->vertices[i]);
-//            outTextureCoordinates.push_back(this->uvs[i]);
-//            outNormals.push_back(this->normals[i]);
-//            unsigned int newIndex = (unsigned int)outVertices.size() - 1;
-//            this->indices.push_back(newIndex);
-//            vertexToOutIndex[packed] = newIndex;
-//        }
-//    }
-//    this->vertices = outVertices;
-//    this->uvs = outTextureCoordinates;
-//    this->normals = outNormals;
-//    this->indices = this->indices;
-
-    MeshModelMaterial material;
-    material.MaterialID = 1;
-    material.MaterialTitle = "MaterialTerrain";
-    material.AmbientColor = glm::vec3(0.7f);
-    material.DiffuseColor = glm::vec3(0.7f);
-    material.IlluminationMode = 2;
-    material.OpticalDensity = 1.0;
-    material.Transparency = 1.0f;
-    MeshMaterialTextureImage textureDiffuse;
-    textureDiffuse.Image = this->heightmapImage;
-    textureDiffuse.Filename = this->heightmapImage;
-    textureDiffuse.Width = heightmapWidth;
-    textureDiffuse.Height = heightmapHeight;
-    textureDiffuse.UseTexture = true;
-    material.TextureDiffuse = textureDiffuse;
-    this->modelTerrain.ModelMaterial = material;
-
-    std::ofstream out(assetsFolder + "/terrain.txt");
-    out << grapher;
-    out.close();
-}
-
-bool HeightmapGenerator::getSimilarVertexIndex(PackedTerrainPoint & packed, std::map<PackedTerrainPoint, unsigned int> & vertexToOutIndex, unsigned int & result) {
-    std::map<PackedTerrainPoint, unsigned int>::iterator it = vertexToOutIndex.find(packed);
-    if (it == vertexToOutIndex.end())
-        return false;
-    else {
-        result = it->second;
-        return true;
-    }
 }

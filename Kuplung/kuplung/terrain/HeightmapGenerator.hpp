@@ -13,15 +13,6 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include <glm/common.hpp>
 
-struct PackedTerrainPoint {
-    glm::vec3 position;
-    glm::vec2 uv;
-    glm::vec3 normal;
-    bool operator<(const PackedTerrainPoint that) const{
-        return memcmp((void*)this, (void*)&that, sizeof(PackedTerrainPoint))>0;
-    };
-};
-
 class HeightmapGenerator {
 public:
     ~HeightmapGenerator();
@@ -44,8 +35,6 @@ private:
     float position_x2;
     float position_y1;
     float position_y2;
-
-    bool getSimilarVertexIndex(PackedTerrainPoint & packed, std::map<PackedTerrainPoint, unsigned int> & vertexToOutIndex, unsigned int & result);
 };
 
 #endif /* HeightmapGenerator_hpp */
