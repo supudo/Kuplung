@@ -25,7 +25,7 @@ public:
     std::string heightmapImage;
     HeightmapGenerator *terrainGenerator;
 
-    bool Setting_UseTexture;
+    bool Setting_UseTexture, Setting_Wireframe;
 
 private:
     GLUtils *glUtils;
