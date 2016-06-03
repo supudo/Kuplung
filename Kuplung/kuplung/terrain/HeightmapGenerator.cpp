@@ -122,22 +122,12 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
 
     std::string grapher = "";
 
-    this->modelTerrain = {};
-
-    this->modelTerrain.countIndices = 0;
-    this->modelTerrain.countNormals = 0;
-    this->modelTerrain.countTextureCoordinates = 0;
-    this->modelTerrain.countVertices = 0;
-    this->modelTerrain.ID = 1;
-    this->modelTerrain.MaterialTitle = "MaterialTerrain";
-    this->modelTerrain.ModelTitle = "Terrain";
-
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
 
     float balanceCoeficient = 1.0f;
     float divisionCoeficient = 10.0f;
-    int vertIndex = 0;
+    unsigned int vertIndex = 0;
     float worldCenter = 0;//-1.0f * heightmapWidth / 2.0f;
 
     glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3;
@@ -202,21 +192,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
 
             this->indices.push_back(vertIndex);
 
-            this->modelTerrain.vertices.push_back(v0 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v1 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
-            this->modelTerrain.countVertices += 3;
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.countTextureCoordinates += 3;
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.countNormals += 3;
-            this->modelTerrain.indices.push_back(vertIndex);
-            this->modelTerrain.countIndices += 1;
-
             vertIndex += 1;
 
             this->colors.push_back(color);
@@ -242,21 +217,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->normals.push_back(n);
 
             this->indices.push_back(vertIndex);
-
-            this->modelTerrain.vertices.push_back(v0 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v2 / divisionCoeficient);
-            this->modelTerrain.vertices.push_back(v3 / divisionCoeficient);
-            this->modelTerrain.countVertices += 3;
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.countTextureCoordinates += 3;
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.normals.push_back(n);
-            this->modelTerrain.countNormals += 3;
-            this->modelTerrain.indices.push_back(vertIndex);
-            this->modelTerrain.countIndices += 1;
 
             vertIndex += 1;
 
@@ -355,11 +315,32 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
         }
     }
 
+    this->modelTerrain = {};
+    this->modelTerrain.vertices.clear();
+    this->modelTerrain.texture_coordinates.clear();
+    this->modelTerrain.normals.clear();
+    this->modelTerrain.indices.clear();
+
+    this->modelTerrain.ID = 1;
+    this->modelTerrain.MaterialTitle = "MaterialTerrain";
+    this->modelTerrain.ModelTitle = "Terrain";
+
+    this->modelTerrain.vertices = this->vertices;
+    this->modelTerrain.texture_coordinates = this->uvs;
+    this->modelTerrain.normals = this->normals;
+    this->modelTerrain.indices = this->indices;
+
+    this->modelTerrain.countVertices = int(this->vertices.size());
+    this->modelTerrain.countTextureCoordinates = int(this->uvs.size());
+    this->modelTerrain.countNormals = int(this->normals.size());
+    this->modelTerrain.countIndices = int(this->indices.size());
+
     MeshModelMaterial material;
     material.MaterialID = 1;
     material.MaterialTitle = "MaterialTerrain";
     material.AmbientColor = glm::vec3(0.7f);
     material.DiffuseColor = glm::vec3(0.7f);
+    material.SpecularExp = 99.0f;
     material.IlluminationMode = 2;
     material.OpticalDensity = 1.0;
     material.Transparency = 1.0f;

@@ -21,7 +21,7 @@ public:
 
     std::vector<glm::vec3> vertices, normals, colors;
     std::vector<glm::vec2> uvs;
-    std::vector<int> indices;
+    std::vector<unsigned int> indices;
     std::string heightmapImage;
 
     int Setting_Octaves;
