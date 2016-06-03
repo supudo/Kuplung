@@ -128,7 +128,6 @@ void Terrain::initBuffers(std::string assetsFolder, int width, int height) {
     glBufferData(GL_ARRAY_BUFFER, this->terrainGenerator->uvs.size() * sizeof(glm::vec2), &this->terrainGenerator->uvs[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeTextureCoord);
     glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
-    //this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
 
     std::string matImageLocal = this->terrainGenerator->heightmapImage;
     int tWidth, tHeight, tChannels;
@@ -206,9 +205,6 @@ void Terrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::ma
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
         glDrawElements(GL_TRIANGLES, int(this->terrainGenerator->indices.size()), GL_UNSIGNED_INT, nullptr);
-        //glDrawElements(GL_TRIANGLES, (int)this->terrainGenerator->vertices.size(), GL_UNSIGNED_INT, nullptr);
-        //glDrawArrays(GL_LINES, 0, (int)this->terrainGenerator->vertices.size());
-        //glDrawArrays(GL_LINE_STRIP, 0, (int)this->terrainGenerator->vertices.size());
 
         if (this->Setting_Wireframe)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

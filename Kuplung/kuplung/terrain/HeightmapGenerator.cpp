@@ -128,8 +128,6 @@ void HeightmapGenerator::generateGeometry2() {
     float heightCoef = 10.0f;
     float worldCenter = -1.0f * heightmapWidth / 2.0f;
     float divisionCoeficient = 10.0f;
-    const float rr = 1.0f / float(heightmapHeight - 1);
-    const float ss = 1.0f / float(heightmapWidth - 1);
 
     float p_x, p_y, p_z;
     glm::vec3 position, color;
@@ -140,8 +138,7 @@ void HeightmapGenerator::generateGeometry2() {
             p_y = y + worldCenter;
             p_z = this->heightMap.GetValue(x, y) * heightCoef;
             position = glm::vec3(p_x, p_y, p_z) / divisionCoeficient;
-            //uv = glm::vec2(x * 2.0f / heightmapWidth, y * 2.0f / heightmapHeight);
-            uv = glm::vec2(x * rr, y * ss);
+            uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
             this->vertices.push_back(position);
             this->uvs.push_back(uv);
             this->normals.push_back(glm::vec3(0, 1, 0));
