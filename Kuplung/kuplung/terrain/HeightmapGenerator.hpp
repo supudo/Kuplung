@@ -11,6 +11,8 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "noise.h"
+#include "kuplung/utilities/libnoise/noiseutils.h"
 #include <glm/common.hpp>
 
 class HeightmapGenerator {
@@ -31,10 +33,17 @@ public:
     MeshModel modelTerrain;
 
 private:
+    std::string assetsFolder;
+    int width, height;
     float position_x1;
     float position_x2;
     float position_y1;
     float position_y2;
+
+    utils::NoiseMap heightMap;
+    utils::Image image;
+
+    void generateGeometry();
 };
 
 #endif /* HeightmapGenerator_hpp */

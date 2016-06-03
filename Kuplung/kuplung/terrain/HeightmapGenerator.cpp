@@ -10,8 +10,6 @@
 // http://www.rastertek.com/tertut02.html
 
 #include "HeightmapGenerator.hpp"
-#include "noise.h"
-#include "kuplung/utilities/libnoise/noiseutils.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <boost/algorithm/string/replace.hpp>
@@ -36,6 +34,10 @@ void HeightmapGenerator::initPosition() {
 }
 
 void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, int height) {
+    this->assetsFolder = assetsFolder;
+    this->width = width;
+    this->height = height;
+
     this->position_x1 += this->Setting_OffsetHorizontal;
     this->position_x2 += this->Setting_OffsetHorizontal;
     this->position_y1 += this->Setting_OffsetVertical;
@@ -48,19 +50,17 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     perlinNoiser.SetPersistence(double(this->Setting_Persistence));
 
     // heightmap
-    utils::NoiseMap heightMap;
     utils::NoiseMapBuilderPlane heightMapBuilder;
     heightMapBuilder.SetSourceModule(perlinNoiser);
-    heightMapBuilder.SetDestNoiseMap(heightMap);
-    heightMapBuilder.SetDestSize(width, height);
+    heightMapBuilder.SetDestNoiseMap(this->heightMap);
+    heightMapBuilder.SetDestSize(this->width, this->height);
     heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
     heightMapBuilder.Build();
 
     // render
     utils::RendererImage renderer;
-    utils::Image image;
-    renderer.SetSourceNoiseMap(heightMap);
-    renderer.SetDestImage(image);
+    renderer.SetSourceNoiseMap(this->heightMap);
+    renderer.SetDestImage(this->image);
     if (this->Setting_ColorTerrain) {
         renderer.ClearGradient();
         renderer.AddGradientPoint(-1.0000, utils::Color(0, 0, 128, 255)); // deeps
@@ -105,14 +105,16 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     boost::replace_all(assetsFolder, "Kuplung.app/Contents/Resources", "");
 #endif
     utils::WriterBMP writer;
-    writer.SetSourceImage(image);
+    writer.SetSourceImage(this->image);
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
+}
 
+void HeightmapGenerator::generateGeometry() {
     // vertices, colors, indices
 
-    int heightmapHeight = heightMap.GetHeight();
-    int heightmapWidth = heightMap.GetWidth();
+    int heightmapHeight = this->heightMap.GetHeight();
+    int heightmapWidth = this->heightMap.GetWidth();
 
     this->vertices.clear();
     this->uvs.clear();
@@ -136,11 +138,11 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     for (int y=0; y<(heightmapHeight - 1) * 3; ++y) {
     //for (int y=0; y<3; ++y) {
         for (int x=0; x<heightmapWidth - 1; ++x) {
-            hmValue = heightMap.GetValue(x, y) * 10.0f;
-            hmValue2 = heightMap.GetValue(x + 1, y) * 10.0f;
-            hmValue3 = heightMap.GetValue(x, y + 1) * 10.0f;
+            hmValue = this->heightMap.GetValue(x, y) * 10.0f;
+            hmValue2 = this->heightMap.GetValue(x + 1, y) * 10.0f;
+            hmValue3 = this->heightMap.GetValue(x, y + 1) * 10.0f;
 
-            utils::Color c = image.GetValue(x, y);
+            utils::Color c = this->image.GetValue(x, y);
             glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
             uv = glm::vec2(x * ss, y * rr);
@@ -350,7 +352,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     this->modelTerrain.ModelMaterial = material;
 
     if (Settings::Instance()->logDebugInfo) {
-        std::ofstream out(assetsFolder + "/terrain.txt");
+        std::ofstream out(this->assetsFolder + "/terrain.txt");
         out << grapher;
         out.close();
     }
