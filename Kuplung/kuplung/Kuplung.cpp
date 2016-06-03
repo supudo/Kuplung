@@ -218,11 +218,9 @@ void Kuplung::onEvent(SDL_Event *ev) {
     if (ev->type == SDL_WINDOWEVENT) {
         switch (ev->window.event) {
             case SDL_WINDOWEVENT_SIZE_CHANGED:
-                Settings::Instance()->SDL_Window_Width = (int)ev->window.data1;
-                Settings::Instance()->SDL_Window_Height = (int)ev->window.data2;
+                Settings::Instance()->SDL_Window_Width = int(ev->window.data1);
+                Settings::Instance()->SDL_Window_Height = int(ev->window.data2);
                 Settings::Instance()->saveSettings();
-                break;
-            default:
                 break;
         }
     }
@@ -315,7 +313,7 @@ void Kuplung::renderSceneModels() {
     int cIndices = 0;
     int cTriangles = 0;
     int cFaces = 0;
-    for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFace* mmf = this->meshModelFaces[i];
 
         glm::mat4 mtxModel = glm::mat4(1.0);
@@ -341,7 +339,7 @@ void Kuplung::renderSceneModels() {
         mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
 
         // outlining
-        mmf->setOptionsSelected(this->sceneSelectedModelObject == i);
+        mmf->setOptionsSelected(this->sceneSelectedModelObject == int(i));
         mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
         mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
 
@@ -371,7 +369,7 @@ void Kuplung::renderSceneModels() {
         cTriangles += cVertices / 3;
         cFaces += cTriangles / 2;
     }
-    Settings::Instance()->sceneCountObjects = (int)this->meshModelFaces.size();
+    Settings::Instance()->sceneCountObjects = int(this->meshModelFaces.size());
     Settings::Instance()->sceneCountVertices = cVertices;
     Settings::Instance()->sceneCountIndices = cIndices;
     Settings::Instance()->sceneCountTriangles = cTriangles;
@@ -428,6 +426,7 @@ void Kuplung::initSceneGUI() {
 
 void Kuplung::addShape(ShapeType type) {
     std::string shapeName = "";
+    assert(type >= ShapeType_Cone && type <= ShapeType_UVSphere);
     switch (type) {
         case ShapeType_Cone:
             shapeName = "cone";
@@ -462,10 +461,9 @@ void Kuplung::addShape(ShapeType type) {
         case ShapeType_UVSphere:
             shapeName = "uv_sphere";
             break;
-        default:
-            break;
     }
     FileBrowser_ParserType t;
+    assert(Settings::Instance()->ModelFileParser >= FileBrowser_ParserType_Own1 && Settings::Instance()->ModelFileParser <= FileBrowser_ParserType_Assimp);
     switch (Settings::Instance()->ModelFileParser) {
         case 0:
             t = FileBrowser_ParserType_Own1;
@@ -474,9 +472,6 @@ void Kuplung::addShape(ShapeType type) {
             t = FileBrowser_ParserType_Own2;
             break;
         case 2:
-            t = FileBrowser_ParserType_Assimp;
-            break;
-        default:
             t = FileBrowser_ParserType_Assimp;
             break;
     }

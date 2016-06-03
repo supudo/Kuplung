@@ -133,11 +133,11 @@ void ObjectsManager::resetSettings() {
     this->Setting_OutlineColorPickerOpen = false;
     this->Setting_ShowAxisHelpers = true;
     this->Settings_ShowZAxis = true;
-    this->SolidLight_MaterialColor = glm::vec3(0.7);
+    this->SolidLight_MaterialColor = glm::vec3(0.7f);
     this->SolidLight_Ambient = glm::vec3(1.0);
     this->SolidLight_Diffuse = glm::vec3(1.0);
     this->SolidLight_Specular = glm::vec3(1.0);
-    this->SolidLight_Ambient_Strength = 0.3;
+    this->SolidLight_Ambient_Strength = 0.3f;
     this->SolidLight_Diffuse_Strength = 1.0;
     this->SolidLight_Specular_Strength = 0.0;
     this->SolidLight_Ambient_ColorPicker = false;
@@ -288,29 +288,26 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     Light *lightObject = new Light();
     lightObject->init(type);
     lightObject->type = type;
+    assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
     switch (type) {
         case LightSourceType_Directional:
-            lightObject->title = ((title == "") ? "Directional " + std::to_string((int)this->lightSources.size() + 1) : title);
+            lightObject->title = ((title == "") ? "Directional " + std::to_string(int(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description == "") ? "Directional area light source" : description);
             lightObject->setModel(this->systemModels["light_directional"]);
             break;
         case LightSourceType_Point:
-            lightObject->title = ((title == "") ? "Point " + std::to_string((int)this->lightSources.size() + 1) : title);
+            lightObject->title = ((title == "") ? "Point " + std::to_string(int(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description == "") ? "Omnidirectional point light source" : description);
             lightObject->setModel(this->systemModels["light_point"]);
             break;
         case LightSourceType_Spot:
-            lightObject->title = ((title == "") ? "Spot " + std::to_string((int)this->lightSources.size() + 1) : title);
+            lightObject->title = ((title == "") ? "Spot " + std::to_string(int(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description == "") ? "Directional cone light source" : description);
             lightObject->setModel(this->systemModels["light_spot"]);
-            break;
-        default:
-            lightObject->setModel(this->systemModels["lamp"]);
             break;
     }
     lightObject->initShaderProgram();
     lightObject->initBuffers(std::string(Settings::Instance()->appFolder()));
-
     this->lightSources.push_back(lightObject);
 }
 
