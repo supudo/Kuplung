@@ -137,6 +137,8 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
             triangleFace = "";
         }
 
+        progressCounter += 1;
+
         float progress = (progressCounter / (float)totalProgress) * 100.0;
         this->funcProgress(progress);
     }

@@ -405,25 +405,25 @@ void Kuplung::initSceneGUI() {
 //    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 
     // terrain as object
-    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 20, 20);
-    this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
-    this->managerObjects->terrain->Setting_UseTexture = true;
-    ModelFace *mmf = new ModelFace();
-    mmf->dataVertices = this->managerObjects->grid->dataVertices;
-    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
-    mmf->dataNormals = this->managerObjects->grid->dataNormals;
-    mmf->dataIndices = this->managerObjects->grid->dataIndices;
+//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 20, 20);
+//    this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
+//    this->managerObjects->terrain->Setting_UseTexture = true;
+//    ModelFace *mmf = new ModelFace();
+//    mmf->dataVertices = this->managerObjects->grid->dataVertices;
+//    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+//    mmf->dataNormals = this->managerObjects->grid->dataNormals;
+//    mmf->dataIndices = this->managerObjects->grid->dataIndices;
 
-    mmf->ModelID = 1;
-    mmf->init();
-    mmf->setModel(this->managerObjects->terrain->terrainGenerator->modelTerrain);
-    mmf->initBoundingBox();
-    mmf->initModelProperties();
-    mmf->initShaderProgram();
-    mmf->initBuffers(Settings::Instance()->currentFolder);
-    this->meshModelFaces.push_back(mmf);
-    this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
+//    mmf->ModelID = 1;
+//    mmf->init();
+//    mmf->setModel(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+//    mmf->initBoundingBox();
+//    mmf->initModelProperties();
+//    mmf->initShaderProgram();
+//    mmf->initBuffers(Settings::Instance()->currentFolder);
+//    this->meshModelFaces.push_back(mmf);
+//    this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+//    this->managerUI->meshModelFaces = &this->meshModelFaces;
 }
 
 void Kuplung::addShape(ShapeType type) {
