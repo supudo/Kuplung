@@ -31,16 +31,16 @@ public:
     bool Setting_ColorTerrain;
     float Setting_OffsetHorizontal, Setting_OffsetVertical;
     MeshModel modelTerrain;
+    int width, height;
+    utils::NoiseMap heightMap;
 
 private:
     std::string assetsFolder;
-    int width, height;
     float position_x1;
     float position_x2;
     float position_y1;
     float position_y2;
 
-    utils::NoiseMap heightMap;
     utils::Image image;
 
     void generateGeometry();

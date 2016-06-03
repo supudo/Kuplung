@@ -205,7 +205,7 @@ void Terrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::ma
         if (this->Setting_Wireframe)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-        glDrawElements(GL_TRIANGLES, int(this->terrainGenerator->indices.size()), GL_UNSIGNED_INT, nullptr);
+        //glDrawElements(GL_TRIANGLES, int(this->terrainGenerator->indices.size()), GL_UNSIGNED_INT, nullptr);
         //glDrawElements(GL_TRIANGLES, (int)this->terrainGenerator->vertices.size(), GL_UNSIGNED_INT, nullptr);
         //glDrawArrays(GL_LINES, 0, (int)this->terrainGenerator->vertices.size());
         //glDrawArrays(GL_LINE_STRIP, 0, (int)this->terrainGenerator->vertices.size());
