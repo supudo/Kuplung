@@ -34,7 +34,7 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
     GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
-    GLint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
+    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
     GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
     std::string readFile(const char *filePath);

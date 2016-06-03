@@ -105,6 +105,13 @@ void ObjectsManager::render() {
     }
     this->renderSkybox();
 
+    if (this->Setting_TerrainAnimateX)
+        this->terrain->terrainGenerator->Setting_OffsetHorizontal += 0.0001f;
+    if (this->Setting_TerrainAnimateY)
+        this->terrain->terrainGenerator->Setting_OffsetVertical += 0.0001f;
+    if (this->Setting_TerrainAnimateX || this->Setting_TerrainAnimateY)
+        this->generateTerrain();
+
     if (this->Setting_ShowTerrain) {
         if (this->heightmapImage == "")
             this->generateTerrain();

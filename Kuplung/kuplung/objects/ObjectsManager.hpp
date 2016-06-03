@@ -76,7 +76,7 @@ public:
     float SolidLight_Ambient_Strength, SolidLight_Diffuse_Strength, SolidLight_Specular_Strength;
     bool SolidLight_MaterialColor_ColorPicker, SolidLight_Ambient_ColorPicker, SolidLight_Diffuse_ColorPicker, SolidLight_Specular_ColorPicker;
 
-    bool Setting_ShowTerrain, Setting_TerrainModel;
+    bool Setting_ShowTerrain, Setting_TerrainModel, Setting_TerrainAnimateX, Setting_TerrainAnimateY;
     std::string heightmapImage;
     int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
 
