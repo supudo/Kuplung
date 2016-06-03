@@ -397,6 +397,14 @@ void Kuplung::renderSceneModels() {
     Settings::Instance()->sceneCountIndices = cIndices;
     Settings::Instance()->sceneCountTriangles = cTriangles;
     Settings::Instance()->sceneCountFaces = cFaces;
+
+    if (this->managerObjects->Setting_ShowTerrain) {
+        Settings::Instance()->sceneCountObjects += 1;
+        Settings::Instance()->sceneCountVertices += int(this->managerObjects->terrain->terrainGenerator->vertices.size());
+        Settings::Instance()->sceneCountIndices += int(this->managerObjects->terrain->terrainGenerator->indices.size());
+        Settings::Instance()->sceneCountTriangles += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 3;
+        Settings::Instance()->sceneCountFaces += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 6;
+    }
 }
 
 #pragma mark - Scene GUI

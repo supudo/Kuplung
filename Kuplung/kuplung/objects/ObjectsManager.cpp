@@ -156,6 +156,8 @@ void ObjectsManager::resetSettings() {
     this->SolidLight_Specular_ColorPicker = false;
     this->Setting_ShowTerrain = false;
     this->Setting_TerrainModel = false;
+    this->Setting_TerrainAnimateX = false;
+    this->Setting_TerrainAnimateY = false;
     this->Setting_TerrainWidth = 100;
     this->Setting_TerrainHeight = 100;
 }
