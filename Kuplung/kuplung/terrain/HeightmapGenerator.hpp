@@ -27,7 +27,7 @@ public:
     std::string heightmapImage;
 
     int Setting_Octaves;
-    float Setting_Frequency, Setting_Persistence;
+    float Setting_Frequency, Setting_Persistence, Setting_ScaleCoeficient, Setting_HeightCoeficient;
     bool Setting_ColorTerrain;
     float Setting_OffsetHorizontal, Setting_OffsetVertical;
     MeshModel modelTerrain;
@@ -44,7 +44,7 @@ private:
     utils::Image image;
 
     void generateMeshModel();
-    void generateGeometry2();
+    void generateGeometrySmooth();
     void generateGeometryCubic();
 };
 

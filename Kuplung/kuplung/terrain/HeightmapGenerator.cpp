@@ -31,6 +31,8 @@ void HeightmapGenerator::initPosition() {
 
     this->Setting_OffsetHorizontal = 0.0f;
     this->Setting_OffsetVertical = 0.0f;
+    this->Setting_ScaleCoeficient = 10.0f;
+    this->Setting_HeightCoeficient = 10.0f;
 }
 
 void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, int height) {
@@ -109,10 +111,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
 
-    this->generateGeometry2();
+    this->generateGeometryCubic();
 }
 
-void HeightmapGenerator::generateGeometry2() {
+void HeightmapGenerator::generateGeometrySmooth() {
     // BIG thanks to http://stackoverflow.com/a/10114636/69897 !!!!
     unsigned int heightmapHeight = this->heightMap.GetHeight();
     unsigned int heightmapWidth = this->heightMap.GetWidth();
@@ -125,9 +127,7 @@ void HeightmapGenerator::generateGeometry2() {
     this->indices.clear();
     this->colors.clear();
 
-    float heightCoef = 10.0f;
     float worldCenter = -1.0f * heightmapWidth / 2.0f;
-    float divisionCoeficient = 10.0f;
 
     float p_x, p_y, p_z;
     glm::vec3 position, color;
@@ -136,8 +136,8 @@ void HeightmapGenerator::generateGeometry2() {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
             p_x = x + worldCenter;
             p_y = y + worldCenter;
-            p_z = this->heightMap.GetValue(x, y) * heightCoef;
-            position = glm::vec3(p_x, p_y, p_z) / divisionCoeficient;
+            p_z = this->heightMap.GetValue(x, y) * this->Setting_HeightCoeficient;
+            position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
             this->vertices.push_back(position);
             this->uvs.push_back(uv);
@@ -197,8 +197,6 @@ void HeightmapGenerator::generateGeometryCubic() {
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
 
-    float balanceCoeficient = 1.0f;
-    float divisionCoeficient = 10.0f;
     unsigned int vertIndex = 0;
     float worldCenter = -1.0f * heightmapWidth / 2.0f;
     glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3, color;
@@ -208,9 +206,9 @@ void HeightmapGenerator::generateGeometryCubic() {
 
     for (int y=0; y<(heightmapHeight - 1) * 3; ++y) {
         for (int x=0; x<heightmapWidth - 1; ++x) {
-            hmValue = this->heightMap.GetValue(x, y) * 10.0f;
-            hmValue2 = this->heightMap.GetValue(x + 1, y) * 10.0f;
-            hmValue3 = this->heightMap.GetValue(x, y + 1) * 10.0f;
+            hmValue = this->heightMap.GetValue(x, y) * this->Setting_HeightCoeficient;
+            hmValue2 = this->heightMap.GetValue(x + 1, y) * this->Setting_HeightCoeficient;
+            hmValue3 = this->heightMap.GetValue(x, y + 1) * this->Setting_HeightCoeficient;
 
             c = this->image.GetValue(x, y);
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
@@ -237,22 +235,22 @@ void HeightmapGenerator::generateGeometryCubic() {
             //   0---X---------------------------------->
             //
 
-            v0 = glm::vec3(x + worldCenter, y + worldCenter, hmValue * balanceCoeficient);
-            v1 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue * balanceCoeficient);
+            v0 = glm::vec3(x + worldCenter, y + worldCenter, hmValue);
+            v1 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue);
             v2 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue);
             v3 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue);
-            v4 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue2 * balanceCoeficient);
+            v4 = glm::vec3(x + worldCenter + 1, y + worldCenter, hmValue2);
             v5 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue2);
-            v10 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue3 * balanceCoeficient);
+            v10 = glm::vec3(x + worldCenter + 1, y + worldCenter + 1, hmValue3);
             v11 = glm::vec3(x + worldCenter, y + worldCenter + 1, hmValue3);
             n = glm::cross(v1 - v0, v2 - v0);
             n2 = glm::cross(v4 - v1, v5 - v1);
             n3 = glm::cross(v10 - v3, v11 - v3);
 
     // triangle 1
-            this->vertices.push_back(v0 / divisionCoeficient);
-            this->vertices.push_back(v1 / divisionCoeficient);
-            this->vertices.push_back(v2 / divisionCoeficient);
+            this->vertices.push_back(v0 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v1 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v2 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
@@ -277,9 +275,9 @@ void HeightmapGenerator::generateGeometryCubic() {
                        v2.x, v2.y, v2.z);
 
     // triangle 2
-            this->vertices.push_back(v0 / divisionCoeficient);
-            this->vertices.push_back(v2 / divisionCoeficient);
-            this->vertices.push_back(v3 / divisionCoeficient);
+            this->vertices.push_back(v0 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v2 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v3 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv);
             this->uvs.push_back(uv);
@@ -298,9 +296,9 @@ void HeightmapGenerator::generateGeometryCubic() {
             this->colors.push_back(color);
 
     // connecting triangle 1 - right
-            this->vertices.push_back(v1 / divisionCoeficient);
-            this->vertices.push_back(v4 / divisionCoeficient);
-            this->vertices.push_back(v5 / divisionCoeficient);
+            this->vertices.push_back(v1 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v4 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v5 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv2);
             this->uvs.push_back(uv2);
@@ -319,9 +317,9 @@ void HeightmapGenerator::generateGeometryCubic() {
             this->colors.push_back(color);
 
     // connecting triangle 2 - right
-            this->vertices.push_back(v1 / divisionCoeficient);
-            this->vertices.push_back(v5 / divisionCoeficient);
-            this->vertices.push_back(v2 / divisionCoeficient);
+            this->vertices.push_back(v1 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v5 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v2 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv2);
             this->uvs.push_back(uv2);
@@ -340,9 +338,9 @@ void HeightmapGenerator::generateGeometryCubic() {
             this->colors.push_back(color);
 
     // connecting triangle 1 - top
-            this->vertices.push_back(v3 / divisionCoeficient);
-            this->vertices.push_back(v2 / divisionCoeficient);
-            this->vertices.push_back(v10 / divisionCoeficient);
+            this->vertices.push_back(v3 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v2 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v10 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv3);
             this->uvs.push_back(uv3);
@@ -361,9 +359,9 @@ void HeightmapGenerator::generateGeometryCubic() {
             this->colors.push_back(color);
 
     // connecting triangle 2 - top
-            this->vertices.push_back(v3 / divisionCoeficient);
-            this->vertices.push_back(v10 / divisionCoeficient);
-            this->vertices.push_back(v11 / divisionCoeficient);
+            this->vertices.push_back(v3 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v10 / this->Setting_ScaleCoeficient);
+            this->vertices.push_back(v11 / this->Setting_ScaleCoeficient);
 
             this->uvs.push_back(uv3);
             this->uvs.push_back(uv3);
