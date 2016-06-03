@@ -108,6 +108,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     writer.SetSourceImage(this->image);
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
+
+    this->generateGeometry();
 }
 
 void HeightmapGenerator::generateGeometry() {
@@ -131,19 +133,19 @@ void HeightmapGenerator::generateGeometry() {
     float divisionCoeficient = 10.0f;
     unsigned int vertIndex = 0;
     float worldCenter = -1.0f * heightmapWidth / 2.0f;
-
-    glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3;
+    glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3, color;
     glm::vec2 uv, uv2, uv3;
     float hmValue, hmValue2, hmValue3;
+    utils::Color c;
+
     for (int y=0; y<(heightmapHeight - 1) * 3; ++y) {
-    //for (int y=0; y<3; ++y) {
         for (int x=0; x<heightmapWidth - 1; ++x) {
             hmValue = this->heightMap.GetValue(x, y) * 10.0f;
             hmValue2 = this->heightMap.GetValue(x + 1, y) * 10.0f;
             hmValue3 = this->heightMap.GetValue(x, y + 1) * 10.0f;
 
-            utils::Color c = this->image.GetValue(x, y);
-            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            c = this->image.GetValue(x, y);
+            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
             uv = glm::vec2(x * ss, y * rr);
             uv2 = glm::vec2((x + 1) * ss, y * rr);
