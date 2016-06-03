@@ -31,7 +31,7 @@ public:
     ObjectsManager(FileModelManager *parser);
 
     void destroy();
-    void init(std::function<void(float)> doProgress);
+    void init(std::function<void(float)> doProgress, std::function<void()> addTerrain);
     void loadSystemModels();
     void render();
     void renderSkybox();
@@ -66,7 +66,6 @@ public:
     float Setting_RatioWidth = 4.0f, Setting_RatioHeight = 3.0f;
     float Setting_PlaneClose = 0.1f, Setting_PlaneFar = 100.0f;
     int Setting_GridSize = 30, Setting_Skybox = 0;
-    int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
     glm::vec4 Setting_OutlineColor;
     glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
@@ -77,11 +76,13 @@ public:
     float SolidLight_Ambient_Strength, SolidLight_Diffuse_Strength, SolidLight_Specular_Strength;
     bool SolidLight_MaterialColor_ColorPicker, SolidLight_Ambient_ColorPicker, SolidLight_Diffuse_ColorPicker, SolidLight_Specular_ColorPicker;
 
-    bool showTerrain;
+    bool Setting_ShowTerrain, Setting_TerrainModel;
     std::string heightmapImage;
+    int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
 
 private:
     std::function<void(float)> funcProgress;
+    std::function<void()> funcAddTerrain;
 
     std::map<std::string, MeshModel> systemModels;
 };

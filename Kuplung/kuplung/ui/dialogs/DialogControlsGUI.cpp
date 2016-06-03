@@ -517,12 +517,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         }
         case 7: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
-            ImGui::Checkbox("Show Terrain", &this->managerObjects->showTerrain);
-            if (this->managerObjects->showTerrain) {
+            ImGui::Checkbox("Show Terrain", &this->managerObjects->Setting_ShowTerrain);
+            if (this->managerObjects->Setting_ShowTerrain) {
                 ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
                 ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
                 ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
+                ImGui::Checkbox("Terrain Model", &this->managerObjects->Setting_TerrainModel);
             }
 
             if (this->generateNewTerrain) {
@@ -532,7 +533,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 this->generateNewTerrain = false;
             }
 
-            if (this->managerObjects->showTerrain) {
+            if (this->managerObjects->Setting_ShowTerrain) {
                 if (this->newHeightmap && this->heightmapImage != "") {
                     int tChannels;
                     unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
@@ -574,7 +575,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 this->newHeightmap = false;
             }
 
-            if (this->managerObjects->showTerrain) {
+            if (this->managerObjects->Setting_ShowTerrain) {
                 ImGui::Separator();
                 ImGui::Text("Map Dimensions");
                 this->helperUI->addControlsIntegerSliderSameLine("X", 1, 10, 256, &this->managerObjects->Setting_TerrainWidth);

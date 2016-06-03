@@ -45,8 +45,9 @@ void ObjectsManager::destroy() {
     }
 }
 
-void ObjectsManager::init(std::function<void(float)> doProgress) {
+void ObjectsManager::init(std::function<void(float)> doProgress, std::function<void()> addTerrain) {
     this->funcProgress = doProgress;
+    this->funcAddTerrain = addTerrain;
 
     this->lightSources.clear();
     this->systemModels.clear();
@@ -104,11 +105,16 @@ void ObjectsManager::render() {
     }
     this->renderSkybox();
 
-    if (this->showTerrain) {
+    if (this->Setting_ShowTerrain) {
         if (this->heightmapImage == "")
             this->generateTerrain();
         this->terrain->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
         this->heightmapImage = this->terrain->heightmapImage;
+    }
+
+    if (this->Setting_TerrainModel) {
+        this->funcAddTerrain();
+        this->Setting_TerrainModel = false;
     }
 }
 
@@ -125,8 +131,6 @@ void ObjectsManager::resetSettings() {
     this->Setting_PlaneClose = 0.1f;
     this->Setting_PlaneFar = 1000.0f;
     this->Setting_GridSize = 30;
-    this->Setting_TerrainWidth = 100;
-    this->Setting_TerrainHeight = 100;
     this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UIAmbientLight = glm::vec3(0.2f);
     this->Setting_FixedGridWorld = true;
@@ -143,7 +147,10 @@ void ObjectsManager::resetSettings() {
     this->SolidLight_Ambient_ColorPicker = false;
     this->SolidLight_Diffuse_ColorPicker = false;
     this->SolidLight_Specular_ColorPicker = false;
-    this->showTerrain = false;
+    this->Setting_ShowTerrain = false;
+    this->Setting_TerrainModel = false;
+    this->Setting_TerrainWidth = 100;
+    this->Setting_TerrainHeight = 100;
 }
 
 void ObjectsManager::resetPropertiesSystem() {

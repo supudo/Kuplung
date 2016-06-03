@@ -125,7 +125,8 @@ bool Kuplung::init() {
                     this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->managerObjects = new ObjectsManager(this->parser);
-                    this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
+                    this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1),
+                                               std::bind(&Kuplung::addTerrainModel, this));
 
                     this->managerUI = new UI();
                     this->managerUI->init(gWindow,
@@ -296,6 +297,28 @@ void Kuplung::onEvent(SDL_Event *ev) {
 
 #pragma mark - Rendering
 
+void Kuplung::addTerrainModel() {
+    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, this->managerObjects->Setting_TerrainWidth, this->managerObjects->Setting_TerrainHeight);
+    this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
+    this->managerObjects->terrain->Setting_UseTexture = true;
+    ModelFace *mmf = new ModelFace();
+    mmf->dataVertices = this->managerObjects->grid->dataVertices;
+    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+    mmf->dataNormals = this->managerObjects->grid->dataNormals;
+    mmf->dataIndices = this->managerObjects->grid->dataIndices;
+
+    mmf->ModelID = 1;
+    mmf->init();
+    mmf->setModel(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+    mmf->initBoundingBox();
+    mmf->initModelProperties();
+    mmf->initShaderProgram();
+    mmf->initBuffers(Settings::Instance()->currentFolder);
+    this->meshModelFaces.push_back(mmf);
+    this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+    this->managerUI->meshModelFaces = &this->meshModelFaces;
+}
+
 void Kuplung::renderScene() {
     this->managerObjects->render();
 
@@ -401,27 +424,6 @@ void Kuplung::initSceneGUI() {
 //    fileTestbed.title = testObj;
 //    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
 //    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
-
-    // terrain as object
-//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 100, 100);
-//    this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
-//    this->managerObjects->terrain->Setting_UseTexture = true;
-//    ModelFace *mmf = new ModelFace();
-//    mmf->dataVertices = this->managerObjects->grid->dataVertices;
-//    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
-//    mmf->dataNormals = this->managerObjects->grid->dataNormals;
-//    mmf->dataIndices = this->managerObjects->grid->dataIndices;
-
-//    mmf->ModelID = 1;
-//    mmf->init();
-//    mmf->setModel(this->managerObjects->terrain->terrainGenerator->modelTerrain);
-//    mmf->initBoundingBox();
-//    mmf->initModelProperties();
-//    mmf->initShaderProgram();
-//    mmf->initBuffers(Settings::Instance()->currentFolder);
-//    this->meshModelFaces.push_back(mmf);
-//    this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
-//    this->managerUI->meshModelFaces = &this->meshModelFaces;
 }
 
 void Kuplung::addShape(ShapeType type) {
