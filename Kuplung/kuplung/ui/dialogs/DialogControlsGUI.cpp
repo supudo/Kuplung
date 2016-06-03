@@ -524,7 +524,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
                 ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
                 ImGui::Checkbox("Terrain Model", &this->managerObjects->Setting_TerrainModel);
-                // TODO: too much RAM consuming
+                // TODO: BIG memory consumption
 //                ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
 //                ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);
             }
