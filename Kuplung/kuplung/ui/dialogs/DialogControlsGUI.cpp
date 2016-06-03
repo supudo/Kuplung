@@ -581,8 +581,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             if (this->managerObjects->Setting_ShowTerrain) {
                 ImGui::Separator();
                 ImGui::Text("Map Dimensions");
-                this->helperUI->addControlsIntegerSliderSameLine("X", 1, 10, 256, &this->managerObjects->Setting_TerrainWidth);
-                this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 10, 256, &this->managerObjects->Setting_TerrainHeight);
+                this->helperUI->addControlsIntegerSliderSameLine("X", 1, 10, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainWidth);
+                this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 10, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainHeight);
                 ImGui::Separator();
                 ImGui::Text("Terrain Map Offset");
                 this->helperUI->addControlsFloatSliderSameLine("X", 3, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
