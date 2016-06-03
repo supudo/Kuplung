@@ -403,7 +403,7 @@ void Kuplung::initSceneGUI() {
 //    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 
     // terrain as object
-//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 20, 20);
+//    this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, 100, 100);
 //    this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
 //    this->managerObjects->terrain->Setting_UseTexture = true;
 //    ModelFace *mmf = new ModelFace();

@@ -43,7 +43,9 @@ private:
     utils::NoiseMap heightMap;
     utils::Image image;
 
-    void generateGeometry();
+    void generateMeshModel();
+    void generateGeometry2();
+    void generateGeometryCubic();
 };
 
 #endif /* HeightmapGenerator_hpp */

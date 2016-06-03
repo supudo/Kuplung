@@ -109,10 +109,81 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
 
-    this->generateGeometry();
+    this->generateGeometry2();
 }
 
-void HeightmapGenerator::generateGeometry() {
+void HeightmapGenerator::generateGeometry2() {
+    // BIG thanks to http://stackoverflow.com/a/10114636/69897 !!!!
+    unsigned int heightmapHeight = this->heightMap.GetHeight();
+    unsigned int heightmapWidth = this->heightMap.GetWidth();
+
+    unsigned int gridHeight = heightmapHeight - 1;
+    unsigned int gridWidth = heightmapWidth - 1;
+
+    this->vertices.clear();
+    this->uvs.clear();
+    this->indices.clear();
+    this->colors.clear();
+
+    float heightCoef = 10.0f;
+    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+    float divisionCoeficient = 10.0f;
+    const float rr = 1.0f / float(heightmapHeight - 1);
+    const float ss = 1.0f / float(heightmapWidth - 1);
+
+    float p_x, p_y, p_z;
+    glm::vec3 position, color;
+    glm::vec2 uv;
+    for (unsigned int y=0; y<heightmapHeight; ++y) {
+        for (unsigned int x=0; x<heightmapWidth; ++x) {
+            p_x = x + worldCenter;
+            p_y = y + worldCenter;
+            p_z = this->heightMap.GetValue(x, y) * heightCoef;
+            position = glm::vec3(p_x, p_y, p_z) / divisionCoeficient;
+            //uv = glm::vec2(x * 2.0f / heightmapWidth, y * 2.0f / heightmapHeight);
+            uv = glm::vec2(x * rr, y * ss);
+            this->vertices.push_back(position);
+            this->uvs.push_back(uv);
+            this->normals.push_back(glm::vec3(0, 1, 0));
+
+            utils::Color c = this->image.GetValue(x, y);
+            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            this->colors.push_back(color);
+        }
+    }
+
+    glm::vec3 v1, v2, v3, normal;
+    for (unsigned int y=0; y<gridHeight; ++y) {
+        for (unsigned int x=0; x<gridWidth; ++x) {
+            unsigned int start = y * heightmapWidth + x;
+            this->indices.push_back(start);
+            this->indices.push_back(start + 1);
+            this->indices.push_back(start + heightmapWidth);
+            v1 = this->vertices[start];
+            v2 = this->vertices[start + 1];
+            v3 = this->vertices[start + heightmapWidth];
+            normal = glm::cross(v2 - v1, v3 - v1);
+            this->normals[start] = normal;
+            this->normals[start + 1] = normal;
+            this->normals[start + heightmapWidth] = normal;
+
+            this->indices.push_back(start + 1);
+            this->indices.push_back(start + 1 + heightmapWidth);
+            this->indices.push_back(start + heightmapWidth);
+            v1 = this->vertices[start];
+            v2 = this->vertices[start + heightmapWidth];
+            v3 = this->vertices[start + 1 + heightmapWidth];
+            normal = glm::cross(v2 - v1, v3 - v1);
+            this->normals[start] = normal;
+            this->normals[start + heightmapWidth] = normal;
+            this->normals[start + 1 + heightmapWidth] = normal;
+        }
+    }
+
+    this->generateMeshModel();
+}
+
+void HeightmapGenerator::generateGeometryCubic() {
     // vertices, colors, indices
 
     int heightmapHeight = this->heightMap.GetHeight();
@@ -315,43 +386,7 @@ void HeightmapGenerator::generateGeometry() {
         }
     }
 
-    this->modelTerrain = {};
-    this->modelTerrain.vertices.clear();
-    this->modelTerrain.texture_coordinates.clear();
-    this->modelTerrain.normals.clear();
-    this->modelTerrain.indices.clear();
-
-    this->modelTerrain.ID = 1;
-    this->modelTerrain.MaterialTitle = "MaterialTerrain";
-    this->modelTerrain.ModelTitle = "Terrain";
-
-    this->modelTerrain.vertices = this->vertices;
-    this->modelTerrain.texture_coordinates = this->uvs;
-    this->modelTerrain.normals = this->normals;
-    this->modelTerrain.indices = this->indices;
-
-    this->modelTerrain.countVertices = int(this->vertices.size());
-    this->modelTerrain.countTextureCoordinates = int(this->uvs.size());
-    this->modelTerrain.countNormals = int(this->normals.size());
-    this->modelTerrain.countIndices = int(this->indices.size());
-
-    MeshModelMaterial material;
-    material.MaterialID = 1;
-    material.MaterialTitle = "MaterialTerrain";
-    material.AmbientColor = glm::vec3(0.7f);
-    material.DiffuseColor = glm::vec3(0.7f);
-    material.SpecularExp = 99.0f;
-    material.IlluminationMode = 2;
-    material.OpticalDensity = 1.0;
-    material.Transparency = 1.0f;
-    MeshMaterialTextureImage textureDiffuse;
-    textureDiffuse.Image = this->heightmapImage;
-    textureDiffuse.Filename = this->heightmapImage;
-    textureDiffuse.Width = heightmapWidth;
-    textureDiffuse.Height = heightmapHeight;
-    textureDiffuse.UseTexture = true;
-    material.TextureDiffuse = textureDiffuse;
-    this->modelTerrain.ModelMaterial = material;
+    this->generateMeshModel();
 
     if (Settings::Instance()->logDebugInfo) {
         std::ofstream out(this->assetsFolder + "/terrain.txt");
@@ -404,4 +439,44 @@ void HeightmapGenerator::generateGeometry() {
         }
     }
     */
+}
+
+void HeightmapGenerator::generateMeshModel() {
+    this->modelTerrain = {};
+    this->modelTerrain.vertices.clear();
+    this->modelTerrain.texture_coordinates.clear();
+    this->modelTerrain.normals.clear();
+    this->modelTerrain.indices.clear();
+
+    this->modelTerrain.ID = 1;
+    this->modelTerrain.MaterialTitle = "MaterialTerrain";
+    this->modelTerrain.ModelTitle = "Terrain";
+
+    this->modelTerrain.vertices = this->vertices;
+    this->modelTerrain.texture_coordinates = this->uvs;
+    this->modelTerrain.normals = this->normals;
+    this->modelTerrain.indices = this->indices;
+
+    this->modelTerrain.countVertices = int(this->vertices.size());
+    this->modelTerrain.countTextureCoordinates = int(this->uvs.size());
+    this->modelTerrain.countNormals = int(this->normals.size());
+    this->modelTerrain.countIndices = int(this->indices.size());
+
+    MeshModelMaterial material;
+    material.MaterialID = 1;
+    material.MaterialTitle = "MaterialTerrain";
+    material.AmbientColor = glm::vec3(0.7f);
+    material.DiffuseColor = glm::vec3(0.7f);
+    material.SpecularExp = 99.0f;
+    material.IlluminationMode = 2;
+    material.OpticalDensity = 1.0;
+    material.Transparency = 1.0f;
+    MeshMaterialTextureImage textureDiffuse;
+    textureDiffuse.Image = this->heightmapImage;
+    textureDiffuse.Filename = this->heightmapImage;
+    textureDiffuse.Width = this->width;
+    textureDiffuse.Height = this->height;
+    textureDiffuse.UseTexture = true;
+    material.TextureDiffuse = textureDiffuse;
+    this->modelTerrain.ModelMaterial = material;
 }
