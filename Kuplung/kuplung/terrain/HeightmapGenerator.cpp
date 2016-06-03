@@ -28,6 +28,7 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Frequency = 2.0f;
     this->Setting_Persistence = 0.5f;
     this->Setting_ColorTerrain = true;
+    this->Setting_SmoothTerrain = true;
 
     this->Setting_OffsetHorizontal = 0.0f;
     this->Setting_OffsetVertical = 0.0f;
@@ -111,7 +112,10 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
 
-    this->generateGeometryCubic();
+    if (this->Setting_SmoothTerrain)
+        this->generateGeometrySmooth();
+    else
+        this->generateGeometryCubic();
 }
 
 void HeightmapGenerator::generateGeometrySmooth() {

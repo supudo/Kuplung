@@ -522,6 +522,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
                 ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
+                ImGui::Checkbox("Smooth Terrain", &this->managerObjects->terrain->terrainGenerator->Setting_SmoothTerrain);
                 ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
                 ImGui::Checkbox("Terrain Model", &this->managerObjects->Setting_TerrainModel);
                 // TODO: BIG memory consumption
