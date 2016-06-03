@@ -274,9 +274,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v4 / divisionCoeficient);
             this->vertices.push_back(v5 / divisionCoeficient);
 
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
+            this->uvs.push_back(uv2);
+            this->uvs.push_back(uv2);
+            this->uvs.push_back(uv2);
 
             this->normals.push_back(n2);
             this->normals.push_back(n2);
@@ -295,9 +295,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v5 / divisionCoeficient);
             this->vertices.push_back(v2 / divisionCoeficient);
 
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
+            this->uvs.push_back(uv2);
+            this->uvs.push_back(uv2);
+            this->uvs.push_back(uv2);
 
             this->normals.push_back(n2);
             this->normals.push_back(n2);
@@ -316,9 +316,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v2 / divisionCoeficient);
             this->vertices.push_back(v10 / divisionCoeficient);
 
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
+            this->uvs.push_back(uv3);
+            this->uvs.push_back(uv3);
+            this->uvs.push_back(uv3);
 
             this->normals.push_back(n3);
             this->normals.push_back(n3);
@@ -337,9 +337,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->vertices.push_back(v10 / divisionCoeficient);
             this->vertices.push_back(v11 / divisionCoeficient);
 
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
-            this->uvs.push_back(uv);
+            this->uvs.push_back(uv3);
+            this->uvs.push_back(uv3);
+            this->uvs.push_back(uv3);
 
             this->normals.push_back(n3);
             this->normals.push_back(n3);
