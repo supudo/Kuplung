@@ -198,10 +198,11 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->colors.push_back(color);
             this->colors.push_back(color);
 
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v0.x, v0.y, v0.z,
-                   v1.x, v1.y, v1.z,
-                   v2.x, v2.y, v2.z);
+            if (Settings::Instance()->logDebugInfo)
+                grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                       v0.x, v0.y, v0.z,
+                       v1.x, v1.y, v1.z,
+                       v2.x, v2.y, v2.z);
 
     // triangle 2
             this->vertices.push_back(v0 / divisionCoeficient);
@@ -223,11 +224,6 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
             this->colors.push_back(color);
             this->colors.push_back(color);
             this->colors.push_back(color);
-
-            grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
-                   v0.x, v0.y, v0.z,
-                   v2.x, v2.y, v2.z,
-                   v3.x, v3.y, v3.z);
 
     // connecting triangle 1 - right
             this->vertices.push_back(v1 / divisionCoeficient);
@@ -353,9 +349,11 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     material.TextureDiffuse = textureDiffuse;
     this->modelTerrain.ModelMaterial = material;
 
-    std::ofstream out(assetsFolder + "/terrain.txt");
-    out << grapher;
-    out.close();
+    if (Settings::Instance()->logDebugInfo) {
+        std::ofstream out(assetsFolder + "/terrain.txt");
+        out << grapher;
+        out.close();
+    }
 
     /*
     // sphere generation
