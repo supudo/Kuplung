@@ -519,7 +519,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
             ImGui::Checkbox("Show Terrain", &this->managerObjects->Setting_ShowTerrain);
             if (this->managerObjects->Setting_ShowTerrain) {
-                ImGui::Checkbox("Generate new terrain", &this->generateNewTerrain);
+                ImGui::Separator();
+                if (ImGui::Button("Generate Terrain", ImVec2(-1, 0)))
+                    this->generateNewTerrain = !this->generateNewTerrain;
                 ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
                 ImGui::Checkbox("Smooth Terrain", &this->managerObjects->terrain->terrainGenerator->Setting_SmoothTerrain);
