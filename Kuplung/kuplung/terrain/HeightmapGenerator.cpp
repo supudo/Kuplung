@@ -133,9 +133,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3;
     glm::vec2 uv, uv2, uv3;
     float hmValue, hmValue2, hmValue3;
-    for (int y=0; y<heightmapHeight * 3; ++y) {
+    for (int y=0; y<(heightmapHeight - 1) * 3; ++y) {
     //for (int y=0; y<3; ++y) {
-        for (int x=0; x<heightmapWidth; ++x) {
+        for (int x=0; x<heightmapWidth - 1; ++x) {
             hmValue = heightMap.GetValue(x, y) * 10.0f;
             hmValue2 = heightMap.GetValue(x + 1, y) * 10.0f;
             hmValue3 = heightMap.GetValue(x, y + 1) * 10.0f;
