@@ -128,7 +128,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     float balanceCoeficient = 1.0f;
     float divisionCoeficient = 10.0f;
     unsigned int vertIndex = 0;
-    float worldCenter = 0;//-1.0f * heightmapWidth / 2.0f;
+    float worldCenter = -1.0f * heightmapWidth / 2.0f;
 
     glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3;
     glm::vec2 uv, uv2, uv3;
