@@ -15,6 +15,12 @@
 #include "kuplung/utilities/libnoise/noiseutils.h"
 #include <glm/common.hpp>
 
+typedef enum GeometryTerrainType {
+    GeometryTerrainType_Smooth,
+    GeometryTerrainType_Cubic,
+    GeometryTerrainType_Sphere
+} GeometryTerrainType;
+
 class HeightmapGenerator {
 public:
     ~HeightmapGenerator();
@@ -30,6 +36,7 @@ public:
     float Setting_Frequency, Setting_Persistence, Setting_ScaleCoeficient, Setting_HeightCoeficient;
     float Setting_OffsetHorizontal, Setting_OffsetVertical;
     bool Setting_ColorTerrain, Setting_SmoothTerrain;
+    int Setting_TerrainType;
     MeshModel modelTerrain;
 
 private:
@@ -44,8 +51,9 @@ private:
     utils::Image image;
 
     void generateMeshModel();
-    void generateGeometrySmooth();
-    void generateGeometryCubic();
+    void generatePlaneGeometrySmooth();
+    void generatePlaneGeometryCubic();
+    void generateSphereGeometry();
 };
 
 #endif /* HeightmapGenerator_hpp */

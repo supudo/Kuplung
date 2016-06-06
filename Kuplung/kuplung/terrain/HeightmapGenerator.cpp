@@ -29,6 +29,7 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Persistence = 0.5f;
     this->Setting_ColorTerrain = true;
     this->Setting_SmoothTerrain = true;
+    this->Setting_TerrainType = 0;
 
     this->Setting_OffsetHorizontal = 0.0f;
     this->Setting_OffsetVertical = 0.0f;
@@ -112,13 +113,20 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     writer.SetDestFilename(this->heightmapImage);
     writer.WriteDestFile();
 
-    if (this->Setting_SmoothTerrain)
-        this->generateGeometrySmooth();
-    else
-        this->generateGeometryCubic();
+    switch (this->Setting_TerrainType) {
+        case GeometryTerrainType_Cubic:
+            this->generatePlaneGeometryCubic();
+            break;
+        case GeometryTerrainType_Sphere:
+            this->generateSphereGeometry();
+            break;
+        default:
+            this->generatePlaneGeometrySmooth();
+            break;
+    }
 }
 
-void HeightmapGenerator::generateGeometrySmooth() {
+void HeightmapGenerator::generatePlaneGeometrySmooth() {
     // BIG thanks to http://stackoverflow.com/a/10114636/69897 !!!!
     unsigned int heightmapHeight = this->heightMap.GetHeight();
     unsigned int heightmapWidth = this->heightMap.GetWidth();
@@ -184,9 +192,7 @@ void HeightmapGenerator::generateGeometrySmooth() {
     this->generateMeshModel();
 }
 
-void HeightmapGenerator::generateGeometryCubic() {
-    // vertices, colors, indices
-
+void HeightmapGenerator::generatePlaneGeometryCubic() {
     int heightmapHeight = this->heightMap.GetHeight();
     int heightmapWidth = this->heightMap.GetWidth();
 
@@ -392,22 +398,38 @@ void HeightmapGenerator::generateGeometryCubic() {
         out << grapher;
         out.close();
     }
+}
 
-    /*
-    // sphere generation
+void HeightmapGenerator::generateSphereGeometry() {
+    int heightmapHeight = this->heightMap.GetHeight();
+    int heightmapWidth = this->heightMap.GetWidth();
+
+    this->vertices.clear();
+    this->uvs.clear();
+    this->normals.clear();
+    this->colors.clear();
+    this->indices.clear();
+
+    const float rr = 1.0f / float(heightmapHeight - 1);
+    const float ss = 1.0f / float(heightmapWidth - 1);
+
+    unsigned int vertIndex = 0;
+    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+    glm::vec3 color;
+    glm::vec2 uv;
+    float hmValue;
+    utils::Color c;
+
     static const double pi = glm::pi<double>();
     static const double pi_2 = glm::half_pi<double>();
 
-    std::vector<float> hmValues;
-    int vertIndex = 0;
     for (int y=0; y<heightmapHeight; ++y) {
         for (int x=0; x<heightmapWidth; ++x) {
-            float hmValue = heightMap.GetValue(x, y) * 10;
-            hmValues.push_back(hmValue);
+            hmValue = heightMap.GetValue(x, y) * 10;
 
-            utils::Color c = image.GetValue(x, y);
-            glm::vec3 color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            glm::vec2 uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
+            c = this->image.GetValue(x, y);
+            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+            uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
 
             // triangle 1
             glm::vec3 point(
@@ -421,23 +443,21 @@ void HeightmapGenerator::generateGeometryCubic() {
             this->modelTerrain.vertices.push_back(point * hmValue);
 
             uv = glm::vec2(x * ss, y * rr);
+            this->uvs.push_back(uv);
             this->modelTerrain.texture_coordinates.push_back(uv);
             this->modelTerrain.countTextureCoordinates += 1;
 
             this->normals.push_back(point);
             this->modelTerrain.countNormals += 1;
 
+            this->colors.push_back(color);
+
             this->indices.push_back(vertIndex);
             vertIndex += 1;
             this->modelTerrain.countIndices += 1;
             this->modelTerrain.indices.push_back(vertIndex);
-
-            this->colors.push_back(color);
-
-            grapher += Settings::Instance()->string_format(" %f,%f,%f \n", point.x, point.y, point.z);
         }
     }
-    */
 }
 
 void HeightmapGenerator::generateMeshModel() {

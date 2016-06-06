@@ -530,6 +530,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 // TODO: BIG memory consumption
 //                ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
 //                ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);
+                ImGui::Separator();
+                ImGui::Text("Geometry Type");
+                const char* geometry_terraintype_items[] = {
+                    "Smooth",
+                    "Cubic",
+                    "Spherical"
+                };
+                ImGui::Combo("##2291", &this->managerObjects->terrain->terrainGenerator->Setting_TerrainType, geometry_terraintype_items, IM_ARRAYSIZE(geometry_terraintype_items));
             }
 
             if (this->generateNewTerrain) {
