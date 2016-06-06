@@ -1,12 +1,12 @@
 //
-//  GUIEditor.cpp
+//  ShaderEditor.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/25/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "kuplung/ui/components/Editor.hpp"
+#include "kuplung/ui/components/ShaderEditor.hpp"
 #include <fstream>
 #include "kuplung/utilities/imgui/imgui_internal.h"
 
@@ -27,7 +27,7 @@ const char* GUIEditor_ShaderItems[] = {
     "terrain.frag"
 };
 
-void Editor::init(std::string appPath, int positionX, int positionY, int width, int height) {
+void ShaderEditor::init(std::string appPath, int positionX, int positionY, int width, int height) {
     this->appPath = appPath;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -37,7 +37,7 @@ void Editor::init(std::string appPath, int positionX, int positionY, int width, 
     this->currentFileName = "";
 }
 
-void Editor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
+void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
     this->doFileShaderCompile = fileShaderCompile;
 
     if (this->width > 0 && this->height > 0)
@@ -89,7 +89,7 @@ void Editor::draw(std::function<void(std::string)> fileShaderCompile, const char
     ImGui::End();
 }
 
-void Editor::compileShader() {
+void ShaderEditor::compileShader() {
     if (this->shaderFileIndex > 0) {
         std::string shaderSource = std::string(this->guiEditorText);
         if (!shaderSource.empty()) {

@@ -81,7 +81,7 @@ void UI::init(SDL_Window *window,
     this->componentFileSaver = new FileSaver();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
-    this->componentFileEditor = new Editor();
+    this->componentFileEditor = new ShaderEditor();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
 
     this->windowStyle = new DialogStyle();

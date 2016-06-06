@@ -28,7 +28,6 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Frequency = 2.0f;
     this->Setting_Persistence = 0.5f;
     this->Setting_ColorTerrain = true;
-    this->Setting_SmoothTerrain = true;
     this->Setting_TerrainType = 0;
 
     this->Setting_OffsetHorizontal = 0.0f;
@@ -131,9 +130,6 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
     unsigned int heightmapHeight = this->heightMap.GetHeight();
     unsigned int heightmapWidth = this->heightMap.GetWidth();
 
-    unsigned int gridHeight = heightmapHeight - 1;
-    unsigned int gridWidth = heightmapWidth - 1;
-
     this->vertices.clear();
     this->uvs.clear();
     this->indices.clear();
@@ -162,8 +158,8 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
     }
 
     glm::vec3 v1, v2, v3, normal;
-    for (unsigned int y=0; y<gridHeight; ++y) {
-        for (unsigned int x=0; x<gridWidth; ++x) {
+    for (unsigned int y=0; y<(heightmapHeight - 1); ++y) {
+        for (unsigned int x=0; x<(heightmapWidth - 1); ++x) {
             unsigned int start = y * heightmapWidth + x;
             this->indices.push_back(start);
             this->indices.push_back(start + 1);
@@ -190,6 +186,88 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
     }
 
     this->generateMeshModel();
+}
+
+void HeightmapGenerator::generateSphereGeometry() {
+    unsigned int heightmapHeight = this->heightMap.GetHeight();
+    unsigned int heightmapWidth = this->heightMap.GetWidth();
+
+    this->vertices.clear();
+    this->uvs.clear();
+    this->normals.clear();
+    this->colors.clear();
+    this->indices.clear();
+
+    std::string grapher = "";
+
+    const float rr = 1.0f / float(heightmapHeight - 1);
+    const float ss = 1.0f / float(heightmapWidth - 1);
+
+    static const double pi = glm::pi<double>();
+    static const double pi_2 = glm::half_pi<double>();
+
+    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+
+    float hmValue;
+    float p_x, p_y, p_z;
+    glm::vec3 position, color;
+    glm::vec2 uv;
+    utils::Color c;
+    for (unsigned int y=0; y<heightmapHeight; ++y) {
+        for (unsigned int x=0; x<heightmapWidth; ++x) {
+            hmValue = this->heightMap.GetValue(x, y);
+            p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
+            p_y = float(sin(-pi_2 + pi * y * rr)) * this->Setting_ScaleCoeficient;
+            p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
+            p_z += hmValue * this->Setting_HeightCoeficient;
+
+            position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
+            uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
+            c = this->image.GetValue(x, y);
+            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+
+            this->vertices.push_back(position);
+            this->uvs.push_back(uv);
+            this->normals.push_back(glm::vec3(0, 1, 0));
+            this->colors.push_back(color);
+        }
+    }
+
+    glm::vec3 v1, v2, v3, normal;
+    for (unsigned int y=0; y<(heightmapHeight - 1); ++y) {
+        for (unsigned int x=0; x<(heightmapWidth - 1); ++x) {
+            unsigned int start = y * heightmapWidth + x;
+            this->indices.push_back(start);
+            this->indices.push_back(start + 1);
+            this->indices.push_back(start + heightmapWidth);
+            v1 = this->vertices[start];
+            v2 = this->vertices[start + 1];
+            v3 = this->vertices[start + heightmapWidth];
+            normal = glm::cross(v2 - v1, v3 - v1);
+            this->normals[start] = normal;
+            this->normals[start + 1] = normal;
+            this->normals[start + heightmapWidth] = normal;
+
+            this->indices.push_back(start + 1);
+            this->indices.push_back(start + 1 + heightmapWidth);
+            this->indices.push_back(start + heightmapWidth);
+            v1 = this->vertices[start];
+            v2 = this->vertices[start + heightmapWidth];
+            v3 = this->vertices[start + 1 + heightmapWidth];
+            normal = glm::cross(v2 - v1, v3 - v1);
+            this->normals[start] = normal;
+            this->normals[start + heightmapWidth] = normal;
+            this->normals[start + 1 + heightmapWidth] = normal;
+        }
+    }
+
+    this->generateMeshModel();
+
+    if (Settings::Instance()->logDebugInfo) {
+        std::ofstream out(this->assetsFolder + "/terrain.txt");
+        out << grapher;
+        out.close();
+    }
 }
 
 void HeightmapGenerator::generatePlaneGeometryCubic() {
@@ -397,66 +475,6 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
         std::ofstream out(this->assetsFolder + "/terrain.txt");
         out << grapher;
         out.close();
-    }
-}
-
-void HeightmapGenerator::generateSphereGeometry() {
-    int heightmapHeight = this->heightMap.GetHeight();
-    int heightmapWidth = this->heightMap.GetWidth();
-
-    this->vertices.clear();
-    this->uvs.clear();
-    this->normals.clear();
-    this->colors.clear();
-    this->indices.clear();
-
-    const float rr = 1.0f / float(heightmapHeight - 1);
-    const float ss = 1.0f / float(heightmapWidth - 1);
-
-    unsigned int vertIndex = 0;
-    float worldCenter = -1.0f * heightmapWidth / 2.0f;
-    glm::vec3 color;
-    glm::vec2 uv;
-    float hmValue;
-    utils::Color c;
-
-    static const double pi = glm::pi<double>();
-    static const double pi_2 = glm::half_pi<double>();
-
-    for (int y=0; y<heightmapHeight; ++y) {
-        for (int x=0; x<heightmapWidth; ++x) {
-            hmValue = heightMap.GetValue(x, y) * 10;
-
-            c = this->image.GetValue(x, y);
-            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            uv = glm::vec2(glm::clamp((float)x, 0.0f, 1.0f), glm::clamp((float)y, 0.0f, 1.0f));
-
-            // triangle 1
-            glm::vec3 point(
-                        float(cos(2 * pi * x * ss) * sin(pi * y * rr)),
-                        float(sin(-pi_2 + pi * y * rr)),
-                        float(sin(2 * pi * x * ss) * sin(pi * y * rr))
-                    );
-
-            this->vertices.push_back(point * hmValue);
-            this->modelTerrain.countVertices += 1;
-            this->modelTerrain.vertices.push_back(point * hmValue);
-
-            uv = glm::vec2(x * ss, y * rr);
-            this->uvs.push_back(uv);
-            this->modelTerrain.texture_coordinates.push_back(uv);
-            this->modelTerrain.countTextureCoordinates += 1;
-
-            this->normals.push_back(point);
-            this->modelTerrain.countNormals += 1;
-
-            this->colors.push_back(color);
-
-            this->indices.push_back(vertIndex);
-            vertIndex += 1;
-            this->modelTerrain.countIndices += 1;
-            this->modelTerrain.indices.push_back(vertIndex);
-        }
     }
 }
 

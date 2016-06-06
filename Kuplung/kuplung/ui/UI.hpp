@@ -18,7 +18,7 @@
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
-#include "kuplung/ui/components/Editor.hpp"
+#include "kuplung/ui/components/ShaderEditor.hpp"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
@@ -103,7 +103,7 @@ private:
     Screenshot *componentScreenshot;
     FileBrowser *componentFileBrowser;
     FileSaver *componentFileSaver;
-    Editor *componentFileEditor;
+    ShaderEditor *componentFileEditor;
     DialogStyle *windowStyle;
     DialogOptions *windowOptions;
     DialogControlsGUI *controlsGUI;
