@@ -33,6 +33,7 @@
 		8A25A6791CB41A64003161D1 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6731CB41A52003161D1 /* stormydays_top.jpg */; };
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
+		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
@@ -85,7 +86,6 @@
 		8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E705B1C6CACAC0085CAE5 /* Settings.cpp */; };
 		8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70611C6CACB40085CAE5 /* HeightmapGenerator.cpp */; };
 		8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70651C6CACB40085CAE5 /* ColorPicker.cpp */; };
-		8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70671C6CACB40085CAE5 /* Editor.cpp */; };
 		8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */; };
 		8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E706D1C6CACB40085CAE5 /* Log.cpp */; };
 		8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E706F1C6CACB40085CAE5 /* Screenshot.cpp */; };
@@ -382,6 +382,8 @@
 		8A2B48791CC4F6EA0077E9D4 /* Exporter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exporter.hpp; path = export/Exporter.hpp; sourceTree = "<group>"; };
 		8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExporterOBJ.cpp; path = export/ExporterOBJ.cpp; sourceTree = "<group>"; };
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
+		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
+		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -446,8 +448,6 @@
 		8A6E70621C6CACB40085CAE5 /* HeightmapGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = HeightmapGenerator.hpp; sourceTree = "<group>"; };
 		8A6E70651C6CACB40085CAE5 /* ColorPicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ColorPicker.cpp; sourceTree = "<group>"; };
 		8A6E70661C6CACB40085CAE5 /* ColorPicker.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ColorPicker.hpp; sourceTree = "<group>"; };
-		8A6E70671C6CACB40085CAE5 /* Editor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Editor.cpp; sourceTree = "<group>"; };
-		8A6E70681C6CACB40085CAE5 /* Editor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Editor.hpp; sourceTree = "<group>"; };
 		8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileBrowser.cpp; sourceTree = "<group>"; };
 		8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileBrowser.hpp; sourceTree = "<group>"; };
 		8A6E706D1C6CACB40085CAE5 /* Log.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Log.cpp; sourceTree = "<group>"; };
@@ -696,8 +696,6 @@
 			children = (
 				8A6E70651C6CACB40085CAE5 /* ColorPicker.cpp */,
 				8A6E70661C6CACB40085CAE5 /* ColorPicker.hpp */,
-				8A6E70671C6CACB40085CAE5 /* Editor.cpp */,
-				8A6E70681C6CACB40085CAE5 /* Editor.hpp */,
 				8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */,
 				8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */,
 				8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */,
@@ -707,6 +705,8 @@
 				8AD91DA91CA3D980004674BC /* materialeditor */,
 				8A6E706F1C6CACB40085CAE5 /* Screenshot.cpp */,
 				8A6E70701C6CACB40085CAE5 /* Screenshot.hpp */,
+				8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */,
+				8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */,
 				8A6E70711C6CACB40085CAE5 /* Tabs.cpp */,
 				8A6E70721C6CACB40085CAE5 /* Tabs.hpp */,
 				8A8540601CEDF39600656C60 /* uveditor */,
@@ -1195,8 +1195,8 @@
 				8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */,
 				8A03648B1C6B71EC001489C8 /* Light.cpp in Sources */,
 				8ABFC1F51CC92BB300FBCF08 /* AxisHelpers.cpp in Sources */,
+				8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */,
 				8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */,
-				8A6E70A71C6CACB40085CAE5 /* Editor.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,

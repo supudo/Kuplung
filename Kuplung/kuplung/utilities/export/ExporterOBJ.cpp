@@ -34,28 +34,6 @@ void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
     this->exportMaterials(faces);
 }
 
-int ExporterOBJ::findInMap3(std::map<int, glm::vec3> m, glm::vec3 v) {
-    std::map<int, glm::vec3>::const_iterator it;
-    int c = 0;
-    for (it = m.begin(); it != m.end(); ++it) {
-        if (it->second == v)
-            return c;
-        c += 1;
-    }
-    return -1;
-}
-
-int ExporterOBJ::findInMap2(std::map<int, glm::vec2> m, glm::vec2 v) {
-    std::map<int, glm::vec2>::const_iterator it;
-    int c = 0;
-    for (it = m.begin(); it != m.end(); ++it) {
-        if (it->second == v)
-            return c;
-        c += 1;
-    }
-    return -1;
-}
-
 std::string ExporterOBJ::exportMesh(ModelFace *face) {
     MeshModel model = face->meshModel;
     std::string meshData = "";
@@ -86,21 +64,18 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
             texture_coordinate = model.texture_coordinates[idx];
         glm::vec3 normal = model.normals[idx];
 
-        if (this->findInMap3(this->uniqueVertices, vertex) == -1) {
-            this->uniqueVertices[this->vCounter] = vertex;
-            this->vCounter += 1;
+        if (find(this->uniqueVertices.begin(), this->uniqueVertices.end(), vertex) == this->uniqueVertices.end()) {
+            this->uniqueVertices.push_back(vertex);
             v += "v " + std::to_string(vertex.x) + " " + std::to_string(vertex.y) + " " + std::to_string(vertex.z) + this->nlDelimiter;
         }
 
-        if (model.texture_coordinates.size() > 0 && this->findInMap2(this->uniqueTextureCoordinates, texture_coordinate) == -1) {
-            this->uniqueTextureCoordinates[this->vtCounter] = texture_coordinate;
-            this->vtCounter += 1;
+        if (find(this->uniqueTextureCoordinates.begin(), this->uniqueTextureCoordinates.end(), texture_coordinate) == this->uniqueTextureCoordinates.end()) {
+            this->uniqueTextureCoordinates.push_back(texture_coordinate);
             vt += "vt " + std::to_string(texture_coordinate.x) + " " + std::to_string(texture_coordinate.y) + this->nlDelimiter;
         }
 
-        if (this->findInMap3(this->uniqueNormals, normal) == -1) {
-            this->uniqueNormals[this->vnCounter] = normal;
-            this->vnCounter += 1;
+        if (find(this->uniqueNormals.begin(), this->uniqueNormals.end(), normal) == this->uniqueNormals.end()) {
+            this->uniqueNormals.push_back(normal);
             vn += "vn " + std::to_string(normal.x) + " " + std::to_string(normal.y) + " " + std::to_string(normal.z) + this->nlDelimiter;
         }
 
@@ -123,12 +98,12 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
         vertex = vertex * rotation;
         vertex = vertex * scale;
 
-        int v = this->findInMap3(this->uniqueVertices, vertex) + 1;
-        int vn = this->findInMap3(this->uniqueNormals, model.normals[j]) + 1;
+        int v = find(this->uniqueVertices.begin(), this->uniqueVertices.end(), vertex) - this->uniqueVertices.begin() + 1;
+        int vn = find(this->uniqueNormals.begin(), this->uniqueNormals.end(), model.normals[j]) - this->uniqueNormals.begin() + 1;
 
         int vt = -1;
         if (model.texture_coordinates.size() > 0)
-            vt = this->findInMap2(this->uniqueTextureCoordinates, model.texture_coordinates[j]);
+            vt = find(this->uniqueTextureCoordinates.begin(), this->uniqueTextureCoordinates.end(), model.texture_coordinates[j]) - this->uniqueTextureCoordinates.begin();
 
         triangleFace += " " + std::to_string(v) + "/" + (vt > -1 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
 
@@ -155,6 +130,9 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
 
+    this->uniqueVertices.clear();
+    this->uniqueTextureCoordinates.clear();
+    this->uniqueNormals.clear();
     this->uniqueVertices.clear();
     this->uniqueTextureCoordinates.clear();
     this->uniqueNormals.clear();
