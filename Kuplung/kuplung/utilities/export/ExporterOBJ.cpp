@@ -81,7 +81,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
 
         progressCounter += 1;
 
-        float progress = (progressCounter / (float)totalProgress) * 100.0;
+        float progress = (progressCounter / float(totalProgress)) * 100.0f;
         this->funcProgress(progress);
     }
 
@@ -98,10 +98,10 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
         vertex = vertex * rotation;
         vertex = vertex * scale;
 
-        int v = find(this->uniqueVertices.begin(), this->uniqueVertices.end(), vertex) - this->uniqueVertices.begin() + 1;
-        int vn = find(this->uniqueNormals.begin(), this->uniqueNormals.end(), model.normals[j]) - this->uniqueNormals.begin() + 1;
+        long v = find(this->uniqueVertices.begin(), this->uniqueVertices.end(), vertex) - this->uniqueVertices.begin() + 1;
+        long vn = find(this->uniqueNormals.begin(), this->uniqueNormals.end(), model.normals[j]) - this->uniqueNormals.begin() + 1;
 
-        int vt = -1;
+        long vt = -1;
         if (model.texture_coordinates.size() > 0)
             vt = find(this->uniqueTextureCoordinates.begin(), this->uniqueTextureCoordinates.end(), model.texture_coordinates[j]) - this->uniqueTextureCoordinates.begin();
 
@@ -114,7 +114,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
 
         progressCounter += 1;
 
-        float progress = (progressCounter / (float)totalProgress) * 100.0;
+        float progress = (progressCounter / float(totalProgress)) * 100.0f;
         this->funcProgress(progress);
     }
 
