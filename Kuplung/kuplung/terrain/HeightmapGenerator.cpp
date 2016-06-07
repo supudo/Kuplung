@@ -226,14 +226,18 @@ void HeightmapGenerator::generateSphereGeometry() {
     glm::vec3 position, color;
     glm::vec2 uv;
     utils::Color c;
-    for (unsigned int y=0; y<heightmapHeight; ++y) {
-        for (unsigned int x=0; x<heightmapWidth; ++x) {
+    for (int y=0; y<heightmapHeight; ++y) {
+        for (int x=0; x<heightmapWidth; ++x) {
             hmValue = this->heightMap.GetValue(x, y);
             p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr));
             p_y = float(sin(-pi_2 + pi * y * rr));
             p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr));
-
             position = glm::vec3(p_x, p_y, p_z) * this->Setting_ScaleCoeficient;
+            position += glm::normalize(position) * hmValue;
+
+            if (Settings::Instance()->logDebugInfo)
+                grapher += Settings::Instance()->string_format("%f,%f,%f\n", position.x, position.y, position.z);
+
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
             c = this->image.GetValue(x, y);
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
