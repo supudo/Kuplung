@@ -152,6 +152,9 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
 
     float worldCenter = -1.0f * heightmapWidth / 2.0f;
 
+    const float rr = 1.0f / float(heightmapHeight - 1);
+    const float ss = 1.0f / float(heightmapWidth - 1);
+
     float p_x, p_y, p_z;
     glm::vec3 position, color;
     glm::vec2 uv;
@@ -162,7 +165,8 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
             p_y = y + worldCenter;
             p_z = this->heightMap.GetValue(x, y) * this->Setting_HeightCoeficient;
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
-            uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
+            uv = glm::vec2(x * ss, 1.0f - y * rr);
+
             c = this->image.GetValue(x, y);
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
