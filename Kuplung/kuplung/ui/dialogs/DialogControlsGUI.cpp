@@ -603,7 +603,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
                 ImGui::Separator();
                 ImGui::Text("Terrain Coeficients");
-                this->helperUI->addControlsFloatSliderSameLine("Scale", 8, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
+                this->helperUI->addControlsFloatSliderSameLine("Scale", 8, 1.0f, 100.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
                 this->helperUI->addControlsFloatSliderSameLine("Height", 9, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_HeightCoeficient);
                 ImGui::Separator();
                 this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);

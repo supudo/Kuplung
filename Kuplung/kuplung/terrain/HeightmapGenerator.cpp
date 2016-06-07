@@ -58,12 +58,22 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     perlinNoiser.SetSeed(this->Setting_Seed);
 
     // heightmap
-    utils::NoiseMapBuilderPlane heightMapBuilder;
-    heightMapBuilder.SetSourceModule(perlinNoiser);
-    heightMapBuilder.SetDestNoiseMap(this->heightMap);
-    heightMapBuilder.SetDestSize(this->width, this->height);
-    heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
-    heightMapBuilder.Build();
+    if (this->Setting_TerrainType != GeometryTerrainType_Sphere) {
+        utils::NoiseMapBuilderPlane heightMapBuilder;
+        heightMapBuilder.SetSourceModule(perlinNoiser);
+        heightMapBuilder.SetDestNoiseMap(this->heightMap);
+        heightMapBuilder.SetDestSize(this->width, this->height);
+        heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
+        heightMapBuilder.Build();
+    }
+    else {
+        utils::NoiseMapBuilderSphere heightMapBuilder;
+        heightMapBuilder.SetSourceModule(perlinNoiser);
+        heightMapBuilder.SetDestNoiseMap(this->heightMap);
+        heightMapBuilder.SetDestSize(this->width, this->height);
+        heightMapBuilder.SetBounds(-90.0, 90.0, -180.0, 180.0);
+        heightMapBuilder.Build();
+    }
 
     // render
     utils::RendererImage renderer;
@@ -211,8 +221,6 @@ void HeightmapGenerator::generateSphereGeometry() {
     static const double pi = glm::pi<double>();
     static const double pi_2 = glm::half_pi<double>();
 
-    float worldCenter = -1.0f * heightmapWidth / 2.0f;
-
     float hmValue;
     float p_x, p_y, p_z;
     glm::vec3 position, color;
@@ -221,11 +229,11 @@ void HeightmapGenerator::generateSphereGeometry() {
     for (unsigned int y=0; y<heightmapHeight; ++y) {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
             hmValue = this->heightMap.GetValue(x, y);
-            p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
-            p_y = float(sin(-pi_2 + pi * y * rr)) * this->Setting_ScaleCoeficient;
-            p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
+            p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr));
+            p_y = float(sin(-pi_2 + pi * y * rr));
+            p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr));
 
-            position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
+            position = glm::vec3(p_x, p_y, p_z) * this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
             c = this->image.GetValue(x, y);
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
