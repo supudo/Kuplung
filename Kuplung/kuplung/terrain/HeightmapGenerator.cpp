@@ -163,12 +163,12 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
             p_z = this->heightMap.GetValue(x, y) * this->Setting_HeightCoeficient;
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
+            c = this->image.GetValue(x, y);
+            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
+
             this->vertices.push_back(position);
             this->uvs.push_back(uv);
             this->normals.push_back(glm::vec3(0, 1, 0));
-
-            c = this->image.GetValue(x, y);
-            color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
             this->colors.push_back(color);
         }
     }
