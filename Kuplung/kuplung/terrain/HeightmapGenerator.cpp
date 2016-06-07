@@ -34,6 +34,8 @@ void HeightmapGenerator::initPosition() {
     this->Setting_OffsetVertical = 0.0f;
     this->Setting_ScaleCoeficient = 10.0f;
     this->Setting_HeightCoeficient = 10.0f;
+
+    this->Setting_Seed = 1;
 }
 
 void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, int height) {
@@ -51,6 +53,9 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, in
     perlinNoiser.SetOctaveCount(this->Setting_Octaves);
     perlinNoiser.SetFrequency(double(this->Setting_Frequency));
     perlinNoiser.SetPersistence(double(this->Setting_Persistence));
+    if (this->Setting_SeedRandom)
+        this->Setting_Seed = rand();
+    perlinNoiser.SetSeed(this->Setting_Seed);
 
     // heightmap
     utils::NoiseMapBuilderPlane heightMapBuilder;
@@ -219,7 +224,6 @@ void HeightmapGenerator::generateSphereGeometry() {
             p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
             p_y = float(sin(-pi_2 + pi * y * rr)) * this->Setting_ScaleCoeficient;
             p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr)) * this->Setting_ScaleCoeficient;
-            p_z += hmValue * this->Setting_HeightCoeficient;
 
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);

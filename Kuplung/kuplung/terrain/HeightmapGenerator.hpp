@@ -35,8 +35,8 @@ public:
     int Setting_Octaves;
     float Setting_Frequency, Setting_Persistence, Setting_ScaleCoeficient, Setting_HeightCoeficient;
     float Setting_OffsetHorizontal, Setting_OffsetVertical;
-    bool Setting_ColorTerrain;
-    int Setting_TerrainType;
+    bool Setting_ColorTerrain, Setting_SeedRandom;
+    int Setting_TerrainType, Setting_Seed;
     MeshModel modelTerrain;
 
 private:
