@@ -595,8 +595,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainHeight);
                 ImGui::Separator();
                 ImGui::Text("Terrain Map Offset");
-                this->helperUI->addControlsFloatSliderSameLine("X", 3, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
-                this->helperUI->addControlsFloatSliderSameLine("Y", 4, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
+                this->helperUI->addControlsFloatSliderSameLine("X", 3, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
+                this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
                 ImGui::Separator();
                 ImGui::Text("Terrain Coeficients");
                 this->helperUI->addControlsFloatSliderSameLine("Scale", 8, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
