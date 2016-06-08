@@ -68,6 +68,7 @@ void UI::init(SDL_Window *window,
     this->showImageSave = false;
     this->showOBJImporter = false;
     this->showSaveDialog = false;
+    this->showRenderer = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -163,7 +164,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
 
-            ImGui::MenuItem(ICON_FA_FLOPPY_O " Save ...", NULL, &this->showSaveDialog);
+            if (ImGui::MenuItem(ICON_FA_FLOPPY_O " Save..."))
+                this->showSaveDialog = true;
 
             ImGui::Separator();
 
@@ -384,20 +386,25 @@ void UI::hideExporting() {
 
 void UI::dialogFileSave(FileSaverOperation operation) {
     std::string title = "";
+    bool * wType;
     switch (operation) {
         case FileSaverOperation_SaveScene:
             title = "Save Scene";
+            wType = &this->showSaveDialog;
             break;
         case FileSaverOperation_Exporter:
             title = "Export Scene";
+            wType = &this->showOBJExporter;
             break;
         case FileSaverOperation_Renderer:
             title = "Render Scene";
+            wType = &this->showRenderer;
             break;
         default:
+            title = "...";
             break;
     }
-    this->componentFileSaver->draw(title.c_str(), operation, &this->showOBJExporter);
+    this->componentFileSaver->draw(title.c_str(), operation, wType);
 }
 
 void UI::dialogOBJImporterBrowser() {

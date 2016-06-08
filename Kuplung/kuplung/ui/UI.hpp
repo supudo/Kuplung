@@ -127,6 +127,7 @@ private:
     bool showDemoWindow;
     bool showOBJExporter;
     bool showImageSave;
+    bool showRenderer;
 };
 
 #endif /* UI_hpp */
