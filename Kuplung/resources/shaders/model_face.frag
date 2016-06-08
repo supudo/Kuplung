@@ -31,6 +31,7 @@ void main(void) {
             vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
             solidLightColor += fs_UIAmbient;
             fragColor = vec4(solidLightColor, fs_alpha);
+            vec4 vAmbient = vec4(0.9, 0.9, 0.9, 1.0);
         }
         else if (fs_modelViewSkin == 2) { // texture
             vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, textureCoords) : vec4(solidSkin_materialColor, 1.0));

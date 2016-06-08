@@ -79,11 +79,11 @@ private:
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
 
-    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
+    void dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string fileName);
 
-    void dialogFileBrowser();
+    void dialogOBJImporterBrowser();
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -113,6 +113,8 @@ private:
 
     bool showDialogStyle;
     bool showDialogFile;
+    bool showOBJImporter;
+    bool showSaveDialog;
     bool showShaderEditor;
     bool showScreenshotWindow;
     bool showSceneStats;

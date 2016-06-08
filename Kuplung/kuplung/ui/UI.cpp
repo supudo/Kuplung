@@ -64,6 +64,8 @@ void UI::init(SDL_Window *window,
     this->showDemoWindow = false;
     this->showOBJExporter = false;
     this->showImageSave = false;
+    this->showOBJImporter = false;
+    this->showSaveDialog = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -76,7 +78,7 @@ void UI::init(SDL_Window *window,
     this->componentScreenshot = new Screenshot();
 
     this->componentFileBrowser = new FileBrowser();
-    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileSaver = new FileSaver();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
@@ -159,7 +161,16 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
 
-            if (ImGui::BeginMenu(ICON_FA_FLOPPY_O " Export")) {
+            ImGui::MenuItem(ICON_FA_FLOPPY_O " Save ...", NULL, &this->showSaveDialog);
+
+            ImGui::Separator();
+
+            if (ImGui::BeginMenu("   Import")) {
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJImporter);
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu("   Export")) {
                 ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
                 ImGui::EndMenu();
             }
@@ -241,8 +252,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::EndMainMenuBar();
     }
 
-    if (this->showDialogFile)
-        this->dialogFileBrowser();
+    if (this->showOBJImporter)
+        this->dialogOBJImporterBrowser();
 
     if (this->showDialogStyle)
         this->dialogStyle();
@@ -370,9 +381,9 @@ void UI::dialogFileSave(FileSaverOperation operation) {
     this->componentFileSaver->draw("Export Scene", operation, &this->showOBJExporter);
 }
 
-void UI::dialogFileBrowser() {
+void UI::dialogOBJImporterBrowser() {
     this->componentFileBrowser->setStyleBrowser(false);
-    this->componentFileBrowser->draw("File Browser", &this->showDialogFile);
+    this->componentFileBrowser->draw("Import Wavefront OBJ file", &this->showOBJImporter);
 }
 
 void UI::dialogStyle() {
@@ -457,10 +468,11 @@ void UI::dialogControlsModels(int * sceneSelectedModelObject) {
     this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, sceneSelectedModelObject);
 }
 
-void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {
+void UI::dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
     this->funcProcessFile(file, type);
+    this->showOBJImporter = false;
     this->showDialogFile = false;
     this->showDialogStyle = false;
 }
@@ -476,7 +488,7 @@ void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) 
         default:
             break;
     }
-        this->showOBJExporter = false;
+    this->showOBJExporter = false;
     this->showImageSave = false;
 }
 
