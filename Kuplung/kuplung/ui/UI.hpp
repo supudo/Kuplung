@@ -40,7 +40,8 @@ public:
               std::function<void(LightSourceType)> addLight,
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
-              std::function<void(FBEntity file)> renderScene
+              std::function<void(FBEntity file)> renderScene,
+              std::function<void(FBEntity file)> saveScene
               );
 
     bool processEvent(SDL_Event *event);
@@ -78,6 +79,7 @@ private:
     std::function<void(FBEntity file)> funcExportScene;
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
+    std::function<void(FBEntity file)> funcSaveScene;
 
     void dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);

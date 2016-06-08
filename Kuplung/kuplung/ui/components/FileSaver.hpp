@@ -16,6 +16,7 @@
 #include "kuplung/settings/Settings.h"
 
 typedef enum FileSaverOperation {
+    FileSaverOperation_SaveScene,
     FileSaverOperation_Exporter,
     FileSaverOperation_Renderer
 } FileSaverOperation;

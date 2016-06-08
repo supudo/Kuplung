@@ -139,7 +139,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::addLight, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::saveScene, this, std::placeholders::_1)
                                           );
                     this->doLog("UI initialized.");
 
@@ -647,4 +648,8 @@ void Kuplung::guiRenderScene(FBEntity file) {
     this->imageRenderer->renderImage(ImageRendererType_Scene, file, &this->meshModelFaces, this->managerObjects);
 //    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
 //        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
+}
+
+void Kuplung::saveScene(FBEntity file) {
+    // TODO: save scene in .kuplung file
 }

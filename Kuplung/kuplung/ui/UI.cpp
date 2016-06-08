@@ -28,7 +28,8 @@ void UI::init(SDL_Window *window,
               std::function<void(LightSourceType)> addLight,
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
-              std::function<void(FBEntity file)> renderScene
+              std::function<void(FBEntity file)> renderScene,
+              std::function<void(FBEntity file)> saveScene
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -41,6 +42,7 @@ void UI::init(SDL_Window *window,
     this->funcExportScene = exportScene;
     this->funcDeleteModel = deleteModel;
     this->funcRenderScene = renderScene;
+    this->funcSaveScene = saveScene;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -252,6 +254,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::EndMainMenuBar();
     }
 
+    if (this->showSaveDialog)
+        this->dialogFileSave(FileSaverOperation_SaveScene);
+
     if (this->showOBJImporter)
         this->dialogOBJImporterBrowser();
 
@@ -378,7 +383,21 @@ void UI::hideExporting() {
 #pragma mark - Private Methods
 
 void UI::dialogFileSave(FileSaverOperation operation) {
-    this->componentFileSaver->draw("Export Scene", operation, &this->showOBJExporter);
+    std::string title = "";
+    switch (operation) {
+        case FileSaverOperation_SaveScene:
+            title = "Save Scene";
+            break;
+        case FileSaverOperation_Exporter:
+            title = "Export Scene";
+            break;
+        case FileSaverOperation_Renderer:
+            title = "Render Scene";
+            break;
+        default:
+            break;
+    }
+    this->componentFileSaver->draw(title.c_str(), operation, &this->showOBJExporter);
 }
 
 void UI::dialogOBJImporterBrowser() {
@@ -479,6 +498,9 @@ void UI::dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type
 
 void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {
     switch (operation) {
+        case FileSaverOperation_SaveScene:
+            this->funcSaveScene(file);
+            break;
         case FileSaverOperation_Exporter:
             this->funcExportScene(file);
             break;

@@ -52,6 +52,7 @@ private:
     void exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces);
     void exportSceneFinished();
     void addTerrainModel();
+    void saveScene(FBEntity file);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
