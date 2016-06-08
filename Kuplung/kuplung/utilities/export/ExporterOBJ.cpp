@@ -69,7 +69,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
             v += "v " + std::to_string(vertex.x) + " " + std::to_string(vertex.y) + " " + std::to_string(vertex.z) + this->nlDelimiter;
         }
 
-        if (find(this->uniqueTextureCoordinates.begin(), this->uniqueTextureCoordinates.end(), texture_coordinate) == this->uniqueTextureCoordinates.end()) {
+        if (model.texture_coordinates.size() && find(this->uniqueTextureCoordinates.begin(), this->uniqueTextureCoordinates.end(), texture_coordinate) == this->uniqueTextureCoordinates.end()) {
             this->uniqueTextureCoordinates.push_back(texture_coordinate);
             vt += "vt " + std::to_string(texture_coordinate.x) + " " + std::to_string(texture_coordinate.y) + this->nlDelimiter;
         }
