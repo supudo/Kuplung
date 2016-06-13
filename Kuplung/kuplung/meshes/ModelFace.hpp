@@ -21,30 +21,6 @@
 #include "kuplung/utilities/maths/Maths.hpp"
 #include "kuplung/meshes/BoundingBox.hpp"
 
-struct ModelFace_LightSource_Directional {
-    GLint gl_InUse;
-    GLint gl_Direction;
-    GLint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
-};
-
-struct ModelFace_LightSource_Point {
-    GLint gl_InUse;
-    GLint gl_Position;
-    GLint gl_Constant, gl_Linear, gl_Quadratic;
-    GLint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
-};
-
-struct ModelFace_LightSource_Spot {
-    GLint gl_InUse;
-    GLint gl_Position, gl_Direction;
-    GLint gl_CutOff, gl_OuterCutOff;
-    GLint gl_Constant, gl_Linear, gl_Quadratic;
-    GLint gl_Ambient, gl_Diffuse, gl_Specular;
-    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
-};
-
 class ModelFace {
 public:
     ModelFace();
@@ -54,12 +30,12 @@ public:
     void destroy();
     void init();
     void setModel(MeshModel meshModel);
-    bool initShaderProgram();
+    virtual bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void initBoundingBox();
     void initProperties();
     void initModelProperties();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
+    virtual void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
     void renderModel();
 
     // general options
@@ -120,7 +96,7 @@ public:
     bool Effect_Bloom_doBloom;
     float Effect_Bloom_WeightA, Effect_Bloom_WeightB, Effect_Bloom_WeightC, Effect_Bloom_WeightD, Effect_Bloom_Vignette, Effect_Bloom_VignetteAtt;
 
-private:
+protected:
     void drawOutline();
     void drawOnly();
 

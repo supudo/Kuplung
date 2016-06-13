@@ -110,10 +110,14 @@ SOURCES += main.cpp \
     kuplung/meshes/CameraModel.cpp \
     kuplung/meshes/LightRay.cpp \
     kuplung/meshes/ModelFace.cpp \
+    kuplung/meshes/ModelFaceForward.cpp \
+    kuplung/meshes/ModelFaceDeferred.cpp \
     kuplung/meshes/BoundingBox.cpp \
     kuplung/meshes/RayLine.cpp \
     kuplung/meshes/Skybox.cpp \
     kuplung/meshes/Terrain.cpp \
+    kuplung/meshes/deferred/GBuffer.cpp \
+    kuplung/meshes/deferred/GeometryPass.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -170,10 +174,14 @@ HEADERS += \
     kuplung/meshes/CameraModel.hpp \
     kuplung/meshes/LightRay.hpp \
     kuplung/meshes/ModelFace.hpp \
+    kuplung/meshes/ModelFaceForward.hpp \
+    kuplung/meshes/ModelFaceDeferred.hpp \
     kuplung/meshes/BoundingBox.hpp \
     kuplung/meshes/RayLine.hpp \
     kuplung/meshes/Skybox.hpp \
     kuplung/meshes/Terrain.hpp \
+    kuplung/meshes/deferred/GBuffer.hpp \
+    kuplung/meshes/deferred/GeometryPass.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
@@ -283,6 +291,10 @@ DISTFILES += \
     resources/shaders/ray_line.frag \
     resources/shaders/grid.vert \
     resources/shaders/grid.frag \
+    resources/shaders/geometry_pass.vert \
+    resources/shaders/geometry_pass.frag \
+    resources/shaders/null_pass.vert \
+    resources/shaders/null_pass.frag \
     resources/shaders/model_face.vert \
     resources/shaders/model_face_effects.vert \
     resources/shaders/model_face_lights.vert \

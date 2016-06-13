@@ -17,6 +17,8 @@
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
 #include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/ModelFaceForward.hpp"
+#include "kuplung/meshes/ModelFaceDeferred.hpp"
 #include "kuplung/meshes/RayLine.hpp"
 #include "kuplung/meshes/Terrain.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"

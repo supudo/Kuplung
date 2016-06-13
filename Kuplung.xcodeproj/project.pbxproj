@@ -121,6 +121,18 @@
 		8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
 		8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
 		8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
+		8AAFD0A41D0F13E400D04B73 /* light_pass_directional.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */; };
+		8AAFD0A51D0F13E400D04B73 /* light_pass_point.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */; };
+		8AAFD0A61D0F13E400D04B73 /* light_pass.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A31D0F13C500D04B73 /* light_pass.vert */; };
+		8AAFD0A71D0F13E400D04B73 /* geometry_pass.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */; };
+		8AAFD0A81D0F13E500D04B73 /* geometry_pass.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */; };
+		8AAFD0B41D0F140700D04B73 /* DirectionalLightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */; };
+		8AAFD0B51D0F140700D04B73 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */; };
+		8AAFD0B61D0F140700D04B73 /* GeometryPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */; };
+		8AAFD0B71D0F140700D04B73 /* LightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B01D0F140700D04B73 /* LightPass.cpp */; };
+		8AAFD0B81D0F140700D04B73 /* PointLightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */; };
+		8AAFD0BD1D0F142300D04B73 /* ModelFaceDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B91D0F142300D04B73 /* ModelFaceDeferred.cpp */; };
+		8AAFD0BE1D0F142300D04B73 /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0BB1D0F142300D04B73 /* ModelFaceForward.cpp */; };
 		8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
@@ -250,6 +262,11 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
+				8AAFD0A41D0F13E400D04B73 /* light_pass_directional.frag in Copy Files */,
+				8AAFD0A51D0F13E400D04B73 /* light_pass_point.frag in Copy Files */,
+				8AAFD0A61D0F13E400D04B73 /* light_pass.vert in Copy Files */,
+				8AAFD0A71D0F13E400D04B73 /* geometry_pass.frag in Copy Files */,
+				8AAFD0A81D0F13E500D04B73 /* geometry_pass.vert in Copy Files */,
 				8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */,
 				8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */,
 				8A5128D31CC0CC6E00BE0600 /* bounding_box.frag in Copy Files */,
@@ -510,6 +527,25 @@
 		8AA5EDF31C773DF8009F1F52 /* model_face.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.vert; sourceTree = "<group>"; };
 		8AA5EDF41C773DF8009F1F52 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
 		8AA5EDF51C773DF8009F1F52 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
+		8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry_pass.frag; sourceTree = "<group>"; };
+		8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry_pass.vert; sourceTree = "<group>"; };
+		8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass_directional.frag; sourceTree = "<group>"; };
+		8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass_point.frag; sourceTree = "<group>"; };
+		8AAFD0A31D0F13C500D04B73 /* light_pass.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass.vert; sourceTree = "<group>"; };
+		8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DirectionalLightPass.cpp; path = deferred/DirectionalLightPass.cpp; sourceTree = "<group>"; };
+		8AAFD0AB1D0F140700D04B73 /* DirectionalLightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DirectionalLightPass.hpp; path = deferred/DirectionalLightPass.hpp; sourceTree = "<group>"; };
+		8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GBuffer.cpp; path = deferred/GBuffer.cpp; sourceTree = "<group>"; };
+		8AAFD0AD1D0F140700D04B73 /* GBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GBuffer.hpp; path = deferred/GBuffer.hpp; sourceTree = "<group>"; };
+		8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryPass.cpp; path = deferred/GeometryPass.cpp; sourceTree = "<group>"; };
+		8AAFD0AF1D0F140700D04B73 /* GeometryPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GeometryPass.hpp; path = deferred/GeometryPass.hpp; sourceTree = "<group>"; };
+		8AAFD0B01D0F140700D04B73 /* LightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightPass.cpp; path = deferred/LightPass.cpp; sourceTree = "<group>"; };
+		8AAFD0B11D0F140700D04B73 /* LightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LightPass.hpp; path = deferred/LightPass.hpp; sourceTree = "<group>"; };
+		8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PointLightPass.cpp; path = deferred/PointLightPass.cpp; sourceTree = "<group>"; };
+		8AAFD0B31D0F140700D04B73 /* PointLightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PointLightPass.hpp; path = deferred/PointLightPass.hpp; sourceTree = "<group>"; };
+		8AAFD0B91D0F142300D04B73 /* ModelFaceDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFaceDeferred.cpp; sourceTree = "<group>"; };
+		8AAFD0BA1D0F142300D04B73 /* ModelFaceDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelFaceDeferred.hpp; sourceTree = "<group>"; };
+		8AAFD0BB1D0F142300D04B73 /* ModelFaceForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFaceForward.cpp; sourceTree = "<group>"; };
+		8AAFD0BC1D0F142300D04B73 /* ModelFaceForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelFaceForward.hpp; sourceTree = "<group>"; };
 		8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CameraModel.cpp; sourceTree = "<group>"; };
 		8AB31F751CBF7DF500E6CE51 /* CameraModel.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = CameraModel.hpp; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
@@ -841,6 +877,23 @@
 			name = uveditor;
 			sourceTree = "<group>";
 		};
+		8AAFD0A91D0F140000D04B73 /* deferred */ = {
+			isa = PBXGroup;
+			children = (
+				8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */,
+				8AAFD0AB1D0F140700D04B73 /* DirectionalLightPass.hpp */,
+				8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */,
+				8AAFD0AD1D0F140700D04B73 /* GBuffer.hpp */,
+				8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */,
+				8AAFD0AF1D0F140700D04B73 /* GeometryPass.hpp */,
+				8AAFD0B01D0F140700D04B73 /* LightPass.cpp */,
+				8AAFD0B11D0F140700D04B73 /* LightPass.hpp */,
+				8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */,
+				8AAFD0B31D0F140700D04B73 /* PointLightPass.hpp */,
+			);
+			name = deferred;
+			sourceTree = "<group>";
+		};
 		8AB6F00F1C3A9BEE00665C40 /* kuplung */ = {
 			isa = PBXGroup;
 			children = (
@@ -867,6 +920,7 @@
 				8A54F11B1C760A0F00B93D18 /* Camera.hpp */,
 				8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */,
 				8AB31F751CBF7DF500E6CE51 /* CameraModel.hpp */,
+				8AAFD0A91D0F140000D04B73 /* deferred */,
 				8A0364811C6B71EC001489C8 /* Light.cpp */,
 				8A0364821C6B71EC001489C8 /* Light.hpp */,
 				8A6E70531C6CAC960085CAE5 /* LightRay.cpp */,
@@ -875,6 +929,10 @@
 				8ABFC1F11CC92B4500FBCF08 /* MiniAxis.hpp */,
 				8A0364831C6B71EC001489C8 /* ModelFace.cpp */,
 				8A0364841C6B71EC001489C8 /* ModelFace.hpp */,
+				8AAFD0B91D0F142300D04B73 /* ModelFaceDeferred.cpp */,
+				8AAFD0BA1D0F142300D04B73 /* ModelFaceDeferred.hpp */,
+				8AAFD0BB1D0F142300D04B73 /* ModelFaceForward.cpp */,
+				8AAFD0BC1D0F142300D04B73 /* ModelFaceForward.hpp */,
 				8A48C3261CBE8B780076F4F6 /* RayLine.cpp */,
 				8A48C3271CBE8B780076F4F6 /* RayLine.hpp */,
 				8AECC0761CB274060096AE7A /* Skybox.cpp */,
@@ -934,8 +992,13 @@
 				8A5128D21CC0CC6600BE0600 /* bounding_box.vert */,
 				8A47F71B1CBF744800699CAC /* camera.frag */,
 				8A47F71C1CBF744800699CAC /* camera.vert */,
+				8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */,
+				8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */,
 				8AA5EDE91C773DF8009F1F52 /* grid.frag */,
 				8AA5EDEA1C773DF8009F1F52 /* grid.vert */,
+				8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */,
+				8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */,
+				8AAFD0A31D0F13C500D04B73 /* light_pass.vert */,
 				8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */,
 				8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */,
 				8AA5EDED1C773DF8009F1F52 /* light.frag */,
@@ -1201,8 +1264,10 @@
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
+				8AAFD0B51D0F140700D04B73 /* GBuffer.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */,
+				8AAFD0B61D0F140700D04B73 /* GeometryPass.cpp in Sources */,
 				8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */,
 				8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */,
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
@@ -1218,7 +1283,9 @@
 				8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
+				8AAFD0B81D0F140700D04B73 /* PointLightPass.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
+				8AAFD0BE1D0F142300D04B73 /* ModelFaceForward.cpp in Sources */,
 				8AECC0781CB274060096AE7A /* Skybox.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */,
@@ -1228,15 +1295,18 @@
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
+				8AAFD0BD1D0F142300D04B73 /* ModelFaceDeferred.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
 				8A03648C1C6B71EC001489C8 /* ModelFace.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */,
+				8AAFD0B41D0F140700D04B73 /* DirectionalLightPass.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
 				8A03648E1C6B71EC001489C8 /* WorldGrid.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
+				8AAFD0B71D0F140700D04B73 /* LightPass.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,

@@ -34,6 +34,9 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         if (ImGui::Checkbox("Terrain Hieghtmap Image History", &Settings::Instance()->Terrain_HeightmapImageHistory))
             Settings::Instance()->saveSettings();
 
+        if (ImGui::Checkbox("Use Deferred Rendering (requires restart)", &Settings::Instance()->DeferredRendering))
+            Settings::Instance()->saveSettings();
+
         const char* parserItems[] = {"Own 1.0", "Own 2.0", "Assimp"};
         if (ImGui::Combo("Model Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
             Settings::Instance()->saveSettings();

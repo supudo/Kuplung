@@ -555,7 +555,11 @@ void Kuplung::processParsedObjFile() {
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
-            ModelFace *mmf = new ModelFace();
+            ModelFace *mmf;
+            if (Settings::Instance()->DeferredRendering)
+                mmf = new ModelFaceDeferred();
+            else
+                mmf = new ModelFaceForward();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;
             mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
             mmf->dataNormals = this->managerObjects->grid->dataNormals;

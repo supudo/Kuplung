@@ -10,6 +10,7 @@
 #define Objects_hpp
 
 #include <glm/glm.hpp>
+#include "kuplung/utilities/gl/GLIncludes.h"
 
 struct GUIObjectSetting {
     int oIndex;
@@ -42,6 +43,30 @@ struct SceneLight {
     SceneLightCoordinate *positionX, *positionY, *positionZ;
     SceneLightCoordinate *directionX, *directionY, *directionZ;
     LightObject *ambient, *diffuse, *specular;
+};
+
+struct ModelFace_LightSource_Directional {
+    GLint gl_InUse;
+    GLint gl_Direction;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+};
+
+struct ModelFace_LightSource_Point {
+    GLint gl_InUse;
+    GLint gl_Position;
+    GLint gl_Constant, gl_Linear, gl_Quadratic;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
+};
+
+struct ModelFace_LightSource_Spot {
+    GLint gl_InUse;
+    GLint gl_Position, gl_Direction;
+    GLint gl_CutOff, gl_OuterCutOff;
+    GLint gl_Constant, gl_Linear, gl_Quadratic;
+    GLint gl_Ambient, gl_Diffuse, gl_Specular;
+    GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
 #endif /* Objects_hpp */
