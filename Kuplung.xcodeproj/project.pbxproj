@@ -121,16 +121,8 @@
 		8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
 		8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
 		8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
-		8AAFD0A41D0F13E400D04B73 /* light_pass_directional.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */; };
-		8AAFD0A51D0F13E400D04B73 /* light_pass_point.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */; };
-		8AAFD0A61D0F13E400D04B73 /* light_pass.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A31D0F13C500D04B73 /* light_pass.vert */; };
-		8AAFD0A71D0F13E400D04B73 /* geometry_pass.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */; };
-		8AAFD0A81D0F13E500D04B73 /* geometry_pass.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */; };
-		8AAFD0B41D0F140700D04B73 /* DirectionalLightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */; };
 		8AAFD0B51D0F140700D04B73 /* GBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */; };
 		8AAFD0B61D0F140700D04B73 /* GeometryPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */; };
-		8AAFD0B71D0F140700D04B73 /* LightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B01D0F140700D04B73 /* LightPass.cpp */; };
-		8AAFD0B81D0F140700D04B73 /* PointLightPass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */; };
 		8AAFD0BD1D0F142300D04B73 /* ModelFaceDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0B91D0F142300D04B73 /* ModelFaceDeferred.cpp */; };
 		8AAFD0BE1D0F142300D04B73 /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAFD0BB1D0F142300D04B73 /* ModelFaceForward.cpp */; };
 		8AB31F761CBF7DF500E6CE51 /* CameraModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB31F741CBF7DF500E6CE51 /* CameraModel.cpp */; };
@@ -171,6 +163,8 @@
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
+		8AD76FF51D1014F000FD38C0 /* deferred_model_face_geometry.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AD76FF31D1014E200FD38C0 /* deferred_model_face_geometry.frag */; };
+		8AD76FF61D1014F000FD38C0 /* deferred_model_face_geometry.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AD76FF41D1014E200FD38C0 /* deferred_model_face_geometry.vert */; };
 		8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */; };
 		8AECC0701CB273E90096AE7A /* fire_planet_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */; };
 		8AECC0711CB273E90096AE7A /* fire_planet_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */; };
@@ -262,11 +256,8 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
-				8AAFD0A41D0F13E400D04B73 /* light_pass_directional.frag in Copy Files */,
-				8AAFD0A51D0F13E400D04B73 /* light_pass_point.frag in Copy Files */,
-				8AAFD0A61D0F13E400D04B73 /* light_pass.vert in Copy Files */,
-				8AAFD0A71D0F13E400D04B73 /* geometry_pass.frag in Copy Files */,
-				8AAFD0A81D0F13E500D04B73 /* geometry_pass.vert in Copy Files */,
+				8AD76FF51D1014F000FD38C0 /* deferred_model_face_geometry.frag in Copy Files */,
+				8AD76FF61D1014F000FD38C0 /* deferred_model_face_geometry.vert in Copy Files */,
 				8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */,
 				8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */,
 				8A5128D31CC0CC6E00BE0600 /* bounding_box.frag in Copy Files */,
@@ -527,21 +518,10 @@
 		8AA5EDF31C773DF8009F1F52 /* model_face.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.vert; sourceTree = "<group>"; };
 		8AA5EDF41C773DF8009F1F52 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
 		8AA5EDF51C773DF8009F1F52 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
-		8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry_pass.frag; sourceTree = "<group>"; };
-		8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = geometry_pass.vert; sourceTree = "<group>"; };
-		8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass_directional.frag; sourceTree = "<group>"; };
-		8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass_point.frag; sourceTree = "<group>"; };
-		8AAFD0A31D0F13C500D04B73 /* light_pass.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = light_pass.vert; sourceTree = "<group>"; };
-		8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DirectionalLightPass.cpp; path = deferred/DirectionalLightPass.cpp; sourceTree = "<group>"; };
-		8AAFD0AB1D0F140700D04B73 /* DirectionalLightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DirectionalLightPass.hpp; path = deferred/DirectionalLightPass.hpp; sourceTree = "<group>"; };
 		8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GBuffer.cpp; path = deferred/GBuffer.cpp; sourceTree = "<group>"; };
 		8AAFD0AD1D0F140700D04B73 /* GBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GBuffer.hpp; path = deferred/GBuffer.hpp; sourceTree = "<group>"; };
 		8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeometryPass.cpp; path = deferred/GeometryPass.cpp; sourceTree = "<group>"; };
 		8AAFD0AF1D0F140700D04B73 /* GeometryPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GeometryPass.hpp; path = deferred/GeometryPass.hpp; sourceTree = "<group>"; };
-		8AAFD0B01D0F140700D04B73 /* LightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LightPass.cpp; path = deferred/LightPass.cpp; sourceTree = "<group>"; };
-		8AAFD0B11D0F140700D04B73 /* LightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LightPass.hpp; path = deferred/LightPass.hpp; sourceTree = "<group>"; };
-		8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PointLightPass.cpp; path = deferred/PointLightPass.cpp; sourceTree = "<group>"; };
-		8AAFD0B31D0F140700D04B73 /* PointLightPass.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PointLightPass.hpp; path = deferred/PointLightPass.hpp; sourceTree = "<group>"; };
 		8AAFD0B91D0F142300D04B73 /* ModelFaceDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFaceDeferred.cpp; sourceTree = "<group>"; };
 		8AAFD0BA1D0F142300D04B73 /* ModelFaceDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModelFaceDeferred.hpp; sourceTree = "<group>"; };
 		8AAFD0BB1D0F142300D04B73 /* ModelFaceForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModelFaceForward.cpp; sourceTree = "<group>"; };
@@ -599,6 +579,8 @@
 		8AC828B31BF5FEE7009C74E0 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		8AD104031C049E8A008CE831 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		8AD104051C05C489008CE831 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		8AD76FF31D1014E200FD38C0 /* deferred_model_face_geometry.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_model_face_geometry.frag; sourceTree = "<group>"; };
+		8AD76FF41D1014E200FD38C0 /* deferred_model_face_geometry.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_model_face_geometry.vert; sourceTree = "<group>"; };
 		8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaterialEditor.cpp; path = materialeditor/MaterialEditor.cpp; sourceTree = "<group>"; };
 		8AD91DAB1CA3D989004674BC /* MaterialEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MaterialEditor.hpp; path = materialeditor/MaterialEditor.hpp; sourceTree = "<group>"; };
 		8AD91DAC1CA3D989004674BC /* MaterialEditorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialEditorData.h; path = materialeditor/MaterialEditorData.h; sourceTree = "<group>"; };
@@ -880,16 +862,10 @@
 		8AAFD0A91D0F140000D04B73 /* deferred */ = {
 			isa = PBXGroup;
 			children = (
-				8AAFD0AA1D0F140700D04B73 /* DirectionalLightPass.cpp */,
-				8AAFD0AB1D0F140700D04B73 /* DirectionalLightPass.hpp */,
 				8AAFD0AC1D0F140700D04B73 /* GBuffer.cpp */,
 				8AAFD0AD1D0F140700D04B73 /* GBuffer.hpp */,
 				8AAFD0AE1D0F140700D04B73 /* GeometryPass.cpp */,
 				8AAFD0AF1D0F140700D04B73 /* GeometryPass.hpp */,
-				8AAFD0B01D0F140700D04B73 /* LightPass.cpp */,
-				8AAFD0B11D0F140700D04B73 /* LightPass.hpp */,
-				8AAFD0B21D0F140700D04B73 /* PointLightPass.cpp */,
-				8AAFD0B31D0F140700D04B73 /* PointLightPass.hpp */,
 			);
 			name = deferred;
 			sourceTree = "<group>";
@@ -992,13 +968,10 @@
 				8A5128D21CC0CC6600BE0600 /* bounding_box.vert */,
 				8A47F71B1CBF744800699CAC /* camera.frag */,
 				8A47F71C1CBF744800699CAC /* camera.vert */,
-				8AAFD09F1D0F13BE00D04B73 /* geometry_pass.frag */,
-				8AAFD0A01D0F13BE00D04B73 /* geometry_pass.vert */,
+				8AD76FF31D1014E200FD38C0 /* deferred_model_face_geometry.frag */,
+				8AD76FF41D1014E200FD38C0 /* deferred_model_face_geometry.vert */,
 				8AA5EDE91C773DF8009F1F52 /* grid.frag */,
 				8AA5EDEA1C773DF8009F1F52 /* grid.vert */,
-				8AAFD0A11D0F13C500D04B73 /* light_pass_directional.frag */,
-				8AAFD0A21D0F13C500D04B73 /* light_pass_point.frag */,
-				8AAFD0A31D0F13C500D04B73 /* light_pass.vert */,
 				8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */,
 				8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */,
 				8AA5EDED1C773DF8009F1F52 /* light.frag */,
@@ -1283,7 +1256,6 @@
 				8A6E70A51C6CACB40085CAE5 /* HeightmapGenerator.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
-				8AAFD0B81D0F140700D04B73 /* PointLightPass.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8AAFD0BE1D0F142300D04B73 /* ModelFaceForward.cpp in Sources */,
 				8AECC0781CB274060096AE7A /* Skybox.cpp in Sources */,
@@ -1302,11 +1274,9 @@
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */,
-				8AAFD0B41D0F140700D04B73 /* DirectionalLightPass.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
 				8A03648E1C6B71EC001489C8 /* WorldGrid.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
-				8AAFD0B71D0F140700D04B73 /* LightPass.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */,
 				8A6E70551C6CAC960085CAE5 /* LightRay.cpp in Sources */,

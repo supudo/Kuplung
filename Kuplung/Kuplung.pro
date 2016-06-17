@@ -116,6 +116,8 @@ SOURCES += main.cpp \
     kuplung/meshes/RayLine.cpp \
     kuplung/meshes/Skybox.cpp \
     kuplung/meshes/Terrain.cpp \
+    kuplung/meshes/deferred/GBuffer.cpp \
+    kuplung/meshes/deferred/GeometryPass.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -178,6 +180,8 @@ HEADERS += \
     kuplung/meshes/RayLine.hpp \
     kuplung/meshes/Skybox.hpp \
     kuplung/meshes/Terrain.hpp \
+    kuplung/meshes/deferred/GBuffer.hpp \
+    kuplung/meshes/deferred/GeometryPass.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
@@ -287,8 +291,8 @@ DISTFILES += \
     resources/shaders/ray_line.frag \
     resources/shaders/grid.vert \
     resources/shaders/grid.frag \
-    resources/shaders/null_pass.vert \
-    resources/shaders/null_pass.frag \
+    resources/shaders/deferred_model_face_geometry.vert \
+    resources/shaders/deferred_model_face_geometry.frag \
     resources/shaders/model_face.vert \
     resources/shaders/model_face_effects.vert \
     resources/shaders/model_face_lights.vert \
