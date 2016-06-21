@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/ModelFaceDeferred.cpp"
-            timestampString = "488193688.091371"
+            filePath = "Kuplung/kuplung/meshes/ModelFace.cpp"
+            timestampString = "488206743.7886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "329"
-            endingLineNumber = "329"
-            landmarkName = "ModelFaceDeferred::renderLightBox()"
+            startingLineNumber = "579"
+            endingLineNumber = "579"
+            landmarkName = "ModelFace::initBuffers(std::string assetsFolder)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

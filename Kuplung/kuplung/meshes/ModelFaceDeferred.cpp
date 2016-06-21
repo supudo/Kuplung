@@ -20,73 +20,76 @@ bool ModelFaceDeferred::initShaderProgram() {
     success |= this->initShader_LightingPass();
     success |= this->initShader_LightBox();
 
-    // - Colors
-    srand(13);
-    for (GLuint i=0; i<NR_LIGHTS; i++) {
-        // Calculate slightly random offsets
-        GLfloat xPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
-        GLfloat yPos = ((rand() % 100) / 100.0) * 6.0 - 4.0;
-        GLfloat zPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
-        this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
+    if (success) {
+        // Set samplers
+        glUseProgram(this->shaderProgram_LightingPass);
+        glUniform1i(this->gl_LightingPass_Position, 0);
+        glUniform1i(this->gl_LightingPass_Normal, 1);
+        glUniform1i(this->gl_LightingPass_AlbedoSpec, 2);
 
-        // Also calculate random color
-        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
+        // - Colors
+        srand(13);
+        for (GLuint i=0; i<this->NR_LIGHTS; i++) {
+            // Calculate slightly random offsets
+            GLfloat xPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
+            GLfloat yPos = ((rand() % 100) / 100.0) * 6.0 - 4.0;
+            GLfloat zPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
+            this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
+
+            // Also calculate random color
+            GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
+            GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
+            GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
+            this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
+        }
+
+        // Set up G-Buffer
+        // 3 textures:
+        // 1. Positions (RGB)
+        // 2. Color (RGB) + Specular (A)
+        // 3. Normals (RGB)
+        glGenFramebuffers(1, &this->gBuffer);
+        glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
+
+        // - Position color buffer
+        glGenTextures(1, &this->gPosition);
+        glBindTexture(GL_TEXTURE_2D, this->gPosition);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->gPosition, 0);
+
+        // - Normal color buffer
+        glGenTextures(1, &this->gNormal);
+        glBindTexture(GL_TEXTURE_2D, this->gNormal);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, this->gNormal, 0);
+
+        // - Color + Specular color buffer
+        glGenTextures(1, &this->gAlbedoSpec);
+        glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, this->gAlbedoSpec, 0);
+
+        // - Tell OpenGL which color attachments we'll use (of this framebuffer) for rendering
+        GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
+        glDrawBuffers(3, attachments);
+
+        // - Create and attach depth buffer (renderbuffer)
+        glGenRenderbuffers(1, &this->rboDepth);
+        glBindRenderbuffer(GL_RENDERBUFFER, this->rboDepth);
+        glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+        glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->rboDepth);
+
+        if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+            Settings::Instance()->funcDoLog("[Deferred Rendering GBuffer] Framebuffer not complete!");
+
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-
-    // Set samplers
-    glUseProgram(this->shaderProgram_LightingPass);
-    glUniform1i(this->gl_LightingPass_Position, 0);
-    glUniform1i(this->gl_LightingPass_Normal, 1);
-    glUniform1i(this->gl_LightingPass_AlbedoSpec, 2);
-
-    // Set up G-Buffer
-    // 3 textures:
-    // 1. Positions (RGB)
-    // 2. Color (RGB) + Specular (A)
-    // 3. Normals (RGB)
-    glGenFramebuffers(1, &this->gBuffer);
-    glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
-
-    // - Position color buffer
-    glGenTextures(1, &this->gPosition);
-    glBindTexture(GL_TEXTURE_2D, this->gPosition);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->gPosition, 0);
-
-    // - Normal color buffer
-    glGenTextures(1, &this->gNormal);
-    glBindTexture(GL_TEXTURE_2D, this->gNormal);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, this->gNormal, 0);
-
-    // - Color + Specular color buffer
-    glGenTextures(1, &this->gAlbedoSpec);
-    glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, this->gAlbedoSpec, 0);
-
-    // - Tell OpenGL which color attachments we'll use (of this framebuffer) for rendering
-    GLuint attachments[3] = { GL_COLOR_ATTACHMENT0, GL_COLOR_ATTACHMENT1, GL_COLOR_ATTACHMENT2 };
-    glDrawBuffers(3, attachments);
-
-    // - Create and attach depth buffer (renderbuffer)
-    glGenRenderbuffers(1, &this->rboDepth);
-    glBindRenderbuffer(GL_RENDERBUFFER, this->rboDepth);
-    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->rboDepth);
-
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        Settings::Instance()->funcDoLog("[Deferred Rendering GBuffer] Framebuffer not complete!");
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     return success;
 }
@@ -216,7 +219,6 @@ bool ModelFaceDeferred::initShader_LightBox() {
 void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
-    glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
     // vertices
@@ -241,8 +243,8 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
         glEnableVertexAttribArray(this->glFS_TextureCoord);
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->vboTextureDiffuse);
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->vboTextureSpecular);
+        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
+        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
     }
 
     // indices
@@ -299,8 +301,8 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
 void ModelFaceDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     glUseProgram(this->shaderFragment_GeometryPass);
+
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
@@ -308,26 +310,23 @@ void ModelFaceDeferred::renderGeometryPass() {
     this->matrixModel = glm::scale(this->matrixModel, glm::vec3(0.25f));
     glUniformMatrix4fv(this->gl_GeometryPass_ModelMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
 
-    if (this->vboTextureDiffuse > 0) {
+    if (this->gl_GeometryPass_TextureDiffuse > 0) {
+        glUniform1i(this->gl_GeometryPass_TextureDiffuse, 1);
         glActiveTexture(GL_TEXTURE0);
-        glUniform1i(this->vboTextureDiffuse, 1);
         glBindTexture(GL_TEXTURE_2D, 1);
     }
 
-    if (this->vboTextureSpecular > 0) {
+    if (this->gl_GeometryPass_TextureSpecular > 0) {
+        glUniform1i(this->gl_GeometryPass_TextureSpecular, 2);
         glActiveTexture(GL_TEXTURE1);
-        glUniform1i(this->vboTextureSpecular, 2);
         glBindTexture(GL_TEXTURE_2D, 2);
     }
 
-    // Draw mesh
     glBindVertexArray(this->glVAO);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
     glBindVertexArray(0);
 
 //    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D, 0);
-//    glActiveTexture(GL_TEXTURE1);
 //    glBindTexture(GL_TEXTURE_2D, 0);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -338,11 +337,13 @@ void ModelFaceDeferred::renderLightingPass() {
     glUseProgram(this->shaderProgram_LightingPass);
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, this->gl_LightingPass_Position);
+    glBindTexture(GL_TEXTURE_2D, this->gPosition);
+
     glActiveTexture(GL_TEXTURE1);
-    glBindTexture(GL_TEXTURE_2D, this->gl_LightingPass_Normal);
+    glBindTexture(GL_TEXTURE_2D, this->gNormal);
+
     glActiveTexture(GL_TEXTURE2);
-    glBindTexture(GL_TEXTURE_2D, this->gl_LightingPass_AlbedoSpec);
+    glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
 
     const GLfloat constant = 1.0f; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
     const GLfloat linear = 0.7f;

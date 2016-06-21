@@ -31,7 +31,7 @@ public:
     void init();
     void setModel(MeshModel meshModel);
     virtual bool initShaderProgram();
-    void initBuffers(std::string assetsFolder);
+    virtual void initBuffers(std::string assetsFolder);
     void initBoundingBox();
     void initProperties();
     void initModelProperties();

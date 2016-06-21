@@ -21,7 +21,8 @@ uniform vec3 viewPos;
 
 uniform int draw_mode;
 
-void main() {
+void main()
+{
     // Retrieve data from gbuffer
     vec3 FragPos = texture(gPosition, TexCoords).rgb;
     vec3 Normal = texture(gNormal, TexCoords).rgb;
@@ -31,10 +32,12 @@ void main() {
     // Then calculate lighting as usual
     vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
     vec3 viewDir  = normalize(viewPos - FragPos);
-    for (int i = 0; i < NR_LIGHTS; ++i) {
+    for(int i = 0; i < NR_LIGHTS; ++i)
+    {
         // Calculate distance between light source and current fragment
         float distance = length(lights[i].Position - FragPos);
-        if (distance < lights[i].Radius) {
+        if(distance < lights[i].Radius)
+        {
             // Diffuse
             vec3 lightDir = normalize(lights[i].Position - FragPos);
             vec3 diffuse = max(dot(Normal, lightDir), 0.0) * Diffuse * lights[i].Color;

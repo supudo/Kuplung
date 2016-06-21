@@ -17,7 +17,7 @@ struct ModelFaceDeferred_LightSource {
 };
 
 class ModelFaceDeferred: public ModelFace {
-private:
+public:
     bool initShaderProgram();
     bool initShader_GeometryPass();
     bool initShader_LightingPass();
@@ -25,6 +25,7 @@ private:
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
+private:
     void renderGeometryPass();
     void renderLightingPass();
     void renderLightBox();

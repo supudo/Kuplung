@@ -11,7 +11,8 @@ in vec3 Normal;
 uniform sampler2D texture_diffuse1;
 uniform sampler2D texture_specular1;
 
-void main() {
+void main()
+{
     // Store the fragment position vector in the first gbuffer texture
     gPosition = FragPos;
     // Also store the per-fragment normals into the gbuffer

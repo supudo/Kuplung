@@ -968,8 +968,8 @@ void ModelFace::renderModel() {
         glUniform3f(this->glMaterial_Emission, this->materialEmission->color.r, this->materialEmission->color.g, this->materialEmission->color.b);
 
         if (this->vboTextureAmbient > 0 && this->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
-            glUniform1i(this->glMaterial_SamplerAmbient, 1);
             glUniform1i(this->glMaterial_HasTextureAmbient, 1);
+            glUniform1i(this->glMaterial_SamplerAmbient, 1);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
         }
