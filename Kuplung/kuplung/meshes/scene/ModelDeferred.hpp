@@ -9,13 +9,13 @@
 #ifndef ModelDeferred_hpp
 #define ModelDeferred_hpp
 
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 
 class ModelDeferred: public Model {
 };
 
 /*
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 struct ModelDeferred_LightSource {

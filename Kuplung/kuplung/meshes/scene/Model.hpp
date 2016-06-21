@@ -16,10 +16,10 @@
 #include "kuplung/ui/Objects.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/meshes/Light.hpp"
-#include "kuplung/meshes/WorldGrid.hpp"
+#include "kuplung/meshes/helpers/Light.hpp"
+#include "kuplung/meshes/helpers/BoundingBox.hpp"
+#include "kuplung/meshes/helpers/WorldGrid.hpp"
 #include "kuplung/utilities/maths/Maths.hpp"
-#include "kuplung/meshes/BoundingBox.hpp"
 
 class Model {
 public:

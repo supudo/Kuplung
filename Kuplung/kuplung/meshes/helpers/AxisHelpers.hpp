@@ -15,7 +15,7 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
-#include "kuplung/meshes/Camera.hpp"
+#include "kuplung/meshes/helpers/Camera.hpp"
 
 class AxisHelpers {
 public:

@@ -107,20 +107,21 @@ OTHER_FILES += resources/axis_helpers/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
-    kuplung/meshes/MiniAxis.cpp \
-    kuplung/meshes/AxisHelpers.cpp \
-    kuplung/meshes/WorldGrid.cpp \
-    kuplung/meshes/Light.cpp \
-    kuplung/meshes/Camera.cpp \
-    kuplung/meshes/CameraModel.cpp \
-    kuplung/meshes/LightRay.cpp \
-    kuplung/meshes/Model.cpp \
-    kuplung/meshes/ModelForward.cpp \
-    kuplung/meshes/ModelDeferred.cpp \
-    kuplung/meshes/BoundingBox.cpp \
-    kuplung/meshes/RayLine.cpp \
-    kuplung/meshes/Skybox.cpp \
-    kuplung/meshes/Terrain.cpp \
+    kuplung/meshes/scene/Mesh.cpp \
+    kuplung/meshes/scene/Model.cpp \
+    kuplung/meshes/scene/ModelForward.cpp \
+    kuplung/meshes/scene/ModelDeferred.cpp \
+    kuplung/meshes/scene/Terrain.cpp \
+    kuplung/meshes/helpers/MiniAxis.cpp \
+    kuplung/meshes/helpers/AxisHelpers.cpp \
+    kuplung/meshes/helpers/WorldGrid.cpp \
+    kuplung/meshes/helpers/Light.cpp \
+    kuplung/meshes/helpers/Camera.cpp \
+    kuplung/meshes/helpers/CameraModel.cpp \
+    kuplung/meshes/helpers/LightRay.cpp \
+    kuplung/meshes/helpers/BoundingBox.cpp \
+    kuplung/meshes/helpers/RayLine.cpp \
+    kuplung/meshes/helpers/Skybox.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -169,20 +170,21 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
-    kuplung/meshes/MiniAxis.hpp \
-    kuplung/meshes/AxisHelpers.hpp \
-    kuplung/meshes/WorldGrid.hpp \
-    kuplung/meshes/Light.hpp \
-    kuplung/meshes/Camera.hpp \
-    kuplung/meshes/CameraModel.hpp \
-    kuplung/meshes/LightRay.hpp \
-    kuplung/meshes/Model.hpp \
-    kuplung/meshes/ModelForward.hpp \
-    kuplung/meshes/ModelDeferred.hpp \
-    kuplung/meshes/BoundingBox.hpp \
-    kuplung/meshes/RayLine.hpp \
-    kuplung/meshes/Skybox.hpp \
-    kuplung/meshes/Terrain.hpp \
+    kuplung/meshes/scene/Mesh.hpp \
+    kuplung/meshes/scene/Model.hpp \
+    kuplung/meshes/scene/ModelForward.hpp \
+    kuplung/meshes/scene/ModelDeferred.hpp \
+    kuplung/meshes/scene/Terrain.hpp \
+    kuplung/meshes/helpers/MiniAxis.hpp \
+    kuplung/meshes/helpers/AxisHelpers.hpp \
+    kuplung/meshes/helpers/WorldGrid.hpp \
+    kuplung/meshes/helpers/Light.hpp \
+    kuplung/meshes/helpers/Camera.hpp \
+    kuplung/meshes/helpers/CameraModel.hpp \
+    kuplung/meshes/helpers/LightRay.hpp \
+    kuplung/meshes/helpers/BoundingBox.hpp \
+    kuplung/meshes/helpers/RayLine.hpp \
+    kuplung/meshes/helpers/Skybox.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \

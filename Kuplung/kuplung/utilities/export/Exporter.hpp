@@ -10,7 +10,7 @@
 #define Exporter_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
 
 class Exporter {

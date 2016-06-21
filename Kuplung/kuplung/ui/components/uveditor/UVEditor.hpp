@@ -17,7 +17,7 @@
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/components/FileBrowser.hpp"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/ui/components/uveditor/UVPoint.hpp"
 
 struct UVLine {

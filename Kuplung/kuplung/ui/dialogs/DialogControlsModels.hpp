@@ -15,7 +15,7 @@
 #include "kuplung/utilities/ImGui/imgui.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditor.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 #include "kuplung/ui/components/uveditor/UVEditor.hpp"

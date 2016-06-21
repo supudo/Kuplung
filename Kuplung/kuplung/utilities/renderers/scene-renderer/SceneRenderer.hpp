@@ -10,7 +10,7 @@
 #define SceneRenderer_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 

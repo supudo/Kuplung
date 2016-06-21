@@ -12,10 +12,10 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/UI.hpp"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"
-#include "kuplung/meshes/RayLine.hpp"
+#include "kuplung/meshes/helpers/RayLine.hpp"
 
 class RayPicking {
 public:

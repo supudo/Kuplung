@@ -15,14 +15,14 @@
 #include <vector>
 #include <glm/glm.hpp>
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/meshes/Camera.hpp"
-#include "kuplung/meshes/CameraModel.hpp"
-#include "kuplung/meshes/Light.hpp"
-#include "kuplung/meshes/AxisHelpers.hpp"
-#include "kuplung/meshes/MiniAxis.hpp"
-#include "kuplung/meshes/Skybox.hpp"
-#include "kuplung/meshes/WorldGrid.hpp"
-#include "kuplung/meshes/Terrain.hpp"
+#include "kuplung/meshes/helpers/Camera.hpp"
+#include "kuplung/meshes/helpers/CameraModel.hpp"
+#include "kuplung/meshes/helpers/Light.hpp"
+#include "kuplung/meshes/helpers/AxisHelpers.hpp"
+#include "kuplung/meshes/helpers/MiniAxis.hpp"
+#include "kuplung/meshes/helpers/Skybox.hpp"
+#include "kuplung/meshes/helpers/WorldGrid.hpp"
+#include "kuplung/meshes/scene/Terrain.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
 class ObjectsManager {

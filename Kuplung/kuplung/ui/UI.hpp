@@ -23,7 +23,7 @@
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
 #include "kuplung/ui/dialogs/DialogControlsModels.hpp"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
 class UI {

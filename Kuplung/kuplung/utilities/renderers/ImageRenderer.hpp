@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
-#include "kuplung/meshes/Model.hpp"
+#include "kuplung/meshes/scene/Model.hpp"
 
 typedef enum ImageRendererType {
     ImageRendererType_Scene,
