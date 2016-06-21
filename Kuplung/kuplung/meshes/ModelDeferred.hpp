@@ -10,6 +10,12 @@
 #define ModelDeferred_hpp
 
 #include "kuplung/meshes/Model.hpp"
+
+class ModelDeferred: public Model {
+};
+
+/*
+#include "kuplung/meshes/Model.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 struct ModelDeferred_LightSource {
@@ -61,5 +67,5 @@ private:
     // Cube
     GLuint vaoCube, vboCube;
 };
-
+*/
 #endif /* ModelDeferred_hpp */

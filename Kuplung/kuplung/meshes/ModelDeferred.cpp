@@ -7,6 +7,8 @@
 //
 
 #include "ModelDeferred.hpp"
+
+/*
 #include <glm/gtc/type_ptr.hpp>
 #include <boost/filesystem.hpp>
 
@@ -492,3 +494,4 @@ void ModelDeferred::renderCube() {
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }
+*/
