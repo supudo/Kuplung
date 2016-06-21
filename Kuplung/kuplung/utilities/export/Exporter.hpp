@@ -10,7 +10,7 @@
 #define Exporter_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/Model.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
 
 class Exporter {
@@ -18,7 +18,7 @@ public:
     ~Exporter();
     void init(std::function<void(float)> doProgress);
     void destroy();
-    void exportScene(FBEntity file, std::vector<ModelFace*> faces);
+    void exportScene(FBEntity file, std::vector<Model*> faces);
 
 private:
     ExporterOBJ* exporterOBJ;

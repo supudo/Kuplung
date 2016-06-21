@@ -10,7 +10,7 @@
 #define MaterialEditorData_hpp
 
 #include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/Model.hpp"
 
 typedef enum MaterialEditor_NodeType {
     MaterialEditor_NodeType_Combine,

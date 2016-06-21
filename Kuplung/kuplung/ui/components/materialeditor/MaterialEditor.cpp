@@ -34,7 +34,7 @@ void MaterialEditor::init() {
     this->panelWidth_Nodes = 100.0f;
 }
 
-void MaterialEditor::draw(int selectedModelID, ModelFace *face, bool* p_opened) {
+void MaterialEditor::draw(int selectedModelID, Model *face, bool* p_opened) {
     ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
 
@@ -304,7 +304,7 @@ void MaterialEditor::draw(int selectedModelID, ModelFace *face, bool* p_opened) 
     ImGui::End();
 }
 
-void MaterialEditor::initMaterialNodes(ModelFace *face) {
+void MaterialEditor::initMaterialNodes(Model *face) {
     MENode_Combine* node0 = new MENode_Combine(0, "fragColor", ImVec2(270.0, 0), 1.0f, ImColor(0, 200, 100), 0, 0);
     this->nodes.push_back(node0);
 

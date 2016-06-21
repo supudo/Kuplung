@@ -1,13 +1,13 @@
 //
-//  ModelFace.hpp
+//  Model.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ModelFace_hpp
-#define ModelFace_hpp
+#ifndef Model_hpp
+#define Model_hpp
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -21,11 +21,11 @@
 #include "kuplung/utilities/maths/Maths.hpp"
 #include "kuplung/meshes/BoundingBox.hpp"
 
-class ModelFace {
+class Model {
 public:
-    ModelFace();
-    ~ModelFace();
-    ModelFace* clone(int modelID);
+    Model();
+    ~Model();
+    Model* clone(int modelID);
 
     void destroy();
     void init();
@@ -171,4 +171,4 @@ protected:
     void doLog(std::string logMessage);
 };
 
-#endif /* ModelFace_hpp */
+#endif /* Model_hpp */

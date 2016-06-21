@@ -10,7 +10,7 @@
 #define MENode_hpp
 
 #include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/Model.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
 
 class MENode {

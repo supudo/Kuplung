@@ -1,12 +1,12 @@
 //
-//  ModelFace.cpp
+//  Model.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ModelFace.hpp"
+#include "Model.hpp"
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,11 +16,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-ModelFace::ModelFace() {
+Model::Model() {
 }
 
-ModelFace* ModelFace::clone(int modelID) {
-    ModelFace *mmf = new ModelFace();
+Model* Model::clone(int modelID) {
+    Model *mmf = new Model();
 
     mmf->ModelID = modelID;
 
@@ -55,11 +55,11 @@ ModelFace* ModelFace::clone(int modelID) {
 
 #pragma mark - Destroy
 
-ModelFace::~ModelFace() {
+Model::~Model() {
     this->destroy();
 }
 
-void ModelFace::destroy() {
+void Model::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);
@@ -177,7 +177,7 @@ void ModelFace::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFace::init() {
+void Model::init() {
     this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
 
@@ -216,11 +216,11 @@ void ModelFace::init() {
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
-void ModelFace::setModel(MeshModel meshModel) {
+void Model::setModel(MeshModel meshModel) {
     this->meshModel = meshModel;
 }
 
-void ModelFace::initModelProperties() {
+void Model::initModelProperties() {
     this->Setting_CelShading = false;
     this->Setting_Wireframe = false;
     this->Setting_Alpha = 1.0f;
@@ -280,7 +280,7 @@ void ModelFace::initModelProperties() {
     this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
-void ModelFace::initProperties() {
+void Model::initProperties() {
     this->Setting_CelShading = false;
     this->Setting_Alpha = 1.0f;
 
@@ -338,7 +338,7 @@ void ModelFace::initProperties() {
 
 #pragma mark - Public
 
-bool ModelFace::initShaderProgram() {
+bool Model::initShaderProgram() {
     bool success = true;
 
     // init FBO
@@ -415,7 +415,7 @@ bool ModelFace::initShaderProgram() {
         if (!programSuccess) {
             GLchar ErrorLog[1024] = { 0 };
             glGetProgramInfoLog(this->shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ModelFace] Invalid shader program: '%s'\n", ErrorLog));
+            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Model] Invalid shader program: '%s'\n", ErrorLog));
             return success = false;
         }
         else {
@@ -574,7 +574,7 @@ bool ModelFace::initShaderProgram() {
     return success;
 }
 
-void ModelFace::initBuffers(std::string assetsFolder) {
+void Model::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
     glBindVertexArray(this->glVAO);
 
@@ -655,13 +655,13 @@ void ModelFace::initBuffers(std::string assetsFolder) {
     this->initBuffersAgain = false;
 }
 
-void ModelFace::initBoundingBox() {
+void Model::initBoundingBox() {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
 }
 
-void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+void Model::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
@@ -733,7 +733,7 @@ void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage m
 
 #pragma mark - Render
 
-void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void Model::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -772,7 +772,7 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
     }
 }
 
-void ModelFace::renderModel() {
+void Model::renderModel() {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -1054,7 +1054,7 @@ void ModelFace::renderModel() {
     }
 }
 
-void ModelFace::drawOutline() {
+void Model::drawOutline() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
 
@@ -1078,7 +1078,7 @@ void ModelFace::drawOutline() {
     this->drawOnly();
 }
 
-void ModelFace::drawOnly() {
+void Model::drawOnly() {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -1091,7 +1091,7 @@ void ModelFace::drawOnly() {
 
 #pragma mark - Reflection
 
-bool ModelFace::reflectionInit() {
+bool Model::reflectionInit() {
     this->reflectWidth = 512;
     this->reflectHeight = 512;
 
@@ -1194,7 +1194,7 @@ bool ModelFace::reflectionInit() {
     return true;
 }
 
-void ModelFace::renderReflectFBO() {
+void Model::renderReflectFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
     glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
@@ -1225,7 +1225,7 @@ void ModelFace::renderReflectFBO() {
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
 }
 
-void ModelFace::renderMirrorSurface() {
+void Model::renderMirrorSurface() {
     glBindVertexArray(this->glVAOReflect);
     glUseProgram(this->shaderProgramReflection);
 
@@ -1263,25 +1263,25 @@ void ModelFace::renderMirrorSurface() {
 
 #pragma mark - Scene Options
 
-void ModelFace::setOptionsFOV(float fov) {
+void Model::setOptionsFOV(float fov) {
     this->so_fov = fov;
 }
 
-void ModelFace::setOptionsSelected(bool selectedYn) {
+void Model::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void ModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
+void Model::setOptionsOutlineColor(glm::vec4 outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 
-void ModelFace::setOptionsOutlineThickness(float thickness) {
+void Model::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
 }
 
 #pragma mark - Utilities
 
-std::string ModelFace::readFile(const char *filePath) {
+std::string Model::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {

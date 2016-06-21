@@ -1,19 +1,19 @@
 //
-//  ModelFaceDeferred.cpp
+//  ModelDeferred.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ModelFaceDeferred.hpp"
+#include "ModelDeferred.hpp"
 #include <glm/gtc/type_ptr.hpp>
 #include <boost/filesystem.hpp>
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-bool ModelFaceDeferred::initShaderProgram() {
+bool ModelDeferred::initShaderProgram() {
     bool success = true;
 
     success |= this->initShader_GeometryPass();
@@ -94,7 +94,7 @@ bool ModelFaceDeferred::initShaderProgram() {
     return success;
 }
 
-bool ModelFaceDeferred::initShader_GeometryPass() {
+bool ModelDeferred::initShader_GeometryPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -132,7 +132,7 @@ bool ModelFaceDeferred::initShader_GeometryPass() {
     return true;
 }
 
-bool ModelFaceDeferred::initShader_LightingPass() {
+bool ModelDeferred::initShader_LightingPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -166,7 +166,7 @@ bool ModelFaceDeferred::initShader_LightingPass() {
 
         this->lightSources.clear();
         for (GLuint i = 0; i < this->lightPositions.size(); i++) {
-            ModelFaceDeferred_LightSource source;
+            ModelDeferred_LightSource source;
             source.gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str());
             source.gl_Color = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str());
             source.gl_Linear = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str());
@@ -179,7 +179,7 @@ bool ModelFaceDeferred::initShader_LightingPass() {
     return true;
 }
 
-bool ModelFaceDeferred::initShader_LightBox() {
+bool ModelDeferred::initShader_LightBox() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -216,7 +216,7 @@ bool ModelFaceDeferred::initShader_LightBox() {
     return true;
 }
 
-void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
+void ModelDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
     glBindVertexArray(this->glVAO);
@@ -280,7 +280,7 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->initBuffersAgain = false;
 }
 
-void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -298,7 +298,7 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
     this->renderLightBox();
 }
 
-void ModelFaceDeferred::renderGeometryPass() {
+void ModelDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderFragment_GeometryPass);
@@ -332,7 +332,7 @@ void ModelFaceDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void ModelFaceDeferred::renderLightingPass() {
+void ModelDeferred::renderLightingPass() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
 
@@ -368,7 +368,7 @@ void ModelFaceDeferred::renderLightingPass() {
     this->renderQuad();
 }
 
-void ModelFaceDeferred::renderLightBox() {
+void ModelDeferred::renderLightBox() {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
@@ -398,7 +398,7 @@ void ModelFaceDeferred::renderLightBox() {
     }
 }
 
-void ModelFaceDeferred::renderQuad() {
+void ModelDeferred::renderQuad() {
     if (this->vaoQuad == 0) {
         GLfloat quadVertices[] = {
             // Positions        // Texture Coords
@@ -423,7 +423,7 @@ void ModelFaceDeferred::renderQuad() {
     glBindVertexArray(0);
 }
 
-void ModelFaceDeferred::renderCube() {
+void ModelDeferred::renderCube() {
     // Initialize (if necessary)
     if (this->vaoCube == 0)
     {

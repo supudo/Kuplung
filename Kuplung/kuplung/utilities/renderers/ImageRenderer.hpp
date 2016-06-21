@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
-#include "kuplung/meshes/ModelFace.hpp"
+#include "kuplung/meshes/Model.hpp"
 
 typedef enum ImageRendererType {
     ImageRendererType_Scene,
@@ -24,7 +24,7 @@ public:
     ~ImageRenderer();
     void init();
     void destroy();
-    void renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects);
+    void renderImage(ImageRendererType type, FBEntity file, std::vector<Model*> *meshModelFaces, ObjectsManager *managerObjects);
 
 private:
     SceneRenderer *rendererScene;

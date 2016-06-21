@@ -32,7 +32,7 @@ void RayPicking::setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera)
     this->matrixCamera = matrixCamera;
 }
 
-void RayPicking::selectModel(std::vector<ModelFace*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject) {
+void RayPicking::selectModel(std::vector<Model*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject) {
     this->meshModelFaces = meshModelFaces;
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
     this->pick();
@@ -73,7 +73,7 @@ void RayPicking::pick() {
 
     this->sceneSelectedModelObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
-        ModelFace *mmf = this->meshModelFaces[i];
+        Model *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
 //                glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);

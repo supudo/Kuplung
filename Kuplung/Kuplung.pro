@@ -109,9 +109,9 @@ SOURCES += main.cpp \
     kuplung/meshes/Camera.cpp \
     kuplung/meshes/CameraModel.cpp \
     kuplung/meshes/LightRay.cpp \
-    kuplung/meshes/ModelFace.cpp \
-    kuplung/meshes/ModelFaceForward.cpp \
-    kuplung/meshes/ModelFaceDeferred.cpp \
+    kuplung/meshes/Model.cpp \
+    kuplung/meshes/ModelForward.cpp \
+    kuplung/meshes/ModelDeferred.cpp \
     kuplung/meshes/BoundingBox.cpp \
     kuplung/meshes/RayLine.cpp \
     kuplung/meshes/Skybox.cpp \
@@ -171,9 +171,9 @@ HEADERS += \
     kuplung/meshes/Camera.hpp \
     kuplung/meshes/CameraModel.hpp \
     kuplung/meshes/LightRay.hpp \
-    kuplung/meshes/ModelFace.hpp \
-    kuplung/meshes/ModelFaceForward.hpp \
-    kuplung/meshes/ModelFaceDeferred.hpp \
+    kuplung/meshes/Model.hpp \
+    kuplung/meshes/ModelForward.hpp \
+    kuplung/meshes/ModelDeferred.hpp \
     kuplung/meshes/BoundingBox.hpp \
     kuplung/meshes/RayLine.hpp \
     kuplung/meshes/Skybox.hpp \

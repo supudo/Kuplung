@@ -20,7 +20,7 @@ Kuplung::~Kuplung() {
 
 void Kuplung::destroy() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFace *mmf = this->meshModelFaces[i];
+        Model *mmf = this->meshModelFaces[i];
         mmf->destroy();
     }
 
@@ -302,7 +302,7 @@ void Kuplung::addTerrainModel() {
     this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, this->managerObjects->Setting_TerrainWidth, this->managerObjects->Setting_TerrainHeight);
     this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
     this->managerObjects->terrain->Setting_UseTexture = true;
-    ModelFace *mmf = new ModelFace();
+    Model *mmf = new Model();
     mmf->dataVertices = this->managerObjects->grid->dataVertices;
     mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
     mmf->dataNormals = this->managerObjects->grid->dataNormals;
@@ -338,7 +338,7 @@ void Kuplung::renderSceneModels() {
     int cTriangles = 0;
     int cFaces = 0;
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFace* mmf = this->meshModelFaces[i];
+        Model* mmf = this->meshModelFaces[i];
 
         glm::mat4 mtxModel = glm::mat4(1.0);
 
@@ -540,7 +540,7 @@ void Kuplung::guiSceneExport(FBEntity file) {
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces) {
+void Kuplung::exportSceneAsync(FBEntity file, std::vector<Model*> meshModelFaces) {
     this->managerExporter->exportScene(file, meshModelFaces);
     this->exporterThreadFinished = true;
 }
@@ -558,11 +558,11 @@ void Kuplung::processParsedObjFile() {
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
-            ModelFace *mmf;
+            Model *mmf;
             if (Settings::Instance()->DeferredRendering)
-                mmf = new ModelFaceDeferred();
+                mmf = new ModelDeferred();
             else
-                mmf = new ModelFaceForward();
+                mmf = new ModelForward();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;
             mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
             mmf->dataNormals = this->managerObjects->grid->dataNormals;
