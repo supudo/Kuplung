@@ -160,6 +160,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_TerrainAnimateY = false;
     this->Setting_TerrainWidth = 100;
     this->Setting_TerrainHeight = 100;
+    this->Setting_LightingPass_DrawMode = 0;
 }
 
 void ObjectsManager::resetPropertiesSystem() {

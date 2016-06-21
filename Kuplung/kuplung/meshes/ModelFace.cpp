@@ -191,6 +191,7 @@ void ModelFace::init() {
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
+    this->Setting_LightingPass_DrawMode = 1;
 
     // light
     this->Setting_LightStrengthAmbient = 0.5;
@@ -255,6 +256,7 @@ void ModelFace::initModelProperties() {
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
     this->Setting_TessellationSubdivision = 1;
+    this->Setting_LightingPass_DrawMode = 1;
 
     this->materialIlluminationModel = this->meshModel.ModelMaterial.IlluminationMode;
     this->Setting_ParallaxMapping = false;
@@ -312,6 +314,7 @@ void ModelFace::initProperties() {
     this->Setting_LightStrengthDiffuse = 1.0;
     this->Setting_LightStrengthSpecular = 1.0;
     this->Setting_TessellationSubdivision = 1;
+    this->Setting_LightingPass_DrawMode = 1;
 
     this->materialIlluminationModel = 1;
     this->Setting_ParallaxMapping = false;

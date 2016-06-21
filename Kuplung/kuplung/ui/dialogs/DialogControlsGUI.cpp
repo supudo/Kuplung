@@ -185,6 +185,18 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Checkbox("Show Pick Rays", &Settings::Instance()->showPickRays);
             ImGui::Separator();
 
+            if (Settings::Instance()->DeferredRendering) {
+                ImGui::Text("Deferred Rendering");
+                std::vector<const char*> deferred_texture_items;
+                deferred_texture_items.push_back("Lighting");
+                deferred_texture_items.push_back("Position");
+                deferred_texture_items.push_back("Normal");
+                deferred_texture_items.push_back("Diffuse");
+                deferred_texture_items.push_back("Specular");
+                ImGui::Combo("Texture", &this->managerObjects->Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
+                ImGui::Separator();
+            }
+
             this->helperUI->addControlColor4("Outline Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
             this->helperUI->addControlsSlider("Outline Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
             ImGui::Separator();

@@ -11,19 +11,54 @@
 
 #include "kuplung/meshes/ModelFace.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
-#include "kuplung/meshes/deferred/GBuffer.hpp"
-#include "kuplung/meshes/deferred/GeometryPass.hpp"
+
+struct ModelFaceDeferred_LightSource {
+    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
+};
 
 class ModelFaceDeferred: public ModelFace {
 private:
     bool initShaderProgram();
+    bool initShader_GeometryPass();
+    bool initShader_LightingPass();
+    bool initShader_LightBox();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
-    void doGeometryPass();
-    void doLightPass();
 
-    GBuffer gBuffer;
-    GeometryPass geometryPass;
+    void renderGeometryPass();
+    void renderLightingPass();
+    void renderLightBox();
+    void renderQuad();
+    void renderCube();
+
+    std::vector<glm::vec3> lightPositions;
+    std::vector<glm::vec3> lightColors;
+
+    GLuint gBuffer, rboDepth;
+    GLuint gPosition, gNormal, gAlbedoSpec;
+    GLuint vboPosition, vboNormal, vboAlbedoSpec;
+    const GLuint NR_LIGHTS = 32;
+
+    // Geometry Pass
+    GLuint shaderProgram_GeometryPass, shaderVertex_GeometryPass, shaderFragment_GeometryPass;
+    GLint gl_GeometryPass_ProjectionMatrix, gl_GeometryPass_ViewMatrix, gl_GeometryPass_ModelMatrix;
+    GLuint gl_GeometryPass_TextureDiffuse, gl_GeometryPass_TextureSpecular;
+
+    // Lighting Pass
+    GLuint shaderProgram_LightingPass, shaderVertex_LightingPass, shaderFragment_LightingPass;
+    GLint gl_LightingPass_Position, gl_LightingPass_Normal, gl_LightingPass_AlbedoSpec;
+    std::vector<ModelFaceDeferred_LightSource> lightSources;
+    GLint gl_LightingPass_ViewPosition, gl_LightingPass_DrawMode;
+
+    // Light Box
+    GLuint shaderProgram_LightBox, shaderVertex_LightBox, shaderFragment_LightBox;
+    GLint gl_LightBox_ProjectionMatrix, gl_LightBox_ViewMatrix, gl_LightBox_ModelMatrix, gl_LightBox_LightColor;
+
+    // Quad
+    GLuint vaoQuad, vboQuad;
+
+    // Cube
+    GLuint vaoCube, vboCube;
 };
 
 #endif /* ModelFaceDeferred_hpp */

@@ -96,6 +96,9 @@ public:
     bool Effect_Bloom_doBloom;
     float Effect_Bloom_WeightA, Effect_Bloom_WeightB, Effect_Bloom_WeightC, Effect_Bloom_WeightD, Effect_Bloom_Vignette, Effect_Bloom_VignetteAtt;
 
+    // rendering
+    int Setting_LightingPass_DrawMode;
+
 protected:
     void drawOutline();
     void drawOnly();

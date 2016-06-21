@@ -380,6 +380,9 @@ void Kuplung::renderSceneModels() {
         mmf->solidLightSkin_Diffuse_Strength = this->managerObjects->SolidLight_Diffuse_Strength;
         mmf->solidLightSkin_Specular_Strength = this->managerObjects->SolidLight_Specular_Strength;
 
+        // rendering
+        mmf->Setting_LightingPass_DrawMode = this->managerObjects->Setting_LightingPass_DrawMode;
+
         // render
         mmf->render(this->managerObjects->matrixProjection,
                     this->managerObjects->camera->matrixCamera,

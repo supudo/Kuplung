@@ -70,6 +70,7 @@ public:
     glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
     bool Settings_ShowZAxis = true;
+    int Setting_LightingPass_DrawMode;
 
     ViewModelSkin viewModelSkin;
     glm::vec3 SolidLight_MaterialColor, SolidLight_Ambient, SolidLight_Diffuse, SolidLight_Specular;
