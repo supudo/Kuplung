@@ -478,6 +478,7 @@ void Kuplung::addShape(ShapeType type) {
     }
     FileBrowser_ParserType t;
     assert(Settings::Instance()->ModelFileParser >= FileBrowser_ParserType_Own1 && Settings::Instance()->ModelFileParser <= FileBrowser_ParserType_Assimp);
+    t = FileBrowser_ParserType_Own2;
     switch (Settings::Instance()->ModelFileParser) {
         case 0:
             t = FileBrowser_ParserType_Own1;

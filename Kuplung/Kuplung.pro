@@ -123,6 +123,7 @@ SOURCES += main.cpp \
     kuplung/meshes/helpers/RayLine.cpp \
     kuplung/meshes/helpers/Skybox.cpp \
     kuplung/objects/ObjectsManager.cpp \
+    kuplung/objects/RenderingManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
@@ -187,6 +188,7 @@ HEADERS += \
     kuplung/meshes/helpers/Skybox.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
+    kuplung/objects/RenderingManager.hpp \
     kuplung/objects/RayPicking.hpp \
     kuplung/settings/ConfigUtils.hpp \
     kuplung/settings/SettingsStructs.h \
