@@ -23,15 +23,9 @@ Mesh* Mesh::clone(int modelID) {
 
     mmf->ModelID = modelID;
 
-    mmf->matrixCamera = this->matrixCamera;
-    mmf->matrixModel = this->matrixModel;
-    mmf->matrixProjection = this->matrixProjection;
-
     mmf->Setting_UseTessellation = this->Setting_UseTessellation;
     mmf->ModelID = this->ModelID;
     mmf->meshModel = this->meshModel;
-
-    mmf->vecCameraPosition = this->vecCameraPosition;
 
     mmf->init();
     mmf->setModel(mmf->meshModel);
@@ -167,8 +161,6 @@ void Mesh::initModelProperties() {
     this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 
-    this->matrixModel = glm::mat4(1.0);
-
     this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->meshModel.ModelMaterial.OpticalDensity });
     this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->meshModel.ModelMaterial.SpecularExp });
 
@@ -224,8 +216,6 @@ void Mesh::initProperties() {
     this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->matrixModel = glm::mat4(1.0);
 
     this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
     this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 100.0f });
@@ -414,14 +404,7 @@ void Mesh::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materi
 
 #pragma mark - Render
 
-void Mesh::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
-    this->matrixProjection = matrixProjection;
-    this->matrixCamera = matrixCamera;
-    this->matrixModel = matrixModel;
-    this->vecCameraPosition = vecCameraPosition;
-    this->grid = grid;
-    this->uiAmbientLight = uiAmbientLight;
-
+void Mesh::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
     if (this->initBuffersAgain)
         this->initBuffers(this->assetsFolder);
 
@@ -429,21 +412,6 @@ void Mesh::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 
     glFrontFace(GL_CCW);
     glBindVertexArray(this->glVAO);
 
-    this->renderModel();
-
-    glUseProgram(0);
-    glBindVertexArray(0);
-
-    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
-        glm::mat4 matrixBB = glm::mat4(1.0f);
-        matrixBB *= this->matrixProjection;
-        matrixBB *= this->matrixCamera;
-        matrixBB *= this->matrixModel;
-        this->boundingBox->render(matrixBB, this->so_outlineColor);
-    }
-}
-
-void Mesh::renderModel() {
     if (this->glVAO > 0) {
         if (this->vboTextureAmbient > 0 && this->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
             glActiveTexture(GL_TEXTURE0);
@@ -487,6 +455,17 @@ void Mesh::renderModel() {
 
         if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+
+    glUseProgram(0);
+    glBindVertexArray(0);
+
+    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
+        glm::mat4 matrixBB = glm::mat4(1.0f);
+        matrixBB *= matrixProjection;
+        matrixBB *= matrixCamera;
+        matrixBB *= matrixModel;
+        this->boundingBox->render(matrixBB, this->so_outlineColor);
     }
 }
 

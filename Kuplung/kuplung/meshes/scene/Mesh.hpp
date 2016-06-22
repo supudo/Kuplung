@@ -33,8 +33,7 @@ public:
     void initBoundingBox();
     void initProperties();
     void initModelProperties();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
-    void renderModel();
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
 
     // general options
     void setOptionsFOV(float fov);
@@ -47,8 +46,6 @@ public:
     bool initBuffersAgain;
     MeshModel meshModel;
     int ModelID;
-    glm::mat4 matrixProjection, matrixCamera, matrixModel;
-    glm::vec3 vecCameraPosition;
     std::vector<GLfloat> dataVertices;
     std::vector<GLfloat> dataTexCoords;
     std::vector<GLfloat> dataNormals;
@@ -58,7 +55,7 @@ public:
 
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
-    int Setting_TessellationSubdivision;
+    int Setting_TessellationSubdivision, Setting_ModelViewSkin;
     ObjectCoordinate *positionX, *positionY, *positionZ;
     ObjectCoordinate *scaleX, *scaleY, *scaleZ;
     ObjectCoordinate *rotateX, *rotateY, *rotateZ;
@@ -66,12 +63,9 @@ public:
     ObjectCoordinate *Setting_MaterialRefraction;
     ObjectCoordinate *Setting_MaterialSpecularExp;
 
-    // view skin
-    ViewModelSkin Setting_ModelViewSkin;
     glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
     float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
 
-    // light
     glm::vec3 Setting_LightPosition, Setting_LightDirection;
     glm::vec3 Setting_LightAmbient, Setting_LightDiffuse, Setting_LightSpecular;
     float Setting_LightStrengthAmbient, Setting_LightStrengthDiffuse, Setting_LightStrengthSpecular;
