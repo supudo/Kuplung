@@ -10,7 +10,7 @@
 #define MaterialEditor_hpp
 
 #include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/ui/components/materialeditor/MaterialEditorData.h"
 #include "kuplung/ui/components/materialeditor/MELink.hpp"
 #include "kuplung/ui/components/materialeditor/MENode.hpp"
@@ -30,10 +30,10 @@ struct DragNode {
 class MaterialEditor {
 public:
     void init();
-    void draw(int selectedModelID, Model *face, bool* p_opened = NULL);
+    void draw(int selectedModelID, ModelFace *face, bool* p_opened = NULL);
 
 private:
-    void initMaterialNodes(Model *face);
+    void initMaterialNodes(ModelFace *face);
 
     bool inited = false;
     int selectedModelID;

@@ -22,7 +22,7 @@ void SceneRenderer::destroy() {
 void SceneRenderer::init() {
 }
 
-void SceneRenderer::renderImage(FBEntity file, std::vector<Model*> *meshModelFaces, ObjectsManager *managerObjects) {
+void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -52,7 +52,7 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<Model*> *meshModelFac
     SDL_FreeSurface(image);
 }
 
-void SceneRenderer::renderImage2(FBEntity file, std::vector<Model*> *meshModelFaces, ObjectsManager *managerObjects) {
+void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -96,7 +96,7 @@ void SceneRenderer::renderImage2(FBEntity file, std::vector<Model*> *meshModelFa
 
 //                    // render models
 //                    for (int i=0; i<(int)(*meshModelFaces).size(); i++) {
-//                        Model* mmf = (*meshModelFaces)[i];
+//                        ModelFace* mmf = (*meshModelFaces)[i];
 
 //                        glm::mat4 mtxModel = glm::mat4(1.0);
 

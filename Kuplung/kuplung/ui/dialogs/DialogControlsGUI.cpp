@@ -73,7 +73,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             }
             case 2: {
                 ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera Model", this->selectedObject == i)) {
+                if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera ModelFace", this->selectedObject == i)) {
                     this->selectedObject = i;
                     this->selectedObjectLight = -1;
                 }
@@ -297,7 +297,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionY->animate, &this->managerObjects->cameraModel->innerLightDirectionY->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionZ->animate, &this->managerObjects->cameraModel->innerLightDirectionZ->point, true, isFrame);
                     ImGui::Separator();
-                    ImGui::Text("Model Color");
+                    ImGui::Text("ModelFace Color");
                     this->helperUI->addControlsSliderSameLine("X", 13, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorR->animate, &this->managerObjects->cameraModel->colorR->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Y", 14, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorG->animate, &this->managerObjects->cameraModel->colorG->point, true, isFrame);
                     this->helperUI->addControlsSliderSameLine("Z", 15, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorB->animate, &this->managerObjects->cameraModel->colorB->point, true, isFrame);
@@ -537,7 +537,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
                 ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
                 ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
-                ImGui::Checkbox("Terrain Model", &this->managerObjects->Setting_TerrainModel);
+                ImGui::Checkbox("Terrain ModelFace", &this->managerObjects->Setting_TerrainModel);
                 // TODO: BIG memory consumption
 //                ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
 //                ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);

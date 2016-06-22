@@ -16,9 +16,9 @@
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
-#include "kuplung/meshes/scene/Model.hpp"
-#include "kuplung/meshes/scene/ModelForward.hpp"
-#include "kuplung/meshes/scene/ModelDeferred.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceForward.hpp"
+#include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
 #include "kuplung/meshes/scene/Terrain.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
@@ -51,7 +51,7 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
-    void exportSceneAsync(FBEntity file, std::vector<Model*> meshModelFaces);
+    void exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces);
     void exportSceneFinished();
     void addTerrainModel();
     void saveScene(FBEntity file);
@@ -93,7 +93,7 @@ private:
     Exporter *managerExporter;
     ImageRenderer *imageRenderer;
     std::vector<MeshModel> meshModels, meshModelsNew;
-    std::vector<Model*> meshModelFaces;
+    std::vector<ModelFace*> meshModelFaces;
     std::vector<RayLine*> rayLines;
 
     Terrain *terrain;

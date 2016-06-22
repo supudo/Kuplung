@@ -37,7 +37,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
 
 }
 
-void UVEditor::setModel(Model *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(Model*)> processTexture) {
+void UVEditor::setModel(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFace*)> processTexture) {
     this->mmf = mmf;
     this->textureType = texType;
     this->texturePath = texturePath;

@@ -1,12 +1,12 @@
 //
-//  Model.cpp
+//  ModelFace.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "Model.hpp"
+#include "ModelFace.hpp"
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,11 +16,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-Model::Model() {
+ModelFace::ModelFace() {
 }
 
-Model* Model::clone(int modelID) {
-    Model *mmf = new Model();
+ModelFace* ModelFace::clone(int modelID) {
+    ModelFace *mmf = new ModelFace();
 
     mmf->ModelID = modelID;
 
@@ -55,11 +55,11 @@ Model* Model::clone(int modelID) {
 
 #pragma mark - Destroy
 
-Model::~Model() {
+ModelFace::~ModelFace() {
     this->destroy();
 }
 
-void Model::destroy() {
+void ModelFace::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);
@@ -177,7 +177,7 @@ void Model::destroy() {
 
 #pragma mark - Initialization
 
-void Model::init() {
+void ModelFace::init() {
     this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
 
@@ -216,11 +216,11 @@ void Model::init() {
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
-void Model::setModel(MeshModel meshModel) {
+void ModelFace::setModel(MeshModel meshModel) {
     this->meshModel = meshModel;
 }
 
-void Model::initModelProperties() {
+void ModelFace::initModelProperties() {
     this->Setting_CelShading = false;
     this->Setting_Wireframe = false;
     this->Setting_Alpha = 1.0f;
@@ -280,7 +280,7 @@ void Model::initModelProperties() {
     this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
-void Model::initProperties() {
+void ModelFace::initProperties() {
     this->Setting_CelShading = false;
     this->Setting_Alpha = 1.0f;
 
@@ -338,7 +338,7 @@ void Model::initProperties() {
 
 #pragma mark - Public
 
-bool Model::initShaderProgram() {
+bool ModelFace::initShaderProgram() {
     bool success = true;
 
     // init FBO
@@ -391,11 +391,11 @@ bool Model::initShaderProgram() {
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -415,7 +415,7 @@ bool Model::initShaderProgram() {
         if (!programSuccess) {
             GLchar ErrorLog[1024] = { 0 };
             glGetProgramInfoLog(this->shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Model] Invalid shader program: '%s'\n", ErrorLog));
+            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ModelFace] Invalid shader program: '%s'\n", ErrorLog));
             return success = false;
         }
         else {
@@ -574,7 +574,7 @@ bool Model::initShaderProgram() {
     return success;
 }
 
-void Model::initBuffers(std::string assetsFolder) {
+void ModelFace::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
     glBindVertexArray(this->glVAO);
 
@@ -655,13 +655,13 @@ void Model::initBuffers(std::string assetsFolder) {
     this->initBuffersAgain = false;
 }
 
-void Model::initBoundingBox() {
+void ModelFace::initBoundingBox() {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
 }
 
-void Model::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
@@ -733,7 +733,7 @@ void Model::loadTexture(std::string assetsFolder, MeshMaterialTextureImage mater
 
 #pragma mark - Render
 
-void Model::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -772,7 +772,7 @@ void Model::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
     }
 }
 
-void Model::renderModel() {
+void ModelFace::renderModel() {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -1054,7 +1054,7 @@ void Model::renderModel() {
     }
 }
 
-void Model::drawOutline() {
+void ModelFace::drawOutline() {
     glm::mat4 mvpMatrix, mtxModel;
     glUniform1f(this->glVS_IsBorder, 0.0);
 
@@ -1078,7 +1078,7 @@ void Model::drawOutline() {
     this->drawOnly();
 }
 
-void Model::drawOnly() {
+void ModelFace::drawOnly() {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -1091,7 +1091,7 @@ void Model::drawOnly() {
 
 #pragma mark - Reflection
 
-bool Model::reflectionInit() {
+bool ModelFace::reflectionInit() {
     this->reflectWidth = 512;
     this->reflectHeight = 512;
 
@@ -1170,8 +1170,8 @@ bool Model::reflectionInit() {
     this->shaderProgramReflection = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderVertexReflection, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgramReflection, this->shaderFragmentReflection, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgramReflection, this->shaderVertexReflection, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgramReflection, this->shaderFragmentReflection, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -1194,7 +1194,7 @@ bool Model::reflectionInit() {
     return true;
 }
 
-void Model::renderReflectFBO() {
+void ModelFace::renderReflectFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboReflection);
     glViewport(0, 0, this->reflectWidth, this->reflectHeight);
 
@@ -1225,7 +1225,7 @@ void Model::renderReflectFBO() {
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
 }
 
-void Model::renderMirrorSurface() {
+void ModelFace::renderMirrorSurface() {
     glBindVertexArray(this->glVAOReflect);
     glUseProgram(this->shaderProgramReflection);
 
@@ -1263,25 +1263,25 @@ void Model::renderMirrorSurface() {
 
 #pragma mark - Scene Options
 
-void Model::setOptionsFOV(float fov) {
+void ModelFace::setOptionsFOV(float fov) {
     this->so_fov = fov;
 }
 
-void Model::setOptionsSelected(bool selectedYn) {
+void ModelFace::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void Model::setOptionsOutlineColor(glm::vec4 outlineColor) {
+void ModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 
-void Model::setOptionsOutlineThickness(float thickness) {
+void ModelFace::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
 }
 
 #pragma mark - Utilities
 
-std::string Model::readFile(const char *filePath) {
+std::string ModelFace::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {

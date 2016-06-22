@@ -1,28 +1,28 @@
 //
-//  ModelDeferred.hpp
+//  ModelFaceDeferred.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ModelDeferred_hpp
-#define ModelDeferred_hpp
+#ifndef ModelFaceDeferred_hpp
+#define ModelFaceDeferred_hpp
 
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 
-class ModelDeferred: public Model {
+class ModelFaceDeferred: public ModelFace {
 };
 
 /*
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 struct ModelDeferred_LightSource {
     GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
 };
 
-class ModelDeferred: public Model {
+class ModelDeferred: public ModelFace {
 public:
     bool initShaderProgram();
     bool initShader_GeometryPass();
@@ -68,4 +68,4 @@ private:
     GLuint vaoCube, vboCube;
 };
 */
-#endif /* ModelDeferred_hpp */
+#endif /* ModelFaceDeferred_hpp */

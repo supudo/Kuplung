@@ -12,7 +12,7 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/UI.hpp"
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
@@ -22,7 +22,7 @@ public:
     ~RayPicking();
     void init(ObjectsManager *managerObjects, Controls *managerControls, std::function<void(std::string)> doLog);
     void setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
-    void selectModel(std::vector<Model*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject);
+    void selectModel(std::vector<ModelFace*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject);
 
     std::vector<RayLine*> rayLines;
 
@@ -34,7 +34,7 @@ private:
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;
 
-    std::vector<Model*> meshModelFaces;
+    std::vector<ModelFace*> meshModelFaces;
     int sceneSelectedModelObject;
 
     void destroy();

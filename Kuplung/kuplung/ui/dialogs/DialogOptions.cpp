@@ -38,7 +38,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             Settings::Instance()->saveSettings();
 
         const char* parserItems[] = {"Own 1.0", "Own 2.0", "Assimp"};
-        if (ImGui::Combo("Model Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+        if (ImGui::Combo("ModelFace Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
             Settings::Instance()->saveSettings();
     }
 

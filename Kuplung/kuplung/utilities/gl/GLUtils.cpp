@@ -9,57 +9,10 @@
 #include "GLUtils.hpp"
 #include <fstream>
 
-GLuint GLUtils::initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName) {
-    GLuint shaderProgram = 0;
-
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderVertexName + ".vert";
-    const char *shader_vertex = readFile(shaderPath.c_str()).c_str();
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/" + shaderFragmentName + ".frag";
-    const char *shader_fragment = readFile(shaderPath.c_str()).c_str();
-
-    shaderProgram = glCreateProgram();
-
-    GLuint shaderVertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(shaderVertex, 1, &shader_vertex, NULL);
-    glCompileShader(shaderVertex);
-
-    GLint isShaderVertexCompiled = GL_FALSE;
-    glGetShaderiv(shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
-    if (isShaderVertexCompiled != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Unable to compile vertex shader " + std::to_string(shaderVertex) + "!");
-        this->printShaderLog(shaderVertex);
-    }
-    else {
-        glAttachShader(shaderProgram, shaderVertex);
-
-        GLuint shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(shaderFragment, 1, &shader_fragment, NULL);
-        glCompileShader(shaderFragment);
-
-        GLint isShaderFragmentCompiled = GL_FALSE;
-        glGetShaderiv(shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
-        if (isShaderFragmentCompiled != GL_TRUE) {
-            Settings::Instance()->funcDoLog("Unable to compile fragment shader " + std::to_string(shaderFragment) + "!");
-            this->printShaderLog(shaderFragment);
-        }
-        else {
-            glAttachShader(shaderProgram, shaderFragment);
-            glLinkProgram(shaderProgram);
-
-            GLint programSuccess = GL_TRUE;
-            glGetProgramiv(shaderProgram, GL_LINK_STATUS, &programSuccess);
-            if (programSuccess != GL_TRUE) {
-                Settings::Instance()->funcDoLog("Error linking program " + std::to_string(shaderProgram) + "!");
-                this->printProgramLog(shaderProgram);
-            }
-        }
-    }
-
-    return shaderProgram;
+GLUtils::~GLUtils() {
 }
 
-bool GLUtils::compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source) {
+bool GLUtils::compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source) {
     shader = glCreateShader(shaderType);
 
     glShaderSource(shader, 1, &shader_source, NULL);
@@ -74,6 +27,22 @@ bool GLUtils::compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shader
     }
     else
         glAttachShader(shaderProgram, shader);
+    return true;
+}
+
+bool GLUtils::compileShader(GLuint &shader, GLenum shaderType, const char *shader_source) {
+    shader = glCreateShader(shaderType);
+
+    glShaderSource(shader, 1, &shader_source, NULL);
+    glCompileShader(shader);
+
+    GLint isShaderCompiled = GL_FALSE;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
+    if (isShaderCompiled != GL_TRUE) {
+        Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
+        this->printShaderLog(shader);
+        return false;
+    }
     return true;
 }
 

@@ -28,8 +28,9 @@ struct GridMeshPoint3D
 class GLUtils {
 public:
     ~GLUtils();
-    GLuint initShaderProgram(std::string shaderVertexName, std::string shaderFragmentName);
-    bool compileShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
+    bool compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
+    bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);
+    std::string readFile(const char *filePath);
 
     void printProgramLog(GLuint program);
     void printShaderLog(GLuint shader);
@@ -37,9 +38,6 @@ public:
     GLint glGetAttribute(GLuint program, const char* var_name);
     GLint glGetUniform(GLuint program, const char* var_name);
     GLsizei getGLTypeSize(GLenum type);
-
-private:
-    std::string readFile(const char *filePath);
 };
 
 #endif /* GLUtils_hpp */

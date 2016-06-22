@@ -203,7 +203,7 @@ void ObjectsManager::initGrid() {
 
 /*
  *
- * Camera Model
+ * Camera ModelFace
  *
  */
 void ObjectsManager::initCameraModel() {

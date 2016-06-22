@@ -10,22 +10,22 @@
 #define ExporterOBJ_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 
 class ExporterOBJ {
 public:
     ~ExporterOBJ();
     void destroy();
     void init(std::function<void(float)> doProgress);
-    void exportToFile(FBEntity file, std::vector<Model*> faces);
+    void exportToFile(FBEntity file, std::vector<ModelFace*> faces);
 
 private:
     std::function<void(float)> funcProgress;
 
-    void exportGeometry(std::vector<Model*> faces);
-    void exportMaterials(std::vector<Model*> faces);
+    void exportGeometry(std::vector<ModelFace*> faces);
+    void exportMaterials(std::vector<ModelFace*> faces);
     void saveFile(std::string fileContents, std::string fileName);
-    std::string exportMesh(Model *face);
+    std::string exportMesh(ModelFace *face);
 
     FBEntity exportFile;
     std::string nlDelimiter;

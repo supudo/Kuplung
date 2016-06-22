@@ -128,7 +128,7 @@ class TriangleMesh {
 public:
     TriangleMesh() : bottomLeftVertex(999999,999999,999999), upperRightVertex(-999999,-999999,-999999) {}
     size_t size() const { return mesh.size(); }
-    // move 3D Model coordinates to be center around COG(0,0,0)
+    // move 3D ModelFace coordinates to be center around COG(0,0,0)
     void normalize() {
         v3 halfBbox = (upperRightVertex – bottomLeftVertex)/2.0f;
         v3 start = bottomLeftVertex + halfBbox;
@@ -231,7 +231,7 @@ int triMeshSlicer(
                   const TriangleMesh                        *mesh,        // the const input mesh
                   std::vector<std::vector<LineSegment>>    &slicesWithLineSegments,
                   // the result slices
-                  const float                                sliceSize) {// slice size in 3D Model digital units
+                  const float                                sliceSize) {// slice size in 3D ModelFace digital units
     Plane plane;                                        // The intersection plane
     plane.setNormal(v3(0, 0, 1));                        // normal does not change during slicing
     const v3 aabb = mesh->meshAABBSize();                // as the model for it’s 3D axis-aligned bounding-box
@@ -293,11 +293,11 @@ int    exportSingleGIVFormat3D(
 
     glm::mat4 View        = glm::rotate(glm::mat4(1.0), angle, axis);
     glm::mat4 Projection  = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.f);
-    glm::mat4 Model       = glm::lookAt(
+    glm::mat4 ModelFace       = glm::lookAt(
                                         glm::vec3(1, 1, 1),    // Eye point (where am I?)
                                         glm::vec3(0, 0, 0),    // Look at Center point (What am I looking at?)
                                         glm::vec3(0, 1, 0));// UP vector of the camera (Where is my UP vector?)
-    glm::mat4 MVP = Projection * View * Model;
+    glm::mat4 MVP = Projection * View * ModelFace;
 
     // Start Output
     char filename[256];
@@ -359,7 +359,7 @@ int main(int argc, char **argv) {
         return 1;
     fprintf(stderr, “Mesh has %d triangles\n”, mesh.size());
 
-    // Optional Model Rotation Around COG Point using GLM Library
+    // Optional ModelFace Rotation Around COG Point using GLM Library
     glm::mat4 mat = glm::mat4(1.0f);
     glm::detail::tquat<float> quaternion = glm::detail::tquat<float>(DEG_TO_RAD(eulerAngles)); // This glm func wants values as radians
     float angle = glm::angle(quaternion);

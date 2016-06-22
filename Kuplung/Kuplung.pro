@@ -107,10 +107,9 @@ OTHER_FILES += resources/axis_helpers/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
-    kuplung/meshes/scene/Mesh.cpp \
-    kuplung/meshes/scene/Model.cpp \
-    kuplung/meshes/scene/ModelForward.cpp \
-    kuplung/meshes/scene/ModelDeferred.cpp \
+    kuplung/meshes/scene/ModelFace.cpp \
+    kuplung/meshes/scene/ModelFaceForward.cpp \
+    kuplung/meshes/scene/ModelFaceDeferred.cpp \
     kuplung/meshes/scene/Terrain.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
     kuplung/meshes/helpers/AxisHelpers.cpp \
@@ -123,7 +122,6 @@ SOURCES += main.cpp \
     kuplung/meshes/helpers/RayLine.cpp \
     kuplung/meshes/helpers/Skybox.cpp \
     kuplung/objects/ObjectsManager.cpp \
-    kuplung/objects/RenderingManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
@@ -171,10 +169,9 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
-    kuplung/meshes/scene/Mesh.hpp \
-    kuplung/meshes/scene/Model.hpp \
-    kuplung/meshes/scene/ModelForward.hpp \
-    kuplung/meshes/scene/ModelDeferred.hpp \
+    kuplung/meshes/scene/ModelFace.hpp \
+    kuplung/meshes/scene/ModelFaceForward.hpp \
+    kuplung/meshes/scene/ModelFaceDeferred.hpp \
     kuplung/meshes/scene/Terrain.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \
     kuplung/meshes/helpers/AxisHelpers.hpp \
@@ -188,7 +185,6 @@ HEADERS += \
     kuplung/meshes/helpers/Skybox.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
-    kuplung/objects/RenderingManager.hpp \
     kuplung/objects/RayPicking.hpp \
     kuplung/settings/ConfigUtils.hpp \
     kuplung/settings/SettingsStructs.h \

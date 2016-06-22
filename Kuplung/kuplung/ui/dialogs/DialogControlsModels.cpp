@@ -99,7 +99,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
 }
 
 void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture) {
-    Model *mmf = (*meshModelFaces)[this->selectedObject];
+    ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
     std::string image, title;
     bool * useTexture;
     switch (texType) {
@@ -217,7 +217,7 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
     }
 }
 
-void DialogControlsModels::showTextureImage(Model* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+void DialogControlsModels::showTextureImage(ModelFace* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
     int wWidth, wHeight, tWidth, tHeight, posX, posY;
     SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
 
@@ -269,7 +269,7 @@ void DialogControlsModels::showTextureImage(Model* mmf, MaterialTextureType type
     *genTexture = false;
 }
 
-void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<Model*> * meshModelFaces, int * sceneSelectedModelObject) {
+void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
@@ -319,12 +319,12 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<Model*>
     ImGui::End();
 }
 
-void DialogControlsModels::processTexture(Model *mmf) {
+void DialogControlsModels::processTexture(ModelFace *mmf) {
     this->showUVEditor = false;
     (*this->meshModelFaces)[this->selectedObject] = mmf;
 }
 
-void DialogControlsModels::drawModels(bool* isFrame, std::vector<Model*> * meshModelFaces) {
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
     this->meshModelFaces = meshModelFaces;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -343,7 +343,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<Model*> * meshM
         scene_items.push_back((*meshModelFaces)[i]->meshModel.ModelTitle.c_str());
     }
 
-    // Scene Model
+    // Scene ModelFace
     ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
@@ -388,9 +388,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<Model*> * meshM
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
     if (this->selectedObject > -1) {
-        Model *mmf = (*meshModelFaces)[this->selectedObject];
+        ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.File.title.c_str());
-        ImGui::TextColored(ImVec4(255, 0, 0, 255), "Model:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.ModelTitle.c_str());
+        ImGui::TextColored(ImVec4(255, 0, 0, 255), "ModelFace:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.ModelTitle.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.MaterialTitle.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Vertices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countVertices);
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countNormals);
@@ -471,7 +471,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<Model*> * meshM
                 break;
             }
             case 1: {
-                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale Model");
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale ModelFace");
                 this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
                 this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
                 this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, (this->managerObjects->Setting_GridSize * 3), true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
@@ -606,7 +606,7 @@ void DialogControlsModels::drawCreate() {
     if (ImGui::Button("Spot (Flashlight)", ImVec2(-1, 0))) this->funcAddLight(LightSourceType_Spot);
 }
 
-void DialogControlsModels::contextModelRename(std::vector<Model*> * meshModelFaces) {
+void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshModelFaces) {
     ImGui::OpenPopup("Rename");
 
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
@@ -634,7 +634,7 @@ void DialogControlsModels::contextModelRename(std::vector<Model*> * meshModelFac
     ImGui::EndPopup();
 }
 
-void DialogControlsModels::contextModelDelete(std::vector<Model*> * meshModelFaces) {
+void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshModelFaces) {
 //    ImGui::SetNextWindowPos(ImGui::GetIO().MouseClickedPos[0]);
 
     ImGui::OpenPopup("Delete?");

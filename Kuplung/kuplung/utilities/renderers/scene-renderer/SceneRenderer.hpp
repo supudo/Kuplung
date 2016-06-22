@@ -10,7 +10,7 @@
 #define SceneRenderer_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/meshes/scene/Model.hpp"
+#include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
@@ -19,8 +19,8 @@ public:
     ~SceneRenderer();
     void init();
     void destroy();
-    void renderImage(FBEntity file, std::vector<Model*> *meshModelFaces, ObjectsManager *managerObjects);
-    void renderImage2(FBEntity file, std::vector<Model*> *meshModelFaces, ObjectsManager *managerObjects);
+    void renderImage(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects);
+    void renderImage2(FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects);
 };
 
 #endif /* SceneRenderer_hpp */
