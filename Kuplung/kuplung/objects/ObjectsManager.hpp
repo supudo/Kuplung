@@ -22,7 +22,8 @@
 #include "kuplung/meshes/helpers/MiniAxis.hpp"
 #include "kuplung/meshes/helpers/Skybox.hpp"
 #include "kuplung/meshes/helpers/WorldGrid.hpp"
-#include "kuplung/meshes/scene/Terrain.hpp"
+#include "kuplung/meshes/artefacts/Terrain.hpp"
+#include "kuplung/meshes/artefacts/Spaceship.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
 class ObjectsManager {
@@ -31,13 +32,15 @@ public:
     ObjectsManager(FileModelManager *parser);
 
     void destroy();
-    void init(std::function<void(float)> doProgress, std::function<void()> addTerrain);
+    void init(std::function<void(float)> doProgress,
+              std::function<void()> addTerrain);
     void loadSystemModels();
     void render();
     void renderSkybox();
     void resetPropertiesSystem();
     void resetSettings();
     void generateTerrain();
+    void generateSpaceship();
 
     void initCamera();
     void initCameraModel();
@@ -46,6 +49,7 @@ public:
     void initAxisHelpers();
     void initSkybox();
     void initTerrain();
+    void initSpaceship();
 
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
     std::vector<Light*> lightSources;
@@ -58,6 +62,7 @@ public:
     Skybox* skybox;
     AxisHelpers *axisHelpers_xMinus, *axisHelpers_xPlus, *axisHelpers_yMinus, *axisHelpers_yPlus, *axisHelpers_zMinus, *axisHelpers_zPlus;
     Terrain *terrain;
+    Spaceship *spaceship;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;
@@ -80,6 +85,8 @@ public:
     bool Setting_ShowTerrain, Setting_TerrainModel, Setting_TerrainAnimateX, Setting_TerrainAnimateY;
     std::string heightmapImage;
     int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
+
+    bool Setting_ShowSpaceship, Setting_GenerateSpaceship;
 
 private:
     std::function<void(float)> funcProgress;

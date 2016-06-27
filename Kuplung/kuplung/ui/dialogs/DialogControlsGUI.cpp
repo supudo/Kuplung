@@ -26,11 +26,13 @@ void DialogControlsGUI::init(ObjectsManager *managerObjects) {
     this->selectedTabGUIGrid = -1;
     this->selectedTabGUILight = -1;
     this->selectedTabGUITerrain = -1;
+    this->selectedTabGUISpaceship = -1;
 
     this->heightmapWidth = 0;
     this->heightmapHeight = 0;
 
     this->generateNewTerrain = false;
+    this->generateNewSpaceship = false;
 
     this->helperUI = new UIHelpers();
 }
@@ -40,9 +42,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
 
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0)))
         this->managerObjects->resetPropertiesSystem();
     ImGui::PopStyleColor(3);
@@ -128,13 +130,29 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 break;
             }
+//            case 7: {
+//                ImGui::Indent();
+//                if (ImGui::Selectable(ICON_FA_ALIGN_CENTER "Terrain", this->selectedObject == i)) {
+//                    this->selectedObject = i;
+//                    this->selectedObjectLight = -1;
+//                }
+//                ImGui::Unindent();
+//                break;
+//            }
             case 7: {
-                ImGui::Indent();
-                if (ImGui::Selectable(ICON_FA_ALIGN_CENTER "Terrain", this->selectedObject == i)) {
-                    this->selectedObject = i;
-                    this->selectedObjectLight = -1;
+                if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Artefacts")) {
+                    ImGui::Bullet();
+                    if (ImGui::Selectable("Terrain", this->selectedObjectArtefact == 0)) {
+                        this->selectedObjectArtefact = 0;
+                        this->selectedObject = 7;
+                    }
+                    ImGui::Bullet();
+                    if (ImGui::Selectable("Spaceship", this->selectedObjectArtefact == 1)) {
+                        this->selectedObjectArtefact = 1;
+                        this->selectedObject = 7;
+                    }
+                    ImGui::TreePop();
                 }
-                ImGui::Unindent();
                 break;
             }
             default:
@@ -528,99 +546,121 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 7: {
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
-            ImGui::Checkbox("Show Terrain", &this->managerObjects->Setting_ShowTerrain);
-            if (this->managerObjects->Setting_ShowTerrain) {
-                ImGui::Separator();
-                if (ImGui::Button("Generate Terrain", ImVec2(-1, 0)))
-                    this->generateNewTerrain = !this->generateNewTerrain;
-                ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
-                ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
-                ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
-                ImGui::Checkbox("Terrain ModelFace", &this->managerObjects->Setting_TerrainModel);
-                // TODO: BIG memory consumption
-//                ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
-//                ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);
-                ImGui::Separator();
-                ImGui::Text("Geometry Type");
-                const char* geometry_terraintype_items[] = {
-                    "Smooth",
-                    "Cubic",
-                    "Spherical"
-                };
-                ImGui::Combo("##2291", &this->managerObjects->terrain->terrainGenerator->Setting_TerrainType, geometry_terraintype_items, IM_ARRAYSIZE(geometry_terraintype_items));
-            }
-
-            if (this->generateNewTerrain) {
-                this->managerObjects->generateTerrain();
-                this->heightmapImage = this->managerObjects->terrain->heightmapImage;
-                this->newHeightmap = true;
-                this->generateNewTerrain = false;
-            }
-
-            if (this->managerObjects->Setting_ShowTerrain) {
-                if (this->newHeightmap && this->heightmapImage != "") {
-                    int tChannels;
-                    unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
-                    if (!tPixels)
-                        Settings::Instance()->funcDoLog("Can't load heightmap preview image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
-                    else {
-                        glGenTextures(1, &this->vboTexHeightmap);
-                        glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-                        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                        GLuint textureFormat = 0;
-                        switch (tChannels) {
-                            case 1:
-                                textureFormat = GL_LUMINANCE;
-                                break;
-                            case 2:
-                                textureFormat = GL_LUMINANCE_ALPHA;
-                                break;
-                            case 3:
-                                textureFormat = GL_RGB;
-                                break;
-                            case 4:
-                                textureFormat = GL_RGBA;
-                                break;
-                            default:
-                                textureFormat = GL_RGB;
-                                break;
-                        }
-                        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->heightmapWidth, this->heightmapHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
-                        glGenerateMipmap(GL_TEXTURE_2D);
-                        stbi_image_free(tPixels);
+            switch (this->selectedObjectArtefact) {
+                case 0: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
+                    ImGui::Checkbox("Show Terrain", &this->managerObjects->Setting_ShowTerrain);
+                    if (this->managerObjects->Setting_ShowTerrain) {
+                        ImGui::Separator();
+                        if (ImGui::Button("Generate Terrain", ImVec2(-1, 0)))
+                            this->generateNewTerrain = !this->generateNewTerrain;
+                        ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
+                        ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
+                        ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
+                        ImGui::Checkbox("Terrain ModelFace", &this->managerObjects->Setting_TerrainModel);
+                        // TODO: BIG memory consumption
+//                        ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
+//                        ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);
+                        ImGui::Separator();
+                        ImGui::Text("Geometry Type");
+                        const char* geometry_terraintype_items[] = {
+                            "Smooth",
+                            "Cubic",
+                            "Spherical"
+                        };
+                        ImGui::Combo("##2291", &this->managerObjects->terrain->terrainGenerator->Setting_TerrainType, geometry_terraintype_items, IM_ARRAYSIZE(geometry_terraintype_items));
                     }
-                }
-                ImGui::Separator();
-                ImGui::Text("Heightmap");
-                ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
-                this->newHeightmap = false;
-            }
 
-            if (this->managerObjects->Setting_ShowTerrain) {
-                ImGui::Separator();
-                ImGui::Text("Seed");
-                ImGui::Checkbox("Random Seed", &this->managerObjects->terrain->terrainGenerator->Setting_SeedRandom);
-                this->helperUI->addControlsIntegerSliderSameLine("Max", 11, std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), &this->managerObjects->terrain->terrainGenerator->Setting_Seed);
-                ImGui::Separator();
-                ImGui::Text("Map Dimensions");
-                this->helperUI->addControlsIntegerSliderSameLine("X", 1, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainWidth);
-                this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainHeight);
-                ImGui::Separator();
-                ImGui::Text("Terrain Map Offset");
-                this->helperUI->addControlsFloatSliderSameLine("X", 3, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
-                this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
-                ImGui::Separator();
-                ImGui::Text("Terrain Coeficients");
-                this->helperUI->addControlsFloatSliderSameLine("Scale", 8, 1.0f, 100.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
-                this->helperUI->addControlsFloatSliderSameLine("Height", 9, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_HeightCoeficient);
-                ImGui::Separator();
-                this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
-                this->helperUI->addControlsFloatSlider("Frequency", 6, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
-                this->helperUI->addControlsFloatSlider("Persistence", 7, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
+                    if (this->generateNewTerrain) {
+                        this->managerObjects->generateTerrain();
+                        this->heightmapImage = this->managerObjects->terrain->heightmapImage;
+                        this->newHeightmap = true;
+                        this->generateNewTerrain = false;
+                    }
+
+                    if (this->managerObjects->Setting_ShowTerrain) {
+                        if (this->newHeightmap && this->heightmapImage != "") {
+                            int tChannels;
+                            unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
+                            if (!tPixels)
+                                Settings::Instance()->funcDoLog("Can't load heightmap preview image - " + this->heightmapImage + " with error - " + std::string(stbi_failure_reason()));
+                            else {
+                                glGenTextures(1, &this->vboTexHeightmap);
+                                glBindTexture(GL_TEXTURE_2D, this->vboTexHeightmap);
+                                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+                                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+                                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+                                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+                                GLuint textureFormat = 0;
+                                switch (tChannels) {
+                                    case 1:
+                                        textureFormat = GL_LUMINANCE;
+                                        break;
+                                    case 2:
+                                        textureFormat = GL_LUMINANCE_ALPHA;
+                                        break;
+                                    case 3:
+                                        textureFormat = GL_RGB;
+                                        break;
+                                    case 4:
+                                        textureFormat = GL_RGBA;
+                                        break;
+                                    default:
+                                        textureFormat = GL_RGB;
+                                        break;
+                                }
+                                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->heightmapWidth, this->heightmapHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+                                glGenerateMipmap(GL_TEXTURE_2D);
+                                stbi_image_free(tPixels);
+                            }
+                        }
+                        ImGui::Separator();
+                        ImGui::Text("Heightmap");
+                        ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
+                        this->newHeightmap = false;
+                    }
+
+                    if (this->managerObjects->Setting_ShowTerrain) {
+                        ImGui::Separator();
+                        ImGui::Text("Seed");
+                        ImGui::Checkbox("Random Seed", &this->managerObjects->terrain->terrainGenerator->Setting_SeedRandom);
+                        this->helperUI->addControlsIntegerSliderSameLine("Max", 11, std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), &this->managerObjects->terrain->terrainGenerator->Setting_Seed);
+                        ImGui::Separator();
+                        ImGui::Text("Map Dimensions");
+                        this->helperUI->addControlsIntegerSliderSameLine("X", 1, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainWidth);
+                        this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainHeight);
+                        ImGui::Separator();
+                        ImGui::Text("Terrain Map Offset");
+                        this->helperUI->addControlsFloatSliderSameLine("X", 3, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
+                        this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
+                        ImGui::Separator();
+                        ImGui::Text("Terrain Coeficients");
+                        this->helperUI->addControlsFloatSliderSameLine("Scale", 8, 1.0f, 100.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
+                        this->helperUI->addControlsFloatSliderSameLine("Height", 9, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_HeightCoeficient);
+                        ImGui::Separator();
+                        this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
+                        this->helperUI->addControlsFloatSlider("Frequency", 6, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
+                        this->helperUI->addControlsFloatSlider("Persistence", 7, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
+                    }
+                    break;
+                }
+                case 1: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Spaceship Generator");
+                    ImGui::Checkbox("Show Spaceship", &this->managerObjects->Setting_ShowSpaceship);
+                    if (this->managerObjects->Setting_ShowSpaceship) {
+                        ImGui::Separator();
+                        if (ImGui::Button("Generate Spaceship", ImVec2(-1, 0)))
+                            this->generateNewSpaceship = !this->generateNewSpaceship;
+                    }
+
+                    if (this->generateNewSpaceship) {
+                        this->managerObjects->generateSpaceship();
+                        this->generateNewSpaceship = false;
+                    }
+                    break;
+                }
+                default:
+                    break;
             }
             break;
         }

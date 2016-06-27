@@ -19,7 +19,6 @@
 #include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
-#include "kuplung/meshes/scene/Terrain.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
@@ -95,8 +94,6 @@ private:
     std::vector<MeshModel> meshModels, meshModelsNew;
     std::vector<ModelFace*> meshModelFaces;
     std::vector<RayLine*> rayLines;
-
-    Terrain *terrain;
 };
 
 #endif /* Kuplung_hpp */

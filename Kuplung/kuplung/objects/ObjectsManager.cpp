@@ -123,6 +123,12 @@ void ObjectsManager::render() {
         this->funcAddTerrain();
         this->Setting_TerrainModel = false;
     }
+
+    if (this->Setting_ShowSpaceship) {
+        if (this->Setting_GenerateSpaceship)
+            this->generateSpaceship();
+        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
+    }
 }
 
 void ObjectsManager::renderSkybox() {
@@ -161,6 +167,8 @@ void ObjectsManager::resetSettings() {
     this->Setting_TerrainWidth = 100;
     this->Setting_TerrainHeight = 100;
     this->Setting_LightingPass_DrawMode = 0;
+    this->Setting_ShowSpaceship = false;
+    this->Setting_GenerateSpaceship = false;
 }
 
 void ObjectsManager::resetPropertiesSystem() {
@@ -294,6 +302,21 @@ void ObjectsManager::initTerrain() {
 
 void ObjectsManager::generateTerrain() {
     this->terrain->initBuffers(Settings::Instance()->currentFolder, this->Setting_TerrainWidth, this->Setting_TerrainHeight);
+}
+
+/*
+ *
+ * Spaceship Generator
+ *
+ */
+void ObjectsManager::initSpaceship() {
+    this->spaceship = new Spaceship();
+    this->spaceship->init();
+    this->spaceship->initShaderProgram();
+}
+
+void ObjectsManager::generateSpaceship() {
+    this->spaceship->initBuffers(this->Setting_GridSize);
 }
 
 /*

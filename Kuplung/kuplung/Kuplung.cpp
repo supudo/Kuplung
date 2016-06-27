@@ -157,8 +157,6 @@ bool Kuplung::init() {
                     this->fontParser->init();
                     this->doLog("Font Parser Initialized.");
 
-                    this->terrain = new Terrain();
-
                     if (SDL_GL_SetSwapInterval(1) < 0) {
                         printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
                         success = false;
@@ -421,6 +419,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initAxisHelpers();
     this->managerObjects->initSkybox();
     this->managerObjects->initTerrain();
+    this->managerObjects->initSpaceship();
     //this->managerObjects->addLight(LightSourceType_Directional);
     //this->managerObjects->addLight(LightSourceType_Point);
     //this->managerObjects->addLight(LightSourceType_Spot);

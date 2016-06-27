@@ -22,8 +22,9 @@ public:
 
 private:
     int selectedObject;
-    int selectedObjectLight;
-    int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight, selectedTabGUITerrain;
+    int selectedObjectLight, selectedObjectArtefact;
+    int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight;
+    int selectedTabGUITerrain, selectedTabGUISpaceship;
     float heightTopPanel = 170.0f;
 
     ObjectsManager *managerObjects;
@@ -33,7 +34,7 @@ private:
     std::string heightmapImage;
     int heightmapWidth, heightmapHeight;
     GLuint vboTexHeightmap;
-    bool newHeightmap, generateNewTerrain;
+    bool newHeightmap, generateNewTerrain, generateNewSpaceship;
 };
 
 #endif /* DialogControlsGUI_hpp */

@@ -110,7 +110,8 @@ SOURCES += main.cpp \
     kuplung/meshes/scene/ModelFace.cpp \
     kuplung/meshes/scene/ModelFaceForward.cpp \
     kuplung/meshes/scene/ModelFaceDeferred.cpp \
-    kuplung/meshes/scene/Terrain.cpp \
+    kuplung/meshes/artefacts/Terrain.cpp \
+    kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
     kuplung/meshes/helpers/AxisHelpers.cpp \
     kuplung/meshes/helpers/WorldGrid.cpp \
@@ -148,7 +149,8 @@ SOURCES += main.cpp \
     kuplung/ui/dialogs/DialogOptions.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
     kuplung/ui/dialogs/DialogControlsModels.cpp \
-    kuplung/terrain/HeightmapGenerator.cpp \
+    kuplung/pcg/HeightmapGenerator.cpp \
+    kuplung/pcg/SpaceshipMeshGenerator.cpp \
     kuplung/utilities/font-parser/FNTParser.cpp \
     kuplung/utilities/gl/GLUtils.cpp \
     kuplung/utilities/imgui/imgui.cpp \
@@ -172,7 +174,8 @@ HEADERS += \
     kuplung/meshes/scene/ModelFace.hpp \
     kuplung/meshes/scene/ModelFaceForward.hpp \
     kuplung/meshes/scene/ModelFaceDeferred.hpp \
-    kuplung/meshes/scene/Terrain.hpp \
+    kuplung/meshes/artefacts/Terrain.hpp \
+    kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \
     kuplung/meshes/helpers/AxisHelpers.hpp \
     kuplung/meshes/helpers/WorldGrid.hpp \
@@ -216,7 +219,8 @@ HEADERS += \
     kuplung/ui/dialogs/DialogControlsModels.hpp \
     kuplung/ui/iconfonts/IconsFontAwesome.h \
     kuplung/ui/iconfonts/IconsMaterialDesign.h \
-    kuplung/terrain/HeightmapGenerator.hpp \
+    kuplung/pcg/HeightmapGenerator.hpp \
+    kuplung/pcg/SpaceshipMeshGenerator.hpp \
     kuplung/utilities/font-parser/FNTParser.hpp \
     kuplung/utilities/gl/GLUtils.hpp \
     kuplung/utilities/imgui/imconfig.h \
@@ -314,6 +318,8 @@ DISTFILES += \
     resources/shaders/light.frag \
     resources/shaders/terrain.vert \
     resources/shaders/terrain.frag \
+    resources/shaders/spaceship.vert \
+    resources/shaders/spaceship.frag \
     resources/shaders/skybox.vert \
     resources/shaders/skybox.frag \
     resources/shaders/bounding_box.vert \
