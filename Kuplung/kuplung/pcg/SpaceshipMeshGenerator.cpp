@@ -13,49 +13,48 @@ SpaceshipMeshGenerator::~SpaceshipMeshGenerator() {
 }
 
 void SpaceshipMeshGenerator::generate(int gridSize) {
+    this->gridSize = gridSize;
+
     this->vertices.clear();
     this->normals.clear();
     this->uvs.clear();
     this->indices.clear();
     this->colors.clear();
 
+    this->generateFirstHull();
+    this->generateMeshModel();
+}
+
+void SpaceshipMeshGenerator::generateFirstHull() {
     std::mt19937 rng;
     rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> dist6(0, gridSize);
+    std::uniform_int_distribution<std::mt19937::result_type> distGridSize(-1.0 * this->gridSize, this->gridSize);
+    std::uniform_int_distribution<std::mt19937::result_type> distColor(0, 1);
 
-    unsigned int x = dist6(rng);
-    unsigned int y = dist6(rng);
-    unsigned int z = dist6(rng);
+    int x = int(distGridSize(rng));
+    int y = int(distGridSize(rng));
+    int z = int(distGridSize(rng));
+    int extrude_size = int(distGridSize(rng)) / 10;
 
     float px = float(x) / 10;
     float py = float(y) / 10;
     float pz = float(z) / 10;
 
-    //
-    //   y
-    //   ^
-    //   |   0 -- 1
-    //   |   |   /|
-    //   |   |  / |
-    //   |   | /  |
-    //   |   2 ---3
-    //   |
-    //   -----------> x
-    //
-    glm::vec3 v1 = glm::vec3(px, py, pz);
-    glm::vec3 v2 = glm::vec3(px + 1, py, pz);
-    glm::vec3 v3 = glm::vec3(px, py - 1, pz);
-    glm::vec3 v4 = glm::vec3(px + 1, py - 1, pz);
+    // side 1
+    glm::vec3 v0 = glm::vec3(px, py, pz);
+    glm::vec3 v1 = glm::vec3(px + 1, py, pz);
+    glm::vec3 v2 = glm::vec3(px, py - 1, pz);
+    glm::vec3 v3 = glm::vec3(px + 1, py - 1, pz);
 
+    this->vertices.push_back(v0);
     this->vertices.push_back(v1);
     this->vertices.push_back(v2);
     this->vertices.push_back(v3);
-    this->vertices.push_back(v4);
 
     this->uvs.push_back(glm::vec2(0));
 
+    this->normals.push_back(glm::cross(v1 - v0, v2 - v0));
     this->normals.push_back(glm::cross(v2 - v1, v3 - v1));
-    this->normals.push_back(glm::cross(v3 - v2, v4 - v2));
 
     this->indices.push_back(0);
     this->indices.push_back(1);
@@ -64,11 +63,74 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
     this->indices.push_back(2);
     this->indices.push_back(3);
 
-    for (size_t i=0; i<this->vertices.size(); i++) {
-        this->colors.push_back(glm::vec3(1.0, 0.0, 0.0));
-    }
+    // side 2
+    glm::vec3 v4 = v0 + glm::vec3(0, 0, extrude_size);
+    glm::vec3 v5 = v1 + glm::vec3(0, 0, extrude_size);
+    glm::vec3 v6 = v2 + glm::vec3(0, 0, extrude_size);
+    glm::vec3 v7 = v3 + glm::vec3(0, 0, extrude_size);
 
-    this->generateMeshModel();
+    this->vertices.push_back(v4);
+    this->vertices.push_back(v5);
+    this->vertices.push_back(v6);
+    this->vertices.push_back(v7);
+
+    this->uvs.push_back(glm::vec2(0));
+
+    this->normals.push_back(glm::cross(v5 - v4, v6 - v4));
+    this->normals.push_back(glm::cross(v6 - v5, v7 - v5));
+
+    this->indices.push_back(4);
+    this->indices.push_back(5);
+    this->indices.push_back(6);
+    this->indices.push_back(5);
+    this->indices.push_back(6);
+    this->indices.push_back(7);
+
+    // connections
+    this->uvs.push_back(glm::vec2(0));
+    this->normals.push_back(glm::cross(v6 - v2, v4 - v2));
+    this->normals.push_back(glm::cross(v4 - v0, v2 - v0));
+    this->indices.push_back(6);
+    this->indices.push_back(4);
+    this->indices.push_back(2);
+    this->indices.push_back(4);
+    this->indices.push_back(2);
+    this->indices.push_back(0);
+
+    this->uvs.push_back(glm::vec2(0));
+    this->normals.push_back(glm::cross(v5 - v3, v5 - v3));
+    this->normals.push_back(glm::cross(v5 - v1, v3 - v1));
+    this->indices.push_back(7);
+    this->indices.push_back(5);
+    this->indices.push_back(3);
+    this->indices.push_back(5);
+    this->indices.push_back(3);
+    this->indices.push_back(1);
+
+    this->uvs.push_back(glm::vec2(0));
+    this->normals.push_back(glm::cross(v7 - v2, v6 - v2));
+    this->normals.push_back(glm::cross(v7 - v2, v3 - v2));
+    this->indices.push_back(6);
+    this->indices.push_back(7);
+    this->indices.push_back(2);
+    this->indices.push_back(7);
+    this->indices.push_back(2);
+    this->indices.push_back(3);
+
+    this->uvs.push_back(glm::vec2(0));
+    this->normals.push_back(glm::cross(v5 - v0, v4 - v0));
+    this->normals.push_back(glm::cross(v5 - v0, v1 - v0));
+    this->indices.push_back(4);
+    this->indices.push_back(5);
+    this->indices.push_back(0);
+    this->indices.push_back(5);
+    this->indices.push_back(0);
+    this->indices.push_back(1);
+
+    // colors
+    for (size_t i=0; i<this->vertices.size(); i++) {
+        this->colors.push_back(glm::vec3(distColor(rng), distColor(rng), distColor(rng)));
+    }
 }
 
 void SpaceshipMeshGenerator::generateMeshModel() {

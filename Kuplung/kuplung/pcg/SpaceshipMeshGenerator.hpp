@@ -25,7 +25,10 @@ public:
     MeshModel modelSpaceship;
 
 private:
+    int gridSize;
+
     void generateMeshModel();
+    void generateFirstHull();
 };
 
 #endif /* SpaceshipMeshGenerator_hpp */
