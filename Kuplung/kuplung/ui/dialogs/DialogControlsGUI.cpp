@@ -651,6 +651,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Spaceship", ImVec2(-1, 0)))
                             this->generateNewSpaceship = !this->generateNewSpaceship;
+                        ImGui::Checkbox("Wireframe", &this->managerObjects->spaceship->Setting_Wireframe);
                     }
 
                     if (this->generateNewSpaceship) {

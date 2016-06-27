@@ -129,7 +129,8 @@ void SpaceshipMeshGenerator::generateFirstHull() {
 
     // colors
     for (size_t i=0; i<this->vertices.size(); i++) {
-        this->colors.push_back(glm::vec3(distColor(rng), distColor(rng), distColor(rng)));
+        //this->colors.push_back(glm::vec3(distColor(rng), distColor(rng), distColor(rng)));
+        this->colors.push_back(glm::vec3(0.8));
     }
 }
 
