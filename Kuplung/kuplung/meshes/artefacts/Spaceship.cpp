@@ -181,7 +181,7 @@ void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
         glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
-        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
+        glUniform3f(this->solidLight->gl_Direction, this->lightDirection.x, this->lightDirection.y, this->lightDirection.z);
         glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
         glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
         glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);

@@ -28,6 +28,7 @@ public:
     SpaceshipMeshGenerator *spaceshipGenerator;
 
     bool Setting_UseTexture, Setting_Wireframe;
+    glm::vec3 lightDirection;
     glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
     float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
 

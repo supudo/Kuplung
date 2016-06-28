@@ -31,7 +31,7 @@ void main(void) {
 
     vec3 fragmentNormal = normalize(v_vertexNormal);
     vec3 viewDirection = normalize(fs_cameraPosition - v_vertexPosition);
-    vec3 lightColor = calculateLight(fragmentNormal, viewDirection, vec4(solidSkin_materialColor, 1.0), processedColor, vec4(solidSkin_materialColor, 1.0));
+    vec3 lightColor = calculateLight(v_vertexNormal, viewDirection, vec4(solidSkin_materialColor, 1.0), processedColor, vec4(solidSkin_materialColor, 1.0));
 
     fragColor = vec4(processedColor.rgb * lightColor, 1.0);
 }

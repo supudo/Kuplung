@@ -26,14 +26,6 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {
-//    -1  1 -1
-//     1  1 -1
-//     1 -1 -1
-//    -1 -1 -1
-//    -1  1  1
-//     1  1  1
-//     1 -1  1
-//    -1 -1  1
     this->vertices.push_back(glm::vec3(-1.0,  1.0, -1.0));
     this->vertices.push_back(glm::vec3( 1.0,  1.0, -1.0));
     this->vertices.push_back(glm::vec3( 1.0, -1.0, -1.0));
