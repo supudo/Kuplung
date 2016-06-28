@@ -90,6 +90,16 @@ bool Spaceship::initShaderProgram() {
         this->glUniformSamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
         this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_color");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+
+        this->lightSource = new ModelFace_LightSource_Directional();
+        this->lightSource->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].direction");
+        this->lightSource->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].ambient");
+        this->lightSource->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].diffuse");
+        this->lightSource->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].specular");
+        this->lightSource->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthAmbient");
+        this->lightSource->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthDiffuse");
+        this->lightSource->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthSpecular");
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -121,18 +131,22 @@ void Spaceship::initBuffers(int gridSize) {
     glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // texture
-    glGenBuffers(1, &this->vboTextureCoordinates);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-    glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->uvs.size() * sizeof(glm::vec2), &this->spaceshipGenerator->uvs[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeTextureCoord);
-    glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    if (this->spaceshipGenerator->uvs.size() > 0) {
+        glGenBuffers(1, &this->vboTextureCoordinates);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
+        glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->uvs.size() * sizeof(glm::vec2), &this->spaceshipGenerator->uvs[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeTextureCoord);
+        glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    }
 
     // colors
-    glGenBuffers(1, &this->vboColors);
-    glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-    glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->colors.size() * sizeof(glm::vec3), &this->spaceshipGenerator->colors[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeColor);
-    glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    if (this->spaceshipGenerator->colors.size() > 0) {
+        glGenBuffers(1, &this->vboColors);
+        glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
+        glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->colors.size() * sizeof(glm::vec3), &this->spaceshipGenerator->colors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(this->glAttributeColor);
+        glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    }
 
     // indices
     glGenBuffers(1, &this->vboIndices);
@@ -144,7 +158,7 @@ void Spaceship::initBuffers(int gridSize) {
 
 #pragma mark - Render
 
-void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, Light* light) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -160,6 +174,16 @@ void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
         glUniform1i(this->glUniformSamplerTexture, 1);
         glActiveTexture(GL_TEXTURE1);
         glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+
+        glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
+
+        glUniform3f(this->lightSource->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
+        glUniform3f(this->lightSource->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
+        glUniform3f(this->lightSource->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
+        glUniform3f(this->lightSource->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+        glUniform1f(this->lightSource->gl_StrengthAmbient, light->ambient->strength);
+        glUniform1f(this->lightSource->gl_StrengthDiffuse, light->diffuse->strength);
+        glUniform1f(this->lightSource->gl_StrengthSpecular, light->specular->strength);
 
         // draw
         glBindVertexArray(this->glVAO);

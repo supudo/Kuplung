@@ -13,7 +13,7 @@ SpaceshipMeshGenerator::~SpaceshipMeshGenerator() {
 }
 
 void SpaceshipMeshGenerator::generate(int gridSize) {
-    this->gridSize = gridSize;
+    this->gridSize = gridSize / 10;
 
     this->vertices.clear();
     this->normals.clear();
@@ -26,25 +26,100 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {
-    std::mt19937 rng;
-    rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> distGridSize(-1.0 * this->gridSize, this->gridSize);
-    std::uniform_int_distribution<std::mt19937::result_type> distColor(0, 1);
+//    -1  1 -1
+//     1  1 -1
+//     1 -1 -1
+//    -1 -1 -1
+//    -1  1  1
+//     1  1  1
+//     1 -1  1
+//    -1 -1  1
+    this->vertices.push_back(glm::vec3(-1.0,  1.0, -1.0));
+    this->vertices.push_back(glm::vec3( 1.0,  1.0, -1.0));
+    this->vertices.push_back(glm::vec3( 1.0, -1.0, -1.0));
+    this->vertices.push_back(glm::vec3(-1.0, -1.0, -1.0));
+    this->vertices.push_back(glm::vec3(-1.0,  1.0,  1.0));
+    this->vertices.push_back(glm::vec3( 1.0,  1.0,  1.0));
+    this->vertices.push_back(glm::vec3( 1.0, -1.0,  1.0));
+    this->vertices.push_back(glm::vec3(-1.0, -1.0,  1.0));
 
-    int x = int(distGridSize(rng));
-    int y = int(distGridSize(rng));
-    int z = int(distGridSize(rng));
-    int extrude_size = int(distGridSize(rng)) / 10;
+    glm::vec3 norms[] = {
+        glm::vec3( 0.0,  0.0, -1.0),
+        glm::vec3( 0.0,  0.0,  1.0),
+        glm::vec3( 0.0,  1.0,  0.0),
+        glm::vec3( 1.0,  0.0,  0.0),
+        glm::vec3( 0.0, -1.0,  0.0),
+        glm::vec3(-1.0,  0.0,  0.0)
+    };
 
-    float px = float(x) / 10;
-    float py = float(y) / 10;
-    float pz = float(z) / 10;
+    this->indices.push_back(1); this->normals.push_back(norms[0]);
+    this->indices.push_back(2); this->normals.push_back(norms[0]);
+    this->indices.push_back(3); this->normals.push_back(norms[0]);
+
+    this->indices.push_back(7); this->normals.push_back(norms[1]);
+    this->indices.push_back(6); this->normals.push_back(norms[1]);
+    this->indices.push_back(5); this->normals.push_back(norms[1]);
+
+    this->indices.push_back(4); this->normals.push_back(norms[2]);
+    this->indices.push_back(5); this->normals.push_back(norms[2]);
+    this->indices.push_back(1); this->normals.push_back(norms[2]);
+
+    this->indices.push_back(5); this->normals.push_back(norms[3]);
+    this->indices.push_back(6); this->normals.push_back(norms[3]);
+    this->indices.push_back(2); this->normals.push_back(norms[3]);
+
+    this->indices.push_back(2); this->normals.push_back(norms[4]);
+    this->indices.push_back(6); this->normals.push_back(norms[4]);
+    this->indices.push_back(7); this->normals.push_back(norms[4]);
+
+    this->indices.push_back(0); this->normals.push_back(norms[5]);
+    this->indices.push_back(3); this->normals.push_back(norms[5]);
+    this->indices.push_back(7); this->normals.push_back(norms[5]);
+
+    this->indices.push_back(0); this->normals.push_back(norms[0]);
+    this->indices.push_back(1); this->normals.push_back(norms[0]);
+    this->indices.push_back(3); this->normals.push_back(norms[0]);
+
+    this->indices.push_back(4); this->normals.push_back(norms[1]);
+    this->indices.push_back(7); this->normals.push_back(norms[1]);
+    this->indices.push_back(5); this->normals.push_back(norms[1]);
+
+    this->indices.push_back(0); this->normals.push_back(norms[2]);
+    this->indices.push_back(4); this->normals.push_back(norms[2]);
+    this->indices.push_back(1); this->normals.push_back(norms[2]);
+
+    this->indices.push_back(1); this->normals.push_back(norms[3]);
+    this->indices.push_back(5); this->normals.push_back(norms[3]);
+    this->indices.push_back(2); this->normals.push_back(norms[3]);
+
+    this->indices.push_back(3); this->normals.push_back(norms[4]);
+    this->indices.push_back(2); this->normals.push_back(norms[4]);
+    this->indices.push_back(7); this->normals.push_back(norms[4]);
+
+    this->indices.push_back(4); this->normals.push_back(norms[5]);
+    this->indices.push_back(0); this->normals.push_back(norms[5]);
+    this->indices.push_back(7); this->normals.push_back(norms[5]);
+
+    for (size_t i=0; i<this->vertices.size(); i++) {
+        this->colors.push_back(glm::vec3(0.8));
+    }
+}
+
+void SpaceshipMeshGenerator::generateFirstHull2() {
+    int x = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+    int y = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+    int z = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+    int extrude_size = this->getRandomValue(-1.0 * this->gridSize, this->gridSize, false);
+
+    float px = float(x);
+    float py = float(y);
+    float pz = float(z);
 
     // side 1
     glm::vec3 v0 = glm::vec3(px, py, pz);
-    glm::vec3 v1 = glm::vec3(px + 1, py, pz);
-    glm::vec3 v2 = glm::vec3(px, py - 1, pz);
-    glm::vec3 v3 = glm::vec3(px + 1, py - 1, pz);
+    glm::vec3 v1 = glm::vec3(px, py + 1, pz);
+    glm::vec3 v2 = glm::vec3(px, py, pz - 1);
+    glm::vec3 v3 = glm::vec3(px, py + 1, pz - 1);
 
     this->vertices.push_back(v0);
     this->vertices.push_back(v1);
@@ -64,10 +139,10 @@ void SpaceshipMeshGenerator::generateFirstHull() {
     this->indices.push_back(3);
 
     // side 2
-    glm::vec3 v4 = v0 + glm::vec3(0, 0, extrude_size);
-    glm::vec3 v5 = v1 + glm::vec3(0, 0, extrude_size);
-    glm::vec3 v6 = v2 + glm::vec3(0, 0, extrude_size);
-    glm::vec3 v7 = v3 + glm::vec3(0, 0, extrude_size);
+    glm::vec3 v4 = v0 + glm::vec3(extrude_size, 0, 0);
+    glm::vec3 v5 = v1 + glm::vec3(extrude_size, 0, 0);
+    glm::vec3 v6 = v2 + glm::vec3(extrude_size, 0, 0);
+    glm::vec3 v7 = v3 + glm::vec3(extrude_size, 0, 0);
 
     this->vertices.push_back(v4);
     this->vertices.push_back(v5);
@@ -129,8 +204,27 @@ void SpaceshipMeshGenerator::generateFirstHull() {
 
     // colors
     for (size_t i=0; i<this->vertices.size(); i++) {
-        //this->colors.push_back(glm::vec3(distColor(rng), distColor(rng), distColor(rng)));
+//        float r = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+//        float g = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+//        float b = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
+//        this->colors.push_back(glm::vec3(r, g, b));
         this->colors.push_back(glm::vec3(0.8));
+    }
+}
+
+int SpaceshipMeshGenerator::getRandomValue(float valueMin, float valueMax, bool zeroIsValid) {
+    std::mt19937 rng;
+    rng.seed(std::random_device()());
+    std::uniform_int_distribution<std::mt19937::result_type> distr(valueMin, valueMax);
+
+    int v = int(distr(rng));
+    if (zeroIsValid)
+        return v;
+    else {
+        if (v == 0)
+            return this->getRandomValue(valueMin, valueMax, zeroIsValid);
+        else
+            return v;
     }
 }
 

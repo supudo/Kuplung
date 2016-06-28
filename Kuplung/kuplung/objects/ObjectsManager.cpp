@@ -127,7 +127,10 @@ void ObjectsManager::render() {
     if (this->Setting_ShowSpaceship) {
         if (this->Setting_GenerateSpaceship)
             this->generateSpaceship();
-        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
+        for (size_t i=0; i<this->lightSources.size(); i++) {
+            if (this->lightSources[i]->type == LightSourceType_Directional)
+                this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition, this->lightSources[i]);
+        }
     }
 }
 

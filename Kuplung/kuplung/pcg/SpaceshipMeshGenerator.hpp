@@ -29,6 +29,8 @@ private:
 
     void generateMeshModel();
     void generateFirstHull();
+    void generateFirstHull2();
+    int getRandomValue(float valueMin, float valueMax, bool zeroIsValid = true);
 };
 
 #endif /* SpaceshipMeshGenerator_hpp */
