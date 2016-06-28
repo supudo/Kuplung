@@ -24,10 +24,12 @@ public:
     void init();
     bool initShaderProgram();
     void initBuffers(int gridSize);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, Light* light);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
     SpaceshipMeshGenerator *spaceshipGenerator;
 
     bool Setting_UseTexture, Setting_Wireframe;
+    glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
+    float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
 
 private:
     GLUtils *glUtils;
@@ -36,10 +38,11 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
     GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor, glFS_CameraPosition;
+    GLuint glUniformMVPMatrix, glUniformMMatrix, glAttributeVertexPosition, glAttributeVertexNormal;
+    GLuint glFS_solidSkin_materialColor, glAttributeColor, glFS_CameraPosition;
     GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
-    ModelFace_LightSource_Directional *lightSource;
+    ModelFace_LightSource_Directional *solidLight;
 
     std::string readFile(const char *filePath);
 };

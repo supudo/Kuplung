@@ -90,16 +90,18 @@ bool Spaceship::initShaderProgram() {
         this->glUniformSamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
         this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_color");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MMatrix");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-        this->lightSource = new ModelFace_LightSource_Directional();
-        this->lightSource->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].direction");
-        this->lightSource->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].ambient");
-        this->lightSource->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].diffuse");
-        this->lightSource->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].specular");
-        this->lightSource->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthAmbient");
-        this->lightSource->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthDiffuse");
-        this->lightSource->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "lightObject[0].strengthSpecular");
+        this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
+        this->solidLight = new ModelFace_LightSource_Directional();
+        this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
+        this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
+        this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
+        this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
+        this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
+        this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
+        this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -158,7 +160,7 @@ void Spaceship::initBuffers(int gridSize) {
 
 #pragma mark - Render
 
-void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, Light* light) {
+void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -169,6 +171,7 @@ void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+        glUniformMatrix4fv(this->glUniformMMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         glUniform1i(this->glUniformHasTexture, this->Setting_UseTexture);
         glUniform1i(this->glUniformSamplerTexture, 1);
@@ -177,13 +180,14 @@ void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
         glUniform3f(this->glFS_CameraPosition, vecCameraPosition.x, vecCameraPosition.y, vecCameraPosition.z);
 
-        glUniform3f(this->lightSource->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
-        glUniform3f(this->lightSource->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
-        glUniform3f(this->lightSource->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
-        glUniform3f(this->lightSource->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
-        glUniform1f(this->lightSource->gl_StrengthAmbient, light->ambient->strength);
-        glUniform1f(this->lightSource->gl_StrengthDiffuse, light->diffuse->strength);
-        glUniform1f(this->lightSource->gl_StrengthSpecular, light->specular->strength);
+        glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
+        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
+        glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
+        glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
+        glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);
+        glUniform1f(this->solidLight->gl_StrengthAmbient, this->solidLightSkin_Ambient_Strength);
+        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->solidLightSkin_Diffuse_Strength);
+        glUniform1f(this->solidLight->gl_StrengthSpecular, this->solidLightSkin_Specular_Strength);
 
         // draw
         glBindVertexArray(this->glVAO);

@@ -127,10 +127,15 @@ void ObjectsManager::render() {
     if (this->Setting_ShowSpaceship) {
         if (this->Setting_GenerateSpaceship)
             this->generateSpaceship();
-        for (size_t i=0; i<this->lightSources.size(); i++) {
-            if (this->lightSources[i]->type == LightSourceType_Directional)
-                this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition, this->lightSources[i]);
-        }
+
+        this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
+        this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
+        this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
+        this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
+        this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
+        this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
+        this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
+        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
     }
 }
 
