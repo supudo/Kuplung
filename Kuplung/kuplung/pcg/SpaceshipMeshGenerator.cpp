@@ -92,7 +92,7 @@ void SpaceshipMeshGenerator::generateFirstHull() {
     this->indices.push_back(0); this->normals.push_back(norms[5]);
     this->indices.push_back(7); this->normals.push_back(norms[5]);
 
-    for (size_t i=0; i<this->vertices.size(); i++) {
+    for (size_t i=0; i<this->indices.size(); i++) {
         this->colors.push_back(glm::vec3(0.8));
     }
 }
