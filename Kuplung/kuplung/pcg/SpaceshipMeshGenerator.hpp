@@ -12,6 +12,7 @@
 #include <glm/glm.hpp>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/utilities/parsers/FileModelManager.hpp"
 
 class SpaceshipMeshGenerator {
 public:
@@ -27,9 +28,12 @@ public:
 private:
     int gridSize;
 
+    FileModelManager *fileParser;
+
     void generateMeshModel();
     void generateFirstHull();
     void generateFirstHull2();
+    void generateFirstHull3();
     int getRandomValue(float valueMin, float valueMax, bool zeroIsValid = true);
 };
 

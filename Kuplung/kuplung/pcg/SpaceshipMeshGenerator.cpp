@@ -21,11 +21,32 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
     this->indices.clear();
     this->colors.clear();
 
+    this->fileParser = new FileModelManager();
+    this->fileParser->init(nullptr);
+
     this->generateFirstHull();
     this->generateMeshModel();
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {
+    FBEntity file;
+    file.isFile = true;
+    file.extension = ".obj";
+    file.title = "cube";
+    file.path = Settings::Instance()->appFolder() + "/shapes/cube.obj";
+    MeshModel hull = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
+
+    this->vertices = hull.vertices;
+    this->normals = hull.normals;
+    this->uvs = hull.texture_coordinates;
+    this->indices = hull.indices;
+
+    for (size_t i=0; i<this->vertices.size(); i++) {
+        this->colors.push_back(glm::vec3(0.8));
+    }
+}
+
+void SpaceshipMeshGenerator::generateFirstHull2() {
     this->vertices.push_back(glm::vec3(-1.0,  1.0, -1.0));
     this->vertices.push_back(glm::vec3( 1.0,  1.0, -1.0));
     this->vertices.push_back(glm::vec3( 1.0, -1.0, -1.0));
@@ -97,7 +118,7 @@ void SpaceshipMeshGenerator::generateFirstHull() {
     }
 }
 
-void SpaceshipMeshGenerator::generateFirstHull2() {
+void SpaceshipMeshGenerator::generateFirstHull3() {
     int x = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
     int y = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
     int z = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
