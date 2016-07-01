@@ -35,6 +35,8 @@ private:
     void generateFirstHull2();
     void generateFirstHull3();
     int getRandomValue(float valueMin, float valueMax, bool zeroIsValid = true);
+
+    void extrudeMesh();
 };
 
 #endif /* SpaceshipMeshGenerator_hpp */

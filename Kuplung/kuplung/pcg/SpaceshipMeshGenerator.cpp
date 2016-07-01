@@ -35,8 +35,12 @@ void SpaceshipMeshGenerator::generateFirstHull() {
     file.title = "cube";
     file.path = Settings::Instance()->appFolder() + "/shapes/cube.obj";
     this->modelSpaceship = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
-
     this->modelSpaceship.ModelTitle = "Spaceship";
+
+    this->extrudeMesh();
+}
+
+void SpaceshipMeshGenerator::extrudeMesh() {
 }
 
 void SpaceshipMeshGenerator::generateFirstHull2() {
