@@ -126,7 +126,8 @@ bool Kuplung::init() {
 
                     this->managerObjects = new ObjectsManager(this->parser);
                     this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1),
-                                               std::bind(&Kuplung::addTerrainModel, this));
+                                               std::bind(&Kuplung::addTerrainModel, this),
+                                               std::bind(&Kuplung::addSpaceshipModel, this));
 
                     this->managerUI = new UI();
                     this->managerUI->init(gWindow,
@@ -300,6 +301,7 @@ void Kuplung::addTerrainModel() {
     this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, this->managerObjects->Setting_TerrainWidth, this->managerObjects->Setting_TerrainHeight);
     this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
     this->managerObjects->terrain->Setting_UseTexture = true;
+
     ModelFace *mmf = new ModelFace();
     mmf->dataVertices = this->managerObjects->grid->dataVertices;
     mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
@@ -315,6 +317,27 @@ void Kuplung::addTerrainModel() {
     mmf->initBuffers(Settings::Instance()->currentFolder);
     this->meshModelFaces.push_back(mmf);
     this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+    this->managerUI->meshModelFaces = &this->meshModelFaces;
+}
+
+void Kuplung::addSpaceshipModel() {
+    this->managerObjects->spaceship->spaceshipGenerator->generate(this->managerObjects->Setting_GridSize);
+
+    ModelFace *mmf = new ModelFace();
+    mmf->dataVertices = this->managerObjects->grid->dataVertices;
+    mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
+    mmf->dataNormals = this->managerObjects->grid->dataNormals;
+    mmf->dataIndices = this->managerObjects->grid->dataIndices;
+
+    mmf->ModelID = 1;
+    mmf->init();
+    mmf->setModel(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship);
+    mmf->initBoundingBox();
+    mmf->initModelProperties();
+    mmf->initShaderProgram();
+    mmf->initBuffers(Settings::Instance()->currentFolder);
+    this->meshModelFaces.push_back(mmf);
+    this->meshModels.push_back(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship);
     this->managerUI->meshModelFaces = &this->meshModelFaces;
 }
 

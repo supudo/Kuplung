@@ -45,9 +45,10 @@ void ObjectsManager::destroy() {
     }
 }
 
-void ObjectsManager::init(std::function<void(float)> doProgress, std::function<void()> addTerrain) {
+void ObjectsManager::init(std::function<void(float)> doProgress, std::function<void()> addTerrain, std::function<void()> addSpaceship) {
     this->funcProgress = doProgress;
     this->funcAddTerrain = addTerrain;
+    this->funcAddSpaceship = addSpaceship;
 
     this->lightSources.clear();
     this->systemModels.clear();
@@ -125,34 +126,37 @@ void ObjectsManager::render() {
     }
 
     if (this->Setting_ShowSpaceship) {
-        if (this->Setting_GenerateSpaceship)
+        if (this->Setting_GenerateSpaceship) {
             this->generateSpaceship();
+            this->funcAddSpaceship();
+            this->Setting_GenerateSpaceship = false;
+        }
 
-        this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
-        bool doSolidLight = true;
-        for (size_t i=0; i<this->lightSources.size(); i++) {
-            if (this->lightSources[i]->type == LightSourceType_Directional) {
-                this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
-                this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
-                this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
-                this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
-                this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
-                this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
-                this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
-                doSolidLight = false;
-                break;
-            }
-        }
-        if (doSolidLight) {
-            this->spaceship->lightDirection = this->camera->cameraPosition;
-            this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
-            this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
-            this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
-            this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
-            this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
-            this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
-        }
-        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
+//        this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
+//        bool doSolidLight = true;
+//        for (size_t i=0; i<this->lightSources.size(); i++) {
+//            if (this->lightSources[i]->type == LightSourceType_Directional) {
+//                this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
+//                this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
+//                this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
+//                this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
+//                this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
+//                this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
+//                this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
+//                doSolidLight = false;
+//                break;
+//            }
+//        }
+//        if (doSolidLight) {
+//            this->spaceship->lightDirection = this->camera->cameraPosition;
+//            this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
+//            this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
+//            this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
+//            this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
+//            this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
+//            this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
+//        }
+//        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
     }
 }
 

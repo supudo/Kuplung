@@ -650,14 +650,15 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     if (this->managerObjects->Setting_ShowSpaceship) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Spaceship", ImVec2(-1, 0)))
-                            this->generateNewSpaceship = !this->generateNewSpaceship;
+                            this->managerObjects->Setting_GenerateSpaceship = true;
+//                            this->generateNewSpaceship = !this->generateNewSpaceship;
                         ImGui::Checkbox("Wireframe", &this->managerObjects->spaceship->Setting_Wireframe);
                     }
 
-                    if (this->generateNewSpaceship) {
-                        this->managerObjects->generateSpaceship();
-                        this->generateNewSpaceship = false;
-                    }
+//                    if (this->generateNewSpaceship) {
+//                        this->managerObjects->generateSpaceship();
+//                        this->generateNewSpaceship = false;
+//                    }
                     break;
                 }
                 default:

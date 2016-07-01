@@ -33,7 +33,8 @@ public:
 
     void destroy();
     void init(std::function<void(float)> doProgress,
-              std::function<void()> addTerrain);
+              std::function<void()> addTerrain,
+              std::function<void()> addSpaceship);
     void loadSystemModels();
     void render();
     void renderSkybox();
@@ -91,6 +92,7 @@ public:
 private:
     std::function<void(float)> funcProgress;
     std::function<void()> funcAddTerrain;
+    std::function<void()> funcAddSpaceship;
 
     std::map<std::string, MeshModel> systemModels;
 };

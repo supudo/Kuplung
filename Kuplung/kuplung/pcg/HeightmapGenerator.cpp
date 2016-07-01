@@ -527,14 +527,7 @@ void HeightmapGenerator::generateMeshModel() {
     material.DiffuseColor = glm::vec3(0.7f);
     material.SpecularExp = 99.0f;
     material.IlluminationMode = 2;
-    material.OpticalDensity = 1.0;
+    material.OpticalDensity = 1.0f;
     material.Transparency = 1.0f;
-    MeshMaterialTextureImage textureDiffuse;
-    textureDiffuse.Image = this->heightmapImage;
-    textureDiffuse.Filename = this->heightmapImage;
-    textureDiffuse.Width = this->width;
-    textureDiffuse.Height = this->height;
-    textureDiffuse.UseTexture = true;
-    material.TextureDiffuse = textureDiffuse;
     this->modelTerrain.ModelMaterial = material;
 }

@@ -53,6 +53,7 @@ private:
     void exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces);
     void exportSceneFinished();
     void addTerrainModel();
+    void addSpaceshipModel();
     void saveScene(FBEntity file);
 
     void guiQuit();

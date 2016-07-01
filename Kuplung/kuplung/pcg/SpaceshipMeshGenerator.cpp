@@ -25,7 +25,7 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
     this->fileParser->init(nullptr);
 
     this->generateFirstHull();
-    this->generateMeshModel();
+//    this->generateMeshModel();
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {
@@ -34,16 +34,9 @@ void SpaceshipMeshGenerator::generateFirstHull() {
     file.extension = ".obj";
     file.title = "cube";
     file.path = Settings::Instance()->appFolder() + "/shapes/cube.obj";
-    MeshModel hull = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
+    this->modelSpaceship = this->fileParser->parse(file, FileBrowser_ParserType_Own2)[0];
 
-    this->vertices = hull.vertices;
-    this->normals = hull.normals;
-    this->uvs = hull.texture_coordinates;
-    this->indices = hull.indices;
-
-    for (size_t i=0; i<this->vertices.size(); i++) {
-        this->colors.push_back(glm::vec3(0.8));
-    }
+    this->modelSpaceship.ModelTitle = "Spaceship";
 }
 
 void SpaceshipMeshGenerator::generateFirstHull2() {
@@ -264,12 +257,12 @@ void SpaceshipMeshGenerator::generateMeshModel() {
 
     MeshModelMaterial material;
     material.MaterialID = 1;
-    material.MaterialTitle = "MaterialTerrain";
-    material.AmbientColor = glm::vec3(0.7f);
-    material.DiffuseColor = glm::vec3(0.7f);
+    material.MaterialTitle = "MaterialSpaceship";
+    material.AmbientColor = glm::vec3(1.0f);
+    material.DiffuseColor = this->colors[0];
     material.SpecularExp = 99.0f;
     material.IlluminationMode = 2;
-    material.OpticalDensity = 1.0;
+    material.OpticalDensity = 1.0f;
     material.Transparency = 1.0f;
     MeshMaterialTextureImage textureDiffuse;
     textureDiffuse.Image = "";
