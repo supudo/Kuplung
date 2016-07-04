@@ -16,7 +16,9 @@ QT Creator and Xcode for convinient debugging
 
 #### TODO
 
-- Model material editor
+- Renderers
+- Deferred Rendering
+- Material node editor
 - Memory inspector
 - Grid to act as a glass surface (simulating reflection)
 
