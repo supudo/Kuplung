@@ -24,8 +24,12 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
     this->fileParser = new FileModelManager();
     this->fileParser->init(nullptr);
 
-    this->generateFirstHull();
-//    this->generateMeshModel();
+    std::vector<MeshModel> models;
+
+    this->generateFirstHull2();
+    this->generateMeshModel();
+    models.push_back(this->modelSpaceship);
+    Kuplung_printObjModels(models, false);
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {

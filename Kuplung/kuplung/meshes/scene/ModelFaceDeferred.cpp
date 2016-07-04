@@ -7,16 +7,17 @@
 //
 
 #include "ModelFaceDeferred.hpp"
-
-/*
 #include <glm/gtc/type_ptr.hpp>
 #include <boost/filesystem.hpp>
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-bool ModelDeferred::initShaderProgram() {
+bool ModelFaceDeferred::initShaderProgram() {
     bool success = true;
+
+    glGenVertexArrays(1, &this->glVAO);
+    glBindVertexArray(this->glVAO);
 
     success |= this->initShader_GeometryPass();
     success |= this->initShader_LightingPass();
@@ -93,10 +94,12 @@ bool ModelDeferred::initShaderProgram() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
+    glBindVertexArray(0);
+
     return success;
 }
 
-bool ModelDeferred::initShader_GeometryPass() {
+bool ModelFaceDeferred::initShader_GeometryPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -108,8 +111,8 @@ bool ModelDeferred::initShader_GeometryPass() {
     this->shaderProgram_GeometryPass = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_GeometryPass, this->shaderVertex_GeometryPass, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_GeometryPass, this->shaderFragment_GeometryPass, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -134,7 +137,7 @@ bool ModelDeferred::initShader_GeometryPass() {
     return true;
 }
 
-bool ModelDeferred::initShader_LightingPass() {
+bool ModelFaceDeferred::initShader_LightingPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -146,8 +149,8 @@ bool ModelDeferred::initShader_LightingPass() {
     this->shaderProgram_LightingPass = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, this->shaderVertex_LightingPass, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, this->shaderFragment_LightingPass, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -181,7 +184,7 @@ bool ModelDeferred::initShader_LightingPass() {
     return true;
 }
 
-bool ModelDeferred::initShader_LightBox() {
+bool ModelFaceDeferred::initShader_LightBox() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
     std::string shaderSourceVertex = readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
@@ -193,8 +196,8 @@ bool ModelDeferred::initShader_LightBox() {
     this->shaderProgram_LightBox = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, this->shaderVertex_LightBox, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, this->shaderFragment_LightBox, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -218,7 +221,7 @@ bool ModelDeferred::initShader_LightBox() {
     return true;
 }
 
-void ModelDeferred::initBuffers(std::string assetsFolder) {
+void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
     glBindVertexArray(this->glVAO);
@@ -282,7 +285,7 @@ void ModelDeferred::initBuffers(std::string assetsFolder) {
     this->initBuffersAgain = false;
 }
 
-void ModelDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -300,10 +303,10 @@ void ModelDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, g
     this->renderLightBox();
 }
 
-void ModelDeferred::renderGeometryPass() {
+void ModelFaceDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glUseProgram(this->shaderFragment_GeometryPass);
+    glUseProgram(this->shaderProgram_GeometryPass);
 
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
@@ -334,7 +337,7 @@ void ModelDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void ModelDeferred::renderLightingPass() {
+void ModelFaceDeferred::renderLightingPass() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
 
@@ -370,7 +373,7 @@ void ModelDeferred::renderLightingPass() {
     this->renderQuad();
 }
 
-void ModelDeferred::renderLightBox() {
+void ModelFaceDeferred::renderLightBox() {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
@@ -400,7 +403,7 @@ void ModelDeferred::renderLightBox() {
     }
 }
 
-void ModelDeferred::renderQuad() {
+void ModelFaceDeferred::renderQuad() {
     if (this->vaoQuad == 0) {
         GLfloat quadVertices[] = {
             // Positions        // Texture Coords
@@ -425,7 +428,7 @@ void ModelDeferred::renderQuad() {
     glBindVertexArray(0);
 }
 
-void ModelDeferred::renderCube() {
+void ModelFaceDeferred::renderCube() {
     // Initialize (if necessary)
     if (this->vaoCube == 0)
     {
@@ -494,4 +497,3 @@ void ModelDeferred::renderCube() {
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }
-*/
