@@ -300,13 +300,15 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
 
     this->renderGeometryPass();
     this->renderLightingPass();
-    this->renderLightBox();
+//    this->renderLightBox();
 }
 
 void ModelFaceDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_GeometryPass);
+
+    glBindVertexArray(this->glVAO);
 
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
@@ -327,14 +329,11 @@ void ModelFaceDeferred::renderGeometryPass() {
         glBindTexture(GL_TEXTURE_2D, 2);
     }
 
-    glBindVertexArray(this->glVAO);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
-    glBindVertexArray(0);
-
-//    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D, 0);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    glBindVertexArray(0);
 }
 
 void ModelFaceDeferred::renderLightingPass() {
