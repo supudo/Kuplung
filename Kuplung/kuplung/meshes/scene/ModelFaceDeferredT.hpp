@@ -15,10 +15,6 @@
 class ModelFaceDeferredT: public ModelFace {
 public:
     void destroy();
-    bool initShader_GeometryPass();
-    bool initShader_LightingPass();
-    bool initShader_LightBox();
-
     bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
