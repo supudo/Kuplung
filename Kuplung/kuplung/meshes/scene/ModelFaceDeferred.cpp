@@ -13,6 +13,44 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
+void ModelFaceDeferred::destroy() {
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboTextureCoordinates);
+    glDeleteBuffers(1, &this->vboIndices);
+    glDeleteBuffers(1, &this->vboTangents);
+    glDeleteBuffers(1, &this->vboBitangents);
+
+    GLint maxColorAttachments = 1;
+    glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
+    GLint colorAttachment;
+    GLenum att = GL_COLOR_ATTACHMENT0;
+    for (colorAttachment = 0; colorAttachment < maxColorAttachments; colorAttachment++) {
+        att += colorAttachment;
+        GLint param;
+        GLuint objName;
+        glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
+        if (GL_RENDERBUFFER == param) {
+            glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+            objName = ((GLuint*)(&param))[0];
+            glDeleteRenderbuffers(1, &objName);
+        }
+        else if (GL_TEXTURE == param) {
+            glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
+            objName = ((GLuint*)(&param))[0];
+            glDeleteTextures(1, &objName);
+        }
+    }
+
+    glDisableVertexAttribArray(this->glVS_VertexPosition);
+    glDisableVertexAttribArray(this->glFS_TextureCoord);
+    glDisableVertexAttribArray(this->glVS_VertexNormal);
+    glDisableVertexAttribArray(this->glVS_Tangent);
+    glDisableVertexAttribArray(this->glVS_Bitangent);
+
+    glDeleteProgram(this->shaderProgram);
+}
+
 bool ModelFaceDeferred::initShaderProgram() {
     bool success = true;
 
@@ -96,11 +134,11 @@ bool ModelFaceDeferred::initShaderProgram() {
 
 bool ModelFaceDeferred::initShader_GeometryPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram_GeometryPass = glCreateProgram();
@@ -134,11 +172,11 @@ bool ModelFaceDeferred::initShader_GeometryPass() {
 
 bool ModelFaceDeferred::initShader_LightingPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram_LightingPass = glCreateProgram();
@@ -181,11 +219,11 @@ bool ModelFaceDeferred::initShader_LightingPass() {
 
 bool ModelFaceDeferred::initShader_LightBox() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram_LightBox = glCreateProgram();

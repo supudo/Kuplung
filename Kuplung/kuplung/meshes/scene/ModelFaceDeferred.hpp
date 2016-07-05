@@ -18,10 +18,12 @@ struct ModelDeferred_LightSource {
 
 class ModelFaceDeferred: public ModelFace {
 public:
-    bool initShaderProgram();
+    void destroy();
     bool initShader_GeometryPass();
     bool initShader_LightingPass();
     bool initShader_LightBox();
+
+    bool initShaderProgram();
     void initBuffers(std::string assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
@@ -34,6 +36,10 @@ private:
 
     std::vector<glm::vec3> lightPositions;
     std::vector<glm::vec3> lightColors;
+
+    GLuint shaderProgram;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
+    GLuint glVS_VertexPosition, glVS_VertexNormal, glFS_TextureCoord, glVS_Tangent, glVS_Bitangent;
 
     GLuint gBuffer, rboDepth;
     GLuint gPosition, gNormal, gAlbedoSpec;
