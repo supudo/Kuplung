@@ -46,7 +46,9 @@ void ModelFaceDeferred::destroy() {
     glDisableVertexAttribArray(this->gl_GeometryPass_Normal);
     glDisableVertexAttribArray(this->gl_GeometryPass_TextureCoordinate);
 
-    glDeleteProgram(this->shaderProgram);
+    glDeleteProgram(this->shaderProgram_GeometryPass);
+    glDeleteProgram(this->shaderProgram_LightingPass);
+    glDeleteProgram(this->shaderProgram_LightBox);
 }
 
 bool ModelFaceDeferred::initShaderProgram() {
@@ -159,7 +161,7 @@ bool ModelFaceDeferred::initShader_GeometryPass() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_GeometryPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Geometry Pass] Error linking program " + std::to_string(this->shaderProgram) + "!");
+        Settings::Instance()->funcDoLog("[Deferred - Geometry Pass] Error linking program " + std::to_string(this->shaderProgram_GeometryPass) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
         return false;
     }
@@ -202,7 +204,7 @@ bool ModelFaceDeferred::initShader_LightingPass() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_LightingPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram) + "!");
+        Settings::Instance()->funcDoLog("[Deferred - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram_LightingPass) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_LightingPass);
         return false;
     }
@@ -249,7 +251,7 @@ bool ModelFaceDeferred::initShader_LightBox() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_LightBox, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Light Box] Error linking program " + std::to_string(this->shaderProgram) + "!");
+        Settings::Instance()->funcDoLog("[Deferred - Light Box] Error linking program " + std::to_string(this->shaderProgram_LightBox) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_LightBox);
         return false;
     }

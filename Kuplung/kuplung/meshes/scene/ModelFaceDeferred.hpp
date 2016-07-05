@@ -37,13 +37,15 @@ private:
     std::vector<glm::vec3> lightPositions;
     std::vector<glm::vec3> lightColors;
 
-    GLuint shaderProgram, glVAO;
+    const GLuint NR_LIGHTS = 32;
+
+    // Model
+    GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
 
+    // G-Buffer
     GLuint gBuffer, rboDepth;
     GLuint gPosition, gNormal, gAlbedoSpec;
-    GLuint vboPosition, vboNormal, vboAlbedoSpec;
-    const GLuint NR_LIGHTS = 32;
 
     // Geometry Pass
     GLuint shaderProgram_GeometryPass;
