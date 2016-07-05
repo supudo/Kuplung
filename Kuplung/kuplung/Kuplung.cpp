@@ -583,7 +583,7 @@ void Kuplung::processParsedObjFile() {
             MeshModel model = this->meshModelsNew[i];
             ModelFace *mmf;
             if (Settings::Instance()->DeferredRendering)
-                mmf = new ModelFaceDeferredT();
+                mmf = new ModelFaceDeferred();
             else
                 mmf = new ModelFaceForward();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;

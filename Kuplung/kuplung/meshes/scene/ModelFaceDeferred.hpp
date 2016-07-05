@@ -39,7 +39,6 @@ private:
 
     GLuint shaderProgram, glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
-    GLuint glVS_VertexPosition, glVS_VertexNormal, glFS_TextureCoord, glVS_Tangent, glVS_Bitangent;
 
     GLuint gBuffer, rboDepth;
     GLuint gPosition, gNormal, gAlbedoSpec;
@@ -48,6 +47,7 @@ private:
 
     // Geometry Pass
     GLuint shaderProgram_GeometryPass;
+    GLuint gl_GeometryPass_Position, gl_GeometryPass_Normal, gl_GeometryPass_TextureCoordinate;
     GLint gl_GeometryPass_ProjectionMatrix, gl_GeometryPass_ViewMatrix, gl_GeometryPass_ModelMatrix;
     GLuint gl_GeometryPass_TextureDiffuse, gl_GeometryPass_TextureSpecular;
 

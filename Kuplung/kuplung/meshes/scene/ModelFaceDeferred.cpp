@@ -42,11 +42,9 @@ void ModelFaceDeferred::destroy() {
         }
     }
 
-    glDisableVertexAttribArray(this->glVS_VertexPosition);
-    glDisableVertexAttribArray(this->glFS_TextureCoord);
-    glDisableVertexAttribArray(this->glVS_VertexNormal);
-    glDisableVertexAttribArray(this->glVS_Tangent);
-    glDisableVertexAttribArray(this->glVS_Bitangent);
+    glDisableVertexAttribArray(this->gl_GeometryPass_Position);
+    glDisableVertexAttribArray(this->gl_GeometryPass_Normal);
+    glDisableVertexAttribArray(this->gl_GeometryPass_TextureCoordinate);
 
     glDeleteProgram(this->shaderProgram);
 }
@@ -166,9 +164,14 @@ bool ModelFaceDeferred::initShader_GeometryPass() {
         return false;
     }
     else {
+        this->gl_GeometryPass_Position = this->glUtils->glGetAttribute(this->shaderProgram_GeometryPass, "position");
+        this->gl_GeometryPass_Normal = this->glUtils->glGetAttribute(this->shaderProgram_GeometryPass, "normal");
+        this->gl_GeometryPass_TextureCoordinate = this->glUtils->glGetAttribute(this->shaderProgram_GeometryPass, "texCoords");
+
         this->gl_GeometryPass_ProjectionMatrix = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "projection");
         this->gl_GeometryPass_ViewMatrix = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "view");
         this->gl_GeometryPass_ModelMatrix = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "model");
+
         this->gl_GeometryPass_TextureDiffuse = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse1");
         this->gl_GeometryPass_TextureSpecular = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular1");
     }
@@ -269,23 +272,23 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, this->meshModel.vertices.size() * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glVS_VertexPosition);
-    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(this->gl_GeometryPass_Position);
+    glVertexAttribPointer(this->gl_GeometryPass_Position, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
     glBufferData(GL_ARRAY_BUFFER, this->meshModel.normals.size() * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glVS_VertexNormal);
-    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(this->gl_GeometryPass_Normal);
+    glVertexAttribPointer(this->gl_GeometryPass_Normal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // textures and colors
     if (this->meshModel.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
         glBufferData(GL_ARRAY_BUFFER, this->meshModel.texture_coordinates.size() * sizeof(glm::vec2), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glFS_TextureCoord);
-        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        glEnableVertexAttribArray(this->gl_GeometryPass_Position);
+        glVertexAttribPointer(this->gl_GeometryPass_Position, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
         ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
@@ -295,29 +298,6 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshModel.countIndices * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
-
-    if (this->meshModel.ModelMaterial.TextureBump.Image != "" &&
-        this->meshModel.vertices.size() > 0 &&
-        this->meshModel.texture_coordinates.size() > 0 &&
-        this->meshModel.normals.size() > 0) {
-        std::vector<glm::vec3> tangents;
-        std::vector<glm::vec3> bitangents;
-        this->mathHelper->computeTangentBasis(this->meshModel.vertices, this->meshModel.texture_coordinates, this->meshModel.normals, tangents, bitangents);
-
-        // tangents
-        glGenBuffers(1, &this->vboTangents);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
-        glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glVS_Tangent);
-        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-        // bitangents
-        glGenBuffers(1, &this->vboBitangents);
-        glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
-        glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glVS_Bitangent);
-        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-    }
 
     glBindVertexArray(0);
 
@@ -341,7 +321,7 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
 }
 
 void ModelFaceDeferred::renderGeometryPass() {
-    glDepthMask(GL_TRUE);
+//    glDepthMask(GL_TRUE);
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -372,8 +352,7 @@ void ModelFaceDeferred::renderGeometryPass() {
     glBindVertexArray(0);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    glDepthMask(GL_FALSE);
+//    glDepthMask(GL_FALSE);
 }
 
 void ModelFaceDeferred::renderLightingPass() {
