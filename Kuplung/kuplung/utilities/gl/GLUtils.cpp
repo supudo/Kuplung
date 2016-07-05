@@ -23,6 +23,7 @@ bool GLUtils::compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLen
     if (isShaderCompiled != GL_TRUE) {
         Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
         this->printShaderLog(shader);
+        glDeleteShader(shader);
         return false;
     }
     else
@@ -32,18 +33,20 @@ bool GLUtils::compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLen
 
 bool GLUtils::compileShader(GLuint &shaderProgram, GLenum shaderType, const char *shader_source) {
     GLuint shader = glCreateShader(shaderType);
-
     glShaderSource(shader, 1, &shader_source, NULL);
     glCompileShader(shader);
 
-    GLint isShaderCompiled = GL_FALSE;
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
-    if (isShaderCompiled != GL_TRUE) {
+    GLint isOK = GL_FALSE;
+    glGetShaderiv(shader, GL_COMPILE_STATUS, &isOK);
+    if (isOK != GL_TRUE) {
         Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
         this->printShaderLog(shader);
+        glDeleteShader(shader);
         return false;
     }
+
     glAttachShader(shaderProgram, shader);
+
     return true;
 }
 

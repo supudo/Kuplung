@@ -109,7 +109,7 @@ void ModelFace::init() {
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
-    this->Setting_LightingPass_DrawMode = 1;
+    this->Setting_LightingPass_DrawMode = 2;
 
     // light
     this->Setting_LightStrengthAmbient = 0.5;

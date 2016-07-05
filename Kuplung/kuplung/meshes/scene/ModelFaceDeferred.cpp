@@ -54,6 +54,9 @@ void ModelFaceDeferred::destroy() {
 bool ModelFaceDeferred::initShaderProgram() {
     bool success = true;
 
+    glGenVertexArrays(1, &this->glVAO);
+    glBindVertexArray(this->glVAO);
+
     success |= this->initShader_GeometryPass();
     success |= this->initShader_LightingPass();
     success |= this->initShader_LightBox();
@@ -61,6 +64,7 @@ bool ModelFaceDeferred::initShaderProgram() {
     if (success) {
         // Set samplers
         glUseProgram(this->shaderProgram_LightingPass);
+
         glUniform1i(this->gl_LightingPass_Position, 0);
         glUniform1i(this->gl_LightingPass_Normal, 1);
         glUniform1i(this->gl_LightingPass_AlbedoSpec, 2);
@@ -128,6 +132,8 @@ bool ModelFaceDeferred::initShaderProgram() {
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
+
+    glBindVertexArray(0);
 
     return success;
 }
@@ -257,28 +263,29 @@ bool ModelFaceDeferred::initShader_LightBox() {
 void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
+    glBindVertexArray(this->glVAO);
+
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countVertices * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->meshModel.vertices.size() * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexPosition);
-    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
-//    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
+    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countNormals * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, this->meshModel.normals.size() * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexNormal);
-    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
+    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // textures and colors
     if (this->meshModel.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->meshModel.countTextureCoordinates * sizeof(glm::vec2), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this->meshModel.texture_coordinates.size() * sizeof(glm::vec2), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glFS_TextureCoord);
-        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), NULL);
+        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
         ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
@@ -302,15 +309,17 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
         glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glVS_Tangent);
-        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
+        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // bitangents
         glGenBuffers(1, &this->vboBitangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
         glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glVS_Bitangent);
-        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
+        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
     }
+
+    glBindVertexArray(0);
 
     this->initBuffersAgain = false;
 }
@@ -336,27 +345,30 @@ void ModelFaceDeferred::renderGeometryPass() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glUseProgram(this->shaderProgram_GeometryPass);
+
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    glm::mat4 model = glm::mat4();
-    model = glm::translate(model, glm::vec3(1.0, 1.0, 1.0));
+    glm::mat4 model = this->matrixModel;//glm::mat4();
+//    model = glm::translate(model, glm::vec3(1.0, 1.0, 1.0));
     model = glm::scale(model, glm::vec3(0.25f));
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glUniformMatrix4fv(this->gl_GeometryPass_ModelMatrix, 1, GL_FALSE, glm::value_ptr(model));
 
-    if (this->gl_GeometryPass_TextureDiffuse > 0) {
+    if (this->gl_GeometryPass_TextureDiffuse) {
         glUniform1i(this->gl_GeometryPass_TextureDiffuse, 1);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, this->gl_GeometryPass_TextureDiffuse);
     }
 
-    if (this->gl_GeometryPass_TextureSpecular > 0) {
+    if (this->gl_GeometryPass_TextureSpecular) {
         glUniform1i(this->gl_GeometryPass_TextureSpecular, 2);
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, 1);
+        glBindTexture(GL_TEXTURE_2D, this->gl_GeometryPass_TextureSpecular);
     }
 
+    glBindVertexArray(this->glVAO);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
+    glBindVertexArray(0);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

@@ -37,7 +37,7 @@ private:
     std::vector<glm::vec3> lightPositions;
     std::vector<glm::vec3> lightColors;
 
-    GLuint shaderProgram;
+    GLuint shaderProgram, glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
     GLuint glVS_VertexPosition, glVS_VertexNormal, glFS_TextureCoord, glVS_Tangent, glVS_Bitangent;
 

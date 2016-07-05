@@ -195,7 +195,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_TerrainAnimateY = false;
     this->Setting_TerrainWidth = 100;
     this->Setting_TerrainHeight = 100;
-    this->Setting_LightingPass_DrawMode = 0;
+    this->Setting_LightingPass_DrawMode = 2;
     this->Setting_ShowSpaceship = false;
     this->Setting_GenerateSpaceship = false;
 }
