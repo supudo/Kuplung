@@ -241,10 +241,10 @@ void ModelFaceDeferredT::render(glm::mat4 matrixProjection, glm::mat4 matrixCame
         glUseProgram(this->shaderProgram_GeometryPass);
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(view));
-        for (GLuint i = 0; i < objectPositions.size(); i++)
+        for (GLuint i = 0; i < this->objectPositions.size(); i++)
         {
             model = glm::mat4();
-            model = glm::translate(model, objectPositions[i]);
+            model = glm::translate(model, this->objectPositions[i]);
             model = glm::scale(model, glm::vec3(0.25f));
             glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
             glBindVertexArray(this->glVAO);
