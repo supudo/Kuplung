@@ -16,9 +16,6 @@
 bool ModelFaceDeferred::initShaderProgram() {
     bool success = true;
 
-    glGenVertexArrays(1, &this->glVAO);
-    glBindVertexArray(this->glVAO);
-
     success |= this->initShader_GeometryPass();
     success |= this->initShader_LightingPass();
     success |= this->initShader_LightBox();
@@ -94,8 +91,6 @@ bool ModelFaceDeferred::initShaderProgram() {
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 
-    glBindVertexArray(0);
-
     return success;
 }
 
@@ -170,7 +165,7 @@ bool ModelFaceDeferred::initShader_LightingPass() {
         this->gl_LightingPass_AlbedoSpec = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "gAlbedoSpec");
 
         this->lightSources.clear();
-        for (GLuint i = 0; i < this->lightPositions.size(); i++) {
+        for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
             ModelDeferred_LightSource source;
             source.gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str());
             source.gl_Color = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str());
@@ -224,21 +219,20 @@ bool ModelFaceDeferred::initShader_LightBox() {
 void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
-    glBindVertexArray(this->glVAO);
-
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, this->meshModel.countVertices * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexPosition);
-    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
+//    glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), (GLvoid*)0);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
     glBufferData(GL_ARRAY_BUFFER, this->meshModel.countNormals * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glVS_VertexNormal);
-    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(this->glVS_VertexNormal, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
 
     // textures and colors
     if (this->meshModel.texture_coordinates.size() > 0) {
@@ -246,7 +240,7 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
         glBufferData(GL_ARRAY_BUFFER, this->meshModel.countTextureCoordinates * sizeof(glm::vec2), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glFS_TextureCoord);
-        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), NULL);
 
         this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
         this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
@@ -270,17 +264,15 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
         glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glVS_Tangent);
-        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glVertexAttribPointer(this->glVS_Tangent, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
 
         // bitangents
         glGenBuffers(1, &this->vboBitangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
         glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glVS_Bitangent);
-        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glVertexAttribPointer(this->glVS_Bitangent, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), NULL);
     }
-
-    glBindVertexArray(0);
 
     this->initBuffersAgain = false;
 }
@@ -293,29 +285,26 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
     this->grid = grid;
     this->uiAmbientLight = uiAmbientLight;
 
-    glClearColor(Settings::Instance()->guiClearColor.r, Settings::Instance()->guiClearColor.g, Settings::Instance()->guiClearColor.b, Settings::Instance()->guiClearColor.w);
     glEnable(GL_DEPTH_TEST);
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     this->renderGeometryPass();
     this->renderLightingPass();
-//    this->renderLightBox();
+    this->renderLightBox();
 }
 
 void ModelFaceDeferred::renderGeometryPass() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
     glUseProgram(this->shaderProgram_GeometryPass);
-
-    glBindVertexArray(this->glVAO);
-
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    this->matrixModel = glm::translate(this->matrixModel, glm::vec3(3, 0, 0));
-    this->matrixModel = glm::scale(this->matrixModel, glm::vec3(0.25f));
-    glUniformMatrix4fv(this->gl_GeometryPass_ModelMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixModel));
+    glm::mat4 model = glm::mat4();
+    model = glm::translate(model, glm::vec3(1.0, 1.0, 1.0));
+    model = glm::scale(model, glm::vec3(0.25f));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
     if (this->gl_GeometryPass_TextureDiffuse > 0) {
         glUniform1i(this->gl_GeometryPass_TextureDiffuse, 1);
@@ -332,31 +321,30 @@ void ModelFaceDeferred::renderGeometryPass() {
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    glBindVertexArray(0);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
 void ModelFaceDeferred::renderLightingPass() {
+    // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
 
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, this->gPosition);
-
     glActiveTexture(GL_TEXTURE1);
     glBindTexture(GL_TEXTURE_2D, this->gNormal);
-
     glActiveTexture(GL_TEXTURE2);
     glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
 
-    const GLfloat constant = 1.0f; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
-    const GLfloat linear = 0.7f;
-    const GLfloat quadratic = 1.8f;
-    for (GLuint i=0; i < this->lightSources.size(); i++) {
+    // Also send light relevant uniforms
+    for (GLuint i = 0; i < this->lightPositions.size(); i++) {
         glUniform3fv(this->lightSources[i].gl_Position, 1, &this->lightPositions[i][0]);
         glUniform3fv(this->lightSources[i].gl_Color, 1, &this->lightColors[i][0]);
 
         // Update attenuation parameters and calculate radius
+        const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+        const GLfloat linear = 0.7;
+        const GLfloat quadratic = 1.8;
         glUniform1f(this->lightSources[i].gl_Linear, linear);
         glUniform1f(this->lightSources[i].gl_Quadratic, quadratic);
 
@@ -366,7 +354,7 @@ void ModelFaceDeferred::renderLightingPass() {
         GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
         glUniform1f(this->lightSources[i].gl_Radius, radius);
     }
-
+//    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &camera.Position[0]);
     glUniform3fv(this->gl_LightingPass_ViewPosition, 1, &this->vecCameraPosition[0]);
     glUniform1i(this->gl_LightingPass_DrawMode, this->Setting_LightingPass_DrawMode);
     this->renderQuad();

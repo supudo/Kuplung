@@ -35,7 +35,6 @@ private:
     std::vector<glm::vec3> lightPositions;
     std::vector<glm::vec3> lightColors;
 
-    GLuint glVAO;
     GLuint gBuffer, rboDepth;
     GLuint gPosition, gNormal, gAlbedoSpec;
     GLuint vboPosition, vboNormal, vboAlbedoSpec;
