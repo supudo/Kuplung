@@ -649,7 +649,7 @@ void ModelFaceForward::renderModel() {
 
         if (this->vboTextureAmbient > 0 && this->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureAmbient, 1);
-            glUniform1i(this->glMaterial_SamplerAmbient, 1);
+            glUniform1i(this->glMaterial_SamplerAmbient, 0);
             glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
         }
