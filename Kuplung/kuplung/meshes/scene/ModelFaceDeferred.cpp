@@ -406,7 +406,7 @@ void ModelFaceDeferred::renderLightingPass() {
     }
 //    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &camera.Position[0]);
     glUniform3fv(this->gl_LightingPass_ViewPosition, 1, &this->vecCameraPosition[0]);
-    glUniform1i(this->gl_LightingPass_DrawMode, this->Setting_LightingPass_DrawMode);
+    glUniform1i(this->gl_LightingPass_DrawMode, this->Setting_LightingPass_DrawMode + 1);
     this->renderQuad();
 }
 
