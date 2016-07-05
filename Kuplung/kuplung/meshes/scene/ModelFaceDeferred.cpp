@@ -341,6 +341,7 @@ void ModelFaceDeferred::render(glm::mat4 matrixProjection, glm::mat4 matrixCamer
 }
 
 void ModelFaceDeferred::renderGeometryPass() {
+    glDepthMask(GL_TRUE);
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -349,8 +350,8 @@ void ModelFaceDeferred::renderGeometryPass() {
     glUniformMatrix4fv(this->gl_GeometryPass_ProjectionMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixProjection));
     glUniformMatrix4fv(this->gl_GeometryPass_ViewMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    glm::mat4 model = this->matrixModel;//glm::mat4();
-//    model = glm::translate(model, glm::vec3(1.0, 1.0, 1.0));
+    glm::mat4 model = glm::mat4();
+    model = glm::translate(model, glm::vec3(1.0, 1.0, 1.0));
     model = glm::scale(model, glm::vec3(0.25f));
     glUniformMatrix4fv(this->gl_GeometryPass_ModelMatrix, 1, GL_FALSE, glm::value_ptr(model));
 
@@ -372,6 +373,7 @@ void ModelFaceDeferred::renderGeometryPass() {
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDepthMask(GL_FALSE);
 }
 
 void ModelFaceDeferred::renderLightingPass() {
