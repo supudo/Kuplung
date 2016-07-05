@@ -198,13 +198,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
             ImGui::Separator();
 
-            ImGui::Checkbox("Show Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
-            ImGui::Checkbox("Show Z Axis", &this->managerObjects->Settings_ShowZAxis);
-            ImGui::Checkbox("Show Pick Rays", &Settings::Instance()->showPickRays);
+            ImGui::Checkbox("Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
+            ImGui::Checkbox("Z Axis", &this->managerObjects->Settings_ShowZAxis);
+            ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
             ImGui::Separator();
 
             if (Settings::Instance()->DeferredRendering) {
-                ImGui::Text("Deferred Rendering");
+                ImGui::Text("Deferred Rendering Stage");
                 std::vector<const char*> deferred_texture_items;
                 deferred_texture_items.push_back("Lighting");
                 deferred_texture_items.push_back("Position");
@@ -215,15 +215,16 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Separator();
             }
 
-            this->helperUI->addControlColor4("Outline Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
-            this->helperUI->addControlsSlider("Outline Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
-            ImGui::Separator();
+            if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
+                Settings::Instance()->saveSettings();
 
-            if (ImGui::Checkbox("Show Bounding Box", &Settings::Instance()->ShowBoundingBox))
-                Settings::Instance()->saveSettings();
-            if (this->helperUI->addControlsSlider("Bounding Box Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
-                Settings::Instance()->BoundingBoxRefresh = true;
-                Settings::Instance()->saveSettings();
+            if (Settings::Instance()->ShowBoundingBox) {
+                if (this->helperUI->addControlsSlider("Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
+                    Settings::Instance()->BoundingBoxRefresh = true;
+                    Settings::Instance()->saveSettings();
+                }
+                this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
+                this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
             }
             break;
         }
@@ -307,8 +308,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             switch (this->selectedTabGUICameraModel) {
                 case 0: {
-                    ImGui::Checkbox("Show Camera", &this->managerObjects->cameraModel->showCameraObject);
-                    ImGui::Checkbox("Show Wire", &this->managerObjects->cameraModel->showInWire);
+                    ImGui::Checkbox("Camera", &this->managerObjects->cameraModel->showCameraObject);
+                    ImGui::Checkbox("Wire", &this->managerObjects->cameraModel->showInWire);
                     ImGui::Separator();
                     ImGui::Text("Inner Light Direction");
                     this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionX->animate, &this->managerObjects->cameraModel->innerLightDirectionX->point, true, isFrame);
@@ -370,7 +371,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::SliderInt("##109", &this->managerObjects->Setting_GridSize, 0, 100);
                     ImGui::Separator();
                     ImGui::Checkbox("Grid fixed with World", &this->managerObjects->Setting_FixedGridWorld);
-                    ImGui::Checkbox("Show Grid", &this->managerObjects->grid->showGrid);
+                    ImGui::Checkbox("Grid", &this->managerObjects->grid->showGrid);
                     ImGui::Checkbox("Act as mirror", &this->managerObjects->grid->actAsMirror);
                     if (this->managerObjects->grid->actAsMirror)
                         this->helperUI->addControlsSliderSameLine("Alpha##999", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->grid->transparency, false, isFrame);
@@ -469,9 +470,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
                     ImGui::Text("%s", this->managerObjects->lightSources[this->selectedObjectLight]->description.c_str());
                     // show lamp object
-                    ImGui::Checkbox("Show Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
-                    ImGui::Checkbox("Show Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
-                    ImGui::Checkbox("Show Wire", &this->managerObjects->lightSources[this->selectedObjectLight]->showInWire);
+                    ImGui::Checkbox("Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
+                    ImGui::Checkbox("Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
+                    ImGui::Checkbox("Wire", &this->managerObjects->lightSources[this->selectedObjectLight]->showInWire);
                     if (ImGui::Button("Delete Light Source")) {
                         this->selectedObject = 0;
                         this->managerObjects->lightSources.erase(this->managerObjects->lightSources.begin() + this->selectedObjectLight);
@@ -549,7 +550,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             switch (this->selectedObjectArtefact) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
-                    ImGui::Checkbox("Show Terrain", &this->managerObjects->Setting_ShowTerrain);
+                    ImGui::Checkbox("Terrain", &this->managerObjects->Setting_ShowTerrain);
                     if (this->managerObjects->Setting_ShowTerrain) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Terrain", ImVec2(-1, 0)))
@@ -646,7 +647,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Spaceship Generator");
-                    ImGui::Checkbox("Show Spaceship", &this->managerObjects->Setting_ShowSpaceship);
+                    ImGui::Checkbox("Spaceship", &this->managerObjects->Setting_ShowSpaceship);
                     if (this->managerObjects->Setting_ShowSpaceship) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Spaceship", ImVec2(-1, 0)))
