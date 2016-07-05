@@ -110,6 +110,7 @@ SOURCES += main.cpp \
     kuplung/meshes/scene/ModelFace.cpp \
     kuplung/meshes/scene/ModelFaceForward.cpp \
     kuplung/meshes/scene/ModelFaceDeferred.cpp \
+    kuplung/meshes/scene/ModelFaceDeferredT.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
@@ -174,6 +175,7 @@ HEADERS += \
     kuplung/meshes/scene/ModelFace.hpp \
     kuplung/meshes/scene/ModelFaceForward.hpp \
     kuplung/meshes/scene/ModelFaceDeferred.hpp \
+    kuplung/meshes/scene/ModelFaceDeferredT.hpp \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \

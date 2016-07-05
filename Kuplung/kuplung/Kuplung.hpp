@@ -19,6 +19,7 @@
 #include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
+#include "kuplung/meshes/scene/ModelFaceDeferredT.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
