@@ -280,8 +280,8 @@ void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
         glEnableVertexAttribArray(this->glFS_TextureCoord);
         glVertexAttribPointer(this->glFS_TextureCoord, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec2), NULL);
 
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
+        ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_GeometryPass_TextureDiffuse);
+        ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_GeometryPass_TextureSpecular);
     }
 
     // indices
@@ -347,13 +347,13 @@ void ModelFaceDeferred::renderGeometryPass() {
     if (this->gl_GeometryPass_TextureDiffuse > 0) {
         glUniform1i(this->gl_GeometryPass_TextureDiffuse, 1);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, 1);
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     if (this->gl_GeometryPass_TextureSpecular > 0) {
         glUniform1i(this->gl_GeometryPass_TextureSpecular, 2);
         glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, 2);
+        glBindTexture(GL_TEXTURE_2D, 1);
     }
 
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
