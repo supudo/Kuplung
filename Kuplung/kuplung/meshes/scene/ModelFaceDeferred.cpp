@@ -54,20 +54,16 @@ void ModelFaceDeferred::destroy() {
 bool ModelFaceDeferred::initShaderProgram() {
     bool success = true;
 
-    glGenVertexArrays(1, &this->glVAO);
-    glBindVertexArray(this->glVAO);
-
     success |= this->initShader_GeometryPass();
     success |= this->initShader_LightingPass();
     success |= this->initShader_LightBox();
 
     if (success) {
         // Set samplers
-        glUseProgram(this->shaderProgram_LightingPass);
-
-        glUniform1i(this->gl_LightingPass_Position, 0);
-        glUniform1i(this->gl_LightingPass_Normal, 1);
-        glUniform1i(this->gl_LightingPass_AlbedoSpec, 2);
+//        glUseProgram(this->shaderProgram_LightingPass);
+//        glUniform1i(this->gl_LightingPass_Position, 0);
+//        glUniform1i(this->gl_LightingPass_Normal, 1);
+//        glUniform1i(this->gl_LightingPass_AlbedoSpec, 2);
 
         // - Colors
         srand(13);
@@ -132,8 +128,6 @@ bool ModelFaceDeferred::initShaderProgram() {
 
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
-
-    glBindVertexArray(0);
 
     return success;
 }
@@ -209,11 +203,16 @@ bool ModelFaceDeferred::initShader_LightingPass() {
         return false;
     }
     else {
+        this->gl_LightingPass_VPosition = this->glUtils->glGetAttribute(this->shaderProgram_LightingPass, "position");
+        this->gl_LightingPass_VTexCoords = this->glUtils->glGetAttribute(this->shaderProgram_LightingPass, "texCoords");
+
         this->gl_LightingPass_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "gPosition");
         this->gl_LightingPass_Normal = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "gNormal");
         this->gl_LightingPass_AlbedoSpec = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "gAlbedoSpec");
 
-        this->lightSources.clear();
+        this->gl_LightingPass_ViewPosition = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "viewPos");
+        this->gl_LightingPass_DrawMode = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, "draw_mode");
+
         for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
             ModelDeferred_LightSource source;
             source.gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str());
@@ -268,6 +267,7 @@ bool ModelFaceDeferred::initShader_LightBox() {
 void ModelFaceDeferred::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 
+    glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
     // vertices

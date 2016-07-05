@@ -54,9 +54,10 @@ private:
     GLuint gl_GeometryPass_TextureDiffuse, gl_GeometryPass_TextureSpecular;
 
     // Lighting Pass
-    GLuint shaderProgram_LightingPass;
-    GLint gl_LightingPass_Position, gl_LightingPass_Normal, gl_LightingPass_AlbedoSpec;
     std::vector<ModelDeferred_LightSource> lightSources;
+    GLuint shaderProgram_LightingPass;
+    GLint gl_LightingPass_VPosition, gl_LightingPass_VTexCoords;
+    GLint gl_LightingPass_Position, gl_LightingPass_Normal, gl_LightingPass_AlbedoSpec;
     GLint gl_LightingPass_ViewPosition, gl_LightingPass_DrawMode;
 
     // Light Box

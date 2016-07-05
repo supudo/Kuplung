@@ -21,6 +21,7 @@
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
+		8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */; };
 		8A25A6741CB41A64003161D1 /* stormydays_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */; };
 		8A25A6751CB41A64003161D1 /* stormydays_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */; };
 		8A25A6761CB41A64003161D1 /* stormydays_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6701CB41A51003161D1 /* stormydays_front.jpg */; };
@@ -384,6 +385,8 @@
 		8A1AFB291C71FC58004888D8 /* DialogControlsModels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsModels.hpp; sourceTree = "<group>"; };
 		8A1CBAD01CA3EFA7000A171D /* MENode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode.cpp; path = materialeditor/MENode.cpp; sourceTree = "<group>"; };
 		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
+		8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredT.cpp; path = scene/ModelFaceDeferredT.cpp; sourceTree = "<group>"; };
+		8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredT.hpp; path = scene/ModelFaceDeferredT.hpp; sourceTree = "<group>"; };
 		8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_back.jpg; path = skybox/stormydays_back.jpg; sourceTree = "<group>"; };
 		8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_bottom.jpg; path = skybox/stormydays_bottom.jpg; sourceTree = "<group>"; };
 		8A25A6701CB41A51003161D1 /* stormydays_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_front.jpg; path = skybox/stormydays_front.jpg; sourceTree = "<group>"; };
@@ -891,6 +894,8 @@
 				8A5AA8D21D1A925B005BDD2E /* ModelFace.hpp */,
 				8A5AA8D31D1A925B005BDD2E /* ModelFaceDeferred.cpp */,
 				8A5AA8D41D1A925B005BDD2E /* ModelFaceDeferred.hpp */,
+				8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */,
+				8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */,
 				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
 				8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */,
 			);
@@ -1296,6 +1301,7 @@
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
+				8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
