@@ -21,6 +21,10 @@
 #include "kuplung/utilities/maths/Maths.hpp"
 #include "kuplung/meshes/helpers/BoundingBox.hpp"
 
+struct ModelDeferred_LightSource {
+    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
+};
+
 class ModelFace {
 public:
     ModelFace();

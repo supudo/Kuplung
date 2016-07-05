@@ -12,10 +12,6 @@
 #include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
-struct ModelDeferred_LightSource {
-    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
-};
-
 class ModelFaceDeferred: public ModelFace {
 public:
     void destroy();
