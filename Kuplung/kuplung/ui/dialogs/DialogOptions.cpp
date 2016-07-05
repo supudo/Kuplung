@@ -27,7 +27,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
 
     ImGui::Begin("Options", p_opened, ImGuiWindowFlags_ShowBorders);
 
-    if (ImGui::CollapsingHeader("General")) {
+    if (ImGui::CollapsingHeader("General", ImGuiTreeNodeFlags_DefaultOpen)) {
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
 
