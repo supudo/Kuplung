@@ -1,13 +1,13 @@
 //
-//  ModelFace.hpp
+//  ModelFaceBase.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ModelFace_hpp
-#define ModelFace_hpp
+#ifndef ModelFaceBase_hpp
+#define ModelFaceBase_hpp
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -25,15 +25,14 @@ struct ModelDeferred_LightSource {
     GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
 };
 
-class ModelFace {
+class ModelFaceBase {
 public:
-    ModelFace();
-    ~ModelFace();
-    ModelFace* clone(int modelID);
+    ModelFaceBase();
+    ~ModelFaceBase();
+    ModelFaceBase* clone(int modelID);
 
     void init();
     void setModel(MeshModel meshModel);
-    void initProperties();
     void initModelProperties();
     void initBoundingBox();
     void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
@@ -129,4 +128,4 @@ protected:
     std::string readFile(const char *filePath);
 };
 
-#endif /* ModelFace_hpp */
+#endif /* ModelFaceBase_hpp */

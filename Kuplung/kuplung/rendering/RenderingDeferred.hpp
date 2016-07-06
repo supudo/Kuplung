@@ -10,13 +10,13 @@
 #define RenderingDeferred_hpp
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
-#include "kuplung/meshes/scene/ModelFace.hpp"
-#include "kuplung/meshes/scene/ModelFaceDeferredMesh.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
+#include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
 
 class RenderingDeferred {
 public:
     bool init();
-    void render(std::vector<ModelFace*> meshModelFaces,
+    void render(std::vector<ModelFaceBase*> meshModelFaces,
                 glm::mat4 matrixProjection,
                 glm::mat4 matrixCamera,
                 glm::vec3 vecCameraPosition,
@@ -27,7 +27,7 @@ public:
 private:
     GLUtils *glUtils;
 
-    std::vector<ModelFaceDeferredMesh*> models;
+    std::vector<ModelFaceDeferred*> models;
     bool modelsInitialized;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
@@ -50,7 +50,7 @@ private:
     GLuint cubeVBO = 0;
     void renderCube();
 
-    void initModels(std::vector<ModelFace*> meshModelFaces);
+    void initModels(std::vector<ModelFaceBase*> meshModelFaces);
     std::string readFile(const char *filePath);
 };
 

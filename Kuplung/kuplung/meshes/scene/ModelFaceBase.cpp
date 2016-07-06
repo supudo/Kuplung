@@ -1,12 +1,12 @@
 //
-//  ModelFace.cpp
+//  ModelFaceBase.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ModelFace.hpp"
+#include "ModelFaceBase.hpp"
 #include <fstream>
 #include <boost/filesystem.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -16,11 +16,11 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-ModelFace::ModelFace() {
+ModelFaceBase::ModelFaceBase() {
 }
 
-ModelFace* ModelFace::clone(int modelID) {
-    ModelFace *mmf = new ModelFace();
+ModelFaceBase* ModelFaceBase::clone(int modelID) {
+    ModelFaceBase *mmf = new ModelFaceBase();
 
     mmf->ModelID = modelID;
 
@@ -53,11 +53,11 @@ ModelFace* ModelFace::clone(int modelID) {
 
 #pragma mark - Destroy
 
-ModelFace::~ModelFace() {
+ModelFaceBase::~ModelFaceBase() {
     this->destroy();
 }
 
-void ModelFace::destroy() {
+void ModelFaceBase::destroy() {
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
         delete this->mfLights_Directional[i];
     }
@@ -95,7 +95,7 @@ void ModelFace::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFace::init() {
+void ModelFaceBase::init() {
     this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
 
@@ -135,11 +135,11 @@ void ModelFace::init() {
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
 }
 
-void ModelFace::setModel(MeshModel meshModel) {
+void ModelFaceBase::setModel(MeshModel meshModel) {
     this->meshModel = meshModel;
 }
 
-void ModelFace::initModelProperties() {
+void ModelFaceBase::initModelProperties() {
     this->Setting_CelShading = false;
     this->Setting_Wireframe = false;
     this->Setting_Alpha = 1.0f;
@@ -200,78 +200,21 @@ void ModelFace::initModelProperties() {
     this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
-void ModelFace::initProperties() {
-    this->Setting_CelShading = false;
-    this->Setting_Alpha = 1.0f;
-    this->Settings_DeferredRender = false;
-
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->matrixModel = glm::mat4(1.0);
-
-    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 100.0f });
-
-    this->Setting_LightPosition = glm::vec3(0.0, 0.0, 0.0);
-    this->Setting_LightDirection = glm::vec3(0.0, 0.0, 0.0);
-    this->Setting_LightAmbient = glm::vec3(0.0, 0.0, 0.0);
-    this->Setting_LightDiffuse = glm::vec3(0.0, 0.0, 0.0);
-    this->Setting_LightSpecular = glm::vec3(0.0, 0.0, 0.0);
-    this->Setting_LightStrengthAmbient = 1.0;
-    this->Setting_LightStrengthDiffuse = 1.0;
-    this->Setting_LightStrengthSpecular = 1.0;
-    this->Setting_TessellationSubdivision = 1;
-    this->Setting_LightingPass_DrawMode = 1;
-
-    this->materialIlluminationModel = 1;
-    this->Setting_ParallaxMapping = false;
-    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-
-    this->Effect_GBlur_Mode = -1;
-    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-
-    this->Effect_Bloom_doBloom = false;
-    this->Effect_Bloom_WeightA = 0.0f;
-    this->Effect_Bloom_WeightB = 0.0f;
-    this->Effect_Bloom_WeightC = 0.0f;
-    this->Effect_Bloom_WeightD = 0.0f;
-    this->Effect_Bloom_Vignette = 0.0f;
-    this->Effect_Bloom_VignetteAtt = 0.0f;
-}
-
-bool ModelFace::initShaderProgram() {
+bool ModelFaceBase::initShaderProgram() {
     return true;
 }
 
-void ModelFace::initBuffers(std::string assetsFolder) {
+void ModelFaceBase::initBuffers(std::string assetsFolder) {
     this->assetsFolder = assetsFolder;
 }
 
-void ModelFace::initBoundingBox() {
+void ModelFaceBase::initBoundingBox() {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
 }
 
-void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+void ModelFaceBase::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
@@ -341,7 +284,7 @@ void ModelFace::loadTexture(std::string assetsFolder, MeshMaterialTextureImage m
     }
 }
 
-void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelFaceBase::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -352,29 +295,29 @@ void ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
 #pragma mark - Scene Options
 
-void ModelFace::setOptionsFOV(float fov) {
+void ModelFaceBase::setOptionsFOV(float fov) {
     this->so_fov = fov;
 }
 
-void ModelFace::setOptionsSelected(bool selectedYn) {
+void ModelFaceBase::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void ModelFace::setOptionsOutlineColor(glm::vec4 outlineColor) {
+void ModelFaceBase::setOptionsOutlineColor(glm::vec4 outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 
-void ModelFace::setOptionsOutlineThickness(float thickness) {
+void ModelFaceBase::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
 }
 
 #pragma mark - Utilities
 
-std::string ModelFace::readFile(const char *filePath) {
+std::string ModelFaceBase::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("[ModelFaceBase] Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";

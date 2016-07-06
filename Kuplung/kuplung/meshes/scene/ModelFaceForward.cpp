@@ -109,43 +109,43 @@ bool ModelFaceForward::initShaderProgram() {
 
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
-    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // tessellation control shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-    std::string shaderSourceTCS = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceTCS = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_tess_control = shaderSourceTCS.c_str();
 
     // tessellation evaluation shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-    std::string shaderSourceTES = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceTES = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_tess_eval = shaderSourceTES.c_str();
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
-    std::string shaderSourceGeometry = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceGeometry = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_geometry = shaderSourceGeometry.c_str();
 
     // fragment shader - parts
     std::string shaderSourceFragment;
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_vars.frag";
-    shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_effects.frag";
-    shaderSourceFragment += ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_lights.frag";
-    shaderSourceFragment += ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
-    shaderSourceFragment += ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_misc.frag";
-    shaderSourceFragment += ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
-    shaderSourceFragment += ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
 
     const char *shader_fragment = shaderSourceFragment.c_str();
 
@@ -176,7 +176,7 @@ bool ModelFaceForward::initShaderProgram() {
         if (!programSuccess) {
             GLchar ErrorLog[1024] = { 0 };
             glGetProgramInfoLog(this->shaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ModelFace] Invalid shader program: '%s'\n", ErrorLog));
+            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ModelFaceForward] Invalid shader program: '%s'\n", ErrorLog));
             return success = false;
         }
         else {
@@ -419,7 +419,7 @@ void ModelFaceForward::initBuffers(std::string assetsFolder) {
 #pragma mark - Render
 
 void ModelFaceForward::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
-    ModelFace::render(matrixProjection, matrixCamera, matrixModel, vecCameraPosition, grid, uiAmbientLight);
+    ModelFaceBase::render(matrixProjection, matrixCamera, matrixModel, vecCameraPosition, grid, uiAmbientLight);
 
     if (this->initBuffersAgain)
         this->initBuffers(this->assetsFolder);
@@ -840,11 +840,11 @@ bool ModelFaceForward::reflectionInit() {
 
     // shaders
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.vert";
-    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.frag";
-    std::string shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgramReflection = glCreateProgram();

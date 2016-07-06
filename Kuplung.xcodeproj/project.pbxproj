@@ -22,12 +22,6 @@
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
 		8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */; };
-		8A25A6741CB41A64003161D1 /* stormydays_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */; };
-		8A25A6751CB41A64003161D1 /* stormydays_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */; };
-		8A25A6761CB41A64003161D1 /* stormydays_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6701CB41A51003161D1 /* stormydays_front.jpg */; };
-		8A25A6771CB41A64003161D1 /* stormydays_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6711CB41A52003161D1 /* stormydays_left.jpg */; };
-		8A25A6781CB41A64003161D1 /* stormydays_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6721CB41A52003161D1 /* stormydays_right.jpg */; };
-		8A25A6791CB41A64003161D1 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A25A6731CB41A52003161D1 /* stormydays_top.jpg */; };
 		8A2855C61D1412DD000BE246 /* deferred_g_buffer.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */; };
 		8A2855C71D1412DE000BE246 /* deferred_g_buffer.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */; };
 		8A2855C81D1412DE000BE246 /* deferred_light_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C21D1412D2000BE246 /* deferred_light_box.frag */; };
@@ -37,7 +31,6 @@
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
-		8A3A29F71D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */; };
 		8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
@@ -71,14 +64,7 @@
 		8A55D3391CCA2E730004712D /* z_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32D1CCA2E620004712D /* z_minus.obj */; };
 		8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32E1CCA2E620004712D /* z_plus.mtl */; };
 		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
-		8A5AA8D71D1A925B005BDD2E /* ModelFace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */; };
 		8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */; };
-		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
-		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
-		8A673C9A1CB2950D004236AC /* lake_mountain_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C941CB294FE004236AC /* lake_mountain_front.jpg */; };
-		8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C951CB294FE004236AC /* lake_mountain_left.jpg */; };
-		8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C961CB294FE004236AC /* lake_mountain_right.jpg */; };
-		8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C971CB294FE004236AC /* lake_mountain_top.jpg */; };
 		8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */; };
 		8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */; };
 		8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */; };
@@ -175,12 +161,26 @@
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
 		8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */; };
-		8AECC0701CB273E90096AE7A /* fire_planet_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */; };
-		8AECC0711CB273E90096AE7A /* fire_planet_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */; };
-		8AECC0721CB273E90096AE7A /* fire_planet_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */; };
-		8AECC0731CB273E90096AE7A /* fire_planet_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */; };
-		8AECC0741CB273E90096AE7A /* fire_planet_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */; };
-		8AECC0751CB273E90096AE7A /* fire_planet_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */; };
+		8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */; };
+		8ADE509F1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */; };
+		8ADE50B21D2D41F900A6E7F0 /* fire_planet_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A01D2D41E400A6E7F0 /* fire_planet_back.jpg */; };
+		8ADE50B31D2D41F900A6E7F0 /* fire_planet_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A11D2D41E400A6E7F0 /* fire_planet_bottom.jpg */; };
+		8ADE50B41D2D41F900A6E7F0 /* fire_planet_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A21D2D41E400A6E7F0 /* fire_planet_front.jpg */; };
+		8ADE50B51D2D41F900A6E7F0 /* fire_planet_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A31D2D41E400A6E7F0 /* fire_planet_left.jpg */; };
+		8ADE50B61D2D41F900A6E7F0 /* fire_planet_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A41D2D41E400A6E7F0 /* fire_planet_right.jpg */; };
+		8ADE50B71D2D41F900A6E7F0 /* fire_planet_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A51D2D41E400A6E7F0 /* fire_planet_top.jpg */; };
+		8ADE50B81D2D41F900A6E7F0 /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A61D2D41E400A6E7F0 /* lake_mountain_back.jpg */; };
+		8ADE50B91D2D41F900A6E7F0 /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A71D2D41E400A6E7F0 /* lake_mountain_bottom.jpg */; };
+		8ADE50BA1D2D41F900A6E7F0 /* lake_mountain_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A81D2D41E400A6E7F0 /* lake_mountain_front.jpg */; };
+		8ADE50BB1D2D41F900A6E7F0 /* lake_mountain_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A91D2D41E400A6E7F0 /* lake_mountain_left.jpg */; };
+		8ADE50BC1D2D41F900A6E7F0 /* lake_mountain_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AA1D2D41E400A6E7F0 /* lake_mountain_right.jpg */; };
+		8ADE50BD1D2D41F900A6E7F0 /* lake_mountain_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AB1D2D41E400A6E7F0 /* lake_mountain_top.jpg */; };
+		8ADE50BE1D2D41F900A6E7F0 /* stormydays_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AC1D2D41E400A6E7F0 /* stormydays_back.jpg */; };
+		8ADE50BF1D2D41F900A6E7F0 /* stormydays_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AD1D2D41E400A6E7F0 /* stormydays_bottom.jpg */; };
+		8ADE50C01D2D41F900A6E7F0 /* stormydays_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AE1D2D41E400A6E7F0 /* stormydays_front.jpg */; };
+		8ADE50C11D2D41F900A6E7F0 /* stormydays_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */; };
+		8ADE50C21D2D41F900A6E7F0 /* stormydays_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */; };
+		8ADE50C31D2D41F900A6E7F0 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */; };
 		8AECC07B1CB274810096AE7A /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
 		8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
 /* End PBXBuildFile section */
@@ -338,24 +338,24 @@
 			dstPath = skybox;
 			dstSubfolderSpec = 7;
 			files = (
-				8AECC0701CB273E90096AE7A /* fire_planet_back.jpg in CopyFiles */,
-				8AECC0711CB273E90096AE7A /* fire_planet_bottom.jpg in CopyFiles */,
-				8AECC0721CB273E90096AE7A /* fire_planet_front.jpg in CopyFiles */,
-				8AECC0731CB273E90096AE7A /* fire_planet_left.jpg in CopyFiles */,
-				8AECC0741CB273E90096AE7A /* fire_planet_right.jpg in CopyFiles */,
-				8AECC0751CB273E90096AE7A /* fire_planet_top.jpg in CopyFiles */,
-				8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */,
-				8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */,
-				8A673C9A1CB2950D004236AC /* lake_mountain_front.jpg in CopyFiles */,
-				8A673C9B1CB2950D004236AC /* lake_mountain_left.jpg in CopyFiles */,
-				8A673C9C1CB2950D004236AC /* lake_mountain_right.jpg in CopyFiles */,
-				8A673C9D1CB2950D004236AC /* lake_mountain_top.jpg in CopyFiles */,
-				8A25A6741CB41A64003161D1 /* stormydays_back.jpg in CopyFiles */,
-				8A25A6751CB41A64003161D1 /* stormydays_bottom.jpg in CopyFiles */,
-				8A25A6761CB41A64003161D1 /* stormydays_front.jpg in CopyFiles */,
-				8A25A6771CB41A64003161D1 /* stormydays_left.jpg in CopyFiles */,
-				8A25A6781CB41A64003161D1 /* stormydays_right.jpg in CopyFiles */,
-				8A25A6791CB41A64003161D1 /* stormydays_top.jpg in CopyFiles */,
+				8ADE50B21D2D41F900A6E7F0 /* fire_planet_back.jpg in CopyFiles */,
+				8ADE50B31D2D41F900A6E7F0 /* fire_planet_bottom.jpg in CopyFiles */,
+				8ADE50B41D2D41F900A6E7F0 /* fire_planet_front.jpg in CopyFiles */,
+				8ADE50B51D2D41F900A6E7F0 /* fire_planet_left.jpg in CopyFiles */,
+				8ADE50B61D2D41F900A6E7F0 /* fire_planet_right.jpg in CopyFiles */,
+				8ADE50B71D2D41F900A6E7F0 /* fire_planet_top.jpg in CopyFiles */,
+				8ADE50B81D2D41F900A6E7F0 /* lake_mountain_back.jpg in CopyFiles */,
+				8ADE50B91D2D41F900A6E7F0 /* lake_mountain_bottom.jpg in CopyFiles */,
+				8ADE50BA1D2D41F900A6E7F0 /* lake_mountain_front.jpg in CopyFiles */,
+				8ADE50BB1D2D41F900A6E7F0 /* lake_mountain_left.jpg in CopyFiles */,
+				8ADE50BC1D2D41F900A6E7F0 /* lake_mountain_right.jpg in CopyFiles */,
+				8ADE50BD1D2D41F900A6E7F0 /* lake_mountain_top.jpg in CopyFiles */,
+				8ADE50BE1D2D41F900A6E7F0 /* stormydays_back.jpg in CopyFiles */,
+				8ADE50BF1D2D41F900A6E7F0 /* stormydays_bottom.jpg in CopyFiles */,
+				8ADE50C01D2D41F900A6E7F0 /* stormydays_front.jpg in CopyFiles */,
+				8ADE50C11D2D41F900A6E7F0 /* stormydays_left.jpg in CopyFiles */,
+				8ADE50C21D2D41F900A6E7F0 /* stormydays_right.jpg in CopyFiles */,
+				8ADE50C31D2D41F900A6E7F0 /* stormydays_top.jpg in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,12 +388,6 @@
 		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
 		8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredT.cpp; path = scene/ModelFaceDeferredT.cpp; sourceTree = "<group>"; };
 		8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredT.hpp; path = scene/ModelFaceDeferredT.hpp; sourceTree = "<group>"; };
-		8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_back.jpg; path = skybox/stormydays_back.jpg; sourceTree = "<group>"; };
-		8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_bottom.jpg; path = skybox/stormydays_bottom.jpg; sourceTree = "<group>"; };
-		8A25A6701CB41A51003161D1 /* stormydays_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_front.jpg; path = skybox/stormydays_front.jpg; sourceTree = "<group>"; };
-		8A25A6711CB41A52003161D1 /* stormydays_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_left.jpg; path = skybox/stormydays_left.jpg; sourceTree = "<group>"; };
-		8A25A6721CB41A52003161D1 /* stormydays_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_right.jpg; path = skybox/stormydays_right.jpg; sourceTree = "<group>"; };
-		8A25A6731CB41A52003161D1 /* stormydays_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_top.jpg; path = skybox/stormydays_top.jpg; sourceTree = "<group>"; };
 		8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.frag; sourceTree = "<group>"; };
 		8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.vert; sourceTree = "<group>"; };
 		8A2855C21D1412D2000BE246 /* deferred_light_box.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_light_box.frag; sourceTree = "<group>"; };
@@ -406,8 +400,6 @@
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
-		8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredMesh.cpp; path = scene/ModelFaceDeferredMesh.cpp; sourceTree = "<group>"; };
-		8A3A29F61D2D0B4800F26AE4 /* ModelFaceDeferredMesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredMesh.hpp; path = scene/ModelFaceDeferredMesh.hpp; sourceTree = "<group>"; };
 		8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingDeferred.cpp; path = rendering/RenderingDeferred.cpp; sourceTree = "<group>"; };
 		8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingDeferred.hpp; path = rendering/RenderingDeferred.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
@@ -440,16 +432,8 @@
 		8A55D32D1CCA2E620004712D /* z_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_minus.obj; path = axis_helpers/z_minus.obj; sourceTree = "<group>"; };
 		8A55D32E1CCA2E620004712D /* z_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.mtl; path = axis_helpers/z_plus.mtl; sourceTree = "<group>"; };
 		8A55D32F1CCA2E620004712D /* z_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.obj; path = axis_helpers/z_plus.obj; sourceTree = "<group>"; };
-		8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFace.cpp; path = scene/ModelFace.cpp; sourceTree = "<group>"; };
-		8A5AA8D21D1A925B005BDD2E /* ModelFace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFace.hpp; path = scene/ModelFace.hpp; sourceTree = "<group>"; };
 		8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceForward.cpp; path = scene/ModelFaceForward.cpp; sourceTree = "<group>"; };
 		8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceForward.hpp; path = scene/ModelFaceForward.hpp; sourceTree = "<group>"; };
-		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
-		8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_bottom.jpg; path = skybox/lake_mountain_bottom.jpg; sourceTree = "<group>"; };
-		8A673C941CB294FE004236AC /* lake_mountain_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_front.jpg; path = skybox/lake_mountain_front.jpg; sourceTree = "<group>"; };
-		8A673C951CB294FE004236AC /* lake_mountain_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_left.jpg; path = skybox/lake_mountain_left.jpg; sourceTree = "<group>"; };
-		8A673C961CB294FE004236AC /* lake_mountain_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_right.jpg; path = skybox/lake_mountain_right.jpg; sourceTree = "<group>"; };
-		8A673C971CB294FE004236AC /* lake_mountain_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_top.jpg; path = skybox/lake_mountain_top.jpg; sourceTree = "<group>"; };
 		8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRenderer.cpp; path = renderers/ImageRenderer.cpp; sourceTree = "<group>"; };
 		8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageRenderer.hpp; path = renderers/ImageRenderer.hpp; sourceTree = "<group>"; };
 		8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneRenderer.cpp; path = "renderers/scene-renderer/SceneRenderer.cpp"; sourceTree = "<group>"; };
@@ -610,12 +594,28 @@
 		8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MaterialEditor.cpp; path = materialeditor/MaterialEditor.cpp; sourceTree = "<group>"; };
 		8AD91DAB1CA3D989004674BC /* MaterialEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MaterialEditor.hpp; path = materialeditor/MaterialEditor.hpp; sourceTree = "<group>"; };
 		8AD91DAC1CA3D989004674BC /* MaterialEditorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialEditorData.h; path = materialeditor/MaterialEditorData.h; sourceTree = "<group>"; };
-		8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_back.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_back.jpg"; sourceTree = SOURCE_ROOT; };
-		8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_bottom.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_bottom.jpg"; sourceTree = SOURCE_ROOT; };
-		8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_front.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_front.jpg"; sourceTree = SOURCE_ROOT; };
-		8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_left.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_left.jpg"; sourceTree = SOURCE_ROOT; };
-		8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_right.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_right.jpg"; sourceTree = SOURCE_ROOT; };
-		8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_top.jpg; path = "build-Kuplung-Desktop_Qt_5_6_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/skybox/fire_planet_top.jpg"; sourceTree = SOURCE_ROOT; };
+		8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceBase.cpp; path = scene/ModelFaceBase.cpp; sourceTree = "<group>"; };
+		8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceBase.hpp; path = scene/ModelFaceBase.hpp; sourceTree = "<group>"; };
+		8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferred.cpp; path = scene/ModelFaceDeferred.cpp; sourceTree = "<group>"; };
+		8ADE509D1D2D418C00A6E7F0 /* ModelFaceDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferred.hpp; path = scene/ModelFaceDeferred.hpp; sourceTree = "<group>"; };
+		8ADE50A01D2D41E400A6E7F0 /* fire_planet_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_back.jpg; path = skybox/fire_planet_back.jpg; sourceTree = "<group>"; };
+		8ADE50A11D2D41E400A6E7F0 /* fire_planet_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_bottom.jpg; path = skybox/fire_planet_bottom.jpg; sourceTree = "<group>"; };
+		8ADE50A21D2D41E400A6E7F0 /* fire_planet_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_front.jpg; path = skybox/fire_planet_front.jpg; sourceTree = "<group>"; };
+		8ADE50A31D2D41E400A6E7F0 /* fire_planet_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_left.jpg; path = skybox/fire_planet_left.jpg; sourceTree = "<group>"; };
+		8ADE50A41D2D41E400A6E7F0 /* fire_planet_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_right.jpg; path = skybox/fire_planet_right.jpg; sourceTree = "<group>"; };
+		8ADE50A51D2D41E400A6E7F0 /* fire_planet_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_top.jpg; path = skybox/fire_planet_top.jpg; sourceTree = "<group>"; };
+		8ADE50A61D2D41E400A6E7F0 /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
+		8ADE50A71D2D41E400A6E7F0 /* lake_mountain_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_bottom.jpg; path = skybox/lake_mountain_bottom.jpg; sourceTree = "<group>"; };
+		8ADE50A81D2D41E400A6E7F0 /* lake_mountain_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_front.jpg; path = skybox/lake_mountain_front.jpg; sourceTree = "<group>"; };
+		8ADE50A91D2D41E400A6E7F0 /* lake_mountain_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_left.jpg; path = skybox/lake_mountain_left.jpg; sourceTree = "<group>"; };
+		8ADE50AA1D2D41E400A6E7F0 /* lake_mountain_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_right.jpg; path = skybox/lake_mountain_right.jpg; sourceTree = "<group>"; };
+		8ADE50AB1D2D41E400A6E7F0 /* lake_mountain_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_top.jpg; path = skybox/lake_mountain_top.jpg; sourceTree = "<group>"; };
+		8ADE50AC1D2D41E400A6E7F0 /* stormydays_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_back.jpg; path = skybox/stormydays_back.jpg; sourceTree = "<group>"; };
+		8ADE50AD1D2D41E400A6E7F0 /* stormydays_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_bottom.jpg; path = skybox/stormydays_bottom.jpg; sourceTree = "<group>"; };
+		8ADE50AE1D2D41E400A6E7F0 /* stormydays_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_front.jpg; path = skybox/stormydays_front.jpg; sourceTree = "<group>"; };
+		8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_left.jpg; path = skybox/stormydays_left.jpg; sourceTree = "<group>"; };
+		8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_right.jpg; path = skybox/stormydays_right.jpg; sourceTree = "<group>"; };
+		8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_top.jpg; path = skybox/stormydays_top.jpg; sourceTree = "<group>"; };
 		8AECC0791CB274610096AE7A /* skybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.frag; sourceTree = "<group>"; };
 		8AECC07A1CB274610096AE7A /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -902,10 +902,10 @@
 		8A81DDAA1D1A82AB004F3270 /* scene */ = {
 			isa = PBXGroup;
 			children = (
-				8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */,
-				8A5AA8D21D1A925B005BDD2E /* ModelFace.hpp */,
-				8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */,
-				8A3A29F61D2D0B4800F26AE4 /* ModelFaceDeferredMesh.hpp */,
+				8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */,
+				8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */,
+				8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */,
+				8ADE509D1D2D418C00A6E7F0 /* ModelFaceDeferred.hpp */,
 				8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */,
 				8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */,
 				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
@@ -1202,24 +1202,24 @@
 		8AECC0681CB273CD0096AE7A /* skybox */ = {
 			isa = PBXGroup;
 			children = (
-				8AECC0691CB273D40096AE7A /* fire_planet_back.jpg */,
-				8AECC06A1CB273D40096AE7A /* fire_planet_bottom.jpg */,
-				8AECC06B1CB273D40096AE7A /* fire_planet_front.jpg */,
-				8AECC06C1CB273D40096AE7A /* fire_planet_left.jpg */,
-				8AECC06D1CB273D40096AE7A /* fire_planet_right.jpg */,
-				8AECC06E1CB273D40096AE7A /* fire_planet_top.jpg */,
-				8A673C921CB294FE004236AC /* lake_mountain_back.jpg */,
-				8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */,
-				8A673C941CB294FE004236AC /* lake_mountain_front.jpg */,
-				8A673C951CB294FE004236AC /* lake_mountain_left.jpg */,
-				8A673C961CB294FE004236AC /* lake_mountain_right.jpg */,
-				8A673C971CB294FE004236AC /* lake_mountain_top.jpg */,
-				8A25A66E1CB41A51003161D1 /* stormydays_back.jpg */,
-				8A25A66F1CB41A51003161D1 /* stormydays_bottom.jpg */,
-				8A25A6701CB41A51003161D1 /* stormydays_front.jpg */,
-				8A25A6711CB41A52003161D1 /* stormydays_left.jpg */,
-				8A25A6721CB41A52003161D1 /* stormydays_right.jpg */,
-				8A25A6731CB41A52003161D1 /* stormydays_top.jpg */,
+				8ADE50A01D2D41E400A6E7F0 /* fire_planet_back.jpg */,
+				8ADE50A11D2D41E400A6E7F0 /* fire_planet_bottom.jpg */,
+				8ADE50A21D2D41E400A6E7F0 /* fire_planet_front.jpg */,
+				8ADE50A31D2D41E400A6E7F0 /* fire_planet_left.jpg */,
+				8ADE50A41D2D41E400A6E7F0 /* fire_planet_right.jpg */,
+				8ADE50A51D2D41E400A6E7F0 /* fire_planet_top.jpg */,
+				8ADE50A61D2D41E400A6E7F0 /* lake_mountain_back.jpg */,
+				8ADE50A71D2D41E400A6E7F0 /* lake_mountain_bottom.jpg */,
+				8ADE50A81D2D41E400A6E7F0 /* lake_mountain_front.jpg */,
+				8ADE50A91D2D41E400A6E7F0 /* lake_mountain_left.jpg */,
+				8ADE50AA1D2D41E400A6E7F0 /* lake_mountain_right.jpg */,
+				8ADE50AB1D2D41E400A6E7F0 /* lake_mountain_top.jpg */,
+				8ADE50AC1D2D41E400A6E7F0 /* stormydays_back.jpg */,
+				8ADE50AD1D2D41E400A6E7F0 /* stormydays_bottom.jpg */,
+				8ADE50AE1D2D41E400A6E7F0 /* stormydays_front.jpg */,
+				8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */,
+				8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */,
+				8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */,
 			);
 			name = skybox;
 			sourceTree = "<group>";
@@ -1296,8 +1296,6 @@
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
-				8A3A29F71D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp in Sources */,
-				8A5AA8D71D1A925B005BDD2E /* ModelFace.cpp in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
@@ -1317,6 +1315,7 @@
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
 				8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */,
+				8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
@@ -1326,6 +1325,7 @@
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
+				8ADE509F1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,

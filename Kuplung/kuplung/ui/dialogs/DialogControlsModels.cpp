@@ -99,7 +99,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
 }
 
 void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture) {
-    ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
+    ModelFaceBase *mmf = (*meshModelFaces)[this->selectedObject];
     std::string image, title;
     bool * useTexture;
     switch (texType) {
@@ -217,7 +217,7 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
     }
 }
 
-void DialogControlsModels::showTextureImage(ModelFace* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
+void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height) {
     int wWidth, wHeight, tWidth, tHeight, posX, posY;
     SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
 
@@ -269,7 +269,7 @@ void DialogControlsModels::showTextureImage(ModelFace* mmf, MaterialTextureType 
     *genTexture = false;
 }
 
-void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFace*> * meshModelFaces, int * sceneSelectedModelObject) {
+void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * meshModelFaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
@@ -319,12 +319,12 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::End();
 }
 
-void DialogControlsModels::processTexture(ModelFace *mmf) {
+void DialogControlsModels::processTexture(ModelFaceBase *mmf) {
     this->showUVEditor = false;
     (*this->meshModelFaces)[this->selectedObject] = mmf;
 }
 
-void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * meshModelFaces) {
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*> * meshModelFaces) {
     this->meshModelFaces = meshModelFaces;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
@@ -388,7 +388,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFace*> * m
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
     if (this->selectedObject > -1) {
-        ModelFace *mmf = (*meshModelFaces)[this->selectedObject];
+        ModelFaceBase *mmf = (*meshModelFaces)[this->selectedObject];
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.File.title.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "ModelFace:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.ModelTitle.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.MaterialTitle.c_str());
@@ -606,7 +606,7 @@ void DialogControlsModels::drawCreate() {
     if (ImGui::Button("Spot (Flashlight)", ImVec2(-1, 0))) this->funcAddLight(LightSourceType_Spot);
 }
 
-void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshModelFaces) {
+void DialogControlsModels::contextModelRename(std::vector<ModelFaceBase*> * meshModelFaces) {
     ImGui::OpenPopup("Rename");
 
     ImGui::BeginPopupModal("Rename", NULL, ImGuiWindowFlags_AlwaysAutoResize);
@@ -634,7 +634,7 @@ void DialogControlsModels::contextModelRename(std::vector<ModelFace*> * meshMode
     ImGui::EndPopup();
 }
 
-void DialogControlsModels::contextModelDelete(std::vector<ModelFace*> * meshModelFaces) {
+void DialogControlsModels::contextModelDelete(std::vector<ModelFaceBase*> * meshModelFaces) {
 //    ImGui::SetNextWindowPos(ImGui::GetIO().MouseClickedPos[0]);
 
     ImGui::OpenPopup("Delete?");

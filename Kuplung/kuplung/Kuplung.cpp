@@ -20,7 +20,7 @@ Kuplung::~Kuplung() {
 
 void Kuplung::destroy() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFace *mmf = this->meshModelFaces[i];
+        ModelFaceBase *mmf = this->meshModelFaces[i];
         mmf->destroy();
     }
 
@@ -305,7 +305,7 @@ void Kuplung::addTerrainModel() {
     this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain = true;
     this->managerObjects->terrain->Setting_UseTexture = true;
 
-    ModelFace *mmf = new ModelFace();
+    ModelFaceBase *mmf = new ModelFaceBase();
     mmf->dataVertices = this->managerObjects->grid->dataVertices;
     mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
     mmf->dataNormals = this->managerObjects->grid->dataNormals;
@@ -327,7 +327,7 @@ void Kuplung::addTerrainModel() {
 void Kuplung::addSpaceshipModel() {
     this->managerObjects->spaceship->spaceshipGenerator->generate(this->managerObjects->Setting_GridSize);
 
-    ModelFace *mmf = new ModelFace();
+    ModelFaceBase *mmf = new ModelFaceBase();
     mmf->dataVertices = this->managerObjects->grid->dataVertices;
     mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
     mmf->dataNormals = this->managerObjects->grid->dataNormals;
@@ -378,7 +378,7 @@ void Kuplung::renderSceneModels() {
         int cTriangles = 0;
         int cFaces = 0;
         for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-            ModelFace* mmf = this->meshModelFaces[i];
+            ModelFaceBase* mmf = this->meshModelFaces[i];
 
             glm::mat4 mtxModel = glm::mat4(1.0);
 
@@ -583,7 +583,7 @@ void Kuplung::guiSceneExport(FBEntity file) {
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces) {
+void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces) {
     this->managerExporter->exportScene(file, meshModelFaces);
     this->exporterThreadFinished = true;
 }
@@ -601,9 +601,9 @@ void Kuplung::processParsedObjFile() {
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
-            ModelFace *mmf;
+            ModelFaceBase *mmf;
             if (Settings::Instance()->DeferredRendering)
-                mmf = new ModelFace();
+                mmf = new ModelFaceBase();
             else
                 mmf = new ModelFaceForward();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;

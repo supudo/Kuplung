@@ -9,14 +9,11 @@
 #ifndef ModelFaceForward_hpp
 #define ModelFaceForward_hpp
 
-#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
-class ModelFaceForward: public ModelFace {
+class ModelFaceForward: public ModelFaceBase {
 public:
     void init();
-    void setModel(MeshModel meshModel);
-    void initProperties();
-    void initModelProperties();
     void renderModel();
 
     void destroy();

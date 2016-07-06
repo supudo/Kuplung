@@ -20,7 +20,7 @@ void ImageRenderer::init() {
     this->rendererScene->init();
 }
 
-void ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFace*> *meshModelFaces, ObjectsManager *managerObjects) {
+void ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, ObjectsManager *managerObjects) {
     if (type == ImageRendererType_Scene)
         this->rendererScene->renderImage(file, meshModelFaces, managerObjects);
 }

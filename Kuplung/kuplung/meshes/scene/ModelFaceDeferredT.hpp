@@ -9,10 +9,10 @@
 #ifndef ModelFaceDeferredT_hpp
 #define ModelFaceDeferredT_hpp
 
-#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
-class ModelFaceDeferredT: public ModelFace {
+class ModelFaceDeferredT: public ModelFaceBase {
 public:
     void destroy();
     bool initShaderProgram();

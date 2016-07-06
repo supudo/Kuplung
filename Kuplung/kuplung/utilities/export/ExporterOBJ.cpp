@@ -28,13 +28,13 @@ void ExporterOBJ::init(std::function<void(float)> doProgress) {
 #endif
 }
 
-void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFace*> faces) {
+void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces) {
     this->exportFile = file;
     this->exportGeometry(faces);
     this->exportMaterials(faces);
 }
 
-std::string ExporterOBJ::exportMesh(ModelFace *face) {
+std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     MeshModel model = face->meshModel;
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
@@ -125,7 +125,7 @@ std::string ExporterOBJ::exportMesh(ModelFace *face) {
     return meshData;
 }
 
-void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
+void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
     std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
     fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
@@ -165,7 +165,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFace*> faces) {
     }
 }
 
-void ExporterOBJ::exportMaterials(std::vector<ModelFace*> faces) {
+void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
     std::map<std::string, std::string> materials;
     for (int i=0; i<(int)faces.size(); i++) {
         MeshModelMaterial mat = faces[i]->meshModel.ModelMaterial;

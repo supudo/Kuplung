@@ -231,8 +231,8 @@ void HeightmapGenerator::generateSphereGeometry() {
     glm::vec3 position, color;
     glm::vec2 uv;
     utils::Color c;
-    for (int y=0; y<heightmapHeight; ++y) {
-        for (int x=0; x<heightmapWidth; ++x) {
+    for (unsigned int y=0; y<heightmapHeight; ++y) {
+        for (unsigned int x=0; x<heightmapWidth; ++x) {
             hmValue = this->heightMap.GetValue(x, y);
             p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr));
             p_y = float(sin(-pi_2 + pi * y * rr));

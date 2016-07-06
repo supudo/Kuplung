@@ -17,7 +17,7 @@
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/components/FileBrowser.hpp"
-#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/ui/components/uveditor/UVPoint.hpp"
 
 struct UVLine {
@@ -36,13 +36,13 @@ typedef enum UVUnwrappingMethod {
 class UVEditor {
 public:
     void init(int positionX, int positionY, int width, int height);
-    void setModel(ModelFace *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFace*)> funcProcessTexture);
+    void setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFaceBase*)> funcProcessTexture);
     void draw(const char* title, bool* p_opened = NULL);
 
 private:
-    std::function<void(ModelFace*)> funcProcessTexture;
+    std::function<void(ModelFaceBase*)> funcProcessTexture;
 
-    ModelFace *mmf;
+    ModelFaceBase *mmf;
     std::string texturePath, textureImage, textureFilename;
     int positionX, positionY, width, height, textureWidth, textureHeight;
     bool showFileBrowser, textureLoaded;

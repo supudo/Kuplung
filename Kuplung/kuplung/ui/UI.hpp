@@ -23,7 +23,7 @@
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
 #include "kuplung/ui/dialogs/DialogControlsModels.hpp"
-#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
 class UI {
@@ -60,7 +60,7 @@ public:
     void showExporting();
     void hideExporting();
 
-    std::vector<ModelFace*> *meshModelFaces;
+    std::vector<ModelFaceBase*> *meshModelFaces;
     bool isFrame;
     bool isParsingOpen, isLoadingOpen, isExportingOpen;
     bool showControlsGUI;

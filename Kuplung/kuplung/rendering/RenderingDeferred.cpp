@@ -177,16 +177,16 @@ bool RenderingDeferred::init() {
     return true;
 }
 
-void RenderingDeferred::initModels(std::vector<ModelFace*> meshModelFaces) {
+void RenderingDeferred::initModels(std::vector<ModelFaceBase*> meshModelFaces) {
     for (size_t j=0; j<meshModelFaces.size(); j++) {
-        ModelFaceDeferredMesh *mfdm = new ModelFaceDeferredMesh();
+        ModelFaceDeferred *mfdm = new ModelFaceDeferred();
         mfdm->init(meshModelFaces[j]->meshModel, Settings::Instance()->currentFolder);
         this->models.push_back(mfdm);
     }
     this->modelsInitialized = true;
 }
 
-void RenderingDeferred::render(std::vector<ModelFace*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
+void RenderingDeferred::render(std::vector<ModelFaceBase*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
     if (!this->modelsInitialized)
         this->initModels(meshModelFaces);
 

@@ -16,7 +16,7 @@
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
-#include "kuplung/meshes/scene/ModelFace.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/rendering/RenderingDeferred.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
@@ -50,7 +50,7 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
-    void exportSceneAsync(FBEntity file, std::vector<ModelFace*> meshModelFaces);
+    void exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();
@@ -94,7 +94,7 @@ private:
     Exporter *managerExporter;
     ImageRenderer *imageRenderer;
     std::vector<MeshModel> meshModels, meshModelsNew;
-    std::vector<ModelFace*> meshModelFaces;
+    std::vector<ModelFaceBase*> meshModelFaces;
     std::vector<RayLine*> rayLines;
 };
 

@@ -19,10 +19,10 @@ void ModelFaceDeferredT::destroy() {
 bool ModelFaceDeferredT::initShaderProgram() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
-    std::string shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.frag";
-    std::string shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
 
     this->shaderProgram_GeometryPass = glCreateProgram();
 
@@ -45,10 +45,10 @@ bool ModelFaceDeferredT::initShaderProgram() {
 
     // Lighting Pass
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
-    shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
+    shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.frag";
-    shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
 
     this->shaderProgram_LightingPass = glCreateProgram();
 
@@ -71,10 +71,10 @@ bool ModelFaceDeferredT::initShaderProgram() {
 
     // Light Boxes
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    shaderSourceVertex = ModelFace::readFile(shaderPath.c_str());
+    shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    shaderSourceFragment = ModelFace::readFile(shaderPath.c_str());
+    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
 
     this->shaderProgram_LightBox = glCreateProgram();
 
@@ -208,8 +208,8 @@ void ModelFaceDeferredT::initBuffers(std::string assetsFolder) {
         glEnableVertexAttribArray(2);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
-        ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_TextureDiffuse);
-        ModelFace::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_TextureSpecular);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Diffuse, &this->gl_TextureDiffuse);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->gl_TextureSpecular);
     }
 
     // indices

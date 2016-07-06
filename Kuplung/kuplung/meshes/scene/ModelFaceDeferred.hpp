@@ -9,30 +9,19 @@
 #ifndef ModelFaceDeferred_hpp
 #define ModelFaceDeferred_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
-#include "kuplung/meshes/scene/ModelFace.hpp"
-#include "kuplung/meshes/scene/ModelFaceDeferredMesh.hpp"
+#include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
-class ModelFaceDeferred {
+class ModelFaceDeferred: public ModelFaceBase {
 public:
-    bool init();
-    void render(std::vector<ModelFace*> meshModelFaces,
-                glm::mat4 matrixProjection,
-                glm::mat4 matrixCamera,
-                glm::vec3 vecCameraPosition,
-                WorldGrid *grid,
-                glm::vec3 uiAmbientLight,
-                int lightingPass_DrawMode);
+    void init(MeshModel model, std::string assetsFolder);
+    void renderModel(GLuint shader);
 
 private:
     GLUtils *glUtils;
+    Maths *mathHelper;
 
-    std::vector<ModelFaceDeferredMesh*> models;
-    bool modelsInitialized;
-
-    GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
-    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
-    GLuint gl_TextureDiffuse, gl_TextureSpecular;
+    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
+    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
 
     GLuint gBuffer;
     GLuint gPosition, gNormal, gAlbedoSpec;
@@ -50,7 +39,7 @@ private:
     GLuint cubeVBO = 0;
     void renderCube();
 
-    void initModels(std::vector<ModelFace*> meshModelFaces);
+    void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
     std::string readFile(const char *filePath);
 };
 
