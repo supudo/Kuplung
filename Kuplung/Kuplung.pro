@@ -107,6 +107,8 @@ OTHER_FILES += resources/axis_helpers/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
+    kuplung/rendering/RenderingManager.cpp \
+    kuplung/rendering/RenderingForward.cpp \
     kuplung/rendering/RenderingDeferred.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
     kuplung/meshes/scene/ModelFaceForward.cpp \
@@ -173,6 +175,8 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
+    kuplung/rendering/RenderingManager.hpp \
+    kuplung/rendering/RenderingForward.hpp \
     kuplung/rendering/RenderingDeferred.hpp \
     kuplung/meshes/scene/ModelFaceBase.hpp \
     kuplung/meshes/scene/ModelFaceForward.hpp \

@@ -14,7 +14,6 @@
 class ModelFaceForward: public ModelFaceBase {
 public:
     void init();
-    void renderModel();
 
     void destroy();
     bool initShaderProgram();
@@ -22,6 +21,7 @@ public:
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
 private:
+    void renderModel();
     void drawOutline();
     void drawOnly();
 

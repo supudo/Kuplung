@@ -193,7 +193,7 @@ void RenderingDeferred::render(std::vector<ModelFaceBase*> meshModelFaces, glm::
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
-    glBindFramebuffer(GL_FRAMEBUFFER, gBuffer);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glm::mat4 projection = matrixProjection;
         glm::mat4 view = matrixCamera;
@@ -265,7 +265,7 @@ void RenderingDeferred::render(std::vector<ModelFaceBase*> meshModelFaces, glm::
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    for (GLuint i = 0; i < lightPositions.size(); i++)
+    for (GLuint i = 0; i < this->lightPositions.size(); i++)
     {
         model = glm::mat4();
         model = glm::translate(model, lightPositions[i]);

@@ -177,8 +177,8 @@ bool Kuplung::init() {
                     this->imageRenderer = new ImageRenderer();
                     this->imageRenderer->init();
 
-                    this->rendererDeferred = new RenderingDeferred();
-                    this->rendererDeferred->init();
+                    this->renderingManager = new RenderingManager();
+                    this->renderingManager->init();
                 }
             }
         }
@@ -365,7 +365,7 @@ void Kuplung::renderScene() {
 
 void Kuplung::renderSceneModels() {
     if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
-        this->rendererDeferred->render(this->meshModelFaces,
+        this->renderingManager->render(this->meshModelFaces,
                                        this->managerObjects->matrixProjection,
                                        this->managerObjects->camera->matrixCamera,
                                        this->managerObjects->camera->cameraPosition,

@@ -13,7 +13,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 void ModelFaceDeferred::init(MeshModel model, std::string assetsFolder) {
-    this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
@@ -44,25 +43,25 @@ void ModelFaceDeferred::init(MeshModel model, std::string assetsFolder) {
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         // ambient texture image
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureAmbient, objMaterialImageType_Bump, &this->vboTextureAmbient);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureAmbient, objMaterialImageType_Bump, &this->vboTextureAmbient);
 
         // diffuse texture image
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDiffuse, objMaterialImageType_Bump, &this->vboTextureDiffuse);
 
         // specular texture image
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->vboTextureSpecular);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecular, objMaterialImageType_Specular, &this->vboTextureSpecular);
 
         // specular-exp texture image
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecularExp, objMaterialImageType_SpecularExp, &this->vboTextureSpecularExp);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureSpecularExp, objMaterialImageType_SpecularExp, &this->vboTextureSpecularExp);
 
         // dissolve texture image
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDissolve, objMaterialImageType_Dissolve, &this->vboTextureDissolve);
 
         // bump map texture
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureBump, objMaterialImageType_Bump, &this->vboTextureBump);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureBump, objMaterialImageType_Bump, &this->vboTextureBump);
 
         // displacement map texture
-        this->loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDisplacement, objMaterialImageType_Displacement, &this->vboTextureDisplacement);
+        ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureDisplacement, objMaterialImageType_Displacement, &this->vboTextureDisplacement);
     }
 
     // indices
@@ -142,74 +141,4 @@ void ModelFaceDeferred::renderModel(GLuint shader) {
     glBindVertexArray(this->glVAO);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
-}
-
-void ModelFaceDeferred::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
-    if (materialImage.Image != "") {
-        std::string matImageLocal = materialImage.Image;
-        if (!boost::filesystem::exists(matImageLocal))
-            matImageLocal = assetsFolder + "/" + materialImage.Image;
-
-        int tWidth, tHeight, tChannels;
-        unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
-        if (!tPixels) {
-            std::string texName = "";
-            switch (type) {
-                case objMaterialImageType_Ambient:
-                    texName = "ambient";
-                    break;
-                case objMaterialImageType_Diffuse:
-                    texName = "diffuse";
-                    break;
-                case objMaterialImageType_Specular:
-                    texName = "specular";
-                    break;
-                case objMaterialImageType_SpecularExp:
-                    texName = "specularExp";
-                    break;
-                case objMaterialImageType_Dissolve:
-                    texName = "dissolve";
-                    break;
-                case objMaterialImageType_Bump:
-                    texName = "bump";
-                    break;
-                case objMaterialImageType_Displacement:
-                    texName = "displacement";
-                    break;
-                default:
-                    break;
-            }
-            Settings::Instance()->funcDoLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
-        }
-        else {
-            glGenTextures(1, vboObject);
-            glBindTexture(GL_TEXTURE_2D, *vboObject);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-            glGenerateMipmap(GL_TEXTURE_2D);
-
-            GLint textureFormat = 0;
-            switch (tChannels) {
-                case 1:
-                    textureFormat = GL_LUMINANCE;
-                    break;
-                case 2:
-                    textureFormat = GL_LUMINANCE_ALPHA;
-                    break;
-                case 3:
-                    textureFormat = GL_RGB;
-                    break;
-                case 4:
-                    textureFormat = GL_RGBA;
-                    break;
-                default:
-                    textureFormat = GL_RGB;
-                    break;
-            }
-            glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
-            stbi_image_free(tPixels);
-        }
-    }
 }
