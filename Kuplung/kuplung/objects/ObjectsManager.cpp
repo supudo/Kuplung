@@ -77,6 +77,7 @@ void ObjectsManager::render() {
     }
 
     this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+
     if (this->Setting_ShowAxisHelpers) {
         float ahPosition = 0;
         ahPosition = this->Setting_GridSize;

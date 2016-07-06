@@ -1,19 +1,19 @@
 //
-//  ModelFaceDeferred.hpp
+//  RenderingDeferred.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ModelFaceDeferred_hpp
-#define ModelFaceDeferred_hpp
+#ifndef RenderingDeferred_hpp
+#define RenderingDeferred_hpp
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/meshes/scene/ModelFaceDeferredMesh.hpp"
 
-class ModelFaceDeferred {
+class RenderingDeferred {
 public:
     bool init();
     void render(std::vector<ModelFace*> meshModelFaces,
@@ -54,4 +54,4 @@ private:
     std::string readFile(const char *filePath);
 };
 
-#endif /* ModelFaceDeferred_hpp */
+#endif /* RenderingDeferred_hpp */

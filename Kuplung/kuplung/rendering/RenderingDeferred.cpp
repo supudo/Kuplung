@@ -1,16 +1,16 @@
 //
-//  ModelFaceDeferred.cpp
+//  RenderingDeferred.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ModelFaceDeferred.hpp"
+#include "RenderingDeferred.hpp"
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
-bool ModelFaceDeferred::init() {
+bool RenderingDeferred::init() {
     this->glUtils = new GLUtils();
     this->modelsInitialized = false;
 
@@ -177,7 +177,7 @@ bool ModelFaceDeferred::init() {
     return true;
 }
 
-void ModelFaceDeferred::initModels(std::vector<ModelFace*> meshModelFaces) {
+void RenderingDeferred::initModels(std::vector<ModelFace*> meshModelFaces) {
     for (size_t j=0; j<meshModelFaces.size(); j++) {
         ModelFaceDeferredMesh *mfdm = new ModelFaceDeferredMesh();
         mfdm->init(meshModelFaces[j]->meshModel, Settings::Instance()->currentFolder);
@@ -186,7 +186,7 @@ void ModelFaceDeferred::initModels(std::vector<ModelFace*> meshModelFaces) {
     this->modelsInitialized = true;
 }
 
-void ModelFaceDeferred::render(std::vector<ModelFace*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
+void RenderingDeferred::render(std::vector<ModelFace*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
     if (!this->modelsInitialized)
         this->initModels(meshModelFaces);
 
@@ -208,7 +208,7 @@ void ModelFaceDeferred::render(std::vector<ModelFace*> meshModelFaces, glm::mat4
             glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
             for (size_t j=0; j<models.size(); j++) {
-                models[j]->render(this->shaderProgram_GeometryPass);
+                models[j]->renderModel(this->shaderProgram_GeometryPass);
             }
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
@@ -276,7 +276,7 @@ void ModelFaceDeferred::render(std::vector<ModelFace*> meshModelFaces, glm::mat4
     }
 }
 
-void ModelFaceDeferred::renderQuad() {
+void RenderingDeferred::renderQuad() {
     if (this->quadVAO == 0)
     {
         GLfloat quadVertices[] = {
@@ -303,7 +303,7 @@ void ModelFaceDeferred::renderQuad() {
 }
 
 
-void ModelFaceDeferred::renderCube() {
+void RenderingDeferred::renderCube() {
     // Initialize (if necessary)
     if (this->cubeVAO == 0)
     {
@@ -373,11 +373,11 @@ void ModelFaceDeferred::renderCube() {
     glBindVertexArray(0);
 }
 
-std::string ModelFaceDeferred::readFile(const char *filePath) {
+std::string RenderingDeferred::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("[ModelFaceDeferred] Could not read file " + std::string(filePath) + ". File does not exist.");
+        Settings::Instance()->funcDoLog("[RenderingDeferred] Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";

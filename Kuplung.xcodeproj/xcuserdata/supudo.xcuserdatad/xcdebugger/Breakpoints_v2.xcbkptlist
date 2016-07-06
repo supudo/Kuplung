@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFace.cpp"
-            timestampString = "489315373.791423"
+            filePath = "Kuplung/kuplung/rendering/RenderingDeferred.cpp"
+            timestampString = "489492058.101111"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "342"
-            endingLineNumber = "342"
-            landmarkName = "ModelFace::initShaderProgram()"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "RenderingDeferred::render(std::vector&lt;ModelFace*&gt; meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFace.cpp"
-            timestampString = "489315378.099975"
+            filePath = "Kuplung/kuplung/rendering/RenderingDeferred.cpp"
+            timestampString = "489492070.63291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "578"
-            endingLineNumber = "578"
-            landmarkName = "ModelFace::initBuffers(std::string assetsFolder)"
+            startingLineNumber = "211"
+            endingLineNumber = "211"
+            landmarkName = "RenderingDeferred::render(std::vector&lt;ModelFace*&gt; meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,93 +41,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFace.cpp"
-            timestampString = "489315383.461408"
+            filePath = "Kuplung/kuplung/rendering/RenderingDeferred.cpp"
+            timestampString = "489492318.240764"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "737"
-            endingLineNumber = "737"
-            landmarkName = "ModelFace::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceDeferred.cpp"
-            timestampString = "489399483.708382"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "ModelFaceDeferred::destroy()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceDeferred.cpp"
-            timestampString = "489399505.485941"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "ModelFaceDeferred::destroy()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceDeferred.cpp"
-            timestampString = "489424145.915821"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "163"
-            endingLineNumber = "163"
-            landmarkName = "ModelFaceDeferred::initShader_GeometryPass()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceDeferred.cpp"
-            timestampString = "489424207.384055"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "206"
-            endingLineNumber = "206"
-            landmarkName = "ModelFaceDeferred::initShader_LightingPass()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceDeferred.cpp"
-            timestampString = "489424210.1207"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "258"
-            endingLineNumber = "258"
-            landmarkName = "ModelFaceDeferred::initShader_LightBox()"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
+            landmarkName = "RenderingDeferred::render(std::vector&lt;ModelFace*&gt; meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

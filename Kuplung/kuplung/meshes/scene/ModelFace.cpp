@@ -100,6 +100,7 @@ void ModelFace::init() {
     this->mathHelper = new Maths();
 
     this->initBuffersAgain = false;
+    this->Settings_DeferredRender = false;
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UseCullFace = false;
@@ -143,6 +144,7 @@ void ModelFace::initModelProperties() {
     this->Setting_Wireframe = false;
     this->Setting_Alpha = 1.0f;
     this->showMaterialEditor = false;
+    this->Settings_DeferredRender = false;
 
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -201,6 +203,7 @@ void ModelFace::initModelProperties() {
 void ModelFace::initProperties() {
     this->Setting_CelShading = false;
     this->Setting_Alpha = 1.0f;
+    this->Settings_DeferredRender = false;
 
     this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
@@ -259,6 +262,7 @@ bool ModelFace::initShaderProgram() {
 }
 
 void ModelFace::initBuffers(std::string assetsFolder) {
+    this->assetsFolder = assetsFolder;
 }
 
 void ModelFace::initBoundingBox() {

@@ -64,6 +64,7 @@ public:
     std::vector<GLuint> dataIndices;
     std::string assetsFolder;
 
+    bool Settings_DeferredRender;
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
     int Setting_TessellationSubdivision;

@@ -18,8 +18,7 @@
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
 #include "kuplung/meshes/scene/ModelFace.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
-#include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
-#include "kuplung/meshes/scene/ModelFaceDeferredT.hpp"
+#include "kuplung/rendering/RenderingDeferred.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
@@ -68,6 +67,7 @@ private:
 
     ObjectsManager *managerObjects;
     RayPicking *rayPicker;
+    RenderingDeferred *rendererDeferred;
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";

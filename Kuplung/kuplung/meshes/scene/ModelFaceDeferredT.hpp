@@ -20,7 +20,6 @@ public:
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
 private:
-
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
     GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint gl_TextureDiffuse, gl_TextureSpecular;

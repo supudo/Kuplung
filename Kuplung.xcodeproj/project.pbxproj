@@ -37,6 +37,8 @@
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
+		8A3A29F71D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */; };
+		8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
@@ -70,7 +72,6 @@
 		8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32E1CCA2E620004712D /* z_plus.mtl */; };
 		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
 		8A5AA8D71D1A925B005BDD2E /* ModelFace.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */; };
-		8A5AA8D81D1A925B005BDD2E /* ModelFaceDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D31D1A925B005BDD2E /* ModelFaceDeferred.cpp */; };
 		8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */; };
 		8A673C981CB2950D004236AC /* lake_mountain_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C921CB294FE004236AC /* lake_mountain_back.jpg */; };
 		8A673C991CB2950D004236AC /* lake_mountain_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A673C931CB294FE004236AC /* lake_mountain_bottom.jpg */; };
@@ -405,6 +406,10 @@
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
+		8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredMesh.cpp; path = scene/ModelFaceDeferredMesh.cpp; sourceTree = "<group>"; };
+		8A3A29F61D2D0B4800F26AE4 /* ModelFaceDeferredMesh.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredMesh.hpp; path = scene/ModelFaceDeferredMesh.hpp; sourceTree = "<group>"; };
+		8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingDeferred.cpp; path = rendering/RenderingDeferred.cpp; sourceTree = "<group>"; };
+		8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingDeferred.hpp; path = rendering/RenderingDeferred.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
@@ -437,8 +442,6 @@
 		8A55D32F1CCA2E620004712D /* z_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.obj; path = axis_helpers/z_plus.obj; sourceTree = "<group>"; };
 		8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFace.cpp; path = scene/ModelFace.cpp; sourceTree = "<group>"; };
 		8A5AA8D21D1A925B005BDD2E /* ModelFace.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFace.hpp; path = scene/ModelFace.hpp; sourceTree = "<group>"; };
-		8A5AA8D31D1A925B005BDD2E /* ModelFaceDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferred.cpp; path = scene/ModelFaceDeferred.cpp; sourceTree = "<group>"; };
-		8A5AA8D41D1A925B005BDD2E /* ModelFaceDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferred.hpp; path = scene/ModelFaceDeferred.hpp; sourceTree = "<group>"; };
 		8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceForward.cpp; path = scene/ModelFaceForward.cpp; sourceTree = "<group>"; };
 		8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceForward.hpp; path = scene/ModelFaceForward.hpp; sourceTree = "<group>"; };
 		8A673C921CB294FE004236AC /* lake_mountain_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = lake_mountain_back.jpg; path = skybox/lake_mountain_back.jpg; sourceTree = "<group>"; };
@@ -661,6 +664,15 @@
 				8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */,
 			);
 			name = export;
+			sourceTree = "<group>";
+		};
+		8A3A29F81D2D0E3C00F26AE4 /* rendering */ = {
+			isa = PBXGroup;
+			children = (
+				8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */,
+				8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */,
+			);
+			name = rendering;
 			sourceTree = "<group>";
 		};
 		8A3CECF71C85B217005CB98D /* maths */ = {
@@ -892,8 +904,8 @@
 			children = (
 				8A5AA8D11D1A925B005BDD2E /* ModelFace.cpp */,
 				8A5AA8D21D1A925B005BDD2E /* ModelFace.hpp */,
-				8A5AA8D31D1A925B005BDD2E /* ModelFaceDeferred.cpp */,
-				8A5AA8D41D1A925B005BDD2E /* ModelFaceDeferred.hpp */,
+				8A3A29F51D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp */,
+				8A3A29F61D2D0B4800F26AE4 /* ModelFaceDeferredMesh.hpp */,
 				8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */,
 				8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */,
 				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
@@ -943,6 +955,7 @@
 				8AB6F0121C3A9BEE00665C40 /* meshes */,
 				8A0364751C6B71D9001489C8 /* objects */,
 				8AA9F2361D217412004A8F1C /* pcg */,
+				8A3A29F81D2D0E3C00F26AE4 /* rendering */,
 				8A6E70561C6CACAC0085CAE5 /* settings */,
 				8A6E70631C6CACB40085CAE5 /* ui */,
 				8A6E70801C6CACB40085CAE5 /* utilities */,
@@ -1283,6 +1296,7 @@
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
+				8A3A29F71D2D0B4800F26AE4 /* ModelFaceDeferredMesh.cpp in Sources */,
 				8A5AA8D71D1A925B005BDD2E /* ModelFace.cpp in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
@@ -1299,6 +1313,7 @@
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
+				8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
 				8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */,
@@ -1313,7 +1328,6 @@
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
-				8A5AA8D81D1A925B005BDD2E /* ModelFaceDeferred.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
