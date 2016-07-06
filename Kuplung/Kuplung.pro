@@ -111,9 +111,9 @@ SOURCES += main.cpp \
     kuplung/rendering/RenderingForward.cpp \
     kuplung/rendering/RenderingDeferred.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
+    kuplung/meshes/scene/ModelFaceData.cpp \
     kuplung/meshes/scene/ModelFaceForward.cpp \
     kuplung/meshes/scene/ModelFaceDeferredT.cpp \
-    kuplung/meshes/scene/ModelFaceDeferred.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
@@ -179,9 +179,9 @@ HEADERS += \
     kuplung/rendering/RenderingForward.hpp \
     kuplung/rendering/RenderingDeferred.hpp \
     kuplung/meshes/scene/ModelFaceBase.hpp \
+    kuplung/meshes/scene/ModelFaceData.hpp \
     kuplung/meshes/scene/ModelFaceForward.hpp \
     kuplung/meshes/scene/ModelFaceDeferredT.hpp \
-    kuplung/meshes/scene/ModelFaceDeferred.hpp \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \

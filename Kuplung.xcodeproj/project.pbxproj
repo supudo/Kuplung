@@ -90,6 +90,9 @@
 		8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70901C6CACB40085CAE5 /* Controls.cpp */; };
 		8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70931C6CACB40085CAE5 /* noiseutils.cpp */; };
 		8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */; };
+		8A7802D41D2D4F3A00D24620 /* RenderingForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7802D01D2D4F3A00D24620 /* RenderingForward.cpp */; };
+		8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7802D21D2D4F3A00D24620 /* RenderingManager.cpp */; };
+		8A7802D81D2D4F4B00D24620 /* ModelFaceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */; };
 		8A7F386D1C7F28EB004D4520 /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
 		8A7F386E1C7F28EF004D4520 /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
 		8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */; };
@@ -162,7 +165,6 @@
 		8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104051C05C489008CE831 /* GLUT.framework */; };
 		8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AD91DAA1CA3D989004674BC /* MaterialEditor.cpp */; };
 		8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */; };
-		8ADE509F1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */; };
 		8ADE50B21D2D41F900A6E7F0 /* fire_planet_back.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A01D2D41E400A6E7F0 /* fire_planet_back.jpg */; };
 		8ADE50B31D2D41F900A6E7F0 /* fire_planet_bottom.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A11D2D41E400A6E7F0 /* fire_planet_bottom.jpg */; };
 		8ADE50B41D2D41F900A6E7F0 /* fire_planet_front.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50A21D2D41E400A6E7F0 /* fire_planet_front.jpg */; };
@@ -492,6 +494,12 @@
 		8A6E70A21C6CACB40085CAE5 /* stb_rect_pack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_rect_pack.h; sourceTree = "<group>"; };
 		8A6E70A31C6CACB40085CAE5 /* stb_textedit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_textedit.h; sourceTree = "<group>"; };
 		8A6E70A41C6CACB40085CAE5 /* stb_truetype.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_truetype.h; sourceTree = "<group>"; };
+		8A7802D01D2D4F3A00D24620 /* RenderingForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingForward.cpp; path = rendering/RenderingForward.cpp; sourceTree = "<group>"; };
+		8A7802D11D2D4F3A00D24620 /* RenderingForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingForward.hpp; path = rendering/RenderingForward.hpp; sourceTree = "<group>"; };
+		8A7802D21D2D4F3A00D24620 /* RenderingManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingManager.cpp; path = rendering/RenderingManager.cpp; sourceTree = "<group>"; };
+		8A7802D31D2D4F3A00D24620 /* RenderingManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingManager.hpp; path = rendering/RenderingManager.hpp; sourceTree = "<group>"; };
+		8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceData.cpp; path = scene/ModelFaceData.cpp; sourceTree = "<group>"; };
+		8A7802D71D2D4F4B00D24620 /* ModelFaceData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceData.hpp; path = scene/ModelFaceData.hpp; sourceTree = "<group>"; };
 		8A7F386B1C7F28E8004D4520 /* reflection.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.frag; sourceTree = "<group>"; };
 		8A7F386C1C7F28E8004D4520 /* reflection.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.vert; sourceTree = "<group>"; };
 		8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AxisHelpers.cpp; path = helpers/AxisHelpers.cpp; sourceTree = "<group>"; };
@@ -596,8 +604,6 @@
 		8AD91DAC1CA3D989004674BC /* MaterialEditorData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MaterialEditorData.h; path = materialeditor/MaterialEditorData.h; sourceTree = "<group>"; };
 		8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceBase.cpp; path = scene/ModelFaceBase.cpp; sourceTree = "<group>"; };
 		8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceBase.hpp; path = scene/ModelFaceBase.hpp; sourceTree = "<group>"; };
-		8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferred.cpp; path = scene/ModelFaceDeferred.cpp; sourceTree = "<group>"; };
-		8ADE509D1D2D418C00A6E7F0 /* ModelFaceDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferred.hpp; path = scene/ModelFaceDeferred.hpp; sourceTree = "<group>"; };
 		8ADE50A01D2D41E400A6E7F0 /* fire_planet_back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_back.jpg; path = skybox/fire_planet_back.jpg; sourceTree = "<group>"; };
 		8ADE50A11D2D41E400A6E7F0 /* fire_planet_bottom.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_bottom.jpg; path = skybox/fire_planet_bottom.jpg; sourceTree = "<group>"; };
 		8ADE50A21D2D41E400A6E7F0 /* fire_planet_front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fire_planet_front.jpg; path = skybox/fire_planet_front.jpg; sourceTree = "<group>"; };
@@ -671,6 +677,10 @@
 			children = (
 				8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */,
 				8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */,
+				8A7802D01D2D4F3A00D24620 /* RenderingForward.cpp */,
+				8A7802D11D2D4F3A00D24620 /* RenderingForward.hpp */,
+				8A7802D21D2D4F3A00D24620 /* RenderingManager.cpp */,
+				8A7802D31D2D4F3A00D24620 /* RenderingManager.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";
@@ -904,8 +914,8 @@
 			children = (
 				8ADE509A1D2D418C00A6E7F0 /* ModelFaceBase.cpp */,
 				8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */,
-				8ADE509C1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp */,
-				8ADE509D1D2D418C00A6E7F0 /* ModelFaceDeferred.hpp */,
+				8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */,
+				8A7802D71D2D4F4B00D24620 /* ModelFaceData.hpp */,
 				8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */,
 				8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */,
 				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
@@ -1294,6 +1304,7 @@
 				8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
+				8A7802D41D2D4F3A00D24620 /* RenderingForward.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
@@ -1311,6 +1322,7 @@
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
+				8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */,
 				8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
@@ -1319,13 +1331,13 @@
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
+				8A7802D81D2D4F4B00D24620 /* ModelFaceData.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
-				8ADE509F1D2D418C00A6E7F0 /* ModelFaceDeferred.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,

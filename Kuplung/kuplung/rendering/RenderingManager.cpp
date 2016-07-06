@@ -14,6 +14,11 @@ void RenderingManager::init() {
 
     this->renderingDeferred = new RenderingDeferred();
     this->renderingDeferred->init();
+
+    this->RenderingTotalVertices = 0;
+    this->RenderingTotalIndices = 0;
+    this->RenderingTotalTriangles = 0;
+    this->RenderingTotalFaces = 0;
 }
 
 void RenderingManager::render(std::vector<ModelFaceBase*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {

@@ -23,6 +23,11 @@ public:
                 glm::vec3 uiAmbientLight,
                 int lightingPass_DrawMode);
 
+    int RenderingTotalVertices;
+    int RenderingTotalIndices;
+    int RenderingTotalTriangles;
+    int RenderingTotalFaces;
+
 private:
     RenderingForward *renderingForward;
     RenderingDeferred *renderingDeferred;

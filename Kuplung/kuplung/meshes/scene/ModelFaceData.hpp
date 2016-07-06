@@ -1,17 +1,17 @@
 //
-//  ModelFaceDeferred.hpp
+//  ModelFaceData.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ModelFaceDeferred_hpp
-#define ModelFaceDeferred_hpp
+#ifndef ModelFaceData_hpp
+#define ModelFaceData_hpp
 
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
-class ModelFaceDeferred: public ModelFaceBase {
+class ModelFaceData: public ModelFaceBase {
 public:
     void init(MeshModel model, std::string assetsFolder);
     void renderModel(GLuint shader);
@@ -23,4 +23,4 @@ private:
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
 };
 
-#endif /* ModelFaceDeferred_hpp */
+#endif /* ModelFaceData_hpp */

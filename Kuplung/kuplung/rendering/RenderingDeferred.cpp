@@ -179,7 +179,7 @@ bool RenderingDeferred::init() {
 
 void RenderingDeferred::initModels(std::vector<ModelFaceBase*> meshModelFaces) {
     for (size_t j=0; j<meshModelFaces.size(); j++) {
-        ModelFaceDeferred *mfdm = new ModelFaceDeferred();
+        ModelFaceData *mfdm = new ModelFaceData();
         mfdm->init(meshModelFaces[j]->meshModel, Settings::Instance()->currentFolder);
         this->models.push_back(mfdm);
     }

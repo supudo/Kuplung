@@ -11,7 +11,7 @@
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
-#include "kuplung/meshes/scene/ModelFaceDeferred.hpp"
+#include "kuplung/meshes/scene/ModelFaceData.hpp"
 
 class RenderingDeferred {
 public:
@@ -27,7 +27,7 @@ public:
 private:
     GLUtils *glUtils;
 
-    std::vector<ModelFaceDeferred*> models;
+    std::vector<ModelFaceData*> models;
     bool modelsInitialized;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;

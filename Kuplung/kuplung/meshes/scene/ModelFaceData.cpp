@@ -1,18 +1,18 @@
 //
-//  ModelFaceDeferred.cpp
+//  ModelFaceData.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ModelFaceDeferred.hpp"
+#include "ModelFaceData.hpp"
 #include <boost/filesystem.hpp>
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-void ModelFaceDeferred::init(MeshModel model, std::string assetsFolder) {
+void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     this->mathHelper = new Maths();
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
@@ -95,7 +95,7 @@ void ModelFaceDeferred::init(MeshModel model, std::string assetsFolder) {
     glBindVertexArray(0);
 }
 
-void ModelFaceDeferred::renderModel(GLuint shader) {
+void ModelFaceData::renderModel(GLuint shader) {
     if (this->vboTextureAmbient > 0 && this->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
         glUniform1i(glGetUniformLocation(shader, "sampler_ambient"), 0);
         glActiveTexture(GL_TEXTURE0);
