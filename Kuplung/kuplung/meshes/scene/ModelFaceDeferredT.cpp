@@ -24,10 +24,10 @@ void ModelFaceDeferredT::init(MeshModel model, std::string assetsFolder) {
 bool ModelFaceDeferredT::initShaderProgram() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
-    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.frag";
-    std::string shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_GeometryPass = glCreateProgram();
 
@@ -50,10 +50,10 @@ bool ModelFaceDeferredT::initShaderProgram() {
 
     // Lighting Pass
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
-    shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.frag";
-    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightingPass = glCreateProgram();
 
@@ -76,10 +76,10 @@ bool ModelFaceDeferredT::initShaderProgram() {
 
     // Light Boxes
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightBox = glCreateProgram();
 

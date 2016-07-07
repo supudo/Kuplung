@@ -21,10 +21,10 @@ void RenderingManager::init() {
     this->RenderingTotalFaces = 0;
 }
 
-void RenderingManager::render(std::vector<ModelFaceBase*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
+void RenderingManager::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
     if (Settings::Instance()->DeferredRendering)
-        this->renderingDeferred->render(meshModelFaces, matrixProjection, matrixCamera, vecCameraPosition, grid, uiAmbientLight, lightingPass_DrawMode);
+        this->renderingDeferred->render(this->meshModelFaces, matrixProjection, matrixCamera, vecCameraPosition, grid, uiAmbientLight, lightingPass_DrawMode);
     else
-        this->renderingForward->render(meshModelFaces, matrixProjection, matrixCamera, vecCameraPosition, grid, uiAmbientLight, lightingPass_DrawMode);
+        this->renderingForward->render(this->meshModelFaces, matrixProjection, matrixCamera, vecCameraPosition, grid, uiAmbientLight, lightingPass_DrawMode);
 }
 

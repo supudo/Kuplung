@@ -38,13 +38,6 @@ ModelFaceBase* ModelFaceBase::clone(int modelID) {
 
     mmf->vecCameraPosition = this->vecCameraPosition;
 
-    mmf->GLSL_LightSourceNumber_Directional = this->GLSL_LightSourceNumber_Directional;
-    mmf->GLSL_LightSourceNumber_Point = this->GLSL_LightSourceNumber_Point;
-    mmf->GLSL_LightSourceNumber_Spot = this->GLSL_LightSourceNumber_Spot;
-    mmf->mfLights_Directional = this->mfLights_Directional;
-    mmf->mfLights_Point = this->mfLights_Point;
-    mmf->mfLights_Spot = this->mfLights_Spot;
-
     mmf->init(mmf->meshModel, mmf->assetsFolder);
 
     return mmf;
@@ -57,16 +50,6 @@ ModelFaceBase::~ModelFaceBase() {
 }
 
 void ModelFaceBase::destroy() {
-    for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
-        delete this->mfLights_Directional[i];
-    }
-    for (size_t i=0; i<this->mfLights_Point.size(); i++) {
-        delete this->mfLights_Point[i];
-    }
-    for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
-        delete this->mfLights_Spot[i];
-    }
-
     this->meshModel = {};
 
     delete this->positionX;
@@ -109,9 +92,6 @@ void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
     this->Setting_UseTessellation = true;
     this->Setting_TessellationSubdivision = 1;
     this->showMaterialEditor = false;
-    this->GLSL_LightSourceNumber_Directional = 8;
-    this->GLSL_LightSourceNumber_Point = 4;
-    this->GLSL_LightSourceNumber_Spot = 4;
     this->Setting_LightingPass_DrawMode = 2;
 
     // light
@@ -304,20 +284,14 @@ void ModelFaceBase::setOptionsOutlineThickness(float thickness) {
     this->so_outlineThickness = thickness;
 }
 
-#pragma mark - Utilities
+bool ModelFaceBase::getOptionsSelected() {
+    return this->so_selectedYn;
+}
 
-std::string ModelFaceBase::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("[ModelFaceBase] Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
+glm::vec4 ModelFaceBase::getOptionsOutlineColor() {
+    return this->so_outlineColor;
+}
+
+float ModelFaceBase::getOptionsOutlineThickness() {
+    return this->so_outlineThickness;
 }

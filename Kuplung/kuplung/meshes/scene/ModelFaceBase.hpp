@@ -21,10 +21,6 @@
 #include "kuplung/utilities/maths/Maths.hpp"
 #include "kuplung/meshes/helpers/BoundingBox.hpp"
 
-struct ModelDeferred_LightSource {
-    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
-};
-
 class ModelFaceBase {
 public:
     ModelFaceBase();
@@ -48,6 +44,9 @@ public:
     void setOptionsSelected(bool selectedYn);
     void setOptionsOutlineColor(glm::vec4 outlineColor);
     void setOptionsOutlineThickness(float thickness);
+    bool getOptionsSelected();
+    glm::vec4 getOptionsOutlineColor();
+    float getOptionsOutlineThickness();
 
     BoundingBox *boundingBox;
     bool initBuffersAgain;
@@ -113,18 +112,6 @@ protected:
 
     GLUtils *glUtils;
     Maths *mathHelper;
-
-    // view skin
-    ModelFace_LightSource_Directional *solidLight;
-    GLint glFS_solidSkin_materialColor;
-
-    // light
-    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
-    std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
-    std::vector<ModelFace_LightSource_Point *> mfLights_Point;
-    std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* ModelFaceBase_hpp */

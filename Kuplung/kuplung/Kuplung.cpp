@@ -360,84 +360,91 @@ void Kuplung::renderScene() {
 }
 
 void Kuplung::renderSceneModels() {
-    if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
-        this->renderingManager->render(this->meshModelFaces,
-                                       this->managerObjects->matrixProjection,
-                                       this->managerObjects->camera->matrixCamera,
-                                       this->managerObjects->camera->cameraPosition,
-                                       this->managerObjects->grid,
-                                       this->managerObjects->Setting_UIAmbientLight,
-                                       this->managerObjects->Setting_LightingPass_DrawMode);
-    else {
-        int cVertices = 0;
-        int cIndices = 0;
-        int cTriangles = 0;
-        int cFaces = 0;
-        for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-            ModelFaceBase* mmf = this->meshModelFaces[i];
+    this->renderingManager->render(this->managerObjects->matrixProjection,
+                                   this->managerObjects->camera->matrixCamera,
+                                   this->managerObjects->camera->cameraPosition,
+                                   this->managerObjects->grid,
+                                   this->managerObjects->Setting_UIAmbientLight,
+                                   this->managerObjects->Setting_LightingPass_DrawMode);
 
-            glm::mat4 mtxModel = glm::mat4(1.0);
+//    if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
+//        this->renderingManager->render(this->meshModelFaces,
+//                                       this->managerObjects->matrixProjection,
+//                                       this->managerObjects->camera->matrixCamera,
+//                                       this->managerObjects->camera->cameraPosition,
+//                                       this->managerObjects->grid,
+//                                       this->managerObjects->Setting_UIAmbientLight,
+//                                       this->managerObjects->Setting_LightingPass_DrawMode);
+//    else {
+//        int cVertices = 0;
+//        int cIndices = 0;
+//        int cTriangles = 0;
+//        int cFaces = 0;
+//        for (size_t i=0; i<this->meshModelFaces.size(); i++) {
+//            ModelFaceBase* mmf = this->meshModelFaces[i];
 
-            // reposition like the grid perspective
-            if (this->managerObjects->Setting_FixedGridWorld)
-                mtxModel *= this->managerObjects->grid->matrixModel;
+//            glm::mat4 mtxModel = glm::mat4(1.0);
 
-            // scale
-            mtxModel = glm::scale(mtxModel, glm::vec3(mmf->scaleX->point, mmf->scaleY->point, mmf->scaleZ->point));
+//            // reposition like the grid perspective
+//            if (this->managerObjects->Setting_FixedGridWorld)
+//                mtxModel *= this->managerObjects->grid->matrixModel;
 
-            // rotate
-            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
-            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateY->point), glm::vec3(0, 1, 0));
-            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
-            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+//            // scale
+//            mtxModel = glm::scale(mtxModel, glm::vec3(mmf->scaleX->point, mmf->scaleY->point, mmf->scaleZ->point));
 
-            // translate
-            mtxModel = glm::translate(mtxModel, glm::vec3(mmf->positionX->point, mmf->positionY->point, mmf->positionZ->point));
+//            // rotate
+//            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
+//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
+//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateY->point), glm::vec3(0, 1, 0));
+//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
+//            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
 
-            // general
-            mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
+//            // translate
+//            mtxModel = glm::translate(mtxModel, glm::vec3(mmf->positionX->point, mmf->positionY->point, mmf->positionZ->point));
 
-            // outlining
-            mmf->setOptionsSelected(this->sceneSelectedModelObject == int(i));
-            mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
-            mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
+//            // general
+//            mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
 
-            // lights
-            mmf->lightSources = this->managerObjects->lightSources;
+//            // outlining
+//            mmf->setOptionsSelected(this->sceneSelectedModelObject == int(i));
+//            mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
+//            mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
 
-            // skins
-            mmf->Setting_ModelViewSkin = this->managerObjects->viewModelSkin;
-            mmf->solidLightSkin_MaterialColor = this->managerObjects->SolidLight_MaterialColor;
-            mmf->solidLightSkin_Ambient = this->managerObjects->SolidLight_Ambient;
-            mmf->solidLightSkin_Diffuse = this->managerObjects->SolidLight_Diffuse;
-            mmf->solidLightSkin_Specular = this->managerObjects->SolidLight_Specular;
-            mmf->solidLightSkin_Ambient_Strength = this->managerObjects->SolidLight_Ambient_Strength;
-            mmf->solidLightSkin_Diffuse_Strength = this->managerObjects->SolidLight_Diffuse_Strength;
-            mmf->solidLightSkin_Specular_Strength = this->managerObjects->SolidLight_Specular_Strength;
+//            // lights
+//            mmf->lightSources = this->managerObjects->lightSources;
 
-            // rendering
-            mmf->Setting_LightingPass_DrawMode = this->managerObjects->Setting_LightingPass_DrawMode;
+//            // skins
+//            mmf->Setting_ModelViewSkin = this->managerObjects->viewModelSkin;
+//            mmf->solidLightSkin_MaterialColor = this->managerObjects->SolidLight_MaterialColor;
+//            mmf->solidLightSkin_Ambient = this->managerObjects->SolidLight_Ambient;
+//            mmf->solidLightSkin_Diffuse = this->managerObjects->SolidLight_Diffuse;
+//            mmf->solidLightSkin_Specular = this->managerObjects->SolidLight_Specular;
+//            mmf->solidLightSkin_Ambient_Strength = this->managerObjects->SolidLight_Ambient_Strength;
+//            mmf->solidLightSkin_Diffuse_Strength = this->managerObjects->SolidLight_Diffuse_Strength;
+//            mmf->solidLightSkin_Specular_Strength = this->managerObjects->SolidLight_Specular_Strength;
 
-            // render
-            mmf->render(this->managerObjects->matrixProjection,
-                        this->managerObjects->camera->matrixCamera,
-                        mtxModel,
-                        this->managerObjects->camera->cameraPosition,
-                        this->managerObjects->grid,
-                        this->managerObjects->Setting_UIAmbientLight);
+//            // rendering
+//            mmf->Setting_LightingPass_DrawMode = this->managerObjects->Setting_LightingPass_DrawMode;
 
-            cVertices += mmf->meshModel.countVertices;
-            cIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
-            cTriangles += cVertices / 3;
-            cFaces += cTriangles / 2;
-        }
-        Settings::Instance()->sceneCountObjects = int(this->meshModelFaces.size());
-        Settings::Instance()->sceneCountVertices = cVertices;
-        Settings::Instance()->sceneCountIndices = cIndices;
-        Settings::Instance()->sceneCountTriangles = cTriangles;
-        Settings::Instance()->sceneCountFaces = cFaces;
-    }
+//            // render
+//            mmf->render(this->managerObjects->matrixProjection,
+//                        this->managerObjects->camera->matrixCamera,
+//                        mtxModel,
+//                        this->managerObjects->camera->cameraPosition,
+//                        this->managerObjects->grid,
+//                        this->managerObjects->Setting_UIAmbientLight);
+
+//            cVertices += mmf->meshModel.countVertices;
+//            cIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
+//            cTriangles += cVertices / 3;
+//            cFaces += cTriangles / 2;
+//        }
+//        Settings::Instance()->sceneCountObjects = int(this->meshModelFaces.size());
+//        Settings::Instance()->sceneCountVertices = cVertices;
+//        Settings::Instance()->sceneCountIndices = cIndices;
+//        Settings::Instance()->sceneCountTriangles = cTriangles;
+//        Settings::Instance()->sceneCountFaces = cFaces;
+//    }
 
     if (this->managerObjects->Setting_ShowTerrain) {
         Settings::Instance()->sceneCountObjects += 1;
@@ -598,21 +605,17 @@ void Kuplung::processParsedObjFile() {
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
 
-            ModelFaceBase *mmf;
-            if (Settings::Instance()->DeferredRendering)
-                mmf = new ModelFaceBase();
-            else
-                mmf = new ModelFaceForward();
+            ModelFaceData *mmf = new ModelFaceData();
             mmf->dataVertices = this->managerObjects->grid->dataVertices;
             mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
             mmf->dataNormals = this->managerObjects->grid->dataNormals;
             mmf->dataIndices = this->managerObjects->grid->dataIndices;
-            mmf->ModelID = int(i);
+            mmf->ModelID = int(this->meshModelFaces.size()) + int(i);
             mmf->init(model, Settings::Instance()->currentFolder);
             mmf->initBoundingBox();
             mmf->initModelProperties();
-            mmf->initBuffers();
 
+            this->renderingManager->meshModelFaces.push_back(mmf);
             this->meshModelFaces.push_back(mmf);
             this->meshModels.push_back(model);
         }

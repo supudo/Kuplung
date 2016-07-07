@@ -12,7 +12,6 @@
 
 bool RenderingDeferred::init() {
     this->glUtils = new GLUtils();
-    this->modelsInitialized = false;
 
     bool success = true;
 
@@ -198,19 +197,7 @@ void RenderingDeferred::initGBuffer() {
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void RenderingDeferred::initModels(std::vector<ModelFaceBase*> meshModelFaces) {
-    for (size_t j=0; j<meshModelFaces.size(); j++) {
-        ModelFaceData *mfdm = new ModelFaceData();
-        mfdm->init(meshModelFaces[j]->meshModel, Settings::Instance()->currentFolder);
-        this->models.push_back(mfdm);
-    }
-    this->modelsInitialized = true;
-}
-
-void RenderingDeferred::render(std::vector<ModelFaceBase*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
-    if (!this->modelsInitialized)
-        this->initModels(meshModelFaces);
-
+void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -228,8 +215,8 @@ void RenderingDeferred::render(std::vector<ModelFaceBase*> meshModelFaces, glm::
             model = glm::scale(model, glm::vec3(0.25f));
             glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-            for (size_t j=0; j<models.size(); j++) {
-                models[j]->renderModel(this->shaderProgram_GeometryPass);
+            for (size_t j=0; j<meshModelFaces.size(); j++) {
+                meshModelFaces[j]->renderModel();
             }
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

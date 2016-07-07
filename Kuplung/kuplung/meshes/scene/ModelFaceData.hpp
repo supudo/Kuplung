@@ -14,7 +14,7 @@
 class ModelFaceData: public ModelFaceBase {
 public:
     void init(MeshModel model, std::string assetsFolder);
-    void renderModel(GLuint shader);
+    void renderModel();
 
 private:
     Maths *mathHelper;

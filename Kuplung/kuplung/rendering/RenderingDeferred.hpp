@@ -16,7 +16,7 @@
 class RenderingDeferred {
 public:
     bool init();
-    void render(std::vector<ModelFaceBase*> meshModelFaces,
+    void render(std::vector<ModelFaceData*> meshModelFaces,
                 glm::mat4 matrixProjection,
                 glm::mat4 matrixCamera,
                 glm::vec3 vecCameraPosition,
@@ -33,9 +33,6 @@ private:
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
 
     GLUtils *glUtils;
-
-    std::vector<ModelFaceData*> models;
-    bool modelsInitialized;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
     GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;

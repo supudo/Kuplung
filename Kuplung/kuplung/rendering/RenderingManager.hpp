@@ -11,12 +11,12 @@
 
 #include "kuplung/rendering/RenderingForward.hpp"
 #include "kuplung/rendering/RenderingDeferred.hpp"
+#include "kuplung/meshes/scene/ModelFaceData.hpp"
 
 class RenderingManager {
 public:
     void init();
-    void render(std::vector<ModelFaceBase*> meshModelFaces,
-                glm::mat4 matrixProjection,
+    void render(glm::mat4 matrixProjection,
                 glm::mat4 matrixCamera,
                 glm::vec3 vecCameraPosition,
                 WorldGrid *grid,
@@ -27,6 +27,8 @@ public:
     int RenderingTotalIndices;
     int RenderingTotalTriangles;
     int RenderingTotalFaces;
+
+    std::vector<ModelFaceData*> meshModelFaces;
 
 private:
     RenderingForward *renderingForward;

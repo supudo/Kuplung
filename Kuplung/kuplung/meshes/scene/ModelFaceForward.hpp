@@ -11,6 +11,10 @@
 
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
+struct ModelDeferred_LightSource {
+    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
+};
+
 class ModelFaceForward: public ModelFaceBase {
 public:
     void init(MeshModel model, std::string assetsFolder);
@@ -28,6 +32,12 @@ private:
     bool reflectionInit();
     void renderReflectFBO();
     void renderMirrorSurface();
+
+    // light
+    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+    std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
+    std::vector<ModelFace_LightSource_Point *> mfLights_Point;
+    std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // model objects
     GLuint shaderProgram;

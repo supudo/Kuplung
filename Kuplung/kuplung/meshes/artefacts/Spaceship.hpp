@@ -40,7 +40,7 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
     GLuint glUniformMVPMatrix, glUniformMMatrix, glAttributeVertexPosition, glAttributeVertexNormal;
-    GLuint glFS_solidSkin_materialColor, glAttributeColor, glFS_CameraPosition;
+    GLuint glAttributeColor, glFS_CameraPosition;
     GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
     ModelFace_LightSource_Directional *solidLight;

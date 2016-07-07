@@ -16,7 +16,6 @@ struct LightSource {
 };
 
 uniform LightSource solidSkin_Light;
-uniform vec3 solidSkin_materialColor;
 
 vec3 calculateLight(vec3 directionNormal, vec3 directionView, vec4 colorDiffuse);
 

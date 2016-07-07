@@ -13,6 +13,8 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
+    ModelFaceBase::init(model, assetsFolder);
+
     this->mathHelper = new Maths();
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
@@ -95,50 +97,14 @@ void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     glBindVertexArray(0);
 }
 
-void ModelFaceData::renderModel(GLuint shader) {
-    if (this->vboTextureAmbient > 0 && this->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_ambient"), 0);
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
-    }
-
-    if (this->vboTextureDiffuse > 0 && this->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_diffuse"), 0);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-    }
-
-    if (this->vboTextureSpecular > 0 && this->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_specular"), 0);
-        glActiveTexture(GL_TEXTURE2);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
-    }
-
-    if (this->vboTextureSpecularExp > 0 && this->meshModel.ModelMaterial.TextureSpecularExp.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_specularexp"), 0);
-        glActiveTexture(GL_TEXTURE3);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
-    }
-
-    if (this->vboTextureDissolve > 0 && this->meshModel.ModelMaterial.TextureDissolve.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_dissolve"), 0);
-        glActiveTexture(GL_TEXTURE4);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
-    }
-
-    if (this->vboTextureBump > 0 && this->meshModel.ModelMaterial.TextureBump.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_bump"), 0);
-        glActiveTexture(GL_TEXTURE5);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureBump);
-    }
-
-    if (this->vboTextureDisplacement > 0 && this->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
-        glUniform1i(glGetUniformLocation(shader, "sampler_displacement"), 0);
-        glActiveTexture(GL_TEXTURE6);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureDisplacement);
-    }
+void ModelFaceData::renderModel() {
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glBindVertexArray(this->glVAO);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
+
+    if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }

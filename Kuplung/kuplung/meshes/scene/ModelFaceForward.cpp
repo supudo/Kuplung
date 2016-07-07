@@ -114,43 +114,43 @@ bool ModelFaceForward::initShaderProgram() {
 
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
-    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // tessellation control shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-    std::string shaderSourceTCS = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceTCS = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_control = shaderSourceTCS.c_str();
 
     // tessellation evaluation shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-    std::string shaderSourceTES = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceTES = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_eval = shaderSourceTES.c_str();
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
-    std::string shaderSourceGeometry = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceGeometry = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_geometry = shaderSourceGeometry.c_str();
 
     // fragment shader - parts
     std::string shaderSourceFragment;
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_vars.frag";
-    shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_effects.frag";
-    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_lights.frag";
-    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
-    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_misc.frag";
-    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
-    shaderSourceFragment += ModelFaceBase::readFile(shaderPath.c_str());
+    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
     const char *shader_fragment = shaderSourceFragment.c_str();
 
@@ -217,16 +217,16 @@ bool ModelFaceForward::initShaderProgram() {
             this->glMaterial_ParallaxMapping = this->glUtils->glGetUniform(this->shaderProgram, "fs_userParallaxMapping");
 
             this->gl_ModelViewSkin = this->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
-            this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
-            this->solidLight = new ModelFace_LightSource_Directional();
-            this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
-            this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
-            this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
-            this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
-            this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
-            this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
-            this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
-            this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
+//            this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
+//            this->solidLight = new ModelFace_LightSource_Directional();
+//            this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
+//            this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
+//            this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
+//            this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
+//            this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
+//            this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
+//            this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
+//            this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
 
             // light - directional
             for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
@@ -521,16 +521,16 @@ void ModelFaceForward::renderModel() {
 
         // render skin
         glUniform1i(this->gl_ModelViewSkin, this->Setting_ModelViewSkin);
-        glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
+//        glUniform3f(this->glFS_solidSkin_materialColor, this->solidLightSkin_MaterialColor.r, this->solidLightSkin_MaterialColor.g, this->solidLightSkin_MaterialColor.b);
 
-        glUniform1i(this->solidLight->gl_InUse, 1);
-        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
-        glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
-        glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
-        glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);
-        glUniform1f(this->solidLight->gl_StrengthAmbient, this->solidLightSkin_Ambient_Strength);
-        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->solidLightSkin_Diffuse_Strength);
-        glUniform1f(this->solidLight->gl_StrengthSpecular, this->solidLightSkin_Specular_Strength);
+//        glUniform1i(this->solidLight->gl_InUse, 1);
+//        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
+//        glUniform3f(this->solidLight->gl_Ambient, this->solidLightSkin_Ambient.r, this->solidLightSkin_Ambient.g, this->solidLightSkin_Ambient.b);
+//        glUniform3f(this->solidLight->gl_Diffuse, this->solidLightSkin_Diffuse.r, this->solidLightSkin_Diffuse.g, this->solidLightSkin_Diffuse.b);
+//        glUniform3f(this->solidLight->gl_Specular, this->solidLightSkin_Specular.r, this->solidLightSkin_Specular.g, this->solidLightSkin_Specular.b);
+//        glUniform1f(this->solidLight->gl_StrengthAmbient, this->solidLightSkin_Ambient_Strength);
+//        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->solidLightSkin_Diffuse_Strength);
+//        glUniform1f(this->solidLight->gl_StrengthSpecular, this->solidLightSkin_Specular_Strength);
 
         // lights
         int lightsCount_Directional = 0;
@@ -844,11 +844,11 @@ bool ModelFaceForward::reflectionInit() {
 
     // shaders
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.vert";
-    std::string shaderSourceVertex = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/reflection.frag";
-    std::string shaderSourceFragment = ModelFaceBase::readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgramReflection = glCreateProgram();
