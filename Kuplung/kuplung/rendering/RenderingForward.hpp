@@ -26,32 +26,6 @@ public:
 
 private:
     GLUtils *glUtils;
-
-    std::vector<ModelFaceForward*> models;
-    bool modelsInitialized;
-
-    GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
-    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
-    GLuint gl_TextureDiffuse, gl_TextureSpecular;
-
-    GLuint gBuffer;
-    GLuint gPosition, gNormal, gAlbedoSpec;
-
-    const GLuint NR_LIGHTS = 32;
-    std::vector<glm::vec3> objectPositions;
-    std::vector<glm::vec3> lightPositions;
-    std::vector<glm::vec3> lightColors;
-
-    GLuint quadVAO = 0;
-    GLuint quadVBO;
-    void renderQuad();
-
-    GLuint cubeVAO = 0;
-    GLuint cubeVBO = 0;
-    void renderCube();
-
-    void initModels(std::vector<ModelFaceBase*> meshModelFaces);
-    std::string readFile(const char *filePath);
 };
 
 #endif /* RenderingForward_hpp */

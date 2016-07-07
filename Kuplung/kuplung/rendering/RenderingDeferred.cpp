@@ -14,12 +14,25 @@ bool RenderingDeferred::init() {
     this->glUtils = new GLUtils();
     this->modelsInitialized = false;
 
+    bool success = true;
+
+    success |= this->initGeometryPass();
+    success |= this->initLighingPass();
+    success |= this->initLights();
+
+    this->initProps();
+    this->initGBuffer();
+
+    return success;
+}
+
+bool RenderingDeferred::initGeometryPass() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_GeometryPass = glCreateProgram();
 
@@ -39,17 +52,20 @@ bool RenderingDeferred::init() {
         this->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
         return false;
     }
+    return true;
+}
 
+bool RenderingDeferred::initLighingPass() {
     // Lighting Pass
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
-    shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.frag";
-    shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightingPass = glCreateProgram();
 
-    shaderCompilation = true;
+    bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
 
@@ -58,24 +74,27 @@ bool RenderingDeferred::init() {
 
     glLinkProgram(this->shaderProgram_LightingPass);
 
-    programSuccess = GL_TRUE;
+    GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_LightingPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[Deferred - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram_LightingPass) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_LightingPass);
         return false;
     }
+    return true;
+}
 
+bool RenderingDeferred::initLights() {
     // Light Boxes
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightBox = glCreateProgram();
 
-    shaderCompilation = true;
+    bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
 
@@ -84,15 +103,17 @@ bool RenderingDeferred::init() {
 
     glLinkProgram(this->shaderProgram_LightBox);
 
-    programSuccess = GL_TRUE;
+    GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_LightBox, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[Deferred - Light Box] Error linking program " + std::to_string(this->shaderProgram_LightBox) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_LightBox);
         return false;
     }
+    return true;
+}
 
-    // Set samplers
+void RenderingDeferred::initProps() {
     glUseProgram(this->shaderProgram_LightingPass);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gPosition"), 0);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gNormal"), 1);
@@ -123,7 +144,9 @@ bool RenderingDeferred::init() {
         GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
         this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
     }
+}
 
+void RenderingDeferred::initGBuffer() {
     // Set up G-Buffer
     // 3 textures:
     // 1. Positions (RGB)
@@ -173,8 +196,6 @@ bool RenderingDeferred::init() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
-
-    return true;
 }
 
 void RenderingDeferred::initModels(std::vector<ModelFaceBase*> meshModelFaces) {
@@ -372,20 +393,3 @@ void RenderingDeferred::renderCube() {
     glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }
-
-std::string RenderingDeferred::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("[RenderingDeferred] Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
-}
-

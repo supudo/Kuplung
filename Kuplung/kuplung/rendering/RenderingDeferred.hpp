@@ -25,6 +25,13 @@ public:
                 int lightingPass_DrawMode);
 
 private:
+    bool initGeometryPass();
+    bool initLighingPass();
+    bool initLights();
+    void initProps();
+    void initGBuffer();
+    void initModels(std::vector<ModelFaceBase*> meshModelFaces);
+
     GLUtils *glUtils;
 
     std::vector<ModelFaceData*> models;
@@ -49,9 +56,6 @@ private:
     GLuint cubeVAO = 0;
     GLuint cubeVBO = 0;
     void renderCube();
-
-    void initModels(std::vector<ModelFaceBase*> meshModelFaces);
-    std::string readFile(const char *filePath);
 };
 
 #endif /* RenderingDeferred_hpp */
