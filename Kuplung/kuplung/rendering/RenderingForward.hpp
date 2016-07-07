@@ -54,19 +54,6 @@ private:
 
     // model objects
     GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment, shaderGeometry, shaderTessControl, shaderTessEval;
-    GLuint fboDefault;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve;
-    GLuint vboTextureBump, vboTextureDisplacement;
-
-    // reflection objects
-    GLuint shaderProgramReflection;
-    GLuint shaderVertexReflection, shaderFragmentReflection;
-    GLuint fboReflection, glVAOReflect;
-    GLuint vboVerticesReflect, vboNormalsReflect, vboTextureCoordinatesReflect, vboIndicesReflect;
-    GLuint reflectTexName, reflectWidth, reflectHeight;
-    GLuint reflectModelViewUniformIdx, reflectProjectionUniformIdx, reflectNormalMatrixUniformIdx;
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;

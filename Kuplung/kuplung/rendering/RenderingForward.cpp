@@ -19,17 +19,6 @@ RenderingForward::~RenderingForward() {
 }
 
 void RenderingForward::destroy() {
-    glDeleteBuffers(1, &this->vboVertices);
-    glDeleteBuffers(1, &this->vboNormals);
-    glDeleteBuffers(1, &this->vboTextureCoordinates);
-    glDeleteBuffers(1, &this->vboIndices);
-    glDeleteBuffers(1, &this->vboTangents);
-    glDeleteBuffers(1, &this->vboBitangents);
-
-    glDeleteBuffers(1, &this->vboVerticesReflect);
-    glDeleteBuffers(1, &this->vboNormalsReflect);
-    glDeleteBuffers(1, &this->vboTextureCoordinatesReflect);
-    glDeleteBuffers(1, &this->vboIndicesReflect);
 
 //    if (this->vboTextureAmbient > 0)
 //        glDeleteBuffers(1, &this->vboTextureAmbient);
@@ -67,33 +56,11 @@ void RenderingForward::destroy() {
         }
     }
 
-    glDeleteFramebuffers(1, &this->fboDefault);
-    glDeleteFramebuffers(1, &this->fboReflection);
-
     glDisableVertexAttribArray(this->glVS_VertexPosition);
     glDisableVertexAttribArray(this->glFS_TextureCoord);
     glDisableVertexAttribArray(this->glVS_VertexNormal);
     glDisableVertexAttribArray(this->glVS_Tangent);
     glDisableVertexAttribArray(this->glVS_Bitangent);
-
-    glDetachShader(this->shaderProgram, this->shaderVertex);
-    glDetachShader(this->shaderProgram, this->shaderTessControl);
-    glDetachShader(this->shaderProgram, this->shaderTessEval);
-    glDetachShader(this->shaderProgram, this->shaderGeometry);
-    glDetachShader(this->shaderProgram, this->shaderFragment);
-    glDeleteProgram(this->shaderProgram);
-
-    glDeleteShader(this->shaderVertex);
-    glDeleteShader(this->shaderTessControl);
-    glDeleteShader(this->shaderTessEval);
-    glDeleteShader(this->shaderGeometry);
-    glDeleteShader(this->shaderFragment);
-
-    glDetachShader(this->shaderProgramReflection, this->shaderVertexReflection);
-    glDetachShader(this->shaderProgramReflection, this->shaderFragmentReflection);
-    glDeleteProgram(this->shaderProgramReflection);
-    glDeleteShader(this->shaderVertexReflection);
-    glDeleteShader(this->shaderFragmentReflection);
 
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
         delete this->mfLights_Directional[i];
@@ -122,7 +89,6 @@ bool RenderingForward::initShaderProgram() {
     bool success = true;
 
     // init FBO
-    this->fboDefault = 0;
 
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
@@ -169,11 +135,11 @@ bool RenderingForward::initShaderProgram() {
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderTessControl, GL_TESS_CONTROL_SHADER, shader_tess_control);
-    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderTessEval, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
-    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderGeometry, GL_GEOMETRY_SHADER, shader_geometry);
-    shaderCompilation |= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -335,8 +301,6 @@ bool RenderingForward::initShaderProgram() {
         this->glEffect_Bloom_VignetteAtt = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_VignetteAtt");
     }
 
-//    success |= this->reflectionInit();
-
     return success;
 }
 
@@ -350,26 +314,22 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, glm::m
 
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
+
     glUseProgram(this->shaderProgram);
-    glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
 
     for (size_t i=0; i<meshModelFaces.size(); i++) {
         ModelFaceData *mfd = meshModelFaces[i];
 
         glm::mat4 matrixModel = glm::mat4(1.0);
-
         matrixModel *= this->grid->matrixModel;
-
         // scale
         matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-
         // rotate
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-
         // translate
         matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
 
@@ -564,65 +524,65 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, glm::m
         glUniform3f(this->glMaterial_Specular, mfd->materialSpecular->color.r, mfd->materialSpecular->color.g, mfd->materialSpecular->color.b);
         glUniform3f(this->glMaterial_Emission, mfd->materialEmission->color.r, mfd->materialEmission->color.g, mfd->materialEmission->color.b);
 
-        if (this->vboTextureAmbient > 0 && mfd->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
+        if (mfd->vboTextureAmbient > 0 && mfd->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureAmbient, 1);
             glUniform1i(this->glMaterial_SamplerAmbient, 0);
             glActiveTexture(GL_TEXTURE0);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureAmbient);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureAmbient);
         }
         else
             glUniform1i(this->glMaterial_HasTextureAmbient, 0);
 
-        if (this->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
+        if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureDiffuse, 1);
             glUniform1i(this->glMaterial_SamplerDiffuse, 1);
             glActiveTexture(GL_TEXTURE1);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDiffuse);
         }
         else
             glUniform1i(this->glMaterial_HasTextureDiffuse, 0);
 
-        if (this->vboTextureSpecular > 0 && mfd->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
+        if (mfd->vboTextureSpecular > 0 && mfd->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureSpecular, 1);
             glUniform1i(this->glMaterial_SamplerSpecular, 2);
             glActiveTexture(GL_TEXTURE2);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecular);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureSpecular);
         }
         else
             glUniform1i(this->glMaterial_HasTextureSpecular, 0);
 
-        if (this->vboTextureSpecularExp > 0 && mfd->meshModel.ModelMaterial.TextureSpecularExp.UseTexture) {
+        if (mfd->vboTextureSpecularExp > 0 && mfd->meshModel.ModelMaterial.TextureSpecularExp.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureSpecularExp, 1);
             glUniform1i(this->glMaterial_SamplerSpecularExp, 3);
             glActiveTexture(GL_TEXTURE3);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureSpecularExp);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureSpecularExp);
         }
         else
             glUniform1i(this->glMaterial_HasTextureSpecularExp, 0);
 
-        if (this->vboTextureDissolve > 0 && mfd->meshModel.ModelMaterial.TextureDissolve.UseTexture) {
+        if (mfd->vboTextureDissolve > 0 && mfd->meshModel.ModelMaterial.TextureDissolve.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureDissolve, 1);
             glUniform1i(this->glMaterial_SamplerDissolve, 4);
             glActiveTexture(GL_TEXTURE4);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureDissolve);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDissolve);
         }
         else
             glUniform1i(this->glMaterial_HasTextureDissolve, 0);
 
-        if (this->vboTextureBump > 0 && mfd->meshModel.ModelMaterial.TextureBump.UseTexture) {
+        if (mfd->vboTextureBump > 0 && mfd->meshModel.ModelMaterial.TextureBump.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureBump, 1);
             glUniform1i(this->glMaterial_SamplerBump, 5);
             glActiveTexture(GL_TEXTURE5);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureBump);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureBump);
         }
         else
             glUniform1i(this->glMaterial_HasTextureBump, 0);
 
-        if (this->vboTextureDisplacement > 0 && mfd->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
+        if (mfd->vboTextureDisplacement > 0 && mfd->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureDisplacement, 1);
             glUniform1i(this->glMaterial_SamplerDisplacement, 6);
             glActiveTexture(GL_TEXTURE6);
-            glBindTexture(GL_TEXTURE_2D, this->vboTextureDisplacement);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDisplacement);
         }
         else
             glUniform1i(this->glMaterial_HasTextureDisplacement, 0);

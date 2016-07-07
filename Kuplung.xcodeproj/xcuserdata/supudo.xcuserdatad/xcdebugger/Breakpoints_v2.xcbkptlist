@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/meshes/scene/ModelFaceData.cpp"
-            timestampString = "489589629.542806"
+            filePath = "Kuplung/kuplung/rendering/RenderingForward.cpp"
+            timestampString = "489590679.82107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "ModelFaceData::renderModel()"
+            startingLineNumber = "548"
+            endingLineNumber = "548"
+            landmarkName = "RenderingForward::render(std::vector&lt;ModelFaceData*&gt; meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -16,11 +16,13 @@ public:
     void init(MeshModel model, std::string assetsFolder);
     void renderModel();
 
+    GLuint glVAO;
+    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
+
 private:
     Maths *mathHelper;
 
-    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
 };
 
 #endif /* ModelFaceData_hpp */
