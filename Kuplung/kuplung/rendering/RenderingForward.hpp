@@ -35,10 +35,6 @@ public:
 private:
     bool initShaderProgram();
 
-//    bool reflectionInit();
-//    void renderReflectFBO();
-//    void renderMirrorSurface();
-
     GLUtils *glUtils;
 
     glm::mat4 matrixProjection, matrixCamera;
@@ -53,11 +49,11 @@ private:
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // model objects
-    GLuint shaderProgram;
+    GLuint shaderProgram, fboDefault;
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
-    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
+    GLint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
     GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;

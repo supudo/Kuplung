@@ -88,8 +88,6 @@ bool RenderingForward::init() {
 bool RenderingForward::initShaderProgram() {
     bool success = true;
 
-    // init FBO
-
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());

@@ -98,6 +98,9 @@ void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
 }
 
 void ModelFaceData::renderModel() {
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
+
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
@@ -107,4 +110,12 @@ void ModelFaceData::renderModel() {
 
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
+        glm::mat4 matrixBB = glm::mat4(1.0f);
+        matrixBB *= this->matrixProjection;
+        matrixBB *= this->matrixCamera;
+        matrixBB *= this->matrixModel;
+        this->boundingBox->render(matrixBB, this->so_outlineColor);
+    }
 }
