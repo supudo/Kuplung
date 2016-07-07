@@ -16,6 +16,11 @@
 void ModelFaceDeferredT::destroy() {
 }
 
+void ModelFaceDeferredT::init(MeshModel model, std::string assetsFolder) {
+    this->meshModel = model;
+    this->assetsFolder = assetsFolder;
+}
+
 bool ModelFaceDeferredT::initShaderProgram() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
@@ -180,9 +185,7 @@ bool ModelFaceDeferredT::initShaderProgram() {
     return true;
 }
 
-void ModelFaceDeferredT::initBuffers(std::string assetsFolder) {
-    this->assetsFolder = assetsFolder;
-
+void ModelFaceDeferredT::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 

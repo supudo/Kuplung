@@ -99,6 +99,11 @@ void ModelFaceForward::destroy() {
 
 #pragma mark - Public
 
+void ModelFaceForward::init(MeshModel model, std::string assetsFolder) {
+    ModelFaceBase::init(model, assetsFolder);
+    this->initShaderProgram();
+}
+
 bool ModelFaceForward::initShaderProgram() {
     bool success = true;
 
@@ -335,8 +340,7 @@ bool ModelFaceForward::initShaderProgram() {
     return success;
 }
 
-void ModelFaceForward::initBuffers(std::string assetsFolder) {
-    this->assetsFolder = assetsFolder;
+void ModelFaceForward::initBuffers() {
     glBindVertexArray(this->glVAO);
 
     // vertices
@@ -422,7 +426,7 @@ void ModelFaceForward::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera
     ModelFaceBase::render(matrixProjection, matrixCamera, matrixModel, vecCameraPosition, grid, uiAmbientLight);
 
     if (this->initBuffersAgain)
-        this->initBuffers(this->assetsFolder);
+        this->initBuffers();
 
     if (this->grid->actAsMirror) {
         glCullFace(GL_FRONT);

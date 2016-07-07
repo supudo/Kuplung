@@ -313,12 +313,10 @@ void Kuplung::addTerrainModel() {
     mmf->Settings_DeferredRender = true;
 
     mmf->ModelID = 1;
-    mmf->init();
-    mmf->setModel(this->managerObjects->terrain->terrainGenerator->modelTerrain);
+    mmf->init(this->managerObjects->terrain->terrainGenerator->modelTerrain, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
     mmf->initModelProperties();
-    mmf->initShaderProgram();
-    mmf->initBuffers(Settings::Instance()->currentFolder);
+    mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
     this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
     this->managerUI->meshModelFaces = &this->meshModelFaces;
@@ -335,12 +333,10 @@ void Kuplung::addSpaceshipModel() {
     mmf->Settings_DeferredRender = true;
 
     mmf->ModelID = 1;
-    mmf->init();
-    mmf->setModel(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship);
+    mmf->init(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
     mmf->initModelProperties();
-    mmf->initShaderProgram();
-    mmf->initBuffers(Settings::Instance()->currentFolder);
+    mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
     this->meshModels.push_back(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship);
     this->managerUI->meshModelFaces = &this->meshModelFaces;
@@ -601,6 +597,7 @@ void Kuplung::processParsedObjFile() {
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
+
             ModelFaceBase *mmf;
             if (Settings::Instance()->DeferredRendering)
                 mmf = new ModelFaceBase();
@@ -611,12 +608,11 @@ void Kuplung::processParsedObjFile() {
             mmf->dataNormals = this->managerObjects->grid->dataNormals;
             mmf->dataIndices = this->managerObjects->grid->dataIndices;
             mmf->ModelID = int(i);
-            mmf->init();
-            mmf->setModel(model);
+            mmf->init(model, Settings::Instance()->currentFolder);
             mmf->initBoundingBox();
             mmf->initModelProperties();
-            mmf->initShaderProgram();
-            mmf->initBuffers(Settings::Instance()->currentFolder);
+            mmf->initBuffers();
+
             this->meshModelFaces.push_back(mmf);
             this->meshModels.push_back(model);
         }

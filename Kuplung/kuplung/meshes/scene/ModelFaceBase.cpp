@@ -45,8 +45,7 @@ ModelFaceBase* ModelFaceBase::clone(int modelID) {
     mmf->mfLights_Point = this->mfLights_Point;
     mmf->mfLights_Spot = this->mfLights_Spot;
 
-    mmf->init();
-    mmf->setModel(mmf->meshModel);
+    mmf->init(mmf->meshModel, mmf->assetsFolder);
 
     return mmf;
 }
@@ -95,9 +94,12 @@ void ModelFaceBase::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFaceBase::init() {
+void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
     this->glUtils = new GLUtils();
     this->mathHelper = new Maths();
+
+    this->meshModel = model;
+    this->assetsFolder = assetsFolder;
 
     this->initBuffersAgain = false;
     this->Settings_DeferredRender = false;
@@ -133,10 +135,6 @@ void ModelFaceBase::init() {
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
     this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-}
-
-void ModelFaceBase::setModel(MeshModel meshModel) {
-    this->meshModel = meshModel;
 }
 
 void ModelFaceBase::initModelProperties() {
@@ -200,12 +198,7 @@ void ModelFaceBase::initModelProperties() {
     this->Effect_Bloom_VignetteAtt = 0.0f;
 }
 
-bool ModelFaceBase::initShaderProgram() {
-    return true;
-}
-
-void ModelFaceBase::initBuffers(std::string assetsFolder) {
-    this->assetsFolder = assetsFolder;
+void ModelFaceBase::initBuffers() {
 }
 
 void ModelFaceBase::initBoundingBox() {

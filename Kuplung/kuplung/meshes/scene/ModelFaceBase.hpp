@@ -29,18 +29,17 @@ class ModelFaceBase {
 public:
     ModelFaceBase();
     ~ModelFaceBase();
+    virtual void destroy();
+
     ModelFaceBase* clone(int modelID);
 
-    void init();
-    void setModel(MeshModel meshModel);
+    virtual void init(MeshModel model, std::string assetsFolder);
     void initModelProperties();
     void initBoundingBox();
+    virtual void initBuffers();
     void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
-    virtual void destroy();
     virtual void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
-    virtual bool initShaderProgram();
-    virtual void initBuffers(std::string assetsFolder);
 
     // general options
     void setOptionsFOV(float fov);

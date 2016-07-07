@@ -13,14 +13,14 @@
 
 class ModelFaceForward: public ModelFaceBase {
 public:
-    void init();
+    void init(MeshModel model, std::string assetsFolder);
 
     void destroy();
-    bool initShaderProgram();
-    void initBuffers(std::string assetsFolder);
+    void initBuffers();
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
 
 private:
+    bool initShaderProgram();
     void renderModel();
     void drawOutline();
     void drawOnly();
