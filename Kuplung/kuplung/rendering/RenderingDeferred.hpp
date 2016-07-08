@@ -15,6 +15,7 @@
 
 class RenderingDeferred {
 public:
+    ~RenderingDeferred();
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces,
                 glm::mat4 matrixProjection,

@@ -24,7 +24,7 @@
 class ModelFaceBase {
 public:
     ModelFaceBase();
-    ~ModelFaceBase();
+    virtual ~ModelFaceBase();
     virtual void destroy();
 
     ModelFaceBase* clone(int modelID);

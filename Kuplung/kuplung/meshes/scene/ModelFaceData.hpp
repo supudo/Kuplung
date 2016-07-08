@@ -13,6 +13,8 @@
 
 class ModelFaceData: public ModelFaceBase {
 public:
+    ~ModelFaceData();
+    void destroy();
     void init(MeshModel model, std::string assetsFolder);
     void renderModel();
 
@@ -21,7 +23,8 @@ public:
 private:
     Maths *mathHelper;
 
-    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
+    GLuint glVAO;
+    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
 };
 
 #endif /* ModelFaceData_hpp */

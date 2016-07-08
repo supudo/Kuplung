@@ -33,7 +33,6 @@ public:
 private:
     bool init();
     void initFolders();
-    void destroy();
     void onEvent(SDL_Event* ev);
     void processObjFileAsync(FBEntity file, FileBrowser_ParserType type);
     void processParsedObjFile();

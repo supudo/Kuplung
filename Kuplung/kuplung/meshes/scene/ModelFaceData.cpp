@@ -12,6 +12,31 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
+ModelFaceData::~ModelFaceData() {
+    this->destroy();
+}
+
+void ModelFaceData::destroy() {
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboNormals);
+    glDeleteBuffers(1, &this->vboTextureCoordinates);
+    glDeleteBuffers(1, &this->vboIndices);
+    glDeleteBuffers(1, &this->vboTangents);
+    glDeleteBuffers(1, &this->vboBitangents);
+
+    glDeleteBuffers(1, &this->vboTextureAmbient);
+    glDeleteBuffers(1, &this->vboTextureDiffuse);
+    glDeleteBuffers(1, &this->vboTextureSpecular);
+    glDeleteBuffers(1, &this->vboTextureSpecularExp);
+    glDeleteBuffers(1, &this->vboTextureDissolve);
+    glDeleteBuffers(1, &this->vboTextureBump);
+    glDeleteBuffers(1, &this->vboTextureDisplacement);
+
+    glDeleteVertexArrays(1, &this->glVAO);
+
+    ModelFaceBase::~ModelFaceBase();
+}
+
 void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
 

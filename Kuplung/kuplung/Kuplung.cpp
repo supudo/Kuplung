@@ -15,13 +15,8 @@
 #pragma mark - Cleanup
 
 Kuplung::~Kuplung() {
-    this->destroy();
-}
-
-void Kuplung::destroy() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFaceBase *mmf = this->meshModelFaces[i];
-        mmf->destroy();
+        this->meshModelFaces[i]->destroy();
     }
 
     this->managerUI->destroy();
