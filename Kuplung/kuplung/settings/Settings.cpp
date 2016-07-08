@@ -40,13 +40,13 @@ void Settings::initSettings() {
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
+    m_pInstance->RendererType = m_pInstance->cfgUtils->readInt("RendererType");
 
     m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
     m_pInstance->logFileBrowser = m_pInstance->cfgUtils->readBool("logFileBrowser");
     m_pInstance->showPickRays = m_pInstance->cfgUtils->readBool("showPickRays");
     m_pInstance->Terrain_HeightmapImageHistory = m_pInstance->cfgUtils->readBool("Terrain_HeightmapImageHistory");
-    m_pInstance->DeferredRendering = m_pInstance->cfgUtils->readBool("DeferredRendering");
 
     m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
     m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
@@ -105,13 +105,13 @@ void Settings::saveSettings() {
 
     this->cfgUtils->writeInt("UIFontSize", this->UIFontSize);
     this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
+    this->cfgUtils->writeInt("RendererType", this->RendererType);
 
     this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);
     this->cfgUtils->writeBool("logFileBrowser", this->logFileBrowser);
     this->cfgUtils->writeBool("showPickRays", this->showPickRays);
     this->cfgUtils->writeBool("Terrain_HeightmapImageHistory", this->Terrain_HeightmapImageHistory);
-    this->cfgUtils->writeBool("DeferredRendering", this->DeferredRendering);
 
     this->cfgUtils->writeBool("ShowBoundingBox", this->ShowBoundingBox);
     this->cfgUtils->writeFloat("BoundingBoxPadding", this->BoundingBoxPadding);

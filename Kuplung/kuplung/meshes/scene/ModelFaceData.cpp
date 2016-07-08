@@ -107,14 +107,14 @@ void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
         // tangents
         glGenBuffers(1, &this->vboTangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
-        glBufferData(GL_ARRAY_BUFFER, (int)tangents.size() * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, int(tangents.size()) * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(3);
         glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // bitangents
         glGenBuffers(1, &this->vboBitangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
-        glBufferData(GL_ARRAY_BUFFER, (int)bitangents.size() * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, int(bitangents.size()) * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(4);
         glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
     }

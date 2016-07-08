@@ -203,7 +203,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
             ImGui::Separator();
 
-            if (Settings::Instance()->DeferredRendering) {
+            if (Settings::Instance()->RendererType == 2) {
                 ImGui::Text("Deferred Rendering Stage");
                 std::vector<const char*> deferred_texture_items;
                 deferred_texture_items.push_back("Lighting");

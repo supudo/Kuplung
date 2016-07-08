@@ -128,6 +128,9 @@
 		8AA9F2351D2173F6004A8F1C /* Terrain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2321D2173F6004A8F1C /* Terrain.cpp */; };
 		8AA9F23B1D21741B004A8F1C /* HeightmapGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2371D21741B004A8F1C /* HeightmapGenerator.cpp */; };
 		8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2391D21741B004A8F1C /* SpaceshipMeshGenerator.cpp */; };
+		8AB273381D2FCC77008508B1 /* RenderingSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB273361D2FCC77008508B1 /* RenderingSimple.cpp */; };
+		8AB2733B1D2FCC9E008508B1 /* rendering_simple.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB273391D2FCC8D008508B1 /* rendering_simple.frag */; };
+		8AB2733C1D2FCC9E008508B1 /* rendering_simple.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
 		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
@@ -306,6 +309,8 @@
 				8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */,
 				8ABFC1F81CC92C1600FBCF08 /* axis_helpers.frag in Copy Files */,
 				8ABFC1F91CC92C1600FBCF08 /* axis_helpers.vert in Copy Files */,
+				8AB2733B1D2FCC9E008508B1 /* rendering_simple.frag in Copy Files */,
+				8AB2733C1D2FCC9E008508B1 /* rendering_simple.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -552,6 +557,10 @@
 		8AA9F2381D21741B004A8F1C /* HeightmapGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HeightmapGenerator.hpp; path = pcg/HeightmapGenerator.hpp; sourceTree = "<group>"; };
 		8AA9F2391D21741B004A8F1C /* SpaceshipMeshGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpaceshipMeshGenerator.cpp; path = pcg/SpaceshipMeshGenerator.cpp; sourceTree = "<group>"; };
 		8AA9F23A1D21741B004A8F1C /* SpaceshipMeshGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SpaceshipMeshGenerator.hpp; path = pcg/SpaceshipMeshGenerator.hpp; sourceTree = "<group>"; };
+		8AB273361D2FCC77008508B1 /* RenderingSimple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingSimple.cpp; path = rendering/RenderingSimple.cpp; sourceTree = "<group>"; };
+		8AB273371D2FCC77008508B1 /* RenderingSimple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingSimple.hpp; path = rendering/RenderingSimple.hpp; sourceTree = "<group>"; };
+		8AB273391D2FCC8D008508B1 /* rendering_simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.frag; sourceTree = "<group>"; };
+		8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.vert; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
 		8AB6F0991C3AA1F900665C40 /* light.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light.mtl; sourceTree = "<group>"; };
@@ -681,6 +690,8 @@
 				8A7802D11D2D4F3A00D24620 /* RenderingForward.hpp */,
 				8A7802D21D2D4F3A00D24620 /* RenderingManager.cpp */,
 				8A7802D31D2D4F3A00D24620 /* RenderingManager.hpp */,
+				8AB273361D2FCC77008508B1 /* RenderingSimple.cpp */,
+				8AB273371D2FCC77008508B1 /* RenderingSimple.hpp */,
 			);
 			name = rendering;
 			sourceTree = "<group>";
@@ -1056,6 +1067,8 @@
 				8A48C3231CBE8B530076F4F6 /* ray_line.vert */,
 				8A7F386B1C7F28E8004D4520 /* reflection.frag */,
 				8A7F386C1C7F28E8004D4520 /* reflection.vert */,
+				8AB273391D2FCC8D008508B1 /* rendering_simple.frag */,
+				8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */,
 				8AECC0791CB274610096AE7A /* skybox.frag */,
 				8AECC07A1CB274610096AE7A /* skybox.vert */,
 				8AA9F22B1D2173CB004A8F1C /* spaceship.frag */,
@@ -1304,6 +1317,7 @@
 				8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
+				8AB273381D2FCC77008508B1 /* RenderingSimple.cpp in Sources */,
 				8A7802D41D2D4F3A00D24620 /* RenderingForward.cpp in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,

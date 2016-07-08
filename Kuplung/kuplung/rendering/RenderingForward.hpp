@@ -12,6 +12,7 @@
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 struct RenderingForward_LightSource {
     GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
@@ -24,13 +25,7 @@ public:
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces,
-                glm::mat4 matrixProjection,
-                glm::mat4 matrixCamera,
-                glm::vec3 vecCameraPosition,
-                WorldGrid *grid,
-                glm::vec3 uiAmbientLight,
-                int lightingPass_DrawMode);
+    void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
 
 private:
     bool initShaderProgram();

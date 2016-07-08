@@ -108,6 +108,7 @@ OTHER_FILES += resources/axis_helpers/*
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
     kuplung/rendering/RenderingManager.cpp \
+    kuplung/rendering/RenderingSimple.cpp \
     kuplung/rendering/RenderingForward.cpp \
     kuplung/rendering/RenderingDeferred.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
@@ -176,6 +177,7 @@ SOURCES += main.cpp \
 HEADERS += \
     kuplung/Kuplung.hpp \
     kuplung/rendering/RenderingManager.hpp \
+    kuplung/rendering/RenderingSimple.hpp \
     kuplung/rendering/RenderingForward.hpp \
     kuplung/rendering/RenderingDeferred.hpp \
     kuplung/meshes/scene/ModelFaceBase.hpp \
@@ -310,6 +312,8 @@ DISTFILES += \
     resources/shaders/deferred_light_box.frag \
     resources/shaders/deferred_shading.vert \
     resources/shaders/deferred_shading.frag \
+    resources/shaders/rendering_simple.vert \
+    resources/shaders/rendering_simple.frag \
     resources/shaders/model_face.vert \
     resources/shaders/model_face_effects.vert \
     resources/shaders/model_face_lights.vert \

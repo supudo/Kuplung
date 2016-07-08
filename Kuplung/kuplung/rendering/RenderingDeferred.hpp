@@ -12,18 +12,13 @@
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 class RenderingDeferred {
 public:
     ~RenderingDeferred();
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces,
-                glm::mat4 matrixProjection,
-                glm::mat4 matrixCamera,
-                glm::vec3 vecCameraPosition,
-                WorldGrid *grid,
-                glm::vec3 uiAmbientLight,
-                int lightingPass_DrawMode);
+    void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
 
 private:
     bool initGeometryPass();

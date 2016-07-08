@@ -338,13 +338,17 @@ void Kuplung::addSpaceshipModel() {
 }
 
 void Kuplung::renderScene() {
-    if (Settings::Instance()->DeferredRendering) {
-        this->renderSceneModels();
-        this->managerObjects->render();
-    }
-    else {
-        this->managerObjects->render();
-        this->renderSceneModels();
+    switch (Settings::Instance()->RendererType) {
+        case 2: {
+            this->renderSceneModels();
+            this->managerObjects->render();
+            break;
+        }
+        default: {
+            this->managerObjects->render();
+            this->renderSceneModels();
+            break;
+        }
     }
 
     for (size_t i=0; i<this->rayLines.size(); i++) {
@@ -355,12 +359,7 @@ void Kuplung::renderScene() {
 }
 
 void Kuplung::renderSceneModels() {
-    this->renderingManager->render(this->managerObjects->matrixProjection,
-                                   this->managerObjects->camera->matrixCamera,
-                                   this->managerObjects->camera->cameraPosition,
-                                   this->managerObjects->grid,
-                                   this->managerObjects->Setting_UIAmbientLight,
-                                   this->managerObjects->Setting_LightingPass_DrawMode);
+    this->renderingManager->render(this->managerObjects);
 
 //    if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
 //        this->renderingManager->render(this->meshModelFaces,

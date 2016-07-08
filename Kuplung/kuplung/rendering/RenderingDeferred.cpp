@@ -197,14 +197,14 @@ void RenderingDeferred::initGBuffer() {
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
+void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glm::mat4 projection = matrixProjection;
-        glm::mat4 view = matrixCamera;
+        glm::mat4 projection = managerObjects->matrixProjection;
+        glm::mat4 view = managerObjects->camera->matrixCamera;
         glm::mat4 model;
         glUseProgram(this->shaderProgram_GeometryPass);
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
@@ -252,8 +252,8 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, glm::
         GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
         glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
     }
-    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &vecCameraPosition[0]);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), lightingPass_DrawMode + 1);
+    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &managerObjects->camera->cameraPosition[0]);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), managerObjects->Setting_LightingPass_DrawMode + 1);
     this->renderQuad();
 
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer

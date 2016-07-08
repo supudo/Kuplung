@@ -9,6 +9,8 @@
 #ifndef RenderingManager_hpp
 #define RenderingManager_hpp
 
+#include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/rendering/RenderingSimple.hpp"
 #include "kuplung/rendering/RenderingForward.hpp"
 #include "kuplung/rendering/RenderingDeferred.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
@@ -16,12 +18,7 @@
 class RenderingManager {
 public:
     void init();
-    void render(glm::mat4 matrixProjection,
-                glm::mat4 matrixCamera,
-                glm::vec3 vecCameraPosition,
-                WorldGrid *grid,
-                glm::vec3 uiAmbientLight,
-                int lightingPass_DrawMode);
+    void render(ObjectsManager *managerObjects);
 
     int RenderingTotalVertices;
     int RenderingTotalIndices;
@@ -31,8 +28,9 @@ public:
     std::vector<ModelFaceData*> meshModelFaces;
 
 private:
-    RenderingForward *renderingForward;
-    RenderingDeferred *renderingDeferred;
+    RenderingSimple *rendererSimple;
+    RenderingForward *rendererForward;
+    RenderingDeferred *rendererDeferred;
 };
 
 #endif /* RenderingManager_hpp */

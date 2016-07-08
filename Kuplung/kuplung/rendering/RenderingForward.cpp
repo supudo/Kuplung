@@ -19,7 +19,6 @@ RenderingForward::~RenderingForward() {
 }
 
 void RenderingForward::destroy() {
-
 //    if (this->vboTextureAmbient > 0)
 //        glDeleteBuffers(1, &this->vboTextureAmbient);
 //    if (this->vboTextureDiffuse > 0)
@@ -302,13 +301,13 @@ bool RenderingForward::initShaderProgram() {
     return success;
 }
 
-void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight, int lightingPass_DrawMode) {
-    this->matrixProjection = matrixProjection;
-    this->matrixCamera = matrixCamera;
-    this->vecCameraPosition = vecCameraPosition;
-    this->uiAmbientLight = uiAmbientLight;
-    this->grid = grid;
-    this->lightingPass_DrawMode = lightingPass_DrawMode;
+void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
+    this->matrixProjection = managerObjects->matrixProjection;
+    this->matrixCamera = managerObjects->camera->matrixCamera;
+    this->vecCameraPosition = managerObjects->camera->cameraPosition;
+    this->uiAmbientLight = managerObjects->Setting_UIAmbientLight;
+    this->grid = managerObjects->grid;
+    this->lightingPass_DrawMode = managerObjects->Setting_LightingPass_DrawMode;
 
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
@@ -330,6 +329,10 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, glm::m
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
         // translate
         matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+
+        mfd->matrixProjection = this->matrixProjection;
+        mfd->matrixCamera = this->matrixCamera;
+        mfd->matrixModel = matrixModel;
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
