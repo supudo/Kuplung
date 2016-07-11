@@ -202,23 +202,23 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glm::mat4 projection = managerObjects->matrixProjection;
-        glm::mat4 view = managerObjects->camera->matrixCamera;
-        glm::mat4 model;
-        glUseProgram(this->shaderProgram_GeometryPass);
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(view));
-        for (GLuint i = 0; i < this->objectPositions.size(); i++) {
-            model = glm::mat4();
-            model = glm::translate(model, this->objectPositions[i]);
-            model = glm::scale(model, glm::vec3(0.25f));
-            glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glm::mat4 projection = managerObjects->matrixProjection;
+    glm::mat4 view = managerObjects->camera->matrixCamera;
+    glm::mat4 model;
+    glUseProgram(this->shaderProgram_GeometryPass);
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    for (GLuint i=0; i<this->objectPositions.size(); i++) {
+        model = glm::mat4();
+        model = glm::translate(model, this->objectPositions[i]);
+        model = glm::scale(model, glm::vec3(0.25f));
+        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
-            for (size_t j=0; j<meshModelFaces.size(); j++) {
-                meshModelFaces[j]->renderModel(false);
-            }
+        for (size_t j=0; j<meshModelFaces.size(); j++) {
+            meshModelFaces[j]->renderModel(false);
         }
+    }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -235,7 +235,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
     glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
 
     // Also send light relevant uniforms
-    for (GLuint i = 0; i < this->lightPositions.size(); i++) {
+    for (GLuint i=0; i<this->lightPositions.size(); i++) {
         glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
         glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
@@ -273,8 +273,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(view));
-    for (GLuint i = 0; i < this->lightPositions.size(); i++)
-    {
+    for (GLuint i=0; i<this->lightPositions.size(); i++) {
         model = glm::mat4();
         model = glm::translate(model, lightPositions[i]);
         model = glm::scale(model, glm::vec3(0.25f));
@@ -285,8 +284,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
 }
 
 void RenderingDeferred::renderQuad() {
-    if (this->quadVAO == 0)
-    {
+    if (this->quadVAO == 0) {
         GLfloat quadVertices[] = {
             // Positions        // Texture Coords
             -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
@@ -312,9 +310,7 @@ void RenderingDeferred::renderQuad() {
 
 
 void RenderingDeferred::renderCube() {
-    // Initialize (if necessary)
-    if (this->cubeVAO == 0)
-    {
+    if (this->cubeVAO == 0) {
         GLfloat vertices[] = {
             // Back face
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // Bottom-left
