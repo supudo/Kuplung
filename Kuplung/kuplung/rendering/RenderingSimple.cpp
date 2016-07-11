@@ -151,8 +151,8 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, Objects
 
         if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
             glUniform1i(this->glFS_HasSamplerTexture, 1);
-            glUniform1i(this->glFS_SamplerTexture, 1);
-            glActiveTexture(GL_TEXTURE1);
+            glUniform1i(this->glFS_SamplerTexture, 0);
+            glActiveTexture(GL_TEXTURE0);
             glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDiffuse);
         }
         else
