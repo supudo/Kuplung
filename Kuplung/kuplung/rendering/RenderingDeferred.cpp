@@ -132,15 +132,15 @@ void RenderingDeferred::initProps() {
     srand(13);
     for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
         // Calculate slightly random offsets
-        GLfloat xPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
-        GLfloat yPos = ((rand() % 100) / 100.0) * 6.0 - 4.0;
-        GLfloat zPos = ((rand() % 100) / 100.0) * 6.0 - 3.0;
+        GLfloat xPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
+        GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 4.0f;
+        GLfloat zPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
         this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
 
         // Also calculate random color
-        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
-        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5; // Between 0.5 and 1.0
+        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
+        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
+        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
         this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
     }
 }
@@ -241,8 +241,8 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
 
         // Update attenuation parameters and calculate radius
         const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
-        const GLfloat linear = 0.7;
-        const GLfloat quadratic = 1.8;
+        const GLfloat linear = 0.7f;
+        const GLfloat quadratic = 1.8f;
         glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), linear);
         glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), quadratic);
 
