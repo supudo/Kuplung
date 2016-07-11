@@ -334,6 +334,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
         mfd->matrixCamera = this->matrixCamera;
         mfd->matrixModel = matrixModel;
         mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
+        mfd->lightSources = managerObjects->lightSources;
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
