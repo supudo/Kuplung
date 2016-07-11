@@ -29,9 +29,6 @@ void main()
     vec3 Diffuse = texture(gAlbedoSpec, TexCoords).rgb;
     float Specular = texture(gAlbedoSpec, TexCoords).a;
 
-//    if (Normal == vec3(0.0, 0.0, 0.0))
-//        discard;
-
     // Then calculate lighting as usual
     vec3 lighting  = Diffuse * 0.1; // hard-coded ambient component
     vec3 viewDir  = normalize(viewPos - FragPos);
@@ -57,14 +54,14 @@ void main()
     }
 
     // Based on which of the 1-5 keys we pressed, show final result or intermediate g-buffer textures
-    if(draw_mode == 1)
+    if (draw_mode == 1)
         FragColor = vec4(lighting, 1.0);
-    else if(draw_mode == 2)
+    else if (draw_mode == 2)
         FragColor = vec4(FragPos, 1.0);
-    else if(draw_mode == 3)
+    else if (draw_mode == 3)
         FragColor = vec4(Normal, 1.0);
-    else if(draw_mode == 4)
+    else if (draw_mode == 4)
         FragColor = vec4(Diffuse, 1.0);
-    else if(draw_mode == 5)
+    else if (draw_mode == 5)
         FragColor = vec4(vec3(Specular), 1.0);
 }

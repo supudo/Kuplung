@@ -131,6 +131,11 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, Objects
         mfd->matrixProjection = this->matrixProjection;
         mfd->matrixCamera = this->matrixCamera;
         mfd->matrixModel = matrixModel;
+        mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
+        mfd->lightSources = managerObjects->lightSources;
+        mfd->setOptionsFOV(managerObjects->Setting_FOV);
+        mfd->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
+        mfd->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

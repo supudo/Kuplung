@@ -335,6 +335,9 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
         mfd->matrixModel = matrixModel;
         mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
         mfd->lightSources = managerObjects->lightSources;
+        mfd->setOptionsFOV(managerObjects->Setting_FOV);
+        mfd->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
+        mfd->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

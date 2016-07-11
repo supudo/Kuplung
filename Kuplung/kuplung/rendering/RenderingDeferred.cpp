@@ -216,6 +216,14 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
+            meshModelFaces[j]->matrixProjection = projection;
+            meshModelFaces[j]->matrixCamera = view;
+            meshModelFaces[j]->matrixModel = model;
+            meshModelFaces[j]->Setting_ModelViewSkin = managerObjects->viewModelSkin;
+            meshModelFaces[j]->lightSources = managerObjects->lightSources;
+            meshModelFaces[j]->setOptionsFOV(managerObjects->Setting_FOV);
+            meshModelFaces[j]->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
+            meshModelFaces[j]->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
             meshModelFaces[j]->renderModel(false);
         }
     }
