@@ -425,6 +425,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             ImGui::Separator();
 
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Solid Skin");
+
             this->helperUI->addControlColor3("Light - Ambient", &this->managerObjects->SolidLight_Ambient, &this->managerObjects->SolidLight_Ambient_ColorPicker);
             this->helperUI->addControlsSlider("Intensity", 4, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Ambient_Strength, true, isFrame);
 
@@ -436,6 +437,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             this->helperUI->addControlColor3("Material Color", &this->managerObjects->SolidLight_MaterialColor, &this->managerObjects->SolidLight_MaterialColor_ColorPicker);
             ImGui::Separator();
+
+            ImGui::Text("Direction");
+            this->helperUI->addControlsSliderSameLine("X", 7, 0.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.x, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.y, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z", 9, 0.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.z, true, isFrame);
             break;
         }
         case 5: {

@@ -130,6 +130,7 @@ void ModelFaceData::renderModel(bool useTessellation) {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glBindVertexArray(this->glVAO);
+
     if (useTessellation)
         glDrawElements(GL_PATCHES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
     else

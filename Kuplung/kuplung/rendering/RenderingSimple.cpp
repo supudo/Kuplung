@@ -145,7 +145,7 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, Objects
         glUniform3f(this->glFS_solidSkin_materialColor, mfd->solidLightSkin_MaterialColor.r, mfd->solidLightSkin_MaterialColor.g, mfd->solidLightSkin_MaterialColor.b);
 
         glUniform1i(this->solidLight->gl_InUse, 1);
-        glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
+        glUniform3f(this->solidLight->gl_Direction, managerObjects->SolidLight_Direction.x, managerObjects->SolidLight_Direction.y, managerObjects->SolidLight_Direction.z);
         glUniform3f(this->solidLight->gl_Ambient, managerObjects->SolidLight_Ambient.r, managerObjects->SolidLight_Ambient.g, managerObjects->SolidLight_Ambient.b);
         glUniform3f(this->solidLight->gl_Diffuse, managerObjects->SolidLight_Diffuse.r, managerObjects->SolidLight_Diffuse.g, managerObjects->SolidLight_Diffuse.b);
         glUniform3f(this->solidLight->gl_Specular, managerObjects->SolidLight_Specular.r, managerObjects->SolidLight_Specular.g, managerObjects->SolidLight_Specular.b);

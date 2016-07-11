@@ -79,6 +79,7 @@ public:
     int Setting_LightingPass_DrawMode;
 
     ViewModelSkin viewModelSkin;
+    glm::vec3 SolidLight_Direction;
     glm::vec3 SolidLight_MaterialColor, SolidLight_Ambient, SolidLight_Diffuse, SolidLight_Specular;
     float SolidLight_Ambient_Strength, SolidLight_Diffuse_Strength, SolidLight_Specular_Strength;
     bool SolidLight_MaterialColor_ColorPicker, SolidLight_Ambient_ColorPicker, SolidLight_Diffuse_ColorPicker, SolidLight_Specular_ColorPicker;
