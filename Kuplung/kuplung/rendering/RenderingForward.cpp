@@ -399,12 +399,12 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
 
         glUniform1i(this->solidLight->gl_InUse, 1);
         glUniform3f(this->solidLight->gl_Direction, 0.0f, 1.0f, 0.0f);
-        glUniform3f(this->solidLight->gl_Ambient, mfd->solidLightSkin_Ambient.r, mfd->solidLightSkin_Ambient.g, mfd->solidLightSkin_Ambient.b);
-        glUniform3f(this->solidLight->gl_Diffuse, mfd->solidLightSkin_Diffuse.r, mfd->solidLightSkin_Diffuse.g, mfd->solidLightSkin_Diffuse.b);
-        glUniform3f(this->solidLight->gl_Specular, mfd->solidLightSkin_Specular.r, mfd->solidLightSkin_Specular.g, mfd->solidLightSkin_Specular.b);
-        glUniform1f(this->solidLight->gl_StrengthAmbient, mfd->solidLightSkin_Ambient_Strength);
-        glUniform1f(this->solidLight->gl_StrengthDiffuse, mfd->solidLightSkin_Diffuse_Strength);
-        glUniform1f(this->solidLight->gl_StrengthSpecular, mfd->solidLightSkin_Specular_Strength);
+        glUniform3f(this->solidLight->gl_Ambient, managerObjects->SolidLight_Ambient.r, managerObjects->SolidLight_Ambient.g, managerObjects->SolidLight_Ambient.b);
+        glUniform3f(this->solidLight->gl_Diffuse, managerObjects->SolidLight_Diffuse.r, managerObjects->SolidLight_Diffuse.g, managerObjects->SolidLight_Diffuse.b);
+        glUniform3f(this->solidLight->gl_Specular, managerObjects->SolidLight_Specular.r, managerObjects->SolidLight_Specular.g, managerObjects->SolidLight_Specular.b);
+        glUniform1f(this->solidLight->gl_StrengthAmbient, managerObjects->SolidLight_Ambient_Strength);
+        glUniform1f(this->solidLight->gl_StrengthDiffuse, managerObjects->SolidLight_Diffuse_Strength);
+        glUniform1f(this->solidLight->gl_StrengthSpecular, managerObjects->SolidLight_Specular_Strength);
 
         // lights
         int lightsCount_Directional = 0;
@@ -421,7 +421,6 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
 
                         // light
                         glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
-                        //printf("%f, %f, %f\n", light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
 
                         // color
                         glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
