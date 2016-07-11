@@ -1,0 +1,39 @@
+#version 410 core
+
+layout(vertices = 3) out;
+
+in vec3 tcs_vertexPosition[];
+in vec2 tcs_textureCoord[];
+in vec3 tcs_vertexNormal0[];
+in vec3 tcs_vertexNormal[];
+in vec3 tcs_tangent0[];
+in vec3 tcs_tangent[];
+in vec3 tcs_bitangent0[];
+in vec3 tcs_bitangent[];
+
+out vec3 tes_vertexPosition[];
+out vec2 tes_textureCoord[];
+out vec3 tes_vertexNormal0[];
+out vec3 tes_vertexNormal[];
+out vec3 tes_tangent0[];
+out vec3 tes_tangent[];
+out vec3 tes_bitangent0[];
+out vec3 tes_bitangent[];
+
+void main() {
+    tes_vertexPosition[gl_InvocationID] = tcs_vertexPosition[gl_InvocationID];
+    tes_textureCoord[gl_InvocationID] = tcs_textureCoord[gl_InvocationID];
+    tes_vertexNormal0[gl_InvocationID] = tcs_vertexNormal0[gl_InvocationID];
+    tes_vertexNormal[gl_InvocationID] = tcs_vertexNormal[gl_InvocationID];
+    tes_tangent0[gl_InvocationID] = tcs_tangent0[gl_InvocationID];
+    tes_tangent[gl_InvocationID] = tcs_tangent[gl_InvocationID];
+    tes_bitangent0[gl_InvocationID] = tcs_bitangent0[gl_InvocationID];
+    tes_bitangent[gl_InvocationID] = tcs_bitangent[gl_InvocationID];
+
+    if (gl_InvocationID == 0) {
+        gl_TessLevelInner[0] = 1.0;
+        gl_TessLevelOuter[0] = 1.0;
+        gl_TessLevelOuter[1] = 1.0;
+        gl_TessLevelOuter[2] = 1.0;
+    }
+}

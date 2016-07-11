@@ -1,0 +1,44 @@
+#version 410 core
+
+layout(triangles, equal_spacing, ccw) in;
+
+uniform mat4 vs_MVPMatrix;
+
+in vec3 tes_vertexPosition[];
+in vec2 tes_textureCoord[];
+in vec3 tes_vertexNormal0[];
+in vec3 tes_vertexNormal[];
+in vec3 tes_tangent0[];
+in vec3 tes_tangent[];
+in vec3 tes_bitangent0[];
+in vec3 tes_bitangent[];
+
+out vec3 gs_vertexPosition;
+out vec2 gs_textureCoord;
+out vec3 gs_vertexNormal0;
+out vec3 gs_vertexNormal;
+out vec3 gs_tangent0;
+out vec3 gs_tangent;
+out vec3 gs_bitangent0;
+out vec3 gs_bitangent;
+
+vec3 interpolate3D(vec3 v0, vec3 v1, vec3 v2) {
+    return vec3(gl_TessCoord.x) * v0 + vec3(gl_TessCoord.y) * v1 + vec3(gl_TessCoord.z) * v2;
+}
+
+vec2 interpolate2D(vec2 v0, vec2 v1, vec2 v2)  {
+    return vec2(gl_TessCoord.x) * v0 + vec2(gl_TessCoord.y) * v1 + vec2(gl_TessCoord.z) * v2;
+}
+
+void main() {
+    gs_vertexPosition = interpolate3D(tes_vertexPosition[0], tes_vertexPosition[1], tes_vertexPosition[2]);
+    gs_textureCoord = interpolate2D(tes_textureCoord[0], tes_textureCoord[1], tes_textureCoord[2]);
+    gs_vertexNormal0 = interpolate3D(tes_vertexNormal0[0], tes_vertexNormal0[1], tes_vertexNormal0[2]);
+    gs_vertexNormal = interpolate3D(tes_vertexNormal[0], tes_vertexNormal[1], tes_vertexNormal[2]);
+    gs_tangent0 = interpolate3D(tes_tangent0[0], tes_tangent0[1], tes_tangent0[2]);
+    gs_tangent = interpolate3D(tes_tangent[0], tes_tangent[1], tes_tangent[2]);
+    gs_bitangent0 = interpolate3D(tes_bitangent0[0], tes_bitangent0[1], tes_bitangent0[2]);
+    gs_bitangent = interpolate3D(tes_bitangent[0], tes_bitangent[1], tes_bitangent[2]);
+
+    gl_Position = vs_MVPMatrix * vec4(gs_vertexPosition, 1.0);
+}

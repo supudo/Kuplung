@@ -122,7 +122,7 @@ void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     glBindVertexArray(0);
 }
 
-void ModelFaceData::renderModel() {
+void ModelFaceData::renderModel(bool useTessellation) {
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 
@@ -130,7 +130,11 @@ void ModelFaceData::renderModel() {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     glBindVertexArray(this->glVAO);
-    glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
+    if (useTessellation)
+        glDrawElements(GL_PATCHES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
+    else
+        glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
+
     glBindVertexArray(0);
 
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)

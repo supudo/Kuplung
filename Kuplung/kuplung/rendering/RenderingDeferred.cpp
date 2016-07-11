@@ -216,7 +216,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
             glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
             for (size_t j=0; j<meshModelFaces.size(); j++) {
-                meshModelFaces[j]->renderModel();
+                meshModelFaces[j]->renderModel(false);
             }
         }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);

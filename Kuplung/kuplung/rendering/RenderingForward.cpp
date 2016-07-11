@@ -612,7 +612,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
             mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
             glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
             glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
-            mfd->renderModel();
+            mfd->renderModel(true);
             glEnable(GL_DEPTH_TEST);
         }
 
@@ -623,7 +623,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, Object
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrixDraw));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
 
-        mfd->renderModel();
+        mfd->renderModel(true);
     }
 
     glUseProgram(0);

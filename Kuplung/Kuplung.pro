@@ -313,6 +313,9 @@ DISTFILES += \
     resources/shaders/deferred_shading.vert \
     resources/shaders/deferred_shading.frag \
     resources/shaders/rendering_simple.vert \
+    resources/shaders/rendering_simple.tcs \
+    resources/shaders/rendering_simple.tes \
+    resources/shaders/rendering_simple.geom \
     resources/shaders/rendering_simple.frag \
     resources/shaders/model_face.vert \
     resources/shaders/model_face_effects.vert \

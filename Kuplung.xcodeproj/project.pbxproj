@@ -188,6 +188,9 @@
 		8ADE50C31D2D41F900A6E7F0 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */; };
 		8AECC07B1CB274810096AE7A /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
 		8AECC07C1CB274810096AE7A /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
+		8AF9D9C51D33BC0100D3AAB7 /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
+		8AF9D9C61D33BC0100D3AAB7 /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
+		8AF9D9C71D33BC0100D3AAB7 /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -310,6 +313,9 @@
 				8ABFC1F81CC92C1600FBCF08 /* axis_helpers.frag in Copy Files */,
 				8ABFC1F91CC92C1600FBCF08 /* axis_helpers.vert in Copy Files */,
 				8AB2733B1D2FCC9E008508B1 /* rendering_simple.frag in Copy Files */,
+				8AF9D9C51D33BC0100D3AAB7 /* rendering_simple.geom in Copy Files */,
+				8AF9D9C61D33BC0100D3AAB7 /* rendering_simple.tcs in Copy Files */,
+				8AF9D9C71D33BC0100D3AAB7 /* rendering_simple.tes in Copy Files */,
 				8AB2733C1D2FCC9E008508B1 /* rendering_simple.vert in Copy Files */,
 			);
 			name = "Copy Files";
@@ -633,6 +639,9 @@
 		8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_top.jpg; path = skybox/stormydays_top.jpg; sourceTree = "<group>"; };
 		8AECC0791CB274610096AE7A /* skybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.frag; sourceTree = "<group>"; };
 		8AECC07A1CB274610096AE7A /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
+		8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.geom; sourceTree = "<group>"; };
+		8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tcs; sourceTree = "<group>"; };
+		8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1068,6 +1077,9 @@
 				8A7F386B1C7F28E8004D4520 /* reflection.frag */,
 				8A7F386C1C7F28E8004D4520 /* reflection.vert */,
 				8AB273391D2FCC8D008508B1 /* rendering_simple.frag */,
+				8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */,
+				8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */,
+				8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */,
 				8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */,
 				8AECC0791CB274610096AE7A /* skybox.frag */,
 				8AECC07A1CB274610096AE7A /* skybox.vert */,

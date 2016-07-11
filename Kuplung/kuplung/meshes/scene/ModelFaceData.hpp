@@ -16,7 +16,7 @@ public:
     ~ModelFaceData();
     void destroy();
     void init(MeshModel model, std::string assetsFolder);
-    void renderModel();
+    void renderModel(bool useTessellation);
 
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
 

@@ -29,6 +29,21 @@ bool RenderingSimple::init() {
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // tessellation control shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.tcs";
+    std::string shaderSourceTCS = this->glUtils->readFile(shaderPath.c_str());
+    const char *shader_tess_control = shaderSourceTCS.c_str();
+
+    // tessellation evaluation shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.tes";
+    std::string shaderSourceTES = this->glUtils->readFile(shaderPath.c_str());
+    const char *shader_tess_eval = shaderSourceTES.c_str();
+
+    // geometry shader
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.geom";
+    std::string shaderSourceGeometry = this->glUtils->readFile(shaderPath.c_str());
+    const char *shader_geometry = shaderSourceGeometry.c_str();
+
+    // fragment shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.frag";
     std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
@@ -37,6 +52,9 @@ bool RenderingSimple::init() {
 
     bool shaderCompilation = true;
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
     shaderCompilation |= this->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
@@ -52,6 +70,8 @@ bool RenderingSimple::init() {
         return false;
     }
     else {
+        glPatchParameteri(GL_PATCH_VERTICES, 3);
+
         this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
         this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
@@ -59,6 +79,7 @@ bool RenderingSimple::init() {
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+        this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
 
         this->glFS_HasSamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "has_texture");
         this->glFS_SamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
@@ -116,6 +137,8 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, Objects
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
+        glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+
         glUniform3f(this->glFS_CameraPosition, this->vecCameraPosition.x, this->vecCameraPosition.y, this->vecCameraPosition.z);
         glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
 
@@ -139,7 +162,7 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, Objects
         else
             glUniform1i(this->glFS_HasSamplerTexture, 0);
 
-        mfd->renderModel();
+        mfd->renderModel(true);
     }
 
     glUseProgram(0);
