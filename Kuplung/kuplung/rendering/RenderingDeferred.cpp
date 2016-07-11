@@ -17,10 +17,11 @@ bool RenderingDeferred::init() {
 
     success |= this->initGeometryPass();
     success |= this->initLighingPass();
-    success |= this->initLights();
+    success |= this->initLightObjects();
 
     this->initProps();
     this->initGBuffer();
+    this->initLights();
 
     return success;
 }
@@ -83,7 +84,7 @@ bool RenderingDeferred::initLighingPass() {
     return true;
 }
 
-bool RenderingDeferred::initLights() {
+bool RenderingDeferred::initLightObjects() {
     // Light Boxes
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
@@ -197,18 +198,88 @@ void RenderingDeferred::initGBuffer() {
     glClearColor(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
+void RenderingDeferred::initLights() {
+    // light - directional
+    for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
+        ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
+        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
+
+        f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
+
+        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
+
+        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        this->mfLights_Directional.push_back(f);
+    }
+
+    // light - point
+    for (int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
+        ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
+        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
+        f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].position").c_str());
+
+        f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].constant").c_str());
+        f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].linear").c_str());
+        f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
+
+        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].specular").c_str());
+
+        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        this->mfLights_Point.push_back(f);
+    }
+
+    // light - spot
+    for (int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
+        ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
+        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
+
+        f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].position").c_str());
+        f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].direction").c_str());
+
+        f->gl_CutOff = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
+        f->gl_OuterCutOff = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
+
+        f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].constant").c_str());
+        f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].linear").c_str());
+        f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
+
+        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].specular").c_str());
+
+        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        this->mfLights_Spot.push_back(f);
+    }
+}
+
 void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
+    this->renderGBuffer(meshModelFaces, managerObjects);
+    this->renderLightingPass(managerObjects);
+    this->renderLightObjects();
+}
+
+void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glm::mat4 projection = managerObjects->matrixProjection;
-    glm::mat4 view = managerObjects->camera->matrixCamera;
+    this->matrixProject = managerObjects->matrixProjection;
+    this->matrixCamera = managerObjects->camera->matrixCamera;
     glm::mat4 model;
     glUseProgram(this->shaderProgram_GeometryPass);
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
     for (GLuint i=0; i<this->objectPositions.size(); i++) {
         model = glm::mat4();
         model = glm::translate(model, this->objectPositions[i]);
@@ -216,8 +287,8 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
-            meshModelFaces[j]->matrixProjection = projection;
-            meshModelFaces[j]->matrixCamera = view;
+            meshModelFaces[j]->matrixProjection = this->matrixProject;
+            meshModelFaces[j]->matrixCamera = this->matrixCamera;
             meshModelFaces[j]->matrixModel = model;
             meshModelFaces[j]->Setting_ModelViewSkin = managerObjects->viewModelSkin;
             meshModelFaces[j]->lightSources = managerObjects->lightSources;
@@ -230,7 +301,9 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
 
+void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
@@ -263,7 +336,9 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &managerObjects->camera->cameraPosition[0]);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), managerObjects->Setting_LightingPass_DrawMode + 1);
     this->renderQuad();
+}
 
+void RenderingDeferred::renderLightObjects() {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
@@ -279,10 +354,10 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
 
     // 3. Render lights on top of scene, by blitting
     glUseProgram(this->shaderProgram_LightBox);
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(projection));
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(view));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
+    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
     for (GLuint i=0; i<this->lightPositions.size(); i++) {
-        model = glm::mat4();
+        glm::mat4 model = glm::mat4();
         model = glm::translate(model, lightPositions[i]);
         model = glm::scale(model, glm::vec3(0.25f));
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(model));

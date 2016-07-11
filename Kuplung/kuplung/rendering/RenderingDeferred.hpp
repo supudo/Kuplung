@@ -23,16 +23,28 @@ public:
 private:
     bool initGeometryPass();
     bool initLighingPass();
-    bool initLights();
+    bool initLightObjects();
     void initProps();
     void initGBuffer();
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
+    void initLights();
+
+    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
+    void renderLightingPass(ObjectsManager *managerObjects);
+    void renderLightObjects();
+
+    glm::mat4 matrixProject, matrixCamera;
 
     GLUtils *glUtils;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
     GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint gl_TextureDiffuse, gl_TextureSpecular;
+
+    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+    std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
+    std::vector<ModelFace_LightSource_Point *> mfLights_Point;
+    std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     GLuint gBuffer;
     GLuint gPosition, gNormal, gAlbedoSpec;
