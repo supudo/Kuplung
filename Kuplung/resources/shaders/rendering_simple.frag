@@ -11,18 +11,17 @@ struct LightSource_Directional {
 };
 
 uniform LightSource_Directional solidSkin_Light;
-uniform vec3 solidSkin_materialColor;
 uniform vec3 fs_UIAmbient;
 uniform vec3 fs_cameraPosition;
 
-out vec3 fs_vertexPosition;
-out vec2 fs_textureCoord;
-out vec3 fs_vertexNormal0;
-out vec3 fs_vertexNormal;
-out vec3 fs_tangent0;
-out vec3 fs_tangent;
-out vec3 fs_bitangent0;
-out vec3 fs_bitangent;
+in vec3 fs_vertexPosition;
+in vec2 fs_textureCoord;
+in vec3 fs_vertexNormal0;
+in vec3 fs_vertexNormal;
+in vec3 fs_tangent0;
+in vec3 fs_tangent;
+in vec3 fs_bitangent0;
+in vec3 fs_bitangent;
 
 out vec4 fragColor;
 
