@@ -76,6 +76,7 @@ public:
     glm::vec3 Setting_UIAmbientLight;
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
     bool Settings_ShowZAxis = true;
+    bool Setting_DeferredTestMode;
     int Setting_LightingPass_DrawMode;
     float Setting_DeferredAmbientStrength;
 

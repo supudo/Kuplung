@@ -215,6 +215,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                 ImGui::Text("Ambient Strength");
                 ImGui::SliderFloat("##109", &this->managerObjects->Setting_DeferredAmbientStrength, 0.0f, 1.0f);
+
+                ImGui::Checkbox("Deferred Test Mode", &this->managerObjects->Setting_DeferredTestMode);
+
                 ImGui::Separator();
             }
 

@@ -156,25 +156,15 @@ void RenderingDeferred::initProps() {
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gNormal"), 1);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gAlbedoSpec"), 2);
 
+    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
     this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
     this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
     this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
     this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
-    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
     this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
     this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
     this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
     this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
-
-//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
-//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
-//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
-//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
-//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
-//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
-//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
-//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
-//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
 
     // - Colors
     srand(13);
@@ -327,7 +317,13 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glUseProgram(this->shaderProgram_GeometryPass);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (GLuint i=0; i<this->objectPositions.size(); i++) {
+
+    GLuint i_to = 0;
+    if (managerObjects->Setting_DeferredTestMode)
+        i_to = this->objectPositions.size();
+    else
+        i_to = 1;
+    for (GLuint i=0; i<i_to; i++) {
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
