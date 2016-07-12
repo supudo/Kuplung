@@ -322,23 +322,33 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     this->matrixProject = managerObjects->matrixProjection;
     this->matrixCamera = managerObjects->camera->matrixCamera;
-    glm::mat4 model;
+    glm::mat4 matrixModel;
     glUseProgram(this->shaderProgram_GeometryPass);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
     for (GLuint i=0; i<this->objectPositions.size(); i++) {
-        model = glm::mat4();
-        model = glm::translate(model, this->objectPositions[i]);
-        model = glm::scale(model, glm::vec3(0.25f));
+        matrixModel = glm::mat4();
 
-        model = glm::translate(model, glm::vec3(0, 0, 0));
-        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-        model = glm::translate(model, glm::vec3(0, 0, 0));
+        matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
+        matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
 
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        matrixModel *= managerObjects->grid->matrixModel;
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
             ModelFaceData *mfd = meshModelFaces[j];
+
+            // scale
+            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+            // rotate
+            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
+            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+            // translate
+            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+
+            glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
 
             if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
                 glUniform1i(this->gl_GeometryPass_Texture_Diffuse, 0);
@@ -354,7 +364,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
 
             mfd->matrixProjection = this->matrixProject;
             mfd->matrixCamera = this->matrixCamera;
-            mfd->matrixModel = model;
+            mfd->matrixModel = matrixModel;
             mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
             mfd->lightSources = managerObjects->lightSources;
             mfd->setOptionsFOV(managerObjects->Setting_FOV);
