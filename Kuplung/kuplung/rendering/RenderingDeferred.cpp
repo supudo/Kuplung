@@ -311,7 +311,7 @@ void RenderingDeferred::initLights() {
 void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
     this->renderGBuffer(meshModelFaces, managerObjects);
     this->renderLightingPass(managerObjects);
-    this->renderLightObjects();
+    this->renderLightObjects(managerObjects);
 }
 
 void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
@@ -332,7 +332,12 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
         matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
 
-        matrixModel *= managerObjects->grid->matrixModel;
+        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+        matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
+        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+
+//        matrixModel *= managerObjects->grid->matrixModel;
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
             ModelFaceData *mfd = meshModelFaces[j];
@@ -521,7 +526,7 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     this->renderQuad();
 }
 
-void RenderingDeferred::renderLightObjects() {
+void RenderingDeferred::renderLightObjects(ObjectsManager *managerObjects) {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
@@ -540,10 +545,17 @@ void RenderingDeferred::renderLightObjects() {
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
     for (GLuint i=0; i<this->lightPositions.size(); i++) {
-        glm::mat4 model = glm::mat4();
-        model = glm::translate(model, this->lightPositions[i]);
-        model = glm::scale(model, glm::vec3(0.25f));
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(model));
+        glm::mat4 matrixModel = glm::mat4();
+//        matrixModel *= managerObjects->grid->matrixModel;
+        matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
+        matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
+
+//        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+//        matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+//        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
+//        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+
+        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
         glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &this->lightColors[i][0]);
         this->renderCube();
     }

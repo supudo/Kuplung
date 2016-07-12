@@ -33,7 +33,7 @@ private:
 
     void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
     void renderLightingPass(ObjectsManager *managerObjects);
-    void renderLightObjects();
+    void renderLightObjects(ObjectsManager *managerObjects);
 
     glm::mat4 matrixProject, matrixCamera;
 
