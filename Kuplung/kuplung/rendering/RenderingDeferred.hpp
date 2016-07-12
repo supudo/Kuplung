@@ -46,8 +46,7 @@ private:
     std::vector<ModelFace_LightSource_Point *> mfLights_Point;
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
-    GLuint gBuffer;
-    GLuint gPosition, gNormal, gAlbedoSpec;
+    GLuint gBuffer, gPosition, gNormal, gAlbedoSpec;
 
     const GLuint NR_LIGHTS = 32;
     std::vector<glm::vec3> objectPositions;
