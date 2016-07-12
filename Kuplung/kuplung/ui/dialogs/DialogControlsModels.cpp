@@ -99,7 +99,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
 }
 
 void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture) {
-    ModelFaceBase *mmf = (*meshModelFaces)[this->selectedObject];
+    ModelFaceBase *mmf = (*this->meshModelFaces)[this->selectedObject];
     std::string image, title;
     bool * useTexture;
     switch (texType) {
@@ -156,38 +156,38 @@ void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTexture
             *loadTexture = false;
             switch (texType) {
                 case MaterialTextureType_Ambient: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureAmbient.Image = "";
                     break;
                 }
                 case MaterialTextureType_Dissolve: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDissolve.Image = "";
                     break;
                 }
                 case MaterialTextureType_Bump: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureBump.Image = "";
                     break;
                 }
                 case MaterialTextureType_Specular: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecular.Image = "";
                     break;
                 }
                 case MaterialTextureType_SpecularExp: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureSpecularExp.Image = "";
                     break;
                 }
                 case MaterialTextureType_Displacement: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDisplacement.Image = "";
                     break;
                 }
                 default: {
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = false;
-                    (*meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = "";
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = false;
+                    (*this->meshModelFaces)[this->selectedObject]->meshModel.ModelMaterial.TextureDiffuse.Image = "";
                     break;
                 }
             }

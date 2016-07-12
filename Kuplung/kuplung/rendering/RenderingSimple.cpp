@@ -18,6 +18,7 @@ RenderingSimple::~RenderingSimple() {
 }
 
 void RenderingSimple::destroy() {
+    glDeleteProgram(this->shaderProgram);
 }
 
 bool RenderingSimple::init() {

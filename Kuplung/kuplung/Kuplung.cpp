@@ -686,7 +686,7 @@ void Kuplung::guiModelDelete(int selectedModel) {
     this->managerUI->meshModelFaces = &this->meshModelFaces;
     this->sceneSelectedModelObject = -1;
     this->managerUI->setSceneSelectedModelObject(-1);
-    this->managerRendering->meshModelFaces.clear();
+    this->managerRendering->meshModelFaces.erase(this->managerRendering->meshModelFaces.begin() + selectedModel);
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {

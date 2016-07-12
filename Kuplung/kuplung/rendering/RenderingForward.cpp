@@ -61,6 +61,8 @@ void RenderingForward::destroy() {
     glDisableVertexAttribArray(this->glVS_Tangent);
     glDisableVertexAttribArray(this->glVS_Bitangent);
 
+    glDeleteProgram(this->shaderProgram);
+
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
         delete this->mfLights_Directional[i];
     }

@@ -17,6 +17,8 @@
 class RenderingDeferred {
 public:
     ~RenderingDeferred();
+    void destroy();
+
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
 
@@ -38,8 +40,6 @@ private:
     GLUtils *glUtils;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
-    GLuint glVAO, vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
-    GLuint gl_TextureDiffuse, gl_TextureSpecular;
 
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
     std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
@@ -55,7 +55,7 @@ private:
     std::vector<glm::vec3> lightColors;
 
     GLuint quadVAO = 0;
-    GLuint quadVBO;
+    GLuint quadVBO = 0;
     void renderQuad();
 
     GLuint cubeVAO = 0;

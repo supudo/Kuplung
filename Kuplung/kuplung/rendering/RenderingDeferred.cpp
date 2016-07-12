@@ -10,6 +10,38 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
+RenderingDeferred::~RenderingDeferred() {
+    this->destroy();
+}
+
+void RenderingDeferred::destroy() {
+    glDeleteBuffers(1, &this->gPosition);
+    glDeleteBuffers(1, &this->gNormal);
+    glDeleteBuffers(1, &this->gAlbedoSpec);
+
+    glDisableVertexAttribArray(this->quadVBO);
+    glDisableVertexAttribArray(this->cubeVBO);
+
+    glDeleteVertexArrays(1, &this->quadVAO);
+    glDeleteVertexArrays(1, &this->cubeVAO);
+
+    glDeleteFramebuffers(1, &this->gBuffer);
+
+    glDeleteProgram(this->shaderProgram_GeometryPass);
+    glDeleteProgram(this->shaderProgram_LightingPass);
+    glDeleteProgram(this->shaderProgram_LightBox);
+
+    for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
+        delete this->mfLights_Directional[i];
+    }
+    for (size_t i=0; i<this->mfLights_Point.size(); i++) {
+        delete this->mfLights_Point[i];
+    }
+    for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
+        delete this->mfLights_Spot[i];
+    }
+}
+
 bool RenderingDeferred::init() {
     this->glUtils = new GLUtils();
 
