@@ -541,10 +541,10 @@ void RenderingDeferred::renderLightObjects() {
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
     for (GLuint i=0; i<this->lightPositions.size(); i++) {
         glm::mat4 model = glm::mat4();
-        model = glm::translate(model, lightPositions[i]);
+        model = glm::translate(model, this->lightPositions[i]);
         model = glm::scale(model, glm::vec3(0.25f));
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(model));
-        glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &lightColors[i][0]);
+        glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &this->lightColors[i][0]);
         this->renderCube();
     }
 }
