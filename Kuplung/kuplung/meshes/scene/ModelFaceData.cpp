@@ -24,6 +24,14 @@ void ModelFaceData::destroy() {
     glDeleteBuffers(1, &this->vboTangents);
     glDeleteBuffers(1, &this->vboBitangents);
 
+    glDeleteTextures(1, &this->vboTextureAmbient);
+    glDeleteTextures(1, &this->vboTextureDiffuse);
+    glDeleteTextures(1, &this->vboTextureSpecular);
+    glDeleteTextures(1, &this->vboTextureSpecularExp);
+    glDeleteTextures(1, &this->vboTextureDissolve);
+    glDeleteTextures(1, &this->vboTextureBump);
+    glDeleteTextures(1, &this->vboTextureDisplacement);
+
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
     GLint colorAttachment;
