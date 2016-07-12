@@ -247,7 +247,7 @@ void RenderingDeferred::initGBuffer() {
 
 void RenderingDeferred::initLights() {
     // light - directional
-    for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
+    for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
         ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
         f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -264,7 +264,7 @@ void RenderingDeferred::initLights() {
     }
 
     // light - point
-    for (int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
+    for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
         ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
         f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
         f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].position").c_str());
@@ -284,7 +284,7 @@ void RenderingDeferred::initLights() {
     }
 
     // light - spot
-    for (int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
+    for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
         ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
         f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -397,10 +397,10 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
 
     // lights
-    int lightsCount_Directional = 0;
-    int lightsCount_Point = 0;
-    int lightsCount_Spot = 0;
-    for (int j=0; j<(int)managerObjects->lightSources.size(); j++) {
+    unsigned int lightsCount_Directional = 0;
+    unsigned int lightsCount_Point = 0;
+    unsigned int lightsCount_Spot = 0;
+    for (size_t j=0; j<managerObjects->lightSources.size(); j++) {
         Light *light = managerObjects->lightSources[j];
         switch (light->type) {
             case LightSourceType_Directional: {
@@ -492,15 +492,15 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
         }
     }
 
-    for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+    for (unsigned int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
         glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
     }
 
-    for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+    for (unsigned int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
         glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
     }
 
-    for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+    for (unsigned int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
         glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
     }
 
