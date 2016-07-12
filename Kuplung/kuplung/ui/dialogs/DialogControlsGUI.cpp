@@ -212,6 +212,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 deferred_texture_items.push_back("Diffuse");
                 deferred_texture_items.push_back("Specular");
                 ImGui::Combo("Texture", &this->managerObjects->Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
+
+                ImGui::Text("Ambient Strength");
+                ImGui::SliderFloat("##109", &this->managerObjects->Setting_DeferredAmbientStrength, 0.0f, 1.0f);
                 ImGui::Separator();
             }
 

@@ -117,6 +117,7 @@ bool RenderingDeferred::initLighingPass() {
         this->glUtils->printProgramLog(this->shaderProgram_LightingPass);
         return false;
     }
+
     return true;
 }
 
@@ -523,6 +524,7 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     }
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &managerObjects->camera->cameraPosition[0]);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), managerObjects->Setting_LightingPass_DrawMode + 1);
+    glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), managerObjects->Setting_DeferredAmbientStrength);
     this->renderQuad();
 }
 

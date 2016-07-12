@@ -21,6 +21,7 @@ uniform Light lights[NR_LIGHTS];
 uniform vec3 viewPos;
 
 uniform int draw_mode;
+uniform float ambientStrength;
 
 struct LightSource_Directional {
     bool inUse;
@@ -82,7 +83,7 @@ void main() {
         lightsSpot = calculateLightSpot(FragPos, Normal, viewDir, Diffuse);
 
     // Then calculate lighting as usual
-    vec3 lighting = Diffuse * 0.1; // hard-coded ambient component
+    vec3 lighting = Diffuse * ambientStrength; // hard-coded ambient component
     for (int i=0; i<NR_LIGHTS; ++i) {
         // Calculate distance between light source and current fragment
         float distance = length(lights[i].Position - FragPos);

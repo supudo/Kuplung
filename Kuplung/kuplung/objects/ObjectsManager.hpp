@@ -77,6 +77,7 @@ public:
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
     bool Settings_ShowZAxis = true;
     int Setting_LightingPass_DrawMode;
+    float Setting_DeferredAmbientStrength;
 
     ViewModelSkin viewModelSkin;
     glm::vec3 SolidLight_Direction;
