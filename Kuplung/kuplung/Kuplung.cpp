@@ -172,8 +172,8 @@ bool Kuplung::init() {
                     this->imageRenderer = new ImageRenderer();
                     this->imageRenderer->init();
 
-                    this->renderingManager = new RenderingManager();
-                    this->renderingManager->init();
+                    this->managerRendering = new RenderingManager();
+                    this->managerRendering->init();
                 }
             }
         }
@@ -359,7 +359,7 @@ void Kuplung::renderScene() {
 }
 
 void Kuplung::renderSceneModels() {
-    this->renderingManager->render(this->managerObjects);
+    this->managerRendering->render(this->managerObjects);
 
 //    if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
 //        this->renderingManager->render(this->meshModelFaces,
@@ -447,6 +447,14 @@ void Kuplung::renderSceneModels() {
         Settings::Instance()->sceneCountTriangles += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 3;
         Settings::Instance()->sceneCountFaces += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 6;
     }
+
+    if (this->managerObjects->Setting_ShowSpaceship) {
+        Settings::Instance()->sceneCountObjects += 1;
+        Settings::Instance()->sceneCountVertices += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size());
+        Settings::Instance()->sceneCountIndices += int(this->managerObjects->spaceship->spaceshipGenerator->indices.size());
+        Settings::Instance()->sceneCountTriangles += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 3;
+        Settings::Instance()->sceneCountFaces += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 6;
+    }
 }
 
 #pragma mark - Scene GUI
@@ -460,9 +468,6 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initSkybox();
     this->managerObjects->initTerrain();
     this->managerObjects->initSpaceship();
-    //this->managerObjects->addLight(LightSourceType_Directional);
-    //this->managerObjects->addLight(LightSourceType_Point);
-    //this->managerObjects->addLight(LightSourceType_Spot);
     this->managerUI->showControlsGUI = true;
     this->managerUI->showControlsModels = true;
     this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
@@ -609,7 +614,7 @@ void Kuplung::processParsedObjFile() {
             mmf->initBoundingBox();
             mmf->initModelProperties();
 
-            this->renderingManager->meshModelFaces.push_back(mmf);
+            this->managerRendering->meshModelFaces.push_back(mmf);
             this->meshModelFaces.push_back(mmf);
             this->meshModels.push_back(model);
         }
@@ -655,6 +660,7 @@ void Kuplung::guiClearScreen() {
     this->meshModelFaces.clear();
     this->objFiles.clear();
     this->rayLines.clear();
+    this->managerRendering->meshModelFaces.clear();
     this->managerUI->setSceneSelectedModelObject(-1);
 }
 
@@ -680,6 +686,7 @@ void Kuplung::guiModelDelete(int selectedModel) {
     this->managerUI->meshModelFaces = &this->meshModelFaces;
     this->sceneSelectedModelObject = -1;
     this->managerUI->setSceneSelectedModelObject(-1);
+    this->managerRendering->meshModelFaces.clear();
 }
 
 void Kuplung::guiRenderScene(FBEntity file) {

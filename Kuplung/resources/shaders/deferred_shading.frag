@@ -54,9 +54,9 @@ uniform LightSource_Directional directionalLights[NR_DIRECTIONAL_LIGHTS];
 uniform LightSource_Point pointLights[NR_POINT_LIGHTS];
 uniform LightSource_Spot spotLights[NR_SPOT_LIGHTS];
 
-vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
-vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
-vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
+vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec3 colorDiffuse);
+vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec3 colorDiffuse);
+vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec3 colorDiffuse);
 
 void main() {
     // Retrieve data from gbuffer
@@ -64,10 +64,25 @@ void main() {
     vec3 Normal = texture(gNormal, TexCoords).rgb;
     vec3 Diffuse = texture(gAlbedoSpec, TexCoords).rgb;
     float Specular = texture(gAlbedoSpec, TexCoords).a;
+    vec3 viewDir = normalize(viewPos - FragPos);
+
+    // directional lights color
+    vec3 lightsDirectional = vec3(0.0);
+    if (directionalLights.length() > 0)
+        lightsDirectional = calculateLightDirectional(Normal, viewDir, Diffuse);
+
+    // point lights color
+    vec3 lightsPoint = vec3(0.0);
+    if (pointLights.length() > 0)
+        lightsPoint = calculateLightPoint(FragPos, Normal, viewDir, Diffuse);
+
+    // spot lights color
+    vec3 lightsSpot = vec3(0.0);
+    if (spotLights.length() > 0)
+        lightsSpot = calculateLightSpot(FragPos, Normal, viewDir, Diffuse);
 
     // Then calculate lighting as usual
     vec3 lighting = Diffuse * 0.1; // hard-coded ambient component
-    vec3 viewDir  = normalize(viewPos - FragPos);
     for (int i=0; i<NR_LIGHTS; ++i) {
         // Calculate distance between light source and current fragment
         float distance = length(lights[i].Position - FragPos);
@@ -87,6 +102,8 @@ void main() {
         }
     }
 
+    lighting += lightsDirectional + lightsPoint + lightsSpot;
+
     if (draw_mode == 1)
         fragColor = vec4(lighting, 1.0);
     else if (draw_mode == 2)
@@ -105,7 +122,7 @@ void main() {
 //
 // =================================================
 
-vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec3 colorDiffuse) {
     vec3 result = vec3(0.0);
     for (int i=0; i<NR_DIRECTIONAL_LIGHTS; i++) {
         if (directionalLights[i].inUse) {
@@ -118,12 +135,7 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
             vec3 directionReflection = normalize(reflect(-directionLight, directionNormal));
             float specularFactor = pow(max(dot(directionView, directionReflection), 0.0), 1.0);
 
-            // Combine results
-            vec3 ambient = directionalLights[i].strengthAmbient * directionalLights[i].ambient * colorAmbient.rgb;
-            vec3 diffuse = directionalLights[i].strengthDiffuse * directionalLights[i].diffuse * lambertFactor * colorDiffuse.rgb;
-            vec3 specular = directionalLights[i].strengthSpecular * directionalLights[i].specular * specularFactor * colorSpecular.rgb;
-
-            result += ambient + diffuse + specular;
+            result += directionalLights[i].strengthDiffuse * directionalLights[i].diffuse * lambertFactor * colorDiffuse;
         }
     }
     return result;
@@ -135,7 +147,7 @@ vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 co
 //
 // =================================================
 
-vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec3 colorDiffuse) {
     vec3 result = vec3(0.0);
     for (int i=0; i<NR_POINT_LIGHTS; i++) {
         if (pointLights[i].inUse) {
@@ -152,12 +164,7 @@ vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 direc
             float lightDistance = length(pointLights[i].position - fragmentPosition);
             float attenuation = 1.0f / (pointLights[i].constant + pointLights[i].linear * lightDistance + pointLights[i].quadratic * (lightDistance * lightDistance));
 
-            // Combine results
-            vec3 ambient = pointLights[i].strengthAmbient * pointLights[i].ambient * attenuation * colorAmbient.rgb;
-            vec3 diffuse = pointLights[i].strengthDiffuse * pointLights[i].diffuse * lambertFactor * attenuation * colorDiffuse.rgb;
-            vec3 specular = pointLights[i].strengthSpecular * pointLights[i].specular * specularFactor * attenuation * colorSpecular.rgb;
-
-            result += ambient + diffuse + specular;
+            result += pointLights[i].strengthDiffuse * pointLights[i].diffuse * lambertFactor * attenuation * colorDiffuse;
         }
     }
     return result;
@@ -169,7 +176,7 @@ vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 direc
 //
 // =================================================
 
-vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular) {
+vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec3 colorDiffuse) {
     vec3 result = vec3(0.0);
     for (int i=0; i<NR_SPOT_LIGHTS; i++) {
         if (spotLights[i].inUse) {
@@ -191,12 +198,7 @@ vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 direct
             float epsilon = spotLights[i].cutOff - spotLights[i].outerCutOff;
             float intensity = clamp((theta - spotLights[i].outerCutOff) / epsilon, 0.0, 1.0);
 
-            // Combine results
-            vec3 ambient = spotLights[i].strengthAmbient * spotLights[i].ambient * attenuation * intensity * colorAmbient.rgb;
-            vec3 diffuse = spotLights[i].strengthDiffuse * spotLights[i].diffuse * lambertFactor * attenuation * intensity * colorDiffuse.rgb;
-            vec3 specular = spotLights[i].strengthSpecular * spotLights[i].specular * specularFactor * attenuation * intensity * colorSpecular.rgb;
-
-            result += ambient + diffuse + specular;
+            result += spotLights[i].strengthDiffuse * spotLights[i].diffuse * lambertFactor * attenuation * intensity * colorDiffuse;
         }
     }
     return result;

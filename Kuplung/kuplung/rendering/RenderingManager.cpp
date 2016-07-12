@@ -45,7 +45,8 @@ void RenderingManager::render(ObjectsManager *managerObjects) {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFaceBase* mmf = this->meshModelFaces[i];
         this->RenderingTotalVertices += mmf->meshModel.countVertices;
-        this->RenderingTotalIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
+        if (mmf->meshModel.indices.size() > 0)
+            this->RenderingTotalIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
         this->RenderingTotalTriangles += this->RenderingTotalVertices / 3;
         this->RenderingTotalFaces += this->RenderingTotalTriangles / 2;
     }

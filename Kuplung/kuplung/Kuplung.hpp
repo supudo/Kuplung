@@ -63,10 +63,6 @@ private:
     void guiSceneExport(FBEntity file);
     void guiRenderScene(FBEntity file);
 
-    ObjectsManager *managerObjects;
-    RayPicking *rayPicker;
-    RenderingManager *renderingManager;
-
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";
     const int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
@@ -85,12 +81,16 @@ private:
     FileModelManager *parser;
 
     // Customs
-    std::vector<FBEntity> objFiles;
     Controls *managerControls;
     UI *managerUI;
     FNTParser *fontParser;
     Exporter *managerExporter;
     ImageRenderer *imageRenderer;
+    ObjectsManager *managerObjects;
+    RayPicking *rayPicker;
+    RenderingManager *managerRendering;
+
+    std::vector<FBEntity> objFiles;
     std::vector<MeshModel> meshModels, meshModelsNew;
     std::vector<ModelFaceBase*> meshModelFaces;
     std::vector<RayLine*> rayLines;

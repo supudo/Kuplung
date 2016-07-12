@@ -129,6 +129,16 @@ void RenderingDeferred::initProps() {
     this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
     this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
 
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
+
     // - Colors
     srand(13);
     for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
@@ -284,6 +294,11 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
         model = glm::mat4();
         model = glm::translate(model, this->objectPositions[i]);
         model = glm::scale(model, glm::vec3(0.25f));
+
+        model = glm::translate(model, glm::vec3(0, 0, 0));
+        model = glm::rotate(model, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+        model = glm::translate(model, glm::vec3(0, 0, 0));
+
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
