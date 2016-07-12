@@ -84,6 +84,10 @@ bool RenderingDeferred::initGeometryPass() {
         this->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
         return false;
     }
+
+    this->gl_GeometryPass_Texture_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse1");
+    this->gl_GeometryPass_Texture_Specular = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular1");
+
     return true;
 }
 
@@ -334,15 +338,29 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(model));
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
-            meshModelFaces[j]->matrixProjection = this->matrixProject;
-            meshModelFaces[j]->matrixCamera = this->matrixCamera;
-            meshModelFaces[j]->matrixModel = model;
-            meshModelFaces[j]->Setting_ModelViewSkin = managerObjects->viewModelSkin;
-            meshModelFaces[j]->lightSources = managerObjects->lightSources;
-            meshModelFaces[j]->setOptionsFOV(managerObjects->Setting_FOV);
-            meshModelFaces[j]->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
-            meshModelFaces[j]->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
-            meshModelFaces[j]->renderModel(false);
+            ModelFaceData *mfd = meshModelFaces[j];
+
+            if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
+                glUniform1i(this->gl_GeometryPass_Texture_Diffuse, 0);
+                glActiveTexture(GL_TEXTURE0);
+                glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDiffuse);
+            }
+
+            if (mfd->vboTextureSpecular > 0 && mfd->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
+                glUniform1i(this->gl_GeometryPass_Texture_Specular, 1);
+                glActiveTexture(GL_TEXTURE1);
+                glBindTexture(GL_TEXTURE_2D, mfd->vboTextureSpecular);
+            }
+
+            mfd->matrixProjection = this->matrixProject;
+            mfd->matrixCamera = this->matrixCamera;
+            mfd->matrixModel = model;
+            mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
+            mfd->lightSources = managerObjects->lightSources;
+            mfd->setOptionsFOV(managerObjects->Setting_FOV);
+            mfd->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
+            mfd->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
+            mfd->renderModel(false);
         }
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
