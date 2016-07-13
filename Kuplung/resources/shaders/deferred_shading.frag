@@ -83,7 +83,7 @@ void main() {
         lightsSpot = calculateLightSpot(FragPos, Normal, viewDir, Diffuse);
 
     // Then calculate lighting as usual
-    vec3 lighting = Diffuse * ambientStrength; // hard-coded ambient component
+    vec3 lighting = Diffuse * ambientStrength;
     for (int i=0; i<NR_LIGHTS; ++i) {
         // Calculate distance between light source and current fragment
         float distance = length(lights[i].Position - FragPos);
@@ -104,7 +104,6 @@ void main() {
             lighting += diffuse + specular;
         }
     }
-
     lighting += (lightsDirectional + lightsPoint + lightsSpot);
 
     if (draw_mode == 1)

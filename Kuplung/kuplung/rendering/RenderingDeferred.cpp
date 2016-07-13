@@ -45,6 +45,10 @@ void RenderingDeferred::destroy() {
 bool RenderingDeferred::init() {
     this->glUtils = new GLUtils();
 
+    this->GLSL_LightSourceNumber_Directional = 8;
+    this->GLSL_LightSourceNumber_Point = 4;
+    this->GLSL_LightSourceNumber_Spot = 4;
+
     bool success = true;
 
     success |= this->initGeometryPass();
@@ -517,22 +521,24 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     }
 
     // Also send light relevant uniforms
-    for (GLuint i=0; i<this->lightPositions.size(); i++) {
-        glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-        glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
+    if (managerObjects->Setting_DeferredTestLights) {
+        for (GLuint i=0; i<this->lightPositions.size(); i++) {
+            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
+            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
-        // Update attenuation parameters and calculate radius
-        const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
-        const GLfloat linear = 0.7f;
-        const GLfloat quadratic = 1.8f;
-        glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), linear);
-        glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), quadratic);
+            // Update attenuation parameters and calculate radius
+            const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
+            const GLfloat linear = 0.7f;
+            const GLfloat quadratic = 1.8f;
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), linear);
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), quadratic);
 
-        // Then calculate radius of light volume/sphere
-        const GLfloat lightThreshold = 5.0; // 5 / 256
-        const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
-        GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
-        glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
+            // Then calculate radius of light volume/sphere
+            const GLfloat lightThreshold = 5.0; // 5 / 256
+            const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
+            GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
+        }
     }
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &managerObjects->camera->cameraPosition[0]);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), managerObjects->Setting_LightingPass_DrawMode + 1);

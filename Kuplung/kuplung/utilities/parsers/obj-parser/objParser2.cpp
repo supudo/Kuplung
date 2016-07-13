@@ -72,11 +72,13 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
         return {};
     }
 
+    int linesCount = this->fileCountLines(ifs);
+
     std::vector<unsigned int> indexModels, indexVertices, indexTexture, indexNormals;
     std::vector<glm::vec3> vVertices, vNormals;
     std::vector<glm::vec2> vTextureCoordinates;
 
-    int modelCounter = 0, currentModelID = 0;
+    int modelCounter = 0, currentModelID = 0, linesProcessedCounter = 0;
     std::string singleLine;
     while (std::getline(ifs, singleLine)) {
         if (boost::starts_with(singleLine, this->id_materialFile)) {
@@ -153,6 +155,10 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             indexNormals.push_back(normalIndex[1]);
             indexNormals.push_back(normalIndex[2]);
         }
+
+        linesProcessedCounter += 1;
+        float progress = (float(linesProcessedCounter) / float(linesCount)) * 100.0;
+        this->doProgress(progress);
     }
 
     if (this->models.size() > 0) {
@@ -384,4 +390,31 @@ std::vector<std::string> objParser2::splitString(const std::string &s, std::stri
     std::vector<std::string> elements;
     boost::split(elements, s, boost::is_any_of(delimiter));
     return elements;
+}
+
+size_t objParser2::fileCountLines(std::istream &is) {
+    if (is.bad())
+        return 0;
+
+    // save state
+    std::istream::iostate state_backup = is.rdstate();
+    // clear state
+    is.clear();
+    std::istream::streampos pos_backup = is.tellg();
+
+    is.seekg(0);
+    size_t line_cnt;
+    size_t lf_cnt = std::count(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>(), '\n');
+    line_cnt = lf_cnt;
+    // if the file is not end with '\n' , then line_cnt should plus 1
+    is.unget();
+    if (is.get() != '\n')
+        ++line_cnt;
+
+    // recover state
+    is.clear() ; // previous reading may set eofbit
+    is.seekg(pos_backup);
+    is.setstate(state_backup);
+
+    return line_cnt;
 }

@@ -34,6 +34,8 @@ private:
     std::function<void(float)> doProgress;
     int objFileLinesCount;
 
+    size_t fileCountLines(std::istream &is);
+
     std::vector<MeshModel> models;
     std::map<std::string, MeshModelMaterial> materials;
     std::vector<glm::vec3> vectorVertices, vectorNormals;
