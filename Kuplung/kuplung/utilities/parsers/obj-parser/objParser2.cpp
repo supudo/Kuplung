@@ -72,13 +72,13 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
         return {};
     }
 
-    int linesCount = this->fileCountLines(ifs);
+    int progressStageTotal = this->fileCountLines(ifs);
 
     std::vector<unsigned int> indexModels, indexVertices, indexTexture, indexNormals;
     std::vector<glm::vec3> vVertices, vNormals;
     std::vector<glm::vec2> vTextureCoordinates;
 
-    int modelCounter = 0, currentModelID = 0, linesProcessedCounter = 0;
+    int modelCounter = 0, currentModelID = 0, progressStageCounter = 0;
     std::string singleLine;
     while (std::getline(ifs, singleLine)) {
         if (boost::starts_with(singleLine, this->id_materialFile)) {
@@ -156,12 +156,15 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             indexNormals.push_back(normalIndex[2]);
         }
 
-        linesProcessedCounter += 1;
-        float progress = (float(linesProcessedCounter) / float(linesCount)) * 100.0;
+        progressStageCounter += 1;
+        float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
         this->doProgress(progress);
     }
 
     if (this->models.size() > 0) {
+        progressStageCounter = 0;
+        progressStageTotal = indexVertices.size();
+        this->doProgress(0.0f);
         for (unsigned int i=0; i<indexVertices.size(); i++) {
             unsigned int modelIndex = indexModels[i];
             unsigned int vertexIndex = indexVertices[i];
@@ -183,8 +186,15 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             }
             else
                 this->models[modelIndex].countTextureCoordinates = 0;
+
+            progressStageCounter += 1;
+            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
+            this->doProgress(progress);
         }
 
+        progressStageCounter = 0;
+        progressStageTotal = this->models.size();
+        this->doProgress(0.0f);
         std::map<PackedVertex, unsigned int> vertexToOutIndex;
         for (size_t i=0; i<this->models.size(); i++) {
             MeshModel m = this->models[i];
@@ -212,6 +222,10 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             this->models[i].normals = outNormals;
             this->models[i].indices = m.indices;
             this->models[i].countIndices = (int)m.indices.size();
+
+            progressStageCounter += 1;
+            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
+            this->doProgress(progress);
         }
     }
 
