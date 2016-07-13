@@ -182,55 +182,69 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
     switch (this->selectedObject) {
         case 0: {
-            this->helperUI->addControlsSlider("Field of view", 1, 1.0f, -180.0f, 180.0f, false, NULL, &this->managerObjects->Setting_FOV, true, isFrame);
-            ImGui::Separator();
-
-            ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
-            ImGui::SliderFloat("W##105", &this->managerObjects->Setting_RatioWidth, 0.0f, 5.0f);
-            ImGui::SliderFloat("H##106", &this->managerObjects->Setting_RatioHeight, 0.0f, 5.0f);
-//            this->helperUI->addControlsFloatSliderSameLine("W", 105, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
-//            this->helperUI->addControlsFloatSliderSameLine("H", 106, 0.0f, 5.0f, &this->managerObjects->Setting_RatioHeight);
-            ImGui::Separator();
-
-            ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
-            this->helperUI->addControlsFloatSliderSameLine("W", 201, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
-            ImGui::SliderFloat("Far##107", &this->managerObjects->Setting_PlaneClose, 0.0f, 1.0f);
-            ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
-            ImGui::Separator();
-
-            ImGui::Checkbox("Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
-            ImGui::Checkbox("Z Axis", &this->managerObjects->Settings_ShowZAxis);
-            ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
-            ImGui::Separator();
-
-            if (Settings::Instance()->RendererType == 2) {
-                ImGui::Text("Deferred Rendering Stage");
-                std::vector<const char*> deferred_texture_items;
-                deferred_texture_items.push_back("Lighting");
-                deferred_texture_items.push_back("Position");
-                deferred_texture_items.push_back("Normal");
-                deferred_texture_items.push_back("Diffuse");
-                deferred_texture_items.push_back("Specular");
-                ImGui::Combo("Texture", &this->managerObjects->Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
-
-                ImGui::Text("Ambient Strength");
-                ImGui::SliderFloat("##109", &this->managerObjects->Setting_DeferredAmbientStrength, 0.0f, 1.0f);
-
-                ImGui::Checkbox("Deferred Test Mode", &this->managerObjects->Setting_DeferredTestMode);
-
+            if (ImGui::CollapsingHeader("View Options")) {
+                ImGui::Indent();
+                this->helperUI->addControlsSlider("Field of view", 1, 1.0f, -180.0f, 180.0f, false, NULL, &this->managerObjects->Setting_FOV, true, isFrame);
                 ImGui::Separator();
+
+                ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
+                ImGui::SliderFloat("W##105", &this->managerObjects->Setting_RatioWidth, 0.0f, 5.0f);
+                ImGui::SliderFloat("H##106", &this->managerObjects->Setting_RatioHeight, 0.0f, 5.0f);
+//                this->helperUI->addControlsFloatSliderSameLine("W", 105, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
+//                this->helperUI->addControlsFloatSliderSameLine("H", 106, 0.0f, 5.0f, &this->managerObjects->Setting_RatioHeight);
+                ImGui::Separator();
+
+                ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
+                this->helperUI->addControlsFloatSliderSameLine("W", 201, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
+                ImGui::SliderFloat("Far##107", &this->managerObjects->Setting_PlaneClose, 0.0f, 1.0f);
+                ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
+                ImGui::Unindent();
             }
 
-            if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
-                Settings::Instance()->saveSettings();
+            if (ImGui::CollapsingHeader("Editor Artefacts")) {
+                ImGui::Indent();
+                ImGui::Checkbox("Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
+                ImGui::Checkbox("Z Axis", &this->managerObjects->Settings_ShowZAxis);
+                ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
+                ImGui::Unindent();
+            }
 
-            if (Settings::Instance()->ShowBoundingBox) {
-                if (this->helperUI->addControlsSlider("Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
-                    Settings::Instance()->BoundingBoxRefresh = true;
-                    Settings::Instance()->saveSettings();
+            if (Settings::Instance()->RendererType == 2) {
+                if (ImGui::CollapsingHeader("Deferred Rendering", ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Indent();
+                    ImGui::Text("Deferred Rendering");
+
+                    std::vector<const char*> deferred_texture_items;
+                    deferred_texture_items.push_back("Lighting");
+                    deferred_texture_items.push_back("Position");
+                    deferred_texture_items.push_back("Normal");
+                    deferred_texture_items.push_back("Diffuse");
+                    deferred_texture_items.push_back("Specular");
+                    ImGui::Combo("##110", &this->managerObjects->Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
+
+                    ImGui::Text("Ambient Strength");
+                    ImGui::SliderFloat("##109", &this->managerObjects->Setting_DeferredAmbientStrength, 0.0f, 1.0f);
+
+                    ImGui::Checkbox("Test Mode", &this->managerObjects->Setting_DeferredTestMode);
+                    ImGui::Checkbox("Test Lights", &this->managerObjects->Setting_DeferredTestLights);
+                    ImGui::Unindent();
                 }
-                this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
-                this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
+            }
+
+            if (ImGui::CollapsingHeader("BoundingBox")) {
+                ImGui::Indent();
+                if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
+                    Settings::Instance()->saveSettings();
+
+                if (Settings::Instance()->ShowBoundingBox) {
+                    if (this->helperUI->addControlsSlider("Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
+                        Settings::Instance()->BoundingBoxRefresh = true;
+                        Settings::Instance()->saveSettings();
+                    }
+                    this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
+                    this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
+                }
+                ImGui::Unindent();
             }
             break;
         }
@@ -430,24 +444,25 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.b, true, isFrame);
             ImGui::Separator();
 
-            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Solid Skin");
+            ImGui::TextColored(ImVec4(1, 0, 0, 1), "Solid Skin Light");
 
-            this->helperUI->addControlColor3("Light - Ambient", &this->managerObjects->SolidLight_Ambient, &this->managerObjects->SolidLight_Ambient_ColorPicker);
+            this->helperUI->addControlColor3("Ambient", &this->managerObjects->SolidLight_Ambient, &this->managerObjects->SolidLight_Ambient_ColorPicker);
             this->helperUI->addControlsSlider("Intensity", 4, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Ambient_Strength, true, isFrame);
 
-            this->helperUI->addControlColor3("Light - Diffuse", &this->managerObjects->SolidLight_Diffuse, &this->managerObjects->SolidLight_Diffuse_ColorPicker);
+            this->helperUI->addControlColor3("Diffuse", &this->managerObjects->SolidLight_Diffuse, &this->managerObjects->SolidLight_Diffuse_ColorPicker);
             this->helperUI->addControlsSlider("Intensity", 5, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Diffuse_Strength, true, isFrame);
 
-            this->helperUI->addControlColor3("Light - Specular", &this->managerObjects->SolidLight_Specular, &this->managerObjects->SolidLight_Specular_ColorPicker);
+            this->helperUI->addControlColor3("Specular", &this->managerObjects->SolidLight_Specular, &this->managerObjects->SolidLight_Specular_ColorPicker);
             this->helperUI->addControlsSlider("Intensity", 6, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Specular_Strength, true, isFrame);
+            ImGui::Separator();
 
             this->helperUI->addControlColor3("Material Color", &this->managerObjects->SolidLight_MaterialColor, &this->managerObjects->SolidLight_MaterialColor_ColorPicker);
             ImGui::Separator();
 
             ImGui::Text("Direction");
-            this->helperUI->addControlsSliderSameLine("X", 7, 0.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.x, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.y, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Z", 9, 0.0f, 0.0f, 10.0f, false, NULL, &this->managerObjects->SolidLight_Direction.z, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("X##407", 7, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.x, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y##408", 8, 1.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.y, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z##409", 9, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.z, true, isFrame);
             break;
         }
         case 5: {

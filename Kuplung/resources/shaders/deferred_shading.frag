@@ -105,7 +105,7 @@ void main() {
         }
     }
 
-//    lighting += lightsDirectional + lightsPoint + lightsSpot;
+    lighting += (lightsDirectional + lightsPoint + lightsSpot);
 
     if (draw_mode == 1)
         fragColor = vec4(lighting, 1.0);

@@ -198,6 +198,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_TerrainWidth = 100;
     this->Setting_TerrainHeight = 100;
     this->Setting_DeferredTestMode = true;
+    this->Setting_DeferredTestLights = true;
     this->Setting_LightingPass_DrawMode = 2;
     this->Setting_DeferredAmbientStrength = 0.1f;
     this->Setting_ShowSpaceship = false;
