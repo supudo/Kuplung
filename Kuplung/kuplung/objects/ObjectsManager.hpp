@@ -77,7 +77,7 @@ public:
     bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
     bool Settings_ShowZAxis = true;
     bool Setting_DeferredTestMode, Setting_DeferredTestLights;
-    int Setting_LightingPass_DrawMode;
+    int Setting_LightingPass_DrawMode, Setting_DeferredTestLightsNumber;
     float Setting_DeferredAmbientStrength;
 
     ViewModelSkin viewModelSkin;

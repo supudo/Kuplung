@@ -201,6 +201,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_DeferredTestLights = true;
     this->Setting_LightingPass_DrawMode = 2;
     this->Setting_DeferredAmbientStrength = 0.1f;
+    this->Setting_DeferredTestLightsNumber = 32;
     this->Setting_ShowSpaceship = false;
     this->Setting_GenerateSpaceship = false;
 }

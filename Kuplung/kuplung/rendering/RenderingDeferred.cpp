@@ -338,12 +338,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    GLuint i_to = 0;
-    if (managerObjects->Setting_DeferredTestMode)
-        i_to = this->objectPositions.size();
-    else
-        i_to = 1;
-    for (GLuint i=0; i<i_to; i++) {
+    for (GLuint i=0; i<((managerObjects->Setting_DeferredTestMode) ? this->objectPositions.size() : 1); i++) {
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
@@ -522,7 +517,8 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
 
     // Also send light relevant uniforms
     if (managerObjects->Setting_DeferredTestLights) {
-        for (GLuint i=0; i<this->lightPositions.size(); i++) {
+        GLuint i = 0;
+        for (; i<managerObjects->Setting_DeferredTestLightsNumber; i++) {
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
@@ -538,6 +534,13 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
             const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
             GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
             glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
+        }
+        for (; i<this->lightPositions.size(); i++) {
+            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
+            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), 0.0f);
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), 0.0f);
+            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
         }
     }
     else {
@@ -573,17 +576,10 @@ void RenderingDeferred::renderLightObjects(ObjectsManager *managerObjects) {
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (GLuint i=0; i<this->lightPositions.size(); i++) {
+    for (GLuint i=0; i<managerObjects->Setting_DeferredTestLightsNumber; i++) {
         glm::mat4 matrixModel = glm::mat4();
-//        matrixModel *= managerObjects->grid->matrixModel;
         matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
         matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
-
-//        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-//        matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-//        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
-//        matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-
         glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
         glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &this->lightColors[i][0]);
         this->renderCube();

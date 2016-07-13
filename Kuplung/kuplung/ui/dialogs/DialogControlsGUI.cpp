@@ -209,6 +209,22 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
+            if (ImGui::CollapsingHeader("BoundingBox")) {
+                ImGui::Indent();
+                if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
+                    Settings::Instance()->saveSettings();
+
+                if (Settings::Instance()->ShowBoundingBox) {
+                    if (this->helperUI->addControlsSlider("Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
+                        Settings::Instance()->BoundingBoxRefresh = true;
+                        Settings::Instance()->saveSettings();
+                    }
+                    this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
+                    this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
+                }
+                ImGui::Unindent();
+            }
+
             if (Settings::Instance()->RendererType == 2) {
                 if (ImGui::CollapsingHeader("Deferred Rendering", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();
@@ -227,24 +243,12 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                     ImGui::Checkbox("Test Mode", &this->managerObjects->Setting_DeferredTestMode);
                     ImGui::Checkbox("Test Lights", &this->managerObjects->Setting_DeferredTestLights);
+                    ImGui::Separator();
+
+                    ImGui::Text("Number of Test Lights");
+                    ImGui::SliderInt("##209", &this->managerObjects->Setting_DeferredTestLightsNumber, 0, 32);
                     ImGui::Unindent();
                 }
-            }
-
-            if (ImGui::CollapsingHeader("BoundingBox")) {
-                ImGui::Indent();
-                if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
-                    Settings::Instance()->saveSettings();
-
-                if (Settings::Instance()->ShowBoundingBox) {
-                    if (this->helperUI->addControlsSlider("Padding", 3, 0.001f, 0.000f, 0.1f, false, NULL, &Settings::Instance()->BoundingBoxPadding, true, isFrame)) {
-                        Settings::Instance()->BoundingBoxRefresh = true;
-                        Settings::Instance()->saveSettings();
-                    }
-                    this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
-                    this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
-                }
-                ImGui::Unindent();
             }
             break;
         }
