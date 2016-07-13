@@ -615,7 +615,6 @@ void RenderingDeferred::renderQuad() {
     glBindVertexArray(0);
 }
 
-
 void RenderingDeferred::renderCube() {
     if (this->cubeVAO == 0) {
         GLfloat vertices[] = {
