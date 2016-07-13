@@ -21,6 +21,12 @@ public:
 
 private:
     bool hasEnding(std::string const &fullString, std::string const &ending);
+
+    template<typename T>
+    std::ostream& binary_write(std::ostream& stream, const T& value);
+
+    template<typename T>
+    std::istream& binary_read(std::istream& stream, T& value);
 };
 
 #endif /* SaveOpen_hpp */
