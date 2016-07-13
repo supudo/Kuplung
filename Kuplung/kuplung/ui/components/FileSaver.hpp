@@ -17,6 +17,7 @@
 
 typedef enum FileSaverOperation {
     FileSaverOperation_SaveScene,
+    FileSaverOperation_OpenScene,
     FileSaverOperation_Exporter,
     FileSaverOperation_Renderer
 } FileSaverOperation;

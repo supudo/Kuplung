@@ -24,6 +24,7 @@
 #include "kuplung/utilities/shapes/Shapes.h"
 #include "kuplung/utilities/export/Exporter.hpp"
 #include "kuplung/utilities/renderers/ImageRenderer.hpp"
+#include "kuplung/utilities/saveopen/SaveOpen.hpp"
 
 class Kuplung {
 public:
@@ -53,6 +54,7 @@ private:
     void addTerrainModel();
     void addSpaceshipModel();
     void saveScene(FBEntity file);
+    void openScene(FBEntity file);
 
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
@@ -79,6 +81,7 @@ private:
 
     //objParser *parser;
     FileModelManager *parser;
+    SaveOpen *managerSaveOpen;
 
     // Customs
     Controls *managerControls;

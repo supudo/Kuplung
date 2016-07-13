@@ -29,7 +29,8 @@ void UI::init(SDL_Window *window,
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
               std::function<void(FBEntity file)> renderScene,
-              std::function<void(FBEntity file)> saveScene
+              std::function<void(FBEntity file)> saveScene,
+              std::function<void(FBEntity file)> openScene
               ) {
     this->sdlWindow = window;
     this->managerObjects = managerObjects;
@@ -43,6 +44,7 @@ void UI::init(SDL_Window *window,
     this->funcDeleteModel = deleteModel;
     this->funcRenderScene = renderScene;
     this->funcSaveScene = saveScene;
+    this->funcOpenScene = openScene;
 
     this->isFrame = false;
     this->isLoadingOpen = false;
@@ -68,6 +70,7 @@ void UI::init(SDL_Window *window,
     this->showImageSave = false;
     this->showOBJImporter = false;
     this->showSaveDialog = false;
+    this->showOpenDialog = false;
     this->showRenderer = false;
 
     int windowWidth, windowHeight;
@@ -129,7 +132,10 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         if (ImGui::BeginMenu("File")) {
             if (ImGui::MenuItem(ICON_FA_FILE_O " New"))
                 this->funcNewScene();
-            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open ...", NULL, &this->showDialogFile);
+
+//            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open ...", NULL, &this->showDialogFile);
+            if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open..."))
+                this->showOpenDialog = true;
 
             if (ImGui::BeginMenu(ICON_FA_FILES_O " Open Recent")) {
                 if (this->recentFiles.size() == 0)
@@ -258,6 +264,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showSaveDialog)
         this->dialogFileSave(FileSaverOperation_SaveScene);
+
+    if (this->showOpenDialog)
+        this->dialogFileSave(FileSaverOperation_OpenScene);
 
     if (this->showOBJImporter)
         this->dialogOBJImporterBrowser();
@@ -392,6 +401,10 @@ void UI::dialogFileSave(FileSaverOperation operation) {
             title = "Save Scene";
             wType = &this->showSaveDialog;
             break;
+        case FileSaverOperation_OpenScene:
+            title = "Open Scene";
+            wType = &this->showOpenDialog;
+            break;
         case FileSaverOperation_Exporter:
             title = "Export Scene";
             wType = &this->showOBJExporter;
@@ -508,6 +521,9 @@ void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) 
         case FileSaverOperation_SaveScene:
             this->funcSaveScene(file);
             break;
+        case FileSaverOperation_OpenScene:
+            this->funcOpenScene(file);
+            break;
         case FileSaverOperation_Exporter:
             this->funcExportScene(file);
             break;
@@ -519,6 +535,8 @@ void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) 
     }
     this->showOBJExporter = false;
     this->showImageSave = false;
+    this->showSaveDialog = false;
+    this->showOpenDialog = false;
 }
 
 void UI::fileShaderEditorSaved(std::string fileName) {

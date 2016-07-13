@@ -41,7 +41,8 @@ public:
               std::function<void(FBEntity file)> exportScene,
               std::function<void(int)> deleteModel,
               std::function<void(FBEntity file)> renderScene,
-              std::function<void(FBEntity file)> saveScene
+              std::function<void(FBEntity file)> saveScene,
+              std::function<void(FBEntity file)> openScene
               );
 
     bool processEvent(SDL_Event *event);
@@ -80,6 +81,7 @@ private:
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
     std::function<void(FBEntity file)> funcSaveScene;
+    std::function<void(FBEntity file)> funcOpenScene;
 
     void dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
@@ -117,6 +119,7 @@ private:
     bool showDialogFile;
     bool showOBJImporter;
     bool showSaveDialog;
+    bool showOpenDialog;
     bool showShaderEditor;
     bool showScreenshotWindow;
     bool showSceneStats;

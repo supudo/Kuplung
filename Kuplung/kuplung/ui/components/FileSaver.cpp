@@ -64,7 +64,10 @@ void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened)
     ImGui::Text("File Name: ");
     ImGui::InputText("", this->fileName, sizeof(this->fileName));
     ImGui::SameLine(0, 10);
-    if (ImGui::Button("Save")) {
+    std::string btnLabel = "Save";
+    if (type == FileSaverOperation_OpenScene)
+        btnLabel = "Open";
+    if (ImGui::Button(btnLabel.c_str())) {
         FBEntity file;
         file.extension = "";
         file.isFile = true;
@@ -77,7 +80,7 @@ void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened)
         this->funcFileSave(file, type);
     }
     ImGui::SameLine(0, 10);
-    if (ImGui::Button("New Folder"))
+    if (type != FileSaverOperation_OpenScene && ImGui::Button("New Folder"))
         this->showNewFolderModel = true;
     ImGui::PopItemWidth();
     ImGui::Separator();
@@ -152,7 +155,10 @@ void FileSaver::drawFiles() {
         FBEntity entity = iter->second;
         if (ImGui::Selectable(entity.title.c_str(), selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
-            this->currentFolder = entity.path;
+            if (entity.isFile)
+                strcpy(this->fileName, entity.title.c_str());
+            else
+                this->currentFolder = entity.path;
             this->drawFiles();
         }
         ImGui::NextColumn();
@@ -183,7 +189,7 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 fs::file_status fileStatus = iteratorFolder->status();
-                if (fs::is_directory(fileStatus)) {
+//                if (fs::is_directory(fileStatus)) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;
@@ -216,7 +222,7 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
                     entity.modifiedDate = mds;
 
                     folderContents[entity.path] = entity;
-                }
+//                }
             }
             catch (const std::exception & ex) {
                 Settings::Instance()->funcDoLog("[SceneExport] " + iteratorFolder->path().filename().string() + " " + ex.what());

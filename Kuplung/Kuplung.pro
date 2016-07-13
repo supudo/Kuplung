@@ -172,7 +172,8 @@ SOURCES += main.cpp \
     kuplung/utilities/export/Exporter.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
-    kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp
+    kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
+    kuplung/utilities/saveopen/SaveOpen.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -255,7 +256,8 @@ HEADERS += \
     kuplung/utilities/export/Exporter.hpp \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
-    kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp
+    kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
+    kuplung/utilities/saveopen/SaveOpen.hpp
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

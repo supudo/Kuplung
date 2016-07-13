@@ -15,6 +15,7 @@
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */; };
+		8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A14D8C41D367BFC00674470 /* SaveOpen.cpp */; };
 		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
@@ -385,6 +386,8 @@
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
 		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
 		8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.2.0.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.2/lib/libassimp.3.2.0.dylib; sourceTree = "<group>"; };
+		8A14D8C41D367BFC00674470 /* SaveOpen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpen.cpp; path = saveopen/SaveOpen.cpp; sourceTree = "<group>"; };
+		8A14D8C51D367BFC00674470 /* SaveOpen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpen.hpp; path = saveopen/SaveOpen.hpp; sourceTree = "<group>"; };
 		8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsStructs.h; sourceTree = "<group>"; };
 		8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8A175AD61CA93EB900A4E46B /* MELink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MELink.cpp; path = materialeditor/MELink.cpp; sourceTree = "<group>"; };
@@ -670,6 +673,15 @@
 			path = objects;
 			sourceTree = "<group>";
 		};
+		8A14D8C31D367BF200674470 /* saveopen */ = {
+			isa = PBXGroup;
+			children = (
+				8A14D8C41D367BFC00674470 /* SaveOpen.cpp */,
+				8A14D8C51D367BFC00674470 /* SaveOpen.hpp */,
+			);
+			name = saveopen;
+			sourceTree = "<group>";
+		};
 		8A1AFB201C71FC3F004888D8 /* iconfonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -750,9 +762,9 @@
 		8A6E70631C6CACB40085CAE5 /* ui */ = {
 			isa = PBXGroup;
 			children = (
-				8A1AFB201C71FC3F004888D8 /* iconfonts */,
 				8A6E70641C6CACB40085CAE5 /* components */,
 				8A6E70731C6CACB40085CAE5 /* dialogs */,
+				8A1AFB201C71FC3F004888D8 /* iconfonts */,
 				8A6E707A1C6CACB40085CAE5 /* implementation */,
 				8A6E707D1C6CACB40085CAE5 /* Objects.h */,
 				8A6E707E1C6CACB40085CAE5 /* UI.cpp */,
@@ -822,6 +834,7 @@
 				8A3CECF71C85B217005CB98D /* maths */,
 				8A6E70951C6CACB40085CAE5 /* parsers */,
 				8A69992B1CE0FB6F009F8D56 /* renderers */,
+				8A14D8C31D367BF200674470 /* saveopen */,
 				8A6E709F1C6CACB40085CAE5 /* stb */,
 			);
 			path = utilities;
@@ -1388,6 +1401,7 @@
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
 				8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */,
 				8A81DDC61D1A82B5004F3270 /* RayLine.cpp in Sources */,
+				8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */,
 				8AA9F2351D2173F6004A8F1C /* Terrain.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

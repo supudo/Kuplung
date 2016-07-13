@@ -136,7 +136,8 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::saveScene, this, std::placeholders::_1)
+                                          std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::openScene, this, std::placeholders::_1)
                                           );
                     this->doLog("UI initialized.");
 
@@ -174,6 +175,9 @@ bool Kuplung::init() {
 
                     this->managerRendering = new RenderingManager();
                     this->managerRendering->init();
+
+                    this->managerSaveOpen = new SaveOpen();
+                    this->managerSaveOpen->init();
                 }
             }
         }
@@ -700,5 +704,9 @@ void Kuplung::guiRenderScene(FBEntity file) {
 }
 
 void Kuplung::saveScene(FBEntity file) {
-    // TODO: save scene in .kuplung file
+    this->managerSaveOpen->saveKuplungFile(file, this->managerObjects, this->meshModelFaces);
+}
+
+void Kuplung::openScene(FBEntity file) {
+    this->managerSaveOpen->openKuplungFile(file, this->managerObjects);
 }
