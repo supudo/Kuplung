@@ -124,6 +124,8 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
         this->binary_write(kuplungFile, l->lConstant);
         this->binary_write(kuplungFile, l->lLinear);
         this->binary_write(kuplungFile, l->lQuadratic);
+        this->binary_write(kuplungFile, l->meshModel);
+        this->binary_write_model(kuplungFile, l->meshModel);
     }
 
 //    for (size_t i=0; i<meshModelFaces.size(); i++) {
@@ -218,16 +220,17 @@ void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
             l->init(LightSourceType_Directional);
             l->initProperties();
 
-            char* tempString;
+            char tempString = '\0';
             this->binary_read(kuplungFile, tempString);
-            l->description = std::string(tempString);
+            l->description = std::to_string(tempString);
 
             this->binary_read(kuplungFile, l->showInWire);
             this->binary_read(kuplungFile, l->showLampDirection);
             this->binary_read(kuplungFile, l->showLampObject);
 
+            tempString = '\0';
             this->binary_read(kuplungFile, tempString);
-            l->title = std::string(tempString);
+            l->title = std::to_string(tempString);
 
             this->binary_read(kuplungFile, l->type);
             this->binary_read(kuplungFile, l->ambient);
@@ -253,6 +256,7 @@ void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
             this->binary_read(kuplungFile, l->lConstant);
             this->binary_read(kuplungFile, l->lLinear);
             this->binary_read(kuplungFile, l->lQuadratic);
+            l->meshModel = this->binary_read_model(kuplungFile);
 
             l->initBuffers(Settings::Instance()->appFolder());
             l->initShaderProgram();
@@ -279,4 +283,154 @@ std::ostream& SaveOpen::binary_write(std::ostream& stream, const T& value) {
 template<typename T>
 std::istream& SaveOpen::binary_read(std::istream& stream, T& value) {
     return stream.read(reinterpret_cast<char*>(&value), sizeof(T));
+}
+
+void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
+    this->binary_write(stream, model.File.extension.c_str());
+    this->binary_write(stream, model.File.isFile);
+    this->binary_write(stream, model.File.modifiedDate.c_str());
+    this->binary_write(stream, model.File.path.c_str());
+    this->binary_write(stream, model.File.size.c_str());
+    this->binary_write(stream, model.File.title.c_str());
+    this->binary_write(stream, model.ID);
+    this->binary_write(stream, model.ModelTitle.c_str());
+    this->binary_write(stream, model.MaterialTitle.c_str());
+    this->binary_write(stream, model.countVertices);
+    this->binary_write(stream, model.countTextureCoordinates);
+    this->binary_write(stream, model.countNormals);
+    this->binary_write(stream, model.countIndices);
+
+    this->binary_write(stream, model.ModelMaterial.MaterialID);
+    this->binary_write(stream, model.ModelMaterial.MaterialTitle.c_str());
+    this->binary_write(stream, model.ModelMaterial.AmbientColor);
+    this->binary_write(stream, model.ModelMaterial.DiffuseColor);
+    this->binary_write(stream, model.ModelMaterial.SpecularColor);
+    this->binary_write(stream, model.ModelMaterial.EmissionColor);
+    this->binary_write(stream, model.ModelMaterial.SpecularExp);
+    this->binary_write(stream, model.ModelMaterial.Transparency);
+    this->binary_write(stream, model.ModelMaterial.IlluminationMode);
+    this->binary_write(stream, model.ModelMaterial.OpticalDensity);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureAmbient);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureDiffuse);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureSpecular);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureSpecularExp);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureDissolve);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureBump);
+    this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureDisplacement);
+
+    stream.write((char*)&model.vertices[0], model.vertices.size() * sizeof(glm::vec3));
+    stream.write((char*)&model.texture_coordinates[0], model.texture_coordinates.size() * sizeof(glm::vec2));
+    stream.write((char*)&model.normals[0], model.normals.size() * sizeof(glm::vec3));
+    stream.write((char*)&model.indices[0], model.indices.size() * sizeof(unsigned int));
+}
+
+void SaveOpen::binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture) {
+    this->binary_write(stream, materialTexture.Filename.c_str());
+    this->binary_write(stream, materialTexture.Image.c_str());
+    this->binary_write(stream, materialTexture.Width);
+    this->binary_write(stream, materialTexture.Height);
+    this->binary_write(stream, materialTexture.UseTexture);
+    this->binary_write(stream, materialTexture.UseTexture);
+
+    int commandsCount = int(materialTexture.Commands.size());
+    this->binary_write(stream, commandsCount);
+    for (size_t i=0; i<size_t(commandsCount); i++) {
+        this->binary_write(stream, materialTexture.Commands[i].c_str());
+    }
+}
+
+MeshModel SaveOpen::binary_read_model(std::istream& stream) {
+    MeshModel model;
+    char tempString;
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.File.extension = std::to_string(tempString);
+
+    this->binary_read(stream, model.File.isFile);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.File.modifiedDate = std::to_string(tempString);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.File.path = std::to_string(tempString);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.File.size = std::to_string(tempString);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.File.title = std::to_string(tempString);
+
+    this->binary_read(stream, model.ID);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.ModelTitle = std::to_string(tempString);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.MaterialTitle = std::to_string(tempString);
+
+    this->binary_read(stream, model.countVertices);
+    this->binary_read(stream, model.countTextureCoordinates);
+    this->binary_read(stream, model.countNormals);
+    this->binary_read(stream, model.countIndices);
+    this->binary_read(stream, model.ModelMaterial.MaterialID);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    model.ModelMaterial.MaterialTitle = std::to_string(tempString);
+
+    this->binary_read(stream, model.ModelMaterial.AmbientColor);
+    this->binary_read(stream, model.ModelMaterial.DiffuseColor);
+    this->binary_read(stream, model.ModelMaterial.SpecularColor);
+    this->binary_read(stream, model.ModelMaterial.EmissionColor);
+    this->binary_read(stream, model.ModelMaterial.SpecularExp);
+    this->binary_read(stream, model.ModelMaterial.Transparency);
+    this->binary_read(stream, model.ModelMaterial.IlluminationMode);
+    this->binary_read(stream, model.ModelMaterial.OpticalDensity);
+    model.ModelMaterial.TextureAmbient = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureDiffuse = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureSpecular = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureSpecularExp = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureDissolve = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureBump = this->binary_read_model_material_texture(stream);
+    model.ModelMaterial.TextureDisplacement = this->binary_read_model_material_texture(stream);
+
+    stream.read((char*)&model.vertices[0], model.vertices.size() * sizeof(glm::vec3));
+    stream.read((char*)&model.texture_coordinates[0], model.texture_coordinates.size() * sizeof(glm::vec2));
+    stream.read((char*)&model.normals[0], model.normals.size() * sizeof(glm::vec3));
+    stream.read((char*)&model.indices[0], model.indices.size() * sizeof(unsigned int));
+
+    return model;
+}
+
+MeshMaterialTextureImage SaveOpen::binary_read_model_material_texture(std::istream& stream) {
+    MeshMaterialTextureImage t;
+    char tempString;
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    t.Filename = std::to_string(tempString);
+
+    tempString = '\0';
+    this->binary_read(stream, tempString);
+    t.Image = std::to_string(tempString);
+
+    this->binary_read(stream, t.Width);
+    this->binary_read(stream, t.Height);
+    this->binary_read(stream, t.UseTexture);
+
+    int lightsCount = 0;
+    this->binary_read(stream, lightsCount);
+    for (size_t i=0; i<t.Commands.size(); i++) {
+        tempString = '\0';
+        this->binary_read(stream, tempString);
+        t.Commands[i] = std::to_string(tempString);
+    }
+    return t;
 }

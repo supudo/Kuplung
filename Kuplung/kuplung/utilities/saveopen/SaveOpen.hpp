@@ -27,6 +27,12 @@ private:
 
     template<typename T>
     std::istream& binary_read(std::istream& stream, T& value);
+
+    void binary_write_model(std::ostream& stream, MeshModel model);
+    void binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture);
+
+    MeshModel binary_read_model(std::istream& stream);
+    MeshMaterialTextureImage binary_read_model_material_texture(std::istream& stream);
 };
 
 #endif /* SaveOpen_hpp */
