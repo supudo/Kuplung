@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/utilities/saveopen/SaveOpen.cpp"
-            timestampString = "490187074.348796"
+            timestampString = "490198395.69051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "344"
-            endingLineNumber = "344"
-            landmarkName = "SaveOpen::binary_write_model_material_texture(std::ostream&amp; stream, MeshMaterialTextureImage materialTexture)"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "SaveOpen::binary_read_model(std::istream&amp; stream)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/utilities/saveopen/SaveOpen.cpp"
-            timestampString = "490187116.000892"
+            timestampString = "490198395.69051"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
+            startingLineNumber = "389"
+            endingLineNumber = "389"
             landmarkName = "SaveOpen::binary_read_model(std::istream&amp; stream)"
             landmarkType = "5">
          </BreakpointContent>

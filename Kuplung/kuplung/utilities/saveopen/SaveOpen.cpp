@@ -23,6 +23,31 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     std::ofstream kuplungFile;
     kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
 
+    if (kuplungFile.is_open() && !kuplungFile.bad()) {
+        this->storeObjectsManagerSettings(kuplungFile, managerObjects);
+        this->storeGlobalLights(kuplungFile, managerObjects);
+
+        kuplungFile.close();
+    }
+}
+
+void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+    std::string fileName = file.path + "/" + file.title;
+
+    std::ifstream kuplungFile;
+    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+
+    if (kuplungFile.is_open() && !kuplungFile.bad()) {
+        kuplungFile.seekg(0);
+
+        this->readObjectsManagerSettings(kuplungFile, managerObjects);
+        this->readGlobalLights(kuplungFile, managerObjects);
+
+        kuplungFile.close();
+    }
+}
+
+void SaveOpen::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
     this->binary_write(kuplungFile, managerObjects->Setting_FOV);
     this->binary_write(kuplungFile, managerObjects->Setting_OutlineThickness);
     this->binary_write(kuplungFile, managerObjects->Setting_RatioWidth);
@@ -90,7 +115,79 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     this->binary_write(kuplungFile, managerObjects->grid->scaleZ);
     this->binary_write(kuplungFile, managerObjects->grid->transparency);
     this->binary_write(kuplungFile, managerObjects->grid->showGrid);
+}
 
+void SaveOpen::readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+    this->binary_read(kuplungFile, managerObjects->Setting_FOV);
+    this->binary_read(kuplungFile, managerObjects->Setting_OutlineThickness);
+    this->binary_read(kuplungFile, managerObjects->Setting_RatioWidth);
+    this->binary_read(kuplungFile, managerObjects->Setting_RatioHeight);
+    this->binary_read(kuplungFile, managerObjects->Setting_PlaneClose);
+    this->binary_read(kuplungFile, managerObjects->Setting_PlaneFar);
+    this->binary_read(kuplungFile, managerObjects->Setting_GridSize);
+    this->binary_read(kuplungFile, managerObjects->Setting_Skybox);
+    this->binary_read(kuplungFile, managerObjects->Setting_OutlineColor);
+    this->binary_read(kuplungFile, managerObjects->Setting_UIAmbientLight);
+    this->binary_read(kuplungFile, managerObjects->Setting_FixedGridWorld);
+    this->binary_read(kuplungFile, managerObjects->Setting_OutlineColorPickerOpen);
+    this->binary_read(kuplungFile, managerObjects->Setting_ShowAxisHelpers);
+    this->binary_read(kuplungFile, managerObjects->Settings_ShowZAxis);
+    this->binary_read(kuplungFile, managerObjects->viewModelSkin);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Direction);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_MaterialColor);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Specular);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient_Strength);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse_Strength);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Specular_Strength);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_MaterialColor_ColorPicker);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient_ColorPicker);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse_ColorPicker);
+    this->binary_read(kuplungFile, managerObjects->SolidLight_Specular_ColorPicker);
+    this->binary_read(kuplungFile, managerObjects->Setting_ShowTerrain);
+    this->binary_read(kuplungFile, managerObjects->Setting_TerrainModel);
+    this->binary_read(kuplungFile, managerObjects->Setting_TerrainAnimateX);
+    this->binary_read(kuplungFile, managerObjects->Setting_TerrainAnimateY);
+    this->binary_read(kuplungFile, managerObjects->Setting_TerrainWidth);
+    this->binary_read(kuplungFile, managerObjects->Setting_TerrainHeight);
+    this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestMode);
+    this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestLights);
+    this->binary_read(kuplungFile, managerObjects->Setting_LightingPass_DrawMode);
+    this->binary_read(kuplungFile, managerObjects->Setting_DeferredAmbientStrength);
+    this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestLightsNumber);
+    this->binary_read(kuplungFile, managerObjects->Setting_ShowSpaceship);
+    this->binary_read(kuplungFile, managerObjects->Setting_GenerateSpaceship);
+    this->binary_read(kuplungFile, managerObjects->matrixProjection);
+    this->binary_read(kuplungFile, managerObjects->camera->cameraPosition);
+    this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Eye);
+    this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Center);
+    this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Up);
+    this->binary_read(kuplungFile, managerObjects->camera->positionX);
+    this->binary_read(kuplungFile, managerObjects->camera->positionY);
+    this->binary_read(kuplungFile, managerObjects->camera->positionZ);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateX);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateY);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateZ);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateCenterX);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateCenterY);
+    this->binary_read(kuplungFile, managerObjects->camera->rotateCenterZ);
+    this->binary_read(kuplungFile, managerObjects->grid->actAsMirror);
+    this->binary_read(kuplungFile, managerObjects->grid->gridSize);
+    this->binary_read(kuplungFile, managerObjects->grid->positionX);
+    this->binary_read(kuplungFile, managerObjects->grid->positionY);
+    this->binary_read(kuplungFile, managerObjects->grid->positionZ);
+    this->binary_read(kuplungFile, managerObjects->grid->rotateX);
+    this->binary_read(kuplungFile, managerObjects->grid->rotateY);
+    this->binary_read(kuplungFile, managerObjects->grid->rotateZ);
+    this->binary_read(kuplungFile, managerObjects->grid->scaleX);
+    this->binary_read(kuplungFile, managerObjects->grid->scaleY);
+    this->binary_read(kuplungFile, managerObjects->grid->scaleZ);
+    this->binary_read(kuplungFile, managerObjects->grid->transparency);
+    this->binary_read(kuplungFile, managerObjects->grid->showGrid);
+}
+
+void SaveOpen::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
     int lightsCount = int(managerObjects->lightSources.size());
     this->binary_write(kuplungFile, lightsCount);
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
@@ -127,162 +224,60 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
         this->binary_write(kuplungFile, l->meshModel);
         this->binary_write_model(kuplungFile, l->meshModel);
     }
-
-//    for (size_t i=0; i<meshModelFaces.size(); i++) {
-//        this->binary_write(kuplungFile, meshModelFaces[i]);
-//    }
-
-    kuplungFile.close();
 }
 
-void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
-    std::string fileName = file.path + "/" + file.title;
+void SaveOpen::readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+    managerObjects->lightSources.clear();
+    int lightsCount = 0;
+    this->binary_read(kuplungFile, lightsCount);
+    for (size_t i=0; i<size_t(lightsCount); i++) {
+        Light* l = new Light();
+        l->init(LightSourceType_Directional);
+        l->initProperties();
 
-    std::ifstream kuplungFile;
-    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+        char tempString = '\0';
+        this->binary_read(kuplungFile, tempString);
+        l->description = std::to_string(tempString);
 
-    if (kuplungFile.is_open() && !kuplungFile.bad()) {
-        kuplungFile.seekg(0);
+        this->binary_read(kuplungFile, l->showInWire);
+        this->binary_read(kuplungFile, l->showLampDirection);
+        this->binary_read(kuplungFile, l->showLampObject);
 
-        this->binary_read(kuplungFile, managerObjects->Setting_FOV);
-        this->binary_read(kuplungFile, managerObjects->Setting_OutlineThickness);
-        this->binary_read(kuplungFile, managerObjects->Setting_RatioWidth);
-        this->binary_read(kuplungFile, managerObjects->Setting_RatioHeight);
-        this->binary_read(kuplungFile, managerObjects->Setting_PlaneClose);
-        this->binary_read(kuplungFile, managerObjects->Setting_PlaneFar);
-        this->binary_read(kuplungFile, managerObjects->Setting_GridSize);
-        this->binary_read(kuplungFile, managerObjects->Setting_Skybox);
-        this->binary_read(kuplungFile, managerObjects->Setting_OutlineColor);
-        this->binary_read(kuplungFile, managerObjects->Setting_UIAmbientLight);
-        this->binary_read(kuplungFile, managerObjects->Setting_FixedGridWorld);
-        this->binary_read(kuplungFile, managerObjects->Setting_OutlineColorPickerOpen);
-        this->binary_read(kuplungFile, managerObjects->Setting_ShowAxisHelpers);
-        this->binary_read(kuplungFile, managerObjects->Settings_ShowZAxis);
-        this->binary_read(kuplungFile, managerObjects->viewModelSkin);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Direction);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_MaterialColor);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Specular);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient_Strength);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse_Strength);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Specular_Strength);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_MaterialColor_ColorPicker);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient_ColorPicker);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Diffuse_ColorPicker);
-        this->binary_read(kuplungFile, managerObjects->SolidLight_Specular_ColorPicker);
-        this->binary_read(kuplungFile, managerObjects->Setting_ShowTerrain);
-        this->binary_read(kuplungFile, managerObjects->Setting_TerrainModel);
-        this->binary_read(kuplungFile, managerObjects->Setting_TerrainAnimateX);
-        this->binary_read(kuplungFile, managerObjects->Setting_TerrainAnimateY);
-        this->binary_read(kuplungFile, managerObjects->Setting_TerrainWidth);
-        this->binary_read(kuplungFile, managerObjects->Setting_TerrainHeight);
-        this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestMode);
-        this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestLights);
-        this->binary_read(kuplungFile, managerObjects->Setting_LightingPass_DrawMode);
-        this->binary_read(kuplungFile, managerObjects->Setting_DeferredAmbientStrength);
-        this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestLightsNumber);
-        this->binary_read(kuplungFile, managerObjects->Setting_ShowSpaceship);
-        this->binary_read(kuplungFile, managerObjects->Setting_GenerateSpaceship);
-        this->binary_read(kuplungFile, managerObjects->matrixProjection);
-        this->binary_read(kuplungFile, managerObjects->camera->cameraPosition);
-        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Eye);
-        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Center);
-        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Up);
-        this->binary_read(kuplungFile, managerObjects->camera->positionX);
-        this->binary_read(kuplungFile, managerObjects->camera->positionY);
-        this->binary_read(kuplungFile, managerObjects->camera->positionZ);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateX);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateY);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateZ);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterX);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterY);
-        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterZ);
-        this->binary_read(kuplungFile, managerObjects->grid->actAsMirror);
-        this->binary_read(kuplungFile, managerObjects->grid->gridSize);
-        this->binary_read(kuplungFile, managerObjects->grid->positionX);
-        this->binary_read(kuplungFile, managerObjects->grid->positionY);
-        this->binary_read(kuplungFile, managerObjects->grid->positionZ);
-        this->binary_read(kuplungFile, managerObjects->grid->rotateX);
-        this->binary_read(kuplungFile, managerObjects->grid->rotateY);
-        this->binary_read(kuplungFile, managerObjects->grid->rotateZ);
-        this->binary_read(kuplungFile, managerObjects->grid->scaleX);
-        this->binary_read(kuplungFile, managerObjects->grid->scaleY);
-        this->binary_read(kuplungFile, managerObjects->grid->scaleZ);
-        this->binary_read(kuplungFile, managerObjects->grid->transparency);
-        this->binary_read(kuplungFile, managerObjects->grid->showGrid);
+        tempString = '\0';
+        this->binary_read(kuplungFile, tempString);
+        l->title = std::to_string(tempString);
 
-        managerObjects->lightSources.clear();
-        int lightsCount = 0;
-        this->binary_read(kuplungFile, lightsCount);
-        for (size_t i=0; i<size_t(lightsCount); i++) {
-            Light* l = new Light();
-            l->init(LightSourceType_Directional);
-            l->initProperties();
+        this->binary_read(kuplungFile, l->type);
+        this->binary_read(kuplungFile, l->ambient);
+        this->binary_read(kuplungFile, l->diffuse);
+        this->binary_read(kuplungFile, l->specular);
+        this->binary_read(kuplungFile, l->positionX);
+        this->binary_read(kuplungFile, l->positionY);
+        this->binary_read(kuplungFile, l->positionZ);
+        this->binary_read(kuplungFile, l->directionX);
+        this->binary_read(kuplungFile, l->directionY);
+        this->binary_read(kuplungFile, l->directionZ);
+        this->binary_read(kuplungFile, l->scaleX);
+        this->binary_read(kuplungFile, l->scaleY);
+        this->binary_read(kuplungFile, l->scaleZ);
+        this->binary_read(kuplungFile, l->rotateX);
+        this->binary_read(kuplungFile, l->rotateY);
+        this->binary_read(kuplungFile, l->rotateZ);
+        this->binary_read(kuplungFile, l->rotateCenterX);
+        this->binary_read(kuplungFile, l->rotateCenterY);
+        this->binary_read(kuplungFile, l->rotateCenterZ);
+        this->binary_read(kuplungFile, l->lCutOff);
+        this->binary_read(kuplungFile, l->lOuterCutOff);
+        this->binary_read(kuplungFile, l->lConstant);
+        this->binary_read(kuplungFile, l->lLinear);
+        this->binary_read(kuplungFile, l->lQuadratic);
+        l->meshModel = this->binary_read_model(kuplungFile);
 
-            char tempString = '\0';
-            this->binary_read(kuplungFile, tempString);
-            l->description = std::to_string(tempString);
+        l->initBuffers(Settings::Instance()->appFolder());
+        l->initShaderProgram();
 
-            this->binary_read(kuplungFile, l->showInWire);
-            this->binary_read(kuplungFile, l->showLampDirection);
-            this->binary_read(kuplungFile, l->showLampObject);
-
-            tempString = '\0';
-            this->binary_read(kuplungFile, tempString);
-            l->title = std::to_string(tempString);
-
-            this->binary_read(kuplungFile, l->type);
-            this->binary_read(kuplungFile, l->ambient);
-            this->binary_read(kuplungFile, l->diffuse);
-            this->binary_read(kuplungFile, l->specular);
-            this->binary_read(kuplungFile, l->positionX);
-            this->binary_read(kuplungFile, l->positionY);
-            this->binary_read(kuplungFile, l->positionZ);
-            this->binary_read(kuplungFile, l->directionX);
-            this->binary_read(kuplungFile, l->directionY);
-            this->binary_read(kuplungFile, l->directionZ);
-            this->binary_read(kuplungFile, l->scaleX);
-            this->binary_read(kuplungFile, l->scaleY);
-            this->binary_read(kuplungFile, l->scaleZ);
-            this->binary_read(kuplungFile, l->rotateX);
-            this->binary_read(kuplungFile, l->rotateY);
-            this->binary_read(kuplungFile, l->rotateZ);
-            this->binary_read(kuplungFile, l->rotateCenterX);
-            this->binary_read(kuplungFile, l->rotateCenterY);
-            this->binary_read(kuplungFile, l->rotateCenterZ);
-            this->binary_read(kuplungFile, l->lCutOff);
-            this->binary_read(kuplungFile, l->lOuterCutOff);
-            this->binary_read(kuplungFile, l->lConstant);
-            this->binary_read(kuplungFile, l->lLinear);
-            this->binary_read(kuplungFile, l->lQuadratic);
-            l->meshModel = this->binary_read_model(kuplungFile);
-
-            l->initBuffers(Settings::Instance()->appFolder());
-            l->initShaderProgram();
-
-            managerObjects->lightSources.push_back(l);
-        }
-
-        kuplungFile.close();
+        managerObjects->lightSources.push_back(l);
     }
-}
-
-bool SaveOpen::hasEnding(std::string const &fullString, std::string const &ending) {
-    if (fullString.length() >= ending.length())
-        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
-    else
-        return false;
-}
-
-template<typename T>
-std::ostream& SaveOpen::binary_write(std::ostream& stream, const T& value) {
-    return stream.write(reinterpret_cast<const char*>(&value), sizeof(T));
-}
-
-template<typename T>
-std::istream& SaveOpen::binary_read(std::istream& stream, T& value) {
-    return stream.read(reinterpret_cast<char*>(&value), sizeof(T));
 }
 
 void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
@@ -299,7 +294,6 @@ void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
     this->binary_write(stream, model.countTextureCoordinates);
     this->binary_write(stream, model.countNormals);
     this->binary_write(stream, model.countIndices);
-
     this->binary_write(stream, model.ModelMaterial.MaterialID);
     this->binary_write(stream, model.ModelMaterial.MaterialTitle.c_str());
     this->binary_write(stream, model.ModelMaterial.AmbientColor);
@@ -318,10 +312,31 @@ void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
     this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureBump);
     this->binary_write_model_material_texture(stream, model.ModelMaterial.TextureDisplacement);
 
-    stream.write((char*)&model.vertices[0], model.vertices.size() * sizeof(glm::vec3));
-    stream.write((char*)&model.texture_coordinates[0], model.texture_coordinates.size() * sizeof(glm::vec2));
-    stream.write((char*)&model.normals[0], model.normals.size() * sizeof(glm::vec3));
-    stream.write((char*)&model.indices[0], model.indices.size() * sizeof(unsigned int));
+    int itemsCount;
+
+    itemsCount = int(model.vertices.size());
+    this->binary_write(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_write(stream, model.vertices[i]);
+    }
+
+    itemsCount = int(model.texture_coordinates.size());
+    this->binary_write(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_write(stream, model.texture_coordinates[i]);
+    }
+
+    itemsCount = int(model.normals.size());
+    this->binary_write(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_write(stream, model.normals[i]);
+    }
+
+    itemsCount = int(model.indices.size());
+    this->binary_write(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_write(stream, model.indices[i]);
+    }
 }
 
 void SaveOpen::binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture) {
@@ -329,7 +344,6 @@ void SaveOpen::binary_write_model_material_texture(std::ostream& stream, MeshMat
     this->binary_write(stream, materialTexture.Image.c_str());
     this->binary_write(stream, materialTexture.Width);
     this->binary_write(stream, materialTexture.Height);
-    this->binary_write(stream, materialTexture.UseTexture);
     this->binary_write(stream, materialTexture.UseTexture);
 
     int commandsCount = int(materialTexture.Commands.size());
@@ -401,10 +415,36 @@ MeshModel SaveOpen::binary_read_model(std::istream& stream) {
     model.ModelMaterial.TextureBump = this->binary_read_model_material_texture(stream);
     model.ModelMaterial.TextureDisplacement = this->binary_read_model_material_texture(stream);
 
-    stream.read((char*)&model.vertices[0], model.vertices.size() * sizeof(glm::vec3));
-    stream.read((char*)&model.texture_coordinates[0], model.texture_coordinates.size() * sizeof(glm::vec2));
-    stream.read((char*)&model.normals[0], model.normals.size() * sizeof(glm::vec3));
-    stream.read((char*)&model.indices[0], model.indices.size() * sizeof(unsigned int));
+    int itemsCount;
+    glm::vec3 tempVec3;
+    glm::vec2 tempVec2;
+
+    itemsCount = 0;
+    this->binary_read(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_read(stream, tempVec3);
+        model.vertices.push_back(tempVec3);
+    }
+
+    itemsCount = 0;
+    this->binary_read(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_read(stream, tempVec2);
+        model.texture_coordinates[i] = tempVec2;
+    }
+
+    itemsCount = 0;
+    this->binary_read(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_read(stream, tempVec3);
+        model.normals.push_back(tempVec3);
+    }
+
+    itemsCount = 0;
+    this->binary_read(stream, itemsCount);
+    for (size_t i=0; i<size_t(itemsCount); i++) {
+        this->binary_read(stream, model.indices[i]);
+    }
 
     return model;
 }
@@ -425,12 +465,29 @@ MeshMaterialTextureImage SaveOpen::binary_read_model_material_texture(std::istre
     this->binary_read(stream, t.Height);
     this->binary_read(stream, t.UseTexture);
 
-    int lightsCount = 0;
-    this->binary_read(stream, lightsCount);
-    for (size_t i=0; i<t.Commands.size(); i++) {
+    int commandsCount = 0;
+    this->binary_read(stream, commandsCount);
+    for (size_t i=0; i<size_t(commandsCount); i++) {
         tempString = '\0';
         this->binary_read(stream, tempString);
-        t.Commands[i] = std::to_string(tempString);
+        t.Commands.push_back(std::to_string(tempString));
     }
     return t;
+}
+
+bool SaveOpen::hasEnding(std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length())
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    else
+        return false;
+}
+
+template<typename T>
+std::ostream& SaveOpen::binary_write(std::ostream& stream, const T& value) {
+    return stream.write(reinterpret_cast<const char*>(&value), sizeof(T));
+}
+
+template<typename T>
+std::istream& SaveOpen::binary_read(std::istream& stream, T& value) {
+    return stream.read(reinterpret_cast<char*>(&value), sizeof(T));
 }
