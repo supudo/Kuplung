@@ -37,6 +37,7 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     this->binary_write(kuplungFile, managerObjects->Setting_OutlineColorPickerOpen);
     this->binary_write(kuplungFile, managerObjects->Setting_ShowAxisHelpers);
     this->binary_write(kuplungFile, managerObjects->Settings_ShowZAxis);
+    this->binary_write(kuplungFile, managerObjects->viewModelSkin);
     this->binary_write(kuplungFile, managerObjects->SolidLight_Direction);
     this->binary_write(kuplungFile, managerObjects->SolidLight_MaterialColor);
     this->binary_write(kuplungFile, managerObjects->SolidLight_Ambient);
@@ -62,6 +63,33 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     this->binary_write(kuplungFile, managerObjects->Setting_DeferredTestLightsNumber);
     this->binary_write(kuplungFile, managerObjects->Setting_ShowSpaceship);
     this->binary_write(kuplungFile, managerObjects->Setting_GenerateSpaceship);
+    this->binary_write(kuplungFile, managerObjects->matrixProjection);
+    this->binary_write(kuplungFile, managerObjects->camera->cameraPosition);
+    this->binary_write(kuplungFile, managerObjects->camera->eyeSettings->View_Eye);
+    this->binary_write(kuplungFile, managerObjects->camera->eyeSettings->View_Center);
+    this->binary_write(kuplungFile, managerObjects->camera->eyeSettings->View_Up);
+    this->binary_write(kuplungFile, managerObjects->camera->positionX->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->positionX->point);
+    this->binary_write(kuplungFile, managerObjects->camera->positionY->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->positionY->point);
+    this->binary_write(kuplungFile, managerObjects->camera->positionZ->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->positionZ->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateX->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateX->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateY->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateY->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateZ->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateZ->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterX->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterX->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterY->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterY->point);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterZ->animate);
+    this->binary_write(kuplungFile, managerObjects->camera->rotateCenterZ->point);
+
+//    for (size_t i=0; i<meshModelFaces.size(); i++) {
+//        this->binary_write(kuplungFile, meshModelFaces[i]);
+//    }
 
     kuplungFile.close();
 }
@@ -89,6 +117,7 @@ void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
         this->binary_read(kuplungFile, managerObjects->Setting_OutlineColorPickerOpen);
         this->binary_read(kuplungFile, managerObjects->Setting_ShowAxisHelpers);
         this->binary_read(kuplungFile, managerObjects->Settings_ShowZAxis);
+        this->binary_read(kuplungFile, managerObjects->viewModelSkin);
         this->binary_read(kuplungFile, managerObjects->SolidLight_Direction);
         this->binary_read(kuplungFile, managerObjects->SolidLight_MaterialColor);
         this->binary_read(kuplungFile, managerObjects->SolidLight_Ambient);
@@ -114,6 +143,29 @@ void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
         this->binary_read(kuplungFile, managerObjects->Setting_DeferredTestLightsNumber);
         this->binary_read(kuplungFile, managerObjects->Setting_ShowSpaceship);
         this->binary_read(kuplungFile, managerObjects->Setting_GenerateSpaceship);
+        this->binary_read(kuplungFile, managerObjects->matrixProjection);
+        this->binary_read(kuplungFile, managerObjects->camera->cameraPosition);
+        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Eye);
+        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Center);
+        this->binary_read(kuplungFile, managerObjects->camera->eyeSettings->View_Up);
+        this->binary_read(kuplungFile, managerObjects->camera->positionX->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->positionX->point);
+        this->binary_read(kuplungFile, managerObjects->camera->positionY->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->positionY->point);
+        this->binary_read(kuplungFile, managerObjects->camera->positionZ->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->positionZ->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateX->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateX->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateY->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateY->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateZ->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateZ->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterX->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterX->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterY->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterY->point);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterZ->animate);
+        this->binary_read(kuplungFile, managerObjects->camera->rotateCenterZ->point);
 
         kuplungFile.close();
     }
