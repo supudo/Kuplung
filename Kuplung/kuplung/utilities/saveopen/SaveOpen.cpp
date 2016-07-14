@@ -91,40 +91,40 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     this->binary_write(kuplungFile, managerObjects->grid->transparency);
     this->binary_write(kuplungFile, managerObjects->grid->showGrid);
 
-//    int lightsCount = int(managerObjects->lightSources.size());
-//    this->binary_write(kuplungFile, lightsCount);
-//    for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
-//        Light* l = managerObjects->lightSources[i];
-//        this->binary_write(kuplungFile, l->description.c_str());
-//        this->binary_write(kuplungFile, l->showInWire);
-//        this->binary_write(kuplungFile, l->showLampDirection);
-//        this->binary_write(kuplungFile, l->showLampObject);
-//        this->binary_write(kuplungFile, l->title.c_str());
-//        this->binary_write(kuplungFile, l->type);
-//        this->binary_write(kuplungFile, l->ambient);
-//        this->binary_write(kuplungFile, l->diffuse);
-//        this->binary_write(kuplungFile, l->specular);
-//        this->binary_write(kuplungFile, l->positionX);
-//        this->binary_write(kuplungFile, l->positionY);
-//        this->binary_write(kuplungFile, l->positionZ);
-//        this->binary_write(kuplungFile, l->directionX);
-//        this->binary_write(kuplungFile, l->directionY);
-//        this->binary_write(kuplungFile, l->directionZ);
-//        this->binary_write(kuplungFile, l->scaleX);
-//        this->binary_write(kuplungFile, l->scaleY);
-//        this->binary_write(kuplungFile, l->scaleZ);
-//        this->binary_write(kuplungFile, l->rotateX);
-//        this->binary_write(kuplungFile, l->rotateY);
-//        this->binary_write(kuplungFile, l->rotateZ);
-//        this->binary_write(kuplungFile, l->rotateCenterX);
-//        this->binary_write(kuplungFile, l->rotateCenterY);
-//        this->binary_write(kuplungFile, l->rotateCenterZ);
-//        this->binary_write(kuplungFile, l->lCutOff);
-//        this->binary_write(kuplungFile, l->lOuterCutOff);
-//        this->binary_write(kuplungFile, l->lConstant);
-//        this->binary_write(kuplungFile, l->lLinear);
-//        this->binary_write(kuplungFile, l->lQuadratic);
-//    }
+    int lightsCount = int(managerObjects->lightSources.size());
+    this->binary_write(kuplungFile, lightsCount);
+    for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
+        Light* l = managerObjects->lightSources[i];
+        this->binary_write(kuplungFile, l->description.c_str());
+        this->binary_write(kuplungFile, l->showInWire);
+        this->binary_write(kuplungFile, l->showLampDirection);
+        this->binary_write(kuplungFile, l->showLampObject);
+        this->binary_write(kuplungFile, l->title.c_str());
+        this->binary_write(kuplungFile, l->type);
+        this->binary_write(kuplungFile, l->ambient);
+        this->binary_write(kuplungFile, l->diffuse);
+        this->binary_write(kuplungFile, l->specular);
+        this->binary_write(kuplungFile, l->positionX);
+        this->binary_write(kuplungFile, l->positionY);
+        this->binary_write(kuplungFile, l->positionZ);
+        this->binary_write(kuplungFile, l->directionX);
+        this->binary_write(kuplungFile, l->directionY);
+        this->binary_write(kuplungFile, l->directionZ);
+        this->binary_write(kuplungFile, l->scaleX);
+        this->binary_write(kuplungFile, l->scaleY);
+        this->binary_write(kuplungFile, l->scaleZ);
+        this->binary_write(kuplungFile, l->rotateX);
+        this->binary_write(kuplungFile, l->rotateY);
+        this->binary_write(kuplungFile, l->rotateZ);
+        this->binary_write(kuplungFile, l->rotateCenterX);
+        this->binary_write(kuplungFile, l->rotateCenterY);
+        this->binary_write(kuplungFile, l->rotateCenterZ);
+        this->binary_write(kuplungFile, l->lCutOff);
+        this->binary_write(kuplungFile, l->lOuterCutOff);
+        this->binary_write(kuplungFile, l->lConstant);
+        this->binary_write(kuplungFile, l->lLinear);
+        this->binary_write(kuplungFile, l->lQuadratic);
+    }
 
 //    for (size_t i=0; i<meshModelFaces.size(); i++) {
 //        this->binary_write(kuplungFile, meshModelFaces[i]);
@@ -210,50 +210,55 @@ void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
         this->binary_read(kuplungFile, managerObjects->grid->transparency);
         this->binary_read(kuplungFile, managerObjects->grid->showGrid);
 
-//        managerObjects->lightSources.clear();
-//        std::vector<Light*> lights;
-//        int* lightsCount = 0;
-//        this->binary_read(kuplungFile, lightsCount);
-//        for (size_t i=0; i<size_t(lightsCount); i++) {
-//            Light* l = new Light();
-//            l->init(LightSourceType_Directional);
-//            char* tempString;
-//            this->binary_read(kuplungFile, tempString);
-//            l->description = std::string(tempString);
+        managerObjects->lightSources.clear();
+        int lightsCount = 0;
+        this->binary_read(kuplungFile, lightsCount);
+        for (size_t i=0; i<size_t(lightsCount); i++) {
+            Light* l = new Light();
+            l->init(LightSourceType_Directional);
+            l->initProperties();
 
-//            this->binary_read(kuplungFile, l->showInWire);
-//            this->binary_read(kuplungFile, l->showLampDirection);
-//            this->binary_read(kuplungFile, l->showLampObject);
+            char* tempString;
+            this->binary_read(kuplungFile, tempString);
+            l->description = std::string(tempString);
 
-//            this->binary_read(kuplungFile, tempString);
-//            l->title = std::string(tempString);
+            this->binary_read(kuplungFile, l->showInWire);
+            this->binary_read(kuplungFile, l->showLampDirection);
+            this->binary_read(kuplungFile, l->showLampObject);
 
-//            this->binary_read(kuplungFile, l->type);
-//            this->binary_read(kuplungFile, l->ambient);
-//            this->binary_read(kuplungFile, l->diffuse);
-//            this->binary_read(kuplungFile, l->specular);
-//            this->binary_read(kuplungFile, l->positionX);
-//            this->binary_read(kuplungFile, l->positionY);
-//            this->binary_read(kuplungFile, l->positionZ);
-//            this->binary_read(kuplungFile, l->directionX);
-//            this->binary_read(kuplungFile, l->directionY);
-//            this->binary_read(kuplungFile, l->directionZ);
-//            this->binary_read(kuplungFile, l->scaleX);
-//            this->binary_read(kuplungFile, l->scaleY);
-//            this->binary_read(kuplungFile, l->scaleZ);
-//            this->binary_read(kuplungFile, l->rotateX);
-//            this->binary_read(kuplungFile, l->rotateY);
-//            this->binary_read(kuplungFile, l->rotateZ);
-//            this->binary_read(kuplungFile, l->rotateCenterX);
-//            this->binary_read(kuplungFile, l->rotateCenterY);
-//            this->binary_read(kuplungFile, l->rotateCenterZ);
-//            this->binary_read(kuplungFile, l->lCutOff);
-//            this->binary_read(kuplungFile, l->lOuterCutOff);
-//            this->binary_read(kuplungFile, l->lConstant);
-//            this->binary_read(kuplungFile, l->lLinear);
-//            this->binary_read(kuplungFile, l->lQuadratic);
-//        }
-//        managerObjects->lightSources = lights;
+            this->binary_read(kuplungFile, tempString);
+            l->title = std::string(tempString);
+
+            this->binary_read(kuplungFile, l->type);
+            this->binary_read(kuplungFile, l->ambient);
+            this->binary_read(kuplungFile, l->diffuse);
+            this->binary_read(kuplungFile, l->specular);
+            this->binary_read(kuplungFile, l->positionX);
+            this->binary_read(kuplungFile, l->positionY);
+            this->binary_read(kuplungFile, l->positionZ);
+            this->binary_read(kuplungFile, l->directionX);
+            this->binary_read(kuplungFile, l->directionY);
+            this->binary_read(kuplungFile, l->directionZ);
+            this->binary_read(kuplungFile, l->scaleX);
+            this->binary_read(kuplungFile, l->scaleY);
+            this->binary_read(kuplungFile, l->scaleZ);
+            this->binary_read(kuplungFile, l->rotateX);
+            this->binary_read(kuplungFile, l->rotateY);
+            this->binary_read(kuplungFile, l->rotateZ);
+            this->binary_read(kuplungFile, l->rotateCenterX);
+            this->binary_read(kuplungFile, l->rotateCenterY);
+            this->binary_read(kuplungFile, l->rotateCenterZ);
+            this->binary_read(kuplungFile, l->lCutOff);
+            this->binary_read(kuplungFile, l->lOuterCutOff);
+            this->binary_read(kuplungFile, l->lConstant);
+            this->binary_read(kuplungFile, l->lLinear);
+            this->binary_read(kuplungFile, l->lQuadratic);
+
+            l->initBuffers(Settings::Instance()->appFolder());
+            l->initShaderProgram();
+
+            managerObjects->lightSources.push_back(l);
+        }
 
         kuplungFile.close();
     }
