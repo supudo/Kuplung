@@ -62,11 +62,11 @@ mac {
     LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
     INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
 
-    LIBS += -L/usr/local/Cellar/glfw3/3.1.2/lib -lGLFW3
-    INCLUDEPATH += /usr/local/Cellar/glfw3/3.1.2/include
+    LIBS += -L/usr/local/Cellar/glfw3/3.2/lib -lGLFW3
+    INCLUDEPATH += /usr/local/Cellar/glfw3/3.2/include
 
-    LIBS += -L/usr/local/Cellar/assimp/3.2/lib -lAssimp
-    INCLUDEPATH += /usr/local/Cellar/assimp/3.2/include
+    LIBS += -L/usr/local/Cellar/assimp/3.3.1/lib -lAssimp
+    INCLUDEPATH += /usr/local/Cellar/assimp/3.3.1/include
 
     LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
     INCLUDEPATH += "$$PWD/../external/libnoise/headers"

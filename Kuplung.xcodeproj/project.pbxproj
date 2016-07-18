@@ -14,7 +14,6 @@
 		8A00279A1C9ABE2300BBFFC6 /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
-		8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */; };
 		8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A14D8C41D367BFC00674470 /* SaveOpen.cpp */; };
 		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
@@ -34,6 +33,7 @@
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
+		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
 		8A43AD7F1C92FAE4000A35FB /* light_directional.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD791C92FACC000A35FB /* light_directional.mtl */; };
@@ -420,6 +420,7 @@
 		8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingDeferred.hpp; path = rendering/RenderingDeferred.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
+		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
 		8A43AD791C92FACC000A35FB /* light_directional.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_directional.mtl; sourceTree = "<group>"; };
@@ -652,9 +653,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */,
 				8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */,
 				8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */,
-				8A05DE421CB5272100EA0B4D /* libassimp.3.2.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1211,6 +1212,7 @@
 		8AD104021C049790008CE831 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */,
 				8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */,
 				8AD104051C05C489008CE831 /* GLUT.framework */,
 				8AD104031C049E8A008CE831 /* OpenGL.framework */,
@@ -1500,22 +1502,22 @@
 					/usr/include,
 					/usr/local/include,
 					/usr/local/Cellar/boost/1.60.0_2/include/boost,
-					/usr/local/Cellar/glfw3/3.1.2/include,
+					/usr/local/Cellar/glfw3/3.2/include,
 					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.4/include,
-					/usr/local/Cellar/assimp/3.2/include,
+					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/Cellar/boost/1.60.0_2/lib,
-					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/glfw3/3.2/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.4/lib,
-					/usr/local/Cellar/assimp/3.2/lib,
+					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 				);
 				OTHER_LDFLAGS = (
@@ -1550,22 +1552,22 @@
 					/usr/include,
 					/usr/local/include,
 					/usr/local/Cellar/boost/1.60.0_2/include/boost,
-					/usr/local/Cellar/glfw3/3.1.2/include,
+					/usr/local/Cellar/glfw3/3.2/include,
 					/usr/local/Cellar/glew/1.13.0/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.4/include,
-					/usr/local/Cellar/assimp/3.2/include,
+					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
 					/usr/local/Cellar/boost/1.60.0_2/lib,
-					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/glfw3/3.2/lib,
 					/usr/local/Cellar/glew/1.13.0/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.4/lib,
-					/usr/local/Cellar/assimp/3.2/lib,
+					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 				);
 				OTHER_LDFLAGS = (

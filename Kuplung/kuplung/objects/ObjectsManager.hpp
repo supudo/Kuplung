@@ -91,12 +91,12 @@ public:
 
     bool Setting_ShowSpaceship, Setting_GenerateSpaceship;
 
+    std::map<std::string, MeshModel> systemModels;
+
 private:
     std::function<void(float)> funcProgress;
     std::function<void()> funcAddTerrain;
     std::function<void()> funcAddSpaceship;
-
-    std::map<std::string, MeshModel> systemModels;
 };
 
 #endif /* ObjectsManager_hpp */

@@ -21,7 +21,7 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     std::remove(fileName.c_str());
 
     std::ofstream kuplungFile;
-    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out);
 
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
         this->storeObjectsManagerSettings(kuplungFile, managerObjects);
@@ -192,11 +192,11 @@ void SaveOpen::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *mana
     this->binary_write(kuplungFile, lightsCount);
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
         Light* l = managerObjects->lightSources[i];
-        this->binary_write(kuplungFile, l->description.c_str());
+        this->binary_write_string(kuplungFile, l->description);
         this->binary_write(kuplungFile, l->showInWire);
         this->binary_write(kuplungFile, l->showLampDirection);
         this->binary_write(kuplungFile, l->showLampObject);
-        this->binary_write(kuplungFile, l->title.c_str());
+        this->binary_write_string(kuplungFile, l->title);
         this->binary_write(kuplungFile, l->type);
         this->binary_write(kuplungFile, l->ambient);
         this->binary_write(kuplungFile, l->diffuse);
@@ -221,8 +221,6 @@ void SaveOpen::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *mana
         this->binary_write(kuplungFile, l->lConstant);
         this->binary_write(kuplungFile, l->lLinear);
         this->binary_write(kuplungFile, l->lQuadratic);
-        this->binary_write(kuplungFile, l->meshModel);
-        this->binary_write_model(kuplungFile, l->meshModel);
     }
 }
 
@@ -235,18 +233,11 @@ void SaveOpen::readGlobalLights(std::istream& kuplungFile, ObjectsManager *manag
         l->init(LightSourceType_Directional);
         l->initProperties();
 
-        char tempString = '\0';
-        this->binary_read(kuplungFile, tempString);
-        l->description = std::to_string(tempString);
-
+        l->description = this->binary_read_string(kuplungFile);
         this->binary_read(kuplungFile, l->showInWire);
         this->binary_read(kuplungFile, l->showLampDirection);
         this->binary_read(kuplungFile, l->showLampObject);
-
-        tempString = '\0';
-        this->binary_read(kuplungFile, tempString);
-        l->title = std::to_string(tempString);
-
+        l->title = this->binary_read_string(kuplungFile);
         this->binary_read(kuplungFile, l->type);
         this->binary_read(kuplungFile, l->ambient);
         this->binary_read(kuplungFile, l->diffuse);
@@ -271,31 +262,40 @@ void SaveOpen::readGlobalLights(std::istream& kuplungFile, ObjectsManager *manag
         this->binary_read(kuplungFile, l->lConstant);
         this->binary_read(kuplungFile, l->lLinear);
         this->binary_read(kuplungFile, l->lQuadratic);
-        l->meshModel = this->binary_read_model(kuplungFile);
+        switch (l->type) {
+            case LightSourceType_Directional:
+                l->setModel(managerObjects->systemModels["light_directional"]);
+                break;
+            case LightSourceType_Point:
+                l->setModel(managerObjects->systemModels["light_point"]);
+                break;
+            case LightSourceType_Spot:
+                l->setModel(managerObjects->systemModels["light_spot"]);
+        }
 
-        l->initBuffers(Settings::Instance()->appFolder());
         l->initShaderProgram();
+        l->initBuffers(Settings::Instance()->appFolder());
 
         managerObjects->lightSources.push_back(l);
     }
 }
 
 void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
-    this->binary_write(stream, model.File.extension.c_str());
+    this->binary_write_string(stream, model.File.extension);
     this->binary_write(stream, model.File.isFile);
-    this->binary_write(stream, model.File.modifiedDate.c_str());
-    this->binary_write(stream, model.File.path.c_str());
-    this->binary_write(stream, model.File.size.c_str());
-    this->binary_write(stream, model.File.title.c_str());
+    this->binary_write_string(stream, model.File.modifiedDate);
+    this->binary_write_string(stream, model.File.path);
+    this->binary_write_string(stream, model.File.size);
+    this->binary_write_string(stream, model.File.title);
     this->binary_write(stream, model.ID);
-    this->binary_write(stream, model.ModelTitle.c_str());
-    this->binary_write(stream, model.MaterialTitle.c_str());
+    this->binary_write_string(stream, model.ModelTitle);
+    this->binary_write_string(stream, model.MaterialTitle);
     this->binary_write(stream, model.countVertices);
     this->binary_write(stream, model.countTextureCoordinates);
     this->binary_write(stream, model.countNormals);
     this->binary_write(stream, model.countIndices);
     this->binary_write(stream, model.ModelMaterial.MaterialID);
-    this->binary_write(stream, model.ModelMaterial.MaterialTitle.c_str());
+    this->binary_write_string(stream, model.ModelMaterial.MaterialTitle);
     this->binary_write(stream, model.ModelMaterial.AmbientColor);
     this->binary_write(stream, model.ModelMaterial.DiffuseColor);
     this->binary_write(stream, model.ModelMaterial.SpecularColor);
@@ -316,89 +316,46 @@ void SaveOpen::binary_write_model(std::ostream& stream, MeshModel model) {
 
     itemsCount = int(model.vertices.size());
     this->binary_write(stream, itemsCount);
-    for (size_t i=0; i<size_t(itemsCount); i++) {
+    for (size_t i=0; i<model.vertices.size(); i++) {
         this->binary_write(stream, model.vertices[i]);
     }
 
     itemsCount = int(model.texture_coordinates.size());
     this->binary_write(stream, itemsCount);
-    for (size_t i=0; i<size_t(itemsCount); i++) {
+    for (size_t i=0; i<model.texture_coordinates.size(); i++) {
         this->binary_write(stream, model.texture_coordinates[i]);
     }
 
     itemsCount = int(model.normals.size());
     this->binary_write(stream, itemsCount);
-    for (size_t i=0; i<size_t(itemsCount); i++) {
+    for (size_t i=0; i<model.normals.size(); i++) {
         this->binary_write(stream, model.normals[i]);
     }
 
-    itemsCount = int(model.indices.size());
-    this->binary_write(stream, itemsCount);
-    for (size_t i=0; i<size_t(itemsCount); i++) {
-        this->binary_write(stream, model.indices[i]);
-    }
-}
-
-void SaveOpen::binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture) {
-    this->binary_write(stream, materialTexture.Filename.c_str());
-    this->binary_write(stream, materialTexture.Image.c_str());
-    this->binary_write(stream, materialTexture.Width);
-    this->binary_write(stream, materialTexture.Height);
-    this->binary_write(stream, materialTexture.UseTexture);
-
-    int commandsCount = int(materialTexture.Commands.size());
-    this->binary_write(stream, commandsCount);
-    for (size_t i=0; i<size_t(commandsCount); i++) {
-        this->binary_write(stream, materialTexture.Commands[i].c_str());
-    }
+//    itemsCount = int(model.indices.size());
+//    this->binary_write(stream, itemsCount);
+//    for (size_t i=0; i<model.indices.size(); i++) {
+//        this->binary_write(stream, model.indices[i]);
+//    }
 }
 
 MeshModel SaveOpen::binary_read_model(std::istream& stream) {
     MeshModel model;
-    char tempString;
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.File.extension = std::to_string(tempString);
-
+    model.File.extension = this->binary_read_string(stream);
     this->binary_read(stream, model.File.isFile);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.File.modifiedDate = std::to_string(tempString);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.File.path = std::to_string(tempString);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.File.size = std::to_string(tempString);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.File.title = std::to_string(tempString);
-
+    model.File.modifiedDate = this->binary_read_string(stream);
+    model.File.path = this->binary_read_string(stream);
+    model.File.size = this->binary_read_string(stream);
+    model.File.title = this->binary_read_string(stream);
     this->binary_read(stream, model.ID);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.ModelTitle = std::to_string(tempString);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.MaterialTitle = std::to_string(tempString);
-
+    model.ModelTitle = this->binary_read_string(stream);
+    model.MaterialTitle = this->binary_read_string(stream);
     this->binary_read(stream, model.countVertices);
     this->binary_read(stream, model.countTextureCoordinates);
     this->binary_read(stream, model.countNormals);
     this->binary_read(stream, model.countIndices);
     this->binary_read(stream, model.ModelMaterial.MaterialID);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    model.ModelMaterial.MaterialTitle = std::to_string(tempString);
-
+    model.ModelMaterial.MaterialTitle = this->binary_read_string(stream);
     this->binary_read(stream, model.ModelMaterial.AmbientColor);
     this->binary_read(stream, model.ModelMaterial.DiffuseColor);
     this->binary_read(stream, model.ModelMaterial.SpecularColor);
@@ -440,27 +397,33 @@ MeshModel SaveOpen::binary_read_model(std::istream& stream) {
         model.normals.push_back(tempVec3);
     }
 
-    itemsCount = 0;
-    this->binary_read(stream, itemsCount);
-    for (size_t i=0; i<size_t(itemsCount); i++) {
-        this->binary_read(stream, model.indices[i]);
-    }
+//    itemsCount = 0;
+//    this->binary_read(stream, itemsCount);
+//    for (size_t i=0; i<size_t(itemsCount); i++) {
+//        this->binary_read(stream, model.indices[i]);
+//    }
 
     return model;
 }
 
+void SaveOpen::binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture) {
+    this->binary_write_string(stream, materialTexture.Filename);
+    this->binary_write_string(stream, materialTexture.Image);
+    this->binary_write(stream, materialTexture.Width);
+    this->binary_write(stream, materialTexture.Height);
+    this->binary_write(stream, materialTexture.UseTexture);
+
+    int commandsCount = int(materialTexture.Commands.size());
+    this->binary_write(stream, commandsCount);
+    for (size_t i=0; i<size_t(commandsCount); i++) {
+        this->binary_write_string(stream, materialTexture.Commands[i]);
+    }
+}
+
 MeshMaterialTextureImage SaveOpen::binary_read_model_material_texture(std::istream& stream) {
     MeshMaterialTextureImage t;
-    char tempString;
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    t.Filename = std::to_string(tempString);
-
-    tempString = '\0';
-    this->binary_read(stream, tempString);
-    t.Image = std::to_string(tempString);
-
+    t.Filename = this->binary_read_string(stream);
+    t.Image = this->binary_read_string(stream);
     this->binary_read(stream, t.Width);
     this->binary_read(stream, t.Height);
     this->binary_read(stream, t.UseTexture);
@@ -468,9 +431,7 @@ MeshMaterialTextureImage SaveOpen::binary_read_model_material_texture(std::istre
     int commandsCount = 0;
     this->binary_read(stream, commandsCount);
     for (size_t i=0; i<size_t(commandsCount); i++) {
-        tempString = '\0';
-        this->binary_read(stream, tempString);
-        t.Commands.push_back(std::to_string(tempString));
+        t.Commands.push_back(this->binary_read_string(stream));
     }
     return t;
 }
@@ -490,4 +451,19 @@ std::ostream& SaveOpen::binary_write(std::ostream& stream, const T& value) {
 template<typename T>
 std::istream& SaveOpen::binary_read(std::istream& stream, T& value) {
     return stream.read(reinterpret_cast<char*>(&value), sizeof(T));
+}
+
+void SaveOpen::binary_write_string(std::ostream& stream, std::string str) {
+    size_t size = str.size();
+    this->binary_write(stream, size);
+    stream.write(&str[0], size);
+}
+
+std::string SaveOpen::binary_read_string(std::istream& stream) {
+    std::string str;
+    size_t size;
+    this->binary_read(stream, size);
+    str.resize(size);
+    stream.read(&str[0], size);
+    return str;
 }

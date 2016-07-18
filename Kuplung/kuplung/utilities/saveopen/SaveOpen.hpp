@@ -28,6 +28,9 @@ private:
     template<typename T>
     std::istream& binary_read(std::istream& stream, T& value);
 
+    void binary_write_string(std::ostream& stream, std::string str);
+    std::string binary_read_string(std::istream& stream);
+
     void storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects);
     void readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects);
 
