@@ -46,7 +46,6 @@
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
 		8A47F71D1CBF745200699CAC /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
 		8A47F71E1CBF745200699CAC /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
-		8A48952B1D3D221B00B40111 /* SaveOpenKuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A4895291D3D221B00B40111 /* SaveOpenKuplung.cpp */; };
 		8A48C3241CBE8B650076F4F6 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
 		8A48C3251CBE8B650076F4F6 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
 		8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */; };
@@ -125,6 +124,7 @@
 		8AA5EE021C773E0B009F1F52 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
 		8AA5EE031C773E0B009F1F52 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
 		8AA5EE041C773E0B009F1F52 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
+		8AA94E1E1D3D28E8008C3263 /* SaveOpenSerialization.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA94E1C1D3D28E8008C3263 /* SaveOpenSerialization.cpp */; };
 		8AA9F22D1D2173D9004A8F1C /* spaceship.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22B1D2173CB004A8F1C /* spaceship.frag */; };
 		8AA9F22E1D2173D9004A8F1C /* spaceship.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22C1D2173CB004A8F1C /* spaceship.vert */; };
 		8AA9F2341D2173F6004A8F1C /* Spaceship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2301D2173F6004A8F1C /* Spaceship.cpp */; };
@@ -435,8 +435,6 @@
 		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
 		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
 		8A47F71C1CBF744800699CAC /* camera.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.vert; sourceTree = "<group>"; };
-		8A4895291D3D221B00B40111 /* SaveOpenKuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenKuplung.cpp; path = saveopen/SaveOpenKuplung.cpp; sourceTree = "<group>"; };
-		8A48952A1D3D221B00B40111 /* SaveOpenKuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenKuplung.hpp; path = saveopen/SaveOpenKuplung.hpp; sourceTree = "<group>"; };
 		8A48C3221CBE8B530076F4F6 /* ray_line.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.frag; sourceTree = "<group>"; };
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
 		8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayPicking.cpp; sourceTree = "<group>"; };
@@ -563,6 +561,8 @@
 		8AA5EDF31C773DF8009F1F52 /* model_face.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face.vert; sourceTree = "<group>"; };
 		8AA5EDF41C773DF8009F1F52 /* terrain.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.frag; sourceTree = "<group>"; };
 		8AA5EDF51C773DF8009F1F52 /* terrain.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = terrain.vert; sourceTree = "<group>"; };
+		8AA94E1C1D3D28E8008C3263 /* SaveOpenSerialization.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenSerialization.cpp; path = saveopen/SaveOpenSerialization.cpp; sourceTree = "<group>"; };
+		8AA94E1D1D3D28E8008C3263 /* SaveOpenSerialization.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenSerialization.hpp; path = saveopen/SaveOpenSerialization.hpp; sourceTree = "<group>"; };
 		8AA9F22B1D2173CB004A8F1C /* spaceship.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = spaceship.frag; sourceTree = "<group>"; };
 		8AA9F22C1D2173CB004A8F1C /* spaceship.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = spaceship.vert; sourceTree = "<group>"; };
 		8AA9F2301D2173F6004A8F1C /* Spaceship.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Spaceship.cpp; path = artefacts/Spaceship.cpp; sourceTree = "<group>"; };
@@ -687,8 +687,8 @@
 				8A14D8C51D367BFC00674470 /* SaveOpen.hpp */,
 				8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */,
 				8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */,
-				8A4895291D3D221B00B40111 /* SaveOpenKuplung.cpp */,
-				8A48952A1D3D221B00B40111 /* SaveOpenKuplung.hpp */,
+				8AA94E1C1D3D28E8008C3263 /* SaveOpenSerialization.cpp */,
+				8AA94E1D1D3D28E8008C3263 /* SaveOpenSerialization.hpp */,
 			);
 			name = saveopen;
 			sourceTree = "<group>";
@@ -1368,8 +1368,8 @@
 				8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */,
 				8A6E70B61C6CACB40085CAE5 /* Controls.cpp in Sources */,
 				8A6E70A61C6CACB40085CAE5 /* ColorPicker.cpp in Sources */,
-				8A48952B1D3D221B00B40111 /* SaveOpenKuplung.cpp in Sources */,
 				8AA9F2341D2173F6004A8F1C /* Spaceship.cpp in Sources */,
+				8AA94E1E1D3D28E8008C3263 /* SaveOpenSerialization.cpp in Sources */,
 				8A81DDC31D1A82B5004F3270 /* Light.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
