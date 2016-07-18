@@ -18,27 +18,43 @@ void SaveOpenSerialization::saveKuplungFile(FBEntity file, ObjectsManager *manag
 
     std::remove(this->fileName.c_str());
 
-    this->storeObjectsManagerSettings(managerObjects);
-    this->storeGlobalLights(managerObjects);
+    std::ofstream kuplungFile;
+    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out);
+
+    if (kuplungFile.is_open() && !kuplungFile.bad()) {
+        this->storeObjectsManagerSettings(kuplungFile, managerObjects);
+        this->storeGlobalLights(kuplungFile, managerObjects);
+
+        kuplungFile.close();
+    }
 }
 
 void SaveOpenSerialization::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
     this->fileName = file.path + "/" + file.title;
 
-    this->readObjectsManagerSettings(managerObjects);
-    this->storeGlobalLights(managerObjects);
+    std::ifstream kuplungFile;
+    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+
+    if (kuplungFile.is_open() && !kuplungFile.bad()) {
+        kuplungFile.seekg(0);
+
+        this->readObjectsManagerSettings(kuplungFile, managerObjects);
+        this->readGlobalLights(kuplungFile, managerObjects);
+
+        kuplungFile.close();
+    }
 }
 
-void SaveOpenSerialization::storeObjectsManagerSettings(ObjectsManager *managerObjects) {
+void SaveOpenSerialization::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
 }
 
-void SaveOpenSerialization::readObjectsManagerSettings(ObjectsManager *managerObjects) {
+void SaveOpenSerialization::readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects) {
 }
 
-void SaveOpenSerialization::storeGlobalLights(ObjectsManager *managerObjects) {
+void SaveOpenSerialization::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
 }
 
-void SaveOpenSerialization::readGlobalLights(ObjectsManager *managerObjects) {
+void SaveOpenSerialization::readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects) {
 }
 
 bool SaveOpenSerialization::hasEnding(std::string const &fullString, std::string const &ending) {

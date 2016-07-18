@@ -24,11 +24,11 @@ private:
 
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
-    void storeObjectsManagerSettings(ObjectsManager *managerObjects);
-    void readObjectsManagerSettings(ObjectsManager *managerObjects);
+    void storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects);
+    void readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects);
 
-    void storeGlobalLights(ObjectsManager *managerObjects);
-    void readGlobalLights(ObjectsManager *managerObjects);
+    void storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects);
+    void readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects);
 };
 
 #endif /* SaveOpenSerialization_hpp */
