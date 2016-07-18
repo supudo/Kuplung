@@ -108,6 +108,7 @@
 		8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDBD1D1A82B5004F3270 /* WorldGrid.cpp */; };
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
+		8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */; };
 		8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
 		8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
 		8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
@@ -541,6 +542,8 @@
 		8A8540621CEDF3A200656C60 /* UVEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVEditor.hpp; path = uveditor/UVEditor.hpp; sourceTree = "<group>"; };
 		8A8540631CEDF3A200656C60 /* UVPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UVPoint.cpp; path = uveditor/UVPoint.cpp; sourceTree = "<group>"; };
 		8A8540641CEDF3A200656C60 /* UVPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVPoint.hpp; path = uveditor/UVPoint.hpp; sourceTree = "<group>"; };
+		8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenBinarySeq.cpp; path = saveopen/SaveOpenBinarySeq.cpp; sourceTree = "<group>"; };
+		8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenBinarySeq.hpp; path = saveopen/SaveOpenBinarySeq.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AA5EDE71C773DF8009F1F52 /* axis.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.frag; sourceTree = "<group>"; };
 		8AA5EDE81C773DF8009F1F52 /* axis.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.vert; sourceTree = "<group>"; };
@@ -679,6 +682,8 @@
 			children = (
 				8A14D8C41D367BFC00674470 /* SaveOpen.cpp */,
 				8A14D8C51D367BFC00674470 /* SaveOpen.hpp */,
+				8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */,
+				8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */,
 			);
 			name = saveopen;
 			sourceTree = "<group>";
@@ -1351,6 +1356,7 @@
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
+				8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */,
 				8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */,
 				8A81DDC41D1A82B5004F3270 /* LightRay.cpp in Sources */,
 				8AA9F23B1D21741B004A8F1C /* HeightmapGenerator.cpp in Sources */,
