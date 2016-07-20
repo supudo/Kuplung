@@ -67,7 +67,7 @@ public:
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;
-    float Setting_OutlineThickness = 1.01;
+    float Setting_OutlineThickness = 1.01f;
     float Setting_RatioWidth = 4.0f, Setting_RatioHeight = 3.0f;
     float Setting_PlaneClose = 0.1f, Setting_PlaneFar = 100.0f;
     int Setting_GridSize = 30, Setting_Skybox = 0;
