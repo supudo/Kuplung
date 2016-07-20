@@ -708,5 +708,16 @@ void Kuplung::saveScene(FBEntity file) {
 }
 
 void Kuplung::openScene(FBEntity file) {
-    this->managerSaveOpen->openKuplungFile(file, this->managerObjects);
+    this->managerRendering->meshModelFaces.clear();
+    this->meshModelFaces.clear();
+    this->meshModels.clear();
+
+    std::vector<ModelFaceData*> models = this->managerSaveOpen->openKuplungFile(file, this->managerObjects);
+
+    this->managerRendering->meshModelFaces.insert(this->managerRendering->meshModelFaces.begin(), begin(models), end(models));
+    this->meshModelFaces.insert(this->meshModelFaces.begin(), begin(models), end(models));
+    this->managerUI->meshModelFaces = &this->meshModelFaces;
+    for (size_t i=0; i<models.size(); i++) {
+        this->meshModels.push_back(models[i]->meshModel);
+    }
 }

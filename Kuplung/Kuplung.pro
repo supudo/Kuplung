@@ -174,8 +174,7 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
-    kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
-    kuplung/utilities/saveopen/SaveOpenSerialization.cpp
+    kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -260,8 +259,7 @@ HEADERS += \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
-    kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
-    kuplung/utilities/saveopen/SaveOpenSerialization.hpp
+    kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

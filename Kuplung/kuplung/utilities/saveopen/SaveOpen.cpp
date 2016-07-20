@@ -17,6 +17,6 @@ void SaveOpen::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, st
     this->entBinarySeq->saveKuplungFile(file, managerObjects, meshModelFaces);
 }
 
-void SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
-    this->entBinarySeq->openKuplungFile(file, managerObjects);
+std::vector<ModelFaceData*> SaveOpen::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+    return this->entBinarySeq->openKuplungFile(file, managerObjects);
 }

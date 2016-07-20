@@ -9,6 +9,7 @@
 #include "SaveOpenBinarySeq.hpp"
 #include <iostream>
 #include <fstream>
+#include <glm/gtx/string_cast.hpp>
 
 void SaveOpenBinarySeq::init() {
 }
@@ -26,12 +27,15 @@ void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, ObjectsManager *managerOb
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
         this->storeObjectsManagerSettings(kuplungFile, managerObjects);
         this->storeGlobalLights(kuplungFile, managerObjects);
+        this->storeObjects(kuplungFile, meshModelFaces);
 
         kuplungFile.close();
     }
 }
 
-void SaveOpenBinarySeq::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+    std::vector<ModelFaceData*> models;
+
     std::string fileName = file.path + "/" + file.title;
 
     std::ifstream kuplungFile;
@@ -42,9 +46,12 @@ void SaveOpenBinarySeq::openKuplungFile(FBEntity file, ObjectsManager *managerOb
 
         this->readObjectsManagerSettings(kuplungFile, managerObjects);
         this->readGlobalLights(kuplungFile, managerObjects);
+        models = this->readObjects(kuplungFile, managerObjects);
 
         kuplungFile.close();
     }
+
+    return models;
 }
 
 void SaveOpenBinarySeq::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
@@ -185,6 +192,74 @@ void SaveOpenBinarySeq::readObjectsManagerSettings(std::istream& kuplungFile, Ob
     this->binary_read(kuplungFile, managerObjects->grid->scaleZ);
     this->binary_read(kuplungFile, managerObjects->grid->transparency);
     this->binary_read(kuplungFile, managerObjects->grid->showGrid);
+
+//    printf("Setting_FOV = %f\n", managerObjects->Setting_FOV);
+//    printf("Setting_OutlineThickness = %f\n", managerObjects->Setting_OutlineThickness);
+//    printf("Setting_RatioWidth = %f\n", managerObjects->Setting_RatioWidth);
+//    printf("Setting_RatioHeight = %f\n", managerObjects->Setting_RatioHeight);
+//    printf("Setting_PlaneClose = %f\n", managerObjects->Setting_PlaneClose);
+//    printf("Setting_PlaneFar = %f\n", managerObjects->Setting_PlaneFar);
+//    printf("Setting_GridSize = %i\n", managerObjects->Setting_GridSize);
+//    printf("Setting_Skybox = %i\n", managerObjects->Setting_Skybox);
+//    printf("Setting_OutlineColor = %s\n", glm::to_string(managerObjects->Setting_OutlineColor).c_str());
+//    printf("Setting_UIAmbientLight = %s\n", glm::to_string(managerObjects->Setting_UIAmbientLight).c_str());
+//    printf("Setting_FixedGridWorld = %d\n", managerObjects->Setting_FixedGridWorld);
+//    printf("Setting_OutlineColorPickerOpen = %d\n", managerObjects->Setting_OutlineColorPickerOpen);
+//    printf("Setting_ShowAxisHelpers = %d\n", managerObjects->Setting_ShowAxisHelpers);
+//    printf("Settings_ShowZAxis = %d\n", managerObjects->Settings_ShowZAxis);
+//    printf("viewModelSkin = %i\n", managerObjects->viewModelSkin);
+//    printf("SolidLight_Direction = %s\n", glm::to_string(managerObjects->SolidLight_Direction).c_str());
+//    printf("SolidLight_MaterialColor = %s\n", glm::to_string(managerObjects->SolidLight_MaterialColor).c_str());
+//    printf("SolidLight_Ambient = %s\n", glm::to_string(managerObjects->SolidLight_Ambient).c_str());
+//    printf("SolidLight_Diffuse = %s\n", glm::to_string(managerObjects->SolidLight_Diffuse).c_str());
+//    printf("SolidLight_Specular = %s\n", glm::to_string(managerObjects->SolidLight_Specular).c_str());
+//    printf("SolidLight_Ambient_Strength = %f\n", managerObjects->SolidLight_Ambient_Strength);
+//    printf("SolidLight_Diffuse_Strength = %f\n", managerObjects->SolidLight_Diffuse_Strength);
+//    printf("SolidLight_Specular_Strength = %f\n", managerObjects->SolidLight_Specular_Strength);
+//    printf("SolidLight_MaterialColor_ColorPicker = %d\n", managerObjects->SolidLight_MaterialColor_ColorPicker);
+//    printf("SolidLight_Ambient_ColorPicker = %d\n", managerObjects->SolidLight_Ambient_ColorPicker);
+//    printf("SolidLight_Diffuse_ColorPicker = %d\n", managerObjects->SolidLight_Diffuse_ColorPicker);
+//    printf("SolidLight_Specular_ColorPicker = %d\n", managerObjects->SolidLight_Specular_ColorPicker);
+//    printf("Setting_ShowTerrain = %d\n", managerObjects->Setting_ShowTerrain);
+//    printf("Setting_TerrainModel = %d\n", managerObjects->Setting_TerrainModel);
+//    printf("Setting_TerrainAnimateX = %d\n", managerObjects->Setting_TerrainAnimateX);
+//    printf("Setting_TerrainAnimateY = %d\n", managerObjects->Setting_TerrainAnimateY);
+//    printf("Setting_TerrainWidth = %i\n", managerObjects->Setting_TerrainWidth);
+//    printf("Setting_TerrainHeight = %i\n", managerObjects->Setting_TerrainHeight);
+//    printf("Setting_DeferredTestMode = %d\n", managerObjects->Setting_DeferredTestMode);
+//    printf("Setting_DeferredTestLights = %d\n", managerObjects->Setting_DeferredTestLights);
+//    printf("Setting_LightingPass_DrawMode = %i\n", managerObjects->Setting_LightingPass_DrawMode);
+//    printf("Setting_DeferredAmbientStrength = %f\n", managerObjects->Setting_DeferredAmbientStrength);
+//    printf("Setting_DeferredTestLightsNumber = %i\n", managerObjects->Setting_DeferredTestLightsNumber);
+//    printf("Setting_ShowSpaceship = %d\n", managerObjects->Setting_ShowSpaceship);
+//    printf("Setting_GenerateSpaceship = %d\n", managerObjects->Setting_GenerateSpaceship);
+//    printf("matrixProjection = %s\n", glm::to_string(managerObjects->matrixProjection).c_str());
+//    printf("camera->cameraPosition = %s\n", glm::to_string(managerObjects->camera->cameraPosition).c_str());
+//    printf("camera->eyeSettings->View_Eye = %s\n", glm::to_string(managerObjects->camera->eyeSettings->View_Eye).c_str());
+//    printf("camera->eyeSettings->View_Center = %s\n", glm::to_string(managerObjects->camera->eyeSettings->View_Center).c_str());
+//    printf("camera->eyeSettings->View_Up = %s\n", glm::to_string(managerObjects->camera->eyeSettings->View_Up).c_str());
+//    printf("camera->positionX = %s\n", managerObjects->camera->positionX->to_string().c_str());
+//    printf("camera->positionY = %s\n", managerObjects->camera->positionY->to_string().c_str());
+//    printf("camera->positionZ = %s\n", managerObjects->camera->positionZ->to_string().c_str());
+//    printf("camera->rotateX = %s\n", managerObjects->camera->rotateX->to_string().c_str());
+//    printf("camera->rotateY = %s\n", managerObjects->camera->rotateY->to_string().c_str());
+//    printf("camera->rotateZ = %s\n", managerObjects->camera->rotateZ->to_string().c_str());
+//    printf("camera->rotateCenterX = %s\n", managerObjects->camera->rotateCenterX->to_string().c_str());
+//    printf("camera->rotateCenterY = %s\n", managerObjects->camera->rotateCenterY->to_string().c_str());
+//    printf("camera->rotateCenterZ = %s\n", managerObjects->camera->rotateCenterZ->to_string().c_str());
+//    printf("grid->actAsMirror = %d\n", managerObjects->grid->actAsMirror);
+//    printf("grid->gridSize = %i\n", managerObjects->grid->gridSize);
+//    printf("grid->positionX = %s\n", managerObjects->grid->positionX->to_string().c_str());
+//    printf("grid->positionY = %s\n", managerObjects->grid->positionY->to_string().c_str());
+//    printf("grid->positionZ = %s\n", managerObjects->grid->positionZ->to_string().c_str());
+//    printf("grid->rotateX = %s\n", managerObjects->grid->rotateX->to_string().c_str());
+//    printf("grid->rotateY = %s\n", managerObjects->grid->rotateY->to_string().c_str());
+//    printf("grid->rotateZ = %s\n", managerObjects->grid->rotateZ->to_string().c_str());
+//    printf("grid->scaleX = %s\n", managerObjects->grid->scaleX->to_string().c_str());
+//    printf("grid->scaleY = %s\n", managerObjects->grid->scaleY->to_string().c_str());
+//    printf("grid->scaleZ = %s\n", managerObjects->grid->scaleZ->to_string().c_str());
+//    printf("grid->transparency = %f\n", managerObjects->grid->transparency);
+//    printf("grid->showGrid = %d\n", managerObjects->grid->showGrid);
 }
 
 void SaveOpenBinarySeq::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
@@ -280,6 +355,155 @@ void SaveOpenBinarySeq::readGlobalLights(std::istream& kuplungFile, ObjectsManag
     }
 }
 
+void SaveOpenBinarySeq::storeObjects(std::ostream& kuplungFile, std::vector<ModelFaceBase*> meshModelFaces) {
+    int modelsCount = int(meshModelFaces.size());
+    this->binary_write(kuplungFile, modelsCount);
+
+    for (size_t i=0; i<meshModelFaces.size(); i++) {
+        ModelFaceBase *m = meshModelFaces[i];
+        this->binary_write(kuplungFile, m->ModelID);
+        this->binary_write(kuplungFile, m->Settings_DeferredRender);
+        this->binary_write(kuplungFile, m->Setting_CelShading);
+        this->binary_write(kuplungFile, m->Setting_Wireframe);
+        this->binary_write(kuplungFile, m->Setting_UseTessellation);
+        this->binary_write(kuplungFile, m->Setting_UseCullFace);
+        this->binary_write(kuplungFile, m->Setting_Alpha);
+        this->binary_write(kuplungFile, m->Setting_TessellationSubdivision);
+        this->binary_write(kuplungFile, m->positionX);
+        this->binary_write(kuplungFile, m->positionY);
+        this->binary_write(kuplungFile, m->positionZ);
+        this->binary_write(kuplungFile, m->scaleX);
+        this->binary_write(kuplungFile, m->scaleY);
+        this->binary_write(kuplungFile, m->scaleZ);
+        this->binary_write(kuplungFile, m->rotateX);
+        this->binary_write(kuplungFile, m->rotateY);
+        this->binary_write(kuplungFile, m->rotateZ);
+        this->binary_write(kuplungFile, m->displaceX);
+        this->binary_write(kuplungFile, m->displaceY);
+        this->binary_write(kuplungFile, m->displaceZ);
+        this->binary_write(kuplungFile, m->Setting_MaterialRefraction);
+        this->binary_write(kuplungFile, m->Setting_MaterialSpecularExp);
+        this->binary_write(kuplungFile, m->Setting_ModelViewSkin);
+        this->binary_write(kuplungFile, m->solidLightSkin_MaterialColor);
+        this->binary_write(kuplungFile, m->solidLightSkin_Ambient);
+        this->binary_write(kuplungFile, m->solidLightSkin_Diffuse);
+        this->binary_write(kuplungFile, m->solidLightSkin_Specular);
+        this->binary_write(kuplungFile, m->solidLightSkin_Ambient_Strength);
+        this->binary_write(kuplungFile, m->solidLightSkin_Diffuse_Strength);
+        this->binary_write(kuplungFile, m->solidLightSkin_Specular_Strength);
+        this->binary_write(kuplungFile, m->Setting_LightPosition);
+        this->binary_write(kuplungFile, m->Setting_LightDirection);
+        this->binary_write(kuplungFile, m->Setting_LightAmbient);
+        this->binary_write(kuplungFile, m->Setting_LightDiffuse);
+        this->binary_write(kuplungFile, m->Setting_LightSpecular);
+        this->binary_write(kuplungFile, m->Setting_LightStrengthAmbient);
+        this->binary_write(kuplungFile, m->Setting_LightStrengthDiffuse);
+        this->binary_write(kuplungFile, m->Setting_LightStrengthSpecular);
+        this->binary_write(kuplungFile, m->materialIlluminationModel);
+        this->binary_write(kuplungFile, m->displacementHeightScale);
+        this->binary_write(kuplungFile, m->showMaterialEditor);
+        this->binary_write(kuplungFile, m->materialAmbient);
+        this->binary_write(kuplungFile, m->materialDiffuse);
+        this->binary_write(kuplungFile, m->materialSpecular);
+        this->binary_write(kuplungFile, m->materialEmission);
+        this->binary_write(kuplungFile, m->Setting_ParallaxMapping);
+        this->binary_write(kuplungFile, m->Effect_GBlur_Mode);
+        this->binary_write(kuplungFile, m->Effect_GBlur_Radius);
+        this->binary_write(kuplungFile, m->Effect_GBlur_Width);
+        this->binary_write(kuplungFile, m->Effect_Bloom_doBloom);
+        this->binary_write(kuplungFile, m->Effect_Bloom_WeightA);
+        this->binary_write(kuplungFile, m->Effect_Bloom_WeightB);
+        this->binary_write(kuplungFile, m->Effect_Bloom_WeightC);
+        this->binary_write(kuplungFile, m->Effect_Bloom_WeightD);
+        this->binary_write(kuplungFile, m->Effect_Bloom_Vignette);
+        this->binary_write(kuplungFile, m->Effect_Bloom_VignetteAtt);
+        this->binary_write(kuplungFile, m->Setting_LightingPass_DrawMode);
+        this->binary_write_model(kuplungFile, m->meshModel);
+    }
+}
+
+std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+    std::vector<ModelFaceData*> models;
+
+    int modelsCount = 0;
+    this->binary_read(kuplungFile, modelsCount);
+
+    for (int i=0; i<modelsCount; i++) {
+        ModelFaceData *m = new ModelFaceData();
+        m->dataVertices = managerObjects->grid->dataVertices;
+        m->dataTexCoords = managerObjects->grid->dataTexCoords;
+        m->dataNormals = managerObjects->grid->dataNormals;
+        m->dataIndices = managerObjects->grid->dataIndices;
+
+        this->binary_read(kuplungFile, m->ModelID);
+        this->binary_read(kuplungFile, m->Settings_DeferredRender);
+        this->binary_read(kuplungFile, m->Setting_CelShading);
+        this->binary_read(kuplungFile, m->Setting_Wireframe);
+        this->binary_read(kuplungFile, m->Setting_UseTessellation);
+        this->binary_read(kuplungFile, m->Setting_UseCullFace);
+        this->binary_read(kuplungFile, m->Setting_Alpha);
+        this->binary_read(kuplungFile, m->Setting_TessellationSubdivision);
+        this->binary_read(kuplungFile, m->positionX);
+        this->binary_read(kuplungFile, m->positionY);
+        this->binary_read(kuplungFile, m->positionZ);
+        this->binary_read(kuplungFile, m->scaleX);
+        this->binary_read(kuplungFile, m->scaleY);
+        this->binary_read(kuplungFile, m->scaleZ);
+        this->binary_read(kuplungFile, m->rotateX);
+        this->binary_read(kuplungFile, m->rotateY);
+        this->binary_read(kuplungFile, m->rotateZ);
+        this->binary_read(kuplungFile, m->displaceX);
+        this->binary_read(kuplungFile, m->displaceY);
+        this->binary_read(kuplungFile, m->displaceZ);
+        this->binary_read(kuplungFile, m->Setting_MaterialRefraction);
+        this->binary_read(kuplungFile, m->Setting_MaterialSpecularExp);
+        this->binary_read(kuplungFile, m->Setting_ModelViewSkin);
+        this->binary_read(kuplungFile, m->solidLightSkin_MaterialColor);
+        this->binary_read(kuplungFile, m->solidLightSkin_Ambient);
+        this->binary_read(kuplungFile, m->solidLightSkin_Diffuse);
+        this->binary_read(kuplungFile, m->solidLightSkin_Specular);
+        this->binary_read(kuplungFile, m->solidLightSkin_Ambient_Strength);
+        this->binary_read(kuplungFile, m->solidLightSkin_Diffuse_Strength);
+        this->binary_read(kuplungFile, m->solidLightSkin_Specular_Strength);
+        this->binary_read(kuplungFile, m->Setting_LightPosition);
+        this->binary_read(kuplungFile, m->Setting_LightDirection);
+        this->binary_read(kuplungFile, m->Setting_LightAmbient);
+        this->binary_read(kuplungFile, m->Setting_LightDiffuse);
+        this->binary_read(kuplungFile, m->Setting_LightSpecular);
+        this->binary_read(kuplungFile, m->Setting_LightStrengthAmbient);
+        this->binary_read(kuplungFile, m->Setting_LightStrengthDiffuse);
+        this->binary_read(kuplungFile, m->Setting_LightStrengthSpecular);
+        this->binary_read(kuplungFile, m->materialIlluminationModel);
+        this->binary_read(kuplungFile, m->displacementHeightScale);
+        this->binary_read(kuplungFile, m->showMaterialEditor);
+        this->binary_read(kuplungFile, m->materialAmbient);
+        this->binary_read(kuplungFile, m->materialDiffuse);
+        this->binary_read(kuplungFile, m->materialSpecular);
+        this->binary_read(kuplungFile, m->materialEmission);
+        this->binary_read(kuplungFile, m->Setting_ParallaxMapping);
+        this->binary_read(kuplungFile, m->Effect_GBlur_Mode);
+        this->binary_read(kuplungFile, m->Effect_GBlur_Radius);
+        this->binary_read(kuplungFile, m->Effect_GBlur_Width);
+        this->binary_read(kuplungFile, m->Effect_Bloom_doBloom);
+        this->binary_read(kuplungFile, m->Effect_Bloom_WeightA);
+        this->binary_read(kuplungFile, m->Effect_Bloom_WeightB);
+        this->binary_read(kuplungFile, m->Effect_Bloom_WeightC);
+        this->binary_read(kuplungFile, m->Effect_Bloom_WeightD);
+        this->binary_read(kuplungFile, m->Effect_Bloom_Vignette);
+        this->binary_read(kuplungFile, m->Effect_Bloom_VignetteAtt);
+        this->binary_read(kuplungFile, m->Setting_LightingPass_DrawMode);
+
+        MeshModel mesh = this->binary_read_model(kuplungFile);
+        m->lightSources = managerObjects->lightSources;
+        m->init(mesh, Settings::Instance()->currentFolder);
+        m->initBoundingBox();
+        m->initModelProperties();
+        models.push_back(m);
+    }
+
+    return models;
+}
+
 void SaveOpenBinarySeq::binary_write_model(std::ostream& stream, MeshModel model) {
     this->binary_write_string(stream, model.File.extension);
     this->binary_write(stream, model.File.isFile);
@@ -373,6 +597,7 @@ MeshModel SaveOpenBinarySeq::binary_read_model(std::istream& stream) {
     model.ModelMaterial.TextureDisplacement = this->binary_read_model_material_texture(stream);
 
     int itemsCount;
+    unsigned int tempInt;
     glm::vec3 tempVec3;
     glm::vec2 tempVec2;
 
@@ -400,7 +625,8 @@ MeshModel SaveOpenBinarySeq::binary_read_model(std::istream& stream) {
     itemsCount = 0;
     this->binary_read(stream, itemsCount);
     for (size_t i=0; i<size_t(itemsCount); i++) {
-        this->binary_read(stream, model.indices[i]);
+        this->binary_read(stream, tempInt);
+        model.indices.push_back(tempInt);
     }
 
     return model;
