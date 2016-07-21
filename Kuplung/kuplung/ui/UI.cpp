@@ -52,6 +52,7 @@ void UI::init(SDL_Window *window,
     this->isExportingOpen = false;
     this->parsingPercentage = 0.0f;
 
+    this->recentFiles.clear();
     this->recentFilesImported.clear();
     this->needsFontChange = false;
     this->showDialogStyle = false;
@@ -133,11 +134,37 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             if (ImGui::MenuItem(ICON_FA_FILE_O " New"))
                 this->funcNewScene();
 
-//            ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open ...", NULL, &this->showDialogFile);
             if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open..."))
                 this->showOpenDialog = true;
 
             if (ImGui::BeginMenu(ICON_FA_FILES_O " Open Recent")) {
+                if (this->recentFiles.size() == 0)
+                    ImGui::MenuItem("No recent files", NULL, false, false);
+                else {
+                    for (std::map<std::string, FBEntity>::iterator iter = this->recentFiles.begin(); iter != this->recentFiles.end(); ++iter) {
+                        std::string title = iter->first;
+                        FBEntity file = iter->second;
+                        if (ImGui::MenuItem(title.c_str(), NULL, false, true))
+                            this->funcOpenScene(file);
+                    }
+                    ImGui::Separator();
+                    if (ImGui::MenuItem("Clear recent files", NULL, false))
+                        this->recentFilesClear();
+                }
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::MenuItem(ICON_FA_FLOPPY_O " Save..."))
+                this->showSaveDialog = true;
+
+            ImGui::Separator();
+
+            if (ImGui::BeginMenu("   Import")) {
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJImporter);
+                ImGui::EndMenu();
+            }
+
+            if (ImGui::BeginMenu(ICON_FA_FILES_O " Import Recent")) {
                 if (this->recentFilesImported.size() == 0)
                     ImGui::MenuItem("No recent files", NULL, false, false);
                 else {
@@ -167,16 +194,6 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     if (ImGui::MenuItem("Clear recent files", NULL, false))
                         this->recentFilesClearImported();
                 }
-                ImGui::EndMenu();
-            }
-
-            if (ImGui::MenuItem(ICON_FA_FLOPPY_O " Save..."))
-                this->showSaveDialog = true;
-
-            ImGui::Separator();
-
-            if (ImGui::BeginMenu("   Import")) {
-                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJImporter);
                 ImGui::EndMenu();
             }
 
@@ -351,6 +368,16 @@ void UI::renderEnd() {
 
     ImGui::Render();
     this->imguiImplementation->ImGui_Implementation_RenderDrawLists();
+}
+
+void UI::recentFilesAdd(std::string title, FBEntity file) {
+    this->recentFiles[title] = file;
+    Settings::Instance()->saveRecentFiles(this->recentFiles);
+}
+
+void UI::recentFilesClear() {
+    this->recentFiles.clear();
+    Settings::Instance()->saveRecentFiles(this->recentFiles);
 }
 
 void UI::recentFilesAddImported(std::string title, FBEntity file) {

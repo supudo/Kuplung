@@ -474,6 +474,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initSpaceship();
     this->managerUI->showControlsGUI = true;
     this->managerUI->showControlsModels = true;
+    this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
     this->managerUI->recentFilesImported = Settings::Instance()->loadRecentFilesImported();
 
     // testbed
@@ -720,4 +721,6 @@ void Kuplung::openScene(FBEntity file) {
     for (size_t i=0; i<models.size(); i++) {
         this->meshModels.push_back(models[i]->meshModel);
     }
+
+    this->managerUI->recentFilesAdd(file.title, file);
 }

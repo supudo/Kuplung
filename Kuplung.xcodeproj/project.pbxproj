@@ -15,7 +15,6 @@
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A14D8C41D367BFC00674470 /* SaveOpen.cpp */; };
-		8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
@@ -193,6 +192,8 @@
 		8AF9D9C51D33BC0100D3AAB7 /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
 		8AF9D9C61D33BC0100D3AAB7 /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
 		8AF9D9C71D33BC0100D3AAB7 /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
+		8AFD82151D410C0A00D088C7 /* Kuplung_RecentFilesImported.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */; };
+		8AFD82161D410C0C00D088C7 /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -330,8 +331,9 @@
 			dstSubfolderSpec = 7;
 			files = (
 				8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */,
+				8AFD82161D410C0C00D088C7 /* Kuplung_RecentFiles.ini in Copy Files */,
+				8AFD82151D410C0A00D088C7 /* Kuplung_RecentFilesImported.ini in Copy Files */,
 				8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */,
-				8A1567BD1CC7D82C001B9DDE /* Kuplung_RecentFiles.ini in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -390,7 +392,6 @@
 		8A14D8C41D367BFC00674470 /* SaveOpen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpen.cpp; path = saveopen/SaveOpen.cpp; sourceTree = "<group>"; };
 		8A14D8C51D367BFC00674470 /* SaveOpen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpen.hpp; path = saveopen/SaveOpen.hpp; sourceTree = "<group>"; };
 		8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsStructs.h; sourceTree = "<group>"; };
-		8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8A175AD61CA93EB900A4E46B /* MELink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MELink.cpp; path = materialeditor/MELink.cpp; sourceTree = "<group>"; };
 		8A175AD71CA93EB900A4E46B /* MELink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MELink.hpp; path = materialeditor/MELink.hpp; sourceTree = "<group>"; };
 		8A1AFB211C71FC3F004888D8 /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsFontAwesome.h; sourceTree = "<group>"; };
@@ -649,6 +650,8 @@
 		8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.geom; sourceTree = "<group>"; };
 		8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tcs; sourceTree = "<group>"; };
 		8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tes; sourceTree = "<group>"; };
+		8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
+		8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFilesImported.ini; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1030,7 +1033,8 @@
 				8AB6F0981C3AA1F900665C40 /* gui */,
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
 				8A9D66BC1C3C1C3A001A6036 /* Info.plist */,
-				8A1567BC1CC7D820001B9DDE /* Kuplung_RecentFiles.ini */,
+				8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */,
+				8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */,
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,

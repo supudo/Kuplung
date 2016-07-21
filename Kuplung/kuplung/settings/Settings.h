@@ -26,6 +26,8 @@ public:
     bool isAllowedStyleExtension(std::string fileExtension);
     bool isAllowedImageExtension(std::string fileExtension);
     void setLogFunc(std::function<void(std::string)> doLog);
+    void saveRecentFiles(std::map <std::string, FBEntity> recentFiles);
+    std::map <std::string, FBEntity> loadRecentFiles();
     void saveRecentFilesImported(std::map <std::string, FBEntity> recentFiles);
     std::map <std::string, FBEntity> loadRecentFilesImported();
 

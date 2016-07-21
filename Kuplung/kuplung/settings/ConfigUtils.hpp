@@ -32,11 +32,14 @@ public:
     void writeFloat(std::string configKey, float configValue);
     void writeString(std::string configKey, std::string configValue);
 
+    void saveRecentFiles(std::map <std::string, FBEntity> recentFiles);
+    std::map <std::string, FBEntity> loadRecentFiles();
+
     void saveRecentFilesImported(std::map <std::string, FBEntity> recentFilesImported);
     std::map <std::string, FBEntity> loadRecentFilesImported();
 
 private:
-    std::string configFile, recentFilesFileImported;
+    std::string configFile, recentFilesFileImported, recentFilesFile;
     std::map<std::string, std::string> configData;
 
     std::regex regex_comment;
