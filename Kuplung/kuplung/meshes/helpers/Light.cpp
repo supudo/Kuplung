@@ -102,6 +102,9 @@ void Light::initProperties(LightSourceType type) {
 
     switch (type) {
         case LightSourceType_Directional: {
+            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
             this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
             break;
         }
