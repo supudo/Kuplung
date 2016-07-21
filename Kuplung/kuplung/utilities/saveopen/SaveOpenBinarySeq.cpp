@@ -299,6 +299,7 @@ void SaveOpenBinarySeq::storeObjects(std::ostream& kuplungFile, std::vector<Mode
 
     for (size_t i=0; i<meshModelFaces.size(); i++) {
         ModelFaceBase *m = meshModelFaces[i];
+        this->binary_write_model(kuplungFile, m->meshModel);
         this->binary_write(kuplungFile, m->ModelID);
         this->binary_write(kuplungFile, m->Settings_DeferredRender);
         this->binary_write(kuplungFile, m->Setting_CelShading);
@@ -340,10 +341,14 @@ void SaveOpenBinarySeq::storeObjects(std::ostream& kuplungFile, std::vector<Mode
         this->binary_write(kuplungFile, m->materialIlluminationModel);
         this->binary_write(kuplungFile, m->displacementHeightScale->point);
         this->binary_write(kuplungFile, m->showMaterialEditor);
-        this->binary_write(kuplungFile, m->materialAmbient);
-        this->binary_write(kuplungFile, m->materialDiffuse);
-        this->binary_write(kuplungFile, m->materialSpecular);
-        this->binary_write(kuplungFile, m->materialEmission);
+        this->binary_write(kuplungFile, m->materialAmbient->color);
+        this->binary_write(kuplungFile, m->materialAmbient->strength);
+        this->binary_write(kuplungFile, m->materialDiffuse->color);
+        this->binary_write(kuplungFile, m->materialDiffuse->strength);
+        this->binary_write(kuplungFile, m->materialSpecular->color);
+        this->binary_write(kuplungFile, m->materialSpecular->strength);
+        this->binary_write(kuplungFile, m->materialEmission->color);
+        this->binary_write(kuplungFile, m->materialEmission->strength);
         this->binary_write(kuplungFile, m->Setting_ParallaxMapping);
         this->binary_write(kuplungFile, m->Effect_GBlur_Mode);
         this->binary_write(kuplungFile, m->Effect_GBlur_Radius->point);
@@ -356,7 +361,6 @@ void SaveOpenBinarySeq::storeObjects(std::ostream& kuplungFile, std::vector<Mode
         this->binary_write(kuplungFile, m->Effect_Bloom_Vignette);
         this->binary_write(kuplungFile, m->Effect_Bloom_VignetteAtt);
         this->binary_write(kuplungFile, m->Setting_LightingPass_DrawMode);
-        this->binary_write_model(kuplungFile, m->meshModel);
     }
 }
 
@@ -376,6 +380,9 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplung
         m->dataTexCoords = managerObjects->grid->dataTexCoords;
         m->dataNormals = managerObjects->grid->dataNormals;
         m->dataIndices = managerObjects->grid->dataIndices;
+
+        m->meshModel = this->binary_read_model(kuplungFile);
+        m->init(m->meshModel, Settings::Instance()->currentFolder);
 
         this->binary_read(kuplungFile, m->ModelID);
         this->binary_read(kuplungFile, m->Settings_DeferredRender);
@@ -418,10 +425,14 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplung
         this->binary_read(kuplungFile, m->materialIlluminationModel);
         this->binary_read(kuplungFile, m->displacementHeightScale->point);
         this->binary_read(kuplungFile, m->showMaterialEditor);
-        this->binary_read(kuplungFile, m->materialAmbient);
-        this->binary_read(kuplungFile, m->materialDiffuse);
-        this->binary_read(kuplungFile, m->materialSpecular);
-        this->binary_read(kuplungFile, m->materialEmission);
+        this->binary_read(kuplungFile, m->materialAmbient->color);
+        this->binary_read(kuplungFile, m->materialAmbient->strength);
+        this->binary_read(kuplungFile, m->materialDiffuse->color);
+        this->binary_read(kuplungFile, m->materialDiffuse->strength);
+        this->binary_read(kuplungFile, m->materialSpecular->color);
+        this->binary_read(kuplungFile, m->materialSpecular->strength);
+        this->binary_read(kuplungFile, m->materialEmission->color);
+        this->binary_read(kuplungFile, m->materialEmission->strength);
         this->binary_read(kuplungFile, m->Setting_ParallaxMapping);
         this->binary_read(kuplungFile, m->Effect_GBlur_Mode);
         this->binary_read(kuplungFile, m->Effect_GBlur_Radius->point);
@@ -434,8 +445,6 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplung
         this->binary_read(kuplungFile, m->Effect_Bloom_Vignette);
         this->binary_read(kuplungFile, m->Effect_Bloom_VignetteAtt);
         this->binary_read(kuplungFile, m->Setting_LightingPass_DrawMode);
-        m->meshModel = this->binary_read_model(kuplungFile);
-        m->init(m->meshModel, Settings::Instance()->currentFolder);
 
         m->initBoundingBox();
 
