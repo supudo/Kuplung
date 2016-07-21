@@ -474,7 +474,7 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initSpaceship();
     this->managerUI->showControlsGUI = true;
     this->managerUI->showControlsModels = true;
-    this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
+    this->managerUI->recentFilesImported = Settings::Instance()->loadRecentFilesImported();
 
     // testbed
 //    std::string testObj = "brick_wall.obj";
@@ -603,7 +603,7 @@ void Kuplung::processParsedObjFile() {
         this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
         this->managerUI->hideParsing();
         this->managerUI->showLoading();
-        this->managerUI->recentFilesAdd(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
+        this->managerUI->recentFilesAddImported(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];

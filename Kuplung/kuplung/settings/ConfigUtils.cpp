@@ -20,7 +20,7 @@ ConfigUtils::~ConfigUtils() {
 
 void ConfigUtils::init(std::string appFolder) {
     this->configFile = appFolder + "/Kuplung_Settings.ini";
-    this->recentFilesFile = appFolder + "/Kuplung_RecentFiles.ini";
+    this->recentFilesFileImported = appFolder + "/Kuplung_RecentFilesImported.ini";
     this->regex_comment = "^#.*";
     this->regex_equalsSign = "=";
     this->readFile();
@@ -83,7 +83,7 @@ void ConfigUtils::writeString(std::string configKey, std::string configValue) {
     this->configData[configKey] = configValue;
 }
 
-void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) {
+void ConfigUtils::saveRecentFilesImported(std::map <std::string, FBEntity> recentFilesImported) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -91,8 +91,8 @@ void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) 
 #else
         std::string nlDelimiter = "\n";
 #endif
-    std::string recentFilesLines = "# Recent Files list" + nlDelimiter + nlDelimiter;
-    for (std::map<std::string, FBEntity>::iterator iter = recentFiles.begin(); iter != recentFiles.end(); ++iter) {
+    std::string recentFilesLines = "# Recent Imported Files list" + nlDelimiter + nlDelimiter;
+    for (std::map<std::string, FBEntity>::iterator iter = recentFilesImported.begin(); iter != recentFilesImported.end(); ++iter) {
         std::string title = iter->first;
         FBEntity fileEntity = iter->second;
         recentFilesLines += "# File" + nlDelimiter;
@@ -102,14 +102,14 @@ void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) 
         recentFilesLines += fileEntity.title + nlDelimiter;
         recentFilesLines += nlDelimiter;
     }
-    std::ofstream out(this->recentFilesFile);
+    std::ofstream out(this->recentFilesFileImported);
     out << recentFilesLines;
     out.close();
 }
 
-std::map <std::string, FBEntity> ConfigUtils::loadRecentFiles() {
+std::map <std::string, FBEntity> ConfigUtils::loadRecentFilesImported() {
     std::map <std::string, FBEntity> recentFiles;
-    std::FILE *fp = std::fopen(this->recentFilesFile.c_str(), "rb");
+    std::FILE *fp = std::fopen(this->recentFilesFileImported.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";

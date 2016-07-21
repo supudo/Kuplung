@@ -51,8 +51,8 @@ public:
     void doLog(std::string message);
     void setSceneSelectedModelObject(int sceneSelectedModelObject);
 
-    void recentFilesAdd(std::string title, FBEntity file);
-    void recentFilesClear();
+    void recentFilesAddImported(std::string title, FBEntity file);
+    void recentFilesClearImported();
     bool isMouseOnGUI();
     void showParsing();
     void hideParsing();
@@ -67,7 +67,7 @@ public:
     bool showControlsGUI;
     bool showControlsModels;
     float parsingPercentage;
-    std::map <std::string, FBEntity> recentFiles;
+    std::map <std::string, FBEntity> recentFilesImported;
 
 private:
     SDL_Window *sdlWindow;

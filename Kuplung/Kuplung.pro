@@ -35,7 +35,7 @@ mac {
     INSTALLS += plist
 
     MediaFiles.files = resources/Kuplung_Settings.ini
-    MediaFiles.files += resources/Kuplung_RecentFiles.ini
+    MediaFiles.files += resources/Kuplung_RecentFilesImported.ini
     MediaFiles.files += resources/Kuplung.icns
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
