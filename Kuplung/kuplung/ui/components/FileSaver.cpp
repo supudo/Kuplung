@@ -69,14 +69,24 @@ void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened)
         btnLabel = "Open";
     if (ImGui::Button(btnLabel.c_str())) {
         FBEntity file;
-        file.extension = "";
+
         file.isFile = true;
-        file.modifiedDate = "";
-        file.path = this->currentFolder;
-        file.size = "";
         file.title = std::string(this->fileName);
+        file.path = this->currentFolder + "/" + file.title;
+        file.extension = file.title.substr(file.title.rfind(".") + 1);
+
+        std::time_t modifiedDate = fs::last_write_time(file.path);
+        std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
+        std::string mds = std::to_string((modifiedDateLocal->tm_year + 1900));
+        mds += "-" + std::to_string((modifiedDateLocal->tm_mon + 1));
+        mds += "-" + std::to_string(modifiedDateLocal->tm_mday);
+        mds += " " + std::to_string(modifiedDateLocal->tm_hour);
+        mds += ":" + std::to_string(modifiedDateLocal->tm_min);
+        mds += "." + std::to_string(modifiedDateLocal->tm_sec);
+        file.modifiedDate = mds;
+
+        file.size = this->convertSize(fs::file_size(file.path));
         Settings::Instance()->currentFolder = this->currentFolder;
-        Settings::Instance()->saveSettings();
         this->funcFileSave(file, type);
     }
     ImGui::SameLine(0, 10);

@@ -36,10 +36,8 @@ void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, ObjectsManager *managerOb
 std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
     std::vector<ModelFaceData*> models;
 
-    std::string fileName = file.path + "/" + file.title;
-
     std::ifstream kuplungFile;
-    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+    kuplungFile.open(file.path.c_str(), std::ios::binary | std::ios::out | std::ios::app);
 
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
         kuplungFile.seekg(0);
