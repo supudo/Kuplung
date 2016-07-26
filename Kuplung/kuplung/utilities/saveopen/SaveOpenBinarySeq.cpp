@@ -37,7 +37,7 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, Ob
     std::vector<ModelFaceData*> models;
 
     std::ifstream kuplungFile;
-    kuplungFile.open(file.path.c_str(), std::ios::binary | std::ios::out | std::ios::app);
+    kuplungFile.open(file.path.c_str(), std::ios::binary | std::ios::in | std::ios::app);
 
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
         kuplungFile.seekg(0);
@@ -282,6 +282,7 @@ void SaveOpenBinarySeq::readGlobalLights(std::istream& kuplungFile, ObjectsManag
                 break;
             case LightSourceType_Spot:
                 l->setModel(managerObjects->systemModels["light_spot"]);
+                break;
         }
 
         l->initShaderProgram();

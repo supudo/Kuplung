@@ -108,6 +108,8 @@
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
 		8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */; };
+		8AA1A7381D461AB000EEC1A3 /* KuplungProtoBufs.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8AA1A7361D461AB000EEC1A3 /* KuplungProtoBufs.pb.cc */; };
+		8AA1A73B1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA1A7391D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp */; };
 		8AA5EDF61C773E0B009F1F52 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
 		8AA5EDF71C773E0B009F1F52 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
 		8AA5EDF81C773E0B009F1F52 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
@@ -546,6 +548,10 @@
 		8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenBinarySeq.cpp; path = saveopen/SaveOpenBinarySeq.cpp; sourceTree = "<group>"; };
 		8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenBinarySeq.hpp; path = saveopen/SaveOpenBinarySeq.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
+		8AA1A7361D461AB000EEC1A3 /* KuplungProtoBufs.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungProtoBufs.pb.cc; path = saveopen/KuplungProtoBufs.pb.cc; sourceTree = "<group>"; };
+		8AA1A7371D461AB000EEC1A3 /* KuplungProtoBufs.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungProtoBufs.pb.h; path = saveopen/KuplungProtoBufs.pb.h; sourceTree = "<group>"; };
+		8AA1A7391D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenGProtocolBufs.cpp; path = saveopen/SaveOpenGProtocolBufs.cpp; sourceTree = "<group>"; };
+		8AA1A73A1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenGProtocolBufs.hpp; path = saveopen/SaveOpenGProtocolBufs.hpp; sourceTree = "<group>"; };
 		8AA5EDE71C773DF8009F1F52 /* axis.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.frag; sourceTree = "<group>"; };
 		8AA5EDE81C773DF8009F1F52 /* axis.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis.vert; sourceTree = "<group>"; };
 		8AA5EDE91C773DF8009F1F52 /* grid.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = grid.frag; sourceTree = "<group>"; };
@@ -683,10 +689,14 @@
 		8A14D8C31D367BF200674470 /* saveopen */ = {
 			isa = PBXGroup;
 			children = (
+				8AA1A7361D461AB000EEC1A3 /* KuplungProtoBufs.pb.cc */,
+				8AA1A7371D461AB000EEC1A3 /* KuplungProtoBufs.pb.h */,
 				8A14D8C41D367BFC00674470 /* SaveOpen.cpp */,
 				8A14D8C51D367BFC00674470 /* SaveOpen.hpp */,
 				8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */,
 				8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */,
+				8AA1A7391D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp */,
+				8AA1A73A1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.hpp */,
 			);
 			name = saveopen;
 			sourceTree = "<group>";
@@ -1373,6 +1383,7 @@
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
+				8AA1A7381D461AB000EEC1A3 /* KuplungProtoBufs.pb.cc in Sources */,
 				8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */,
 				8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
@@ -1412,6 +1423,7 @@
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
 				8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */,
+				8AA1A73B1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp in Sources */,
 				8A81DDC61D1A82B5004F3270 /* RayLine.cpp in Sources */,
 				8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */,
 				8AA9F2351D2173F6004A8F1C /* Terrain.cpp in Sources */,
@@ -1518,6 +1530,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
+					/usr/local/Cellar/protobuf/2.6.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1529,6 +1542,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
+					/usr/local/Cellar/protobuf/2.6.1/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1543,6 +1557,7 @@
 					"-lnoise",
 					"-isystem",
 					"-lAssimp",
+					"-lprotobuf",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;
@@ -1568,6 +1583,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
+					/usr/local/Cellar/protobuf/2.6.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -1579,6 +1595,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
+					/usr/local/Cellar/protobuf/2.6.1/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -1593,6 +1610,7 @@
 					"-lnoise",
 					"-isystem",
 					"-lAssimp",
+					"-lprotobuf",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;

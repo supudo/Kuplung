@@ -69,6 +69,9 @@ mac {
     LIBS += -L/usr/local/Cellar/assimp/3.3.1/lib -lAssimp
     INCLUDEPATH += /usr/local/Cellar/assimp/3.3.1/include
 
+    LIBS += -L/usr/local/Cellar/protobuf/2.6.1/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/2.6.1/include
+
     LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
     INCLUDEPATH += "$$PWD/../external/libnoise/headers"
 }
@@ -175,7 +178,10 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
-    kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp
+    kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
+    kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
+    kuplung/utilities/saveopen/KuplungDefinitions.pb.cc \
+    kuplung/utilities/saveopen/KuplungProtoBufs.pb.cc
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -260,7 +266,10 @@ HEADERS += \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
-    kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp
+    kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
+    kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \
+    kuplung/utilities/saveopen/KuplungDefinitions.pb.h \
+    kuplung/utilities/saveopen/KuplungProtoBufs.pb.h
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \

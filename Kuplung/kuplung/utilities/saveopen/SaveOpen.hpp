@@ -13,6 +13,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp"
+#include "kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp"
 
 class SaveOpen {
 public:
@@ -22,6 +23,7 @@ public:
 
 private:
     SaveOpenBinarySeq *entBinarySeq;
+    SaveOpenGProtocolBufs *entGProtocolBufs;
 };
 
 #endif /* SaveOpen_hpp */
