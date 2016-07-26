@@ -2,7 +2,7 @@
 
 syntax = "proto2";
 
-package KuplungProtoBufs;
+package KuplungApp;
 
 message Vec2 {
   required float x = 1;

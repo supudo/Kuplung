@@ -16,7 +16,7 @@
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 
-namespace KuplungProtoBufs {
+namespace KuplungApp {
 
 namespace {
 
@@ -151,12 +151,12 @@ void protobuf_AddDesc_KuplungDefinitions_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-    "\n\030KuplungDefinitions.proto\022\020KuplungProto"
-    "Bufs\"\034\n\004Vec2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\'\n\004Ve"
-    "c3\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004V"
-    "ec4\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001"
-    "w\030\004 \002(\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001"
-    " \002(\010\022\r\n\005point\030\002 \002(\002", 219);
+    "\n\030KuplungDefinitions.proto\022\nKuplungApp\"\034"
+    "\n\004Vec2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\'\n\004Vec3\022\t\n\001"
+    "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
+    "\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001w\030\004 \002("
+    "\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001 \002(\010\022\r"
+    "\n\005point\030\002 \002(\002", 213);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungDefinitions.proto", &protobuf_RegisterTypes);
   Vec2::default_instance_ = new Vec2();
@@ -187,7 +187,7 @@ const int Vec2::kYFieldNumber;
 Vec2::Vec2()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(constructor:KuplungApp.Vec2)
 }
 
 void Vec2::InitAsDefaultInstance() {
@@ -197,7 +197,7 @@ Vec2::Vec2(const Vec2& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec2)
 }
 
 void Vec2::SharedCtor() {
@@ -208,7 +208,7 @@ void Vec2::SharedCtor() {
 }
 
 Vec2::~Vec2() {
-  // @@protoc_insertion_point(destructor:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(destructor:KuplungApp.Vec2)
   SharedDtor();
 }
 
@@ -262,7 +262,7 @@ bool Vec2::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(parse_start:KuplungApp.Vec2)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -311,17 +311,17 @@ bool Vec2::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(parse_success:KuplungApp.Vec2)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.Vec2)
   return false;
 #undef DO_
 }
 
 void Vec2::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.Vec2)
   // required float x = 1;
   if (has_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
@@ -336,12 +336,12 @@ void Vec2::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.Vec2)
 }
 
 ::google::protobuf::uint8* Vec2::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec2)
   // required float x = 1;
   if (has_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
@@ -356,7 +356,7 @@ void Vec2::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec2)
   return target;
 }
 
@@ -459,7 +459,7 @@ const int Vec3::kZFieldNumber;
 Vec3::Vec3()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(constructor:KuplungApp.Vec3)
 }
 
 void Vec3::InitAsDefaultInstance() {
@@ -469,7 +469,7 @@ Vec3::Vec3(const Vec3& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec3)
 }
 
 void Vec3::SharedCtor() {
@@ -481,7 +481,7 @@ void Vec3::SharedCtor() {
 }
 
 Vec3::~Vec3() {
-  // @@protoc_insertion_point(destructor:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(destructor:KuplungApp.Vec3)
   SharedDtor();
 }
 
@@ -535,7 +535,7 @@ bool Vec3::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(parse_start:KuplungApp.Vec3)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -599,17 +599,17 @@ bool Vec3::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(parse_success:KuplungApp.Vec3)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.Vec3)
   return false;
 #undef DO_
 }
 
 void Vec3::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.Vec3)
   // required float x = 1;
   if (has_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
@@ -629,12 +629,12 @@ void Vec3::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.Vec3)
 }
 
 ::google::protobuf::uint8* Vec3::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec3)
   // required float x = 1;
   if (has_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
@@ -654,7 +654,7 @@ void Vec3::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec3)
   return target;
 }
 
@@ -767,7 +767,7 @@ const int Vec4::kWFieldNumber;
 Vec4::Vec4()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(constructor:KuplungApp.Vec4)
 }
 
 void Vec4::InitAsDefaultInstance() {
@@ -777,7 +777,7 @@ Vec4::Vec4(const Vec4& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec4)
 }
 
 void Vec4::SharedCtor() {
@@ -790,7 +790,7 @@ void Vec4::SharedCtor() {
 }
 
 Vec4::~Vec4() {
-  // @@protoc_insertion_point(destructor:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(destructor:KuplungApp.Vec4)
   SharedDtor();
 }
 
@@ -844,7 +844,7 @@ bool Vec4::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(parse_start:KuplungApp.Vec4)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -923,17 +923,17 @@ bool Vec4::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(parse_success:KuplungApp.Vec4)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.Vec4)
   return false;
 #undef DO_
 }
 
 void Vec4::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.Vec4)
   // required float x = 1;
   if (has_x()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
@@ -958,12 +958,12 @@ void Vec4::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.Vec4)
 }
 
 ::google::protobuf::uint8* Vec4::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec4)
   // required float x = 1;
   if (has_x()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
@@ -988,7 +988,7 @@ void Vec4::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec4)
   return target;
 }
 
@@ -1108,7 +1108,7 @@ const int ObjectCoordinate::kPointFieldNumber;
 ObjectCoordinate::ObjectCoordinate()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(constructor:KuplungApp.ObjectCoordinate)
 }
 
 void ObjectCoordinate::InitAsDefaultInstance() {
@@ -1118,7 +1118,7 @@ ObjectCoordinate::ObjectCoordinate(const ObjectCoordinate& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.ObjectCoordinate)
 }
 
 void ObjectCoordinate::SharedCtor() {
@@ -1129,7 +1129,7 @@ void ObjectCoordinate::SharedCtor() {
 }
 
 ObjectCoordinate::~ObjectCoordinate() {
-  // @@protoc_insertion_point(destructor:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(destructor:KuplungApp.ObjectCoordinate)
   SharedDtor();
 }
 
@@ -1183,7 +1183,7 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(parse_start:KuplungApp.ObjectCoordinate)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
     tag = p.first;
@@ -1232,17 +1232,17 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(parse_success:KuplungApp.ObjectCoordinate)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.ObjectCoordinate)
   return false;
 #undef DO_
 }
 
 void ObjectCoordinate::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.ObjectCoordinate)
   // required bool animate = 1;
   if (has_animate()) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->animate(), output);
@@ -1257,12 +1257,12 @@ void ObjectCoordinate::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.ObjectCoordinate)
 }
 
 ::google::protobuf::uint8* ObjectCoordinate::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ObjectCoordinate)
   // required bool animate = 1;
   if (has_animate()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->animate(), target);
@@ -1277,7 +1277,7 @@ void ObjectCoordinate::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.ObjectCoordinate)
   return target;
 }
 
@@ -1371,6 +1371,6 @@ void ObjectCoordinate::Swap(ObjectCoordinate* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace KuplungProtoBufs
+}  // namespace KuplungApp
 
 // @@protoc_insertion_point(global_scope)

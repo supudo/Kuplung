@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
-#include "kuplung/utilities/saveopen/KuplungProtoBufs.pb.h"
+#include "kuplung/utilities/saveopen/KuplungAppSettings.pb.h"
 
 class SaveOpenGProtocolBufs {
 public:
@@ -32,19 +32,19 @@ private:
 
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
-    ::KuplungProtoBufs::Vec4* getVec4(glm::vec4 v);
-    ::KuplungProtoBufs::Vec3* getVec3(glm::vec3 v);
-    ::KuplungProtoBufs::Vec2* getVec2(glm::vec2 v);
+    KuplungApp::Vec4* getVec4(glm::vec4 v);
+    KuplungApp::Vec3* getVec3(glm::vec3 v);
+    KuplungApp::Vec2* getVec2(glm::vec2 v);
 
-    glm::vec4 setVec4(const ::KuplungProtoBufs::Vec4& v);
-    glm::vec3 setVec3(const ::KuplungProtoBufs::Vec3& v);
-    glm::vec2 setVec2(const ::KuplungProtoBufs::Vec2& v);
+    glm::vec4 setVec4(const KuplungApp::Vec4& v);
+    glm::vec3 setVec3(const KuplungApp::Vec3& v);
+    glm::vec2 setVec2(const KuplungApp::Vec2& v);
 
-//    ::KuplungProtoBufs::FloatMatrix* getMatrix(glm::mat4 m);
-//    glm::mat4 setMatrix(const ::KuplungProtoBufs::FloatMatrix& m);
+//    KuplungApp::FloatMatrix* getMatrix(glm::mat4 m);
+//    glm::mat4 setMatrix(const KuplungApp::FloatMatrix& m);
 
-    ::KuplungProtoBufs::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate* v);
-    ObjectCoordinate* setObjectCoordinate(const ::KuplungProtoBufs::ObjectCoordinate& v);
+    KuplungApp::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate* v);
+    ObjectCoordinate* setObjectCoordinate(const KuplungApp::ObjectCoordinate& v);
 };
 
 #endif /* SaveOpenGProtocolBufs_hpp */

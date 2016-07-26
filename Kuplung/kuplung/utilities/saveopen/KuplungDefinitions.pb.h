@@ -26,7 +26,7 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 
-namespace KuplungProtoBufs {
+namespace KuplungApp {
 
 // Internal implementation detail -- do not call these.
 void  protobuf_AddDesc_KuplungDefinitions_2eproto();
@@ -107,7 +107,7 @@ class Vec2 : public ::google::protobuf::Message {
   inline float y() const;
   inline void set_y(float value);
 
-  // @@protoc_insertion_point(class_scope:KuplungProtoBufs.Vec2)
+  // @@protoc_insertion_point(class_scope:KuplungApp.Vec2)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -203,7 +203,7 @@ class Vec3 : public ::google::protobuf::Message {
   inline float z() const;
   inline void set_z(float value);
 
-  // @@protoc_insertion_point(class_scope:KuplungProtoBufs.Vec3)
+  // @@protoc_insertion_point(class_scope:KuplungApp.Vec3)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -309,7 +309,7 @@ class Vec4 : public ::google::protobuf::Message {
   inline float w() const;
   inline void set_w(float value);
 
-  // @@protoc_insertion_point(class_scope:KuplungProtoBufs.Vec4)
+  // @@protoc_insertion_point(class_scope:KuplungApp.Vec4)
  private:
   inline void set_has_x();
   inline void clear_has_x();
@@ -404,7 +404,7 @@ class ObjectCoordinate : public ::google::protobuf::Message {
   inline float point() const;
   inline void set_point(float value);
 
-  // @@protoc_insertion_point(class_scope:KuplungProtoBufs.ObjectCoordinate)
+  // @@protoc_insertion_point(class_scope:KuplungApp.ObjectCoordinate)
  private:
   inline void set_has_animate();
   inline void clear_has_animate();
@@ -446,13 +446,13 @@ inline void Vec2::clear_x() {
   clear_has_x();
 }
 inline float Vec2::x() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec2.x)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec2.x)
   return x_;
 }
 inline void Vec2::set_x(float value) {
   set_has_x();
   x_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec2.x)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec2.x)
 }
 
 // required float y = 2;
@@ -470,13 +470,13 @@ inline void Vec2::clear_y() {
   clear_has_y();
 }
 inline float Vec2::y() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec2.y)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec2.y)
   return y_;
 }
 inline void Vec2::set_y(float value) {
   set_has_y();
   y_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec2.y)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec2.y)
 }
 
 // -------------------------------------------------------------------
@@ -498,13 +498,13 @@ inline void Vec3::clear_x() {
   clear_has_x();
 }
 inline float Vec3::x() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec3.x)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec3.x)
   return x_;
 }
 inline void Vec3::set_x(float value) {
   set_has_x();
   x_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec3.x)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec3.x)
 }
 
 // required float y = 2;
@@ -522,13 +522,13 @@ inline void Vec3::clear_y() {
   clear_has_y();
 }
 inline float Vec3::y() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec3.y)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec3.y)
   return y_;
 }
 inline void Vec3::set_y(float value) {
   set_has_y();
   y_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec3.y)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec3.y)
 }
 
 // required float z = 3;
@@ -546,13 +546,13 @@ inline void Vec3::clear_z() {
   clear_has_z();
 }
 inline float Vec3::z() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec3.z)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec3.z)
   return z_;
 }
 inline void Vec3::set_z(float value) {
   set_has_z();
   z_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec3.z)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec3.z)
 }
 
 // -------------------------------------------------------------------
@@ -574,13 +574,13 @@ inline void Vec4::clear_x() {
   clear_has_x();
 }
 inline float Vec4::x() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec4.x)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec4.x)
   return x_;
 }
 inline void Vec4::set_x(float value) {
   set_has_x();
   x_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec4.x)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec4.x)
 }
 
 // required float y = 2;
@@ -598,13 +598,13 @@ inline void Vec4::clear_y() {
   clear_has_y();
 }
 inline float Vec4::y() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec4.y)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec4.y)
   return y_;
 }
 inline void Vec4::set_y(float value) {
   set_has_y();
   y_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec4.y)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec4.y)
 }
 
 // required float z = 3;
@@ -622,13 +622,13 @@ inline void Vec4::clear_z() {
   clear_has_z();
 }
 inline float Vec4::z() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec4.z)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec4.z)
   return z_;
 }
 inline void Vec4::set_z(float value) {
   set_has_z();
   z_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec4.z)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec4.z)
 }
 
 // required float w = 4;
@@ -646,13 +646,13 @@ inline void Vec4::clear_w() {
   clear_has_w();
 }
 inline float Vec4::w() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.Vec4.w)
+  // @@protoc_insertion_point(field_get:KuplungApp.Vec4.w)
   return w_;
 }
 inline void Vec4::set_w(float value) {
   set_has_w();
   w_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.Vec4.w)
+  // @@protoc_insertion_point(field_set:KuplungApp.Vec4.w)
 }
 
 // -------------------------------------------------------------------
@@ -674,13 +674,13 @@ inline void ObjectCoordinate::clear_animate() {
   clear_has_animate();
 }
 inline bool ObjectCoordinate::animate() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.ObjectCoordinate.animate)
+  // @@protoc_insertion_point(field_get:KuplungApp.ObjectCoordinate.animate)
   return animate_;
 }
 inline void ObjectCoordinate::set_animate(bool value) {
   set_has_animate();
   animate_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.ObjectCoordinate.animate)
+  // @@protoc_insertion_point(field_set:KuplungApp.ObjectCoordinate.animate)
 }
 
 // required float point = 2;
@@ -698,19 +698,19 @@ inline void ObjectCoordinate::clear_point() {
   clear_has_point();
 }
 inline float ObjectCoordinate::point() const {
-  // @@protoc_insertion_point(field_get:KuplungProtoBufs.ObjectCoordinate.point)
+  // @@protoc_insertion_point(field_get:KuplungApp.ObjectCoordinate.point)
   return point_;
 }
 inline void ObjectCoordinate::set_point(float value) {
   set_has_point();
   point_ = value;
-  // @@protoc_insertion_point(field_set:KuplungProtoBufs.ObjectCoordinate.point)
+  // @@protoc_insertion_point(field_set:KuplungApp.ObjectCoordinate.point)
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 
-}  // namespace KuplungProtoBufs
+}  // namespace KuplungApp
 
 #ifndef SWIG
 namespace google {

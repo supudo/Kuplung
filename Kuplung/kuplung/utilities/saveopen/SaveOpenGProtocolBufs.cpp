@@ -56,7 +56,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
 }
 
 void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungProtoBufs::ManagerObjects bufManagerObjects;
+    KuplungApp::ManagerObjects bufManagerObjects;
 
     bufManagerObjects.set_setting_fov(managerObjects->Setting_FOV);
     bufManagerObjects.set_setting_outlinethickness(managerObjects->Setting_OutlineThickness);
@@ -102,7 +102,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFil
 
 //    bufManagerObjects.set_allocated_matrixprojection(this->getMatrix(managerObjects->matrixProjection));
 
-    ::KuplungProtoBufs::CameraSettings* bufCamera = new ::KuplungProtoBufs::CameraSettings();
+    KuplungApp::CameraSettings* bufCamera = new KuplungApp::CameraSettings();
     bufCamera->set_allocated_cameraposition(this->getVec3(managerObjects->camera->cameraPosition));
     bufCamera->set_allocated_view_eye(this->getVec3(managerObjects->camera->eyeSettings->View_Eye));
     bufCamera->set_allocated_view_center(this->getVec3(managerObjects->camera->eyeSettings->View_Center));
@@ -118,7 +118,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFil
     bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate(managerObjects->camera->rotateCenterZ));
     bufManagerObjects.set_allocated_camera(bufCamera);
 
-    ::KuplungProtoBufs::GridSettings* bufGrid = new ::KuplungProtoBufs::GridSettings();
+    KuplungApp::GridSettings* bufGrid = new KuplungApp::GridSettings();
     bufGrid->set_actasmirror(managerObjects->grid->actAsMirror);
     bufGrid->set_gridsize(managerObjects->grid->gridSize);
     bufGrid->set_allocated_positionx(this->getObjectCoordinate(managerObjects->grid->positionX));
@@ -139,7 +139,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFil
 }
 
 void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungProtoBufs::ManagerObjects bufManagerObjects;
+    KuplungApp::ManagerObjects bufManagerObjects;
     if (!bufManagerObjects.ParseFromIstream(&kuplungFile))
         printf("Failed to read managerObjects settings.\n");
     else {
@@ -205,7 +205,7 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::istream& kuplungFile
 
 //        managerObjects->matrixProjection = this->setMatrix(bufManagerObjects.matrixprojection());
 
-        const ::KuplungProtoBufs::CameraSettings& camera = bufManagerObjects.camera();
+        const KuplungApp::CameraSettings& camera = bufManagerObjects.camera();
         managerObjects->camera->cameraPosition = this->setVec3(camera.cameraposition());
         managerObjects->camera->eyeSettings->View_Eye = this->setVec3(camera.view_eye());
         managerObjects->camera->eyeSettings->View_Center = this->setVec3(camera.view_center());
@@ -220,7 +220,7 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::istream& kuplungFile
         managerObjects->camera->rotateCenterY = this->setObjectCoordinate(camera.rotatecentery());
         managerObjects->camera->rotateCenterZ = this->setObjectCoordinate(camera.rotatecenterz());
 
-        const ::KuplungProtoBufs::GridSettings& grid = bufManagerObjects.grid();
+        const KuplungApp::GridSettings& grid = bufManagerObjects.grid();
         managerObjects->grid->actAsMirror = grid.actasmirror();
         managerObjects->grid->gridSize = grid.gridsize();
         managerObjects->grid->positionX = this->setObjectCoordinate(grid.positionx());
@@ -238,11 +238,11 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::istream& kuplungFile
 }
 
 void SaveOpenGProtocolBufs::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungProtoBufs::ManagerObjects bufManagerObjects;
+    KuplungApp::ManagerObjects bufManagerObjects;
 
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
         Light* l = managerObjects->lightSources[i];
-        KuplungProtoBufs::LightObject* lo = bufManagerObjects.add_lights();
+        KuplungApp::LightObject* lo = bufManagerObjects.add_lights();
         lo->set_title(l->title);
         lo->set_description(l->description);
         lo->set_type(l->type);
@@ -253,12 +253,12 @@ void SaveOpenGProtocolBufs::storeGlobalLights(std::ostream& kuplungFile, Objects
 }
 
 void SaveOpenGProtocolBufs::readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungProtoBufs::ManagerObjects bufManagerObjects;
+    KuplungApp::ManagerObjects bufManagerObjects;
     if (!bufManagerObjects.ParseFromIstream(&kuplungFile))
         printf("Failed to read Lights.\n");
     else {
         for (int i=0; i<bufManagerObjects.lights_size(); i++) {
-            KuplungProtoBufs::LightObject lo = bufManagerObjects.lights(i);
+            KuplungApp::LightObject lo = bufManagerObjects.lights(i);
 
             Light* l = new Light();
             l->init(LightSourceType_Directional);
@@ -307,8 +307,8 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::istream& kup
     return models;
 }
 
-::KuplungProtoBufs::Vec4* SaveOpenGProtocolBufs::getVec4(glm::vec4 v) {
-    ::KuplungProtoBufs::Vec4* gv = new ::KuplungProtoBufs::Vec4();
+KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(glm::vec4 v) {
+    KuplungApp::Vec4* gv = new KuplungApp::Vec4();
     gv->set_x(v.x);
     gv->set_y(v.y);
     gv->set_z(v.z);
@@ -316,35 +316,35 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::istream& kup
     return gv;
 }
 
-::KuplungProtoBufs::Vec3* SaveOpenGProtocolBufs::getVec3(glm::vec3 v) {
-    ::KuplungProtoBufs::Vec3* gv = new ::KuplungProtoBufs::Vec3();
+KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(glm::vec3 v) {
+    KuplungApp::Vec3* gv = new KuplungApp::Vec3();
     gv->set_x(v.x);
     gv->set_y(v.y);
     gv->set_z(v.z);
     return gv;
 }
 
-::KuplungProtoBufs::Vec2* SaveOpenGProtocolBufs::getVec2(glm::vec2 v) {
-    ::KuplungProtoBufs::Vec2* gv = new ::KuplungProtoBufs::Vec2();
+KuplungApp::Vec2* SaveOpenGProtocolBufs::getVec2(glm::vec2 v) {
+    KuplungApp::Vec2* gv = new KuplungApp::Vec2();
     gv->set_x(v.x);
     gv->set_y(v.y);
     return gv;
 }
 
-glm::vec4 SaveOpenGProtocolBufs::setVec4(const ::KuplungProtoBufs::Vec4& v) {
+glm::vec4 SaveOpenGProtocolBufs::setVec4(const KuplungApp::Vec4& v) {
     return glm::vec4(v.x(), v.y(), v.z(), v.w());
 }
 
-glm::vec3 SaveOpenGProtocolBufs::setVec3(const ::KuplungProtoBufs::Vec3& v) {
+glm::vec3 SaveOpenGProtocolBufs::setVec3(const KuplungApp::Vec3& v) {
     return glm::vec3(v.x(), v.y(), v.z());
 }
 
-glm::vec2 SaveOpenGProtocolBufs::setVec2(const ::KuplungProtoBufs::Vec2& v) {
+glm::vec2 SaveOpenGProtocolBufs::setVec2(const KuplungApp::Vec2& v) {
     return glm::vec2(v.x(), v.y());
 }
 
-//::KuplungProtoBufs::FloatMatrix* SaveOpenGProtocolBufs::getMatrix(glm::mat4 m) {
-//    ::KuplungProtoBufs::FloatMatrix* mtx = new ::KuplungProtoBufs::FloatMatrix();
+//KuplungApp::FloatMatrix* SaveOpenGProtocolBufs::getMatrix(glm::mat4 m) {
+//    KuplungApp::FloatMatrix* mtx = new KuplungApp::FloatMatrix();
 //    mtx->set_rows(4);
 //    mtx->set_cols(4);
 //    for (int i=0; i<4; i++) {
@@ -356,7 +356,7 @@ glm::vec2 SaveOpenGProtocolBufs::setVec2(const ::KuplungProtoBufs::Vec2& v) {
 //    return mtx;
 //}
 
-//glm::mat4 SaveOpenGProtocolBufs::setMatrix(const ::KuplungProtoBufs::FloatMatrix& m) {
+//glm::mat4 SaveOpenGProtocolBufs::setMatrix(const KuplungApp::FloatMatrix& m) {
 //    glm::mat4 mtx = glm::mat4(1.0);
 //    int rows = int(m.rows());
 //    int columns = int(m.cols());
@@ -368,14 +368,14 @@ glm::vec2 SaveOpenGProtocolBufs::setVec2(const ::KuplungProtoBufs::Vec2& v) {
 //    return mtx;
 //}
 
-::KuplungProtoBufs::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate* v) {
-    ::KuplungProtoBufs::ObjectCoordinate* oc = new ::KuplungProtoBufs::ObjectCoordinate();
+KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate* v) {
+    KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
     oc->set_animate(v->animate);
     oc->set_point(v->point);
     return oc;
 }
 
-ObjectCoordinate* SaveOpenGProtocolBufs::setObjectCoordinate(const ::KuplungProtoBufs::ObjectCoordinate& v) {
+ObjectCoordinate* SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) {
     ObjectCoordinate* oc = new ObjectCoordinate();
     oc->animate = v.animate();
     oc->point = v.point();

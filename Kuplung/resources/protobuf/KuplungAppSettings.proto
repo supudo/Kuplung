@@ -1,8 +1,8 @@
-// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungProtoBufs.proto 
+// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungAppSettings.proto 
 
 syntax = "proto2";
 
-package KuplungProtoBufs;
+package KuplungApp;
 
 import "KuplungDefinitions.proto";
 
