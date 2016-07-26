@@ -1,0 +1,34 @@
+// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungProtoBufs.proto 
+
+syntax = "proto2";
+
+package KuplungProtoBufs;
+
+message Vec2 {
+  required float x = 1;
+  required float y = 2;
+}
+
+message Vec3 {
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+}
+
+message Vec4 {
+  required float x = 1;
+  required float y = 2;
+  required float z = 3;
+  required float w = 4;
+}
+
+message ObjectCoordinate {
+  required bool animate = 1;
+  required float point = 2;
+}
+
+//message FloatMatrix {
+//  required uint32 rows = 1;
+//  required uint32 cols = 2;
+//  repeated float data = 3 [packed = true];
+//}

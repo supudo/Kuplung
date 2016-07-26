@@ -274,6 +274,8 @@ HEADERS += \
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+    resources/protobuf/KuplungDefinitions.proto \
+    resources/protobuf/KuplungProtoBufs.proto \
     resources/axis_helpers/x_minus.obj \
     resources/axis_helpers/x_minus.mtl \
     resources/axis_helpers/x_plus.obj \
