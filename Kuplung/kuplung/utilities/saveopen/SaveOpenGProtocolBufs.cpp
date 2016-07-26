@@ -19,46 +19,71 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
     std::string fileName = file.path;
     if (!this->hasEnding(fileName, ".kuplung"))
         fileName += ".kuplung";
-
     std::remove(fileName.c_str());
 
-    std::ofstream kuplungFile;
-    kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out);
+    std::string fileNameSettings = fileName + ".settings";
+    std::string fileNameScene = fileName + ".scene";
 
-    if (kuplungFile.is_open() && !kuplungFile.bad()) {
+    std::ofstream kuplungFileSettings;
+    kuplungFileSettings.open(fileNameSettings.c_str(), std::ios::binary | std::ios::out);
+    if (kuplungFileSettings.is_open() && !kuplungFileSettings.bad()) {
         this->storeObjectsManagerSettings(managerObjects);
         this->storeGlobalLights(managerObjects);
 
-        if (!this->bufGUISettings.SerializeToOstream(&kuplungFile))
+        if (!this->bufGUISettings.SerializeToOstream(&kuplungFileSettings))
           printf("Failed to write App Settings.\n");
 
-        this->storeObjects(kuplungFile, meshModelFaces);
+        google::protobuf::ShutdownProtobufLibrary();
+        kuplungFileSettings.close();
+    }
+
+    std::ofstream kuplungFileScene;
+    kuplungFileScene.open(fileNameScene.c_str(), std::ios::binary | std::ios::out);
+    if (kuplungFileScene.is_open() && !kuplungFileScene.bad()) {
+        this->storeObjects(meshModelFaces);
+
+        if (!this->bufScene.SerializeToOstream(&kuplungFileScene))
+          printf("Failed to write Scene.\n");
 
         google::protobuf::ShutdownProtobufLibrary();
-        kuplungFile.close();
+        kuplungFileScene.close();
     }
 }
 
 std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
     std::vector<ModelFaceData*> models;
 
-    std::ifstream kuplungFile;
-    kuplungFile.open(file.path.c_str(), std::ios::binary | std::ios::in);
+    std::string fileNameSettings = file.path + ".settings";
+    std::string fileNameScene = file.path + ".scene";
 
-    if (kuplungFile.is_open() && !kuplungFile.bad()) {
-        kuplungFile.seekg(0);
+    std::ifstream kuplungFileSettings;
+    kuplungFileSettings.open(fileNameSettings.c_str(), std::ios::binary | std::ios::in);
+    if (kuplungFileSettings.is_open() && !kuplungFileSettings.bad()) {
+        kuplungFileSettings.seekg(0);
 
-        if (!this->bufGUISettings.ParseFromIstream(&kuplungFile))
+        if (!this->bufGUISettings.ParseFromIstream(&kuplungFileSettings))
             printf("Failed to read App Settings.\n");
         else {
             this->readObjectsManagerSettings(managerObjects);
             this->readGlobalLights(managerObjects);
         }
 
-        models = this->readObjects(kuplungFile, managerObjects);
+        google::protobuf::ShutdownProtobufLibrary();
+        kuplungFileSettings.close();
+    }
+
+    std::ifstream kuplungFileScene;
+    kuplungFileScene.open(fileNameScene.c_str(), std::ios::binary | std::ios::in);
+    if (kuplungFileScene.is_open() && !kuplungFileScene.bad()) {
+        kuplungFileScene.seekg(0);
+
+        if (!this->bufScene.ParseFromIstream(&kuplungFileScene))
+            printf("Failed to read Scene.\n");
+        else
+            models = this->readObjects(managerObjects);
 
         google::protobuf::ShutdownProtobufLibrary();
-        kuplungFile.close();
+        kuplungFileScene.close();
     }
 
     return models;
@@ -322,10 +347,10 @@ void SaveOpenGProtocolBufs::readGlobalLights(ObjectsManager *managerObjects) {
     }
 }
 
-void SaveOpenGProtocolBufs::storeObjects(std::ostream& kuplungFile, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFaces) {
 }
 
-std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(ObjectsManager *managerObjects) {
     std::vector<ModelFaceData*> models;
     return models;
 }

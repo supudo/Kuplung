@@ -45,6 +45,8 @@
 		8A43AD821C92FAE4000A35FB /* light_point.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7C1C92FACC000A35FB /* light_point.obj */; };
 		8A43AD831C92FAE4000A35FB /* light_spot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7D1C92FACC000A35FB /* light_spot.mtl */; };
 		8A43AD841C92FAE4000A35FB /* light_spot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7E1C92FACC000A35FB /* light_spot.obj */; };
+		8A43BA6F1D4776A50034CD46 /* KuplungAppScene.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43BA6E1D47769B0034CD46 /* KuplungAppScene.proto */; };
+		8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
 		8A47F71D1CBF745200699CAC /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
@@ -208,6 +210,7 @@
 			dstPath = protobuf;
 			dstSubfolderSpec = 7;
 			files = (
+				8A43BA6F1D4776A50034CD46 /* KuplungAppScene.proto in CopyFiles */,
 				8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */,
 				8A1091A21D47665700658E39 /* KuplungDefinitions.proto in CopyFiles */,
 			);
@@ -453,6 +456,9 @@
 		8A43AD7C1C92FACC000A35FB /* light_point.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_point.obj; sourceTree = "<group>"; };
 		8A43AD7D1C92FACC000A35FB /* light_spot.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.mtl; sourceTree = "<group>"; };
 		8A43AD7E1C92FACC000A35FB /* light_spot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light_spot.obj; sourceTree = "<group>"; };
+		8A43BA6E1D47769B0034CD46 /* KuplungAppScene.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KuplungAppScene.proto; path = protobuf/KuplungAppScene.proto; sourceTree = "<group>"; };
+		8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungAppScene.pb.cc; path = saveopen/KuplungAppScene.pb.cc; sourceTree = "<group>"; };
+		8A43BA711D4776B10034CD46 /* KuplungAppScene.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungAppScene.pb.h; path = saveopen/KuplungAppScene.pb.h; sourceTree = "<group>"; };
 		8A47F7171CBF741800699CAC /* camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.mtl; sourceTree = "<group>"; };
 		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
 		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
@@ -707,6 +713,7 @@
 		8A10919D1D47663300658E39 /* protobuf */ = {
 			isa = PBXGroup;
 			children = (
+				8A43BA6E1D47769B0034CD46 /* KuplungAppScene.proto */,
 				8A10919E1D47663D00658E39 /* KuplungAppSettings.proto */,
 				8A10919F1D47663D00658E39 /* KuplungDefinitions.proto */,
 			);
@@ -716,6 +723,8 @@
 		8A14D8C31D367BF200674470 /* saveopen */ = {
 			isa = PBXGroup;
 			children = (
+				8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */,
+				8A43BA711D4776B10034CD46 /* KuplungAppScene.pb.h */,
 				8A1091971D47662400658E39 /* KuplungAppSettings.pb.cc */,
 				8A1091981D47662400658E39 /* KuplungAppSettings.pb.h */,
 				8A1091991D47662400658E39 /* KuplungDefinitions.pb.cc */,
@@ -1450,6 +1459,7 @@
 				8A81DDC21D1A82B5004F3270 /* CameraModel.cpp in Sources */,
 				8A81DDC01D1A82B5004F3270 /* BoundingBox.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
+				8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */,
 				8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */,
 				8A81DDC71D1A82B5004F3270 /* Skybox.cpp in Sources */,
 				8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */,

@@ -13,6 +13,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/saveopen/KuplungAppSettings.pb.h"
+#include "kuplung/utilities/saveopen/KuplungAppScene.pb.h"
 
 class SaveOpenGProtocolBufs {
 public:
@@ -27,10 +28,11 @@ private:
     void storeGlobalLights(ObjectsManager *managerObjects);
     void readGlobalLights(ObjectsManager *managerObjects);
 
-    void storeObjects(std::ostream& kuplungFile, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    void storeObjects(std::vector<ModelFaceBase*> meshModelFaces);
+    std::vector<ModelFaceData*> readObjects(ObjectsManager *managerObjects);
 
     KuplungApp::GUISettings bufGUISettings;
+    KuplungApp::Scene bufScene;
 
     bool hasEnding(std::string const &fullString, std::string const &ending);
 

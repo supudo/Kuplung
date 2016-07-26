@@ -32,6 +32,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ObjectCoordinate_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectCoordinate_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MaterialColor_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MaterialColor_reflection_ = NULL;
 
 }  // namespace
 
@@ -109,6 +112,24 @@ void protobuf_AssignDesc_KuplungDefinitions_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectCoordinate));
+  MaterialColor_descriptor_ = file->message_type(4);
+  static const int MaterialColor_offsets_[4] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, colorpickeropen_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, animate_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, color_),
+  };
+  MaterialColor_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MaterialColor_descriptor_,
+      MaterialColor::default_instance_,
+      MaterialColor_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MaterialColor));
 }
 
 namespace {
@@ -129,6 +150,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     Vec4_descriptor_, &Vec4::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectCoordinate_descriptor_, &ObjectCoordinate::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MaterialColor_descriptor_, &MaterialColor::default_instance());
 }
 
 }  // namespace
@@ -142,6 +165,8 @@ void protobuf_ShutdownFile_KuplungDefinitions_2eproto() {
   delete Vec4_reflection_;
   delete ObjectCoordinate::default_instance_;
   delete ObjectCoordinate_reflection_;
+  delete MaterialColor::default_instance_;
+  delete MaterialColor_reflection_;
 }
 
 void protobuf_AddDesc_KuplungDefinitions_2eproto() {
@@ -156,17 +181,22 @@ void protobuf_AddDesc_KuplungDefinitions_2eproto() {
     "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
     "\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001w\030\004 \002("
     "\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001 \002(\010\022\r"
-    "\n\005point\030\002 \002(\002", 213);
+    "\n\005point\030\002 \002(\002\"l\n\rMaterialColor\022\027\n\017colorP"
+    "ickerOpen\030\001 \002(\010\022\017\n\007animate\030\002 \002(\010\022\020\n\010stre"
+    "ngth\030\003 \002(\002\022\037\n\005color\030\004 \002(\0132\020.KuplungApp.V"
+    "ec3", 323);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungDefinitions.proto", &protobuf_RegisterTypes);
   Vec2::default_instance_ = new Vec2();
   Vec3::default_instance_ = new Vec3();
   Vec4::default_instance_ = new Vec4();
   ObjectCoordinate::default_instance_ = new ObjectCoordinate();
+  MaterialColor::default_instance_ = new MaterialColor();
   Vec2::default_instance_->InitAsDefaultInstance();
   Vec3::default_instance_->InitAsDefaultInstance();
   Vec4::default_instance_->InitAsDefaultInstance();
   ObjectCoordinate::default_instance_->InitAsDefaultInstance();
+  MaterialColor::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_KuplungDefinitions_2eproto);
 }
 
@@ -1365,6 +1395,362 @@ void ObjectCoordinate::Swap(ObjectCoordinate* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = ObjectCoordinate_descriptor_;
   metadata.reflection = ObjectCoordinate_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MaterialColor::kColorPickerOpenFieldNumber;
+const int MaterialColor::kAnimateFieldNumber;
+const int MaterialColor::kStrengthFieldNumber;
+const int MaterialColor::kColorFieldNumber;
+#endif  // !_MSC_VER
+
+MaterialColor::MaterialColor()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.MaterialColor)
+}
+
+void MaterialColor::InitAsDefaultInstance() {
+  color_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
+}
+
+MaterialColor::MaterialColor(const MaterialColor& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.MaterialColor)
+}
+
+void MaterialColor::SharedCtor() {
+  _cached_size_ = 0;
+  colorpickeropen_ = false;
+  animate_ = false;
+  strength_ = 0;
+  color_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MaterialColor::~MaterialColor() {
+  // @@protoc_insertion_point(destructor:KuplungApp.MaterialColor)
+  SharedDtor();
+}
+
+void MaterialColor::SharedDtor() {
+  if (this != default_instance_) {
+    delete color_;
+  }
+}
+
+void MaterialColor::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MaterialColor::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MaterialColor_descriptor_;
+}
+
+const MaterialColor& MaterialColor::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungDefinitions_2eproto();
+  return *default_instance_;
+}
+
+MaterialColor* MaterialColor::default_instance_ = NULL;
+
+MaterialColor* MaterialColor::New() const {
+  return new MaterialColor;
+}
+
+void MaterialColor::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<MaterialColor*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 15) {
+    ZR_(colorpickeropen_, strength_);
+    if (has_color()) {
+      if (color_ != NULL) color_->::KuplungApp::Vec3::Clear();
+    }
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MaterialColor::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.MaterialColor)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool colorPickerOpen = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &colorpickeropen_)));
+          set_has_colorpickeropen();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(16)) goto parse_animate;
+        break;
+      }
+
+      // required bool animate = 2;
+      case 2: {
+        if (tag == 16) {
+         parse_animate:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &animate_)));
+          set_has_animate();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(29)) goto parse_strength;
+        break;
+      }
+
+      // required float strength = 3;
+      case 3: {
+        if (tag == 29) {
+         parse_strength:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &strength_)));
+          set_has_strength();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_color;
+        break;
+      }
+
+      // required .KuplungApp.Vec3 color = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_color:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_color()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.MaterialColor)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.MaterialColor)
+  return false;
+#undef DO_
+}
+
+void MaterialColor::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.MaterialColor)
+  // required bool colorPickerOpen = 1;
+  if (has_colorpickeropen()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->colorpickeropen(), output);
+  }
+
+  // required bool animate = 2;
+  if (has_animate()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->animate(), output);
+  }
+
+  // required float strength = 3;
+  if (has_strength()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->strength(), output);
+  }
+
+  // required .KuplungApp.Vec3 color = 4;
+  if (has_color()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->color(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.MaterialColor)
+}
+
+::google::protobuf::uint8* MaterialColor::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MaterialColor)
+  // required bool colorPickerOpen = 1;
+  if (has_colorpickeropen()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->colorpickeropen(), target);
+  }
+
+  // required bool animate = 2;
+  if (has_animate()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->animate(), target);
+  }
+
+  // required float strength = 3;
+  if (has_strength()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->strength(), target);
+  }
+
+  // required .KuplungApp.Vec3 color = 4;
+  if (has_color()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->color(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MaterialColor)
+  return target;
+}
+
+int MaterialColor::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool colorPickerOpen = 1;
+    if (has_colorpickeropen()) {
+      total_size += 1 + 1;
+    }
+
+    // required bool animate = 2;
+    if (has_animate()) {
+      total_size += 1 + 1;
+    }
+
+    // required float strength = 3;
+    if (has_strength()) {
+      total_size += 1 + 4;
+    }
+
+    // required .KuplungApp.Vec3 color = 4;
+    if (has_color()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->color());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MaterialColor::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MaterialColor* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MaterialColor*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MaterialColor::MergeFrom(const MaterialColor& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_colorpickeropen()) {
+      set_colorpickeropen(from.colorpickeropen());
+    }
+    if (from.has_animate()) {
+      set_animate(from.animate());
+    }
+    if (from.has_strength()) {
+      set_strength(from.strength());
+    }
+    if (from.has_color()) {
+      mutable_color()->::KuplungApp::Vec3::MergeFrom(from.color());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MaterialColor::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MaterialColor::CopyFrom(const MaterialColor& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MaterialColor::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+
+  if (has_color()) {
+    if (!this->color().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void MaterialColor::Swap(MaterialColor* other) {
+  if (other != this) {
+    std::swap(colorpickeropen_, other->colorpickeropen_);
+    std::swap(animate_, other->animate_);
+    std::swap(strength_, other->strength_);
+    std::swap(color_, other->color_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MaterialColor::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MaterialColor_descriptor_;
+  metadata.reflection = MaterialColor_reflection_;
   return metadata;
 }
 

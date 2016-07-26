@@ -1,4 +1,4 @@
-// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungProtoBufs.proto 
+// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungDefinitions.proto 
 
 syntax = "proto2";
 
@@ -25,6 +25,13 @@ message Vec4 {
 message ObjectCoordinate {
   required bool animate = 1;
   required float point = 2;
+}
+
+message MaterialColor {
+    required bool colorPickerOpen = 1;
+    required bool animate = 2;
+    required float strength = 3;
+    required Vec3 color = 4;
 }
 
 //message FloatMatrix {

@@ -181,7 +181,8 @@ SOURCES += main.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
     kuplung/utilities/saveopen/KuplungDefinitions.pb.cc \
-    kuplung/utilities/saveopen/KuplungAppSettings.pb.cc
+    kuplung/utilities/saveopen/KuplungAppSettings.pb.cc \
+    kuplung/utilities/saveopen/KuplungAppScene.pb.cc
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -269,13 +270,15 @@ HEADERS += \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \
     kuplung/utilities/saveopen/KuplungDefinitions.pb.h \
-    kuplung/utilities/saveopen/KuplungAppSettings.pb.h
+    kuplung/utilities/saveopen/KuplungAppSettings.pb.h \
+    kuplung/utilities/saveopen/KuplungAppScene.pb.h
 
 DISTFILES += \
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
     resources/protobuf/KuplungDefinitions.proto \
     resources/protobuf/KuplungAppSettings.proto \
+    resources/protobuf/KuplungAppScene.proto \
     resources/axis_helpers/x_minus.obj \
     resources/axis_helpers/x_minus.mtl \
     resources/axis_helpers/x_plus.obj \

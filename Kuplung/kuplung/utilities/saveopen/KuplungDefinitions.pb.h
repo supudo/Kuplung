@@ -37,6 +37,7 @@ class Vec2;
 class Vec3;
 class Vec4;
 class ObjectCoordinate;
+class MaterialColor;
 
 // ===================================================================
 
@@ -424,6 +425,117 @@ class ObjectCoordinate : public ::google::protobuf::Message {
   void InitAsDefaultInstance();
   static ObjectCoordinate* default_instance_;
 };
+// -------------------------------------------------------------------
+
+class MaterialColor : public ::google::protobuf::Message {
+ public:
+  MaterialColor();
+  virtual ~MaterialColor();
+
+  MaterialColor(const MaterialColor& from);
+
+  inline MaterialColor& operator=(const MaterialColor& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MaterialColor& default_instance();
+
+  void Swap(MaterialColor* other);
+
+  // implements Message ----------------------------------------------
+
+  MaterialColor* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MaterialColor& from);
+  void MergeFrom(const MaterialColor& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool colorPickerOpen = 1;
+  inline bool has_colorpickeropen() const;
+  inline void clear_colorpickeropen();
+  static const int kColorPickerOpenFieldNumber = 1;
+  inline bool colorpickeropen() const;
+  inline void set_colorpickeropen(bool value);
+
+  // required bool animate = 2;
+  inline bool has_animate() const;
+  inline void clear_animate();
+  static const int kAnimateFieldNumber = 2;
+  inline bool animate() const;
+  inline void set_animate(bool value);
+
+  // required float strength = 3;
+  inline bool has_strength() const;
+  inline void clear_strength();
+  static const int kStrengthFieldNumber = 3;
+  inline float strength() const;
+  inline void set_strength(float value);
+
+  // required .KuplungApp.Vec3 color = 4;
+  inline bool has_color() const;
+  inline void clear_color();
+  static const int kColorFieldNumber = 4;
+  inline const ::KuplungApp::Vec3& color() const;
+  inline ::KuplungApp::Vec3* mutable_color();
+  inline ::KuplungApp::Vec3* release_color();
+  inline void set_allocated_color(::KuplungApp::Vec3* color);
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.MaterialColor)
+ private:
+  inline void set_has_colorpickeropen();
+  inline void clear_has_colorpickeropen();
+  inline void set_has_animate();
+  inline void clear_has_animate();
+  inline void set_has_strength();
+  inline void clear_has_strength();
+  inline void set_has_color();
+  inline void clear_has_color();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  bool colorpickeropen_;
+  bool animate_;
+  float strength_;
+  ::KuplungApp::Vec3* color_;
+  friend void  protobuf_AddDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_AssignDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_ShutdownFile_KuplungDefinitions_2eproto();
+
+  void InitAsDefaultInstance();
+  static MaterialColor* default_instance_;
+};
 // ===================================================================
 
 
@@ -705,6 +817,123 @@ inline void ObjectCoordinate::set_point(float value) {
   set_has_point();
   point_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.ObjectCoordinate.point)
+}
+
+// -------------------------------------------------------------------
+
+// MaterialColor
+
+// required bool colorPickerOpen = 1;
+inline bool MaterialColor::has_colorpickeropen() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MaterialColor::set_has_colorpickeropen() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MaterialColor::clear_has_colorpickeropen() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MaterialColor::clear_colorpickeropen() {
+  colorpickeropen_ = false;
+  clear_has_colorpickeropen();
+}
+inline bool MaterialColor::colorpickeropen() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MaterialColor.colorPickerOpen)
+  return colorpickeropen_;
+}
+inline void MaterialColor::set_colorpickeropen(bool value) {
+  set_has_colorpickeropen();
+  colorpickeropen_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MaterialColor.colorPickerOpen)
+}
+
+// required bool animate = 2;
+inline bool MaterialColor::has_animate() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MaterialColor::set_has_animate() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MaterialColor::clear_has_animate() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MaterialColor::clear_animate() {
+  animate_ = false;
+  clear_has_animate();
+}
+inline bool MaterialColor::animate() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MaterialColor.animate)
+  return animate_;
+}
+inline void MaterialColor::set_animate(bool value) {
+  set_has_animate();
+  animate_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MaterialColor.animate)
+}
+
+// required float strength = 3;
+inline bool MaterialColor::has_strength() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MaterialColor::set_has_strength() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MaterialColor::clear_has_strength() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MaterialColor::clear_strength() {
+  strength_ = 0;
+  clear_has_strength();
+}
+inline float MaterialColor::strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MaterialColor.strength)
+  return strength_;
+}
+inline void MaterialColor::set_strength(float value) {
+  set_has_strength();
+  strength_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MaterialColor.strength)
+}
+
+// required .KuplungApp.Vec3 color = 4;
+inline bool MaterialColor::has_color() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MaterialColor::set_has_color() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MaterialColor::clear_has_color() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MaterialColor::clear_color() {
+  if (color_ != NULL) color_->::KuplungApp::Vec3::Clear();
+  clear_has_color();
+}
+inline const ::KuplungApp::Vec3& MaterialColor::color() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MaterialColor.color)
+  return color_ != NULL ? *color_ : *default_instance_->color_;
+}
+inline ::KuplungApp::Vec3* MaterialColor::mutable_color() {
+  set_has_color();
+  if (color_ == NULL) color_ = new ::KuplungApp::Vec3;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MaterialColor.color)
+  return color_;
+}
+inline ::KuplungApp::Vec3* MaterialColor::release_color() {
+  clear_has_color();
+  ::KuplungApp::Vec3* temp = color_;
+  color_ = NULL;
+  return temp;
+}
+inline void MaterialColor::set_allocated_color(::KuplungApp::Vec3* color) {
+  delete color_;
+  color_ = color;
+  if (color) {
+    set_has_color();
+  } else {
+    clear_has_color();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MaterialColor.color)
 }
 
 

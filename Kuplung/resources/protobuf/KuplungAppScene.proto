@@ -1,0 +1,75 @@
+// protoc --cpp_out=../../kuplung/utilities/saveopen/ KuplungAppScene.proto 
+
+syntax = "proto2";
+
+package KuplungApp;
+
+import "KuplungDefinitions.proto";
+
+message Scene {
+  required int32 ModelID = 1;
+
+  required bool Settings_DeferredRender = 2;
+  required bool Setting_CelShading = 3;
+  required bool Setting_Wireframe = 4;
+  required bool Setting_UseTessellation = 5;
+  required bool Setting_UseCullFace = 6;
+  required float Setting_Alpha = 7;
+  required int32 Setting_TessellationSubdivision = 8;
+  required ObjectCoordinate positionX = 9;
+  required ObjectCoordinate positionY = 10;
+  required ObjectCoordinate positionZ = 11;
+  required ObjectCoordinate scaleX = 12;
+  required ObjectCoordinate scaleY = 13;
+  required ObjectCoordinate scaleZ = 14;
+  required ObjectCoordinate rotateX = 15;
+  required ObjectCoordinate rotateY = 16;
+  required ObjectCoordinate rotateZ = 17;
+  required ObjectCoordinate displaceX = 18;
+  required ObjectCoordinate displaceY = 19;
+  required ObjectCoordinate displaceZ = 20;
+  required ObjectCoordinate Setting_MaterialRefraction = 21;
+  required ObjectCoordinate Setting_MaterialSpecularExp = 22;
+
+  required int32 Setting_ModelViewSkin = 23;
+  required Vec3 solidLightSkin_MaterialColor = 24;
+  required Vec3 solidLightSkin_Ambient = 25;
+  required Vec3 solidLightSkin_Diffuse = 26;
+  required Vec3 solidLightSkin_Specular = 27;
+  required float solidLightSkin_Ambient_Strength = 28;
+  required float solidLightSkin_Diffuse_Strength = 29;
+  required float solidLightSkin_Specular_Strength = 30;
+
+  required Vec3 Setting_LightPosition = 31;
+  required Vec3 Setting_LightDirection = 32;
+  required Vec3 Setting_LightAmbient = 33;
+  required Vec3 Setting_LightDiffuse = 34;
+  required Vec3 Setting_LightSpecular = 35;
+  required float Setting_LightStrengthAmbient = 36;
+  required float Setting_LightStrengthDiffuse = 37;
+  required float Setting_LightStrengthSpecular = 38;
+
+  required int32 materialIlluminationModel = 39;
+  required ObjectCoordinate displacementHeightScale = 40;
+  required bool showMaterialEditor = 41;
+  required MaterialColor materialAmbient = 42;
+  required MaterialColor materialDiffuse = 43;
+  required MaterialColor materialSpecular = 44;
+  required MaterialColor materialEmission = 45;
+
+  required bool Setting_ParallaxMapping = 46;
+
+  required int32 Effect_GBlur_Mode = 47;
+  required ObjectCoordinate Effect_GBlur_Radius = 48;
+  required ObjectCoordinate Effect_GBlur_Width = 49;
+
+  required bool Effect_Bloom_doBloom = 50;
+  required float Effect_Bloom_WeightA = 51;
+  required float Effect_Bloom_WeightB = 52;
+  required float Effect_Bloom_WeightC = 53;
+  required float Effect_Bloom_WeightD = 54;
+  required float Effect_Bloom_Vignette = 55;
+  required float Effect_Bloom_VignetteAtt = 56;
+
+  required int32 Setting_LightingPass_DrawMode = 57;
+}
