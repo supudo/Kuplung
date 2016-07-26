@@ -20,9 +20,9 @@ namespace KuplungApp {
 
 namespace {
 
-const ::google::protobuf::Descriptor* ManagerObjects_descriptor_ = NULL;
+const ::google::protobuf::Descriptor* GUISettings_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
-  ManagerObjects_reflection_ = NULL;
+  GUISettings_reflection_ = NULL;
 const ::google::protobuf::Descriptor* CameraSettings_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CameraSettings_reflection_ = NULL;
@@ -42,64 +42,64 @@ void protobuf_AssignDesc_KuplungAppSettings_2eproto() {
     ::google::protobuf::DescriptorPool::generated_pool()->FindFileByName(
       "KuplungAppSettings.proto");
   GOOGLE_CHECK(file != NULL);
-  ManagerObjects_descriptor_ = file->message_type(0);
-  static const int ManagerObjects_offsets_[44] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_fov_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_outlinethickness_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_ratiowidth_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_ratioheight_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_planeclose_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_planefar_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_gridsize_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_skybox_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_outlinecolor_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_uiambientlight_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_fixedgridworld_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_outlinecolorpickeropen_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_showaxishelpers_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, settings_showzaxis_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_deferredtestmode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_deferredtestlights_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_lightingpass_drawmode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_deferredtestlightsnumber_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_deferredambientstrength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, viewmodelskin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_direction_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_materialcolor_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_ambient_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_diffuse_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_specular_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_ambient_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_diffuse_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_specular_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_materialcolor_colorpicker_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_ambient_colorpicker_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_diffuse_colorpicker_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, solidlight_specular_colorpicker_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_showterrain_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_terrainmodel_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_terrainanimatex_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_terrainanimatey_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, heightmapimage_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_terrainwidth_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_terrainheight_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_showspaceship_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, setting_generatespaceship_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, camera_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, grid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, lights_),
+  GUISettings_descriptor_ = file->message_type(0);
+  static const int GUISettings_offsets_[44] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_fov_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_outlinethickness_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_ratiowidth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_ratioheight_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_planeclose_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_planefar_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_gridsize_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_skybox_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_outlinecolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_uiambientlight_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_fixedgridworld_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_outlinecolorpickeropen_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_showaxishelpers_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, settings_showzaxis_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_deferredtestmode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_deferredtestlights_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_lightingpass_drawmode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_deferredtestlightsnumber_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_deferredambientstrength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, viewmodelskin_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_direction_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_materialcolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_ambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_diffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_specular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_ambient_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_diffuse_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_specular_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_materialcolor_colorpicker_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_ambient_colorpicker_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_diffuse_colorpicker_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, solidlight_specular_colorpicker_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_showterrain_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_terrainmodel_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_terrainanimatex_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_terrainanimatey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, heightmapimage_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_terrainwidth_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_terrainheight_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_showspaceship_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_generatespaceship_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, camera_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, grid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, lights_),
   };
-  ManagerObjects_reflection_ =
+  GUISettings_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
-      ManagerObjects_descriptor_,
-      ManagerObjects::default_instance_,
-      ManagerObjects_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ManagerObjects, _unknown_fields_),
+      GUISettings_descriptor_,
+      GUISettings::default_instance_,
+      GUISettings_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _unknown_fields_),
       -1,
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(ManagerObjects));
+      sizeof(GUISettings));
   CameraSettings_descriptor_ = file->message_type(1);
   static const int CameraSettings_offsets_[13] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CameraSettings, cameraposition_),
@@ -155,12 +155,13 @@ void protobuf_AssignDesc_KuplungAppSettings_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GridSettings));
   LightObject_descriptor_ = file->message_type(3);
-  static const int LightObject_offsets_[20] = {
+  static const int LightObject_offsets_[21] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, title_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, description_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, showlampobject_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, showlampdirection_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, showinwire_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, positionx_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, positiony_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, positionz_),
@@ -201,7 +202,7 @@ inline void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    ManagerObjects_descriptor_, &ManagerObjects::default_instance());
+    GUISettings_descriptor_, &GUISettings::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CameraSettings_descriptor_, &CameraSettings::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -213,8 +214,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }  // namespace
 
 void protobuf_ShutdownFile_KuplungAppSettings_2eproto() {
-  delete ManagerObjects::default_instance_;
-  delete ManagerObjects_reflection_;
+  delete GUISettings::default_instance_;
+  delete GUISettings_reflection_;
   delete CameraSettings::default_instance_;
   delete CameraSettings_reflection_;
   delete GridSettings::default_instance_;
@@ -232,104 +233,104 @@ void protobuf_AddDesc_KuplungAppSettings_2eproto() {
   ::KuplungApp::protobuf_AddDesc_KuplungDefinitions_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\030KuplungAppSettings.proto\022\nKuplungApp\032\030"
-    "KuplungDefinitions.proto\"\275\014\n\016ManagerObje"
-    "cts\022\023\n\013Setting_FOV\030\001 \002(\002\022 \n\030Setting_Outl"
-    "ineThickness\030\002 \002(\002\022\032\n\022Setting_RatioWidth"
-    "\030\003 \002(\002\022\033\n\023Setting_RatioHeight\030\004 \002(\002\022\032\n\022S"
-    "etting_PlaneClose\030\005 \002(\002\022\030\n\020Setting_Plane"
-    "Far\030\006 \002(\002\022\030\n\020Setting_GridSize\030\007 \002(\005\022\026\n\016S"
-    "etting_Skybox\030\010 \002(\005\022.\n\024Setting_OutlineCo"
-    "lor\030\t \002(\0132\020.KuplungApp.Vec4\0220\n\026Setting_U"
-    "IAmbientLight\030\n \002(\0132\020.KuplungApp.Vec3\022\036\n"
-    "\026Setting_FixedGridWorld\030\013 \002(\010\022&\n\036Setting"
-    "_OutlineColorPickerOpen\030\014 \002(\010\022\037\n\027Setting"
-    "_ShowAxisHelpers\030\r \002(\010\022\032\n\022Settings_ShowZ"
-    "Axis\030\016 \002(\010\022 \n\030Setting_DeferredTestMode\030\017"
-    " \002(\010\022\"\n\032Setting_DeferredTestLights\030\020 \002(\010"
-    "\022%\n\035Setting_LightingPass_DrawMode\030\021 \002(\005\022"
-    "(\n Setting_DeferredTestLightsNumber\030\022 \002("
-    "\005\022\'\n\037Setting_DeferredAmbientStrength\030\023 \002"
-    "(\002\022\025\n\rviewModelSkin\030\024 \002(\005\022.\n\024SolidLight_"
-    "Direction\030\025 \002(\0132\020.KuplungApp.Vec3\0222\n\030Sol"
-    "idLight_MaterialColor\030\026 \002(\0132\020.KuplungApp"
-    ".Vec3\022,\n\022SolidLight_Ambient\030\027 \002(\0132\020.Kupl"
-    "ungApp.Vec3\022,\n\022SolidLight_Diffuse\030\030 \002(\0132"
-    "\020.KuplungApp.Vec3\022-\n\023SolidLight_Specular"
-    "\030\031 \002(\0132\020.KuplungApp.Vec3\022#\n\033SolidLight_A"
-    "mbient_Strength\030\032 \002(\002\022#\n\033SolidLight_Diff"
-    "use_Strength\030\033 \002(\002\022$\n\034SolidLight_Specula"
-    "r_Strength\030\034 \002(\002\022,\n$SolidLight_MaterialC"
-    "olor_ColorPicker\030\035 \002(\010\022&\n\036SolidLight_Amb"
-    "ient_ColorPicker\030\036 \002(\010\022&\n\036SolidLight_Dif"
-    "fuse_ColorPicker\030\037 \002(\010\022\'\n\037SolidLight_Spe"
-    "cular_ColorPicker\030  \002(\010\022\033\n\023Setting_ShowT"
-    "errain\030! \002(\010\022\034\n\024Setting_TerrainModel\030\" \002"
-    "(\010\022\037\n\027Setting_TerrainAnimateX\030# \002(\010\022\037\n\027S"
-    "etting_TerrainAnimateY\030$ \002(\010\022\026\n\016heightma"
-    "pImage\030% \002(\t\022\034\n\024Setting_TerrainWidth\030& \002"
-    "(\005\022\035\n\025Setting_TerrainHeight\030\' \002(\005\022\035\n\025Set"
-    "ting_ShowSpaceship\030( \002(\010\022!\n\031Setting_Gene"
-    "rateSpaceship\030) \002(\010\022*\n\006camera\030* \002(\0132\032.Ku"
-    "plungApp.CameraSettings\022&\n\004grid\030+ \002(\0132\030."
-    "KuplungApp.GridSettings\022\'\n\006lights\030, \003(\0132"
-    "\027.KuplungApp.LightObject\"\347\004\n\016CameraSetti"
-    "ngs\022(\n\016cameraPosition\030\001 \002(\0132\020.KuplungApp"
-    ".Vec3\022\"\n\010View_Eye\030\002 \002(\0132\020.KuplungApp.Vec"
-    "3\022%\n\013View_Center\030\003 \002(\0132\020.KuplungApp.Vec3"
-    "\022!\n\007View_Up\030\004 \002(\0132\020.KuplungApp.Vec3\022/\n\tp"
-    "ositionX\030\005 \002(\0132\034.KuplungApp.ObjectCoordi"
-    "nate\022/\n\tpositionY\030\006 \002(\0132\034.KuplungApp.Obj"
-    "ectCoordinate\022/\n\tpositionZ\030\007 \002(\0132\034.Kuplu"
-    "ngApp.ObjectCoordinate\022-\n\007rotateX\030\010 \002(\0132"
-    "\034.KuplungApp.ObjectCoordinate\022-\n\007rotateY"
-    "\030\t \002(\0132\034.KuplungApp.ObjectCoordinate\022-\n\007"
-    "rotateZ\030\n \002(\0132\034.KuplungApp.ObjectCoordin"
-    "ate\0223\n\rrotateCenterX\030\013 \002(\0132\034.KuplungApp."
-    "ObjectCoordinate\0223\n\rrotateCenterY\030\014 \002(\0132"
-    "\034.KuplungApp.ObjectCoordinate\0223\n\rrotateC"
-    "enterZ\030\r \002(\0132\034.KuplungApp.ObjectCoordina"
-    "te\"\207\004\n\014GridSettings\022\023\n\013actAsMirror\030\001 \002(\010"
-    "\022\020\n\010gridSize\030\002 \002(\005\022/\n\tpositionX\030\003 \002(\0132\034."
+    "KuplungDefinitions.proto\"\272\014\n\013GUISettings"
+    "\022\023\n\013Setting_FOV\030\001 \002(\002\022 \n\030Setting_Outline"
+    "Thickness\030\002 \002(\002\022\032\n\022Setting_RatioWidth\030\003 "
+    "\002(\002\022\033\n\023Setting_RatioHeight\030\004 \002(\002\022\032\n\022Sett"
+    "ing_PlaneClose\030\005 \002(\002\022\030\n\020Setting_PlaneFar"
+    "\030\006 \002(\002\022\030\n\020Setting_GridSize\030\007 \002(\005\022\026\n\016Sett"
+    "ing_Skybox\030\010 \002(\005\022.\n\024Setting_OutlineColor"
+    "\030\t \002(\0132\020.KuplungApp.Vec4\0220\n\026Setting_UIAm"
+    "bientLight\030\n \002(\0132\020.KuplungApp.Vec3\022\036\n\026Se"
+    "tting_FixedGridWorld\030\013 \002(\010\022&\n\036Setting_Ou"
+    "tlineColorPickerOpen\030\014 \002(\010\022\037\n\027Setting_Sh"
+    "owAxisHelpers\030\r \002(\010\022\032\n\022Settings_ShowZAxi"
+    "s\030\016 \002(\010\022 \n\030Setting_DeferredTestMode\030\017 \002("
+    "\010\022\"\n\032Setting_DeferredTestLights\030\020 \002(\010\022%\n"
+    "\035Setting_LightingPass_DrawMode\030\021 \002(\005\022(\n "
+    "Setting_DeferredTestLightsNumber\030\022 \002(\005\022\'"
+    "\n\037Setting_DeferredAmbientStrength\030\023 \002(\002\022"
+    "\025\n\rviewModelSkin\030\024 \002(\005\022.\n\024SolidLight_Dir"
+    "ection\030\025 \002(\0132\020.KuplungApp.Vec3\0222\n\030SolidL"
+    "ight_MaterialColor\030\026 \002(\0132\020.KuplungApp.Ve"
+    "c3\022,\n\022SolidLight_Ambient\030\027 \002(\0132\020.Kuplung"
+    "App.Vec3\022,\n\022SolidLight_Diffuse\030\030 \002(\0132\020.K"
+    "uplungApp.Vec3\022-\n\023SolidLight_Specular\030\031 "
+    "\002(\0132\020.KuplungApp.Vec3\022#\n\033SolidLight_Ambi"
+    "ent_Strength\030\032 \002(\002\022#\n\033SolidLight_Diffuse"
+    "_Strength\030\033 \002(\002\022$\n\034SolidLight_Specular_S"
+    "trength\030\034 \002(\002\022,\n$SolidLight_MaterialColo"
+    "r_ColorPicker\030\035 \002(\010\022&\n\036SolidLight_Ambien"
+    "t_ColorPicker\030\036 \002(\010\022&\n\036SolidLight_Diffus"
+    "e_ColorPicker\030\037 \002(\010\022\'\n\037SolidLight_Specul"
+    "ar_ColorPicker\030  \002(\010\022\033\n\023Setting_ShowTerr"
+    "ain\030! \002(\010\022\034\n\024Setting_TerrainModel\030\" \002(\010\022"
+    "\037\n\027Setting_TerrainAnimateX\030# \002(\010\022\037\n\027Sett"
+    "ing_TerrainAnimateY\030$ \002(\010\022\026\n\016heightmapIm"
+    "age\030% \002(\t\022\034\n\024Setting_TerrainWidth\030& \002(\005\022"
+    "\035\n\025Setting_TerrainHeight\030\' \002(\005\022\035\n\025Settin"
+    "g_ShowSpaceship\030( \002(\010\022!\n\031Setting_Generat"
+    "eSpaceship\030) \002(\010\022*\n\006camera\030* \002(\0132\032.Kuplu"
+    "ngApp.CameraSettings\022&\n\004grid\030+ \002(\0132\030.Kup"
+    "lungApp.GridSettings\022\'\n\006lights\030, \003(\0132\027.K"
+    "uplungApp.LightObject\"\347\004\n\016CameraSettings"
+    "\022(\n\016cameraPosition\030\001 \002(\0132\020.KuplungApp.Ve"
+    "c3\022\"\n\010View_Eye\030\002 \002(\0132\020.KuplungApp.Vec3\022%"
+    "\n\013View_Center\030\003 \002(\0132\020.KuplungApp.Vec3\022!\n"
+    "\007View_Up\030\004 \002(\0132\020.KuplungApp.Vec3\022/\n\tposi"
+    "tionX\030\005 \002(\0132\034.KuplungApp.ObjectCoordinat"
+    "e\022/\n\tpositionY\030\006 \002(\0132\034.KuplungApp.Object"
+    "Coordinate\022/\n\tpositionZ\030\007 \002(\0132\034.KuplungA"
+    "pp.ObjectCoordinate\022-\n\007rotateX\030\010 \002(\0132\034.K"
+    "uplungApp.ObjectCoordinate\022-\n\007rotateY\030\t "
+    "\002(\0132\034.KuplungApp.ObjectCoordinate\022-\n\007rot"
+    "ateZ\030\n \002(\0132\034.KuplungApp.ObjectCoordinate"
+    "\0223\n\rrotateCenterX\030\013 \002(\0132\034.KuplungApp.Obj"
+    "ectCoordinate\0223\n\rrotateCenterY\030\014 \002(\0132\034.K"
+    "uplungApp.ObjectCoordinate\0223\n\rrotateCent"
+    "erZ\030\r \002(\0132\034.KuplungApp.ObjectCoordinate\""
+    "\207\004\n\014GridSettings\022\023\n\013actAsMirror\030\001 \002(\010\022\020\n"
+    "\010gridSize\030\002 \002(\005\022/\n\tpositionX\030\003 \002(\0132\034.Kup"
+    "lungApp.ObjectCoordinate\022/\n\tpositionY\030\004 "
+    "\002(\0132\034.KuplungApp.ObjectCoordinate\022/\n\tpos"
+    "itionZ\030\005 \002(\0132\034.KuplungApp.ObjectCoordina"
+    "te\022-\n\007rotateX\030\006 \002(\0132\034.KuplungApp.ObjectC"
+    "oordinate\022-\n\007rotateY\030\007 \002(\0132\034.KuplungApp."
+    "ObjectCoordinate\022-\n\007rotateZ\030\010 \002(\0132\034.Kupl"
+    "ungApp.ObjectCoordinate\022,\n\006scaleX\030\t \002(\0132"
+    "\034.KuplungApp.ObjectCoordinate\022,\n\006scaleY\030"
+    "\n \002(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006s"
+    "caleZ\030\013 \002(\0132\034.KuplungApp.ObjectCoordinat"
+    "e\022\024\n\014transparency\030\014 \002(\002\022\020\n\010showGrid\030\r \002("
+    "\005\"\345\006\n\013LightObject\022\r\n\005title\030\001 \002(\t\022\023\n\013desc"
+    "ription\030\002 \002(\t\022\014\n\004type\030\003 \002(\005\022\026\n\016showLampO"
+    "bject\030\004 \002(\010\022\031\n\021showLampDirection\030\005 \002(\010\022\022"
+    "\n\nshowInWire\030\006 \002(\010\022/\n\tpositionX\030\007 \002(\0132\034."
     "KuplungApp.ObjectCoordinate\022/\n\tpositionY"
-    "\030\004 \002(\0132\034.KuplungApp.ObjectCoordinate\022/\n\t"
-    "positionZ\030\005 \002(\0132\034.KuplungApp.ObjectCoord"
-    "inate\022-\n\007rotateX\030\006 \002(\0132\034.KuplungApp.Obje"
-    "ctCoordinate\022-\n\007rotateY\030\007 \002(\0132\034.KuplungA"
-    "pp.ObjectCoordinate\022-\n\007rotateZ\030\010 \002(\0132\034.K"
-    "uplungApp.ObjectCoordinate\022,\n\006scaleX\030\t \002"
-    "(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006scal"
-    "eY\030\n \002(\0132\034.KuplungApp.ObjectCoordinate\022,"
-    "\n\006scaleZ\030\013 \002(\0132\034.KuplungApp.ObjectCoordi"
-    "nate\022\024\n\014transparency\030\014 \002(\002\022\020\n\010showGrid\030\r"
-    " \002(\005\"\321\006\n\013LightObject\022\r\n\005title\030\001 \002(\t\022\023\n\013d"
-    "escription\030\002 \002(\t\022\014\n\004type\030\003 \002(\005\022\026\n\016showLa"
-    "mpObject\030\004 \002(\010\022\031\n\021showLampDirection\030\005 \002("
-    "\010\022/\n\tpositionX\030\006 \002(\0132\034.KuplungApp.Object"
-    "Coordinate\022/\n\tpositionY\030\007 \002(\0132\034.KuplungA"
-    "pp.ObjectCoordinate\022/\n\tpositionZ\030\010 \002(\0132\034"
-    ".KuplungApp.ObjectCoordinate\0220\n\ndirectio"
-    "nX\030\t \002(\0132\034.KuplungApp.ObjectCoordinate\0220"
-    "\n\ndirectionY\030\n \002(\0132\034.KuplungApp.ObjectCo"
-    "ordinate\0220\n\ndirectionZ\030\013 \002(\0132\034.KuplungAp"
-    "p.ObjectCoordinate\022,\n\006scaleX\030\014 \002(\0132\034.Kup"
-    "lungApp.ObjectCoordinate\022,\n\006scaleY\030\r \002(\013"
-    "2\034.KuplungApp.ObjectCoordinate\022,\n\006scaleZ"
-    "\030\016 \002(\0132\034.KuplungApp.ObjectCoordinate\022-\n\007"
-    "rotateX\030\017 \002(\0132\034.KuplungApp.ObjectCoordin"
-    "ate\022-\n\007rotateY\030\020 \002(\0132\034.KuplungApp.Object"
-    "Coordinate\022-\n\007rotateZ\030\021 \002(\0132\034.KuplungApp"
-    ".ObjectCoordinate\0223\n\rrotateCenterX\030\022 \002(\013"
-    "2\034.KuplungApp.ObjectCoordinate\0223\n\rrotate"
-    "CenterY\030\023 \002(\0132\034.KuplungApp.ObjectCoordin"
-    "ate\0223\n\rrotateCenterZ\030\024 \002(\0132\034.KuplungApp."
-    "ObjectCoordinate", 3656);
+    "\030\010 \002(\0132\034.KuplungApp.ObjectCoordinate\022/\n\t"
+    "positionZ\030\t \002(\0132\034.KuplungApp.ObjectCoord"
+    "inate\0220\n\ndirectionX\030\n \002(\0132\034.KuplungApp.O"
+    "bjectCoordinate\0220\n\ndirectionY\030\013 \002(\0132\034.Ku"
+    "plungApp.ObjectCoordinate\0220\n\ndirectionZ\030"
+    "\014 \002(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006s"
+    "caleX\030\r \002(\0132\034.KuplungApp.ObjectCoordinat"
+    "e\022,\n\006scaleY\030\016 \002(\0132\034.KuplungApp.ObjectCoo"
+    "rdinate\022,\n\006scaleZ\030\017 \002(\0132\034.KuplungApp.Obj"
+    "ectCoordinate\022-\n\007rotateX\030\020 \002(\0132\034.Kuplung"
+    "App.ObjectCoordinate\022-\n\007rotateY\030\021 \002(\0132\034."
+    "KuplungApp.ObjectCoordinate\022-\n\007rotateZ\030\022"
+    " \002(\0132\034.KuplungApp.ObjectCoordinate\0223\n\rro"
+    "tateCenterX\030\023 \002(\0132\034.KuplungApp.ObjectCoo"
+    "rdinate\0223\n\rrotateCenterY\030\024 \002(\0132\034.Kuplung"
+    "App.ObjectCoordinate\0223\n\rrotateCenterZ\030\025 "
+    "\002(\0132\034.KuplungApp.ObjectCoordinate", 3673);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungAppSettings.proto", &protobuf_RegisterTypes);
-  ManagerObjects::default_instance_ = new ManagerObjects();
+  GUISettings::default_instance_ = new GUISettings();
   CameraSettings::default_instance_ = new CameraSettings();
   GridSettings::default_instance_ = new GridSettings();
   LightObject::default_instance_ = new LightObject();
-  ManagerObjects::default_instance_->InitAsDefaultInstance();
+  GUISettings::default_instance_->InitAsDefaultInstance();
   CameraSettings::default_instance_->InitAsDefaultInstance();
   GridSettings::default_instance_->InitAsDefaultInstance();
   LightObject::default_instance_->InitAsDefaultInstance();
@@ -346,59 +347,59 @@ struct StaticDescriptorInitializer_KuplungAppSettings_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int ManagerObjects::kSettingFOVFieldNumber;
-const int ManagerObjects::kSettingOutlineThicknessFieldNumber;
-const int ManagerObjects::kSettingRatioWidthFieldNumber;
-const int ManagerObjects::kSettingRatioHeightFieldNumber;
-const int ManagerObjects::kSettingPlaneCloseFieldNumber;
-const int ManagerObjects::kSettingPlaneFarFieldNumber;
-const int ManagerObjects::kSettingGridSizeFieldNumber;
-const int ManagerObjects::kSettingSkyboxFieldNumber;
-const int ManagerObjects::kSettingOutlineColorFieldNumber;
-const int ManagerObjects::kSettingUIAmbientLightFieldNumber;
-const int ManagerObjects::kSettingFixedGridWorldFieldNumber;
-const int ManagerObjects::kSettingOutlineColorPickerOpenFieldNumber;
-const int ManagerObjects::kSettingShowAxisHelpersFieldNumber;
-const int ManagerObjects::kSettingsShowZAxisFieldNumber;
-const int ManagerObjects::kSettingDeferredTestModeFieldNumber;
-const int ManagerObjects::kSettingDeferredTestLightsFieldNumber;
-const int ManagerObjects::kSettingLightingPassDrawModeFieldNumber;
-const int ManagerObjects::kSettingDeferredTestLightsNumberFieldNumber;
-const int ManagerObjects::kSettingDeferredAmbientStrengthFieldNumber;
-const int ManagerObjects::kViewModelSkinFieldNumber;
-const int ManagerObjects::kSolidLightDirectionFieldNumber;
-const int ManagerObjects::kSolidLightMaterialColorFieldNumber;
-const int ManagerObjects::kSolidLightAmbientFieldNumber;
-const int ManagerObjects::kSolidLightDiffuseFieldNumber;
-const int ManagerObjects::kSolidLightSpecularFieldNumber;
-const int ManagerObjects::kSolidLightAmbientStrengthFieldNumber;
-const int ManagerObjects::kSolidLightDiffuseStrengthFieldNumber;
-const int ManagerObjects::kSolidLightSpecularStrengthFieldNumber;
-const int ManagerObjects::kSolidLightMaterialColorColorPickerFieldNumber;
-const int ManagerObjects::kSolidLightAmbientColorPickerFieldNumber;
-const int ManagerObjects::kSolidLightDiffuseColorPickerFieldNumber;
-const int ManagerObjects::kSolidLightSpecularColorPickerFieldNumber;
-const int ManagerObjects::kSettingShowTerrainFieldNumber;
-const int ManagerObjects::kSettingTerrainModelFieldNumber;
-const int ManagerObjects::kSettingTerrainAnimateXFieldNumber;
-const int ManagerObjects::kSettingTerrainAnimateYFieldNumber;
-const int ManagerObjects::kHeightmapImageFieldNumber;
-const int ManagerObjects::kSettingTerrainWidthFieldNumber;
-const int ManagerObjects::kSettingTerrainHeightFieldNumber;
-const int ManagerObjects::kSettingShowSpaceshipFieldNumber;
-const int ManagerObjects::kSettingGenerateSpaceshipFieldNumber;
-const int ManagerObjects::kCameraFieldNumber;
-const int ManagerObjects::kGridFieldNumber;
-const int ManagerObjects::kLightsFieldNumber;
+const int GUISettings::kSettingFOVFieldNumber;
+const int GUISettings::kSettingOutlineThicknessFieldNumber;
+const int GUISettings::kSettingRatioWidthFieldNumber;
+const int GUISettings::kSettingRatioHeightFieldNumber;
+const int GUISettings::kSettingPlaneCloseFieldNumber;
+const int GUISettings::kSettingPlaneFarFieldNumber;
+const int GUISettings::kSettingGridSizeFieldNumber;
+const int GUISettings::kSettingSkyboxFieldNumber;
+const int GUISettings::kSettingOutlineColorFieldNumber;
+const int GUISettings::kSettingUIAmbientLightFieldNumber;
+const int GUISettings::kSettingFixedGridWorldFieldNumber;
+const int GUISettings::kSettingOutlineColorPickerOpenFieldNumber;
+const int GUISettings::kSettingShowAxisHelpersFieldNumber;
+const int GUISettings::kSettingsShowZAxisFieldNumber;
+const int GUISettings::kSettingDeferredTestModeFieldNumber;
+const int GUISettings::kSettingDeferredTestLightsFieldNumber;
+const int GUISettings::kSettingLightingPassDrawModeFieldNumber;
+const int GUISettings::kSettingDeferredTestLightsNumberFieldNumber;
+const int GUISettings::kSettingDeferredAmbientStrengthFieldNumber;
+const int GUISettings::kViewModelSkinFieldNumber;
+const int GUISettings::kSolidLightDirectionFieldNumber;
+const int GUISettings::kSolidLightMaterialColorFieldNumber;
+const int GUISettings::kSolidLightAmbientFieldNumber;
+const int GUISettings::kSolidLightDiffuseFieldNumber;
+const int GUISettings::kSolidLightSpecularFieldNumber;
+const int GUISettings::kSolidLightAmbientStrengthFieldNumber;
+const int GUISettings::kSolidLightDiffuseStrengthFieldNumber;
+const int GUISettings::kSolidLightSpecularStrengthFieldNumber;
+const int GUISettings::kSolidLightMaterialColorColorPickerFieldNumber;
+const int GUISettings::kSolidLightAmbientColorPickerFieldNumber;
+const int GUISettings::kSolidLightDiffuseColorPickerFieldNumber;
+const int GUISettings::kSolidLightSpecularColorPickerFieldNumber;
+const int GUISettings::kSettingShowTerrainFieldNumber;
+const int GUISettings::kSettingTerrainModelFieldNumber;
+const int GUISettings::kSettingTerrainAnimateXFieldNumber;
+const int GUISettings::kSettingTerrainAnimateYFieldNumber;
+const int GUISettings::kHeightmapImageFieldNumber;
+const int GUISettings::kSettingTerrainWidthFieldNumber;
+const int GUISettings::kSettingTerrainHeightFieldNumber;
+const int GUISettings::kSettingShowSpaceshipFieldNumber;
+const int GUISettings::kSettingGenerateSpaceshipFieldNumber;
+const int GUISettings::kCameraFieldNumber;
+const int GUISettings::kGridFieldNumber;
+const int GUISettings::kLightsFieldNumber;
 #endif  // !_MSC_VER
 
-ManagerObjects::ManagerObjects()
+GUISettings::GUISettings()
   : ::google::protobuf::Message() {
   SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(constructor:KuplungApp.GUISettings)
 }
 
-void ManagerObjects::InitAsDefaultInstance() {
+void GUISettings::InitAsDefaultInstance() {
   setting_outlinecolor_ = const_cast< ::KuplungApp::Vec4*>(&::KuplungApp::Vec4::default_instance());
   setting_uiambientlight_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
   solidlight_direction_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
@@ -410,14 +411,14 @@ void ManagerObjects::InitAsDefaultInstance() {
   grid_ = const_cast< ::KuplungApp::GridSettings*>(&::KuplungApp::GridSettings::default_instance());
 }
 
-ManagerObjects::ManagerObjects(const ManagerObjects& from)
+GUISettings::GUISettings(const GUISettings& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.GUISettings)
 }
 
-void ManagerObjects::SharedCtor() {
+void GUISettings::SharedCtor() {
   ::google::protobuf::internal::GetEmptyString();
   _cached_size_ = 0;
   setting_fov_ = 0;
@@ -466,12 +467,12 @@ void ManagerObjects::SharedCtor() {
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-ManagerObjects::~ManagerObjects() {
-  // @@protoc_insertion_point(destructor:KuplungApp.ManagerObjects)
+GUISettings::~GUISettings() {
+  // @@protoc_insertion_point(destructor:KuplungApp.GUISettings)
   SharedDtor();
 }
 
-void ManagerObjects::SharedDtor() {
+void GUISettings::SharedDtor() {
   if (heightmapimage_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete heightmapimage_;
   }
@@ -488,30 +489,30 @@ void ManagerObjects::SharedDtor() {
   }
 }
 
-void ManagerObjects::SetCachedSize(int size) const {
+void GUISettings::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* ManagerObjects::descriptor() {
+const ::google::protobuf::Descriptor* GUISettings::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return ManagerObjects_descriptor_;
+  return GUISettings_descriptor_;
 }
 
-const ManagerObjects& ManagerObjects::default_instance() {
+const GUISettings& GUISettings::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_KuplungAppSettings_2eproto();
   return *default_instance_;
 }
 
-ManagerObjects* ManagerObjects::default_instance_ = NULL;
+GUISettings* GUISettings::default_instance_ = NULL;
 
-ManagerObjects* ManagerObjects::New() const {
-  return new ManagerObjects;
+GUISettings* GUISettings::New() const {
+  return new GUISettings;
 }
 
-void ManagerObjects::Clear() {
+void GUISettings::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<ManagerObjects*>(16)->f) - \
+  &reinterpret_cast<GUISettings*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -584,11 +585,11 @@ void ManagerObjects::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool ManagerObjects::MergePartialFromCodedStream(
+bool GUISettings::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(parse_start:KuplungApp.GUISettings)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
@@ -1250,17 +1251,17 @@ bool ManagerObjects::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(parse_success:KuplungApp.GUISettings)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.GUISettings)
   return false;
 #undef DO_
 }
 
-void ManagerObjects::SerializeWithCachedSizes(
+void GUISettings::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.GUISettings)
   // required float Setting_FOV = 1;
   if (has_setting_fov()) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->setting_fov(), output);
@@ -1500,12 +1501,12 @@ void ManagerObjects::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.GUISettings)
 }
 
-::google::protobuf::uint8* ManagerObjects::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* GUISettings::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GUISettings)
   // required float Setting_FOV = 1;
   if (has_setting_fov()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->setting_fov(), target);
@@ -1756,11 +1757,11 @@ void ManagerObjects::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.GUISettings)
   return target;
 }
 
-int ManagerObjects::ByteSize() const {
+int GUISettings::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -2043,10 +2044,10 @@ int ManagerObjects::ByteSize() const {
   return total_size;
 }
 
-void ManagerObjects::MergeFrom(const ::google::protobuf::Message& from) {
+void GUISettings::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const ManagerObjects* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const ManagerObjects*>(
+  const GUISettings* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const GUISettings*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2055,7 +2056,7 @@ void ManagerObjects::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void ManagerObjects::MergeFrom(const ManagerObjects& from) {
+void GUISettings::MergeFrom(const GUISettings& from) {
   GOOGLE_CHECK_NE(&from, this);
   lights_.MergeFrom(from.lights_);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -2202,19 +2203,19 @@ void ManagerObjects::MergeFrom(const ManagerObjects& from) {
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void ManagerObjects::CopyFrom(const ::google::protobuf::Message& from) {
+void GUISettings::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void ManagerObjects::CopyFrom(const ManagerObjects& from) {
+void GUISettings::CopyFrom(const GUISettings& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool ManagerObjects::IsInitialized() const {
+bool GUISettings::IsInitialized() const {
   if ((_has_bits_[0] & 0xffffffff) != 0xffffffff) return false;
   if ((_has_bits_[1] & 0x000007ff) != 0x000007ff) return false;
 
@@ -2249,7 +2250,7 @@ bool ManagerObjects::IsInitialized() const {
   return true;
 }
 
-void ManagerObjects::Swap(ManagerObjects* other) {
+void GUISettings::Swap(GUISettings* other) {
   if (other != this) {
     std::swap(setting_fov_, other->setting_fov_);
     std::swap(setting_outlinethickness_, other->setting_outlinethickness_);
@@ -2302,11 +2303,11 @@ void ManagerObjects::Swap(ManagerObjects* other) {
   }
 }
 
-::google::protobuf::Metadata ManagerObjects::GetMetadata() const {
+::google::protobuf::Metadata GUISettings::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = ManagerObjects_descriptor_;
-  metadata.reflection = ManagerObjects_reflection_;
+  metadata.descriptor = GUISettings_descriptor_;
+  metadata.reflection = GUISettings_reflection_;
   return metadata;
 }
 
@@ -3901,6 +3902,7 @@ const int LightObject::kDescriptionFieldNumber;
 const int LightObject::kTypeFieldNumber;
 const int LightObject::kShowLampObjectFieldNumber;
 const int LightObject::kShowLampDirectionFieldNumber;
+const int LightObject::kShowInWireFieldNumber;
 const int LightObject::kPositionXFieldNumber;
 const int LightObject::kPositionYFieldNumber;
 const int LightObject::kPositionZFieldNumber;
@@ -3957,6 +3959,7 @@ void LightObject::SharedCtor() {
   type_ = 0;
   showlampobject_ = false;
   showlampdirection_ = false;
+  showinwire_ = false;
   positionx_ = NULL;
   positiony_ = NULL;
   positionz_ = NULL;
@@ -4039,7 +4042,7 @@ void LightObject::Clear() {
   } while (0)
 
   if (_has_bits_[0 / 32] & 255) {
-    ZR_(type_, showlampdirection_);
+    ZR_(type_, showinwire_);
     if (has_title()) {
       if (title_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
         title_->clear();
@@ -4056,11 +4059,11 @@ void LightObject::Clear() {
     if (has_positiony()) {
       if (positiony_ != NULL) positiony_->::KuplungApp::ObjectCoordinate::Clear();
     }
+  }
+  if (_has_bits_[8 / 32] & 65280) {
     if (has_positionz()) {
       if (positionz_ != NULL) positionz_->::KuplungApp::ObjectCoordinate::Clear();
     }
-  }
-  if (_has_bits_[8 / 32] & 65280) {
     if (has_directionx()) {
       if (directionx_ != NULL) directionx_->::KuplungApp::ObjectCoordinate::Clear();
     }
@@ -4082,11 +4085,11 @@ void LightObject::Clear() {
     if (has_rotatex()) {
       if (rotatex_ != NULL) rotatex_->::KuplungApp::ObjectCoordinate::Clear();
     }
+  }
+  if (_has_bits_[16 / 32] & 2031616) {
     if (has_rotatey()) {
       if (rotatey_ != NULL) rotatey_->::KuplungApp::ObjectCoordinate::Clear();
     }
-  }
-  if (_has_bits_[16 / 32] & 983040) {
     if (has_rotatez()) {
       if (rotatez_ != NULL) rotatez_->::KuplungApp::ObjectCoordinate::Clear();
     }
@@ -4192,195 +4195,210 @@ bool LightObject::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(50)) goto parse_positionX;
+        if (input->ExpectTag(48)) goto parse_showInWire;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate positionX = 6;
+      // required bool showInWire = 6;
       case 6: {
-        if (tag == 50) {
+        if (tag == 48) {
+         parse_showInWire:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &showinwire_)));
+          set_has_showinwire();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(58)) goto parse_positionX;
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate positionX = 7;
+      case 7: {
+        if (tag == 58) {
          parse_positionX:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(58)) goto parse_positionY;
+        if (input->ExpectTag(66)) goto parse_positionY;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate positionY = 7;
-      case 7: {
-        if (tag == 58) {
+      // required .KuplungApp.ObjectCoordinate positionY = 8;
+      case 8: {
+        if (tag == 66) {
          parse_positionY:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(66)) goto parse_positionZ;
+        if (input->ExpectTag(74)) goto parse_positionZ;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate positionZ = 8;
-      case 8: {
-        if (tag == 66) {
+      // required .KuplungApp.ObjectCoordinate positionZ = 9;
+      case 9: {
+        if (tag == 74) {
          parse_positionZ:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(74)) goto parse_directionX;
+        if (input->ExpectTag(82)) goto parse_directionX;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate directionX = 9;
-      case 9: {
-        if (tag == 74) {
+      // required .KuplungApp.ObjectCoordinate directionX = 10;
+      case 10: {
+        if (tag == 82) {
          parse_directionX:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionx()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(82)) goto parse_directionY;
+        if (input->ExpectTag(90)) goto parse_directionY;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate directionY = 10;
-      case 10: {
-        if (tag == 82) {
+      // required .KuplungApp.ObjectCoordinate directionY = 11;
+      case 11: {
+        if (tag == 90) {
          parse_directionY:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directiony()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(90)) goto parse_directionZ;
+        if (input->ExpectTag(98)) goto parse_directionZ;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate directionZ = 11;
-      case 11: {
-        if (tag == 90) {
+      // required .KuplungApp.ObjectCoordinate directionZ = 12;
+      case 12: {
+        if (tag == 98) {
          parse_directionZ:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionz()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(98)) goto parse_scaleX;
+        if (input->ExpectTag(106)) goto parse_scaleX;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate scaleX = 12;
-      case 12: {
-        if (tag == 98) {
+      // required .KuplungApp.ObjectCoordinate scaleX = 13;
+      case 13: {
+        if (tag == 106) {
          parse_scaleX:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalex()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(106)) goto parse_scaleY;
+        if (input->ExpectTag(114)) goto parse_scaleY;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate scaleY = 13;
-      case 13: {
-        if (tag == 106) {
+      // required .KuplungApp.ObjectCoordinate scaleY = 14;
+      case 14: {
+        if (tag == 114) {
          parse_scaleY:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scaley()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(114)) goto parse_scaleZ;
+        if (input->ExpectTag(122)) goto parse_scaleZ;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-      case 14: {
-        if (tag == 114) {
+      // required .KuplungApp.ObjectCoordinate scaleZ = 15;
+      case 15: {
+        if (tag == 122) {
          parse_scaleZ:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalez()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(122)) goto parse_rotateX;
+        if (input->ExpectTag(130)) goto parse_rotateX;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateX = 15;
-      case 15: {
-        if (tag == 122) {
+      // required .KuplungApp.ObjectCoordinate rotateX = 16;
+      case 16: {
+        if (tag == 130) {
          parse_rotateX:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(130)) goto parse_rotateY;
+        if (input->ExpectTag(138)) goto parse_rotateY;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateY = 16;
-      case 16: {
-        if (tag == 130) {
+      // required .KuplungApp.ObjectCoordinate rotateY = 17;
+      case 17: {
+        if (tag == 138) {
          parse_rotateY:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(138)) goto parse_rotateZ;
+        if (input->ExpectTag(146)) goto parse_rotateZ;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-      case 17: {
-        if (tag == 138) {
+      // required .KuplungApp.ObjectCoordinate rotateZ = 18;
+      case 18: {
+        if (tag == 146) {
          parse_rotateZ:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(146)) goto parse_rotateCenterX;
+        if (input->ExpectTag(154)) goto parse_rotateCenterX;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
-      case 18: {
-        if (tag == 146) {
+      // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
+      case 19: {
+        if (tag == 154) {
          parse_rotateCenterX:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterx()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(154)) goto parse_rotateCenterY;
+        if (input->ExpectTag(162)) goto parse_rotateCenterY;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
-      case 19: {
-        if (tag == 154) {
+      // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
+      case 20: {
+        if (tag == 162) {
          parse_rotateCenterY:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecentery()));
         } else {
           goto handle_unusual;
         }
-        if (input->ExpectTag(162)) goto parse_rotateCenterZ;
+        if (input->ExpectTag(170)) goto parse_rotateCenterZ;
         break;
       }
 
-      // required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
-      case 20: {
-        if (tag == 162) {
+      // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
+      case 21: {
+        if (tag == 170) {
          parse_rotateCenterZ:
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterz()));
@@ -4451,94 +4469,99 @@ void LightObject::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->showlampdirection(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionX = 6;
+  // required bool showInWire = 6;
+  if (has_showinwire()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->showinwire(), output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate positionX = 7;
   if (has_positionx()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, this->positionx(), output);
+      7, this->positionx(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionY = 7;
+  // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (has_positiony()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, this->positiony(), output);
+      8, this->positiony(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionZ = 8;
+  // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (has_positionz()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, this->positionz(), output);
+      9, this->positionz(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionX = 9;
+  // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (has_directionx()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, this->directionx(), output);
+      10, this->directionx(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionY = 10;
+  // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (has_directiony()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->directiony(), output);
+      11, this->directiony(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionZ = 11;
+  // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (has_directionz()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->directionz(), output);
+      12, this->directionz(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleX = 12;
+  // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (has_scalex()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, this->scalex(), output);
+      13, this->scalex(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleY = 13;
+  // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (has_scaley()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, this->scaley(), output);
+      14, this->scaley(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleZ = 14;
+  // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (has_scalez()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, this->scalez(), output);
+      15, this->scalez(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateX = 15;
+  // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (has_rotatex()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, this->rotatex(), output);
+      16, this->rotatex(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateY = 16;
+  // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (has_rotatey()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      16, this->rotatey(), output);
+      17, this->rotatey(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateZ = 17;
+  // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (has_rotatez()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, this->rotatez(), output);
+      18, this->rotatez(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
+  // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (has_rotatecenterx()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      18, this->rotatecenterx(), output);
+      19, this->rotatecenterx(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
+  // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (has_rotatecentery()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      19, this->rotatecentery(), output);
+      20, this->rotatecentery(), output);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
+  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (has_rotatecenterz()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, this->rotatecenterz(), output);
+      21, this->rotatecenterz(), output);
   }
 
   if (!unknown_fields().empty()) {
@@ -4588,109 +4611,114 @@ void LightObject::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->showlampdirection(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionX = 6;
+  // required bool showInWire = 6;
+  if (has_showinwire()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->showinwire(), target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate positionX = 7;
   if (has_positionx()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        6, this->positionx(), target);
+        7, this->positionx(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionY = 7;
+  // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (has_positiony()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        7, this->positiony(), target);
+        8, this->positiony(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate positionZ = 8;
+  // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (has_positionz()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        8, this->positionz(), target);
+        9, this->positionz(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionX = 9;
+  // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (has_directionx()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        9, this->directionx(), target);
+        10, this->directionx(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionY = 10;
+  // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (has_directiony()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        10, this->directiony(), target);
+        11, this->directiony(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate directionZ = 11;
+  // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (has_directionz()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        11, this->directionz(), target);
+        12, this->directionz(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleX = 12;
+  // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (has_scalex()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        12, this->scalex(), target);
+        13, this->scalex(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleY = 13;
+  // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (has_scaley()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        13, this->scaley(), target);
+        14, this->scaley(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate scaleZ = 14;
+  // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (has_scalez()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        14, this->scalez(), target);
+        15, this->scalez(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateX = 15;
+  // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (has_rotatex()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        15, this->rotatex(), target);
+        16, this->rotatex(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateY = 16;
+  // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (has_rotatey()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        16, this->rotatey(), target);
+        17, this->rotatey(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateZ = 17;
+  // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (has_rotatez()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        17, this->rotatez(), target);
+        18, this->rotatez(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
+  // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (has_rotatecenterx()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        18, this->rotatecenterx(), target);
+        19, this->rotatecenterx(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
+  // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (has_rotatecentery()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        19, this->rotatecentery(), target);
+        20, this->rotatecentery(), target);
   }
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
+  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (has_rotatecenterz()) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
-        20, this->rotatecenterz(), target);
+        21, this->rotatecenterz(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -4736,109 +4764,114 @@ int LightObject::ByteSize() const {
       total_size += 1 + 1;
     }
 
-    // required .KuplungApp.ObjectCoordinate positionX = 6;
+    // required bool showInWire = 6;
+    if (has_showinwire()) {
+      total_size += 1 + 1;
+    }
+
+    // required .KuplungApp.ObjectCoordinate positionX = 7;
     if (has_positionx()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->positionx());
     }
 
-    // required .KuplungApp.ObjectCoordinate positionY = 7;
+    // required .KuplungApp.ObjectCoordinate positionY = 8;
     if (has_positiony()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->positiony());
     }
 
-    // required .KuplungApp.ObjectCoordinate positionZ = 8;
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required .KuplungApp.ObjectCoordinate positionZ = 9;
     if (has_positionz()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->positionz());
     }
 
-  }
-  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
-    // required .KuplungApp.ObjectCoordinate directionX = 9;
+    // required .KuplungApp.ObjectCoordinate directionX = 10;
     if (has_directionx()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->directionx());
     }
 
-    // required .KuplungApp.ObjectCoordinate directionY = 10;
+    // required .KuplungApp.ObjectCoordinate directionY = 11;
     if (has_directiony()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->directiony());
     }
 
-    // required .KuplungApp.ObjectCoordinate directionZ = 11;
+    // required .KuplungApp.ObjectCoordinate directionZ = 12;
     if (has_directionz()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->directionz());
     }
 
-    // required .KuplungApp.ObjectCoordinate scaleX = 12;
+    // required .KuplungApp.ObjectCoordinate scaleX = 13;
     if (has_scalex()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->scalex());
     }
 
-    // required .KuplungApp.ObjectCoordinate scaleY = 13;
+    // required .KuplungApp.ObjectCoordinate scaleY = 14;
     if (has_scaley()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->scaley());
     }
 
-    // required .KuplungApp.ObjectCoordinate scaleZ = 14;
+    // required .KuplungApp.ObjectCoordinate scaleZ = 15;
     if (has_scalez()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->scalez());
     }
 
-    // required .KuplungApp.ObjectCoordinate rotateX = 15;
+    // required .KuplungApp.ObjectCoordinate rotateX = 16;
     if (has_rotatex()) {
-      total_size += 1 +
+      total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->rotatex());
     }
 
-    // required .KuplungApp.ObjectCoordinate rotateY = 16;
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    // required .KuplungApp.ObjectCoordinate rotateY = 17;
     if (has_rotatey()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->rotatey());
     }
 
-  }
-  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
-    // required .KuplungApp.ObjectCoordinate rotateZ = 17;
+    // required .KuplungApp.ObjectCoordinate rotateZ = 18;
     if (has_rotatez()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->rotatez());
     }
 
-    // required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
+    // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
     if (has_rotatecenterx()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->rotatecenterx());
     }
 
-    // required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
+    // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
     if (has_rotatecentery()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
           this->rotatecentery());
     }
 
-    // required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
+    // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
     if (has_rotatecenterz()) {
       total_size += 2 +
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
@@ -4887,17 +4920,20 @@ void LightObject::MergeFrom(const LightObject& from) {
     if (from.has_showlampdirection()) {
       set_showlampdirection(from.showlampdirection());
     }
+    if (from.has_showinwire()) {
+      set_showinwire(from.showinwire());
+    }
     if (from.has_positionx()) {
       mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
     }
     if (from.has_positiony()) {
       mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
     }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_positionz()) {
       mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
     }
-  }
-  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
     if (from.has_directionx()) {
       mutable_directionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directionx());
     }
@@ -4919,11 +4955,11 @@ void LightObject::MergeFrom(const LightObject& from) {
     if (from.has_rotatex()) {
       mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
     }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_rotatey()) {
       mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
     }
-  }
-  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
     if (from.has_rotatez()) {
       mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
     }
@@ -4953,7 +4989,7 @@ void LightObject::CopyFrom(const LightObject& from) {
 }
 
 bool LightObject::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000fffff) != 0x000fffff) return false;
+  if ((_has_bits_[0] & 0x001fffff) != 0x001fffff) return false;
 
   if (has_positionx()) {
     if (!this->positionx().IsInitialized()) return false;
@@ -5010,6 +5046,7 @@ void LightObject::Swap(LightObject* other) {
     std::swap(type_, other->type_);
     std::swap(showlampobject_, other->showlampobject_);
     std::swap(showlampdirection_, other->showlampdirection_);
+    std::swap(showinwire_, other->showinwire_);
     std::swap(positionx_, other->positionx_);
     std::swap(positiony_, other->positiony_);
     std::swap(positionz_, other->positionz_);

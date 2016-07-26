@@ -6,7 +6,7 @@ package KuplungApp;
 
 import "KuplungDefinitions.proto";
 
-message ManagerObjects {
+message GUISettings {
   required float Setting_FOV = 1;
   required float Setting_OutlineThickness = 2;
   required float Setting_RatioWidth = 3;
@@ -97,24 +97,25 @@ message LightObject {
   required int32 type = 3;
   required bool showLampObject = 4;
   required bool showLampDirection = 5;
+  required bool showInWire = 6;
 
-  required ObjectCoordinate positionX = 6;
-  required ObjectCoordinate positionY = 7;
-  required ObjectCoordinate positionZ = 8;
+  required ObjectCoordinate positionX = 7;
+  required ObjectCoordinate positionY = 8;
+  required ObjectCoordinate positionZ = 9;
   
-  required ObjectCoordinate directionX = 9;
-  required ObjectCoordinate directionY = 10;
-  required ObjectCoordinate directionZ = 11;
+  required ObjectCoordinate directionX = 10;
+  required ObjectCoordinate directionY = 11;
+  required ObjectCoordinate directionZ = 12;
 
-  required ObjectCoordinate scaleX = 12;
-  required ObjectCoordinate scaleY = 13;
-  required ObjectCoordinate scaleZ = 14;
+  required ObjectCoordinate scaleX = 13;
+  required ObjectCoordinate scaleY = 14;
+  required ObjectCoordinate scaleZ = 15;
 
-  required ObjectCoordinate rotateX = 15;
-  required ObjectCoordinate rotateY = 16;
-  required ObjectCoordinate rotateZ = 17;
+  required ObjectCoordinate rotateX = 16;
+  required ObjectCoordinate rotateY = 17;
+  required ObjectCoordinate rotateZ = 18;
   
-  required ObjectCoordinate rotateCenterX = 18;
-  required ObjectCoordinate rotateCenterY = 19;
-  required ObjectCoordinate rotateCenterZ = 20;
+  required ObjectCoordinate rotateCenterX = 19;
+  required ObjectCoordinate rotateCenterY = 20;
+  required ObjectCoordinate rotateCenterZ = 21;
 }

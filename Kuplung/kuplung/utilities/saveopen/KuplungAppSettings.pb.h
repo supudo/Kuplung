@@ -34,21 +34,21 @@ void  protobuf_AddDesc_KuplungAppSettings_2eproto();
 void protobuf_AssignDesc_KuplungAppSettings_2eproto();
 void protobuf_ShutdownFile_KuplungAppSettings_2eproto();
 
-class ManagerObjects;
+class GUISettings;
 class CameraSettings;
 class GridSettings;
 class LightObject;
 
 // ===================================================================
 
-class ManagerObjects : public ::google::protobuf::Message {
+class GUISettings : public ::google::protobuf::Message {
  public:
-  ManagerObjects();
-  virtual ~ManagerObjects();
+  GUISettings();
+  virtual ~GUISettings();
 
-  ManagerObjects(const ManagerObjects& from);
+  GUISettings(const GUISettings& from);
 
-  inline ManagerObjects& operator=(const ManagerObjects& from) {
+  inline GUISettings& operator=(const GUISettings& from) {
     CopyFrom(from);
     return *this;
   }
@@ -62,17 +62,17 @@ class ManagerObjects : public ::google::protobuf::Message {
   }
 
   static const ::google::protobuf::Descriptor* descriptor();
-  static const ManagerObjects& default_instance();
+  static const GUISettings& default_instance();
 
-  void Swap(ManagerObjects* other);
+  void Swap(GUISettings* other);
 
   // implements Message ----------------------------------------------
 
-  ManagerObjects* New() const;
+  GUISettings* New() const;
   void CopyFrom(const ::google::protobuf::Message& from);
   void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const ManagerObjects& from);
-  void MergeFrom(const ManagerObjects& from);
+  void CopyFrom(const GUISettings& from);
+  void MergeFrom(const GUISettings& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -430,7 +430,7 @@ class ManagerObjects : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::LightObject >*
       mutable_lights();
 
-  // @@protoc_insertion_point(class_scope:KuplungApp.ManagerObjects)
+  // @@protoc_insertion_point(class_scope:KuplungApp.GUISettings)
  private:
   inline void set_has_setting_fov();
   inline void clear_has_setting_fov();
@@ -572,7 +572,7 @@ class ManagerObjects : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_KuplungAppSettings_2eproto();
 
   void InitAsDefaultInstance();
-  static ManagerObjects* default_instance_;
+  static GUISettings* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1116,136 +1116,143 @@ class LightObject : public ::google::protobuf::Message {
   inline bool showlampdirection() const;
   inline void set_showlampdirection(bool value);
 
-  // required .KuplungApp.ObjectCoordinate positionX = 6;
+  // required bool showInWire = 6;
+  inline bool has_showinwire() const;
+  inline void clear_showinwire();
+  static const int kShowInWireFieldNumber = 6;
+  inline bool showinwire() const;
+  inline void set_showinwire(bool value);
+
+  // required .KuplungApp.ObjectCoordinate positionX = 7;
   inline bool has_positionx() const;
   inline void clear_positionx();
-  static const int kPositionXFieldNumber = 6;
+  static const int kPositionXFieldNumber = 7;
   inline const ::KuplungApp::ObjectCoordinate& positionx() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_positionx();
   inline ::KuplungApp::ObjectCoordinate* release_positionx();
   inline void set_allocated_positionx(::KuplungApp::ObjectCoordinate* positionx);
 
-  // required .KuplungApp.ObjectCoordinate positionY = 7;
+  // required .KuplungApp.ObjectCoordinate positionY = 8;
   inline bool has_positiony() const;
   inline void clear_positiony();
-  static const int kPositionYFieldNumber = 7;
+  static const int kPositionYFieldNumber = 8;
   inline const ::KuplungApp::ObjectCoordinate& positiony() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_positiony();
   inline ::KuplungApp::ObjectCoordinate* release_positiony();
   inline void set_allocated_positiony(::KuplungApp::ObjectCoordinate* positiony);
 
-  // required .KuplungApp.ObjectCoordinate positionZ = 8;
+  // required .KuplungApp.ObjectCoordinate positionZ = 9;
   inline bool has_positionz() const;
   inline void clear_positionz();
-  static const int kPositionZFieldNumber = 8;
+  static const int kPositionZFieldNumber = 9;
   inline const ::KuplungApp::ObjectCoordinate& positionz() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_positionz();
   inline ::KuplungApp::ObjectCoordinate* release_positionz();
   inline void set_allocated_positionz(::KuplungApp::ObjectCoordinate* positionz);
 
-  // required .KuplungApp.ObjectCoordinate directionX = 9;
+  // required .KuplungApp.ObjectCoordinate directionX = 10;
   inline bool has_directionx() const;
   inline void clear_directionx();
-  static const int kDirectionXFieldNumber = 9;
+  static const int kDirectionXFieldNumber = 10;
   inline const ::KuplungApp::ObjectCoordinate& directionx() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_directionx();
   inline ::KuplungApp::ObjectCoordinate* release_directionx();
   inline void set_allocated_directionx(::KuplungApp::ObjectCoordinate* directionx);
 
-  // required .KuplungApp.ObjectCoordinate directionY = 10;
+  // required .KuplungApp.ObjectCoordinate directionY = 11;
   inline bool has_directiony() const;
   inline void clear_directiony();
-  static const int kDirectionYFieldNumber = 10;
+  static const int kDirectionYFieldNumber = 11;
   inline const ::KuplungApp::ObjectCoordinate& directiony() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_directiony();
   inline ::KuplungApp::ObjectCoordinate* release_directiony();
   inline void set_allocated_directiony(::KuplungApp::ObjectCoordinate* directiony);
 
-  // required .KuplungApp.ObjectCoordinate directionZ = 11;
+  // required .KuplungApp.ObjectCoordinate directionZ = 12;
   inline bool has_directionz() const;
   inline void clear_directionz();
-  static const int kDirectionZFieldNumber = 11;
+  static const int kDirectionZFieldNumber = 12;
   inline const ::KuplungApp::ObjectCoordinate& directionz() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_directionz();
   inline ::KuplungApp::ObjectCoordinate* release_directionz();
   inline void set_allocated_directionz(::KuplungApp::ObjectCoordinate* directionz);
 
-  // required .KuplungApp.ObjectCoordinate scaleX = 12;
+  // required .KuplungApp.ObjectCoordinate scaleX = 13;
   inline bool has_scalex() const;
   inline void clear_scalex();
-  static const int kScaleXFieldNumber = 12;
+  static const int kScaleXFieldNumber = 13;
   inline const ::KuplungApp::ObjectCoordinate& scalex() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_scalex();
   inline ::KuplungApp::ObjectCoordinate* release_scalex();
   inline void set_allocated_scalex(::KuplungApp::ObjectCoordinate* scalex);
 
-  // required .KuplungApp.ObjectCoordinate scaleY = 13;
+  // required .KuplungApp.ObjectCoordinate scaleY = 14;
   inline bool has_scaley() const;
   inline void clear_scaley();
-  static const int kScaleYFieldNumber = 13;
+  static const int kScaleYFieldNumber = 14;
   inline const ::KuplungApp::ObjectCoordinate& scaley() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_scaley();
   inline ::KuplungApp::ObjectCoordinate* release_scaley();
   inline void set_allocated_scaley(::KuplungApp::ObjectCoordinate* scaley);
 
-  // required .KuplungApp.ObjectCoordinate scaleZ = 14;
+  // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   inline bool has_scalez() const;
   inline void clear_scalez();
-  static const int kScaleZFieldNumber = 14;
+  static const int kScaleZFieldNumber = 15;
   inline const ::KuplungApp::ObjectCoordinate& scalez() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_scalez();
   inline ::KuplungApp::ObjectCoordinate* release_scalez();
   inline void set_allocated_scalez(::KuplungApp::ObjectCoordinate* scalez);
 
-  // required .KuplungApp.ObjectCoordinate rotateX = 15;
+  // required .KuplungApp.ObjectCoordinate rotateX = 16;
   inline bool has_rotatex() const;
   inline void clear_rotatex();
-  static const int kRotateXFieldNumber = 15;
+  static const int kRotateXFieldNumber = 16;
   inline const ::KuplungApp::ObjectCoordinate& rotatex() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatex();
   inline ::KuplungApp::ObjectCoordinate* release_rotatex();
   inline void set_allocated_rotatex(::KuplungApp::ObjectCoordinate* rotatex);
 
-  // required .KuplungApp.ObjectCoordinate rotateY = 16;
+  // required .KuplungApp.ObjectCoordinate rotateY = 17;
   inline bool has_rotatey() const;
   inline void clear_rotatey();
-  static const int kRotateYFieldNumber = 16;
+  static const int kRotateYFieldNumber = 17;
   inline const ::KuplungApp::ObjectCoordinate& rotatey() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatey();
   inline ::KuplungApp::ObjectCoordinate* release_rotatey();
   inline void set_allocated_rotatey(::KuplungApp::ObjectCoordinate* rotatey);
 
-  // required .KuplungApp.ObjectCoordinate rotateZ = 17;
+  // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   inline bool has_rotatez() const;
   inline void clear_rotatez();
-  static const int kRotateZFieldNumber = 17;
+  static const int kRotateZFieldNumber = 18;
   inline const ::KuplungApp::ObjectCoordinate& rotatez() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatez();
   inline ::KuplungApp::ObjectCoordinate* release_rotatez();
   inline void set_allocated_rotatez(::KuplungApp::ObjectCoordinate* rotatez);
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
+  // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   inline bool has_rotatecenterx() const;
   inline void clear_rotatecenterx();
-  static const int kRotateCenterXFieldNumber = 18;
+  static const int kRotateCenterXFieldNumber = 19;
   inline const ::KuplungApp::ObjectCoordinate& rotatecenterx() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatecenterx();
   inline ::KuplungApp::ObjectCoordinate* release_rotatecenterx();
   inline void set_allocated_rotatecenterx(::KuplungApp::ObjectCoordinate* rotatecenterx);
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
+  // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   inline bool has_rotatecentery() const;
   inline void clear_rotatecentery();
-  static const int kRotateCenterYFieldNumber = 19;
+  static const int kRotateCenterYFieldNumber = 20;
   inline const ::KuplungApp::ObjectCoordinate& rotatecentery() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatecentery();
   inline ::KuplungApp::ObjectCoordinate* release_rotatecentery();
   inline void set_allocated_rotatecentery(::KuplungApp::ObjectCoordinate* rotatecentery);
 
-  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
+  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   inline bool has_rotatecenterz() const;
   inline void clear_rotatecenterz();
-  static const int kRotateCenterZFieldNumber = 20;
+  static const int kRotateCenterZFieldNumber = 21;
   inline const ::KuplungApp::ObjectCoordinate& rotatecenterz() const;
   inline ::KuplungApp::ObjectCoordinate* mutable_rotatecenterz();
   inline ::KuplungApp::ObjectCoordinate* release_rotatecenterz();
@@ -1263,6 +1270,8 @@ class LightObject : public ::google::protobuf::Message {
   inline void clear_has_showlampobject();
   inline void set_has_showlampdirection();
   inline void clear_has_showlampdirection();
+  inline void set_has_showinwire();
+  inline void clear_has_showinwire();
   inline void set_has_positionx();
   inline void clear_has_positionx();
   inline void set_has_positiony();
@@ -1303,6 +1312,7 @@ class LightObject : public ::google::protobuf::Message {
   ::google::protobuf::int32 type_;
   bool showlampobject_;
   bool showlampdirection_;
+  bool showinwire_;
   ::KuplungApp::ObjectCoordinate* positionx_;
   ::KuplungApp::ObjectCoordinate* positiony_;
   ::KuplungApp::ObjectCoordinate* positionz_;
@@ -1330,231 +1340,231 @@ class LightObject : public ::google::protobuf::Message {
 
 // ===================================================================
 
-// ManagerObjects
+// GUISettings
 
 // required float Setting_FOV = 1;
-inline bool ManagerObjects::has_setting_fov() const {
+inline bool GUISettings::has_setting_fov() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void ManagerObjects::set_has_setting_fov() {
+inline void GUISettings::set_has_setting_fov() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void ManagerObjects::clear_has_setting_fov() {
+inline void GUISettings::clear_has_setting_fov() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void ManagerObjects::clear_setting_fov() {
+inline void GUISettings::clear_setting_fov() {
   setting_fov_ = 0;
   clear_has_setting_fov();
 }
-inline float ManagerObjects::setting_fov() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_FOV)
+inline float GUISettings::setting_fov() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_FOV)
   return setting_fov_;
 }
-inline void ManagerObjects::set_setting_fov(float value) {
+inline void GUISettings::set_setting_fov(float value) {
   set_has_setting_fov();
   setting_fov_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_FOV)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_FOV)
 }
 
 // required float Setting_OutlineThickness = 2;
-inline bool ManagerObjects::has_setting_outlinethickness() const {
+inline bool GUISettings::has_setting_outlinethickness() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void ManagerObjects::set_has_setting_outlinethickness() {
+inline void GUISettings::set_has_setting_outlinethickness() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void ManagerObjects::clear_has_setting_outlinethickness() {
+inline void GUISettings::clear_has_setting_outlinethickness() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void ManagerObjects::clear_setting_outlinethickness() {
+inline void GUISettings::clear_setting_outlinethickness() {
   setting_outlinethickness_ = 0;
   clear_has_setting_outlinethickness();
 }
-inline float ManagerObjects::setting_outlinethickness() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_OutlineThickness)
+inline float GUISettings::setting_outlinethickness() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_OutlineThickness)
   return setting_outlinethickness_;
 }
-inline void ManagerObjects::set_setting_outlinethickness(float value) {
+inline void GUISettings::set_setting_outlinethickness(float value) {
   set_has_setting_outlinethickness();
   setting_outlinethickness_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_OutlineThickness)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_OutlineThickness)
 }
 
 // required float Setting_RatioWidth = 3;
-inline bool ManagerObjects::has_setting_ratiowidth() const {
+inline bool GUISettings::has_setting_ratiowidth() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void ManagerObjects::set_has_setting_ratiowidth() {
+inline void GUISettings::set_has_setting_ratiowidth() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void ManagerObjects::clear_has_setting_ratiowidth() {
+inline void GUISettings::clear_has_setting_ratiowidth() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void ManagerObjects::clear_setting_ratiowidth() {
+inline void GUISettings::clear_setting_ratiowidth() {
   setting_ratiowidth_ = 0;
   clear_has_setting_ratiowidth();
 }
-inline float ManagerObjects::setting_ratiowidth() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_RatioWidth)
+inline float GUISettings::setting_ratiowidth() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_RatioWidth)
   return setting_ratiowidth_;
 }
-inline void ManagerObjects::set_setting_ratiowidth(float value) {
+inline void GUISettings::set_setting_ratiowidth(float value) {
   set_has_setting_ratiowidth();
   setting_ratiowidth_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_RatioWidth)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_RatioWidth)
 }
 
 // required float Setting_RatioHeight = 4;
-inline bool ManagerObjects::has_setting_ratioheight() const {
+inline bool GUISettings::has_setting_ratioheight() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void ManagerObjects::set_has_setting_ratioheight() {
+inline void GUISettings::set_has_setting_ratioheight() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void ManagerObjects::clear_has_setting_ratioheight() {
+inline void GUISettings::clear_has_setting_ratioheight() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void ManagerObjects::clear_setting_ratioheight() {
+inline void GUISettings::clear_setting_ratioheight() {
   setting_ratioheight_ = 0;
   clear_has_setting_ratioheight();
 }
-inline float ManagerObjects::setting_ratioheight() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_RatioHeight)
+inline float GUISettings::setting_ratioheight() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_RatioHeight)
   return setting_ratioheight_;
 }
-inline void ManagerObjects::set_setting_ratioheight(float value) {
+inline void GUISettings::set_setting_ratioheight(float value) {
   set_has_setting_ratioheight();
   setting_ratioheight_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_RatioHeight)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_RatioHeight)
 }
 
 // required float Setting_PlaneClose = 5;
-inline bool ManagerObjects::has_setting_planeclose() const {
+inline bool GUISettings::has_setting_planeclose() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void ManagerObjects::set_has_setting_planeclose() {
+inline void GUISettings::set_has_setting_planeclose() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void ManagerObjects::clear_has_setting_planeclose() {
+inline void GUISettings::clear_has_setting_planeclose() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void ManagerObjects::clear_setting_planeclose() {
+inline void GUISettings::clear_setting_planeclose() {
   setting_planeclose_ = 0;
   clear_has_setting_planeclose();
 }
-inline float ManagerObjects::setting_planeclose() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_PlaneClose)
+inline float GUISettings::setting_planeclose() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_PlaneClose)
   return setting_planeclose_;
 }
-inline void ManagerObjects::set_setting_planeclose(float value) {
+inline void GUISettings::set_setting_planeclose(float value) {
   set_has_setting_planeclose();
   setting_planeclose_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_PlaneClose)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_PlaneClose)
 }
 
 // required float Setting_PlaneFar = 6;
-inline bool ManagerObjects::has_setting_planefar() const {
+inline bool GUISettings::has_setting_planefar() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void ManagerObjects::set_has_setting_planefar() {
+inline void GUISettings::set_has_setting_planefar() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void ManagerObjects::clear_has_setting_planefar() {
+inline void GUISettings::clear_has_setting_planefar() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void ManagerObjects::clear_setting_planefar() {
+inline void GUISettings::clear_setting_planefar() {
   setting_planefar_ = 0;
   clear_has_setting_planefar();
 }
-inline float ManagerObjects::setting_planefar() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_PlaneFar)
+inline float GUISettings::setting_planefar() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_PlaneFar)
   return setting_planefar_;
 }
-inline void ManagerObjects::set_setting_planefar(float value) {
+inline void GUISettings::set_setting_planefar(float value) {
   set_has_setting_planefar();
   setting_planefar_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_PlaneFar)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_PlaneFar)
 }
 
 // required int32 Setting_GridSize = 7;
-inline bool ManagerObjects::has_setting_gridsize() const {
+inline bool GUISettings::has_setting_gridsize() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void ManagerObjects::set_has_setting_gridsize() {
+inline void GUISettings::set_has_setting_gridsize() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void ManagerObjects::clear_has_setting_gridsize() {
+inline void GUISettings::clear_has_setting_gridsize() {
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void ManagerObjects::clear_setting_gridsize() {
+inline void GUISettings::clear_setting_gridsize() {
   setting_gridsize_ = 0;
   clear_has_setting_gridsize();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_gridsize() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_GridSize)
+inline ::google::protobuf::int32 GUISettings::setting_gridsize() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_GridSize)
   return setting_gridsize_;
 }
-inline void ManagerObjects::set_setting_gridsize(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_gridsize(::google::protobuf::int32 value) {
   set_has_setting_gridsize();
   setting_gridsize_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_GridSize)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_GridSize)
 }
 
 // required int32 Setting_Skybox = 8;
-inline bool ManagerObjects::has_setting_skybox() const {
+inline bool GUISettings::has_setting_skybox() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void ManagerObjects::set_has_setting_skybox() {
+inline void GUISettings::set_has_setting_skybox() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void ManagerObjects::clear_has_setting_skybox() {
+inline void GUISettings::clear_has_setting_skybox() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void ManagerObjects::clear_setting_skybox() {
+inline void GUISettings::clear_setting_skybox() {
   setting_skybox_ = 0;
   clear_has_setting_skybox();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_skybox() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_Skybox)
+inline ::google::protobuf::int32 GUISettings::setting_skybox() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_Skybox)
   return setting_skybox_;
 }
-inline void ManagerObjects::set_setting_skybox(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_skybox(::google::protobuf::int32 value) {
   set_has_setting_skybox();
   setting_skybox_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_Skybox)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_Skybox)
 }
 
 // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
-inline bool ManagerObjects::has_setting_outlinecolor() const {
+inline bool GUISettings::has_setting_outlinecolor() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void ManagerObjects::set_has_setting_outlinecolor() {
+inline void GUISettings::set_has_setting_outlinecolor() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void ManagerObjects::clear_has_setting_outlinecolor() {
+inline void GUISettings::clear_has_setting_outlinecolor() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void ManagerObjects::clear_setting_outlinecolor() {
+inline void GUISettings::clear_setting_outlinecolor() {
   if (setting_outlinecolor_ != NULL) setting_outlinecolor_->::KuplungApp::Vec4::Clear();
   clear_has_setting_outlinecolor();
 }
-inline const ::KuplungApp::Vec4& ManagerObjects::setting_outlinecolor() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_OutlineColor)
+inline const ::KuplungApp::Vec4& GUISettings::setting_outlinecolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_OutlineColor)
   return setting_outlinecolor_ != NULL ? *setting_outlinecolor_ : *default_instance_->setting_outlinecolor_;
 }
-inline ::KuplungApp::Vec4* ManagerObjects::mutable_setting_outlinecolor() {
+inline ::KuplungApp::Vec4* GUISettings::mutable_setting_outlinecolor() {
   set_has_setting_outlinecolor();
   if (setting_outlinecolor_ == NULL) setting_outlinecolor_ = new ::KuplungApp::Vec4;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.Setting_OutlineColor)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.Setting_OutlineColor)
   return setting_outlinecolor_;
 }
-inline ::KuplungApp::Vec4* ManagerObjects::release_setting_outlinecolor() {
+inline ::KuplungApp::Vec4* GUISettings::release_setting_outlinecolor() {
   clear_has_setting_outlinecolor();
   ::KuplungApp::Vec4* temp = setting_outlinecolor_;
   setting_outlinecolor_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_setting_outlinecolor(::KuplungApp::Vec4* setting_outlinecolor) {
+inline void GUISettings::set_allocated_setting_outlinecolor(::KuplungApp::Vec4* setting_outlinecolor) {
   delete setting_outlinecolor_;
   setting_outlinecolor_ = setting_outlinecolor;
   if (setting_outlinecolor) {
@@ -1562,40 +1572,40 @@ inline void ManagerObjects::set_allocated_setting_outlinecolor(::KuplungApp::Vec
   } else {
     clear_has_setting_outlinecolor();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.Setting_OutlineColor)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.Setting_OutlineColor)
 }
 
 // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
-inline bool ManagerObjects::has_setting_uiambientlight() const {
+inline bool GUISettings::has_setting_uiambientlight() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void ManagerObjects::set_has_setting_uiambientlight() {
+inline void GUISettings::set_has_setting_uiambientlight() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void ManagerObjects::clear_has_setting_uiambientlight() {
+inline void GUISettings::clear_has_setting_uiambientlight() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void ManagerObjects::clear_setting_uiambientlight() {
+inline void GUISettings::clear_setting_uiambientlight() {
   if (setting_uiambientlight_ != NULL) setting_uiambientlight_->::KuplungApp::Vec3::Clear();
   clear_has_setting_uiambientlight();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::setting_uiambientlight() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_UIAmbientLight)
+inline const ::KuplungApp::Vec3& GUISettings::setting_uiambientlight() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_UIAmbientLight)
   return setting_uiambientlight_ != NULL ? *setting_uiambientlight_ : *default_instance_->setting_uiambientlight_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_setting_uiambientlight() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_setting_uiambientlight() {
   set_has_setting_uiambientlight();
   if (setting_uiambientlight_ == NULL) setting_uiambientlight_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.Setting_UIAmbientLight)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.Setting_UIAmbientLight)
   return setting_uiambientlight_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_setting_uiambientlight() {
+inline ::KuplungApp::Vec3* GUISettings::release_setting_uiambientlight() {
   clear_has_setting_uiambientlight();
   ::KuplungApp::Vec3* temp = setting_uiambientlight_;
   setting_uiambientlight_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_setting_uiambientlight(::KuplungApp::Vec3* setting_uiambientlight) {
+inline void GUISettings::set_allocated_setting_uiambientlight(::KuplungApp::Vec3* setting_uiambientlight) {
   delete setting_uiambientlight_;
   setting_uiambientlight_ = setting_uiambientlight;
   if (setting_uiambientlight) {
@@ -1603,280 +1613,280 @@ inline void ManagerObjects::set_allocated_setting_uiambientlight(::KuplungApp::V
   } else {
     clear_has_setting_uiambientlight();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.Setting_UIAmbientLight)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.Setting_UIAmbientLight)
 }
 
 // required bool Setting_FixedGridWorld = 11;
-inline bool ManagerObjects::has_setting_fixedgridworld() const {
+inline bool GUISettings::has_setting_fixedgridworld() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void ManagerObjects::set_has_setting_fixedgridworld() {
+inline void GUISettings::set_has_setting_fixedgridworld() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void ManagerObjects::clear_has_setting_fixedgridworld() {
+inline void GUISettings::clear_has_setting_fixedgridworld() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void ManagerObjects::clear_setting_fixedgridworld() {
+inline void GUISettings::clear_setting_fixedgridworld() {
   setting_fixedgridworld_ = false;
   clear_has_setting_fixedgridworld();
 }
-inline bool ManagerObjects::setting_fixedgridworld() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_FixedGridWorld)
+inline bool GUISettings::setting_fixedgridworld() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_FixedGridWorld)
   return setting_fixedgridworld_;
 }
-inline void ManagerObjects::set_setting_fixedgridworld(bool value) {
+inline void GUISettings::set_setting_fixedgridworld(bool value) {
   set_has_setting_fixedgridworld();
   setting_fixedgridworld_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_FixedGridWorld)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_FixedGridWorld)
 }
 
 // required bool Setting_OutlineColorPickerOpen = 12;
-inline bool ManagerObjects::has_setting_outlinecolorpickeropen() const {
+inline bool GUISettings::has_setting_outlinecolorpickeropen() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void ManagerObjects::set_has_setting_outlinecolorpickeropen() {
+inline void GUISettings::set_has_setting_outlinecolorpickeropen() {
   _has_bits_[0] |= 0x00000800u;
 }
-inline void ManagerObjects::clear_has_setting_outlinecolorpickeropen() {
+inline void GUISettings::clear_has_setting_outlinecolorpickeropen() {
   _has_bits_[0] &= ~0x00000800u;
 }
-inline void ManagerObjects::clear_setting_outlinecolorpickeropen() {
+inline void GUISettings::clear_setting_outlinecolorpickeropen() {
   setting_outlinecolorpickeropen_ = false;
   clear_has_setting_outlinecolorpickeropen();
 }
-inline bool ManagerObjects::setting_outlinecolorpickeropen() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_OutlineColorPickerOpen)
+inline bool GUISettings::setting_outlinecolorpickeropen() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_OutlineColorPickerOpen)
   return setting_outlinecolorpickeropen_;
 }
-inline void ManagerObjects::set_setting_outlinecolorpickeropen(bool value) {
+inline void GUISettings::set_setting_outlinecolorpickeropen(bool value) {
   set_has_setting_outlinecolorpickeropen();
   setting_outlinecolorpickeropen_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_OutlineColorPickerOpen)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_OutlineColorPickerOpen)
 }
 
 // required bool Setting_ShowAxisHelpers = 13;
-inline bool ManagerObjects::has_setting_showaxishelpers() const {
+inline bool GUISettings::has_setting_showaxishelpers() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_showaxishelpers() {
+inline void GUISettings::set_has_setting_showaxishelpers() {
   _has_bits_[0] |= 0x00001000u;
 }
-inline void ManagerObjects::clear_has_setting_showaxishelpers() {
+inline void GUISettings::clear_has_setting_showaxishelpers() {
   _has_bits_[0] &= ~0x00001000u;
 }
-inline void ManagerObjects::clear_setting_showaxishelpers() {
+inline void GUISettings::clear_setting_showaxishelpers() {
   setting_showaxishelpers_ = false;
   clear_has_setting_showaxishelpers();
 }
-inline bool ManagerObjects::setting_showaxishelpers() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_ShowAxisHelpers)
+inline bool GUISettings::setting_showaxishelpers() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_ShowAxisHelpers)
   return setting_showaxishelpers_;
 }
-inline void ManagerObjects::set_setting_showaxishelpers(bool value) {
+inline void GUISettings::set_setting_showaxishelpers(bool value) {
   set_has_setting_showaxishelpers();
   setting_showaxishelpers_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_ShowAxisHelpers)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_ShowAxisHelpers)
 }
 
 // required bool Settings_ShowZAxis = 14;
-inline bool ManagerObjects::has_settings_showzaxis() const {
+inline bool GUISettings::has_settings_showzaxis() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
-inline void ManagerObjects::set_has_settings_showzaxis() {
+inline void GUISettings::set_has_settings_showzaxis() {
   _has_bits_[0] |= 0x00002000u;
 }
-inline void ManagerObjects::clear_has_settings_showzaxis() {
+inline void GUISettings::clear_has_settings_showzaxis() {
   _has_bits_[0] &= ~0x00002000u;
 }
-inline void ManagerObjects::clear_settings_showzaxis() {
+inline void GUISettings::clear_settings_showzaxis() {
   settings_showzaxis_ = false;
   clear_has_settings_showzaxis();
 }
-inline bool ManagerObjects::settings_showzaxis() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Settings_ShowZAxis)
+inline bool GUISettings::settings_showzaxis() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Settings_ShowZAxis)
   return settings_showzaxis_;
 }
-inline void ManagerObjects::set_settings_showzaxis(bool value) {
+inline void GUISettings::set_settings_showzaxis(bool value) {
   set_has_settings_showzaxis();
   settings_showzaxis_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Settings_ShowZAxis)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Settings_ShowZAxis)
 }
 
 // required bool Setting_DeferredTestMode = 15;
-inline bool ManagerObjects::has_setting_deferredtestmode() const {
+inline bool GUISettings::has_setting_deferredtestmode() const {
   return (_has_bits_[0] & 0x00004000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_deferredtestmode() {
+inline void GUISettings::set_has_setting_deferredtestmode() {
   _has_bits_[0] |= 0x00004000u;
 }
-inline void ManagerObjects::clear_has_setting_deferredtestmode() {
+inline void GUISettings::clear_has_setting_deferredtestmode() {
   _has_bits_[0] &= ~0x00004000u;
 }
-inline void ManagerObjects::clear_setting_deferredtestmode() {
+inline void GUISettings::clear_setting_deferredtestmode() {
   setting_deferredtestmode_ = false;
   clear_has_setting_deferredtestmode();
 }
-inline bool ManagerObjects::setting_deferredtestmode() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_DeferredTestMode)
+inline bool GUISettings::setting_deferredtestmode() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_DeferredTestMode)
   return setting_deferredtestmode_;
 }
-inline void ManagerObjects::set_setting_deferredtestmode(bool value) {
+inline void GUISettings::set_setting_deferredtestmode(bool value) {
   set_has_setting_deferredtestmode();
   setting_deferredtestmode_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_DeferredTestMode)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_DeferredTestMode)
 }
 
 // required bool Setting_DeferredTestLights = 16;
-inline bool ManagerObjects::has_setting_deferredtestlights() const {
+inline bool GUISettings::has_setting_deferredtestlights() const {
   return (_has_bits_[0] & 0x00008000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_deferredtestlights() {
+inline void GUISettings::set_has_setting_deferredtestlights() {
   _has_bits_[0] |= 0x00008000u;
 }
-inline void ManagerObjects::clear_has_setting_deferredtestlights() {
+inline void GUISettings::clear_has_setting_deferredtestlights() {
   _has_bits_[0] &= ~0x00008000u;
 }
-inline void ManagerObjects::clear_setting_deferredtestlights() {
+inline void GUISettings::clear_setting_deferredtestlights() {
   setting_deferredtestlights_ = false;
   clear_has_setting_deferredtestlights();
 }
-inline bool ManagerObjects::setting_deferredtestlights() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_DeferredTestLights)
+inline bool GUISettings::setting_deferredtestlights() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_DeferredTestLights)
   return setting_deferredtestlights_;
 }
-inline void ManagerObjects::set_setting_deferredtestlights(bool value) {
+inline void GUISettings::set_setting_deferredtestlights(bool value) {
   set_has_setting_deferredtestlights();
   setting_deferredtestlights_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_DeferredTestLights)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_DeferredTestLights)
 }
 
 // required int32 Setting_LightingPass_DrawMode = 17;
-inline bool ManagerObjects::has_setting_lightingpass_drawmode() const {
+inline bool GUISettings::has_setting_lightingpass_drawmode() const {
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_lightingpass_drawmode() {
+inline void GUISettings::set_has_setting_lightingpass_drawmode() {
   _has_bits_[0] |= 0x00010000u;
 }
-inline void ManagerObjects::clear_has_setting_lightingpass_drawmode() {
+inline void GUISettings::clear_has_setting_lightingpass_drawmode() {
   _has_bits_[0] &= ~0x00010000u;
 }
-inline void ManagerObjects::clear_setting_lightingpass_drawmode() {
+inline void GUISettings::clear_setting_lightingpass_drawmode() {
   setting_lightingpass_drawmode_ = 0;
   clear_has_setting_lightingpass_drawmode();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_lightingpass_drawmode() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_LightingPass_DrawMode)
+inline ::google::protobuf::int32 GUISettings::setting_lightingpass_drawmode() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_LightingPass_DrawMode)
   return setting_lightingpass_drawmode_;
 }
-inline void ManagerObjects::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
   set_has_setting_lightingpass_drawmode();
   setting_lightingpass_drawmode_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_LightingPass_DrawMode)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_LightingPass_DrawMode)
 }
 
 // required int32 Setting_DeferredTestLightsNumber = 18;
-inline bool ManagerObjects::has_setting_deferredtestlightsnumber() const {
+inline bool GUISettings::has_setting_deferredtestlightsnumber() const {
   return (_has_bits_[0] & 0x00020000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_deferredtestlightsnumber() {
+inline void GUISettings::set_has_setting_deferredtestlightsnumber() {
   _has_bits_[0] |= 0x00020000u;
 }
-inline void ManagerObjects::clear_has_setting_deferredtestlightsnumber() {
+inline void GUISettings::clear_has_setting_deferredtestlightsnumber() {
   _has_bits_[0] &= ~0x00020000u;
 }
-inline void ManagerObjects::clear_setting_deferredtestlightsnumber() {
+inline void GUISettings::clear_setting_deferredtestlightsnumber() {
   setting_deferredtestlightsnumber_ = 0;
   clear_has_setting_deferredtestlightsnumber();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_deferredtestlightsnumber() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_DeferredTestLightsNumber)
+inline ::google::protobuf::int32 GUISettings::setting_deferredtestlightsnumber() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_DeferredTestLightsNumber)
   return setting_deferredtestlightsnumber_;
 }
-inline void ManagerObjects::set_setting_deferredtestlightsnumber(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_deferredtestlightsnumber(::google::protobuf::int32 value) {
   set_has_setting_deferredtestlightsnumber();
   setting_deferredtestlightsnumber_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_DeferredTestLightsNumber)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_DeferredTestLightsNumber)
 }
 
 // required float Setting_DeferredAmbientStrength = 19;
-inline bool ManagerObjects::has_setting_deferredambientstrength() const {
+inline bool GUISettings::has_setting_deferredambientstrength() const {
   return (_has_bits_[0] & 0x00040000u) != 0;
 }
-inline void ManagerObjects::set_has_setting_deferredambientstrength() {
+inline void GUISettings::set_has_setting_deferredambientstrength() {
   _has_bits_[0] |= 0x00040000u;
 }
-inline void ManagerObjects::clear_has_setting_deferredambientstrength() {
+inline void GUISettings::clear_has_setting_deferredambientstrength() {
   _has_bits_[0] &= ~0x00040000u;
 }
-inline void ManagerObjects::clear_setting_deferredambientstrength() {
+inline void GUISettings::clear_setting_deferredambientstrength() {
   setting_deferredambientstrength_ = 0;
   clear_has_setting_deferredambientstrength();
 }
-inline float ManagerObjects::setting_deferredambientstrength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_DeferredAmbientStrength)
+inline float GUISettings::setting_deferredambientstrength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_DeferredAmbientStrength)
   return setting_deferredambientstrength_;
 }
-inline void ManagerObjects::set_setting_deferredambientstrength(float value) {
+inline void GUISettings::set_setting_deferredambientstrength(float value) {
   set_has_setting_deferredambientstrength();
   setting_deferredambientstrength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_DeferredAmbientStrength)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_DeferredAmbientStrength)
 }
 
 // required int32 viewModelSkin = 20;
-inline bool ManagerObjects::has_viewmodelskin() const {
+inline bool GUISettings::has_viewmodelskin() const {
   return (_has_bits_[0] & 0x00080000u) != 0;
 }
-inline void ManagerObjects::set_has_viewmodelskin() {
+inline void GUISettings::set_has_viewmodelskin() {
   _has_bits_[0] |= 0x00080000u;
 }
-inline void ManagerObjects::clear_has_viewmodelskin() {
+inline void GUISettings::clear_has_viewmodelskin() {
   _has_bits_[0] &= ~0x00080000u;
 }
-inline void ManagerObjects::clear_viewmodelskin() {
+inline void GUISettings::clear_viewmodelskin() {
   viewmodelskin_ = 0;
   clear_has_viewmodelskin();
 }
-inline ::google::protobuf::int32 ManagerObjects::viewmodelskin() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.viewModelSkin)
+inline ::google::protobuf::int32 GUISettings::viewmodelskin() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.viewModelSkin)
   return viewmodelskin_;
 }
-inline void ManagerObjects::set_viewmodelskin(::google::protobuf::int32 value) {
+inline void GUISettings::set_viewmodelskin(::google::protobuf::int32 value) {
   set_has_viewmodelskin();
   viewmodelskin_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.viewModelSkin)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.viewModelSkin)
 }
 
 // required .KuplungApp.Vec3 SolidLight_Direction = 21;
-inline bool ManagerObjects::has_solidlight_direction() const {
+inline bool GUISettings::has_solidlight_direction() const {
   return (_has_bits_[0] & 0x00100000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_direction() {
+inline void GUISettings::set_has_solidlight_direction() {
   _has_bits_[0] |= 0x00100000u;
 }
-inline void ManagerObjects::clear_has_solidlight_direction() {
+inline void GUISettings::clear_has_solidlight_direction() {
   _has_bits_[0] &= ~0x00100000u;
 }
-inline void ManagerObjects::clear_solidlight_direction() {
+inline void GUISettings::clear_solidlight_direction() {
   if (solidlight_direction_ != NULL) solidlight_direction_->::KuplungApp::Vec3::Clear();
   clear_has_solidlight_direction();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::solidlight_direction() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Direction)
+inline const ::KuplungApp::Vec3& GUISettings::solidlight_direction() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Direction)
   return solidlight_direction_ != NULL ? *solidlight_direction_ : *default_instance_->solidlight_direction_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_solidlight_direction() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_solidlight_direction() {
   set_has_solidlight_direction();
   if (solidlight_direction_ == NULL) solidlight_direction_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.SolidLight_Direction)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.SolidLight_Direction)
   return solidlight_direction_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_solidlight_direction() {
+inline ::KuplungApp::Vec3* GUISettings::release_solidlight_direction() {
   clear_has_solidlight_direction();
   ::KuplungApp::Vec3* temp = solidlight_direction_;
   solidlight_direction_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_solidlight_direction(::KuplungApp::Vec3* solidlight_direction) {
+inline void GUISettings::set_allocated_solidlight_direction(::KuplungApp::Vec3* solidlight_direction) {
   delete solidlight_direction_;
   solidlight_direction_ = solidlight_direction;
   if (solidlight_direction) {
@@ -1884,40 +1894,40 @@ inline void ManagerObjects::set_allocated_solidlight_direction(::KuplungApp::Vec
   } else {
     clear_has_solidlight_direction();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.SolidLight_Direction)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.SolidLight_Direction)
 }
 
 // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
-inline bool ManagerObjects::has_solidlight_materialcolor() const {
+inline bool GUISettings::has_solidlight_materialcolor() const {
   return (_has_bits_[0] & 0x00200000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_materialcolor() {
+inline void GUISettings::set_has_solidlight_materialcolor() {
   _has_bits_[0] |= 0x00200000u;
 }
-inline void ManagerObjects::clear_has_solidlight_materialcolor() {
+inline void GUISettings::clear_has_solidlight_materialcolor() {
   _has_bits_[0] &= ~0x00200000u;
 }
-inline void ManagerObjects::clear_solidlight_materialcolor() {
+inline void GUISettings::clear_solidlight_materialcolor() {
   if (solidlight_materialcolor_ != NULL) solidlight_materialcolor_->::KuplungApp::Vec3::Clear();
   clear_has_solidlight_materialcolor();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::solidlight_materialcolor() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_MaterialColor)
+inline const ::KuplungApp::Vec3& GUISettings::solidlight_materialcolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_MaterialColor)
   return solidlight_materialcolor_ != NULL ? *solidlight_materialcolor_ : *default_instance_->solidlight_materialcolor_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_solidlight_materialcolor() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_solidlight_materialcolor() {
   set_has_solidlight_materialcolor();
   if (solidlight_materialcolor_ == NULL) solidlight_materialcolor_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.SolidLight_MaterialColor)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.SolidLight_MaterialColor)
   return solidlight_materialcolor_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_solidlight_materialcolor() {
+inline ::KuplungApp::Vec3* GUISettings::release_solidlight_materialcolor() {
   clear_has_solidlight_materialcolor();
   ::KuplungApp::Vec3* temp = solidlight_materialcolor_;
   solidlight_materialcolor_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_solidlight_materialcolor(::KuplungApp::Vec3* solidlight_materialcolor) {
+inline void GUISettings::set_allocated_solidlight_materialcolor(::KuplungApp::Vec3* solidlight_materialcolor) {
   delete solidlight_materialcolor_;
   solidlight_materialcolor_ = solidlight_materialcolor;
   if (solidlight_materialcolor) {
@@ -1925,40 +1935,40 @@ inline void ManagerObjects::set_allocated_solidlight_materialcolor(::KuplungApp:
   } else {
     clear_has_solidlight_materialcolor();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.SolidLight_MaterialColor)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.SolidLight_MaterialColor)
 }
 
 // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
-inline bool ManagerObjects::has_solidlight_ambient() const {
+inline bool GUISettings::has_solidlight_ambient() const {
   return (_has_bits_[0] & 0x00400000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_ambient() {
+inline void GUISettings::set_has_solidlight_ambient() {
   _has_bits_[0] |= 0x00400000u;
 }
-inline void ManagerObjects::clear_has_solidlight_ambient() {
+inline void GUISettings::clear_has_solidlight_ambient() {
   _has_bits_[0] &= ~0x00400000u;
 }
-inline void ManagerObjects::clear_solidlight_ambient() {
+inline void GUISettings::clear_solidlight_ambient() {
   if (solidlight_ambient_ != NULL) solidlight_ambient_->::KuplungApp::Vec3::Clear();
   clear_has_solidlight_ambient();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::solidlight_ambient() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Ambient)
+inline const ::KuplungApp::Vec3& GUISettings::solidlight_ambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Ambient)
   return solidlight_ambient_ != NULL ? *solidlight_ambient_ : *default_instance_->solidlight_ambient_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_solidlight_ambient() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_solidlight_ambient() {
   set_has_solidlight_ambient();
   if (solidlight_ambient_ == NULL) solidlight_ambient_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.SolidLight_Ambient)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.SolidLight_Ambient)
   return solidlight_ambient_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_solidlight_ambient() {
+inline ::KuplungApp::Vec3* GUISettings::release_solidlight_ambient() {
   clear_has_solidlight_ambient();
   ::KuplungApp::Vec3* temp = solidlight_ambient_;
   solidlight_ambient_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_solidlight_ambient(::KuplungApp::Vec3* solidlight_ambient) {
+inline void GUISettings::set_allocated_solidlight_ambient(::KuplungApp::Vec3* solidlight_ambient) {
   delete solidlight_ambient_;
   solidlight_ambient_ = solidlight_ambient;
   if (solidlight_ambient) {
@@ -1966,40 +1976,40 @@ inline void ManagerObjects::set_allocated_solidlight_ambient(::KuplungApp::Vec3*
   } else {
     clear_has_solidlight_ambient();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.SolidLight_Ambient)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.SolidLight_Ambient)
 }
 
 // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
-inline bool ManagerObjects::has_solidlight_diffuse() const {
+inline bool GUISettings::has_solidlight_diffuse() const {
   return (_has_bits_[0] & 0x00800000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_diffuse() {
+inline void GUISettings::set_has_solidlight_diffuse() {
   _has_bits_[0] |= 0x00800000u;
 }
-inline void ManagerObjects::clear_has_solidlight_diffuse() {
+inline void GUISettings::clear_has_solidlight_diffuse() {
   _has_bits_[0] &= ~0x00800000u;
 }
-inline void ManagerObjects::clear_solidlight_diffuse() {
+inline void GUISettings::clear_solidlight_diffuse() {
   if (solidlight_diffuse_ != NULL) solidlight_diffuse_->::KuplungApp::Vec3::Clear();
   clear_has_solidlight_diffuse();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::solidlight_diffuse() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Diffuse)
+inline const ::KuplungApp::Vec3& GUISettings::solidlight_diffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Diffuse)
   return solidlight_diffuse_ != NULL ? *solidlight_diffuse_ : *default_instance_->solidlight_diffuse_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_solidlight_diffuse() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_solidlight_diffuse() {
   set_has_solidlight_diffuse();
   if (solidlight_diffuse_ == NULL) solidlight_diffuse_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.SolidLight_Diffuse)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.SolidLight_Diffuse)
   return solidlight_diffuse_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_solidlight_diffuse() {
+inline ::KuplungApp::Vec3* GUISettings::release_solidlight_diffuse() {
   clear_has_solidlight_diffuse();
   ::KuplungApp::Vec3* temp = solidlight_diffuse_;
   solidlight_diffuse_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_solidlight_diffuse(::KuplungApp::Vec3* solidlight_diffuse) {
+inline void GUISettings::set_allocated_solidlight_diffuse(::KuplungApp::Vec3* solidlight_diffuse) {
   delete solidlight_diffuse_;
   solidlight_diffuse_ = solidlight_diffuse;
   if (solidlight_diffuse) {
@@ -2007,40 +2017,40 @@ inline void ManagerObjects::set_allocated_solidlight_diffuse(::KuplungApp::Vec3*
   } else {
     clear_has_solidlight_diffuse();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.SolidLight_Diffuse)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.SolidLight_Diffuse)
 }
 
 // required .KuplungApp.Vec3 SolidLight_Specular = 25;
-inline bool ManagerObjects::has_solidlight_specular() const {
+inline bool GUISettings::has_solidlight_specular() const {
   return (_has_bits_[0] & 0x01000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_specular() {
+inline void GUISettings::set_has_solidlight_specular() {
   _has_bits_[0] |= 0x01000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_specular() {
+inline void GUISettings::clear_has_solidlight_specular() {
   _has_bits_[0] &= ~0x01000000u;
 }
-inline void ManagerObjects::clear_solidlight_specular() {
+inline void GUISettings::clear_solidlight_specular() {
   if (solidlight_specular_ != NULL) solidlight_specular_->::KuplungApp::Vec3::Clear();
   clear_has_solidlight_specular();
 }
-inline const ::KuplungApp::Vec3& ManagerObjects::solidlight_specular() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Specular)
+inline const ::KuplungApp::Vec3& GUISettings::solidlight_specular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Specular)
   return solidlight_specular_ != NULL ? *solidlight_specular_ : *default_instance_->solidlight_specular_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::mutable_solidlight_specular() {
+inline ::KuplungApp::Vec3* GUISettings::mutable_solidlight_specular() {
   set_has_solidlight_specular();
   if (solidlight_specular_ == NULL) solidlight_specular_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.SolidLight_Specular)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.SolidLight_Specular)
   return solidlight_specular_;
 }
-inline ::KuplungApp::Vec3* ManagerObjects::release_solidlight_specular() {
+inline ::KuplungApp::Vec3* GUISettings::release_solidlight_specular() {
   clear_has_solidlight_specular();
   ::KuplungApp::Vec3* temp = solidlight_specular_;
   solidlight_specular_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_solidlight_specular(::KuplungApp::Vec3* solidlight_specular) {
+inline void GUISettings::set_allocated_solidlight_specular(::KuplungApp::Vec3* solidlight_specular) {
   delete solidlight_specular_;
   solidlight_specular_ = solidlight_specular;
   if (solidlight_specular) {
@@ -2048,326 +2058,326 @@ inline void ManagerObjects::set_allocated_solidlight_specular(::KuplungApp::Vec3
   } else {
     clear_has_solidlight_specular();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.SolidLight_Specular)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.SolidLight_Specular)
 }
 
 // required float SolidLight_Ambient_Strength = 26;
-inline bool ManagerObjects::has_solidlight_ambient_strength() const {
+inline bool GUISettings::has_solidlight_ambient_strength() const {
   return (_has_bits_[0] & 0x02000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_ambient_strength() {
+inline void GUISettings::set_has_solidlight_ambient_strength() {
   _has_bits_[0] |= 0x02000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_ambient_strength() {
+inline void GUISettings::clear_has_solidlight_ambient_strength() {
   _has_bits_[0] &= ~0x02000000u;
 }
-inline void ManagerObjects::clear_solidlight_ambient_strength() {
+inline void GUISettings::clear_solidlight_ambient_strength() {
   solidlight_ambient_strength_ = 0;
   clear_has_solidlight_ambient_strength();
 }
-inline float ManagerObjects::solidlight_ambient_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Ambient_Strength)
+inline float GUISettings::solidlight_ambient_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Ambient_Strength)
   return solidlight_ambient_strength_;
 }
-inline void ManagerObjects::set_solidlight_ambient_strength(float value) {
+inline void GUISettings::set_solidlight_ambient_strength(float value) {
   set_has_solidlight_ambient_strength();
   solidlight_ambient_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Ambient_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Ambient_Strength)
 }
 
 // required float SolidLight_Diffuse_Strength = 27;
-inline bool ManagerObjects::has_solidlight_diffuse_strength() const {
+inline bool GUISettings::has_solidlight_diffuse_strength() const {
   return (_has_bits_[0] & 0x04000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_diffuse_strength() {
+inline void GUISettings::set_has_solidlight_diffuse_strength() {
   _has_bits_[0] |= 0x04000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_diffuse_strength() {
+inline void GUISettings::clear_has_solidlight_diffuse_strength() {
   _has_bits_[0] &= ~0x04000000u;
 }
-inline void ManagerObjects::clear_solidlight_diffuse_strength() {
+inline void GUISettings::clear_solidlight_diffuse_strength() {
   solidlight_diffuse_strength_ = 0;
   clear_has_solidlight_diffuse_strength();
 }
-inline float ManagerObjects::solidlight_diffuse_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Diffuse_Strength)
+inline float GUISettings::solidlight_diffuse_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Diffuse_Strength)
   return solidlight_diffuse_strength_;
 }
-inline void ManagerObjects::set_solidlight_diffuse_strength(float value) {
+inline void GUISettings::set_solidlight_diffuse_strength(float value) {
   set_has_solidlight_diffuse_strength();
   solidlight_diffuse_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Diffuse_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Diffuse_Strength)
 }
 
 // required float SolidLight_Specular_Strength = 28;
-inline bool ManagerObjects::has_solidlight_specular_strength() const {
+inline bool GUISettings::has_solidlight_specular_strength() const {
   return (_has_bits_[0] & 0x08000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_specular_strength() {
+inline void GUISettings::set_has_solidlight_specular_strength() {
   _has_bits_[0] |= 0x08000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_specular_strength() {
+inline void GUISettings::clear_has_solidlight_specular_strength() {
   _has_bits_[0] &= ~0x08000000u;
 }
-inline void ManagerObjects::clear_solidlight_specular_strength() {
+inline void GUISettings::clear_solidlight_specular_strength() {
   solidlight_specular_strength_ = 0;
   clear_has_solidlight_specular_strength();
 }
-inline float ManagerObjects::solidlight_specular_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Specular_Strength)
+inline float GUISettings::solidlight_specular_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Specular_Strength)
   return solidlight_specular_strength_;
 }
-inline void ManagerObjects::set_solidlight_specular_strength(float value) {
+inline void GUISettings::set_solidlight_specular_strength(float value) {
   set_has_solidlight_specular_strength();
   solidlight_specular_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Specular_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Specular_Strength)
 }
 
 // required bool SolidLight_MaterialColor_ColorPicker = 29;
-inline bool ManagerObjects::has_solidlight_materialcolor_colorpicker() const {
+inline bool GUISettings::has_solidlight_materialcolor_colorpicker() const {
   return (_has_bits_[0] & 0x10000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_materialcolor_colorpicker() {
+inline void GUISettings::set_has_solidlight_materialcolor_colorpicker() {
   _has_bits_[0] |= 0x10000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_materialcolor_colorpicker() {
+inline void GUISettings::clear_has_solidlight_materialcolor_colorpicker() {
   _has_bits_[0] &= ~0x10000000u;
 }
-inline void ManagerObjects::clear_solidlight_materialcolor_colorpicker() {
+inline void GUISettings::clear_solidlight_materialcolor_colorpicker() {
   solidlight_materialcolor_colorpicker_ = false;
   clear_has_solidlight_materialcolor_colorpicker();
 }
-inline bool ManagerObjects::solidlight_materialcolor_colorpicker() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_MaterialColor_ColorPicker)
+inline bool GUISettings::solidlight_materialcolor_colorpicker() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_MaterialColor_ColorPicker)
   return solidlight_materialcolor_colorpicker_;
 }
-inline void ManagerObjects::set_solidlight_materialcolor_colorpicker(bool value) {
+inline void GUISettings::set_solidlight_materialcolor_colorpicker(bool value) {
   set_has_solidlight_materialcolor_colorpicker();
   solidlight_materialcolor_colorpicker_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_MaterialColor_ColorPicker)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_MaterialColor_ColorPicker)
 }
 
 // required bool SolidLight_Ambient_ColorPicker = 30;
-inline bool ManagerObjects::has_solidlight_ambient_colorpicker() const {
+inline bool GUISettings::has_solidlight_ambient_colorpicker() const {
   return (_has_bits_[0] & 0x20000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_ambient_colorpicker() {
+inline void GUISettings::set_has_solidlight_ambient_colorpicker() {
   _has_bits_[0] |= 0x20000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_ambient_colorpicker() {
+inline void GUISettings::clear_has_solidlight_ambient_colorpicker() {
   _has_bits_[0] &= ~0x20000000u;
 }
-inline void ManagerObjects::clear_solidlight_ambient_colorpicker() {
+inline void GUISettings::clear_solidlight_ambient_colorpicker() {
   solidlight_ambient_colorpicker_ = false;
   clear_has_solidlight_ambient_colorpicker();
 }
-inline bool ManagerObjects::solidlight_ambient_colorpicker() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Ambient_ColorPicker)
+inline bool GUISettings::solidlight_ambient_colorpicker() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Ambient_ColorPicker)
   return solidlight_ambient_colorpicker_;
 }
-inline void ManagerObjects::set_solidlight_ambient_colorpicker(bool value) {
+inline void GUISettings::set_solidlight_ambient_colorpicker(bool value) {
   set_has_solidlight_ambient_colorpicker();
   solidlight_ambient_colorpicker_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Ambient_ColorPicker)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Ambient_ColorPicker)
 }
 
 // required bool SolidLight_Diffuse_ColorPicker = 31;
-inline bool ManagerObjects::has_solidlight_diffuse_colorpicker() const {
+inline bool GUISettings::has_solidlight_diffuse_colorpicker() const {
   return (_has_bits_[0] & 0x40000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_diffuse_colorpicker() {
+inline void GUISettings::set_has_solidlight_diffuse_colorpicker() {
   _has_bits_[0] |= 0x40000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_diffuse_colorpicker() {
+inline void GUISettings::clear_has_solidlight_diffuse_colorpicker() {
   _has_bits_[0] &= ~0x40000000u;
 }
-inline void ManagerObjects::clear_solidlight_diffuse_colorpicker() {
+inline void GUISettings::clear_solidlight_diffuse_colorpicker() {
   solidlight_diffuse_colorpicker_ = false;
   clear_has_solidlight_diffuse_colorpicker();
 }
-inline bool ManagerObjects::solidlight_diffuse_colorpicker() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Diffuse_ColorPicker)
+inline bool GUISettings::solidlight_diffuse_colorpicker() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Diffuse_ColorPicker)
   return solidlight_diffuse_colorpicker_;
 }
-inline void ManagerObjects::set_solidlight_diffuse_colorpicker(bool value) {
+inline void GUISettings::set_solidlight_diffuse_colorpicker(bool value) {
   set_has_solidlight_diffuse_colorpicker();
   solidlight_diffuse_colorpicker_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Diffuse_ColorPicker)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Diffuse_ColorPicker)
 }
 
 // required bool SolidLight_Specular_ColorPicker = 32;
-inline bool ManagerObjects::has_solidlight_specular_colorpicker() const {
+inline bool GUISettings::has_solidlight_specular_colorpicker() const {
   return (_has_bits_[0] & 0x80000000u) != 0;
 }
-inline void ManagerObjects::set_has_solidlight_specular_colorpicker() {
+inline void GUISettings::set_has_solidlight_specular_colorpicker() {
   _has_bits_[0] |= 0x80000000u;
 }
-inline void ManagerObjects::clear_has_solidlight_specular_colorpicker() {
+inline void GUISettings::clear_has_solidlight_specular_colorpicker() {
   _has_bits_[0] &= ~0x80000000u;
 }
-inline void ManagerObjects::clear_solidlight_specular_colorpicker() {
+inline void GUISettings::clear_solidlight_specular_colorpicker() {
   solidlight_specular_colorpicker_ = false;
   clear_has_solidlight_specular_colorpicker();
 }
-inline bool ManagerObjects::solidlight_specular_colorpicker() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.SolidLight_Specular_ColorPicker)
+inline bool GUISettings::solidlight_specular_colorpicker() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Specular_ColorPicker)
   return solidlight_specular_colorpicker_;
 }
-inline void ManagerObjects::set_solidlight_specular_colorpicker(bool value) {
+inline void GUISettings::set_solidlight_specular_colorpicker(bool value) {
   set_has_solidlight_specular_colorpicker();
   solidlight_specular_colorpicker_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.SolidLight_Specular_ColorPicker)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.SolidLight_Specular_ColorPicker)
 }
 
 // required bool Setting_ShowTerrain = 33;
-inline bool ManagerObjects::has_setting_showterrain() const {
+inline bool GUISettings::has_setting_showterrain() const {
   return (_has_bits_[1] & 0x00000001u) != 0;
 }
-inline void ManagerObjects::set_has_setting_showterrain() {
+inline void GUISettings::set_has_setting_showterrain() {
   _has_bits_[1] |= 0x00000001u;
 }
-inline void ManagerObjects::clear_has_setting_showterrain() {
+inline void GUISettings::clear_has_setting_showterrain() {
   _has_bits_[1] &= ~0x00000001u;
 }
-inline void ManagerObjects::clear_setting_showterrain() {
+inline void GUISettings::clear_setting_showterrain() {
   setting_showterrain_ = false;
   clear_has_setting_showterrain();
 }
-inline bool ManagerObjects::setting_showterrain() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_ShowTerrain)
+inline bool GUISettings::setting_showterrain() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_ShowTerrain)
   return setting_showterrain_;
 }
-inline void ManagerObjects::set_setting_showterrain(bool value) {
+inline void GUISettings::set_setting_showterrain(bool value) {
   set_has_setting_showterrain();
   setting_showterrain_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_ShowTerrain)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_ShowTerrain)
 }
 
 // required bool Setting_TerrainModel = 34;
-inline bool ManagerObjects::has_setting_terrainmodel() const {
+inline bool GUISettings::has_setting_terrainmodel() const {
   return (_has_bits_[1] & 0x00000002u) != 0;
 }
-inline void ManagerObjects::set_has_setting_terrainmodel() {
+inline void GUISettings::set_has_setting_terrainmodel() {
   _has_bits_[1] |= 0x00000002u;
 }
-inline void ManagerObjects::clear_has_setting_terrainmodel() {
+inline void GUISettings::clear_has_setting_terrainmodel() {
   _has_bits_[1] &= ~0x00000002u;
 }
-inline void ManagerObjects::clear_setting_terrainmodel() {
+inline void GUISettings::clear_setting_terrainmodel() {
   setting_terrainmodel_ = false;
   clear_has_setting_terrainmodel();
 }
-inline bool ManagerObjects::setting_terrainmodel() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_TerrainModel)
+inline bool GUISettings::setting_terrainmodel() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_TerrainModel)
   return setting_terrainmodel_;
 }
-inline void ManagerObjects::set_setting_terrainmodel(bool value) {
+inline void GUISettings::set_setting_terrainmodel(bool value) {
   set_has_setting_terrainmodel();
   setting_terrainmodel_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_TerrainModel)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_TerrainModel)
 }
 
 // required bool Setting_TerrainAnimateX = 35;
-inline bool ManagerObjects::has_setting_terrainanimatex() const {
+inline bool GUISettings::has_setting_terrainanimatex() const {
   return (_has_bits_[1] & 0x00000004u) != 0;
 }
-inline void ManagerObjects::set_has_setting_terrainanimatex() {
+inline void GUISettings::set_has_setting_terrainanimatex() {
   _has_bits_[1] |= 0x00000004u;
 }
-inline void ManagerObjects::clear_has_setting_terrainanimatex() {
+inline void GUISettings::clear_has_setting_terrainanimatex() {
   _has_bits_[1] &= ~0x00000004u;
 }
-inline void ManagerObjects::clear_setting_terrainanimatex() {
+inline void GUISettings::clear_setting_terrainanimatex() {
   setting_terrainanimatex_ = false;
   clear_has_setting_terrainanimatex();
 }
-inline bool ManagerObjects::setting_terrainanimatex() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_TerrainAnimateX)
+inline bool GUISettings::setting_terrainanimatex() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_TerrainAnimateX)
   return setting_terrainanimatex_;
 }
-inline void ManagerObjects::set_setting_terrainanimatex(bool value) {
+inline void GUISettings::set_setting_terrainanimatex(bool value) {
   set_has_setting_terrainanimatex();
   setting_terrainanimatex_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_TerrainAnimateX)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_TerrainAnimateX)
 }
 
 // required bool Setting_TerrainAnimateY = 36;
-inline bool ManagerObjects::has_setting_terrainanimatey() const {
+inline bool GUISettings::has_setting_terrainanimatey() const {
   return (_has_bits_[1] & 0x00000008u) != 0;
 }
-inline void ManagerObjects::set_has_setting_terrainanimatey() {
+inline void GUISettings::set_has_setting_terrainanimatey() {
   _has_bits_[1] |= 0x00000008u;
 }
-inline void ManagerObjects::clear_has_setting_terrainanimatey() {
+inline void GUISettings::clear_has_setting_terrainanimatey() {
   _has_bits_[1] &= ~0x00000008u;
 }
-inline void ManagerObjects::clear_setting_terrainanimatey() {
+inline void GUISettings::clear_setting_terrainanimatey() {
   setting_terrainanimatey_ = false;
   clear_has_setting_terrainanimatey();
 }
-inline bool ManagerObjects::setting_terrainanimatey() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_TerrainAnimateY)
+inline bool GUISettings::setting_terrainanimatey() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_TerrainAnimateY)
   return setting_terrainanimatey_;
 }
-inline void ManagerObjects::set_setting_terrainanimatey(bool value) {
+inline void GUISettings::set_setting_terrainanimatey(bool value) {
   set_has_setting_terrainanimatey();
   setting_terrainanimatey_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_TerrainAnimateY)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_TerrainAnimateY)
 }
 
 // required string heightmapImage = 37;
-inline bool ManagerObjects::has_heightmapimage() const {
+inline bool GUISettings::has_heightmapimage() const {
   return (_has_bits_[1] & 0x00000010u) != 0;
 }
-inline void ManagerObjects::set_has_heightmapimage() {
+inline void GUISettings::set_has_heightmapimage() {
   _has_bits_[1] |= 0x00000010u;
 }
-inline void ManagerObjects::clear_has_heightmapimage() {
+inline void GUISettings::clear_has_heightmapimage() {
   _has_bits_[1] &= ~0x00000010u;
 }
-inline void ManagerObjects::clear_heightmapimage() {
+inline void GUISettings::clear_heightmapimage() {
   if (heightmapimage_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     heightmapimage_->clear();
   }
   clear_has_heightmapimage();
 }
-inline const ::std::string& ManagerObjects::heightmapimage() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.heightmapImage)
+inline const ::std::string& GUISettings::heightmapimage() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.heightmapImage)
   return *heightmapimage_;
 }
-inline void ManagerObjects::set_heightmapimage(const ::std::string& value) {
+inline void GUISettings::set_heightmapimage(const ::std::string& value) {
   set_has_heightmapimage();
   if (heightmapimage_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     heightmapimage_ = new ::std::string;
   }
   heightmapimage_->assign(value);
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.heightmapImage)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.heightmapImage)
 }
-inline void ManagerObjects::set_heightmapimage(const char* value) {
+inline void GUISettings::set_heightmapimage(const char* value) {
   set_has_heightmapimage();
   if (heightmapimage_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     heightmapimage_ = new ::std::string;
   }
   heightmapimage_->assign(value);
-  // @@protoc_insertion_point(field_set_char:KuplungApp.ManagerObjects.heightmapImage)
+  // @@protoc_insertion_point(field_set_char:KuplungApp.GUISettings.heightmapImage)
 }
-inline void ManagerObjects::set_heightmapimage(const char* value, size_t size) {
+inline void GUISettings::set_heightmapimage(const char* value, size_t size) {
   set_has_heightmapimage();
   if (heightmapimage_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     heightmapimage_ = new ::std::string;
   }
   heightmapimage_->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:KuplungApp.ManagerObjects.heightmapImage)
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.GUISettings.heightmapImage)
 }
-inline ::std::string* ManagerObjects::mutable_heightmapimage() {
+inline ::std::string* GUISettings::mutable_heightmapimage() {
   set_has_heightmapimage();
   if (heightmapimage_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     heightmapimage_ = new ::std::string;
   }
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.heightmapImage)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.heightmapImage)
   return heightmapimage_;
 }
-inline ::std::string* ManagerObjects::release_heightmapimage() {
+inline ::std::string* GUISettings::release_heightmapimage() {
   clear_has_heightmapimage();
   if (heightmapimage_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     return NULL;
@@ -2377,7 +2387,7 @@ inline ::std::string* ManagerObjects::release_heightmapimage() {
     return temp;
   }
 }
-inline void ManagerObjects::set_allocated_heightmapimage(::std::string* heightmapimage) {
+inline void GUISettings::set_allocated_heightmapimage(::std::string* heightmapimage) {
   if (heightmapimage_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
     delete heightmapimage_;
   }
@@ -2388,136 +2398,136 @@ inline void ManagerObjects::set_allocated_heightmapimage(::std::string* heightma
     clear_has_heightmapimage();
     heightmapimage_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.heightmapImage)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.heightmapImage)
 }
 
 // required int32 Setting_TerrainWidth = 38;
-inline bool ManagerObjects::has_setting_terrainwidth() const {
+inline bool GUISettings::has_setting_terrainwidth() const {
   return (_has_bits_[1] & 0x00000020u) != 0;
 }
-inline void ManagerObjects::set_has_setting_terrainwidth() {
+inline void GUISettings::set_has_setting_terrainwidth() {
   _has_bits_[1] |= 0x00000020u;
 }
-inline void ManagerObjects::clear_has_setting_terrainwidth() {
+inline void GUISettings::clear_has_setting_terrainwidth() {
   _has_bits_[1] &= ~0x00000020u;
 }
-inline void ManagerObjects::clear_setting_terrainwidth() {
+inline void GUISettings::clear_setting_terrainwidth() {
   setting_terrainwidth_ = 0;
   clear_has_setting_terrainwidth();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_terrainwidth() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_TerrainWidth)
+inline ::google::protobuf::int32 GUISettings::setting_terrainwidth() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_TerrainWidth)
   return setting_terrainwidth_;
 }
-inline void ManagerObjects::set_setting_terrainwidth(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_terrainwidth(::google::protobuf::int32 value) {
   set_has_setting_terrainwidth();
   setting_terrainwidth_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_TerrainWidth)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_TerrainWidth)
 }
 
 // required int32 Setting_TerrainHeight = 39;
-inline bool ManagerObjects::has_setting_terrainheight() const {
+inline bool GUISettings::has_setting_terrainheight() const {
   return (_has_bits_[1] & 0x00000040u) != 0;
 }
-inline void ManagerObjects::set_has_setting_terrainheight() {
+inline void GUISettings::set_has_setting_terrainheight() {
   _has_bits_[1] |= 0x00000040u;
 }
-inline void ManagerObjects::clear_has_setting_terrainheight() {
+inline void GUISettings::clear_has_setting_terrainheight() {
   _has_bits_[1] &= ~0x00000040u;
 }
-inline void ManagerObjects::clear_setting_terrainheight() {
+inline void GUISettings::clear_setting_terrainheight() {
   setting_terrainheight_ = 0;
   clear_has_setting_terrainheight();
 }
-inline ::google::protobuf::int32 ManagerObjects::setting_terrainheight() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_TerrainHeight)
+inline ::google::protobuf::int32 GUISettings::setting_terrainheight() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_TerrainHeight)
   return setting_terrainheight_;
 }
-inline void ManagerObjects::set_setting_terrainheight(::google::protobuf::int32 value) {
+inline void GUISettings::set_setting_terrainheight(::google::protobuf::int32 value) {
   set_has_setting_terrainheight();
   setting_terrainheight_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_TerrainHeight)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_TerrainHeight)
 }
 
 // required bool Setting_ShowSpaceship = 40;
-inline bool ManagerObjects::has_setting_showspaceship() const {
+inline bool GUISettings::has_setting_showspaceship() const {
   return (_has_bits_[1] & 0x00000080u) != 0;
 }
-inline void ManagerObjects::set_has_setting_showspaceship() {
+inline void GUISettings::set_has_setting_showspaceship() {
   _has_bits_[1] |= 0x00000080u;
 }
-inline void ManagerObjects::clear_has_setting_showspaceship() {
+inline void GUISettings::clear_has_setting_showspaceship() {
   _has_bits_[1] &= ~0x00000080u;
 }
-inline void ManagerObjects::clear_setting_showspaceship() {
+inline void GUISettings::clear_setting_showspaceship() {
   setting_showspaceship_ = false;
   clear_has_setting_showspaceship();
 }
-inline bool ManagerObjects::setting_showspaceship() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_ShowSpaceship)
+inline bool GUISettings::setting_showspaceship() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_ShowSpaceship)
   return setting_showspaceship_;
 }
-inline void ManagerObjects::set_setting_showspaceship(bool value) {
+inline void GUISettings::set_setting_showspaceship(bool value) {
   set_has_setting_showspaceship();
   setting_showspaceship_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_ShowSpaceship)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_ShowSpaceship)
 }
 
 // required bool Setting_GenerateSpaceship = 41;
-inline bool ManagerObjects::has_setting_generatespaceship() const {
+inline bool GUISettings::has_setting_generatespaceship() const {
   return (_has_bits_[1] & 0x00000100u) != 0;
 }
-inline void ManagerObjects::set_has_setting_generatespaceship() {
+inline void GUISettings::set_has_setting_generatespaceship() {
   _has_bits_[1] |= 0x00000100u;
 }
-inline void ManagerObjects::clear_has_setting_generatespaceship() {
+inline void GUISettings::clear_has_setting_generatespaceship() {
   _has_bits_[1] &= ~0x00000100u;
 }
-inline void ManagerObjects::clear_setting_generatespaceship() {
+inline void GUISettings::clear_setting_generatespaceship() {
   setting_generatespaceship_ = false;
   clear_has_setting_generatespaceship();
 }
-inline bool ManagerObjects::setting_generatespaceship() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.Setting_GenerateSpaceship)
+inline bool GUISettings::setting_generatespaceship() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_GenerateSpaceship)
   return setting_generatespaceship_;
 }
-inline void ManagerObjects::set_setting_generatespaceship(bool value) {
+inline void GUISettings::set_setting_generatespaceship(bool value) {
   set_has_setting_generatespaceship();
   setting_generatespaceship_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.ManagerObjects.Setting_GenerateSpaceship)
+  // @@protoc_insertion_point(field_set:KuplungApp.GUISettings.Setting_GenerateSpaceship)
 }
 
 // required .KuplungApp.CameraSettings camera = 42;
-inline bool ManagerObjects::has_camera() const {
+inline bool GUISettings::has_camera() const {
   return (_has_bits_[1] & 0x00000200u) != 0;
 }
-inline void ManagerObjects::set_has_camera() {
+inline void GUISettings::set_has_camera() {
   _has_bits_[1] |= 0x00000200u;
 }
-inline void ManagerObjects::clear_has_camera() {
+inline void GUISettings::clear_has_camera() {
   _has_bits_[1] &= ~0x00000200u;
 }
-inline void ManagerObjects::clear_camera() {
+inline void GUISettings::clear_camera() {
   if (camera_ != NULL) camera_->::KuplungApp::CameraSettings::Clear();
   clear_has_camera();
 }
-inline const ::KuplungApp::CameraSettings& ManagerObjects::camera() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.camera)
+inline const ::KuplungApp::CameraSettings& GUISettings::camera() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.camera)
   return camera_ != NULL ? *camera_ : *default_instance_->camera_;
 }
-inline ::KuplungApp::CameraSettings* ManagerObjects::mutable_camera() {
+inline ::KuplungApp::CameraSettings* GUISettings::mutable_camera() {
   set_has_camera();
   if (camera_ == NULL) camera_ = new ::KuplungApp::CameraSettings;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.camera)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.camera)
   return camera_;
 }
-inline ::KuplungApp::CameraSettings* ManagerObjects::release_camera() {
+inline ::KuplungApp::CameraSettings* GUISettings::release_camera() {
   clear_has_camera();
   ::KuplungApp::CameraSettings* temp = camera_;
   camera_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_camera(::KuplungApp::CameraSettings* camera) {
+inline void GUISettings::set_allocated_camera(::KuplungApp::CameraSettings* camera) {
   delete camera_;
   camera_ = camera;
   if (camera) {
@@ -2525,40 +2535,40 @@ inline void ManagerObjects::set_allocated_camera(::KuplungApp::CameraSettings* c
   } else {
     clear_has_camera();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.camera)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.camera)
 }
 
 // required .KuplungApp.GridSettings grid = 43;
-inline bool ManagerObjects::has_grid() const {
+inline bool GUISettings::has_grid() const {
   return (_has_bits_[1] & 0x00000400u) != 0;
 }
-inline void ManagerObjects::set_has_grid() {
+inline void GUISettings::set_has_grid() {
   _has_bits_[1] |= 0x00000400u;
 }
-inline void ManagerObjects::clear_has_grid() {
+inline void GUISettings::clear_has_grid() {
   _has_bits_[1] &= ~0x00000400u;
 }
-inline void ManagerObjects::clear_grid() {
+inline void GUISettings::clear_grid() {
   if (grid_ != NULL) grid_->::KuplungApp::GridSettings::Clear();
   clear_has_grid();
 }
-inline const ::KuplungApp::GridSettings& ManagerObjects::grid() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.grid)
+inline const ::KuplungApp::GridSettings& GUISettings::grid() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.grid)
   return grid_ != NULL ? *grid_ : *default_instance_->grid_;
 }
-inline ::KuplungApp::GridSettings* ManagerObjects::mutable_grid() {
+inline ::KuplungApp::GridSettings* GUISettings::mutable_grid() {
   set_has_grid();
   if (grid_ == NULL) grid_ = new ::KuplungApp::GridSettings;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.grid)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.grid)
   return grid_;
 }
-inline ::KuplungApp::GridSettings* ManagerObjects::release_grid() {
+inline ::KuplungApp::GridSettings* GUISettings::release_grid() {
   clear_has_grid();
   ::KuplungApp::GridSettings* temp = grid_;
   grid_ = NULL;
   return temp;
 }
-inline void ManagerObjects::set_allocated_grid(::KuplungApp::GridSettings* grid) {
+inline void GUISettings::set_allocated_grid(::KuplungApp::GridSettings* grid) {
   delete grid_;
   grid_ = grid;
   if (grid) {
@@ -2566,36 +2576,36 @@ inline void ManagerObjects::set_allocated_grid(::KuplungApp::GridSettings* grid)
   } else {
     clear_has_grid();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.ManagerObjects.grid)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.GUISettings.grid)
 }
 
 // repeated .KuplungApp.LightObject lights = 44;
-inline int ManagerObjects::lights_size() const {
+inline int GUISettings::lights_size() const {
   return lights_.size();
 }
-inline void ManagerObjects::clear_lights() {
+inline void GUISettings::clear_lights() {
   lights_.Clear();
 }
-inline const ::KuplungApp::LightObject& ManagerObjects::lights(int index) const {
-  // @@protoc_insertion_point(field_get:KuplungApp.ManagerObjects.lights)
+inline const ::KuplungApp::LightObject& GUISettings::lights(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.lights)
   return lights_.Get(index);
 }
-inline ::KuplungApp::LightObject* ManagerObjects::mutable_lights(int index) {
-  // @@protoc_insertion_point(field_mutable:KuplungApp.ManagerObjects.lights)
+inline ::KuplungApp::LightObject* GUISettings::mutable_lights(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.GUISettings.lights)
   return lights_.Mutable(index);
 }
-inline ::KuplungApp::LightObject* ManagerObjects::add_lights() {
-  // @@protoc_insertion_point(field_add:KuplungApp.ManagerObjects.lights)
+inline ::KuplungApp::LightObject* GUISettings::add_lights() {
+  // @@protoc_insertion_point(field_add:KuplungApp.GUISettings.lights)
   return lights_.Add();
 }
 inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::LightObject >&
-ManagerObjects::lights() const {
-  // @@protoc_insertion_point(field_list:KuplungApp.ManagerObjects.lights)
+GUISettings::lights() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.GUISettings.lights)
   return lights_;
 }
 inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::LightObject >*
-ManagerObjects::mutable_lights() {
-  // @@protoc_insertion_point(field_mutable_list:KuplungApp.ManagerObjects.lights)
+GUISettings::mutable_lights() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.GUISettings.lights)
   return &lights_;
 }
 
@@ -3833,15 +3843,39 @@ inline void LightObject::set_showlampdirection(bool value) {
   // @@protoc_insertion_point(field_set:KuplungApp.LightObject.showLampDirection)
 }
 
-// required .KuplungApp.ObjectCoordinate positionX = 6;
-inline bool LightObject::has_positionx() const {
+// required bool showInWire = 6;
+inline bool LightObject::has_showinwire() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void LightObject::set_has_positionx() {
+inline void LightObject::set_has_showinwire() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void LightObject::clear_has_positionx() {
+inline void LightObject::clear_has_showinwire() {
   _has_bits_[0] &= ~0x00000020u;
+}
+inline void LightObject::clear_showinwire() {
+  showinwire_ = false;
+  clear_has_showinwire();
+}
+inline bool LightObject::showinwire() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.showInWire)
+  return showinwire_;
+}
+inline void LightObject::set_showinwire(bool value) {
+  set_has_showinwire();
+  showinwire_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.LightObject.showInWire)
+}
+
+// required .KuplungApp.ObjectCoordinate positionX = 7;
+inline bool LightObject::has_positionx() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void LightObject::set_has_positionx() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void LightObject::clear_has_positionx() {
+  _has_bits_[0] &= ~0x00000040u;
 }
 inline void LightObject::clear_positionx() {
   if (positionx_ != NULL) positionx_->::KuplungApp::ObjectCoordinate::Clear();
@@ -3874,15 +3908,15 @@ inline void LightObject::set_allocated_positionx(::KuplungApp::ObjectCoordinate*
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.positionX)
 }
 
-// required .KuplungApp.ObjectCoordinate positionY = 7;
+// required .KuplungApp.ObjectCoordinate positionY = 8;
 inline bool LightObject::has_positiony() const {
-  return (_has_bits_[0] & 0x00000040u) != 0;
+  return (_has_bits_[0] & 0x00000080u) != 0;
 }
 inline void LightObject::set_has_positiony() {
-  _has_bits_[0] |= 0x00000040u;
+  _has_bits_[0] |= 0x00000080u;
 }
 inline void LightObject::clear_has_positiony() {
-  _has_bits_[0] &= ~0x00000040u;
+  _has_bits_[0] &= ~0x00000080u;
 }
 inline void LightObject::clear_positiony() {
   if (positiony_ != NULL) positiony_->::KuplungApp::ObjectCoordinate::Clear();
@@ -3915,15 +3949,15 @@ inline void LightObject::set_allocated_positiony(::KuplungApp::ObjectCoordinate*
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.positionY)
 }
 
-// required .KuplungApp.ObjectCoordinate positionZ = 8;
+// required .KuplungApp.ObjectCoordinate positionZ = 9;
 inline bool LightObject::has_positionz() const {
-  return (_has_bits_[0] & 0x00000080u) != 0;
+  return (_has_bits_[0] & 0x00000100u) != 0;
 }
 inline void LightObject::set_has_positionz() {
-  _has_bits_[0] |= 0x00000080u;
+  _has_bits_[0] |= 0x00000100u;
 }
 inline void LightObject::clear_has_positionz() {
-  _has_bits_[0] &= ~0x00000080u;
+  _has_bits_[0] &= ~0x00000100u;
 }
 inline void LightObject::clear_positionz() {
   if (positionz_ != NULL) positionz_->::KuplungApp::ObjectCoordinate::Clear();
@@ -3956,15 +3990,15 @@ inline void LightObject::set_allocated_positionz(::KuplungApp::ObjectCoordinate*
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.positionZ)
 }
 
-// required .KuplungApp.ObjectCoordinate directionX = 9;
+// required .KuplungApp.ObjectCoordinate directionX = 10;
 inline bool LightObject::has_directionx() const {
-  return (_has_bits_[0] & 0x00000100u) != 0;
+  return (_has_bits_[0] & 0x00000200u) != 0;
 }
 inline void LightObject::set_has_directionx() {
-  _has_bits_[0] |= 0x00000100u;
+  _has_bits_[0] |= 0x00000200u;
 }
 inline void LightObject::clear_has_directionx() {
-  _has_bits_[0] &= ~0x00000100u;
+  _has_bits_[0] &= ~0x00000200u;
 }
 inline void LightObject::clear_directionx() {
   if (directionx_ != NULL) directionx_->::KuplungApp::ObjectCoordinate::Clear();
@@ -3997,15 +4031,15 @@ inline void LightObject::set_allocated_directionx(::KuplungApp::ObjectCoordinate
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.directionX)
 }
 
-// required .KuplungApp.ObjectCoordinate directionY = 10;
+// required .KuplungApp.ObjectCoordinate directionY = 11;
 inline bool LightObject::has_directiony() const {
-  return (_has_bits_[0] & 0x00000200u) != 0;
+  return (_has_bits_[0] & 0x00000400u) != 0;
 }
 inline void LightObject::set_has_directiony() {
-  _has_bits_[0] |= 0x00000200u;
+  _has_bits_[0] |= 0x00000400u;
 }
 inline void LightObject::clear_has_directiony() {
-  _has_bits_[0] &= ~0x00000200u;
+  _has_bits_[0] &= ~0x00000400u;
 }
 inline void LightObject::clear_directiony() {
   if (directiony_ != NULL) directiony_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4038,15 +4072,15 @@ inline void LightObject::set_allocated_directiony(::KuplungApp::ObjectCoordinate
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.directionY)
 }
 
-// required .KuplungApp.ObjectCoordinate directionZ = 11;
+// required .KuplungApp.ObjectCoordinate directionZ = 12;
 inline bool LightObject::has_directionz() const {
-  return (_has_bits_[0] & 0x00000400u) != 0;
+  return (_has_bits_[0] & 0x00000800u) != 0;
 }
 inline void LightObject::set_has_directionz() {
-  _has_bits_[0] |= 0x00000400u;
+  _has_bits_[0] |= 0x00000800u;
 }
 inline void LightObject::clear_has_directionz() {
-  _has_bits_[0] &= ~0x00000400u;
+  _has_bits_[0] &= ~0x00000800u;
 }
 inline void LightObject::clear_directionz() {
   if (directionz_ != NULL) directionz_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4079,15 +4113,15 @@ inline void LightObject::set_allocated_directionz(::KuplungApp::ObjectCoordinate
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.directionZ)
 }
 
-// required .KuplungApp.ObjectCoordinate scaleX = 12;
+// required .KuplungApp.ObjectCoordinate scaleX = 13;
 inline bool LightObject::has_scalex() const {
-  return (_has_bits_[0] & 0x00000800u) != 0;
+  return (_has_bits_[0] & 0x00001000u) != 0;
 }
 inline void LightObject::set_has_scalex() {
-  _has_bits_[0] |= 0x00000800u;
+  _has_bits_[0] |= 0x00001000u;
 }
 inline void LightObject::clear_has_scalex() {
-  _has_bits_[0] &= ~0x00000800u;
+  _has_bits_[0] &= ~0x00001000u;
 }
 inline void LightObject::clear_scalex() {
   if (scalex_ != NULL) scalex_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4120,15 +4154,15 @@ inline void LightObject::set_allocated_scalex(::KuplungApp::ObjectCoordinate* sc
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.scaleX)
 }
 
-// required .KuplungApp.ObjectCoordinate scaleY = 13;
+// required .KuplungApp.ObjectCoordinate scaleY = 14;
 inline bool LightObject::has_scaley() const {
-  return (_has_bits_[0] & 0x00001000u) != 0;
+  return (_has_bits_[0] & 0x00002000u) != 0;
 }
 inline void LightObject::set_has_scaley() {
-  _has_bits_[0] |= 0x00001000u;
+  _has_bits_[0] |= 0x00002000u;
 }
 inline void LightObject::clear_has_scaley() {
-  _has_bits_[0] &= ~0x00001000u;
+  _has_bits_[0] &= ~0x00002000u;
 }
 inline void LightObject::clear_scaley() {
   if (scaley_ != NULL) scaley_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4161,15 +4195,15 @@ inline void LightObject::set_allocated_scaley(::KuplungApp::ObjectCoordinate* sc
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.scaleY)
 }
 
-// required .KuplungApp.ObjectCoordinate scaleZ = 14;
+// required .KuplungApp.ObjectCoordinate scaleZ = 15;
 inline bool LightObject::has_scalez() const {
-  return (_has_bits_[0] & 0x00002000u) != 0;
+  return (_has_bits_[0] & 0x00004000u) != 0;
 }
 inline void LightObject::set_has_scalez() {
-  _has_bits_[0] |= 0x00002000u;
+  _has_bits_[0] |= 0x00004000u;
 }
 inline void LightObject::clear_has_scalez() {
-  _has_bits_[0] &= ~0x00002000u;
+  _has_bits_[0] &= ~0x00004000u;
 }
 inline void LightObject::clear_scalez() {
   if (scalez_ != NULL) scalez_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4202,15 +4236,15 @@ inline void LightObject::set_allocated_scalez(::KuplungApp::ObjectCoordinate* sc
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.scaleZ)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateX = 15;
+// required .KuplungApp.ObjectCoordinate rotateX = 16;
 inline bool LightObject::has_rotatex() const {
-  return (_has_bits_[0] & 0x00004000u) != 0;
+  return (_has_bits_[0] & 0x00008000u) != 0;
 }
 inline void LightObject::set_has_rotatex() {
-  _has_bits_[0] |= 0x00004000u;
+  _has_bits_[0] |= 0x00008000u;
 }
 inline void LightObject::clear_has_rotatex() {
-  _has_bits_[0] &= ~0x00004000u;
+  _has_bits_[0] &= ~0x00008000u;
 }
 inline void LightObject::clear_rotatex() {
   if (rotatex_ != NULL) rotatex_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4243,15 +4277,15 @@ inline void LightObject::set_allocated_rotatex(::KuplungApp::ObjectCoordinate* r
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateX)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateY = 16;
+// required .KuplungApp.ObjectCoordinate rotateY = 17;
 inline bool LightObject::has_rotatey() const {
-  return (_has_bits_[0] & 0x00008000u) != 0;
+  return (_has_bits_[0] & 0x00010000u) != 0;
 }
 inline void LightObject::set_has_rotatey() {
-  _has_bits_[0] |= 0x00008000u;
+  _has_bits_[0] |= 0x00010000u;
 }
 inline void LightObject::clear_has_rotatey() {
-  _has_bits_[0] &= ~0x00008000u;
+  _has_bits_[0] &= ~0x00010000u;
 }
 inline void LightObject::clear_rotatey() {
   if (rotatey_ != NULL) rotatey_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4284,15 +4318,15 @@ inline void LightObject::set_allocated_rotatey(::KuplungApp::ObjectCoordinate* r
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateY)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateZ = 17;
+// required .KuplungApp.ObjectCoordinate rotateZ = 18;
 inline bool LightObject::has_rotatez() const {
-  return (_has_bits_[0] & 0x00010000u) != 0;
+  return (_has_bits_[0] & 0x00020000u) != 0;
 }
 inline void LightObject::set_has_rotatez() {
-  _has_bits_[0] |= 0x00010000u;
+  _has_bits_[0] |= 0x00020000u;
 }
 inline void LightObject::clear_has_rotatez() {
-  _has_bits_[0] &= ~0x00010000u;
+  _has_bits_[0] &= ~0x00020000u;
 }
 inline void LightObject::clear_rotatez() {
   if (rotatez_ != NULL) rotatez_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4325,15 +4359,15 @@ inline void LightObject::set_allocated_rotatez(::KuplungApp::ObjectCoordinate* r
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateZ)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateCenterX = 18;
+// required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
 inline bool LightObject::has_rotatecenterx() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
+  return (_has_bits_[0] & 0x00040000u) != 0;
 }
 inline void LightObject::set_has_rotatecenterx() {
-  _has_bits_[0] |= 0x00020000u;
+  _has_bits_[0] |= 0x00040000u;
 }
 inline void LightObject::clear_has_rotatecenterx() {
-  _has_bits_[0] &= ~0x00020000u;
+  _has_bits_[0] &= ~0x00040000u;
 }
 inline void LightObject::clear_rotatecenterx() {
   if (rotatecenterx_ != NULL) rotatecenterx_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4366,15 +4400,15 @@ inline void LightObject::set_allocated_rotatecenterx(::KuplungApp::ObjectCoordin
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateCenterX)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateCenterY = 19;
+// required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
 inline bool LightObject::has_rotatecentery() const {
-  return (_has_bits_[0] & 0x00040000u) != 0;
+  return (_has_bits_[0] & 0x00080000u) != 0;
 }
 inline void LightObject::set_has_rotatecentery() {
-  _has_bits_[0] |= 0x00040000u;
+  _has_bits_[0] |= 0x00080000u;
 }
 inline void LightObject::clear_has_rotatecentery() {
-  _has_bits_[0] &= ~0x00040000u;
+  _has_bits_[0] &= ~0x00080000u;
 }
 inline void LightObject::clear_rotatecentery() {
   if (rotatecentery_ != NULL) rotatecentery_->::KuplungApp::ObjectCoordinate::Clear();
@@ -4407,15 +4441,15 @@ inline void LightObject::set_allocated_rotatecentery(::KuplungApp::ObjectCoordin
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateCenterY)
 }
 
-// required .KuplungApp.ObjectCoordinate rotateCenterZ = 20;
+// required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
 inline bool LightObject::has_rotatecenterz() const {
-  return (_has_bits_[0] & 0x00080000u) != 0;
+  return (_has_bits_[0] & 0x00100000u) != 0;
 }
 inline void LightObject::set_has_rotatecenterz() {
-  _has_bits_[0] |= 0x00080000u;
+  _has_bits_[0] |= 0x00100000u;
 }
 inline void LightObject::clear_has_rotatecenterz() {
-  _has_bits_[0] &= ~0x00080000u;
+  _has_bits_[0] &= ~0x00100000u;
 }
 inline void LightObject::clear_rotatecenterz() {
   if (rotatecenterz_ != NULL) rotatecenterz_->::KuplungApp::ObjectCoordinate::Clear();

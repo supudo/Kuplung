@@ -26,9 +26,13 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
     kuplungFile.open(fileName.c_str(), std::ios::binary | std::ios::out);
 
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
-        this->storeObjectsManagerSettings(kuplungFile, managerObjects);
-//        this->storeGlobalLights(kuplungFile, managerObjects);
-//        this->storeObjects(kuplungFile, meshModelFaces);
+        this->storeObjectsManagerSettings(managerObjects);
+        this->storeGlobalLights(managerObjects);
+
+        if (!this->bufGUISettings.SerializeToOstream(&kuplungFile))
+          printf("Failed to write App Settings.\n");
+
+        this->storeObjects(kuplungFile, meshModelFaces);
 
         google::protobuf::ShutdownProtobufLibrary();
         kuplungFile.close();
@@ -44,9 +48,14 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
     if (kuplungFile.is_open() && !kuplungFile.bad()) {
         kuplungFile.seekg(0);
 
-        this->readObjectsManagerSettings(kuplungFile, managerObjects);
-//        this->readGlobalLights(kuplungFile, managerObjects);
-//        models = this->readObjects(kuplungFile, managerObjects);
+        if (!this->bufGUISettings.ParseFromIstream(&kuplungFile))
+            printf("Failed to read App Settings.\n");
+        else {
+            this->readObjectsManagerSettings(managerObjects);
+            this->readGlobalLights(managerObjects);
+        }
+
+        models = this->readObjects(kuplungFile, managerObjects);
 
         google::protobuf::ShutdownProtobufLibrary();
         kuplungFile.close();
@@ -55,52 +64,50 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
     return models;
 }
 
-void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungApp::ManagerObjects bufManagerObjects;
+void SaveOpenGProtocolBufs::storeObjectsManagerSettings(ObjectsManager *managerObjects) {
+    this->bufGUISettings.set_setting_fov(managerObjects->Setting_FOV);
+    this->bufGUISettings.set_setting_outlinethickness(managerObjects->Setting_OutlineThickness);
+    this->bufGUISettings.set_setting_ratiowidth(managerObjects->Setting_RatioWidth);
+    this->bufGUISettings.set_setting_ratioheight(managerObjects->Setting_RatioHeight);
+    this->bufGUISettings.set_setting_planeclose(managerObjects->Setting_PlaneClose);
+    this->bufGUISettings.set_setting_planefar(managerObjects->Setting_PlaneFar);
+    this->bufGUISettings.set_setting_gridsize(managerObjects->Setting_GridSize);
+    this->bufGUISettings.set_setting_skybox(managerObjects->Setting_Skybox);
+    this->bufGUISettings.set_allocated_setting_outlinecolor(this->getVec4(managerObjects->Setting_OutlineColor));
+    this->bufGUISettings.set_allocated_setting_uiambientlight(this->getVec3(managerObjects->Setting_UIAmbientLight));
+    this->bufGUISettings.set_setting_fixedgridworld(managerObjects->Setting_FixedGridWorld);
+    this->bufGUISettings.set_setting_outlinecolorpickeropen(managerObjects->Setting_OutlineColorPickerOpen);
+    this->bufGUISettings.set_setting_showaxishelpers(managerObjects->Setting_ShowAxisHelpers);
+    this->bufGUISettings.set_settings_showzaxis(managerObjects->Settings_ShowZAxis);
+    this->bufGUISettings.set_viewmodelskin(managerObjects->viewModelSkin);
+    this->bufGUISettings.set_allocated_solidlight_direction(this->getVec3(managerObjects->SolidLight_Direction));
+    this->bufGUISettings.set_allocated_solidlight_materialcolor(this->getVec3(managerObjects->SolidLight_MaterialColor));
+    this->bufGUISettings.set_allocated_solidlight_ambient(this->getVec3(managerObjects->SolidLight_Ambient));
+    this->bufGUISettings.set_allocated_solidlight_diffuse(this->getVec3(managerObjects->SolidLight_Diffuse));
+    this->bufGUISettings.set_allocated_solidlight_specular(this->getVec3(managerObjects->SolidLight_Specular));
+    this->bufGUISettings.set_solidlight_ambient_strength(managerObjects->SolidLight_Ambient_Strength);
+    this->bufGUISettings.set_solidlight_diffuse_strength(managerObjects->SolidLight_Diffuse_Strength);
+    this->bufGUISettings.set_solidlight_specular_strength(managerObjects->SolidLight_Specular_Strength);
+    this->bufGUISettings.set_solidlight_materialcolor_colorpicker(managerObjects->SolidLight_MaterialColor_ColorPicker);
+    this->bufGUISettings.set_solidlight_ambient_colorpicker(managerObjects->SolidLight_Ambient_ColorPicker);
+    this->bufGUISettings.set_solidlight_diffuse_colorpicker(managerObjects->SolidLight_Diffuse_ColorPicker);
+    this->bufGUISettings.set_solidlight_specular_colorpicker(managerObjects->SolidLight_Specular_ColorPicker);
+    this->bufGUISettings.set_setting_showterrain(managerObjects->Setting_ShowTerrain);
+    this->bufGUISettings.set_setting_terrainmodel(managerObjects->Setting_TerrainModel);
+    this->bufGUISettings.set_setting_terrainanimatex(managerObjects->Setting_TerrainAnimateX);
+    this->bufGUISettings.set_setting_terrainanimatey(managerObjects->Setting_TerrainAnimateY);
+    this->bufGUISettings.set_heightmapimage(managerObjects->heightmapImage);
+    this->bufGUISettings.set_setting_terrainwidth(managerObjects->Setting_TerrainWidth);
+    this->bufGUISettings.set_setting_terrainheight(managerObjects->Setting_TerrainHeight);
+    this->bufGUISettings.set_setting_deferredtestmode(managerObjects->Setting_DeferredTestMode);
+    this->bufGUISettings.set_setting_deferredtestlights(managerObjects->Setting_DeferredTestLights);
+    this->bufGUISettings.set_setting_lightingpass_drawmode(managerObjects->Setting_LightingPass_DrawMode);
+    this->bufGUISettings.set_setting_deferredambientstrength(managerObjects->Setting_DeferredAmbientStrength);
+    this->bufGUISettings.set_setting_deferredtestlightsnumber(managerObjects->Setting_DeferredTestLightsNumber);
+    this->bufGUISettings.set_setting_showspaceship(managerObjects->Setting_ShowSpaceship);
+    this->bufGUISettings.set_setting_generatespaceship(managerObjects->Setting_GenerateSpaceship);
 
-    bufManagerObjects.set_setting_fov(managerObjects->Setting_FOV);
-    bufManagerObjects.set_setting_outlinethickness(managerObjects->Setting_OutlineThickness);
-    bufManagerObjects.set_setting_ratiowidth(managerObjects->Setting_RatioWidth);
-    bufManagerObjects.set_setting_ratioheight(managerObjects->Setting_RatioHeight);
-    bufManagerObjects.set_setting_planeclose(managerObjects->Setting_PlaneClose);
-    bufManagerObjects.set_setting_planefar(managerObjects->Setting_PlaneFar);
-    bufManagerObjects.set_setting_gridsize(managerObjects->Setting_GridSize);
-    bufManagerObjects.set_setting_skybox(managerObjects->Setting_Skybox);
-    bufManagerObjects.set_allocated_setting_outlinecolor(this->getVec4(managerObjects->Setting_OutlineColor));
-    bufManagerObjects.set_allocated_setting_uiambientlight(this->getVec3(managerObjects->Setting_UIAmbientLight));
-    bufManagerObjects.set_setting_fixedgridworld(managerObjects->Setting_FixedGridWorld);
-    bufManagerObjects.set_setting_outlinecolorpickeropen(managerObjects->Setting_OutlineColorPickerOpen);
-    bufManagerObjects.set_setting_showaxishelpers(managerObjects->Setting_ShowAxisHelpers);
-    bufManagerObjects.set_settings_showzaxis(managerObjects->Settings_ShowZAxis);
-    bufManagerObjects.set_viewmodelskin(managerObjects->viewModelSkin);
-    bufManagerObjects.set_allocated_solidlight_direction(this->getVec3(managerObjects->SolidLight_Direction));
-    bufManagerObjects.set_allocated_solidlight_materialcolor(this->getVec3(managerObjects->SolidLight_MaterialColor));
-    bufManagerObjects.set_allocated_solidlight_ambient(this->getVec3(managerObjects->SolidLight_Ambient));
-    bufManagerObjects.set_allocated_solidlight_diffuse(this->getVec3(managerObjects->SolidLight_Diffuse));
-    bufManagerObjects.set_allocated_solidlight_specular(this->getVec3(managerObjects->SolidLight_Specular));
-    bufManagerObjects.set_solidlight_ambient_strength(managerObjects->SolidLight_Ambient_Strength);
-    bufManagerObjects.set_solidlight_diffuse_strength(managerObjects->SolidLight_Diffuse_Strength);
-    bufManagerObjects.set_solidlight_specular_strength(managerObjects->SolidLight_Specular_Strength);
-    bufManagerObjects.set_solidlight_materialcolor_colorpicker(managerObjects->SolidLight_MaterialColor_ColorPicker);
-    bufManagerObjects.set_solidlight_ambient_colorpicker(managerObjects->SolidLight_Ambient_ColorPicker);
-    bufManagerObjects.set_solidlight_diffuse_colorpicker(managerObjects->SolidLight_Diffuse_ColorPicker);
-    bufManagerObjects.set_solidlight_specular_colorpicker(managerObjects->SolidLight_Specular_ColorPicker);
-    bufManagerObjects.set_setting_showterrain(managerObjects->Setting_ShowTerrain);
-    bufManagerObjects.set_setting_terrainmodel(managerObjects->Setting_TerrainModel);
-    bufManagerObjects.set_setting_terrainanimatex(managerObjects->Setting_TerrainAnimateX);
-    bufManagerObjects.set_setting_terrainanimatey(managerObjects->Setting_TerrainAnimateY);
-    bufManagerObjects.set_heightmapimage(managerObjects->heightmapImage);
-    bufManagerObjects.set_setting_terrainwidth(managerObjects->Setting_TerrainWidth);
-    bufManagerObjects.set_setting_terrainheight(managerObjects->Setting_TerrainHeight);
-    bufManagerObjects.set_setting_deferredtestmode(managerObjects->Setting_DeferredTestMode);
-    bufManagerObjects.set_setting_deferredtestlights(managerObjects->Setting_DeferredTestLights);
-    bufManagerObjects.set_setting_lightingpass_drawmode(managerObjects->Setting_LightingPass_DrawMode);
-    bufManagerObjects.set_setting_deferredambientstrength(managerObjects->Setting_DeferredAmbientStrength);
-    bufManagerObjects.set_setting_deferredtestlightsnumber(managerObjects->Setting_DeferredTestLightsNumber);
-    bufManagerObjects.set_setting_showspaceship(managerObjects->Setting_ShowSpaceship);
-    bufManagerObjects.set_setting_generatespaceship(managerObjects->Setting_GenerateSpaceship);
-
-//    bufManagerObjects.set_allocated_matrixprojection(this->getMatrix(managerObjects->matrixProjection));
+//    this->bufGUISettings.set_allocated_matrixprojection(this->getMatrix(managerObjects->matrixProjection));
 
     KuplungApp::CameraSettings* bufCamera = new KuplungApp::CameraSettings();
     bufCamera->set_allocated_cameraposition(this->getVec3(managerObjects->camera->cameraPosition));
@@ -116,7 +123,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFil
     bufCamera->set_allocated_rotatecenterx(this->getObjectCoordinate(managerObjects->camera->rotateCenterX));
     bufCamera->set_allocated_rotatecentery(this->getObjectCoordinate(managerObjects->camera->rotateCenterY));
     bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate(managerObjects->camera->rotateCenterZ));
-    bufManagerObjects.set_allocated_camera(bufCamera);
+    this->bufGUISettings.set_allocated_camera(bufCamera);
 
     KuplungApp::GridSettings* bufGrid = new KuplungApp::GridSettings();
     bufGrid->set_actasmirror(managerObjects->grid->actAsMirror);
@@ -132,170 +139,186 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::ostream& kuplungFil
     bufGrid->set_allocated_scalez(this->getObjectCoordinate(managerObjects->grid->scaleZ));
     bufGrid->set_transparency(managerObjects->grid->transparency);
     bufGrid->set_showgrid(managerObjects->grid->showGrid);
-    bufManagerObjects.set_allocated_grid(bufGrid);
-
-    if (!bufManagerObjects.SerializeToOstream(&kuplungFile))
-      printf("Failed to write managerObjects settings.\n");
+    this->bufGUISettings.set_allocated_grid(bufGrid);
 }
 
-void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungApp::ManagerObjects bufManagerObjects;
-    if (!bufManagerObjects.ParseFromIstream(&kuplungFile))
-        printf("Failed to read managerObjects settings.\n");
-    else {
-        managerObjects->Setting_FOV = bufManagerObjects.setting_fov();
-        managerObjects->Setting_OutlineThickness = bufManagerObjects.setting_outlinethickness();
-        managerObjects->Setting_RatioWidth = bufManagerObjects.setting_ratiowidth();
-        managerObjects->Setting_RatioHeight = bufManagerObjects.setting_ratioheight();
-        managerObjects->Setting_PlaneClose = bufManagerObjects.setting_planeclose();
-        managerObjects->Setting_PlaneFar = bufManagerObjects.setting_planefar();
-        managerObjects->Setting_GridSize = bufManagerObjects.setting_gridsize();
-        managerObjects->Setting_Skybox = bufManagerObjects.setting_skybox();
-        managerObjects->Setting_OutlineColor = this->setVec4(bufManagerObjects.setting_outlinecolor());
-        managerObjects->Setting_UIAmbientLight = this->setVec3(bufManagerObjects.setting_uiambientlight());
-        managerObjects->Setting_FixedGridWorld = bufManagerObjects.setting_fixedgridworld();
-        managerObjects->Setting_OutlineColorPickerOpen = bufManagerObjects.setting_outlinecolorpickeropen();
-        managerObjects->Setting_ShowAxisHelpers = bufManagerObjects.setting_showaxishelpers();
-        managerObjects->Settings_ShowZAxis = bufManagerObjects.settings_showzaxis();
-        switch (bufManagerObjects.viewmodelskin()) {
-            case 0:
-                managerObjects->viewModelSkin = ViewModelSkin_Solid;
-                break;
-            case 1:
-                managerObjects->viewModelSkin = ViewModelSkin_Material;
-                break;
-            case 2:
-                managerObjects->viewModelSkin = ViewModelSkin_Texture;
-                break;
-            case 3:
-                managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
-                break;
-            case 4:
-                managerObjects->viewModelSkin = ViewModelSkin_Rendered;
-                break;
-            default:
-                break;
-        }
-        managerObjects->SolidLight_Direction = this->setVec3(bufManagerObjects.solidlight_direction());
-        managerObjects->SolidLight_MaterialColor = this->setVec3(bufManagerObjects.solidlight_materialcolor());
-        managerObjects->SolidLight_Ambient = this->setVec3(bufManagerObjects.solidlight_ambient());
-        managerObjects->SolidLight_Diffuse = this->setVec3(bufManagerObjects.solidlight_diffuse());
-        managerObjects->SolidLight_Specular = this->setVec3(bufManagerObjects.solidlight_specular());
-        managerObjects->SolidLight_Ambient_Strength = bufManagerObjects.solidlight_ambient_strength();
-        managerObjects->SolidLight_Diffuse_Strength = bufManagerObjects.solidlight_diffuse_strength();
-        managerObjects->SolidLight_Specular_Strength = bufManagerObjects.solidlight_specular_strength();
-        managerObjects->SolidLight_MaterialColor_ColorPicker = bufManagerObjects.solidlight_materialcolor_colorpicker();
-        managerObjects->SolidLight_Ambient_ColorPicker = bufManagerObjects.solidlight_ambient_colorpicker();
-        managerObjects->SolidLight_Diffuse_ColorPicker = bufManagerObjects.solidlight_diffuse_colorpicker();
-        managerObjects->SolidLight_Specular_ColorPicker = bufManagerObjects.solidlight_specular_colorpicker();
-        managerObjects->Setting_ShowTerrain = bufManagerObjects.setting_showterrain();
-        managerObjects->Setting_TerrainModel = bufManagerObjects.setting_terrainmodel();
-        managerObjects->Setting_TerrainAnimateX = bufManagerObjects.setting_terrainanimatex();
-        managerObjects->Setting_TerrainAnimateY = bufManagerObjects.setting_terrainanimatey();
-        managerObjects->heightmapImage = bufManagerObjects.heightmapimage();
-        managerObjects->Setting_TerrainWidth = bufManagerObjects.setting_terrainwidth();
-        managerObjects->Setting_TerrainHeight = bufManagerObjects.setting_terrainheight();
-        managerObjects->Setting_DeferredTestMode = bufManagerObjects.setting_deferredtestmode();
-        managerObjects->Setting_DeferredTestLights = bufManagerObjects.setting_deferredtestlights();
-        managerObjects->Setting_LightingPass_DrawMode = bufManagerObjects.setting_lightingpass_drawmode();
-        managerObjects->Setting_DeferredAmbientStrength = bufManagerObjects.setting_deferredambientstrength();
-        managerObjects->Setting_DeferredTestLightsNumber = bufManagerObjects.setting_deferredtestlightsnumber();
-        managerObjects->Setting_ShowSpaceship = bufManagerObjects.setting_showspaceship();
-        managerObjects->Setting_GenerateSpaceship = bufManagerObjects.setting_generatespaceship();
-
-//        managerObjects->matrixProjection = this->setMatrix(bufManagerObjects.matrixprojection());
-
-        const KuplungApp::CameraSettings& camera = bufManagerObjects.camera();
-        managerObjects->camera->cameraPosition = this->setVec3(camera.cameraposition());
-        managerObjects->camera->eyeSettings->View_Eye = this->setVec3(camera.view_eye());
-        managerObjects->camera->eyeSettings->View_Center = this->setVec3(camera.view_center());
-        managerObjects->camera->eyeSettings->View_Up = this->setVec3(camera.view_up());
-        managerObjects->camera->positionX = this->setObjectCoordinate(camera.positionx());
-        managerObjects->camera->positionY = this->setObjectCoordinate(camera.positiony());
-        managerObjects->camera->positionZ = this->setObjectCoordinate(camera.positionz());
-        managerObjects->camera->rotateX = this->setObjectCoordinate(camera.rotatex());
-        managerObjects->camera->rotateY = this->setObjectCoordinate(camera.rotatey());
-        managerObjects->camera->rotateZ = this->setObjectCoordinate(camera.rotatez());
-        managerObjects->camera->rotateCenterX = this->setObjectCoordinate(camera.rotatecenterx());
-        managerObjects->camera->rotateCenterY = this->setObjectCoordinate(camera.rotatecentery());
-        managerObjects->camera->rotateCenterZ = this->setObjectCoordinate(camera.rotatecenterz());
-
-        const KuplungApp::GridSettings& grid = bufManagerObjects.grid();
-        managerObjects->grid->actAsMirror = grid.actasmirror();
-        managerObjects->grid->gridSize = grid.gridsize();
-        managerObjects->grid->positionX = this->setObjectCoordinate(grid.positionx());
-        managerObjects->grid->positionY = this->setObjectCoordinate(grid.positiony());
-        managerObjects->grid->positionZ = this->setObjectCoordinate(grid.positionz());
-        managerObjects->grid->rotateX = this->setObjectCoordinate(grid.rotatex());
-        managerObjects->grid->rotateY = this->setObjectCoordinate(grid.rotatey());
-        managerObjects->grid->rotateZ = this->setObjectCoordinate(grid.rotatez());
-        managerObjects->grid->scaleX = this->setObjectCoordinate(grid.scalex());
-        managerObjects->grid->scaleY = this->setObjectCoordinate(grid.scaley());
-        managerObjects->grid->scaleZ = this->setObjectCoordinate(grid.scalez());
-        managerObjects->grid->transparency = grid.transparency();
-        managerObjects->grid->showGrid = grid.showgrid();
+void SaveOpenGProtocolBufs::readObjectsManagerSettings(ObjectsManager *managerObjects) {
+    managerObjects->Setting_FOV = this->bufGUISettings.setting_fov();
+    managerObjects->Setting_OutlineThickness = this->bufGUISettings.setting_outlinethickness();
+    managerObjects->Setting_RatioWidth = this->bufGUISettings.setting_ratiowidth();
+    managerObjects->Setting_RatioHeight = this->bufGUISettings.setting_ratioheight();
+    managerObjects->Setting_PlaneClose = this->bufGUISettings.setting_planeclose();
+    managerObjects->Setting_PlaneFar = this->bufGUISettings.setting_planefar();
+    managerObjects->Setting_GridSize = this->bufGUISettings.setting_gridsize();
+    managerObjects->Setting_Skybox = this->bufGUISettings.setting_skybox();
+    managerObjects->Setting_OutlineColor = this->setVec4(this->bufGUISettings.setting_outlinecolor());
+    managerObjects->Setting_UIAmbientLight = this->setVec3(this->bufGUISettings.setting_uiambientlight());
+    managerObjects->Setting_FixedGridWorld = this->bufGUISettings.setting_fixedgridworld();
+    managerObjects->Setting_OutlineColorPickerOpen = this->bufGUISettings.setting_outlinecolorpickeropen();
+    managerObjects->Setting_ShowAxisHelpers = this->bufGUISettings.setting_showaxishelpers();
+    managerObjects->Settings_ShowZAxis = this->bufGUISettings.settings_showzaxis();
+    switch (this->bufGUISettings.viewmodelskin()) {
+        case 0:
+            managerObjects->viewModelSkin = ViewModelSkin_Solid;
+            break;
+        case 1:
+            managerObjects->viewModelSkin = ViewModelSkin_Material;
+            break;
+        case 2:
+            managerObjects->viewModelSkin = ViewModelSkin_Texture;
+            break;
+        case 3:
+            managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
+            break;
+        case 4:
+            managerObjects->viewModelSkin = ViewModelSkin_Rendered;
+            break;
+        default:
+            break;
     }
+    managerObjects->SolidLight_Direction = this->setVec3(this->bufGUISettings.solidlight_direction());
+    managerObjects->SolidLight_MaterialColor = this->setVec3(this->bufGUISettings.solidlight_materialcolor());
+    managerObjects->SolidLight_Ambient = this->setVec3(this->bufGUISettings.solidlight_ambient());
+    managerObjects->SolidLight_Diffuse = this->setVec3(this->bufGUISettings.solidlight_diffuse());
+    managerObjects->SolidLight_Specular = this->setVec3(this->bufGUISettings.solidlight_specular());
+    managerObjects->SolidLight_Ambient_Strength = this->bufGUISettings.solidlight_ambient_strength();
+    managerObjects->SolidLight_Diffuse_Strength = this->bufGUISettings.solidlight_diffuse_strength();
+    managerObjects->SolidLight_Specular_Strength = this->bufGUISettings.solidlight_specular_strength();
+    managerObjects->SolidLight_MaterialColor_ColorPicker = this->bufGUISettings.solidlight_materialcolor_colorpicker();
+    managerObjects->SolidLight_Ambient_ColorPicker = this->bufGUISettings.solidlight_ambient_colorpicker();
+    managerObjects->SolidLight_Diffuse_ColorPicker = this->bufGUISettings.solidlight_diffuse_colorpicker();
+    managerObjects->SolidLight_Specular_ColorPicker = this->bufGUISettings.solidlight_specular_colorpicker();
+    managerObjects->Setting_ShowTerrain = this->bufGUISettings.setting_showterrain();
+    managerObjects->Setting_TerrainModel = this->bufGUISettings.setting_terrainmodel();
+    managerObjects->Setting_TerrainAnimateX = this->bufGUISettings.setting_terrainanimatex();
+    managerObjects->Setting_TerrainAnimateY = this->bufGUISettings.setting_terrainanimatey();
+    managerObjects->heightmapImage = this->bufGUISettings.heightmapimage();
+    managerObjects->Setting_TerrainWidth = this->bufGUISettings.setting_terrainwidth();
+    managerObjects->Setting_TerrainHeight = this->bufGUISettings.setting_terrainheight();
+    managerObjects->Setting_DeferredTestMode = this->bufGUISettings.setting_deferredtestmode();
+    managerObjects->Setting_DeferredTestLights = this->bufGUISettings.setting_deferredtestlights();
+    managerObjects->Setting_LightingPass_DrawMode = this->bufGUISettings.setting_lightingpass_drawmode();
+    managerObjects->Setting_DeferredAmbientStrength = this->bufGUISettings.setting_deferredambientstrength();
+    managerObjects->Setting_DeferredTestLightsNumber = this->bufGUISettings.setting_deferredtestlightsnumber();
+    managerObjects->Setting_ShowSpaceship = this->bufGUISettings.setting_showspaceship();
+    managerObjects->Setting_GenerateSpaceship = this->bufGUISettings.setting_generatespaceship();
+
+//        managerObjects->matrixProjection = this->setMatrix(this->bufGUISettings.matrixprojection());
+
+    const KuplungApp::CameraSettings& camera = this->bufGUISettings.camera();
+    managerObjects->camera->cameraPosition = this->setVec3(camera.cameraposition());
+    managerObjects->camera->eyeSettings->View_Eye = this->setVec3(camera.view_eye());
+    managerObjects->camera->eyeSettings->View_Center = this->setVec3(camera.view_center());
+    managerObjects->camera->eyeSettings->View_Up = this->setVec3(camera.view_up());
+    managerObjects->camera->positionX = this->setObjectCoordinate(camera.positionx());
+    managerObjects->camera->positionY = this->setObjectCoordinate(camera.positiony());
+    managerObjects->camera->positionZ = this->setObjectCoordinate(camera.positionz());
+    managerObjects->camera->rotateX = this->setObjectCoordinate(camera.rotatex());
+    managerObjects->camera->rotateY = this->setObjectCoordinate(camera.rotatey());
+    managerObjects->camera->rotateZ = this->setObjectCoordinate(camera.rotatez());
+    managerObjects->camera->rotateCenterX = this->setObjectCoordinate(camera.rotatecenterx());
+    managerObjects->camera->rotateCenterY = this->setObjectCoordinate(camera.rotatecentery());
+    managerObjects->camera->rotateCenterZ = this->setObjectCoordinate(camera.rotatecenterz());
+
+    const KuplungApp::GridSettings& grid = this->bufGUISettings.grid();
+    managerObjects->grid->actAsMirror = grid.actasmirror();
+    managerObjects->grid->gridSize = grid.gridsize();
+    managerObjects->grid->positionX = this->setObjectCoordinate(grid.positionx());
+    managerObjects->grid->positionY = this->setObjectCoordinate(grid.positiony());
+    managerObjects->grid->positionZ = this->setObjectCoordinate(grid.positionz());
+    managerObjects->grid->rotateX = this->setObjectCoordinate(grid.rotatex());
+    managerObjects->grid->rotateY = this->setObjectCoordinate(grid.rotatey());
+    managerObjects->grid->rotateZ = this->setObjectCoordinate(grid.rotatez());
+    managerObjects->grid->scaleX = this->setObjectCoordinate(grid.scalex());
+    managerObjects->grid->scaleY = this->setObjectCoordinate(grid.scaley());
+    managerObjects->grid->scaleZ = this->setObjectCoordinate(grid.scalez());
+    managerObjects->grid->transparency = grid.transparency();
+    managerObjects->grid->showGrid = grid.showgrid();
 }
 
-void SaveOpenGProtocolBufs::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungApp::ManagerObjects bufManagerObjects;
-
+void SaveOpenGProtocolBufs::storeGlobalLights(ObjectsManager *managerObjects) {
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
         Light* l = managerObjects->lightSources[i];
-        KuplungApp::LightObject* lo = bufManagerObjects.add_lights();
+        KuplungApp::LightObject* lo = this->bufGUISettings.add_lights();
         lo->set_title(l->title);
         lo->set_description(l->description);
         lo->set_type(l->type);
+        lo->set_showlampobject(l->showLampObject);
+        lo->set_showlampdirection(l->showLampDirection);
+        lo->set_showinwire(l->showInWire);
+        lo->set_allocated_positionx(this->getObjectCoordinate(l->positionX));
+        lo->set_allocated_positiony(this->getObjectCoordinate(l->positionY));
+        lo->set_allocated_positionz(this->getObjectCoordinate(l->positionZ));
+        lo->set_allocated_directionx(this->getObjectCoordinate(l->directionX));
+        lo->set_allocated_directiony(this->getObjectCoordinate(l->directionY));
+        lo->set_allocated_directionz(this->getObjectCoordinate(l->directionZ));
+        lo->set_allocated_scalex(this->getObjectCoordinate(l->scaleX));
+        lo->set_allocated_scaley(this->getObjectCoordinate(l->scaleY));
+        lo->set_allocated_scalez(this->getObjectCoordinate(l->scaleZ));
+        lo->set_allocated_rotatex(this->getObjectCoordinate(l->rotateX));
+        lo->set_allocated_rotatey(this->getObjectCoordinate(l->rotateY));
+        lo->set_allocated_rotatez(this->getObjectCoordinate(l->rotateZ));
+        lo->set_allocated_rotatecenterx(this->getObjectCoordinate(l->rotateCenterX));
+        lo->set_allocated_rotatecentery(this->getObjectCoordinate(l->rotateCenterY));
+        lo->set_allocated_rotatecenterz(this->getObjectCoordinate(l->rotateCenterZ));
     }
-
-    if (!bufManagerObjects.SerializeToOstream(&kuplungFile))
-      printf("Failed to write Lights.\n");
 }
 
-void SaveOpenGProtocolBufs::readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects) {
-    KuplungApp::ManagerObjects bufManagerObjects;
-    if (!bufManagerObjects.ParseFromIstream(&kuplungFile))
-        printf("Failed to read Lights.\n");
-    else {
-        for (int i=0; i<bufManagerObjects.lights_size(); i++) {
-            KuplungApp::LightObject lo = bufManagerObjects.lights(i);
+void SaveOpenGProtocolBufs::readGlobalLights(ObjectsManager *managerObjects) {
+    for (int i=0; i<this->bufGUISettings.lights_size(); i++) {
+        KuplungApp::LightObject lo = this->bufGUISettings.lights(i);
 
-            Light* l = new Light();
-            l->init(LightSourceType_Directional);
-            l->initProperties();
-            l->title = lo.title();
-            l->description = lo.description();
+        Light* l = new Light();
+        l->init(LightSourceType_Directional);
+        l->initProperties();
+        l->title = lo.title();
+        l->description = lo.description();
+        l->showLampObject = lo.showlampobject();
+        l->showLampDirection = lo.showlampdirection();
+        l->showInWire = lo.showinwire();
+        l->positionX = this->setObjectCoordinate(lo.positionx());
+        l->positionY = this->setObjectCoordinate(lo.positiony());
+        l->positionZ = this->setObjectCoordinate(lo.positionz());
+        l->directionX = this->setObjectCoordinate(lo.directionx());
+        l->directionY = this->setObjectCoordinate(lo.directiony());
+        l->directionZ = this->setObjectCoordinate(lo.directionz());
+        l->scaleX = this->setObjectCoordinate(lo.scalex());
+        l->scaleY = this->setObjectCoordinate(lo.scaley());
+        l->scaleZ = this->setObjectCoordinate(lo.scalez());
+        l->rotateX = this->setObjectCoordinate(lo.rotatex());
+        l->rotateY = this->setObjectCoordinate(lo.rotatey());
+        l->rotateZ = this->setObjectCoordinate(lo.rotatez());
+        l->rotateCenterX = this->setObjectCoordinate(lo.rotatecenterx());
+        l->rotateCenterY = this->setObjectCoordinate(lo.rotatecentery());
+        l->rotateCenterZ = this->setObjectCoordinate(lo.rotatecenterz());
 
-            switch (lo.type()) {
-                case 0:
-                    l->type = LightSourceType_Directional;
-                    break;
-                case 1:
-                    l->type = LightSourceType_Point;
-                    break;
-                case 2:
-                    l->type = LightSourceType_Spot;
-                    break;
-            }
-
-            switch (l->type) {
-                case LightSourceType_Directional:
-                    l->setModel(managerObjects->systemModels["light_directional"]);
-                    break;
-                case LightSourceType_Point:
-                    l->setModel(managerObjects->systemModels["light_point"]);
-                    break;
-                case LightSourceType_Spot:
-                    l->setModel(managerObjects->systemModels["light_spot"]);
-            }
-
-            l->initShaderProgram();
-            l->initBuffers(Settings::Instance()->appFolder());
-
-            managerObjects->lightSources.push_back(l);
-
-            printf("%s = %s\n", l->title.c_str(), l->description.c_str());
+        switch (lo.type()) {
+            case 0:
+                l->type = LightSourceType_Directional;
+                break;
+            case 1:
+                l->type = LightSourceType_Point;
+                break;
+            case 2:
+                l->type = LightSourceType_Spot;
+                break;
         }
+
+        switch (l->type) {
+            case LightSourceType_Directional:
+                l->setModel(managerObjects->systemModels["light_directional"]);
+                break;
+            case LightSourceType_Point:
+                l->setModel(managerObjects->systemModels["light_point"]);
+                break;
+            case LightSourceType_Spot:
+                l->setModel(managerObjects->systemModels["light_spot"]);
+        }
+
+        l->initShaderProgram();
+        l->initBuffers(Settings::Instance()->appFolder());
+
+        managerObjects->lightSources.push_back(l);
     }
 }
 

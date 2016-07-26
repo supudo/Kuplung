@@ -21,14 +21,16 @@ public:
     std::vector<ModelFaceData*> openKuplungFile(FBEntity file, ObjectsManager *managerObjects);
 
 private:
-    void storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects);
-    void readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    void storeObjectsManagerSettings(ObjectsManager *managerObjects);
+    void readObjectsManagerSettings(ObjectsManager *managerObjects);
 
-    void storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects);
-    void readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    void storeGlobalLights(ObjectsManager *managerObjects);
+    void readGlobalLights(ObjectsManager *managerObjects);
 
     void storeObjects(std::ostream& kuplungFile, std::vector<ModelFaceBase*> meshModelFaces);
     std::vector<ModelFaceData*> readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects);
+
+    KuplungApp::GUISettings bufGUISettings;
 
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
