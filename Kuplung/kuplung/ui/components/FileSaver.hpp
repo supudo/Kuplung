@@ -14,6 +14,7 @@
 #include <map>
 #include <string>
 #include "kuplung/settings/Settings.h"
+#include <boost/filesystem.hpp>
 
 typedef enum FileSaverOperation {
     FileSaverOperation_SaveScene,
@@ -36,6 +37,7 @@ private:
     std::string convertSize(size_t size);
     double roundOff(double n);
     void modalNewFolder();
+    bool isHidden(const boost::filesystem::path &p);
 
     bool showNewFolderModel;
     float panelWidth_FileOptions;

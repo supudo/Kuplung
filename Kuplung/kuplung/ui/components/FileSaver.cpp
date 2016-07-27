@@ -9,7 +9,7 @@
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
-#include <boost/filesystem.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iostream>
@@ -199,7 +199,7 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 fs::file_status fileStatus = iteratorFolder->status();
-//                if (fs::is_directory(fileStatus)) {
+                if (!this->isHidden(iteratorFolder->path())) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;
@@ -232,7 +232,7 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
                     entity.modifiedDate = mds;
 
                     folderContents[entity.path] = entity;
-//                }
+                }
             }
             catch (const std::exception & ex) {
                 Settings::Instance()->funcDoLog("[SceneExport] " + iteratorFolder->path().filename().string() + " " + ex.what());
@@ -270,4 +270,11 @@ double FileSaver::roundOff(double n) {
     int i = d + 0.5;
     d = (float)i / 100.0;
     return d;
+}
+
+bool FileSaver::isHidden(const fs::path &p) {
+    std::string name = p.filename().string();
+    if (name == ".." || name == "."  || boost::starts_with(name, "."))
+       return true;
+    return false;
 }

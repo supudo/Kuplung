@@ -9,6 +9,7 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
+#include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
 #include <iostream>
@@ -119,6 +120,7 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
                         break;
                 }
                 this->processFile(entity, t, TextureType);
+                Settings::Instance()->currentFolder = entity.path;
                 Settings::Instance()->saveSettings();
             }
             else {
@@ -251,7 +253,7 @@ void FileBrowser::logMessage(std::string logMessage) {
 
 bool FileBrowser::isHidden(const fs::path &p) {
     std::string name = p.filename().string();
-    if (name == ".." || name == "."  || name[0] == '.')
+    if (name == ".." || name == "."  || boost::starts_with(name, "."))
        return true;
     return false;
 }
