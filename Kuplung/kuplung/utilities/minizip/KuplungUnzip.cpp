@@ -43,6 +43,55 @@ extern "C" {
 
 #include "KuplungUnzip.hpp"
 
+
+
+KuplungUnzip::KuplungUnzip(std::string _filename) : filename(_filename), valid(false) {
+    this->zf = this->Open(_filename);
+    if (!this->zf)
+        return;
+    valid = true;
+}
+
+KuplungUnzip::~KuplungUnzip(void) {
+    this->Close();
+}
+
+void KuplungUnzip::Close(void) {
+    unzClose(this->zf);
+    this->zf = NULL;
+    this->valid = false;
+}
+
+zipFile KuplungUnzip::Open(std::string zipfilename) {
+    char filename_try[MAXFILENAME + 16] = "";
+    zipFile zf = NULL;
+
+#ifdef USEWIN32IOAPI
+    zlib_filefunc64_def ffunc;
+#endif
+
+    strncpy(filename_try, zipfilename.c_str(), MAXFILENAME - 1);
+    /* strncpy doesnt append the trailing NULL, of the string is too long. */
+    filename_try[MAXFILENAME] = '\0';
+
+#ifdef USEWIN32IOAPI
+    fill_win32_filefunc64A(&ffunc);
+    zf = unzOpen2_64(zipfilename.c_str(), &ffunc);
+#else
+    zf = unzOpen64(zipfilename.c_str());
+#endif
+    if (zf == NULL) {
+        strcat(filename_try, ".zip");
+#ifdef USEWIN32IOAPI
+        zf = unzOpen2_64(filename_try, &ffunc);
+#else
+        zf = unzOpen64(filename_try);
+#endif
+    }
+
+    return zf;
+}
+
 bool KuplungUnzip::UnzipFile(std::string unzipFolder) {
     unz_global_info global_info;
     if (unzGetGlobalInfo(this->zf, &global_info) != UNZ_OK) {
@@ -108,183 +157,3 @@ bool KuplungUnzip::UnzipFile(std::string unzipFolder) {
     }
     return true;
 }
-
-KuplungUnzip::KuplungUnzip(std::string _filename) : filename(_filename), valid(false) {
-    this->zf = this->Open(_filename);
-    if (!this->zf)
-        return;
-    valid = true;
-}
-
-void KuplungUnzip::Close(void) {
-    unzClose(this->zf);
-    this->zf = NULL;
-    this->valid = false;
-}
-
-zipFile KuplungUnzip::Open(std::string zipfilename) {
-    char filename_try[MAXFILENAME + 16] = "";
-    zipFile zf = NULL;
-
-#ifdef USEWIN32IOAPI
-    zlib_filefunc64_def ffunc;
-#endif
-
-    strncpy(filename_try, zipfilename.c_str(), MAXFILENAME - 1);
-    /* strncpy doesnt append the trailing NULL, of the string is too long. */
-    filename_try[MAXFILENAME] = '\0';
-
-#ifdef USEWIN32IOAPI
-    fill_win32_filefunc64A(&ffunc);
-    zf = unzOpen2_64(zipfilename.c_str(), &ffunc);
-#else
-    zf = unzOpen64(zipfilename.c_str());
-#endif
-    if (zf == NULL) {
-        strcat(filename_try, ".zip");
-#ifdef USEWIN32IOAPI
-        zf = unzOpen2_64(filename_try, &ffunc);
-#else
-        zf = unzOpen64(filename_try);
-#endif
-    }
-
-    return zf;
-}
-
-KuplungUnzip::~KuplungUnzip(void) {
-    this->Close();
-}
-
-int KuplungUnzip::ItemCount(void) {
-    int i = 0;
-    unzGoToFirstFile(this->zf);
-    do {
-        i++;
-    }
-    while((unzGoToNextFile(zf)) == UNZ_OK);
-    return i;
-}
-
-void KuplungUnzip::List(void) {
-    int i = 0;
-    printf("Listing:\n");
-    for (i=0 ; i<this->ItemCount(); i++) {
-        std::string n = this->NameOfItem(i);
-        long sz = this->SizeOfItem(i);
-        printf("[%i] : (%ld) %s", i, sz, n.c_str());
-    }
-}
-
-int KuplungUnzip::IndexOfItem(std::string itemName) {
-    int i = 0;
-    for (i=0 ; i<this->ItemCount(); i++) {
-        std::string n = this->NameOfItem(i);
-        if (!n.compare(itemName))
-            return i;
-    }
-    return -1;
-}
-
-void KuplungUnzip::ListOfItems(std::vector<std::string>& listing) {
-    unzGoToFirstFile(this->zf);
-    listing.clear();
-    do {
-        char filename_inzip[256];
-        unz_file_info64 file_info;
-        int err;
-
-        err = unzGetCurrentFileInfo64(zf, &file_info, filename_inzip,sizeof(filename_inzip), NULL, 0, NULL, 0);
-        if (err != UNZ_OK)
-            return;
-
-        std::string s(filename_inzip);
-        listing.push_back(s);
-    }
-    while ((unzGoToNextFile(this->zf)) == UNZ_OK);
-}
-
-std::string KuplungUnzip::NameOfItem(int idx) {
-    std::string ret("");
-    int i = 0;
-    unzGoToFirstFile(this->zf);
-    do {
-        char filename_inzip[256];
-        unz_file_info64 file_info;
-        int err;
-        err = unzGetCurrentFileInfo64(zf, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-        if (err != UNZ_OK)
-            return ret;
-        if (i == idx) {
-            ret.assign(filename_inzip);
-            return ret;
-        }
-        i++;
-    }
-    while ((unzGoToNextFile(this->zf)) == UNZ_OK);
-    return ret;
-}
-
-long KuplungUnzip::SizeOfItem(int idx) {
-    int i = 0;
-    unzGoToFirstFile(this->zf);
-    do {
-        char filename_inzip[256];
-        unz_file_info64 file_info;
-        int err;
-
-        err = unzGetCurrentFileInfo64(this->zf, &file_info, filename_inzip, sizeof(filename_inzip), NULL, 0, NULL, 0);
-        if (err != UNZ_OK)
-            return 0;
-        if (i == idx)
-            return file_info.uncompressed_size;
-        i++;
-    }
-    while ((unzGoToNextFile(this->zf)) == UNZ_OK);
-    return 0;
-}
-
-int KuplungUnzip::ExtractToRAM( int idx, char * buf, long bufsz, std::string pw) {
-    const char * password = NULL;
-    int i = 0;
-    int err = 0;
-
-    if (!buf)
-        return -1;
-    buf[0] = '\0';
-
-    if (pw.compare(""))
-        password = pw.c_str();
-
-    unzGoToFirstFile(this->zf);
-
-    do {
-        if (i == idx) {
-            err = unzOpenCurrentFilePassword(this->zf, password);
-            err = unzReadCurrentFile(this->zf, buf, bufsz);
-            unzCloseCurrentFile(this->zf);
-            return err;
-        }
-        i++;
-    }
-    while ((unzGoToNextFile(this->zf)) == UNZ_OK);
-
-    return 0;
-}
-
-std::string KuplungUnzip::ExtractToString(int idx, std::string password) {
-    long sz = this->SizeOfItem(idx);
-    if (sz == 0)
-        return "";
-
-    sz++;
-    sz *= sizeof(char);
-    char * buf = (char *)malloc(sz);
-
-    this->ExtractToRAM(idx, buf, sz, password);
-    buf[sz - 1] = '\0';
-
-    std::string ret(buf);
-    return ret;
-}
-

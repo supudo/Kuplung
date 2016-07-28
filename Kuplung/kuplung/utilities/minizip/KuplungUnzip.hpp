@@ -27,21 +27,6 @@ public:
     zipFile Open(std::string zipfilename);
     void Close(void);
 
-//    void Add(std::string contentPath, std::string zipPath, int flags);
-
-    void List(void);
-    int ItemCount(void);
-    int IndexOfItem(std::string itemName);
-
-    void ListOfItems(std::vector<std::string>& listing);
-    std::string NameOfItem(int idx);
-    long SizeOfItem(int idx);
-    int ExtractToRAM(int idx, char * buf, long bufsz, std::string pw="");
-    std::string ExtractToString(int idx, std::string password="");
-
-    long SizeOfItem(std::string itemName) { return this->SizeOfItem(this->IndexOfItem(itemName)); }
-    std::string ExtractToString(std::string itemName, std::string password="") { return this->ExtractToString(this->IndexOfItem(itemName), password); }
-
 private:
     std::string filename;
     bool valid;

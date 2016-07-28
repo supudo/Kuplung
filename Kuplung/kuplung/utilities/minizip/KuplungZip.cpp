@@ -6,6 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#include "kuplung/settings/Settings.h"
 #include <iostream>
 
 extern "C" {
@@ -96,7 +97,7 @@ int getFileCrc(const char* filenameinzip, void* buf, unsigned long size_buf, uns
              size_read = (int)fread(buf, 1, size_buf, fin);
              if (size_read < size_buf) {
                  if (feof(fin) == 0) {
-                     printf("error in reading %s\n",filenameinzip);
+                     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading %s\n", filenameinzip));
                      err = ZIP_ERRNO;
                  }
              }
@@ -170,7 +171,7 @@ int KuplungZip::Add(std::string contentPath, std::string zipPath, int flags) {
     size_buf = WRITEBUFFERSIZE;
     buf = (void*)malloc(size_buf);
     if (buf == NULL) {
-        printf("Error allocating memory\n");
+        Settings::Instance()->funcDoLog("[KuplungZip] Error allocating memory!\n");
         return ZIP_INTERNALERROR;
     }
 
@@ -193,12 +194,12 @@ int KuplungZip::Add(std::string contentPath, std::string zipPath, int flags) {
                                  password, crcFile, zip64);
 
     if (err != ZIP_OK)
-        printf("error in opening %s in zipfile\n", contentPath.c_str());
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening %s in zipfile!\n", contentPath.c_str()));
     else {
         fin = FOPEN_FUNC((char*)contentPath.c_str(), "rb");
         if (fin == NULL) {
             err = ZIP_ERRNO;
-            printf("error in opening %s for reading\n", contentPath.c_str());
+            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in opening %s for reading\n", contentPath.c_str()));
         }
     }
 
@@ -208,7 +209,7 @@ int KuplungZip::Add(std::string contentPath, std::string zipPath, int flags) {
             size_read = (int)fread(buf, 1, size_buf, fin);
             if (size_read < size_buf) {
                 if (feof(fin) == 0) {
-                    printf("error in reading %s\n", contentPath.c_str());
+                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in reading %s\n", contentPath.c_str()));
                     err = ZIP_ERRNO;
                 }
             }
@@ -216,7 +217,7 @@ int KuplungZip::Add(std::string contentPath, std::string zipPath, int flags) {
             if (size_read > 0) {
                 err = zipWriteInFileInZip (this->zf, buf, size_read);
                 if (err < 0)
-                    printf("error in writing %s in the zipfile\n", contentPath.c_str());
+                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungZip] Error in writing %s in the zipfile\n", contentPath.c_str()));
             }
         }
         while ((err == ZIP_OK) && (size_read > 0));
