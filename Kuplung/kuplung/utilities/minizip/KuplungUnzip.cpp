@@ -6,6 +6,7 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#include "kuplung/settings/Settings.h"
 #include <iostream>
 #include <boost/filesystem/path.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -42,86 +43,70 @@ extern "C" {
 
 #include "KuplungUnzip.hpp"
 
-#define dir_delimter '/'
-#define MAX_FILENAME 512
-#define READ_SIZE 8192
-
-void KuplungUnzip::UnzipFile(std::string unzipFolder) {
-    // Get info about the zip file
+bool KuplungUnzip::UnzipFile(std::string unzipFolder) {
     unz_global_info global_info;
     if (unzGetGlobalInfo(this->zf, &global_info) != UNZ_OK) {
-        printf("could not read file global info\n");
-        unzClose(this->zf);
+        Settings::Instance()->funcDoLog("[KuplungUnzip] Could not read file global info!\n");
+        return false;
     }
 
-    // Buffer to hold data read from the zip file.
-    char read_buffer[READ_SIZE];
-
-    // Loop to extract all files
+    char read_buffer[WRITEBUFFERSIZE];
     uLong i;
     for (i=0; i<global_info.number_entry; ++i) {
-        // Get info about current file.
         unz_file_info file_info;
-        char filename[MAX_FILENAME];
-        if (unzGetCurrentFileInfo(this->zf, &file_info, filename, MAX_FILENAME, NULL, 0, NULL, 0 ) != UNZ_OK) {
-            printf("could not read file info\n");
-            unzClose(this->zf);
+        char filename[MAXFILENAME];
+        if (unzGetCurrentFileInfo(this->zf, &file_info, filename, MAXFILENAME, NULL, 0, NULL, 0 ) != UNZ_OK) {
+            Settings::Instance()->funcDoLog("[KuplungUnzip] Could not read file info!\n");
+            return false;
         }
 
-        // Check if this entry is a directory or file.
         const size_t filename_length = std::strlen(filename);
-        if (filename[filename_length - 1] == dir_delimter) {
-            // Entry is a directory, so create it.
-            printf("dir:%s\n", filename);
+        if (filename[filename_length - 1] == '/') {
             boost::filesystem::path zFolder(filename);
-            if (!boost::filesystem::create_directory(zFolder))
-                printf("can't create folder - %s\n", zFolder.c_str());
+            if (!boost::filesystem::create_directory(zFolder)) {
+                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungUnzip] Can't create folder - %s\n", zFolder.c_str()));
+                return false;
+            }
         }
         else {
-            // Entry is a file, so extract it.
-            printf("file:%s\n", filename);
             if (unzOpenCurrentFile(this->zf) != UNZ_OK) {
-                printf("could not open file\n");
-                unzClose(this->zf);
+                Settings::Instance()->funcDoLog("[KuplungUnzip] Could not open file!\n");
+                return false;
             }
 
-            // Open a file to write out the data.
             std::string f = unzipFolder + filename;
             FILE *out = fopen(f.c_str(), "wb");
             if (out == NULL) {
-                printf("could not open destination file\n");
+                Settings::Instance()->funcDoLog("[KuplungUnzip] Could not open destination file!\n");
                 unzCloseCurrentFile(this->zf);
-                unzClose(this->zf);
+                return false;
             }
 
             int error = UNZ_OK;
             do {
-                error = unzReadCurrentFile(this->zf, read_buffer, READ_SIZE);
+                error = unzReadCurrentFile(this->zf, read_buffer, WRITEBUFFERSIZE);
                 if (error < 0) {
-                    printf("error %d\n", error);
+                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungUnzip] Error Occured %d\n", error));
                     unzCloseCurrentFile( this->zf);
-                    unzClose(this->zf);
+                    return false;
                 }
-
-                // Write data to file.
                 if (error > 0)
-                    fwrite(read_buffer, error, 1, out); // You should check return of fwrite...
+                    fwrite(read_buffer, error, 1, out);
             }
             while (error > 0);
-
             fclose(out);
         }
 
         unzCloseCurrentFile(this->zf);
 
-        // Go the the next entry listed in the zip file.
         if ((i + 1) < global_info.number_entry) {
             if (unzGoToNextFile(this->zf) != UNZ_OK) {
-                printf("cound not read next file\n");
-                unzClose(this->zf);
+                Settings::Instance()->funcDoLog("[KuplungUnzip] Could not read next file\n");
+                return false;
             }
         }
     }
+    return true;
 }
 
 KuplungUnzip::KuplungUnzip(std::string _filename) : filename(_filename), valid(false) {

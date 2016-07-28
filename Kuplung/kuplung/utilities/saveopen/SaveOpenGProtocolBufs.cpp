@@ -73,48 +73,45 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
     std::string zPath = file.path;
     boost::replace_all(zPath, file.title, "");
     KuplungUnzip *zFile = new KuplungUnzip(file.path.c_str());
-    zFile->UnzipFile(zPath);
-    delete zFile;
+    if (zFile->UnzipFile(zPath)) {
+//        delete zFile;
 
-    std::string fileNameSettings = file.path + ".settings";
-    std::string fileNameScene = file.path + ".scene";
+        std::string fileNameSettings = file.path + ".settings";
+        std::string fileNameScene = file.path + ".scene";
 
-    std::ifstream kuplungFileSettings;
-    kuplungFileSettings.open(fileNameSettings.c_str(), std::ios::binary | std::ios::in);
-    if (kuplungFileSettings.is_open() && !kuplungFileSettings.bad()) {
-        kuplungFileSettings.seekg(0);
+        std::ifstream kuplungFileSettings;
+        kuplungFileSettings.open(fileNameSettings.c_str(), std::ios::binary | std::ios::in);
+        if (kuplungFileSettings.is_open() && !kuplungFileSettings.bad()) {
+            kuplungFileSettings.seekg(0);
 
-        if (!this->bufGUISettings.ParseFromIstream(&kuplungFileSettings))
-            printf("Failed to read App Settings.\n");
-        else {
-            this->readObjectsManagerSettings(managerObjects);
-            this->readGlobalLights(managerObjects);
+            if (!this->bufGUISettings.ParseFromIstream(&kuplungFileSettings))
+                printf("Failed to read App Settings.\n");
+            else {
+                this->readObjectsManagerSettings(managerObjects);
+                this->readGlobalLights(managerObjects);
+            }
+
+            kuplungFileSettings.close();
         }
 
-        kuplungFileSettings.close();
+        std::ifstream kuplungFileScene;
+        kuplungFileScene.open(fileNameScene.c_str(), std::ios::binary | std::ios::in);
+        if (kuplungFileScene.is_open() && !kuplungFileScene.bad()) {
+            kuplungFileScene.seekg(0);
+
+            if (!this->bufScene.ParseFromIstream(&kuplungFileScene))
+                printf("Failed to read Scene.\n");
+            else
+                models = this->readObjects(managerObjects);
+
+            kuplungFileScene.close();
+        }
+
+        boost::filesystem::remove(fileNameSettings.c_str());
+        boost::filesystem::remove(fileNameScene.c_str());
     }
-
-    std::ifstream kuplungFileScene;
-    kuplungFileScene.open(fileNameScene.c_str(), std::ios::binary | std::ios::in);
-    if (kuplungFileScene.is_open() && !kuplungFileScene.bad()) {
-        kuplungFileScene.seekg(0);
-
-        if (!this->bufScene.ParseFromIstream(&kuplungFileScene))
-            printf("Failed to read Scene.\n");
-        else
-            models = this->readObjects(managerObjects);
-
-        kuplungFileScene.close();
-    }
-
-    boost::filesystem::remove(fileNameSettings.c_str());
-    boost::filesystem::remove(fileNameScene.c_str());
 
     google::protobuf::ShutdownProtobufLibrary();
-
-//    std::vector<MeshModel> mms;
-//    mms.push_back(models.at(0)->meshModel);
-//    Kuplung_printObjModels(mms, false);
 
     return models;
 }

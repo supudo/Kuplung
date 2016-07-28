@@ -22,7 +22,7 @@ public:
     ~KuplungUnzip(void);
 
     bool isValid(void) { return valid; }
-    void UnzipFile(std::string unzipFolder);
+    bool UnzipFile(std::string unzipFolder);
 
     zipFile Open(std::string zipfilename);
     void Close(void);
