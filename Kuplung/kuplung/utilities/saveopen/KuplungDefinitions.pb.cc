@@ -32,9 +32,21 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* ObjectCoordinate_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   ObjectCoordinate_reflection_ = NULL;
+const ::google::protobuf::Descriptor* FBEntity_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  FBEntity_reflection_ = NULL;
 const ::google::protobuf::Descriptor* MaterialColor_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   MaterialColor_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MeshMaterialTextureImage_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MeshMaterialTextureImage_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MeshModelMaterial_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MeshModelMaterial_reflection_ = NULL;
+const ::google::protobuf::Descriptor* Mesh_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  Mesh_reflection_ = NULL;
 
 }  // namespace
 
@@ -112,7 +124,27 @@ void protobuf_AssignDesc_KuplungDefinitions_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(ObjectCoordinate));
-  MaterialColor_descriptor_ = file->message_type(4);
+  FBEntity_descriptor_ = file->message_type(4);
+  static const int FBEntity_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, isfile_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, path_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, title_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, extension_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, modifieddate_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, size_),
+  };
+  FBEntity_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      FBEntity_descriptor_,
+      FBEntity::default_instance_,
+      FBEntity_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(FBEntity));
+  MaterialColor_descriptor_ = file->message_type(5);
   static const int MaterialColor_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, colorpickeropen_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, animate_),
@@ -130,6 +162,84 @@ void protobuf_AssignDesc_KuplungDefinitions_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(MaterialColor));
+  MeshMaterialTextureImage_descriptor_ = file->message_type(6);
+  static const int MeshMaterialTextureImage_offsets_[6] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, filename_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, image_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, width_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, height_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, usetexture_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, commands_),
+  };
+  MeshMaterialTextureImage_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MeshMaterialTextureImage_descriptor_,
+      MeshMaterialTextureImage::default_instance_,
+      MeshMaterialTextureImage_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MeshMaterialTextureImage));
+  MeshModelMaterial_descriptor_ = file->message_type(7);
+  static const int MeshModelMaterial_offsets_[17] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, materialid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, materialtitle_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, ambientcolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, diffusecolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, specularcolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, emissioncolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, specularexp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, transparency_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, illuminationmode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, opticaldensity_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, textureambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturediffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturespecular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturespecularexp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturedissolve_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturebump_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, texturedisplacement_),
+  };
+  MeshModelMaterial_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MeshModelMaterial_descriptor_,
+      MeshModelMaterial::default_instance_,
+      MeshModelMaterial_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MeshModelMaterial));
+  Mesh_descriptor_ = file->message_type(8);
+  static const int Mesh_offsets_[13] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, id_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, file_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, modeltitle_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, materialtitle_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, countvertices_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, counttexturecoordinates_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, countnormals_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, countindices_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, modelmaterial_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, vertices_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, texture_coordinates_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, normals_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, indices_),
+  };
+  Mesh_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      Mesh_descriptor_,
+      Mesh::default_instance_,
+      Mesh_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(Mesh));
 }
 
 namespace {
@@ -151,7 +261,15 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     ObjectCoordinate_descriptor_, &ObjectCoordinate::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    FBEntity_descriptor_, &FBEntity::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     MaterialColor_descriptor_, &MaterialColor::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MeshMaterialTextureImage_descriptor_, &MeshMaterialTextureImage::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MeshModelMaterial_descriptor_, &MeshModelMaterial::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    Mesh_descriptor_, &Mesh::default_instance());
 }
 
 }  // namespace
@@ -165,8 +283,16 @@ void protobuf_ShutdownFile_KuplungDefinitions_2eproto() {
   delete Vec4_reflection_;
   delete ObjectCoordinate::default_instance_;
   delete ObjectCoordinate_reflection_;
+  delete FBEntity::default_instance_;
+  delete FBEntity_reflection_;
   delete MaterialColor::default_instance_;
   delete MaterialColor_reflection_;
+  delete MeshMaterialTextureImage::default_instance_;
+  delete MeshMaterialTextureImage_reflection_;
+  delete MeshModelMaterial::default_instance_;
+  delete MeshModelMaterial_reflection_;
+  delete Mesh::default_instance_;
+  delete Mesh_reflection_;
 }
 
 void protobuf_AddDesc_KuplungDefinitions_2eproto() {
@@ -181,22 +307,64 @@ void protobuf_AddDesc_KuplungDefinitions_2eproto() {
     "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
     "\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001w\030\004 \002("
     "\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001 \002(\010\022\r"
-    "\n\005point\030\002 \002(\002\"l\n\rMaterialColor\022\027\n\017colorP"
-    "ickerOpen\030\001 \002(\010\022\017\n\007animate\030\002 \002(\010\022\020\n\010stre"
-    "ngth\030\003 \002(\002\022\037\n\005color\030\004 \002(\0132\020.KuplungApp.V"
-    "ec3", 323);
+    "\n\005point\030\002 \002(\002\"n\n\010FBEntity\022\016\n\006isFile\030\001 \002("
+    "\010\022\014\n\004path\030\002 \002(\t\022\r\n\005title\030\003 \002(\t\022\021\n\textens"
+    "ion\030\004 \002(\t\022\024\n\014modifiedDate\030\005 \002(\t\022\014\n\004size\030"
+    "\006 \002(\t\"l\n\rMaterialColor\022\027\n\017colorPickerOpe"
+    "n\030\001 \002(\010\022\017\n\007animate\030\002 \002(\010\022\020\n\010strength\030\003 \002"
+    "(\002\022\037\n\005color\030\004 \002(\0132\020.KuplungApp.Vec3\"\200\001\n\030"
+    "MeshMaterialTextureImage\022\020\n\010Filename\030\001 \002"
+    "(\t\022\r\n\005Image\030\002 \002(\t\022\r\n\005Width\030\003 \002(\005\022\016\n\006Heig"
+    "ht\030\004 \002(\005\022\022\n\nUseTexture\030\005 \002(\010\022\020\n\010Commands"
+    "\030\006 \003(\t\"\367\005\n\021MeshModelMaterial\022\022\n\nMaterial"
+    "ID\030\001 \002(\005\022\025\n\rMaterialTitle\030\002 \002(\t\022&\n\014Ambie"
+    "ntColor\030\003 \002(\0132\020.KuplungApp.Vec3\022&\n\014Diffu"
+    "seColor\030\004 \002(\0132\020.KuplungApp.Vec3\022\'\n\rSpecu"
+    "larColor\030\005 \002(\0132\020.KuplungApp.Vec3\022\'\n\rEmis"
+    "sionColor\030\006 \002(\0132\020.KuplungApp.Vec3\022\023\n\013Spe"
+    "cularExp\030\007 \002(\002\022\024\n\014Transparency\030\010 \002(\002\022\030\n\020"
+    "IlluminationMode\030\t \002(\007\022\026\n\016OpticalDensity"
+    "\030\n \002(\002\022<\n\016TextureAmbient\030\013 \002(\0132$.Kuplung"
+    "App.MeshMaterialTextureImage\022<\n\016TextureD"
+    "iffuse\030\014 \002(\0132$.KuplungApp.MeshMaterialTe"
+    "xtureImage\022=\n\017TextureSpecular\030\r \002(\0132$.Ku"
+    "plungApp.MeshMaterialTextureImage\022@\n\022Tex"
+    "tureSpecularExp\030\016 \002(\0132$.KuplungApp.MeshM"
+    "aterialTextureImage\022=\n\017TextureDissolve\030\017"
+    " \002(\0132$.KuplungApp.MeshMaterialTextureIma"
+    "ge\0229\n\013TextureBump\030\020 \002(\0132$.KuplungApp.Mes"
+    "hMaterialTextureImage\022A\n\023TextureDisplace"
+    "ment\030\021 \002(\0132$.KuplungApp.MeshMaterialText"
+    "ureImage\"\202\003\n\004Mesh\022\n\n\002ID\030\001 \002(\005\022\"\n\004File\030\002 "
+    "\002(\0132\024.KuplungApp.FBEntity\022\022\n\nModelTitle\030"
+    "\003 \002(\t\022\025\n\rMaterialTitle\030\004 \002(\t\022\025\n\rcountVer"
+    "tices\030\005 \002(\005\022\037\n\027countTextureCoordinates\030\006"
+    " \002(\005\022\024\n\014countNormals\030\007 \002(\005\022\024\n\014countIndic"
+    "es\030\010 \002(\005\0224\n\rModelMaterial\030\t \002(\0132\035.Kuplun"
+    "gApp.MeshModelMaterial\022\"\n\010vertices\030\n \003(\013"
+    "2\020.KuplungApp.Vec3\022-\n\023texture_coordinate"
+    "s\030\013 \003(\0132\020.KuplungApp.Vec2\022!\n\007normals\030\014 \003"
+    "(\0132\020.KuplungApp.Vec3\022\017\n\007indices\030\r \003(\007", 1717);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungDefinitions.proto", &protobuf_RegisterTypes);
   Vec2::default_instance_ = new Vec2();
   Vec3::default_instance_ = new Vec3();
   Vec4::default_instance_ = new Vec4();
   ObjectCoordinate::default_instance_ = new ObjectCoordinate();
+  FBEntity::default_instance_ = new FBEntity();
   MaterialColor::default_instance_ = new MaterialColor();
+  MeshMaterialTextureImage::default_instance_ = new MeshMaterialTextureImage();
+  MeshModelMaterial::default_instance_ = new MeshModelMaterial();
+  Mesh::default_instance_ = new Mesh();
   Vec2::default_instance_->InitAsDefaultInstance();
   Vec3::default_instance_->InitAsDefaultInstance();
   Vec4::default_instance_->InitAsDefaultInstance();
   ObjectCoordinate::default_instance_->InitAsDefaultInstance();
+  FBEntity::default_instance_->InitAsDefaultInstance();
   MaterialColor::default_instance_->InitAsDefaultInstance();
+  MeshMaterialTextureImage::default_instance_->InitAsDefaultInstance();
+  MeshModelMaterial::default_instance_->InitAsDefaultInstance();
+  Mesh::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_KuplungDefinitions_2eproto);
 }
 
@@ -1402,6 +1570,525 @@ void ObjectCoordinate::Swap(ObjectCoordinate* other) {
 // ===================================================================
 
 #ifndef _MSC_VER
+const int FBEntity::kIsFileFieldNumber;
+const int FBEntity::kPathFieldNumber;
+const int FBEntity::kTitleFieldNumber;
+const int FBEntity::kExtensionFieldNumber;
+const int FBEntity::kModifiedDateFieldNumber;
+const int FBEntity::kSizeFieldNumber;
+#endif  // !_MSC_VER
+
+FBEntity::FBEntity()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.FBEntity)
+}
+
+void FBEntity::InitAsDefaultInstance() {
+}
+
+FBEntity::FBEntity(const FBEntity& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.FBEntity)
+}
+
+void FBEntity::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  isfile_ = false;
+  path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  title_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  extension_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  modifieddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  size_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+FBEntity::~FBEntity() {
+  // @@protoc_insertion_point(destructor:KuplungApp.FBEntity)
+  SharedDtor();
+}
+
+void FBEntity::SharedDtor() {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete path_;
+  }
+  if (title_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete title_;
+  }
+  if (extension_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete extension_;
+  }
+  if (modifieddate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete modifieddate_;
+  }
+  if (size_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete size_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void FBEntity::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* FBEntity::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return FBEntity_descriptor_;
+}
+
+const FBEntity& FBEntity::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungDefinitions_2eproto();
+  return *default_instance_;
+}
+
+FBEntity* FBEntity::default_instance_ = NULL;
+
+FBEntity* FBEntity::New() const {
+  return new FBEntity;
+}
+
+void FBEntity::Clear() {
+  if (_has_bits_[0 / 32] & 63) {
+    isfile_ = false;
+    if (has_path()) {
+      if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        path_->clear();
+      }
+    }
+    if (has_title()) {
+      if (title_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        title_->clear();
+      }
+    }
+    if (has_extension()) {
+      if (extension_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        extension_->clear();
+      }
+    }
+    if (has_modifieddate()) {
+      if (modifieddate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        modifieddate_->clear();
+      }
+    }
+    if (has_size()) {
+      if (size_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        size_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool FBEntity::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.FBEntity)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bool isFile = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &isfile_)));
+          set_has_isfile();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_path;
+        break;
+      }
+
+      // required string path = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_path:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_path()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->path().data(), this->path().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "path");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_title;
+        break;
+      }
+
+      // required string title = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_title:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_title()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->title().data(), this->title().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "title");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_extension;
+        break;
+      }
+
+      // required string extension = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_extension:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_extension()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->extension().data(), this->extension().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "extension");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_modifiedDate;
+        break;
+      }
+
+      // required string modifiedDate = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_modifiedDate:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_modifieddate()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->modifieddate().data(), this->modifieddate().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "modifieddate");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_size;
+        break;
+      }
+
+      // required string size = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_size:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_size()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->size().data(), this->size().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "size");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.FBEntity)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.FBEntity)
+  return false;
+#undef DO_
+}
+
+void FBEntity::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.FBEntity)
+  // required bool isFile = 1;
+  if (has_isfile()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->isfile(), output);
+  }
+
+  // required string path = 2;
+  if (has_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->path().data(), this->path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "path");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->path(), output);
+  }
+
+  // required string title = 3;
+  if (has_title()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->title().data(), this->title().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "title");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->title(), output);
+  }
+
+  // required string extension = 4;
+  if (has_extension()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->extension().data(), this->extension().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "extension");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->extension(), output);
+  }
+
+  // required string modifiedDate = 5;
+  if (has_modifieddate()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->modifieddate().data(), this->modifieddate().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "modifieddate");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      5, this->modifieddate(), output);
+  }
+
+  // required string size = 6;
+  if (has_size()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->size().data(), this->size().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "size");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->size(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.FBEntity)
+}
+
+::google::protobuf::uint8* FBEntity::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.FBEntity)
+  // required bool isFile = 1;
+  if (has_isfile()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->isfile(), target);
+  }
+
+  // required string path = 2;
+  if (has_path()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->path().data(), this->path().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "path");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->path(), target);
+  }
+
+  // required string title = 3;
+  if (has_title()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->title().data(), this->title().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "title");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->title(), target);
+  }
+
+  // required string extension = 4;
+  if (has_extension()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->extension().data(), this->extension().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "extension");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->extension(), target);
+  }
+
+  // required string modifiedDate = 5;
+  if (has_modifieddate()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->modifieddate().data(), this->modifieddate().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "modifieddate");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        5, this->modifieddate(), target);
+  }
+
+  // required string size = 6;
+  if (has_size()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->size().data(), this->size().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "size");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->size(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.FBEntity)
+  return target;
+}
+
+int FBEntity::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bool isFile = 1;
+    if (has_isfile()) {
+      total_size += 1 + 1;
+    }
+
+    // required string path = 2;
+    if (has_path()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->path());
+    }
+
+    // required string title = 3;
+    if (has_title()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->title());
+    }
+
+    // required string extension = 4;
+    if (has_extension()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->extension());
+    }
+
+    // required string modifiedDate = 5;
+    if (has_modifieddate()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->modifieddate());
+    }
+
+    // required string size = 6;
+    if (has_size()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->size());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void FBEntity::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const FBEntity* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const FBEntity*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void FBEntity::MergeFrom(const FBEntity& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_isfile()) {
+      set_isfile(from.isfile());
+    }
+    if (from.has_path()) {
+      set_path(from.path());
+    }
+    if (from.has_title()) {
+      set_title(from.title());
+    }
+    if (from.has_extension()) {
+      set_extension(from.extension());
+    }
+    if (from.has_modifieddate()) {
+      set_modifieddate(from.modifieddate());
+    }
+    if (from.has_size()) {
+      set_size(from.size());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void FBEntity::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void FBEntity::CopyFrom(const FBEntity& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool FBEntity::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+
+  return true;
+}
+
+void FBEntity::Swap(FBEntity* other) {
+  if (other != this) {
+    std::swap(isfile_, other->isfile_);
+    std::swap(path_, other->path_);
+    std::swap(title_, other->title_);
+    std::swap(extension_, other->extension_);
+    std::swap(modifieddate_, other->modifieddate_);
+    std::swap(size_, other->size_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata FBEntity::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = FBEntity_descriptor_;
+  metadata.reflection = FBEntity_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
 const int MaterialColor::kColorPickerOpenFieldNumber;
 const int MaterialColor::kAnimateFieldNumber;
 const int MaterialColor::kStrengthFieldNumber;
@@ -1751,6 +2438,2234 @@ void MaterialColor::Swap(MaterialColor* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = MaterialColor_descriptor_;
   metadata.reflection = MaterialColor_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MeshMaterialTextureImage::kFilenameFieldNumber;
+const int MeshMaterialTextureImage::kImageFieldNumber;
+const int MeshMaterialTextureImage::kWidthFieldNumber;
+const int MeshMaterialTextureImage::kHeightFieldNumber;
+const int MeshMaterialTextureImage::kUseTextureFieldNumber;
+const int MeshMaterialTextureImage::kCommandsFieldNumber;
+#endif  // !_MSC_VER
+
+MeshMaterialTextureImage::MeshMaterialTextureImage()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.MeshMaterialTextureImage)
+}
+
+void MeshMaterialTextureImage::InitAsDefaultInstance() {
+}
+
+MeshMaterialTextureImage::MeshMaterialTextureImage(const MeshMaterialTextureImage& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshMaterialTextureImage)
+}
+
+void MeshMaterialTextureImage::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  width_ = 0;
+  height_ = 0;
+  usetexture_ = false;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MeshMaterialTextureImage::~MeshMaterialTextureImage() {
+  // @@protoc_insertion_point(destructor:KuplungApp.MeshMaterialTextureImage)
+  SharedDtor();
+}
+
+void MeshMaterialTextureImage::SharedDtor() {
+  if (filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete filename_;
+  }
+  if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete image_;
+  }
+  if (this != default_instance_) {
+  }
+}
+
+void MeshMaterialTextureImage::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MeshMaterialTextureImage::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MeshMaterialTextureImage_descriptor_;
+}
+
+const MeshMaterialTextureImage& MeshMaterialTextureImage::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungDefinitions_2eproto();
+  return *default_instance_;
+}
+
+MeshMaterialTextureImage* MeshMaterialTextureImage::default_instance_ = NULL;
+
+MeshMaterialTextureImage* MeshMaterialTextureImage::New() const {
+  return new MeshMaterialTextureImage;
+}
+
+void MeshMaterialTextureImage::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<MeshMaterialTextureImage*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 31) {
+    ZR_(width_, height_);
+    if (has_filename()) {
+      if (filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        filename_->clear();
+      }
+    }
+    if (has_image()) {
+      if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        image_->clear();
+      }
+    }
+    usetexture_ = false;
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  commands_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MeshMaterialTextureImage::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.MeshMaterialTextureImage)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required string Filename = 1;
+      case 1: {
+        if (tag == 10) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_filename()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->filename().data(), this->filename().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "filename");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_Image;
+        break;
+      }
+
+      // required string Image = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_Image:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_image()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->image().data(), this->image().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "image");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(24)) goto parse_Width;
+        break;
+      }
+
+      // required int32 Width = 3;
+      case 3: {
+        if (tag == 24) {
+         parse_Width:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &width_)));
+          set_has_width();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(32)) goto parse_Height;
+        break;
+      }
+
+      // required int32 Height = 4;
+      case 4: {
+        if (tag == 32) {
+         parse_Height:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &height_)));
+          set_has_height();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_UseTexture;
+        break;
+      }
+
+      // required bool UseTexture = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_UseTexture:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+                 input, &usetexture_)));
+          set_has_usetexture();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_Commands;
+        break;
+      }
+
+      // repeated string Commands = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_Commands:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->add_commands()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->commands(this->commands_size() - 1).data(),
+            this->commands(this->commands_size() - 1).length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "commands");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_Commands;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.MeshMaterialTextureImage)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.MeshMaterialTextureImage)
+  return false;
+#undef DO_
+}
+
+void MeshMaterialTextureImage::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.MeshMaterialTextureImage)
+  // required string Filename = 1;
+  if (has_filename()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->filename().data(), this->filename().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "filename");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->filename(), output);
+  }
+
+  // required string Image = 2;
+  if (has_image()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->image().data(), this->image().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "image");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->image(), output);
+  }
+
+  // required int32 Width = 3;
+  if (has_width()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->width(), output);
+  }
+
+  // required int32 Height = 4;
+  if (has_height()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->height(), output);
+  }
+
+  // required bool UseTexture = 5;
+  if (has_usetexture()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->usetexture(), output);
+  }
+
+  // repeated string Commands = 6;
+  for (int i = 0; i < this->commands_size(); i++) {
+  ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    this->commands(i).data(), this->commands(i).length(),
+    ::google::protobuf::internal::WireFormat::SERIALIZE,
+    "commands");
+    ::google::protobuf::internal::WireFormatLite::WriteString(
+      6, this->commands(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.MeshMaterialTextureImage)
+}
+
+::google::protobuf::uint8* MeshMaterialTextureImage::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshMaterialTextureImage)
+  // required string Filename = 1;
+  if (has_filename()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->filename().data(), this->filename().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "filename");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->filename(), target);
+  }
+
+  // required string Image = 2;
+  if (has_image()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->image().data(), this->image().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "image");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->image(), target);
+  }
+
+  // required int32 Width = 3;
+  if (has_width()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->width(), target);
+  }
+
+  // required int32 Height = 4;
+  if (has_height()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->height(), target);
+  }
+
+  // required bool UseTexture = 5;
+  if (has_usetexture()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->usetexture(), target);
+  }
+
+  // repeated string Commands = 6;
+  for (int i = 0; i < this->commands_size(); i++) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->commands(i).data(), this->commands(i).length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "commands");
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteStringToArray(6, this->commands(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshMaterialTextureImage)
+  return target;
+}
+
+int MeshMaterialTextureImage::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required string Filename = 1;
+    if (has_filename()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->filename());
+    }
+
+    // required string Image = 2;
+    if (has_image()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->image());
+    }
+
+    // required int32 Width = 3;
+    if (has_width()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->width());
+    }
+
+    // required int32 Height = 4;
+    if (has_height()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->height());
+    }
+
+    // required bool UseTexture = 5;
+    if (has_usetexture()) {
+      total_size += 1 + 1;
+    }
+
+  }
+  // repeated string Commands = 6;
+  total_size += 1 * this->commands_size();
+  for (int i = 0; i < this->commands_size(); i++) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+      this->commands(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MeshMaterialTextureImage::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MeshMaterialTextureImage* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MeshMaterialTextureImage*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  commands_.MergeFrom(from.commands_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_filename()) {
+      set_filename(from.filename());
+    }
+    if (from.has_image()) {
+      set_image(from.image());
+    }
+    if (from.has_width()) {
+      set_width(from.width());
+    }
+    if (from.has_height()) {
+      set_height(from.height());
+    }
+    if (from.has_usetexture()) {
+      set_usetexture(from.usetexture());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MeshMaterialTextureImage::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MeshMaterialTextureImage::CopyFrom(const MeshMaterialTextureImage& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MeshMaterialTextureImage::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+
+  return true;
+}
+
+void MeshMaterialTextureImage::Swap(MeshMaterialTextureImage* other) {
+  if (other != this) {
+    std::swap(filename_, other->filename_);
+    std::swap(image_, other->image_);
+    std::swap(width_, other->width_);
+    std::swap(height_, other->height_);
+    std::swap(usetexture_, other->usetexture_);
+    commands_.Swap(&other->commands_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MeshMaterialTextureImage::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MeshMaterialTextureImage_descriptor_;
+  metadata.reflection = MeshMaterialTextureImage_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MeshModelMaterial::kMaterialIDFieldNumber;
+const int MeshModelMaterial::kMaterialTitleFieldNumber;
+const int MeshModelMaterial::kAmbientColorFieldNumber;
+const int MeshModelMaterial::kDiffuseColorFieldNumber;
+const int MeshModelMaterial::kSpecularColorFieldNumber;
+const int MeshModelMaterial::kEmissionColorFieldNumber;
+const int MeshModelMaterial::kSpecularExpFieldNumber;
+const int MeshModelMaterial::kTransparencyFieldNumber;
+const int MeshModelMaterial::kIlluminationModeFieldNumber;
+const int MeshModelMaterial::kOpticalDensityFieldNumber;
+const int MeshModelMaterial::kTextureAmbientFieldNumber;
+const int MeshModelMaterial::kTextureDiffuseFieldNumber;
+const int MeshModelMaterial::kTextureSpecularFieldNumber;
+const int MeshModelMaterial::kTextureSpecularExpFieldNumber;
+const int MeshModelMaterial::kTextureDissolveFieldNumber;
+const int MeshModelMaterial::kTextureBumpFieldNumber;
+const int MeshModelMaterial::kTextureDisplacementFieldNumber;
+#endif  // !_MSC_VER
+
+MeshModelMaterial::MeshModelMaterial()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.MeshModelMaterial)
+}
+
+void MeshModelMaterial::InitAsDefaultInstance() {
+  ambientcolor_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
+  diffusecolor_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
+  specularcolor_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
+  emissioncolor_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
+  textureambient_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturediffuse_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturespecular_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturespecularexp_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturedissolve_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturebump_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+  texturedisplacement_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(&::KuplungApp::MeshMaterialTextureImage::default_instance());
+}
+
+MeshModelMaterial::MeshModelMaterial(const MeshModelMaterial& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModelMaterial)
+}
+
+void MeshModelMaterial::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  materialid_ = 0;
+  materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ambientcolor_ = NULL;
+  diffusecolor_ = NULL;
+  specularcolor_ = NULL;
+  emissioncolor_ = NULL;
+  specularexp_ = 0;
+  transparency_ = 0;
+  illuminationmode_ = 0u;
+  opticaldensity_ = 0;
+  textureambient_ = NULL;
+  texturediffuse_ = NULL;
+  texturespecular_ = NULL;
+  texturespecularexp_ = NULL;
+  texturedissolve_ = NULL;
+  texturebump_ = NULL;
+  texturedisplacement_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MeshModelMaterial::~MeshModelMaterial() {
+  // @@protoc_insertion_point(destructor:KuplungApp.MeshModelMaterial)
+  SharedDtor();
+}
+
+void MeshModelMaterial::SharedDtor() {
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete materialtitle_;
+  }
+  if (this != default_instance_) {
+    delete ambientcolor_;
+    delete diffusecolor_;
+    delete specularcolor_;
+    delete emissioncolor_;
+    delete textureambient_;
+    delete texturediffuse_;
+    delete texturespecular_;
+    delete texturespecularexp_;
+    delete texturedissolve_;
+    delete texturebump_;
+    delete texturedisplacement_;
+  }
+}
+
+void MeshModelMaterial::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* MeshModelMaterial::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return MeshModelMaterial_descriptor_;
+}
+
+const MeshModelMaterial& MeshModelMaterial::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungDefinitions_2eproto();
+  return *default_instance_;
+}
+
+MeshModelMaterial* MeshModelMaterial::default_instance_ = NULL;
+
+MeshModelMaterial* MeshModelMaterial::New() const {
+  return new MeshModelMaterial;
+}
+
+void MeshModelMaterial::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<MeshModelMaterial*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(materialid_, specularexp_);
+    if (has_materialtitle()) {
+      if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        materialtitle_->clear();
+      }
+    }
+    if (has_ambientcolor()) {
+      if (ambientcolor_ != NULL) ambientcolor_->::KuplungApp::Vec3::Clear();
+    }
+    if (has_diffusecolor()) {
+      if (diffusecolor_ != NULL) diffusecolor_->::KuplungApp::Vec3::Clear();
+    }
+    if (has_specularcolor()) {
+      if (specularcolor_ != NULL) specularcolor_->::KuplungApp::Vec3::Clear();
+    }
+    if (has_emissioncolor()) {
+      if (emissioncolor_ != NULL) emissioncolor_->::KuplungApp::Vec3::Clear();
+    }
+    transparency_ = 0;
+  }
+  if (_has_bits_[8 / 32] & 65280) {
+    illuminationmode_ = 0u;
+    opticaldensity_ = 0;
+    if (has_textureambient()) {
+      if (textureambient_ != NULL) textureambient_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+    if (has_texturediffuse()) {
+      if (texturediffuse_ != NULL) texturediffuse_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+    if (has_texturespecular()) {
+      if (texturespecular_ != NULL) texturespecular_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+    if (has_texturespecularexp()) {
+      if (texturespecularexp_ != NULL) texturespecularexp_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+    if (has_texturedissolve()) {
+      if (texturedissolve_ != NULL) texturedissolve_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+    if (has_texturebump()) {
+      if (texturebump_ != NULL) texturebump_->::KuplungApp::MeshMaterialTextureImage::Clear();
+    }
+  }
+  if (has_texturedisplacement()) {
+    if (texturedisplacement_ != NULL) texturedisplacement_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool MeshModelMaterial::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.MeshModelMaterial)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 MaterialID = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &materialid_)));
+          set_has_materialid();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_MaterialTitle;
+        break;
+      }
+
+      // required string MaterialTitle = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_MaterialTitle:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_materialtitle()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->materialtitle().data(), this->materialtitle().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "materialtitle");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_AmbientColor;
+        break;
+      }
+
+      // required .KuplungApp.Vec3 AmbientColor = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_AmbientColor:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ambientcolor()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_DiffuseColor;
+        break;
+      }
+
+      // required .KuplungApp.Vec3 DiffuseColor = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_DiffuseColor:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_diffusecolor()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(42)) goto parse_SpecularColor;
+        break;
+      }
+
+      // required .KuplungApp.Vec3 SpecularColor = 5;
+      case 5: {
+        if (tag == 42) {
+         parse_SpecularColor:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_specularcolor()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(50)) goto parse_EmissionColor;
+        break;
+      }
+
+      // required .KuplungApp.Vec3 EmissionColor = 6;
+      case 6: {
+        if (tag == 50) {
+         parse_EmissionColor:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_emissioncolor()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(61)) goto parse_SpecularExp;
+        break;
+      }
+
+      // required float SpecularExp = 7;
+      case 7: {
+        if (tag == 61) {
+         parse_SpecularExp:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &specularexp_)));
+          set_has_specularexp();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(69)) goto parse_Transparency;
+        break;
+      }
+
+      // required float Transparency = 8;
+      case 8: {
+        if (tag == 69) {
+         parse_Transparency:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &transparency_)));
+          set_has_transparency();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(77)) goto parse_IlluminationMode;
+        break;
+      }
+
+      // required fixed32 IlluminationMode = 9;
+      case 9: {
+        if (tag == 77) {
+         parse_IlluminationMode:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+                 input, &illuminationmode_)));
+          set_has_illuminationmode();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(85)) goto parse_OpticalDensity;
+        break;
+      }
+
+      // required float OpticalDensity = 10;
+      case 10: {
+        if (tag == 85) {
+         parse_OpticalDensity:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+                 input, &opticaldensity_)));
+          set_has_opticaldensity();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(90)) goto parse_TextureAmbient;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+      case 11: {
+        if (tag == 90) {
+         parse_TextureAmbient:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_textureambient()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(98)) goto parse_TextureDiffuse;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+      case 12: {
+        if (tag == 98) {
+         parse_TextureDiffuse:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturediffuse()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(106)) goto parse_TextureSpecular;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+      case 13: {
+        if (tag == 106) {
+         parse_TextureSpecular:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturespecular()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(114)) goto parse_TextureSpecularExp;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+      case 14: {
+        if (tag == 114) {
+         parse_TextureSpecularExp:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturespecularexp()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(122)) goto parse_TextureDissolve;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+      case 15: {
+        if (tag == 122) {
+         parse_TextureDissolve:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturedissolve()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(130)) goto parse_TextureBump;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+      case 16: {
+        if (tag == 130) {
+         parse_TextureBump:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturebump()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(138)) goto parse_TextureDisplacement;
+        break;
+      }
+
+      // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+      case 17: {
+        if (tag == 138) {
+         parse_TextureDisplacement:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_texturedisplacement()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.MeshModelMaterial)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.MeshModelMaterial)
+  return false;
+#undef DO_
+}
+
+void MeshModelMaterial::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.MeshModelMaterial)
+  // required int32 MaterialID = 1;
+  if (has_materialid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->materialid(), output);
+  }
+
+  // required string MaterialTitle = 2;
+  if (has_materialtitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->materialtitle().data(), this->materialtitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "materialtitle");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      2, this->materialtitle(), output);
+  }
+
+  // required .KuplungApp.Vec3 AmbientColor = 3;
+  if (has_ambientcolor()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, this->ambientcolor(), output);
+  }
+
+  // required .KuplungApp.Vec3 DiffuseColor = 4;
+  if (has_diffusecolor()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, this->diffusecolor(), output);
+  }
+
+  // required .KuplungApp.Vec3 SpecularColor = 5;
+  if (has_specularcolor()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, this->specularcolor(), output);
+  }
+
+  // required .KuplungApp.Vec3 EmissionColor = 6;
+  if (has_emissioncolor()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, this->emissioncolor(), output);
+  }
+
+  // required float SpecularExp = 7;
+  if (has_specularexp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->specularexp(), output);
+  }
+
+  // required float Transparency = 8;
+  if (has_transparency()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->transparency(), output);
+  }
+
+  // required fixed32 IlluminationMode = 9;
+  if (has_illuminationmode()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFixed32(9, this->illuminationmode(), output);
+  }
+
+  // required float OpticalDensity = 10;
+  if (has_opticaldensity()) {
+    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->opticaldensity(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+  if (has_textureambient()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->textureambient(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+  if (has_texturediffuse()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, this->texturediffuse(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+  if (has_texturespecular()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      13, this->texturespecular(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+  if (has_texturespecularexp()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      14, this->texturespecularexp(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+  if (has_texturedissolve()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      15, this->texturedissolve(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+  if (has_texturebump()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      16, this->texturebump(), output);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+  if (has_texturedisplacement()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, this->texturedisplacement(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.MeshModelMaterial)
+}
+
+::google::protobuf::uint8* MeshModelMaterial::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModelMaterial)
+  // required int32 MaterialID = 1;
+  if (has_materialid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->materialid(), target);
+  }
+
+  // required string MaterialTitle = 2;
+  if (has_materialtitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->materialtitle().data(), this->materialtitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "materialtitle");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        2, this->materialtitle(), target);
+  }
+
+  // required .KuplungApp.Vec3 AmbientColor = 3;
+  if (has_ambientcolor()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        3, this->ambientcolor(), target);
+  }
+
+  // required .KuplungApp.Vec3 DiffuseColor = 4;
+  if (has_diffusecolor()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        4, this->diffusecolor(), target);
+  }
+
+  // required .KuplungApp.Vec3 SpecularColor = 5;
+  if (has_specularcolor()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        5, this->specularcolor(), target);
+  }
+
+  // required .KuplungApp.Vec3 EmissionColor = 6;
+  if (has_emissioncolor()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        6, this->emissioncolor(), target);
+  }
+
+  // required float SpecularExp = 7;
+  if (has_specularexp()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->specularexp(), target);
+  }
+
+  // required float Transparency = 8;
+  if (has_transparency()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->transparency(), target);
+  }
+
+  // required fixed32 IlluminationMode = 9;
+  if (has_illuminationmode()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(9, this->illuminationmode(), target);
+  }
+
+  // required float OpticalDensity = 10;
+  if (has_opticaldensity()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->opticaldensity(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+  if (has_textureambient()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->textureambient(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+  if (has_texturediffuse()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        12, this->texturediffuse(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+  if (has_texturespecular()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        13, this->texturespecular(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+  if (has_texturespecularexp()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        14, this->texturespecularexp(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+  if (has_texturedissolve()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        15, this->texturedissolve(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+  if (has_texturebump()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        16, this->texturebump(), target);
+  }
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+  if (has_texturedisplacement()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        17, this->texturedisplacement(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModelMaterial)
+  return target;
+}
+
+int MeshModelMaterial::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 MaterialID = 1;
+    if (has_materialid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->materialid());
+    }
+
+    // required string MaterialTitle = 2;
+    if (has_materialtitle()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->materialtitle());
+    }
+
+    // required .KuplungApp.Vec3 AmbientColor = 3;
+    if (has_ambientcolor()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->ambientcolor());
+    }
+
+    // required .KuplungApp.Vec3 DiffuseColor = 4;
+    if (has_diffusecolor()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->diffusecolor());
+    }
+
+    // required .KuplungApp.Vec3 SpecularColor = 5;
+    if (has_specularcolor()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->specularcolor());
+    }
+
+    // required .KuplungApp.Vec3 EmissionColor = 6;
+    if (has_emissioncolor()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->emissioncolor());
+    }
+
+    // required float SpecularExp = 7;
+    if (has_specularexp()) {
+      total_size += 1 + 4;
+    }
+
+    // required float Transparency = 8;
+    if (has_transparency()) {
+      total_size += 1 + 4;
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required fixed32 IlluminationMode = 9;
+    if (has_illuminationmode()) {
+      total_size += 1 + 4;
+    }
+
+    // required float OpticalDensity = 10;
+    if (has_opticaldensity()) {
+      total_size += 1 + 4;
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+    if (has_textureambient()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->textureambient());
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+    if (has_texturediffuse()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturediffuse());
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+    if (has_texturespecular()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturespecular());
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+    if (has_texturespecularexp()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturespecularexp());
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+    if (has_texturedissolve()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturedissolve());
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+    if (has_texturebump()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturebump());
+    }
+
+  }
+  if (_has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+    if (has_texturedisplacement()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->texturedisplacement());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MeshModelMaterial::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const MeshModelMaterial* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MeshModelMaterial*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void MeshModelMaterial::MergeFrom(const MeshModelMaterial& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_materialid()) {
+      set_materialid(from.materialid());
+    }
+    if (from.has_materialtitle()) {
+      set_materialtitle(from.materialtitle());
+    }
+    if (from.has_ambientcolor()) {
+      mutable_ambientcolor()->::KuplungApp::Vec3::MergeFrom(from.ambientcolor());
+    }
+    if (from.has_diffusecolor()) {
+      mutable_diffusecolor()->::KuplungApp::Vec3::MergeFrom(from.diffusecolor());
+    }
+    if (from.has_specularcolor()) {
+      mutable_specularcolor()->::KuplungApp::Vec3::MergeFrom(from.specularcolor());
+    }
+    if (from.has_emissioncolor()) {
+      mutable_emissioncolor()->::KuplungApp::Vec3::MergeFrom(from.emissioncolor());
+    }
+    if (from.has_specularexp()) {
+      set_specularexp(from.specularexp());
+    }
+    if (from.has_transparency()) {
+      set_transparency(from.transparency());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_illuminationmode()) {
+      set_illuminationmode(from.illuminationmode());
+    }
+    if (from.has_opticaldensity()) {
+      set_opticaldensity(from.opticaldensity());
+    }
+    if (from.has_textureambient()) {
+      mutable_textureambient()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.textureambient());
+    }
+    if (from.has_texturediffuse()) {
+      mutable_texturediffuse()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturediffuse());
+    }
+    if (from.has_texturespecular()) {
+      mutable_texturespecular()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturespecular());
+    }
+    if (from.has_texturespecularexp()) {
+      mutable_texturespecularexp()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturespecularexp());
+    }
+    if (from.has_texturedissolve()) {
+      mutable_texturedissolve()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturedissolve());
+    }
+    if (from.has_texturebump()) {
+      mutable_texturebump()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturebump());
+    }
+  }
+  if (from._has_bits_[16 / 32] & (0xffu << (16 % 32))) {
+    if (from.has_texturedisplacement()) {
+      mutable_texturedisplacement()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturedisplacement());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void MeshModelMaterial::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void MeshModelMaterial::CopyFrom(const MeshModelMaterial& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MeshModelMaterial::IsInitialized() const {
+  if ((_has_bits_[0] & 0x0001ffff) != 0x0001ffff) return false;
+
+  if (has_ambientcolor()) {
+    if (!this->ambientcolor().IsInitialized()) return false;
+  }
+  if (has_diffusecolor()) {
+    if (!this->diffusecolor().IsInitialized()) return false;
+  }
+  if (has_specularcolor()) {
+    if (!this->specularcolor().IsInitialized()) return false;
+  }
+  if (has_emissioncolor()) {
+    if (!this->emissioncolor().IsInitialized()) return false;
+  }
+  if (has_textureambient()) {
+    if (!this->textureambient().IsInitialized()) return false;
+  }
+  if (has_texturediffuse()) {
+    if (!this->texturediffuse().IsInitialized()) return false;
+  }
+  if (has_texturespecular()) {
+    if (!this->texturespecular().IsInitialized()) return false;
+  }
+  if (has_texturespecularexp()) {
+    if (!this->texturespecularexp().IsInitialized()) return false;
+  }
+  if (has_texturedissolve()) {
+    if (!this->texturedissolve().IsInitialized()) return false;
+  }
+  if (has_texturebump()) {
+    if (!this->texturebump().IsInitialized()) return false;
+  }
+  if (has_texturedisplacement()) {
+    if (!this->texturedisplacement().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void MeshModelMaterial::Swap(MeshModelMaterial* other) {
+  if (other != this) {
+    std::swap(materialid_, other->materialid_);
+    std::swap(materialtitle_, other->materialtitle_);
+    std::swap(ambientcolor_, other->ambientcolor_);
+    std::swap(diffusecolor_, other->diffusecolor_);
+    std::swap(specularcolor_, other->specularcolor_);
+    std::swap(emissioncolor_, other->emissioncolor_);
+    std::swap(specularexp_, other->specularexp_);
+    std::swap(transparency_, other->transparency_);
+    std::swap(illuminationmode_, other->illuminationmode_);
+    std::swap(opticaldensity_, other->opticaldensity_);
+    std::swap(textureambient_, other->textureambient_);
+    std::swap(texturediffuse_, other->texturediffuse_);
+    std::swap(texturespecular_, other->texturespecular_);
+    std::swap(texturespecularexp_, other->texturespecularexp_);
+    std::swap(texturedissolve_, other->texturedissolve_);
+    std::swap(texturebump_, other->texturebump_);
+    std::swap(texturedisplacement_, other->texturedisplacement_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata MeshModelMaterial::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = MeshModelMaterial_descriptor_;
+  metadata.reflection = MeshModelMaterial_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int Mesh::kIDFieldNumber;
+const int Mesh::kFileFieldNumber;
+const int Mesh::kModelTitleFieldNumber;
+const int Mesh::kMaterialTitleFieldNumber;
+const int Mesh::kCountVerticesFieldNumber;
+const int Mesh::kCountTextureCoordinatesFieldNumber;
+const int Mesh::kCountNormalsFieldNumber;
+const int Mesh::kCountIndicesFieldNumber;
+const int Mesh::kModelMaterialFieldNumber;
+const int Mesh::kVerticesFieldNumber;
+const int Mesh::kTextureCoordinatesFieldNumber;
+const int Mesh::kNormalsFieldNumber;
+const int Mesh::kIndicesFieldNumber;
+#endif  // !_MSC_VER
+
+Mesh::Mesh()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.Mesh)
+}
+
+void Mesh::InitAsDefaultInstance() {
+  file_ = const_cast< ::KuplungApp::FBEntity*>(&::KuplungApp::FBEntity::default_instance());
+  modelmaterial_ = const_cast< ::KuplungApp::MeshModelMaterial*>(&::KuplungApp::MeshModelMaterial::default_instance());
+}
+
+Mesh::Mesh(const Mesh& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.Mesh)
+}
+
+void Mesh::SharedCtor() {
+  ::google::protobuf::internal::GetEmptyString();
+  _cached_size_ = 0;
+  id_ = 0;
+  file_ = NULL;
+  modeltitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  countvertices_ = 0;
+  counttexturecoordinates_ = 0;
+  countnormals_ = 0;
+  countindices_ = 0;
+  modelmaterial_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Mesh::~Mesh() {
+  // @@protoc_insertion_point(destructor:KuplungApp.Mesh)
+  SharedDtor();
+}
+
+void Mesh::SharedDtor() {
+  if (modeltitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete modeltitle_;
+  }
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete materialtitle_;
+  }
+  if (this != default_instance_) {
+    delete file_;
+    delete modelmaterial_;
+  }
+}
+
+void Mesh::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Mesh::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Mesh_descriptor_;
+}
+
+const Mesh& Mesh::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungDefinitions_2eproto();
+  return *default_instance_;
+}
+
+Mesh* Mesh::default_instance_ = NULL;
+
+Mesh* Mesh::New() const {
+  return new Mesh;
+}
+
+void Mesh::Clear() {
+#define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
+  &reinterpret_cast<Mesh*>(16)->f) - \
+   reinterpret_cast<char*>(16))
+
+#define ZR_(first, last) do {                              \
+    size_t f = OFFSET_OF_FIELD_(first);                    \
+    size_t n = OFFSET_OF_FIELD_(last) - f + sizeof(last);  \
+    ::memset(&first, 0, n);                                \
+  } while (0)
+
+  if (_has_bits_[0 / 32] & 255) {
+    ZR_(id_, countvertices_);
+    ZR_(counttexturecoordinates_, countnormals_);
+    if (has_file()) {
+      if (file_ != NULL) file_->::KuplungApp::FBEntity::Clear();
+    }
+    if (has_modeltitle()) {
+      if (modeltitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        modeltitle_->clear();
+      }
+    }
+    if (has_materialtitle()) {
+      if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+        materialtitle_->clear();
+      }
+    }
+    countindices_ = 0;
+  }
+  if (has_modelmaterial()) {
+    if (modelmaterial_ != NULL) modelmaterial_->::KuplungApp::MeshModelMaterial::Clear();
+  }
+
+#undef OFFSET_OF_FIELD_
+#undef ZR_
+
+  vertices_.Clear();
+  texture_coordinates_.Clear();
+  normals_.Clear();
+  indices_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Mesh::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.Mesh)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 ID = 1;
+      case 1: {
+        if (tag == 8) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &id_)));
+          set_has_id();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(18)) goto parse_File;
+        break;
+      }
+
+      // required .KuplungApp.FBEntity File = 2;
+      case 2: {
+        if (tag == 18) {
+         parse_File:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_file()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(26)) goto parse_ModelTitle;
+        break;
+      }
+
+      // required string ModelTitle = 3;
+      case 3: {
+        if (tag == 26) {
+         parse_ModelTitle:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_modeltitle()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->modeltitle().data(), this->modeltitle().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "modeltitle");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(34)) goto parse_MaterialTitle;
+        break;
+      }
+
+      // required string MaterialTitle = 4;
+      case 4: {
+        if (tag == 34) {
+         parse_MaterialTitle:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_materialtitle()));
+          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+            this->materialtitle().data(), this->materialtitle().length(),
+            ::google::protobuf::internal::WireFormat::PARSE,
+            "materialtitle");
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(40)) goto parse_countVertices;
+        break;
+      }
+
+      // required int32 countVertices = 5;
+      case 5: {
+        if (tag == 40) {
+         parse_countVertices:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &countvertices_)));
+          set_has_countvertices();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(48)) goto parse_countTextureCoordinates;
+        break;
+      }
+
+      // required int32 countTextureCoordinates = 6;
+      case 6: {
+        if (tag == 48) {
+         parse_countTextureCoordinates:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &counttexturecoordinates_)));
+          set_has_counttexturecoordinates();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(56)) goto parse_countNormals;
+        break;
+      }
+
+      // required int32 countNormals = 7;
+      case 7: {
+        if (tag == 56) {
+         parse_countNormals:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &countnormals_)));
+          set_has_countnormals();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(64)) goto parse_countIndices;
+        break;
+      }
+
+      // required int32 countIndices = 8;
+      case 8: {
+        if (tag == 64) {
+         parse_countIndices:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &countindices_)));
+          set_has_countindices();
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(74)) goto parse_ModelMaterial;
+        break;
+      }
+
+      // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+      case 9: {
+        if (tag == 74) {
+         parse_ModelMaterial:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_modelmaterial()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(82)) goto parse_vertices;
+        break;
+      }
+
+      // repeated .KuplungApp.Vec3 vertices = 10;
+      case 10: {
+        if (tag == 82) {
+         parse_vertices:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_vertices()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(82)) goto parse_vertices;
+        if (input->ExpectTag(90)) goto parse_texture_coordinates;
+        break;
+      }
+
+      // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+      case 11: {
+        if (tag == 90) {
+         parse_texture_coordinates:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_texture_coordinates()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(90)) goto parse_texture_coordinates;
+        if (input->ExpectTag(98)) goto parse_normals;
+        break;
+      }
+
+      // repeated .KuplungApp.Vec3 normals = 12;
+      case 12: {
+        if (tag == 98) {
+         parse_normals:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_normals()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(98)) goto parse_normals;
+        if (input->ExpectTag(109)) goto parse_indices;
+        break;
+      }
+
+      // repeated fixed32 indices = 13;
+      case 13: {
+        if (tag == 109) {
+         parse_indices:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+                 1, 109, input, this->mutable_indices())));
+        } else if (tag == 106) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+                 input, this->mutable_indices())));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(109)) goto parse_indices;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.Mesh)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.Mesh)
+  return false;
+#undef DO_
+}
+
+void Mesh::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.Mesh)
+  // required int32 ID = 1;
+  if (has_id()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
+  }
+
+  // required .KuplungApp.FBEntity File = 2;
+  if (has_file()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, this->file(), output);
+  }
+
+  // required string ModelTitle = 3;
+  if (has_modeltitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->modeltitle().data(), this->modeltitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "modeltitle");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      3, this->modeltitle(), output);
+  }
+
+  // required string MaterialTitle = 4;
+  if (has_materialtitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->materialtitle().data(), this->materialtitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "materialtitle");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->materialtitle(), output);
+  }
+
+  // required int32 countVertices = 5;
+  if (has_countvertices()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->countvertices(), output);
+  }
+
+  // required int32 countTextureCoordinates = 6;
+  if (has_counttexturecoordinates()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->counttexturecoordinates(), output);
+  }
+
+  // required int32 countNormals = 7;
+  if (has_countnormals()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->countnormals(), output);
+  }
+
+  // required int32 countIndices = 8;
+  if (has_countindices()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->countindices(), output);
+  }
+
+  // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+  if (has_modelmaterial()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, this->modelmaterial(), output);
+  }
+
+  // repeated .KuplungApp.Vec3 vertices = 10;
+  for (int i = 0; i < this->vertices_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      10, this->vertices(i), output);
+  }
+
+  // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+  for (int i = 0; i < this->texture_coordinates_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, this->texture_coordinates(i), output);
+  }
+
+  // repeated .KuplungApp.Vec3 normals = 12;
+  for (int i = 0; i < this->normals_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, this->normals(i), output);
+  }
+
+  // repeated fixed32 indices = 13;
+  for (int i = 0; i < this->indices_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteFixed32(
+      13, this->indices(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.Mesh)
+}
+
+::google::protobuf::uint8* Mesh::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Mesh)
+  // required int32 ID = 1;
+  if (has_id()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
+  }
+
+  // required .KuplungApp.FBEntity File = 2;
+  if (has_file()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        2, this->file(), target);
+  }
+
+  // required string ModelTitle = 3;
+  if (has_modeltitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->modeltitle().data(), this->modeltitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "modeltitle");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        3, this->modeltitle(), target);
+  }
+
+  // required string MaterialTitle = 4;
+  if (has_materialtitle()) {
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+      this->materialtitle().data(), this->materialtitle().length(),
+      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      "materialtitle");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->materialtitle(), target);
+  }
+
+  // required int32 countVertices = 5;
+  if (has_countvertices()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->countvertices(), target);
+  }
+
+  // required int32 countTextureCoordinates = 6;
+  if (has_counttexturecoordinates()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->counttexturecoordinates(), target);
+  }
+
+  // required int32 countNormals = 7;
+  if (has_countnormals()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->countnormals(), target);
+  }
+
+  // required int32 countIndices = 8;
+  if (has_countindices()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->countindices(), target);
+  }
+
+  // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+  if (has_modelmaterial()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        9, this->modelmaterial(), target);
+  }
+
+  // repeated .KuplungApp.Vec3 vertices = 10;
+  for (int i = 0; i < this->vertices_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        10, this->vertices(i), target);
+  }
+
+  // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+  for (int i = 0; i < this->texture_coordinates_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        11, this->texture_coordinates(i), target);
+  }
+
+  // repeated .KuplungApp.Vec3 normals = 12;
+  for (int i = 0; i < this->normals_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        12, this->normals(i), target);
+  }
+
+  // repeated fixed32 indices = 13;
+  for (int i = 0; i < this->indices_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteFixed32ToArray(13, this->indices(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Mesh)
+  return target;
+}
+
+int Mesh::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 ID = 1;
+    if (has_id()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->id());
+    }
+
+    // required .KuplungApp.FBEntity File = 2;
+    if (has_file()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->file());
+    }
+
+    // required string ModelTitle = 3;
+    if (has_modeltitle()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->modeltitle());
+    }
+
+    // required string MaterialTitle = 4;
+    if (has_materialtitle()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::StringSize(
+          this->materialtitle());
+    }
+
+    // required int32 countVertices = 5;
+    if (has_countvertices()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->countvertices());
+    }
+
+    // required int32 countTextureCoordinates = 6;
+    if (has_counttexturecoordinates()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->counttexturecoordinates());
+    }
+
+    // required int32 countNormals = 7;
+    if (has_countnormals()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->countnormals());
+    }
+
+    // required int32 countIndices = 8;
+    if (has_countindices()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->countindices());
+    }
+
+  }
+  if (_has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+    if (has_modelmaterial()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->modelmaterial());
+    }
+
+  }
+  // repeated .KuplungApp.Vec3 vertices = 10;
+  total_size += 1 * this->vertices_size();
+  for (int i = 0; i < this->vertices_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->vertices(i));
+  }
+
+  // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+  total_size += 1 * this->texture_coordinates_size();
+  for (int i = 0; i < this->texture_coordinates_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->texture_coordinates(i));
+  }
+
+  // repeated .KuplungApp.Vec3 normals = 12;
+  total_size += 1 * this->normals_size();
+  for (int i = 0; i < this->normals_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->normals(i));
+  }
+
+  // repeated fixed32 indices = 13;
+  {
+    int data_size = 0;
+    data_size = 4 * this->indices_size();
+    total_size += 1 * this->indices_size() + data_size;
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Mesh::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Mesh* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Mesh*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Mesh::MergeFrom(const Mesh& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  vertices_.MergeFrom(from.vertices_);
+  texture_coordinates_.MergeFrom(from.texture_coordinates_);
+  normals_.MergeFrom(from.normals_);
+  indices_.MergeFrom(from.indices_);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_id()) {
+      set_id(from.id());
+    }
+    if (from.has_file()) {
+      mutable_file()->::KuplungApp::FBEntity::MergeFrom(from.file());
+    }
+    if (from.has_modeltitle()) {
+      set_modeltitle(from.modeltitle());
+    }
+    if (from.has_materialtitle()) {
+      set_materialtitle(from.materialtitle());
+    }
+    if (from.has_countvertices()) {
+      set_countvertices(from.countvertices());
+    }
+    if (from.has_counttexturecoordinates()) {
+      set_counttexturecoordinates(from.counttexturecoordinates());
+    }
+    if (from.has_countnormals()) {
+      set_countnormals(from.countnormals());
+    }
+    if (from.has_countindices()) {
+      set_countindices(from.countindices());
+    }
+  }
+  if (from._has_bits_[8 / 32] & (0xffu << (8 % 32))) {
+    if (from.has_modelmaterial()) {
+      mutable_modelmaterial()->::KuplungApp::MeshModelMaterial::MergeFrom(from.modelmaterial());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Mesh::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Mesh::CopyFrom(const Mesh& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Mesh::IsInitialized() const {
+  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
+
+  if (has_file()) {
+    if (!this->file().IsInitialized()) return false;
+  }
+  if (has_modelmaterial()) {
+    if (!this->modelmaterial().IsInitialized()) return false;
+  }
+  if (!::google::protobuf::internal::AllAreInitialized(this->vertices())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->texture_coordinates())) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(this->normals())) return false;
+  return true;
+}
+
+void Mesh::Swap(Mesh* other) {
+  if (other != this) {
+    std::swap(id_, other->id_);
+    std::swap(file_, other->file_);
+    std::swap(modeltitle_, other->modeltitle_);
+    std::swap(materialtitle_, other->materialtitle_);
+    std::swap(countvertices_, other->countvertices_);
+    std::swap(counttexturecoordinates_, other->counttexturecoordinates_);
+    std::swap(countnormals_, other->countnormals_);
+    std::swap(countindices_, other->countindices_);
+    std::swap(modelmaterial_, other->modelmaterial_);
+    vertices_.Swap(&other->vertices_);
+    texture_coordinates_.Swap(&other->texture_coordinates_);
+    normals_.Swap(&other->normals_);
+    indices_.Swap(&other->indices_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Mesh::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Mesh_descriptor_;
+  metadata.reflection = Mesh_reflection_;
   return metadata;
 }
 

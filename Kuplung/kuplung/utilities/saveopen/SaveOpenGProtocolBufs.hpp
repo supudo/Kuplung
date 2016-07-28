@@ -44,11 +44,23 @@ private:
     glm::vec3 setVec3(const KuplungApp::Vec3& v);
     glm::vec2 setVec2(const KuplungApp::Vec2& v);
 
-//    KuplungApp::FloatMatrix* getMatrix(glm::mat4 m);
-//    glm::mat4 setMatrix(const KuplungApp::FloatMatrix& m);
-
     KuplungApp::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate* v);
     ObjectCoordinate* setObjectCoordinate(const KuplungApp::ObjectCoordinate& v);
+
+    KuplungApp::MaterialColor* getMaterialColor(MaterialColor* v);
+    MaterialColor* setMaterialColor(const KuplungApp::MaterialColor& v);
+
+    KuplungApp::Mesh* getMesh(MeshModel ent);
+    MeshModel setMesh(const KuplungApp::Mesh& ent);
+
+    KuplungApp::MeshModelMaterial* getMeshModelMaterial(MeshModelMaterial ent);
+    MeshModelMaterial setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent);
+
+    KuplungApp::FBEntity* getFBEntity(FBEntity ent);
+    FBEntity setFBEntity(const KuplungApp::FBEntity& ent);
+
+    KuplungApp::MeshMaterialTextureImage* getMeshMaterialTextureImage(MeshMaterialTextureImage ent);
+    MeshMaterialTextureImage setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent);
 };
 
 #endif /* SaveOpenGProtocolBufs_hpp */

@@ -52,8 +52,6 @@ message GUISettings {
   required bool Setting_ShowSpaceship = 40;
   required bool Setting_GenerateSpaceship = 41;
 
-  //required FloatMatrix matrixProjection = 42;
-
   required CameraSettings camera = 42;
   required GridSettings grid = 43;
   repeated LightObject lights = 44;

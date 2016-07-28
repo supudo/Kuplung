@@ -27,15 +27,65 @@ message ObjectCoordinate {
   required float point = 2;
 }
 
-message MaterialColor {
-    required bool colorPickerOpen = 1;
-    required bool animate = 2;
-    required float strength = 3;
-    required Vec3 color = 4;
+message FBEntity {
+  required bool isFile = 1;
+  required string path = 2;
+  required string title = 3;
+  required string extension = 4;
+  required string modifiedDate = 5;
+  required string size = 6;
 }
 
-//message FloatMatrix {
-//  required uint32 rows = 1;
-//  required uint32 cols = 2;
-//  repeated float data = 3 [packed = true];
-//}
+message MaterialColor {
+  required bool colorPickerOpen = 1;
+  required bool animate = 2;
+  required float strength = 3;
+  required Vec3 color = 4;
+}
+
+message MeshMaterialTextureImage {
+  required string Filename = 1;
+  required string Image = 2;
+  required int32 Width = 3;
+  required int32 Height = 4;
+  required bool UseTexture = 5;
+  repeated string Commands = 6;
+}
+
+message MeshModelMaterial {
+  required int32 MaterialID = 1;
+  required string MaterialTitle = 2;
+
+  required Vec3 AmbientColor = 3;
+  required Vec3 DiffuseColor = 4;
+  required Vec3 SpecularColor = 5;
+  required Vec3 EmissionColor = 6;
+  required float SpecularExp = 7;
+  required float Transparency = 8;
+  required fixed32 IlluminationMode = 9;
+  required float OpticalDensity = 10;
+
+  required MeshMaterialTextureImage TextureAmbient = 11;
+  required MeshMaterialTextureImage TextureDiffuse = 12;
+  required MeshMaterialTextureImage TextureSpecular = 13;
+  required MeshMaterialTextureImage TextureSpecularExp = 14;
+  required MeshMaterialTextureImage TextureDissolve = 15;
+  required MeshMaterialTextureImage TextureBump = 16;
+  required MeshMaterialTextureImage TextureDisplacement = 17;
+}
+
+message Mesh {
+  required int32 ID = 1;
+  required FBEntity File = 2;
+  required string ModelTitle = 3;
+  required string MaterialTitle = 4;
+  required int32 countVertices = 5;
+  required int32 countTextureCoordinates = 6;
+  required int32 countNormals = 7;
+  required int32 countIndices = 8;
+
+  required MeshModelMaterial ModelMaterial = 9;
+  repeated Vec3 vertices = 10;
+  repeated Vec2 texture_coordinates = 11;
+  repeated Vec3 normals = 12;
+  repeated fixed32 indices = 13;

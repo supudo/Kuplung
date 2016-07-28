@@ -75,17 +75,19 @@ void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened)
         file.path = this->currentFolder + "/" + file.title;
         file.extension = file.title.substr(file.title.rfind(".") + 1);
 
-        std::time_t modifiedDate = fs::last_write_time(file.path);
-        std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
-        std::string mds = std::to_string((modifiedDateLocal->tm_year + 1900));
-        mds += "-" + std::to_string((modifiedDateLocal->tm_mon + 1));
-        mds += "-" + std::to_string(modifiedDateLocal->tm_mday);
-        mds += " " + std::to_string(modifiedDateLocal->tm_hour);
-        mds += ":" + std::to_string(modifiedDateLocal->tm_min);
-        mds += "." + std::to_string(modifiedDateLocal->tm_sec);
-        file.modifiedDate = mds;
+//        std::time_t modifiedDate = fs::last_write_time(file.path);
+//        std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
+//        std::string mds = std::to_string((modifiedDateLocal->tm_year + 1900));
+//        mds += "-" + std::to_string((modifiedDateLocal->tm_mon + 1));
+//        mds += "-" + std::to_string(modifiedDateLocal->tm_mday);
+//        mds += " " + std::to_string(modifiedDateLocal->tm_hour);
+//        mds += ":" + std::to_string(modifiedDateLocal->tm_min);
+//        mds += "." + std::to_string(modifiedDateLocal->tm_sec);
+//        file.modifiedDate = mds;
+        file.modifiedDate = "";
 
-        file.size = this->convertSize(fs::file_size(file.path));
+//        file.size = this->convertSize(fs::file_size(file.path));
+        file.size = "";
         Settings::Instance()->currentFolder = this->currentFolder;
         this->funcFileSave(file, type);
     }

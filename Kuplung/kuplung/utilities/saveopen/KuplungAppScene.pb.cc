@@ -23,6 +23,9 @@ namespace {
 const ::google::protobuf::Descriptor* Scene_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   Scene_reflection_ = NULL;
+const ::google::protobuf::Descriptor* MeshModel_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  MeshModel_reflection_ = NULL;
 
 }  // namespace
 
@@ -34,64 +37,8 @@ void protobuf_AssignDesc_KuplungAppScene_2eproto() {
       "KuplungAppScene.proto");
   GOOGLE_CHECK(file != NULL);
   Scene_descriptor_ = file->message_type(0);
-  static const int Scene_offsets_[57] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, modelid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, settings_deferredrender_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_celshading_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_wireframe_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_usetessellation_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_usecullface_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_alpha_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_tessellationsubdivision_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, positionx_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, positiony_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, positionz_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, scalex_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, scaley_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, scalez_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, rotatex_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, rotatey_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, rotatez_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, displacex_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, displacey_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, displacez_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_materialrefraction_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_materialspecularexp_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_modelviewskin_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_materialcolor_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_ambient_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_diffuse_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_specular_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_ambient_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_diffuse_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, solidlightskin_specular_strength_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightposition_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightdirection_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightambient_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightdiffuse_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightspecular_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightstrengthambient_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightstrengthdiffuse_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightstrengthspecular_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, materialilluminationmodel_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, displacementheightscale_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, showmaterialeditor_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, materialambient_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, materialdiffuse_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, materialspecular_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, materialemission_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_parallaxmapping_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_gblur_mode_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_gblur_radius_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_gblur_width_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_dobloom_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_weighta_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_weightb_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_weightc_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_weightd_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_vignette_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, effect_bloom_vignetteatt_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, setting_lightingpass_drawmode_),
+  static const int Scene_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, models_),
   };
   Scene_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -104,6 +51,78 @@ void protobuf_AssignDesc_KuplungAppScene_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(Scene));
+  MeshModel_descriptor_ = file->message_type(1);
+  static const int MeshModel_offsets_[58] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, modelid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, settings_deferredrender_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_celshading_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_wireframe_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_usetessellation_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_usecullface_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_alpha_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_tessellationsubdivision_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, positionx_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, positiony_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, positionz_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, scalex_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, scaley_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, scalez_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, rotatex_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, rotatey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, rotatez_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, displacex_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, displacey_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, displacez_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_materialrefraction_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_materialspecularexp_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_modelviewskin_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_materialcolor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_ambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_diffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_specular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_ambient_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_diffuse_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, solidlightskin_specular_strength_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightposition_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightdirection_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightdiffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightspecular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightstrengthambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightstrengthdiffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightstrengthspecular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, materialilluminationmodel_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, displacementheightscale_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, showmaterialeditor_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, materialambient_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, materialdiffuse_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, materialspecular_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, materialemission_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_parallaxmapping_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_gblur_mode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_gblur_radius_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_gblur_width_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_dobloom_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_weighta_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_weightb_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_weightc_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_weightd_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_vignette_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, effect_bloom_vignetteatt_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, setting_lightingpass_drawmode_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, meshobject_),
+  };
+  MeshModel_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      MeshModel_descriptor_,
+      MeshModel::default_instance_,
+      MeshModel_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(MeshModel));
 }
 
 namespace {
@@ -118,6 +137,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     Scene_descriptor_, &Scene::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    MeshModel_descriptor_, &MeshModel::default_instance());
 }
 
 }  // namespace
@@ -125,6 +146,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void protobuf_ShutdownFile_KuplungAppScene_2eproto() {
   delete Scene::default_instance_;
   delete Scene_reflection_;
+  delete MeshModel::default_instance_;
+  delete MeshModel_reflection_;
 }
 
 void protobuf_AddDesc_KuplungAppScene_2eproto() {
@@ -136,72 +159,76 @@ void protobuf_AddDesc_KuplungAppScene_2eproto() {
   ::KuplungApp::protobuf_AddDesc_KuplungDefinitions_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\025KuplungAppScene.proto\022\nKuplungApp\032\030Kup"
-    "lungDefinitions.proto\"\200\023\n\005Scene\022\017\n\007Model"
-    "ID\030\001 \002(\005\022\037\n\027Settings_DeferredRender\030\002 \002("
-    "\010\022\032\n\022Setting_CelShading\030\003 \002(\010\022\031\n\021Setting"
-    "_Wireframe\030\004 \002(\010\022\037\n\027Setting_UseTessellat"
-    "ion\030\005 \002(\010\022\033\n\023Setting_UseCullFace\030\006 \002(\010\022\025"
-    "\n\rSetting_Alpha\030\007 \002(\002\022\'\n\037Setting_Tessell"
-    "ationSubdivision\030\010 \002(\005\022/\n\tpositionX\030\t \002("
-    "\0132\034.KuplungApp.ObjectCoordinate\022/\n\tposit"
-    "ionY\030\n \002(\0132\034.KuplungApp.ObjectCoordinate"
-    "\022/\n\tpositionZ\030\013 \002(\0132\034.KuplungApp.ObjectC"
-    "oordinate\022,\n\006scaleX\030\014 \002(\0132\034.KuplungApp.O"
-    "bjectCoordinate\022,\n\006scaleY\030\r \002(\0132\034.Kuplun"
-    "gApp.ObjectCoordinate\022,\n\006scaleZ\030\016 \002(\0132\034."
-    "KuplungApp.ObjectCoordinate\022-\n\007rotateX\030\017"
-    " \002(\0132\034.KuplungApp.ObjectCoordinate\022-\n\007ro"
-    "tateY\030\020 \002(\0132\034.KuplungApp.ObjectCoordinat"
-    "e\022-\n\007rotateZ\030\021 \002(\0132\034.KuplungApp.ObjectCo"
-    "ordinate\022/\n\tdisplaceX\030\022 \002(\0132\034.KuplungApp"
-    ".ObjectCoordinate\022/\n\tdisplaceY\030\023 \002(\0132\034.K"
-    "uplungApp.ObjectCoordinate\022/\n\tdisplaceZ\030"
-    "\024 \002(\0132\034.KuplungApp.ObjectCoordinate\022@\n\032S"
-    "etting_MaterialRefraction\030\025 \002(\0132\034.Kuplun"
-    "gApp.ObjectCoordinate\022A\n\033Setting_Materia"
-    "lSpecularExp\030\026 \002(\0132\034.KuplungApp.ObjectCo"
-    "ordinate\022\035\n\025Setting_ModelViewSkin\030\027 \002(\005\022"
-    "6\n\034solidLightSkin_MaterialColor\030\030 \002(\0132\020."
-    "KuplungApp.Vec3\0220\n\026solidLightSkin_Ambien"
-    "t\030\031 \002(\0132\020.KuplungApp.Vec3\0220\n\026solidLightS"
-    "kin_Diffuse\030\032 \002(\0132\020.KuplungApp.Vec3\0221\n\027s"
-    "olidLightSkin_Specular\030\033 \002(\0132\020.KuplungAp"
-    "p.Vec3\022\'\n\037solidLightSkin_Ambient_Strengt"
-    "h\030\034 \002(\002\022\'\n\037solidLightSkin_Diffuse_Streng"
-    "th\030\035 \002(\002\022(\n solidLightSkin_Specular_Stre"
-    "ngth\030\036 \002(\002\022/\n\025Setting_LightPosition\030\037 \002("
-    "\0132\020.KuplungApp.Vec3\0220\n\026Setting_LightDire"
-    "ction\030  \002(\0132\020.KuplungApp.Vec3\022.\n\024Setting"
-    "_LightAmbient\030! \002(\0132\020.KuplungApp.Vec3\022.\n"
-    "\024Setting_LightDiffuse\030\" \002(\0132\020.KuplungApp"
-    ".Vec3\022/\n\025Setting_LightSpecular\030# \002(\0132\020.K"
-    "uplungApp.Vec3\022$\n\034Setting_LightStrengthA"
-    "mbient\030$ \002(\002\022$\n\034Setting_LightStrengthDif"
-    "fuse\030% \002(\002\022%\n\035Setting_LightStrengthSpecu"
-    "lar\030& \002(\002\022!\n\031materialIlluminationModel\030\'"
-    " \002(\005\022=\n\027displacementHeightScale\030( \002(\0132\034."
-    "KuplungApp.ObjectCoordinate\022\032\n\022showMater"
-    "ialEditor\030) \002(\010\0222\n\017materialAmbient\030* \002(\013"
-    "2\031.KuplungApp.MaterialColor\0222\n\017materialD"
-    "iffuse\030+ \002(\0132\031.KuplungApp.MaterialColor\022"
-    "3\n\020materialSpecular\030, \002(\0132\031.KuplungApp.M"
-    "aterialColor\0223\n\020materialEmission\030- \002(\0132\031"
-    ".KuplungApp.MaterialColor\022\037\n\027Setting_Par"
-    "allaxMapping\030. \002(\010\022\031\n\021Effect_GBlur_Mode\030"
-    "/ \002(\005\0229\n\023Effect_GBlur_Radius\0300 \002(\0132\034.Kup"
-    "lungApp.ObjectCoordinate\0228\n\022Effect_GBlur"
-    "_Width\0301 \002(\0132\034.KuplungApp.ObjectCoordina"
-    "te\022\034\n\024Effect_Bloom_doBloom\0302 \002(\010\022\034\n\024Effe"
-    "ct_Bloom_WeightA\0303 \002(\002\022\034\n\024Effect_Bloom_W"
-    "eightB\0304 \002(\002\022\034\n\024Effect_Bloom_WeightC\0305 \002"
-    "(\002\022\034\n\024Effect_Bloom_WeightD\0306 \002(\002\022\035\n\025Effe"
-    "ct_Bloom_Vignette\0307 \002(\002\022 \n\030Effect_Bloom_"
-    "VignetteAtt\0308 \002(\002\022%\n\035Setting_LightingPas"
-    "s_DrawMode\0309 \002(\005", 2496);
+    "lungDefinitions.proto\".\n\005Scene\022%\n\006models"
+    "\030\001 \003(\0132\025.KuplungApp.MeshModel\"\252\023\n\tMeshMo"
+    "del\022\017\n\007ModelID\030\001 \002(\005\022\037\n\027Settings_Deferre"
+    "dRender\030\002 \002(\010\022\032\n\022Setting_CelShading\030\003 \002("
+    "\010\022\031\n\021Setting_Wireframe\030\004 \002(\010\022\037\n\027Setting_"
+    "UseTessellation\030\005 \002(\010\022\033\n\023Setting_UseCull"
+    "Face\030\006 \002(\010\022\025\n\rSetting_Alpha\030\007 \002(\002\022\'\n\037Set"
+    "ting_TessellationSubdivision\030\010 \002(\005\022/\n\tpo"
+    "sitionX\030\t \002(\0132\034.KuplungApp.ObjectCoordin"
+    "ate\022/\n\tpositionY\030\n \002(\0132\034.KuplungApp.Obje"
+    "ctCoordinate\022/\n\tpositionZ\030\013 \002(\0132\034.Kuplun"
+    "gApp.ObjectCoordinate\022,\n\006scaleX\030\014 \002(\0132\034."
+    "KuplungApp.ObjectCoordinate\022,\n\006scaleY\030\r "
+    "\002(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006sca"
+    "leZ\030\016 \002(\0132\034.KuplungApp.ObjectCoordinate\022"
+    "-\n\007rotateX\030\017 \002(\0132\034.KuplungApp.ObjectCoor"
+    "dinate\022-\n\007rotateY\030\020 \002(\0132\034.KuplungApp.Obj"
+    "ectCoordinate\022-\n\007rotateZ\030\021 \002(\0132\034.Kuplung"
+    "App.ObjectCoordinate\022/\n\tdisplaceX\030\022 \002(\0132"
+    "\034.KuplungApp.ObjectCoordinate\022/\n\tdisplac"
+    "eY\030\023 \002(\0132\034.KuplungApp.ObjectCoordinate\022/"
+    "\n\tdisplaceZ\030\024 \002(\0132\034.KuplungApp.ObjectCoo"
+    "rdinate\022@\n\032Setting_MaterialRefraction\030\025 "
+    "\002(\0132\034.KuplungApp.ObjectCoordinate\022A\n\033Set"
+    "ting_MaterialSpecularExp\030\026 \002(\0132\034.Kuplung"
+    "App.ObjectCoordinate\022\035\n\025Setting_ModelVie"
+    "wSkin\030\027 \002(\005\0226\n\034solidLightSkin_MaterialCo"
+    "lor\030\030 \002(\0132\020.KuplungApp.Vec3\0220\n\026solidLigh"
+    "tSkin_Ambient\030\031 \002(\0132\020.KuplungApp.Vec3\0220\n"
+    "\026solidLightSkin_Diffuse\030\032 \002(\0132\020.KuplungA"
+    "pp.Vec3\0221\n\027solidLightSkin_Specular\030\033 \002(\013"
+    "2\020.KuplungApp.Vec3\022\'\n\037solidLightSkin_Amb"
+    "ient_Strength\030\034 \002(\002\022\'\n\037solidLightSkin_Di"
+    "ffuse_Strength\030\035 \002(\002\022(\n solidLightSkin_S"
+    "pecular_Strength\030\036 \002(\002\022/\n\025Setting_LightP"
+    "osition\030\037 \002(\0132\020.KuplungApp.Vec3\0220\n\026Setti"
+    "ng_LightDirection\030  \002(\0132\020.KuplungApp.Vec"
+    "3\022.\n\024Setting_LightAmbient\030! \002(\0132\020.Kuplun"
+    "gApp.Vec3\022.\n\024Setting_LightDiffuse\030\" \002(\0132"
+    "\020.KuplungApp.Vec3\022/\n\025Setting_LightSpecul"
+    "ar\030# \002(\0132\020.KuplungApp.Vec3\022$\n\034Setting_Li"
+    "ghtStrengthAmbient\030$ \002(\002\022$\n\034Setting_Ligh"
+    "tStrengthDiffuse\030% \002(\002\022%\n\035Setting_LightS"
+    "trengthSpecular\030& \002(\002\022!\n\031materialIllumin"
+    "ationModel\030\' \002(\005\022=\n\027displacementHeightSc"
+    "ale\030( \002(\0132\034.KuplungApp.ObjectCoordinate\022"
+    "\032\n\022showMaterialEditor\030) \002(\010\0222\n\017materialA"
+    "mbient\030* \002(\0132\031.KuplungApp.MaterialColor\022"
+    "2\n\017materialDiffuse\030+ \002(\0132\031.KuplungApp.Ma"
+    "terialColor\0223\n\020materialSpecular\030, \002(\0132\031."
+    "KuplungApp.MaterialColor\0223\n\020materialEmis"
+    "sion\030- \002(\0132\031.KuplungApp.MaterialColor\022\037\n"
+    "\027Setting_ParallaxMapping\030. \002(\010\022\031\n\021Effect"
+    "_GBlur_Mode\030/ \002(\005\0229\n\023Effect_GBlur_Radius"
+    "\0300 \002(\0132\034.KuplungApp.ObjectCoordinate\0228\n\022"
+    "Effect_GBlur_Width\0301 \002(\0132\034.KuplungApp.Ob"
+    "jectCoordinate\022\034\n\024Effect_Bloom_doBloom\0302"
+    " \002(\010\022\034\n\024Effect_Bloom_WeightA\0303 \002(\002\022\034\n\024Ef"
+    "fect_Bloom_WeightB\0304 \002(\002\022\034\n\024Effect_Bloom"
+    "_WeightC\0305 \002(\002\022\034\n\024Effect_Bloom_WeightD\0306"
+    " \002(\002\022\035\n\025Effect_Bloom_Vignette\0307 \002(\002\022 \n\030E"
+    "ffect_Bloom_VignetteAtt\0308 \002(\002\022%\n\035Setting"
+    "_LightingPass_DrawMode\0309 \002(\005\022$\n\nmeshObje"
+    "ct\030: \002(\0132\020.KuplungApp.Mesh", 2586);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungAppScene.proto", &protobuf_RegisterTypes);
   Scene::default_instance_ = new Scene();
+  MeshModel::default_instance_ = new MeshModel();
   Scene::default_instance_->InitAsDefaultInstance();
+  MeshModel::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_KuplungAppScene_2eproto);
 }
 
@@ -215,63 +242,7 @@ struct StaticDescriptorInitializer_KuplungAppScene_2eproto {
 // ===================================================================
 
 #ifndef _MSC_VER
-const int Scene::kModelIDFieldNumber;
-const int Scene::kSettingsDeferredRenderFieldNumber;
-const int Scene::kSettingCelShadingFieldNumber;
-const int Scene::kSettingWireframeFieldNumber;
-const int Scene::kSettingUseTessellationFieldNumber;
-const int Scene::kSettingUseCullFaceFieldNumber;
-const int Scene::kSettingAlphaFieldNumber;
-const int Scene::kSettingTessellationSubdivisionFieldNumber;
-const int Scene::kPositionXFieldNumber;
-const int Scene::kPositionYFieldNumber;
-const int Scene::kPositionZFieldNumber;
-const int Scene::kScaleXFieldNumber;
-const int Scene::kScaleYFieldNumber;
-const int Scene::kScaleZFieldNumber;
-const int Scene::kRotateXFieldNumber;
-const int Scene::kRotateYFieldNumber;
-const int Scene::kRotateZFieldNumber;
-const int Scene::kDisplaceXFieldNumber;
-const int Scene::kDisplaceYFieldNumber;
-const int Scene::kDisplaceZFieldNumber;
-const int Scene::kSettingMaterialRefractionFieldNumber;
-const int Scene::kSettingMaterialSpecularExpFieldNumber;
-const int Scene::kSettingModelViewSkinFieldNumber;
-const int Scene::kSolidLightSkinMaterialColorFieldNumber;
-const int Scene::kSolidLightSkinAmbientFieldNumber;
-const int Scene::kSolidLightSkinDiffuseFieldNumber;
-const int Scene::kSolidLightSkinSpecularFieldNumber;
-const int Scene::kSolidLightSkinAmbientStrengthFieldNumber;
-const int Scene::kSolidLightSkinDiffuseStrengthFieldNumber;
-const int Scene::kSolidLightSkinSpecularStrengthFieldNumber;
-const int Scene::kSettingLightPositionFieldNumber;
-const int Scene::kSettingLightDirectionFieldNumber;
-const int Scene::kSettingLightAmbientFieldNumber;
-const int Scene::kSettingLightDiffuseFieldNumber;
-const int Scene::kSettingLightSpecularFieldNumber;
-const int Scene::kSettingLightStrengthAmbientFieldNumber;
-const int Scene::kSettingLightStrengthDiffuseFieldNumber;
-const int Scene::kSettingLightStrengthSpecularFieldNumber;
-const int Scene::kMaterialIlluminationModelFieldNumber;
-const int Scene::kDisplacementHeightScaleFieldNumber;
-const int Scene::kShowMaterialEditorFieldNumber;
-const int Scene::kMaterialAmbientFieldNumber;
-const int Scene::kMaterialDiffuseFieldNumber;
-const int Scene::kMaterialSpecularFieldNumber;
-const int Scene::kMaterialEmissionFieldNumber;
-const int Scene::kSettingParallaxMappingFieldNumber;
-const int Scene::kEffectGBlurModeFieldNumber;
-const int Scene::kEffectGBlurRadiusFieldNumber;
-const int Scene::kEffectGBlurWidthFieldNumber;
-const int Scene::kEffectBloomDoBloomFieldNumber;
-const int Scene::kEffectBloomWeightAFieldNumber;
-const int Scene::kEffectBloomWeightBFieldNumber;
-const int Scene::kEffectBloomWeightCFieldNumber;
-const int Scene::kEffectBloomWeightDFieldNumber;
-const int Scene::kEffectBloomVignetteFieldNumber;
-const int Scene::kEffectBloomVignetteAttFieldNumber;
-const int Scene::kSettingLightingPassDrawModeFieldNumber;
+const int Scene::kModelsFieldNumber;
 #endif  // !_MSC_VER
 
 Scene::Scene()
@@ -281,6 +252,283 @@ Scene::Scene()
 }
 
 void Scene::InitAsDefaultInstance() {
+}
+
+Scene::Scene(const Scene& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.Scene)
+}
+
+void Scene::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+Scene::~Scene() {
+  // @@protoc_insertion_point(destructor:KuplungApp.Scene)
+  SharedDtor();
+}
+
+void Scene::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void Scene::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* Scene::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return Scene_descriptor_;
+}
+
+const Scene& Scene::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_KuplungAppScene_2eproto();
+  return *default_instance_;
+}
+
+Scene* Scene::default_instance_ = NULL;
+
+Scene* Scene::New() const {
+  return new Scene;
+}
+
+void Scene::Clear() {
+  models_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool Scene::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:KuplungApp.Scene)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(127);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .KuplungApp.MeshModel models = 1;
+      case 1: {
+        if (tag == 10) {
+         parse_models:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_models()));
+        } else {
+          goto handle_unusual;
+        }
+        if (input->ExpectTag(10)) goto parse_models;
+        if (input->ExpectAtEnd()) goto success;
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0 ||
+            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:KuplungApp.Scene)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:KuplungApp.Scene)
+  return false;
+#undef DO_
+}
+
+void Scene::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:KuplungApp.Scene)
+  // repeated .KuplungApp.MeshModel models = 1;
+  for (int i = 0; i < this->models_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->models(i), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+  // @@protoc_insertion_point(serialize_end:KuplungApp.Scene)
+}
+
+::google::protobuf::uint8* Scene::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
+  // repeated .KuplungApp.MeshModel models = 1;
+  for (int i = 0; i < this->models_size(); i++) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->models(i), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Scene)
+  return target;
+}
+
+int Scene::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .KuplungApp.MeshModel models = 1;
+  total_size += 1 * this->models_size();
+  for (int i = 0; i < this->models_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->models(i));
+  }
+
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void Scene::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const Scene* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const Scene*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void Scene::MergeFrom(const Scene& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  models_.MergeFrom(from.models_);
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void Scene::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void Scene::CopyFrom(const Scene& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool Scene::IsInitialized() const {
+
+  if (!::google::protobuf::internal::AllAreInitialized(this->models())) return false;
+  return true;
+}
+
+void Scene::Swap(Scene* other) {
+  if (other != this) {
+    models_.Swap(&other->models_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata Scene::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = Scene_descriptor_;
+  metadata.reflection = Scene_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MeshModel::kModelIDFieldNumber;
+const int MeshModel::kSettingsDeferredRenderFieldNumber;
+const int MeshModel::kSettingCelShadingFieldNumber;
+const int MeshModel::kSettingWireframeFieldNumber;
+const int MeshModel::kSettingUseTessellationFieldNumber;
+const int MeshModel::kSettingUseCullFaceFieldNumber;
+const int MeshModel::kSettingAlphaFieldNumber;
+const int MeshModel::kSettingTessellationSubdivisionFieldNumber;
+const int MeshModel::kPositionXFieldNumber;
+const int MeshModel::kPositionYFieldNumber;
+const int MeshModel::kPositionZFieldNumber;
+const int MeshModel::kScaleXFieldNumber;
+const int MeshModel::kScaleYFieldNumber;
+const int MeshModel::kScaleZFieldNumber;
+const int MeshModel::kRotateXFieldNumber;
+const int MeshModel::kRotateYFieldNumber;
+const int MeshModel::kRotateZFieldNumber;
+const int MeshModel::kDisplaceXFieldNumber;
+const int MeshModel::kDisplaceYFieldNumber;
+const int MeshModel::kDisplaceZFieldNumber;
+const int MeshModel::kSettingMaterialRefractionFieldNumber;
+const int MeshModel::kSettingMaterialSpecularExpFieldNumber;
+const int MeshModel::kSettingModelViewSkinFieldNumber;
+const int MeshModel::kSolidLightSkinMaterialColorFieldNumber;
+const int MeshModel::kSolidLightSkinAmbientFieldNumber;
+const int MeshModel::kSolidLightSkinDiffuseFieldNumber;
+const int MeshModel::kSolidLightSkinSpecularFieldNumber;
+const int MeshModel::kSolidLightSkinAmbientStrengthFieldNumber;
+const int MeshModel::kSolidLightSkinDiffuseStrengthFieldNumber;
+const int MeshModel::kSolidLightSkinSpecularStrengthFieldNumber;
+const int MeshModel::kSettingLightPositionFieldNumber;
+const int MeshModel::kSettingLightDirectionFieldNumber;
+const int MeshModel::kSettingLightAmbientFieldNumber;
+const int MeshModel::kSettingLightDiffuseFieldNumber;
+const int MeshModel::kSettingLightSpecularFieldNumber;
+const int MeshModel::kSettingLightStrengthAmbientFieldNumber;
+const int MeshModel::kSettingLightStrengthDiffuseFieldNumber;
+const int MeshModel::kSettingLightStrengthSpecularFieldNumber;
+const int MeshModel::kMaterialIlluminationModelFieldNumber;
+const int MeshModel::kDisplacementHeightScaleFieldNumber;
+const int MeshModel::kShowMaterialEditorFieldNumber;
+const int MeshModel::kMaterialAmbientFieldNumber;
+const int MeshModel::kMaterialDiffuseFieldNumber;
+const int MeshModel::kMaterialSpecularFieldNumber;
+const int MeshModel::kMaterialEmissionFieldNumber;
+const int MeshModel::kSettingParallaxMappingFieldNumber;
+const int MeshModel::kEffectGBlurModeFieldNumber;
+const int MeshModel::kEffectGBlurRadiusFieldNumber;
+const int MeshModel::kEffectGBlurWidthFieldNumber;
+const int MeshModel::kEffectBloomDoBloomFieldNumber;
+const int MeshModel::kEffectBloomWeightAFieldNumber;
+const int MeshModel::kEffectBloomWeightBFieldNumber;
+const int MeshModel::kEffectBloomWeightCFieldNumber;
+const int MeshModel::kEffectBloomWeightDFieldNumber;
+const int MeshModel::kEffectBloomVignetteFieldNumber;
+const int MeshModel::kEffectBloomVignetteAttFieldNumber;
+const int MeshModel::kSettingLightingPassDrawModeFieldNumber;
+const int MeshModel::kMeshObjectFieldNumber;
+#endif  // !_MSC_VER
+
+MeshModel::MeshModel()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:KuplungApp.MeshModel)
+}
+
+void MeshModel::InitAsDefaultInstance() {
   positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
   positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
   positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
@@ -311,16 +559,17 @@ void Scene::InitAsDefaultInstance() {
   materialemission_ = const_cast< ::KuplungApp::MaterialColor*>(&::KuplungApp::MaterialColor::default_instance());
   effect_gblur_radius_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
   effect_gblur_width_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
+  meshobject_ = const_cast< ::KuplungApp::Mesh*>(&::KuplungApp::Mesh::default_instance());
 }
 
-Scene::Scene(const Scene& from)
+MeshModel::MeshModel(const MeshModel& from)
   : ::google::protobuf::Message() {
   SharedCtor();
   MergeFrom(from);
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.Scene)
+  // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModel)
 }
 
-void Scene::SharedCtor() {
+void MeshModel::SharedCtor() {
   _cached_size_ = 0;
   modelid_ = 0;
   settings_deferredrender_ = false;
@@ -379,15 +628,16 @@ void Scene::SharedCtor() {
   effect_bloom_vignette_ = 0;
   effect_bloom_vignetteatt_ = 0;
   setting_lightingpass_drawmode_ = 0;
+  meshobject_ = NULL;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
-Scene::~Scene() {
-  // @@protoc_insertion_point(destructor:KuplungApp.Scene)
+MeshModel::~MeshModel() {
+  // @@protoc_insertion_point(destructor:KuplungApp.MeshModel)
   SharedDtor();
 }
 
-void Scene::SharedDtor() {
+void MeshModel::SharedDtor() {
   if (this != default_instance_) {
     delete positionx_;
     delete positiony_;
@@ -419,33 +669,34 @@ void Scene::SharedDtor() {
     delete materialemission_;
     delete effect_gblur_radius_;
     delete effect_gblur_width_;
+    delete meshobject_;
   }
 }
 
-void Scene::SetCachedSize(int size) const {
+void MeshModel::SetCachedSize(int size) const {
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
   _cached_size_ = size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
 }
-const ::google::protobuf::Descriptor* Scene::descriptor() {
+const ::google::protobuf::Descriptor* MeshModel::descriptor() {
   protobuf_AssignDescriptorsOnce();
-  return Scene_descriptor_;
+  return MeshModel_descriptor_;
 }
 
-const Scene& Scene::default_instance() {
+const MeshModel& MeshModel::default_instance() {
   if (default_instance_ == NULL) protobuf_AddDesc_KuplungAppScene_2eproto();
   return *default_instance_;
 }
 
-Scene* Scene::default_instance_ = NULL;
+MeshModel* MeshModel::default_instance_ = NULL;
 
-Scene* Scene::New() const {
-  return new Scene;
+MeshModel* MeshModel::New() const {
+  return new MeshModel;
 }
 
-void Scene::Clear() {
+void MeshModel::Clear() {
 #define OFFSET_OF_FIELD_(f) (reinterpret_cast<char*>(      \
-  &reinterpret_cast<Scene*>(16)->f) - \
+  &reinterpret_cast<MeshModel*>(16)->f) - \
    reinterpret_cast<char*>(16))
 
 #define ZR_(first, last) do {                              \
@@ -569,7 +820,12 @@ void Scene::Clear() {
     }
     effect_bloom_dobloom_ = false;
   }
-  setting_lightingpass_drawmode_ = 0;
+  if (_has_bits_[56 / 32] & 50331648) {
+    setting_lightingpass_drawmode_ = 0;
+    if (has_meshobject()) {
+      if (meshobject_ != NULL) meshobject_->::KuplungApp::Mesh::Clear();
+    }
+  }
 
 #undef OFFSET_OF_FIELD_
 #undef ZR_
@@ -578,11 +834,11 @@ void Scene::Clear() {
   mutable_unknown_fields()->Clear();
 }
 
-bool Scene::MergePartialFromCodedStream(
+bool MeshModel::MergePartialFromCodedStream(
     ::google::protobuf::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!(EXPRESSION)) goto failure
   ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.Scene)
+  // @@protoc_insertion_point(parse_start:KuplungApp.MeshModel)
   for (;;) {
     ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoff(16383);
     tag = p.first;
@@ -1378,6 +1634,19 @@ bool Scene::MergePartialFromCodedStream(
         } else {
           goto handle_unusual;
         }
+        if (input->ExpectTag(466)) goto parse_meshObject;
+        break;
+      }
+
+      // required .KuplungApp.Mesh meshObject = 58;
+      case 58: {
+        if (tag == 466) {
+         parse_meshObject:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_meshobject()));
+        } else {
+          goto handle_unusual;
+        }
         if (input->ExpectAtEnd()) goto success;
         break;
       }
@@ -1396,17 +1665,17 @@ bool Scene::MergePartialFromCodedStream(
     }
   }
 success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.Scene)
+  // @@protoc_insertion_point(parse_success:KuplungApp.MeshModel)
   return true;
 failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.Scene)
+  // @@protoc_insertion_point(parse_failure:KuplungApp.MeshModel)
   return false;
 #undef DO_
 }
 
-void Scene::SerializeWithCachedSizes(
+void MeshModel::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.Scene)
+  // @@protoc_insertion_point(serialize_start:KuplungApp.MeshModel)
   // required int32 ModelID = 1;
   if (has_modelid()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->modelid(), output);
@@ -1722,16 +1991,22 @@ void Scene::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(57, this->setting_lightingpass_drawmode(), output);
   }
 
+  // required .KuplungApp.Mesh meshObject = 58;
+  if (has_meshobject()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      58, this->meshobject(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
   }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.Scene)
+  // @@protoc_insertion_point(serialize_end:KuplungApp.MeshModel)
 }
 
-::google::protobuf::uint8* Scene::SerializeWithCachedSizesToArray(
+::google::protobuf::uint8* MeshModel::SerializeWithCachedSizesToArray(
     ::google::protobuf::uint8* target) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModel)
   // required int32 ModelID = 1;
   if (has_modelid()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->modelid(), target);
@@ -2077,15 +2352,22 @@ void Scene::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(57, this->setting_lightingpass_drawmode(), target);
   }
 
+  // required .KuplungApp.Mesh meshObject = 58;
+  if (has_meshobject()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        58, this->meshobject(), target);
+  }
+
   if (!unknown_fields().empty()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Scene)
+  // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModel)
   return target;
 }
 
-int Scene::ByteSize() const {
+int MeshModel::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
@@ -2460,6 +2742,13 @@ int Scene::ByteSize() const {
           this->setting_lightingpass_drawmode());
     }
 
+    // required .KuplungApp.Mesh meshObject = 58;
+    if (has_meshobject()) {
+      total_size += 2 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->meshobject());
+    }
+
   }
   if (!unknown_fields().empty()) {
     total_size +=
@@ -2472,10 +2761,10 @@ int Scene::ByteSize() const {
   return total_size;
 }
 
-void Scene::MergeFrom(const ::google::protobuf::Message& from) {
+void MeshModel::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_CHECK_NE(&from, this);
-  const Scene* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const Scene*>(
+  const MeshModel* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const MeshModel*>(
       &from);
   if (source == NULL) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2484,7 +2773,7 @@ void Scene::MergeFrom(const ::google::protobuf::Message& from) {
   }
 }
 
-void Scene::MergeFrom(const Scene& from) {
+void MeshModel::MergeFrom(const MeshModel& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_modelid()) {
@@ -2672,25 +2961,28 @@ void Scene::MergeFrom(const Scene& from) {
     if (from.has_setting_lightingpass_drawmode()) {
       set_setting_lightingpass_drawmode(from.setting_lightingpass_drawmode());
     }
+    if (from.has_meshobject()) {
+      mutable_meshobject()->::KuplungApp::Mesh::MergeFrom(from.meshobject());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
 
-void Scene::CopyFrom(const ::google::protobuf::Message& from) {
+void MeshModel::CopyFrom(const ::google::protobuf::Message& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-void Scene::CopyFrom(const Scene& from) {
+void MeshModel::CopyFrom(const MeshModel& from) {
   if (&from == this) return;
   Clear();
   MergeFrom(from);
 }
 
-bool Scene::IsInitialized() const {
+bool MeshModel::IsInitialized() const {
   if ((_has_bits_[0] & 0xffffffff) != 0xffffffff) return false;
-  if ((_has_bits_[1] & 0x01ffffff) != 0x01ffffff) return false;
+  if ((_has_bits_[1] & 0x03ffffff) != 0x03ffffff) return false;
 
   if (has_positionx()) {
     if (!this->positionx().IsInitialized()) return false;
@@ -2782,10 +3074,13 @@ bool Scene::IsInitialized() const {
   if (has_effect_gblur_width()) {
     if (!this->effect_gblur_width().IsInitialized()) return false;
   }
+  if (has_meshobject()) {
+    if (!this->meshobject().IsInitialized()) return false;
+  }
   return true;
 }
 
-void Scene::Swap(Scene* other) {
+void MeshModel::Swap(MeshModel* other) {
   if (other != this) {
     std::swap(modelid_, other->modelid_);
     std::swap(settings_deferredrender_, other->settings_deferredrender_);
@@ -2844,6 +3139,7 @@ void Scene::Swap(Scene* other) {
     std::swap(effect_bloom_vignette_, other->effect_bloom_vignette_);
     std::swap(effect_bloom_vignetteatt_, other->effect_bloom_vignetteatt_);
     std::swap(setting_lightingpass_drawmode_, other->setting_lightingpass_drawmode_);
+    std::swap(meshobject_, other->meshobject_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_has_bits_[1], other->_has_bits_[1]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
@@ -2851,11 +3147,11 @@ void Scene::Swap(Scene* other) {
   }
 }
 
-::google::protobuf::Metadata Scene::GetMetadata() const {
+::google::protobuf::Metadata MeshModel::GetMetadata() const {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::Metadata metadata;
-  metadata.descriptor = Scene_descriptor_;
-  metadata.reflection = Scene_reflection_;
+  metadata.descriptor = MeshModel_descriptor_;
+  metadata.reflection = MeshModel_reflection_;
   return metadata;
 }
 

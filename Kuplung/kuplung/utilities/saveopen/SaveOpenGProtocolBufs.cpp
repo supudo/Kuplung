@@ -10,6 +10,9 @@
 #include <iostream>
 #include <fstream>
 #include <glm/gtx/string_cast.hpp>
+#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities/minizip/KuplungZip.hpp"
+#include "kuplung/utilities/minizip/KuplungUnzip.hpp"
 
 void SaveOpenGProtocolBufs::init() {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -23,6 +26,12 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
 
     std::string fileNameSettings = fileName + ".settings";
     std::string fileNameScene = fileName + ".scene";
+    std::string fileNameZipSettings = file.title + ".settings";
+    std::string fileNameZipScene = file.title + ".scene";
+    if (!this->hasEnding(file.title, ".kuplung")) {
+        fileNameZipSettings = file.title + ".kuplung.settings";
+        fileNameZipScene = file.title + ".kuplung.scene";
+    }
 
     std::ofstream kuplungFileSettings;
     kuplungFileSettings.open(fileNameSettings.c_str(), std::ios::binary | std::ios::out);
@@ -48,10 +57,24 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
         google::protobuf::ShutdownProtobufLibrary();
         kuplungFileScene.close();
     }
+
+    KuplungZip *zipFile = new KuplungZip(fileName.c_str());
+    zipFile->Add(fileNameSettings.c_str(), fileNameZipSettings.c_str());
+    zipFile->Add(fileNameScene.c_str(), fileNameZipScene.c_str());
+    delete zipFile;
+
+    boost::filesystem::remove(fileNameSettings.c_str());
+    boost::filesystem::remove(fileNameScene.c_str());
 }
 
 std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
     std::vector<ModelFaceData*> models;
+
+    std::string zPath = file.path;
+    boost::replace_all(zPath, file.title, "");
+    KuplungUnzip *zFile = new KuplungUnzip(file.path.c_str());
+    zFile->UnzipFile(zPath);
+    delete zFile;
 
     std::string fileNameSettings = file.path + ".settings";
     std::string fileNameScene = file.path + ".scene";
@@ -68,7 +91,6 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
             this->readGlobalLights(managerObjects);
         }
 
-        google::protobuf::ShutdownProtobufLibrary();
         kuplungFileSettings.close();
     }
 
@@ -82,9 +104,17 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
         else
             models = this->readObjects(managerObjects);
 
-        google::protobuf::ShutdownProtobufLibrary();
         kuplungFileScene.close();
     }
+
+    boost::filesystem::remove(fileNameSettings.c_str());
+    boost::filesystem::remove(fileNameScene.c_str());
+
+    google::protobuf::ShutdownProtobufLibrary();
+
+//    std::vector<MeshModel> mms;
+//    mms.push_back(models.at(0)->meshModel);
+//    Kuplung_printObjModels(mms, false);
 
     return models;
 }
@@ -131,8 +161,6 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(ObjectsManager *managerO
     this->bufGUISettings.set_setting_deferredtestlightsnumber(managerObjects->Setting_DeferredTestLightsNumber);
     this->bufGUISettings.set_setting_showspaceship(managerObjects->Setting_ShowSpaceship);
     this->bufGUISettings.set_setting_generatespaceship(managerObjects->Setting_GenerateSpaceship);
-
-//    this->bufGUISettings.set_allocated_matrixprojection(this->getMatrix(managerObjects->matrixProjection));
 
     KuplungApp::CameraSettings* bufCamera = new KuplungApp::CameraSettings();
     bufCamera->set_allocated_cameraposition(this->getVec3(managerObjects->camera->cameraPosition));
@@ -227,8 +255,6 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(ObjectsManager *managerOb
     managerObjects->Setting_DeferredTestLightsNumber = this->bufGUISettings.setting_deferredtestlightsnumber();
     managerObjects->Setting_ShowSpaceship = this->bufGUISettings.setting_showspaceship();
     managerObjects->Setting_GenerateSpaceship = this->bufGUISettings.setting_generatespaceship();
-
-//        managerObjects->matrixProjection = this->setMatrix(this->bufGUISettings.matrixprojection());
 
     const KuplungApp::CameraSettings& camera = this->bufGUISettings.camera();
     managerObjects->camera->cameraPosition = this->setVec3(camera.cameraposition());
@@ -348,11 +374,344 @@ void SaveOpenGProtocolBufs::readGlobalLights(ObjectsManager *managerObjects) {
 }
 
 void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFaces) {
+    for (size_t i=0; i<meshModelFaces.size(); i++) {
+        ModelFaceBase *mf = meshModelFaces[i];
+        KuplungApp::MeshModel* model = this->bufScene.add_models();
+        model->set_modelid(mf->ModelID);
+        model->set_settings_deferredrender(mf->Settings_DeferredRender);
+        model->set_setting_celshading(mf->Setting_CelShading);
+        model->set_setting_wireframe(mf->Setting_Wireframe);
+        model->set_setting_usetessellation(mf->Setting_UseTessellation);
+        model->set_setting_usecullface(mf->Setting_UseCullFace);
+        model->set_setting_alpha(mf->Setting_Alpha);
+        model->set_setting_tessellationsubdivision(mf->Setting_TessellationSubdivision);
+        model->set_allocated_positionx(this->getObjectCoordinate(mf->positionX));
+        model->set_allocated_positiony(this->getObjectCoordinate(mf->positionY));
+        model->set_allocated_positionz(this->getObjectCoordinate(mf->positionZ));
+        model->set_allocated_scalex(this->getObjectCoordinate(mf->scaleX));
+        model->set_allocated_scaley(this->getObjectCoordinate(mf->scaleY));
+        model->set_allocated_scalez(this->getObjectCoordinate(mf->scaleZ));
+        model->set_allocated_rotatex(this->getObjectCoordinate(mf->rotateX));
+        model->set_allocated_rotatey(this->getObjectCoordinate(mf->rotateY));
+        model->set_allocated_rotatez(this->getObjectCoordinate(mf->rotateZ));
+        model->set_allocated_displacex(this->getObjectCoordinate(mf->displaceX));
+        model->set_allocated_displacey(this->getObjectCoordinate(mf->displaceY));
+        model->set_allocated_displacez(this->getObjectCoordinate(mf->displaceZ));
+        model->set_allocated_setting_materialrefraction(this->getObjectCoordinate(mf->Setting_MaterialRefraction));
+        model->set_allocated_setting_materialspecularexp(this->getObjectCoordinate(mf->Setting_MaterialSpecularExp));
+        model->set_setting_modelviewskin(mf->Setting_ModelViewSkin);
+        model->set_allocated_solidlightskin_materialcolor(this->getVec3(mf->solidLightSkin_MaterialColor));
+        model->set_allocated_solidlightskin_ambient(this->getVec3(mf->solidLightSkin_Ambient));
+        model->set_allocated_solidlightskin_diffuse(this->getVec3(mf->solidLightSkin_Diffuse));
+        model->set_allocated_solidlightskin_specular(this->getVec3(mf->solidLightSkin_Specular));
+        model->set_solidlightskin_ambient_strength(mf->solidLightSkin_Ambient_Strength);
+        model->set_solidlightskin_diffuse_strength(mf->solidLightSkin_Diffuse_Strength);
+        model->set_solidlightskin_specular_strength(mf->solidLightSkin_Specular_Strength);
+        model->set_allocated_setting_lightposition(this->getVec3(mf->Setting_LightPosition));
+        model->set_allocated_setting_lightdirection(this->getVec3(mf->Setting_LightDirection));
+        model->set_allocated_setting_lightambient(this->getVec3(mf->Setting_LightAmbient));
+        model->set_allocated_setting_lightdiffuse(this->getVec3(mf->Setting_LightDiffuse));
+        model->set_allocated_setting_lightspecular(this->getVec3(mf->Setting_LightSpecular));
+        model->set_setting_lightstrengthambient(mf->Setting_LightStrengthAmbient);
+        model->set_setting_lightstrengthdiffuse(mf->Setting_LightStrengthDiffuse);
+        model->set_setting_lightstrengthspecular(mf->Setting_LightStrengthSpecular);
+        model->set_materialilluminationmodel(mf->materialIlluminationModel);
+        model->set_allocated_displacementheightscale(this->getObjectCoordinate(mf->displacementHeightScale));
+        model->set_showmaterialeditor(mf->showMaterialEditor);
+        model->set_allocated_materialambient(this->getMaterialColor(mf->materialAmbient));
+        model->set_allocated_materialdiffuse(this->getMaterialColor(mf->materialDiffuse));
+        model->set_allocated_materialspecular(this->getMaterialColor(mf->materialSpecular));
+        model->set_allocated_materialemission(this->getMaterialColor(mf->materialEmission));
+        model->set_setting_parallaxmapping(mf->Setting_ParallaxMapping);
+        model->set_effect_gblur_mode(mf->Effect_GBlur_Mode);
+        model->set_allocated_effect_gblur_radius(this->getObjectCoordinate(mf->Effect_GBlur_Radius));
+        model->set_allocated_effect_gblur_width(this->getObjectCoordinate(mf->Effect_GBlur_Width));
+        model->set_effect_bloom_dobloom(mf->Effect_Bloom_doBloom);
+        model->set_effect_bloom_weighta(mf->Effect_Bloom_WeightA);
+        model->set_effect_bloom_weightb(mf->Effect_Bloom_WeightB);
+        model->set_effect_bloom_weightc(mf->Effect_Bloom_WeightC);
+        model->set_effect_bloom_weightd(mf->Effect_Bloom_WeightD);
+        model->set_effect_bloom_vignette(mf->Effect_Bloom_Vignette);
+        model->set_effect_bloom_vignetteatt(mf->Effect_Bloom_VignetteAtt);
+        model->set_setting_lightingpass_drawmode(mf->Setting_LightingPass_DrawMode);
+        model->set_allocated_meshobject(this->getMesh(mf->meshModel));
+    }
 }
 
 std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(ObjectsManager *managerObjects) {
     std::vector<ModelFaceData*> models;
+
+    for (int i=0; i<this->bufScene.models_size(); i++) {
+        const KuplungApp::MeshModel& mm = this->bufScene.models(i);
+
+        ModelFaceData *m = new ModelFaceData();
+        m->initModelProperties();
+        m->lightSources = managerObjects->lightSources;
+        m->dataVertices = managerObjects->grid->dataVertices;
+        m->dataTexCoords = managerObjects->grid->dataTexCoords;
+        m->dataNormals = managerObjects->grid->dataNormals;
+        m->dataIndices = managerObjects->grid->dataIndices;
+
+        m->meshModel = this->setMesh(mm.meshobject());
+        m->init(m->meshModel, Settings::Instance()->currentFolder);
+
+        m->ModelID = mm.modelid();
+        m->Settings_DeferredRender = mm.settings_deferredrender();
+        m->Setting_CelShading = mm.setting_celshading();
+        m->Setting_Wireframe = mm.setting_wireframe();
+        m->Setting_UseTessellation = mm.setting_usetessellation();
+        m->Setting_UseCullFace = mm.setting_usecullface();
+        m->Setting_Alpha = mm.setting_alpha();
+        m->Setting_TessellationSubdivision = mm.setting_tessellationsubdivision();
+        m->positionX = this->setObjectCoordinate(mm.positionx());
+        m->positionY = this->setObjectCoordinate(mm.positiony());
+        m->positionZ = this->setObjectCoordinate(mm.positionz());
+        m->scaleX = this->setObjectCoordinate(mm.scalex());
+        m->scaleY = this->setObjectCoordinate(mm.scaley());
+        m->scaleZ = this->setObjectCoordinate(mm.scalez());
+        m->rotateX = this->setObjectCoordinate(mm.rotatex());
+        m->rotateY = this->setObjectCoordinate(mm.rotatey());
+        m->rotateZ = this->setObjectCoordinate(mm.rotatez());
+        m->displaceX = this->setObjectCoordinate(mm.displacex());
+        m->displaceY = this->setObjectCoordinate(mm.displacey());
+        m->displaceZ = this->setObjectCoordinate(mm.displacez());
+        m->Setting_MaterialRefraction = this->setObjectCoordinate(mm.setting_materialrefraction());
+        m->Setting_MaterialSpecularExp = this->setObjectCoordinate(mm.setting_materialspecularexp());
+        switch (mm.setting_modelviewskin()) {
+            case 0:
+                m->Setting_ModelViewSkin = ViewModelSkin_Solid;
+                break;
+            case 1:
+                m->Setting_ModelViewSkin = ViewModelSkin_Material;
+                break;
+            case 2:
+                m->Setting_ModelViewSkin = ViewModelSkin_Texture;
+                break;
+            case 3:
+                m->Setting_ModelViewSkin = ViewModelSkin_Wireframe;
+                break;
+            case 4:
+                m->Setting_ModelViewSkin = ViewModelSkin_Rendered;
+                break;
+        }
+        m->solidLightSkin_MaterialColor = this->setVec3(mm.solidlightskin_materialcolor());
+        m->solidLightSkin_Ambient = this->setVec3(mm.solidlightskin_ambient());
+        m->solidLightSkin_Diffuse = this->setVec3(mm.solidlightskin_diffuse());
+        m->solidLightSkin_Specular = this->setVec3(mm.solidlightskin_specular());
+        m->solidLightSkin_Ambient_Strength = mm.solidlightskin_ambient_strength();
+        m->solidLightSkin_Diffuse_Strength = mm.solidlightskin_diffuse_strength();
+        m->solidLightSkin_Specular_Strength = mm.solidlightskin_specular_strength();
+        m->Setting_LightPosition = this->setVec3(mm.setting_lightposition());
+        m->Setting_LightDirection = this->setVec3(mm.setting_lightdirection());
+        m->Setting_LightAmbient = this->setVec3(mm.setting_lightambient());
+        m->Setting_LightDiffuse = this->setVec3(mm.setting_lightdiffuse());
+        m->Setting_LightSpecular = this->setVec3(mm.setting_lightspecular());
+        m->Setting_LightStrengthAmbient = mm.setting_lightstrengthambient();
+        m->Setting_LightStrengthDiffuse = mm.setting_lightstrengthdiffuse();
+        m->Setting_LightStrengthSpecular = mm.setting_lightstrengthspecular();
+        m->materialIlluminationModel = mm.materialilluminationmodel();
+        m->displacementHeightScale = this->setObjectCoordinate(mm.displacementheightscale());
+        m->showMaterialEditor = mm.showmaterialeditor();
+        m->materialAmbient = this->setMaterialColor(mm.materialambient());
+        m->materialDiffuse = this->setMaterialColor(mm.materialdiffuse());
+        m->materialSpecular = this->setMaterialColor(mm.materialspecular());
+        m->materialEmission = this->setMaterialColor(mm.materialemission());
+        m->Setting_ParallaxMapping = mm.setting_parallaxmapping();
+        m->Effect_GBlur_Mode = mm.effect_gblur_mode();
+        m->Effect_GBlur_Radius = this->setObjectCoordinate(mm.effect_gblur_radius());
+        m->Effect_GBlur_Width = this->setObjectCoordinate(mm.effect_gblur_width());
+        m->Effect_Bloom_doBloom = mm.effect_bloom_dobloom();
+        m->Effect_Bloom_WeightA = mm.effect_bloom_weighta();
+        m->Effect_Bloom_WeightB = mm.effect_bloom_weightb();
+        m->Effect_Bloom_WeightC = mm.effect_bloom_weightc();
+        m->Effect_Bloom_WeightD = mm.effect_bloom_weightd();
+        m->Effect_Bloom_Vignette = mm.effect_bloom_vignette();
+        m->Effect_Bloom_VignetteAtt = mm.effect_bloom_vignetteatt();
+        m->Setting_LightingPass_DrawMode = mm.setting_lightingpass_drawmode();
+
+        m->initBoundingBox();
+
+        models.push_back(m);
+    }
+
     return models;
+}
+
+KuplungApp::Mesh* SaveOpenGProtocolBufs::getMesh(MeshModel ent) {
+    KuplungApp::Mesh* mesh = new KuplungApp::Mesh();
+    mesh->set_id(ent.ID);
+    mesh->set_allocated_file(this->getFBEntity(ent.File));
+    mesh->set_modeltitle(ent.ModelTitle);
+    mesh->set_materialtitle(ent.MaterialTitle);
+    mesh->set_countvertices(ent.countVertices);
+    mesh->set_countnormals(ent.countNormals);
+    mesh->set_counttexturecoordinates(ent.countTextureCoordinates);
+    mesh->set_countindices(ent.countIndices);
+    mesh->set_allocated_modelmaterial(this->getMeshModelMaterial(ent.ModelMaterial));
+    for (size_t i=0; i<ent.vertices.size(); i++) {
+        glm::vec3 mv = ent.vertices[i];
+        KuplungApp::Vec3* v = mesh->add_vertices();
+        v->set_x(mv.x);
+        v->set_y(mv.y);
+        v->set_z(mv.z);
+    }
+    for (size_t i=0; i<ent.normals.size(); i++) {
+        glm::vec3 mv = ent.normals[i];
+        KuplungApp::Vec3* v = mesh->add_normals();
+        v->set_x(mv.x);
+        v->set_y(mv.y);
+        v->set_z(mv.z);
+    }
+    for (size_t i=0; i<ent.texture_coordinates.size(); i++) {
+        glm::vec2 mv = ent.texture_coordinates[i];
+        KuplungApp::Vec2* v = mesh->add_texture_coordinates();
+        v->set_x(mv.x);
+        v->set_y(mv.y);
+    }
+    for (size_t i=0; i<ent.indices.size(); i++) {
+        mesh->add_indices(ent.indices[i]);
+    }
+    return mesh;
+}
+
+MeshModel SaveOpenGProtocolBufs::setMesh(const KuplungApp::Mesh& ent) {
+    MeshModel mm;
+    mm.ID = ent.id();
+    mm.File = this->setFBEntity(ent.file());
+    mm.ModelTitle = ent.modeltitle();
+    mm.MaterialTitle = ent.materialtitle();
+    mm.countVertices = ent.countvertices();
+    mm.countNormals = ent.countnormals();
+    mm.countTextureCoordinates = ent.counttexturecoordinates();
+    mm.countIndices = ent.countindices();
+    mm.ModelMaterial = this->setMeshModelMaterial(ent.modelmaterial());
+    for (int i=0; i<ent.vertices_size(); i++) {
+        const KuplungApp::Vec3& v = ent.vertices(i);
+        mm.vertices.push_back(glm::vec3(v.x(), v.y(), v.z()));
+    }
+    for (int i=0; i<ent.normals_size(); i++) {
+        const KuplungApp::Vec3& v = ent.normals(i);
+        mm.normals.push_back(glm::vec3(v.x(), v.y(), v.z()));
+    }
+    for (int i=0; i<ent.texture_coordinates_size(); i++) {
+        const KuplungApp::Vec2& v = ent.texture_coordinates(i);
+        mm.texture_coordinates.push_back(glm::vec2(v.x(), v.y()));
+    }
+    for (int i=0; i<ent.indices_size(); i++) {
+        mm.indices.push_back(ent.indices(i));
+    }
+    return mm;
+}
+
+KuplungApp::MeshModelMaterial* SaveOpenGProtocolBufs::getMeshModelMaterial(MeshModelMaterial ent) {
+    KuplungApp::MeshModelMaterial* m = new KuplungApp::MeshModelMaterial();
+    m->set_materialid(ent.MaterialID);
+    m->set_materialtitle(ent.MaterialTitle);
+    m->set_allocated_ambientcolor(this->getVec3(ent.AmbientColor));
+    m->set_allocated_diffusecolor(this->getVec3(ent.DiffuseColor));
+    m->set_allocated_specularcolor(this->getVec3(ent.SpecularColor));
+    m->set_allocated_emissioncolor(this->getVec3(ent.EmissionColor));
+    m->set_specularexp(ent.SpecularExp);
+    m->set_transparency(ent.Transparency);
+    m->set_illuminationmode(ent.IlluminationMode);
+    m->set_opticaldensity(ent.OpticalDensity);
+    m->set_allocated_textureambient(this->getMeshMaterialTextureImage(ent.TextureAmbient));
+    m->set_allocated_texturediffuse(this->getMeshMaterialTextureImage(ent.TextureDiffuse));
+    m->set_allocated_texturespecular(this->getMeshMaterialTextureImage(ent.TextureSpecular));
+    m->set_allocated_texturespecularexp(this->getMeshMaterialTextureImage(ent.TextureSpecularExp));
+    m->set_allocated_texturedissolve(this->getMeshMaterialTextureImage(ent.TextureDissolve));
+    m->set_allocated_texturebump(this->getMeshMaterialTextureImage(ent.TextureBump));
+    m->set_allocated_texturedisplacement(this->getMeshMaterialTextureImage(ent.TextureDisplacement));
+    return m;
+}
+
+MeshModelMaterial SaveOpenGProtocolBufs::setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent) {
+    MeshModelMaterial m;
+    m.MaterialID = ent.materialid();
+    m.MaterialTitle = ent.materialtitle();
+    m.AmbientColor = this->setVec3(ent.ambientcolor());
+    m.DiffuseColor = this->setVec3(ent.diffusecolor());
+    m.SpecularColor = this->setVec3(ent.specularcolor());
+    m.EmissionColor = this->setVec3(ent.emissioncolor());
+    m.SpecularExp = ent.specularexp();
+    m.Transparency = ent.transparency();
+    m.IlluminationMode = ent.illuminationmode();
+    m.OpticalDensity = ent.opticaldensity();
+    m.TextureAmbient = this->setMeshMaterialTextureImage(ent.textureambient());
+    m.TextureDiffuse = this->setMeshMaterialTextureImage(ent.texturediffuse());
+    m.TextureSpecular = this->setMeshMaterialTextureImage(ent.texturespecular());
+    m.TextureSpecularExp = this->setMeshMaterialTextureImage(ent.texturespecularexp());
+    m.TextureDissolve = this->setMeshMaterialTextureImage(ent.texturedissolve());
+    m.TextureBump = this->setMeshMaterialTextureImage(ent.texturebump());
+    m.TextureDisplacement = this->setMeshMaterialTextureImage(ent.texturedisplacement());
+    return m;
+}
+
+KuplungApp::FBEntity* SaveOpenGProtocolBufs::getFBEntity(FBEntity ent) {
+    KuplungApp::FBEntity* fb = new KuplungApp::FBEntity();
+    fb->set_extension(ent.extension);
+    fb->set_isfile(ent.isFile);
+    fb->set_modifieddate(ent.modifiedDate);
+    fb->set_path(ent.path);
+    fb->set_size(ent.size);
+    fb->set_title(ent.title);
+    return fb;
+}
+
+FBEntity SaveOpenGProtocolBufs::setFBEntity(const KuplungApp::FBEntity& ent) {
+    FBEntity fb;
+    fb.extension = ent.extension();
+    fb.isFile = ent.isfile();
+    fb.modifiedDate = ent.modifieddate();
+    fb.path = ent.path();
+    fb.size = ent.size();
+    fb.title = ent.title();
+    return fb;
+}
+
+KuplungApp::MeshMaterialTextureImage* SaveOpenGProtocolBufs::getMeshMaterialTextureImage(MeshMaterialTextureImage ent) {
+    KuplungApp::MeshMaterialTextureImage* meshMatTexImage = new KuplungApp::MeshMaterialTextureImage();
+    meshMatTexImage->set_filename(ent.Filename);
+    meshMatTexImage->set_image(ent.Image);
+    meshMatTexImage->set_width(ent.Width);
+    meshMatTexImage->set_height(ent.Height);
+    meshMatTexImage->set_usetexture(ent.UseTexture);
+    for (size_t i=0; i<ent.Commands.size(); i++) {
+        std::string *s = meshMatTexImage->add_commands();
+        *s = ent.Commands[i];
+    }
+    return meshMatTexImage;
+}
+
+MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent) {
+    MeshMaterialTextureImage meshMatTexImage;
+    meshMatTexImage.Filename = ent.filename();
+    meshMatTexImage.Image = ent.image();
+    meshMatTexImage.Width = ent.width();
+    meshMatTexImage.Height = ent.height();
+    meshMatTexImage.UseTexture = ent.usetexture();
+    for (int i=0; i<ent.commands_size(); i++) {
+        meshMatTexImage.Commands.push_back(ent.commands(i));
+    }
+    return meshMatTexImage;
+}
+
+KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor* v) {
+    KuplungApp::MaterialColor* mc = new KuplungApp::MaterialColor();
+    mc->set_colorpickeropen(v->colorPickerOpen);
+    mc->set_animate(v->animate);
+    mc->set_strength(v->strength);
+    mc->set_allocated_color(this->getVec3(v->color));
+    return mc;
+}
+
+MaterialColor* SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::MaterialColor& v) {
+    MaterialColor* mc = new MaterialColor();
+    mc->colorPickerOpen = v.colorpickeropen();
+    mc->animate = v.animate();
+    mc->strength = v.strength();
+    mc->color = this->setVec3(v.color());
+    return mc;
 }
 
 KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(glm::vec4 v) {

@@ -37,7 +37,11 @@ class Vec2;
 class Vec3;
 class Vec4;
 class ObjectCoordinate;
+class FBEntity;
 class MaterialColor;
+class MeshMaterialTextureImage;
+class MeshModelMaterial;
+class Mesh;
 
 // ===================================================================
 
@@ -427,6 +431,160 @@ class ObjectCoordinate : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class FBEntity : public ::google::protobuf::Message {
+ public:
+  FBEntity();
+  virtual ~FBEntity();
+
+  FBEntity(const FBEntity& from);
+
+  inline FBEntity& operator=(const FBEntity& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FBEntity& default_instance();
+
+  void Swap(FBEntity* other);
+
+  // implements Message ----------------------------------------------
+
+  FBEntity* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const FBEntity& from);
+  void MergeFrom(const FBEntity& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required bool isFile = 1;
+  inline bool has_isfile() const;
+  inline void clear_isfile();
+  static const int kIsFileFieldNumber = 1;
+  inline bool isfile() const;
+  inline void set_isfile(bool value);
+
+  // required string path = 2;
+  inline bool has_path() const;
+  inline void clear_path();
+  static const int kPathFieldNumber = 2;
+  inline const ::std::string& path() const;
+  inline void set_path(const ::std::string& value);
+  inline void set_path(const char* value);
+  inline void set_path(const char* value, size_t size);
+  inline ::std::string* mutable_path();
+  inline ::std::string* release_path();
+  inline void set_allocated_path(::std::string* path);
+
+  // required string title = 3;
+  inline bool has_title() const;
+  inline void clear_title();
+  static const int kTitleFieldNumber = 3;
+  inline const ::std::string& title() const;
+  inline void set_title(const ::std::string& value);
+  inline void set_title(const char* value);
+  inline void set_title(const char* value, size_t size);
+  inline ::std::string* mutable_title();
+  inline ::std::string* release_title();
+  inline void set_allocated_title(::std::string* title);
+
+  // required string extension = 4;
+  inline bool has_extension() const;
+  inline void clear_extension();
+  static const int kExtensionFieldNumber = 4;
+  inline const ::std::string& extension() const;
+  inline void set_extension(const ::std::string& value);
+  inline void set_extension(const char* value);
+  inline void set_extension(const char* value, size_t size);
+  inline ::std::string* mutable_extension();
+  inline ::std::string* release_extension();
+  inline void set_allocated_extension(::std::string* extension);
+
+  // required string modifiedDate = 5;
+  inline bool has_modifieddate() const;
+  inline void clear_modifieddate();
+  static const int kModifiedDateFieldNumber = 5;
+  inline const ::std::string& modifieddate() const;
+  inline void set_modifieddate(const ::std::string& value);
+  inline void set_modifieddate(const char* value);
+  inline void set_modifieddate(const char* value, size_t size);
+  inline ::std::string* mutable_modifieddate();
+  inline ::std::string* release_modifieddate();
+  inline void set_allocated_modifieddate(::std::string* modifieddate);
+
+  // required string size = 6;
+  inline bool has_size() const;
+  inline void clear_size();
+  static const int kSizeFieldNumber = 6;
+  inline const ::std::string& size() const;
+  inline void set_size(const ::std::string& value);
+  inline void set_size(const char* value);
+  inline void set_size(const char* value, size_t size);
+  inline ::std::string* mutable_size();
+  inline ::std::string* release_size();
+  inline void set_allocated_size(::std::string* size);
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.FBEntity)
+ private:
+  inline void set_has_isfile();
+  inline void clear_has_isfile();
+  inline void set_has_path();
+  inline void clear_has_path();
+  inline void set_has_title();
+  inline void clear_has_title();
+  inline void set_has_extension();
+  inline void clear_has_extension();
+  inline void set_has_modifieddate();
+  inline void clear_has_modifieddate();
+  inline void set_has_size();
+  inline void clear_has_size();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* path_;
+  ::std::string* title_;
+  ::std::string* extension_;
+  ::std::string* modifieddate_;
+  ::std::string* size_;
+  bool isfile_;
+  friend void  protobuf_AddDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_AssignDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_ShutdownFile_KuplungDefinitions_2eproto();
+
+  void InitAsDefaultInstance();
+  static FBEntity* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class MaterialColor : public ::google::protobuf::Message {
  public:
   MaterialColor();
@@ -535,6 +693,643 @@ class MaterialColor : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static MaterialColor* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MeshMaterialTextureImage : public ::google::protobuf::Message {
+ public:
+  MeshMaterialTextureImage();
+  virtual ~MeshMaterialTextureImage();
+
+  MeshMaterialTextureImage(const MeshMaterialTextureImage& from);
+
+  inline MeshMaterialTextureImage& operator=(const MeshMaterialTextureImage& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MeshMaterialTextureImage& default_instance();
+
+  void Swap(MeshMaterialTextureImage* other);
+
+  // implements Message ----------------------------------------------
+
+  MeshMaterialTextureImage* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MeshMaterialTextureImage& from);
+  void MergeFrom(const MeshMaterialTextureImage& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required string Filename = 1;
+  inline bool has_filename() const;
+  inline void clear_filename();
+  static const int kFilenameFieldNumber = 1;
+  inline const ::std::string& filename() const;
+  inline void set_filename(const ::std::string& value);
+  inline void set_filename(const char* value);
+  inline void set_filename(const char* value, size_t size);
+  inline ::std::string* mutable_filename();
+  inline ::std::string* release_filename();
+  inline void set_allocated_filename(::std::string* filename);
+
+  // required string Image = 2;
+  inline bool has_image() const;
+  inline void clear_image();
+  static const int kImageFieldNumber = 2;
+  inline const ::std::string& image() const;
+  inline void set_image(const ::std::string& value);
+  inline void set_image(const char* value);
+  inline void set_image(const char* value, size_t size);
+  inline ::std::string* mutable_image();
+  inline ::std::string* release_image();
+  inline void set_allocated_image(::std::string* image);
+
+  // required int32 Width = 3;
+  inline bool has_width() const;
+  inline void clear_width();
+  static const int kWidthFieldNumber = 3;
+  inline ::google::protobuf::int32 width() const;
+  inline void set_width(::google::protobuf::int32 value);
+
+  // required int32 Height = 4;
+  inline bool has_height() const;
+  inline void clear_height();
+  static const int kHeightFieldNumber = 4;
+  inline ::google::protobuf::int32 height() const;
+  inline void set_height(::google::protobuf::int32 value);
+
+  // required bool UseTexture = 5;
+  inline bool has_usetexture() const;
+  inline void clear_usetexture();
+  static const int kUseTextureFieldNumber = 5;
+  inline bool usetexture() const;
+  inline void set_usetexture(bool value);
+
+  // repeated string Commands = 6;
+  inline int commands_size() const;
+  inline void clear_commands();
+  static const int kCommandsFieldNumber = 6;
+  inline const ::std::string& commands(int index) const;
+  inline ::std::string* mutable_commands(int index);
+  inline void set_commands(int index, const ::std::string& value);
+  inline void set_commands(int index, const char* value);
+  inline void set_commands(int index, const char* value, size_t size);
+  inline ::std::string* add_commands();
+  inline void add_commands(const ::std::string& value);
+  inline void add_commands(const char* value);
+  inline void add_commands(const char* value, size_t size);
+  inline const ::google::protobuf::RepeatedPtrField< ::std::string>& commands() const;
+  inline ::google::protobuf::RepeatedPtrField< ::std::string>* mutable_commands();
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.MeshMaterialTextureImage)
+ private:
+  inline void set_has_filename();
+  inline void clear_has_filename();
+  inline void set_has_image();
+  inline void clear_has_image();
+  inline void set_has_width();
+  inline void clear_has_width();
+  inline void set_has_height();
+  inline void clear_has_height();
+  inline void set_has_usetexture();
+  inline void clear_has_usetexture();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* filename_;
+  ::std::string* image_;
+  ::google::protobuf::int32 width_;
+  ::google::protobuf::int32 height_;
+  ::google::protobuf::RepeatedPtrField< ::std::string> commands_;
+  bool usetexture_;
+  friend void  protobuf_AddDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_AssignDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_ShutdownFile_KuplungDefinitions_2eproto();
+
+  void InitAsDefaultInstance();
+  static MeshMaterialTextureImage* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MeshModelMaterial : public ::google::protobuf::Message {
+ public:
+  MeshModelMaterial();
+  virtual ~MeshModelMaterial();
+
+  MeshModelMaterial(const MeshModelMaterial& from);
+
+  inline MeshModelMaterial& operator=(const MeshModelMaterial& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MeshModelMaterial& default_instance();
+
+  void Swap(MeshModelMaterial* other);
+
+  // implements Message ----------------------------------------------
+
+  MeshModelMaterial* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MeshModelMaterial& from);
+  void MergeFrom(const MeshModelMaterial& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 MaterialID = 1;
+  inline bool has_materialid() const;
+  inline void clear_materialid();
+  static const int kMaterialIDFieldNumber = 1;
+  inline ::google::protobuf::int32 materialid() const;
+  inline void set_materialid(::google::protobuf::int32 value);
+
+  // required string MaterialTitle = 2;
+  inline bool has_materialtitle() const;
+  inline void clear_materialtitle();
+  static const int kMaterialTitleFieldNumber = 2;
+  inline const ::std::string& materialtitle() const;
+  inline void set_materialtitle(const ::std::string& value);
+  inline void set_materialtitle(const char* value);
+  inline void set_materialtitle(const char* value, size_t size);
+  inline ::std::string* mutable_materialtitle();
+  inline ::std::string* release_materialtitle();
+  inline void set_allocated_materialtitle(::std::string* materialtitle);
+
+  // required .KuplungApp.Vec3 AmbientColor = 3;
+  inline bool has_ambientcolor() const;
+  inline void clear_ambientcolor();
+  static const int kAmbientColorFieldNumber = 3;
+  inline const ::KuplungApp::Vec3& ambientcolor() const;
+  inline ::KuplungApp::Vec3* mutable_ambientcolor();
+  inline ::KuplungApp::Vec3* release_ambientcolor();
+  inline void set_allocated_ambientcolor(::KuplungApp::Vec3* ambientcolor);
+
+  // required .KuplungApp.Vec3 DiffuseColor = 4;
+  inline bool has_diffusecolor() const;
+  inline void clear_diffusecolor();
+  static const int kDiffuseColorFieldNumber = 4;
+  inline const ::KuplungApp::Vec3& diffusecolor() const;
+  inline ::KuplungApp::Vec3* mutable_diffusecolor();
+  inline ::KuplungApp::Vec3* release_diffusecolor();
+  inline void set_allocated_diffusecolor(::KuplungApp::Vec3* diffusecolor);
+
+  // required .KuplungApp.Vec3 SpecularColor = 5;
+  inline bool has_specularcolor() const;
+  inline void clear_specularcolor();
+  static const int kSpecularColorFieldNumber = 5;
+  inline const ::KuplungApp::Vec3& specularcolor() const;
+  inline ::KuplungApp::Vec3* mutable_specularcolor();
+  inline ::KuplungApp::Vec3* release_specularcolor();
+  inline void set_allocated_specularcolor(::KuplungApp::Vec3* specularcolor);
+
+  // required .KuplungApp.Vec3 EmissionColor = 6;
+  inline bool has_emissioncolor() const;
+  inline void clear_emissioncolor();
+  static const int kEmissionColorFieldNumber = 6;
+  inline const ::KuplungApp::Vec3& emissioncolor() const;
+  inline ::KuplungApp::Vec3* mutable_emissioncolor();
+  inline ::KuplungApp::Vec3* release_emissioncolor();
+  inline void set_allocated_emissioncolor(::KuplungApp::Vec3* emissioncolor);
+
+  // required float SpecularExp = 7;
+  inline bool has_specularexp() const;
+  inline void clear_specularexp();
+  static const int kSpecularExpFieldNumber = 7;
+  inline float specularexp() const;
+  inline void set_specularexp(float value);
+
+  // required float Transparency = 8;
+  inline bool has_transparency() const;
+  inline void clear_transparency();
+  static const int kTransparencyFieldNumber = 8;
+  inline float transparency() const;
+  inline void set_transparency(float value);
+
+  // required fixed32 IlluminationMode = 9;
+  inline bool has_illuminationmode() const;
+  inline void clear_illuminationmode();
+  static const int kIlluminationModeFieldNumber = 9;
+  inline ::google::protobuf::uint32 illuminationmode() const;
+  inline void set_illuminationmode(::google::protobuf::uint32 value);
+
+  // required float OpticalDensity = 10;
+  inline bool has_opticaldensity() const;
+  inline void clear_opticaldensity();
+  static const int kOpticalDensityFieldNumber = 10;
+  inline float opticaldensity() const;
+  inline void set_opticaldensity(float value);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+  inline bool has_textureambient() const;
+  inline void clear_textureambient();
+  static const int kTextureAmbientFieldNumber = 11;
+  inline const ::KuplungApp::MeshMaterialTextureImage& textureambient() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_textureambient();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_textureambient();
+  inline void set_allocated_textureambient(::KuplungApp::MeshMaterialTextureImage* textureambient);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+  inline bool has_texturediffuse() const;
+  inline void clear_texturediffuse();
+  static const int kTextureDiffuseFieldNumber = 12;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturediffuse() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturediffuse();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturediffuse();
+  inline void set_allocated_texturediffuse(::KuplungApp::MeshMaterialTextureImage* texturediffuse);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+  inline bool has_texturespecular() const;
+  inline void clear_texturespecular();
+  static const int kTextureSpecularFieldNumber = 13;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturespecular() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturespecular();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturespecular();
+  inline void set_allocated_texturespecular(::KuplungApp::MeshMaterialTextureImage* texturespecular);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+  inline bool has_texturespecularexp() const;
+  inline void clear_texturespecularexp();
+  static const int kTextureSpecularExpFieldNumber = 14;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturespecularexp() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturespecularexp();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturespecularexp();
+  inline void set_allocated_texturespecularexp(::KuplungApp::MeshMaterialTextureImage* texturespecularexp);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+  inline bool has_texturedissolve() const;
+  inline void clear_texturedissolve();
+  static const int kTextureDissolveFieldNumber = 15;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturedissolve() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturedissolve();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturedissolve();
+  inline void set_allocated_texturedissolve(::KuplungApp::MeshMaterialTextureImage* texturedissolve);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+  inline bool has_texturebump() const;
+  inline void clear_texturebump();
+  static const int kTextureBumpFieldNumber = 16;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturebump() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturebump();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturebump();
+  inline void set_allocated_texturebump(::KuplungApp::MeshMaterialTextureImage* texturebump);
+
+  // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+  inline bool has_texturedisplacement() const;
+  inline void clear_texturedisplacement();
+  static const int kTextureDisplacementFieldNumber = 17;
+  inline const ::KuplungApp::MeshMaterialTextureImage& texturedisplacement() const;
+  inline ::KuplungApp::MeshMaterialTextureImage* mutable_texturedisplacement();
+  inline ::KuplungApp::MeshMaterialTextureImage* release_texturedisplacement();
+  inline void set_allocated_texturedisplacement(::KuplungApp::MeshMaterialTextureImage* texturedisplacement);
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.MeshModelMaterial)
+ private:
+  inline void set_has_materialid();
+  inline void clear_has_materialid();
+  inline void set_has_materialtitle();
+  inline void clear_has_materialtitle();
+  inline void set_has_ambientcolor();
+  inline void clear_has_ambientcolor();
+  inline void set_has_diffusecolor();
+  inline void clear_has_diffusecolor();
+  inline void set_has_specularcolor();
+  inline void clear_has_specularcolor();
+  inline void set_has_emissioncolor();
+  inline void clear_has_emissioncolor();
+  inline void set_has_specularexp();
+  inline void clear_has_specularexp();
+  inline void set_has_transparency();
+  inline void clear_has_transparency();
+  inline void set_has_illuminationmode();
+  inline void clear_has_illuminationmode();
+  inline void set_has_opticaldensity();
+  inline void clear_has_opticaldensity();
+  inline void set_has_textureambient();
+  inline void clear_has_textureambient();
+  inline void set_has_texturediffuse();
+  inline void clear_has_texturediffuse();
+  inline void set_has_texturespecular();
+  inline void clear_has_texturespecular();
+  inline void set_has_texturespecularexp();
+  inline void clear_has_texturespecularexp();
+  inline void set_has_texturedissolve();
+  inline void clear_has_texturedissolve();
+  inline void set_has_texturebump();
+  inline void clear_has_texturebump();
+  inline void set_has_texturedisplacement();
+  inline void clear_has_texturedisplacement();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::std::string* materialtitle_;
+  ::KuplungApp::Vec3* ambientcolor_;
+  ::KuplungApp::Vec3* diffusecolor_;
+  ::google::protobuf::int32 materialid_;
+  float specularexp_;
+  ::KuplungApp::Vec3* specularcolor_;
+  ::KuplungApp::Vec3* emissioncolor_;
+  float transparency_;
+  ::google::protobuf::uint32 illuminationmode_;
+  ::KuplungApp::MeshMaterialTextureImage* textureambient_;
+  ::KuplungApp::MeshMaterialTextureImage* texturediffuse_;
+  ::KuplungApp::MeshMaterialTextureImage* texturespecular_;
+  ::KuplungApp::MeshMaterialTextureImage* texturespecularexp_;
+  ::KuplungApp::MeshMaterialTextureImage* texturedissolve_;
+  ::KuplungApp::MeshMaterialTextureImage* texturebump_;
+  ::KuplungApp::MeshMaterialTextureImage* texturedisplacement_;
+  float opticaldensity_;
+  friend void  protobuf_AddDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_AssignDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_ShutdownFile_KuplungDefinitions_2eproto();
+
+  void InitAsDefaultInstance();
+  static MeshModelMaterial* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class Mesh : public ::google::protobuf::Message {
+ public:
+  Mesh();
+  virtual ~Mesh();
+
+  Mesh(const Mesh& from);
+
+  inline Mesh& operator=(const Mesh& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Mesh& default_instance();
+
+  void Swap(Mesh* other);
+
+  // implements Message ----------------------------------------------
+
+  Mesh* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const Mesh& from);
+  void MergeFrom(const Mesh& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ID = 1;
+  inline bool has_id() const;
+  inline void clear_id();
+  static const int kIDFieldNumber = 1;
+  inline ::google::protobuf::int32 id() const;
+  inline void set_id(::google::protobuf::int32 value);
+
+  // required .KuplungApp.FBEntity File = 2;
+  inline bool has_file() const;
+  inline void clear_file();
+  static const int kFileFieldNumber = 2;
+  inline const ::KuplungApp::FBEntity& file() const;
+  inline ::KuplungApp::FBEntity* mutable_file();
+  inline ::KuplungApp::FBEntity* release_file();
+  inline void set_allocated_file(::KuplungApp::FBEntity* file);
+
+  // required string ModelTitle = 3;
+  inline bool has_modeltitle() const;
+  inline void clear_modeltitle();
+  static const int kModelTitleFieldNumber = 3;
+  inline const ::std::string& modeltitle() const;
+  inline void set_modeltitle(const ::std::string& value);
+  inline void set_modeltitle(const char* value);
+  inline void set_modeltitle(const char* value, size_t size);
+  inline ::std::string* mutable_modeltitle();
+  inline ::std::string* release_modeltitle();
+  inline void set_allocated_modeltitle(::std::string* modeltitle);
+
+  // required string MaterialTitle = 4;
+  inline bool has_materialtitle() const;
+  inline void clear_materialtitle();
+  static const int kMaterialTitleFieldNumber = 4;
+  inline const ::std::string& materialtitle() const;
+  inline void set_materialtitle(const ::std::string& value);
+  inline void set_materialtitle(const char* value);
+  inline void set_materialtitle(const char* value, size_t size);
+  inline ::std::string* mutable_materialtitle();
+  inline ::std::string* release_materialtitle();
+  inline void set_allocated_materialtitle(::std::string* materialtitle);
+
+  // required int32 countVertices = 5;
+  inline bool has_countvertices() const;
+  inline void clear_countvertices();
+  static const int kCountVerticesFieldNumber = 5;
+  inline ::google::protobuf::int32 countvertices() const;
+  inline void set_countvertices(::google::protobuf::int32 value);
+
+  // required int32 countTextureCoordinates = 6;
+  inline bool has_counttexturecoordinates() const;
+  inline void clear_counttexturecoordinates();
+  static const int kCountTextureCoordinatesFieldNumber = 6;
+  inline ::google::protobuf::int32 counttexturecoordinates() const;
+  inline void set_counttexturecoordinates(::google::protobuf::int32 value);
+
+  // required int32 countNormals = 7;
+  inline bool has_countnormals() const;
+  inline void clear_countnormals();
+  static const int kCountNormalsFieldNumber = 7;
+  inline ::google::protobuf::int32 countnormals() const;
+  inline void set_countnormals(::google::protobuf::int32 value);
+
+  // required int32 countIndices = 8;
+  inline bool has_countindices() const;
+  inline void clear_countindices();
+  static const int kCountIndicesFieldNumber = 8;
+  inline ::google::protobuf::int32 countindices() const;
+  inline void set_countindices(::google::protobuf::int32 value);
+
+  // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+  inline bool has_modelmaterial() const;
+  inline void clear_modelmaterial();
+  static const int kModelMaterialFieldNumber = 9;
+  inline const ::KuplungApp::MeshModelMaterial& modelmaterial() const;
+  inline ::KuplungApp::MeshModelMaterial* mutable_modelmaterial();
+  inline ::KuplungApp::MeshModelMaterial* release_modelmaterial();
+  inline void set_allocated_modelmaterial(::KuplungApp::MeshModelMaterial* modelmaterial);
+
+  // repeated .KuplungApp.Vec3 vertices = 10;
+  inline int vertices_size() const;
+  inline void clear_vertices();
+  static const int kVerticesFieldNumber = 10;
+  inline const ::KuplungApp::Vec3& vertices(int index) const;
+  inline ::KuplungApp::Vec3* mutable_vertices(int index);
+  inline ::KuplungApp::Vec3* add_vertices();
+  inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >&
+      vertices() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >*
+      mutable_vertices();
+
+  // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+  inline int texture_coordinates_size() const;
+  inline void clear_texture_coordinates();
+  static const int kTextureCoordinatesFieldNumber = 11;
+  inline const ::KuplungApp::Vec2& texture_coordinates(int index) const;
+  inline ::KuplungApp::Vec2* mutable_texture_coordinates(int index);
+  inline ::KuplungApp::Vec2* add_texture_coordinates();
+  inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec2 >&
+      texture_coordinates() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec2 >*
+      mutable_texture_coordinates();
+
+  // repeated .KuplungApp.Vec3 normals = 12;
+  inline int normals_size() const;
+  inline void clear_normals();
+  static const int kNormalsFieldNumber = 12;
+  inline const ::KuplungApp::Vec3& normals(int index) const;
+  inline ::KuplungApp::Vec3* mutable_normals(int index);
+  inline ::KuplungApp::Vec3* add_normals();
+  inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >&
+      normals() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >*
+      mutable_normals();
+
+  // repeated fixed32 indices = 13;
+  inline int indices_size() const;
+  inline void clear_indices();
+  static const int kIndicesFieldNumber = 13;
+  inline ::google::protobuf::uint32 indices(int index) const;
+  inline void set_indices(int index, ::google::protobuf::uint32 value);
+  inline void add_indices(::google::protobuf::uint32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      indices() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_indices();
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.Mesh)
+ private:
+  inline void set_has_id();
+  inline void clear_has_id();
+  inline void set_has_file();
+  inline void clear_has_file();
+  inline void set_has_modeltitle();
+  inline void clear_has_modeltitle();
+  inline void set_has_materialtitle();
+  inline void clear_has_materialtitle();
+  inline void set_has_countvertices();
+  inline void clear_has_countvertices();
+  inline void set_has_counttexturecoordinates();
+  inline void clear_has_counttexturecoordinates();
+  inline void set_has_countnormals();
+  inline void clear_has_countnormals();
+  inline void set_has_countindices();
+  inline void clear_has_countindices();
+  inline void set_has_modelmaterial();
+  inline void clear_has_modelmaterial();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::KuplungApp::FBEntity* file_;
+  ::std::string* modeltitle_;
+  ::google::protobuf::int32 id_;
+  ::google::protobuf::int32 countvertices_;
+  ::std::string* materialtitle_;
+  ::google::protobuf::int32 counttexturecoordinates_;
+  ::google::protobuf::int32 countnormals_;
+  ::KuplungApp::MeshModelMaterial* modelmaterial_;
+  ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 > vertices_;
+  ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec2 > texture_coordinates_;
+  ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 > normals_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > indices_;
+  ::google::protobuf::int32 countindices_;
+  friend void  protobuf_AddDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_AssignDesc_KuplungDefinitions_2eproto();
+  friend void protobuf_ShutdownFile_KuplungDefinitions_2eproto();
+
+  void InitAsDefaultInstance();
+  static Mesh* default_instance_;
 };
 // ===================================================================
 
@@ -821,6 +1616,414 @@ inline void ObjectCoordinate::set_point(float value) {
 
 // -------------------------------------------------------------------
 
+// FBEntity
+
+// required bool isFile = 1;
+inline bool FBEntity::has_isfile() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void FBEntity::set_has_isfile() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void FBEntity::clear_has_isfile() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void FBEntity::clear_isfile() {
+  isfile_ = false;
+  clear_has_isfile();
+}
+inline bool FBEntity::isfile() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.isFile)
+  return isfile_;
+}
+inline void FBEntity::set_isfile(bool value) {
+  set_has_isfile();
+  isfile_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.isFile)
+}
+
+// required string path = 2;
+inline bool FBEntity::has_path() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void FBEntity::set_has_path() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void FBEntity::clear_has_path() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void FBEntity::clear_path() {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_->clear();
+  }
+  clear_has_path();
+}
+inline const ::std::string& FBEntity::path() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.path)
+  return *path_;
+}
+inline void FBEntity::set_path(const ::std::string& value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.path)
+}
+inline void FBEntity::set_path(const char* value) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.path)
+}
+inline void FBEntity::set_path(const char* value, size_t size) {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  path_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.FBEntity.path)
+}
+inline ::std::string* FBEntity::mutable_path() {
+  set_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    path_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.FBEntity.path)
+  return path_;
+}
+inline ::std::string* FBEntity::release_path() {
+  clear_has_path();
+  if (path_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = path_;
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FBEntity::set_allocated_path(::std::string* path) {
+  if (path_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete path_;
+  }
+  if (path) {
+    set_has_path();
+    path_ = path;
+  } else {
+    clear_has_path();
+    path_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.FBEntity.path)
+}
+
+// required string title = 3;
+inline bool FBEntity::has_title() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void FBEntity::set_has_title() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void FBEntity::clear_has_title() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void FBEntity::clear_title() {
+  if (title_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    title_->clear();
+  }
+  clear_has_title();
+}
+inline const ::std::string& FBEntity::title() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.title)
+  return *title_;
+}
+inline void FBEntity::set_title(const ::std::string& value) {
+  set_has_title();
+  if (title_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    title_ = new ::std::string;
+  }
+  title_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.title)
+}
+inline void FBEntity::set_title(const char* value) {
+  set_has_title();
+  if (title_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    title_ = new ::std::string;
+  }
+  title_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.title)
+}
+inline void FBEntity::set_title(const char* value, size_t size) {
+  set_has_title();
+  if (title_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    title_ = new ::std::string;
+  }
+  title_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.FBEntity.title)
+}
+inline ::std::string* FBEntity::mutable_title() {
+  set_has_title();
+  if (title_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    title_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.FBEntity.title)
+  return title_;
+}
+inline ::std::string* FBEntity::release_title() {
+  clear_has_title();
+  if (title_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = title_;
+    title_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FBEntity::set_allocated_title(::std::string* title) {
+  if (title_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete title_;
+  }
+  if (title) {
+    set_has_title();
+    title_ = title;
+  } else {
+    clear_has_title();
+    title_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.FBEntity.title)
+}
+
+// required string extension = 4;
+inline bool FBEntity::has_extension() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void FBEntity::set_has_extension() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void FBEntity::clear_has_extension() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void FBEntity::clear_extension() {
+  if (extension_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    extension_->clear();
+  }
+  clear_has_extension();
+}
+inline const ::std::string& FBEntity::extension() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.extension)
+  return *extension_;
+}
+inline void FBEntity::set_extension(const ::std::string& value) {
+  set_has_extension();
+  if (extension_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    extension_ = new ::std::string;
+  }
+  extension_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.extension)
+}
+inline void FBEntity::set_extension(const char* value) {
+  set_has_extension();
+  if (extension_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    extension_ = new ::std::string;
+  }
+  extension_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.extension)
+}
+inline void FBEntity::set_extension(const char* value, size_t size) {
+  set_has_extension();
+  if (extension_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    extension_ = new ::std::string;
+  }
+  extension_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.FBEntity.extension)
+}
+inline ::std::string* FBEntity::mutable_extension() {
+  set_has_extension();
+  if (extension_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    extension_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.FBEntity.extension)
+  return extension_;
+}
+inline ::std::string* FBEntity::release_extension() {
+  clear_has_extension();
+  if (extension_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = extension_;
+    extension_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FBEntity::set_allocated_extension(::std::string* extension) {
+  if (extension_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete extension_;
+  }
+  if (extension) {
+    set_has_extension();
+    extension_ = extension;
+  } else {
+    clear_has_extension();
+    extension_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.FBEntity.extension)
+}
+
+// required string modifiedDate = 5;
+inline bool FBEntity::has_modifieddate() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void FBEntity::set_has_modifieddate() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void FBEntity::clear_has_modifieddate() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void FBEntity::clear_modifieddate() {
+  if (modifieddate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modifieddate_->clear();
+  }
+  clear_has_modifieddate();
+}
+inline const ::std::string& FBEntity::modifieddate() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.modifiedDate)
+  return *modifieddate_;
+}
+inline void FBEntity::set_modifieddate(const ::std::string& value) {
+  set_has_modifieddate();
+  if (modifieddate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modifieddate_ = new ::std::string;
+  }
+  modifieddate_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.modifiedDate)
+}
+inline void FBEntity::set_modifieddate(const char* value) {
+  set_has_modifieddate();
+  if (modifieddate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modifieddate_ = new ::std::string;
+  }
+  modifieddate_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.modifiedDate)
+}
+inline void FBEntity::set_modifieddate(const char* value, size_t size) {
+  set_has_modifieddate();
+  if (modifieddate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modifieddate_ = new ::std::string;
+  }
+  modifieddate_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.FBEntity.modifiedDate)
+}
+inline ::std::string* FBEntity::mutable_modifieddate() {
+  set_has_modifieddate();
+  if (modifieddate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modifieddate_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.FBEntity.modifiedDate)
+  return modifieddate_;
+}
+inline ::std::string* FBEntity::release_modifieddate() {
+  clear_has_modifieddate();
+  if (modifieddate_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = modifieddate_;
+    modifieddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FBEntity::set_allocated_modifieddate(::std::string* modifieddate) {
+  if (modifieddate_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete modifieddate_;
+  }
+  if (modifieddate) {
+    set_has_modifieddate();
+    modifieddate_ = modifieddate;
+  } else {
+    clear_has_modifieddate();
+    modifieddate_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.FBEntity.modifiedDate)
+}
+
+// required string size = 6;
+inline bool FBEntity::has_size() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void FBEntity::set_has_size() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void FBEntity::clear_has_size() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void FBEntity::clear_size() {
+  if (size_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    size_->clear();
+  }
+  clear_has_size();
+}
+inline const ::std::string& FBEntity::size() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.FBEntity.size)
+  return *size_;
+}
+inline void FBEntity::set_size(const ::std::string& value) {
+  set_has_size();
+  if (size_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    size_ = new ::std::string;
+  }
+  size_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.FBEntity.size)
+}
+inline void FBEntity::set_size(const char* value) {
+  set_has_size();
+  if (size_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    size_ = new ::std::string;
+  }
+  size_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.size)
+}
+inline void FBEntity::set_size(const char* value, size_t size) {
+  set_has_size();
+  if (size_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    size_ = new ::std::string;
+  }
+  size_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.FBEntity.size)
+}
+inline ::std::string* FBEntity::mutable_size() {
+  set_has_size();
+  if (size_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    size_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.FBEntity.size)
+  return size_;
+}
+inline ::std::string* FBEntity::release_size() {
+  clear_has_size();
+  if (size_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = size_;
+    size_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void FBEntity::set_allocated_size(::std::string* size) {
+  if (size_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete size_;
+  }
+  if (size) {
+    set_has_size();
+    size_ = size;
+  } else {
+    clear_has_size();
+    size_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.FBEntity.size)
+}
+
+// -------------------------------------------------------------------
+
 // MaterialColor
 
 // required bool colorPickerOpen = 1;
@@ -934,6 +2137,1417 @@ inline void MaterialColor::set_allocated_color(::KuplungApp::Vec3* color) {
     clear_has_color();
   }
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.MaterialColor.color)
+}
+
+// -------------------------------------------------------------------
+
+// MeshMaterialTextureImage
+
+// required string Filename = 1;
+inline bool MeshMaterialTextureImage::has_filename() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MeshMaterialTextureImage::set_has_filename() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MeshMaterialTextureImage::clear_has_filename() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MeshMaterialTextureImage::clear_filename() {
+  if (filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    filename_->clear();
+  }
+  clear_has_filename();
+}
+inline const ::std::string& MeshMaterialTextureImage::filename() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.Filename)
+  return *filename_;
+}
+inline void MeshMaterialTextureImage::set_filename(const ::std::string& value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    filename_ = new ::std::string;
+  }
+  filename_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Filename)
+}
+inline void MeshMaterialTextureImage::set_filename(const char* value) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    filename_ = new ::std::string;
+  }
+  filename_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Filename)
+}
+inline void MeshMaterialTextureImage::set_filename(const char* value, size_t size) {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    filename_ = new ::std::string;
+  }
+  filename_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.MeshMaterialTextureImage.Filename)
+}
+inline ::std::string* MeshMaterialTextureImage::mutable_filename() {
+  set_has_filename();
+  if (filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    filename_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshMaterialTextureImage.Filename)
+  return filename_;
+}
+inline ::std::string* MeshMaterialTextureImage::release_filename() {
+  clear_has_filename();
+  if (filename_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = filename_;
+    filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MeshMaterialTextureImage::set_allocated_filename(::std::string* filename) {
+  if (filename_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete filename_;
+  }
+  if (filename) {
+    set_has_filename();
+    filename_ = filename;
+  } else {
+    clear_has_filename();
+    filename_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshMaterialTextureImage.Filename)
+}
+
+// required string Image = 2;
+inline bool MeshMaterialTextureImage::has_image() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MeshMaterialTextureImage::set_has_image() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MeshMaterialTextureImage::clear_has_image() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MeshMaterialTextureImage::clear_image() {
+  if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_->clear();
+  }
+  clear_has_image();
+}
+inline const ::std::string& MeshMaterialTextureImage::image() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.Image)
+  return *image_;
+}
+inline void MeshMaterialTextureImage::set_image(const ::std::string& value) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Image)
+}
+inline void MeshMaterialTextureImage::set_image(const char* value) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Image)
+}
+inline void MeshMaterialTextureImage::set_image(const char* value, size_t size) {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  image_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.MeshMaterialTextureImage.Image)
+}
+inline ::std::string* MeshMaterialTextureImage::mutable_image() {
+  set_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    image_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshMaterialTextureImage.Image)
+  return image_;
+}
+inline ::std::string* MeshMaterialTextureImage::release_image() {
+  clear_has_image();
+  if (image_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = image_;
+    image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MeshMaterialTextureImage::set_allocated_image(::std::string* image) {
+  if (image_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete image_;
+  }
+  if (image) {
+    set_has_image();
+    image_ = image;
+  } else {
+    clear_has_image();
+    image_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshMaterialTextureImage.Image)
+}
+
+// required int32 Width = 3;
+inline bool MeshMaterialTextureImage::has_width() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MeshMaterialTextureImage::set_has_width() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MeshMaterialTextureImage::clear_has_width() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MeshMaterialTextureImage::clear_width() {
+  width_ = 0;
+  clear_has_width();
+}
+inline ::google::protobuf::int32 MeshMaterialTextureImage::width() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.Width)
+  return width_;
+}
+inline void MeshMaterialTextureImage::set_width(::google::protobuf::int32 value) {
+  set_has_width();
+  width_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Width)
+}
+
+// required int32 Height = 4;
+inline bool MeshMaterialTextureImage::has_height() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MeshMaterialTextureImage::set_has_height() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MeshMaterialTextureImage::clear_has_height() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MeshMaterialTextureImage::clear_height() {
+  height_ = 0;
+  clear_has_height();
+}
+inline ::google::protobuf::int32 MeshMaterialTextureImage::height() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.Height)
+  return height_;
+}
+inline void MeshMaterialTextureImage::set_height(::google::protobuf::int32 value) {
+  set_has_height();
+  height_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Height)
+}
+
+// required bool UseTexture = 5;
+inline bool MeshMaterialTextureImage::has_usetexture() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MeshMaterialTextureImage::set_has_usetexture() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MeshMaterialTextureImage::clear_has_usetexture() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MeshMaterialTextureImage::clear_usetexture() {
+  usetexture_ = false;
+  clear_has_usetexture();
+}
+inline bool MeshMaterialTextureImage::usetexture() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.UseTexture)
+  return usetexture_;
+}
+inline void MeshMaterialTextureImage::set_usetexture(bool value) {
+  set_has_usetexture();
+  usetexture_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.UseTexture)
+}
+
+// repeated string Commands = 6;
+inline int MeshMaterialTextureImage::commands_size() const {
+  return commands_.size();
+}
+inline void MeshMaterialTextureImage::clear_commands() {
+  commands_.Clear();
+}
+inline const ::std::string& MeshMaterialTextureImage::commands(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshMaterialTextureImage.Commands)
+  return commands_.Get(index);
+}
+inline ::std::string* MeshMaterialTextureImage::mutable_commands(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshMaterialTextureImage.Commands)
+  return commands_.Mutable(index);
+}
+inline void MeshMaterialTextureImage::set_commands(int index, const ::std::string& value) {
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Commands)
+  commands_.Mutable(index)->assign(value);
+}
+inline void MeshMaterialTextureImage::set_commands(int index, const char* value) {
+  commands_.Mutable(index)->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+inline void MeshMaterialTextureImage::set_commands(int index, const char* value, size_t size) {
+  commands_.Mutable(index)->assign(
+    reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+inline ::std::string* MeshMaterialTextureImage::add_commands() {
+  return commands_.Add();
+}
+inline void MeshMaterialTextureImage::add_commands(const ::std::string& value) {
+  commands_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+inline void MeshMaterialTextureImage::add_commands(const char* value) {
+  commands_.Add()->assign(value);
+  // @@protoc_insertion_point(field_add_char:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+inline void MeshMaterialTextureImage::add_commands(const char* value, size_t size) {
+  commands_.Add()->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_add_pointer:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+inline const ::google::protobuf::RepeatedPtrField< ::std::string>&
+MeshMaterialTextureImage::commands() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.MeshMaterialTextureImage.Commands)
+  return commands_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::std::string>*
+MeshMaterialTextureImage::mutable_commands() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.MeshMaterialTextureImage.Commands)
+  return &commands_;
+}
+
+// -------------------------------------------------------------------
+
+// MeshModelMaterial
+
+// required int32 MaterialID = 1;
+inline bool MeshModelMaterial::has_materialid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void MeshModelMaterial::set_has_materialid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void MeshModelMaterial::clear_has_materialid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void MeshModelMaterial::clear_materialid() {
+  materialid_ = 0;
+  clear_has_materialid();
+}
+inline ::google::protobuf::int32 MeshModelMaterial::materialid() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.MaterialID)
+  return materialid_;
+}
+inline void MeshModelMaterial::set_materialid(::google::protobuf::int32 value) {
+  set_has_materialid();
+  materialid_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.MaterialID)
+}
+
+// required string MaterialTitle = 2;
+inline bool MeshModelMaterial::has_materialtitle() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void MeshModelMaterial::set_has_materialtitle() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void MeshModelMaterial::clear_has_materialtitle() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void MeshModelMaterial::clear_materialtitle() {
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_->clear();
+  }
+  clear_has_materialtitle();
+}
+inline const ::std::string& MeshModelMaterial::materialtitle() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.MaterialTitle)
+  return *materialtitle_;
+}
+inline void MeshModelMaterial::set_materialtitle(const ::std::string& value) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.MaterialTitle)
+}
+inline void MeshModelMaterial::set_materialtitle(const char* value) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.MeshModelMaterial.MaterialTitle)
+}
+inline void MeshModelMaterial::set_materialtitle(const char* value, size_t size) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.MeshModelMaterial.MaterialTitle)
+}
+inline ::std::string* MeshModelMaterial::mutable_materialtitle() {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.MaterialTitle)
+  return materialtitle_;
+}
+inline ::std::string* MeshModelMaterial::release_materialtitle() {
+  clear_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = materialtitle_;
+    materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void MeshModelMaterial::set_allocated_materialtitle(::std::string* materialtitle) {
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete materialtitle_;
+  }
+  if (materialtitle) {
+    set_has_materialtitle();
+    materialtitle_ = materialtitle;
+  } else {
+    clear_has_materialtitle();
+    materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.MaterialTitle)
+}
+
+// required .KuplungApp.Vec3 AmbientColor = 3;
+inline bool MeshModelMaterial::has_ambientcolor() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void MeshModelMaterial::set_has_ambientcolor() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void MeshModelMaterial::clear_has_ambientcolor() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void MeshModelMaterial::clear_ambientcolor() {
+  if (ambientcolor_ != NULL) ambientcolor_->::KuplungApp::Vec3::Clear();
+  clear_has_ambientcolor();
+}
+inline const ::KuplungApp::Vec3& MeshModelMaterial::ambientcolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.AmbientColor)
+  return ambientcolor_ != NULL ? *ambientcolor_ : *default_instance_->ambientcolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::mutable_ambientcolor() {
+  set_has_ambientcolor();
+  if (ambientcolor_ == NULL) ambientcolor_ = new ::KuplungApp::Vec3;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.AmbientColor)
+  return ambientcolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::release_ambientcolor() {
+  clear_has_ambientcolor();
+  ::KuplungApp::Vec3* temp = ambientcolor_;
+  ambientcolor_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_ambientcolor(::KuplungApp::Vec3* ambientcolor) {
+  delete ambientcolor_;
+  ambientcolor_ = ambientcolor;
+  if (ambientcolor) {
+    set_has_ambientcolor();
+  } else {
+    clear_has_ambientcolor();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.AmbientColor)
+}
+
+// required .KuplungApp.Vec3 DiffuseColor = 4;
+inline bool MeshModelMaterial::has_diffusecolor() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void MeshModelMaterial::set_has_diffusecolor() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void MeshModelMaterial::clear_has_diffusecolor() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void MeshModelMaterial::clear_diffusecolor() {
+  if (diffusecolor_ != NULL) diffusecolor_->::KuplungApp::Vec3::Clear();
+  clear_has_diffusecolor();
+}
+inline const ::KuplungApp::Vec3& MeshModelMaterial::diffusecolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.DiffuseColor)
+  return diffusecolor_ != NULL ? *diffusecolor_ : *default_instance_->diffusecolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::mutable_diffusecolor() {
+  set_has_diffusecolor();
+  if (diffusecolor_ == NULL) diffusecolor_ = new ::KuplungApp::Vec3;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.DiffuseColor)
+  return diffusecolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::release_diffusecolor() {
+  clear_has_diffusecolor();
+  ::KuplungApp::Vec3* temp = diffusecolor_;
+  diffusecolor_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_diffusecolor(::KuplungApp::Vec3* diffusecolor) {
+  delete diffusecolor_;
+  diffusecolor_ = diffusecolor;
+  if (diffusecolor) {
+    set_has_diffusecolor();
+  } else {
+    clear_has_diffusecolor();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.DiffuseColor)
+}
+
+// required .KuplungApp.Vec3 SpecularColor = 5;
+inline bool MeshModelMaterial::has_specularcolor() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void MeshModelMaterial::set_has_specularcolor() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void MeshModelMaterial::clear_has_specularcolor() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void MeshModelMaterial::clear_specularcolor() {
+  if (specularcolor_ != NULL) specularcolor_->::KuplungApp::Vec3::Clear();
+  clear_has_specularcolor();
+}
+inline const ::KuplungApp::Vec3& MeshModelMaterial::specularcolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.SpecularColor)
+  return specularcolor_ != NULL ? *specularcolor_ : *default_instance_->specularcolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::mutable_specularcolor() {
+  set_has_specularcolor();
+  if (specularcolor_ == NULL) specularcolor_ = new ::KuplungApp::Vec3;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.SpecularColor)
+  return specularcolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::release_specularcolor() {
+  clear_has_specularcolor();
+  ::KuplungApp::Vec3* temp = specularcolor_;
+  specularcolor_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_specularcolor(::KuplungApp::Vec3* specularcolor) {
+  delete specularcolor_;
+  specularcolor_ = specularcolor;
+  if (specularcolor) {
+    set_has_specularcolor();
+  } else {
+    clear_has_specularcolor();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.SpecularColor)
+}
+
+// required .KuplungApp.Vec3 EmissionColor = 6;
+inline bool MeshModelMaterial::has_emissioncolor() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void MeshModelMaterial::set_has_emissioncolor() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void MeshModelMaterial::clear_has_emissioncolor() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void MeshModelMaterial::clear_emissioncolor() {
+  if (emissioncolor_ != NULL) emissioncolor_->::KuplungApp::Vec3::Clear();
+  clear_has_emissioncolor();
+}
+inline const ::KuplungApp::Vec3& MeshModelMaterial::emissioncolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.EmissionColor)
+  return emissioncolor_ != NULL ? *emissioncolor_ : *default_instance_->emissioncolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::mutable_emissioncolor() {
+  set_has_emissioncolor();
+  if (emissioncolor_ == NULL) emissioncolor_ = new ::KuplungApp::Vec3;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.EmissionColor)
+  return emissioncolor_;
+}
+inline ::KuplungApp::Vec3* MeshModelMaterial::release_emissioncolor() {
+  clear_has_emissioncolor();
+  ::KuplungApp::Vec3* temp = emissioncolor_;
+  emissioncolor_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_emissioncolor(::KuplungApp::Vec3* emissioncolor) {
+  delete emissioncolor_;
+  emissioncolor_ = emissioncolor;
+  if (emissioncolor) {
+    set_has_emissioncolor();
+  } else {
+    clear_has_emissioncolor();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.EmissionColor)
+}
+
+// required float SpecularExp = 7;
+inline bool MeshModelMaterial::has_specularexp() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void MeshModelMaterial::set_has_specularexp() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void MeshModelMaterial::clear_has_specularexp() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void MeshModelMaterial::clear_specularexp() {
+  specularexp_ = 0;
+  clear_has_specularexp();
+}
+inline float MeshModelMaterial::specularexp() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.SpecularExp)
+  return specularexp_;
+}
+inline void MeshModelMaterial::set_specularexp(float value) {
+  set_has_specularexp();
+  specularexp_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.SpecularExp)
+}
+
+// required float Transparency = 8;
+inline bool MeshModelMaterial::has_transparency() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void MeshModelMaterial::set_has_transparency() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void MeshModelMaterial::clear_has_transparency() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void MeshModelMaterial::clear_transparency() {
+  transparency_ = 0;
+  clear_has_transparency();
+}
+inline float MeshModelMaterial::transparency() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.Transparency)
+  return transparency_;
+}
+inline void MeshModelMaterial::set_transparency(float value) {
+  set_has_transparency();
+  transparency_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.Transparency)
+}
+
+// required fixed32 IlluminationMode = 9;
+inline bool MeshModelMaterial::has_illuminationmode() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void MeshModelMaterial::set_has_illuminationmode() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void MeshModelMaterial::clear_has_illuminationmode() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void MeshModelMaterial::clear_illuminationmode() {
+  illuminationmode_ = 0u;
+  clear_has_illuminationmode();
+}
+inline ::google::protobuf::uint32 MeshModelMaterial::illuminationmode() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.IlluminationMode)
+  return illuminationmode_;
+}
+inline void MeshModelMaterial::set_illuminationmode(::google::protobuf::uint32 value) {
+  set_has_illuminationmode();
+  illuminationmode_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.IlluminationMode)
+}
+
+// required float OpticalDensity = 10;
+inline bool MeshModelMaterial::has_opticaldensity() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void MeshModelMaterial::set_has_opticaldensity() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void MeshModelMaterial::clear_has_opticaldensity() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void MeshModelMaterial::clear_opticaldensity() {
+  opticaldensity_ = 0;
+  clear_has_opticaldensity();
+}
+inline float MeshModelMaterial::opticaldensity() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.OpticalDensity)
+  return opticaldensity_;
+}
+inline void MeshModelMaterial::set_opticaldensity(float value) {
+  set_has_opticaldensity();
+  opticaldensity_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModelMaterial.OpticalDensity)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+inline bool MeshModelMaterial::has_textureambient() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void MeshModelMaterial::set_has_textureambient() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void MeshModelMaterial::clear_has_textureambient() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void MeshModelMaterial::clear_textureambient() {
+  if (textureambient_ != NULL) textureambient_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_textureambient();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::textureambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureAmbient)
+  return textureambient_ != NULL ? *textureambient_ : *default_instance_->textureambient_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_textureambient() {
+  set_has_textureambient();
+  if (textureambient_ == NULL) textureambient_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureAmbient)
+  return textureambient_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_textureambient() {
+  clear_has_textureambient();
+  ::KuplungApp::MeshMaterialTextureImage* temp = textureambient_;
+  textureambient_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_textureambient(::KuplungApp::MeshMaterialTextureImage* textureambient) {
+  delete textureambient_;
+  textureambient_ = textureambient;
+  if (textureambient) {
+    set_has_textureambient();
+  } else {
+    clear_has_textureambient();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureAmbient)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+inline bool MeshModelMaterial::has_texturediffuse() const {
+  return (_has_bits_[0] & 0x00000800u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturediffuse() {
+  _has_bits_[0] |= 0x00000800u;
+}
+inline void MeshModelMaterial::clear_has_texturediffuse() {
+  _has_bits_[0] &= ~0x00000800u;
+}
+inline void MeshModelMaterial::clear_texturediffuse() {
+  if (texturediffuse_ != NULL) texturediffuse_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturediffuse();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturediffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureDiffuse)
+  return texturediffuse_ != NULL ? *texturediffuse_ : *default_instance_->texturediffuse_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturediffuse() {
+  set_has_texturediffuse();
+  if (texturediffuse_ == NULL) texturediffuse_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureDiffuse)
+  return texturediffuse_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturediffuse() {
+  clear_has_texturediffuse();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturediffuse_;
+  texturediffuse_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturediffuse(::KuplungApp::MeshMaterialTextureImage* texturediffuse) {
+  delete texturediffuse_;
+  texturediffuse_ = texturediffuse;
+  if (texturediffuse) {
+    set_has_texturediffuse();
+  } else {
+    clear_has_texturediffuse();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureDiffuse)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+inline bool MeshModelMaterial::has_texturespecular() const {
+  return (_has_bits_[0] & 0x00001000u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturespecular() {
+  _has_bits_[0] |= 0x00001000u;
+}
+inline void MeshModelMaterial::clear_has_texturespecular() {
+  _has_bits_[0] &= ~0x00001000u;
+}
+inline void MeshModelMaterial::clear_texturespecular() {
+  if (texturespecular_ != NULL) texturespecular_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturespecular();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturespecular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureSpecular)
+  return texturespecular_ != NULL ? *texturespecular_ : *default_instance_->texturespecular_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturespecular() {
+  set_has_texturespecular();
+  if (texturespecular_ == NULL) texturespecular_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureSpecular)
+  return texturespecular_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturespecular() {
+  clear_has_texturespecular();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturespecular_;
+  texturespecular_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturespecular(::KuplungApp::MeshMaterialTextureImage* texturespecular) {
+  delete texturespecular_;
+  texturespecular_ = texturespecular;
+  if (texturespecular) {
+    set_has_texturespecular();
+  } else {
+    clear_has_texturespecular();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureSpecular)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+inline bool MeshModelMaterial::has_texturespecularexp() const {
+  return (_has_bits_[0] & 0x00002000u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturespecularexp() {
+  _has_bits_[0] |= 0x00002000u;
+}
+inline void MeshModelMaterial::clear_has_texturespecularexp() {
+  _has_bits_[0] &= ~0x00002000u;
+}
+inline void MeshModelMaterial::clear_texturespecularexp() {
+  if (texturespecularexp_ != NULL) texturespecularexp_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturespecularexp();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturespecularexp() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureSpecularExp)
+  return texturespecularexp_ != NULL ? *texturespecularexp_ : *default_instance_->texturespecularexp_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturespecularexp() {
+  set_has_texturespecularexp();
+  if (texturespecularexp_ == NULL) texturespecularexp_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureSpecularExp)
+  return texturespecularexp_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturespecularexp() {
+  clear_has_texturespecularexp();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturespecularexp_;
+  texturespecularexp_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturespecularexp(::KuplungApp::MeshMaterialTextureImage* texturespecularexp) {
+  delete texturespecularexp_;
+  texturespecularexp_ = texturespecularexp;
+  if (texturespecularexp) {
+    set_has_texturespecularexp();
+  } else {
+    clear_has_texturespecularexp();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureSpecularExp)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+inline bool MeshModelMaterial::has_texturedissolve() const {
+  return (_has_bits_[0] & 0x00004000u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturedissolve() {
+  _has_bits_[0] |= 0x00004000u;
+}
+inline void MeshModelMaterial::clear_has_texturedissolve() {
+  _has_bits_[0] &= ~0x00004000u;
+}
+inline void MeshModelMaterial::clear_texturedissolve() {
+  if (texturedissolve_ != NULL) texturedissolve_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturedissolve();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturedissolve() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureDissolve)
+  return texturedissolve_ != NULL ? *texturedissolve_ : *default_instance_->texturedissolve_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturedissolve() {
+  set_has_texturedissolve();
+  if (texturedissolve_ == NULL) texturedissolve_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureDissolve)
+  return texturedissolve_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturedissolve() {
+  clear_has_texturedissolve();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturedissolve_;
+  texturedissolve_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturedissolve(::KuplungApp::MeshMaterialTextureImage* texturedissolve) {
+  delete texturedissolve_;
+  texturedissolve_ = texturedissolve;
+  if (texturedissolve) {
+    set_has_texturedissolve();
+  } else {
+    clear_has_texturedissolve();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureDissolve)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+inline bool MeshModelMaterial::has_texturebump() const {
+  return (_has_bits_[0] & 0x00008000u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturebump() {
+  _has_bits_[0] |= 0x00008000u;
+}
+inline void MeshModelMaterial::clear_has_texturebump() {
+  _has_bits_[0] &= ~0x00008000u;
+}
+inline void MeshModelMaterial::clear_texturebump() {
+  if (texturebump_ != NULL) texturebump_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturebump();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturebump() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureBump)
+  return texturebump_ != NULL ? *texturebump_ : *default_instance_->texturebump_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturebump() {
+  set_has_texturebump();
+  if (texturebump_ == NULL) texturebump_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureBump)
+  return texturebump_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturebump() {
+  clear_has_texturebump();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturebump_;
+  texturebump_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturebump(::KuplungApp::MeshMaterialTextureImage* texturebump) {
+  delete texturebump_;
+  texturebump_ = texturebump;
+  if (texturebump) {
+    set_has_texturebump();
+  } else {
+    clear_has_texturebump();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureBump)
+}
+
+// required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+inline bool MeshModelMaterial::has_texturedisplacement() const {
+  return (_has_bits_[0] & 0x00010000u) != 0;
+}
+inline void MeshModelMaterial::set_has_texturedisplacement() {
+  _has_bits_[0] |= 0x00010000u;
+}
+inline void MeshModelMaterial::clear_has_texturedisplacement() {
+  _has_bits_[0] &= ~0x00010000u;
+}
+inline void MeshModelMaterial::clear_texturedisplacement() {
+  if (texturedisplacement_ != NULL) texturedisplacement_->::KuplungApp::MeshMaterialTextureImage::Clear();
+  clear_has_texturedisplacement();
+}
+inline const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::texturedisplacement() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModelMaterial.TextureDisplacement)
+  return texturedisplacement_ != NULL ? *texturedisplacement_ : *default_instance_->texturedisplacement_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::mutable_texturedisplacement() {
+  set_has_texturedisplacement();
+  if (texturedisplacement_ == NULL) texturedisplacement_ = new ::KuplungApp::MeshMaterialTextureImage;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModelMaterial.TextureDisplacement)
+  return texturedisplacement_;
+}
+inline ::KuplungApp::MeshMaterialTextureImage* MeshModelMaterial::release_texturedisplacement() {
+  clear_has_texturedisplacement();
+  ::KuplungApp::MeshMaterialTextureImage* temp = texturedisplacement_;
+  texturedisplacement_ = NULL;
+  return temp;
+}
+inline void MeshModelMaterial::set_allocated_texturedisplacement(::KuplungApp::MeshMaterialTextureImage* texturedisplacement) {
+  delete texturedisplacement_;
+  texturedisplacement_ = texturedisplacement;
+  if (texturedisplacement) {
+    set_has_texturedisplacement();
+  } else {
+    clear_has_texturedisplacement();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModelMaterial.TextureDisplacement)
+}
+
+// -------------------------------------------------------------------
+
+// Mesh
+
+// required int32 ID = 1;
+inline bool Mesh::has_id() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void Mesh::set_has_id() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void Mesh::clear_has_id() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void Mesh::clear_id() {
+  id_ = 0;
+  clear_has_id();
+}
+inline ::google::protobuf::int32 Mesh::id() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.ID)
+  return id_;
+}
+inline void Mesh::set_id(::google::protobuf::int32 value) {
+  set_has_id();
+  id_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.ID)
+}
+
+// required .KuplungApp.FBEntity File = 2;
+inline bool Mesh::has_file() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void Mesh::set_has_file() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void Mesh::clear_has_file() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void Mesh::clear_file() {
+  if (file_ != NULL) file_->::KuplungApp::FBEntity::Clear();
+  clear_has_file();
+}
+inline const ::KuplungApp::FBEntity& Mesh::file() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.File)
+  return file_ != NULL ? *file_ : *default_instance_->file_;
+}
+inline ::KuplungApp::FBEntity* Mesh::mutable_file() {
+  set_has_file();
+  if (file_ == NULL) file_ = new ::KuplungApp::FBEntity;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.File)
+  return file_;
+}
+inline ::KuplungApp::FBEntity* Mesh::release_file() {
+  clear_has_file();
+  ::KuplungApp::FBEntity* temp = file_;
+  file_ = NULL;
+  return temp;
+}
+inline void Mesh::set_allocated_file(::KuplungApp::FBEntity* file) {
+  delete file_;
+  file_ = file;
+  if (file) {
+    set_has_file();
+  } else {
+    clear_has_file();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Mesh.File)
+}
+
+// required string ModelTitle = 3;
+inline bool Mesh::has_modeltitle() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void Mesh::set_has_modeltitle() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void Mesh::clear_has_modeltitle() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void Mesh::clear_modeltitle() {
+  if (modeltitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modeltitle_->clear();
+  }
+  clear_has_modeltitle();
+}
+inline const ::std::string& Mesh::modeltitle() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.ModelTitle)
+  return *modeltitle_;
+}
+inline void Mesh::set_modeltitle(const ::std::string& value) {
+  set_has_modeltitle();
+  if (modeltitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modeltitle_ = new ::std::string;
+  }
+  modeltitle_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.ModelTitle)
+}
+inline void Mesh::set_modeltitle(const char* value) {
+  set_has_modeltitle();
+  if (modeltitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modeltitle_ = new ::std::string;
+  }
+  modeltitle_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.Mesh.ModelTitle)
+}
+inline void Mesh::set_modeltitle(const char* value, size_t size) {
+  set_has_modeltitle();
+  if (modeltitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modeltitle_ = new ::std::string;
+  }
+  modeltitle_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.Mesh.ModelTitle)
+}
+inline ::std::string* Mesh::mutable_modeltitle() {
+  set_has_modeltitle();
+  if (modeltitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    modeltitle_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.ModelTitle)
+  return modeltitle_;
+}
+inline ::std::string* Mesh::release_modeltitle() {
+  clear_has_modeltitle();
+  if (modeltitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = modeltitle_;
+    modeltitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void Mesh::set_allocated_modeltitle(::std::string* modeltitle) {
+  if (modeltitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete modeltitle_;
+  }
+  if (modeltitle) {
+    set_has_modeltitle();
+    modeltitle_ = modeltitle;
+  } else {
+    clear_has_modeltitle();
+    modeltitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Mesh.ModelTitle)
+}
+
+// required string MaterialTitle = 4;
+inline bool Mesh::has_materialtitle() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void Mesh::set_has_materialtitle() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void Mesh::clear_has_materialtitle() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void Mesh::clear_materialtitle() {
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_->clear();
+  }
+  clear_has_materialtitle();
+}
+inline const ::std::string& Mesh::materialtitle() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.MaterialTitle)
+  return *materialtitle_;
+}
+inline void Mesh::set_materialtitle(const ::std::string& value) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(value);
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.MaterialTitle)
+}
+inline void Mesh::set_materialtitle(const char* value) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(value);
+  // @@protoc_insertion_point(field_set_char:KuplungApp.Mesh.MaterialTitle)
+}
+inline void Mesh::set_materialtitle(const char* value, size_t size) {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  materialtitle_->assign(reinterpret_cast<const char*>(value), size);
+  // @@protoc_insertion_point(field_set_pointer:KuplungApp.Mesh.MaterialTitle)
+}
+inline ::std::string* Mesh::mutable_materialtitle() {
+  set_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    materialtitle_ = new ::std::string;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.MaterialTitle)
+  return materialtitle_;
+}
+inline ::std::string* Mesh::release_materialtitle() {
+  clear_has_materialtitle();
+  if (materialtitle_ == &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    return NULL;
+  } else {
+    ::std::string* temp = materialtitle_;
+    materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+    return temp;
+  }
+}
+inline void Mesh::set_allocated_materialtitle(::std::string* materialtitle) {
+  if (materialtitle_ != &::google::protobuf::internal::GetEmptyStringAlreadyInited()) {
+    delete materialtitle_;
+  }
+  if (materialtitle) {
+    set_has_materialtitle();
+    materialtitle_ = materialtitle;
+  } else {
+    clear_has_materialtitle();
+    materialtitle_ = const_cast< ::std::string*>(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Mesh.MaterialTitle)
+}
+
+// required int32 countVertices = 5;
+inline bool Mesh::has_countvertices() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void Mesh::set_has_countvertices() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void Mesh::clear_has_countvertices() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void Mesh::clear_countvertices() {
+  countvertices_ = 0;
+  clear_has_countvertices();
+}
+inline ::google::protobuf::int32 Mesh::countvertices() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.countVertices)
+  return countvertices_;
+}
+inline void Mesh::set_countvertices(::google::protobuf::int32 value) {
+  set_has_countvertices();
+  countvertices_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.countVertices)
+}
+
+// required int32 countTextureCoordinates = 6;
+inline bool Mesh::has_counttexturecoordinates() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void Mesh::set_has_counttexturecoordinates() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void Mesh::clear_has_counttexturecoordinates() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void Mesh::clear_counttexturecoordinates() {
+  counttexturecoordinates_ = 0;
+  clear_has_counttexturecoordinates();
+}
+inline ::google::protobuf::int32 Mesh::counttexturecoordinates() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.countTextureCoordinates)
+  return counttexturecoordinates_;
+}
+inline void Mesh::set_counttexturecoordinates(::google::protobuf::int32 value) {
+  set_has_counttexturecoordinates();
+  counttexturecoordinates_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.countTextureCoordinates)
+}
+
+// required int32 countNormals = 7;
+inline bool Mesh::has_countnormals() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void Mesh::set_has_countnormals() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void Mesh::clear_has_countnormals() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void Mesh::clear_countnormals() {
+  countnormals_ = 0;
+  clear_has_countnormals();
+}
+inline ::google::protobuf::int32 Mesh::countnormals() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.countNormals)
+  return countnormals_;
+}
+inline void Mesh::set_countnormals(::google::protobuf::int32 value) {
+  set_has_countnormals();
+  countnormals_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.countNormals)
+}
+
+// required int32 countIndices = 8;
+inline bool Mesh::has_countindices() const {
+  return (_has_bits_[0] & 0x00000080u) != 0;
+}
+inline void Mesh::set_has_countindices() {
+  _has_bits_[0] |= 0x00000080u;
+}
+inline void Mesh::clear_has_countindices() {
+  _has_bits_[0] &= ~0x00000080u;
+}
+inline void Mesh::clear_countindices() {
+  countindices_ = 0;
+  clear_has_countindices();
+}
+inline ::google::protobuf::int32 Mesh::countindices() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.countIndices)
+  return countindices_;
+}
+inline void Mesh::set_countindices(::google::protobuf::int32 value) {
+  set_has_countindices();
+  countindices_ = value;
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.countIndices)
+}
+
+// required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+inline bool Mesh::has_modelmaterial() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void Mesh::set_has_modelmaterial() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void Mesh::clear_has_modelmaterial() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void Mesh::clear_modelmaterial() {
+  if (modelmaterial_ != NULL) modelmaterial_->::KuplungApp::MeshModelMaterial::Clear();
+  clear_has_modelmaterial();
+}
+inline const ::KuplungApp::MeshModelMaterial& Mesh::modelmaterial() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.ModelMaterial)
+  return modelmaterial_ != NULL ? *modelmaterial_ : *default_instance_->modelmaterial_;
+}
+inline ::KuplungApp::MeshModelMaterial* Mesh::mutable_modelmaterial() {
+  set_has_modelmaterial();
+  if (modelmaterial_ == NULL) modelmaterial_ = new ::KuplungApp::MeshModelMaterial;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.ModelMaterial)
+  return modelmaterial_;
+}
+inline ::KuplungApp::MeshModelMaterial* Mesh::release_modelmaterial() {
+  clear_has_modelmaterial();
+  ::KuplungApp::MeshModelMaterial* temp = modelmaterial_;
+  modelmaterial_ = NULL;
+  return temp;
+}
+inline void Mesh::set_allocated_modelmaterial(::KuplungApp::MeshModelMaterial* modelmaterial) {
+  delete modelmaterial_;
+  modelmaterial_ = modelmaterial;
+  if (modelmaterial) {
+    set_has_modelmaterial();
+  } else {
+    clear_has_modelmaterial();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Mesh.ModelMaterial)
+}
+
+// repeated .KuplungApp.Vec3 vertices = 10;
+inline int Mesh::vertices_size() const {
+  return vertices_.size();
+}
+inline void Mesh::clear_vertices() {
+  vertices_.Clear();
+}
+inline const ::KuplungApp::Vec3& Mesh::vertices(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.vertices)
+  return vertices_.Get(index);
+}
+inline ::KuplungApp::Vec3* Mesh::mutable_vertices(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.vertices)
+  return vertices_.Mutable(index);
+}
+inline ::KuplungApp::Vec3* Mesh::add_vertices() {
+  // @@protoc_insertion_point(field_add:KuplungApp.Mesh.vertices)
+  return vertices_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >&
+Mesh::vertices() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.Mesh.vertices)
+  return vertices_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >*
+Mesh::mutable_vertices() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.Mesh.vertices)
+  return &vertices_;
+}
+
+// repeated .KuplungApp.Vec2 texture_coordinates = 11;
+inline int Mesh::texture_coordinates_size() const {
+  return texture_coordinates_.size();
+}
+inline void Mesh::clear_texture_coordinates() {
+  texture_coordinates_.Clear();
+}
+inline const ::KuplungApp::Vec2& Mesh::texture_coordinates(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.texture_coordinates)
+  return texture_coordinates_.Get(index);
+}
+inline ::KuplungApp::Vec2* Mesh::mutable_texture_coordinates(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.texture_coordinates)
+  return texture_coordinates_.Mutable(index);
+}
+inline ::KuplungApp::Vec2* Mesh::add_texture_coordinates() {
+  // @@protoc_insertion_point(field_add:KuplungApp.Mesh.texture_coordinates)
+  return texture_coordinates_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec2 >&
+Mesh::texture_coordinates() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.Mesh.texture_coordinates)
+  return texture_coordinates_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec2 >*
+Mesh::mutable_texture_coordinates() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.Mesh.texture_coordinates)
+  return &texture_coordinates_;
+}
+
+// repeated .KuplungApp.Vec3 normals = 12;
+inline int Mesh::normals_size() const {
+  return normals_.size();
+}
+inline void Mesh::clear_normals() {
+  normals_.Clear();
+}
+inline const ::KuplungApp::Vec3& Mesh::normals(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.normals)
+  return normals_.Get(index);
+}
+inline ::KuplungApp::Vec3* Mesh::mutable_normals(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Mesh.normals)
+  return normals_.Mutable(index);
+}
+inline ::KuplungApp::Vec3* Mesh::add_normals() {
+  // @@protoc_insertion_point(field_add:KuplungApp.Mesh.normals)
+  return normals_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >&
+Mesh::normals() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.Mesh.normals)
+  return normals_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::Vec3 >*
+Mesh::mutable_normals() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.Mesh.normals)
+  return &normals_;
+}
+
+// repeated fixed32 indices = 13;
+inline int Mesh::indices_size() const {
+  return indices_.size();
+}
+inline void Mesh::clear_indices() {
+  indices_.Clear();
+}
+inline ::google::protobuf::uint32 Mesh::indices(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Mesh.indices)
+  return indices_.Get(index);
+}
+inline void Mesh::set_indices(int index, ::google::protobuf::uint32 value) {
+  indices_.Set(index, value);
+  // @@protoc_insertion_point(field_set:KuplungApp.Mesh.indices)
+}
+inline void Mesh::add_indices(::google::protobuf::uint32 value) {
+  indices_.Add(value);
+  // @@protoc_insertion_point(field_add:KuplungApp.Mesh.indices)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+Mesh::indices() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.Mesh.indices)
+  return indices_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+Mesh::mutable_indices() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.Mesh.indices)
+  return &indices_;
 }
 
 

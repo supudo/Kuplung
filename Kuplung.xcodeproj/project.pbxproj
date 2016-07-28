@@ -1619,7 +1619,8 @@
 					"-isystem",
 					"-lAssimp",
 					"-lprotobuf",
-					"-lminizip",
+					"-lz",
+					"-lMinizip",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;
@@ -1672,7 +1673,8 @@
 					"-isystem",
 					"-lAssimp",
 					"-lprotobuf",
-					"-lminizip",
+					"-lz",
+					"-lMinizip",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;

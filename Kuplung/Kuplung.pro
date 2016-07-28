@@ -72,6 +72,9 @@ mac {
     LIBS += -L/usr/local/Cellar/protobuf/2.6.1/lib -lprotobuf
     INCLUDEPATH += /usr/local/Cellar/protobuf/2.6.1/include
 
+    LIBS += -L/usr/local/Cellar/minizip/1.1/lib -lz -lMinizip
+    INCLUDEPATH += /usr/local/Cellar/minizip/1.1/include
+
     LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
     INCLUDEPATH += "$$PWD/../external/libnoise/headers"
 }
@@ -177,6 +180,8 @@ SOURCES += main.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
+    kuplung/utilities/minizip/KuplungZip.cpp \
+    kuplung/utilities/minizip/KuplungUnzip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
@@ -266,6 +271,8 @@ HEADERS += \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
+    kuplung/utilities/minizip/KuplungZip.hpp \
+    kuplung/utilities/minizip/KuplungUnzip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \

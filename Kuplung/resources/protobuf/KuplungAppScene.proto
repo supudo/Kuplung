@@ -7,6 +7,10 @@ package KuplungApp;
 import "KuplungDefinitions.proto";
 
 message Scene {
+  repeated MeshModel models = 1;
+}
+
+message MeshModel {
   required int32 ModelID = 1;
 
   required bool Settings_DeferredRender = 2;
@@ -72,4 +76,6 @@ message Scene {
   required float Effect_Bloom_VignetteAtt = 56;
 
   required int32 Setting_LightingPass_DrawMode = 57;
+
+  required Mesh meshObject = 58;
 }

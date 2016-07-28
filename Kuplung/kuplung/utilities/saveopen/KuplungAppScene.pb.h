@@ -35,6 +35,7 @@ void protobuf_AssignDesc_KuplungAppScene_2eproto();
 void protobuf_ShutdownFile_KuplungAppScene_2eproto();
 
 class Scene;
+class MeshModel;
 
 // ===================================================================
 
@@ -70,6 +71,88 @@ class Scene : public ::google::protobuf::Message {
   void MergeFrom(const ::google::protobuf::Message& from);
   void CopyFrom(const Scene& from);
   void MergeFrom(const Scene& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .KuplungApp.MeshModel models = 1;
+  inline int models_size() const;
+  inline void clear_models();
+  static const int kModelsFieldNumber = 1;
+  inline const ::KuplungApp::MeshModel& models(int index) const;
+  inline ::KuplungApp::MeshModel* mutable_models(int index);
+  inline ::KuplungApp::MeshModel* add_models();
+  inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::MeshModel >&
+      models() const;
+  inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::MeshModel >*
+      mutable_models();
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.Scene)
+ private:
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::uint32 _has_bits_[1];
+  mutable int _cached_size_;
+  ::google::protobuf::RepeatedPtrField< ::KuplungApp::MeshModel > models_;
+  friend void  protobuf_AddDesc_KuplungAppScene_2eproto();
+  friend void protobuf_AssignDesc_KuplungAppScene_2eproto();
+  friend void protobuf_ShutdownFile_KuplungAppScene_2eproto();
+
+  void InitAsDefaultInstance();
+  static Scene* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MeshModel : public ::google::protobuf::Message {
+ public:
+  MeshModel();
+  virtual ~MeshModel();
+
+  MeshModel(const MeshModel& from);
+
+  inline MeshModel& operator=(const MeshModel& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const MeshModel& default_instance();
+
+  void Swap(MeshModel* other);
+
+  // implements Message ----------------------------------------------
+
+  MeshModel* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const MeshModel& from);
+  void MergeFrom(const MeshModel& from);
   void Clear();
   bool IsInitialized() const;
 
@@ -550,7 +633,16 @@ class Scene : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 setting_lightingpass_drawmode() const;
   inline void set_setting_lightingpass_drawmode(::google::protobuf::int32 value);
 
-  // @@protoc_insertion_point(class_scope:KuplungApp.Scene)
+  // required .KuplungApp.Mesh meshObject = 58;
+  inline bool has_meshobject() const;
+  inline void clear_meshobject();
+  static const int kMeshObjectFieldNumber = 58;
+  inline const ::KuplungApp::Mesh& meshobject() const;
+  inline ::KuplungApp::Mesh* mutable_meshobject();
+  inline ::KuplungApp::Mesh* release_meshobject();
+  inline void set_allocated_meshobject(::KuplungApp::Mesh* meshobject);
+
+  // @@protoc_insertion_point(class_scope:KuplungApp.MeshModel)
  private:
   inline void set_has_modelid();
   inline void clear_has_modelid();
@@ -666,6 +758,8 @@ class Scene : public ::google::protobuf::Message {
   inline void clear_has_effect_bloom_vignetteatt();
   inline void set_has_setting_lightingpass_drawmode();
   inline void clear_has_setting_lightingpass_drawmode();
+  inline void set_has_meshobject();
+  inline void clear_has_meshobject();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -726,6 +820,7 @@ class Scene : public ::google::protobuf::Message {
   float effect_bloom_weightd_;
   float effect_bloom_vignette_;
   float effect_bloom_vignetteatt_;
+  ::KuplungApp::Mesh* meshobject_;
   ::google::protobuf::int32 setting_lightingpass_drawmode_;
   mutable int _cached_size_;
   friend void  protobuf_AddDesc_KuplungAppScene_2eproto();
@@ -733,7 +828,7 @@ class Scene : public ::google::protobuf::Message {
   friend void protobuf_ShutdownFile_KuplungAppScene_2eproto();
 
   void InitAsDefaultInstance();
-  static Scene* default_instance_;
+  static MeshModel* default_instance_;
 };
 // ===================================================================
 
@@ -742,229 +837,263 @@ class Scene : public ::google::protobuf::Message {
 
 // Scene
 
+// repeated .KuplungApp.MeshModel models = 1;
+inline int Scene::models_size() const {
+  return models_.size();
+}
+inline void Scene::clear_models() {
+  models_.Clear();
+}
+inline const ::KuplungApp::MeshModel& Scene::models(int index) const {
+  // @@protoc_insertion_point(field_get:KuplungApp.Scene.models)
+  return models_.Get(index);
+}
+inline ::KuplungApp::MeshModel* Scene::mutable_models(int index) {
+  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.models)
+  return models_.Mutable(index);
+}
+inline ::KuplungApp::MeshModel* Scene::add_models() {
+  // @@protoc_insertion_point(field_add:KuplungApp.Scene.models)
+  return models_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::KuplungApp::MeshModel >&
+Scene::models() const {
+  // @@protoc_insertion_point(field_list:KuplungApp.Scene.models)
+  return models_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::KuplungApp::MeshModel >*
+Scene::mutable_models() {
+  // @@protoc_insertion_point(field_mutable_list:KuplungApp.Scene.models)
+  return &models_;
+}
+
+// -------------------------------------------------------------------
+
+// MeshModel
+
 // required int32 ModelID = 1;
-inline bool Scene::has_modelid() const {
+inline bool MeshModel::has_modelid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void Scene::set_has_modelid() {
+inline void MeshModel::set_has_modelid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void Scene::clear_has_modelid() {
+inline void MeshModel::clear_has_modelid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void Scene::clear_modelid() {
+inline void MeshModel::clear_modelid() {
   modelid_ = 0;
   clear_has_modelid();
 }
-inline ::google::protobuf::int32 Scene::modelid() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.ModelID)
+inline ::google::protobuf::int32 MeshModel::modelid() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.ModelID)
   return modelid_;
 }
-inline void Scene::set_modelid(::google::protobuf::int32 value) {
+inline void MeshModel::set_modelid(::google::protobuf::int32 value) {
   set_has_modelid();
   modelid_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.ModelID)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.ModelID)
 }
 
 // required bool Settings_DeferredRender = 2;
-inline bool Scene::has_settings_deferredrender() const {
+inline bool MeshModel::has_settings_deferredrender() const {
   return (_has_bits_[0] & 0x00000002u) != 0;
 }
-inline void Scene::set_has_settings_deferredrender() {
+inline void MeshModel::set_has_settings_deferredrender() {
   _has_bits_[0] |= 0x00000002u;
 }
-inline void Scene::clear_has_settings_deferredrender() {
+inline void MeshModel::clear_has_settings_deferredrender() {
   _has_bits_[0] &= ~0x00000002u;
 }
-inline void Scene::clear_settings_deferredrender() {
+inline void MeshModel::clear_settings_deferredrender() {
   settings_deferredrender_ = false;
   clear_has_settings_deferredrender();
 }
-inline bool Scene::settings_deferredrender() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Settings_DeferredRender)
+inline bool MeshModel::settings_deferredrender() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Settings_DeferredRender)
   return settings_deferredrender_;
 }
-inline void Scene::set_settings_deferredrender(bool value) {
+inline void MeshModel::set_settings_deferredrender(bool value) {
   set_has_settings_deferredrender();
   settings_deferredrender_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Settings_DeferredRender)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Settings_DeferredRender)
 }
 
 // required bool Setting_CelShading = 3;
-inline bool Scene::has_setting_celshading() const {
+inline bool MeshModel::has_setting_celshading() const {
   return (_has_bits_[0] & 0x00000004u) != 0;
 }
-inline void Scene::set_has_setting_celshading() {
+inline void MeshModel::set_has_setting_celshading() {
   _has_bits_[0] |= 0x00000004u;
 }
-inline void Scene::clear_has_setting_celshading() {
+inline void MeshModel::clear_has_setting_celshading() {
   _has_bits_[0] &= ~0x00000004u;
 }
-inline void Scene::clear_setting_celshading() {
+inline void MeshModel::clear_setting_celshading() {
   setting_celshading_ = false;
   clear_has_setting_celshading();
 }
-inline bool Scene::setting_celshading() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_CelShading)
+inline bool MeshModel::setting_celshading() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_CelShading)
   return setting_celshading_;
 }
-inline void Scene::set_setting_celshading(bool value) {
+inline void MeshModel::set_setting_celshading(bool value) {
   set_has_setting_celshading();
   setting_celshading_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_CelShading)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_CelShading)
 }
 
 // required bool Setting_Wireframe = 4;
-inline bool Scene::has_setting_wireframe() const {
+inline bool MeshModel::has_setting_wireframe() const {
   return (_has_bits_[0] & 0x00000008u) != 0;
 }
-inline void Scene::set_has_setting_wireframe() {
+inline void MeshModel::set_has_setting_wireframe() {
   _has_bits_[0] |= 0x00000008u;
 }
-inline void Scene::clear_has_setting_wireframe() {
+inline void MeshModel::clear_has_setting_wireframe() {
   _has_bits_[0] &= ~0x00000008u;
 }
-inline void Scene::clear_setting_wireframe() {
+inline void MeshModel::clear_setting_wireframe() {
   setting_wireframe_ = false;
   clear_has_setting_wireframe();
 }
-inline bool Scene::setting_wireframe() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_Wireframe)
+inline bool MeshModel::setting_wireframe() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_Wireframe)
   return setting_wireframe_;
 }
-inline void Scene::set_setting_wireframe(bool value) {
+inline void MeshModel::set_setting_wireframe(bool value) {
   set_has_setting_wireframe();
   setting_wireframe_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_Wireframe)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_Wireframe)
 }
 
 // required bool Setting_UseTessellation = 5;
-inline bool Scene::has_setting_usetessellation() const {
+inline bool MeshModel::has_setting_usetessellation() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
-inline void Scene::set_has_setting_usetessellation() {
+inline void MeshModel::set_has_setting_usetessellation() {
   _has_bits_[0] |= 0x00000010u;
 }
-inline void Scene::clear_has_setting_usetessellation() {
+inline void MeshModel::clear_has_setting_usetessellation() {
   _has_bits_[0] &= ~0x00000010u;
 }
-inline void Scene::clear_setting_usetessellation() {
+inline void MeshModel::clear_setting_usetessellation() {
   setting_usetessellation_ = false;
   clear_has_setting_usetessellation();
 }
-inline bool Scene::setting_usetessellation() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_UseTessellation)
+inline bool MeshModel::setting_usetessellation() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_UseTessellation)
   return setting_usetessellation_;
 }
-inline void Scene::set_setting_usetessellation(bool value) {
+inline void MeshModel::set_setting_usetessellation(bool value) {
   set_has_setting_usetessellation();
   setting_usetessellation_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_UseTessellation)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_UseTessellation)
 }
 
 // required bool Setting_UseCullFace = 6;
-inline bool Scene::has_setting_usecullface() const {
+inline bool MeshModel::has_setting_usecullface() const {
   return (_has_bits_[0] & 0x00000020u) != 0;
 }
-inline void Scene::set_has_setting_usecullface() {
+inline void MeshModel::set_has_setting_usecullface() {
   _has_bits_[0] |= 0x00000020u;
 }
-inline void Scene::clear_has_setting_usecullface() {
+inline void MeshModel::clear_has_setting_usecullface() {
   _has_bits_[0] &= ~0x00000020u;
 }
-inline void Scene::clear_setting_usecullface() {
+inline void MeshModel::clear_setting_usecullface() {
   setting_usecullface_ = false;
   clear_has_setting_usecullface();
 }
-inline bool Scene::setting_usecullface() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_UseCullFace)
+inline bool MeshModel::setting_usecullface() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_UseCullFace)
   return setting_usecullface_;
 }
-inline void Scene::set_setting_usecullface(bool value) {
+inline void MeshModel::set_setting_usecullface(bool value) {
   set_has_setting_usecullface();
   setting_usecullface_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_UseCullFace)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_UseCullFace)
 }
 
 // required float Setting_Alpha = 7;
-inline bool Scene::has_setting_alpha() const {
+inline bool MeshModel::has_setting_alpha() const {
   return (_has_bits_[0] & 0x00000040u) != 0;
 }
-inline void Scene::set_has_setting_alpha() {
+inline void MeshModel::set_has_setting_alpha() {
   _has_bits_[0] |= 0x00000040u;
 }
-inline void Scene::clear_has_setting_alpha() {
+inline void MeshModel::clear_has_setting_alpha() {
   _has_bits_[0] &= ~0x00000040u;
 }
-inline void Scene::clear_setting_alpha() {
+inline void MeshModel::clear_setting_alpha() {
   setting_alpha_ = 0;
   clear_has_setting_alpha();
 }
-inline float Scene::setting_alpha() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_Alpha)
+inline float MeshModel::setting_alpha() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_Alpha)
   return setting_alpha_;
 }
-inline void Scene::set_setting_alpha(float value) {
+inline void MeshModel::set_setting_alpha(float value) {
   set_has_setting_alpha();
   setting_alpha_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_Alpha)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_Alpha)
 }
 
 // required int32 Setting_TessellationSubdivision = 8;
-inline bool Scene::has_setting_tessellationsubdivision() const {
+inline bool MeshModel::has_setting_tessellationsubdivision() const {
   return (_has_bits_[0] & 0x00000080u) != 0;
 }
-inline void Scene::set_has_setting_tessellationsubdivision() {
+inline void MeshModel::set_has_setting_tessellationsubdivision() {
   _has_bits_[0] |= 0x00000080u;
 }
-inline void Scene::clear_has_setting_tessellationsubdivision() {
+inline void MeshModel::clear_has_setting_tessellationsubdivision() {
   _has_bits_[0] &= ~0x00000080u;
 }
-inline void Scene::clear_setting_tessellationsubdivision() {
+inline void MeshModel::clear_setting_tessellationsubdivision() {
   setting_tessellationsubdivision_ = 0;
   clear_has_setting_tessellationsubdivision();
 }
-inline ::google::protobuf::int32 Scene::setting_tessellationsubdivision() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_TessellationSubdivision)
+inline ::google::protobuf::int32 MeshModel::setting_tessellationsubdivision() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_TessellationSubdivision)
   return setting_tessellationsubdivision_;
 }
-inline void Scene::set_setting_tessellationsubdivision(::google::protobuf::int32 value) {
+inline void MeshModel::set_setting_tessellationsubdivision(::google::protobuf::int32 value) {
   set_has_setting_tessellationsubdivision();
   setting_tessellationsubdivision_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_TessellationSubdivision)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_TessellationSubdivision)
 }
 
 // required .KuplungApp.ObjectCoordinate positionX = 9;
-inline bool Scene::has_positionx() const {
+inline bool MeshModel::has_positionx() const {
   return (_has_bits_[0] & 0x00000100u) != 0;
 }
-inline void Scene::set_has_positionx() {
+inline void MeshModel::set_has_positionx() {
   _has_bits_[0] |= 0x00000100u;
 }
-inline void Scene::clear_has_positionx() {
+inline void MeshModel::clear_has_positionx() {
   _has_bits_[0] &= ~0x00000100u;
 }
-inline void Scene::clear_positionx() {
+inline void MeshModel::clear_positionx() {
   if (positionx_ != NULL) positionx_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_positionx();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::positionx() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.positionX)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::positionx() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionX)
   return positionx_ != NULL ? *positionx_ : *default_instance_->positionx_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_positionx() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positionx() {
   set_has_positionx();
   if (positionx_ == NULL) positionx_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.positionX)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.positionX)
   return positionx_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_positionx() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_positionx() {
   clear_has_positionx();
   ::KuplungApp::ObjectCoordinate* temp = positionx_;
   positionx_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_positionx(::KuplungApp::ObjectCoordinate* positionx) {
+inline void MeshModel::set_allocated_positionx(::KuplungApp::ObjectCoordinate* positionx) {
   delete positionx_;
   positionx_ = positionx;
   if (positionx) {
@@ -972,40 +1101,40 @@ inline void Scene::set_allocated_positionx(::KuplungApp::ObjectCoordinate* posit
   } else {
     clear_has_positionx();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.positionX)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.positionX)
 }
 
 // required .KuplungApp.ObjectCoordinate positionY = 10;
-inline bool Scene::has_positiony() const {
+inline bool MeshModel::has_positiony() const {
   return (_has_bits_[0] & 0x00000200u) != 0;
 }
-inline void Scene::set_has_positiony() {
+inline void MeshModel::set_has_positiony() {
   _has_bits_[0] |= 0x00000200u;
 }
-inline void Scene::clear_has_positiony() {
+inline void MeshModel::clear_has_positiony() {
   _has_bits_[0] &= ~0x00000200u;
 }
-inline void Scene::clear_positiony() {
+inline void MeshModel::clear_positiony() {
   if (positiony_ != NULL) positiony_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_positiony();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::positiony() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.positionY)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::positiony() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionY)
   return positiony_ != NULL ? *positiony_ : *default_instance_->positiony_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_positiony() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positiony() {
   set_has_positiony();
   if (positiony_ == NULL) positiony_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.positionY)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.positionY)
   return positiony_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_positiony() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_positiony() {
   clear_has_positiony();
   ::KuplungApp::ObjectCoordinate* temp = positiony_;
   positiony_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_positiony(::KuplungApp::ObjectCoordinate* positiony) {
+inline void MeshModel::set_allocated_positiony(::KuplungApp::ObjectCoordinate* positiony) {
   delete positiony_;
   positiony_ = positiony;
   if (positiony) {
@@ -1013,40 +1142,40 @@ inline void Scene::set_allocated_positiony(::KuplungApp::ObjectCoordinate* posit
   } else {
     clear_has_positiony();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.positionY)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.positionY)
 }
 
 // required .KuplungApp.ObjectCoordinate positionZ = 11;
-inline bool Scene::has_positionz() const {
+inline bool MeshModel::has_positionz() const {
   return (_has_bits_[0] & 0x00000400u) != 0;
 }
-inline void Scene::set_has_positionz() {
+inline void MeshModel::set_has_positionz() {
   _has_bits_[0] |= 0x00000400u;
 }
-inline void Scene::clear_has_positionz() {
+inline void MeshModel::clear_has_positionz() {
   _has_bits_[0] &= ~0x00000400u;
 }
-inline void Scene::clear_positionz() {
+inline void MeshModel::clear_positionz() {
   if (positionz_ != NULL) positionz_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_positionz();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::positionz() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.positionZ)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::positionz() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionZ)
   return positionz_ != NULL ? *positionz_ : *default_instance_->positionz_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_positionz() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positionz() {
   set_has_positionz();
   if (positionz_ == NULL) positionz_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.positionZ)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.positionZ)
   return positionz_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_positionz() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_positionz() {
   clear_has_positionz();
   ::KuplungApp::ObjectCoordinate* temp = positionz_;
   positionz_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_positionz(::KuplungApp::ObjectCoordinate* positionz) {
+inline void MeshModel::set_allocated_positionz(::KuplungApp::ObjectCoordinate* positionz) {
   delete positionz_;
   positionz_ = positionz;
   if (positionz) {
@@ -1054,40 +1183,40 @@ inline void Scene::set_allocated_positionz(::KuplungApp::ObjectCoordinate* posit
   } else {
     clear_has_positionz();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.positionZ)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.positionZ)
 }
 
 // required .KuplungApp.ObjectCoordinate scaleX = 12;
-inline bool Scene::has_scalex() const {
+inline bool MeshModel::has_scalex() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
-inline void Scene::set_has_scalex() {
+inline void MeshModel::set_has_scalex() {
   _has_bits_[0] |= 0x00000800u;
 }
-inline void Scene::clear_has_scalex() {
+inline void MeshModel::clear_has_scalex() {
   _has_bits_[0] &= ~0x00000800u;
 }
-inline void Scene::clear_scalex() {
+inline void MeshModel::clear_scalex() {
   if (scalex_ != NULL) scalex_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_scalex();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::scalex() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.scaleX)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::scalex() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleX)
   return scalex_ != NULL ? *scalex_ : *default_instance_->scalex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_scalex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scalex() {
   set_has_scalex();
   if (scalex_ == NULL) scalex_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.scaleX)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.scaleX)
   return scalex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_scalex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_scalex() {
   clear_has_scalex();
   ::KuplungApp::ObjectCoordinate* temp = scalex_;
   scalex_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_scalex(::KuplungApp::ObjectCoordinate* scalex) {
+inline void MeshModel::set_allocated_scalex(::KuplungApp::ObjectCoordinate* scalex) {
   delete scalex_;
   scalex_ = scalex;
   if (scalex) {
@@ -1095,40 +1224,40 @@ inline void Scene::set_allocated_scalex(::KuplungApp::ObjectCoordinate* scalex) 
   } else {
     clear_has_scalex();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.scaleX)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.scaleX)
 }
 
 // required .KuplungApp.ObjectCoordinate scaleY = 13;
-inline bool Scene::has_scaley() const {
+inline bool MeshModel::has_scaley() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
-inline void Scene::set_has_scaley() {
+inline void MeshModel::set_has_scaley() {
   _has_bits_[0] |= 0x00001000u;
 }
-inline void Scene::clear_has_scaley() {
+inline void MeshModel::clear_has_scaley() {
   _has_bits_[0] &= ~0x00001000u;
 }
-inline void Scene::clear_scaley() {
+inline void MeshModel::clear_scaley() {
   if (scaley_ != NULL) scaley_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_scaley();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::scaley() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.scaleY)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::scaley() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleY)
   return scaley_ != NULL ? *scaley_ : *default_instance_->scaley_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_scaley() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scaley() {
   set_has_scaley();
   if (scaley_ == NULL) scaley_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.scaleY)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.scaleY)
   return scaley_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_scaley() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_scaley() {
   clear_has_scaley();
   ::KuplungApp::ObjectCoordinate* temp = scaley_;
   scaley_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_scaley(::KuplungApp::ObjectCoordinate* scaley) {
+inline void MeshModel::set_allocated_scaley(::KuplungApp::ObjectCoordinate* scaley) {
   delete scaley_;
   scaley_ = scaley;
   if (scaley) {
@@ -1136,40 +1265,40 @@ inline void Scene::set_allocated_scaley(::KuplungApp::ObjectCoordinate* scaley) 
   } else {
     clear_has_scaley();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.scaleY)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.scaleY)
 }
 
 // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-inline bool Scene::has_scalez() const {
+inline bool MeshModel::has_scalez() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
-inline void Scene::set_has_scalez() {
+inline void MeshModel::set_has_scalez() {
   _has_bits_[0] |= 0x00002000u;
 }
-inline void Scene::clear_has_scalez() {
+inline void MeshModel::clear_has_scalez() {
   _has_bits_[0] &= ~0x00002000u;
 }
-inline void Scene::clear_scalez() {
+inline void MeshModel::clear_scalez() {
   if (scalez_ != NULL) scalez_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_scalez();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::scalez() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.scaleZ)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::scalez() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleZ)
   return scalez_ != NULL ? *scalez_ : *default_instance_->scalez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_scalez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scalez() {
   set_has_scalez();
   if (scalez_ == NULL) scalez_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.scaleZ)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.scaleZ)
   return scalez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_scalez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_scalez() {
   clear_has_scalez();
   ::KuplungApp::ObjectCoordinate* temp = scalez_;
   scalez_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_scalez(::KuplungApp::ObjectCoordinate* scalez) {
+inline void MeshModel::set_allocated_scalez(::KuplungApp::ObjectCoordinate* scalez) {
   delete scalez_;
   scalez_ = scalez;
   if (scalez) {
@@ -1177,40 +1306,40 @@ inline void Scene::set_allocated_scalez(::KuplungApp::ObjectCoordinate* scalez) 
   } else {
     clear_has_scalez();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.scaleZ)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.scaleZ)
 }
 
 // required .KuplungApp.ObjectCoordinate rotateX = 15;
-inline bool Scene::has_rotatex() const {
+inline bool MeshModel::has_rotatex() const {
   return (_has_bits_[0] & 0x00004000u) != 0;
 }
-inline void Scene::set_has_rotatex() {
+inline void MeshModel::set_has_rotatex() {
   _has_bits_[0] |= 0x00004000u;
 }
-inline void Scene::clear_has_rotatex() {
+inline void MeshModel::clear_has_rotatex() {
   _has_bits_[0] &= ~0x00004000u;
 }
-inline void Scene::clear_rotatex() {
+inline void MeshModel::clear_rotatex() {
   if (rotatex_ != NULL) rotatex_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_rotatex();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::rotatex() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.rotateX)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::rotatex() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateX)
   return rotatex_ != NULL ? *rotatex_ : *default_instance_->rotatex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_rotatex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatex() {
   set_has_rotatex();
   if (rotatex_ == NULL) rotatex_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.rotateX)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.rotateX)
   return rotatex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_rotatex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_rotatex() {
   clear_has_rotatex();
   ::KuplungApp::ObjectCoordinate* temp = rotatex_;
   rotatex_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_rotatex(::KuplungApp::ObjectCoordinate* rotatex) {
+inline void MeshModel::set_allocated_rotatex(::KuplungApp::ObjectCoordinate* rotatex) {
   delete rotatex_;
   rotatex_ = rotatex;
   if (rotatex) {
@@ -1218,40 +1347,40 @@ inline void Scene::set_allocated_rotatex(::KuplungApp::ObjectCoordinate* rotatex
   } else {
     clear_has_rotatex();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.rotateX)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.rotateX)
 }
 
 // required .KuplungApp.ObjectCoordinate rotateY = 16;
-inline bool Scene::has_rotatey() const {
+inline bool MeshModel::has_rotatey() const {
   return (_has_bits_[0] & 0x00008000u) != 0;
 }
-inline void Scene::set_has_rotatey() {
+inline void MeshModel::set_has_rotatey() {
   _has_bits_[0] |= 0x00008000u;
 }
-inline void Scene::clear_has_rotatey() {
+inline void MeshModel::clear_has_rotatey() {
   _has_bits_[0] &= ~0x00008000u;
 }
-inline void Scene::clear_rotatey() {
+inline void MeshModel::clear_rotatey() {
   if (rotatey_ != NULL) rotatey_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_rotatey();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::rotatey() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.rotateY)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::rotatey() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateY)
   return rotatey_ != NULL ? *rotatey_ : *default_instance_->rotatey_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_rotatey() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatey() {
   set_has_rotatey();
   if (rotatey_ == NULL) rotatey_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.rotateY)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.rotateY)
   return rotatey_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_rotatey() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_rotatey() {
   clear_has_rotatey();
   ::KuplungApp::ObjectCoordinate* temp = rotatey_;
   rotatey_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_rotatey(::KuplungApp::ObjectCoordinate* rotatey) {
+inline void MeshModel::set_allocated_rotatey(::KuplungApp::ObjectCoordinate* rotatey) {
   delete rotatey_;
   rotatey_ = rotatey;
   if (rotatey) {
@@ -1259,40 +1388,40 @@ inline void Scene::set_allocated_rotatey(::KuplungApp::ObjectCoordinate* rotatey
   } else {
     clear_has_rotatey();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.rotateY)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.rotateY)
 }
 
 // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-inline bool Scene::has_rotatez() const {
+inline bool MeshModel::has_rotatez() const {
   return (_has_bits_[0] & 0x00010000u) != 0;
 }
-inline void Scene::set_has_rotatez() {
+inline void MeshModel::set_has_rotatez() {
   _has_bits_[0] |= 0x00010000u;
 }
-inline void Scene::clear_has_rotatez() {
+inline void MeshModel::clear_has_rotatez() {
   _has_bits_[0] &= ~0x00010000u;
 }
-inline void Scene::clear_rotatez() {
+inline void MeshModel::clear_rotatez() {
   if (rotatez_ != NULL) rotatez_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_rotatez();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::rotatez() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.rotateZ)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::rotatez() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateZ)
   return rotatez_ != NULL ? *rotatez_ : *default_instance_->rotatez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_rotatez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatez() {
   set_has_rotatez();
   if (rotatez_ == NULL) rotatez_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.rotateZ)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.rotateZ)
   return rotatez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_rotatez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_rotatez() {
   clear_has_rotatez();
   ::KuplungApp::ObjectCoordinate* temp = rotatez_;
   rotatez_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_rotatez(::KuplungApp::ObjectCoordinate* rotatez) {
+inline void MeshModel::set_allocated_rotatez(::KuplungApp::ObjectCoordinate* rotatez) {
   delete rotatez_;
   rotatez_ = rotatez;
   if (rotatez) {
@@ -1300,40 +1429,40 @@ inline void Scene::set_allocated_rotatez(::KuplungApp::ObjectCoordinate* rotatez
   } else {
     clear_has_rotatez();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.rotateZ)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.rotateZ)
 }
 
 // required .KuplungApp.ObjectCoordinate displaceX = 18;
-inline bool Scene::has_displacex() const {
+inline bool MeshModel::has_displacex() const {
   return (_has_bits_[0] & 0x00020000u) != 0;
 }
-inline void Scene::set_has_displacex() {
+inline void MeshModel::set_has_displacex() {
   _has_bits_[0] |= 0x00020000u;
 }
-inline void Scene::clear_has_displacex() {
+inline void MeshModel::clear_has_displacex() {
   _has_bits_[0] &= ~0x00020000u;
 }
-inline void Scene::clear_displacex() {
+inline void MeshModel::clear_displacex() {
   if (displacex_ != NULL) displacex_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_displacex();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::displacex() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.displaceX)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::displacex() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceX)
   return displacex_ != NULL ? *displacex_ : *default_instance_->displacex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_displacex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacex() {
   set_has_displacex();
   if (displacex_ == NULL) displacex_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.displaceX)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.displaceX)
   return displacex_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_displacex() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_displacex() {
   clear_has_displacex();
   ::KuplungApp::ObjectCoordinate* temp = displacex_;
   displacex_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_displacex(::KuplungApp::ObjectCoordinate* displacex) {
+inline void MeshModel::set_allocated_displacex(::KuplungApp::ObjectCoordinate* displacex) {
   delete displacex_;
   displacex_ = displacex;
   if (displacex) {
@@ -1341,40 +1470,40 @@ inline void Scene::set_allocated_displacex(::KuplungApp::ObjectCoordinate* displ
   } else {
     clear_has_displacex();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.displaceX)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.displaceX)
 }
 
 // required .KuplungApp.ObjectCoordinate displaceY = 19;
-inline bool Scene::has_displacey() const {
+inline bool MeshModel::has_displacey() const {
   return (_has_bits_[0] & 0x00040000u) != 0;
 }
-inline void Scene::set_has_displacey() {
+inline void MeshModel::set_has_displacey() {
   _has_bits_[0] |= 0x00040000u;
 }
-inline void Scene::clear_has_displacey() {
+inline void MeshModel::clear_has_displacey() {
   _has_bits_[0] &= ~0x00040000u;
 }
-inline void Scene::clear_displacey() {
+inline void MeshModel::clear_displacey() {
   if (displacey_ != NULL) displacey_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_displacey();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::displacey() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.displaceY)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::displacey() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceY)
   return displacey_ != NULL ? *displacey_ : *default_instance_->displacey_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_displacey() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacey() {
   set_has_displacey();
   if (displacey_ == NULL) displacey_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.displaceY)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.displaceY)
   return displacey_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_displacey() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_displacey() {
   clear_has_displacey();
   ::KuplungApp::ObjectCoordinate* temp = displacey_;
   displacey_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_displacey(::KuplungApp::ObjectCoordinate* displacey) {
+inline void MeshModel::set_allocated_displacey(::KuplungApp::ObjectCoordinate* displacey) {
   delete displacey_;
   displacey_ = displacey;
   if (displacey) {
@@ -1382,40 +1511,40 @@ inline void Scene::set_allocated_displacey(::KuplungApp::ObjectCoordinate* displ
   } else {
     clear_has_displacey();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.displaceY)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.displaceY)
 }
 
 // required .KuplungApp.ObjectCoordinate displaceZ = 20;
-inline bool Scene::has_displacez() const {
+inline bool MeshModel::has_displacez() const {
   return (_has_bits_[0] & 0x00080000u) != 0;
 }
-inline void Scene::set_has_displacez() {
+inline void MeshModel::set_has_displacez() {
   _has_bits_[0] |= 0x00080000u;
 }
-inline void Scene::clear_has_displacez() {
+inline void MeshModel::clear_has_displacez() {
   _has_bits_[0] &= ~0x00080000u;
 }
-inline void Scene::clear_displacez() {
+inline void MeshModel::clear_displacez() {
   if (displacez_ != NULL) displacez_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_displacez();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::displacez() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.displaceZ)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::displacez() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceZ)
   return displacez_ != NULL ? *displacez_ : *default_instance_->displacez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_displacez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacez() {
   set_has_displacez();
   if (displacez_ == NULL) displacez_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.displaceZ)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.displaceZ)
   return displacez_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_displacez() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_displacez() {
   clear_has_displacez();
   ::KuplungApp::ObjectCoordinate* temp = displacez_;
   displacez_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_displacez(::KuplungApp::ObjectCoordinate* displacez) {
+inline void MeshModel::set_allocated_displacez(::KuplungApp::ObjectCoordinate* displacez) {
   delete displacez_;
   displacez_ = displacez;
   if (displacez) {
@@ -1423,40 +1552,40 @@ inline void Scene::set_allocated_displacez(::KuplungApp::ObjectCoordinate* displ
   } else {
     clear_has_displacez();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.displaceZ)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.displaceZ)
 }
 
 // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
-inline bool Scene::has_setting_materialrefraction() const {
+inline bool MeshModel::has_setting_materialrefraction() const {
   return (_has_bits_[0] & 0x00100000u) != 0;
 }
-inline void Scene::set_has_setting_materialrefraction() {
+inline void MeshModel::set_has_setting_materialrefraction() {
   _has_bits_[0] |= 0x00100000u;
 }
-inline void Scene::clear_has_setting_materialrefraction() {
+inline void MeshModel::clear_has_setting_materialrefraction() {
   _has_bits_[0] &= ~0x00100000u;
 }
-inline void Scene::clear_setting_materialrefraction() {
+inline void MeshModel::clear_setting_materialrefraction() {
   if (setting_materialrefraction_ != NULL) setting_materialrefraction_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_setting_materialrefraction();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::setting_materialrefraction() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_MaterialRefraction)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::setting_materialrefraction() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_MaterialRefraction)
   return setting_materialrefraction_ != NULL ? *setting_materialrefraction_ : *default_instance_->setting_materialrefraction_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_setting_materialrefraction() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_setting_materialrefraction() {
   set_has_setting_materialrefraction();
   if (setting_materialrefraction_ == NULL) setting_materialrefraction_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_MaterialRefraction)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_MaterialRefraction)
   return setting_materialrefraction_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_setting_materialrefraction() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_setting_materialrefraction() {
   clear_has_setting_materialrefraction();
   ::KuplungApp::ObjectCoordinate* temp = setting_materialrefraction_;
   setting_materialrefraction_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_materialrefraction(::KuplungApp::ObjectCoordinate* setting_materialrefraction) {
+inline void MeshModel::set_allocated_setting_materialrefraction(::KuplungApp::ObjectCoordinate* setting_materialrefraction) {
   delete setting_materialrefraction_;
   setting_materialrefraction_ = setting_materialrefraction;
   if (setting_materialrefraction) {
@@ -1464,40 +1593,40 @@ inline void Scene::set_allocated_setting_materialrefraction(::KuplungApp::Object
   } else {
     clear_has_setting_materialrefraction();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_MaterialRefraction)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_MaterialRefraction)
 }
 
 // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
-inline bool Scene::has_setting_materialspecularexp() const {
+inline bool MeshModel::has_setting_materialspecularexp() const {
   return (_has_bits_[0] & 0x00200000u) != 0;
 }
-inline void Scene::set_has_setting_materialspecularexp() {
+inline void MeshModel::set_has_setting_materialspecularexp() {
   _has_bits_[0] |= 0x00200000u;
 }
-inline void Scene::clear_has_setting_materialspecularexp() {
+inline void MeshModel::clear_has_setting_materialspecularexp() {
   _has_bits_[0] &= ~0x00200000u;
 }
-inline void Scene::clear_setting_materialspecularexp() {
+inline void MeshModel::clear_setting_materialspecularexp() {
   if (setting_materialspecularexp_ != NULL) setting_materialspecularexp_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_setting_materialspecularexp();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::setting_materialspecularexp() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_MaterialSpecularExp)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::setting_materialspecularexp() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_MaterialSpecularExp)
   return setting_materialspecularexp_ != NULL ? *setting_materialspecularexp_ : *default_instance_->setting_materialspecularexp_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_setting_materialspecularexp() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_setting_materialspecularexp() {
   set_has_setting_materialspecularexp();
   if (setting_materialspecularexp_ == NULL) setting_materialspecularexp_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_MaterialSpecularExp)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_MaterialSpecularExp)
   return setting_materialspecularexp_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_setting_materialspecularexp() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_setting_materialspecularexp() {
   clear_has_setting_materialspecularexp();
   ::KuplungApp::ObjectCoordinate* temp = setting_materialspecularexp_;
   setting_materialspecularexp_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_materialspecularexp(::KuplungApp::ObjectCoordinate* setting_materialspecularexp) {
+inline void MeshModel::set_allocated_setting_materialspecularexp(::KuplungApp::ObjectCoordinate* setting_materialspecularexp) {
   delete setting_materialspecularexp_;
   setting_materialspecularexp_ = setting_materialspecularexp;
   if (setting_materialspecularexp) {
@@ -1505,64 +1634,64 @@ inline void Scene::set_allocated_setting_materialspecularexp(::KuplungApp::Objec
   } else {
     clear_has_setting_materialspecularexp();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_MaterialSpecularExp)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_MaterialSpecularExp)
 }
 
 // required int32 Setting_ModelViewSkin = 23;
-inline bool Scene::has_setting_modelviewskin() const {
+inline bool MeshModel::has_setting_modelviewskin() const {
   return (_has_bits_[0] & 0x00400000u) != 0;
 }
-inline void Scene::set_has_setting_modelviewskin() {
+inline void MeshModel::set_has_setting_modelviewskin() {
   _has_bits_[0] |= 0x00400000u;
 }
-inline void Scene::clear_has_setting_modelviewskin() {
+inline void MeshModel::clear_has_setting_modelviewskin() {
   _has_bits_[0] &= ~0x00400000u;
 }
-inline void Scene::clear_setting_modelviewskin() {
+inline void MeshModel::clear_setting_modelviewskin() {
   setting_modelviewskin_ = 0;
   clear_has_setting_modelviewskin();
 }
-inline ::google::protobuf::int32 Scene::setting_modelviewskin() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_ModelViewSkin)
+inline ::google::protobuf::int32 MeshModel::setting_modelviewskin() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_ModelViewSkin)
   return setting_modelviewskin_;
 }
-inline void Scene::set_setting_modelviewskin(::google::protobuf::int32 value) {
+inline void MeshModel::set_setting_modelviewskin(::google::protobuf::int32 value) {
   set_has_setting_modelviewskin();
   setting_modelviewskin_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_ModelViewSkin)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_ModelViewSkin)
 }
 
 // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
-inline bool Scene::has_solidlightskin_materialcolor() const {
+inline bool MeshModel::has_solidlightskin_materialcolor() const {
   return (_has_bits_[0] & 0x00800000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_materialcolor() {
+inline void MeshModel::set_has_solidlightskin_materialcolor() {
   _has_bits_[0] |= 0x00800000u;
 }
-inline void Scene::clear_has_solidlightskin_materialcolor() {
+inline void MeshModel::clear_has_solidlightskin_materialcolor() {
   _has_bits_[0] &= ~0x00800000u;
 }
-inline void Scene::clear_solidlightskin_materialcolor() {
+inline void MeshModel::clear_solidlightskin_materialcolor() {
   if (solidlightskin_materialcolor_ != NULL) solidlightskin_materialcolor_->::KuplungApp::Vec3::Clear();
   clear_has_solidlightskin_materialcolor();
 }
-inline const ::KuplungApp::Vec3& Scene::solidlightskin_materialcolor() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_MaterialColor)
+inline const ::KuplungApp::Vec3& MeshModel::solidlightskin_materialcolor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_MaterialColor)
   return solidlightskin_materialcolor_ != NULL ? *solidlightskin_materialcolor_ : *default_instance_->solidlightskin_materialcolor_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_solidlightskin_materialcolor() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_materialcolor() {
   set_has_solidlightskin_materialcolor();
   if (solidlightskin_materialcolor_ == NULL) solidlightskin_materialcolor_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.solidLightSkin_MaterialColor)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.solidLightSkin_MaterialColor)
   return solidlightskin_materialcolor_;
 }
-inline ::KuplungApp::Vec3* Scene::release_solidlightskin_materialcolor() {
+inline ::KuplungApp::Vec3* MeshModel::release_solidlightskin_materialcolor() {
   clear_has_solidlightskin_materialcolor();
   ::KuplungApp::Vec3* temp = solidlightskin_materialcolor_;
   solidlightskin_materialcolor_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_solidlightskin_materialcolor(::KuplungApp::Vec3* solidlightskin_materialcolor) {
+inline void MeshModel::set_allocated_solidlightskin_materialcolor(::KuplungApp::Vec3* solidlightskin_materialcolor) {
   delete solidlightskin_materialcolor_;
   solidlightskin_materialcolor_ = solidlightskin_materialcolor;
   if (solidlightskin_materialcolor) {
@@ -1570,40 +1699,40 @@ inline void Scene::set_allocated_solidlightskin_materialcolor(::KuplungApp::Vec3
   } else {
     clear_has_solidlightskin_materialcolor();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.solidLightSkin_MaterialColor)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.solidLightSkin_MaterialColor)
 }
 
 // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
-inline bool Scene::has_solidlightskin_ambient() const {
+inline bool MeshModel::has_solidlightskin_ambient() const {
   return (_has_bits_[0] & 0x01000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_ambient() {
+inline void MeshModel::set_has_solidlightskin_ambient() {
   _has_bits_[0] |= 0x01000000u;
 }
-inline void Scene::clear_has_solidlightskin_ambient() {
+inline void MeshModel::clear_has_solidlightskin_ambient() {
   _has_bits_[0] &= ~0x01000000u;
 }
-inline void Scene::clear_solidlightskin_ambient() {
+inline void MeshModel::clear_solidlightskin_ambient() {
   if (solidlightskin_ambient_ != NULL) solidlightskin_ambient_->::KuplungApp::Vec3::Clear();
   clear_has_solidlightskin_ambient();
 }
-inline const ::KuplungApp::Vec3& Scene::solidlightskin_ambient() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Ambient)
+inline const ::KuplungApp::Vec3& MeshModel::solidlightskin_ambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Ambient)
   return solidlightskin_ambient_ != NULL ? *solidlightskin_ambient_ : *default_instance_->solidlightskin_ambient_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_solidlightskin_ambient() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_ambient() {
   set_has_solidlightskin_ambient();
   if (solidlightskin_ambient_ == NULL) solidlightskin_ambient_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.solidLightSkin_Ambient)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.solidLightSkin_Ambient)
   return solidlightskin_ambient_;
 }
-inline ::KuplungApp::Vec3* Scene::release_solidlightskin_ambient() {
+inline ::KuplungApp::Vec3* MeshModel::release_solidlightskin_ambient() {
   clear_has_solidlightskin_ambient();
   ::KuplungApp::Vec3* temp = solidlightskin_ambient_;
   solidlightskin_ambient_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_solidlightskin_ambient(::KuplungApp::Vec3* solidlightskin_ambient) {
+inline void MeshModel::set_allocated_solidlightskin_ambient(::KuplungApp::Vec3* solidlightskin_ambient) {
   delete solidlightskin_ambient_;
   solidlightskin_ambient_ = solidlightskin_ambient;
   if (solidlightskin_ambient) {
@@ -1611,40 +1740,40 @@ inline void Scene::set_allocated_solidlightskin_ambient(::KuplungApp::Vec3* soli
   } else {
     clear_has_solidlightskin_ambient();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.solidLightSkin_Ambient)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.solidLightSkin_Ambient)
 }
 
 // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
-inline bool Scene::has_solidlightskin_diffuse() const {
+inline bool MeshModel::has_solidlightskin_diffuse() const {
   return (_has_bits_[0] & 0x02000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_diffuse() {
+inline void MeshModel::set_has_solidlightskin_diffuse() {
   _has_bits_[0] |= 0x02000000u;
 }
-inline void Scene::clear_has_solidlightskin_diffuse() {
+inline void MeshModel::clear_has_solidlightskin_diffuse() {
   _has_bits_[0] &= ~0x02000000u;
 }
-inline void Scene::clear_solidlightskin_diffuse() {
+inline void MeshModel::clear_solidlightskin_diffuse() {
   if (solidlightskin_diffuse_ != NULL) solidlightskin_diffuse_->::KuplungApp::Vec3::Clear();
   clear_has_solidlightskin_diffuse();
 }
-inline const ::KuplungApp::Vec3& Scene::solidlightskin_diffuse() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Diffuse)
+inline const ::KuplungApp::Vec3& MeshModel::solidlightskin_diffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Diffuse)
   return solidlightskin_diffuse_ != NULL ? *solidlightskin_diffuse_ : *default_instance_->solidlightskin_diffuse_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_solidlightskin_diffuse() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_diffuse() {
   set_has_solidlightskin_diffuse();
   if (solidlightskin_diffuse_ == NULL) solidlightskin_diffuse_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.solidLightSkin_Diffuse)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.solidLightSkin_Diffuse)
   return solidlightskin_diffuse_;
 }
-inline ::KuplungApp::Vec3* Scene::release_solidlightskin_diffuse() {
+inline ::KuplungApp::Vec3* MeshModel::release_solidlightskin_diffuse() {
   clear_has_solidlightskin_diffuse();
   ::KuplungApp::Vec3* temp = solidlightskin_diffuse_;
   solidlightskin_diffuse_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_solidlightskin_diffuse(::KuplungApp::Vec3* solidlightskin_diffuse) {
+inline void MeshModel::set_allocated_solidlightskin_diffuse(::KuplungApp::Vec3* solidlightskin_diffuse) {
   delete solidlightskin_diffuse_;
   solidlightskin_diffuse_ = solidlightskin_diffuse;
   if (solidlightskin_diffuse) {
@@ -1652,40 +1781,40 @@ inline void Scene::set_allocated_solidlightskin_diffuse(::KuplungApp::Vec3* soli
   } else {
     clear_has_solidlightskin_diffuse();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.solidLightSkin_Diffuse)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.solidLightSkin_Diffuse)
 }
 
 // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
-inline bool Scene::has_solidlightskin_specular() const {
+inline bool MeshModel::has_solidlightskin_specular() const {
   return (_has_bits_[0] & 0x04000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_specular() {
+inline void MeshModel::set_has_solidlightskin_specular() {
   _has_bits_[0] |= 0x04000000u;
 }
-inline void Scene::clear_has_solidlightskin_specular() {
+inline void MeshModel::clear_has_solidlightskin_specular() {
   _has_bits_[0] &= ~0x04000000u;
 }
-inline void Scene::clear_solidlightskin_specular() {
+inline void MeshModel::clear_solidlightskin_specular() {
   if (solidlightskin_specular_ != NULL) solidlightskin_specular_->::KuplungApp::Vec3::Clear();
   clear_has_solidlightskin_specular();
 }
-inline const ::KuplungApp::Vec3& Scene::solidlightskin_specular() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Specular)
+inline const ::KuplungApp::Vec3& MeshModel::solidlightskin_specular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Specular)
   return solidlightskin_specular_ != NULL ? *solidlightskin_specular_ : *default_instance_->solidlightskin_specular_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_solidlightskin_specular() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_specular() {
   set_has_solidlightskin_specular();
   if (solidlightskin_specular_ == NULL) solidlightskin_specular_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.solidLightSkin_Specular)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.solidLightSkin_Specular)
   return solidlightskin_specular_;
 }
-inline ::KuplungApp::Vec3* Scene::release_solidlightskin_specular() {
+inline ::KuplungApp::Vec3* MeshModel::release_solidlightskin_specular() {
   clear_has_solidlightskin_specular();
   ::KuplungApp::Vec3* temp = solidlightskin_specular_;
   solidlightskin_specular_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_solidlightskin_specular(::KuplungApp::Vec3* solidlightskin_specular) {
+inline void MeshModel::set_allocated_solidlightskin_specular(::KuplungApp::Vec3* solidlightskin_specular) {
   delete solidlightskin_specular_;
   solidlightskin_specular_ = solidlightskin_specular;
   if (solidlightskin_specular) {
@@ -1693,112 +1822,112 @@ inline void Scene::set_allocated_solidlightskin_specular(::KuplungApp::Vec3* sol
   } else {
     clear_has_solidlightskin_specular();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.solidLightSkin_Specular)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.solidLightSkin_Specular)
 }
 
 // required float solidLightSkin_Ambient_Strength = 28;
-inline bool Scene::has_solidlightskin_ambient_strength() const {
+inline bool MeshModel::has_solidlightskin_ambient_strength() const {
   return (_has_bits_[0] & 0x08000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_ambient_strength() {
+inline void MeshModel::set_has_solidlightskin_ambient_strength() {
   _has_bits_[0] |= 0x08000000u;
 }
-inline void Scene::clear_has_solidlightskin_ambient_strength() {
+inline void MeshModel::clear_has_solidlightskin_ambient_strength() {
   _has_bits_[0] &= ~0x08000000u;
 }
-inline void Scene::clear_solidlightskin_ambient_strength() {
+inline void MeshModel::clear_solidlightskin_ambient_strength() {
   solidlightskin_ambient_strength_ = 0;
   clear_has_solidlightskin_ambient_strength();
 }
-inline float Scene::solidlightskin_ambient_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Ambient_Strength)
+inline float MeshModel::solidlightskin_ambient_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Ambient_Strength)
   return solidlightskin_ambient_strength_;
 }
-inline void Scene::set_solidlightskin_ambient_strength(float value) {
+inline void MeshModel::set_solidlightskin_ambient_strength(float value) {
   set_has_solidlightskin_ambient_strength();
   solidlightskin_ambient_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.solidLightSkin_Ambient_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Ambient_Strength)
 }
 
 // required float solidLightSkin_Diffuse_Strength = 29;
-inline bool Scene::has_solidlightskin_diffuse_strength() const {
+inline bool MeshModel::has_solidlightskin_diffuse_strength() const {
   return (_has_bits_[0] & 0x10000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_diffuse_strength() {
+inline void MeshModel::set_has_solidlightskin_diffuse_strength() {
   _has_bits_[0] |= 0x10000000u;
 }
-inline void Scene::clear_has_solidlightskin_diffuse_strength() {
+inline void MeshModel::clear_has_solidlightskin_diffuse_strength() {
   _has_bits_[0] &= ~0x10000000u;
 }
-inline void Scene::clear_solidlightskin_diffuse_strength() {
+inline void MeshModel::clear_solidlightskin_diffuse_strength() {
   solidlightskin_diffuse_strength_ = 0;
   clear_has_solidlightskin_diffuse_strength();
 }
-inline float Scene::solidlightskin_diffuse_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Diffuse_Strength)
+inline float MeshModel::solidlightskin_diffuse_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Diffuse_Strength)
   return solidlightskin_diffuse_strength_;
 }
-inline void Scene::set_solidlightskin_diffuse_strength(float value) {
+inline void MeshModel::set_solidlightskin_diffuse_strength(float value) {
   set_has_solidlightskin_diffuse_strength();
   solidlightskin_diffuse_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.solidLightSkin_Diffuse_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Diffuse_Strength)
 }
 
 // required float solidLightSkin_Specular_Strength = 30;
-inline bool Scene::has_solidlightskin_specular_strength() const {
+inline bool MeshModel::has_solidlightskin_specular_strength() const {
   return (_has_bits_[0] & 0x20000000u) != 0;
 }
-inline void Scene::set_has_solidlightskin_specular_strength() {
+inline void MeshModel::set_has_solidlightskin_specular_strength() {
   _has_bits_[0] |= 0x20000000u;
 }
-inline void Scene::clear_has_solidlightskin_specular_strength() {
+inline void MeshModel::clear_has_solidlightskin_specular_strength() {
   _has_bits_[0] &= ~0x20000000u;
 }
-inline void Scene::clear_solidlightskin_specular_strength() {
+inline void MeshModel::clear_solidlightskin_specular_strength() {
   solidlightskin_specular_strength_ = 0;
   clear_has_solidlightskin_specular_strength();
 }
-inline float Scene::solidlightskin_specular_strength() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.solidLightSkin_Specular_Strength)
+inline float MeshModel::solidlightskin_specular_strength() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Specular_Strength)
   return solidlightskin_specular_strength_;
 }
-inline void Scene::set_solidlightskin_specular_strength(float value) {
+inline void MeshModel::set_solidlightskin_specular_strength(float value) {
   set_has_solidlightskin_specular_strength();
   solidlightskin_specular_strength_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.solidLightSkin_Specular_Strength)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Specular_Strength)
 }
 
 // required .KuplungApp.Vec3 Setting_LightPosition = 31;
-inline bool Scene::has_setting_lightposition() const {
+inline bool MeshModel::has_setting_lightposition() const {
   return (_has_bits_[0] & 0x40000000u) != 0;
 }
-inline void Scene::set_has_setting_lightposition() {
+inline void MeshModel::set_has_setting_lightposition() {
   _has_bits_[0] |= 0x40000000u;
 }
-inline void Scene::clear_has_setting_lightposition() {
+inline void MeshModel::clear_has_setting_lightposition() {
   _has_bits_[0] &= ~0x40000000u;
 }
-inline void Scene::clear_setting_lightposition() {
+inline void MeshModel::clear_setting_lightposition() {
   if (setting_lightposition_ != NULL) setting_lightposition_->::KuplungApp::Vec3::Clear();
   clear_has_setting_lightposition();
 }
-inline const ::KuplungApp::Vec3& Scene::setting_lightposition() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightPosition)
+inline const ::KuplungApp::Vec3& MeshModel::setting_lightposition() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightPosition)
   return setting_lightposition_ != NULL ? *setting_lightposition_ : *default_instance_->setting_lightposition_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_setting_lightposition() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_setting_lightposition() {
   set_has_setting_lightposition();
   if (setting_lightposition_ == NULL) setting_lightposition_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_LightPosition)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_LightPosition)
   return setting_lightposition_;
 }
-inline ::KuplungApp::Vec3* Scene::release_setting_lightposition() {
+inline ::KuplungApp::Vec3* MeshModel::release_setting_lightposition() {
   clear_has_setting_lightposition();
   ::KuplungApp::Vec3* temp = setting_lightposition_;
   setting_lightposition_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_lightposition(::KuplungApp::Vec3* setting_lightposition) {
+inline void MeshModel::set_allocated_setting_lightposition(::KuplungApp::Vec3* setting_lightposition) {
   delete setting_lightposition_;
   setting_lightposition_ = setting_lightposition;
   if (setting_lightposition) {
@@ -1806,40 +1935,40 @@ inline void Scene::set_allocated_setting_lightposition(::KuplungApp::Vec3* setti
   } else {
     clear_has_setting_lightposition();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_LightPosition)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_LightPosition)
 }
 
 // required .KuplungApp.Vec3 Setting_LightDirection = 32;
-inline bool Scene::has_setting_lightdirection() const {
+inline bool MeshModel::has_setting_lightdirection() const {
   return (_has_bits_[0] & 0x80000000u) != 0;
 }
-inline void Scene::set_has_setting_lightdirection() {
+inline void MeshModel::set_has_setting_lightdirection() {
   _has_bits_[0] |= 0x80000000u;
 }
-inline void Scene::clear_has_setting_lightdirection() {
+inline void MeshModel::clear_has_setting_lightdirection() {
   _has_bits_[0] &= ~0x80000000u;
 }
-inline void Scene::clear_setting_lightdirection() {
+inline void MeshModel::clear_setting_lightdirection() {
   if (setting_lightdirection_ != NULL) setting_lightdirection_->::KuplungApp::Vec3::Clear();
   clear_has_setting_lightdirection();
 }
-inline const ::KuplungApp::Vec3& Scene::setting_lightdirection() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightDirection)
+inline const ::KuplungApp::Vec3& MeshModel::setting_lightdirection() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightDirection)
   return setting_lightdirection_ != NULL ? *setting_lightdirection_ : *default_instance_->setting_lightdirection_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_setting_lightdirection() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_setting_lightdirection() {
   set_has_setting_lightdirection();
   if (setting_lightdirection_ == NULL) setting_lightdirection_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_LightDirection)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_LightDirection)
   return setting_lightdirection_;
 }
-inline ::KuplungApp::Vec3* Scene::release_setting_lightdirection() {
+inline ::KuplungApp::Vec3* MeshModel::release_setting_lightdirection() {
   clear_has_setting_lightdirection();
   ::KuplungApp::Vec3* temp = setting_lightdirection_;
   setting_lightdirection_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_lightdirection(::KuplungApp::Vec3* setting_lightdirection) {
+inline void MeshModel::set_allocated_setting_lightdirection(::KuplungApp::Vec3* setting_lightdirection) {
   delete setting_lightdirection_;
   setting_lightdirection_ = setting_lightdirection;
   if (setting_lightdirection) {
@@ -1847,40 +1976,40 @@ inline void Scene::set_allocated_setting_lightdirection(::KuplungApp::Vec3* sett
   } else {
     clear_has_setting_lightdirection();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_LightDirection)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_LightDirection)
 }
 
 // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
-inline bool Scene::has_setting_lightambient() const {
+inline bool MeshModel::has_setting_lightambient() const {
   return (_has_bits_[1] & 0x00000001u) != 0;
 }
-inline void Scene::set_has_setting_lightambient() {
+inline void MeshModel::set_has_setting_lightambient() {
   _has_bits_[1] |= 0x00000001u;
 }
-inline void Scene::clear_has_setting_lightambient() {
+inline void MeshModel::clear_has_setting_lightambient() {
   _has_bits_[1] &= ~0x00000001u;
 }
-inline void Scene::clear_setting_lightambient() {
+inline void MeshModel::clear_setting_lightambient() {
   if (setting_lightambient_ != NULL) setting_lightambient_->::KuplungApp::Vec3::Clear();
   clear_has_setting_lightambient();
 }
-inline const ::KuplungApp::Vec3& Scene::setting_lightambient() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightAmbient)
+inline const ::KuplungApp::Vec3& MeshModel::setting_lightambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightAmbient)
   return setting_lightambient_ != NULL ? *setting_lightambient_ : *default_instance_->setting_lightambient_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_setting_lightambient() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_setting_lightambient() {
   set_has_setting_lightambient();
   if (setting_lightambient_ == NULL) setting_lightambient_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_LightAmbient)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_LightAmbient)
   return setting_lightambient_;
 }
-inline ::KuplungApp::Vec3* Scene::release_setting_lightambient() {
+inline ::KuplungApp::Vec3* MeshModel::release_setting_lightambient() {
   clear_has_setting_lightambient();
   ::KuplungApp::Vec3* temp = setting_lightambient_;
   setting_lightambient_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_lightambient(::KuplungApp::Vec3* setting_lightambient) {
+inline void MeshModel::set_allocated_setting_lightambient(::KuplungApp::Vec3* setting_lightambient) {
   delete setting_lightambient_;
   setting_lightambient_ = setting_lightambient;
   if (setting_lightambient) {
@@ -1888,40 +2017,40 @@ inline void Scene::set_allocated_setting_lightambient(::KuplungApp::Vec3* settin
   } else {
     clear_has_setting_lightambient();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_LightAmbient)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_LightAmbient)
 }
 
 // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
-inline bool Scene::has_setting_lightdiffuse() const {
+inline bool MeshModel::has_setting_lightdiffuse() const {
   return (_has_bits_[1] & 0x00000002u) != 0;
 }
-inline void Scene::set_has_setting_lightdiffuse() {
+inline void MeshModel::set_has_setting_lightdiffuse() {
   _has_bits_[1] |= 0x00000002u;
 }
-inline void Scene::clear_has_setting_lightdiffuse() {
+inline void MeshModel::clear_has_setting_lightdiffuse() {
   _has_bits_[1] &= ~0x00000002u;
 }
-inline void Scene::clear_setting_lightdiffuse() {
+inline void MeshModel::clear_setting_lightdiffuse() {
   if (setting_lightdiffuse_ != NULL) setting_lightdiffuse_->::KuplungApp::Vec3::Clear();
   clear_has_setting_lightdiffuse();
 }
-inline const ::KuplungApp::Vec3& Scene::setting_lightdiffuse() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightDiffuse)
+inline const ::KuplungApp::Vec3& MeshModel::setting_lightdiffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightDiffuse)
   return setting_lightdiffuse_ != NULL ? *setting_lightdiffuse_ : *default_instance_->setting_lightdiffuse_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_setting_lightdiffuse() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_setting_lightdiffuse() {
   set_has_setting_lightdiffuse();
   if (setting_lightdiffuse_ == NULL) setting_lightdiffuse_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_LightDiffuse)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_LightDiffuse)
   return setting_lightdiffuse_;
 }
-inline ::KuplungApp::Vec3* Scene::release_setting_lightdiffuse() {
+inline ::KuplungApp::Vec3* MeshModel::release_setting_lightdiffuse() {
   clear_has_setting_lightdiffuse();
   ::KuplungApp::Vec3* temp = setting_lightdiffuse_;
   setting_lightdiffuse_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_lightdiffuse(::KuplungApp::Vec3* setting_lightdiffuse) {
+inline void MeshModel::set_allocated_setting_lightdiffuse(::KuplungApp::Vec3* setting_lightdiffuse) {
   delete setting_lightdiffuse_;
   setting_lightdiffuse_ = setting_lightdiffuse;
   if (setting_lightdiffuse) {
@@ -1929,40 +2058,40 @@ inline void Scene::set_allocated_setting_lightdiffuse(::KuplungApp::Vec3* settin
   } else {
     clear_has_setting_lightdiffuse();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_LightDiffuse)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_LightDiffuse)
 }
 
 // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
-inline bool Scene::has_setting_lightspecular() const {
+inline bool MeshModel::has_setting_lightspecular() const {
   return (_has_bits_[1] & 0x00000004u) != 0;
 }
-inline void Scene::set_has_setting_lightspecular() {
+inline void MeshModel::set_has_setting_lightspecular() {
   _has_bits_[1] |= 0x00000004u;
 }
-inline void Scene::clear_has_setting_lightspecular() {
+inline void MeshModel::clear_has_setting_lightspecular() {
   _has_bits_[1] &= ~0x00000004u;
 }
-inline void Scene::clear_setting_lightspecular() {
+inline void MeshModel::clear_setting_lightspecular() {
   if (setting_lightspecular_ != NULL) setting_lightspecular_->::KuplungApp::Vec3::Clear();
   clear_has_setting_lightspecular();
 }
-inline const ::KuplungApp::Vec3& Scene::setting_lightspecular() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightSpecular)
+inline const ::KuplungApp::Vec3& MeshModel::setting_lightspecular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightSpecular)
   return setting_lightspecular_ != NULL ? *setting_lightspecular_ : *default_instance_->setting_lightspecular_;
 }
-inline ::KuplungApp::Vec3* Scene::mutable_setting_lightspecular() {
+inline ::KuplungApp::Vec3* MeshModel::mutable_setting_lightspecular() {
   set_has_setting_lightspecular();
   if (setting_lightspecular_ == NULL) setting_lightspecular_ = new ::KuplungApp::Vec3;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Setting_LightSpecular)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Setting_LightSpecular)
   return setting_lightspecular_;
 }
-inline ::KuplungApp::Vec3* Scene::release_setting_lightspecular() {
+inline ::KuplungApp::Vec3* MeshModel::release_setting_lightspecular() {
   clear_has_setting_lightspecular();
   ::KuplungApp::Vec3* temp = setting_lightspecular_;
   setting_lightspecular_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_setting_lightspecular(::KuplungApp::Vec3* setting_lightspecular) {
+inline void MeshModel::set_allocated_setting_lightspecular(::KuplungApp::Vec3* setting_lightspecular) {
   delete setting_lightspecular_;
   setting_lightspecular_ = setting_lightspecular;
   if (setting_lightspecular) {
@@ -1970,136 +2099,136 @@ inline void Scene::set_allocated_setting_lightspecular(::KuplungApp::Vec3* setti
   } else {
     clear_has_setting_lightspecular();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Setting_LightSpecular)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Setting_LightSpecular)
 }
 
 // required float Setting_LightStrengthAmbient = 36;
-inline bool Scene::has_setting_lightstrengthambient() const {
+inline bool MeshModel::has_setting_lightstrengthambient() const {
   return (_has_bits_[1] & 0x00000008u) != 0;
 }
-inline void Scene::set_has_setting_lightstrengthambient() {
+inline void MeshModel::set_has_setting_lightstrengthambient() {
   _has_bits_[1] |= 0x00000008u;
 }
-inline void Scene::clear_has_setting_lightstrengthambient() {
+inline void MeshModel::clear_has_setting_lightstrengthambient() {
   _has_bits_[1] &= ~0x00000008u;
 }
-inline void Scene::clear_setting_lightstrengthambient() {
+inline void MeshModel::clear_setting_lightstrengthambient() {
   setting_lightstrengthambient_ = 0;
   clear_has_setting_lightstrengthambient();
 }
-inline float Scene::setting_lightstrengthambient() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightStrengthAmbient)
+inline float MeshModel::setting_lightstrengthambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthAmbient)
   return setting_lightstrengthambient_;
 }
-inline void Scene::set_setting_lightstrengthambient(float value) {
+inline void MeshModel::set_setting_lightstrengthambient(float value) {
   set_has_setting_lightstrengthambient();
   setting_lightstrengthambient_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_LightStrengthAmbient)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthAmbient)
 }
 
 // required float Setting_LightStrengthDiffuse = 37;
-inline bool Scene::has_setting_lightstrengthdiffuse() const {
+inline bool MeshModel::has_setting_lightstrengthdiffuse() const {
   return (_has_bits_[1] & 0x00000010u) != 0;
 }
-inline void Scene::set_has_setting_lightstrengthdiffuse() {
+inline void MeshModel::set_has_setting_lightstrengthdiffuse() {
   _has_bits_[1] |= 0x00000010u;
 }
-inline void Scene::clear_has_setting_lightstrengthdiffuse() {
+inline void MeshModel::clear_has_setting_lightstrengthdiffuse() {
   _has_bits_[1] &= ~0x00000010u;
 }
-inline void Scene::clear_setting_lightstrengthdiffuse() {
+inline void MeshModel::clear_setting_lightstrengthdiffuse() {
   setting_lightstrengthdiffuse_ = 0;
   clear_has_setting_lightstrengthdiffuse();
 }
-inline float Scene::setting_lightstrengthdiffuse() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightStrengthDiffuse)
+inline float MeshModel::setting_lightstrengthdiffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthDiffuse)
   return setting_lightstrengthdiffuse_;
 }
-inline void Scene::set_setting_lightstrengthdiffuse(float value) {
+inline void MeshModel::set_setting_lightstrengthdiffuse(float value) {
   set_has_setting_lightstrengthdiffuse();
   setting_lightstrengthdiffuse_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_LightStrengthDiffuse)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthDiffuse)
 }
 
 // required float Setting_LightStrengthSpecular = 38;
-inline bool Scene::has_setting_lightstrengthspecular() const {
+inline bool MeshModel::has_setting_lightstrengthspecular() const {
   return (_has_bits_[1] & 0x00000020u) != 0;
 }
-inline void Scene::set_has_setting_lightstrengthspecular() {
+inline void MeshModel::set_has_setting_lightstrengthspecular() {
   _has_bits_[1] |= 0x00000020u;
 }
-inline void Scene::clear_has_setting_lightstrengthspecular() {
+inline void MeshModel::clear_has_setting_lightstrengthspecular() {
   _has_bits_[1] &= ~0x00000020u;
 }
-inline void Scene::clear_setting_lightstrengthspecular() {
+inline void MeshModel::clear_setting_lightstrengthspecular() {
   setting_lightstrengthspecular_ = 0;
   clear_has_setting_lightstrengthspecular();
 }
-inline float Scene::setting_lightstrengthspecular() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightStrengthSpecular)
+inline float MeshModel::setting_lightstrengthspecular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthSpecular)
   return setting_lightstrengthspecular_;
 }
-inline void Scene::set_setting_lightstrengthspecular(float value) {
+inline void MeshModel::set_setting_lightstrengthspecular(float value) {
   set_has_setting_lightstrengthspecular();
   setting_lightstrengthspecular_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_LightStrengthSpecular)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthSpecular)
 }
 
 // required int32 materialIlluminationModel = 39;
-inline bool Scene::has_materialilluminationmodel() const {
+inline bool MeshModel::has_materialilluminationmodel() const {
   return (_has_bits_[1] & 0x00000040u) != 0;
 }
-inline void Scene::set_has_materialilluminationmodel() {
+inline void MeshModel::set_has_materialilluminationmodel() {
   _has_bits_[1] |= 0x00000040u;
 }
-inline void Scene::clear_has_materialilluminationmodel() {
+inline void MeshModel::clear_has_materialilluminationmodel() {
   _has_bits_[1] &= ~0x00000040u;
 }
-inline void Scene::clear_materialilluminationmodel() {
+inline void MeshModel::clear_materialilluminationmodel() {
   materialilluminationmodel_ = 0;
   clear_has_materialilluminationmodel();
 }
-inline ::google::protobuf::int32 Scene::materialilluminationmodel() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.materialIlluminationModel)
+inline ::google::protobuf::int32 MeshModel::materialilluminationmodel() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialIlluminationModel)
   return materialilluminationmodel_;
 }
-inline void Scene::set_materialilluminationmodel(::google::protobuf::int32 value) {
+inline void MeshModel::set_materialilluminationmodel(::google::protobuf::int32 value) {
   set_has_materialilluminationmodel();
   materialilluminationmodel_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.materialIlluminationModel)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.materialIlluminationModel)
 }
 
 // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
-inline bool Scene::has_displacementheightscale() const {
+inline bool MeshModel::has_displacementheightscale() const {
   return (_has_bits_[1] & 0x00000080u) != 0;
 }
-inline void Scene::set_has_displacementheightscale() {
+inline void MeshModel::set_has_displacementheightscale() {
   _has_bits_[1] |= 0x00000080u;
 }
-inline void Scene::clear_has_displacementheightscale() {
+inline void MeshModel::clear_has_displacementheightscale() {
   _has_bits_[1] &= ~0x00000080u;
 }
-inline void Scene::clear_displacementheightscale() {
+inline void MeshModel::clear_displacementheightscale() {
   if (displacementheightscale_ != NULL) displacementheightscale_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_displacementheightscale();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::displacementheightscale() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.displacementHeightScale)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::displacementheightscale() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displacementHeightScale)
   return displacementheightscale_ != NULL ? *displacementheightscale_ : *default_instance_->displacementheightscale_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_displacementheightscale() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacementheightscale() {
   set_has_displacementheightscale();
   if (displacementheightscale_ == NULL) displacementheightscale_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.displacementHeightScale)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.displacementHeightScale)
   return displacementheightscale_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_displacementheightscale() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_displacementheightscale() {
   clear_has_displacementheightscale();
   ::KuplungApp::ObjectCoordinate* temp = displacementheightscale_;
   displacementheightscale_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_displacementheightscale(::KuplungApp::ObjectCoordinate* displacementheightscale) {
+inline void MeshModel::set_allocated_displacementheightscale(::KuplungApp::ObjectCoordinate* displacementheightscale) {
   delete displacementheightscale_;
   displacementheightscale_ = displacementheightscale;
   if (displacementheightscale) {
@@ -2107,64 +2236,64 @@ inline void Scene::set_allocated_displacementheightscale(::KuplungApp::ObjectCoo
   } else {
     clear_has_displacementheightscale();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.displacementHeightScale)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.displacementHeightScale)
 }
 
 // required bool showMaterialEditor = 41;
-inline bool Scene::has_showmaterialeditor() const {
+inline bool MeshModel::has_showmaterialeditor() const {
   return (_has_bits_[1] & 0x00000100u) != 0;
 }
-inline void Scene::set_has_showmaterialeditor() {
+inline void MeshModel::set_has_showmaterialeditor() {
   _has_bits_[1] |= 0x00000100u;
 }
-inline void Scene::clear_has_showmaterialeditor() {
+inline void MeshModel::clear_has_showmaterialeditor() {
   _has_bits_[1] &= ~0x00000100u;
 }
-inline void Scene::clear_showmaterialeditor() {
+inline void MeshModel::clear_showmaterialeditor() {
   showmaterialeditor_ = false;
   clear_has_showmaterialeditor();
 }
-inline bool Scene::showmaterialeditor() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.showMaterialEditor)
+inline bool MeshModel::showmaterialeditor() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.showMaterialEditor)
   return showmaterialeditor_;
 }
-inline void Scene::set_showmaterialeditor(bool value) {
+inline void MeshModel::set_showmaterialeditor(bool value) {
   set_has_showmaterialeditor();
   showmaterialeditor_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.showMaterialEditor)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.showMaterialEditor)
 }
 
 // required .KuplungApp.MaterialColor materialAmbient = 42;
-inline bool Scene::has_materialambient() const {
+inline bool MeshModel::has_materialambient() const {
   return (_has_bits_[1] & 0x00000200u) != 0;
 }
-inline void Scene::set_has_materialambient() {
+inline void MeshModel::set_has_materialambient() {
   _has_bits_[1] |= 0x00000200u;
 }
-inline void Scene::clear_has_materialambient() {
+inline void MeshModel::clear_has_materialambient() {
   _has_bits_[1] &= ~0x00000200u;
 }
-inline void Scene::clear_materialambient() {
+inline void MeshModel::clear_materialambient() {
   if (materialambient_ != NULL) materialambient_->::KuplungApp::MaterialColor::Clear();
   clear_has_materialambient();
 }
-inline const ::KuplungApp::MaterialColor& Scene::materialambient() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.materialAmbient)
+inline const ::KuplungApp::MaterialColor& MeshModel::materialambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialAmbient)
   return materialambient_ != NULL ? *materialambient_ : *default_instance_->materialambient_;
 }
-inline ::KuplungApp::MaterialColor* Scene::mutable_materialambient() {
+inline ::KuplungApp::MaterialColor* MeshModel::mutable_materialambient() {
   set_has_materialambient();
   if (materialambient_ == NULL) materialambient_ = new ::KuplungApp::MaterialColor;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.materialAmbient)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.materialAmbient)
   return materialambient_;
 }
-inline ::KuplungApp::MaterialColor* Scene::release_materialambient() {
+inline ::KuplungApp::MaterialColor* MeshModel::release_materialambient() {
   clear_has_materialambient();
   ::KuplungApp::MaterialColor* temp = materialambient_;
   materialambient_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_materialambient(::KuplungApp::MaterialColor* materialambient) {
+inline void MeshModel::set_allocated_materialambient(::KuplungApp::MaterialColor* materialambient) {
   delete materialambient_;
   materialambient_ = materialambient;
   if (materialambient) {
@@ -2172,40 +2301,40 @@ inline void Scene::set_allocated_materialambient(::KuplungApp::MaterialColor* ma
   } else {
     clear_has_materialambient();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.materialAmbient)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.materialAmbient)
 }
 
 // required .KuplungApp.MaterialColor materialDiffuse = 43;
-inline bool Scene::has_materialdiffuse() const {
+inline bool MeshModel::has_materialdiffuse() const {
   return (_has_bits_[1] & 0x00000400u) != 0;
 }
-inline void Scene::set_has_materialdiffuse() {
+inline void MeshModel::set_has_materialdiffuse() {
   _has_bits_[1] |= 0x00000400u;
 }
-inline void Scene::clear_has_materialdiffuse() {
+inline void MeshModel::clear_has_materialdiffuse() {
   _has_bits_[1] &= ~0x00000400u;
 }
-inline void Scene::clear_materialdiffuse() {
+inline void MeshModel::clear_materialdiffuse() {
   if (materialdiffuse_ != NULL) materialdiffuse_->::KuplungApp::MaterialColor::Clear();
   clear_has_materialdiffuse();
 }
-inline const ::KuplungApp::MaterialColor& Scene::materialdiffuse() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.materialDiffuse)
+inline const ::KuplungApp::MaterialColor& MeshModel::materialdiffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialDiffuse)
   return materialdiffuse_ != NULL ? *materialdiffuse_ : *default_instance_->materialdiffuse_;
 }
-inline ::KuplungApp::MaterialColor* Scene::mutable_materialdiffuse() {
+inline ::KuplungApp::MaterialColor* MeshModel::mutable_materialdiffuse() {
   set_has_materialdiffuse();
   if (materialdiffuse_ == NULL) materialdiffuse_ = new ::KuplungApp::MaterialColor;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.materialDiffuse)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.materialDiffuse)
   return materialdiffuse_;
 }
-inline ::KuplungApp::MaterialColor* Scene::release_materialdiffuse() {
+inline ::KuplungApp::MaterialColor* MeshModel::release_materialdiffuse() {
   clear_has_materialdiffuse();
   ::KuplungApp::MaterialColor* temp = materialdiffuse_;
   materialdiffuse_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_materialdiffuse(::KuplungApp::MaterialColor* materialdiffuse) {
+inline void MeshModel::set_allocated_materialdiffuse(::KuplungApp::MaterialColor* materialdiffuse) {
   delete materialdiffuse_;
   materialdiffuse_ = materialdiffuse;
   if (materialdiffuse) {
@@ -2213,40 +2342,40 @@ inline void Scene::set_allocated_materialdiffuse(::KuplungApp::MaterialColor* ma
   } else {
     clear_has_materialdiffuse();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.materialDiffuse)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.materialDiffuse)
 }
 
 // required .KuplungApp.MaterialColor materialSpecular = 44;
-inline bool Scene::has_materialspecular() const {
+inline bool MeshModel::has_materialspecular() const {
   return (_has_bits_[1] & 0x00000800u) != 0;
 }
-inline void Scene::set_has_materialspecular() {
+inline void MeshModel::set_has_materialspecular() {
   _has_bits_[1] |= 0x00000800u;
 }
-inline void Scene::clear_has_materialspecular() {
+inline void MeshModel::clear_has_materialspecular() {
   _has_bits_[1] &= ~0x00000800u;
 }
-inline void Scene::clear_materialspecular() {
+inline void MeshModel::clear_materialspecular() {
   if (materialspecular_ != NULL) materialspecular_->::KuplungApp::MaterialColor::Clear();
   clear_has_materialspecular();
 }
-inline const ::KuplungApp::MaterialColor& Scene::materialspecular() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.materialSpecular)
+inline const ::KuplungApp::MaterialColor& MeshModel::materialspecular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialSpecular)
   return materialspecular_ != NULL ? *materialspecular_ : *default_instance_->materialspecular_;
 }
-inline ::KuplungApp::MaterialColor* Scene::mutable_materialspecular() {
+inline ::KuplungApp::MaterialColor* MeshModel::mutable_materialspecular() {
   set_has_materialspecular();
   if (materialspecular_ == NULL) materialspecular_ = new ::KuplungApp::MaterialColor;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.materialSpecular)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.materialSpecular)
   return materialspecular_;
 }
-inline ::KuplungApp::MaterialColor* Scene::release_materialspecular() {
+inline ::KuplungApp::MaterialColor* MeshModel::release_materialspecular() {
   clear_has_materialspecular();
   ::KuplungApp::MaterialColor* temp = materialspecular_;
   materialspecular_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_materialspecular(::KuplungApp::MaterialColor* materialspecular) {
+inline void MeshModel::set_allocated_materialspecular(::KuplungApp::MaterialColor* materialspecular) {
   delete materialspecular_;
   materialspecular_ = materialspecular;
   if (materialspecular) {
@@ -2254,40 +2383,40 @@ inline void Scene::set_allocated_materialspecular(::KuplungApp::MaterialColor* m
   } else {
     clear_has_materialspecular();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.materialSpecular)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.materialSpecular)
 }
 
 // required .KuplungApp.MaterialColor materialEmission = 45;
-inline bool Scene::has_materialemission() const {
+inline bool MeshModel::has_materialemission() const {
   return (_has_bits_[1] & 0x00001000u) != 0;
 }
-inline void Scene::set_has_materialemission() {
+inline void MeshModel::set_has_materialemission() {
   _has_bits_[1] |= 0x00001000u;
 }
-inline void Scene::clear_has_materialemission() {
+inline void MeshModel::clear_has_materialemission() {
   _has_bits_[1] &= ~0x00001000u;
 }
-inline void Scene::clear_materialemission() {
+inline void MeshModel::clear_materialemission() {
   if (materialemission_ != NULL) materialemission_->::KuplungApp::MaterialColor::Clear();
   clear_has_materialemission();
 }
-inline const ::KuplungApp::MaterialColor& Scene::materialemission() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.materialEmission)
+inline const ::KuplungApp::MaterialColor& MeshModel::materialemission() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialEmission)
   return materialemission_ != NULL ? *materialemission_ : *default_instance_->materialemission_;
 }
-inline ::KuplungApp::MaterialColor* Scene::mutable_materialemission() {
+inline ::KuplungApp::MaterialColor* MeshModel::mutable_materialemission() {
   set_has_materialemission();
   if (materialemission_ == NULL) materialemission_ = new ::KuplungApp::MaterialColor;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.materialEmission)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.materialEmission)
   return materialemission_;
 }
-inline ::KuplungApp::MaterialColor* Scene::release_materialemission() {
+inline ::KuplungApp::MaterialColor* MeshModel::release_materialemission() {
   clear_has_materialemission();
   ::KuplungApp::MaterialColor* temp = materialemission_;
   materialemission_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_materialemission(::KuplungApp::MaterialColor* materialemission) {
+inline void MeshModel::set_allocated_materialemission(::KuplungApp::MaterialColor* materialemission) {
   delete materialemission_;
   materialemission_ = materialemission;
   if (materialemission) {
@@ -2295,88 +2424,88 @@ inline void Scene::set_allocated_materialemission(::KuplungApp::MaterialColor* m
   } else {
     clear_has_materialemission();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.materialEmission)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.materialEmission)
 }
 
 // required bool Setting_ParallaxMapping = 46;
-inline bool Scene::has_setting_parallaxmapping() const {
+inline bool MeshModel::has_setting_parallaxmapping() const {
   return (_has_bits_[1] & 0x00002000u) != 0;
 }
-inline void Scene::set_has_setting_parallaxmapping() {
+inline void MeshModel::set_has_setting_parallaxmapping() {
   _has_bits_[1] |= 0x00002000u;
 }
-inline void Scene::clear_has_setting_parallaxmapping() {
+inline void MeshModel::clear_has_setting_parallaxmapping() {
   _has_bits_[1] &= ~0x00002000u;
 }
-inline void Scene::clear_setting_parallaxmapping() {
+inline void MeshModel::clear_setting_parallaxmapping() {
   setting_parallaxmapping_ = false;
   clear_has_setting_parallaxmapping();
 }
-inline bool Scene::setting_parallaxmapping() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_ParallaxMapping)
+inline bool MeshModel::setting_parallaxmapping() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_ParallaxMapping)
   return setting_parallaxmapping_;
 }
-inline void Scene::set_setting_parallaxmapping(bool value) {
+inline void MeshModel::set_setting_parallaxmapping(bool value) {
   set_has_setting_parallaxmapping();
   setting_parallaxmapping_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_ParallaxMapping)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_ParallaxMapping)
 }
 
 // required int32 Effect_GBlur_Mode = 47;
-inline bool Scene::has_effect_gblur_mode() const {
+inline bool MeshModel::has_effect_gblur_mode() const {
   return (_has_bits_[1] & 0x00004000u) != 0;
 }
-inline void Scene::set_has_effect_gblur_mode() {
+inline void MeshModel::set_has_effect_gblur_mode() {
   _has_bits_[1] |= 0x00004000u;
 }
-inline void Scene::clear_has_effect_gblur_mode() {
+inline void MeshModel::clear_has_effect_gblur_mode() {
   _has_bits_[1] &= ~0x00004000u;
 }
-inline void Scene::clear_effect_gblur_mode() {
+inline void MeshModel::clear_effect_gblur_mode() {
   effect_gblur_mode_ = 0;
   clear_has_effect_gblur_mode();
 }
-inline ::google::protobuf::int32 Scene::effect_gblur_mode() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_GBlur_Mode)
+inline ::google::protobuf::int32 MeshModel::effect_gblur_mode() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Mode)
   return effect_gblur_mode_;
 }
-inline void Scene::set_effect_gblur_mode(::google::protobuf::int32 value) {
+inline void MeshModel::set_effect_gblur_mode(::google::protobuf::int32 value) {
   set_has_effect_gblur_mode();
   effect_gblur_mode_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_GBlur_Mode)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_GBlur_Mode)
 }
 
 // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
-inline bool Scene::has_effect_gblur_radius() const {
+inline bool MeshModel::has_effect_gblur_radius() const {
   return (_has_bits_[1] & 0x00008000u) != 0;
 }
-inline void Scene::set_has_effect_gblur_radius() {
+inline void MeshModel::set_has_effect_gblur_radius() {
   _has_bits_[1] |= 0x00008000u;
 }
-inline void Scene::clear_has_effect_gblur_radius() {
+inline void MeshModel::clear_has_effect_gblur_radius() {
   _has_bits_[1] &= ~0x00008000u;
 }
-inline void Scene::clear_effect_gblur_radius() {
+inline void MeshModel::clear_effect_gblur_radius() {
   if (effect_gblur_radius_ != NULL) effect_gblur_radius_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_effect_gblur_radius();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::effect_gblur_radius() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_GBlur_Radius)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::effect_gblur_radius() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Radius)
   return effect_gblur_radius_ != NULL ? *effect_gblur_radius_ : *default_instance_->effect_gblur_radius_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_effect_gblur_radius() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_effect_gblur_radius() {
   set_has_effect_gblur_radius();
   if (effect_gblur_radius_ == NULL) effect_gblur_radius_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Effect_GBlur_Radius)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Effect_GBlur_Radius)
   return effect_gblur_radius_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_effect_gblur_radius() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_effect_gblur_radius() {
   clear_has_effect_gblur_radius();
   ::KuplungApp::ObjectCoordinate* temp = effect_gblur_radius_;
   effect_gblur_radius_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_effect_gblur_radius(::KuplungApp::ObjectCoordinate* effect_gblur_radius) {
+inline void MeshModel::set_allocated_effect_gblur_radius(::KuplungApp::ObjectCoordinate* effect_gblur_radius) {
   delete effect_gblur_radius_;
   effect_gblur_radius_ = effect_gblur_radius;
   if (effect_gblur_radius) {
@@ -2384,40 +2513,40 @@ inline void Scene::set_allocated_effect_gblur_radius(::KuplungApp::ObjectCoordin
   } else {
     clear_has_effect_gblur_radius();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Effect_GBlur_Radius)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Effect_GBlur_Radius)
 }
 
 // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
-inline bool Scene::has_effect_gblur_width() const {
+inline bool MeshModel::has_effect_gblur_width() const {
   return (_has_bits_[1] & 0x00010000u) != 0;
 }
-inline void Scene::set_has_effect_gblur_width() {
+inline void MeshModel::set_has_effect_gblur_width() {
   _has_bits_[1] |= 0x00010000u;
 }
-inline void Scene::clear_has_effect_gblur_width() {
+inline void MeshModel::clear_has_effect_gblur_width() {
   _has_bits_[1] &= ~0x00010000u;
 }
-inline void Scene::clear_effect_gblur_width() {
+inline void MeshModel::clear_effect_gblur_width() {
   if (effect_gblur_width_ != NULL) effect_gblur_width_->::KuplungApp::ObjectCoordinate::Clear();
   clear_has_effect_gblur_width();
 }
-inline const ::KuplungApp::ObjectCoordinate& Scene::effect_gblur_width() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_GBlur_Width)
+inline const ::KuplungApp::ObjectCoordinate& MeshModel::effect_gblur_width() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Width)
   return effect_gblur_width_ != NULL ? *effect_gblur_width_ : *default_instance_->effect_gblur_width_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::mutable_effect_gblur_width() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::mutable_effect_gblur_width() {
   set_has_effect_gblur_width();
   if (effect_gblur_width_ == NULL) effect_gblur_width_ = new ::KuplungApp::ObjectCoordinate;
-  // @@protoc_insertion_point(field_mutable:KuplungApp.Scene.Effect_GBlur_Width)
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.Effect_GBlur_Width)
   return effect_gblur_width_;
 }
-inline ::KuplungApp::ObjectCoordinate* Scene::release_effect_gblur_width() {
+inline ::KuplungApp::ObjectCoordinate* MeshModel::release_effect_gblur_width() {
   clear_has_effect_gblur_width();
   ::KuplungApp::ObjectCoordinate* temp = effect_gblur_width_;
   effect_gblur_width_ = NULL;
   return temp;
 }
-inline void Scene::set_allocated_effect_gblur_width(::KuplungApp::ObjectCoordinate* effect_gblur_width) {
+inline void MeshModel::set_allocated_effect_gblur_width(::KuplungApp::ObjectCoordinate* effect_gblur_width) {
   delete effect_gblur_width_;
   effect_gblur_width_ = effect_gblur_width;
   if (effect_gblur_width) {
@@ -2425,199 +2554,240 @@ inline void Scene::set_allocated_effect_gblur_width(::KuplungApp::ObjectCoordina
   } else {
     clear_has_effect_gblur_width();
   }
-  // @@protoc_insertion_point(field_set_allocated:KuplungApp.Scene.Effect_GBlur_Width)
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.Effect_GBlur_Width)
 }
 
 // required bool Effect_Bloom_doBloom = 50;
-inline bool Scene::has_effect_bloom_dobloom() const {
+inline bool MeshModel::has_effect_bloom_dobloom() const {
   return (_has_bits_[1] & 0x00020000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_dobloom() {
+inline void MeshModel::set_has_effect_bloom_dobloom() {
   _has_bits_[1] |= 0x00020000u;
 }
-inline void Scene::clear_has_effect_bloom_dobloom() {
+inline void MeshModel::clear_has_effect_bloom_dobloom() {
   _has_bits_[1] &= ~0x00020000u;
 }
-inline void Scene::clear_effect_bloom_dobloom() {
+inline void MeshModel::clear_effect_bloom_dobloom() {
   effect_bloom_dobloom_ = false;
   clear_has_effect_bloom_dobloom();
 }
-inline bool Scene::effect_bloom_dobloom() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_doBloom)
+inline bool MeshModel::effect_bloom_dobloom() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_doBloom)
   return effect_bloom_dobloom_;
 }
-inline void Scene::set_effect_bloom_dobloom(bool value) {
+inline void MeshModel::set_effect_bloom_dobloom(bool value) {
   set_has_effect_bloom_dobloom();
   effect_bloom_dobloom_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_doBloom)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_doBloom)
 }
 
 // required float Effect_Bloom_WeightA = 51;
-inline bool Scene::has_effect_bloom_weighta() const {
+inline bool MeshModel::has_effect_bloom_weighta() const {
   return (_has_bits_[1] & 0x00040000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_weighta() {
+inline void MeshModel::set_has_effect_bloom_weighta() {
   _has_bits_[1] |= 0x00040000u;
 }
-inline void Scene::clear_has_effect_bloom_weighta() {
+inline void MeshModel::clear_has_effect_bloom_weighta() {
   _has_bits_[1] &= ~0x00040000u;
 }
-inline void Scene::clear_effect_bloom_weighta() {
+inline void MeshModel::clear_effect_bloom_weighta() {
   effect_bloom_weighta_ = 0;
   clear_has_effect_bloom_weighta();
 }
-inline float Scene::effect_bloom_weighta() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_WeightA)
+inline float MeshModel::effect_bloom_weighta() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightA)
   return effect_bloom_weighta_;
 }
-inline void Scene::set_effect_bloom_weighta(float value) {
+inline void MeshModel::set_effect_bloom_weighta(float value) {
   set_has_effect_bloom_weighta();
   effect_bloom_weighta_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_WeightA)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightA)
 }
 
 // required float Effect_Bloom_WeightB = 52;
-inline bool Scene::has_effect_bloom_weightb() const {
+inline bool MeshModel::has_effect_bloom_weightb() const {
   return (_has_bits_[1] & 0x00080000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_weightb() {
+inline void MeshModel::set_has_effect_bloom_weightb() {
   _has_bits_[1] |= 0x00080000u;
 }
-inline void Scene::clear_has_effect_bloom_weightb() {
+inline void MeshModel::clear_has_effect_bloom_weightb() {
   _has_bits_[1] &= ~0x00080000u;
 }
-inline void Scene::clear_effect_bloom_weightb() {
+inline void MeshModel::clear_effect_bloom_weightb() {
   effect_bloom_weightb_ = 0;
   clear_has_effect_bloom_weightb();
 }
-inline float Scene::effect_bloom_weightb() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_WeightB)
+inline float MeshModel::effect_bloom_weightb() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightB)
   return effect_bloom_weightb_;
 }
-inline void Scene::set_effect_bloom_weightb(float value) {
+inline void MeshModel::set_effect_bloom_weightb(float value) {
   set_has_effect_bloom_weightb();
   effect_bloom_weightb_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_WeightB)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightB)
 }
 
 // required float Effect_Bloom_WeightC = 53;
-inline bool Scene::has_effect_bloom_weightc() const {
+inline bool MeshModel::has_effect_bloom_weightc() const {
   return (_has_bits_[1] & 0x00100000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_weightc() {
+inline void MeshModel::set_has_effect_bloom_weightc() {
   _has_bits_[1] |= 0x00100000u;
 }
-inline void Scene::clear_has_effect_bloom_weightc() {
+inline void MeshModel::clear_has_effect_bloom_weightc() {
   _has_bits_[1] &= ~0x00100000u;
 }
-inline void Scene::clear_effect_bloom_weightc() {
+inline void MeshModel::clear_effect_bloom_weightc() {
   effect_bloom_weightc_ = 0;
   clear_has_effect_bloom_weightc();
 }
-inline float Scene::effect_bloom_weightc() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_WeightC)
+inline float MeshModel::effect_bloom_weightc() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightC)
   return effect_bloom_weightc_;
 }
-inline void Scene::set_effect_bloom_weightc(float value) {
+inline void MeshModel::set_effect_bloom_weightc(float value) {
   set_has_effect_bloom_weightc();
   effect_bloom_weightc_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_WeightC)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightC)
 }
 
 // required float Effect_Bloom_WeightD = 54;
-inline bool Scene::has_effect_bloom_weightd() const {
+inline bool MeshModel::has_effect_bloom_weightd() const {
   return (_has_bits_[1] & 0x00200000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_weightd() {
+inline void MeshModel::set_has_effect_bloom_weightd() {
   _has_bits_[1] |= 0x00200000u;
 }
-inline void Scene::clear_has_effect_bloom_weightd() {
+inline void MeshModel::clear_has_effect_bloom_weightd() {
   _has_bits_[1] &= ~0x00200000u;
 }
-inline void Scene::clear_effect_bloom_weightd() {
+inline void MeshModel::clear_effect_bloom_weightd() {
   effect_bloom_weightd_ = 0;
   clear_has_effect_bloom_weightd();
 }
-inline float Scene::effect_bloom_weightd() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_WeightD)
+inline float MeshModel::effect_bloom_weightd() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightD)
   return effect_bloom_weightd_;
 }
-inline void Scene::set_effect_bloom_weightd(float value) {
+inline void MeshModel::set_effect_bloom_weightd(float value) {
   set_has_effect_bloom_weightd();
   effect_bloom_weightd_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_WeightD)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightD)
 }
 
 // required float Effect_Bloom_Vignette = 55;
-inline bool Scene::has_effect_bloom_vignette() const {
+inline bool MeshModel::has_effect_bloom_vignette() const {
   return (_has_bits_[1] & 0x00400000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_vignette() {
+inline void MeshModel::set_has_effect_bloom_vignette() {
   _has_bits_[1] |= 0x00400000u;
 }
-inline void Scene::clear_has_effect_bloom_vignette() {
+inline void MeshModel::clear_has_effect_bloom_vignette() {
   _has_bits_[1] &= ~0x00400000u;
 }
-inline void Scene::clear_effect_bloom_vignette() {
+inline void MeshModel::clear_effect_bloom_vignette() {
   effect_bloom_vignette_ = 0;
   clear_has_effect_bloom_vignette();
 }
-inline float Scene::effect_bloom_vignette() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_Vignette)
+inline float MeshModel::effect_bloom_vignette() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_Vignette)
   return effect_bloom_vignette_;
 }
-inline void Scene::set_effect_bloom_vignette(float value) {
+inline void MeshModel::set_effect_bloom_vignette(float value) {
   set_has_effect_bloom_vignette();
   effect_bloom_vignette_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_Vignette)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_Vignette)
 }
 
 // required float Effect_Bloom_VignetteAtt = 56;
-inline bool Scene::has_effect_bloom_vignetteatt() const {
+inline bool MeshModel::has_effect_bloom_vignetteatt() const {
   return (_has_bits_[1] & 0x00800000u) != 0;
 }
-inline void Scene::set_has_effect_bloom_vignetteatt() {
+inline void MeshModel::set_has_effect_bloom_vignetteatt() {
   _has_bits_[1] |= 0x00800000u;
 }
-inline void Scene::clear_has_effect_bloom_vignetteatt() {
+inline void MeshModel::clear_has_effect_bloom_vignetteatt() {
   _has_bits_[1] &= ~0x00800000u;
 }
-inline void Scene::clear_effect_bloom_vignetteatt() {
+inline void MeshModel::clear_effect_bloom_vignetteatt() {
   effect_bloom_vignetteatt_ = 0;
   clear_has_effect_bloom_vignetteatt();
 }
-inline float Scene::effect_bloom_vignetteatt() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Effect_Bloom_VignetteAtt)
+inline float MeshModel::effect_bloom_vignetteatt() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_VignetteAtt)
   return effect_bloom_vignetteatt_;
 }
-inline void Scene::set_effect_bloom_vignetteatt(float value) {
+inline void MeshModel::set_effect_bloom_vignetteatt(float value) {
   set_has_effect_bloom_vignetteatt();
   effect_bloom_vignetteatt_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Effect_Bloom_VignetteAtt)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_VignetteAtt)
 }
 
 // required int32 Setting_LightingPass_DrawMode = 57;
-inline bool Scene::has_setting_lightingpass_drawmode() const {
+inline bool MeshModel::has_setting_lightingpass_drawmode() const {
   return (_has_bits_[1] & 0x01000000u) != 0;
 }
-inline void Scene::set_has_setting_lightingpass_drawmode() {
+inline void MeshModel::set_has_setting_lightingpass_drawmode() {
   _has_bits_[1] |= 0x01000000u;
 }
-inline void Scene::clear_has_setting_lightingpass_drawmode() {
+inline void MeshModel::clear_has_setting_lightingpass_drawmode() {
   _has_bits_[1] &= ~0x01000000u;
 }
-inline void Scene::clear_setting_lightingpass_drawmode() {
+inline void MeshModel::clear_setting_lightingpass_drawmode() {
   setting_lightingpass_drawmode_ = 0;
   clear_has_setting_lightingpass_drawmode();
 }
-inline ::google::protobuf::int32 Scene::setting_lightingpass_drawmode() const {
-  // @@protoc_insertion_point(field_get:KuplungApp.Scene.Setting_LightingPass_DrawMode)
+inline ::google::protobuf::int32 MeshModel::setting_lightingpass_drawmode() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightingPass_DrawMode)
   return setting_lightingpass_drawmode_;
 }
-inline void Scene::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
+inline void MeshModel::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
   set_has_setting_lightingpass_drawmode();
   setting_lightingpass_drawmode_ = value;
-  // @@protoc_insertion_point(field_set:KuplungApp.Scene.Setting_LightingPass_DrawMode)
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightingPass_DrawMode)
+}
+
+// required .KuplungApp.Mesh meshObject = 58;
+inline bool MeshModel::has_meshobject() const {
+  return (_has_bits_[1] & 0x02000000u) != 0;
+}
+inline void MeshModel::set_has_meshobject() {
+  _has_bits_[1] |= 0x02000000u;
+}
+inline void MeshModel::clear_has_meshobject() {
+  _has_bits_[1] &= ~0x02000000u;
+}
+inline void MeshModel::clear_meshobject() {
+  if (meshobject_ != NULL) meshobject_->::KuplungApp::Mesh::Clear();
+  clear_has_meshobject();
+}
+inline const ::KuplungApp::Mesh& MeshModel::meshobject() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.meshObject)
+  return meshobject_ != NULL ? *meshobject_ : *default_instance_->meshobject_;
+}
+inline ::KuplungApp::Mesh* MeshModel::mutable_meshobject() {
+  set_has_meshobject();
+  if (meshobject_ == NULL) meshobject_ = new ::KuplungApp::Mesh;
+  // @@protoc_insertion_point(field_mutable:KuplungApp.MeshModel.meshObject)
+  return meshobject_;
+}
+inline ::KuplungApp::Mesh* MeshModel::release_meshobject() {
+  clear_has_meshobject();
+  ::KuplungApp::Mesh* temp = meshobject_;
+  meshobject_ = NULL;
+  return temp;
+}
+inline void MeshModel::set_allocated_meshobject(::KuplungApp::Mesh* meshobject) {
+  delete meshobject_;
+  meshobject_ = meshobject;
+  if (meshobject) {
+    set_has_meshobject();
+  } else {
+    clear_has_meshobject();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.meshObject)
 }
 
 
