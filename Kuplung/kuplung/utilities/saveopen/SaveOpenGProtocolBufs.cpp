@@ -11,8 +11,9 @@
 #include <fstream>
 #include <glm/gtx/string_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include "kuplung/utilities/minizip/KuplungZip.hpp"
-#include "kuplung/utilities/minizip/KuplungUnzip.hpp"
+//#include "kuplung/utilities/minizip/KuplungZip.hpp"
+//#include "kuplung/utilities/minizip/KuplungUnzip.hpp"
+#include "kuplung/utilities/minizip/KuplungMinizip.hpp"
 
 void SaveOpenGProtocolBufs::init() {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
@@ -58,9 +59,11 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
         kuplungFileScene.close();
     }
 
-    KuplungZip *zipFile = new KuplungZip(fileName.c_str());
+    KuplungMinizip *zipFile = new KuplungMinizip();
+    zipFile->Create(fileName.c_str());
     zipFile->Add(fileNameSettings.c_str(), fileNameZipSettings.c_str());
     zipFile->Add(fileNameScene.c_str(), fileNameZipScene.c_str());
+    zipFile->CloseZip();
     delete zipFile;
 
     boost::filesystem::remove(fileNameSettings.c_str());
@@ -72,8 +75,10 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
 
     std::string zPath = file.path;
     boost::replace_all(zPath, file.title, "");
-    KuplungUnzip *zFile = new KuplungUnzip(file.path.c_str());
+    KuplungMinizip *zFile = new KuplungMinizip();
+    zFile->Open(file.path.c_str());
     if (zFile->UnzipFile(zPath)) {
+        zFile->CloseUnzip();
         delete zFile;
 
         std::string fileNameSettings = file.path + ".settings";
