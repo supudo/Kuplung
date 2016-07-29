@@ -110,6 +110,8 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
         boost::filesystem::remove(fileNameSettings.c_str());
         boost::filesystem::remove(fileNameScene.c_str());
     }
+    else
+        Settings::Instance()->funcDoLog("[KuplungSave Protobuf] Cannot unzip .kuplung file!");
 
     google::protobuf::ShutdownProtobufLibrary();
 
