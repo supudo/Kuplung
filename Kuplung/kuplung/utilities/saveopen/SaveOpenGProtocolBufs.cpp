@@ -74,7 +74,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
     boost::replace_all(zPath, file.title, "");
     KuplungUnzip *zFile = new KuplungUnzip(file.path.c_str());
     if (zFile->UnzipFile(zPath)) {
-//        delete zFile;
+        delete zFile;
 
         std::string fileNameSettings = file.path + ".settings";
         std::string fileNameScene = file.path + ".scene";

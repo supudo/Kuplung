@@ -271,6 +271,7 @@ HEADERS += \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
+    kuplung/utilities/minizip/KuplungMinizip.h \
     kuplung/utilities/minizip/KuplungZip.hpp \
     kuplung/utilities/minizip/KuplungUnzip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \

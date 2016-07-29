@@ -11,10 +11,7 @@
 
 #include <iostream>
 #include <vector>
-
-extern "C" {
-    #include <minizip/zip.h>
-}
+#include <minizip/zip.h>
 
 class KuplungUnzip {
 public:

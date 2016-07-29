@@ -603,6 +603,7 @@
 		8AA9F2381D21741B004A8F1C /* HeightmapGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HeightmapGenerator.hpp; path = pcg/HeightmapGenerator.hpp; sourceTree = "<group>"; };
 		8AA9F2391D21741B004A8F1C /* SpaceshipMeshGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpaceshipMeshGenerator.cpp; path = pcg/SpaceshipMeshGenerator.cpp; sourceTree = "<group>"; };
 		8AA9F23A1D21741B004A8F1C /* SpaceshipMeshGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SpaceshipMeshGenerator.hpp; path = pcg/SpaceshipMeshGenerator.hpp; sourceTree = "<group>"; };
+		8AAB6DF81D4B6670009F7EB6 /* KuplungMinizip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungMinizip.h; path = minizip/KuplungMinizip.h; sourceTree = "<group>"; };
 		8AB273361D2FCC77008508B1 /* RenderingSimple.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingSimple.cpp; path = rendering/RenderingSimple.cpp; sourceTree = "<group>"; };
 		8AB273371D2FCC77008508B1 /* RenderingSimple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingSimple.hpp; path = rendering/RenderingSimple.hpp; sourceTree = "<group>"; };
 		8AB273391D2FCC8D008508B1 /* rendering_simple.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.frag; sourceTree = "<group>"; };
@@ -1277,6 +1278,7 @@
 		8ACDEB701D478D7B005EDF25 /* minizip */ = {
 			isa = PBXGroup;
 			children = (
+				8AAB6DF81D4B6670009F7EB6 /* KuplungMinizip.h */,
 				8ACDEB711D478D85005EDF25 /* KuplungUnzip.cpp */,
 				8ACDEB721D478D85005EDF25 /* KuplungUnzip.hpp */,
 				8ACDEB731D478D85005EDF25 /* KuplungZip.cpp */,
