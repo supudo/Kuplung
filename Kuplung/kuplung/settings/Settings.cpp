@@ -166,18 +166,18 @@ void Settings::setLogFunc(std::function<void(std::string)> doLog) {
     this->funcDoLog = doLog;
 }
 
-void Settings::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) {
+void Settings::saveRecentFiles(std::vector<FBEntity> recentFiles) {
     this->cfgUtils->saveRecentFiles(recentFiles);
 }
 
-std::map <std::string, FBEntity> Settings::loadRecentFiles() {
+std::vector<FBEntity> Settings::loadRecentFiles() {
     return this->cfgUtils->loadRecentFiles();
 }
 
-void Settings::saveRecentFilesImported(std::map <std::string, FBEntity> recentFiles) {
+void Settings::saveRecentFilesImported(std::vector<FBEntity> recentFiles) {
     this->cfgUtils->saveRecentFilesImported(recentFiles);
 }
 
-std::map <std::string, FBEntity> Settings::loadRecentFilesImported() {
+std::vector<FBEntity> Settings::loadRecentFilesImported() {
     return this->cfgUtils->loadRecentFilesImported();
 }

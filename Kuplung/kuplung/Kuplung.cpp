@@ -116,6 +116,8 @@ bool Kuplung::init() {
                 else {
                     Settings::Instance()->setLogFunc(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 
+                    this->initFolders();
+
                     this->parser = new FileModelManager();
                     this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
@@ -143,7 +145,6 @@ bool Kuplung::init() {
 
                     this->managerObjects->loadSystemModels();
 
-                    this->initFolders();
                     this->doLog("App initialized.");
 
                     this->managerControls = new Controls();
@@ -365,85 +366,6 @@ void Kuplung::renderScene() {
 void Kuplung::renderSceneModels() {
     this->managerRendering->render(this->managerObjects);
 
-//    if (Settings::Instance()->DeferredRendering && this->meshModelFaces.size() > 0)
-//        this->renderingManager->render(this->meshModelFaces,
-//                                       this->managerObjects->matrixProjection,
-//                                       this->managerObjects->camera->matrixCamera,
-//                                       this->managerObjects->camera->cameraPosition,
-//                                       this->managerObjects->grid,
-//                                       this->managerObjects->Setting_UIAmbientLight,
-//                                       this->managerObjects->Setting_LightingPass_DrawMode);
-//    else {
-//        int cVertices = 0;
-//        int cIndices = 0;
-//        int cTriangles = 0;
-//        int cFaces = 0;
-//        for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-//            ModelFaceBase* mmf = this->meshModelFaces[i];
-
-//            glm::mat4 mtxModel = glm::mat4(1.0);
-
-//            // reposition like the grid perspective
-//            if (this->managerObjects->Setting_FixedGridWorld)
-//                mtxModel *= this->managerObjects->grid->matrixModel;
-
-//            // scale
-//            mtxModel = glm::scale(mtxModel, glm::vec3(mmf->scaleX->point, mmf->scaleY->point, mmf->scaleZ->point));
-
-//            // rotate
-//            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateX->point), glm::vec3(1, 0, 0));
-//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateY->point), glm::vec3(0, 1, 0));
-//            mtxModel = glm::rotate(mtxModel, glm::radians(mmf->rotateZ->point), glm::vec3(0, 0, 1));
-//            mtxModel = glm::translate(mtxModel, glm::vec3(0, 0, 0));
-
-//            // translate
-//            mtxModel = glm::translate(mtxModel, glm::vec3(mmf->positionX->point, mmf->positionY->point, mmf->positionZ->point));
-
-//            // general
-//            mmf->setOptionsFOV(this->managerObjects->Setting_FOV);
-
-//            // outlining
-//            mmf->setOptionsSelected(this->sceneSelectedModelObject == int(i));
-//            mmf->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
-//            mmf->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
-
-//            // lights
-//            mmf->lightSources = this->managerObjects->lightSources;
-
-//            // skins
-//            mmf->Setting_ModelViewSkin = this->managerObjects->viewModelSkin;
-//            mmf->solidLightSkin_MaterialColor = this->managerObjects->SolidLight_MaterialColor;
-//            mmf->solidLightSkin_Ambient = this->managerObjects->SolidLight_Ambient;
-//            mmf->solidLightSkin_Diffuse = this->managerObjects->SolidLight_Diffuse;
-//            mmf->solidLightSkin_Specular = this->managerObjects->SolidLight_Specular;
-//            mmf->solidLightSkin_Ambient_Strength = this->managerObjects->SolidLight_Ambient_Strength;
-//            mmf->solidLightSkin_Diffuse_Strength = this->managerObjects->SolidLight_Diffuse_Strength;
-//            mmf->solidLightSkin_Specular_Strength = this->managerObjects->SolidLight_Specular_Strength;
-
-//            // rendering
-//            mmf->Setting_LightingPass_DrawMode = this->managerObjects->Setting_LightingPass_DrawMode;
-
-//            // render
-//            mmf->render(this->managerObjects->matrixProjection,
-//                        this->managerObjects->camera->matrixCamera,
-//                        mtxModel,
-//                        this->managerObjects->camera->cameraPosition,
-//                        this->managerObjects->grid,
-//                        this->managerObjects->Setting_UIAmbientLight);
-
-//            cVertices += mmf->meshModel.countVertices;
-//            cIndices += ((*std::max_element(mmf->meshModel.indices.begin(), mmf->meshModel.indices.end())) + 1);
-//            cTriangles += cVertices / 3;
-//            cFaces += cTriangles / 2;
-//        }
-//        Settings::Instance()->sceneCountObjects = int(this->meshModelFaces.size());
-//        Settings::Instance()->sceneCountVertices = cVertices;
-//        Settings::Instance()->sceneCountIndices = cIndices;
-//        Settings::Instance()->sceneCountTriangles = cTriangles;
-//        Settings::Instance()->sceneCountFaces = cFaces;
-//    }
-
     if (this->managerObjects->Setting_ShowTerrain) {
         Settings::Instance()->sceneCountObjects += 1;
         Settings::Instance()->sceneCountVertices += int(this->managerObjects->terrain->terrainGenerator->vertices.size());
@@ -476,15 +398,6 @@ void Kuplung::initSceneGUI() {
     this->managerUI->showControlsModels = true;
     this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
     this->managerUI->recentFilesImported = Settings::Instance()->loadRecentFilesImported();
-
-    // testbed
-//    std::string testObj = "brick_wall.obj";
-//    FBEntity fileTestbed;
-//    fileTestbed.isFile = true;
-//    fileTestbed.extension = ".obj";
-//    fileTestbed.title = testObj;
-//    fileTestbed.path = "/Users/supudo/Software/C++/Kuplung/_objects/" + testObj;
-//    this->guiProcessObjFile(fileTestbed, FileBrowser_ParserType_Own2);
 }
 
 void Kuplung::addShape(ShapeType type) {
@@ -604,7 +517,7 @@ void Kuplung::processParsedObjFile() {
         this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
         this->managerUI->hideParsing();
         this->managerUI->showLoading();
-        this->managerUI->recentFilesAddImported(this->objFiles[this->objFiles.size() - 1].title, this->objFiles[this->objFiles.size() - 1]);
+        this->managerUI->recentFilesAddImported(this->objFiles[this->objFiles.size() - 1]);
 
         for (size_t i=0; i<this->meshModelsNew.size(); i++) {
             MeshModel model = this->meshModelsNew[i];
@@ -667,6 +580,7 @@ void Kuplung::guiClearScreen() {
     this->rayLines.clear();
     this->managerRendering->meshModelFaces.clear();
     this->managerUI->setSceneSelectedModelObject(-1);
+    this->managerObjects->clearAllLights();
 }
 
 void Kuplung::guiEditorshaderCompiled(std::string fileName) {
@@ -722,5 +636,5 @@ void Kuplung::openScene(FBEntity file) {
         this->meshModels.push_back(models[i]->meshModel);
     }
 
-    this->managerUI->recentFilesAdd(file.title, file);
+    this->managerUI->recentFilesAdd(file);
 }

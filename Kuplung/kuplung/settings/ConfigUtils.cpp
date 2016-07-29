@@ -84,7 +84,7 @@ void ConfigUtils::writeString(std::string configKey, std::string configValue) {
     this->configData[configKey] = configValue;
 }
 
-void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) {
+void ConfigUtils::saveRecentFiles(std::vector<FBEntity> recentFiles) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -93,14 +93,11 @@ void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) 
         std::string nlDelimiter = "\n";
 #endif
     std::string recentFilesLines = "# Recent Files list" + nlDelimiter + nlDelimiter;
-    for (std::map<std::string, FBEntity>::iterator iter = recentFiles.begin(); iter != recentFiles.end(); ++iter) {
-        std::string title = iter->first;
-        FBEntity fileEntity = iter->second;
+    for (size_t i=0; i<recentFiles.size(); i++) {
+        FBEntity fileEntity = recentFiles[i];
         recentFilesLines += "# File" + nlDelimiter;
-        recentFilesLines += fileEntity.extension + nlDelimiter;
-        recentFilesLines += fileEntity.path + nlDelimiter;
-        recentFilesLines += fileEntity.size + nlDelimiter;
         recentFilesLines += fileEntity.title + nlDelimiter;
+        recentFilesLines += fileEntity.path + nlDelimiter;
         recentFilesLines += nlDelimiter;
     }
     std::ofstream out(this->recentFilesFile);
@@ -108,8 +105,8 @@ void ConfigUtils::saveRecentFiles(std::map <std::string, FBEntity> recentFiles) 
     out.close();
 }
 
-std::map <std::string, FBEntity> ConfigUtils::loadRecentFiles() {
-    std::map <std::string, FBEntity> recentFiles;
+std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
+    std::vector<FBEntity> recentFiles;
     std::FILE *fp = std::fopen(this->recentFilesFile.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
@@ -133,7 +130,6 @@ std::map <std::string, FBEntity> ConfigUtils::loadRecentFiles() {
         recentFiles = {};
 
         int fileCounter = 0;
-        std::string title = "";
         FBEntity fileEntity;
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
@@ -144,18 +140,17 @@ std::map <std::string, FBEntity> ConfigUtils::loadRecentFiles() {
                 continue;
             }
             else {
-                if (fileCounter == 0) {
-                    fileEntity.isFile = true;
-                    fileEntity.extension = singleLine;
-                }
-                else if (fileCounter == 1)
-                    fileEntity.path = singleLine;
-                else if (fileCounter == 2)
-                    fileEntity.size = singleLine;
-                else if (fileCounter == 3) {
-                    title = singleLine;
+                if (fileCounter == 0)
                     fileEntity.title = singleLine;
-                    recentFiles[title] = fileEntity;
+                else if (fileCounter == 1) {
+                    fileEntity.isFile = true;
+                    fileEntity.path = singleLine;
+
+                    std::vector<std::string> elems;
+                    boost::split(elems, fileEntity.path, boost::is_any_of("."));
+                    fileEntity.extension = elems[elems.size() - 1];
+
+                    recentFiles.push_back(fileEntity);
                 }
                 fileCounter += 1;
             }
@@ -166,7 +161,7 @@ std::map <std::string, FBEntity> ConfigUtils::loadRecentFiles() {
     return recentFiles;
 }
 
-void ConfigUtils::saveRecentFilesImported(std::map <std::string, FBEntity> recentFilesImported) {
+void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> recentFilesImported) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -175,14 +170,11 @@ void ConfigUtils::saveRecentFilesImported(std::map <std::string, FBEntity> recen
         std::string nlDelimiter = "\n";
 #endif
     std::string recentFilesLines = "# Recent Imported Files list" + nlDelimiter + nlDelimiter;
-    for (std::map<std::string, FBEntity>::iterator iter = recentFilesImported.begin(); iter != recentFilesImported.end(); ++iter) {
-        std::string title = iter->first;
-        FBEntity fileEntity = iter->second;
+    for (size_t i=0; i<recentFilesImported.size(); i++) {
+        FBEntity fileEntity = recentFilesImported[i];
         recentFilesLines += "# File" + nlDelimiter;
-        recentFilesLines += fileEntity.extension + nlDelimiter;
-        recentFilesLines += fileEntity.path + nlDelimiter;
-        recentFilesLines += fileEntity.size + nlDelimiter;
         recentFilesLines += fileEntity.title + nlDelimiter;
+        recentFilesLines += fileEntity.path + nlDelimiter;
         recentFilesLines += nlDelimiter;
     }
     std::ofstream out(this->recentFilesFileImported);
@@ -190,8 +182,8 @@ void ConfigUtils::saveRecentFilesImported(std::map <std::string, FBEntity> recen
     out.close();
 }
 
-std::map <std::string, FBEntity> ConfigUtils::loadRecentFilesImported() {
-    std::map <std::string, FBEntity> recentFiles;
+std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
+    std::vector<FBEntity> recentFiles;
     std::FILE *fp = std::fopen(this->recentFilesFileImported.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
@@ -215,7 +207,6 @@ std::map <std::string, FBEntity> ConfigUtils::loadRecentFilesImported() {
         recentFiles = {};
 
         int fileCounter = 0;
-        std::string title = "";
         FBEntity fileEntity;
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
@@ -226,18 +217,17 @@ std::map <std::string, FBEntity> ConfigUtils::loadRecentFilesImported() {
                 continue;
             }
             else {
-                if (fileCounter == 0) {
-                    fileEntity.isFile = true;
-                    fileEntity.extension = singleLine;
-                }
-                else if (fileCounter == 1)
-                    fileEntity.path = singleLine;
-                else if (fileCounter == 2)
-                    fileEntity.size = singleLine;
-                else if (fileCounter == 3) {
-                    title = singleLine;
+                if (fileCounter == 0)
                     fileEntity.title = singleLine;
-                    recentFiles[title] = fileEntity;
+                else if (fileCounter == 1) {
+                    fileEntity.isFile = true;
+                    fileEntity.path = singleLine;
+
+                    std::vector<std::string> elems;
+                    boost::split(elems, fileEntity.path, boost::is_any_of("."));
+                    fileEntity.extension = elems[elems.size() - 1];
+
+                    recentFiles.push_back(fileEntity);
                 }
                 fileCounter += 1;
             }

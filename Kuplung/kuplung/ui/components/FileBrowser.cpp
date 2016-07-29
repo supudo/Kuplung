@@ -9,6 +9,8 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/lexical_cast.hpp>
@@ -120,7 +122,17 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
                         break;
                 }
                 this->processFile(entity, t, TextureType);
-                Settings::Instance()->currentFolder = entity.path;
+
+#ifdef _WIN32
+        std::string folderDelimiter = "\";
+#else
+        std::string folderDelimiter = "/";
+#endif
+                std::vector<std::string> elems;
+                boost::split(elems, entity.path, boost::is_any_of(folderDelimiter));
+                elems.pop_back();
+
+                Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
                 Settings::Instance()->saveSettings();
             }
             else {

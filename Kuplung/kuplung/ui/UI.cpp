@@ -73,6 +73,8 @@ void UI::init(SDL_Window *window,
     this->showSaveDialog = false;
     this->showOpenDialog = false;
     this->showRenderer = false;
+    this->showRecentFileDoesntExists = false;
+    this->showRecentFileImportedDoesntExists = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -141,11 +143,14 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 if (this->recentFiles.size() == 0)
                     ImGui::MenuItem("No recent files", NULL, false, false);
                 else {
-                    for (std::map<std::string, FBEntity>::iterator iter = this->recentFiles.begin(); iter != this->recentFiles.end(); ++iter) {
-                        std::string title = iter->first;
-                        FBEntity file = iter->second;
-                        if (ImGui::MenuItem(title.c_str(), NULL, false, true))
-                            this->funcOpenScene(file);
+                    for (size_t i=0; i<this->recentFiles.size(); i++) {
+                        FBEntity file = this->recentFiles[i];
+                        if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
+                            if (boost::filesystem::exists(file.path))
+                                this->funcOpenScene(file);
+                            else
+                                this->showRecentFileDoesntExists = true;
+                        }
                     }
                     ImGui::Separator();
                     if (ImGui::MenuItem("Clear recent files", NULL, false))
@@ -168,26 +173,29 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 if (this->recentFilesImported.size() == 0)
                     ImGui::MenuItem("No recent files", NULL, false, false);
                 else {
-                    for (std::map<std::string, FBEntity>::iterator iter = this->recentFilesImported.begin(); iter != this->recentFilesImported.end(); ++iter) {
-                        std::string title = iter->first;
-                        FBEntity file = iter->second;
-                        if (ImGui::MenuItem(title.c_str(), NULL, false, true)) {
-                            FileBrowser_ParserType t;
-                            switch (Settings::Instance()->ModelFileParser) {
-                                case 0:
-                                    t = FileBrowser_ParserType_Own1;
-                                    break;
-                                case 1:
-                                    t = FileBrowser_ParserType_Own2;
-                                    break;
-                                case 2:
-                                    t = FileBrowser_ParserType_Assimp;
-                                    break;
-                                default:
-                                    t = FileBrowser_ParserType_Assimp;
-                                    break;
+                    for (size_t i=0; i<this->recentFilesImported.size(); i++) {
+                        FBEntity file = this->recentFilesImported[i];
+                        if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
+                            if (boost::filesystem::exists(file.path)) {
+                                FileBrowser_ParserType t;
+                                switch (Settings::Instance()->ModelFileParser) {
+                                    case 0:
+                                        t = FileBrowser_ParserType_Own1;
+                                        break;
+                                    case 1:
+                                        t = FileBrowser_ParserType_Own2;
+                                        break;
+                                    case 2:
+                                        t = FileBrowser_ParserType_Assimp;
+                                        break;
+                                    default:
+                                        t = FileBrowser_ParserType_Assimp;
+                                        break;
+                                }
+                                this->funcProcessFile(file, t);
                             }
-                            this->funcProcessFile(file, t);
+                            else
+                                this->showRecentFileImportedDoesntExists = true;
                         }
                     }
                     ImGui::Separator();
@@ -279,6 +287,12 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::EndMainMenuBar();
     }
 
+    if (this->showRecentFileDoesntExists)
+        this->popupRecentFileDoesntExists();
+
+    if (this->showRecentFileImportedDoesntExists)
+        this->popupRecentFileImportedDoesntExists();
+
     if (this->showSaveDialog)
         this->dialogFileSave(FileSaverOperation_SaveScene);
 
@@ -360,6 +374,42 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::ShowTestWindow(&this->showDemoWindow);
 }
 
+void UI::popupRecentFileDoesntExists() {
+    ImGui::OpenPopup("Warning");
+    ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("This file no longer exists!");
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) {
+        std::vector<FBEntity> recents;
+        for (size_t i=0; i<this->recentFiles.size(); i++) {
+            if (boost::filesystem::exists(this->recentFiles[i].path))
+                recents.push_back(this->recentFiles[i]);
+        }
+        this->recentFiles = recents;
+        Settings::Instance()->saveRecentFiles(this->recentFiles);
+        this->showRecentFileDoesntExists = false;
+        ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
+}
+
+void UI::popupRecentFileImportedDoesntExists() {
+    ImGui::OpenPopup("Warning");
+    ImGui::BeginPopupModal("Warning", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("This file no longer exists!");
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) {
+        std::vector<FBEntity> recents;
+        for (size_t i=0; i<this->recentFilesImported.size(); i++) {
+            if (boost::filesystem::exists(this->recentFilesImported[i].path))
+                recents.push_back(this->recentFilesImported[i]);
+        }
+        this->recentFilesImported = recents;
+        Settings::Instance()->saveRecentFilesImported(this->recentFilesImported);
+        this->showRecentFileImportedDoesntExists = false;
+        ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
+}
+
 void UI::renderEnd() {
     if (this->needsFontChange) {
         this->windowOptions->loadFonts(&this->needsFontChange);
@@ -370,9 +420,18 @@ void UI::renderEnd() {
     this->imguiImplementation->ImGui_Implementation_RenderDrawLists();
 }
 
-void UI::recentFilesAdd(std::string title, FBEntity file) {
-    this->recentFiles[title] = file;
-    Settings::Instance()->saveRecentFiles(this->recentFiles);
+void UI::recentFilesAdd(FBEntity file) {
+    bool exists = false;
+    for (size_t i=0; i<this->recentFiles.size(); i++) {
+        if (this->recentFiles[i].path == file.path) {
+            exists = true;
+            break;
+        }
+    }
+    if (!exists) {
+        this->recentFiles.push_back(file);
+        Settings::Instance()->saveRecentFiles(this->recentFiles);
+    }
 }
 
 void UI::recentFilesClear() {
@@ -380,9 +439,18 @@ void UI::recentFilesClear() {
     Settings::Instance()->saveRecentFiles(this->recentFiles);
 }
 
-void UI::recentFilesAddImported(std::string title, FBEntity file) {
-    this->recentFilesImported[title] = file;
-    Settings::Instance()->saveRecentFilesImported(this->recentFilesImported);
+void UI::recentFilesAddImported(FBEntity file) {
+    bool exists = false;
+    for (size_t i=0; i<this->recentFilesImported.size(); i++) {
+        if (this->recentFilesImported[i].path == file.path) {
+            exists = true;
+            break;
+        }
+    }
+    if (!exists) {
+        this->recentFilesImported.push_back(file);
+        Settings::Instance()->saveRecentFilesImported(this->recentFilesImported);
+    }
 }
 
 void UI::recentFilesClearImported() {

@@ -42,6 +42,7 @@ public:
     void resetSettings();
     void generateTerrain();
     void generateSpaceship();
+    void clearAllLights();
 
     void initCamera();
     void initCameraModel();

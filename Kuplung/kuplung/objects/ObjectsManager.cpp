@@ -385,6 +385,13 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
     this->lightSources.push_back(lightObject);
 }
 
+void ObjectsManager::clearAllLights() {
+    for (size_t i=0; i<this->lightSources.size(); i++) {
+        this->lightSources[i]->destroy();
+    }
+    this->lightSources.clear();
+}
+
 /*
  *
  * Utilities

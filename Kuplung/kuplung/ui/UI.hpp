@@ -51,9 +51,9 @@ public:
     void doLog(std::string message);
     void setSceneSelectedModelObject(int sceneSelectedModelObject);
 
-    void recentFilesAdd(std::string title, FBEntity file);
+    void recentFilesAdd(FBEntity file);
     void recentFilesClear();
-    void recentFilesAddImported(std::string title, FBEntity file);
+    void recentFilesAddImported(FBEntity file);
     void recentFilesClearImported();
     bool isMouseOnGUI();
     void showParsing();
@@ -69,7 +69,7 @@ public:
     bool showControlsGUI;
     bool showControlsModels;
     float parsingPercentage;
-    std::map <std::string, FBEntity> recentFiles, recentFilesImported;
+    std::vector<FBEntity> recentFiles, recentFilesImported;
 
 private:
     SDL_Window *sdlWindow;
@@ -102,6 +102,8 @@ private:
     void dialogControlsGUI();
     void dialogControlsModels(int * sceneSelectedModelObject);
     void dialogFileSave(FileSaverOperation type);
+    void popupRecentFileDoesntExists();
+    void popupRecentFileImportedDoesntExists();
 
     SDL2OpenGL32 *imguiImplementation;
     ObjectsManager *managerObjects;
@@ -133,6 +135,8 @@ private:
     bool showOBJExporter;
     bool showImageSave;
     bool showRenderer;
+    bool showRecentFileDoesntExists;
+    bool showRecentFileImportedDoesntExists;
 };
 
 #endif /* UI_hpp */
