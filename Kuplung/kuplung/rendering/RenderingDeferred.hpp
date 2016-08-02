@@ -22,6 +22,8 @@ public:
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
 
+    std::vector<glm::vec3> objectPositions;
+
 private:
     bool initGeometryPass();
     bool initLighingPass();
@@ -50,7 +52,6 @@ private:
     GLuint gBuffer, gPosition, gNormal, gAlbedoSpec;
 
     const GLuint NR_LIGHTS = 32;
-    std::vector<glm::vec3> objectPositions;
     std::vector<glm::vec3> lightPositions;
     std::vector<glm::vec3> lightColors;
 

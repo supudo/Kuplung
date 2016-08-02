@@ -160,6 +160,7 @@ void RenderingDeferred::initProps() {
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gNormal"), 1);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gAlbedoSpec"), 2);
 
+    //TODO: parametrize this in the GUI
     this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
     this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
     this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
@@ -173,6 +174,8 @@ void RenderingDeferred::initProps() {
     for (size_t i=0; i<this->objectPositions.size(); i++) {
         this->objectPositions[i] *= glm::vec3(1.0, 0.0, 1.0);
     }
+
+//    this->objectPositions.push_back(glm::vec3(0.0, 0.0, 0.0));
 
     // - Colors
     srand(13);
@@ -342,7 +345,8 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
-        matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
+        if (this->objectPositions.size() > 1)
+            matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
 
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
