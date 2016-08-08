@@ -32,7 +32,7 @@ Settings* Settings::Instance() {
 #pragma mark - Init
 
 void Settings::initSettings() {
-    this->cfgUtils = new ConfigUtils();
+    this->cfgUtils = std::make_unique<ConfigUtils>();
     this->cfgUtils->init(Settings::Instance()->appFolder());
 
     m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");

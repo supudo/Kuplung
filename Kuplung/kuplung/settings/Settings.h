@@ -51,7 +51,7 @@ private:
 
     void initSettings();
 
-    ConfigUtils *cfgUtils;
+    std::unique_ptr<ConfigUtils> cfgUtils;
 };
 
 #endif /* Settings_h */

@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-CONFIG += c++11
+CONFIG += c++14
 CONFIG += app_bundle
 CONFIG -= console
 CONFIG -= qt
@@ -18,7 +18,8 @@ CONFIG(release, debug|release) {
 }
 
 mac {
-    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_CXXFLAGS += -std=c++14
+    QMAKE_CXXFLAGS += -stdlib=libc++
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
@@ -54,8 +55,8 @@ mac {
 #    LIBS += -lSDL2 -lGLFW3 -lAssimp -lGLFW3
 #    INCLUDEPATH += /usr/local/include
 
-    LIBS += -L/usr/local/Cellar/boost/1.60.0_2/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.60.0_2/include
+    LIBS += -L/usr/local/Cellar/boost/1.61.0/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.61.0/include
 
     LIBS += -L/usr/local/Cellar/glm/0.9.7.4/lib
     INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.4/include

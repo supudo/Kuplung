@@ -1572,14 +1572,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.60.0_2/include/boost,
+					/usr/local/Cellar/boost/1.61.0/include/boost,
 					/usr/local/Cellar/glfw3/3.2/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.4/include,
@@ -1591,7 +1591,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.60.0_2/lib,
+					/usr/local/Cellar/boost/1.61.0/lib,
 					/usr/local/Cellar/glfw3/3.2/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.4/lib,
@@ -1626,14 +1626,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
-					/usr/local/Cellar/boost/1.60.0_2/include/boost,
+					/usr/local/Cellar/boost/1.61.0/include/boost,
 					/usr/local/Cellar/glfw3/3.2/include,
 					/usr/local/Cellar/sdl2/2.0.4/include,
 					/usr/local/Cellar/glm/0.9.7.4/include,
@@ -1645,7 +1645,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					/usr/lib,
-					/usr/local/Cellar/boost/1.60.0_2/lib,
+					/usr/local/Cellar/boost/1.61.0/lib,
 					/usr/local/Cellar/glfw3/3.2/lib,
 					/usr/local/Cellar/sdl2/2.0.4/lib,
 					/usr/local/Cellar/glm/0.9.7.4/lib,

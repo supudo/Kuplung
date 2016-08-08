@@ -161,21 +161,21 @@ void RenderingDeferred::initProps() {
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gAlbedoSpec"), 2);
 
     //TODO: parametrize this in the GUI
-    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
-    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
-    this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
-    this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
-    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
-    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
-    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
-    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
-    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
+//    this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
+//    this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
+//    this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
+
+    this->objectPositions.push_back(glm::vec3(0.0, 0.0, 0.0));
 
     for (size_t i=0; i<this->objectPositions.size(); i++) {
         this->objectPositions[i] *= glm::vec3(1.0, 0.0, 1.0);
     }
-
-//    this->objectPositions.push_back(glm::vec3(0.0, 0.0, 0.0));
 
     // - Colors
     srand(13);

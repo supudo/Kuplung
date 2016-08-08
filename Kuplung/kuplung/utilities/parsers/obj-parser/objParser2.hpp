@@ -17,8 +17,8 @@ struct PackedVertex {
     glm::vec3 position;
     glm::vec2 uv;
     glm::vec3 normal;
-    bool operator<(const PackedVertex that) const{
-        return memcmp((void*)this, (void*)&that, sizeof(PackedVertex))>0;
+    bool operator<(const PackedVertex that) const {
+        return memcmp((void*)this, (void*)&that, sizeof(PackedVertex)) > 0;
     };
 };
 
