@@ -16,16 +16,18 @@
 
 class Camera {
 public:
+    ~Camera();
+    Camera();
     void destroy();
     void initProperties();
     void render();
     glm::vec3 createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far);
     PixelDataPoint getClickData(int x, int y, int height);
 
-    ObjectEye *eyeSettings;
-    ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-    ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
+    std::unique_ptr<ObjectEye> eyeSettings;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
 
     glm::vec3 cameraPosition;
     glm::mat4 matrixCamera;

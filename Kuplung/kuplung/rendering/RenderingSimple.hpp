@@ -15,19 +15,20 @@
 
 class RenderingSimple {
 public:
-    RenderingSimple();
+    RenderingSimple(ObjectsManager &managerObjects);
+    RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
     ~RenderingSimple();
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
+    void render(std::vector<ModelFaceData*> meshModelFaces);
 
 private:
     GLUtils *glUtils;
+    ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;
     glm::vec3 vecCameraPosition, uiAmbientLight;
-    WorldGrid *grid;
 
     GLuint shaderProgram;
 

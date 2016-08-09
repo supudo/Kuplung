@@ -46,6 +46,8 @@ struct PixelDataPoint {
 };
 
 struct ObjectCoordinate {
+    ObjectCoordinate() { this->animate = false; this->point = 0.0f; }
+    ObjectCoordinate(bool a, float p) : animate(a), point(p) { this->animate = a; this->point = p; }
     bool animate;
     float point;
 };
@@ -57,6 +59,10 @@ struct ObjectEye {
 };
 
 struct MaterialColor {
+    MaterialColor()
+        { this->colorPickerOpen = false; this->animate = false; this->strength = 0.0f; this->color = glm::vec3(1, 1, 1); }
+    MaterialColor(bool cpo, bool a, float s, glm::vec3 c) : colorPickerOpen(cpo), animate(a), strength(s), color(c)
+        { this->colorPickerOpen = cpo; this->animate = a; this->strength = s; this->color = c; }
     bool colorPickerOpen;
     bool animate;
     float strength;

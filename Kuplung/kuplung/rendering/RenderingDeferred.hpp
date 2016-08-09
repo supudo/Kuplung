@@ -16,11 +16,12 @@
 
 class RenderingDeferred {
 public:
+    RenderingDeferred(ObjectsManager &managerObjects);
     ~RenderingDeferred();
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
+    void render(std::vector<ModelFaceData*> meshModelFaces);
 
     std::vector<glm::vec3> objectPositions;
 
@@ -33,13 +34,14 @@ private:
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
     void initLights();
 
-    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
-    void renderLightingPass(std::unique_ptr<ObjectsManager> &managerObjects);
-    void renderLightObjects(std::unique_ptr<ObjectsManager> &managerObjects);
+    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces);
+    void renderLightingPass();
+    void renderLightObjects();
 
     glm::mat4 matrixProject, matrixCamera;
 
     GLUtils *glUtils;
+    ObjectsManager &managerObjects;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;
     GLint gl_GeometryPass_Texture_Diffuse, gl_GeometryPass_Texture_Specular;

@@ -45,7 +45,9 @@ private:
     glm::vec2 setVec2(const KuplungApp::Vec2& v);
 
     KuplungApp::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate* v);
+    KuplungApp::ObjectCoordinate* getObjectCoordinate2(ObjectCoordinate& v);
     ObjectCoordinate* setObjectCoordinate(const KuplungApp::ObjectCoordinate& v);
+    std::unique_ptr<ObjectCoordinate> setObjectCoordinate2(const KuplungApp::ObjectCoordinate& v);
 
     KuplungApp::MaterialColor* getMaterialColor(MaterialColor* v);
     MaterialColor* setMaterialColor(const KuplungApp::MaterialColor& v);

@@ -20,21 +20,21 @@ struct RenderingForward_LightSource {
 
 class RenderingForward {
 public:
-    RenderingForward();
+    RenderingForward(ObjectsManager &managerObjects);
     ~RenderingForward();
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
+    void render(std::vector<ModelFaceData*> meshModelFaces);
 
 private:
     bool initShaderProgram();
 
     GLUtils *glUtils;
+    ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;
     glm::vec3 vecCameraPosition, uiAmbientLight;
-    WorldGrid *grid;
     int lightingPass_DrawMode;
 
     // light

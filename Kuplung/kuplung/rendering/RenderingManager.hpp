@@ -9,16 +9,19 @@
 #ifndef RenderingManager_hpp
 #define RenderingManager_hpp
 
-#include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/rendering/RenderingSimple.hpp"
 #include "kuplung/rendering/RenderingForward.hpp"
 #include "kuplung/rendering/RenderingDeferred.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 class RenderingManager {
 public:
+    RenderingManager(ObjectsManager &managerObjects);
+    ~RenderingManager();
+    void destroy();
     void init();
-    void render(std::unique_ptr<ObjectsManager> &managerObjects);
+    void render();
 
     int RenderingTotalVertices;
     int RenderingTotalIndices;
@@ -28,9 +31,11 @@ public:
     std::vector<ModelFaceData*> meshModelFaces;
 
 private:
-    RenderingSimple *rendererSimple;
-    RenderingForward *rendererForward;
-    RenderingDeferred *rendererDeferred;
+    ObjectsManager &managerObjects;
+
+    std::unique_ptr<RenderingSimple> rendererSimple;
+    std::unique_ptr<RenderingForward> rendererForward;
+    std::unique_ptr<RenderingDeferred> rendererDeferred;
 };
 
 #endif /* RenderingManager_hpp */

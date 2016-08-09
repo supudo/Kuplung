@@ -36,29 +36,29 @@ void Light::destroy() {
 
     glDeleteVertexArrays(1, &this->glVAO);
 
-    delete this->positionX;
-    delete this->positionY;
-    delete this->positionZ;
-    delete this->directionX;
-    delete this->directionY;
-    delete this->directionZ;
-    delete this->scaleX;
-    delete this->scaleY;
-    delete this->scaleZ;
-    delete this->rotateX;
-    delete this->rotateY;
-    delete this->rotateZ;
-    delete this->rotateCenterX;
-    delete this->rotateCenterY;
-    delete this->rotateCenterZ;
-    delete this->ambient;
-    delete this->diffuse;
-    delete this->specular;
-    delete this->lCutOff;
-    delete this->lOuterCutOff;
-    delete this->lConstant;
-    delete this->lLinear;
-    delete this->lQuadratic;
+    this->positionX.reset();
+    this->positionY.reset();
+    this->positionZ.reset();
+    this->directionX.reset();
+    this->directionY.reset();
+    this->directionZ.reset();
+    this->scaleX.reset();
+    this->scaleY.reset();
+    this->scaleZ.reset();
+    this->rotateX.reset();
+    this->rotateY.reset();
+    this->rotateZ.reset();
+    this->rotateCenterX.reset();
+    this->rotateCenterY.reset();
+    this->rotateCenterZ.reset();
+    this->ambient.reset();
+    this->diffuse.reset();
+    this->specular.reset();
+    this->lCutOff.reset();
+    this->lOuterCutOff.reset();
+    this->lConstant.reset();
+    this->lLinear.reset();
+    this->lQuadratic.reset();
 }
 
 #pragma mark - Initialization
@@ -77,56 +77,56 @@ void Light::initProperties(LightSourceType type) {
     this->showLampDirection = true;
     this->showInWire = false;
 
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 5.0f });
+    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 5.0f);
 
-    this->directionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->directionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -2.0f });
-    this->directionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->directionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->directionY = std::make_unique<ObjectCoordinate>(false, -2.0f);
+    this->directionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+    this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f);
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f }); // -71.0f
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f }); // -36.0f
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f); // -71.0f
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f); // -36.0f
+    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateCenterY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateCenterZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->ambient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.3f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->diffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+    this->ambient = std::make_unique<MaterialColor>(false, false, 0.3f, glm::vec3(1.0, 1.0, 1.0));
+    this->diffuse = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
 
     switch (type) {
         case LightSourceType_Directional: {
-            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 0.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+            this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
             break;
         }
         case LightSourceType_Point: {
-            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.2f });
-            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.05f });
-            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+            this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.2f);
+            this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.05f);
+            this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
             break;
         }
         case LightSourceType_Spot: {
-            this->lConstant = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-            this->lLinear = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-            this->lQuadratic = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.032f });
-            this->specular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0f, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
+            this->lConstant = std::make_unique<ObjectCoordinate>(false, 1.0f);
+            this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.032f);
+            this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
             break;
         }
         default:
             break;
     }
-    this->lCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -180.0f });
-    this->lOuterCutOff = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 160.0f });
+    this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
+    this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
 
     this->matrixModel = glm::mat4(1.0);
 }

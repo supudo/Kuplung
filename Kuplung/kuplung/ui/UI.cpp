@@ -36,7 +36,6 @@ void UI::init(SDL_Window *window,
               std::function<void(FBEntity file)> openScene
               ) {
     this->sdlWindow = window;
-    this->managerObjects = managerObjects;
     this->funcQuitApp = quitApp;
     this->funcProcessFile = processFile;
     this->funcNewScene = newScene;

@@ -34,9 +34,9 @@ public:
 
     MirrorSurface *mirrorSurface;
     bool showGrid, actAsMirror;
-    ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
 
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;

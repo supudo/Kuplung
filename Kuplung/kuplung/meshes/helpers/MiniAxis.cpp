@@ -18,9 +18,9 @@ MiniAxis::~MiniAxis() {
 }
 
 void MiniAxis::destroy() {
-    delete this->rotateX;
-    delete this->rotateY;
-    delete this->rotateZ;
+    this->rotateX.reset();
+    this->rotateY.reset();
+    this->rotateZ.reset();
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
@@ -45,9 +45,9 @@ void MiniAxis::init() {
 void MiniAxis::initProperties() {
     this->showAxis = true;
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->matrixModel = glm::mat4(1.0);
 }

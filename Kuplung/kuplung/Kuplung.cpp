@@ -172,7 +172,7 @@ bool Kuplung::init() {
                     this->imageRenderer = std::make_unique<ImageRenderer>();
                     this->imageRenderer->init();
 
-                    this->managerRendering = std::make_unique<RenderingManager>();
+                    this->managerRendering = std::make_unique<RenderingManager>(*this->managerObjects);
                     this->managerRendering->init();
 
                     this->managerSaveOpen = std::make_unique<SaveOpen>();
@@ -362,7 +362,7 @@ void Kuplung::renderScene() {
 }
 
 void Kuplung::renderSceneModels() {
-    this->managerRendering->render(this->managerObjects);
+    this->managerRendering->render();
 
     if (this->managerObjects->Setting_ShowTerrain) {
         Settings::Instance()->sceneCountObjects += 1;

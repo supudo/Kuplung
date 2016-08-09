@@ -8,14 +8,25 @@
 
 #include "RenderingManager.hpp"
 
+RenderingManager::RenderingManager(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
+}
+
+RenderingManager::~RenderingManager() {
+    this->destroy();
+}
+
+void RenderingManager::destroy() {
+}
+
 void RenderingManager::init() {
-    this->rendererSimple = new RenderingSimple();
+    this->rendererSimple = std::make_unique<RenderingSimple>(this->managerObjects);
     this->rendererSimple->init();
 
-    this->rendererForward = new RenderingForward();
+    this->rendererForward = std::make_unique<RenderingForward>(this->managerObjects);
     this->rendererForward->init();
 
-    this->rendererDeferred = new RenderingDeferred();
+    this->rendererDeferred = std::make_unique<RenderingDeferred>(this->managerObjects);
     this->rendererDeferred->init();
 
     this->RenderingTotalVertices = 0;
@@ -24,16 +35,16 @@ void RenderingManager::init() {
     this->RenderingTotalFaces = 0;
 }
 
-void RenderingManager::render(std::unique_ptr<ObjectsManager> &managerObjects) {
+void RenderingManager::render() {
     switch (Settings::Instance()->RendererType) {
         case 0:
-            this->rendererSimple->render(this->meshModelFaces, managerObjects);
+            this->rendererSimple->render(this->meshModelFaces);
             break;
         case 1:
-            this->rendererForward->render(this->meshModelFaces, managerObjects);
+            this->rendererForward->render(this->meshModelFaces);
             break;
         case 2:
-            this->rendererDeferred->render(this->meshModelFaces, managerObjects);
+            this->rendererDeferred->render(this->meshModelFaces);
             break;
         default:
             break;

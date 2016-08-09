@@ -13,6 +13,7 @@
  * Constructor & Destructor
  *
  */
+
 ObjectsManager::ObjectsManager() {
 }
 
@@ -82,14 +83,14 @@ void ObjectsManager::render() {
         ahPosition /= 2;
         //ahPosition += 1;
 
-        this->axisHelpers_xMinus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(- ahPosition, 0, 0));
-        this->axisHelpers_xPlus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(ahPosition, 0, 0));
+        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(- ahPosition, 0, 0));
+        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(ahPosition, 0, 0));
 
-        this->axisHelpers_yMinus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, - ahPosition, 0));
-        this->axisHelpers_yPlus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, ahPosition, 0));
+        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, - ahPosition, 0));
+        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, ahPosition, 0));
 
-        this->axisHelpers_zMinus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, - ahPosition));
-        this->axisHelpers_zPlus->render(this->camera, this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, ahPosition));
+        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, - ahPosition));
+        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, ahPosition));
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 

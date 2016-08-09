@@ -28,11 +28,11 @@ public:
     void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
     MeshModel meshModel;
 
-    ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-    ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
-    ObjectCoordinate *innerLightDirectionX, *innerLightDirectionY, *innerLightDirectionZ;
-    ObjectCoordinate *colorR, *colorG, *colorB;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
+    std::unique_ptr<ObjectCoordinate> innerLightDirectionX, innerLightDirectionY, innerLightDirectionZ;
+    std::unique_ptr<ObjectCoordinate> colorR, colorG, colorB;
     bool showCameraObject, showInWire;
 
     glm::mat4 matrixProjection;

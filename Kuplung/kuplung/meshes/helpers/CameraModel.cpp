@@ -14,25 +14,25 @@
 #include <fstream>
 
 void CameraModel::destroy() {
-    delete this->positionX;
-    delete this->positionY;
-    delete this->positionZ;
+    this->positionX.reset();
+    this->positionY.reset();
+    this->positionZ.reset();
 
-    delete this->rotateX;
-    delete this->rotateY;
-    delete this->rotateZ;
+    this->rotateX.reset();
+    this->rotateY.reset();
+    this->rotateZ.reset();
 
-    delete this->rotateCenterX;
-    delete this->rotateCenterY;
-    delete this->rotateCenterZ;
+    this->rotateCenterX.reset();
+    this->rotateCenterY.reset();
+    this->rotateCenterZ.reset();
 
-    delete this->innerLightDirectionX;
-    delete this->innerLightDirectionY;
-    delete this->innerLightDirectionZ;
+    this->innerLightDirectionX.reset();
+    this->innerLightDirectionY.reset();
+    this->innerLightDirectionZ.reset();
 
-    delete this->colorR;
-    delete this->colorG;
-    delete this->colorB;
+    this->colorR.reset();
+    this->colorG.reset();
+    this->colorB.reset();
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);
@@ -57,25 +57,25 @@ void CameraModel::setModel(MeshModel meshModel) {
 }
 
 void CameraModel::initProperties() {
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -6.0f });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -2.0f });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 3.0f });
+    this->positionX = std::make_unique<ObjectCoordinate>(false, -6.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, -2.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 3.0f);
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 300.0f });
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 300.0f);
 
-    this->rotateCenterX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateCenterY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 35.0f });
-    this->rotateCenterZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateCenterX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateCenterY = std::make_unique<ObjectCoordinate>(false, 35.0f);
+    this->rotateCenterZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->innerLightDirectionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->innerLightDirectionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.055f });
-    this->innerLightDirectionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.206f });
+    this->innerLightDirectionX = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->innerLightDirectionY = std::make_unique<ObjectCoordinate>(false, 0.055f);
+    this->innerLightDirectionZ = std::make_unique<ObjectCoordinate>(false, 0.206f);
 
-    this->colorR = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
-    this->colorG = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
-    this->colorB = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.61f });
+    this->colorR = std::make_unique<ObjectCoordinate>(false, 0.61f);
+    this->colorG = std::make_unique<ObjectCoordinate>(false, 0.61f);
+    this->colorB = std::make_unique<ObjectCoordinate>(false, 0.61f);
 
     this->matrixCamera = glm::mat4(1.0);
     this->matrixModel = glm::mat4(1.0);

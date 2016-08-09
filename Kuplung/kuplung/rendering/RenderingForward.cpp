@@ -11,7 +11,8 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <fstream>
 
-RenderingForward::RenderingForward() {
+RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
 }
 
 RenderingForward::~RenderingForward() {
@@ -303,13 +304,12 @@ bool RenderingForward::initShaderProgram() {
     return success;
 }
 
-void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
-    this->matrixProjection = managerObjects->matrixProjection;
-    this->matrixCamera = managerObjects->camera->matrixCamera;
-    this->vecCameraPosition = managerObjects->camera->cameraPosition;
-    this->uiAmbientLight = managerObjects->Setting_UIAmbientLight;
-    this->grid = managerObjects->grid;
-    this->lightingPass_DrawMode = managerObjects->Setting_LightingPass_DrawMode;
+void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces) {
+    this->matrixProjection = managerObjects.matrixProjection;
+    this->matrixCamera = managerObjects.camera->matrixCamera;
+    this->vecCameraPosition = managerObjects.camera->cameraPosition;
+    this->uiAmbientLight = managerObjects.Setting_UIAmbientLight;
+    this->lightingPass_DrawMode = managerObjects.Setting_LightingPass_DrawMode;
 
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
@@ -320,7 +320,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, std::u
         ModelFaceData *mfd = meshModelFaces[i];
 
         glm::mat4 matrixModel = glm::mat4(1.0);
-        matrixModel *= this->grid->matrixModel;
+        matrixModel *= this->managerObjects.grid->matrixModel;
         // scale
         matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
         // rotate
@@ -335,11 +335,11 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, std::u
         mfd->matrixProjection = this->matrixProjection;
         mfd->matrixCamera = this->matrixCamera;
         mfd->matrixModel = matrixModel;
-        mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
-        mfd->lightSources = managerObjects->lightSources;
-        mfd->setOptionsFOV(managerObjects->Setting_FOV);
-        mfd->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
-        mfd->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
+        mfd->Setting_ModelViewSkin = managerObjects.viewModelSkin;
+        mfd->lightSources = managerObjects.lightSources;
+        mfd->setOptionsFOV(managerObjects.Setting_FOV);
+        mfd->setOptionsOutlineColor(managerObjects.Setting_OutlineColor);
+        mfd->setOptionsOutlineThickness(managerObjects.Setting_OutlineThickness);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -405,13 +405,13 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, std::u
         glUniform3f(this->glFS_solidSkin_materialColor, mfd->solidLightSkin_MaterialColor.r, mfd->solidLightSkin_MaterialColor.g, mfd->solidLightSkin_MaterialColor.b);
 
         glUniform1i(this->solidLight->gl_InUse, 1);
-        glUniform3f(this->solidLight->gl_Direction, managerObjects->SolidLight_Direction.x, managerObjects->SolidLight_Direction.y, managerObjects->SolidLight_Direction.z);
-        glUniform3f(this->solidLight->gl_Ambient, managerObjects->SolidLight_Ambient.r, managerObjects->SolidLight_Ambient.g, managerObjects->SolidLight_Ambient.b);
-        glUniform3f(this->solidLight->gl_Diffuse, managerObjects->SolidLight_Diffuse.r, managerObjects->SolidLight_Diffuse.g, managerObjects->SolidLight_Diffuse.b);
-        glUniform3f(this->solidLight->gl_Specular, managerObjects->SolidLight_Specular.r, managerObjects->SolidLight_Specular.g, managerObjects->SolidLight_Specular.b);
-        glUniform1f(this->solidLight->gl_StrengthAmbient, managerObjects->SolidLight_Ambient_Strength);
-        glUniform1f(this->solidLight->gl_StrengthDiffuse, managerObjects->SolidLight_Diffuse_Strength);
-        glUniform1f(this->solidLight->gl_StrengthSpecular, managerObjects->SolidLight_Specular_Strength);
+        glUniform3f(this->solidLight->gl_Direction, managerObjects.SolidLight_Direction.x, managerObjects.SolidLight_Direction.y, managerObjects.SolidLight_Direction.z);
+        glUniform3f(this->solidLight->gl_Ambient, managerObjects.SolidLight_Ambient.r, managerObjects.SolidLight_Ambient.g, managerObjects.SolidLight_Ambient.b);
+        glUniform3f(this->solidLight->gl_Diffuse, managerObjects.SolidLight_Diffuse.r, managerObjects.SolidLight_Diffuse.g, managerObjects.SolidLight_Diffuse.b);
+        glUniform3f(this->solidLight->gl_Specular, managerObjects.SolidLight_Specular.r, managerObjects.SolidLight_Specular.g, managerObjects.SolidLight_Specular.b);
+        glUniform1f(this->solidLight->gl_StrengthAmbient, managerObjects.SolidLight_Ambient_Strength);
+        glUniform1f(this->solidLight->gl_StrengthDiffuse, managerObjects.SolidLight_Diffuse_Strength);
+        glUniform1f(this->solidLight->gl_StrengthSpecular, managerObjects.SolidLight_Specular_Strength);
 
         // lights
         int lightsCount_Directional = 0;

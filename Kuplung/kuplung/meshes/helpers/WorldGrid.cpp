@@ -18,17 +18,17 @@ WorldGrid::~WorldGrid() {
 }
 
 void WorldGrid::destroy() {
-    delete this->positionX;
-    delete this->positionY;
-    delete this->positionZ;
+    this->positionX.reset();
+    this->positionY.reset();
+    this->positionZ.reset();
 
-    delete this->scaleX;
-    delete this->scaleY;
-    delete this->scaleZ;
+    this->scaleX.reset();
+    this->scaleY.reset();
+    this->scaleZ.reset();
 
-    delete this->rotateX;
-    delete this->rotateY;
-    delete this->rotateZ;
+    this->rotateX.reset();
+    this->rotateY.reset();
+    this->rotateZ.reset();
 
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboIndices);
@@ -59,17 +59,17 @@ void WorldGrid::initProperties(int size) {
     this->actAsMirrorNeedsChange = true;
     this->transparency = 0.5;
 
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+    this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f);
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ -90.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, -90.0f);
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->matrixModel = glm::mat4(1.0);
 

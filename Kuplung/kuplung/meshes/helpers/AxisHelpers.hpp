@@ -25,7 +25,7 @@ public:
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(Camera *camera, glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position);
+    void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position);
     MeshModel meshModel;
 
     glm::mat4 matrixProjection;

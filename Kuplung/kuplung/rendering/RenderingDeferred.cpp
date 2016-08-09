@@ -10,6 +10,10 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
+RenderingDeferred::RenderingDeferred(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
+}
+
 RenderingDeferred::~RenderingDeferred() {
     this->destroy();
 }
@@ -311,11 +315,11 @@ void RenderingDeferred::initLights() {
     }
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
-    this->renderGBuffer(meshModelFaces, managerObjects);
-    this->renderLightingPass(managerObjects);
-    if (managerObjects->Setting_DeferredTestLights)
-        this->renderLightObjects(managerObjects);
+void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces) {
+    this->renderGBuffer(meshModelFaces);
+    this->renderLightingPass();
+    if (this->managerObjects.Setting_DeferredTestLights)
+        this->renderLightObjects();
     else {
         glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
@@ -328,20 +332,20 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, std::
     }
 }
 
-void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
+void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
     glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    this->matrixProject = managerObjects->matrixProjection;
-    this->matrixCamera = managerObjects->camera->matrixCamera;
+    this->matrixProject = this->managerObjects.matrixProjection;
+    this->matrixCamera = this->managerObjects.camera->matrixCamera;
     glm::mat4 matrixModel;
     glUseProgram(this->shaderProgram_GeometryPass);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    for (GLuint i=0; i<((managerObjects->Setting_DeferredTestMode) ? this->objectPositions.size() : 1); i++) {
+    for (GLuint i=0; i<((this->managerObjects.Setting_DeferredTestMode) ? this->objectPositions.size() : 1); i++) {
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
@@ -386,11 +390,11 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
             mfd->matrixProjection = this->matrixProject;
             mfd->matrixCamera = this->matrixCamera;
             mfd->matrixModel = matrixModel;
-            mfd->Setting_ModelViewSkin = managerObjects->viewModelSkin;
-            mfd->lightSources = managerObjects->lightSources;
-            mfd->setOptionsFOV(managerObjects->Setting_FOV);
-            mfd->setOptionsOutlineColor(managerObjects->Setting_OutlineColor);
-            mfd->setOptionsOutlineThickness(managerObjects->Setting_OutlineThickness);
+            mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
+            mfd->lightSources = this->managerObjects.lightSources;
+            mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
+            mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
+            mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
             mfd->renderModel(false);
         }
     }
@@ -399,7 +403,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void RenderingDeferred::renderLightingPass(std::unique_ptr<ObjectsManager> &managerObjects) {
+void RenderingDeferred::renderLightingPass() {
     // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
@@ -415,8 +419,8 @@ void RenderingDeferred::renderLightingPass(std::unique_ptr<ObjectsManager> &mana
     unsigned int lightsCount_Directional = 0;
     unsigned int lightsCount_Point = 0;
     unsigned int lightsCount_Spot = 0;
-    for (size_t j=0; j<managerObjects->lightSources.size(); j++) {
-        Light *light = managerObjects->lightSources[j];
+    for (size_t j=0; j<this->managerObjects.lightSources.size(); j++) {
+        Light *light = this->managerObjects.lightSources[j];
         switch (light->type) {
             case LightSourceType_Directional: {
                 if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
@@ -520,9 +524,9 @@ void RenderingDeferred::renderLightingPass(std::unique_ptr<ObjectsManager> &mana
     }
 
     // Also send light relevant uniforms
-    if (managerObjects->Setting_DeferredTestLights) {
+    if (this->managerObjects.Setting_DeferredTestLights) {
         GLuint i = 0;
-        for (; i<managerObjects->Setting_DeferredTestLightsNumber; i++) {
+        for (; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
@@ -556,13 +560,13 @@ void RenderingDeferred::renderLightingPass(std::unique_ptr<ObjectsManager> &mana
             glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
         }
     }
-    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &managerObjects->camera->cameraPosition[0]);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), managerObjects->Setting_LightingPass_DrawMode + 1);
-    glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), managerObjects->Setting_DeferredAmbientStrength);
+    glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &this->managerObjects.camera->cameraPosition[0]);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), this->managerObjects.Setting_LightingPass_DrawMode + 1);
+    glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), this->managerObjects.Setting_DeferredAmbientStrength);
     this->renderQuad();
 }
 
-void RenderingDeferred::renderLightObjects(std::unique_ptr<ObjectsManager> &managerObjects) {
+void RenderingDeferred::renderLightObjects() {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
@@ -580,7 +584,7 @@ void RenderingDeferred::renderLightObjects(std::unique_ptr<ObjectsManager> &mana
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (GLuint i=0; i<managerObjects->Setting_DeferredTestLightsNumber; i++) {
+    for (GLuint i=0; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
         glm::mat4 matrixModel = glm::mat4();
         matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
         matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));

@@ -97,7 +97,7 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(Camera *camera, glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position) {
+void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

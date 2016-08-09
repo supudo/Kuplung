@@ -26,7 +26,7 @@ public:
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
 
     bool showAxis;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
 
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;

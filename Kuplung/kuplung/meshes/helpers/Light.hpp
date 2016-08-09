@@ -32,14 +32,14 @@ public:
     LightSourceType type;
     bool showLampObject, showLampDirection;
 
-    ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *directionX, *directionY, *directionZ;
-    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-    ObjectCoordinate *rotateCenterX, *rotateCenterY, *rotateCenterZ;
-    MaterialColor *ambient, *diffuse, *specular;
-    ObjectCoordinate *lCutOff, *lOuterCutOff;
-    ObjectCoordinate *lConstant, *lLinear, *lQuadratic;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    std::unique_ptr<ObjectCoordinate> directionX, directionY, directionZ;
+    std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
+    std::unique_ptr<MaterialColor> ambient, diffuse, specular;
+    std::unique_ptr<ObjectCoordinate> lCutOff, lOuterCutOff;
+    std::unique_ptr<ObjectCoordinate> lConstant, lLinear, lQuadratic;
     bool showInWire;
 
     glm::mat4 matrixProjection;

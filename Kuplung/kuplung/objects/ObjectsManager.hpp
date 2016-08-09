@@ -56,11 +56,11 @@ public:
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
     std::vector<Light*> lightSources;
 
-    Camera* camera;
-    CameraModel* cameraModel;
-    WorldGrid* grid;
-    MiniAxis* axisSystem;
-    Skybox* skybox;
+    Camera *camera;
+    CameraModel *cameraModel;
+    WorldGrid *grid;
+    MiniAxis *axisSystem;
+    Skybox *skybox;
     AxisHelpers *axisHelpers_xMinus, *axisHelpers_xPlus, *axisHelpers_yMinus, *axisHelpers_yPlus, *axisHelpers_zMinus, *axisHelpers_zPlus;
     Terrain *terrain;
     Spaceship *spaceship;

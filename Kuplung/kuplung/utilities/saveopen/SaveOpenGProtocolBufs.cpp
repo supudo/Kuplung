@@ -171,29 +171,29 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::unique_ptr<ObjectsM
     bufCamera->set_allocated_view_eye(this->getVec3(managerObjects->camera->eyeSettings->View_Eye));
     bufCamera->set_allocated_view_center(this->getVec3(managerObjects->camera->eyeSettings->View_Center));
     bufCamera->set_allocated_view_up(this->getVec3(managerObjects->camera->eyeSettings->View_Up));
-    bufCamera->set_allocated_positionx(this->getObjectCoordinate(managerObjects->camera->positionX));
-    bufCamera->set_allocated_positiony(this->getObjectCoordinate(managerObjects->camera->positionY));
-    bufCamera->set_allocated_positionz(this->getObjectCoordinate(managerObjects->camera->positionZ));
-    bufCamera->set_allocated_rotatex(this->getObjectCoordinate(managerObjects->camera->rotateX));
-    bufCamera->set_allocated_rotatey(this->getObjectCoordinate(managerObjects->camera->rotateY));
-    bufCamera->set_allocated_rotatez(this->getObjectCoordinate(managerObjects->camera->rotateZ));
-    bufCamera->set_allocated_rotatecenterx(this->getObjectCoordinate(managerObjects->camera->rotateCenterX));
-    bufCamera->set_allocated_rotatecentery(this->getObjectCoordinate(managerObjects->camera->rotateCenterY));
-    bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate(managerObjects->camera->rotateCenterZ));
+    bufCamera->set_allocated_positionx(this->getObjectCoordinate2(*managerObjects->camera->positionX));
+    bufCamera->set_allocated_positiony(this->getObjectCoordinate2(*managerObjects->camera->positionY));
+    bufCamera->set_allocated_positionz(this->getObjectCoordinate2(*managerObjects->camera->positionZ));
+    bufCamera->set_allocated_rotatex(this->getObjectCoordinate2(*managerObjects->camera->rotateX));
+    bufCamera->set_allocated_rotatey(this->getObjectCoordinate2(*managerObjects->camera->rotateY));
+    bufCamera->set_allocated_rotatez(this->getObjectCoordinate2(*managerObjects->camera->rotateZ));
+    bufCamera->set_allocated_rotatecenterx(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterX));
+    bufCamera->set_allocated_rotatecentery(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterY));
+    bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterZ));
     this->bufGUISettings.set_allocated_camera(bufCamera);
 
     KuplungApp::GridSettings* bufGrid = new KuplungApp::GridSettings();
     bufGrid->set_actasmirror(managerObjects->grid->actAsMirror);
     bufGrid->set_gridsize(managerObjects->grid->gridSize);
-    bufGrid->set_allocated_positionx(this->getObjectCoordinate(managerObjects->grid->positionX));
-    bufGrid->set_allocated_positiony(this->getObjectCoordinate(managerObjects->grid->positionY));
-    bufGrid->set_allocated_positionz(this->getObjectCoordinate(managerObjects->grid->positionZ));
-    bufGrid->set_allocated_rotatex(this->getObjectCoordinate(managerObjects->grid->rotateX));
-    bufGrid->set_allocated_rotatey(this->getObjectCoordinate(managerObjects->grid->rotateY));
-    bufGrid->set_allocated_rotatez(this->getObjectCoordinate(managerObjects->grid->rotateZ));
-    bufGrid->set_allocated_scalex(this->getObjectCoordinate(managerObjects->grid->scaleX));
-    bufGrid->set_allocated_scaley(this->getObjectCoordinate(managerObjects->grid->scaleY));
-    bufGrid->set_allocated_scalez(this->getObjectCoordinate(managerObjects->grid->scaleZ));
+    bufGrid->set_allocated_positionx(this->getObjectCoordinate2(*managerObjects->grid->positionX));
+    bufGrid->set_allocated_positiony(this->getObjectCoordinate2(*managerObjects->grid->positionY));
+    bufGrid->set_allocated_positionz(this->getObjectCoordinate2(*managerObjects->grid->positionZ));
+    bufGrid->set_allocated_rotatex(this->getObjectCoordinate2(*managerObjects->grid->rotateX));
+    bufGrid->set_allocated_rotatey(this->getObjectCoordinate2(*managerObjects->grid->rotateY));
+    bufGrid->set_allocated_rotatez(this->getObjectCoordinate2(*managerObjects->grid->rotateZ));
+    bufGrid->set_allocated_scalex(this->getObjectCoordinate2(*managerObjects->grid->scaleX));
+    bufGrid->set_allocated_scaley(this->getObjectCoordinate2(*managerObjects->grid->scaleY));
+    bufGrid->set_allocated_scalez(this->getObjectCoordinate2(*managerObjects->grid->scaleZ));
     bufGrid->set_transparency(managerObjects->grid->transparency);
     bufGrid->set_showgrid(managerObjects->grid->showGrid);
     this->bufGUISettings.set_allocated_grid(bufGrid);
@@ -265,28 +265,28 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsMa
     managerObjects->camera->eyeSettings->View_Eye = this->setVec3(camera.view_eye());
     managerObjects->camera->eyeSettings->View_Center = this->setVec3(camera.view_center());
     managerObjects->camera->eyeSettings->View_Up = this->setVec3(camera.view_up());
-    managerObjects->camera->positionX = this->setObjectCoordinate(camera.positionx());
-    managerObjects->camera->positionY = this->setObjectCoordinate(camera.positiony());
-    managerObjects->camera->positionZ = this->setObjectCoordinate(camera.positionz());
-    managerObjects->camera->rotateX = this->setObjectCoordinate(camera.rotatex());
-    managerObjects->camera->rotateY = this->setObjectCoordinate(camera.rotatey());
-    managerObjects->camera->rotateZ = this->setObjectCoordinate(camera.rotatez());
-    managerObjects->camera->rotateCenterX = this->setObjectCoordinate(camera.rotatecenterx());
-    managerObjects->camera->rotateCenterY = this->setObjectCoordinate(camera.rotatecentery());
-    managerObjects->camera->rotateCenterZ = this->setObjectCoordinate(camera.rotatecenterz());
+    managerObjects->camera->positionX = this->setObjectCoordinate2(camera.positionx());
+    managerObjects->camera->positionY = this->setObjectCoordinate2(camera.positiony());
+    managerObjects->camera->positionZ = this->setObjectCoordinate2(camera.positionz());
+    managerObjects->camera->rotateX = this->setObjectCoordinate2(camera.rotatex());
+    managerObjects->camera->rotateY = this->setObjectCoordinate2(camera.rotatey());
+    managerObjects->camera->rotateZ = this->setObjectCoordinate2(camera.rotatez());
+    managerObjects->camera->rotateCenterX = this->setObjectCoordinate2(camera.rotatecenterx());
+    managerObjects->camera->rotateCenterY = this->setObjectCoordinate2(camera.rotatecentery());
+    managerObjects->camera->rotateCenterZ = this->setObjectCoordinate2(camera.rotatecenterz());
 
     const KuplungApp::GridSettings& grid = this->bufGUISettings.grid();
     managerObjects->grid->actAsMirror = grid.actasmirror();
     managerObjects->grid->gridSize = grid.gridsize();
-    managerObjects->grid->positionX = this->setObjectCoordinate(grid.positionx());
-    managerObjects->grid->positionY = this->setObjectCoordinate(grid.positiony());
-    managerObjects->grid->positionZ = this->setObjectCoordinate(grid.positionz());
-    managerObjects->grid->rotateX = this->setObjectCoordinate(grid.rotatex());
-    managerObjects->grid->rotateY = this->setObjectCoordinate(grid.rotatey());
-    managerObjects->grid->rotateZ = this->setObjectCoordinate(grid.rotatez());
-    managerObjects->grid->scaleX = this->setObjectCoordinate(grid.scalex());
-    managerObjects->grid->scaleY = this->setObjectCoordinate(grid.scaley());
-    managerObjects->grid->scaleZ = this->setObjectCoordinate(grid.scalez());
+    managerObjects->grid->positionX = this->setObjectCoordinate2(grid.positionx());
+    managerObjects->grid->positionY = this->setObjectCoordinate2(grid.positiony());
+    managerObjects->grid->positionZ = this->setObjectCoordinate2(grid.positionz());
+    managerObjects->grid->rotateX = this->setObjectCoordinate2(grid.rotatex());
+    managerObjects->grid->rotateY = this->setObjectCoordinate2(grid.rotatey());
+    managerObjects->grid->rotateZ = this->setObjectCoordinate2(grid.rotatez());
+    managerObjects->grid->scaleX = this->setObjectCoordinate2(grid.scalex());
+    managerObjects->grid->scaleY = this->setObjectCoordinate2(grid.scaley());
+    managerObjects->grid->scaleZ = this->setObjectCoordinate2(grid.scalez());
     managerObjects->grid->transparency = grid.transparency();
     managerObjects->grid->showGrid = grid.showgrid();
 }
@@ -301,21 +301,21 @@ void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager> &m
         lo->set_showlampobject(l->showLampObject);
         lo->set_showlampdirection(l->showLampDirection);
         lo->set_showinwire(l->showInWire);
-        lo->set_allocated_positionx(this->getObjectCoordinate(l->positionX));
-        lo->set_allocated_positiony(this->getObjectCoordinate(l->positionY));
-        lo->set_allocated_positionz(this->getObjectCoordinate(l->positionZ));
-        lo->set_allocated_directionx(this->getObjectCoordinate(l->directionX));
-        lo->set_allocated_directiony(this->getObjectCoordinate(l->directionY));
-        lo->set_allocated_directionz(this->getObjectCoordinate(l->directionZ));
-        lo->set_allocated_scalex(this->getObjectCoordinate(l->scaleX));
-        lo->set_allocated_scaley(this->getObjectCoordinate(l->scaleY));
-        lo->set_allocated_scalez(this->getObjectCoordinate(l->scaleZ));
-        lo->set_allocated_rotatex(this->getObjectCoordinate(l->rotateX));
-        lo->set_allocated_rotatey(this->getObjectCoordinate(l->rotateY));
-        lo->set_allocated_rotatez(this->getObjectCoordinate(l->rotateZ));
-        lo->set_allocated_rotatecenterx(this->getObjectCoordinate(l->rotateCenterX));
-        lo->set_allocated_rotatecentery(this->getObjectCoordinate(l->rotateCenterY));
-        lo->set_allocated_rotatecenterz(this->getObjectCoordinate(l->rotateCenterZ));
+        lo->set_allocated_positionx(this->getObjectCoordinate2(*l->positionX));
+        lo->set_allocated_positiony(this->getObjectCoordinate2(*l->positionY));
+        lo->set_allocated_positionz(this->getObjectCoordinate2(*l->positionZ));
+        lo->set_allocated_directionx(this->getObjectCoordinate2(*l->directionX));
+        lo->set_allocated_directiony(this->getObjectCoordinate2(*l->directionY));
+        lo->set_allocated_directionz(this->getObjectCoordinate2(*l->directionZ));
+        lo->set_allocated_scalex(this->getObjectCoordinate2(*l->scaleX));
+        lo->set_allocated_scaley(this->getObjectCoordinate2(*l->scaleY));
+        lo->set_allocated_scalez(this->getObjectCoordinate2(*l->scaleZ));
+        lo->set_allocated_rotatex(this->getObjectCoordinate2(*l->rotateX));
+        lo->set_allocated_rotatey(this->getObjectCoordinate2(*l->rotateY));
+        lo->set_allocated_rotatez(this->getObjectCoordinate2(*l->rotateZ));
+        lo->set_allocated_rotatecenterx(this->getObjectCoordinate2(*l->rotateCenterX));
+        lo->set_allocated_rotatecentery(this->getObjectCoordinate2(*l->rotateCenterY));
+        lo->set_allocated_rotatecenterz(this->getObjectCoordinate2(*l->rotateCenterZ));
     }
 }
 
@@ -331,21 +331,21 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &ma
         l->showLampObject = lo.showlampobject();
         l->showLampDirection = lo.showlampdirection();
         l->showInWire = lo.showinwire();
-        l->positionX = this->setObjectCoordinate(lo.positionx());
-        l->positionY = this->setObjectCoordinate(lo.positiony());
-        l->positionZ = this->setObjectCoordinate(lo.positionz());
-        l->directionX = this->setObjectCoordinate(lo.directionx());
-        l->directionY = this->setObjectCoordinate(lo.directiony());
-        l->directionZ = this->setObjectCoordinate(lo.directionz());
-        l->scaleX = this->setObjectCoordinate(lo.scalex());
-        l->scaleY = this->setObjectCoordinate(lo.scaley());
-        l->scaleZ = this->setObjectCoordinate(lo.scalez());
-        l->rotateX = this->setObjectCoordinate(lo.rotatex());
-        l->rotateY = this->setObjectCoordinate(lo.rotatey());
-        l->rotateZ = this->setObjectCoordinate(lo.rotatez());
-        l->rotateCenterX = this->setObjectCoordinate(lo.rotatecenterx());
-        l->rotateCenterY = this->setObjectCoordinate(lo.rotatecentery());
-        l->rotateCenterZ = this->setObjectCoordinate(lo.rotatecenterz());
+        l->positionX = this->setObjectCoordinate2(lo.positionx());
+        l->positionY = this->setObjectCoordinate2(lo.positiony());
+        l->positionZ = this->setObjectCoordinate2(lo.positionz());
+        l->directionX = this->setObjectCoordinate2(lo.directionx());
+        l->directionY = this->setObjectCoordinate2(lo.directiony());
+        l->directionZ = this->setObjectCoordinate2(lo.directionz());
+        l->scaleX = this->setObjectCoordinate2(lo.scalex());
+        l->scaleY = this->setObjectCoordinate2(lo.scaley());
+        l->scaleZ = this->setObjectCoordinate2(lo.scalez());
+        l->rotateX = this->setObjectCoordinate2(lo.rotatex());
+        l->rotateY = this->setObjectCoordinate2(lo.rotatey());
+        l->rotateZ = this->setObjectCoordinate2(lo.rotatez());
+        l->rotateCenterX = this->setObjectCoordinate2(lo.rotatecenterx());
+        l->rotateCenterY = this->setObjectCoordinate2(lo.rotatecentery());
+        l->rotateCenterZ = this->setObjectCoordinate2(lo.rotatecenterz());
 
         switch (lo.type()) {
             case 0:
@@ -779,6 +779,18 @@ glm::vec2 SaveOpenGProtocolBufs::setVec2(const KuplungApp::Vec2& v) {
 //    return mtx;
 //}
 
+KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate2(ObjectCoordinate& v) {
+    KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
+    oc->set_animate(v.animate);
+    oc->set_point(v.point);
+    return oc;
+}
+
+std::unique_ptr<ObjectCoordinate> SaveOpenGProtocolBufs::setObjectCoordinate2(const KuplungApp::ObjectCoordinate& v) {
+    auto t = std::make_unique<ObjectCoordinate>(v.animate(), v.point());
+    return t;
+}
+
 KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate* v) {
     KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
     oc->set_animate(v->animate);
@@ -787,10 +799,7 @@ KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectC
 }
 
 ObjectCoordinate* SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) {
-    ObjectCoordinate* oc = new ObjectCoordinate();
-    oc->animate = v.animate();
-    oc->point = v.point();
-    return oc;
+    return new ObjectCoordinate(v.animate(), v.point());
 }
 
 bool SaveOpenGProtocolBufs::hasEnding(std::string const &fullString, std::string const &ending) {
