@@ -20,7 +20,7 @@ public:
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
+    void render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
     GLUtils *glUtils;

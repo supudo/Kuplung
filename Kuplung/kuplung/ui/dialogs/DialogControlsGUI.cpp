@@ -15,9 +15,11 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsGUI::init(ObjectsManager *managerObjects) {
+DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+}
 
+void DialogControlsGUI::init() {
     this->selectedObject = 0;
     this->selectedObjectLight = 0;
     this->selectedTabScene = -1;
@@ -46,7 +48,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0)))
-        this->managerObjects->resetPropertiesSystem();
+        this->managerObjects.resetPropertiesSystem();
     ImGui::PopStyleColor(3);
 
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
@@ -110,17 +112,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 break;
             }
             case 6: {
-                if (this->managerObjects->lightSources.size() == 0) {
+                if (this->managerObjects.lightSources.size() == 0) {
                     ImGui::Indent();
                     ImGui::Text(ICON_FA_LIGHTBULB_O " Lights");
                     ImGui::Unindent();
                 }
                 else {
                     if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
-                        for (int j=0; j<(int)this->managerObjects->lightSources.size(); j++) {
-                            std::string title = this->managerObjects->lightSources[j]->title;
+                        for (int j=0; j<(int)this->managerObjects.lightSources.size(); j++) {
+                            std::string title = this->managerObjects.lightSources[j]->title;
                             ImGui::Bullet();
-                            if (ImGui::Selectable(this->managerObjects->lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
+                            if (ImGui::Selectable(this->managerObjects.lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
                                 this->selectedObjectLight = j;
                                 this->selectedObject = 6;
                             }
@@ -184,27 +186,27 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         case 0: {
             if (ImGui::CollapsingHeader("View Options")) {
                 ImGui::Indent();
-                this->helperUI->addControlsSlider("Field of view", 1, 1.0f, -180.0f, 180.0f, false, NULL, &this->managerObjects->Setting_FOV, true, isFrame);
+                this->helperUI->addControlsSlider("Field of view", 1, 1.0f, -180.0f, 180.0f, false, NULL, &this->managerObjects.Setting_FOV, true, isFrame);
                 ImGui::Separator();
 
                 ImGui::Text("Ratio"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("W & H");
-                ImGui::SliderFloat("W##105", &this->managerObjects->Setting_RatioWidth, 0.0f, 5.0f);
-                ImGui::SliderFloat("H##106", &this->managerObjects->Setting_RatioHeight, 0.0f, 5.0f);
-//                this->helperUI->addControlsFloatSliderSameLine("W", 105, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
-//                this->helperUI->addControlsFloatSliderSameLine("H", 106, 0.0f, 5.0f, &this->managerObjects->Setting_RatioHeight);
+                ImGui::SliderFloat("W##105", &this->managerObjects.Setting_RatioWidth, 0.0f, 5.0f);
+                ImGui::SliderFloat("H##106", &this->managerObjects.Setting_RatioHeight, 0.0f, 5.0f);
+//                this->helperUI->addControlsFloatSliderSameLine("W", 105, 0.0f, 5.0f, &this->managerObjects.Setting_RatioWidth);
+//                this->helperUI->addControlsFloatSliderSameLine("H", 106, 0.0f, 5.0f, &this->managerObjects.Setting_RatioHeight);
                 ImGui::Separator();
 
                 ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
-//                this->helperUI->addControlsFloatSliderSameLine("W", 291, 0.0f, 5.0f, &this->managerObjects->Setting_RatioWidth);
-                ImGui::SliderFloat("Far##107", &this->managerObjects->Setting_PlaneClose, 0.0f, 1.0f);
-                ImGui::SliderFloat("Close##108", &this->managerObjects->Setting_PlaneFar, 0.0f, 1000.0f);
+//                this->helperUI->addControlsFloatSliderSameLine("W", 291, 0.0f, 5.0f, &this->managerObjects.Setting_RatioWidth);
+                ImGui::SliderFloat("Far##107", &this->managerObjects.Setting_PlaneClose, 0.0f, 1.0f);
+                ImGui::SliderFloat("Close##108", &this->managerObjects.Setting_PlaneFar, 0.0f, 1000.0f);
                 ImGui::Unindent();
             }
 
             if (ImGui::CollapsingHeader("Editor Artefacts")) {
                 ImGui::Indent();
-                ImGui::Checkbox("Axis Helpers", &this->managerObjects->Setting_ShowAxisHelpers);
-                ImGui::Checkbox("Z Axis", &this->managerObjects->Settings_ShowZAxis);
+                ImGui::Checkbox("Axis Helpers", &this->managerObjects.Setting_ShowAxisHelpers);
+                ImGui::Checkbox("Z Axis", &this->managerObjects.Settings_ShowZAxis);
                 ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
                 ImGui::Unindent();
             }
@@ -219,8 +221,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         Settings::Instance()->BoundingBoxRefresh = true;
                         Settings::Instance()->saveSettings();
                     }
-                    this->helperUI->addControlColor4("Color", &this->managerObjects->Setting_OutlineColor, &this->managerObjects->Setting_OutlineColorPickerOpen);
-                    this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects->Setting_OutlineThickness, true, isFrame);
+                    this->helperUI->addControlColor4("Color", &this->managerObjects.Setting_OutlineColor, &this->managerObjects.Setting_OutlineColorPickerOpen);
+                    this->helperUI->addControlsSlider("Thickness", 2, 1.01f, 0.0f, 2.0f, false, NULL, &this->managerObjects.Setting_OutlineThickness, true, isFrame);
                 }
                 ImGui::Unindent();
             }
@@ -236,17 +238,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     deferred_texture_items.push_back("Normal");
                     deferred_texture_items.push_back("Diffuse");
                     deferred_texture_items.push_back("Specular");
-                    ImGui::Combo("##110", &this->managerObjects->Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
+                    ImGui::Combo("##110", &this->managerObjects.Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
 
                     ImGui::Text("Ambient Strength");
-                    ImGui::SliderFloat("##109", &this->managerObjects->Setting_DeferredAmbientStrength, 0.0f, 1.0f);
+                    ImGui::SliderFloat("##109", &this->managerObjects.Setting_DeferredAmbientStrength, 0.0f, 1.0f);
 
-                    ImGui::Checkbox("Test Mode", &this->managerObjects->Setting_DeferredTestMode);
-                    ImGui::Checkbox("Test Lights", &this->managerObjects->Setting_DeferredTestLights);
+                    ImGui::Checkbox("Test Mode", &this->managerObjects.Setting_DeferredTestMode);
+                    ImGui::Checkbox("Test Lights", &this->managerObjects.Setting_DeferredTestLights);
                     ImGui::Separator();
 
                     ImGui::Text("Number of Test Lights");
-                    ImGui::SliderInt("##209", &this->managerObjects->Setting_DeferredTestLightsNumber, 0, 32);
+                    ImGui::SliderInt("##209", &this->managerObjects.Setting_DeferredTestLightsNumber, 0, 32);
                     ImGui::Unindent();
                 }
             }
@@ -274,38 +276,38 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Look-At matrix");
                     ImGui::Separator();
                     ImGui::Text("Eye");
-                    this->helperUI->addControlsSliderSameLine("X", 1, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Eye.x, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 1.0f, this->managerObjects->Setting_PlaneClose, this->managerObjects->Setting_PlaneFar, false, NULL, &this->managerObjects->camera->eyeSettings->View_Eye.y, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 1.0f, 0.0f, 90.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Eye.z, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 1, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.x, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 1.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.y, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 1.0f, 0.0f, 90.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.z, true, isFrame);
                     ImGui::Separator();
                     ImGui::Text("Center");
-                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Center.x, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Center.y, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, 0.0f, 45.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Center.z, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Center.x, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Center.y, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, 0.0f, 45.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Center.z, true, isFrame);
                     ImGui::Separator();
                     ImGui::Text("Up");
-                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.x, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.y, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects->camera->eyeSettings->View_Up.z, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Up.x, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Up.y, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, -1.0f, 1.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Up.z, true, isFrame);
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateX->animate, &this->managerObjects->camera->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateY->animate, &this->managerObjects->camera->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->camera->rotateZ->animate, &this->managerObjects->camera->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.camera->rotateX->animate, &this->managerObjects.camera->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.camera->rotateY->animate, &this->managerObjects.camera->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.camera->rotateZ->animate, &this->managerObjects.camera->rotateZ->point, true, isFrame);
                     ImGui::Separator();
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
-                    this->helperUI->addControlsSliderSameLine("X", 16, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterX->animate, &this->managerObjects->camera->rotateCenterX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 17, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterY->animate, &this->managerObjects->camera->rotateCenterY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 18, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->camera->rotateCenterZ->animate, &this->managerObjects->camera->rotateCenterZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 16, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.camera->rotateCenterX->animate, &this->managerObjects.camera->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 17, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.camera->rotateCenterY->animate, &this->managerObjects.camera->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 18, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.camera->rotateCenterZ->animate, &this->managerObjects.camera->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 19, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionX->animate, &this->managerObjects->camera->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 20, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionY->animate, &this->managerObjects->camera->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 21, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->camera->positionZ->animate, &this->managerObjects->camera->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 19, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.camera->positionX->animate, &this->managerObjects.camera->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 20, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.camera->positionY->animate, &this->managerObjects.camera->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 21, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.camera->positionZ->animate, &this->managerObjects.camera->positionZ->point, true, isFrame);
                     break;
                 }
                 default:
@@ -332,37 +334,37 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
             switch (this->selectedTabGUICameraModel) {
                 case 0: {
-                    ImGui::Checkbox("Camera", &this->managerObjects->cameraModel->showCameraObject);
-                    ImGui::Checkbox("Wire", &this->managerObjects->cameraModel->showInWire);
+                    ImGui::Checkbox("Camera", &this->managerObjects.cameraModel->showCameraObject);
+                    ImGui::Checkbox("Wire", &this->managerObjects.cameraModel->showInWire);
                     ImGui::Separator();
                     ImGui::Text("Inner Light Direction");
-                    this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionX->animate, &this->managerObjects->cameraModel->innerLightDirectionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionY->animate, &this->managerObjects->cameraModel->innerLightDirectionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, -1.0f, 1.0f, true, &this->managerObjects->cameraModel->innerLightDirectionZ->animate, &this->managerObjects->cameraModel->innerLightDirectionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, -1.0f, 1.0f, true, &this->managerObjects.cameraModel->innerLightDirectionX->animate, &this->managerObjects.cameraModel->innerLightDirectionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, -1.0f, 1.0f, true, &this->managerObjects.cameraModel->innerLightDirectionY->animate, &this->managerObjects.cameraModel->innerLightDirectionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, -1.0f, 1.0f, true, &this->managerObjects.cameraModel->innerLightDirectionZ->animate, &this->managerObjects.cameraModel->innerLightDirectionZ->point, true, isFrame);
                     ImGui::Separator();
                     ImGui::Text("ModelFace Color");
-                    this->helperUI->addControlsSliderSameLine("X", 13, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorR->animate, &this->managerObjects->cameraModel->colorR->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 14, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorG->animate, &this->managerObjects->cameraModel->colorG->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 15, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->cameraModel->colorB->animate, &this->managerObjects->cameraModel->colorB->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 13, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.cameraModel->colorR->animate, &this->managerObjects.cameraModel->colorR->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 14, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.cameraModel->colorG->animate, &this->managerObjects.cameraModel->colorG->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 15, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.cameraModel->colorB->animate, &this->managerObjects.cameraModel->colorB->point, true, isFrame);
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 4, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionX->animate, &this->managerObjects->cameraModel->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 5, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionY->animate, &this->managerObjects->cameraModel->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 6, 0.05f, -2 * this->managerObjects->Setting_GridSize, 2 * this->managerObjects->Setting_GridSize, true, &this->managerObjects->cameraModel->positionZ->animate, &this->managerObjects->cameraModel->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 4, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.cameraModel->positionX->animate, &this->managerObjects.cameraModel->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.cameraModel->positionY->animate, &this->managerObjects.cameraModel->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->managerObjects.cameraModel->positionZ->animate, &this->managerObjects.cameraModel->positionZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateX->animate, &this->managerObjects->cameraModel->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateY->animate, &this->managerObjects->cameraModel->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, 0.0f, 360.0f, true, &this->managerObjects->cameraModel->rotateZ->animate, &this->managerObjects->cameraModel->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 7, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.cameraModel->rotateX->animate, &this->managerObjects.cameraModel->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 8, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.cameraModel->rotateY->animate, &this->managerObjects.cameraModel->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 9, 1.0f, 0.0f, 360.0f, true, &this->managerObjects.cameraModel->rotateZ->animate, &this->managerObjects.cameraModel->rotateZ->point, true, isFrame);
                     ImGui::Separator();
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around center");
-                    this->helperUI->addControlsSliderSameLine("X", 10, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterX->animate, &this->managerObjects->cameraModel->rotateCenterX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 11, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterY->animate, &this->managerObjects->cameraModel->rotateCenterY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 12, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->cameraModel->rotateCenterZ->animate, &this->managerObjects->cameraModel->rotateCenterZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 10, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.cameraModel->rotateCenterX->animate, &this->managerObjects.cameraModel->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 11, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.cameraModel->rotateCenterY->animate, &this->managerObjects.cameraModel->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 12, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.cameraModel->rotateCenterZ->animate, &this->managerObjects.cameraModel->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 default:
@@ -392,48 +394,48 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "General grid settings");
                     ImGui::Text("Grid size"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Squares");
-                    ImGui::SliderInt("##109", &this->managerObjects->Setting_GridSize, 0, 100);
+                    ImGui::SliderInt("##109", &this->managerObjects.Setting_GridSize, 0, 100);
                     ImGui::Separator();
-                    ImGui::Checkbox("Grid fixed with World", &this->managerObjects->Setting_FixedGridWorld);
-                    ImGui::Checkbox("Grid", &this->managerObjects->grid->showGrid);
-                    ImGui::Checkbox("Act as mirror", &this->managerObjects->grid->actAsMirror);
-                    if (this->managerObjects->grid->actAsMirror)
-                        this->helperUI->addControlsSliderSameLine("Alpha##999", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->grid->transparency, false, isFrame);
+                    ImGui::Checkbox("Grid fixed with World", &this->managerObjects.Setting_FixedGridWorld);
+                    ImGui::Checkbox("Grid", &this->managerObjects.grid->showGrid);
+                    ImGui::Checkbox("Act as mirror", &this->managerObjects.grid->actAsMirror);
+                    if (this->managerObjects.grid->actAsMirror)
+                        this->helperUI->addControlsSliderSameLine("Alpha##999", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.grid->transparency, false, isFrame);
                     ImGui::Separator();
-                    if (this->managerObjects->grid->actAsMirror) {
+                    if (this->managerObjects.grid->actAsMirror) {
                         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Mirror Position");
                         ImGui::Separator();
                         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move mirror by axis");
-                        this->helperUI->addControlsSliderSameLine("X", 71, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateX, true, isFrame);
-                        this->helperUI->addControlsSliderSameLine("Y", 81, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateY, true, isFrame);
-                        this->helperUI->addControlsSliderSameLine("Z", 91, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, false, nullptr, &this->managerObjects->grid->mirrorSurface->translateZ, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("X", 71, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, false, nullptr, &this->managerObjects.grid->mirrorSurface->translateX, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Y", 81, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, false, nullptr, &this->managerObjects.grid->mirrorSurface->translateY, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Z", 91, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, false, nullptr, &this->managerObjects.grid->mirrorSurface->translateZ, true, isFrame);
                         ImGui::Separator();
                         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate mirror around axis");
-                        this->helperUI->addControlsSliderSameLine("X", 41, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateX, true, isFrame);
-                        this->helperUI->addControlsSliderSameLine("Y", 51, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateY, true, isFrame);
-                        this->helperUI->addControlsSliderSameLine("Z", 61, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects->grid->mirrorSurface->rotateZ, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("X", 41, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects.grid->mirrorSurface->rotateX, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Y", 51, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects.grid->mirrorSurface->rotateY, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Z", 61, 1.0f, -180.0f, 180.0f, false, nullptr, &this->managerObjects.grid->mirrorSurface->rotateZ, true, isFrame);
                     }
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
-                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->grid->scaleX->animate, &this->managerObjects->grid->scaleX->point, false, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->grid->scaleY->animate, &this->managerObjects->grid->scaleY->point, false, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, 1.0f, true, &this->managerObjects->grid->scaleZ->animate, &this->managerObjects->grid->scaleZ->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, 1.0f, true, &this->managerObjects.grid->scaleX->animate, &this->managerObjects.grid->scaleX->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, 1.0f, true, &this->managerObjects.grid->scaleY->animate, &this->managerObjects.grid->scaleY->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, 1.0f, true, &this->managerObjects.grid->scaleZ->animate, &this->managerObjects.grid->scaleZ->point, false, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate object around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->grid->rotateX->animate, &this->managerObjects->grid->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->grid->rotateY->animate, &this->managerObjects->grid->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->grid->rotateZ->animate, &this->managerObjects->grid->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.grid->rotateX->animate, &this->managerObjects.grid->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.grid->rotateY->animate, &this->managerObjects.grid->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.grid->rotateZ->animate, &this->managerObjects.grid->rotateZ->point, true, isFrame);
                     break;
                 }
                 case 3: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->grid->positionX->animate, &this->managerObjects->grid->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->grid->positionY->animate, &this->managerObjects->grid->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->grid->positionZ->animate, &this->managerObjects->grid->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.grid->positionX->animate, &this->managerObjects.grid->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.grid->positionY->animate, &this->managerObjects.grid->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.grid->positionZ->animate, &this->managerObjects.grid->positionZ->point, true, isFrame);
                     break;
                 }
                 default:
@@ -443,38 +445,38 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         }
         case 4: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scene Ambient Light");
-            this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.r, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.g, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects->Setting_UIAmbientLight.b, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("X", 1, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects.Setting_UIAmbientLight.r, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y", 2, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects.Setting_UIAmbientLight.g, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z", 3, 0.001f, 0.0, 1.0, false, nullptr, &this->managerObjects.Setting_UIAmbientLight.b, true, isFrame);
             ImGui::Separator();
 
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Solid Skin Light");
 
-            this->helperUI->addControlColor3("Ambient", &this->managerObjects->SolidLight_Ambient, &this->managerObjects->SolidLight_Ambient_ColorPicker);
-            this->helperUI->addControlsSlider("Intensity", 4, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Ambient_Strength, true, isFrame);
+            this->helperUI->addControlColor3("Ambient", &this->managerObjects.SolidLight_Ambient, &this->managerObjects.SolidLight_Ambient_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 4, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.SolidLight_Ambient_Strength, true, isFrame);
 
-            this->helperUI->addControlColor3("Diffuse", &this->managerObjects->SolidLight_Diffuse, &this->managerObjects->SolidLight_Diffuse_ColorPicker);
-            this->helperUI->addControlsSlider("Intensity", 5, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Diffuse_Strength, true, isFrame);
+            this->helperUI->addControlColor3("Diffuse", &this->managerObjects.SolidLight_Diffuse, &this->managerObjects.SolidLight_Diffuse_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 5, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.SolidLight_Diffuse_Strength, true, isFrame);
 
-            this->helperUI->addControlColor3("Specular", &this->managerObjects->SolidLight_Specular, &this->managerObjects->SolidLight_Specular_ColorPicker);
-            this->helperUI->addControlsSlider("Intensity", 6, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects->SolidLight_Specular_Strength, true, isFrame);
+            this->helperUI->addControlColor3("Specular", &this->managerObjects.SolidLight_Specular, &this->managerObjects.SolidLight_Specular_ColorPicker);
+            this->helperUI->addControlsSlider("Intensity", 6, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.SolidLight_Specular_Strength, true, isFrame);
             ImGui::Separator();
 
-            this->helperUI->addControlColor3("Material Color", &this->managerObjects->SolidLight_MaterialColor, &this->managerObjects->SolidLight_MaterialColor_ColorPicker);
+            this->helperUI->addControlColor3("Material Color", &this->managerObjects.SolidLight_MaterialColor, &this->managerObjects.SolidLight_MaterialColor_ColorPicker);
             ImGui::Separator();
 
             ImGui::Text("Direction");
-            this->helperUI->addControlsSliderSameLine("X##407", 7, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.x, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Y##408", 8, 1.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.y, true, isFrame);
-            this->helperUI->addControlsSliderSameLine("Z##409", 9, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects->SolidLight_Direction.z, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("X##407", 7, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects.SolidLight_Direction.x, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Y##408", 8, 1.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects.SolidLight_Direction.y, true, isFrame);
+            this->helperUI->addControlsSliderSameLine("Z##409", 9, 0.0f, 0.0f, 10.0f, false, nullptr, &this->managerObjects.SolidLight_Direction.z, true, isFrame);
             break;
         }
         case 5: {
             ImGui::TextColored(ImVec4(1, 0, 0, 1), "Skybox");
             std::vector<const char*> skybox_items;
-            for (size_t i=0; i<this->managerObjects->skybox->skyboxItems.size(); i++)
-                skybox_items.push_back(this->managerObjects->skybox->skyboxItems[i].title.c_str());
-            ImGui::Combo("##987", &this->managerObjects->skybox->Setting_Skybox_Item, &skybox_items[0], (int)skybox_items.size());
+            for (size_t i=0; i<this->managerObjects.skybox->skyboxItems.size(); i++)
+                skybox_items.push_back(this->managerObjects.skybox->skyboxItems[i].title.c_str());
+            ImGui::Combo("##987", &this->managerObjects.skybox->Setting_Skybox_Item, &skybox_items[0], (int)skybox_items.size());
             break;
         }
         case 6: {
@@ -499,71 +501,71 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             switch (this->selectedTabGUILight) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
-                    ImGui::Text("%s", this->managerObjects->lightSources[this->selectedObjectLight]->description.c_str());
+                    ImGui::Text("%s", this->managerObjects.lightSources[this->selectedObjectLight]->description.c_str());
                     // show lamp object
-                    ImGui::Checkbox("Lamp", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampObject);
-                    ImGui::Checkbox("Direction", &this->managerObjects->lightSources[this->selectedObjectLight]->showLampDirection);
-                    ImGui::Checkbox("Wire", &this->managerObjects->lightSources[this->selectedObjectLight]->showInWire);
+                    ImGui::Checkbox("Lamp", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampObject);
+                    ImGui::Checkbox("Direction", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampDirection);
+                    ImGui::Checkbox("Wire", &this->managerObjects.lightSources[this->selectedObjectLight]->showInWire);
                     if (ImGui::Button("Delete Light Source")) {
                         this->selectedObject = 0;
-                        this->managerObjects->lightSources.erase(this->managerObjects->lightSources.begin() + this->selectedObjectLight);
+                        this->managerObjects.lightSources.erase(this->managerObjects.lightSources.begin() + this->selectedObjectLight);
                         this->selectedObjectLight = -1;
                     }
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale object");
-                    this->helperUI->addControlsSliderSameLine("X", 10, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 11, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 12, 0.05f, 0.0f, this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->scaleZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 10, 0.05f, 0.0f, this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleX->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 11, 0.05f, 0.0f, this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleY->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 12, 0.05f, 0.0f, this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleZ->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->scaleZ->point, true, isFrame);
                     break;
                 }
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Around center");
-                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 13, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateX->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 14, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateY->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 15, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateZ->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateZ->point, true, isFrame);
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Around axis");
-                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->rotateCenterZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterX->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterY->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterZ->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->rotateCenterZ->point, true, isFrame);
                     break;
                 }
                 case 3: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move object by axis");
-                    this->helperUI->addControlsSliderSameLine("X", 16, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->positionX->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->positionX->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 17, 1.0f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->positionY->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->positionY->point, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 18, 1.0f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &this->managerObjects->lightSources[this->selectedObjectLight]->positionZ->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->positionZ->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 16, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->positionX->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->positionX->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 17, 1.0f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->positionY->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->positionY->point, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 18, 1.0f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &this->managerObjects.lightSources[this->selectedObjectLight]->positionZ->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->positionZ->point, true, isFrame);
                     break;
                 }
                 case 4: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Light colors");
 
-                    this->helperUI->addControlColor3("Ambient Color", &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->color, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->colorPickerOpen);
-                    this->helperUI->addControlsSlider("Ambient Intensity", 19, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->ambient->strength, true, isFrame);
+                    this->helperUI->addControlColor3("Ambient Color", &this->managerObjects.lightSources[this->selectedObjectLight]->ambient->color, &this->managerObjects.lightSources[this->selectedObjectLight]->ambient->colorPickerOpen);
+                    this->helperUI->addControlsSlider("Ambient Intensity", 19, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->ambient->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->ambient->strength, true, isFrame);
 
-                    this->helperUI->addControlColor3("Diffuse Color", &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->color, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->colorPickerOpen);
-                    this->helperUI->addControlsSlider("Diffuse Intensity", 20, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->diffuse->strength, true, isFrame);
+                    this->helperUI->addControlColor3("Diffuse Color", &this->managerObjects.lightSources[this->selectedObjectLight]->diffuse->color, &this->managerObjects.lightSources[this->selectedObjectLight]->diffuse->colorPickerOpen);
+                    this->helperUI->addControlsSlider("Diffuse Intensity", 20, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->diffuse->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->diffuse->strength, true, isFrame);
 
-                    this->helperUI->addControlColor3("Specular Color", &this->managerObjects->lightSources[this->selectedObjectLight]->specular->color, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->colorPickerOpen);
-                    this->helperUI->addControlsSlider("Specular Intensity", 21, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->specular->strength, true, isFrame);
+                    this->helperUI->addControlColor3("Specular Color", &this->managerObjects.lightSources[this->selectedObjectLight]->specular->color, &this->managerObjects.lightSources[this->selectedObjectLight]->specular->colorPickerOpen);
+                    this->helperUI->addControlsSlider("Specular Intensity", 21, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->specular->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->specular->strength, true, isFrame);
 
                     ImGui::Separator();
 
-                    if (this->managerObjects->lightSources[this->selectedObjectLight]->type != LightSourceType_Directional) {
-                        this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
-                        this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lLinear->point, true, isFrame);
-                        this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
+                    if (this->managerObjects.lightSources[this->selectedObjectLight]->type != LightSourceType_Directional) {
+                        this->helperUI->addControlsSlider("Constant", 22, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->lConstant->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->lConstant->point, true, isFrame);
+                        this->helperUI->addControlsSlider("Literal", 23, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->lLinear->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->lLinear->point, true, isFrame);
+                        this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->lQuadratic->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->lQuadratic->point, true, isFrame);
                     }
 
-                    switch (this->managerObjects->lightSources[this->selectedObjectLight]->type) {
+                    switch (this->managerObjects.lightSources[this->selectedObjectLight]->type) {
                         case LightSourceType_Point: {
                             break;
                         }
                         case LightSourceType_Spot: {
                             ImGui::Separator();
-                            this->helperUI->addControlsSlider("CutOff", 25, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lCutOff->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lCutOff->point, true, isFrame);
-                            this->helperUI->addControlsSlider("Outer CutOff", 26, 1.0f, -180.0f, 180.0f, true, &this->managerObjects->lightSources[this->selectedObjectLight]->lOuterCutOff->animate, &this->managerObjects->lightSources[this->selectedObjectLight]->lOuterCutOff->point, true, isFrame);
+                            this->helperUI->addControlsSlider("CutOff", 25, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->lCutOff->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->lCutOff->point, true, isFrame);
+                            this->helperUI->addControlsSlider("Outer CutOff", 26, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[this->selectedObjectLight]->lOuterCutOff->animate, &this->managerObjects.lightSources[this->selectedObjectLight]->lOuterCutOff->point, true, isFrame);
                             break;
                         }
                         default:
@@ -581,18 +583,18 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             switch (this->selectedObjectArtefact) {
                 case 0: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Terrain");
-                    ImGui::Checkbox("Terrain", &this->managerObjects->Setting_ShowTerrain);
-                    if (this->managerObjects->Setting_ShowTerrain) {
+                    ImGui::Checkbox("Terrain", &this->managerObjects.Setting_ShowTerrain);
+                    if (this->managerObjects.Setting_ShowTerrain) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Terrain", ImVec2(-1, 0)))
                             this->generateNewTerrain = !this->generateNewTerrain;
-                        ImGui::Checkbox("Color Heightmap", &this->managerObjects->terrain->terrainGenerator->Setting_ColorTerrain);
-                        ImGui::Checkbox("Textured Terrain", &this->managerObjects->terrain->Setting_UseTexture);
-                        ImGui::Checkbox("Wireframe Terrain", &this->managerObjects->terrain->Setting_Wireframe);
-                        ImGui::Checkbox("Terrain ModelFace", &this->managerObjects->Setting_TerrainModel);
+                        ImGui::Checkbox("Color Heightmap", &this->managerObjects.terrain->terrainGenerator->Setting_ColorTerrain);
+                        ImGui::Checkbox("Textured Terrain", &this->managerObjects.terrain->Setting_UseTexture);
+                        ImGui::Checkbox("Wireframe Terrain", &this->managerObjects.terrain->Setting_Wireframe);
+                        ImGui::Checkbox("Terrain ModelFace", &this->managerObjects.Setting_TerrainModel);
                         // TODO: BIG memory consumption
-//                        ImGui::Checkbox("Animate by X", &this->managerObjects->Setting_TerrainAnimateX);
-//                        ImGui::Checkbox("Animate by Y", &this->managerObjects->Setting_TerrainAnimateY);
+//                        ImGui::Checkbox("Animate by X", &this->managerObjects.Setting_TerrainAnimateX);
+//                        ImGui::Checkbox("Animate by Y", &this->managerObjects.Setting_TerrainAnimateY);
                         ImGui::Separator();
                         ImGui::Text("Geometry Type");
                         const char* geometry_terraintype_items[] = {
@@ -600,17 +602,17 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                             "Cubic",
                             "Spherical"
                         };
-                        ImGui::Combo("##2291", &this->managerObjects->terrain->terrainGenerator->Setting_TerrainType, geometry_terraintype_items, IM_ARRAYSIZE(geometry_terraintype_items));
+                        ImGui::Combo("##2291", &this->managerObjects.terrain->terrainGenerator->Setting_TerrainType, geometry_terraintype_items, IM_ARRAYSIZE(geometry_terraintype_items));
                     }
 
                     if (this->generateNewTerrain) {
-                        this->managerObjects->generateTerrain();
-                        this->heightmapImage = this->managerObjects->terrain->heightmapImage;
+                        this->managerObjects.generateTerrain();
+                        this->heightmapImage = this->managerObjects.terrain->heightmapImage;
                         this->newHeightmap = true;
                         this->generateNewTerrain = false;
                     }
 
-                    if (this->managerObjects->Setting_ShowTerrain) {
+                    if (this->managerObjects.Setting_ShowTerrain) {
                         if (this->newHeightmap && this->heightmapImage != "") {
                             int tChannels;
                             unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
@@ -652,43 +654,43 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         this->newHeightmap = false;
                     }
 
-                    if (this->managerObjects->Setting_ShowTerrain) {
+                    if (this->managerObjects.Setting_ShowTerrain) {
                         ImGui::Separator();
                         ImGui::Text("Seed");
-                        ImGui::Checkbox("Random Seed", &this->managerObjects->terrain->terrainGenerator->Setting_SeedRandom);
-                        this->helperUI->addControlsIntegerSliderSameLine("Max", 11, std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), &this->managerObjects->terrain->terrainGenerator->Setting_Seed);
+                        ImGui::Checkbox("Random Seed", &this->managerObjects.terrain->terrainGenerator->Setting_SeedRandom);
+                        this->helperUI->addControlsIntegerSliderSameLine("Max", 11, std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), &this->managerObjects.terrain->terrainGenerator->Setting_Seed);
                         ImGui::Separator();
                         ImGui::Text("Map Dimensions");
-                        this->helperUI->addControlsIntegerSliderSameLine("X", 1, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainWidth);
-                        this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 3, this->managerObjects->Setting_GridSize * 10, &this->managerObjects->Setting_TerrainHeight);
+                        this->helperUI->addControlsIntegerSliderSameLine("X", 1, 3, this->managerObjects.Setting_GridSize * 10, &this->managerObjects.Setting_TerrainWidth);
+                        this->helperUI->addControlsIntegerSliderSameLine("Y", 2, 3, this->managerObjects.Setting_GridSize * 10, &this->managerObjects.Setting_TerrainHeight);
                         ImGui::Separator();
                         ImGui::Text("Terrain Map Offset");
-                        this->helperUI->addControlsFloatSliderSameLine("X", 3, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetHorizontal);
-                        this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects->terrain->terrainGenerator->Setting_OffsetVertical);
+                        this->helperUI->addControlsFloatSliderSameLine("X", 3, -1000.0f, 1000.0f, &this->managerObjects.terrain->terrainGenerator->Setting_OffsetHorizontal);
+                        this->helperUI->addControlsFloatSliderSameLine("Y", 4, -1000.0f, 1000.0f, &this->managerObjects.terrain->terrainGenerator->Setting_OffsetVertical);
                         ImGui::Separator();
                         ImGui::Text("Terrain Coeficients");
-                        this->helperUI->addControlsFloatSliderSameLine("Scale", 8, 1.0f, 100.0f, &this->managerObjects->terrain->terrainGenerator->Setting_ScaleCoeficient);
-                        this->helperUI->addControlsFloatSliderSameLine("Height", 9, -10.0f, 10.0f, &this->managerObjects->terrain->terrainGenerator->Setting_HeightCoeficient);
+                        this->helperUI->addControlsFloatSliderSameLine("Scale", 8, 1.0f, 100.0f, &this->managerObjects.terrain->terrainGenerator->Setting_ScaleCoeficient);
+                        this->helperUI->addControlsFloatSliderSameLine("Height", 9, -10.0f, 10.0f, &this->managerObjects.terrain->terrainGenerator->Setting_HeightCoeficient);
                         ImGui::Separator();
-                        this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects->terrain->terrainGenerator->Setting_Octaves);
-                        this->helperUI->addControlsFloatSlider("Frequency", 6, 1.0f, 16.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Frequency);
-                        this->helperUI->addControlsFloatSlider("Persistence", 7, 0.0f, 1.0f, &this->managerObjects->terrain->terrainGenerator->Setting_Persistence);
+                        this->helperUI->addControlsIntegerSlider("Octaves", 5, 1, 24, &this->managerObjects.terrain->terrainGenerator->Setting_Octaves);
+                        this->helperUI->addControlsFloatSlider("Frequency", 6, 1.0f, 16.0f, &this->managerObjects.terrain->terrainGenerator->Setting_Frequency);
+                        this->helperUI->addControlsFloatSlider("Persistence", 7, 0.0f, 1.0f, &this->managerObjects.terrain->terrainGenerator->Setting_Persistence);
                     }
                     break;
                 }
                 case 1: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Spaceship Generator");
-                    ImGui::Checkbox("Spaceship", &this->managerObjects->Setting_ShowSpaceship);
-                    if (this->managerObjects->Setting_ShowSpaceship) {
+                    ImGui::Checkbox("Spaceship", &this->managerObjects.Setting_ShowSpaceship);
+                    if (this->managerObjects.Setting_ShowSpaceship) {
                         ImGui::Separator();
                         if (ImGui::Button("Generate Spaceship", ImVec2(-1, 0)))
-                            this->managerObjects->Setting_GenerateSpaceship = true;
+                            this->managerObjects.Setting_GenerateSpaceship = true;
 //                            this->generateNewSpaceship = !this->generateNewSpaceship;
-                        ImGui::Checkbox("Wireframe", &this->managerObjects->spaceship->Setting_Wireframe);
+                        ImGui::Checkbox("Wireframe", &this->managerObjects.spaceship->Setting_Wireframe);
                     }
 
 //                    if (this->generateNewSpaceship) {
-//                        this->managerObjects->generateSpaceship();
+//                        this->managerObjects.generateSpaceship();
 //                        this->generateNewSpaceship = false;
 //                    }
                     break;
@@ -707,7 +709,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
     ImGui::End();
 
-    this->setHeightmapImage(this->managerObjects->heightmapImage);
+    this->setHeightmapImage(this->managerObjects.heightmapImage);
 }
 
 void DialogControlsGUI::setHeightmapImage(std::string heightmapImage) {

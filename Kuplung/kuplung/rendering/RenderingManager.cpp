@@ -24,7 +24,7 @@ void RenderingManager::init() {
     this->RenderingTotalFaces = 0;
 }
 
-void RenderingManager::render(ObjectsManager *managerObjects) {
+void RenderingManager::render(std::unique_ptr<ObjectsManager> &managerObjects) {
     switch (Settings::Instance()->RendererType) {
         case 0:
             this->rendererSimple->render(this->meshModelFaces, managerObjects);

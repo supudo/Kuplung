@@ -29,13 +29,13 @@
 class ObjectsManager {
 public:
     ~ObjectsManager();
-    ObjectsManager(FileModelManager *parser);
+    ObjectsManager();
 
     void destroy();
     void init(std::function<void(float)> doProgress,
               std::function<void()> addTerrain,
               std::function<void()> addSpaceship);
-    void loadSystemModels();
+    void loadSystemModels(std::unique_ptr<FileModelManager> &fileParser);
     void render();
     void renderSkybox();
     void resetPropertiesSystem();
@@ -56,7 +56,6 @@ public:
     void addLight(LightSourceType type, std::string title = "", std::string description = "");
     std::vector<Light*> lightSources;
 
-    FileModelManager *fileParser;
     Camera* camera;
     CameraModel* cameraModel;
     WorldGrid* grid;

@@ -16,18 +16,18 @@
 class SaveOpenBinarySeq {
 public:
     void init();
-    void saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, ObjectsManager *managerObjects);
+    void saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
+    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
-    void storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects);
-    void readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    void storeObjectsManagerSettings(std::ostream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects);
+    void readObjectsManagerSettings(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects);
 
-    void storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects);
-    void readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    void storeGlobalLights(std::ostream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects);
+    void readGlobalLights(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects);
 
     void storeObjects(std::ostream& kuplungFile, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects);
+    std::vector<ModelFaceData*> readObjects(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects);
 
     void binary_write_model(std::ostream& stream, MeshModel model);
     void binary_write_model_material_texture(std::ostream& stream, MeshMaterialTextureImage materialTexture);

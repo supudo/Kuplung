@@ -24,7 +24,7 @@ public:
     ~ImageRenderer();
     void init();
     void destroy();
-    void renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, ObjectsManager *managerObjects);
+    void renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
     SceneRenderer *rendererScene;

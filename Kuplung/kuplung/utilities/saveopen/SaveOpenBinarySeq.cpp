@@ -14,7 +14,7 @@
 void SaveOpenBinarySeq::init() {
 }
 
-void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
     std::string fileName = file.path + "/" + file.title;
     if (!this->hasEnding(fileName, ".kuplung"))
         fileName += ".kuplung";
@@ -33,7 +33,7 @@ void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, ObjectsManager *managerOb
     }
 }
 
-std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     std::ifstream kuplungFile;
@@ -52,7 +52,7 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, Ob
     return models;
 }
 
-void SaveOpenBinarySeq::storeObjectsManagerSettings(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
+void SaveOpenBinarySeq::storeObjectsManagerSettings(std::ostream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->binary_write(kuplungFile, managerObjects->Setting_FOV);
     this->binary_write(kuplungFile, managerObjects->Setting_OutlineThickness);
     this->binary_write(kuplungFile, managerObjects->Setting_RatioWidth);
@@ -122,7 +122,7 @@ void SaveOpenBinarySeq::storeObjectsManagerSettings(std::ostream& kuplungFile, O
     this->binary_write(kuplungFile, managerObjects->grid->showGrid);
 }
 
-void SaveOpenBinarySeq::readObjectsManagerSettings(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+void SaveOpenBinarySeq::readObjectsManagerSettings(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->binary_read(kuplungFile, managerObjects->Setting_FOV);
     this->binary_read(kuplungFile, managerObjects->Setting_OutlineThickness);
     this->binary_read(kuplungFile, managerObjects->Setting_RatioWidth);
@@ -192,7 +192,7 @@ void SaveOpenBinarySeq::readObjectsManagerSettings(std::istream& kuplungFile, Ob
     this->binary_read(kuplungFile, managerObjects->grid->showGrid);
 }
 
-void SaveOpenBinarySeq::storeGlobalLights(std::ostream& kuplungFile, ObjectsManager *managerObjects) {
+void SaveOpenBinarySeq::storeGlobalLights(std::ostream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects) {
     int lightsCount = int(managerObjects->lightSources.size());
     this->binary_write(kuplungFile, lightsCount);
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
@@ -232,7 +232,7 @@ void SaveOpenBinarySeq::storeGlobalLights(std::ostream& kuplungFile, ObjectsMana
     }
 }
 
-void SaveOpenBinarySeq::readGlobalLights(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+void SaveOpenBinarySeq::readGlobalLights(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects) {
     managerObjects->lightSources.clear();
     int lightsCount = 0;
     this->binary_read(kuplungFile, lightsCount);
@@ -363,7 +363,7 @@ void SaveOpenBinarySeq::storeObjects(std::ostream& kuplungFile, std::vector<Mode
     }
 }
 
-std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplungFile, ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplungFile, std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     int modelsCount = 0;

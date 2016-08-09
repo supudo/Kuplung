@@ -17,7 +17,8 @@
 
 class DialogControlsGUI {
 public:
-    void init(ObjectsManager *managerObjects);
+    DialogControlsGUI(ObjectsManager &managerObjects);
+    void init();
     void render(bool* show, bool* isFrame);
 
 private:
@@ -27,7 +28,7 @@ private:
     int selectedTabGUITerrain, selectedTabGUISpaceship;
     float heightTopPanel = 170.0f;
 
-    ObjectsManager *managerObjects;
+    ObjectsManager &managerObjects;
     UIHelpers *helperUI;
 
     void setHeightmapImage(std::string heightmapImage);

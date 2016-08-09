@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "Kuplung::doProgress(float):Kuplung.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "this-&gt;managerUI-&gt;get()-&gt;parsingPercentage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

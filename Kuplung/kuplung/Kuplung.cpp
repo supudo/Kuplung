@@ -118,17 +118,16 @@ bool Kuplung::init() {
 
                     this->initFolders();
 
-                    this->parser = new FileModelManager();
+                    this->parser = std::make_unique<FileModelManager>();
                     this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
-                    this->managerObjects = new ObjectsManager(this->parser);
+                    this->managerObjects = std::make_unique<ObjectsManager>();
                     this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1),
                                                std::bind(&Kuplung::addTerrainModel, this),
                                                std::bind(&Kuplung::addSpaceshipModel, this));
 
-                    this->managerUI = new UI();
+                    this->managerUI = std::make_unique<UI>(*this->managerObjects);
                     this->managerUI->init(gWindow,
-                                          this->managerObjects,
                                           std::bind(&Kuplung::guiQuit, this),
                                           std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiClearScreen, this),
@@ -143,15 +142,14 @@ bool Kuplung::init() {
                                           );
                     this->doLog("UI initialized.");
 
-                    this->managerObjects->loadSystemModels();
+                    this->managerObjects->loadSystemModels(this->parser);
+                    this->doLog("Objects Manager initialized.");
 
-                    this->doLog("App initialized.");
-
-                    this->managerControls = new Controls();
+                    this->managerControls = std::make_unique<Controls>();
                     this->managerControls->init(this->gWindow);
                     this->doLog("Input Control Manager initialized.");
 
-                    this->fontParser = new FNTParser();
+                    this->fontParser = std::make_unique<FNTParser>();
                     this->fontParser->init();
                     this->doLog("Font Parser Initialized.");
 
@@ -165,19 +163,19 @@ bool Kuplung::init() {
 
                     this->initSceneGUI();
 
-                    this->rayPicker = new RayPicking();
-                    this->rayPicker->init(this->managerObjects, this->managerControls, std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+                    this->rayPicker = std::make_unique<RayPicking>();
+                    this->rayPicker->init(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
 
-                    this->managerExporter = new Exporter();
+                    this->managerExporter = std::make_unique<Exporter>();
                     this->managerExporter->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
-                    this->imageRenderer = new ImageRenderer();
+                    this->imageRenderer = std::make_unique<ImageRenderer>();
                     this->imageRenderer->init();
 
-                    this->managerRendering = new RenderingManager();
+                    this->managerRendering = std::make_unique<RenderingManager>();
                     this->managerRendering->init();
 
-                    this->managerSaveOpen = new SaveOpen();
+                    this->managerSaveOpen = std::make_unique<SaveOpen>();
                     this->managerSaveOpen->init();
                 }
             }
@@ -292,7 +290,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // picking
         if (this->managerControls->mouseButton_LEFT) {
             this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
-            this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject);
+            this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
             this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
         }
     }

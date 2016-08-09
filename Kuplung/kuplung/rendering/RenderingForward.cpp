@@ -303,7 +303,7 @@ bool RenderingForward::initShaderProgram() {
     return success;
 }
 
-void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
+void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->matrixProjection = managerObjects->matrixProjection;
     this->matrixCamera = managerObjects->camera->matrixCamera;
     this->vecCameraPosition = managerObjects->camera->cameraPosition;

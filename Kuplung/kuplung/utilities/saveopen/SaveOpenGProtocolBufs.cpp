@@ -19,7 +19,7 @@ void SaveOpenGProtocolBufs::init() {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
 }
 
-void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
     std::string fileName = file.path;
     if (!this->hasEnding(fileName, ".kuplung"))
         fileName += ".kuplung";
@@ -70,7 +70,7 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, ObjectsManager *manag
     boost::filesystem::remove(fileNameScene.c_str());
 }
 
-std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file, ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     std::string zPath = file.path;
@@ -123,7 +123,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
     return models;
 }
 
-void SaveOpenGProtocolBufs::storeObjectsManagerSettings(ObjectsManager *managerObjects) {
+void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects) {
     this->bufGUISettings.set_setting_fov(managerObjects->Setting_FOV);
     this->bufGUISettings.set_setting_outlinethickness(managerObjects->Setting_OutlineThickness);
     this->bufGUISettings.set_setting_ratiowidth(managerObjects->Setting_RatioWidth);
@@ -199,7 +199,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(ObjectsManager *managerO
     this->bufGUISettings.set_allocated_grid(bufGrid);
 }
 
-void SaveOpenGProtocolBufs::readObjectsManagerSettings(ObjectsManager *managerObjects) {
+void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects) {
     managerObjects->Setting_FOV = this->bufGUISettings.setting_fov();
     managerObjects->Setting_OutlineThickness = this->bufGUISettings.setting_outlinethickness();
     managerObjects->Setting_RatioWidth = this->bufGUISettings.setting_ratiowidth();
@@ -291,7 +291,7 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(ObjectsManager *managerOb
     managerObjects->grid->showGrid = grid.showgrid();
 }
 
-void SaveOpenGProtocolBufs::storeGlobalLights(ObjectsManager *managerObjects) {
+void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager> &managerObjects) {
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
         Light* l = managerObjects->lightSources[i];
         KuplungApp::LightObject* lo = this->bufGUISettings.add_lights();
@@ -319,7 +319,7 @@ void SaveOpenGProtocolBufs::storeGlobalLights(ObjectsManager *managerObjects) {
     }
 }
 
-void SaveOpenGProtocolBufs::readGlobalLights(ObjectsManager *managerObjects) {
+void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &managerObjects) {
     for (int i=0; i<this->bufGUISettings.lights_size(); i++) {
         KuplungApp::LightObject lo = this->bufGUISettings.lights(i);
 
@@ -442,7 +442,7 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
     }
 }
 
-std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(ObjectsManager *managerObjects) {
+std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     for (int i=0; i<this->bufScene.models_size(); i++) {

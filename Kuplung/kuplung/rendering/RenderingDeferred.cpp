@@ -311,7 +311,7 @@ void RenderingDeferred::initLights() {
     }
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
+void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->renderGBuffer(meshModelFaces, managerObjects);
     this->renderLightingPass(managerObjects);
     if (managerObjects->Setting_DeferredTestLights)
@@ -328,7 +328,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, Objec
     }
 }
 
-void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects) {
+void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -399,7 +399,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
+void RenderingDeferred::renderLightingPass(std::unique_ptr<ObjectsManager> &managerObjects) {
     // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
@@ -562,7 +562,7 @@ void RenderingDeferred::renderLightingPass(ObjectsManager *managerObjects) {
     this->renderQuad();
 }
 
-void RenderingDeferred::renderLightObjects(ObjectsManager *managerObjects) {
+void RenderingDeferred::renderLightObjects(std::unique_ptr<ObjectsManager> &managerObjects) {
     // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer

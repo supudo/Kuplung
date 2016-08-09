@@ -28,10 +28,10 @@
 
 class UI {
 public:
+    UI(ObjectsManager &managerObjects);
     ~UI();
     void destroy();
     void init(SDL_Window *window,
-              ObjectsManager *managerObjects,
               std::function<void()> quitApp,
               std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
               std::function<void()> newScene,
@@ -106,7 +106,7 @@ private:
     void popupRecentFileImportedDoesntExists();
 
     SDL2OpenGL32 *imguiImplementation;
-    ObjectsManager *managerObjects;
+    ObjectsManager &managerObjects;
     Log *componentLog;
     Screenshot *componentScreenshot;
     FileBrowser *componentFileBrowser;

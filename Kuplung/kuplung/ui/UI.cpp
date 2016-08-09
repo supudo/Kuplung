@@ -11,6 +11,10 @@
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/ui/components/Tabs.hpp"
 
+UI::UI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
+}
+
 UI::~UI() {
     this->destroy();
 }
@@ -19,7 +23,6 @@ void UI::destroy() {
 }
 
 void UI::init(SDL_Window *window,
-              ObjectsManager *managerObjects,
               std::function<void()> quitApp,
               std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
               std::function<void()> newScene,
@@ -106,11 +109,11 @@ void UI::init(SDL_Window *window,
 
     this->windowOptions->loadFonts(&this->needsFontChange);
 
-    this->controlsGUI = new DialogControlsGUI();
-    this->controlsGUI->init(this->managerObjects);
+    this->controlsGUI = new DialogControlsGUI(this->managerObjects);
+    this->controlsGUI->init();
 
-    this->controlsModels = new DialogControlsModels();
-    this->controlsModels->init(this->sdlWindow, this->managerObjects, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
+    this->controlsModels = new DialogControlsModels(this->managerObjects);
+    this->controlsModels->init(this->sdlWindow, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
 }
 
 void UI::doLog(std::string message) {
@@ -225,25 +228,25 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 //            ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
                 if (ImGui::MenuItem("Directional (Sun)"))
-                    this->managerObjects->addLight(LightSourceType_Directional);
+                    this->managerObjects.addLight(LightSourceType_Directional);
                 if (ImGui::MenuItem("Point (Light bulb)"))
-                    this->managerObjects->addLight(LightSourceType_Point);
+                    this->managerObjects.addLight(LightSourceType_Point);
                 if (ImGui::MenuItem("Spot (Flashlight)"))
-                    this->managerObjects->addLight(LightSourceType_Spot);
+                    this->managerObjects.addLight(LightSourceType_Spot);
                 ImGui::EndMenu();
             }
             ImGui::Separator();
             if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Scene Rendering")) {
-                if (ImGui::MenuItem("Solid", NULL, managerObjects->viewModelSkin == ViewModelSkin_Solid))
-                    this->managerObjects->viewModelSkin = ViewModelSkin_Solid;
-                if (ImGui::MenuItem("Material", NULL, managerObjects->viewModelSkin == ViewModelSkin_Material))
-                    this->managerObjects->viewModelSkin = ViewModelSkin_Material;
-                if (ImGui::MenuItem("Texture", NULL, managerObjects->viewModelSkin == ViewModelSkin_Texture))
-                    this->managerObjects->viewModelSkin = ViewModelSkin_Texture;
-                if (ImGui::MenuItem("Wireframe", NULL, managerObjects->viewModelSkin == ViewModelSkin_Wireframe))
-                    this->managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
-                if (ImGui::MenuItem("Rendered", NULL, managerObjects->viewModelSkin == ViewModelSkin_Rendered))
-                    this->managerObjects->viewModelSkin = ViewModelSkin_Rendered;
+                if (ImGui::MenuItem("Solid", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Solid))
+                    this->managerObjects.viewModelSkin = ViewModelSkin_Solid;
+                if (ImGui::MenuItem("Material", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Material))
+                    this->managerObjects.viewModelSkin = ViewModelSkin_Material;
+                if (ImGui::MenuItem("Texture", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Texture))
+                    this->managerObjects.viewModelSkin = ViewModelSkin_Texture;
+                if (ImGui::MenuItem("Wireframe", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Wireframe))
+                    this->managerObjects.viewModelSkin = ViewModelSkin_Wireframe;
+                if (ImGui::MenuItem("Rendered", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Rendered))
+                    this->managerObjects.viewModelSkin = ViewModelSkin_Rendered;
                 ImGui::EndMenu();
             }
             ImGui::Separator();

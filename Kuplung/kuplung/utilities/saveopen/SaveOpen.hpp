@@ -18,8 +18,8 @@
 class SaveOpen {
 public:
     void init();
-    void saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, ObjectsManager *managerObjects);
+    void saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
+    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
     SaveOpenBinarySeq *entBinarySeq;

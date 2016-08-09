@@ -20,7 +20,7 @@ public:
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
+    void render(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
 
     std::vector<glm::vec3> objectPositions;
 
@@ -33,9 +33,9 @@ private:
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
     void initLights();
 
-    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, ObjectsManager *managerObjects);
-    void renderLightingPass(ObjectsManager *managerObjects);
-    void renderLightObjects(ObjectsManager *managerObjects);
+    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
+    void renderLightingPass(std::unique_ptr<ObjectsManager> &managerObjects);
+    void renderLightObjects(std::unique_ptr<ObjectsManager> &managerObjects);
 
     glm::mat4 matrixProject, matrixCamera;
 

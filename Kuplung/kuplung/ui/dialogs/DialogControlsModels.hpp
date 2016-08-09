@@ -22,8 +22,8 @@
 
 class DialogControlsModels {
 public:
+    DialogControlsModels(ObjectsManager &managerObjects);
     void init(SDL_Window* sdlWindow,
-              ObjectsManager *managerObjects,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
               std::function<void(int)> deleteModel);
@@ -72,7 +72,7 @@ private:
     void showTextureImage(ModelFaceBase* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
     void processTexture(ModelFaceBase *mmf);
 
-    ObjectsManager *managerObjects;
+    ObjectsManager &managerObjects;
     UIHelpers *helperUI;
     MaterialEditor *componentMaterialEditor;
     UVEditor *componentUVEditor;

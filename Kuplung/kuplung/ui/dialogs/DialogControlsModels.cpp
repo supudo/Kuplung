@@ -14,9 +14,12 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, ObjectsManager *managerObjects, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
-    this->sdlWindow = sdlWindow;
+DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+}
+
+void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
+    this->sdlWindow = sdlWindow;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
     this->funcDeleteModel = deleteModel;
@@ -472,9 +475,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
             }
             case 1: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale ModelFace");
-                this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects->Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects->Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects->Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
                 break;
             }
             case 2: {
@@ -488,22 +491,22 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
 
 //                ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
-                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionX->animate, &(*meshModelFaces)[this->selectedObject]->positionX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionX->animate, &(*meshModelFaces)[this->selectedObject]->positionX->point, true, isFrame);
 //                ImGui::PopItemWidth();
 //                ImGui::SameLine();
 //                ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.35f);
 //                ImGui::InputFloat("##0001", &(*meshModelFaces)[this->selectedObject]->positionX->point, -1.0f, -1.0f, 3);
 //                ImGui::PopItemWidth();
 
-                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionY->animate, &(*meshModelFaces)[this->selectedObject]->positionY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionZ->animate, &(*meshModelFaces)[this->selectedObject]->positionZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionY->animate, &(*meshModelFaces)[this->selectedObject]->positionY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionZ->animate, &(*meshModelFaces)[this->selectedObject]->positionZ->point, true, isFrame);
                 break;
             }
             case 4: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
-                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceX->animate, &(*meshModelFaces)[this->selectedObject]->displaceX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceY->animate, &(*meshModelFaces)[this->selectedObject]->displaceY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects->Setting_GridSize), this->managerObjects->Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceZ->animate, &(*meshModelFaces)[this->selectedObject]->displaceZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceX->animate, &(*meshModelFaces)[this->selectedObject]->displaceX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceY->animate, &(*meshModelFaces)[this->selectedObject]->displaceY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->displaceZ->animate, &(*meshModelFaces)[this->selectedObject]->displaceZ->point, true, isFrame);
                 break;
             }
             case 5: {

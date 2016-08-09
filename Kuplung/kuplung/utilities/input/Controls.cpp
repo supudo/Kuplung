@@ -8,6 +8,9 @@
 
 #include "Controls.hpp"
 
+Controls::~Controls() {
+}
+
 void Controls::init(SDL_Window* sdlWindow) {
     this->sdlWindow = sdlWindow;
 

@@ -18,18 +18,18 @@
 class SaveOpenGProtocolBufs {
 public:
     void init();
-    void saveKuplungFile(FBEntity file, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, ObjectsManager *managerObjects);
+    void saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
+    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
-    void storeObjectsManagerSettings(ObjectsManager *managerObjects);
-    void readObjectsManagerSettings(ObjectsManager *managerObjects);
+    void storeObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects);
+    void readObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects);
 
-    void storeGlobalLights(ObjectsManager *managerObjects);
-    void readGlobalLights(ObjectsManager *managerObjects);
+    void storeGlobalLights(std::unique_ptr<ObjectsManager> &managerObjects);
+    void readGlobalLights(std::unique_ptr<ObjectsManager> &managerObjects);
 
     void storeObjects(std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> readObjects(ObjectsManager *managerObjects);
+    std::vector<ModelFaceData*> readObjects(std::unique_ptr<ObjectsManager> &managerObjects);
 
     KuplungApp::GUISettings bufGUISettings;
     KuplungApp::Scene bufScene;

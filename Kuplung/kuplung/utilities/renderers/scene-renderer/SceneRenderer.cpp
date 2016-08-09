@@ -22,7 +22,7 @@ void SceneRenderer::destroy() {
 void SceneRenderer::init() {
 }
 
-void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, ObjectsManager *managerObjects) {
+void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -52,7 +52,7 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *mesh
     SDL_FreeSurface(image);
 }
 
-void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, ObjectsManager *managerObjects) {
+void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 

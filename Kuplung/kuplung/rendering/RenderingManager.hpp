@@ -18,7 +18,7 @@
 class RenderingManager {
 public:
     void init();
-    void render(ObjectsManager *managerObjects);
+    void render(std::unique_ptr<ObjectsManager> &managerObjects);
 
     int RenderingTotalVertices;
     int RenderingTotalIndices;
