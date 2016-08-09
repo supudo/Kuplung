@@ -17,27 +17,27 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 ModelFaceBase::ModelFaceBase() {
-//    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-//    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-//    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-//    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-//    this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-//    this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-//    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+//    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f });
+//    this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f });
+//    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f });
+//    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->displaceX = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->displaceY = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->displaceZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->materialAmbient = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
+//    this->materialDiffuse = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
+//    this->materialSpecular = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
+//    this->materialEmission = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
+//    this->Setting_MaterialSpecularExp = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->Setting_MaterialRefraction = std::make_unique<ObjectCoordinate>(false, 1.0f });
+//    this->displacementHeightScale = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f });
+//    this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f });
 }
 
 ModelFaceBase* ModelFaceBase::clone(int modelID) {
@@ -73,27 +73,27 @@ ModelFaceBase::~ModelFaceBase() {
 void ModelFaceBase::destroy() {
     this->meshModel = {};
 
-    delete this->positionX;
-    delete this->positionY;
-    delete this->positionZ;
-    delete this->scaleX;
-    delete this->scaleY;
-    delete this->scaleZ;
-    delete this->rotateX;
-    delete this->rotateY;
-    delete this->rotateZ;
-    delete this->displaceX;
-    delete this->displaceY;
-    delete this->displaceZ;
-    delete this->Setting_MaterialRefraction;
-    delete this->Setting_MaterialSpecularExp;
-    delete this->displacementHeightScale;
-    delete this->materialAmbient;
-    delete this->materialDiffuse;
-    delete this->materialSpecular;
-    delete this->materialEmission;
-    delete this->Effect_GBlur_Radius;
-    delete this->Effect_GBlur_Width;
+    this->positionX.reset();
+    this->positionY.reset();
+    this->positionZ.reset();
+    this->scaleX.reset();
+    this->scaleY.reset();
+    this->scaleZ.reset();
+    this->rotateX.reset();
+    this->rotateY.reset();
+    this->rotateZ.reset();
+    this->displaceX.reset();
+    this->displaceY.reset();
+    this->displaceZ.reset();
+    this->Setting_MaterialRefraction.reset();
+    this->Setting_MaterialSpecularExp.reset();
+    this->displacementHeightScale.reset();
+    this->materialAmbient.reset();
+    this->materialDiffuse.reset();
+    this->materialSpecular.reset();
+    this->materialEmission.reset();
+    this->Effect_GBlur_Radius.reset();
+    this->Effect_GBlur_Width.reset();
 }
 
 #pragma mark - Initialization
@@ -124,18 +124,18 @@ void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
     this->Setting_LightSpecular = glm::vec3(1.0, 1.0, 1.0);
 
     // material
-    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->meshModel.ModelMaterial.OpticalDensity });
-    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ glm::vec3(1.0, 1.0, 1.0) });
-    this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Setting_MaterialRefraction = std::make_unique<ObjectCoordinate>(false, this->meshModel.ModelMaterial.OpticalDensity);
+    this->materialAmbient = std::make_unique<MaterialColor>(false, false, 1.0, glm::vec3(1.0, 1.0, 1.0));
+    this->materialDiffuse = std::make_unique<MaterialColor>(false, false, 1.0, glm::vec3(1.0, 1.0, 1.0));
+    this->materialSpecular = std::make_unique<MaterialColor>(false, false, 1.0, glm::vec3(1.0, 1.0, 1.0));
+    this->materialEmission = std::make_unique<MaterialColor>(false, false, 1.0, glm::vec3(1.0, 1.0, 1.0));
+    this->displacementHeightScale = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->Setting_ParallaxMapping = false;
 
     // effects
     this->Effect_GBlur_Mode = -1;
-    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f);
 }
 
 void ModelFaceBase::initModelProperties() {
@@ -145,26 +145,26 @@ void ModelFaceBase::initModelProperties() {
     this->showMaterialEditor = false;
     this->Settings_DeferredRender = false;
 
-    this->positionX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->positionZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->scaleX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
-    this->scaleZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 1.0f });
+    this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f);
+    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f);
 
-    this->rotateX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->rotateZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
-    this->displaceX = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->displaceY = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->displaceZ = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->displaceX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->displaceY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->displaceZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->matrixModel = glm::mat4(1.0);
 
-    this->Setting_MaterialRefraction = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->meshModel.ModelMaterial.OpticalDensity });
-    this->Setting_MaterialSpecularExp = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ this->meshModel.ModelMaterial.SpecularExp });
+    this->Setting_MaterialRefraction = std::make_unique<ObjectCoordinate>(false, this->meshModel.ModelMaterial.OpticalDensity);
+    this->Setting_MaterialSpecularExp = std::make_unique<ObjectCoordinate>(false, this->meshModel.ModelMaterial.SpecularExp);
 
     this->Setting_LightPosition = glm::vec3(0.0, 0.0, 0.0);
     this->Setting_LightDirection = glm::vec3(0.0, 0.0, 0.0);
@@ -180,15 +180,15 @@ void ModelFaceBase::initModelProperties() {
     this->materialIlluminationModel = this->meshModel.ModelMaterial.IlluminationMode;
     this->Setting_ParallaxMapping = false;
 
-    this->materialAmbient = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ this->meshModel.ModelMaterial.AmbientColor });
-    this->materialDiffuse = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ this->meshModel.ModelMaterial.DiffuseColor });
-    this->materialSpecular = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ this->meshModel.ModelMaterial.SpecularColor });
-    this->materialEmission = new MaterialColor({ /*.colorPickerOpen=*/ false, /*.animate=*/ false, /*.strength=*/ 1.0, /*.color=*/ this->meshModel.ModelMaterial.EmissionColor });
-    this->displacementHeightScale = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->materialAmbient = std::make_unique<MaterialColor>(false, false, 1.0, this->meshModel.ModelMaterial.AmbientColor);
+    this->materialDiffuse = std::make_unique<MaterialColor>(false, false, 1.0, this->meshModel.ModelMaterial.DiffuseColor);
+    this->materialSpecular = std::make_unique<MaterialColor>(false, false, 1.0, this->meshModel.ModelMaterial.SpecularColor);
+    this->materialEmission = std::make_unique<MaterialColor>(false, false, 1.0, this->meshModel.ModelMaterial.EmissionColor);
+    this->displacementHeightScale = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->Effect_GBlur_Mode = -1;
-    this->Effect_GBlur_Radius = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
-    this->Effect_GBlur_Width = new ObjectCoordinate({ /*.animate=*/ false, /*.point=*/ 0.0f });
+    this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->Effect_Bloom_doBloom = false;
     this->Effect_Bloom_WeightA = 0.0f;

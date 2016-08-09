@@ -65,12 +65,12 @@ public:
     bool Setting_CelShading, Setting_Wireframe, Setting_UseTessellation, Setting_UseCullFace;
     float Setting_Alpha;
     int Setting_TessellationSubdivision;
-    ObjectCoordinate *positionX, *positionY, *positionZ;
-    ObjectCoordinate *scaleX, *scaleY, *scaleZ;
-    ObjectCoordinate *rotateX, *rotateY, *rotateZ;
-    ObjectCoordinate *displaceX, *displaceY, *displaceZ;
-    ObjectCoordinate *Setting_MaterialRefraction;
-    ObjectCoordinate *Setting_MaterialSpecularExp;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
+    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+    std::unique_ptr<ObjectCoordinate> displaceX, displaceY, displaceZ;
+    std::unique_ptr<ObjectCoordinate> Setting_MaterialRefraction;
+    std::unique_ptr<ObjectCoordinate> Setting_MaterialSpecularExp;
 
     // view skin
     ViewModelSkin Setting_ModelViewSkin;
@@ -84,16 +84,16 @@ public:
 
     // material
     int materialIlluminationModel;
-    ObjectCoordinate* displacementHeightScale;
+    std::unique_ptr<ObjectCoordinate> displacementHeightScale;
     bool showMaterialEditor;
-    MaterialColor *materialAmbient, *materialDiffuse, *materialSpecular, *materialEmission;
+    std::unique_ptr<MaterialColor> materialAmbient, materialDiffuse, materialSpecular, materialEmission;
 
     // mapping
     bool Setting_ParallaxMapping;
 
     // effects - gaussian blur
     int Effect_GBlur_Mode;
-    ObjectCoordinate *Effect_GBlur_Radius, *Effect_GBlur_Width;
+    std::unique_ptr<ObjectCoordinate> Effect_GBlur_Radius, Effect_GBlur_Width;
 
     // effects - bloom
     bool Effect_Bloom_doBloom;

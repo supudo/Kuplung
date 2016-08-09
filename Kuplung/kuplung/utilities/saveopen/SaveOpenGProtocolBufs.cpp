@@ -389,20 +389,20 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
         model->set_setting_usecullface(mf->Setting_UseCullFace);
         model->set_setting_alpha(mf->Setting_Alpha);
         model->set_setting_tessellationsubdivision(mf->Setting_TessellationSubdivision);
-        model->set_allocated_positionx(this->getObjectCoordinate(mf->positionX));
-        model->set_allocated_positiony(this->getObjectCoordinate(mf->positionY));
-        model->set_allocated_positionz(this->getObjectCoordinate(mf->positionZ));
-        model->set_allocated_scalex(this->getObjectCoordinate(mf->scaleX));
-        model->set_allocated_scaley(this->getObjectCoordinate(mf->scaleY));
-        model->set_allocated_scalez(this->getObjectCoordinate(mf->scaleZ));
-        model->set_allocated_rotatex(this->getObjectCoordinate(mf->rotateX));
-        model->set_allocated_rotatey(this->getObjectCoordinate(mf->rotateY));
-        model->set_allocated_rotatez(this->getObjectCoordinate(mf->rotateZ));
-        model->set_allocated_displacex(this->getObjectCoordinate(mf->displaceX));
-        model->set_allocated_displacey(this->getObjectCoordinate(mf->displaceY));
-        model->set_allocated_displacez(this->getObjectCoordinate(mf->displaceZ));
-        model->set_allocated_setting_materialrefraction(this->getObjectCoordinate(mf->Setting_MaterialRefraction));
-        model->set_allocated_setting_materialspecularexp(this->getObjectCoordinate(mf->Setting_MaterialSpecularExp));
+        model->set_allocated_positionx(this->getObjectCoordinate2(*mf->positionX));
+        model->set_allocated_positiony(this->getObjectCoordinate2(*mf->positionY));
+        model->set_allocated_positionz(this->getObjectCoordinate2(*mf->positionZ));
+        model->set_allocated_scalex(this->getObjectCoordinate2(*mf->scaleX));
+        model->set_allocated_scaley(this->getObjectCoordinate2(*mf->scaleY));
+        model->set_allocated_scalez(this->getObjectCoordinate2(*mf->scaleZ));
+        model->set_allocated_rotatex(this->getObjectCoordinate2(*mf->rotateX));
+        model->set_allocated_rotatey(this->getObjectCoordinate2(*mf->rotateY));
+        model->set_allocated_rotatez(this->getObjectCoordinate2(*mf->rotateZ));
+        model->set_allocated_displacex(this->getObjectCoordinate2(*mf->displaceX));
+        model->set_allocated_displacey(this->getObjectCoordinate2(*mf->displaceY));
+        model->set_allocated_displacez(this->getObjectCoordinate2(*mf->displaceZ));
+        model->set_allocated_setting_materialrefraction(this->getObjectCoordinate2(*mf->Setting_MaterialRefraction));
+        model->set_allocated_setting_materialspecularexp(this->getObjectCoordinate2(*mf->Setting_MaterialSpecularExp));
         model->set_setting_modelviewskin(mf->Setting_ModelViewSkin);
         model->set_allocated_solidlightskin_materialcolor(this->getVec3(mf->solidLightSkin_MaterialColor));
         model->set_allocated_solidlightskin_ambient(this->getVec3(mf->solidLightSkin_Ambient));
@@ -420,16 +420,16 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
         model->set_setting_lightstrengthdiffuse(mf->Setting_LightStrengthDiffuse);
         model->set_setting_lightstrengthspecular(mf->Setting_LightStrengthSpecular);
         model->set_materialilluminationmodel(mf->materialIlluminationModel);
-        model->set_allocated_displacementheightscale(this->getObjectCoordinate(mf->displacementHeightScale));
+        model->set_allocated_displacementheightscale(this->getObjectCoordinate2(*mf->displacementHeightScale));
         model->set_showmaterialeditor(mf->showMaterialEditor);
-        model->set_allocated_materialambient(this->getMaterialColor(mf->materialAmbient));
-        model->set_allocated_materialdiffuse(this->getMaterialColor(mf->materialDiffuse));
-        model->set_allocated_materialspecular(this->getMaterialColor(mf->materialSpecular));
-        model->set_allocated_materialemission(this->getMaterialColor(mf->materialEmission));
+        model->set_allocated_materialambient(this->getMaterialColor2(*mf->materialAmbient));
+        model->set_allocated_materialdiffuse(this->getMaterialColor2(*mf->materialDiffuse));
+        model->set_allocated_materialspecular(this->getMaterialColor2(*mf->materialSpecular));
+        model->set_allocated_materialemission(this->getMaterialColor2(*mf->materialEmission));
         model->set_setting_parallaxmapping(mf->Setting_ParallaxMapping);
         model->set_effect_gblur_mode(mf->Effect_GBlur_Mode);
-        model->set_allocated_effect_gblur_radius(this->getObjectCoordinate(mf->Effect_GBlur_Radius));
-        model->set_allocated_effect_gblur_width(this->getObjectCoordinate(mf->Effect_GBlur_Width));
+        model->set_allocated_effect_gblur_radius(this->getObjectCoordinate2(*mf->Effect_GBlur_Radius));
+        model->set_allocated_effect_gblur_width(this->getObjectCoordinate2(*mf->Effect_GBlur_Width));
         model->set_effect_bloom_dobloom(mf->Effect_Bloom_doBloom);
         model->set_effect_bloom_weighta(mf->Effect_Bloom_WeightA);
         model->set_effect_bloom_weightb(mf->Effect_Bloom_WeightB);
@@ -467,20 +467,20 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
         m->Setting_UseCullFace = mm.setting_usecullface();
         m->Setting_Alpha = mm.setting_alpha();
         m->Setting_TessellationSubdivision = mm.setting_tessellationsubdivision();
-        m->positionX = this->setObjectCoordinate(mm.positionx());
-        m->positionY = this->setObjectCoordinate(mm.positiony());
-        m->positionZ = this->setObjectCoordinate(mm.positionz());
-        m->scaleX = this->setObjectCoordinate(mm.scalex());
-        m->scaleY = this->setObjectCoordinate(mm.scaley());
-        m->scaleZ = this->setObjectCoordinate(mm.scalez());
-        m->rotateX = this->setObjectCoordinate(mm.rotatex());
-        m->rotateY = this->setObjectCoordinate(mm.rotatey());
-        m->rotateZ = this->setObjectCoordinate(mm.rotatez());
-        m->displaceX = this->setObjectCoordinate(mm.displacex());
-        m->displaceY = this->setObjectCoordinate(mm.displacey());
-        m->displaceZ = this->setObjectCoordinate(mm.displacez());
-        m->Setting_MaterialRefraction = this->setObjectCoordinate(mm.setting_materialrefraction());
-        m->Setting_MaterialSpecularExp = this->setObjectCoordinate(mm.setting_materialspecularexp());
+        m->positionX = this->setObjectCoordinate2(mm.positionx());
+        m->positionY = this->setObjectCoordinate2(mm.positiony());
+        m->positionZ = this->setObjectCoordinate2(mm.positionz());
+        m->scaleX = this->setObjectCoordinate2(mm.scalex());
+        m->scaleY = this->setObjectCoordinate2(mm.scaley());
+        m->scaleZ = this->setObjectCoordinate2(mm.scalez());
+        m->rotateX = this->setObjectCoordinate2(mm.rotatex());
+        m->rotateY = this->setObjectCoordinate2(mm.rotatey());
+        m->rotateZ = this->setObjectCoordinate2(mm.rotatez());
+        m->displaceX = this->setObjectCoordinate2(mm.displacex());
+        m->displaceY = this->setObjectCoordinate2(mm.displacey());
+        m->displaceZ = this->setObjectCoordinate2(mm.displacez());
+        m->Setting_MaterialRefraction = this->setObjectCoordinate2(mm.setting_materialrefraction());
+        m->Setting_MaterialSpecularExp = this->setObjectCoordinate2(mm.setting_materialspecularexp());
         switch (mm.setting_modelviewskin()) {
             case 0:
                 m->Setting_ModelViewSkin = ViewModelSkin_Solid;
@@ -514,16 +514,16 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
         m->Setting_LightStrengthDiffuse = mm.setting_lightstrengthdiffuse();
         m->Setting_LightStrengthSpecular = mm.setting_lightstrengthspecular();
         m->materialIlluminationModel = mm.materialilluminationmodel();
-        m->displacementHeightScale = this->setObjectCoordinate(mm.displacementheightscale());
+        m->displacementHeightScale = this->setObjectCoordinate2(mm.displacementheightscale());
         m->showMaterialEditor = mm.showmaterialeditor();
-        m->materialAmbient = this->setMaterialColor(mm.materialambient());
-        m->materialDiffuse = this->setMaterialColor(mm.materialdiffuse());
-        m->materialSpecular = this->setMaterialColor(mm.materialspecular());
-        m->materialEmission = this->setMaterialColor(mm.materialemission());
+        m->materialAmbient = this->setMaterialColor2(mm.materialambient());
+        m->materialDiffuse = this->setMaterialColor2(mm.materialdiffuse());
+        m->materialSpecular = this->setMaterialColor2(mm.materialspecular());
+        m->materialEmission = this->setMaterialColor2(mm.materialemission());
         m->Setting_ParallaxMapping = mm.setting_parallaxmapping();
         m->Effect_GBlur_Mode = mm.effect_gblur_mode();
-        m->Effect_GBlur_Radius = this->setObjectCoordinate(mm.effect_gblur_radius());
-        m->Effect_GBlur_Width = this->setObjectCoordinate(mm.effect_gblur_width());
+        m->Effect_GBlur_Radius = this->setObjectCoordinate2(mm.effect_gblur_radius());
+        m->Effect_GBlur_Width = this->setObjectCoordinate2(mm.effect_gblur_width());
         m->Effect_Bloom_doBloom = mm.effect_bloom_dobloom();
         m->Effect_Bloom_WeightA = mm.effect_bloom_weighta();
         m->Effect_Bloom_WeightB = mm.effect_bloom_weightb();
@@ -698,6 +698,20 @@ MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(cons
         meshMatTexImage.Commands.push_back(ent.commands(i));
     }
     return meshMatTexImage;
+}
+
+KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor2(MaterialColor& v) {
+    KuplungApp::MaterialColor* mc = new KuplungApp::MaterialColor();
+    mc->set_colorpickeropen(v.colorPickerOpen);
+    mc->set_animate(v.animate);
+    mc->set_strength(v.strength);
+    mc->set_allocated_color(this->getVec3(v.color));
+    return mc;
+}
+
+std::unique_ptr<MaterialColor> SaveOpenGProtocolBufs::setMaterialColor2(const KuplungApp::MaterialColor& v) {
+    auto t = std::make_unique<MaterialColor>(v.colorpickeropen(), v.animate(), v.strength(), this->setVec3(v.color()));
+    return t;
 }
 
 KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor* v) {
