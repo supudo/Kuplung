@@ -32,12 +32,14 @@ void RayLine::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void RayLine::init() {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
     this->initProperties();
 }
 

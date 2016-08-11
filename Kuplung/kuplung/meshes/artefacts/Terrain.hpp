@@ -28,7 +28,7 @@ public:
     bool Setting_UseTexture, Setting_Wireframe;
 
 private:
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

@@ -24,7 +24,7 @@ public:
     void render(std::vector<ModelFaceData*> meshModelFaces);
 
 private:
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;

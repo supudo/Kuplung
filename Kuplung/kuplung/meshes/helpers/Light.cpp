@@ -59,12 +59,14 @@ void Light::destroy() {
     this->lConstant.reset();
     this->lLinear.reset();
     this->lQuadratic.reset();
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void Light::init(LightSourceType type) {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
     this->initProperties(type);
 }
 

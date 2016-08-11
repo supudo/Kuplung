@@ -20,10 +20,11 @@ RenderingSimple::~RenderingSimple() {
 
 void RenderingSimple::destroy() {
     glDeleteProgram(this->shaderProgram);
+    this->glUtils.reset();
 }
 
 bool RenderingSimple::init() {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
 
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.vert";

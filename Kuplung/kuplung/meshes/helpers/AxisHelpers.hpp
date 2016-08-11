@@ -33,7 +33,7 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

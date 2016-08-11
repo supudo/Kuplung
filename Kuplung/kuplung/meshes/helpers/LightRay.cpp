@@ -28,13 +28,15 @@ void LightRay::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void LightRay::init(std::function<void(std::string)> doLog) {
     this->doLogFunc = doLog;
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
 }
 
 #pragma mark - Public

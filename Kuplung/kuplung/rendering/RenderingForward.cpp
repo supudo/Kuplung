@@ -73,10 +73,11 @@ void RenderingForward::destroy() {
     for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
         delete this->mfLights_Spot[i];
     }
+    this->glUtils.reset();
 }
 
 bool RenderingForward::init() {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
 
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;

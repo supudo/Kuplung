@@ -40,7 +40,7 @@ private:
 
     glm::mat4 matrixProject, matrixCamera;
 
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;

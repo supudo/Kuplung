@@ -39,12 +39,14 @@ void Terrain::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void Terrain::init() {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
     this->terrainGenerator = new HeightmapGenerator();
     this->terrainGenerator->initPosition();
 

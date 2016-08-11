@@ -45,12 +45,14 @@ void Skybox::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void Skybox::init(int gridSize) {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
 
     this->gridSize = gridSize;
     this->Setting_Skybox_Item = 0;

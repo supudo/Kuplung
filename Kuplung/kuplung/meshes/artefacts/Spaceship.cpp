@@ -39,12 +39,14 @@ void Spaceship::destroy() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
+
+    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void Spaceship::init() {
-    this->glUtils = new GLUtils();
+    this->glUtils = std::make_unique<GLUtils>();
     this->spaceshipGenerator = new SpaceshipMeshGenerator();
 
     this->Setting_UseTexture = false;

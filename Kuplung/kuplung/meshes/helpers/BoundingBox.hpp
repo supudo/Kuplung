@@ -31,7 +31,7 @@ public:
     glm::vec3 size, center;
 
 private:
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     std::vector<GLfloat> dataVertices;
     std::vector<GLuint> dataIndices;

@@ -110,8 +110,8 @@ protected:
     glm::vec3 uiAmbientLight;
     WorldGrid *grid;
 
-    GLUtils *glUtils;
-    Maths *mathHelper;
+    std::unique_ptr<GLUtils> glUtils;
+    std::unique_ptr<Maths> mathHelper;
 };
 
 #endif /* ModelFaceBase_hpp */

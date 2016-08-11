@@ -29,7 +29,8 @@ public:
 private:
     int gridSize;
 
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
+
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices, vboTexture;
     GLuint glVS_MatrixView, glVS_MatrixProjection, glVS_VertexPosition;

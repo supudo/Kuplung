@@ -94,13 +94,16 @@ void ModelFaceBase::destroy() {
     this->materialEmission.reset();
     this->Effect_GBlur_Radius.reset();
     this->Effect_GBlur_Width.reset();
+
+    this->glUtils.reset();
+    this->mathHelper.reset();
 }
 
 #pragma mark - Initialization
 
 void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
-    this->glUtils = new GLUtils();
-    this->mathHelper = new Maths();
+    this->glUtils = std::make_unique<GLUtils>();
+    this->mathHelper = std::make_unique<Maths>();
 
     this->meshModel = model;
     this->assetsFolder = assetsFolder;

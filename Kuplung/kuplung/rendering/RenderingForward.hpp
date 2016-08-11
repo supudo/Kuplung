@@ -30,7 +30,7 @@ public:
 private:
     bool initShaderProgram();
 
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;

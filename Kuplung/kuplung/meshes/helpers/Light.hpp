@@ -49,7 +49,7 @@ public:
 private:
     float x, y, z;
 
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

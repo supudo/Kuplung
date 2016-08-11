@@ -33,7 +33,7 @@ public:
     float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
 
 private:
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

@@ -35,7 +35,7 @@ public:
 private:
     int axisSize;
 
-    GLUtils *glUtils;
+    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

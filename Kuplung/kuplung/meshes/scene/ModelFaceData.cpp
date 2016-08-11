@@ -61,7 +61,6 @@ void ModelFaceData::destroy() {
 void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
 
-    this->mathHelper = new Maths();
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
 
