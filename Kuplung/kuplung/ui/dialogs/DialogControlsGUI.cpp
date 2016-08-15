@@ -203,7 +203,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Separator();
 
                 ImGui::Text("Gamma"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Gamma Correction");
-                ImGui::SliderFloat("Gamma##109", &this->managerObjects.Setting_GammaCoeficient, 1.0f, 2.4f);
+                ImGui::SliderFloat("##109", &this->managerObjects.Setting_GammaCoeficient, 1.0f, 4.0f);
                 ImGui::Unindent();
             }
 
