@@ -202,6 +202,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_DeferredTestLightsNumber = 32;
     this->Setting_ShowSpaceship = false;
     this->Setting_GenerateSpaceship = false;
+    this->Setting_GammaCoeficient = 1.0f;
 }
 
 void ObjectsManager::resetPropertiesSystem() {

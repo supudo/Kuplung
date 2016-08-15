@@ -78,6 +78,7 @@ public:
     bool Setting_DeferredTestMode, Setting_DeferredTestLights;
     int Setting_LightingPass_DrawMode, Setting_DeferredTestLightsNumber;
     float Setting_DeferredAmbientStrength;
+    float Setting_GammaCoeficient;
 
     ViewModelSkin viewModelSkin;
     glm::vec3 SolidLight_Direction;

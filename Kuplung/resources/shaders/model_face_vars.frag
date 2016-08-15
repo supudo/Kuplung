@@ -12,6 +12,7 @@ uniform vec3 fs_UIAmbient;
 uniform bool fs_celShading;
 uniform bool fs_userParallaxMapping;
 uniform int fs_modelViewSkin;
+uniform float fs_gammaCoeficient;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;

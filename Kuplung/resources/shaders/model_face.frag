@@ -115,6 +115,8 @@ void main(void) {
                 fragColor = vec4((material.refraction > 1.0) ? processedColorRefraction : processedColor_Diffuse.rgb, fs_alpha);
             else
                 fragColor = vec4(processedColorRefraction, fs_alpha);
+
+            fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / fs_gammaCoeficient));
         }
         else
             fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);
