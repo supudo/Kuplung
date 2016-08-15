@@ -245,7 +245,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Combo("##110", &this->managerObjects.Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
 
                     ImGui::Text("Ambient Strength");
-                    ImGui::SliderFloat("##109", &this->managerObjects.Setting_DeferredAmbientStrength, 0.0f, 1.0f);
+                    ImGui::SliderFloat("##210", &this->managerObjects.Setting_DeferredAmbientStrength, 0.0f, 1.0f);
 
                     ImGui::Checkbox("Test Mode", &this->managerObjects.Setting_DeferredTestMode);
                     ImGui::Checkbox("Test Lights", &this->managerObjects.Setting_DeferredTestLights);
