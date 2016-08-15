@@ -22,6 +22,7 @@ uniform vec3 viewPos;
 
 uniform int draw_mode;
 uniform float ambientStrength;
+uniform float gammaCoeficient;
 
 struct LightSource_Directional {
     bool inUse;
@@ -116,6 +117,9 @@ void main() {
         fragColor = vec4(Diffuse, 1.0);
     else if (draw_mode == 5)
         fragColor = vec4(vec3(Specular), 1.0);
+
+    // gamma correction
+    fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / gammaCoeficient));
 }
 
 // =================================================

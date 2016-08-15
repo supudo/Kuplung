@@ -564,6 +564,7 @@ void RenderingDeferred::renderLightingPass() {
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &this->managerObjects.camera->cameraPosition[0]);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), this->managerObjects.Setting_LightingPass_DrawMode + 1);
     glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), this->managerObjects.Setting_DeferredAmbientStrength);
+    glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "gammaCoeficient"), this->managerObjects.Setting_GammaCoeficient);
     this->renderQuad();
 }
 
