@@ -362,7 +362,7 @@ void Kuplung::renderScene() {
 }
 
 void Kuplung::renderSceneModels() {
-    this->managerRendering->render();
+    this->managerRendering->render(this->sceneSelectedModelObject);
 
     if (this->managerObjects->Setting_ShowTerrain) {
         Settings::Instance()->sceneCountObjects += 1;

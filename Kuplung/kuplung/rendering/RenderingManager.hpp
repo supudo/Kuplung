@@ -21,7 +21,7 @@ public:
     ~RenderingManager();
     void destroy();
     void init();
-    void render();
+    void render(int selectedModel);
 
     int RenderingTotalVertices;
     int RenderingTotalIndices;

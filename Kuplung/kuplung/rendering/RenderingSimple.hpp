@@ -21,7 +21,7 @@ public:
     void destroy();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces);
+    void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
 
 private:
     std::unique_ptr<GLUtils> glUtils;

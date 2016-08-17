@@ -35,16 +35,16 @@ void RenderingManager::init() {
     this->RenderingTotalFaces = 0;
 }
 
-void RenderingManager::render() {
+void RenderingManager::render(int selectedModel) {
     switch (Settings::Instance()->RendererType) {
         case 0:
-            this->rendererSimple->render(this->meshModelFaces);
+            this->rendererSimple->render(this->meshModelFaces, selectedModel);
             break;
         case 1:
-            this->rendererForward->render(this->meshModelFaces);
+            this->rendererForward->render(this->meshModelFaces, selectedModel);
             break;
         case 2:
-            this->rendererDeferred->render(this->meshModelFaces);
+            this->rendererDeferred->render(this->meshModelFaces, selectedModel);
             break;
         default:
             break;

@@ -318,8 +318,8 @@ void RenderingDeferred::initLights() {
     }
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces) {
-    this->renderGBuffer(meshModelFaces);
+void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+    this->renderGBuffer(meshModelFaces, selectedModel);
     this->renderLightingPass();
     if (this->managerObjects.Setting_DeferredTestLights)
         this->renderLightObjects();
@@ -335,7 +335,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces) {
     }
 }
 
-void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces) {
+void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -395,6 +395,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
             mfd->matrixModel = matrixModel;
             mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
             mfd->lightSources = this->managerObjects.lightSources;
+            mfd->setOptionsSelected(j == selectedModel);
             mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
             mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
             mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
