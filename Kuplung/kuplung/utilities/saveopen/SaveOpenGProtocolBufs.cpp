@@ -292,6 +292,7 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsMa
 }
 
 void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager> &managerObjects) {
+    this->bufGUISettings.clear_lights();
     for (size_t i=0; i<managerObjects->lightSources.size(); i++) {
         Light* l = managerObjects->lightSources[i];
         KuplungApp::LightObject* lo = this->bufGUISettings.add_lights();
@@ -378,6 +379,7 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &ma
 }
 
 void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFaces) {
+    this->bufScene.clear_models();
     for (size_t i=0; i<meshModelFaces.size(); i++) {
         ModelFaceBase *mf = meshModelFaces[i];
         KuplungApp::MeshModel* model = this->bufScene.add_models();

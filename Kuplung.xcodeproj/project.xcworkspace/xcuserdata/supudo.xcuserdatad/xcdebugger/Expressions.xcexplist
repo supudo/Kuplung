@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "SaveOpenGProtocolBufs::storeGlobalLights(std::__1::unique_ptr&lt;ObjectsManager, std::__1::default_delete&lt;ObjectsManager&gt; &gt;&amp;):SaveOpenGProtocolBufs.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "managerObjects-&gt;lightSources.size()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "Kuplung::onEvent(SDL_Event*):Kuplung.cpp">
          <PersistentStrings>
             <PersistentString

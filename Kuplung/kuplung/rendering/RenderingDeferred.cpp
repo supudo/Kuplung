@@ -176,29 +176,29 @@ void RenderingDeferred::initProps() {
         this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
         this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
         this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
-
-        // - Colors
-        srand(13);
-        for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
-            // Calculate slightly random offsets
-            GLfloat xPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
-            //GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 4.0f;
-            GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 0.0f;
-            GLfloat zPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
-            this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
-
-            // Also calculate random color
-            GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-            GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-            GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-            this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
-        }
     }
     else
         this->objectPositions.push_back(glm::vec3(0.0, 0.0, 0.0));
 
     for (size_t i=0; i<this->objectPositions.size(); i++) {
         this->objectPositions[i] *= glm::vec3(1.0, 0.0, 1.0);
+    }
+
+    // - Colors
+    srand(13);
+    for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
+        // Calculate slightly random offsets
+        GLfloat xPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
+        //GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 4.0f;
+        GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 0.0f;
+        GLfloat zPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
+        this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
+
+        // Also calculate random color
+        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
+        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
+        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
+        this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
     }
 }
 
