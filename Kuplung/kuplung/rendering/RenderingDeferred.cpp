@@ -357,7 +357,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
 
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
+//        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
 //        matrixModel *= managerObjects->grid->matrixModel;
