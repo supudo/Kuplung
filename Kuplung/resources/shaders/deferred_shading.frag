@@ -3,9 +3,9 @@
 out vec4 fragColor;
 in vec2 TexCoords;
 
-uniform sampler2D gPosition;
-uniform sampler2D gNormal;
-uniform sampler2D gAlbedoSpec;
+uniform sampler2D sampler_position;
+uniform sampler2D sampler_normal;
+uniform sampler2D sampler_albedospec;
 
 struct Light {
     vec3 Position;
@@ -62,10 +62,10 @@ vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 direct
 
 void main() {
     // Retrieve data from gbuffer
-    vec3 FragPos = texture(gPosition, TexCoords).rgb;
-    vec3 Normal = texture(gNormal, TexCoords).rgb;
-    vec3 Diffuse = texture(gAlbedoSpec, TexCoords).rgb;
-    float Specular = texture(gAlbedoSpec, TexCoords).a;
+    vec3 FragPos = texture(sampler_position, TexCoords).rgb;
+    vec3 Normal = texture(sampler_normal, TexCoords).rgb;
+    vec3 Diffuse = texture(sampler_albedospec, TexCoords).rgb;
+    float Specular = texture(sampler_albedospec, TexCoords).a;
     vec3 viewDir = normalize(viewPos - FragPos);
 
     // directional lights color

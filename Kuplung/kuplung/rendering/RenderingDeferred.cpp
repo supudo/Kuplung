@@ -161,9 +161,9 @@ bool RenderingDeferred::initLightObjects() {
 
 void RenderingDeferred::initProps() {
     glUseProgram(this->shaderProgram_LightingPass);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gPosition"), 0);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gNormal"), 1);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "gAlbedoSpec"), 2);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_position"), 0);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_normal"), 1);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_albedospec"), 2);
 
     //TODO: parametrize this in the GUI
     if (this->managerObjects.Setting_DeferredTestMode) {
@@ -395,7 +395,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
             mfd->matrixModel = matrixModel;
             mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
             mfd->lightSources = this->managerObjects.lightSources;
-            mfd->setOptionsSelected(j == selectedModel);
+            mfd->setOptionsSelected(int(j) == selectedModel);
             mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
             mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
             mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
