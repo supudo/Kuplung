@@ -182,8 +182,6 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
-#    kuplung/utilities/minizip/KuplungZip.cpp \
-#    kuplung/utilities/minizip/KuplungUnzip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
@@ -274,9 +272,6 @@ HEADERS += \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
-#    kuplung/utilities/minizip/KuplungMinizip.h \
-#    kuplung/utilities/minizip/KuplungZip.hpp \
-#    kuplung/utilities/minizip/KuplungUnzip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \
