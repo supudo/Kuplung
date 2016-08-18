@@ -521,7 +521,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                     this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[this->selectedObject]->Setting_TessellationSubdivision);
                     ImGui::Separator();
                     if (mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
-                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 10.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);
+                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, 0.0f, 1.0f, true, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->animate, &(*meshModelFaces)[this->selectedObject]->displacementHeightScale->point, false, isFrame);
                         ImGui::Separator();
                     }
                 }
