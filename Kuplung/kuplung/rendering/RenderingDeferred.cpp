@@ -94,8 +94,8 @@ bool RenderingDeferred::initGeometryPass() {
         return false;
     }
 
-    this->gl_GeometryPass_Texture_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse1");
-    this->gl_GeometryPass_Texture_Specular = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular1");
+    this->gl_GeometryPass_Texture_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse");
+    this->gl_GeometryPass_Texture_Specular = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular");
 
     return true;
 }
