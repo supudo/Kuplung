@@ -40,27 +40,9 @@ void main(void) {
             vec3 solidLightColor = calculateLightSolid(fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
             fragColor = vec4(solidLightColor, fs_alpha);
         }
-        else if (fs_modelViewSkin == 3) { // wireframe
+        else if (fs_modelViewSkin == 3) // wireframe
             fragColor = vec4(1.0);
-        }
         else if (fs_modelViewSkin == 4) { // full render
-            vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
-
-            // Parallax mapping coordinates
-            if (fs_userParallaxMapping) {
-                vec3 T = normalize(mat3(fs_ModelMatrix) * fs_tangent0);
-                vec3 B = normalize(mat3(fs_ModelMatrix) * fs_bitangent0);
-                vec3 N = normalize(mat3(fs_ModelMatrix) * fs_vertexNormal0);
-                mat3 TBN = transpose(mat3(T, B, N));
-                vec3 tangentViewPosition = TBN * fs_cameraPosition;
-                vec3 tangentFragPosition = TBN * fs_vertexPosition;
-                vec3 tangentViewDirection = normalize(tangentViewPosition - tangentFragPosition);
-                textureCoords = calculateParallaxMapping(fs_textureCoord,  tangentViewDirection);
-
-                if (textureCoords.x > 1.0 || textureCoords.y > 1.0 || textureCoords.x < 0.0 || textureCoords.y < 0.0)
-                    discard;
-             }
-
             // ambient color/texture
             vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, textureCoords) : vec4(material.ambient, 1.0));
 
@@ -69,6 +51,21 @@ void main(void) {
 
             // specular color/texture
             vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, textureCoords) : vec4(material.specular, 1.0));
+
+            // fragment position
+            vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
+
+            // Parallax mapping coordinates
+            if (fs_userParallaxMapping) {
+                mat3 TBN = cotangent_frame(normalDirection, fragmentPosition, textureCoords);
+                vec3 tangentViewPosition = TBN * fs_cameraPosition;
+                fragmentPosition = TBN * fragmentPosition;
+                vec3 tangentViewDirection = normalize(tangentViewPosition - fragmentPosition);
+                textureCoords = calculateParallaxMapping(fs_textureCoord,  tangentViewDirection);
+
+                if (textureCoords.x > 1.0 || textureCoords.y > 1.0 || textureCoords.x < 0.0 || textureCoords.y < 0.0)
+                    discard;
+             }
 
             // directional lights color
             vec3 lightsDirectional = vec3(0.0);
@@ -92,11 +89,13 @@ void main(void) {
                 vec4 effect_GBlur_Color = effect_gaussian_blur();
                 processedColorRefraction += effect_GBlur_Color.rgb;
             }
+
             if (effect_Bloom.doBloom) {
                 // effects - bloom
                 vec4 effect_Bloom_Color = effect_bloom();
                 processedColorRefraction += effect_Bloom_Color.rgb;
             }
+
             if (material.refraction > 1.0) {
                 vec3 refraction = calculateRefraction(fragmentNormal, processedColor_Diffuse);
                 processedColorRefraction = processedColorRefraction * refraction;

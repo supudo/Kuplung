@@ -134,6 +134,8 @@ vec3 calculateBumpedNormal();
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
 
+mat3 cotangent_frame(vec3 normal, vec3 position, vec2 texCoords);
+
 // out color
 
 out vec4 fragColor;
