@@ -342,6 +342,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
         mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
         mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
+        mfd->setOptionsSelected(int(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -617,16 +618,16 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         glUniform1f(this->glVS_IsBorder, 0.0);
 
         glm::mat4 mtxModel;
-        if (mfd->getOptionsSelected()) {
-            glDisable(GL_DEPTH_TEST);
-            glUniform1f(this->glVS_IsBorder, 1.0);
-            mtxModel = glm::scale(matrixModel, glm::vec3(mfd->getOptionsOutlineThickness()));
-            mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
-            glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-            glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
-            mfd->renderModel(true);
-            glEnable(GL_DEPTH_TEST);
-        }
+//        if (mfd->getOptionsSelected()) {
+//            glDisable(GL_DEPTH_TEST);
+//            glUniform1f(this->glVS_IsBorder, 1.0);
+//            mtxModel = glm::scale(matrixModel, glm::vec3(mfd->getOptionsOutlineThickness()));
+//            mvpMatrix = this->matrixProjection * this->matrixCamera * mtxModel;
+//            glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+//            glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
+//            mfd->renderModel(true);
+//            glEnable(GL_DEPTH_TEST);
+//        }
 
         // model draw
         glUniform1f(this->glVS_IsBorder, 0.0);
