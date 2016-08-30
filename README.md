@@ -5,7 +5,7 @@ C/C++/OpenGL Experiments - obj model viewer
 #### Using/Including
 
 - [ImGui](https://github.com/ocornut/imgui)
-- [ImGuzmo](https://github.com/CedricGuillemet/ImGuizmo)
+- [ImGuizmo](https://github.com/CedricGuillemet/ImGuizmo)
 - [STB libs](https://github.com/nothings/stb)
 - [Boost](http://www.boost.org/)
 - [GLM](http://glm.g-truc.net/)
