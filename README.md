@@ -1,6 +1,6 @@
 # Kuplung
 
-C/C++/OpenGL Experiments - obj model viewer
+C/C++/OpenGL Model Viewer (Experiments)
 
 #### Using/Including
 
