@@ -139,6 +139,11 @@ void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f);
+
+    // gizmo controls
+    this->Setting_Gizmo_Translate = false;
+    this->Setting_Gizmo_Rotate = false;
+    this->Setting_Gizmo_Scale = false;
 }
 
 void ModelFaceBase::initModelProperties() {
@@ -200,6 +205,11 @@ void ModelFaceBase::initModelProperties() {
     this->Effect_Bloom_WeightD = 0.0f;
     this->Effect_Bloom_Vignette = 0.0f;
     this->Effect_Bloom_VignetteAtt = 0.0f;
+
+    // gizmo controls
+    this->Setting_Gizmo_Translate = false;
+    this->Setting_Gizmo_Rotate = false;
+    this->Setting_Gizmo_Scale = false;
 }
 
 void ModelFaceBase::initBuffers() {
@@ -209,6 +219,12 @@ void ModelFaceBase::initBoundingBox() {
     this->boundingBox = new BoundingBox();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
+}
+
+void ModelFaceBase::initVertexSphere() {
+    this->vertexSphere = new VertexSphere();
+    this->vertexSphere->initShaderProgram();
+    this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
 void ModelFaceBase::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {

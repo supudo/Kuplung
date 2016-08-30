@@ -231,6 +231,15 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
+            if (ImGui::CollapsingHeader("Vertices")) {
+                ImGui::Indent();
+                ImGui::Checkbox("Visible", &this->managerObjects.Setting_VertexSphere_Visible);
+                ImGui::SliderInt("Segments", &this->managerObjects.Setting_VertexSphere_Segments, 3, 32);
+                this->helperUI->addControlsSlider("Radius", 1.0f, 0.5f, 0.0f, 2.0f, false, NULL, &this->managerObjects.Setting_VertexSphere_Radius, true, isFrame);
+                this->helperUI->addControlColor4("Color", &this->managerObjects.Setting_VertexSphere_Color, &this->managerObjects.Setting_VertexSphere_ColorPickerOpen);
+                ImGui::Unindent();
+            }
+
             if (Settings::Instance()->RendererType == 2) {
                 if (ImGui::CollapsingHeader("Deferred Rendering", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();

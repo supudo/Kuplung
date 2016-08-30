@@ -636,6 +636,11 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrixDraw));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
 
+        mfd->vertexSphereVisible = this->managerObjects.Setting_VertexSphere_Visible;
+        mfd->vertexSphereRadius = this->managerObjects.Setting_VertexSphere_Radius;
+        mfd->vertexSphereSegments = this->managerObjects.Setting_VertexSphere_Segments;
+        mfd->vertexSphereColor = this->managerObjects.Setting_VertexSphere_Color;
+
         mfd->renderModel(true);
     }
 

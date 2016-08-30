@@ -1,19 +1,27 @@
 //
-//  AxisHelpers.cpp
+//  VertexSphere.cpp
 //  Kuplung
 //
-//  Created by Sergey Petrov on 12/14/15.
+//  Created by Sergey Petrov on 12/2/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "AxisHelpers.hpp"
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-#include <glm/gtx/intersect.hpp>
-#include <glm/gtc/type_ptr.hpp>
-#include <fstream>
+#include "VertexSphere.hpp"
 
-void AxisHelpers::destroy() {
+#include <fstream>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+#pragma mark - Destroy
+
+VertexSphere::VertexSphere() {
+}
+
+VertexSphere::~VertexSphere() {
+    this->destroy();
+}
+
+void VertexSphere::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -23,33 +31,26 @@ void AxisHelpers::destroy() {
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
 
+    glDeleteBuffers(1, &this->vboVertices);
+    glDeleteBuffers(1, &this->vboIndices);
+
     glDeleteVertexArrays(1, &this->glVAO);
 
     this->glUtils.reset();
 }
 
-void AxisHelpers::init() {
+#pragma mark - Public
+
+bool VertexSphere::initShaderProgram() {
     this->glUtils = std::make_unique<GLUtils>();
-    this->initProperties();
-}
 
-void AxisHelpers::setModel(MeshModel meshModel) {
-    this->meshModel = meshModel;
-}
-
-void AxisHelpers::initProperties() {
-    this->matrixCamera = glm::mat4(1.0);
-    this->matrixModel = glm::mat4(1.0);
-}
-
-bool AxisHelpers::initShaderProgram() {
     bool success = true;
 
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/axis_helpers.vert";
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/vertex_sphere.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/axis_helpers.frag";
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/vertex_sphere.frag";
     std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
@@ -80,51 +81,77 @@ bool AxisHelpers::initShaderProgram() {
     return success;
 }
 
-void AxisHelpers::initBuffers() {
+
+void VertexSphere::initBuffers(MeshModel meshModel, int circleSegments, float radius) {
+    this->circleSegments = circleSegments;
+
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glDisable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
+
+    float theta = 2 * 3.1415926 / float(this->circleSegments);
+    float c = cosf(theta);
+    float s = sinf(theta);
+    float t;
+
+    float r = radius;
+    float x = r;
+    float y = 0;
+
+    this->dataVertices.clear();
+    this->dataIndices.clear();
+
+    for (size_t i=0; i<meshModel.vertices.size(); i++) {
+        glm::vec3 vertex = meshModel.vertices[i];
+        for (int j=0; j<this->circleSegments; j++) {
+            this->dataVertices.push_back(glm::vec3(x + vertex.x, y + vertex.y, vertex.z));
+            this->dataIndices.push_back(i);
+
+            t = x;
+            x = c * x - s * y;
+            y = s * t + c * y;
+        }
+    }
 
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countVertices * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, int(this->dataVertices.size()) * sizeof(glm::vec3), &this->dataVertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshModel.countIndices * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, int(this->dataIndices.size()) * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld, glm::vec3 position) {
+#pragma mark - Render
+
+void VertexSphere::render(glm::mat4 matrixMVP, glm::vec4 color) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        this->matrixProjection = mtxProjection;
-        this->matrixCamera = mtxCamera;
+//        glFrontFace(GL_CCW);
+//        glCullFace(GL_BACK);
 
-        this->matrixModel = glm::mat4(1.0);
-        if (fixedGridWorld)
-            this->matrixModel = mtxGrid;
+//        glEnable(GL_DEPTH_TEST);
+//        glDepthFunc(GL_LESS);
+//        glDisable(GL_BLEND);
+//        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        this->matrixModel = glm::translate(this->matrixModel, position);
+        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(matrixMVP));
+        glUniform3f(this->glUniformColor, color.r, color.g, color.b);
 
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
-
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-
-        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-
-        glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);
-
-        // draw
         glBindVertexArray(this->glVAO);
-        glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
+        for (int i = 0; i < this->circleSegments; i++)
+            glDrawArrays(GL_LINE_LOOP, this->circleSegments * i, this->circleSegments);
         glBindVertexArray(0);
 
         glUseProgram(0);

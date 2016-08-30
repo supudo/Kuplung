@@ -10,6 +10,7 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/ui/components/Tabs.hpp"
+#include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 UI::UI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
@@ -132,6 +133,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     this->isFrame = isFrame;
 
     this->imguiImplementation->ImGui_Implementation_NewFrame();
+    ImGuizmo::BeginFrame();
 
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("File")) {

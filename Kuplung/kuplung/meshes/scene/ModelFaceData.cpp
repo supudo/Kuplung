@@ -8,6 +8,9 @@
 
 #include "ModelFaceData.hpp"
 #include <boost/filesystem.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+#include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
@@ -161,11 +164,51 @@ void ModelFaceData::renderModel(bool useTessellation) {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
-        glm::mat4 matrixBB = glm::mat4(1.0f);
-        matrixBB *= this->matrixProjection;
-        matrixBB *= this->matrixCamera;
-        matrixBB *= this->matrixModel;
+    glm::mat4 matrixBB = glm::mat4(1.0f);
+    matrixBB *= this->matrixProjection;
+    matrixBB *= this->matrixCamera;
+    matrixBB *= this->matrixModel;
+
+    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn)
         this->boundingBox->render(matrixBB, this->so_outlineColor);
+
+    if (this->vertexSphereVisible) {
+//        this->vertexSphere->initBuffers(this->meshModel, this->vertexSphereSegments, this->vertexSphereRadius);
+//        this->vertexSphere->render(matrixBB, vertexSphereColor);
+    }
+
+    if (this->getOptionsSelected() && (this->Setting_Gizmo_Rotate || this->Setting_Gizmo_Translate || this->Setting_Gizmo_Scale)) {
+        ImGuizmo::Enable(true);
+        ImGuizmo::MODE gizmo_mode = ImGuizmo::TRANSLATE;
+        if (this->Setting_Gizmo_Rotate)
+            gizmo_mode = ImGuizmo::ROTATE;
+        else if (this->Setting_Gizmo_Scale)
+            gizmo_mode = ImGuizmo::SCALE;
+        glm::mat4 mtx = glm::mat4(1.0);
+        ImGuizmo::Mogwai(glm::value_ptr(this->matrixCamera),
+                         glm::value_ptr(this->matrixProjection),
+                         gizmo_mode,
+                         glm::value_ptr(this->matrixModel),
+                         glm::value_ptr(mtx)
+                         );
+
+        glm::vec3 scale;
+        glm::quat rotation;
+        glm::vec3 translation;
+        glm::vec3 skew;
+        glm::vec4 perspective;
+        glm::decompose(mtx, scale, rotation, translation, skew, perspective);
+
+        if (this->Setting_Gizmo_Translate) {
+            this->positionX->point += translation.x;
+            this->positionY->point += -1.0 * translation.z;
+            this->positionZ->point += translation.y;
+        }
+
+        if (this->Setting_Gizmo_Rotate) {
+            this->rotateX->point += glm::degrees(rotation.x);
+            this->rotateY->point += glm::degrees(rotation.z);
+            this->rotateZ->point += glm::degrees(rotation.y);
+        }
     }
 }

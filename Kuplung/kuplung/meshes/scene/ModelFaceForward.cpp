@@ -432,13 +432,15 @@ void ModelFaceForward::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera
     glUseProgram(0);
     glBindVertexArray(0);
 
-    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn) {
-        glm::mat4 matrixBB = glm::mat4(1.0f);
-        matrixBB *= this->matrixProjection;
-        matrixBB *= this->matrixCamera;
-        matrixBB *= this->matrixModel;
+    glm::mat4 matrixBB = glm::mat4(1.0f);
+    matrixBB *= this->matrixProjection;
+    matrixBB *= this->matrixCamera;
+    matrixBB *= this->matrixModel;
+
+    if (Settings::Instance()->ShowBoundingBox && this->so_selectedYn)
         this->boundingBox->render(matrixBB, this->so_outlineColor);
-    }
+
+    this->vertexSphere->render(matrixBB, glm::vec4(1.0, 0.0, 0.0, 1.0));
 }
 
 void ModelFaceForward::renderModel() {

@@ -135,6 +135,7 @@ SOURCES += main.cpp \
     kuplung/meshes/helpers/BoundingBox.cpp \
     kuplung/meshes/helpers/RayLine.cpp \
     kuplung/meshes/helpers/Skybox.cpp \
+    kuplung/meshes/helpers/VertexSphere.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -164,11 +165,13 @@ SOURCES += main.cpp \
     kuplung/ui/dialogs/DialogControlsModels.cpp \
     kuplung/pcg/HeightmapGenerator.cpp \
     kuplung/pcg/SpaceshipMeshGenerator.cpp \
+    kuplung/pcg/VoronoiGenerator.cpp \
     kuplung/utilities/font-parser/FNTParser.cpp \
     kuplung/utilities/gl/GLUtils.cpp \
     kuplung/utilities/imgui/imgui.cpp \
     kuplung/utilities/imgui/imgui_demo.cpp \
     kuplung/utilities/imgui/imgui_draw.cpp \
+    kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp \
     kuplung/utilities/input/Controls.cpp \
     kuplung/utilities/libnoise/noiseutils.cpp \
     kuplung/utilities/maths/Maths.cpp \
@@ -211,6 +214,7 @@ HEADERS += \
     kuplung/meshes/helpers/BoundingBox.hpp \
     kuplung/meshes/helpers/RayLine.hpp \
     kuplung/meshes/helpers/Skybox.hpp \
+    kuplung/meshes/helpers/VertexSphere.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
@@ -246,11 +250,13 @@ HEADERS += \
     kuplung/ui/iconfonts/IconsMaterialDesign.h \
     kuplung/pcg/HeightmapGenerator.hpp \
     kuplung/pcg/SpaceshipMeshGenerator.hpp \
+    kuplung/pcg/VoronoiGenerator.hpp \
     kuplung/utilities/font-parser/FNTParser.hpp \
     kuplung/utilities/gl/GLUtils.hpp \
     kuplung/utilities/imgui/imconfig.h \
     kuplung/utilities/imgui/imgui.h \
     kuplung/utilities/imgui/imgui_internal.h \
+    kuplung/utilities/imgui/imguizmo/ImGuizmo.h \
     kuplung/utilities/input/Controls.hpp \
     kuplung/utilities/libnoise/noiseutils.h \
     kuplung/utilities/maths/Maths.hpp \
@@ -364,6 +370,8 @@ DISTFILES += \
     resources/shaders/skybox.frag \
     resources/shaders/bounding_box.vert \
     resources/shaders/bounding_box.frag \
+    resources/shaders/vertex_sphere.vert \
+    resources/shaders/vertex_sphere.frag \
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \
     resources/skybox/fire_planet_front.jpg \

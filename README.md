@@ -5,6 +5,7 @@ C/C++/OpenGL Experiments - obj model viewer
 #### Using/Including
 
 - [ImGui](https://github.com/ocornut/imgui)
+- [ImGuzmo](https://github.com/CedricGuillemet/ImGuizmo)
 - [STB libs](https://github.com/nothings/stb)
 - [Boost](http://www.boost.org/)
 - [GLM](http://glm.g-truc.net/)
@@ -12,7 +13,7 @@ C/C++/OpenGL Experiments - obj model viewer
 - [libnoise](http://libnoise.sourceforge.net/)
 
 #### IDE
-QT Creator and Xcode for convinient debugging
+QT Creator (Xcode for convinient debugging)
 
 #### TODO
 

@@ -475,6 +475,12 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
             }
             case 1: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale ModelFace");
+                if (ImGui::Checkbox("Gizmo Scale", &(*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Scale)) {
+                    if ((*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Scale) {
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Rotate = false;
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Translate = false;
+                    }
+                }
                 this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
                 this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
                 this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
@@ -482,6 +488,12 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
             }
             case 2: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
+                if (ImGui::Checkbox("Gizmo Rotate", &(*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Rotate)) {
+                    if ((*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Rotate) {
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Scale = false;
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Translate = false;
+                    }
+                }
                 this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateX->animate, &(*meshModelFaces)[this->selectedObject]->rotateX->point, true, isFrame);
                 this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateY->animate, &(*meshModelFaces)[this->selectedObject]->rotateY->point, true, isFrame);
                 this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[this->selectedObject]->rotateZ->animate, &(*meshModelFaces)[this->selectedObject]->rotateZ->point, true, isFrame);
@@ -489,6 +501,13 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
             }
             case 3: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Move model by axis");
+
+                if (ImGui::Checkbox("Gizmo Translate", &(*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Translate)) {
+                    if ((*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Translate) {
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Scale = false;
+                        (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Rotate = false;
+                    }
+                }
 
 //                ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
                 this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[this->selectedObject]->positionX->animate, &(*meshModelFaces)[this->selectedObject]->positionX->point, true, isFrame);

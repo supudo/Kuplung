@@ -75,34 +75,38 @@ void RayPicking::pick(std::unique_ptr<ObjectsManager> &managerObjects, std::uniq
         ModelFaceBase *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
-//                glm::vec3 v1 = this->fixSignVector(mmf->oFace.vectors_vertices[j]);
-//                glm::vec3 v2 = this->fixSignVector(mmf->oFace.vectors_vertices[j - 1]);
-//                glm::vec3 v3 = this->fixSignVector(mmf->oFace.vectors_vertices[j - 2]);
-
-//                glm::vec4 tp01 = mmf->matrixModel * glm::vec4(v1, 1.0);
-//                glm::vec4 tp02 = mmf->matrixModel * glm::vec4(v2, 1.0);
-//                glm::vec4 tp03 = mmf->matrixModel * glm::vec4(v3, 1.0);
-
-//                glm::vec3 tp1 = this->fixSignVector(glm::vec3(tp01.x, tp01.y, tp01.z));
-//                glm::vec3 tp2 = this->fixSignVector(glm::vec3(tp02.x, tp02.y, tp02.z));
-//                glm::vec3 tp3 = this->fixSignVector(glm::vec3(tp03.x, tp03.y, tp03.z));
-
-//                glm::vec3 intersectionPoint;
-//                if (glm::intersectLineTriangle(vFrom, vTo * this->managerObjects->Setting_PlaneFar, tp1, tp2, tp3, intersectionPoint)) {
-//                    this->sceneSelectedModelObject = i;
-//                    this->doLog(Settings::Instance()->string_format("[Pick] %s", mmf->oFace.ModelTitle.c_str()));
-//                }
-
                 float id = -1;
                 glm::vec3 aabb_min = glm::vec3(mmf->boundingBox->min_x, mmf->boundingBox->min_y, mmf->boundingBox->min_z);
                 glm::vec3 aabb_max = glm::vec3(mmf->boundingBox->max_x, mmf->boundingBox->max_y, mmf->boundingBox->max_z);
-                if (this->testRayOBBIntersection(vFrom, vTo, aabb_min, aabb_max, mmf->matrixModel, id)) {
+                if (this->testRayOBBIntersection(vFrom, vTo, aabb_min, aabb_max, mmf->matrixModel, id))
                     this->sceneSelectedModelObject = i;
-                    //this->doLog(Settings::Instance()->string_format("[Pick] %s", mmf->oFace.ModelTitle.c_str()));
-                }
+            }
+
+            glm::vec3 v = mmf->meshModel.vertices[j];
+            glm::mat4 mtx = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
+            if (this->testRaySphereIntersection(vFrom, vTo, v, mtx, 0.9f)) {
+//                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[%i - %i] clicked = %f, %f, %f", i, j, v.x, v.y, v.z));
             }
         }
     }
+//    Settings::Instance()->funcDoLog("=======================");
+}
+
+bool RayPicking::testRaySphereIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 vertex, glm::mat4 mtx, float radius) {
+    bool result = false;
+
+    glm::vec4 v = glm::vec4(vertex, 1.0) * mtx;
+    glm::vec4 ray_from = glm::vec4(ray_origin, 1.0);
+    glm::vec4 ray_to = glm::vec4(ray_direction, 1.0) * 1000.0f;
+
+    float distance = 0.0f;
+    bool intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
+    if (intersected && distance > 0.001f && distance < radius) {
+//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("vertex = %f, %f, %f ; distance = %f", vertex.x, vertex.y, vertex.z, distance));
+        result = true;
+    }
+
+    return result;
 }
 
 glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) {
@@ -241,19 +245,6 @@ void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeigh
         0.0,
         1.0f
     );
-
-    // The Projection matrix goes from Camera Space to NDC.
-    // So inverse(ProjectionMatrix) goes from NDC to Camera Space.
-//    glm::mat4 InverseProjectionMatrix = glm::inverse(ProjectionMatrix);
-
-    // The View Matrix goes from World Space to Camera Space.
-    // So inverse(ViewMatrix) goes from Camera Space to World Space.
-//    glm::mat4 InverseViewMatrix = glm::inverse(ViewMatrix);
-
-//    glm::vec4 lRayStart_camera = InverseProjectionMatrix * lRayStart_NDC;    lRayStart_camera/=lRayStart_camera.w;
-//    glm::vec4 lRayStart_world  = InverseViewMatrix       * lRayStart_camera; lRayStart_world /=lRayStart_world .w;
-//    glm::vec4 lRayEnd_camera   = InverseProjectionMatrix * lRayEnd_NDC;      lRayEnd_camera  /=lRayEnd_camera  .w;
-//    glm::vec4 lRayEnd_world    = InverseViewMatrix       * lRayEnd_camera;   lRayEnd_world   /=lRayEnd_world   .w;
 
     // Faster way (just one inverse)
     glm::mat4 M = glm::inverse(ProjectionMatrix * ViewMatrix);

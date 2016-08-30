@@ -11,6 +11,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtx/intersect.hpp>
+#include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 #pragma mark - Cleanup
 
@@ -230,10 +231,12 @@ void Kuplung::onEvent(SDL_Event *ev) {
     if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen && !this->managerUI->isLoadingOpen) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
-            this->sceneSelectedModelObject = -1;
-            this->managerUI->setSceneSelectedModelObject(-1);
-            this->rayLines.clear();
-            this->rayPicker->rayLines = this->rayLines;
+            if (!ImGuizmo::IsUsing()) {
+                this->sceneSelectedModelObject = -1;
+                this->managerUI->setSceneSelectedModelObject(-1);
+                this->rayLines.clear();
+                this->rayPicker->rayLines = this->rayLines;
+            }
         }
 
         if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
@@ -288,7 +291,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
 
         // picking
-        if (this->managerControls->mouseButton_LEFT) {
+        if (!ImGuizmo::IsUsing() && this->managerControls->mouseButton_LEFT) {
             this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
             this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
             this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
@@ -313,6 +316,7 @@ void Kuplung::addTerrainModel() {
     mmf->ModelID = 1;
     mmf->init(this->managerObjects->terrain->terrainGenerator->modelTerrain, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
+    mmf->initVertexSphere();
     mmf->initModelProperties();
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
@@ -333,6 +337,7 @@ void Kuplung::addSpaceshipModel() {
     mmf->ModelID = 1;
     mmf->init(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
+    mmf->initVertexSphere();
     mmf->initModelProperties();
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
@@ -528,6 +533,7 @@ void Kuplung::processParsedObjFile() {
             mmf->ModelID = int(this->meshModelFaces.size()) + int(i);
             mmf->init(model, Settings::Instance()->currentFolder);
             mmf->initBoundingBox();
+            mmf->initVertexSphere();
             mmf->initModelProperties();
 
             this->managerRendering->meshModelFaces.push_back(mmf);

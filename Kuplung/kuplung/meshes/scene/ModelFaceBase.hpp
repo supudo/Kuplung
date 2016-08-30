@@ -20,6 +20,7 @@
 #include "kuplung/meshes/helpers/WorldGrid.hpp"
 #include "kuplung/utilities/maths/Maths.hpp"
 #include "kuplung/meshes/helpers/BoundingBox.hpp"
+#include "kuplung/meshes/helpers/VertexSphere.hpp"
 
 class ModelFaceBase {
 public:
@@ -32,6 +33,7 @@ public:
     virtual void init(MeshModel model, std::string assetsFolder);
     void initModelProperties();
     void initBoundingBox();
+    void initVertexSphere();
     virtual void initBuffers();
     void loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
 
@@ -49,6 +51,7 @@ public:
     float getOptionsOutlineThickness();
 
     BoundingBox *boundingBox;
+    VertexSphere *vertexSphere;
     bool initBuffersAgain;
     MeshModel meshModel;
     int ModelID;
@@ -71,6 +74,9 @@ public:
     std::unique_ptr<ObjectCoordinate> displaceX, displaceY, displaceZ;
     std::unique_ptr<ObjectCoordinate> Setting_MaterialRefraction;
     std::unique_ptr<ObjectCoordinate> Setting_MaterialSpecularExp;
+
+    // Gizmo controls
+    bool Setting_Gizmo_Translate, Setting_Gizmo_Rotate, Setting_Gizmo_Scale;
 
     // view skin
     ViewModelSkin Setting_ModelViewSkin;
