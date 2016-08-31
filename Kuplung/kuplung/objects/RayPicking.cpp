@@ -85,28 +85,25 @@ void RayPicking::pick(std::unique_ptr<ObjectsManager> &managerObjects, std::uniq
             glm::vec3 v = mmf->meshModel.vertices[j];
             glm::mat4 mtx = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
             if (this->testRaySphereIntersection(vFrom, vTo, v, mtx, 0.9f)) {
-//                Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[%i - %i] clicked = %f, %f, %f", i, j, v.x, v.y, v.z));
             }
         }
     }
-//    Settings::Instance()->funcDoLog("=======================");
 }
 
 bool RayPicking::testRaySphereIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 vertex, glm::mat4 mtx, float radius) {
-    bool result = false;
+    bool intersected = false;
+    float distance = 0.0f;
 
     glm::vec4 v = glm::vec4(vertex, 1.0) * mtx;
     glm::vec4 ray_from = glm::vec4(ray_origin, 1.0);
     glm::vec4 ray_to = glm::vec4(ray_direction, 1.0) * 1000.0f;
 
-    float distance = 0.0f;
-    bool intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
+    intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
     if (intersected && distance > 0.001f && distance < radius) {
-//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("vertex = %f, %f, %f ; distance = %f", vertex.x, vertex.y, vertex.z, distance));
-        result = true;
+//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
     }
 
-    return result;
+    return intersected;
 }
 
 glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) {

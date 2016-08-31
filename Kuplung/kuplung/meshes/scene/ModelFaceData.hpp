@@ -18,7 +18,7 @@ public:
     void init(MeshModel model, std::string assetsFolder);
     void renderModel(bool useTessellation);
 
-    bool vertexSphereVisible;
+    bool vertexSphereVisible, vertexSphereIsSphere, vertexSphereShowWireframes;
     float vertexSphereRadius;
     int vertexSphereSegments;
     glm::vec4 vertexSphereColor;

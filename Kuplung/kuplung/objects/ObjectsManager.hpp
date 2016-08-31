@@ -93,6 +93,7 @@ public:
     bool Setting_ShowSpaceship, Setting_GenerateSpaceship;
 
     bool Setting_VertexSphere_Visible, Setting_VertexSphere_ColorPickerOpen;
+    bool Setting_VertexSphere_IsSphere, Setting_VertexSphere_ShowWireframes;
     float Setting_VertexSphere_Radius;
     int Setting_VertexSphere_Segments;
     glm::vec4 Setting_VertexSphere_Color;

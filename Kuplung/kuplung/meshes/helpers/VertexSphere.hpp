@@ -24,22 +24,22 @@ public:
     void initBuffers(MeshModel meshModel, int circleSegments, float radius);
     void render(glm::mat4 matrixMVP, glm::vec4 color);
 
-    glm::mat4 matrixTransform;
+    bool isSphere;
+    bool showWireframes;
+    int circleSegments;
+    std::vector<glm::vec3> dataVertices;
+    std::vector<glm::vec3> dataNormals;
+    std::vector<GLuint> dataIndices;
 
 private:
     std::unique_ptr<GLUtils> glUtils;
 
-    std::vector<glm::vec3> dataVertices;
-    std::vector<GLuint> dataIndices;
-
-    int circleSegments;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
-    GLuint vboVertices, vboIndices;
+    GLuint vboVertices, vboNormals, vboIndices;
 
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
+    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glUniformInnerLightDirection, glUniformColor;
 };
 
 #endif /* VertexSphere_hpp */

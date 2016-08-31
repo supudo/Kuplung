@@ -173,8 +173,10 @@ void ModelFaceData::renderModel(bool useTessellation) {
         this->boundingBox->render(matrixBB, this->so_outlineColor);
 
     if (this->vertexSphereVisible) {
-//        this->vertexSphere->initBuffers(this->meshModel, this->vertexSphereSegments, this->vertexSphereRadius);
-//        this->vertexSphere->render(matrixBB, vertexSphereColor);
+        this->vertexSphere->isSphere = this->vertexSphereIsSphere;
+        this->vertexSphere->showWireframes = this->vertexSphereShowWireframes;
+        this->vertexSphere->initBuffers(this->meshModel, this->vertexSphereSegments, this->vertexSphereRadius);
+        this->vertexSphere->render(matrixBB, vertexSphereColor);
     }
 
     if (this->getOptionsSelected() && (this->Setting_Gizmo_Rotate || this->Setting_Gizmo_Translate || this->Setting_Gizmo_Scale)) {

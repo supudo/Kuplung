@@ -640,6 +640,8 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         mfd->vertexSphereRadius = this->managerObjects.Setting_VertexSphere_Radius;
         mfd->vertexSphereSegments = this->managerObjects.Setting_VertexSphere_Segments;
         mfd->vertexSphereColor = this->managerObjects.Setting_VertexSphere_Color;
+        mfd->vertexSphereIsSphere = this->managerObjects.Setting_VertexSphere_IsSphere;
+        mfd->vertexSphereShowWireframes = this->managerObjects.Setting_VertexSphere_ShowWireframes;
 
         mfd->renderModel(true);
     }

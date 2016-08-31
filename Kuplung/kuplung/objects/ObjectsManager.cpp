@@ -208,6 +208,8 @@ void ObjectsManager::resetSettings() {
     this->Setting_VertexSphere_Segments = 8;
     this->Setting_VertexSphere_Color = glm::vec4(1.0);
     this->Setting_VertexSphere_ColorPickerOpen = false;
+    this->Setting_VertexSphere_IsSphere = true;
+    this->Setting_VertexSphere_ShowWireframes = true;
 }
 
 void ObjectsManager::resetPropertiesSystem() {
