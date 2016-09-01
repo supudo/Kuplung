@@ -142,35 +142,6 @@ namespace ImGuizmo
     };
 
     vec_t makeVect(float _x, float _y, float _z = 0.f, float _w = 0.f) { vec_t res; res.x = _x; res.y = _y; res.z = _z; res.w = _w; return res; }
-    vec_t vect(float _x, float _y, float _z = 0.f, float _w = 0.f)
-    {
-        vec_t res;
-        res.x = _x;
-        res.y = _y;
-        res.z = _z;
-        res.w = _w;
-        return res;
-    }
-
-    vec_t vect(int _x, int _y, int _z = 0, int _w = 0)
-    {
-        vec_t res;
-        res.x = float(_x);
-        res.y = float(_y);
-        res.z = float(_z);
-        res.w = float(_w);
-        return res;
-    }
-
-    vec_t vect(float v)
-    {
-        vec_t res;
-        res.x = v;
-        res.y = v;
-        res.z = v;
-        res.w = v;
-        return res;
-    }
     vec_t vec_t::operator * (float f) const { return makeVect(x * f, y * f, z * f, w *f); }
     vec_t vec_t::operator - () const { return makeVect(-x, -y, -z, -w); }
     vec_t vec_t::operator - (const vec_t& v) const { return makeVect(x - v.x, y - v.y, z - v.z, w - v.w); }
@@ -585,7 +556,7 @@ namespace ImGuizmo
     static const ImU32 selectionColor = 0xFF1080FF;
     static const ImU32 inactiveColor = 0x99999999;
     static const ImU32 translationLineColor = 0xAAAAAAAA;
-    static const char *translationInfoMask[] = { "X : %5.2f", "Y : %5.2f", "Z : %5.2f", "X : %5.2f Y : %5.2f", "X : %5.2f Z : %5.2f", "Y : %5.2f Z : %5.2f", "X : %5.2f Y : %5.2f Z : %5.2f" };
+    static const char *translationInfoMask[] = { "X : %5.2f", "Y : %5.2f", "Z : %5.2f", "X : %5.2f Y : %5.2f", "Y : %5.2f Z : %5.2f", "X : %5.2f Z : %5.2f", "X : %5.2f Y : %5.2f Z : %5.2f" };
     static const char *scaleInfoMask[] = { "X : %5.2f", "Y : %5.2f", "Z : %5.2f", "XYZ : %5.2f" };
     static const char *rotationInfoMask[] = { "X : %5.2f deg %5.2f rad", "Y : %5.2f deg %5.2f rad", "Z : %5.2f deg %5.2f rad", "Screen : %5.2f deg %5.2f rad" };
     static const int translationInfoIndex[] = { 0,0,0, 1,0,0, 2,0,0, 0,1,0, 0,2,0, 1,2,0, 0,1,2 };
@@ -825,12 +796,12 @@ namespace ImGuizmo
             //const vec_t& dirPlaneY = directionUnary[(i + 1) % 3];
             //const vec_t& dirPlaneNormal = directionUnary[planNormal];
 
-            vec_t cameraEyeToGizmo = Normalized(gContext.mModel.v.position - gContext.mCameraEye);
-            const bool belowAxisLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneX)) < angleLimit);
+            //vec_t cameraEyeToGizmo = Normalized(gContext.mModel.v.position - gContext.mCameraEye);
+            //const bool belowAxisLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneX)) < angleLimit);
             //const bool belowPlaneLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneNormal)) > planeLimit);
 
             // draw axis
-            if (belowAxisLimit)
+            //if (belowAxisLimit)
             {
                 ImVec2 baseSSpace = worldToPos(dirPlaneX * 0.1f * gContext.mScreenFactor, gContext.mMVP);
                 ImVec2 worldDirSSpaceNoScale = worldToPos(dirPlaneX * gContext.mScreenFactor, gContext.mMVP);
@@ -882,17 +853,17 @@ namespace ImGuizmo
         // draw
         for (unsigned int i = 0; i < 3; i++)
         {
-            const int planNormal = (i + 2) % 3;
+            //const int planNormal = (i + 2) % 3;
             const vec_t& dirPlaneX = directionUnary[i];
             const vec_t& dirPlaneY = directionUnary[(i + 1) % 3];
-            const vec_t& dirPlaneNormal = directionUnary[planNormal];
+            //const vec_t& dirPlaneNormal = directionUnary[planNormal];
 
-            vec_t cameraEyeToGizmo = Normalized(gContext.mModel.v.position - gContext.mCameraEye);
-            const bool belowAxisLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneX)) < angleLimit);
-            const bool belowPlaneLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneNormal)) > planeLimit);
+            //vec_t cameraEyeToGizmo = Normalized(gContext.mModel.v.position - gContext.mCameraEye);
+            //const bool belowAxisLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneX)) < angleLimit);
+            //const bool belowPlaneLimit = (fabsf(cameraEyeToGizmo.Dot3(dirPlaneNormal)) > planeLimit);
 
             // draw axis
-            if (belowAxisLimit)
+            //if (belowAxisLimit)
             {
                 ImVec2 baseSSpace = worldToPos(dirPlaneX * 0.1f * gContext.mScreenFactor, gContext.mMVP);
                 ImVec2 worldDirSSpace = worldToPos(dirPlaneX * gContext.mScreenFactor, gContext.mMVP);
@@ -901,7 +872,7 @@ namespace ImGuizmo
             }
 
             // draw plane
-            if (belowPlaneLimit)
+            //if (belowPlaneLimit)
             {
                 ImVec2 screenQuadPts[4];
                 for (int j = 0; j < 4; j++)
@@ -1081,7 +1052,7 @@ namespace ImGuizmo
             {
                 gContext.mbUsing = true;
                 gContext.mCurrentOperation = type;
-                const vec_t movePlanNormal[] = { gContext.mModel.v.up, gContext.mModel.v.dir, gContext.mModel.v.right, gContext.mModel.v.dir, gContext.mModel.v.up, gContext.mModel.v.right, -gContext.mCameraDir };
+                const vec_t movePlanNormal[] = { gContext.mModel.v.up, gContext.mModel.v.dir, gContext.mModel.v.right, gContext.mModel.v.dir, gContext.mModel.v.right, gContext.mModel.v.up, -gContext.mCameraDir };
                 // pickup plan
                 gContext.mTranslationPlan = BuildPlan(gContext.mModel.v.position, movePlanNormal[type - MOVE_X]);
                 const float len = IntersectRayPlane(gContext.mRayOrigin, gContext.mRayVector, gContext.mTranslationPlan);
