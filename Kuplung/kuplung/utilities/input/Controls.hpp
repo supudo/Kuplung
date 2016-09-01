@@ -29,6 +29,7 @@ public:
 
     bool keyPressed_LALT, keyPressed_LSHIFT, keyPressed_LCTRL;
     bool keyPressed_RALT, keyPressed_RSHIFT, keyPressed_RCTRL;
+    bool keyPresset_TAB;
 
     int xrel, yrel;
 

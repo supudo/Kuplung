@@ -77,6 +77,7 @@ public:
 
     // Gizmo controls
     bool Setting_Gizmo_Translate, Setting_Gizmo_Rotate, Setting_Gizmo_Scale;
+    bool Setting_EditMode;
 
     // view skin
     ViewModelSkin Setting_ModelViewSkin;

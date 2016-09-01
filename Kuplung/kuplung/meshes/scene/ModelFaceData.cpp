@@ -181,18 +181,19 @@ void ModelFaceData::renderModel(bool useTessellation) {
 
     if (this->getOptionsSelected() && (this->Setting_Gizmo_Rotate || this->Setting_Gizmo_Translate || this->Setting_Gizmo_Scale)) {
         ImGuizmo::Enable(true);
-        ImGuizmo::MODE gizmo_mode = ImGuizmo::TRANSLATE;
+        ImGuizmo::OPERATION gizmo_operation = ImGuizmo::TRANSLATE;
         if (this->Setting_Gizmo_Rotate)
-            gizmo_mode = ImGuizmo::ROTATE;
+            gizmo_operation = ImGuizmo::ROTATE;
         else if (this->Setting_Gizmo_Scale)
-            gizmo_mode = ImGuizmo::SCALE;
+            gizmo_operation = ImGuizmo::SCALE;
         glm::mat4 mtx = glm::mat4(1.0);
-        ImGuizmo::Mogwai(glm::value_ptr(this->matrixCamera),
-                         glm::value_ptr(this->matrixProjection),
-                         gizmo_mode,
-                         glm::value_ptr(this->matrixModel),
-                         glm::value_ptr(mtx)
-                         );
+        ImGuizmo::Manipulate(glm::value_ptr(this->matrixCamera),
+                             glm::value_ptr(this->matrixProjection),
+                             gizmo_operation,
+                             ImGuizmo::LOCAL,
+                             glm::value_ptr(this->matrixModel),
+                             glm::value_ptr(mtx)
+                            );
 
         glm::vec3 scale;
         glm::quat rotation;
@@ -211,6 +212,12 @@ void ModelFaceData::renderModel(bool useTessellation) {
             this->rotateX->point += glm::degrees(rotation.x);
             this->rotateY->point += glm::degrees(rotation.z);
             this->rotateZ->point += glm::degrees(rotation.y);
+        }
+
+        if (this->Setting_Gizmo_Scale) {
+            this->scaleX->point *= scale.x;
+            this->scaleY->point *= scale.y;
+            this->scaleZ->point *= scale.z;
         }
     }
 }

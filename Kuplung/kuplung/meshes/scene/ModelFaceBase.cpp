@@ -110,6 +110,7 @@ void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
 
     this->initBuffersAgain = false;
     this->Settings_DeferredRender = false;
+    this->Setting_EditMode = false;
 
     this->so_outlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
     this->Setting_UseCullFace = false;
@@ -152,6 +153,7 @@ void ModelFaceBase::initModelProperties() {
     this->Setting_Alpha = 1.0f;
     this->showMaterialEditor = false;
     this->Settings_DeferredRender = false;
+    this->Setting_EditMode = false;
 
     this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);

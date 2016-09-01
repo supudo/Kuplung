@@ -7,9 +7,11 @@
 //
 
 #include "RenderingForward.hpp"
+#include <fstream>
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
-#include <fstream>
+#include <glm/gtx/matrix_decompose.hpp>
+#include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
@@ -162,6 +164,7 @@ bool RenderingForward::initShaderProgram() {
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
         this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
+        this->glVS_EditModeWireframe = this->glUtils->glGetUniform(this->shaderProgram, "vs_editModeWireframe");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
@@ -318,8 +321,12 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
 
     glUseProgram(this->shaderProgram);
 
+    int selectedModelID = -1;
     for (size_t i=0; i<meshModelFaces.size(); i++) {
         ModelFaceData *mfd = meshModelFaces[i];
+
+        if (mfd->getOptionsSelected())
+            selectedModelID = i;
 
         glm::mat4 matrixModel = glm::mat4(1.0);
         matrixModel *= this->managerObjects.grid->matrixModel;
@@ -644,6 +651,64 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         mfd->vertexSphereShowWireframes = this->managerObjects.Setting_VertexSphere_ShowWireframes;
 
         mfd->renderModel(true);
+
+        // edit mode wireframe
+        if (mfd->getOptionsSelected() && mfd->Setting_EditMode) {
+            mfd->Setting_Wireframe = true;
+            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point + 0.01, mfd->scaleY->point + 0.01, mfd->scaleZ->point + 0.01));
+
+            mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
+            matrixModelView = this->matrixCamera * matrixModel;
+            matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixCamera * matrixModel));
+            matrixWorld = matrixModel;
+            glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+            glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(matrixModelView));
+            glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
+            glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
+
+            glUniform1i(this->gl_ModelViewSkin, ViewModelSkin_Solid);
+            //TODO: put in settings
+            glUniform3f(this->glFS_solidSkin_materialColor, 1.0f, 0.522f, 0.0f);
+
+            mfd->renderModel(true);
+            mfd->Setting_Wireframe = false;
+        }
+    }
+
+    // edit mode
+    if (this->managerObjects.VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
+        ImGuizmo::Enable(true);
+
+        glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
+        v0 = ((ModelFaceData*)meshModelFaces[selectedModelID])->matrixModel * v0;
+        glm::mat4 matrixVertex = meshModelFaces[selectedModelID]->matrixModel;
+        matrixVertex[3] = v0;
+
+        glm::mat4 mtx = glm::mat4(1.0);
+
+        ImGuizmo::Manipulate(glm::value_ptr(this->managerObjects.camera->matrixCamera),
+                             glm::value_ptr(this->managerObjects.matrixProjection),
+                             ImGuizmo::TRANSLATE,
+                             ImGuizmo::WORLD,
+                             glm::value_ptr(matrixVertex),
+                             glm::value_ptr(mtx)
+                            );
+
+        glm::vec3 scale;
+        glm::quat rotation;
+        glm::vec3 translation;
+        glm::vec3 skew;
+        glm::vec4 perspective;
+        glm::decompose(mtx, scale, rotation, translation, skew, perspective);
+
+        this->managerObjects.VertexEditorMode.x += translation.x;
+        this->managerObjects.VertexEditorMode.y += -1.0 * translation.z;
+        this->managerObjects.VertexEditorMode.z += translation.y;
+        meshModelFaces[selectedModelID]->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
+        //TODO: not good for drawing...
+        meshModelFaces[selectedModelID]->initBuffers();
+        meshModelFaces[selectedModelID]->init(meshModelFaces[selectedModelID]->meshModel, meshModelFaces[selectedModelID]->assetsFolder);
     }
 
     glUseProgram(0);

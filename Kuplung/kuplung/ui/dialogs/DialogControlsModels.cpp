@@ -297,7 +297,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     switch (this->selectedTabPanel) {
         case 0:
-            if (meshModelFaces != NULL)
+            if (meshModelFaces != NULL && meshModelFaces->size() > 0)
                 this->drawModels(isFrame, meshModelFaces);
             else
                 ImGui::TextColored(ImVec4(255, 0, 0, 255), "No models in the current scene.");
@@ -468,6 +468,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 // cel shading
                 ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[this->selectedObject]->Setting_CelShading);
                 ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
+                ImGui::Checkbox("Edit Mode", &(*meshModelFaces)[this->selectedObject]->Setting_EditMode);
                 // alpha
                 ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
                 this->helperUI->addControlsFloatSlider("", 1, 0.0f, 1.0f, &(*meshModelFaces)[this->selectedObject]->Setting_Alpha);

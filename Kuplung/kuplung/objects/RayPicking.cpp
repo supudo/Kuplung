@@ -34,12 +34,21 @@ void RayPicking::selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::ve
                              std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
     this->meshModelFaces = meshModelFaces;
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
-    this->pick(managerObjects, managerControls);
+    this->pickModel(managerObjects, managerControls);
     *sceneSelectedModelObject = this->sceneSelectedModelObject;
     *rayLines = this->rayLines;
 }
 
-void RayPicking::pick(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+void RayPicking::selectVertex(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
+                              std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+    this->meshModelFaces = meshModelFaces;
+    this->sceneSelectedModelObject = *sceneSelectedModelObject;
+    this->pickVertex(managerObjects, managerControls);
+    *sceneSelectedModelObject = this->sceneSelectedModelObject;
+    *rayLines = this->rayLines;
+}
+
+void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
     int mouse_x = managerControls->mousePosition.x;
     int mouse_y = managerControls->mousePosition.y;
 
@@ -81,10 +90,43 @@ void RayPicking::pick(std::unique_ptr<ObjectsManager> &managerObjects, std::uniq
                 if (this->testRayOBBIntersection(vFrom, vTo, aabb_min, aabb_max, mmf->matrixModel, id))
                     this->sceneSelectedModelObject = i;
             }
+        }
+    }
+}
 
+void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+    int mouse_x = managerControls->mousePosition.x;
+    int mouse_y = managerControls->mousePosition.y;
+
+    glm::vec3 vFrom;
+    glm::vec3 ray_direction;
+    this->getRay(
+        Settings::Instance()->SDL_Window_Width / 2, Settings::Instance()->SDL_Window_Height / 2,
+        Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
+        this->matrixCamera,
+        this->matrixProjection,
+        vFrom,
+        ray_direction
+    );
+
+    glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
+    glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
+    glm::vec4 eyeCoordinates = this->getEyeCoordinates(clipCoordinates, managerObjects);
+
+    glm::mat4 invertedViewMatrix = glm::inverse(managerObjects->camera->matrixCamera);
+    glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates;
+    glm::vec3 vTo = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
+
+    this->sceneSelectedModelObject = -1;
+    for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+        ModelFaceBase *mmf = this->meshModelFaces[i];
+        for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             glm::vec3 v = mmf->meshModel.vertices[j];
             glm::mat4 mtx = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
-            if (this->testRaySphereIntersection(vFrom, vTo, v, mtx, 0.9f)) {
+
+            if (this->testRaySphereIntersection(vFrom, vTo, v, mtx, managerObjects->Setting_VertexSphere_Radius)) {
+                managerObjects->VertexEditorModeID = j;
+                managerObjects->VertexEditorMode = v;
             }
         }
     }
@@ -95,13 +137,45 @@ bool RayPicking::testRaySphereIntersection(glm::vec3 ray_origin, glm::vec3 ray_d
     float distance = 0.0f;
 
     glm::vec4 v = glm::vec4(vertex, 1.0) * mtx;
-    glm::vec4 ray_from = glm::vec4(ray_origin, 1.0);
-    glm::vec4 ray_to = glm::vec4(ray_direction, 1.0) * 1000.0f;
+//    glm::vec4 ray_from = glm::vec4(ray_origin, 1.0);
+//    glm::vec4 ray_to = glm::vec4(ray_direction, 1.0) * 1000.0f;
+    glm::vec3 ray_from = ray_origin;
+    glm::vec3 ray_to = ray_direction * 1000.0f;
 
-    intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
-    if (intersected && distance > 0.001f && distance < radius) {
-//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
-    }
+//    intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
+//    if (intersected && distance > 0.001f && distance < radius)
+//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[intersectRaySphere] = [%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
+
+    // Create the vector from end point vA to center of sphere
+    glm::vec3 vDirToSphere = vertex - glm::vec3(ray_to);
+
+    // Create a normalized direction vector from end point vA to end point vB
+    glm::vec3 vLineDir = glm::normalize(ray_from - ray_to);
+
+    // Find length of line segment
+    float fLineLength = glm::distance(ray_to, ray_from);
+
+    // Using the dot product, we project the vDirToSphere onto the vector vLineDir
+    float t = glm::dot(vDirToSphere, vLineDir);
+
+    glm::vec3 vClosestPoint;
+    // If our projected distance from vA is less than or equal to 0, the closest point is vA
+    if (t <= 0.0f)
+     vClosestPoint = ray_to;
+    // If our projected distance from vA is greater thatn line length, closest point is vB
+    else if (t >= fLineLength)
+     vClosestPoint = ray_from;
+    // Otherwise calculate the point on the line using t and return it
+    else
+     vClosestPoint = ray_to + vLineDir * t;
+
+    // Now just check if closest point is within radius of sphere
+    distance = glm::distance(vertex, vClosestPoint);
+    intersected = distance <= radius;
+    if (intersected)
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT] - [%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
+//    else
+//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MISS] - %f = %f", distance, radius));
 
     return intersected;
 }

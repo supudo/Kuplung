@@ -29,6 +29,8 @@ void Controls::init(SDL_Window* sdlWindow) {
     this->keyPressed_RSHIFT = false;
     this->keyPressed_RCTRL = false;
 
+    this->keyPresset_TAB = false;
+
     this->mouseWheel = {};
     this->mouseWheel.x = 0;
     this->mouseWheel.y = 0;
@@ -100,6 +102,19 @@ void Controls::handleKeyDown(SDL_Event* ev) {
             case SDLK_DELETE: {
                 this->keyPressed_ESC = false;
                 this->keyPressed_DELETE = true;
+                this->mouseButton_LEFT = false;
+                this->mouseButton_MIDDLE = false;
+                this->mouseButton_RIGHT = false;
+                this->mouseGoLeft = false;
+                this->mouseGoRight = false;
+                this->mouseGoUp = false;
+                this->mouseGoDown = false;
+                break;
+            }
+            case SDLK_TAB: {
+                this->keyPressed_ESC = false;
+                this->keyPressed_DELETE = false;
+                this->keyPresset_TAB = !this->keyPresset_TAB;
                 this->mouseButton_LEFT = false;
                 this->mouseButton_MIDDLE = false;
                 this->mouseButton_RIGHT = false;

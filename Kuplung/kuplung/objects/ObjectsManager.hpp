@@ -97,6 +97,8 @@ public:
     float Setting_VertexSphere_Radius;
     int Setting_VertexSphere_Segments;
     glm::vec4 Setting_VertexSphere_Color;
+    int VertexEditorModeID;
+    glm::vec3 VertexEditorMode;
 
     std::map<std::string, MeshModel> systemModels;
 

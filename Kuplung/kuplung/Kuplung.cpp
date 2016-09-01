@@ -8,9 +8,6 @@
 
 #include "Kuplung.hpp"
 #include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/matrix_decompose.hpp>
-#include <glm/gtx/intersect.hpp>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 #pragma mark - Cleanup
@@ -242,6 +239,9 @@ void Kuplung::onEvent(SDL_Event *ev) {
         if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
             this->guiModelDelete(this->sceneSelectedModelObject);
 
+        if (this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
+            this->meshModelFaces[this->sceneSelectedModelObject]->Setting_EditMode = this->managerControls->keyPresset_TAB;
+
         // FOV & zoom
         if (this->managerControls->keyPressed_LALT) {
             if (this->managerControls->mouseWheel.y < 0)
@@ -293,8 +293,14 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // picking
         if (!ImGuizmo::IsUsing() && this->managerControls->mouseButton_LEFT) {
             this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
-            this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
-            this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
+            if (this->managerControls->keyPresset_TAB) {
+                if (this->managerObjects->VertexEditorModeID == -1)
+                    this->rayPicker->selectVertex(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
+            }
+            else {
+                this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
+                this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
+            }
         }
     }
 }

@@ -210,6 +210,8 @@ void ObjectsManager::resetSettings() {
     this->Setting_VertexSphere_ColorPickerOpen = false;
     this->Setting_VertexSphere_IsSphere = true;
     this->Setting_VertexSphere_ShowWireframes = true;
+    this->VertexEditorModeID = -1;
+    this->VertexEditorMode = glm::vec3(0.0);
 }
 
 void ObjectsManager::resetPropertiesSystem() {
