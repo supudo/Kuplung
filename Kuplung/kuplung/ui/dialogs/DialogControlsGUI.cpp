@@ -235,15 +235,45 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Indent();
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Manipulate mode:");
                 ImGui::BeginGroup();
-                float width = ImGui::GetContentRegionAvailWidth() * 0.3;
-                if (ImGui::Button("Vertex", ImVec2(width, 0)))
-                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
+                float width = ImGui::GetContentRegionAvailWidth() * 0.3f;
+
+                if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(121 / 255.0f, 5 / 255.0f, 5 / 255.0f, 1.0f));
+                    if (ImGui::Button("Vertex", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
+                    ImGui::PopStyleColor();
+                }
+                else {
+                    if (ImGui::Button("Vertex", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
+                }
+
                 ImGui::SameLine();
-                if (ImGui::Button("Line", ImVec2(width, 0)))
-                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
+
+                if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(121 / 255.0f, 5 / 255.0f, 5 / 255.0f, 1.0f));
+                    if (ImGui::Button("Line", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
+                    ImGui::PopStyleColor();
+                }
+                else {
+                    if (ImGui::Button("Line", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
+                }
+
                 ImGui::SameLine();
-                if (ImGui::Button("Face", ImVec2(width, 0)))
-                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
+
+                if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {
+                    ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(121 / 255.0f, 5 / 255.0f, 5 / 255.0f, 1.0f));
+                    if (ImGui::Button("Face", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
+                    ImGui::PopStyleColor();
+                }
+                else {
+                    if (ImGui::Button("Face", ImVec2(width, 0)))
+                        this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
+                }
+
                 ImGui::EndGroup();
                 ImGui::Separator();
 
