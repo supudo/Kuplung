@@ -236,6 +236,11 @@ void Kuplung::onEvent(SDL_Event *ev) {
             }
         }
 
+        if (this->managerControls->keyPresset_TAB)
+            Settings::Instance()->ShowBoundingBox = false;
+        else
+            Settings::Instance()->ShowBoundingBox = true;
+
         if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
             this->guiModelDelete(this->sceneSelectedModelObject);
 
@@ -293,12 +298,18 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // picking
         if (!ImGuizmo::IsUsing() && this->managerControls->mouseButton_LEFT) {
             this->rayPicker->setMatrices(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
-            if (this->managerControls->keyPresset_TAB)
+            if (this->managerControls->keyPresset_TAB) {
                 this->rayPicker->selectVertex(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
+            }
             else {
                 this->rayPicker->selectModel(this->meshModelFaces, &this->rayLines, &this->sceneSelectedModelObject, this->managerObjects, this->managerControls);
                 this->managerUI->setSceneSelectedModelObject(this->sceneSelectedModelObject);
             }
+        }
+
+        if (!this->managerControls->keyPresset_TAB) {
+            this->managerObjects->VertexEditorMode = glm::vec3(0.0);
+            this->managerObjects->VertexEditorModeID = -1;
         }
     }
 }

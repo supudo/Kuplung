@@ -710,6 +710,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         //TODO: not good for drawing...
         mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
         mfd->init(mfd->meshModel, mfd->assetsFolder);
+        mfd->Setting_EditMode = true;
     }
 
     glUseProgram(0);

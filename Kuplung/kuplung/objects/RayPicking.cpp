@@ -124,7 +124,7 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
             glm::vec3 v = mmf->meshModel.vertices[j];
             glm::mat4 mtx = mmf->matrixProjection * mmf->matrixCamera * mmf->matrixModel;
 
-            if (this->testRaySphereIntersection(vFrom, vTo, v, mtx, managerObjects->Setting_VertexSphere_Radius)) {
+            if (this->testRaySphereIntersection(j, mmf, vFrom, vTo, v, mtx, managerObjects->Setting_VertexSphere_Radius)) {
                 managerObjects->VertexEditorModeID = j;
                 managerObjects->VertexEditorMode = v;
             }
@@ -132,19 +132,12 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
     }
 }
 
-bool RayPicking::testRaySphereIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 vertex, glm::mat4 mtx, float radius) {
+bool RayPicking::testRaySphereIntersection(int vID, ModelFaceBase *mmf, glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 vertex, glm::mat4 mtx, float radius) {
     bool intersected = false;
     float distance = 0.0f;
 
-    glm::vec4 v = glm::vec4(vertex, 1.0) * mtx;
-//    glm::vec4 ray_from = glm::vec4(ray_origin, 1.0);
-//    glm::vec4 ray_to = glm::vec4(ray_direction, 1.0) * 1000.0f;
     glm::vec3 ray_from = ray_origin;
     glm::vec3 ray_to = ray_direction * 1000.0f;
-
-//    intersected = glm::intersectRaySphere(ray_from, ray_to, v, radius * radius, distance);
-//    if (intersected && distance > 0.001f && distance < radius)
-//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[intersectRaySphere] = [%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
 
     // Create the vector from end point vA to center of sphere
     glm::vec3 vDirToSphere = vertex - glm::vec3(ray_to);
@@ -161,21 +154,19 @@ bool RayPicking::testRaySphereIntersection(glm::vec3 ray_origin, glm::vec3 ray_d
     glm::vec3 vClosestPoint;
     // If our projected distance from vA is less than or equal to 0, the closest point is vA
     if (t <= 0.0f)
-     vClosestPoint = ray_to;
+        vClosestPoint = ray_to;
     // If our projected distance from vA is greater thatn line length, closest point is vB
     else if (t >= fLineLength)
-     vClosestPoint = ray_from;
+        vClosestPoint = ray_from;
     // Otherwise calculate the point on the line using t and return it
     else
-     vClosestPoint = ray_to + vLineDir * t;
+        vClosestPoint = ray_to + vLineDir * t;
 
     // Now just check if closest point is within radius of sphere
     distance = glm::distance(vertex, vClosestPoint);
     intersected = distance <= radius;
-    if (intersected)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT] - [%f, %f, %f] %f, %f, %f = %f", vertex.x, vertex.y, vertex.z, v.x, v.y, v.z, distance));
-//    else
-//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MISS] - %f = %f", distance, radius));
+//    if (intersected)
+//        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] - [%f, %f, %f] %f, %f, %f = %d", vID, vertex.x, vertex.y, vertex.z, distance));
 
     return intersected;
 }
