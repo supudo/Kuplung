@@ -203,7 +203,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_ShowSpaceship = false;
     this->Setting_GenerateSpaceship = false;
     this->Setting_GammaCoeficient = 1.0f;
-    this->Setting_VertexSphere_Visible = true;
+    this->Setting_VertexSphere_Visible = false;
     this->Setting_VertexSphere_Radius = 0.5f;
     this->Setting_VertexSphere_Segments = 8;
     this->Setting_VertexSphere_Color = glm::vec4(1.0);

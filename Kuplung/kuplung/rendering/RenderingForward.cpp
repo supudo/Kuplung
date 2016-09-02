@@ -680,9 +680,11 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
     if (this->managerObjects.VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
         ImGuizmo::Enable(true);
 
+        ModelFaceData *mfd = meshModelFaces[selectedModelID];
+
         glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
-        v0 = ((ModelFaceData*)meshModelFaces[selectedModelID])->matrixModel * v0;
-        glm::mat4 matrixVertex = meshModelFaces[selectedModelID]->matrixModel;
+        v0 = mfd->matrixModel * v0;
+        glm::mat4 matrixVertex = mfd->matrixModel;
         matrixVertex[3] = v0;
 
         glm::mat4 mtx = glm::mat4(1.0);
@@ -705,10 +707,9 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         this->managerObjects.VertexEditorMode.x += translation.x;
         this->managerObjects.VertexEditorMode.y += -1.0 * translation.z;
         this->managerObjects.VertexEditorMode.z += translation.y;
-        meshModelFaces[selectedModelID]->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
         //TODO: not good for drawing...
-        meshModelFaces[selectedModelID]->initBuffers();
-        meshModelFaces[selectedModelID]->init(meshModelFaces[selectedModelID]->meshModel, meshModelFaces[selectedModelID]->assetsFolder);
+        mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
+        mfd->init(mfd->meshModel, mfd->assetsFolder);
     }
 
     glUseProgram(0);
