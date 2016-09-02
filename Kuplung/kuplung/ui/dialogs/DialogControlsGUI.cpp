@@ -231,9 +231,23 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
-            if (ImGui::CollapsingHeader("Vertices")) {
+            if (ImGui::CollapsingHeader("Edit Mode")) {
                 ImGui::Indent();
-                ImGui::Checkbox("Visible", &this->managerObjects.Setting_VertexSphere_Visible);
+                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Manipulate mode:");
+                ImGui::BeginGroup();
+                float width = ImGui::GetContentRegionAvailWidth() * 0.3;
+                if (ImGui::Button("Vertex", ImVec2(width, 0)))
+                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
+                ImGui::SameLine();
+                if (ImGui::Button("Line", ImVec2(width, 0)))
+                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
+                ImGui::SameLine();
+                if (ImGui::Button("Face", ImVec2(width, 0)))
+                    this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
+                ImGui::EndGroup();
+                ImGui::Separator();
+
+                ImGui::Checkbox("Vertex Sphere", &this->managerObjects.Setting_VertexSphere_Visible);
                 if (this->managerObjects.Setting_VertexSphere_Visible) {
                     ImGui::Checkbox("Sphere", &this->managerObjects.Setting_VertexSphere_IsSphere);
                     ImGui::Checkbox("Wireframes", &this->managerObjects.Setting_VertexSphere_ShowWireframes);

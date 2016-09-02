@@ -26,6 +26,12 @@
 #include "kuplung/meshes/artefacts/Spaceship.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 
+typedef enum GeometryEditMode {
+    GeometryEditMode_Vertex,
+    GeometryEditMode_Line,
+    GeometryEditMode_Face
+} GeometryEditMode;
+
 class ObjectsManager {
 public:
     ~ObjectsManager();
@@ -99,6 +105,7 @@ public:
     glm::vec4 Setting_VertexSphere_Color;
     int VertexEditorModeID;
     glm::vec3 VertexEditorMode;
+    GeometryEditMode Setting_GeometryEditMode;
 
     std::map<std::string, MeshModel> systemModels;
 

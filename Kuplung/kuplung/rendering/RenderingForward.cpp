@@ -704,11 +704,22 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         glm::vec4 perspective;
         glm::decompose(mtx, scale, rotation, translation, skew, perspective);
 
+        glm::vec3 v = this->managerObjects.VertexEditorMode;
         this->managerObjects.VertexEditorMode.x += translation.x;
         this->managerObjects.VertexEditorMode.y += -1.0 * translation.z;
         this->managerObjects.VertexEditorMode.z += translation.y;
+        if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex)
+            mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
+        else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {
+        }
+        else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {
+            for (size_t i=0; i<mfd->meshModel.vertices.size(); i++) {
+                if (mfd->meshModel.vertices[i] == v) {
+                    mfd->meshModel.vertices[i] = this->managerObjects.VertexEditorMode;
+                }
+            }
+        }
         //TODO: not good for drawing...
-        mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
         mfd->init(mfd->meshModel, mfd->assetsFolder);
         mfd->Setting_EditMode = true;
     }
