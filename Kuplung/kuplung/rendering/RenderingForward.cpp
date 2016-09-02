@@ -719,8 +719,8 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
                 }
             }
         }
-        //TODO: not good for drawing...
-        mfd->init(mfd->meshModel, mfd->assetsFolder);
+        //TODO: not good for drawing... reuploading the buffers again .... should find a better way - immediate draw or GL_STREAM_DRAW?
+        mfd->initBuffers();
         mfd->Setting_EditMode = true;
     }
 

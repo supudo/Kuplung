@@ -67,6 +67,11 @@ void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
 
+    this->initBuffers();
+}
+
+void ModelFaceData::initBuffers() {
+    ModelFaceBase::initBuffers();
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 

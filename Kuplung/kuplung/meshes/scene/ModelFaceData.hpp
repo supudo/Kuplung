@@ -15,6 +15,7 @@ class ModelFaceData: public ModelFaceBase {
 public:
     ~ModelFaceData();
     void destroy();
+    void initBuffers();
     void init(MeshModel model, std::string assetsFolder);
     void renderModel(bool useTessellation);
 
