@@ -10,6 +10,7 @@
 #define Kuplung_hpp
 
 #include <thread>
+#include <chrono>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/ui/UI.hpp"
@@ -19,6 +20,7 @@
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/rendering/RenderingManager.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
+#include "kuplung/meshes/helpers/StructuredVolumetricSampling.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
@@ -97,6 +99,10 @@ private:
     std::vector<MeshModel> meshModels, meshModelsNew;
     std::vector<ModelFaceBase*> meshModelFaces;
     std::vector<RayLine*> rayLines;
+
+    StructuredVolumetricSampling *structured_Volumetric_Sampling;
+
+    float applicationStartTime;
 };
 
 #endif /* Kuplung_hpp */

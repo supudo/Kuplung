@@ -39,6 +39,7 @@ mac {
     MediaFiles.files += resources/Kuplung_RecentFiles.ini
     MediaFiles.files += resources/Kuplung_RecentFilesImported.ini
     MediaFiles.files += resources/Kuplung.icns
+    MediaFiles.files += resources/noise16.png
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
@@ -136,6 +137,7 @@ SOURCES += main.cpp \
     kuplung/meshes/helpers/RayLine.cpp \
     kuplung/meshes/helpers/Skybox.cpp \
     kuplung/meshes/helpers/VertexSphere.cpp \
+    kuplung/meshes/helpers/StructuredVolumetricSampling.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -215,6 +217,7 @@ HEADERS += \
     kuplung/meshes/helpers/RayLine.hpp \
     kuplung/meshes/helpers/Skybox.hpp \
     kuplung/meshes/helpers/VertexSphere.hpp \
+    kuplung/meshes/helpers/StructuredVolumetricSampling.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
@@ -372,6 +375,8 @@ DISTFILES += \
     resources/shaders/bounding_box.frag \
     resources/shaders/vertex_sphere.vert \
     resources/shaders/vertex_sphere.frag \
+    resources/shaders/structured_vol_sampling.vert \
+    resources/shaders/structured_vol_sampling.frag \
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \
     resources/skybox/fire_planet_front.jpg \

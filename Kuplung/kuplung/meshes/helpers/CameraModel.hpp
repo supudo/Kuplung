@@ -47,8 +47,6 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboIndices;
     GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glUniformInnerLightDirection, glUniformColor;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* CameraModel_hpp */
