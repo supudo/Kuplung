@@ -20,7 +20,7 @@
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/rendering/RenderingManager.hpp"
 #include "kuplung/meshes/helpers/RayLine.hpp"
-#include "kuplung/meshes/helpers/StructuredVolumetricSampling.hpp"
+#include "kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/objects/RayPicking.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"

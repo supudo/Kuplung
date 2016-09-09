@@ -8,20 +8,20 @@ uniform float fs_deltaRunningTime;
 uniform vec4 fs_mouseCoordinates;
 uniform sampler2D fs_noiseTextureSampler;
 
-void mainImage(out vec4 c, in vec2 f);
+out vec4 fragColor;
 
 #define SAMPLE_COUNT 32
-#define PERIOD 1.0
+#define PERIOD 1.
+
+// mouse toggle
 bool STRUCTURED = true;
 
 // cam moving in a straight line
-vec3 lookDir = vec3(cos(0.53 * fs_deltaRunningTime), 0.0, sin(fs_deltaRunningTime));
-vec3 camVel = vec3(-20.0, 0.0, 0.0);
+vec3 lookDir = vec3(cos(.53*fs_deltaRunningTime),0.,sin(fs_deltaRunningTime));
+vec3 camVel = vec3(-20.,0.,0.);
 float zoom = 1.2; // 1.5;
 
-vec3 sundir = normalize(vec3(-1.0, 0.0, -1.0));
-
-out vec4 fragColor;
+vec3 sundir = normalize(vec3(-1.0,0.0,-1.));
 
 // LUT based 3d value noise
 float noise(in vec3 x) {
@@ -35,7 +35,7 @@ float noise(in vec3 x) {
 }
 
 vec4 map(in vec3 p) {
-  float d = 0.1 + 0.8 * sin(0.6 * p.z) * sin(0.5 * p.x) - p.y;
+    float d = 0.1 + 0.8 * sin(0.6 * p.z) * sin(0.5 * p.x) - p.y;
 
     vec3 q = p;
     float f;
@@ -57,8 +57,6 @@ vec4 map(in vec3 p) {
     return res;
 }
 
-// to share with unity hlsl
-#define fmod mod
 float mysign(float x) { return x < 0.0 ? -1.0 : 1.0 ; }
 vec2 mysign(vec2 x) { return vec2(x.x < 0.0 ? -1.0 : 1.0, x.y < 0.0 ? -1.0 : 1.0) ; }
 
@@ -97,7 +95,7 @@ void SetupSampling(out vec2 t, out vec2 dt, out vec2 wt, in vec3 ro, in vec3 rd)
     vec2 dist = abs(ndotro / ndotrd);
 
     // raymarch start offset - skips leftover bit to get from ro to first strata lines
-    t = -mysign(ndotrd) * fmod(ndotro, period) / abs(ndotrd);
+    t = -mysign(ndotrd) * mod(ndotro, period) / abs(ndotrd);
     if (ndotrd.x > 0.0)
         t.x += dt.x;
     if (ndotrd.y > 0.0)
@@ -224,5 +222,6 @@ void main(void) {
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
     mainImage(color, fragColor.xy);
     color.w = 1.0;
-    fragColor = color;
+//    fragColor = color;
+//    fragColor = texture(fs_noiseTextureSampler, fs_textureCoord.xy);
 }

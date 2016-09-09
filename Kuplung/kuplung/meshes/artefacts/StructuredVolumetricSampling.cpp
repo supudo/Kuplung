@@ -67,7 +67,6 @@ bool StructuredVolumetricSampling::initShaderProgram() {
     }
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
 
         this->glFS_deltaRunningTime = this->glUtils->glGetUniform(this->shaderProgram, "fs_deltaRunningTime");
         this->glFS_noiseTextureSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_noiseTextureSampler");
@@ -88,30 +87,19 @@ void StructuredVolumetricSampling::initBuffers() {
     glBindVertexArray(this->glVAO);
 
     GLfloat vertices[] = {
-//        -1.0, -1.0, 1.0,
-//        -1.0, -1.0, 1.0,
-//         1.0, -1.0, 1.0,
-//         1.0, -1.0, 1.0
-
-        -1.0, -1.0,
-         3.0, -1.0,
-        -1.0,  3.0
-
-//         1,  1, 0,
-//        -1,  1, 0
-//        -1, -1, 0
-
-//         1.0, -1.0, 0.0,
-//         1.0,  1.0, 0.0,
-//        -1.0,  1.0, 0.0
+        -1.0f, -1.0f,  0.0f,
+         1.0f, -1.0f,  0.0f,
+         1.0f,  1.0f,  0.0f,
+         1.0f,  1.0f,  0.0f,
+        -1.0f,  1.0f,  0.0f,
+        -1.0f, -1.0f,  0.0f
     };
 
-    // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     std::string matImageLocal = Settings::Instance()->appFolder() + "/noise16.png";
     int tWidth, tHeight, tChannels;
@@ -150,18 +138,16 @@ void StructuredVolumetricSampling::initBuffers() {
     glBindVertexArray(0);
 }
 
-void StructuredVolumetricSampling::render(glm::mat4 matrixMVP, int mouseX, int mouseY, float seconds) {
+void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        // drawing options
         glCullFace(GL_FRONT);
         glFrontFace(GL_CCW);
+        glEnable(GL_TEXTURE_2D);
 
-        glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(matrixMVP));
-
-        glUniform1i(this->glFS_noiseTextureSampler, 0);
         glActiveTexture(GL_TEXTURE0);
+        glUniform1i(this->glFS_noiseTextureSampler, 0);
 
         glUniform1f(this->glFS_deltaRunningTime, seconds);
         glUniform3f(this->glFS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0.0f);
@@ -169,8 +155,7 @@ void StructuredVolumetricSampling::render(glm::mat4 matrixMVP, int mouseX, int m
 
         // draw
         glBindVertexArray(this->glVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
-//        glDrawElements(GL_LINES, 3, GL_UNSIGNED_SHORT, 0);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
         glBindVertexArray(0);
 
         glUseProgram(0);

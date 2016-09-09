@@ -367,29 +367,28 @@ void Kuplung::addSpaceshipModel() {
 
 void Kuplung::renderScene() {
     // structured volumetric samping
-    this->structured_Volumetric_Sampling->render(
-                this->managerObjects->matrixProjection * this->managerObjects->camera->matrixCamera,
-                this->managerControls->mousePosition.x,
-                this->managerControls->mousePosition.y,
-                (SDL_GetTicks() - this->applicationStartTime) / 1000.0f
-                );
+//    this->structured_Volumetric_Sampling->render(
+//                this->managerControls->mousePosition.x,
+//                this->managerControls->mousePosition.y,
+//                (SDL_GetTicks() - this->applicationStartTime) / 1000.0f
+//                );
 
-//    switch (Settings::Instance()->RendererType) {
-//        case 2: {
-//            this->renderSceneModels();
-//            this->managerObjects->render();
-//            break;
-//        }
-//        default: {
-//            this->managerObjects->render();
-//            this->renderSceneModels();
-//            break;
-//        }
-//    }
+    switch (Settings::Instance()->RendererType) {
+        case 2: {
+            this->renderSceneModels();
+            this->managerObjects->render();
+            break;
+        }
+        default: {
+            this->managerObjects->render();
+            this->renderSceneModels();
+            break;
+        }
+    }
 
-//    for (size_t i=0; i<this->rayLines.size(); i++) {
-//        this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
-//    }
+    for (size_t i=0; i<this->rayLines.size(); i++) {
+        this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
+    }
 
     this->processRunningThreads();
 }

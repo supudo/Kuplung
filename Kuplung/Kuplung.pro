@@ -126,6 +126,7 @@ SOURCES += main.cpp \
     kuplung/meshes/scene/ModelFaceDeferredT.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
+    kuplung/meshes/artefacts/StructuredVolumetricSampling.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
     kuplung/meshes/helpers/AxisHelpers.cpp \
     kuplung/meshes/helpers/WorldGrid.cpp \
@@ -137,7 +138,6 @@ SOURCES += main.cpp \
     kuplung/meshes/helpers/RayLine.cpp \
     kuplung/meshes/helpers/Skybox.cpp \
     kuplung/meshes/helpers/VertexSphere.cpp \
-    kuplung/meshes/helpers/StructuredVolumetricSampling.cpp \
     kuplung/objects/ObjectsManager.cpp \
     kuplung/objects/RayPicking.cpp \
     kuplung/settings/ConfigUtils.cpp \
@@ -206,6 +206,7 @@ HEADERS += \
     kuplung/meshes/scene/ModelFaceDeferredT.hpp \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
+    kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \
     kuplung/meshes/helpers/AxisHelpers.hpp \
     kuplung/meshes/helpers/WorldGrid.hpp \
@@ -217,7 +218,6 @@ HEADERS += \
     kuplung/meshes/helpers/RayLine.hpp \
     kuplung/meshes/helpers/Skybox.hpp \
     kuplung/meshes/helpers/VertexSphere.hpp \
-    kuplung/meshes/helpers/StructuredVolumetricSampling.hpp \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \

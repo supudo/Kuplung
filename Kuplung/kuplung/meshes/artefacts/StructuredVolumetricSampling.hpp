@@ -10,7 +10,6 @@
 #define StructuredVolumetricSampling_hpp
 
 #include <string>
-#include <glm/common.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
@@ -21,15 +20,14 @@ public:
     void init();
     bool initShaderProgram();
     void initBuffers();
-    void render(glm::mat4 matrixMVP, int mouseX, int mouseY, float seconds);
+    void render(int mouseX, int mouseY, float seconds);
 
 private:
     std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboTextureNoise;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix;
-    GLint glFS_deltaRunningTime, glFS_noiseTextureSampler, glFS_screenResolution, glFS_mouseCoordinates;
+    GLuint glAttributeVertexPosition, glFS_deltaRunningTime, glFS_noiseTextureSampler, glFS_screenResolution, glFS_mouseCoordinates;
 
 private:
 };
