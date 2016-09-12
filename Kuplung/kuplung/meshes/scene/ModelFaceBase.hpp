@@ -106,6 +106,9 @@ public:
     bool Effect_Bloom_doBloom;
     float Effect_Bloom_WeightA, Effect_Bloom_WeightB, Effect_Bloom_WeightC, Effect_Bloom_WeightD, Effect_Bloom_Vignette, Effect_Bloom_VignetteAtt;
 
+    // effects - tone mapping
+    bool Effect_ToneMapping_ACESFilmRec2020;
+
     // rendering
     int Setting_LightingPass_DrawMode;
 

@@ -136,6 +136,24 @@ bool RayPicking::testRaySphereIntersection(int vID, ModelFaceBase *mmf, glm::vec
     bool intersected = false;
     float distance = 0.0f;
 
+    glm::vec4 v0 = glm::vec4(vertex, 1.0);
+    v0 = v0 * mtx;
+
+    glm::vec3 p1;
+    glm::vec3 n1;
+    intersected = glm::intersectRaySphere(
+                      ray_origin,
+                      ray_direction,
+                      vertex,
+                      radius,
+                      p1,
+                      n1
+                      );
+    if (intersected)
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] - [%f, %f, %f] %f, %f, %f = %d", vID, vertex.x, vertex.y, vertex.z, distance));
+
+
+    /*
     glm::vec3 ray_from = ray_origin;
     glm::vec3 ray_to = ray_direction * 1000.0f;
 
@@ -167,7 +185,7 @@ bool RayPicking::testRaySphereIntersection(int vID, ModelFaceBase *mmf, glm::vec
     intersected = distance <= radius;
 //    if (intersected)
 //        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] - [%f, %f, %f] %f, %f, %f = %d", vID, vertex.x, vertex.y, vertex.z, distance));
-
+    */
     return intersected;
 }
 

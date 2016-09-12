@@ -612,6 +612,7 @@ void Kuplung::guiClearScreen() {
     this->managerRendering->meshModelFaces.clear();
     this->managerUI->setSceneSelectedModelObject(-1);
     this->managerObjects->clearAllLights();
+    this->managerControls->keyPresset_TAB = false;
 }
 
 void Kuplung::guiEditorshaderCompiled(std::string fileName) {

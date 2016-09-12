@@ -55,7 +55,6 @@ private:
     GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
     GLint glFS_GammaCoeficient;
-    GLint glVS_EditModeWireframe;
 
     // material
     GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
@@ -70,6 +69,8 @@ private:
     GLint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
     // effects - bloom
     GLint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
+    // effects - tone mapping
+    GLint glEffect_ToneMapping_ACESFilmRec2020;
 
     // view skin
     ModelFace_LightSource_Directional *solidLight;

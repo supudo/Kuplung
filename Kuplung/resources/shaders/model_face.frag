@@ -116,6 +116,10 @@ void main(void) {
                 fragColor = vec4(processedColorRefraction, fs_alpha);
 
             fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / fs_gammaCoeficient));
+
+            // tone mapping
+            if (fs_ACESFilmRec2020)
+                fragColor.rgb = ACESFilmRec2020(fragColor.rgb);
         }
         else
             fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);

@@ -13,6 +13,7 @@ uniform bool fs_celShading;
 uniform bool fs_userParallaxMapping;
 uniform int fs_modelViewSkin;
 uniform float fs_gammaCoeficient;
+uniform bool fs_ACESFilmRec2020;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
@@ -135,6 +136,8 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
 
 mat3 cotangent_frame(vec3 normal, vec3 position, vec2 texCoords);
+
+vec3 ACESFilmRec2020(vec3 x);
 
 // out color
 

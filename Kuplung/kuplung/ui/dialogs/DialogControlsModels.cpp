@@ -557,14 +557,23 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 break;
             }
             case 6: {
-                ImGui::TextColored(ImVec4(1, 0, 0, 1), "Effects");
-
-                ImGui::Text("Gaussian Blur");
-                const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
-                ImGui::Combo("Mode##228", &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
-                this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
-                this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
-                ImGui::Separator();
+                if (ImGui::CollapsingHeader("Gaussian Blur")) {
+                    ImGui::Indent();
+                    ImGui::BeginGroup();
+                    const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
+                    ImGui::Combo("Mode##228", &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
+                    this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Radius->point, true, isFrame);
+                    this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->animate, &(*meshModelFaces)[this->selectedObject]->Effect_GBlur_Width->point, true, isFrame);
+                    ImGui::EndGroup();
+                    ImGui::Unindent();
+                }
+                if (ImGui::CollapsingHeader("Filmic Tone Mapping")) {
+                    ImGui::Indent();
+                    ImGui::BeginGroup();
+                    ImGui::Checkbox("ACES Film Rec2020", &(*meshModelFaces)[this->selectedObject]->Effect_ToneMapping_ACESFilmRec2020);
+                    ImGui::EndGroup();
+                    ImGui::Unindent();
+                }
 
 //            ImGui::Text("Bloom");
 //            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[this->selectedObject]->Effect_Bloom_doBloom);

@@ -164,7 +164,6 @@ bool RenderingForward::initShaderProgram() {
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
         this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
-        this->glVS_EditModeWireframe = this->glUtils->glGetUniform(this->shaderProgram, "vs_editModeWireframe");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
@@ -304,6 +303,9 @@ bool RenderingForward::initShaderProgram() {
         this->glEffect_Bloom_WeightD = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightD");
         this->glEffect_Bloom_Vignette = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_Vignette");
         this->glEffect_Bloom_VignetteAtt = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_VignetteAtt");
+
+        // effects - tone mapping
+        this->glEffect_ToneMapping_ACESFilmRec2020 = this->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
     }
 
     return success;
@@ -622,6 +624,9 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         glUniform1f(this->glEffect_Bloom_Vignette, mfd->Effect_Bloom_Vignette);
         glUniform1f(this->glEffect_Bloom_VignetteAtt, mfd->Effect_Bloom_VignetteAtt);
 
+        // effects - tone mapping
+        glUniform1i(this->glEffect_ToneMapping_ACESFilmRec2020, mfd->Effect_ToneMapping_ACESFilmRec2020);
+
         glUniform1f(this->glVS_IsBorder, 0.0);
 
         glm::mat4 mtxModel;
@@ -714,9 +719,12 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         }
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {
             for (size_t i=0; i<mfd->meshModel.vertices.size(); i++) {
-                if (mfd->meshModel.vertices[i] == v) {
-                    mfd->meshModel.vertices[i] = this->managerObjects.VertexEditorMode;
-                }
+//                if (mfd->meshModel.vertices[i] == v) {
+//                    mfd->meshModel.vertices[i] = v;
+//                    printf("MATCH - [%f, %f, %f]\n", v.x, v.y, v.z);
+//                }
+//                else
+//                    printf("----- [%f, %f, %f]\n", v.x, v.y, v.z);
             }
         }
         //TODO: not good for drawing... reuploading the buffers again .... should find a better way - immediate draw or GL_STREAM_DRAW?

@@ -1,8 +1,23 @@
-// https://github.com/kmkolasinski/AwesomeBump/blob/master/Sources/resources/filters_3d.frag
+// =================================================
+//
+// Filmic tone maping
+// see https://knarkowicz.wordpress.com/2016/08/31/hdr-display-first-steps/
+//
+// =================================================
+
+vec3 ACESFilmRec2020(vec3 x) {
+    float a = 15.8f;
+    float b = 2.12f;
+    float c = 1.2f;
+    float d = 5.92f;
+    float e = 1.9f;
+    return vec3( x * ( a * x + b ) ) / ( x * ( c * x + d ) + e );
+}
 
 // =================================================
 //
 // Gaussian Blur
+// see https://github.com/kmkolasinski/AwesomeBump/blob/master/Sources/resources/filters_3d.frag
 //
 // =================================================
 

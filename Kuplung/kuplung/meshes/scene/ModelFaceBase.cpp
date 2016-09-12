@@ -140,6 +140,7 @@ void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
     this->Effect_GBlur_Mode = -1;
     this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->Effect_ToneMapping_ACESFilmRec2020 = false;
 
     // gizmo controls
     this->Setting_Gizmo_Translate = false;
@@ -207,6 +208,8 @@ void ModelFaceBase::initModelProperties() {
     this->Effect_Bloom_WeightD = 0.0f;
     this->Effect_Bloom_Vignette = 0.0f;
     this->Effect_Bloom_VignetteAtt = 0.0f;
+
+    this->Effect_ToneMapping_ACESFilmRec2020 = false;
 
     // gizmo controls
     this->Setting_Gizmo_Translate = false;
