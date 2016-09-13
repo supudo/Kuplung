@@ -78,11 +78,6 @@ bool BoundingBox::initShaderProgram() {
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
 
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDisable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
     return success;
 }
 

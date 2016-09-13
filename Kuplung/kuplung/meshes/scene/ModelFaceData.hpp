@@ -25,6 +25,8 @@ public:
     glm::vec4 vertexSphereColor;
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
 
+    glm::mat4 matrixGrid;
+
 private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;

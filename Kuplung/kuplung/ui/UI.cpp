@@ -210,7 +210,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu("   Export")) {
-                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJExporter, (this->meshModelFaces != NULL && this->meshModelFaces->size() > 0));
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJExporter, true);
                 ImGui::EndMenu();
             }
 

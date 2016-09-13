@@ -343,6 +343,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         // translate
         matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
 
+        mfd->matrixGrid = this->managerObjects.grid->matrixModel;
         mfd->matrixProjection = this->matrixProjection;
         mfd->matrixCamera = this->matrixCamera;
         mfd->matrixModel = matrixModel;
