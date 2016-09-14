@@ -89,3 +89,4 @@ message Mesh {
   repeated Vec2 texture_coordinates = 11;
   repeated Vec3 normals = 12;
   repeated fixed32 indices = 13;
+}

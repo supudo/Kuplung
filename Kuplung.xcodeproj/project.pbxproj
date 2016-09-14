@@ -36,6 +36,10 @@
 		8A43AD841C92FAE4000A35FB /* light_spot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43AD7E1C92FACC000A35FB /* light_spot.obj */; };
 		8A43BA6F1D4776A50034CD46 /* KuplungAppScene.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A43BA6E1D47769B0034CD46 /* KuplungAppScene.proto */; };
 		8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */; };
+		8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DC1D895FAD00E951DF /* VoronoiGenerator.cpp */; };
+		8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */; };
+		8A45C5E41D89609C00E951DF /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
+		8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
 		8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */; };
@@ -346,6 +350,8 @@
 				8AAF14531D75B8D40075189D /* terrain.vert in Copy Files */,
 				8AAF14541D75B8D40075189D /* vertex_sphere.frag in Copy Files */,
 				8AAF14551D75B8D40075189D /* vertex_sphere.vert in Copy Files */,
+				8A45C5E41D89609C00E951DF /* structured_vol_sampling.frag in Copy Files */,
+				8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,6 +472,12 @@
 		8A43BA6E1D47769B0034CD46 /* KuplungAppScene.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KuplungAppScene.proto; path = protobuf/KuplungAppScene.proto; sourceTree = "<group>"; };
 		8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungAppScene.pb.cc; path = saveopen/KuplungAppScene.pb.cc; sourceTree = "<group>"; };
 		8A43BA711D4776B10034CD46 /* KuplungAppScene.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungAppScene.pb.h; path = saveopen/KuplungAppScene.pb.h; sourceTree = "<group>"; };
+		8A45C5DC1D895FAD00E951DF /* VoronoiGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VoronoiGenerator.cpp; path = pcg/VoronoiGenerator.cpp; sourceTree = "<group>"; };
+		8A45C5DD1D895FAD00E951DF /* VoronoiGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VoronoiGenerator.hpp; path = pcg/VoronoiGenerator.hpp; sourceTree = "<group>"; };
+		8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = StructuredVolumetricSampling.cpp; path = artefacts/StructuredVolumetricSampling.cpp; sourceTree = "<group>"; };
+		8A45C5E01D895FC400E951DF /* StructuredVolumetricSampling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StructuredVolumetricSampling.hpp; path = artefacts/StructuredVolumetricSampling.hpp; sourceTree = "<group>"; };
+		8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.frag; sourceTree = "<group>"; };
+		8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.vert; sourceTree = "<group>"; };
 		8A47F7171CBF741800699CAC /* camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.mtl; sourceTree = "<group>"; };
 		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
 		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
@@ -1049,6 +1061,8 @@
 			children = (
 				8AA9F2301D2173F6004A8F1C /* Spaceship.cpp */,
 				8AA9F2311D2173F6004A8F1C /* Spaceship.hpp */,
+				8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */,
+				8A45C5E01D895FC400E951DF /* StructuredVolumetricSampling.hpp */,
 				8AA9F2321D2173F6004A8F1C /* Terrain.cpp */,
 				8AA9F2331D2173F6004A8F1C /* Terrain.hpp */,
 			);
@@ -1062,6 +1076,8 @@
 				8AA9F2381D21741B004A8F1C /* HeightmapGenerator.hpp */,
 				8AA9F2391D21741B004A8F1C /* SpaceshipMeshGenerator.cpp */,
 				8AA9F23A1D21741B004A8F1C /* SpaceshipMeshGenerator.hpp */,
+				8A45C5DC1D895FAD00E951DF /* VoronoiGenerator.cpp */,
+				8A45C5DD1D895FAD00E951DF /* VoronoiGenerator.hpp */,
 			);
 			name = pcg;
 			sourceTree = "<group>";
@@ -1185,6 +1201,8 @@
 				8AECC07A1CB274610096AE7A /* skybox.vert */,
 				8AA9F22B1D2173CB004A8F1C /* spaceship.frag */,
 				8AA9F22C1D2173CB004A8F1C /* spaceship.vert */,
+				8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */,
+				8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */,
 				8AA5EDF41C773DF8009F1F52 /* terrain.frag */,
 				8AA5EDF51C773DF8009F1F52 /* terrain.vert */,
 				8AAF14251D75B8B40075189D /* vertex_sphere.frag */,
@@ -1404,7 +1422,7 @@
 		8AC828A81BF5FEE7009C74E0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = supudo.net;
 				TargetAttributes = {
 					8AC828AF1BF5FEE7009C74E0 = {
@@ -1442,6 +1460,7 @@
 				8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */,
 				8A6E70B51C6CACB40085CAE5 /* imgui_draw.cpp in Sources */,
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
+				8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */,
 				8AB273381D2FCC77008508B1 /* RenderingSimple.cpp in Sources */,
 				8A7802D41D2D4F3A00D24620 /* RenderingForward.cpp in Sources */,
 				8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */,
@@ -1450,6 +1469,7 @@
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
+				8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
 				8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */,
@@ -1530,8 +1550,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1573,8 +1595,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -1613,7 +1637,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/2.6.1/include,
+					/usr/local/Cellar/protobuf/3.0.2/include,
 					/usr/local/Cellar/minizip/1.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -1625,7 +1649,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/2.6.1/lib,
+					/usr/local/Cellar/protobuf/3.0.2/lib,
 					/usr/local/Cellar/minizip/1.1/lib,
 				);
 				OTHER_LDFLAGS = (
@@ -1667,7 +1691,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/2.6.1/include,
+					/usr/local/Cellar/protobuf/3.0.2/include,
 					/usr/local/Cellar/minizip/1.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -1679,7 +1703,7 @@
 					/usr/local/Cellar/glm/0.9.7.4/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/2.6.1/lib,
+					/usr/local/Cellar/protobuf/3.0.2/lib,
 					/usr/local/Cellar/minizip/1.1/lib,
 				);
 				OTHER_LDFLAGS = (
