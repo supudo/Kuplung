@@ -334,14 +334,14 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         matrixModel *= this->managerObjects.grid->matrixModel;
         // scale
         matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+        // translate
+        matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
         // rotate
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-        // translate
-        matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
 
         mfd->matrixGrid = this->managerObjects.grid->matrixModel;
         mfd->matrixProjection = this->matrixProjection;

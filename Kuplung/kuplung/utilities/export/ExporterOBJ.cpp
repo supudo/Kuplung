@@ -9,6 +9,7 @@
 #include "ExporterOBJ.hpp"
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 ExporterOBJ::~ExporterOBJ() {
     this->destroy();
@@ -161,7 +162,11 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
                                  std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
 
         fileSuffix = "";
-        this->saveFile(fileContents, this->exportFile.path + "/" + this->exportFile.title + fileSuffix + ".obj");
+        std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
+        std::string fileName = this->exportFile.title;
+        if (boost::algorithm::ends_with(fileName, ".obj"))
+            fileName = fileName.substr(0, fileName.size() - 4);
+        this->saveFile(fileContents, filePath + "/" + fileName + fileSuffix + ".obj");
     }
 }
 
@@ -209,8 +214,13 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
 
     fileContents += this->nlDelimiter;
 
-    if (fileContents != "")
-        this->saveFile(fileContents, this->exportFile.path + "/" + this->exportFile.title + ".mtl");
+    if (fileContents != "") {
+        std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
+        std::string fileName = this->exportFile.title;
+        if (boost::algorithm::ends_with(fileName, ".obj"))
+            fileName = fileName.substr(0, fileName.size() - 4);
+        this->saveFile(fileContents, filePath + "/" + fileName + ".mtl");
+    }
 }
 
 void ExporterOBJ::saveFile(std::string fileContents, std::string fileName) {
