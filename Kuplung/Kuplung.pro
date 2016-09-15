@@ -59,8 +59,8 @@ mac {
     LIBS += -L/usr/local/Cellar/boost/1.61.0/lib -lboost_system -lboost_filesystem
     INCLUDEPATH += /usr/local/Cellar/boost/1.61.0/include
 
-    LIBS += -L/usr/local/Cellar/glm/0.9.7.4/lib
-    INCLUDEPATH += /usr/local/Cellar/glm/0.9.7.4/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.8.0/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.0/include
 
     LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
     INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
