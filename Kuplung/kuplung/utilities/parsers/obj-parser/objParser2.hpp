@@ -32,7 +32,7 @@ public:
 private:
     FBEntity file;
     std::function<void(float)> doProgress;
-    int objFileLinesCount;
+    int objFileLinesCount = 0;
 
     size_t fileCountLines(std::istream &is);
 
@@ -42,7 +42,7 @@ private:
     std::vector<glm::vec2> vectorTextureCoordinates;
     std::vector<unsigned int> vectorIndices;
 
-    void loadMaterialFile(std::string materialFile);
+    void loadMaterialFile(std::string const& materialFile);
     MeshMaterialTextureImage parseTextureImage(std::string textureLine);
     std::vector<std::string> splitString(const std::string &s, std::string delimiter);
     bool getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result);

@@ -31,12 +31,12 @@ private:
     std::vector<float> string2float(std::vector<std::string> strings);
     int getLineCount();
 
-    std::vector<MeshModelMaterial> loadMaterial(std::string materialFile);
-    MeshModelMaterial findMaterial(std::string materialID);
-    MeshMaterialTextureImage parseTextureImage(std::string textureLine);
+    std::vector<MeshModelMaterial> loadMaterial(std::string const& materialFile);
+    MeshModelMaterial findMaterial(std::string const& materialID);
+    MeshMaterialTextureImage parseTextureImage(std::string const& textureLine);
 
     std::vector<float> geometricVertices, textureCoordinates, vertexNormals, spaceVertices, polygonalFaces;
-    int objFileLinesCount;
+    int objFileLinesCount = 0;
 
     // comment line
     std::regex regex_comment;

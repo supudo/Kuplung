@@ -61,7 +61,7 @@ void ModelFaceData::destroy() {
     ModelFaceBase::~ModelFaceBase();
 }
 
-void ModelFaceData::init(MeshModel model, std::string assetsFolder) {
+void ModelFaceData::init(MeshModel model, std::string const& assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
 
     this->meshModel = model;

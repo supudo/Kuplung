@@ -16,7 +16,6 @@
 
 class SpaceshipMeshGenerator {
 public:
-    ~SpaceshipMeshGenerator();
     void generate(int gridSize);
 
     std::vector<glm::vec3> vertices, normals, colors;

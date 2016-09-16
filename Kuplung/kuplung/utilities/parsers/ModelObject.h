@@ -118,7 +118,7 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
         printf("model.ModelMaterial.SpecularExp = %f\n", m.ModelMaterial.SpecularExp);
         printf("model.ModelMaterial.SpecularExp = %f\n", m.ModelMaterial.Transparency);
         printf("model.ModelMaterial.OpticalDensity = %f\n", m.ModelMaterial.OpticalDensity);
-        printf("model.ModelMaterial.IlluminationMode = %i\n", m.ModelMaterial.IlluminationMode);
+        printf("model.ModelMaterial.IlluminationMode = %u\n", m.ModelMaterial.IlluminationMode);
 
         printf("model.ModelMaterial.textures_ambient.Filename = %s\n", m.ModelMaterial.TextureAmbient.Filename.c_str());
         printf("model.ModelMaterial.textures_diffuse.Filename = %s\n", m.ModelMaterial.TextureDiffuse.Filename.c_str());

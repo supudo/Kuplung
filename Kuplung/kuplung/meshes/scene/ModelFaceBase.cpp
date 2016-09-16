@@ -16,30 +16,6 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-ModelFaceBase::ModelFaceBase() {
-//    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f });
-//    this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f });
-//    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f });
-//    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->displaceX = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->displaceY = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->displaceZ = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->materialAmbient = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialDiffuse = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialSpecular = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
-//    this->materialEmission = new MaterialColor(alse, false, 1.0, glm::vec3(1.0, 1.0, 1.0) });
-//    this->Setting_MaterialSpecularExp = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->Setting_MaterialRefraction = std::make_unique<ObjectCoordinate>(false, 1.0f });
-//    this->displacementHeightScale = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->Effect_GBlur_Radius = std::make_unique<ObjectCoordinate>(false, 0.0f });
-//    this->Effect_GBlur_Width = std::make_unique<ObjectCoordinate>(false, 0.0f });
-}
-
 ModelFaceBase* ModelFaceBase::clone(int modelID) {
     ModelFaceBase *mmf = new ModelFaceBase();
 
@@ -101,7 +77,7 @@ void ModelFaceBase::destroy() {
 
 #pragma mark - Initialization
 
-void ModelFaceBase::init(MeshModel model, std::string assetsFolder) {
+void ModelFaceBase::init(MeshModel model, std::string const& assetsFolder) {
     this->glUtils = std::make_unique<GLUtils>();
     this->mathHelper = std::make_unique<Maths>();
 
@@ -232,7 +208,7 @@ void ModelFaceBase::initVertexSphere() {
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
-void ModelFaceBase::loadTexture(std::string assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))

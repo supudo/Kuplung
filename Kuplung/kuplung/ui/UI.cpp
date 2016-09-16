@@ -110,7 +110,6 @@ void UI::init(SDL_Window *window,
     this->windowOptions->loadFonts(&this->needsFontChange);
 
     this->controlsGUI = new DialogControlsGUI(this->managerObjects);
-    this->controlsGUI->init();
 
     this->controlsModels = new DialogControlsModels(this->managerObjects);
     this->controlsModels->init(this->sdlWindow, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);

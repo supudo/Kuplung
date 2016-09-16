@@ -16,13 +16,6 @@
 
 DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
-}
-
-void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
-    this->sdlWindow = sdlWindow;
-    this->funcAddShape = addShape;
-    this->funcAddLight = addLight;
-    this->funcDeleteModel = deleteModel;
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;
@@ -39,14 +32,14 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeT
     this->showTexture_Specular = false;
     this->showTextureWindow_SpecularExp = false;
     this->showTexture_SpecularExp = false;
+    this->showTextureWindow_Displacement = false;
+    this->showTexture_Displacement = false;
     this->showUVEditor = false;
-
-    this->TextureImage = "";
-    this->TextureFilename = "";
 
     this->textureAmbient_Width = this->textureAmbient_Height = this->textureDiffuse_Width = this->textureDiffuse_Height = 0;
     this->textureDissolve_Width = this->textureDissolve_Height = this->textureBump_Width = this->textureBump_Height = 0;
     this->textureSpecular_Width = this->textureSpecular_Height = this->textureSpecularExp_Width = this->textureSpecularExp_Height = 0;
+    this->textureDisplacement_Width = this->textureDisplacement_Height = 0;
 
     this->selectedObject = -1;
     this->selectedTabScene = -1;
@@ -61,6 +54,13 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeT
 
     this->componentUVEditor = new UVEditor();
     this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
+}
+
+void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
+    this->sdlWindow = sdlWindow;
+    this->funcAddShape = addShape;
+    this->funcAddLight = addLight;
+    this->funcDeleteModel = deleteModel;
 }
 
 void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height) {

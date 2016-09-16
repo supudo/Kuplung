@@ -207,6 +207,8 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
                         entity.isFile = false;
                     else if (fs::is_regular_file(fileStatus))
                         entity.isFile = true;
+                    else
+                        entity.isFile = false;
 
                     entity.title = iteratorFolder->path().filename().string();
                     if (!entity.isFile)

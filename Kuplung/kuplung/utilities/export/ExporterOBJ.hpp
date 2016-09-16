@@ -24,11 +24,12 @@ private:
 
     void exportGeometry(std::vector<ModelFaceBase*> faces);
     void exportMaterials(std::vector<ModelFaceBase*> faces);
-    void saveFile(std::string fileContents, std::string fileName);
+    void saveFile(std::string const& fileContents, std::string const& fileName);
     std::string exportMesh(ModelFaceBase *face);
 
     FBEntity exportFile;
     std::string nlDelimiter;
+    bool addSuffix = true;
 
     std::vector<glm::vec3> uniqueVertices;
     std::vector<glm::vec2> uniqueTextureCoordinates;

@@ -9,9 +9,6 @@
 #include "SpaceshipMeshGenerator.hpp"
 #include <random>
 
-SpaceshipMeshGenerator::~SpaceshipMeshGenerator() {
-}
-
 void SpaceshipMeshGenerator::generate(int gridSize) {
     this->gridSize = gridSize / 10;
 
@@ -263,7 +260,7 @@ void SpaceshipMeshGenerator::generateMeshModel() {
     this->modelSpaceship.countNormals = int(this->normals.size());
     this->modelSpaceship.countIndices = int(this->indices.size());
 
-    MeshModelMaterial material;
+    MeshModelMaterial material = {};
     material.MaterialID = 1;
     material.MaterialTitle = "MaterialSpaceship";
     material.AmbientColor = glm::vec3(1.0f);
@@ -272,7 +269,7 @@ void SpaceshipMeshGenerator::generateMeshModel() {
     material.IlluminationMode = 2;
     material.OpticalDensity = 1.0f;
     material.Transparency = 1.0f;
-    MeshMaterialTextureImage textureDiffuse;
+    MeshMaterialTextureImage textureDiffuse = {};
     textureDiffuse.Image = "";
     textureDiffuse.Filename = "";
     textureDiffuse.Width = 0;

@@ -16,7 +16,7 @@ public:
     ~ModelFaceData();
     void destroy();
     void initBuffers();
-    void init(MeshModel model, std::string assetsFolder);
+    void init(MeshModel model, std::string const& assetsFolder);
     void renderModel(bool useTessellation);
 
     bool vertexSphereVisible, vertexSphereIsSphere, vertexSphereShowWireframes;

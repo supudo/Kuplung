@@ -23,7 +23,7 @@ public:
     ImGuiStyle& loadDefault();
 
 private:
-    void saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style);
+    void saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, ImGuiStyle& style);
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
     ImVec4 tov4(std::string opValue);
     ImVec2 tov2(std::string opValue);

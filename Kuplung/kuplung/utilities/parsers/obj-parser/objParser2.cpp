@@ -246,7 +246,7 @@ bool objParser2::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVer
     }
 }
 
-void objParser2::loadMaterialFile(std::string materialFile) {
+void objParser2::loadMaterialFile(std::string const& materialFile) {
     this->materials.clear();
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
@@ -262,7 +262,7 @@ void objParser2::loadMaterialFile(std::string materialFile) {
         if (boost::starts_with(singleLine, this->id_materialNew)) {
             currentMaterialTitle = singleLine;
             boost::replace_first(currentMaterialTitle, this->id_materialNew, "");
-            MeshModelMaterial entityMaterial;
+            MeshModelMaterial entityMaterial = {};
             entityMaterial.MaterialID = MaterialID;
             entityMaterial.MaterialTitle = currentMaterialTitle;
             entityMaterial.SpecularExp = -1.0;

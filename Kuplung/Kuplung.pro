@@ -27,6 +27,8 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
 
+    QMAKE_MAC_SDK = macosx10.12
+
     QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.11
 
     QMAKE_INFO_PLIST = Info.plist

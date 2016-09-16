@@ -23,7 +23,6 @@ typedef enum GeometryTerrainType {
 
 class HeightmapGenerator {
 public:
-    ~HeightmapGenerator();
     void initPosition();
     void generateTerrain(std::string assetsFolder, int width, int height);
 

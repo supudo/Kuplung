@@ -12,11 +12,14 @@ ImageRenderer::~ImageRenderer() {
     this->destroy();
 }
 
+ImageRenderer::ImageRenderer() {
+    this->rendererScene = new SceneRenderer();
+}
+
 void ImageRenderer::destroy() {
 }
 
 void ImageRenderer::init() {
-    this->rendererScene = new SceneRenderer();
     this->rendererScene->init();
 }
 

@@ -238,15 +238,13 @@ void SaveOpenBinarySeq::readGlobalLights(std::istream& kuplungFile, std::unique_
     this->binary_read(kuplungFile, lightsCount);
     for (size_t i=0; i<size_t(lightsCount); i++) {
         Light* l = new Light();
-        l->init(LightSourceType_Directional);
-        l->initProperties();
 
         l->description = this->binary_read_string(kuplungFile);
+        this->binary_read(kuplungFile, l->type);
         this->binary_read(kuplungFile, l->showInWire);
         this->binary_read(kuplungFile, l->showLampDirection);
         this->binary_read(kuplungFile, l->showLampObject);
         l->title = this->binary_read_string(kuplungFile);
-        this->binary_read(kuplungFile, l->type);
         this->binary_read(kuplungFile, l->ambient->color);
         this->binary_read(kuplungFile, l->ambient->strength);
         this->binary_read(kuplungFile, l->diffuse->color);
@@ -370,8 +368,6 @@ std::vector<ModelFaceData*> SaveOpenBinarySeq::readObjects(std::istream& kuplung
     this->binary_read(kuplungFile, modelsCount);
 
     for (int i=0; i<modelsCount; i++) {
-        MeshModel mesh;
-
         ModelFaceData *m = new ModelFaceData();
         m->initModelProperties();
         m->lightSources = managerObjects->lightSources;

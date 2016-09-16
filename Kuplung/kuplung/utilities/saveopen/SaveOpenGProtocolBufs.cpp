@@ -324,10 +324,21 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &ma
     for (int i=0; i<this->bufGUISettings.lights_size(); i++) {
         KuplungApp::LightObject lo = this->bufGUISettings.lights(i);
 
+        LightSourceType t = LightSourceType_Directional;
+        switch (lo.type()) {
+            case 0:
+                t = LightSourceType_Directional;
+                break;
+            case 1:
+                t = LightSourceType_Point;
+                break;
+            case 2:
+                t = LightSourceType_Spot;
+                break;
+        }
         Light* l = new Light();
-        l->init(LightSourceType_Directional);
-        l->initProperties();
         l->title = lo.title();
+        l->type = t;
         l->description = lo.description();
         l->showLampObject = lo.showlampobject();
         l->showLampDirection = lo.showlampdirection();

@@ -17,13 +17,12 @@
 
 class DialogControlsGUI {
 public:
-    DialogControlsGUI(ObjectsManager &managerObjects);
-    void init();
+    explicit DialogControlsGUI(ObjectsManager &managerObjects);
     void render(bool* show, bool* isFrame);
 
 private:
     int selectedObject;
-    int selectedObjectLight, selectedObjectArtefact;
+    int selectedObjectLight, selectedObjectArtefact = -1;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight;
     int selectedTabGUITerrain, selectedTabGUISpaceship;
     float heightTopPanel = 170.0f;
@@ -35,7 +34,7 @@ private:
     std::string heightmapImage;
     int heightmapWidth, heightmapHeight;
     GLuint vboTexHeightmap;
-    bool newHeightmap, generateNewTerrain, generateNewSpaceship;
+    bool newHeightmap = false, generateNewTerrain = false, generateNewSpaceship = false;
 };
 
 #endif /* DialogControlsGUI_hpp */

@@ -14,9 +14,6 @@
  *
  */
 
-ObjectsManager::ObjectsManager() {
-}
-
 ObjectsManager::~ObjectsManager() {
     this->destroy();
 }
@@ -370,7 +367,7 @@ void ObjectsManager::generateSpaceship() {
  */
 void ObjectsManager::addLight(LightSourceType type, std::string title, std::string description) {
     Light *lightObject = new Light();
-    lightObject->init(type);
+    lightObject->initProperties(type);
     lightObject->type = type;
     assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
     switch (type) {

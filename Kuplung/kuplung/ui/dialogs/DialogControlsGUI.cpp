@@ -17,9 +17,7 @@
 
 DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
-}
 
-void DialogControlsGUI::init() {
     this->selectedObject = 0;
     this->selectedObjectLight = 0;
     this->selectedTabScene = -1;

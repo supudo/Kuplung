@@ -46,11 +46,11 @@ private:
 
     std::vector<ModelFaceBase*> * meshModelFaces;
     bool cmenu_deleteYn, cmenu_renameModel;
-    char guiModelRenameText[256];
+    char guiModelRenameText[256] = "";
     int selectedTabScene, selectedTabGUICamera, selectedTabGUIGrid, selectedTabGUILight, selectedTabPanel;
     float heightTopPanel = 170.0f;
     float panelHeight_Tabs = 36.0f;
-    char filePath[256];
+    char filePath[256] = "";
     std::string TextureImage, TextureFilename;
 
     bool showTextureWindow_Ambient, showTexture_Ambient, showTextureWindow_Diffuse, showTexture_Diffuse;

@@ -23,7 +23,7 @@ public:
     void setModel(MeshModel meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
-    void initBuffers(std::string assetsFolder);
+    void initBuffers(std::string const& assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
     MeshModel meshModel;
 
@@ -59,8 +59,6 @@ private:
     GLuint glUniformMVPMatrix;
     GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
     GLuint glUniformUseColor, glUniformColor;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* Light_hpp */

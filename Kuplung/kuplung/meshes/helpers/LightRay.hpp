@@ -18,14 +18,13 @@
 class LightRay {
 public:
     ~LightRay();
+    LightRay();
     void destroy();
-    void init(std::function<void(std::string)> doLog);
     bool initShaderProgram();
     void initBuffers(glm::vec3 position, glm::vec3 direction, bool simple);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
 
 private:
-    std::function<void(std::string)> doLogFunc;
     int axisSize;
     float x, y, z;
 
@@ -35,9 +34,6 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices;
     GLuint glAttributeVertexPosition, glUniformMVPMatrix;
-
-    std::string readFile(const char *filePath);
-    void doLog(std::string logMessage);
 };
 
 #endif /* LightRay_hpp */

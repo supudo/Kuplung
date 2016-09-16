@@ -12,12 +12,15 @@ Exporter::~Exporter() {
     this->destroy();
 }
 
+Exporter::Exporter() {
+    this->exporterOBJ = new ExporterOBJ();
+}
+
 void Exporter::destroy() {
     this->exporterOBJ->destroy();
 }
 
 void Exporter::init(std::function<void(float)> doProgress) {
-    this->exporterOBJ = new ExporterOBJ();
     this->exporterOBJ->init(doProgress);
 }
 

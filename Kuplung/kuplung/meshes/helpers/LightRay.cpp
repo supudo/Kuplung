@@ -17,6 +17,14 @@ LightRay::~LightRay() {
     this->destroy();
 }
 
+LightRay::LightRay() {
+    this->glUtils = std::make_unique<GLUtils>();
+    this->axisSize = -1;
+    this->x = -1;
+    this->y = -1;
+    this->z = -1;
+}
+
 void LightRay::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
@@ -32,68 +40,40 @@ void LightRay::destroy() {
     this->glUtils.reset();
 }
 
-#pragma mark - Initialization
-
-void LightRay::init(std::function<void(std::string)> doLog) {
-    this->doLogFunc = doLog;
-    this->glUtils = std::make_unique<GLUtils>();
-}
-
 #pragma mark - Public
 
 bool LightRay::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.vert";
-    std::string shaderVertexSource = readFile(shaderPath.c_str());
+    std::string shaderVertexSource = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderVertexSource.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
+    std::string shaderFragmentSource = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderFragmentSource.c_str();
 
     this->shaderProgram = glCreateProgram();
 
-    this->shaderVertex = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(this->shaderVertex, 1, &shader_vertex, NULL);
-    glCompileShader(this->shaderVertex);
+    bool shaderCompilation = true;
+    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
-    GLint isShaderVertexCompiled = GL_FALSE;
-    glGetShaderiv(this->shaderVertex, GL_COMPILE_STATUS, &isShaderVertexCompiled);
-    if (isShaderVertexCompiled != GL_TRUE) {
-        this->doLog(Settings::Instance()->string_format("Unable to compile vertex shader %d!\n", this->shaderVertex));
-        this->glUtils->printShaderLog(this->shaderVertex);
+    if (!shaderCompilation)
+        return false;
+
+    glLinkProgram(this->shaderProgram);
+
+    GLint programSuccess = GL_TRUE;
+    glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
+    if (programSuccess != GL_TRUE) {
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
+        this->glUtils->printProgramLog(this->shaderProgram);
+        return success = false;
     }
     else {
-        glAttachShader(this->shaderProgram, this->shaderVertex);
-
-        this->shaderFragment = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(this->shaderFragment, 1, &shader_fragment, NULL);
-        glCompileShader(this->shaderFragment);
-
-        GLint isShaderFragmentCompiled = GL_FALSE;
-        glGetShaderiv(this->shaderFragment, GL_COMPILE_STATUS, &isShaderFragmentCompiled);
-        if (isShaderFragmentCompiled != GL_TRUE) {
-            this->doLog(Settings::Instance()->string_format("Unable to compile fragment shader %d!\n", this->shaderFragment));
-            this->glUtils->printShaderLog(this->shaderFragment);
-            return success = false;
-        }
-        else {
-            glAttachShader(this->shaderProgram, this->shaderFragment);
-            glLinkProgram(this->shaderProgram);
-
-            GLint programSuccess = GL_TRUE;
-            glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
-            if (programSuccess != GL_TRUE) {
-                this->doLog(Settings::Instance()->string_format("Error linking program %d!\n", this->shaderProgram));
-                this->glUtils->printProgramLog(this->shaderProgram);
-                return success = false;
-            }
-            else {
-                this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-                this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-            }
-        }
+        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
 
     this->x = 999;
@@ -191,26 +171,4 @@ void LightRay::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::m
 
         glUseProgram(0);
     }
-}
-
-#pragma mark - Utilities
-
-std::string LightRay::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        this->doLog("Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
-}
-
-void LightRay::doLog(std::string logMessage) {
-    this->doLogFunc("[LightRay] " + logMessage);
 }

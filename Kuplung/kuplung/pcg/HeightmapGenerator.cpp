@@ -15,9 +15,6 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <fstream>
 
-HeightmapGenerator::~HeightmapGenerator() {
-}
-
 void HeightmapGenerator::initPosition() {
     this->position_x1 = 0.0f;
     this->position_x2 = 1.0f;
@@ -520,7 +517,7 @@ void HeightmapGenerator::generateMeshModel() {
     this->modelTerrain.countNormals = int(this->normals.size());
     this->modelTerrain.countIndices = int(this->indices.size());
 
-    MeshModelMaterial material;
+    MeshModelMaterial material = {};
     material.MaterialID = 1;
     material.MaterialTitle = "MaterialTerrain";
     material.AmbientColor = glm::vec3(0.7f);

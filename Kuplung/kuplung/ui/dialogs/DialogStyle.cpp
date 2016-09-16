@@ -130,7 +130,7 @@ ImGuiStyle& DialogStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void DialogStyle::saveStyles(std::string fontfile, std::string fontsize, std::string styleFilePath, ImGuiStyle& style) {
+void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;

@@ -23,7 +23,6 @@
 
 class KuplungMinizip {
 public:
-    KuplungMinizip();
     ~KuplungMinizip(void);
 
     bool isValid(void) { return this->valid; }
@@ -32,11 +31,11 @@ public:
     void CloseZip(void);
     void CloseUnzip(void);
     int Add(std::string contentPath, std::string zipPath="", int flags=ZipFlag_Better);
-    bool UnzipFile(std::string unzipFolder);
+    bool UnzipFile(std::string const& unzipFolder);
 
 private:
     std::string filename;
-    bool valid;
+    bool valid = false;
     zipFile zf;
 
     int isLargeFile(const char* filename);

@@ -21,6 +21,7 @@
 class FileModelManager {
 public:
     ~FileModelManager();
+    FileModelManager();
     void destroy();
     void init(std::function<void(float)> doProgress);
     std::vector<MeshModel> parse(FBEntity file, FileBrowser_ParserType type);

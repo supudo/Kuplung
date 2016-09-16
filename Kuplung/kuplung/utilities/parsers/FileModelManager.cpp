@@ -12,6 +12,13 @@ FileModelManager::~FileModelManager() {
     this->destroy();
 }
 
+FileModelManager::FileModelManager() {
+    this->parserOBJ1 = new objParser1();
+    this->parserOBJ2 = new objParser2();
+    this->parserSTL = new STLParser();
+    this->parserAssimp = new AssimpParser();
+}
+
 void FileModelManager::destroy() {
     this->parserOBJ2->destroy();
     this->parserOBJ1->destroy();
@@ -21,17 +28,9 @@ void FileModelManager::destroy() {
 
 void FileModelManager::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
-
-    this->parserOBJ1 = new objParser1();
     this->parserOBJ1->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
-
-    this->parserOBJ2 = new objParser2();
     this->parserOBJ2->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
-
-    this->parserSTL = new STLParser();
     this->parserSTL->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
-
-    this->parserAssimp = new AssimpParser();
     this->parserAssimp->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 

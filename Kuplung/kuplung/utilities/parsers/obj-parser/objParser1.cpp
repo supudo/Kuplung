@@ -13,13 +13,9 @@
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 
-#pragma mark - Destructor
-
 objParser1::~objParser1() {
     this->destroy();
 }
-
-#pragma mark - Publics
 
 void objParser1::init(std::function<void(float)> doProgress) {
     this->models = {};
@@ -185,7 +181,7 @@ std::vector<MeshModel> objParser1::parse(FBEntity file) {
     return this->models;
 }
 
-MeshModelMaterial objParser1::findMaterial(std::string materialID) {
+MeshModelMaterial objParser1::findMaterial(std::string const& materialID) {
     for (size_t i=0; i<this->materials.size(); i++) {
         if (materialID == this->materials[i].MaterialTitle)
             return this->materials[i];
@@ -193,7 +189,7 @@ MeshModelMaterial objParser1::findMaterial(std::string materialID) {
     return {};
 }
 
-std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string materialFile) {
+std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& materialFile) {
     std::vector<MeshModelMaterial> materials;
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
@@ -227,7 +223,7 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string materialFile
             }
 
             if (std::regex_match(singleLine, this->regex_materialNew)) {
-                MeshModelMaterial entityMaterial;
+                MeshModelMaterial entityMaterial = {};
                 entityMaterial.MaterialTitle = std::accumulate(begin(lineElements), end(lineElements), entityMaterial.MaterialTitle);
                 entityMaterial.SpecularExp = -1.0;
                 entityMaterial.Transparency = -1.0;
@@ -293,7 +289,7 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string materialFile
 
 #pragma mark - Helpers
 
-MeshMaterialTextureImage objParser1::parseTextureImage(std::string textureLine) {
+MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textureLine) {
     MeshMaterialTextureImage materialImage;
 
     materialImage.Height = 0;

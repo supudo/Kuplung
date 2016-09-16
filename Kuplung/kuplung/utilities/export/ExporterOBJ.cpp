@@ -20,6 +20,7 @@ void ExporterOBJ::destroy() {
 
 void ExporterOBJ::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
+    this->addSuffix = false;
 #ifdef _WIN32
     this->nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -161,7 +162,8 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
                                  std::to_string(year) + std::to_string(month) + std::to_string(day) +
                                  std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
 
-        fileSuffix = "";
+        if (!this->addSuffix)
+            fileSuffix = "";
         std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
         std::string fileName = this->exportFile.title;
         if (boost::algorithm::ends_with(fileName, ".obj"))
@@ -223,7 +225,7 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
     }
 }
 
-void ExporterOBJ::saveFile(std::string fileContents, std::string fileName) {
+void ExporterOBJ::saveFile(std::string const& fileContents, std::string const& fileName) {
 //    printf("--------------------------------------------------------\n");
 //    printf("%s\n", fileName.c_str());
 //    printf("%s\n", fileContents.c_str());

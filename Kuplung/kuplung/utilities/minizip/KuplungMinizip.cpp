@@ -65,9 +65,6 @@
 KuplungMinizip::~KuplungMinizip(void) {
 }
 
-KuplungMinizip::KuplungMinizip() {
-}
-
 void KuplungMinizip::CloseZip(void) {
     zipClose(this->zf, NULL);
     this->zf = NULL;
@@ -86,10 +83,9 @@ void KuplungMinizip::Create(std::string zipfilename) {
     int fileExists = 0;
     int create = 0;
     int err = ZIP_OK;
-    int flags = ZipFlag_Overwrite;
 
     if (fileExists)
-        create = (flags & ZipFlag_Overwrite) ? APPEND_STATUS_CREATE : APPEND_STATUS_ADDINZIP;
+        create = (ZipFlag_Overwrite & ZipFlag_Overwrite) ? APPEND_STATUS_CREATE : APPEND_STATUS_ADDINZIP;
     else
         create = APPEND_STATUS_CREATE;
 
@@ -152,7 +148,6 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
     char * password = NULL;
     zip_fileinfo zi;
     FILE * fin = NULL;
-    int size_read;
     int size_buf = 0;
     void* buf = NULL;
     int err;
@@ -197,6 +192,7 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
     }
 
     if (err == ZIP_OK) {
+        int size_read;
         do {
             err = ZIP_OK;
             size_read = (int)fread(buf, 1, size_buf, fin);
@@ -219,7 +215,7 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
     if (fin)
         fclose(fin);
 
-    if( err == ZIP_OK )
+    if (err == ZIP_OK)
         err = zipCloseFileInZip(this->zf);
 
     free(buf);
@@ -227,7 +223,7 @@ int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags)
     return ZIP_OK;
 }
 
-bool KuplungMinizip::UnzipFile(std::string unzipFolder) {
+bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
     unz_global_info global_info;
     if (unzGetGlobalInfo(this->zf, &global_info) != UNZ_OK) {
         Settings::Instance()->funcDoLog("[KuplungMinizip] Could not read file global info!");
@@ -315,12 +311,12 @@ int KuplungMinizip::getFileCrc(const char* filenameinzip, void* buf, unsigned lo
     int err = ZIP_OK;
     FILE * fin = FOPEN_FUNC(filenameinzip, "rb");
 
-    unsigned long size_read = 0;
-    unsigned long total_read = 0;
     if (fin == NULL)
         err = ZIP_ERRNO;
 
      if (err == ZIP_OK) {
+         unsigned long size_read = 0;
+         unsigned long total_read = 0;
          do {
              err = ZIP_OK;
              size_read = (int)fread(buf, 1, size_buf, fin);

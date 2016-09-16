@@ -102,7 +102,7 @@ MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::str
         material->Get(AI_MATKEY_NAME, materialName);
         entityModel.MaterialTitle = std::string(materialName.C_Str());
 
-        MeshModelMaterial entityMaterial;
+        MeshModelMaterial entityMaterial = {};
         this->indexMaterial += 1;
         entityMaterial.MaterialTitle = std::string(materialName.C_Str());
 
@@ -185,7 +185,7 @@ std::vector<MeshMaterialTextureImage> AssimpParser::loadMaterialTextures(aiMater
             }
         }
         if (!skip) {
-            MeshMaterialTextureImage texture;
+            MeshMaterialTextureImage texture = {};
             texture.Filename = std::string(str.C_Str());
             texture.Image = std::string(str.C_Str());
 

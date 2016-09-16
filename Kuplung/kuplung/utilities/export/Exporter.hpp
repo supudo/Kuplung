@@ -16,6 +16,7 @@
 class Exporter {
 public:
     ~Exporter();
+    Exporter();
     void init(std::function<void(float)> doProgress);
     void destroy();
     void exportScene(FBEntity file, std::vector<ModelFaceBase*> faces);
