@@ -22,7 +22,7 @@
 
 class DialogControlsModels {
 public:
-    DialogControlsModels(ObjectsManager &managerObjects);
+    explicit DialogControlsModels(ObjectsManager &managerObjects);
     void init(SDL_Window* sdlWindow,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
@@ -67,7 +67,7 @@ private:
     GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureDissolve, vboTextureBump;
     GLuint vboTextureDisplacement, vboTextureSpecular, vboTextureSpecularExp;
 
-    void showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture);
+    void showTextureLine(std::string const& chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture);
     void createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height);
     void showTextureImage(ModelFaceBase* mmf, MaterialTextureType type, std::string title, bool* showWindow, bool* genTexture, GLuint* vboBuffer, int* width, int* height);
     void processTexture(ModelFaceBase *mmf);

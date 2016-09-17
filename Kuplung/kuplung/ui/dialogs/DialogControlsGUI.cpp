@@ -771,7 +771,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     this->setHeightmapImage(this->managerObjects.heightmapImage);
 }
 
-void DialogControlsGUI::setHeightmapImage(std::string heightmapImage) {
+void DialogControlsGUI::setHeightmapImage(std::string const& heightmapImage) {
     if (this->heightmapImage != heightmapImage) {
         this->heightmapImage = heightmapImage;
         this->newHeightmap = true;

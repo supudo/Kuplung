@@ -18,7 +18,7 @@ ConfigUtils::~ConfigUtils() {
 
 #pragma mark - Init
 
-void ConfigUtils::init(std::string appFolder) {
+void ConfigUtils::init(std::string const& appFolder) {
     this->configFile = appFolder + "/Kuplung_Settings.ini";
     this->recentFilesFile = appFolder + "/Kuplung_RecentFiles.ini";
     this->recentFilesFileImported = appFolder + "/Kuplung_RecentFilesImported.ini";

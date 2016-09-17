@@ -103,7 +103,7 @@ bool Terrain::initShaderProgram() {
     return success;
 }
 
-void Terrain::initBuffers(std::string assetsFolder, int width, int height) {
+void Terrain::initBuffers(std::string const& assetsFolder, int width, int height) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 

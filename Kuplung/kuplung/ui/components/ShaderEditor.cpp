@@ -27,7 +27,7 @@ const char* GUIEditor_ShaderItems[] = {
     "terrain.frag"
 };
 
-void ShaderEditor::init(std::string appPath, int positionX, int positionY, int width, int height) {
+void ShaderEditor::init(std::string const& appPath, int positionX, int positionY, int width, int height) {
     this->appPath = appPath;
     this->positionX = positionX;
     this->positionY = positionY;

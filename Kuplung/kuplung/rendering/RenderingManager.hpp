@@ -17,7 +17,7 @@
 
 class RenderingManager {
 public:
-    RenderingManager(ObjectsManager &managerObjects);
+    explicit RenderingManager(ObjectsManager &managerObjects);
     ~RenderingManager();
     void destroy();
     void init();

@@ -101,7 +101,7 @@ void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vb
     }
 }
 
-void DialogControlsModels::showTextureLine(std::string chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture) {
+void DialogControlsModels::showTextureLine(std::string const& chkLabel, MaterialTextureType texType, bool* showWindow, bool* loadTexture) {
     ModelFaceBase *mmf = (*this->meshModelFaces)[this->selectedObject];
     std::string image, title;
     bool * useTexture;

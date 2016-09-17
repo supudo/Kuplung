@@ -115,7 +115,7 @@ void UI::init(SDL_Window *window,
     this->controlsModels->init(this->sdlWindow, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
 }
 
-void UI::doLog(std::string message) {
+void UI::doLog(std::string const& message) {
     printf("%s\n", message.c_str());
     this->componentLog->addToLog("%s\n", message.c_str());
 }
@@ -637,6 +637,6 @@ void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) 
     this->showOpenDialog = false;
 }
 
-void UI::fileShaderEditorSaved(std::string fileName) {
+void UI::fileShaderEditorSaved(std::string const& fileName) {
     this->funcFileShaderCompile(fileName);
 }

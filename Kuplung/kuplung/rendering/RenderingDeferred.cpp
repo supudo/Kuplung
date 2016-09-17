@@ -56,9 +56,9 @@ bool RenderingDeferred::init() {
 
     bool success = true;
 
-    success |= this->initGeometryPass();
-    success |= this->initLighingPass();
-    success |= this->initLightObjects();
+    success &= this->initGeometryPass();
+    success &= this->initLighingPass();
+    success &= this->initLightObjects();
 
     this->initProps();
     this->initGBuffer();

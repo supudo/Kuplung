@@ -17,7 +17,7 @@ struct ModelDeferred_LightSource {
 
 class ModelFaceForward: public ModelFaceBase {
 public:
-    void init(MeshModel model, std::string assetsFolder);
+    void init(MeshModel model, std::string const& assetsFolder);
 
     void destroy();
     void initBuffers();

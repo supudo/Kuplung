@@ -31,7 +31,7 @@ public:
     void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(std::string filePath);
+    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
     std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile;
 
     void drawFiles(MaterialTextureType TextureType = MaterialTextureType_Undefined);

@@ -36,7 +36,7 @@ typedef enum UVUnwrappingMethod {
 class UVEditor {
 public:
     void init(int positionX, int positionY, int width, int height);
-    void setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::string texturePath, std::function<void(ModelFaceBase*)> funcProcessTexture);
+    void setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::string const& texturePath, std::function<void(ModelFaceBase*)> funcProcessTexture);
     void draw(const char* title, bool* p_opened = NULL);
 
 private:

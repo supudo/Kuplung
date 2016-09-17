@@ -44,7 +44,7 @@ private:
     void renderSceneModels();
     void setupScene(FBEntity file);
     void initSceneGUI();
-    void doLog(std::string logMessage);
+    void doLog(std::string const& logMessage);
     void doProgress(float value);
     std::string readFile(const char *filePath);
     void processRunningThreads();
@@ -61,9 +61,8 @@ private:
     void guiQuit();
     void guiProcessObjFile(FBEntity file, FileBrowser_ParserType type);
     void guiClearScreen();
-    void guiEditorshaderCompiled(std::string fileName);
+    void guiEditorshaderCompiled(std::string const& fileName);
     void guiModelDelete(int selectedModel);
-    void guiModelRename(int selectedModel, std::string newName);
     void guiSceneExport(FBEntity file);
     void guiRenderScene(FBEntity file);
 

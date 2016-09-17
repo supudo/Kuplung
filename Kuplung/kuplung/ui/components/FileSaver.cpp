@@ -180,7 +180,7 @@ void FileSaver::drawFiles() {
     }
 }
 
-std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePath) {
+std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string const& filePath) {
     std::map<std::string, FBEntity> folderContents;
 
     fs::path currentPath(filePath);
@@ -221,7 +221,7 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string filePat
                     if (!entity.isFile)
                         entity.size = "";
                     else {
-                        std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
+//                        std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
                         entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
                     }
 

@@ -84,7 +84,7 @@ void ModelFaceForward::destroy() {
 
 #pragma mark - Public
 
-void ModelFaceForward::init(MeshModel model, std::string assetsFolder) {
+void ModelFaceForward::init(MeshModel model, std::string const& assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
     this->initShaderProgram();
 }
@@ -320,7 +320,7 @@ bool ModelFaceForward::initShaderProgram() {
 
     glBindVertexArray(0);
 
-    success |= this->reflectionInit();
+    success &= this->reflectionInit();
 
     return success;
 }

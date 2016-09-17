@@ -595,7 +595,7 @@ bool Kuplung::hasEnding(std::string const &fullString, std::string const &ending
     return false;
 }
 
-void Kuplung::doLog(std::string logMessage) {
+void Kuplung::doLog(std::string const& logMessage) {
     if (this->managerUI)
         this->managerUI->doLog(logMessage);
 }
@@ -615,7 +615,7 @@ void Kuplung::guiClearScreen() {
     this->managerControls->keyPresset_TAB = false;
 }
 
-void Kuplung::guiEditorshaderCompiled(std::string fileName) {
+void Kuplung::guiEditorshaderCompiled(std::string const& fileName) {
     if (fileName.compare(0, 9, "kuplung") == 0) {
     }
     else if (fileName.compare(0, 5, "light") == 0) {

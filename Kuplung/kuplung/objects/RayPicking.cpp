@@ -134,7 +134,6 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
 
 bool RayPicking::testRaySphereIntersection(int vID, ModelFaceBase *mmf, glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 vertex, glm::mat4 mtx, float radius) {
     bool intersected = false;
-    float distance = 0.0f;
 
     glm::vec4 v0 = glm::vec4(vertex, 1.0);
     v0 = v0 * mtx;
@@ -150,10 +149,12 @@ bool RayPicking::testRaySphereIntersection(int vID, ModelFaceBase *mmf, glm::vec
                       n1
                       );
     if (intersected)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] - [%f, %f, %f] %f, %f, %f = %d", vID, vertex.x, vertex.y, vertex.z, distance));
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] - [%f, %f, %f] %f, %f, %f", vID, vertex.x, vertex.y, vertex.z));
 
 
     /*
+    float distance = 0.0f;
+
     glm::vec3 ray_from = ray_origin;
     glm::vec3 ray_to = ray_direction * 1000.0f;
 
@@ -340,13 +341,3 @@ void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeigh
     out_direction = glm::normalize(lRayDir_world);
 }
 
-float RayPicking::fixSign(float num) {
-    if ((num < 0.0f) && (-log10(std::abs(num)) > FLT_EPSILON))
-        return -num;
-    else
-        return num;
-}
-
-glm::vec3 RayPicking::fixSignVector(glm::vec3 v) {
-    return glm::vec3(this->fixSign(v.x), this->fixSign(v.y), this->fixSign(v.z));
-}

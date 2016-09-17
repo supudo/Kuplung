@@ -28,7 +28,7 @@
 
 class UI {
 public:
-    UI(ObjectsManager &managerObjects);
+    explicit UI(ObjectsManager &managerObjects);
     ~UI();
     void destroy();
     void init(SDL_Window *window,
@@ -48,7 +48,7 @@ public:
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
-    void doLog(std::string message);
+    void doLog(std::string const& message);
     void setSceneSelectedModelObject(int sceneSelectedModelObject);
 
     void recentFilesAdd(FBEntity file);
@@ -87,7 +87,7 @@ private:
 
     void dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
-    void fileShaderEditorSaved(std::string fileName);
+    void fileShaderEditorSaved(std::string const& fileName);
 
     void dialogOBJImporterBrowser();
     void dialogStyle();

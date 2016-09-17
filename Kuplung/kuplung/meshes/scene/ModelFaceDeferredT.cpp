@@ -16,7 +16,7 @@
 void ModelFaceDeferredT::destroy() {
 }
 
-void ModelFaceDeferredT::init(MeshModel model, std::string assetsFolder) {
+void ModelFaceDeferredT::init(MeshModel model, std::string const& assetsFolder) {
     this->meshModel = model;
     this->assetsFolder = assetsFolder;
 }

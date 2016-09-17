@@ -14,7 +14,7 @@
 
 class MENode_Combine: public MENode {
 public:
-    MENode_Combine(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename="", std::string textureImage="");
+    MENode_Combine(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename="", std::string const& textureImage="");
     virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview, float scale);
 };
 

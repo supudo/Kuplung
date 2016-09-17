@@ -15,7 +15,7 @@
 
 class MENode_Texture: public MENode {
 public:
-    MENode_Texture(int id, MaterialTextureType texType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename="", std::string textureImage="");
+    MENode_Texture(int id, MaterialTextureType texType, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename="", std::string const& textureImage="");
     virtual void draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview, float scale);
 
 private:
@@ -27,11 +27,10 @@ private:
 
     FileBrowser *componentFileBrowser;
 
-    void initBase(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename="", std::string textureImage="");
+    void initBase(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename="", std::string const& textureImage="");
     void showImage();
     void createTextureBuffer(int* width, int* height);
     void dialogFileBrowserProcessFile(FBEntity file);
-    void doLog(std::string logMessage);
 };
 
 #endif /* MENode_Texture_hpp */

@@ -19,7 +19,7 @@
 class ConfigUtils {
 public:
     ~ConfigUtils();
-    void init(std::string appFolder);
+    void init(std::string const& appFolder);
     void saveSettings();
 
     bool readBool(std::string configKey);

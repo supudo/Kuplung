@@ -19,7 +19,7 @@ void FontsList::init() {
     this->fonts.clear();
 }
 
-bool FontsList::fontFileExists(std::string font) {
+bool FontsList::fontFileExists(std::string const& font) {
     return boost::filesystem::exists(font);
 }
 

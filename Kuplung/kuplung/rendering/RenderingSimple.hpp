@@ -15,8 +15,8 @@
 
 class RenderingSimple {
 public:
-    RenderingSimple(ObjectsManager &managerObjects);
-    RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
+    explicit RenderingSimple(ObjectsManager &managerObjects);
+    explicit RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
     ~RenderingSimple();
     void destroy();
 

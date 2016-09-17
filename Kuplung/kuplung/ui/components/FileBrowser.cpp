@@ -150,7 +150,7 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
     }
 }
 
-std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string filePath) {
+std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const& filePath) {
     std::map<std::string, FBEntity> folderContents;
 
     if (this->log)

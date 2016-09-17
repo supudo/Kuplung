@@ -15,13 +15,13 @@ UIHelpers::UIHelpers() {
     this->componentColorPicker = new ColorPicker();
 }
 
-void UIHelpers::addControlsXYZ(std::string property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit) {
+void UIHelpers::addControlsXYZ(std::string const& property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit) {
     this->addControlsSlider(property + " X", 1, step, min, limit, showAnimate, animatedFlag, animatedValue, doMinus, isFrame);
     this->addControlsSlider(property + " Y", 2, step, min, limit, showAnimate, animatedFlag, animatedValue, doMinus, isFrame);
     this->addControlsSlider(property + " Z", 3, step, min, limit, showAnimate, animatedFlag, animatedValue, doMinus, isFrame);
 }
 
-bool UIHelpers::addControlsSlider(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsSlider(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
@@ -36,14 +36,14 @@ bool UIHelpers::addControlsSlider(std::string title, int idx, float step, float 
     return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-bool UIHelpers::addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue) {
+bool UIHelpers::addControlsIntegerSlider(std::string const& title, int idx, int min, int limit, int* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-bool UIHelpers::addControlsIntegerSliderSameLine(std::string title, int idx, int min, int limit, int* animatedValue) {
+bool UIHelpers::addControlsIntegerSliderSameLine(std::string const& title, int idx, int min, int limit, int* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
     if (title != "") {
@@ -53,14 +53,14 @@ bool UIHelpers::addControlsIntegerSliderSameLine(std::string title, int idx, int
     return result;
 }
 
-bool UIHelpers::addControlsFloatSlider(std::string title, int idx, float min, float limit, float* animatedValue) {
+bool UIHelpers::addControlsFloatSlider(std::string const& title, int idx, float min, float limit, float* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-bool UIHelpers::addControlsFloatSliderSameLine(std::string title, int idx, float min, float limit, float* animatedValue) {
+bool UIHelpers::addControlsFloatSliderSameLine(std::string const& title, int idx, float min, float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit, "%.03f");
     if (title != "") {
@@ -70,11 +70,12 @@ bool UIHelpers::addControlsFloatSliderSameLine(std::string title, int idx, float
     return result;
 }
 
-bool UIHelpers::addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsSliderSameLine(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
-            this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus);
+            this->animateValue(isFrame, animatedFlag, animatedValue, step, limit, doMinus);
+            //this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();
@@ -83,11 +84,12 @@ bool UIHelpers::addControlsSliderSameLine(std::string title, int idx, float step
     return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
 }
 
-void UIHelpers::addControlColor3(std::string title, glm::vec3* vValue, bool* bValue) {
+void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bool* bValue) {
     std::string ce_id = "##101" + title;
     std::string icon_id = ICON_MD_COLORIZE + ce_id;
     ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, 255.0), "%s", title.c_str());
-    ImGui::ColorEdit3(ce_id.c_str(), (float*)&(*vValue));
+    ImGui::ColorEdit3(ce_id.c_str(), (float*)vValue);
+    //ImGui::ColorEdit3(ce_id.c_str(), (float*)&(*vValue)); // cppcheck
     ImGui::SameLine();
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
@@ -97,14 +99,16 @@ void UIHelpers::addControlColor3(std::string title, glm::vec3* vValue, bool* bVa
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);
     if (*bValue)
-        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+        this->componentColorPicker->show(title.c_str(), bValue, (float*)vValue, true);
+        //this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true); // cppcheck
 }
 
-void UIHelpers::addControlColor4(std::string title, glm::vec4* vValue, bool* bValue) {
+void UIHelpers::addControlColor4(std::string const& title, glm::vec4* vValue, bool* bValue) {
     std::string ce_id = "##101" + title;
     std::string icon_id = ICON_MD_COLORIZE + ce_id;
     ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, (*(&vValue))->a), "%s", title.c_str());
-    ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true);
+    ImGui::ColorEdit4(ce_id.c_str(), (float*)vValue, true);
+    //ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true); // cppcheck
     ImGui::SameLine();
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
@@ -114,11 +118,13 @@ void UIHelpers::addControlColor4(std::string title, glm::vec4* vValue, bool* bVa
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);
     if (*bValue)
-        this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true);
+        this->componentColorPicker->show(title.c_str(), bValue, (float*)vValue, true);
+        //this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true); // cppcheck
 }
 
 void UIHelpers::animateValue(bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float limit, bool doMinus) {
-    std::thread animThread(&UIHelpers::animateValueAsync, this, &(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus);
+    std::thread animThread(&UIHelpers::animateValueAsync, this, isFrame, animatedFlag, animatedValue, step, limit, doMinus);
+    //std::thread animThread(&UIHelpers::animateValueAsync, this, &(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
     animThread.detach();
 }
 
@@ -135,7 +141,7 @@ void UIHelpers::animateValueAsync(bool* isFrame, bool* animatedFlag, float* anim
     }
 }
 
-bool UIHelpers::addControlsDrag(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsDrag(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
@@ -150,21 +156,21 @@ bool UIHelpers::addControlsDrag(std::string title, int idx, float step, float mi
     return ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
 }
 
-bool UIHelpers::addControlsIntegerDrag(std::string title, int idx, int min, int limit, int* animatedValue) {
+bool UIHelpers::addControlsIntegerDrag(std::string const& title, int idx, int min, int limit, int* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::DragInt(s_id.c_str(), *(&animatedValue), 0.001f, min, limit);
 }
 
-bool UIHelpers::addControlsFloatDrag(std::string title, int idx, float min, float limit, float* animatedValue) {
+bool UIHelpers::addControlsFloatDrag(std::string const& title, int idx, float min, float limit, float* animatedValue) {
     if (title != "")
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
 }
 
-bool UIHelpers::addControlsFloatDragSameLine(std::string title, int idx, float min, float limit, float* animatedValue) {
+bool UIHelpers::addControlsFloatDragSameLine(std::string const& title, int idx, float min, float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
     if (title != "") {
@@ -174,11 +180,12 @@ bool UIHelpers::addControlsFloatDragSameLine(std::string title, int idx, float m
     return result;
 }
 
-bool UIHelpers::addControlsDragSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
+bool UIHelpers::addControlsDragSameLine(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame) {
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
-            this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus);
+            this->animateValue(isFrame, animatedFlag, animatedValue, step, limit, doMinus);
+            //this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();

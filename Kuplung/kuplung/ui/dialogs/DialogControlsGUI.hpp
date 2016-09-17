@@ -30,7 +30,7 @@ private:
     ObjectsManager &managerObjects;
     UIHelpers *helperUI;
 
-    void setHeightmapImage(std::string heightmapImage);
+    void setHeightmapImage(std::string const& heightmapImage);
     std::string heightmapImage;
     int heightmapWidth, heightmapHeight;
     GLuint vboTexHeightmap;

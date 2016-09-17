@@ -22,20 +22,20 @@ public:
     UIHelpers();
     void render();
 
-    void addControlsXYZ(std::string property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit);
-    bool addControlsSlider(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
-    bool addControlsFloatSlider(std::string title, int idx, float min, float limit, float* animatedValue);
-    bool addControlsFloatSliderSameLine(std::string title, int idx, float min, float limit, float* animatedValue);
-    bool addControlsIntegerSlider(std::string title, int idx, int min, int limit, int* animatedValue);
-    bool addControlsIntegerSliderSameLine(std::string title, int idx, int min, int limit, int* animatedValue);
-    bool addControlsSliderSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
-    void addControlColor3(std::string title, glm::vec3* vValue, bool* bValue);
-    void addControlColor4(std::string title, glm::vec4* vValue, bool* bValue);
-    bool addControlsDrag(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
-    bool addControlsIntegerDrag(std::string title, int idx, int min, int limit, int* animatedValue);
-    bool addControlsFloatDrag(std::string title, int idx, float min, float limit, float* animatedValue);
-    bool addControlsFloatDragSameLine(std::string title, int idx, float min, float limit, float* animatedValue);
-    bool addControlsDragSameLine(std::string title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    void addControlsXYZ(std::string const& property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit);
+    bool addControlsSlider(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    bool addControlsFloatSlider(std::string const& title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsFloatSliderSameLine(std::string const& title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsIntegerSlider(std::string const& title, int idx, int min, int limit, int* animatedValue);
+    bool addControlsIntegerSliderSameLine(std::string const& title, int idx, int min, int limit, int* animatedValue);
+    bool addControlsSliderSameLine(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    void addControlColor3(std::string const& title, glm::vec3* vValue, bool* bValue);
+    void addControlColor4(std::string const& title, glm::vec4* vValue, bool* bValue);
+    bool addControlsDrag(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
+    bool addControlsIntegerDrag(std::string const& title, int idx, int min, int limit, int* animatedValue);
+    bool addControlsFloatDrag(std::string const& title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsFloatDragSameLine(std::string const& title, int idx, float min, float limit, float* animatedValue);
+    bool addControlsDragSameLine(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
 
 private:
     ColorPicker *componentColorPicker;

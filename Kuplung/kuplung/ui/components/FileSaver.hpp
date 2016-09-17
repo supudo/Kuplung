@@ -29,7 +29,7 @@ public:
     void draw(const char* title, FileSaverOperation type, bool* p_opened = NULL);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(std::string filePath);
+    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
     std::function<void(FBEntity, FileSaverOperation)> funcFileSave;
 
     void drawFiles();

@@ -86,7 +86,7 @@ bool RenderingForward::init() {
     this->GLSL_LightSourceNumber_Spot = 4;
 
     bool success = true;
-    success |= this->initShaderProgram();
+    success &= this->initShaderProgram();
     return success;
 }
 

@@ -20,7 +20,7 @@ struct RenderingForward_LightSource {
 
 class RenderingForward {
 public:
-    RenderingForward(ObjectsManager &managerObjects);
+    explicit RenderingForward(ObjectsManager &managerObjects);
     ~RenderingForward();
     void destroy();
 

@@ -19,7 +19,7 @@
 static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
 //static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
-MENode_Texture::MENode_Texture(int id, MaterialTextureType texType, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+MENode_Texture::MENode_Texture(int id, MaterialTextureType texType, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename, std::string const& textureImage) {
     this->initBase(id, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
     this->showTextureWindow = false;
     this->showFileBrowser = false;
@@ -38,7 +38,7 @@ MENode_Texture::MENode_Texture(int id, MaterialTextureType texType, std::string 
     this->createTextureBuffer(&this->textureWidth, &this->textureHeight);
 }
 
-void MENode_Texture::initBase(int id, std::string name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string textureFilename, std::string textureImage) {
+void MENode_Texture::initBase(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename, std::string const& textureImage) {
     MENode::init(id, MaterialEditor_NodeType_Image, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
@@ -167,7 +167,7 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
     int tChannels;
     unsigned char* tPixels = stbi_load(this->TextureImage.c_str(), width, height, &tChannels, 0);
     if (!tPixels)
-        this->doLog("Can't load texture image - " + this->TextureImage + " with error - " + std::string(stbi_failure_reason()));
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[MENode_Texture] Can't load texture image %s with error %s!\n", this->TextureImage.c_str(), stbi_failure_reason()));
     else {
         glGenTextures(1, &this->vboBuffer);
         glBindTexture(GL_TEXTURE_2D, this->vboBuffer);
@@ -206,8 +206,4 @@ void MENode_Texture::dialogFileBrowserProcessFile(FBEntity file) {
     strcpy(this->filePath, this->TextureImage.c_str());
     this->initBase(this->ID, this->Name, this->Pos, this->Value, this->Color, this->InputsCount, this->OutputsCount, this->TextureFilename, this->TextureImage);
     this->createTextureBuffer(&this->textureWidth, &this->textureHeight);
-}
-
-void MENode_Texture::doLog(std::string logMessage) {
-    Settings::Instance()->funcDoLog("[MENode_Texture] " + logMessage);
 }

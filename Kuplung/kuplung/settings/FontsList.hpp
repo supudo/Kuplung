@@ -17,7 +17,7 @@
 class FontsList {
 public:
     void init();
-    bool fontFileExists(std::string font);
+    bool fontFileExists(std::string const& font);
     void getFonts();
     int getSelectedFontSize();
 
