@@ -45,14 +45,13 @@ void protobuf_AssignDesc_KuplungAppScene_2eproto() {
   Scene_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       Scene_descriptor_,
-      Scene::default_instance_,
+      Scene::internal_default_instance(),
       Scene_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, _has_bits_),
       -1,
       -1,
       sizeof(Scene),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Scene, _internal_metadata_));
   MeshModel_descriptor_ = file->message_type(1);
   static const int MeshModel_offsets_[58] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, modelid_),
@@ -117,20 +116,19 @@ void protobuf_AssignDesc_KuplungAppScene_2eproto() {
   MeshModel_reflection_ =
     ::google::protobuf::internal::GeneratedMessageReflection::NewGeneratedMessageReflection(
       MeshModel_descriptor_,
-      MeshModel::default_instance_,
+      MeshModel::internal_default_instance(),
       MeshModel_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _has_bits_),
       -1,
       -1,
       sizeof(MeshModel),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _internal_metadata_),
-      -1);
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModel, _internal_metadata_));
 }
 
 namespace {
 
 GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AssignDescriptors_once_);
-inline void protobuf_AssignDescriptorsOnce() {
+void protobuf_AssignDescriptorsOnce() {
   ::google::protobuf::GoogleOnceInit(&protobuf_AssignDescriptors_once_,
                  &protobuf_AssignDesc_KuplungAppScene_2eproto);
 }
@@ -139,28 +137,39 @@ void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      Scene_descriptor_, &Scene::default_instance());
+      Scene_descriptor_, Scene::internal_default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-      MeshModel_descriptor_, &MeshModel::default_instance());
+      MeshModel_descriptor_, MeshModel::internal_default_instance());
 }
 
 }  // namespace
 
 void protobuf_ShutdownFile_KuplungAppScene_2eproto() {
-  delete Scene::default_instance_;
+  Scene_default_instance_.Shutdown();
   delete Scene_reflection_;
-  delete MeshModel::default_instance_;
+  MeshModel_default_instance_.Shutdown();
   delete MeshModel_reflection_;
 }
 
-void protobuf_AddDesc_KuplungAppScene_2eproto() GOOGLE_ATTRIBUTE_COLD;
-void protobuf_AddDesc_KuplungAppScene_2eproto() {
-  static bool already_here = false;
-  if (already_here) return;
-  already_here = true;
+void protobuf_InitDefaults_KuplungAppScene_2eproto_impl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-  ::KuplungApp::protobuf_AddDesc_KuplungDefinitions_2eproto();
+  ::KuplungApp::protobuf_InitDefaults_KuplungDefinitions_2eproto();
+  Scene_default_instance_.DefaultConstruct();
+  MeshModel_default_instance_.DefaultConstruct();
+  Scene_default_instance_.get_mutable()->InitAsDefaultInstance();
+  MeshModel_default_instance_.get_mutable()->InitAsDefaultInstance();
+}
+
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_InitDefaults_KuplungAppScene_2eproto_once_);
+void protobuf_InitDefaults_KuplungAppScene_2eproto() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_InitDefaults_KuplungAppScene_2eproto_once_,
+                 &protobuf_InitDefaults_KuplungAppScene_2eproto_impl);
+}
+void protobuf_AddDesc_KuplungAppScene_2eproto_impl() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  protobuf_InitDefaults_KuplungAppScene_2eproto();
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
     "\n\025KuplungAppScene.proto\022\nKuplungApp\032\030Kup"
     "lungDefinitions.proto\".\n\005Scene\022%\n\006models"
@@ -229,19 +238,31 @@ void protobuf_AddDesc_KuplungAppScene_2eproto() {
     "ct\030: \002(\0132\020.KuplungApp.Mesh", 2586);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungAppScene.proto", &protobuf_RegisterTypes);
-  Scene::default_instance_ = new Scene();
-  MeshModel::default_instance_ = new MeshModel();
-  Scene::default_instance_->InitAsDefaultInstance();
-  MeshModel::default_instance_->InitAsDefaultInstance();
+  ::KuplungApp::protobuf_AddDesc_KuplungDefinitions_2eproto();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_KuplungAppScene_2eproto);
 }
 
+GOOGLE_PROTOBUF_DECLARE_ONCE(protobuf_AddDesc_KuplungAppScene_2eproto_once_);
+void protobuf_AddDesc_KuplungAppScene_2eproto() {
+  ::google::protobuf::GoogleOnceInit(&protobuf_AddDesc_KuplungAppScene_2eproto_once_,
+                 &protobuf_AddDesc_KuplungAppScene_2eproto_impl);
+}
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer_KuplungAppScene_2eproto {
   StaticDescriptorInitializer_KuplungAppScene_2eproto() {
     protobuf_AddDesc_KuplungAppScene_2eproto();
   }
 } static_descriptor_initializer_KuplungAppScene_2eproto_;
+
+namespace {
+
+static void MergeFromFail(int line) GOOGLE_ATTRIBUTE_COLD GOOGLE_ATTRIBUTE_NORETURN;
+static void MergeFromFail(int line) {
+  ::google::protobuf::internal::MergeFromFail(__FILE__, line);
+}
+
+}  // namespace
+
 
 // ===================================================================
 
@@ -251,6 +272,7 @@ const int Scene::kModelsFieldNumber;
 
 Scene::Scene()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (this != internal_default_instance()) protobuf_InitDefaults_KuplungAppScene_2eproto();
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Scene)
 }
@@ -262,13 +284,12 @@ Scene::Scene(const Scene& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Scene)
 }
 
 void Scene::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
 Scene::~Scene() {
@@ -277,8 +298,6 @@ Scene::~Scene() {
 }
 
 void Scene::SharedDtor() {
-  if (this != default_instance_) {
-  }
 }
 
 void Scene::SetCachedSize(int size) const {
@@ -292,11 +311,11 @@ const ::google::protobuf::Descriptor* Scene::descriptor() {
 }
 
 const Scene& Scene::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_KuplungAppScene_2eproto();
-  return *default_instance_;
+  protobuf_InitDefaults_KuplungAppScene_2eproto();
+  return *internal_default_instance();
 }
 
-Scene* Scene::default_instance_ = NULL;
+::google::protobuf::internal::ExplicitlyConstructed<Scene> Scene_default_instance_;
 
 Scene* Scene::New(::google::protobuf::Arena* arena) const {
   Scene* n = new Scene;
@@ -309,7 +328,7 @@ Scene* Scene::New(::google::protobuf::Arena* arena) const {
 void Scene::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Scene)
   models_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  _has_bits_.Clear();
   if (_internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->Clear();
   }
@@ -381,6 +400,7 @@ void Scene::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Scene::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
   // repeated .KuplungApp.MeshModel models = 1;
   for (unsigned int i = 0, n = this->models_size(); i < n; i++) {
@@ -397,16 +417,19 @@ void Scene::SerializeWithCachedSizes(
   return target;
 }
 
-int Scene::ByteSize() const {
+size_t Scene::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Scene)
-  int total_size = 0;
+  size_t total_size = 0;
 
   // repeated .KuplungApp.MeshModel models = 1;
-  total_size += 1 * this->models_size();
-  for (int i = 0; i < this->models_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->models(i));
+  {
+    unsigned int count = this->models_size();
+    total_size += 1UL * count;
+    for (unsigned int i = 0; i < count; i++) {
+      total_size +=
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->models(i));
+    }
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -414,18 +437,17 @@ int Scene::ByteSize() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
+  _cached_size_ = cached_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
 void Scene::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Scene)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const Scene* source = 
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const Scene* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const Scene>(
           &from);
   if (source == NULL) {
@@ -433,18 +455,25 @@ void Scene::MergeFrom(const ::google::protobuf::Message& from) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Scene)
-    MergeFrom(*source);
+    UnsafeMergeFrom(*source);
   }
 }
 
 void Scene::MergeFrom(const Scene& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Scene)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  if (GOOGLE_PREDICT_TRUE(&from != this)) {
+    UnsafeMergeFrom(from);
+  } else {
+    MergeFromFail(__LINE__);
   }
+}
+
+void Scene::UnsafeMergeFrom(const Scene& from) {
+  GOOGLE_DCHECK(&from != this);
   models_.MergeFrom(from.models_);
   if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+    ::google::protobuf::UnknownFieldSet::MergeToInternalMetdata(
+      from.unknown_fields(), &_internal_metadata_);
   }
 }
 
@@ -459,7 +488,7 @@ void Scene::CopyFrom(const Scene& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:KuplungApp.Scene)
   if (&from == this) return;
   Clear();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
 }
 
 bool Scene::IsInitialized() const {
@@ -520,6 +549,9 @@ Scene::models() const {
   return models_;
 }
 
+inline const Scene* Scene::internal_default_instance() {
+  return &Scene_default_instance_.get();
+}
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -587,62 +619,85 @@ const int MeshModel::kMeshObjectFieldNumber;
 
 MeshModel::MeshModel()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (this != internal_default_instance()) protobuf_InitDefaults_KuplungAppScene_2eproto();
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.MeshModel)
 }
 
 void MeshModel::InitAsDefaultInstance() {
-  positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  displacex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  displacey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  displacez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  setting_materialrefraction_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  setting_materialspecularexp_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  solidlightskin_materialcolor_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  solidlightskin_ambient_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  solidlightskin_diffuse_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  solidlightskin_specular_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  setting_lightposition_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  setting_lightdirection_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  setting_lightambient_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  setting_lightdiffuse_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  setting_lightspecular_ = const_cast< ::KuplungApp::Vec3*>(&::KuplungApp::Vec3::default_instance());
-  displacementheightscale_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  materialambient_ = const_cast< ::KuplungApp::MaterialColor*>(&::KuplungApp::MaterialColor::default_instance());
-  materialdiffuse_ = const_cast< ::KuplungApp::MaterialColor*>(&::KuplungApp::MaterialColor::default_instance());
-  materialspecular_ = const_cast< ::KuplungApp::MaterialColor*>(&::KuplungApp::MaterialColor::default_instance());
-  materialemission_ = const_cast< ::KuplungApp::MaterialColor*>(&::KuplungApp::MaterialColor::default_instance());
-  effect_gblur_radius_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  effect_gblur_width_ = const_cast< ::KuplungApp::ObjectCoordinate*>(&::KuplungApp::ObjectCoordinate::default_instance());
-  meshobject_ = const_cast< ::KuplungApp::Mesh*>(&::KuplungApp::Mesh::default_instance());
+  positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  displacex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  displacey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  displacez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  setting_materialrefraction_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  setting_materialspecularexp_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  solidlightskin_materialcolor_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  solidlightskin_ambient_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  solidlightskin_diffuse_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  solidlightskin_specular_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  setting_lightposition_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  setting_lightdirection_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  setting_lightambient_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  setting_lightdiffuse_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  setting_lightspecular_ = const_cast< ::KuplungApp::Vec3*>(
+      ::KuplungApp::Vec3::internal_default_instance());
+  displacementheightscale_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  materialambient_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  materialdiffuse_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  materialspecular_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  materialemission_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  effect_gblur_radius_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  effect_gblur_width_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  meshobject_ = const_cast< ::KuplungApp::Mesh*>(
+      ::KuplungApp::Mesh::internal_default_instance());
 }
 
 MeshModel::MeshModel(const MeshModel& from)
   : ::google::protobuf::Message(),
     _internal_metadata_(NULL) {
   SharedCtor();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModel)
 }
 
 void MeshModel::SharedCtor() {
-  _cached_size_ = 0;
-  modelid_ = 0;
-  settings_deferredrender_ = false;
-  setting_celshading_ = false;
-  setting_wireframe_ = false;
-  setting_usetessellation_ = false;
-  setting_usecullface_ = false;
-  setting_alpha_ = 0;
-  setting_tessellationsubdivision_ = 0;
   positionx_ = NULL;
   positiony_ = NULL;
   positionz_ = NULL;
@@ -657,43 +712,26 @@ void MeshModel::SharedCtor() {
   displacez_ = NULL;
   setting_materialrefraction_ = NULL;
   setting_materialspecularexp_ = NULL;
-  setting_modelviewskin_ = 0;
   solidlightskin_materialcolor_ = NULL;
   solidlightskin_ambient_ = NULL;
   solidlightskin_diffuse_ = NULL;
   solidlightskin_specular_ = NULL;
-  solidlightskin_ambient_strength_ = 0;
-  solidlightskin_diffuse_strength_ = 0;
-  solidlightskin_specular_strength_ = 0;
   setting_lightposition_ = NULL;
   setting_lightdirection_ = NULL;
   setting_lightambient_ = NULL;
   setting_lightdiffuse_ = NULL;
   setting_lightspecular_ = NULL;
-  setting_lightstrengthambient_ = 0;
-  setting_lightstrengthdiffuse_ = 0;
-  setting_lightstrengthspecular_ = 0;
-  materialilluminationmodel_ = 0;
   displacementheightscale_ = NULL;
-  showmaterialeditor_ = false;
   materialambient_ = NULL;
   materialdiffuse_ = NULL;
   materialspecular_ = NULL;
   materialemission_ = NULL;
-  setting_parallaxmapping_ = false;
-  effect_gblur_mode_ = 0;
   effect_gblur_radius_ = NULL;
   effect_gblur_width_ = NULL;
-  effect_bloom_dobloom_ = false;
-  effect_bloom_weighta_ = 0;
-  effect_bloom_weightb_ = 0;
-  effect_bloom_weightc_ = 0;
-  effect_bloom_weightd_ = 0;
-  effect_bloom_vignette_ = 0;
-  effect_bloom_vignetteatt_ = 0;
-  setting_lightingpass_drawmode_ = 0;
   meshobject_ = NULL;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  ::memset(&modelid_, 0, reinterpret_cast<char*>(&setting_lightingpass_drawmode_) -
+    reinterpret_cast<char*>(&modelid_) + sizeof(setting_lightingpass_drawmode_));
+  _cached_size_ = 0;
 }
 
 MeshModel::~MeshModel() {
@@ -702,7 +740,7 @@ MeshModel::~MeshModel() {
 }
 
 void MeshModel::SharedDtor() {
-  if (this != default_instance_) {
+  if (this != &MeshModel_default_instance_.get()) {
     delete positionx_;
     delete positiony_;
     delete positionz_;
@@ -748,11 +786,11 @@ const ::google::protobuf::Descriptor* MeshModel::descriptor() {
 }
 
 const MeshModel& MeshModel::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_KuplungAppScene_2eproto();
-  return *default_instance_;
+  protobuf_InitDefaults_KuplungAppScene_2eproto();
+  return *internal_default_instance();
 }
 
-MeshModel* MeshModel::default_instance_ = NULL;
+::google::protobuf::internal::ExplicitlyConstructed<MeshModel> MeshModel_default_instance_;
 
 MeshModel* MeshModel::New(::google::protobuf::Arena* arena) const {
   MeshModel* n = new MeshModel;
@@ -776,7 +814,7 @@ void MeshModel::Clear() {
 #endif
 
 #define ZR_(first, last) do {\
-  ::memset(&first, 0,\
+  ::memset(&(first), 0,\
            ZR_HELPER_(last) - ZR_HELPER_(first) + sizeof(last));\
 } while (0)
 
@@ -835,7 +873,7 @@ void MeshModel::Clear() {
     }
   }
   if (_has_bits_[24 / 32] & 4278190080u) {
-    ZR_(solidlightskin_diffuse_strength_, solidlightskin_specular_strength_);
+    ZR_(solidlightskin_ambient_strength_, solidlightskin_specular_strength_);
     if (has_solidlightskin_ambient()) {
       if (solidlightskin_ambient_ != NULL) solidlightskin_ambient_->::KuplungApp::Vec3::Clear();
     }
@@ -845,7 +883,6 @@ void MeshModel::Clear() {
     if (has_solidlightskin_specular()) {
       if (solidlightskin_specular_ != NULL) solidlightskin_specular_->::KuplungApp::Vec3::Clear();
     }
-    solidlightskin_ambient_strength_ = 0;
     if (has_setting_lightposition()) {
       if (setting_lightposition_ != NULL) setting_lightposition_->::KuplungApp::Vec3::Clear();
     }
@@ -854,7 +891,7 @@ void MeshModel::Clear() {
     }
   }
   if (_has_bits_[32 / 32] & 255u) {
-    ZR_(setting_lightstrengthambient_, setting_lightstrengthspecular_);
+    ZR_(setting_lightstrengthambient_, materialilluminationmodel_);
     if (has_setting_lightambient()) {
       if (setting_lightambient_ != NULL) setting_lightambient_->::KuplungApp::Vec3::Clear();
     }
@@ -864,7 +901,6 @@ void MeshModel::Clear() {
     if (has_setting_lightspecular()) {
       if (setting_lightspecular_ != NULL) setting_lightspecular_->::KuplungApp::Vec3::Clear();
     }
-    materialilluminationmodel_ = 0;
     if (has_displacementheightscale()) {
       if (displacementheightscale_ != NULL) displacementheightscale_->::KuplungApp::ObjectCoordinate::Clear();
     }
@@ -905,7 +941,7 @@ void MeshModel::Clear() {
 #undef ZR_HELPER_
 #undef ZR_
 
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  _has_bits_.Clear();
   if (_internal_metadata_.have_unknown_fields()) {
     mutable_unknown_fields()->Clear();
   }
@@ -924,10 +960,10 @@ bool MeshModel::MergePartialFromCodedStream(
       // required int32 ModelID = 1;
       case 1: {
         if (tag == 8) {
+          set_has_modelid();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &modelid_)));
-          set_has_modelid();
         } else {
           goto handle_unusual;
         }
@@ -939,10 +975,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 2: {
         if (tag == 16) {
          parse_Settings_DeferredRender:
+          set_has_settings_deferredrender();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &settings_deferredrender_)));
-          set_has_settings_deferredrender();
         } else {
           goto handle_unusual;
         }
@@ -954,10 +990,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 3: {
         if (tag == 24) {
          parse_Setting_CelShading:
+          set_has_setting_celshading();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_celshading_)));
-          set_has_setting_celshading();
         } else {
           goto handle_unusual;
         }
@@ -969,10 +1005,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 4: {
         if (tag == 32) {
          parse_Setting_Wireframe:
+          set_has_setting_wireframe();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_wireframe_)));
-          set_has_setting_wireframe();
         } else {
           goto handle_unusual;
         }
@@ -984,10 +1020,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 5: {
         if (tag == 40) {
          parse_Setting_UseTessellation:
+          set_has_setting_usetessellation();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_usetessellation_)));
-          set_has_setting_usetessellation();
         } else {
           goto handle_unusual;
         }
@@ -999,10 +1035,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 6: {
         if (tag == 48) {
          parse_Setting_UseCullFace:
+          set_has_setting_usecullface();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_usecullface_)));
-          set_has_setting_usecullface();
         } else {
           goto handle_unusual;
         }
@@ -1014,10 +1050,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 7: {
         if (tag == 61) {
          parse_Setting_Alpha:
+          set_has_setting_alpha();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_alpha_)));
-          set_has_setting_alpha();
         } else {
           goto handle_unusual;
         }
@@ -1029,10 +1065,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 8: {
         if (tag == 64) {
          parse_Setting_TessellationSubdivision:
+          set_has_setting_tessellationsubdivision();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_tessellationsubdivision_)));
-          set_has_setting_tessellationsubdivision();
         } else {
           goto handle_unusual;
         }
@@ -1226,10 +1262,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 23: {
         if (tag == 184) {
          parse_Setting_ModelViewSkin:
+          set_has_setting_modelviewskin();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_modelviewskin_)));
-          set_has_setting_modelviewskin();
         } else {
           goto handle_unusual;
         }
@@ -1293,10 +1329,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 28: {
         if (tag == 229) {
          parse_solidLightSkin_Ambient_Strength:
+          set_has_solidlightskin_ambient_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_ambient_strength_)));
-          set_has_solidlightskin_ambient_strength();
         } else {
           goto handle_unusual;
         }
@@ -1308,10 +1344,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 29: {
         if (tag == 237) {
          parse_solidLightSkin_Diffuse_Strength:
+          set_has_solidlightskin_diffuse_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_diffuse_strength_)));
-          set_has_solidlightskin_diffuse_strength();
         } else {
           goto handle_unusual;
         }
@@ -1323,10 +1359,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 30: {
         if (tag == 245) {
          parse_solidLightSkin_Specular_Strength:
+          set_has_solidlightskin_specular_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_specular_strength_)));
-          set_has_solidlightskin_specular_strength();
         } else {
           goto handle_unusual;
         }
@@ -1403,10 +1439,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 36: {
         if (tag == 293) {
          parse_Setting_LightStrengthAmbient:
+          set_has_setting_lightstrengthambient();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthambient_)));
-          set_has_setting_lightstrengthambient();
         } else {
           goto handle_unusual;
         }
@@ -1418,10 +1454,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 37: {
         if (tag == 301) {
          parse_Setting_LightStrengthDiffuse:
+          set_has_setting_lightstrengthdiffuse();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthdiffuse_)));
-          set_has_setting_lightstrengthdiffuse();
         } else {
           goto handle_unusual;
         }
@@ -1433,10 +1469,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 38: {
         if (tag == 309) {
          parse_Setting_LightStrengthSpecular:
+          set_has_setting_lightstrengthspecular();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthspecular_)));
-          set_has_setting_lightstrengthspecular();
         } else {
           goto handle_unusual;
         }
@@ -1448,10 +1484,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 39: {
         if (tag == 312) {
          parse_materialIlluminationModel:
+          set_has_materialilluminationmodel();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &materialilluminationmodel_)));
-          set_has_materialilluminationmodel();
         } else {
           goto handle_unusual;
         }
@@ -1476,10 +1512,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 41: {
         if (tag == 328) {
          parse_showMaterialEditor:
+          set_has_showmaterialeditor();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &showmaterialeditor_)));
-          set_has_showmaterialeditor();
         } else {
           goto handle_unusual;
         }
@@ -1543,10 +1579,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 46: {
         if (tag == 368) {
          parse_Setting_ParallaxMapping:
+          set_has_setting_parallaxmapping();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_parallaxmapping_)));
-          set_has_setting_parallaxmapping();
         } else {
           goto handle_unusual;
         }
@@ -1558,10 +1594,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 47: {
         if (tag == 376) {
          parse_Effect_GBlur_Mode:
+          set_has_effect_gblur_mode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &effect_gblur_mode_)));
-          set_has_effect_gblur_mode();
         } else {
           goto handle_unusual;
         }
@@ -1599,10 +1635,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 50: {
         if (tag == 400) {
          parse_Effect_Bloom_doBloom:
+          set_has_effect_bloom_dobloom();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
                  input, &effect_bloom_dobloom_)));
-          set_has_effect_bloom_dobloom();
         } else {
           goto handle_unusual;
         }
@@ -1614,10 +1650,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 51: {
         if (tag == 413) {
          parse_Effect_Bloom_WeightA:
+          set_has_effect_bloom_weighta();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weighta_)));
-          set_has_effect_bloom_weighta();
         } else {
           goto handle_unusual;
         }
@@ -1629,10 +1665,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 52: {
         if (tag == 421) {
          parse_Effect_Bloom_WeightB:
+          set_has_effect_bloom_weightb();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightb_)));
-          set_has_effect_bloom_weightb();
         } else {
           goto handle_unusual;
         }
@@ -1644,10 +1680,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 53: {
         if (tag == 429) {
          parse_Effect_Bloom_WeightC:
+          set_has_effect_bloom_weightc();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightc_)));
-          set_has_effect_bloom_weightc();
         } else {
           goto handle_unusual;
         }
@@ -1659,10 +1695,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 54: {
         if (tag == 437) {
          parse_Effect_Bloom_WeightD:
+          set_has_effect_bloom_weightd();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightd_)));
-          set_has_effect_bloom_weightd();
         } else {
           goto handle_unusual;
         }
@@ -1674,10 +1710,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 55: {
         if (tag == 445) {
          parse_Effect_Bloom_Vignette:
+          set_has_effect_bloom_vignette();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_vignette_)));
-          set_has_effect_bloom_vignette();
         } else {
           goto handle_unusual;
         }
@@ -1689,10 +1725,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 56: {
         if (tag == 453) {
          parse_Effect_Bloom_VignetteAtt:
+          set_has_effect_bloom_vignetteatt();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_vignetteatt_)));
-          set_has_effect_bloom_vignetteatt();
         } else {
           goto handle_unusual;
         }
@@ -1704,10 +1740,10 @@ bool MeshModel::MergePartialFromCodedStream(
       case 57: {
         if (tag == 456) {
          parse_Setting_LightingPass_DrawMode:
+          set_has_setting_lightingpass_drawmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_lightingpass_drawmode_)));
-          set_has_setting_lightingpass_drawmode();
         } else {
           goto handle_unusual;
         }
@@ -2083,6 +2119,7 @@ void MeshModel::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MeshModel::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModel)
   // required int32 ModelID = 1;
   if (has_modelid()) {
@@ -2444,9 +2481,9 @@ void MeshModel::SerializeWithCachedSizes(
   return target;
 }
 
-int MeshModel::RequiredFieldsByteSizeFallback() const {
+size_t MeshModel::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.MeshModel)
-  int total_size = 0;
+  size_t total_size = 0;
 
   if (has_modelid()) {
     // required int32 ModelID = 1;
@@ -2814,9 +2851,9 @@ int MeshModel::RequiredFieldsByteSizeFallback() const {
 
   return total_size;
 }
-int MeshModel::ByteSize() const {
+size_t MeshModel::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.MeshModel)
-  int total_size = 0;
+  size_t total_size = 0;
 
   if ((((_has_bits_[0] & 0xffffffff) ^ 0xffffffff)
          | ((_has_bits_[1] & 0x03ffffff) ^ 0x03ffffff)) == 0) {  // All required fields are present.
@@ -3076,18 +3113,17 @@ int MeshModel::ByteSize() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
   GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
+  _cached_size_ = cached_size;
   GOOGLE_SAFE_CONCURRENT_WRITES_END();
   return total_size;
 }
 
 void MeshModel::MergeFrom(const ::google::protobuf::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshModel)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
-  }
-  const MeshModel* source = 
+  if (GOOGLE_PREDICT_FALSE(&from == this)) MergeFromFail(__LINE__);
+  const MeshModel* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const MeshModel>(
           &from);
   if (source == NULL) {
@@ -3095,15 +3131,21 @@ void MeshModel::MergeFrom(const ::google::protobuf::Message& from) {
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshModel)
-    MergeFrom(*source);
+    UnsafeMergeFrom(*source);
   }
 }
 
 void MeshModel::MergeFrom(const MeshModel& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModel)
-  if (GOOGLE_PREDICT_FALSE(&from == this)) {
-    ::google::protobuf::internal::MergeFromFail(__FILE__, __LINE__);
+  if (GOOGLE_PREDICT_TRUE(&from != this)) {
+    UnsafeMergeFrom(from);
+  } else {
+    MergeFromFail(__LINE__);
   }
+}
+
+void MeshModel::UnsafeMergeFrom(const MeshModel& from) {
+  GOOGLE_DCHECK(&from != this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     if (from.has_modelid()) {
       set_modelid(from.modelid());
@@ -3295,7 +3337,8 @@ void MeshModel::MergeFrom(const MeshModel& from) {
     }
   }
   if (from._internal_metadata_.have_unknown_fields()) {
-    mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+    ::google::protobuf::UnknownFieldSet::MergeToInternalMetdata(
+      from.unknown_fields(), &_internal_metadata_);
   }
 }
 
@@ -3310,7 +3353,7 @@ void MeshModel::CopyFrom(const MeshModel& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:KuplungApp.MeshModel)
   if (&from == this) return;
   Clear();
-  MergeFrom(from);
+  UnsafeMergeFrom(from);
 }
 
 bool MeshModel::IsInitialized() const {
@@ -3507,11 +3550,11 @@ void MeshModel::clear_modelid() {
   modelid_ = 0;
   clear_has_modelid();
 }
- ::google::protobuf::int32 MeshModel::modelid() const {
+::google::protobuf::int32 MeshModel::modelid() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.ModelID)
   return modelid_;
 }
- void MeshModel::set_modelid(::google::protobuf::int32 value) {
+void MeshModel::set_modelid(::google::protobuf::int32 value) {
   set_has_modelid();
   modelid_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.ModelID)
@@ -3531,11 +3574,11 @@ void MeshModel::clear_settings_deferredrender() {
   settings_deferredrender_ = false;
   clear_has_settings_deferredrender();
 }
- bool MeshModel::settings_deferredrender() const {
+bool MeshModel::settings_deferredrender() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Settings_DeferredRender)
   return settings_deferredrender_;
 }
- void MeshModel::set_settings_deferredrender(bool value) {
+void MeshModel::set_settings_deferredrender(bool value) {
   set_has_settings_deferredrender();
   settings_deferredrender_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Settings_DeferredRender)
@@ -3555,11 +3598,11 @@ void MeshModel::clear_setting_celshading() {
   setting_celshading_ = false;
   clear_has_setting_celshading();
 }
- bool MeshModel::setting_celshading() const {
+bool MeshModel::setting_celshading() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_CelShading)
   return setting_celshading_;
 }
- void MeshModel::set_setting_celshading(bool value) {
+void MeshModel::set_setting_celshading(bool value) {
   set_has_setting_celshading();
   setting_celshading_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_CelShading)
@@ -3579,11 +3622,11 @@ void MeshModel::clear_setting_wireframe() {
   setting_wireframe_ = false;
   clear_has_setting_wireframe();
 }
- bool MeshModel::setting_wireframe() const {
+bool MeshModel::setting_wireframe() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_Wireframe)
   return setting_wireframe_;
 }
- void MeshModel::set_setting_wireframe(bool value) {
+void MeshModel::set_setting_wireframe(bool value) {
   set_has_setting_wireframe();
   setting_wireframe_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_Wireframe)
@@ -3603,11 +3646,11 @@ void MeshModel::clear_setting_usetessellation() {
   setting_usetessellation_ = false;
   clear_has_setting_usetessellation();
 }
- bool MeshModel::setting_usetessellation() const {
+bool MeshModel::setting_usetessellation() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_UseTessellation)
   return setting_usetessellation_;
 }
- void MeshModel::set_setting_usetessellation(bool value) {
+void MeshModel::set_setting_usetessellation(bool value) {
   set_has_setting_usetessellation();
   setting_usetessellation_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_UseTessellation)
@@ -3627,11 +3670,11 @@ void MeshModel::clear_setting_usecullface() {
   setting_usecullface_ = false;
   clear_has_setting_usecullface();
 }
- bool MeshModel::setting_usecullface() const {
+bool MeshModel::setting_usecullface() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_UseCullFace)
   return setting_usecullface_;
 }
- void MeshModel::set_setting_usecullface(bool value) {
+void MeshModel::set_setting_usecullface(bool value) {
   set_has_setting_usecullface();
   setting_usecullface_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_UseCullFace)
@@ -3651,11 +3694,11 @@ void MeshModel::clear_setting_alpha() {
   setting_alpha_ = 0;
   clear_has_setting_alpha();
 }
- float MeshModel::setting_alpha() const {
+float MeshModel::setting_alpha() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_Alpha)
   return setting_alpha_;
 }
- void MeshModel::set_setting_alpha(float value) {
+void MeshModel::set_setting_alpha(float value) {
   set_has_setting_alpha();
   setting_alpha_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_Alpha)
@@ -3675,11 +3718,11 @@ void MeshModel::clear_setting_tessellationsubdivision() {
   setting_tessellationsubdivision_ = 0;
   clear_has_setting_tessellationsubdivision();
 }
- ::google::protobuf::int32 MeshModel::setting_tessellationsubdivision() const {
+::google::protobuf::int32 MeshModel::setting_tessellationsubdivision() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_TessellationSubdivision)
   return setting_tessellationsubdivision_;
 }
- void MeshModel::set_setting_tessellationsubdivision(::google::protobuf::int32 value) {
+void MeshModel::set_setting_tessellationsubdivision(::google::protobuf::int32 value) {
   set_has_setting_tessellationsubdivision();
   setting_tessellationsubdivision_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_TessellationSubdivision)
@@ -3701,7 +3744,8 @@ void MeshModel::clear_positionx() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::positionx() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionX)
-  return positionx_ != NULL ? *positionx_ : *default_instance_->positionx_;
+  return positionx_ != NULL ? *positionx_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positionx() {
   set_has_positionx();
@@ -3745,7 +3789,8 @@ void MeshModel::clear_positiony() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::positiony() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionY)
-  return positiony_ != NULL ? *positiony_ : *default_instance_->positiony_;
+  return positiony_ != NULL ? *positiony_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positiony() {
   set_has_positiony();
@@ -3789,7 +3834,8 @@ void MeshModel::clear_positionz() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::positionz() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.positionZ)
-  return positionz_ != NULL ? *positionz_ : *default_instance_->positionz_;
+  return positionz_ != NULL ? *positionz_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_positionz() {
   set_has_positionz();
@@ -3833,7 +3879,8 @@ void MeshModel::clear_scalex() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::scalex() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleX)
-  return scalex_ != NULL ? *scalex_ : *default_instance_->scalex_;
+  return scalex_ != NULL ? *scalex_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scalex() {
   set_has_scalex();
@@ -3877,7 +3924,8 @@ void MeshModel::clear_scaley() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::scaley() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleY)
-  return scaley_ != NULL ? *scaley_ : *default_instance_->scaley_;
+  return scaley_ != NULL ? *scaley_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scaley() {
   set_has_scaley();
@@ -3921,7 +3969,8 @@ void MeshModel::clear_scalez() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::scalez() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.scaleZ)
-  return scalez_ != NULL ? *scalez_ : *default_instance_->scalez_;
+  return scalez_ != NULL ? *scalez_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_scalez() {
   set_has_scalez();
@@ -3965,7 +4014,8 @@ void MeshModel::clear_rotatex() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::rotatex() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateX)
-  return rotatex_ != NULL ? *rotatex_ : *default_instance_->rotatex_;
+  return rotatex_ != NULL ? *rotatex_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatex() {
   set_has_rotatex();
@@ -4009,7 +4059,8 @@ void MeshModel::clear_rotatey() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::rotatey() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateY)
-  return rotatey_ != NULL ? *rotatey_ : *default_instance_->rotatey_;
+  return rotatey_ != NULL ? *rotatey_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatey() {
   set_has_rotatey();
@@ -4053,7 +4104,8 @@ void MeshModel::clear_rotatez() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::rotatez() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.rotateZ)
-  return rotatez_ != NULL ? *rotatez_ : *default_instance_->rotatez_;
+  return rotatez_ != NULL ? *rotatez_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_rotatez() {
   set_has_rotatez();
@@ -4097,7 +4149,8 @@ void MeshModel::clear_displacex() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::displacex() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceX)
-  return displacex_ != NULL ? *displacex_ : *default_instance_->displacex_;
+  return displacex_ != NULL ? *displacex_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacex() {
   set_has_displacex();
@@ -4141,7 +4194,8 @@ void MeshModel::clear_displacey() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::displacey() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceY)
-  return displacey_ != NULL ? *displacey_ : *default_instance_->displacey_;
+  return displacey_ != NULL ? *displacey_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacey() {
   set_has_displacey();
@@ -4185,7 +4239,8 @@ void MeshModel::clear_displacez() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::displacez() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displaceZ)
-  return displacez_ != NULL ? *displacez_ : *default_instance_->displacez_;
+  return displacez_ != NULL ? *displacez_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacez() {
   set_has_displacez();
@@ -4229,7 +4284,8 @@ void MeshModel::clear_setting_materialrefraction() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::setting_materialrefraction() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_MaterialRefraction)
-  return setting_materialrefraction_ != NULL ? *setting_materialrefraction_ : *default_instance_->setting_materialrefraction_;
+  return setting_materialrefraction_ != NULL ? *setting_materialrefraction_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_setting_materialrefraction() {
   set_has_setting_materialrefraction();
@@ -4273,7 +4329,8 @@ void MeshModel::clear_setting_materialspecularexp() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::setting_materialspecularexp() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_MaterialSpecularExp)
-  return setting_materialspecularexp_ != NULL ? *setting_materialspecularexp_ : *default_instance_->setting_materialspecularexp_;
+  return setting_materialspecularexp_ != NULL ? *setting_materialspecularexp_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_setting_materialspecularexp() {
   set_has_setting_materialspecularexp();
@@ -4315,11 +4372,11 @@ void MeshModel::clear_setting_modelviewskin() {
   setting_modelviewskin_ = 0;
   clear_has_setting_modelviewskin();
 }
- ::google::protobuf::int32 MeshModel::setting_modelviewskin() const {
+::google::protobuf::int32 MeshModel::setting_modelviewskin() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_ModelViewSkin)
   return setting_modelviewskin_;
 }
- void MeshModel::set_setting_modelviewskin(::google::protobuf::int32 value) {
+void MeshModel::set_setting_modelviewskin(::google::protobuf::int32 value) {
   set_has_setting_modelviewskin();
   setting_modelviewskin_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_ModelViewSkin)
@@ -4341,7 +4398,8 @@ void MeshModel::clear_solidlightskin_materialcolor() {
 }
 const ::KuplungApp::Vec3& MeshModel::solidlightskin_materialcolor() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_MaterialColor)
-  return solidlightskin_materialcolor_ != NULL ? *solidlightskin_materialcolor_ : *default_instance_->solidlightskin_materialcolor_;
+  return solidlightskin_materialcolor_ != NULL ? *solidlightskin_materialcolor_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_materialcolor() {
   set_has_solidlightskin_materialcolor();
@@ -4385,7 +4443,8 @@ void MeshModel::clear_solidlightskin_ambient() {
 }
 const ::KuplungApp::Vec3& MeshModel::solidlightskin_ambient() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Ambient)
-  return solidlightskin_ambient_ != NULL ? *solidlightskin_ambient_ : *default_instance_->solidlightskin_ambient_;
+  return solidlightskin_ambient_ != NULL ? *solidlightskin_ambient_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_ambient() {
   set_has_solidlightskin_ambient();
@@ -4429,7 +4488,8 @@ void MeshModel::clear_solidlightskin_diffuse() {
 }
 const ::KuplungApp::Vec3& MeshModel::solidlightskin_diffuse() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Diffuse)
-  return solidlightskin_diffuse_ != NULL ? *solidlightskin_diffuse_ : *default_instance_->solidlightskin_diffuse_;
+  return solidlightskin_diffuse_ != NULL ? *solidlightskin_diffuse_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_diffuse() {
   set_has_solidlightskin_diffuse();
@@ -4473,7 +4533,8 @@ void MeshModel::clear_solidlightskin_specular() {
 }
 const ::KuplungApp::Vec3& MeshModel::solidlightskin_specular() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Specular)
-  return solidlightskin_specular_ != NULL ? *solidlightskin_specular_ : *default_instance_->solidlightskin_specular_;
+  return solidlightskin_specular_ != NULL ? *solidlightskin_specular_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_solidlightskin_specular() {
   set_has_solidlightskin_specular();
@@ -4515,11 +4576,11 @@ void MeshModel::clear_solidlightskin_ambient_strength() {
   solidlightskin_ambient_strength_ = 0;
   clear_has_solidlightskin_ambient_strength();
 }
- float MeshModel::solidlightskin_ambient_strength() const {
+float MeshModel::solidlightskin_ambient_strength() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Ambient_Strength)
   return solidlightskin_ambient_strength_;
 }
- void MeshModel::set_solidlightskin_ambient_strength(float value) {
+void MeshModel::set_solidlightskin_ambient_strength(float value) {
   set_has_solidlightskin_ambient_strength();
   solidlightskin_ambient_strength_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Ambient_Strength)
@@ -4539,11 +4600,11 @@ void MeshModel::clear_solidlightskin_diffuse_strength() {
   solidlightskin_diffuse_strength_ = 0;
   clear_has_solidlightskin_diffuse_strength();
 }
- float MeshModel::solidlightskin_diffuse_strength() const {
+float MeshModel::solidlightskin_diffuse_strength() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Diffuse_Strength)
   return solidlightskin_diffuse_strength_;
 }
- void MeshModel::set_solidlightskin_diffuse_strength(float value) {
+void MeshModel::set_solidlightskin_diffuse_strength(float value) {
   set_has_solidlightskin_diffuse_strength();
   solidlightskin_diffuse_strength_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Diffuse_Strength)
@@ -4563,11 +4624,11 @@ void MeshModel::clear_solidlightskin_specular_strength() {
   solidlightskin_specular_strength_ = 0;
   clear_has_solidlightskin_specular_strength();
 }
- float MeshModel::solidlightskin_specular_strength() const {
+float MeshModel::solidlightskin_specular_strength() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.solidLightSkin_Specular_Strength)
   return solidlightskin_specular_strength_;
 }
- void MeshModel::set_solidlightskin_specular_strength(float value) {
+void MeshModel::set_solidlightskin_specular_strength(float value) {
   set_has_solidlightskin_specular_strength();
   solidlightskin_specular_strength_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.solidLightSkin_Specular_Strength)
@@ -4589,7 +4650,8 @@ void MeshModel::clear_setting_lightposition() {
 }
 const ::KuplungApp::Vec3& MeshModel::setting_lightposition() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightPosition)
-  return setting_lightposition_ != NULL ? *setting_lightposition_ : *default_instance_->setting_lightposition_;
+  return setting_lightposition_ != NULL ? *setting_lightposition_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_setting_lightposition() {
   set_has_setting_lightposition();
@@ -4633,7 +4695,8 @@ void MeshModel::clear_setting_lightdirection() {
 }
 const ::KuplungApp::Vec3& MeshModel::setting_lightdirection() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightDirection)
-  return setting_lightdirection_ != NULL ? *setting_lightdirection_ : *default_instance_->setting_lightdirection_;
+  return setting_lightdirection_ != NULL ? *setting_lightdirection_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_setting_lightdirection() {
   set_has_setting_lightdirection();
@@ -4677,7 +4740,8 @@ void MeshModel::clear_setting_lightambient() {
 }
 const ::KuplungApp::Vec3& MeshModel::setting_lightambient() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightAmbient)
-  return setting_lightambient_ != NULL ? *setting_lightambient_ : *default_instance_->setting_lightambient_;
+  return setting_lightambient_ != NULL ? *setting_lightambient_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_setting_lightambient() {
   set_has_setting_lightambient();
@@ -4721,7 +4785,8 @@ void MeshModel::clear_setting_lightdiffuse() {
 }
 const ::KuplungApp::Vec3& MeshModel::setting_lightdiffuse() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightDiffuse)
-  return setting_lightdiffuse_ != NULL ? *setting_lightdiffuse_ : *default_instance_->setting_lightdiffuse_;
+  return setting_lightdiffuse_ != NULL ? *setting_lightdiffuse_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_setting_lightdiffuse() {
   set_has_setting_lightdiffuse();
@@ -4765,7 +4830,8 @@ void MeshModel::clear_setting_lightspecular() {
 }
 const ::KuplungApp::Vec3& MeshModel::setting_lightspecular() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightSpecular)
-  return setting_lightspecular_ != NULL ? *setting_lightspecular_ : *default_instance_->setting_lightspecular_;
+  return setting_lightspecular_ != NULL ? *setting_lightspecular_
+                         : *::KuplungApp::Vec3::internal_default_instance();
 }
 ::KuplungApp::Vec3* MeshModel::mutable_setting_lightspecular() {
   set_has_setting_lightspecular();
@@ -4807,11 +4873,11 @@ void MeshModel::clear_setting_lightstrengthambient() {
   setting_lightstrengthambient_ = 0;
   clear_has_setting_lightstrengthambient();
 }
- float MeshModel::setting_lightstrengthambient() const {
+float MeshModel::setting_lightstrengthambient() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthAmbient)
   return setting_lightstrengthambient_;
 }
- void MeshModel::set_setting_lightstrengthambient(float value) {
+void MeshModel::set_setting_lightstrengthambient(float value) {
   set_has_setting_lightstrengthambient();
   setting_lightstrengthambient_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthAmbient)
@@ -4831,11 +4897,11 @@ void MeshModel::clear_setting_lightstrengthdiffuse() {
   setting_lightstrengthdiffuse_ = 0;
   clear_has_setting_lightstrengthdiffuse();
 }
- float MeshModel::setting_lightstrengthdiffuse() const {
+float MeshModel::setting_lightstrengthdiffuse() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthDiffuse)
   return setting_lightstrengthdiffuse_;
 }
- void MeshModel::set_setting_lightstrengthdiffuse(float value) {
+void MeshModel::set_setting_lightstrengthdiffuse(float value) {
   set_has_setting_lightstrengthdiffuse();
   setting_lightstrengthdiffuse_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthDiffuse)
@@ -4855,11 +4921,11 @@ void MeshModel::clear_setting_lightstrengthspecular() {
   setting_lightstrengthspecular_ = 0;
   clear_has_setting_lightstrengthspecular();
 }
- float MeshModel::setting_lightstrengthspecular() const {
+float MeshModel::setting_lightstrengthspecular() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightStrengthSpecular)
   return setting_lightstrengthspecular_;
 }
- void MeshModel::set_setting_lightstrengthspecular(float value) {
+void MeshModel::set_setting_lightstrengthspecular(float value) {
   set_has_setting_lightstrengthspecular();
   setting_lightstrengthspecular_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightStrengthSpecular)
@@ -4879,11 +4945,11 @@ void MeshModel::clear_materialilluminationmodel() {
   materialilluminationmodel_ = 0;
   clear_has_materialilluminationmodel();
 }
- ::google::protobuf::int32 MeshModel::materialilluminationmodel() const {
+::google::protobuf::int32 MeshModel::materialilluminationmodel() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialIlluminationModel)
   return materialilluminationmodel_;
 }
- void MeshModel::set_materialilluminationmodel(::google::protobuf::int32 value) {
+void MeshModel::set_materialilluminationmodel(::google::protobuf::int32 value) {
   set_has_materialilluminationmodel();
   materialilluminationmodel_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.materialIlluminationModel)
@@ -4905,7 +4971,8 @@ void MeshModel::clear_displacementheightscale() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::displacementheightscale() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.displacementHeightScale)
-  return displacementheightscale_ != NULL ? *displacementheightscale_ : *default_instance_->displacementheightscale_;
+  return displacementheightscale_ != NULL ? *displacementheightscale_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_displacementheightscale() {
   set_has_displacementheightscale();
@@ -4947,11 +5014,11 @@ void MeshModel::clear_showmaterialeditor() {
   showmaterialeditor_ = false;
   clear_has_showmaterialeditor();
 }
- bool MeshModel::showmaterialeditor() const {
+bool MeshModel::showmaterialeditor() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.showMaterialEditor)
   return showmaterialeditor_;
 }
- void MeshModel::set_showmaterialeditor(bool value) {
+void MeshModel::set_showmaterialeditor(bool value) {
   set_has_showmaterialeditor();
   showmaterialeditor_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.showMaterialEditor)
@@ -4973,7 +5040,8 @@ void MeshModel::clear_materialambient() {
 }
 const ::KuplungApp::MaterialColor& MeshModel::materialambient() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialAmbient)
-  return materialambient_ != NULL ? *materialambient_ : *default_instance_->materialambient_;
+  return materialambient_ != NULL ? *materialambient_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
 }
 ::KuplungApp::MaterialColor* MeshModel::mutable_materialambient() {
   set_has_materialambient();
@@ -5017,7 +5085,8 @@ void MeshModel::clear_materialdiffuse() {
 }
 const ::KuplungApp::MaterialColor& MeshModel::materialdiffuse() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialDiffuse)
-  return materialdiffuse_ != NULL ? *materialdiffuse_ : *default_instance_->materialdiffuse_;
+  return materialdiffuse_ != NULL ? *materialdiffuse_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
 }
 ::KuplungApp::MaterialColor* MeshModel::mutable_materialdiffuse() {
   set_has_materialdiffuse();
@@ -5061,7 +5130,8 @@ void MeshModel::clear_materialspecular() {
 }
 const ::KuplungApp::MaterialColor& MeshModel::materialspecular() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialSpecular)
-  return materialspecular_ != NULL ? *materialspecular_ : *default_instance_->materialspecular_;
+  return materialspecular_ != NULL ? *materialspecular_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
 }
 ::KuplungApp::MaterialColor* MeshModel::mutable_materialspecular() {
   set_has_materialspecular();
@@ -5105,7 +5175,8 @@ void MeshModel::clear_materialemission() {
 }
 const ::KuplungApp::MaterialColor& MeshModel::materialemission() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.materialEmission)
-  return materialemission_ != NULL ? *materialemission_ : *default_instance_->materialemission_;
+  return materialemission_ != NULL ? *materialemission_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
 }
 ::KuplungApp::MaterialColor* MeshModel::mutable_materialemission() {
   set_has_materialemission();
@@ -5147,11 +5218,11 @@ void MeshModel::clear_setting_parallaxmapping() {
   setting_parallaxmapping_ = false;
   clear_has_setting_parallaxmapping();
 }
- bool MeshModel::setting_parallaxmapping() const {
+bool MeshModel::setting_parallaxmapping() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_ParallaxMapping)
   return setting_parallaxmapping_;
 }
- void MeshModel::set_setting_parallaxmapping(bool value) {
+void MeshModel::set_setting_parallaxmapping(bool value) {
   set_has_setting_parallaxmapping();
   setting_parallaxmapping_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_ParallaxMapping)
@@ -5171,11 +5242,11 @@ void MeshModel::clear_effect_gblur_mode() {
   effect_gblur_mode_ = 0;
   clear_has_effect_gblur_mode();
 }
- ::google::protobuf::int32 MeshModel::effect_gblur_mode() const {
+::google::protobuf::int32 MeshModel::effect_gblur_mode() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Mode)
   return effect_gblur_mode_;
 }
- void MeshModel::set_effect_gblur_mode(::google::protobuf::int32 value) {
+void MeshModel::set_effect_gblur_mode(::google::protobuf::int32 value) {
   set_has_effect_gblur_mode();
   effect_gblur_mode_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_GBlur_Mode)
@@ -5197,7 +5268,8 @@ void MeshModel::clear_effect_gblur_radius() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::effect_gblur_radius() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Radius)
-  return effect_gblur_radius_ != NULL ? *effect_gblur_radius_ : *default_instance_->effect_gblur_radius_;
+  return effect_gblur_radius_ != NULL ? *effect_gblur_radius_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_effect_gblur_radius() {
   set_has_effect_gblur_radius();
@@ -5241,7 +5313,8 @@ void MeshModel::clear_effect_gblur_width() {
 }
 const ::KuplungApp::ObjectCoordinate& MeshModel::effect_gblur_width() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_GBlur_Width)
-  return effect_gblur_width_ != NULL ? *effect_gblur_width_ : *default_instance_->effect_gblur_width_;
+  return effect_gblur_width_ != NULL ? *effect_gblur_width_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
 }
 ::KuplungApp::ObjectCoordinate* MeshModel::mutable_effect_gblur_width() {
   set_has_effect_gblur_width();
@@ -5283,11 +5356,11 @@ void MeshModel::clear_effect_bloom_dobloom() {
   effect_bloom_dobloom_ = false;
   clear_has_effect_bloom_dobloom();
 }
- bool MeshModel::effect_bloom_dobloom() const {
+bool MeshModel::effect_bloom_dobloom() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_doBloom)
   return effect_bloom_dobloom_;
 }
- void MeshModel::set_effect_bloom_dobloom(bool value) {
+void MeshModel::set_effect_bloom_dobloom(bool value) {
   set_has_effect_bloom_dobloom();
   effect_bloom_dobloom_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_doBloom)
@@ -5307,11 +5380,11 @@ void MeshModel::clear_effect_bloom_weighta() {
   effect_bloom_weighta_ = 0;
   clear_has_effect_bloom_weighta();
 }
- float MeshModel::effect_bloom_weighta() const {
+float MeshModel::effect_bloom_weighta() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightA)
   return effect_bloom_weighta_;
 }
- void MeshModel::set_effect_bloom_weighta(float value) {
+void MeshModel::set_effect_bloom_weighta(float value) {
   set_has_effect_bloom_weighta();
   effect_bloom_weighta_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightA)
@@ -5331,11 +5404,11 @@ void MeshModel::clear_effect_bloom_weightb() {
   effect_bloom_weightb_ = 0;
   clear_has_effect_bloom_weightb();
 }
- float MeshModel::effect_bloom_weightb() const {
+float MeshModel::effect_bloom_weightb() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightB)
   return effect_bloom_weightb_;
 }
- void MeshModel::set_effect_bloom_weightb(float value) {
+void MeshModel::set_effect_bloom_weightb(float value) {
   set_has_effect_bloom_weightb();
   effect_bloom_weightb_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightB)
@@ -5355,11 +5428,11 @@ void MeshModel::clear_effect_bloom_weightc() {
   effect_bloom_weightc_ = 0;
   clear_has_effect_bloom_weightc();
 }
- float MeshModel::effect_bloom_weightc() const {
+float MeshModel::effect_bloom_weightc() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightC)
   return effect_bloom_weightc_;
 }
- void MeshModel::set_effect_bloom_weightc(float value) {
+void MeshModel::set_effect_bloom_weightc(float value) {
   set_has_effect_bloom_weightc();
   effect_bloom_weightc_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightC)
@@ -5379,11 +5452,11 @@ void MeshModel::clear_effect_bloom_weightd() {
   effect_bloom_weightd_ = 0;
   clear_has_effect_bloom_weightd();
 }
- float MeshModel::effect_bloom_weightd() const {
+float MeshModel::effect_bloom_weightd() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_WeightD)
   return effect_bloom_weightd_;
 }
- void MeshModel::set_effect_bloom_weightd(float value) {
+void MeshModel::set_effect_bloom_weightd(float value) {
   set_has_effect_bloom_weightd();
   effect_bloom_weightd_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_WeightD)
@@ -5403,11 +5476,11 @@ void MeshModel::clear_effect_bloom_vignette() {
   effect_bloom_vignette_ = 0;
   clear_has_effect_bloom_vignette();
 }
- float MeshModel::effect_bloom_vignette() const {
+float MeshModel::effect_bloom_vignette() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_Vignette)
   return effect_bloom_vignette_;
 }
- void MeshModel::set_effect_bloom_vignette(float value) {
+void MeshModel::set_effect_bloom_vignette(float value) {
   set_has_effect_bloom_vignette();
   effect_bloom_vignette_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_Vignette)
@@ -5427,11 +5500,11 @@ void MeshModel::clear_effect_bloom_vignetteatt() {
   effect_bloom_vignetteatt_ = 0;
   clear_has_effect_bloom_vignetteatt();
 }
- float MeshModel::effect_bloom_vignetteatt() const {
+float MeshModel::effect_bloom_vignetteatt() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Effect_Bloom_VignetteAtt)
   return effect_bloom_vignetteatt_;
 }
- void MeshModel::set_effect_bloom_vignetteatt(float value) {
+void MeshModel::set_effect_bloom_vignetteatt(float value) {
   set_has_effect_bloom_vignetteatt();
   effect_bloom_vignetteatt_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Effect_Bloom_VignetteAtt)
@@ -5451,11 +5524,11 @@ void MeshModel::clear_setting_lightingpass_drawmode() {
   setting_lightingpass_drawmode_ = 0;
   clear_has_setting_lightingpass_drawmode();
 }
- ::google::protobuf::int32 MeshModel::setting_lightingpass_drawmode() const {
+::google::protobuf::int32 MeshModel::setting_lightingpass_drawmode() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.Setting_LightingPass_DrawMode)
   return setting_lightingpass_drawmode_;
 }
- void MeshModel::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
+void MeshModel::set_setting_lightingpass_drawmode(::google::protobuf::int32 value) {
   set_has_setting_lightingpass_drawmode();
   setting_lightingpass_drawmode_ = value;
   // @@protoc_insertion_point(field_set:KuplungApp.MeshModel.Setting_LightingPass_DrawMode)
@@ -5477,7 +5550,8 @@ void MeshModel::clear_meshobject() {
 }
 const ::KuplungApp::Mesh& MeshModel::meshobject() const {
   // @@protoc_insertion_point(field_get:KuplungApp.MeshModel.meshObject)
-  return meshobject_ != NULL ? *meshobject_ : *default_instance_->meshobject_;
+  return meshobject_ != NULL ? *meshobject_
+                         : *::KuplungApp::Mesh::internal_default_instance();
 }
 ::KuplungApp::Mesh* MeshModel::mutable_meshobject() {
   set_has_meshobject();
@@ -5505,6 +5579,9 @@ void MeshModel::set_allocated_meshobject(::KuplungApp::Mesh* meshobject) {
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.MeshModel.meshObject)
 }
 
+inline const MeshModel* MeshModel::internal_default_instance() {
+  return &MeshModel_default_instance_.get();
+}
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // @@protoc_insertion_point(namespace_scope)

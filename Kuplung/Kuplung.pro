@@ -73,8 +73,8 @@ mac {
     LIBS += -L/usr/local/Cellar/assimp/3.3.1/lib -lAssimp
     INCLUDEPATH += /usr/local/Cellar/assimp/3.3.1/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.0.2/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.0.2/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.1.0/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.1.0/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.1/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.1/include
