@@ -27,6 +27,7 @@ private:
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboTextureNoise;
+    GLuint glVS_screenResolution;
     GLuint glAttributeVertexPosition, glFS_deltaRunningTime, glFS_noiseTextureSampler, glFS_screenResolution, glFS_mouseCoordinates;
 
 private:

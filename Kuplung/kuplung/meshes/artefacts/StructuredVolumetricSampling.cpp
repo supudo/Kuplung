@@ -68,6 +68,8 @@ bool StructuredVolumetricSampling::initShaderProgram() {
     else {
         this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
 
+        this->glVS_screenResolution = this->glUtils->glGetUniform(this->shaderProgram, "vs_screenResolution");
+
         this->glFS_deltaRunningTime = this->glUtils->glGetUniform(this->shaderProgram, "fs_deltaRunningTime");
         this->glFS_noiseTextureSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_noiseTextureSampler");
         this->glFS_screenResolution = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResolution");
@@ -149,6 +151,7 @@ void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds)
         glActiveTexture(GL_TEXTURE0);
         glUniform1i(this->glFS_noiseTextureSampler, 0);
 
+        glUniform2f(this->glVS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glUniform1f(this->glFS_deltaRunningTime, seconds);
         glUniform3f(this->glFS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0.0f);
         glUniform4f(this->glFS_mouseCoordinates, float(mouseX), float(mouseY), 0.0f, 0.0f);

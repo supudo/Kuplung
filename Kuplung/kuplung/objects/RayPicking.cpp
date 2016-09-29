@@ -127,6 +127,7 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
             if (this->testRaySphereIntersection(j, mmf, vFrom, vTo, v, mtx, managerObjects->Setting_VertexSphere_Radius)) {
                 managerObjects->VertexEditorModeID = j;
                 managerObjects->VertexEditorMode = v;
+                break;
             }
         }
     }

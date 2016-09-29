@@ -8,6 +8,7 @@ uniform float fs_deltaRunningTime;
 uniform vec4 fs_mouseCoordinates;
 uniform sampler2D fs_noiseTextureSampler;
 
+in vec4 glFragCoord;
 out vec4 fragColor;
 
 #define SAMPLE_COUNT 32
@@ -220,8 +221,6 @@ void mainImage(out vec4 frag_Color, in vec2 fragCoord) {
 
 void main(void) {
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);
-    mainImage(color, fragColor.xy);
-    color.w = 1.0;
-//    fragColor = color;
-//    fragColor = texture(fs_noiseTextureSampler, fs_textureCoord.xy);
+    mainImage(color, glFragCoord.xy);
+    fragColor = color;
 }

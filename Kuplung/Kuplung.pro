@@ -4,17 +4,19 @@ CONFIG += c++14
 CONFIG += app_bundle
 CONFIG -= console
 CONFIG -= qt
+#CONFIG += sanitizer sanitize_address
 
 CONFIG(debug, debug|release) {
-  TARGET = kuplung
-  OBJECTS_DIR = debug
-  MOC_DIR = debug
+    TARGET = kuplung
+    OBJECTS_DIR = debug
+    MOC_DIR = debug
+#    QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
 }
 
 CONFIG(release, debug|release) {
-  TARGET = kuplung
-  OBJECTS_DIR = release
-  MOC_DIR = release
+    TARGET = kuplung
+    OBJECTS_DIR = release
+    MOC_DIR = release
 }
 
 mac {

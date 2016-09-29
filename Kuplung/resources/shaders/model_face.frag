@@ -83,7 +83,7 @@ void main(void) {
                 lightsSpot = calculateLightSpot(fragmentPosition, fragmentNormal, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
 
             // Refraction
-            vec3 processedColorRefraction = (material.emission + lightsDirectional + lightsPoint + lightsSpot + fs_UIAmbient);
+            vec3 processedColorRefraction = (material.emission + lightsDirectional) + (lightsPoint + lightsSpot) + fs_UIAmbient;
             if (effect_GBlur.gauss_mode > -1) {
                 // effects - gaussian blur
                 vec4 effect_GBlur_Color = effect_gaussian_blur();
