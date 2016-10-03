@@ -157,6 +157,7 @@ void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds)
         glEnable(GL_TEXTURE_2D);
 
         glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->vboTextureNoise);
         glUniform1i(this->glFS_noiseTextureSampler, 0);
 
         glUniform2f(this->glVS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
@@ -173,7 +174,7 @@ void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds)
     }
 }
 
-void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, int windowWidth, int windowHeight, GLuint* vboTexture) {
+void StructuredVolumetricSampling::initFBO(int windowWidth, int windowHeight, GLuint* vboTexture) {
     glGenTextures(1, vboTexture);
     glBindTexture(GL_TEXTURE_2D, *vboTexture);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -184,52 +185,31 @@ void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, windowWidth, windowHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindTexture(GL_TEXTURE_2D, 0);
 
-    GLuint rboId;
-    glGenRenderbuffers(1, &rboId);
-    glBindRenderbuffer(GL_RENDERBUFFER, rboId);
+    glGenRenderbuffers(1, &this->tRBO);
+    glBindRenderbuffer(GL_RENDERBUFFER, this->tRBO);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, windowWidth, windowHeight);
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
 
-    GLuint fboId;
-    glGenFramebuffers(1, &fboId);
-    glBindFramebuffer(GL_FRAMEBUFFER, fboId);
+    glGenFramebuffers(1, &this->tFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
 
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, *vboTexture, 0);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboId);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->tRBO);
 
     GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE)
         Settings::Instance()->funcDoLog("[SVS] - Error creating FBO! - " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
 
-    glBindFramebuffer(GL_FRAMEBUFFER, fboId);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture) {
+    glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (this->glVAO > 0) {
-        glUseProgram(this->shaderProgram);
-
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-        glEnable(GL_TEXTURE_2D);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, this->vboTextureNoise);
-        glUniform1i(this->glFS_noiseTextureSampler, 0);
-
-        glUniform2f(this->glVS_screenResolution, windowWidth, windowHeight);
-        glUniform1f(this->glFS_deltaRunningTime, seconds);
-        glUniform3f(this->glFS_screenResolution, windowWidth, windowHeight, 0.0f);
-        glUniform4f(this->glFS_mouseCoordinates, float(mouseX), float(mouseY), 0.0f, 0.0f);
-
-        // draw
-        glBindVertexArray(this->glVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
-        glBindVertexArray(0);
-
-        glUseProgram(0);
-    }
+    this->render(mouseX, mouseY, seconds);
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
     glBindTexture(GL_TEXTURE_2D, *vboTexture);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
