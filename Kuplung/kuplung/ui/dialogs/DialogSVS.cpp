@@ -25,6 +25,13 @@ void DialogSVS::render(bool* p_opened) {
     this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
     this->textureHeight = this->windowHeight - this->viewPaddingVertical;
 
+    this->structured_Volumetric_Sampling->renderToTexture(
+            ImGui::GetIO().MousePos.x,
+            ImGui::GetIO().MousePos.y,
+            (SDL_GetTicks() / 1000.0f),
+            &this->vboTexture
+    );
+
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
     ImVec2 offset = ImGui::GetCursorScreenPos() - this->scrolling;
 
@@ -46,4 +53,13 @@ void DialogSVS::init() {
     this->viewPaddingVertical = 40.0f;
     this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
     this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+
+    this->structured_Volumetric_Sampling = std::make_unique<StructuredVolumetricSampling>();
+    this->structured_Volumetric_Sampling->init();
+    this->structured_Volumetric_Sampling->initShaderProgram();
+    this->structured_Volumetric_Sampling->initBuffers();
+    this->structured_Volumetric_Sampling->initFBO(
+                Settings::Instance()->SDL_Window_Width,
+                Settings::Instance()->SDL_Window_Height,
+                &this->vboTexture);
 }

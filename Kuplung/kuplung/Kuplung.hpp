@@ -25,7 +25,6 @@
 #include "kuplung/utilities/export/Exporter.hpp"
 #include "kuplung/utilities/renderers/ImageRenderer.hpp"
 #include "kuplung/utilities/saveopen/SaveOpen.hpp"
-#include "kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp"
 
 class Kuplung {
 public:
@@ -97,8 +96,6 @@ private:
     std::vector<MeshModel> meshModels, meshModelsNew;
     std::vector<ModelFaceBase*> meshModelFaces;
     std::vector<RayLine*> rayLines;
-
-    std::unique_ptr<StructuredVolumetricSampling> structured_Volumetric_Sampling;
 };
 
 #endif /* Kuplung_hpp */

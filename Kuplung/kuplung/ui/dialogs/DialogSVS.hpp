@@ -11,6 +11,7 @@
 
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/ImGui/imgui.h"
+#include "kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp"
 
 class DialogSVS {
 public:
@@ -24,6 +25,8 @@ public:
 private:
     int textureWidth, textureHeight;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
+
+    std::unique_ptr<StructuredVolumetricSampling> structured_Volumetric_Sampling;
 };
 
 #endif /* DialogSVS_hpp */
