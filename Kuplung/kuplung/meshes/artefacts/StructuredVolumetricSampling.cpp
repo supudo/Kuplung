@@ -203,14 +203,20 @@ void StructuredVolumetricSampling::initFBO(int windowWidth, int windowHeight, GL
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture) {
+void StructuredVolumetricSampling::bindFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
 
-    this->render(mouseX, mouseY, seconds);
-
+void StructuredVolumetricSampling::unbindFBO(GLuint* vboTexture) {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
     glBindTexture(GL_TEXTURE_2D, *vboTexture);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture) {
+    this->bindFBO();
+    this->render(mouseX, mouseY, seconds);
+    this->unbindFBO(vboTexture);
 }

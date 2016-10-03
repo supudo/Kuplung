@@ -33,6 +33,8 @@ private:
     GLuint glVS_screenResolution;
     GLuint glAttributeVertexPosition, glFS_deltaRunningTime, glFS_noiseTextureSampler, glFS_screenResolution, glFS_mouseCoordinates;
 
+    void bindFBO();
+    void unbindFBO(GLuint* vboTexture);
     GLuint tFBO, tRBO, tRenderedTexture;
 };
 
