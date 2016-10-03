@@ -1,0 +1,88 @@
+--------------------------------------------------------------------------------------
+
+Audio track:
+	1. mzk03.mp3 (JosSs - [Omega Sound] X`TrackTure)
+was made by Jose Manuel Perez (https://soundcloud.com/josss-1 , https://www.facebook.com/MusicByJosSs).
+If you would like to use this track please ask the author about permission: josss.sectoromega@gmail.com
+
+--------------------------------------------------------------------------------------
+
+Audio tracks:
+	1. mzk00.mp3 (stage7 - Electronebulae)
+	2. mzk02.mp3 (stage7/Sonika - 8-bit mentality)
+ware made by Juan Alberto "stage7" Martínez (http://stg7.net/) and are licensed under 
+Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+(http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US).
+
+--------------------------------------------------------------------------------------
+
+Files:
+	1. webcamBig.png
+	2. tex10.png
+	3. tex11.png
+	4. tex12.png
+	5. tex12_orig.png
+	6. tex14.png
+	7. tex15.png
+	8. tex16.png
+comes from Shadertoy.com by Beautypi (Inigo Quilez and Pol Jeremias, http://www.beautypi.com/)
+and are licensed under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
+(http://creativecommons.org/licenses/by-nc-sa/3.0/deed.en_US).
+
+--------------------------------------------------------------------------------------
+Files:
+	1. cube05_5.png
+	2. cube00_0.jpg
+	3. cube00_1.jpg
+	4. cube00_2.jpg
+	5. cube00_3.jpg
+	6. cube00_4.jpg
+	7. cube00_5.jpg
+	8. cube01_0.png
+	9. cube01_1.png
+	10. cube01_2.png
+	11. cube01_3.png
+	12. cube01_4.png
+	13. cube01_5.png
+	14. cube02_0.jpg
+	15. cube02_1.jpg
+	16. cube02_2.jpg
+	17. cube02_3.jpg
+	18. cube02_4.jpg
+	19. cube02_5.jpg
+	20. cube03_0.png
+	21. cube03_1.png
+	22. cube03_2.png
+	23. cube03_3.png
+	24. cube03_4.png
+	25. cube03_5.png
+	26. cube04_0.png
+	27. cube04_1.png
+	28. cube04_2.png
+	29. cube04_3.png
+	30. cube04_4.png
+	31. cube04_5.png
+	32. cube05_0.png
+	33. cube05_1.png
+	34. cube05_2.png
+	35. cube05_3.png
+	36. cube05_4.png
+ware made by Paul Debevec and comes from: http://www.pauldebevec.com/Probes
+If want to use them, please let Paul know about it: paul@debevec.org.
+
+--------------------------------------------------------------------------------------
+
+Files:
+	1. tex09.jpg
+	2. tex00.jpg
+	3. tex01.jpg
+	4. tex02.jpg
+	5. tex03.jpg
+	6. tex04.jpg
+	7. tex05.jpg
+	8. tex06.jpg
+	9. tex07.jpg
+	10. tex08.jpg
+have uknown source. I downloaded them from Shadertoy.com. Creators of Shadertoy
+also don't know the authors of these files. If you are the author of one of them please 
+let me know if I can use them and under which license: synthclipse (at) gmail (dot) com 

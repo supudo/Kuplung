@@ -47,6 +47,7 @@ mac {
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
+    MediaFiles.files += resources/shadertoy
     MediaFiles.files += resources/shapes
     MediaFiles.files += resources/skybox
     MediaFiles.files += resources/axis_helpers
@@ -131,6 +132,7 @@ SOURCES += main.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.cpp \
+    kuplung/meshes/artefacts/Shadertoy.cpp \
     kuplung/meshes/helpers/MiniAxis.cpp \
     kuplung/meshes/helpers/AxisHelpers.cpp \
     kuplung/meshes/helpers/WorldGrid.cpp \
@@ -170,6 +172,7 @@ SOURCES += main.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
     kuplung/ui/dialogs/DialogControlsModels.cpp \
     kuplung/ui/dialogs/DialogSVS.cpp \
+    kuplung/ui/dialogs/DialogShadertoy.cpp \
     kuplung/pcg/HeightmapGenerator.cpp \
     kuplung/pcg/SpaceshipMeshGenerator.cpp \
     kuplung/pcg/VoronoiGenerator.cpp \
@@ -212,6 +215,7 @@ HEADERS += \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp \
+    kuplung/meshes/artefacts/Shadertoy.hpp \
     kuplung/meshes/helpers/MiniAxis.hpp \
     kuplung/meshes/helpers/AxisHelpers.hpp \
     kuplung/meshes/helpers/WorldGrid.hpp \
@@ -255,6 +259,7 @@ HEADERS += \
     kuplung/ui/dialogs/DialogControlsGUI.hpp \
     kuplung/ui/dialogs/DialogControlsModels.hpp \
     kuplung/ui/dialogs/DialogSVS.hpp \
+    kuplung/ui/dialogs/DialogShadertoy.hpp \
     kuplung/ui/iconfonts/IconsFontAwesome.h \
     kuplung/ui/iconfonts/IconsMaterialDesign.h \
     kuplung/pcg/HeightmapGenerator.hpp \
@@ -295,11 +300,14 @@ HEADERS += \
     kuplung/utilities/saveopen/KuplungAppScene.pb.h
 
 DISTFILES += \
+# Fonts
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \
+# .proto files
     resources/protobuf/KuplungDefinitions.proto \
     resources/protobuf/KuplungAppSettings.proto \
     resources/protobuf/KuplungAppScene.proto \
+# Axis objects
     resources/axis_helpers/x_minus.obj \
     resources/axis_helpers/x_minus.mtl \
     resources/axis_helpers/x_plus.obj \
@@ -312,6 +320,7 @@ DISTFILES += \
     resources/axis_helpers/z_minus.mtl \
     resources/axis_helpers/z_plus.obj \
     resources/axis_helpers/z_plus.mtl \
+# Shapes
     resources/shapes/cone.mtl \
     resources/shapes/cone.obj \
     resources/shapes/cube.mtl \
@@ -334,6 +343,7 @@ DISTFILES += \
     resources/shapes/tube.obj \
     resources/shapes/uv_sphere.mtl \
     resources/shapes/uv_sphere.obj \
+# Shaders
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
     resources/shaders/axis_helpers.vert \
@@ -381,8 +391,10 @@ DISTFILES += \
     resources/shaders/bounding_box.frag \
     resources/shaders/vertex_sphere.vert \
     resources/shaders/vertex_sphere.frag \
+    resources/shaders/shadertoy.vert \
     resources/shaders/structured_vol_sampling.vert \
     resources/shaders/structured_vol_sampling.frag \
+# Cube textures
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \
     resources/skybox/fire_planet_front.jpg \
@@ -400,4 +412,64 @@ DISTFILES += \
     resources/skybox/stormydays_top.jpg \
     resources/skybox/stormydays_bottom.jpg \
     resources/skybox/stormydays_back.jpg \
-    resources/skybox/stormydays_front.jpg
+    resources/skybox/stormydays_front.jpg \
+# ShaderToy resources
+    resources/shadertoy/LICENSE.txt \
+    resources/shadertoy/cube00_0.jpg \
+    resources/shadertoy/cube00_1.jpg \
+    resources/shadertoy/cube00_2.jpg \
+    resources/shadertoy/cube00_3.jpg \
+    resources/shadertoy/cube00_4.jpg \
+    resources/shadertoy/cube00_5.jpg \
+    resources/shadertoy/cube01_0.png \
+    resources/shadertoy/cube01_1.png \
+    resources/shadertoy/cube01_2.png \
+    resources/shadertoy/cube01_3.png \
+    resources/shadertoy/cube01_4.png \
+    resources/shadertoy/cube01_5.png \
+    resources/shadertoy/cube02_0.jpg \
+    resources/shadertoy/cube02_1.jpg \
+    resources/shadertoy/cube02_2.jpg \
+    resources/shadertoy/cube02_3.jpg \
+    resources/shadertoy/cube02_4.jpg \
+    resources/shadertoy/cube02_5.jpg \
+    resources/shadertoy/cube03_0.png \
+    resources/shadertoy/cube03_1.png \
+    resources/shadertoy/cube03_2.png \
+    resources/shadertoy/cube03_3.png \
+    resources/shadertoy/cube03_4.png \
+    resources/shadertoy/cube03_5.png \
+    resources/shadertoy/cube04_0.png \
+    resources/shadertoy/cube04_1.png \
+    resources/shadertoy/cube04_2.png \
+    resources/shadertoy/cube04_3.png \
+    resources/shadertoy/cube04_4.png \
+    resources/shadertoy/cube04_5.png \
+    resources/shadertoy/cube05_0.png \
+    resources/shadertoy/cube05_1.png \
+    resources/shadertoy/cube05_2.png \
+    resources/shadertoy/cube05_3.png \
+    resources/shadertoy/cube05_4.png \
+    resources/shadertoy/cube05_5.png \
+    resources/shadertoy/tex00.jpg \
+    resources/shadertoy/tex01.jpg \
+    resources/shadertoy/tex02.jpg \
+    resources/shadertoy/tex03.jpg \
+    resources/shadertoy/tex04.jpg \
+    resources/shadertoy/tex05.jpg \
+    resources/shadertoy/tex06.jpg \
+    resources/shadertoy/tex07.jpg \
+    resources/shadertoy/tex08.jpg \
+    resources/shadertoy/tex09.jpg \
+    resources/shadertoy/tex10.png \
+    resources/shadertoy/tex11.png \
+    resources/shadertoy/tex12.png \
+    resources/shadertoy/tex13.png \
+    resources/shadertoy/tex14.png \
+    resources/shadertoy/tex15.png \
+    resources/shadertoy/tex16.png \
+    resources/shadertoy/tex17.jpg \
+    resources/shadertoy/tex18.jpg \
+    resources/shadertoy/tex19.png \
+    resources/shadertoy/tex20.jpg \
+    resources/shadertoy/webcamBig.png

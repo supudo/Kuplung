@@ -79,6 +79,7 @@ void UI::init(SDL_Window *window,
     this->showRecentFileDoesntExists = false;
     this->showRecentFileImportedDoesntExists = false;
     this->showSVS = false;
+    this->showShadertoy = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -117,6 +118,9 @@ void UI::init(SDL_Window *window,
 
     this->componentSVS = std::make_unique<DialogSVS>();
     this->componentSVS->init();
+
+    this->componentShadertoy = std::make_unique<DialogShadertoy>();
+    this->componentShadertoy->init();
 }
 
 void UI::doLog(std::string const& message) {
@@ -268,6 +272,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
             ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
+            ImGui::MenuItem(ICON_FA_BICYCLE " Shadertoy", NULL, &this->showShadertoy);
             ImGui::Separator();
             ImGui::MenuItem(ICON_FA_COG " Options", NULL, &this->showOptions);
             ImGui::EndMenu();
@@ -348,6 +353,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showImageSave)
         this->dialogFileSave(FileSaverOperation_Renderer);
+
+    if (this->showShadertoy)
+        this->dialogShadertoy();
 
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
@@ -608,6 +616,10 @@ void UI::dialogControlsGUI() {
 
 void UI::dialogControlsModels(int * sceneSelectedModelObject) {
     this->controlsModels->render(&this->showControlsModels, &this->isFrame, this->meshModelFaces, sceneSelectedModelObject);
+}
+
+void UI::dialogShadertoy() {
+    this->componentShadertoy->render(&this->showShadertoy);
 }
 
 void UI::dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type) {

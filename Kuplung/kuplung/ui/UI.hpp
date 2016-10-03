@@ -24,6 +24,7 @@
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
 #include "kuplung/ui/dialogs/DialogControlsModels.hpp"
 #include "kuplung/ui/dialogs/DialogSVS.hpp"
+#include "kuplung/ui/dialogs/DialogShadertoy.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
@@ -106,6 +107,7 @@ private:
     void dialogControlsGUI();
     void dialogControlsModels(int * sceneSelectedModelObject);
     void dialogFileSave(FileSaverOperation type);
+    void dialogShadertoy();
     void popupRecentFileDoesntExists();
     void popupRecentFileImportedDoesntExists();
 
@@ -120,6 +122,7 @@ private:
     DialogOptions *windowOptions;
     DialogControlsGUI *controlsGUI;
     DialogControlsModels *controlsModels;
+    std::unique_ptr<DialogShadertoy> componentShadertoy;
 
     bool needsFontChange;
 
@@ -141,6 +144,8 @@ private:
     bool showRenderer;
     bool showRecentFileDoesntExists;
     bool showRecentFileImportedDoesntExists;
+    bool showShadertoy;
+
 };
 
 #endif /* UI_hpp */
