@@ -212,7 +212,8 @@ void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float
         glEnable(GL_TEXTURE_2D);
 
         glActiveTexture(GL_TEXTURE0);
-        glUniform1i(this->glFS_noiseTextureSampler, this->vboTextureNoise);
+        glBindTexture(GL_TEXTURE_2D, this->vboTextureNoise);
+        glUniform1i(this->glFS_noiseTextureSampler, 0);
 
         glUniform2f(this->glVS_screenResolution, windowWidth, windowHeight);
         glUniform1f(this->glFS_deltaRunningTime, seconds);
