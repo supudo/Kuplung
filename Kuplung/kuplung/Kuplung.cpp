@@ -176,11 +176,10 @@ bool Kuplung::init() {
                     this->managerSaveOpen = std::make_unique<SaveOpen>();
                     this->managerSaveOpen->init();
 
-                    this->structured_Volumetric_Sampling = new StructuredVolumetricSampling();
+                    this->structured_Volumetric_Sampling = std::make_unique<StructuredVolumetricSampling>();
                     this->structured_Volumetric_Sampling->init();
                     this->structured_Volumetric_Sampling->initShaderProgram();
                     this->structured_Volumetric_Sampling->initBuffers();
-                    this->applicationStartTime = 0.0f;
                 }
             }
         }
@@ -366,13 +365,6 @@ void Kuplung::addSpaceshipModel() {
 }
 
 void Kuplung::renderScene() {
-    // structured volumetric samping
-//    this->structured_Volumetric_Sampling->render(
-//                this->managerControls->mousePosition.x,
-//                this->managerControls->mousePosition.y,
-//                (SDL_GetTicks() - this->applicationStartTime) / 1000.0f
-//                );
-
     switch (Settings::Instance()->RendererType) {
         case 2: {
             this->renderSceneModels();
@@ -388,6 +380,20 @@ void Kuplung::renderScene() {
 
     for (size_t i=0; i<this->rayLines.size(); i++) {
         this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
+    }
+
+    // structured volumetric samping
+    if (this->managerUI->showSVS) {
+        this->managerUI->componentSVS->render(&this->managerUI->showSVS);
+        this->structured_Volumetric_Sampling->renderToTexture(
+                this->managerControls->mousePosition.x,
+                this->managerControls->mousePosition.y,
+                (SDL_GetTicks() / 1000.0f),
+                this->managerUI->componentSVS->windowWidth,
+                this->managerUI->componentSVS->windowHeight,
+                &this->managerUI->componentSVS->vboTexture
+        );
+//        this->structured_Volumetric_Sampling->render(this->managerControls->mousePosition.x, this->managerControls->mousePosition.y, (SDL_GetTicks() / 1000.0f));
     }
 
     this->processRunningThreads();

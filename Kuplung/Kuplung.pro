@@ -169,6 +169,7 @@ SOURCES += main.cpp \
     kuplung/ui/dialogs/DialogOptions.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
     kuplung/ui/dialogs/DialogControlsModels.cpp \
+    kuplung/ui/dialogs/DialogSVS.cpp \
     kuplung/pcg/HeightmapGenerator.cpp \
     kuplung/pcg/SpaceshipMeshGenerator.cpp \
     kuplung/pcg/VoronoiGenerator.cpp \
@@ -253,6 +254,7 @@ HEADERS += \
     kuplung/ui/dialogs/DialogOptions.hpp \
     kuplung/ui/dialogs/DialogControlsGUI.hpp \
     kuplung/ui/dialogs/DialogControlsModels.hpp \
+    kuplung/ui/dialogs/DialogSVS.hpp \
     kuplung/ui/iconfonts/IconsFontAwesome.h \
     kuplung/ui/iconfonts/IconsMaterialDesign.h \
     kuplung/pcg/HeightmapGenerator.hpp \

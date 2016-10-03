@@ -78,6 +78,7 @@ void UI::init(SDL_Window *window,
     this->showRenderer = false;
     this->showRecentFileDoesntExists = false;
     this->showRecentFileImportedDoesntExists = false;
+    this->showSVS = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -113,6 +114,9 @@ void UI::init(SDL_Window *window,
 
     this->controlsModels = new DialogControlsModels(this->managerObjects);
     this->controlsModels->init(this->sdlWindow, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
+
+    this->componentSVS = std::make_unique<DialogSVS>();
+    this->componentSVS->init();
 }
 
 void UI::doLog(std::string const& message) {
@@ -263,6 +267,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 //            ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
             ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
+            ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
             ImGui::Separator();
             ImGui::MenuItem(ICON_FA_COG " Options", NULL, &this->showOptions);
             ImGui::EndMenu();

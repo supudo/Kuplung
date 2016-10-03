@@ -23,6 +23,7 @@
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
 #include "kuplung/ui/dialogs/DialogControlsModels.hpp"
+#include "kuplung/ui/dialogs/DialogSVS.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
@@ -70,6 +71,9 @@ public:
     bool showControlsModels;
     float parsingPercentage;
     std::vector<FBEntity> recentFiles, recentFilesImported;
+
+    std::unique_ptr<DialogSVS> componentSVS;
+    bool showSVS;
 
 private:
     SDL_Window *sdlWindow;

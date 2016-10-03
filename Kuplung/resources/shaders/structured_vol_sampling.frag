@@ -18,11 +18,11 @@ out vec4 fragColor;
 bool STRUCTURED = true;
 
 // cam moving in a straight line
-vec3 lookDir = vec3(cos(.53*fs_deltaRunningTime),0.,sin(fs_deltaRunningTime));
-vec3 camVel = vec3(-20.,0.,0.);
+vec3 lookDir = vec3(cos(0.53 * fs_deltaRunningTime), 0.0, sin(fs_deltaRunningTime));
+vec3 camVel = vec3(-20.0, 0.0, 0.0);
 float zoom = 1.2; // 1.5;
 
-vec3 sundir = normalize(vec3(-1.0,0.0,-1.));
+vec3 sundir = normalize(vec3(-1.0, 0.0, -1.0));
 
 // LUT based 3d value noise
 float noise(in vec3 x) {

@@ -20,7 +20,9 @@ public:
     void init();
     bool initShaderProgram();
     void initBuffers();
+    void initNoiseTexture();
     void render(int mouseX, int mouseY, float seconds);
+    void renderToTexture(int mouseX, int mouseY, float seconds, int windowWidth, int windowHeight, GLuint* vboTexture);
 
 private:
     std::unique_ptr<GLUtils> glUtils;
@@ -29,8 +31,6 @@ private:
     GLuint glVAO, vboVertices, vboTextureNoise;
     GLuint glVS_screenResolution;
     GLuint glAttributeVertexPosition, glFS_deltaRunningTime, glFS_noiseTextureSampler, glFS_screenResolution, glFS_mouseCoordinates;
-
-private:
 };
 
 #endif /* StructuredVolumetricSampling_hpp */

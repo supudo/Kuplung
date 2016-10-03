@@ -20,6 +20,7 @@
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
 		8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */; };
+		8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */; };
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
@@ -444,6 +445,8 @@
 		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
 		8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredT.cpp; path = scene/ModelFaceDeferredT.cpp; sourceTree = "<group>"; };
 		8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredT.hpp; path = scene/ModelFaceDeferredT.hpp; sourceTree = "<group>"; };
+		8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogSVS.cpp; sourceTree = "<group>"; };
+		8A2543DD1D9D6CF10057A927 /* DialogSVS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogSVS.hpp; sourceTree = "<group>"; };
 		8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.frag; sourceTree = "<group>"; };
 		8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.vert; sourceTree = "<group>"; };
 		8A2855C21D1412D2000BE246 /* deferred_light_box.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_light_box.frag; sourceTree = "<group>"; };
@@ -893,6 +896,8 @@
 				8A6E70751C6CACB40085CAE5 /* DialogOptions.hpp */,
 				8A6E70761C6CACB40085CAE5 /* DialogStyle.cpp */,
 				8A6E70771C6CACB40085CAE5 /* DialogStyle.hpp */,
+				8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */,
+				8A2543DD1D9D6CF10057A927 /* DialogSVS.hpp */,
 			);
 			path = dialogs;
 			sourceTree = "<group>";
@@ -1462,6 +1467,7 @@
 				8A6E705F1C6CACAC0085CAE5 /* Settings.cpp in Sources */,
 				8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */,
 				8AB273381D2FCC77008508B1 /* RenderingSimple.cpp in Sources */,
+				8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */,
 				8A7802D41D2D4F3A00D24620 /* RenderingForward.cpp in Sources */,
 				8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
@@ -1637,7 +1643,7 @@
 					/usr/local/Cellar/glm/0.9.8.0/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/3.0.2/include,
+					/usr/local/Cellar/protobuf/3.1.0/include,
 					/usr/local/Cellar/minizip/1.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -1649,7 +1655,7 @@
 					/usr/local/Cellar/glm/0.9.8.0/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/3.0.2/lib,
+					/usr/local/Cellar/protobuf/3.1.0/lib,
 					/usr/local/Cellar/minizip/1.1/lib,
 				);
 				OTHER_LDFLAGS = (
@@ -1691,7 +1697,7 @@
 					/usr/local/Cellar/glm/0.9.8.0/include,
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/3.0.2/include,
+					/usr/local/Cellar/protobuf/3.1.0/include,
 					/usr/local/Cellar/minizip/1.1/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
@@ -1703,7 +1709,7 @@
 					/usr/local/Cellar/glm/0.9.8.0/lib,
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/3.0.2/lib,
+					/usr/local/Cellar/protobuf/3.1.0/lib,
 					/usr/local/Cellar/minizip/1.1/lib,
 				);
 				OTHER_LDFLAGS = (
