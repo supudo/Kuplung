@@ -31,7 +31,7 @@ void FNTParser::init() {
     this->regex_char = "^char.*";
 }
 
-FontMap FNTParser::parse(FBEntity file) {
+KuplungFontMap FNTParser::parse(FBEntity file) {
     this->fm = {};
 
     std::ifstream ifs(file.path.c_str());
@@ -164,7 +164,7 @@ FontMap FNTParser::parse(FBEntity file) {
             }
             else if (tag == "char") {
                 // char id=64 x=2 y=2 width=54 height=64 xoffset=4 yoffset=1 xadvance=55 page=0 chnl=0 letter="@"
-                FontMapCharacter fmc;
+                KuplungFontMapCharacter fmc;
                 while (!lineStream.eof()) {
                     lineStream >> pair;
                     i = (unsigned int)pair.find('=');

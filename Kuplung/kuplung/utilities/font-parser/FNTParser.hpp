@@ -12,13 +12,12 @@
 #include <regex>
 #include "kuplung/settings/Settings.h"
 
-struct FontMapCharacter {
+struct KuplungFontMapCharacter {
     int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
     std::string letter;
 };
 
-struct FontMap {
-
+struct KuplungFontMap {
     std::string fontName, charset, file;
     int count;
     int size, bold, italic, unicode, stretchH, smooth, aa;
@@ -26,18 +25,18 @@ struct FontMap {
     int paddingTop, paddingRight, paddingBottom, paddingLeft;
     int spacingHorizontal, spacingVertical;
 
-    std::vector<FontMapCharacter> characters;
+    std::vector<KuplungFontMapCharacter> characters;
 };
 
 class FNTParser {
 public:
     ~FNTParser();
     void init();
-    FontMap parse(FBEntity file);
+    KuplungFontMap parse(FBEntity file);
     void destroy();
 
 private:
-    FontMap fm;
+    KuplungFontMap fm;
 
     std::regex regex_whiteSpace; // whitespace
     std::regex regex_equals; // equals
