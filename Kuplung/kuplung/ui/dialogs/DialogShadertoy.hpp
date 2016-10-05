@@ -30,10 +30,13 @@ private:
     float heightTopPanel, widthTexturesPanel, buttonCompileHeight;
     char shadertoyEditorText[1024 * 16];
     void compileShader();
+    bool channel0Cube, channel1Cube, channel2Cube, channel3Cube;
     int texImage0, texImage1, texImage2, texImage3;
+    int cubemapImage0, cubemapImage1, cubemapImage2, cubemapImage3;
 
     std::string exec(const char* cmd);
     std::string paste();
+    void openExample(std::string fileName);
 };
 
 #endif /* DialogShadertoy_hpp */

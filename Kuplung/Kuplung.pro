@@ -47,6 +47,7 @@ mac {
     MediaFiles.files += resources/gui
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
+    MediaFiles.files += resources/shaders/stoy
     MediaFiles.files += resources/shadertoy
     MediaFiles.files += resources/shapes
     MediaFiles.files += resources/skybox
@@ -115,8 +116,10 @@ OTHER_FILES += resources/*
 OTHER_FILES += resources/gui/*
 OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
+OTHER_FILES += resources/shaders/stoy/*
 OTHER_FILES += resources/shapes/*
 OTHER_FILES += resources/skybox/*
+OTHER_FILES += resources/shadertoy/*
 OTHER_FILES += resources/axis_helpers/*
 
 SOURCES += main.cpp \
@@ -394,6 +397,12 @@ DISTFILES += \
     resources/shaders/shadertoy.vert \
     resources/shaders/structured_vol_sampling.vert \
     resources/shaders/structured_vol_sampling.frag \
+# Shaders - shadertoy
+    resources/shaders/stoy/4ljGW1.stoy \
+    resources/shaders/stoy/4tlSzl.stoy \
+    resources/shaders/stoy/Ms2SD1.stoy \
+    resources/shaders/stoy/XlfGRj.stoy \
+    resources/shaders/stoy/XlSSzK.stoy \
 # Cube textures
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \

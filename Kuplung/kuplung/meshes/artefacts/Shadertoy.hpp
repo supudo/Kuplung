@@ -26,20 +26,24 @@ public:
     void renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture);
 
     std::string iChannel0_Image, iChannel1_Image, iChannel2_Image, iChannel3_Image;
+    std::string iChannel0_CubeImage, iChannel1_CubeImage, iChannel2_CubeImage, iChannel3_CubeImage;
+    int textureWidth, textureHeight;
 
-private:
     std::unique_ptr<GLUtils> glUtils;
 
-    void addTexture(std::string textureImage, GLuint* vboTexture);
+private:
+
+    void addTexture(std::string textureImage, GLuint* vboTexture, int textureID);
+    float iChannelResolution0[2], iChannelResolution1[2], iChannelResolution2[2], iChannelResolution3[2];
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices;
     GLuint vs_InFBO, vs_ScreenResolution;
 
     GLint glAttributeVertexPosition;
-    GLint iResolution, iGlobalTime, iTimeDelta, iFrame;
+    GLint iResolution, iGlobalTime, iTimeDelta, iFrame, iFrameRate;
     GLint iChannelTime[4], iChannelResolution[4];
-    GLint iMouse, iDate, iSampleRate;
+    GLint iMouse, iDate;
     GLuint iChannel0, iChannel1, iChannel2, iChannel3;
 
     void bindFBO();

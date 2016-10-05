@@ -29,6 +29,12 @@ void DialogShadertoy::render(bool* p_opened) {
     this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
     this->textureHeight = this->windowHeight - this->viewPaddingVertical;
 
+    if (this->heightTopPanel != this->engineShadertoy->textureHeight)
+        this->engineShadertoy->initFBO(
+                    this->windowWidth,
+                    this->heightTopPanel,
+                    &this->vboTexture);
+
     this->engineShadertoy->renderToTexture(
             ImGui::GetIO().MousePos.x,
             ImGui::GetIO().MousePos.y,
@@ -78,52 +84,130 @@ void DialogShadertoy::render(bool* p_opened) {
         strcpy(this->shadertoyEditorText, this->paste().c_str());
 
 // BEGIN textures
-    ImGui::BeginChild("Textures", ImVec2(this->widthTexturesPanel, 0), false);
+    ImGui::BeginChild("Options", ImVec2(this->widthTexturesPanel, 0), false);
 
-//    const char* availableTextureImages[] = {
-//        "tex00.jpg", "tex01.jpg", "tex02.jpg", "tex03.jpg", "tex04.jpg", "tex05.jpg", "tex06.jpg", "tex07.jpg", "tex08.jpg", "tex09.jpg", "tex10.jpg",
-//        "tex11.jpg", "tex12.jpg", "tex13.jpg", "tex14.jpg", "tex15.jpg", "tex16.jpg", "tex17.jpg", "tex18.jpg", "tex19.jpg", "tex20.jpg"
-//    };
+    ImGui::Text("Examples");
 
-//    ImGui::PushItemWidth(100.0f);
-//    ImGui::Text("Texture Image[0]");
-//    ImGui::Combo("##textImage0", &this->texImage0, availableTextureImages, IM_ARRAYSIZE(availableTextureImages));
-//    ImGui::Text("Texture Image[1]");
-//    ImGui::Combo("##textImage1", &this->texImage1, availableTextureImages, IM_ARRAYSIZE(availableTextureImages));
-//    ImGui::Text("Texture Image[2]");
-//    ImGui::Combo("##textImage2", &this->texImage2, availableTextureImages, IM_ARRAYSIZE(availableTextureImages));
-//    ImGui::Text("Texture Image[3]");
-//    ImGui::Combo("##textImage3", &this->texImage3, availableTextureImages, IM_ARRAYSIZE(availableTextureImages));
-//    ImGui::PopItemWidth();
+    if (ImGui::Button("Artificial", ImVec2(-1.0f, 0.0f)))
+        this->openExample(Settings::Instance()->appFolder() + "/shaders/stoy/4ljGW1.stoy");
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("Artificial");
 
-    std::vector<const char*> textureImages;
-    for (int i=0; i<21; i++) {
-        std::string t = "tex" + std::string((i < 10) ? "0" : "") + std::to_string(i) + ".jpg";
-        textureImages.push_back(t.c_str());
-    }
+    if (ImGui::Button(" Combustible\nVoronoi Layers", ImVec2(-1.0f, 0.0f)))
+        this->openExample(Settings::Instance()->appFolder() + "/shaders/stoy/4tlSzl.stoy");
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("Combustible Voronoi Layers");
+
+    if (ImGui::Button("Seascape", ImVec2(-1.0f, 0.0f)))
+        this->openExample(Settings::Instance()->appFolder() + "/shaders/stoy/Ms2SD1.stoy");
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("Seascape");
+
+    if (ImGui::Button("Star Nest", ImVec2(-1.0f, 0.0f)))
+        this->openExample(Settings::Instance()->appFolder() + "/shaders/stoy/XlfGRj.stoy");
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("Star Nest");
+
+    if (ImGui::Button("Sun Surface", ImVec2(-1.0f, 0.0f)))
+        this->openExample(Settings::Instance()->appFolder() + "/shaders/stoy/XlSSzK.stoy");
+    if (ImGui::IsItemHovered()) ImGui::SetTooltip("Sun Surface");
+
+    ImGui::Separator();
+
+    const char* textureImages[] = {
+        " -- NONE -- ",
+        "tex00.jpg", "tex01.jpg", "tex02.jpg", "tex03.jpg", "tex04.jpg", "tex05.jpg", "tex06.jpg", "tex07.jpg", "tex08.jpg", "tex09.jpg", "tex10.jpg",
+        "tex11.jpg", "tex12.jpg", "tex13.jpg", "tex14.jpg", "tex15.jpg", "tex16.jpg", "tex17.jpg", "tex18.jpg", "tex19.jpg", "tex20.jpg"
+    };
+
+    const char* cubemapImages[] = {
+        " -- NONE -- ",
+        "cube00_0.jpg", "cube00_1.jpg", "cube00_2.jpg", "cube00_3.jpg",
+        "cube00_4.jpg", "cube00_5.jpg", "cube01_0.png", "cube01_1.png", "cube01_2.png", "cube01_3.png", "cube01_4.png", "cube01_5.png",
+        "cube02_0.jpg", "cube02_1.jpg", "cube02_2.jpg", "cube02_3.jpg", "cube02_4.jpg", "cube02_5.jpg", "cube03_0.png", "cube03_1.png",
+        "cube03_2.png", "cube03_3.png", "cube03_4.png", "cube03_5.png", "cube04_0.png", "cube04_1.png", "cube04_2.png", "cube04_3.png",
+        "cube04_4.png", "cube04_5.png", "cube05_0.png", "cube05_1.png", "cube05_2.png", "cube05_3.png", "cube05_4.png", "cube05_5.png"
+    };
 
     ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
-    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
-    ImGui::Text("Texture #0");
-    ImGui::ListBox("##texImage0", &this->texImage0, &textureImages[0], int(textureImages.size()), 3);
-    if (ImGui::IsItemHovered()) {
-        ImGui::BeginTooltip();
-        ImGui::Text("Texture %i", this->texImage0);
-        ImGui::EndTooltip();
-    }
+
+    ImGui::TextColored(ImColor(255.0f, 0.0f, 0.0f, 255.0f), "Channel #0");
+    ImGui::Checkbox("Cubemap?##001", &this->channel0Cube);
+    if (this->channel0Cube)
+        ImGui::ListBox("##cubemap0", &this->cubemapImage0, cubemapImages, IM_ARRAYSIZE(cubemapImages), 3);
+    else
+        ImGui::ListBox("##texImage0", &this->texImage0, textureImages, IM_ARRAYSIZE(textureImages), 3);
+
     ImGui::Separator();
-    ImGui::Text("Texture #1");
-    ImGui::ListBox("##texImage1", &this->texImage1, &textureImages[0], int(textureImages.size()), 3);
+
+    ImGui::TextColored(ImColor(255.0f, 0.0f, 0.0f, 255.0f), "Channel #1");
+    ImGui::Checkbox("Cubemap?##002", &this->channel1Cube);
+    if (this->channel1Cube)
+        ImGui::ListBox("##cubemap1", &this->cubemapImage1, cubemapImages, IM_ARRAYSIZE(cubemapImages), 3);
+    else
+        ImGui::ListBox("##texImage1", &this->texImage1, textureImages, IM_ARRAYSIZE(textureImages), 3);
+
     ImGui::Separator();
-    ImGui::Text("Texture #2");
-    ImGui::ListBox("##texImage2", &this->texImage2, &textureImages[0], int(textureImages.size()), 3);
+
+    ImGui::TextColored(ImColor(255.0f, 0.0f, 0.0f, 255.0f), "Channel #2");
+    ImGui::Checkbox("Cubemap?##003", &this->channel2Cube);
+    if (this->channel2Cube)
+        ImGui::ListBox("##cubemap2", &this->cubemapImage2, cubemapImages, IM_ARRAYSIZE(cubemapImages), 3);
+    else
+        ImGui::ListBox("##texImage2", &this->texImage2, textureImages, IM_ARRAYSIZE(textureImages), 3);
+
     ImGui::Separator();
-    ImGui::Text("Texture #3");
-    ImGui::ListBox("##texImage3", &this->texImage3, &textureImages[0], int(textureImages.size()), 3);
-    ImGui::PopStyleColor(1);
+
+    ImGui::TextColored(ImColor(255.0f, 0.0f, 0.0f, 255.0f), "Channel #3");
+    ImGui::Checkbox("Cubemap?##004", &this->channel3Cube);
+    if (this->channel3Cube)
+        ImGui::ListBox("##cubemap3", &this->cubemapImage3, cubemapImages, IM_ARRAYSIZE(cubemapImages), 3);
+    else
+        ImGui::ListBox("##texImage3", &this->texImage3, textureImages, IM_ARRAYSIZE(textureImages), 3);
+
     ImGui::PopStyleVar(2);
+
+    if (this->texImage0 > 0) {
+        this->engineShadertoy->iChannel0_CubeImage = "";
+        this->engineShadertoy->iChannel0_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage0 < 10) ? "0" : "") + std::to_string(this->texImage0) + ".jpg";
+        this->texImage0 = 0;
+    }
+    if (this->cubemapImage0 > 0) {
+        this->engineShadertoy->iChannel0_Image = "";
+        this->engineShadertoy->iChannel0_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage0];
+        this->cubemapImage0 = 0;
+    }
+
+    if (this->texImage1 > 0) {
+        this->engineShadertoy->iChannel1_CubeImage = "";
+        this->engineShadertoy->iChannel1_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage1 < 10) ? "0" : "") + std::to_string(this->texImage1) + ".jpg";
+        this->texImage1 = 0;
+    }
+    if (this->cubemapImage1 > 0) {
+        this->engineShadertoy->iChannel1_Image = "";
+        this->engineShadertoy->iChannel1_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage1];
+        this->cubemapImage1 = 0;
+    }
+
+    if (this->texImage2 > 0) {
+        this->engineShadertoy->iChannel2_CubeImage = "";
+        this->engineShadertoy->iChannel2_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage2 < 10) ? "0" : "") + std::to_string(this->texImage2) + ".jpg";
+        this->texImage2 = 0;
+    }
+    if (this->cubemapImage2 > 0) {
+        this->engineShadertoy->iChannel2_Image = "";
+        this->engineShadertoy->iChannel2_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage2];
+        this->cubemapImage2 = 0;
+    }
+
+    if (this->texImage3 > 0) {
+        this->engineShadertoy->iChannel3_CubeImage = "";
+        this->engineShadertoy->iChannel3_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage3 < 10) ? "0" : "") + std::to_string(this->texImage3) + ".jpg";
+        this->texImage3 = 0;
+    }
+    if (this->cubemapImage3 > 0) {
+        this->engineShadertoy->iChannel3_Image = "";
+        this->engineShadertoy->iChannel3_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage3];
+        this->cubemapImage3 = 0;
+    }
 
     ImGui::EndChild();
 
@@ -146,7 +230,7 @@ void DialogShadertoy::render(bool* p_opened) {
 
 // BEGIN IDE
     ImGui::BeginChild("IDE", ImVec2(0.0f, 0.0f), false);
-    int lines = (ImGui::GetWindowHeight() - this->buttonCompileHeight - 4.0f) / ImGui::GetTextLineHeight();
+    int lines = (ImGui::GetWindowHeight() - 4.0f) / ImGui::GetTextLineHeight();
     ImGui::InputTextMultiline("##source", this->shadertoyEditorText, IM_ARRAYSIZE(this->shadertoyEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
     ImGui::EndChild();
 
@@ -167,6 +251,11 @@ void DialogShadertoy::init() {
     this->buttonCompileHeight = 44.0f;
     this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
     this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+
+    this->channel0Cube = false;
+    this->channel1Cube = false;
+    this->channel2Cube = false;
+    this->channel3Cube = false;
 
     const char* funcMain = "void mainImage(out vec4 fragColor, in vec2 fragCoord)\n"
             "{\n"
@@ -189,8 +278,8 @@ void DialogShadertoy::compileShader() {
     this->engineShadertoy->initShaderProgram(std::string(this->shadertoyEditorText));
     this->engineShadertoy->initBuffers();
     this->engineShadertoy->initFBO(
-                Settings::Instance()->SDL_Window_Width,
-                Settings::Instance()->SDL_Window_Height,
+                this->windowWidth,
+                this->heightTopPanel,
                 &this->vboTexture);
 }
 
@@ -215,4 +304,10 @@ std::string DialogShadertoy::paste() {
 #else
     return this->exec("pbpaste");
 #endif
+}
+
+void DialogShadertoy::openExample(std::string fileName) {
+    std::string fileContents = this->engineShadertoy->glUtils->readFile(fileName.c_str());
+    strcpy(this->shadertoyEditorText, fileContents.c_str());
+//    this->compileShader();
 }

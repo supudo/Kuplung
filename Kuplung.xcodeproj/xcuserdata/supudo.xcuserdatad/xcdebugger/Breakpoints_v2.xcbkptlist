@@ -25,38 +25,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/ui/dialogs/DialogSVS.cpp"
-            timestampString = "496856316.980861"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "DialogSVS::init()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Kuplung/kuplung/ui/dialogs/DialogSVS.cpp"
-            timestampString = "496856318.839518"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "DialogSVS::render(bool* p_opened, int mouseX, int mouseY)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Kuplung/kuplung/meshes/artefacts/StructuredVolumetricSampling.cpp"
             timestampString = "496856335.029223"
             startingColumnNumber = "9223372036854775807"
@@ -64,6 +32,22 @@
             startingLineNumber = "174"
             endingLineNumber = "174"
             landmarkName = "StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, int windowWidth, int windowHeight, GLuint vboTexture)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Kuplung/kuplung/meshes/artefacts/Shadertoy.cpp"
+            timestampString = "497349638.583538"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "Shadertoy::initShaderProgram(std::string fragmentShaderSource)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
