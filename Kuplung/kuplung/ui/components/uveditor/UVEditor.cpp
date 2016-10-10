@@ -29,7 +29,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->textureImage = "";
     this->textureFilename = "";
 
-    this->componentFileBrowser = new FileBrowser();
+    this->componentFileBrowser = std::make_unique<FileBrowser>();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
                                      Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
                                      std::bind(&UVEditor::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));

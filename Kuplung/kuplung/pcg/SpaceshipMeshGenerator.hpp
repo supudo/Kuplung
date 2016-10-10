@@ -27,7 +27,7 @@ public:
 private:
     int gridSize;
 
-    FileModelManager *fileParser;
+    std::unique_ptr<FileModelManager> fileParser;
 
     void generateMeshModel();
     void generateFirstHull();

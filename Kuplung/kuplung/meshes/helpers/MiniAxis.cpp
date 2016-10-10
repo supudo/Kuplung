@@ -59,11 +59,11 @@ bool MiniAxis::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/axis.vert";
-    std::string shaderVertexSource = readFile(shaderPath.c_str());
+    std::string shaderVertexSource = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderVertexSource.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/axis.frag";
-    std::string shaderFragmentSource = readFile(shaderPath.c_str());
+    std::string shaderFragmentSource = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderFragmentSource.c_str();
 
     this->shaderProgram = glCreateProgram();
@@ -183,22 +183,4 @@ void MiniAxis::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
 
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     }
-}
-
-#pragma mark - Utilities
-
-std::string MiniAxis::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
 }

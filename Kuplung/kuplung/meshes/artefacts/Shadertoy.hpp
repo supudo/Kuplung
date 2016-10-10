@@ -32,7 +32,6 @@ public:
     std::unique_ptr<GLUtils> glUtils;
 
 private:
-
     void addTexture(std::string textureImage, GLuint* vboTexture, int textureID);
     float iChannelResolution0[2], iChannelResolution1[2], iChannelResolution2[2], iChannelResolution3[2];
 

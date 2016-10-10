@@ -25,7 +25,7 @@ private:
     int textureWidth, textureHeight;
     int TextureType;
 
-    FileBrowser *componentFileBrowser;
+    std::unique_ptr<FileBrowser> componentFileBrowser;
 
     void initBase(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename="", std::string const& textureImage="");
     void showImage();

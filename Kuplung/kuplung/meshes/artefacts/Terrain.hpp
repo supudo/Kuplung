@@ -23,7 +23,7 @@ public:
     void initBuffers(std::string const& assetsFolder, int width, int height);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
     std::string heightmapImage;
-    HeightmapGenerator *terrainGenerator;
+    std::unique_ptr<HeightmapGenerator> terrainGenerator;
 
     bool Setting_UseTexture, Setting_Wireframe;
 
@@ -36,8 +36,6 @@ private:
     GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
     GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
     GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* Terrain_hpp */

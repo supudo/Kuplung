@@ -42,8 +42,6 @@ private:
     GLuint vboVertices, vboIndices;
 
     GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* BoundingBox_hpp */

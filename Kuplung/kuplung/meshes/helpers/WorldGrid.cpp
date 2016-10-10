@@ -75,7 +75,7 @@ void WorldGrid::initProperties(int size) {
 
     this->matrixModel = glm::mat4(1.0);
 
-    this->mirrorSurface = new MirrorSurface();
+    this->mirrorSurface = std::make_unique<MirrorSurface>();
 
     this->mirrorSurface->translateX = 0.0;
     this->mirrorSurface->translateY = 5.0;
@@ -91,11 +91,11 @@ bool WorldGrid::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/grid.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/grid.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
@@ -363,22 +363,4 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool 
 
         glUseProgram(0);
     }
-}
-
-#pragma mark - Utilities
-
-std::string WorldGrid::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
 }

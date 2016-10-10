@@ -39,8 +39,6 @@ private:
 
     std::vector<float> dataVertices, dataColors;
     std::vector<uint> dataIndices;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* RayLine_hpp */

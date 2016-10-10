@@ -102,12 +102,12 @@ void Skybox::init(int gridSize) {
 bool Skybox::initBuffers() {
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/skybox.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // fragment shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/skybox.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
@@ -267,22 +267,4 @@ void Skybox::render(glm::mat4 matrixView, float plane_close, float plane_far, fl
 
         glDepthFunc(currentDepthFuncMode);
     }
-}
-
-#pragma mark - Utilities
-
-std::string Skybox::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
 }

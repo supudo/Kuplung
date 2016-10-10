@@ -30,10 +30,10 @@ private:
     std::function<void(float)> funcProgress;
     void doProgress(float value);
 
-    objParser1 *parserOBJ1;
-    objParser2 *parserOBJ2;
-    STLParser *parserSTL;
-    AssimpParser *parserAssimp;
+    std::unique_ptr<objParser1> parserOBJ1;
+    std::unique_ptr<objParser2> parserOBJ2;
+    std::unique_ptr<STLParser> parserSTL;
+    std::unique_ptr<AssimpParser> parserAssimp;
 };
 
 #endif /* FileModelManager_hpp */

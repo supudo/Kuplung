@@ -48,11 +48,11 @@ DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects) : man
     this->selectedTabGUILight = -1;
     this->selectedTabPanel = 1;
 
-    this->helperUI = new UIHelpers();
-    this->componentMaterialEditor = new MaterialEditor();
+    this->helperUI = std::make_unique<UIHelpers>();
+    this->componentMaterialEditor = std::make_unique<MaterialEditor>();
     this->componentMaterialEditor->init();
 
-    this->componentUVEditor = new UVEditor();
+    this->componentUVEditor = std::make_unique<UVEditor>();
     this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
 }
 

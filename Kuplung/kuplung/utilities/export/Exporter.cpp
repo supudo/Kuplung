@@ -13,11 +13,11 @@ Exporter::~Exporter() {
 }
 
 Exporter::Exporter() {
-    this->exporterOBJ = new ExporterOBJ();
+    this->exporterOBJ = std::make_unique<ExporterOBJ>();
 }
 
 void Exporter::destroy() {
-    this->exporterOBJ->destroy();
+    this->exporterOBJ.reset();
 }
 
 void Exporter::init(std::function<void(float)> doProgress) {

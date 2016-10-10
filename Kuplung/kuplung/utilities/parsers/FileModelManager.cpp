@@ -13,17 +13,17 @@ FileModelManager::~FileModelManager() {
 }
 
 FileModelManager::FileModelManager() {
-    this->parserOBJ1 = new objParser1();
-    this->parserOBJ2 = new objParser2();
-    this->parserSTL = new STLParser();
-    this->parserAssimp = new AssimpParser();
+    this->parserOBJ1 = std::make_unique<objParser1>();
+    this->parserOBJ2 = std::make_unique<objParser2>();
+    this->parserSTL = std::make_unique<STLParser>();
+    this->parserAssimp = std::make_unique<AssimpParser>();
 }
 
 void FileModelManager::destroy() {
-    this->parserOBJ2->destroy();
-    this->parserOBJ1->destroy();
-    this->parserSTL->destroy();
-    this->parserAssimp->destroy();
+    this->parserOBJ2.reset();
+    this->parserOBJ1.reset();
+    this->parserSTL.reset();
+    this->parserAssimp.reset();
 }
 
 void FileModelManager::init(std::function<void(float)> doProgress) {

@@ -59,7 +59,7 @@ private:
     std::vector<UVPoint *> uvPoints;
     std::vector<UVLine> uvLines;
 
-    FileBrowser *componentFileBrowser;
+    std::unique_ptr<FileBrowser> componentFileBrowser;
 
     void projectSquare();
     void initTextureBuffer();

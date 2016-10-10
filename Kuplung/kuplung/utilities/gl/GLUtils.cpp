@@ -73,7 +73,7 @@ void GLUtils::printProgramLog(GLuint program) {
         int infoLogLength = 0;
         int maxLength = infoLogLength;
         glGetProgramiv(program, GL_INFO_LOG_LENGTH, &maxLength);
-        char* infoLog = new char[ maxLength ];
+        char* infoLog = new char[maxLength];
         glGetProgramInfoLog(program, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
             Settings::Instance()->funcDoLog(infoLog);

@@ -34,8 +34,6 @@ private:
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices, vboTexture;
     GLuint glVS_MatrixView, glVS_MatrixProjection, glVS_VertexPosition;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* ModelFace_hpp */

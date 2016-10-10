@@ -38,7 +38,7 @@ public:
     bool addControlsDragSameLine(std::string const& title, int idx, float step, float min, float limit, bool showAnimate, bool* animatedFlag, float* animatedValue, bool doMinus, bool* isFrame);
 
 private:
-    ColorPicker *componentColorPicker;
+    std::unique_ptr<ColorPicker> componentColorPicker;
 
     void animateValue(bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float limit, bool doMinus);
     void animateValueAsync(bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float limit, bool doMinus);

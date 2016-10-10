@@ -13,7 +13,7 @@ ImageRenderer::~ImageRenderer() {
 }
 
 ImageRenderer::ImageRenderer() {
-    this->rendererScene = new SceneRenderer();
+    this->rendererScene = std::make_unique<SceneRenderer>();
 }
 
 void ImageRenderer::destroy() {

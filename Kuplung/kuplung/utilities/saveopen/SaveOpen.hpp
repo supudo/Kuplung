@@ -22,8 +22,8 @@ public:
     std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
-    SaveOpenBinarySeq *entBinarySeq;
-    SaveOpenGProtocolBufs *entGProtocolBufs;
+    std::unique_ptr<SaveOpenBinarySeq> entBinarySeq;
+    std::unique_ptr<SaveOpenGProtocolBufs> entGProtocolBufs;
 };
 
 #endif /* SaveOpen_hpp */

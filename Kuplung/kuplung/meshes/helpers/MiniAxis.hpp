@@ -41,8 +41,6 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors;
     GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* MiniAxis_hpp */

@@ -35,7 +35,6 @@ private:
     MeshModel binary_read_model(std::istream& stream);
     MeshMaterialTextureImage binary_read_model_material_texture(std::istream& stream);
 
-
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
     template<typename T>

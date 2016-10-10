@@ -9,10 +9,10 @@
 #include "SaveOpen.hpp"
 
 void SaveOpen::init() {
-    this->entBinarySeq = new SaveOpenBinarySeq();
+    this->entBinarySeq = std::make_unique<SaveOpenBinarySeq>();
     this->entBinarySeq->init();
 
-    this->entGProtocolBufs = new SaveOpenGProtocolBufs();
+    this->entGProtocolBufs = std::make_unique<SaveOpenGProtocolBufs>();
     this->entGProtocolBufs->init();
 }
 

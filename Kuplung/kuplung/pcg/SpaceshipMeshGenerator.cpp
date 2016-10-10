@@ -18,7 +18,7 @@ void SpaceshipMeshGenerator::generate(int gridSize) {
     this->indices.clear();
     this->colors.clear();
 
-    this->fileParser = new FileModelManager();
+    this->fileParser = std::make_unique<FileModelManager>();
     this->fileParser->init(nullptr);
 
     std::vector<MeshModel> models;

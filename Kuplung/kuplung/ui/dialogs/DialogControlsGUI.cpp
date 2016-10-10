@@ -34,7 +34,7 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerOb
     this->generateNewTerrain = false;
     this->generateNewSpaceship = false;
 
-    this->helperUI = new UIHelpers();
+    this->helperUI = std::make_unique<UIHelpers>();
 }
 
 void DialogControlsGUI::render(bool* show, bool* isFrame) {

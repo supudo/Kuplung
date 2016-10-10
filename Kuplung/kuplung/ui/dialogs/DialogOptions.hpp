@@ -21,7 +21,7 @@ public:
     void loadFonts(bool* needsFontChange = NULL);
 
 private:
-    FontsList *fontLister;
+    std::unique_ptr<FontsList> fontLister;
 
     int optionsFontSelected, optionsFontSizeSelected;
 };

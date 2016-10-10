@@ -73,9 +73,9 @@ private:
     void processTexture(ModelFaceBase *mmf);
 
     ObjectsManager &managerObjects;
-    UIHelpers *helperUI;
-    MaterialEditor *componentMaterialEditor;
-    UVEditor *componentUVEditor;
+    std::unique_ptr<UIHelpers> helperUI;
+    std::unique_ptr<MaterialEditor> componentMaterialEditor;
+    std::unique_ptr<UVEditor> componentUVEditor;
 };
 
 #endif /* DialogControlsModels_hpp */

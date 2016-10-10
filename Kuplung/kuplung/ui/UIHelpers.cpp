@@ -12,7 +12,7 @@
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 
 UIHelpers::UIHelpers() {
-    this->componentColorPicker = new ColorPicker();
+    this->componentColorPicker = std::make_unique<ColorPicker>();
 }
 
 void UIHelpers::addControlsXYZ(std::string const& property, bool showAnimate, bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, float step, float min, float limit) {

@@ -47,7 +47,7 @@ void Spaceship::destroy() {
 
 void Spaceship::init() {
     this->glUtils = std::make_unique<GLUtils>();
-    this->spaceshipGenerator = new SpaceshipMeshGenerator();
+    this->spaceshipGenerator = std::make_unique<SpaceshipMeshGenerator>();
 
     this->Setting_UseTexture = false;
     this->Setting_Wireframe = false;
@@ -59,11 +59,11 @@ bool Spaceship::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/spaceship.vert";
-    std::string shaderSourceVertex = readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/spaceship.frag";
-    std::string shaderSourceFragment = readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
@@ -95,7 +95,7 @@ bool Spaceship::initShaderProgram() {
         this->glUniformMMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MMatrix");
         this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
 
-        this->solidLight = new ModelFace_LightSource_Directional();
+        this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
         this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
         this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
         this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
@@ -204,22 +204,4 @@ void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::
 
         glUseProgram(0);
     }
-}
-
-#pragma mark - Utilities
-
-std::string Spaceship::readFile(const char *filePath) {
-    std::string content;
-    std::ifstream fileStream(filePath, std::ios::in);
-    if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
-        return "";
-    }
-    std::string line = "";
-    while (!fileStream.eof()) {
-        std::getline(fileStream, line);
-        content.append(line + "\n");
-    }
-    fileStream.close();
-    return content;
 }

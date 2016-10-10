@@ -13,7 +13,7 @@
 #include "kuplung/settings/Settings.h"
 
 void DialogOptions::init() {
-    this->fontLister = new FontsList();
+    this->fontLister = std::make_unique<FontsList>();
     this->fontLister->init();
     this->fontLister->getFonts();
 

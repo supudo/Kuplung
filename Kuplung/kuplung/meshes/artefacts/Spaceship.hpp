@@ -25,7 +25,7 @@ public:
     bool initShaderProgram();
     void initBuffers(int gridSize);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
-    SpaceshipMeshGenerator *spaceshipGenerator;
+    std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
 
     bool Setting_UseTexture, Setting_Wireframe;
     glm::vec3 lightDirection;
@@ -43,9 +43,7 @@ private:
     GLuint glAttributeColor, glFS_CameraPosition;
     GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
-    ModelFace_LightSource_Directional *solidLight;
-
-    std::string readFile(const char *filePath);
+    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 
 #endif /* Spaceship_hpp */

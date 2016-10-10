@@ -22,7 +22,7 @@ public:
     void exportScene(FBEntity file, std::vector<ModelFaceBase*> faces);
 
 private:
-    ExporterOBJ* exporterOBJ;
+    std::unique_ptr<ExporterOBJ> exporterOBJ;
 };
 
 #endif /* Exporter_hpp */

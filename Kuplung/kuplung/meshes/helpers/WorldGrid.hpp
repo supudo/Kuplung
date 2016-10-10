@@ -32,7 +32,7 @@ public:
     int gridSize;
     float transparency;
 
-    MirrorSurface *mirrorSurface;
+    std::unique_ptr<MirrorSurface> mirrorSurface;
     bool showGrid, actAsMirror;
     std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
     std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
@@ -59,8 +59,6 @@ private:
     bool actAsMirrorNeedsChange;
     int gridSizeVertex;
     int zIndex;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* WorldGrid_hpp */

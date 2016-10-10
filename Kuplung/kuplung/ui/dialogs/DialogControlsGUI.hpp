@@ -28,7 +28,7 @@ private:
     float heightTopPanel = 170.0f;
 
     ObjectsManager &managerObjects;
-    UIHelpers *helperUI;
+    std::unique_ptr<UIHelpers> helperUI;
 
     void setHeightmapImage(std::string const& heightmapImage);
     std::string heightmapImage;
