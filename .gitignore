@@ -40,6 +40,8 @@ VS2015/Kuplung.VC.opendb
 VS2015/Kuplung.sdf
 
 # Xcode
+.DS_Store
+*/build/*
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -48,4 +50,10 @@ VS2015/Kuplung.sdf
 !default.mode2v3
 *.perspectivev3
 !default.perspectivev3
-xcuserdata/
+xcuserdata
+profile
+*.moved-aside
+DerivedData
+.idea/
+*.hmap
+xcuserdata/*
