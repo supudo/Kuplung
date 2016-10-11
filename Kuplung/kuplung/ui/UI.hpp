@@ -111,17 +111,17 @@ private:
     void popupRecentFileDoesntExists();
     void popupRecentFileImportedDoesntExists();
 
-    SDL2OpenGL32 *imguiImplementation;
     ObjectsManager &managerObjects;
-    Log *componentLog;
-    Screenshot *componentScreenshot;
-    FileBrowser *componentFileBrowser;
-    FileSaver *componentFileSaver;
-    ShaderEditor *componentFileEditor;
-    DialogStyle *windowStyle;
-    DialogOptions *windowOptions;
-    DialogControlsGUI *controlsGUI;
-    DialogControlsModels *controlsModels;
+    std::unique_ptr<SDL2OpenGL32> imguiImplementation;
+    std::unique_ptr<Log> componentLog;
+    std::unique_ptr<Screenshot> componentScreenshot;
+    std::unique_ptr<FileBrowser> componentFileBrowser;
+    std::unique_ptr<FileSaver> componentFileSaver;
+    std::unique_ptr<ShaderEditor> componentFileEditor;
+    std::unique_ptr<DialogStyle> windowStyle;
+    std::unique_ptr<DialogOptions> windowOptions;
+    std::unique_ptr<DialogControlsGUI> controlsGUI;
+    std::unique_ptr<DialogControlsModels> controlsModels;
     std::unique_ptr<DialogShadertoy> componentShadertoy;
 
     bool needsFontChange;

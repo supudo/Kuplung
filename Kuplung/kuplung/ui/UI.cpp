@@ -85,35 +85,35 @@ void UI::init(SDL_Window *window,
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 50, posY = 50;
 
-    this->imguiImplementation = new SDL2OpenGL32();
+    this->imguiImplementation = std::make_unique<SDL2OpenGL32>();
     this->imguiImplementation->init(this->sdlWindow);
 
-    this->componentLog = new Log();
-    this->componentScreenshot = new Screenshot();
+    this->componentLog = std::make_unique<Log>();
+    this->componentScreenshot = std::make_unique<Screenshot>();
 
-    this->componentFileBrowser = new FileBrowser();
+    this->componentFileBrowser = std::make_unique<FileBrowser>();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
-    this->componentFileSaver = new FileSaver();
+    this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
-    this->componentFileEditor = new ShaderEditor();
+    this->componentFileEditor = std::make_unique<ShaderEditor>();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
 
-    this->windowStyle = new DialogStyle();
+    this->windowStyle = std::make_unique<DialogStyle>();
     ImGuiStyle& style = ImGui::GetStyle();
     this->windowStyle->saveDefault(style);
     style = this->windowStyle->loadCurrent();
 
-    this->windowOptions = new DialogOptions();
+    this->windowOptions = std::make_unique<DialogOptions>();
     this->windowOptions->init();
     this->imguiImplementation->ImGui_Implementation_Init();
 
     this->windowOptions->loadFonts(&this->needsFontChange);
 
-    this->controlsGUI = new DialogControlsGUI(this->managerObjects);
+    this->controlsGUI = std::make_unique<DialogControlsGUI>(this->managerObjects);
 
-    this->controlsModels = new DialogControlsModels(this->managerObjects);
+    this->controlsModels = std::make_unique<DialogControlsModels>(this->managerObjects);
     this->controlsModels->init(this->sdlWindow, this->funcAddShape, this->funcAddLight, this->funcDeleteModel);
 
     this->componentSVS = std::make_unique<DialogSVS>();
@@ -587,7 +587,7 @@ void UI::dialogAboutKuplung() {
 }
 
 void UI::dialogOptions(ImGuiStyle* ref) {
-    this->windowOptions->showOptionsWindow(ref, this->windowStyle, &this->showOptions, &this->needsFontChange);
+    this->windowOptions->showOptionsWindow(ref, this->windowStyle.get(), &this->showOptions, &this->needsFontChange);
 }
 
 void UI::dialogSceneStats() {

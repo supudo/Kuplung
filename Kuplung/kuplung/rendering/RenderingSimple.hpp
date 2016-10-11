@@ -36,7 +36,7 @@ private:
     GLuint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
 
     GLuint glFS_CameraPosition, glFS_UIAmbient;
-    ModelFace_LightSource_Directional *solidLight;
+    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 
 #endif /* RenderingSimple_hpp */
