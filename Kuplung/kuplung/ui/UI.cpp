@@ -80,6 +80,7 @@ void UI::init(SDL_Window *window,
     this->showRecentFileImportedDoesntExists = false;
     this->showSVS = false;
     this->showShadertoy = false;
+    this->showShadertoyMessage = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -120,7 +121,7 @@ void UI::init(SDL_Window *window,
     this->componentSVS->init();
 
     this->componentShadertoy = std::make_unique<DialogShadertoy>();
-    this->componentShadertoy->init();
+    this->componentShadertoy->init(std::bind(&UI::dialogShadertoyMessage, this));
 }
 
 void UI::doLog(std::string const& message) {
@@ -356,6 +357,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showShadertoy)
         this->dialogShadertoy();
+
+    if (this->showShadertoyMessage)
+        this->dialogShadertoyMessageWindow();
 
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
@@ -620,6 +624,21 @@ void UI::dialogControlsModels(int * sceneSelectedModelObject) {
 
 void UI::dialogShadertoy() {
     this->componentShadertoy->render(&this->showShadertoy);
+}
+
+void UI::dialogShadertoyMessage() {
+    this->showShadertoyMessage = true;
+}
+
+void UI::dialogShadertoyMessageWindow() {
+    ImGui::OpenPopup("Paste Error");
+    ImGui::BeginPopupModal("Paste Error", NULL, ImGuiWindowFlags_AlwaysAutoResize);
+    ImGui::Text("Clipboard size is too big.\nPlease, reduce the shader source and paste it again.");
+    if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(),0))) {
+        this->showShadertoyMessage = false;
+        ImGui::CloseCurrentPopup();
+    }
+    ImGui::EndPopup();
 }
 
 void UI::dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type) {

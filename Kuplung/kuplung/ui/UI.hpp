@@ -108,6 +108,8 @@ private:
     void dialogControlsModels(int * sceneSelectedModelObject);
     void dialogFileSave(FileSaverOperation type);
     void dialogShadertoy();
+    void dialogShadertoyMessage();
+    void dialogShadertoyMessageWindow();
     void popupRecentFileDoesntExists();
     void popupRecentFileImportedDoesntExists();
 
@@ -145,6 +147,7 @@ private:
     bool showRecentFileDoesntExists;
     bool showRecentFileImportedDoesntExists;
     bool showShadertoy;
+    bool showShadertoyMessage;
 
 };
 

@@ -81,7 +81,7 @@ void DialogShadertoy::render(bool* p_opened) {
         this->compileShader();
     ImGui::SameLine();
     if (ImGui::Button("Paste", ImVec2(ImGui::GetWindowWidth() * 0.14, this->buttonCompileHeight)))
-        strcpy(this->shadertoyEditorText, this->paste().c_str());
+        this->getFromClipboard();
 
 // BEGIN textures
     ImGui::BeginChild("Options", ImVec2(this->widthTexturesPanel, 0), false);
@@ -243,7 +243,8 @@ void DialogShadertoy::render(bool* p_opened) {
     ImGui::End();
 }
 
-void DialogShadertoy::init() {
+void DialogShadertoy::init(std::function<void()> fShowErrorMessage) {
+    this->funcShowMessage = fShowErrorMessage;
     this->viewPaddingHorizontal = 20.0f;
     this->viewPaddingVertical = 40.0f;
     this->heightTopPanel = 200.0f;
@@ -256,6 +257,14 @@ void DialogShadertoy::init() {
     this->channel1Cube = false;
     this->channel2Cube = false;
     this->channel3Cube = false;
+    this->cubemapImage0 = -1;
+    this->cubemapImage1 = -1;
+    this->cubemapImage2 = -1;
+    this->cubemapImage3 = -1;
+    this->texImage0 = -1;
+    this->texImage1 = -1;
+    this->texImage2 = -1;
+    this->texImage3 = -1;
 
     const char* funcMain = "void mainImage(out vec4 fragColor, in vec2 fragCoord)\n"
             "{\n"
@@ -304,6 +313,14 @@ std::string DialogShadertoy::paste() {
 #else
     return this->exec("pbpaste");
 #endif
+}
+
+void DialogShadertoy::getFromClipboard() {
+    std::string clipboardContents = this->paste();
+    if (clipboardContents.length() > (1024 * 16))
+        this->funcShowMessage();
+    else
+        strcpy(this->shadertoyEditorText, clipboardContents.c_str());
 }
 
 void DialogShadertoy::openExample(std::string fileName) {

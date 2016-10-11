@@ -15,7 +15,7 @@
 
 class DialogShadertoy {
 public:
-    void init();
+    void init(std::function<void()> fShowErrorMessage);
     void render(bool* p_opened);
 
     GLuint vboTexture;
@@ -23,6 +23,8 @@ public:
     float viewPaddingHorizontal, viewPaddingVertical;
 
 private:
+    std::function<void()> funcShowMessage;
+
     int textureWidth, textureHeight;
     ImVec2 scrolling = ImVec2(0.0f, 0.0f);
 
@@ -36,6 +38,7 @@ private:
 
     std::string exec(const char* cmd);
     std::string paste();
+    void getFromClipboard();
     void openExample(std::string fileName);
 };
 
