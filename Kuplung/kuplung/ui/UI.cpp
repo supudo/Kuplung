@@ -122,6 +122,9 @@ void UI::init(SDL_Window *window,
 
     this->componentShadertoy = std::make_unique<DialogShadertoy>();
     this->componentShadertoy->init(std::bind(&UI::dialogShadertoyMessage, this));
+
+    this->componentConsumption = std::make_unique<Consumption>();
+    this->componentConsumption->init();
 }
 
 void UI::doLog(std::string const& message) {
@@ -611,6 +614,8 @@ void UI::dialogSceneStats() {
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::Text("%d vertices, %d indices (%d triangles)", ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
     ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
+//    ImGui::Separator();
+//    ImGui::Text("Memory Used - %lu MB", this->componentConsumption->getMemoryConsumption());
     ImGui::End();
 }
 

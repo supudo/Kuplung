@@ -55,7 +55,7 @@ void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType Te
     ImGui::Separator();
 
     ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-    const char* parserItems[] = {"Own 1.0", "Own 2.0", "Assimp"};
+    const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
     if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
         Settings::Instance()->saveSettings();
 

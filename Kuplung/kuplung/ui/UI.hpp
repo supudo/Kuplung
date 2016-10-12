@@ -27,6 +27,7 @@
 #include "kuplung/ui/dialogs/DialogShadertoy.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
+#include "kuplung/utilities/consumption/Consumption.hpp"
 
 class UI {
 public:
@@ -125,6 +126,7 @@ private:
     std::unique_ptr<DialogControlsGUI> controlsGUI;
     std::unique_ptr<DialogControlsModels> controlsModels;
     std::unique_ptr<DialogShadertoy> componentShadertoy;
+    std::unique_ptr<Consumption> (componentConsumption);
 
     bool needsFontChange;
 

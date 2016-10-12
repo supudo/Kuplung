@@ -203,7 +203,8 @@ SOURCES += main.cpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
     kuplung/utilities/saveopen/KuplungDefinitions.pb.cc \
     kuplung/utilities/saveopen/KuplungAppSettings.pb.cc \
-    kuplung/utilities/saveopen/KuplungAppScene.pb.cc
+    kuplung/utilities/saveopen/KuplungAppScene.pb.cc \
+    kuplung/utilities/consumption/Consumption.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -300,7 +301,8 @@ HEADERS += \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \
     kuplung/utilities/saveopen/KuplungDefinitions.pb.h \
     kuplung/utilities/saveopen/KuplungAppSettings.pb.h \
-    kuplung/utilities/saveopen/KuplungAppScene.pb.h
+    kuplung/utilities/saveopen/KuplungAppScene.pb.h \
+    kuplung/utilities/consumption/Consumption.hpp
 
 DISTFILES += \
 # Fonts

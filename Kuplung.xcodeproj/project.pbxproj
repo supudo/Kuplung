@@ -276,6 +276,7 @@
 		8ADE50C11D2D41F900A6E7F0 /* stormydays_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */; };
 		8ADE50C21D2D41F900A6E7F0 /* stormydays_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */; };
 		8ADE50C31D2D41F900A6E7F0 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */; };
+		8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC9CE11DAE44F600161D50 /* Consumption.cpp */; };
 		8AFD82151D410C0A00D088C7 /* Kuplung_RecentFilesImported.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */; };
 		8AFD82161D410C0C00D088C7 /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */; };
 /* End PBXBuildFile section */
@@ -929,6 +930,8 @@
 		8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.geom; sourceTree = "<group>"; };
 		8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tcs; sourceTree = "<group>"; };
 		8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rendering_simple.tes; sourceTree = "<group>"; };
+		8AFC9CE11DAE44F600161D50 /* Consumption.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Consumption.cpp; path = consumption/Consumption.cpp; sourceTree = "<group>"; };
+		8AFC9CE21DAE44F600161D50 /* Consumption.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Consumption.hpp; path = consumption/Consumption.hpp; sourceTree = "<group>"; };
 		8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFilesImported.ini; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1135,6 +1138,7 @@
 		8A6E70801C6CACB40085CAE5 /* utilities */ = {
 			isa = PBXGroup;
 			children = (
+				8AFC9CE01DAE44EC00161D50 /* consumption */,
 				8A2B48771CC4F6DC0077E9D4 /* export */,
 				8A6E70811C6CACB40085CAE5 /* font-parser */,
 				8A6E70841C6CACB40085CAE5 /* gl */,
@@ -1698,6 +1702,15 @@
 			name = skybox;
 			sourceTree = "<group>";
 		};
+		8AFC9CE01DAE44EC00161D50 /* consumption */ = {
+			isa = PBXGroup;
+			children = (
+				8AFC9CE11DAE44F600161D50 /* Consumption.cpp */,
+				8AFC9CE21DAE44F600161D50 /* Consumption.hpp */,
+			);
+			name = consumption;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1817,6 +1830,7 @@
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
+				8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
