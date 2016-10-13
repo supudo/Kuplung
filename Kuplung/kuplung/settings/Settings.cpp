@@ -61,6 +61,9 @@ void Settings::initSettings() {
     m_pInstance->frameFileBrowser_Width = m_pInstance->cfgUtils->readInt("frameFileBrowser_Width");
     m_pInstance->frameFileBrowser_Height = m_pInstance->cfgUtils->readInt("frameFileBrowser_Height");
 
+    m_pInstance->Consumption_Interval_CPU = m_pInstance->cfgUtils->readInt("Consumption_Interval_CPU");
+    m_pInstance->Consumption_Interval_Memory = m_pInstance->cfgUtils->readInt("Consumption_Interval_Memory");
+
     m_pInstance->guiClearColor = {70.0f / 255.0f, 70.0f / 255.0f, 70.0f / 255.0f, 255.0f / 255.0f};
     m_pInstance->SDL_Window_Flags = SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE;
 
@@ -124,6 +127,9 @@ void Settings::saveSettings() {
 
     this->cfgUtils->writeInt("SDL_Window_Width", this->SDL_Window_Width);
     this->cfgUtils->writeInt("SDL_Window_Height", this->SDL_Window_Height);
+
+    this->cfgUtils->writeInt("Consumption_Interval_CPU", this->Consumption_Interval_CPU);
+    this->cfgUtils->writeInt("Consumption_Interval_Memory", this->Consumption_Interval_Memory);
 
     this->cfgUtils->saveSettings();
 }

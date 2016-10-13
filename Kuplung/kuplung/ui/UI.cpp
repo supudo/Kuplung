@@ -292,13 +292,14 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         }
 
         //ImGui::Text("  --> %.1f FPS | %d vertices, %d indices (%d triangles)", ImGui::GetIO().Framerate, ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
-        ImGui::Text("  --> %.1f FPS | %d objs, %d verts, %d indices (%d tris, %d faces)",
+        ImGui::Text("  --> %.1f FPS | %d objs, %d verts, %d indices (%d tris, %d faces) | %s",
                     ImGui::GetIO().Framerate,
                     Settings::Instance()->sceneCountObjects,
                     Settings::Instance()->sceneCountVertices,
                     Settings::Instance()->sceneCountIndices,
                     Settings::Instance()->sceneCountTriangles,
-                    Settings::Instance()->sceneCountFaces
+                    Settings::Instance()->sceneCountFaces,
+                    this->componentConsumption->getOverallStats().c_str()
                     );
 
         ImGui::EndMainMenuBar();
@@ -601,7 +602,7 @@ void UI::dialogSceneStats() {
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 10;
-    int posY = windowHeight - 164;
+    int posY = windowHeight - 200;
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Stats", &this->showSceneStats, ImVec2(0, 0), 0.3f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
     ImGui::Text("OpenGL version: 4.1 (%s)", glGetString(GL_VERSION));
@@ -614,8 +615,6 @@ void UI::dialogSceneStats() {
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::Text("%d vertices, %d indices (%d triangles)", ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
     ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
-//    ImGui::Separator();
-//    ImGui::Text("Memory Used - %lu MB", this->componentConsumption->getMemoryConsumption());
     ImGui::End();
 }
 

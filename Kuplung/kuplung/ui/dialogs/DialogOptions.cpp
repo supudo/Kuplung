@@ -28,24 +28,40 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
     ImGui::Begin("Options", p_opened, ImGuiWindowFlags_ShowBorders);
 
     if (ImGui::CollapsingHeader("General", ImGuiTreeNodeFlags_DefaultOpen)) {
+        ImGui::Indent();
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
 
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+        ImGui::BeginChild("RefreshRate", ImVec2(0.0f, 98.0f), true);
+        ImGui::Text("Consumption Refresh Interval (in seconds, 0 - disabled)");
+        ImGui::SliderInt("Memory", &Settings::Instance()->Consumption_Interval_Memory, 0, 100);
+        ImGui::SliderInt("CPU", &Settings::Instance()->Consumption_Interval_CPU, 0, 100);
+        if (ImGui::Button("Save", ImVec2(ImGui::GetWindowWidth() * 0.65f, 0)))
+            Settings::Instance()->saveSettings();
+        ImGui::EndChild();
+        ImGui::PopStyleVar();
+
+        ImGui::Unindent();
+    }
+
+    if (ImGui::CollapsingHeader("Rendering", NULL, true, false)) {
+        ImGui::Indent();
         if (ImGui::Checkbox("Terrain Hieghtmap Image History", &Settings::Instance()->Terrain_HeightmapImageHistory))
             Settings::Instance()->saveSettings();
 
         const char* rendererItems[] = {"Simple", "Forward", "Deferred"};
         if (ImGui::Combo("Renderer", &Settings::Instance()->RendererType, rendererItems, IM_ARRAYSIZE(rendererItems)))
             Settings::Instance()->saveSettings();
-//        if (ImGui::Checkbox("Use Deferred Rendering (requires restart)", &Settings::Instance()->DeferredRendering))
-//            Settings::Instance()->saveSettings();
 
         const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
         if (ImGui::Combo("ModelFace Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
             Settings::Instance()->saveSettings();
+        ImGui::Unindent();
     }
 
-    if (ImGui::CollapsingHeader("Look & Feel", NULL, true, true)) {
+    if (ImGui::CollapsingHeader("Look & Feel", NULL, true, false)) {
+        ImGui::Indent();
         ImGuiStyle& style = ImGui::GetStyle();
 
         const ImGuiStyle def;
@@ -164,6 +180,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         }
 
         ImGui::PopItemWidth();
+        ImGui::Unindent();
     }
 
     ImGui::End();

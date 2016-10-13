@@ -42,6 +42,7 @@ public:
     int UIFontFileIndex, ModelFileParser;
     float UIFontSize, BoundingBoxPadding;
     int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
+    int Consumption_Interval_CPU, Consumption_Interval_Memory;
 
 private:
     Settings(){};

@@ -14,8 +14,27 @@
 class Consumption {
 public:
     void init();
-    unsigned long getMemoryConsumption();
-    unsigned long getCPUUsage();
+    std::string getOverallStats();
+    std::string getMemoryConsumption();
+    std::string getCPULoad();
+
+private:
+    double memoryMarkPoint;
+    std::string usageOverall;
+    std::string usageMemory;
+    std::string usageCPU;
+    unsigned int lastTimeMemory = 0, currentTimeMemory;
+    unsigned int lastTimeCPU = 0, currentTimeCPU;
+
+    bool isTimeToUpdateMemory();
+    bool isTimeToUpdateCPU();
+
+    size_t getPeakRSS();
+
+    void memoryMark();
+    void memoryUnmark();
+
+    std::string exec(const char* cmd);
 };
 
 #endif /* Consumption_hpp */
