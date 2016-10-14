@@ -73,6 +73,8 @@ void ModelFaceBase::destroy() {
 
     this->glUtils.reset();
     this->mathHelper.reset();
+    this->boundingBox.reset();
+    this->vertexSphere.reset();
 }
 
 #pragma mark - Initialization
@@ -197,13 +199,13 @@ void ModelFaceBase::initBuffers() {
 }
 
 void ModelFaceBase::initBoundingBox() {
-    this->boundingBox = new BoundingBox();
+    this->boundingBox = std::make_unique<BoundingBox>();
     this->boundingBox->initShaderProgram();
     this->boundingBox->initBuffers(this->meshModel);
 }
 
 void ModelFaceBase::initVertexSphere() {
-    this->vertexSphere = new VertexSphere();
+    this->vertexSphere = std::make_unique<VertexSphere>();
     this->vertexSphere->initShaderProgram();
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }

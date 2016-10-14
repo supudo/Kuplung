@@ -49,8 +49,8 @@ public:
     glm::vec4 getOptionsOutlineColor();
     float getOptionsOutlineThickness();
 
-    BoundingBox *boundingBox;
-    VertexSphere *vertexSphere;
+    std::unique_ptr<BoundingBox> boundingBox;
+    std::unique_ptr<VertexSphere> vertexSphere;
     bool initBuffersAgain;
     MeshModel meshModel;
     int ModelID;

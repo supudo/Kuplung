@@ -24,6 +24,17 @@ Kuplung::~Kuplung() {
         this->rayLines[i]->destroy();
     }
 
+    this->parser.reset();
+    this->managerSaveOpen.reset();
+    this->managerControls.reset();
+    this->managerUI.reset();
+    this->fontParser.reset();
+    this->managerExporter.reset();
+    this->imageRenderer.reset();
+    this->managerObjects.reset();
+    this->rayPicker.reset();
+    this->managerRendering.reset();
+
     SDL_GL_DeleteContext(this->glContext);
 
     SDL_DestroyWindow(this->gWindow);

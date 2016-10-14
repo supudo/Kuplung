@@ -126,7 +126,7 @@ private:
     std::unique_ptr<DialogControlsGUI> controlsGUI;
     std::unique_ptr<DialogControlsModels> controlsModels;
     std::unique_ptr<DialogShadertoy> componentShadertoy;
-    std::unique_ptr<Consumption> (componentConsumption);
+    std::unique_ptr<Consumption> componentConsumption;
 
     bool needsFontChange;
 

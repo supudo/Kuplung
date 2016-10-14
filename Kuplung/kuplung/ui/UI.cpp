@@ -21,6 +21,19 @@ UI::~UI() {
 }
 
 void UI::destroy() {
+    this->imguiImplementation.reset();
+    this->componentLog.reset();
+    this->componentScreenshot.reset();
+    this->componentFileBrowser.reset();
+    this->componentFileSaver.reset();
+    this->componentFileEditor.reset();
+    this->windowStyle.reset();
+    this->windowOptions.reset();
+    this->controlsGUI.reset();
+    this->controlsModels.reset();
+    this->componentShadertoy.reset();
+    this->componentConsumption.reset();
+    this->componentSVS.reset();
 }
 
 void UI::init(SDL_Window *window,
