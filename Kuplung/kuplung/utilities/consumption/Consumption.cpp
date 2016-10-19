@@ -34,7 +34,7 @@ void Consumption::init() {
 std::string Consumption::getOverallStats() {
     this->usageCPU = this->getCPULoad();
     this->usageMemory = this->getMemoryConsumption();
-    this->usageOverall = (this->usageMemory == "" ? "n/a" : this->usageMemory) + ", " + (this->usageCPU == "" ? "n/a" : this->usageCPU);
+    this->usageOverall = (this->usageMemory == "" ? "Memory: n/a" : this->usageMemory) + ", " + (this->usageCPU == "" ? "CPU: n/a" : this->usageCPU);
     return this->usageOverall;
 }
 
@@ -42,9 +42,9 @@ std::string Consumption::getMemoryConsumption() {
     if (this->isTimeToUpdateMemory()) {
         double memory = this->getPeakRSS() - this->memoryMarkPoint;
         if (std::fabs(this->memoryMarkPoint) < 1e-6)
-            this->usageMemory = Settings::Instance()->string_format("Total Memory: %.2f Mb", memory);
+            this->usageMemory = Settings::Instance()->string_format("Total Memory: %.2fMb", memory);
         else
-            this->usageMemory = Settings::Instance()->string_format("Memory: %.2f Mb", memory);
+            this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
     }
     return this->usageMemory;
 }
