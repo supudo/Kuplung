@@ -9,6 +9,8 @@
 #include "ConfigUtils.hpp"
 #include <boost/algorithm/string.hpp>
 #include <fstream>
+#include <mutex>
+#include <stdexcept>
 
 #pragma mark - Cleanup
 
@@ -43,8 +45,13 @@ void ConfigUtils::saveSettings() {
         std::string cfgValue = iter->second;
         configLines += cfgKey + " = " + cfgValue + nlDelimiter;
     }
+    static std::mutex mutex;
+    std::lock_guard<std::mutex> lock(mutex);
+
     std::ofstream out(this->configFile);
-    out << configLines;
+    if (!out.is_open())
+        throw std::runtime_error("[Kuplung] Unable to save settings file!");
+    out << configLines << std::endl;
     out.close();
 }
 
