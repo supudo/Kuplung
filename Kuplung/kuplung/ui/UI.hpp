@@ -33,7 +33,6 @@ class UI {
 public:
     explicit UI(ObjectsManager &managerObjects);
     ~UI();
-    void destroy();
     void init(SDL_Window *window,
               std::function<void()> quitApp,
               std::function<void(FBEntity, FileBrowser_ParserType)> processFile,

@@ -16,10 +16,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 ModelFaceData::~ModelFaceData() {
-    this->destroy();
-}
-
-void ModelFaceData::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);
@@ -57,8 +53,6 @@ void ModelFaceData::destroy() {
     }
 
     glDeleteVertexArrays(1, &this->glVAO);
-
-    ModelFaceBase::~ModelFaceBase();
 }
 
 void ModelFaceData::init(MeshModel model, std::string const& assetsFolder) {

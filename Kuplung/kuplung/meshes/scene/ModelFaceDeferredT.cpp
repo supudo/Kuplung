@@ -13,9 +13,6 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-void ModelFaceDeferredT::destroy() {
-}
-
 void ModelFaceDeferredT::init(MeshModel model, std::string const& assetsFolder) {
     this->meshModel = model;
     this->assetsFolder = assetsFolder;

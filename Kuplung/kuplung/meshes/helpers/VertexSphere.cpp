@@ -12,8 +12,6 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 VertexSphere::VertexSphere() {
     this->isSphere = false;
     this->showWireframes = false;
@@ -21,10 +19,6 @@ VertexSphere::VertexSphere() {
 }
 
 VertexSphere::~VertexSphere() {
-    this->destroy();
-}
-
-void VertexSphere::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);

@@ -19,7 +19,6 @@ class RenderingManager {
 public:
     explicit RenderingManager(ObjectsManager &managerObjects);
     ~RenderingManager();
-    void destroy();
     void init();
     void render(int selectedModel);
 

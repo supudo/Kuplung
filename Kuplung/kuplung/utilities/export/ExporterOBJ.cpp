@@ -12,10 +12,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 
 ExporterOBJ::~ExporterOBJ() {
-    this->destroy();
-}
-
-void ExporterOBJ::destroy() {
 }
 
 void ExporterOBJ::init(std::function<void(float)> doProgress) {

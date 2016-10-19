@@ -15,10 +15,6 @@ RenderingSimple::RenderingSimple(ObjectsManager &managerObjects) : managerObject
 }
 
 RenderingSimple::~RenderingSimple() {
-    this->destroy();
-}
-
-void RenderingSimple::destroy() {
     glDeleteProgram(this->shaderProgram);
     this->glUtils.reset();
 }

@@ -38,7 +38,6 @@ private:
     std::vector<ModelFaceBase*> meshModelFaces;
     int sceneSelectedModelObject;
 
-    void destroy();
     void pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
     void pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
 

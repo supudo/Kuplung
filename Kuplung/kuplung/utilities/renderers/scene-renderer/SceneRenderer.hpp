@@ -18,7 +18,6 @@ class SceneRenderer {
 public:
     ~SceneRenderer();
     void init();
-    void destroy();
     void renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
     void renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
 };

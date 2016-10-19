@@ -19,7 +19,7 @@
 
 class CameraModel {
 public:
-    void destroy();
+    ~CameraModel();
     void init();
     void setModel(MeshModel meshModel);
     void initProperties();

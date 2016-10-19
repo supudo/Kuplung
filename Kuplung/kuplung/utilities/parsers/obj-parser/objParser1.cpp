@@ -14,7 +14,6 @@
 #include <boost/algorithm/string.hpp>
 
 objParser1::~objParser1() {
-    this->destroy();
 }
 
 void objParser1::init(std::function<void(float)> doProgress) {
@@ -53,9 +52,6 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->regex_materialTextureSpecular = "^map_Ks\\s.*";
     this->regex_materialTextureSpecularExp = "^map_Ns\\s.*";
     this->regex_materialTextureDissolve = "^map_d\\s.*";
-}
-
-void objParser1::destroy() {
 }
 
 std::vector<MeshModel> objParser1::parse(FBEntity file) {

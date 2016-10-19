@@ -18,7 +18,6 @@ class RenderingDeferred {
 public:
     RenderingDeferred(ObjectsManager &managerObjects);
     ~RenderingDeferred();
-    void destroy();
 
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);

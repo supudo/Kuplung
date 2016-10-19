@@ -9,14 +9,10 @@
 #include "ImageRenderer.hpp"
 
 ImageRenderer::~ImageRenderer() {
-    this->destroy();
 }
 
 ImageRenderer::ImageRenderer() {
     this->rendererScene = std::make_unique<SceneRenderer>();
-}
-
-void ImageRenderer::destroy() {
 }
 
 void ImageRenderer::init() {

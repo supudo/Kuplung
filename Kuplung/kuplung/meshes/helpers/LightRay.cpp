@@ -11,21 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 LightRay::~LightRay() {
-    this->destroy();
-}
-
-LightRay::LightRay() {
-    this->glUtils = std::make_unique<GLUtils>();
-    this->axisSize = -1;
-    this->x = -1;
-    this->y = -1;
-    this->z = -1;
-}
-
-void LightRay::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -38,6 +24,14 @@ void LightRay::destroy() {
     glDeleteVertexArrays(1, &this->glVAO);
 
     this->glUtils.reset();
+}
+
+LightRay::LightRay() {
+    this->glUtils = std::make_unique<GLUtils>();
+    this->axisSize = -1;
+    this->x = -1;
+    this->y = -1;
+    this->z = -1;
 }
 
 #pragma mark - Public

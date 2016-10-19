@@ -14,10 +14,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 StructuredVolumetricSampling::~StructuredVolumetricSampling() {
-    this->destroy();
-}
-
-void StructuredVolumetricSampling::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
 
     glDisableVertexAttribArray(this->glAttributeVertexPosition);

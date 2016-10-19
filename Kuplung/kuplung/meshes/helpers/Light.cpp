@@ -16,13 +16,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 Light::~Light() {
-    this->destroy();
-}
-
-void Light::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
     glDisableVertexAttribArray(this->glAttributeTextureCoord);
     glDisableVertexAttribArray(this->glAttributeVertexNormal);

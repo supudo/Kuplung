@@ -19,7 +19,6 @@ class VertexSphere {
 public:
     VertexSphere();
     ~VertexSphere();
-    void destroy();
     bool initShaderProgram();
     void initBuffers(MeshModel meshModel, int circleSegments, float radius);
     void render(glm::mat4 matrixMVP, glm::vec4 color);

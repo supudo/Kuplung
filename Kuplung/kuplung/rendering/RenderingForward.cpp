@@ -18,10 +18,6 @@ RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObje
 }
 
 RenderingForward::~RenderingForward() {
-    this->destroy();
-}
-
-void RenderingForward::destroy() {
 //    if (this->vboTextureAmbient > 0)
 //        glDeleteBuffers(1, &this->vboTextureAmbient);
 //    if (this->vboTextureDiffuse > 0)

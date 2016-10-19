@@ -15,10 +15,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 Shadertoy::~Shadertoy() {
-    this->destroy();
-}
-
-void Shadertoy::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
 
     glDeleteTextures(1, &this->iChannel0);

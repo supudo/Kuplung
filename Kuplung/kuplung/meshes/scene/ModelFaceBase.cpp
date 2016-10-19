@@ -40,13 +40,7 @@ ModelFaceBase* ModelFaceBase::clone(int modelID) {
     return mmf;
 }
 
-#pragma mark - Destroy
-
 ModelFaceBase::~ModelFaceBase() {
-    this->destroy();
-}
-
-void ModelFaceBase::destroy() {
     this->meshModel = {};
 
     this->positionX.reset();

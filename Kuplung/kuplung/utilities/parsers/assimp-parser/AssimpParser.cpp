@@ -11,10 +11,6 @@
 #include <boost/filesystem.hpp>
 
 AssimpParser::~AssimpParser() {
-    this->destroy();
-}
-
-void AssimpParser::destroy() {
 }
 
 void AssimpParser::init(std::function<void(float)> doProgress) {

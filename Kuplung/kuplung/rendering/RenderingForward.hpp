@@ -22,7 +22,6 @@ class RenderingForward {
 public:
     explicit RenderingForward(ObjectsManager &managerObjects);
     ~RenderingForward();
-    void destroy();
 
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);

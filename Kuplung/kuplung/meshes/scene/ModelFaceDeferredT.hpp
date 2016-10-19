@@ -14,7 +14,6 @@
 
 class ModelFaceDeferredT: public ModelFaceBase {
 public:
-    void destroy();
     void init(MeshModel model, std::string const& assetsFolder);
     bool initShaderProgram();
     void initBuffers();

@@ -23,13 +23,7 @@ const GLenum SkyboxTextureCubemap[6] = {
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, // Front
 };
 
-#pragma mark - Destroy
-
 Skybox::~Skybox() {
-    this->destroy();
-}
-
-void Skybox::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
 
     if (this->vboTexture > 0)

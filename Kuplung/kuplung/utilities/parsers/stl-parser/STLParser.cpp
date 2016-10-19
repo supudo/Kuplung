@@ -9,10 +9,6 @@
 #include "STLParser.hpp"
 
 STLParser::~STLParser() {
-    this->destroy();
-}
-
-void STLParser::destroy() {
 }
 
 void STLParser::init(std::function<void(float)> doProgress) {

@@ -18,10 +18,6 @@
 #pragma mark - Destructor
 
 objParser2::~objParser2() {
-    this->destroy();
-}
-
-void objParser2::destroy() {
 }
 
 #pragma mark - Publics

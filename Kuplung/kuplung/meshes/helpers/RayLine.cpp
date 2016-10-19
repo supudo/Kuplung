@@ -11,13 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 RayLine::~RayLine() {
-    this->destroy();
-}
-
-void RayLine::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboIndices);
     glDeleteBuffers(1, &this->vboColors);

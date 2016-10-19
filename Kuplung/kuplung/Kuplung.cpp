@@ -14,16 +14,17 @@
 
 Kuplung::~Kuplung() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        this->meshModelFaces[i]->destroy();
+        ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[i];
+        delete mfd;
     }
-
-    this->managerUI->destroy();
-    this->parser->destroy();
-    this->managerObjects->destroy();
     for (size_t i=0; i<this->rayLines.size(); i++) {
-        this->rayLines[i]->destroy();
+        RayLine* rl = this->rayLines[i];
+        delete rl;
     }
 
+    this->managerUI.reset();
+    this->parser.reset();
+    this->managerObjects.reset();
     this->parser.reset();
     this->managerSaveOpen.reset();
     this->managerControls.reset();
@@ -604,7 +605,8 @@ void Kuplung::doLog(std::string const& logMessage) {
 
 void Kuplung::guiClearScreen() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        this->meshModelFaces[i]->destroy();
+        ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[i];
+        delete mfd;
     }
     this->meshModels.clear();
     this->meshModelsNew.clear();
@@ -633,7 +635,9 @@ void Kuplung::guiEditorshaderCompiled(std::string const& fileName) {
 }
 
 void Kuplung::guiModelDelete(int selectedModel) {
-    this->meshModelFaces[selectedModel]->destroy();
+    ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[selectedModel];
+    delete mfd;
+
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->meshModels.erase(this->meshModels.begin() + selectedModel);
     this->managerUI->meshModelFaces = &this->meshModelFaces;

@@ -17,7 +17,6 @@
 class Terrain {
 public:
     ~Terrain();
-    void destroy();
     void init();
     bool initShaderProgram();
     void initBuffers(std::string const& assetsFolder, int width, int height);

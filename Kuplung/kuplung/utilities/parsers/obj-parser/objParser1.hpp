@@ -19,7 +19,6 @@ public:
     ~objParser1();
     void init(std::function<void(float)> doProgress);
     std::vector<MeshModel> parse(FBEntity file);
-    void destroy();
 
 private:
     std::vector<MeshModel> models;

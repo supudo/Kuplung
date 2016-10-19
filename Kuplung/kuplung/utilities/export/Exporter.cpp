@@ -9,15 +9,11 @@
 #include "Exporter.hpp"
 
 Exporter::~Exporter() {
-    this->destroy();
+    this->exporterOBJ.reset();
 }
 
 Exporter::Exporter() {
     this->exporterOBJ = std::make_unique<ExporterOBJ>();
-}
-
-void Exporter::destroy() {
-    this->exporterOBJ.reset();
 }
 
 void Exporter::init(std::function<void(float)> doProgress) {

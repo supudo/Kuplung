@@ -21,7 +21,6 @@ public:
     ~AssimpParser();
     void init(std::function<void(float)> doProgress);
     std::vector<MeshModel> parse(FBEntity file);
-    void destroy();
 
     std::vector<float> vertices, normals;
 

@@ -15,29 +15,19 @@
  */
 
 ObjectsManager::~ObjectsManager() {
-    this->destroy();
-}
-
-/*
- *
- * General
- *
- */
-
-void ObjectsManager::destroy() {
-    this->camera->destroy();
-    this->cameraModel->destroy();
-    this->grid->destroy();
-    this->axisHelpers_xMinus->destroy();
-    this->axisHelpers_xPlus->destroy();
-    this->axisHelpers_yMinus->destroy();
-    this->axisHelpers_yPlus->destroy();
-    this->axisHelpers_zMinus->destroy();
-    this->axisHelpers_zPlus->destroy();
-    this->axisSystem->destroy();
-    this->skybox->destroy();
+    delete this->camera;
+    delete this->cameraModel;
+    delete this->grid;
+    delete this->axisHelpers_xMinus;
+    delete this->axisHelpers_xPlus;
+    delete this->axisHelpers_yMinus;
+    delete this->axisHelpers_yPlus;
+    delete this->axisHelpers_zMinus;
+    delete this->axisHelpers_zPlus;
+    delete this->axisSystem;
+    delete this->skybox;
     for (size_t i=0; i<this->lightSources.size(); i++) {
-        this->lightSources[i]->destroy();
+        delete this->lightSources[i];
     }
 }
 
@@ -394,7 +384,8 @@ void ObjectsManager::addLight(LightSourceType type, std::string title, std::stri
 
 void ObjectsManager::clearAllLights() {
     for (size_t i=0; i<this->lightSources.size(); i++) {
-        this->lightSources[i]->destroy();
+        Light* l = this->lightSources[i];
+        delete l;
     }
     this->lightSources.clear();
 }

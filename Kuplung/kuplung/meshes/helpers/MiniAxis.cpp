@@ -11,13 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 MiniAxis::~MiniAxis() {
-    this->destroy();
-}
-
-void MiniAxis::destroy() {
     this->rotateX.reset();
     this->rotateY.reset();
     this->rotateZ.reset();

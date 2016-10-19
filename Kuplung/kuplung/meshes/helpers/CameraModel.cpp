@@ -13,7 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
-void CameraModel::destroy() {
+CameraModel::~CameraModel() {
     this->positionX.reset();
     this->positionY.reset();
     this->positionZ.reset();

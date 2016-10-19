@@ -20,7 +20,6 @@
 class Spaceship {
 public:
     ~Spaceship();
-    void destroy();
     void init();
     bool initShaderProgram();
     void initBuffers(int gridSize);

@@ -33,7 +33,6 @@ public:
     ~FNTParser();
     void init();
     KuplungFontMap parse(FBEntity file);
-    void destroy();
 
 private:
     KuplungFontMap fm;

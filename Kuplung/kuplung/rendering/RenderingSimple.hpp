@@ -18,7 +18,6 @@ public:
     explicit RenderingSimple(ObjectsManager &managerObjects);
     explicit RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
     ~RenderingSimple();
-    void destroy();
 
     bool init();
     void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);

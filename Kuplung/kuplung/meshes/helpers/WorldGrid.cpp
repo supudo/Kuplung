@@ -11,13 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 WorldGrid::~WorldGrid() {
-    this->destroy();
-}
-
-void WorldGrid::destroy() {
     this->positionX.reset();
     this->positionY.reset();
     this->positionZ.reset();

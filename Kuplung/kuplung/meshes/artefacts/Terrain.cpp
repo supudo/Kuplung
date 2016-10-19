@@ -14,13 +14,7 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-#pragma mark - Destroy
-
 Terrain::~Terrain() {
-    this->destroy();
-}
-
-void Terrain::destroy() {
     glDeleteBuffers(1, &this->vboVertices);
     glDeleteBuffers(1, &this->vboNormals);
     glDeleteBuffers(1, &this->vboTextureCoordinates);

@@ -17,10 +17,6 @@ UI::UI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
 }
 
 UI::~UI() {
-    this->destroy();
-}
-
-void UI::destroy() {
     this->imguiImplementation.reset();
     this->componentLog.reset();
     this->componentScreenshot.reset();

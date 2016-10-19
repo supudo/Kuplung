@@ -15,10 +15,6 @@
 #include <glm/gtx/intersect.hpp>
 
 RayPicking::~RayPicking() {
-    this->destroy();
-}
-
-void RayPicking::destroy() {
 }
 
 void RayPicking::init(std::function<void(std::string)> doLog) {

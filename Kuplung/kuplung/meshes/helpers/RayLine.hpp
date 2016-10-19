@@ -18,7 +18,6 @@
 class RayLine {
 public:
     ~RayLine();
-    void destroy();
     void init();
     bool initShaderProgram();
     void initBuffers(glm::vec3 vecFrom, glm::vec3 vecTo);

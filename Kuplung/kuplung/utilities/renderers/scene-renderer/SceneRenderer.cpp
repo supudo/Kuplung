@@ -13,10 +13,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 SceneRenderer::~SceneRenderer() {
-    this->destroy();
-}
-
-void SceneRenderer::destroy() {
 }
 
 void SceneRenderer::init() {

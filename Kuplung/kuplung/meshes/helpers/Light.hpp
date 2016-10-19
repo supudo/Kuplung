@@ -18,7 +18,6 @@
 class Light {
 public:
     ~Light();
-    void destroy();
     void init(LightSourceType type);
     void setModel(MeshModel meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);

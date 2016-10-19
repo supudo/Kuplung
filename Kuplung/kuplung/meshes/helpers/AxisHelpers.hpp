@@ -19,7 +19,7 @@
 
 class AxisHelpers {
 public:
-    void destroy();
+    ~AxisHelpers();
     void init();
     void setModel(MeshModel meshModel);
     void initProperties();

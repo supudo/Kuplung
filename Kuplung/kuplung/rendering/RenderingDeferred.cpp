@@ -15,10 +15,6 @@ RenderingDeferred::RenderingDeferred(ObjectsManager &managerObjects) : managerOb
 }
 
 RenderingDeferred::~RenderingDeferred() {
-    this->destroy();
-}
-
-void RenderingDeferred::destroy() {
     glDeleteBuffers(1, &this->gPosition);
     glDeleteBuffers(1, &this->gNormal);
     glDeleteBuffers(1, &this->gAlbedoSpec);

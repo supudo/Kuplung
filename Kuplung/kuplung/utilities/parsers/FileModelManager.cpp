@@ -9,7 +9,10 @@
 #include "FileModelManager.hpp"
 
 FileModelManager::~FileModelManager() {
-    this->destroy();
+    this->parserOBJ2.reset();
+    this->parserOBJ1.reset();
+    this->parserSTL.reset();
+    this->parserAssimp.reset();
 }
 
 FileModelManager::FileModelManager() {
@@ -17,13 +20,6 @@ FileModelManager::FileModelManager() {
     this->parserOBJ2 = std::make_unique<objParser2>();
     this->parserSTL = std::make_unique<STLParser>();
     this->parserAssimp = std::make_unique<AssimpParser>();
-}
-
-void FileModelManager::destroy() {
-    this->parserOBJ2.reset();
-    this->parserOBJ1.reset();
-    this->parserSTL.reset();
-    this->parserAssimp.reset();
 }
 
 void FileModelManager::init(std::function<void(float)> doProgress) {

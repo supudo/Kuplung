@@ -17,10 +17,6 @@ Camera::Camera() {
 }
 
 Camera::~Camera() {
-    this->destroy();
-}
-
-void Camera::destroy() {
     this->eyeSettings.reset();
 
     this->positionX.reset();

@@ -18,7 +18,6 @@
 class Skybox {
 public:
     ~Skybox();
-    void destroy();
     void init(int gridSize);
     bool initBuffers();
     void render(glm::mat4 matrixView, float plane_close, float plane_far, float fov);

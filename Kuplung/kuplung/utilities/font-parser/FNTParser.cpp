@@ -14,10 +14,6 @@
 //#include <boost/algorithm/string.hpp>
 
 FNTParser::~FNTParser() {
-    this->destroy();
-}
-
-void FNTParser::destroy() {
 }
 
 void FNTParser::init() {

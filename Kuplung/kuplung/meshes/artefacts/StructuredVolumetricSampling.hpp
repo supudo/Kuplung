@@ -16,7 +16,6 @@
 class StructuredVolumetricSampling {
 public:
     ~StructuredVolumetricSampling();
-    void destroy();
     void init();
     bool initShaderProgram();
     void initBuffers();

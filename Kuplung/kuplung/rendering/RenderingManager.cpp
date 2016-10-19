@@ -13,10 +13,6 @@ RenderingManager::RenderingManager(ObjectsManager &managerObjects) : managerObje
 }
 
 RenderingManager::~RenderingManager() {
-    this->destroy();
-}
-
-void RenderingManager::destroy() {
 }
 
 void RenderingManager::init() {

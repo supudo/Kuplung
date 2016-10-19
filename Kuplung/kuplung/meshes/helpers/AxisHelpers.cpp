@@ -13,7 +13,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <fstream>
 
-void AxisHelpers::destroy() {
+AxisHelpers::~AxisHelpers() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);

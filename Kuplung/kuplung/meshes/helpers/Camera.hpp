@@ -18,7 +18,6 @@ class Camera {
 public:
     ~Camera();
     Camera();
-    void destroy();
     void initProperties();
     void render();
     glm::vec3 createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far);

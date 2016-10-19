@@ -12,16 +12,10 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-#pragma mark - Destroy
-
 BoundingBox::BoundingBox() {
 }
 
 BoundingBox::~BoundingBox() {
-    this->destroy();
-}
-
-void BoundingBox::destroy() {
     glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);

@@ -17,9 +17,8 @@
 
 class BoundingBox {
 public:
-    BoundingBox();
     ~BoundingBox();
-    void destroy();
+    BoundingBox();
     bool initShaderProgram();
     void initBuffers(MeshModel meshModel);
     void render(glm::mat4 matrixMVP, glm::vec4 outlineColor);

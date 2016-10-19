@@ -35,8 +35,6 @@ typedef enum GeometryEditMode {
 class ObjectsManager {
 public:
     ~ObjectsManager();
-
-    void destroy();
     void init(std::function<void(float)> doProgress,
               std::function<void()> addTerrain,
               std::function<void()> addSpaceship);
