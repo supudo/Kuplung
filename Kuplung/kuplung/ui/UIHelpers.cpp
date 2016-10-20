@@ -80,8 +80,13 @@ bool UIHelpers::addControlsSliderSameLine(std::string const& title, int idx, flo
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();
     }
-    std::string s_id = title + "##10" + std::to_string(idx);
-    return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
+//    std::string s_id = title + "##10" + std::to_string(idx);
+//    return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
+    std::string s_id = "##10" + std::to_string(idx);
+    bool r = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);;
+    ImGui::SameLine();
+    ImGui::Text("%s", title.c_str());
+    return r;
 }
 
 void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bool* bValue) {

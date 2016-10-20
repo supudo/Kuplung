@@ -462,6 +462,8 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
 
         ImGui::Separator();
 
+        static bool K_DCM_ReadOnly = false;
+
         switch (this->selectedTabScene) {
             case 0: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
@@ -482,9 +484,17 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                         (*meshModelFaces)[this->selectedObject]->Setting_Gizmo_Translate = false;
                     }
                 }
-                this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
+                ImGui::Checkbox("Scale all", &(*meshModelFaces)[this->selectedObject]->scale0);
+                if ((*meshModelFaces)[this->selectedObject]->scale0) {
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[this->selectedObject]->scaleX->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("X");
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[this->selectedObject]->scaleY->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Y");
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[this->selectedObject]->scaleZ->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Z");
+                }
+                else {
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleX->animate, &(*meshModelFaces)[this->selectedObject]->scaleX->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleY->animate, &(*meshModelFaces)[this->selectedObject]->scaleY->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[this->selectedObject]->scaleZ->animate, &(*meshModelFaces)[this->selectedObject]->scaleZ->point, false, isFrame);
+                }
                 break;
             }
             case 2: {

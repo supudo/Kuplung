@@ -40,8 +40,6 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboIndices;
     GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
-
-    std::string readFile(const char *filePath);
 };
 
 #endif /* AxisHelpers_hpp */

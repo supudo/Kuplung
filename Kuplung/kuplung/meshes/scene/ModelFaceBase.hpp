@@ -67,6 +67,7 @@ public:
     float Setting_Alpha;
     int Setting_TessellationSubdivision;
     std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+    bool scale0;
     std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
     std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
     std::unique_ptr<ObjectCoordinate> displaceX, displaceY, displaceZ;
