@@ -159,6 +159,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/ImageViewer.cpp \
+    kuplung/ui/components/RendererUI.cpp \
     kuplung/ui/components/Log.cpp \
     kuplung/ui/components/Screenshot.cpp \
     kuplung/ui/components/ColorPicker.cpp \
@@ -248,6 +249,7 @@ HEADERS += \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/ImageViewer.hpp \
+    kuplung/ui/components/RendererUI.hpp \
     kuplung/ui/components/Log.hpp \
     kuplung/ui/components/Screenshot.hpp \
     kuplung/ui/components/ColorPicker.hpp \

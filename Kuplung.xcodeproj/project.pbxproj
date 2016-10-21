@@ -278,6 +278,7 @@
 		8ADE50C11D2D41F900A6E7F0 /* stormydays_left.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */; };
 		8ADE50C21D2D41F900A6E7F0 /* stormydays_right.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */; };
 		8ADE50C31D2D41F900A6E7F0 /* stormydays_top.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */; };
+		8AE25AE61DBA0B590098252E /* RendererUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AE25AE41DBA0B590098252E /* RendererUI.cpp */; };
 		8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC9CE11DAE44F600161D50 /* Consumption.cpp */; };
 		8AFD82151D410C0A00D088C7 /* Kuplung_RecentFilesImported.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */; };
 		8AFD82161D410C0C00D088C7 /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */; };
@@ -931,6 +932,8 @@
 		8ADE50AF1D2D41E400A6E7F0 /* stormydays_left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_left.jpg; path = skybox/stormydays_left.jpg; sourceTree = "<group>"; };
 		8ADE50B01D2D41E400A6E7F0 /* stormydays_right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_right.jpg; path = skybox/stormydays_right.jpg; sourceTree = "<group>"; };
 		8ADE50B11D2D41E400A6E7F0 /* stormydays_top.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = stormydays_top.jpg; path = skybox/stormydays_top.jpg; sourceTree = "<group>"; };
+		8AE25AE41DBA0B590098252E /* RendererUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RendererUI.cpp; sourceTree = "<group>"; };
+		8AE25AE51DBA0B590098252E /* RendererUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RendererUI.hpp; sourceTree = "<group>"; };
 		8AECC0791CB274610096AE7A /* skybox.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.frag; sourceTree = "<group>"; };
 		8AECC07A1CB274610096AE7A /* skybox.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = skybox.vert; sourceTree = "<group>"; };
 		8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.geom; sourceTree = "<group>"; };
@@ -1105,6 +1108,8 @@
 				8A6E706D1C6CACB40085CAE5 /* Log.cpp */,
 				8A6E706E1C6CACB40085CAE5 /* Log.hpp */,
 				8AD91DA91CA3D980004674BC /* materialeditor */,
+				8AE25AE41DBA0B590098252E /* RendererUI.cpp */,
+				8AE25AE51DBA0B590098252E /* RendererUI.hpp */,
 				8A6E706F1C6CACB40085CAE5 /* Screenshot.cpp */,
 				8A6E70701C6CACB40085CAE5 /* Screenshot.hpp */,
 				8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */,
@@ -1828,6 +1833,7 @@
 				8A81DDC31D1A82B5004F3270 /* Light.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
+				8AE25AE61DBA0B590098252E /* RendererUI.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8AB255B91DA4F2E100ABF2AC /* DialogShadertoy.cpp in Sources */,

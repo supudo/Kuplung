@@ -393,6 +393,13 @@ void Kuplung::renderScene() {
     if (this->managerUI->showSVS)
         this->managerUI->componentSVS->render(&this->managerUI->showSVS);
 
+    // renderer
+    if (this->managerUI->showRendererUI)
+        this->managerUI->componentRendererUI->render(&this->managerUI->showRendererUI,
+                                                     this->imageRenderer.get(),
+                                                     this->managerObjects.get(),
+                                                     &this->meshModelFaces);
+
     this->processRunningThreads();
 }
 

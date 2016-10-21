@@ -30,6 +30,8 @@ UI::~UI() {
     this->componentShadertoy.reset();
     this->componentConsumption.reset();
     this->componentSVS.reset();
+    this->componentImageViewer.reset();
+    this->componentRendererUI.reset();
 }
 
 void UI::init(SDL_Window *window,
@@ -91,6 +93,7 @@ void UI::init(SDL_Window *window,
     this->showShadertoy = false;
     this->showShadertoyMessage = false;
     this->showImageViewer = false;
+    this->showRendererUI = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -137,6 +140,9 @@ void UI::init(SDL_Window *window,
     this->componentConsumption->init();
 
     this->componentImageViewer = std::make_unique<ImageViewer>();
+
+    this->componentRendererUI = std::make_unique<RendererUI>();
+    this->componentRendererUI->init(this->sdlWindow);
 }
 
 void UI::doLog(std::string const& message) {
@@ -274,7 +280,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::EndMenu();
             }
             ImGui::Separator();
-            ImGui::MenuItem("Render Image", NULL, &this->showImageSave);
+            ImGui::MenuItem(ICON_FA_FILE_IMAGE_O " Render Image", NULL, &this->showImageSave);
+            ImGui::MenuItem(ICON_FA_CUBES " Renderer UI", NULL, &this->showRendererUI);
             ImGui::EndMenu();
         }
 

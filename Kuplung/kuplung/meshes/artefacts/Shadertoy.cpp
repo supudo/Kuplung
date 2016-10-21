@@ -189,7 +189,7 @@ void Shadertoy::initTextures() {
     }
     if (this->iChannel3_Image != "") {
         this->addTexture(this->iChannel3_Image, &this->iChannel3, tc);
-        tc += 1;
+//        tc += 1;
     }
 }
 

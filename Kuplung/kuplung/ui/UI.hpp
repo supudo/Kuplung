@@ -19,6 +19,7 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
+#include "kuplung/ui/components/RendererUI.hpp"
 #include "kuplung/ui/components/ShaderEditor.hpp"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
@@ -77,6 +78,9 @@ public:
 
     std::unique_ptr<DialogSVS> componentSVS;
     bool showSVS;
+
+    std::unique_ptr<RendererUI> componentRendererUI;
+    bool showRendererUI;
 
 private:
     SDL_Window *sdlWindow;
