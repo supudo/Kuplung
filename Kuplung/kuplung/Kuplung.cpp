@@ -179,7 +179,7 @@ bool Kuplung::init() {
                     this->managerExporter = std::make_unique<Exporter>();
                     this->managerExporter->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
-                    this->imageRenderer = std::make_unique<ImageRenderer>();
+                    this->imageRenderer = std::make_unique<ImageRenderer>(*this->managerObjects);
                     this->imageRenderer->init();
 
                     this->managerRendering = std::make_unique<RenderingManager>(*this->managerObjects);
@@ -649,9 +649,10 @@ void Kuplung::guiModelDelete(int selectedModel) {
 void Kuplung::guiRenderScene(FBEntity file) {
     this->managerObjects->renderSkybox();
     this->renderSceneModels();
-    SDL_GL_SwapWindow(this->gWindow);
+//    SDL_GL_SwapWindow(this->gWindow);
 
-    this->imageRenderer->renderImage(ImageRendererType_Scene, file, &this->meshModelFaces, this->managerObjects);
+    std::string renderedImage = this->imageRenderer->renderImage(ImageRendererType_SceneFull, file, &this->meshModelFaces);
+    this->managerUI->showRenderedImage(renderedImage);
 //    if (SDL_GL_MakeCurrent(this->gWindow, this->glContext) < 0)
 //        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }

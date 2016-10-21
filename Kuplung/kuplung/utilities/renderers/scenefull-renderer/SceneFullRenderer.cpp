@@ -1,35 +1,29 @@
 //
-//  RenderingDeferred.cpp
+//  SceneFullRenderer.cpp
 //  Kuplung
 //
-//  Created by Sergey Petrov on 12/2/15.
+//  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "RenderingDeferred.hpp"
+#include "SceneFullRenderer.hpp"
 #include <glm/gtc/type_ptr.hpp>
-#include <fstream>
 
-RenderingDeferred::RenderingDeferred(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+SceneFullRenderer::SceneFullRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
 }
 
-RenderingDeferred::~RenderingDeferred() {
+SceneFullRenderer::~SceneFullRenderer() {
     glDeleteBuffers(1, &this->gPosition);
     glDeleteBuffers(1, &this->gNormal);
     glDeleteBuffers(1, &this->gAlbedoSpec);
 
     glDisableVertexAttribArray(this->quadVBO);
-    glDisableVertexAttribArray(this->cubeVBO);
-
     glDeleteVertexArrays(1, &this->quadVAO);
-    glDeleteVertexArrays(1, &this->cubeVAO);
-
     glDeleteFramebuffers(1, &this->gBuffer);
 
     glDeleteProgram(this->shaderProgram_GeometryPass);
     glDeleteProgram(this->shaderProgram_LightingPass);
-    glDeleteProgram(this->shaderProgram_LightBox);
 
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
         delete this->mfLights_Directional[i];
@@ -43,7 +37,7 @@ RenderingDeferred::~RenderingDeferred() {
     this->glUtils.reset();
 }
 
-bool RenderingDeferred::init() {
+void SceneFullRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
 
     this->GLSL_LightSourceNumber_Directional = 8;
@@ -54,16 +48,58 @@ bool RenderingDeferred::init() {
 
     success &= this->initGeometryPass();
     success &= this->initLighingPass();
-    success &= this->initLightObjects();
 
-    this->initProps();
-    this->initGBuffer();
-    this->initLights();
-
-    return success;
+    if (success) {
+        this->initGBuffer();
+        this->initLights();
+    }
 }
 
-bool RenderingDeferred::initGeometryPass() {
+std::string SceneFullRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+    this->fileOutputImage = file;
+
+    this->renderGBuffer(meshModelFaces);
+    this->renderLightingPass();
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
+    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+    glBlitFramebuffer(0, 0,
+                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
+                      0, 0,
+                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
+                      GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    int width = Settings::Instance()->SDL_Window_Width;
+    int height = Settings::Instance()->SDL_Window_Height;
+
+    SDL_Surface *image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
+
+    glReadBuffer(GL_BACK);
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+
+    // flip vertically
+    int index;
+    void* temp_row;
+    int height_div_2;
+    temp_row = (void *)malloc(image->pitch);
+    if (NULL == temp_row)
+        Settings::Instance()->funcDoLog("[SceneFullRenderer] Not enough memory for image inversion");
+    height_div_2 = (int) (image->h * .5);
+    for (index = 0; index < height_div_2; index++) {
+        memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
+        memcpy((Uint8 *)(image->pixels) + image->pitch * index, (Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), image->pitch);
+        memcpy((Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), temp_row, image->pitch);
+    }
+    free(temp_row);
+
+    std::string f = file.path + ".bmp";
+    SDL_SaveBMP(image, f.c_str());
+    SDL_FreeSurface(image);
+
+    return f;
+}
+
+bool SceneFullRenderer::initGeometryPass() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
@@ -96,7 +132,7 @@ bool RenderingDeferred::initGeometryPass() {
     return true;
 }
 
-bool RenderingDeferred::initLighingPass() {
+bool SceneFullRenderer::initLighingPass() {
     // Lighting Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
@@ -126,79 +162,7 @@ bool RenderingDeferred::initLighingPass() {
     return true;
 }
 
-bool RenderingDeferred::initLightObjects() {
-    // Light Boxes
-    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
-
-    this->shaderProgram_LightBox = glCreateProgram();
-
-    bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
-
-    if (!shaderCompilation)
-        return false;
-
-    glLinkProgram(this->shaderProgram_LightBox);
-
-    GLint programSuccess = GL_TRUE;
-    glGetProgramiv(this->shaderProgram_LightBox, GL_LINK_STATUS, &programSuccess);
-    if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Light Box] Error linking program " + std::to_string(this->shaderProgram_LightBox) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram_LightBox);
-        return false;
-    }
-    return true;
-}
-
-void RenderingDeferred::initProps() {
-    glUseProgram(this->shaderProgram_LightingPass);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_position"), 0);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_normal"), 1);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_albedospec"), 2);
-
-    //TODO: parametrize this in the GUI
-    if (this->managerObjects.Setting_DeferredTestMode) {
-        this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
-        this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
-        this->objectPositions.push_back(glm::vec3(0.0, -3.0, -3.0));
-        this->objectPositions.push_back(glm::vec3(3.0, -3.0, -3.0));
-        this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 0.0));
-        this->objectPositions.push_back(glm::vec3(3.0, -3.0, 0.0));
-        this->objectPositions.push_back(glm::vec3(-3.0, -3.0, 3.0));
-        this->objectPositions.push_back(glm::vec3(0.0, -3.0, 3.0));
-        this->objectPositions.push_back(glm::vec3(3.0, -3.0, 3.0));
-    }
-    else
-        this->objectPositions.push_back(glm::vec3(0.0, 0.0, 0.0));
-
-    for (size_t i=0; i<this->objectPositions.size(); i++) {
-        this->objectPositions[i] *= glm::vec3(1.0, 0.0, 1.0);
-    }
-
-    // - Colors
-    srand(13);
-    for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
-        // Calculate slightly random offsets
-        GLfloat xPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
-        //GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 4.0f;
-        GLfloat yPos = ((rand() % 100) / 100.0f) * 6.0f - 0.0f;
-        GLfloat zPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
-        this->lightPositions.push_back(glm::vec3(xPos, yPos, zPos));
-
-        // Also calculate random color
-        GLfloat rColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-        GLfloat gColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-        GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
-        this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
-    }
-}
-
-void RenderingDeferred::initGBuffer() {
+void SceneFullRenderer::initGBuffer() {
     // Set up G-Buffer
     // 3 textures:
     // 1. Positions (RGB)
@@ -248,7 +212,7 @@ void RenderingDeferred::initGBuffer() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void RenderingDeferred::initLights() {
+void SceneFullRenderer::initLights() {
     // light - directional
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
         ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
@@ -312,24 +276,7 @@ void RenderingDeferred::initLights() {
     }
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
-    this->renderGBuffer(meshModelFaces, selectedModel);
-    this->renderLightingPass();
-    if (this->managerObjects.Setting_DeferredTestLights)
-        this->renderLightObjects();
-    else {
-        glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-        glBlitFramebuffer(0, 0,
-                          Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                          0, 0,
-                          Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                          GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-    }
-}
-
-void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+void SceneFullRenderer::renderGBuffer(std::vector<ModelFaceBase*> *meshModelFaces) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -342,66 +289,56 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    for (GLuint i=0; i<((this->managerObjects.Setting_DeferredTestMode) ? this->objectPositions.size() : 1); i++) {
-        matrixModel = glm::mat4();
+    matrixModel = glm::mat4();
+    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+    matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
+    matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
-        matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
-        if (this->objectPositions.size() > 1)
-            matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
+    for (size_t j=0; j<(*meshModelFaces).size(); j++) {
+        ModelFaceData* mfd = (ModelFaceData*)(*meshModelFaces)[j];
 
+        // scale
+        matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+        // rotate
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-        matrixModel = glm::rotate(matrixModel, glm::radians(-90.0f), glm::vec3(1, 0, 0));
-//        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
+        matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
+        matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
+        matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+        // translate
+        matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
 
-//        matrixModel *= managerObjects->grid->matrixModel;
+        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
 
-        for (size_t j=0; j<meshModelFaces.size(); j++) {
-            ModelFaceData *mfd = meshModelFaces[j];
-
-            // scale
-            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-            // rotate
-            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-            // translate
-            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
-
-            glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
-
-            if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
-                glUniform1i(this->gl_GeometryPass_Texture_Diffuse, 0);
-                glActiveTexture(GL_TEXTURE0);
-                glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDiffuse);
-            }
-
-            if (mfd->vboTextureSpecular > 0 && mfd->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
-                glUniform1i(this->gl_GeometryPass_Texture_Specular, 1);
-                glActiveTexture(GL_TEXTURE1);
-                glBindTexture(GL_TEXTURE_2D, mfd->vboTextureSpecular);
-            }
-
-            mfd->matrixProjection = this->matrixProject;
-            mfd->matrixCamera = this->matrixCamera;
-            mfd->matrixModel = matrixModel;
-            mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
-            mfd->lightSources = this->managerObjects.lightSources;
-            mfd->setOptionsSelected(int(j) == selectedModel);
-            mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
-            mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
-            mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
-            mfd->renderModel(false);
+        if (mfd->vboTextureDiffuse > 0 && mfd->meshModel.ModelMaterial.TextureDiffuse.UseTexture) {
+            glUniform1i(this->gl_GeometryPass_Texture_Diffuse, 0);
+            glActiveTexture(GL_TEXTURE0);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureDiffuse);
         }
+
+        if (mfd->vboTextureSpecular > 0 && mfd->meshModel.ModelMaterial.TextureSpecular.UseTexture) {
+            glUniform1i(this->gl_GeometryPass_Texture_Specular, 1);
+            glActiveTexture(GL_TEXTURE1);
+            glBindTexture(GL_TEXTURE_2D, mfd->vboTextureSpecular);
+        }
+
+        mfd->matrixProjection = this->matrixProject;
+        mfd->matrixCamera = this->matrixCamera;
+        mfd->matrixModel = matrixModel;
+        mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
+        mfd->lightSources = this->managerObjects.lightSources;
+        mfd->setOptionsSelected(0);
+        mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
+        mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
+        mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
+        mfd->renderModel(false);
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void RenderingDeferred::renderLightingPass() {
+void SceneFullRenderer::renderLightingPass() {
     // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
@@ -521,79 +458,14 @@ void RenderingDeferred::renderLightingPass() {
         glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
     }
 
-    // Also send light relevant uniforms
-    if (this->managerObjects.Setting_DeferredTestLights) {
-        GLuint i = 0;
-        for (; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
-
-            // Update attenuation parameters and calculate radius
-            const GLfloat constant = 1.0; // Note that we don't send this to the shader, we assume it is always 1.0 (in our case)
-            const GLfloat linear = 0.7f;
-            const GLfloat quadratic = 1.8f;
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), linear);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), quadratic);
-
-            // Then calculate radius of light volume/sphere
-            const GLfloat lightThreshold = 5.0; // 5 / 256
-            const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
-            GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
-        }
-        for (; i<this->lightPositions.size(); i++) {
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), 0.0f);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), 0.0f);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
-        }
-    }
-    else {
-        for (GLuint i=0; i<this->lightPositions.size(); i++) {
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
-            glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Linear").c_str()), 0.0f);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Quadratic").c_str()), 0.0f);
-            glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), 0.0f);
-        }
-    }
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, "viewPos"), 1, &this->managerObjects.camera->cameraPosition[0]);
-    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), this->managerObjects.Setting_LightingPass_DrawMode + 1);
+    glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "draw_mode"), 4);
     glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), this->managerObjects.Setting_DeferredAmbientStrength);
     glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "gammaCoeficient"), this->managerObjects.Setting_GammaCoeficient);
     this->renderQuad();
 }
 
-void RenderingDeferred::renderLightObjects() {
-    // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
-    glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
-    glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
-    // blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
-    // the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the
-    // depth buffer in another stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
-    glBlitFramebuffer(0, 0,
-                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                      0, 0,
-                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                      GL_DEPTH_BUFFER_BIT, GL_NEAREST);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-    // 3. Render lights on top of scene, by blitting
-    glUseProgram(this->shaderProgram_LightBox);
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (GLuint i=0; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
-        glm::mat4 matrixModel = glm::mat4();
-        matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
-        matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "model"), 1, GL_FALSE, glm::value_ptr(matrixModel));
-        glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &this->lightColors[i][0]);
-        this->renderCube();
-    }
-}
-
-void RenderingDeferred::renderQuad() {
+void SceneFullRenderer::renderQuad() {
     if (this->quadVAO == 0) {
         GLfloat quadVertices[] = {
             // Positions        // Texture Coords
@@ -615,73 +487,5 @@ void RenderingDeferred::renderQuad() {
     }
     glBindVertexArray(this->quadVAO);
     glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-    glBindVertexArray(0);
-}
-
-void RenderingDeferred::renderCube() {
-    if (this->cubeVAO == 0) {
-        GLfloat vertices[] = {
-            // Back face
-            -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // Bottom-left
-            0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right
-            0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 0.0f, // bottom-right
-            0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f,  // top-right
-            -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f,  // bottom-left
-            -0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 1.0f,// top-left
-            // Front face
-            -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, // bottom-left
-            0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,  // bottom-right
-            0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,  // top-right
-            0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f, // top-right
-            -0.5f, 0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,  // top-left
-            -0.5f, -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,  // bottom-left
-            // Left face
-            -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-            -0.5f, 0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-left
-            -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-left
-            -0.5f, -0.5f, -0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-left
-            -0.5f, -0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 0.0f, 0.0f,  // bottom-right
-            -0.5f, 0.5f, 0.5f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-right
-            // Right face
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, // top-left
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f, // bottom-right
-            0.5f, 0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f, // top-right
-            0.5f, -0.5f, -0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 1.0f,  // bottom-right
-            0.5f, 0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f,  // top-left
-            0.5f, -0.5f, 0.5f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, // bottom-left
-            // Bottom face
-            -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-            0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 1.0f, // top-left
-            0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f,// bottom-left
-            0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f, // bottom-left
-            -0.5f, -0.5f, 0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 0.0f, // bottom-right
-            -0.5f, -0.5f, -0.5f, 0.0f, -1.0f, 0.0f, 0.0f, 1.0f, // top-right
-            // Top face
-            -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
-            0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-            0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top-right
-            0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, // bottom-right
-            -0.5f, 0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,// top-left
-            -0.5f, 0.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f // bottom-left
-        };
-        glGenVertexArrays(1, &this->cubeVAO);
-        glGenBuffers(1, &this->cubeVBO);
-        // Fill buffer
-        glBindBuffer(GL_ARRAY_BUFFER, this->cubeVBO);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        // Link vertex attributes
-        glBindVertexArray(this->cubeVAO);
-        glEnableVertexAttribArray(0);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
-        glEnableVertexAttribArray(1);
-        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
-        glEnableVertexAttribArray(2);
-        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
-    }
-    // Render Cube
-    glBindVertexArray(this->cubeVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
     glBindVertexArray(0);
 }

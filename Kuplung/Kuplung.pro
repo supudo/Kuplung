@@ -158,6 +158,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/FileSaver.cpp \
+    kuplung/ui/components/ImageViewer.cpp \
     kuplung/ui/components/Log.cpp \
     kuplung/ui/components/Screenshot.cpp \
     kuplung/ui/components/ColorPicker.cpp \
@@ -197,6 +198,7 @@ SOURCES += main.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
+    kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
@@ -245,6 +247,7 @@ HEADERS += \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/FileSaver.hpp \
+    kuplung/ui/components/ImageViewer.hpp \
     kuplung/ui/components/Log.hpp \
     kuplung/ui/components/Screenshot.hpp \
     kuplung/ui/components/ColorPicker.hpp \
@@ -295,6 +298,7 @@ HEADERS += \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
+    kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \

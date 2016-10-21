@@ -90,6 +90,7 @@ void UI::init(SDL_Window *window,
     this->showSVS = false;
     this->showShadertoy = false;
     this->showShadertoyMessage = false;
+    this->showImageViewer = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -134,6 +135,8 @@ void UI::init(SDL_Window *window,
 
     this->componentConsumption = std::make_unique<Consumption>();
     this->componentConsumption->init();
+
+    this->componentImageViewer = std::make_unique<ImageViewer>();
 }
 
 void UI::doLog(std::string const& message) {
@@ -374,6 +377,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->showShadertoyMessage)
         this->dialogShadertoyMessageWindow();
 
+    if (this->showImageViewer)
+        this->componentImageViewer->showImage(&this->showImageViewer);
+
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
     if (ImGui::BeginPopupModal("Kuplung Parsing", &this->isParsingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
@@ -405,6 +411,18 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showDemoWindow)
         ImGui::ShowTestWindow(&this->showDemoWindow);
+}
+
+void UI::showRenderedImage(std::string renderedImage) {
+    this->componentImageViewer->genTexture = true;
+    this->componentImageViewer->imagePath = renderedImage;
+
+    int wWidth, wHeight;
+    SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
+    this->componentImageViewer->wWidth = wWidth;
+    this->componentImageViewer->wHeight = wHeight;
+
+    this->showImageViewer = true;
 }
 
 void UI::popupRecentFileDoesntExists() {

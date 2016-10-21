@@ -12,13 +12,17 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/stb/stb_image.h"
 
+SceneRenderer::SceneRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
+}
+
 SceneRenderer::~SceneRenderer() {
 }
 
 void SceneRenderer::init() {
 }
 
-void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::string SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -32,8 +36,8 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *mesh
     void* temp_row;
     int height_div_2;
     temp_row = (void *)malloc(image->pitch);
-    if(NULL == temp_row)
-        Settings::Instance()->funcDoLog("Not enough memory for image inversion");
+    if (NULL == temp_row)
+        Settings::Instance()->funcDoLog("[SceneRenderer] Not enough memory for image inversion");
     height_div_2 = (int) (image->h * .5);
     for (index = 0; index < height_div_2; index++) {
         memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
@@ -42,13 +46,16 @@ void SceneRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *mesh
     }
     free(temp_row);
 
-    std::string f = file.path + "/" + file.title + ".bmp";
+    //std::string f = file.path + "/" + file.title + ".bmp";
+    std::string f = file.path + ".bmp";
 
     SDL_SaveBMP(image, f.c_str());
     SDL_FreeSurface(image);
+
+    return f;
 }
 
-void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::string SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -87,7 +94,7 @@ void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *mes
                     glClearColor(Settings::Instance()->guiClearColor.r, Settings::Instance()->guiClearColor.g, Settings::Instance()->guiClearColor.b, Settings::Instance()->guiClearColor.w);
                     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-                    managerObjects->render();
+                    this->managerObjects.render();
                     //managerObjects->renderSkybox();
 
 //                    // render models
@@ -163,4 +170,6 @@ void SceneRenderer::renderImage2(FBEntity file, std::vector<ModelFaceBase*> *mes
             SDL_DestroyWindow(gWindow);
         }
     }
+
+    return "";
 }

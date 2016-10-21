@@ -18,6 +18,7 @@
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
+#include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/ShaderEditor.hpp"
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
@@ -64,6 +65,7 @@ public:
     void hideLoading();
     void showExporting();
     void hideExporting();
+    void showRenderedImage(std::string renderedImage);
 
     std::vector<ModelFaceBase*> *meshModelFaces;
     bool isFrame;
@@ -126,6 +128,7 @@ private:
     std::unique_ptr<DialogControlsModels> controlsModels;
     std::unique_ptr<DialogShadertoy> componentShadertoy;
     std::unique_ptr<Consumption> componentConsumption;
+    std::unique_ptr<ImageViewer> componentImageViewer;
 
     bool needsFontChange;
 
@@ -149,6 +152,7 @@ private:
     bool showRecentFileImportedDoesntExists;
     bool showShadertoy;
     bool showShadertoyMessage;
+    bool showImageViewer;
 
 };
 

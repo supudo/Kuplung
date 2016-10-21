@@ -8,18 +8,25 @@
 
 #include "ImageRenderer.hpp"
 
+ImageRenderer::ImageRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+    this->managerObjects = managerObjects;
+}
+
 ImageRenderer::~ImageRenderer() {
 }
 
-ImageRenderer::ImageRenderer() {
-    this->rendererScene = std::make_unique<SceneRenderer>();
-}
-
 void ImageRenderer::init() {
+    this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
     this->rendererScene->init();
+
+    this->rendererSceneFull = std::make_unique<SceneFullRenderer>(this->managerObjects);
+    this->rendererSceneFull->init();
 }
 
-void ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     if (type == ImageRendererType_Scene)
-        this->rendererScene->renderImage(file, meshModelFaces, managerObjects);
+        return this->rendererScene->renderImage(file, meshModelFaces);
+    else if (type == ImageRendererType_SceneFull)
+        return this->rendererSceneFull->renderImage(file, meshModelFaces);
+    return "";
 }

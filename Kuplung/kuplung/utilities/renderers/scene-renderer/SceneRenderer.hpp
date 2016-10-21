@@ -16,10 +16,14 @@
 
 class SceneRenderer {
 public:
+    SceneRenderer(ObjectsManager &managerObjects);
     ~SceneRenderer();
     void init();
-    void renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
-    void renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects);
+    std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
+    std::string renderImage2(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
+
+private:
+    ObjectsManager &managerObjects;
 };
 
 #endif /* SceneRenderer_hpp */
