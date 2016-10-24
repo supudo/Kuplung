@@ -16,22 +16,22 @@ ImageRenderer::~ImageRenderer() {
 }
 
 void ImageRenderer::init() {
-    this->rendererDefault = std::make_unique<DefaultRenderer>(this->managerObjects);
-    this->rendererDefault->init();
-
     this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
     this->rendererScene->init();
 
-    this->rendererSceneFull = std::make_unique<SceneFullRenderer>(this->managerObjects);
-    this->rendererSceneFull->init();
+    this->rendererDefaultForward = std::make_unique<DefaultForwardRenderer>(this->managerObjects);
+    this->rendererDefaultForward->init();
+
+    this->rendererDefaultDeferred = std::make_unique<DefaultDeferredRenderer>(this->managerObjects);
+    this->rendererDefaultDeferred->init();
 }
 
 std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
-    if (type == ImageRendererType_Default)
-        return this->rendererDefault->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_Scene)
+    if (type == ImageRendererType_Scene)
         return this->rendererScene->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_SceneFull)
-        return this->rendererSceneFull->renderImage(file, meshModelFaces);
+    else if (type == ImageRendererType_DefaultForward)
+        return this->rendererDefaultForward->renderImage(file, meshModelFaces);
+    else if (type == ImageRendererType_DefaultDeferred)
+        return this->rendererDefaultDeferred->renderImage(file, meshModelFaces);
     return "";
 }

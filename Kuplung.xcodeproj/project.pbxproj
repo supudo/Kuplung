@@ -25,7 +25,6 @@
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */; };
-		8A3BEE0B1DBE0DB6004A8A1D /* DefaultRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BEE091DBE0DB6004A8A1D /* DefaultRenderer.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
@@ -61,7 +60,6 @@
 		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
 		8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */; };
 		8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */; };
-		8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */; };
 		8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */; };
 		8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A21CD27B9E002CB119 /* objParser1.cpp */; };
 		8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A41CD27B9E002CB119 /* objParser2.cpp */; };
@@ -98,6 +96,9 @@
 		8A81DDC61D1A82B5004F3270 /* RayLine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDB91D1A82B5004F3270 /* RayLine.cpp */; };
 		8A81DDC71D1A82B5004F3270 /* Skybox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDBB1D1A82B5004F3270 /* Skybox.cpp */; };
 		8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDBD1D1A82B5004F3270 /* WorldGrid.cpp */; };
+		8A83BF891DBE3AB200B927D5 /* DefaultDeferredRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83BF871DBE3AB200B927D5 /* DefaultDeferredRenderer.cpp */; };
+		8A83BF8D1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83BF8B1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp */; };
+		8A83BF911DBE3ACE00B927D5 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83BF8F1DBE3ACE00B927D5 /* SceneRenderer.cpp */; };
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
 		8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */; };
@@ -254,7 +255,6 @@
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
 		8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2913D1CD2455000A631C1 /* AssimpParser.cpp */; };
 		8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC291421CD2456800A631C1 /* STLParser.cpp */; };
-		8AC4B80C1DBA099100F1D850 /* SceneFullRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B80A1DBA099100F1D850 /* SceneFullRenderer.cpp */; };
 		8AC4B80F1DBA09B800F1D850 /* ImageViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B80D1DBA09B800F1D850 /* ImageViewer.cpp */; };
 		8AC828B41BF5FEE7009C74E0 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC828B31BF5FEE7009C74E0 /* main.cpp */; };
 		8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AD104031C049E8A008CE831 /* OpenGL.framework */; };
@@ -617,8 +617,6 @@
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
 		8A3A29F91D2D0E4800F26AE4 /* RenderingDeferred.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingDeferred.cpp; path = rendering/RenderingDeferred.cpp; sourceTree = "<group>"; };
 		8A3A29FA1D2D0E4800F26AE4 /* RenderingDeferred.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingDeferred.hpp; path = rendering/RenderingDeferred.hpp; sourceTree = "<group>"; };
-		8A3BEE091DBE0DB6004A8A1D /* DefaultRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultRenderer.cpp; path = "renderers/default-renderer/DefaultRenderer.cpp"; sourceTree = "<group>"; };
-		8A3BEE0A1DBE0DB6004A8A1D /* DefaultRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DefaultRenderer.hpp; path = "renderers/default-renderer/DefaultRenderer.hpp"; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
@@ -663,8 +661,6 @@
 		8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceForward.hpp; path = scene/ModelFaceForward.hpp; sourceTree = "<group>"; };
 		8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRenderer.cpp; path = renderers/ImageRenderer.cpp; sourceTree = "<group>"; };
 		8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageRenderer.hpp; path = renderers/ImageRenderer.hpp; sourceTree = "<group>"; };
-		8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneRenderer.cpp; path = "renderers/scene-renderer/SceneRenderer.cpp"; sourceTree = "<group>"; };
-		8A6999311CE0FB86009F8D56 /* SceneRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SceneRenderer.hpp; path = "renderers/scene-renderer/SceneRenderer.hpp"; sourceTree = "<group>"; };
 		8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSaver.cpp; sourceTree = "<group>"; };
 		8A6999341CE0FBA2009F8D56 /* FileSaver.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FileSaver.hpp; sourceTree = "<group>"; };
 		8A6B61A21CD27B9E002CB119 /* objParser1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParser1.cpp; path = "obj-parser/objParser1.cpp"; sourceTree = "<group>"; };
@@ -747,6 +743,12 @@
 		8A81DDBC1D1A82B5004F3270 /* Skybox.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Skybox.hpp; path = helpers/Skybox.hpp; sourceTree = "<group>"; };
 		8A81DDBD1D1A82B5004F3270 /* WorldGrid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WorldGrid.cpp; path = helpers/WorldGrid.cpp; sourceTree = "<group>"; };
 		8A81DDBE1D1A82B5004F3270 /* WorldGrid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = WorldGrid.hpp; path = helpers/WorldGrid.hpp; sourceTree = "<group>"; };
+		8A83BF871DBE3AB200B927D5 /* DefaultDeferredRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultDeferredRenderer.cpp; path = "renderers/default-deferred/DefaultDeferredRenderer.cpp"; sourceTree = "<group>"; };
+		8A83BF881DBE3AB200B927D5 /* DefaultDeferredRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DefaultDeferredRenderer.hpp; path = "renderers/default-deferred/DefaultDeferredRenderer.hpp"; sourceTree = "<group>"; };
+		8A83BF8B1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DefaultForwardRenderer.cpp; path = "renderers/default-forward/DefaultForwardRenderer.cpp"; sourceTree = "<group>"; };
+		8A83BF8C1DBE3ABE00B927D5 /* DefaultForwardRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DefaultForwardRenderer.hpp; path = "renderers/default-forward/DefaultForwardRenderer.hpp"; sourceTree = "<group>"; };
+		8A83BF8F1DBE3ACE00B927D5 /* SceneRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneRenderer.cpp; path = "renderers/scene-renderer/SceneRenderer.cpp"; sourceTree = "<group>"; };
+		8A83BF901DBE3ACE00B927D5 /* SceneRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SceneRenderer.hpp; path = "renderers/scene-renderer/SceneRenderer.hpp"; sourceTree = "<group>"; };
 		8A8540611CEDF3A200656C60 /* UVEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UVEditor.cpp; path = uveditor/UVEditor.cpp; sourceTree = "<group>"; };
 		8A8540621CEDF3A200656C60 /* UVEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVEditor.hpp; path = uveditor/UVEditor.hpp; sourceTree = "<group>"; };
 		8A8540631CEDF3A200656C60 /* UVPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UVPoint.cpp; path = uveditor/UVPoint.cpp; sourceTree = "<group>"; };
@@ -905,8 +907,6 @@
 		8AC2913E1CD2455000A631C1 /* AssimpParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AssimpParser.hpp; path = "assimp-parser/AssimpParser.hpp"; sourceTree = "<group>"; };
 		8AC291421CD2456800A631C1 /* STLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STLParser.cpp; path = "stl-parser/STLParser.cpp"; sourceTree = "<group>"; };
 		8AC291431CD2456800A631C1 /* STLParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = STLParser.hpp; path = "stl-parser/STLParser.hpp"; sourceTree = "<group>"; };
-		8AC4B80A1DBA099100F1D850 /* SceneFullRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneFullRenderer.cpp; path = "renderers/scenefull-renderer/SceneFullRenderer.cpp"; sourceTree = "<group>"; };
-		8AC4B80B1DBA099100F1D850 /* SceneFullRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SceneFullRenderer.hpp; path = "renderers/scenefull-renderer/SceneFullRenderer.hpp"; sourceTree = "<group>"; };
 		8AC4B80D1DBA09B800F1D850 /* ImageViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImageViewer.cpp; sourceTree = "<group>"; };
 		8AC4B80E1DBA09B800F1D850 /* ImageViewer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImageViewer.hpp; sourceTree = "<group>"; };
 		8AC828B01BF5FEE7009C74E0 /* Kuplung.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Kuplung.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1041,15 +1041,6 @@
 			name = rendering;
 			sourceTree = "<group>";
 		};
-		8A3BEE081DBE0DAF004A8A1D /* default-renderer */ = {
-			isa = PBXGroup;
-			children = (
-				8A3BEE091DBE0DB6004A8A1D /* DefaultRenderer.cpp */,
-				8A3BEE0A1DBE0DB6004A8A1D /* DefaultRenderer.hpp */,
-			);
-			name = "default-renderer";
-			sourceTree = "<group>";
-		};
 		8A3CECF71C85B217005CB98D /* maths */ = {
 			isa = PBXGroup;
 			children = (
@@ -1062,24 +1053,15 @@
 		8A69992B1CE0FB6F009F8D56 /* renderers */ = {
 			isa = PBXGroup;
 			children = (
-				8A3BEE081DBE0DAF004A8A1D /* default-renderer */,
+				8A83BF861DBE3AAC00B927D5 /* default-deferred */,
+				8A83BF8A1DBE3AB800B927D5 /* default-forward */,
 				8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */,
 				8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */,
 				8AFDE3D91DBE0F2B001D7097 /* KuplungRendererBase.cpp */,
 				8AFDE3DA1DBE0F2B001D7097 /* KuplungRendererBase.hpp */,
-				8A69992F1CE0FB7E009F8D56 /* scene-renderer */,
-				8AC4B8091DBA098B00F1D850 /* scenefull-renderer */,
+				8A83BF8E1DBE3AC800B927D5 /* scene-renderer */,
 			);
 			name = renderers;
-			sourceTree = "<group>";
-		};
-		8A69992F1CE0FB7E009F8D56 /* scene-renderer */ = {
-			isa = PBXGroup;
-			children = (
-				8A6999301CE0FB86009F8D56 /* SceneRenderer.cpp */,
-				8A6999311CE0FB86009F8D56 /* SceneRenderer.hpp */,
-			);
-			name = "scene-renderer";
 			sourceTree = "<group>";
 		};
 		8A6E70561C6CACAC0085CAE5 /* settings */ = {
@@ -1305,6 +1287,33 @@
 				8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */,
 			);
 			name = scene;
+			sourceTree = "<group>";
+		};
+		8A83BF861DBE3AAC00B927D5 /* default-deferred */ = {
+			isa = PBXGroup;
+			children = (
+				8A83BF871DBE3AB200B927D5 /* DefaultDeferredRenderer.cpp */,
+				8A83BF881DBE3AB200B927D5 /* DefaultDeferredRenderer.hpp */,
+			);
+			name = "default-deferred";
+			sourceTree = "<group>";
+		};
+		8A83BF8A1DBE3AB800B927D5 /* default-forward */ = {
+			isa = PBXGroup;
+			children = (
+				8A83BF8B1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp */,
+				8A83BF8C1DBE3ABE00B927D5 /* DefaultForwardRenderer.hpp */,
+			);
+			name = "default-forward";
+			sourceTree = "<group>";
+		};
+		8A83BF8E1DBE3AC800B927D5 /* scene-renderer */ = {
+			isa = PBXGroup;
+			children = (
+				8A83BF8F1DBE3ACE00B927D5 /* SceneRenderer.cpp */,
+				8A83BF901DBE3ACE00B927D5 /* SceneRenderer.hpp */,
+			);
+			name = "scene-renderer";
 			sourceTree = "<group>";
 		};
 		8A8540601CEDF39600656C60 /* uveditor */ = {
@@ -1633,15 +1642,6 @@
 			name = "stl-parser";
 			sourceTree = "<group>";
 		};
-		8AC4B8091DBA098B00F1D850 /* scenefull-renderer */ = {
-			isa = PBXGroup;
-			children = (
-				8AC4B80A1DBA099100F1D850 /* SceneFullRenderer.cpp */,
-				8AC4B80B1DBA099100F1D850 /* SceneFullRenderer.hpp */,
-			);
-			name = "scenefull-renderer";
-			sourceTree = "<group>";
-		};
 		8AC828A71BF5FEE7009C74E0 = {
 			isa = PBXGroup;
 			children = (
@@ -1835,14 +1835,12 @@
 				8AA78CD41D4B6A3C00F6ABB6 /* KuplungMinizip.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */,
-				8AC4B80C1DBA099100F1D850 /* SceneFullRenderer.cpp in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
 				8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */,
 				8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */,
-				8A3BEE0B1DBE0DB6004A8A1D /* DefaultRenderer.cpp in Sources */,
 				8A81DDC41D1A82B5004F3270 /* LightRay.cpp in Sources */,
 				8AA9F23B1D21741B004A8F1C /* HeightmapGenerator.cpp in Sources */,
 				8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */,
@@ -1856,7 +1854,9 @@
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
 				8AB255B91DA4F2E100ABF2AC /* DialogShadertoy.cpp in Sources */,
+				8A83BF891DBE3AB200B927D5 /* DefaultDeferredRenderer.cpp in Sources */,
 				8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */,
+				8A83BF911DBE3ACE00B927D5 /* SceneRenderer.cpp in Sources */,
 				8A3A29FB1D2D0E4800F26AE4 /* RenderingDeferred.cpp in Sources */,
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8AAF14211D75B8780075189D /* ImGuizmo.cpp in Sources */,
@@ -1871,6 +1871,7 @@
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
+				8A83BF8D1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
@@ -1886,7 +1887,6 @@
 				8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
-				8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
 				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
 				8AFDE3DB1DBE0F2B001D7097 /* KuplungRendererBase.cpp in Sources */,

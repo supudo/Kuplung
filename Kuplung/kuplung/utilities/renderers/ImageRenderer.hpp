@@ -10,17 +10,16 @@
 #define ImageRenderer_hpp
 
 #include "kuplung/settings/Settings.h"
-#include "kuplung/utilities/renderers/default-renderer/DefaultRenderer.hpp"
 #include "kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp"
-#include "kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.hpp"
+#include "kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp"
+#include "kuplung/utilities/renderers/default-deferred/DefaultDeferredRenderer.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
 typedef enum ImageRendererType {
-    ImageRendererType_Default,
     ImageRendererType_Scene,
-    ImageRendererType_SceneFull,
-    ImageRendererType_RayTrace
+    ImageRendererType_DefaultForward,
+    ImageRendererType_DefaultDeferred
 } ImageRendererType;
 
 class ImageRenderer {
@@ -32,9 +31,9 @@ public:
 
 private:
     ObjectsManager &managerObjects;
-    std::unique_ptr<DefaultRenderer> rendererDefault;
     std::unique_ptr<SceneRenderer> rendererScene;
-    std::unique_ptr<SceneFullRenderer> rendererSceneFull;
+    std::unique_ptr<DefaultForwardRenderer> rendererDefaultForward;
+    std::unique_ptr<DefaultDeferredRenderer> rendererDefaultDeferred;
 };
 
 #endif /* ImageRenderer_hpp */

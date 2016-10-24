@@ -1,13 +1,13 @@
 //
-//  SceneFullRenderer.hpp
+//  DefaultDeferredRenderer.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef SceneFullRenderer_hpp
-#define SceneFullRenderer_hpp
+#ifndef DefaultDeferredRenderer_hpp
+#define DefaultDeferredRenderer_hpp
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
@@ -15,10 +15,10 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
-class SceneFullRenderer: public KuplungRendererBase {
+class DefaultDeferredRenderer: public KuplungRendererBase {
 public:
-    SceneFullRenderer(ObjectsManager &managerObjects);
-    ~SceneFullRenderer();
+    DefaultDeferredRenderer(ObjectsManager &managerObjects);
+    ~DefaultDeferredRenderer();
     void init();
     std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
 
@@ -56,4 +56,4 @@ private:
     void renderQuad();
 };
 
-#endif /* SceneFullRenderer_hpp */
+#endif /* DefaultDeferredRenderer_hpp */

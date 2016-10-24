@@ -52,9 +52,9 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::PushItemWidth(-1.0f);
     ImGui::Text("Renderer");
     const char* renderer_items[] = {
-        "Default",
-        "Simple",
-        "Complex"
+        "Scene",
+        "Default - Forward",
+        "Default - Deferred"
     };
     ImGui::Combo("##987", &this->rendererType, renderer_items, IM_ARRAYSIZE(renderer_items));
     ImGui::Separator();

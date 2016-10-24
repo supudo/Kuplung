@@ -199,9 +199,9 @@ SOURCES += main.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/KuplungRendererBase.cpp \
-    kuplung/utilities/renderers/default-renderer/DefaultRenderer.cpp \
+    kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.cpp \
+    kuplung/utilities/renderers/default-deferred/DefaultDeferredRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
-    kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
@@ -302,9 +302,9 @@ HEADERS += \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/KuplungRendererBase.hpp \
-    kuplung/utilities/renderers/default-renderer/DefaultRenderer.hpp \
+    kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp \
+    kuplung/utilities/renderers/default-deferred/DefaultDeferredRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
-    kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \

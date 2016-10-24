@@ -1,12 +1,12 @@
 //
-//  DefaultRenderer.cpp
+//  DefaultForwardRenderer.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "DefaultRenderer.hpp"
+#include "DefaultForwardRenderer.hpp"
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -14,11 +14,11 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-DefaultRenderer::DefaultRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
 }
 
-DefaultRenderer::~DefaultRenderer() {
+DefaultForwardRenderer::~DefaultForwardRenderer() {
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
     GLint colorAttachment;
@@ -63,7 +63,7 @@ DefaultRenderer::~DefaultRenderer() {
     this->glUtils.reset();
 }
 
-void DefaultRenderer::init() {
+void DefaultForwardRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
 
     this->GLSL_LightSourceNumber_Directional = 8;
@@ -76,7 +76,7 @@ void DefaultRenderer::init() {
     success &= this->initShaderProgram();
 }
 
-bool DefaultRenderer::initShaderProgram() {
+bool DefaultForwardRenderer::initShaderProgram() {
     bool success = true;
 
     // vertex shader
@@ -297,7 +297,7 @@ bool DefaultRenderer::initShaderProgram() {
     return success;
 }
 
-void DefaultRenderer::createFBO() {
+void DefaultForwardRenderer::createFBO() {
     glGenFramebuffers(1, &this->renderFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, this->renderFBO);
     this->generateAttachmentTexture(false, false);
@@ -316,7 +316,7 @@ void DefaultRenderer::createFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void DefaultRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
+void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
     GLenum attachment_type;
     if (!depth && !stencil)
         attachment_type = GL_RGB;
@@ -339,7 +339,7 @@ void DefaultRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stenc
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-std::string DefaultRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string DefaultForwardRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     this->fileOutputImage = file;
     std::string endFile;
 
@@ -390,7 +390,7 @@ std::string DefaultRenderer::renderImage(FBEntity file, std::vector<ModelFaceBas
     return endFile;
 }
 
-void DefaultRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces) {
+void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces) {
     this->matrixProjection = this->managerObjects.matrixProjection;
     this->matrixCamera = this->managerObjects.camera->matrixCamera;
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;

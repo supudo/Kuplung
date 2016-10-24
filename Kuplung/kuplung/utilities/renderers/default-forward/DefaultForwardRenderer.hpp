@@ -1,13 +1,13 @@
 //
-//  DefaultRenderer.hpp
+//  DefaultForwardRenderer.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef DefaultRenderer_hpp
-#define DefaultRenderer_hpp
+#ifndef DefaultForwardRenderer_hpp
+#define DefaultForwardRenderer_hpp
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
@@ -15,10 +15,10 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
-class DefaultRenderer: public KuplungRendererBase {
+class DefaultForwardRenderer: public KuplungRendererBase {
 public:
-    explicit DefaultRenderer(ObjectsManager &managerObjects);
-    ~DefaultRenderer();
+    explicit DefaultForwardRenderer(ObjectsManager &managerObjects);
+    ~DefaultForwardRenderer();
     void init();
     std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
 
@@ -78,4 +78,4 @@ private:
     GLint glFS_solidSkin_materialColor;
 };
 
-#endif /* DefaultRenderer_hpp */
+#endif /* DefaultForwardRenderer_hpp */

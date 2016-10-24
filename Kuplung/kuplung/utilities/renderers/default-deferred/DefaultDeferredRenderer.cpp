@@ -1,19 +1,19 @@
 //
-//  SceneFullRenderer.cpp
+//  DefaultDeferredRenderer.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "SceneFullRenderer.hpp"
+#include "DefaultDeferredRenderer.hpp"
 #include <glm/gtc/type_ptr.hpp>
 
-SceneFullRenderer::SceneFullRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+DefaultDeferredRenderer::DefaultDeferredRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
 }
 
-SceneFullRenderer::~SceneFullRenderer() {
+DefaultDeferredRenderer::~DefaultDeferredRenderer() {
     glDeleteBuffers(1, &this->gPosition);
     glDeleteBuffers(1, &this->gNormal);
     glDeleteBuffers(1, &this->gAlbedoSpec);
@@ -37,7 +37,7 @@ SceneFullRenderer::~SceneFullRenderer() {
     this->glUtils.reset();
 }
 
-void SceneFullRenderer::init() {
+void DefaultDeferredRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
 
     this->GLSL_LightSourceNumber_Directional = 8;
@@ -55,7 +55,7 @@ void SceneFullRenderer::init() {
     }
 }
 
-std::string SceneFullRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string DefaultDeferredRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     this->fileOutputImage = file;
 
     this->renderGBuffer(meshModelFaces);
@@ -101,7 +101,7 @@ std::string SceneFullRenderer::renderImage(FBEntity file, std::vector<ModelFaceB
     return f;
 }
 
-bool SceneFullRenderer::initGeometryPass() {
+bool DefaultDeferredRenderer::initGeometryPass() {
     // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
@@ -134,7 +134,7 @@ bool SceneFullRenderer::initGeometryPass() {
     return true;
 }
 
-bool SceneFullRenderer::initLighingPass() {
+bool DefaultDeferredRenderer::initLighingPass() {
     // Lighting Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
@@ -164,7 +164,7 @@ bool SceneFullRenderer::initLighingPass() {
     return true;
 }
 
-void SceneFullRenderer::initGBuffer() {
+void DefaultDeferredRenderer::initGBuffer() {
     // Set up G-Buffer
     // 3 textures:
     // 1. Positions (RGB)
@@ -214,7 +214,7 @@ void SceneFullRenderer::initGBuffer() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void SceneFullRenderer::initLights() {
+void DefaultDeferredRenderer::initLights() {
     // light - directional
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
         ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
@@ -278,7 +278,7 @@ void SceneFullRenderer::initLights() {
     }
 }
 
-void SceneFullRenderer::renderGBuffer(std::vector<ModelFaceBase*> *meshModelFaces) {
+void DefaultDeferredRenderer::renderGBuffer(std::vector<ModelFaceBase*> *meshModelFaces) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -340,7 +340,7 @@ void SceneFullRenderer::renderGBuffer(std::vector<ModelFaceBase*> *meshModelFace
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
 
-void SceneFullRenderer::renderLightingPass() {
+void DefaultDeferredRenderer::renderLightingPass() {
     // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glUseProgram(this->shaderProgram_LightingPass);
@@ -467,7 +467,7 @@ void SceneFullRenderer::renderLightingPass() {
     this->renderQuad();
 }
 
-void SceneFullRenderer::renderQuad() {
+void DefaultDeferredRenderer::renderQuad() {
     if (this->quadVAO == 0) {
         GLfloat quadVertices[] = {
             // Positions        // Texture Coords
