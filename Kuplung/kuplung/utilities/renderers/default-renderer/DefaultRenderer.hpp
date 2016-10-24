@@ -13,10 +13,11 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
-class DefaultRenderer {
+class DefaultRenderer: public KuplungRendererBase {
 public:
-    DefaultRenderer(ObjectsManager &managerObjects);
+    explicit DefaultRenderer(ObjectsManager &managerObjects);
     ~DefaultRenderer();
     void init();
     std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);

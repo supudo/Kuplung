@@ -283,6 +283,7 @@
 		8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFC9CE11DAE44F600161D50 /* Consumption.cpp */; };
 		8AFD82151D410C0A00D088C7 /* Kuplung_RecentFilesImported.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */; };
 		8AFD82161D410C0C00D088C7 /* Kuplung_RecentFiles.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */; };
+		8AFDE3DB1DBE0F2B001D7097 /* KuplungRendererBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDE3D91DBE0F2B001D7097 /* KuplungRendererBase.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -946,6 +947,8 @@
 		8AFC9CE21DAE44F600161D50 /* Consumption.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Consumption.hpp; path = consumption/Consumption.hpp; sourceTree = "<group>"; };
 		8AFD82131D410BFA00D088C7 /* Kuplung_RecentFiles.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFiles.ini; sourceTree = "<group>"; };
 		8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_RecentFilesImported.ini; sourceTree = "<group>"; };
+		8AFDE3D91DBE0F2B001D7097 /* KuplungRendererBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungRendererBase.cpp; path = renderers/KuplungRendererBase.cpp; sourceTree = "<group>"; };
+		8AFDE3DA1DBE0F2B001D7097 /* KuplungRendererBase.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = KuplungRendererBase.hpp; path = renderers/KuplungRendererBase.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1062,6 +1065,8 @@
 				8A3BEE081DBE0DAF004A8A1D /* default-renderer */,
 				8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */,
 				8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */,
+				8AFDE3D91DBE0F2B001D7097 /* KuplungRendererBase.cpp */,
+				8AFDE3DA1DBE0F2B001D7097 /* KuplungRendererBase.hpp */,
 				8A69992F1CE0FB7E009F8D56 /* scene-renderer */,
 				8AC4B8091DBA098B00F1D850 /* scenefull-renderer */,
 			);
@@ -1884,6 +1889,7 @@
 				8A6999321CE0FB86009F8D56 /* SceneRenderer.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
 				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
+				8AFDE3DB1DBE0F2B001D7097 /* KuplungRendererBase.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
 				8A81DDC21D1A82B5004F3270 /* CameraModel.cpp in Sources */,
 				8A81DDC01D1A82B5004F3270 /* BoundingBox.cpp in Sources */,

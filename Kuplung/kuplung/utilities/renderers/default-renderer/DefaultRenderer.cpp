@@ -70,6 +70,8 @@ void DefaultRenderer::init() {
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
 
+    this->Setting_RenderSkybox = false;
+
     bool success = true;
     success &= this->initShaderProgram();
 }
@@ -400,6 +402,9 @@ void DefaultRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFac
 
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+
+    if (this->Setting_RenderSkybox)
+        this->managerObjects.renderSkybox();
 
     glUseProgram(this->shaderProgram);
 

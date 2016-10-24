@@ -13,8 +13,9 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
-class SceneFullRenderer {
+class SceneFullRenderer: public KuplungRendererBase {
 public:
     SceneFullRenderer(ObjectsManager &managerObjects);
     ~SceneFullRenderer();

@@ -60,6 +60,7 @@ std::string SceneFullRenderer::renderImage(FBEntity file, std::vector<ModelFaceB
 
     this->renderGBuffer(meshModelFaces);
     this->renderLightingPass();
+
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
     glBlitFramebuffer(0, 0,

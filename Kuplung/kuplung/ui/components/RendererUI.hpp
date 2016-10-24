@@ -33,6 +33,8 @@ private:
     void dialogFileSave();
 
     int rendererType, imageFormat;
+    float panelWidth_RenderOptions, panelWidth_RenderOptionsMin, zoomFactor;
+    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
 
     bool genTexture;
     GLuint vboBuffer;

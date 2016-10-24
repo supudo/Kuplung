@@ -198,6 +198,7 @@ SOURCES += main.cpp \
     kuplung/utilities/export/Exporter.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
+    kuplung/utilities/renderers/KuplungRendererBase.cpp \
     kuplung/utilities/renderers/default-renderer/DefaultRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.cpp \
@@ -300,6 +301,7 @@ HEADERS += \
     kuplung/utilities/export/Exporter.hpp \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
+    kuplung/utilities/renderers/KuplungRendererBase.hpp \
     kuplung/utilities/renderers/default-renderer/DefaultRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/renderers/scenefull-renderer/SceneFullRenderer.hpp \
