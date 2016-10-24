@@ -35,3 +35,12 @@ std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, st
         return this->rendererDefaultDeferred->renderImage(file, meshModelFaces);
     return "";
 }
+
+void ImageRenderer::showSpecificSettings(ImageRendererType type) {
+    if (type == ImageRendererType_Scene)
+        return this->rendererScene->showSpecificSettings();
+    else if (type == ImageRendererType_DefaultForward)
+        return this->rendererDefaultForward->showSpecificSettings();
+    else if (type == ImageRendererType_DefaultDeferred)
+        return this->rendererDefaultDeferred->showSpecificSettings();
+}

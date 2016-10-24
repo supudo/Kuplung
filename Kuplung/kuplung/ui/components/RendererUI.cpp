@@ -22,6 +22,7 @@ void RendererUI::init(SDL_Window *sdlWindow) {
     this->panelWidth_RenderOptions = 140.0f;
     this->panelWidth_RenderOptionsMin = 140.0f;
     this->zoomFactor = 1.0f;
+    this->rendererType = 2;
 
     SDL_GetWindowSize(sdlWindow, &this->wWidth, &this->wHeight);
     this->wWidth -= (this->wPadding * 2);
@@ -74,6 +75,20 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
         ImGui::InputText("##fileName", ifn, IM_ARRAYSIZE(ifn), ImGuiInputTextFlags_ReadOnly);
         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Size: ");
         ImGui::Text("%ix%i px", this->tWidth, this->tHeight);
+        ImGui::Separator();
+    }
+    switch (this->rendererType) {
+        case 0:
+            imageRenderer->showSpecificSettings(ImageRendererType_Scene);
+            break;
+        case 1:
+            imageRenderer->showSpecificSettings(ImageRendererType_DefaultForward);
+            break;
+        case 2:
+            imageRenderer->showSpecificSettings(ImageRendererType_DefaultDeferred);
+            break;
+        default:
+            break;
     }
 
     ImGui::PopItemWidth();

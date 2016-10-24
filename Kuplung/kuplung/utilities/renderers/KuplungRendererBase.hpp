@@ -17,6 +17,7 @@ public:
     virtual ~KuplungRendererBase();
     virtual void init();
     virtual std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
+    virtual void showSpecificSettings();
 
     bool Setting_RenderSkybox;
 };

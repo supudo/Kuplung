@@ -28,6 +28,7 @@ public:
     ~ImageRenderer();
     void init();
     std::string renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
+    void showSpecificSettings(ImageRendererType type);
 
 private:
     ObjectsManager &managerObjects;

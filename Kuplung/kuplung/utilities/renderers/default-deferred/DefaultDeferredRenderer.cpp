@@ -8,6 +8,8 @@
 
 #include "DefaultDeferredRenderer.hpp"
 #include <glm/gtc/type_ptr.hpp>
+#include "kuplung/utilities/imgui/imgui_internal.h"
+#include "kuplung/utilities/stb/stb_image_write.h"
 
 DefaultDeferredRenderer::DefaultDeferredRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
@@ -39,6 +41,7 @@ DefaultDeferredRenderer::~DefaultDeferredRenderer() {
 
 void DefaultDeferredRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
+    this->Setting_ReadBuffer = 0;
 
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
@@ -55,11 +58,31 @@ void DefaultDeferredRenderer::init() {
     }
 }
 
+void DefaultDeferredRenderer::showSpecificSettings() {
+    ImGui::Text("Buffer:");
+    const char* buffer_items[] = {
+        "Position",
+        "Normal",
+        "Color + Specular",
+        "Lighting"
+    };
+    ImGui::Combo("##236", &this->Setting_ReadBuffer, buffer_items, IM_ARRAYSIZE(buffer_items));
+}
+
 std::string DefaultDeferredRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     this->fileOutputImage = file;
+    std::string endFile;
+
+    int width = Settings::Instance()->SDL_Window_Width;
+    int height = Settings::Instance()->SDL_Window_Height;
+
+    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
     this->renderGBuffer(meshModelFaces);
     this->renderLightingPass();
+
+    unsigned char* pixels = new unsigned char[3 * width * height];
 
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
@@ -70,35 +93,31 @@ std::string DefaultDeferredRenderer::renderImage(FBEntity file, std::vector<Mode
                       GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    int width = Settings::Instance()->SDL_Window_Width;
-    int height = Settings::Instance()->SDL_Window_Height;
-
-    SDL_Surface *image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
-
-    glReadBuffer(GL_BACK_RIGHT);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
+    if (this->Setting_ReadBuffer < 3)
+        glReadBuffer(GL_COLOR_ATTACHMENT0 + this->Setting_ReadBuffer);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
+    glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    // flip vertically
-    int index;
-    void* temp_row;
-    int height_div_2;
-    temp_row = (void *)malloc(image->pitch);
-    if (NULL == temp_row)
-        Settings::Instance()->funcDoLog("[SceneFullRenderer] Not enough memory for image inversion");
-    height_div_2 = (int) (image->h * .5);
-    for (index = 0; index < height_div_2; index++) {
-        memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
-        memcpy((Uint8 *)(image->pixels) + image->pitch * index, (Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), image->pitch);
-        memcpy((Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), temp_row, image->pitch);
+    unsigned char* line_tmp = new unsigned char[3 * width];
+    unsigned char* line_a = pixels;
+    unsigned char* line_b = pixels + (3 * width * (height - 1));
+    while (line_a < line_b) {
+        memcpy(line_tmp, line_a, width * 3);
+        memcpy(line_a, line_b, width * 3);
+        memcpy(line_b, line_tmp, width * 3);
+        line_a += width * 3;
+        line_b -= width * 3;
     }
-    free(temp_row);
 
-    std::string f = file.path + ".bmp";
-    SDL_SaveBMP(image, f.c_str());
-    SDL_FreeSurface(image);
+    endFile = file.path + ".bmp";
+    stbi_write_bmp(endFile.c_str(), width, height, 3, pixels);
 
-    return f;
+    delete[] pixels;
+    delete[] line_tmp;
+
+    return endFile;
 }
 
 bool DefaultDeferredRenderer::initGeometryPass() {
@@ -202,11 +221,10 @@ void DefaultDeferredRenderer::initGBuffer() {
     glDrawBuffers(3, attachments);
 
     // - Create and attach depth buffer (renderbuffer)
-    GLuint rboDepth;
-    glGenRenderbuffers(1, &rboDepth);
-    glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
+    glGenRenderbuffers(1, &this->rboDepth);
+    glBindRenderbuffer(GL_RENDERBUFFER, this->rboDepth);
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->rboDepth);
     // - Finally check if framebuffer is complete
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
         Settings::Instance()->funcDoLog("[Deferred Rendering T GBuffer] Framebuffer not complete!");

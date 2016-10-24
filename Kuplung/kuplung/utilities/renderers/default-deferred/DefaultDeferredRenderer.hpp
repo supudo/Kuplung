@@ -22,8 +22,11 @@ public:
     void init();
     std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
 
+    void showSpecificSettings();
+
 private:
     FBEntity fileOutputImage;
+    int Setting_ReadBuffer;
 
     bool initGeometryPass();
     bool initLighingPass();
@@ -47,7 +50,7 @@ private:
     std::vector<ModelFace_LightSource_Point *> mfLights_Point;
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
-    GLuint gBuffer, gPosition, gNormal, gAlbedoSpec;
+    GLuint gBuffer, gPosition, gNormal, gAlbedoSpec, rboDepth;
 
     const GLuint NR_LIGHTS = 32;
 

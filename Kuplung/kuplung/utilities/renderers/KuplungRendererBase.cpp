@@ -17,3 +17,6 @@ void KuplungRendererBase::init() {
 std::string KuplungRendererBase::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     return "";
 }
+
+void KuplungRendererBase::showSpecificSettings() {
+}
