@@ -45,7 +45,7 @@ private:
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // model objects
-    GLuint shaderProgram, renderFBO, renderRBO, renderTextureColorbuffer;
+    GLuint shaderProgram, renderFBO, renderRBO, renderTextureColorBuffer;
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;

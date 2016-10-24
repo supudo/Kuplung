@@ -301,7 +301,7 @@ void DefaultRenderer::createFBO() {
     glGenFramebuffers(1, &this->renderFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, this->renderFBO);
     this->generateAttachmentTexture(false, false);
-    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->renderTextureColorbuffer, 0);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->renderTextureColorBuffer, 0);
 
     int screenWidth = Settings::Instance()->SDL_Window_Width;
     int screenHeight = Settings::Instance()->SDL_Window_Height;
@@ -328,8 +328,8 @@ void DefaultRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stenc
     int screenWidth = Settings::Instance()->SDL_Window_Width;
     int screenHeight = Settings::Instance()->SDL_Window_Height;
 
-    glGenTextures(1, &this->renderTextureColorbuffer);
-    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorbuffer);
+    glGenTextures(1, &this->renderTextureColorBuffer);
+    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
     if (!depth && !stencil)
         glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
     else
@@ -353,7 +353,7 @@ std::string DefaultRenderer::renderImage(FBEntity file, std::vector<ModelFaceBas
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorbuffer);
+    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
     glGenerateMipmap(GL_TEXTURE_2D);
     glBindTexture(GL_TEXTURE_2D, 0);
 
