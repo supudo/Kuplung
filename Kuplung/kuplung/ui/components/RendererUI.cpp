@@ -37,6 +37,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::Text("Renderer");
     ImGui::SameLine();
     const char* renderer_items[] = {
+        "Default",
         "Simple",
         "Complex"
     };

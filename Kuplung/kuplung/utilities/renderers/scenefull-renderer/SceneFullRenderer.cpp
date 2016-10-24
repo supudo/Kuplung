@@ -74,7 +74,8 @@ std::string SceneFullRenderer::renderImage(FBEntity file, std::vector<ModelFaceB
 
     SDL_Surface *image = SDL_CreateRGBSurface(SDL_SWSURFACE, width, height, 24, 0x000000FF, 0x0000FF00, 0x00FF0000, 0);
 
-    glReadBuffer(GL_BACK);
+    glReadBuffer(GL_BACK_RIGHT);
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, image->pixels);
 
     // flip vertically

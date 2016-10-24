@@ -16,6 +16,9 @@ ImageRenderer::~ImageRenderer() {
 }
 
 void ImageRenderer::init() {
+    this->rendererDefault = std::make_unique<DefaultRenderer>(this->managerObjects);
+    this->rendererDefault->init();
+
     this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
     this->rendererScene->init();
 
@@ -24,7 +27,9 @@ void ImageRenderer::init() {
 }
 
 std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
-    if (type == ImageRendererType_Scene)
+    if (type == ImageRendererType_Default)
+        return this->rendererDefault->renderImage(file, meshModelFaces);
+    else if (type == ImageRendererType_Scene)
         return this->rendererScene->renderImage(file, meshModelFaces);
     else if (type == ImageRendererType_SceneFull)
         return this->rendererSceneFull->renderImage(file, meshModelFaces);
