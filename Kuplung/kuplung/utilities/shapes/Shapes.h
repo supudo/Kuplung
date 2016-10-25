@@ -17,6 +17,7 @@ typedef enum ShapeType {
     ShapeType_IcoSphere,
     ShapeType_MonkeyHead,
     ShapeType_Plane,
+    ShapeType_PlaneObjects,
     ShapeType_Triangle,
     ShapeType_Torus,
     ShapeType_Tube,

@@ -350,6 +350,8 @@ DISTFILES += \
     resources/shapes/monkey_head.obj \
     resources/shapes/plane.mtl \
     resources/shapes/plane.obj \
+    resources/shapes/plane_objects.mtl \
+    resources/shapes/plane_objects.obj \
     resources/shapes/triangle.mtl \
     resources/shapes/triangle.obj \
     resources/shapes/torus.mtl \

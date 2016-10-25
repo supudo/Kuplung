@@ -465,6 +465,9 @@ void Kuplung::addShape(ShapeType type) {
         case ShapeType_Plane:
             shapeName = "plane";
             break;
+        case ShapeType_PlaneObjects:
+            shapeName = "plane_objects";
+            break;
         case ShapeType_Triangle:
             shapeName = "triangle";
             break;

@@ -312,7 +312,7 @@ void DefaultForwardRenderer::createFBO() {
     glBindRenderbuffer(GL_RENDERBUFFER, 0);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, this->renderRBO);
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        Settings::Instance()->funcDoLog("[Kuplung-DefaultRenderer] Framebuffer is not complete!");
+        Settings::Instance()->funcDoLog("[Kuplung-DefaultForwardRenderer] Framebuffer is not complete!");
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 

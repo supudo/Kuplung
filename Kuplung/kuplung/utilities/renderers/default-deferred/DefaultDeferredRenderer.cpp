@@ -61,10 +61,11 @@ void DefaultDeferredRenderer::init() {
 void DefaultDeferredRenderer::showSpecificSettings() {
     ImGui::Text("Buffer:");
     const char* buffer_items[] = {
+        "Lighting",
         "Position",
         "Normal",
-        "Color + Specular",
-        "Lighting"
+        "Diffuse",
+        "Specular"
     };
     ImGui::Combo("##236", &this->Setting_ReadBuffer, buffer_items, IM_ARRAYSIZE(buffer_items));
 }
@@ -93,12 +94,9 @@ std::string DefaultDeferredRenderer::renderImage(FBEntity file, std::vector<Mode
                       GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    glBindFramebuffer(GL_FRAMEBUFFER, this->gBuffer);
-    if (this->Setting_ReadBuffer < 3)
-        glReadBuffer(GL_COLOR_ATTACHMENT0 + this->Setting_ReadBuffer);
+    glReadBuffer(GL_);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
     unsigned char* line_tmp = new unsigned char[3 * width];
     unsigned char* line_a = pixels;
@@ -142,7 +140,7 @@ bool DefaultDeferredRenderer::initGeometryPass() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_GeometryPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Geometry Pass] Error linking program " + std::to_string(this->shaderProgram_GeometryPass) + "!");
+        Settings::Instance()->funcDoLog("[Kuplung-DefaultDeferredRenderer] Error linking program " + std::to_string(this->shaderProgram_GeometryPass) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
         return false;
     }
@@ -175,7 +173,7 @@ bool DefaultDeferredRenderer::initLighingPass() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram_LightingPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("[Deferred - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram_LightingPass) + "!");
+        Settings::Instance()->funcDoLog("[Kuplung-DefaultDeferredRenderer - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram_LightingPass) + "!");
         this->glUtils->printProgramLog(this->shaderProgram_LightingPass);
         return false;
     }
@@ -227,7 +225,7 @@ void DefaultDeferredRenderer::initGBuffer() {
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->rboDepth);
     // - Finally check if framebuffer is complete
     if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
-        Settings::Instance()->funcDoLog("[Deferred Rendering T GBuffer] Framebuffer not complete!");
+        Settings::Instance()->funcDoLog("[Kuplung-DefaultDeferredRenderer - GBuffer] Framebuffer not complete!");
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }

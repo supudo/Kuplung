@@ -43,6 +43,8 @@
 		8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
+		8A4C65EB1DBF67570022837F /* plane_objects.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4C65E91DBF66C20022837F /* plane_objects.mtl */; };
+		8A4C65EC1DBF67570022837F /* plane_objects.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4C65EA1DBF66C20022837F /* plane_objects.obj */; };
 		8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */; };
 		8A5128CF1CC0CC4D00BE0600 /* triangle.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */; };
 		8A5128D01CC0CC4D00BE0600 /* triangle.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CE1CC0CC3F00BE0600 /* triangle.obj */; };
@@ -403,6 +405,8 @@
 				8AB917931CAEA7E9002988C2 /* monkey_head.obj in CopyFiles */,
 				8AB917941CAEA7E9002988C2 /* plane.mtl in CopyFiles */,
 				8AB917951CAEA7E9002988C2 /* plane.obj in CopyFiles */,
+				8A4C65EB1DBF67570022837F /* plane_objects.mtl in CopyFiles */,
+				8A4C65EC1DBF67570022837F /* plane_objects.obj in CopyFiles */,
 				8AB917961CAEA7E9002988C2 /* torus.mtl in CopyFiles */,
 				8AB917971CAEA7E9002988C2 /* torus.obj in CopyFiles */,
 				8AB917981CAEA7E9002988C2 /* tube.mtl in CopyFiles */,
@@ -643,6 +647,8 @@
 		8A47F71C1CBF744800699CAC /* camera.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.vert; sourceTree = "<group>"; };
 		8A48C3221CBE8B530076F4F6 /* ray_line.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.frag; sourceTree = "<group>"; };
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
+		8A4C65E91DBF66C20022837F /* plane_objects.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.mtl; path = shapes/plane_objects.mtl; sourceTree = "<group>"; };
+		8A4C65EA1DBF66C20022837F /* plane_objects.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.obj; path = shapes/plane_objects.obj; sourceTree = "<group>"; };
 		8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayPicking.cpp; sourceTree = "<group>"; };
 		8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayPicking.hpp; sourceTree = "<group>"; };
 		8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.mtl; path = shapes/triangle.mtl; sourceTree = "<group>"; };
@@ -1580,6 +1586,8 @@
 				8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */,
 				8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */,
 				8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */,
+				8A4C65E91DBF66C20022837F /* plane_objects.mtl */,
+				8A4C65EA1DBF66C20022837F /* plane_objects.obj */,
 				8AB9177F1CAEA7CC002988C2 /* plane.mtl */,
 				8AB917801CAEA7CC002988C2 /* plane.obj */,
 				8AB917811CAEA7CC002988C2 /* torus.mtl */,
