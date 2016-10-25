@@ -34,6 +34,11 @@ private:
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
     void initLights();
 
+    void createFBO();
+    void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
+    GLuint renderFBO, renderRBO, renderTextureColorBuffer;
+
+    void renderScene(std::vector<ModelFaceBase*> *meshModelFaces);
     void renderGBuffer(std::vector<ModelFaceBase*> *meshModelFaces);
     void renderLightingPass();
 
