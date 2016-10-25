@@ -94,7 +94,6 @@ std::string DefaultDeferredRenderer::renderImage(FBEntity file, std::vector<Mode
                       GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
-    glReadBuffer(GL_);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
 
