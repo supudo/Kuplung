@@ -22,7 +22,7 @@ void RendererUI::init(SDL_Window *sdlWindow) {
     this->panelWidth_RenderOptions = 140.0f;
     this->panelWidth_RenderOptionsMin = 140.0f;
     this->zoomFactor = 1.0f;
-    this->rendererType = 2;
+    this->rendererType = 1;
 
     SDL_GetWindowSize(sdlWindow, &this->wWidth, &this->wHeight);
     this->wWidth -= (this->wPadding * 2);
@@ -53,9 +53,8 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::PushItemWidth(-1.0f);
     ImGui::Text("Renderer");
     const char* renderer_items[] = {
-        "Scene",
-        "Default - Forward",
-        "Default - Deferred"
+        "App",
+        "Default"
     };
     ImGui::Combo("##987", &this->rendererType, renderer_items, IM_ARRAYSIZE(renderer_items));
     ImGui::Separator();
