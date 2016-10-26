@@ -200,7 +200,6 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/KuplungRendererBase.cpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.cpp \
-    kuplung/utilities/renderers/default-deferred/DefaultDeferredRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
@@ -303,7 +302,6 @@ HEADERS += \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/KuplungRendererBase.hpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp \
-    kuplung/utilities/renderers/default-deferred/DefaultDeferredRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
@@ -360,6 +358,12 @@ DISTFILES += \
     resources/shapes/tube.obj \
     resources/shapes/uv_sphere.mtl \
     resources/shapes/uv_sphere.obj \
+    resources/shapes/brick_wall.mtl \
+    resources/shapes/brick_wall.obj \
+    resources/shapes/brick_wall_diffuse.png \
+    resources/shapes/brick_wall_displacement.png \
+    resources/shapes/brick_wall_normal.png \
+    resources/shapes/brick_wall_spec.png \
 # Shaders
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \

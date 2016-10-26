@@ -84,8 +84,6 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
         case 1:
             imageRenderer->showSpecificSettings(ImageRendererType_DefaultForward);
             break;
-        case 2:
-            imageRenderer->showSpecificSettings(ImageRendererType_DefaultDeferred);
             break;
         default:
             break;

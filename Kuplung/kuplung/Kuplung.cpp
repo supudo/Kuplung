@@ -442,8 +442,11 @@ void Kuplung::initSceneGUI() {
 
 void Kuplung::addShape(ShapeType type) {
     std::string shapeName = "";
-    assert(type >= ShapeType_Cone && type <= ShapeType_UVSphere);
+    assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
     switch (type) {
+        case ShapeType_BrickWall:
+            shapeName = "brick_wall";
+            break;
         case ShapeType_Cone:
             shapeName = "cone";
             break;

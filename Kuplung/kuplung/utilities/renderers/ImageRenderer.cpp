@@ -21,9 +21,6 @@ void ImageRenderer::init() {
 
     this->rendererDefaultForward = std::make_unique<DefaultForwardRenderer>(this->managerObjects);
     this->rendererDefaultForward->init();
-
-    this->rendererDefaultDeferred = std::make_unique<DefaultDeferredRenderer>(this->managerObjects);
-    this->rendererDefaultDeferred->init();
 }
 
 std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
@@ -31,8 +28,6 @@ std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, st
         return this->rendererScene->renderImage(file, meshModelFaces);
     else if (type == ImageRendererType_DefaultForward)
         return this->rendererDefaultForward->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_DefaultDeferred)
-        return this->rendererDefaultDeferred->renderImage(file, meshModelFaces);
     return "";
 }
 
@@ -41,6 +36,4 @@ void ImageRenderer::showSpecificSettings(ImageRendererType type) {
         return this->rendererScene->showSpecificSettings();
     else if (type == ImageRendererType_DefaultForward)
         return this->rendererDefaultForward->showSpecificSettings();
-    else if (type == ImageRendererType_DefaultDeferred)
-        return this->rendererDefaultDeferred->showSpecificSettings();
 }

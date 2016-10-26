@@ -10,6 +10,7 @@
 #define Shapes_h
 
 typedef enum ShapeType {
+    ShapeType_BrickWall,
     ShapeType_Cone,
     ShapeType_Cube,
     ShapeType_Cylinder,

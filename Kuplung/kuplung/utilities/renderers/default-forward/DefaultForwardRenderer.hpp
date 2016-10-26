@@ -28,6 +28,7 @@ private:
     std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
+    GLuint renderFBO, renderRBO, renderTextureColorBuffer;
     void createFBO();
     void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
     void renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces);
@@ -45,7 +46,7 @@ private:
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
 
     // model objects
-    GLuint shaderProgram, renderFBO, renderRBO, renderTextureColorBuffer;
+    GLuint shaderProgram;
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;

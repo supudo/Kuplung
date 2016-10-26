@@ -633,6 +633,7 @@ void DialogControlsModels::drawCreate() {
     if (ImGui::Button("Cone", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cone);
     if (ImGui::Button("Cube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cube);
     if (ImGui::Button("Cylinder", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cylinder);
+    if (ImGui::Button("Brick Wall", ImVec2(-1, 0))) this->funcAddShape(ShapeType_BrickWall);
     if (ImGui::Button("Grid", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Grid);
     if (ImGui::Button("Ico Sphere", ImVec2(-1, 0))) this->funcAddShape(ShapeType_IcoSphere);
     if (ImGui::Button("Plane", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Plane);
