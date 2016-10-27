@@ -9,9 +9,9 @@
 #ifndef RenderingManager_hpp
 #define RenderingManager_hpp
 
-#include "kuplung/rendering/RenderingSimple.hpp"
-#include "kuplung/rendering/RenderingForward.hpp"
-#include "kuplung/rendering/RenderingDeferred.hpp"
+#include "kuplung/rendering/methods/RenderingSimple.hpp"
+#include "kuplung/rendering/methods/RenderingForward.hpp"
+#include "kuplung/rendering/methods/RenderingDeferred.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 
