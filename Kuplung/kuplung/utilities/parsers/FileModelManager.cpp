@@ -34,9 +34,9 @@ std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_Parser
     std::vector<MeshModel> meshModels;
     switch (type) {
         case FileBrowser_ParserType_Own1: {
-            if (file.extension == ".obj")
+            if (file.extension == ".obj" || file.extension == "obj")
                 meshModels = this->parserOBJ1->parse(file);
-            else if (file.extension == ".stl")
+            else if (file.extension == ".stl" || file.extension == "stl")
                 meshModels = this->parserSTL->parse(file);
             break;
         }

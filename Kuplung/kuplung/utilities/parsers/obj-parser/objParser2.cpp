@@ -121,35 +121,84 @@ std::vector<MeshModel> objParser2::parse(FBEntity file) {
             this->models[currentModelID].MaterialTitle = this->models[currentModelID].ModelMaterial.MaterialTitle;
         }
         else if (boost::starts_with(singleLine, this->id_face)) {
-            unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
-            std::string face = this->id_face + "%d/%d/%d %d/%d/%d %d/%d/%d";
-            int matches = std::sscanf(singleLine.c_str(), face.c_str(),
-                                &vertexIndex[0], &uvIndex[0], &normalIndex[0],
-                                &vertexIndex[1], &uvIndex[1], &normalIndex[1],
-                                &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
-            if (matches != 9) {
-                face = this->id_face + "%d//%d %d//%d %d//%d";
-                matches = std::sscanf(singleLine.c_str(), face.c_str(),
-                                    &vertexIndex[0], &normalIndex[0],
-                                    &vertexIndex[1], &normalIndex[1],
-                                    &vertexIndex[2], &normalIndex[2]);
-                if (matches != 6) {
-                    Settings::Instance()->funcDoLog("OBJ file in wrong format!");
-                    return this->models;
+            std::vector<std::string> ft = this->splitString(singleLine, " ");
+            if (ft.size() == 5) {
+                unsigned int tri_vertexIndex[4], tri_uvIndex[4], tri_normalIndex[4];
+                std::string face = this->id_face + "%d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d";
+                int matches = std::sscanf(singleLine.c_str(), face.c_str(),
+                                    &tri_vertexIndex[0], &tri_uvIndex[0], &tri_normalIndex[0],
+                                    &tri_vertexIndex[1], &tri_uvIndex[1], &tri_normalIndex[1],
+                                    &tri_vertexIndex[2], &tri_uvIndex[2], &tri_normalIndex[2],
+                                    &tri_vertexIndex[3], &tri_uvIndex[3], &tri_normalIndex[3]);
+                if (matches != 12) {
+                    face = this->id_face + "%d//%d %d//%d %d//%d %d//%d";
+                    matches = std::sscanf(singleLine.c_str(), face.c_str(),
+                                        &tri_vertexIndex[0], &tri_normalIndex[0],
+                                        &tri_vertexIndex[1], &tri_normalIndex[1],
+                                        &tri_vertexIndex[2], &tri_normalIndex[2],
+                                        &tri_vertexIndex[3], &tri_normalIndex[3]);
+                    if (matches != 8) {
+                        Settings::Instance()->funcDoLog("OBJ file in wrong format!");
+                        return this->models;
+                    }
                 }
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexVertices.push_back(tri_vertexIndex[0]);
+                indexVertices.push_back(tri_vertexIndex[1]);
+                indexVertices.push_back(tri_vertexIndex[2]);
+                indexTexture.push_back(tri_uvIndex[0]);
+                indexTexture.push_back(tri_uvIndex[1]);
+                indexTexture.push_back(tri_uvIndex[2]);
+                indexNormals.push_back(tri_normalIndex[0]);
+                indexNormals.push_back(tri_normalIndex[1]);
+                indexNormals.push_back(tri_normalIndex[2]);
+
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexVertices.push_back(tri_vertexIndex[2]);
+                indexVertices.push_back(tri_vertexIndex[3]);
+                indexVertices.push_back(tri_vertexIndex[0]);
+                indexTexture.push_back(tri_uvIndex[2]);
+                indexTexture.push_back(tri_uvIndex[3]);
+                indexTexture.push_back(tri_uvIndex[0]);
+                indexNormals.push_back(tri_normalIndex[2]);
+                indexNormals.push_back(tri_normalIndex[3]);
+                indexNormals.push_back(tri_normalIndex[0]);
             }
-            indexModels.push_back(currentModelID);
-            indexModels.push_back(currentModelID);
-            indexModels.push_back(currentModelID);
-            indexVertices.push_back(vertexIndex[0]);
-            indexVertices.push_back(vertexIndex[1]);
-            indexVertices.push_back(vertexIndex[2]);
-            indexTexture.push_back(uvIndex[0]);
-            indexTexture.push_back(uvIndex[1]);
-            indexTexture.push_back(uvIndex[2]);
-            indexNormals.push_back(normalIndex[0]);
-            indexNormals.push_back(normalIndex[1]);
-            indexNormals.push_back(normalIndex[2]);
+            else {
+                unsigned int vertexIndex[3], uvIndex[3], normalIndex[3];
+                std::string face = this->id_face + "%d/%d/%d %d/%d/%d %d/%d/%d";
+                int matches = std::sscanf(singleLine.c_str(), face.c_str(),
+                                    &vertexIndex[0], &uvIndex[0], &normalIndex[0],
+                                    &vertexIndex[1], &uvIndex[1], &normalIndex[1],
+                                    &vertexIndex[2], &uvIndex[2], &normalIndex[2]);
+                if (matches != 9) {
+                    face = this->id_face + "%d//%d %d//%d %d//%d";
+                    matches = std::sscanf(singleLine.c_str(), face.c_str(),
+                                        &vertexIndex[0], &normalIndex[0],
+                                        &vertexIndex[1], &normalIndex[1],
+                                        &vertexIndex[2], &normalIndex[2]);
+                    if (matches != 6) {
+                        Settings::Instance()->funcDoLog("OBJ file in wrong format!");
+                        return this->models;
+                    }
+                }
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexModels.push_back(currentModelID);
+                indexVertices.push_back(vertexIndex[0]);
+                indexVertices.push_back(vertexIndex[1]);
+                indexVertices.push_back(vertexIndex[2]);
+                indexTexture.push_back(uvIndex[0]);
+                indexTexture.push_back(uvIndex[1]);
+                indexTexture.push_back(uvIndex[2]);
+                indexNormals.push_back(normalIndex[0]);
+                indexNormals.push_back(normalIndex[1]);
+                indexNormals.push_back(normalIndex[2]);
+            }
         }
 
         progressStageCounter += 1;
