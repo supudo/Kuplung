@@ -54,7 +54,7 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->regex_materialTextureDissolve = "^map_d\\s.*";
 }
 
-std::vector<MeshModel> objParser1::parse(FBEntity file) {
+std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> settings) {
     this->file = file;
     this->geometricVertices = {};
     this->textureCoordinates = {};
@@ -317,13 +317,8 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
 
     std::string folderPath = this->file.path;
     boost::replace_all(folderPath, this->file.title, "");
-#ifdef _WIN32
-    if (!boost::filesystem::exists(materialImage.Image))
-        materialImage.Image = folderPath + "/" + materialImage.Image;
-#else
-    if (!boost::filesystem::exists(materialImage.Image))
-        materialImage.Image = folderPath + "/" + materialImage.Image;
-#endif
+    if (!boost::filesystem::exists(materialImage.Image) && !boost::filesystem::path(materialImage.Image).is_absolute())
+        materialImage.Image = folderPath + materialImage.Image;
 
     std::regex pathSeparator("/");
     std::vector<std::string> fileElements = this->splitString(materialImage.Image, pathSeparator);

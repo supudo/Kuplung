@@ -17,6 +17,7 @@
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
+#include "kuplung/ui/components/importers/ImportOBJ.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/RendererUI.hpp"
@@ -37,7 +38,7 @@ public:
     ~UI();
     void init(SDL_Window *window,
               std::function<void()> quitApp,
-              std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
+              std::function<void(FBEntity, std::vector<std::string>)> processImportedFile,
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
@@ -85,7 +86,7 @@ public:
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
-    std::function<void(FBEntity, FileBrowser_ParserType)> funcProcessFile;
+    std::function<void(FBEntity, std::vector<std::string>)> funcProcessImportedFile;
     std::function<void()> funcNewScene;
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
@@ -96,7 +97,8 @@ private:
     std::function<void(FBEntity file)> funcSaveScene;
     std::function<void(FBEntity file)> funcOpenScene;
 
-    void dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type);
+    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
+    void dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> settings);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
@@ -124,6 +126,7 @@ private:
     std::unique_ptr<Log> componentLog;
     std::unique_ptr<Screenshot> componentScreenshot;
     std::unique_ptr<FileBrowser> componentFileBrowser;
+    std::unique_ptr<ImportOBJ> componentImportOBJ;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
     std::unique_ptr<DialogStyle> windowStyle;

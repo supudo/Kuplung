@@ -26,6 +26,7 @@
 		8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */; };
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
+		8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A3443941DC0DD86008393B5 /* brick_wall_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */; };
 		8A3443951DC0DD86008393B5 /* brick_wall_displacement.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438F1DC0DD7A008393B5 /* brick_wall_displacement.png */; };
@@ -634,6 +635,8 @@
 		8A2B48791CC4F6EA0077E9D4 /* Exporter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exporter.hpp; path = export/Exporter.hpp; sourceTree = "<group>"; };
 		8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExporterOBJ.cpp; path = export/ExporterOBJ.cpp; sourceTree = "<group>"; };
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
+		8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImportOBJ.cpp; path = importers/ImportOBJ.cpp; sourceTree = "<group>"; };
+		8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImportOBJ.hpp; path = importers/ImportOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
 		8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_diffuse.png; path = shapes/brick_wall_diffuse.png; sourceTree = "<group>"; };
@@ -1060,6 +1063,15 @@
 			name = export;
 			sourceTree = "<group>";
 		};
+		8A2CF6AD1DC39DFA008D014E /* importers */ = {
+			isa = PBXGroup;
+			children = (
+				8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */,
+				8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */,
+			);
+			name = importers;
+			sourceTree = "<group>";
+		};
 		8A3A29F81D2D0E3C00F26AE4 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -1125,6 +1137,7 @@
 		8A6E70641C6CACB40085CAE5 /* components */ = {
 			isa = PBXGroup;
 			children = (
+				8A2CF6AD1DC39DFA008D014E /* importers */,
 				8A6E70651C6CACB40085CAE5 /* ColorPicker.cpp */,
 				8A6E70661C6CACB40085CAE5 /* ColorPicker.hpp */,
 				8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */,
@@ -1928,6 +1941,7 @@
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
 				8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */,
 				8AA1A73B1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp in Sources */,
+				8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */,
 				8A81DDC61D1A82B5004F3270 /* RayLine.cpp in Sources */,
 				8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */,
 				8AA9F2351D2173F6004A8F1C /* Terrain.cpp in Sources */,

@@ -17,12 +17,6 @@
 #include <string>
 #include <boost/filesystem.hpp>
 
-typedef enum FileBrowser_ParserType {
-    FileBrowser_ParserType_Own1 = 0,
-    FileBrowser_ParserType_Own2 = 1,
-    FileBrowser_ParserType_Assimp = 2
-} FileBrowser_ParserType;
-
 class FileBrowser {
 public:
     void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile);

@@ -15,12 +15,8 @@
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string.hpp>
 
-#pragma mark - Destructor
-
 objParser2::~objParser2() {
 }
-
-#pragma mark - Publics
 
 void objParser2::init(std::function<void(float)> doProgress) {
     this->doProgress = doProgress;
@@ -54,7 +50,7 @@ void objParser2::init(std::function<void(float)> doProgress) {
     this->id_materialTextureDissolve = "map_d ";
 }
 
-std::vector<MeshModel> objParser2::parse(FBEntity file) {
+std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string> settings) {
     this->file = file;
     this->models = {};
     this->vectorVertices = {};
@@ -431,17 +427,11 @@ MeshMaterialTextureImage objParser2::parseTextureImage(std::string textureLine) 
 
     std::string folderPath = this->file.path;
     boost::replace_all(folderPath, this->file.title, "");
-#ifdef _WIN32
-    if (!boost::filesystem::exists(materialImage.Image))
-        materialImage.Image = folderPath + "/" + materialImage.Image;
-#else
-    if (!boost::filesystem::exists(materialImage.Image))
-        materialImage.Image = folderPath + "/" + materialImage.Image;
-#endif
+    if (!boost::filesystem::exists(materialImage.Image) && !boost::filesystem::path(materialImage.Image).is_absolute())
+        materialImage.Image = folderPath + materialImage.Image;
 
     std::vector<std::string> fileElements = this->splitString(materialImage.Image, "/");
     materialImage.Filename = fileElements[fileElements.size() - 1];
-
     return materialImage;
 }
 

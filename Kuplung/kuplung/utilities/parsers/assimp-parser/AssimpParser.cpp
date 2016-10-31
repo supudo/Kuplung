@@ -17,7 +17,7 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 }
 
-std::vector<MeshModel> AssimpParser::parse(FBEntity file) {
+std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> settings) {
     this->file = file;
     this->models.clear();
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
@@ -187,13 +187,8 @@ std::vector<MeshMaterialTextureImage> AssimpParser::loadMaterialTextures(aiMater
 
             std::string folderPath = this->file.path;
             boost::replace_all(folderPath, this->file.title, "");
-        #ifdef _WIN32
-            if (!boost::filesystem::exists(texture.Image))
-                texture.Image = folderPath + "/" + texture.Image;
-        #else
-            if (!boost::filesystem::exists(texture.Image))
-                texture.Image = folderPath + "/" + texture.Image;
-        #endif
+            if (!boost::filesystem::exists(texture.Image) && !boost::filesystem::path(texture.Image).is_absolute())
+                texture.Image = folderPath + texture.Image;
 
             texture.Height = 0;
             texture.Width = 0;

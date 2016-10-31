@@ -10,6 +10,7 @@
 #define Settings_h
 
 #include <string>
+#include <algorithm>
 #include <vector>
 #include "ConfigUtils.hpp"
 #include "SettingsStructs.h"

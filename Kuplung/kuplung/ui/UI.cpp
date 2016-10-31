@@ -36,7 +36,7 @@ UI::~UI() {
 
 void UI::init(SDL_Window *window,
               std::function<void()> quitApp,
-              std::function<void(FBEntity, FileBrowser_ParserType)> processFile,
+              std::function<void(FBEntity, std::vector<std::string>)> processImportedFile,
               std::function<void()> newScene,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
@@ -49,7 +49,7 @@ void UI::init(SDL_Window *window,
               ) {
     this->sdlWindow = window;
     this->funcQuitApp = quitApp;
-    this->funcProcessFile = processFile;
+    this->funcProcessImportedFile = processImportedFile;
     this->funcNewScene = newScene;
     this->funcFileShaderCompile = fileShaderCompile;
     this->funcAddShape = addShape;
@@ -106,7 +106,10 @@ void UI::init(SDL_Window *window,
     this->componentScreenshot = std::make_unique<Screenshot>();
 
     this->componentFileBrowser = std::make_unique<FileBrowser>();
-    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+    this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+
+    this->componentImportOBJ = std::make_unique<ImportOBJ>();
+    this->componentImportOBJ->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
@@ -225,7 +228,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                                         t = FileBrowser_ParserType_Assimp;
                                         break;
                                 }
-                                this->funcProcessFile(file, t);
+                                this->funcProcessImportedFile(file, std::vector<std::string>());
                             }
                             else
                                 this->showRecentFileImportedDoesntExists = true;
@@ -574,8 +577,7 @@ void UI::dialogFileSave(FileSaverOperation operation) {
 }
 
 void UI::dialogOBJImporterBrowser() {
-    this->componentFileBrowser->setStyleBrowser(false);
-    this->componentFileBrowser->draw("Import Wavefront OBJ file", &this->showOBJImporter);
+    this->componentImportOBJ->draw("Import Wavefront OBJ file", &this->showOBJImporter);
 }
 
 void UI::dialogStyle() {
@@ -679,13 +681,18 @@ void UI::dialogShadertoyMessageWindow() {
     ImGui::EndPopup();
 }
 
-void UI::dialogOBJImporterProcessFile(FBEntity file, FileBrowser_ParserType type) {
+void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
-    this->funcProcessFile(file, type);
+    this->funcProcessImportedFile(file, std::vector<std::string>());
     this->showOBJImporter = false;
     this->showDialogFile = false;
     this->showDialogStyle = false;
+}
+
+void UI::dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> settings) {
+    this->funcProcessImportedFile(file, settings);
+    this->showOBJImporter = false;
 }
 
 void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {

@@ -23,7 +23,7 @@ public:
     ~FileModelManager();
     FileModelManager();
     void init(std::function<void(float)> doProgress);
-    std::vector<MeshModel> parse(FBEntity file, FileBrowser_ParserType type);
+    std::vector<MeshModel> parse(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings);
 
 private:
     std::function<void(float)> funcProgress;

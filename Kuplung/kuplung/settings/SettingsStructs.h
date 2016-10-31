@@ -20,4 +20,10 @@ struct FBEntity {
     std::string path, title, extension, modifiedDate, size;
 };
 
+typedef enum FileBrowser_ParserType {
+    FileBrowser_ParserType_Own1 = 0,
+    FileBrowser_ParserType_Own2 = 1,
+    FileBrowser_ParserType_Assimp = 2
+} FileBrowser_ParserType;
+
 #endif /* SettingsStructs_h */

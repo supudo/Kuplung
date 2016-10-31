@@ -157,6 +157,7 @@ SOURCES += main.cpp \
     kuplung/ui/implementation/SDL2OpenGL32.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
+    kuplung/ui/components/importers/ImportOBJ.cpp \
     kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/ImageViewer.cpp \
     kuplung/ui/components/RendererUI.cpp \
@@ -248,6 +249,7 @@ HEADERS += \
     kuplung/ui/implementation/SDL2OpenGL32.hpp \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
+    kuplung/ui/components/importers/ImportOBJ.hpp \
     kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/ImageViewer.hpp \
     kuplung/ui/components/RendererUI.hpp \

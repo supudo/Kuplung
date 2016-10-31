@@ -155,16 +155,19 @@ std::string Settings::string_format(const std::string fmt_str, ...) {
 
 bool Settings::isAllowedFileExtension(std::string fileExtension) {
     std::string allowedExtensions[] = {".obj"};
+    std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
 
 bool Settings::isAllowedStyleExtension(std::string fileExtension) {
     std::string allowedExtensions[] = {".style"};
+    std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
 
 bool Settings::isAllowedImageExtension(std::string fileExtension) {
     std::string allowedExtensions[] = {".png", ".jpg", ".bmp", ".jpeg", ".tga"};
+    std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
 

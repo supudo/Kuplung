@@ -139,7 +139,7 @@ bool Kuplung::init() {
                     this->managerUI = std::make_unique<UI>(*this->managerObjects);
                     this->managerUI->init(gWindow,
                                           std::bind(&Kuplung::guiQuit, this),
-                                          std::bind(&Kuplung::guiProcessObjFile, this, std::placeholders::_1, std::placeholders::_2),
+                                          std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiClearScreen, this),
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
@@ -503,7 +503,7 @@ void Kuplung::addShape(ShapeType type) {
     shapeFile.extension = ".obj";
     shapeFile.title = shapeName + ".obj";
     shapeFile.path = Settings::Instance()->appFolder() + "/shapes/" + shapeName + ".obj";
-    this->guiProcessObjFile(shapeFile, t);
+    this->guiProcessImportedFile(shapeFile, std::vector<std::string>());
 }
 
 void Kuplung::addLight(LightSourceType type) {
@@ -521,12 +521,13 @@ void Kuplung::processRunningThreads() {
         this->exportSceneFinished();
 }
 
-void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
+void Kuplung::guiProcessImportedFile(FBEntity file, std::vector<std::string> settings) {
     if (this->hasEnding(file.title, ".obj")) {
         this->managerUI->showParsing();
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
-        std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, type);
+        FileBrowser_ParserType rt = FileBrowser_ParserType(Settings::Instance()->RendererType);
+        std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, rt, settings);
         objParserThread.detach();
         this->doLog("Starting parsing OBJ " + file.title);
     }
@@ -534,8 +535,8 @@ void Kuplung::guiProcessObjFile(FBEntity file, FileBrowser_ParserType type) {
         this->doLog("!!! You have to select .obj file !!!");
 }
 
-void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type) {
-    std::vector<MeshModel> newModels = this->parser->parse(file, type);
+void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings) {
+    std::vector<MeshModel> newModels = this->parser->parse(file, type, settings);
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;

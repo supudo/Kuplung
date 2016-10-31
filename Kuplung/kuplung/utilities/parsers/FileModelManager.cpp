@@ -30,22 +30,22 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
     this->parserAssimp->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 
-std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_ParserType type) {
+std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings) {
     std::vector<MeshModel> meshModels;
     switch (type) {
         case FileBrowser_ParserType_Own1: {
             if (file.extension == ".obj" || file.extension == "obj")
-                meshModels = this->parserOBJ1->parse(file);
+                meshModels = this->parserOBJ1->parse(file, settings);
             else if (file.extension == ".stl" || file.extension == "stl")
-                meshModels = this->parserSTL->parse(file);
+                meshModels = this->parserSTL->parse(file, settings);
             break;
         }
         case FileBrowser_ParserType_Own2: {
-            meshModels = this->parserOBJ2->parse(file);
+            meshModels = this->parserOBJ2->parse(file, settings);
             break;
         }
         case FileBrowser_ParserType_Assimp: {
-            meshModels = this->parserAssimp->parse(file);
+            meshModels = this->parserAssimp->parse(file, settings);
             break;
         }
         default:
