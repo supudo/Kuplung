@@ -27,8 +27,8 @@ void ImportOBJ::init(int positionX, int positionY, int width, int height, std::f
     this->processFile = processFile;
     this->panelWidth_Options = 200.0f;
     this->panelWidth_OptionsMin = 200.0f;
-    this->Setting_Forward = 0;
-    this->Setting_Up = 0;
+    this->Setting_Forward = 1;
+    this->Setting_Up = 5;
 }
 
 void ImportOBJ::draw(const char* title, bool* p_opened) {
@@ -67,6 +67,11 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
         "Z Up"
     };
     ImGui::Combo("##988", &this->Setting_Up, up_items, IM_ARRAYSIZE(up_items));
+    ImGui::Separator();
+    if (ImGui::Button("From Blender", ImVec2(-1.0f, 0.0f))) {
+        this->Setting_Forward = 2;
+        this->Setting_Up = 4;
+    }
     ImGui::PopItemWidth();
 
     ImGui::EndChild();
