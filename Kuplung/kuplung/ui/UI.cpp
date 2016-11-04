@@ -32,6 +32,8 @@ UI::~UI() {
     this->componentSVS.reset();
     this->componentImageViewer.reset();
     this->componentRendererUI.reset();
+    this->componentImportOBJ.reset();
+    this->componentExportOBJ.reset();
 }
 
 void UI::init(SDL_Window *window,
@@ -41,7 +43,7 @@ void UI::init(SDL_Window *window,
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
-              std::function<void(FBEntity file)> exportScene,
+              std::function<void(FBEntity file, std::vector<std::string>)> exportScene,
               std::function<void(int)> deleteModel,
               std::function<void(FBEntity file)> renderScene,
               std::function<void(FBEntity file)> saveScene,
@@ -54,7 +56,7 @@ void UI::init(SDL_Window *window,
     this->funcFileShaderCompile = fileShaderCompile;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
-    this->funcExportScene = exportScene;
+    this->funcProcessExpoterdFile = exportScene;
     this->funcDeleteModel = deleteModel;
     this->funcRenderScene = renderScene;
     this->funcSaveScene = saveScene;
@@ -110,6 +112,9 @@ void UI::init(SDL_Window *window,
 
     this->componentImportOBJ = std::make_unique<ImportOBJ>();
     this->componentImportOBJ->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+
+    this->componentExportOBJ = std::make_unique<ExportOBJ>();
+    this->componentExportOBJ->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogOBJExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&UI::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
@@ -342,6 +347,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->showOBJImporter)
         this->dialogOBJImporterBrowser();
 
+    if (this->showOBJExporter)
+        this->dialogOBJExporterBrowser();
+
     if (this->showDialogStyle)
         this->dialogStyle();
 
@@ -374,9 +382,6 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showSceneStats)
         this->dialogSceneStats();
-
-    if (this->showOBJExporter)
-        this->dialogFileSave(FileSaverOperation_Exporter);
 
     if (this->showImageSave)
         this->dialogFileSave(FileSaverOperation_Renderer);
@@ -561,10 +566,6 @@ void UI::dialogFileSave(FileSaverOperation operation) {
             title = "Open Scene";
             wType = &this->showOpenDialog;
             break;
-        case FileSaverOperation_Exporter:
-            title = "Export Scene";
-            wType = &this->showOBJExporter;
-            break;
         case FileSaverOperation_Renderer:
             title = "Render Scene";
             wType = &this->showRenderer;
@@ -578,6 +579,10 @@ void UI::dialogFileSave(FileSaverOperation operation) {
 
 void UI::dialogOBJImporterBrowser() {
     this->componentImportOBJ->draw("Import Wavefront OBJ file", &this->showOBJImporter);
+}
+
+void UI::dialogOBJExporterBrowser() {
+    this->componentExportOBJ->draw("Export Wavefront OBJ file", &this->showOBJExporter);
 }
 
 void UI::dialogStyle() {
@@ -695,6 +700,11 @@ void UI::dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> se
     this->showOBJImporter = false;
 }
 
+void UI::dialogOBJExporterProcessFile(FBEntity file, std::vector<std::string> settings) {
+    this->funcProcessExpoterdFile(file, settings);
+    this->showOBJExporter = false;
+}
+
 void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {
     switch (operation) {
         case FileSaverOperation_SaveScene:
@@ -703,16 +713,12 @@ void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) 
         case FileSaverOperation_OpenScene:
             this->funcOpenScene(file);
             break;
-        case FileSaverOperation_Exporter:
-            this->funcExportScene(file);
-            break;
         case FileSaverOperation_Renderer:
             this->funcRenderScene(file);
             break;
         default:
             break;
     }
-    this->showOBJExporter = false;
     this->showImageSave = false;
     this->showSaveDialog = false;
     this->showOpenDialog = false;

@@ -18,6 +18,7 @@
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/importers/ImportOBJ.hpp"
+#include "kuplung/ui/components/exporters/ExportOBJ.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/RendererUI.hpp"
@@ -43,7 +44,7 @@ public:
               std::function<void(std::string)> fileShaderCompile,
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
-              std::function<void(FBEntity file)> exportScene,
+              std::function<void(FBEntity file, std::vector<std::string>)> exportScene,
               std::function<void(int)> deleteModel,
               std::function<void(FBEntity file)> renderScene,
               std::function<void(FBEntity file)> saveScene,
@@ -91,7 +92,7 @@ private:
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
     std::function<void(LightSourceType)> funcAddLight;
-    std::function<void(FBEntity file)> funcExportScene;
+    std::function<void(FBEntity file, std::vector<std::string>)> funcProcessExpoterdFile;
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
     std::function<void(FBEntity file)> funcSaveScene;
@@ -99,10 +100,12 @@ private:
 
     void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
     void dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> settings);
+    void dialogOBJExporterProcessFile(FBEntity file, std::vector<std::string> settings);
     void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
     void dialogOBJImporterBrowser();
+    void dialogOBJExporterBrowser();
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -127,6 +130,7 @@ private:
     std::unique_ptr<Screenshot> componentScreenshot;
     std::unique_ptr<FileBrowser> componentFileBrowser;
     std::unique_ptr<ImportOBJ> componentImportOBJ;
+    std::unique_ptr<ExportOBJ> componentExportOBJ;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
     std::unique_ptr<DialogStyle> windowStyle;
@@ -142,6 +146,7 @@ private:
     bool showDialogStyle;
     bool showDialogFile;
     bool showOBJImporter;
+    bool showOBJExporter;
     bool showSaveDialog;
     bool showOpenDialog;
     bool showShaderEditor;
@@ -152,7 +157,6 @@ private:
     bool showAboutImgui;
     bool showAboutKuplung;
     bool showDemoWindow;
-    bool showOBJExporter;
     bool showImageSave;
     bool showRenderer;
     bool showRecentFileDoesntExists;

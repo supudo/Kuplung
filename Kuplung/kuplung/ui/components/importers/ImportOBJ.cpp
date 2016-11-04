@@ -73,7 +73,6 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
         this->Setting_Up = 4;
     }
     ImGui::PopItemWidth();
-
     ImGui::EndChild();
 
     ImGui::SameLine();

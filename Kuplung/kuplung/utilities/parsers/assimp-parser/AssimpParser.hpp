@@ -12,6 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
+#include "kuplung/utilities/parsers/ParserUtils.hpp"
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
@@ -26,6 +27,8 @@ public:
 
 private:
     std::function<void(float)> funcProgress;
+
+    std::unique_ptr<ParserUtils> parserUtils;
 
     FBEntity file;
     std::vector<MeshModel> models;

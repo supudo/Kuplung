@@ -11,6 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/utilities/parsers/ParserUtils.hpp"
 #include <regex>
 #include <functional>
 
@@ -23,6 +24,8 @@ public:
 private:
     std::vector<MeshModel> models;
     std::vector<MeshModelMaterial> materials;
+
+    std::unique_ptr<ParserUtils> parserUtils;
 
     FBEntity file;
     std::function<void(float)> doProgress;

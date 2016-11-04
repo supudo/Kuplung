@@ -11,15 +11,18 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
+#include "kuplung/utilities/parsers/ParserUtils.hpp"
 
 class ExporterOBJ {
 public:
     ~ExporterOBJ();
     void init(std::function<void(float)> doProgress);
-    void exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces);
+    void exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces, std::vector<std::string> settings);
 
 private:
     std::function<void(float)> funcProgress;
+
+    std::unique_ptr<ParserUtils> parserUtils;
 
     void exportGeometry(std::vector<ModelFaceBase*> faces);
     void exportMaterials(std::vector<ModelFaceBase*> faces);
@@ -34,6 +37,8 @@ private:
     std::vector<glm::vec2> uniqueTextureCoordinates;
     std::vector<glm::vec3> uniqueNormals;
     int vCounter = 1, vtCounter = 1, vnCounter = 1;
+    
+    std::vector<std::string> objSettings;
 };
 
 #endif /* ExporterOBJ_hpp */

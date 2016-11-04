@@ -144,7 +144,7 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addLight, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1),
+                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1),
                                           std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
@@ -542,16 +542,16 @@ void Kuplung::processObjFileAsync(FBEntity file, FileBrowser_ParserType type, st
     this->objParserThreadFinished = true;
 }
 
-void Kuplung::guiSceneExport(FBEntity file) {
+void Kuplung::guiSceneExport(FBEntity file, std::vector<std::string> settings) {
 //    this->managerExporter->exportScene(file, this->meshModelFaces);
     this->managerUI->showExporting();
     this->exporterThreadFinished = false;
-    std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces);
+    std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces, settings);
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces) {
-    this->managerExporter->exportScene(file, meshModelFaces);
+void Kuplung::exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces, std::vector<std::string> settings) {
+    this->managerExporter->exportScene(file, meshModelFaces, settings);
     this->exporterThreadFinished = true;
 }
 

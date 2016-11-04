@@ -158,6 +158,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/importers/ImportOBJ.cpp \
+    kuplung/ui/components/exporters/ExportOBJ.cpp \
     kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/ImageViewer.cpp \
     kuplung/ui/components/RendererUI.cpp \
@@ -192,6 +193,7 @@ SOURCES += main.cpp \
     kuplung/utilities/libnoise/noiseutils.cpp \
     kuplung/utilities/maths/Maths.cpp \
     kuplung/utilities/parsers/FileModelManager.cpp \
+    kuplung/utilities/parsers/ParserUtils.cpp \
     kuplung/utilities/parsers/obj-parser/objParser1.cpp \
     kuplung/utilities/parsers/obj-parser/objParser2.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
@@ -250,6 +252,7 @@ HEADERS += \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/importers/ImportOBJ.hpp \
+    kuplung/ui/components/exporters/ExportOBJ.hpp \
     kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/ImageViewer.hpp \
     kuplung/ui/components/RendererUI.hpp \
@@ -287,6 +290,7 @@ HEADERS += \
     kuplung/utilities/libnoise/noiseutils.h \
     kuplung/utilities/maths/Maths.hpp \
     kuplung/utilities/parsers/FileModelManager.hpp \
+    kuplung/utilities/parsers/ParserUtils.hpp \
     kuplung/utilities/parsers/ModelObject.h \
     kuplung/utilities/parsers/obj-parser/objParser1.hpp \
     kuplung/utilities/parsers/obj-parser/objParser2.hpp \

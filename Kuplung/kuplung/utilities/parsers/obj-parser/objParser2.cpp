@@ -14,87 +14,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string.hpp>
-#include <glm/gtx/rotate_vector.hpp>
-
-glm::vec3 objParser2::fixVectorAxis(glm::vec3 v, int indexForward, int indexUp) {
-    //
-    //                 +Z
-    //                  |
-    //                  |           +Y
-    //                  |         /
-    //                  |       /
-    //                  |     /
-    //                  |   /
-    //                  | /
-    //  -X--------------|-----------------+X
-    //                 /|
-    //               /  |
-    //             /    |
-    //           /      |
-    //         /        |
-    //       /          |
-    //     -Y           |
-    //                 -Z
-    //
-
-    switch (indexForward) {
-        case 0: { // -X Forward
-            v = glm::rotateZ(v, glm::radians(-90.0f));
-            break;
-        }
-        case 1: { // -Y Forward
-            v = glm::rotateZ(v, glm::radians(180.0f));
-            break;
-        }
-        case 2: { // -Z Forward
-            v = glm::rotateX(v, glm::radians(90.0f));
-            break;
-        }
-        case 3: { // X Forward
-            v = glm::rotateZ(v, glm::radians(90.0f));
-            break;
-        }
-        case 4: { // Y Forward
-            break;
-        }
-        case 5: { // Z Forward
-            v = glm::rotateX(v, glm::radians(-90.0f));
-            break;
-        }
-        default:
-            break;
-    }
-
-    switch (indexUp) {
-        case 0: { // -X Up
-            v = glm::rotateY(v, glm::radians(-90.0f));
-            break;
-        }
-        case 1: { // -Y Up
-            break;
-        }
-        case 2: { // -Z Up
-            v = glm::rotateY(v, glm::radians(180.0f));
-            break;
-        }
-        case 3: { // X Up
-            v = glm::rotateY(v, glm::radians(90.0f));
-            break;
-        }
-        case 4: { // Y Up
-            v = glm::rotateY(v, glm::radians(180.0f));
-            break;
-        }
-        case 5: { // Z Up
-//            v = glm::rotateY(v, glm::radians(180.0f));
-            break;
-        }
-        default:
-            break;
-    }
-
-    return v;
-}
 
 objParser2::~objParser2() {
 }
@@ -129,6 +48,8 @@ void objParser2::init(std::function<void(float)> doProgress) {
     this->id_materialTextureSpecular = "map_Ks ";
     this->id_materialTextureSpecularExp = "map_Ns ";
     this->id_materialTextureDissolve = "map_d ";
+
+    this->parserUtils = std::make_unique<ParserUtils>();
 }
 
 std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string> settings) {
@@ -299,8 +220,8 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
             unsigned int vertexIndex = indexVertices[i];
             unsigned int normalIndex = indexNormals[i];
 
-            glm::vec3 vertex = this->fixVectorAxis(vVertices[vertexIndex - 1], Setting_Axis_Forward, Setting_Axis_Up);
-            glm::vec3 normal = this->fixVectorAxis(vNormals[normalIndex - 1], Setting_Axis_Forward, Setting_Axis_Up);
+            glm::vec3 vertex = this->parserUtils->fixVectorAxis(vVertices[vertexIndex - 1], Setting_Axis_Forward, Setting_Axis_Up);
+            glm::vec3 normal = this->parserUtils->fixVectorAxis(vNormals[normalIndex - 1], Setting_Axis_Forward, Setting_Axis_Up);
 
             this->models[modelIndex].vertices.push_back(vertex);
             this->models[modelIndex].countVertices += 1;

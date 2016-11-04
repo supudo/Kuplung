@@ -15,6 +15,8 @@ AssimpParser::~AssimpParser() {
 
 void AssimpParser::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
+
+    this->parserUtils = std::make_unique<ParserUtils>();
 }
 
 std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> settings) {

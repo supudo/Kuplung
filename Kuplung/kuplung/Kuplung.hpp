@@ -49,7 +49,7 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(ShapeType type);
     void addLight(LightSourceType type);
-    void exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces);
+    void exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces, std::vector<std::string> settings);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();
@@ -61,7 +61,7 @@ private:
     void guiClearScreen();
     void guiEditorshaderCompiled(std::string const& fileName);
     void guiModelDelete(int selectedModel);
-    void guiSceneExport(FBEntity file);
+    void guiSceneExport(FBEntity file, std::vector<std::string> settings);
     void guiRenderScene(FBEntity file);
 
     // Screen dimension constants

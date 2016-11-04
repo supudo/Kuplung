@@ -52,6 +52,8 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->regex_materialTextureSpecular = "^map_Ks\\s.*";
     this->regex_materialTextureSpecularExp = "^map_Ns\\s.*";
     this->regex_materialTextureDissolve = "^map_d\\s.*";
+
+    this->parserUtils = std::make_unique<ParserUtils>();
 }
 
 std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> settings) {

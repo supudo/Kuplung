@@ -50,6 +50,8 @@
 		8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */; };
 		8A45C5E41D89609C00E951DF /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
 		8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
+		8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDBD1DCA591900383570 /* ParserUtils.cpp */; };
+		8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
 		8A4C65EB1DBF67570022837F /* plane_objects.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4C65E91DBF66C20022837F /* plane_objects.mtl */; };
@@ -665,6 +667,10 @@
 		8A45C5E01D895FC400E951DF /* StructuredVolumetricSampling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StructuredVolumetricSampling.hpp; path = artefacts/StructuredVolumetricSampling.hpp; sourceTree = "<group>"; };
 		8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.frag; sourceTree = "<group>"; };
 		8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.vert; sourceTree = "<group>"; };
+		8A45EDBD1DCA591900383570 /* ParserUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParserUtils.cpp; sourceTree = "<group>"; };
+		8A45EDBE1DCA591900383570 /* ParserUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParserUtils.hpp; sourceTree = "<group>"; };
+		8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportOBJ.cpp; path = exporters/ExportOBJ.cpp; sourceTree = "<group>"; };
+		8A45EDC31DCA5A5400383570 /* ExportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExportOBJ.hpp; path = exporters/ExportOBJ.hpp; sourceTree = "<group>"; };
 		8A47F7171CBF741800699CAC /* camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.mtl; sourceTree = "<group>"; };
 		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
 		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
@@ -1091,6 +1097,15 @@
 			path = maths;
 			sourceTree = "<group>";
 		};
+		8A45EDC11DCA5A4E00383570 /* exporters */ = {
+			isa = PBXGroup;
+			children = (
+				8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */,
+				8A45EDC31DCA5A5400383570 /* ExportOBJ.hpp */,
+			);
+			name = exporters;
+			sourceTree = "<group>";
+		};
 		8A69992B1CE0FB6F009F8D56 /* renderers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1137,15 +1152,16 @@
 		8A6E70641C6CACB40085CAE5 /* components */ = {
 			isa = PBXGroup;
 			children = (
-				8A2CF6AD1DC39DFA008D014E /* importers */,
 				8A6E70651C6CACB40085CAE5 /* ColorPicker.cpp */,
 				8A6E70661C6CACB40085CAE5 /* ColorPicker.hpp */,
+				8A45EDC11DCA5A4E00383570 /* exporters */,
 				8A6E70691C6CACB40085CAE5 /* FileBrowser.cpp */,
 				8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */,
 				8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */,
 				8A6999341CE0FBA2009F8D56 /* FileSaver.hpp */,
 				8AC4B80D1DBA09B800F1D850 /* ImageViewer.cpp */,
 				8AC4B80E1DBA09B800F1D850 /* ImageViewer.hpp */,
+				8A2CF6AD1DC39DFA008D014E /* importers */,
 				8A6E706D1C6CACB40085CAE5 /* Log.cpp */,
 				8A6E706E1C6CACB40085CAE5 /* Log.hpp */,
 				8AD91DA91CA3D980004674BC /* materialeditor */,
@@ -1269,6 +1285,8 @@
 				8A6E70971C6CACB40085CAE5 /* FileModelManager.hpp */,
 				8A6E70981C6CACB40085CAE5 /* ModelObject.h */,
 				8AC291401CD2455C00A631C1 /* obj-parser */,
+				8A45EDBD1DCA591900383570 /* ParserUtils.cpp */,
+				8A45EDBE1DCA591900383570 /* ParserUtils.hpp */,
 				8AC291411CD2456200A631C1 /* stl-parser */,
 			);
 			path = parsers;
@@ -1892,6 +1910,7 @@
 				8AE25AE61DBA0B590098252E /* RendererUI.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
+				8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */,
 				8AB255B91DA4F2E100ABF2AC /* DialogShadertoy.cpp in Sources */,
 				8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */,
 				8A83BF911DBE3ACE00B927D5 /* SceneRenderer.cpp in Sources */,
@@ -1915,6 +1934,7 @@
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
+				8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,

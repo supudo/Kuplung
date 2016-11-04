@@ -11,6 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#include "kuplung/utilities/parsers/ParserUtils.hpp"
 #include <functional>
 
 struct PackedVertex {
@@ -33,6 +34,8 @@ private:
     std::function<void(float)> doProgress;
     int objFileLinesCount = 0;
 
+    std::unique_ptr<ParserUtils> parserUtils;
+
     size_t fileCountLines(std::istream &is);
 
     std::vector<MeshModel> models;
@@ -45,8 +48,6 @@ private:
     MeshMaterialTextureImage parseTextureImage(std::string textureLine);
     std::vector<std::string> splitString(const std::string &s, std::string delimiter);
     bool getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result);
-
-    glm::vec3 fixVectorAxis(glm::vec3 v, int indexForward, int indexUp);
 
     // current object name
     std::string id_objTitle;

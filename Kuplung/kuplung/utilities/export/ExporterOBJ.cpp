@@ -9,6 +9,7 @@
 #include "ExporterOBJ.hpp"
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
 ExporterOBJ::~ExporterOBJ() {
@@ -24,10 +25,13 @@ void ExporterOBJ::init(std::function<void(float)> doProgress) {
 #else
     this->nlDelimiter = "\n";
 #endif
+
+    this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces) {
+void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces, std::vector<std::string> settings) {
     this->exportFile = file;
+    this->objSettings = settings;
     this->exportGeometry(faces);
     this->exportMaterials(faces);
 }
@@ -36,6 +40,13 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     MeshModel model = face->meshModel;
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
+    
+    int Setting_Axis_Forward = 4;
+    if (this->objSettings.size() > 0 && this->objSettings[0] != "")
+        Setting_Axis_Forward = std::stoi(this->objSettings[0]);
+    int Setting_Axis_Up = 5;
+    if (this->objSettings.size() > 1 && this->objSettings[1] != "")
+        Setting_Axis_Up = std::stoi(this->objSettings[1]);
 
     glm::vec3 scale;
     glm::quat rotation;
@@ -52,7 +63,9 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     meshData += "o " + model.ModelTitle + this->nlDelimiter;
     for (size_t j=0; j<model.indices.size(); j++) {
         int idx = model.indices[j];
+        //glm::vec3 vertex = this->parserUtils->fixVectorAxis(model.vertices[idx], Setting_Axis_Forward, Setting_Axis_Up);
         glm::vec3 vertex = model.vertices[idx];
+
         vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
         vertex = vertex * rotation;
         vertex = vertex * scale;
@@ -60,6 +73,7 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
         glm::vec2 texture_coordinate;
         if (model.texture_coordinates.size() > 0)
             texture_coordinate = model.texture_coordinates[idx];
+        //glm::vec3 normal = this->parserUtils->fixVectorAxis(model.normals[idx], Setting_Axis_Forward, Setting_Axis_Up);
         glm::vec3 normal = model.normals[idx];
 
         if (find(this->uniqueVertices.begin(), this->uniqueVertices.end(), vertex) == this->uniqueVertices.end()) {
@@ -126,7 +140,9 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
 void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
     std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
-    fileContents += "mtllib " + this->exportFile.title + ".mtl" + this->nlDelimiter;
+    std::string fn = this->exportFile.title;
+    boost::replace_all(fn, ".obj", "");
+    fileContents += "mtllib " + fn + ".mtl" + this->nlDelimiter;
 
     this->uniqueVertices.clear();
     this->uniqueTextureCoordinates.clear();
