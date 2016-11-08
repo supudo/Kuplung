@@ -7,4 +7,4 @@ before_install:
 #  - brew install cmake
 
 script:
-  - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug .. && cmake --build . && cmake --build . --target coveralls
+  - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug .. && cmake --build ./Kuplung && cmake --build ./Kuplung --target coveralls
