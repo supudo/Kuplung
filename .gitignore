@@ -29,6 +29,9 @@ Makefile*
 
 *.autosave
 
+#Cmake build
+cmake-build/
+
 #QtCtreator Qml
 *.qmlproject.user
 *.qmlproject.user.*

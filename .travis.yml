@@ -1,35 +1,7 @@
 language: cpp
 os: osx
-
-matrix:
-  include:
-    - compiler: clang
-      addons:
-        apt:
-          sources:
-            - llvm-toolchain-precise-3.7
-          packages:
-            - clang-3.7
-      env: COMPILER=clang++-3.7
-  exclude:
-    - os: linux
-      compiler: clang
-    - os: osx
-      compiler: gcc
-
-before_install:
-  - if [ $TRAVIS_OS_NAME == osx ]; then brew update && brew install glm; fi
-
+install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq lcov curl
 script:
-  - qmake -project
-  - qmake Kuplung.pro -r CONFIG+=debug CONFIG+=x86_64 CONFIG+=qml_debug
-  - if [ $TRAVIS_OS_NAME == osx ]; then
-      QTDIR="/usr/local/opt/qt5"
-      && PATH="$QTDIR/bin:$PATH"
-      && LDFLAGS=-L$QTDIR/lib
-      && CPPFLAGS=-I$QTDIR/include
-      ;
-    fi
-  - make clean
-  - make
-
+  - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug .. && cmake --build . && cmake --build . --target coveralls
