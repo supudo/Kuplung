@@ -13,7 +13,7 @@ C/C++/OpenGL Model Viewer (Experiments)
 - [libnoise](http://libnoise.sourceforge.net/)
 
 #### IDE
-QT Creator (Xcode for convinient debugging)
+QT Creator & CLion (Xcode for convinient debugging)
 
 #### TODO
 
