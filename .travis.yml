@@ -4,7 +4,7 @@ os: osx
 
 before_install:
   - brew update
-#  - brew install cmake
+  - brew install glm minizip glfw3 assimp protobuf
 
 script:
   - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./Kuplung && cmake --build ./Kuplung --target coveralls
