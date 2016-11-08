@@ -4,7 +4,7 @@ os: osx
 
 before_install:
   - brew update
-  - brew install cmake
+#  - brew install cmake
 
 script:
   - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug .. && cmake --build . && cmake --build . --target coveralls
