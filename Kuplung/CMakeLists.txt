@@ -272,6 +272,8 @@ SET(SOURCE_FILES
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp
+    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.cpp
+    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.hpp
     kuplung/utilities/renderers/ImageRenderer.cpp
     kuplung/utilities/renderers/ImageRenderer.hpp
     kuplung/utilities/renderers/KuplungRendererBase.cpp

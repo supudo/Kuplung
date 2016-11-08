@@ -54,7 +54,8 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::Text("Renderer");
     const char* renderer_items[] = {
         "App",
-        "Default"
+        "Default",
+        "Path Tracer"
     };
     ImGui::Combo("##987", &this->rendererType, renderer_items, IM_ARRAYSIZE(renderer_items));
     ImGui::Separator();
@@ -83,6 +84,8 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
         case 1:
             imageRenderer->showSpecificSettings(ImageRendererType_DefaultForward);
             break;
+        case 2:
+            imageRenderer->showSpecificSettings(ImageRendererType_PathTracer);
             break;
         default:
             break;

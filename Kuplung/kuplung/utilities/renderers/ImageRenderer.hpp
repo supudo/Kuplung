@@ -12,12 +12,14 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp"
 #include "kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp"
+#include "kuplung/utilities/renderers/path-tracer/PathTracerRenderer.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
 typedef enum ImageRendererType {
     ImageRendererType_Scene,
-    ImageRendererType_DefaultForward
+    ImageRendererType_DefaultForward,
+    ImageRendererType_PathTracer
 } ImageRendererType;
 
 class ImageRenderer {
@@ -32,6 +34,7 @@ private:
     ObjectsManager &managerObjects;
     std::unique_ptr<SceneRenderer> rendererScene;
     std::unique_ptr<DefaultForwardRenderer> rendererDefaultForward;
+    std::unique_ptr<PathTracerRenderer> rendererPathTracer;
 };
 
 #endif /* ImageRenderer_hpp */
