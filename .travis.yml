@@ -1,7 +1,10 @@
 language: cpp
+
 os: osx
-install:
-  - sudo apt-get update -qq
-  - sudo apt-get install -y -qq lcov curl
+
+before_install:
+  - brew update
+  - brew install cmake
+
 script:
   - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug .. && cmake --build . && cmake --build . --target coveralls
