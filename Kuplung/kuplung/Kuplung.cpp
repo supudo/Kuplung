@@ -212,7 +212,9 @@ void Kuplung::initFolders() {
     std::string homeFolder = std::string(hpath);
 #else
     char const *hpath = getenv("HOME");
-    std::string homeFolder = std::string(hpath);
+    std::string homeFolder("");
+    if (hpath != NULL)
+        homeFolder = std::string(hpath);
 #endif
     if (Settings::Instance()->currentFolder == "")
         Settings::Instance()->currentFolder = homeFolder;

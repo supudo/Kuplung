@@ -28,6 +28,7 @@ Makefile*
 # QtCreator
 
 *.autosave
+imgui.ini
 
 #Cmake build
 cmake-build/
