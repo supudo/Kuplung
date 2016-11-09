@@ -22,8 +22,8 @@ void ImageRenderer::init() {
     this->rendererDefaultForward = std::make_unique<DefaultForwardRenderer>(this->managerObjects);
     this->rendererDefaultForward->init();
 
-    this->rendererPathTracer = std::make_unique<PathTracerRenderer>(this->managerObjects);
-    this->rendererPathTracer->init();
+    this->rendererRayTracer = std::make_unique<RayTracerRenderer>(this->managerObjects);
+    this->rendererRayTracer->init();
 }
 
 std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
@@ -31,8 +31,8 @@ std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity file, st
         return this->rendererScene->renderImage(file, meshModelFaces);
     else if (type == ImageRendererType_DefaultForward)
         return this->rendererDefaultForward->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_PathTracer)
-        return this->rendererPathTracer->renderImage(file, meshModelFaces);
+    else if (type == ImageRendererType_RayTracer)
+        return this->rendererRayTracer->renderImage(file, meshModelFaces);
     return "";
 }
 
@@ -41,6 +41,6 @@ void ImageRenderer::showSpecificSettings(ImageRendererType type) {
         return this->rendererScene->showSpecificSettings();
     else if (type == ImageRendererType_DefaultForward)
         return this->rendererDefaultForward->showSpecificSettings();
-    else if (type == ImageRendererType_PathTracer)
-        return this->rendererPathTracer->showSpecificSettings();
+    else if (type == ImageRendererType_RayTracer)
+        return this->rendererRayTracer->showSpecificSettings();
 }

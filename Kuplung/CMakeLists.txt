@@ -5,6 +5,8 @@ PROJECT(${PROJECT_NAME})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/../cmake-build")
+
 # Warnings
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-private-field")
@@ -31,9 +33,6 @@ ENDIF(APPLE)
 
 FIND_LIBRARY(OpenGL_LIBRARY OpenGL)
 MARK_AS_ADVANCED(OpenGL_LIBRARY)
-IF (OpenGL_FOUND)
-    MESSAGE(FATAL_ERROR "OpenGL not found!")
-ENDIF(OpenGL_FOUND)
 
 # Boost
 SET(Boost_MAJOR_VERSION 1)
@@ -272,8 +271,8 @@ SET(SOURCE_FILES
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp
-    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.cpp
-    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.hpp
+    kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.cpp
+    kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.hpp
     kuplung/utilities/renderers/ImageRenderer.cpp
     kuplung/utilities/renderers/ImageRenderer.hpp
     kuplung/utilities/renderers/KuplungRendererBase.cpp
@@ -527,13 +526,18 @@ SET(Kuplung_Misc
 
 IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AND Protobuf_FOUND AND MINIZIP_FOUND)
     IF(APPLE)
-        SET(MACOSX_BUNDLE true)
-        SET(MACOSX_BUNDLE_BUNDLE_NAME ${MY_APP_NAME})
+        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES})
 
-        # Misc
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
-        FILE(GLOB Kuplung_Misc_Files "resources/*.*")
-        FILE(COPY ${Kuplung_Misc_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+        # Misc Files
+        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/resources/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+        FILE(GLOB Kuplung_Ini_Files "resources/*.ini")
+        FILE(COPY ${Kuplung_Ini_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+        FILE(GLOB Kuplung_Icns_Files "resources/*.icns")
+        FILE(COPY ${Kuplung_Icns_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+        FILE(GLOB Kuplung_Ico_Files "resources/*.ico")
+        FILE(COPY ${Kuplung_Ico_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+        FILE(GLOB Kuplung_Noise16_Files "resources/noise16.png")
+        FILE(COPY ${Kuplung_Noise16_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
 
         # Shapes
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shapes/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
@@ -584,8 +588,6 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/skybox/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
         FILE(GLOB Kuplung_Skybox_Files "resources/skybox/*.*")
         FILE(COPY ${Kuplung_Skybox_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
-
-        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES})
 
         SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist")
 

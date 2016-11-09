@@ -572,6 +572,7 @@ void UI::dialogFileSave(FileSaverOperation operation) {
             break;
         default:
             title = "...";
+            wType = nullptr;
             break;
     }
     this->componentFileSaver->draw(title.c_str(), operation, wType);

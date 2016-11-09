@@ -1,12 +1,12 @@
 //
-//  PathTracerRenderer.cpp
+//  RayTracerRenderer.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "PathTracerRenderer.hpp"
+#include "RayTracerRenderer.hpp"
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -14,11 +14,11 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-PathTracerRenderer::PathTracerRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+RayTracerRenderer::RayTracerRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
 }
 
-PathTracerRenderer::~PathTracerRenderer() {
+RayTracerRenderer::~RayTracerRenderer() {
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
     GLint colorAttachment;
@@ -46,11 +46,11 @@ PathTracerRenderer::~PathTracerRenderer() {
     this->glUtils.reset();
 }
 
-void PathTracerRenderer::init() {
+void RayTracerRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
 }
 
-std::string PathTracerRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string RayTracerRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
     std::string endFile;
 
     int width = Settings::Instance()->SDL_Window_Width;
@@ -70,11 +70,7 @@ std::string PathTracerRenderer::renderImage(FBEntity file, std::vector<ModelFace
     unsigned char* pixels = new unsigned char[3 * width * height];
 
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->renderFBO);
-    glBlitFramebuffer(0, 0,
-                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                      0, 0,
-                      Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-                      GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glReadBuffer(GL_COLOR_ATTACHMENT0);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
@@ -100,7 +96,7 @@ std::string PathTracerRenderer::renderImage(FBEntity file, std::vector<ModelFace
     return endFile;
 }
 
-void PathTracerRenderer::createFBO() {
+void RayTracerRenderer::createFBO() {
     glGenFramebuffers(1, &this->renderFBO);
     glBindFramebuffer(GL_FRAMEBUFFER, this->renderFBO);
     this->generateAttachmentTexture(false, false);
@@ -119,7 +115,7 @@ void PathTracerRenderer::createFBO() {
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void PathTracerRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
+void RayTracerRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
     GLenum attachment_type;
     if (!depth && !stencil)
         attachment_type = GL_RGB;
@@ -142,7 +138,7 @@ void PathTracerRenderer::generateAttachmentTexture(GLboolean depth, GLboolean st
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void PathTracerRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces) {
+void RayTracerRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces) {
     glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 }

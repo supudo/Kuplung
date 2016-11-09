@@ -1,13 +1,13 @@
 //
-//  PathTracerRenderer.hpp
+//  RayTracerRenderer.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 12/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef PathTracerRenderer_hpp
-#define PathTracerRenderer_hpp
+#ifndef RayTracerRenderer_hpp
+#define RayTracerRenderer_hpp
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
@@ -15,10 +15,10 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
-class PathTracerRenderer: public KuplungRendererBase {
+class RayTracerRenderer: public KuplungRendererBase {
 public:
-    explicit PathTracerRenderer(ObjectsManager &managerObjects);
-    ~PathTracerRenderer();
+    explicit RayTracerRenderer(ObjectsManager &managerObjects);
+    ~RayTracerRenderer();
     void init();
     std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
 
@@ -34,4 +34,4 @@ private:
     void renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces);
 };
 
-#endif /* PathTracerRenderer_hpp */
+#endif /* RayTracerRenderer_hpp */

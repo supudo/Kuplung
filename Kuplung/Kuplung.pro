@@ -204,7 +204,7 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/KuplungRendererBase.cpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
-    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.cpp \
+    kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
@@ -310,7 +310,7 @@ HEADERS += \
     kuplung/utilities/renderers/KuplungRendererBase.hpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
-    kuplung/utilities/renderers/path-tracer/PathTracerRenderer.hpp \
+    kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
