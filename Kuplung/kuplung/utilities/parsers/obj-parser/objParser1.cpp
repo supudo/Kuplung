@@ -100,6 +100,7 @@ std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string>
                 if (std::regex_match(singleLine, this->regex_objTitle)) {
                     MeshModel entityModel;
                     entityModel.ID = modelID;
+                    entityModel.File = file;
                     entityModel.ModelTitle = std::accumulate(begin(lineElements), end(lineElements), entityModel.ModelTitle);
                     entityModel.countVertices = 0;
                     entityModel.countTextureCoordinates = 0;

@@ -62,14 +62,14 @@ mac {
 #    LIBS += -lSDL2 -lGLFW3 -lAssimp -lGLFW3
 #    INCLUDEPATH += /usr/local/include
 
-    LIBS += -L/usr/local/Cellar/boost/1.61.0/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.61.0/include
+    LIBS += -L/usr/local/Cellar/boost/1.62.0/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.62.0/include
 
-    LIBS += -L/usr/local/Cellar/glm/0.9.8.0/lib
-    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.0/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.8.2/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.2/include
 
-    LIBS += -L/usr/local/Cellar/sdl2/2.0.4/lib -lSDL2
-    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.4/include
+    LIBS += -L/usr/local/Cellar/sdl2/2.0.5/lib -lSDL2
+    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.5/include
 
     LIBS += -L/usr/local/Cellar/glfw3/3.2.1/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.2.1/include

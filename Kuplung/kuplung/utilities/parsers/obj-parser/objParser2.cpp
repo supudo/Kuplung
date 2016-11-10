@@ -82,6 +82,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
         else if (boost::starts_with(singleLine, this->id_objTitle)) {
             currentModelID = modelCounter;
             MeshModel entityModel;
+            entityModel.File = file;
             entityModel.ID = currentModelID;
             entityModel.ModelTitle = singleLine;
             boost::replace_first(entityModel.ModelTitle, this->id_objTitle, "");

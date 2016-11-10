@@ -45,6 +45,9 @@ public:
     int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
     int Consumption_Interval_CPU, Consumption_Interval_Memory;
 
+    void timerStart(std::string msg);
+    void timerEnd(std::string msg);
+
 private:
     Settings(){};
     Settings(Settings const&){};
@@ -54,6 +57,8 @@ private:
     void initSettings();
 
     std::unique_ptr<ConfigUtils> cfgUtils;
+
+    std::string getTimeNow();
 };
 
 #endif /* Settings_h */

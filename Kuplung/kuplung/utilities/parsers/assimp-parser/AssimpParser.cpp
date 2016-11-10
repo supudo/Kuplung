@@ -60,6 +60,7 @@ void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
 MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::string modelTitle) {
     MeshModel entityModel;
     entityModel.ID = this->indexModel;
+    entityModel.File = this->file;
     entityModel.ModelTitle = modelTitle;
     entityModel.countVertices = 0;
     entityModel.countTextureCoordinates = 0;

@@ -190,3 +190,30 @@ void Settings::saveRecentFilesImported(std::vector<FBEntity> recentFiles) {
 std::vector<FBEntity> Settings::loadRecentFilesImported() {
     return this->cfgUtils->loadRecentFilesImported();
 }
+
+void Settings::timerStart(std::string msg) {
+    this->funcDoLog(this->string_format("[Timer START] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+}
+
+void Settings::timerEnd(std::string msg) {
+    this->funcDoLog(this->string_format("[Timer END] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
+}
+
+std::string Settings::getTimeNow() {
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    int t_hour = int(now->tm_hour);
+    int t_min = int(now->tm_min);
+    int t_sec = int(now->tm_sec);
+    std::string tn("");
+    if (t_hour < 10)
+        tn += "0";
+    tn += std::to_string(t_hour) + ":";
+    if (t_min < 10)
+        tn += "0";
+    tn += std::to_string(t_min) + ":";
+    if (t_sec < 10)
+        tn += "0";
+    tn += std::to_string(t_sec);
+    return tn;
+}
