@@ -11,6 +11,8 @@
 
 typedef enum ShapeType {
     ShapeType_BrickWall,
+    ShapeType_MaterialBall,
+    ShapeType_MaterialBallBlender,
     ShapeType_Cone,
     ShapeType_Cube,
     ShapeType_Cylinder,

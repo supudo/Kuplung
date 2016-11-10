@@ -633,15 +633,20 @@ void DialogControlsModels::drawCreate() {
     if (ImGui::Button("Cone", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cone);
     if (ImGui::Button("Cube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cube);
     if (ImGui::Button("Cylinder", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Cylinder);
-    if (ImGui::Button("Brick Wall", ImVec2(-1, 0))) this->funcAddShape(ShapeType_BrickWall);
     if (ImGui::Button("Grid", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Grid);
     if (ImGui::Button("Ico Sphere", ImVec2(-1, 0))) this->funcAddShape(ShapeType_IcoSphere);
     if (ImGui::Button("Plane", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Plane);
-    if (ImGui::Button("Plane Objects", ImVec2(-1, 0))) this->funcAddShape(ShapeType_PlaneObjects);
     if (ImGui::Button("Torus", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Torus);
     if (ImGui::Button("Tube", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Tube);
     if (ImGui::Button("UV Sphere", ImVec2(-1, 0))) this->funcAddShape(ShapeType_UVSphere);
     if (ImGui::Button("Monkey Head", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MonkeyHead);
+
+    ImGui::Separator();
+
+    if (ImGui::Button("Brick Wall", ImVec2(-1, 0))) this->funcAddShape(ShapeType_BrickWall);
+    if (ImGui::Button("Plane Objects", ImVec2(-1, 0))) this->funcAddShape(ShapeType_PlaneObjects);
+    if (ImGui::Button("Material Ball", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MaterialBall);
+    if (ImGui::Button("Material Ball - Blender", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MaterialBallBlender);
 
     ImGui::Separator();
 

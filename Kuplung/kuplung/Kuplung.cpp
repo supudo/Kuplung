@@ -446,9 +446,6 @@ void Kuplung::addShape(ShapeType type) {
     std::string shapeName = "";
     assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
     switch (type) {
-        case ShapeType_BrickWall:
-            shapeName = "brick_wall";
-            break;
         case ShapeType_Cone:
             shapeName = "cone";
             break;
@@ -470,9 +467,6 @@ void Kuplung::addShape(ShapeType type) {
         case ShapeType_Plane:
             shapeName = "plane";
             break;
-        case ShapeType_PlaneObjects:
-            shapeName = "plane_objects";
-            break;
         case ShapeType_Triangle:
             shapeName = "triangle";
             break;
@@ -485,9 +479,20 @@ void Kuplung::addShape(ShapeType type) {
         case ShapeType_UVSphere:
             shapeName = "uv_sphere";
             break;
+        case ShapeType_BrickWall:
+            shapeName = "brick_wall";
+            break;
+        case ShapeType_PlaneObjects:
+            shapeName = "plane_objects";
+            break;
+        case ShapeType_MaterialBall:
+            shapeName = "MaterialBall";
+            break;
+        case ShapeType_MaterialBallBlender:
+            shapeName = "MaterialBallBlender";
+            break;
     }
     FileBrowser_ParserType t;
-    assert(Settings::Instance()->ModelFileParser >= FileBrowser_ParserType_Own1 && Settings::Instance()->ModelFileParser <= FileBrowser_ParserType_Assimp);
     t = FileBrowser_ParserType_Own2;
     switch (Settings::Instance()->ModelFileParser) {
         case 0:

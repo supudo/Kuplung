@@ -118,7 +118,7 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
                         t = FileBrowser_ParserType_Assimp;
                         break;
                     default:
-                        t = FileBrowser_ParserType_Assimp;
+                        t = FileBrowser_ParserType_Own2;
                         break;
                 }
                 this->processFile(entity, t, TextureType);

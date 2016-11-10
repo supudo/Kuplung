@@ -354,6 +354,10 @@ DISTFILES += \
     resources/shapes/ico_sphere.obj \
     resources/shapes/monkey_head.mtl \
     resources/shapes/monkey_head.obj \
+    resources/shapes/MaterialBall.mtl \
+    resources/shapes/MaterialBall.obj \
+    resources/shapes/MaterialBallBlender.mtl \
+    resources/shapes/MaterialBallBlender.obj \
     resources/shapes/plane.mtl \
     resources/shapes/plane.obj \
     resources/shapes/plane_objects.mtl \
