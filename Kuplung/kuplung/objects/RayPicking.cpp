@@ -113,6 +113,14 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
     glm::vec4 rayWorld = invertedViewMatrix * eyeCoordinates;
     glm::vec3 vTo = glm::vec3(rayWorld.x, rayWorld.y, rayWorld.z);
 
+    if (Settings::Instance()->showPickRays) {
+        RayLine *rl = new RayLine();
+        rl->init();
+        rl->initShaderProgram();
+        rl->initBuffers(vFrom, vTo * managerObjects->Setting_PlaneFar);
+        this->rayLines.push_back(rl);
+    }
+
     this->sceneSelectedModelObject = -1;
     for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
         ModelFaceBase *mmf = this->meshModelFaces[i];
