@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A00ADBF1DD4DA0E0067B395 /* epcot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A00ADBD1DD4DA010067B395 /* epcot.mtl */; };
+		8A00ADC01DD4DA0E0067B395 /* epcot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A00ADBE1DD4DA010067B395 /* epcot.obj */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A1091971D47662400658E39 /* KuplungAppSettings.pb.cc */; };
@@ -414,6 +416,8 @@
 				8A2575F71DD48ACF004172E3 /* cube.obj in CopyFiles */,
 				8A2575F81DD48ACF004172E3 /* cylinder.mtl in CopyFiles */,
 				8A2575F91DD48ACF004172E3 /* cylinder.obj in CopyFiles */,
+				8A00ADBF1DD4DA0E0067B395 /* epcot.mtl in CopyFiles */,
+				8A00ADC01DD4DA0E0067B395 /* epcot.obj in CopyFiles */,
 				8A2575FA1DD48ACF004172E3 /* grid.mtl in CopyFiles */,
 				8A2575FB1DD48ACF004172E3 /* grid.obj in CopyFiles */,
 				8A2575FC1DD48ACF004172E3 /* ico_sphere.mtl in CopyFiles */,
@@ -600,6 +604,8 @@
 		8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_mapping.frag; sourceTree = "<group>"; };
 		8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_misc.frag; sourceTree = "<group>"; };
 		8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_vars.frag; sourceTree = "<group>"; };
+		8A00ADBD1DD4DA010067B395 /* epcot.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = epcot.mtl; path = shapes/epcot.mtl; sourceTree = "<group>"; };
+		8A00ADBE1DD4DA010067B395 /* epcot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = epcot.obj; path = shapes/epcot.obj; sourceTree = "<group>"; };
 		8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDefinitions.h; sourceTree = "<group>"; };
 		8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectsManager.cpp; sourceTree = "<group>"; };
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
@@ -1655,6 +1661,8 @@
 				8AB917761CAEA7CC002988C2 /* cube.obj */,
 				8AB917771CAEA7CC002988C2 /* cylinder.mtl */,
 				8AB917781CAEA7CC002988C2 /* cylinder.obj */,
+				8A00ADBD1DD4DA010067B395 /* epcot.mtl */,
+				8A00ADBE1DD4DA010067B395 /* epcot.obj */,
 				8AB917791CAEA7CC002988C2 /* grid.mtl */,
 				8AB9177A1CAEA7CC002988C2 /* grid.obj */,
 				8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */,

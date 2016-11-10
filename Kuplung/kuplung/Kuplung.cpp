@@ -491,6 +491,9 @@ void Kuplung::addShape(ShapeType type) {
         case ShapeType_MaterialBallBlender:
             shapeName = "MaterialBallBlender";
             break;
+        case ShapeType_Epcot:
+            shapeName = "epcot";
+            break;
     }
     FileBrowser_ParserType t;
     t = FileBrowser_ParserType_Own2;

@@ -313,6 +313,8 @@ SET(Kuplung_Shapes
     resources/shapes/cube.obj
     resources/shapes/cylinder.mtl
     resources/shapes/cylinder.obj
+    resources/shapes/epcot.mtl
+    resources/shapes/epcot.obj
     resources/shapes/grid.mtl
     resources/shapes/grid.obj
     resources/shapes/ico_sphere.mtl
