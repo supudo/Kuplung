@@ -200,6 +200,15 @@ void ObjectsManager::resetSettings() {
     this->VertexEditorModeID = -1;
     this->VertexEditorMode = glm::vec3(0.0);
     this->Setting_GeometryEditMode = GeometryEditMode_Vertex;
+
+    Settings::Instance()->mRayDraw = false;
+    Settings::Instance()->mRayAnimate = false;
+    Settings::Instance()->mRayOriginX = 0;
+    Settings::Instance()->mRayOriginY = 0;
+    Settings::Instance()->mRayOriginZ = 0;
+    Settings::Instance()->mRayDirectionX = 0;
+    Settings::Instance()->mRayDirectionY = 0;
+    Settings::Instance()->mRayDirectionZ = 0;
 }
 
 void ObjectsManager::resetPropertiesSystem() {

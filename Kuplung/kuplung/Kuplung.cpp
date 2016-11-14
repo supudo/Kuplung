@@ -387,6 +387,40 @@ void Kuplung::renderScene() {
         }
     }
 
+    if (Settings::Instance()->mRayAnimate) {
+        glm::vec3 rFrom = glm::vec3(Settings::Instance()->mRayOriginX, Settings::Instance()->mRayOriginY, Settings::Instance()->mRayOriginZ);
+        glm::vec3 rDirection = glm::vec3(Settings::Instance()->mRayDirectionX, Settings::Instance()->mRayDirectionY, Settings::Instance()->mRayDirectionZ);
+
+        RayLine *rl;
+        if (this->rayLines.size() > 0)
+            rl = this->rayLines[0];
+        else {
+            rl = new RayLine();
+            rl->init();
+            rl->initShaderProgram();
+        }
+        rl->initBuffers(rFrom, rDirection * this->managerObjects->Setting_PlaneFar);
+        if (this->rayLines.size() <= 0)
+            this->rayLines.push_back(rl);
+    }
+    else if (Settings::Instance()->mRayDraw) {
+        Settings::Instance()->mRayDraw = false;
+        glm::vec3 rFrom = glm::vec3(Settings::Instance()->mRayOriginX, Settings::Instance()->mRayOriginY, Settings::Instance()->mRayOriginZ);
+        glm::vec3 rDirection = glm::vec3(Settings::Instance()->mRayDirectionX, Settings::Instance()->mRayDirectionY, Settings::Instance()->mRayDirectionZ);
+        RayLine *rl = new RayLine();
+        rl->init();
+        rl->initShaderProgram();
+        rl->initBuffers(rFrom, rDirection * this->managerObjects->Setting_PlaneFar);
+        if (Settings::Instance()->showPickRaysSingle) {
+            for (size_t i=0; i<this->rayLines.size(); i++) {
+                RayLine *mfd = (RayLine*)this->rayLines[i];
+                delete mfd;
+            }
+            this->rayLines.clear();
+        }
+        this->rayLines.push_back(rl);
+    }
+
     for (size_t i=0; i<this->rayLines.size(); i++) {
         this->rayLines[i]->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera);
     }

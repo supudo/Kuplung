@@ -89,6 +89,7 @@ void RayLine::initBuffers(glm::vec3 vecFrom, glm::vec3 vecTo) {
         vecFrom.x, vecFrom.y, vecFrom.z,
         vecTo.x, vecTo.y, vecTo.z
     };
+    printf("ray - %f, %f, %f ///// %f, %f, %f\n", vecFrom.x, vecFrom.y, vecFrom.z, vecTo.x, vecTo.y, vecTo.z);
 
     this->dataColors = {
         0.0, 0.0, 0.0,

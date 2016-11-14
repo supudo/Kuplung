@@ -44,6 +44,9 @@ public:
     float UIFontSize, BoundingBoxPadding;
     int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
     int Consumption_Interval_CPU, Consumption_Interval_Memory;
+    bool mRayDraw, mRayAnimate;
+    float mRayOriginX, mRayOriginY, mRayOriginZ;
+    float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
 
     void timerStart(std::string msg);
     void timerEnd(std::string msg);

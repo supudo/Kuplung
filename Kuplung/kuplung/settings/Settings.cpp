@@ -32,6 +32,15 @@ Settings* Settings::Instance() {
 #pragma mark - Init
 
 void Settings::initSettings() {
+    this->mRayDraw = false;
+    this->mRayAnimate = false;
+    this->mRayOriginX = 0.0f;
+    this->mRayOriginY = 0.0f;
+    this->mRayOriginZ = 0.0f;
+    this->mRayDirectionX = 0.0f;
+    this->mRayDirectionY = 0.0f;
+    this->mRayDirectionZ = 0.0f;
+
     this->cfgUtils = std::make_unique<ConfigUtils>();
     this->cfgUtils->init(Settings::Instance()->appFolder());
 

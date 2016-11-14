@@ -217,6 +217,29 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         Settings::Instance()->saveSettings();
                     ImGui::Unindent();
                 }
+                if (ImGui::CollapsingHeader("Add Ray", ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Indent();
+                    ImGui::Text("Origin");
+                    ImGui::InputFloat("X##9920", &Settings::Instance()->mRayOriginX, 0, 0, 8);
+                    ImGui::InputFloat("Y##9921", &Settings::Instance()->mRayOriginY, 0, 0, 8);
+                    ImGui::InputFloat("Z##9922", &Settings::Instance()->mRayOriginZ, 0, 0, 8);
+                    ImGui::Checkbox("Animate", &Settings::Instance()->mRayAnimate);
+                    if (Settings::Instance()->mRayAnimate) {
+                        ImGui::Text("Direction");
+                        ImGui::SliderFloat("X##9930", &Settings::Instance()->mRayDirectionX, -1.0f, 1.0f);
+                        ImGui::SliderFloat("Y##9931", &Settings::Instance()->mRayDirectionY, -1.0f, 1.0f);
+                        ImGui::SliderFloat("Z##9932", &Settings::Instance()->mRayDirectionZ, -1.0f, 1.0f);
+                    }
+                    else {
+                        ImGui::Text("Direction");
+                        ImGui::InputFloat("X##9930", &Settings::Instance()->mRayDirectionX, 0, 0, 8);
+                        ImGui::InputFloat("Y##9931", &Settings::Instance()->mRayDirectionY, 0, 0, 8);
+                        ImGui::InputFloat("Z##9932", &Settings::Instance()->mRayDirectionZ, 0, 0, 8);
+                        if (ImGui::Button("Draw", ImVec2(ImGui::GetWindowWidth() * 0.75f, 0)))
+                            Settings::Instance()->mRayDraw = true;
+                    }
+                    ImGui::Unindent();
+                }
                 ImGui::Unindent();
             }
 
