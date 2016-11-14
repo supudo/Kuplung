@@ -29,6 +29,7 @@ public:
     std::vector<glm::vec3> dataVertices;
     std::vector<glm::vec3> dataNormals;
     std::vector<GLuint> dataIndices;
+    glm::mat4 matrixMVP;
 
 private:
     std::unique_ptr<GLUtils> glUtils;

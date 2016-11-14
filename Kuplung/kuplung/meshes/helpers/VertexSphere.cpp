@@ -212,6 +212,8 @@ void VertexSphere::initBuffers(MeshModel meshModel, int circleSegments, float ra
 #pragma mark - Render
 
 void VertexSphere::render(glm::mat4 matrixMVP, glm::vec4 color) {
+    this->matrixMVP = matrixMVP;
+
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

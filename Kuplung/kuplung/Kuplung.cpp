@@ -632,6 +632,11 @@ void Kuplung::guiClearScreen() {
         ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[i];
         delete mfd;
     }
+    for (size_t i=0; i<this->rayLines.size(); i++) {
+        RayLine *mfd = (RayLine*)this->rayLines[i];
+        delete mfd;
+    }
+    this->rayLines.clear();
     this->meshModels.clear();
     this->meshModelsNew.clear();
     this->meshModelFaces.clear();

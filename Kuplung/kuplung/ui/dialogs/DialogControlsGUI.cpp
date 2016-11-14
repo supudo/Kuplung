@@ -209,7 +209,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Indent();
                 ImGui::Checkbox("Axis Helpers", &this->managerObjects.Setting_ShowAxisHelpers);
                 ImGui::Checkbox("Z Axis", &this->managerObjects.Settings_ShowZAxis);
-                ImGui::Checkbox("Pick Rays", &Settings::Instance()->showPickRays);
+                if (ImGui::CollapsingHeader("Pick Rays", ImGuiTreeNodeFlags_DefaultOpen)) {
+                    ImGui::Indent();
+                    if (ImGui::Checkbox("Show Rays", &Settings::Instance()->showPickRays))
+                        Settings::Instance()->saveSettings();
+                    if (ImGui::Checkbox("Single Ray", &Settings::Instance()->showPickRaysSingle))
+                        Settings::Instance()->saveSettings();
+                    ImGui::Unindent();
+                }
                 ImGui::Unindent();
             }
 
