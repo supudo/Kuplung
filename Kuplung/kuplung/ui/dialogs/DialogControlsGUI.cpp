@@ -220,6 +220,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 if (ImGui::CollapsingHeader("Add Ray", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();
                     ImGui::Text("Origin");
+                    if (ImGui::Button("Set to camera position", ImVec2(ImGui::GetWindowWidth() * 0.75f, 0))) {
+                        Settings::Instance()->mRayOriginX = managerObjects.camera->positionX->point;
+                        Settings::Instance()->mRayOriginY = managerObjects.camera->positionY->point;
+                        Settings::Instance()->mRayOriginZ = managerObjects.camera->positionZ->point;
+                    }
                     ImGui::InputFloat("X##9920", &Settings::Instance()->mRayOriginX, 0, 0, 8);
                     ImGui::InputFloat("Y##9921", &Settings::Instance()->mRayOriginY, 0, 0, 8);
                     ImGui::InputFloat("Z##9922", &Settings::Instance()->mRayOriginZ, 0, 0, 8);
