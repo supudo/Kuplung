@@ -111,6 +111,9 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
         rayStartPosition,
         rayDirection
     );
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RAY] - [ORIGIN: %f, %f, %f] ||||||| [DIR: %f, %f, %f]",
+                                                                         rayStartPosition.x, rayStartPosition.y, rayStartPosition.z,
+                                                                         rayDirection.x, rayDirection.y, rayDirection.z));
 
     glm::vec2 normalizedCoordinates = this->getNormalizeDeviceCordinates(mouse_x, mouse_y);
     glm::vec4 clipCoordinates = glm::vec4(normalizedCoordinates, -1.0f, 1.0f);
@@ -154,8 +157,8 @@ bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_o
     bool intersected = false;
     float distance = 0.0f;
 
-    glm::vec3 v0 = glm::vec4(vertex, 1.0) * mtx;
-    v0 = glm::vec3(v0.x, v0.z, v0.y);
+    glm::vec4 vq = glm::vec4(vertex, 1.0) * mtx;
+    glm::vec3 v0 = glm::vec3(vq);
 
     intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
     if (intersected)
@@ -200,7 +203,7 @@ bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_dire
         float e = glm::dot(xaxis, delta);
         float f = glm::dot(ray_direction, xaxis);
 
-        if (fabs(f) > 0.001f) { // Standard case
+        if (std::fabs(f) > 0.001f) { // Standard case
             float t1 = (e + aabb_min.x) / f; // Intersection with the "left" plane
             float t2 = (e + aabb_max.x) / f; // Intersection with the "right" plane
             // t1 and t2 now contain distances betwen ray origin and ray-plane intersections
@@ -240,7 +243,7 @@ bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_dire
         float e = glm::dot(yaxis, delta);
         float f = glm::dot(ray_direction, yaxis);
 
-        if (fabs(f) > 0.001f) {
+        if (std::fabs(f) > 0.001f) {
             float t1 = (e + aabb_min.y) / f;
             float t2 = (e + aabb_max.y) / f;
 
@@ -270,7 +273,7 @@ bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_dire
         float e = glm::dot(zaxis, delta);
         float f = glm::dot(ray_direction, zaxis);
 
-        if (fabs(f) > 0.001f) {
+        if (std::fabs(f) > 0.001f) {
 
             float t1 = (e + aabb_min.z) / f;
             float t2 = (e + aabb_max.z) / f;
@@ -299,12 +302,12 @@ bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_dire
 
 void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, glm::mat4 ViewMatrix, glm::mat4 ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) {
     glm::vec4 lRayStart_NDC(
-        ((float)mouseX/(float)screenWidth  - 0.5f) * 2.0f,
-        ((float)mouseY/(float)screenHeight - 0.5f) * 2.0f,
+        (float(mouseX)/float(screenWidth)  - 0.5f) * 2.0f,
+        (float(mouseY)/float(screenHeight) - 0.5f) * 2.0f,
         -1.0, 1.0f);
     glm::vec4 lRayEnd_NDC(
-        ((float)mouseX/(float)screenWidth  - 0.5f) * 2.0f,
-        ((float)mouseY/(float)screenHeight - 0.5f) * 2.0f,
+        (float(mouseX)/float(screenWidth)  - 0.5f) * 2.0f,
+        (float(mouseY)/float(screenHeight) - 0.5f) * 2.0f,
         0.0, 1.0f
     );
 
@@ -312,7 +315,7 @@ void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeigh
     glm::vec4 lRayStart_world = M * lRayStart_NDC;
     lRayStart_world /= lRayStart_world.w;
     glm::vec4 lRayEnd_world = M * lRayEnd_NDC;
-    lRayEnd_world /=lRayEnd_world.w;
+    lRayEnd_world /= lRayEnd_world.w;
 
     glm::vec3 lRayDir_world(lRayEnd_world - lRayStart_world);
     lRayDir_world = glm::normalize(lRayDir_world);
