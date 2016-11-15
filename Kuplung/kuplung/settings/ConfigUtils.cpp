@@ -57,37 +57,37 @@ void ConfigUtils::saveSettings() {
 
 #pragma mark - Read
 
-bool ConfigUtils::readBool(std::string configKey) {
+bool ConfigUtils::readBool(std::string const& configKey) {
     return this->configData[configKey] == "true";
 }
 
-int ConfigUtils::readInt(std::string configKey) {
+int ConfigUtils::readInt(std::string const& configKey) {
     return std::stoi(this->configData[configKey]);
 }
 
-float ConfigUtils::readFloat(std::string configKey) {
+float ConfigUtils::readFloat(std::string const& configKey) {
     return std::stof(this->configData[configKey]);
 }
 
-std::string ConfigUtils::readString(std::string configKey) {
+std::string ConfigUtils::readString(std::string const& configKey) {
     return this->configData[configKey];
 }
 
 #pragma mark - Write
 
-void ConfigUtils::writeBool(std::string configKey, bool configValue) {
+void ConfigUtils::writeBool(std::string const& configKey, bool const& configValue) {
     this->configData[configKey] = configValue ? "true" : "false";
 }
 
-void ConfigUtils::writeInt(std::string configKey, int configValue) {
+void ConfigUtils::writeInt(std::string const& configKey, int const& configValue) {
     this->configData[configKey] = std::to_string(configValue);
 }
 
-void ConfigUtils::writeFloat(std::string configKey, float configValue) {
+void ConfigUtils::writeFloat(std::string const& configKey, float const& configValue) {
     this->configData[configKey] = std::to_string(configValue);
 }
 
-void ConfigUtils::writeString(std::string configKey, std::string configValue) {
+void ConfigUtils::writeString(std::string const& configKey, std::string const& configValue) {
     this->configData[configKey] = configValue;
 }
 
@@ -168,7 +168,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
     return recentFiles;
 }
 
-void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> recentFilesImported) {
+void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const&  recentFilesImported) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -297,7 +297,7 @@ void ConfigUtils::readFile() {
     }
 }
 
-std::vector<std::string> ConfigUtils::splitString(const std::string &s, std::regex delimiter) {
+std::vector<std::string> ConfigUtils::splitString(const std::string &s, std::regex const& delimiter) {
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;

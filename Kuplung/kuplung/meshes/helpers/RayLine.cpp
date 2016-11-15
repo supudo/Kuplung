@@ -27,7 +27,7 @@ RayLine::~RayLine() {
 
     glDeleteVertexArrays(1, &this->glVAO);
 
-    this->glUtils.reset();
+//    this->glUtils.reset();
 }
 
 #pragma mark - Initialization

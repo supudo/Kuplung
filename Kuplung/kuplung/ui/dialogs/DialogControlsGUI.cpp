@@ -209,14 +209,15 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Indent();
                 ImGui::Checkbox("Axis Helpers", &this->managerObjects.Setting_ShowAxisHelpers);
                 ImGui::Checkbox("Z Axis", &this->managerObjects.Settings_ShowZAxis);
-                if (ImGui::CollapsingHeader("Pick Rays", ImGuiTreeNodeFlags_DefaultOpen)) {
-                    ImGui::Indent();
-                    if (ImGui::Checkbox("Show Rays", &Settings::Instance()->showPickRays))
-                        Settings::Instance()->saveSettings();
-                    if (ImGui::Checkbox("Single Ray", &Settings::Instance()->showPickRaysSingle))
-                        Settings::Instance()->saveSettings();
-                    ImGui::Unindent();
-                }
+                ImGui::Unindent();
+            }
+
+            if (ImGui::CollapsingHeader("Rays")) {
+                ImGui::Indent();
+                if (ImGui::Checkbox("Show Rays", &Settings::Instance()->showPickRays))
+                    Settings::Instance()->saveSettings();
+                if (ImGui::Checkbox("Single Ray", &Settings::Instance()->showPickRaysSingle))
+                    Settings::Instance()->saveSettings();
                 if (ImGui::CollapsingHeader("Add Ray", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();
                     ImGui::Text("Origin");
@@ -494,7 +495,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Checkbox("Grid", &this->managerObjects.grid->showGrid);
                     ImGui::Checkbox("Act as mirror", &this->managerObjects.grid->actAsMirror);
                     if (this->managerObjects.grid->actAsMirror)
-                        this->helperUI->addControlsSliderSameLine("Alpha##999", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.grid->transparency, false, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Alpha", 999, 0.01f, 0.0f, 1.0f, false, NULL, &this->managerObjects.grid->transparency, false, isFrame);
                     ImGui::Separator();
                     if (this->managerObjects.grid->actAsMirror) {
                         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Mirror Position");

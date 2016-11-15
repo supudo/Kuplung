@@ -186,20 +186,20 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 
         this->zIndex = (int)verticesData.size();
 
-        GridMeshPoint3D p_z_0;
-        p_z_0.x = 0.0f;
-        p_z_0.y = 0.0f;
-        p_z_0.z = -1.0f * (float)gridMinus;
-        verticesData.push_back(p_z_0);
+        GridMeshPoint3D p_z_Minus_Down;
+        p_z_Minus_Down.x = 0.0f;
+        p_z_Minus_Down.y = 0.0f;
+        p_z_Minus_Down.z = -1.0f * (float)gridMinus;
+        verticesData.push_back(p_z_Minus_Down);
         this->dataColors.push_back(0.0f);
         this->dataColors.push_back(0.0f);
         this->dataColors.push_back(1.0f);
 
-        GridMeshPoint3D p_z_1;
-        p_z_1.x = 0.0f;
-        p_z_1.y = 0.0f;
-        p_z_1.z = (float)gridMinus;
-        verticesData.push_back(p_z_1);
+        GridMeshPoint3D p_z_Plus_Up;
+        p_z_Plus_Up.x = 0.0f;
+        p_z_Plus_Up.y = 0.0f;
+        p_z_Plus_Up.z = (float)gridMinus;
+        verticesData.push_back(p_z_Plus_Up);
         this->dataColors.push_back(0.0f);
         this->dataColors.push_back(0.0f);
         this->dataColors.push_back(1.0f);
