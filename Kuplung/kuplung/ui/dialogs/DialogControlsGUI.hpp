@@ -19,10 +19,10 @@ class DialogControlsGUI {
 public:
     explicit DialogControlsGUI(ObjectsManager &managerObjects);
     void render(bool* show, bool* isFrame);
+    int selectedObject, selectedObjectLight;
 
 private:
-    int selectedObject;
-    int selectedObjectLight, selectedObjectArtefact = -1;
+    int selectedObjectArtefact = -1;
     int selectedTabScene, selectedTabGUICamera, selectedTabGUICameraModel, selectedTabGUIGrid, selectedTabGUILight;
     int selectedTabGUITerrain, selectedTabGUISpaceship;
     float heightTopPanel = 170.0f;

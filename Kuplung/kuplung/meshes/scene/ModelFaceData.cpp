@@ -203,14 +203,14 @@ void ModelFaceData::renderModel(bool useTessellation) {
 
         if (this->Setting_Gizmo_Translate) {
             this->positionX->point += translation.x;
-            this->positionY->point += -1.0 * translation.z;
-            this->positionZ->point += translation.y;
+            this->positionY->point += translation.y;
+            this->positionZ->point += translation.z;
         }
 
         if (this->Setting_Gizmo_Rotate) {
             this->rotateX->point += glm::degrees(rotation.x);
-            this->rotateY->point += glm::degrees(rotation.z);
-            this->rotateZ->point += glm::degrees(rotation.y);
+            this->rotateY->point += glm::degrees(rotation.y);
+            this->rotateZ->point += glm::degrees(rotation.z);
         }
 
         if (this->Setting_Gizmo_Scale) {

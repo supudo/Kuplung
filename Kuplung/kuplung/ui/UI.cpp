@@ -428,6 +428,11 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         ImGui::ShowTestWindow(&this->showDemoWindow);
 }
 
+void UI::clearAllLights() {
+    this->controlsGUI->selectedObject = 0;
+    this->controlsGUI->selectedObjectLight = -1;
+}
+
 void UI::showRenderedImage(std::string renderedImage) {
     this->componentImageViewer->genTexture = true;
     this->componentImageViewer->imagePath = renderedImage;

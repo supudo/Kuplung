@@ -264,9 +264,6 @@
 		8AB256421DA4F3CF00ABF2AC /* shadertoy.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB256411DA4F3C400ABF2AC /* shadertoy.vert */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
-		8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F0991C3AA1F900665C40 /* light.mtl */; };
-		8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09A1C3AA1F900665C40 /* light.obj */; };
-		8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */; };
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
 		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
@@ -472,9 +469,6 @@
 			files = (
 				8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */,
 				8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */,
-				8AB6F0B01C3AA27D00665C40 /* light.mtl in CopyFiles */,
-				8AB6F0B11C3AA27D00665C40 /* light.obj in CopyFiles */,
-				8AB6F0B21C3AA27D00665C40 /* light_texture.jpg in CopyFiles */,
 				8A43AD7F1C92FAE4000A35FB /* light_directional.mtl in CopyFiles */,
 				8A43AD801C92FAE4000A35FB /* light_directional.obj in CopyFiles */,
 				8A43AD811C92FAE4000A35FB /* light_point.mtl in CopyFiles */,
@@ -917,9 +911,6 @@
 		8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = rendering_simple.vert; sourceTree = "<group>"; };
 		8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Kuplung.cpp; sourceTree = "<group>"; };
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
-		8AB6F0991C3AA1F900665C40 /* light.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light.mtl; sourceTree = "<group>"; };
-		8AB6F09A1C3AA1F900665C40 /* light.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = light.obj; sourceTree = "<group>"; };
-		8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = light_texture.jpg; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
 		8AB917731CAEA7CC002988C2 /* cone.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.mtl; path = shapes/cone.mtl; sourceTree = "<group>"; };
@@ -1575,9 +1566,6 @@
 			children = (
 				8A47F7171CBF741800699CAC /* camera.mtl */,
 				8A47F7181CBF741800699CAC /* camera.obj */,
-				8AB6F0991C3AA1F900665C40 /* light.mtl */,
-				8AB6F09A1C3AA1F900665C40 /* light.obj */,
-				8AB6F09B1C3AA1F900665C40 /* light_texture.jpg */,
 				8A43AD791C92FACC000A35FB /* light_directional.mtl */,
 				8A43AD7A1C92FACC000A35FB /* light_directional.obj */,
 				8A43AD7B1C92FACC000A35FB /* light_point.mtl */,

@@ -14,16 +14,17 @@
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/meshes/helpers/RayLine.hpp"
 
 class Light {
 public:
     ~Light();
-    void init(LightSourceType type);
+    void init();
     void setModel(MeshModel meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
     void initBuffers(std::string const& assetsFolder);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     MeshModel meshModel;
 
     std::string title;
@@ -49,6 +50,7 @@ private:
     float x, y, z;
 
     std::unique_ptr<GLUtils> glUtils;
+    RayLine* lightDirectionRay;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

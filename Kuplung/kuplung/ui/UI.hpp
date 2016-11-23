@@ -69,6 +69,7 @@ public:
     void showExporting();
     void hideExporting();
     void showRenderedImage(std::string renderedImage);
+    void clearAllLights();
 
     std::vector<ModelFaceBase*> *meshModelFaces;
     bool isFrame;

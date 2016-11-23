@@ -27,8 +27,8 @@ void ImportOBJ::init(int positionX, int positionY, int width, int height, std::f
     this->processFile = processFile;
     this->panelWidth_Options = 200.0f;
     this->panelWidth_OptionsMin = 200.0f;
-    this->Setting_Forward = 1;
-    this->Setting_Up = 5;
+    this->Setting_Forward = 2;
+    this->Setting_Up = 4;
 }
 
 void ImportOBJ::draw(const char* title, bool* p_opened) {

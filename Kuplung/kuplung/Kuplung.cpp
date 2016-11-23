@@ -675,10 +675,10 @@ void Kuplung::guiClearScreen() {
     this->meshModelsNew.clear();
     this->meshModelFaces.clear();
     this->objFiles.clear();
-    this->rayLines.clear();
     this->managerRendering->meshModelFaces.clear();
     this->managerUI->setSceneSelectedModelObject(-1);
     this->managerObjects->clearAllLights();
+    this->managerUI->clearAllLights();
     this->managerControls->keyPresset_TAB = false;
 }
 

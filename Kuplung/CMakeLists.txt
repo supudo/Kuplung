@@ -359,15 +359,12 @@ SET(Kuplung_Fonts
 SET(Kuplung_GUI
     resources/gui/camera.mtl
     resources/gui/camera.obj
-    resources/gui/light.mtl
-    resources/gui/light.obj
     resources/gui/light_directional.mtl
     resources/gui/light_directional.obj
     resources/gui/light_point.mtl
     resources/gui/light_point.obj
     resources/gui/light_spot.mtl
-    resources/gui/light_spot.obj
-    resources/gui/light_texture.jpg)
+    resources/gui/light_spot.obj)
 
 SET(Kuplung_Images_xcassets
     resources/Images.xcassets/AppIcon.appiconset/Contents.json

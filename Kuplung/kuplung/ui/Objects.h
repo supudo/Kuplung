@@ -10,6 +10,7 @@
 #define Objects_hpp
 
 #include <glm/glm.hpp>
+#include <string>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 struct GUIObjectSetting {

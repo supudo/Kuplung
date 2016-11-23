@@ -1,8 +1,8 @@
-# Blender MTL File: 'plane_objects.blend'
+# Blender MTL File: 'None'
 # Material Count: 5
 
-newmtl MaterialCone
-Ns 96.078431
+newmtl MaterialCone.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.524517 0.009485 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -12,7 +12,7 @@ d 1.000000
 illum 2
 
 newmtl MaterialCube
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.010854 0.176393 0.640000
 Ks 0.500000 0.500000 0.500000
@@ -21,8 +21,8 @@ Ni 1.000000
 d 1.000000
 illum 2
 
-newmtl MaterialPlane
-Ns 96.078431
+newmtl MaterialPlane.001
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.640000 0.567930 0.007439
 Ks 0.500000 0.500000 0.500000
@@ -32,7 +32,7 @@ d 1.000000
 illum 2
 
 newmtl MaterialSphere
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.000804 0.640000 0.000835
 Ks 0.500000 0.500000 0.500000
@@ -42,7 +42,7 @@ d 1.000000
 illum 2
 
 newmtl MaterialTorus
-Ns 96.078431
+Ns 94.117647
 Ka 1.000000 1.000000 1.000000
 Kd 0.005496 0.486014 0.640000
 Ks 0.500000 0.500000 0.500000

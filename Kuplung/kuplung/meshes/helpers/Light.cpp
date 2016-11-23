@@ -59,9 +59,9 @@ Light::~Light() {
 
 #pragma mark - Initialization
 
-void Light::init(LightSourceType type) {
+void Light::init() {
     this->glUtils = std::make_unique<GLUtils>();
-    this->initProperties(type);
+    this->lightDirectionRay = new RayLine();
 }
 
 void Light::setModel(MeshModel meshModel) {
@@ -74,11 +74,11 @@ void Light::initProperties(LightSourceType type) {
     this->showInWire = false;
 
     this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->positionZ = std::make_unique<ObjectCoordinate>(false, 5.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, 5.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->directionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->directionY = std::make_unique<ObjectCoordinate>(false, -2.0f);
+    this->directionY = std::make_unique<ObjectCoordinate>(false, 1.0f);
     this->directionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->scaleX = std::make_unique<ObjectCoordinate>(false, 1.0f);
@@ -102,29 +102,39 @@ void Light::initProperties(LightSourceType type) {
             this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
             this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.0f);
             this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
+            this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
+            this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
             break;
         }
         case LightSourceType_Point: {
             this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
             this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.2f);
             this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.05f);
-            this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
+            this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
+            this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
+            this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
             break;
         }
         case LightSourceType_Spot: {
             this->lConstant = std::make_unique<ObjectCoordinate>(false, 1.0f);
-            this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
+            this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.09f);
             this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.032f);
             this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
+            this->lCutOff = std::make_unique<ObjectCoordinate>(false, 12.5f);
+            this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 15.0f);
             break;
         }
         default:
             break;
     }
-    this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
-    this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
 
     this->matrixModel = glm::mat4(1.0);
+
+    glm::vec3 lrFrom = glm::vec3(0);
+    glm::vec3 lrTo = glm::vec3(this->positionX->point, this->positionY->point * -100.0f, this->positionZ->point);
+    this->lightDirectionRay->init();
+    this->lightDirectionRay->initShaderProgram();
+    this->lightDirectionRay->initBuffers(lrFrom, lrTo);
 }
 
 #pragma mark - Public
@@ -254,7 +264,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
 
 #pragma mark - Render
 
-void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 mtxGrid, bool fixedGridWorld) {
+void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
     if (this->glVAO > 0 && this->showLampObject) {
         glUseProgram(this->shaderProgram);
 
@@ -262,8 +272,6 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
         this->matrixCamera = matrixCamera;
 
         this->matrixModel = glm::mat4(1.0);
-        if (fixedGridWorld)
-            this->matrixModel = mtxGrid;
         this->matrixModel = glm::scale(this->matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateX->point), glm::vec3(1, 0, 0));
@@ -271,12 +279,6 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
-
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
-        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
 
 //        glm::vec3 vLightDirection = glm::vec3(this->directionX->point, this->directionY->point, this->directionZ->point);
 
@@ -320,5 +322,9 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4
             glBindTexture(GL_TEXTURE_2D, 0);
 
         glUseProgram(0);
+
+        this->lightDirectionRay->matrixModel = this->matrixModel;
+        if (this->showLampDirection)
+            this->lightDirectionRay->render(this->matrixProjection, this->matrixCamera);
     }
 }

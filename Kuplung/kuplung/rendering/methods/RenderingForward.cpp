@@ -439,7 +439,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
                         glUniform1i(f->gl_InUse, 1);
 
                         // light
-                        glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
+                        glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
 
                         // color
                         glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
@@ -490,7 +490,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
                         glUniform1i(f->gl_InUse, 1);
 
                         // light
-                        glUniform3f(f->gl_Direction, light->matrixModel[2].x, light->matrixModel[2].y, light->matrixModel[2].z);
+                        glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
                         glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
 
                         // cutoff
@@ -708,8 +708,8 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
 
         glm::vec3 v = this->managerObjects.VertexEditorMode;
         this->managerObjects.VertexEditorMode.x += translation.x;
-        this->managerObjects.VertexEditorMode.y += -1.0 * translation.z;
-        this->managerObjects.VertexEditorMode.z += translation.y;
+        this->managerObjects.VertexEditorMode.y += -1.0 * translation.y;
+        this->managerObjects.VertexEditorMode.z += translation.z;
         if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex)
             mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {

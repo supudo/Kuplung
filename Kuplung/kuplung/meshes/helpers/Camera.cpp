@@ -34,16 +34,36 @@ Camera::~Camera() {
 
 void Camera::initProperties() {
     this->eyeSettings = std::make_unique<ObjectEye>();
-    this->eyeSettings->View_Eye = glm::vec3(0.0, 0.0, 3.0);
-    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
-    this->eyeSettings->View_Up = glm::vec3(0.0, FLT_EPSILON, 1.0); // TODO: doesn't work with 0.0, can't figure why
+//    this->eyeSettings->View_Eye = glm::vec3(0.0, 0.0, 3.0);
+//    this->eyeSettings->View_Center = glm::vec3(0.0, 0.0, 0.0);
+//    this->eyeSettings->View_Up = glm::vec3(0.0, FLT_EPSILON, 1.0); // TODO: doesn't work with 0.0, can't figure why
+
+//    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+//    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+//    this->positionZ = std::make_unique<ObjectCoordinate>(false, -10.0f);
+
+//    this->rotateX = std::make_unique<ObjectCoordinate>(false, 30.0f);
+//    this->rotateY = std::make_unique<ObjectCoordinate>(false, 334.0f);
+//    this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
+
+//    this->rotateCenterX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+//    this->rotateCenterY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+//    this->rotateCenterZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
+
+    this->eyeSettings->View_Eye = glm::vec3(0, 0, 10);
+    this->eyeSettings->View_Center = glm::vec3(0, 0, 0);
+    this->eyeSettings->View_Up = glm::vec3(0, -1, 0);
+
+//    this->eyeSettings->View_Eye = glm::vec3(0, 2, 0);
+//    this->eyeSettings->View_Center = glm::vec3(0, 0, -4);
+//    this->eyeSettings->View_Up = glm::vec3(0, 1, 0);
 
     this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->positionZ = std::make_unique<ObjectCoordinate>(false, -10.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, -16.0f);
 
-    this->rotateX = std::make_unique<ObjectCoordinate>(false, 30.0f);
-    this->rotateY = std::make_unique<ObjectCoordinate>(false, 334.0f);
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 160.0f);
+    this->rotateY = std::make_unique<ObjectCoordinate>(false, 140.0f);
     this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
     this->rotateCenterX = std::make_unique<ObjectCoordinate>(false, 0.0f);
@@ -63,9 +83,9 @@ void Camera::render() {
     this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
     this->matrixCamera = glm::translate(this->matrixCamera, glm::vec3(0, 0, 0));
 
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
-    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
+//    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
+//    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
+//    this->matrixCamera = glm::rotate(this->matrixCamera, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
 
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }

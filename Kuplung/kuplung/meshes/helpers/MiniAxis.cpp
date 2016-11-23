@@ -111,13 +111,13 @@ void MiniAxis::initBuffers() {
         1.0f, 0.0f, 0.0f, 1.0f,
         1.0f, 0.0f, 0.0f, 1.0f,
 
-        // Z - blue - up
-        0.0f, 0.0f, 1.0f, 1.0f,
-        0.0f, 0.0f, 1.0f, 1.0f,
-
         // Y - green
         0.0f, 1.0f, 0.0f, 1.0f,
-        0.0f, 1.0f, 0.0f, 1.0f
+        0.0f, 1.0f, 0.0f, 1.0f,
+
+        // Z - blue
+        0.0f, 0.0f, 1.0f, 1.0f,
+        0.0f, 0.0f, 1.0f, 1.0f
     };
 
     // vertices

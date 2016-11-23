@@ -70,21 +70,21 @@ void ObjectsManager::render() {
         ahPosition /= 2;
         //ahPosition += 1;
 
-        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(- ahPosition, 0, 0));
-        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(ahPosition, 0, 0));
+        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- ahPosition, 0, 0));
+        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(ahPosition, 0, 0));
 
-        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, - ahPosition, 0));
-        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, ahPosition, 0));
+        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - ahPosition, 0));
+        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, ahPosition, 0));
 
-        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, - ahPosition));
-        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld, glm::vec3(0, 0, ahPosition));
+        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - ahPosition));
+        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition));
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
     this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
 
     for (size_t i=0; i<this->lightSources.size(); i++) {
-        this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
+        this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera);
     }
 
     if (this->Setting_Skybox != this->skybox->Setting_Skybox_Item) {
@@ -366,6 +366,7 @@ void ObjectsManager::generateSpaceship() {
  */
 void ObjectsManager::addLight(LightSourceType type, std::string title, std::string description) {
     Light *lightObject = new Light();
+    lightObject->init();
     lightObject->initProperties(type);
     lightObject->type = type;
     assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
@@ -410,10 +411,6 @@ void ObjectsManager::loadSystemModels(std::unique_ptr<FileModelManager> &filePar
     file.extension = ".obj";
 
     FileBrowser_ParserType parserType = FileBrowser_ParserType_Own2;
-
-    file.title = "light";
-    file.path = Settings::Instance()->appFolder() + "/gui/light.obj";
-    this->systemModels["lamp"] = fileParser->parse(file, parserType, std::vector<std::string>())[0];
 
     file.title = "light_directional";
     file.path = Settings::Instance()->appFolder() + "/gui/light_directional.obj";

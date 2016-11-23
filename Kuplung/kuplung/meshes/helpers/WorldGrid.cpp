@@ -63,7 +63,7 @@ void WorldGrid::initProperties(int size) {
     this->scaleY = std::make_unique<ObjectCoordinate>(false, 1.0f);
     this->scaleZ = std::make_unique<ObjectCoordinate>(false, 1.0f);
 
-    this->rotateX = std::make_unique<ObjectCoordinate>(false, -90.0f);
+    this->rotateX = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->rotateY = std::make_unique<ObjectCoordinate>(false, 0.0f);
     this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
@@ -150,10 +150,10 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                 if (h) {
                     GridMeshPoint3D p;
                     p.x = (j - gridMinus) * unitSize;
-                    p.y = (i - gridMinus) * unitSize;
-                    p.z = 0;
+                    p.y = 0;
+                    p.z = (i - gridMinus) * unitSize;
                     verticesData.push_back(p);
-                    if (p.y == 0) {
+                    if (p.z == 0) {
                         this->dataColors.push_back(1.0f);
                         this->dataColors.push_back(0.0f);
                         this->dataColors.push_back(0.0f);
@@ -167,13 +167,13 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
                 else {
                     GridMeshPoint3D p;
                     p.x = (i - this->gridSizeVertex - gridMinus) * unitSize;
-                    p.y = (j - gridMinus) * unitSize;
-                    p.z = 0;
+                    p.y = 0;
+                    p.z = (j - gridMinus) * unitSize;
                     verticesData.push_back(p);
                     if (p.x == 0) {
                         this->dataColors.push_back(0.0f);
-                        this->dataColors.push_back(1.0f);
                         this->dataColors.push_back(0.0f);
+                        this->dataColors.push_back(1.0f);
                     }
                     else {
                         this->dataColors.push_back(0.7f);
@@ -188,21 +188,21 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 
         GridMeshPoint3D p_z_Minus_Down;
         p_z_Minus_Down.x = 0.0f;
-        p_z_Minus_Down.y = 0.0f;
-        p_z_Minus_Down.z = -1.0f * (float)gridMinus;
+        p_z_Minus_Down.y = -1.0f * (float)gridMinus;
+        p_z_Minus_Down.z = 0.0f;
         verticesData.push_back(p_z_Minus_Down);
         this->dataColors.push_back(0.0f);
-        this->dataColors.push_back(0.0f);
         this->dataColors.push_back(1.0f);
+        this->dataColors.push_back(0.0f);
 
         GridMeshPoint3D p_z_Plus_Up;
         p_z_Plus_Up.x = 0.0f;
-        p_z_Plus_Up.y = 0.0f;
-        p_z_Plus_Up.z = (float)gridMinus;
+        p_z_Plus_Up.y = (float)gridMinus;
+        p_z_Plus_Up.z = 0.0f;
         verticesData.push_back(p_z_Plus_Up);
         this->dataColors.push_back(0.0f);
-        this->dataColors.push_back(0.0f);
         this->dataColors.push_back(1.0f);
+        this->dataColors.push_back(0.0f);
 
         // vertices
         glGenBuffers(1, &this->vboVertices);
@@ -229,12 +229,12 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
         float planePoint = (float)(this->gridSize / 2);
 
         this->dataVertices = {
-            planePoint, planePoint, 0.0,
-            planePoint, -1 * planePoint, 0.0,
-            -1 * planePoint, -1 * planePoint, 0.0,
-            -1 * planePoint, planePoint, 0.0,
-            planePoint, planePoint, 0.0,
-            -1 * planePoint, -1 * planePoint, 0.0
+            planePoint, 0.0, planePoint,
+            planePoint, 0.0, -1 * planePoint,
+            -1 * planePoint, 0.0, -1 * planePoint,
+            -1 * planePoint, 0.0, planePoint,
+            planePoint, 0.0, planePoint,
+            -1 * planePoint, 0.0, -1 * planePoint
         };
 
         this->dataTexCoords = {

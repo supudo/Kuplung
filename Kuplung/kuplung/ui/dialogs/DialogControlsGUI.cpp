@@ -371,9 +371,12 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Look-At matrix");
                     ImGui::Separator();
                     ImGui::Text("Eye");
-                    this->helperUI->addControlsSliderSameLine("X", 1, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.x, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 1.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.y, true, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 1.0f, 0.0f, 90.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.z, true, isFrame);
+//                    this->helperUI->addControlsSliderSameLine("X", 1, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.x, true, isFrame);
+//                    this->helperUI->addControlsSliderSameLine("Y", 2, 1.0f, this->managerObjects.Setting_PlaneClose, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.y, true, isFrame);
+//                    this->helperUI->addControlsSliderSameLine("Z", 3, 1.0f, 0.0f, 90.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.z, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 1, 1.0f, - this->managerObjects.Setting_PlaneFar, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.x, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 1.0f, - this->managerObjects.Setting_PlaneFar, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.y, true, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 1.0f, - this->managerObjects.Setting_PlaneFar, this->managerObjects.Setting_PlaneFar, false, NULL, &this->managerObjects.camera->eyeSettings->View_Eye.z, true, isFrame);
                     ImGui::Separator();
                     ImGui::Text("Center");
                     this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -10.0f, 10.0f, false, NULL, &this->managerObjects.camera->eyeSettings->View_Center.x, true, isFrame);
