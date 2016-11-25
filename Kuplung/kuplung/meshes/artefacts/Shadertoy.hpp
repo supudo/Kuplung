@@ -17,7 +17,7 @@ class Shadertoy {
 public:
     ~Shadertoy();
     void init();
-    bool initShaderProgram(std::string fragmentShaderSource);
+    bool initShaderProgram(std::string const& fragmentShaderSource);
     void initBuffers();
     void initTextures();
     void initFBO(int windowWidth, int windowHeight, GLuint* vboTexture);

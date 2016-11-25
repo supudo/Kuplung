@@ -46,7 +46,7 @@ void Shadertoy::init() {
     this->iChannel3_CubeImage = "";
 }
 
-bool Shadertoy::initShaderProgram(std::string fragmentShaderSource) {
+bool Shadertoy::initShaderProgram(std::string const& fragmentShaderSource) {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadertoy.vert";
@@ -115,29 +115,29 @@ void main() {\n\
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->vs_InFBO = this->glUtils->glGetUniform(this->shaderProgram, "vs_inFBO");
-        this->vs_ScreenResolution = this->glUtils->glGetUniform(this->shaderProgram, "vs_screenResolution");
+        this->glAttributeVertexPosition = this->glUtils->glGetAttributeNoWarning(this->shaderProgram, "a_vertexPosition");
+        this->vs_InFBO = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "vs_inFBO");
+        this->vs_ScreenResolution = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "vs_screenResolution");
 
-        this->iResolution = this->glUtils->glGetUniform(this->shaderProgram, "iResolution");
-        this->iGlobalTime = this->glUtils->glGetUniform(this->shaderProgram, "iGlobalTime");
-        this->iTimeDelta = this->glUtils->glGetUniform(this->shaderProgram, "iTimeDelta");
-        this->iFrameRate = this->glUtils->glGetUniform(this->shaderProgram, "iFrameRate");
+        this->iResolution = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iResolution");
+        this->iGlobalTime = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iGlobalTime");
+        this->iTimeDelta = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iTimeDelta");
+        this->iFrameRate = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iFrameRate");
         this->iFrame = this->glUtils->glGetUniform(this->shaderProgram, "iFrame");
-        this->iChannelTime[0] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelTime[0]");
-        this->iChannelTime[1] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelTime[1]");
-        this->iChannelTime[2] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelTime[2]");
-        this->iChannelTime[3] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelTime[3]");
-        this->iChannelResolution[0] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelResolution[0]");
-        this->iChannelResolution[1] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelResolution[1]");
-        this->iChannelResolution[2] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelResolution[2]");
-        this->iChannelResolution[3] = this->glUtils->glGetUniform(this->shaderProgram, "iChannelResolution[3]");
-        this->iMouse = this->glUtils->glGetUniform(this->shaderProgram, "iMouse");
-        this->iDate = this->glUtils->glGetUniform(this->shaderProgram, "iDate");
-        this->iChannel0 = this->glUtils->glGetUniform(this->shaderProgram, "iChannel0");
-        this->iChannel1 = this->glUtils->glGetUniform(this->shaderProgram, "iChannel1");
-        this->iChannel2 = this->glUtils->glGetUniform(this->shaderProgram, "iChannel2");
-        this->iChannel3 = this->glUtils->glGetUniform(this->shaderProgram, "iChannel3");
+        this->iChannelTime[0] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[0]");
+        this->iChannelTime[1] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[1]");
+        this->iChannelTime[2] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[2]");
+        this->iChannelTime[3] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[3]");
+        this->iChannelResolution[0] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[0]");
+        this->iChannelResolution[1] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[1]");
+        this->iChannelResolution[2] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[2]");
+        this->iChannelResolution[3] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[3]");
+        this->iMouse = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iMouse");
+        this->iDate = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iDate");
+        this->iChannel0 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel0");
+        this->iChannel1 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel1");
+        this->iChannel2 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel2");
+        this->iChannel3 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel3");
     }
 
     glEnable(GL_DEPTH_TEST);
