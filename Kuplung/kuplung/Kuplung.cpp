@@ -375,7 +375,7 @@ void Kuplung::addSpaceshipModel() {
 
 void Kuplung::renderScene() {
     switch (Settings::Instance()->RendererType) {
-        case 2: {
+        case InAppRendererType_Deferred: {
             this->renderSceneModels();
             this->managerObjects->render();
             break;

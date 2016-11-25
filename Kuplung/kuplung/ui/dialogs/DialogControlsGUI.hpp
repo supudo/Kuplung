@@ -14,6 +14,7 @@
 #include "kuplung/utilities/ImGui/imgui.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
+#include "kuplung/settings/SettingsStructs.h"
 
 class DialogControlsGUI {
 public:

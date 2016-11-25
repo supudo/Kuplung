@@ -15,7 +15,6 @@
 
 RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
-    this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
     this->GLSL_LightSourceNumber_Spot = 0;
@@ -392,7 +391,6 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
     this->matrixCamera = this->managerObjects.camera->matrixCamera;
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
     this->uiAmbientLight = this->managerObjects.Setting_UIAmbientLight;
-    this->lightingPass_DrawMode = this->managerObjects.Setting_LightingPass_DrawMode;
 
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
@@ -403,20 +401,16 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
 
 void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
-        //glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->positionX->point, this->managerObjects.lightSources[0]->positionY->point, this->managerObjects.lightSources[0]->positionZ->point);
-        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
-        glm::mat4 lightProjection = glm::ortho(
-                                        -10.0f,
-                                        10.0f,
-                                        -10.0f,
-                                        10.0f,
-                                        this->managerObjects.Setting_PlaneClose,
-                                        this->managerObjects.Setting_PlaneFar);
-        glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0), glm::vec3(0, -1, 0));
+//        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
+        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->positionX->point, this->managerObjects.lightSources[0]->positionY->point, this->managerObjects.lightSources[0]->positionZ->point);
+        glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
+                                               this->managerObjects.Setting_PlaneClose,
+                                               this->managerObjects.Setting_PlaneFar);
+        glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
         this->matrixLightSpace = lightProjection * lightView;
 
         glUseProgram(this->shaderProgramShadows);
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgramShadows, "lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgramShadows, "shadow_lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
@@ -539,7 +533,7 @@ void RenderingForwardShadowMapping::renderModels(GLuint shaderProgram, std::vect
         glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
         glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
         if (this->vboDepthMap > 0) {
-            glActiveTexture(GL_TEXTURE0);
+            glActiveTexture(GL_TEXTURE7);
             glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
         }
 

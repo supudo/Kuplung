@@ -26,4 +26,11 @@ typedef enum FileBrowser_ParserType {
     FileBrowser_ParserType_Assimp = 2
 } FileBrowser_ParserType;
 
+typedef enum InAppRendererType {
+    InAppRendererType_Simple,
+    InAppRendererType_Forward,
+    InAppRendererType_ForwardShadowMapping,
+    InAppRendererType_Deferred
+} InAppRendererType;
+
 #endif /* SettingsStructs_h */

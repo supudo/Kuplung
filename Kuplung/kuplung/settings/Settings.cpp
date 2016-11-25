@@ -49,7 +49,7 @@ void Settings::initSettings() {
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
-    m_pInstance->RendererType = m_pInstance->cfgUtils->readInt("RendererType");
+    m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
 
     m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");

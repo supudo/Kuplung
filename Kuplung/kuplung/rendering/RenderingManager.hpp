@@ -15,6 +15,7 @@
 #include "kuplung/rendering/methods/RenderingDeferred.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
+#include "kuplung/settings/SettingsStructs.h"
 
 class RenderingManager {
 public:

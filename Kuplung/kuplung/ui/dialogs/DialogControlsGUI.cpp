@@ -322,7 +322,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
-            if (Settings::Instance()->RendererType == 3) {
+            if (Settings::Instance()->RendererType == InAppRendererType_Deferred) {
                 if (ImGui::CollapsingHeader("Deferred Rendering", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();
                     ImGui::Text("Deferred Rendering");

@@ -19,6 +19,7 @@ void DialogOptions::init() {
 
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
     this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
+    this->optionsRendererType = Settings::Instance()->RendererType;
 }
 
 void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool* p_opened, bool* needsFontChange) {
@@ -51,8 +52,10 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             Settings::Instance()->saveSettings();
 
         const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Deferred"};
-        if (ImGui::Combo("Renderer", &Settings::Instance()->RendererType, rendererItems, IM_ARRAYSIZE(rendererItems)))
+        if (ImGui::Combo("Renderer", &this->optionsRendererType, rendererItems, IM_ARRAYSIZE(rendererItems))) {
             Settings::Instance()->saveSettings();
+            Settings::Instance()->RendererType = static_cast<InAppRendererType>(this->optionsRendererType);
+        }
 
         const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
         if (ImGui::Combo("ModelFace Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))

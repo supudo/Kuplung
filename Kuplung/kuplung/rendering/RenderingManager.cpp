@@ -40,16 +40,16 @@ void RenderingManager::init() {
 
 void RenderingManager::render(int selectedModel) {
     switch (Settings::Instance()->RendererType) {
-        case 0:
+        case InAppRendererType_Simple:
             this->rendererSimple->render(this->meshModelFaces, selectedModel);
             break;
-        case 1:
+        case InAppRendererType_Forward:
             this->rendererForward->render(this->meshModelFaces, selectedModel);
             break;
-        case 2:
+        case InAppRendererType_ForwardShadowMapping:
             this->rendererForwardShadowMapping->render(this->meshModelFaces, selectedModel);
             break;
-        case 3:
+        case InAppRendererType_Deferred:
             this->rendererDeferred->render(this->meshModelFaces, selectedModel);
             break;
         default:

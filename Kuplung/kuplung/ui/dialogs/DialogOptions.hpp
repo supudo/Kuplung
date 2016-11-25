@@ -23,7 +23,7 @@ public:
 private:
     std::unique_ptr<FontsList> fontLister;
 
-    int optionsFontSelected, optionsFontSizeSelected;
+    int optionsFontSelected, optionsFontSizeSelected, optionsRendererType;
 };
 
 #endif /* DialogOptions_hpp */
