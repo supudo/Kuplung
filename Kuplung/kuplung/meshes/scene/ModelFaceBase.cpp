@@ -183,6 +183,8 @@ void ModelFaceBase::initModelProperties() {
 
     this->Effect_ToneMapping_ACESFilmRec2020 = false;
 
+    this->Setting_ShowShadows = true;
+
     // gizmo controls
     this->Setting_Gizmo_Translate = false;
     this->Setting_Gizmo_Rotate = false;

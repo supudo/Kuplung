@@ -66,6 +66,14 @@ GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
     return var;
 }
 
+GLint GLUtils::glGetAttributeNoWarning(GLuint program, const char* var_name) {
+    return glGetAttribLocation(program, var_name);
+}
+
+GLint GLUtils::glGetUniformNoWarning(GLuint program, const char* var_name) {
+    return glGetUniformLocation(program, var_name);
+}
+
 #pragma mark - Printing
 
 void GLUtils::printProgramLog(GLuint program) {

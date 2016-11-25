@@ -22,6 +22,9 @@ void RenderingManager::init() {
     this->rendererForward = std::make_unique<RenderingForward>(this->managerObjects);
     this->rendererForward->init();
 
+    this->rendererForwardShadowMapping = std::make_unique<RenderingForwardShadowMapping>(this->managerObjects);
+    this->rendererForwardShadowMapping->init();
+
     this->rendererDeferred = std::make_unique<RenderingDeferred>(this->managerObjects);
     this->rendererDeferred->init();
 
@@ -40,6 +43,9 @@ void RenderingManager::render(int selectedModel) {
             this->rendererForward->render(this->meshModelFaces, selectedModel);
             break;
         case 2:
+            this->rendererForwardShadowMapping->render(this->meshModelFaces, selectedModel);
+            break;
+        case 3:
             this->rendererDeferred->render(this->meshModelFaces, selectedModel);
             break;
         default:

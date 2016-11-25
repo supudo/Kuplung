@@ -1,7 +1,5 @@
 #version 410 core
 
-// in's
-
 uniform mat4 fs_ModelMatrix;
 uniform mat4 fs_WorldMatrix;
 uniform vec3 fs_cameraPosition;
@@ -24,8 +22,6 @@ in vec3 fs_tangent;
 in vec3 fs_bitangent0;
 in vec3 fs_bitangent;
 in float fs_isBorder;
-
-// structs
 
 struct ModelMaterial {
     vec3 ambient;
@@ -96,11 +92,9 @@ struct Effect_Bloom {
 };
 
 // lights & mats
-
 #define NR_DIRECTIONAL_LIGHTS 8
 #define NR_POINT_LIGHTS 4
 #define NR_SPOT_LIGHTS 4
-
 uniform LightSource_Directional directionalLights[NR_DIRECTIONAL_LIGHTS];
 uniform LightSource_Point pointLights[NR_POINT_LIGHTS];
 uniform LightSource_Spot spotLights[NR_SPOT_LIGHTS];
@@ -111,34 +105,35 @@ uniform LightSource_Directional solidSkin_Light;
 uniform vec3 solidSkin_materialColor;
 
 // effect vars
-
 uniform Effect_GaussianBlur effect_GBlur;
 uniform Effect_Bloom effect_Bloom;
 
 // calculated vars
-
 float diffuse_texture_width = textureSize(material.sampler_diffuse, 0).r; //texture width
 float diffuse_texture_height = textureSize(material.sampler_diffuse, 0).g; //texture height
 //vec2 diffuse_texel = vec2(1.0 / diffuse_texture_width, 1.0 / diffuse_texture_height);
 vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height));
 
-// functions
+// shadows
+uniform bool fs_showShadows;
+uniform sampler2D sampler_shadowMap;
+in vec3 fs_shadow_FragPos;
+in vec3 fs_shadow_Normal;
+in vec2 fs_shadow_TexCoords;
+in vec4 fs_shadow_FragPosLightSpace;
 
+// functions
 vec3 calculateLightSolid(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightDirectional(vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightPoint(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
 vec3 calculateLightSpot(vec3 fragmentPosition, vec3 directionNormal, vec3 directionView, vec4 colorAmbient, vec4 colorDiffuse, vec4 colorSpecular);
-
 vec4 celShadingColor();
 vec3 calculateBumpedNormal();
-
 vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
-
 mat3 cotangent_frame(vec3 normal, vec3 position, vec2 texCoords);
-
 vec3 ACESFilmRec2020(vec3 x);
+float calculateShadowValue();
 
 // out color
-
 out vec4 fragColor;

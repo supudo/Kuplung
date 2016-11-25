@@ -120,6 +120,11 @@ void main(void) {
             // tone mapping
             if (fs_ACESFilmRec2020)
                 fragColor.rgb = ACESFilmRec2020(fragColor.rgb);
+
+            // shadows
+            float v = calculateShadowValue();
+//            if (fs_showShadows)
+//                fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue()) * (processedColor_Diffuse + processedColor_Specular)) * fragColor;
         }
         else
             fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);

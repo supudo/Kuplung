@@ -23,6 +23,13 @@ out vec3 tcs_bitangent;
 out vec3 tcs_displacementLocation;
 out float tcs_isBorder;
 
+uniform mat4 shadow_model;
+uniform mat4 shadow_lightSpaceMatrix;
+out vec3 tcs_shadow_FragPos;
+out vec3 tcs_shadow_Normal;
+out vec2 tcs_shadow_TexCoords;
+out vec4 tcs_shadow_FragPosLightSpace;
+
 void main(void) {
     tcs_vertexPosition = vs_vertexPosition;
     tcs_textureCoord = vs_textureCoord;
@@ -34,6 +41,11 @@ void main(void) {
     tcs_bitangent = (vs_WorldMatrix * vec4(vs_bitangent, 0.0)).xyz;
     tcs_displacementLocation = vs_displacementLocation;
     tcs_isBorder = vs_isBorder;
+
+    tcs_shadow_FragPos = vec3(shadow_model * vec4(vs_vertexPosition, 1.0));
+    tcs_shadow_Normal = transpose(inverse(mat3(shadow_model))) * vs_vertexNormal;
+    tcs_shadow_TexCoords = vs_textureCoord;
+    tcs_shadow_FragPosLightSpace = shadow_lightSpaceMatrix * vec4(tcs_shadow_FragPos, 1.0);
 
     gl_Position = vs_MVPMatrix * vec4(vs_vertexPosition, 1.0);
 }

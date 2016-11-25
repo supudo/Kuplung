@@ -111,6 +111,9 @@ public:
     // rendering
     int Setting_LightingPass_DrawMode;
 
+    // shadows
+    bool Setting_ShowShadows;
+
 protected:
     float so_fov;
     float so_outlineThickness;

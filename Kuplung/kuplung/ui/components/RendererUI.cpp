@@ -85,6 +85,9 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
             imageRenderer->showSpecificSettings(ImageRendererType_DefaultForward);
             break;
         case 2:
+            imageRenderer->showSpecificSettings(ImageRendererType_DefaultForwardShadowMapping);
+            break;
+        case 3:
             imageRenderer->showSpecificSettings(ImageRendererType_RayTracer);
             break;
         default:

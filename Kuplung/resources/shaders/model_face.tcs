@@ -22,6 +22,10 @@ in vec3 tcs_bitangent0[];
 in vec3 tcs_bitangent[];
 in vec3 tcs_displacementLocation[];
 in float tcs_isBorder[];
+in vec3 tcs_shadow_FragPos[];
+in vec3 tcs_shadow_Normal[];
+in vec2 tcs_shadow_TexCoords[];
+in vec4 tcs_shadow_FragPosLightSpace[];
 
 out vec3 tes_vertexPosition[];
 out vec2 tes_textureCoord[];
@@ -33,6 +37,10 @@ out vec3 tes_bitangent0[];
 out vec3 tes_bitangent[];
 out vec3 tes_displacementLocation[];
 out float tes_isBorder[];
+out vec3 tes_shadow_FragPos[];
+out vec3 tes_shadow_Normal[];
+out vec2 tes_shadow_TexCoords[];
+out vec4 tes_shadow_FragPosLightSpace[];
 
 float lod_factor = 0.004;
 float level(vec4 v0, vec4 v1) {
@@ -54,6 +62,10 @@ void main() {
     tes_bitangent[ID] = tcs_bitangent[ID];
     tes_displacementLocation[ID] = tcs_displacementLocation[ID];
     tes_isBorder[ID] = tcs_isBorder[ID];
+    tes_shadow_FragPos[ID] = tcs_shadow_FragPos[ID];
+    tes_shadow_Normal[ID] = tcs_shadow_Normal[ID];
+    tes_shadow_TexCoords[ID] = tcs_shadow_TexCoords[ID];
+    tes_shadow_FragPosLightSpace[ID] = tcs_shadow_FragPosLightSpace[ID];
 
     if (ID == 0) {
         if (!tcs_UseTessellation) {

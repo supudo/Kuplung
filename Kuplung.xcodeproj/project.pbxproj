@@ -11,6 +11,7 @@
 		8A00ADC01DD4DA0E0067B395 /* epcot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A00ADBE1DD4DA010067B395 /* epcot.obj */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
+		8A1084EB1DE8672A007426F2 /* RenderingForwardShadowMapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1084E91DE8672A007426F2 /* RenderingForwardShadowMapping.cpp */; };
 		8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A1091971D47662400658E39 /* KuplungAppSettings.pb.cc */; };
 		8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A1091991D47662400658E39 /* KuplungDefinitions.pb.cc */; };
 		8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10919E1D47663D00658E39 /* KuplungAppSettings.proto */; };
@@ -24,6 +25,59 @@
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
+		8A2154381DE7501F00034C59 /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
+		8A2154391DE7501F00034C59 /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
+		8A21543A1DE7501F00034C59 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
+		8A21543B1DE7501F00034C59 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
+		8A21543C1DE7501F00034C59 /* bounding_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D11CC0CC6600BE0600 /* bounding_box.frag */; };
+		8A21543D1DE7501F00034C59 /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
+		8A21543E1DE7501F00034C59 /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
+		8A21543F1DE7501F00034C59 /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
+		8A2154401DE7501F00034C59 /* deferred_g_buffer.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */; };
+		8A2154411DE7501F00034C59 /* deferred_g_buffer.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */; };
+		8A2154421DE7501F00034C59 /* deferred_light_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C21D1412D2000BE246 /* deferred_light_box.frag */; };
+		8A2154431DE7501F00034C59 /* deferred_light_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C31D1412D2000BE246 /* deferred_light_box.vert */; };
+		8A2154441DE7501F00034C59 /* deferred_shading.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C41D1412D2000BE246 /* deferred_shading.frag */; };
+		8A2154451DE7501F00034C59 /* deferred_shading.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C51D1412D2000BE246 /* deferred_shading.vert */; };
+		8A2154461DE7501F00034C59 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
+		8A2154471DE7501F00034C59 /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEA1C773DF8009F1F52 /* grid.vert */; };
+		8A2154481DE7501F00034C59 /* light_ray.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */; };
+		8A2154491DE7501F00034C59 /* light_ray.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */; };
+		8A21544A1DE7501F00034C59 /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDED1C773DF8009F1F52 /* light.frag */; };
+		8A21544B1DE7501F00034C59 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEE1C773DF8009F1F52 /* light.vert */; };
+		8A21544C1DE7501F00034C59 /* model_face_effects.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */; };
+		8A21544D1DE7501F00034C59 /* model_face_lights.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */; };
+		8A21544E1DE7501F00034C59 /* model_face_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */; };
+		8A21544F1DE7501F00034C59 /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
+		8A2154501DE7501F00034C59 /* model_face_shadow_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */; };
+		8A2154511DE7501F00034C59 /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
+		8A2154521DE7501F00034C59 /* model_face.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEF1C773DF8009F1F52 /* model_face.frag */; };
+		8A2154531DE7501F00034C59 /* model_face.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF01C773DF8009F1F52 /* model_face.geom */; };
+		8A2154541DE7501F00034C59 /* model_face.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF11C773DF8009F1F52 /* model_face.tcs */; };
+		8A2154551DE7501F00034C59 /* model_face.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF21C773DF8009F1F52 /* model_face.tes */; };
+		8A2154561DE7501F00034C59 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
+		8A2154571DE7501F00034C59 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
+		8A2154581DE7501F00034C59 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
+		8A2154591DE7501F00034C59 /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
+		8A21545A1DE7501F00034C59 /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
+		8A21545B1DE7501F00034C59 /* rendering_simple.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB273391D2FCC8D008508B1 /* rendering_simple.frag */; };
+		8A21545C1DE7501F00034C59 /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
+		8A21545D1DE7501F00034C59 /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
+		8A21545E1DE7501F00034C59 /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
+		8A21545F1DE7501F00034C59 /* rendering_simple.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */; };
+		8A2154601DE7501F00034C59 /* shadertoy.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB256411DA4F3C400ABF2AC /* shadertoy.vert */; };
+		8A2154611DE7501F00034C59 /* shadow_mapping_depth.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */; };
+		8A2154621DE7501F00034C59 /* shadow_mapping_depth.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */; };
+		8A2154631DE7501F00034C59 /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
+		8A2154641DE7501F00034C59 /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
+		8A2154651DE7501F00034C59 /* spaceship.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22B1D2173CB004A8F1C /* spaceship.frag */; };
+		8A2154661DE7501F00034C59 /* spaceship.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22C1D2173CB004A8F1C /* spaceship.vert */; };
+		8A2154671DE7501F00034C59 /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
+		8A2154681DE7501F00034C59 /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
+		8A2154691DE7501F00034C59 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
+		8A21546A1DE7501F00034C59 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
+		8A21546B1DE7501F00034C59 /* vertex_sphere.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14251D75B8B40075189D /* vertex_sphere.frag */; };
+		8A21546C1DE7501F00034C59 /* vertex_sphere.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14261D75B8B40075189D /* vertex_sphere.vert */; };
 		8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */; };
 		8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */; };
 		8A2575EE1DD48ACF004172E3 /* brick_wall_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */; };
@@ -79,8 +133,6 @@
 		8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */; };
 		8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DC1D895FAD00E951DF /* VoronoiGenerator.cpp */; };
 		8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */; };
-		8A45C5E41D89609C00E951DF /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
-		8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
 		8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDBD1DCA591900383570 /* ParserUtils.cpp */; };
 		8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
@@ -148,53 +200,6 @@
 		8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2391D21741B004A8F1C /* SpaceshipMeshGenerator.cpp */; };
 		8AAF14211D75B8780075189D /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF141F1D75B8780075189D /* ImGuizmo.cpp */; };
 		8AAF14241D75B8A10075189D /* VertexSphere.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AAF14221D75B8A10075189D /* VertexSphere.cpp */; };
-		8AAF14271D75B8D30075189D /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
-		8AAF14281D75B8D30075189D /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
-		8AAF14291D75B8D30075189D /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
-		8AAF142A1D75B8D30075189D /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
-		8AAF142B1D75B8D30075189D /* bounding_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D11CC0CC6600BE0600 /* bounding_box.frag */; };
-		8AAF142C1D75B8D30075189D /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
-		8AAF142D1D75B8D30075189D /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
-		8AAF142E1D75B8D30075189D /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
-		8AAF142F1D75B8D30075189D /* deferred_g_buffer.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */; };
-		8AAF14301D75B8D30075189D /* deferred_g_buffer.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */; };
-		8AAF14311D75B8D30075189D /* deferred_light_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C21D1412D2000BE246 /* deferred_light_box.frag */; };
-		8AAF14321D75B8D30075189D /* deferred_light_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C31D1412D2000BE246 /* deferred_light_box.vert */; };
-		8AAF14331D75B8D30075189D /* deferred_shading.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C41D1412D2000BE246 /* deferred_shading.frag */; };
-		8AAF14341D75B8D30075189D /* deferred_shading.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C51D1412D2000BE246 /* deferred_shading.vert */; };
-		8AAF14351D75B8D30075189D /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
-		8AAF14361D75B8D30075189D /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEA1C773DF8009F1F52 /* grid.vert */; };
-		8AAF14371D75B8D30075189D /* light_ray.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */; };
-		8AAF14381D75B8D30075189D /* light_ray.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */; };
-		8AAF14391D75B8D30075189D /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDED1C773DF8009F1F52 /* light.frag */; };
-		8AAF143A1D75B8D30075189D /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEE1C773DF8009F1F52 /* light.vert */; };
-		8AAF143B1D75B8D30075189D /* model_face_effects.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */; };
-		8AAF143C1D75B8D30075189D /* model_face_lights.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */; };
-		8AAF143D1D75B8D40075189D /* model_face_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */; };
-		8AAF143E1D75B8D40075189D /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
-		8AAF143F1D75B8D40075189D /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
-		8AAF14401D75B8D40075189D /* model_face.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEF1C773DF8009F1F52 /* model_face.frag */; };
-		8AAF14411D75B8D40075189D /* model_face.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF01C773DF8009F1F52 /* model_face.geom */; };
-		8AAF14421D75B8D40075189D /* model_face.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF11C773DF8009F1F52 /* model_face.tcs */; };
-		8AAF14431D75B8D40075189D /* model_face.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF21C773DF8009F1F52 /* model_face.tes */; };
-		8AAF14441D75B8D40075189D /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
-		8AAF14451D75B8D40075189D /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
-		8AAF14461D75B8D40075189D /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
-		8AAF14471D75B8D40075189D /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
-		8AAF14481D75B8D40075189D /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
-		8AAF14491D75B8D40075189D /* rendering_simple.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB273391D2FCC8D008508B1 /* rendering_simple.frag */; };
-		8AAF144A1D75B8D40075189D /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
-		8AAF144B1D75B8D40075189D /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
-		8AAF144C1D75B8D40075189D /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
-		8AAF144D1D75B8D40075189D /* rendering_simple.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */; };
-		8AAF144E1D75B8D40075189D /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
-		8AAF144F1D75B8D40075189D /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
-		8AAF14501D75B8D40075189D /* spaceship.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22B1D2173CB004A8F1C /* spaceship.frag */; };
-		8AAF14511D75B8D40075189D /* spaceship.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22C1D2173CB004A8F1C /* spaceship.vert */; };
-		8AAF14521D75B8D40075189D /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
-		8AAF14531D75B8D40075189D /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
-		8AAF14541D75B8D40075189D /* vertex_sphere.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14251D75B8B40075189D /* vertex_sphere.frag */; };
-		8AAF14551D75B8D40075189D /* vertex_sphere.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14261D75B8B40075189D /* vertex_sphere.vert */; };
 		8AB255B91DA4F2E100ABF2AC /* DialogShadertoy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB255B71DA4F2E100ABF2AC /* DialogShadertoy.cpp */; };
 		8AB255BC1DA4F31000ABF2AC /* Shadertoy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB255BA1DA4F31000ABF2AC /* Shadertoy.cpp */; };
 		8AB255FA1DA4F35B00ABF2AC /* cube00_0.jpg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB255BE1DA4F32F00ABF2AC /* cube00_0.jpg */; };
@@ -261,7 +266,6 @@
 		8AB2563E1DA4F39E00ABF2AC /* Ms2SD1.stoy in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB256381DA4F38200ABF2AC /* Ms2SD1.stoy */; };
 		8AB2563F1DA4F39E00ABF2AC /* XlfGRj.stoy in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB256391DA4F38200ABF2AC /* XlfGRj.stoy */; };
 		8AB256401DA4F39E00ABF2AC /* XlSSzK.stoy in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB2563A1DA4F38200ABF2AC /* XlSSzK.stoy */; };
-		8AB256421DA4F3CF00ABF2AC /* shadertoy.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB256411DA4F3C400ABF2AC /* shadertoy.vert */; };
 		8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */; };
 		8AB6F0AF1C3AA25000665C40 /* Kuplung.icns in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */; };
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
@@ -484,56 +488,59 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
-				8AB256421DA4F3CF00ABF2AC /* shadertoy.vert in Copy Files */,
-				8AAF14271D75B8D30075189D /* axis_helpers.frag in Copy Files */,
-				8AAF14281D75B8D30075189D /* axis_helpers.vert in Copy Files */,
-				8AAF14291D75B8D30075189D /* axis.frag in Copy Files */,
-				8AAF142A1D75B8D30075189D /* axis.vert in Copy Files */,
-				8AAF142B1D75B8D30075189D /* bounding_box.frag in Copy Files */,
-				8AAF142C1D75B8D30075189D /* bounding_box.vert in Copy Files */,
-				8AAF142D1D75B8D30075189D /* camera.frag in Copy Files */,
-				8AAF142E1D75B8D30075189D /* camera.vert in Copy Files */,
-				8AAF142F1D75B8D30075189D /* deferred_g_buffer.frag in Copy Files */,
-				8AAF14301D75B8D30075189D /* deferred_g_buffer.vert in Copy Files */,
-				8AAF14311D75B8D30075189D /* deferred_light_box.frag in Copy Files */,
-				8AAF14321D75B8D30075189D /* deferred_light_box.vert in Copy Files */,
-				8AAF14331D75B8D30075189D /* deferred_shading.frag in Copy Files */,
-				8AAF14341D75B8D30075189D /* deferred_shading.vert in Copy Files */,
-				8AAF14351D75B8D30075189D /* grid.frag in Copy Files */,
-				8AAF14361D75B8D30075189D /* grid.vert in Copy Files */,
-				8AAF14371D75B8D30075189D /* light_ray.frag in Copy Files */,
-				8AAF14381D75B8D30075189D /* light_ray.vert in Copy Files */,
-				8AAF14391D75B8D30075189D /* light.frag in Copy Files */,
-				8AAF143A1D75B8D30075189D /* light.vert in Copy Files */,
-				8AAF143B1D75B8D30075189D /* model_face_effects.frag in Copy Files */,
-				8AAF143C1D75B8D30075189D /* model_face_lights.frag in Copy Files */,
-				8AAF143D1D75B8D40075189D /* model_face_mapping.frag in Copy Files */,
-				8AAF143E1D75B8D40075189D /* model_face_misc.frag in Copy Files */,
-				8AAF143F1D75B8D40075189D /* model_face_vars.frag in Copy Files */,
-				8AAF14401D75B8D40075189D /* model_face.frag in Copy Files */,
-				8AAF14411D75B8D40075189D /* model_face.geom in Copy Files */,
-				8AAF14421D75B8D40075189D /* model_face.tcs in Copy Files */,
-				8AAF14431D75B8D40075189D /* model_face.tes in Copy Files */,
-				8AAF14441D75B8D40075189D /* model_face.vert in Copy Files */,
-				8AAF14451D75B8D40075189D /* ray_line.frag in Copy Files */,
-				8AAF14461D75B8D40075189D /* ray_line.vert in Copy Files */,
-				8AAF14471D75B8D40075189D /* reflection.frag in Copy Files */,
-				8AAF14481D75B8D40075189D /* reflection.vert in Copy Files */,
-				8AAF14491D75B8D40075189D /* rendering_simple.frag in Copy Files */,
-				8AAF144A1D75B8D40075189D /* rendering_simple.geom in Copy Files */,
-				8AAF144B1D75B8D40075189D /* rendering_simple.tcs in Copy Files */,
-				8AAF144C1D75B8D40075189D /* rendering_simple.tes in Copy Files */,
-				8AAF144D1D75B8D40075189D /* rendering_simple.vert in Copy Files */,
-				8AAF144E1D75B8D40075189D /* skybox.frag in Copy Files */,
-				8AAF144F1D75B8D40075189D /* skybox.vert in Copy Files */,
-				8AAF14501D75B8D40075189D /* spaceship.frag in Copy Files */,
-				8AAF14511D75B8D40075189D /* spaceship.vert in Copy Files */,
-				8AAF14521D75B8D40075189D /* terrain.frag in Copy Files */,
-				8AAF14531D75B8D40075189D /* terrain.vert in Copy Files */,
-				8AAF14541D75B8D40075189D /* vertex_sphere.frag in Copy Files */,
-				8AAF14551D75B8D40075189D /* vertex_sphere.vert in Copy Files */,
-				8A45C5E41D89609C00E951DF /* structured_vol_sampling.frag in Copy Files */,
-				8A45C5E51D89609C00E951DF /* structured_vol_sampling.vert in Copy Files */,
+				8A2154381DE7501F00034C59 /* axis_helpers.frag in Copy Files */,
+				8A2154391DE7501F00034C59 /* axis_helpers.vert in Copy Files */,
+				8A21543A1DE7501F00034C59 /* axis.frag in Copy Files */,
+				8A21543B1DE7501F00034C59 /* axis.vert in Copy Files */,
+				8A21543C1DE7501F00034C59 /* bounding_box.frag in Copy Files */,
+				8A21543D1DE7501F00034C59 /* bounding_box.vert in Copy Files */,
+				8A21543E1DE7501F00034C59 /* camera.frag in Copy Files */,
+				8A21543F1DE7501F00034C59 /* camera.vert in Copy Files */,
+				8A2154401DE7501F00034C59 /* deferred_g_buffer.frag in Copy Files */,
+				8A2154411DE7501F00034C59 /* deferred_g_buffer.vert in Copy Files */,
+				8A2154421DE7501F00034C59 /* deferred_light_box.frag in Copy Files */,
+				8A2154431DE7501F00034C59 /* deferred_light_box.vert in Copy Files */,
+				8A2154441DE7501F00034C59 /* deferred_shading.frag in Copy Files */,
+				8A2154451DE7501F00034C59 /* deferred_shading.vert in Copy Files */,
+				8A2154461DE7501F00034C59 /* grid.frag in Copy Files */,
+				8A2154471DE7501F00034C59 /* grid.vert in Copy Files */,
+				8A2154481DE7501F00034C59 /* light_ray.frag in Copy Files */,
+				8A2154491DE7501F00034C59 /* light_ray.vert in Copy Files */,
+				8A21544A1DE7501F00034C59 /* light.frag in Copy Files */,
+				8A21544B1DE7501F00034C59 /* light.vert in Copy Files */,
+				8A21544C1DE7501F00034C59 /* model_face_effects.frag in Copy Files */,
+				8A21544D1DE7501F00034C59 /* model_face_lights.frag in Copy Files */,
+				8A21544E1DE7501F00034C59 /* model_face_mapping.frag in Copy Files */,
+				8A21544F1DE7501F00034C59 /* model_face_misc.frag in Copy Files */,
+				8A2154501DE7501F00034C59 /* model_face_shadow_mapping.frag in Copy Files */,
+				8A2154511DE7501F00034C59 /* model_face_vars.frag in Copy Files */,
+				8A2154521DE7501F00034C59 /* model_face.frag in Copy Files */,
+				8A2154531DE7501F00034C59 /* model_face.geom in Copy Files */,
+				8A2154541DE7501F00034C59 /* model_face.tcs in Copy Files */,
+				8A2154551DE7501F00034C59 /* model_face.tes in Copy Files */,
+				8A2154561DE7501F00034C59 /* model_face.vert in Copy Files */,
+				8A2154571DE7501F00034C59 /* ray_line.frag in Copy Files */,
+				8A2154581DE7501F00034C59 /* ray_line.vert in Copy Files */,
+				8A2154591DE7501F00034C59 /* reflection.frag in Copy Files */,
+				8A21545A1DE7501F00034C59 /* reflection.vert in Copy Files */,
+				8A21545B1DE7501F00034C59 /* rendering_simple.frag in Copy Files */,
+				8A21545C1DE7501F00034C59 /* rendering_simple.geom in Copy Files */,
+				8A21545D1DE7501F00034C59 /* rendering_simple.tcs in Copy Files */,
+				8A21545E1DE7501F00034C59 /* rendering_simple.tes in Copy Files */,
+				8A21545F1DE7501F00034C59 /* rendering_simple.vert in Copy Files */,
+				8A2154601DE7501F00034C59 /* shadertoy.vert in Copy Files */,
+				8A2154611DE7501F00034C59 /* shadow_mapping_depth.frag in Copy Files */,
+				8A2154621DE7501F00034C59 /* shadow_mapping_depth.vert in Copy Files */,
+				8A2154631DE7501F00034C59 /* skybox.frag in Copy Files */,
+				8A2154641DE7501F00034C59 /* skybox.vert in Copy Files */,
+				8A2154651DE7501F00034C59 /* spaceship.frag in Copy Files */,
+				8A2154661DE7501F00034C59 /* spaceship.vert in Copy Files */,
+				8A2154671DE7501F00034C59 /* structured_vol_sampling.frag in Copy Files */,
+				8A2154681DE7501F00034C59 /* structured_vol_sampling.vert in Copy Files */,
+				8A2154691DE7501F00034C59 /* terrain.frag in Copy Files */,
+				8A21546A1DE7501F00034C59 /* terrain.vert in Copy Files */,
+				8A21546B1DE7501F00034C59 /* vertex_sphere.frag in Copy Files */,
+				8A21546C1DE7501F00034C59 /* vertex_sphere.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -605,6 +612,8 @@
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
 		8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Kuplung_Settings.ini; sourceTree = "<group>"; };
 		8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.2.0.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.2/lib/libassimp.3.2.0.dylib; sourceTree = "<group>"; };
+		8A1084E91DE8672A007426F2 /* RenderingForwardShadowMapping.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderingForwardShadowMapping.cpp; path = rendering/methods/RenderingForwardShadowMapping.cpp; sourceTree = "<group>"; };
+		8A1084EA1DE8672A007426F2 /* RenderingForwardShadowMapping.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingForwardShadowMapping.hpp; path = rendering/methods/RenderingForwardShadowMapping.hpp; sourceTree = "<group>"; };
 		8A1091971D47662400658E39 /* KuplungAppSettings.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungAppSettings.pb.cc; path = saveopen/KuplungAppSettings.pb.cc; sourceTree = "<group>"; };
 		8A1091981D47662400658E39 /* KuplungAppSettings.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungAppSettings.pb.h; path = saveopen/KuplungAppSettings.pb.h; sourceTree = "<group>"; };
 		8A1091991D47662400658E39 /* KuplungDefinitions.pb.cc */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungDefinitions.pb.cc; path = saveopen/KuplungDefinitions.pb.cc; sourceTree = "<group>"; };
@@ -632,6 +641,9 @@
 		8A1AFB291C71FC58004888D8 /* DialogControlsModels.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogControlsModels.hpp; sourceTree = "<group>"; };
 		8A1CBAD01CA3EFA7000A171D /* MENode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode.cpp; path = materialeditor/MENode.cpp; sourceTree = "<group>"; };
 		8A1CBAD11CA3EFA7000A171D /* MENode.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode.hpp; path = materialeditor/MENode.hpp; sourceTree = "<group>"; };
+		8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model_face_shadow_mapping.frag; sourceTree = "<group>"; };
+		8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow_mapping_depth.frag; sourceTree = "<group>"; };
+		8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow_mapping_depth.vert; sourceTree = "<group>"; };
 		8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredT.cpp; path = scene/ModelFaceDeferredT.cpp; sourceTree = "<group>"; };
 		8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredT.hpp; path = scene/ModelFaceDeferredT.hpp; sourceTree = "<group>"; };
 		8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogSVS.cpp; sourceTree = "<group>"; };
@@ -1055,6 +1067,8 @@
 				8A15A9CD1DC236E9003B65B8 /* RenderingDeferred.hpp */,
 				8A15A9CE1DC236E9003B65B8 /* RenderingForward.cpp */,
 				8A15A9CF1DC236E9003B65B8 /* RenderingForward.hpp */,
+				8A1084E91DE8672A007426F2 /* RenderingForwardShadowMapping.cpp */,
+				8A1084EA1DE8672A007426F2 /* RenderingForwardShadowMapping.hpp */,
 				8A15A9D01DC236E9003B65B8 /* RenderingSimple.cpp */,
 				8A15A9D11DC236E9003B65B8 /* RenderingSimple.hpp */,
 			);
@@ -1603,6 +1617,7 @@
 				8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */,
 				8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */,
 				8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */,
+				8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */,
 				8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */,
 				8AA5EDEF1C773DF8009F1F52 /* model_face.frag */,
 				8AA5EDF01C773DF8009F1F52 /* model_face.geom */,
@@ -1619,6 +1634,8 @@
 				8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */,
 				8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */,
 				8AB256411DA4F3C400ABF2AC /* shadertoy.vert */,
+				8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */,
+				8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */,
 				8AECC0791CB274610096AE7A /* skybox.frag */,
 				8AECC07A1CB274610096AE7A /* skybox.vert */,
 				8AA9F22B1D2173CB004A8F1C /* spaceship.frag */,
@@ -1957,6 +1974,7 @@
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
+				8A1084EB1DE8672A007426F2 /* RenderingForwardShadowMapping.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
 				8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,

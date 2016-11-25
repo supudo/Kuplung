@@ -122,6 +122,7 @@ SOURCES += main.cpp \
     kuplung/rendering/RenderingManager.cpp \
     kuplung/rendering/methods/RenderingSimple.cpp \
     kuplung/rendering/methods/RenderingForward.cpp \
+    kuplung/rendering/methods/RenderingForwardShadowMapping.cpp \
     kuplung/rendering/methods/RenderingDeferred.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
     kuplung/meshes/scene/ModelFaceData.cpp \
@@ -214,6 +215,7 @@ HEADERS += \
     kuplung/rendering/RenderingManager.hpp \
     kuplung/rendering/methods/RenderingSimple.hpp \
     kuplung/rendering/methods/RenderingForward.hpp \
+    kuplung/rendering/methods/RenderingForwardShadowMapping.hpp \
     kuplung/rendering/methods/RenderingDeferred.hpp \
     kuplung/meshes/scene/ModelFaceBase.hpp \
     kuplung/meshes/scene/ModelFaceData.hpp \
@@ -402,11 +404,14 @@ DISTFILES += \
     resources/shaders/model_face_lights.vert \
     resources/shaders/model_face_mapping.vert \
     resources/shaders/model_face_misc.vert \
+    resources/shaders/model_face_shadow_mapping.vert \
     resources/shaders/model_face_vars.vert \
     resources/shaders/model_face.geom \
     resources/shaders/model_face.frag \
     resources/shaders/model_face.tcs \
     resources/shaders/model_face.tes \
+    resources/shaders/shadow_mapping_depth.vert \
+    resources/shaders/shadow_mapping_depth.frag \
     resources/shaders/reflection.vert \
     resources/shaders/reflection.frag \
     resources/shaders/light.vert \

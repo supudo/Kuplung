@@ -471,6 +471,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[this->selectedObject]->Setting_CelShading);
                 ImGui::Checkbox("Wireframe", &(*meshModelFaces)[this->selectedObject]->Setting_Wireframe);
                 ImGui::Checkbox("Edit Mode", &(*meshModelFaces)[this->selectedObject]->Setting_EditMode);
+                ImGui::Checkbox("Shadows", &(*meshModelFaces)[this->selectedObject]->Setting_ShowShadows);
                 // alpha
                 ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[this->selectedObject]->Setting_Alpha), "Alpha Blending");
                 this->helperUI->addControlsFloatSlider("", 1, 0.0f, 1.0f, &(*meshModelFaces)[this->selectedObject]->Setting_Alpha);

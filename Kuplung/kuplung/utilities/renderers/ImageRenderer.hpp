@@ -19,6 +19,7 @@
 typedef enum ImageRendererType {
     ImageRendererType_Scene,
     ImageRendererType_DefaultForward,
+    ImageRendererType_DefaultForwardShadowMapping,
     ImageRendererType_RayTracer
 } ImageRendererType;
 

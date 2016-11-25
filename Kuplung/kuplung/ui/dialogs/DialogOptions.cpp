@@ -50,7 +50,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         if (ImGui::Checkbox("Terrain Hieghtmap Image History", &Settings::Instance()->Terrain_HeightmapImageHistory))
             Settings::Instance()->saveSettings();
 
-        const char* rendererItems[] = {"Simple", "Forward", "Deferred"};
+        const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Deferred"};
         if (ImGui::Combo("Renderer", &Settings::Instance()->RendererType, rendererItems, IM_ARRAYSIZE(rendererItems)))
             Settings::Instance()->saveSettings();
 
