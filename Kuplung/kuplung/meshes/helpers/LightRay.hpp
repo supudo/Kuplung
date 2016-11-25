@@ -17,8 +17,8 @@
 
 class LightRay {
 public:
-    ~LightRay();
     LightRay();
+    ~LightRay();
     bool initShaderProgram();
     void initBuffers(glm::vec3 position, glm::vec3 direction, bool simple);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);

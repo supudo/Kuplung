@@ -19,7 +19,7 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> settings) {
+std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> const& settings) {
     this->file = file;
     this->models.clear();
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);

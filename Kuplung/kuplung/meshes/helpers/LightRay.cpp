@@ -26,8 +26,7 @@ LightRay::~LightRay() {
     this->glUtils.reset();
 }
 
-LightRay::LightRay() {
-    this->glUtils = std::make_unique<GLUtils>();
+LightRay::LightRay() : glUtils(std::make_unique<GLUtils>()) {
     this->axisSize = -1;
     this->x = -1;
     this->y = -1;
@@ -61,7 +60,7 @@ bool LightRay::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
+        Settings::Instance()->funcDoLog("[LightRay] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }

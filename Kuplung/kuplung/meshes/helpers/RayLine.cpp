@@ -68,7 +68,7 @@ bool RayLine::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
+        Settings::Instance()->funcDoLog("[RayLine] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }

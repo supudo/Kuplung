@@ -13,10 +13,7 @@
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
-
-struct RenderingForward_LightSource {
-    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
-};
+#include "kuplung/ui/Objects.h"
 
 class RenderingForward {
 public:
@@ -53,7 +50,7 @@ private:
     GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
-    GLint glFS_GammaCoeficient;
+    GLint glFS_GammaCoeficient, glFS_showShadows;
 
     // material
     GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;

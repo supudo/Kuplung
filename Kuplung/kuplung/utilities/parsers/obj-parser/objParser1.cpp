@@ -56,7 +56,7 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> settings) {
+std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> const& settings) {
     this->file = file;
     this->geometricVertices = {};
     this->textureCoordinates = {};

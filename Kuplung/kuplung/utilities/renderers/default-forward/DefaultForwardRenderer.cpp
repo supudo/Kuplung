@@ -16,6 +16,10 @@
 
 DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+    this->lightingPass_DrawMode = -1;
+    this->GLSL_LightSourceNumber_Directional = 0;
+    this->GLSL_LightSourceNumber_Point = 0;
+    this->GLSL_LightSourceNumber_Spot = 0;
 }
 
 DefaultForwardRenderer::~DefaultForwardRenderer() {
@@ -101,21 +105,18 @@ bool DefaultForwardRenderer::initShaderProgram() {
 
     // fragment shader - parts
     std::string shaderSourceFragment;
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_vars.frag";
-    shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_effects.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_lights.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_misc.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
+    std::vector<std::string> fragFiles = {
+        "vars",
+        "effects",
+        "lights",
+        "mapping",
+        "shadow_mapping",
+        "misc"
+    };
+    for (size_t i=0; i<fragFiles.size(); i++) {
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag";
+        shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
+    }
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
     shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
@@ -138,7 +139,7 @@ bool DefaultForwardRenderer::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!");
+        Settings::Instance()->funcDoLog("[DefaultForwardRenderer] Error linking program " + std::to_string(this->shaderProgram) + "!");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }

@@ -70,4 +70,8 @@ struct ModelFace_LightSource_Spot {
     GLint gl_StrengthAmbient, gl_StrengthDiffuse, gl_StrengthSpecular;
 };
 
+struct RenderingForward_LightSource {
+    GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
+};
+
 #endif /* Objects_hpp */

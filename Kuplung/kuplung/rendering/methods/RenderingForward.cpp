@@ -15,6 +15,10 @@
 
 RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+    this->lightingPass_DrawMode = -1;
+    this->GLSL_LightSourceNumber_Directional = 0;
+    this->GLSL_LightSourceNumber_Point = 0;
+    this->GLSL_LightSourceNumber_Spot = 0;
 }
 
 RenderingForward::~RenderingForward() {
@@ -111,21 +115,18 @@ bool RenderingForward::initShaderProgram() {
 
     // fragment shader - parts
     std::string shaderSourceFragment;
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_vars.frag";
-    shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_effects.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_lights.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_mapping.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
-    shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_misc.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
-
+    std::vector<std::string> fragFiles = {
+        "vars",
+        "effects",
+        "lights",
+        "mapping",
+        "shadow_mapping",
+        "misc"
+    };
+    for (size_t i=0; i<fragFiles.size(); i++) {
+        shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag";
+        shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
+    }
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
     shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
 
@@ -148,7 +149,7 @@ bool RenderingForward::initShaderProgram() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!");
+        Settings::Instance()->funcDoLog("[RenderingForward - initShaders] Error linking program " + std::to_string(this->shaderProgram) + "!");
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
@@ -160,6 +161,8 @@ bool RenderingForward::initShaderProgram() {
         this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
         this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
+
+        this->glFS_showShadows = this->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
@@ -415,6 +418,9 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
         // render skin
         glUniform1i(this->gl_ModelViewSkin, mfd->Setting_ModelViewSkin);
         glUniform3f(this->glFS_solidSkin_materialColor, mfd->solidLightSkin_MaterialColor.r, mfd->solidLightSkin_MaterialColor.g, mfd->solidLightSkin_MaterialColor.b);
+
+        // shadows
+        glUniform1i(this->glFS_showShadows, false);
 
         glUniform1i(this->solidLight->gl_InUse, 1);
         glUniform3f(this->solidLight->gl_Direction, this->managerObjects.SolidLight_Direction.x, this->managerObjects.SolidLight_Direction.y, this->managerObjects.SolidLight_Direction.z);

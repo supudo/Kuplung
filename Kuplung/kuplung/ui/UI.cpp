@@ -14,6 +14,37 @@
 
 UI::UI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+    this->isFrame = false;
+    this->isParsingOpen = false;
+    this->isLoadingOpen = false;
+    this->isExportingOpen = false;
+    this->showControlsGUI = false;
+    this->showControlsModels = false;
+    this->parsingPercentage = 0.0f;
+    this->showSVS = false;
+    this->showRendererUI = false;
+    this->needsFontChange = false;
+    this->showDialogStyle = false;
+    this->showDialogFile = false;
+    this->showOBJImporter = false;
+    this->showOBJExporter = false;
+    this->showSaveDialog = false;
+    this->showOpenDialog = false;
+    this->showShaderEditor = false;
+    this->showScreenshotWindow = false;
+    this->showSceneStats = false;
+    this->showOptions = false;
+    this->showAppMetrics = false;
+    this->showAboutImgui = false;
+    this->showAboutKuplung = false;
+    this->showDemoWindow = false;
+    this->showImageSave = false;
+    this->showRenderer = false;
+    this->showRecentFileDoesntExists = false;
+    this->showRecentFileImportedDoesntExists = false;
+    this->showShadertoy = false;
+    this->showShadertoyMessage = false;
+    this->showImageViewer = false;
 }
 
 UI::~UI() {

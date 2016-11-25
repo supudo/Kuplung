@@ -15,6 +15,6 @@ void STLParser::init(std::function<void(float)> doProgress) {
     this->funcProgress = doProgress;
 }
 
-std::vector<MeshModel> STLParser::parse(FBEntity file, std::vector<std::string> settings) {
+std::vector<MeshModel> STLParser::parse(FBEntity file, std::vector<std::string> const& settings) {
     return {};
 }
