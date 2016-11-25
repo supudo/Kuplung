@@ -157,6 +157,8 @@ SET(SOURCE_FILES
     kuplung/rendering/methods/RenderingDeferred.hpp
     kuplung/rendering/methods/RenderingForward.cpp
     kuplung/rendering/methods/RenderingForward.hpp
+    kuplung/rendering/methods/RenderingForwardShadowMapping.cpp
+    kuplung/rendering/methods/RenderingForwardShadowMapping.hpp
     kuplung/rendering/methods/RenderingSimple.cpp
     kuplung/rendering/methods/RenderingSimple.hpp
     kuplung/rendering/RenderingManager.cpp
