@@ -41,7 +41,8 @@ private:
     bool initShadowsShader();
     bool initShadowsBuffers();
     GLuint shaderProgramShadows, shaderShadowsVertex, shaderShadowsFragment;
-    GLuint fboDepthMap, vboDepthMap, glShadow_ModelMatrix, glShadow_LightSpaceMatrix;
+    GLuint fboDepthMap, vboDepthMap;
+    GLint glShadow_ModelMatrix, glShadow_LightSpaceMatrix;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;

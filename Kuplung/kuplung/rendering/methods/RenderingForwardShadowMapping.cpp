@@ -740,18 +740,14 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
 
         // shadows
-        if (isShadowPass) {
-            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-        }
-        else {
-            glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
-            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-            glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-            if (this->vboDepthMap > 0) {
-                glActiveTexture(GL_TEXTURE7);
-                glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
-            }
+        glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
+        glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+        glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+        glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        if (!isShadowPass && this->vboDepthMap > 0) {
+            glActiveTexture(GL_TEXTURE7);
+            glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
         }
 
         mfd->vertexSphereVisible = this->managerObjects.Setting_VertexSphere_Visible;
