@@ -4,7 +4,7 @@
 //
 // =================================================
 
-float calculateShadowValue() {
+float calculateShadowValue(vec3 fragmentPosition) {
     // perform perspective divide
     vec3 projCoords = fs_shadow_FragPosLightSpace.xyz / fs_shadow_FragPosLightSpace.w;
 
@@ -22,7 +22,7 @@ float calculateShadowValue() {
 
     vec3 lightPos = pointLights[0].position;
 
-    vec3 lightDir = normalize(lightPos - fs_shadow_FragPos);
+    vec3 lightDir = normalize(lightPos - fragmentPosition);
     float bias = max(0.05 * (1.0 - dot(normal, lightDir)), 0.005);
 
     // Check whether current frag pos is in shadow

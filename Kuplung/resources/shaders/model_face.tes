@@ -15,9 +15,7 @@ in vec3 tes_bitangent0[];
 in vec3 tes_bitangent[];
 in vec3 tes_displacementLocation[];
 in float tes_isBorder[];
-in vec3 tes_shadow_FragPos[];
 in vec3 tes_shadow_Normal[];
-in vec2 tes_shadow_TexCoords[];
 in vec4 tes_shadow_FragPosLightSpace[];
 
 out vec3 gs_vertexPosition;
@@ -31,9 +29,7 @@ out vec3 gs_bitangent;
 out vec3 gs_displacementLocation;
 out float gs_isBorder;
 out float gs_height;
-out vec3 gs_shadow_FragPos;
 out vec3 gs_shadow_Normal;
-out vec2 gs_shadow_TexCoords;
 out vec4 gs_shadow_FragPosLightSpace;
 
 struct ModelMaterial {
@@ -89,9 +85,7 @@ void main() {
     gs_bitangent = interpolate3D(tes_bitangent[0], tes_bitangent[1], tes_bitangent[2]);
     gs_displacementLocation = interpolate3D(tes_displacementLocation[0], tes_displacementLocation[1], tes_displacementLocation[2]);
     gs_isBorder = tes_isBorder[0];
-    gs_shadow_FragPos = interpolate3D(tes_shadow_FragPos[0], tes_shadow_FragPos[1], tes_shadow_FragPos[2]);
     gs_shadow_Normal = interpolate3D(tes_shadow_Normal[0], tes_shadow_Normal[1], tes_shadow_Normal[2]);
-    gs_shadow_TexCoords = interpolate2D(tes_shadow_TexCoords[0], tes_shadow_TexCoords[1], tes_shadow_TexCoords[2]);
     gs_shadow_FragPosLightSpace = interpolate4D(tes_shadow_FragPosLightSpace[0], tes_shadow_FragPosLightSpace[1], tes_shadow_FragPosLightSpace[2]);
 
     gs_height = 1.0;

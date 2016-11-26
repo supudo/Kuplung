@@ -117,9 +117,7 @@ vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height)
 // shadows
 uniform bool fs_showShadows;
 uniform sampler2D sampler_shadowMap;
-in vec3 fs_shadow_FragPos;
 in vec3 fs_shadow_Normal;
-in vec2 fs_shadow_TexCoords;
 in vec4 fs_shadow_FragPosLightSpace;
 
 // functions
@@ -133,7 +131,7 @@ vec3 calculateRefraction(vec3 normalDirection, vec4 texturedColor_Diffuse);
 float stepmix(float edge0, float edge1, float E, float x);
 mat3 cotangent_frame(vec3 normal, vec3 position, vec2 texCoords);
 vec3 ACESFilmRec2020(vec3 x);
-float calculateShadowValue();
+float calculateShadowValue(vec3 fragmentPosition);
 
 // out color
 out vec4 fragColor;

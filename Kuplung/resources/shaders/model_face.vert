@@ -8,6 +8,7 @@ layout (location = 4) in vec3 vs_bitangent;
 
 uniform mat4 vs_MVPMatrix;
 uniform mat4 vs_WorldMatrix;
+uniform mat4 fs_ModelMatrix;
 
 uniform vec3 vs_displacementLocation;
 uniform float vs_isBorder;
@@ -25,9 +26,7 @@ out float tcs_isBorder;
 
 uniform mat4 shadow_model;
 uniform mat4 shadow_lightSpaceMatrix;
-out vec3 tcs_shadow_FragPos;
 out vec3 tcs_shadow_Normal;
-out vec2 tcs_shadow_TexCoords;
 out vec4 tcs_shadow_FragPosLightSpace;
 
 void main(void) {
@@ -42,10 +41,8 @@ void main(void) {
     tcs_displacementLocation = vs_displacementLocation;
     tcs_isBorder = vs_isBorder;
 
-    tcs_shadow_FragPos = vec3(shadow_model * vec4(vs_vertexPosition, 1.0));
     tcs_shadow_Normal = transpose(inverse(mat3(shadow_model))) * vs_vertexNormal;
-    tcs_shadow_TexCoords = vs_textureCoord;
-    tcs_shadow_FragPosLightSpace = shadow_lightSpaceMatrix * vec4(tcs_shadow_FragPos, 1.0);
+    tcs_shadow_FragPosLightSpace = shadow_lightSpaceMatrix * vec4(vec3(fs_ModelMatrix * vec4(vs_vertexPosition, 1.0)), 1.0);
 
     gl_Position = vs_MVPMatrix * vec4(vs_vertexPosition, 1.0);
 }

@@ -57,12 +57,6 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
         }
     }
 
-    glDisableVertexAttribArray(this->glVS_VertexPosition);
-    glDisableVertexAttribArray(this->glFS_TextureCoord);
-    glDisableVertexAttribArray(this->glVS_VertexNormal);
-    glDisableVertexAttribArray(this->glVS_Tangent);
-    glDisableVertexAttribArray(this->glVS_Bitangent);
-
     glDeleteProgram(this->shaderProgram);
 
     glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
@@ -162,12 +156,6 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     else {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
 
-        this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-        this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-        this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-        this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
-        this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
-
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
         this->glTCS_UseTessellation = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
@@ -199,6 +187,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 
         this->gl_ModelViewSkin = this->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
         this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
+
         this->solidLight = new ModelFace_LightSource_Directional();
         this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
         this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
@@ -357,19 +346,21 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
         this->glUtils->printProgramLog(this->shaderProgramShadows);
         return false;
     }
+    else {
+        this->glShadow_ModelMatrix = this->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
+        this->glShadow_LightSpaceMatrix = this->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
+    }
 
     return result;
 }
 
 bool RenderingForwardShadowMapping::initShadowsBuffers() {
-    const GLuint SHADOW_WIDTH = 1024, SHADOW_HEIGHT = 1024;
-
     glGenFramebuffers(1, &this->fboDepthMap);
 
     glGenTextures(1, &this->vboDepthMap);
     glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, SHADOW_WIDTH, SHADOW_HEIGHT, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -396,7 +387,7 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
     glFrontFace(GL_CCW);
 
     this->renderShadows(meshModelFaces, selectedModel);
-    this->renderModels(this->shaderProgram, meshModelFaces, selectedModel);
+    this->renderModels(false, this->shaderProgram, meshModelFaces, selectedModel);
 }
 
 void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
@@ -410,16 +401,16 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         this->matrixLightSpace = lightProjection * lightView;
 
         glUseProgram(this->shaderProgramShadows);
-        glUniformMatrix4fv(glGetUniformLocation(this->shaderProgramShadows, "shadow_lightSpaceMatrix"), 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
-        this->renderModels(this->shaderProgramShadows, meshModelFaces, selectedModel);
+        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 }
 
-void RenderingForwardShadowMapping::renderModels(GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     glUseProgram(shaderProgram);
 
     int selectedModelID = -1;
@@ -529,12 +520,18 @@ void RenderingForwardShadowMapping::renderModels(GLuint shaderProgram, std::vect
         glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
 
         // shadows
-        glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-        glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
-        glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-        if (this->vboDepthMap > 0) {
-            glActiveTexture(GL_TEXTURE7);
-            glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
+        if (isShadowPass) {
+            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        }
+        else {
+            glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
+            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+            if (this->vboDepthMap > 0) {
+                glActiveTexture(GL_TEXTURE7);
+                glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
+            }
         }
 
         // lights

@@ -21,7 +21,6 @@ in float gs_isBorder[3];
 in float gs_height[3];
 in vec3 gs_shadow_FragPos[3];
 in vec3 gs_shadow_Normal[3];
-in vec2 gs_shadow_TexCoords[3];
 in vec4 gs_shadow_FragPosLightSpace[3];
 
 out vec3 fs_vertexPosition;
@@ -34,9 +33,7 @@ out vec3 fs_bitangent0;
 out vec3 fs_bitangent;
 out vec3 fs_outlineColor;
 out float fs_isBorder;
-out vec3 fs_shadow_FragPos;
 out vec3 fs_shadow_Normal;
-out vec2 fs_shadow_TexCoords;
 out vec4 fs_shadow_FragPosLightSpace;
 
 void main() {
@@ -54,9 +51,7 @@ void main() {
         fs_bitangent0 = gs_bitangent0[i];
         fs_bitangent = gs_bitangent[i];
         fs_isBorder = gs_isBorder[i];
-        fs_shadow_FragPos = gs_shadow_FragPos[i];
         fs_shadow_Normal = gs_shadow_Normal[i];
-        fs_shadow_TexCoords = gs_shadow_TexCoords[i];
         fs_shadow_FragPosLightSpace = gs_shadow_FragPosLightSpace[i];
         EmitVertex();
     }
@@ -81,9 +76,7 @@ void main() {
             fs_bitangent0 = gs_bitangent0[i];
             fs_bitangent = gs_bitangent[i];
             fs_isBorder = gs_isBorder[i];
-            fs_shadow_FragPos = gs_shadow_FragPos[i];
             fs_shadow_Normal = gs_shadow_Normal[i];
-            fs_shadow_TexCoords = gs_shadow_TexCoords[i];
             fs_shadow_FragPosLightSpace = gs_shadow_FragPosLightSpace[i];
             EmitVertex();
         }

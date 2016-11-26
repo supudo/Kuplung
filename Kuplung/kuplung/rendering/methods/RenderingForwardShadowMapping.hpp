@@ -30,13 +30,13 @@ private:
     ObjectsManager &managerObjects;
 
     void renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
-    void renderModels(GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderModels(bool isShadowPass, GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
 
     bool initShadows();
     bool initShadowsShader();
     bool initShadowsBuffers();
     GLuint shaderProgramShadows, shaderShadowsVertex, shaderShadowsFragment;
-    GLuint fboDepthMap, vboDepthMap;
+    GLuint fboDepthMap, vboDepthMap, glShadow_ModelMatrix, glShadow_LightSpaceMatrix;
     glm::mat4 matrixLightSpace;
 
     glm::mat4 matrixProjection, matrixCamera;
@@ -53,7 +53,6 @@ private:
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
-    GLint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
     GLint glVS_shadowModelMatrix, glVS_LightSpaceMatrix, glFS_showShadows, glFS_SamplerShadowMap;
 
     // general

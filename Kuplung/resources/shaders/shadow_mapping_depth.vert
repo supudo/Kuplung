@@ -1,6 +1,7 @@
 #version 410 core
 
-in vec3 vs_vertexPosition;
+layout (location = 0) in vec3 vs_vertexPosition;
+
 uniform mat4 shadow_lightSpaceMatrix;
 uniform mat4 shadow_model;
 

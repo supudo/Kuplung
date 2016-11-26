@@ -104,8 +104,8 @@ void main(void) {
                 processedColorRefraction = processedColorRefraction * processedColor_Diffuse.rgb;
 
             // TODO: fix?
-            //if (material.has_texture_specular)
-            //    processedColorRefraction *= processedColor_Specular.rgb;
+//            if (material.has_texture_specular)
+//                processedColorRefraction *= processedColor_Specular.rgb;
 
             // final color
             if (fs_celShading) // cel-shading
@@ -119,9 +119,9 @@ void main(void) {
             if (fs_ACESFilmRec2020)
                 fragColor.rgb = ACESFilmRec2020(fragColor.rgb);
 
-//            // shadows
+            // shadows
             if (fs_showShadows)
-                fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue()) * (processedColor_Diffuse + processedColor_Specular)) * fragColor;
+                fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular)) * fragColor;
 
             fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / fs_gammaCoeficient));
         }
