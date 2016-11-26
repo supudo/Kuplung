@@ -53,8 +53,8 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
 
         const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Deferred"};
         if (ImGui::Combo("Renderer", &this->optionsRendererType, rendererItems, IM_ARRAYSIZE(rendererItems))) {
-            Settings::Instance()->saveSettings();
             Settings::Instance()->RendererType = static_cast<InAppRendererType>(this->optionsRendererType);
+            Settings::Instance()->saveSettings();
         }
 
         const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
