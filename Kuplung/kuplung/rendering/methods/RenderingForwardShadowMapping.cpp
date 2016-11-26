@@ -392,7 +392,6 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
 
 void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
-//        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
         glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->positionX->point, this->managerObjects.lightSources[0]->positionY->point, this->managerObjects.lightSources[0]->positionZ->point);
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
                                                this->managerObjects.Setting_PlaneClose,
@@ -518,21 +517,6 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
         glUniform1f(this->solidLight->gl_StrengthAmbient, this->managerObjects.SolidLight_Ambient_Strength);
         glUniform1f(this->solidLight->gl_StrengthDiffuse, this->managerObjects.SolidLight_Diffuse_Strength);
         glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
-
-        // shadows
-        if (isShadowPass) {
-            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-        }
-        else {
-            glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
-            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-            glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-            if (this->vboDepthMap > 0) {
-                glActiveTexture(GL_TEXTURE7);
-                glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
-            }
-        }
 
         // lights
         int lightsCount_Directional = 0;
@@ -733,6 +717,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
         // effects - tone mapping
         glUniform1i(this->glEffect_ToneMapping_ACESFilmRec2020, mfd->Effect_ToneMapping_ACESFilmRec2020);
 
+        // border
         glUniform1f(this->glVS_IsBorder, 0.0);
 
         glm::mat4 mtxModel;
@@ -753,6 +738,21 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
         glm::mat4 mvpMatrixDraw = this->matrixProjection * this->matrixCamera * mtxModel;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrixDraw));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
+
+        // shadows
+        if (isShadowPass) {
+            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        }
+        else {
+            glUniform1i(this->glFS_showShadows, mfd->Setting_ShowShadows);
+            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+            if (this->vboDepthMap > 0) {
+                glActiveTexture(GL_TEXTURE7);
+                glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
+            }
+        }
 
         mfd->vertexSphereVisible = this->managerObjects.Setting_VertexSphere_Visible;
         mfd->vertexSphereRadius = this->managerObjects.Setting_VertexSphere_Radius;
@@ -829,7 +829,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
                     mfd->meshModel.vertices[i] = v;
             }
         }
-        //TODO: not good for drawing... reuploading the buffers again .... should find a better way - immediate draw or GL_STREAM_DRAW?
+        //TODO: not good for drawing... reuploading the buffers again .... should find a better way - immediate draw, GL_STREAM_DRAW?
         mfd->initBuffers();
         mfd->Setting_EditMode = true;
     }
