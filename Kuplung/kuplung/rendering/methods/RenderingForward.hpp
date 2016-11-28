@@ -27,11 +27,6 @@ private:
     bool initShaderProgram();
     void renderModels(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
 
-    void renderDepthBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
-    void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
-    void createDepthFBO();
-    GLuint renderFBO, renderRBO, renderTextureColorBuffer;
-
     std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
@@ -57,6 +52,9 @@ private:
     GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
     GLint glFS_GammaCoeficient, glFS_showShadows;
+
+    // depth color
+    GLint glFS_planeClose, glFS_planeFar, glFS_showDepthColor;
 
     // material
     GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;

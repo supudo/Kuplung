@@ -69,3 +69,14 @@ float stepmix(float edge0, float edge1, float E, float x) {
     float T = clamp(0.5 * (x - edge0 + E) / E, 0.0, 1.0);
     return mix(edge0, edge1, T);
 }
+
+// =================================================
+//
+// Depth Testing
+//
+// =================================================
+
+float linearizeDepth(float depth) {
+    float z = depth * 2.0 - fs_planeClose;
+    return (2.0 * fs_planeClose * fs_planeFar) / (fs_planeFar + fs_planeClose - z * (fs_planeFar - fs_planeClose));
+}

@@ -128,4 +128,9 @@ void main(void) {
         else
             fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);
     }
+
+    if (fs_showDepthColor) {
+        float depth = linearizeDepth(gl_FragCoord.z) / fs_planeFar;
+        fragColor = vec4(vec3(depth), 1.0f);
+    }
 }

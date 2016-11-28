@@ -326,7 +326,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Indent();
                 ImGui::Text("Rendering View Options");
                 if (ImGui::Button("Render - Depth", ImVec2(-1, 0)))
-                    this->managerObjects.Setting_Rendering_Depth = true;
+                    this->managerObjects.Setting_Rendering_Depth = !this->managerObjects.Setting_Rendering_Depth;
                 ImGui::Unindent();
             }
 

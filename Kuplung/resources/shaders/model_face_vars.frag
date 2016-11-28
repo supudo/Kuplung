@@ -12,6 +12,9 @@ uniform bool fs_userParallaxMapping;
 uniform int fs_modelViewSkin;
 uniform float fs_gammaCoeficient;
 uniform bool fs_ACESFilmRec2020;
+uniform float fs_planeClose;
+uniform float fs_planeFar;
+uniform bool fs_showDepthColor;
 
 in vec3 fs_vertexPosition;
 in vec2 fs_textureCoord;
@@ -132,6 +135,7 @@ float stepmix(float edge0, float edge1, float E, float x);
 mat3 cotangent_frame(vec3 normal, vec3 position, vec2 texCoords);
 vec3 ACESFilmRec2020(vec3 x);
 float calculateShadowValue(vec3 fragmentPosition);
+float linearizeDepth(float depth);
 
 // out color
 out vec4 fragColor;
