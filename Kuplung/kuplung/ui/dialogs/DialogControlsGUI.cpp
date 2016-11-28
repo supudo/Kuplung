@@ -322,6 +322,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
+            if (ImGui::CollapsingHeader("Render Buffer", ImGuiTreeNodeFlags_DefaultOpen)) {
+                ImGui::Indent();
+                ImGui::Text("Rendering View Options");
+                if (ImGui::Button("Render - Depth", ImVec2(-1, 0)))
+                    this->managerObjects.Setting_Rendering_Depth = true;
+                ImGui::Unindent();
+            }
+
             if (Settings::Instance()->RendererType == InAppRendererType_Deferred) {
                 if (ImGui::CollapsingHeader("Deferred Rendering", ImGuiTreeNodeFlags_DefaultOpen)) {
                     ImGui::Indent();
