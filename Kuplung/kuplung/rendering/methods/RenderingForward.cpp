@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
+#include "kuplung/utilities/stb/stb_image_write.h"
 
 RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
@@ -317,6 +318,80 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
     this->uiAmbientLight = this->managerObjects.Setting_UIAmbientLight;
     this->lightingPass_DrawMode = this->managerObjects.Setting_LightingPass_DrawMode;
 
+    if (this->managerObjects.Setting_Rendering_Depth)
+        this->renderDepthBuffer(meshModelFaces, selectedModel);
+    else
+        this->renderModels(meshModelFaces, selectedModel);
+}
+
+void RenderingForward::renderDepthBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+    this->createDepthFBO();
+
+    int width = Settings::Instance()->SDL_Window_Width;
+    int height = Settings::Instance()->SDL_Window_Height;
+
+    glBindFramebuffer(GL_FRAMEBUFFER, this->renderFBO);
+//    for (size_t i=0; i<meshModelFaces.size(); i++) {
+//        ModelFaceData *mfd = meshModelFaces[i];
+//        mfd->renderModel(true);
+//    }
+    this->renderModels(meshModelFaces, selectedModel);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+//    glActiveTexture(GL_TEXTURE0);
+//    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
+//    glGenerateMipmap(GL_TEXTURE_2D);
+//    glBindTexture(GL_TEXTURE_2D, 0);
+
+    glBindFramebuffer(GL_READ_FRAMEBUFFER, this->renderFBO);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glReadBuffer(GL_DEPTH_ATTACHMENT);
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void RenderingForward::createDepthFBO() {
+    glGenFramebuffers(1, &this->renderFBO);
+    glBindFramebuffer(GL_FRAMEBUFFER, this->renderFBO);
+    this->generateAttachmentTexture(false, false);
+    glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->renderTextureColorBuffer, 0);
+
+    int screenWidth = Settings::Instance()->SDL_Window_Width;
+    int screenHeight = Settings::Instance()->SDL_Window_Height;
+
+    glGenRenderbuffers(1, &this->renderRBO);
+    glBindRenderbuffer(GL_RENDERBUFFER, this->renderRBO);
+    glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH24_STENCIL8, screenWidth, screenHeight);
+    glBindRenderbuffer(GL_RENDERBUFFER, 0);
+    glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT, GL_RENDERBUFFER, this->renderRBO);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+        Settings::Instance()->funcDoLog("[RenderingForward - renderDepthBuffer] Framebuffer is not complete!");
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void RenderingForward::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
+    GLenum attachment_type;
+    if (!depth && !stencil)
+        attachment_type = GL_RGB;
+    else if (depth && !stencil)
+        attachment_type = GL_DEPTH_COMPONENT;
+    else if (!depth && stencil)
+        attachment_type = GL_STENCIL_INDEX;
+
+    int screenWidth = Settings::Instance()->SDL_Window_Width;
+    int screenHeight = Settings::Instance()->SDL_Window_Height;
+
+    glGenTextures(1, &this->renderTextureColorBuffer);
+    glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
+    if (!depth && !stencil)
+        glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
+    else
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, screenWidth, screenHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
 

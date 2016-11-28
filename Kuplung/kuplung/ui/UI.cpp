@@ -316,6 +316,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     this->managerObjects.viewModelSkin = ViewModelSkin_Wireframe;
                 if (ImGui::MenuItem("Rendered", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Rendered))
                     this->managerObjects.viewModelSkin = ViewModelSkin_Rendered;
+                ImGui::Separator();
+                ImGui::MenuItem("Render - Depth", NULL, &this->managerObjects.Setting_Rendering_Depth);
                 ImGui::EndMenu();
             }
             ImGui::Separator();

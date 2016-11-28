@@ -106,6 +106,8 @@ public:
 
     std::map<std::string, MeshModel> systemModels;
 
+    bool Setting_Rendering_Depth;
+
 private:
     std::function<void(float)> funcProgress;
     std::function<void()> funcAddTerrain;

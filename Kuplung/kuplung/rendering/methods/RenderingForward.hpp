@@ -25,6 +25,12 @@ public:
 
 private:
     bool initShaderProgram();
+    void renderModels(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+
+    void renderDepthBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
+    void createDepthFBO();
+    GLuint renderFBO, renderRBO, renderTextureColorBuffer;
 
     std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;

@@ -200,6 +200,7 @@ void ObjectsManager::resetSettings() {
     this->VertexEditorModeID = -1;
     this->VertexEditorMode = glm::vec3(0.0);
     this->Setting_GeometryEditMode = GeometryEditMode_Vertex;
+    this->Setting_Rendering_Depth = false;
 
     Settings::Instance()->mRayDraw = false;
     Settings::Instance()->mRayAnimate = false;
@@ -223,7 +224,7 @@ void ObjectsManager::resetPropertiesSystem() {
     if (this->axisSystem)
         this->axisSystem->initProperties();
     for (size_t i=0; i<this->lightSources.size(); i++) {
-        this->lightSources[i]->initProperties();
+        this->lightSources[i]->initProperties(this->lightSources[i]->type);
     }
 }
 

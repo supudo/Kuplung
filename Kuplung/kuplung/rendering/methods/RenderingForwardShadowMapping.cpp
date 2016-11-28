@@ -12,6 +12,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
+#include "kuplung/utilities/stb/stb_image_write.h"
 
 RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
@@ -406,6 +407,37 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         glClear(GL_DEPTH_BUFFER_BIT);
         this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
+        glGenerateMipmap(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        // save framebuffer to file
+        int width = Settings::Instance()->SDL_Window_Width;
+        int height = Settings::Instance()->SDL_Window_Height;
+
+        unsigned char* pixels = new unsigned char[3 * width * height];
+        glBindFramebuffer(GL_READ_FRAMEBUFFER, this->fboDepthMap);
+        glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+        glReadBuffer(GL_DEPTH_ATTACHMENT);
+        glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        unsigned char* line_tmp = new unsigned char[3 * width];
+        unsigned char* line_a = pixels;
+        unsigned char* line_b = pixels + (3 * width * (height - 1));
+        while (line_a < line_b) {
+            memcpy(line_tmp, line_a, width * 3);
+            memcpy(line_a, line_b, width * 3);
+            memcpy(line_b, line_tmp, width * 3);
+            line_a += width * 3;
+            line_b -= width * 3;
+        }
+
+        std::string fileDepth("/Users/supudo/Software/C++/Kuplung/depth_fbo.bmp");
+        stbi_write_bmp(fileDepth.c_str(), width, height, 3, pixels);
     }
 }
 

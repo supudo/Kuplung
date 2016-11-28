@@ -604,7 +604,16 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Checkbox("Lamp", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampObject);
                     ImGui::Checkbox("Direction", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampDirection);
                     ImGui::Checkbox("Wire", &this->managerObjects.lightSources[this->selectedObjectLight]->showInWire);
-                    if (ImGui::Button("Delete Light Source")) {
+                    if (ImGui::Button("View From Here", ImVec2(-1, 0))) {
+                        this->managerObjects.camera->positionX->point = -1.0f * this->managerObjects.lightSources[this->selectedObjectLight]->positionX->point;
+                        this->managerObjects.camera->positionY->point = -1.0f * this->managerObjects.lightSources[this->selectedObjectLight]->positionY->point;
+                        this->managerObjects.camera->positionZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->positionZ->point;
+                        this->managerObjects.camera->rotateX->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateX->point + 90.0f;
+                        this->managerObjects.camera->rotateY->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateY->point;
+                        this->managerObjects.camera->rotateZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateZ->point;
+                    }
+                    ImGui::Separator();
+                    if (ImGui::Button("Delete Light Source", ImVec2(-1, 0))) {
                         this->selectedObject = 0;
                         this->managerObjects.lightSources.erase(this->managerObjects.lightSources.begin() + this->selectedObjectLight);
                         this->selectedObjectLight = -1;
