@@ -395,7 +395,10 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         }
 
         // depth color
-        glUniform1f(this->glFS_planeClose, this->managerObjects.Setting_PlaneClose);
+        float pc = 1.0f;
+        if (this->managerObjects.Setting_PlaneClose >= 1.0f)
+            pc = this->managerObjects.Setting_PlaneClose;
+        glUniform1f(this->glFS_planeClose, pc);
         glUniform1f(this->glFS_planeFar, this->managerObjects.Setting_PlaneFar / 100.0f);
         glUniform1i(this->glFS_showDepthColor, this->managerObjects.Setting_Rendering_Depth);
 
