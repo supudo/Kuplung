@@ -110,9 +110,14 @@ void BoundingBox::initBuffers(MeshModel meshModel) {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
-    this->min_x = this->max_x = this->meshModel.vertices[0].x;
-    this->min_y = this->max_y = this->meshModel.vertices[0].y;
-    this->min_z = this->max_z = this->meshModel.vertices[0].z;
+    this->min_x = this->max_x = 0.0f;
+    this->min_y = this->max_y = 0.0f;
+    this->min_z = this->max_z = 0.0f;
+    if (this->meshModel.vertices.size() > 0) {
+        this->min_x = this->max_x = this->meshModel.vertices[0].x;
+        this->min_y = this->max_y = this->meshModel.vertices[0].y;
+        this->min_z = this->max_z = this->meshModel.vertices[0].z;
+    }
     for (unsigned int i = 0; i < this->meshModel.vertices.size(); i++) {
         if (this->meshModel.vertices[i].x < this->min_x) this->min_x = this->meshModel.vertices[i].x;
         if (this->meshModel.vertices[i].x > this->max_x) this->max_x = this->meshModel.vertices[i].x;
