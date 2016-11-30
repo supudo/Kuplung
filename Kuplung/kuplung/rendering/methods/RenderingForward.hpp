@@ -51,7 +51,7 @@ private:
     GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
     GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
-    GLint glFS_GammaCoeficient, glFS_showShadows;
+    GLint glFS_GammaCoeficient, glFS_showShadows, glFS_ShadowPass;
 
     // depth color
     GLint glFS_planeClose, glFS_planeFar, glFS_showDepthColor;

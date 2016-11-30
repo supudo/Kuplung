@@ -164,6 +164,7 @@ bool RenderingForward::initShaderProgram() {
         this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         this->glFS_showShadows = this->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
+        this->glFS_ShadowPass = this->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
 
         this->glFS_planeClose = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeClose");
         this->glFS_planeFar = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeFar");
@@ -401,6 +402,7 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         glUniform1f(this->glFS_planeClose, pc);
         glUniform1f(this->glFS_planeFar, this->managerObjects.Setting_PlaneFar / 100.0f);
         glUniform1i(this->glFS_showDepthColor, this->managerObjects.Setting_Rendering_Depth);
+        glUniform1i(this->glFS_ShadowPass, false);
 
         // tessellation
         glUniform1i(this->glTCS_UseCullFace, mfd->Setting_UseCullFace);
