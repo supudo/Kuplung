@@ -105,9 +105,6 @@ void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, int sel
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
     this->uiAmbientLight = this->managerObjects.Setting_UIAmbientLight;
 
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
     glUseProgram(this->shaderProgram);
 
     for (size_t i=0; i<meshModelFaces.size(); i++) {

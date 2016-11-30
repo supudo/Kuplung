@@ -280,25 +280,8 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
-//        glm::vec3 vLightDirection = glm::vec3(this->directionX->point, this->directionY->point, this->directionZ->point);
-
-//        // lamp
-//        this->meshLight->render(this->matrixProjection, this->matrixCamera, this->matrixModel);
-
-//        // direction line
-//        glm::mat4 mtxModelDot = this->matrixModel;
-//        mtxModelDot = glm::rotate(mtxModelDot, glm::radians(90.0f), glm::vec3(1, 0, 0));
-//        this->meshLightRay->initBuffers(glm::vec3(0, 0, 0), vLightDirection, true);
-//        this->meshLightRay->render(this->matrixProjection, this->matrixCamera, mtxModelDot);
-
-        // texture
         if (this->vboTextureDiffuse > 0)
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-        //glEnable(GL_CULL_FACE);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
@@ -308,7 +291,6 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
             glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);
         }
 
-        // draw
         glBindVertexArray(this->glVAO);
         if (this->showInWire)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -317,7 +299,6 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         glBindVertexArray(0);
 
-        // clear texture
         if (this->vboTextureDiffuse > 0)
             glBindTexture(GL_TEXTURE_2D, 0);
 

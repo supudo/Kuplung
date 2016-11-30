@@ -316,8 +316,6 @@ void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool 
             this->initBuffers(this->gridSize, 1.0);
 
         if (!this->actAsMirror) {
-            glFrontFace(GL_CCW);
-            glCullFace(GL_BACK);
             glLineWidth((GLfloat)2.5f);
 
             glEnable(GL_DEPTH_TEST);

@@ -413,14 +413,10 @@ void ModelFaceForward::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera
     if (this->initBuffersAgain)
         this->initBuffers();
 
-    if (this->grid->actAsMirror) {
-        glCullFace(GL_FRONT);
+    if (this->grid->actAsMirror)
         this->renderReflectFBO();
-    }
 
     if (!this->grid->actAsMirror) {
-        glCullFace(GL_BACK);
-        glFrontFace(GL_CCW);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDefault);
         glBindVertexArray(this->glVAO);
     }
@@ -887,7 +883,6 @@ void ModelFaceForward::renderReflectFBO() {
 
     glBindVertexArray(this->glVAO);
     glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);
-    glCullFace(GL_FRONT);
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
 
     this->matrixModel = mtxModel;

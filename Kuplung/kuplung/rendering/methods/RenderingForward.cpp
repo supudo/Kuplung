@@ -327,9 +327,6 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, int se
 }
 
 void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
     glUseProgram(this->shaderProgram);
 
     int selectedModelID = -1;

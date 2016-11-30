@@ -137,8 +137,6 @@ void RayLine::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         // draw
         glBindVertexArray(this->glVAO);
 
-        glFrontFace(GL_CCW);
-        glCullFace(GL_BACK);
         glLineWidth((GLfloat)2.5f);
 
         glEnable(GL_DEPTH_TEST);

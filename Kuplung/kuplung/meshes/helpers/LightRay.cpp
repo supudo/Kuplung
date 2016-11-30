@@ -145,15 +145,11 @@ void LightRay::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::m
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
         glLineWidth((GLfloat)5.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        // draw
         glBindVertexArray(this->glVAO);
         if (this->axisSize > 2)
             glDrawElements(GL_TRIANGLES, this->axisSize, GL_UNSIGNED_INT, nullptr);

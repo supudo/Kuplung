@@ -159,9 +159,6 @@ void MiniAxis::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
 
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
         glLineWidth((GLfloat)5.5f);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;

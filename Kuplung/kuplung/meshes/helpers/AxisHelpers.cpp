@@ -109,10 +109,6 @@ void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3
         this->matrixModel = glm::translate(this->matrixModel, position);
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
 
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);
 

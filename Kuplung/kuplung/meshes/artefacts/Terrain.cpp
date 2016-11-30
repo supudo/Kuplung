@@ -181,11 +181,6 @@ void Terrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::ma
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        // drawing options
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
-        //glEnable(GL_CULL_FACE);
-
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 

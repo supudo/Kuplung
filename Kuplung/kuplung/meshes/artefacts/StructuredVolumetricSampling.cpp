@@ -148,8 +148,6 @@ void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds)
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        glCullFace(GL_FRONT);
-        glFrontFace(GL_CCW);
         glEnable(GL_TEXTURE_2D);
 
         glActiveTexture(GL_TEXTURE0);

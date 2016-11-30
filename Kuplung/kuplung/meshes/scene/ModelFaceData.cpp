@@ -145,9 +145,6 @@ void ModelFaceData::initBuffers() {
 }
 
 void ModelFaceData::renderModel(bool useTessellation) {
-    glCullFace(GL_BACK);
-    glFrontFace(GL_CCW);
-
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

@@ -300,13 +300,13 @@ void Kuplung::onEvent(SDL_Event *ev) {
         // move camera
         if (this->managerControls->keyPressed_LSHIFT && this->managerControls->mouseButton_LEFT) {
             if (this->managerControls->mouseGoLeft)
-                this->managerObjects->camera->positionX->point -= 0.1;
-            else if (this->managerControls->mouseGoRight)
                 this->managerObjects->camera->positionX->point += 0.1;
+            else if (this->managerControls->mouseGoRight)
+                this->managerObjects->camera->positionX->point -= 0.1;
             else if (this->managerControls->mouseGoUp)
-                this->managerObjects->camera->positionY->point += 0.1;
-            else if (this->managerControls->mouseGoDown)
                 this->managerObjects->camera->positionY->point -= 0.1;
+            else if (this->managerControls->mouseGoDown)
+                this->managerObjects->camera->positionY->point += 0.1;
         }
 
         // picking
