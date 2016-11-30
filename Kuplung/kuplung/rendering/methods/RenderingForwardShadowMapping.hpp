@@ -30,7 +30,7 @@ private:
     ObjectsManager &managerObjects;
 
     void renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
-    void renderModels(bool isShadowPass, GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
 
     glm::mat4 matrixProjection, matrixCamera;
     glm::vec3 vecCameraPosition, uiAmbientLight;
@@ -42,7 +42,7 @@ private:
     bool initShadowsBuffers();
     GLuint shaderProgramShadows, shaderShadowsVertex, shaderShadowsFragment;
     GLuint fboDepthMap, vboDepthMap;
-    GLint glShadow_ModelMatrix, glShadow_LightSpaceMatrix;
+    GLint glShadow_ModelMatrix, glShadow_LightSpaceMatrix, glFS_ShadowPass;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
@@ -62,6 +62,9 @@ private:
     GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
     GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
     GLint glFS_GammaCoeficient;
+
+    // depth color
+    GLint glFS_planeClose, glFS_planeFar, glFS_showDepthColor;
 
     // material
     GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;

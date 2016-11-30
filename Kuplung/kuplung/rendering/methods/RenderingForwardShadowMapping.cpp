@@ -170,6 +170,11 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
         this->glFS_UIAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
         this->glFS_GammaCoeficient = this->glUtils->glGetUniform(this->shaderProgram, "fs_gammaCoeficient");
 
+        this->glFS_planeClose = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeClose");
+        this->glFS_planeFar = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeFar");
+        this->glFS_showDepthColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_showDepthColor");
+        this->glFS_ShadowPass = this->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
+
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
         this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
@@ -402,13 +407,18 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
-        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
+//        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
+        for (size_t i=0; i<meshModelFaces.size(); i++) {
+            ModelFaceData *mfd = meshModelFaces[i];
+            mfd->renderModel(true);
+        }
+        glUseProgram(0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
 }
 
-void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shaderProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
-    glUseProgram(shaderProgram);
+void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+    glUseProgram(sProgram);
 
     int selectedModelID = -1;
     for (size_t i=0; i<meshModelFaces.size(); i++) {
@@ -442,6 +452,8 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
         mfd->setOptionsSelected(int(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
+        if (isShadowPass)
+            mvpMatrix = this->matrixLightSpace;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
@@ -472,6 +484,17 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint shade
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glUniform1f(this->glFS_AlphaBlending, 1.0);
         }
+
+        // shadow pass
+        glUniform1i(this->glFS_ShadowPass, isShadowPass);
+
+        // depth color
+        float pc = 1.0f;
+        if (this->managerObjects.Setting_PlaneClose >= 1.0f)
+            pc = this->managerObjects.Setting_PlaneClose;
+        glUniform1f(this->glFS_planeClose, pc);
+        glUniform1f(this->glFS_planeFar, this->managerObjects.Setting_PlaneFar / 100.0f);
+        glUniform1i(this->glFS_showDepthColor, this->managerObjects.Setting_Rendering_Depth);
 
         // tessellation
         glUniform1i(this->glTCS_UseCullFace, mfd->Setting_UseCullFace);

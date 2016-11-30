@@ -156,7 +156,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_OutlineThickness = 0.0f;
     this->Setting_RatioWidth = 4.0f;
     this->Setting_RatioHeight = 3.0f;
-    this->Setting_PlaneClose = 0.1f;
+    this->Setting_PlaneClose = 1.0f;
     this->Setting_PlaneFar = 1000.0f;
     this->Setting_GridSize = 30;
     this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
