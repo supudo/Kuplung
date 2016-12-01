@@ -106,7 +106,7 @@ public:
 
     std::map<std::string, MeshModel> systemModels;
 
-    bool Setting_Rendering_Depth;
+    bool Setting_Rendering_Depth, Setting_DebugShadowTexture;
 
 private:
     std::function<void(float)> funcProgress;

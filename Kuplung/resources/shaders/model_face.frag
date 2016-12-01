@@ -5,14 +5,14 @@
 // =================================================
 
 void main(void) {
-    if (fs_shadowPass) {
-        vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
-        vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
-        vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
-        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
-        fragColor = (1.0 - calculateShadowValue(fragmentPosition)) * processedColor_Diffuse;
-    }
-    else {
+//    if (fs_shadowPass) {
+//        vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
+//        vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
+//        vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
+//        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
+//        fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular));
+//    }
+//    else {
         if (fs_isBorder > 0.0)
             fragColor = vec4(fs_outlineColor, 1.0);
         else {
@@ -39,7 +39,6 @@ void main(void) {
                 vec3 solidLightColor = calculateLightSolid(normalDirection, viewDirection, processedColor_Ambient, processedColor_Diffuse, processedColor_Specular);
                 solidLightColor += fs_UIAmbient;
                 fragColor = vec4(solidLightColor, fs_alpha);
-                vec4 vAmbient = vec4(0.9, 0.9, 0.9, 1.0);
             }
             else if (fs_modelViewSkin == 2) { // texture
                 vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, textureCoords) : vec4(solidSkin_materialColor, 1.0));
@@ -133,7 +132,8 @@ void main(void) {
 
                 fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / fs_gammaCoeficient));
 
-    //            fragColor = texture(sampler_shadowMap, textureCoords);
+                if (fs_debugShadowTexture)
+                    fragColor = texture(sampler_shadowMap, textureCoords);
             }
             else
                 fragColor = vec4(0.7, 0.7, 0.7, fs_alpha);
@@ -143,5 +143,5 @@ void main(void) {
             float depth = linearizeDepth(gl_FragCoord.z) / fs_planeFar;
             fragColor = vec4(vec3(depth), 1.0f);
         }
-    }
+//    }
 }

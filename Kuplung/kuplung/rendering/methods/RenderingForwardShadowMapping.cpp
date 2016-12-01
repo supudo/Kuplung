@@ -174,6 +174,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
         this->glFS_planeFar = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeFar");
         this->glFS_showDepthColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_showDepthColor");
         this->glFS_ShadowPass = this->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
+        this->glFS_DebugShadowTexture = this->glUtils->glGetUniform(this->shaderProgram, "fs_debugShadowTexture");
 
         this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
@@ -366,7 +367,10 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     glGenTextures(1, &this->vboDepthMap);
     glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    int smapWidth = 1024;//Settings::Instance()->SDL_Window_Width;
+    int smapHeight = 1024;//Settings::Instance()->SDL_Window_Height;
+
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, smapWidth, smapHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -379,6 +383,10 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     glDrawBuffer(GL_NONE);
     glReadBuffer(GL_NONE);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        Settings::Instance()->funcDoLog("[RenderingForwardShadowMapping] Can't create shadow framebuffer!");
+        return false;
+    }
 
     return true;
 }
@@ -399,7 +407,7 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
                                                this->managerObjects.Setting_PlaneClose,
                                                this->managerObjects.Setting_PlaneFar);
-        glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+        glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         this->matrixLightSpace = lightProjection * lightView;
 
         glUseProgram(this->shaderProgramShadows);
@@ -407,11 +415,28 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
-//        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
-        for (size_t i=0; i<meshModelFaces.size(); i++) {
-            ModelFaceData *mfd = meshModelFaces[i];
-            mfd->renderModel(true);
-        }
+        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
+//        for (size_t i=0; i<meshModelFaces.size(); i++) {
+//            ModelFaceData *mfd = meshModelFaces[i];
+
+//            glm::mat4 matrixModel = glm::mat4(1.0);
+//            matrixModel *= this->managerObjects.grid->matrixModel;
+//            // scale
+//            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+//            // translate
+//            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+//            // rotate
+//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
+//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+
+//            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+//            glUniform1i(this->glFS_ShadowPass, true);
+
+//            mfd->renderModel(true);
+//        }
         glUseProgram(0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
@@ -456,6 +481,8 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
             mvpMatrix = this->matrixLightSpace;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
+        if (isShadowPass)
+            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         glm::mat4 matrixModelView = this->matrixCamera * matrixModel;
@@ -495,6 +522,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         glUniform1f(this->glFS_planeClose, pc);
         glUniform1f(this->glFS_planeFar, this->managerObjects.Setting_PlaneFar / 100.0f);
         glUniform1i(this->glFS_showDepthColor, this->managerObjects.Setting_Rendering_Depth);
+        glUniform1i(this->glFS_DebugShadowTexture, this->managerObjects.Setting_DebugShadowTexture);
 
         // tessellation
         glUniform1i(this->glTCS_UseCullFace, mfd->Setting_UseCullFace);
@@ -767,6 +795,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
         glUniformMatrix4fv(this->glVS_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
         if (!isShadowPass && this->vboDepthMap > 0) {
+            glUniform1i(this->glFS_SamplerShadowMap, 7);
             glActiveTexture(GL_TEXTURE7);
             glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
         }

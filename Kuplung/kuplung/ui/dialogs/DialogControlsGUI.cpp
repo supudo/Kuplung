@@ -325,8 +325,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             if (ImGui::CollapsingHeader("Render Buffer", ImGuiTreeNodeFlags_DefaultOpen)) {
                 ImGui::Indent();
                 ImGui::Text("Rendering View Options");
-                if (ImGui::Button("Render - Depth", ImVec2(-1, 0)))
+                if (ImGui::Button("Depth Colors", ImVec2(-1, 0)))
                     this->managerObjects.Setting_Rendering_Depth = !this->managerObjects.Setting_Rendering_Depth;
+                if (ImGui::Button("Shadow Texture", ImVec2(-1, 0)))
+                    this->managerObjects.Setting_DebugShadowTexture = !this->managerObjects.Setting_DebugShadowTexture;
                 ImGui::Unindent();
             }
 

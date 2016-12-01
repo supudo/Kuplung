@@ -120,6 +120,7 @@ vec2 diffuse_dxy = vec2(1.0 / max(diffuse_texture_width, diffuse_texture_height)
 // shadows
 uniform bool fs_showShadows;
 uniform bool fs_shadowPass;
+uniform bool fs_debugShadowTexture;
 uniform sampler2D sampler_shadowMap;
 in vec3 fs_shadow_Normal;
 in vec4 fs_shadow_FragPosLightSpace;

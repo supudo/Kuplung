@@ -201,6 +201,7 @@ void ObjectsManager::resetSettings() {
     this->VertexEditorMode = glm::vec3(0.0);
     this->Setting_GeometryEditMode = GeometryEditMode_Vertex;
     this->Setting_Rendering_Depth = false;
+    this->Setting_DebugShadowTexture = false;
 
     Settings::Instance()->mRayDraw = false;
     Settings::Instance()->mRayAnimate = false;
