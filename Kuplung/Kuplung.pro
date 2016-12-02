@@ -412,6 +412,8 @@ DISTFILES += \
     resources/shaders/model_face.tes \
     resources/shaders/shadow_mapping_depth.vert \
     resources/shaders/shadow_mapping_depth.frag \
+    resources/shaders/shadows_debug_quad.vert \
+    resources/shaders/shadows_debug_quad_depth.frag \
     resources/shaders/reflection.vert \
     resources/shaders/reflection.frag \
     resources/shaders/light.vert \

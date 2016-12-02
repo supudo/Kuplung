@@ -36,6 +36,9 @@ private:
     int heightmapWidth, heightmapHeight;
     GLuint vboTexHeightmap;
     bool newHeightmap = false, generateNewTerrain = false, generateNewSpaceship = false;
+    bool lockCameraWithLight;
+    void lockCameraOnce();
+    void lockCamera();
 };
 
 #endif /* DialogControlsGUI_hpp */

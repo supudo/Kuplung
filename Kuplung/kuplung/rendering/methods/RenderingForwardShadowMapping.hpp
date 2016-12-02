@@ -31,6 +31,7 @@ private:
 
     void renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
     void renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderDepth();
 
     glm::mat4 matrixProjection, matrixCamera;
     glm::vec3 vecCameraPosition, uiAmbientLight;
@@ -43,6 +44,13 @@ private:
     GLuint shaderProgramShadows, shaderShadowsVertex, shaderShadowsFragment;
     GLuint fboDepthMap, vboDepthMap;
     GLint glShadow_ModelMatrix, glShadow_LightSpaceMatrix, glFS_ShadowPass, glFS_DebugShadowTexture;
+
+    // shadows debug
+    bool initShadowsDepth();
+    bool initShadowsDepthShader();
+    GLuint shaderProgramDepth, shaderDepthVertex, shaderDepthFragment;
+    GLint glDepth_Plane_Close, glDepth_Plane_Far, glDepth_SamplerTexture;
+    GLuint depthQuadVAO, depthQuadVBO;
 
     // light
     int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;

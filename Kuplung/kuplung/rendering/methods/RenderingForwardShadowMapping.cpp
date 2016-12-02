@@ -313,8 +313,53 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     }
 
     success &= this->initShadows();
+    success &= this->initShadowsDepth();
 
     return success;
+}
+
+bool RenderingForwardShadowMapping::initShadowsDepth() {
+    bool success = true;
+    success &= this->initShadowsDepthShader();
+    return success;
+}
+
+bool RenderingForwardShadowMapping::initShadowsDepthShader() {
+    bool result = true;
+
+    std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad.vert";
+    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    const char *shader_vertex = shaderSourceVertex.c_str();
+
+    shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad_depth.frag";
+    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    const char *shader_fragment = shaderSourceFragment.c_str();
+
+    this->shaderProgramDepth = glCreateProgram();
+
+    bool shaderCompilation = true;
+    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthFragment, GL_FRAGMENT_SHADER, shader_fragment);
+
+    if (!shaderCompilation)
+        return false;
+
+    glLinkProgram(this->shaderProgramDepth);
+
+    GLint programSuccess = GL_TRUE;
+    glGetProgramiv(this->shaderProgramDepth, GL_LINK_STATUS, &programSuccess);
+    if (programSuccess != GL_TRUE) {
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramDepth) + "!\n");
+        this->glUtils->printProgramLog(this->shaderProgramDepth);
+        return false;
+    }
+    else {
+        this->glDepth_Plane_Close = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "near_plane");
+        this->glDepth_Plane_Far = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "far_plane");
+        this->glDepth_SamplerTexture = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
+    }
+
+    return result;
 }
 
 bool RenderingForwardShadowMapping::initShadows() {
@@ -349,7 +394,7 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
     GLint programSuccess = GL_TRUE;
     glGetProgramiv(this->shaderProgramShadows, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgram) + "!\n");
+        Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramShadows) + "!\n");
         this->glUtils->printProgramLog(this->shaderProgramShadows);
         return false;
     }
@@ -370,7 +415,7 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     int smapWidth = 1024;//Settings::Instance()->SDL_Window_Width;
     int smapHeight = 1024;//Settings::Instance()->SDL_Window_Height;
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, smapWidth, smapHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, smapWidth, smapHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
@@ -399,47 +444,82 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
 
     this->renderShadows(meshModelFaces, selectedModel);
     this->renderModels(false, this->shaderProgram, meshModelFaces, selectedModel);
+    this->renderDepth();
 }
 
 void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
-        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->positionX->point, this->managerObjects.lightSources[0]->positionY->point, this->managerObjects.lightSources[0]->positionZ->point);
+        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
                                                this->managerObjects.Setting_PlaneClose,
                                                this->managerObjects.Setting_PlaneFar);
-        glm::mat4 lightView = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
-        this->matrixLightSpace = lightProjection * lightView;
+        glm::mat4 matrixLightView = glm::lookAt(lightPos, this->managerObjects.camera->eyeSettings->View_Center, this->managerObjects.camera->eyeSettings->View_Up);
+        matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
+        this->matrixLightSpace = lightProjection * matrixLightView;
 
         glUseProgram(this->shaderProgramShadows);
-        glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
-        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
-//        for (size_t i=0; i<meshModelFaces.size(); i++) {
-//            ModelFaceData *mfd = meshModelFaces[i];
+//        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
+        for (size_t i=0; i<meshModelFaces.size(); i++) {
+            ModelFaceData *mfd = meshModelFaces[i];
 
-//            glm::mat4 matrixModel = glm::mat4(1.0);
-//            matrixModel *= this->managerObjects.grid->matrixModel;
-//            // scale
-//            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-//            // translate
-//            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
-//            // rotate
-//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+            glm::mat4 matrixModel = glm::mat4(1.0);
+            matrixModel *= this->managerObjects.grid->matrixModel;
+            // scale
+            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+            // translate
+            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+            // rotate
+            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
+            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
+            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
-//            glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
-//            glUniform1i(this->glFS_ShadowPass, true);
+            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
-//            mfd->renderModel(true);
-//        }
+            mfd->renderModel(true);
+        }
         glUseProgram(0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
+}
+
+void RenderingForwardShadowMapping::renderDepth() {
+    glUseProgram(this->shaderProgramDepth);
+    glUniform1f(this->glDepth_Plane_Close, this->managerObjects.Setting_PlaneClose);
+    glUniform1f(this->glDepth_Plane_Far, this->managerObjects.Setting_PlaneFar);
+    glUniform1i(this->glDepth_SamplerTexture, 0);
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
+
+    if (this->depthQuadVAO == 0) {
+        GLfloat quadVertices[] = {
+            // Positions        // Texture Coords
+            -1.0f,  1.0f, 0.0f,  0.0f, 1.0f,
+            -1.0f, -1.0f, 0.0f,  0.0f, 0.0f,
+             1.0f,  1.0f, 0.0f,  1.0f, 1.0f,
+             1.0f, -1.0f, 0.0f,  1.0f, 0.0f,
+        };
+        // Setup plane VAO
+        glGenVertexArrays(1, &this->depthQuadVAO);
+        glGenBuffers(1, &this->depthQuadVBO);
+        glBindVertexArray(this->depthQuadVAO);
+        glBindBuffer(GL_ARRAY_BUFFER, this->depthQuadVBO);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    }
+    glBindVertexArray(this->depthQuadVAO);
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindVertexArray(0);
+
+    glUseProgram(0);
 }
 
 void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
@@ -464,6 +544,13 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+
+//        if (this->managerObjects.lightSources.size() > 0) {
+//            this->managerObjects.matrixProjection = this->matrixLightSpace;
+//            this->matrixProjection = this->matrixLightSpace;
+//            glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
+//            matrixModel = glm::lookAt(lightPos, glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, -1.0f, 0.0f));
+//        }
 
         mfd->matrixGrid = this->managerObjects.grid->matrixModel;
         mfd->matrixProjection = this->matrixProjection;

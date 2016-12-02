@@ -31,8 +31,10 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerOb
     this->heightmapWidth = 0;
     this->heightmapHeight = 0;
 
+    this->newHeightmap = false;
     this->generateNewTerrain = false;
     this->generateNewSpaceship = false;
+    this->lockCameraWithLight = false;
 
     this->helperUI = std::make_unique<UIHelpers>();
 }
@@ -614,14 +616,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Checkbox("Lamp", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampObject);
                     ImGui::Checkbox("Direction", &this->managerObjects.lightSources[this->selectedObjectLight]->showLampDirection);
                     ImGui::Checkbox("Wire", &this->managerObjects.lightSources[this->selectedObjectLight]->showInWire);
-                    if (ImGui::Button("View From Here", ImVec2(-1, 0))) {
-                        this->managerObjects.camera->positionX->point = -1.0f * this->managerObjects.lightSources[this->selectedObjectLight]->positionX->point;
-                        this->managerObjects.camera->positionY->point = -1.0f * this->managerObjects.lightSources[this->selectedObjectLight]->positionY->point;
-                        this->managerObjects.camera->positionZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->positionZ->point;
-                        this->managerObjects.camera->rotateX->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateX->point + 90.0f;
-                        this->managerObjects.camera->rotateY->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateY->point;
-                        this->managerObjects.camera->rotateZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateZ->point;
-                    }
+                    ImGui::Checkbox("Lock with Camera", &this->lockCameraWithLight);
+                    if (ImGui::Button("View From Here", ImVec2(-1, 0)))
+                        this->lockCameraOnce();
                     ImGui::Separator();
                     if (ImGui::Button("Delete Light Source", ImVec2(-1, 0))) {
                         this->selectedObject = 0;
@@ -827,11 +824,31 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::End();
 
     this->setHeightmapImage(this->managerObjects.heightmapImage);
+    this->lockCamera();
 }
 
 void DialogControlsGUI::setHeightmapImage(std::string const& heightmapImage) {
     if (this->heightmapImage != heightmapImage) {
         this->heightmapImage = heightmapImage;
         this->newHeightmap = true;
+    }
+}
+
+void DialogControlsGUI::lockCameraOnce() {
+    this->lockCameraWithLight = true;
+    this->lockCamera();
+    this->lockCameraWithLight = false;
+}
+
+void DialogControlsGUI::lockCamera() {
+    if (this->lockCameraWithLight) {
+        this->managerObjects.camera->positionX->point = this->managerObjects.lightSources[this->selectedObjectLight]->positionX->point;
+        this->managerObjects.camera->positionY->point = this->managerObjects.lightSources[this->selectedObjectLight]->positionY->point;
+        this->managerObjects.camera->positionZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->positionZ->point;
+        this->managerObjects.camera->rotateX->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateX->point + 90.0f;
+        this->managerObjects.camera->rotateY->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateY->point + 180.0f;
+        this->managerObjects.camera->rotateZ->point = this->managerObjects.lightSources[this->selectedObjectLight]->rotateZ->point;
+        this->managerObjects.camera->cameraPosition = this->managerObjects.lightSources[this->selectedObjectLight]->matrixModel[3];
+        this->managerObjects.camera->matrixCamera = this->managerObjects.lightSources[this->selectedObjectLight]->matrixModel;
     }
 }

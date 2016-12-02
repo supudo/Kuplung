@@ -5,14 +5,14 @@
 // =================================================
 
 void main(void) {
-//    if (fs_shadowPass) {
-//        vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
-//        vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
-//        vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
-//        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
-//        fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular));
-//    }
-//    else {
+    if (fs_shadowPass) {
+        vec4 processedColor_Ambient = (material.has_texture_ambient ? texture(material.sampler_ambient, fs_textureCoord) : vec4(material.ambient, 1.0));
+        vec4 processedColor_Diffuse = (material.has_texture_diffuse ? texture(material.sampler_diffuse, fs_textureCoord) : vec4(material.diffuse, 1.0));
+        vec4 processedColor_Specular = (material.has_texture_specular ? texture(material.sampler_specular, fs_textureCoord) : vec4(material.specular, 1.0));
+        vec3 fragmentPosition = vec3(fs_ModelMatrix * vec4(fs_vertexPosition, 1.0f));
+        fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular));
+    }
+    else {
         if (fs_isBorder > 0.0)
             fragColor = vec4(fs_outlineColor, 1.0);
         else {
@@ -143,5 +143,5 @@ void main(void) {
             float depth = linearizeDepth(gl_FragCoord.z) / fs_planeFar;
             fragColor = vec4(vec3(depth), 1.0f);
         }
-//    }
+    }
 }
