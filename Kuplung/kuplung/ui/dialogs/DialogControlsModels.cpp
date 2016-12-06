@@ -648,6 +648,7 @@ void DialogControlsModels::drawCreate() {
     if (ImGui::Button("Epcot", ImVec2(-1, 0))) this->funcAddShape(ShapeType_Epcot);
     if (ImGui::Button("Brick Wall", ImVec2(-1, 0))) this->funcAddShape(ShapeType_BrickWall);
     if (ImGui::Button("Plane Objects", ImVec2(-1, 0))) this->funcAddShape(ShapeType_PlaneObjects);
+    if (ImGui::Button("Plane Objects - Large Plane", ImVec2(-1, 0))) this->funcAddShape(ShapeType_PlaneObjectsLargePlane);
     if (ImGui::Button("Material Ball", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MaterialBall);
     if (ImGui::Button("Material Ball - Blender", ImVec2(-1, 0))) this->funcAddShape(ShapeType_MaterialBallBlender);
 

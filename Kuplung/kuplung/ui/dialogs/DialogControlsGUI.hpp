@@ -39,6 +39,8 @@ private:
     bool lockCameraWithLight;
     void lockCameraOnce();
     void lockCamera();
+
+    float lightRotateX, lightRotateY, lightRotateZ;
 };
 
 #endif /* DialogControlsGUI_hpp */

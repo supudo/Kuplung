@@ -25,6 +25,9 @@ public:
     bool initShaderProgram();
     void initBuffers(std::string const& assetsFolder);
     void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
+    glm::vec3 getNewPositionAfterRotation(glm::vec3 rotation);
+    bool turnOff_Position;
+
     MeshModel meshModel;
 
     std::string title;

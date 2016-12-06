@@ -28,6 +28,7 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
 
     QMAKE_MAC_SDK = macosx10.12
 
@@ -361,6 +362,8 @@ DISTFILES += \
     resources/shapes/plane.obj \
     resources/shapes/plane_objects.mtl \
     resources/shapes/plane_objects.obj \
+    resources/shapes/plane_objects_large.mtl \
+    resources/shapes/plane_objects_large.obj \
     resources/shapes/triangle.mtl \
     resources/shapes/triangle.obj \
     resources/shapes/torus.mtl \

@@ -135,6 +135,8 @@ void Light::initProperties(LightSourceType type) {
     this->lightDirectionRay->init();
     this->lightDirectionRay->initShaderProgram();
     this->lightDirectionRay->initBuffers(lrFrom, lrTo);
+
+    this->turnOff_Position = false;
 }
 
 #pragma mark - Public
@@ -264,6 +266,18 @@ void Light::initBuffers(std::string const& assetsFolder) {
 
 #pragma mark - Render
 
+glm::vec3 Light::getNewPositionAfterRotation(glm::vec3 rotation) {
+    glm::mat4 mtx = this->matrixModel;
+
+    mtx = glm::translate(mtx, glm::vec3(0, 0, 0));
+    mtx = glm::rotate(mtx, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+    mtx = glm::rotate(mtx, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+    mtx = glm::rotate(mtx, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+    mtx = glm::translate(mtx, glm::vec3(0, 0, 0));
+
+    return mtx[3];
+}
+
 void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
     if (this->glVAO > 0 && this->showLampObject) {
         glUseProgram(this->shaderProgram);
@@ -272,13 +286,23 @@ void Light::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
         this->matrixCamera = matrixCamera;
 
         this->matrixModel = glm::mat4(1.0);
+
         this->matrixModel = glm::scale(this->matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));
+
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateX->point), glm::vec3(1, 0, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
         this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
-        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
+
+        if (!this->turnOff_Position)
+            this->matrixModel = glm::translate(this->matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
+
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterX->point), glm::vec3(1, 0, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
+        this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
+        this->matrixModel = glm::translate(this->matrixModel, glm::vec3(0, 0, 0));
 
         if (this->vboTextureDiffuse > 0)
             glBindTexture(GL_TEXTURE_2D, this->vboTextureDiffuse);

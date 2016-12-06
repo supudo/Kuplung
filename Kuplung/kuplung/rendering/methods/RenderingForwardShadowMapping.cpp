@@ -461,28 +461,28 @@ void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> me
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
         glClear(GL_DEPTH_BUFFER_BIT);
-//        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
-        for (size_t i=0; i<meshModelFaces.size(); i++) {
-            ModelFaceData *mfd = meshModelFaces[i];
+        this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);
+//        for (size_t i=0; i<meshModelFaces.size(); i++) {
+//            ModelFaceData *mfd = meshModelFaces[i];
 
-            glm::mat4 matrixModel = glm::mat4(1.0);
-            matrixModel *= this->managerObjects.grid->matrixModel;
-            // scale
-            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
-            // translate
-            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
-            // rotate
-            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
-            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
-            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+//            glm::mat4 matrixModel = glm::mat4(1.0);
+//            matrixModel *= this->managerObjects.grid->matrixModel;
+//            // scale
+//            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
+//            // translate
+//            matrixModel = glm::translate(matrixModel, glm::vec3(mfd->positionX->point, mfd->positionY->point, mfd->positionZ->point));
+//            // rotate
+//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateX->point), glm::vec3(1, 0, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateY->point), glm::vec3(0, 1, 0));
+//            matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
+//            matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
-            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
-            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+//            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+//            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
-            mfd->renderModel(true);
-        }
+//            mfd->renderModel(true);
+//        }
         glUseProgram(0);
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
     }
@@ -568,8 +568,11 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
             mvpMatrix = this->matrixLightSpace;
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
-        if (isShadowPass)
+        if (isShadowPass) {
             glUniformMatrix4fv(this->glVS_shadowModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glShadow_ModelMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
+            glUniformMatrix4fv(this->glShadow_LightSpaceMatrix, 1, GL_FALSE, glm::value_ptr(this->matrixLightSpace));
+        }
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         glm::mat4 matrixModelView = this->matrixCamera * matrixModel;
