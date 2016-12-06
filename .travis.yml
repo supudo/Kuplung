@@ -1,10 +1,12 @@
 language: cpp
-
 os: osx
+compiler:
+  - clang
+  - gcc
 
 before_install:
   - brew update
   - brew install glm minizip glfw3 assimp protobuf
 
 script:
-  - mkdir build && cd build && cmake -DCOVERALLS=ON -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./Kuplung && cmake --build ./Kuplung --target coveralls
+  - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./
