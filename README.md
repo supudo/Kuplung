@@ -2,6 +2,8 @@
 
 C/C++/OpenGL Model Viewer (Experiments)
 
+[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung)
+
 #### Using/Including
 
 - [ImGui](https://github.com/ocornut/imgui)
