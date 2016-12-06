@@ -6,7 +6,7 @@ compiler:
 
 before_install:
   - brew update
-  - brew install cmake boost sdl2 glm minizip glfw3 assimp protobuf
+  - brew install sdl2 glm minizip glfw3 assimp protobuf
 
 script:
   - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./
