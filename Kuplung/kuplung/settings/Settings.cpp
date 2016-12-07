@@ -85,6 +85,8 @@ void Settings::initSettings() {
     m_pInstance->sceneCountTriangles = 0;
     m_pInstance->sceneCountFaces = 0;
 
+    m_pInstance->showAllVisualArtefacts = true;
+
 #ifdef _WIN32
     m_pInstance->newLineDelimiter = "\r\n";
 #elif defined macintosh // OS 9

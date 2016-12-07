@@ -50,100 +50,102 @@ void ObjectsManager::render() {
 
     this->camera->render();
 
-    if (this->Setting_GridSize != this->grid->gridSize) {
-        this->grid->gridSize = this->Setting_GridSize;
-        this->grid->initBuffers(this->Setting_GridSize, 1);
-        this->skybox->init(this->Setting_GridSize);
-        this->axisHelpers_xMinus->initBuffers();
-        this->axisHelpers_xPlus->initBuffers();
-        this->axisHelpers_yMinus->initBuffers();
-        this->axisHelpers_yPlus->initBuffers();
-        this->axisHelpers_zMinus->initBuffers();
-        this->axisHelpers_zPlus->initBuffers();
-    }
-
-    this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
-
-    if (this->Setting_ShowAxisHelpers) {
-        float ahPosition = 0;
-        ahPosition = this->Setting_GridSize;
-        ahPosition /= 2;
-        //ahPosition += 1;
-
-        this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- ahPosition, 0, 0));
-        this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(ahPosition, 0, 0));
-
-        this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - ahPosition, 0));
-        this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, ahPosition, 0));
-
-        this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - ahPosition));
-        this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition));
-    }
-    this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
-
-    this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
-
-    for (size_t i=0; i<this->lightSources.size(); i++) {
-        this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera);
-    }
-
-    if (this->Setting_Skybox != this->skybox->Setting_Skybox_Item) {
-        this->skybox->initBuffers();
-        this->Setting_Skybox = this->skybox->Setting_Skybox_Item;
-    }
-    this->renderSkybox();
-
-    if (this->Setting_TerrainAnimateX)
-        this->terrain->terrainGenerator->Setting_OffsetHorizontal += 0.0001f;
-    if (this->Setting_TerrainAnimateY)
-        this->terrain->terrainGenerator->Setting_OffsetVertical += 0.0001f;
-    if (this->Setting_TerrainAnimateX || this->Setting_TerrainAnimateY)
-        this->generateTerrain();
-
-    if (this->Setting_ShowTerrain) {
-        if (this->heightmapImage == "")
-            this->generateTerrain();
-        this->terrain->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
-        this->heightmapImage = this->terrain->heightmapImage;
-    }
-
-    if (this->Setting_TerrainModel) {
-        this->funcAddTerrain();
-        this->Setting_TerrainModel = false;
-    }
-
-    if (this->Setting_ShowSpaceship) {
-        if (this->Setting_GenerateSpaceship) {
-            this->generateSpaceship();
-            this->funcAddSpaceship();
-            this->Setting_GenerateSpaceship = false;
+    if (Settings::Instance()->showAllVisualArtefacts) {
+        if (this->Setting_GridSize != this->grid->gridSize) {
+            this->grid->gridSize = this->Setting_GridSize;
+            this->grid->initBuffers(this->Setting_GridSize, 1);
+            this->skybox->init(this->Setting_GridSize);
+            this->axisHelpers_xMinus->initBuffers();
+            this->axisHelpers_xPlus->initBuffers();
+            this->axisHelpers_yMinus->initBuffers();
+            this->axisHelpers_yPlus->initBuffers();
+            this->axisHelpers_zMinus->initBuffers();
+            this->axisHelpers_zPlus->initBuffers();
         }
 
-//        this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
-//        bool doSolidLight = true;
-//        for (size_t i=0; i<this->lightSources.size(); i++) {
-//            if (this->lightSources[i]->type == LightSourceType_Directional) {
-//                this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
-//                this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
-//                this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
-//                this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
-//                this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
-//                this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
-//                this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
-//                doSolidLight = false;
-//                break;
+        this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+
+        if (this->Setting_ShowAxisHelpers) {
+            float ahPosition = 0;
+            ahPosition = this->Setting_GridSize;
+            ahPosition /= 2;
+            //ahPosition += 1;
+
+            this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(- ahPosition, 0, 0));
+            this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(ahPosition, 0, 0));
+
+            this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, - ahPosition, 0));
+            this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, ahPosition, 0));
+
+            this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, - ahPosition));
+            this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition));
+        }
+        this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
+
+        this->cameraModel->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->Setting_FixedGridWorld);
+
+        for (size_t i=0; i<this->lightSources.size(); i++) {
+            this->lightSources[i]->render(this->matrixProjection, this->camera->matrixCamera);
+        }
+
+        if (this->Setting_Skybox != this->skybox->Setting_Skybox_Item) {
+            this->skybox->initBuffers();
+            this->Setting_Skybox = this->skybox->Setting_Skybox_Item;
+        }
+        this->renderSkybox();
+
+        if (this->Setting_TerrainAnimateX)
+            this->terrain->terrainGenerator->Setting_OffsetHorizontal += 0.0001f;
+        if (this->Setting_TerrainAnimateY)
+            this->terrain->terrainGenerator->Setting_OffsetVertical += 0.0001f;
+        if (this->Setting_TerrainAnimateX || this->Setting_TerrainAnimateY)
+            this->generateTerrain();
+
+        if (this->Setting_ShowTerrain) {
+            if (this->heightmapImage == "")
+                this->generateTerrain();
+            this->terrain->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel);
+            this->heightmapImage = this->terrain->heightmapImage;
+        }
+
+        if (this->Setting_TerrainModel) {
+            this->funcAddTerrain();
+            this->Setting_TerrainModel = false;
+        }
+
+        if (this->Setting_ShowSpaceship) {
+            if (this->Setting_GenerateSpaceship) {
+                this->generateSpaceship();
+                this->funcAddSpaceship();
+                this->Setting_GenerateSpaceship = false;
+            }
+
+//            this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
+//            bool doSolidLight = true;
+//            for (size_t i=0; i<this->lightSources.size(); i++) {
+//                if (this->lightSources[i]->type == LightSourceType_Directional) {
+//                    this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
+//                    this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
+//                    this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
+//                    this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
+//                    this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
+//                    this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
+//                    this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
+//                    doSolidLight = false;
+//                    break;
+//                }
 //            }
-//        }
-//        if (doSolidLight) {
-//            this->spaceship->lightDirection = this->camera->cameraPosition;
-//            this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
-//            this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
-//            this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
-//            this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
-//            this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
-//            this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
-//        }
-//        this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
+//            if (doSolidLight) {
+//                this->spaceship->lightDirection = this->camera->cameraPosition;
+//                this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
+//                this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
+//                this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
+//                this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
+//                this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
+//                this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
+//            }
+//            this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
+        }
     }
 }
 

@@ -329,6 +329,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         if (ImGui::BeginMenu("View")) {
             ImGui::MenuItem(this->showControlsGUI ? ICON_FA_TOGGLE_ON " GUI Controls" : ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->showControlsGUI);
             ImGui::MenuItem(this->showControlsModels ? ICON_FA_TOGGLE_ON " Scene Controls" : ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->showControlsModels);
+            ImGui::MenuItem(Settings::Instance()->showAllVisualArtefacts ? ICON_FA_TOGGLE_OFF " Hide Visual Artefacts" : ICON_FA_TOGGLE_ON " Show Visual Artefacts", NULL, &Settings::Instance()->showAllVisualArtefacts);
             ImGui::Separator();
             if (ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
                 Settings::Instance()->saveSettings();
