@@ -63,6 +63,8 @@ private:
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
+
+    // shadows
     GLint glVS_shadowModelMatrix, glVS_LightSpaceMatrix, glFS_showShadows, glFS_SamplerShadowMap;
 
     // general
