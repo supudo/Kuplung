@@ -35,7 +35,7 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Seed = 1;
 }
 
-void HeightmapGenerator::generateTerrain(std::string assetsFolder, int width, int height) {
+void HeightmapGenerator::generateTerrain(std::string assetsFolder, const int width, const int height) {
     this->assetsFolder = assetsFolder;
     this->width = width;
     this->height = height;

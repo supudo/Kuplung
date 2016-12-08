@@ -68,7 +68,7 @@ public:
     void hideLoading();
     void showExporting();
     void hideExporting();
-    void showRenderedImage(std::string renderedImage);
+    void showRenderedImage(std::string const& renderedImage);
     void clearAllLights();
 
     std::vector<ModelFaceBase*> *meshModelFaces;
@@ -99,10 +99,10 @@ private:
     std::function<void(FBEntity file)> funcSaveScene;
     std::function<void(FBEntity file)> funcOpenScene;
 
-    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type);
-    void dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> settings);
-    void dialogOBJExporterProcessFile(FBEntity file, std::vector<std::string> settings);
-    void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
+    void dialogFileBrowserProcessFile(const FBEntity file, FileBrowser_ParserType type);
+    void dialogOBJImporterProcessFile(const FBEntity file, std::vector<std::string> settings);
+    void dialogOBJExporterProcessFile(const FBEntity file, std::vector<std::string> settings);
+    void dialogFileSaveProcessFile(const FBEntity file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
     void dialogOBJImporterBrowser();

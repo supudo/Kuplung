@@ -128,7 +128,6 @@ SOURCES += main.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
     kuplung/meshes/scene/ModelFaceData.cpp \
     kuplung/meshes/scene/ModelFaceForward.cpp \
-    kuplung/meshes/scene/ModelFaceDeferredT.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.cpp \
@@ -221,7 +220,6 @@ HEADERS += \
     kuplung/meshes/scene/ModelFaceBase.hpp \
     kuplung/meshes/scene/ModelFaceData.hpp \
     kuplung/meshes/scene/ModelFaceForward.hpp \
-    kuplung/meshes/scene/ModelFaceDeferredT.hpp \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp \

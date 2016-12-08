@@ -84,7 +84,7 @@ ModelFaceForward::~ModelFaceForward() {
 
 #pragma mark - Public
 
-void ModelFaceForward::init(MeshModel model, std::string const& assetsFolder) {
+void ModelFaceForward::init(const MeshModel model, std::string const& assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
     this->initShaderProgram();
 }
@@ -407,7 +407,7 @@ void ModelFaceForward::initBuffers() {
 
 #pragma mark - Render
 
-void ModelFaceForward::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelFaceForward::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight) {
     ModelFaceBase::render(matrixProjection, matrixCamera, matrixModel, vecCameraPosition, grid, uiAmbientLight);
 
     if (this->initBuffersAgain)

@@ -17,7 +17,7 @@
 class DialogStyle {
 public:
     void saveDefault(ImGuiStyle& style);
-    void save(std::string fontfile, std::string fontsize, ImGuiStyle& style);
+    void save(std::string const& fontfile, std::string const& fontsize, ImGuiStyle& style);
     ImGuiStyle& loadCurrent();
     ImGuiStyle& load(std::string styleFilePath);
     ImGuiStyle& loadDefault();

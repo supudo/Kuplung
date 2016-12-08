@@ -139,7 +139,7 @@ void MiniAxis::initBuffers() {
 
 #pragma mark - Render
 
-void MiniAxis::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
+void MiniAxis::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera) {
     if (this->glVAO > 0 && this->showAxis) {
         glUseProgram(this->shaderProgram);
 

@@ -26,16 +26,16 @@ class ModelFaceBase {
 public:
     virtual ~ModelFaceBase();
 
-    ModelFaceBase* clone(int modelID);
+    ModelFaceBase* clone(const int modelID);
 
-    virtual void init(MeshModel model, std::string const& assetsFolder);
+    virtual void init(const MeshModel model, std::string const& assetsFolder);
     void initModelProperties();
     void initBoundingBox();
     void initVertexSphere();
     virtual void initBuffers();
-    void loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject);
+    void loadTexture(std::string const& assetsFolder, const MeshMaterialTextureImage materialImage, const objMaterialImageType type, GLuint* vboObject);
 
-    virtual void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
+    virtual void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight);
 
     // general options
     void setOptionsFOV(float fov);

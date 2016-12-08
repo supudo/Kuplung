@@ -56,7 +56,7 @@ public:
     void initTerrain();
     void initSpaceship();
 
-    void addLight(LightSourceType type, std::string title = "", std::string description = "");
+    void addLight(const LightSourceType type, std::string const& title = "", std::string const& description = "");
     std::vector<Light*> lightSources;
 
     Camera *camera;

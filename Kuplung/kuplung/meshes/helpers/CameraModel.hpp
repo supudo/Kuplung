@@ -21,11 +21,11 @@ class CameraModel {
 public:
     ~CameraModel();
     void init();
-    void setModel(MeshModel meshModel);
+    void setModel(const MeshModel meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld);
+    void render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld);
     MeshModel meshModel;
 
     std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;

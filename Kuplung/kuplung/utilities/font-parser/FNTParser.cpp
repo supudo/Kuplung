@@ -27,7 +27,7 @@ void FNTParser::init() {
     this->regex_char = "^char.*";
 }
 
-KuplungFontMap FNTParser::parse(FBEntity file) {
+KuplungFontMap FNTParser::parse(FBEntity const& file) {
     this->fm = {};
 
     std::ifstream ifs(file.path.c_str());

@@ -45,7 +45,7 @@ Skybox::~Skybox() {
 
 #pragma mark - Initialization
 
-void Skybox::init(int gridSize) {
+void Skybox::init(const int gridSize) {
     this->glUtils = std::make_unique<GLUtils>();
 
     this->gridSize = gridSize;
@@ -219,7 +219,7 @@ bool Skybox::initBuffers() {
 
 #pragma mark - Render
 
-void Skybox::render(glm::mat4 matrixView, float plane_close, float plane_far, float fov) {
+void Skybox::render(const glm::mat4 matrixView, const float plane_close, const float plane_far, const float fov) {
     if (this->glVAO > 0 && this->Setting_Skybox_Item > 0) {
         glBindVertexArray(this->glVAO);
         glUseProgram(this->shaderProgram);

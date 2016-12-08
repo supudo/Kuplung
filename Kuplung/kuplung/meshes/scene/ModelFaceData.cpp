@@ -55,7 +55,7 @@ ModelFaceData::~ModelFaceData() {
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
-void ModelFaceData::init(MeshModel model, std::string const& assetsFolder) {
+void ModelFaceData::init(const MeshModel model, std::string const& assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
 
     this->meshModel = model;
@@ -144,7 +144,7 @@ void ModelFaceData::initBuffers() {
     glBindVertexArray(0);
 }
 
-void ModelFaceData::renderModel(bool useTessellation) {
+void ModelFaceData::renderModel(const bool useTessellation) {
     if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 

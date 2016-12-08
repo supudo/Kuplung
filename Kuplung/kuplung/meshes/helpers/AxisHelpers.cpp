@@ -33,7 +33,7 @@ void AxisHelpers::init() {
     this->initProperties();
 }
 
-void AxisHelpers::setModel(MeshModel meshModel) {
+void AxisHelpers::setModel(const MeshModel meshModel) {
     this->meshModel = meshModel;
 }
 
@@ -99,7 +99,7 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position) {
+void AxisHelpers::render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::vec3 position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

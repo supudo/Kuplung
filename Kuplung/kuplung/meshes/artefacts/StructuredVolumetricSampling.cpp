@@ -144,7 +144,7 @@ void StructuredVolumetricSampling::initNoiseTexture() {
     }
 }
 
-void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds) {
+void StructuredVolumetricSampling::render(const int mouseX, const int mouseY, const float seconds) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -168,7 +168,7 @@ void StructuredVolumetricSampling::render(int mouseX, int mouseY, float seconds)
     }
 }
 
-void StructuredVolumetricSampling::initFBO(int windowWidth, int windowHeight, GLuint* vboTexture) {
+void StructuredVolumetricSampling::initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture) {
     glGenTextures(1, vboTexture);
     glBindTexture(GL_TEXTURE_2D, *vboTexture);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -209,7 +209,7 @@ void StructuredVolumetricSampling::unbindFBO(GLuint* vboTexture) {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void StructuredVolumetricSampling::renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture) {
+void StructuredVolumetricSampling::renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture) {
     this->bindFBO();
     this->render(mouseX, mouseY, seconds);
     this->unbindFBO(vboTexture);

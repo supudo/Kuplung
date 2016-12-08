@@ -20,7 +20,6 @@
 class RayPicking {
 public:
     ~RayPicking();
-    void init(std::function<void(std::string)> doLog);
     void setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     void selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
                      std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
@@ -30,8 +29,6 @@ public:
     std::vector<RayLine*> rayLines;
 
 private:
-    std::function<void(std::string)> doLog;
-
     glm::mat4 matrixProjection;
     glm::mat4 matrixCamera;
 

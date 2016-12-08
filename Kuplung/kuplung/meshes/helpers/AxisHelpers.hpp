@@ -21,11 +21,11 @@ class AxisHelpers {
 public:
     ~AxisHelpers();
     void init();
-    void setModel(MeshModel meshModel);
+    void setModel(const MeshModel meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::vec3 position);
+    void render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::vec3 position);
     MeshModel meshModel;
 
     glm::mat4 matrixProjection;

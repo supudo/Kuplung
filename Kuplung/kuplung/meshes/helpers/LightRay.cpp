@@ -77,7 +77,7 @@ bool LightRay::initShaderProgram() {
     return success;
 }
 
-void LightRay::initBuffers(glm::vec3 position, glm::vec3 direction, bool simple) {
+void LightRay::initBuffers(const glm::vec3 position, const glm::vec3 direction, const bool simple) {
     if (position.x != x && position.y != y && position.z != z) {
         this->x = position.x;
         this->y = position.y;
@@ -141,7 +141,7 @@ void LightRay::initBuffers(glm::vec3 position, glm::vec3 direction, bool simple)
 
 #pragma mark - Render
 
-void LightRay::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void LightRay::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

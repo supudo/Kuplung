@@ -16,7 +16,7 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "kuplung/utilities/stb/stb_image.h"
 
-ModelFaceBase* ModelFaceBase::clone(int modelID) {
+ModelFaceBase* ModelFaceBase::clone(const int modelID) {
     ModelFaceBase *mmf = new ModelFaceBase();
 
     mmf->ModelID = modelID;
@@ -73,7 +73,7 @@ ModelFaceBase::~ModelFaceBase() {
 
 #pragma mark - Initialization
 
-void ModelFaceBase::init(MeshModel model, std::string const& assetsFolder) {
+void ModelFaceBase::init(const MeshModel model, std::string const& assetsFolder) {
     this->glUtils = std::make_unique<GLUtils>();
     this->mathHelper = std::make_unique<Maths>();
 
@@ -206,7 +206,7 @@ void ModelFaceBase::initVertexSphere() {
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
-void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage materialImage, objMaterialImageType type, GLuint* vboObject) {
+void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMaterialTextureImage materialImage, const objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
@@ -276,7 +276,7 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTex
     }
 }
 
-void ModelFaceBase::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight) {
+void ModelFaceBase::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;

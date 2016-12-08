@@ -34,7 +34,7 @@ void MaterialEditor::init() {
     this->panelWidth_Nodes = 100.0f;
 }
 
-void MaterialEditor::draw(int selectedModelID, ModelFaceBase *face, bool* p_opened) {
+void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* p_opened) {
     ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
 

@@ -91,7 +91,7 @@ void Camera::render() {
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }
 
-glm::vec3 Camera::createRay(float mouse_x, float mouse_y, float fov, float ratio, float near, float far) {
+glm::vec3 Camera::createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float near, const float far) {
     float mouseX = mouse_x / (Settings::Instance()->SDL_Window_Width * 0.5f) - 1.0f;
     float mouseY = mouse_y / (Settings::Instance()->SDL_Window_Height * 0.5f) - 1.0f;
 
@@ -108,7 +108,7 @@ glm::vec3 Camera::createRay(float mouse_x, float mouse_y, float fov, float ratio
     return glm::normalize(glm::vec3(worldPos));
 }
 
-PixelDataPoint Camera::getClickData(int x, int y, int height) {
+PixelDataPoint Camera::getClickData(const int x, const int y, const int height) {
     PixelDataPoint p;
     glReadPixels(x, height - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, p.color);
     glReadPixels(x, height - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &p.depth);

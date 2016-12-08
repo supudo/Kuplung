@@ -32,7 +32,7 @@ public:
     void writeFloat(std::string const& configKey, float const& configValue);
     void writeString(std::string const& configKey, std::string const& configValue);
 
-    void saveRecentFiles(std::vector<FBEntity> recentFiles);
+    void saveRecentFiles(std::vector<FBEntity> const& recentFiles);
     std::vector<FBEntity> loadRecentFiles();
 
     void saveRecentFilesImported(std::vector<FBEntity> const& recentFilesImported);

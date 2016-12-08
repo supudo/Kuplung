@@ -20,7 +20,7 @@ public:
     explicit DefaultForwardRenderer(ObjectsManager &managerObjects);
     ~DefaultForwardRenderer();
     void init();
-    std::string renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces);
+    std::string renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);
 
 private:
     FBEntity fileOutputImage;

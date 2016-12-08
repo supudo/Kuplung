@@ -20,8 +20,8 @@
 class FileBrowser {
 public:
     void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile);
-    void setStyleBrowser(bool isStyle);
-    void setImageBrowser(bool isImage);
+    void setStyleBrowser(const bool isStyle);
+    void setImageBrowser(const bool isImage);
     void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);
 
 private:
@@ -32,7 +32,7 @@ private:
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);
-    void logMessage(std::string logMessage);
+    void logMessage(std::string const& logMessage);
     bool isHidden(const boost::filesystem::path &p);
 
     bool log, isStyleBrowser, isImageBrowser;

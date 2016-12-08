@@ -467,7 +467,7 @@ void UI::clearAllLights() {
     this->controlsGUI->selectedObjectLight = -1;
 }
 
-void UI::showRenderedImage(std::string renderedImage) {
+void UI::showRenderedImage(std::string const& renderedImage) {
     this->componentImageViewer->genTexture = true;
     this->componentImageViewer->imagePath = renderedImage;
 
@@ -726,7 +726,7 @@ void UI::dialogShadertoyMessageWindow() {
     ImGui::EndPopup();
 }
 
-void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type) {
+void UI::dialogFileBrowserProcessFile(const FBEntity file, FileBrowser_ParserType type) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
     this->funcProcessImportedFile(file, std::vector<std::string>());
@@ -735,17 +735,17 @@ void UI::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType type
     this->showDialogStyle = false;
 }
 
-void UI::dialogOBJImporterProcessFile(FBEntity file, std::vector<std::string> settings) {
+void UI::dialogOBJImporterProcessFile(const FBEntity file, std::vector<std::string> settings) {
     this->funcProcessImportedFile(file, settings);
     this->showOBJImporter = false;
 }
 
-void UI::dialogOBJExporterProcessFile(FBEntity file, std::vector<std::string> settings) {
+void UI::dialogOBJExporterProcessFile(const FBEntity file, std::vector<std::string> settings) {
     this->funcProcessExpoterdFile(file, settings);
     this->showOBJExporter = false;
 }
 
-void UI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {
+void UI::dialogFileSaveProcessFile(const FBEntity file, FileSaverOperation operation) {
     switch (operation) {
         case FileSaverOperation_SaveScene:
             this->funcSaveScene(file);

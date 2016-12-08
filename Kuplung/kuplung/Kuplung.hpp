@@ -35,34 +35,33 @@ private:
     bool init();
     void initFolders();
     void onEvent(SDL_Event* ev);
-    void processObjFileAsync(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings);
+    void processObjFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> settings);
     void processParsedObjFile();
-    bool hasEnding(std::string const &fullString, std::string const &ending);
+    bool hasEnding(std::string const& fullString, std::string const& ending);
     void renderScene();
     void renderSceneModels();
-    void setupScene(FBEntity file);
     void initSceneGUI();
     void doLog(std::string const& logMessage);
     void doProgress(float value);
     std::string readFile(const char *filePath);
     void processRunningThreads();
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
-    void addShape(ShapeType type);
-    void addLight(LightSourceType type);
-    void exportSceneAsync(FBEntity file, std::vector<ModelFaceBase*> meshModelFaces, std::vector<std::string> settings);
+    void addShape(const ShapeType type);
+    void addLight(const LightSourceType type);
+    void exportSceneAsync(const FBEntity file, const std::vector<ModelFaceBase*> meshModelFaces, const std::vector<std::string> settings);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();
-    void saveScene(FBEntity file);
-    void openScene(FBEntity file);
+    void saveScene(const FBEntity file);
+    void openScene(const FBEntity file);
 
     void guiQuit();
-    void guiProcessImportedFile(FBEntity file, std::vector<std::string> settings);
+    void guiProcessImportedFile(const FBEntity file, const std::vector<std::string> settings);
     void guiClearScreen();
     void guiEditorshaderCompiled(std::string const& fileName);
-    void guiModelDelete(int selectedModel);
-    void guiSceneExport(FBEntity file, std::vector<std::string> settings);
-    void guiRenderScene(FBEntity file);
+    void guiModelDelete(const int selectedModel);
+    void guiSceneExport(const FBEntity file, const std::vector<std::string> settings);
+    void guiRenderScene(const FBEntity file);
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";

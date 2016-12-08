@@ -18,9 +18,9 @@ struct ModelDeferred_LightSource {
 class ModelFaceForward: public ModelFaceBase {
 public:
     ~ModelFaceForward();
-    void init(MeshModel model, std::string const& assetsFolder);
+    void init(const MeshModel model, std::string const& assetsFolder);
     void initBuffers();
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition, WorldGrid *grid, glm::vec3 uiAmbientLight);
+    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight);
 
 private:
     bool initShaderProgram();

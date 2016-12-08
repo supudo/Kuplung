@@ -29,7 +29,7 @@ void ExporterOBJ::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-void ExporterOBJ::exportToFile(FBEntity file, std::vector<ModelFaceBase*> faces, std::vector<std::string> settings) {
+void ExporterOBJ::exportToFile(FBEntity const& file, std::vector<ModelFaceBase*> faces, std::vector<std::string> const& settings) {
     this->exportFile = file;
     this->objSettings = settings;
     this->exportGeometry(faces);
@@ -40,7 +40,7 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     MeshModel model = face->meshModel;
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
-    
+
     int Setting_Axis_Forward = 4;
     if (this->objSettings.size() > 0 && this->objSettings[0] != "")
         Setting_Axis_Forward = std::stoi(this->objSettings[0]);

@@ -54,7 +54,7 @@ void CameraModel::init() {
     this->initProperties();
 }
 
-void CameraModel::setModel(MeshModel meshModel) {
+void CameraModel::setModel(const MeshModel meshModel) {
     this->meshModel = meshModel;
 }
 
@@ -157,7 +157,7 @@ void CameraModel::initBuffers() {
     glBindVertexArray(0);
 }
 
-void CameraModel::render(glm::mat4 mtxProjection, glm::mat4 mtxCamera, glm::mat4 mtxGrid, bool fixedGridWorld) {
+void CameraModel::render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld) {
     if (this->glVAO > 0 && this->showCameraObject) {
         glUseProgram(this->shaderProgram);
 

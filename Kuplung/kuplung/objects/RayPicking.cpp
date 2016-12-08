@@ -17,10 +17,6 @@
 RayPicking::~RayPicking() {
 }
 
-void RayPicking::init(std::function<void(std::string)> doLog) {
-    this->doLog = doLog;
-}
-
 void RayPicking::setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;

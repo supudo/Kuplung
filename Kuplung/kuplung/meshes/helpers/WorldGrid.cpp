@@ -46,10 +46,10 @@ WorldGrid::~WorldGrid() {
 
 void WorldGrid::init() {
     this->glUtils = std::make_unique<GLUtils>();
-    this->initProperties(10);
+    this->initProperties();
 }
 
-void WorldGrid::initProperties(int size) {
+void WorldGrid::initProperties() {
     this->showGrid = true;
     this->actAsMirror = false;
     this->actAsMirrorNeedsChange = true;
@@ -121,7 +121,7 @@ bool WorldGrid::initShaderProgram() {
     return success;
 }
 
-void WorldGrid::initBuffers(int gridSize, float unitSize) {
+void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -288,7 +288,7 @@ void WorldGrid::initBuffers(int gridSize, float unitSize) {
 
 #pragma mark - Render
 
-void WorldGrid::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool showZAxis) {
+void WorldGrid::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const bool showZAxis) {
     if (this->glVAO > 0 && this->showGrid) {
         glUseProgram(this->shaderProgram);
 

@@ -14,7 +14,7 @@ KuplungRendererBase::~KuplungRendererBase() {
 void KuplungRendererBase::init() {
 }
 
-std::string KuplungRendererBase::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string KuplungRendererBase::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
     return "";
 }
 

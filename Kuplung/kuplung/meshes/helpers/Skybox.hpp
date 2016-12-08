@@ -18,9 +18,9 @@
 class Skybox {
 public:
     ~Skybox();
-    void init(int gridSize);
+    void init(const int gridSize);
     bool initBuffers();
-    void render(glm::mat4 matrixView, float plane_close, float plane_far, float fov);
+    void render(const glm::mat4 matrixView, const float plane_close, const float plane_far, const float fov);
 
     std::vector<Skybox_Item> skyboxItems;
     int Setting_Skybox_Item;

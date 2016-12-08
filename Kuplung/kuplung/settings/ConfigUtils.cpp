@@ -91,7 +91,7 @@ void ConfigUtils::writeString(std::string const& configKey, std::string const& c
     this->configData[configKey] = configValue;
 }
 
-void ConfigUtils::saveRecentFiles(std::vector<FBEntity> recentFiles) {
+void ConfigUtils::saveRecentFiles(std::vector<FBEntity> const& recentFiles) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
@@ -168,7 +168,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
     return recentFiles;
 }
 
-void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const&  recentFilesImported) {
+void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const& recentFilesImported) {
 #ifdef _WIN32
         std::string nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9

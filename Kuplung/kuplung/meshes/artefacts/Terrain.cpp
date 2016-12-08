@@ -97,7 +97,7 @@ bool Terrain::initShaderProgram() {
     return success;
 }
 
-void Terrain::initBuffers(std::string const& assetsFolder, int width, int height) {
+void Terrain::initBuffers(std::string const& assetsFolder, const int width, const int height) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -177,7 +177,7 @@ void Terrain::initBuffers(std::string const& assetsFolder, int width, int height
 
 #pragma mark - Render
 
-void Terrain::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel) {
+void Terrain::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

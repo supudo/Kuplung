@@ -50,7 +50,7 @@ void RayTracerRenderer::init() {
     this->glUtils = std::make_unique<GLUtils>();
 }
 
-std::string RayTracerRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string RayTracerRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
     std::string endFile;
 
     int width = Settings::Instance()->SDL_Window_Width;

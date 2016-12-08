@@ -340,7 +340,7 @@ void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolea
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-std::string DefaultForwardRenderer::renderImage(FBEntity file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string DefaultForwardRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
     this->fileOutputImage = file;
     std::string endFile;
 

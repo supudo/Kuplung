@@ -107,7 +107,7 @@ bool Spaceship::initShaderProgram() {
     return success;
 }
 
-void Spaceship::initBuffers(int gridSize) {
+void Spaceship::initBuffers(const int gridSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -155,7 +155,7 @@ void Spaceship::initBuffers(int gridSize) {
 
 #pragma mark - Render
 
-void Spaceship::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition) {
+void Spaceship::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

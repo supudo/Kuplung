@@ -240,13 +240,13 @@ std::string FileBrowser::convertSize(size_t size) {
     int div = 0;
     size_t rem = 0;
 
-    while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
+    while (size >= 1024 && div < int((sizeof SIZES / sizeof * SIZES))) {
         rem = (size % 1024);
         div++;
         size /= 1024;
     }
 
-    double size_d = (float)size + (float)rem / 1024.0;
+    double size_d = double(size) + double(rem) / 1024.0;
     std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
     return result;
 }
@@ -254,13 +254,13 @@ std::string FileBrowser::convertSize(size_t size) {
 double FileBrowser::roundOff(double n) {
     double d = n * 100.0;
     int i = d + 0.5;
-    d = (float)i / 100.0;
+    d = double(i) / 100.0;
     return d;
 }
 
-void FileBrowser::logMessage(std::string logMessage) {
+void FileBrowser::logMessage(std::string const& logMessage) {
     if (this->log)
-        Settings::Instance()->funcDoLog("[GUIFileBrowser] " + logMessage);
+        Settings::Instance()->funcDoLog("[FileBrowser] " + logMessage);
 }
 
 bool FileBrowser::isHidden(const fs::path &p) {

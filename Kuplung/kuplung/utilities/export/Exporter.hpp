@@ -18,7 +18,7 @@ public:
     ~Exporter();
     Exporter();
     void init(std::function<void(float)> doProgress);
-    void exportScene(FBEntity file, std::vector<ModelFaceBase*> faces, std::vector<std::string> settings);
+    void exportScene(FBEntity const& file, std::vector<ModelFaceBase*> faces, std::vector<std::string> const& settings);
 
 private:
     std::unique_ptr<ExporterOBJ> exporterOBJ;

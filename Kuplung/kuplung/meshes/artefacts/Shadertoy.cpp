@@ -193,7 +193,7 @@ void Shadertoy::initTextures() {
     }
 }
 
-void Shadertoy::addTexture(std::string textureImage, GLuint* vboTexture, int textureID) {
+void Shadertoy::addTexture(std::string const & textureImage, GLuint* vboTexture, const int textureID) {
     int tWidth, tHeight, tChannels;
     unsigned char* tPixels = stbi_load(textureImage.c_str(), &tWidth, &tHeight, &tChannels, 0);
     if (tPixels) {
@@ -250,7 +250,7 @@ void Shadertoy::addTexture(std::string textureImage, GLuint* vboTexture, int tex
     }
 }
 
-void Shadertoy::render(int mouseX, int mouseY, float seconds) {
+void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
@@ -319,7 +319,7 @@ void Shadertoy::render(int mouseX, int mouseY, float seconds) {
     }
 }
 
-void Shadertoy::initFBO(int windowWidth, int windowHeight, GLuint* vboTexture) {
+void Shadertoy::initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture) {
     this->textureWidth = windowWidth;
     this->textureHeight = windowHeight;
 
@@ -363,7 +363,7 @@ void Shadertoy::unbindFBO(GLuint* vboTexture) {
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void Shadertoy::renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture) {
+void Shadertoy::renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture) {
     this->bindFBO();
     this->render(mouseX, mouseY, seconds);
     this->unbindFBO(vboTexture);

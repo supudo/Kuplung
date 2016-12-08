@@ -223,7 +223,7 @@ void ObjectsManager::resetPropertiesSystem() {
     if (this->cameraModel)
         this->cameraModel->initProperties();
     if (this->grid)
-        this->grid->initProperties(this->Setting_GridSize);
+        this->grid->initProperties();
     if (this->axisSystem)
         this->axisSystem->initProperties();
     for (size_t i=0; i<this->lightSources.size(); i++) {
@@ -368,7 +368,7 @@ void ObjectsManager::generateSpaceship() {
  * Lights
  *
  */
-void ObjectsManager::addLight(LightSourceType type, std::string title, std::string description) {
+void ObjectsManager::addLight(const LightSourceType type, std::string const& title, std::string const& description) {
     Light *lightObject = new Light();
     lightObject->init();
     lightObject->initProperties(type);

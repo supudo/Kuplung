@@ -20,9 +20,9 @@ public:
     bool initShaderProgram(std::string const& fragmentShaderSource);
     void initBuffers();
     void initTextures();
-    void initFBO(int windowWidth, int windowHeight, GLuint* vboTexture);
-    void render(int mouseX, int mouseY, float seconds);
-    void renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture);
+    void initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture);
+    void render(const int mouseX, const int mouseY, const float seconds);
+    void renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture);
 
     std::string iChannel0_Image, iChannel1_Image, iChannel2_Image, iChannel3_Image;
     std::string iChannel0_CubeImage, iChannel1_CubeImage, iChannel2_CubeImage, iChannel3_CubeImage;
@@ -31,7 +31,7 @@ public:
     std::unique_ptr<GLUtils> glUtils;
 
 private:
-    void addTexture(std::string textureImage, GLuint* vboTexture, int textureID);
+    void addTexture(std::string const& textureImage, GLuint* vboTexture, const int textureID);
     float iChannelResolution0[2], iChannelResolution1[2], iChannelResolution2[2], iChannelResolution3[2];
 
     GLuint shaderProgram, shaderVertex, shaderFragment;

@@ -20,9 +20,9 @@ public:
     bool initShaderProgram();
     void initBuffers();
     void initNoiseTexture();
-    void initFBO(int windowWidth, int windowHeight, GLuint* vboTexture);
-    void render(int mouseX, int mouseY, float seconds);
-    void renderToTexture(int mouseX, int mouseY, float seconds, GLuint* vboTexture);
+    void initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture);
+    void render(const int mouseX, const int mouseY, const float seconds);
+    void renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture);
 
 private:
     std::unique_ptr<GLUtils> glUtils;

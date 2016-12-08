@@ -20,8 +20,8 @@ public:
     VertexSphere();
     ~VertexSphere();
     bool initShaderProgram();
-    void initBuffers(MeshModel meshModel, int circleSegments, float radius);
-    void render(glm::mat4 matrixMVP, glm::vec4 color);
+    void initBuffers(const MeshModel meshModel, const int circleSegments, const float radius);
+    void render(const glm::mat4 matrixMVP, const glm::vec4 color);
 
     bool isSphere;
     bool showWireframes;

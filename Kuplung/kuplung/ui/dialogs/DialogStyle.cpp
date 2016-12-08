@@ -19,7 +19,7 @@ void DialogStyle::saveDefault(ImGuiStyle& style) {
         this->saveStyles("-", "14.00", defaultStyleFile, style);
 }
 
-void DialogStyle::save(std::string fontfile, std::string fontsize, ImGuiStyle& style) {
+void DialogStyle::save(std::string const& fontfile, std::string const& fontsize, ImGuiStyle& style) {
     this->saveStyles(fontfile, fontsize, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 

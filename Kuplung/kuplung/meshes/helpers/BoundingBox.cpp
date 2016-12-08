@@ -75,7 +75,7 @@ bool BoundingBox::initShaderProgram() {
     return success;
 }
 
-void BoundingBox::initBuffers(MeshModel meshModel) {
+void BoundingBox::initBuffers(const MeshModel meshModel) {
     this->meshModel = meshModel;
 
     glGenVertexArrays(1, &this->glVAO);
@@ -146,7 +146,7 @@ void BoundingBox::initBuffers(MeshModel meshModel) {
 
 #pragma mark - Render
 
-void BoundingBox::render(glm::mat4 matrixMVP, glm::vec4 outlineColor) {
+void BoundingBox::render(const glm::mat4 matrixMVP, const glm::vec4 outlineColor) {
     if (Settings::Instance()->BoundingBoxRefresh)
         this->initBuffers(this->meshModel);
     if (this->glVAO > 0) {

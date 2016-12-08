@@ -25,9 +25,9 @@ public:
     ~WorldGrid();
     void init();
     bool initShaderProgram();
-    void initBuffers(int gridSize, float unitSize);
-    void initProperties(int size);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, bool showZAxis);
+    void initBuffers(const int gridSize, const float unitSize);
+    void initProperties();
+    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const bool showZAxis);
     int gridSize;
     float transparency;
 

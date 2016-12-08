@@ -22,8 +22,8 @@ public:
     ~Spaceship();
     void init();
     bool initShaderProgram();
-    void initBuffers(int gridSize);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel, glm::vec3 vecCameraPosition);
+    void initBuffers(const int gridSize);
+    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition);
     std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
 
     bool Setting_UseTexture, Setting_Wireframe;

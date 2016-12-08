@@ -19,8 +19,8 @@ public:
     ~Terrain();
     void init();
     bool initShaderProgram();
-    void initBuffers(std::string const& assetsFolder, int width, int height);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void initBuffers(std::string const& assetsFolder, const int width, const int height);
+    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel);
     std::string heightmapImage;
     std::unique_ptr<HeightmapGenerator> terrainGenerator;
 

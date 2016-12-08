@@ -20,8 +20,8 @@ public:
     LightRay();
     ~LightRay();
     bool initShaderProgram();
-    void initBuffers(glm::vec3 position, glm::vec3 direction, bool simple);
-    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixModel);
+    void initBuffers(const glm::vec3 position, const glm::vec3 direction, const bool simple);
+    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel);
 
 private:
     int axisSize;

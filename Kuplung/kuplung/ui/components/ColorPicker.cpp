@@ -21,13 +21,13 @@
 
 // ImGui picker
 
-void ColorPicker::show(const char* title, bool* p_opened, float* col, bool show_alpha) {
+void ColorPicker::show(const char* title, bool* p_opened, float* col, const bool show_alpha) {
     ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
     this->ColorPicker4(col, show_alpha);
     ImGui::End();
 }
 
-bool ColorPicker::ColorPicker4(float* col, bool show_alpha) {
+bool ColorPicker::ColorPicker4(float* col, const bool show_alpha) {
     ImGuiIO& io = ImGui::GetIO();
     ImGuiStyle& style = ImGui::GetStyle();
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -138,5 +138,5 @@ bool ColorPicker::ColorPicker4(float* col, bool show_alpha) {
 }
 
 bool ColorPicker::ColorPicker3(float col[3]) {
-    return ColorPicker4(col, false);
+    return this->ColorPicker4(col, false);
 }

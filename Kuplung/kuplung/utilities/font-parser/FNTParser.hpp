@@ -32,7 +32,7 @@ class FNTParser {
 public:
     ~FNTParser();
     void init();
-    KuplungFontMap parse(FBEntity file);
+    KuplungFontMap parse(FBEntity const& file);
 
 private:
     KuplungFontMap fm;
