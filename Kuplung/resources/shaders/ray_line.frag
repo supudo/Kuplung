@@ -1,6 +1,7 @@
 #version 410 core
 
 uniform vec3 fs_color;
+
 out vec4 fragColor;
 
 void main(void) {

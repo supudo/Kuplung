@@ -39,7 +39,7 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboIndices;
 
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glUniformInnerLightDirection, glUniformColor;
+    GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
 };
 
 #endif /* VertexSphere_hpp */

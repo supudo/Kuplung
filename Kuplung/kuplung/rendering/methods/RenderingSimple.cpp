@@ -99,7 +99,7 @@ bool RenderingSimple::init() {
     return true;
 }
 
-void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingSimple::render(std::vector<ModelFaceData*> meshModelFaces, const int) {
     this->matrixProjection = this->managerObjects.matrixProjection;
     this->matrixCamera = this->managerObjects.camera->matrixCamera;
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;

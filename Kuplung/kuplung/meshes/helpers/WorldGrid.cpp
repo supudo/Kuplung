@@ -28,7 +28,8 @@ WorldGrid::~WorldGrid() {
     glDeleteBuffers(1, &this->vboIndices);
     glDeleteBuffers(1, &this->vboColors);
 
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -111,11 +112,9 @@ bool WorldGrid::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glAttributeActAsMirror = this->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
         this->glAttributeAlpha = this->glUtils->glGetUniform(this->shaderProgram, "a_alpha");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "fs_color");
     }
 
     return success;
@@ -153,15 +152,15 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
                     p.y = 0;
                     p.z = (i - gridMinus) * unitSize;
                     verticesData.push_back(p);
-                    if (p.z == 0) {
+                    if (p.z < 0 || p.z > 0) {
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                    }
+                    else {
                         this->dataColors.push_back(1.0f);
                         this->dataColors.push_back(0.0f);
                         this->dataColors.push_back(0.0f);
-                    }
-                    else {
-                        this->dataColors.push_back(0.7f);
-                        this->dataColors.push_back(0.7f);
-                        this->dataColors.push_back(0.7f);
                     }
                 }
                 else {
@@ -170,25 +169,25 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
                     p.y = 0;
                     p.z = (j - gridMinus) * unitSize;
                     verticesData.push_back(p);
-                    if (p.x == 0) {
+                    if (p.x < 0 || p.x > 0) {
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                        this->dataColors.push_back(0.7f);
+                    }
+                    else {
                         this->dataColors.push_back(0.0f);
                         this->dataColors.push_back(0.0f);
                         this->dataColors.push_back(1.0f);
-                    }
-                    else {
-                        this->dataColors.push_back(0.7f);
-                        this->dataColors.push_back(0.7f);
-                        this->dataColors.push_back(0.7f);
                     }
                 }
             }
         }
 
-        this->zIndex = (int)verticesData.size();
+        this->zIndex = static_cast<int>(verticesData.size());
 
         GridMeshPoint3D p_z_Minus_Down;
         p_z_Minus_Down.x = 0.0f;
-        p_z_Minus_Down.y = -1.0f * (float)gridMinus;
+        p_z_Minus_Down.y = static_cast<float>(-1.0f * gridMinus);
         p_z_Minus_Down.z = 0.0f;
         verticesData.push_back(p_z_Minus_Down);
         this->dataColors.push_back(0.0f);
@@ -197,7 +196,7 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
 
         GridMeshPoint3D p_z_Plus_Up;
         p_z_Plus_Up.x = 0.0f;
-        p_z_Plus_Up.y = (float)gridMinus;
+        p_z_Plus_Up.y = static_cast<float>(gridMinus);
         p_z_Plus_Up.z = 0.0f;
         verticesData.push_back(p_z_Plus_Up);
         this->dataColors.push_back(0.0f);
@@ -207,26 +206,26 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, verticesData.size() * sizeof(GridMeshPoint3D) * sizeof(GLfloat), &verticesData[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(verticesData.size() * sizeof(GridMeshPoint3D) * sizeof(GLfloat)), &verticesData[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // colors
         glGenBuffers(1, &this->vboColors);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-        glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeColor);
-        glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
     }
     else {
         this->actAsMirrorNeedsChange = false;
 
-        float planePoint = (float)(this->gridSize / 2);
+        float planePoint = static_cast<float>(this->gridSize / 2);
 
         this->dataVertices = {
             planePoint, 0.0, planePoint,
@@ -266,21 +265,21 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataVertices.size() * sizeof(GLfloat)), &this->dataVertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // colors
         glGenBuffers(1, &this->vboColors);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-        glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeColor);
-        glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
     }
 
     glBindVertexArray(0);
@@ -316,7 +315,7 @@ void WorldGrid::render(const glm::mat4 matrixProjection, const glm::mat4 matrixC
             this->initBuffers(this->gridSize, 1.0);
 
         if (!this->actAsMirror) {
-            glLineWidth((GLfloat)2.5f);
+            glLineWidth(2.5f);
 
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);

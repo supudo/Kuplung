@@ -50,8 +50,6 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    float x, y, z;
-
     std::unique_ptr<GLUtils> glUtils;
     RayLine* lightDirectionRay;
 
@@ -60,9 +58,7 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
     GLuint vboTextureDiffuse;
-    GLuint glUniformMVPMatrix;
-    GLuint glAttributeVertexPosition, glAttributeTextureCoord, glAttributeVertexNormal, glUniformSampler;
-    GLuint glUniformUseColor, glUniformColor;
+    GLint glUniformMVPMatrix, glUniformSampler, glUniformUseColor, glUniformColor;
 };
 
 #endif /* Light_hpp */

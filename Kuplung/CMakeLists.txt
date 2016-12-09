@@ -138,8 +138,6 @@ SET(SOURCE_FILES
     kuplung/meshes/scene/ModelFaceBase.hpp
     kuplung/meshes/scene/ModelFaceData.cpp
     kuplung/meshes/scene/ModelFaceData.hpp
-    kuplung/meshes/scene/ModelFaceForward.cpp
-    kuplung/meshes/scene/ModelFaceForward.hpp
     kuplung/objects/ObjectDefinitions.h
     kuplung/objects/ObjectsManager.cpp
     kuplung/objects/ObjectsManager.hpp

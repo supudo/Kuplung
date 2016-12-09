@@ -58,16 +58,14 @@ bool RenderingDeferred::init() {
     success &= this->initGeometryPass();
     success &= this->initLighingPass();
     success &= this->initLightObjects();
-
-    this->initProps();
-    this->initGBuffer();
-    this->initLights();
+    success &= this->initProps();
+    success &= this->initGBuffer();
+    success &= this->initLights();
 
     return success;
 }
 
 bool RenderingDeferred::initGeometryPass() {
-    // Gemetry Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
@@ -100,7 +98,6 @@ bool RenderingDeferred::initGeometryPass() {
 }
 
 bool RenderingDeferred::initLighingPass() {
-    // Lighting Pass
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
     std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
 
@@ -158,7 +155,9 @@ bool RenderingDeferred::initLightObjects() {
     return true;
 }
 
-void RenderingDeferred::initProps() {
+bool RenderingDeferred::initProps() {
+    bool result = true;
+
     glUseProgram(this->shaderProgram_LightingPass);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_position"), 0);
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_normal"), 1);
@@ -199,9 +198,13 @@ void RenderingDeferred::initProps() {
         GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
         this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
     }
+
+    return result;
 }
 
-void RenderingDeferred::initGBuffer() {
+bool RenderingDeferred::initGBuffer() {
+    bool result = true;
+
     // Set up G-Buffer
     // 3 textures:
     // 1. Positions (RGB)
@@ -245,13 +248,19 @@ void RenderingDeferred::initGBuffer() {
     glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
     // - Finally check if framebuffer is complete
-    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE)
+    if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
+        result = false;
         Settings::Instance()->funcDoLog("[Deferred Rendering T GBuffer] Framebuffer not complete!");
+    }
 
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+    return result;
 }
 
-void RenderingDeferred::initLights() {
+bool RenderingDeferred::initLights() {
+    bool result = true;
+
     // light - directional
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
         ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
@@ -313,6 +322,8 @@ void RenderingDeferred::initLights() {
         f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
         this->mfLights_Spot.push_back(f);
     }
+
+    return result;
 }
 
 void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
@@ -345,7 +356,13 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    for (GLuint i=0; i<((this->managerObjects.Setting_DeferredTestMode) ? this->objectPositions.size() : 1); i++) {
+    const int objPositions = [&] {
+        if (this->managerObjects.Setting_DeferredTestMode)
+            return int(this->objectPositions.size());
+        else
+            return 1;
+    }();
+    for (int i=0; i<objPositions; i++) {
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
@@ -357,7 +374,7 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
 //        matrixModel = glm::rotate(matrixModel, glm::radians(180.0f), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
-//        matrixModel *= managerObjects->grid->matrixModel;
+//        matrixModel *= managerObjects.grid->matrixModel;
 
         for (size_t j=0; j<meshModelFaces.size(); j++) {
             ModelFaceData *mfd = meshModelFaces[j];
@@ -526,8 +543,8 @@ void RenderingDeferred::renderLightingPass() {
 
     // Also send light relevant uniforms
     if (this->managerObjects.Setting_DeferredTestLights) {
-        GLuint i = 0;
-        for (; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
+        size_t i = 0;
+        for (; i<size_t(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
@@ -541,7 +558,7 @@ void RenderingDeferred::renderLightingPass() {
             // Then calculate radius of light volume/sphere
             const GLfloat lightThreshold = 5.0; // 5 / 256
             const GLfloat maxBrightness = std::fmaxf(std::fmaxf(this->lightColors[i].r, this->lightColors[i].g), this->lightColors[i].b);
-            GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256.0 / lightThreshold) * maxBrightness)))) / (2 * quadratic);
+            GLfloat radius = (-linear + static_cast<float>(std::sqrt(linear * linear - 4 * quadratic * (constant - (256 / lightThreshold)) * maxBrightness))) / (2 * quadratic);
             glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Radius").c_str()), radius);
         }
         for (; i<this->lightPositions.size(); i++) {
@@ -586,7 +603,7 @@ void RenderingDeferred::renderLightObjects() {
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (GLuint i=0; i<this->managerObjects.Setting_DeferredTestLightsNumber; i++) {
+    for (size_t i=0; i<size_t(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
         glm::mat4 matrixModel = glm::mat4();
         matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
         matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));

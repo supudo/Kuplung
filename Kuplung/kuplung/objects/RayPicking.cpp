@@ -70,7 +70,7 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
         rl->initBuffers(vFrom, vTo * managerObjects->Setting_PlaneFar);
         if (Settings::Instance()->showPickRaysSingle) {
             for (size_t i=0; i<this->rayLines.size(); i++) {
-                RayLine *mfd = (RayLine*)this->rayLines[i];
+                RayLine *mfd = dynamic_cast<RayLine*>(this->rayLines[i]);
                 delete mfd;
             }
             this->rayLines.clear();
@@ -79,7 +79,7 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
     }
 
     this->sceneSelectedModelObject = -1;
-    for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFaceBase *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
@@ -87,7 +87,7 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
                 glm::vec3 aabb_min = glm::vec3(mmf->boundingBox->min_x, mmf->boundingBox->min_y, mmf->boundingBox->min_z);
                 glm::vec3 aabb_max = glm::vec3(mmf->boundingBox->max_x, mmf->boundingBox->max_y, mmf->boundingBox->max_z);
                 if (this->testRayOBBIntersection(vFrom, vTo, aabb_min, aabb_max, mmf->matrixModel, id))
-                    this->sceneSelectedModelObject = i;
+                    this->sceneSelectedModelObject = static_cast<int>(i);
             }
         }
     }
@@ -107,7 +107,7 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
         rayStartPosition,
         rayDirection
     );
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RAY] - [ORIGIN: %f, %f, %f] ||||||| [DIR: %f, %f, %f]",
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[RAY] - [ORIGIN: %g, %g, %g] ||||||| [DIR: %g, %g, %g]",
                                                                          rayStartPosition.x, rayStartPosition.y, rayStartPosition.z,
                                                                          rayDirection.x, rayDirection.y, rayDirection.z));
 
@@ -126,7 +126,7 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
         rl->initBuffers(rayStartPosition, rayDirection * managerObjects->Setting_PlaneFar);
         if (Settings::Instance()->showPickRaysSingle) {
             for (size_t i=0; i<this->rayLines.size(); i++) {
-                RayLine *mfd = (RayLine*)this->rayLines[i];
+                RayLine *mfd = dynamic_cast<RayLine*>(this->rayLines[i]);
                 delete mfd;
             }
             this->rayLines.clear();
@@ -135,13 +135,13 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
     }
 
     this->sceneSelectedModelObject = -1;
-    for (int i=0; i<(int)this->meshModelFaces.size(); i++) {
+    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
         ModelFaceBase *mmf = this->meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             glm::vec3 v = mmf->meshModel.vertices[j];
             glm::mat4 mtx = mmf->matrixModel;
             if (this->testRaySphereIntersection(j, rayStartPosition, rayDirection, v, mtx, managerObjects->Setting_VertexSphere_Radius)) {
-                managerObjects->VertexEditorModeID = j;
+                managerObjects->VertexEditorModeID = static_cast<int>(j);
                 managerObjects->VertexEditorMode = v;
                 break;
             }
@@ -158,13 +158,13 @@ bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_o
 
     intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
     if (intersected)
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] ||||||||| [CENTER: %f, %f, %f] ||||||||| [VERTEX: %.f, %.f, %.f] ===== %f",
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
                                                                             vID,
                                                                             v0.x, v0.y, v0.z,
                                                                             vertex.x, vertex.y, vertex.z,
                                                                             distance));
     else
-        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[NOK - %i] ||||||||| [CENTER: %f, %f, %f] ||||||||| [VERTEX: %.f, %.f, %.f] ===== %f",
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[NOK - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
                                                                             vID,
                                                                             v0.x, v0.y, v0.z,
                                                                             vertex.x, vertex.y, vertex.z,

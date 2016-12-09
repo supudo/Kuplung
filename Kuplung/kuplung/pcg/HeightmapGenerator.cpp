@@ -139,8 +139,8 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, const int wid
 
 void HeightmapGenerator::generatePlaneGeometrySmooth() {
     // BIG thanks to http://stackoverflow.com/a/10114636/69897 !!!!
-    unsigned int heightmapHeight = this->heightMap.GetHeight();
-    unsigned int heightmapWidth = this->heightMap.GetWidth();
+    unsigned int heightmapHeight = static_cast<unsigned int>(this->heightMap.GetHeight());
+    unsigned int heightmapWidth = static_cast<unsigned int>(this->heightMap.GetWidth());
 
     this->vertices.clear();
     this->uvs.clear();
@@ -160,11 +160,11 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
             p_x = x + worldCenter;
             p_y = y + worldCenter;
-            p_z = this->heightMap.GetValue(x, y) * this->Setting_HeightCoeficient;
+            p_z = this->heightMap.GetValue(int(x), int(y)) * this->Setting_HeightCoeficient;
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * ss, 1.0f - y * rr);
 
-            c = this->image.GetValue(x, y);
+            c = this->image.GetValue(int(x), int(y));
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
             this->vertices.push_back(position);
@@ -206,8 +206,8 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
 }
 
 void HeightmapGenerator::generateSphereGeometry() {
-    unsigned int heightmapHeight = this->heightMap.GetHeight();
-    unsigned int heightmapWidth = this->heightMap.GetWidth();
+    unsigned int heightmapHeight = static_cast<unsigned int>(this->heightMap.GetHeight());
+    unsigned int heightmapWidth = static_cast<unsigned int>(this->heightMap.GetWidth());
 
     this->vertices.clear();
     this->uvs.clear();
@@ -230,7 +230,7 @@ void HeightmapGenerator::generateSphereGeometry() {
     utils::Color c;
     for (unsigned int y=0; y<heightmapHeight; ++y) {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
-            hmValue = this->heightMap.GetValue(x, y);
+            hmValue = this->heightMap.GetValue(int(x), int(y));
             p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr));
             p_y = float(sin(-pi_2 + pi * y * rr));
             p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr));
@@ -238,10 +238,10 @@ void HeightmapGenerator::generateSphereGeometry() {
             position += glm::normalize(position) * hmValue;
 
             if (Settings::Instance()->logDebugInfo)
-                grapher += Settings::Instance()->string_format("%f,%f,%f\n", position.x, position.y, position.z);
+                grapher += Settings::Instance()->string_format("%g,%g,%g\n", position.x, position.y, position.z);
 
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
-            c = this->image.GetValue(x, y);
+            c = this->image.GetValue(int(x), int(y));
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
             this->vertices.push_back(position);
@@ -375,7 +375,7 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
             this->colors.push_back(color);
 
             if (Settings::Instance()->logDebugInfo)
-                grapher += Settings::Instance()->string_format(" %f,%f,%f;%f,%f,%f;%f,%f,%f \n",
+                grapher += Settings::Instance()->string_format(" %g,%g,%g;%g,%g,%g;%g,%g,%g \n",
                        v0.x, v0.y, v0.z,
                        v1.x, v1.y, v1.z,
                        v2.x, v2.y, v2.z);

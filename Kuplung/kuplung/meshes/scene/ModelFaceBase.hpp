@@ -89,7 +89,7 @@ public:
     float Setting_LightStrengthAmbient, Setting_LightStrengthDiffuse, Setting_LightStrengthSpecular;
 
     // material
-    int materialIlluminationModel;
+    unsigned int materialIlluminationModel;
     std::unique_ptr<ObjectCoordinate> displacementHeightScale;
     bool showMaterialEditor;
     std::unique_ptr<MaterialColor> materialAmbient, materialDiffuse, materialSpecular, materialEmission;

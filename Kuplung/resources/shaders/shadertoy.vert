@@ -1,6 +1,6 @@
 #version 410 core
 
-in vec3 a_vertexPosition;
+layout (location = 0) in vec3 a_vertexPosition;
 
 uniform mat4 TileMatrix = mat4(1.0);
 uniform vec2 vs_screenResolution;

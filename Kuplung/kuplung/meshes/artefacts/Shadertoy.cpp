@@ -22,6 +22,8 @@ Shadertoy::~Shadertoy() {
     glDeleteTextures(1, &this->iChannel2);
     glDeleteTextures(1, &this->iChannel3);
 
+    glDisableVertexAttribArray(0);
+
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDeleteProgram(this->shaderProgram);
@@ -115,7 +117,6 @@ void main() {\n\
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttributeNoWarning(this->shaderProgram, "a_vertexPosition");
         this->vs_InFBO = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "vs_inFBO");
         this->vs_ScreenResolution = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "vs_screenResolution");
 
@@ -134,10 +135,10 @@ void main() {\n\
         this->iChannelResolution[3] = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[3]");
         this->iMouse = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iMouse");
         this->iDate = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iDate");
-        this->iChannel0 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel0");
-        this->iChannel1 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel1");
-        this->iChannel2 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel2");
-        this->iChannel3 = this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel3");
+        this->iChannel0 = GLuint(this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel0"));
+        this->iChannel1 = GLuint(this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel1"));
+        this->iChannel2 = GLuint(this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel2"));
+        this->iChannel3 = GLuint(this->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel3"));
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -164,8 +165,8 @@ void Shadertoy::initBuffers() {
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
 
     this->iChannel0_Image = Settings::Instance()->appFolder() + "/noise16.png";
     this->initTextures();
@@ -205,7 +206,7 @@ void Shadertoy::addTexture(std::string const & textureImage, GLuint* vboTexture,
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glGenerateMipmap(GL_TEXTURE_2D);
 
-        GLint textureFormat = 0;
+        GLenum textureFormat = 0;
         switch (tChannels) {
             case 1:
                 textureFormat = GL_LUMINANCE;
@@ -223,7 +224,7 @@ void Shadertoy::addTexture(std::string const & textureImage, GLuint* vboTexture,
                 textureFormat = GL_RGB;
                 break;
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
         stbi_image_free(tPixels);
         switch (textureID) {
             case 0: {
@@ -258,32 +259,32 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
 
         glUniform1i(this->vs_InFBO, 1);
 
-        int tc = 0;
+        GLint tc = 0;
         if (this->iChannel0_Image != "") {
-            glActiveTexture(GL_TEXTURE0 + tc);
+            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel0);
-            glUniform1i(this->iChannel0, tc);
+            glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution0[0], this->iChannelResolution0[1], 0.0f);
             tc += 1;
         }
         if (this->iChannel1_Image != "") {
-            glActiveTexture(GL_TEXTURE0 + tc);
+            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel1);
-            glUniform1i(this->iChannel0, tc);
+            glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution1[0], this->iChannelResolution1[1], 0.0f);
             tc += 1;
         }
         if (this->iChannel2_Image != "") {
-            glActiveTexture(GL_TEXTURE0 + tc);
+            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel2);
-            glUniform1i(this->iChannel0, tc);
+            glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution2[0], this->iChannelResolution2[1], 0.0f);
             tc += 1;
         }
         if (this->iChannel3_Image != "") {
-            glActiveTexture(GL_TEXTURE0 + tc);
+            glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel3);
-            glUniform1i(this->iChannel0, tc);
+            glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution3[0], this->iChannelResolution3[1], 0.0f);
             tc += 1;
         }

@@ -16,7 +16,8 @@ MiniAxis::~MiniAxis() {
     this->rotateY.reset();
     this->rotateZ.reset();
 
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -78,11 +79,8 @@ bool MiniAxis::initShaderProgram() {
         this->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
-    else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+    else
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-        this->glAttributeColor = this->glUtils->glGetAttribute(this->shaderProgram, "a_axisColor");
-    }
 
     return success;
 }
@@ -124,15 +122,15 @@ void MiniAxis::initBuffers() {
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data) * sizeof(GLfloat), g_vertex_buffer_data, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // colors
     glGenBuffers(1, &this->vboColors);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
     glBufferData(GL_ARRAY_BUFFER, sizeof(g_color_buffer_data) * sizeof(GLfloat), g_color_buffer_data, GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeColor);
-    glVertexAttribPointer(this->glAttributeColor, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
 
     glBindVertexArray(0);
 }
@@ -146,11 +144,8 @@ void MiniAxis::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCa
         this->matrixProjection = matrixProjection;
         this->matrixCamera = matrixCamera;
 
-        float axisW = 120;
-        float axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
-
-        float axisX = 10;
-        float axisY = 10;
+        int axisW = 120, axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
+        int axisX = 10, axisY = 10;
 
         glViewport(axisX, axisY, axisW, axisH);
 
@@ -159,7 +154,7 @@ void MiniAxis::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCa
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateY->point), glm::vec3(0, 1, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateZ->point), glm::vec3(0, 0, 1));
 
-        glLineWidth((GLfloat)5.5f);
+        glLineWidth(5.5f);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

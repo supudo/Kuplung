@@ -19,7 +19,8 @@ VertexSphere::VertexSphere() {
 }
 
 VertexSphere::~VertexSphere() {
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -70,8 +71,6 @@ bool VertexSphere::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
         this->glUniformInnerLightDirection = this->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
@@ -99,7 +98,7 @@ void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegmen
     this->dataIndices.clear();
 
     if (!this->isSphere) {
-        float theta = 2 * 3.1415926 / float(this->circleSegments);
+        float theta = 2 * 3.1415926f / float(this->circleSegments);
         float c = cosf(theta);
         float s = sinf(theta);
         float t;
@@ -112,7 +111,7 @@ void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegmen
             glm::vec3 vertex = meshModel.vertices[i];
             for (int j=0; j<this->circleSegments; j++) {
                 this->dataVertices.push_back(glm::vec3(x + vertex.x, y + vertex.y, vertex.z));
-                this->dataIndices.push_back(i);
+                this->dataIndices.push_back(static_cast<unsigned int>(i));
 
                 t = x;
                 x = c * x - s * y;
@@ -123,14 +122,14 @@ void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegmen
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, int(this->dataVertices.size()) * sizeof(glm::vec3), &this->dataVertices[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->dataVertices.size() * sizeof(glm::vec3)), &this->dataVertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, int(this->dataIndices.size()) * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
     }
     else {
         const float rings = 1.0f / float(this->circleSegments - 1);
@@ -149,7 +148,6 @@ void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegmen
                     p_y = float(sin(-pi_2 + pi * y * rings));
                     p_z = float(sin(2 * pi * x * sectors) * sin(pi * y * rings));
                     position = glm::vec3(p_x, p_y, p_z) * radius;
-//                    position += glm::normalize(position) + meshModel.vertices[i];
                     position += meshModel.vertices[i];
                     this->dataVertices.push_back(position);
                     this->dataNormals.push_back(position);
@@ -188,21 +186,21 @@ void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegmen
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, int(this->dataVertices.size()) * sizeof(glm::vec3), &this->dataVertices[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLint>(this->dataVertices.size() * sizeof(glm::vec3)), &this->dataVertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // normals
         glGenBuffers(1, &this->vboNormals);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-        glBufferData(GL_ARRAY_BUFFER, this->dataNormals.size() * sizeof(glm::vec3), &this->dataNormals[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexNormal);
-        glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLint>(this->dataNormals.size() * sizeof(glm::vec3)), &this->dataNormals[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(1);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
         glGenBuffers(1, &this->vboIndices);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, int(this->dataIndices.size()) * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
 
     }
 

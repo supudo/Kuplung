@@ -22,13 +22,15 @@ CONFIG(release, debug|release) {
 mac {
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+#    QMAKE_CXXFLAGS_WARN_ON += -Wall
+#    QMAKE_CFLAGS_WARN_ON += -Wall
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
-    QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
+#    QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
 
     QMAKE_MAC_SDK = macosx10.12
 
@@ -130,7 +132,6 @@ SOURCES += main.cpp \
     kuplung/rendering/methods/RenderingDeferred.cpp \
     kuplung/meshes/scene/ModelFaceBase.cpp \
     kuplung/meshes/scene/ModelFaceData.cpp \
-    kuplung/meshes/scene/ModelFaceForward.cpp \
     kuplung/meshes/artefacts/Terrain.cpp \
     kuplung/meshes/artefacts/Spaceship.cpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.cpp \
@@ -222,7 +223,6 @@ HEADERS += \
     kuplung/rendering/methods/RenderingDeferred.hpp \
     kuplung/meshes/scene/ModelFaceBase.hpp \
     kuplung/meshes/scene/ModelFaceData.hpp \
-    kuplung/meshes/scene/ModelFaceForward.hpp \
     kuplung/meshes/artefacts/Terrain.hpp \
     kuplung/meshes/artefacts/Spaceship.hpp \
     kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp \

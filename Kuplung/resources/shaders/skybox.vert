@@ -1,8 +1,10 @@
 #version 410 core
 
+layout (location = 0) in vec3 vs_vertexPosition;
+
 uniform mat4 vs_MatrixView;
 uniform mat4 vs_MatrixProjection;
-in vec3 vs_vertexPosition;
+
 out vec3 vs_textureCoord;
 
 void main(void) {

@@ -11,7 +11,7 @@
 
 #include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
-#include "kuplung/meshes/scene/ModelFaceForward.hpp"
+//#include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/Objects.h"
 

@@ -39,7 +39,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeColor;
+    GLint glUniformMVPMatrix;
 };
 
 #endif /* MiniAxis_hpp */

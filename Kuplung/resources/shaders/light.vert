@@ -1,10 +1,10 @@
 #version 410 core
 
-uniform mat4 u_MVPMatrix;
+layout (location = 0) in vec3 a_vertexPosition;
+layout (location = 1) in vec3 a_vertexNormal;
+layout (location = 2) in vec2 a_textureCoord;
 
-in vec3 a_vertexPosition;
-in vec3 a_vertexNormal;
-in vec2 a_textureCoord;
+uniform mat4 u_MVPMatrix;
 
 out vec3 v_vertexNormal;
 out vec2 v_textureCoord;

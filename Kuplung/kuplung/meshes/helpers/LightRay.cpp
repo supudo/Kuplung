@@ -12,7 +12,6 @@
 #include <glm/gtc/type_ptr.hpp>
 
 LightRay::~LightRay() {
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -65,7 +64,6 @@ bool LightRay::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
 
@@ -78,7 +76,7 @@ bool LightRay::initShaderProgram() {
 }
 
 void LightRay::initBuffers(const glm::vec3 position, const glm::vec3 direction, const bool simple) {
-    if (position.x != x && position.y != y && position.z != z) {
+    if ((position.x > x || position.x < x) && (position.y > y || position.y < y) && (position.z > z || position.z < z)) {
         this->x = position.x;
         this->y = position.y;
         this->z = position.z;
@@ -98,18 +96,18 @@ void LightRay::initBuffers(const glm::vec3 position, const glm::vec3 direction, 
         }
         else {
             GLfloat g_vertex_buffer_data[] = {
-                 -0.866024971, 0, 0.5,
-                 0.866024971, 0, -0.5,
+                 -0.866024971f, 0, 0.5,
+                 0.866024971f, 0, -0.5,
                  0, 0, -1,
                  0, 0, -1,
-                 -0.866024971, 0, -0.5,
-                 -0.866024971, 0, 0.5,
-                 -0.866024971, 0, 0.5,
+                 -0.866024971f, 0, -0.5,
+                 -0.866024971f, 0, 0.5,
+                 -0.866024971f, 0, 0.5,
                  0, 0, 1,
-                 0.866024971, 0, 0.5,
-                 0.866024971, 0, 0.5,
-                 0.866024971, 0, -0.5,
-                 -0.866024971, 0, 0.5
+                 0.866024971f, 0, 0.5,
+                 0.866024971f, 0, 0.5,
+                 0.866024971f, 0, -0.5,
+                 -0.866024971f, 0, 0.5
             };
             for (size_t i=0; i<sizeof(g_vertex_buffer_data); i++) {
                 vertices.push_back(g_vertex_buffer_data[i]);
@@ -119,20 +117,20 @@ void LightRay::initBuffers(const glm::vec3 position, const glm::vec3 direction, 
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), &vertices[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeVertexPosition);
-        glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(vertices.size() * sizeof(GLfloat)), &vertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         if (!simple) {
             std::vector<GLuint> indices;
             for (size_t i=0; i<12; i++) {
-                indices.push_back((int)i);
+                indices.push_back(static_cast<GLuint>(i));
             }
 
             // indices
             glGenBuffers(1, &this->vboIndices);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-            glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(indices.size()) * sizeof(GLuint), &indices[0], GL_STATIC_DRAW);
         }
 
         glBindVertexArray(0);
@@ -145,7 +143,7 @@ void LightRay::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCa
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        glLineWidth((GLfloat)5.5f);
+        glLineWidth(5.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

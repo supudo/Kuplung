@@ -16,11 +16,12 @@ BoundingBox::BoundingBox() {
 }
 
 BoundingBox::~BoundingBox() {
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
     glDeleteProgram(this->shaderProgram);
+
+    glDisableVertexAttribArray(0);
 
     glDeleteShader(this->shaderVertex);
     glDeleteShader(this->shaderFragment);
@@ -67,7 +68,6 @@ bool BoundingBox::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
@@ -96,9 +96,9 @@ void BoundingBox::initBuffers(const MeshModel meshModel) {
     };
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->dataVertices.size() * sizeof(GLfloat)), &this->dataVertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
 
     // indices
     this->dataIndices = {
@@ -108,7 +108,7 @@ void BoundingBox::initBuffers(const MeshModel meshModel) {
     };
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size()) * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
     this->min_x = this->max_x = 0.0f;
     this->min_y = this->max_y = 0.0f;
@@ -159,9 +159,14 @@ void BoundingBox::render(const glm::mat4 matrixMVP, const glm::vec4 outlineColor
 
         glBindVertexArray(this->glVAO);
 
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, (GLvoid*)(4 * sizeof(GLuint)));
-        glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, (GLvoid*)(8 * sizeof(GLuint)));
+        size_t firstIndex = 0;
+        size_t indexDataSize = sizeof(GLuint);
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(firstIndex * indexDataSize));
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(4 * indexDataSize));
+        glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(8 * indexDataSize));
+//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);
+//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, (GLvoid*)(4 * sizeof(GLuint)));
+//        glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, (GLvoid*)(8 * sizeof(GLuint)));
 
         glBindVertexArray(0);
 

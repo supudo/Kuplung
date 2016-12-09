@@ -32,7 +32,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix;
+    GLint glUniformMVPMatrix;
 };
 
 #endif /* LightRay_hpp */

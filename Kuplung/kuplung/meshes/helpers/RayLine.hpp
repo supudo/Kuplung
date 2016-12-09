@@ -34,7 +34,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glUniformColor;
+    GLint glUniformMVPMatrix, glUniformColor;
 
     std::vector<float> dataVertices, dataColors;
     std::vector<uint> dataIndices;

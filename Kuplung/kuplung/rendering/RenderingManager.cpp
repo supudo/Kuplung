@@ -21,16 +21,20 @@ RenderingManager::~RenderingManager() {
 
 void RenderingManager::init() {
     this->rendererSimple = std::make_unique<RenderingSimple>(this->managerObjects);
-    this->rendererSimple->init();
+    if (!this->rendererSimple->init())
+        Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingSimple::init()!");
 
     this->rendererForward = std::make_unique<RenderingForward>(this->managerObjects);
-    this->rendererForward->init();
+    if (!this->rendererForward->init())
+        Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingForward::init()!");
 
     this->rendererForwardShadowMapping = std::make_unique<RenderingForwardShadowMapping>(this->managerObjects);
-    this->rendererForwardShadowMapping->init();
+    if (!this->rendererForwardShadowMapping->init())
+        Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingForwardShadowMapping::init()!");
 
     this->rendererDeferred = std::make_unique<RenderingDeferred>(this->managerObjects);
-    this->rendererDeferred->init();
+    if (!this->rendererDeferred->init())
+        Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingDeferred::init()!");
 
     this->RenderingTotalVertices = 0;
     this->RenderingTotalIndices = 0;

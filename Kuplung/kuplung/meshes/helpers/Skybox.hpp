@@ -32,7 +32,7 @@ private:
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboIndices, vboTexture;
-    GLuint glVS_MatrixView, glVS_MatrixProjection, glVS_VertexPosition;
+    GLint glVS_MatrixView, glVS_MatrixProjection;
 };
 
 #endif /* ModelFace_hpp */

@@ -16,7 +16,7 @@ RayLine::~RayLine() {
     glDeleteBuffers(1, &this->vboIndices);
     glDeleteBuffers(1, &this->vboColors);
 
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
+    glDisableVertexAttribArray(0);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -73,7 +73,6 @@ bool RayLine::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
         this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
@@ -103,21 +102,21 @@ void RayLine::initBuffers(const glm::vec3 vecFrom, const glm::vec3 vecTo) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->dataVertices.size() * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataVertices.size()) * sizeof(GLfloat), &this->dataVertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // colors
     glGenBuffers(1, &this->vboColors);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-    glBufferData(GL_ARRAY_BUFFER, this->dataColors.size() * sizeof(GLfloat), &this->dataColors[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glUniformColor);
-    glVertexAttribPointer(this->glUniformColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->dataIndices.size() * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size()) * sizeof(GLuint), &this->dataIndices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }
@@ -137,7 +136,7 @@ void RayLine::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCam
         // draw
         glBindVertexArray(this->glVAO);
 
-        glLineWidth((GLfloat)2.5f);
+        glLineWidth(2.5f);
 
         glEnable(GL_DEPTH_TEST);
         glDepthFunc(GL_LESS);

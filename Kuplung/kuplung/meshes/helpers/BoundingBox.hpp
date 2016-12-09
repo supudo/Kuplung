@@ -40,7 +40,7 @@ private:
     GLuint glVAO;
     GLuint vboVertices, vboIndices;
 
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
+    GLint glUniformMVPMatrix, glUniformColor;
 };
 
 #endif /* BoundingBox_hpp */

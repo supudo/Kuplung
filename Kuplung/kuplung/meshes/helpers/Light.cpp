@@ -17,9 +17,9 @@
 #include <glm/gtc/type_ptr.hpp>
 
 Light::~Light() {
-    glDisableVertexAttribArray(this->glAttributeVertexPosition);
-    glDisableVertexAttribArray(this->glAttributeTextureCoord);
-    glDisableVertexAttribArray(this->glAttributeVertexNormal);
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -96,6 +96,7 @@ void Light::initProperties(LightSourceType type) {
     this->ambient = std::make_unique<MaterialColor>(false, false, 0.3f, glm::vec3(1.0, 1.0, 1.0));
     this->diffuse = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
 
+    assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
     switch (type) {
         case LightSourceType_Directional: {
             this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
@@ -124,8 +125,6 @@ void Light::initProperties(LightSourceType type) {
             this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 15.0f);
             break;
         }
-        default:
-            break;
     }
 
     this->matrixModel = glm::mat4(1.0);
@@ -171,10 +170,6 @@ bool Light::initShaderProgram() {
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
-        this->glAttributeVertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexNormal");
-        this->glAttributeTextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "a_textureCoord");
-
         this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
 
         this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
@@ -197,24 +192,24 @@ void Light::initBuffers(std::string const& assetsFolder) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countVertices * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexPosition);
-    glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countVertices) * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.countNormals * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(this->glAttributeVertexNormal);
-    glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countNormals) * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // textures and colors
     if (this->meshModel.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->meshModel.texture_coordinates.size() * sizeof(glm::vec3), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glAttributeTextureCoord);
-        glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.texture_coordinates.size() * sizeof(glm::vec3)), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(2);
+        glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
         if (this->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
             std::string matImageLocal = assetsFolder + "/gui/" + this->meshModel.ModelMaterial.TextureDiffuse.Image;
@@ -232,7 +227,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
                 glGenerateMipmap(GL_TEXTURE_2D);
 
-                GLint textureFormat = 0;
+                GLenum textureFormat = 0;
                 switch (tChannels) {
                     case 1:
                         textureFormat = GL_LUMINANCE;
@@ -250,7 +245,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
                         textureFormat = GL_RGB;
                         break;
                 }
-                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+                glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
                 stbi_image_free(tPixels);
             }
         }
@@ -259,7 +254,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshModel.countIndices * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countIndices) * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
 
     glBindVertexArray(0);
 }

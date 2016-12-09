@@ -216,6 +216,13 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMater
         unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
         if (!tPixels) {
             std::string texName = "";
+            assert(type == objMaterialImageType_Ambient ||
+                   type == objMaterialImageType_Diffuse ||
+                   type == objMaterialImageType_Specular ||
+                   type == objMaterialImageType_SpecularExp ||
+                   type == objMaterialImageType_Dissolve ||
+                   type == objMaterialImageType_Bump ||
+                   type == objMaterialImageType_Displacement);
             switch (type) {
                 case objMaterialImageType_Ambient:
                     texName = "ambient";
@@ -238,8 +245,6 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMater
                 case objMaterialImageType_Displacement:
                     texName = "displacement";
                     break;
-                default:
-                    break;
             }
             Settings::Instance()->funcDoLog("Can't load " + texName + " texture image - " + matImageLocal + " with error - " + std::string(stbi_failure_reason()));
         }
@@ -252,7 +257,7 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMater
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
             glGenerateMipmap(GL_TEXTURE_2D);
 
-            GLint textureFormat = 0;
+            GLenum textureFormat = 0;
             switch (tChannels) {
                 case 1:
                     textureFormat = GL_LUMINANCE;
@@ -270,7 +275,7 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMater
                     textureFormat = GL_RGB;
                     break;
             }
-            glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+            glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
             stbi_image_free(tPixels);
         }
     }

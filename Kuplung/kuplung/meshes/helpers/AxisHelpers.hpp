@@ -38,8 +38,8 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glUniformColor;
+    GLuint vboVertices, vboIndices;
+    GLint glUniformMVPMatrix, glUniformColor;
 };
 
 #endif /* AxisHelpers_hpp */

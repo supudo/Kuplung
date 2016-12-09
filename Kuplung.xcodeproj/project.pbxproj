@@ -25,60 +25,6 @@
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
-		8A2154381DE7501F00034C59 /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
-		8A2154391DE7501F00034C59 /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
-		8A21543A1DE7501F00034C59 /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
-		8A21543B1DE7501F00034C59 /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
-		8A21543C1DE7501F00034C59 /* bounding_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D11CC0CC6600BE0600 /* bounding_box.frag */; };
-		8A21543D1DE7501F00034C59 /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
-		8A21543E1DE7501F00034C59 /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
-		8A21543F1DE7501F00034C59 /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
-		8A2154401DE7501F00034C59 /* deferred_g_buffer.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */; };
-		8A2154411DE7501F00034C59 /* deferred_g_buffer.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */; };
-		8A2154421DE7501F00034C59 /* deferred_light_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C21D1412D2000BE246 /* deferred_light_box.frag */; };
-		8A2154431DE7501F00034C59 /* deferred_light_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C31D1412D2000BE246 /* deferred_light_box.vert */; };
-		8A2154441DE7501F00034C59 /* deferred_shading.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C41D1412D2000BE246 /* deferred_shading.frag */; };
-		8A2154451DE7501F00034C59 /* deferred_shading.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C51D1412D2000BE246 /* deferred_shading.vert */; };
-		8A2154461DE7501F00034C59 /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
-		8A2154471DE7501F00034C59 /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEA1C773DF8009F1F52 /* grid.vert */; };
-		8A2154481DE7501F00034C59 /* light_ray.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */; };
-		8A2154491DE7501F00034C59 /* light_ray.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */; };
-		8A21544A1DE7501F00034C59 /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDED1C773DF8009F1F52 /* light.frag */; };
-		8A21544B1DE7501F00034C59 /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEE1C773DF8009F1F52 /* light.vert */; };
-		8A21544C1DE7501F00034C59 /* model_face_effects.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */; };
-		8A21544D1DE7501F00034C59 /* model_face_lights.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */; };
-		8A21544E1DE7501F00034C59 /* model_face_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */; };
-		8A21544F1DE7501F00034C59 /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
-		8A2154501DE7501F00034C59 /* model_face_shadow_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */; };
-		8A2154511DE7501F00034C59 /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
-		8A2154521DE7501F00034C59 /* model_face.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEF1C773DF8009F1F52 /* model_face.frag */; };
-		8A2154531DE7501F00034C59 /* model_face.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF01C773DF8009F1F52 /* model_face.geom */; };
-		8A2154541DE7501F00034C59 /* model_face.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF11C773DF8009F1F52 /* model_face.tcs */; };
-		8A2154551DE7501F00034C59 /* model_face.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF21C773DF8009F1F52 /* model_face.tes */; };
-		8A2154561DE7501F00034C59 /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
-		8A2154571DE7501F00034C59 /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
-		8A2154581DE7501F00034C59 /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
-		8A2154591DE7501F00034C59 /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
-		8A21545A1DE7501F00034C59 /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
-		8A21545B1DE7501F00034C59 /* rendering_simple.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB273391D2FCC8D008508B1 /* rendering_simple.frag */; };
-		8A21545C1DE7501F00034C59 /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
-		8A21545D1DE7501F00034C59 /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
-		8A21545E1DE7501F00034C59 /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
-		8A21545F1DE7501F00034C59 /* rendering_simple.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */; };
-		8A2154601DE7501F00034C59 /* shadertoy.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB256411DA4F3C400ABF2AC /* shadertoy.vert */; };
-		8A2154611DE7501F00034C59 /* shadow_mapping_depth.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */; };
-		8A2154621DE7501F00034C59 /* shadow_mapping_depth.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */; };
-		8A2154631DE7501F00034C59 /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
-		8A2154641DE7501F00034C59 /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
-		8A2154651DE7501F00034C59 /* spaceship.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22B1D2173CB004A8F1C /* spaceship.frag */; };
-		8A2154661DE7501F00034C59 /* spaceship.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22C1D2173CB004A8F1C /* spaceship.vert */; };
-		8A2154671DE7501F00034C59 /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
-		8A2154681DE7501F00034C59 /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
-		8A2154691DE7501F00034C59 /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
-		8A21546A1DE7501F00034C59 /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
-		8A21546B1DE7501F00034C59 /* vertex_sphere.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14251D75B8B40075189D /* vertex_sphere.frag */; };
-		8A21546C1DE7501F00034C59 /* vertex_sphere.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14261D75B8B40075189D /* vertex_sphere.vert */; };
-		8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */; };
 		8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */; };
 		8A2575EE1DD48ACF004172E3 /* brick_wall_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */; };
 		8A2575EF1DD48ACF004172E3 /* brick_wall_displacement.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438F1DC0DD7A008393B5 /* brick_wall_displacement.png */; };
@@ -137,6 +83,61 @@
 		8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
+		8A4FB76C1DFACDEA004EC0EE /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
+		8A4FB76D1DFACDEA004EC0EE /* axis_helpers.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */; };
+		8A4FB76E1DFACDEA004EC0EE /* axis.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE71C773DF8009F1F52 /* axis.frag */; };
+		8A4FB76F1DFACDEA004EC0EE /* axis.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE81C773DF8009F1F52 /* axis.vert */; };
+		8A4FB7701DFACDEA004EC0EE /* bounding_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D11CC0CC6600BE0600 /* bounding_box.frag */; };
+		8A4FB7711DFACDEA004EC0EE /* bounding_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A5128D21CC0CC6600BE0600 /* bounding_box.vert */; };
+		8A4FB7721DFACDEA004EC0EE /* camera.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71B1CBF744800699CAC /* camera.frag */; };
+		8A4FB7731DFACDEA004EC0EE /* camera.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A47F71C1CBF744800699CAC /* camera.vert */; };
+		8A4FB7741DFACDEA004EC0EE /* deferred_g_buffer.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */; };
+		8A4FB7751DFACDEA004EC0EE /* deferred_g_buffer.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */; };
+		8A4FB7761DFACDEA004EC0EE /* deferred_light_box.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C21D1412D2000BE246 /* deferred_light_box.frag */; };
+		8A4FB7771DFACDEA004EC0EE /* deferred_light_box.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C31D1412D2000BE246 /* deferred_light_box.vert */; };
+		8A4FB7781DFACDEA004EC0EE /* deferred_shading.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C41D1412D2000BE246 /* deferred_shading.frag */; };
+		8A4FB7791DFACDEA004EC0EE /* deferred_shading.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2855C51D1412D2000BE246 /* deferred_shading.vert */; };
+		8A4FB77A1DFACDEA004EC0EE /* grid.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDE91C773DF8009F1F52 /* grid.frag */; };
+		8A4FB77B1DFACDEA004EC0EE /* grid.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEA1C773DF8009F1F52 /* grid.vert */; };
+		8A4FB77C1DFACDEA004EC0EE /* light_ray.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEB1C773DF8009F1F52 /* light_ray.frag */; };
+		8A4FB77D1DFACDEA004EC0EE /* light_ray.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEC1C773DF8009F1F52 /* light_ray.vert */; };
+		8A4FB77E1DFACDEA004EC0EE /* light.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDED1C773DF8009F1F52 /* light.frag */; };
+		8A4FB77F1DFACDEA004EC0EE /* light.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEE1C773DF8009F1F52 /* light.vert */; };
+		8A4FB7801DFACDEA004EC0EE /* model_face_effects.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027911C9ABDFE00BBFFC6 /* model_face_effects.frag */; };
+		8A4FB7811DFACDEA004EC0EE /* model_face_lights.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027921C9ABDFE00BBFFC6 /* model_face_lights.frag */; };
+		8A4FB7821DFACDEA004EC0EE /* model_face_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */; };
+		8A4FB7831DFACDEA004EC0EE /* model_face_misc.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */; };
+		8A4FB7841DFACDEA004EC0EE /* model_face_shadow_mapping.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */; };
+		8A4FB7851DFACDEA004EC0EE /* model_face_vars.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */; };
+		8A4FB7861DFACDEA004EC0EE /* model_face.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDEF1C773DF8009F1F52 /* model_face.frag */; };
+		8A4FB7871DFACDEA004EC0EE /* model_face.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF01C773DF8009F1F52 /* model_face.geom */; };
+		8A4FB7881DFACDEA004EC0EE /* model_face.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF11C773DF8009F1F52 /* model_face.tcs */; };
+		8A4FB7891DFACDEA004EC0EE /* model_face.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF21C773DF8009F1F52 /* model_face.tes */; };
+		8A4FB78A1DFACDEA004EC0EE /* model_face.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF31C773DF8009F1F52 /* model_face.vert */; };
+		8A4FB78B1DFACDEA004EC0EE /* ray_line.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3221CBE8B530076F4F6 /* ray_line.frag */; };
+		8A4FB78C1DFACDEA004EC0EE /* ray_line.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A48C3231CBE8B530076F4F6 /* ray_line.vert */; };
+		8A4FB78D1DFACDEA004EC0EE /* reflection.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386B1C7F28E8004D4520 /* reflection.frag */; };
+		8A4FB78E1DFACDEA004EC0EE /* reflection.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A7F386C1C7F28E8004D4520 /* reflection.vert */; };
+		8A4FB78F1DFACDEA004EC0EE /* rendering_simple.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB273391D2FCC8D008508B1 /* rendering_simple.frag */; };
+		8A4FB7901DFACDEA004EC0EE /* rendering_simple.geom in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C21D33BBEE00D3AAB7 /* rendering_simple.geom */; };
+		8A4FB7911DFACDEA004EC0EE /* rendering_simple.tcs in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C31D33BBEE00D3AAB7 /* rendering_simple.tcs */; };
+		8A4FB7921DFACDEA004EC0EE /* rendering_simple.tes in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AF9D9C41D33BBEE00D3AAB7 /* rendering_simple.tes */; };
+		8A4FB7931DFACDEA004EC0EE /* rendering_simple.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB2733A1D2FCC8D008508B1 /* rendering_simple.vert */; };
+		8A4FB7941DFACDEA004EC0EE /* shadertoy.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AB256411DA4F3C400ABF2AC /* shadertoy.vert */; };
+		8A4FB7951DFACDEA004EC0EE /* shadow_mapping_depth.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */; };
+		8A4FB7961DFACDEA004EC0EE /* shadow_mapping_depth.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */; };
+		8A4FB7971DFACDEA004EC0EE /* shadows_debug_quad_depth.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A4FB76A1DFACDCD004EC0EE /* shadows_debug_quad_depth.frag */; };
+		8A4FB7981DFACDEA004EC0EE /* shadows_debug_quad.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A4FB76B1DFACDCD004EC0EE /* shadows_debug_quad.vert */; };
+		8A4FB7991DFACDEA004EC0EE /* skybox.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC0791CB274610096AE7A /* skybox.frag */; };
+		8A4FB79A1DFACDEA004EC0EE /* skybox.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AECC07A1CB274610096AE7A /* skybox.vert */; };
+		8A4FB79B1DFACDEA004EC0EE /* spaceship.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22B1D2173CB004A8F1C /* spaceship.frag */; };
+		8A4FB79C1DFACDEA004EC0EE /* spaceship.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA9F22C1D2173CB004A8F1C /* spaceship.vert */; };
+		8A4FB79D1DFACDEA004EC0EE /* structured_vol_sampling.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */; };
+		8A4FB79E1DFACDEA004EC0EE /* structured_vol_sampling.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */; };
+		8A4FB79F1DFACDEA004EC0EE /* terrain.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF41C773DF8009F1F52 /* terrain.frag */; };
+		8A4FB7A01DFACDEA004EC0EE /* terrain.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AA5EDF51C773DF8009F1F52 /* terrain.vert */; };
+		8A4FB7A11DFACDEA004EC0EE /* vertex_sphere.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14251D75B8B40075189D /* vertex_sphere.frag */; };
+		8A4FB7A21DFACDEA004EC0EE /* vertex_sphere.vert in Copy Files */ = {isa = PBXBuildFile; fileRef = 8AAF14261D75B8B40075189D /* vertex_sphere.vert */; };
 		8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */; };
 		8A55D3301CCA2E730004712D /* x_minus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D3281CCA2E620004712D /* x_minus.mtl */; };
 		8A55D3311CCA2E730004712D /* x_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D3291CCA2E620004712D /* x_minus.obj */; };
@@ -488,59 +489,61 @@
 			dstPath = shaders;
 			dstSubfolderSpec = 7;
 			files = (
-				8A2154381DE7501F00034C59 /* axis_helpers.frag in Copy Files */,
-				8A2154391DE7501F00034C59 /* axis_helpers.vert in Copy Files */,
-				8A21543A1DE7501F00034C59 /* axis.frag in Copy Files */,
-				8A21543B1DE7501F00034C59 /* axis.vert in Copy Files */,
-				8A21543C1DE7501F00034C59 /* bounding_box.frag in Copy Files */,
-				8A21543D1DE7501F00034C59 /* bounding_box.vert in Copy Files */,
-				8A21543E1DE7501F00034C59 /* camera.frag in Copy Files */,
-				8A21543F1DE7501F00034C59 /* camera.vert in Copy Files */,
-				8A2154401DE7501F00034C59 /* deferred_g_buffer.frag in Copy Files */,
-				8A2154411DE7501F00034C59 /* deferred_g_buffer.vert in Copy Files */,
-				8A2154421DE7501F00034C59 /* deferred_light_box.frag in Copy Files */,
-				8A2154431DE7501F00034C59 /* deferred_light_box.vert in Copy Files */,
-				8A2154441DE7501F00034C59 /* deferred_shading.frag in Copy Files */,
-				8A2154451DE7501F00034C59 /* deferred_shading.vert in Copy Files */,
-				8A2154461DE7501F00034C59 /* grid.frag in Copy Files */,
-				8A2154471DE7501F00034C59 /* grid.vert in Copy Files */,
-				8A2154481DE7501F00034C59 /* light_ray.frag in Copy Files */,
-				8A2154491DE7501F00034C59 /* light_ray.vert in Copy Files */,
-				8A21544A1DE7501F00034C59 /* light.frag in Copy Files */,
-				8A21544B1DE7501F00034C59 /* light.vert in Copy Files */,
-				8A21544C1DE7501F00034C59 /* model_face_effects.frag in Copy Files */,
-				8A21544D1DE7501F00034C59 /* model_face_lights.frag in Copy Files */,
-				8A21544E1DE7501F00034C59 /* model_face_mapping.frag in Copy Files */,
-				8A21544F1DE7501F00034C59 /* model_face_misc.frag in Copy Files */,
-				8A2154501DE7501F00034C59 /* model_face_shadow_mapping.frag in Copy Files */,
-				8A2154511DE7501F00034C59 /* model_face_vars.frag in Copy Files */,
-				8A2154521DE7501F00034C59 /* model_face.frag in Copy Files */,
-				8A2154531DE7501F00034C59 /* model_face.geom in Copy Files */,
-				8A2154541DE7501F00034C59 /* model_face.tcs in Copy Files */,
-				8A2154551DE7501F00034C59 /* model_face.tes in Copy Files */,
-				8A2154561DE7501F00034C59 /* model_face.vert in Copy Files */,
-				8A2154571DE7501F00034C59 /* ray_line.frag in Copy Files */,
-				8A2154581DE7501F00034C59 /* ray_line.vert in Copy Files */,
-				8A2154591DE7501F00034C59 /* reflection.frag in Copy Files */,
-				8A21545A1DE7501F00034C59 /* reflection.vert in Copy Files */,
-				8A21545B1DE7501F00034C59 /* rendering_simple.frag in Copy Files */,
-				8A21545C1DE7501F00034C59 /* rendering_simple.geom in Copy Files */,
-				8A21545D1DE7501F00034C59 /* rendering_simple.tcs in Copy Files */,
-				8A21545E1DE7501F00034C59 /* rendering_simple.tes in Copy Files */,
-				8A21545F1DE7501F00034C59 /* rendering_simple.vert in Copy Files */,
-				8A2154601DE7501F00034C59 /* shadertoy.vert in Copy Files */,
-				8A2154611DE7501F00034C59 /* shadow_mapping_depth.frag in Copy Files */,
-				8A2154621DE7501F00034C59 /* shadow_mapping_depth.vert in Copy Files */,
-				8A2154631DE7501F00034C59 /* skybox.frag in Copy Files */,
-				8A2154641DE7501F00034C59 /* skybox.vert in Copy Files */,
-				8A2154651DE7501F00034C59 /* spaceship.frag in Copy Files */,
-				8A2154661DE7501F00034C59 /* spaceship.vert in Copy Files */,
-				8A2154671DE7501F00034C59 /* structured_vol_sampling.frag in Copy Files */,
-				8A2154681DE7501F00034C59 /* structured_vol_sampling.vert in Copy Files */,
-				8A2154691DE7501F00034C59 /* terrain.frag in Copy Files */,
-				8A21546A1DE7501F00034C59 /* terrain.vert in Copy Files */,
-				8A21546B1DE7501F00034C59 /* vertex_sphere.frag in Copy Files */,
-				8A21546C1DE7501F00034C59 /* vertex_sphere.vert in Copy Files */,
+				8A4FB76C1DFACDEA004EC0EE /* axis_helpers.frag in Copy Files */,
+				8A4FB76D1DFACDEA004EC0EE /* axis_helpers.vert in Copy Files */,
+				8A4FB76E1DFACDEA004EC0EE /* axis.frag in Copy Files */,
+				8A4FB76F1DFACDEA004EC0EE /* axis.vert in Copy Files */,
+				8A4FB7701DFACDEA004EC0EE /* bounding_box.frag in Copy Files */,
+				8A4FB7711DFACDEA004EC0EE /* bounding_box.vert in Copy Files */,
+				8A4FB7721DFACDEA004EC0EE /* camera.frag in Copy Files */,
+				8A4FB7731DFACDEA004EC0EE /* camera.vert in Copy Files */,
+				8A4FB7741DFACDEA004EC0EE /* deferred_g_buffer.frag in Copy Files */,
+				8A4FB7751DFACDEA004EC0EE /* deferred_g_buffer.vert in Copy Files */,
+				8A4FB7761DFACDEA004EC0EE /* deferred_light_box.frag in Copy Files */,
+				8A4FB7771DFACDEA004EC0EE /* deferred_light_box.vert in Copy Files */,
+				8A4FB7781DFACDEA004EC0EE /* deferred_shading.frag in Copy Files */,
+				8A4FB7791DFACDEA004EC0EE /* deferred_shading.vert in Copy Files */,
+				8A4FB77A1DFACDEA004EC0EE /* grid.frag in Copy Files */,
+				8A4FB77B1DFACDEA004EC0EE /* grid.vert in Copy Files */,
+				8A4FB77C1DFACDEA004EC0EE /* light_ray.frag in Copy Files */,
+				8A4FB77D1DFACDEA004EC0EE /* light_ray.vert in Copy Files */,
+				8A4FB77E1DFACDEA004EC0EE /* light.frag in Copy Files */,
+				8A4FB77F1DFACDEA004EC0EE /* light.vert in Copy Files */,
+				8A4FB7801DFACDEA004EC0EE /* model_face_effects.frag in Copy Files */,
+				8A4FB7811DFACDEA004EC0EE /* model_face_lights.frag in Copy Files */,
+				8A4FB7821DFACDEA004EC0EE /* model_face_mapping.frag in Copy Files */,
+				8A4FB7831DFACDEA004EC0EE /* model_face_misc.frag in Copy Files */,
+				8A4FB7841DFACDEA004EC0EE /* model_face_shadow_mapping.frag in Copy Files */,
+				8A4FB7851DFACDEA004EC0EE /* model_face_vars.frag in Copy Files */,
+				8A4FB7861DFACDEA004EC0EE /* model_face.frag in Copy Files */,
+				8A4FB7871DFACDEA004EC0EE /* model_face.geom in Copy Files */,
+				8A4FB7881DFACDEA004EC0EE /* model_face.tcs in Copy Files */,
+				8A4FB7891DFACDEA004EC0EE /* model_face.tes in Copy Files */,
+				8A4FB78A1DFACDEA004EC0EE /* model_face.vert in Copy Files */,
+				8A4FB78B1DFACDEA004EC0EE /* ray_line.frag in Copy Files */,
+				8A4FB78C1DFACDEA004EC0EE /* ray_line.vert in Copy Files */,
+				8A4FB78D1DFACDEA004EC0EE /* reflection.frag in Copy Files */,
+				8A4FB78E1DFACDEA004EC0EE /* reflection.vert in Copy Files */,
+				8A4FB78F1DFACDEA004EC0EE /* rendering_simple.frag in Copy Files */,
+				8A4FB7901DFACDEA004EC0EE /* rendering_simple.geom in Copy Files */,
+				8A4FB7911DFACDEA004EC0EE /* rendering_simple.tcs in Copy Files */,
+				8A4FB7921DFACDEA004EC0EE /* rendering_simple.tes in Copy Files */,
+				8A4FB7931DFACDEA004EC0EE /* rendering_simple.vert in Copy Files */,
+				8A4FB7941DFACDEA004EC0EE /* shadertoy.vert in Copy Files */,
+				8A4FB7951DFACDEA004EC0EE /* shadow_mapping_depth.frag in Copy Files */,
+				8A4FB7961DFACDEA004EC0EE /* shadow_mapping_depth.vert in Copy Files */,
+				8A4FB7971DFACDEA004EC0EE /* shadows_debug_quad_depth.frag in Copy Files */,
+				8A4FB7981DFACDEA004EC0EE /* shadows_debug_quad.vert in Copy Files */,
+				8A4FB7991DFACDEA004EC0EE /* skybox.frag in Copy Files */,
+				8A4FB79A1DFACDEA004EC0EE /* skybox.vert in Copy Files */,
+				8A4FB79B1DFACDEA004EC0EE /* spaceship.frag in Copy Files */,
+				8A4FB79C1DFACDEA004EC0EE /* spaceship.vert in Copy Files */,
+				8A4FB79D1DFACDEA004EC0EE /* structured_vol_sampling.frag in Copy Files */,
+				8A4FB79E1DFACDEA004EC0EE /* structured_vol_sampling.vert in Copy Files */,
+				8A4FB79F1DFACDEA004EC0EE /* terrain.frag in Copy Files */,
+				8A4FB7A01DFACDEA004EC0EE /* terrain.vert in Copy Files */,
+				8A4FB7A11DFACDEA004EC0EE /* vertex_sphere.frag in Copy Files */,
+				8A4FB7A21DFACDEA004EC0EE /* vertex_sphere.vert in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -644,8 +647,6 @@
 		8A2154341DE74FD700034C59 /* model_face_shadow_mapping.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = model_face_shadow_mapping.frag; sourceTree = "<group>"; };
 		8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow_mapping_depth.frag; sourceTree = "<group>"; };
 		8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow_mapping_depth.vert; sourceTree = "<group>"; };
-		8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceDeferredT.cpp; path = scene/ModelFaceDeferredT.cpp; sourceTree = "<group>"; };
-		8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceDeferredT.hpp; path = scene/ModelFaceDeferredT.hpp; sourceTree = "<group>"; };
 		8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogSVS.cpp; sourceTree = "<group>"; };
 		8A2543DD1D9D6CF10057A927 /* DialogSVS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogSVS.hpp; sourceTree = "<group>"; };
 		8A2575EA1DD48A9D004172E3 /* MaterialBall.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaterialBall.mtl; path = "build-Kuplung-Desktop_Qt_5_7_0_clang_64bit-Debug/kuplung.app/Contents/Resources/shapes/MaterialBall.mtl"; sourceTree = SOURCE_ROOT; };
@@ -706,6 +707,8 @@
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
 		8A4C65E91DBF66C20022837F /* plane_objects.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.mtl; path = shapes/plane_objects.mtl; sourceTree = "<group>"; };
 		8A4C65EA1DBF66C20022837F /* plane_objects.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.obj; path = shapes/plane_objects.obj; sourceTree = "<group>"; };
+		8A4FB76A1DFACDCD004EC0EE /* shadows_debug_quad_depth.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadows_debug_quad_depth.frag; sourceTree = "<group>"; };
+		8A4FB76B1DFACDCD004EC0EE /* shadows_debug_quad.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadows_debug_quad.vert; sourceTree = "<group>"; };
 		8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayPicking.cpp; sourceTree = "<group>"; };
 		8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayPicking.hpp; sourceTree = "<group>"; };
 		8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.mtl; path = shapes/triangle.mtl; sourceTree = "<group>"; };
@@ -1376,8 +1379,6 @@
 				8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */,
 				8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */,
 				8A7802D71D2D4F4B00D24620 /* ModelFaceData.hpp */,
-				8A220E1C1D2C050700F7F816 /* ModelFaceDeferredT.cpp */,
-				8A220E1D1D2C050700F7F816 /* ModelFaceDeferredT.hpp */,
 				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
 				8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */,
 			);
@@ -1636,6 +1637,8 @@
 				8AB256411DA4F3C400ABF2AC /* shadertoy.vert */,
 				8A2154351DE74FDC00034C59 /* shadow_mapping_depth.frag */,
 				8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */,
+				8A4FB76A1DFACDCD004EC0EE /* shadows_debug_quad_depth.frag */,
+				8A4FB76B1DFACDCD004EC0EE /* shadows_debug_quad.vert */,
 				8AECC0791CB274610096AE7A /* skybox.frag */,
 				8AECC07A1CB274610096AE7A /* skybox.vert */,
 				8AA9F22B1D2173CB004A8F1C /* spaceship.frag */,
@@ -1960,7 +1963,6 @@
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8AAF14211D75B8780075189D /* ImGuizmo.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
-				8A220E1E1D2C050700F7F816 /* ModelFaceDeferredT.cpp in Sources */,
 				8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,

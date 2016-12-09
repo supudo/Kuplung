@@ -29,7 +29,7 @@ Skybox::~Skybox() {
     if (this->vboTexture > 0)
         glDeleteBuffers(1, &this->vboTexture);
 
-    glDisableVertexAttribArray(this->glVS_VertexPosition);
+    glDisableVertexAttribArray(0);
 
     glDetachShader(this->shaderProgram, this->shaderVertex);
     glDetachShader(this->shaderProgram, this->shaderFragment);
@@ -125,7 +125,6 @@ bool Skybox::initBuffers() {
 
     this->glVS_MatrixView = this->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixView");
     this->glVS_MatrixProjection = this->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixProjection");
-    this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
 
     if (this->Setting_Skybox_Item > 0) {
         glGenVertexArrays(1, &this->glVAO);
@@ -183,17 +182,18 @@ bool Skybox::initBuffers() {
         // vertices
         glGenBuffers(1, &this->vboVertices);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-        glBufferData(GL_ARRAY_BUFFER, skyboxVertices.size() * sizeof(GLfloat), &skyboxVertices[0], GL_STATIC_DRAW);
-        glEnableVertexAttribArray(this->glVS_VertexPosition);
-        glVertexAttribPointer(this->glVS_VertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(skyboxVertices.size() * sizeof(GLfloat)), &skyboxVertices[0], GL_STATIC_DRAW);
+        glEnableVertexAttribArray(0);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // skybox textures
         glGenTextures(1, &this->vboTexture);
         glActiveTexture(GL_TEXTURE0);
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
-        for (size_t i=0 ; i<this->skyboxItems[this->Setting_Skybox_Item].images.size(); i++) {
-            std::string image = Settings::Instance()->appFolder() + "/skybox/" + this->skyboxItems[this->Setting_Skybox_Item].images[i];
+        size_t skyboxIndex = static_cast<size_t>(this->Setting_Skybox_Item);
+        for (size_t i=0 ; i<this->skyboxItems[skyboxIndex].images.size(); i++) {
+            std::string image = Settings::Instance()->appFolder() + "/skybox/" + this->skyboxItems[skyboxIndex].images[i];
 
             int tWidth, tHeight, tChannels;
             unsigned char* tPixels = stbi_load(image.c_str(), &tWidth, &tHeight, &tChannels, 0);
@@ -231,7 +231,7 @@ void Skybox::render(const glm::mat4 matrixView, const float plane_close, const f
 
         glUniformMatrix4fv(this->glVS_MatrixView, 1, GL_FALSE, glm::value_ptr(matrixView));
 
-        glm::mat4 matrixProjection = glm::perspective(fov, (float)Settings::Instance()->SDL_Window_Width / (float)Settings::Instance()->SDL_Window_Height, plane_close, plane_far);
+        glm::mat4 matrixProjection = glm::perspective(fov, static_cast<float>(Settings::Instance()->SDL_Window_Width) / static_cast<float>(Settings::Instance()->SDL_Window_Height), plane_close, plane_far);
         glUniformMatrix4fv(this->glVS_MatrixProjection, 1, GL_FALSE, glm::value_ptr(matrixProjection));
 
         glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);
@@ -241,6 +241,6 @@ void Skybox::render(const glm::mat4 matrixView, const float plane_close, const f
         glUseProgram(0);
         glBindVertexArray(0);
 
-        glDepthFunc(currentDepthFuncMode);
+        glDepthFunc(static_cast<GLenum>(currentDepthFuncMode));
     }
 }

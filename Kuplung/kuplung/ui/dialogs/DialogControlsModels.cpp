@@ -614,7 +614,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                     "[9] Transparency: Glass on\n    Reflection: Raytrace off",
                     "[10] Casts shadows onto invisible surfaces"
                 };
-                ImGui::Combo("##987", &(*meshModelFaces)[this->selectedObject]->materialIlluminationModel, illum_models_items, IM_ARRAYSIZE(illum_models_items));
+                ImGui::Combo("##987", reinterpret_cast<int*>(&(*meshModelFaces)[this->selectedObject]->materialIlluminationModel), illum_models_items, IM_ARRAYSIZE(illum_models_items));
                 break;
             }
             default:

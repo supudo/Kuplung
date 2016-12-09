@@ -46,7 +46,7 @@ private:
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;
     GLuint vboVertices, vboNormals, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glUniformInnerLightDirection, glUniformColor;
+    GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
 };
 
 #endif /* CameraModel_hpp */

@@ -36,9 +36,8 @@ private:
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices;
-    GLuint vs_InFBO, vs_ScreenResolution;
+    GLint vs_InFBO, vs_ScreenResolution;
 
-    GLint glAttributeVertexPosition;
     GLint iResolution, iGlobalTime, iTimeDelta, iFrame, iFrameRate;
     GLint iChannelTime[4], iChannelResolution[4];
     GLint iMouse, iDate;
@@ -46,7 +45,7 @@ private:
 
     void bindFBO();
     void unbindFBO(GLuint* vboTexture);
-    GLuint tFBO, tRBO, tRenderedTexture;
+    GLuint tFBO, tRBO;
 };
 
 #endif /* Shadertoy_hpp */

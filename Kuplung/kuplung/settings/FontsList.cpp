@@ -24,9 +24,9 @@ bool FontsList::fontFileExists(std::string const& font) {
 }
 
 int FontsList::getSelectedFontSize() {
-    for (int i=0; i<(int)sizeof(this->fontSizes); i++) {
-        if (atof(this->fontSizes[i]) == Settings::Instance()->UIFontSize) {
-            return i;
+    for (size_t i=0; i<sizeof(this->fontSizes); i++) {
+        if (atof(this->fontSizes[i]) < Settings::Instance()->UIFontSize) {
+            return int(i);
         }
     }
     return 0;

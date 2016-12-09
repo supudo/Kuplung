@@ -53,7 +53,7 @@ private:
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors, vboIndices;
-    GLuint glAttributeVertexPosition, glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha, glAttributeColor;
+    GLint glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha;
 
     bool actAsMirrorNeedsChange;
     int gridSizeVertex;

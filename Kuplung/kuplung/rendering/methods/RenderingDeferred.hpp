@@ -28,10 +28,10 @@ private:
     bool initGeometryPass();
     bool initLighingPass();
     bool initLightObjects();
-    void initProps();
-    void initGBuffer();
-    void initModels(std::vector<ModelFaceBase*> meshModelFaces);
-    void initLights();
+    bool initProps();
+    bool initGBuffer();
+    bool initModels(std::vector<ModelFaceBase*> meshModelFaces);
+    bool initLights();
 
     void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
     void renderLightingPass();

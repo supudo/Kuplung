@@ -1,9 +1,9 @@
 #version 410 core
 
-uniform mat4 u_MVPMatrix;
+layout (location = 0) in vec3 a_vertexPosition;
+layout (location = 1) in vec3 fs_color;
 
-in vec3 a_vertexPosition;
-in vec3 fs_color;
+uniform mat4 u_MVPMatrix;
 
 out vec3 v_color;
 

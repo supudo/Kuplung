@@ -39,21 +39,21 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
 
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
-    GLint colorAttachment;
+    GLuint colorAttachment;
     GLenum att = GL_COLOR_ATTACHMENT0;
-    for (colorAttachment = 0; colorAttachment < maxColorAttachments; colorAttachment++) {
+    for (colorAttachment = 0; colorAttachment < static_cast<GLuint>(maxColorAttachments); colorAttachment++) {
         att += colorAttachment;
         GLint param;
         GLuint objName;
         glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
         if (GL_RENDERBUFFER == param) {
             glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-            objName = ((GLuint*)(&param))[0];
+            objName = reinterpret_cast<GLuint*>(&param)[0];
             glDeleteRenderbuffers(1, &objName);
         }
         else if (GL_TEXTURE == param) {
             glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-            objName = ((GLuint*)(&param))[0];
+            objName = reinterpret_cast<GLuint*>(&param)[0];
             glDeleteTextures(1, &objName);
         }
     }

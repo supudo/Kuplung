@@ -33,21 +33,21 @@ ModelFaceData::~ModelFaceData() {
 
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
-    GLint colorAttachment;
+    GLuint colorAttachment;
     GLenum att = GL_COLOR_ATTACHMENT0;
-    for (colorAttachment = 0; colorAttachment < maxColorAttachments; colorAttachment++) {
+    for (colorAttachment = 0; colorAttachment < static_cast<GLuint>(maxColorAttachments); colorAttachment++) {
         att += colorAttachment;
         GLint param;
         GLuint objName;
         glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
         if (GL_RENDERBUFFER == param) {
             glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-            objName = ((GLuint*)(&param))[0];
+            objName = reinterpret_cast<GLuint*>(&param)[0];
             glDeleteRenderbuffers(1, &objName);
         }
         else if (GL_TEXTURE == param) {
             glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
-            objName = ((GLuint*)(&param))[0];
+            objName = reinterpret_cast<GLuint*>(&param)[0];
             glDeleteTextures(1, &objName);
         }
     }
@@ -72,14 +72,14 @@ void ModelFaceData::initBuffers() {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.vertices.size() * sizeof(glm::vec3), &this->meshModel.vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.vertices.size() * sizeof(glm::vec3)), &this->meshModel.vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->meshModel.normals.size() * sizeof(glm::vec3), &this->meshModel.normals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.normals.size() * sizeof(glm::vec3)), &this->meshModel.normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(1);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
@@ -87,7 +87,7 @@ void ModelFaceData::initBuffers() {
     if (this->meshModel.texture_coordinates.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->meshModel.texture_coordinates.size() * sizeof(glm::vec2), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.texture_coordinates.size() * sizeof(glm::vec2)), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(2);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
@@ -116,7 +116,7 @@ void ModelFaceData::initBuffers() {
     // indices
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->meshModel.countIndices * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countIndices) * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
 
     if (this->meshModel.ModelMaterial.TextureBump.Image != "" &&
         this->meshModel.vertices.size() > 0 &&
@@ -129,14 +129,14 @@ void ModelFaceData::initBuffers() {
         // tangents
         glGenBuffers(1, &this->vboTangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
-        glBufferData(GL_ARRAY_BUFFER, int(tangents.size()) * sizeof(glm::vec3), &tangents[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(tangents.size() * sizeof(glm::vec3)), &tangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(3);
         glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // bitangents
         glGenBuffers(1, &this->vboBitangents);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
-        glBufferData(GL_ARRAY_BUFFER, int(bitangents.size()) * sizeof(glm::vec3), &bitangents[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bitangents.size() * sizeof(glm::vec3)), &bitangents[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(4);
         glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
     }

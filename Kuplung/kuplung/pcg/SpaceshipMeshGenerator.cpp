@@ -112,15 +112,15 @@ void SpaceshipMeshGenerator::generateFirstHull2() {
     this->indices.push_back(7); this->normals.push_back(norms[5]);
 
     for (size_t i=0; i<this->indices.size(); i++) {
-        this->colors.push_back(glm::vec3(0.8));
+        this->colors.push_back(glm::vec3(0.8f));
     }
 }
 
 void SpaceshipMeshGenerator::generateFirstHull3() {
-    int x = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
-    int y = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
-    int z = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
-    int extrude_size = this->getRandomValue(-1.0 * this->gridSize, this->gridSize, false);
+    int x = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    int y = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    int z = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    int extrude_size = this->getRandomValue(-1.0f * this->gridSize, this->gridSize, false);
 
     float px = float(x);
     float py = float(y);
@@ -219,14 +219,14 @@ void SpaceshipMeshGenerator::generateFirstHull3() {
 //        float g = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
 //        float b = this->getRandomValue(-1.0 * this->gridSize, this->gridSize);
 //        this->colors.push_back(glm::vec3(r, g, b));
-        this->colors.push_back(glm::vec3(0.8));
+        this->colors.push_back(glm::vec3(0.8f));
     }
 }
 
 int SpaceshipMeshGenerator::getRandomValue(const float valueMin, const float valueMax, bool zeroIsValid) {
     std::mt19937 rng;
     rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> distr(valueMin, valueMax);
+    std::uniform_int_distribution<std::mt19937::result_type> distr(static_cast<unsigned int>(valueMin), static_cast<unsigned int>(valueMax));
 
     int v = int(distr(rng));
     if (zeroIsValid)
