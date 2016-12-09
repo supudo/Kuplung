@@ -20,7 +20,7 @@ public:
     ~RenderingDeferred();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
     std::vector<glm::vec3> objectPositions;
 
@@ -33,7 +33,7 @@ private:
     void initModels(std::vector<ModelFaceBase*> meshModelFaces);
     void initLights();
 
-    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
     void renderLightingPass();
     void renderLightObjects();
 

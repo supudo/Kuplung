@@ -79,6 +79,9 @@ mac {
     LIBS += -L/usr/local/Cellar/minizip/1.1/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.1/include
 
+#    LIBS += -L/usr/local/Cellar/unittest-cpp/1.6.1/lib -lUnitTest++
+#    INCLUDEPATH += /usr/local/Cellar/unittest-cpp/1.6.1/include
+
     LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
     INCLUDEPATH += "$$PWD/../external/libnoise/headers"
 }

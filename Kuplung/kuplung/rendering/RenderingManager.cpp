@@ -38,7 +38,7 @@ void RenderingManager::init() {
     this->RenderingTotalFaces = 0;
 }
 
-void RenderingManager::render(int selectedModel) {
+void RenderingManager::render(const int selectedModel) {
     switch (Settings::Instance()->RendererType) {
         case InAppRendererType_Simple:
             this->rendererSimple->render(this->meshModelFaces, selectedModel);

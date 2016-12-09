@@ -21,11 +21,11 @@ public:
     ~RenderingForward();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
 private:
     bool initShaderProgram();
-    void renderModels(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderModels(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
     std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;

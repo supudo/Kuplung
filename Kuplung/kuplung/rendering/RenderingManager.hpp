@@ -22,7 +22,7 @@ public:
     explicit RenderingManager(ObjectsManager &managerObjects);
     ~RenderingManager();
     void init();
-    void render(int selectedModel);
+    void render(const int selectedModel);
 
     int RenderingTotalVertices;
     int RenderingTotalIndices;

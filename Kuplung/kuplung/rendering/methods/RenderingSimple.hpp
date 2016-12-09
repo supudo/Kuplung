@@ -20,7 +20,7 @@ public:
     ~RenderingSimple();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
 private:
     std::unique_ptr<GLUtils> glUtils;

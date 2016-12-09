@@ -21,7 +21,7 @@ public:
     ~RenderingForwardShadowMapping();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
 private:
     bool initShaderProgram();
@@ -29,7 +29,7 @@ private:
     std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
-    void renderShadows(std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderShadows(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
     void renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
     void renderDepth();
 
