@@ -256,21 +256,21 @@ std::string FileSaver::convertSize(size_t size) {
     int div = 0;
     size_t rem = 0;
 
-    while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
+    while (size >= 1024 && div < static_cast<int>(sizeof SIZES / sizeof *SIZES)) {
         rem = (size % 1024);
         div++;
         size /= 1024;
     }
 
-    double size_d = (float)size + (float)rem / 1024.0;
+    double size_d = double(size + rem / 1024.0f);
     std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
     return result;
 }
 
 double FileSaver::roundOff(double n) {
     double d = n * 100.0;
-    int i = d + 0.5;
-    d = (float)i / 100.0;
+    int i = static_cast<int>(d + 0.5);
+    d = static_cast<double>(i / 100.0);
     return d;
 }
 

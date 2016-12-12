@@ -40,7 +40,7 @@ private:
     void drawCreate();
 
     void contextModelRename(std::vector<ModelFaceBase*> * meshModelFaces);
-    void contextModelDelete(std::vector<ModelFaceBase*> * meshModelFaces);
+    void contextModelDelete();
 
     SDL_Window* sdlWindow;
 

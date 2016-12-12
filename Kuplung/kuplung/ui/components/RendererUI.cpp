@@ -13,7 +13,6 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x+rhs.x, lhs.y+rhs.y); }
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 void RendererUI::init(SDL_Window *sdlWindow) {
@@ -47,7 +46,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     float new_font_scale = ImClamp(this->zoomFactor + g.IO.MouseWheel * 0.10f, 0.50f, 2.50f);
 
     ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_RenderOptions, 0));
-    ImGui::BeginChild("RenderOptions", ImVec2(-1.0f, ImGui::GetWindowHeight() * 0.92));
+    ImGui::BeginChild("RenderOptions", ImVec2(-1.0f, ImGui::GetWindowHeight() * 0.92f));
     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
     ImGui::Separator();
     ImGui::PushItemWidth(-1.0f);
@@ -99,7 +98,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::Separator();
     if (ImGui::Button("Render", ImVec2(-1.0f, this->bHeight))) {
         this->genTexture = true;
-        this->renderImageTexture(imageRenderer, managerObjects, meshModelFaces);
+        this->renderImageTexture(imageRenderer, meshModelFaces);
     }
 
     if (ImGui::Button("Save", ImVec2(-1.0f, this->bHeight)))
@@ -132,7 +131,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::SameLine();
 
     ImGui::BeginChild("RenderWindow", ImVec2(-1.0f, -1.0f), false);
-    ImGui::BeginChild("RenderPreview", ImVec2(-1.0f, ImGui::GetWindowHeight() * 0.98), false, ImGuiWindowFlags_HorizontalScrollbar);
+    ImGui::BeginChild("RenderPreview", ImVec2(-1.0f, ImGui::GetWindowHeight() * 0.98f), false, ImGuiWindowFlags_HorizontalScrollbar);
     if (ImGui::IsMouseDragging(0)) {
         ImVec2 dragging_location = ImVec2(io.MouseDelta.x / window->FontWindowScale, io.MouseDelta.y / window->FontWindowScale);
         ImGui::SetScrollX(ImGui::GetScrollX() - dragging_location.x);
@@ -142,12 +141,12 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     if (io.MouseClicked[2])
         new_font_scale = 1.f;   // MMB = RESET ZOOM
     float scale = new_font_scale / this->zoomFactor;
-    if (scale != 1)	{
+    if (scale < 1 || scale > 1)	{
         this->scrolling = ImVec2(this->scrolling.x * scale, this->scrolling.y * scale);
         this->zoomFactor = new_font_scale;
     }
 
-    ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(this->tWidth * this->zoomFactor, this->tHeight * this->zoomFactor));
+    ImGui::Image(ImTextureID(intptr_t(this->vboBuffer)), ImVec2(this->tWidth * this->zoomFactor, this->tHeight * this->zoomFactor));
 
     // Scrolling
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
@@ -190,7 +189,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
 
 //    if (ImGui::Button("Render", ImVec2(ImGui::GetWindowWidth() * 0.20, this->bHeight))) {
 //        this->genTexture = true;
-//        this->renderImageTexture(imageRenderer, managerObjects, meshModelFaces);
+//        this->renderImageTexture(imageRenderer, meshModelFaces);
 //    }
 //    ImGui::SameLine();
 //    if (ImGui::Button("Save", ImVec2(ImGui::GetWindowWidth() * 0.78, this->bHeight)))
@@ -215,7 +214,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
 //    this->genTexture = false;
 //}
 
-void RendererUI::renderImageTexture(ImageRenderer *imageRenderer, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> *meshModelFaces) {
+void RendererUI::renderImageTexture(ImageRenderer *imageRenderer, std::vector<ModelFaceBase*> *meshModelFaces) {
     FBEntity file;
     file.extension = ".bmp";
     file.isFile = true;

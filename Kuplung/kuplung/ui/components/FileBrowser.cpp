@@ -253,7 +253,7 @@ std::string FileBrowser::convertSize(size_t size) {
 
 double FileBrowser::roundOff(double n) {
     double d = n * 100.0;
-    int i = d + 0.5;
+    int i = int(d + 0.5);
     d = double(i) / 100.0;
     return d;
 }

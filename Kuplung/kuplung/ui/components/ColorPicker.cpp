@@ -90,7 +90,7 @@ bool ColorPicker::ColorPicker4(float* col, const bool show_alpha) {
         ImGui::ColorConvertRGBtoHSV(col[0], col[1], col[2], new_H, new_S, new_V);
         if (new_H <= 0 && H > 0)
         {
-            if (new_V <= 0 && V != new_V)
+            if (new_V <= 0 && (V < new_V || V > new_V))
                 ImGui::ColorConvertHSVtoRGB(H, S, new_V <= 0 ? V * 0.5f : new_V, col[0], col[1], col[2]);
             else if (new_S <= 0)
                 ImGui::ColorConvertHSVtoRGB(H, new_S <= 0 ? S * 0.5f : new_S, new_V, col[0], col[1], col[2]);

@@ -75,13 +75,10 @@ bool UIHelpers::addControlsSliderSameLine(std::string const& title, const int id
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
             this->animateValue(isFrame, animatedFlag, animatedValue, step, limit, doMinus);
-            //this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();
     }
-//    std::string s_id = title + "##10" + std::to_string(idx);
-//    return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
     std::string s_id = "##10" + std::to_string(idx);
     bool r = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);;
     ImGui::SameLine();
@@ -92,9 +89,8 @@ bool UIHelpers::addControlsSliderSameLine(std::string const& title, const int id
 void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bool* bValue) {
     std::string ce_id = "##101" + title;
     std::string icon_id = ICON_MD_COLORIZE + ce_id;
-    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, 255.0), "%s", title.c_str());
+    ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, 255.0), "%s", title.c_str());
     ImGui::ColorEdit3(ce_id.c_str(), (float*)vValue);
-    //ImGui::ColorEdit3(ce_id.c_str(), (float*)&(*vValue)); // cppcheck
     ImGui::SameLine();
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
@@ -105,15 +101,13 @@ void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bo
     ImGui::PopStyleColor(4);
     if (*bValue)
         this->componentColorPicker->show(title.c_str(), bValue, (float*)vValue, true);
-        //this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true); // cppcheck
 }
 
 void UIHelpers::addControlColor4(std::string const& title, glm::vec4* vValue, bool* bValue) {
     std::string ce_id = "##101" + title;
     std::string icon_id = ICON_MD_COLORIZE + ce_id;
-    ImGui::TextColored(ImVec4((*(&vValue))->r, (*(&vValue))->g, (*(&vValue))->b, (*(&vValue))->a), "%s", title.c_str());
+    ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, vValue->a), "%s", title.c_str());
     ImGui::ColorEdit4(ce_id.c_str(), (float*)vValue, true);
-    //ImGui::ColorEdit4(ce_id.c_str(), (float*)&(*vValue), true); // cppcheck
     ImGui::SameLine();
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
@@ -124,12 +118,10 @@ void UIHelpers::addControlColor4(std::string const& title, glm::vec4* vValue, bo
     ImGui::PopStyleColor(4);
     if (*bValue)
         this->componentColorPicker->show(title.c_str(), bValue, (float*)vValue, true);
-        //this->componentColorPicker->show(title.c_str(), &(*bValue), (float*)&(*vValue), true); // cppcheck
 }
 
 void UIHelpers::animateValue(bool* isFrame, bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus) {
     std::thread animThread(&UIHelpers::animateValueAsync, this, isFrame, animatedFlag, animatedValue, step, limit, doMinus);
-    //std::thread animThread(&UIHelpers::animateValueAsync, this, &(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
     animThread.detach();
 }
 
@@ -190,7 +182,6 @@ bool UIHelpers::addControlsDragSameLine(std::string const& title, const int idx,
         std::string c_id = "##00" + std::to_string(idx);
         if (ImGui::Checkbox(c_id.c_str(), animatedFlag))
             this->animateValue(isFrame, animatedFlag, animatedValue, step, limit, doMinus);
-            //this->animateValue(&(*isFrame), &(*animatedFlag), animatedValue, step, limit, doMinus); // cppcheck
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("Animate %s", title.c_str());
         ImGui::SameLine();

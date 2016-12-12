@@ -60,10 +60,10 @@ void Screenshot::ShowScreenshotsWindow(bool* open) {
 
     capture |= (ImGui::GetIO().KeyAlt && ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_C)));
     if (capture) {
-        int w = (int)bounds_rect.GetWidth(), h = (int)bounds_rect.GetHeight();
+        int w = int(bounds_rect.GetWidth()), h = int(bounds_rect.GetHeight());
         unsigned char* pixels = new unsigned char[3 * w * h];
         glPixelStorei(GL_PACK_ALIGNMENT, 1);
-        glReadPixels((int)bounds_rect.Min.x, (int)ImGui::GetIO().DisplaySize.y - (int)bounds_rect.Max.y, w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+        glReadPixels(int(bounds_rect.Min.x), int(ImGui::GetIO().DisplaySize.y - bounds_rect.Max.y), w, h, GL_RGB, GL_UNSIGNED_BYTE, pixels);
         unsigned char* line_tmp = new unsigned char[3 * w];
         unsigned char* line_a = pixels;
         unsigned char* line_b = pixels + (3 * w * (h - 1));

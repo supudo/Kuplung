@@ -33,7 +33,7 @@ void ImageViewer::showImage(bool* show) {
 
     ImGui::Separator();
 
-    ImGui::Image((ImTextureID)(intptr_t)this->vboBuffer, ImVec2(this->tWidth, this->tHeight));
+    ImGui::Image(ImTextureID(intptr_t(this->vboBuffer)), ImVec2(this->tWidth, this->tHeight));
 
     ImGui::End();
     this->genTexture = false;
@@ -53,7 +53,7 @@ void ImageViewer::createTextureBuffer() {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-        GLint textureFormat = 0;
+        GLenum textureFormat = 0;
         switch (tChannels) {
             case 1:
                 textureFormat = GL_LUMINANCE;
@@ -71,7 +71,7 @@ void ImageViewer::createTextureBuffer() {
                 textureFormat = GL_RGB;
                 break;
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->tWidth, this->tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<int>(textureFormat), this->tWidth, this->tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
         glGenerateMipmap(GL_TEXTURE_2D);
         stbi_image_free(tPixels);
         this->tWidth += 20;

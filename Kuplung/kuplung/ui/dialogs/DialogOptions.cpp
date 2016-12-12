@@ -72,8 +72,8 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             style = ref ? *ref : def;
             style = wStyle->loadDefault();
             wStyle->save("-", "14.00", style);
-            optionsFontSelected = 0;
-            optionsFontSizeSelected = 1;
+            this->optionsFontSelected = 0;
+            this->optionsFontSizeSelected = 1;
             Settings::Instance()->UIFontFileIndex = 0;
             Settings::Instance()->UIFontSize = 14.00;
             *needsFontChange = true;
@@ -83,9 +83,9 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             if (ImGui::Button("Save")) {
                 *ref = style;
                 std::string font = "-";
-                if (optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[optionsFontSelected].path))
-                    font = fontLister->fonts[optionsFontSelected - 1].path;
-                std::string fontSize = std::string(this->fontLister->fontSizes[optionsFontSizeSelected]);
+                if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path))
+                    font = this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected - 1)].path;
+                std::string fontSize = std::string(this->fontLister->fontSizes[this->optionsFontSizeSelected]);
                 Settings::Instance()->UIFontSize = std::stof(fontSize);
                 wStyle->save(font, fontSize, style);
                 *needsFontChange = true;
@@ -104,17 +104,17 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
             std::string f1 = " - < Default Font > ";
             std::vector<const char*> fonts;
             fonts.push_back(f1.c_str());
-            for (int i = 0, j = 1; i < (int)this->fontLister->fonts.size(); i++, j++) {
+            for (size_t i = 0, j = 1; i < this->fontLister->fonts.size(); i++, j++) {
                 fonts.push_back(this->fontLister->fonts[i].title.c_str());
             }
             ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.60f);
-            //ImGui::Combo("##001", &optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
-            ImGui::Combo("##001", &optionsFontSelected, &fonts[0], (int)(this->fontLister->fonts.size() + 1));
+            //ImGui::Combo("##001", &this->optionsFontSelected, fonts, IM_ARRAYSIZE(fonts));
+            ImGui::Combo("##001", &this->optionsFontSelected, &fonts[0], int(this->fontLister->fonts.size() + 1));
             ImGui::PopItemWidth();
 
             ImGui::SameLine();
             ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.30f);
-            ImGui::Combo("##002", &optionsFontSizeSelected, this->fontLister->fontSizes, IM_ARRAYSIZE(this->fontLister->fontSizes));
+            ImGui::Combo("##002", &this->optionsFontSizeSelected, this->fontLister->fontSizes, IM_ARRAYSIZE(this->fontLister->fontSizes));
             ImGui::PopItemWidth();
             ImGui::TreePop();
         }
@@ -196,8 +196,8 @@ void DialogOptions::loadFonts(bool* needsFontChange) {
 
     if (this->optionsFontSelected == 0)
         Settings::Instance()->UIFontFile = "";
-    else if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[this->optionsFontSelected].path))
-        Settings::Instance()->UIFontFile = this->fontLister->fonts[this->optionsFontSelected].path;
+    else if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path))
+        Settings::Instance()->UIFontFile = this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path;
 
     if (Settings::Instance()->UIFontFile != "" && Settings::Instance()->UIFontFile != "-")
         io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), Settings::Instance()->UIFontSize);
@@ -218,7 +218,7 @@ void DialogOptions::loadFonts(bool* needsFontChange) {
     ImFontConfig gm_config;
     gm_config.MergeMode = true;
     gm_config.PixelSnapH = true;
-    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), Settings::Instance()->UIFontSize + 8.00, &gm_config, gm_ranges);
+    io.Fonts->AddFontFromFileTTF(gmFont.c_str(), Settings::Instance()->UIFontSize + 8.00f, &gm_config, gm_ranges);
 
     *needsFontChange = false;
 }

@@ -25,10 +25,10 @@ public:
     float bHeight;
 
 private:
-    void renderImageTexture(ImageRenderer *imageRenderer, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> *meshModelFaces);
+    void renderImageTexture(ImageRenderer *imageRenderer, std::vector<ModelFaceBase*> *meshModelFaces);
 
     std::unique_ptr<FileSaver> componentFileSaver;
-    void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation type);
+    void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation);
     bool showSaveDialog;
     void dialogFileSave();
 

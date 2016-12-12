@@ -354,7 +354,7 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
         //ImGui::Text("  --> %.1f FPS | %d vertices, %d indices (%d triangles)", ImGui::GetIO().Framerate, ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
         ImGui::Text("  --> %.1f FPS | %d objs, %d verts, %d indices (%d tris, %d faces) | %s",
-                    ImGui::GetIO().Framerate,
+                    double(ImGui::GetIO().Framerate),
                     Settings::Instance()->sceneCountObjects,
                     Settings::Instance()->sceneCountVertices,
                     Settings::Instance()->sceneCountIndices,
@@ -432,9 +432,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
     if (ImGui::BeginPopupModal("Kuplung Parsing", &this->isParsingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
-        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-        ImGui::Text("Processing ... %0.2f%%\n", this->parsingPercentage);
-        ImGui::ProgressBar(this->parsingPercentage / 100.0, ImVec2(0.0f, 0.0f));
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+        ImGui::Text("Processing ... %0.2f%%\n", double(this->parsingPercentage));
+        ImGui::ProgressBar(this->parsingPercentage / 100.0f, ImVec2(0.0f, 0.0f));
         ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
         ImGui::PopStyleColor(1);
         ImGui::EndPopup();
@@ -450,9 +450,9 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->isExportingOpen)
         ImGui::OpenPopup("Kuplung Exporting");
     if (ImGui::BeginPopupModal("Kuplung Exporting", &this->isExportingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
-        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
-        ImGui::Text("Exporting ... %0.2f%%\n", this->parsingPercentage);
-        ImGui::ProgressBar(this->parsingPercentage / 100.0, ImVec2(0.0f, 0.0f));
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+        ImGui::Text("Exporting ... %0.2f%%\n", double(this->parsingPercentage));
+        ImGui::ProgressBar(this->parsingPercentage / 100.0f, ImVec2(0.0f, 0.0f));
         ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
         ImGui::PopStyleColor(1);
         ImGui::EndPopup();
@@ -594,8 +594,9 @@ void UI::hideExporting() {
 #pragma mark - Private Methods
 
 void UI::dialogFileSave(FileSaverOperation operation) {
-    std::string title = "";
-    bool * wType;
+    std::string title = "...";
+    bool *wType = nullptr;
+    assert(operation == FileSaverOperation_SaveScene || operation == FileSaverOperation_OpenScene || operation == FileSaverOperation_Renderer);
     switch (operation) {
         case FileSaverOperation_SaveScene:
             title = "Save Scene";
@@ -608,10 +609,6 @@ void UI::dialogFileSave(FileSaverOperation operation) {
         case FileSaverOperation_Renderer:
             title = "Render Scene";
             wType = &this->showRenderer;
-            break;
-        default:
-            title = "...";
-            wType = nullptr;
             break;
     }
     this->componentFileSaver->draw(title.c_str(), operation, wType);
@@ -726,7 +723,7 @@ void UI::dialogShadertoyMessageWindow() {
     ImGui::EndPopup();
 }
 
-void UI::dialogFileBrowserProcessFile(const FBEntity file, FileBrowser_ParserType type) {
+void UI::dialogFileBrowserProcessFile(const FBEntity file, FileBrowser_ParserType) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
     this->funcProcessImportedFile(file, std::vector<std::string>());
@@ -746,6 +743,9 @@ void UI::dialogOBJExporterProcessFile(const FBEntity file, std::vector<std::stri
 }
 
 void UI::dialogFileSaveProcessFile(const FBEntity file, FileSaverOperation operation) {
+    assert(operation == FileSaverOperation_SaveScene ||
+           operation == FileSaverOperation_OpenScene ||
+           operation == FileSaverOperation_Renderer);
     switch (operation) {
         case FileSaverOperation_SaveScene:
             this->funcSaveScene(file);
@@ -755,8 +755,6 @@ void UI::dialogFileSaveProcessFile(const FBEntity file, FileSaverOperation opera
             break;
         case FileSaverOperation_Renderer:
             this->funcRenderScene(file);
-            break;
-        default:
             break;
     }
     this->showImageSave = false;

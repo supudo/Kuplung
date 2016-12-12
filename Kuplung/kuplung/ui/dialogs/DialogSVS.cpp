@@ -22,12 +22,12 @@ void DialogSVS::render(bool* p_opened) {
 
     this->windowWidth = ImGui::GetWindowWidth();
     this->windowHeight = ImGui::GetWindowHeight();
-    this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
-    this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+    this->textureWidth = int(this->windowWidth - this->viewPaddingHorizontal);
+    this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
     this->structured_Volumetric_Sampling->renderToTexture(
-            ImGui::GetIO().MousePos.x,
-            ImGui::GetIO().MousePos.y,
+            int(ImGui::GetIO().MousePos.x),
+            int(ImGui::GetIO().MousePos.y),
             (SDL_GetTicks() / 1000.0f),
             &this->vboTexture
     );
@@ -51,8 +51,8 @@ void DialogSVS::render(bool* p_opened) {
 void DialogSVS::init() {
     this->viewPaddingHorizontal = 20.0f;
     this->viewPaddingVertical = 40.0f;
-    this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
-    this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+    this->textureWidth = int(this->windowWidth - this->viewPaddingHorizontal);
+    this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
     this->structured_Volumetric_Sampling = std::make_unique<StructuredVolumetricSampling>();
     this->structured_Volumetric_Sampling->init();

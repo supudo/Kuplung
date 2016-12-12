@@ -126,11 +126,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 }
                 else {
                     if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
-                        for (int j=0; j<(int)this->managerObjects.lightSources.size(); j++) {
-                            std::string title = this->managerObjects.lightSources[j]->title;
+                        for (size_t j=0; j<this->managerObjects.lightSources.size(); j++) {
                             ImGui::Bullet();
-                            if (ImGui::Selectable(this->managerObjects.lightSources[j]->title.c_str(), this->selectedObjectLight == j)) {
-                                this->selectedObjectLight = j;
+                            if (ImGui::Selectable(this->managerObjects.lightSources[j]->title.c_str(), this->selectedObjectLight == int(j))) {
+                                this->selectedObjectLight = int(j);
                                 this->selectedObject = 6;
                             }
                         }
@@ -352,7 +351,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     deferred_texture_items.push_back("Normal");
                     deferred_texture_items.push_back("Diffuse");
                     deferred_texture_items.push_back("Specular");
-                    ImGui::Combo("##110", &this->managerObjects.Setting_LightingPass_DrawMode, &deferred_texture_items[0], (int)deferred_texture_items.size());
+                    ImGui::Combo("##110", &this->managerObjects.Setting_LightingPass_DrawMode, &deferred_texture_items[0], int(deferred_texture_items.size()));
 
                     ImGui::Text("Ambient Strength");
                     ImGui::SliderFloat("##210", &this->managerObjects.Setting_DeferredAmbientStrength, 0.0f, 1.0f);
@@ -369,9 +368,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 1: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
 
             const char* tabsGUICamera[] = {
                 "\n" ICON_MD_REMOVE_RED_EYE,
@@ -433,9 +432,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 2: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
 
             const char* tabsGUICameraModel[] = {
                 "\n" ICON_MD_TRANSFORM,
@@ -593,13 +592,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             std::vector<const char*> skybox_items;
             for (size_t i=0; i<this->managerObjects.skybox->skyboxItems.size(); i++)
                 skybox_items.push_back(this->managerObjects.skybox->skyboxItems[i].title.c_str());
-            ImGui::Combo("##987", &this->managerObjects.skybox->Setting_Skybox_Item, &skybox_items[0], (int)skybox_items.size());
+            ImGui::Combo("##987", &this->managerObjects.skybox->Setting_Skybox_Item, &skybox_items[0], int(skybox_items.size()));
             break;
         }
         case 6: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1 / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1 / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1 / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
 
             const char* tabsGUILight[] = {
                 "\n" ICON_MD_TRANSFORM,
@@ -683,7 +682,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         this->helperUI->addControlsSlider("Quadratic", 24, 0.01f, 0.0f, 1.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lQuadratic->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lQuadratic->point, true, isFrame);
                     }
 
-                    switch (this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->type) {
+                    int lType = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->type;
+                    assert(lType == LightSourceType_Point || lType == LightSourceType_Spot);
+                    switch (lType) {
                         case LightSourceType_Point: {
                             break;
                         }
@@ -693,8 +694,6 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                             this->helperUI->addControlsSlider("Outer CutOff", 26, 1.0f, -180.0f, 180.0f, true, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lOuterCutOff->animate, &this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->lOuterCutOff->point, true, isFrame);
                             break;
                         }
-                        default:
-                            break;
                     }
 
                     break;
@@ -750,7 +749,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
                                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
                                 glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-                                GLuint textureFormat = 0;
+                                GLenum textureFormat = 0;
                                 switch (tChannels) {
                                     case 1:
                                         textureFormat = GL_LUMINANCE;
@@ -768,14 +767,14 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                                         textureFormat = GL_RGB;
                                         break;
                                 }
-                                glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, this->heightmapWidth, this->heightmapHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
+                                glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), this->heightmapWidth, this->heightmapHeight, 0, textureFormat, GL_UNSIGNED_BYTE, (GLvoid*)tPixels);
                                 glGenerateMipmap(GL_TEXTURE_2D);
                                 stbi_image_free(tPixels);
                             }
                         }
                         ImGui::Separator();
                         ImGui::Text("Heightmap");
-                        ImGui::Image((ImTextureID)(intptr_t)this->vboTexHeightmap, ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
+                        ImGui::Image(ImTextureID(intptr_t(this->vboTexHeightmap)), ImVec2(this->heightmapWidth, this->heightmapHeight), ImVec2(0,0), ImVec2(1,1), ImVec4(1,1,1,1), ImVec4(1,1,1,1));
                         this->newHeightmap = false;
                     }
 
@@ -835,10 +834,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     this->setHeightmapImage(this->managerObjects.heightmapImage);
     this->lockCamera();
 
-    if (this->managerObjects.lightSources.size() > this->selectedObjectLight) {
-        if (this->lightRotateX != this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point ||
-            this->lightRotateY != this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point ||
-            this->lightRotateZ != this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point) {
+    if (int(this->managerObjects.lightSources.size()) > this->selectedObjectLight) {
+        float slp_x = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
+        float slp_y = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
+        float slp_z = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
+        if (this->lightRotateX < slp_x || this->lightRotateX > slp_x ||
+            this->lightRotateY < slp_y || this->lightRotateY > slp_y ||
+            this->lightRotateZ < slp_z || this->lightRotateZ > slp_z) {
             this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point = this->lightRotateX;
             this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point = this->lightRotateY;
             this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point = this->lightRotateZ;

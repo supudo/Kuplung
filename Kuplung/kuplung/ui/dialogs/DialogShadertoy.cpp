@@ -26,18 +26,18 @@ void DialogShadertoy::render(bool* p_opened) {
 
     this->windowWidth = ImGui::GetWindowWidth();
     this->windowHeight = ImGui::GetWindowHeight();
-    this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
-    this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+    this->textureWidth = int(this->windowWidth - this->viewPaddingHorizontal);
+    this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
-    if (this->heightTopPanel != this->engineShadertoy->textureHeight)
+    if (this->heightTopPanel < this->engineShadertoy->textureHeight || this->heightTopPanel > this->engineShadertoy->textureHeight)
         this->engineShadertoy->initFBO(
-                    this->windowWidth,
-                    this->heightTopPanel,
+                    int(this->windowWidth),
+                    int(this->heightTopPanel),
                     &this->vboTexture);
 
     this->engineShadertoy->renderToTexture(
-            ImGui::GetIO().MousePos.x,
-            ImGui::GetIO().MousePos.y,
+            int(ImGui::GetIO().MousePos.x),
+            int(ImGui::GetIO().MousePos.y),
             (SDL_GetTicks() / 1000.0f),
             &this->vboTexture
     );
@@ -77,10 +77,10 @@ void DialogShadertoy::render(bool* p_opened) {
     ImGui::BeginChild("Editor", ImVec2(0, 0), false);
 
 // buttons
-    if (ImGui::Button("COMPILE", ImVec2(ImGui::GetWindowWidth() * 0.85, this->buttonCompileHeight)))
+    if (ImGui::Button("COMPILE", ImVec2(ImGui::GetWindowWidth() * 0.85f, this->buttonCompileHeight)))
         this->compileShader();
     ImGui::SameLine();
-    if (ImGui::Button("Paste", ImVec2(ImGui::GetWindowWidth() * 0.14, this->buttonCompileHeight)))
+    if (ImGui::Button("Paste", ImVec2(ImGui::GetWindowWidth() * 0.14f, this->buttonCompileHeight)))
         this->getFromClipboard();
 
 // BEGIN textures
@@ -230,7 +230,7 @@ void DialogShadertoy::render(bool* p_opened) {
 
 // BEGIN IDE
     ImGui::BeginChild("IDE", ImVec2(0.0f, 0.0f), false);
-    int lines = (ImGui::GetWindowHeight() - 4.0f) / ImGui::GetTextLineHeight();
+    int lines = static_cast<int>((ImGui::GetWindowHeight() - 4.0f) / ImGui::GetTextLineHeight());
     ImGui::InputTextMultiline("##source", this->shadertoyEditorText, IM_ARRAYSIZE(this->shadertoyEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
     ImGui::EndChild();
 
@@ -250,8 +250,8 @@ void DialogShadertoy::init(std::function<void()> fShowErrorMessage) {
     this->heightTopPanel = 200.0f;
     this->widthTexturesPanel = 140.0f;
     this->buttonCompileHeight = 44.0f;
-    this->textureWidth = this->windowWidth - this->viewPaddingHorizontal;
-    this->textureHeight = this->windowHeight - this->viewPaddingVertical;
+    this->textureWidth = int(this->windowWidth - this->viewPaddingHorizontal);
+    this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
     this->channel0Cube = false;
     this->channel1Cube = false;
@@ -287,8 +287,8 @@ void DialogShadertoy::compileShader() {
     this->engineShadertoy->initShaderProgram(std::string(this->shadertoyEditorText));
     this->engineShadertoy->initBuffers();
     this->engineShadertoy->initFBO(
-                this->windowWidth,
-                this->heightTopPanel,
+                int(this->windowWidth),
+                int(this->heightTopPanel),
                 &this->vboTexture);
 }
 
