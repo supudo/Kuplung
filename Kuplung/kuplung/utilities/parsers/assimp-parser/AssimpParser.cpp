@@ -19,7 +19,7 @@ void AssimpParser::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> const& settings) {
+std::vector<MeshModel> AssimpParser::parse(FBEntity file, std::vector<std::string> const&) {
     this->file = file;
     this->models.clear();
     const aiScene* scene = this->parser.ReadFile(file.path, aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_CalcTangentSpace);
@@ -50,7 +50,7 @@ void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
         std::string modelTitle = std::string(node->mName.C_Str());
         this->models.push_back(this->processMesh(mesh, scene, modelTitle));
         this->meshCounter += 1;
-        this->funcProgress(((float)this->meshCounter / (float)scene->mNumMeshes) * 100.0);
+        this->funcProgress((float(this->meshCounter) / float(scene->mNumMeshes)) * 100.0f);
     }
     for (GLuint i=0; i<node->mNumChildren; i++) {
         this->processNode(node->mChildren[i], scene);

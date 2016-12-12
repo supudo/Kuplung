@@ -66,7 +66,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
         return {};
     }
 
-    int progressStageTotal = this->fileCountLines(ifs);
+    int progressStageTotal = static_cast<int>(this->fileCountLines(ifs));
 
     std::vector<unsigned int> indexModels, indexVertices, indexTexture, indexNormals;
     std::vector<glm::vec3> vVertices, vNormals;
@@ -116,8 +116,8 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
         }
         else if (boost::starts_with(singleLine, this->id_useMaterial)) {
             boost::replace_first(singleLine, this->id_useMaterial, "");
-            this->models[currentModelID].ModelMaterial = this->materials[singleLine];
-            this->models[currentModelID].MaterialTitle = this->models[currentModelID].ModelMaterial.MaterialTitle;
+            this->models[static_cast<size_t>(currentModelID)].ModelMaterial = this->materials[singleLine];
+            this->models[static_cast<size_t>(currentModelID)].MaterialTitle = this->models[static_cast<size_t>(currentModelID)].ModelMaterial.MaterialTitle;
         }
         else if (boost::starts_with(singleLine, this->id_face)) {
             std::vector<std::string> ft = this->splitString(singleLine, " ");
@@ -137,13 +137,13 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
                                         &tri_vertexIndex[2], &tri_normalIndex[2],
                                         &tri_vertexIndex[3], &tri_normalIndex[3]);
                     if (matches != 8) {
-                        Settings::Instance()->funcDoLog("OBJ file in wrong format!");
+                        Settings::Instance()->funcDoLog("OBJ file is in wrong format!");
                         return this->models;
                     }
                 }
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
                 indexVertices.push_back(tri_vertexIndex[0]);
                 indexVertices.push_back(tri_vertexIndex[1]);
                 indexVertices.push_back(tri_vertexIndex[2]);
@@ -154,9 +154,9 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
                 indexNormals.push_back(tri_normalIndex[1]);
                 indexNormals.push_back(tri_normalIndex[2]);
 
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
                 indexVertices.push_back(tri_vertexIndex[2]);
                 indexVertices.push_back(tri_vertexIndex[3]);
                 indexVertices.push_back(tri_vertexIndex[0]);
@@ -181,13 +181,13 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
                                         &vertexIndex[1], &normalIndex[1],
                                         &vertexIndex[2], &normalIndex[2]);
                     if (matches != 6) {
-                        Settings::Instance()->funcDoLog("OBJ file in wrong format!");
+                        Settings::Instance()->funcDoLog("OBJ file is in wrong format!");
                         return this->models;
                     }
                 }
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
-                indexModels.push_back(currentModelID);
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
+                indexModels.push_back(static_cast<unsigned int>(currentModelID));
                 indexVertices.push_back(vertexIndex[0]);
                 indexVertices.push_back(vertexIndex[1]);
                 indexVertices.push_back(vertexIndex[2]);
@@ -201,7 +201,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
         }
 
         progressStageCounter += 1;
-        float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
+        float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0f;
         this->doProgress(progress);
     }
 
@@ -214,7 +214,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
 
     if (this->models.size() > 0) {
         progressStageCounter = 0;
-        progressStageTotal = indexVertices.size();
+        progressStageTotal = static_cast<int>(indexVertices.size());
         this->doProgress(0.0f);
         for (unsigned int i=0; i<indexVertices.size(); i++) {
             unsigned int modelIndex = indexModels[i];
@@ -239,12 +239,12 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
                 this->models[modelIndex].countTextureCoordinates = 0;
 
             progressStageCounter += 1;
-            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
+            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0f;
             this->doProgress(progress);
         }
 
         progressStageCounter = 0;
-        progressStageTotal = this->models.size();
+        progressStageTotal = static_cast<int>(this->models.size());
         this->doProgress(0.0f);
         std::map<PackedVertex, unsigned int> vertexToOutIndex;
         for (size_t i=0; i<this->models.size(); i++) {
@@ -263,7 +263,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
                     if (m.texture_coordinates.size() > 0)
                         outTextureCoordinates.push_back(m.texture_coordinates[j]);
                     outNormals.push_back(m.normals[j]);
-                    unsigned int newIndex = (unsigned int)outVertices.size() - 1;
+                    unsigned int newIndex = static_cast<unsigned int>(outVertices.size() - 1);
                     m.indices.push_back(newIndex);
                     vertexToOutIndex[packed] = newIndex;
                 }
@@ -272,10 +272,10 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
             this->models[i].texture_coordinates = outTextureCoordinates;
             this->models[i].normals = outNormals;
             this->models[i].indices = m.indices;
-            this->models[i].countIndices = (int)m.indices.size();
+            this->models[i].countIndices = int(m.indices.size());
 
             progressStageCounter += 1;
-            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0;
+            float progress = (float(progressStageCounter) / float(progressStageTotal)) * 100.0f;
             this->doProgress(progress);
         }
     }
@@ -461,7 +461,7 @@ size_t objParser2::fileCountLines(std::istream &is) {
 
     is.seekg(0);
     size_t line_cnt;
-    size_t lf_cnt = std::count(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>(), '\n');
+    size_t lf_cnt = static_cast<size_t>(std::count(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>(), '\n'));
     line_cnt = lf_cnt;
     // if the file is not end with '\n' , then line_cnt should plus 1
     is.unget();

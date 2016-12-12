@@ -116,7 +116,7 @@ void RayTracerRenderer::createFBO() {
 }
 
 void RayTracerRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
-    GLenum attachment_type;
+    GLenum attachment_type = GL_RGB;
     if (!depth && !stencil)
         attachment_type = GL_RGB;
     else if (depth && !stencil)
@@ -130,7 +130,7 @@ void RayTracerRenderer::generateAttachmentTexture(GLboolean depth, GLboolean ste
     glGenTextures(1, &this->renderTextureColorBuffer);
     glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
     if (!depth && !stencil)
-        glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(attachment_type), screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
     else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, screenWidth, screenHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

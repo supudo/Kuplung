@@ -318,7 +318,7 @@ void DefaultForwardRenderer::createFBO() {
 }
 
 void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolean stencil) {
-    GLenum attachment_type;
+    GLenum attachment_type = GL_RGB;
     if (!depth && !stencil)
         attachment_type = GL_RGB;
     else if (depth && !stencil)
@@ -332,7 +332,7 @@ void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolea
     glGenTextures(1, &this->renderTextureColorBuffer);
     glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
     if (!depth && !stencil)
-        glTexImage2D(GL_TEXTURE_2D, 0, attachment_type, screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(attachment_type), screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
     else
         glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, screenWidth, screenHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -445,11 +445,11 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshM
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
         // blending
-        if (mfd->meshModel.ModelMaterial.Transparency < 1.0 || mfd->Setting_Alpha < 1.0) {
+        if (mfd->meshModel.ModelMaterial.Transparency < 1.0f || mfd->Setting_Alpha < 1.0f) {
             glDisable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
-            if (mfd->meshModel.ModelMaterial.Transparency < 1.0)
+            if (mfd->meshModel.ModelMaterial.Transparency < 1.0f)
                 glUniform1f(this->glFS_AlphaBlending, mfd->meshModel.ModelMaterial.Transparency);
             else
                 glUniform1f(this->glFS_AlphaBlending, mfd->Setting_Alpha);
@@ -506,14 +506,15 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshM
         glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
 
         // lights
-        int lightsCount_Directional = 0;
-        int lightsCount_Point = 0;
-        int lightsCount_Spot = 0;
-        for (int j=0; j<(int)mfd->lightSources.size(); j++) {
+        size_t lightsCount_Directional = 0, lightsCount_Point = 0, lightsCount_Spot = 0;
+        for (size_t j=0; j<mfd->lightSources.size(); j++) {
             Light *light = mfd->lightSources[j];
+            assert(light->type == LightSourceType_Directional ||
+                   light->type == LightSourceType_Point ||
+                   light->type == LightSourceType_Spot);
             switch (light->type) {
                 case LightSourceType_Directional: {
-                    if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
+                    if (lightsCount_Directional < static_cast<size_t>(this->GLSL_LightSourceNumber_Directional)) {
                         ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
 
                         glUniform1i(f->gl_InUse, 1);
@@ -536,7 +537,7 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshM
                     break;
                 }
                 case LightSourceType_Point: {
-                    if (lightsCount_Point < this->GLSL_LightSourceNumber_Point) {
+                    if (lightsCount_Point < static_cast<size_t>(this->GLSL_LightSourceNumber_Point)) {
                         ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
 
                         glUniform1i(f->gl_InUse, 1);
@@ -564,7 +565,7 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshM
                     break;
                 }
                 case LightSourceType_Spot: {
-                    if (lightsCount_Spot < this->GLSL_LightSourceNumber_Spot) {
+                    if (lightsCount_Spot < static_cast<size_t>(this->GLSL_LightSourceNumber_Spot)) {
                         ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
 
                         glUniform1i(f->gl_InUse, 1);
@@ -596,27 +597,25 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*> *meshM
                     }
                     break;
                 }
-                default:
-                    break;
             }
         }
 
-        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+        for (size_t j=lightsCount_Directional; j<static_cast<size_t>(this->GLSL_LightSourceNumber_Directional); j++) {
             glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+        for (size_t j=lightsCount_Point; j<static_cast<size_t>(this->GLSL_LightSourceNumber_Point); j++) {
             glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+        for (size_t j=lightsCount_Spot; j<static_cast<size_t>(this->GLSL_LightSourceNumber_Spot); j++) {
             glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
         }
 
         // material
         glUniform1f(this->glMaterial_Refraction, mfd->Setting_MaterialRefraction->point);
         glUniform1f(this->glMaterial_SpecularExp, mfd->Setting_MaterialSpecularExp->point);
-        glUniform1i(this->glMaterial_IlluminationModel, mfd->materialIlluminationModel);
+        glUniform1i(this->glMaterial_IlluminationModel, static_cast<int>(mfd->materialIlluminationModel));
         glUniform1f(this->glMaterial_HeightScale, mfd->displacementHeightScale->point);
         glUniform3f(this->glMaterial_Ambient, mfd->materialAmbient->color.r, mfd->materialAmbient->color.g, mfd->materialAmbient->color.b);
         glUniform3f(this->glMaterial_Diffuse, mfd->materialDiffuse->color.r, mfd->materialDiffuse->color.g, mfd->materialDiffuse->color.b);

@@ -32,6 +32,9 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
 
 std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings) {
     std::vector<MeshModel> meshModels;
+    assert(type == FileBrowser_ParserType_Own1 ||
+           type == FileBrowser_ParserType_Own2 ||
+           type == FileBrowser_ParserType_Assimp);
     switch (type) {
         case FileBrowser_ParserType_Own1: {
             if (file.extension == ".obj" || file.extension == "obj")
@@ -48,8 +51,6 @@ std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_Parser
             meshModels = this->parserAssimp->parse(file, settings);
             break;
         }
-        default:
-            break;
     }
     return meshModels;
 }

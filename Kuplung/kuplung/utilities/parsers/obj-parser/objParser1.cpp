@@ -56,7 +56,7 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> const& settings) {
+std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string> const&) {
     this->file = file;
     this->geometricVertices = {};
     this->textureCoordinates = {};
@@ -132,8 +132,8 @@ std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string>
                 this->spaceVertices.insert(end(this->spaceVertices), begin(points), end(points));
             }
             else if (std::regex_match(singleLine, this->regex_useMaterial)) {
-                this->models[indexModel].MaterialTitle = singleLine;
-                boost::replace_all(this->models[indexModel].MaterialTitle, "usemtl ", "");
+                this->models[static_cast<size_t>(indexModel)].MaterialTitle = singleLine;
+                boost::replace_all(this->models[static_cast<size_t>(indexModel)].MaterialTitle, "usemtl ", "");
             }
             else if (std::regex_match(singleLine, this->regex_polygonalFaces)) {
                 std::vector<std::string> singleFaceElements = this->splitString(singleLine, this->regex_whiteSpace);
@@ -143,30 +143,35 @@ std::vector<MeshModel> objParser1::parse(FBEntity file, std::vector<std::string>
                     std::vector<std::string> face = this->splitString(singleFaceElements[i], this->regex_polygonalFacesSingle);
 
                     int v_idx = (std::stoi(face[0]) - 1) * 3;
-                    glm::vec3 v_v = glm::vec3(this->geometricVertices[v_idx + 0], this->geometricVertices[v_idx + 1], this->geometricVertices[v_idx + 2]);
-                    this->models[indexModel].vertices.push_back(v_v);
-                    this->models[indexModel].countVertices += 3;
+                    glm::vec3 v_v = glm::vec3(this->geometricVertices[static_cast<size_t>(v_idx + 0)],
+                            this->geometricVertices[static_cast<size_t>(v_idx + 1)],
+                            this->geometricVertices[static_cast<size_t>(v_idx + 2)]);
+                    this->models[static_cast<size_t>(indexModel)].vertices.push_back(v_v);
+                    this->models[static_cast<size_t>(indexModel)].countVertices += 3;
 
                     if (this->textureCoordinates.size() > 0 && face[1] != "") {
                         int t_idx = (std::stoi(face[1]) - 1) * 2;
-                        glm::vec2 v_tc = glm::vec2(this->textureCoordinates[t_idx + 0], this->textureCoordinates[t_idx + 1]);
-                        this->models[indexModel].texture_coordinates.push_back(v_tc);
-                        this->models[indexModel].countTextureCoordinates += 2;
+                        glm::vec2 v_tc = glm::vec2(this->textureCoordinates[static_cast<size_t>(t_idx + 0)],
+                                this->textureCoordinates[static_cast<size_t>(t_idx + 1)]);
+                        this->models[static_cast<size_t>(indexModel)].texture_coordinates.push_back(v_tc);
+                        this->models[static_cast<size_t>(indexModel)].countTextureCoordinates += 2;
                     }
 
                     int n_idx = (std::stoi(face[2]) - 1) * 3;
-                    glm::vec3 v_n = glm::vec3(this->vertexNormals[n_idx + 0], this->vertexNormals[n_idx + 1], this->vertexNormals[n_idx + 2]);
-                    this->models[indexModel].normals.push_back(v_n);
-                    this->models[indexModel].countNormals += 3;
+                    glm::vec3 v_n = glm::vec3(this->vertexNormals[static_cast<size_t>(n_idx + 0)],
+                            this->vertexNormals[static_cast<size_t>(n_idx + 1)],
+                            this->vertexNormals[static_cast<size_t>(n_idx + 2)]);
+                    this->models[static_cast<size_t>(indexModel)].normals.push_back(v_n);
+                    this->models[static_cast<size_t>(indexModel)].countNormals += 3;
 
-                    this->models[indexModel].indices.push_back(indicesCounter);
-                    this->models[indexModel].countIndices += 1;
+                    this->models[static_cast<size_t>(indexModel)].indices.push_back(static_cast<unsigned int>(indicesCounter));
+                    this->models[static_cast<size_t>(indexModel)].countIndices += 1;
                     indicesCounter += 1;
                 }
             }
 
             linesProcessedCounter += 1;
-            float progress = ((float)linesProcessedCounter / (float)this->objFileLinesCount) * 100.0;
+            float progress = (float(linesProcessedCounter) / float(this->objFileLinesCount)) * 100.0f;
             this->doProgress(progress);
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
@@ -234,50 +239,50 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
 
             if (std::regex_match(singleLine, this->regex_materialAmbientColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[indexMaterial].AmbientColor.r = points[0];
-                materials[indexMaterial].AmbientColor.g = points[1];
-                materials[indexMaterial].AmbientColor.b = points[2];
+                materials[static_cast<size_t>(indexMaterial)].AmbientColor.r = points[0];
+                materials[static_cast<size_t>(indexMaterial)].AmbientColor.g = points[1];
+                materials[static_cast<size_t>(indexMaterial)].AmbientColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialDiffuseColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[indexMaterial].DiffuseColor.r = points[0];
-                materials[indexMaterial].DiffuseColor.g = points[1];
-                materials[indexMaterial].DiffuseColor.b = points[2];
+                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.r = points[0];
+                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.g = points[1];
+                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialSpecularColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[indexMaterial].SpecularColor.r = points[0];
-                materials[indexMaterial].SpecularColor.g = points[1];
-                materials[indexMaterial].SpecularColor.b = points[2];
+                materials[static_cast<size_t>(indexMaterial)].SpecularColor.r = points[0];
+                materials[static_cast<size_t>(indexMaterial)].SpecularColor.g = points[1];
+                materials[static_cast<size_t>(indexMaterial)].SpecularColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialEmissionColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[indexMaterial].EmissionColor.r = points[0];
-                materials[indexMaterial].EmissionColor.g = points[1];
-                materials[indexMaterial].EmissionColor.b = points[2];
+                materials[static_cast<size_t>(indexMaterial)].EmissionColor.r = points[0];
+                materials[static_cast<size_t>(indexMaterial)].EmissionColor.g = points[1];
+                materials[static_cast<size_t>(indexMaterial)].EmissionColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialSpecularExp))
-                materials[indexMaterial].SpecularExp = std::stof(lineElements[0]);
+                materials[static_cast<size_t>(indexMaterial)].SpecularExp = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialTransperant1) || std::regex_match(singleLine, this->regex_materialTransperant2))
-                materials[indexMaterial].Transparency = std::stof(lineElements[0]);
+                materials[static_cast<size_t>(indexMaterial)].Transparency = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialOpticalDensity))
-                materials[indexMaterial].OpticalDensity = std::stof(lineElements[0]);
+                materials[static_cast<size_t>(indexMaterial)].OpticalDensity = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialIllumination))
-                materials[indexMaterial].IlluminationMode = std::stof(lineElements[0]);
+                materials[static_cast<size_t>(indexMaterial)].IlluminationMode = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialTextureAmbient))
-                materials[indexMaterial].TextureAmbient = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureAmbient = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDiffuse))
-                materials[indexMaterial].TextureDiffuse = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureDiffuse = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecular))
-                materials[indexMaterial].TextureSpecular = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureSpecular = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecularExp))
-                materials[indexMaterial].TextureSpecularExp = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureSpecularExp = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDissolve))
-                materials[indexMaterial].TextureDissolve = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureDissolve = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureBump))
-                materials[indexMaterial].TextureBump = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureBump = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDisplacement))
-                materials[indexMaterial].TextureDisplacement = this->parseTextureImage(cleanLine);
+                materials[static_cast<size_t>(indexMaterial)].TextureDisplacement = this->parseTextureImage(cleanLine);
 
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
@@ -361,7 +366,7 @@ int objParser1::getLineCount() {
 #endif
 
     std::ifstream inFile2(this->file.path.c_str());
-    int linesCount = (int)std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim);
+    int linesCount = int(std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim));
     inFile2.close();
     return linesCount;
 }

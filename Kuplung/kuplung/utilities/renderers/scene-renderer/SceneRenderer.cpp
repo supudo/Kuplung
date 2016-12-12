@@ -22,7 +22,7 @@ SceneRenderer::~SceneRenderer() {
 void SceneRenderer::init() {
 }
 
-std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -38,7 +38,7 @@ std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFa
     temp_row = (void *)malloc(image->pitch);
     if (NULL == temp_row)
         Settings::Instance()->funcDoLog("[SceneRenderer] Not enough memory for image inversion");
-    height_div_2 = (int) (image->h * .5);
+    height_div_2 = int(image->h * .5);
     for (index = 0; index < height_div_2; index++) {
         memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
         memcpy((Uint8 *)(image->pixels) + image->pitch * index, (Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), image->pitch);
@@ -55,7 +55,7 @@ std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFa
     return f;
 }
 
-std::string SceneRenderer::renderImage2(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string SceneRenderer::renderImage2(FBEntity const& file, std::vector<ModelFaceBase*> *) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -152,7 +152,7 @@ std::string SceneRenderer::renderImage2(FBEntity const& file, std::vector<ModelF
                     temp_row = (void *)malloc(image->pitch);
                     if(NULL == temp_row)
                         Settings::Instance()->funcDoLog("Not enough memory for image inversion");
-                    height_div_2 = (int) (image->h * .5);
+                    height_div_2 = int(image->h * .5);
                     for (index = 0; index < height_div_2; index++) {
                         memcpy((Uint8 *)temp_row,(Uint8 *)(image->pixels) + image->pitch * index, image->pitch);
                         memcpy((Uint8 *)(image->pixels) + image->pitch * index, (Uint8 *)(image->pixels) + image->pitch * (image->h - index - 1), image->pitch);
