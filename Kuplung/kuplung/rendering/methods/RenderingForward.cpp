@@ -59,12 +59,6 @@ RenderingForward::~RenderingForward() {
         }
     }
 
-    glDisableVertexAttribArray(this->glVS_VertexPosition);
-    glDisableVertexAttribArray(this->glFS_TextureCoord);
-    glDisableVertexAttribArray(this->glVS_VertexNormal);
-    glDisableVertexAttribArray(this->glVS_Tangent);
-    glDisableVertexAttribArray(this->glVS_Bitangent);
-
     glDeleteProgram(this->shaderProgram);
 
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
@@ -157,12 +151,6 @@ bool RenderingForward::initShaderProgram() {
     else {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
 
-        this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-        this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-        this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-        this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
-        this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
-
         this->glFS_showShadows = this->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
         this->glFS_ShadowPass = this->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
 
@@ -207,7 +195,7 @@ bool RenderingForward::initShaderProgram() {
         this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
 
         // light - directional
-        for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
             ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -224,7 +212,7 @@ bool RenderingForward::initShaderProgram() {
         }
 
         // light - point
-        for (int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
             ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
             f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
@@ -244,7 +232,7 @@ bool RenderingForward::initShaderProgram() {
         }
 
         // light - spot
-        for (int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
             ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -334,7 +322,7 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         ModelFaceData *mfd = meshModelFaces[i];
 
         if (mfd->getOptionsSelected())
-            selectedModelID = i;
+            selectedModelID = int(i);
 
         glm::mat4 matrixModel = glm::mat4(1.0);
         matrixModel *= this->managerObjects.grid->matrixModel;
@@ -375,11 +363,11 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
         // blending
-        if (mfd->meshModel.ModelMaterial.Transparency < 1.0 || mfd->Setting_Alpha < 1.0) {
+        if (mfd->meshModel.ModelMaterial.Transparency < 1.0f || mfd->Setting_Alpha < 1.0f) {
             glDisable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
-            if (mfd->meshModel.ModelMaterial.Transparency < 1.0)
+            if (mfd->meshModel.ModelMaterial.Transparency < 1.0f)
                 glUniform1f(this->glFS_AlphaBlending, mfd->meshModel.ModelMaterial.Transparency);
             else
                 glUniform1f(this->glFS_AlphaBlending, mfd->Setting_Alpha);
@@ -448,11 +436,12 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
 
         // lights
-        int lightsCount_Directional = 0;
-        int lightsCount_Point = 0;
-        int lightsCount_Spot = 0;
-        for (int j=0; j<(int)mfd->lightSources.size(); j++) {
+        unsigned int lightsCount_Directional = 0, lightsCount_Point = 0, lightsCount_Spot = 0;
+        for (size_t j=0; j<mfd->lightSources.size(); j++) {
             Light *light = mfd->lightSources[j];
+            assert(light->type == LightSourceType_Directional ||
+                   light->type == LightSourceType_Point ||
+                   light->type == LightSourceType_Spot);
             switch (light->type) {
                 case LightSourceType_Directional: {
                     if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
@@ -538,20 +527,18 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
                     }
                     break;
                 }
-                default:
-                    break;
             }
         }
 
-        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+        for (unsigned int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
             glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+        for (unsigned int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
             glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+        for (unsigned int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
             glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
         }
 
@@ -679,7 +666,7 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
         // edit mode wireframe
         if (mfd->getOptionsSelected() && mfd->Setting_EditMode) {
             mfd->Setting_Wireframe = true;
-            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point + 0.01, mfd->scaleY->point + 0.01, mfd->scaleZ->point + 0.01));
+            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point + 0.01f, mfd->scaleY->point + 0.01f, mfd->scaleZ->point + 0.01f));
 
             mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
             matrixModelView = this->matrixCamera * matrixModel;
@@ -704,7 +691,7 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
     if (this->managerObjects.VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
         ImGuizmo::Enable(true);
 
-        ModelFaceData *mfd = meshModelFaces[selectedModelID];
+        ModelFaceData *mfd = meshModelFaces[static_cast<size_t>(selectedModelID)];
 
         glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
         v0 = mfd->matrixModel * v0;
@@ -730,10 +717,10 @@ void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, 
 
         glm::vec3 v = this->managerObjects.VertexEditorMode;
         this->managerObjects.VertexEditorMode.x += translation.x;
-        this->managerObjects.VertexEditorMode.y += -1.0 * translation.y;
+        this->managerObjects.VertexEditorMode.y += -1.0f * translation.y;
         this->managerObjects.VertexEditorMode.z += translation.z;
         if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex)
-            mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
+            mfd->meshModel.vertices[static_cast<size_t>(this->managerObjects.VertexEditorModeID)] = this->managerObjects.VertexEditorMode;
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {
         }
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {

@@ -35,7 +35,7 @@ private:
     int lightingPass_DrawMode;
 
     // light
-    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+    unsigned int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
     std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
     std::vector<ModelFace_LightSource_Point *> mfLights_Point;
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
@@ -45,7 +45,6 @@ private:
 
     // variables
     GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
-    GLint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
 
     // general
     GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;

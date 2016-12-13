@@ -44,12 +44,6 @@ DefaultForwardRenderer::~DefaultForwardRenderer() {
         }
     }
 
-    glDisableVertexAttribArray(this->glVS_VertexPosition);
-    glDisableVertexAttribArray(this->glFS_TextureCoord);
-    glDisableVertexAttribArray(this->glVS_VertexNormal);
-    glDisableVertexAttribArray(this->glVS_Tangent);
-    glDisableVertexAttribArray(this->glVS_Bitangent);
-
     glDeleteProgram(this->shaderProgram);
 
     glDeleteFramebuffers(1, &this->renderFBO);
@@ -145,12 +139,6 @@ bool DefaultForwardRenderer::initShaderProgram() {
     }
     else {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
-
-        this->glVS_VertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexPosition");
-        this->glFS_TextureCoord = this->glUtils->glGetAttribute(this->shaderProgram, "vs_textureCoord");
-        this->glVS_VertexNormal = this->glUtils->glGetAttribute(this->shaderProgram, "vs_vertexNormal");
-        this->glVS_Tangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_tangent");
-        this->glVS_Bitangent = this->glUtils->glGetAttribute(this->shaderProgram, "vs_bitangent");
 
         this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
         this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");

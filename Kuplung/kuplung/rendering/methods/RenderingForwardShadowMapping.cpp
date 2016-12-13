@@ -206,7 +206,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
         this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
 
         // light - directional
-        for (int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
             ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -223,7 +223,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
         }
 
         // light - point
-        for (int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
             ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
             f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
@@ -243,7 +243,7 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
         }
 
         // light - spot
-        for (int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
+        for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
             ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
             f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
@@ -530,7 +530,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         ModelFaceData *mfd = meshModelFaces[i];
 
         if (mfd->getOptionsSelected())
-            selectedModelID = i;
+            selectedModelID = int(i);
 
         glm::mat4 matrixModel = glm::mat4(1.0);
         matrixModel *= this->managerObjects.grid->matrixModel;
@@ -585,11 +585,11 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
 
         // blending
-        if (mfd->meshModel.ModelMaterial.Transparency < 1.0 || mfd->Setting_Alpha < 1.0) {
+        if (mfd->meshModel.ModelMaterial.Transparency < 1.0f || mfd->Setting_Alpha < 1.0f) {
             glDisable(GL_DEPTH_TEST);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
             glEnable(GL_BLEND);
-            if (mfd->meshModel.ModelMaterial.Transparency < 1.0)
+            if (mfd->meshModel.ModelMaterial.Transparency < 1.0f)
                 glUniform1f(this->glFS_AlphaBlending, mfd->meshModel.ModelMaterial.Transparency);
             else
                 glUniform1f(this->glFS_AlphaBlending, mfd->Setting_Alpha);
@@ -658,11 +658,14 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
 
         // lights
-        int lightsCount_Directional = 0;
-        int lightsCount_Point = 0;
-        int lightsCount_Spot = 0;
+        unsigned int lightsCount_Directional = 0;
+        unsigned int lightsCount_Point = 0;
+        unsigned int lightsCount_Spot = 0;
         for (size_t j=0; j<mfd->lightSources.size(); j++) {
             Light *light = mfd->lightSources[j];
+            assert(light->type == LightSourceType_Directional ||
+                   light->type == LightSourceType_Point ||
+                   light->type == LightSourceType_Spot);
             switch (light->type) {
                 case LightSourceType_Directional: {
                     if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
@@ -748,27 +751,25 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
                     }
                     break;
                 }
-                default:
-                    break;
             }
         }
 
-        for (int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
+        for (unsigned int j=lightsCount_Directional; j<this->GLSL_LightSourceNumber_Directional; j++) {
             glUniform1i(this->mfLights_Directional[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
+        for (unsigned int j=lightsCount_Point; j<this->GLSL_LightSourceNumber_Point; j++) {
             glUniform1i(this->mfLights_Point[j]->gl_InUse, 0);
         }
 
-        for (int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
+        for (unsigned int j=lightsCount_Spot; j<this->GLSL_LightSourceNumber_Spot; j++) {
             glUniform1i(this->mfLights_Spot[j]->gl_InUse, 0);
         }
 
         // material
         glUniform1f(this->glMaterial_Refraction, mfd->Setting_MaterialRefraction->point);
         glUniform1f(this->glMaterial_SpecularExp, mfd->Setting_MaterialSpecularExp->point);
-        glUniform1i(this->glMaterial_IlluminationModel, mfd->materialIlluminationModel);
+        glUniform1i(this->glMaterial_IlluminationModel, static_cast<GLint>(mfd->materialIlluminationModel));
         glUniform1f(this->glMaterial_HeightScale, mfd->displacementHeightScale->point);
         glUniform3f(this->glMaterial_Ambient, mfd->materialAmbient->color.r, mfd->materialAmbient->color.g, mfd->materialAmbient->color.b);
         glUniform3f(this->glMaterial_Diffuse, mfd->materialDiffuse->color.r, mfd->materialDiffuse->color.g, mfd->materialDiffuse->color.b);
@@ -902,7 +903,7 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
         // edit mode wireframe
         if (mfd->getOptionsSelected() && mfd->Setting_EditMode) {
             mfd->Setting_Wireframe = true;
-            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point + 0.01, mfd->scaleY->point + 0.01, mfd->scaleZ->point + 0.01));
+            matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point + 0.01f, mfd->scaleY->point + 0.01f, mfd->scaleZ->point + 0.01f));
 
             mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
             matrixModelView = this->matrixCamera * matrixModel;
@@ -953,10 +954,10 @@ void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProg
 
         glm::vec3 v = this->managerObjects.VertexEditorMode;
         this->managerObjects.VertexEditorMode.x += translation.x;
-        this->managerObjects.VertexEditorMode.y += -1.0 * translation.y;
+        this->managerObjects.VertexEditorMode.y += -1.0f * translation.y;
         this->managerObjects.VertexEditorMode.z += translation.z;
         if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex)
-            mfd->meshModel.vertices[this->managerObjects.VertexEditorModeID] = this->managerObjects.VertexEditorMode;
+            mfd->meshModel.vertices[static_cast<size_t>(this->managerObjects.VertexEditorModeID)] = this->managerObjects.VertexEditorMode;
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {
         }
         else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {

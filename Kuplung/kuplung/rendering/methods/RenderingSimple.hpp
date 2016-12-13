@@ -30,11 +30,8 @@ private:
     glm::vec3 vecCameraPosition, uiAmbientLight;
 
     GLuint shaderProgram;
-
-    GLuint glVS_VertexPosition, glFS_TextureCoord, glVS_VertexNormal, glVS_Tangent, glVS_Bitangent;
-    GLuint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
-
-    GLuint glFS_CameraPosition, glFS_UIAmbient;
+    GLint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
+    GLint glFS_CameraPosition, glFS_UIAmbient;
     std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 

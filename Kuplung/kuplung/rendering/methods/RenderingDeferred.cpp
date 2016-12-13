@@ -356,13 +356,13 @@ void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_GeometryPass, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
 
-    const int objPositions = [&] {
+    const size_t objPositions = [&] {
         if (this->managerObjects.Setting_DeferredTestMode)
-            return int(this->objectPositions.size());
+            return this->objectPositions.size();
         else
-            return 1;
+            return static_cast<size_t>(1);
     }();
-    for (int i=0; i<objPositions; i++) {
+    for (size_t i=0; i<objPositions; i++) {
         matrixModel = glm::mat4();
 
         matrixModel = glm::translate(matrixModel, this->objectPositions[i]);
@@ -439,6 +439,9 @@ void RenderingDeferred::renderLightingPass() {
     unsigned int lightsCount_Spot = 0;
     for (size_t j=0; j<this->managerObjects.lightSources.size(); j++) {
         Light *light = this->managerObjects.lightSources[j];
+        assert(light->type == LightSourceType_Directional ||
+               light->type == LightSourceType_Point ||
+               light->type == LightSourceType_Spot);
         switch (light->type) {
             case LightSourceType_Directional: {
                 if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
@@ -524,8 +527,6 @@ void RenderingDeferred::renderLightingPass() {
                 }
                 break;
             }
-            default:
-                break;
         }
     }
 

@@ -258,7 +258,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
             this->guiModelDelete(this->sceneSelectedModelObject);
 
         if (this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
-            this->meshModelFaces[this->sceneSelectedModelObject]->Setting_EditMode = this->managerControls->keyPresset_TAB;
+            this->meshModelFaces[static_cast<size_t>(this->sceneSelectedModelObject)]->Setting_EditMode = this->managerControls->keyPresset_TAB;
 
         // FOV & zoom
         if (this->managerControls->keyPressed_LALT) {
@@ -373,17 +373,13 @@ void Kuplung::addSpaceshipModel() {
 }
 
 void Kuplung::renderScene() {
-    switch (Settings::Instance()->RendererType) {
-        case InAppRendererType_Deferred: {
-            this->renderSceneModels();
-            this->managerObjects->render();
-            break;
-        }
-        default: {
-            this->managerObjects->render();
-            this->renderSceneModels();
-            break;
-        }
+    if (Settings::Instance()->RendererType == InAppRendererType_Deferred) {
+        this->renderSceneModels();
+        this->managerObjects->render();
+    }
+    else {
+        this->managerObjects->render();
+        this->renderSceneModels();
     }
 
     if (Settings::Instance()->mRayAnimate) {
@@ -700,7 +696,7 @@ void Kuplung::guiEditorshaderCompiled(std::string const& fileName) {
 }
 
 void Kuplung::guiModelDelete(const int selectedModel) {
-    ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[selectedModel];
+    ModelFaceData *mfd = (ModelFaceData*)this->meshModelFaces[static_cast<size_t>(selectedModel)];
     delete mfd;
 
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);

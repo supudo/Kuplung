@@ -53,7 +53,7 @@ private:
     GLuint depthQuadVAO, depthQuadVBO;
 
     // light
-    int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+    unsigned int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
     std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
     std::vector<ModelFace_LightSource_Point *> mfLights_Point;
     std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
