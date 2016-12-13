@@ -32,7 +32,7 @@ StructuredVolumetricSampling::~StructuredVolumetricSampling() {
     this->glUtils.reset();
 }
 
-void StructuredVolumetricSampling::init() {
+StructuredVolumetricSampling::StructuredVolumetricSampling() {
     this->glUtils = std::make_unique<GLUtils>();
 }
 

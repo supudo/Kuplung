@@ -49,7 +49,7 @@ CameraModel::~CameraModel() {
     this->glUtils.reset();
 }
 
-void CameraModel::init() {
+CameraModel::CameraModel() {
     this->glUtils = std::make_unique<GLUtils>();
     this->initProperties();
 }

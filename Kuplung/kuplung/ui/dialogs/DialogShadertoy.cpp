@@ -274,7 +274,6 @@ void DialogShadertoy::init(std::function<void()> fShowErrorMessage) {
     strcpy(this->shadertoyEditorText, funcMain);
 
     this->engineShadertoy = std::make_unique<Shadertoy>();
-    this->engineShadertoy->init();
     this->engineShadertoy->initShaderProgram(std::string(funcMain));
     this->engineShadertoy->initBuffers();
     this->engineShadertoy->initFBO(

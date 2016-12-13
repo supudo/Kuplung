@@ -834,7 +834,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     this->setHeightmapImage(this->managerObjects.heightmapImage);
     this->lockCamera();
 
-    if (int(this->managerObjects.lightSources.size()) > this->selectedObjectLight) {
+    if (this->managerObjects.lightSources.size() > 0 && this->selectedObjectLight > -1 && int(this->managerObjects.lightSources.size()) > this->selectedObjectLight) {
         float slp_x = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
         float slp_y = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
         float slp_z = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;

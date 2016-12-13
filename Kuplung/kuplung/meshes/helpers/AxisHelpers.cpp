@@ -29,7 +29,7 @@ AxisHelpers::~AxisHelpers() {
     this->glUtils.reset();
 }
 
-void AxisHelpers::init() {
+AxisHelpers::AxisHelpers() {
     this->glUtils = std::make_unique<GLUtils>();
     this->initProperties();
 }

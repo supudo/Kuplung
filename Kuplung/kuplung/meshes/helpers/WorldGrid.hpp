@@ -23,7 +23,7 @@ struct MirrorSurface {
 class WorldGrid {
 public:
     ~WorldGrid();
-    void init();
+    WorldGrid();
     bool initShaderProgram();
     void initBuffers(const int gridSize, const float unitSize);
     void initProperties();

@@ -20,7 +20,7 @@
 class CameraModel {
 public:
     ~CameraModel();
-    void init();
+    CameraModel();
     void setModel(const MeshModel meshModel);
     void initProperties();
     bool initShaderProgram();

@@ -14,8 +14,8 @@
 class ModelFaceData: public ModelFaceBase {
 public:
     ~ModelFaceData();
-    void initBuffers();
     void init(const MeshModel model, std::string const& assetsFolder);
+    void initBuffers();
     void renderModel(const bool useTessellation);
 
     bool vertexSphereVisible, vertexSphereIsSphere, vertexSphereShowWireframes;

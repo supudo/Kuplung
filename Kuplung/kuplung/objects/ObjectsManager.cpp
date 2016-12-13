@@ -248,7 +248,6 @@ void ObjectsManager::initCamera() {
  */
 void ObjectsManager::initGrid() {
     this->grid = new WorldGrid();
-    this->grid->init();
     this->grid->initShaderProgram();
     this->grid->initBuffers(this->Setting_GridSize, 1);
 }
@@ -273,7 +272,6 @@ void ObjectsManager::initCameraModel() {
  */
 void ObjectsManager::initAxisSystem() {
     this->axisSystem = new MiniAxis();
-    this->axisSystem->init();
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
 }
@@ -285,37 +283,31 @@ void ObjectsManager::initAxisSystem() {
  */
 void ObjectsManager::initAxisHelpers() {
     this->axisHelpers_xMinus = new AxisHelpers();
-    this->axisHelpers_xMinus->init();
     this->axisHelpers_xMinus->setModel(this->systemModels["axis_x_minus"]);
     this->axisHelpers_xMinus->initShaderProgram();
     this->axisHelpers_xMinus->initBuffers();
 
     this->axisHelpers_xPlus = new AxisHelpers();
-    this->axisHelpers_xPlus->init();
     this->axisHelpers_xPlus->setModel(this->systemModels["axis_x_plus"]);
     this->axisHelpers_xPlus->initShaderProgram();
     this->axisHelpers_xPlus->initBuffers();
 
     this->axisHelpers_yMinus = new AxisHelpers();
-    this->axisHelpers_yMinus->init();
     this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"]);
     this->axisHelpers_yMinus->initShaderProgram();
     this->axisHelpers_yMinus->initBuffers();
 
     this->axisHelpers_yPlus = new AxisHelpers();
-    this->axisHelpers_yPlus->init();
     this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"]);
     this->axisHelpers_yPlus->initShaderProgram();
     this->axisHelpers_yPlus->initBuffers();
 
     this->axisHelpers_zMinus = new AxisHelpers();
-    this->axisHelpers_zMinus->init();
     this->axisHelpers_zMinus->setModel(this->systemModels["axis_z_minus"]);
     this->axisHelpers_zMinus->initShaderProgram();
     this->axisHelpers_zMinus->initBuffers();
 
     this->axisHelpers_zPlus = new AxisHelpers();
-    this->axisHelpers_zPlus->init();
     this->axisHelpers_zPlus->setModel(this->systemModels["axis_z_plus"]);
     this->axisHelpers_zPlus->initShaderProgram();
     this->axisHelpers_zPlus->initBuffers();
@@ -340,7 +332,6 @@ void ObjectsManager::initSkybox() {
  */
 void ObjectsManager::initTerrain() {
     this->terrain = new Terrain();
-    this->terrain->init();
     this->terrain->initShaderProgram();
 }
 
@@ -355,7 +346,6 @@ void ObjectsManager::generateTerrain() {
  */
 void ObjectsManager::initSpaceship() {
     this->spaceship = new Spaceship();
-    this->spaceship->init();
     this->spaceship->initShaderProgram();
 }
 

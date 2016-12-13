@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A00ADBF1DD4DA0E0067B395 /* epcot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A00ADBD1DD4DA010067B395 /* epcot.mtl */; };
-		8A00ADC01DD4DA0E0067B395 /* epcot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A00ADBE1DD4DA010067B395 /* epcot.obj */; };
 		8A03647C1C6B71D9001489C8 /* ObjectsManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */; };
 		8A04DBD31C63BB310023CA07 /* Kuplung_Settings.ini in Copy Files */ = {isa = PBXBuildFile; fileRef = 8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */; };
 		8A1084EB1DE8672A007426F2 /* RenderingForwardShadowMapping.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1084E91DE8672A007426F2 /* RenderingForwardShadowMapping.cpp */; };
@@ -26,40 +24,6 @@
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
 		8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1CBAD01CA3EFA7000A171D /* MENode.cpp */; };
 		8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */; };
-		8A2575EE1DD48ACF004172E3 /* brick_wall_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */; };
-		8A2575EF1DD48ACF004172E3 /* brick_wall_displacement.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A34438F1DC0DD7A008393B5 /* brick_wall_displacement.png */; };
-		8A2575F01DD48ACF004172E3 /* brick_wall_normal.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3443901DC0DD7A008393B5 /* brick_wall_normal.png */; };
-		8A2575F11DD48ACF004172E3 /* brick_wall_spec.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3443911DC0DD7A008393B5 /* brick_wall_spec.png */; };
-		8A2575F21DD48ACF004172E3 /* brick_wall.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3443921DC0DD7A008393B5 /* brick_wall.mtl */; };
-		8A2575F31DD48ACF004172E3 /* brick_wall.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3443931DC0DD7A008393B5 /* brick_wall.obj */; };
-		8A2575F41DD48ACF004172E3 /* cone.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917731CAEA7CC002988C2 /* cone.mtl */; };
-		8A2575F51DD48ACF004172E3 /* cone.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917741CAEA7CC002988C2 /* cone.obj */; };
-		8A2575F61DD48ACF004172E3 /* cube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917751CAEA7CC002988C2 /* cube.mtl */; };
-		8A2575F71DD48ACF004172E3 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917761CAEA7CC002988C2 /* cube.obj */; };
-		8A2575F81DD48ACF004172E3 /* cylinder.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917771CAEA7CC002988C2 /* cylinder.mtl */; };
-		8A2575F91DD48ACF004172E3 /* cylinder.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917781CAEA7CC002988C2 /* cylinder.obj */; };
-		8A2575FA1DD48ACF004172E3 /* grid.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917791CAEA7CC002988C2 /* grid.mtl */; };
-		8A2575FB1DD48ACF004172E3 /* grid.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177A1CAEA7CC002988C2 /* grid.obj */; };
-		8A2575FC1DD48ACF004172E3 /* ico_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */; };
-		8A2575FD1DD48ACF004172E3 /* ico_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */; };
-		8A2575FE1DD48ACF004172E3 /* MaterialBall.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A2575EA1DD48A9D004172E3 /* MaterialBall.mtl */; };
-		8A2575FF1DD48ACF004172E3 /* MaterialBall.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A2575EB1DD48A9D004172E3 /* MaterialBall.obj */; };
-		8A2576001DD48ACF004172E3 /* MaterialBallBlender.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A2575EC1DD48A9D004172E3 /* MaterialBallBlender.mtl */; };
-		8A2576011DD48ACF004172E3 /* MaterialBallBlender.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A2575ED1DD48A9D004172E3 /* MaterialBallBlender.obj */; };
-		8A2576021DD48ACF004172E3 /* monkey_head.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */; };
-		8A2576031DD48ACF004172E3 /* monkey_head.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */; };
-		8A2576041DD48ACF004172E3 /* plane_objects.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4C65E91DBF66C20022837F /* plane_objects.mtl */; };
-		8A2576051DD48ACF004172E3 /* plane_objects.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4C65EA1DBF66C20022837F /* plane_objects.obj */; };
-		8A2576061DD48ACF004172E3 /* plane.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB9177F1CAEA7CC002988C2 /* plane.mtl */; };
-		8A2576071DD48ACF004172E3 /* plane.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917801CAEA7CC002988C2 /* plane.obj */; };
-		8A2576081DD48ACF004172E3 /* torus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917811CAEA7CC002988C2 /* torus.mtl */; };
-		8A2576091DD48ACF004172E3 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917821CAEA7CC002988C2 /* torus.obj */; };
-		8A25760A1DD48ACF004172E3 /* triangle.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */; };
-		8A25760B1DD48ACF004172E3 /* triangle.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A5128CE1CC0CC3F00BE0600 /* triangle.obj */; };
-		8A25760C1DD48ACF004172E3 /* tube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917831CAEA7CC002988C2 /* tube.mtl */; };
-		8A25760D1DD48ACF004172E3 /* tube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917841CAEA7CC002988C2 /* tube.obj */; };
-		8A25760E1DD48ACF004172E3 /* uv_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */; };
-		8A25760F1DD48ACF004172E3 /* uv_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AB917861CAEA7CC002988C2 /* uv_sphere.obj */; };
 		8A2576131DD48B05004172E3 /* RayTracerRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2576111DD48B05004172E3 /* RayTracerRenderer.cpp */; };
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
@@ -151,7 +115,6 @@
 		8A55D3391CCA2E730004712D /* z_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32D1CCA2E620004712D /* z_minus.obj */; };
 		8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32E1CCA2E620004712D /* z_plus.mtl */; };
 		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
-		8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */; };
 		8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */; };
 		8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */; };
 		8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A21CD27B9E002CB119 /* objParser1.cpp */; };
@@ -272,6 +235,44 @@
 		8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */; };
 		8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */; };
 		8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8ABC5C411CA3DEC00024F816 /* MENode_Texture.cpp */; };
+		8AC155071E0022F300639D87 /* brick_wall_diffuse.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E11E0022DD00639D87 /* brick_wall_diffuse.png */; };
+		8AC155081E0022F300639D87 /* brick_wall_displacement.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E21E0022DD00639D87 /* brick_wall_displacement.png */; };
+		8AC155091E0022F300639D87 /* brick_wall_normal.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E31E0022DD00639D87 /* brick_wall_normal.png */; };
+		8AC1550A1E0022F300639D87 /* brick_wall_spec.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E41E0022DD00639D87 /* brick_wall_spec.png */; };
+		8AC1550B1E0022F300639D87 /* brick_wall.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E51E0022DD00639D87 /* brick_wall.mtl */; };
+		8AC1550C1E0022F300639D87 /* brick_wall.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E61E0022DD00639D87 /* brick_wall.obj */; };
+		8AC1550D1E0022F300639D87 /* cone.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E71E0022DD00639D87 /* cone.mtl */; };
+		8AC1550E1E0022F300639D87 /* cone.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E81E0022DD00639D87 /* cone.obj */; };
+		8AC1550F1E0022F300639D87 /* cube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154E91E0022DD00639D87 /* cube.mtl */; };
+		8AC155101E0022F300639D87 /* cube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154EA1E0022DD00639D87 /* cube.obj */; };
+		8AC155111E0022F300639D87 /* cylinder.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154EB1E0022DD00639D87 /* cylinder.mtl */; };
+		8AC155121E0022F300639D87 /* cylinder.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154EC1E0022DD00639D87 /* cylinder.obj */; };
+		8AC155131E0022F300639D87 /* epcot.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154ED1E0022DD00639D87 /* epcot.mtl */; };
+		8AC155141E0022F300639D87 /* epcot.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154EE1E0022DD00639D87 /* epcot.obj */; };
+		8AC155151E0022F300639D87 /* grid.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154EF1E0022DD00639D87 /* grid.mtl */; };
+		8AC155161E0022F300639D87 /* grid.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F01E0022DD00639D87 /* grid.obj */; };
+		8AC155171E0022F300639D87 /* ico_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F11E0022DD00639D87 /* ico_sphere.mtl */; };
+		8AC155181E0022F300639D87 /* ico_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F21E0022DD00639D87 /* ico_sphere.obj */; };
+		8AC155191E0022F300639D87 /* MaterialBall.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F31E0022DD00639D87 /* MaterialBall.mtl */; };
+		8AC1551A1E0022F300639D87 /* MaterialBall.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F41E0022DD00639D87 /* MaterialBall.obj */; };
+		8AC1551B1E0022F300639D87 /* MaterialBallBlender.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F51E0022DD00639D87 /* MaterialBallBlender.mtl */; };
+		8AC1551C1E0022F300639D87 /* MaterialBallBlender.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F61E0022DD00639D87 /* MaterialBallBlender.obj */; };
+		8AC1551D1E0022F300639D87 /* monkey_head.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F71E0022DD00639D87 /* monkey_head.mtl */; };
+		8AC1551E1E0022F300639D87 /* monkey_head.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F81E0022DD00639D87 /* monkey_head.obj */; };
+		8AC1551F1E0022F300639D87 /* plane_objects_large.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154F91E0022DD00639D87 /* plane_objects_large.mtl */; };
+		8AC155201E0022F300639D87 /* plane_objects_large.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FA1E0022DD00639D87 /* plane_objects_large.obj */; };
+		8AC155211E0022F300639D87 /* plane_objects.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FB1E0022DD00639D87 /* plane_objects.mtl */; };
+		8AC155221E0022F300639D87 /* plane_objects.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FC1E0022DD00639D87 /* plane_objects.obj */; };
+		8AC155231E0022F300639D87 /* plane.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FD1E0022DD00639D87 /* plane.mtl */; };
+		8AC155241E0022F300639D87 /* plane.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FE1E0022DD00639D87 /* plane.obj */; };
+		8AC155251E0022F300639D87 /* torus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC154FF1E0022DD00639D87 /* torus.mtl */; };
+		8AC155261E0022F300639D87 /* torus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155001E0022DD00639D87 /* torus.obj */; };
+		8AC155271E0022F300639D87 /* triangle.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155011E0022DD00639D87 /* triangle.mtl */; };
+		8AC155281E0022F300639D87 /* triangle.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155021E0022DD00639D87 /* triangle.obj */; };
+		8AC155291E0022F300639D87 /* tube.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155031E0022DD00639D87 /* tube.mtl */; };
+		8AC1552A1E0022F300639D87 /* tube.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155041E0022DD00639D87 /* tube.obj */; };
+		8AC1552B1E0022F300639D87 /* uv_sphere.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155051E0022DD00639D87 /* uv_sphere.mtl */; };
+		8AC1552C1E0022F300639D87 /* uv_sphere.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8AC155061E0022DD00639D87 /* uv_sphere.obj */; };
 		8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC2913D1CD2455000A631C1 /* AssimpParser.cpp */; };
 		8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC291421CD2456800A631C1 /* STLParser.cpp */; };
 		8AC4B80F1DBA09B800F1D850 /* ImageViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AC4B80D1DBA09B800F1D850 /* ImageViewer.cpp */; };
@@ -406,42 +407,44 @@
 			dstPath = shapes;
 			dstSubfolderSpec = 7;
 			files = (
-				8A2575EE1DD48ACF004172E3 /* brick_wall_diffuse.png in CopyFiles */,
-				8A2575EF1DD48ACF004172E3 /* brick_wall_displacement.png in CopyFiles */,
-				8A2575F01DD48ACF004172E3 /* brick_wall_normal.png in CopyFiles */,
-				8A2575F11DD48ACF004172E3 /* brick_wall_spec.png in CopyFiles */,
-				8A2575F21DD48ACF004172E3 /* brick_wall.mtl in CopyFiles */,
-				8A2575F31DD48ACF004172E3 /* brick_wall.obj in CopyFiles */,
-				8A2575F41DD48ACF004172E3 /* cone.mtl in CopyFiles */,
-				8A2575F51DD48ACF004172E3 /* cone.obj in CopyFiles */,
-				8A2575F61DD48ACF004172E3 /* cube.mtl in CopyFiles */,
-				8A2575F71DD48ACF004172E3 /* cube.obj in CopyFiles */,
-				8A2575F81DD48ACF004172E3 /* cylinder.mtl in CopyFiles */,
-				8A2575F91DD48ACF004172E3 /* cylinder.obj in CopyFiles */,
-				8A00ADBF1DD4DA0E0067B395 /* epcot.mtl in CopyFiles */,
-				8A00ADC01DD4DA0E0067B395 /* epcot.obj in CopyFiles */,
-				8A2575FA1DD48ACF004172E3 /* grid.mtl in CopyFiles */,
-				8A2575FB1DD48ACF004172E3 /* grid.obj in CopyFiles */,
-				8A2575FC1DD48ACF004172E3 /* ico_sphere.mtl in CopyFiles */,
-				8A2575FD1DD48ACF004172E3 /* ico_sphere.obj in CopyFiles */,
-				8A2575FE1DD48ACF004172E3 /* MaterialBall.mtl in CopyFiles */,
-				8A2575FF1DD48ACF004172E3 /* MaterialBall.obj in CopyFiles */,
-				8A2576001DD48ACF004172E3 /* MaterialBallBlender.mtl in CopyFiles */,
-				8A2576011DD48ACF004172E3 /* MaterialBallBlender.obj in CopyFiles */,
-				8A2576021DD48ACF004172E3 /* monkey_head.mtl in CopyFiles */,
-				8A2576031DD48ACF004172E3 /* monkey_head.obj in CopyFiles */,
-				8A2576041DD48ACF004172E3 /* plane_objects.mtl in CopyFiles */,
-				8A2576051DD48ACF004172E3 /* plane_objects.obj in CopyFiles */,
-				8A2576061DD48ACF004172E3 /* plane.mtl in CopyFiles */,
-				8A2576071DD48ACF004172E3 /* plane.obj in CopyFiles */,
-				8A2576081DD48ACF004172E3 /* torus.mtl in CopyFiles */,
-				8A2576091DD48ACF004172E3 /* torus.obj in CopyFiles */,
-				8A25760A1DD48ACF004172E3 /* triangle.mtl in CopyFiles */,
-				8A25760B1DD48ACF004172E3 /* triangle.obj in CopyFiles */,
-				8A25760C1DD48ACF004172E3 /* tube.mtl in CopyFiles */,
-				8A25760D1DD48ACF004172E3 /* tube.obj in CopyFiles */,
-				8A25760E1DD48ACF004172E3 /* uv_sphere.mtl in CopyFiles */,
-				8A25760F1DD48ACF004172E3 /* uv_sphere.obj in CopyFiles */,
+				8AC155071E0022F300639D87 /* brick_wall_diffuse.png in CopyFiles */,
+				8AC155081E0022F300639D87 /* brick_wall_displacement.png in CopyFiles */,
+				8AC155091E0022F300639D87 /* brick_wall_normal.png in CopyFiles */,
+				8AC1550A1E0022F300639D87 /* brick_wall_spec.png in CopyFiles */,
+				8AC1550B1E0022F300639D87 /* brick_wall.mtl in CopyFiles */,
+				8AC1550C1E0022F300639D87 /* brick_wall.obj in CopyFiles */,
+				8AC1550D1E0022F300639D87 /* cone.mtl in CopyFiles */,
+				8AC1550E1E0022F300639D87 /* cone.obj in CopyFiles */,
+				8AC1550F1E0022F300639D87 /* cube.mtl in CopyFiles */,
+				8AC155101E0022F300639D87 /* cube.obj in CopyFiles */,
+				8AC155111E0022F300639D87 /* cylinder.mtl in CopyFiles */,
+				8AC155121E0022F300639D87 /* cylinder.obj in CopyFiles */,
+				8AC155131E0022F300639D87 /* epcot.mtl in CopyFiles */,
+				8AC155141E0022F300639D87 /* epcot.obj in CopyFiles */,
+				8AC155151E0022F300639D87 /* grid.mtl in CopyFiles */,
+				8AC155161E0022F300639D87 /* grid.obj in CopyFiles */,
+				8AC155171E0022F300639D87 /* ico_sphere.mtl in CopyFiles */,
+				8AC155181E0022F300639D87 /* ico_sphere.obj in CopyFiles */,
+				8AC155191E0022F300639D87 /* MaterialBall.mtl in CopyFiles */,
+				8AC1551A1E0022F300639D87 /* MaterialBall.obj in CopyFiles */,
+				8AC1551B1E0022F300639D87 /* MaterialBallBlender.mtl in CopyFiles */,
+				8AC1551C1E0022F300639D87 /* MaterialBallBlender.obj in CopyFiles */,
+				8AC1551D1E0022F300639D87 /* monkey_head.mtl in CopyFiles */,
+				8AC1551E1E0022F300639D87 /* monkey_head.obj in CopyFiles */,
+				8AC1551F1E0022F300639D87 /* plane_objects_large.mtl in CopyFiles */,
+				8AC155201E0022F300639D87 /* plane_objects_large.obj in CopyFiles */,
+				8AC155211E0022F300639D87 /* plane_objects.mtl in CopyFiles */,
+				8AC155221E0022F300639D87 /* plane_objects.obj in CopyFiles */,
+				8AC155231E0022F300639D87 /* plane.mtl in CopyFiles */,
+				8AC155241E0022F300639D87 /* plane.obj in CopyFiles */,
+				8AC155251E0022F300639D87 /* torus.mtl in CopyFiles */,
+				8AC155261E0022F300639D87 /* torus.obj in CopyFiles */,
+				8AC155271E0022F300639D87 /* triangle.mtl in CopyFiles */,
+				8AC155281E0022F300639D87 /* triangle.obj in CopyFiles */,
+				8AC155291E0022F300639D87 /* tube.mtl in CopyFiles */,
+				8AC1552A1E0022F300639D87 /* tube.obj in CopyFiles */,
+				8AC1552B1E0022F300639D87 /* uv_sphere.mtl in CopyFiles */,
+				8AC1552C1E0022F300639D87 /* uv_sphere.obj in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -608,8 +611,6 @@
 		8A0027931C9ABDFE00BBFFC6 /* model_face_mapping.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_mapping.frag; sourceTree = "<group>"; };
 		8A0027941C9ABDFE00BBFFC6 /* model_face_misc.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_misc.frag; sourceTree = "<group>"; };
 		8A0027951C9ABDFE00BBFFC6 /* model_face_vars.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = model_face_vars.frag; sourceTree = "<group>"; };
-		8A00ADBD1DD4DA010067B395 /* epcot.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = epcot.mtl; path = shapes/epcot.mtl; sourceTree = "<group>"; };
-		8A00ADBE1DD4DA010067B395 /* epcot.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = epcot.obj; path = shapes/epcot.obj; sourceTree = "<group>"; };
 		8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ObjectDefinitions.h; sourceTree = "<group>"; };
 		8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ObjectsManager.cpp; sourceTree = "<group>"; };
 		8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ObjectsManager.hpp; sourceTree = "<group>"; };
@@ -649,10 +650,6 @@
 		8A2154361DE74FDC00034C59 /* shadow_mapping_depth.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadow_mapping_depth.vert; sourceTree = "<group>"; };
 		8A2543DC1D9D6CF10057A927 /* DialogSVS.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogSVS.cpp; sourceTree = "<group>"; };
 		8A2543DD1D9D6CF10057A927 /* DialogSVS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogSVS.hpp; sourceTree = "<group>"; };
-		8A2575EA1DD48A9D004172E3 /* MaterialBall.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaterialBall.mtl; path = "build-Kuplung-Desktop_Qt_5_7_0_clang_64bit-Debug/kuplung.app/Contents/Resources/shapes/MaterialBall.mtl"; sourceTree = SOURCE_ROOT; };
-		8A2575EB1DD48A9D004172E3 /* MaterialBall.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaterialBall.obj; path = "build-Kuplung-Desktop_Qt_5_7_0_clang_64bit-Debug/kuplung.app/Contents/Resources/shapes/MaterialBall.obj"; sourceTree = SOURCE_ROOT; };
-		8A2575EC1DD48A9D004172E3 /* MaterialBallBlender.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaterialBallBlender.mtl; path = "build-Kuplung-Desktop_Qt_5_7_0_clang_64bit-Debug/kuplung.app/Contents/Resources/shapes/MaterialBallBlender.mtl"; sourceTree = SOURCE_ROOT; };
-		8A2575ED1DD48A9D004172E3 /* MaterialBallBlender.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = MaterialBallBlender.obj; path = "build-Kuplung-Desktop_Qt_5_7_0_clang_64bit-Debug/kuplung.app/Contents/Resources/shapes/MaterialBallBlender.obj"; sourceTree = SOURCE_ROOT; };
 		8A2576111DD48B05004172E3 /* RayTracerRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RayTracerRenderer.cpp; path = "renderers/ray-tracer/RayTracerRenderer.cpp"; sourceTree = "<group>"; };
 		8A2576121DD48B05004172E3 /* RayTracerRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RayTracerRenderer.hpp; path = "renderers/ray-tracer/RayTracerRenderer.hpp"; sourceTree = "<group>"; };
 		8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.frag; sourceTree = "<group>"; };
@@ -669,12 +666,6 @@
 		8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImportOBJ.hpp; path = importers/ImportOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
-		8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_diffuse.png; path = shapes/brick_wall_diffuse.png; sourceTree = "<group>"; };
-		8A34438F1DC0DD7A008393B5 /* brick_wall_displacement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_displacement.png; path = shapes/brick_wall_displacement.png; sourceTree = "<group>"; };
-		8A3443901DC0DD7A008393B5 /* brick_wall_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_normal.png; path = shapes/brick_wall_normal.png; sourceTree = "<group>"; };
-		8A3443911DC0DD7A008393B5 /* brick_wall_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_spec.png; path = shapes/brick_wall_spec.png; sourceTree = "<group>"; };
-		8A3443921DC0DD7A008393B5 /* brick_wall.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = brick_wall.mtl; path = shapes/brick_wall.mtl; sourceTree = "<group>"; };
-		8A3443931DC0DD7A008393B5 /* brick_wall.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = brick_wall.obj; path = shapes/brick_wall.obj; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
@@ -705,14 +696,10 @@
 		8A47F71C1CBF744800699CAC /* camera.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.vert; sourceTree = "<group>"; };
 		8A48C3221CBE8B530076F4F6 /* ray_line.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.frag; sourceTree = "<group>"; };
 		8A48C3231CBE8B530076F4F6 /* ray_line.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = ray_line.vert; sourceTree = "<group>"; };
-		8A4C65E91DBF66C20022837F /* plane_objects.mtl */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.mtl; path = shapes/plane_objects.mtl; sourceTree = "<group>"; };
-		8A4C65EA1DBF66C20022837F /* plane_objects.obj */ = {isa = PBXFileReference; lastKnownFileType = text; name = plane_objects.obj; path = shapes/plane_objects.obj; sourceTree = "<group>"; };
 		8A4FB76A1DFACDCD004EC0EE /* shadows_debug_quad_depth.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadows_debug_quad_depth.frag; sourceTree = "<group>"; };
 		8A4FB76B1DFACDCD004EC0EE /* shadows_debug_quad.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; path = shadows_debug_quad.vert; sourceTree = "<group>"; };
 		8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RayPicking.cpp; sourceTree = "<group>"; };
 		8A5128CB1CC0CBF900BE0600 /* RayPicking.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = RayPicking.hpp; sourceTree = "<group>"; };
-		8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.mtl; path = shapes/triangle.mtl; sourceTree = "<group>"; };
-		8A5128CE1CC0CC3F00BE0600 /* triangle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.obj; path = shapes/triangle.obj; sourceTree = "<group>"; };
 		8A5128D11CC0CC6600BE0600 /* bounding_box.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bounding_box.frag; sourceTree = "<group>"; };
 		8A5128D21CC0CC6600BE0600 /* bounding_box.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = bounding_box.vert; sourceTree = "<group>"; };
 		8A55D3281CCA2E620004712D /* x_minus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = x_minus.mtl; path = axis_helpers/x_minus.mtl; sourceTree = "<group>"; };
@@ -723,8 +710,6 @@
 		8A55D32D1CCA2E620004712D /* z_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_minus.obj; path = axis_helpers/z_minus.obj; sourceTree = "<group>"; };
 		8A55D32E1CCA2E620004712D /* z_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.mtl; path = axis_helpers/z_plus.mtl; sourceTree = "<group>"; };
 		8A55D32F1CCA2E620004712D /* z_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.obj; path = axis_helpers/z_plus.obj; sourceTree = "<group>"; };
-		8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceForward.cpp; path = scene/ModelFaceForward.cpp; sourceTree = "<group>"; };
-		8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceForward.hpp; path = scene/ModelFaceForward.hpp; sourceTree = "<group>"; };
 		8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRenderer.cpp; path = renderers/ImageRenderer.cpp; sourceTree = "<group>"; };
 		8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageRenderer.hpp; path = renderers/ImageRenderer.hpp; sourceTree = "<group>"; };
 		8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSaver.cpp; sourceTree = "<group>"; };
@@ -928,26 +913,6 @@
 		8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Kuplung.hpp; sourceTree = "<group>"; };
 		8AB6F0AD1C3AA21900665C40 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Kuplung.icns; sourceTree = "<group>"; };
-		8AB917731CAEA7CC002988C2 /* cone.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.mtl; path = shapes/cone.mtl; sourceTree = "<group>"; };
-		8AB917741CAEA7CC002988C2 /* cone.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.obj; path = shapes/cone.obj; sourceTree = "<group>"; };
-		8AB917751CAEA7CC002988C2 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = shapes/cube.mtl; sourceTree = "<group>"; };
-		8AB917761CAEA7CC002988C2 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = shapes/cube.obj; sourceTree = "<group>"; };
-		8AB917771CAEA7CC002988C2 /* cylinder.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.mtl; path = shapes/cylinder.mtl; sourceTree = "<group>"; };
-		8AB917781CAEA7CC002988C2 /* cylinder.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.obj; path = shapes/cylinder.obj; sourceTree = "<group>"; };
-		8AB917791CAEA7CC002988C2 /* grid.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.mtl; path = shapes/grid.mtl; sourceTree = "<group>"; };
-		8AB9177A1CAEA7CC002988C2 /* grid.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.obj; path = shapes/grid.obj; sourceTree = "<group>"; };
-		8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.mtl; path = shapes/ico_sphere.mtl; sourceTree = "<group>"; };
-		8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.obj; path = shapes/ico_sphere.obj; sourceTree = "<group>"; };
-		8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.mtl; path = shapes/monkey_head.mtl; sourceTree = "<group>"; };
-		8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.obj; path = shapes/monkey_head.obj; sourceTree = "<group>"; };
-		8AB9177F1CAEA7CC002988C2 /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.mtl; path = shapes/plane.mtl; sourceTree = "<group>"; };
-		8AB917801CAEA7CC002988C2 /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.obj; path = shapes/plane.obj; sourceTree = "<group>"; };
-		8AB917811CAEA7CC002988C2 /* torus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.mtl; path = shapes/torus.mtl; sourceTree = "<group>"; };
-		8AB917821CAEA7CC002988C2 /* torus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.obj; path = shapes/torus.obj; sourceTree = "<group>"; };
-		8AB917831CAEA7CC002988C2 /* tube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.mtl; path = shapes/tube.mtl; sourceTree = "<group>"; };
-		8AB917841CAEA7CC002988C2 /* tube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.obj; path = shapes/tube.obj; sourceTree = "<group>"; };
-		8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.mtl; path = shapes/uv_sphere.mtl; sourceTree = "<group>"; };
-		8AB917861CAEA7CC002988C2 /* uv_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.obj; path = shapes/uv_sphere.obj; sourceTree = "<group>"; };
 		8ABC5C3D1CA3DEC00024F816 /* MENode_Color.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Color.cpp; path = materialeditor/MENode_Color.cpp; sourceTree = "<group>"; };
 		8ABC5C3E1CA3DEC00024F816 /* MENode_Color.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MENode_Color.hpp; path = materialeditor/MENode_Color.hpp; sourceTree = "<group>"; };
 		8ABC5C3F1CA3DEC00024F816 /* MENode_Combine.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MENode_Combine.cpp; path = materialeditor/MENode_Combine.cpp; sourceTree = "<group>"; };
@@ -960,6 +925,44 @@
 		8ABFC1EA1CC92ADD00FBCF08 /* y_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = y_plus.obj; path = axis_helpers/y_plus.obj; sourceTree = "<group>"; };
 		8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis_helpers.frag; sourceTree = "<group>"; };
 		8ABFC1F71CC92C0800FBCF08 /* axis_helpers.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = axis_helpers.vert; sourceTree = "<group>"; };
+		8AC154E11E0022DD00639D87 /* brick_wall_diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_diffuse.png; path = shapes/brick_wall_diffuse.png; sourceTree = "<group>"; };
+		8AC154E21E0022DD00639D87 /* brick_wall_displacement.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_displacement.png; path = shapes/brick_wall_displacement.png; sourceTree = "<group>"; };
+		8AC154E31E0022DD00639D87 /* brick_wall_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_normal.png; path = shapes/brick_wall_normal.png; sourceTree = "<group>"; };
+		8AC154E41E0022DD00639D87 /* brick_wall_spec.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brick_wall_spec.png; path = shapes/brick_wall_spec.png; sourceTree = "<group>"; };
+		8AC154E51E0022DD00639D87 /* brick_wall.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = brick_wall.mtl; path = shapes/brick_wall.mtl; sourceTree = "<group>"; };
+		8AC154E61E0022DD00639D87 /* brick_wall.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = brick_wall.obj; path = shapes/brick_wall.obj; sourceTree = "<group>"; };
+		8AC154E71E0022DD00639D87 /* cone.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.mtl; path = shapes/cone.mtl; sourceTree = "<group>"; };
+		8AC154E81E0022DD00639D87 /* cone.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cone.obj; path = shapes/cone.obj; sourceTree = "<group>"; };
+		8AC154E91E0022DD00639D87 /* cube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.mtl; path = shapes/cube.mtl; sourceTree = "<group>"; };
+		8AC154EA1E0022DD00639D87 /* cube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cube.obj; path = shapes/cube.obj; sourceTree = "<group>"; };
+		8AC154EB1E0022DD00639D87 /* cylinder.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.mtl; path = shapes/cylinder.mtl; sourceTree = "<group>"; };
+		8AC154EC1E0022DD00639D87 /* cylinder.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cylinder.obj; path = shapes/cylinder.obj; sourceTree = "<group>"; };
+		8AC154ED1E0022DD00639D87 /* epcot.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = epcot.mtl; path = shapes/epcot.mtl; sourceTree = "<group>"; };
+		8AC154EE1E0022DD00639D87 /* epcot.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = epcot.obj; path = shapes/epcot.obj; sourceTree = "<group>"; };
+		8AC154EF1E0022DD00639D87 /* grid.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.mtl; path = shapes/grid.mtl; sourceTree = "<group>"; };
+		8AC154F01E0022DD00639D87 /* grid.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = grid.obj; path = shapes/grid.obj; sourceTree = "<group>"; };
+		8AC154F11E0022DD00639D87 /* ico_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.mtl; path = shapes/ico_sphere.mtl; sourceTree = "<group>"; };
+		8AC154F21E0022DD00639D87 /* ico_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ico_sphere.obj; path = shapes/ico_sphere.obj; sourceTree = "<group>"; };
+		8AC154F31E0022DD00639D87 /* MaterialBall.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MaterialBall.mtl; path = shapes/MaterialBall.mtl; sourceTree = "<group>"; };
+		8AC154F41E0022DD00639D87 /* MaterialBall.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MaterialBall.obj; path = shapes/MaterialBall.obj; sourceTree = "<group>"; };
+		8AC154F51E0022DD00639D87 /* MaterialBallBlender.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MaterialBallBlender.mtl; path = shapes/MaterialBallBlender.mtl; sourceTree = "<group>"; };
+		8AC154F61E0022DD00639D87 /* MaterialBallBlender.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = MaterialBallBlender.obj; path = shapes/MaterialBallBlender.obj; sourceTree = "<group>"; };
+		8AC154F71E0022DD00639D87 /* monkey_head.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.mtl; path = shapes/monkey_head.mtl; sourceTree = "<group>"; };
+		8AC154F81E0022DD00639D87 /* monkey_head.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = monkey_head.obj; path = shapes/monkey_head.obj; sourceTree = "<group>"; };
+		8AC154F91E0022DD00639D87 /* plane_objects_large.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane_objects_large.mtl; path = shapes/plane_objects_large.mtl; sourceTree = "<group>"; };
+		8AC154FA1E0022DD00639D87 /* plane_objects_large.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane_objects_large.obj; path = shapes/plane_objects_large.obj; sourceTree = "<group>"; };
+		8AC154FB1E0022DD00639D87 /* plane_objects.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane_objects.mtl; path = shapes/plane_objects.mtl; sourceTree = "<group>"; };
+		8AC154FC1E0022DD00639D87 /* plane_objects.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane_objects.obj; path = shapes/plane_objects.obj; sourceTree = "<group>"; };
+		8AC154FD1E0022DD00639D87 /* plane.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.mtl; path = shapes/plane.mtl; sourceTree = "<group>"; };
+		8AC154FE1E0022DD00639D87 /* plane.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = plane.obj; path = shapes/plane.obj; sourceTree = "<group>"; };
+		8AC154FF1E0022DD00639D87 /* torus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.mtl; path = shapes/torus.mtl; sourceTree = "<group>"; };
+		8AC155001E0022DD00639D87 /* torus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = torus.obj; path = shapes/torus.obj; sourceTree = "<group>"; };
+		8AC155011E0022DD00639D87 /* triangle.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.mtl; path = shapes/triangle.mtl; sourceTree = "<group>"; };
+		8AC155021E0022DD00639D87 /* triangle.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = triangle.obj; path = shapes/triangle.obj; sourceTree = "<group>"; };
+		8AC155031E0022DD00639D87 /* tube.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.mtl; path = shapes/tube.mtl; sourceTree = "<group>"; };
+		8AC155041E0022DD00639D87 /* tube.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = tube.obj; path = shapes/tube.obj; sourceTree = "<group>"; };
+		8AC155051E0022DD00639D87 /* uv_sphere.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.mtl; path = shapes/uv_sphere.mtl; sourceTree = "<group>"; };
+		8AC155061E0022DD00639D87 /* uv_sphere.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = uv_sphere.obj; path = shapes/uv_sphere.obj; sourceTree = "<group>"; };
 		8AC2913D1CD2455000A631C1 /* AssimpParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AssimpParser.cpp; path = "assimp-parser/AssimpParser.cpp"; sourceTree = "<group>"; };
 		8AC2913E1CD2455000A631C1 /* AssimpParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AssimpParser.hpp; path = "assimp-parser/AssimpParser.hpp"; sourceTree = "<group>"; };
 		8AC291421CD2456800A631C1 /* STLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STLParser.cpp; path = "stl-parser/STLParser.cpp"; sourceTree = "<group>"; };
@@ -1379,8 +1382,6 @@
 				8ADE509B1D2D418C00A6E7F0 /* ModelFaceBase.hpp */,
 				8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */,
 				8A7802D71D2D4F4B00D24620 /* ModelFaceData.hpp */,
-				8A5AA8D51D1A925B005BDD2E /* ModelFaceForward.cpp */,
-				8A5AA8D61D1A925B005BDD2E /* ModelFaceForward.hpp */,
 			);
 			name = scene;
 			sourceTree = "<group>";
@@ -1657,42 +1658,44 @@
 		8AB917721CAEA7B9002988C2 /* shapes */ = {
 			isa = PBXGroup;
 			children = (
-				8A34438E1DC0DD7A008393B5 /* brick_wall_diffuse.png */,
-				8A34438F1DC0DD7A008393B5 /* brick_wall_displacement.png */,
-				8A3443901DC0DD7A008393B5 /* brick_wall_normal.png */,
-				8A3443911DC0DD7A008393B5 /* brick_wall_spec.png */,
-				8A3443921DC0DD7A008393B5 /* brick_wall.mtl */,
-				8A3443931DC0DD7A008393B5 /* brick_wall.obj */,
-				8AB917731CAEA7CC002988C2 /* cone.mtl */,
-				8AB917741CAEA7CC002988C2 /* cone.obj */,
-				8AB917751CAEA7CC002988C2 /* cube.mtl */,
-				8AB917761CAEA7CC002988C2 /* cube.obj */,
-				8AB917771CAEA7CC002988C2 /* cylinder.mtl */,
-				8AB917781CAEA7CC002988C2 /* cylinder.obj */,
-				8A00ADBD1DD4DA010067B395 /* epcot.mtl */,
-				8A00ADBE1DD4DA010067B395 /* epcot.obj */,
-				8AB917791CAEA7CC002988C2 /* grid.mtl */,
-				8AB9177A1CAEA7CC002988C2 /* grid.obj */,
-				8AB9177B1CAEA7CC002988C2 /* ico_sphere.mtl */,
-				8AB9177C1CAEA7CC002988C2 /* ico_sphere.obj */,
-				8A2575EA1DD48A9D004172E3 /* MaterialBall.mtl */,
-				8A2575EB1DD48A9D004172E3 /* MaterialBall.obj */,
-				8A2575EC1DD48A9D004172E3 /* MaterialBallBlender.mtl */,
-				8A2575ED1DD48A9D004172E3 /* MaterialBallBlender.obj */,
-				8AB9177D1CAEA7CC002988C2 /* monkey_head.mtl */,
-				8AB9177E1CAEA7CC002988C2 /* monkey_head.obj */,
-				8A4C65E91DBF66C20022837F /* plane_objects.mtl */,
-				8A4C65EA1DBF66C20022837F /* plane_objects.obj */,
-				8AB9177F1CAEA7CC002988C2 /* plane.mtl */,
-				8AB917801CAEA7CC002988C2 /* plane.obj */,
-				8AB917811CAEA7CC002988C2 /* torus.mtl */,
-				8AB917821CAEA7CC002988C2 /* torus.obj */,
-				8A5128CD1CC0CC3F00BE0600 /* triangle.mtl */,
-				8A5128CE1CC0CC3F00BE0600 /* triangle.obj */,
-				8AB917831CAEA7CC002988C2 /* tube.mtl */,
-				8AB917841CAEA7CC002988C2 /* tube.obj */,
-				8AB917851CAEA7CC002988C2 /* uv_sphere.mtl */,
-				8AB917861CAEA7CC002988C2 /* uv_sphere.obj */,
+				8AC154E11E0022DD00639D87 /* brick_wall_diffuse.png */,
+				8AC154E21E0022DD00639D87 /* brick_wall_displacement.png */,
+				8AC154E31E0022DD00639D87 /* brick_wall_normal.png */,
+				8AC154E41E0022DD00639D87 /* brick_wall_spec.png */,
+				8AC154E51E0022DD00639D87 /* brick_wall.mtl */,
+				8AC154E61E0022DD00639D87 /* brick_wall.obj */,
+				8AC154E71E0022DD00639D87 /* cone.mtl */,
+				8AC154E81E0022DD00639D87 /* cone.obj */,
+				8AC154E91E0022DD00639D87 /* cube.mtl */,
+				8AC154EA1E0022DD00639D87 /* cube.obj */,
+				8AC154EB1E0022DD00639D87 /* cylinder.mtl */,
+				8AC154EC1E0022DD00639D87 /* cylinder.obj */,
+				8AC154ED1E0022DD00639D87 /* epcot.mtl */,
+				8AC154EE1E0022DD00639D87 /* epcot.obj */,
+				8AC154EF1E0022DD00639D87 /* grid.mtl */,
+				8AC154F01E0022DD00639D87 /* grid.obj */,
+				8AC154F11E0022DD00639D87 /* ico_sphere.mtl */,
+				8AC154F21E0022DD00639D87 /* ico_sphere.obj */,
+				8AC154F31E0022DD00639D87 /* MaterialBall.mtl */,
+				8AC154F41E0022DD00639D87 /* MaterialBall.obj */,
+				8AC154F51E0022DD00639D87 /* MaterialBallBlender.mtl */,
+				8AC154F61E0022DD00639D87 /* MaterialBallBlender.obj */,
+				8AC154F71E0022DD00639D87 /* monkey_head.mtl */,
+				8AC154F81E0022DD00639D87 /* monkey_head.obj */,
+				8AC154F91E0022DD00639D87 /* plane_objects_large.mtl */,
+				8AC154FA1E0022DD00639D87 /* plane_objects_large.obj */,
+				8AC154FB1E0022DD00639D87 /* plane_objects.mtl */,
+				8AC154FC1E0022DD00639D87 /* plane_objects.obj */,
+				8AC154FD1E0022DD00639D87 /* plane.mtl */,
+				8AC154FE1E0022DD00639D87 /* plane.obj */,
+				8AC154FF1E0022DD00639D87 /* torus.mtl */,
+				8AC155001E0022DD00639D87 /* torus.obj */,
+				8AC155011E0022DD00639D87 /* triangle.mtl */,
+				8AC155021E0022DD00639D87 /* triangle.obj */,
+				8AC155031E0022DD00639D87 /* tube.mtl */,
+				8AC155041E0022DD00639D87 /* tube.obj */,
+				8AC155051E0022DD00639D87 /* uv_sphere.mtl */,
+				8AC155061E0022DD00639D87 /* uv_sphere.obj */,
 			);
 			name = shapes;
 			sourceTree = "<group>";
@@ -1987,7 +1990,6 @@
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
-				8A5AA8D91D1A925B005BDD2E /* ModelFaceForward.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,

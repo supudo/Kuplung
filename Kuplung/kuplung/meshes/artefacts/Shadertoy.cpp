@@ -36,7 +36,7 @@ Shadertoy::~Shadertoy() {
     this->glUtils.reset();
 }
 
-void Shadertoy::init() {
+Shadertoy::Shadertoy() {
     this->glUtils = std::make_unique<GLUtils>();
     this->iChannel0_Image = "";
     this->iChannel1_Image = "";

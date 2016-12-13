@@ -20,7 +20,7 @@
 class Spaceship {
 public:
     ~Spaceship();
-    void init();
+    Spaceship();
     bool initShaderProgram();
     void initBuffers(const int gridSize);
     void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition);

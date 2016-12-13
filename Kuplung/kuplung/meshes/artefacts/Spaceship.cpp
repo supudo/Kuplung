@@ -39,7 +39,7 @@ Spaceship::~Spaceship() {
 
 #pragma mark - Initialization
 
-void Spaceship::init() {
+Spaceship::Spaceship() {
     this->glUtils = std::make_unique<GLUtils>();
     this->spaceshipGenerator = std::make_unique<SpaceshipMeshGenerator>();
 

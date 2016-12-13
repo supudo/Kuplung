@@ -16,7 +16,7 @@
 class Shadertoy {
 public:
     ~Shadertoy();
-    void init();
+    Shadertoy();
     bool initShaderProgram(std::string const& fragmentShaderSource);
     void initBuffers();
     void initTextures();

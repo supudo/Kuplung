@@ -55,7 +55,6 @@ void DialogSVS::init() {
     this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
     this->structured_Volumetric_Sampling = std::make_unique<StructuredVolumetricSampling>();
-    this->structured_Volumetric_Sampling->init();
     this->structured_Volumetric_Sampling->initShaderProgram();
     this->structured_Volumetric_Sampling->initBuffers();
     this->structured_Volumetric_Sampling->initFBO(

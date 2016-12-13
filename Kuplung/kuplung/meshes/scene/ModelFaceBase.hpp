@@ -25,9 +25,7 @@
 class ModelFaceBase {
 public:
     virtual ~ModelFaceBase();
-
     ModelFaceBase* clone(const int modelID);
-
     virtual void init(const MeshModel model, std::string const& assetsFolder);
     void initModelProperties();
     void initBoundingBox();

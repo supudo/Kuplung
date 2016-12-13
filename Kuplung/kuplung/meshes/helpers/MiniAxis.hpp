@@ -18,7 +18,7 @@
 class MiniAxis {
 public:
     ~MiniAxis();
-    void init();
+    MiniAxis();
     void initProperties();
     bool initShaderProgram();
     void initBuffers(); // 0 = x, 1 = y, 2 = z

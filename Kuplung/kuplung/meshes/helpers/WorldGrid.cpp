@@ -45,7 +45,7 @@ WorldGrid::~WorldGrid() {
 
 #pragma mark - Initialization
 
-void WorldGrid::init() {
+WorldGrid::WorldGrid() {
     this->glUtils = std::make_unique<GLUtils>();
     this->initProperties();
 }

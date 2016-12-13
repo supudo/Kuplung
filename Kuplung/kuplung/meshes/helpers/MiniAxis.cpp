@@ -33,7 +33,7 @@ MiniAxis::~MiniAxis() {
 
 #pragma mark - Initialization
 
-void MiniAxis::init() {
+MiniAxis::MiniAxis() {
     this->glUtils = std::make_unique<GLUtils>();
     this->initProperties();
 }
