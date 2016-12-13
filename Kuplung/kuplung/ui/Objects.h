@@ -14,11 +14,9 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 struct GUIObjectSetting {
-    int oIndex;
-    bool oAnimate;
-    int iValue;
+    int oIndex, iValue;
+    bool oAnimate, bValue;
     float fValue;
-    bool bValue;
     glm::vec4 vValue;
 };
 
@@ -28,14 +26,14 @@ typedef enum LightType {
 } LightType;
 
 struct LightObject {
-    bool colorPickerOpen, doAnimation;
     float strength;
+    bool colorPickerOpen, doAnimation;
     glm::vec3 color;
 };
 
 struct SceneLightCoordinate {
-    bool doAnimation;
     float coordinate;
+    bool doAnimation;
 };
 
 struct SceneLight {

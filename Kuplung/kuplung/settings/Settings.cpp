@@ -230,3 +230,4 @@ std::string Settings::getTimeNow() {
     tn += std::to_string(t_sec);
     return tn;
 }
+

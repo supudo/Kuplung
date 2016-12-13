@@ -12,6 +12,10 @@
 #include <string>
 #include <algorithm>
 #include <vector>
+#include <iostream>
+#include <type_traits>
+#include <typeinfo>
+
 #include "ConfigUtils.hpp"
 #include "SettingsStructs.h"
 
@@ -51,6 +55,16 @@ public:
 
     void timerStart(std::string msg);
     void timerEnd(std::string msg);
+
+    template <class T>
+    void printClassAlignment(T *s) {
+        std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
+    }
+
+    template <typename T>
+    void printTypeAlignment(T s) {
+        std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
+    }
 
 private:
     Settings(){};
