@@ -563,7 +563,7 @@ void Kuplung::processRunningThreads() {
         this->exportSceneFinished();
 }
 
-void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std::string> settings) {
+void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std::string> &settings) {
     if (this->hasEnding(file.title, ".obj")) {
         this->managerUI->showParsing();
         this->objParserThreadFinished = false;
@@ -577,14 +577,14 @@ void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std:
         this->doLog("!!! You have to select .obj file !!!");
 }
 
-void Kuplung::processObjFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> settings) {
+void Kuplung::processObjFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> &settings) {
     std::vector<MeshModel> newModels = this->parser->parse(file, type, settings);
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
 
-void Kuplung::guiSceneExport(const FBEntity file, const std::vector<std::string> settings) {
+void Kuplung::guiSceneExport(const FBEntity file, const std::vector<std::string> &settings) {
 //    this->managerExporter->exportScene(file, this->meshModelFaces);
     this->managerUI->showExporting();
     this->exporterThreadFinished = false;
@@ -592,7 +592,7 @@ void Kuplung::guiSceneExport(const FBEntity file, const std::vector<std::string>
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(const FBEntity file, const std::vector<ModelFaceBase*> meshModelFaces, const std::vector<std::string> settings) {
+void Kuplung::exportSceneAsync(const FBEntity file, const std::vector<ModelFaceBase*> meshModelFaces, const std::vector<std::string> &settings) {
     this->managerExporter->exportScene(file, meshModelFaces, settings);
     this->exporterThreadFinished = true;
 }
