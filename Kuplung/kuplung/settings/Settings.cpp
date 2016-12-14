@@ -32,17 +32,17 @@ Settings* Settings::Instance() {
 #pragma mark - Init
 
 void Settings::initSettings() {
-    this->mRayDraw = false;
-    this->mRayAnimate = false;
-    this->mRayOriginX = 0.0f;
-    this->mRayOriginY = 0.0f;
-    this->mRayOriginZ = 0.0f;
-    this->mRayDirectionX = 0.0f;
-    this->mRayDirectionY = 0.0f;
-    this->mRayDirectionZ = 0.0f;
+    m_pInstance->mRayDraw = false;
+    m_pInstance->mRayAnimate = false;
+    m_pInstance->mRayOriginX = 0.0f;
+    m_pInstance->mRayOriginY = 0.0f;
+    m_pInstance->mRayOriginZ = 0.0f;
+    m_pInstance->mRayDirectionX = 0.0f;
+    m_pInstance->mRayDirectionY = 0.0f;
+    m_pInstance->mRayDirectionZ = 0.0f;
 
-    this->cfgUtils = std::make_unique<ConfigUtils>();
-    this->cfgUtils->init(Settings::Instance()->appFolder());
+    m_pInstance->cfgUtils = std::make_unique<ConfigUtils>();
+    m_pInstance->cfgUtils->init(Settings::Instance()->appFolder());
 
     m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
     m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
