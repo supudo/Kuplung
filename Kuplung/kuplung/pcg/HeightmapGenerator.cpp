@@ -159,8 +159,8 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
     for (unsigned int y=0; y<heightmapHeight; ++y) {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
             p_x = x + worldCenter;
-            p_y = y + worldCenter;
-            p_z = this->heightMap.GetValue(int(x), int(y)) * this->Setting_HeightCoeficient;
+            p_y = this->heightMap.GetValue(int(x), int(y)) * this->Setting_HeightCoeficient;
+            p_z = y + worldCenter;
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * ss, 1.0f - y * rr);
 

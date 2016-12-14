@@ -31,7 +31,7 @@ private:
     std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboIndices, vboTexture;
+    GLuint glVAO, vboVertices, vboTexture;
     GLint glVS_MatrixView, glVS_MatrixProjection;
 };
 

@@ -43,8 +43,6 @@ private:
     bool show_grid = true;
     int node_selected = -1;
 
-    char nodeImagePathText[256];
-
     DragNode dragNode;
     ImColor style_LinkColor;
     float style_LinkThickness;

@@ -34,7 +34,7 @@ private:
 
     void bindFBO();
     void unbindFBO(GLuint* vboTexture);
-    GLuint tFBO, tRBO, tRenderedTexture;
+    GLuint tFBO, tRBO;
 };
 
 #endif /* StructuredVolumetricSampling_hpp */
