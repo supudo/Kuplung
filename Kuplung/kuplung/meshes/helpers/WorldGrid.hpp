@@ -16,8 +16,7 @@
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
 struct MirrorSurface {
-    float translateX,translateY, translateZ;
-    float rotateX, rotateY, rotateZ;
+    float translateX,translateY, translateZ, rotateX, rotateY, rotateZ;
 };
 
 class WorldGrid {

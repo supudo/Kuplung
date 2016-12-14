@@ -68,7 +68,7 @@ public:
 
 private:
     Settings(){}
-    Settings(Settings const&){};
+    Settings(Settings const&){}
     Settings& operator=(Settings const&);
     static Settings* m_pInstance;
 
