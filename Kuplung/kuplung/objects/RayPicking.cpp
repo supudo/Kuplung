@@ -23,7 +23,7 @@ void RayPicking::setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera)
 }
 
 void RayPicking::selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                             std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+                             std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     this->meshModelFaces = meshModelFaces;
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
     this->pickModel(managerObjects, managerControls);
@@ -32,7 +32,7 @@ void RayPicking::selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::ve
 }
 
 void RayPicking::selectVertex(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                              std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+                              std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     this->meshModelFaces = meshModelFaces;
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
     this->pickVertex(managerObjects, managerControls);
@@ -40,7 +40,7 @@ void RayPicking::selectVertex(std::vector<ModelFaceBase*> meshModelFaces, std::v
     *rayLines = this->rayLines;
 }
 
-void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     int mouse_x = managerControls->mousePosition.x;
     int mouse_y = managerControls->mousePosition.y;
 
@@ -93,7 +93,7 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
     }
 }
 
-void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls) {
+void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     int mouse_x = managerControls->mousePosition.x;
     int mouse_y = managerControls->mousePosition.y;
 

@@ -8,6 +8,8 @@
 
 #include "Controls.hpp"
 
+namespace KuplungApp { namespace Utilities { namespace Input {
+
 Controls::~Controls() {
 }
 
@@ -176,4 +178,6 @@ void Controls::handleMouseMotion(SDL_Event* ev) {
             this->mouseGoDown = true;
     }
 }
+
+}}}
 

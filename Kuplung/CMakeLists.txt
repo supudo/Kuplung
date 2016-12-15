@@ -139,6 +139,7 @@ SET(SOURCE_FILES
     kuplung/meshes/scene/ModelFaceBase.hpp
     kuplung/meshes/scene/ModelFaceData.cpp
     kuplung/meshes/scene/ModelFaceData.hpp
+    kuplung/objects/Objects.h
     kuplung/objects/ObjectDefinitions.h
     kuplung/objects/ObjectsManager.cpp
     kuplung/objects/ObjectsManager.hpp
@@ -222,7 +223,6 @@ SET(SOURCE_FILES
     kuplung/ui/iconfonts/IconsMaterialDesign.h
     kuplung/ui/implementation/SDL2OpenGL32.cpp
     kuplung/ui/implementation/SDL2OpenGL32.hpp
-    kuplung/ui/Objects.h
     kuplung/ui/UI.cpp
     kuplung/ui/UI.hpp
     kuplung/ui/UIHelpers.cpp

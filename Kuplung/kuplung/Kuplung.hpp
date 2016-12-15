@@ -82,7 +82,7 @@ private:
     std::unique_ptr<SaveOpen> managerSaveOpen;
 
     // Customs
-    std::unique_ptr<Controls> managerControls;
+    std::unique_ptr<KuplungApp::Utilities::Input::Controls> managerControls;
     std::unique_ptr<UI> managerUI;
     std::unique_ptr<KuplungApp::Utilities::FontParser::FNTParser> fontParser;
     std::unique_ptr<KuplungApp::Utilities::Export::Exporter> managerExporter;

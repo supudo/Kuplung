@@ -12,6 +12,8 @@
 #include <SDL2/SDL.h>
 #include "kuplung/settings/Settings.h"
 
+namespace KuplungApp { namespace Utilities { namespace Input {
+
 struct ControlPoint {
     int x, y;
 };
@@ -44,5 +46,7 @@ private:
     void handleMouseWheel(SDL_Event* ev);
     void handleMouseMotion(SDL_Event* ev);
 };
+
+}}}
 
 #endif /* Controls_hpp */

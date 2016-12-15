@@ -155,7 +155,7 @@ bool Kuplung::init() {
                     this->managerObjects->loadSystemModels(this->parser);
                     this->doLog("Objects Manager initialized.");
 
-                    this->managerControls = std::make_unique<Controls>();
+                    this->managerControls = std::make_unique<KuplungApp::Utilities::Input::Controls>();
                     this->managerControls->init(this->gWindow);
                     this->doLog("Input Control Manager initialized.");
 

@@ -22,9 +22,9 @@ public:
     ~RayPicking();
     void setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera);
     void selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                     std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
+                     std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls);
     void selectVertex(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                      std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
+                      std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls);
 
     std::vector<RayLine*> rayLines;
 
@@ -35,8 +35,8 @@ private:
     std::vector<ModelFaceBase*> meshModelFaces;
     int sceneSelectedModelObject;
 
-    void pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
-    void pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<Controls> &managerControls);
+    void pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls);
+    void pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls);
 
     glm::vec2 getNormalizeDeviceCordinates(float X, float Y);
     glm::vec4 getEyeCoordinates(glm::vec4& coordinates, std::unique_ptr<ObjectsManager> &managerObjects);
