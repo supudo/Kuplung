@@ -34,29 +34,27 @@ VertexSphere::~VertexSphere() {
 
     glDeleteVertexArrays(1, &this->glVAO);
 
-    this->glUtils.reset();
+    Settings::Instance()->glUtils.reset();
 }
 
 #pragma mark - Public
 
 bool VertexSphere::initShaderProgram() {
-    this->glUtils = std::make_unique<GLUtils>();
-
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/vertex_sphere.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/vertex_sphere.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -67,13 +65,13 @@ bool VertexSphere::initShaderProgram() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[VertexSphere] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
     else {
-        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-        this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
-        this->glUniformInnerLightDirection = this->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
+        this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
+        this->glUniformInnerLightDirection = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
     }
 
     this->isSphere = true;

@@ -12,6 +12,13 @@
 GLUtils::~GLUtils() {
 }
 
+GLUtils::GLUtils(std::function<void(std::string)> logFunction) {
+    this->funcLog = logFunction;
+}
+
+GLUtils::GLUtils() {
+}
+
 bool GLUtils::compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source) {
     shader = glCreateShader(shaderType);
 
@@ -21,7 +28,7 @@ bool GLUtils::compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLen
     GLint isShaderCompiled = GL_FALSE;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &isShaderCompiled);
     if (isShaderCompiled != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
+        this->funcLog("Unable to compile shader " + std::to_string(shader) + "!");
         this->printShaderLog(shader);
         glDeleteShader(shader);
         return false;
@@ -39,7 +46,7 @@ bool GLUtils::compileShader(GLuint &shaderProgram, GLenum shaderType, const char
     GLint isOK = GL_FALSE;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &isOK);
     if (isOK != GL_TRUE) {
-        Settings::Instance()->funcDoLog("Unable to compile shader " + std::to_string(shader) + "!");
+        this->funcLog("Unable to compile shader " + std::to_string(shader) + "!");
         this->printShaderLog(shader);
         glDeleteShader(shader);
         return false;
@@ -55,14 +62,14 @@ bool GLUtils::compileShader(GLuint &shaderProgram, GLenum shaderType, const char
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
     GLint var = glGetAttribLocation(program, var_name);
     if (var == -1)
-        Settings::Instance()->funcDoLog("Cannot fetch shader attribute " + std::string(var_name) + "!");
+        this->funcLog("Cannot fetch shader attribute " + std::string(var_name) + "!");
     return var;
 }
 
 GLint GLUtils::glGetUniform(GLuint program, const char* var_name) {
     GLint var = glGetUniformLocation(program, var_name);
     if (var == -1)
-        Settings::Instance()->funcDoLog("Cannot fetch shader uniform - " + std::string(var_name));
+        this->funcLog("Cannot fetch shader uniform - " + std::string(var_name));
     return var;
 }
 
@@ -84,11 +91,11 @@ void GLUtils::printProgramLog(GLuint program) {
         char* infoLog = new char[maxLength];
         glGetProgramInfoLog(program, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
-            Settings::Instance()->funcDoLog(infoLog);
+            this->funcLog(infoLog);
         delete[] infoLog;
     }
     else
-        Settings::Instance()->funcDoLog("Name " + std::to_string(program) + " is not a program!");
+        this->funcLog("Name " + std::to_string(program) + " is not a program!");
 }
 
 void GLUtils::printShaderLog(GLuint shader) {
@@ -100,11 +107,11 @@ void GLUtils::printShaderLog(GLuint shader) {
 
         glGetShaderInfoLog(shader, maxLength, &infoLogLength, infoLog);
         if (infoLogLength > 0)
-            Settings::Instance()->funcDoLog(infoLog);
+            this->funcLog(infoLog);
         delete[] infoLog;
     }
     else
-        Settings::Instance()->funcDoLog("Name " + std::to_string(shader) + " is not a shader!");
+        this->funcLog("Name " + std::to_string(shader) + " is not a shader!");
 }
 
 bool GLUtils::logOpenGLError(const char *file, int line) {
@@ -147,7 +154,7 @@ bool GLUtils::logOpenGLError(const char *file, int line) {
                 break;
         }
         success = false;
-        Settings::Instance()->funcDoLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
+        this->funcLog("Error occured at " + std::string(file) + " on line " + std::to_string(line) + " : " + error);
         err = glGetError();
     }
 
@@ -180,7 +187,7 @@ std::string GLUtils::readFile(const char *filePath) {
     std::string content;
     std::ifstream fileStream(filePath, std::ios::in);
     if (!fileStream.is_open()) {
-        Settings::Instance()->funcDoLog("Could not read file " + std::string(filePath) + ". File does not exist.");
+        this->funcLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
     std::string line = "";

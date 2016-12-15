@@ -43,12 +43,9 @@ RenderingDeferred::~RenderingDeferred() {
     for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
         delete this->mfLights_Spot[i];
     }
-    this->glUtils.reset();
 }
 
 bool RenderingDeferred::init() {
-    this->glUtils = std::make_unique<GLUtils>();
-
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
@@ -67,16 +64,16 @@ bool RenderingDeferred::init() {
 
 bool RenderingDeferred::initGeometryPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_g_buffer.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_GeometryPass = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_GeometryPass, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
 
     if (!shaderCompilation)
         return false;
@@ -87,28 +84,28 @@ bool RenderingDeferred::initGeometryPass() {
     glGetProgramiv(this->shaderProgram_GeometryPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[RenderingDeferred - Geometry Pass] Error linking program " + std::to_string(this->shaderProgram_GeometryPass) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram_GeometryPass);
         return false;
     }
 
-    this->gl_GeometryPass_Texture_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse");
-    this->gl_GeometryPass_Texture_Specular = this->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular");
+    this->gl_GeometryPass_Texture_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse");
+    this->gl_GeometryPass_Texture_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular");
 
     return true;
 }
 
 bool RenderingDeferred::initLighingPass() {
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_shading.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightingPass = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightingPass, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_LightingPass, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_LightingPass, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
 
     if (!shaderCompilation)
         return false;
@@ -119,7 +116,7 @@ bool RenderingDeferred::initLighingPass() {
     glGetProgramiv(this->shaderProgram_LightingPass, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[RenderingDeferred - Lighting Pass] Error linking program " + std::to_string(this->shaderProgram_LightingPass) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram_LightingPass);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram_LightingPass);
         return false;
     }
 
@@ -129,16 +126,16 @@ bool RenderingDeferred::initLighingPass() {
 bool RenderingDeferred::initLightObjects() {
     // Light Boxes
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/deferred_light_box.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     this->shaderProgram_LightBox = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram_LightBox, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_LightBox, GL_VERTEX_SHADER, shaderSourceVertex.c_str());
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram_LightBox, GL_FRAGMENT_SHADER, shaderSourceFragment.c_str());
 
     if (!shaderCompilation)
         return false;
@@ -149,7 +146,7 @@ bool RenderingDeferred::initLightObjects() {
     glGetProgramiv(this->shaderProgram_LightBox, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[RenderingDeferred - Light Box] Error linking program " + std::to_string(this->shaderProgram_LightBox) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram_LightBox);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram_LightBox);
         return false;
     }
     return true;
@@ -264,62 +261,62 @@ bool RenderingDeferred::initLights() {
     // light - directional
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
         ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
-        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
+        f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
-        f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
+        f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
 
-        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
-        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
-        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
+        f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
 
-        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
         this->mfLights_Directional.push_back(f);
     }
 
     // light - point
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
         ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
-        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
-        f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].position").c_str());
+        f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
+        f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].position").c_str());
 
-        f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].constant").c_str());
-        f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].linear").c_str());
-        f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
+        f->gl_Constant = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].constant").c_str());
+        f->gl_Linear = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].linear").c_str());
+        f->gl_Quadratic = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
 
-        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
-        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
-        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].specular").c_str());
+        f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].specular").c_str());
 
-        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
         this->mfLights_Point.push_back(f);
     }
 
     // light - spot
     for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
         ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
-        f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
+        f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
-        f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].position").c_str());
-        f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].direction").c_str());
+        f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].position").c_str());
+        f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].direction").c_str());
 
-        f->gl_CutOff = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
-        f->gl_OuterCutOff = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
+        f->gl_CutOff = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
+        f->gl_OuterCutOff = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
 
-        f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].constant").c_str());
-        f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].linear").c_str());
-        f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
+        f->gl_Constant = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].constant").c_str());
+        f->gl_Linear = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].linear").c_str());
+        f->gl_Quadratic = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
 
-        f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
-        f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
-        f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].specular").c_str());
+        f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
+        f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
+        f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].specular").c_str());
 
-        f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-        f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-        f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+        f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+        f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+        f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_LightingPass, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
         this->mfLights_Spot.push_back(f);
     }
 

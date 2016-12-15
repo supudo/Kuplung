@@ -9,7 +9,6 @@
 #ifndef RenderingSimple_hpp
 #define RenderingSimple_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 
@@ -23,7 +22,6 @@ public:
     void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;

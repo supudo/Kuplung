@@ -11,8 +11,8 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/ui/Objects.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
@@ -120,7 +120,6 @@ protected:
     glm::vec3 uiAmbientLight;
     WorldGrid *grid;
 
-    std::unique_ptr<GLUtils> glUtils;
     std::unique_ptr<Maths> mathHelper;
 };
 

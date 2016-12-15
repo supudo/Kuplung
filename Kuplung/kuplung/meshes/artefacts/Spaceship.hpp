@@ -12,7 +12,6 @@
 #include <glm/glm.hpp>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/pcg/SpaceshipMeshGenerator.hpp"
 #include "kuplung/ui/Objects.h"
 #include "kuplung/meshes/helpers/Light.hpp"
@@ -26,14 +25,12 @@ public:
     void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition);
     std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
 
+    float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
     bool Setting_UseTexture, Setting_Wireframe;
     glm::vec3 lightDirection;
     glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
-    float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;

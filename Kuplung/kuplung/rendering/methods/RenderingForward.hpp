@@ -9,9 +9,8 @@
 #ifndef RenderingForward_hpp
 #define RenderingForward_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
-//#include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/Objects.h"
 
@@ -27,7 +26,6 @@ private:
     bool initShaderProgram();
     void renderModels(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
 
-    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;

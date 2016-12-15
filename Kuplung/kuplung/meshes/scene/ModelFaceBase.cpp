@@ -65,7 +65,6 @@ ModelFaceBase::~ModelFaceBase() {
     this->Effect_GBlur_Radius.reset();
     this->Effect_GBlur_Width.reset();
 
-    this->glUtils.reset();
     this->mathHelper.reset();
     this->boundingBox.reset();
     this->vertexSphere.reset();
@@ -74,7 +73,6 @@ ModelFaceBase::~ModelFaceBase() {
 #pragma mark - Initialization
 
 void ModelFaceBase::init(const MeshModel model, std::string const& assetsFolder) {
-    this->glUtils = std::make_unique<GLUtils>();
     this->mathHelper = std::make_unique<Maths>();
 
     this->meshModel = model;

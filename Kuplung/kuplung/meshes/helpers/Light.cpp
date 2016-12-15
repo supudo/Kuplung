@@ -53,14 +53,11 @@ Light::~Light() {
     this->lConstant.reset();
     this->lLinear.reset();
     this->lQuadratic.reset();
-
-    this->glUtils.reset();
 }
 
 #pragma mark - Initialization
 
 void Light::init() {
-    this->glUtils = std::make_unique<GLUtils>();
     this->lightDirectionRay = new RayLine();
 }
 
@@ -144,18 +141,18 @@ bool Light::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/light.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -166,15 +163,15 @@ bool Light::initShaderProgram() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[Light] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
     else {
-        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
 
-        this->glUniformSampler = this->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
-        this->glUniformUseColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_useColor");
-        this->glUniformColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_color");
+        this->glUniformSampler = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_sampler");
+        this->glUniformUseColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_useColor");
+        this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     }
 
     glEnable(GL_DEPTH_TEST);

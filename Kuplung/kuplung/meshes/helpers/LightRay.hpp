@@ -13,7 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 
 class LightRay {
 public:
@@ -26,8 +26,6 @@ public:
 private:
     int axisSize;
     float x, y, z;
-
-    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

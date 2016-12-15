@@ -9,7 +9,7 @@
 #ifndef RayTracerRenderer_hpp
 #define RayTracerRenderer_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
@@ -25,7 +25,6 @@ public:
 private:
     FBEntity fileOutputImage;
 
-    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     GLuint renderFBO, renderRBO, renderTextureColorBuffer;

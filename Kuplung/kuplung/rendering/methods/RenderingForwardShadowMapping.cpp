@@ -76,12 +76,9 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
     for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
         delete this->mfLights_Spot[i];
     }
-    this->glUtils.reset();
 }
 
 bool RenderingForwardShadowMapping::init() {
-    this->glUtils = std::make_unique<GLUtils>();
-
     this->GLSL_LightSourceNumber_Directional = 8;
     this->GLSL_LightSourceNumber_Point = 4;
     this->GLSL_LightSourceNumber_Spot = 4;
@@ -96,22 +93,22 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // tessellation control shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
-    std::string shaderSourceTCS = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceTCS = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_control = shaderSourceTCS.c_str();
 
     // tessellation evaluation shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
-    std::string shaderSourceTES = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceTES = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_eval = shaderSourceTES.c_str();
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
-    std::string shaderSourceGeometry = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceGeometry = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_geometry = shaderSourceGeometry.c_str();
 
     // fragment shader - parts
@@ -126,21 +123,21 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     };
     for (size_t i=0; i<fragFiles.size(); i++) {
         shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag";
-        shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
+        shaderSourceFragment += Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     }
     shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
-    shaderSourceFragment += this->glUtils->readFile(shaderPath.c_str());
+    shaderSourceFragment += Settings::Instance()->glUtils->readFile(shaderPath.c_str());
 
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -151,165 +148,165 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[RenderingForwardShadowMapping - initShaders] Error linking program " + std::to_string(this->shaderProgram) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
     else {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
 
-        this->glGS_GeomDisplacementLocation = this->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
-        this->glTCS_UseCullFace = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
-        this->glTCS_UseTessellation = this->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
-        this->glTCS_TessellationSubdivision = this->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationSubdivision");
+        this->glGS_GeomDisplacementLocation = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
+        this->glTCS_UseCullFace = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
+        this->glTCS_UseTessellation = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "tcs_UseTessellation");
+        this->glTCS_TessellationSubdivision = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "tcs_TessellationSubdivision");
 
-        this->glFS_AlphaBlending = this->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
-        this->glFS_CelShading = this->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
-        this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
-        this->glVS_IsBorder = this->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
-        this->glFS_OutlineColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
-        this->glFS_UIAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
-        this->glFS_GammaCoeficient = this->glUtils->glGetUniform(this->shaderProgram, "fs_gammaCoeficient");
+        this->glFS_AlphaBlending = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_alpha");
+        this->glFS_CelShading = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_celShading");
+        this->glFS_CameraPosition = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+        this->glVS_IsBorder = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_isBorder");
+        this->glFS_OutlineColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_outlineColor");
+        this->glFS_UIAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
+        this->glFS_GammaCoeficient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_gammaCoeficient");
 
-        this->glFS_planeClose = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeClose");
-        this->glFS_planeFar = this->glUtils->glGetUniform(this->shaderProgram, "fs_planeFar");
-        this->glFS_showDepthColor = this->glUtils->glGetUniform(this->shaderProgram, "fs_showDepthColor");
-        this->glFS_ShadowPass = this->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
-        this->glFS_DebugShadowTexture = this->glUtils->glGetUniform(this->shaderProgram, "fs_debugShadowTexture");
+        this->glFS_planeClose = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_planeClose");
+        this->glFS_planeFar = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_planeFar");
+        this->glFS_showDepthColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_showDepthColor");
+        this->glFS_ShadowPass = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");
+        this->glFS_DebugShadowTexture = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_debugShadowTexture");
 
-        this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
-        this->glFS_MMatrix = this->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
-        this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
-        this->glFS_MVMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVMatrix");
+        this->glVS_MVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+        this->glFS_MMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ModelMatrix");
+        this->glVS_WorldMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
+        this->glFS_MVMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVMatrix");
         this->glVS_NormalMatrix = glGetUniformLocation(this->shaderProgram, "vs_normalMatrix");
 
-        this->glFS_ScreenResX = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
-        this->glFS_ScreenResY = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
+        this->glFS_ScreenResX = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResX");
+        this->glFS_ScreenResY = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResY");
 
-        this->glMaterial_ParallaxMapping = this->glUtils->glGetUniform(this->shaderProgram, "fs_userParallaxMapping");
+        this->glMaterial_ParallaxMapping = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_userParallaxMapping");
 
-        this->glVS_shadowModelMatrix = this->glUtils->glGetUniform(this->shaderProgram, "shadow_model");
-        this->glFS_showShadows = this->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
-        this->glVS_LightSpaceMatrix = this->glUtils->glGetUniform(this->shaderProgram, "shadow_lightSpaceMatrix");
-        this->glFS_SamplerShadowMap = this->glUtils->glGetUniform(this->shaderProgram, "sampler_shadowMap");
+        this->glVS_shadowModelMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "shadow_model");
+        this->glFS_showShadows = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
+        this->glVS_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "shadow_lightSpaceMatrix");
+        this->glFS_SamplerShadowMap = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "sampler_shadowMap");
 
-        this->gl_ModelViewSkin = this->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
-        this->glFS_solidSkin_materialColor = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
+        this->gl_ModelViewSkin = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
+        this->glFS_solidSkin_materialColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
 
         this->solidLight = new ModelFace_LightSource_Directional();
-        this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
-        this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
-        this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
-        this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
-        this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
-        this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
-        this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
-        this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
+        this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
+        this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
+        this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
+        this->solidLight->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
+        this->solidLight->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
+        this->solidLight->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
+        this->solidLight->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
+        this->solidLight->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
 
         // light - directional
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
             ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
-            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
+            f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
-            f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
+            f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
 
-            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
-            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
-            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
+            f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].specular").c_str());
 
-            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+            f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
             this->mfLights_Directional.push_back(f);
         }
 
         // light - point
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
             ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
-            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
-            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
+            f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
+            f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
 
-            f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].constant").c_str());
-            f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].linear").c_str());
-            f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
+            f->gl_Constant = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].constant").c_str());
+            f->gl_Linear = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].linear").c_str());
+            f->gl_Quadratic = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].quadratic").c_str());
 
-            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
-            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
-            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].specular").c_str());
+            f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].specular").c_str());
 
-            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+            f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
             this->mfLights_Point.push_back(f);
         }
 
         // light - spot
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
             ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
-            f->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
+            f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
-            f->gl_Position = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].position").c_str());
-            f->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].direction").c_str());
+            f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].position").c_str());
+            f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].direction").c_str());
 
-            f->gl_CutOff = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
-            f->gl_OuterCutOff = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
+            f->gl_CutOff = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].cutOff").c_str());
+            f->gl_OuterCutOff = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].outerCutOff").c_str());
 
-            f->gl_Constant = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].constant").c_str());
-            f->gl_Linear = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].linear").c_str());
-            f->gl_Quadratic = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
+            f->gl_Constant = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].constant").c_str());
+            f->gl_Linear = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].linear").c_str());
+            f->gl_Quadratic = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].quadratic").c_str());
 
-            f->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
-            f->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
-            f->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].specular").c_str());
+            f->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].ambient").c_str());
+            f->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].diffuse").c_str());
+            f->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].specular").c_str());
 
-            f->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
-            f->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
-            f->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
+            f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
+            f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
+            f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
             this->mfLights_Spot.push_back(f);
         }
 
         // material
-        this->glMaterial_Refraction = this->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
-        this->glMaterial_SpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.specularExp");
-        this->glMaterial_IlluminationModel = this->glUtils->glGetUniform(this->shaderProgram, "material.illumination_model");
-        this->glMaterial_HeightScale = this->glUtils->glGetUniform(this->shaderProgram, "material.heightScale");
+        this->glMaterial_Refraction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.refraction");
+        this->glMaterial_SpecularExp = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.specularExp");
+        this->glMaterial_IlluminationModel = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.illumination_model");
+        this->glMaterial_HeightScale = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.heightScale");
 
-        this->glMaterial_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
-        this->glMaterial_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
-        this->glMaterial_Specular = this->glUtils->glGetUniform(this->shaderProgram, "material.specular");
-        this->glMaterial_Emission = this->glUtils->glGetUniform(this->shaderProgram, "material.emission");
+        this->glMaterial_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.ambient");
+        this->glMaterial_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.diffuse");
+        this->glMaterial_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.specular");
+        this->glMaterial_Emission = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.emission");
 
-        this->glMaterial_SamplerAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_ambient");
-        this->glMaterial_SamplerDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_diffuse");
-        this->glMaterial_SamplerSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
-        this->glMaterial_SamplerSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
-        this->glMaterial_SamplerDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
-        this->glMaterial_SamplerBump = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_bump");
-        this->glMaterial_SamplerDisplacement = this->glUtils->glGetUniform(this->shaderProgram, "material.sampler_displacement");
+        this->glMaterial_SamplerAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_ambient");
+        this->glMaterial_SamplerDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_diffuse");
+        this->glMaterial_SamplerSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specular");
+        this->glMaterial_SamplerSpecularExp = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_specularExp");
+        this->glMaterial_SamplerDissolve = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_dissolve");
+        this->glMaterial_SamplerBump = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_bump");
+        this->glMaterial_SamplerDisplacement = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.sampler_displacement");
 
-        this->glMaterial_HasTextureAmbient = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_ambient");
-        this->glMaterial_HasTextureDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_diffuse");
-        this->glMaterial_HasTextureSpecular = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specular");
-        this->glMaterial_HasTextureSpecularExp = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
-        this->glMaterial_HasTextureDissolve = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
-        this->glMaterial_HasTextureBump = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_bump");
-        this->glMaterial_HasTextureDisplacement = this->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_displacement");
+        this->glMaterial_HasTextureAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_ambient");
+        this->glMaterial_HasTextureDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_diffuse");
+        this->glMaterial_HasTextureSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specular");
+        this->glMaterial_HasTextureSpecularExp = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_specularExp");
+        this->glMaterial_HasTextureDissolve = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_dissolve");
+        this->glMaterial_HasTextureBump = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_bump");
+        this->glMaterial_HasTextureDisplacement = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "material.has_texture_displacement");
 
         // effects - gaussian blur
-        this->glEffect_GB_W = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_w");
-        this->glEffect_GB_Radius = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_radius");
-        this->glEffect_GB_Mode = this->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_mode");
+        this->glEffect_GB_W = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_w");
+        this->glEffect_GB_Radius = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_radius");
+        this->glEffect_GB_Mode = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_GBlur.gauss_mode");
 
         // effects - bloom
-        this->glEffect_Bloom_doBloom = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.doBloom");
-        this->glEffect_Bloom_WeightA = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightA");
-        this->glEffect_Bloom_WeightB = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightB");
-        this->glEffect_Bloom_WeightC = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightC");
-        this->glEffect_Bloom_WeightD = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightD");
-        this->glEffect_Bloom_Vignette = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_Vignette");
-        this->glEffect_Bloom_VignetteAtt = this->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_VignetteAtt");
+        this->glEffect_Bloom_doBloom = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.doBloom");
+        this->glEffect_Bloom_WeightA = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightA");
+        this->glEffect_Bloom_WeightB = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightB");
+        this->glEffect_Bloom_WeightC = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightC");
+        this->glEffect_Bloom_WeightD = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_WeightD");
+        this->glEffect_Bloom_Vignette = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_Vignette");
+        this->glEffect_Bloom_VignetteAtt = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "effect_Bloom.bloom_VignetteAtt");
 
         // effects - tone mapping
-        this->glEffect_ToneMapping_ACESFilmRec2020 = this->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
+        this->glEffect_ToneMapping_ACESFilmRec2020 = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
     }
 
     success &= this->initShadows();
@@ -328,18 +325,18 @@ bool RenderingForwardShadowMapping::initShadowsDepthShader() {
     bool result = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/shadows_debug_quad_depth.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgramDepth = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramDepth, this->shaderDepthFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -350,13 +347,13 @@ bool RenderingForwardShadowMapping::initShadowsDepthShader() {
     glGetProgramiv(this->shaderProgramDepth, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramDepth) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgramDepth);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgramDepth);
         return false;
     }
     else {
-        this->glDepth_Plane_Close = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "near_plane");
-        this->glDepth_Plane_Far = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "far_plane");
-        this->glDepth_SamplerTexture = this->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
+        this->glDepth_Plane_Close = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "near_plane");
+        this->glDepth_Plane_Far = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "far_plane");
+        this->glDepth_SamplerTexture = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramDepth, "depthMap");
     }
 
     return result;
@@ -373,18 +370,18 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
     bool result = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/shadow_mapping_depth.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgramShadows = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgramShadows, this->shaderShadowsFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -395,12 +392,12 @@ bool RenderingForwardShadowMapping::initShadowsShader() {
     glGetProgramiv(this->shaderProgramShadows, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("Error linking program " + std::to_string(this->shaderProgramShadows) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgramShadows);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgramShadows);
         return false;
     }
     else {
-        this->glShadow_ModelMatrix = this->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
-        this->glShadow_LightSpaceMatrix = this->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
+        this->glShadow_ModelMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_model");
+        this->glShadow_LightSpaceMatrix = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgramShadows, "shadow_lightSpaceMatrix");
     }
 
     return result;

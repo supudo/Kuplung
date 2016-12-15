@@ -10,10 +10,10 @@
 #define BoundingBox_hpp
 
 #include <glm/gtc/matrix_transform.hpp>
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class BoundingBox {
 public:
@@ -30,8 +30,6 @@ public:
     glm::vec3 size, center;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     std::vector<GLfloat> dataVertices;
     std::vector<GLuint> dataIndices;
 

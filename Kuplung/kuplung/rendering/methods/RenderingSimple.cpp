@@ -16,45 +16,42 @@ RenderingSimple::RenderingSimple(ObjectsManager &managerObjects) : managerObject
 
 RenderingSimple::~RenderingSimple() {
     glDeleteProgram(this->shaderProgram);
-    this->glUtils.reset();
 }
 
 bool RenderingSimple::init() {
-    this->glUtils = std::make_unique<GLUtils>();
-
     // vertex shader
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     // tessellation control shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.tcs";
-    std::string shaderSourceTCS = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceTCS = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_control = shaderSourceTCS.c_str();
 
     // tessellation evaluation shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.tes";
-    std::string shaderSourceTES = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceTES = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_tess_eval = shaderSourceTES.c_str();
 
     // geometry shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.geom";
-    std::string shaderSourceGeometry = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceGeometry = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_geometry = shaderSourceGeometry.c_str();
 
     // fragment shader
     shaderPath = Settings::Instance()->appFolder() + "/shaders/rendering_simple.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
-    shaderCompilation &= this->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_TESS_CONTROL_SHADER, shader_tess_control);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_TESS_EVALUATION_SHADER, shader_tess_eval);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_GEOMETRY_SHADER, shader_geometry);
+    shaderCompilation &= Settings::Instance()->glUtils->compileShader(this->shaderProgram, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -65,30 +62,30 @@ bool RenderingSimple::init() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[RenderingSimple - initShaders] Error linking program " + std::to_string(this->shaderProgram) + "!");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return false;
     }
     else {
         glPatchParameteri(GL_PATCH_VERTICES, 3);
 
-        this->glVS_MVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
-        this->glVS_WorldMatrix = this->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
+        this->glVS_MVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
+        this->glVS_WorldMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");
 
-        this->glFS_HasSamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "has_texture");
-        this->glFS_SamplerTexture = this->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
+        this->glFS_HasSamplerTexture = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "has_texture");
+        this->glFS_SamplerTexture = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "sampler_texture");
 
-        this->glFS_CameraPosition = this->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
-        this->glFS_UIAmbient = this->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
+        this->glFS_CameraPosition = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_cameraPosition");
+        this->glFS_UIAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_UIAmbient");
 
         this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
-        this->solidLight->gl_InUse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
-        this->solidLight->gl_Direction = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
-        this->solidLight->gl_Ambient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
-        this->solidLight->gl_Diffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
-        this->solidLight->gl_Specular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
-        this->solidLight->gl_StrengthAmbient = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
-        this->solidLight->gl_StrengthDiffuse = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
-        this->solidLight->gl_StrengthSpecular = this->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
+        this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
+        this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
+        this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");
+        this->solidLight->gl_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.diffuse");
+        this->solidLight->gl_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.specular");
+        this->solidLight->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthAmbient");
+        this->solidLight->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
+        this->solidLight->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
     }
     return true;
 }

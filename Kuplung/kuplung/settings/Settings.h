@@ -18,6 +18,7 @@
 
 #include "ConfigUtils.hpp"
 #include "SettingsStructs.h"
+#include "kuplung/utilities/gl/GLUtils.hpp"
 
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 
@@ -56,6 +57,8 @@ public:
     void timerStart(std::string msg);
     void timerEnd(std::string msg);
 
+    std::unique_ptr<GLUtils> glUtils;
+
     template <class T>
     void printClassAlignment(T *s) {
         std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
@@ -63,7 +66,7 @@ public:
 
     template <typename T>
     void printTypeAlignment(T s) {
-        std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
+        std::cout << "Size: " << sizeof(s) << " - " << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
     }
 
 private:
@@ -75,6 +78,7 @@ private:
     void initSettings();
     std::unique_ptr<ConfigUtils> cfgUtils;
     std::string getTimeNow();
+    void reuseLogFunc(std::string msg);
 };
 
 #endif /* Settings_h */

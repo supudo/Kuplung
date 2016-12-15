@@ -28,30 +28,27 @@ StructuredVolumetricSampling::~StructuredVolumetricSampling() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
-
-    this->glUtils.reset();
 }
 
 StructuredVolumetricSampling::StructuredVolumetricSampling() {
-    this->glUtils = std::make_unique<GLUtils>();
 }
 
 bool StructuredVolumetricSampling::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/structured_vol_sampling.vert";
-    std::string shaderSourceVertex = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/structured_vol_sampling.frag";
-    std::string shaderSourceFragment = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderSourceFragment.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -62,18 +59,18 @@ bool StructuredVolumetricSampling::initShaderProgram() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[SVS] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
     else {
-        this->glAttributeVertexPosition = this->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
+        this->glAttributeVertexPosition = Settings::Instance()->glUtils->glGetAttribute(this->shaderProgram, "a_vertexPosition");
 
-        this->glVS_screenResolution = this->glUtils->glGetUniform(this->shaderProgram, "vs_screenResolution");
+        this->glVS_screenResolution = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_screenResolution");
 
-        this->glFS_deltaRunningTime = this->glUtils->glGetUniform(this->shaderProgram, "fs_deltaRunningTime");
-        this->glFS_noiseTextureSampler = this->glUtils->glGetUniform(this->shaderProgram, "fs_noiseTextureSampler");
-        this->glFS_screenResolution = this->glUtils->glGetUniform(this->shaderProgram, "fs_screenResolution");
-        this->glFS_mouseCoordinates = this->glUtils->glGetUniform(this->shaderProgram, "fs_mouseCoordinates");
+        this->glFS_deltaRunningTime = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_deltaRunningTime");
+        this->glFS_noiseTextureSampler = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_noiseTextureSampler");
+        this->glFS_screenResolution = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_screenResolution");
+        this->glFS_mouseCoordinates = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_mouseCoordinates");
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -121,7 +118,7 @@ void StructuredVolumetricSampling::initNoiseTexture() {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glGenerateMipmap(GL_TEXTURE_2D);
 
-        GLint textureFormat = 0;
+        GLenum textureFormat = 0;
         switch (tChannels) {
             case 1:
                 textureFormat = GL_LUMINANCE;
@@ -139,7 +136,7 @@ void StructuredVolumetricSampling::initNoiseTexture() {
                 textureFormat = GL_RGB;
                 break;
         }
-        glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
+        glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
         stbi_image_free(tPixels);
     }
 }

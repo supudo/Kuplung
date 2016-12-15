@@ -21,11 +21,9 @@ LightRay::~LightRay() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
-
-    this->glUtils.reset();
 }
 
-LightRay::LightRay() : glUtils(std::make_unique<GLUtils>()) {
+LightRay::LightRay() {
     this->axisSize = -1;
     this->x = -1;
     this->y = -1;
@@ -38,18 +36,18 @@ bool LightRay::initShaderProgram() {
     bool success = true;
 
     std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.vert";
-    std::string shaderVertexSource = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderVertexSource = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderVertexSource.c_str();
 
     shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.frag";
-    std::string shaderFragmentSource = this->glUtils->readFile(shaderPath.c_str());
+    std::string shaderFragmentSource = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_fragment = shaderFragmentSource.c_str();
 
     this->shaderProgram = glCreateProgram();
 
     bool shaderCompilation = true;
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
-    shaderCompilation &= this->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderVertex, GL_VERTEX_SHADER, shader_vertex);
+    shaderCompilation &= Settings::Instance()->glUtils->compileAndAttachShader(this->shaderProgram, this->shaderFragment, GL_FRAGMENT_SHADER, shader_fragment);
 
     if (!shaderCompilation)
         return false;
@@ -60,11 +58,11 @@ bool LightRay::initShaderProgram() {
     glGetProgramiv(this->shaderProgram, GL_LINK_STATUS, &programSuccess);
     if (programSuccess != GL_TRUE) {
         Settings::Instance()->funcDoLog("[LightRay] Error linking program " + std::to_string(this->shaderProgram) + "!\n");
-        this->glUtils->printProgramLog(this->shaderProgram);
+        Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return success = false;
     }
     else {
-        this->glUniformMVPMatrix = this->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+        this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     }
 
     this->x = 999;

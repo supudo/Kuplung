@@ -42,12 +42,9 @@ RayTracerRenderer::~RayTracerRenderer() {
 
     glDeleteFramebuffers(1, &this->renderFBO);
     glDeleteRenderbuffers(1, &this->renderRBO);
-
-    this->glUtils.reset();
 }
 
 void RayTracerRenderer::init() {
-    this->glUtils = std::make_unique<GLUtils>();
 }
 
 std::string RayTracerRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {

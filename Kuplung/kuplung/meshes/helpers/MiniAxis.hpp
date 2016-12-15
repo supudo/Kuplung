@@ -10,10 +10,10 @@
 #define MiniAxis_hpp
 
 #include <glm/gtc/matrix_transform.hpp>
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class MiniAxis {
 public:
@@ -33,8 +33,6 @@ public:
 
 private:
     int axisSize;
-
-    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

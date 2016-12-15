@@ -12,7 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 
 class Skybox {
@@ -27,8 +27,6 @@ public:
 
 private:
     int gridSize;
-
-    std::unique_ptr<GLUtils> glUtils;
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboTexture;

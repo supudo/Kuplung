@@ -12,7 +12,6 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/utilities/renderers/KuplungRendererBase.hpp"
 
 class SceneRenderer: public KuplungRendererBase {

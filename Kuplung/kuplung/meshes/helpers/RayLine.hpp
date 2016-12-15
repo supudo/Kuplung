@@ -13,7 +13,6 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class RayLine {
 public:
@@ -29,8 +28,6 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors, vboIndices;

@@ -9,7 +9,7 @@
 #ifndef RenderingDeferred_hpp
 #define RenderingDeferred_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
@@ -39,7 +39,6 @@ private:
 
     glm::mat4 matrixProject, matrixCamera;
 
-    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     GLuint shaderProgram_GeometryPass, shaderProgram_LightingPass, shaderProgram_LightBox;

@@ -13,7 +13,7 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 
 class VertexSphere {
 public:
@@ -32,8 +32,6 @@ public:
     glm::mat4 matrixMVP;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;

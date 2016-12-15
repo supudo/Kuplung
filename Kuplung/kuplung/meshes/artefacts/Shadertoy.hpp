@@ -10,8 +10,8 @@
 #define Shadertoy_hpp
 
 #include <string>
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class Shadertoy {
 public:
@@ -27,8 +27,6 @@ public:
     std::string iChannel0_Image, iChannel1_Image, iChannel2_Image, iChannel3_Image;
     std::string iChannel0_CubeImage, iChannel1_CubeImage, iChannel2_CubeImage, iChannel3_CubeImage;
     int textureWidth, textureHeight;
-
-    std::unique_ptr<GLUtils> glUtils;
 
 private:
     void addTexture(std::string const& textureImage, GLuint* vboTexture, const int textureID);

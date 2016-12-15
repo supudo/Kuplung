@@ -14,7 +14,6 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 #include "kuplung/utilities/parsers/ModelObject.h"
 
 class CameraModel {
@@ -40,8 +39,6 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;

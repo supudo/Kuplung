@@ -11,7 +11,7 @@
 
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/pcg/HeightmapGenerator.hpp"
 
 class Terrain {
@@ -27,8 +27,6 @@ public:
     bool Setting_UseTexture, Setting_Wireframe;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO;

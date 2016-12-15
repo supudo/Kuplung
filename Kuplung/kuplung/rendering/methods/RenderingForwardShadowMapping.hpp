@@ -9,9 +9,8 @@
 #ifndef RenderingForwardShadowMapping_hpp
 #define RenderingForwardShadowMapping_hpp
 
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
-//#include "kuplung/meshes/scene/ModelFaceForward.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/Objects.h"
 
@@ -26,7 +25,6 @@ public:
 private:
     bool initShaderProgram();
 
-    std::unique_ptr<GLUtils> glUtils;
     ObjectsManager &managerObjects;
 
     void renderShadows(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);

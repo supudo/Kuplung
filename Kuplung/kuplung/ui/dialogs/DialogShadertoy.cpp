@@ -323,7 +323,7 @@ void DialogShadertoy::getFromClipboard() {
 }
 
 void DialogShadertoy::openExample(std::string fileName) {
-    std::string fileContents = this->engineShadertoy->glUtils->readFile(fileName.c_str());
+    std::string fileContents = Settings::Instance()->glUtils->readFile(fileName.c_str());
     strcpy(this->shadertoyEditorText, fileContents.c_str());
 //    this->compileShader();
 }

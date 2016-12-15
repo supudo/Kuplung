@@ -13,7 +13,7 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
+#include "kuplung/settings/Settings.h"
 
 struct MirrorSurface {
     float translateX,translateY, translateZ, rotateX, rotateY, rotateZ;
@@ -47,8 +47,6 @@ public:
     std::vector<GLuint> dataIndices;
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboColors, vboIndices;

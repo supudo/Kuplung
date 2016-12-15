@@ -10,8 +10,8 @@
 #define StructuredVolumetricSampling_hpp
 
 #include <string>
+#include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/gl/GLUtils.hpp"
 
 class StructuredVolumetricSampling {
 public:
@@ -25,8 +25,6 @@ public:
     void renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture);
 
 private:
-    std::unique_ptr<GLUtils> glUtils;
-
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboTextureNoise;
     GLuint glVS_screenResolution;
