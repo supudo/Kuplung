@@ -18,13 +18,12 @@ struct KuplungFontMapCharacter {
 };
 
 struct KuplungFontMap {
-    std::string fontName, charset, file;
     int count;
     int size, bold, italic, unicode, stretchH, smooth, aa;
     int pageid, lineHeight, base, scaleW, scaleH, pages, packed;
     int paddingTop, paddingRight, paddingBottom, paddingLeft;
     int spacingHorizontal, spacingVertical;
-
+    std::string fontName, charset, file;
     std::vector<KuplungFontMapCharacter> characters;
 };
 
