@@ -33,8 +33,6 @@ VertexSphere::~VertexSphere() {
     glDeleteBuffers(1, &this->vboIndices);
 
     glDeleteVertexArrays(1, &this->glVAO);
-
-    Settings::Instance()->glUtils.reset();
 }
 
 #pragma mark - Public

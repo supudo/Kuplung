@@ -33,8 +33,6 @@ Terrain::~Terrain() {
     glDeleteShader(this->shaderFragment);
 
     glDeleteVertexArrays(1, &this->glVAO);
-
-    Settings::Instance()->glUtils.reset();
 }
 
 #pragma mark - Initialization
