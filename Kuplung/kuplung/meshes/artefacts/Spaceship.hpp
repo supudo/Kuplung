@@ -13,7 +13,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/pcg/SpaceshipMeshGenerator.hpp"
-#include "kuplung/ui/Objects.h"
+#include "kuplung/objects/Objects.h"
 #include "kuplung/meshes/helpers/Light.hpp"
 
 class Spaceship {

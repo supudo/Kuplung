@@ -238,6 +238,7 @@ HEADERS += \
     kuplung/meshes/helpers/RayLine.hpp \
     kuplung/meshes/helpers/Skybox.hpp \
     kuplung/meshes/helpers/VertexSphere.hpp \
+    kuplung/objects/Objects.h \
     kuplung/objects/ObjectDefinitions.h \
     kuplung/objects/ObjectsManager.hpp \
     kuplung/objects/RayPicking.hpp \
@@ -245,7 +246,6 @@ HEADERS += \
     kuplung/settings/SettingsStructs.h \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \
-    kuplung/ui/Objects.h \
     kuplung/ui/UI.hpp \
     kuplung/ui/UIHelpers.hpp \
     kuplung/ui/implementation/SDL2OpenGL32.hpp \

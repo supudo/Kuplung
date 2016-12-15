@@ -57,7 +57,7 @@ public:
     void timerStart(std::string msg);
     void timerEnd(std::string msg);
 
-    std::unique_ptr<GLUtils> glUtils;
+    std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
 
     template <class T>
     void printClassAlignment(T *s) {

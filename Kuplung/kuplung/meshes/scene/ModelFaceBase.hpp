@@ -13,7 +13,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/ui/Objects.h"
+#include "kuplung/objects/Objects.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/meshes/helpers/Light.hpp"
@@ -120,7 +120,7 @@ protected:
     glm::vec3 uiAmbientLight;
     WorldGrid *grid;
 
-    std::unique_ptr<Maths> mathHelper;
+    std::unique_ptr<KuplungApp::Utilities::Math::Maths> mathHelper;
 };
 
 #endif /* ModelFaceBase_hpp */

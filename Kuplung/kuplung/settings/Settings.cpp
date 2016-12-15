@@ -95,7 +95,7 @@ void Settings::initSettings() {
     m_pInstance->newLineDelimiter = "\n";
 #endif
 
-    m_pInstance->glUtils = std::make_unique<GLUtils>(std::bind(&Settings::reuseLogFunc, this, std::placeholders::_1));
+    m_pInstance->glUtils = std::make_unique<KuplungApp::Utilities::GL::GLUtils>(std::bind(&Settings::reuseLogFunc, this, std::placeholders::_1));
 }
 
 void Settings::reuseLogFunc(std::string msg) {

@@ -12,6 +12,8 @@
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 
+namespace KuplungApp { namespace Utilities { namespace Export {
+
 ExporterOBJ::~ExporterOBJ() {
 }
 
@@ -219,7 +221,7 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
     }
 
     std::string fileContents = "# Kuplung MTL File" + this->nlDelimiter;
-    fileContents += "# Material Count: " + std::to_string((int)materials.size()) + this->nlDelimiter;
+    fileContents += "# Material Count: " + std::to_string(materials.size()) + this->nlDelimiter;
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
 
     for (std::map<std::string, std::string>::iterator iter = materials.begin(); iter != materials.end(); ++iter) {
@@ -247,3 +249,5 @@ void ExporterOBJ::saveFile(std::string const& fileContents, std::string const& f
     out << fileContents;
     out.close();
 }
+
+}}}

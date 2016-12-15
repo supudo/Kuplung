@@ -24,6 +24,8 @@
 #include <boost/algorithm/string.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
+namespace KuplungApp { namespace Utilities { namespace Consumption {
+
 void Consumption::init() {
     this->usageOverall = "";
     this->usageMemory = "";
@@ -116,3 +118,5 @@ size_t Consumption::getPeakRSS() {
     return size_t(kuplung_resource_usage.ru_maxrss) / (1024.0 * 1024.0);
 #endif
 }
+
+}}}

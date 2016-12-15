@@ -13,6 +13,8 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
 
+namespace KuplungApp { namespace Utilities { namespace Export {
+
 class ExporterOBJ {
 public:
     ~ExporterOBJ();
@@ -40,5 +42,7 @@ private:
 
     std::vector<std::string> objSettings;
 };
+
+}}}
 
 #endif /* ExporterOBJ_hpp */

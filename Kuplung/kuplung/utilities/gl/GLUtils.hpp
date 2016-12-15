@@ -13,13 +13,7 @@
 #include <functional>
 #include "kuplung/utilities/gl/GLIncludes.h"
 
-struct GridMeshPoint2D {
-    GLfloat x, y;
-};
-
-struct GridMeshPoint3D {
-    GLfloat x, y, z;
-};
+namespace KuplungApp { namespace Utilities { namespace GL {
 
 class GLUtils {
 public:
@@ -42,5 +36,7 @@ public:
 private:
     std::function<void(std::string)> funcLog;
 };
+
+}}}
 
 #endif /* GLUtils_hpp */

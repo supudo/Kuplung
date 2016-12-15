@@ -12,6 +12,8 @@
 #include <vector>
 #include <glm/glm.hpp>
 
+namespace KuplungApp { namespace Utilities { namespace Math {
+
 class Maths {
 public:
     void computeTangentBasis(
@@ -24,5 +26,7 @@ public:
         std::vector<glm::vec3> &bitangents
     );
 };
+
+}}}
 
 #endif /* Maths_hpp */

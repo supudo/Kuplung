@@ -38,7 +38,6 @@ Terrain::~Terrain() {
 #pragma mark - Initialization
 
 Terrain::Terrain() {
-    Settings::Instance()->glUtils = std::make_unique<GLUtils>();
     this->terrainGenerator = std::make_unique<HeightmapGenerator>();
     this->terrainGenerator->initPosition();
 

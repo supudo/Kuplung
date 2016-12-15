@@ -59,7 +59,7 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<Objec
         kuplungFileScene.close();
     }
 
-    KuplungMinizip *zipFile = new KuplungMinizip();
+    KuplungApp::Utilities::Minizip::KuplungMinizip *zipFile = new KuplungApp::Utilities::Minizip::KuplungMinizip();
     zipFile->Create(fileName.c_str());
     zipFile->Add(fileNameSettings.c_str(), fileNameZipSettings.c_str());
     zipFile->Add(fileNameScene.c_str(), fileNameZipScene.c_str());
@@ -75,7 +75,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
 
     std::string zPath = file.path;
     boost::replace_all(zPath, file.title, "");
-    KuplungMinizip *zFile = new KuplungMinizip();
+    KuplungApp::Utilities::Minizip::KuplungMinizip *zFile = new KuplungApp::Utilities::Minizip::KuplungMinizip();
     zFile->Open(file.path.c_str());
     if (zFile->UnzipFile(zPath)) {
         zFile->CloseUnzip();

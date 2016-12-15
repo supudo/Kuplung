@@ -12,6 +12,8 @@
 #include <regex>
 #include "kuplung/settings/Settings.h"
 
+namespace KuplungApp { namespace Utilities { namespace FontParser {
+
 struct KuplungFontMapCharacter {
     int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
     std::string letter;
@@ -46,5 +48,7 @@ private:
 
     std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
 };
+
+}}}
 
 #endif /* FNTParser_hpp */

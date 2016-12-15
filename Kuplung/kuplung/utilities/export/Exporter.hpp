@@ -13,6 +13,8 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
 
+namespace KuplungApp { namespace Utilities { namespace Export {
+
 class Exporter {
 public:
     ~Exporter();
@@ -23,5 +25,7 @@ public:
 private:
     std::unique_ptr<ExporterOBJ> exporterOBJ;
 };
+
+}}}
 
 #endif /* Exporter_hpp */

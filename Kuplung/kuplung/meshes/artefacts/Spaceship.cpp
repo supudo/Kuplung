@@ -38,7 +38,6 @@ Spaceship::~Spaceship() {
 #pragma mark - Initialization
 
 Spaceship::Spaceship() {
-    Settings::Instance()->glUtils = std::make_unique<GLUtils>();
     this->spaceshipGenerator = std::make_unique<SpaceshipMeshGenerator>();
 
     this->Setting_UseTexture = false;

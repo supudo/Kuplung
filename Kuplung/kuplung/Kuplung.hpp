@@ -84,8 +84,8 @@ private:
     // Customs
     std::unique_ptr<Controls> managerControls;
     std::unique_ptr<UI> managerUI;
-    std::unique_ptr<FNTParser> fontParser;
-    std::unique_ptr<Exporter> managerExporter;
+    std::unique_ptr<KuplungApp::Utilities::FontParser::FNTParser> fontParser;
+    std::unique_ptr<KuplungApp::Utilities::Export::Exporter> managerExporter;
     std::unique_ptr<ImageRenderer> imageRenderer;
     std::unique_ptr<ObjectsManager> managerObjects;
     std::unique_ptr<RayPicking> rayPicker;

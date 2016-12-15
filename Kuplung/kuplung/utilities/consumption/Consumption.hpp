@@ -11,6 +11,8 @@
 
 #include "kuplung/settings/Settings.h"
 
+namespace KuplungApp { namespace Utilities { namespace Consumption {
+
 class Consumption {
 public:
     void init();
@@ -36,5 +38,7 @@ private:
 
     std::string exec(const char* cmd);
 };
+
+}}}
 
 #endif /* Consumption_hpp */

@@ -175,7 +175,7 @@ void UI::init(SDL_Window *window,
     this->componentShadertoy = std::make_unique<DialogShadertoy>();
     this->componentShadertoy->init(std::bind(&UI::dialogShadertoyMessage, this));
 
-    this->componentConsumption = std::make_unique<Consumption>();
+    this->componentConsumption = std::make_unique<KuplungApp::Utilities::Consumption::Consumption>();
     this->componentConsumption->init();
 
     this->componentImageViewer = std::make_unique<ImageViewer>();

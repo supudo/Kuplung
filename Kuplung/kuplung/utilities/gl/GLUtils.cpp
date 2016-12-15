@@ -9,6 +9,8 @@
 #include "GLUtils.hpp"
 #include <fstream>
 
+namespace KuplungApp { namespace Utilities { namespace GL {
+
 GLUtils::~GLUtils() {
 }
 
@@ -198,3 +200,5 @@ std::string GLUtils::readFile(const char *filePath) {
     fileStream.close();
     return content;
 }
+
+}}}

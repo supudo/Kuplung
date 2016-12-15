@@ -72,4 +72,12 @@ struct RenderingForward_LightSource {
     GLint gl_Position, gl_Color, gl_Linear, gl_Quadratic, gl_Radius;
 };
 
+struct GridMeshPoint2D {
+    GLfloat x, y;
+};
+
+struct GridMeshPoint3D {
+    GLfloat x, y, z;
+};
+
 #endif /* Objects_hpp */

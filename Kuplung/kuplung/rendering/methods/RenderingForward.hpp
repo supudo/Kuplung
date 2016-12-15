@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
-#include "kuplung/ui/Objects.h"
+#include "kuplung/objects/Objects.h"
 
 class RenderingForward {
 public:

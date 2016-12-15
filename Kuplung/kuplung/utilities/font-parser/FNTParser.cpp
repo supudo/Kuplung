@@ -11,7 +11,8 @@
 #include "FNTParser.hpp"
 #include <sstream>
 #include <fstream>
-//#include <boost/algorithm/string.hpp>
+
+namespace KuplungApp { namespace Utilities { namespace FontParser {
 
 FNTParser::~FNTParser() {
 }
@@ -210,3 +211,5 @@ std::vector<std::string> FNTParser::splitString(const std::string &s, std::regex
         elements.push_back(*iter);
     return elements;
 }
+
+}}}

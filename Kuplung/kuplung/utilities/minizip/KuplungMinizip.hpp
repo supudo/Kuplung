@@ -14,6 +14,8 @@
 #include <minizip/zip.h>
 #include <minizip/unzip.h>
 
+namespace KuplungApp { namespace Utilities { namespace Minizip {
+
 #define ZipFlag_Overwrite 0x01 /* -o */
 #define ZipFlag_Append 0x02 /* -a */
 #define ZipFlag_Store 0x04 /* -0 */
@@ -41,5 +43,7 @@ private:
     int isLargeFile(const char* filename);
     int getFileCrc(const char* filenameinzip, void* buf, unsigned long size_buf, unsigned long* result_crc);
 };
+
+}}}
 
 #endif /* KuplungMinizip_hpp */

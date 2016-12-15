@@ -159,7 +159,7 @@ bool Kuplung::init() {
                     this->managerControls->init(this->gWindow);
                     this->doLog("Input Control Manager initialized.");
 
-                    this->fontParser = std::make_unique<FNTParser>();
+                    this->fontParser = std::make_unique<KuplungApp::Utilities::FontParser::FNTParser>();
                     this->fontParser->init();
                     this->doLog("Font Parser Initialized.");
 
@@ -175,7 +175,7 @@ bool Kuplung::init() {
 
                     this->rayPicker = std::make_unique<RayPicking>();
 
-                    this->managerExporter = std::make_unique<Exporter>();
+                    this->managerExporter = std::make_unique<KuplungApp::Utilities::Export::Exporter>();
                     this->managerExporter->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
                     this->imageRenderer = std::make_unique<ImageRenderer>(*this->managerObjects);

@@ -73,7 +73,7 @@ ModelFaceBase::~ModelFaceBase() {
 #pragma mark - Initialization
 
 void ModelFaceBase::init(const MeshModel model, std::string const& assetsFolder) {
-    this->mathHelper = std::make_unique<Maths>();
+    this->mathHelper = std::make_unique<KuplungApp::Utilities::Math::Maths>();
 
     this->meshModel = model;
     this->assetsFolder = assetsFolder;

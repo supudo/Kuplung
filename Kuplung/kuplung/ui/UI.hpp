@@ -139,7 +139,7 @@ private:
     std::unique_ptr<DialogControlsGUI> controlsGUI;
     std::unique_ptr<DialogControlsModels> controlsModels;
     std::unique_ptr<DialogShadertoy> componentShadertoy;
-    std::unique_ptr<Consumption> componentConsumption;
+    std::unique_ptr<KuplungApp::Utilities::Consumption::Consumption> componentConsumption;
     std::unique_ptr<ImageViewer> componentImageViewer;
 
     bool needsFontChange;

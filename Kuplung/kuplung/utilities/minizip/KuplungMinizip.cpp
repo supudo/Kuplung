@@ -62,6 +62,8 @@
 #define FSEEKO_FUNC(stream, offset, origin) fseeko64(stream, offset, origin)
 #endif
 
+namespace KuplungApp { namespace Utilities { namespace Minizip {
+
 KuplungMinizip::~KuplungMinizip(void) {
 }
 
@@ -340,3 +342,5 @@ int KuplungMinizip::getFileCrc(const char* filenameinzip, void* buf, unsigned lo
      *result_crc = calculate_crc;
      return err;
 }
+
+}}}

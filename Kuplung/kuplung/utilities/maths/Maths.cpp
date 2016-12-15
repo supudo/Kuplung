@@ -8,6 +8,8 @@
 
 #include "Maths.hpp"
 
+namespace KuplungApp { namespace Utilities { namespace Math {
+
 void Maths::computeTangentBasis(
     // inputs
     std::vector<glm::vec3> & vertices,
@@ -66,3 +68,5 @@ void Maths::computeTangentBasis(
             t = t * -1.0f;
     }
 }
+
+}}}
