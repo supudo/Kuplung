@@ -28,5 +28,7 @@ ADD_CUSTOM_TARGET(cppcheck
                   --library=qt.cfg
                   --template="[{severity}][{id}] {message} {callstack} \\n"
                   --verbose
+                  #--check-config
+                  #-I ${CMAKE_SOURCE_DIR}
                   --quiet ${ALL_SOURCE_FILES}
 )

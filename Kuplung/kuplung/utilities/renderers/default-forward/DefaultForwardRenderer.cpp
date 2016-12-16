@@ -14,8 +14,11 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects)
+    : managerObjects(managerObjects),
+      fileOutputImage() {
     this->managerObjects = managerObjects;
+    this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
@@ -163,7 +166,6 @@ bool DefaultForwardRenderer::initShaderProgram() {
 
         this->gl_ModelViewSkin = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
         this->glFS_solidSkin_materialColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
-        this->solidLight = new ModelFace_LightSource_Directional();
         this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
         this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
         this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");

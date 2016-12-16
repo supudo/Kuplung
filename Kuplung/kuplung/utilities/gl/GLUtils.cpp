@@ -14,8 +14,7 @@ namespace KuplungApp { namespace Utilities { namespace GL {
 GLUtils::~GLUtils() {
 }
 
-GLUtils::GLUtils(std::function<void(std::string)> logFunction) {
-    this->funcLog = logFunction;
+GLUtils::GLUtils(std::function<void(std::string)> logFunction) : funcLog(logFunction) {
 }
 
 GLUtils::GLUtils() {

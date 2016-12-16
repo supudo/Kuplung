@@ -32,6 +32,7 @@ MiniAxis::~MiniAxis() {
 #pragma mark - Initialization
 
 MiniAxis::MiniAxis() {
+    this->axisSize = 6;
     this->initProperties();
 }
 
@@ -86,7 +87,6 @@ void MiniAxis::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    this->axisSize = 6;
     GLfloat g_vertex_buffer_data[] = {
         // X
         -100, 0, 0,

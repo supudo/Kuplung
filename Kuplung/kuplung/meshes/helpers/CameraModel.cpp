@@ -47,11 +47,11 @@ CameraModel::~CameraModel() {
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
-CameraModel::CameraModel() {
+CameraModel::CameraModel() : meshModel() {
     this->initProperties();
 }
 
-void CameraModel::setModel(const MeshModel meshModel) {
+void CameraModel::setModel(MeshModel const& meshModel) {
     this->meshModel = meshModel;
 }
 

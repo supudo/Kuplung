@@ -16,7 +16,7 @@
 
 class RenderingDeferred {
 public:
-    RenderingDeferred(ObjectsManager &managerObjects);
+    explicit RenderingDeferred(ObjectsManager &managerObjects);
     ~RenderingDeferred();
 
     bool init();

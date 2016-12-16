@@ -12,7 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-BoundingBox::BoundingBox() {
+BoundingBox::BoundingBox() : meshModel() {
 }
 
 BoundingBox::~BoundingBox() {
@@ -71,7 +71,7 @@ bool BoundingBox::initShaderProgram() {
     return success;
 }
 
-void BoundingBox::initBuffers(const MeshModel meshModel) {
+void BoundingBox::initBuffers(MeshModel const& meshModel) {
     this->meshModel = meshModel;
 
     glGenVertexArrays(1, &this->glVAO);

@@ -48,7 +48,7 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(const ShapeType type);
     void addLight(const LightSourceType type);
-    void exportSceneAsync(const FBEntity file, const std::vector<ModelFaceBase*> meshModelFaces, const std::vector<std::string> &settings);
+    void exportSceneAsync(const FBEntity file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();

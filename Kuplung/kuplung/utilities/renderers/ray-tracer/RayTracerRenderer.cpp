@@ -14,7 +14,9 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-RayTracerRenderer::RayTracerRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+RayTracerRenderer::RayTracerRenderer(ObjectsManager &managerObjects)
+    : fileOutputImage(),
+      managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
 }
 

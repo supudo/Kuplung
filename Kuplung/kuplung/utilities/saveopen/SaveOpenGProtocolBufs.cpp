@@ -11,8 +11,6 @@
 #include <fstream>
 #include <glm/gtx/string_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
-//#include "kuplung/utilities/minizip/KuplungZip.hpp"
-//#include "kuplung/utilities/minizip/KuplungUnzip.hpp"
 #include "kuplung/utilities/minizip/KuplungMinizip.hpp"
 
 void SaveOpenGProtocolBufs::init() {

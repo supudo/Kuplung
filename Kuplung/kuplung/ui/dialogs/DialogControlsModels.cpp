@@ -14,7 +14,11 @@
 #include <boost/filesystem.hpp>
 #include "kuplung/utilities/stb/stb_image.h"
 
-DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects)
+    : managerObjects(managerObjects),
+      helperUI(std::make_unique<UIHelpers>()),
+      componentMaterialEditor(std::make_unique<MaterialEditor>()),
+      componentUVEditor(std::make_unique<UVEditor>()) {
     this->managerObjects = managerObjects;
 
     this->cmenu_deleteYn = false;
@@ -48,11 +52,7 @@ DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects) : man
     this->selectedTabGUILight = -1;
     this->selectedTabPanel = 1;
 
-    this->helperUI = std::make_unique<UIHelpers>();
-    this->componentMaterialEditor = std::make_unique<MaterialEditor>();
     this->componentMaterialEditor->init();
-
-    this->componentUVEditor = std::make_unique<UVEditor>();
     this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
 }
 

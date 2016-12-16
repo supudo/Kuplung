@@ -16,7 +16,7 @@
 
 class SceneRenderer: public KuplungRendererBase {
 public:
-    SceneRenderer(ObjectsManager &managerObjects);
+    explicit SceneRenderer(ObjectsManager &managerObjects);
     ~SceneRenderer();
     void init();
     std::string renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);

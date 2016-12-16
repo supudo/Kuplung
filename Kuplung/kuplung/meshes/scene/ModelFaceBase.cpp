@@ -72,7 +72,7 @@ ModelFaceBase::~ModelFaceBase() {
 
 #pragma mark - Initialization
 
-void ModelFaceBase::init(const MeshModel model, std::string const& assetsFolder) {
+void ModelFaceBase::init(MeshModel const& model, std::string const& assetsFolder) {
     this->mathHelper = std::make_unique<KuplungApp::Utilities::Math::Maths>();
 
     this->meshModel = model;
@@ -204,7 +204,7 @@ void ModelFaceBase::initVertexSphere() {
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
-void ModelFaceBase::loadTexture(std::string const& assetsFolder, const MeshMaterialTextureImage materialImage, const objMaterialImageType type, GLuint* vboObject) {
+void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))

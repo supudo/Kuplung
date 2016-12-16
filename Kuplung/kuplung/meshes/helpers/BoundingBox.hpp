@@ -20,7 +20,7 @@ public:
     ~BoundingBox();
     BoundingBox();
     bool initShaderProgram();
-    void initBuffers(const MeshModel meshModel);
+    void initBuffers(MeshModel const& meshModel);
     void render(const glm::mat4 matrixMVP, const glm::vec4 outlineColor);
     MeshModel meshModel;
 

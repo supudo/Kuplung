@@ -35,6 +35,8 @@ Shadertoy::~Shadertoy() {
 }
 
 Shadertoy::Shadertoy() {
+    this->textureWidth = 0;
+    this->textureHeight = 0;
     this->iChannel0_Image = "";
     this->iChannel1_Image = "";
     this->iChannel2_Image = "";

@@ -78,7 +78,7 @@ bool VertexSphere::initShaderProgram() {
     return success;
 }
 
-void VertexSphere::initBuffers(const MeshModel meshModel, const int circleSegments, const float radius) {
+void VertexSphere::initBuffers(MeshModel const& meshModel, const int circleSegments, const float radius) {
     this->circleSegments = circleSegments;
 
     glEnable(GL_DEPTH_TEST);

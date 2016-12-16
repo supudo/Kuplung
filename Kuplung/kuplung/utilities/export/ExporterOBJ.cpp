@@ -43,12 +43,12 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
 
-    int Setting_Axis_Forward = 4;
-    if (this->objSettings.size() > 0 && this->objSettings[0] != "")
-        Setting_Axis_Forward = std::stoi(this->objSettings[0]);
-    int Setting_Axis_Up = 5;
-    if (this->objSettings.size() > 1 && this->objSettings[1] != "")
-        Setting_Axis_Up = std::stoi(this->objSettings[1]);
+//    int Setting_Axis_Forward = 4;
+//    if (this->objSettings.size() > 0 && this->objSettings[0] != "")
+//        Setting_Axis_Forward = std::stoi(this->objSettings[0]);
+//    int Setting_Axis_Up = 5;
+//    if (this->objSettings.size() > 1 && this->objSettings[1] != "")
+//        Setting_Axis_Up = std::stoi(this->objSettings[1]);
 
     glm::vec3 scale;
     glm::quat rotation;

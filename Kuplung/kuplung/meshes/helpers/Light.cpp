@@ -61,7 +61,7 @@ void Light::init() {
     this->lightDirectionRay = new RayLine();
 }
 
-void Light::setModel(const MeshModel meshModel) {
+void Light::setModel(MeshModel const& meshModel) {
     this->meshModel = meshModel;
 }
 

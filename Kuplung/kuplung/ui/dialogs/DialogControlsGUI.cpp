@@ -15,7 +15,8 @@
 #define STBI_FAILURE_USERMSG
 #include "kuplung/utilities/stb/stb_image.h"
 
-DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
+DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects)
+    : managerObjects(managerObjects), helperUI(std::make_unique<UIHelpers>()) {
     this->managerObjects = managerObjects;
 
     this->selectedObject = 0;
@@ -38,8 +39,6 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects) : managerOb
     this->generateNewTerrain = false;
     this->generateNewSpaceship = false;
     this->lockCameraWithLight = false;
-
-    this->helperUI = std::make_unique<UIHelpers>();
 }
 
 void DialogControlsGUI::render(bool* show, bool* isFrame) {

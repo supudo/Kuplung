@@ -30,7 +30,7 @@ public:
 
 private:
     void addTexture(std::string const& textureImage, GLuint* vboTexture, const int textureID);
-    float iChannelResolution0[2], iChannelResolution1[2], iChannelResolution2[2], iChannelResolution3[2];
+    float iChannelResolution0[2] = {0}, iChannelResolution1[2] = {0}, iChannelResolution2[2] = {0}, iChannelResolution3[2] = {0};
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices;

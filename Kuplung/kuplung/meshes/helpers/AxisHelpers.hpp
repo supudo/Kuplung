@@ -20,7 +20,7 @@ class AxisHelpers {
 public:
     ~AxisHelpers();
     AxisHelpers();
-    void setModel(const MeshModel meshModel);
+    void setModel(MeshModel const& meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();

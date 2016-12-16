@@ -55,7 +55,7 @@ ModelFaceData::~ModelFaceData() {
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
-void ModelFaceData::init(const MeshModel model, std::string const& assetsFolder) {
+void ModelFaceData::init(MeshModel const& model, std::string const& assetsFolder) {
     ModelFaceBase::init(model, assetsFolder);
 
     this->meshModel = model;

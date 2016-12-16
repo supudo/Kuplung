@@ -44,6 +44,9 @@ WorldGrid::~WorldGrid() {
 #pragma mark - Initialization
 
 WorldGrid::WorldGrid() {
+    this->gridSize = 10;
+    this->gridSizeVertex = 10;
+    this->zIndex = 0;
     this->initProperties();
 }
 

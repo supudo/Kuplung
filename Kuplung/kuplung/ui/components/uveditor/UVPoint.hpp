@@ -13,7 +13,7 @@
 
 class UVPoint {
 public:
-    UVPoint(int id, ImVec2 position, ImColor color, float radius);
+    UVPoint(int id, ImVec2 position, ImColor const& color, float radius);
     void draw(ImVec2 pointRect);
 
     int ID;

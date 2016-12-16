@@ -16,6 +16,7 @@
 
 RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+    this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
@@ -181,7 +182,6 @@ bool RenderingForward::initShaderProgram() {
 
         this->gl_ModelViewSkin = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_modelViewSkin");
         this->glFS_solidSkin_materialColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_materialColor");
-        this->solidLight = new ModelFace_LightSource_Directional();
         this->solidLight->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.inUse");
         this->solidLight->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.direction");
         this->solidLight->gl_Ambient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.ambient");

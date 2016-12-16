@@ -11,8 +11,7 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 
-UIHelpers::UIHelpers() {
-    this->componentColorPicker = std::make_unique<ColorPicker>();
+UIHelpers::UIHelpers() : componentColorPicker(std::make_unique<ColorPicker>()) {
 }
 
 void UIHelpers::addControlsXYZ(std::string const& property, const bool showAnimate, const bool doMinus, bool* isFrame, bool* animatedFlag, float* animatedValue, const float step, const float min, const float limit) {

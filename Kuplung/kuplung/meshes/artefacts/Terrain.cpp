@@ -37,12 +37,8 @@ Terrain::~Terrain() {
 
 #pragma mark - Initialization
 
-Terrain::Terrain() {
-    this->terrainGenerator = std::make_unique<HeightmapGenerator>();
+Terrain::Terrain() : terrainGenerator(std::make_unique<HeightmapGenerator>()), Setting_UseTexture(false), Setting_Wireframe(false) {
     this->terrainGenerator->initPosition();
-
-    this->Setting_UseTexture = false;
-    this->Setting_Wireframe = false;
 }
 
 #pragma mark - Public

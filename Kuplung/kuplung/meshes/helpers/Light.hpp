@@ -20,7 +20,7 @@ class Light {
 public:
     ~Light();
     void init();
-    void setModel(const MeshModel meshModel);
+    void setModel(MeshModel const& meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
     void initBuffers(std::string const& assetsFolder);

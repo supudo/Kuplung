@@ -42,6 +42,10 @@ Spaceship::Spaceship() {
 
     this->Setting_UseTexture = false;
     this->Setting_Wireframe = false;
+
+    this->solidLightSkin_Ambient_Strength = 0.0f;
+    this->solidLightSkin_Diffuse_Strength = 0.0f;
+    this->solidLightSkin_Specular_Strength = 0.0f;
 }
 
 #pragma mark - Public

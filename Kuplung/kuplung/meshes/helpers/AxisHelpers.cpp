@@ -26,11 +26,11 @@ AxisHelpers::~AxisHelpers() {
     glDeleteVertexArrays(1, &this->glVAO);
 }
 
-AxisHelpers::AxisHelpers() {
+AxisHelpers::AxisHelpers() : meshModel() {
     this->initProperties();
 }
 
-void AxisHelpers::setModel(const MeshModel meshModel) {
+void AxisHelpers::setModel(MeshModel const& meshModel) {
     this->meshModel = meshModel;
 }
 
