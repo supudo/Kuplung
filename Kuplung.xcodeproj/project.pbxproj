@@ -652,6 +652,7 @@
 		8A2543DD1D9D6CF10057A927 /* DialogSVS.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogSVS.hpp; sourceTree = "<group>"; };
 		8A2576111DD48B05004172E3 /* RayTracerRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RayTracerRenderer.cpp; path = "renderers/ray-tracer/RayTracerRenderer.cpp"; sourceTree = "<group>"; };
 		8A2576121DD48B05004172E3 /* RayTracerRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RayTracerRenderer.hpp; path = "renderers/ray-tracer/RayTracerRenderer.hpp"; sourceTree = "<group>"; };
+		8A270E611E04403D0029FAF3 /* Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Objects.h; sourceTree = "<group>"; };
 		8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.frag; sourceTree = "<group>"; };
 		8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_g_buffer.vert; sourceTree = "<group>"; };
 		8A2855C21D1412D2000BE246 /* deferred_light_box.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = deferred_light_box.frag; sourceTree = "<group>"; };
@@ -740,7 +741,6 @@
 		8A6E70771C6CACB40085CAE5 /* DialogStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogStyle.hpp; sourceTree = "<group>"; };
 		8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDL2OpenGL32.cpp; sourceTree = "<group>"; };
 		8A6E707C1C6CACB40085CAE5 /* SDL2OpenGL32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SDL2OpenGL32.hpp; sourceTree = "<group>"; };
-		8A6E707D1C6CACB40085CAE5 /* Objects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Objects.h; sourceTree = "<group>"; };
 		8A6E707E1C6CACB40085CAE5 /* UI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UI.cpp; sourceTree = "<group>"; };
 		8A6E707F1C6CACB40085CAE5 /* UI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UI.hpp; sourceTree = "<group>"; };
 		8A6E70821C6CACB40085CAE5 /* FNTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FNTParser.cpp; sourceTree = "<group>"; };
@@ -1029,6 +1029,7 @@
 			isa = PBXGroup;
 			children = (
 				8A0364781C6B71D9001489C8 /* ObjectDefinitions.h */,
+				8A270E611E04403D0029FAF3 /* Objects.h */,
 				8A0364791C6B71D9001489C8 /* ObjectsManager.cpp */,
 				8A03647A1C6B71D9001489C8 /* ObjectsManager.hpp */,
 				8A5128CA1CC0CBF900BE0600 /* RayPicking.cpp */,
@@ -1182,7 +1183,6 @@
 				8A6E70731C6CACB40085CAE5 /* dialogs */,
 				8A1AFB201C71FC3F004888D8 /* iconfonts */,
 				8A6E707A1C6CACB40085CAE5 /* implementation */,
-				8A6E707D1C6CACB40085CAE5 /* Objects.h */,
 				8A6E707E1C6CACB40085CAE5 /* UI.cpp */,
 				8A6E707F1C6CACB40085CAE5 /* UI.hpp */,
 				8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */,
