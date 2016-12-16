@@ -527,19 +527,6 @@ void Kuplung::addShape(const ShapeType type) {
             shapeName = "epcot";
             break;
     }
-    FileBrowser_ParserType t;
-    t = FileBrowser_ParserType_Own2;
-    switch (Settings::Instance()->ModelFileParser) {
-        case 0:
-            t = FileBrowser_ParserType_Own1;
-            break;
-        case 1:
-            t = FileBrowser_ParserType_Own2;
-            break;
-        case 2:
-            t = FileBrowser_ParserType_Assimp;
-            break;
-    }
     FBEntity shapeFile;
     shapeFile.isFile = true;
     shapeFile.extension = ".obj";

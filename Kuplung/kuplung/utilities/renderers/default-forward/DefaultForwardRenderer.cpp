@@ -70,8 +70,7 @@ void DefaultForwardRenderer::init() {
 
     this->Setting_RenderSkybox = false;
 
-    bool success = true;
-    success &= this->initShaderProgram();
+    this->initShaderProgram();
 }
 
 bool DefaultForwardRenderer::initShaderProgram() {

@@ -285,7 +285,6 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
             glBindTexture(GL_TEXTURE_2D, this->iChannel3);
             glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution3[0], this->iChannelResolution3[1], 0.0f);
-            tc += 1;
         }
 
         glUniform2f(this->vs_ScreenResolution, this->textureWidth, this->textureHeight);

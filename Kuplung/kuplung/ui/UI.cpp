@@ -248,24 +248,8 @@ void UI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                     for (size_t i=0; i<this->recentFilesImported.size(); i++) {
                         FBEntity file = this->recentFilesImported[i];
                         if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
-                            if (boost::filesystem::exists(file.path)) {
-                                FileBrowser_ParserType t;
-                                switch (Settings::Instance()->ModelFileParser) {
-                                    case 0:
-                                        t = FileBrowser_ParserType_Own1;
-                                        break;
-                                    case 1:
-                                        t = FileBrowser_ParserType_Own2;
-                                        break;
-                                    case 2:
-                                        t = FileBrowser_ParserType_Assimp;
-                                        break;
-                                    default:
-                                        t = FileBrowser_ParserType_Assimp;
-                                        break;
-                                }
+                            if (boost::filesystem::exists(file.path))
                                 this->funcProcessImportedFile(file, std::vector<std::string>());
-                            }
                             else
                                 this->showRecentFileImportedDoesntExists = true;
                         }
