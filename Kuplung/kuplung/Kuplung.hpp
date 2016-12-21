@@ -12,7 +12,7 @@
 #include <thread>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
-#include "kuplung/ui/UI.hpp"
+#include "kuplung/ui/UIManager.hpp"
 #include "kuplung/utilities/parsers/FileModelManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"
 #include "kuplung/utilities/font-parser/FNTParser.hpp"
@@ -83,7 +83,7 @@ private:
 
     // Customs
     std::unique_ptr<KuplungApp::Utilities::Input::Controls> managerControls;
-    std::unique_ptr<UI> managerUI;
+    std::unique_ptr<UIManager> managerUI;
     std::unique_ptr<KuplungApp::Utilities::FontParser::FNTParser> fontParser;
     std::unique_ptr<KuplungApp::Utilities::Export::Exporter> managerExporter;
     std::unique_ptr<ImageRenderer> imageRenderer;

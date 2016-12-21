@@ -152,9 +152,10 @@ SOURCES += main.cpp \
     kuplung/settings/ConfigUtils.cpp \
     kuplung/settings/Settings.cpp \
     kuplung/settings/FontsList.cpp \
-    kuplung/ui/UI.cpp \
+    kuplung/ui/UIManager.cpp \
     kuplung/ui/UIHelpers.cpp \
-    kuplung/ui/implementation/SDL2OpenGL32.cpp \
+    kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp \
+    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/importers/ImportOBJ.cpp \
@@ -189,6 +190,7 @@ SOURCES += main.cpp \
     kuplung/utilities/imgui/imgui_demo.cpp \
     kuplung/utilities/imgui/imgui_draw.cpp \
     kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp \
+    kuplung/utilities/nanovg/nanovg.c \
     kuplung/utilities/input/Controls.cpp \
     kuplung/utilities/libnoise/noiseutils.cpp \
     kuplung/utilities/maths/Maths.cpp \
@@ -246,9 +248,10 @@ HEADERS += \
     kuplung/settings/SettingsStructs.h \
     kuplung/settings/Settings.h \
     kuplung/settings/FontsList.hpp \
-    kuplung/ui/UI.hpp \
+    kuplung/ui/UIManager.hpp \
     kuplung/ui/UIHelpers.hpp \
-    kuplung/ui/implementation/SDL2OpenGL32.hpp \
+    kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp \
+    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/importers/ImportOBJ.hpp \
@@ -286,6 +289,12 @@ HEADERS += \
     kuplung/utilities/imgui/imgui.h \
     kuplung/utilities/imgui/imgui_internal.h \
     kuplung/utilities/imgui/imguizmo/ImGuizmo.h \
+    kuplung/utilities/nanovg/fontstash.h \
+    kuplung/utilities/nanovg/nanovg_gl_utils.h \
+    kuplung/utilities/nanovg/nanovg_gl.h \
+    kuplung/utilities/nanovg/nanovg.h \
+    kuplung/utilities/oui/oui.h \
+    kuplung/utilities/oui/blendish.h \
     kuplung/utilities/input/Controls.hpp \
     kuplung/utilities/libnoise/noiseutils.h \
     kuplung/utilities/maths/Maths.hpp \
@@ -327,6 +336,10 @@ DISTFILES += \
     resources/protobuf/KuplungDefinitions.proto \
     resources/protobuf/KuplungAppSettings.proto \
     resources/protobuf/KuplungAppScene.proto \
+# OUI/nanovg files
+    resources/oui/blender_icons.svg \
+    resources/oui/blender_icons16.png \
+    resources/oui/DejaVuSans.ttf \
 # Axis objects
     resources/axis_helpers/x_minus.obj \
     resources/axis_helpers/x_minus.mtl \

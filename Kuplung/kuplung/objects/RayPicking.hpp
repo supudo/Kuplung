@@ -11,7 +11,6 @@
 
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/settings/Settings.h"
-#include "kuplung/ui/UI.hpp"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/input/Controls.hpp"

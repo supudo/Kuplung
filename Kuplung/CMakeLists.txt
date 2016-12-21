@@ -221,10 +221,12 @@ SET(SOURCE_FILES
     kuplung/ui/dialogs/DialogSVS.hpp
     kuplung/ui/iconfonts/IconsFontAwesome.h
     kuplung/ui/iconfonts/IconsMaterialDesign.h
-    kuplung/ui/implementation/SDL2OpenGL32.cpp
-    kuplung/ui/implementation/SDL2OpenGL32.hpp
-    kuplung/ui/UI.cpp
-    kuplung/ui/UI.hpp
+    kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
+    kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
+    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp
+    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp
+    kuplung/ui/UIManager.cpp
+    kuplung/ui/UIManager.hpp
     kuplung/ui/UIHelpers.cpp
     kuplung/ui/UIHelpers.hpp
     kuplung/utilities/consumption/Consumption.cpp
@@ -246,6 +248,14 @@ SET(SOURCE_FILES
     kuplung/utilities/imgui/imgui_demo.cpp
     kuplung/utilities/imgui/imgui_draw.cpp
     kuplung/utilities/imgui/imgui_internal.h
+    kuplung/utilities/nanovg/fontstash.h
+    kuplung/utilities/nanovg/nanovg.c
+    kuplung/utilities/nanovg/nanovg.h
+    kuplung/utilities/nanovg/nanovg.c
+    kuplung/utilities/nanovg/nanovg_gl.h
+    kuplung/utilities/nanovg/nanovg_gl_utils.h
+    kuplung/utilities/oui/blendish.h
+    kuplung/utilities/oui/oui.h
     kuplung/utilities/input/Controls.cpp
     kuplung/utilities/input/Controls.hpp
     kuplung/utilities/libnoise/noiseutils.cpp
@@ -527,6 +537,11 @@ SET(Kuplung_Misc
     resources/Kuplung_Settings.ini
     resources/noise16.png)
 
+SET(Kuplung_OuiNanovVG
+    resources/oui/blender_icons.svg
+    resources/oui/blender_icons16.png
+    resources/oui/DejaVuSans.ttf)
+
 IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AND Protobuf_FOUND AND MINIZIP_FOUND)
     IF(APPLE)
         INCLUDE(CMakeToolsHelpers OPTIONAL)
@@ -564,6 +579,11 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         FILE(GLOB Kuplung_GUI_Files "resources/gui/*.*")
         FILE(COPY ${Kuplung_GUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/gui/")
 
+        # Oui / nanovg
+        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/oui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
+        FILE(GLOB Kuplung_OUI_Files "resources/oui/*.*")
+        FILE(COPY ${Kuplung_OUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
+        
         # Image Assets
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/Images.xcassets/AppIcon.appiconset/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
         FILE(GLOB Kuplung_ImageAssets_Files "resources/Images.xcassets/AppIcon.appiconset/*.*")

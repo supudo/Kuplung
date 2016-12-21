@@ -136,7 +136,7 @@ bool Kuplung::init() {
                                                std::bind(&Kuplung::addTerrainModel, this),
                                                std::bind(&Kuplung::addSpaceshipModel, this));
 
-                    this->managerUI = std::make_unique<UI>(*this->managerObjects);
+                    this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
                     this->managerUI->init(gWindow,
                                           std::bind(&Kuplung::guiQuit, this),
                                           std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2),
@@ -238,7 +238,7 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 
-    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen && !this->managerUI->isLoadingOpen) {
+    if (!this->managerUI->isMouseOnGUI() && !this->managerUI->isParsingOpen() && !this->managerUI->isLoadingOpen()) {
         // escape button
         if (this->managerControls->keyPressed_ESC) {
             if (!ImGuizmo::IsUsing()) {
@@ -348,7 +348,7 @@ void Kuplung::addTerrainModel() {
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
     this->meshModels.push_back(this->managerObjects->terrain->terrainGenerator->modelTerrain);
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->setMeshModelFaces(&this->meshModelFaces);
 }
 
 void Kuplung::addSpaceshipModel() {
@@ -369,7 +369,7 @@ void Kuplung::addSpaceshipModel() {
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
     this->meshModels.push_back(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship);
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->setMeshModelFaces(&this->meshModelFaces);
 }
 
 void Kuplung::renderScene() {
@@ -421,15 +421,12 @@ void Kuplung::renderScene() {
     }
 
     // structured volumetric samping
-    if (this->managerUI->showSVS)
-        this->managerUI->componentSVS->render(&this->managerUI->showSVS);
+    if (this->managerUI->showSVS())
+        this->managerUI->renderComponentSVS();
 
     // renderer
-    if (this->managerUI->showRendererUI)
-        this->managerUI->componentRendererUI->render(&this->managerUI->showRendererUI,
-                                                     this->imageRenderer.get(),
-                                                     this->managerObjects.get(),
-                                                     &this->meshModelFaces);
+    if (this->managerUI->showRendererUI())
+        this->managerUI->renderComponentRenderer(this->imageRenderer.get());
 
     this->processRunningThreads();
 }
@@ -465,10 +462,10 @@ void Kuplung::initSceneGUI() {
     this->managerObjects->initSkybox();
     this->managerObjects->initTerrain();
     this->managerObjects->initSpaceship();
-    this->managerUI->showControlsGUI = true;
-    this->managerUI->showControlsModels = true;
-    this->managerUI->recentFiles = Settings::Instance()->loadRecentFiles();
-    this->managerUI->recentFilesImported = Settings::Instance()->loadRecentFilesImported();
+    this->managerUI->setShowControlsGUI(true);
+    this->managerUI->setShowControlsModels(true);
+    this->managerUI->setRecentFiles(Settings::Instance()->loadRecentFiles());
+    this->managerUI->setRecentFilesImported(Settings::Instance()->loadRecentFilesImported());
 }
 
 void Kuplung::addShape(const ShapeType type) {
@@ -615,10 +612,10 @@ void Kuplung::processParsedObjFile() {
         }
         this->meshModelsNew.clear();
 
-        this->managerUI->meshModelFaces = &this->meshModelFaces;
+        this->managerUI->setMeshModelFaces(&this->meshModelFaces);
 
         if (this->meshModelFaces.size() > 0) {
-            this->managerUI->showControlsModels = true;
+            this->managerUI->setShowControlsModels(true);
             //this->managerUI->showSceneStats = true;
         }
     }
@@ -628,7 +625,7 @@ void Kuplung::processParsedObjFile() {
 
 void Kuplung::doProgress(float value) {
     this->objLoadingProgress = value;
-    this->managerUI->parsingPercentage = value;
+    this->managerUI->setParcingPercentage(value);
 }
 
 void Kuplung::guiQuit() {
@@ -688,7 +685,7 @@ void Kuplung::guiModelDelete(const int selectedModel) {
 
     this->meshModelFaces.erase(this->meshModelFaces.begin() + selectedModel);
     this->meshModels.erase(this->meshModels.begin() + selectedModel);
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->setMeshModelFaces(&this->meshModelFaces);
     this->sceneSelectedModelObject = -1;
     this->managerUI->setSceneSelectedModelObject(-1);
     this->managerRendering->meshModelFaces.erase(this->managerRendering->meshModelFaces.begin() + selectedModel);
@@ -718,7 +715,7 @@ void Kuplung::openScene(const FBEntity file) {
 
     this->managerRendering->meshModelFaces.insert(this->managerRendering->meshModelFaces.begin(), begin(models), end(models));
     this->meshModelFaces.insert(this->meshModelFaces.begin(), begin(models), end(models));
-    this->managerUI->meshModelFaces = &this->meshModelFaces;
+    this->managerUI->setMeshModelFaces(&this->meshModelFaces);
     for (size_t i=0; i<models.size(); i++) {
         this->meshModels.push_back(models[i]->meshModel);
     }

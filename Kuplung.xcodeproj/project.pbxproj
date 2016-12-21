@@ -19,6 +19,10 @@
 		8A15A9D31DC236E9003B65B8 /* RenderingForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9CE1DC236E9003B65B8 /* RenderingForward.cpp */; };
 		8A15A9D41DC236E9003B65B8 /* RenderingSimple.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9D01DC236E9003B65B8 /* RenderingSimple.cpp */; };
 		8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A175AD61CA93EB900A4E46B /* MELink.cpp */; };
+		8A18660E1E0AF125006A28D7 /* blender_icons.svg in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A18660A1E0AF0FF006A28D7 /* blender_icons.svg */; };
+		8A18660F1E0AF125006A28D7 /* blender_icons16.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A18660B1E0AF0FF006A28D7 /* blender_icons16.png */; };
+		8A1866101E0AF125006A28D7 /* DejaVuSans.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A18660C1E0AF0FF006A28D7 /* DejaVuSans.ttf */; };
+		8A1866171E0AF152006A28D7 /* nanovg.c in Sources */ = {isa = PBXBuildFile; fileRef = 8A1866151E0AF152006A28D7 /* nanovg.c */; };
 		8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */; };
 		8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB261C71FC58004888D8 /* DialogControlsGUI.cpp */; };
 		8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A1AFB281C71FC58004888D8 /* DialogControlsModels.cpp */; };
@@ -129,8 +133,6 @@
 		8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70711C6CACB40085CAE5 /* Tabs.cpp */; };
 		8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70741C6CACB40085CAE5 /* DialogOptions.cpp */; };
 		8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70761C6CACB40085CAE5 /* DialogStyle.cpp */; };
-		8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */; };
-		8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E707E1C6CACB40085CAE5 /* UI.cpp */; };
 		8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70821C6CACB40085CAE5 /* FNTParser.cpp */; };
 		8A6E70B21C6CACB40085CAE5 /* GLUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70861C6CACB40085CAE5 /* GLUtils.cpp */; };
 		8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E708A1C6CACB40085CAE5 /* imgui.cpp */; };
@@ -156,6 +158,9 @@
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
 		8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */; };
+		8A9905FA1E0AED5900C0FBA5 /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9905F81E0AED5900C0FBA5 /* UIManager.cpp */; };
+		8A9906001E0AED6D00C0FBA5 /* GUI_ImGui.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9905FC1E0AED6D00C0FBA5 /* GUI_ImGui.cpp */; };
+		8A9906011E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9905FE1E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp */; };
 		8AA1A73B1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA1A7391D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp */; };
 		8AA78CD41D4B6A3C00F6ABB6 /* KuplungMinizip.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA78CD21D4B6A3C00F6ABB6 /* KuplungMinizip.cpp */; };
 		8AA9F2341D2173F6004A8F1C /* Spaceship.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8AA9F2301D2173F6004A8F1C /* Spaceship.cpp */; };
@@ -316,6 +321,18 @@
 				8A43BA6F1D4776A50034CD46 /* KuplungAppScene.proto in CopyFiles */,
 				8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */,
 				8A1091A21D47665700658E39 /* KuplungDefinitions.proto in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A18660D1E0AF108006A28D7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = oui;
+			dstSubfolderSpec = 7;
+			files = (
+				8A18660E1E0AF125006A28D7 /* blender_icons.svg in CopyFiles */,
+				8A18660F1E0AF125006A28D7 /* blender_icons16.png in CopyFiles */,
+				8A1866101E0AF125006A28D7 /* DejaVuSans.ttf in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +652,16 @@
 		8A15A9D11DC236E9003B65B8 /* RenderingSimple.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingSimple.hpp; path = rendering/methods/RenderingSimple.hpp; sourceTree = "<group>"; };
 		8A175AD61CA93EB900A4E46B /* MELink.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MELink.cpp; path = materialeditor/MELink.cpp; sourceTree = "<group>"; };
 		8A175AD71CA93EB900A4E46B /* MELink.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = MELink.hpp; path = materialeditor/MELink.hpp; sourceTree = "<group>"; };
+		8A18660A1E0AF0FF006A28D7 /* blender_icons.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = blender_icons.svg; path = oui/blender_icons.svg; sourceTree = "<group>"; };
+		8A18660B1E0AF0FF006A28D7 /* blender_icons16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blender_icons16.png; path = oui/blender_icons16.png; sourceTree = "<group>"; };
+		8A18660C1E0AF0FF006A28D7 /* DejaVuSans.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = DejaVuSans.ttf; path = oui/DejaVuSans.ttf; sourceTree = "<group>"; };
+		8A1866121E0AF152006A28D7 /* fontstash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fontstash.h; path = nanovg/fontstash.h; sourceTree = "<group>"; };
+		8A1866131E0AF152006A28D7 /* nanovg_gl_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg_gl_utils.h; path = nanovg/nanovg_gl_utils.h; sourceTree = "<group>"; };
+		8A1866141E0AF152006A28D7 /* nanovg_gl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg_gl.h; path = nanovg/nanovg_gl.h; sourceTree = "<group>"; };
+		8A1866151E0AF152006A28D7 /* nanovg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = nanovg.c; path = nanovg/nanovg.c; sourceTree = "<group>"; };
+		8A1866161E0AF152006A28D7 /* nanovg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = nanovg.h; path = nanovg/nanovg.h; sourceTree = "<group>"; };
+		8A1866191E0AF15E006A28D7 /* blendish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = blendish.h; path = oui/blendish.h; sourceTree = "<group>"; };
+		8A18661A1E0AF15E006A28D7 /* oui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oui.h; path = oui/oui.h; sourceTree = "<group>"; };
 		8A1AFB211C71FC3F004888D8 /* IconsFontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsFontAwesome.h; sourceTree = "<group>"; };
 		8A1AFB221C71FC3F004888D8 /* IconsMaterialDesign.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconsMaterialDesign.h; sourceTree = "<group>"; };
 		8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIHelpers.cpp; sourceTree = "<group>"; };
@@ -739,10 +766,6 @@
 		8A6E70751C6CACB40085CAE5 /* DialogOptions.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogOptions.hpp; sourceTree = "<group>"; };
 		8A6E70761C6CACB40085CAE5 /* DialogStyle.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DialogStyle.cpp; sourceTree = "<group>"; };
 		8A6E70771C6CACB40085CAE5 /* DialogStyle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DialogStyle.hpp; sourceTree = "<group>"; };
-		8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SDL2OpenGL32.cpp; sourceTree = "<group>"; };
-		8A6E707C1C6CACB40085CAE5 /* SDL2OpenGL32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = SDL2OpenGL32.hpp; sourceTree = "<group>"; };
-		8A6E707E1C6CACB40085CAE5 /* UI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UI.cpp; sourceTree = "<group>"; };
-		8A6E707F1C6CACB40085CAE5 /* UI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UI.hpp; sourceTree = "<group>"; };
 		8A6E70821C6CACB40085CAE5 /* FNTParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FNTParser.cpp; sourceTree = "<group>"; };
 		8A6E70831C6CACB40085CAE5 /* FNTParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = FNTParser.hpp; sourceTree = "<group>"; };
 		8A6E70851C6CACB40085CAE5 /* GLIncludes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLIncludes.h; sourceTree = "<group>"; };
@@ -802,6 +825,12 @@
 		8A8540641CEDF3A200656C60 /* UVPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVPoint.hpp; path = uveditor/UVPoint.hpp; sourceTree = "<group>"; };
 		8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenBinarySeq.cpp; path = saveopen/SaveOpenBinarySeq.cpp; sourceTree = "<group>"; };
 		8A9505EE1D3D21F20039941C /* SaveOpenBinarySeq.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenBinarySeq.hpp; path = saveopen/SaveOpenBinarySeq.hpp; sourceTree = "<group>"; };
+		8A9905F81E0AED5900C0FBA5 /* UIManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIManager.cpp; sourceTree = "<group>"; };
+		8A9905F91E0AED5900C0FBA5 /* UIManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIManager.hpp; sourceTree = "<group>"; };
+		8A9905FC1E0AED6D00C0FBA5 /* GUI_ImGui.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI_ImGui.cpp; path = gui_imgui/GUI_ImGui.cpp; sourceTree = "<group>"; };
+		8A9905FD1E0AED6D00C0FBA5 /* GUI_ImGui.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUI_ImGui.hpp; path = gui_imgui/GUI_ImGui.hpp; sourceTree = "<group>"; };
+		8A9905FE1E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SDL2OpenGL32.cpp; path = gui_imgui/SDL2OpenGL32.cpp; sourceTree = "<group>"; };
+		8A9905FF1E0AED6D00C0FBA5 /* SDL2OpenGL32.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SDL2OpenGL32.hpp; path = gui_imgui/SDL2OpenGL32.hpp; sourceTree = "<group>"; };
 		8A9D66BC1C3C1C3A001A6036 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Kuplung/Info.plist; sourceTree = SOURCE_ROOT; };
 		8AA1A7391D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenGProtocolBufs.cpp; path = saveopen/SaveOpenGProtocolBufs.cpp; sourceTree = "<group>"; };
 		8AA1A73A1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpenGProtocolBufs.hpp; path = saveopen/SaveOpenGProtocolBufs.hpp; sourceTree = "<group>"; };
@@ -1082,6 +1111,37 @@
 			name = methods;
 			sourceTree = "<group>";
 		};
+		8A1866091E0AF0F7006A28D7 /* oui */ = {
+			isa = PBXGroup;
+			children = (
+				8A18660A1E0AF0FF006A28D7 /* blender_icons.svg */,
+				8A18660B1E0AF0FF006A28D7 /* blender_icons16.png */,
+				8A18660C1E0AF0FF006A28D7 /* DejaVuSans.ttf */,
+			);
+			name = oui;
+			sourceTree = "<group>";
+		};
+		8A1866111E0AF14B006A28D7 /* nanovg */ = {
+			isa = PBXGroup;
+			children = (
+				8A1866121E0AF152006A28D7 /* fontstash.h */,
+				8A1866131E0AF152006A28D7 /* nanovg_gl_utils.h */,
+				8A1866141E0AF152006A28D7 /* nanovg_gl.h */,
+				8A1866151E0AF152006A28D7 /* nanovg.c */,
+				8A1866161E0AF152006A28D7 /* nanovg.h */,
+			);
+			name = nanovg;
+			sourceTree = "<group>";
+		};
+		8A1866181E0AF155006A28D7 /* oui */ = {
+			isa = PBXGroup;
+			children = (
+				8A1866191E0AF15E006A28D7 /* blendish.h */,
+				8A18661A1E0AF15E006A28D7 /* oui.h */,
+			);
+			name = oui;
+			sourceTree = "<group>";
+		};
 		8A1AFB201C71FC3F004888D8 /* iconfonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1183,10 +1243,10 @@
 				8A6E70731C6CACB40085CAE5 /* dialogs */,
 				8A1AFB201C71FC3F004888D8 /* iconfonts */,
 				8A6E707A1C6CACB40085CAE5 /* implementation */,
-				8A6E707E1C6CACB40085CAE5 /* UI.cpp */,
-				8A6E707F1C6CACB40085CAE5 /* UI.hpp */,
 				8A1AFB231C71FC47004888D8 /* UIHelpers.cpp */,
 				8A1AFB241C71FC47004888D8 /* UIHelpers.hpp */,
+				8A9905F81E0AED5900C0FBA5 /* UIManager.cpp */,
+				8A9905F91E0AED5900C0FBA5 /* UIManager.hpp */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -1242,8 +1302,7 @@
 		8A6E707A1C6CACB40085CAE5 /* implementation */ = {
 			isa = PBXGroup;
 			children = (
-				8A6E707B1C6CACB40085CAE5 /* SDL2OpenGL32.cpp */,
-				8A6E707C1C6CACB40085CAE5 /* SDL2OpenGL32.hpp */,
+				8A9905FB1E0AED6700C0FBA5 /* gui_imgui */,
 			);
 			path = implementation;
 			sourceTree = "<group>";
@@ -1260,6 +1319,8 @@
 				8A6E70921C6CACB40085CAE5 /* libnoise */,
 				8A3CECF71C85B217005CB98D /* maths */,
 				8ACDEB701D478D7B005EDF25 /* minizip */,
+				8A1866111E0AF14B006A28D7 /* nanovg */,
+				8A1866181E0AF155006A28D7 /* oui */,
 				8A6E70951C6CACB40085CAE5 /* parsers */,
 				8A69992B1CE0FB6F009F8D56 /* renderers */,
 				8A14D8C31D367BF200674470 /* saveopen */,
@@ -1415,6 +1476,17 @@
 			name = uveditor;
 			sourceTree = "<group>";
 		};
+		8A9905FB1E0AED6700C0FBA5 /* gui_imgui */ = {
+			isa = PBXGroup;
+			children = (
+				8A9905FC1E0AED6D00C0FBA5 /* GUI_ImGui.cpp */,
+				8A9905FD1E0AED6D00C0FBA5 /* GUI_ImGui.hpp */,
+				8A9905FE1E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp */,
+				8A9905FF1E0AED6D00C0FBA5 /* SDL2OpenGL32.hpp */,
+			);
+			name = gui_imgui;
+			sourceTree = "<group>";
+		};
 		8AA9F22F1D2173F0004A8F1C /* artefacts */ = {
 			isa = PBXGroup;
 			children = (
@@ -1559,7 +1631,6 @@
 		8AB6F0971C3AA1F900665C40 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				8AB255BD1DA4F32100ABF2AC /* shadertoy */,
 				8ABFC1E61CC92AD400FBCF08 /* axis_helpers */,
 				8AD236601C5A4F880001E934 /* fonts */,
 				8AB6F0981C3AA1F900665C40 /* gui */,
@@ -1569,8 +1640,10 @@
 				8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */,
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
+				8A1866091E0AF0F7006A28D7 /* oui */,
 				8A10919D1D47663300658E39 /* protobuf */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
+				8AB255BD1DA4F32100ABF2AC /* shadertoy */,
 				8AB917721CAEA7B9002988C2 /* shapes */,
 				8AECC0681CB273CD0096AE7A /* skybox */,
 			);
@@ -1877,6 +1950,7 @@
 				8A1091A01D47664700658E39 /* CopyFiles */,
 				8AB255F91DA4F34300ABF2AC /* CopyFiles */,
 				8AB2563B1DA4F38700ABF2AC /* CopyFiles */,
+				8A18660D1E0AF108006A28D7 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -1937,6 +2011,7 @@
 				8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */,
 				8A2543DE1D9D6CF10057A927 /* DialogSVS.cpp in Sources */,
 				8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */,
+				8A1866171E0AF152006A28D7 /* nanovg.c in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8AA78CD41D4B6A3C00F6ABB6 /* KuplungMinizip.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
@@ -1956,6 +2031,7 @@
 				8A81DDC31D1A82B5004F3270 /* Light.cpp in Sources */,
 				8ABC5C451CA3DEC00024F816 /* MENode_Texture.cpp in Sources */,
 				8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */,
+				8A9905FA1E0AED5900C0FBA5 /* UIManager.cpp in Sources */,
 				8AE25AE61DBA0B590098252E /* RendererUI.cpp in Sources */,
 				8A6E70AC1C6CACB40085CAE5 /* DialogOptions.cpp in Sources */,
 				8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */,
@@ -1973,6 +2049,7 @@
 				8A7802D81D2D4F4B00D24620 /* ModelFaceData.cpp in Sources */,
 				8AC4B80F1DBA09B800F1D850 /* ImageViewer.cpp in Sources */,
 				8A1AFB251C71FC47004888D8 /* UIHelpers.cpp in Sources */,
+				8A9906001E0AED6D00C0FBA5 /* GUI_ImGui.cpp in Sources */,
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8A83BF8D1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp in Sources */,
@@ -1985,15 +2062,14 @@
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
 				8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */,
 				8A1CBAD21CA3EFA7000A171D /* MENode.cpp in Sources */,
+				8A9906011E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
-				8A6E70AF1C6CACB40085CAE5 /* SDL2OpenGL32.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
-				8A6E70B01C6CACB40085CAE5 /* UI.cpp in Sources */,
 				8AFDE3DB1DBE0F2B001D7097 /* KuplungRendererBase.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
 				8A81DDC21D1A82B5004F3270 /* CameraModel.cpp in Sources */,
