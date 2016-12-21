@@ -15,8 +15,8 @@
 #include "kuplung/utilities/stb/stb_image_write.h"
 
 DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects)
-    : managerObjects(managerObjects),
-      fileOutputImage() {
+    : fileOutputImage(),
+      managerObjects(managerObjects){
     this->managerObjects = managerObjects;
     this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;

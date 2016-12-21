@@ -50,6 +50,7 @@ void Settings::initSettings() {
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
     m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
+    m_pInstance->GUISystem = m_pInstance->cfgUtils->readInt("GUISystem");
 
     m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
     m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
@@ -127,6 +128,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeInt("UIFontSize", static_cast<int>(this->UIFontSize));
     this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
     this->cfgUtils->writeInt("RendererType", this->RendererType);
+    this->cfgUtils->writeInt("GUISystem", this->GUISystem);
 
     this->cfgUtils->writeBool("wireframesMode", this->wireframesMode);
     this->cfgUtils->writeBool("logDebugInfo", this->logDebugInfo);

@@ -47,6 +47,7 @@ public:
     int frameLog_Width, frameLog_Height;
     int frameFileBrowser_Width, frameFileBrowser_Height;
     int UIFontFileIndex, ModelFileParser;
+    int GUISystem;
     float UIFontSize, BoundingBoxPadding;
     int sceneCountObjects, sceneCountVertices, sceneCountIndices, sceneCountTriangles, sceneCountFaces;
     int Consumption_Interval_CPU, Consumption_Interval_Memory;
