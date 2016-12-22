@@ -154,6 +154,7 @@ SOURCES += main.cpp \
     kuplung/settings/FontsList.cpp \
     kuplung/ui/UIManager.cpp \
     kuplung/ui/UIHelpers.cpp \
+    kuplung/ui/implementation/gui_oui/GUI_OUI.cpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
@@ -250,6 +251,7 @@ HEADERS += \
     kuplung/settings/FontsList.hpp \
     kuplung/ui/UIManager.hpp \
     kuplung/ui/UIHelpers.hpp \
+    kuplung/ui/implementation/gui_oui/GUI_OUI.hpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp \
     kuplung/ui/components/ShaderEditor.hpp \

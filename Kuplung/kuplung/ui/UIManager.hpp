@@ -13,6 +13,7 @@
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp"
+#include "kuplung/ui/implementation/gui_oui/GUI_OUI.hpp"
 
 class UIManager {
 public:
@@ -68,6 +69,7 @@ public:
 
 private:
     std::unique_ptr<GUI_ImGui> provider_ImGui;
+    std::unique_ptr<GUI_OUI> provider_OUI;
 
     ObjectsManager &managerObjects;
 
