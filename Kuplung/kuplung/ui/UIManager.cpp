@@ -256,7 +256,7 @@ void UIManager::renderComponentSVS() {
             this->provider_ImGui->componentSVS->render(&this->provider_ImGui->showSVS);
             break;
         case 2:
-            this->provider_OUI->componentSVS->render(&this->provider_ImGui->showSVS);
+//            this->provider_OUI->componentSVS->render(&this->provider_ImGui->showSVS);
             break;
     }
 }
@@ -281,10 +281,10 @@ void UIManager::renderComponentRenderer(ImageRenderer* comp) {
                                                               this->provider_ImGui->meshModelFaces);
             break;
         case 2:
-            this->provider_OUI->componentRendererUI->render(&this->provider_ImGui->showRendererUI,
-                                                              comp,
-                                                              &this->managerObjects,
-                                                              this->provider_ImGui->meshModelFaces);
+//            this->provider_OUI->componentRendererUI->render(&this->provider_ImGui->showRendererUI,
+//                                                              comp,
+//                                                              &this->managerObjects,
+//                                                              this->provider_ImGui->meshModelFaces);
             break;
     }
 }

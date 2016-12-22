@@ -119,6 +119,7 @@
 		8A55D3391CCA2E730004712D /* z_minus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32D1CCA2E620004712D /* z_minus.obj */; };
 		8A55D33A1CCA2E730004712D /* z_plus.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32E1CCA2E620004712D /* z_plus.mtl */; };
 		8A55D33B1CCA2E730004712D /* z_plus.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A55D32F1CCA2E620004712D /* z_plus.obj */; };
+		8A5F5BE31E0BECA300BA4FCE /* GUI_OUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A5F5BE11E0BECA300BA4FCE /* GUI_OUI.cpp */; };
 		8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */; };
 		8A6999351CE0FBA2009F8D56 /* FileSaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */; };
 		8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6B61A21CD27B9E002CB119 /* objParser1.cpp */; };
@@ -738,6 +739,8 @@
 		8A55D32D1CCA2E620004712D /* z_minus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_minus.obj; path = axis_helpers/z_minus.obj; sourceTree = "<group>"; };
 		8A55D32E1CCA2E620004712D /* z_plus.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.mtl; path = axis_helpers/z_plus.mtl; sourceTree = "<group>"; };
 		8A55D32F1CCA2E620004712D /* z_plus.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = z_plus.obj; path = axis_helpers/z_plus.obj; sourceTree = "<group>"; };
+		8A5F5BE11E0BECA300BA4FCE /* GUI_OUI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GUI_OUI.cpp; path = gui_oui/GUI_OUI.cpp; sourceTree = "<group>"; };
+		8A5F5BE21E0BECA300BA4FCE /* GUI_OUI.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = GUI_OUI.hpp; path = gui_oui/GUI_OUI.hpp; sourceTree = "<group>"; };
 		8A69992C1CE0FB7A009F8D56 /* ImageRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImageRenderer.cpp; path = renderers/ImageRenderer.cpp; sourceTree = "<group>"; };
 		8A69992D1CE0FB7A009F8D56 /* ImageRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImageRenderer.hpp; path = renderers/ImageRenderer.hpp; sourceTree = "<group>"; };
 		8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileSaver.cpp; sourceTree = "<group>"; };
@@ -1208,6 +1211,15 @@
 			name = exporters;
 			sourceTree = "<group>";
 		};
+		8A5F5BE01E0BEC9D00BA4FCE /* gui_oui */ = {
+			isa = PBXGroup;
+			children = (
+				8A5F5BE11E0BECA300BA4FCE /* GUI_OUI.cpp */,
+				8A5F5BE21E0BECA300BA4FCE /* GUI_OUI.hpp */,
+			);
+			name = gui_oui;
+			sourceTree = "<group>";
+		};
 		8A69992B1CE0FB6F009F8D56 /* renderers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1303,6 +1315,7 @@
 			isa = PBXGroup;
 			children = (
 				8A9905FB1E0AED6700C0FBA5 /* gui_imgui */,
+				8A5F5BE01E0BEC9D00BA4FCE /* gui_oui */,
 			);
 			path = implementation;
 			sourceTree = "<group>";
@@ -2042,6 +2055,7 @@
 				8ABC5C431CA3DEC00024F816 /* MENode_Color.cpp in Sources */,
 				8AAF14211D75B8780075189D /* ImGuizmo.cpp in Sources */,
 				8A6B61A71CD27B9E002CB119 /* objParser2.cpp in Sources */,
+				8A5F5BE31E0BECA300BA4FCE /* GUI_OUI.cpp in Sources */,
 				8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,

@@ -221,6 +221,8 @@ SET(SOURCE_FILES
     kuplung/ui/dialogs/DialogSVS.hpp
     kuplung/ui/iconfonts/IconsFontAwesome.h
     kuplung/ui/iconfonts/IconsMaterialDesign.h
+    kuplung/ui/implementation/gui_oui/GUI_OUI.cpp
+    kuplung/ui/implementation/gui_oui/GUI_OUI.hpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp

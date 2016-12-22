@@ -62,6 +62,9 @@ public:
     float parsingPercentage;
     std::vector<FBEntity> recentFiles, recentFilesImported;
 
+    bool showSVS;
+    bool showRendererUI;
+
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
