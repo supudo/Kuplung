@@ -33,11 +33,16 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
 
+        ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+        ImGui::BeginChild("GUIProvider", ImVec2(0.0f, 52.0f), true);
+        ImGui::Text("GUI Provider");
         const char* guiSystems[] = {"ImGui", "OUI"};
-        if (ImGui::Combo("GUI Provider", &this->optionsGUIProvider, guiSystems, IM_ARRAYSIZE(guiSystems))) {
+        if (ImGui::Combo("##11829", &this->optionsGUIProvider, guiSystems, IM_ARRAYSIZE(guiSystems))) {
             Settings::Instance()->GUISystem = this->optionsGUIProvider + 1;
             Settings::Instance()->saveSettings();
         }
+        ImGui::EndChild();
+        ImGui::PopStyleVar();
 
         ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
         ImGui::BeginChild("RefreshRate", ImVec2(0.0f, 98.0f), true);
