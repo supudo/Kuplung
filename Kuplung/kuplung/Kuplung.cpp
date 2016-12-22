@@ -53,6 +53,11 @@ int Kuplung::run() {
     SDL_Event ev;
 
     while (this->gameIsRunning) {
+        if (Settings::Instance()->maybeGracefullApplicationQuit) {
+            this->gameIsRunning = false;
+            break;
+        }
+
         while (SDL_PollEvent(&ev)) {
             this->onEvent(&ev);
         }

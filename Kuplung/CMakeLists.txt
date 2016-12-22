@@ -1,6 +1,6 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.6)
 
-SET(PROJECT_NAME "Kuplung" CXX)
+SET(PROJECT_NAME "Kuplung")
 PROJECT(${PROJECT_NAME})
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
@@ -223,6 +223,8 @@ SET(SOURCE_FILES
     kuplung/ui/iconfonts/IconsMaterialDesign.h
     kuplung/ui/implementation/gui_oui/GUI_OUI.cpp
     kuplung/ui/implementation/gui_oui/GUI_OUI.hpp
+    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.cpp
+    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp
@@ -253,7 +255,6 @@ SET(SOURCE_FILES
     kuplung/utilities/nanovg/fontstash.h
     kuplung/utilities/nanovg/nanovg.c
     kuplung/utilities/nanovg/nanovg.h
-    kuplung/utilities/nanovg/nanovg.c
     kuplung/utilities/nanovg/nanovg_gl.h
     kuplung/utilities/nanovg/nanovg_gl_utils.h
     kuplung/utilities/oui/blendish.h
@@ -548,7 +549,7 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
     IF(APPLE)
         INCLUDE(CMakeToolsHelpers OPTIONAL)
 
-        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES})
+        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
 
         # Misc Files
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/resources/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")

@@ -87,6 +87,7 @@ void Settings::initSettings() {
     m_pInstance->sceneCountFaces = 0;
 
     m_pInstance->showAllVisualArtefacts = true;
+    m_pInstance->maybeGracefullApplicationQuit = false;
 
 #ifdef _WIN32
     m_pInstance->newLineDelimiter = "\r\n";

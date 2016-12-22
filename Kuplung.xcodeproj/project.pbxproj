@@ -33,6 +33,7 @@
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
 		8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
+		8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
@@ -695,6 +696,8 @@
 		8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImportOBJ.hpp; path = importers/ImportOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
+		8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OuiNanoVG_Implementation.cpp; path = gui_oui/OuiNanoVG_Implementation.cpp; sourceTree = "<group>"; };
+		8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OuiNanoVG_Implementation.hpp; path = gui_oui/OuiNanoVG_Implementation.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
@@ -1216,6 +1219,8 @@
 			children = (
 				8A5F5BE11E0BECA300BA4FCE /* GUI_OUI.cpp */,
 				8A5F5BE21E0BECA300BA4FCE /* GUI_OUI.hpp */,
+				8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */,
+				8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */,
 			);
 			name = gui_oui;
 			sourceTree = "<group>";
@@ -2058,6 +2063,7 @@
 				8A5F5BE31E0BECA300BA4FCE /* GUI_OUI.cpp in Sources */,
 				8ADE509E1D2D418C00A6E7F0 /* ModelFaceBase.cpp in Sources */,
 				8AC291441CD2456800A631C1 /* STLParser.cpp in Sources */,
+				8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */,
 				8A1AFB2B1C71FC58004888D8 /* DialogControlsModels.cpp in Sources */,
 				8A6E70B71C6CACB40085CAE5 /* noiseutils.cpp in Sources */,
 				8A7802D81D2D4F4B00D24620 /* ModelFaceData.cpp in Sources */,

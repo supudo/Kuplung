@@ -48,6 +48,7 @@ mac {
     MediaFiles.files += resources/Kuplung.icns
     MediaFiles.files += resources/noise16.png
     MediaFiles.files += resources/gui
+    MediaFiles.files += resources/oui
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
     MediaFiles.files += resources/shaders/stoy
@@ -115,6 +116,7 @@ win32|win64 {
 
 OTHER_FILES += resources/*
 OTHER_FILES += resources/gui/*
+OTHER_FILES += resources/oui/*
 OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
 OTHER_FILES += resources/shaders/stoy/*
@@ -155,6 +157,7 @@ SOURCES += main.cpp \
     kuplung/ui/UIManager.cpp \
     kuplung/ui/UIHelpers.cpp \
     kuplung/ui/implementation/gui_oui/GUI_OUI.cpp \
+    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.cpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
@@ -252,6 +255,7 @@ HEADERS += \
     kuplung/ui/UIManager.hpp \
     kuplung/ui/UIHelpers.hpp \
     kuplung/ui/implementation/gui_oui/GUI_OUI.hpp \
+    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp \
     kuplung/ui/components/ShaderEditor.hpp \

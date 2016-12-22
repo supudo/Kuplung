@@ -12,6 +12,7 @@
 
 GUI_OUI::GUI_OUI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
+    this->guiImplementation = std::make_unique<OuiNanoVG_Implementation>(managerObjects);
     this->isFrame = false;
     this->isParsingOpen = false;
     this->isLoadingOpen = false;
@@ -22,6 +23,7 @@ GUI_OUI::GUI_OUI(ObjectsManager &managerObjects) : managerObjects(managerObjects
 }
 
 GUI_OUI::~GUI_OUI() {
+    this->guiImplementation.reset();
 }
 
 void GUI_OUI::init(SDL_Window *window,
@@ -60,6 +62,24 @@ void GUI_OUI::init(SDL_Window *window,
     this->recentFilesImported.clear();
     this->showControlsGUI = false;
     this->showControlsModels = false;
+
+    this->guiImplementation->init(window, quitApp, processImportedFile, newScene, fileShaderCompile,
+                                  addShape, addLight, exportScene, deleteModel, renderScene, saveScene, openScene);
+}
+
+void GUI_OUI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
+    this->isFrame = isFrame;
+    this->guiImplementation->renderStart(isFrame, sceneSelectedModelObject);
+}
+
+void GUI_OUI::renderEnd() {
+    this->guiImplementation->renderEnd();
+}
+
+void GUI_OUI::clearAllLights() {
+}
+
+void GUI_OUI::showRenderedImage(std::string const& renderedImage) {
 }
 
 void GUI_OUI::doLog(std::string const& message) {
@@ -71,19 +91,6 @@ void GUI_OUI::setSceneSelectedModelObject(int sceneSelectedModelObject) {
 
 bool GUI_OUI::processEvent(SDL_Event *event) {
     return true;
-}
-
-void GUI_OUI::renderStart(bool isFrame, int * sceneSelectedModelObject) {
-    this->isFrame = isFrame;
-}
-
-void GUI_OUI::clearAllLights() {
-}
-
-void GUI_OUI::showRenderedImage(std::string const& renderedImage) {
-}
-
-void GUI_OUI::renderEnd() {
 }
 
 void GUI_OUI::recentFilesAdd(FBEntity file) {

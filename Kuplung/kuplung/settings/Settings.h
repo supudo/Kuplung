@@ -37,6 +37,7 @@ public:
     void saveRecentFilesImported(std::vector<FBEntity> recentFiles);
     std::vector<FBEntity> loadRecentFilesImported();
 
+    bool maybeGracefullApplicationQuit;
     std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
     bool wireframesMode, logDebugInfo, logFileBrowser, ShowBoundingBox, BoundingBoxRefresh, showPickRays;

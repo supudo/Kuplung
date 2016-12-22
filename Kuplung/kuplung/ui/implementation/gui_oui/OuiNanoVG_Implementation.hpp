@@ -1,13 +1,13 @@
 //
-//  GUI_OUI.hpp
+//  OuiNanoVG_Implementation.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/16/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef GUI_OUI_hpp
-#define GUI_OUI_hpp
+#ifndef OuiNanoVG_Implementation_hpp
+#define OuiNanoVG_Implementation_hpp
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectsManager.hpp"
@@ -16,12 +16,10 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
-#include "kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp"
-
-class GUI_OUI {
+class OuiNanoVG_Implementation {
 public:
-    explicit GUI_OUI(ObjectsManager &managerObjects);
-    ~GUI_OUI();
+    explicit OuiNanoVG_Implementation(ObjectsManager &managerObjects);
+    ~OuiNanoVG_Implementation();
     void init(SDL_Window *window,
               std::function<void()> quitApp,
               std::function<void(FBEntity, std::vector<std::string>)> processImportedFile,
@@ -36,36 +34,8 @@ public:
               std::function<void(FBEntity file)> openScene
               );
 
-    bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
-    void doLog(std::string const& message);
-    void setSceneSelectedModelObject(int sceneSelectedModelObject);
-
-    void recentFilesAdd(FBEntity file);
-    void recentFilesClear();
-    void recentFilesAddImported(FBEntity file);
-    void recentFilesClearImported();
-    bool isMouseOnGUI();
-    void showParsing();
-    void hideParsing();
-    void showLoading();
-    void hideLoading();
-    void showExporting();
-    void hideExporting();
-    void showRenderedImage(std::string const& renderedImage);
-    void clearAllLights();
-
-    std::vector<ModelFaceBase*> *meshModelFaces;
-    bool isFrame;
-    bool isParsingOpen, isLoadingOpen, isExportingOpen;
-    bool showControlsGUI;
-    bool showControlsModels;
-    float parsingPercentage;
-    std::vector<FBEntity> recentFiles, recentFilesImported;
-
-    bool showSVS;
-    bool showRendererUI;
 
 private:
     SDL_Window *sdlWindow;
@@ -82,7 +52,6 @@ private:
     std::function<void(FBEntity file)> funcOpenScene;
 
     ObjectsManager &managerObjects;
-    std::unique_ptr<OuiNanoVG_Implementation> guiImplementation;
 };
 
-#endif /* GUI_OUI_hpp */
+#endif /* OuiNanoVG_Implementation_hpp */

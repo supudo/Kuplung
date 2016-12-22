@@ -35,10 +35,11 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
 
         ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
         ImGui::BeginChild("GUIProvider", ImVec2(0.0f, 52.0f), true);
-        ImGui::Text("GUI Provider");
+        ImGui::Text("GUI Provider (requires restart)");
         const char* guiSystems[] = {"ImGui", "OUI"};
         if (ImGui::Combo("##11829", &this->optionsGUIProvider, guiSystems, IM_ARRAYSIZE(guiSystems))) {
             Settings::Instance()->GUISystem = this->optionsGUIProvider + 1;
+            Settings::Instance()->maybeGracefullApplicationQuit = true;
             Settings::Instance()->saveSettings();
         }
         ImGui::EndChild();
