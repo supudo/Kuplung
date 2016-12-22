@@ -33,6 +33,12 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
 
+        const char* guiSystems[] = {"ImGui", "OUI"};
+        if (ImGui::Combo("GUI Provider", &this->optionsGUIProvider, guiSystems, IM_ARRAYSIZE(guiSystems))) {
+            Settings::Instance()->GUISystem = this->optionsGUIProvider + 1;
+            Settings::Instance()->saveSettings();
+        }
+
         ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
         ImGui::BeginChild("RefreshRate", ImVec2(0.0f, 98.0f), true);
         ImGui::Text("Consumption Refresh Interval (in seconds, 0 - disabled)");
