@@ -557,7 +557,7 @@ void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std:
         this->managerUI->showParsing();
         this->objParserThreadFinished = false;
         this->objParserThreadProcessed = false;
-        FileBrowser_ParserType rt = FileBrowser_ParserType(Settings::Instance()->RendererType);
+        FileBrowser_ParserType rt = FileBrowser_ParserType(Settings::Instance()->ModelFileParser);
         std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, rt, settings);
         objParserThread.detach();
         this->doLog("Starting parsing OBJ " + file.title);

@@ -682,7 +682,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     }
 
                     int lType = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->type;
-                    assert(lType == LightSourceType_Point || lType == LightSourceType_Spot);
+                    assert(lType == LightSourceType_Directional || lType == LightSourceType_Point || lType == LightSourceType_Spot);
                     switch (lType) {
                         case LightSourceType_Point: {
                             break;

@@ -25,4 +25,11 @@ QT Creator & CLion (Xcode for convinient debugging)
 - Memory inspector
 - Grid to act as a glass surface (simulating reflection)
 
-![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot2.png "Kuplung")
+![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot3.png "Kuplung")
+
+#### License
+
+Each library uses comes with its own license. The core of the application is public domain or whatever fits them all.
+**Use on your own risk.**
+
+Drop me a line if you think i fail miserably in licensing.
