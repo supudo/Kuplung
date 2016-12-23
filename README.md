@@ -19,11 +19,13 @@ QT Creator & CLion (Xcode for convinient debugging)
 
 #### TODO
 
-- Renderers
-- Deferred Rendering
-- Material node editor
+- Renderers (WIP)
+- Deferred Rendering (WIP)
+- Material node editor (WIP)
+- Shadows (WIP)
 - Memory inspector
 - Grid to act as a glass surface (simulating reflection)
+- Memory optimization
 
 ![Kuplung](https://raw.githubusercontent.com/supudo/Kuplung/master/screenshots/screenshot3.png "Kuplung")
 
