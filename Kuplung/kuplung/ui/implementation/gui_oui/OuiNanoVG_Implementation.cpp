@@ -670,14 +670,14 @@ void draw_demostuff(NVGcontext *vg, int x, int y, float w, float h) {
     y += 40;
     float progress_value = fmodf((SDL_GetTicks() / 1000.0f) / 10.0f, 1.0f);
     char progress_label[32];
-    sprintf(progress_label, "%d%%", int(progress_value*100+0.5f));
+    sprintf(progress_label, "%d%%", int(progress_value * 100 + 0.5f));
     bndSlider(vg, x, y, 240, BND_WIDGET_HEIGHT, BND_CORNER_NONE, BND_DEFAULT, progress_value, "Default", progress_label);
     y += 25;
     bndSlider(vg, x, y, 240, BND_WIDGET_HEIGHT, BND_CORNER_NONE, BND_HOVER, progress_value, "Hovered", progress_label);
     y += 25;
     bndSlider(vg, x, y, 240, BND_WIDGET_HEIGHT, BND_CORNER_NONE, BND_ACTIVE, progress_value, "Active", progress_label);
 
-    int rw = x+240-rx;
+    int rw = x + 240 - rx;
     float s_offset = sinf((SDL_GetTicks() / 1000.0f) / 2.0f) * 0.5f + 0.5f;
     float s_size = cosf((SDL_GetTicks() / 1000.0f) / 3.11f) * 0.5f + 0.5f;
 
