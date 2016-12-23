@@ -16,6 +16,8 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/shapes/Shapes.h"
 
+#include "kuplung/utilities/nanovg/nanovg.h"
+
 class OuiNanoVG_Implementation {
 public:
     explicit OuiNanoVG_Implementation(ObjectsManager &managerObjects);
@@ -36,6 +38,7 @@ public:
 
     void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
+    bool processEvent(SDL_Event *event);
 
 private:
     SDL_Window *sdlWindow;

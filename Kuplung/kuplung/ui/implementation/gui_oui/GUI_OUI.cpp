@@ -90,7 +90,7 @@ void GUI_OUI::setSceneSelectedModelObject(int sceneSelectedModelObject) {
 }
 
 bool GUI_OUI::processEvent(SDL_Event *event) {
-    return true;
+    return this->guiImplementation->processEvent(event);
 }
 
 void GUI_OUI::recentFilesAdd(FBEntity file) {
