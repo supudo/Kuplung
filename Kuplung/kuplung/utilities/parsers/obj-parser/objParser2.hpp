@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
-#include <functional>
+#include "kuplung/utilities/measurement/Timings.hpp"
 
 struct PackedVertex {
     glm::vec3 position;

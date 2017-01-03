@@ -233,6 +233,8 @@ SET(SOURCE_FILES
     kuplung/ui/UIManager.hpp
     kuplung/ui/UIHelpers.cpp
     kuplung/ui/UIHelpers.hpp
+    kuplung/utilities/measurement/Timings.cpp
+    kuplung/utilities/measurement/Timings.hpp
     kuplung/utilities/consumption/Consumption.cpp
     kuplung/utilities/consumption/Consumption.hpp
     kuplung/utilities/export/Exporter.cpp
