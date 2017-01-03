@@ -17,30 +17,25 @@
 RayPicking::~RayPicking() {
 }
 
-void RayPicking::setMatrices(glm::mat4 matrixProjection, glm::mat4 matrixCamera) {
-    this->matrixProjection = matrixProjection;
-    this->matrixCamera = matrixCamera;
-}
-
-void RayPicking::selectModel(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                             std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
-    this->meshModelFaces = meshModelFaces;
+void RayPicking::selectModel(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera,
+                             const std::vector<ModelFaceBase*>& meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
+                             std::unique_ptr<ObjectsManager> &managerObjects, const std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
-    this->pickModel(managerObjects, managerControls);
+    this->pickModel(matrixProjection, matrixCamera, meshModelFaces, managerObjects, managerControls);
     *sceneSelectedModelObject = this->sceneSelectedModelObject;
     *rayLines = this->rayLines;
 }
 
-void RayPicking::selectVertex(std::vector<ModelFaceBase*> meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
-                              std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
-    this->meshModelFaces = meshModelFaces;
+void RayPicking::selectVertex(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera,
+                              const std::vector<ModelFaceBase*>& meshModelFaces, std::vector<RayLine*> * rayLines, int *sceneSelectedModelObject,
+                              std::unique_ptr<ObjectsManager> &managerObjects, const std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     this->sceneSelectedModelObject = *sceneSelectedModelObject;
-    this->pickVertex(managerObjects, managerControls);
+    this->pickVertex(matrixProjection, matrixCamera, meshModelFaces, managerObjects, managerControls);
     *sceneSelectedModelObject = this->sceneSelectedModelObject;
     *rayLines = this->rayLines;
 }
 
-void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
+void RayPicking::pickModel(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const std::vector<ModelFaceBase*>& meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects, const std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     int mouse_x = managerControls->mousePosition.x;
     int mouse_y = managerControls->mousePosition.y;
 
@@ -49,8 +44,8 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
     this->getRay(
         Settings::Instance()->SDL_Window_Width / 2, Settings::Instance()->SDL_Window_Height / 2,
         Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-        this->matrixCamera,
-        this->matrixProjection,
+        matrixCamera,
+        matrixProjection,
         vFrom,
         ray_direction
     );
@@ -79,8 +74,8 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
     }
 
     this->sceneSelectedModelObject = -1;
-    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFaceBase *mmf = this->meshModelFaces[i];
+    for (size_t i=0; i<meshModelFaces.size(); i++) {
+        ModelFaceBase *mmf = meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             if ((j + 1) % 3 == 0) {
                 float id = -1;
@@ -93,7 +88,7 @@ void RayPicking::pickModel(std::unique_ptr<ObjectsManager> &managerObjects, std:
     }
 }
 
-void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
+void RayPicking::pickVertex(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const std::vector<ModelFaceBase*>& meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects, const std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls) {
     int mouse_x = managerControls->mousePosition.x;
     int mouse_y = managerControls->mousePosition.y;
 
@@ -102,8 +97,8 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
     this->getRay(
         Settings::Instance()->SDL_Window_Width / 2, Settings::Instance()->SDL_Window_Height / 2,
         Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height,
-        this->matrixCamera,
-        this->matrixProjection,
+        matrixCamera,
+        matrixProjection,
         rayStartPosition,
         rayDirection
     );
@@ -135,8 +130,8 @@ void RayPicking::pickVertex(std::unique_ptr<ObjectsManager> &managerObjects, std
     }
 
     this->sceneSelectedModelObject = -1;
-    for (size_t i=0; i<this->meshModelFaces.size(); i++) {
-        ModelFaceBase *mmf = this->meshModelFaces[i];
+    for (size_t i=0; i<meshModelFaces.size(); i++) {
+        ModelFaceBase *mmf = meshModelFaces[i];
         for (size_t j=0; j<mmf->meshModel.vertices.size(); j++) {
             glm::vec3 v = mmf->meshModel.vertices[j];
             glm::mat4 mtx = mmf->matrixModel;
