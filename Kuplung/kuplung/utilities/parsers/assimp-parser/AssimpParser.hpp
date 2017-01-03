@@ -21,7 +21,7 @@ class AssimpParser {
 public:
     ~AssimpParser();
     void init(std::function<void(float)> doProgress);
-    std::vector<MeshModel> parse(FBEntity file, std::vector<std::string> const& settings);
+    std::vector<MeshModel> parse(const FBEntity& file, const std::vector<std::string>& settings);
 
     std::vector<float> vertices, normals;
 

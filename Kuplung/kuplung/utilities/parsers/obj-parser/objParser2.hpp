@@ -27,7 +27,7 @@ class objParser2 {
 public:
     ~objParser2();
     void init(std::function<void(float)> doProgress);
-    std::vector<MeshModel> parse(FBEntity file, std::vector<std::string> settings);
+    std::vector<MeshModel> parse(const FBEntity& file, const std::vector<std::string>& settings);
 
 private:
     FBEntity file;
@@ -36,8 +36,6 @@ private:
 
     std::unique_ptr<ParserUtils> parserUtils;
 
-    size_t fileCountLines(std::istream &is);
-
     std::vector<MeshModel> models;
     std::map<std::string, MeshModelMaterial> materials;
     std::vector<glm::vec3> vectorVertices, vectorNormals;
@@ -45,9 +43,9 @@ private:
     std::vector<unsigned int> vectorIndices;
 
     void loadMaterialFile(std::string const& materialFile);
-    MeshMaterialTextureImage parseTextureImage(std::string textureLine);
-    std::vector<std::string> splitString(const std::string &s, std::string delimiter);
-    bool getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result);
+    MeshMaterialTextureImage parseTextureImage(const std::string& textureLine);
+    std::vector<std::string> splitString(const std::string& s, const std::string& delimiter);
+    bool getSimilarVertexIndex(PackedVertex& packed, std::map<PackedVertex, unsigned int>& vertexToOutIndex, unsigned int& result);
 
     // current object name
     std::string id_objTitle;

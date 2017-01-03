@@ -52,7 +52,7 @@ void objParser2::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string> settings) {
+std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector<std::string>& settings) {
     this->file = file;
     this->models = {};
     this->vectorVertices = {};
@@ -66,7 +66,9 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
         return {};
     }
 
-    int progressStageTotal = static_cast<int>(this->fileCountLines(ifs));
+    ifs.seekg(0);
+    int progressStageTotal = int(std::count(std::istreambuf_iterator<char>(ifs), std::istreambuf_iterator<char>(), '\n'));
+    ifs.seekg(0);
 
     std::vector<unsigned int> indexModels, indexVertices, indexTexture, indexNormals;
     std::vector<glm::vec3> vVertices, vNormals;
@@ -285,7 +287,7 @@ std::vector<MeshModel> objParser2::parse(FBEntity file, std::vector<std::string>
     return this->models;
 }
 
-bool objParser2::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVertex, unsigned int> & vertexToOutIndex, unsigned int & result) {
+bool objParser2::getSimilarVertexIndex(PackedVertex& packed, std::map<PackedVertex, unsigned int>& vertexToOutIndex, unsigned int& result) {
     std::map<PackedVertex, unsigned int>::iterator it = vertexToOutIndex.find(packed);
     if (it == vertexToOutIndex.end())
         return false;
@@ -295,7 +297,7 @@ bool objParser2::getSimilarVertexIndex(PackedVertex & packed, std::map<PackedVer
     }
 }
 
-void objParser2::loadMaterialFile(std::string const& materialFile) {
+void objParser2::loadMaterialFile(const std::string& materialFile) {
     this->materials.clear();
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
@@ -403,7 +405,7 @@ void objParser2::loadMaterialFile(std::string const& materialFile) {
     }
 }
 
-MeshMaterialTextureImage objParser2::parseTextureImage(std::string textureLine) {
+MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textureLine) {
     MeshMaterialTextureImage materialImage;
 
     materialImage.Height = 0;
@@ -443,35 +445,8 @@ MeshMaterialTextureImage objParser2::parseTextureImage(std::string textureLine) 
     return materialImage;
 }
 
-std::vector<std::string> objParser2::splitString(const std::string &s, std::string delimiter) {
+std::vector<std::string> objParser2::splitString(const std::string& s, const std::string& delimiter) {
     std::vector<std::string> elements;
     boost::split(elements, s, boost::is_any_of(delimiter));
     return elements;
-}
-
-size_t objParser2::fileCountLines(std::istream &is) {
-    if (is.bad())
-        return 0;
-
-    // save state
-    std::istream::iostate state_backup = is.rdstate();
-    // clear state
-    is.clear();
-    std::istream::streampos pos_backup = is.tellg();
-
-    is.seekg(0);
-    size_t line_cnt;
-    size_t lf_cnt = static_cast<size_t>(std::count(std::istreambuf_iterator<char>(is), std::istreambuf_iterator<char>(), '\n'));
-    line_cnt = lf_cnt;
-    // if the file is not end with '\n' , then line_cnt should plus 1
-    is.unget();
-    if (is.get() != '\n')
-        ++line_cnt;
-
-    // recover state
-    is.clear() ; // previous reading may set eofbit
-    is.seekg(pos_backup);
-    is.setstate(state_backup);
-
-    return line_cnt;
 }
