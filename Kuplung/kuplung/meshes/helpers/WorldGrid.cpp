@@ -120,7 +120,7 @@ bool WorldGrid::initShaderProgram() {
     return success;
 }
 
-void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
+void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -287,12 +287,9 @@ void WorldGrid::initBuffers(const int gridSize, const float unitSize) {
 
 #pragma mark - Render
 
-void WorldGrid::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const bool showZAxis) {
+void WorldGrid::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const bool& showZAxis) {
     if (this->glVAO > 0 && this->showGrid) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = matrixProjection;
-        this->matrixCamera = matrixCamera;
 
         this->matrixModel = glm::mat4(1.0);
         this->matrixModel = glm::scale(this->matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));

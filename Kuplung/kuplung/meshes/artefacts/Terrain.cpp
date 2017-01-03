@@ -170,7 +170,7 @@ void Terrain::initBuffers(std::string const& assetsFolder, const int width, cons
 
 #pragma mark - Render
 
-void Terrain::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel) {
+void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

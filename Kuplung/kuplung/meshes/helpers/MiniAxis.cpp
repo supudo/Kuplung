@@ -134,12 +134,9 @@ void MiniAxis::initBuffers() {
 
 #pragma mark - Render
 
-void MiniAxis::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera) {
+void MiniAxis::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
     if (this->glVAO > 0 && this->showAxis) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = matrixProjection;
-        this->matrixCamera = matrixCamera;
 
         int axisW = 120, axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
         int axisX = 10, axisY = 10;
@@ -153,7 +150,7 @@ void MiniAxis::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCa
 
         glLineWidth(5.5f);
 
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+        glm::mat4 mvpMatrix = matrixProjection * matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw

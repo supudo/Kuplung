@@ -30,13 +30,11 @@ AxisHelpers::AxisHelpers() : meshModel() {
     this->initProperties();
 }
 
-void AxisHelpers::setModel(MeshModel const& meshModel) {
+void AxisHelpers::setModel(const MeshModel& meshModel) {
     this->meshModel = meshModel;
 }
 
 void AxisHelpers::initProperties() {
-    this->matrixCamera = glm::mat4(1.0);
-    this->matrixModel = glm::mat4(1.0);
 }
 
 bool AxisHelpers::initShaderProgram() {
@@ -95,15 +93,12 @@ void AxisHelpers::initBuffers() {
     glBindVertexArray(0);
 }
 
-void AxisHelpers::render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::vec3 position) {
+void AxisHelpers::render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::vec3& position) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 
-        this->matrixProjection = mtxProjection;
-        this->matrixCamera = mtxCamera;
-        this->matrixModel = glm::mat4(1.0);
-        this->matrixModel = glm::translate(this->matrixModel, position);
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+        glm::mat4 matrixModel = glm::translate(glm::mat4(1.0), position);
+        glm::mat4 mvpMatrix = mtxProjection * mtxCamera * matrixModel;
 
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniform3f(this->glUniformColor, this->meshModel.ModelMaterial.DiffuseColor.r, this->meshModel.ModelMaterial.DiffuseColor.g, this->meshModel.ModelMaterial.DiffuseColor.b);

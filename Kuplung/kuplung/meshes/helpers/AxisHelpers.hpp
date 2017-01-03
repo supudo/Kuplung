@@ -20,16 +20,12 @@ class AxisHelpers {
 public:
     ~AxisHelpers();
     AxisHelpers();
-    void setModel(MeshModel const& meshModel);
+    void setModel(const MeshModel& meshModel);
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::vec3 position);
+    void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::vec3& position);
     MeshModel meshModel;
-
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
-    glm::mat4 matrixModel;
 
 private:
     GLuint shaderProgram;

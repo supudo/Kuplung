@@ -22,7 +22,7 @@ CONFIG(release, debug|release) {
 mac {
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
-#    QMAKE_CXXFLAGS_WARN_ON += -Wall
+
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
@@ -30,7 +30,17 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
     QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
+
+#    optims
 #    QMAKE_CXXFLAGS_WARN_ON += -Wpadded
+#    QMAKE_CXXFLAGS_WARN_ON += -Wextra
+#    QMAKE_CXXFLAGS_WARN_ON += -Wshadow
+#    QMAKE_CXXFLAGS_WARN_ON += -Wnon-virtual-dtor
+#    QMAKE_CXXFLAGS_WARN_ON += -pedantic
+#    QMAKE_CXXFLAGS_WARN_ON += -Wunused
+#    QMAKE_CXXFLAGS_WARN_ON += -Wcast-align
+#    QMAKE_CXXFLAGS_WARN_ON += -Wmisleading-indentation
+#    QMAKE_CXXFLAGS_WARN_ON += -Weffc++
 
     QMAKE_MAC_SDK = macosx10.12
 

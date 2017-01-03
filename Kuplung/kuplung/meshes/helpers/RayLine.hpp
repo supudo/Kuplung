@@ -19,12 +19,10 @@ public:
     ~RayLine();
     void init();
     bool initShaderProgram();
-    void initBuffers(const glm::vec3 vecFrom, const glm::vec3 vecTo);
+    void initBuffers(const glm::vec3& vecFrom, const glm::vec3& vecTo);
     void initProperties();
-    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera);
+    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
 
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
     glm::mat4 matrixModel;
 
 private:

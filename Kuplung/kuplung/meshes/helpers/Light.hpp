@@ -20,12 +20,12 @@ class Light {
 public:
     ~Light();
     void init();
-    void setModel(MeshModel const& meshModel);
+    void setModel(const MeshModel& meshModel);
     void initProperties(LightSourceType type = LightSourceType_Directional);
     bool initShaderProgram();
     void initBuffers(std::string const& assetsFolder);
-    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera);
-    glm::vec3 getNewPositionAfterRotation(const glm::vec3 rotation);
+    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
+    glm::vec3 getNewPositionAfterRotation(const glm::vec3& rotation);
     bool turnOff_Position;
 
     MeshModel meshModel;
@@ -45,8 +45,6 @@ public:
     std::unique_ptr<ObjectCoordinate> lConstant, lLinear, lQuadratic;
     bool showInWire;
 
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
     glm::mat4 matrixModel;
 
 private:

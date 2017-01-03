@@ -20,8 +20,8 @@ public:
     VertexSphere();
     ~VertexSphere();
     bool initShaderProgram();
-    void initBuffers(MeshModel const& meshModel, const int circleSegments, const float radius);
-    void render(const glm::mat4 matrixMVP, const glm::vec4 color);
+    void initBuffers(MeshModel const& meshModel, const int& circleSegments, const float& radius);
+    void render(const glm::mat4& matrixMVP, const glm::vec4& color);
 
     bool isSphere;
     bool showWireframes;
@@ -29,7 +29,6 @@ public:
     std::vector<glm::vec3> dataVertices;
     std::vector<glm::vec3> dataNormals;
     std::vector<GLuint> dataIndices;
-    glm::mat4 matrixMVP;
 
 private:
     GLuint shaderProgram;

@@ -22,13 +22,10 @@ public:
     void initProperties();
     bool initShaderProgram();
     void initBuffers(); // 0 = x, 1 = y, 2 = z
-    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera);
+    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
 
     bool showAxis;
     std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
-
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
     glm::mat4 matrixModel;
 
 private:

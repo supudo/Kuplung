@@ -77,7 +77,7 @@ bool RayLine::initShaderProgram() {
     return success;
 }
 
-void RayLine::initBuffers(const glm::vec3 vecFrom, const glm::vec3 vecTo) {
+void RayLine::initBuffers(const glm::vec3& vecFrom, const glm::vec3& vecTo) {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
@@ -120,12 +120,9 @@ void RayLine::initBuffers(const glm::vec3 vecFrom, const glm::vec3 vecTo) {
 
 #pragma mark - Render
 
-void RayLine::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera) {
+void RayLine::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = matrixProjection;
-        this->matrixCamera = matrixCamera;
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));

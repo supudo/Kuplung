@@ -78,7 +78,7 @@ bool VertexSphere::initShaderProgram() {
     return success;
 }
 
-void VertexSphere::initBuffers(MeshModel const& meshModel, const int circleSegments, const float radius) {
+void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegments, const float& radius) {
     this->circleSegments = circleSegments;
 
     glEnable(GL_DEPTH_TEST);
@@ -205,9 +205,7 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int circleSegme
 
 #pragma mark - Render
 
-void VertexSphere::render(const glm::mat4 matrixMVP, const glm::vec4 color) {
-    this->matrixMVP = matrixMVP;
-
+void VertexSphere::render(const glm::mat4& matrixMVP, const glm::vec4& color) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

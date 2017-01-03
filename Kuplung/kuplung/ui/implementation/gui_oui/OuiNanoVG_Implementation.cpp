@@ -998,6 +998,10 @@ int add_menu_option(int parent, const char *name, int *choice) {
     return opt;
 }
 
+void draw2(NVGcontext *vg, float w, float h) {
+    bndBackground(vg, 110, 110, w, h);
+}
+
 void draw(NVGcontext *vg, float w, float h) {
     bndBackground(vg, 0, 0, w, h);
 
@@ -1196,7 +1200,8 @@ void OuiNanoVG_Implementation::renderStart(bool, int *) {
     glEnable(GL_STENCIL_TEST);
     nvgBeginFrame(_vg, winWidth, winHeight, pxRatio);
 
-    draw(_vg, winWidth, winHeight);
+//    draw(_vg, winWidth, winHeight);
+    draw2(_vg, winWidth, winHeight);
 }
 
 void OuiNanoVG_Implementation::renderEnd() {

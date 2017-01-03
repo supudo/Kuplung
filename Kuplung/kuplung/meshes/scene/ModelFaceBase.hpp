@@ -31,9 +31,9 @@ public:
     void initBoundingBox();
     void initVertexSphere();
     virtual void initBuffers();
-    void loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType type, GLuint* vboObject);
+    void loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject);
 
-    virtual void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight);
+    virtual void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4 matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight);
 
     // general options
     void setOptionsFOV(float fov);

@@ -25,9 +25,9 @@ public:
     ~WorldGrid();
     WorldGrid();
     bool initShaderProgram();
-    void initBuffers(const int gridSize, const float unitSize);
+    void initBuffers(const int& gridSize, const float& unitSize);
     void initProperties();
-    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const bool showZAxis);
+    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const bool& showZAxis);
     int gridSize;
     float transparency;
 
@@ -37,8 +37,6 @@ public:
     std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
     std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
 
-    glm::mat4 matrixProjection;
-    glm::mat4 matrixCamera;
     glm::mat4 matrixModel;
 
     std::vector<GLfloat> dataVertices;

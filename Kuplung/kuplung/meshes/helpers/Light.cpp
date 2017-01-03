@@ -61,7 +61,7 @@ void Light::init() {
     this->lightDirectionRay = new RayLine();
 }
 
-void Light::setModel(MeshModel const& meshModel) {
+void Light::setModel(const MeshModel& meshModel) {
     this->meshModel = meshModel;
 }
 
@@ -258,7 +258,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
 
 #pragma mark - Render
 
-glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3 rotation) {
+glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3& rotation) {
     glm::mat4 mtx = this->matrixModel;
 
     mtx = glm::translate(mtx, glm::vec3(0, 0, 0));
@@ -270,12 +270,9 @@ glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3 rotation) {
     return mtx[3];
 }
 
-void Light::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera) {
+void Light::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
     if (this->glVAO > 0 && this->showLampObject) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = matrixProjection;
-        this->matrixCamera = matrixCamera;
 
         this->matrixModel = glm::mat4(1.0);
 
@@ -322,6 +319,6 @@ void Light::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamer
 
         this->lightDirectionRay->matrixModel = this->matrixModel;
         if (this->showLampDirection)
-            this->lightDirectionRay->render(this->matrixProjection, this->matrixCamera);
+            this->lightDirectionRay->render(matrixProjection, matrixCamera);
     }
 }

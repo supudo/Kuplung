@@ -204,7 +204,7 @@ void ModelFaceBase::initVertexSphere() {
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
-void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType type, GLuint* vboObject) {
+void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject) {
     if (materialImage.Image != "") {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
@@ -279,7 +279,7 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTex
     }
 }
 
-void ModelFaceBase::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition, WorldGrid *grid, const glm::vec3 uiAmbientLight) {
+void ModelFaceBase::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4 matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;

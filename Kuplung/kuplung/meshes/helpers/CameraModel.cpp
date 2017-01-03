@@ -76,7 +76,6 @@ void CameraModel::initProperties() {
     this->colorG = std::make_unique<ObjectCoordinate>(false, 0.61f);
     this->colorB = std::make_unique<ObjectCoordinate>(false, 0.61f);
 
-    this->matrixCamera = glm::mat4(1.0);
     this->matrixModel = glm::mat4(1.0);
 
     this->showCameraObject = true;
@@ -152,12 +151,9 @@ void CameraModel::initBuffers() {
     glBindVertexArray(0);
 }
 
-void CameraModel::render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld) {
+void CameraModel::render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld) {
     if (this->glVAO > 0 && this->showCameraObject) {
         glUseProgram(this->shaderProgram);
-
-        this->matrixProjection = mtxProjection;
-        this->matrixCamera = mtxCamera;
 
         this->matrixModel = glm::mat4(1.0);
         if (fixedGridWorld)
@@ -173,7 +169,7 @@ void CameraModel::render(const glm::mat4 mtxProjection, const glm::mat4 mtxCamer
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterY->point), glm::vec3(0, 1, 0));
         this->matrixModel = glm::rotate(this->matrixModel, glm::radians(this->rotateCenterZ->point), glm::vec3(0, 0, 1));
 
-        glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * this->matrixModel;
+        glm::mat4 mvpMatrix = mtxProjection * mtxCamera * this->matrixModel;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         glUniform3f(this->glUniformColor, this->colorR->point, this->colorG->point, this->colorB->point);
