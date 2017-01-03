@@ -19,7 +19,7 @@ public:
     ~RenderingSimple();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
+    void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
 private:
     ObjectsManager &managerObjects;

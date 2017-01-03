@@ -20,11 +20,11 @@ public:
     ~RenderingForward();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
+    void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
 private:
     bool initShaderProgram();
-    void renderModels(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
+    void renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
     ObjectsManager &managerObjects;
 

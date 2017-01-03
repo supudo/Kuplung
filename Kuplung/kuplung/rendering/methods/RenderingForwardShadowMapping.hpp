@@ -20,15 +20,15 @@ public:
     ~RenderingForwardShadowMapping();
 
     bool init();
-    void render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
+    void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
 private:
     bool initShaderProgram();
 
     ObjectsManager &managerObjects;
 
-    void renderShadows(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel);
-    void renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel);
+    void renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
+    void renderModels(const bool& isShadowPass, const GLuint& sProgram, const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
     void renderDepth();
 
     glm::mat4 matrixProjection, matrixCamera;

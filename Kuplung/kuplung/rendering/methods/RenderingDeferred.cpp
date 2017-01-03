@@ -323,7 +323,7 @@ bool RenderingDeferred::initLights() {
     return result;
 }
 
-void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     this->renderGBuffer(meshModelFaces, selectedModel);
     this->renderLightingPass();
     if (this->managerObjects.Setting_DeferredTestLights)
@@ -340,7 +340,7 @@ void RenderingDeferred::render(std::vector<ModelFaceData*> meshModelFaces, const
     }
 }
 
-void RenderingDeferred::renderGBuffer(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // 1. Geometry Pass: render scene's geometry/color data into gbuffer

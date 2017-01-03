@@ -301,7 +301,7 @@ bool RenderingForward::initShaderProgram() {
     return success;
 }
 
-void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingForward::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     this->matrixProjection = this->managerObjects.matrixProjection;
     this->matrixCamera = this->managerObjects.camera->matrixCamera;
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
@@ -311,7 +311,7 @@ void RenderingForward::render(std::vector<ModelFaceData*> meshModelFaces, const 
     this->renderModels(meshModelFaces, selectedModel);
 }
 
-void RenderingForward::renderModels(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     glUseProgram(this->shaderProgram);
 
     int selectedModelID = -1;

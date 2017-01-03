@@ -433,7 +433,7 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     return true;
 }
 
-void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingForwardShadowMapping::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     this->matrixProjection = this->managerObjects.matrixProjection;
     this->matrixCamera = this->managerObjects.camera->matrixCamera;
     this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
@@ -444,7 +444,7 @@ void RenderingForwardShadowMapping::render(std::vector<ModelFaceData*> meshModel
     this->renderDepth();
 }
 
-void RenderingForwardShadowMapping::renderShadows(std::vector<ModelFaceData*> meshModelFaces, const int selectedModel) {
+void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
         glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
@@ -519,7 +519,7 @@ void RenderingForwardShadowMapping::renderDepth() {
     glUseProgram(0);
 }
 
-void RenderingForwardShadowMapping::renderModels(bool isShadowPass, GLuint sProgram, std::vector<ModelFaceData*> meshModelFaces, int selectedModel) {
+void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const GLuint& sProgram, const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     glUseProgram(sProgram);
 
     int selectedModelID = -1;
