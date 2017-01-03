@@ -973,11 +973,13 @@ void uiMakeCurrent(UIcontext *ctx) {
 void uiDestroyContext(UIcontext *ctx) {
     if (ui_context == ctx)
         uiMakeCurrent(NULL);
-    free(ctx->items);
-    free(ctx->last_items);
-    free(ctx->item_map);
-    free(ctx->data);
-    free(ctx);
+    if (ctx) {
+        free(ctx->items);
+        free(ctx->last_items);
+        free(ctx->item_map);
+        free(ctx->data);
+        free(ctx);
+    }
 }
 
 OUI_EXPORT UIcontext *uiGetContext() {

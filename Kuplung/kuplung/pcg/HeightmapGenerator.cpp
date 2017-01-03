@@ -35,7 +35,7 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Seed = 1;
 }
 
-void HeightmapGenerator::generateTerrain(std::string assetsFolder, const int width, const int height) {
+void HeightmapGenerator::generateTerrain(const std::string& assetsFolder, const int& width, const int& height) {
     this->assetsFolder = assetsFolder;
     this->width = width;
     this->height = height;
@@ -117,7 +117,7 @@ void HeightmapGenerator::generateTerrain(std::string assetsFolder, const int wid
 
 #ifdef _WIN32
 #else
-    boost::replace_all(assetsFolder, "Kuplung.app/Contents/Resources", "");
+    boost::replace_all(this->assetsFolder, "Kuplung.app/Contents/Resources", "");
 #endif
     utils::WriterBMP writer;
     writer.SetSourceImage(this->image);

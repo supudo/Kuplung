@@ -16,7 +16,7 @@
 
 class SpaceshipMeshGenerator {
 public:
-    void generate(const int gridSize);
+    void generate(const int& gridSize);
 
     std::vector<glm::vec3> vertices, normals, colors;
     std::vector<glm::vec2> uvs;
@@ -33,7 +33,7 @@ private:
     void generateFirstHull();
     void generateFirstHull2();
     void generateFirstHull3();
-    int getRandomValue(const float valueMin, const float valueMax, bool zeroIsValid = true);
+    int getRandomValue(const float& valueMin, const float& valueMax, bool zeroIsValid = true);
 
     void extrudeMesh();
 };

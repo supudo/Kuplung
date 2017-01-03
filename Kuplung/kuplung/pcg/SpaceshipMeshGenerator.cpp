@@ -9,7 +9,7 @@
 #include "SpaceshipMeshGenerator.hpp"
 #include <random>
 
-void SpaceshipMeshGenerator::generate(const int gridSize) {
+void SpaceshipMeshGenerator::generate(const int& gridSize) {
     this->gridSize = gridSize / 10;
 
     this->vertices.clear();
@@ -223,7 +223,7 @@ void SpaceshipMeshGenerator::generateFirstHull3() {
     }
 }
 
-int SpaceshipMeshGenerator::getRandomValue(const float valueMin, const float valueMax, bool zeroIsValid) {
+int SpaceshipMeshGenerator::getRandomValue(const float& valueMin, const float& valueMax, bool zeroIsValid) {
     std::mt19937 rng;
     rng.seed(std::random_device()());
     std::uniform_int_distribution<std::mt19937::result_type> distr(static_cast<unsigned int>(valueMin), static_cast<unsigned int>(valueMax));

@@ -24,7 +24,7 @@ typedef enum GeometryTerrainType {
 class HeightmapGenerator {
 public:
     void initPosition();
-    void generateTerrain(std::string assetsFolder, const int width, const int height);
+    void generateTerrain(const std::string& assetsFolder, const int& width, const int& height);
 
     std::vector<glm::vec3> vertices, normals, colors;
     std::vector<glm::vec2> uvs;
