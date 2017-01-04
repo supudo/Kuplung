@@ -22,7 +22,7 @@ SceneRenderer::~SceneRenderer() {
 void SceneRenderer::init() {
 }
 
-std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *) {
+std::string SceneRenderer::renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 
@@ -55,7 +55,7 @@ std::string SceneRenderer::renderImage(FBEntity const& file, std::vector<ModelFa
     return f;
 }
 
-std::string SceneRenderer::renderImage2(FBEntity const& file, std::vector<ModelFaceBase*> *) {
+std::string SceneRenderer::renderImage2(const FBEntity& file, std::vector<ModelFaceBase*> *) {
     int width = Settings::Instance()->SDL_Window_Width;
     int height = Settings::Instance()->SDL_Window_Height;
 

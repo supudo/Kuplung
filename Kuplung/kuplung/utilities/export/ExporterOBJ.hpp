@@ -19,17 +19,17 @@ class ExporterOBJ {
 public:
     ~ExporterOBJ();
     void init(std::function<void(float)> doProgress);
-    void exportToFile(FBEntity const& file, std::vector<ModelFaceBase*> faces, std::vector<std::string> const& settings);
+    void exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings);
 
 private:
     std::function<void(float)> funcProgress;
 
     std::unique_ptr<ParserUtils> parserUtils;
 
-    void exportGeometry(std::vector<ModelFaceBase*> faces);
-    void exportMaterials(std::vector<ModelFaceBase*> faces);
-    void saveFile(std::string const& fileContents, std::string const& fileName);
-    std::string exportMesh(ModelFaceBase *face);
+    void exportGeometry(const std::vector<ModelFaceBase*>& faces);
+    void exportMaterials(const std::vector<ModelFaceBase*>& faces);
+    void saveFile(const std::string& fileContents, const std::string& fileName);
+    std::string exportMesh(const ModelFaceBase& face);
 
     FBEntity exportFile;
     std::string nlDelimiter;

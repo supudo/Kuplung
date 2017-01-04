@@ -26,7 +26,7 @@ void ImageRenderer::init() {
     this->rendererRayTracer->init();
 }
 
-std::string ImageRenderer::renderImage(ImageRendererType type, FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces) {
+std::string ImageRenderer::renderImage(ImageRendererType type, const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) {
     if (type == ImageRendererType_Scene)
         return this->rendererScene->renderImage(file, meshModelFaces);
     else if (type == ImageRendererType_DefaultForward)

@@ -31,15 +31,15 @@ void ExporterOBJ::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-void ExporterOBJ::exportToFile(FBEntity const& file, std::vector<ModelFaceBase*> faces, std::vector<std::string> const& settings) {
+void ExporterOBJ::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
     this->exportFile = file;
     this->objSettings = settings;
     this->exportGeometry(faces);
     this->exportMaterials(faces);
 }
 
-std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
-    MeshModel model = face->meshModel;
+std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
+    MeshModel model = face.meshModel;
     std::string meshData = "";
     std::string v(""), vt(""), vn(""), f("");
 
@@ -55,7 +55,7 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     glm::vec3 translation;
     glm::vec3 skew;
     glm::vec4 perspective;
-    glm::decompose(face->matrixModel, scale, rotation, translation, skew, perspective);
+    glm::decompose(face.matrixModel, scale, rotation, translation, skew, perspective);
 
     this->funcProgress(0.0f);
     int totalProgress = int(model.indices.size()) * 2;
@@ -68,7 +68,7 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
         //glm::vec3 vertex = this->parserUtils->fixVectorAxis(model.vertices[idx], Setting_Axis_Forward, Setting_Axis_Up);
         glm::vec3 vertex = model.vertices[idx];
 
-        vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        vertex += glm::vec3(face.positionX->point, face.positionY->point, face.positionZ->point);
         vertex = vertex * rotation;
         vertex = vertex * scale;
 
@@ -105,10 +105,10 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
 
     std::string triangleFace = "";
     for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
-        int j = model.indices[(int)k];
+        int j = model.indices[int(k)];
 
         glm::vec3 vertex = model.vertices[j];
-        vertex += glm::vec3(face->positionX->point, face->positionY->point, face->positionZ->point);
+        vertex += glm::vec3(face.positionX->point, face.positionY->point, face.positionZ->point);
         vertex = vertex * rotation;
         vertex = vertex * scale;
 
@@ -139,7 +139,7 @@ std::string ExporterOBJ::exportMesh(ModelFaceBase *face) {
     return meshData;
 }
 
-void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
+void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
     std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
     fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
     std::string fn = this->exportFile.title;
@@ -157,7 +157,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
     this->vnCounter = 1;
 
     for (size_t i=0; i<faces.size(); i++) {
-        fileContents += this->exportMesh(faces[i]);
+        fileContents += this->exportMesh(*faces[i]);
     }
     fileContents += this->nlDelimiter;
 
@@ -186,7 +186,7 @@ void ExporterOBJ::exportGeometry(std::vector<ModelFaceBase*> faces) {
     }
 }
 
-void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
+void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     std::map<std::string, std::string> materials;
     for (int i=0; i<(int)faces.size(); i++) {
         MeshModelMaterial mat = faces[i]->meshModel.ModelMaterial;
@@ -239,7 +239,7 @@ void ExporterOBJ::exportMaterials(std::vector<ModelFaceBase*> faces) {
     }
 }
 
-void ExporterOBJ::saveFile(std::string const& fileContents, std::string const& fileName) {
+void ExporterOBJ::saveFile(const std::string& fileContents, const std::string& fileName) {
 //    printf("--------------------------------------------------------\n");
 //    printf("%s\n", fileName.c_str());
 //    printf("%s\n", fileContents.c_str());

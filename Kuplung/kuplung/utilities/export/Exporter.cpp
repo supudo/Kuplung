@@ -22,7 +22,7 @@ void Exporter::init(std::function<void(float)> doProgress) {
     this->exporterOBJ->init(doProgress);
 }
 
-void Exporter::exportScene(FBEntity const& file, std::vector<ModelFaceBase*> faces, std::vector<std::string> const& settings) {
+void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
     this->exporterOBJ->exportToFile(file, faces, settings);
 }
 

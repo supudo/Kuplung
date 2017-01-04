@@ -19,8 +19,8 @@ public:
     explicit SceneRenderer(ObjectsManager &managerObjects);
     ~SceneRenderer();
     void init();
-    std::string renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);
-    std::string renderImage2(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);
+    std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
+    std::string renderImage2(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
 
 private:
     ObjectsManager &managerObjects;
