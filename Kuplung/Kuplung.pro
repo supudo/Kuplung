@@ -6,22 +6,41 @@ CONFIG -= console
 CONFIG -= qt
 #CONFIG += sanitizer sanitize_address
 
+DO_LLVM_IR = false
+
 CONFIG(debug, debug|release) {
     TARGET = kuplung
-    OBJECTS_DIR = debug
-    MOC_DIR = debug
+    $$DO_LLVM_IR {
+        OBJECTS_DIR = debuig-ll
+        MOC_DIR = debug-ll
+    }
+    else {
+        OBJECTS_DIR = debug
+        MOC_DIR = debug
+    }
 #    QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
 }
 
 CONFIG(release, debug|release) {
     TARGET = kuplung
-    OBJECTS_DIR = release
-    MOC_DIR = release
+    $$DO_LLVM_IR {
+        OBJECTS_DIR = release-ll
+        MOC_DIR = release-ll
+    }
+    else {
+        OBJECTS_DIR = release
+        MOC_DIR = release
+    }
 }
 
 mac {
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
+
+    $$DO_LLVM_IR {
+        QMAKE_EXT_OBJ = .ll
+        QMAKE_CXXFLAGS += -Os -S -emit-llvm
+    }
 
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-private-field

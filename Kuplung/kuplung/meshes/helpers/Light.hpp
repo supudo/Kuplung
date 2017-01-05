@@ -48,7 +48,7 @@ public:
     glm::mat4 matrixModel;
 
 private:
-    RayLine* lightDirectionRay;
+    std::unique_ptr<RayLine> lightDirectionRay;
 
     GLuint shaderProgram;
     GLuint shaderVertex, shaderFragment;

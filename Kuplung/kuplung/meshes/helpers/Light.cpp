@@ -58,7 +58,7 @@ Light::~Light() {
 #pragma mark - Initialization
 
 void Light::init() {
-    this->lightDirectionRay = new RayLine();
+    this->lightDirectionRay = std::make_unique<RayLine>();
 }
 
 void Light::setModel(const MeshModel& meshModel) {
