@@ -1,12 +1,22 @@
+#
+# Kuplung
+# Sergey Petrov
+#
+# qmake
+#
+
+# product LLVM IR code
+DO_LLVM_IR = false
+
+# address-sanitize
+DO_ADDRESS_SANITIZER = true
+
 TEMPLATE = app
 
 CONFIG += c++14
 CONFIG += app_bundle
 CONFIG -= console
 CONFIG -= qt
-#CONFIG += sanitizer sanitize_address
-
-DO_LLVM_IR = false
 
 CONFIG(debug, debug|release) {
     TARGET = kuplung
@@ -18,7 +28,7 @@ CONFIG(debug, debug|release) {
         OBJECTS_DIR = debug
         MOC_DIR = debug
     }
-#    QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
+    QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
 }
 
 CONFIG(release, debug|release) {
@@ -40,6 +50,12 @@ mac {
     $$DO_LLVM_IR {
         QMAKE_EXT_OBJ = .ll
         QMAKE_CXXFLAGS += -Os -S -emit-llvm
+    }
+
+    $$DO_ADDRESS_SANITIZER {
+        QMAKE_CXXFLAGS += -fsanitize=address -fno-omit-frame-pointer
+        QMAKE_CFLAGS += -fsanitize=address -fno-omit-frame-pointer
+        QMAKE_LFLAGS += -fsanitize=address
     }
 
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs

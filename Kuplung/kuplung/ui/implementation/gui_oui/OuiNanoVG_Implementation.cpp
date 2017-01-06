@@ -1145,8 +1145,10 @@ OuiNanoVG_Implementation::OuiNanoVG_Implementation(ObjectsManager &managerObject
 
 OuiNanoVG_Implementation::~OuiNanoVG_Implementation() {
     uiDestroyContext(uictx);
-    nvgDeleteImage(_vg, 0);
-    nvgDeleteGL3(_vg);
+    if (_vg) {
+        nvgDeleteImage(_vg, 0);
+        nvgDeleteGL3(_vg);
+    }
 }
 
 void OuiNanoVG_Implementation::init(SDL_Window *window,
