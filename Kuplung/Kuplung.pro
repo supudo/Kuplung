@@ -9,7 +9,7 @@
 DO_LLVM_IR = false
 
 # address-sanitize
-DO_ADDRESS_SANITIZER = true
+DO_ADDRESS_SANITIZER = false
 
 TEMPLATE = app
 
