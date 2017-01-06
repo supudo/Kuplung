@@ -5,11 +5,11 @@
 # qmake
 #
 
-# product LLVM IR code
+# produce LLVM IR code
 DO_LLVM_IR = false
 
 # address-sanitize
-DO_ADDRESS_SANITIZER = false
+DO_ADDRESS_SANITIZER = true
 
 TEMPLATE = app
 
