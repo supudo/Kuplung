@@ -9,7 +9,7 @@
 DO_LLVM_IR = false
 
 # address-sanitize
-DO_ADDRESS_SANITIZER = true
+DO_ADDRESS_SANITIZER = false
 
 TEMPLATE = app
 
@@ -28,7 +28,7 @@ CONFIG(debug, debug|release) {
         OBJECTS_DIR = debug
         MOC_DIR = debug
     }
-    QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
+    #QMAKE_POST_LINK = dsymutil "kuplung.app/Contents/MacOS/kuplung"
 }
 
 CONFIG(release, debug|release) {

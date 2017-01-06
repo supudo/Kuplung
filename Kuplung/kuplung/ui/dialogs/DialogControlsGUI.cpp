@@ -20,7 +20,7 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects)
     this->managerObjects = managerObjects;
 
     this->selectedObject = 0;
-    this->selectedObjectLight = 0;
+    this->selectedObjectLight = -1;
     this->selectedTabScene = -1;
     this->selectedTabGUICamera = -1;
     this->selectedTabGUICameraModel = -1;
@@ -51,9 +51,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
         this->managerObjects.resetPropertiesSystem();
-        this->lightRotateX = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
-        this->lightRotateY = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
-        this->lightRotateZ = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
+        if (this->selectedObjectLight > -1) {
+            this->lightRotateX = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
+            this->lightRotateY = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
+            this->lightRotateZ = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
+        }
     }
     ImGui::PopStyleColor(3);
 

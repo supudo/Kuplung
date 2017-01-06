@@ -117,14 +117,14 @@ void Spaceship::initBuffers(const int gridSize) {
     // vertices
     glGenBuffers(1, &this->vboVertices);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-    glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->vertices.size() * sizeof(glm::vec3), &this->spaceshipGenerator->vertices[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->spaceshipGenerator->vertices.size() * sizeof(glm::vec3)), &this->spaceshipGenerator->vertices[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexPosition);
     glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // normals
     glGenBuffers(1, &this->vboNormals);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
-    glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->normals.size() * sizeof(glm::vec3), &this->spaceshipGenerator->normals[0], GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->spaceshipGenerator->normals.size() * sizeof(glm::vec3)), &this->spaceshipGenerator->normals[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(this->glAttributeVertexNormal);
     glVertexAttribPointer(this->glAttributeVertexNormal, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
@@ -132,7 +132,7 @@ void Spaceship::initBuffers(const int gridSize) {
     if (this->spaceshipGenerator->uvs.size() > 0) {
         glGenBuffers(1, &this->vboTextureCoordinates);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
-        glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->uvs.size() * sizeof(glm::vec2), &this->spaceshipGenerator->uvs[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->spaceshipGenerator->uvs.size() * sizeof(glm::vec2)), &this->spaceshipGenerator->uvs[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeTextureCoord);
         glVertexAttribPointer(this->glAttributeTextureCoord, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
     }
@@ -141,7 +141,7 @@ void Spaceship::initBuffers(const int gridSize) {
     if (this->spaceshipGenerator->colors.size() > 0) {
         glGenBuffers(1, &this->vboColors);
         glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-        glBufferData(GL_ARRAY_BUFFER, this->spaceshipGenerator->colors.size() * sizeof(glm::vec3), &this->spaceshipGenerator->colors[0], GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->spaceshipGenerator->colors.size() * sizeof(glm::vec3)), &this->spaceshipGenerator->colors[0], GL_STATIC_DRAW);
         glEnableVertexAttribArray(this->glAttributeColor);
         glVertexAttribPointer(this->glAttributeColor, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
     }
