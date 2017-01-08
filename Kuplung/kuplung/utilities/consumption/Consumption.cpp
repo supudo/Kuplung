@@ -36,7 +36,7 @@ void Consumption::init() {
 std::string Consumption::getOverallStats() {
     this->usageCPU = this->getCPULoad();
     this->usageMemory = this->getMemoryConsumption();
-    this->usageOverall = (this->usageMemory == "" ? "Memory: n/a" : this->usageMemory) + ", " + (this->usageCPU == "" ? "CPU: n/a" : this->usageCPU);
+    this->usageOverall = (this->usageMemory.empty() ? "Memory: n/a" : this->usageMemory) + ", " + (this->usageCPU.empty() ? "CPU: n/a" : this->usageCPU);
     return this->usageOverall;
 }
 

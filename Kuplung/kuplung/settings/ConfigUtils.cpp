@@ -141,7 +141,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -218,7 +218,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -273,7 +273,7 @@ void ConfigUtils::readFile() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 continue;
             }

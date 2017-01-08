@@ -43,7 +43,7 @@ ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
         while ((pos = fileContents.find(Settings::Instance()->newLineDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine == "" || std::regex_match(singleLine, regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, regex_comment)) {
                 fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
                 continue;
             }

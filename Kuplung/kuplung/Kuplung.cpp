@@ -220,7 +220,7 @@ void Kuplung::initFolders() {
     if (hpath != NULL)
         homeFolder = std::string(hpath);
 #endif
-    if (Settings::Instance()->currentFolder == "")
+    if (Settings::Instance()->currentFolder.empty())
         Settings::Instance()->currentFolder = homeFolder;
 }
 

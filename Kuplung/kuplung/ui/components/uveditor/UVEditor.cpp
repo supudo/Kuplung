@@ -137,7 +137,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     ImGui::Combo("##002", &this->uvUnwrappingType, mapping_items, IM_ARRAYSIZE(mapping_items));
 
     ImGui::Separator();
-    ImGui::Text("Image: %s", (this->textureImage == "" ? "" : this->textureImage.c_str()));
+    ImGui::Text("Image: %s", (this->textureImage.empty() ? "" : this->textureImage.c_str()));
     if (this->textureWidth > 0 && this->textureHeight > 0)
         ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);
     else

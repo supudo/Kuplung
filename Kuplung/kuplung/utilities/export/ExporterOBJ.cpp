@@ -190,7 +190,7 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     std::map<std::string, std::string> materials;
     for (int i=0; i<(int)faces.size(); i++) {
         MeshModelMaterial mat = faces[i]->meshModel.ModelMaterial;
-        if (materials[mat.MaterialTitle] == "") {
+        if (materials[mat.MaterialTitle].empty()) {
             materials[mat.MaterialTitle] = this->nlDelimiter;
             materials[mat.MaterialTitle] += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
             materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %f", mat.SpecularExp) + this->nlDelimiter;

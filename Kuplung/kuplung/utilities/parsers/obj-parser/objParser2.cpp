@@ -415,7 +415,7 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
     if (textureLine.find("-") != std::string::npos) {
         std::vector<std::string> lineElements = this->splitString(textureLine, "-");
 
-        if (lineElements[0] == "")
+        if (lineElements[0].empty())
             lineElements.erase(lineElements.begin());
 
         std::vector<std::string> lastElements = this->splitString(lineElements[lineElements.size() - 1], " ");

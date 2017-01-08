@@ -88,7 +88,7 @@ std::vector<MeshModel> objParser1::parse(const FBEntity& file, const std::vector
         while ((pos = fileContents.find(Settings::Instance()->newLineDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
                 continue;
             }
@@ -221,7 +221,7 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
             copy(lineElements.begin(), lineElements.end(), std::ostream_iterator<std::string>(cleanLineOS, ""));
             std::string cleanLine = cleanLineOS.str();
 
-            if (singleLine == "" || std::regex_match(singleLine, this->regex_comment)) {
+            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
                 fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
                 continue;
             }
@@ -304,7 +304,7 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
         std::regex dash("-");
         std::vector<std::string> lineElements = this->splitString(textureLine, dash);
 
-        if (lineElements[0] == "")
+        if (lineElements[0].empty())
             lineElements.erase(lineElements.begin());
 
         std::vector<std::string> lastElements = this->splitString(lineElements[lineElements.size() - 1], this->regex_whiteSpace);
