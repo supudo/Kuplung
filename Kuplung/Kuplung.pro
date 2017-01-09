@@ -11,6 +11,11 @@ DO_LLVM_IR = false
 # address-sanitize
 DO_ADDRESS_SANITIZER = false
 
+# address-sanitize
+DO_SAVE_TEMPS = false
+
+# ========================
+
 TEMPLATE = app
 
 CONFIG += c++14
@@ -46,6 +51,10 @@ CONFIG(release, debug|release) {
 mac {
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
+
+    $$DO_SAVE_TEMPS {
+        QMAKE_CXXFLAGS += -S -save-temps
+    }
 
     $$DO_LLVM_IR {
         QMAKE_EXT_OBJ = .ll
@@ -124,8 +133,8 @@ mac {
     LIBS += -L/usr/local/Cellar/protobuf/3.1.0/lib -lprotobuf
     INCLUDEPATH += /usr/local/Cellar/protobuf/3.1.0/include
 
-    LIBS += -L/usr/local/Cellar/minizip/1.1/lib -lz -lMinizip
-    INCLUDEPATH += /usr/local/Cellar/minizip/1.1/include
+    LIBS += -L/usr/local/Cellar/minizip/1.2.10/lib -lz -lMinizip
+    INCLUDEPATH += /usr/local/Cellar/minizip/1.2.10/include
 
 #    LIBS += -L/usr/local/Cellar/unittest-cpp/1.6.1/lib -lUnitTest++
 #    INCLUDEPATH += /usr/local/Cellar/unittest-cpp/1.6.1/include

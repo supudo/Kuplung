@@ -2230,7 +2230,7 @@
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 					/usr/local/Cellar/protobuf/3.1.0/include,
-					/usr/local/Cellar/minizip/1.1/include,
+					/usr/local/Cellar/minizip/1.2.10/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2242,7 +2242,7 @@
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 					/usr/local/Cellar/protobuf/3.1.0/lib,
-					/usr/local/Cellar/minizip/1.1/lib,
+					/usr/local/Cellar/minizip/1.2.10/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2284,7 +2284,7 @@
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 					/usr/local/Cellar/protobuf/3.1.0/include,
-					/usr/local/Cellar/minizip/1.1/include,
+					/usr/local/Cellar/minizip/1.2.10/include,
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2296,7 +2296,7 @@
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 					/usr/local/Cellar/protobuf/3.1.0/lib,
-					/usr/local/Cellar/minizip/1.1/lib,
+					/usr/local/Cellar/minizip/1.2.10/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",

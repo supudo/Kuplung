@@ -62,12 +62,12 @@ public:
     std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
 
     template <class T>
-    void printClassAlignment(T *s) {
+    inline void printClassAlignment(T *s) {
         std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
     }
 
     template <typename T>
-    void printTypeAlignment(T s) {
+    inline void printTypeAlignment(T s) {
         std::cout << "Size: " << sizeof(s) << " - " << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';
     }
 
