@@ -14,8 +14,7 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-RenderingForward::RenderingForward(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
+RenderingForward::RenderingForward(ObjectsManager& mo) : managerObjects(mo) {
     this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;

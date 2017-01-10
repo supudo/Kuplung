@@ -16,7 +16,7 @@
 
 class RenderingForward {
 public:
-    explicit RenderingForward(ObjectsManager &managerObjects);
+    explicit RenderingForward(ObjectsManager& mo);
     ~RenderingForward();
 
     bool init();

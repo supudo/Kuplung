@@ -26,7 +26,7 @@ CONFIG -= qt
 CONFIG(debug, debug|release) {
     TARGET = kuplung
     $$DO_LLVM_IR {
-        OBJECTS_DIR = debuig-ll
+        OBJECTS_DIR = debug-ll
         MOC_DIR = debug-ll
     }
     else {
