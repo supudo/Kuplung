@@ -156,8 +156,9 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
     this->vtCounter = 1;
     this->vnCounter = 1;
 
-    for (size_t i=0; i<faces.size(); i++) {
-        fileContents += this->exportMesh(*faces[i]);
+    std::vector<ModelFaceBase*>::const_iterator faceIterator;
+    for (faceIterator = faces.begin(); faceIterator != faces.end(); faceIterator++) {
+        fileContents += this->exportMesh(**faceIterator);
     }
     fileContents += this->nlDelimiter;
 
@@ -188,19 +189,20 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
 
 void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     std::map<std::string, std::string> materials;
-    for (int i=0; i<(int)faces.size(); i++) {
-        MeshModelMaterial mat = faces[i]->meshModel.ModelMaterial;
+    std::vector<ModelFaceBase*>::const_iterator faceIterator;
+    for (faceIterator = faces.begin(); faceIterator != faces.end(); faceIterator++) {
+        MeshModelMaterial mat = (*faceIterator)->meshModel.ModelMaterial;
         if (materials[mat.MaterialTitle].empty()) {
             materials[mat.MaterialTitle] = this->nlDelimiter;
             materials[mat.MaterialTitle] += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %f", mat.SpecularExp) + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka %f %f %f", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd %f %f %f", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks %f %f %f", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke %f %f %f", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %g", mat.SpecularExp) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka %g %g %g", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd %g %g %g", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks %g %g %g", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke %g %g %g", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
             if (mat.OpticalDensity >= 0.0f)
-                materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni %f", mat.OpticalDensity) + this->nlDelimiter;
-            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %f", mat.Transparency) + this->nlDelimiter;
+                materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni %g", mat.OpticalDensity) + this->nlDelimiter;
+            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %g", mat.Transparency) + this->nlDelimiter;
             materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
 
             if (mat.TextureAmbient.Image != "")
@@ -238,6 +240,59 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
         this->saveFile(fileContents, filePath + "/" + fileName + ".mtl");
     }
 }
+
+//void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
+//    std::map<std::string, std::string> materials;
+//    for (int i=0; i<(int)faces.size(); i++) {
+//        MeshModelMaterial mat = faces[i]->meshModel.ModelMaterial;
+//        if (materials[mat.MaterialTitle].empty()) {
+//            materials[mat.MaterialTitle] = this->nlDelimiter;
+//            materials[mat.MaterialTitle] += "newmtl " + mat.MaterialTitle + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ns %f", mat.SpecularExp) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ka %f %f %f", mat.AmbientColor.r, mat.AmbientColor.g, mat.AmbientColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Kd %f %f %f", mat.DiffuseColor.r, mat.DiffuseColor.g, mat.DiffuseColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ks %f %f %f", mat.SpecularColor.r, mat.SpecularColor.g, mat.SpecularColor.b) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ke %f %f %f", mat.EmissionColor.r, mat.EmissionColor.g, mat.EmissionColor.b) + this->nlDelimiter;
+//            if (mat.OpticalDensity >= 0.0f)
+//                materials[mat.MaterialTitle] += Settings::Instance()->string_format("Ni %f", mat.OpticalDensity) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %f", mat.Transparency) + this->nlDelimiter;
+//            materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
+
+//            if (mat.TextureAmbient.Image != "")
+//                materials[mat.MaterialTitle] += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;
+//            if (mat.TextureDiffuse.Image != "")
+//                materials[mat.MaterialTitle] += "map_Kd " + mat.TextureDiffuse.Image + this->nlDelimiter;
+//            if (mat.TextureDissolve.Image != "")
+//                materials[mat.MaterialTitle] += "map_d " + mat.TextureDissolve.Image + this->nlDelimiter;
+//            if (mat.TextureBump.Image != "")
+//                materials[mat.MaterialTitle] += "map_Bump " + mat.TextureBump.Image + this->nlDelimiter;
+//            if (mat.TextureDisplacement.Image != "")
+//                materials[mat.MaterialTitle] += "disp " + mat.TextureDisplacement.Image + this->nlDelimiter;
+//            if (mat.TextureSpecular.Image != "")
+//                materials[mat.MaterialTitle] += "map_Ks " + mat.TextureSpecular.Image + this->nlDelimiter;
+//            if (mat.TextureSpecularExp.Image != "")
+//                materials[mat.MaterialTitle] += "map_Ns " + mat.TextureSpecularExp.Image + this->nlDelimiter;
+//        }
+//    }
+
+//    std::string fileContents = "# Kuplung MTL File" + this->nlDelimiter;
+//    fileContents += "# Material Count: " + std::to_string(materials.size()) + this->nlDelimiter;
+//    fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
+
+//    for (std::map<std::string, std::string>::iterator iter = materials.begin(); iter != materials.end(); ++iter) {
+//        fileContents += iter->second;
+//    }
+
+//    fileContents += this->nlDelimiter;
+
+//    if (fileContents != "") {
+//        std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
+//        std::string fileName = this->exportFile.title;
+//        if (boost::algorithm::ends_with(fileName, ".obj"))
+//            fileName = fileName.substr(0, fileName.size() - 4);
+//        this->saveFile(fileContents, filePath + "/" + fileName + ".mtl");
+//    }
+//}
 
 void ExporterOBJ::saveFile(const std::string& fileContents, const std::string& fileName) {
 //    printf("--------------------------------------------------------\n");

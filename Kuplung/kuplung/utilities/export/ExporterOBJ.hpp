@@ -28,6 +28,7 @@ private:
 
     void exportGeometry(const std::vector<ModelFaceBase*>& faces);
     void exportMaterials(const std::vector<ModelFaceBase*>& faces);
+
     void saveFile(const std::string& fileContents, const std::string& fileName);
     std::string exportMesh(const ModelFaceBase& face);
 

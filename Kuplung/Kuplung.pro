@@ -85,6 +85,7 @@ mac {
 #    QMAKE_CXXFLAGS_WARN_ON += -Wcast-align
 #    QMAKE_CXXFLAGS_WARN_ON += -Wmisleading-indentation
 #    QMAKE_CXXFLAGS_WARN_ON += -Weffc++
+#    QMAKE_CXXFLAGS_WARN_ON += ‑fno‑elide‑constructors
 
     QMAKE_MAC_SDK = macosx10.12
 

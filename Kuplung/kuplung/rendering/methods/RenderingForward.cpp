@@ -14,12 +14,16 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include "kuplung/utilities/stb/stb_image_write.h"
 
-RenderingForward::RenderingForward(ObjectsManager& mo) : managerObjects(mo) {
+RenderingForward::RenderingForward(ObjectsManager& mo) : managerObjects(&mo) {
     this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
     this->GLSL_LightSourceNumber_Spot = 0;
+}
+
+RenderingForward::RenderingForward(const RenderingForward& rf) {
+    this->managerObjects = rf.managerObjects;
 }
 
 RenderingForward::~RenderingForward() {
@@ -299,11 +303,11 @@ bool RenderingForward::initShaderProgram() {
 }
 
 void RenderingForward::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
-    this->matrixProjection = this->managerObjects.matrixProjection;
-    this->matrixCamera = this->managerObjects.camera->matrixCamera;
-    this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
-    this->uiAmbientLight = this->managerObjects.Setting_UIAmbientLight;
-    this->lightingPass_DrawMode = this->managerObjects.Setting_LightingPass_DrawMode;
+    this->matrixProjection = this->managerObjects->matrixProjection;
+    this->matrixCamera = this->managerObjects->camera->matrixCamera;
+    this->vecCameraPosition = this->managerObjects->camera->cameraPosition;
+    this->uiAmbientLight = this->managerObjects->Setting_UIAmbientLight;
+    this->lightingPass_DrawMode = this->managerObjects->Setting_LightingPass_DrawMode;
 
     this->renderModels(meshModelFaces, selectedModel);
 }
@@ -319,7 +323,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             selectedModelID = int(i);
 
         glm::mat4 matrixModel = glm::mat4(1.0);
-        matrixModel *= this->managerObjects.grid->matrixModel;
+        matrixModel *= this->managerObjects->grid->matrixModel;
         // scale
         matrixModel = glm::scale(matrixModel, glm::vec3(mfd->scaleX->point, mfd->scaleY->point, mfd->scaleZ->point));
         // translate
@@ -331,15 +335,15 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         matrixModel = glm::rotate(matrixModel, glm::radians(mfd->rotateZ->point), glm::vec3(0, 0, 1));
         matrixModel = glm::translate(matrixModel, glm::vec3(0, 0, 0));
 
-        mfd->matrixGrid = this->managerObjects.grid->matrixModel;
+        mfd->matrixGrid = this->managerObjects->grid->matrixModel;
         mfd->matrixProjection = this->matrixProjection;
         mfd->matrixCamera = this->matrixCamera;
         mfd->matrixModel = matrixModel;
-        mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
-        mfd->lightSources = this->managerObjects.lightSources;
-        mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
-        mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
-        mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
+        mfd->Setting_ModelViewSkin = this->managerObjects->viewModelSkin;
+        mfd->lightSources = this->managerObjects->lightSources;
+        mfd->setOptionsFOV(this->managerObjects->Setting_FOV);
+        mfd->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
+        mfd->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
         mfd->setOptionsSelected(int(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
@@ -376,11 +380,11 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
 
         // depth color
         float pc = 1.0f;
-        if (this->managerObjects.Setting_PlaneClose >= 1.0f)
-            pc = this->managerObjects.Setting_PlaneClose;
+        if (this->managerObjects->Setting_PlaneClose >= 1.0f)
+            pc = this->managerObjects->Setting_PlaneClose;
         glUniform1f(this->glFS_planeClose, pc);
-        glUniform1f(this->glFS_planeFar, this->managerObjects.Setting_PlaneFar / 100.0f);
-        glUniform1i(this->glFS_showDepthColor, this->managerObjects.Setting_Rendering_Depth);
+        glUniform1f(this->glFS_planeFar, this->managerObjects->Setting_PlaneFar / 100.0f);
+        glUniform1i(this->glFS_showDepthColor, this->managerObjects->Setting_Rendering_Depth);
         glUniform1i(this->glFS_ShadowPass, false);
 
         // tessellation
@@ -411,7 +415,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glUniform1i(this->glMaterial_ParallaxMapping, mfd->Setting_ParallaxMapping);
 
         // gamma correction
-        glUniform1f(this->glFS_GammaCoeficient, this->managerObjects.Setting_GammaCoeficient);
+        glUniform1f(this->glFS_GammaCoeficient, this->managerObjects->Setting_GammaCoeficient);
 
         // render skin
         glUniform1i(this->gl_ModelViewSkin, mfd->Setting_ModelViewSkin);
@@ -421,13 +425,13 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glUniform1i(this->glFS_showShadows, false);
 
         glUniform1i(this->solidLight->gl_InUse, 1);
-        glUniform3f(this->solidLight->gl_Direction, this->managerObjects.SolidLight_Direction.x, this->managerObjects.SolidLight_Direction.y, this->managerObjects.SolidLight_Direction.z);
-        glUniform3f(this->solidLight->gl_Ambient, this->managerObjects.SolidLight_Ambient.r, this->managerObjects.SolidLight_Ambient.g, this->managerObjects.SolidLight_Ambient.b);
-        glUniform3f(this->solidLight->gl_Diffuse, this->managerObjects.SolidLight_Diffuse.r, this->managerObjects.SolidLight_Diffuse.g, this->managerObjects.SolidLight_Diffuse.b);
-        glUniform3f(this->solidLight->gl_Specular, this->managerObjects.SolidLight_Specular.r, this->managerObjects.SolidLight_Specular.g, this->managerObjects.SolidLight_Specular.b);
-        glUniform1f(this->solidLight->gl_StrengthAmbient, this->managerObjects.SolidLight_Ambient_Strength);
-        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->managerObjects.SolidLight_Diffuse_Strength);
-        glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects.SolidLight_Specular_Strength);
+        glUniform3f(this->solidLight->gl_Direction, this->managerObjects->SolidLight_Direction.x, this->managerObjects->SolidLight_Direction.y, this->managerObjects->SolidLight_Direction.z);
+        glUniform3f(this->solidLight->gl_Ambient, this->managerObjects->SolidLight_Ambient.r, this->managerObjects->SolidLight_Ambient.g, this->managerObjects->SolidLight_Ambient.b);
+        glUniform3f(this->solidLight->gl_Diffuse, this->managerObjects->SolidLight_Diffuse.r, this->managerObjects->SolidLight_Diffuse.g, this->managerObjects->SolidLight_Diffuse.b);
+        glUniform3f(this->solidLight->gl_Specular, this->managerObjects->SolidLight_Specular.r, this->managerObjects->SolidLight_Specular.g, this->managerObjects->SolidLight_Specular.b);
+        glUniform1f(this->solidLight->gl_StrengthAmbient, this->managerObjects->SolidLight_Ambient_Strength);
+        glUniform1f(this->solidLight->gl_StrengthDiffuse, this->managerObjects->SolidLight_Diffuse_Strength);
+        glUniform1f(this->solidLight->gl_StrengthSpecular, this->managerObjects->SolidLight_Specular_Strength);
 
         // lights
         unsigned int lightsCount_Directional = 0, lightsCount_Point = 0, lightsCount_Spot = 0;
@@ -648,12 +652,12 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrixDraw));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
 
-        mfd->vertexSphereVisible = this->managerObjects.Setting_VertexSphere_Visible;
-        mfd->vertexSphereRadius = this->managerObjects.Setting_VertexSphere_Radius;
-        mfd->vertexSphereSegments = this->managerObjects.Setting_VertexSphere_Segments;
-        mfd->vertexSphereColor = this->managerObjects.Setting_VertexSphere_Color;
-        mfd->vertexSphereIsSphere = this->managerObjects.Setting_VertexSphere_IsSphere;
-        mfd->vertexSphereShowWireframes = this->managerObjects.Setting_VertexSphere_ShowWireframes;
+        mfd->vertexSphereVisible = this->managerObjects->Setting_VertexSphere_Visible;
+        mfd->vertexSphereRadius = this->managerObjects->Setting_VertexSphere_Radius;
+        mfd->vertexSphereSegments = this->managerObjects->Setting_VertexSphere_Segments;
+        mfd->vertexSphereColor = this->managerObjects->Setting_VertexSphere_Color;
+        mfd->vertexSphereIsSphere = this->managerObjects->Setting_VertexSphere_IsSphere;
+        mfd->vertexSphereShowWireframes = this->managerObjects->Setting_VertexSphere_ShowWireframes;
 
         mfd->renderModel(true);
 
@@ -682,20 +686,20 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
     }
 
     // edit mode
-    if (this->managerObjects.VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
+    if (this->managerObjects->VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
         ImGuizmo::Enable(true);
 
         ModelFaceData *mfd = meshModelFaces[static_cast<size_t>(selectedModelID)];
 
-        glm::vec4 v0 = glm::vec4(this->managerObjects.VertexEditorMode, 1.0);
+        glm::vec4 v0 = glm::vec4(this->managerObjects->VertexEditorMode, 1.0);
         v0 = mfd->matrixModel * v0;
         glm::mat4 matrixVertex = mfd->matrixModel;
         matrixVertex[3] = v0;
 
         glm::mat4 mtx = glm::mat4(1.0);
 
-        ImGuizmo::Manipulate(glm::value_ptr(this->managerObjects.camera->matrixCamera),
-                             glm::value_ptr(this->managerObjects.matrixProjection),
+        ImGuizmo::Manipulate(glm::value_ptr(this->managerObjects->camera->matrixCamera),
+                             glm::value_ptr(this->managerObjects->matrixProjection),
                              ImGuizmo::TRANSLATE,
                              ImGuizmo::WORLD,
                              glm::value_ptr(matrixVertex),
@@ -709,15 +713,15 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glm::vec4 perspective;
         glm::decompose(mtx, scale, rotation, translation, skew, perspective);
 
-        glm::vec3 v = this->managerObjects.VertexEditorMode;
-        this->managerObjects.VertexEditorMode.x += translation.x;
-        this->managerObjects.VertexEditorMode.y += -1.0f * translation.y;
-        this->managerObjects.VertexEditorMode.z += translation.z;
-        if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Vertex)
-            mfd->meshModel.vertices[static_cast<size_t>(this->managerObjects.VertexEditorModeID)] = this->managerObjects.VertexEditorMode;
-        else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Line) {
+        glm::vec3 v = this->managerObjects->VertexEditorMode;
+        this->managerObjects->VertexEditorMode.x += translation.x;
+        this->managerObjects->VertexEditorMode.y += -1.0f * translation.y;
+        this->managerObjects->VertexEditorMode.z += translation.z;
+        if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Vertex)
+            mfd->meshModel.vertices[static_cast<size_t>(this->managerObjects->VertexEditorModeID)] = this->managerObjects->VertexEditorMode;
+        else if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Line) {
         }
-        else if (this->managerObjects.Setting_GeometryEditMode == GeometryEditMode_Face) {
+        else if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Face) {
             for (size_t i=0; i<mfd->meshModel.vertices.size(); i++) {
                 if (mfd->meshModel.vertices[i] == v)
                     mfd->meshModel.vertices[i] = v;

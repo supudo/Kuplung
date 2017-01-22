@@ -18,6 +18,7 @@ class RenderingForward {
 public:
     explicit RenderingForward(ObjectsManager& mo);
     ~RenderingForward();
+    RenderingForward(const RenderingForward& rf);
 
     bool init();
     void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
@@ -26,7 +27,7 @@ private:
     bool initShaderProgram();
     void renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
-    ObjectsManager &managerObjects;
+    ObjectsManager* managerObjects;
 
     glm::mat4 matrixProjection, matrixCamera;
     glm::vec3 vecCameraPosition, uiAmbientLight;
