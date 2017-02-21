@@ -205,8 +205,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                 ImGui::Text("Planes"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Far & Close");
 //                this->helperUI->addControlsFloatSliderSameLine("W", 291, 0.0f, 5.0f, &this->managerObjects.Setting_RatioWidth);
-                ImGui::SliderFloat("Far##107", &this->managerObjects.Setting_PlaneFar, 0.0f, 1.0f);
-                ImGui::SliderFloat("Close##108", &this->managerObjects.Setting_PlaneClose, 0.0f, 1000.0f);
+                ImGui::SliderFloat("Close##108", &this->managerObjects.Setting_PlaneClose, 0.0f, 1.0f);
+                ImGui::SliderFloat("Far##107", &this->managerObjects.Setting_PlaneFar, 0.0f, 1000.0f);
                 ImGui::Separator();
 
                 ImGui::Text("Gamma"); if (ImGui::IsItemHovered()) ImGui::SetTooltip("Gamma Correction");
