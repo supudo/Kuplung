@@ -347,8 +347,8 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         mfd->setOptionsSelected(int(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
-        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
+        glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
         glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         glm::mat4 matrixModelView = this->matrixCamera * matrixModel;
@@ -357,8 +357,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         glm::mat3 matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixCamera * matrixModel));
         glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
 
-        glm::mat4 matrixWorld = matrixModel;
-        glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
+        glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
         // blending
         if (mfd->meshModel.ModelMaterial.Transparency < 1.0f || mfd->Setting_Alpha < 1.0f) {
@@ -669,12 +668,11 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
             matrixModelView = this->matrixCamera * matrixModel;
             matrixNormal = glm::inverseTranspose(glm::mat3(this->matrixCamera * matrixModel));
-            matrixWorld = matrixModel;
             glUniformMatrix4fv(this->glVS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
             glUniformMatrix4fv(this->glFS_MMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
             glUniformMatrix4fv(this->glFS_MVMatrix, 1, GL_FALSE, glm::value_ptr(matrixModelView));
             glUniformMatrix3fv(this->glVS_NormalMatrix, 1, GL_FALSE, glm::value_ptr(matrixNormal));
-            glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixWorld));
+            glUniformMatrix4fv(this->glVS_WorldMatrix, 1, GL_FALSE, glm::value_ptr(matrixModel));
 
             glUniform1i(this->gl_ModelViewSkin, ViewModelSkin_Solid);
             //TODO: put in settings

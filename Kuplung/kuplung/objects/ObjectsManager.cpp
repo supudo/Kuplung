@@ -43,6 +43,12 @@ void ObjectsManager::init(std::function<void(float)> doProgress, std::function<v
     //this->viewModelSkin = ViewModelSkin_Texture;
 
     this->resetSettings();
+//    glm::mat4 m_m = mvpMatrix;
+//    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[0].x, m_m[0].y, m_m[0].z, m_m[0].w);
+//    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[1].x, m_m[1].y, m_m[1].z, m_m[1].w);
+//    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[2].x, m_m[2].y, m_m[2].z, m_m[2].w);
+//    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[3].x, m_m[3].y, m_m[3].z, m_m[3].w);
+//    printf("===============\n");
 }
 
 void ObjectsManager::render() {

@@ -151,6 +151,7 @@ void MiniAxis::render(const glm::mat4& matrixProjection, const glm::mat4& matrix
         glLineWidth(5.5f);
 
         glm::mat4 mvpMatrix = matrixProjection * matrixCamera * this->matrixModel;
+
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
 
         // draw
