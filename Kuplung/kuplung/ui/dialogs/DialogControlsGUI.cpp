@@ -241,7 +241,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     ImGui::Checkbox("Animate", &Settings::Instance()->mRayAnimate);
                     if (Settings::Instance()->mRayAnimate) {
                         ImGui::Text("Direction");
-                        ImGui::SliderFloat("X##9930", &Settings::Instance()->mRayDirectionX, -1.0f, 1.0f);
+                        ImGui::SliderFloat("X##9930", &Settings::Instance()->mRayDirectionX, -1.0f, 1.0);
                         ImGui::SliderFloat("Y##9931", &Settings::Instance()->mRayDirectionY, -1.0f, 1.0f);
                         ImGui::SliderFloat("Z##9932", &Settings::Instance()->mRayDirectionZ, -1.0f, 1.0f);
                     }
@@ -849,10 +849,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             glm::vec3 newRotation = glm::vec3(this->lightRotateX, this->lightRotateY, this->lightRotateZ);
             glm::vec3 newPosition = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->getNewPositionAfterRotation(newRotation);
 
-            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->turnOff_Position = true;
-            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionX->point = newPosition.x;
-            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionY->point = newPosition.y;
-            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionZ->point = newPosition.z;
+//            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->turnOff_Position = true;
+//            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionX->point = newPosition.x;
+//            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionY->point = newPosition.y;
+//            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionZ->point = newPosition.z;
         }
     }
 }

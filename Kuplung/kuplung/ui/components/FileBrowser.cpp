@@ -70,7 +70,7 @@ void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType Te
     ImGui::Separator();
     ImGui::Text("ID");
     ImGui::NextColumn();
-    ImGui:: Text("File");
+    ImGui::Text("File");
     ImGui::NextColumn();
     ImGui::Text("Size");
     ImGui::NextColumn();

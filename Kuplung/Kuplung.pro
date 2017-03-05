@@ -134,8 +134,8 @@ mac {
     LIBS += -L/usr/local/Cellar/protobuf/3.2.0/lib -lprotobuf
     INCLUDEPATH += /usr/local/Cellar/protobuf/3.2.0/include
 
-    LIBS += -L/usr/local/Cellar/minizip/1.2.10/lib -lz -lMinizip
-    INCLUDEPATH += /usr/local/Cellar/minizip/1.2.10/include
+    LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
+    INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
 
 #    LIBS += -L/usr/local/Cellar/unittest-cpp/1.6.1/lib -lUnitTest++
 #    INCLUDEPATH += /usr/local/Cellar/unittest-cpp/1.6.1/include
