@@ -137,6 +137,9 @@ mac {
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
 
+    LIBS += -L/usr/local/Cellar/lua@5.3/5.3.4/lib -lz -llua.5.3 -lm
+    INCLUDEPATH += /usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3
+
 #    LIBS += -L/usr/local/Cellar/unittest-cpp/1.6.1/lib -lUnitTest++
 #    INCLUDEPATH += /usr/local/Cellar/unittest-cpp/1.6.1/include
 
