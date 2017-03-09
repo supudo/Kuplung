@@ -73,7 +73,22 @@ uniform float iSampleRate;\n";
     else if (this->iChannel0_CubeImage != "")
         shaderFragment += "uniform samplerCube iChannel0;\n";
 
-            shaderFragment += "\
+    if (this->iChannel1_Image != "")
+        shaderFragment += "uniform sampler2D iChannel1;\n";
+    else if (this->iChannel1_CubeImage != "")
+        shaderFragment += "uniform samplerCube iChannel1;\n";
+
+    if (this->iChannel2_Image != "")
+        shaderFragment += "uniform sampler2D iChannel2;\n";
+    else if (this->iChannel2_CubeImage != "")
+        shaderFragment += "uniform samplerCube iChannel2;\n";
+
+    if (this->iChannel3_Image != "")
+        shaderFragment += "uniform sampler2D iChannel3;\n";
+    else if (this->iChannel3_CubeImage != "")
+        shaderFragment += "uniform samplerCube iChannel3;\n";
+
+    shaderFragment += "\
 \n\
 #define texture2D texture\n\
 #define textureCube texture\n\
@@ -291,7 +306,6 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
         glUniform3f(this->iResolution, this->textureWidth, this->textureHeight, 0);
         glUniform1f(this->iGlobalTime, seconds);
         glUniform4f(this->iMouse, float(mouseX), float(mouseY), 0.0f, 0.0f);
-
         glUniform1f(this->iChannelTime[0], seconds);
         glUniform1f(this->iChannelTime[1], seconds);
         glUniform1f(this->iChannelTime[2], seconds);

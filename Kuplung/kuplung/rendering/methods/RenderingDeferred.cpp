@@ -324,6 +324,11 @@ bool RenderingDeferred::initLights() {
 }
 
 void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
+    if (this->managerObjects.Setting_DeferredRandomizeLightPositions) {
+        this->init();
+        this->managerObjects.Setting_DeferredRandomizeLightPositions = false;
+    }
+
     this->renderGBuffer(meshModelFaces, selectedModel);
     this->renderLightingPass();
     if (this->managerObjects.Setting_DeferredTestLights)

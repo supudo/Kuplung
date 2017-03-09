@@ -359,6 +359,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                     ImGui::Checkbox("Test Mode", &this->managerObjects.Setting_DeferredTestMode);
                     ImGui::Checkbox("Test Lights", &this->managerObjects.Setting_DeferredTestLights);
+                    if (ImGui::Button("Randomize Light Positions", ImVec2(-1, 0)))
+                        this->managerObjects.Setting_DeferredRandomizeLightPositions = true;
                     ImGui::Separator();
 
                     ImGui::Text("Number of Test Lights");
