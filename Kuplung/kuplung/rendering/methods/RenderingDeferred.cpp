@@ -180,7 +180,9 @@ bool RenderingDeferred::initProps() {
     }
 
     // - Colors
-    srand(13);
+    srand(time(0));
+    this->lightPositions.clear();
+    this->lightColors.clear();
     for (GLuint i = 0; i < this->NR_LIGHTS; i++) {
         // Calculate slightly random offsets
         GLfloat xPos = ((rand() % 100) / 100.0f) * 6.0f - 3.0f;
