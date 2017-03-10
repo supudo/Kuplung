@@ -161,6 +161,7 @@ bool RenderingDeferred::initProps() {
     glUniform1i(glGetUniformLocation(this->shaderProgram_LightingPass, "sampler_albedospec"), 2);
 
     //TODO: parametrize this in the GUI
+    this->objectPositions.clear();
     if (this->managerObjects.Setting_DeferredTestMode) {
         this->objectPositions.push_back(glm::vec3(0.0, -3.0, 0.0));
         this->objectPositions.push_back(glm::vec3(-3.0, -3.0, -3.0));
