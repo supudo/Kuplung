@@ -35,6 +35,9 @@ void ShaderEditor::init(std::string const& appPath, int positionX, int positionY
     this->height = height;
     this->shaderFileIndex = 0;
     this->currentFileName = "";
+
+    lua_State *L = luaL_newstate();
+    luaL_openlibs(L);
 }
 
 void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {

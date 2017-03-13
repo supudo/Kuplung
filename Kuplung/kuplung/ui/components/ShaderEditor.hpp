@@ -12,9 +12,11 @@
 #include <functional>
 #include <map>
 #include <string>
+extern "C" {
 #include <lua.h>
 #include <lualib.h>
 #include <lauxlib.h>
+}
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/settings/Settings.h"
 
