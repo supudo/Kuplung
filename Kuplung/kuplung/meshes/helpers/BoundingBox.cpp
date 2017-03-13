@@ -150,22 +150,15 @@ void BoundingBox::render(const glm::mat4& matrixMVP, const glm::vec4& outlineCol
 
         glm::mat4 mtxModel = matrixMVP * this->matrixTransform;
         glUniformMatrix4fv(this->glUniformMVPMatrix, 1, GL_FALSE, glm::value_ptr(mtxModel));
-
         glUniform3f(this->glUniformColor, outlineColor.r, outlineColor.g, outlineColor.b);
 
         glBindVertexArray(this->glVAO);
-
         size_t firstIndex = 0;
         size_t indexDataSize = sizeof(GLuint);
         glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(firstIndex * indexDataSize));
         glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(4 * indexDataSize));
         glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(8 * indexDataSize));
-//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, 0);
-//        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, (GLvoid*)(4 * sizeof(GLuint)));
-//        glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, (GLvoid*)(8 * sizeof(GLuint)));
-
         glBindVertexArray(0);
-
         glUseProgram(0);
     }
 }

@@ -258,7 +258,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 ImGui::Unindent();
             }
 
-            if (ImGui::CollapsingHeader("BoundingBox")) {
+            if (ImGui::CollapsingHeader("Bounding Box")) {
                 ImGui::Indent();
                 if (ImGui::Checkbox("Bounding Box", &Settings::Instance()->ShowBoundingBox))
                     Settings::Instance()->saveSettings();
