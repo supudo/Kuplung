@@ -39,22 +39,12 @@ void LuaManager::execute(const std::string& fileName) {
 extern "C"
 #endif
 int LuaManager::testFromLua(lua_State* state) {
-    // The number of function arguments will be on top of the stack.
     int args = lua_gettop(state);
-
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] This was called from Lua with %d arguments!", args));
-
     for (int n=1; n <= args; ++n) {
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager]  Argument %d: '%s'", n, lua_tostring(state, n)));
     }
-
-    // Push the return value on top of the stack. NOTE: We haven't popped the
-    // input arguments to our function. To be honest, I haven't checked if we
-    // must, but at least in stack machines like the JVM, the stack will be
-    // cleaned between each function call.
     lua_pushnumber(state, 123);
-
-    // Let Lua know how many return values we've passed
     return 1;
 }
 
