@@ -273,6 +273,8 @@ SET(SOURCE_FILES
     kuplung/utilities/libnoise/noiseutils.h
     kuplung/utilities/maths/Maths.cpp
     kuplung/utilities/maths/Maths.hpp
+    kuplung/utilities/lua/LuaManager.cpp
+    kuplung/utilities/lua/LuaManager.hpp
     kuplung/utilities/minizip/KuplungMinizip.cpp
     kuplung/utilities/minizip/KuplungMinizip.hpp
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp

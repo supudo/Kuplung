@@ -36,19 +36,10 @@ void ShaderEditor::init(std::string const& appPath, int positionX, int positionY
     this->shaderFileIndex = 0;
     this->currentFileName = "";
 
-    lua_State *luaState = luaL_newstate();
-    luaL_openlibs(luaState);
+    this->managerLua = std::make_unique<KuplungApp::Utilities::Lua::LuaManager>();
+    this->managerLua->initLua();
     std::string luaFile = Settings::Instance()->appFolder() + "/lua/test.lua";
-    printf("Lua file: %s\n", luaFile.c_str());
-    luaL_dofile(luaState, luaFile.c_str());
-
-    const char* message = lua_tostring(luaState, -1);
-    puts(message);
-    printf("Lua Error: %s\n", message);
-    lua_pop(luaState, 1);
-
-    printf("\n");
-    lua_close(luaState);
+    this->managerLua->evalLuaFile(luaFile);
 }
 
 void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {

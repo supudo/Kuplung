@@ -12,17 +12,9 @@
 #include <functional>
 #include <map>
 #include <string>
-
-#ifdef __cplusplus
-#include <lua.hpp>
-#else
-#include <lua.h>
-#include <lualib.h>
-#include <lauxlib.h>
-#endif
-
 #include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/settings/Settings.h"
+#include "kuplung/utilities/lua/LuaManager.hpp"
 
 class ShaderEditor {
 public:
@@ -36,6 +28,8 @@ private:
     std::string appPath, fileContents, currentFileName;
     int positionX, positionY, width, height, shaderFileIndex;
     char guiEditorText[1024 * 16];
+
+    std::unique_ptr<KuplungApp::Utilities::Lua::LuaManager> managerLua;
 };
 
 #endif /* ShaderEditor_hpp */

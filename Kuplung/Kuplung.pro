@@ -279,7 +279,8 @@ SOURCES += main.cpp \
     kuplung/utilities/saveopen/KuplungAppSettings.pb.cc \
     kuplung/utilities/saveopen/KuplungAppScene.pb.cc \
     kuplung/utilities/consumption/Consumption.cpp \
-    kuplung/utilities/measurement/Timings.cpp
+    kuplung/utilities/measurement/Timings.cpp \
+    kuplung/utilities/lua/LuaManager.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -394,7 +395,8 @@ HEADERS += \
     kuplung/utilities/saveopen/KuplungAppSettings.pb.h \
     kuplung/utilities/saveopen/KuplungAppScene.pb.h \
     kuplung/utilities/consumption/Consumption.hpp \
-    kuplung/utilities/measurement/Timings.hpp
+    kuplung/utilities/measurement/Timings.hpp \
+    kuplung/utilities/lua/LuaManager.hpp
 
 DISTFILES += \
 # Lua
