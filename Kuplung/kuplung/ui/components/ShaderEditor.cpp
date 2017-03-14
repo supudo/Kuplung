@@ -39,7 +39,7 @@ void ShaderEditor::init(std::string const& appPath, int positionX, int positionY
     this->managerLua = std::make_unique<KuplungApp::Utilities::Lua::LuaManager>();
     this->managerLua->initLua();
     std::string luaFile = Settings::Instance()->appFolder() + "/lua/test.lua";
-    this->managerLua->evalLuaFile(luaFile);
+    this->managerLua->execute(luaFile);
 }
 
 void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {

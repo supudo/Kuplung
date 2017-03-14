@@ -15,10 +15,47 @@ void LuaManager::initLua() {
     luaL_openlibs(this->luaState);
 }
 
-void LuaManager::evalLuaFile(const std::string& fileName) {
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Evaluating file: %s\n", fileName.c_str()));
-    luaL_dofile(this->luaState, fileName.c_str());
-    this->checkLuaErrors();
+void LuaManager::execute(const std::string& fileName) {
+    int lua_result;
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Evaluating file: %s", fileName.c_str()));
+    lua_register(
+                this->luaState,
+                "testFromLua",
+                KuplungApp::Utilities::Lua::LuaManager::testFromLua
+                );
+    lua_result = luaL_loadfile(this->luaState, fileName.c_str());
+    if (lua_result != LUA_OK) {
+        this->checkLuaErrors();
+        return;
+    }
+    lua_result = lua_pcall(this->luaState, 0, LUA_MULTRET, 0);
+    if (lua_result != LUA_OK) {
+        this->checkLuaErrors();
+        return;
+    }
+}
+
+#ifdef __cplusplus
+extern "C"
+#endif
+int LuaManager::testFromLua(lua_State* state) {
+    // The number of function arguments will be on top of the stack.
+    int args = lua_gettop(state);
+
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] This was called from Lua with %d arguments!", args));
+
+    for (int n=1; n <= args; ++n) {
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager]  Argument %d: '%s'", n, lua_tostring(state, n)));
+    }
+
+    // Push the return value on top of the stack. NOTE: We haven't popped the
+    // input arguments to our function. To be honest, I haven't checked if we
+    // must, but at least in stack machines like the JVM, the stack will be
+    // cleaned between each function call.
+    lua_pushnumber(state, 123);
+
+    // Let Lua know how many return values we've passed
+    return 1;
 }
 
 void LuaManager::checkLuaErrors() {

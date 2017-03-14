@@ -27,7 +27,8 @@ public:
     void closeLua();
     void checkLuaErrors();
 
-    void evalLuaFile(const std::string& fileName);
+    void execute(const std::string& fileName);
+    static int testFromLua(lua_State *state);
 
 private:
     lua_State *luaState;
