@@ -111,6 +111,7 @@ mac {
     MediaFiles.files += resources/shapes
     MediaFiles.files += resources/skybox
     MediaFiles.files += resources/axis_helpers
+    MediaFiles.files += resources/lua
     MediaFiles.path = Contents/Resources
     QMAKE_BUNDLE_DATA += MediaFiles
 
@@ -182,6 +183,7 @@ OTHER_FILES += resources/shapes/*
 OTHER_FILES += resources/skybox/*
 OTHER_FILES += resources/shadertoy/*
 OTHER_FILES += resources/axis_helpers/*
+OTHER_FILES += resources/lua/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
@@ -395,6 +397,8 @@ HEADERS += \
     kuplung/utilities/measurement/Timings.hpp
 
 DISTFILES += \
+# Lua
+    resources/lua/test.lua \
 # Fonts
     resources/fonts/fontawesome-webfont.ttf \
     resources/fonts/material-icons-regular.ttf \

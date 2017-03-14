@@ -34,6 +34,7 @@
 		8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */; };
+		8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3928ED1E77E79F005BF8C5 /* test.lua */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
@@ -336,6 +337,16 @@
 				8A18660E1E0AF125006A28D7 /* blender_icons.svg in CopyFiles */,
 				8A18660F1E0AF125006A28D7 /* blender_icons16.png in CopyFiles */,
 				8A1866101E0AF125006A28D7 /* DejaVuSans.ttf in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A3928EE1E77E7BD005BF8C5 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = lua;
+			dstSubfolderSpec = 7;
+			files = (
+				8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +710,7 @@
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
 		8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OuiNanoVG_Implementation.cpp; path = gui_oui/OuiNanoVG_Implementation.cpp; sourceTree = "<group>"; };
 		8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OuiNanoVG_Implementation.hpp; path = gui_oui/OuiNanoVG_Implementation.hpp; sourceTree = "<group>"; };
+		8A3928ED1E77E79F005BF8C5 /* test.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.lua; path = lua/test.lua; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
@@ -1189,6 +1201,14 @@
 			name = importers;
 			sourceTree = "<group>";
 		};
+		8A3928EC1E77E791005BF8C5 /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				8A3928ED1E77E79F005BF8C5 /* test.lua */,
+			);
+			name = lua;
+			sourceTree = "<group>";
+		};
 		8A3A29F81D2D0E3C00F26AE4 /* rendering */ = {
 			isa = PBXGroup;
 			children = (
@@ -1671,6 +1691,7 @@
 				8AFD82141D410BFA00D088C7 /* Kuplung_RecentFilesImported.ini */,
 				8A04DBD21C63BB2A0023CA07 /* Kuplung_Settings.ini */,
 				8AB6F0AE1C3AA24A00665C40 /* Kuplung.icns */,
+				8A3928EC1E77E791005BF8C5 /* lua */,
 				8A1866091E0AF0F7006A28D7 /* oui */,
 				8A10919D1D47663300658E39 /* protobuf */,
 				8AB6F09F1C3AA1F900665C40 /* shaders */,
@@ -1982,6 +2003,7 @@
 				8AB255F91DA4F34300ABF2AC /* CopyFiles */,
 				8AB2563B1DA4F38700ABF2AC /* CopyFiles */,
 				8A18660D1E0AF108006A28D7 /* CopyFiles */,
+				8A3928EE1E77E7BD005BF8C5 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2230,7 +2252,8 @@
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 					/usr/local/Cellar/protobuf/3.2.0/include,
-					/usr/local/Cellar/minizip/1.2.10/include,
+					/usr/local/Cellar/minizip/1.2.11/include,
+					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2242,7 +2265,8 @@
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 					/usr/local/Cellar/protobuf/3.2.0/lib,
-					/usr/local/Cellar/minizip/1.2.10/lib,
+					/usr/local/Cellar/minizip/1.2.11/lib,
+					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2257,8 +2281,10 @@
 					"-isystem",
 					"-lAssimp",
 					"-lprotobuf",
+					"-lm",
 					"-lz",
 					"-lMinizip",
+					"-llua.5.3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;
@@ -2284,7 +2310,8 @@
 					/usr/local/Cellar/assimp/3.3.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
 					/usr/local/Cellar/protobuf/3.2.0/include,
-					/usr/local/Cellar/minizip/1.2.10/include,
+					/usr/local/Cellar/minizip/1.2.11/include,
+					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2296,7 +2323,8 @@
 					/usr/local/Cellar/assimp/3.3.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
 					/usr/local/Cellar/protobuf/3.2.0/lib,
-					/usr/local/Cellar/minizip/1.2.10/lib,
+					/usr/local/Cellar/minizip/1.2.11/lib,
+					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2311,8 +2339,10 @@
 					"-isystem",
 					"-lAssimp",
 					"-lprotobuf",
+					"-lm",
 					"-lz",
 					"-lMinizip",
+					"-llua.5.3",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;

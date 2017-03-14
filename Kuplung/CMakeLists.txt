@@ -553,6 +553,9 @@ SET(Kuplung_OuiNanovVG
     resources/oui/blender_icons16.png
     resources/oui/DejaVuSans.ttf)
 
+SET(Kuplung_Lua
+    resources/lua/test.lua)
+
 IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AND Protobuf_FOUND AND MINIZIP_FOUND)
     IF(APPLE)
         INCLUDE(CMakeToolsHelpers OPTIONAL)
@@ -569,6 +572,11 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         FILE(COPY ${Kuplung_Ico_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
         FILE(GLOB Kuplung_Noise16_Files "resources/noise16.png")
         FILE(COPY ${Kuplung_Noise16_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
+
+        # Lua
+        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/lua/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
+        FILE(GLOB Kuplung_Lua_Files "resources/lua/*.*")
+        FILE(COPY ${Kuplung_Lua_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
 
         # Shapes
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shapes/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
