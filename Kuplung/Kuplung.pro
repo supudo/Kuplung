@@ -239,6 +239,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/materialeditor/MENode_Color.cpp \
     kuplung/ui/components/materialeditor/MENode_Combine.cpp \
     kuplung/ui/components/materialeditor/MENode_Texture.cpp \
+    kuplung/ui/components/ide/KuplungIDE.cpp \
     kuplung/ui/dialogs/DialogStyle.cpp \
     kuplung/ui/dialogs/DialogOptions.cpp \
     kuplung/ui/dialogs/DialogControlsGUI.cpp \
@@ -340,6 +341,7 @@ HEADERS += \
     kuplung/ui/components/materialeditor/MENode_Color.hpp \
     kuplung/ui/components/materialeditor/MENode_Combine.hpp \
     kuplung/ui/components/materialeditor/MENode_Texture.hpp \
+    kuplung/ui/components/ide/KuplungIDE.hpp \
     kuplung/ui/dialogs/DialogStyle.hpp \
     kuplung/ui/dialogs/DialogOptions.hpp \
     kuplung/ui/dialogs/DialogControlsGUI.hpp \
