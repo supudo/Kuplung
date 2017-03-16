@@ -45,6 +45,7 @@ GUI_ImGui::GUI_ImGui(ObjectsManager &managerObjects) : managerObjects(managerObj
     this->showShadertoy = false;
     this->showShadertoyMessage = false;
     this->showImageViewer = false;
+    this->showKuplungIDE = false;
 }
 
 GUI_ImGui::~GUI_ImGui() {
@@ -65,6 +66,7 @@ GUI_ImGui::~GUI_ImGui() {
     this->componentRendererUI.reset();
     this->componentImportOBJ.reset();
     this->componentExportOBJ.reset();
+    this->componentKuplungIDE.reset();
 }
 
 void GUI_ImGui::init(SDL_Window *window,
@@ -127,6 +129,7 @@ void GUI_ImGui::init(SDL_Window *window,
     this->showShadertoyMessage = false;
     this->showImageViewer = false;
     this->showRendererUI = false;
+    this->showKuplungIDE = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -182,6 +185,9 @@ void GUI_ImGui::init(SDL_Window *window,
 
     this->componentRendererUI = std::make_unique<RendererUI>();
     this->componentRendererUI->init(this->sdlWindow);
+
+    this->componentKuplungIDE = std::make_unique<KuplungIDE>();
+    this->componentKuplungIDE->init();
 }
 
 void GUI_ImGui::doLog(std::string const& message) {
@@ -317,7 +323,8 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::Separator();
             if (ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
                 Settings::Instance()->saveSettings();
-            ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
+//            ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
+            ImGui::MenuItem(ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
             ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
             ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
@@ -376,6 +383,9 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showShaderEditor)
         this->dialogShaderEditor();
+
+    if (this->showKuplungIDE)
+        this->dialogKuplungIDE();
 
     if (Settings::Instance()->logDebugInfo)
         this->dialogLog();
@@ -617,6 +627,10 @@ void GUI_ImGui::dialogScreenshot() {
 
 void GUI_ImGui::dialogShaderEditor() {
     this->componentFileEditor->draw(std::bind(&GUI_ImGui::fileShaderEditorSaved, this, std::placeholders::_1), "Editor", &this->showShaderEditor);
+}
+
+void GUI_ImGui::dialogKuplungIDE() {
+    this->componentKuplungIDE->draw("IDE", &this->showKuplungIDE);
 }
 
 void GUI_ImGui::dialogLog() {

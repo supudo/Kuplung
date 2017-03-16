@@ -25,6 +25,7 @@
 #include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/RendererUI.hpp"
 #include "kuplung/ui/components/ShaderEditor.hpp"
+#include "kuplung/ui/components/ide/KuplungIDE.hpp"
 
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
@@ -129,6 +130,7 @@ private:
     void dialogShadertoyMessageWindow();
     void popupRecentFileDoesntExists();
     void popupRecentFileImportedDoesntExists();
+    void dialogKuplungIDE();
 
     ObjectsManager &managerObjects;
     std::unique_ptr<SDL2OpenGL32> imguiImplementation;
@@ -146,6 +148,7 @@ private:
     std::unique_ptr<DialogShadertoy> componentShadertoy;
     std::unique_ptr<KuplungApp::Utilities::Consumption::Consumption> componentConsumption;
     std::unique_ptr<ImageViewer> componentImageViewer;
+    std::unique_ptr<KuplungIDE> componentKuplungIDE;
 
     bool needsFontChange;
 
@@ -170,6 +173,7 @@ private:
     bool showShadertoy;
     bool showShadertoyMessage;
     bool showImageViewer;
+    bool showKuplungIDE;
 
 };
 
