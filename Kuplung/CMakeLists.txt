@@ -195,6 +195,8 @@ SET(SOURCE_FILES
     kuplung/ui/components/uveditor/UVEditor.hpp
     kuplung/ui/components/uveditor/UVPoint.cpp
     kuplung/ui/components/uveditor/UVPoint.hpp
+    kuplung/ui/components/ide/KuplungIDE.cpp
+    kuplung/ui/components/ide/KuplungIDE.hpp
     kuplung/ui/components/ColorPicker.cpp
     kuplung/ui/components/ColorPicker.hpp
     kuplung/ui/components/FileBrowser.cpp
