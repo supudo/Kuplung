@@ -231,7 +231,6 @@ SOURCES += main.cpp \
     kuplung/utilities/cuda/CudaHelpers.cpp \
     kuplung/cuda/examples/VectorAddition.cpp \
     kuplung/cuda/examples/oceanFFT.cpp \
-#    kuplung/cuda/examples/oceanFFT0.cpp \
     kuplung/rendering/RenderingManager.cpp \
     kuplung/rendering/methods/RenderingSimple.cpp \
     kuplung/rendering/methods/RenderingForward.cpp \
@@ -334,7 +333,6 @@ HEADERS += \
     kuplung/utilities/cuda/CudaHelpers.hpp \
     kuplung/cuda/examples/VectorAddition.hpp \
     kuplung/cuda/examples/oceanFFT.hpp \
-#    kuplung/cuda/examples/oceanFFT0.hpp \
     kuplung/rendering/RenderingManager.hpp \
     kuplung/rendering/methods/RenderingSimple.hpp \
     kuplung/rendering/methods/RenderingForward.hpp \

@@ -14,10 +14,6 @@
 		8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A1091991D47662400658E39 /* KuplungDefinitions.pb.cc */; };
 		8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10919E1D47663D00658E39 /* KuplungAppSettings.proto */; };
 		8A1091A21D47665700658E39 /* KuplungDefinitions.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10919F1D47663D00658E39 /* KuplungDefinitions.proto */; };
-		8A10ADC11E81605000687EAD /* ref_slopeShading.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBC1E81603800687EAD /* ref_slopeShading.bin */; };
-		8A10ADC21E81605000687EAD /* ref_spatialDomain.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBD1E81603800687EAD /* ref_spatialDomain.bin */; };
-		8A10ADC31E81605000687EAD /* slopeShading.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBE1E81603800687EAD /* slopeShading.bin */; };
-		8A10ADC41E81605000687EAD /* spatialDomain.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBF1E81603800687EAD /* spatialDomain.bin */; };
 		8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A14D8C41D367BFC00674470 /* SaveOpen.cpp */; };
 		8A15A9D21DC236E9003B65B8 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9CC1DC236E9003B65B8 /* RenderingDeferred.cpp */; };
 		8A15A9D31DC236E9003B65B8 /* RenderingForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9CE1DC236E9003B65B8 /* RenderingForward.cpp */; };
@@ -39,7 +35,6 @@
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */; };
 		8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3928ED1E77E79F005BF8C5 /* test.lua */; };
-		8A3A023C1E814314006D96A7 /* oceanFFT0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A403FFA1E800CF600733754 /* KuplungIDE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A403FF81E800CF600733754 /* KuplungIDE.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
@@ -155,6 +150,7 @@
 		8A7B9AB21E800F0400ADD386 /* CUDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB11E800F0400ADD386 /* CUDA.framework */; };
 		8A7B9AC11E80190400ADD386 /* cuda_oceanFFT_kernel_cuda.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB71E8016CB00ADD386 /* cuda_oceanFFT_kernel_cuda.o */; };
 		8A7B9AC21E80190400ADD386 /* cuda_vectorAddition_cuda.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB81E8016CB00ADD386 /* cuda_vectorAddition_cuda.o */; };
+		8A7BBA081E8195830032DA7E /* CudaHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7BBA061E8195830032DA7E /* CudaHelpers.cpp */; };
 		8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */; };
 		8A81DDC01D1A82B5004F3270 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAD1D1A82B5004F3270 /* BoundingBox.cpp */; };
 		8A81DDC11D1A82B5004F3270 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAF1D1A82B5004F3270 /* Camera.cpp */; };
@@ -340,19 +336,6 @@
 				8A43BA6F1D4776A50034CD46 /* KuplungAppScene.proto in CopyFiles */,
 				8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */,
 				8A1091A21D47665700658E39 /* KuplungDefinitions.proto in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		8A10ADC01E81604100687EAD /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = cuda_data;
-			dstSubfolderSpec = 7;
-			files = (
-				8A10ADC11E81605000687EAD /* ref_slopeShading.bin in CopyFiles */,
-				8A10ADC21E81605000687EAD /* ref_spatialDomain.bin in CopyFiles */,
-				8A10ADC31E81605000687EAD /* slopeShading.bin in CopyFiles */,
-				8A10ADC41E81605000687EAD /* spatialDomain.bin in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -754,8 +737,6 @@
 		8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OuiNanoVG_Implementation.cpp; path = gui_oui/OuiNanoVG_Implementation.cpp; sourceTree = "<group>"; };
 		8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OuiNanoVG_Implementation.hpp; path = gui_oui/OuiNanoVG_Implementation.hpp; sourceTree = "<group>"; };
 		8A3928ED1E77E79F005BF8C5 /* test.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.lua; path = lua/test.lua; sourceTree = "<group>"; };
-		8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = oceanFFT0.cpp; path = cuda/examples/oceanFFT0.cpp; sourceTree = "<group>"; };
-		8A3A023B1E814314006D96A7 /* oceanFFT0.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = oceanFFT0.hpp; path = cuda/examples/oceanFFT0.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A403FEE1E7FED5300733754 /* cuda_oceanFFT_kernel.cu */ = {isa = PBXFileReference; lastKnownFileType = text; name = cuda_oceanFFT_kernel.cu; path = cuda/cu/cuda_oceanFFT_kernel.cu; sourceTree = "<group>"; };
@@ -871,6 +852,8 @@
 		8A7B9AB81E8016CB00ADD386 /* cuda_vectorAddition_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_vectorAddition_cuda.o; path = external/cuda_build/cuda_vectorAddition_cuda.o; sourceTree = "<group>"; };
 		8A7B9AC31E8019B900ADD386 /* libcudart.8.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.8.0.dylib; path = "../../../../../../Developer/NVIDIA/CUDA-8.0/lib/libcudart.8.0.dylib"; sourceTree = "<group>"; };
 		8A7B9AC41E8019B900ADD386 /* libcufft.8.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcufft.8.0.dylib; path = "../../../../../../Developer/NVIDIA/CUDA-8.0/lib/libcufft.8.0.dylib"; sourceTree = "<group>"; };
+		8A7BBA061E8195830032DA7E /* CudaHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CudaHelpers.cpp; path = cuda/CudaHelpers.cpp; sourceTree = "<group>"; };
+		8A7BBA071E8195830032DA7E /* CudaHelpers.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CudaHelpers.hpp; path = cuda/CudaHelpers.hpp; sourceTree = "<group>"; };
 		8A7F386B1C7F28E8004D4520 /* reflection.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.frag; sourceTree = "<group>"; };
 		8A7F386C1C7F28E8004D4520 /* reflection.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.vert; sourceTree = "<group>"; };
 		8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AxisHelpers.cpp; path = helpers/AxisHelpers.cpp; sourceTree = "<group>"; };
@@ -1445,6 +1428,7 @@
 			isa = PBXGroup;
 			children = (
 				8AFC9CE01DAE44EC00161D50 /* consumption */,
+				8A7BBA051E8195730032DA7E /* cuda */,
 				8A2B48771CC4F6DC0077E9D4 /* export */,
 				8A6E70811C6CACB40085CAE5 /* font-parser */,
 				8A6E70841C6CACB40085CAE5 /* gl */,
@@ -1541,6 +1525,15 @@
 				8A6E70A41C6CACB40085CAE5 /* stb_truetype.h */,
 			);
 			path = stb;
+			sourceTree = "<group>";
+		};
+		8A7BBA051E8195730032DA7E /* cuda */ = {
+			isa = PBXGroup;
+			children = (
+				8A7BBA061E8195830032DA7E /* CudaHelpers.cpp */,
+				8A7BBA071E8195830032DA7E /* CudaHelpers.hpp */,
+			);
+			name = cuda;
 			sourceTree = "<group>";
 		};
 		8A81DDA91D1A82A7004F3270 /* helpers */ = {
@@ -1655,8 +1648,6 @@
 			children = (
 				8A8E14251E7FE81000273DCC /* oceanFFT.cpp */,
 				8A8E14261E7FE81000273DCC /* oceanFFT.hpp */,
-				8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */,
-				8A3A023B1E814314006D96A7 /* oceanFFT0.hpp */,
 				8A8E14271E7FE81000273DCC /* VectorAddition.cpp */,
 				8A8E14281E7FE81000273DCC /* VectorAddition.hpp */,
 			);
@@ -2164,7 +2155,6 @@
 				8A18660D1E0AF108006A28D7 /* CopyFiles */,
 				8A3928EE1E77E7BD005BF8C5 /* CopyFiles */,
 				8A8E14081E7FDEC100273DCC /* CopyFiles */,
-				8A10ADC01E81604100687EAD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2245,7 +2235,6 @@
 				8A1866171E0AF152006A28D7 /* nanovg.c in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8AA78CD41D4B6A3C00F6ABB6 /* KuplungMinizip.cpp in Sources */,
-				8A3A023C1E814314006D96A7 /* oceanFFT0.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
@@ -2295,6 +2284,7 @@
 				8AC2913F1CD2455000A631C1 /* AssimpParser.cpp in Sources */,
 				8A1084EB1DE8672A007426F2 /* RenderingForwardShadowMapping.cpp in Sources */,
 				8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */,
+				8A7BBA081E8195830032DA7E /* CudaHelpers.cpp in Sources */,
 				8AFC9CE31DAE44F600161D50 /* Consumption.cpp in Sources */,
 				8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */,
 				8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */,
@@ -2442,7 +2432,6 @@
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 					/usr/local/cuda/include,
-					"/Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2511,7 +2500,6 @@
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 					/usr/local/cuda/include,
-					"/Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (

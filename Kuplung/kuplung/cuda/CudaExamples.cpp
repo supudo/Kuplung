@@ -22,9 +22,6 @@ void CudaExamples::init() {
     this->exampleOceanFFT = std::make_unique<oceanFFT>();
     this->exampleOceanFFT->init();
 
-//    this->exampleOceanFFT0 = std::make_unique<oceanFFT0>();
-//    this->exampleOceanFFT0->init();
-
     this->exampleVectorAddition = std::make_unique<VectorAddition>();
     this->exampleVectorAddition->init();
 }
@@ -36,7 +33,7 @@ void CudaExamples::draw(bool* p_opened, glm::mat4 matrixProjection, glm::mat4 ma
     if (ImGui::Begin("Cuda Examples", p_opened, ImGuiWindowFlags_ShowBorders)) {
         ImGui::TextColored(ImVec4(1, 0, 0, 1), "Select example:");
         ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95);
-        const char* cuda_examples[] = {"Adding vectors", "Ocean FFT", "Ocean FFT 0"};
+        const char* cuda_examples[] = {"Adding vectors", "Ocean FFT"};
         ImGui::Combo("##cuda_examples", &this->selectedCudaExample, cuda_examples, IM_ARRAYSIZE(cuda_examples));
         ImGui::PopItemWidth();
         ImGui::Separator();
@@ -55,9 +52,6 @@ void CudaExamples::renderExample(glm::mat4 matrixProjection, glm::mat4 matrixCam
         case 1:
             this->vboTexture = this->exampleOceanFFT->draw(matrixProjection, matrixCamera, matrixGrid);
             break;
-//        case 2:
-//            this->vboTexture = this->exampleOceanFFT0->draw(matrixProjection, matrixCamera, matrixGrid);
-//            break;
     }
 
     if (this->vboTexture) {

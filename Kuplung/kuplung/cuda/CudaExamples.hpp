@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include "kuplung/cuda/examples/VectorAddition.hpp"
 #include "kuplung/cuda/examples/oceanFFT.hpp"
-//#include "kuplung/cuda/examples/oceanFFT0.hpp"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include <glm/glm.hpp>
 
@@ -34,7 +33,6 @@ private:
     void renderExample(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
 
     std::unique_ptr<oceanFFT> exampleOceanFFT;
-//    std::unique_ptr<oceanFFT0> exampleOceanFFT0;
     std::unique_ptr<VectorAddition> exampleVectorAddition;
 };
 
