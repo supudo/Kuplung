@@ -31,7 +31,7 @@ int CudaHelpers::gpuGetMaxGflopsDeviceId() {
     cudaGetDeviceCount(&device_count);
 
     if (device_count == 0) {
-        fprintf(stderr, "gpuGetMaxGflopsDeviceId() CUDA error: no devices supporting CUDA.\n");
+        Settings::Instance()->funcDoLog("[CudaHelpers] CUDA error: no devices supporting CUDA.");
         return -1;
     }
 
@@ -51,7 +51,7 @@ int CudaHelpers::gpuGetMaxGflopsDeviceId() {
     }
 
     if (devices_prohibited == device_count) {
-        fprintf(stderr, "gpuGetMaxGflopsDeviceId() CUDA error: all devices have compute mode prohibited.\n");
+        Settings::Instance()->funcDoLog("[CudaHelpers] CUDA error: all devices have compute mode prohibited.");
         return -1;
     }
 
@@ -123,6 +123,6 @@ int CudaHelpers::_ConvertSMVer2Cores(int major, int minor) {
     }
 
     // If we don't find the values, we default use the previous one to run properly
-    printf("MapSMtoCores for SM %d.%d is undefined.  Default to use %d Cores/SM\n", major, minor, nGpuArchCoresPerSM[index - 1].Cores);
+    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[CudaHelpers] MapSMtoCores for SM %d.%d is undefined. Default to use %d Cores/SM", major, minor, nGpuArchCoresPerSM[index - 1].Cores));
     return nGpuArchCoresPerSM[index-1].Cores;
 }
