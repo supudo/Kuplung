@@ -108,6 +108,27 @@ INCLUDE_DIRECTORIES(../external/libnoise/headers)
 LINK_DIRECTORIES(../external/libnoise/lib)
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 
+# Cuda
+# FIND_PACKAGE(CUDA)
+# IF(CUDA_FOUND)
+#     INCLUDE_DIRECTORIES(${CUDA_INCLUDE_DIRS})
+
+#     SET(CUDA_SOURCES
+#         kuplung/cuda/cu/cuda_vectorAddition.cu
+#         kuplung/cuda/cu/cuda_oceanFFT_kernel.cu)
+
+#     SET(CUDA_NVCC_FLAGS
+#         ${CUDA_NVCC_FLAGS};
+#         -D_DEBUG;
+#         -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
+#         -I/usr/local/cuda/include;
+#         -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
+
+#     SET(CMAKE_HOST_FLAGS ${CMAKE_HOST_FLAGS};-std=c++14;-stdlib=libc++)
+#     CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES})
+#     ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
+# ENDIF(CUDA_FOUND)
+
 INCLUDE_DIRECTORIES(.)
 
 SET(SOURCE_FILES
@@ -320,6 +341,8 @@ SET(SOURCE_FILES
     kuplung/utilities/stb/stb_rect_pack.h
     kuplung/utilities/stb/stb_textedit.h
     kuplung/utilities/stb/stb_truetype.h
+    # kuplung/cuda/CudaTest.cpp
+    # kuplung/cuda/CudaTest.hpp
     kuplung/Kuplung.cpp
     kuplung/Kuplung.hpp
     main.cpp)
@@ -564,7 +587,11 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
     IF(APPLE)
         INCLUDE(CMakeToolsHelpers OPTIONAL)
 
-        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
+        IF (CUDA_FOUND)
+            ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c ${CUDA_COMPILED_FILES})
+        ELSE(CUDA_FOUND)
+            ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
+        ENDIF(CUDA_FOUND)
 
         # Misc Files
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/resources/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
@@ -679,5 +706,10 @@ ENDIF(MINIZIP_FOUND)
 IF(LUA_FOUND)
     TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${LUA_LIBRARIES})
 ENDIF(LUA_FOUND)
+
+IF(CUDA_FOUND)
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CUDA_LIBRARIES})
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CUDA_cudart_static_LIBRARY})
+ENDIF(CUDA_FOUND)
 
 INCLUDE(cppcheck.cmake)

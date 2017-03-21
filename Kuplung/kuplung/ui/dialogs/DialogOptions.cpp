@@ -32,6 +32,10 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         ImGui::Indent();
         if (ImGui::Checkbox("Log Messages", &Settings::Instance()->logDebugInfo))
             Settings::Instance()->saveSettings();
+#ifdef DEF_KuplungSetting_UseCuda
+        if (ImGui::Checkbox("Use Cuda (required Nvidia Cuda)", &Settings::Instance()->UseCuda))
+            Settings::Instance()->saveSettings();
+#endif
 
         ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
         ImGui::BeginChild("GUIProvider", ImVec2(0.0f, 52.0f), true);

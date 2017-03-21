@@ -46,6 +46,7 @@ GUI_ImGui::GUI_ImGui(ObjectsManager &managerObjects) : managerObjects(managerObj
     this->showShadertoyMessage = false;
     this->showImageViewer = false;
     this->showKuplungIDE = false;
+    this->showCudaExamples = false;
 }
 
 GUI_ImGui::~GUI_ImGui() {
@@ -67,6 +68,9 @@ GUI_ImGui::~GUI_ImGui() {
     this->componentImportOBJ.reset();
     this->componentExportOBJ.reset();
     this->componentKuplungIDE.reset();
+#ifdef DEF_KuplungSetting_UseCuda
+    this->componentCudaExamples.reset();
+#endif
 }
 
 void GUI_ImGui::init(SDL_Window *window,
@@ -130,6 +134,7 @@ void GUI_ImGui::init(SDL_Window *window,
     this->showImageViewer = false;
     this->showRendererUI = false;
     this->showKuplungIDE = false;
+    this->showCudaExamples = false;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -188,6 +193,11 @@ void GUI_ImGui::init(SDL_Window *window,
 
     this->componentKuplungIDE = std::make_unique<KuplungIDE>();
     this->componentKuplungIDE->init();
+
+#ifdef DEF_KuplungSetting_UseCuda
+    this->componentCudaExamples = std::make_unique<CudaExamples>();
+    this->componentCudaExamples->init();
+#endif
 }
 
 void GUI_ImGui::doLog(std::string const& message) {
@@ -329,6 +339,10 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
             ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
             ImGui::MenuItem(ICON_FA_BICYCLE " Shadertoy", NULL, &this->showShadertoy);
+#ifdef DEF_KuplungSetting_UseCuda
+            if (Settings::Instance()->UseCuda)
+                ImGui::MenuItem(ICON_FA_SPACE_SHUTTLE " Cuda Examples", NULL, &this->showCudaExamples);
+#endif
             ImGui::Separator();
             ImGui::MenuItem(ICON_FA_COG " Options", NULL, &this->showOptions);
             ImGui::EndMenu();
@@ -422,6 +436,11 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 
     if (this->showImageViewer)
         this->componentImageViewer->showImage(&this->showImageViewer);
+
+#ifdef DEF_KuplungSetting_UseCuda
+    if (this->showCudaExamples)
+        this->dialogCudaExamples();
+#endif
 
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
@@ -708,6 +727,12 @@ void GUI_ImGui::dialogShadertoy() {
 
 void GUI_ImGui::dialogShadertoyMessage() {
     this->showShadertoyMessage = true;
+}
+
+void GUI_ImGui::dialogCudaExamples() {
+#ifdef DEF_KuplungSetting_UseCuda
+    this->componentCudaExamples->draw(&this->showCudaExamples, this->managerObjects.matrixProjection, this->managerObjects.camera->matrixCamera, this->managerObjects.grid->matrixModel);
+#endif
 }
 
 void GUI_ImGui::dialogShadertoyMessageWindow() {

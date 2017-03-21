@@ -848,8 +848,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point = this->lightRotateY;
             this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point = this->lightRotateZ;
 
-            glm::vec3 newRotation = glm::vec3(this->lightRotateX, this->lightRotateY, this->lightRotateZ);
-            glm::vec3 newPosition = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->getNewPositionAfterRotation(newRotation);
+//            glm::vec3 newRotation = glm::vec3(this->lightRotateX, this->lightRotateY, this->lightRotateZ);
+//            glm::vec3 newPosition = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->getNewPositionAfterRotation(newRotation);
 
 //            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->turnOff_Position = true;
 //            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionX->point = newPosition.x;

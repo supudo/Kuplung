@@ -14,6 +14,10 @@
 		8A10919C1D47662500658E39 /* KuplungDefinitions.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A1091991D47662400658E39 /* KuplungDefinitions.pb.cc */; };
 		8A1091A11D47665700658E39 /* KuplungAppSettings.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10919E1D47663D00658E39 /* KuplungAppSettings.proto */; };
 		8A1091A21D47665700658E39 /* KuplungDefinitions.proto in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10919F1D47663D00658E39 /* KuplungDefinitions.proto */; };
+		8A10ADC11E81605000687EAD /* ref_slopeShading.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBC1E81603800687EAD /* ref_slopeShading.bin */; };
+		8A10ADC21E81605000687EAD /* ref_spatialDomain.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBD1E81603800687EAD /* ref_spatialDomain.bin */; };
+		8A10ADC31E81605000687EAD /* slopeShading.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBE1E81603800687EAD /* slopeShading.bin */; };
+		8A10ADC41E81605000687EAD /* spatialDomain.bin in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A10ADBF1E81603800687EAD /* spatialDomain.bin */; };
 		8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A14D8C41D367BFC00674470 /* SaveOpen.cpp */; };
 		8A15A9D21DC236E9003B65B8 /* RenderingDeferred.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9CC1DC236E9003B65B8 /* RenderingDeferred.cpp */; };
 		8A15A9D31DC236E9003B65B8 /* RenderingForward.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A15A9CE1DC236E9003B65B8 /* RenderingForward.cpp */; };
@@ -35,7 +39,9 @@
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */; };
 		8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3928ED1E77E79F005BF8C5 /* test.lua */; };
+		8A3A023C1E814314006D96A7 /* oceanFFT0.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
+		8A403FFA1E800CF600733754 /* KuplungIDE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A403FF81E800CF600733754 /* KuplungIDE.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
 		8A4086461C64E54600101017 /* fontawesome-webfont.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086441C64E53500101017 /* fontawesome-webfont.ttf */; };
 		8A4086471C64E54900101017 /* material-icons-regular.ttf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A4086451C64E53500101017 /* material-icons-regular.ttf */; };
@@ -146,6 +152,9 @@
 		8A6E70B81C6CACB40085CAE5 /* FileModelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A6E70961C6CACB40085CAE5 /* FileModelManager.cpp */; };
 		8A7802D51D2D4F3A00D24620 /* RenderingManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7802D21D2D4F3A00D24620 /* RenderingManager.cpp */; };
 		8A7802D81D2D4F4B00D24620 /* ModelFaceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */; };
+		8A7B9AB21E800F0400ADD386 /* CUDA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB11E800F0400ADD386 /* CUDA.framework */; };
+		8A7B9AC11E80190400ADD386 /* cuda_oceanFFT_kernel_cuda.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB71E8016CB00ADD386 /* cuda_oceanFFT_kernel_cuda.o */; };
+		8A7B9AC21E80190400ADD386 /* cuda_vectorAddition_cuda.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A7B9AB81E8016CB00ADD386 /* cuda_vectorAddition_cuda.o */; };
 		8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */; };
 		8A81DDC01D1A82B5004F3270 /* BoundingBox.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAD1D1A82B5004F3270 /* BoundingBox.cpp */; };
 		8A81DDC11D1A82B5004F3270 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDAF1D1A82B5004F3270 /* Camera.cpp */; };
@@ -161,6 +170,11 @@
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
 		8A8BB8CD1E1BEC5000316A43 /* Timings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BB8CB1E1BEC5000316A43 /* Timings.cpp */; };
+		8A8E14091E7FDECB00273DCC /* oceanFFT.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A8E14061E7FDEAE00273DCC /* oceanFFT.frag */; };
+		8A8E140A1E7FDECD00273DCC /* oceanFFT.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A8E14071E7FDEAE00273DCC /* oceanFFT.vert */; };
+		8A8E141E1E7FDF0F00273DCC /* CudaExamples.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8E14181E7FDF0F00273DCC /* CudaExamples.cpp */; };
+		8A8E14291E7FE81000273DCC /* oceanFFT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8E14251E7FE81000273DCC /* oceanFFT.cpp */; };
+		8A8E142A1E7FE81000273DCC /* VectorAddition.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8E14271E7FE81000273DCC /* VectorAddition.cpp */; };
 		8A91C8331E77F3E90051C928 /* LuaManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A91C8311E77F3E90051C928 /* LuaManager.cpp */; };
 		8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */; };
 		8A9905FA1E0AED5900C0FBA5 /* UIManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A9905F81E0AED5900C0FBA5 /* UIManager.cpp */; };
@@ -329,6 +343,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8A10ADC01E81604100687EAD /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = cuda_data;
+			dstSubfolderSpec = 7;
+			files = (
+				8A10ADC11E81605000687EAD /* ref_slopeShading.bin in CopyFiles */,
+				8A10ADC21E81605000687EAD /* ref_spatialDomain.bin in CopyFiles */,
+				8A10ADC31E81605000687EAD /* slopeShading.bin in CopyFiles */,
+				8A10ADC41E81605000687EAD /* spatialDomain.bin in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8A18660D1E0AF108006A28D7 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -348,6 +375,17 @@
 			dstSubfolderSpec = 7;
 			files = (
 				8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8A8E14081E7FDEC100273DCC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = shaders/cuda;
+			dstSubfolderSpec = 7;
+			files = (
+				8A8E14091E7FDECB00273DCC /* oceanFFT.frag in CopyFiles */,
+				8A8E140A1E7FDECD00273DCC /* oceanFFT.vert in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -656,6 +694,10 @@
 		8A10919A1D47662400658E39 /* KuplungDefinitions.pb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KuplungDefinitions.pb.h; path = saveopen/KuplungDefinitions.pb.h; sourceTree = "<group>"; };
 		8A10919E1D47663D00658E39 /* KuplungAppSettings.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KuplungAppSettings.proto; path = protobuf/KuplungAppSettings.proto; sourceTree = "<group>"; };
 		8A10919F1D47663D00658E39 /* KuplungDefinitions.proto */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KuplungDefinitions.proto; path = protobuf/KuplungDefinitions.proto; sourceTree = "<group>"; };
+		8A10ADBC1E81603800687EAD /* ref_slopeShading.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = ref_slopeShading.bin; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/cuda_data/ref_slopeShading.bin"; sourceTree = SOURCE_ROOT; };
+		8A10ADBD1E81603800687EAD /* ref_spatialDomain.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = ref_spatialDomain.bin; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/cuda_data/ref_spatialDomain.bin"; sourceTree = SOURCE_ROOT; };
+		8A10ADBE1E81603800687EAD /* slopeShading.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = slopeShading.bin; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/cuda_data/slopeShading.bin"; sourceTree = SOURCE_ROOT; };
+		8A10ADBF1E81603800687EAD /* spatialDomain.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = spatialDomain.bin; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/kuplung.app/Contents/Resources/cuda_data/spatialDomain.bin"; sourceTree = SOURCE_ROOT; };
 		8A14D8C41D367BFC00674470 /* SaveOpen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpen.cpp; path = saveopen/SaveOpen.cpp; sourceTree = "<group>"; };
 		8A14D8C51D367BFC00674470 /* SaveOpen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SaveOpen.hpp; path = saveopen/SaveOpen.hpp; sourceTree = "<group>"; };
 		8A1567BB1CC7D810001B9DDE /* SettingsStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsStructs.h; sourceTree = "<group>"; };
@@ -712,8 +754,17 @@
 		8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OuiNanoVG_Implementation.cpp; path = gui_oui/OuiNanoVG_Implementation.cpp; sourceTree = "<group>"; };
 		8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OuiNanoVG_Implementation.hpp; path = gui_oui/OuiNanoVG_Implementation.hpp; sourceTree = "<group>"; };
 		8A3928ED1E77E79F005BF8C5 /* test.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.lua; path = lua/test.lua; sourceTree = "<group>"; };
+		8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = oceanFFT0.cpp; path = cuda/examples/oceanFFT0.cpp; sourceTree = "<group>"; };
+		8A3A023B1E814314006D96A7 /* oceanFFT0.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = oceanFFT0.hpp; path = cuda/examples/oceanFFT0.hpp; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
+		8A403FEE1E7FED5300733754 /* cuda_oceanFFT_kernel.cu */ = {isa = PBXFileReference; lastKnownFileType = text; name = cuda_oceanFFT_kernel.cu; path = cuda/cu/cuda_oceanFFT_kernel.cu; sourceTree = "<group>"; };
+		8A403FEF1E7FED5300733754 /* cuda_vectorAddition.cu */ = {isa = PBXFileReference; lastKnownFileType = text; name = cuda_vectorAddition.cu; path = cuda/cu/cuda_vectorAddition.cu; sourceTree = "<group>"; };
+		8A403FF11E800B4700733754 /* Makefile */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		8A403FF31E800C6B00733754 /* cuda_oceanFFT_kernel.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_oceanFFT_kernel.o; path = external/cuda_build/cuda_oceanFFT_kernel.o; sourceTree = "<group>"; };
+		8A403FF41E800C6B00733754 /* cuda_vectorAddition.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_vectorAddition.o; path = external/cuda_build/cuda_vectorAddition.o; sourceTree = "<group>"; };
+		8A403FF81E800CF600733754 /* KuplungIDE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = KuplungIDE.cpp; path = ide/KuplungIDE.cpp; sourceTree = "<group>"; };
+		8A403FF91E800CF600733754 /* KuplungIDE.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = KuplungIDE.hpp; path = ide/KuplungIDE.hpp; sourceTree = "<group>"; };
 		8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.3.3.1.dylib; path = ../../../../../../usr/local/Cellar/assimp/3.3.1/lib/libassimp.3.3.1.dylib; sourceTree = "<group>"; };
 		8A4086441C64E53500101017 /* fontawesome-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "fontawesome-webfont.ttf"; sourceTree = "<group>"; };
 		8A4086451C64E53500101017 /* material-icons-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "material-icons-regular.ttf"; sourceTree = "<group>"; };
@@ -813,6 +864,13 @@
 		8A7802D31D2D4F3A00D24620 /* RenderingManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = RenderingManager.hpp; path = rendering/RenderingManager.hpp; sourceTree = "<group>"; };
 		8A7802D61D2D4F4B00D24620 /* ModelFaceData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ModelFaceData.cpp; path = scene/ModelFaceData.cpp; sourceTree = "<group>"; };
 		8A7802D71D2D4F4B00D24620 /* ModelFaceData.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ModelFaceData.hpp; path = scene/ModelFaceData.hpp; sourceTree = "<group>"; };
+		8A7B9AB11E800F0400ADD386 /* CUDA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CUDA.framework; path = ../../../../../../Library/Frameworks/CUDA.framework; sourceTree = "<group>"; };
+		8A7B9AB31E80161F00ADD386 /* cuda_oceanFFT_kernel_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_oceanFFT_kernel_cuda.o; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/cuda/cuda_oceanFFT_kernel_cuda.o"; sourceTree = "<group>"; };
+		8A7B9AB41E80161F00ADD386 /* cuda_vectorAddition_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_vectorAddition_cuda.o; path = "build-Kuplung-Desktop_Qt_5_8_0_clang_64bit2-Debug/cuda/cuda_vectorAddition_cuda.o"; sourceTree = "<group>"; };
+		8A7B9AB71E8016CB00ADD386 /* cuda_oceanFFT_kernel_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_oceanFFT_kernel_cuda.o; path = external/cuda_build/cuda_oceanFFT_kernel_cuda.o; sourceTree = "<group>"; };
+		8A7B9AB81E8016CB00ADD386 /* cuda_vectorAddition_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_vectorAddition_cuda.o; path = external/cuda_build/cuda_vectorAddition_cuda.o; sourceTree = "<group>"; };
+		8A7B9AC31E8019B900ADD386 /* libcudart.8.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcudart.8.0.dylib; path = "../../../../../../Developer/NVIDIA/CUDA-8.0/lib/libcudart.8.0.dylib"; sourceTree = "<group>"; };
+		8A7B9AC41E8019B900ADD386 /* libcufft.8.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcufft.8.0.dylib; path = "../../../../../../Developer/NVIDIA/CUDA-8.0/lib/libcufft.8.0.dylib"; sourceTree = "<group>"; };
 		8A7F386B1C7F28E8004D4520 /* reflection.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.frag; sourceTree = "<group>"; };
 		8A7F386C1C7F28E8004D4520 /* reflection.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = reflection.vert; sourceTree = "<group>"; };
 		8A81DDAB1D1A82B5004F3270 /* AxisHelpers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AxisHelpers.cpp; path = helpers/AxisHelpers.cpp; sourceTree = "<group>"; };
@@ -845,6 +903,14 @@
 		8A8540641CEDF3A200656C60 /* UVPoint.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVPoint.hpp; path = uveditor/UVPoint.hpp; sourceTree = "<group>"; };
 		8A8BB8CB1E1BEC5000316A43 /* Timings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Timings.cpp; path = measurement/Timings.cpp; sourceTree = "<group>"; };
 		8A8BB8CC1E1BEC5000316A43 /* Timings.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Timings.hpp; path = measurement/Timings.hpp; sourceTree = "<group>"; };
+		8A8E14061E7FDEAE00273DCC /* oceanFFT.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = oceanFFT.frag; path = cuda/oceanFFT.frag; sourceTree = "<group>"; };
+		8A8E14071E7FDEAE00273DCC /* oceanFFT.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = oceanFFT.vert; path = cuda/oceanFFT.vert; sourceTree = "<group>"; };
+		8A8E14181E7FDF0F00273DCC /* CudaExamples.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CudaExamples.cpp; path = cuda/CudaExamples.cpp; sourceTree = "<group>"; };
+		8A8E14191E7FDF0F00273DCC /* CudaExamples.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = CudaExamples.hpp; path = cuda/CudaExamples.hpp; sourceTree = "<group>"; };
+		8A8E14251E7FE81000273DCC /* oceanFFT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = oceanFFT.cpp; path = cuda/examples/oceanFFT.cpp; sourceTree = "<group>"; };
+		8A8E14261E7FE81000273DCC /* oceanFFT.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = oceanFFT.hpp; path = cuda/examples/oceanFFT.hpp; sourceTree = "<group>"; };
+		8A8E14271E7FE81000273DCC /* VectorAddition.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VectorAddition.cpp; path = cuda/examples/VectorAddition.cpp; sourceTree = "<group>"; };
+		8A8E14281E7FE81000273DCC /* VectorAddition.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = VectorAddition.hpp; path = cuda/examples/VectorAddition.hpp; sourceTree = "<group>"; };
 		8A91C8311E77F3E90051C928 /* LuaManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LuaManager.cpp; path = lua/LuaManager.cpp; sourceTree = "<group>"; };
 		8A91C8321E77F3E90051C928 /* LuaManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = LuaManager.hpp; path = lua/LuaManager.hpp; sourceTree = "<group>"; };
 		8A9505ED1D3D21F20039941C /* SaveOpenBinarySeq.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SaveOpenBinarySeq.cpp; path = saveopen/SaveOpenBinarySeq.cpp; sourceTree = "<group>"; };
@@ -1069,9 +1135,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */,
+				8A7B9AB21E800F0400ADD386 /* CUDA.framework in Frameworks */,
+				8A7B9AC11E80190400ADD386 /* cuda_oceanFFT_kernel_cuda.o in Frameworks */,
+				8A7B9AC21E80190400ADD386 /* cuda_vectorAddition_cuda.o in Frameworks */,
 				8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */,
 				8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */,
+				8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1099,6 +1168,17 @@
 				8A10919F1D47663D00658E39 /* KuplungDefinitions.proto */,
 			);
 			name = protobuf;
+			sourceTree = "<group>";
+		};
+		8A10ADBB1E81602E00687EAD /* cuda_data */ = {
+			isa = PBXGroup;
+			children = (
+				8A10ADBC1E81603800687EAD /* ref_slopeShading.bin */,
+				8A10ADBD1E81603800687EAD /* ref_spatialDomain.bin */,
+				8A10ADBE1E81603800687EAD /* slopeShading.bin */,
+				8A10ADBF1E81603800687EAD /* spatialDomain.bin */,
+			);
+			name = cuda_data;
 			sourceTree = "<group>";
 		};
 		8A14D8C31D367BF200674470 /* saveopen */ = {
@@ -1231,6 +1311,15 @@
 			path = maths;
 			sourceTree = "<group>";
 		};
+		8A403FF71E800CEF00733754 /* ide */ = {
+			isa = PBXGroup;
+			children = (
+				8A403FF81E800CF600733754 /* KuplungIDE.cpp */,
+				8A403FF91E800CF600733754 /* KuplungIDE.hpp */,
+			);
+			name = ide;
+			sourceTree = "<group>";
+		};
 		8A45EDC11DCA5A4E00383570 /* exporters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1304,6 +1393,7 @@
 				8A6E706A1C6CACB40085CAE5 /* FileBrowser.hpp */,
 				8A6999331CE0FBA2009F8D56 /* FileSaver.cpp */,
 				8A6999341CE0FBA2009F8D56 /* FileSaver.hpp */,
+				8A403FF71E800CEF00733754 /* ide */,
 				8AC4B80D1DBA09B800F1D850 /* ImageViewer.cpp */,
 				8AC4B80E1DBA09B800F1D850 /* ImageViewer.hpp */,
 				8A2CF6AD1DC39DFA008D014E /* importers */,
@@ -1531,6 +1621,48 @@
 			name = measurement;
 			sourceTree = "<group>";
 		};
+		8A8E14051E7FDEA500273DCC /* cuda */ = {
+			isa = PBXGroup;
+			children = (
+				8A8E14061E7FDEAE00273DCC /* oceanFFT.frag */,
+				8A8E14071E7FDEAE00273DCC /* oceanFFT.vert */,
+			);
+			name = cuda;
+			sourceTree = "<group>";
+		};
+		8A8E140B1E7FDEE400273DCC /* cuda */ = {
+			isa = PBXGroup;
+			children = (
+				8A8E14151E7FDEFA00273DCC /* cu */,
+				8A8E14181E7FDF0F00273DCC /* CudaExamples.cpp */,
+				8A8E14191E7FDF0F00273DCC /* CudaExamples.hpp */,
+				8A8E14241E7FE80900273DCC /* examples */,
+			);
+			name = cuda;
+			sourceTree = "<group>";
+		};
+		8A8E14151E7FDEFA00273DCC /* cu */ = {
+			isa = PBXGroup;
+			children = (
+				8A403FEE1E7FED5300733754 /* cuda_oceanFFT_kernel.cu */,
+				8A403FEF1E7FED5300733754 /* cuda_vectorAddition.cu */,
+			);
+			name = cu;
+			sourceTree = "<group>";
+		};
+		8A8E14241E7FE80900273DCC /* examples */ = {
+			isa = PBXGroup;
+			children = (
+				8A8E14251E7FE81000273DCC /* oceanFFT.cpp */,
+				8A8E14261E7FE81000273DCC /* oceanFFT.hpp */,
+				8A3A023A1E814314006D96A7 /* oceanFFT0.cpp */,
+				8A3A023B1E814314006D96A7 /* oceanFFT0.hpp */,
+				8A8E14271E7FE81000273DCC /* VectorAddition.cpp */,
+				8A8E14281E7FE81000273DCC /* VectorAddition.hpp */,
+			);
+			name = examples;
+			sourceTree = "<group>";
+		};
 		8A91C8301E77F3DD0051C928 /* lua */ = {
 			isa = PBXGroup;
 			children = (
@@ -1669,6 +1801,7 @@
 		8AB6F00F1C3A9BEE00665C40 /* kuplung */ = {
 			isa = PBXGroup;
 			children = (
+				8A8E140B1E7FDEE400273DCC /* cuda */,
 				8AB6F0101C3A9BEE00665C40 /* Kuplung.cpp */,
 				8AB6F0111C3A9BEE00665C40 /* Kuplung.hpp */,
 				8AB6F0121C3A9BEE00665C40 /* meshes */,
@@ -1696,6 +1829,7 @@
 			isa = PBXGroup;
 			children = (
 				8ABFC1E61CC92AD400FBCF08 /* axis_helpers */,
+				8A10ADBB1E81602E00687EAD /* cuda_data */,
 				8AD236601C5A4F880001E934 /* fonts */,
 				8AB6F0981C3AA1F900665C40 /* gui */,
 				8AB6F0AD1C3AA21900665C40 /* Images.xcassets */,
@@ -1741,6 +1875,7 @@
 				8A5128D21CC0CC6600BE0600 /* bounding_box.vert */,
 				8A47F71B1CBF744800699CAC /* camera.frag */,
 				8A47F71C1CBF744800699CAC /* camera.vert */,
+				8A8E14051E7FDEA500273DCC /* cuda */,
 				8A2855C01D1412D2000BE246 /* deferred_g_buffer.frag */,
 				8A2855C11D1412D2000BE246 /* deferred_g_buffer.vert */,
 				8A2855C21D1412D2000BE246 /* deferred_light_box.frag */,
@@ -1925,6 +2060,16 @@
 		8AD104021C049790008CE831 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A7B9AC31E8019B900ADD386 /* libcudart.8.0.dylib */,
+				8A7B9AC41E8019B900ADD386 /* libcufft.8.0.dylib */,
+				8A7B9AB71E8016CB00ADD386 /* cuda_oceanFFT_kernel_cuda.o */,
+				8A7B9AB81E8016CB00ADD386 /* cuda_vectorAddition_cuda.o */,
+				8A7B9AB31E80161F00ADD386 /* cuda_oceanFFT_kernel_cuda.o */,
+				8A7B9AB41E80161F00ADD386 /* cuda_vectorAddition_cuda.o */,
+				8A7B9AB11E800F0400ADD386 /* CUDA.framework */,
+				8A403FF31E800C6B00733754 /* cuda_oceanFFT_kernel.o */,
+				8A403FF41E800C6B00733754 /* cuda_vectorAddition.o */,
+				8A403FF11E800B4700733754 /* Makefile */,
 				8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */,
 				8A05DE411CB5272100EA0B4D /* libassimp.3.2.0.dylib */,
 				8AD104051C05C489008CE831 /* GLUT.framework */,
@@ -2003,6 +2148,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8AC828B71BF5FEE7009C74E0 /* Build configuration list for PBXNativeTarget "Kuplung" */;
 			buildPhases = (
+				8A8E14231E7FE2B400273DCC /* ShellScript */,
 				8AC828AC1BF5FEE7009C74E0 /* Sources */,
 				8AC828AD1BF5FEE7009C74E0 /* Frameworks */,
 				8AC828AE1BF5FEE7009C74E0 /* Copy Files */,
@@ -2017,6 +2163,8 @@
 				8AB2563B1DA4F38700ABF2AC /* CopyFiles */,
 				8A18660D1E0AF108006A28D7 /* CopyFiles */,
 				8A3928EE1E77E7BD005BF8C5 /* CopyFiles */,
+				8A8E14081E7FDEC100273DCC /* CopyFiles */,
+				8A10ADC01E81604100687EAD /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -2058,6 +2206,22 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		8A8E14231E7FE2B400273DCC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make --file=KuplungCuda.make";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8AC828AC1BF5FEE7009C74E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -2066,6 +2230,7 @@
 				8A5128CC1CC0CBF900BE0600 /* RayPicking.cpp in Sources */,
 				8A2576131DD48B05004172E3 /* RayTracerRenderer.cpp in Sources */,
 				8AB255BC1DA4F31000ABF2AC /* Shadertoy.cpp in Sources */,
+				8A8E14291E7FE81000273DCC /* oceanFFT.cpp in Sources */,
 				8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */,
 				8A81DDC11D1A82B5004F3270 /* Camera.cpp in Sources */,
 				8A81DDC51D1A82B5004F3270 /* MiniAxis.cpp in Sources */,
@@ -2080,12 +2245,14 @@
 				8A1866171E0AF152006A28D7 /* nanovg.c in Sources */,
 				8A6E70B31C6CACB40085CAE5 /* imgui.cpp in Sources */,
 				8AA78CD41D4B6A3C00F6ABB6 /* KuplungMinizip.cpp in Sources */,
+				8A3A023C1E814314006D96A7 /* oceanFFT0.cpp in Sources */,
 				8A6E70A81C6CACB40085CAE5 /* FileBrowser.cpp in Sources */,
 				8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
+				8A8E142A1E7FE81000273DCC /* VectorAddition.cpp in Sources */,
 				8A9505EF1D3D21F20039941C /* SaveOpenBinarySeq.cpp in Sources */,
 				8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */,
 				8A81DDC41D1A82B5004F3270 /* LightRay.cpp in Sources */,
@@ -2135,6 +2302,7 @@
 				8A9906011E0AED6D00C0FBA5 /* SDL2OpenGL32.cpp in Sources */,
 				8A175AD81CA93EB900A4E46B /* MELink.cpp in Sources */,
 				8A6E70A91C6CACB40085CAE5 /* Log.cpp in Sources */,
+				8A8E141E1E7FDF0F00273DCC /* CudaExamples.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
@@ -2147,6 +2315,7 @@
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
 				8AAF14241D75B8A10075189D /* VertexSphere.cpp in Sources */,
 				8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */,
+				8A403FFA1E800CF600733754 /* KuplungIDE.cpp in Sources */,
 				8A15A9D41DC236E9003B65B8 /* RenderingSimple.cpp in Sources */,
 				8A69992E1CE0FB7A009F8D56 /* ImageRenderer.cpp in Sources */,
 				8A81DDC71D1A82B5004F3270 /* Skybox.cpp in Sources */,
@@ -2255,7 +2424,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = "DEF_KuplungSetting_UseCuda=1";
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
@@ -2268,6 +2441,8 @@
 					/usr/local/Cellar/protobuf/3.2.0/include,
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
+					/usr/local/cuda/include,
+					"/Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2281,6 +2456,7 @@
 					/usr/local/Cellar/protobuf/3.2.0/lib,
 					/usr/local/Cellar/minizip/1.2.11/lib,
 					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
+					/usr/local/cuda/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2299,6 +2475,11 @@
 					"-lz",
 					"-lMinizip",
 					"-llua.5.3",
+					"-Wl,-rpath,/usr/local/cuda/lib",
+					"-lcuda",
+					"-lcudart",
+					"-lcufft",
+					"-lcudadevrt",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;
@@ -2313,7 +2494,10 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks;
+				FRAMEWORK_SEARCH_PATHS = (
+					/Library/Frameworks,
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
 					/usr/local/include,
@@ -2326,6 +2510,8 @@
 					/usr/local/Cellar/protobuf/3.2.0/include,
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
+					/usr/local/cuda/include,
+					"/Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Kuplung/Info.plist";
 				LIBRARY_SEARCH_PATHS = (
@@ -2339,6 +2525,7 @@
 					/usr/local/Cellar/protobuf/3.2.0/lib,
 					/usr/local/Cellar/minizip/1.2.11/lib,
 					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
+					/usr/local/cuda/lib,
 				);
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -2357,6 +2544,11 @@
 					"-lz",
 					"-lMinizip",
 					"-llua.5.3",
+					"-Wl,-rpath,/usr/local/cuda/lib",
+					"-lcuda",
+					"-lcudart",
+					"-lcufft",
+					"-lcudadevrt",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.supudo.apps.Kuplung;
 				PRODUCT_NAME = Kuplung;

@@ -58,6 +58,11 @@ void Settings::initSettings() {
     m_pInstance->showPickRays = m_pInstance->cfgUtils->readBool("showPickRays");
     m_pInstance->showPickRaysSingle = m_pInstance->cfgUtils->readBool("showPickRaysSingle");
     m_pInstance->Terrain_HeightmapImageHistory = m_pInstance->cfgUtils->readBool("Terrain_HeightmapImageHistory");
+#ifdef DEF_KuplungSetting_UseCuda
+    m_pInstance->UseCuda = m_pInstance->cfgUtils->readBool("UseCuda");
+#else
+    m_pInstance->UseCuda = false;
+#endif
 
     m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
     m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
@@ -137,6 +142,7 @@ void Settings::saveSettings() {
     this->cfgUtils->writeBool("showPickRays", this->showPickRays);
     this->cfgUtils->writeBool("showPickRaysSingle", this->showPickRaysSingle);
     this->cfgUtils->writeBool("Terrain_HeightmapImageHistory", this->Terrain_HeightmapImageHistory);
+    this->cfgUtils->writeBool("UseCuda", this->UseCuda);
 
     this->cfgUtils->writeBool("ShowBoundingBox", this->ShowBoundingBox);
     this->cfgUtils->writeFloat("BoundingBoxPadding", this->BoundingBoxPadding);

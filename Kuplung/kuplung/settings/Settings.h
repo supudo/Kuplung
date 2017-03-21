@@ -55,6 +55,7 @@ public:
     bool mRayDraw, mRayAnimate;
     float mRayOriginX, mRayOriginY, mRayOriginZ;
     float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
+    bool UseCuda;
 
     void timerStart(std::string msg);
     void timerEnd(std::string msg);

@@ -27,6 +27,10 @@
 #include "kuplung/ui/components/ShaderEditor.hpp"
 #include "kuplung/ui/components/ide/KuplungIDE.hpp"
 
+#ifdef DEF_KuplungSetting_UseCuda
+#include "kuplung/cuda/CudaExamples.hpp"
+#endif
+
 #include "kuplung/ui/dialogs/DialogStyle.hpp"
 #include "kuplung/ui/dialogs/DialogOptions.hpp"
 #include "kuplung/ui/dialogs/DialogControlsGUI.hpp"
@@ -131,6 +135,7 @@ private:
     void popupRecentFileDoesntExists();
     void popupRecentFileImportedDoesntExists();
     void dialogKuplungIDE();
+    void dialogCudaExamples();
 
     ObjectsManager &managerObjects;
     std::unique_ptr<SDL2OpenGL32> imguiImplementation;
@@ -149,6 +154,9 @@ private:
     std::unique_ptr<KuplungApp::Utilities::Consumption::Consumption> componentConsumption;
     std::unique_ptr<ImageViewer> componentImageViewer;
     std::unique_ptr<KuplungIDE> componentKuplungIDE;
+#ifdef DEF_KuplungSetting_UseCuda
+    std::unique_ptr<CudaExamples> componentCudaExamples;
+#endif
 
     bool needsFontChange;
 
@@ -174,6 +182,7 @@ private:
     bool showShadertoyMessage;
     bool showImageViewer;
     bool showKuplungIDE;
+    bool showCudaExamples;
 
 };
 

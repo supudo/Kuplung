@@ -73,6 +73,7 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-declarations
     QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
 
 #    optims
@@ -107,6 +108,7 @@ mac {
     MediaFiles.files += resources/fonts
     MediaFiles.files += resources/shaders
     MediaFiles.files += resources/shaders/stoy
+    MediaFiles.files += resources/shaders/cuda
     MediaFiles.files += resources/shadertoy
     MediaFiles.files += resources/shapes
     MediaFiles.files += resources/skybox
@@ -173,12 +175,50 @@ win32|win64 {
 #    INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
 }
 
+# BEGIN Cuda
+
+mac {
+    K_C_LIBS = -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
+    LIBS += -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
+    INCLUDEPATH += /usr/local/cuda/include
+
+#    INCLUDEPATH += /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers
+#    INCLUDEPATH += /Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc
+
+    CUDA_DIR = /usr/local/cuda
+
+    CUDA_OBJECTS_DIR = cuda
+
+    OTHER_FILES += kuplung/cuda/cu/cuda_vectorAddition.cu \
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+
+    CUDA_SOURCES += kuplung/cuda/cu/cuda_vectorAddition.cu \
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+
+    SYSTEM_NAME = x64
+    SYSTEM_TYPE = 64
+    CUDA_ARCH = compute_30
+    NVCC_OPTIONS = --use_fast_math
+    NVCC_COMM = $$CUDA_DIR/bin/nvcc
+
+    cuda_d.input = CUDA_SOURCES
+    cuda_d.output = $$CUDA_OBJECTS_DIR/${QMAKE_FILE_BASE}_cuda.o
+    cuda_d.dependency_type = TYPE_C
+    cuda_d.commands = $$NVCC_COMM -D_DEBUG $$NVCC_OPTIONS $$K_C_LIBS --machine $$SYSTEM_TYPE -arch=$$CUDA_ARCH -c -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_NAME}
+    QMAKE_EXTRA_COMPILERS += cuda_d
+
+    DEFINES += "DEF_KuplungSetting_UseCuda"
+}
+
+# END Cuda
+
 OTHER_FILES += resources/*
 OTHER_FILES += resources/gui/*
 OTHER_FILES += resources/oui/*
 OTHER_FILES += resources/fonts/*
 OTHER_FILES += resources/shaders/*
 OTHER_FILES += resources/shaders/stoy/*
+OTHER_FILES += resources/shaders/cuda/*
 OTHER_FILES += resources/shapes/*
 OTHER_FILES += resources/skybox/*
 OTHER_FILES += resources/shadertoy/*
@@ -187,6 +227,11 @@ OTHER_FILES += resources/lua/*
 
 SOURCES += main.cpp \
     kuplung/Kuplung.cpp \
+    kuplung/cuda/CudaExamples.cpp \
+    kuplung/utilities/cuda/CudaHelpers.cpp \
+    kuplung/cuda/examples/VectorAddition.cpp \
+    kuplung/cuda/examples/oceanFFT.cpp \
+#    kuplung/cuda/examples/oceanFFT0.cpp \
     kuplung/rendering/RenderingManager.cpp \
     kuplung/rendering/methods/RenderingSimple.cpp \
     kuplung/rendering/methods/RenderingForward.cpp \
@@ -285,6 +330,11 @@ SOURCES += main.cpp \
 
 HEADERS += \
     kuplung/Kuplung.hpp \
+    kuplung/cuda/CudaExamples.hpp \
+    kuplung/utilities/cuda/CudaHelpers.hpp \
+    kuplung/cuda/examples/VectorAddition.hpp \
+    kuplung/cuda/examples/oceanFFT.hpp \
+#    kuplung/cuda/examples/oceanFFT0.hpp \
     kuplung/rendering/RenderingManager.hpp \
     kuplung/rendering/methods/RenderingSimple.hpp \
     kuplung/rendering/methods/RenderingForward.hpp \
@@ -528,6 +578,9 @@ DISTFILES += \
     resources/shaders/stoy/Ms2SD1.stoy \
     resources/shaders/stoy/XlfGRj.stoy \
     resources/shaders/stoy/XlSSzK.stoy \
+# Shaders - cuda
+    resources/shaders/cuda/oceanFFT.vert \
+    resources/shaders/cuda/oceanFFT.frag \
 # Cube textures
     resources/skybox/fire_planet_back.jpg \
     resources/skybox/fire_planet_bottom.jpg \
