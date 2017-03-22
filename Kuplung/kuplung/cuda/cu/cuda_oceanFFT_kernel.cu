@@ -41,13 +41,7 @@ float2 complex_mult(float2 ab, float2 cd) {
 }
 
 // generate wave heightfield at time t based on initial heightfield and dispersion relationship
-__global__ void generateSpectrumKernel(float2 *h0,
-                                       float2 *ht,
-                                       unsigned int in_width,
-                                       unsigned int out_width,
-                                       unsigned int out_height,
-                                       float t,
-                                       float patchSize) {
+__global__ void generateSpectrumKernel(float2 *h0, float2 *ht, unsigned int in_width, unsigned int out_width, unsigned int out_height, float t, float patchSize) {
     unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
     unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
     unsigned int in_index = y * in_width + x;
@@ -60,7 +54,7 @@ __global__ void generateSpectrumKernel(float2 *h0,
     k.y = (-(int)out_width / 2.0f + y) * (2.0f * CUDART_PI_F / patchSize);
 
     // calculate dispersion w(k)
-    float k_len = sqrtf(k.x*k.x + k.y*k.y);
+    float k_len = sqrtf(k.x * k.x + k.y * k.y);
     float w = sqrtf(9.81f * k_len);
 
     if ((x < out_width) && (y < out_height)) {
@@ -73,13 +67,10 @@ __global__ void generateSpectrumKernel(float2 *h0,
 }
 
 // update height map values based on output of FFT
-__global__ void updateHeightmapKernel(float  *heightMap,
-                                      float2 *ht,
-                                      unsigned int width)
-{
-    unsigned int x = blockIdx.x*blockDim.x + threadIdx.x;
-    unsigned int y = blockIdx.y*blockDim.y + threadIdx.y;
-    unsigned int i = y*width+x;
+__global__ void updateHeightmapKernel(float  *heightMap, float2 *ht, unsigned int width) {
+    unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
+    unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
+    unsigned int i = y * width + x;
 
     // cos(pi * (m1 + m2))
     float sign_correction = ((x + y) & 0x01) ? -1.0f : 1.0f;
@@ -88,18 +79,16 @@ __global__ void updateHeightmapKernel(float  *heightMap,
 }
 
 // generate slope by partial differences in spatial domain
-__global__ void calculateSlopeKernel(float *h, float2 *slopeOut, unsigned int width, unsigned int height)
-{
-    unsigned int x = blockIdx.x*blockDim.x + threadIdx.x;
-    unsigned int y = blockIdx.y*blockDim.y + threadIdx.y;
-    unsigned int i = y*width+x;
+__global__ void calculateSlopeKernel(float *h, float2 *slopeOut, unsigned int width, unsigned int height) {
+    unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
+    unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
+    unsigned int i = y * width + x;
 
     float2 slope = make_float2(0.0f, 0.0f);
 
-    if ((x > 0) && (y > 0) && (x < width-1) && (y < height-1))
-    {
-        slope.x = h[i+1] - h[i-1];
-        slope.y = h[i+width] - h[i-width];
+    if ((x > 0) && (y > 0) && (x < width-1) && (y < height-1)) {
+        slope.x = h[i + 1] - h[i - 1];
+        slope.y = h[i + width] - h[i - width];
     }
 
     slopeOut[i] = slope;
@@ -107,33 +96,21 @@ __global__ void calculateSlopeKernel(float *h, float2 *slopeOut, unsigned int wi
 
 // wrapper functions
 extern "C"
-void cudaGenerateSpectrumKernel(float2 *d_h0,
-                                float2 *d_ht,
-                                unsigned int in_width,
-                                unsigned int out_width,
-                                unsigned int out_height,
-                                float animTime,
-                                float patchSize) {
+void cudaGenerateSpectrumKernel(float2 *d_h0, float2 *d_ht, unsigned int in_width, unsigned int out_width, unsigned int out_height, float animTime, float patchSize) {
     dim3 block(8, 8, 1);
     dim3 grid(cuda_iDivUp(out_width, block.x), cuda_iDivUp(out_height, block.y), 1);
     generateSpectrumKernel<<<grid, block>>>(d_h0, d_ht, in_width, out_width, out_height, animTime, patchSize);
 }
 
 extern "C"
-void cudaUpdateHeightmapKernel(float  *d_heightMap,
-                               float2 *d_ht,
-                               unsigned int width,
-                               unsigned int height)
-{
+void cudaUpdateHeightmapKernel(float  *d_heightMap, float2 *d_ht, unsigned int width, unsigned int height) {
     dim3 block(8, 8, 1);
     dim3 grid(cuda_iDivUp(width, block.x), cuda_iDivUp(height, block.y), 1);
     updateHeightmapKernel<<<grid, block>>>(d_heightMap, d_ht, width);
 }
 
 extern "C"
-void cudaCalculateSlopeKernel(float *hptr, float2 *slopeOut,
-                              unsigned int width, unsigned int height)
-{
+void cudaCalculateSlopeKernel(float *hptr, float2 *slopeOut, unsigned int width, unsigned int height) {
     dim3 block(8, 8, 1);
     dim3 grid2(cuda_iDivUp(width, block.x), cuda_iDivUp(height, block.y), 1);
     calculateSlopeKernel<<<grid2, block>>>(hptr, slopeOut, width, height);

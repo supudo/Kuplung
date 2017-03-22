@@ -95,6 +95,10 @@ public:
     std::unique_ptr<RendererUI> componentRendererUI;
     bool showRendererUI;
 
+#ifdef DEF_KuplungSetting_UseCuda
+    std::unique_ptr<CudaExamples> componentCudaExamples;
+#endif
+
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
@@ -154,9 +158,6 @@ private:
     std::unique_ptr<KuplungApp::Utilities::Consumption::Consumption> componentConsumption;
     std::unique_ptr<ImageViewer> componentImageViewer;
     std::unique_ptr<KuplungIDE> componentKuplungIDE;
-#ifdef DEF_KuplungSetting_UseCuda
-    std::unique_ptr<CudaExamples> componentCudaExamples;
-#endif
 
     bool needsFontChange;
 

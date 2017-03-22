@@ -198,6 +198,7 @@ void ObjectsManager::resetSettings() {
     this->Setting_DeferredTestLightsNumber = 32;
     this->Setting_ShowSpaceship = false;
     this->Setting_GenerateSpaceship = false;
+    this->Setting_Cuda_ShowOceanFFT = false;
     this->Setting_GammaCoeficient = 1.0f;
     this->Setting_VertexSphere_Visible = false;
     this->Setting_VertexSphere_Radius = 0.5f;

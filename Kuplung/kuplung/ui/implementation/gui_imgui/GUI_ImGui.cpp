@@ -197,6 +197,8 @@ void GUI_ImGui::init(SDL_Window *window,
 #ifdef DEF_KuplungSetting_UseCuda
     this->componentCudaExamples = std::make_unique<CudaExamples>();
     this->componentCudaExamples->init();
+
+    this->controlsGUI->setCudaOceanFFT(this->componentCudaExamples->exampleOceanFFT.get());
 #endif
 }
 

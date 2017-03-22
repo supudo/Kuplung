@@ -93,7 +93,7 @@ public:
     std::string heightmapImage;
     int Setting_TerrainWidth = 100, Setting_TerrainHeight = 100;
 
-    bool Setting_ShowSpaceship, Setting_GenerateSpaceship;
+    bool Setting_ShowSpaceship, Setting_GenerateSpaceship, Setting_Cuda_ShowOceanFFT;
 
     bool Setting_VertexSphere_Visible, Setting_VertexSphere_ColorPickerOpen;
     bool Setting_VertexSphere_IsSphere, Setting_VertexSphere_ShowWireframes;

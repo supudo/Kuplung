@@ -67,8 +67,9 @@ public:
 
     void setParcingPercentage(float value);
 
-private:
     std::unique_ptr<GUI_ImGui> provider_ImGui;
+
+private:
     std::unique_ptr<GUI_OUI> provider_OUI;
 
     ObjectsManager &managerObjects;

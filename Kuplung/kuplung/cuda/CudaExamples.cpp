@@ -21,6 +21,7 @@ void CudaExamples::init() {
 
     this->exampleOceanFFT = std::make_unique<oceanFFT>();
     this->exampleOceanFFT->init();
+    this->exampleOceanFFT->initParameters();
 
     this->exampleVectorAddition = std::make_unique<VectorAddition>();
     this->exampleVectorAddition->init();

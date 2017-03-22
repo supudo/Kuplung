@@ -11,15 +11,20 @@
 
 #include <string>
 #include <vector>
+#include <math.h>
 #include "kuplung/utilities/ImGui/imgui.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/ui/UIHelpers.hpp"
 #include "kuplung/settings/SettingsStructs.h"
+#ifdef DEF_KuplungSetting_UseCuda
+#include "kuplung/cuda/examples/oceanFFT.hpp"
+#endif
 
 class DialogControlsGUI {
 public:
     explicit DialogControlsGUI(ObjectsManager &managerObjects);
     void render(bool* show, bool* isFrame);
+    void setCudaOceanFFT(oceanFFT* component);
     int selectedObject, selectedObjectLight;
 
 private:
@@ -30,6 +35,9 @@ private:
 
     ObjectsManager &managerObjects;
     std::unique_ptr<UIHelpers> helperUI;
+#ifdef DEF_KuplungSetting_UseCuda
+    oceanFFT* cudaOceanFFT;
+#endif
 
     void setHeightmapImage(std::string const& heightmapImage);
     std::string heightmapImage;

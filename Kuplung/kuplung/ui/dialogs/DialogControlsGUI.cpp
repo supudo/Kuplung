@@ -56,6 +56,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->lightRotateY = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
             this->lightRotateZ = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
         }
+#ifdef DEF_KuplungSetting_UseCuda
+        this->cudaOceanFFT->initParameters();
+#endif
     }
     ImGui::PopStyleColor(3);
 
@@ -160,6 +163,13 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         this->selectedObjectArtefact = 1;
                         this->selectedObject = 7;
                     }
+#ifdef DEF_KuplungSetting_UseCuda
+                    ImGui::Bullet();
+                    if (ImGui::Selectable("Cuda - Ocean FFT", this->selectedObjectArtefact == 2)) {
+                        this->selectedObjectArtefact = 2;
+                        this->selectedObject = 7;
+                    }
+#endif
                     ImGui::TreePop();
                 }
                 break;
@@ -822,6 +832,28 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 //                    }
                     break;
                 }
+#ifdef DEF_KuplungSetting_UseCuda
+                case 2: {
+                    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Cuda Example - Ocean FFT");
+                    ImGui::Checkbox("Show Ocean", &this->managerObjects.Setting_Cuda_ShowOceanFFT);
+                    if (this->managerObjects.Setting_Cuda_ShowOceanFFT) {
+                        if (ImGui::Button("Regenerate", ImVec2(-1, 0)))
+                            this->cudaOceanFFT->init();
+                        ImGui::Separator();
+                        ImGui::Checkbox("Wireframe", &this->cudaOceanFFT->Setting_ShowWireframes);
+                        ImGui::Checkbox("Draw in Points", &this->cudaOceanFFT->Setting_DrawDots);
+                        ImGui::Checkbox("Animate", &this->cudaOceanFFT->Setting_Animate);
+                        ImGui::Separator();
+                        this->helperUI->addControlsSlider("Gravity", 456, 0.01f, 0.0f, 100.0f, false, NULL, &this->cudaOceanFFT->Simm_g, true, isFrame);
+                        this->helperUI->addControlsSlider("Patch Size", 457, 1, 0.0f, 1000.0f, false, NULL, &this->cudaOceanFFT->Simm_patchSize, true, isFrame);
+                        this->helperUI->addControlsSlider("Wind Speed", 458, 1, 0.0f, 1000.0f, false, NULL, &this->cudaOceanFFT->Simm_windSpeed, true, isFrame);
+                        this->helperUI->addControlsSlider("Wind Direction", 459, 1, 0.0f, M_PI, false, NULL, &this->cudaOceanFFT->Simm_windDir, true, isFrame);
+                        ImGui::Separator();
+                        this->helperUI->addControlsSlider("Height Modifier", 460, 1, 1, 100, false, NULL, &this->cudaOceanFFT->heightModifier, true, isFrame);
+                    }
+                    break;
+                }
+#endif
                 default:
                     break;
             }
@@ -857,6 +889,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 //            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->positionZ->point = newPosition.z;
         }
     }
+}
+
+void DialogControlsGUI::setCudaOceanFFT(oceanFFT* component) {
+    this->cudaOceanFFT = component;
 }
 
 void DialogControlsGUI::setHeightmapImage(std::string const& heightmapImage) {

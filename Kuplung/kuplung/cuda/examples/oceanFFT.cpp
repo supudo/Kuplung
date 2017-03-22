@@ -44,7 +44,33 @@ void oceanFFT::init() {
     this->runGraphicsTest();
 }
 
+void oceanFFT::initParameters() {
+        this->Setting_ShowWireframes = false;
+    this->Setting_DrawDots = false;
+    this->Setting_Animate = true;
+
+    this->Simm_g = 9.81f;              // gravitational constant
+    this->Simm_A = 1e-7f;              // wave scale factor
+    this->Simm_patchSize = 100;        // patch size
+    this->Simm_windSpeed = 100.0f;
+    this->Simm_windDir = CUDART_PI_F / 3.0f;
+    this->Simm_dirDepend = 0.07f;
+
+    this->meshSize = 256;
+    this->spectrumW = meshSize + 4;
+    this->spectrumH = meshSize + 1;
+    this->heightModifier = 1.0;
+}
+
+void oceanFFT::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid) {
+    this->inRendererUI = false;
+    this->timerEvent();
+    this->renderCuda(matrixProjection, matrixCamera, matrixGrid);
+}
+
 GLuint oceanFFT::draw(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid) {
+    this->inRendererUI = true;
+
     this->timerEvent();
 
     this->createFBO();
@@ -63,11 +89,13 @@ GLuint oceanFFT::draw(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::m
 
 void oceanFFT::renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid) {
     // run CUDA kernel to generate vertex positions
-    if (this->animate)
+    if (this->Setting_Animate)
         runCuda();
 
-    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    if (this->inRendererUI) {
+        glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
+    }
 
     glUseProgram(this->shaderProgram);
 
@@ -92,13 +120,13 @@ void oceanFFT::renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, gl
     glUniform3f(this->gl_lightDir, 0.0f, 1.0f, 0.0f);
 
     glBindVertexArray(this->glVAO);
-    if (this->drawPoints)
+    if (this->Setting_DrawDots)
         glDrawArrays(GL_POINTS, 0, this->meshSize * this->meshSize);
     else {
-        if (Settings::Instance()->wireframesMode)
+        if (Settings::Instance()->wireframesMode || this->Setting_ShowWireframes)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawElements(GL_TRIANGLE_STRIP, ((this->meshSize * 2) + 2) * (this->meshSize - 1), GL_UNSIGNED_INT, 0);
-        if (Settings::Instance()->wireframesMode)
+        if (Settings::Instance()->wireframesMode || this->Setting_ShowWireframes)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
     glBindVertexArray(0);
@@ -156,7 +184,7 @@ void oceanFFT::runCudaTest() {
     cudaMalloc((void **)&this->g_sptr, this->meshSize * this->meshSize * sizeof(float2));
 
     // generate wave spectrum in frequency domain
-    cudaGenerateSpectrumKernel(this->d_h0, this->d_ht, this->spectrumW, this->meshSize, this->meshSize, this->animTime, this->patchSize);
+    cudaGenerateSpectrumKernel(this->d_h0, this->d_ht, this->spectrumW, this->meshSize, this->meshSize, this->animTime, this->Simm_patchSize);
 
     // execute inverse FFT to convert to spatial domain
     cufftExecC2C(this->fftPlan, this->d_ht, this->d_ht, CUFFT_INVERSE);
@@ -200,7 +228,7 @@ void oceanFFT::runCuda() {
     size_t num_bytes;
 
     // generate wave spectrum in frequency domain
-    cudaGenerateSpectrumKernel(this->d_h0, this->d_ht, this->spectrumW, this->meshSize, this->meshSize, this->animTime, this->patchSize);
+    cudaGenerateSpectrumKernel(this->d_h0, this->d_ht, this->spectrumW, this->meshSize, this->meshSize, this->animTime, this->Simm_patchSize);
 
     // execute inverse FFT to convert to spatial domain
     cufftExecC2C(this->fftPlan, this->d_ht, this->d_ht, CUFFT_INVERSE);
@@ -223,8 +251,7 @@ void oceanFFT::runCuda() {
 
 void oceanFFT::timerEvent() {
     float time = SDL_GetTicks();
-
-    if (this->animate)
+    if (this->Setting_Animate)
         this->animTime += (time - this->prevTime) * this->animationRate;
     this->prevTime = time;
 }
@@ -254,7 +281,7 @@ float oceanFFT::phillips(float Kx, float Ky, float Vdir, float V, float A, float
         return 0.0f;
 
     // largest possible wave from constant wind of velocity v
-    float L = V * V / g;
+    float L = V * V / this->Simm_g;
 
     float k_x = Kx / sqrtf(k_squared);
     float k_y = Ky / sqrtf(k_squared);
@@ -277,10 +304,10 @@ float oceanFFT::phillips(float Kx, float Ky, float Vdir, float V, float A, float
 void oceanFFT::generate_h0(float2 *h0) {
     for (unsigned int y = 0; y <= this->meshSize; y++) {
         for (unsigned int x = 0; x <= this->meshSize; x++) {
-            float kx = (-(int)this->meshSize / 2.0f + x) * (2.0f * CUDART_PI_F / this->patchSize);
-            float ky = (-(int)this->meshSize / 2.0f + y) * (2.0f * CUDART_PI_F / this->patchSize);
+            float kx = (-(int)this->meshSize / 2.0f + x) * (2.0f * CUDART_PI_F / this->Simm_patchSize);
+            float ky = (-(int)this->meshSize / 2.0f + y) * (2.0f * CUDART_PI_F / this->Simm_patchSize);
 
-            float P = sqrtf(phillips(kx, ky, this->windDir, this->windSpeed, this->A, this->dirDepend));
+            float P = sqrtf(phillips(kx, ky, this->Simm_windDir, this->Simm_windSpeed, this->Simm_A, this->Simm_dirDepend));
 
             if (kx == 0.0f && ky == 0.0f)
                 P = 0.0f;

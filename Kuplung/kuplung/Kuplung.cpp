@@ -453,6 +453,13 @@ void Kuplung::renderSceneModels() {
         Settings::Instance()->sceneCountTriangles += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 3;
         Settings::Instance()->sceneCountFaces += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 6;
     }
+
+#ifdef DEF_KuplungSetting_UseCuda
+    if (this->managerObjects->Setting_Cuda_ShowOceanFFT) {
+        Settings::Instance()->sceneCountObjects += 1;
+        this->managerUI->provider_ImGui->componentCudaExamples->exampleOceanFFT->render(this->managerObjects->matrixProjection, this->managerObjects->camera->matrixCamera, this->managerObjects->grid->matrixModel);
+    }
+#endif
 }
 
 #pragma mark - Scene GUI

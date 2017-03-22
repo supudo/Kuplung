@@ -11,8 +11,8 @@ out vec3 v_eyeSpaceNormal; // eyeSpaceNormal
 out vec3 v_worldSpaceNormal; // worldSpaceNormal
 
 uniform float heightScale; // = 0.5;
-uniform float chopiness;   // = 1.0;
-uniform vec2  size;        // = vec2(256.0, 256.0);
+uniform float chopiness; // = 1.0;
+uniform vec2 size; // = vec2(256.0, 256.0);
 
 uniform mat4 v_MVPMatrix;
 uniform mat4 v_MVMatrix;

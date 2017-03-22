@@ -55,7 +55,24 @@ class oceanFFT {
 public:
     ~oceanFFT();
     void init();
+    void initParameters();
     GLuint draw(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
+    void render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
+
+    bool Setting_ShowWireframes, Setting_DrawDots, Setting_Animate;
+
+    // simulation parameters
+    float Simm_g = 9.81f;              // gravitational constant
+    float Simm_A = 1e-7f;              // wave scale factor
+    float Simm_patchSize = 100;        // patch size
+    float Simm_windSpeed = 100.0f;
+    float Simm_windDir = CUDART_PI_F / 3.0f;
+    float Simm_dirDepend = 0.07f;
+
+    unsigned int meshSize = 256;
+    unsigned int spectrumW = meshSize + 4;
+    unsigned int spectrumH = meshSize + 1;
+    float heightModifier = 1.0;
 
 private:
     GLuint shaderProgram;
@@ -75,21 +92,12 @@ private:
     void createFBO();
     void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // constants
-    const unsigned int meshSize = 256;
-    const unsigned int spectrumW = meshSize + 4;
-    const unsigned int spectrumH = meshSize + 1;
-    const float heightModifier = 1.0;
+    bool inRendererUI;
 
     // OpenGL vertex buffers
     GLuint posVertexBuffer;
     GLuint heightVertexBuffer, slopeVertexBuffer, indexBuffer;
     struct cudaGraphicsResource *cuda_posVB_resource, *cuda_heightVB_resource, *cuda_slopeVB_resource; // handles OpenGL-CUDA exchange
-
-    bool animate = true;
-    bool drawPoints = false;
-    bool wireFrame = false;
 
     // FFT data
     cufftHandle fftPlan;
@@ -101,14 +109,6 @@ private:
     // pointers to device object
     float *g_hptr = NULL;
     float2 *g_sptr = NULL;
-
-    // simulation parameters
-    const float g = 9.81f;              // gravitational constant
-    const float A = 1e-7f;              // wave scale factor
-    const float patchSize = 100;        // patch size
-    float windSpeed = 100.0f;
-    float windDir = CUDART_PI_F / 3.0f;
-    float dirDepend = 0.07f;
 
     float animTime = 0.0f;
     float prevTime = 0.0f;
