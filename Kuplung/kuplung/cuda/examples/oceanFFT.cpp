@@ -45,7 +45,7 @@ void oceanFFT::init() {
 }
 
 void oceanFFT::initParameters() {
-        this->Setting_ShowWireframes = false;
+    this->Setting_ShowWireframes = false;
     this->Setting_DrawDots = false;
     this->Setting_Animate = true;
 
