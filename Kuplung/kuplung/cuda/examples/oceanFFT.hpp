@@ -62,6 +62,10 @@ private:
     GLuint glVAO;
     GLuint renderFBO, renderTextureColorBuffer, renderRBO;
 
+    GLint gl_VS_MVPMatrix, gl_VS_MVMatrix, gl_VS_NMatrix;
+    GLint gl_heightScale, gl_chopiness, gl_size;
+    GLint gl_deepColor, gl_shallowColor, gl_skyColor, gl_lightDir;
+
     glm::mat4 matrixModel;
 
     std::unique_ptr<CudaHelpers> helperCuda;

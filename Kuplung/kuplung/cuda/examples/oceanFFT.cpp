@@ -78,18 +78,18 @@ void oceanFFT::renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, gl
     glm::mat4 mvMatrix = matrixCamera * matrixModel;
     glm::mat3 nMatrix = glm::inverseTranspose(glm::mat3(matrixCamera * matrixModel));
 
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram, "v_MVPMatrix"), 1, GL_FALSE, glm::value_ptr(mvpMatrix));
-    glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram, "v_MVMatrix"), 1, GL_FALSE, glm::value_ptr(mvMatrix));
-    glUniformMatrix3fv(glGetUniformLocation(this->shaderProgram, "v_NMatrix"), 1, GL_FALSE, glm::value_ptr(nMatrix));
+    glUniformMatrix4fv(this->gl_VS_MVPMatrix, 1, GL_FALSE, glm::value_ptr(mvpMatrix));
+    glUniformMatrix4fv(this->gl_VS_MVMatrix, 1, GL_FALSE, glm::value_ptr(mvMatrix));
+    glUniformMatrix3fv(this->gl_VS_NMatrix, 1, GL_FALSE, glm::value_ptr(nMatrix));
 
-    glUniform1f(glGetUniformLocation(this->shaderProgram, "heightScale"), this->heightModifier / 2);
-    glUniform1f(glGetUniformLocation(this->shaderProgram, "chopiness"), 1.0f);
-    glUniform2f(glGetUniformLocation(this->shaderProgram, "size"), (float) this->meshSize, float(this->meshSize));
+    glUniform1f(this->gl_heightScale, this->heightModifier / 2);
+    glUniform1f(this->gl_chopiness, 1.0f);
+    glUniform2f(this->gl_size, (float) this->meshSize, float(this->meshSize));
 
-    glUniform4f(glGetUniformLocation(this->shaderProgram, "deepColor"), 0.0f, 0.1f, 0.4f, 1.0f);
-    glUniform4f(glGetUniformLocation(this->shaderProgram, "shallowColor"), 0.1f, 0.3f, 0.3f, 1.0f);
-    glUniform4f(glGetUniformLocation(this->shaderProgram, "skyColor"), 1.0f, 1.0f, 1.0f, 1.0f);
-    glUniform3f(glGetUniformLocation(this->shaderProgram, "lightDir"), 0.0f, 1.0f, 0.0f);
+    glUniform4f(this->gl_deepColor, 0.0f, 0.1f, 0.4f, 1.0f);
+    glUniform4f(this->gl_shallowColor, 0.1f, 0.3f, 0.3f, 1.0f);
+    glUniform4f(this->gl_skyColor, 1.0f, 1.0f, 1.0f, 1.0f);
+    glUniform3f(this->gl_lightDir, 0.0f, 1.0f, 0.0f);
 
     glBindVertexArray(this->glVAO);
     if (this->drawPoints)
@@ -393,6 +393,19 @@ bool oceanFFT::initShaderProgram() {
         Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
         return false;
     }
+
+    this->gl_VS_MVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "v_MVPMatrix");
+    this->gl_VS_MVMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "v_MVMatrix");
+    this->gl_VS_NMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "v_NMatrix");
+
+    this->gl_heightScale = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "heightScale");
+    this->gl_chopiness = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "chopiness");
+    this->gl_size = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "size");
+
+    this->gl_deepColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "deepColor");
+    this->gl_shallowColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "shallowColor");
+    this->gl_skyColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "skyColor");
+    this->gl_lightDir = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "lightDir");
 
     return true;
 }
