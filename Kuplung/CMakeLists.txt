@@ -109,25 +109,42 @@ LINK_DIRECTORIES(../external/libnoise/lib)
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 
 # Cuda
-# FIND_PACKAGE(CUDA)
-# IF(CUDA_FOUND)
-#     INCLUDE_DIRECTORIES(${CUDA_INCLUDE_DIRS})
+FIND_PACKAGE(CUDA)
+IF(CUDA_FOUND)
+    INCLUDE_DIRECTORIES(${CUDA_INCLUDE_DIRS})
 
-#     SET(CUDA_SOURCES
-#         kuplung/cuda/cu/cuda_vectorAddition.cu
-#         kuplung/cuda/cu/cuda_oceanFFT_kernel.cu)
+    SET(CUDA_SOURCES_CU
+        kuplung/cuda/cu/cuda_vectorAddition.cu
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu)
 
-#     SET(CUDA_NVCC_FLAGS
-#         ${CUDA_NVCC_FLAGS};
-#         -D_DEBUG;
-#         -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
-#         -I/usr/local/cuda/include;
-#         -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
+    SET(CUDA_NVCC_FLAGS
+        ${CUDA_NVCC_FLAGS};
+        -D_DEBUG;
+        -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
+        -I/usr/local/cuda/include;
+        -std=c++11;-DVERBOSE;
+        -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
+    SET(CUDA_PROPAGATE_HOST_FLAGS OFF)
+    CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES_CU})
 
-#     SET(CMAKE_HOST_FLAGS ${CMAKE_HOST_FLAGS};-std=c++14;-stdlib=libc++)
-#     CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES})
-#     ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
-# ENDIF(CUDA_FOUND)
+    # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L/usr/local/cuda/lib -lcuda -lcudart -lcufft")
+
+    SET(CUDA_SOURCES_CPP
+        kuplung/cuda/CudaExamples.cpp
+        kuplung/cuda/CudaExamples.hpp
+        kuplung/utilities/cuda/CudaHelpers.cpp
+        kuplung/utilities/cuda/CudaHelpers.hpp
+        kuplung/cuda/examples/VectorAddition.cpp
+        kuplung/cuda/examples/VectorAddition.hpp
+        kuplung/cuda/examples/oceanFFT.cpp
+        kuplung/cuda/examples/oceanFFT.hpp)
+
+    SET(CUDA_SOURCES_SHADERS
+        resources/shaders/cuda/oceanFFT.vert
+        resources/shaders/cuda/oceanFFT.frag)
+
+    ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
+ENDIF(CUDA_FOUND)
 
 INCLUDE_DIRECTORIES(.)
 
@@ -588,7 +605,7 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         INCLUDE(CMakeToolsHelpers OPTIONAL)
 
         IF (CUDA_FOUND)
-            ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c ${CUDA_COMPILED_FILES})
+            ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${CUDA_SOURCES_CPP} kuplung/utilities/nanovg/nanovg.c ${CUDA_COMPILED_FILES})
         ELSE(CUDA_FOUND)
             ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
         ENDIF(CUDA_FOUND)
@@ -659,6 +676,13 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         FILE(GLOB Kuplung_Shaders_StoyAssets_Files "resources/shadertoy/*.*")
         FILE(COPY ${Kuplung_Shaders_StoyAssets_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shadertoy/")
 
+        IF (CUDA_FOUND)
+            # Shaders - Cuda
+            EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/cuda/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
+            FILE(GLOB Kuplung_Shaders_Cuda_Files "resources/cuda/*.*")
+            FILE(COPY ${Kuplung_Shaders_Cuda_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
+        ENDIF(CUDA_FOUND)
+
         # Skybox
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/skybox/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
         FILE(GLOB Kuplung_Skybox_Files "resources/skybox/*.*")
@@ -708,8 +732,8 @@ IF(LUA_FOUND)
 ENDIF(LUA_FOUND)
 
 IF(CUDA_FOUND)
-    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CUDA_LIBRARIES})
-    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CUDA_cudart_static_LIBRARY})
+    SET(CUDA_LIBRARY_DIRECTORY_FLAG "-L${CUDA_TOOLKIT_ROOT_DIR}/lib")
+    TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${CUDA_LIBRARY_DIRECTORY_FLAG} cuda cufft ${CUDA_LIBRARIES})
 ENDIF(CUDA_FOUND)
 
 INCLUDE(cppcheck.cmake)

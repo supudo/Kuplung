@@ -7,6 +7,7 @@ compiler:
 before_install:
   - brew update
   - brew install sdl2 glm minizip glfw3 assimp protobuf lua@5.3
+  - brew cask install cuda
 
 script:
   - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./
