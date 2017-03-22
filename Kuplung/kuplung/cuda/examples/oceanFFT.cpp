@@ -346,7 +346,7 @@ void oceanFFT::initBuffers() {
     glBindBuffer(GL_ARRAY_BUFFER, this->slopeVertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, this->meshSize * this->meshSize * sizeof(float2), 0, GL_DYNAMIC_DRAW);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float2), NULL);
     cudaGraphicsGLRegisterBuffer(&this->cuda_slopeVB_resource, this->slopeVertexBuffer, cudaGraphicsMapFlagsWriteDiscard);
 
     // indices
