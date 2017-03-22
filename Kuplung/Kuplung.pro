@@ -182,9 +182,6 @@ mac {
     LIBS += -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
     INCLUDEPATH += /usr/local/cuda/include
 
-#    INCLUDEPATH += /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk/System/Library/Frameworks/OpenGL.framework/Headers
-#    INCLUDEPATH += /Users/supudo/NVIDIA_CUDA-8.0_Samples/common/inc
-
     CUDA_DIR = /usr/local/cuda
 
     CUDA_OBJECTS_DIR = cuda
