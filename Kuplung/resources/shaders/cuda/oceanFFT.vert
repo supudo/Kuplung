@@ -9,8 +9,6 @@ layout (location = 2) in vec3 a_slope;
 out vec3 v_eyeSpacePos; // eyeSpacePos
 out vec3 v_eyeSpaceNormal; // eyeSpaceNormal
 out vec3 v_worldSpaceNormal; // worldSpaceNormal
-out vec3 v_height;
-out vec3 v_slope;
 
 uniform float heightScale; // = 0.5;
 uniform float chopiness;   // = 1.0;
@@ -34,6 +32,4 @@ void main() {
 
     v_eyeSpacePos = (v_MVMatrix * pos).xyz;
     v_eyeSpaceNormal = (v_NMatrix * normal).xyz;
-    v_height = a_height;
-    v_slope = a_slope;
 }

@@ -4,8 +4,6 @@
 in vec3 v_eyeSpacePos; // eyeSpacePos
 in vec3 v_eyeSpaceNormal; // worldSpaceNormal;
 in vec3 v_worldSpaceNormal; // eyeSpaceNormal;
-in vec3 v_height;
-in vec3 v_slope;
 
 uniform vec4 deepColor;
 uniform vec4 shallowColor;
