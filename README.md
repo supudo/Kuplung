@@ -13,6 +13,7 @@ C/C++/OpenGL Model Viewer (Experiments)
 - [GLM](http://glm.g-truc.net/)
 - [SDL2](https://www.libsdl.org/)
 - [libnoise](http://libnoise.sourceforge.net/)
+- [NVIDIA CUDA](https://developer.nvidia.com/cuda-zone)
 
 #### IDE
 QT Creator
