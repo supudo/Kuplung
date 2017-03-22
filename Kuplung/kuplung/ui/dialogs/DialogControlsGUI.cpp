@@ -907,10 +907,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         }
     }
 }
-
+#ifdef DEF_KuplungSetting_UseCuda
 void DialogControlsGUI::setCudaOceanFFT(oceanFFT* component) {
     this->cudaOceanFFT = component;
 }
+#endif
 
 void DialogControlsGUI::setHeightmapImage(std::string const& heightmapImage) {
     if (this->heightmapImage != heightmapImage) {

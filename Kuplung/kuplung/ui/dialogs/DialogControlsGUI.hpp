@@ -24,7 +24,9 @@ class DialogControlsGUI {
 public:
     explicit DialogControlsGUI(ObjectsManager &managerObjects);
     void render(bool* show, bool* isFrame);
+#ifdef DEF_KuplungSetting_UseCuda
     void setCudaOceanFFT(oceanFFT* component);
+#endif
     int selectedObject, selectedObjectLight;
 
 private:
