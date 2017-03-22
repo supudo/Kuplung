@@ -11,6 +11,7 @@
 #include "oceanFFT.hpp"
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtc/matrix_inverse.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 ////////////////////////////////////////////////////////////////////////////////
 // kernels
@@ -60,6 +61,14 @@ void oceanFFT::initParameters() {
     this->spectrumW = meshSize + 4;
     this->spectrumH = meshSize + 1;
     this->heightModifier = 1.0;
+
+    this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
+    this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
+
+    this->scaleX = std::make_unique<ObjectCoordinate>(false, 10.0f);
+    this->scaleY = std::make_unique<ObjectCoordinate>(false, 10.0f);
+    this->scaleZ = std::make_unique<ObjectCoordinate>(false, 10.0f);
 }
 
 void oceanFFT::render(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid) {
@@ -101,6 +110,10 @@ void oceanFFT::renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, gl
 
     glm::mat4 matrixModel = glm::mat4(1.0);
     matrixModel = matrixModel * matrixGrid;
+    // scale
+    matrixModel = glm::scale(matrixModel, glm::vec3(this->scaleX->point, this->scaleY->point, this->scaleZ->point));
+    // translate
+    matrixModel = glm::translate(matrixModel, glm::vec3(this->positionX->point, this->positionY->point, this->positionZ->point));
 
     glm::mat4 mvpMatrix = matrixProjection * matrixCamera * matrixModel;
     glm::mat4 mvMatrix = matrixCamera * matrixModel;

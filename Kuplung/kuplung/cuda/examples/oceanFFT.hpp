@@ -39,6 +39,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/cuda/CudaHelpers.hpp"
+#include "kuplung/objects/ObjectDefinitions.h"
 #include <glm/glm.hpp>
 
 #include <stdlib.h>
@@ -73,6 +74,10 @@ public:
     unsigned int spectrumW = meshSize + 4;
     unsigned int spectrumH = meshSize + 1;
     float heightModifier = 1.0;
+
+    bool scaleAll;
+    std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
+    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
 
 private:
     GLuint shaderProgram;

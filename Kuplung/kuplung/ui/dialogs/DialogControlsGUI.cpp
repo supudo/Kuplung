@@ -836,6 +836,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                 case 2: {
                     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Cuda Example - Ocean FFT");
                     ImGui::Checkbox("Show Ocean", &this->managerObjects.Setting_Cuda_ShowOceanFFT);
+
                     if (this->managerObjects.Setting_Cuda_ShowOceanFFT) {
                         if (ImGui::Button("Regenerate", ImVec2(-1, 0)))
                             this->cudaOceanFFT->init();
@@ -850,6 +851,22 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         this->helperUI->addControlsSlider("Wind Direction", 459, 1, 0.0f, M_PI, false, NULL, &this->cudaOceanFFT->Simm_windDir, true, isFrame);
                         ImGui::Separator();
                         this->helperUI->addControlsSlider("Height Modifier", 460, 1, 1, 100, false, NULL, &this->cudaOceanFFT->heightModifier, true, isFrame);
+                        ImGui::Separator();
+                        ImGui::Checkbox("Scale all", &this->cudaOceanFFT->scaleAll);
+                        if (this->cudaOceanFFT->scaleAll) {
+                            ImGui::SliderFloat("##001", &this->cudaOceanFFT->scaleX->point, 1.0f, 100.0f); ImGui::SameLine(); ImGui::Text("X");
+                            ImGui::SliderFloat("##001", &this->cudaOceanFFT->scaleY->point, 1.0f, 100.0f); ImGui::SameLine(); ImGui::Text("Y");
+                            ImGui::SliderFloat("##001", &this->cudaOceanFFT->scaleZ->point, 1.0f, 100.0f); ImGui::SameLine(); ImGui::Text("Z");
+                        }
+                        else {
+                            this->helperUI->addControlsSliderSameLine("X", 1, 0.1f, 1.0f, 100.0f, true, &this->cudaOceanFFT->scaleX->animate, &this->cudaOceanFFT->scaleX->point, false, isFrame);
+                            this->helperUI->addControlsSliderSameLine("Y", 2, 0.1f, 1.0f, 100.0f, true, &this->cudaOceanFFT->scaleY->animate, &this->cudaOceanFFT->scaleY->point, false, isFrame);
+                            this->helperUI->addControlsSliderSameLine("Z", 3, 0.1f, 1.0f, 100.0f, true, &this->cudaOceanFFT->scaleZ->animate, &this->cudaOceanFFT->scaleZ->point, false, isFrame);
+                        }
+                        ImGui::Separator();
+                        this->helperUI->addControlsSliderSameLine("X", 4, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->cudaOceanFFT->positionX->animate, &this->cudaOceanFFT->positionX->point, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Y", 5, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->cudaOceanFFT->positionY->animate, &this->cudaOceanFFT->positionY->point, true, isFrame);
+                        this->helperUI->addControlsSliderSameLine("Z", 6, 0.05f, -2 * this->managerObjects.Setting_GridSize, 2 * this->managerObjects.Setting_GridSize, true, &this->cudaOceanFFT->positionZ->animate, &this->cudaOceanFFT->positionZ->point, true, isFrame);
                     }
                     break;
                 }
