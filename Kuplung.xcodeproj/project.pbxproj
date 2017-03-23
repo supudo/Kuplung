@@ -51,6 +51,7 @@
 		8A43BA721D4776B10034CD46 /* KuplungAppScene.pb.cc in Sources */ = {isa = PBXBuildFile; fileRef = 8A43BA701D4776B10034CD46 /* KuplungAppScene.pb.cc */; };
 		8A45C5DE1D895FAD00E951DF /* VoronoiGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DC1D895FAD00E951DF /* VoronoiGenerator.cpp */; };
 		8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */; };
+		8A45DDC11E83E9D100F727FD /* STLParserAssimp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45DDBF1E83E9D100F727FD /* STLParserAssimp.cpp */; };
 		8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDBD1DCA591900383570 /* ParserUtils.cpp */; };
 		8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
@@ -769,6 +770,8 @@
 		8A45C5E01D895FC400E951DF /* StructuredVolumetricSampling.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = StructuredVolumetricSampling.hpp; path = artefacts/StructuredVolumetricSampling.hpp; sourceTree = "<group>"; };
 		8A45C5E21D89608000E951DF /* structured_vol_sampling.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.frag; sourceTree = "<group>"; };
 		8A45C5E31D89608000E951DF /* structured_vol_sampling.vert */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = structured_vol_sampling.vert; sourceTree = "<group>"; };
+		8A45DDBF1E83E9D100F727FD /* STLParserAssimp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = STLParserAssimp.cpp; path = "stl-parser/STLParserAssimp.cpp"; sourceTree = "<group>"; };
+		8A45DDC01E83E9D100F727FD /* STLParserAssimp.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = STLParserAssimp.hpp; path = "stl-parser/STLParserAssimp.hpp"; sourceTree = "<group>"; };
 		8A45EDBD1DCA591900383570 /* ParserUtils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ParserUtils.cpp; sourceTree = "<group>"; };
 		8A45EDBE1DCA591900383570 /* ParserUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParserUtils.hpp; sourceTree = "<group>"; };
 		8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportOBJ.cpp; path = exporters/ExportOBJ.cpp; sourceTree = "<group>"; };
@@ -2031,6 +2034,8 @@
 			children = (
 				8AC291421CD2456800A631C1 /* STLParser.cpp */,
 				8AC291431CD2456800A631C1 /* STLParser.hpp */,
+				8A45DDBF1E83E9D100F727FD /* STLParserAssimp.cpp */,
+				8A45DDC01E83E9D100F727FD /* STLParserAssimp.hpp */,
 			);
 			name = "stl-parser";
 			sourceTree = "<group>";
@@ -2322,6 +2327,7 @@
 				8A8E141E1E7FDF0F00273DCC /* CudaExamples.cpp in Sources */,
 				8AB6F0691C3A9BEE00665C40 /* Kuplung.cpp in Sources */,
 				8A6E705E1C6CACAC0085CAE5 /* FontsList.cpp in Sources */,
+				8A45DDC11E83E9D100F727FD /* STLParserAssimp.cpp in Sources */,
 				8A6B61A61CD27B9E002CB119 /* objParser1.cpp in Sources */,
 				8A6E70B11C6CACB40085CAE5 /* FNTParser.cpp in Sources */,
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,

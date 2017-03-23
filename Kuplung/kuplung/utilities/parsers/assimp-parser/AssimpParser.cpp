@@ -164,6 +164,15 @@ MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::str
 
         entityModel.ModelMaterial = entityMaterial;
     }
+    else {
+        MeshModelMaterial entityMaterial = {};
+        entityMaterial.MaterialID = 1;
+        entityMaterial.MaterialTitle = "";
+        entityMaterial.DiffuseColor = glm::vec3(0.7, 0.7, 0.7);
+        entityMaterial.Transparency = 1.0f;
+        entityMaterial.IlluminationMode = 2;
+        entityModel.ModelMaterial = entityMaterial;
+    }
 
     this->indexModel += 1;
 
