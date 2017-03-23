@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, MaterialTextureType)> processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;
@@ -56,9 +56,9 @@ void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType Te
 
     ImGui::Text("Mode File Parser:"); ImGui::SameLine();
 #ifdef DEF_KuplungSetting_UseCuda
-    const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "Cuda", "STL Parser", "PLY Parser"};
+    const char* parserItems[] = {"Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp"};
 #else
-    const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "STL Parser", "PLY Parser"};
+    const char* parserItems[] = {"Kuplung Parsers", "Assimp"};
 #endif
     if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
         Settings::Instance()->saveSettings();
@@ -110,22 +110,7 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
         if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile) {
-                FileBrowser_ParserType t;
-                switch (Settings::Instance()->ModelFileParser) {
-                    case 0:
-                        t = FileBrowser_ParserType_Own1;
-                        break;
-                    case 1:
-                        t = FileBrowser_ParserType_Own2;
-                        break;
-                    case 2:
-                        t = FileBrowser_ParserType_Assimp;
-                        break;
-                    default:
-                        t = FileBrowser_ParserType_Own2;
-                        break;
-                }
-                this->processFile(entity, t, TextureType);
+                this->processFile(entity, TextureType);
 
 #ifdef _WIN32
         std::string folderDelimiter = "\";

@@ -315,6 +315,14 @@ void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager> &m
         lo->set_allocated_rotatecenterx(this->getObjectCoordinate2(*l->rotateCenterX));
         lo->set_allocated_rotatecentery(this->getObjectCoordinate2(*l->rotateCenterY));
         lo->set_allocated_rotatecenterz(this->getObjectCoordinate2(*l->rotateCenterZ));
+        lo->set_allocated_ambient(this->getMaterialColor2(*l->ambient));
+        lo->set_allocated_diffuse(this->getMaterialColor2(*l->diffuse));
+        lo->set_allocated_specular(this->getMaterialColor2(*l->specular));
+        lo->set_allocated_lcutoff(this->getObjectCoordinate2(*l->lCutOff));
+        lo->set_allocated_loutercutoff(this->getObjectCoordinate2(*l->lOuterCutOff));
+        lo->set_allocated_lconstant(this->getObjectCoordinate2(*l->lConstant));
+        lo->set_allocated_llinear(this->getObjectCoordinate2(*l->lLinear));
+        lo->set_allocated_lquadratic(this->getObjectCoordinate2(*l->lQuadratic));
     }
 }
 
@@ -356,6 +364,14 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &ma
         l->rotateCenterX = this->setObjectCoordinate2(lo.rotatecenterx());
         l->rotateCenterY = this->setObjectCoordinate2(lo.rotatecentery());
         l->rotateCenterZ = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->ambient = this->setMaterialColor2(lo.ambient());
+        l->diffuse = this->setMaterialColor2(lo.diffuse());
+        l->specular = this->setMaterialColor2(lo.specular());
+        l->lCutOff = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->lOuterCutOff = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->lConstant = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->lLinear = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->lQuadratic = this->setObjectCoordinate2(lo.rotatecenterz());
 
         switch (lo.type()) {
             case 0:

@@ -42,44 +42,22 @@ void FileModelManager::init(std::function<void(float)> doProgress) {
     this->parserAssimp->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 
-std::vector<MeshModel> FileModelManager::parse(FBEntity file, FileBrowser_ParserType type, std::vector<std::string> settings) {
+std::vector<MeshModel> FileModelManager::parse(FBEntity file, std::vector<std::string> settings) {
     std::vector<MeshModel> meshModels;
-    assert(type == FileBrowser_ParserType_Own1 ||
-           type == FileBrowser_ParserType_Own2 ||
-#ifdef DEF_KuplungSetting_UseCuda
-           type == FileBrowser_ParserType_Cuda ||
-#endif
-           type == FileBrowser_ParserType_STL ||
-           type == FileBrowser_ParserType_PLY ||
-           type == FileBrowser_ParserType_Assimp);
-    switch (type) {
-        case FileBrowser_ParserType_Own1: {
-            meshModels = this->parserOBJ1->parse(file, settings);
-            break;
-        }
-        case FileBrowser_ParserType_Own2: {
+    if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own) {
+        if (Settings::Instance()->hasEnding(file.title, ".obj") || Settings::Instance()->hasEnding(file.path, ".obj"))
             meshModels = this->parserOBJ2->parse(file, settings);
-            break;
-        }
-        case FileBrowser_ParserType_Assimp: {
-            meshModels = this->parserAssimp->parse(file, settings);
-            break;
-        }
-#ifdef DEF_KuplungSetting_UseCuda
-        case FileBrowser_ParserType_Cuda: {
-            meshModels = this->parserOBJCuda->parse(file, settings);
-            break;
-        }
-#endif
-        case FileBrowser_ParserType_STL: {
+        else if (Settings::Instance()->hasEnding(file.title, ".stl") || Settings::Instance()->hasEnding(file.path, ".stl"))
             meshModels = this->parserSTL->parse(file, settings);
-            break;
-        }
-        case FileBrowser_ParserType_PLY: {
+        else if (Settings::Instance()->hasEnding(file.title, ".ply") || Settings::Instance()->hasEnding(file.path, ".ply"))
             meshModels = this->parserPLY->parse(file, settings);
-            break;
-        }
     }
+#ifdef DEF_KuplungSetting_UseCuda
+    else if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own_Cuda)
+        meshModels = this->parserOBJCuda->parse(file, settings);
+#endif
+    else if (Settings::Instance()->ModelFileParser == Importer_ParserType_Assimp)
+        meshModels = this->parserAssimp->parse(file, settings);
     return meshModels;
 }
 

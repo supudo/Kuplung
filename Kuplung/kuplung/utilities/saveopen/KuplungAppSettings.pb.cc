@@ -214,12 +214,20 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, rotatecenterx_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, rotatecentery_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, rotatecenterz_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, ambient_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, diffuse_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, specular_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, lcutoff_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, loutercutoff_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, lconstant_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, llinear_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, lquadratic_),
   0,
   1,
-  17,
-  18,
-  19,
-  20,
+  25,
+  26,
+  27,
+  28,
   2,
   3,
   4,
@@ -235,13 +243,21 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   14,
   15,
   16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 0, 48, sizeof(GUISettings)},
   { 92, 109, sizeof(CameraSettings)},
   { 122, 139, sizeof(GridSettings)},
-  { 152, 177, sizeof(LightObject)},
+  { 152, 185, sizeof(LightObject)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -386,6 +402,22 @@ void TableStruct::InitDefaultsImpl() {
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
   _LightObject_default_instance_.get_mutable()->rotatecenterz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->ambient_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->diffuse_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->specular_ = const_cast< ::KuplungApp::MaterialColor*>(
+      ::KuplungApp::MaterialColor::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->lcutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->loutercutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->lconstant_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->llinear_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
+  _LightObject_default_instance_.get_mutable()->lquadratic_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+      ::KuplungApp::ObjectCoordinate::internal_default_instance());
 }
 
 void InitDefaults() {
@@ -465,7 +497,7 @@ void AddDescriptorsImpl() {
       "\n \002(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006s"
       "caleZ\030\013 \002(\0132\034.KuplungApp.ObjectCoordinat"
       "e\022\024\n\014transparency\030\014 \002(\002\022\020\n\010showGrid\030\r \002("
-      "\005\"\345\006\n\013LightObject\022\r\n\005title\030\001 \002(\t\022\023\n\013desc"
+      "\005\"\337\t\n\013LightObject\022\r\n\005title\030\001 \002(\t\022\023\n\013desc"
       "ription\030\002 \002(\t\022\014\n\004type\030\003 \002(\005\022\026\n\016showLampO"
       "bject\030\004 \002(\010\022\031\n\021showLampDirection\030\005 \002(\010\022\022"
       "\n\nshowInWire\030\006 \002(\010\022/\n\tpositionX\030\007 \002(\0132\034."
@@ -486,10 +518,20 @@ void AddDescriptorsImpl() {
       "tateCenterX\030\023 \002(\0132\034.KuplungApp.ObjectCoo"
       "rdinate\0223\n\rrotateCenterY\030\024 \002(\0132\034.Kuplung"
       "App.ObjectCoordinate\0223\n\rrotateCenterZ\030\025 "
-      "\002(\0132\034.KuplungApp.ObjectCoordinate"
+      "\002(\0132\034.KuplungApp.ObjectCoordinate\022*\n\007amb"
+      "ient\030\026 \002(\0132\031.KuplungApp.MaterialColor\022*\n"
+      "\007diffuse\030\027 \002(\0132\031.KuplungApp.MaterialColo"
+      "r\022+\n\010specular\030\030 \002(\0132\031.KuplungApp.Materia"
+      "lColor\022-\n\007lCutOff\030\031 \002(\0132\034.KuplungApp.Obj"
+      "ectCoordinate\0222\n\014lOuterCutOff\030\032 \002(\0132\034.Ku"
+      "plungApp.ObjectCoordinate\022/\n\tlConstant\030\033"
+      " \002(\0132\034.KuplungApp.ObjectCoordinate\022-\n\007lL"
+      "inear\030\034 \002(\0132\034.KuplungApp.ObjectCoordinat"
+      "e\0220\n\nlQuadratic\030\035 \002(\0132\034.KuplungApp.Objec"
+      "tCoordinate"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 3673);
+      descriptor, 4051);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungAppSettings.proto", &protobuf_RegisterTypes);
   ::KuplungApp::protobuf_KuplungDefinitions_2eproto::AddDescriptors();
@@ -6798,6 +6840,14 @@ const int LightObject::kRotateZFieldNumber;
 const int LightObject::kRotateCenterXFieldNumber;
 const int LightObject::kRotateCenterYFieldNumber;
 const int LightObject::kRotateCenterZFieldNumber;
+const int LightObject::kAmbientFieldNumber;
+const int LightObject::kDiffuseFieldNumber;
+const int LightObject::kSpecularFieldNumber;
+const int LightObject::kLCutOffFieldNumber;
+const int LightObject::kLOuterCutOffFieldNumber;
+const int LightObject::kLConstantFieldNumber;
+const int LightObject::kLLinearFieldNumber;
+const int LightObject::kLQuadraticFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 LightObject::LightObject()
@@ -6897,6 +6947,46 @@ LightObject::LightObject(const LightObject& from)
   } else {
     rotatecenterz_ = NULL;
   }
+  if (from.has_ambient()) {
+    ambient_ = new ::KuplungApp::MaterialColor(*from.ambient_);
+  } else {
+    ambient_ = NULL;
+  }
+  if (from.has_diffuse()) {
+    diffuse_ = new ::KuplungApp::MaterialColor(*from.diffuse_);
+  } else {
+    diffuse_ = NULL;
+  }
+  if (from.has_specular()) {
+    specular_ = new ::KuplungApp::MaterialColor(*from.specular_);
+  } else {
+    specular_ = NULL;
+  }
+  if (from.has_lcutoff()) {
+    lcutoff_ = new ::KuplungApp::ObjectCoordinate(*from.lcutoff_);
+  } else {
+    lcutoff_ = NULL;
+  }
+  if (from.has_loutercutoff()) {
+    loutercutoff_ = new ::KuplungApp::ObjectCoordinate(*from.loutercutoff_);
+  } else {
+    loutercutoff_ = NULL;
+  }
+  if (from.has_lconstant()) {
+    lconstant_ = new ::KuplungApp::ObjectCoordinate(*from.lconstant_);
+  } else {
+    lconstant_ = NULL;
+  }
+  if (from.has_llinear()) {
+    llinear_ = new ::KuplungApp::ObjectCoordinate(*from.llinear_);
+  } else {
+    llinear_ = NULL;
+  }
+  if (from.has_lquadratic()) {
+    lquadratic_ = new ::KuplungApp::ObjectCoordinate(*from.lquadratic_);
+  } else {
+    lquadratic_ = NULL;
+  }
   ::memcpy(&type_, &from.type_,
     reinterpret_cast<char*>(&showinwire_) -
     reinterpret_cast<char*>(&type_) + sizeof(showinwire_));
@@ -6963,6 +7053,30 @@ void LightObject::SharedDtor() {
   }
   if (this != internal_default_instance()) {
     delete rotatecenterz_;
+  }
+  if (this != internal_default_instance()) {
+    delete ambient_;
+  }
+  if (this != internal_default_instance()) {
+    delete diffuse_;
+  }
+  if (this != internal_default_instance()) {
+    delete specular_;
+  }
+  if (this != internal_default_instance()) {
+    delete lcutoff_;
+  }
+  if (this != internal_default_instance()) {
+    delete loutercutoff_;
+  }
+  if (this != internal_default_instance()) {
+    delete lconstant_;
+  }
+  if (this != internal_default_instance()) {
+    delete llinear_;
+  }
+  if (this != internal_default_instance()) {
+    delete lquadratic_;
   }
 }
 
@@ -7059,11 +7173,45 @@ void LightObject::Clear() {
       rotatecentery_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (has_rotatecenterz()) {
-    GOOGLE_DCHECK(rotatecenterz_ != NULL);
-    rotatecenterz_->::KuplungApp::ObjectCoordinate::Clear();
+  if (_has_bits_[16 / 32] & 16711680u) {
+    if (has_rotatecenterz()) {
+      GOOGLE_DCHECK(rotatecenterz_ != NULL);
+      rotatecenterz_->::KuplungApp::ObjectCoordinate::Clear();
+    }
+    if (has_ambient()) {
+      GOOGLE_DCHECK(ambient_ != NULL);
+      ambient_->::KuplungApp::MaterialColor::Clear();
+    }
+    if (has_diffuse()) {
+      GOOGLE_DCHECK(diffuse_ != NULL);
+      diffuse_->::KuplungApp::MaterialColor::Clear();
+    }
+    if (has_specular()) {
+      GOOGLE_DCHECK(specular_ != NULL);
+      specular_->::KuplungApp::MaterialColor::Clear();
+    }
+    if (has_lcutoff()) {
+      GOOGLE_DCHECK(lcutoff_ != NULL);
+      lcutoff_->::KuplungApp::ObjectCoordinate::Clear();
+    }
+    if (has_loutercutoff()) {
+      GOOGLE_DCHECK(loutercutoff_ != NULL);
+      loutercutoff_->::KuplungApp::ObjectCoordinate::Clear();
+    }
+    if (has_lconstant()) {
+      GOOGLE_DCHECK(lconstant_ != NULL);
+      lconstant_->::KuplungApp::ObjectCoordinate::Clear();
+    }
+    if (has_llinear()) {
+      GOOGLE_DCHECK(llinear_ != NULL);
+      llinear_->::KuplungApp::ObjectCoordinate::Clear();
+    }
   }
-  if (_has_bits_[16 / 32] & 1966080u) {
+  if (has_lquadratic()) {
+    GOOGLE_DCHECK(lquadratic_ != NULL);
+    lquadratic_->::KuplungApp::ObjectCoordinate::Clear();
+  }
+  if (_has_bits_[24 / 32] & 503316480u) {
     ::memset(&type_, 0, reinterpret_cast<char*>(&showinwire_) -
       reinterpret_cast<char*>(&type_) + sizeof(showinwire_));
   }
@@ -7328,6 +7476,94 @@ bool LightObject::MergePartialFromCodedStream(
         break;
       }
 
+      // required .KuplungApp.MaterialColor ambient = 22;
+      case 22: {
+        if (tag == 178u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_ambient()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.MaterialColor diffuse = 23;
+      case 23: {
+        if (tag == 186u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_diffuse()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.MaterialColor specular = 24;
+      case 24: {
+        if (tag == 194u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_specular()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+      case 25: {
+        if (tag == 202u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_lcutoff()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+      case 26: {
+        if (tag == 210u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_loutercutoff()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate lConstant = 27;
+      case 27: {
+        if (tag == 218u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_lconstant()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate lLinear = 28;
+      case 28: {
+        if (tag == 226u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_llinear()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+      case 29: {
+        if (tag == 234u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_lquadratic()));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -7481,6 +7717,54 @@ void LightObject::SerializeWithCachedSizes(
   if (has_rotatecenterz()) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       21, *this->rotatecenterz_, output);
+  }
+
+  // required .KuplungApp.MaterialColor ambient = 22;
+  if (has_ambient()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, *this->ambient_, output);
+  }
+
+  // required .KuplungApp.MaterialColor diffuse = 23;
+  if (has_diffuse()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      23, *this->diffuse_, output);
+  }
+
+  // required .KuplungApp.MaterialColor specular = 24;
+  if (has_specular()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      24, *this->specular_, output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+  if (has_lcutoff()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, *this->lcutoff_, output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+  if (has_loutercutoff()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      26, *this->loutercutoff_, output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lConstant = 27;
+  if (has_lconstant()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      27, *this->lconstant_, output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lLinear = 28;
+  if (has_llinear()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      28, *this->llinear_, output);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+  if (has_lquadratic()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      29, *this->lquadratic_, output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -7641,6 +7925,62 @@ void LightObject::SerializeWithCachedSizes(
         21, *this->rotatecenterz_, false, target);
   }
 
+  // required .KuplungApp.MaterialColor ambient = 22;
+  if (has_ambient()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        22, *this->ambient_, false, target);
+  }
+
+  // required .KuplungApp.MaterialColor diffuse = 23;
+  if (has_diffuse()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        23, *this->diffuse_, false, target);
+  }
+
+  // required .KuplungApp.MaterialColor specular = 24;
+  if (has_specular()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        24, *this->specular_, false, target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+  if (has_lcutoff()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        25, *this->lcutoff_, false, target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+  if (has_loutercutoff()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        26, *this->loutercutoff_, false, target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lConstant = 27;
+  if (has_lconstant()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        27, *this->lconstant_, false, target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lLinear = 28;
+  if (has_llinear()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        28, *this->llinear_, false, target);
+  }
+
+  // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+  if (has_lquadratic()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      InternalWriteMessageNoVirtualToArray(
+        29, *this->lquadratic_, false, target);
+  }
+
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
         unknown_fields(), target);
@@ -7772,6 +8112,62 @@ size_t LightObject::RequiredFieldsByteSizeFallback() const {
         *this->rotatecenterz_);
   }
 
+  if (has_ambient()) {
+    // required .KuplungApp.MaterialColor ambient = 22;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->ambient_);
+  }
+
+  if (has_diffuse()) {
+    // required .KuplungApp.MaterialColor diffuse = 23;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->diffuse_);
+  }
+
+  if (has_specular()) {
+    // required .KuplungApp.MaterialColor specular = 24;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->specular_);
+  }
+
+  if (has_lcutoff()) {
+    // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lcutoff_);
+  }
+
+  if (has_loutercutoff()) {
+    // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->loutercutoff_);
+  }
+
+  if (has_lconstant()) {
+    // required .KuplungApp.ObjectCoordinate lConstant = 27;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lconstant_);
+  }
+
+  if (has_llinear()) {
+    // required .KuplungApp.ObjectCoordinate lLinear = 28;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->llinear_);
+  }
+
+  if (has_lquadratic()) {
+    // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lquadratic_);
+  }
+
   if (has_type()) {
     // required int32 type = 3;
     total_size += 1 +
@@ -7805,7 +8201,7 @@ size_t LightObject::ByteSizeLong() const {
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
         unknown_fields());
   }
-  if (((_has_bits_[0] & 0x001fffff) ^ 0x001fffff) == 0) {  // All required fields are present.
+  if (((_has_bits_[0] & 0x1fffffff) ^ 0x1fffffff) == 0) {  // All required fields are present.
     // required string title = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
@@ -7890,6 +8286,46 @@ size_t LightObject::ByteSizeLong() const {
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
         *this->rotatecenterz_);
+
+    // required .KuplungApp.MaterialColor ambient = 22;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->ambient_);
+
+    // required .KuplungApp.MaterialColor diffuse = 23;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->diffuse_);
+
+    // required .KuplungApp.MaterialColor specular = 24;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->specular_);
+
+    // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lcutoff_);
+
+    // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->loutercutoff_);
+
+    // required .KuplungApp.ObjectCoordinate lConstant = 27;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lconstant_);
+
+    // required .KuplungApp.ObjectCoordinate lLinear = 28;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->llinear_);
+
+    // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+    total_size += 2 +
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        *this->lquadratic_);
 
     // required int32 type = 3;
     total_size += 1 +
@@ -7988,9 +8424,35 @@ void LightObject::MergeFrom(const LightObject& from) {
       mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecentery());
     }
   }
-  if (from._has_bits_[16 / 32] & 2031616u) {
+  if (from._has_bits_[16 / 32] & 16711680u) {
     if (from.has_rotatecenterz()) {
       mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterz());
+    }
+    if (from.has_ambient()) {
+      mutable_ambient()->::KuplungApp::MaterialColor::MergeFrom(from.ambient());
+    }
+    if (from.has_diffuse()) {
+      mutable_diffuse()->::KuplungApp::MaterialColor::MergeFrom(from.diffuse());
+    }
+    if (from.has_specular()) {
+      mutable_specular()->::KuplungApp::MaterialColor::MergeFrom(from.specular());
+    }
+    if (from.has_lcutoff()) {
+      mutable_lcutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lcutoff());
+    }
+    if (from.has_loutercutoff()) {
+      mutable_loutercutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.loutercutoff());
+    }
+    if (from.has_lconstant()) {
+      mutable_lconstant()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lconstant());
+    }
+    if (from.has_llinear()) {
+      mutable_llinear()->::KuplungApp::ObjectCoordinate::MergeFrom(from.llinear());
+    }
+  }
+  if (from._has_bits_[24 / 32] & 520093696u) {
+    if (from.has_lquadratic()) {
+      mutable_lquadratic()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lquadratic());
     }
     if (from.has_type()) {
       set_type(from.type());
@@ -8022,7 +8484,7 @@ void LightObject::CopyFrom(const LightObject& from) {
 }
 
 bool LightObject::IsInitialized() const {
-  if ((_has_bits_[0] & 0x001fffff) != 0x001fffff) return false;
+  if ((_has_bits_[0] & 0x1fffffff) != 0x1fffffff) return false;
   if (has_positionx()) {
     if (!this->positionx_->IsInitialized()) return false;
   }
@@ -8068,6 +8530,30 @@ bool LightObject::IsInitialized() const {
   if (has_rotatecenterz()) {
     if (!this->rotatecenterz_->IsInitialized()) return false;
   }
+  if (has_ambient()) {
+    if (!this->ambient_->IsInitialized()) return false;
+  }
+  if (has_diffuse()) {
+    if (!this->diffuse_->IsInitialized()) return false;
+  }
+  if (has_specular()) {
+    if (!this->specular_->IsInitialized()) return false;
+  }
+  if (has_lcutoff()) {
+    if (!this->lcutoff_->IsInitialized()) return false;
+  }
+  if (has_loutercutoff()) {
+    if (!this->loutercutoff_->IsInitialized()) return false;
+  }
+  if (has_lconstant()) {
+    if (!this->lconstant_->IsInitialized()) return false;
+  }
+  if (has_llinear()) {
+    if (!this->llinear_->IsInitialized()) return false;
+  }
+  if (has_lquadratic()) {
+    if (!this->lquadratic_->IsInitialized()) return false;
+  }
   return true;
 }
 
@@ -8093,6 +8579,14 @@ void LightObject::InternalSwap(LightObject* other) {
   std::swap(rotatecenterx_, other->rotatecenterx_);
   std::swap(rotatecentery_, other->rotatecentery_);
   std::swap(rotatecenterz_, other->rotatecenterz_);
+  std::swap(ambient_, other->ambient_);
+  std::swap(diffuse_, other->diffuse_);
+  std::swap(specular_, other->specular_);
+  std::swap(lcutoff_, other->lcutoff_);
+  std::swap(loutercutoff_, other->loutercutoff_);
+  std::swap(lconstant_, other->lconstant_);
+  std::swap(llinear_, other->llinear_);
+  std::swap(lquadratic_, other->lquadratic_);
   std::swap(type_, other->type_);
   std::swap(showlampobject_, other->showlampobject_);
   std::swap(showlampdirection_, other->showlampdirection_);
@@ -8236,13 +8730,13 @@ void LightObject::set_allocated_description(::std::string* description) {
 
 // required int32 type = 3;
 bool LightObject::has_type() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
+  return (_has_bits_[0] & 0x02000000u) != 0;
 }
 void LightObject::set_has_type() {
-  _has_bits_[0] |= 0x00020000u;
+  _has_bits_[0] |= 0x02000000u;
 }
 void LightObject::clear_has_type() {
-  _has_bits_[0] &= ~0x00020000u;
+  _has_bits_[0] &= ~0x02000000u;
 }
 void LightObject::clear_type() {
   type_ = 0;
@@ -8260,13 +8754,13 @@ void LightObject::set_type(::google::protobuf::int32 value) {
 
 // required bool showLampObject = 4;
 bool LightObject::has_showlampobject() const {
-  return (_has_bits_[0] & 0x00040000u) != 0;
+  return (_has_bits_[0] & 0x04000000u) != 0;
 }
 void LightObject::set_has_showlampobject() {
-  _has_bits_[0] |= 0x00040000u;
+  _has_bits_[0] |= 0x04000000u;
 }
 void LightObject::clear_has_showlampobject() {
-  _has_bits_[0] &= ~0x00040000u;
+  _has_bits_[0] &= ~0x04000000u;
 }
 void LightObject::clear_showlampobject() {
   showlampobject_ = false;
@@ -8284,13 +8778,13 @@ void LightObject::set_showlampobject(bool value) {
 
 // required bool showLampDirection = 5;
 bool LightObject::has_showlampdirection() const {
-  return (_has_bits_[0] & 0x00080000u) != 0;
+  return (_has_bits_[0] & 0x08000000u) != 0;
 }
 void LightObject::set_has_showlampdirection() {
-  _has_bits_[0] |= 0x00080000u;
+  _has_bits_[0] |= 0x08000000u;
 }
 void LightObject::clear_has_showlampdirection() {
-  _has_bits_[0] &= ~0x00080000u;
+  _has_bits_[0] &= ~0x08000000u;
 }
 void LightObject::clear_showlampdirection() {
   showlampdirection_ = false;
@@ -8308,13 +8802,13 @@ void LightObject::set_showlampdirection(bool value) {
 
 // required bool showInWire = 6;
 bool LightObject::has_showinwire() const {
-  return (_has_bits_[0] & 0x00100000u) != 0;
+  return (_has_bits_[0] & 0x10000000u) != 0;
 }
 void LightObject::set_has_showinwire() {
-  _has_bits_[0] |= 0x00100000u;
+  _has_bits_[0] |= 0x10000000u;
 }
 void LightObject::clear_has_showinwire() {
-  _has_bits_[0] &= ~0x00100000u;
+  _has_bits_[0] &= ~0x10000000u;
 }
 void LightObject::clear_showinwire() {
   showinwire_ = false;
@@ -9003,6 +9497,366 @@ void LightObject::set_allocated_rotatecenterz(::KuplungApp::ObjectCoordinate* ro
     clear_has_rotatecenterz();
   }
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateCenterZ)
+}
+
+// required .KuplungApp.MaterialColor ambient = 22;
+bool LightObject::has_ambient() const {
+  return (_has_bits_[0] & 0x00020000u) != 0;
+}
+void LightObject::set_has_ambient() {
+  _has_bits_[0] |= 0x00020000u;
+}
+void LightObject::clear_has_ambient() {
+  _has_bits_[0] &= ~0x00020000u;
+}
+void LightObject::clear_ambient() {
+  if (ambient_ != NULL) ambient_->::KuplungApp::MaterialColor::Clear();
+  clear_has_ambient();
+}
+const ::KuplungApp::MaterialColor& LightObject::ambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.ambient)
+  return ambient_ != NULL ? *ambient_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+::KuplungApp::MaterialColor* LightObject::mutable_ambient() {
+  set_has_ambient();
+  if (ambient_ == NULL) {
+    ambient_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.ambient)
+  return ambient_;
+}
+::KuplungApp::MaterialColor* LightObject::release_ambient() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.ambient)
+  clear_has_ambient();
+  ::KuplungApp::MaterialColor* temp = ambient_;
+  ambient_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_ambient(::KuplungApp::MaterialColor* ambient) {
+  delete ambient_;
+  ambient_ = ambient;
+  if (ambient) {
+    set_has_ambient();
+  } else {
+    clear_has_ambient();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.ambient)
+}
+
+// required .KuplungApp.MaterialColor diffuse = 23;
+bool LightObject::has_diffuse() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+void LightObject::set_has_diffuse() {
+  _has_bits_[0] |= 0x00040000u;
+}
+void LightObject::clear_has_diffuse() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+void LightObject::clear_diffuse() {
+  if (diffuse_ != NULL) diffuse_->::KuplungApp::MaterialColor::Clear();
+  clear_has_diffuse();
+}
+const ::KuplungApp::MaterialColor& LightObject::diffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.diffuse)
+  return diffuse_ != NULL ? *diffuse_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+::KuplungApp::MaterialColor* LightObject::mutable_diffuse() {
+  set_has_diffuse();
+  if (diffuse_ == NULL) {
+    diffuse_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.diffuse)
+  return diffuse_;
+}
+::KuplungApp::MaterialColor* LightObject::release_diffuse() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.diffuse)
+  clear_has_diffuse();
+  ::KuplungApp::MaterialColor* temp = diffuse_;
+  diffuse_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_diffuse(::KuplungApp::MaterialColor* diffuse) {
+  delete diffuse_;
+  diffuse_ = diffuse;
+  if (diffuse) {
+    set_has_diffuse();
+  } else {
+    clear_has_diffuse();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.diffuse)
+}
+
+// required .KuplungApp.MaterialColor specular = 24;
+bool LightObject::has_specular() const {
+  return (_has_bits_[0] & 0x00080000u) != 0;
+}
+void LightObject::set_has_specular() {
+  _has_bits_[0] |= 0x00080000u;
+}
+void LightObject::clear_has_specular() {
+  _has_bits_[0] &= ~0x00080000u;
+}
+void LightObject::clear_specular() {
+  if (specular_ != NULL) specular_->::KuplungApp::MaterialColor::Clear();
+  clear_has_specular();
+}
+const ::KuplungApp::MaterialColor& LightObject::specular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.specular)
+  return specular_ != NULL ? *specular_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+::KuplungApp::MaterialColor* LightObject::mutable_specular() {
+  set_has_specular();
+  if (specular_ == NULL) {
+    specular_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.specular)
+  return specular_;
+}
+::KuplungApp::MaterialColor* LightObject::release_specular() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.specular)
+  clear_has_specular();
+  ::KuplungApp::MaterialColor* temp = specular_;
+  specular_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_specular(::KuplungApp::MaterialColor* specular) {
+  delete specular_;
+  specular_ = specular;
+  if (specular) {
+    set_has_specular();
+  } else {
+    clear_has_specular();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.specular)
+}
+
+// required .KuplungApp.ObjectCoordinate lCutOff = 25;
+bool LightObject::has_lcutoff() const {
+  return (_has_bits_[0] & 0x00100000u) != 0;
+}
+void LightObject::set_has_lcutoff() {
+  _has_bits_[0] |= 0x00100000u;
+}
+void LightObject::clear_has_lcutoff() {
+  _has_bits_[0] &= ~0x00100000u;
+}
+void LightObject::clear_lcutoff() {
+  if (lcutoff_ != NULL) lcutoff_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lcutoff();
+}
+const ::KuplungApp::ObjectCoordinate& LightObject::lcutoff() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lCutOff)
+  return lcutoff_ != NULL ? *lcutoff_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+::KuplungApp::ObjectCoordinate* LightObject::mutable_lcutoff() {
+  set_has_lcutoff();
+  if (lcutoff_ == NULL) {
+    lcutoff_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lCutOff)
+  return lcutoff_;
+}
+::KuplungApp::ObjectCoordinate* LightObject::release_lcutoff() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lCutOff)
+  clear_has_lcutoff();
+  ::KuplungApp::ObjectCoordinate* temp = lcutoff_;
+  lcutoff_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_lcutoff(::KuplungApp::ObjectCoordinate* lcutoff) {
+  delete lcutoff_;
+  lcutoff_ = lcutoff;
+  if (lcutoff) {
+    set_has_lcutoff();
+  } else {
+    clear_has_lcutoff();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lCutOff)
+}
+
+// required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+bool LightObject::has_loutercutoff() const {
+  return (_has_bits_[0] & 0x00200000u) != 0;
+}
+void LightObject::set_has_loutercutoff() {
+  _has_bits_[0] |= 0x00200000u;
+}
+void LightObject::clear_has_loutercutoff() {
+  _has_bits_[0] &= ~0x00200000u;
+}
+void LightObject::clear_loutercutoff() {
+  if (loutercutoff_ != NULL) loutercutoff_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_loutercutoff();
+}
+const ::KuplungApp::ObjectCoordinate& LightObject::loutercutoff() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lOuterCutOff)
+  return loutercutoff_ != NULL ? *loutercutoff_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+::KuplungApp::ObjectCoordinate* LightObject::mutable_loutercutoff() {
+  set_has_loutercutoff();
+  if (loutercutoff_ == NULL) {
+    loutercutoff_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lOuterCutOff)
+  return loutercutoff_;
+}
+::KuplungApp::ObjectCoordinate* LightObject::release_loutercutoff() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lOuterCutOff)
+  clear_has_loutercutoff();
+  ::KuplungApp::ObjectCoordinate* temp = loutercutoff_;
+  loutercutoff_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_loutercutoff(::KuplungApp::ObjectCoordinate* loutercutoff) {
+  delete loutercutoff_;
+  loutercutoff_ = loutercutoff;
+  if (loutercutoff) {
+    set_has_loutercutoff();
+  } else {
+    clear_has_loutercutoff();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lOuterCutOff)
+}
+
+// required .KuplungApp.ObjectCoordinate lConstant = 27;
+bool LightObject::has_lconstant() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+void LightObject::set_has_lconstant() {
+  _has_bits_[0] |= 0x00400000u;
+}
+void LightObject::clear_has_lconstant() {
+  _has_bits_[0] &= ~0x00400000u;
+}
+void LightObject::clear_lconstant() {
+  if (lconstant_ != NULL) lconstant_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lconstant();
+}
+const ::KuplungApp::ObjectCoordinate& LightObject::lconstant() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lConstant)
+  return lconstant_ != NULL ? *lconstant_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+::KuplungApp::ObjectCoordinate* LightObject::mutable_lconstant() {
+  set_has_lconstant();
+  if (lconstant_ == NULL) {
+    lconstant_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lConstant)
+  return lconstant_;
+}
+::KuplungApp::ObjectCoordinate* LightObject::release_lconstant() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lConstant)
+  clear_has_lconstant();
+  ::KuplungApp::ObjectCoordinate* temp = lconstant_;
+  lconstant_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_lconstant(::KuplungApp::ObjectCoordinate* lconstant) {
+  delete lconstant_;
+  lconstant_ = lconstant;
+  if (lconstant) {
+    set_has_lconstant();
+  } else {
+    clear_has_lconstant();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lConstant)
+}
+
+// required .KuplungApp.ObjectCoordinate lLinear = 28;
+bool LightObject::has_llinear() const {
+  return (_has_bits_[0] & 0x00800000u) != 0;
+}
+void LightObject::set_has_llinear() {
+  _has_bits_[0] |= 0x00800000u;
+}
+void LightObject::clear_has_llinear() {
+  _has_bits_[0] &= ~0x00800000u;
+}
+void LightObject::clear_llinear() {
+  if (llinear_ != NULL) llinear_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_llinear();
+}
+const ::KuplungApp::ObjectCoordinate& LightObject::llinear() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lLinear)
+  return llinear_ != NULL ? *llinear_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+::KuplungApp::ObjectCoordinate* LightObject::mutable_llinear() {
+  set_has_llinear();
+  if (llinear_ == NULL) {
+    llinear_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lLinear)
+  return llinear_;
+}
+::KuplungApp::ObjectCoordinate* LightObject::release_llinear() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lLinear)
+  clear_has_llinear();
+  ::KuplungApp::ObjectCoordinate* temp = llinear_;
+  llinear_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_llinear(::KuplungApp::ObjectCoordinate* llinear) {
+  delete llinear_;
+  llinear_ = llinear;
+  if (llinear) {
+    set_has_llinear();
+  } else {
+    clear_has_llinear();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lLinear)
+}
+
+// required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+bool LightObject::has_lquadratic() const {
+  return (_has_bits_[0] & 0x01000000u) != 0;
+}
+void LightObject::set_has_lquadratic() {
+  _has_bits_[0] |= 0x01000000u;
+}
+void LightObject::clear_has_lquadratic() {
+  _has_bits_[0] &= ~0x01000000u;
+}
+void LightObject::clear_lquadratic() {
+  if (lquadratic_ != NULL) lquadratic_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lquadratic();
+}
+const ::KuplungApp::ObjectCoordinate& LightObject::lquadratic() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lQuadratic)
+  return lquadratic_ != NULL ? *lquadratic_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+::KuplungApp::ObjectCoordinate* LightObject::mutable_lquadratic() {
+  set_has_lquadratic();
+  if (lquadratic_ == NULL) {
+    lquadratic_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lQuadratic)
+  return lquadratic_;
+}
+::KuplungApp::ObjectCoordinate* LightObject::release_lquadratic() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lQuadratic)
+  clear_has_lquadratic();
+  ::KuplungApp::ObjectCoordinate* temp = lquadratic_;
+  lquadratic_ = NULL;
+  return temp;
+}
+void LightObject::set_allocated_lquadratic(::KuplungApp::ObjectCoordinate* lquadratic) {
+  delete lquadratic_;
+  lquadratic_ = lquadratic;
+  if (lquadratic) {
+    set_has_lquadratic();
+  } else {
+    clear_has_lquadratic();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lQuadratic)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

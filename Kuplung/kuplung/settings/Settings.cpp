@@ -49,6 +49,8 @@ void Settings::initSettings() {
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
+    if (m_pInstance->ModelFileParser >= Importer_ParserType_Count)
+        m_pInstance->ModelFileParser = Importer_ParserType_Own;
     m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
     m_pInstance->GUISystem = m_pInstance->cfgUtils->readInt("GUISystem");
 
@@ -246,5 +248,11 @@ std::string Settings::getTimeNow() {
         tn += "0";
     tn += std::to_string(t_sec);
     return tn;
+}
+
+bool Settings::hasEnding(std::string const &fullString, std::string const &ending) {
+    if (fullString.length() >= ending.length())
+        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
+    return false;
 }
 

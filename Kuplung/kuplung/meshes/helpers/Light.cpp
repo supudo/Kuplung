@@ -317,8 +317,10 @@ void Light::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCam
 
         glUseProgram(0);
 
-        this->lightDirectionRay->matrixModel = this->matrixModel;
-        if (this->showLampDirection)
-            this->lightDirectionRay->render(matrixProjection, matrixCamera);
+        if (this->lightDirectionRay) {
+            this->lightDirectionRay->matrixModel = this->matrixModel;
+            if (this->showLampDirection)
+                this->lightDirectionRay->render(matrixProjection, matrixCamera);
+        }
     }
 }

@@ -19,14 +19,14 @@
 
 class FileBrowser {
 public:
-    void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile);
+    void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, MaterialTextureType)> processFile);
     void setStyleBrowser(const bool isStyle);
     void setImageBrowser(const bool isImage);
     void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
-    std::function<void(FBEntity, FileBrowser_ParserType, MaterialTextureType)> processFile;
+    std::function<void(FBEntity, MaterialTextureType)> processFile;
 
     void drawFiles(MaterialTextureType TextureType = MaterialTextureType_Undefined);
     std::string convertToString(double num);

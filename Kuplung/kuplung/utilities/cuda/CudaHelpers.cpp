@@ -6,6 +6,8 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#ifdef DEF_KuplungSetting_UseCuda
+
 #include "CudaHelpers.hpp"
 
 int CudaHelpers::findCudaDevice() {
@@ -126,3 +128,5 @@ int CudaHelpers::_ConvertSMVer2Cores(int major, int minor) {
     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[CudaHelpers] MapSMtoCores for SM %d.%d is undefined. Default to use %d Cores/SM", major, minor, nGpuArchCoresPerSM[index - 1].Cores));
     return nGpuArchCoresPerSM[index-1].Cores;
 }
+
+#endif

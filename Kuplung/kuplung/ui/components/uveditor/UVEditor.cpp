@@ -32,7 +32,7 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->componentFileBrowser = std::make_unique<FileBrowser>();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
                                      Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height,
-                                     std::bind(&UVEditor::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+                                     std::bind(&UVEditor::dialogFileBrowserProcessFile, this, std::placeholders::_1, std::placeholders::_2));
     this->componentFileBrowser->setImageBrowser(true);
 
 }
@@ -87,7 +87,7 @@ void UVEditor::setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::st
         default:
             break;
     }
-    this->dialogFileBrowserProcessFile(file, (FileBrowser_ParserType)Settings::Instance()->ModelFileParser, this->textureType);
+    this->dialogFileBrowserProcessFile(file, this->textureType);
 }
 
 void UVEditor::draw(const char* title, bool* p_opened) {
@@ -473,7 +473,7 @@ void UVEditor::initTextureBuffer() {
     }
 }
 
-void UVEditor::dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType) {
+void UVEditor::dialogFileBrowserProcessFile(FBEntity file, MaterialTextureType texType) {
     this->showFileBrowser = false;
     this->textureImage = file.path;
     this->textureFilename = file.title;

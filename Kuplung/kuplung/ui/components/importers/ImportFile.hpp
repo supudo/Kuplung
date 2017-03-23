@@ -21,13 +21,13 @@ class ImportFile {
 public:
     void init(int positionX, int positionY, int width, int height,
               std::function<void(FBEntity, std::vector<std::string>)> processFile);
-    void draw(const char* title, bool* p_opened = NULL, FileBrowser_ParserType type = FileBrowser_ParserType_Own2);
+    void draw(const char* title, bool* p_opened = NULL, int type=0);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath, FileBrowser_ParserType type);
+    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath, int type);
     std::function<void(FBEntity, std::vector<std::string>)> processFile;
 
-    void drawFiles(FileBrowser_ParserType type);
+    void drawFiles(int type);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);

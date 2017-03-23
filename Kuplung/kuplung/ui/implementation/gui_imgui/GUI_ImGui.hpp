@@ -113,13 +113,13 @@ private:
     std::function<void(FBEntity file)> funcSaveScene;
     std::function<void(FBEntity file)> funcOpenScene;
 
-    void dialogFileBrowserProcessFile(FBEntity const& file, FileBrowser_ParserType type);
+    void dialogFileBrowserProcessFile(FBEntity const& file);
     void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
     void dialogOBJExporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
-    void dialogImporterBrowser(FileBrowser_ParserType type);
+    void dialogImporterBrowser(int type);
     void dialogOBJExporterBrowser();
     void dialogStyle();
     void dialogScreenshot();

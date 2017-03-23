@@ -59,6 +59,7 @@ public:
 
     void timerStart(std::string msg);
     void timerEnd(std::string msg);
+    bool hasEnding(std::string const &fullString, std::string const &ending);
 
     std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
 

@@ -1364,6 +1364,78 @@ class LightObject : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::KuplungApp::ObjectCoordinate* release_rotatecenterz();
   void set_allocated_rotatecenterz(::KuplungApp::ObjectCoordinate* rotatecenterz);
 
+  // required .KuplungApp.MaterialColor ambient = 22;
+  bool has_ambient() const;
+  void clear_ambient();
+  static const int kAmbientFieldNumber = 22;
+  const ::KuplungApp::MaterialColor& ambient() const;
+  ::KuplungApp::MaterialColor* mutable_ambient();
+  ::KuplungApp::MaterialColor* release_ambient();
+  void set_allocated_ambient(::KuplungApp::MaterialColor* ambient);
+
+  // required .KuplungApp.MaterialColor diffuse = 23;
+  bool has_diffuse() const;
+  void clear_diffuse();
+  static const int kDiffuseFieldNumber = 23;
+  const ::KuplungApp::MaterialColor& diffuse() const;
+  ::KuplungApp::MaterialColor* mutable_diffuse();
+  ::KuplungApp::MaterialColor* release_diffuse();
+  void set_allocated_diffuse(::KuplungApp::MaterialColor* diffuse);
+
+  // required .KuplungApp.MaterialColor specular = 24;
+  bool has_specular() const;
+  void clear_specular();
+  static const int kSpecularFieldNumber = 24;
+  const ::KuplungApp::MaterialColor& specular() const;
+  ::KuplungApp::MaterialColor* mutable_specular();
+  ::KuplungApp::MaterialColor* release_specular();
+  void set_allocated_specular(::KuplungApp::MaterialColor* specular);
+
+  // required .KuplungApp.ObjectCoordinate lCutOff = 25;
+  bool has_lcutoff() const;
+  void clear_lcutoff();
+  static const int kLCutOffFieldNumber = 25;
+  const ::KuplungApp::ObjectCoordinate& lcutoff() const;
+  ::KuplungApp::ObjectCoordinate* mutable_lcutoff();
+  ::KuplungApp::ObjectCoordinate* release_lcutoff();
+  void set_allocated_lcutoff(::KuplungApp::ObjectCoordinate* lcutoff);
+
+  // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+  bool has_loutercutoff() const;
+  void clear_loutercutoff();
+  static const int kLOuterCutOffFieldNumber = 26;
+  const ::KuplungApp::ObjectCoordinate& loutercutoff() const;
+  ::KuplungApp::ObjectCoordinate* mutable_loutercutoff();
+  ::KuplungApp::ObjectCoordinate* release_loutercutoff();
+  void set_allocated_loutercutoff(::KuplungApp::ObjectCoordinate* loutercutoff);
+
+  // required .KuplungApp.ObjectCoordinate lConstant = 27;
+  bool has_lconstant() const;
+  void clear_lconstant();
+  static const int kLConstantFieldNumber = 27;
+  const ::KuplungApp::ObjectCoordinate& lconstant() const;
+  ::KuplungApp::ObjectCoordinate* mutable_lconstant();
+  ::KuplungApp::ObjectCoordinate* release_lconstant();
+  void set_allocated_lconstant(::KuplungApp::ObjectCoordinate* lconstant);
+
+  // required .KuplungApp.ObjectCoordinate lLinear = 28;
+  bool has_llinear() const;
+  void clear_llinear();
+  static const int kLLinearFieldNumber = 28;
+  const ::KuplungApp::ObjectCoordinate& llinear() const;
+  ::KuplungApp::ObjectCoordinate* mutable_llinear();
+  ::KuplungApp::ObjectCoordinate* release_llinear();
+  void set_allocated_llinear(::KuplungApp::ObjectCoordinate* llinear);
+
+  // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+  bool has_lquadratic() const;
+  void clear_lquadratic();
+  static const int kLQuadraticFieldNumber = 29;
+  const ::KuplungApp::ObjectCoordinate& lquadratic() const;
+  ::KuplungApp::ObjectCoordinate* mutable_lquadratic();
+  ::KuplungApp::ObjectCoordinate* release_lquadratic();
+  void set_allocated_lquadratic(::KuplungApp::ObjectCoordinate* lquadratic);
+
   // required int32 type = 3;
   bool has_type() const;
   void clear_type();
@@ -1436,6 +1508,22 @@ class LightObject : public ::google::protobuf::Message /* @@protoc_insertion_poi
   void clear_has_rotatecentery();
   void set_has_rotatecenterz();
   void clear_has_rotatecenterz();
+  void set_has_ambient();
+  void clear_has_ambient();
+  void set_has_diffuse();
+  void clear_has_diffuse();
+  void set_has_specular();
+  void clear_has_specular();
+  void set_has_lcutoff();
+  void clear_has_lcutoff();
+  void set_has_loutercutoff();
+  void clear_has_loutercutoff();
+  void set_has_lconstant();
+  void clear_has_lconstant();
+  void set_has_llinear();
+  void clear_has_llinear();
+  void set_has_lquadratic();
+  void clear_has_lquadratic();
 
   // helper for ByteSizeLong()
   size_t RequiredFieldsByteSizeFallback() const;
@@ -1460,6 +1548,14 @@ class LightObject : public ::google::protobuf::Message /* @@protoc_insertion_poi
   ::KuplungApp::ObjectCoordinate* rotatecenterx_;
   ::KuplungApp::ObjectCoordinate* rotatecentery_;
   ::KuplungApp::ObjectCoordinate* rotatecenterz_;
+  ::KuplungApp::MaterialColor* ambient_;
+  ::KuplungApp::MaterialColor* diffuse_;
+  ::KuplungApp::MaterialColor* specular_;
+  ::KuplungApp::ObjectCoordinate* lcutoff_;
+  ::KuplungApp::ObjectCoordinate* loutercutoff_;
+  ::KuplungApp::ObjectCoordinate* lconstant_;
+  ::KuplungApp::ObjectCoordinate* llinear_;
+  ::KuplungApp::ObjectCoordinate* lquadratic_;
   ::google::protobuf::int32 type_;
   bool showlampobject_;
   bool showlampdirection_;
@@ -3987,13 +4083,13 @@ inline void LightObject::set_allocated_description(::std::string* description) {
 
 // required int32 type = 3;
 inline bool LightObject::has_type() const {
-  return (_has_bits_[0] & 0x00020000u) != 0;
+  return (_has_bits_[0] & 0x02000000u) != 0;
 }
 inline void LightObject::set_has_type() {
-  _has_bits_[0] |= 0x00020000u;
+  _has_bits_[0] |= 0x02000000u;
 }
 inline void LightObject::clear_has_type() {
-  _has_bits_[0] &= ~0x00020000u;
+  _has_bits_[0] &= ~0x02000000u;
 }
 inline void LightObject::clear_type() {
   type_ = 0;
@@ -4011,13 +4107,13 @@ inline void LightObject::set_type(::google::protobuf::int32 value) {
 
 // required bool showLampObject = 4;
 inline bool LightObject::has_showlampobject() const {
-  return (_has_bits_[0] & 0x00040000u) != 0;
+  return (_has_bits_[0] & 0x04000000u) != 0;
 }
 inline void LightObject::set_has_showlampobject() {
-  _has_bits_[0] |= 0x00040000u;
+  _has_bits_[0] |= 0x04000000u;
 }
 inline void LightObject::clear_has_showlampobject() {
-  _has_bits_[0] &= ~0x00040000u;
+  _has_bits_[0] &= ~0x04000000u;
 }
 inline void LightObject::clear_showlampobject() {
   showlampobject_ = false;
@@ -4035,13 +4131,13 @@ inline void LightObject::set_showlampobject(bool value) {
 
 // required bool showLampDirection = 5;
 inline bool LightObject::has_showlampdirection() const {
-  return (_has_bits_[0] & 0x00080000u) != 0;
+  return (_has_bits_[0] & 0x08000000u) != 0;
 }
 inline void LightObject::set_has_showlampdirection() {
-  _has_bits_[0] |= 0x00080000u;
+  _has_bits_[0] |= 0x08000000u;
 }
 inline void LightObject::clear_has_showlampdirection() {
-  _has_bits_[0] &= ~0x00080000u;
+  _has_bits_[0] &= ~0x08000000u;
 }
 inline void LightObject::clear_showlampdirection() {
   showlampdirection_ = false;
@@ -4059,13 +4155,13 @@ inline void LightObject::set_showlampdirection(bool value) {
 
 // required bool showInWire = 6;
 inline bool LightObject::has_showinwire() const {
-  return (_has_bits_[0] & 0x00100000u) != 0;
+  return (_has_bits_[0] & 0x10000000u) != 0;
 }
 inline void LightObject::set_has_showinwire() {
-  _has_bits_[0] |= 0x00100000u;
+  _has_bits_[0] |= 0x10000000u;
 }
 inline void LightObject::clear_has_showinwire() {
-  _has_bits_[0] &= ~0x00100000u;
+  _has_bits_[0] &= ~0x10000000u;
 }
 inline void LightObject::clear_showinwire() {
   showinwire_ = false;
@@ -4754,6 +4850,366 @@ inline void LightObject::set_allocated_rotatecenterz(::KuplungApp::ObjectCoordin
     clear_has_rotatecenterz();
   }
   // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.rotateCenterZ)
+}
+
+// required .KuplungApp.MaterialColor ambient = 22;
+inline bool LightObject::has_ambient() const {
+  return (_has_bits_[0] & 0x00020000u) != 0;
+}
+inline void LightObject::set_has_ambient() {
+  _has_bits_[0] |= 0x00020000u;
+}
+inline void LightObject::clear_has_ambient() {
+  _has_bits_[0] &= ~0x00020000u;
+}
+inline void LightObject::clear_ambient() {
+  if (ambient_ != NULL) ambient_->::KuplungApp::MaterialColor::Clear();
+  clear_has_ambient();
+}
+inline const ::KuplungApp::MaterialColor& LightObject::ambient() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.ambient)
+  return ambient_ != NULL ? *ambient_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+inline ::KuplungApp::MaterialColor* LightObject::mutable_ambient() {
+  set_has_ambient();
+  if (ambient_ == NULL) {
+    ambient_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.ambient)
+  return ambient_;
+}
+inline ::KuplungApp::MaterialColor* LightObject::release_ambient() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.ambient)
+  clear_has_ambient();
+  ::KuplungApp::MaterialColor* temp = ambient_;
+  ambient_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_ambient(::KuplungApp::MaterialColor* ambient) {
+  delete ambient_;
+  ambient_ = ambient;
+  if (ambient) {
+    set_has_ambient();
+  } else {
+    clear_has_ambient();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.ambient)
+}
+
+// required .KuplungApp.MaterialColor diffuse = 23;
+inline bool LightObject::has_diffuse() const {
+  return (_has_bits_[0] & 0x00040000u) != 0;
+}
+inline void LightObject::set_has_diffuse() {
+  _has_bits_[0] |= 0x00040000u;
+}
+inline void LightObject::clear_has_diffuse() {
+  _has_bits_[0] &= ~0x00040000u;
+}
+inline void LightObject::clear_diffuse() {
+  if (diffuse_ != NULL) diffuse_->::KuplungApp::MaterialColor::Clear();
+  clear_has_diffuse();
+}
+inline const ::KuplungApp::MaterialColor& LightObject::diffuse() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.diffuse)
+  return diffuse_ != NULL ? *diffuse_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+inline ::KuplungApp::MaterialColor* LightObject::mutable_diffuse() {
+  set_has_diffuse();
+  if (diffuse_ == NULL) {
+    diffuse_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.diffuse)
+  return diffuse_;
+}
+inline ::KuplungApp::MaterialColor* LightObject::release_diffuse() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.diffuse)
+  clear_has_diffuse();
+  ::KuplungApp::MaterialColor* temp = diffuse_;
+  diffuse_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_diffuse(::KuplungApp::MaterialColor* diffuse) {
+  delete diffuse_;
+  diffuse_ = diffuse;
+  if (diffuse) {
+    set_has_diffuse();
+  } else {
+    clear_has_diffuse();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.diffuse)
+}
+
+// required .KuplungApp.MaterialColor specular = 24;
+inline bool LightObject::has_specular() const {
+  return (_has_bits_[0] & 0x00080000u) != 0;
+}
+inline void LightObject::set_has_specular() {
+  _has_bits_[0] |= 0x00080000u;
+}
+inline void LightObject::clear_has_specular() {
+  _has_bits_[0] &= ~0x00080000u;
+}
+inline void LightObject::clear_specular() {
+  if (specular_ != NULL) specular_->::KuplungApp::MaterialColor::Clear();
+  clear_has_specular();
+}
+inline const ::KuplungApp::MaterialColor& LightObject::specular() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.specular)
+  return specular_ != NULL ? *specular_
+                         : *::KuplungApp::MaterialColor::internal_default_instance();
+}
+inline ::KuplungApp::MaterialColor* LightObject::mutable_specular() {
+  set_has_specular();
+  if (specular_ == NULL) {
+    specular_ = new ::KuplungApp::MaterialColor;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.specular)
+  return specular_;
+}
+inline ::KuplungApp::MaterialColor* LightObject::release_specular() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.specular)
+  clear_has_specular();
+  ::KuplungApp::MaterialColor* temp = specular_;
+  specular_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_specular(::KuplungApp::MaterialColor* specular) {
+  delete specular_;
+  specular_ = specular;
+  if (specular) {
+    set_has_specular();
+  } else {
+    clear_has_specular();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.specular)
+}
+
+// required .KuplungApp.ObjectCoordinate lCutOff = 25;
+inline bool LightObject::has_lcutoff() const {
+  return (_has_bits_[0] & 0x00100000u) != 0;
+}
+inline void LightObject::set_has_lcutoff() {
+  _has_bits_[0] |= 0x00100000u;
+}
+inline void LightObject::clear_has_lcutoff() {
+  _has_bits_[0] &= ~0x00100000u;
+}
+inline void LightObject::clear_lcutoff() {
+  if (lcutoff_ != NULL) lcutoff_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lcutoff();
+}
+inline const ::KuplungApp::ObjectCoordinate& LightObject::lcutoff() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lCutOff)
+  return lcutoff_ != NULL ? *lcutoff_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::mutable_lcutoff() {
+  set_has_lcutoff();
+  if (lcutoff_ == NULL) {
+    lcutoff_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lCutOff)
+  return lcutoff_;
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::release_lcutoff() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lCutOff)
+  clear_has_lcutoff();
+  ::KuplungApp::ObjectCoordinate* temp = lcutoff_;
+  lcutoff_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_lcutoff(::KuplungApp::ObjectCoordinate* lcutoff) {
+  delete lcutoff_;
+  lcutoff_ = lcutoff;
+  if (lcutoff) {
+    set_has_lcutoff();
+  } else {
+    clear_has_lcutoff();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lCutOff)
+}
+
+// required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
+inline bool LightObject::has_loutercutoff() const {
+  return (_has_bits_[0] & 0x00200000u) != 0;
+}
+inline void LightObject::set_has_loutercutoff() {
+  _has_bits_[0] |= 0x00200000u;
+}
+inline void LightObject::clear_has_loutercutoff() {
+  _has_bits_[0] &= ~0x00200000u;
+}
+inline void LightObject::clear_loutercutoff() {
+  if (loutercutoff_ != NULL) loutercutoff_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_loutercutoff();
+}
+inline const ::KuplungApp::ObjectCoordinate& LightObject::loutercutoff() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lOuterCutOff)
+  return loutercutoff_ != NULL ? *loutercutoff_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::mutable_loutercutoff() {
+  set_has_loutercutoff();
+  if (loutercutoff_ == NULL) {
+    loutercutoff_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lOuterCutOff)
+  return loutercutoff_;
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::release_loutercutoff() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lOuterCutOff)
+  clear_has_loutercutoff();
+  ::KuplungApp::ObjectCoordinate* temp = loutercutoff_;
+  loutercutoff_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_loutercutoff(::KuplungApp::ObjectCoordinate* loutercutoff) {
+  delete loutercutoff_;
+  loutercutoff_ = loutercutoff;
+  if (loutercutoff) {
+    set_has_loutercutoff();
+  } else {
+    clear_has_loutercutoff();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lOuterCutOff)
+}
+
+// required .KuplungApp.ObjectCoordinate lConstant = 27;
+inline bool LightObject::has_lconstant() const {
+  return (_has_bits_[0] & 0x00400000u) != 0;
+}
+inline void LightObject::set_has_lconstant() {
+  _has_bits_[0] |= 0x00400000u;
+}
+inline void LightObject::clear_has_lconstant() {
+  _has_bits_[0] &= ~0x00400000u;
+}
+inline void LightObject::clear_lconstant() {
+  if (lconstant_ != NULL) lconstant_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lconstant();
+}
+inline const ::KuplungApp::ObjectCoordinate& LightObject::lconstant() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lConstant)
+  return lconstant_ != NULL ? *lconstant_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::mutable_lconstant() {
+  set_has_lconstant();
+  if (lconstant_ == NULL) {
+    lconstant_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lConstant)
+  return lconstant_;
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::release_lconstant() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lConstant)
+  clear_has_lconstant();
+  ::KuplungApp::ObjectCoordinate* temp = lconstant_;
+  lconstant_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_lconstant(::KuplungApp::ObjectCoordinate* lconstant) {
+  delete lconstant_;
+  lconstant_ = lconstant;
+  if (lconstant) {
+    set_has_lconstant();
+  } else {
+    clear_has_lconstant();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lConstant)
+}
+
+// required .KuplungApp.ObjectCoordinate lLinear = 28;
+inline bool LightObject::has_llinear() const {
+  return (_has_bits_[0] & 0x00800000u) != 0;
+}
+inline void LightObject::set_has_llinear() {
+  _has_bits_[0] |= 0x00800000u;
+}
+inline void LightObject::clear_has_llinear() {
+  _has_bits_[0] &= ~0x00800000u;
+}
+inline void LightObject::clear_llinear() {
+  if (llinear_ != NULL) llinear_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_llinear();
+}
+inline const ::KuplungApp::ObjectCoordinate& LightObject::llinear() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lLinear)
+  return llinear_ != NULL ? *llinear_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::mutable_llinear() {
+  set_has_llinear();
+  if (llinear_ == NULL) {
+    llinear_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lLinear)
+  return llinear_;
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::release_llinear() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lLinear)
+  clear_has_llinear();
+  ::KuplungApp::ObjectCoordinate* temp = llinear_;
+  llinear_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_llinear(::KuplungApp::ObjectCoordinate* llinear) {
+  delete llinear_;
+  llinear_ = llinear;
+  if (llinear) {
+    set_has_llinear();
+  } else {
+    clear_has_llinear();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lLinear)
+}
+
+// required .KuplungApp.ObjectCoordinate lQuadratic = 29;
+inline bool LightObject::has_lquadratic() const {
+  return (_has_bits_[0] & 0x01000000u) != 0;
+}
+inline void LightObject::set_has_lquadratic() {
+  _has_bits_[0] |= 0x01000000u;
+}
+inline void LightObject::clear_has_lquadratic() {
+  _has_bits_[0] &= ~0x01000000u;
+}
+inline void LightObject::clear_lquadratic() {
+  if (lquadratic_ != NULL) lquadratic_->::KuplungApp::ObjectCoordinate::Clear();
+  clear_has_lquadratic();
+}
+inline const ::KuplungApp::ObjectCoordinate& LightObject::lquadratic() const {
+  // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lQuadratic)
+  return lquadratic_ != NULL ? *lquadratic_
+                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::mutable_lquadratic() {
+  set_has_lquadratic();
+  if (lquadratic_ == NULL) {
+    lquadratic_ = new ::KuplungApp::ObjectCoordinate;
+  }
+  // @@protoc_insertion_point(field_mutable:KuplungApp.LightObject.lQuadratic)
+  return lquadratic_;
+}
+inline ::KuplungApp::ObjectCoordinate* LightObject::release_lquadratic() {
+  // @@protoc_insertion_point(field_release:KuplungApp.LightObject.lQuadratic)
+  clear_has_lquadratic();
+  ::KuplungApp::ObjectCoordinate* temp = lquadratic_;
+  lquadratic_ = NULL;
+  return temp;
+}
+inline void LightObject::set_allocated_lquadratic(::KuplungApp::ObjectCoordinate* lquadratic) {
+  delete lquadratic_;
+  lquadratic_ = lquadratic;
+  if (lquadratic) {
+    set_has_lquadratic();
+  } else {
+    clear_has_lquadratic();
+  }
+  // @@protoc_insertion_point(field_set_allocated:KuplungApp.LightObject.lQuadratic)
 }
 
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS

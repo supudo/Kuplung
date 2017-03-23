@@ -317,14 +317,14 @@ void objParser2::loadMaterialFile(const std::string& materialFile) {
             MeshModelMaterial entityMaterial = {};
             entityMaterial.MaterialID = MaterialID;
             entityMaterial.MaterialTitle = currentMaterialTitle;
-            entityMaterial.SpecularExp = -1.0;
-            entityMaterial.Transparency = -1.0;
-            entityMaterial.IlluminationMode = -1.0;
-            entityMaterial.OpticalDensity = -1.0;
+            entityMaterial.SpecularExp = 1.0;
+            entityMaterial.Transparency = 1.0;
+            entityMaterial.IlluminationMode = 2;
+            entityMaterial.OpticalDensity = 1.0;
             entityMaterial.AmbientColor = glm::vec3(0.0f);
             entityMaterial.DiffuseColor = glm::vec3(0.0f);
             entityMaterial.SpecularColor = glm::vec3(0.0f);
-            entityMaterial.EmissionColor = glm::vec3(0.0f);;
+            entityMaterial.EmissionColor = glm::vec3(0.0f);
             MaterialID += 1;
             this->materials[currentMaterialTitle] = entityMaterial;
         }

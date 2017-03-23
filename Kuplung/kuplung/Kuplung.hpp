@@ -35,7 +35,7 @@ private:
     bool init();
     void initFolders();
     void onEvent(SDL_Event* ev);
-    void processImportFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> &settings);
+    void processImportFileAsync(const FBEntity file, const std::vector<std::string> &settings);
     void processParsedImportedFile();
     bool hasEnding(std::string const& fullString, std::string const& ending);
     void renderScene();

@@ -116,4 +116,14 @@ message LightObject {
   required ObjectCoordinate rotateCenterX = 19;
   required ObjectCoordinate rotateCenterY = 20;
   required ObjectCoordinate rotateCenterZ = 21;
+  
+  required MaterialColor ambient = 22;
+  required MaterialColor diffuse = 23;
+  required MaterialColor specular = 24;
+
+  required ObjectCoordinate lCutOff = 25;
+  required ObjectCoordinate lOuterCutOff = 26;
+  required ObjectCoordinate lConstant = 27;
+  required ObjectCoordinate lLinear = 28;
+  required ObjectCoordinate lQuadratic = 29;
 }

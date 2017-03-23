@@ -562,20 +562,13 @@ void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std:
     this->managerUI->showParsing();
     this->objParserThreadFinished = false;
     this->objParserThreadProcessed = false;
-    FileBrowser_ParserType rt;
-    if (this->hasEnding(file.title, ".obj"))
-        rt = FileBrowser_ParserType(Settings::Instance()->ModelFileParser);
-    else if (this->hasEnding(file.title, ".stl"))
-        rt = FileBrowser_ParserType_STL;
-    else if (this->hasEnding(file.title, ".ply"))
-        rt = FileBrowser_ParserType_PLY;
-    std::thread filejParserThread(&Kuplung::processImportFileAsync, this, file, rt, settings);
+    std::thread filejParserThread(&Kuplung::processImportFileAsync, this, file, settings);
     filejParserThread.detach();
     this->doLog("Starting parsing " + file.title);
 }
 
-void Kuplung::processImportFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> &settings) {
-    std::vector<MeshModel> newModels = this->parser->parse(file, type, settings);
+void Kuplung::processImportFileAsync(const FBEntity file, const std::vector<std::string> &settings) {
+    std::vector<MeshModel> newModels = this->parser->parse(file, settings);
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
@@ -643,12 +636,6 @@ void Kuplung::doProgress(float value) {
 
 void Kuplung::guiQuit() {
     this->gameIsRunning = false;
-}
-
-bool Kuplung::hasEnding(std::string const &fullString, std::string const &ending) {
-    if (fullString.length() >= ending.length())
-        return (0 == fullString.compare (fullString.length() - ending.length(), ending.length(), ending));
-    return false;
 }
 
 void Kuplung::doLog(std::string const& logMessage) {

@@ -63,7 +63,7 @@ private:
 
     void projectSquare();
     void initTextureBuffer();
-    void dialogFileBrowserProcessFile(FBEntity file, FileBrowser_ParserType parserType, MaterialTextureType texType);
+    void dialogFileBrowserProcessFile(FBEntity file, MaterialTextureType texType);
     void processTextureCoordinates();
     void processTextureCoordinatesSquare();
 };

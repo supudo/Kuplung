@@ -103,15 +103,18 @@ MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::str
 
         MeshModelMaterial entityMaterial = {};
         this->indexMaterial += 1;
+        entityMaterial.MaterialID = this->indexMaterial;
         entityMaterial.MaterialTitle = std::string(materialName.C_Str());
 
         float shininess = 0.0f;
         material->Get(AI_MATKEY_SHININESS, shininess); // Ns
-        entityMaterial.SpecularExp = shininess / 4.0f; // Assimp still multiples the exp 4 times ....
+        entityMaterial.SpecularExp = shininess / 4.0f; // Assimp still multiples the exp 4 times ...
 
         material->Get(AI_MATKEY_REFRACTI, entityMaterial.OpticalDensity); // Ni
         material->Get(AI_MATKEY_OPACITY, entityMaterial.Transparency);
         material->Get(AI_MATKEY_SHADING_MODEL, entityMaterial.IlluminationMode);
+        // Assimp ignores the "illum" in the obj file for some reason ...
+        entityMaterial.IlluminationMode = 2;
 
         aiColor3D color;
 

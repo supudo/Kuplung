@@ -31,7 +31,7 @@ void ImportFile::init(int positionX, int positionY, int width, int height, std::
     this->Setting_Up = 4;
 }
 
-void ImportFile::draw(const char* title, bool* p_opened, FileBrowser_ParserType type) {
+void ImportFile::draw(const char* title, bool* p_opened, int type) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -95,32 +95,26 @@ void ImportFile::draw(const char* title, bool* p_opened, FileBrowser_ParserType 
 
     ImGui::BeginChild("Browser", ImVec2(-1.0f, -1.0f), false);
 
-    if (type == FileBrowser_ParserType_Own1 || type == FileBrowser_ParserType_Own2 || type == FileBrowser_ParserType_Assimp)
+    if (type == 0)
         ImGui::Text("Select OBJ file");
-#ifdef DEF_KuplungSetting_UseCuda
-    else if (type == FileBrowser_ParserType_Cuda)
-        ImGui::Text("Select CUDA file");
-#endif
-    else if (type == FileBrowser_ParserType_STL)
+    else if (type == 1)
         ImGui::Text("Select STL file");
-    else if (type == FileBrowser_ParserType_PLY)
+    else if (type == 2)
         ImGui::Text("Select PLY file");
     ImGui::Separator();
     ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
     ImGui::Separator();
 
     ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-    if (type < FileBrowser_ParserType_STL) {
 #ifdef DEF_KuplungSetting_UseCuda
-        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "Cuda"};
+    const char* parserItems[] = {"Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp"};
 #else
-        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
+    const char* parserItems[] = {"Kuplung Parsers", "Assimp"};
 #endif
-        if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
-            Settings::Instance()->saveSettings();
+    if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+        Settings::Instance()->saveSettings();
 
-        ImGui::Separator();
-    }
+    ImGui::Separator();
 
     ImGui::BeginChild("scrolling");
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
@@ -158,7 +152,7 @@ void ImportFile::draw(const char* title, bool* p_opened, FileBrowser_ParserType 
 
 #pragma mark - Private
 
-void ImportFile::drawFiles(FileBrowser_ParserType type) {
+void ImportFile::drawFiles(int type) {
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder, type);
     int i = 0;
     static int selected = -1;
@@ -202,7 +196,7 @@ void ImportFile::drawFiles(FileBrowser_ParserType type) {
     }
 }
 
-std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const& filePath, FileBrowser_ParserType type) {
+std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const& filePath, int type) {
     std::map<std::string, FBEntity> folderContents;
     fs::path currentPath(filePath);
 
@@ -223,11 +217,11 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const&
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 fs::file_status fileStatus = iteratorFolder->status();
-                if (type == FileBrowser_ParserType_Own1 || type == FileBrowser_ParserType_Own2 || type == FileBrowser_ParserType_Assimp)
+                if (type == 0)
                     isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".obj"});
-                else if (type == FileBrowser_ParserType_STL)
+                else if (type == 1)
                     isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".stl"});
-                else if (type == FileBrowser_ParserType_PLY)
+                else if (type == 2)
                     isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".ply"});
                 if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
                     FBEntity entity;

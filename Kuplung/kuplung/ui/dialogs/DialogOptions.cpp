@@ -74,11 +74,11 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         }
 
 #ifdef DEF_KuplungSetting_UseCuda
-        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "Cuda", "STL Parser", "PLY Parser"};
+    const char* parserItems[] = {"Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp"};
 #else
-        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "STL Parser", "PLY Parser"};
+    const char* parserItems[] = {"Kuplung Parsers", "Assimp"};
 #endif
-        if (ImGui::Combo("ModelFace Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+        if (ImGui::Combo("Import Parser", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
             Settings::Instance()->saveSettings();
         ImGui::Unindent();
     }

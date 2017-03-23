@@ -10,6 +10,7 @@
 #define SettingsStructs_h
 
 #include <string>
+#include <vector>
 
 struct Color {
     float r, g, b, w;
@@ -20,14 +21,21 @@ struct FBEntity {
     std::string path, title, extension, modifiedDate, size;
 };
 
-typedef enum FileBrowser_ParserType {
-    FileBrowser_ParserType_Own1 = 0,
-    FileBrowser_ParserType_Own2 = 1,
-    FileBrowser_ParserType_Assimp = 2,
-    FileBrowser_ParserType_Cuda = 3,
-    FileBrowser_ParserType_STL = 4,
-    FileBrowser_ParserType_PLY = 5
-} FileBrowser_ParserType;
+typedef enum Importer_ParserType {
+    Importer_ParserType_Own = 0,
+#ifdef DEF_KuplungSetting_UseCuda
+    Importer_ParserType_Own_Cuda = 1,
+    Importer_ParserType_Assimp = 2
+#else
+    Importer_ParserType_Assimp = 1
+#endif
+} Importer_ParserType;
+
+#ifdef DEF_KuplungSetting_UseCuda
+static int Importer_ParserType_Count = 3;
+#else
+static int Importer_ParserType_Count = 2;
+#endif
 
 typedef enum InAppRendererType {
     InAppRendererType_Simple,

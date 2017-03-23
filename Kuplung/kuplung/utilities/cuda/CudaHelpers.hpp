@@ -6,6 +6,8 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#ifdef DEF_KuplungSetting_UseCuda
+
 #ifndef CudaHelpers_hpp
 #define CudaHelpers_hpp
 
@@ -29,3 +31,5 @@ private:
 };
 
 #endif /* CudaHelpers_hpp */
+
+#endif
