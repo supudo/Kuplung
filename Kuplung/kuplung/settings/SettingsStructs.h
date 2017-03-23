@@ -23,7 +23,10 @@ struct FBEntity {
 typedef enum FileBrowser_ParserType {
     FileBrowser_ParserType_Own1 = 0,
     FileBrowser_ParserType_Own2 = 1,
-    FileBrowser_ParserType_Assimp = 2
+    FileBrowser_ParserType_Assimp = 2,
+    FileBrowser_ParserType_Cuda = 3,
+    FileBrowser_ParserType_STL = 4,
+    FileBrowser_ParserType_PLY = 5
 } FileBrowser_ParserType;
 
 typedef enum InAppRendererType {

@@ -28,7 +28,7 @@ public:
     void saveSettings();
     std::string string_format(const std::string fmt_str, ...);
     std::string appFolder();
-    bool isAllowedFileExtension(std::string fileExtension);
+    bool isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions = std::vector<std::string>());
     bool isAllowedStyleExtension(std::string fileExtension);
     bool isAllowedImageExtension(std::string fileExtension);
     void setLogFunc(std::function<void(std::string)> doLog);

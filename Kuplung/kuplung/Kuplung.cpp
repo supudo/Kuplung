@@ -551,7 +551,7 @@ void Kuplung::addLight(const LightSourceType type) {
 
 void Kuplung::processRunningThreads() {
     if (this->objParserThreadFinished && !this->objParserThreadProcessed) {
-        this->processParsedObjFile();
+        this->processParsedImportedFile();
         this->objParserThreadProcessed = true;
     }
     if (this->exporterThreadFinished)
@@ -559,20 +559,22 @@ void Kuplung::processRunningThreads() {
 }
 
 void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std::string> &settings) {
-    if (this->hasEnding(file.title, ".obj")) {
-        this->managerUI->showParsing();
-        this->objParserThreadFinished = false;
-        this->objParserThreadProcessed = false;
-        FileBrowser_ParserType rt = FileBrowser_ParserType(Settings::Instance()->ModelFileParser);
-        std::thread objParserThread(&Kuplung::processObjFileAsync, this, file, rt, settings);
-        objParserThread.detach();
-        this->doLog("Starting parsing OBJ " + file.title);
-    }
-    else
-        this->doLog("!!! You have to select .obj file !!!");
+    this->managerUI->showParsing();
+    this->objParserThreadFinished = false;
+    this->objParserThreadProcessed = false;
+    FileBrowser_ParserType rt;
+    if (this->hasEnding(file.title, ".obj"))
+        rt = FileBrowser_ParserType(Settings::Instance()->ModelFileParser);
+    else if (this->hasEnding(file.title, ".stl"))
+        rt = FileBrowser_ParserType_STL;
+    else if (this->hasEnding(file.title, ".ply"))
+        rt = FileBrowser_ParserType_PLY;
+    std::thread filejParserThread(&Kuplung::processImportFileAsync, this, file, rt, settings);
+    filejParserThread.detach();
+    this->doLog("Starting parsing " + file.title);
 }
 
-void Kuplung::processObjFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> &settings) {
+void Kuplung::processImportFileAsync(const FBEntity file, const FileBrowser_ParserType type, const std::vector<std::string> &settings) {
     std::vector<MeshModel> newModels = this->parser->parse(file, type, settings);
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
@@ -596,7 +598,7 @@ void Kuplung::exportSceneFinished() {
     this->managerUI->hideExporting();
 }
 
-void Kuplung::processParsedObjFile() {
+void Kuplung::processParsedImportedFile() {
     if (this->objFiles.size() > 0) {
         this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
         this->managerUI->hideParsing();

@@ -1,12 +1,12 @@
 //
-//  ImportOBJ.cpp
+//  ImportFile.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/18/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#include "ImportOBJ.hpp"
+#include "ImportFile.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <ctime>
 #include <boost/algorithm/string.hpp>
@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void ImportOBJ::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, std::vector<std::string>)> processFile) {
+void ImportFile::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, std::vector<std::string>)> processFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -31,7 +31,7 @@ void ImportOBJ::init(int positionX, int positionY, int width, int height, std::f
     this->Setting_Up = 4;
 }
 
-void ImportOBJ::draw(const char* title, bool* p_opened) {
+void ImportFile::draw(const char* title, bool* p_opened, FileBrowser_ParserType type) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -51,9 +51,9 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
         "-X Forward",
         "-Y Forward",
         "-Z Forward",
-        "X Forward",
-        "Y Forward",
-        "Z Forward"
+        " X Forward",
+        " Y Forward",
+        " Z Forward"
     };
     ImGui::Combo("##987", &this->Setting_Forward, forward_items, IM_ARRAYSIZE(forward_items));
     ImGui::Separator();
@@ -62,9 +62,9 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
         "-X Up",
         "-Y Up",
         "-Z Up",
-        "X Up",
-        "Y Up",
-        "Z Up"
+        " X Up",
+        " Y Up",
+        " Z Up"
     };
     ImGui::Combo("##988", &this->Setting_Up, up_items, IM_ARRAYSIZE(up_items));
     ImGui::Separator();
@@ -95,17 +95,32 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
 
     ImGui::BeginChild("Browser", ImVec2(-1.0f, -1.0f), false);
 
-    ImGui::Text("Select OBJ file");
+    if (type == FileBrowser_ParserType_Own1 || type == FileBrowser_ParserType_Own2 || type == FileBrowser_ParserType_Assimp)
+        ImGui::Text("Select OBJ file");
+#ifdef DEF_KuplungSetting_UseCuda
+    else if (type == FileBrowser_ParserType_Cuda)
+        ImGui::Text("Select CUDA file");
+#endif
+    else if (type == FileBrowser_ParserType_STL)
+        ImGui::Text("Select STL file");
+    else if (type == FileBrowser_ParserType_PLY)
+        ImGui::Text("Select PLY file");
     ImGui::Separator();
     ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
     ImGui::Separator();
 
     ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-    const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
-    if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
-        Settings::Instance()->saveSettings();
+    if (type < FileBrowser_ParserType_STL) {
+#ifdef DEF_KuplungSetting_UseCuda
+        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp", "Cuda"};
+#else
+        const char* parserItems[] = {"Kuplung Obj Parser 1.0", "Kuplung Obj Parser 2.0", "Assimp"};
+#endif
+        if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+            Settings::Instance()->saveSettings();
 
-    ImGui::Separator();
+        ImGui::Separator();
+    }
 
     ImGui::BeginChild("scrolling");
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
@@ -126,7 +141,7 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
 
     ImGui::SetColumnOffset(1, 40);
 
-    this->drawFiles();
+    this->drawFiles(type);
 
     ImGui::Columns(1);
 
@@ -143,8 +158,8 @@ void ImportOBJ::draw(const char* title, bool* p_opened) {
 
 #pragma mark - Private
 
-void ImportOBJ::drawFiles() {
-    std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder);
+void ImportFile::drawFiles(FileBrowser_ParserType type) {
+    std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder, type);
     int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -174,7 +189,7 @@ void ImportOBJ::drawFiles() {
             }
             else {
                 Settings::Instance()->currentFolder = entity.path;
-                this->drawFiles();
+                this->drawFiles(type);
             }
         }
         ImGui::NextColumn();
@@ -187,7 +202,7 @@ void ImportOBJ::drawFiles() {
     }
 }
 
-std::map<std::string, FBEntity> ImportOBJ::getFolderContents(std::string const& filePath) {
+std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const& filePath, FileBrowser_ParserType type) {
     std::map<std::string, FBEntity> folderContents;
     fs::path currentPath(filePath);
 
@@ -208,7 +223,12 @@ std::map<std::string, FBEntity> ImportOBJ::getFolderContents(std::string const& 
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 fs::file_status fileStatus = iteratorFolder->status();
-                isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string());
+                if (type == FileBrowser_ParserType_Own1 || type == FileBrowser_ParserType_Own2 || type == FileBrowser_ParserType_Assimp)
+                    isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".obj"});
+                else if (type == FileBrowser_ParserType_STL)
+                    isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".stl"});
+                else if (type == FileBrowser_ParserType_PLY)
+                    isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".ply"});
                 if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
@@ -253,13 +273,13 @@ std::map<std::string, FBEntity> ImportOBJ::getFolderContents(std::string const& 
     return folderContents;
 }
 
-std::string ImportOBJ::convertToString(double num) {
+std::string ImportFile::convertToString(double num) {
     std::ostringstream convert;
     convert << num;
     return convert.str();
 }
 
-std::string ImportOBJ::convertSize(size_t size) {
+std::string ImportFile::convertSize(size_t size) {
     static const char *SIZES[] = { "B", "KB", "MB", "GB" };
     int div = 0;
     size_t rem = 0;
@@ -275,14 +295,14 @@ std::string ImportOBJ::convertSize(size_t size) {
     return result;
 }
 
-double ImportOBJ::roundOff(double n) {
+double ImportFile::roundOff(double n) {
     double d = n * 100.0;
     int i = d + 0.5;
     d = (float)i / 100.0;
     return d;
 }
 
-bool ImportOBJ::isHidden(const fs::path &p) {
+bool ImportFile::isHidden(const fs::path &p) {
     std::string name = p.filename().string();
     if (name == ".." || name == "."  || boost::starts_with(name, "."))
        return true;

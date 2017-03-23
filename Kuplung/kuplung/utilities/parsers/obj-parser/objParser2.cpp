@@ -63,6 +63,7 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector
     std::ifstream ifs(this->file.path.c_str());
     if (!ifs.is_open()) {
         Settings::Instance()->funcDoLog("Cannot open .obj file" + this->file.path + "!");
+        ifs.close();
         return {};
     }
 

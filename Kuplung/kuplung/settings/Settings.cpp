@@ -180,10 +180,13 @@ std::string Settings::string_format(const std::string fmt_str, ...) {
     return std::string(formatted.get());
 }
 
-bool Settings::isAllowedFileExtension(std::string fileExtension) {
-    std::string allowedExtensions[] = {".obj"};
-    std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
-    return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
+bool Settings::isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions) {
+    if (allowedExtensions.size() > 0) {
+        std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
+        return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
+    }
+    else
+        return true;
 }
 
 bool Settings::isAllowedStyleExtension(std::string fileExtension) {

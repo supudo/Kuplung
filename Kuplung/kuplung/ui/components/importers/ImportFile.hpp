@@ -1,13 +1,13 @@
 //
-//  ImportOBJ.hpp
+//  ImportFile.hpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 11/18/15.
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
-#ifndef ImportOBJ_hpp
-#define ImportOBJ_hpp
+#ifndef ImportFile_hpp
+#define ImportFile_hpp
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/imgui/imgui.h"
@@ -17,17 +17,17 @@
 #include <string>
 #include <boost/filesystem.hpp>
 
-class ImportOBJ {
+class ImportFile {
 public:
     void init(int positionX, int positionY, int width, int height,
               std::function<void(FBEntity, std::vector<std::string>)> processFile);
-    void draw(const char* title, bool* p_opened = NULL);
+    void draw(const char* title, bool* p_opened = NULL, FileBrowser_ParserType type = FileBrowser_ParserType_Own2);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
+    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath, FileBrowser_ParserType type);
     std::function<void(FBEntity, std::vector<std::string>)> processFile;
 
-    void drawFiles();
+    void drawFiles(FileBrowser_ParserType type);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);
@@ -39,4 +39,4 @@ private:
     int Setting_Forward, Setting_Up;
 };
 
-#endif /* ImportOBJ_hpp */
+#endif /* ImportFile_hpp */

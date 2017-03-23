@@ -31,10 +31,11 @@
 		8A2576131DD48B05004172E3 /* RayTracerRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2576111DD48B05004172E3 /* RayTracerRenderer.cpp */; };
 		8A2B487C1CC4F6EA0077E9D4 /* Exporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B48781CC4F6EA0077E9D4 /* Exporter.cpp */; };
 		8A2B487D1CC4F6EA0077E9D4 /* ExporterOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */; };
-		8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */; };
 		8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */; };
 		8A33F1131E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */; };
 		8A3928EF1E77E7C8005BF8C5 /* test.lua in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A3928ED1E77E79F005BF8C5 /* test.lua */; };
+		8A3CCA881E83E0C0009E91AD /* objParserCuda.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CCA861E83E0C0009E91AD /* objParserCuda.cpp */; };
+		8A3CCA8A1E83E11D009E91AD /* cuda_OBJParser_cuda.o in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A3CCA891E83E11D009E91AD /* cuda_OBJParser_cuda.o */; };
 		8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A3CECF81C85B217005CB98D /* Maths.cpp */; };
 		8A403FFA1E800CF600733754 /* KuplungIDE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A403FF81E800CF600733754 /* KuplungIDE.cpp */; };
 		8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A407D281D3D1C0600767717 /* libassimp.3.3.1.dylib */; };
@@ -163,6 +164,8 @@
 		8A81DDC81D1A82B5004F3270 /* WorldGrid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A81DDBD1D1A82B5004F3270 /* WorldGrid.cpp */; };
 		8A83BF8D1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83BF8B1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp */; };
 		8A83BF911DBE3ACE00B927D5 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83BF8F1DBE3ACE00B927D5 /* SceneRenderer.cpp */; };
+		8A83CB5A1E83DAC7001725E4 /* ImportFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83CB581E83DAC7001725E4 /* ImportFile.cpp */; };
+		8A83CB5E1E83DB63001725E4 /* PLYParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A83CB5C1E83DB63001725E4 /* PLYParser.cpp */; };
 		8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540611CEDF3A200656C60 /* UVEditor.cpp */; };
 		8A8540661CEDF3A200656C60 /* UVPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8540631CEDF3A200656C60 /* UVPoint.cpp */; };
 		8A8BB8CD1E1BEC5000316A43 /* Timings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BB8CB1E1BEC5000316A43 /* Timings.cpp */; };
@@ -730,13 +733,15 @@
 		8A2B48791CC4F6EA0077E9D4 /* Exporter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Exporter.hpp; path = export/Exporter.hpp; sourceTree = "<group>"; };
 		8A2B487A1CC4F6EA0077E9D4 /* ExporterOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExporterOBJ.cpp; path = export/ExporterOBJ.cpp; sourceTree = "<group>"; };
 		8A2B487B1CC4F6EA0077E9D4 /* ExporterOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExporterOBJ.hpp; path = export/ExporterOBJ.hpp; sourceTree = "<group>"; };
-		8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImportOBJ.cpp; path = importers/ImportOBJ.cpp; sourceTree = "<group>"; };
-		8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImportOBJ.hpp; path = importers/ImportOBJ.hpp; sourceTree = "<group>"; };
 		8A301B7B1D06EB0F0066B57A /* ShaderEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderEditor.cpp; sourceTree = "<group>"; };
 		8A301B7C1D06EB0F0066B57A /* ShaderEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShaderEditor.hpp; sourceTree = "<group>"; };
 		8A33F1111E0C1BF6004FB852 /* OuiNanoVG_Implementation.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = OuiNanoVG_Implementation.cpp; path = gui_oui/OuiNanoVG_Implementation.cpp; sourceTree = "<group>"; };
 		8A33F1121E0C1BF6004FB852 /* OuiNanoVG_Implementation.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = OuiNanoVG_Implementation.hpp; path = gui_oui/OuiNanoVG_Implementation.hpp; sourceTree = "<group>"; };
 		8A3928ED1E77E79F005BF8C5 /* test.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = test.lua; path = lua/test.lua; sourceTree = "<group>"; };
+		8A3CCA851E83E07F009E91AD /* cuda_OBJParser.cu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = cuda_OBJParser.cu; path = cuda/cu/cuda_OBJParser.cu; sourceTree = "<group>"; };
+		8A3CCA861E83E0C0009E91AD /* objParserCuda.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objParserCuda.cpp; path = "obj-parser/objParserCuda.cpp"; sourceTree = "<group>"; };
+		8A3CCA871E83E0C0009E91AD /* objParserCuda.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = objParserCuda.hpp; path = "obj-parser/objParserCuda.hpp"; sourceTree = "<group>"; };
+		8A3CCA891E83E11D009E91AD /* cuda_OBJParser_cuda.o */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.objfile"; name = cuda_OBJParser_cuda.o; path = external/cuda_build/cuda_OBJParser_cuda.o; sourceTree = "<group>"; };
 		8A3CECF81C85B217005CB98D /* Maths.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Maths.cpp; sourceTree = "<group>"; };
 		8A3CECF91C85B217005CB98D /* Maths.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Maths.hpp; sourceTree = "<group>"; };
 		8A403FEE1E7FED5300733754 /* cuda_oceanFFT_kernel.cu */ = {isa = PBXFileReference; lastKnownFileType = text; name = cuda_oceanFFT_kernel.cu; path = cuda/cu/cuda_oceanFFT_kernel.cu; sourceTree = "<group>"; };
@@ -880,6 +885,10 @@
 		8A83BF8C1DBE3ABE00B927D5 /* DefaultForwardRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = DefaultForwardRenderer.hpp; path = "renderers/default-forward/DefaultForwardRenderer.hpp"; sourceTree = "<group>"; };
 		8A83BF8F1DBE3ACE00B927D5 /* SceneRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SceneRenderer.cpp; path = "renderers/scene-renderer/SceneRenderer.cpp"; sourceTree = "<group>"; };
 		8A83BF901DBE3ACE00B927D5 /* SceneRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = SceneRenderer.hpp; path = "renderers/scene-renderer/SceneRenderer.hpp"; sourceTree = "<group>"; };
+		8A83CB581E83DAC7001725E4 /* ImportFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ImportFile.cpp; path = importers/ImportFile.cpp; sourceTree = "<group>"; };
+		8A83CB591E83DAC7001725E4 /* ImportFile.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ImportFile.hpp; path = importers/ImportFile.hpp; sourceTree = "<group>"; };
+		8A83CB5C1E83DB63001725E4 /* PLYParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PLYParser.cpp; path = "ply-parser/PLYParser.cpp"; sourceTree = "<group>"; };
+		8A83CB5D1E83DB63001725E4 /* PLYParser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = PLYParser.hpp; path = "ply-parser/PLYParser.hpp"; sourceTree = "<group>"; };
 		8A8540611CEDF3A200656C60 /* UVEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UVEditor.cpp; path = uveditor/UVEditor.cpp; sourceTree = "<group>"; };
 		8A8540621CEDF3A200656C60 /* UVEditor.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = UVEditor.hpp; path = uveditor/UVEditor.hpp; sourceTree = "<group>"; };
 		8A8540631CEDF3A200656C60 /* UVPoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UVPoint.cpp; path = uveditor/UVPoint.cpp; sourceTree = "<group>"; };
@@ -1121,6 +1130,7 @@
 				8A7B9AB21E800F0400ADD386 /* CUDA.framework in Frameworks */,
 				8A7B9AC11E80190400ADD386 /* cuda_oceanFFT_kernel_cuda.o in Frameworks */,
 				8A7B9AC21E80190400ADD386 /* cuda_vectorAddition_cuda.o in Frameworks */,
+				8A3CCA8A1E83E11D009E91AD /* cuda_OBJParser_cuda.o in Frameworks */,
 				8AD104061C05C489008CE831 /* GLUT.framework in Frameworks */,
 				8AD104041C049E8A008CE831 /* OpenGL.framework in Frameworks */,
 				8A407D291D3D1C0600767717 /* libassimp.3.3.1.dylib in Frameworks */,
@@ -1261,8 +1271,8 @@
 		8A2CF6AD1DC39DFA008D014E /* importers */ = {
 			isa = PBXGroup;
 			children = (
-				8A2CF6AE1DC39E07008D014E /* ImportOBJ.cpp */,
-				8A2CF6AF1DC39E07008D014E /* ImportOBJ.hpp */,
+				8A83CB581E83DAC7001725E4 /* ImportFile.cpp */,
+				8A83CB591E83DAC7001725E4 /* ImportFile.hpp */,
 			);
 			name = importers;
 			sourceTree = "<group>";
@@ -1510,6 +1520,7 @@
 				8AC291401CD2455C00A631C1 /* obj-parser */,
 				8A45EDBD1DCA591900383570 /* ParserUtils.cpp */,
 				8A45EDBE1DCA591900383570 /* ParserUtils.hpp */,
+				8A83CB5B1E83DB5C001725E4 /* ply-parser */,
 				8AC291411CD2456200A631C1 /* stl-parser */,
 			);
 			path = parsers;
@@ -1594,6 +1605,15 @@
 			name = "scene-renderer";
 			sourceTree = "<group>";
 		};
+		8A83CB5B1E83DB5C001725E4 /* ply-parser */ = {
+			isa = PBXGroup;
+			children = (
+				8A83CB5C1E83DB63001725E4 /* PLYParser.cpp */,
+				8A83CB5D1E83DB63001725E4 /* PLYParser.hpp */,
+			);
+			name = "ply-parser";
+			sourceTree = "<group>";
+		};
 		8A8540601CEDF39600656C60 /* uveditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -1637,6 +1657,7 @@
 		8A8E14151E7FDEFA00273DCC /* cu */ = {
 			isa = PBXGroup;
 			children = (
+				8A3CCA851E83E07F009E91AD /* cuda_OBJParser.cu */,
 				8A403FEE1E7FED5300733754 /* cuda_oceanFFT_kernel.cu */,
 				8A403FEF1E7FED5300733754 /* cuda_vectorAddition.cu */,
 			);
@@ -1999,6 +2020,8 @@
 				8A6B61A31CD27B9E002CB119 /* objParser1.hpp */,
 				8A6B61A41CD27B9E002CB119 /* objParser2.cpp */,
 				8A6B61A51CD27B9E002CB119 /* objParser2.hpp */,
+				8A3CCA861E83E0C0009E91AD /* objParserCuda.cpp */,
+				8A3CCA871E83E0C0009E91AD /* objParserCuda.hpp */,
 			);
 			name = "obj-parser";
 			sourceTree = "<group>";
@@ -2051,6 +2074,7 @@
 		8AD104021C049790008CE831 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8A3CCA891E83E11D009E91AD /* cuda_OBJParser_cuda.o */,
 				8A7B9AC31E8019B900ADD386 /* libcudart.8.0.dylib */,
 				8A7B9AC41E8019B900ADD386 /* libcufft.8.0.dylib */,
 				8A7B9AB71E8016CB00ADD386 /* cuda_oceanFFT_kernel_cuda.o */,
@@ -2221,6 +2245,7 @@
 				8A2576131DD48B05004172E3 /* RayTracerRenderer.cpp in Sources */,
 				8AB255BC1DA4F31000ABF2AC /* Shadertoy.cpp in Sources */,
 				8A8E14291E7FE81000273DCC /* oceanFFT.cpp in Sources */,
+				8A3CCA881E83E0C0009E91AD /* objParserCuda.cpp in Sources */,
 				8A301B7D1D06EB0F0066B57A /* ShaderEditor.cpp in Sources */,
 				8A81DDC11D1A82B5004F3270 /* Camera.cpp in Sources */,
 				8A81DDC51D1A82B5004F3270 /* MiniAxis.cpp in Sources */,
@@ -2239,6 +2264,7 @@
 				8A10919B1D47662400658E39 /* KuplungAppSettings.pb.cc in Sources */,
 				8AA9F23C1D21741B004A8F1C /* SpaceshipMeshGenerator.cpp in Sources */,
 				8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */,
+				8A83CB5E1E83DB63001725E4 /* PLYParser.cpp in Sources */,
 				8A6E70B41C6CACB40085CAE5 /* imgui_demo.cpp in Sources */,
 				8A81DDBF1D1A82B5004F3270 /* AxisHelpers.cpp in Sources */,
 				8A8E142A1E7FE81000273DCC /* VectorAddition.cpp in Sources */,
@@ -2278,6 +2304,7 @@
 				8ABC5C441CA3DEC00024F816 /* MENode_Combine.cpp in Sources */,
 				8A6E705D1C6CACAC0085CAE5 /* ConfigUtils.cpp in Sources */,
 				8A83BF8D1DBE3ABE00B927D5 /* DefaultForwardRenderer.cpp in Sources */,
+				8A83CB5A1E83DAC7001725E4 /* ImportFile.cpp in Sources */,
 				8A1AFB2A1C71FC58004888D8 /* DialogControlsGUI.cpp in Sources */,
 				8A91C8331E77F3E90051C928 /* LuaManager.cpp in Sources */,
 				8AD91DAD1CA3D989004674BC /* MaterialEditor.cpp in Sources */,
@@ -2314,7 +2341,6 @@
 				8A6E70AB1C6CACB40085CAE5 /* Tabs.cpp in Sources */,
 				8A8540651CEDF3A200656C60 /* UVEditor.cpp in Sources */,
 				8AA1A73B1D461AC400EEC1A3 /* SaveOpenGProtocolBufs.cpp in Sources */,
-				8A2CF6B01DC39E07008D014E /* ImportOBJ.cpp in Sources */,
 				8A81DDC61D1A82B5004F3270 /* RayLine.cpp in Sources */,
 				8A14D8C61D367BFC00674470 /* SaveOpen.cpp in Sources */,
 				8AA9F2351D2173F6004A8F1C /* Terrain.cpp in Sources */,

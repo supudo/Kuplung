@@ -115,14 +115,15 @@ IF(CUDA_FOUND)
 
     SET(CUDA_SOURCES_CU
         kuplung/cuda/cu/cuda_vectorAddition.cu
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu)
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+        kuplung/cuda/cu/cuda_OBJParser.cu)
 
     SET(CUDA_NVCC_FLAGS
         ${CUDA_NVCC_FLAGS};
         -D_DEBUG;
         -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
         -I/usr/local/cuda/include;
-        -std=c++11;-DVERBOSE;
+        # -std=c++11;-DVERBOSE;
         -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
     SET(CUDA_PROPAGATE_HOST_FLAGS OFF)
     CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES_CU})
@@ -214,8 +215,8 @@ SET(SOURCE_FILES
     kuplung/settings/SettingsStructs.h
     kuplung/ui/components/exporters/ExportOBJ.cpp
     kuplung/ui/components/exporters/ExportOBJ.hpp
-    kuplung/ui/components/importers/ImportOBJ.cpp
-    kuplung/ui/components/importers/ImportOBJ.hpp
+    kuplung/ui/components/importers/ImportFile.cpp
+    kuplung/ui/components/importers/ImportFile.hpp
     kuplung/ui/components/materialeditor/MaterialEditor.cpp
     kuplung/ui/components/materialeditor/MaterialEditor.hpp
     kuplung/ui/components/materialeditor/MaterialEditorData.h
@@ -323,8 +324,12 @@ SET(SOURCE_FILES
     kuplung/utilities/parsers/obj-parser/objParser1.hpp
     kuplung/utilities/parsers/obj-parser/objParser2.cpp
     kuplung/utilities/parsers/obj-parser/objParser2.hpp
+    kuplung/utilities/parsers/obj-parser/objParserCuda.cpp
+    kuplung/utilities/parsers/obj-parser/objParserCuda.hpp
     kuplung/utilities/parsers/stl-parser/STLParser.cpp
     kuplung/utilities/parsers/stl-parser/STLParser.hpp
+    kuplung/utilities/parsers/ply-parser/PLYParser.cpp
+    kuplung/utilities/parsers/ply-parser/PLYParser.hpp
     kuplung/utilities/parsers/FileModelManager.cpp
     kuplung/utilities/parsers/FileModelManager.hpp
     kuplung/utilities/parsers/ModelObject.h

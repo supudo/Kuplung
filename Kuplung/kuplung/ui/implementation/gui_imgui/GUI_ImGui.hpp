@@ -19,7 +19,7 @@
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
-#include "kuplung/ui/components/importers/ImportOBJ.hpp"
+#include "kuplung/ui/components/importers/ImportFile.hpp"
 #include "kuplung/ui/components/exporters/ExportOBJ.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
@@ -114,12 +114,12 @@ private:
     std::function<void(FBEntity file)> funcOpenScene;
 
     void dialogFileBrowserProcessFile(FBEntity const& file, FileBrowser_ParserType type);
-    void dialogOBJImporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
+    void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
     void dialogOBJExporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
-    void dialogOBJImporterBrowser();
+    void dialogImporterBrowser(FileBrowser_ParserType type);
     void dialogOBJExporterBrowser();
     void dialogStyle();
     void dialogScreenshot();
@@ -146,7 +146,7 @@ private:
     std::unique_ptr<Log> componentLog;
     std::unique_ptr<Screenshot> componentScreenshot;
     std::unique_ptr<FileBrowser> componentFileBrowser;
-    std::unique_ptr<ImportOBJ> componentImportOBJ;
+    std::unique_ptr<ImportFile> componentImportFile;
     std::unique_ptr<ExportOBJ> componentExportOBJ;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
@@ -163,7 +163,9 @@ private:
 
     bool showDialogStyle;
     bool showDialogFile;
-    bool showOBJImporter;
+    bool showFileImporter_OBJ;
+    bool showFileImporter_STL;
+    bool showFileImporter_PLY;
     bool showOBJExporter;
     bool showSaveDialog;
     bool showOpenDialog;

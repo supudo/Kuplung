@@ -187,10 +187,12 @@ mac {
     CUDA_OBJECTS_DIR = cuda
 
     OTHER_FILES += kuplung/cuda/cu/cuda_vectorAddition.cu \
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
+        kuplung/cuda/cu/cuda_OBJParser.cu
 
     CUDA_SOURCES += kuplung/cuda/cu/cuda_vectorAddition.cu \
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
+        kuplung/cuda/cu/cuda_OBJParser.cu
 
     SYSTEM_NAME = x64
     SYSTEM_TYPE = 64
@@ -263,7 +265,7 @@ SOURCES += main.cpp \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
-    kuplung/ui/components/importers/ImportOBJ.cpp \
+    kuplung/ui/components/importers/ImportFile.cpp \
     kuplung/ui/components/exporters/ExportOBJ.cpp \
     kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/ImageViewer.cpp \
@@ -304,7 +306,9 @@ SOURCES += main.cpp \
     kuplung/utilities/parsers/ParserUtils.cpp \
     kuplung/utilities/parsers/obj-parser/objParser1.cpp \
     kuplung/utilities/parsers/obj-parser/objParser2.cpp \
+    kuplung/utilities/parsers/obj-parser/objParserCuda.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
+    kuplung/utilities/parsers/ply-parser/PLYParser.cpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
     kuplung/utilities/export/Exporter.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
@@ -368,7 +372,7 @@ HEADERS += \
     kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
-    kuplung/ui/components/importers/ImportOBJ.hpp \
+    kuplung/ui/components/importers/ImportFile.hpp \
     kuplung/ui/components/exporters/ExportOBJ.hpp \
     kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/ImageViewer.hpp \
@@ -418,7 +422,9 @@ HEADERS += \
     kuplung/utilities/parsers/ModelObject.h \
     kuplung/utilities/parsers/obj-parser/objParser1.hpp \
     kuplung/utilities/parsers/obj-parser/objParser2.hpp \
+    kuplung/utilities/parsers/obj-parser/objParserCuda.hpp \
     kuplung/utilities/parsers/stl-parser/STLParser.hpp \
+    kuplung/utilities/parsers/ply-parser/PLYParser.hpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp \
     kuplung/utilities/stb/stb_image.h \
     kuplung/utilities/stb/stb_image_write.h \
