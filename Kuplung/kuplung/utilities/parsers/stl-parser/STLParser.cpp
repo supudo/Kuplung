@@ -149,11 +149,11 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
     stl_file_data.read(n_triangles, 4);
     std::string h(header_info);
 
-    int indicesCounter = 0;
+    unsigned int indicesCounter = 0;
     unsigned int* r = (unsigned int*) n_triangles;
     unsigned int num_triangles = *r;
     int progressCounter = 0;
-    int progressTotal = num_triangles;
+    unsigned int progressTotal = num_triangles;
     for (unsigned int i = 0; i < num_triangles; i++) {
         glm::vec3 normal = this->parsePoint(stl_file_data);
         glm::vec3 v1 = this->parsePoint(stl_file_data);
@@ -183,8 +183,8 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
         entityModel.indices.push_back(indicesCounter);
         indicesCounter += 1;
 
-        char dummy[2];
-        stl_file_data.read(dummy, 2);
+        char attrs[2];
+        stl_file_data.read(attrs, 2);
 
         progressCounter += 1;
         float progress = (float(progressCounter) / float(progressTotal)) * 100.0f;
@@ -199,9 +199,9 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
     entityMaterial.IlluminationMode = 2;
     entityModel.ModelMaterial = entityMaterial;
 
-    entityModel.countIndices = entityModel.indices.size();
-    entityModel.countNormals = entityModel.normals.size();
-    entityModel.countVertices = entityModel.vertices.size();
+    entityModel.countIndices = int(entityModel.indices.size());
+    entityModel.countNormals = int(entityModel.normals.size());
+    entityModel.countVertices = int(entityModel.vertices.size());
 
     currentModelID += 1;
     this->models.push_back(entityModel);
