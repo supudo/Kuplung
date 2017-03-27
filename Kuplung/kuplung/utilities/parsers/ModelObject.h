@@ -103,9 +103,15 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
 
             std::string normals;
             for (size_t j=0; j<m.normals.size(); j++) {
-                normals += Settings::Instance()->string_format("[%g, %g, %g], ", m.normals[j].x, m.normals[j].y, m.normals[j].z);
+                normals += Settings::Instance()->string_format("[%f, %f, %f], ", m.normals[j].x, m.normals[j].y, m.normals[j].z);
             }
             printf("m.normals : %s\n", normals.c_str());
+
+            std::string indices;
+            for (size_t j=0; j<m.indices.size(); j++) {
+                indices+= Settings::Instance()->string_format("[%i], ", m.indices[j]);
+            }
+            printf("m.indices : %s\n", indices.c_str());
         }
 
         printf("model.ModelMaterial.MaterialID = %i\n", m.ModelMaterial.MaterialID);

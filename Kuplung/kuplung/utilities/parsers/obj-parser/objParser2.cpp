@@ -62,7 +62,7 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector
 
     std::ifstream ifs(this->file.path.c_str());
     if (!ifs.is_open()) {
-        Settings::Instance()->funcDoLog("Cannot open .obj file" + this->file.path + "!");
+        Settings::Instance()->funcDoLog("[objParser2] Cannot open .obj file" + this->file.path + "!");
         ifs.close();
         return {};
     }
@@ -140,7 +140,7 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector
                                         &tri_vertexIndex[2], &tri_normalIndex[2],
                                         &tri_vertexIndex[3], &tri_normalIndex[3]);
                     if (matches != 8) {
-                        Settings::Instance()->funcDoLog("OBJ file is in wrong format!");
+                        Settings::Instance()->funcDoLog("[objParser2] OBJ file is in wrong format!");
                         return this->models;
                     }
                 }
@@ -184,7 +184,7 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector
                                         &vertexIndex[1], &normalIndex[1],
                                         &vertexIndex[2], &normalIndex[2]);
                     if (matches != 6) {
-                        Settings::Instance()->funcDoLog("OBJ file is in wrong format!");
+                        Settings::Instance()->funcDoLog("[objParser2] OBJ file is in wrong format!");
                         return this->models;
                     }
                 }
@@ -285,6 +285,8 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector
 
     ifs.close();
 
+//    Kuplung_printObjModels(this->models, false);
+
     return this->models;
 }
 
@@ -304,7 +306,7 @@ void objParser2::loadMaterialFile(const std::string& materialFile) {
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
     std::ifstream ifs(materialPath.c_str());
     if (!ifs.is_open()) {
-        Settings::Instance()->funcDoLog("Cannot open .mtl file - " + materialPath + "!");
+        Settings::Instance()->funcDoLog("[objParser2] Cannot open .mtl file - " + materialPath + "!");
         return;
     }
 
