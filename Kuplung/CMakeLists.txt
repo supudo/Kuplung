@@ -145,6 +145,7 @@ IF(CUDA_FOUND)
         resources/shaders/cuda/oceanFFT.frag)
 
     ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
+    ADD_DEFINITIONS(-DGLM_FORCE_CUDA)
 ENDIF(CUDA_FOUND)
 
 INCLUDE_DIRECTORIES(.)

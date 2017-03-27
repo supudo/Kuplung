@@ -207,6 +207,7 @@ mac {
     QMAKE_EXTRA_COMPILERS += cuda_d
 
     DEFINES += "DEF_KuplungSetting_UseCuda"
+    DEFINES += "GLM_FORCE_CUDA"
 }
 
 # END Cuda

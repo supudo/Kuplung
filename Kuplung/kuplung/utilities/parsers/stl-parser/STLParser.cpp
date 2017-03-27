@@ -7,7 +7,9 @@
 //
 
 #include "STLParser.hpp"
-#include <stdint.h>
+#include <sstream>
+#include <boost/algorithm/string/predicate.hpp>
+#include <boost/algorithm/string/replace.hpp>
 
 STLParser::~STLParser() {
 }
@@ -213,6 +215,64 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
 
 bool STLParser::loadAsciiFile(const FBEntity& file) {
     Settings::Instance()->funcDoLog("[STLParser] Parsing ascii STL file...");
+
     bool result = true;
+
+    int currentModelID = 0;
+    MeshModel entityModel;
+    entityModel.File = file;
+    entityModel.ID = currentModelID;
+    entityModel.ModelTitle = file.title;
+    entityModel.countVertices = 0;
+    entityModel.countTextureCoordinates = 0;
+    entityModel.countNormals = 0;
+    entityModel.countIndices = 0;
+
+    std::ifstream stl_file_data(file.path.c_str());
+    if (!stl_file_data.is_open()) {
+        Settings::Instance()->funcDoLog("[objParser2] Cannot open .obj file" + file.path + "!");
+        stl_file_data.close();
+        return {};
+    }
+
+    unsigned int indicesCounter = 0;
+    std::string singleLine;
+    glm::vec3 normal;
+    while (std::getline(stl_file_data, singleLine)) {
+        if (boost::starts_with(singleLine, "facet")) {
+            boost::replace_first(singleLine, "facet normal ", "");
+            std::stringstream valReader(singleLine);
+            valReader >> normal.x >> normal.y >> normal.z;
+        }
+        else if (boost::starts_with(singleLine, "vertex")) {
+            boost::replace_first(singleLine, "vertex ", "");
+            std::stringstream valReader(singleLine);
+            glm::vec3 v;
+            valReader >> v.x >> v.y >> v.z;
+            entityModel.vertices.push_back(v);
+            entityModel.normals.push_back(normal);
+            entityModel.indices.push_back(indicesCounter);
+            indicesCounter += 1;
+        }
+    }
+    stl_file_data.close();
+
+    MeshModelMaterial entityMaterial = {};
+    entityMaterial.MaterialID = 1;
+    entityMaterial.MaterialTitle = "";
+    entityMaterial.DiffuseColor = glm::vec3(0.7, 0.7, 0.7);
+    entityMaterial.Transparency = 1.0f;
+    entityMaterial.IlluminationMode = 2;
+    entityModel.ModelMaterial = entityMaterial;
+
+    entityModel.countIndices = int(entityModel.indices.size());
+    entityModel.countNormals = int(entityModel.normals.size());
+    entityModel.countVertices = int(entityModel.vertices.size());
+
+    currentModelID += 1;
+    this->models.push_back(entityModel);
+
+    stl_file_data.close();
+
     return result;
 }
