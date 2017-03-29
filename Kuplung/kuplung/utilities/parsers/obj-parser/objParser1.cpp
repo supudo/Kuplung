@@ -229,10 +229,10 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
             if (std::regex_match(singleLine, this->regex_materialNew)) {
                 MeshModelMaterial entityMaterial = {};
                 entityMaterial.MaterialTitle = std::accumulate(begin(lineElements), end(lineElements), entityMaterial.MaterialTitle);
-                entityMaterial.SpecularExp = -1.0;
-                entityMaterial.Transparency = -1.0;
-                entityMaterial.IlluminationMode = -1.0;
-                entityMaterial.OpticalDensity = -1.0;
+                entityMaterial.SpecularExp = 1.0;
+                entityMaterial.Transparency = 1.0;
+                entityMaterial.IlluminationMode = 2;
+                entityMaterial.OpticalDensity = 1.0;
                 indexMaterial += 1;
                 materials.push_back(entityMaterial);
             }

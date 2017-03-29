@@ -15,7 +15,7 @@
 // TODO: expose ID in api?
 // TODO: massage, cleanup
 
-#include "kuplung/utilities/ImGui/imgui.h"
+#include "kuplung/utilities/imgui/imgui.h"
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "kuplung/utilities/imgui/imgui_internal.h" // ImSaturate
 

@@ -22,8 +22,6 @@ CU_OBJS = ${CU_SOURCES:.cu=_cuda.o}
 all: $(PROGRAM_NAME)
 
 %_cuda.o: %.cu
-	#$(NVCC) $(NVCCFLAGS) -o $@ $<
-	#$(NVCC) -dlink  -o bs_link.o $@
 	$(NVCC) $(CUDA_INCLUDE) -G -g -O0 -gencode arch=compute_30,code=sm_30  -odir "." -M -o $@ $<
 	$(NVCC) $(CUDA_INCLUDE) -G -g -O0 --compile --relocatable-device-code=false -gencode arch=compute_30,code=compute_30 -gencode arch=compute_30,code=sm_30  -x cu -o  $@ $<
 
@@ -33,8 +31,6 @@ $(PROGRAM_NAME): $(CU_OBJS)
 	do				\
 		mv $(CUDA_FOLDER)/$$cu_obj external/cuda_build/$$cu_obj; \
 	done
-
-# cp external/cuda_build/$$cu_obj $(OBJECT_FILE_DIR_normal)/$(NATIVE_ARCH_ACTUAL)/$$cu_obj;
 
 clean:
 	@- $(RM) $(PROGRAM_NAME) $(CU_OBJS) *~ 

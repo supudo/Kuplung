@@ -14,7 +14,7 @@
 #include <thread>
 #include <vector>
 #include <glm/glm.hpp>
-#include "kuplung/utilities/ImGui/imgui.h"
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/ui/components/ColorPicker.hpp"
 
 class UIHelpers {

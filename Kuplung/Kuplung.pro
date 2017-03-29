@@ -75,6 +75,8 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
     QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-declarations
     QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
+    # Assimp-specific warning
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-address-of-packed-member
 
 #    optims
 #    QMAKE_CXXFLAGS_WARN_ON += -Wpadded

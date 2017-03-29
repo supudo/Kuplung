@@ -34,16 +34,16 @@ std::vector<MeshModel> STLParser::parse(const FBEntity& file, const std::vector<
     FILE *fp = fopen(file.path.c_str(), "rb");
     fseek(fp, 0, SEEK_END);
     fileSize = ftell(fp);
-    char *obj_data_buffer = new char[fileSize + 1];
+    char *stl_data_buffer = new char[fileSize + 1];
     fseek(fp, 0, SEEK_SET);
-    fread(obj_data_buffer, sizeof(char), fileSize, fp);
+    fread(stl_data_buffer, sizeof(char), fileSize, fp);
     fclose(fp);
-    obj_data_buffer[fileSize] = '\0';
+    stl_data_buffer[fileSize] = '\0';
 
     bool result = false;
-    if (this->isBinarySTL(obj_data_buffer, fileSize))
+    if (this->isBinarySTL(stl_data_buffer, fileSize))
         result = this->loadBinaryFile(file, fileSize);
-    else if (this->isAsciiSTL(obj_data_buffer, fileSize))
+    else if (this->isAsciiSTL(stl_data_buffer, fileSize))
         result = this->loadAsciiFile(file);
     else
         Settings::Instance()->funcDoLog("[STLParser] Error occured - cannot determing file type (ascii/binary)!");
@@ -51,7 +51,7 @@ std::vector<MeshModel> STLParser::parse(const FBEntity& file, const std::vector<
     if (!result)
         Settings::Instance()->funcDoLog("[STLParser] Error occured - parsing failed! See errors logged above.");
 
-    delete[] obj_data_buffer;
+    delete[] stl_data_buffer;
 
     return this->models;
 }
@@ -230,7 +230,7 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
 
     std::ifstream stl_file_data(file.path.c_str());
     if (!stl_file_data.is_open()) {
-        Settings::Instance()->funcDoLog("[objParser2] Cannot open .obj file" + file.path + "!");
+        Settings::Instance()->funcDoLog("[STLParser] Cannot open .stl file - " + file.path + "!");
         stl_file_data.close();
         return {};
     }
@@ -271,8 +271,6 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
 
     currentModelID += 1;
     this->models.push_back(entityModel);
-
-    stl_file_data.close();
 
     return result;
 }

@@ -111,41 +111,57 @@ SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 # Cuda
 FIND_PACKAGE(CUDA)
 IF(CUDA_FOUND)
-    INCLUDE_DIRECTORIES(${CUDA_INCLUDE_DIRS})
+    # Not sure at all if this is correct, actually i'm sure it's incorrect but it works.
+    STRING(LENGTH ${CUDA_VERSION_STRING} CUDA_VERSION_LENGTH)
+    STRING(SUBSTRING "${CMAKE_CXX_COMPILER_VERSION}" 0 ${CUDA_VERSION_LENGTH} CXX_VERSION)
+    SET(CUDA_OK FALSE)
+    IF (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
+        IF (NOT "${CXX_VERSION}" STREQUAL "${CUDA_VERSION_STRING}")
+            MESSAGE("WARNING: Cuda doesn't support this Clang version (Cuda - ${CUDA_VERSION_STRING}, Clang - ${CMAKE_CXX_COMPILER_VERSION})! Disabling Cuda support...")
+        ELSE()
+            MESSAGE("WARNING: Cuda is OK with this Clang version!")
+            SET(CUDA_OK TRUE)
+        ENDIF()
+    ELSE()
+    ENDIF()
 
-    SET(CUDA_SOURCES_CU
-        kuplung/cuda/cu/cuda_vectorAddition.cu
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
-        kuplung/cuda/cu/cuda_OBJParser.cu)
+    IF (CUDA_OK)
+        INCLUDE_DIRECTORIES(${CUDA_INCLUDE_DIRS})
 
-    SET(CUDA_NVCC_FLAGS
-        ${CUDA_NVCC_FLAGS};
-        -D_DEBUG;
-        -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
-        -I/usr/local/cuda/include;
-        # -std=c++11;-DVERBOSE;
-        -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
-    SET(CUDA_PROPAGATE_HOST_FLAGS OFF)
-    CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES_CU})
+        SET(CUDA_SOURCES_CU
+            kuplung/cuda/cu/cuda_vectorAddition.cu
+            kuplung/cuda/cu/cuda_oceanFFT_kernel.cu
+            kuplung/cuda/cu/cuda_OBJParser.cu)
 
-    # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L/usr/local/cuda/lib -lcuda -lcudart -lcufft")
+        SET(CUDA_NVCC_FLAGS
+            ${CUDA_NVCC_FLAGS};
+            -D_DEBUG;
+            -L/usr/local/cuda/lib;-lcuda;-lcudart;-lcufft;
+            -I/usr/local/cuda/include;
+            # -std=c++11;-DVERBOSE;
+            -O3;-gencode arch=compute_30,code=compute_30;--use_fast_math)
+        SET(CUDA_PROPAGATE_HOST_FLAGS OFF)
+        CUDA_COMPILE(CUDA_COMPILED_FILES ${CUDA_SOURCES_CU})
 
-    SET(CUDA_SOURCES_CPP
-        kuplung/cuda/CudaExamples.cpp
-        kuplung/cuda/CudaExamples.hpp
-        kuplung/utilities/cuda/CudaHelpers.cpp
-        kuplung/utilities/cuda/CudaHelpers.hpp
-        kuplung/cuda/examples/VectorAddition.cpp
-        kuplung/cuda/examples/VectorAddition.hpp
-        kuplung/cuda/examples/oceanFFT.cpp
-        kuplung/cuda/examples/oceanFFT.hpp)
+        # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -L/usr/local/cuda/lib -lcuda -lcudart -lcufft")
 
-    SET(CUDA_SOURCES_SHADERS
-        resources/shaders/cuda/oceanFFT.vert
-        resources/shaders/cuda/oceanFFT.frag)
+        SET(CUDA_SOURCES_CPP
+            kuplung/cuda/CudaExamples.cpp
+            kuplung/cuda/CudaExamples.hpp
+            kuplung/utilities/cuda/CudaHelpers.cpp
+            kuplung/utilities/cuda/CudaHelpers.hpp
+            kuplung/cuda/examples/VectorAddition.cpp
+            kuplung/cuda/examples/VectorAddition.hpp
+            kuplung/cuda/examples/oceanFFT.cpp
+            kuplung/cuda/examples/oceanFFT.hpp)
 
-    ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
-    ADD_DEFINITIONS(-DGLM_FORCE_CUDA)
+        SET(CUDA_SOURCES_SHADERS
+            resources/shaders/cuda/oceanFFT.vert
+            resources/shaders/cuda/oceanFFT.frag)
+
+        ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
+        ADD_DEFINITIONS(-DGLM_FORCE_CUDA)
+    ENDIF(CUDA_OK)
 ENDIF(CUDA_FOUND)
 
 INCLUDE_DIRECTORIES(.)

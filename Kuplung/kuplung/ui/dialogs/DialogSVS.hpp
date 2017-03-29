@@ -10,7 +10,7 @@
 #define DialogSVS_hpp
 
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/ImGui/imgui.h"
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/meshes/artefacts/StructuredVolumetricSampling.hpp"
 
 class DialogSVS {

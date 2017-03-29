@@ -11,7 +11,7 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
-#include "kuplung/utilities/ImGui/imgui.h"
+#include "kuplung/utilities/imgui/imgui.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/utilities/renderers/ImageRenderer.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"

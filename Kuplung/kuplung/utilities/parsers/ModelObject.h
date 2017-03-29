@@ -109,7 +109,7 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
 
             std::string indices;
             for (size_t j=0; j<m.indices.size(); j++) {
-                indices+= Settings::Instance()->string_format("[%i], ", m.indices[j]);
+                indices+= Settings::Instance()->string_format("%i, ", m.indices[j]);
             }
             printf("m.indices : %s\n", indices.c_str());
         }
@@ -123,7 +123,7 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
         printf("model.ModelMaterial.EmissionColor = %g, %g, %g\n", m.ModelMaterial.EmissionColor.r, m.ModelMaterial.EmissionColor.g, m.ModelMaterial.EmissionColor.b);
 
         printf("model.ModelMaterial.SpecularExp = %g\n", m.ModelMaterial.SpecularExp);
-        printf("model.ModelMaterial.SpecularExp = %g\n", m.ModelMaterial.Transparency);
+        printf("model.ModelMaterial.Transparency = %g\n", m.ModelMaterial.Transparency);
         printf("model.ModelMaterial.OpticalDensity = %g\n", m.ModelMaterial.OpticalDensity);
         printf("model.ModelMaterial.IlluminationMode = %u\n", m.ModelMaterial.IlluminationMode);
 

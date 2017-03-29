@@ -22,6 +22,11 @@ public:
 
 private:
     std::function<void(float)> funcProgress;
+    std::vector<MeshModel> models;
+
+    int Setting_Axis_Forward, Setting_Axis_Up;
+
+    void loadAsciiFile(const FBEntity& file);
 };
 
 #endif /* PLYParser_hpp */
