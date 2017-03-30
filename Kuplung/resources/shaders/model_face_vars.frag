@@ -12,6 +12,7 @@ uniform bool fs_userParallaxMapping;
 uniform int fs_modelViewSkin;
 uniform float fs_gammaCoeficient;
 uniform bool fs_ACESFilmRec2020;
+uniform bool fs_HDRTonemapping;
 uniform float fs_planeClose;
 uniform float fs_planeFar;
 uniform bool fs_showDepthColor;

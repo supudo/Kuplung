@@ -126,6 +126,10 @@ void main(void) {
                 if (fs_ACESFilmRec2020)
                     fragColor.rgb = ACESFilmRec2020(fragColor.rgb);
 
+                // HDR tonemapping
+                if (fs_HDRTonemapping)
+                    fragColor.rgb = fragColor.rgb / (fragColor.rgb + vec3(1.0));
+
                 // shadows
                 if (fs_showShadows)
                     fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular)) * fragColor;

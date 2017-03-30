@@ -68,7 +68,7 @@ private:
     // effects - bloom
     GLint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
     // effects - tone mapping
-    GLint glEffect_ToneMapping_ACESFilmRec2020;
+    GLint glEffect_ToneMapping_ACESFilmRec2020, glEffect_HDR_Tonemapping;
 
     // view skin
     ModelFace_LightSource_Directional *solidLight;

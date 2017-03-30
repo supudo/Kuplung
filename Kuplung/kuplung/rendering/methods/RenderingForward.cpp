@@ -297,6 +297,7 @@ bool RenderingForward::initShaderProgram() {
 
         // effects - tone mapping
         this->glEffect_ToneMapping_ACESFilmRec2020 = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
+        this->glEffect_HDR_Tonemapping = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_HDRTonemapping");
     }
 
     return success;
@@ -629,6 +630,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
 
         // effects - tone mapping
         glUniform1i(this->glEffect_ToneMapping_ACESFilmRec2020, mfd->Effect_ToneMapping_ACESFilmRec2020);
+        glUniform1i(this->glEffect_HDR_Tonemapping, mfd->Effect_HDR_Tonemapping);
 
         glUniform1f(this->glVS_IsBorder, 0.0);
 

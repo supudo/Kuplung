@@ -14,6 +14,9 @@ DO_ADDRESS_SANITIZER = false
 # address-sanitize
 DO_SAVE_TEMPS = false
 
+# Cuda
+DO_CUDA = false
+
 # ========================
 
 TEMPLATE = app
@@ -179,37 +182,39 @@ win32|win64 {
 
 # BEGIN Cuda
 
-mac {
-    K_C_LIBS = -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
-    LIBS += -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
-    INCLUDEPATH += /usr/local/cuda/include
+$$DO_CUDA {
+    mac {
+        K_C_LIBS = -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
+        LIBS += -L/usr/local/cuda/lib -lcuda -lcudart -lcufft
+        INCLUDEPATH += /usr/local/cuda/include
 
-    CUDA_DIR = /usr/local/cuda
+        CUDA_DIR = /usr/local/cuda
 
-    CUDA_OBJECTS_DIR = cuda
+        CUDA_OBJECTS_DIR = cuda
 
-    OTHER_FILES += kuplung/cuda/cu/cuda_vectorAddition.cu \
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
-        kuplung/cuda/cu/cuda_OBJParser.cu
+        OTHER_FILES += kuplung/cuda/cu/cuda_vectorAddition.cu \
+            kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
+            kuplung/cuda/cu/cuda_OBJParser.cu
 
-    CUDA_SOURCES += kuplung/cuda/cu/cuda_vectorAddition.cu \
-        kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
-        kuplung/cuda/cu/cuda_OBJParser.cu
+        CUDA_SOURCES += kuplung/cuda/cu/cuda_vectorAddition.cu \
+            kuplung/cuda/cu/cuda_oceanFFT_kernel.cu \
+            kuplung/cuda/cu/cuda_OBJParser.cu
 
-    SYSTEM_NAME = x64
-    SYSTEM_TYPE = 64
-    CUDA_ARCH = compute_30
-    NVCC_OPTIONS = --use_fast_math
-    NVCC_COMM = $$CUDA_DIR/bin/nvcc
+        SYSTEM_NAME = x64
+        SYSTEM_TYPE = 64
+        CUDA_ARCH = compute_30
+        NVCC_OPTIONS = --use_fast_math
+        NVCC_COMM = $$CUDA_DIR/bin/nvcc
 
-    cuda_d.input = CUDA_SOURCES
-    cuda_d.output = $$CUDA_OBJECTS_DIR/${QMAKE_FILE_BASE}_cuda.o
-    cuda_d.dependency_type = TYPE_C
-    cuda_d.commands = $$NVCC_COMM -D_DEBUG $$NVCC_OPTIONS $$K_C_LIBS --machine $$SYSTEM_TYPE -arch=$$CUDA_ARCH -c -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_NAME}
-    QMAKE_EXTRA_COMPILERS += cuda_d
+        cuda_d.input = CUDA_SOURCES
+        cuda_d.output = $$CUDA_OBJECTS_DIR/${QMAKE_FILE_BASE}_cuda.o
+        cuda_d.dependency_type = TYPE_C
+        cuda_d.commands = $$NVCC_COMM -D_DEBUG $$NVCC_OPTIONS $$K_C_LIBS --machine $$SYSTEM_TYPE -arch=$$CUDA_ARCH -c -o ${QMAKE_FILE_OUT} ${QMAKE_FILE_NAME}
+        QMAKE_EXTRA_COMPILERS += cuda_d
 
-    DEFINES += "DEF_KuplungSetting_UseCuda"
-    DEFINES += "GLM_FORCE_CUDA"
+        DEFINES += "DEF_KuplungSetting_UseCuda"
+        DEFINES += "GLM_FORCE_CUDA"
+    }
 }
 
 # END Cuda

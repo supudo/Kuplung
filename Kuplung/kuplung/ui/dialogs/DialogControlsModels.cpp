@@ -600,10 +600,11 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                     ImGui::EndGroup();
                     ImGui::Unindent();
                 }
-                if (ImGui::CollapsingHeader("Filmic Tone Mapping")) {
+                if (ImGui::CollapsingHeader("Tone Mapping")) {
                     ImGui::Indent();
                     ImGui::BeginGroup();
                     ImGui::Checkbox("ACES Film Rec2020", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_ToneMapping_ACESFilmRec2020);
+                    ImGui::Checkbox("HDR", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_HDR_Tonemapping);
                     ImGui::EndGroup();
                     ImGui::Unindent();
                 }

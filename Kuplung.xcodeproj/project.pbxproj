@@ -2232,7 +2232,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "make --file=KuplungCuda.make";
+			shellScript = "make --file=KuplungCuda.make USE_CUDA=0";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2444,10 +2444,15 @@
 					/Library/Frameworks,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 					GLM_FORCE_CUDA,
+					"DEF_KuplungSetting_UseCuda=1",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"DEBUG=1",
+					"$(inherited)",
 				);
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
@@ -2518,8 +2523,8 @@
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"DEF_KuplungSetting_UseCuda=1",
 					GLM_FORCE_CUDA,
+					DEF_KuplungSetting_UseCuda,
 				);
 				HEADER_SEARCH_PATHS = (
 					/usr/include,
