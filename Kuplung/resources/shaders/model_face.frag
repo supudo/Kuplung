@@ -134,6 +134,7 @@ void main(void) {
                 if (fs_showShadows)
                     fragColor = (processedColor_Ambient + (1.0 - calculateShadowValue(fragmentPosition)) * (processedColor_Diffuse + processedColor_Specular)) * fragColor;
 
+                // gamma correction
                 fragColor.rgb = pow(fragColor.rgb, vec3(1.0 / fs_gammaCoeficient));
 
                 if (fs_debugShadowTexture)
