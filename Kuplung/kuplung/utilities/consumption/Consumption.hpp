@@ -32,6 +32,7 @@ private:
     bool isTimeToUpdateCPU();
 
     size_t getPeakRSS();
+    size_t getCurrentRSS();
 
     void memoryMark();
     void memoryUnmark();
