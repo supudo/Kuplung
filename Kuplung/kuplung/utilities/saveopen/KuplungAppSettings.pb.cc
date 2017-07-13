@@ -36,11 +36,29 @@ namespace {
 
 }  // namespace
 
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTableField
+    const TableStruct::entries[] = {
+  {0, 0, 0, ::google::protobuf::internal::kInvalidMask, 0, 0},
+};
+
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
+    const TableStruct::aux[] = {
+  ::google::protobuf::internal::AuxillaryParseTableField(),
+};
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
+    TableStruct::schema[] = {
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+};
+
 const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_fov_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_outlinethickness_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, setting_ratiowidth_),
@@ -133,6 +151,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CameraSettings, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CameraSettings, cameraposition_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CameraSettings, view_eye_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CameraSettings, view_center_),
@@ -163,6 +182,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridSettings, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridSettings, actasmirror_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridSettings, gridsize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GridSettings, positionx_),
@@ -193,6 +213,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, title_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, description_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(LightObject, type_),
@@ -254,10 +275,10 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 48, sizeof(GUISettings)},
-  { 92, 109, sizeof(CameraSettings)},
-  { 122, 139, sizeof(GridSettings)},
-  { 152, 185, sizeof(LightObject)},
+  { 0, 49, sizeof(GUISettings)},
+  { 93, 111, sizeof(CameraSettings)},
+  { 124, 142, sizeof(GridSettings)},
+  { 155, 189, sizeof(LightObject)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -721,7 +742,7 @@ void GUISettings::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* GUISettings::descriptor() {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[0].descriptor;
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const GUISettings& GUISettings::default_instance() {
@@ -820,7 +841,8 @@ bool GUISettings::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float Setting_FOV = 1;
       case 1: {
-        if (tag == 13u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u)) {
           set_has_setting_fov();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -833,7 +855,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_OutlineThickness = 2;
       case 2: {
-        if (tag == 21u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u)) {
           set_has_setting_outlinethickness();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -846,7 +869,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_RatioWidth = 3;
       case 3: {
-        if (tag == 29u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u)) {
           set_has_setting_ratiowidth();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -859,7 +883,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_RatioHeight = 4;
       case 4: {
-        if (tag == 37u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(37u)) {
           set_has_setting_ratioheight();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -872,7 +897,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_PlaneClose = 5;
       case 5: {
-        if (tag == 45u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(45u)) {
           set_has_setting_planeclose();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -885,7 +911,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_PlaneFar = 6;
       case 6: {
-        if (tag == 53u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(53u)) {
           set_has_setting_planefar();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -898,7 +925,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_GridSize = 7;
       case 7: {
-        if (tag == 56u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u)) {
           set_has_setting_gridsize();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -911,7 +939,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_Skybox = 8;
       case 8: {
-        if (tag == 64u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(64u)) {
           set_has_setting_skybox();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -924,7 +953,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
       case 9: {
-        if (tag == 74u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_setting_outlinecolor()));
         } else {
@@ -935,7 +965,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
       case 10: {
-        if (tag == 82u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_setting_uiambientlight()));
         } else {
@@ -946,7 +977,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_FixedGridWorld = 11;
       case 11: {
-        if (tag == 88u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(88u)) {
           set_has_setting_fixedgridworld();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -959,7 +991,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_OutlineColorPickerOpen = 12;
       case 12: {
-        if (tag == 96u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(96u)) {
           set_has_setting_outlinecolorpickeropen();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -972,7 +1005,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_ShowAxisHelpers = 13;
       case 13: {
-        if (tag == 104u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(104u)) {
           set_has_setting_showaxishelpers();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -985,7 +1019,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Settings_ShowZAxis = 14;
       case 14: {
-        if (tag == 112u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(112u)) {
           set_has_settings_showzaxis();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -998,7 +1033,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_DeferredTestMode = 15;
       case 15: {
-        if (tag == 120u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(120u)) {
           set_has_setting_deferredtestmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1011,7 +1047,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_DeferredTestLights = 16;
       case 16: {
-        if (tag == 128u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(128u)) {
           set_has_setting_deferredtestlights();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1024,7 +1061,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_LightingPass_DrawMode = 17;
       case 17: {
-        if (tag == 136u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(136u)) {
           set_has_setting_lightingpass_drawmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1037,7 +1075,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_DeferredTestLightsNumber = 18;
       case 18: {
-        if (tag == 144u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(144u)) {
           set_has_setting_deferredtestlightsnumber();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1050,7 +1089,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float Setting_DeferredAmbientStrength = 19;
       case 19: {
-        if (tag == 157u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(157u)) {
           set_has_setting_deferredambientstrength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1063,7 +1103,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 viewModelSkin = 20;
       case 20: {
-        if (tag == 160u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(160u)) {
           set_has_viewmodelskin();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1076,7 +1117,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SolidLight_Direction = 21;
       case 21: {
-        if (tag == 170u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(170u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_direction()));
         } else {
@@ -1087,7 +1129,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
       case 22: {
-        if (tag == 178u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(178u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_materialcolor()));
         } else {
@@ -1098,7 +1141,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
       case 23: {
-        if (tag == 186u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(186u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_ambient()));
         } else {
@@ -1109,7 +1153,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
       case 24: {
-        if (tag == 194u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(194u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_diffuse()));
         } else {
@@ -1120,7 +1165,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SolidLight_Specular = 25;
       case 25: {
-        if (tag == 202u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(202u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_specular()));
         } else {
@@ -1131,7 +1177,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float SolidLight_Ambient_Strength = 26;
       case 26: {
-        if (tag == 213u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(213u)) {
           set_has_solidlight_ambient_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1144,7 +1191,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float SolidLight_Diffuse_Strength = 27;
       case 27: {
-        if (tag == 221u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(221u)) {
           set_has_solidlight_diffuse_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1157,7 +1205,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required float SolidLight_Specular_Strength = 28;
       case 28: {
-        if (tag == 229u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(229u)) {
           set_has_solidlight_specular_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1170,7 +1219,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool SolidLight_MaterialColor_ColorPicker = 29;
       case 29: {
-        if (tag == 232u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(232u)) {
           set_has_solidlight_materialcolor_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1183,7 +1233,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool SolidLight_Ambient_ColorPicker = 30;
       case 30: {
-        if (tag == 240u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(240u)) {
           set_has_solidlight_ambient_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1196,7 +1247,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool SolidLight_Diffuse_ColorPicker = 31;
       case 31: {
-        if (tag == 248u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(248u)) {
           set_has_solidlight_diffuse_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1209,7 +1261,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool SolidLight_Specular_ColorPicker = 32;
       case 32: {
-        if (tag == 256u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(256u)) {
           set_has_solidlight_specular_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1222,7 +1275,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_ShowTerrain = 33;
       case 33: {
-        if (tag == 264u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(264u)) {
           set_has_setting_showterrain();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1235,7 +1289,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_TerrainModel = 34;
       case 34: {
-        if (tag == 272u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(272u)) {
           set_has_setting_terrainmodel();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1248,7 +1303,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_TerrainAnimateX = 35;
       case 35: {
-        if (tag == 280u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(280u)) {
           set_has_setting_terrainanimatex();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1261,7 +1317,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_TerrainAnimateY = 36;
       case 36: {
-        if (tag == 288u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(288u)) {
           set_has_setting_terrainanimatey();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1274,7 +1331,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required string heightmapImage = 37;
       case 37: {
-        if (tag == 298u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(298u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_heightmapimage()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1289,7 +1347,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_TerrainWidth = 38;
       case 38: {
-        if (tag == 304u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(304u)) {
           set_has_setting_terrainwidth();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1302,7 +1361,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required int32 Setting_TerrainHeight = 39;
       case 39: {
-        if (tag == 312u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(312u)) {
           set_has_setting_terrainheight();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1315,7 +1375,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_ShowSpaceship = 40;
       case 40: {
-        if (tag == 320u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(320u)) {
           set_has_setting_showspaceship();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1328,7 +1389,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required bool Setting_GenerateSpaceship = 41;
       case 41: {
-        if (tag == 328u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(328u)) {
           set_has_setting_generatespaceship();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1341,7 +1403,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.CameraSettings camera = 42;
       case 42: {
-        if (tag == 338u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(338u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_camera()));
         } else {
@@ -1352,7 +1415,8 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.GridSettings grid = 43;
       case 43: {
-        if (tag == 346u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(346u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_grid()));
         } else {
@@ -1363,14 +1427,13 @@ bool GUISettings::MergePartialFromCodedStream(
 
       // repeated .KuplungApp.LightObject lights = 44;
       case 44: {
-        if (tag == 354u) {
-          DO_(input->IncrementRecursionDepth());
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(354u)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_lights()));
         } else {
           goto handle_unusual;
         }
-        input->UnsafeDecrementRecursionDepth();
         break;
       }
 
@@ -1399,195 +1462,203 @@ failure:
 void GUISettings::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.GUISettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float Setting_FOV = 1;
-  if (has_setting_fov()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->setting_fov(), output);
   }
 
   // required float Setting_OutlineThickness = 2;
-  if (has_setting_outlinethickness()) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->setting_outlinethickness(), output);
   }
 
   // required float Setting_RatioWidth = 3;
-  if (has_setting_ratiowidth()) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->setting_ratiowidth(), output);
   }
 
   // required float Setting_RatioHeight = 4;
-  if (has_setting_ratioheight()) {
+  if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->setting_ratioheight(), output);
   }
 
   // required float Setting_PlaneClose = 5;
-  if (has_setting_planeclose()) {
+  if (cached_has_bits & 0x00004000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(5, this->setting_planeclose(), output);
   }
 
   // required float Setting_PlaneFar = 6;
-  if (has_setting_planefar()) {
+  if (cached_has_bits & 0x00008000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(6, this->setting_planefar(), output);
   }
 
   // required int32 Setting_GridSize = 7;
-  if (has_setting_gridsize()) {
+  if (cached_has_bits & 0x00010000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->setting_gridsize(), output);
   }
 
   // required int32 Setting_Skybox = 8;
-  if (has_setting_skybox()) {
+  if (cached_has_bits & 0x00020000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->setting_skybox(), output);
   }
 
   // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
-  if (has_setting_outlinecolor()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->setting_outlinecolor_, output);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
-  if (has_setting_uiambientlight()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, *this->setting_uiambientlight_, output);
   }
 
   // required bool Setting_FixedGridWorld = 11;
-  if (has_setting_fixedgridworld()) {
+  if (cached_has_bits & 0x00040000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(11, this->setting_fixedgridworld(), output);
   }
 
   // required bool Setting_OutlineColorPickerOpen = 12;
-  if (has_setting_outlinecolorpickeropen()) {
+  if (cached_has_bits & 0x00080000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(12, this->setting_outlinecolorpickeropen(), output);
   }
 
   // required bool Setting_ShowAxisHelpers = 13;
-  if (has_setting_showaxishelpers()) {
+  if (cached_has_bits & 0x00100000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(13, this->setting_showaxishelpers(), output);
   }
 
   // required bool Settings_ShowZAxis = 14;
-  if (has_settings_showzaxis()) {
+  if (cached_has_bits & 0x00200000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(14, this->settings_showzaxis(), output);
   }
 
   // required bool Setting_DeferredTestMode = 15;
-  if (has_setting_deferredtestmode()) {
+  if (cached_has_bits & 0x04000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(15, this->setting_deferredtestmode(), output);
   }
 
   // required bool Setting_DeferredTestLights = 16;
-  if (has_setting_deferredtestlights()) {
+  if (cached_has_bits & 0x08000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(16, this->setting_deferredtestlights(), output);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 17;
-  if (has_setting_lightingpass_drawmode()) {
+  if (cached_has_bits & 0x00400000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(17, this->setting_lightingpass_drawmode(), output);
   }
 
   // required int32 Setting_DeferredTestLightsNumber = 18;
-  if (has_setting_deferredtestlightsnumber()) {
+  if (cached_has_bits & 0x00800000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(18, this->setting_deferredtestlightsnumber(), output);
   }
 
   // required float Setting_DeferredAmbientStrength = 19;
-  if (has_setting_deferredambientstrength()) {
+  if (cached_has_bits & 0x01000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(19, this->setting_deferredambientstrength(), output);
   }
 
   // required int32 viewModelSkin = 20;
-  if (has_viewmodelskin()) {
+  if (cached_has_bits & 0x02000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(20, this->viewmodelskin(), output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Direction = 21;
-  if (has_solidlight_direction()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       21, *this->solidlight_direction_, output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
-  if (has_solidlight_materialcolor()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       22, *this->solidlight_materialcolor_, output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
-  if (has_solidlight_ambient()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       23, *this->solidlight_ambient_, output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
-  if (has_solidlight_diffuse()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       24, *this->solidlight_diffuse_, output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
-  if (has_solidlight_specular()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       25, *this->solidlight_specular_, output);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
-  if (has_solidlight_ambient_strength()) {
+  if (cached_has_bits & 0x40000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(26, this->solidlight_ambient_strength(), output);
   }
 
   // required float SolidLight_Diffuse_Strength = 27;
-  if (has_solidlight_diffuse_strength()) {
+  if (cached_has_bits & 0x80000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(27, this->solidlight_diffuse_strength(), output);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required float SolidLight_Specular_Strength = 28;
-  if (has_solidlight_specular_strength()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(28, this->solidlight_specular_strength(), output);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required bool SolidLight_MaterialColor_ColorPicker = 29;
-  if (has_solidlight_materialcolor_colorpicker()) {
+  if (cached_has_bits & 0x10000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(29, this->solidlight_materialcolor_colorpicker(), output);
   }
 
   // required bool SolidLight_Ambient_ColorPicker = 30;
-  if (has_solidlight_ambient_colorpicker()) {
+  if (cached_has_bits & 0x20000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(30, this->solidlight_ambient_colorpicker(), output);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required bool SolidLight_Diffuse_ColorPicker = 31;
-  if (has_solidlight_diffuse_colorpicker()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(31, this->solidlight_diffuse_colorpicker(), output);
   }
 
   // required bool SolidLight_Specular_ColorPicker = 32;
-  if (has_solidlight_specular_colorpicker()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(32, this->solidlight_specular_colorpicker(), output);
   }
 
   // required bool Setting_ShowTerrain = 33;
-  if (has_setting_showterrain()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(33, this->setting_showterrain(), output);
   }
 
   // required bool Setting_TerrainModel = 34;
-  if (has_setting_terrainmodel()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(34, this->setting_terrainmodel(), output);
   }
 
   // required bool Setting_TerrainAnimateX = 35;
-  if (has_setting_terrainanimatex()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(35, this->setting_terrainanimatex(), output);
   }
 
   // required bool Setting_TerrainAnimateY = 36;
-  if (has_setting_terrainanimatey()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(36, this->setting_terrainanimatey(), output);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required string heightmapImage = 37;
-  if (has_heightmapimage()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->heightmapimage().data(), this->heightmapimage().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -1596,34 +1667,36 @@ void GUISettings::SerializeWithCachedSizes(
       37, this->heightmapimage(), output);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required int32 Setting_TerrainWidth = 38;
-  if (has_setting_terrainwidth()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(38, this->setting_terrainwidth(), output);
   }
 
   // required int32 Setting_TerrainHeight = 39;
-  if (has_setting_terrainheight()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(39, this->setting_terrainheight(), output);
   }
 
   // required bool Setting_ShowSpaceship = 40;
-  if (has_setting_showspaceship()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(40, this->setting_showspaceship(), output);
   }
 
   // required bool Setting_GenerateSpaceship = 41;
-  if (has_setting_generatespaceship()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(41, this->setting_generatespaceship(), output);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required .KuplungApp.CameraSettings camera = 42;
-  if (has_camera()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       42, *this->camera_, output);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
-  if (has_grid()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       43, *this->grid_, output);
   }
@@ -1643,204 +1716,211 @@ void GUISettings::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* GUISettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GUISettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float Setting_FOV = 1;
-  if (has_setting_fov()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->setting_fov(), target);
   }
 
   // required float Setting_OutlineThickness = 2;
-  if (has_setting_outlinethickness()) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->setting_outlinethickness(), target);
   }
 
   // required float Setting_RatioWidth = 3;
-  if (has_setting_ratiowidth()) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->setting_ratiowidth(), target);
   }
 
   // required float Setting_RatioHeight = 4;
-  if (has_setting_ratioheight()) {
+  if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->setting_ratioheight(), target);
   }
 
   // required float Setting_PlaneClose = 5;
-  if (has_setting_planeclose()) {
+  if (cached_has_bits & 0x00004000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(5, this->setting_planeclose(), target);
   }
 
   // required float Setting_PlaneFar = 6;
-  if (has_setting_planefar()) {
+  if (cached_has_bits & 0x00008000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(6, this->setting_planefar(), target);
   }
 
   // required int32 Setting_GridSize = 7;
-  if (has_setting_gridsize()) {
+  if (cached_has_bits & 0x00010000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->setting_gridsize(), target);
   }
 
   // required int32 Setting_Skybox = 8;
-  if (has_setting_skybox()) {
+  if (cached_has_bits & 0x00020000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->setting_skybox(), target);
   }
 
   // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
-  if (has_setting_outlinecolor()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        9, *this->setting_outlinecolor_, false, target);
+        9, *this->setting_outlinecolor_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
-  if (has_setting_uiambientlight()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, *this->setting_uiambientlight_, false, target);
+        10, *this->setting_uiambientlight_, deterministic, target);
   }
 
   // required bool Setting_FixedGridWorld = 11;
-  if (has_setting_fixedgridworld()) {
+  if (cached_has_bits & 0x00040000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(11, this->setting_fixedgridworld(), target);
   }
 
   // required bool Setting_OutlineColorPickerOpen = 12;
-  if (has_setting_outlinecolorpickeropen()) {
+  if (cached_has_bits & 0x00080000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(12, this->setting_outlinecolorpickeropen(), target);
   }
 
   // required bool Setting_ShowAxisHelpers = 13;
-  if (has_setting_showaxishelpers()) {
+  if (cached_has_bits & 0x00100000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(13, this->setting_showaxishelpers(), target);
   }
 
   // required bool Settings_ShowZAxis = 14;
-  if (has_settings_showzaxis()) {
+  if (cached_has_bits & 0x00200000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(14, this->settings_showzaxis(), target);
   }
 
   // required bool Setting_DeferredTestMode = 15;
-  if (has_setting_deferredtestmode()) {
+  if (cached_has_bits & 0x04000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(15, this->setting_deferredtestmode(), target);
   }
 
   // required bool Setting_DeferredTestLights = 16;
-  if (has_setting_deferredtestlights()) {
+  if (cached_has_bits & 0x08000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(16, this->setting_deferredtestlights(), target);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 17;
-  if (has_setting_lightingpass_drawmode()) {
+  if (cached_has_bits & 0x00400000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(17, this->setting_lightingpass_drawmode(), target);
   }
 
   // required int32 Setting_DeferredTestLightsNumber = 18;
-  if (has_setting_deferredtestlightsnumber()) {
+  if (cached_has_bits & 0x00800000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(18, this->setting_deferredtestlightsnumber(), target);
   }
 
   // required float Setting_DeferredAmbientStrength = 19;
-  if (has_setting_deferredambientstrength()) {
+  if (cached_has_bits & 0x01000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(19, this->setting_deferredambientstrength(), target);
   }
 
   // required int32 viewModelSkin = 20;
-  if (has_viewmodelskin()) {
+  if (cached_has_bits & 0x02000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(20, this->viewmodelskin(), target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Direction = 21;
-  if (has_solidlight_direction()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        21, *this->solidlight_direction_, false, target);
+        21, *this->solidlight_direction_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
-  if (has_solidlight_materialcolor()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        22, *this->solidlight_materialcolor_, false, target);
+        22, *this->solidlight_materialcolor_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
-  if (has_solidlight_ambient()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        23, *this->solidlight_ambient_, false, target);
+        23, *this->solidlight_ambient_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
-  if (has_solidlight_diffuse()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        24, *this->solidlight_diffuse_, false, target);
+        24, *this->solidlight_diffuse_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
-  if (has_solidlight_specular()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        25, *this->solidlight_specular_, false, target);
+        25, *this->solidlight_specular_, deterministic, target);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
-  if (has_solidlight_ambient_strength()) {
+  if (cached_has_bits & 0x40000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(26, this->solidlight_ambient_strength(), target);
   }
 
   // required float SolidLight_Diffuse_Strength = 27;
-  if (has_solidlight_diffuse_strength()) {
+  if (cached_has_bits & 0x80000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(27, this->solidlight_diffuse_strength(), target);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required float SolidLight_Specular_Strength = 28;
-  if (has_solidlight_specular_strength()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(28, this->solidlight_specular_strength(), target);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required bool SolidLight_MaterialColor_ColorPicker = 29;
-  if (has_solidlight_materialcolor_colorpicker()) {
+  if (cached_has_bits & 0x10000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(29, this->solidlight_materialcolor_colorpicker(), target);
   }
 
   // required bool SolidLight_Ambient_ColorPicker = 30;
-  if (has_solidlight_ambient_colorpicker()) {
+  if (cached_has_bits & 0x20000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(30, this->solidlight_ambient_colorpicker(), target);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required bool SolidLight_Diffuse_ColorPicker = 31;
-  if (has_solidlight_diffuse_colorpicker()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(31, this->solidlight_diffuse_colorpicker(), target);
   }
 
   // required bool SolidLight_Specular_ColorPicker = 32;
-  if (has_solidlight_specular_colorpicker()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(32, this->solidlight_specular_colorpicker(), target);
   }
 
   // required bool Setting_ShowTerrain = 33;
-  if (has_setting_showterrain()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(33, this->setting_showterrain(), target);
   }
 
   // required bool Setting_TerrainModel = 34;
-  if (has_setting_terrainmodel()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(34, this->setting_terrainmodel(), target);
   }
 
   // required bool Setting_TerrainAnimateX = 35;
-  if (has_setting_terrainanimatex()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(35, this->setting_terrainanimatex(), target);
   }
 
   // required bool Setting_TerrainAnimateY = 36;
-  if (has_setting_terrainanimatey()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(36, this->setting_terrainanimatey(), target);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required string heightmapImage = 37;
-  if (has_heightmapimage()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->heightmapimage().data(), this->heightmapimage().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -1850,45 +1930,47 @@ void GUISettings::SerializeWithCachedSizes(
         37, this->heightmapimage(), target);
   }
 
+  cached_has_bits = _has_bits_[1];
   // required int32 Setting_TerrainWidth = 38;
-  if (has_setting_terrainwidth()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(38, this->setting_terrainwidth(), target);
   }
 
   // required int32 Setting_TerrainHeight = 39;
-  if (has_setting_terrainheight()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(39, this->setting_terrainheight(), target);
   }
 
   // required bool Setting_ShowSpaceship = 40;
-  if (has_setting_showspaceship()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(40, this->setting_showspaceship(), target);
   }
 
   // required bool Setting_GenerateSpaceship = 41;
-  if (has_setting_generatespaceship()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(41, this->setting_generatespaceship(), target);
   }
 
+  cached_has_bits = _has_bits_[0];
   // required .KuplungApp.CameraSettings camera = 42;
-  if (has_camera()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        42, *this->camera_, false, target);
+        42, *this->camera_, deterministic, target);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
-  if (has_grid()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        43, *this->grid_, false, target);
+        43, *this->grid_, deterministic, target);
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
   for (unsigned int i = 0, n = this->lights_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        44, this->lights(i), false, target);
+        44, this->lights(i), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -2368,148 +2450,158 @@ void GUISettings::MergeFrom(const GUISettings& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.GUISettings)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
   lights_.MergeFrom(from.lights_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_heightmapimage()) {
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_heightmapimage();
       heightmapimage_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.heightmapimage_);
     }
-    if (from.has_setting_outlinecolor()) {
+    if (cached_has_bits & 0x00000002u) {
       mutable_setting_outlinecolor()->::KuplungApp::Vec4::MergeFrom(from.setting_outlinecolor());
     }
-    if (from.has_setting_uiambientlight()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_setting_uiambientlight()->::KuplungApp::Vec3::MergeFrom(from.setting_uiambientlight());
     }
-    if (from.has_solidlight_direction()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_solidlight_direction()->::KuplungApp::Vec3::MergeFrom(from.solidlight_direction());
     }
-    if (from.has_solidlight_materialcolor()) {
+    if (cached_has_bits & 0x00000010u) {
       mutable_solidlight_materialcolor()->::KuplungApp::Vec3::MergeFrom(from.solidlight_materialcolor());
     }
-    if (from.has_solidlight_ambient()) {
+    if (cached_has_bits & 0x00000020u) {
       mutable_solidlight_ambient()->::KuplungApp::Vec3::MergeFrom(from.solidlight_ambient());
     }
-    if (from.has_solidlight_diffuse()) {
+    if (cached_has_bits & 0x00000040u) {
       mutable_solidlight_diffuse()->::KuplungApp::Vec3::MergeFrom(from.solidlight_diffuse());
     }
-    if (from.has_solidlight_specular()) {
+    if (cached_has_bits & 0x00000080u) {
       mutable_solidlight_specular()->::KuplungApp::Vec3::MergeFrom(from.solidlight_specular());
     }
   }
-  if (from._has_bits_[8 / 32] & 65280u) {
-    if (from.has_camera()) {
+  if (cached_has_bits & 65280u) {
+    if (cached_has_bits & 0x00000100u) {
       mutable_camera()->::KuplungApp::CameraSettings::MergeFrom(from.camera());
     }
-    if (from.has_grid()) {
+    if (cached_has_bits & 0x00000200u) {
       mutable_grid()->::KuplungApp::GridSettings::MergeFrom(from.grid());
     }
-    if (from.has_setting_fov()) {
-      set_setting_fov(from.setting_fov());
+    if (cached_has_bits & 0x00000400u) {
+      setting_fov_ = from.setting_fov_;
     }
-    if (from.has_setting_outlinethickness()) {
-      set_setting_outlinethickness(from.setting_outlinethickness());
+    if (cached_has_bits & 0x00000800u) {
+      setting_outlinethickness_ = from.setting_outlinethickness_;
     }
-    if (from.has_setting_ratiowidth()) {
-      set_setting_ratiowidth(from.setting_ratiowidth());
+    if (cached_has_bits & 0x00001000u) {
+      setting_ratiowidth_ = from.setting_ratiowidth_;
     }
-    if (from.has_setting_ratioheight()) {
-      set_setting_ratioheight(from.setting_ratioheight());
+    if (cached_has_bits & 0x00002000u) {
+      setting_ratioheight_ = from.setting_ratioheight_;
     }
-    if (from.has_setting_planeclose()) {
-      set_setting_planeclose(from.setting_planeclose());
+    if (cached_has_bits & 0x00004000u) {
+      setting_planeclose_ = from.setting_planeclose_;
     }
-    if (from.has_setting_planefar()) {
-      set_setting_planefar(from.setting_planefar());
+    if (cached_has_bits & 0x00008000u) {
+      setting_planefar_ = from.setting_planefar_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
-  if (from._has_bits_[16 / 32] & 16711680u) {
-    if (from.has_setting_gridsize()) {
-      set_setting_gridsize(from.setting_gridsize());
+  if (cached_has_bits & 16711680u) {
+    if (cached_has_bits & 0x00010000u) {
+      setting_gridsize_ = from.setting_gridsize_;
     }
-    if (from.has_setting_skybox()) {
-      set_setting_skybox(from.setting_skybox());
+    if (cached_has_bits & 0x00020000u) {
+      setting_skybox_ = from.setting_skybox_;
     }
-    if (from.has_setting_fixedgridworld()) {
-      set_setting_fixedgridworld(from.setting_fixedgridworld());
+    if (cached_has_bits & 0x00040000u) {
+      setting_fixedgridworld_ = from.setting_fixedgridworld_;
     }
-    if (from.has_setting_outlinecolorpickeropen()) {
-      set_setting_outlinecolorpickeropen(from.setting_outlinecolorpickeropen());
+    if (cached_has_bits & 0x00080000u) {
+      setting_outlinecolorpickeropen_ = from.setting_outlinecolorpickeropen_;
     }
-    if (from.has_setting_showaxishelpers()) {
-      set_setting_showaxishelpers(from.setting_showaxishelpers());
+    if (cached_has_bits & 0x00100000u) {
+      setting_showaxishelpers_ = from.setting_showaxishelpers_;
     }
-    if (from.has_settings_showzaxis()) {
-      set_settings_showzaxis(from.settings_showzaxis());
+    if (cached_has_bits & 0x00200000u) {
+      settings_showzaxis_ = from.settings_showzaxis_;
     }
-    if (from.has_setting_lightingpass_drawmode()) {
-      set_setting_lightingpass_drawmode(from.setting_lightingpass_drawmode());
+    if (cached_has_bits & 0x00400000u) {
+      setting_lightingpass_drawmode_ = from.setting_lightingpass_drawmode_;
     }
-    if (from.has_setting_deferredtestlightsnumber()) {
-      set_setting_deferredtestlightsnumber(from.setting_deferredtestlightsnumber());
+    if (cached_has_bits & 0x00800000u) {
+      setting_deferredtestlightsnumber_ = from.setting_deferredtestlightsnumber_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
-  if (from._has_bits_[24 / 32] & 4278190080u) {
-    if (from.has_setting_deferredambientstrength()) {
-      set_setting_deferredambientstrength(from.setting_deferredambientstrength());
+  if (cached_has_bits & 4278190080u) {
+    if (cached_has_bits & 0x01000000u) {
+      setting_deferredambientstrength_ = from.setting_deferredambientstrength_;
     }
-    if (from.has_viewmodelskin()) {
-      set_viewmodelskin(from.viewmodelskin());
+    if (cached_has_bits & 0x02000000u) {
+      viewmodelskin_ = from.viewmodelskin_;
     }
-    if (from.has_setting_deferredtestmode()) {
-      set_setting_deferredtestmode(from.setting_deferredtestmode());
+    if (cached_has_bits & 0x04000000u) {
+      setting_deferredtestmode_ = from.setting_deferredtestmode_;
     }
-    if (from.has_setting_deferredtestlights()) {
-      set_setting_deferredtestlights(from.setting_deferredtestlights());
+    if (cached_has_bits & 0x08000000u) {
+      setting_deferredtestlights_ = from.setting_deferredtestlights_;
     }
-    if (from.has_solidlight_materialcolor_colorpicker()) {
-      set_solidlight_materialcolor_colorpicker(from.solidlight_materialcolor_colorpicker());
+    if (cached_has_bits & 0x10000000u) {
+      solidlight_materialcolor_colorpicker_ = from.solidlight_materialcolor_colorpicker_;
     }
-    if (from.has_solidlight_ambient_colorpicker()) {
-      set_solidlight_ambient_colorpicker(from.solidlight_ambient_colorpicker());
+    if (cached_has_bits & 0x20000000u) {
+      solidlight_ambient_colorpicker_ = from.solidlight_ambient_colorpicker_;
     }
-    if (from.has_solidlight_ambient_strength()) {
-      set_solidlight_ambient_strength(from.solidlight_ambient_strength());
+    if (cached_has_bits & 0x40000000u) {
+      solidlight_ambient_strength_ = from.solidlight_ambient_strength_;
     }
-    if (from.has_solidlight_diffuse_strength()) {
-      set_solidlight_diffuse_strength(from.solidlight_diffuse_strength());
+    if (cached_has_bits & 0x80000000u) {
+      solidlight_diffuse_strength_ = from.solidlight_diffuse_strength_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
-  if (from._has_bits_[32 / 32] & 255u) {
-    if (from.has_solidlight_specular_strength()) {
-      set_solidlight_specular_strength(from.solidlight_specular_strength());
+  cached_has_bits = from._has_bits_[1];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
+      solidlight_specular_strength_ = from.solidlight_specular_strength_;
     }
-    if (from.has_solidlight_diffuse_colorpicker()) {
-      set_solidlight_diffuse_colorpicker(from.solidlight_diffuse_colorpicker());
+    if (cached_has_bits & 0x00000002u) {
+      solidlight_diffuse_colorpicker_ = from.solidlight_diffuse_colorpicker_;
     }
-    if (from.has_solidlight_specular_colorpicker()) {
-      set_solidlight_specular_colorpicker(from.solidlight_specular_colorpicker());
+    if (cached_has_bits & 0x00000004u) {
+      solidlight_specular_colorpicker_ = from.solidlight_specular_colorpicker_;
     }
-    if (from.has_setting_showterrain()) {
-      set_setting_showterrain(from.setting_showterrain());
+    if (cached_has_bits & 0x00000008u) {
+      setting_showterrain_ = from.setting_showterrain_;
     }
-    if (from.has_setting_terrainmodel()) {
-      set_setting_terrainmodel(from.setting_terrainmodel());
+    if (cached_has_bits & 0x00000010u) {
+      setting_terrainmodel_ = from.setting_terrainmodel_;
     }
-    if (from.has_setting_terrainwidth()) {
-      set_setting_terrainwidth(from.setting_terrainwidth());
+    if (cached_has_bits & 0x00000020u) {
+      setting_terrainwidth_ = from.setting_terrainwidth_;
     }
-    if (from.has_setting_terrainanimatex()) {
-      set_setting_terrainanimatex(from.setting_terrainanimatex());
+    if (cached_has_bits & 0x00000040u) {
+      setting_terrainanimatex_ = from.setting_terrainanimatex_;
     }
-    if (from.has_setting_terrainanimatey()) {
-      set_setting_terrainanimatey(from.setting_terrainanimatey());
+    if (cached_has_bits & 0x00000080u) {
+      setting_terrainanimatey_ = from.setting_terrainanimatey_;
     }
+    _has_bits_[1] |= cached_has_bits;
   }
-  if (from._has_bits_[40 / 32] & 1792u) {
-    if (from.has_setting_showspaceship()) {
-      set_setting_showspaceship(from.setting_showspaceship());
+  if (cached_has_bits & 1792u) {
+    if (cached_has_bits & 0x00000100u) {
+      setting_showspaceship_ = from.setting_showspaceship_;
     }
-    if (from.has_setting_generatespaceship()) {
-      set_setting_generatespaceship(from.setting_generatespaceship());
+    if (cached_has_bits & 0x00000200u) {
+      setting_generatespaceship_ = from.setting_generatespaceship_;
     }
-    if (from.has_setting_terrainheight()) {
-      set_setting_terrainheight(from.setting_terrainheight());
+    if (cached_has_bits & 0x00000400u) {
+      setting_terrainheight_ = from.setting_terrainheight_;
     }
+    _has_bits_[1] |= cached_has_bits;
   }
 }
 
@@ -2566,7 +2658,7 @@ void GUISettings::Swap(GUISettings* other) {
   InternalSwap(other);
 }
 void GUISettings::InternalSwap(GUISettings* other) {
-  lights_.UnsafeArenaSwap(&other->lights_);
+  lights_.InternalSwap(&other->lights_);
   heightmapimage_.Swap(&other->heightmapimage_);
   std::swap(setting_outlinecolor_, other->setting_outlinecolor_);
   std::swap(setting_uiambientlight_, other->setting_uiambientlight_);
@@ -2618,7 +2710,7 @@ void GUISettings::InternalSwap(GUISettings* other) {
 
 ::google::protobuf::Metadata GUISettings::GetMetadata() const {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[0];
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -3662,11 +3754,12 @@ void GUISettings::set_heightmapimage(const ::std::string& value) {
 void GUISettings::set_heightmapimage(::std::string&& value) {
   set_has_heightmapimage();
   heightmapimage_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.GUISettings.heightmapImage)
 }
 #endif
 void GUISettings::set_heightmapimage(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_heightmapimage();
   heightmapimage_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.GUISettings.heightmapImage)
@@ -4075,7 +4168,7 @@ void CameraSettings::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* CameraSettings::descriptor() {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[1].descriptor;
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const CameraSettings& CameraSettings::default_instance() {
@@ -4165,7 +4258,8 @@ bool CameraSettings::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required .KuplungApp.Vec3 cameraPosition = 1;
       case 1: {
-        if (tag == 10u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_cameraposition()));
         } else {
@@ -4176,7 +4270,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 View_Eye = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_eye()));
         } else {
@@ -4187,7 +4282,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 View_Center = 3;
       case 3: {
-        if (tag == 26u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_center()));
         } else {
@@ -4198,7 +4294,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 View_Up = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_up()));
         } else {
@@ -4209,7 +4306,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionX = 5;
       case 5: {
-        if (tag == 42u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -4220,7 +4318,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionY = 6;
       case 6: {
-        if (tag == 50u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -4231,7 +4330,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionZ = 7;
       case 7: {
-        if (tag == 58u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -4242,7 +4342,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateX = 8;
       case 8: {
-        if (tag == 66u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -4253,7 +4354,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateY = 9;
       case 9: {
-        if (tag == 74u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -4264,7 +4366,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateZ = 10;
       case 10: {
-        if (tag == 82u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -4275,7 +4378,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
       case 11: {
-        if (tag == 90u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterx()));
         } else {
@@ -4286,7 +4390,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
       case 12: {
-        if (tag == 98u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(98u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecentery()));
         } else {
@@ -4297,7 +4402,8 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
       case 13: {
-        if (tag == 106u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(106u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterz()));
         } else {
@@ -4331,80 +4437,84 @@ failure:
 void CameraSettings::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.CameraSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 cameraPosition = 1;
-  if (has_cameraposition()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       1, *this->cameraposition_, output);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
-  if (has_view_eye()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->view_eye_, output);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
-  if (has_view_center()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->view_center_, output);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
-  if (has_view_up()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->view_up_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->positionx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, *this->positiony_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       7, *this->positionz_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, *this->rotatex_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->rotatey_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, *this->rotatez_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
-  if (has_rotatecenterx()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->rotatecenterx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
-  if (has_rotatecentery()) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       12, *this->rotatecentery_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
-  if (has_rotatecenterz()) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       13, *this->rotatecenterz_, output);
   }
@@ -4418,97 +4528,100 @@ void CameraSettings::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* CameraSettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.CameraSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 cameraPosition = 1;
-  if (has_cameraposition()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        1, *this->cameraposition_, false, target);
+        1, *this->cameraposition_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
-  if (has_view_eye()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        2, *this->view_eye_, false, target);
+        2, *this->view_eye_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
-  if (has_view_center()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        3, *this->view_center_, false, target);
+        3, *this->view_center_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
-  if (has_view_up()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        4, *this->view_up_, false, target);
+        4, *this->view_up_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        5, *this->positionx_, false, target);
+        5, *this->positionx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        6, *this->positiony_, false, target);
+        6, *this->positiony_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        7, *this->positionz_, false, target);
+        7, *this->positionz_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        8, *this->rotatex_, false, target);
+        8, *this->rotatex_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        9, *this->rotatey_, false, target);
+        9, *this->rotatey_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, *this->rotatez_, false, target);
+        10, *this->rotatez_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
-  if (has_rotatecenterx()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->rotatecenterx_, false, target);
+        11, *this->rotatecenterx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
-  if (has_rotatecentery()) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, *this->rotatecentery_, false, target);
+        12, *this->rotatecentery_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
-  if (has_rotatecenterz()) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        13, *this->rotatecenterz_, false, target);
+        13, *this->rotatecenterz_, deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4720,46 +4833,50 @@ void CameraSettings::MergeFrom(const CameraSettings& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.CameraSettings)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_cameraposition()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       mutable_cameraposition()->::KuplungApp::Vec3::MergeFrom(from.cameraposition());
     }
-    if (from.has_view_eye()) {
+    if (cached_has_bits & 0x00000002u) {
       mutable_view_eye()->::KuplungApp::Vec3::MergeFrom(from.view_eye());
     }
-    if (from.has_view_center()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_view_center()->::KuplungApp::Vec3::MergeFrom(from.view_center());
     }
-    if (from.has_view_up()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_view_up()->::KuplungApp::Vec3::MergeFrom(from.view_up());
     }
-    if (from.has_positionx()) {
+    if (cached_has_bits & 0x00000010u) {
       mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
     }
-    if (from.has_positiony()) {
+    if (cached_has_bits & 0x00000020u) {
       mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
     }
-    if (from.has_positionz()) {
+    if (cached_has_bits & 0x00000040u) {
       mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
     }
-    if (from.has_rotatex()) {
+    if (cached_has_bits & 0x00000080u) {
       mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
     }
   }
-  if (from._has_bits_[8 / 32] & 7936u) {
-    if (from.has_rotatey()) {
+  if (cached_has_bits & 7936u) {
+    if (cached_has_bits & 0x00000100u) {
       mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
     }
-    if (from.has_rotatez()) {
+    if (cached_has_bits & 0x00000200u) {
       mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
     }
-    if (from.has_rotatecenterx()) {
+    if (cached_has_bits & 0x00000400u) {
       mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterx());
     }
-    if (from.has_rotatecentery()) {
+    if (cached_has_bits & 0x00000800u) {
       mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecentery());
     }
-    if (from.has_rotatecenterz()) {
+    if (cached_has_bits & 0x00001000u) {
       mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterz());
     }
   }
@@ -4848,7 +4965,7 @@ void CameraSettings::InternalSwap(CameraSettings* other) {
 
 ::google::protobuf::Metadata CameraSettings::GetMetadata() const {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[1];
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -5572,7 +5689,7 @@ void GridSettings::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* GridSettings::descriptor() {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[2].descriptor;
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const GridSettings& GridSettings::default_instance() {
@@ -5648,7 +5765,8 @@ bool GridSettings::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool actAsMirror = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_actasmirror();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -5661,7 +5779,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required int32 gridSize = 2;
       case 2: {
-        if (tag == 16u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u)) {
           set_has_gridsize();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5674,7 +5793,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionX = 3;
       case 3: {
-        if (tag == 26u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -5685,7 +5805,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionY = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -5696,7 +5817,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionZ = 5;
       case 5: {
-        if (tag == 42u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -5707,7 +5829,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateX = 6;
       case 6: {
-        if (tag == 50u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -5718,7 +5841,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateY = 7;
       case 7: {
-        if (tag == 58u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -5729,7 +5853,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateZ = 8;
       case 8: {
-        if (tag == 66u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -5740,7 +5865,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleX = 9;
       case 9: {
-        if (tag == 74u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalex()));
         } else {
@@ -5751,7 +5877,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleY = 10;
       case 10: {
-        if (tag == 82u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scaley()));
         } else {
@@ -5762,7 +5889,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleZ = 11;
       case 11: {
-        if (tag == 90u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalez()));
         } else {
@@ -5773,7 +5901,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required float transparency = 12;
       case 12: {
-        if (tag == 101u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(101u)) {
           set_has_transparency();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -5786,7 +5915,8 @@ bool GridSettings::MergePartialFromCodedStream(
 
       // required int32 showGrid = 13;
       case 13: {
-        if (tag == 104u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(104u)) {
           set_has_showgrid();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5822,77 +5952,81 @@ failure:
 void GridSettings::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.GridSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool actAsMirror = 1;
-  if (has_actasmirror()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->actasmirror(), output);
   }
 
   // required int32 gridSize = 2;
-  if (has_gridsize()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->gridsize(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 3;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->positionx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->positiony_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->positionz_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, *this->rotatex_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       7, *this->rotatey_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, *this->rotatez_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
-  if (has_scalex()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->scalex_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
-  if (has_scaley()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, *this->scaley_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
-  if (has_scalez()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->scalez_, output);
   }
 
   // required float transparency = 12;
-  if (has_transparency()) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(12, this->transparency(), output);
   }
 
   // required int32 showGrid = 13;
-  if (has_showgrid()) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->showgrid(), output);
   }
 
@@ -5905,88 +6039,91 @@ void GridSettings::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* GridSettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GridSettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool actAsMirror = 1;
-  if (has_actasmirror()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->actasmirror(), target);
   }
 
   // required int32 gridSize = 2;
-  if (has_gridsize()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->gridsize(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 3;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        3, *this->positionx_, false, target);
+        3, *this->positionx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        4, *this->positiony_, false, target);
+        4, *this->positiony_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        5, *this->positionz_, false, target);
+        5, *this->positionz_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        6, *this->rotatex_, false, target);
+        6, *this->rotatex_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        7, *this->rotatey_, false, target);
+        7, *this->rotatey_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        8, *this->rotatez_, false, target);
+        8, *this->rotatez_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
-  if (has_scalex()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        9, *this->scalex_, false, target);
+        9, *this->scalex_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
-  if (has_scaley()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, *this->scaley_, false, target);
+        10, *this->scaley_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
-  if (has_scalez()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->scalez_, false, target);
+        11, *this->scalez_, deterministic, target);
   }
 
   // required float transparency = 12;
-  if (has_transparency()) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(12, this->transparency(), target);
   }
 
   // required int32 showGrid = 13;
-  if (has_showgrid()) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->showgrid(), target);
   }
 
@@ -6191,48 +6328,53 @@ void GridSettings::MergeFrom(const GridSettings& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.GridSettings)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_positionx()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
     }
-    if (from.has_positiony()) {
+    if (cached_has_bits & 0x00000002u) {
       mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
     }
-    if (from.has_positionz()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
     }
-    if (from.has_rotatex()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
     }
-    if (from.has_rotatey()) {
+    if (cached_has_bits & 0x00000010u) {
       mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
     }
-    if (from.has_rotatez()) {
+    if (cached_has_bits & 0x00000020u) {
       mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
     }
-    if (from.has_scalex()) {
+    if (cached_has_bits & 0x00000040u) {
       mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalex());
     }
-    if (from.has_scaley()) {
+    if (cached_has_bits & 0x00000080u) {
       mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scaley());
     }
   }
-  if (from._has_bits_[8 / 32] & 7936u) {
-    if (from.has_scalez()) {
+  if (cached_has_bits & 7936u) {
+    if (cached_has_bits & 0x00000100u) {
       mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalez());
     }
-    if (from.has_actasmirror()) {
-      set_actasmirror(from.actasmirror());
+    if (cached_has_bits & 0x00000200u) {
+      actasmirror_ = from.actasmirror_;
     }
-    if (from.has_gridsize()) {
-      set_gridsize(from.gridsize());
+    if (cached_has_bits & 0x00000400u) {
+      gridsize_ = from.gridsize_;
     }
-    if (from.has_transparency()) {
-      set_transparency(from.transparency());
+    if (cached_has_bits & 0x00000800u) {
+      transparency_ = from.transparency_;
     }
-    if (from.has_showgrid()) {
-      set_showgrid(from.showgrid());
+    if (cached_has_bits & 0x00001000u) {
+      showgrid_ = from.showgrid_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -6307,7 +6449,7 @@ void GridSettings::InternalSwap(GridSettings* other) {
 
 ::google::protobuf::Metadata GridSettings::GetMetadata() const {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[2];
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7087,7 +7229,7 @@ void LightObject::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* LightObject::descriptor() {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[3].descriptor;
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const LightObject& LightObject::default_instance() {
@@ -7231,7 +7373,8 @@ bool LightObject::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string title = 1;
       case 1: {
-        if (tag == 10u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -7246,7 +7389,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required string description = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_description()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -7261,7 +7405,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required int32 type = 3;
       case 3: {
-        if (tag == 24u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u)) {
           set_has_type();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7274,7 +7419,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required bool showLampObject = 4;
       case 4: {
-        if (tag == 32u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u)) {
           set_has_showlampobject();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7287,7 +7433,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required bool showLampDirection = 5;
       case 5: {
-        if (tag == 40u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u)) {
           set_has_showlampdirection();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7300,7 +7447,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required bool showInWire = 6;
       case 6: {
-        if (tag == 48u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u)) {
           set_has_showinwire();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7313,7 +7461,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionX = 7;
       case 7: {
-        if (tag == 58u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(58u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -7324,7 +7473,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionY = 8;
       case 8: {
-        if (tag == 66u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(66u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -7335,7 +7485,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionZ = 9;
       case 9: {
-        if (tag == 74u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -7346,7 +7497,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate directionX = 10;
       case 10: {
-        if (tag == 82u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionx()));
         } else {
@@ -7357,7 +7509,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate directionY = 11;
       case 11: {
-        if (tag == 90u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directiony()));
         } else {
@@ -7368,7 +7521,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate directionZ = 12;
       case 12: {
-        if (tag == 98u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(98u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionz()));
         } else {
@@ -7379,7 +7533,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleX = 13;
       case 13: {
-        if (tag == 106u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(106u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalex()));
         } else {
@@ -7390,7 +7545,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleY = 14;
       case 14: {
-        if (tag == 114u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(114u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scaley()));
         } else {
@@ -7401,7 +7557,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleZ = 15;
       case 15: {
-        if (tag == 122u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(122u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalez()));
         } else {
@@ -7412,7 +7569,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateX = 16;
       case 16: {
-        if (tag == 130u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(130u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -7423,7 +7581,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateY = 17;
       case 17: {
-        if (tag == 138u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(138u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -7434,7 +7593,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateZ = 18;
       case 18: {
-        if (tag == 146u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(146u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -7445,7 +7605,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
       case 19: {
-        if (tag == 154u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(154u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterx()));
         } else {
@@ -7456,7 +7617,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
       case 20: {
-        if (tag == 162u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(162u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecentery()));
         } else {
@@ -7467,7 +7629,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
       case 21: {
-        if (tag == 170u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(170u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterz()));
         } else {
@@ -7478,7 +7641,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor ambient = 22;
       case 22: {
-        if (tag == 178u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(178u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_ambient()));
         } else {
@@ -7489,7 +7653,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor diffuse = 23;
       case 23: {
-        if (tag == 186u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(186u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_diffuse()));
         } else {
@@ -7500,7 +7665,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor specular = 24;
       case 24: {
-        if (tag == 194u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(194u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_specular()));
         } else {
@@ -7511,7 +7677,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate lCutOff = 25;
       case 25: {
-        if (tag == 202u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(202u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lcutoff()));
         } else {
@@ -7522,7 +7689,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
       case 26: {
-        if (tag == 210u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(210u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_loutercutoff()));
         } else {
@@ -7533,7 +7701,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate lConstant = 27;
       case 27: {
-        if (tag == 218u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(218u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lconstant()));
         } else {
@@ -7544,7 +7713,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate lLinear = 28;
       case 28: {
-        if (tag == 226u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(226u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_llinear()));
         } else {
@@ -7555,7 +7725,8 @@ bool LightObject::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
       case 29: {
-        if (tag == 234u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(234u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lquadratic()));
         } else {
@@ -7589,8 +7760,12 @@ failure:
 void LightObject::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.LightObject)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required string title = 1;
-  if (has_title()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -7600,7 +7775,7 @@ void LightObject::SerializeWithCachedSizes(
   }
 
   // required string description = 2;
-  if (has_description()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -7610,159 +7785,159 @@ void LightObject::SerializeWithCachedSizes(
   }
 
   // required int32 type = 3;
-  if (has_type()) {
+  if (cached_has_bits & 0x02000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->type(), output);
   }
 
   // required bool showLampObject = 4;
-  if (has_showlampobject()) {
+  if (cached_has_bits & 0x04000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->showlampobject(), output);
   }
 
   // required bool showLampDirection = 5;
-  if (has_showlampdirection()) {
+  if (cached_has_bits & 0x08000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->showlampdirection(), output);
   }
 
   // required bool showInWire = 6;
-  if (has_showinwire()) {
+  if (cached_has_bits & 0x10000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->showinwire(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 7;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       7, *this->positionx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       8, *this->positiony_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->positionz_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
-  if (has_directionx()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       10, *this->directionx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
-  if (has_directiony()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->directiony_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
-  if (has_directionz()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       12, *this->directionz_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
-  if (has_scalex()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       13, *this->scalex_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
-  if (has_scaley()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       14, *this->scaley_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
-  if (has_scalez()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       15, *this->scalez_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       16, *this->rotatex_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       17, *this->rotatey_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       18, *this->rotatez_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
-  if (has_rotatecenterx()) {
+  if (cached_has_bits & 0x00004000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       19, *this->rotatecenterx_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
-  if (has_rotatecentery()) {
+  if (cached_has_bits & 0x00008000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       20, *this->rotatecentery_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
-  if (has_rotatecenterz()) {
+  if (cached_has_bits & 0x00010000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       21, *this->rotatecenterz_, output);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
-  if (has_ambient()) {
+  if (cached_has_bits & 0x00020000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       22, *this->ambient_, output);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
-  if (has_diffuse()) {
+  if (cached_has_bits & 0x00040000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       23, *this->diffuse_, output);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
-  if (has_specular()) {
+  if (cached_has_bits & 0x00080000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       24, *this->specular_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
-  if (has_lcutoff()) {
+  if (cached_has_bits & 0x00100000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       25, *this->lcutoff_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
-  if (has_loutercutoff()) {
+  if (cached_has_bits & 0x00200000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       26, *this->loutercutoff_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
-  if (has_lconstant()) {
+  if (cached_has_bits & 0x00400000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       27, *this->lconstant_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
-  if (has_llinear()) {
+  if (cached_has_bits & 0x00800000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       28, *this->llinear_, output);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
-  if (has_lquadratic()) {
+  if (cached_has_bits & 0x01000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       29, *this->lquadratic_, output);
   }
@@ -7776,10 +7951,13 @@ void LightObject::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* LightObject::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.LightObject)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required string title = 1;
-  if (has_title()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -7790,7 +7968,7 @@ void LightObject::SerializeWithCachedSizes(
   }
 
   // required string description = 2;
-  if (has_description()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->description().data(), this->description().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -7801,184 +7979,184 @@ void LightObject::SerializeWithCachedSizes(
   }
 
   // required int32 type = 3;
-  if (has_type()) {
+  if (cached_has_bits & 0x02000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->type(), target);
   }
 
   // required bool showLampObject = 4;
-  if (has_showlampobject()) {
+  if (cached_has_bits & 0x04000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->showlampobject(), target);
   }
 
   // required bool showLampDirection = 5;
-  if (has_showlampdirection()) {
+  if (cached_has_bits & 0x08000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->showlampdirection(), target);
   }
 
   // required bool showInWire = 6;
-  if (has_showinwire()) {
+  if (cached_has_bits & 0x10000000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->showinwire(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 7;
-  if (has_positionx()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        7, *this->positionx_, false, target);
+        7, *this->positionx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
-  if (has_positiony()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        8, *this->positiony_, false, target);
+        8, *this->positiony_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
-  if (has_positionz()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        9, *this->positionz_, false, target);
+        9, *this->positionz_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
-  if (has_directionx()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, *this->directionx_, false, target);
+        10, *this->directionx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
-  if (has_directiony()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->directiony_, false, target);
+        11, *this->directiony_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
-  if (has_directionz()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, *this->directionz_, false, target);
+        12, *this->directionz_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
-  if (has_scalex()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        13, *this->scalex_, false, target);
+        13, *this->scalex_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
-  if (has_scaley()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        14, *this->scaley_, false, target);
+        14, *this->scaley_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
-  if (has_scalez()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        15, *this->scalez_, false, target);
+        15, *this->scalez_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
-  if (has_rotatex()) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        16, *this->rotatex_, false, target);
+        16, *this->rotatex_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
-  if (has_rotatey()) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        17, *this->rotatey_, false, target);
+        17, *this->rotatey_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
-  if (has_rotatez()) {
+  if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        18, *this->rotatez_, false, target);
+        18, *this->rotatez_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
-  if (has_rotatecenterx()) {
+  if (cached_has_bits & 0x00004000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        19, *this->rotatecenterx_, false, target);
+        19, *this->rotatecenterx_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
-  if (has_rotatecentery()) {
+  if (cached_has_bits & 0x00008000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        20, *this->rotatecentery_, false, target);
+        20, *this->rotatecentery_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
-  if (has_rotatecenterz()) {
+  if (cached_has_bits & 0x00010000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        21, *this->rotatecenterz_, false, target);
+        21, *this->rotatecenterz_, deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
-  if (has_ambient()) {
+  if (cached_has_bits & 0x00020000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        22, *this->ambient_, false, target);
+        22, *this->ambient_, deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
-  if (has_diffuse()) {
+  if (cached_has_bits & 0x00040000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        23, *this->diffuse_, false, target);
+        23, *this->diffuse_, deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
-  if (has_specular()) {
+  if (cached_has_bits & 0x00080000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        24, *this->specular_, false, target);
+        24, *this->specular_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
-  if (has_lcutoff()) {
+  if (cached_has_bits & 0x00100000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        25, *this->lcutoff_, false, target);
+        25, *this->lcutoff_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
-  if (has_loutercutoff()) {
+  if (cached_has_bits & 0x00200000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        26, *this->loutercutoff_, false, target);
+        26, *this->loutercutoff_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
-  if (has_lconstant()) {
+  if (cached_has_bits & 0x00400000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        27, *this->lconstant_, false, target);
+        27, *this->lconstant_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
-  if (has_llinear()) {
+  if (cached_has_bits & 0x00800000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        28, *this->llinear_, false, target);
+        28, *this->llinear_, deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
-  if (has_lquadratic()) {
+  if (cached_has_bits & 0x01000000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        29, *this->lquadratic_, false, target);
+        29, *this->lquadratic_, deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -8370,102 +8548,107 @@ void LightObject::MergeFrom(const LightObject& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.LightObject)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_title()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_title();
       title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
-    if (from.has_description()) {
+    if (cached_has_bits & 0x00000002u) {
       set_has_description();
       description_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.description_);
     }
-    if (from.has_positionx()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
     }
-    if (from.has_positiony()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
     }
-    if (from.has_positionz()) {
+    if (cached_has_bits & 0x00000010u) {
       mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
     }
-    if (from.has_directionx()) {
+    if (cached_has_bits & 0x00000020u) {
       mutable_directionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directionx());
     }
-    if (from.has_directiony()) {
+    if (cached_has_bits & 0x00000040u) {
       mutable_directiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directiony());
     }
-    if (from.has_directionz()) {
+    if (cached_has_bits & 0x00000080u) {
       mutable_directionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directionz());
     }
   }
-  if (from._has_bits_[8 / 32] & 65280u) {
-    if (from.has_scalex()) {
+  if (cached_has_bits & 65280u) {
+    if (cached_has_bits & 0x00000100u) {
       mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalex());
     }
-    if (from.has_scaley()) {
+    if (cached_has_bits & 0x00000200u) {
       mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scaley());
     }
-    if (from.has_scalez()) {
+    if (cached_has_bits & 0x00000400u) {
       mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalez());
     }
-    if (from.has_rotatex()) {
+    if (cached_has_bits & 0x00000800u) {
       mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
     }
-    if (from.has_rotatey()) {
+    if (cached_has_bits & 0x00001000u) {
       mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
     }
-    if (from.has_rotatez()) {
+    if (cached_has_bits & 0x00002000u) {
       mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
     }
-    if (from.has_rotatecenterx()) {
+    if (cached_has_bits & 0x00004000u) {
       mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterx());
     }
-    if (from.has_rotatecentery()) {
+    if (cached_has_bits & 0x00008000u) {
       mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecentery());
     }
   }
-  if (from._has_bits_[16 / 32] & 16711680u) {
-    if (from.has_rotatecenterz()) {
+  if (cached_has_bits & 16711680u) {
+    if (cached_has_bits & 0x00010000u) {
       mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterz());
     }
-    if (from.has_ambient()) {
+    if (cached_has_bits & 0x00020000u) {
       mutable_ambient()->::KuplungApp::MaterialColor::MergeFrom(from.ambient());
     }
-    if (from.has_diffuse()) {
+    if (cached_has_bits & 0x00040000u) {
       mutable_diffuse()->::KuplungApp::MaterialColor::MergeFrom(from.diffuse());
     }
-    if (from.has_specular()) {
+    if (cached_has_bits & 0x00080000u) {
       mutable_specular()->::KuplungApp::MaterialColor::MergeFrom(from.specular());
     }
-    if (from.has_lcutoff()) {
+    if (cached_has_bits & 0x00100000u) {
       mutable_lcutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lcutoff());
     }
-    if (from.has_loutercutoff()) {
+    if (cached_has_bits & 0x00200000u) {
       mutable_loutercutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.loutercutoff());
     }
-    if (from.has_lconstant()) {
+    if (cached_has_bits & 0x00400000u) {
       mutable_lconstant()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lconstant());
     }
-    if (from.has_llinear()) {
+    if (cached_has_bits & 0x00800000u) {
       mutable_llinear()->::KuplungApp::ObjectCoordinate::MergeFrom(from.llinear());
     }
   }
-  if (from._has_bits_[24 / 32] & 520093696u) {
-    if (from.has_lquadratic()) {
+  if (cached_has_bits & 520093696u) {
+    if (cached_has_bits & 0x01000000u) {
       mutable_lquadratic()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lquadratic());
     }
-    if (from.has_type()) {
-      set_type(from.type());
+    if (cached_has_bits & 0x02000000u) {
+      type_ = from.type_;
     }
-    if (from.has_showlampobject()) {
-      set_showlampobject(from.showlampobject());
+    if (cached_has_bits & 0x04000000u) {
+      showlampobject_ = from.showlampobject_;
     }
-    if (from.has_showlampdirection()) {
-      set_showlampdirection(from.showlampdirection());
+    if (cached_has_bits & 0x08000000u) {
+      showlampdirection_ = from.showlampdirection_;
     }
-    if (from.has_showinwire()) {
-      set_showinwire(from.showinwire());
+    if (cached_has_bits & 0x10000000u) {
+      showinwire_ = from.showinwire_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -8598,7 +8781,7 @@ void LightObject::InternalSwap(LightObject* other) {
 
 ::google::protobuf::Metadata LightObject::GetMetadata() const {
   protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[3];
+  return protobuf_KuplungAppSettings_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8631,11 +8814,12 @@ void LightObject::set_title(const ::std::string& value) {
 void LightObject::set_title(::std::string&& value) {
   set_has_title();
   title_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.LightObject.title)
 }
 #endif
 void LightObject::set_title(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_title();
   title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.LightObject.title)
@@ -8693,11 +8877,12 @@ void LightObject::set_description(const ::std::string& value) {
 void LightObject::set_description(::std::string&& value) {
   set_has_description();
   description_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.LightObject.description)
 }
 #endif
 void LightObject::set_description(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_description();
   description_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.LightObject.description)

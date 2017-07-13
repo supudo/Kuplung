@@ -46,11 +46,34 @@ namespace {
 
 }  // namespace
 
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTableField
+    const TableStruct::entries[] = {
+  {0, 0, 0, ::google::protobuf::internal::kInvalidMask, 0, 0},
+};
+
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
+    const TableStruct::aux[] = {
+  ::google::protobuf::internal::AuxillaryParseTableField(),
+};
+PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
+    TableStruct::schema[] = {
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+  { NULL, NULL, 0, -1, -1, false },
+};
+
 const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec2, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec2, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec2, x_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec2, y_),
   0,
@@ -59,6 +82,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec3, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec3, x_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec3, y_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec3, z_),
@@ -69,6 +93,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec4, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec4, x_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec4, y_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Vec4, z_),
@@ -81,6 +106,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectCoordinate, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectCoordinate, animate_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ObjectCoordinate, point_),
   0,
@@ -89,6 +115,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, isfile_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, path_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FBEntity, title_),
@@ -105,6 +132,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, colorpickeropen_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, animate_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MaterialColor, strength_),
@@ -117,6 +145,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, filename_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, image_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshMaterialTextureImage, width_),
@@ -133,6 +162,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, materialid_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, materialtitle_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(MeshModelMaterial, ambientcolor_),
@@ -171,6 +201,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, id_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, file_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Mesh, modeltitle_),
@@ -200,15 +231,15 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
 };
 
 static const ::google::protobuf::internal::MigrationSchema schemas[] = {
-  { 0, 6, sizeof(Vec2)},
-  { 8, 15, sizeof(Vec3)},
-  { 18, 26, sizeof(Vec4)},
-  { 30, 36, sizeof(ObjectCoordinate)},
-  { 38, 48, sizeof(FBEntity)},
-  { 54, 62, sizeof(MaterialColor)},
-  { 66, 76, sizeof(MeshMaterialTextureImage)},
-  { 82, 103, sizeof(MeshModelMaterial)},
-  { 120, 137, sizeof(Mesh)},
+  { 0, 7, sizeof(Vec2)},
+  { 9, 17, sizeof(Vec3)},
+  { 20, 29, sizeof(Vec4)},
+  { 33, 40, sizeof(ObjectCoordinate)},
+  { 42, 53, sizeof(FBEntity)},
+  { 59, 68, sizeof(MaterialColor)},
+  { 72, 83, sizeof(MeshMaterialTextureImage)},
+  { 89, 111, sizeof(MeshModelMaterial)},
+  { 128, 146, sizeof(Mesh)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -430,7 +461,7 @@ void Vec2::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Vec2::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[0].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const Vec2& Vec2::default_instance() {
@@ -468,7 +499,8 @@ bool Vec2::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (tag == 13u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u)) {
           set_has_x();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -481,7 +513,8 @@ bool Vec2::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (tag == 21u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u)) {
           set_has_y();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -517,13 +550,17 @@ failure:
 void Vec2::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec2)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
@@ -536,15 +573,18 @@ void Vec2::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Vec2::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec2)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
@@ -617,13 +657,18 @@ void Vec2::MergeFrom(const Vec2& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec2)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 3u) {
-    if (from.has_x()) {
-      set_x(from.x());
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      x_ = from.x_;
     }
-    if (from.has_y()) {
-      set_y(from.y());
+    if (cached_has_bits & 0x00000002u) {
+      y_ = from.y_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -660,7 +705,7 @@ void Vec2::InternalSwap(Vec2* other) {
 
 ::google::protobuf::Metadata Vec2::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[0];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -765,7 +810,7 @@ void Vec3::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Vec3::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[1].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const Vec3& Vec3::default_instance() {
@@ -803,7 +848,8 @@ bool Vec3::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (tag == 13u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u)) {
           set_has_x();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -816,7 +862,8 @@ bool Vec3::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (tag == 21u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u)) {
           set_has_y();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -829,7 +876,8 @@ bool Vec3::MergePartialFromCodedStream(
 
       // required float z = 3;
       case 3: {
-        if (tag == 29u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u)) {
           set_has_z();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -865,18 +913,22 @@ failure:
 void Vec3::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec3)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   // required float z = 3;
-  if (has_z()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
@@ -889,20 +941,23 @@ void Vec3::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Vec3::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec3)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   // required float z = 3;
-  if (has_z()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
@@ -983,16 +1038,21 @@ void Vec3::MergeFrom(const Vec3& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec3)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 7u) {
-    if (from.has_x()) {
-      set_x(from.x());
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 7u) {
+    if (cached_has_bits & 0x00000001u) {
+      x_ = from.x_;
     }
-    if (from.has_y()) {
-      set_y(from.y());
+    if (cached_has_bits & 0x00000002u) {
+      y_ = from.y_;
     }
-    if (from.has_z()) {
-      set_z(from.z());
+    if (cached_has_bits & 0x00000004u) {
+      z_ = from.z_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -1030,7 +1090,7 @@ void Vec3::InternalSwap(Vec3* other) {
 
 ::google::protobuf::Metadata Vec3::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[1];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1160,7 +1220,7 @@ void Vec4::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Vec4::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[2].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const Vec4& Vec4::default_instance() {
@@ -1198,7 +1258,8 @@ bool Vec4::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (tag == 13u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(13u)) {
           set_has_x();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1211,7 +1272,8 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (tag == 21u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u)) {
           set_has_y();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1224,7 +1286,8 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float z = 3;
       case 3: {
-        if (tag == 29u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u)) {
           set_has_z();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1237,7 +1300,8 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float w = 4;
       case 4: {
-        if (tag == 37u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(37u)) {
           set_has_w();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1273,23 +1337,27 @@ failure:
 void Vec4::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec4)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   // required float z = 3;
-  if (has_z()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
   // required float w = 4;
-  if (has_w()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->w(), output);
   }
 
@@ -1302,25 +1370,28 @@ void Vec4::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Vec4::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec4)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required float x = 1;
-  if (has_x()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
-  if (has_y()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   // required float z = 3;
-  if (has_z()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
   // required float w = 4;
-  if (has_w()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->w(), target);
   }
 
@@ -1409,19 +1480,24 @@ void Vec4::MergeFrom(const Vec4& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec4)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 15u) {
-    if (from.has_x()) {
-      set_x(from.x());
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 15u) {
+    if (cached_has_bits & 0x00000001u) {
+      x_ = from.x_;
     }
-    if (from.has_y()) {
-      set_y(from.y());
+    if (cached_has_bits & 0x00000002u) {
+      y_ = from.y_;
     }
-    if (from.has_z()) {
-      set_z(from.z());
+    if (cached_has_bits & 0x00000004u) {
+      z_ = from.z_;
     }
-    if (from.has_w()) {
-      set_w(from.w());
+    if (cached_has_bits & 0x00000008u) {
+      w_ = from.w_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -1460,7 +1536,7 @@ void Vec4::InternalSwap(Vec4* other) {
 
 ::google::protobuf::Metadata Vec4::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[2];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1612,7 +1688,7 @@ void ObjectCoordinate::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* ObjectCoordinate::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[3].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const ObjectCoordinate& ObjectCoordinate::default_instance() {
@@ -1650,7 +1726,8 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool animate = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_animate();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1663,7 +1740,8 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
 
       // required float point = 2;
       case 2: {
-        if (tag == 21u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(21u)) {
           set_has_point();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1699,13 +1777,17 @@ failure:
 void ObjectCoordinate::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.ObjectCoordinate)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool animate = 1;
-  if (has_animate()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->animate(), output);
   }
 
   // required float point = 2;
-  if (has_point()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->point(), output);
   }
 
@@ -1718,15 +1800,18 @@ void ObjectCoordinate::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* ObjectCoordinate::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ObjectCoordinate)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool animate = 1;
-  if (has_animate()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->animate(), target);
   }
 
   // required float point = 2;
-  if (has_point()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->point(), target);
   }
 
@@ -1799,13 +1884,18 @@ void ObjectCoordinate::MergeFrom(const ObjectCoordinate& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.ObjectCoordinate)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 3u) {
-    if (from.has_animate()) {
-      set_animate(from.animate());
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 3u) {
+    if (cached_has_bits & 0x00000001u) {
+      animate_ = from.animate_;
     }
-    if (from.has_point()) {
-      set_point(from.point());
+    if (cached_has_bits & 0x00000002u) {
+      point_ = from.point_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -1842,7 +1932,7 @@ void ObjectCoordinate::InternalSwap(ObjectCoordinate* other) {
 
 ::google::protobuf::Metadata ObjectCoordinate::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[3];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -1977,7 +2067,7 @@ void FBEntity::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FBEntity::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[4].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const FBEntity& FBEntity::default_instance() {
@@ -2034,7 +2124,8 @@ bool FBEntity::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool isFile = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_isfile();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2047,7 +2138,8 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string path = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_path()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2062,7 +2154,8 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string title = 3;
       case 3: {
-        if (tag == 26u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2077,7 +2170,8 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string extension = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_extension()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2092,7 +2186,8 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string modifiedDate = 5;
       case 5: {
-        if (tag == 42u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_modifieddate()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2107,7 +2202,8 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string size = 6;
       case 6: {
-        if (tag == 50u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_size()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -2145,13 +2241,17 @@ failure:
 void FBEntity::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.FBEntity)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool isFile = 1;
-  if (has_isfile()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->isfile(), output);
   }
 
   // required string path = 2;
-  if (has_path()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), this->path().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2161,7 +2261,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string title = 3;
-  if (has_title()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2171,7 +2271,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string extension = 4;
-  if (has_extension()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->extension().data(), this->extension().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2181,7 +2281,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string modifiedDate = 5;
-  if (has_modifieddate()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modifieddate().data(), this->modifieddate().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2191,7 +2291,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string size = 6;
-  if (has_size()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->size().data(), this->size().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2209,15 +2309,18 @@ void FBEntity::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* FBEntity::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.FBEntity)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool isFile = 1;
-  if (has_isfile()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->isfile(), target);
   }
 
   // required string path = 2;
-  if (has_path()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), this->path().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2228,7 +2331,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string title = 3;
-  if (has_title()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), this->title().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2239,7 +2342,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string extension = 4;
-  if (has_extension()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->extension().data(), this->extension().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2250,7 +2353,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string modifiedDate = 5;
-  if (has_modifieddate()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modifieddate().data(), this->modifieddate().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2261,7 +2364,7 @@ void FBEntity::SerializeWithCachedSizes(
   }
 
   // required string size = 6;
-  if (has_size()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->size().data(), this->size().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -2392,30 +2495,35 @@ void FBEntity::MergeFrom(const FBEntity& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.FBEntity)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 63u) {
-    if (from.has_path()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 63u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_path();
       path_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.path_);
     }
-    if (from.has_title()) {
+    if (cached_has_bits & 0x00000002u) {
       set_has_title();
       title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
-    if (from.has_extension()) {
+    if (cached_has_bits & 0x00000004u) {
       set_has_extension();
       extension_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.extension_);
     }
-    if (from.has_modifieddate()) {
+    if (cached_has_bits & 0x00000008u) {
       set_has_modifieddate();
       modifieddate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
     }
-    if (from.has_size()) {
+    if (cached_has_bits & 0x00000010u) {
       set_has_size();
       size_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.size_);
     }
-    if (from.has_isfile()) {
-      set_isfile(from.isfile());
+    if (cached_has_bits & 0x00000020u) {
+      isfile_ = from.isfile_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -2456,7 +2564,7 @@ void FBEntity::InternalSwap(FBEntity* other) {
 
 ::google::protobuf::Metadata FBEntity::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[4];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -2513,11 +2621,12 @@ void FBEntity::set_path(const ::std::string& value) {
 void FBEntity::set_path(::std::string&& value) {
   set_has_path();
   path_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.FBEntity.path)
 }
 #endif
 void FBEntity::set_path(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_path();
   path_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.path)
@@ -2575,11 +2684,12 @@ void FBEntity::set_title(const ::std::string& value) {
 void FBEntity::set_title(::std::string&& value) {
   set_has_title();
   title_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.FBEntity.title)
 }
 #endif
 void FBEntity::set_title(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_title();
   title_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.title)
@@ -2637,11 +2747,12 @@ void FBEntity::set_extension(const ::std::string& value) {
 void FBEntity::set_extension(::std::string&& value) {
   set_has_extension();
   extension_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.FBEntity.extension)
 }
 #endif
 void FBEntity::set_extension(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_extension();
   extension_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.extension)
@@ -2699,11 +2810,12 @@ void FBEntity::set_modifieddate(const ::std::string& value) {
 void FBEntity::set_modifieddate(::std::string&& value) {
   set_has_modifieddate();
   modifieddate_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.FBEntity.modifiedDate)
 }
 #endif
 void FBEntity::set_modifieddate(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_modifieddate();
   modifieddate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.modifiedDate)
@@ -2761,11 +2873,12 @@ void FBEntity::set_size(const ::std::string& value) {
 void FBEntity::set_size(::std::string&& value) {
   set_has_size();
   size_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.FBEntity.size)
 }
 #endif
 void FBEntity::set_size(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_size();
   size_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.FBEntity.size)
@@ -2856,7 +2969,7 @@ void MaterialColor::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* MaterialColor::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[5].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const MaterialColor& MaterialColor::default_instance() {
@@ -2898,7 +3011,8 @@ bool MaterialColor::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool colorPickerOpen = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_colorpickeropen();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2911,7 +3025,8 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required bool animate = 2;
       case 2: {
-        if (tag == 16u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u)) {
           set_has_animate();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -2924,7 +3039,8 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required float strength = 3;
       case 3: {
-        if (tag == 29u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(29u)) {
           set_has_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -2937,7 +3053,8 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 color = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_color()));
         } else {
@@ -2971,23 +3088,27 @@ failure:
 void MaterialColor::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MaterialColor)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool colorPickerOpen = 1;
-  if (has_colorpickeropen()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->colorpickeropen(), output);
   }
 
   // required bool animate = 2;
-  if (has_animate()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->animate(), output);
   }
 
   // required float strength = 3;
-  if (has_strength()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->strength(), output);
   }
 
   // required .KuplungApp.Vec3 color = 4;
-  if (has_color()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->color_, output);
   }
@@ -3001,28 +3122,31 @@ void MaterialColor::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MaterialColor::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MaterialColor)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required bool colorPickerOpen = 1;
-  if (has_colorpickeropen()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->colorpickeropen(), target);
   }
 
   // required bool animate = 2;
-  if (has_animate()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->animate(), target);
   }
 
   // required float strength = 3;
-  if (has_strength()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->strength(), target);
   }
 
   // required .KuplungApp.Vec3 color = 4;
-  if (has_color()) {
+  if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        4, *this->color_, false, target);
+        4, *this->color_, deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3114,19 +3238,24 @@ void MaterialColor::MergeFrom(const MaterialColor& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MaterialColor)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 15u) {
-    if (from.has_color()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 15u) {
+    if (cached_has_bits & 0x00000001u) {
       mutable_color()->::KuplungApp::Vec3::MergeFrom(from.color());
     }
-    if (from.has_colorpickeropen()) {
-      set_colorpickeropen(from.colorpickeropen());
+    if (cached_has_bits & 0x00000002u) {
+      colorpickeropen_ = from.colorpickeropen_;
     }
-    if (from.has_animate()) {
-      set_animate(from.animate());
+    if (cached_has_bits & 0x00000004u) {
+      animate_ = from.animate_;
     }
-    if (from.has_strength()) {
-      set_strength(from.strength());
+    if (cached_has_bits & 0x00000008u) {
+      strength_ = from.strength_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -3168,7 +3297,7 @@ void MaterialColor::InternalSwap(MaterialColor* other) {
 
 ::google::protobuf::Metadata MaterialColor::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[5];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -3358,7 +3487,7 @@ void MeshMaterialTextureImage::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* MeshMaterialTextureImage::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[6].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const MeshMaterialTextureImage& MeshMaterialTextureImage::default_instance() {
@@ -3407,7 +3536,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string Filename = 1;
       case 1: {
-        if (tag == 10u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_filename()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -3422,7 +3552,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required string Image = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_image()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -3437,7 +3568,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required int32 Width = 3;
       case 3: {
-        if (tag == 24u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u)) {
           set_has_width();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -3450,7 +3582,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required int32 Height = 4;
       case 4: {
-        if (tag == 32u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u)) {
           set_has_height();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -3463,7 +3596,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required bool UseTexture = 5;
       case 5: {
-        if (tag == 40u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u)) {
           set_has_usetexture();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -3476,7 +3610,8 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // repeated string Commands = 6;
       case 6: {
-        if (tag == 50u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->add_commands()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -3515,8 +3650,12 @@ failure:
 void MeshMaterialTextureImage::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MeshMaterialTextureImage)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required string Filename = 1;
-  if (has_filename()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), this->filename().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3526,7 +3665,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   }
 
   // required string Image = 2;
-  if (has_image()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->image().data(), this->image().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3536,22 +3675,22 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   }
 
   // required int32 Width = 3;
-  if (has_width()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->width(), output);
   }
 
   // required int32 Height = 4;
-  if (has_height()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->height(), output);
   }
 
   // required bool UseTexture = 5;
-  if (has_usetexture()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->usetexture(), output);
   }
 
   // repeated string Commands = 6;
-  for (int i = 0; i < this->commands_size(); i++) {
+  for (int i = 0, n = this->commands_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->commands(i).data(), this->commands(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3569,10 +3708,13 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MeshMaterialTextureImage::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshMaterialTextureImage)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required string Filename = 1;
-  if (has_filename()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), this->filename().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3583,7 +3725,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   }
 
   // required string Image = 2;
-  if (has_image()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->image().data(), this->image().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3594,22 +3736,22 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   }
 
   // required int32 Width = 3;
-  if (has_width()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->width(), target);
   }
 
   // required int32 Height = 4;
-  if (has_height()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->height(), target);
   }
 
   // required bool UseTexture = 5;
-  if (has_usetexture()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->usetexture(), target);
   }
 
   // repeated string Commands = 6;
-  for (int i = 0; i < this->commands_size(); i++) {
+  for (int i = 0, n = this->commands_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->commands(i).data(), this->commands(i).length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -3704,7 +3846,7 @@ size_t MeshMaterialTextureImage::ByteSizeLong() const {
   // repeated string Commands = 6;
   total_size += 1 *
       ::google::protobuf::internal::FromIntSize(this->commands_size());
-  for (int i = 0; i < this->commands_size(); i++) {
+  for (int i = 0, n = this->commands_size(); i < n; i++) {
     total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
       this->commands(i));
   }
@@ -3735,25 +3877,30 @@ void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshMaterialTextureImage)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
   commands_.MergeFrom(from.commands_);
-  if (from._has_bits_[0 / 32] & 31u) {
-    if (from.has_filename()) {
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 31u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_filename();
       filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
     }
-    if (from.has_image()) {
+    if (cached_has_bits & 0x00000002u) {
       set_has_image();
       image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
     }
-    if (from.has_width()) {
-      set_width(from.width());
+    if (cached_has_bits & 0x00000004u) {
+      width_ = from.width_;
     }
-    if (from.has_height()) {
-      set_height(from.height());
+    if (cached_has_bits & 0x00000008u) {
+      height_ = from.height_;
     }
-    if (from.has_usetexture()) {
-      set_usetexture(from.usetexture());
+    if (cached_has_bits & 0x00000010u) {
+      usetexture_ = from.usetexture_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
 }
 
@@ -3781,7 +3928,7 @@ void MeshMaterialTextureImage::Swap(MeshMaterialTextureImage* other) {
   InternalSwap(other);
 }
 void MeshMaterialTextureImage::InternalSwap(MeshMaterialTextureImage* other) {
-  commands_.UnsafeArenaSwap(&other->commands_);
+  commands_.InternalSwap(&other->commands_);
   filename_.Swap(&other->filename_);
   image_.Swap(&other->image_);
   std::swap(width_, other->width_);
@@ -3794,7 +3941,7 @@ void MeshMaterialTextureImage::InternalSwap(MeshMaterialTextureImage* other) {
 
 ::google::protobuf::Metadata MeshMaterialTextureImage::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[6];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -3827,11 +3974,12 @@ void MeshMaterialTextureImage::set_filename(const ::std::string& value) {
 void MeshMaterialTextureImage::set_filename(::std::string&& value) {
   set_has_filename();
   filename_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.MeshMaterialTextureImage.Filename)
 }
 #endif
 void MeshMaterialTextureImage::set_filename(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_filename();
   filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Filename)
@@ -3889,11 +4037,12 @@ void MeshMaterialTextureImage::set_image(const ::std::string& value) {
 void MeshMaterialTextureImage::set_image(::std::string&& value) {
   set_has_image();
   image_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.MeshMaterialTextureImage.Image)
 }
 #endif
 void MeshMaterialTextureImage::set_image(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_image();
   image_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Image)
@@ -4015,7 +4164,14 @@ void MeshMaterialTextureImage::set_commands(int index, const ::std::string& valu
   // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Commands)
   commands_.Mutable(index)->assign(value);
 }
+#if LANG_CXX11
+void MeshMaterialTextureImage::set_commands(int index, ::std::string&& value) {
+  // @@protoc_insertion_point(field_set:KuplungApp.MeshMaterialTextureImage.Commands)
+  commands_.Mutable(index)->assign(std::move(value));
+}
+#endif
 void MeshMaterialTextureImage::set_commands(int index, const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   commands_.Mutable(index)->assign(value);
   // @@protoc_insertion_point(field_set_char:KuplungApp.MeshMaterialTextureImage.Commands)
 }
@@ -4032,7 +4188,14 @@ void MeshMaterialTextureImage::add_commands(const ::std::string& value) {
   commands_.Add()->assign(value);
   // @@protoc_insertion_point(field_add:KuplungApp.MeshMaterialTextureImage.Commands)
 }
+#if LANG_CXX11
+void MeshMaterialTextureImage::add_commands(::std::string&& value) {
+  commands_.Add(std::move(value));
+  // @@protoc_insertion_point(field_add:KuplungApp.MeshMaterialTextureImage.Commands)
+}
+#endif
 void MeshMaterialTextureImage::add_commands(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   commands_.Add()->assign(value);
   // @@protoc_insertion_point(field_add_char:KuplungApp.MeshMaterialTextureImage.Commands)
 }
@@ -4210,7 +4373,7 @@ void MeshModelMaterial::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* MeshModelMaterial::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[7].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const MeshModelMaterial& MeshModelMaterial::default_instance() {
@@ -4301,7 +4464,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 MaterialID = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_materialid();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -4314,7 +4478,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required string MaterialTitle = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -4329,7 +4494,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 AmbientColor = 3;
       case 3: {
-        if (tag == 26u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_ambientcolor()));
         } else {
@@ -4340,7 +4506,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 DiffuseColor = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_diffusecolor()));
         } else {
@@ -4351,7 +4518,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SpecularColor = 5;
       case 5: {
-        if (tag == 42u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(42u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_specularcolor()));
         } else {
@@ -4362,7 +4530,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 EmissionColor = 6;
       case 6: {
-        if (tag == 50u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(50u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_emissioncolor()));
         } else {
@@ -4373,7 +4542,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float SpecularExp = 7;
       case 7: {
-        if (tag == 61u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(61u)) {
           set_has_specularexp();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -4386,7 +4556,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float Transparency = 8;
       case 8: {
-        if (tag == 69u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(69u)) {
           set_has_transparency();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -4399,7 +4570,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required fixed32 IlluminationMode = 9;
       case 9: {
-        if (tag == 77u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(77u)) {
           set_has_illuminationmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
@@ -4412,7 +4584,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float OpticalDensity = 10;
       case 10: {
-        if (tag == 85u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(85u)) {
           set_has_opticaldensity();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -4425,7 +4598,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
       case 11: {
-        if (tag == 90u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_textureambient()));
         } else {
@@ -4436,7 +4610,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
       case 12: {
-        if (tag == 98u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(98u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturediffuse()));
         } else {
@@ -4447,7 +4622,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
       case 13: {
-        if (tag == 106u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(106u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturespecular()));
         } else {
@@ -4458,7 +4634,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
       case 14: {
-        if (tag == 114u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(114u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturespecularexp()));
         } else {
@@ -4469,7 +4646,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
       case 15: {
-        if (tag == 122u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(122u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturedissolve()));
         } else {
@@ -4480,7 +4658,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
       case 16: {
-        if (tag == 130u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(130u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturebump()));
         } else {
@@ -4491,7 +4670,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
       case 17: {
-        if (tag == 138u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(138u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_texturedisplacement()));
         } else {
@@ -4525,13 +4705,17 @@ failure:
 void MeshModelMaterial::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MeshModelMaterial)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required int32 MaterialID = 1;
-  if (has_materialid()) {
+  if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->materialid(), output);
   }
 
   // required string MaterialTitle = 2;
-  if (has_materialtitle()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), this->materialtitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -4541,87 +4725,87 @@ void MeshModelMaterial::SerializeWithCachedSizes(
   }
 
   // required .KuplungApp.Vec3 AmbientColor = 3;
-  if (has_ambientcolor()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       3, *this->ambientcolor_, output);
   }
 
   // required .KuplungApp.Vec3 DiffuseColor = 4;
-  if (has_diffusecolor()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       4, *this->diffusecolor_, output);
   }
 
   // required .KuplungApp.Vec3 SpecularColor = 5;
-  if (has_specularcolor()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       5, *this->specularcolor_, output);
   }
 
   // required .KuplungApp.Vec3 EmissionColor = 6;
-  if (has_emissioncolor()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       6, *this->emissioncolor_, output);
   }
 
   // required float SpecularExp = 7;
-  if (has_specularexp()) {
+  if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->specularexp(), output);
   }
 
   // required float Transparency = 8;
-  if (has_transparency()) {
+  if (cached_has_bits & 0x00004000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->transparency(), output);
   }
 
   // required fixed32 IlluminationMode = 9;
-  if (has_illuminationmode()) {
+  if (cached_has_bits & 0x00008000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(9, this->illuminationmode(), output);
   }
 
   // required float OpticalDensity = 10;
-  if (has_opticaldensity()) {
+  if (cached_has_bits & 0x00010000u) {
     ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->opticaldensity(), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-  if (has_textureambient()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       11, *this->textureambient_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-  if (has_texturediffuse()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       12, *this->texturediffuse_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-  if (has_texturespecular()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       13, *this->texturespecular_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-  if (has_texturespecularexp()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       14, *this->texturespecularexp_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-  if (has_texturedissolve()) {
+  if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       15, *this->texturedissolve_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-  if (has_texturebump()) {
+  if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       16, *this->texturebump_, output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-  if (has_texturedisplacement()) {
+  if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       17, *this->texturedisplacement_, output);
   }
@@ -4635,15 +4819,18 @@ void MeshModelMaterial::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* MeshModelMaterial::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModelMaterial)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required int32 MaterialID = 1;
-  if (has_materialid()) {
+  if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->materialid(), target);
   }
 
   // required string MaterialTitle = 2;
-  if (has_materialtitle()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), this->materialtitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -4654,100 +4841,100 @@ void MeshModelMaterial::SerializeWithCachedSizes(
   }
 
   // required .KuplungApp.Vec3 AmbientColor = 3;
-  if (has_ambientcolor()) {
+  if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        3, *this->ambientcolor_, false, target);
+        3, *this->ambientcolor_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 DiffuseColor = 4;
-  if (has_diffusecolor()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        4, *this->diffusecolor_, false, target);
+        4, *this->diffusecolor_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SpecularColor = 5;
-  if (has_specularcolor()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        5, *this->specularcolor_, false, target);
+        5, *this->specularcolor_, deterministic, target);
   }
 
   // required .KuplungApp.Vec3 EmissionColor = 6;
-  if (has_emissioncolor()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        6, *this->emissioncolor_, false, target);
+        6, *this->emissioncolor_, deterministic, target);
   }
 
   // required float SpecularExp = 7;
-  if (has_specularexp()) {
+  if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->specularexp(), target);
   }
 
   // required float Transparency = 8;
-  if (has_transparency()) {
+  if (cached_has_bits & 0x00004000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->transparency(), target);
   }
 
   // required fixed32 IlluminationMode = 9;
-  if (has_illuminationmode()) {
+  if (cached_has_bits & 0x00008000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(9, this->illuminationmode(), target);
   }
 
   // required float OpticalDensity = 10;
-  if (has_opticaldensity()) {
+  if (cached_has_bits & 0x00010000u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->opticaldensity(), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-  if (has_textureambient()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, *this->textureambient_, false, target);
+        11, *this->textureambient_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-  if (has_texturediffuse()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, *this->texturediffuse_, false, target);
+        12, *this->texturediffuse_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-  if (has_texturespecular()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        13, *this->texturespecular_, false, target);
+        13, *this->texturespecular_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-  if (has_texturespecularexp()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        14, *this->texturespecularexp_, false, target);
+        14, *this->texturespecularexp_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-  if (has_texturedissolve()) {
+  if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        15, *this->texturedissolve_, false, target);
+        15, *this->texturedissolve_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-  if (has_texturebump()) {
+  if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        16, *this->texturebump_, false, target);
+        16, *this->texturebump_, deterministic, target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-  if (has_texturedisplacement()) {
+  if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        17, *this->texturedisplacement_, false, target);
+        17, *this->texturedisplacement_, deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -4991,60 +5178,65 @@ void MeshModelMaterial::MergeFrom(const MeshModelMaterial& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModelMaterial)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_materialtitle()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_materialtitle();
       materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
     }
-    if (from.has_ambientcolor()) {
+    if (cached_has_bits & 0x00000002u) {
       mutable_ambientcolor()->::KuplungApp::Vec3::MergeFrom(from.ambientcolor());
     }
-    if (from.has_diffusecolor()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_diffusecolor()->::KuplungApp::Vec3::MergeFrom(from.diffusecolor());
     }
-    if (from.has_specularcolor()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_specularcolor()->::KuplungApp::Vec3::MergeFrom(from.specularcolor());
     }
-    if (from.has_emissioncolor()) {
+    if (cached_has_bits & 0x00000010u) {
       mutable_emissioncolor()->::KuplungApp::Vec3::MergeFrom(from.emissioncolor());
     }
-    if (from.has_textureambient()) {
+    if (cached_has_bits & 0x00000020u) {
       mutable_textureambient()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.textureambient());
     }
-    if (from.has_texturediffuse()) {
+    if (cached_has_bits & 0x00000040u) {
       mutable_texturediffuse()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturediffuse());
     }
-    if (from.has_texturespecular()) {
+    if (cached_has_bits & 0x00000080u) {
       mutable_texturespecular()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturespecular());
     }
   }
-  if (from._has_bits_[8 / 32] & 65280u) {
-    if (from.has_texturespecularexp()) {
+  if (cached_has_bits & 65280u) {
+    if (cached_has_bits & 0x00000100u) {
       mutable_texturespecularexp()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturespecularexp());
     }
-    if (from.has_texturedissolve()) {
+    if (cached_has_bits & 0x00000200u) {
       mutable_texturedissolve()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturedissolve());
     }
-    if (from.has_texturebump()) {
+    if (cached_has_bits & 0x00000400u) {
       mutable_texturebump()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturebump());
     }
-    if (from.has_texturedisplacement()) {
+    if (cached_has_bits & 0x00000800u) {
       mutable_texturedisplacement()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from.texturedisplacement());
     }
-    if (from.has_materialid()) {
-      set_materialid(from.materialid());
+    if (cached_has_bits & 0x00001000u) {
+      materialid_ = from.materialid_;
     }
-    if (from.has_specularexp()) {
-      set_specularexp(from.specularexp());
+    if (cached_has_bits & 0x00002000u) {
+      specularexp_ = from.specularexp_;
     }
-    if (from.has_transparency()) {
-      set_transparency(from.transparency());
+    if (cached_has_bits & 0x00004000u) {
+      transparency_ = from.transparency_;
     }
-    if (from.has_illuminationmode()) {
-      set_illuminationmode(from.illuminationmode());
+    if (cached_has_bits & 0x00008000u) {
+      illuminationmode_ = from.illuminationmode_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
-  if (from.has_opticaldensity()) {
+  if (cached_has_bits & 0x00010000u) {
     set_opticaldensity(from.opticaldensity());
   }
 }
@@ -5130,7 +5322,7 @@ void MeshModelMaterial::InternalSwap(MeshModelMaterial* other) {
 
 ::google::protobuf::Metadata MeshModelMaterial::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[7];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -5187,11 +5379,12 @@ void MeshModelMaterial::set_materialtitle(const ::std::string& value) {
 void MeshModelMaterial::set_materialtitle(::std::string&& value) {
   set_has_materialtitle();
   materialtitle_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.MeshModelMaterial.MaterialTitle)
 }
 #endif
 void MeshModelMaterial::set_materialtitle(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_materialtitle();
   materialtitle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.MeshModelMaterial.MaterialTitle)
@@ -5906,7 +6099,7 @@ void Mesh::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Mesh::descriptor() {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[8].descriptor;
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
 }
 
 const Mesh& Mesh::default_instance() {
@@ -5967,7 +6160,8 @@ bool Mesh::MergePartialFromCodedStream(
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 ID = 1;
       case 1: {
-        if (tag == 8u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u)) {
           set_has_id();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5980,7 +6174,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required .KuplungApp.FBEntity File = 2;
       case 2: {
-        if (tag == 18u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_file()));
         } else {
@@ -5991,7 +6186,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required string ModelTitle = 3;
       case 3: {
-        if (tag == 26u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_modeltitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -6006,7 +6202,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required string MaterialTitle = 4;
       case 4: {
-        if (tag == 34u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -6021,7 +6218,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countVertices = 5;
       case 5: {
-        if (tag == 40u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(40u)) {
           set_has_countvertices();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -6034,7 +6232,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countTextureCoordinates = 6;
       case 6: {
-        if (tag == 48u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(48u)) {
           set_has_counttexturecoordinates();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -6047,7 +6246,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countNormals = 7;
       case 7: {
-        if (tag == 56u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(56u)) {
           set_has_countnormals();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -6060,7 +6260,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countIndices = 8;
       case 8: {
-        if (tag == 64u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(64u)) {
           set_has_countindices();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -6073,7 +6274,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
       case 9: {
-        if (tag == 74u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(74u)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_modelmaterial()));
         } else {
@@ -6084,50 +6286,49 @@ bool Mesh::MergePartialFromCodedStream(
 
       // repeated .KuplungApp.Vec3 vertices = 10;
       case 10: {
-        if (tag == 82u) {
-          DO_(input->IncrementRecursionDepth());
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(82u)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_vertices()));
         } else {
           goto handle_unusual;
         }
-        input->UnsafeDecrementRecursionDepth();
         break;
       }
 
       // repeated .KuplungApp.Vec2 texture_coordinates = 11;
       case 11: {
-        if (tag == 90u) {
-          DO_(input->IncrementRecursionDepth());
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(90u)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_texture_coordinates()));
         } else {
           goto handle_unusual;
         }
-        input->UnsafeDecrementRecursionDepth();
         break;
       }
 
       // repeated .KuplungApp.Vec3 normals = 12;
       case 12: {
-        if (tag == 98u) {
-          DO_(input->IncrementRecursionDepth());
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(98u)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_normals()));
         } else {
           goto handle_unusual;
         }
-        input->UnsafeDecrementRecursionDepth();
         break;
       }
 
       // repeated fixed32 indices = 13;
       case 13: {
-        if (tag == 109u) {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(109u)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
                  1, 109u, input, this->mutable_indices())));
-        } else if (tag == 106u) {
+        } else if (static_cast< ::google::protobuf::uint8>(tag) ==
+                   static_cast< ::google::protobuf::uint8>(106u)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
                    ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
                  input, this->mutable_indices())));
@@ -6162,19 +6363,23 @@ failure:
 void Mesh::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Mesh)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required int32 ID = 1;
-  if (has_id()) {
+  if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
   // required .KuplungApp.FBEntity File = 2;
-  if (has_file()) {
+  if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       2, *this->file_, output);
   }
 
   // required string ModelTitle = 3;
-  if (has_modeltitle()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modeltitle().data(), this->modeltitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -6184,7 +6389,7 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // required string MaterialTitle = 4;
-  if (has_materialtitle()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), this->materialtitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -6194,27 +6399,27 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // required int32 countVertices = 5;
-  if (has_countvertices()) {
+  if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->countvertices(), output);
   }
 
   // required int32 countTextureCoordinates = 6;
-  if (has_counttexturecoordinates()) {
+  if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->counttexturecoordinates(), output);
   }
 
   // required int32 countNormals = 7;
-  if (has_countnormals()) {
+  if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->countnormals(), output);
   }
 
   // required int32 countIndices = 8;
-  if (has_countindices()) {
+  if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->countindices(), output);
   }
 
   // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-  if (has_modelmaterial()) {
+  if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
       9, *this->modelmaterial_, output);
   }
@@ -6238,7 +6443,7 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // repeated fixed32 indices = 13;
-  for (int i = 0; i < this->indices_size(); i++) {
+  for (int i = 0, n = this->indices_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteFixed32(
       13, this->indices(i), output);
   }
@@ -6252,22 +6457,25 @@ void Mesh::SerializeWithCachedSizes(
 
 ::google::protobuf::uint8* Mesh::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Mesh)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
   // required int32 ID = 1;
-  if (has_id()) {
+  if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
   // required .KuplungApp.FBEntity File = 2;
-  if (has_file()) {
+  if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        2, *this->file_, false, target);
+        2, *this->file_, deterministic, target);
   }
 
   // required string ModelTitle = 3;
-  if (has_modeltitle()) {
+  if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modeltitle().data(), this->modeltitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -6278,7 +6486,7 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // required string MaterialTitle = 4;
-  if (has_materialtitle()) {
+  if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), this->materialtitle().length(),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
@@ -6289,58 +6497,56 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // required int32 countVertices = 5;
-  if (has_countvertices()) {
+  if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->countvertices(), target);
   }
 
   // required int32 countTextureCoordinates = 6;
-  if (has_counttexturecoordinates()) {
+  if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->counttexturecoordinates(), target);
   }
 
   // required int32 countNormals = 7;
-  if (has_countnormals()) {
+  if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->countnormals(), target);
   }
 
   // required int32 countIndices = 8;
-  if (has_countindices()) {
+  if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->countindices(), target);
   }
 
   // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-  if (has_modelmaterial()) {
+  if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        9, *this->modelmaterial_, false, target);
+        9, *this->modelmaterial_, deterministic, target);
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
   for (unsigned int i = 0, n = this->vertices_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, this->vertices(i), false, target);
+        10, this->vertices(i), deterministic, target);
   }
 
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
   for (unsigned int i = 0, n = this->texture_coordinates_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, this->texture_coordinates(i), false, target);
+        11, this->texture_coordinates(i), deterministic, target);
   }
 
   // repeated .KuplungApp.Vec3 normals = 12;
   for (unsigned int i = 0, n = this->normals_size(); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, this->normals(i), false, target);
+        12, this->normals(i), deterministic, target);
   }
 
   // repeated fixed32 indices = 13;
-  for (int i = 0; i < this->indices_size(); i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      WriteFixed32ToArray(13, this->indices(i), target);
-  }
+  target = ::google::protobuf::internal::WireFormatLite::
+    WriteFixed32ToArray(13, this->indices_, target);
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
@@ -6545,39 +6751,44 @@ void Mesh::MergeFrom(const Mesh& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Mesh)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
   vertices_.MergeFrom(from.vertices_);
   texture_coordinates_.MergeFrom(from.texture_coordinates_);
   normals_.MergeFrom(from.normals_);
   indices_.MergeFrom(from.indices_);
-  if (from._has_bits_[0 / 32] & 255u) {
-    if (from.has_modeltitle()) {
+  cached_has_bits = from._has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       set_has_modeltitle();
       modeltitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
     }
-    if (from.has_materialtitle()) {
+    if (cached_has_bits & 0x00000002u) {
       set_has_materialtitle();
       materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
     }
-    if (from.has_file()) {
+    if (cached_has_bits & 0x00000004u) {
       mutable_file()->::KuplungApp::FBEntity::MergeFrom(from.file());
     }
-    if (from.has_modelmaterial()) {
+    if (cached_has_bits & 0x00000008u) {
       mutable_modelmaterial()->::KuplungApp::MeshModelMaterial::MergeFrom(from.modelmaterial());
     }
-    if (from.has_id()) {
-      set_id(from.id());
+    if (cached_has_bits & 0x00000010u) {
+      id_ = from.id_;
     }
-    if (from.has_countvertices()) {
-      set_countvertices(from.countvertices());
+    if (cached_has_bits & 0x00000020u) {
+      countvertices_ = from.countvertices_;
     }
-    if (from.has_counttexturecoordinates()) {
-      set_counttexturecoordinates(from.counttexturecoordinates());
+    if (cached_has_bits & 0x00000040u) {
+      counttexturecoordinates_ = from.counttexturecoordinates_;
     }
-    if (from.has_countnormals()) {
-      set_countnormals(from.countnormals());
+    if (cached_has_bits & 0x00000080u) {
+      countnormals_ = from.countnormals_;
     }
+    _has_bits_[0] |= cached_has_bits;
   }
-  if (from.has_countindices()) {
+  if (cached_has_bits & 0x00000100u) {
     set_countindices(from.countindices());
   }
 }
@@ -6615,10 +6826,10 @@ void Mesh::Swap(Mesh* other) {
   InternalSwap(other);
 }
 void Mesh::InternalSwap(Mesh* other) {
-  vertices_.UnsafeArenaSwap(&other->vertices_);
-  texture_coordinates_.UnsafeArenaSwap(&other->texture_coordinates_);
-  normals_.UnsafeArenaSwap(&other->normals_);
-  indices_.UnsafeArenaSwap(&other->indices_);
+  vertices_.InternalSwap(&other->vertices_);
+  texture_coordinates_.InternalSwap(&other->texture_coordinates_);
+  normals_.InternalSwap(&other->normals_);
+  indices_.InternalSwap(&other->indices_);
   modeltitle_.Swap(&other->modeltitle_);
   materialtitle_.Swap(&other->materialtitle_);
   std::swap(file_, other->file_);
@@ -6635,7 +6846,7 @@ void Mesh::InternalSwap(Mesh* other) {
 
 ::google::protobuf::Metadata Mesh::GetMetadata() const {
   protobuf_KuplungDefinitions_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[8];
+  return protobuf_KuplungDefinitions_2eproto::file_level_metadata[kIndexInFileMessages];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -6737,11 +6948,12 @@ void Mesh::set_modeltitle(const ::std::string& value) {
 void Mesh::set_modeltitle(::std::string&& value) {
   set_has_modeltitle();
   modeltitle_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.Mesh.ModelTitle)
 }
 #endif
 void Mesh::set_modeltitle(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_modeltitle();
   modeltitle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.Mesh.ModelTitle)
@@ -6799,11 +7011,12 @@ void Mesh::set_materialtitle(const ::std::string& value) {
 void Mesh::set_materialtitle(::std::string&& value) {
   set_has_materialtitle();
   materialtitle_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:KuplungApp.Mesh.MaterialTitle)
 }
 #endif
 void Mesh::set_materialtitle(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
   set_has_materialtitle();
   materialtitle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
   // @@protoc_insertion_point(field_set_char:KuplungApp.Mesh.MaterialTitle)

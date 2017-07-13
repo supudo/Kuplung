@@ -113,6 +113,12 @@ void ModelFaceBase::init(MeshModel const& model, std::string const& assetsFolder
     this->Effect_ToneMapping_ACESFilmRec2020 = false;
     this->Effect_HDR_Tonemapping = false;
 
+    // PBR
+    this->Setting_Rendering_PBR = true;
+    this->Setting_Rendering_PBR_Metallic = 0.1;
+    this->Setting_Rendering_PBR_Roughness = 0.1;
+    this->Setting_Rendering_PBR_AO = 0.1;
+
     // gizmo controls
     this->Setting_Gizmo_Translate = false;
     this->Setting_Gizmo_Rotate = false;
@@ -184,6 +190,11 @@ void ModelFaceBase::initModelProperties() {
     this->Effect_HDR_Tonemapping = false;
 
     this->Setting_ShowShadows = true;
+
+    this->Setting_Rendering_PBR = true;
+    this->Setting_Rendering_PBR_Metallic = 0.1;
+    this->Setting_Rendering_PBR_Roughness = 0.1;
+    this->Setting_Rendering_PBR_AO = 0.1;
 
     // gizmo controls
     this->Setting_Gizmo_Translate = false;

@@ -1,6 +1,6 @@
 # Kuplung
 
-C/C++/OpenGL Model Viewer (Experiments)
+C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo/Kuplung-Py).
 
 [![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung)
 

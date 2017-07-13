@@ -112,6 +112,12 @@ public:
     // shadows
     bool Setting_ShowShadows;
 
+    // PBR
+    bool Setting_Rendering_PBR;
+    float Setting_Rendering_PBR_Metallic;
+    float Setting_Rendering_PBR_Roughness;
+    float Setting_Rendering_PBR_AO;
+
 protected:
     float so_fov;
     float so_outlineThickness;

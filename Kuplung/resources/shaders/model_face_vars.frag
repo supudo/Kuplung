@@ -140,5 +140,18 @@ vec3 ACESFilmRec2020(vec3 x);
 float calculateShadowValue(vec3 fragmentPosition);
 float linearizeDepth(float depth);
 
+// PBR
+const float PI = 3.14159265359;
+uniform bool fs_renderPBR;
+uniform float fs_PBR_Metallic;
+uniform float fs_PBR_Roughness;
+uniform float fs_PBR_AO;
+vec3 calculatePBR();
+float DistributionGGX(vec3 N, vec3 H, float roughness);
+float GeometrySchlickGGX(float NdotV, float roughness);
+float GeometrySmith(vec3 N, vec3 V, vec3 L, float roughness);
+vec3 fresnelSchlick(float cosTheta, vec3 F0);
+vec3 getNormalFromMap();
+
 // out color
 out vec4 fragColor;

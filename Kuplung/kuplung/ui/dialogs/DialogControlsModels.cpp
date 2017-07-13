@@ -590,6 +590,17 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 break;
             }
             case 6: {
+                if (ImGui::CollapsingHeader("PBR")) {
+                    ImGui::Indent();
+                    ImGui::BeginGroup();
+                    ImGui::Checkbox("Use PBR", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR);
+                    this->helperUI->addControlsSlider("Metallic", 13, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Metallic, true, isFrame);
+                    this->helperUI->addControlsSlider("Rougness", 14, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Roughness, true, isFrame);
+                    this->helperUI->addControlsSlider("AO", 15, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_AO, true, isFrame);
+                    ImGui::EndGroup();
+                    ImGui::Unindent();
+                }
+
                 if (ImGui::CollapsingHeader("Gaussian Blur")) {
                     ImGui::Indent();
                     ImGui::BeginGroup();

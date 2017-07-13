@@ -114,10 +114,11 @@ IF(CUDA_FOUND)
     # Not sure at all if this is correct, actually i'm sure it's incorrect but it works.
     STRING(LENGTH ${CUDA_VERSION_STRING} CUDA_VERSION_LENGTH)
     STRING(SUBSTRING "${CMAKE_CXX_COMPILER_VERSION}" 0 ${CUDA_VERSION_LENGTH} CXX_VERSION)
-    SET(CUDA_OK FALSE)
+    SET (CUDA_OK FALSE)
     IF (CMAKE_CXX_COMPILER_ID STREQUAL "AppleClang")
         IF (NOT "${CXX_VERSION}" STREQUAL "${CUDA_VERSION_STRING}")
-            MESSAGE("WARNING: Cuda doesn't support this Clang version (Cuda - ${CUDA_VERSION_STRING}, Clang - ${CMAKE_CXX_COMPILER_VERSION})! Disabling Cuda support...")
+            MESSAGE("-- WARNING: Cuda doesn't support this Clang version (Cuda - ${CUDA_VERSION_STRING}, Clang - ${CMAKE_CXX_COMPILER_VERSION})!")
+            MESSAGE("-- WARNING: Disabling Cuda support...")
         ELSE()
             MESSAGE("WARNING: Cuda is OK with this Clang version!")
             SET(CUDA_OK TRUE)
@@ -392,6 +393,7 @@ SET(Kuplung_Shapes
     resources/shapes/brick_wall_diffuse.png
     resources/shapes/brick_wall_displacement.png
     resources/shapes/brick_wall_normal.png
+    resources/shapes/brick_wall_occlusion.png
     resources/shapes/brick_wall_spec.png
     resources/shapes/cone.mtl
     resources/shapes/cone.obj

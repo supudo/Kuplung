@@ -1,4 +1,4 @@
-# Blender MTL File: 'None'
+# Blender MTL File: 'Brick Wall'
 # Material Count: 1
 
 newmtl MaterialBrickWall
@@ -13,4 +13,5 @@ illum 2
 map_Kd brick_wall_diffuse.png
 disp brick_wall_displacement.png
 map_Bump brick_wall_normal.png
+map_Ka brick_wall_occlusion.png
 map_Ks brick_wall_spec.png

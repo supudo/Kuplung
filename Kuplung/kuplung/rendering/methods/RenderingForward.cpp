@@ -115,7 +115,8 @@ bool RenderingForward::initShaderProgram() {
         "lights",
         "mapping",
         "shadow_mapping",
-        "misc"
+        "misc",
+        "pbr"
     };
     for (size_t i=0; i<fragFiles.size(); i++) {
         shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag";
@@ -298,6 +299,12 @@ bool RenderingForward::initShaderProgram() {
         // effects - tone mapping
         this->glEffect_ToneMapping_ACESFilmRec2020 = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_ACESFilmRec2020");
         this->glEffect_HDR_Tonemapping = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_HDRTonemapping");
+
+        // PBR
+        this->glPBR_UsePBR = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_renderPBR");
+        this->glPBR_Metallic = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_Metallic");
+        this->glPBR_Rougness = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_Roughness");
+        this->glPBR_AO = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_AO");
     }
 
     return success;
@@ -631,6 +638,12 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         // effects - tone mapping
         glUniform1i(this->glEffect_ToneMapping_ACESFilmRec2020, mfd->Effect_ToneMapping_ACESFilmRec2020);
         glUniform1i(this->glEffect_HDR_Tonemapping, mfd->Effect_HDR_Tonemapping);
+
+        // PBR
+        glUniform1i(this->glPBR_UsePBR, mfd->Setting_Rendering_PBR);
+        glUniform1f(this->glPBR_Metallic, mfd->Setting_Rendering_PBR_Metallic);
+        glUniform1f(this->glPBR_Rougness, mfd->Setting_Rendering_PBR_Roughness);
+        glUniform1f(this->glPBR_AO, mfd->Setting_Rendering_PBR_AO);
 
         glUniform1f(this->glVS_IsBorder, 0.0);
 

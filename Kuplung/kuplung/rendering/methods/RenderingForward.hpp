@@ -73,6 +73,9 @@ private:
     // view skin
     ModelFace_LightSource_Directional *solidLight;
     GLint glFS_solidSkin_materialColor;
+
+    // PBR
+    GLuint glPBR_UsePBR, glPBR_Metallic, glPBR_Rougness, glPBR_AO;
 };
 
 #endif /* RenderingForward_hpp */

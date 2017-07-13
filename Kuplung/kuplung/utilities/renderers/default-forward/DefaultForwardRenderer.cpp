@@ -104,7 +104,8 @@ bool DefaultForwardRenderer::initShaderProgram() {
         "lights",
         "mapping",
         "shadow_mapping",
-        "misc"
+        "misc",
+        "pbr"
     };
     for (size_t i=0; i<fragFiles.size(); i++) {
         shaderPath = Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag";

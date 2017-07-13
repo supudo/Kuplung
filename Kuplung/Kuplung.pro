@@ -27,6 +27,7 @@ CONFIG -= console
 CONFIG -= qt
 
 CONFIG(debug, debug|release) {
+    DEFINES += Def_Kuplung_DEBUG_BUILD
     TARGET = kuplung
     $$DO_LLVM_IR {
         OBJECTS_DIR = debug-ll
@@ -40,6 +41,7 @@ CONFIG(debug, debug|release) {
 }
 
 CONFIG(release, debug|release) {
+    DEFINES += Def_Kuplung_RELEASE_BUILD
     TARGET = kuplung
     $$DO_LLVM_IR {
         OBJECTS_DIR = release-ll
@@ -124,11 +126,11 @@ mac {
 
     LIBS += -framework cocoa -framework OpenGL
 
-    LIBS += -L/usr/local/Cellar/boost/1.63.0/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.63.0/include
+    LIBS += -L/usr/local/Cellar/boost/1.64.0_1/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.64.0_1/include
 
-    LIBS += -L/usr/local/Cellar/glm/0.9.8.3/lib
-    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.3/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.8.4/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.4/include
 
     LIBS += -L/usr/local/Cellar/sdl2/2.0.5/lib -lSDL2
     INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.5/include
@@ -139,8 +141,8 @@ mac {
     LIBS += -L/usr/local/Cellar/assimp/3.3.1/lib -lAssimp
     INCLUDEPATH += /usr/local/Cellar/assimp/3.3.1/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.2.0/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.2.0/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.3.0/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.3.0/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
@@ -525,6 +527,7 @@ DISTFILES += \
     resources/shapes/brick_wall_displacement.png \
     resources/shapes/brick_wall_normal.png \
     resources/shapes/brick_wall_spec.png \
+    resources/shapes/brick_wall_occlusion.png \
 # Shaders
     resources/shaders/axis.vert \
     resources/shaders/axis.frag \
@@ -550,14 +553,15 @@ DISTFILES += \
     resources/shaders/rendering_simple.geom \
     resources/shaders/rendering_simple.frag \
     resources/shaders/model_face.vert \
-    resources/shaders/model_face_effects.vert \
-    resources/shaders/model_face_lights.vert \
-    resources/shaders/model_face_mapping.vert \
-    resources/shaders/model_face_misc.vert \
-    resources/shaders/model_face_shadow_mapping.vert \
-    resources/shaders/model_face_vars.vert \
-    resources/shaders/model_face.geom \
     resources/shaders/model_face.frag \
+    resources/shaders/model_face_effects.frag \
+    resources/shaders/model_face_lights.frag \
+    resources/shaders/model_face_mapping.frag \
+    resources/shaders/model_face_misc.frag \
+    resources/shaders/model_face_shadow_mapping.frag \
+    resources/shaders/model_face_pbr.frag \
+    resources/shaders/model_face_vars.frag \
+    resources/shaders/model_face.geom \
     resources/shaders/model_face.tcs \
     resources/shaders/model_face.tes \
     resources/shaders/shadow_mapping_depth.vert \
