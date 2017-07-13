@@ -13,6 +13,11 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/objects/ObjectDefinitions.h"
+#ifdef WIN32
+//#include <windows.h>
+//#include <windef.h>
+typedef unsigned int uint;
+#endif
 
 class RayLine {
 public:

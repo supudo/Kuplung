@@ -21,10 +21,17 @@ DO_CUDA = false
 
 TEMPLATE = app
 
-CONFIG += c++14
-CONFIG += app_bundle
-CONFIG -= console
-CONFIG -= qt
+mac {
+    CONFIG += c++14
+    CONFIG += app_bundle
+    CONFIG -= console
+    CONFIG -= qt
+}
+win32|win64 {
+    CONFIG += console c++14
+    CONFIG -= app_bundle
+    CONFIG -= qt
+}
 
 CONFIG(debug, debug|release) {
     DEFINES += Def_Kuplung_DEBUG_BUILD
@@ -158,28 +165,79 @@ mac {
 }
 
 win32|win64 {
-#    RC_FILE += resources/Kuplung.ico
-#    RC_ICONS += resources/Kuplung.ico
+    QMAKE_CXXFLAGS_WARN_ON += -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309
 
-#    LIBS += -L"C:\Boost\lib-mingw" -llibboost_system-vc140-mt-1_60 -llibboost_filesystem-vc140-mt-gd-1_60
-#    INCLUDEPATH += "C:\Boost\include\boost-1_60"
+    OBJECTS_DIR = "./objects/"
 
-#    LIBS += -L"D:\_Work\_Misc" -llibEGLd
-#    LIBS += -L"D:\_Work\_Misc" -llibGLESv2d
+    RC_FILE += resources/kuplung.rc
 
-#    INCLUDEPATH += "D:\_Work\glm"
+    LIBS += -L"D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1" -lboost_system-vc141-mt-gd-1_64 -lboost_filesystem-vc141-mt-gd-1_64
+    INCLUDEPATH += "D:/Libs/boost.1.64.prebuilt"
 
-#    LIBS += -L"D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\lib" -lSDL2
-#    INCLUDEPATH += "D:\_Work\SDL2\SDL2-2.0.4\i686-w64-mingw32\include"
+    INCLUDEPATH += "D:\Libs\glm-0.9.8.4"
 
-#    LIBS += -L"D:\_Work\GLFW\lib-mingw" -lGLFW3
-#    INCLUDEPATH += "D:\_Work\GLFW\include"
+    LIBS += -lopengl32
 
-#    LIBS += -L"D:\_Work\GLEW\lib\Release MX\Win32" -lglew32mx
-#    INCLUDEPATH += "D:\_Work\GLEW\include"
+    LIBS += -L"D:/Libs/SDL2-2.0.5/lib/x64" -lSDL2main -lSDL2
+    INCLUDEPATH += "D:\Libs\SDL2-2.0.5\include"
 
-#    LIBS += -L"D:\_Projects\Kuplung\external\libnoise\lib" -llibnoise
-#    INCLUDEPATH += "D:\_Projects\Kuplung\external\libnoise\headers"
+    LIBS += -L"D:/Libs/GLFW3/lib-vc2015" -lGLFW3
+    INCLUDEPATH += "D:/Libs/GLFW3/include"
+
+    LIBS += -L"D:/Libs/glew-2.0.0-win32/lib/Release/x64" -lGLEW32
+    INCLUDEPATH += "D:/Libs/glew-2.0.0-win32/include"
+
+    LIBS += -L"D:\Libs\assimp\lib" -lassimp-vc140-mt
+    INCLUDEPATH += "D:\Libs\assimp\include"
+
+    LIBS += -L"D:\Libs\protobuf\lib" -llibprotobufd
+    INCLUDEPATH += "D:\Libs\protobuf\include"
+
+    LIBS += -L"D:\Libs\lua-5.3.4_Win64_vc14_lib\lib" -llua53
+    INCLUDEPATH += "D:\Libs\lua-5.3.4_Win64_vc14_lib\include"
+
+    LIBS += -L"$$PWD\..\external\libnoise\windows\lib" -lnoise
+    INCLUDEPATH += "$$PWD\..\external\libnoise\windows\include"
+
+    INCLUDEPATH += "$$PWD\..\external\zlib"
+    INCLUDEPATH += "$$PWD\..\external\minizip"
+
+    SOURCES += \
+            $$PWD\..\external/zlib/zutil.c \
+            $$PWD\..\external/zlib/uncompr.c \
+            $$PWD\..\external/zlib/trees.c \
+            $$PWD\..\external/zlib/inftrees.c \
+            $$PWD\..\external/zlib/inflate.c \
+            $$PWD\..\external/zlib/inffast.c \
+            $$PWD\..\external/zlib/infback.c \
+            $$PWD\..\external/zlib/deflate.c \
+            $$PWD\..\external/zlib/crc32.c \
+            $$PWD\..\external/zlib/adler32.c \
+            $$PWD\..\external/minizip/ioapi.c \
+            $$PWD\..\external/minizip/unzip.c
+
+    HEADERS += \
+            $$PWD\..\external/zlib/zutil.h \
+            $$PWD\..\external/zlib/zlib.h \
+            $$PWD\..\external/zlib/zconf.h \
+            $$PWD\..\external/zlib/trees.h \
+            $$PWD\..\external/zlib/inftrees.h \
+            $$PWD\..\external/zlib/inflate.h \
+            $$PWD\..\external/zlib/inffixed.h \
+            $$PWD\..\external/zlib/inffast.h \
+            $$PWD\..\external/zlib/deflate.h \
+            $$PWD\..\external/zlib/crc32.h \
+            $$PWD\..\external/minizip/crypt.h \
+            $$PWD\..\external/minizip/ioapi.h \
+            $$PWD\..\external/minizip/unzip.h
+
+    PWD_WIN = $${PWD}/resources
+    DESTDIR_WIN = "./resources"
+    PWD_WIN ~= s,/,\\,g
+    DESTDIR_WIN ~= s,/,\\,g
+    copyfiles.commands = $$quote(cmd /c xcopy /S /I /Y $${PWD_WIN} $${DESTDIR_WIN})
+    QMAKE_EXTRA_TARGETS += copyfiles
+    POST_TARGETDEPS += copyfiles
 }
 
 # BEGIN Cuda
@@ -672,4 +730,5 @@ DISTFILES += \
     resources/shadertoy/tex18.jpg \
     resources/shadertoy/tex19.png \
     resources/shadertoy/tex20.jpg \
-    resources/shadertoy/webcamBig.png
+    resources/shadertoy/webcamBig.png \
+    resources/kuplung.rc

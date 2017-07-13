@@ -31,18 +31,18 @@ void DialogShadertoy::render(bool* p_opened) {
 
     if (this->heightTopPanel < this->engineShadertoy->textureHeight || this->heightTopPanel > this->engineShadertoy->textureHeight)
         this->engineShadertoy->initFBO(
-                    int(this->windowWidth),
-                    int(this->heightTopPanel),
-                    &this->vboTexture);
+                int(this->windowWidth),
+                int(this->heightTopPanel),
+                &this->vboTexture);
 
     this->engineShadertoy->renderToTexture(
-            int(ImGui::GetIO().MousePos.x),
-            int(ImGui::GetIO().MousePos.y),
-            (SDL_GetTicks() / 1000.0f),
-            &this->vboTexture
-    );
+                int(ImGui::GetIO().MousePos.x),
+                int(ImGui::GetIO().MousePos.y),
+                (SDL_GetTicks() / 1000.0f),
+                &this->vboTexture
+                );
 
-// BEGIN preview
+    // BEGIN preview
     ImGui::BeginChild("Preview", ImVec2(0, this->heightTopPanel), true);
 
     ImDrawList* draw_list = ImGui::GetWindowDrawList();
@@ -56,9 +56,9 @@ void DialogShadertoy::render(bool* p_opened) {
     draw_list->ChannelsMerge();
 
     ImGui::EndChild();
-// END preview
+    // END preview
 
-// BEGIN preview delimiter
+    // BEGIN preview delimiter
     ImGui::GetIO().MouseDrawCursor = true;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
@@ -71,19 +71,19 @@ void DialogShadertoy::render(bool* p_opened) {
         ImGui::SetMouseCursor(3);
     else
         ImGui::GetIO().MouseDrawCursor = false;
-// END preview delimiter
+    // END preview delimiter
 
-// BEGIN editor
+    // BEGIN editor
     ImGui::BeginChild("Editor", ImVec2(0, 0), false);
 
-// buttons
+    // buttons
     if (ImGui::Button("COMPILE", ImVec2(ImGui::GetWindowWidth() * 0.85f, this->buttonCompileHeight)))
         this->compileShader();
     ImGui::SameLine();
     if (ImGui::Button("Paste", ImVec2(ImGui::GetWindowWidth() * 0.14f, this->buttonCompileHeight)))
         this->getFromClipboard();
 
-// BEGIN textures
+    // BEGIN textures
     ImGui::BeginChild("Options", ImVec2(this->widthTexturesPanel, 0), false);
 
     ImGui::Text("Examples");
@@ -211,7 +211,7 @@ void DialogShadertoy::render(bool* p_opened) {
 
     ImGui::EndChild();
 
-// BEGIN textures delimiter
+    // BEGIN textures delimiter
     ImGui::SameLine();
     ImGui::GetIO().MouseDrawCursor = true;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
@@ -226,15 +226,15 @@ void DialogShadertoy::render(bool* p_opened) {
     else
         ImGui::GetIO().MouseDrawCursor = false;
     ImGui::SameLine();
-// END textures delimiter
+    // END textures delimiter
 
-// BEGIN IDE
+    // BEGIN IDE
     ImGui::BeginChild("IDE", ImVec2(0.0f, 0.0f), false);
     int lines = static_cast<int>((ImGui::GetWindowHeight() - 4.0f) / ImGui::GetTextLineHeight());
     ImGui::InputTextMultiline("##source", this->shadertoyEditorText, IM_ARRAYSIZE(this->shadertoyEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);
     ImGui::EndChild();
 
-// END editor
+    // END editor
     ImGui::EndChild();
 
     if (ImGui::IsWindowHovered() && !ImGui::IsAnyItemActive() && ImGui::IsMouseDragging(2, 0.0f))
@@ -267,10 +267,10 @@ void DialogShadertoy::init(std::function<void()> fShowErrorMessage) {
     this->texImage3 = -1;
 
     const char* funcMain = "void mainImage(out vec4 fragColor, in vec2 fragCoord)\n"
-            "{\n"
-            "   vec2 uv = fragCoord.xy / iResolution.xy;\n"
-            "   fragColor = vec4(uv, 0.5 + 0.5 * sin(iGlobalTime), 1.0);\n"
-            "}\n\0";
+                           "{\n"
+                           "   vec2 uv = fragCoord.xy / iResolution.xy;\n"
+                           "   fragColor = vec4(uv, 0.5 + 0.5 * sin(iGlobalTime), 1.0);\n"
+                           "}\n\0";
     strcpy(this->shadertoyEditorText, funcMain);
 
     this->engineShadertoy = std::make_unique<Shadertoy>();
@@ -292,6 +292,9 @@ void DialogShadertoy::compileShader() {
 }
 
 std::string DialogShadertoy::exec(const char* cmd) {
+#ifdef _WIN32
+    return "";
+#else
     FILE* pipe = popen(cmd, "r");
     if (!pipe)
         return "ERROR";
@@ -304,11 +307,12 @@ std::string DialogShadertoy::exec(const char* cmd) {
     }
     pclose(pipe);
     return result;
+#endif
 }
 
 std::string DialogShadertoy::paste() {
 #ifdef _WIN32
-    //TODO: Pate text from Windows clipboard
+    return "";
 #else
     return this->exec("pbpaste");
 #endif
@@ -325,5 +329,5 @@ void DialogShadertoy::getFromClipboard() {
 void DialogShadertoy::openExample(std::string fileName) {
     std::string fileContents = Settings::Instance()->glUtils->readFile(fileName.c_str());
     strcpy(this->shadertoyEditorText, fileContents.c_str());
-//    this->compileShader();
+    //this->compileShader();
 }

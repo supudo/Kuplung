@@ -20,7 +20,7 @@ public:
     Camera();
     void initProperties();
     void render();
-    glm::vec3 createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float near, const float far);
+    glm::vec3 createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float pNear, const float pFar);
     PixelDataPoint getClickData(const int x, const int y, const int height);
 
     std::unique_ptr<ObjectEye> eyeSettings;

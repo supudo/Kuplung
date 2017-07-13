@@ -62,11 +62,19 @@ bool ConfigUtils::readBool(std::string const& configKey) {
 }
 
 int ConfigUtils::readInt(std::string const& configKey) {
-    return std::stoi(this->configData[configKey]);
+    std::string val = this->configData[configKey];
+    if (val != "")
+        return std::stoi(val);
+    else
+        return 0;
 }
 
 float ConfigUtils::readFloat(std::string const& configKey) {
-    return std::stof(this->configData[configKey]);
+    std::string val = this->configData[configKey];
+    if (val != "")
+        return std::stof(val);
+    else
+        return 0;
 }
 
 std::string ConfigUtils::readString(std::string const& configKey) {

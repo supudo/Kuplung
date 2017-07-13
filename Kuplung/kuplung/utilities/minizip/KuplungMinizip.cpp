@@ -6,6 +6,39 @@
 //  Copyright © 2015 supudo.net. All rights reserved.
 //
 
+#ifdef _WIN32
+
+#include "KuplungMinizip.hpp"
+
+namespace KuplungApp { namespace Utilities { namespace Minizip {
+
+KuplungMinizip::~KuplungMinizip(void) {
+}
+
+void KuplungMinizip::Create(std::string zipfilename) {
+}
+
+void KuplungMinizip::Open(std::string zipfilename) {
+}
+
+void KuplungMinizip::CloseZip(void) {
+}
+
+void KuplungMinizip::CloseUnzip(void) {
+}
+
+int KuplungMinizip::Add(std::string contentPath, std::string zipPath, int flags) {
+    return 0;
+}
+
+bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
+    return false;
+}
+
+}}}
+
+#else
+
 #include "KuplungMinizip.hpp"
 #include "kuplung/settings/Settings.h"
 #include <iostream>
@@ -344,3 +377,5 @@ int KuplungMinizip::getFileCrc(const char* filenameinzip, void* buf, unsigned lo
 }
 
 }}}
+
+#endif

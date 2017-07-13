@@ -24,12 +24,12 @@ void LuaManager::execute(const std::string& fileName) {
                 KuplungApp::Utilities::Lua::LuaManager::testFromLua
                 );
     lua_result = luaL_loadfile(this->luaState, fileName.c_str());
-    if (lua_result != LUA_OK) {
+    if (lua_result != 0) {
         this->checkLuaErrors();
         return;
     }
     lua_result = lua_pcall(this->luaState, 0, LUA_MULTRET, 0);
-    if (lua_result != LUA_OK) {
+    if (lua_result != 0) {
         this->checkLuaErrors();
         return;
     }

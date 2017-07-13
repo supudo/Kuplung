@@ -268,7 +268,7 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
             else if (std::regex_match(singleLine, this->regex_materialOpticalDensity))
                 materials[static_cast<size_t>(indexMaterial)].OpticalDensity = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialIllumination))
-                materials[static_cast<size_t>(indexMaterial)].IlluminationMode = std::stof(lineElements[0]);
+                materials[static_cast<size_t>(indexMaterial)].IlluminationMode = static_cast<unsigned int>(std::stof(lineElements[0]));
             else if (std::regex_match(singleLine, this->regex_materialTextureAmbient))
                 materials[static_cast<size_t>(indexMaterial)].TextureAmbient = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDiffuse))
@@ -356,10 +356,11 @@ std::vector<float> objParser1::string2float(std::vector<std::string> strings) {
 }
 
 int objParser1::getLineCount() {
-    char delim;
 #ifdef _WIN32
-    delim = '\r\n';
-#elif defined macintosh // OS 9
+    return 0;
+#else
+    char delim;
+#if defined macintosh // OS 9
     delim = '\r';
 #else
     delim = '\n';
@@ -369,4 +370,5 @@ int objParser1::getLineCount() {
     int linesCount = int(std::count(std::istreambuf_iterator<char>(inFile2), std::istreambuf_iterator<char>(), delim));
     inFile2.close();
     return linesCount;
+#endif
 }

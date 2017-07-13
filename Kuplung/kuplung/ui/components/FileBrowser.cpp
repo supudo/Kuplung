@@ -113,7 +113,7 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
                 this->processFile(entity, TextureType);
 
 #ifdef _WIN32
-        std::string folderDelimiter = "\";
+        std::string folderDelimiter = "\\";
 #else
         std::string folderDelimiter = "/";
 #endif

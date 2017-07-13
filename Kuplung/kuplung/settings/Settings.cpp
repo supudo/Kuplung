@@ -8,11 +8,15 @@
 
 #include "Settings.h"
 #include <SDL2/SDL.h>
+#ifdef _WIN32
+#undef main
+#endif
 #include <stdarg.h>
 #include <memory>
 
 #ifdef _WIN32
-// ...
+#include <boost/filesystem.hpp>
+#include <iostream>
 #else
 #include "CoreFoundation/CoreFoundation.h"
 #endif
@@ -115,8 +119,7 @@ void Settings::reuseLogFunc(std::string msg) {
 
 std::string Settings::appFolder() {
 #ifdef _WIN32
-    //TODO: Windows
-    return "";
+    return boost::filesystem::current_path().string() + "/resources";
 #else
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);

@@ -795,7 +795,11 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                         ImGui::Separator();
                         ImGui::Text("Seed");
                         ImGui::Checkbox("Random Seed", &this->managerObjects.terrain->terrainGenerator->Setting_SeedRandom);
+#ifdef _WIN32
+                        this->helperUI->addControlsIntegerSliderSameLine("Max", 11, (std::numeric_limits<int>::min)(), (std::numeric_limits<int>::max)(), &this->managerObjects.terrain->terrainGenerator->Setting_Seed);
+#else
                         this->helperUI->addControlsIntegerSliderSameLine("Max", 11, std::numeric_limits<int>::min(), std::numeric_limits<int>::max(), &this->managerObjects.terrain->terrainGenerator->Setting_Seed);
+#endif
                         ImGui::Separator();
                         ImGui::Text("Map Dimensions");
                         this->helperUI->addControlsIntegerSliderSameLine("X", 1, 3, this->managerObjects.Setting_GridSize * 10, &this->managerObjects.Setting_TerrainWidth);

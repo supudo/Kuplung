@@ -796,8 +796,8 @@ void build_democontent(int parent) {
 
 int demorect(int parent, const char *label, float hue, int box, int layout, int w, int h, int m1, int m2, int m3, int m4) {
     int item = colorrect(label, nvgHSL(hue, 1.0f, 0.8f));
-    uiSetLayout(item, u_int(layout));
-    uiSetBox(item, u_int(box));
+    uiSetLayout(item, uint(layout));
+    uiSetBox(item, uint(box));
     uiSetMargins(item, short(m1), short(m2), short(m3), short(m4));
     uiSetSize(item, w, h);
     uiInsert(parent, item);
@@ -1103,12 +1103,12 @@ bool OuiNanoVG_Implementation::processEvent(SDL_Event *event) {
         }
         case SDL_MOUSEBUTTONUP: {
             bool bntLeft = event->button.button == SDL_BUTTON_LEFT;
-            uiSetButton((bntLeft ? 2 : 1), u_int(SDL_GetModState()), 0);
+            uiSetButton((bntLeft ? 2 : 1), uint(SDL_GetModState()), 0);
             break;
         }
         case SDL_MOUSEBUTTONDOWN: {
             bool bntLeft = event->button.button == SDL_BUTTON_LEFT;
-            uiSetButton((bntLeft ? 2 : 1), u_int(SDL_GetModState()), 1);
+            uiSetButton((bntLeft ? 2 : 1), uint(SDL_GetModState()), 1);
             break;
         }
         case SDL_MOUSEWHEEL: {
@@ -1116,17 +1116,17 @@ bool OuiNanoVG_Implementation::processEvent(SDL_Event *event) {
             break;
         }
         case SDL_KEYUP: {
-            uiSetKey(u_int(keyEvent->keysym.sym), keyEvent->keysym.mod, 0);
+            uiSetKey(uint(keyEvent->keysym.sym), keyEvent->keysym.mod, 0);
             break;
         }
         case SDL_KEYDOWN: {
-            uiSetKey(u_int(keyEvent->keysym.sym), keyEvent->keysym.mod,1);
+            uiSetKey(uint(keyEvent->keysym.sym), keyEvent->keysym.mod,1);
             const char *ch = SDL_GetKeyName(keyEvent->keysym.sym);
             if (*ch != '\0') {
                 unsigned int key = 0;
                 while (*ch != '\0') {
                     key = key << 8UL;
-                    key = key + u_int(*ch);
+                    key = key + uint(*ch);
                     ch++;
                 }
                 uiSetChar(key);

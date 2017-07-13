@@ -218,9 +218,10 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
         glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
         // indices
-        glGenBuffers(1, &this->vboIndices);
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
+        // TODO: fix - division by zero on Windows
+        //glGenBuffers(1, &this->vboIndices);
+        //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
+        //glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
     }
     else {
         this->actAsMirrorNeedsChange = false;

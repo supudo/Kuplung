@@ -10,6 +10,9 @@
 #define Controls_hpp
 
 #include <SDL2/SDL.h>
+#ifdef _WIN32
+#undef main
+#endif
 #include "kuplung/settings/Settings.h"
 
 namespace KuplungApp { namespace Utilities { namespace Input {

@@ -170,7 +170,7 @@ void ImportFile::drawFiles(int type) {
                 this->processFile(entity, setts);
 
 #ifdef _WIN32
-        std::string folderDelimiter = "\";
+        std::string folderDelimiter = "\\";
 #else
         std::string folderDelimiter = "/";
 #endif

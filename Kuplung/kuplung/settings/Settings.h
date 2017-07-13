@@ -20,6 +20,10 @@
 #include "SettingsStructs.h"
 #include "kuplung/utilities/gl/GLUtils.hpp"
 
+#ifdef WIN32
+#include <memory>
+#endif
+
 #define BOOST_FILESYSTEM_NO_DEPRECATED
 
 class Settings {

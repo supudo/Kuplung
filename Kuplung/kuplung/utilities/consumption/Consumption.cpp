@@ -52,6 +52,9 @@ std::string Consumption::getMemoryConsumption() {
 }
 
 std::string Consumption::getCPULoad() {
+#ifdef _WIN32
+    return "CPU: 0%";
+#else
     if (this->isTimeToUpdateCPU()) {
         pid_t p = getpid();
         std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
@@ -64,6 +67,7 @@ std::string Consumption::getCPULoad() {
         this->usageCPU = "CPU:" + elems[1] + "%";
     }
     return this->usageCPU;
+#endif
 }
 
 bool Consumption::isTimeToUpdateMemory() {
@@ -85,6 +89,9 @@ bool Consumption::isTimeToUpdateCPU() {
 }
 
 std::string Consumption::exec(const char* cmd) {
+#ifdef _WIN32
+    return "";
+#else
     FILE* pipe = popen(cmd, "r");
     if (!pipe)
         return "ERROR";
@@ -97,6 +104,7 @@ std::string Consumption::exec(const char* cmd) {
     }
     pclose(pipe);
     return result;
+#endif
 }
 
 void Consumption::memoryMark() {

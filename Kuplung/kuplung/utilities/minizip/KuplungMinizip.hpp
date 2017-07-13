@@ -9,6 +9,29 @@
 #ifndef KuplungMinizip_hpp
 #define KuplungMinizip_hpp
 
+#ifdef _WIN32
+
+#include "kuplung/settings/Settings.h"
+
+namespace KuplungApp { namespace Utilities { namespace Minizip {
+
+class KuplungMinizip {
+public:
+    ~KuplungMinizip(void);
+
+    bool isValid(void) { return false; }
+    void Create(std::string zipfilename);
+    void Open(std::string zipfilename);
+    void CloseZip(void);
+    void CloseUnzip(void);
+    int Add(std::string contentPath, std::string zipPath="", int flags=0);
+    bool UnzipFile(std::string const& unzipFolder);
+};
+
+}}}
+
+#else
+
 #include <iostream>
 #include <vector>
 #include <minizip/zip.h>
@@ -45,5 +68,7 @@ private:
 };
 
 }}}
+
+#endif
 
 #endif /* KuplungMinizip_hpp */

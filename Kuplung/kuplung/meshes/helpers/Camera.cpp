@@ -91,11 +91,11 @@ void Camera::render() {
     this->cameraPosition = glm::vec3(this->matrixCamera[3].x, this->matrixCamera[3].y, this->matrixCamera[3].z);
 }
 
-glm::vec3 Camera::createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float near, const float far) {
+glm::vec3 Camera::createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float pNear, const float pFar) {
     float mouseX = mouse_x / (Settings::Instance()->SDL_Window_Width * 0.5f) - 1.0f;
     float mouseY = mouse_y / (Settings::Instance()->SDL_Window_Height * 0.5f) - 1.0f;
 
-    glm::mat4 proj = glm::perspective(fov, ratio, near, far);
+    glm::mat4 proj = glm::perspective(fov, ratio, pNear, pFar);
 
     glm::vec3 cameraDirection = glm::vec3(this->matrixCamera[2].x, this->matrixCamera[2].y, this->matrixCamera[2].z);
     glm::vec3 cameraUpVector = this->eyeSettings->View_Up;
