@@ -313,7 +313,7 @@ void WorldGrid::render(const glm::mat4& matrixProjection, const glm::mat4& matri
             this->initBuffers(this->gridSize, 1.0);
 
         if (!this->actAsMirror) {
-            glLineWidth(2.5f);
+            glLineWidth(1.0f);
 
             glEnable(GL_DEPTH_TEST);
             glDepthFunc(GL_LESS);
