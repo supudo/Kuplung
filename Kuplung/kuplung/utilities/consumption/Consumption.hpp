@@ -10,6 +10,7 @@
 #define Consumption_hpp
 
 #include "kuplung/settings/Settings.h"
+#include "WindowsCPUUsage.hpp"
 
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
@@ -33,11 +34,18 @@ private:
 
     size_t getPeakRSS();
     size_t getCurrentRSS();
+    size_t getWorkingRSS();
+    size_t getPagefileUsage();
+    void windows_printMemStruct();
 
     void memoryMark();
     void memoryUnmark();
 
     std::string exec(const char* cmd);
+
+#ifdef _WIN32
+    WindowsCPUUsage winCPUMeter;
+#endif
 };
 
 }}}

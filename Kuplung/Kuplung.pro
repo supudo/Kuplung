@@ -231,6 +231,9 @@ win32|win64 {
             $$PWD\..\external/minizip/ioapi.h \
             $$PWD\..\external/minizip/unzip.h
 
+    SOURCES += kuplung/utilities/consumption/WindowsCPUUsage.cpp
+    HEADERS += kuplung/utilities/consumption/WindowsCPUUsage.hpp
+
     PWD_WIN = $${PWD}/resources
     DESTDIR_WIN = "./resources"
     PWD_WIN ~= s,/,\\,g

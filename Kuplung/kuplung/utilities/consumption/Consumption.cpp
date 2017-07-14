@@ -40,69 +40,6 @@ std::string Consumption::getOverallStats() {
     return this->usageOverall;
 }
 
-std::string Consumption::getMemoryConsumption() {
-#ifdef _WIN32
-    PROCESS_MEMORY_COUNTERS pmc;
-    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
-    SIZE_T virtualMemUsedByMe = pmc.WorkingSetSize;
-    return Settings::Instance()->string_format("Memory: %.2fMb", virtualMemUsedByMe);
-#else
-    if (this->isTimeToUpdateMemory()) {
-        double memory = this->getPeakRSS() - this->memoryMarkPoint;
-        if (std::fabs(this->memoryMarkPoint) < 1e-6)
-            this->usageMemory = Settings::Instance()->string_format("Total Memory: %.2fMb", memory);
-        else
-            this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
-    }
-    return this->usageMemory;
-#endif
-}
-
-#ifdef _WIN32
-static float CalculateCPULoad(unsigned long long idleTicks, unsigned long long totalTicks) {
-   static unsigned long long _previousTotalTicks = 0;
-   static unsigned long long _previousIdleTicks = 0;
-
-   unsigned long long totalTicksSinceLastTime = totalTicks - _previousTotalTicks;
-   unsigned long long idleTicksSinceLastTime = idleTicks - _previousIdleTicks;
-
-   float ret = 1.0f - ((totalTicksSinceLastTime > 0) ? ((float)idleTicksSinceLastTime) / totalTicksSinceLastTime : 0);
-
-   _previousTotalTicks = totalTicks;
-   _previousIdleTicks = idleTicks;
-   return ret;
-}
-
-static unsigned long long FileTimeToInt64(const FILETIME& ft) {
-    return (((unsigned long long)(ft.dwHighDateTime)) << 32) | ((unsigned long long)ft.dwLowDateTime);
-}
-#endif
-
-std::string Consumption::getCPULoad() {
-#ifdef _WIN32
-    if (this->isTimeToUpdateCPU()) {
-        FILETIME idleTime, kernelTime, userTime;
-        float cpu = GetSystemTimes(&idleTime, &kernelTime, &userTime) ? CalculateCPULoad(FileTimeToInt64(idleTime), FileTimeToInt64(kernelTime) + FileTimeToInt64(userTime)) : -1.0f;
-        cpu *= 100.0f;
-        this->usageCPU = "CPU: " + Settings::Instance()->string_format("%.2f", cpu) + "%";
-    }
-    return this->usageCPU;
-#else
-    if (this->isTimeToUpdateCPU()) {
-        pid_t p = getpid();
-        std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
-        const char* com = c.c_str();
-        std::string res = this->exec(com);
-
-        std::vector<std::string> elems;
-        boost::split(elems, res, boost::is_any_of("\n"));
-
-        this->usageCPU = "CPU:" + elems[1] + "%";
-    }
-    return this->usageCPU;
-#endif
-}
-
 bool Consumption::isTimeToUpdateMemory() {
     this->currentTimeMemory = SDL_GetTicks();
     if (Settings::Instance()->Consumption_Interval_Memory > 0 && (this->currentTimeMemory > this->lastTimeMemory + (1000 * Settings::Instance()->Consumption_Interval_Memory))) {
@@ -128,6 +65,30 @@ bool Consumption::isTimeToUpdateCPU() {
     return false;
 }
 
+// -------------------------
+// Memory
+// -------------------------
+
+std::string Consumption::getMemoryConsumption() {
+#ifdef _WIN32
+    if (this->isTimeToUpdateMemory()) {
+        //double memory = this->getWorkingRSS() - this->memoryMarkPoint;
+        double memory = this->getPagefileUsage();
+        this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
+    }
+    return this->usageMemory;
+#else
+    if (this->isTimeToUpdateMemory()) {
+        double memory = this->getPeakRSS() - this->memoryMarkPoint;
+        if (std::fabs(this->memoryMarkPoint) < 1e-6)
+            this->usageMemory = Settings::Instance()->string_format("Total Memory: %.2fMb", memory);
+        else
+            this->usageMemory = Settings::Instance()->string_format("Memory: %.2fMb", memory);
+    }
+    return this->usageMemory;
+#endif
+}
+
 std::string Consumption::exec(const char* cmd) {
 #ifdef _WIN32
     return "";
@@ -148,11 +109,56 @@ std::string Consumption::exec(const char* cmd) {
 }
 
 void Consumption::memoryMark() {
+#ifdef _WIN32
+    this->memoryMarkPoint = this->getWorkingRSS();
+#else
     this->memoryMarkPoint = this->getPeakRSS();
+#endif
 }
 
 void Consumption::memoryUnmark() {
     this->memoryMarkPoint = 0.0;
+}
+
+void Consumption::windows_printMemStruct() {
+#ifdef _WIN32
+    PROCESS_MEMORY_COUNTERS pmc2;
+    if (GetProcessMemoryInfo(GetCurrentProcess(), &pmc2, sizeof(pmc2))) {
+        printf("----------------------------------------------------------------\n");
+        printf("PageFaultCount: %f\n", (double)pmc2.PageFaultCount / (1024 * 1024));
+        printf("PeakWorkingSetSize: %f\n", (double)pmc2.PeakWorkingSetSize / (1024 * 1024));
+        printf("WorkingSetSize: %f\n", (double)pmc2.WorkingSetSize / (1024 * 1024));
+        printf("QuotaPeakPagedPoolUsage: %f\n", (double)pmc2.QuotaPeakPagedPoolUsage / (1024 * 1024));
+        printf("QuotaPagedPoolUsage: %f\n", (double)pmc2.QuotaPagedPoolUsage / (1024 * 1024));
+        printf("QuotaPeakNonPagedPoolUsage: %f\n", (double)pmc2.QuotaPeakNonPagedPoolUsage / (1024 * 1024));
+        printf("QuotaNonPagedPoolUsage: %f\n", (double)pmc2.QuotaNonPagedPoolUsage / (1024 * 1024));
+        printf("PagefileUsage: %f\n", (double)pmc2.PagefileUsage / (1024 * 1024));
+        printf("PeakPagefileUsage: %f\n", (double)pmc2.PeakPagefileUsage / (1024 * 1024));
+    }
+#endif
+}
+
+size_t Consumption::getPagefileUsage() {
+#ifdef _WIN32
+    //windows_printMemStruct();
+    PROCESS_MEMORY_COUNTERS pmc;
+    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+    SIZE_T memoryUsage = pmc.PagefileUsage;
+    return size_t(memoryUsage) / (1024.0 * 1024.0);
+#else
+    return 0;
+#endif
+}
+
+size_t Consumption::getWorkingRSS() {
+#ifdef _WIN32
+    PROCESS_MEMORY_COUNTERS pmc;
+    GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+    SIZE_T virtualMemUsedByMe = pmc.WorkingSetSize;
+    return size_t(virtualMemUsedByMe) / (1024.0 * 1024.0);
+#else
+    return 0;
+#endif
 }
 
 size_t Consumption::getPeakRSS() {
@@ -178,6 +184,34 @@ size_t Consumption::getCurrentRSS() {
     if (task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &infoCount) != KERN_SUCCESS)
         return (size_t)0L;
     return (size_t)info.resident_size;
+#endif
+}
+
+// -------------------------
+// CPU
+// -------------------------
+
+
+std::string Consumption::getCPULoad() {
+#ifdef _WIN32
+    if (this->isTimeToUpdateCPU()) {
+        short cpuUsage = this->winCPUMeter.GetUsage();
+        this->usageCPU = Settings::Instance()->string_format("CPU: %d%%", cpuUsage);
+    }
+    return this->usageCPU;
+#else
+    if (this->isTimeToUpdateCPU()) {
+        pid_t p = getpid();
+        std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
+        const char* com = c.c_str();
+        std::string res = this->exec(com);
+
+        std::vector<std::string> elems;
+        boost::split(elems, res, boost::is_any_of("\n"));
+
+        this->usageCPU = "CPU:" + elems[1] + "%";
+    }
+    return this->usageCPU;
 #endif
 }
 
