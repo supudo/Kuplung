@@ -113,7 +113,7 @@ bool Kuplung::init() {
         this->initFolders();
 
         if (Settings::Instance()->SDL_Window_Height == 0)
-            Settings::Instance()->SDL_Window_Height = current.h;
+            Settings::Instance()->SDL_Window_Height = current.h - 100;
         if (Settings::Instance()->SDL_Window_Width == 0)
             Settings::Instance()->SDL_Window_Width = current.w - 100;
 
