@@ -12,16 +12,20 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/ObjectsManager.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
+#include "kuplung/utilities/miniz/KuplungMiniz.hpp"
 #include "kuplung/utilities/saveopen/KuplungAppSettings.pb.h"
 #include "kuplung/utilities/saveopen/KuplungAppScene.pb.h"
 
 class SaveOpenGProtocolBufs {
 public:
+    ~SaveOpenGProtocolBufs();
     void init();
     void saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
     std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
+    std::unique_ptr<KuplungApp::Utilities::Miniz::KuplungMiniz> managerZip;
+
     void storeObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects);
     void readObjectsManagerSettings(std::unique_ptr<ObjectsManager> &managerObjects);
 

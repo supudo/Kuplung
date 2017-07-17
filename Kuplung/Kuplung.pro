@@ -199,38 +199,6 @@ win32|win64 {
     LIBS += -L"$$PWD\..\external\libnoise\windows\lib" -lnoise
     INCLUDEPATH += "$$PWD\..\external\libnoise\windows\include"
 
-    INCLUDEPATH += "$$PWD\..\external\zlib"
-    INCLUDEPATH += "$$PWD\..\external\minizip"
-
-    SOURCES += \
-            $$PWD\..\external/zlib/zutil.c \
-            $$PWD\..\external/zlib/uncompr.c \
-            $$PWD\..\external/zlib/trees.c \
-            $$PWD\..\external/zlib/inftrees.c \
-            $$PWD\..\external/zlib/inflate.c \
-            $$PWD\..\external/zlib/inffast.c \
-            $$PWD\..\external/zlib/infback.c \
-            $$PWD\..\external/zlib/deflate.c \
-            $$PWD\..\external/zlib/crc32.c \
-            $$PWD\..\external/zlib/adler32.c \
-            $$PWD\..\external/minizip/ioapi.c \
-            $$PWD\..\external/minizip/unzip.c
-
-    HEADERS += \
-            $$PWD\..\external/zlib/zutil.h \
-            $$PWD\..\external/zlib/zlib.h \
-            $$PWD\..\external/zlib/zconf.h \
-            $$PWD\..\external/zlib/trees.h \
-            $$PWD\..\external/zlib/inftrees.h \
-            $$PWD\..\external/zlib/inflate.h \
-            $$PWD\..\external/zlib/inffixed.h \
-            $$PWD\..\external/zlib/inffast.h \
-            $$PWD\..\external/zlib/deflate.h \
-            $$PWD\..\external/zlib/crc32.h \
-            $$PWD\..\external/minizip/crypt.h \
-            $$PWD\..\external/minizip/ioapi.h \
-            $$PWD\..\external/minizip/unzip.h
-
     SOURCES += kuplung/utilities/consumption/WindowsCPUUsage.cpp
     HEADERS += kuplung/utilities/consumption/WindowsCPUUsage.hpp
 
@@ -389,6 +357,8 @@ SOURCES += main.cpp \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.cpp \
     kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.cpp \
     kuplung/utilities/minizip/KuplungMinizip.cpp \
+    kuplung/utilities/miniz/miniz.c \
+    kuplung/utilities/miniz/KuplungMiniz.cpp \
     kuplung/utilities/saveopen/SaveOpen.cpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.cpp \
@@ -512,6 +482,8 @@ HEADERS += \
     kuplung/utilities/renderers/scene-renderer/SceneRenderer.hpp \
     kuplung/utilities/renderers/ray-tracer/RayTracerRenderer.hpp \
     kuplung/utilities/minizip/KuplungMinizip.hpp \
+    kuplung/utilities/miniz/miniz.h \
+    kuplung/utilities/miniz/KuplungMiniz.hpp \
     kuplung/utilities/saveopen/SaveOpen.hpp \
     kuplung/utilities/saveopen/SaveOpenBinarySeq.hpp \
     kuplung/utilities/saveopen/SaveOpenGProtocolBufs.hpp \

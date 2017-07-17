@@ -11,10 +11,14 @@
 #include <fstream>
 #include <glm/gtx/string_cast.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include "kuplung/utilities/minizip/KuplungMinizip.hpp"
+
+SaveOpenGProtocolBufs::~SaveOpenGProtocolBufs() {
+    this->managerZip.reset();
+}
 
 void SaveOpenGProtocolBufs::init() {
     GOOGLE_PROTOBUF_VERIFY_VERSION;
+    this->managerZip = std::make_unique<KuplungApp::Utilities::Miniz::KuplungMiniz>();
 }
 
 void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
@@ -57,12 +61,10 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<Objec
         kuplungFileScene.close();
     }
 
-    KuplungApp::Utilities::Minizip::KuplungMinizip *zipFile = new KuplungApp::Utilities::Minizip::KuplungMinizip();
-    zipFile->Create(fileName.c_str());
-    zipFile->Add(fileNameSettings.c_str(), fileNameZipSettings.c_str());
-    zipFile->Add(fileNameScene.c_str(), fileNameZipScene.c_str());
-    zipFile->CloseZip();
-    delete zipFile;
+    this->managerZip->createZipFile(fileName.c_str());
+    this->managerZip->addFileToArchive(fileNameSettings.c_str(), fileNameZipSettings.c_str());
+    this->managerZip->addFileToArchive(fileNameScene.c_str(), fileNameZipScene.c_str());
+    this->managerZip->closeZipFile();
 
     boost::filesystem::remove(fileNameSettings.c_str());
     boost::filesystem::remove(fileNameScene.c_str());
@@ -73,12 +75,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file
 
     std::string zPath = file.path;
     boost::replace_all(zPath, file.title, "");
-    KuplungApp::Utilities::Minizip::KuplungMinizip *zFile = new KuplungApp::Utilities::Minizip::KuplungMinizip();
-    zFile->Open(file.path.c_str());
-    if (zFile->UnzipFile(zPath)) {
-        zFile->CloseUnzip();
-        delete zFile;
-
+    if (this->managerZip->unzipArchive(file.title, zPath)) {
         std::string fileNameSettings = file.path + ".settings";
         std::string fileNameScene = file.path + ".scene";
 
