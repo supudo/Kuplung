@@ -1,0 +1,831 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectsManager.cpp">
+      <Filter>kuplung\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\RayPicking.cpp">
+      <Filter>kuplung\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Shadertoy.cpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Spaceship.cpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Terrain.cpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceBase.cpp">
+      <Filter>kuplung\meshes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceData.cpp">
+      <Filter>kuplung\meshes\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\AxisHelpers.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\BoundingBox.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Camera.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\CameraModel.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\LightRay.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Light.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\MiniAxis.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\RayLine.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Skybox.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\VertexSphere.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\WorldGrid.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\SpaceshipMeshGenerator.cpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\StructuredVolumetricSampling.cpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\VoronoiGenerator.cpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\HeightmapGenerator.cpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\RenderingManager.cpp">
+      <Filter>kuplung\rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingDeferred.cpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForward.cpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForwardShadowMapping.cpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingSimple.cpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\ConfigUtils.cpp">
+      <Filter>kuplung\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\FontsList.cpp">
+      <Filter>kuplung\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\Settings.cpp">
+      <Filter>kuplung\settings</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIHelpers.cpp">
+      <Filter>kuplung\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIManager.cpp">
+      <Filter>kuplung\ui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsModels.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogOptions.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogShadertoy.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogStyle.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogSVS.cpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.cpp">
+      <Filter>kuplung\ui\implementation\gui_oui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.cpp">
+      <Filter>kuplung\ui\implementation\gui_oui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.cpp">
+      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp">
+      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVEditor.cpp">
+      <Filter>kuplung\ui\components\uveditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVPoint.cpp">
+      <Filter>kuplung\ui\components\uveditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditor.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MELink.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Color.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Combine.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Texture.cpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\importers\ImportFile.cpp">
+      <Filter>kuplung\ui\components\importers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ide\KuplungIDE.cpp">
+      <Filter>kuplung\ui\components\ide</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\exporters\ExportOBJ.cpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ColorPicker.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileBrowser.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileSaver.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ImageViewer.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Log.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\RendererUI.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Screenshot.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ShaderEditor.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Tabs.cpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\Consumption.cpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\Exporter.cpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\ExporterOBJ.cpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\font-parser\FNTParser.cpp">
+      <Filter>kuplung\utilities\font-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLUtils.cpp">
+      <Filter>kuplung\utilities\gl</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.cpp">
+      <Filter>kuplung\utilities\imgui\imguizmo</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_demo.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_draw.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\input\Controls.cpp">
+      <Filter>kuplung\utilities\input</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\libnoise\noiseutils.cpp">
+      <Filter>kuplung\utilities\libnoise</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\lua\LuaManager.cpp">
+      <Filter>kuplung\utilities\lua</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\maths\Maths.cpp">
+      <Filter>kuplung\utilities\maths</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\measurement\Timings.cpp">
+      <Filter>kuplung\utilities\measurement</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\miniz.c">
+      <Filter>kuplung\utilities\miniz</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\KuplungMiniz.cpp">
+      <Filter>kuplung\utilities\miniz</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\minizip\KuplungMinizip.cpp">
+      <Filter>kuplung\utilities\minizip</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg.c">
+      <Filter>kuplung\utilities\nanovg</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ParserUtils.cpp">
+      <Filter>kuplung\utilities\parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.cpp">
+      <Filter>kuplung\utilities\parsers\assimp-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.cpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.cpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.cpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ply-parser\PLYParser.cpp">
+      <Filter>kuplung\utilities\parsers\ply-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.cpp">
+      <Filter>kuplung\utilities\parsers\stl-parser</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\KuplungRendererBase.cpp">
+      <Filter>kuplung\utilities\renderers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\default-forward\DefaultForwardRenderer.cpp">
+      <Filter>kuplung\utilities\renderers\default-forward</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ray-tracer\RayTracerRenderer.cpp">
+      <Filter>kuplung\utilities\renderers\ray-tracer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\scene-renderer\SceneRenderer.cpp">
+      <Filter>kuplung\utilities\renderers\scene-renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpen.cpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenBinarySeq.cpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.cpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungDefinitions.pb.cc">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppScene.pb.cc">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppSettings.pb.cc">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\Kuplung.cpp">
+      <Filter>kuplung</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\main.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\FileModelManager.cpp">
+      <Filter>kuplung\utilities\parsers</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ImageRenderer.cpp">
+      <Filter>kuplung\utilities\renderers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectDefinitions.h">
+      <Filter>kuplung\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\Objects.h">
+      <Filter>kuplung\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectsManager.hpp">
+      <Filter>kuplung\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\RayPicking.hpp">
+      <Filter>kuplung\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Shadertoy.hpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Spaceship.hpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Terrain.hpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceBase.hpp">
+      <Filter>kuplung\meshes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceData.hpp">
+      <Filter>kuplung\meshes\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\AxisHelpers.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\BoundingBox.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Camera.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\CameraModel.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Light.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\LightRay.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\MiniAxis.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\RayLine.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Skybox.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\VertexSphere.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\WorldGrid.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\VoronoiGenerator.hpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\SpaceshipMeshGenerator.hpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\StructuredVolumetricSampling.hpp">
+      <Filter>kuplung\meshes\artefacts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\HeightmapGenerator.hpp">
+      <Filter>kuplung\pcg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\RenderingManager.hpp">
+      <Filter>kuplung\rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingDeferred.hpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForward.hpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForwardShadowMapping.hpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingSimple.hpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\ConfigUtils.hpp">
+      <Filter>kuplung\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\FontsList.hpp">
+      <Filter>kuplung\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\Settings.h">
+      <Filter>kuplung\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\SettingsStructs.h">
+      <Filter>kuplung\settings</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIHelpers.hpp">
+      <Filter>kuplung\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIManager.hpp">
+      <Filter>kuplung\ui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogSVS.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsModels.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogOptions.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogShadertoy.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogStyle.hpp">
+      <Filter>kuplung\ui\dialogs</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\iconfonts\IconsFontAwesome.h">
+      <Filter>kuplung\ui\iconfonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h">
+      <Filter>kuplung\ui\iconfonts</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.hpp">
+      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp">
+      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.hpp">
+      <Filter>kuplung\ui\implementation\gui_oui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.hpp">
+      <Filter>kuplung\ui\implementation\gui_oui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVEditor.hpp">
+      <Filter>kuplung\ui\components\uveditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVPoint.hpp">
+      <Filter>kuplung\ui\components\uveditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditor.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditorData.h">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MELink.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Color.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Combine.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Texture.hpp">
+      <Filter>kuplung\ui\components\materialeditor</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\importers\ImportFile.hpp">
+      <Filter>kuplung\ui\components\importers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ide\KuplungIDE.hpp">
+      <Filter>kuplung\ui\components\ide</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\exporters\ExportOBJ.hpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ColorPicker.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileBrowser.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileSaver.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ImageViewer.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Log.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\RendererUI.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Screenshot.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ShaderEditor.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Tabs.hpp">
+      <Filter>kuplung\ui\components</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\Consumption.hpp">
+      <Filter>kuplung\utilities\consumption</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\Exporter.hpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\ExporterOBJ.hpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\font-parser\FNTParser.hpp">
+      <Filter>kuplung\utilities\font-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLIncludes.h">
+      <Filter>kuplung\utilities\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLUtils.hpp">
+      <Filter>kuplung\utilities\gl</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imconfig.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_internal.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.h">
+      <Filter>kuplung\utilities\imgui\imguizmo</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\input\Controls.hpp">
+      <Filter>kuplung\utilities\input</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\libnoise\noiseutils.h">
+      <Filter>kuplung\utilities\libnoise</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\lua\LuaManager.hpp">
+      <Filter>kuplung\utilities\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\maths\Maths.hpp">
+      <Filter>kuplung\utilities\maths</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\measurement\Timings.hpp">
+      <Filter>kuplung\utilities\measurement</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\miniz.h">
+      <Filter>kuplung\utilities\miniz</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\KuplungMiniz.hpp">
+      <Filter>kuplung\utilities\miniz</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\minizip\KuplungMinizip.hpp">
+      <Filter>kuplung\utilities\minizip</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg.h">
+      <Filter>kuplung\utilities\nanovg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg_gl.h">
+      <Filter>kuplung\utilities\nanovg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg_gl_utils.h">
+      <Filter>kuplung\utilities\nanovg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\fontstash.h">
+      <Filter>kuplung\utilities\nanovg</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\oui\oui.h">
+      <Filter>kuplung\utilities\oui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\oui\blendish.h">
+      <Filter>kuplung\utilities\oui</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\FileModelManager.hpp">
+      <Filter>kuplung\utilities\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ModelObject.h">
+      <Filter>kuplung\utilities\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ParserUtils.hpp">
+      <Filter>kuplung\utilities\parsers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.hpp">
+      <Filter>kuplung\utilities\parsers\assimp-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.hpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.hpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.hpp">
+      <Filter>kuplung\utilities\parsers\obj-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ply-parser\PLYParser.hpp">
+      <Filter>kuplung\utilities\parsers\ply-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.hpp">
+      <Filter>kuplung\utilities\parsers\stl-parser</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ImageRenderer.hpp">
+      <Filter>kuplung\utilities\renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\KuplungRendererBase.hpp">
+      <Filter>kuplung\utilities\renderers</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\default-forward\DefaultForwardRenderer.hpp">
+      <Filter>kuplung\utilities\renderers\default-forward</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ray-tracer\RayTracerRenderer.hpp">
+      <Filter>kuplung\utilities\renderers\ray-tracer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\scene-renderer\SceneRenderer.hpp">
+      <Filter>kuplung\utilities\renderers\scene-renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_image.h">
+      <Filter>kuplung\utilities\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_image_write.h">
+      <Filter>kuplung\utilities\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_rect_pack.h">
+      <Filter>kuplung\utilities\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_textedit.h">
+      <Filter>kuplung\utilities\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_truetype.h">
+      <Filter>kuplung\utilities\stb</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\shapes\Shapes.h">
+      <Filter>kuplung\utilities\shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpen.hpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenBinarySeq.hpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.hpp">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppScene.pb.h">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppSettings.pb.h">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungDefinitions.pb.h">
+      <Filter>kuplung\utilities\saveopen</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\Kuplung.hpp">
+      <Filter>kuplung</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="kuplung">
+      <UniqueIdentifier>{3b9d86e7-48eb-45e4-a748-a79c3b234ff4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\objects">
+      <UniqueIdentifier>{2c46aab6-bfd9-4fca-8be9-b629a98bb980}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\pcg">
+      <UniqueIdentifier>{480b700f-18c2-4c7d-b205-1ed75049d76f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\rendering">
+      <UniqueIdentifier>{03aa5273-d50d-42cb-9728-3e8fa49582cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\rendering\methods">
+      <UniqueIdentifier>{f27e9cd5-0553-447b-8de0-64b8012e43df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\settings">
+      <UniqueIdentifier>{be8a256a-6f5c-419b-a37c-b7dcf5c0f349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\meshes">
+      <UniqueIdentifier>{ac968da0-acbb-4fab-83c8-bd1cf1c101be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\meshes\artefacts">
+      <UniqueIdentifier>{6caff1c5-503a-4cf7-a37a-4f8f4474f6be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\meshes\helpers">
+      <UniqueIdentifier>{facb1d58-33a4-4dee-947a-4d8f0d8e439c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\meshes\scene">
+      <UniqueIdentifier>{b5e6fbb1-ec28-4f42-b719-1798a6102c67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui">
+      <UniqueIdentifier>{400587e8-0f9e-41b9-a044-0363454e8f06}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components">
+      <UniqueIdentifier>{69caa07a-dc4e-4ffb-b030-a53c0e453ef4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components\exporters">
+      <UniqueIdentifier>{bb1d385c-a744-42d8-8f72-d0fd9ab651f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components\ide">
+      <UniqueIdentifier>{4cf9f515-d24f-4f5b-babe-5af20b88e9f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components\importers">
+      <UniqueIdentifier>{10b859cc-9e6c-4d89-917c-9f6667ec89c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components\materialeditor">
+      <UniqueIdentifier>{bcf6f138-9bcf-4fc6-ac88-7f9ed575ce7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\components\uveditor">
+      <UniqueIdentifier>{08c653ab-902e-4aaf-87eb-ec27986ec016}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\dialogs">
+      <UniqueIdentifier>{ba836a5d-8e14-4cd3-9202-5401d961d49d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\iconfonts">
+      <UniqueIdentifier>{0d0504fc-fb0f-42e2-95e6-1c11b2f23c6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\implementation">
+      <UniqueIdentifier>{5233949e-6636-422f-bcd3-fb2d03a83e16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\implementation\gui_imgui">
+      <UniqueIdentifier>{f6ec1e5d-be71-4040-82bf-7e879efbbd5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\ui\implementation\gui_oui">
+      <UniqueIdentifier>{e6e19278-ef2d-4ed6-8334-d148c521cf49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities">
+      <UniqueIdentifier>{55242600-0b5a-467f-a0a4-443217e10f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\consumption">
+      <UniqueIdentifier>{4afa1110-2e23-4bd5-bf3a-8972408537bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\export">
+      <UniqueIdentifier>{ff9818c2-00bf-4349-9962-efa9a16285e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\font-parser">
+      <UniqueIdentifier>{4d84f0aa-9f1f-4493-bb89-dcb76e6a2e93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\gl">
+      <UniqueIdentifier>{89d83185-a5ee-4c7e-933a-827680668e97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\imgui">
+      <UniqueIdentifier>{e70b0d33-337d-4613-a84c-6f7802994633}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\imgui\imguizmo">
+      <UniqueIdentifier>{8d027ef1-3383-40ec-84bf-b2f06ffcf25d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\input">
+      <UniqueIdentifier>{ebacf92e-4a34-4a18-9b46-0fd079f807ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\libnoise">
+      <UniqueIdentifier>{c108d9fc-2014-4048-aead-3bada21a06f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\lua">
+      <UniqueIdentifier>{dbd81cf8-3ef7-4a8f-ae7d-70c7d83c900b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\maths">
+      <UniqueIdentifier>{21bd3634-e604-4541-bca4-3a403e6b7564}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\measurement">
+      <UniqueIdentifier>{b344d5e1-fec8-459e-b0f4-aa6e6b937815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\miniz">
+      <UniqueIdentifier>{b0943f14-7b48-4c8c-a3aa-f82c560a4b62}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\minizip">
+      <UniqueIdentifier>{7f35a8a2-9efc-42dc-ab88-ccca0af50cd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\nanovg">
+      <UniqueIdentifier>{eb383c04-7715-46ee-ac21-243044a1ad81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\oui">
+      <UniqueIdentifier>{cae5287d-a2d5-4370-aeec-6b6d7e89a5bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers">
+      <UniqueIdentifier>{e6f281f9-5b92-4765-ac03-dcfc29421aa7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers\assimp-parser">
+      <UniqueIdentifier>{93cb2303-d42d-421b-9eaf-5e18be1e4e48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers\obj-parser">
+      <UniqueIdentifier>{ece7b013-4eb3-495e-b46b-60985ec29b77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers\ply-parser">
+      <UniqueIdentifier>{da0ac9dc-df93-408d-a907-7bdae01e9186}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers\stl-parser">
+      <UniqueIdentifier>{2098b227-ecac-4144-bcf6-dbf74b7bc06a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\renderers">
+      <UniqueIdentifier>{09c3fe61-697a-4d7e-aaf5-7c8128de79e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\renderers\default-forward">
+      <UniqueIdentifier>{b063e38b-de94-4886-b0f4-1596dd01821b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\renderers\ray-tracer">
+      <UniqueIdentifier>{9a500532-c7f0-467c-8c58-4405862d5da7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\renderers\scene-renderer">
+      <UniqueIdentifier>{bdb60580-0f7d-4af5-a342-74583dde2915}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\stb">
+      <UniqueIdentifier>{9bc7ff14-74d6-4e01-bb96-40f331226a1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\shapes">
+      <UniqueIdentifier>{134ae6a1-ac5c-46d1-a8d1-21b5c2ed15a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\saveopen">
+      <UniqueIdentifier>{5f8443b2-1faf-4e58-8243-dd5813f2a5e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{72564a32-2ecd-430b-bc4e-b30b169b575c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Kuplung\resources\kuplung.rc">
+      <Filter>resources</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

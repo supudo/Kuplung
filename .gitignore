@@ -43,6 +43,12 @@ VS2015/packages/*
 VS2015/Kuplung.VC.opendb
 VS2015/Kuplung.sdf
 
+# VS 2017
+*.sdf
+MSVC/resources/*
+MSVC/.vs/*
+MSVC/Kuplung.dir/*
+
 # VSCode
 .vscode
 

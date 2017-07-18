@@ -165,6 +165,8 @@ mac {
 }
 
 win32|win64 {
+    #QMAKE_CXXFLAGS += /std:c++latest
+
     QMAKE_CXXFLAGS_WARN_ON += -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309
 
     OBJECTS_DIR = "./objects/"

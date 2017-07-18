@@ -1,0 +1,514 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGUID>{C32FB03E-A9FE-3AAC-A339-D619916CA374}</ProjectGUID>
+    <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
+    <Keyword>Win32Proj</Keyword>
+    <Platform>x64</Platform>
+    <ProjectName>Kuplung</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v141</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\Software\C++\Kuplung\MSVC\Release\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Kuplung.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Kuplung</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\Software\C++\Kuplung\MSVC\Release\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Kuplung.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Kuplung</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\Software\C++\Kuplung\MSVC\Release\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Kuplung.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Kuplung</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\Software\C++\Kuplung\MSVC\Release\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Kuplung.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Kuplung</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Debug/</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>boost_system-vc141-mt-gd-1_64.lib;boost_filesystem-vc141-mt-gd-1_64.lib;opengl32.lib;SDL2main.lib;SDL2.lib;GLFW3.lib;GLEW32.lib;assimp-vc140-mt.lib;libprotobufd.lib;lua53.lib;noise.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1;D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/lib;D:/Libs/assimp/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <PostBuildEvent>
+      <Command>cmd /c xcopy /S /I /Y "$(ProjectDir)..\Kuplung\resources" "$(TargetDir)..\..\resources"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>Release/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="Release";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"Release\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1;D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/lib;D:/Libs/assimp/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Release/Kuplung.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/Release/Kuplung.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>MinSizeRel/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="MinSizeRel";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"MinSizeRel\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1;D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/lib;D:/Libs/assimp/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>No</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/MinSizeRel/Kuplung.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/MinSizeRel/Kuplung.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AssemblerListingLocation>RelWithDebInfo/</AssemblerListingLocation>
+      <CompileAs>CompileAsCpp</CompileAs>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4244;4100;4068;4267;4305;4838;4477;4305;4996;4309</DisableSpecificWarnings>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <WarningLevel>Level3</WarningLevel>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR="RelWithDebInfo";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;CMAKE_INTDIR=\"RelWithDebInfo\";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;D:\Software\C++\Kuplung\Kuplung\..\external\libnoise\windows\include;D:\Software\C++\Kuplung\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1;D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/lib;D:/Libs/assimp/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>Debug</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/RelWithDebInfo/Kuplung.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/Software/C++/Kuplung/MSVC/Release/RelWithDebInfo/Kuplung.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+      <Version>
+      </Version>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Shadertoy.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Spaceship.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\StructuredVolumetricSampling.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Terrain.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\AxisHelpers.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\BoundingBox.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Camera.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\CameraModel.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Light.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\LightRay.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\MiniAxis.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\RayLine.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Skybox.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\VertexSphere.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\WorldGrid.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceBase.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceData.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\Objects.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectDefinitions.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectsManager.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\RayPicking.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\HeightmapGenerator.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\SpaceshipMeshGenerator.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\VoronoiGenerator.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingDeferred.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForward.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForwardShadowMapping.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingSimple.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\RenderingManager.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\ConfigUtils.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\FontsList.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\Settings.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\SettingsStructs.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\exporters\ExportOBJ.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\importers\ImportFile.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditor.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditorData.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MELink.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Color.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Combine.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Texture.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVEditor.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVPoint.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ide\KuplungIDE.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ColorPicker.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileBrowser.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileSaver.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ImageViewer.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Log.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\RendererUI.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Screenshot.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ShaderEditor.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Tabs.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsModels.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogOptions.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogShadertoy.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogStyle.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogSVS.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\iconfonts\IconsFontAwesome.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIManager.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIHelpers.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\Exporter.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\ExporterOBJ.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\font-parser\FNTParser.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLIncludes.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLUtils.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imconfig.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_internal.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\fontstash.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg_gl.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg_gl_utils.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\oui\blendish.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\oui\oui.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\input\Controls.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\libnoise\noiseutils.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\maths\Maths.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\lua\LuaManager.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\minizip\KuplungMinizip.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\miniz.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\KuplungMiniz.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ply-parser\PLYParser.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\FileModelManager.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ModelObject.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ParserUtils.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\default-forward\DefaultForwardRenderer.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\scene-renderer\SceneRenderer.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ray-tracer\RayTracerRenderer.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ImageRenderer.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\KuplungRendererBase.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppScene.pb.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppSettings.pb.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungDefinitions.pb.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpen.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenBinarySeq.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.hpp" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\shapes\Shapes.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_image.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_image_write.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_rect_pack.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_textedit.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\stb\stb_truetype.h" />
+    <ClInclude Include="D:\Software\C++\Kuplung\Kuplung\kuplung\Kuplung.hpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Shadertoy.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Spaceship.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\StructuredVolumetricSampling.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\artefacts\Terrain.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\AxisHelpers.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\BoundingBox.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Camera.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\CameraModel.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Light.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\LightRay.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\MiniAxis.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\RayLine.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\Skybox.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\VertexSphere.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\helpers\WorldGrid.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceBase.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\meshes\scene\ModelFaceData.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\ObjectsManager.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\objects\RayPicking.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\HeightmapGenerator.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\SpaceshipMeshGenerator.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\pcg\VoronoiGenerator.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingDeferred.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForward.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingForwardShadowMapping.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\methods\RenderingSimple.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\rendering\RenderingManager.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\ConfigUtils.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\FontsList.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\settings\Settings.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\exporters\ExportOBJ.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\importers\ImportFile.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MaterialEditor.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MELink.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Color.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Combine.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\materialeditor\MENode_Texture.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVEditor.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\uveditor\UVPoint.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ide\KuplungIDE.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ColorPicker.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileBrowser.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\FileSaver.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ImageViewer.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Log.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\RendererUI.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Screenshot.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\ShaderEditor.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\components\Tabs.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsGUI.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogControlsModels.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogOptions.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogShadertoy.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogStyle.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\dialogs\DialogSVS.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIManager.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\ui\UIHelpers.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\Exporter.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\export\ExporterOBJ.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\font-parser\FNTParser.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\gl\GLUtils.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imguizmo\ImGuizmo.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_demo.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\imgui\imgui_draw.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\nanovg\nanovg.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\input\Controls.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\libnoise\noiseutils.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\maths\Maths.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\lua\LuaManager.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\minizip\KuplungMinizip.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\miniz.c">
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">CompileAsC</CompileAs>
+      <CompileAs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">CompileAsC</CompileAs>
+    </ClCompile>
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\miniz\KuplungMiniz.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\stl-parser\STLParser.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ply-parser\PLYParser.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\FileModelManager.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\parsers\ParserUtils.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\default-forward\DefaultForwardRenderer.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\scene-renderer\SceneRenderer.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ray-tracer\RayTracerRenderer.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\ImageRenderer.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\renderers\KuplungRendererBase.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppScene.pb.cc" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungAppSettings.pb.cc" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\KuplungDefinitions.pb.cc" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpen.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenBinarySeq.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\utilities\saveopen\SaveOpenGProtocolBufs.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\kuplung\Kuplung.cpp" />
+    <ClCompile Include="D:\Software\C++\Kuplung\Kuplung\main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Kuplung\resources\kuplung.rc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
