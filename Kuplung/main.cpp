@@ -17,7 +17,9 @@
 /// <li><a href="http://www.boost.org/" target="_blank">Boost</a></li>
 /// <li><a href="http://glm.g-truc.net/" target="_blank">GLM</a></li>
 /// <li><a href="https://www.libsdl.org/" target="_blank">SDL2</a></li>
-/// <li><a href=">http://libnoise.sourceforge.net/" target="_blank">libnoise</a></li>
+/// <li><a href="https://github.com/google/protobuf" target="_blank">protobuf</a></li>
+/// <li><a href="http://libnoise.sourceforge.net/" target="_blank">libnoise</a></li>
+/// <li><a href="https://developer.nvidia.com/cuda-zone" target="_blank">Cuda</a></li>
 /// </ul>
 ///
 /// @section built Built with

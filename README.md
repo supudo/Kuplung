@@ -12,6 +12,7 @@ C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo
 - [Boost](http://www.boost.org/)
 - [GLM](http://glm.g-truc.net/)
 - [SDL2](https://www.libsdl.org/)
+- [protobuf](https://github.com/google/protobuf)
 - [libnoise](http://libnoise.sourceforge.net/)
 - [NVIDIA CUDA](https://developer.nvidia.com/cuda-zone)
 
