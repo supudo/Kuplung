@@ -145,11 +145,11 @@ mac {
     LIBS += -L/usr/local/Cellar/glfw3/3.2.1/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.2.1/include
 
-    LIBS += -L/usr/local/Cellar/assimp/3.3.1/lib -lAssimp
-    INCLUDEPATH += /usr/local/Cellar/assimp/3.3.1/include
+    LIBS += -L/usr/local/Cellar/assimp/4.0.0/lib -lAssimp
+    INCLUDEPATH += /usr/local/Cellar/assimp/4.0.0/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.3.0/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.3.0/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.3.2/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.3.2/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include

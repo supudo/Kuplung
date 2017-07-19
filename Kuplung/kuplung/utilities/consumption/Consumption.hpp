@@ -10,7 +10,9 @@
 #define Consumption_hpp
 
 #include "kuplung/settings/Settings.h"
+#ifdef WIN32
 #include "WindowsCPUUsage.hpp"
+#endif
 
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
