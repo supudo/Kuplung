@@ -48,6 +48,7 @@ VS2015/Kuplung.sdf
 MSVC/resources/*
 MSVC/.vs/*
 MSVC/Kuplung.dir/*
+MSVC/Release/*
 
 # VSCode
 .vscode
