@@ -35,7 +35,7 @@ private:
     bool init();
     void initFolders();
     void onEvent(SDL_Event* ev);
-    void processImportFileAsync(const FBEntity file, const std::vector<std::string> &settings);
+    void processImportFileAsync(const FBEntity& file, const std::vector<std::string> &settings);
     void processParsedImportedFile();
     bool hasEnding(std::string const& fullString, std::string const& ending);
     void renderScene();
@@ -48,20 +48,20 @@ private:
     void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(const ShapeType type);
     void addLight(const LightSourceType type);
-    void exportSceneAsync(const FBEntity file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings);
+    void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();
-    void saveScene(const FBEntity file);
-    void openScene(const FBEntity file);
+    void saveScene(const FBEntity& file);
+    void openScene(const FBEntity& file);
 
     void guiQuit();
-    void guiProcessImportedFile(const FBEntity file, const std::vector<std::string> &settings);
+    void guiProcessImportedFile(const FBEntity& file, const std::vector<std::string> &settings);
     void guiClearScreen();
     void guiEditorshaderCompiled(std::string const& fileName);
     void guiModelDelete(const int selectedModel);
-    void guiSceneExport(const FBEntity file, const std::vector<std::string> &settings);
-    void guiRenderScene(const FBEntity file);
+    void guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings);
+    void guiRenderScene(const FBEntity& file);
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";

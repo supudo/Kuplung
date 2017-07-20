@@ -149,9 +149,6 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
     this->uniqueVertices.clear();
     this->uniqueTextureCoordinates.clear();
     this->uniqueNormals.clear();
-    this->uniqueVertices.clear();
-    this->uniqueTextureCoordinates.clear();
-    this->uniqueNormals.clear();
     this->vCounter = 1;
     this->vtCounter = 1;
     this->vnCounter = 1;

@@ -568,7 +568,7 @@ void Kuplung::processRunningThreads() {
         this->exportSceneFinished();
 }
 
-void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std::string> &settings) {
+void Kuplung::guiProcessImportedFile(const FBEntity& file, const std::vector<std::string> &settings) {
     this->managerUI->showParsing();
     this->objParserThreadFinished = false;
     this->objParserThreadProcessed = false;
@@ -577,14 +577,14 @@ void Kuplung::guiProcessImportedFile(const FBEntity file, const std::vector<std:
     this->doLog("Starting parsing " + file.title);
 }
 
-void Kuplung::processImportFileAsync(const FBEntity file, const std::vector<std::string> &settings) {
+void Kuplung::processImportFileAsync(const FBEntity& file, const std::vector<std::string> &settings) {
     std::vector<MeshModel> newModels = this->parser->parse(file, settings);
     this->meshModelsNew.insert(end(this->meshModelsNew), begin(newModels), end(newModels));
     this->objFiles.push_back(file);
     this->objParserThreadFinished = true;
 }
 
-void Kuplung::guiSceneExport(const FBEntity file, const std::vector<std::string> &settings) {
+void Kuplung::guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings) {
     //    this->managerExporter->exportScene(file, this->meshModelFaces);
     this->managerUI->showExporting();
     this->exporterThreadFinished = false;
@@ -592,7 +592,7 @@ void Kuplung::guiSceneExport(const FBEntity file, const std::vector<std::string>
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(const FBEntity file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings) {
+void Kuplung::exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings) {
     this->managerExporter->exportScene(file, meshModelFaces, settings);
     this->exporterThreadFinished = true;
 }
@@ -701,7 +701,7 @@ void Kuplung::guiModelDelete(const int selectedModel) {
     this->managerRendering->meshModelFaces.erase(this->managerRendering->meshModelFaces.begin() + selectedModel);
 }
 
-void Kuplung::guiRenderScene(const FBEntity file) {
+void Kuplung::guiRenderScene(const FBEntity& file) {
     this->managerObjects->renderSkybox();
     this->renderSceneModels();
     //    SDL_GL_SwapWindow(this->gWindow);
@@ -712,11 +712,11 @@ void Kuplung::guiRenderScene(const FBEntity file) {
     //        Settings::Instance()->funcDoLog("[Renderer] Cannot get back to main context!");
 }
 
-void Kuplung::saveScene(const FBEntity file) {
+void Kuplung::saveScene(const FBEntity& file) {
     this->managerSaveOpen->saveKuplungFile(file, this->managerObjects, this->meshModelFaces);
 }
 
-void Kuplung::openScene(const FBEntity file) {
+void Kuplung::openScene(const FBEntity& file) {
     this->managerRendering->meshModelFaces.clear();
     this->meshModelFaces.clear();
     this->meshModels.clear();

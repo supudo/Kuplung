@@ -42,8 +42,7 @@ bool KuplungMiniz::unzipArchive(std::string const& archiveFile, std::string cons
         std::streampos filesize = zipFileStream.tellg();
         zipFileStream.seekg(0, std::ios::beg);
 
-        uint8_t* _buffer = nullptr;
-        _buffer = new uint8_t[(uint32_t)filesize];
+        uint8_t* _buffer = new uint8_t[(uint32_t)filesize];
         zipFileStream.read((char*)_buffer, filesize);
 
         mz_zip_archive zipFile;

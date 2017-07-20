@@ -202,10 +202,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
 
                     folderContents[entity.path] = entity;
 
-                    if (entity.isFile)
-                        this->logMessage(entity.title);
-                    else
-                        this->logMessage(entity.title);
+                    this->logMessage(entity.title);
                 }
             }
             catch (const std::exception & ex) {

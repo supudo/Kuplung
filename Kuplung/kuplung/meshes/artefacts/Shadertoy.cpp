@@ -54,7 +54,7 @@ bool Shadertoy::initShaderProgram(std::string const& fragmentShaderSource) {
     std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
     const char *shader_vertex = shaderSourceVertex.c_str();
 
-    std::string shaderFragment = "#version 410 core\n\
+    std::string shaderFragmentSource = "#version 410 core\n\
 \n\
 out vec4 outFragmentColor;\n\
 uniform vec3 iResolution;\n\
@@ -69,35 +69,35 @@ uniform vec4 iDate;\n\
 uniform float iSampleRate;\n";
 
     if (this->iChannel0_Image != "")
-        shaderFragment += "uniform sampler2D iChannel0;\n";
+		shaderFragmentSource += "uniform sampler2D iChannel0;\n";
     else if (this->iChannel0_CubeImage != "")
-        shaderFragment += "uniform samplerCube iChannel0;\n";
+		shaderFragmentSource += "uniform samplerCube iChannel0;\n";
 
     if (this->iChannel1_Image != "")
-        shaderFragment += "uniform sampler2D iChannel1;\n";
+		shaderFragmentSource += "uniform sampler2D iChannel1;\n";
     else if (this->iChannel1_CubeImage != "")
-        shaderFragment += "uniform samplerCube iChannel1;\n";
+		shaderFragmentSource += "uniform samplerCube iChannel1;\n";
 
     if (this->iChannel2_Image != "")
-        shaderFragment += "uniform sampler2D iChannel2;\n";
+		shaderFragmentSource += "uniform sampler2D iChannel2;\n";
     else if (this->iChannel2_CubeImage != "")
-        shaderFragment += "uniform samplerCube iChannel2;\n";
+		shaderFragmentSource += "uniform samplerCube iChannel2;\n";
 
     if (this->iChannel3_Image != "")
-        shaderFragment += "uniform sampler2D iChannel3;\n";
+		shaderFragmentSource += "uniform sampler2D iChannel3;\n";
     else if (this->iChannel3_CubeImage != "")
-        shaderFragment += "uniform samplerCube iChannel3;\n";
+		shaderFragmentSource += "uniform samplerCube iChannel3;\n";
 
-    shaderFragment += "\
+	shaderFragmentSource += "\
 \n\
 #define texture2D texture\n\
 #define textureCube texture\n\
 \n\
 \n";
 
-    shaderFragment += fragmentShaderSource;
+	shaderFragmentSource += fragmentShaderSource;
 
-    shaderFragment += "\
+	shaderFragmentSource += "\
 \n\
 void main() {\n\
     vec4 color = vec4(0.0, 0.0, 0.0, 1.0);\n\
@@ -106,7 +106,7 @@ void main() {\n\
 }\n\
 \n";
 
-    const char *shader_fragment = shaderFragment.c_str();
+    const char *shader_fragment = shaderFragmentSource.c_str();
 
 //    printf("---------------------\n");
 //    printf("%s\n", shader_fragment);

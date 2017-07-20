@@ -56,8 +56,8 @@ void objParser1::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> objParser1::parse(const FBEntity& file, const std::vector<std::string>&) {
-    this->file = file;
+std::vector<MeshModel> objParser1::parse(const FBEntity& fileToParse, const std::vector<std::string>&) {
+    this->file = fileToParse;
     this->geometricVertices = {};
     this->textureCoordinates = {};
     this->vertexNormals = {};
@@ -194,7 +194,7 @@ MeshModelMaterial objParser1::findMaterial(std::string const& materialID) {
 }
 
 std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& materialFile) {
-    std::vector<MeshModelMaterial> materials;
+    std::vector<MeshModelMaterial> current_materials;
 
     std::string materialPath = this->file.path.substr(0, this->file.path.find_last_of("\\/")) + "/" + materialFile;
     std::FILE *fp = std::fopen(materialPath.c_str(), "rb");
@@ -234,61 +234,61 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
                 entityMaterial.IlluminationMode = 2;
                 entityMaterial.OpticalDensity = 1.0;
                 indexMaterial += 1;
-                materials.push_back(entityMaterial);
+				current_materials.push_back(entityMaterial);
             }
 
             if (std::regex_match(singleLine, this->regex_materialAmbientColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[static_cast<size_t>(indexMaterial)].AmbientColor.r = points[0];
-                materials[static_cast<size_t>(indexMaterial)].AmbientColor.g = points[1];
-                materials[static_cast<size_t>(indexMaterial)].AmbientColor.b = points[2];
+				current_materials[static_cast<size_t>(indexMaterial)].AmbientColor.r = points[0];
+				current_materials[static_cast<size_t>(indexMaterial)].AmbientColor.g = points[1];
+				current_materials[static_cast<size_t>(indexMaterial)].AmbientColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialDiffuseColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.r = points[0];
-                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.g = points[1];
-                materials[static_cast<size_t>(indexMaterial)].DiffuseColor.b = points[2];
+				current_materials[static_cast<size_t>(indexMaterial)].DiffuseColor.r = points[0];
+				current_materials[static_cast<size_t>(indexMaterial)].DiffuseColor.g = points[1];
+				current_materials[static_cast<size_t>(indexMaterial)].DiffuseColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialSpecularColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[static_cast<size_t>(indexMaterial)].SpecularColor.r = points[0];
-                materials[static_cast<size_t>(indexMaterial)].SpecularColor.g = points[1];
-                materials[static_cast<size_t>(indexMaterial)].SpecularColor.b = points[2];
+				current_materials[static_cast<size_t>(indexMaterial)].SpecularColor.r = points[0];
+				current_materials[static_cast<size_t>(indexMaterial)].SpecularColor.g = points[1];
+				current_materials[static_cast<size_t>(indexMaterial)].SpecularColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialEmissionColor)) {
                 std::vector<float> points = this->string2float(lineElements);
-                materials[static_cast<size_t>(indexMaterial)].EmissionColor.r = points[0];
-                materials[static_cast<size_t>(indexMaterial)].EmissionColor.g = points[1];
-                materials[static_cast<size_t>(indexMaterial)].EmissionColor.b = points[2];
+				current_materials[static_cast<size_t>(indexMaterial)].EmissionColor.r = points[0];
+				current_materials[static_cast<size_t>(indexMaterial)].EmissionColor.g = points[1];
+				current_materials[static_cast<size_t>(indexMaterial)].EmissionColor.b = points[2];
             }
             else if (std::regex_match(singleLine, this->regex_materialSpecularExp))
-                materials[static_cast<size_t>(indexMaterial)].SpecularExp = std::stof(lineElements[0]);
+				current_materials[static_cast<size_t>(indexMaterial)].SpecularExp = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialTransperant1) || std::regex_match(singleLine, this->regex_materialTransperant2))
-                materials[static_cast<size_t>(indexMaterial)].Transparency = std::stof(lineElements[0]);
+				current_materials[static_cast<size_t>(indexMaterial)].Transparency = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialOpticalDensity))
-                materials[static_cast<size_t>(indexMaterial)].OpticalDensity = std::stof(lineElements[0]);
+				current_materials[static_cast<size_t>(indexMaterial)].OpticalDensity = std::stof(lineElements[0]);
             else if (std::regex_match(singleLine, this->regex_materialIllumination))
-                materials[static_cast<size_t>(indexMaterial)].IlluminationMode = static_cast<unsigned int>(std::stof(lineElements[0]));
+				current_materials[static_cast<size_t>(indexMaterial)].IlluminationMode = static_cast<unsigned int>(std::stof(lineElements[0]));
             else if (std::regex_match(singleLine, this->regex_materialTextureAmbient))
-                materials[static_cast<size_t>(indexMaterial)].TextureAmbient = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureAmbient = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDiffuse))
-                materials[static_cast<size_t>(indexMaterial)].TextureDiffuse = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureDiffuse = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecular))
-                materials[static_cast<size_t>(indexMaterial)].TextureSpecular = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureSpecular = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureSpecularExp))
-                materials[static_cast<size_t>(indexMaterial)].TextureSpecularExp = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureSpecularExp = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDissolve))
-                materials[static_cast<size_t>(indexMaterial)].TextureDissolve = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureDissolve = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureBump))
-                materials[static_cast<size_t>(indexMaterial)].TextureBump = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureBump = this->parseTextureImage(cleanLine);
             else if (std::regex_match(singleLine, this->regex_materialTextureDisplacement))
-                materials[static_cast<size_t>(indexMaterial)].TextureDisplacement = this->parseTextureImage(cleanLine);
+				current_materials[static_cast<size_t>(indexMaterial)].TextureDisplacement = this->parseTextureImage(cleanLine);
 
             fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         }
     }
 
-    return materials;
+    return current_materials;
 }
 
 #pragma mark - Helpers

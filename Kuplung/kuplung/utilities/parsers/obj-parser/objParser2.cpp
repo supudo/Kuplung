@@ -52,8 +52,8 @@ void objParser2::init(std::function<void(float)> doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> objParser2::parse(const FBEntity& file, const std::vector<std::string>& settings) {
-    this->file = file;
+std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std::vector<std::string>& settings) {
+    this->file = fileToParse;
     this->models = {};
     this->vectorVertices = {};
     this->vectorNormals = {};
