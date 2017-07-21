@@ -29,8 +29,8 @@ private:
 
     FBEntity file;
     std::function<void(float)> doProgress;
-    std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
-    std::vector<float> string2float(std::vector<std::string> strings);
+    std::vector<std::string> splitString(const std::string &s, const std::regex& delimiter);
+    std::vector<float> string2float(const std::vector<std::string>& strings);
     int getLineCount();
 
     std::vector<MeshModelMaterial> loadMaterial(std::string const& materialFile);

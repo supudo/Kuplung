@@ -24,9 +24,9 @@ void STLParser::init(std::function<void(float)> doProgress) {
 std::vector<MeshModel> STLParser::parse(const FBEntity& file, const std::vector<std::string>& settings) {
     this->models = {};
 
-    if (settings.size() > 0 && settings[0] != "")
+    if (settings.size() > 0 && !settings[0].empty())
         this->Setting_Axis_Forward = std::stoi(settings[0]);
-    if (settings.size() > 1 && settings[1] != "")
+    if (settings.size() > 1 && !settings[1].empty())
         this->Setting_Axis_Up = std::stoi(settings[1]);
 
     unsigned int fileSize;
@@ -149,7 +149,7 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
     char n_triangles[4];
     stl_file_data.read(header_info, 80);
     stl_file_data.read(n_triangles, 4);
-    std::string h(header_info);
+    //std::string h(header_info);
 
     unsigned int indicesCounter = 0;
     unsigned int* r = (unsigned int*) n_triangles;
@@ -195,7 +195,7 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
 
     MeshModelMaterial entityMaterial = {};
     entityMaterial.MaterialID = 1;
-    entityMaterial.MaterialTitle = "";
+    entityMaterial.MaterialTitle.clear();
     entityMaterial.DiffuseColor = glm::vec3(0.7, 0.7, 0.7);
     entityMaterial.Transparency = 1.0f;
     entityMaterial.IlluminationMode = 2;
@@ -259,7 +259,7 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
 
     MeshModelMaterial entityMaterial = {};
     entityMaterial.MaterialID = 1;
-    entityMaterial.MaterialTitle = "";
+    entityMaterial.MaterialTitle.clear();
     entityMaterial.DiffuseColor = glm::vec3(0.7, 0.7, 0.7);
     entityMaterial.Transparency = 1.0f;
     entityMaterial.IlluminationMode = 2;

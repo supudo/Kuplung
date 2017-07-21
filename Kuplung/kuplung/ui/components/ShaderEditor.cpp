@@ -34,7 +34,7 @@ void ShaderEditor::init(std::string const& appPath, int positionX, int positionY
     this->width = width;
     this->height = height;
     this->shaderFileIndex = 0;
-    this->currentFileName = "";
+    this->currentFileName.clear();
 
     this->managerLua = std::make_unique<KuplungApp::Utilities::Lua::LuaManager>();
     this->managerLua->initLua();
@@ -80,7 +80,7 @@ void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, cons
        }
     }
     else
-        this->fileContents = "";
+        this->fileContents.clear();
 
     int lines = ImGui::GetWindowHeight() / ImGui::GetTextLineHeight();
     ImGui::InputTextMultiline("##source", this->guiEditorText, IM_ARRAYSIZE(this->guiEditorText), ImVec2(-1.0f, ImGui::GetTextLineHeight() * lines), ImGuiInputTextFlags_AllowTabInput);

@@ -118,7 +118,7 @@ void ModelFaceData::initBuffers() {
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.countIndices) * sizeof(GLuint), &this->meshModel.indices[0], GL_STATIC_DRAW);
 
-    if (this->meshModel.ModelMaterial.TextureBump.Image != "" &&
+    if (!this->meshModel.ModelMaterial.TextureBump.Image.empty() &&
         this->meshModel.vertices.size() > 0 &&
         this->meshModel.texture_coordinates.size() > 0 &&
         this->meshModel.normals.size() > 0) {

@@ -180,7 +180,7 @@ glm::vec4 RayPicking::getEyeCoordinates(glm::vec4& coordinates, std::unique_ptr<
     return glm::vec4(eyeCoordinates.x, eyeCoordinates.y, -1.0f, 0.0f);
 }
 
-bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 aabb_min, glm::vec3 aabb_max, glm::mat4 ModelMatrix, float& intersection_distance) {
+bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::vec3& ray_direction, const glm::vec3& aabb_min, const glm::vec3& aabb_max, const glm::mat4& ModelMatrix, float& intersection_distance) {
     float tMin = 0.0f;
     float tMax = 100000.0f;
 
@@ -291,7 +291,7 @@ bool RayPicking::testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_dire
     return true;
 }
 
-void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, glm::mat4 ViewMatrix, glm::mat4 ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) {
+void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) {
     glm::vec4 lRayStart_NDC(
         (float(mouseX)/float(screenWidth)  - 0.5f) * 2.0f,
         (float(mouseY)/float(screenHeight) - 0.5f) * 2.0f,

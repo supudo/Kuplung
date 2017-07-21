@@ -16,12 +16,12 @@ void SaveOpen::init() {
     this->entGProtocolBufs->init();
 }
 
-void SaveOpen::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpen::saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces) {
 //    this->entBinarySeq->saveKuplungFile(file, managerObjects, meshModelFaces);
     this->entGProtocolBufs->saveKuplungFile(file, managerObjects, meshModelFaces);
 }
 
-std::vector<ModelFaceData*> SaveOpen::openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::vector<ModelFaceData*> SaveOpen::openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects) {
 //    return this->entBinarySeq->openKuplungFile(file, managerObjects);
     return this->entGProtocolBufs->openKuplungFile(file, managerObjects);
 }

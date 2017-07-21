@@ -20,13 +20,13 @@ void KuplungMiniz::closeZipFile() {
     mz_zip_writer_end(&this->zipFile);
 }
 
-void KuplungMiniz::createZipFile(std::string zipFilename) {
+void KuplungMiniz::createZipFile(const std::string& zipFilename) {
     memset(&this->zipFile, 0, sizeof(mz_zip_archive));
     mz_zip_writer_init_file(&this->zipFile, zipFilename.c_str(), 0);
 
 }
 
-int KuplungMiniz::addFileToArchive(std::string contentPath, std::string zipPath) {
+int KuplungMiniz::addFileToArchive(const std::string& contentPath, const std::string& zipPath) {
     if (!mz_zip_writer_add_file(&this->zipFile, zipPath.c_str(), contentPath.c_str(), "", 0, MZ_BEST_COMPRESSION)) {
         Settings::Instance()->funcDoLog("[Kuplung-Miniz-Add] failed!");
         return 1;

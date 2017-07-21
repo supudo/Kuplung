@@ -151,7 +151,7 @@ void CameraModel::initBuffers() {
     glBindVertexArray(0);
 }
 
-void CameraModel::render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld) {
+void CameraModel::render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4& mtxGrid, const bool& fixedGridWorld) {
     if (this->glVAO > 0 && this->showCameraObject) {
         glUseProgram(this->shaderProgram);
 

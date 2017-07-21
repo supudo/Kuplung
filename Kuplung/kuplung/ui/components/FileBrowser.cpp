@@ -154,7 +154,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
             entity.isFile = false;
             entity.title = "..";
             entity.path = currentPath.parent_path().string();
-            entity.size = "";
+            entity.size.clear();
             folderContents[".."] = entity;
         }
 
@@ -184,9 +184,9 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
                     entity.path = iteratorFolder->path().string();
 
                     if (!entity.isFile)
-                        entity.size = "";
+                        entity.size.clear();
                     else {
-                        std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
+                        //std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
                         entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
                     }
 
@@ -198,7 +198,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
                     mds += " " + std::to_string(modifiedDateLocal->tm_hour);
                     mds += ":" + std::to_string(modifiedDateLocal->tm_min);
                     mds += "." + std::to_string(modifiedDateLocal->tm_sec);
-                    entity.modifiedDate = mds;
+                    entity.modifiedDate = std::move(mds);
 
                     folderContents[entity.path] = entity;
 

@@ -750,7 +750,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
                     }
 
                     if (this->managerObjects.Setting_ShowTerrain) {
-                        if (this->newHeightmap && this->heightmapImage != "") {
+                        if (this->newHeightmap && !this->heightmapImage.empty()) {
                             int tChannels;
                             unsigned char* tPixels = stbi_load(this->heightmapImage.c_str(), &this->heightmapWidth, &this->heightmapHeight, &tChannels, 0);
                             if (!tPixels)

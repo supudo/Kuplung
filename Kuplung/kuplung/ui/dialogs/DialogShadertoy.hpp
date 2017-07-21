@@ -39,7 +39,7 @@ private:
     std::string exec(const char* cmd);
     std::string paste();
     void getFromClipboard();
-    void openExample(std::string fileName);
+    void openExample(const std::string& fileName);
 };
 
 #endif /* DialogShadertoy_hpp */

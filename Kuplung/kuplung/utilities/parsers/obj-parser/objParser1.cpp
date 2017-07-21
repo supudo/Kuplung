@@ -149,7 +149,7 @@ std::vector<MeshModel> objParser1::parse(const FBEntity& fileToParse, const std:
                     this->models[static_cast<size_t>(indexModel)].vertices.push_back(v_v);
                     this->models[static_cast<size_t>(indexModel)].countVertices += 3;
 
-                    if (this->textureCoordinates.size() > 0 && face[1] != "") {
+                    if (this->textureCoordinates.size() > 0 && !face[1].empty()) {
                         int t_idx = (std::stoi(face[1]) - 1) * 2;
                         glm::vec2 v_tc = glm::vec2(this->textureCoordinates[static_cast<size_t>(t_idx + 0)],
                                 this->textureCoordinates[static_cast<size_t>(t_idx + 1)]);
@@ -300,7 +300,7 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
     materialImage.Width = 0;
     materialImage.UseTexture = true;
 
-    if (textureLine.find("-") != std::string::npos) {
+    if (textureLine.find('-') != std::string::npos) {
         std::regex dash("-");
         std::vector<std::string> lineElements = this->splitString(textureLine, dash);
 
@@ -335,7 +335,7 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
     return materialImage;
 }
 
-std::vector<std::string> objParser1::splitString(const std::string &s, std::regex delimiter) {
+std::vector<std::string> objParser1::splitString(const std::string &s, const std::regex& delimiter) {
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
@@ -344,7 +344,7 @@ std::vector<std::string> objParser1::splitString(const std::string &s, std::rege
     return elements;
 }
 
-std::vector<float> objParser1::string2float(std::vector<std::string> strings) {
+std::vector<float> objParser1::string2float(const std::vector<std::string>& strings) {
     std::vector<float> floats;
     try {
         for (size_t i=0; i<strings.size(); i++) {

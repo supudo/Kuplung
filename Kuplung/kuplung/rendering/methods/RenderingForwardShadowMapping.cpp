@@ -447,12 +447,14 @@ void RenderingForwardShadowMapping::render(const std::vector<ModelFaceData*>& me
 
 void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
-        glm::vec3 lightPos = glm::vec3(this->managerObjects.lightSources[0]->matrixModel[3].x, this->managerObjects.lightSources[0]->matrixModel[3].y, this->managerObjects.lightSources[0]->matrixModel[3].z);
+		glm::vec4 vecpos = this->managerObjects.lightSources[0]->matrixModel[3];
+        glm::vec3 lightPos = glm::vec3(vecpos.x, vecpos.y, vecpos.z);
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
                                                this->managerObjects.Setting_PlaneClose,
                                                this->managerObjects.Setting_PlaneFar);
-        glm::mat4 matrixLightView = glm::lookAt(lightPos, this->managerObjects.camera->eyeSettings->View_Center, this->managerObjects.camera->eyeSettings->View_Up);
-        matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
+        // TODO: PVS SA
+		//glm::mat4 matrixLightView = glm::lookAt(lightPos, this->managerObjects.camera->eyeSettings->View_Center, this->managerObjects.camera->eyeSettings->View_Up);
+		glm::mat4 matrixLightView = glm::translate(this->managerObjects.camera->matrixCamera, glm::vec3(-2, 2, 2));
         this->matrixLightSpace = lightProjection * matrixLightView;
 
         glUseProgram(this->shaderProgramShadows);
@@ -628,7 +630,8 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
         glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
 
         // Outline color
-        glUniform3f(this->glFS_OutlineColor, mfd->getOptionsOutlineColor().r, mfd->getOptionsOutlineColor().g, mfd->getOptionsOutlineColor().b);
+		glm::vec4 outline_color = mfd->getOptionsOutlineColor();
+        glUniform3f(this->glFS_OutlineColor, outline_color.r, outline_color.g, outline_color.b);
 
         // ambient color for editor
         glUniform3f(this->glFS_UIAmbient, this->uiAmbientLight.r, this->uiAmbientLight.g, this->uiAmbientLight.b);
@@ -675,9 +678,12 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                         glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
 
                         // color
-                        glUniform3f(f->gl_Ambient, light->ambient->color.r, light->ambient->color.g, light->ambient->color.b);
-                        glUniform3f(f->gl_Diffuse, light->diffuse->color.r, light->diffuse->color.g, light->diffuse->color.b);
-                        glUniform3f(f->gl_Specular, light->specular->color.r, light->specular->color.g, light->specular->color.b);
+						glm::vec3 c_ambient = light->ambient->color;
+						glm::vec3 c_diffuse = light->diffuse->color;
+						glm::vec3 c_specular = light->specular->color;
+                        glUniform3f(f->gl_Ambient, c_ambient.r, c_ambient.g, c_ambient.b);
+                        glUniform3f(f->gl_Diffuse, c_diffuse.r, c_diffuse.g, c_diffuse.b);
+                        glUniform3f(f->gl_Specular, c_specular.r, c_specular.g, c_specular.b);
 
                         // light factors
                         glUniform1f(f->gl_StrengthAmbient, light->ambient->strength);
@@ -695,7 +701,8 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                         glUniform1i(f->gl_InUse, 1);
 
                         // light
-                        glUniform3f(f->gl_Position, light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
+						glm::vec3 vec_pos = light->matrixModel[3];
+                        glUniform3f(f->gl_Position, vec_pos.x, vec_pos.y, vec_pos.z);
 
                         // factors
                         glUniform1f(f->gl_Constant, light->lConstant->point);
@@ -769,10 +776,15 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
         glUniform1f(this->glMaterial_SpecularExp, mfd->Setting_MaterialSpecularExp->point);
         glUniform1i(this->glMaterial_IlluminationModel, static_cast<GLint>(mfd->materialIlluminationModel));
         glUniform1f(this->glMaterial_HeightScale, mfd->displacementHeightScale->point);
-        glUniform3f(this->glMaterial_Ambient, mfd->materialAmbient->color.r, mfd->materialAmbient->color.g, mfd->materialAmbient->color.b);
-        glUniform3f(this->glMaterial_Diffuse, mfd->materialDiffuse->color.r, mfd->materialDiffuse->color.g, mfd->materialDiffuse->color.b);
-        glUniform3f(this->glMaterial_Specular, mfd->materialSpecular->color.r, mfd->materialSpecular->color.g, mfd->materialSpecular->color.b);
-        glUniform3f(this->glMaterial_Emission, mfd->materialEmission->color.r, mfd->materialEmission->color.g, mfd->materialEmission->color.b);
+
+		glm::vec3 c_Ambient = mfd->materialAmbient->color;
+		glm::vec3 c_Diffuse = mfd->materialDiffuse->color;
+		glm::vec3 c_Specular = mfd->materialSpecular->color;
+		glm::vec3 c_Emission = mfd->materialEmission->color;
+        glUniform3f(this->glMaterial_Ambient, c_Ambient.r, c_Ambient.g, c_Ambient.b);
+        glUniform3f(this->glMaterial_Diffuse, c_Diffuse.r, c_Diffuse.g, c_Diffuse.b);
+        glUniform3f(this->glMaterial_Specular, c_Specular.r, c_Specular.g, c_Specular.b);
+        glUniform3f(this->glMaterial_Emission, c_Emission.r, c_Emission.g, c_Emission.b);
 
         if (mfd->vboTextureAmbient > 0 && mfd->meshModel.ModelMaterial.TextureAmbient.UseTexture) {
             glUniform1i(this->glMaterial_HasTextureAmbient, 1);

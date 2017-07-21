@@ -41,7 +41,7 @@ void UIManager::init(SDL_Window *window,
     }
 }
 
-void UIManager::doLog(std::string message) {
+void UIManager::doLog(const std::string& message) {
     switch (Settings::Instance()->GUISystem) {
         case 1:
             this->provider_ImGui->doLog(message);
@@ -311,7 +311,7 @@ void UIManager::setShowControlsModels(bool showModels) {
     }
 }
 
-void UIManager::setRecentFiles(std::vector<FBEntity> files) {
+void UIManager::setRecentFiles(const std::vector<FBEntity>& files) {
     switch (Settings::Instance()->GUISystem) {
         case 1:
             this->provider_ImGui->recentFiles = files;
@@ -322,7 +322,7 @@ void UIManager::setRecentFiles(std::vector<FBEntity> files) {
     }
 }
 
-void UIManager::setRecentFilesImported(std::vector<FBEntity> files) {
+void UIManager::setRecentFilesImported(const std::vector<FBEntity>& files) {
     switch (Settings::Instance()->GUISystem) {
         case 1:
             this->provider_ImGui->recentFilesImported = files;
@@ -333,7 +333,7 @@ void UIManager::setRecentFilesImported(std::vector<FBEntity> files) {
     }
 }
 
-void UIManager::recentFilesAdd(FBEntity file) {
+void UIManager::recentFilesAdd(const FBEntity& file) {
     switch (Settings::Instance()->GUISystem) {
         case 1:
             this->provider_ImGui->recentFilesAdd(file);
@@ -344,7 +344,7 @@ void UIManager::recentFilesAdd(FBEntity file) {
     }
 }
 
-void UIManager::recentFilesAddImported(FBEntity file) {
+void UIManager::recentFilesAddImported(const FBEntity& file) {
     switch (Settings::Instance()->GUISystem) {
         case 1:
             this->provider_ImGui->recentFilesAddImported(file);

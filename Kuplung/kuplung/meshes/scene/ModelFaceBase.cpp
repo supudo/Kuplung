@@ -26,7 +26,6 @@ ModelFaceBase* ModelFaceBase::clone(const int modelID) {
     mmf->matrixProjection = this->matrixProjection;
 
     mmf->Setting_UseTessellation = this->Setting_UseTessellation;
-    mmf->ModelID = this->ModelID;
     mmf->meshModel = this->meshModel;
 
     mmf->so_fov = this->so_fov;
@@ -72,11 +71,11 @@ ModelFaceBase::~ModelFaceBase() {
 
 #pragma mark - Initialization
 
-void ModelFaceBase::init(MeshModel const& model, std::string const& assetsFolder) {
+void ModelFaceBase::init(MeshModel const& model, std::string const& assetFolder) {
     this->mathHelper = std::make_unique<KuplungApp::Utilities::Math::Maths>();
 
     this->meshModel = model;
-    this->assetsFolder = assetsFolder;
+    this->assetsFolder = assetFolder;
 
     this->initBuffersAgain = false;
     this->Settings_DeferredRender = false;
@@ -217,16 +216,16 @@ void ModelFaceBase::initVertexSphere() {
     this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
-void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject) {
-    if (materialImage.Image != "") {
+void ModelFaceBase::loadTexture(std::string const& texturesFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject) {
+    if (!materialImage.Image.empty()) {
         std::string matImageLocal = materialImage.Image;
         if (!boost::filesystem::exists(matImageLocal))
-            matImageLocal = assetsFolder + "/" + materialImage.Image;
+            matImageLocal = texturesFolder + "/" + materialImage.Image;
 
         int tWidth, tHeight, tChannels;
         unsigned char* tPixels = stbi_load(matImageLocal.c_str(), &tWidth, &tHeight, &tChannels, 0);
         if (!tPixels) {
-            std::string texName = "";
+            std::string texName("");
             assert(type == objMaterialImageType_Ambient ||
                    type == objMaterialImageType_Diffuse ||
                    type == objMaterialImageType_Specular ||
@@ -292,7 +291,7 @@ void ModelFaceBase::loadTexture(std::string const& assetsFolder, MeshMaterialTex
     }
 }
 
-void ModelFaceBase::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4 matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight) {
+void ModelFaceBase::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight) {
     this->matrixProjection = matrixProjection;
     this->matrixCamera = matrixCamera;
     this->matrixModel = matrixModel;
@@ -311,7 +310,7 @@ void ModelFaceBase::setOptionsSelected(bool selectedYn) {
     this->so_selectedYn = selectedYn;
 }
 
-void ModelFaceBase::setOptionsOutlineColor(glm::vec4 outlineColor) {
+void ModelFaceBase::setOptionsOutlineColor(const glm::vec4& outlineColor) {
     this->so_outlineColor = outlineColor;
 }
 

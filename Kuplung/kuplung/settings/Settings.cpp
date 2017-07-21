@@ -210,7 +210,7 @@ void Settings::setLogFunc(std::function<void(std::string)> doLog) {
     this->funcDoLog = doLog;
 }
 
-void Settings::saveRecentFiles(std::vector<FBEntity> recentFiles) {
+void Settings::saveRecentFiles(const std::vector<FBEntity>& recentFiles) {
     this->cfgUtils->saveRecentFiles(recentFiles);
 }
 
@@ -218,7 +218,7 @@ std::vector<FBEntity> Settings::loadRecentFiles() {
     return this->cfgUtils->loadRecentFiles();
 }
 
-void Settings::saveRecentFilesImported(std::vector<FBEntity> recentFiles) {
+void Settings::saveRecentFilesImported(const std::vector<FBEntity>& recentFiles) {
     this->cfgUtils->saveRecentFilesImported(recentFiles);
 }
 
@@ -226,11 +226,11 @@ std::vector<FBEntity> Settings::loadRecentFilesImported() {
     return this->cfgUtils->loadRecentFilesImported();
 }
 
-void Settings::timerStart(std::string msg) {
+void Settings::timerStart(const std::string& msg) {
     this->funcDoLog(this->string_format("[Timer START] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
 }
 
-void Settings::timerEnd(std::string msg) {
+void Settings::timerEnd(const std::string& msg) {
     this->funcDoLog(this->string_format("[Timer END] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
 }
 

@@ -66,7 +66,7 @@ struct MeshModel {
     std::vector<unsigned int> indices;
 };
 
-void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices) {
+void static Kuplung_printObjModels(const std::vector<MeshModel>& models, bool byIndices) {
     for (size_t i=0; i<models.size(); i++) {
         MeshModel m = models[i];
         printf("model.ID = %i\n", m.ID);
@@ -82,16 +82,20 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
             for (size_t j=0; j<m.indices.size(); j++) {
                 size_t idx = m.indices[j];
                 std::string geom = Settings::Instance()->string_format("index = %i ---> ", idx);
-                geom += Settings::Instance()->string_format("vertex = [%g, %g, %g]", m.vertices[idx].x, m.vertices[idx].y, m.vertices[idx].z);
-                geom += Settings::Instance()->string_format(", uv = [%g, %g]", m.texture_coordinates[idx].x, m.texture_coordinates[idx].y);
-                geom += Settings::Instance()->string_format(", normal = [%g, %g, %g]", m.normals[idx].x, m.normals[idx].y, m.normals[idx].z);
-                printf("%s\n", geom.c_str());
+				glm::vec3 vert = m.vertices[idx];
+				glm::vec2 tc = m.texture_coordinates[idx];
+				glm::vec3 n = m.normals[idx];
+                geom += Settings::Instance()->string_format("vertex = [%g, %g, %g]", vert.x, vert.y, vert.z);
+                geom += Settings::Instance()->string_format(", uv = [%g, %g]", tc.x, tc.y);
+                geom += Settings::Instance()->string_format(", normal = [%g, %g, %g]", n.x, n.y, n.z);
+                //printf("%s\n", geom.c_str());
             }
         }
         else {
             std::string verts;
             for (size_t j=0; j<m.vertices.size(); j++) {
-                verts += Settings::Instance()->string_format("[%g, %g, %g], ", m.vertices[j].x, m.vertices[j].y, m.vertices[j].z);
+				glm::vec3 v = m.vertices[j];
+                verts += Settings::Instance()->string_format("[%g, %g, %g], ", v.x, v.y, v.z);
             }
             printf("m.vertices : %s\n", verts.c_str());
 
@@ -103,7 +107,8 @@ void static Kuplung_printObjModels(std::vector<MeshModel> models, bool byIndices
 
             std::string normals;
             for (size_t j=0; j<m.normals.size(); j++) {
-                normals += Settings::Instance()->string_format("[%f, %f, %f], ", m.normals[j].x, m.normals[j].y, m.normals[j].z);
+				glm::vec3 n = m.normals[j];
+                normals += Settings::Instance()->string_format("[%f, %f, %f], ", n.x, n.y, n.z);
             }
             printf("m.normals : %s\n", normals.c_str());
 

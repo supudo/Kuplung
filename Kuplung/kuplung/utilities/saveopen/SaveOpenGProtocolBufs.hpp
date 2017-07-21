@@ -20,8 +20,8 @@ class SaveOpenGProtocolBufs {
 public:
     ~SaveOpenGProtocolBufs();
     void init();
-    void saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces);
-    std::vector<ModelFaceData*> openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects);
+    void saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces);
+    std::vector<ModelFaceData*> openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
     std::unique_ptr<KuplungApp::Utilities::Miniz::KuplungMiniz> managerZip;
@@ -40,9 +40,9 @@ private:
 
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
-    KuplungApp::Vec4* getVec4(glm::vec4 v);
-    KuplungApp::Vec3* getVec3(glm::vec3 v);
-    KuplungApp::Vec2* getVec2(glm::vec2 v);
+    KuplungApp::Vec4* getVec4(const glm::vec4& v);
+    KuplungApp::Vec3* getVec3(const glm::vec3& v);
+    KuplungApp::Vec2* getVec2(const glm::vec2& v);
 
     glm::vec4 setVec4(const KuplungApp::Vec4& v);
     glm::vec3 setVec3(const KuplungApp::Vec3& v);

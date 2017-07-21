@@ -157,12 +157,12 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
         }
         case MaterialTextureType_Undefined: {
             title = "Undefined";
-            image = "";
+            image.clear();
             break;
         }
     }
 
-    if (image != "") {
+    if (!image.empty()) {
         ImGui::Checkbox(chkLabel.c_str(), useTexture);
         if (ImGui::IsItemHovered())
             ImGui::SetTooltip("%s", ("Show/Hide " + title + " Texture").c_str());
@@ -179,37 +179,37 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
             switch (texType) {
                 case MaterialTextureType_Ambient: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureAmbient.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureAmbient.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureAmbient.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Diffuse: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDiffuse.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDiffuse.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDiffuse.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Dissolve: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDissolve.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDissolve.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDissolve.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Bump: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureBump.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureBump.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureBump.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Specular: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecular.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecular.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecular.Image.clear();
                     break;
                 }
                 case MaterialTextureType_SpecularExp: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecularExp.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecularExp.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureSpecularExp.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Displacement: {
                     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDisplacement.UseTexture = false;
-                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDisplacement.Image = "";
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->meshModel.ModelMaterial.TextureDisplacement.Image.clear();
                     break;
                 }
                 case MaterialTextureType_Undefined: {
@@ -228,7 +228,7 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
             this->showUVEditor = true;
         }
         ImGui::SameLine();
-        size_t f = image.find_last_of("/");
+        size_t f = image.find_last_of('/');
         if (f != std::string::npos)
             image = image.substr(f + 1);
         ImGui::Text("%s: %s", title.c_str(), image.c_str());
@@ -246,7 +246,7 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
     int wWidth, wHeight, tWidth, tHeight, posX, posY;
     SDL_GetWindowSize(this->sdlWindow, &wWidth, &wHeight);
 
-    std::string img = "";
+    std::string img("");
     if (type == MaterialTextureType_Ambient)
         img = mmf->meshModel.ModelMaterial.TextureAmbient.Image;
     else if (type == MaterialTextureType_Diffuse)
@@ -294,7 +294,7 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
     *genTexture = false;
 }
 
-void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * meshModelFaces, int * sceneSelectedModelObject) {
+void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * mmfaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
@@ -319,8 +319,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     switch (this->selectedTabPanel) {
         case 0:
-            if (meshModelFaces != NULL && meshModelFaces->size() > 0)
-                this->drawModels(isFrame, meshModelFaces);
+            if (mmfaces != NULL && mmfaces->size() > 0)
+                this->drawModels(isFrame, mmfaces);
             else
                 ImGui::TextColored(ImVec4(255, 0, 0, 255), "No models in the current scene.");
             break;
@@ -333,8 +333,8 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
 
     ImGui::EndGroup();
 
-    if (this->selectedObject > -1 && meshModelFaces != NULL && static_cast<int>((*meshModelFaces).size()) > this->selectedObject && (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor)
-        this->componentMaterialEditor->draw(this->selectedObject, (*meshModelFaces)[static_cast<size_t>(this->selectedObject)], &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor);
+    if (this->selectedObject > -1 && mmfaces != NULL && static_cast<int>((*mmfaces).size()) > this->selectedObject && (*mmfaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor)
+        this->componentMaterialEditor->draw(this->selectedObject, (*mmfaces)[static_cast<size_t>(this->selectedObject)], &(*mmfaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor);
 
     *sceneSelectedModelObject = this->selectedObject;
 
@@ -349,14 +349,14 @@ void DialogControlsModels::processTexture(ModelFaceBase *mmf) {
     (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)] = mmf;
 }
 
-void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*> * meshModelFaces) {
-    this->meshModelFaces = meshModelFaces;
+void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*> * mmfaces) {
+    this->meshModelFaces = mmfaces;
     ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
-        for (size_t i=0; i<meshModelFaces->size(); i++) {
-            (*meshModelFaces)[i]->initModelProperties();
+        for (size_t i=0; i<this->meshModelFaces->size(); i++) {
+            (*this->meshModelFaces)[i]->initModelProperties();
         }
     }
     ImGui::PopStyleColor(3);
@@ -364,8 +364,8 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::BeginChild("Scene Items", ImVec2(0, this->heightTopPanel), true);
 
     std::vector<const char*> scene_items;
-    for (size_t i=0; i<meshModelFaces->size(); i++) {
-        scene_items.push_back((*meshModelFaces)[i]->meshModel.ModelTitle.c_str());
+    for (size_t i=0; i<this->meshModelFaces->size(); i++) {
+        scene_items.push_back((*this->meshModelFaces)[i]->meshModel.ModelTitle.c_str());
     }
 
     // Scene ModelFace
@@ -373,13 +373,13 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
-    ImGui::ListBox("", &this->selectedObject, &scene_items[0], static_cast<int>(meshModelFaces->size()));
+    ImGui::ListBox("", &this->selectedObject, &scene_items[0], static_cast<int>(this->meshModelFaces->size()));
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);
     if (this->selectedObject > -1 && ImGui::BeginPopupContextItem("Actions")) {
         ImGui::MenuItem("Rename", NULL, &this->cmenu_renameModel);
         if (ImGui::MenuItem("Duplicate"))
-            (*meshModelFaces).push_back((*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->clone(static_cast<int>((*meshModelFaces).size() + 1)));
+            (*this->meshModelFaces).push_back((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->clone(static_cast<int>((*this->meshModelFaces).size() + 1)));
         //ImGui::MenuItem("Delete", NULL, &this->cmenu_deleteYn);
         if (ImGui::BeginMenu("Delete")) {
             if (ImGui::MenuItem("OK"))
@@ -391,7 +391,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PopItemWidth();
 
     if (this->cmenu_renameModel)
-        this->contextModelRename(meshModelFaces);
+        this->contextModelRename(this->meshModelFaces);
 
     if (this->cmenu_deleteYn)
         this->contextModelDelete();
@@ -413,7 +413,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
     if (this->selectedObject > -1) {
-        ModelFaceBase *mmf = (*meshModelFaces)[static_cast<size_t>(this->selectedObject)];
+        ModelFaceBase *mmf = (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)];
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.File.title.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "ModelFace:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.ModelTitle.c_str());
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Material:"); ImGui::SameLine(); ImGui::Text("%s", mmf->meshModel.MaterialTitle.c_str());
@@ -421,13 +421,13 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Normals:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countNormals);
         ImGui::TextColored(ImVec4(255, 0, 0, 255), "Indices:"); ImGui::SameLine(); ImGui::Text("%i", mmf->meshModel.countIndices);
 
-        if (mmf->meshModel.ModelMaterial.TextureAmbient.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureDiffuse.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureBump.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureDisplacement.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureDissolve.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureSpecular.Image != "" ||
-            mmf->meshModel.ModelMaterial.TextureSpecularExp.Image != "") {
+        if (!mmf->meshModel.ModelMaterial.TextureAmbient.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureDiffuse.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureBump.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureDisplacement.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureDissolve.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureSpecular.Image.empty() ||
+            !mmf->meshModel.ModelMaterial.TextureSpecularExp.Image.empty()) {
             ImGui::Separator();
             ImGui::TextColored(ImVec4(255, 0, 0, 255), "Textures");
         }
@@ -490,47 +490,47 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
             case 0: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Properties");
                 // cel shading
-                ImGui::Checkbox("Cel Shading", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_CelShading);
-                ImGui::Checkbox("Wireframe", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Wireframe);
-                ImGui::Checkbox("Edit Mode", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_EditMode);
-                ImGui::Checkbox("Shadows", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_ShowShadows);
+                ImGui::Checkbox("Cel Shading", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_CelShading);
+                ImGui::Checkbox("Wireframe", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Wireframe);
+                ImGui::Checkbox("Edit Mode", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_EditMode);
+                ImGui::Checkbox("Shadows", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_ShowShadows);
                 // alpha
-                ImGui::TextColored(ImVec4(1, 1, 1, (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Alpha), "Alpha Blending");
-                this->helperUI->addControlsFloatSlider("", 1, 0.0f, 1.0f, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Alpha);
+                ImGui::TextColored(ImVec4(1, 1, 1, (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Alpha), "Alpha Blending");
+                this->helperUI->addControlsFloatSlider("", 1, 0.0f, 1.0f, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Alpha);
                 break;
             }
             case 1: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Scale ModelFace");
-                if (ImGui::Checkbox("Gizmo Scale", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale)) {
-                    if ((*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale) {
-                        (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate = false;
-                        (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Translate = false;
+                if (ImGui::Checkbox("Gizmo Scale", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale)) {
+                    if ((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale) {
+                        (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate = false;
+                        (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Translate = false;
                     }
                 }
-                ImGui::Checkbox("Scale all", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0);
-                if ((*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0) {
-                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("X");
-                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Y");
-                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Z");
+                ImGui::Checkbox("Scale all", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0);
+                if ((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scale0) {
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("X");
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Y");
+                    ImGui::Checkbox("", &K_DCM_ReadOnly); ImGui::SameLine(); ImGui::SliderFloat("##001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->point, 0.05f, this->managerObjects.Setting_GridSize / 2); ImGui::SameLine(); ImGui::Text("Z");
                 }
                 else {
-                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->point, false, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->point, false, isFrame);
-                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("X", 1, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleX->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Y", 2, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleY->point, false, isFrame);
+                    this->helperUI->addControlsSliderSameLine("Z", 3, 0.05f, 0.0f, this->managerObjects.Setting_GridSize / 2, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->scaleZ->point, false, isFrame);
                 }
                 break;
             }
             case 2: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Rotate model around axis");
-                if (ImGui::Checkbox("Gizmo Rotate", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate)) {
-                    if ((*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate) {
-                        (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale = false;
-                        (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Translate = false;
+                if (ImGui::Checkbox("Gizmo Rotate", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate)) {
+                    if ((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Rotate) {
+                        (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Scale = false;
+                        (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Gizmo_Translate = false;
                     }
                 }
-                this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateX->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateY->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateZ->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 4, 1.0f, -180.0f, 180.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateX->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 5, 1.0f, -180.0f, 180.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateY->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 6, 1.0f, -180.0f, 180.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateZ->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->rotateZ->point, true, isFrame);
                 break;
             }
             case 3: {
@@ -544,59 +544,59 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                 }
 
 //                ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.65f);
-                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 7, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->point, true, isFrame);
 //                ImGui::PopItemWidth();
 //                ImGui::SameLine();
 //                ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.35f);
-//                ImGui::InputFloat("##0001", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->point, -1.0f, -1.0f, 3);
+//                ImGui::InputFloat("##0001", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionX->point, -1.0f, -1.0f, 3);
 //                ImGui::PopItemWidth();
 
-                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionY->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionZ->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 8, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionY->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 9, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionZ->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->positionZ->point, true, isFrame);
                 break;
             }
             case 4: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Displace model");
-                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceX->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceX->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceY->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceY->point, true, isFrame);
-                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceZ->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceZ->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("X", 10, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceX->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceX->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Y", 11, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceY->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceY->point, true, isFrame);
+                this->helperUI->addControlsSliderSameLine("Z", 12, 0.5f, (-1 * this->managerObjects.Setting_GridSize), this->managerObjects.Setting_GridSize, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceZ->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displaceZ->point, true, isFrame);
                 break;
             }
             case 5: {
                 ImGui::TextColored(ImVec4(1, 0, 0, 1), "Material of the model");
                 if (ImGui::Button("Material Editor"))
-                    (*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor = true;
-                ImGui::Checkbox("Parallax Mapping", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_ParallaxMapping);
+                    (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->showMaterialEditor = true;
+                ImGui::Checkbox("Parallax Mapping", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_ParallaxMapping);
                 ImGui::Separator();
-                ImGui::Checkbox("Use Tessellation", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseTessellation);
-                if ((*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseTessellation) {
-                    ImGui::Checkbox("Culling", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseCullFace);
-                    this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_TessellationSubdivision);
+                ImGui::Checkbox("Use Tessellation", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseTessellation);
+                if ((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseTessellation) {
+                    ImGui::Checkbox("Culling", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_UseCullFace);
+                    this->helperUI->addControlsIntegerSlider("Subdivision", 24, 0, 100, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_TessellationSubdivision);
                     ImGui::Separator();
                     if (mmf->meshModel.ModelMaterial.TextureDisplacement.UseTexture) {
-                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, -2.0f, 2.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displacementHeightScale->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displacementHeightScale->point, false, isFrame);
+                        this->helperUI->addControlsSlider("Displacement", 15, 0.05f, -2.0f, 2.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displacementHeightScale->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->displacementHeightScale->point, false, isFrame);
                         ImGui::Separator();
                     }
                 }
                 else
                     ImGui::Separator();
-                this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialRefraction->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialRefraction->point, true, isFrame);
-                this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialSpecularExp->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialSpecularExp->point, true, isFrame);
+                this->helperUI->addControlsSlider("Refraction", 13, 0.05f, -10.0f, 10.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialRefraction->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialRefraction->point, true, isFrame);
+                this->helperUI->addControlsSlider("Specular Exponent", 14, 10.0f, 0.0f, 1000.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialSpecularExp->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_MaterialSpecularExp->point, true, isFrame);
                 ImGui::Separator();
-                this->helperUI->addControlColor3("Ambient Color", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialAmbient->color, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialAmbient->colorPickerOpen);
-                this->helperUI->addControlColor3("Diffuse Color", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialDiffuse->color, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialDiffuse->colorPickerOpen);
-                this->helperUI->addControlColor3("Specular Color", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialSpecular->color, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialSpecular->colorPickerOpen);
-                this->helperUI->addControlColor3("Emission Color", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialEmission->color, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialEmission->colorPickerOpen);
+                this->helperUI->addControlColor3("Ambient Color", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialAmbient->color, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialAmbient->colorPickerOpen);
+                this->helperUI->addControlColor3("Diffuse Color", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialDiffuse->color, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialDiffuse->colorPickerOpen);
+                this->helperUI->addControlColor3("Specular Color", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialSpecular->color, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialSpecular->colorPickerOpen);
+                this->helperUI->addControlColor3("Emission Color", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialEmission->color, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialEmission->colorPickerOpen);
                 break;
             }
             case 6: {
                 if (ImGui::CollapsingHeader("PBR")) {
                     ImGui::Indent();
                     ImGui::BeginGroup();
-                    ImGui::Checkbox("Use PBR", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR);
-                    this->helperUI->addControlsSlider("Metallic", 13, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Metallic, true, isFrame);
-                    this->helperUI->addControlsSlider("Rougness", 14, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Roughness, true, isFrame);
-                    this->helperUI->addControlsSlider("AO", 15, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_AO, true, isFrame);
+                    ImGui::Checkbox("Use PBR", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR);
+                    this->helperUI->addControlsSlider("Metallic", 13, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Metallic, true, isFrame);
+                    this->helperUI->addControlsSlider("Rougness", 14, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_Roughness, true, isFrame);
+                    this->helperUI->addControlsSlider("AO", 15, 0.0000001f, 0.0f, 1.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Setting_Rendering_PBR_AO, true, isFrame);
                     ImGui::EndGroup();
                     ImGui::Unindent();
                 }
@@ -605,29 +605,29 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                     ImGui::Indent();
                     ImGui::BeginGroup();
                     const char* gb_items[] = {"No Blur", "Horizontal", "Vertical"};
-                    ImGui::Combo("Mode##228", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
-                    this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Radius->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Radius->point, true, isFrame);
-                    this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Width->animate, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Width->point, true, isFrame);
+                    ImGui::Combo("Mode##228", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Mode, gb_items, IM_ARRAYSIZE(gb_items));
+                    this->helperUI->addControlsSlider("Radius", 16, 0.0f, 0.0f, 1000.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Radius->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Radius->point, true, isFrame);
+                    this->helperUI->addControlsSlider("Width", 17, 0.0f, 0.0f, 1000.0f, true, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Width->animate, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_GBlur_Width->point, true, isFrame);
                     ImGui::EndGroup();
                     ImGui::Unindent();
                 }
                 if (ImGui::CollapsingHeader("Tone Mapping")) {
                     ImGui::Indent();
                     ImGui::BeginGroup();
-                    ImGui::Checkbox("ACES Film Rec2020", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_ToneMapping_ACESFilmRec2020);
-                    ImGui::Checkbox("HDR", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_HDR_Tonemapping);
+                    ImGui::Checkbox("ACES Film Rec2020", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_ToneMapping_ACESFilmRec2020);
+                    ImGui::Checkbox("HDR", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_HDR_Tonemapping);
                     ImGui::EndGroup();
                     ImGui::Unindent();
                 }
 
 //            ImGui::Text("Bloom");
-//            ImGui::Checkbox("Apply Bloom", &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_doBloom);
-//            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightA, false, isFrame);
-//            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightB, false, isFrame);
-//            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightC, false, isFrame);
-//            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightD, false, isFrame);
-//            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_Vignette, false, isFrame);
-//            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_VignetteAtt, false, isFrame);
+//            ImGui::Checkbox("Apply Bloom", &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_doBloom);
+//            this->helperUI->addControlsSlider("Ambient", 18, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightA, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular", 19, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightB, false, isFrame);
+//            this->helperUI->addControlsSlider("Specular Exp", 20, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightC, false, isFrame);
+//            this->helperUI->addControlsSlider("Dissolve", 21, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_WeightD, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette", 22, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_Vignette, false, isFrame);
+//            this->helperUI->addControlsSlider("Vignette Attenuation", 23, 0.0f, 0.0f, 10.0f, false, NULL, &(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->Effect_Bloom_VignetteAtt, false, isFrame);
 //            ImGui::Separator();
                 break;
             }
@@ -648,7 +648,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
                     "[9] Transparency: Glass on\n    Reflection: Raytrace off",
                     "[10] Casts shadows onto invisible surfaces"
                 };
-                ImGui::Combo("##987", reinterpret_cast<int*>(&(*meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialIlluminationModel), illum_models_items, IM_ARRAYSIZE(illum_models_items));
+                ImGui::Combo("##987", reinterpret_cast<int*>(&(*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)]->materialIlluminationModel), illum_models_items, IM_ARRAYSIZE(illum_models_items));
                 break;
             }
             default:

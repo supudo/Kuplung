@@ -23,7 +23,7 @@ void DialogStyle::save(std::string const& fontfile, std::string const& fontsize,
     this->saveStyles(fontfile, fontsize, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
-ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
+ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
    ImGuiStyle& style = ImGui::GetStyle();
 
     std::FILE *fp = std::fopen(styleFilePath.c_str(), "rb");
@@ -58,7 +58,7 @@ ImGuiStyle& DialogStyle::load(std::string styleFilePath) {
                     boost::algorithm::trim(opValue);
                 }
                 else
-                    opValue = "";
+                    opValue.clear();
 
                 boost::replace_all(opKey, "style.rendering.", "");
                 boost::replace_all(opKey, "style.sizes.", "");
@@ -177,7 +177,7 @@ void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fon
     out.close();
 }
 
-std::vector<std::string> DialogStyle::splitString(const std::string &s, std::regex delimiter) {
+std::vector<std::string> DialogStyle::splitString(const std::string &s, const std::regex& delimiter) {
     std::vector<std::string> elements;
     std::sregex_token_iterator iter(s.begin(), s.end(), delimiter, -1);
     std::sregex_token_iterator end;
@@ -187,12 +187,12 @@ std::vector<std::string> DialogStyle::splitString(const std::string &s, std::reg
     return elements;
 }
 
-ImVec4 DialogStyle::tov4(std::string opValue) {
+ImVec4 DialogStyle::tov4(const std::string& opValue) {
     std::vector<std::string> values = this->splitString(opValue, std::regex(","));
     return ImVec4(std::stof(values[0]), std::stof(values[1]), std::stof(values[2]), std::stof(values[3]));
 }
 
-ImVec2 DialogStyle::tov2(std::string opValue) {
+ImVec2 DialogStyle::tov2(const std::string& opValue) {
     std::vector<std::string> values = this->splitString(opValue, std::regex(","));
     return ImVec2(std::stof(values[0]), std::stof(values[1]));
 }

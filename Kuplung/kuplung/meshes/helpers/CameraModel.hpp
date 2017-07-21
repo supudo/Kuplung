@@ -24,7 +24,7 @@ public:
     void initProperties();
     bool initShaderProgram();
     void initBuffers();
-    void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4 mtxGrid, const bool fixedGridWorld);
+    void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4& mtxGrid, const bool& fixedGridWorld);
     MeshModel meshModel;
 
     std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;

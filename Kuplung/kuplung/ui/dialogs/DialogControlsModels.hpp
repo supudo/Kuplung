@@ -27,7 +27,7 @@ public:
               std::function<void(ShapeType)> addShape,
               std::function<void(LightSourceType)> addLight,
               std::function<void(int)> deleteModel);
-    void render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * meshModelFaces, int * sceneSelectedModelObject);
+    void render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * mmfaces, int * sceneSelectedModelObject);
 
     int selectedObject;
 

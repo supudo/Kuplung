@@ -25,9 +25,9 @@ void UVEditor::init(int positionX, int positionY, int width, int height) {
     this->textureLoaded = false;
     this->uvUnwrappingType = UVUnwrappingMethod_None;
     this->uvUnwrappingTypePrev = -1;
-    this->texturePath = "";
-    this->textureImage = "";
-    this->textureFilename = "";
+    this->texturePath.clear();
+    this->textureImage.clear();
+    this->textureFilename.clear();
 
     this->componentFileBrowser = std::make_unique<FileBrowser>();
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, 50, 50,
@@ -45,9 +45,9 @@ void UVEditor::setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::st
 
     FBEntity file;
     file.isFile = true;
-    file.modifiedDate = "";
-    file.size = "";
-    file.extension = "";
+    file.modifiedDate.clear();
+    file.size.clear();
+    file.extension.clear();
     switch (texType) {
         case MaterialTextureType_Ambient: {
             file.title = this->mmf->meshModel.ModelMaterial.TextureAmbient.Image;
@@ -111,9 +111,9 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     btnLabel = ICON_FA_TIMES " Clear";
     if (ImGui::Button(btnLabel.c_str())) {
         this->textureLoaded = false;
-        this->textureFilename = "";
-        this->textureImage = "";
-        this->texturePath = "";
+        this->textureFilename.clear();
+        this->textureImage.clear();
+        this->texturePath.clear();
         this->textureHeight = -1;
         this->textureWidth = 1;
     }
@@ -164,7 +164,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     for (float y = fmodf(offset.y, GRID_SZ); y < canvas_sz.y; y += GRID_SZ)
         draw_list->AddLine(ImVec2(0.0f, y) + win_pos, ImVec2(canvas_sz.x, y) + win_pos, GRID_COLOR);
 
-    if (this->textureImage != "") {
+    if (!this->textureImage.empty()) {
         draw_list->ChannelsSplit(2);
 
         if (this->uvUnwrappingType != this->uvUnwrappingTypePrev) {
@@ -431,7 +431,7 @@ void UVEditor::initTextureBuffer() {
     this->textureWidth = 0;
     this->textureHeight = 0;
 
-    if (this->textureImage != "") {
+    if (!this->textureImage.empty()) {
         if (!boost::filesystem::exists(this->textureImage))
             this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
         int tChannels;
@@ -473,7 +473,7 @@ void UVEditor::initTextureBuffer() {
     }
 }
 
-void UVEditor::dialogFileBrowserProcessFile(FBEntity file, MaterialTextureType texType) {
+void UVEditor::dialogFileBrowserProcessFile(const FBEntity& file, MaterialTextureType texType) {
     this->showFileBrowser = false;
     this->textureImage = file.path;
     this->textureFilename = file.title;

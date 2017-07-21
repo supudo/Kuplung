@@ -231,7 +231,7 @@ void Kuplung::initFolders() {
         homeFolder = std::string(hpath);
 #endif
     if (Settings::Instance()->currentFolder.empty())
-        Settings::Instance()->currentFolder = homeFolder;
+        Settings::Instance()->currentFolder = std::move(homeFolder);
 }
 
 #pragma mark - Event processing
@@ -490,7 +490,7 @@ void Kuplung::initSceneGUI() {
 }
 
 void Kuplung::addShape(const ShapeType type) {
-    std::string shapeName = "";
+    std::string shapeName("");
     assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
     switch (type) {
     case ShapeType_Cone:

@@ -36,8 +36,8 @@ private:
 
     glm::vec2 getNormalizeDeviceCordinates(float X, float Y);
     glm::vec4 getEyeCoordinates(glm::vec4& coordinates, std::unique_ptr<ObjectsManager> &managerObjects);
-    void getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, glm::mat4 ViewMatrix, glm::mat4 ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction);
-    bool testRayOBBIntersection(glm::vec3 ray_origin, glm::vec3 ray_direction, glm::vec3 aabb_min, glm::vec3 aabb_max, glm::mat4 ModelMatrix, float& intersection_distance);
+    void getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction);
+    bool testRayOBBIntersection(const glm::vec3& ray_origin, const glm::vec3& ray_direction, const glm::vec3& aabb_min, const glm::vec3& aabb_max, const glm::mat4& ModelMatrix, float& intersection_distance);
     bool testRaySphereIntersection(int const vID, glm::vec3 const& ray_origin, glm::vec3 const& ray_direction, glm::vec3 const& vertex, glm::mat4 const& mtx, float const& radius);
 };
 

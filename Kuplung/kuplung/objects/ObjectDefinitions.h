@@ -75,7 +75,7 @@ struct Skybox_Item {
 };
 
 std::string static Kuplung_getTextureName(MaterialTextureType texType) {
-    std::string texName = "";
+    std::string texName("");
     switch (texType) {
         case MaterialTextureType_Ambient:
             texName = "Ambient";

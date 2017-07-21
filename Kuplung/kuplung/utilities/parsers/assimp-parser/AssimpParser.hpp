@@ -40,7 +40,7 @@ private:
     std::vector<MeshMaterialTextureImage> textures_loaded;
 
     void processNode(aiNode* node, const aiScene* scene);
-    MeshModel processMesh(aiMesh* mesh, const aiScene* scene, std::string modelTitle);
+    MeshModel processMesh(aiMesh* mesh, const aiScene* scene, const std::string& modelTitle);
     std::vector<MeshMaterialTextureImage> loadMaterialTextures(aiMaterial* mat, aiTextureType type);
 };
 

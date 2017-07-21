@@ -47,8 +47,8 @@ KuplungFontMap FNTParser::parse(FBEntity const& file) {
             if (tag == "info") {
                 std::vector<std::string> lineElements = this->splitString(line, this->regex_equals);
                 if (lineElements.size() >= 2) {
-                    std::size_t found = lineElements[1].rfind(" ");
-                    std::string fontName = lineElements[1].substr(0, found);
+//                    std::size_t found = lineElements[1].rfind(' ');
+//                    std::string fontName = lineElements[1].substr(0, found);
 //                    boost::erase_all(fontName, "\"");
 //                    this->fm.fontName = fontName;
 //                    std::string nf = "info font=\"" + fontName + "\" ";

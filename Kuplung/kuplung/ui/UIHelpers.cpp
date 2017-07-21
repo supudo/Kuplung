@@ -21,7 +21,7 @@ void UIHelpers::addControlsXYZ(std::string const& property, const bool showAnima
 }
 
 bool UIHelpers::addControlsSlider(std::string const& title, const int idx, const float step, const float min, const float limit, const bool showAnimate, bool* animatedFlag, float* animatedValue, const bool doMinus, bool* isFrame) {
-    if (title != "")
+    if (!title.empty())
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
@@ -36,7 +36,7 @@ bool UIHelpers::addControlsSlider(std::string const& title, const int idx, const
 }
 
 bool UIHelpers::addControlsIntegerSlider(std::string const& title, const int idx, const int min, const int limit, int* animatedValue) {
-    if (title != "")
+	if (!title.empty())
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
@@ -45,7 +45,7 @@ bool UIHelpers::addControlsIntegerSlider(std::string const& title, const int idx
 bool UIHelpers::addControlsIntegerSliderSameLine(std::string const& title, const int idx, const int min, const int limit, int* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::SliderInt(s_id.c_str(), *(&animatedValue), min, limit);
-    if (title != "") {
+	if (!title.empty()) {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());
     }
@@ -53,7 +53,7 @@ bool UIHelpers::addControlsIntegerSliderSameLine(std::string const& title, const
 }
 
 bool UIHelpers::addControlsFloatSlider(std::string const& title, const int idx, const float min, const float limit, float* animatedValue) {
-    if (title != "")
+	if (!title.empty())
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
@@ -62,7 +62,7 @@ bool UIHelpers::addControlsFloatSlider(std::string const& title, const int idx, 
 bool UIHelpers::addControlsFloatSliderSameLine(std::string const& title, const int idx, const float min, const float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit, "%.03f");
-    if (title != "") {
+	if (!title.empty()) {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());
     }
@@ -138,7 +138,7 @@ void UIHelpers::animateValueAsync(bool* isFrame, bool* animatedFlag, float* anim
 }
 
 bool UIHelpers::addControlsDrag(std::string const& title, const int idx, const float step, const float min, const float limit, const bool showAnimate, bool* animatedFlag, float* animatedValue, const bool doMinus, bool* isFrame) {
-    if (title != "")
+	if (!title.empty())
         ImGui::Text("%s", title.c_str());
     if (showAnimate) {
         std::string c_id = "##00" + std::to_string(idx);
@@ -153,14 +153,14 @@ bool UIHelpers::addControlsDrag(std::string const& title, const int idx, const f
 }
 
 bool UIHelpers::addControlsIntegerDrag(std::string const& title, const int idx, const int min, const int limit, int* animatedValue) {
-    if (title != "")
+	if (!title.empty())
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::DragInt(s_id.c_str(), *(&animatedValue), 0.001f, min, limit);
 }
 
 bool UIHelpers::addControlsFloatDrag(std::string const& title, const int idx, const float min, float const limit, float* animatedValue) {
-    if (title != "")
+	if (!title.empty())
         ImGui::Text("%s", title.c_str());
     std::string s_id = "##10" + std::to_string(idx);
     return ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
@@ -169,7 +169,7 @@ bool UIHelpers::addControlsFloatDrag(std::string const& title, const int idx, co
 bool UIHelpers::addControlsFloatDragSameLine(std::string const& title, const int idx, const float min, const float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
     bool result = ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
-    if (title != "") {
+	if (!title.empty()) {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());
     }

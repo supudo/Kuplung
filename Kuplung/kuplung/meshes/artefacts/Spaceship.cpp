@@ -156,7 +156,7 @@ void Spaceship::initBuffers(const int gridSize) {
 
 #pragma mark - Render
 
-void Spaceship::render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition) {
+void Spaceship::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition) {
     if (this->glVAO > 0) {
         glUseProgram(this->shaderProgram);
 

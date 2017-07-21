@@ -199,7 +199,7 @@ void MENode_Texture::createTextureBuffer(int* width, int* height) {
     }
 }
 
-void MENode_Texture::dialogFileBrowserProcessFile(FBEntity file) {
+void MENode_Texture::dialogFileBrowserProcessFile(const FBEntity& file) {
     this->showFileBrowser = false;
     this->TextureImage = file.path;
     this->TextureFilename = file.title;

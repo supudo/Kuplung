@@ -33,14 +33,14 @@ public:
     virtual void initBuffers();
     void loadTexture(std::string const& assetsFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject);
 
-    virtual void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4 matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight);
+    virtual void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition, WorldGrid *grid, const glm::vec3& uiAmbientLight);
 
     // general options
     void setOptionsFOV(float fov);
 
     // outlining
     void setOptionsSelected(bool selectedYn);
-    void setOptionsOutlineColor(glm::vec4 outlineColor);
+    void setOptionsOutlineColor(const glm::vec4& outlineColor);
     void setOptionsOutlineThickness(float thickness);
     bool getOptionsSelected();
     glm::vec4 getOptionsOutlineColor();

@@ -37,14 +37,14 @@ Shadertoy::~Shadertoy() {
 Shadertoy::Shadertoy() {
     this->textureWidth = 0;
     this->textureHeight = 0;
-    this->iChannel0_Image = "";
-    this->iChannel1_Image = "";
-    this->iChannel2_Image = "";
-    this->iChannel3_Image = "";
-    this->iChannel0_CubeImage = "";
-    this->iChannel1_CubeImage = "";
-    this->iChannel2_CubeImage = "";
-    this->iChannel3_CubeImage = "";
+    this->iChannel0_Image.clear();
+    this->iChannel1_Image.clear();
+    this->iChannel2_Image.clear();
+    this->iChannel3_Image.clear();
+    this->iChannel0_CubeImage.clear();
+    this->iChannel1_CubeImage.clear();
+    this->iChannel2_CubeImage.clear();
+    this->iChannel3_CubeImage.clear();
 }
 
 bool Shadertoy::initShaderProgram(std::string const& fragmentShaderSource) {
@@ -68,24 +68,24 @@ uniform vec4 iMouse;\n\
 uniform vec4 iDate;\n\
 uniform float iSampleRate;\n";
 
-    if (this->iChannel0_Image != "")
+    if (!this->iChannel0_Image.empty())
 		shaderFragmentSource += "uniform sampler2D iChannel0;\n";
-    else if (this->iChannel0_CubeImage != "")
+    else if (!this->iChannel0_CubeImage.empty())
 		shaderFragmentSource += "uniform samplerCube iChannel0;\n";
 
-    if (this->iChannel1_Image != "")
+    if (!this->iChannel1_Image.empty())
 		shaderFragmentSource += "uniform sampler2D iChannel1;\n";
-    else if (this->iChannel1_CubeImage != "")
+    else if (!this->iChannel1_CubeImage.empty())
 		shaderFragmentSource += "uniform samplerCube iChannel1;\n";
 
-    if (this->iChannel2_Image != "")
+    if (!this->iChannel2_Image.empty())
 		shaderFragmentSource += "uniform sampler2D iChannel2;\n";
-    else if (this->iChannel2_CubeImage != "")
+    else if (!this->iChannel2_CubeImage.empty())
 		shaderFragmentSource += "uniform samplerCube iChannel2;\n";
 
-    if (this->iChannel3_Image != "")
+    if (!this->iChannel3_Image.empty())
 		shaderFragmentSource += "uniform sampler2D iChannel3;\n";
-    else if (this->iChannel3_CubeImage != "")
+    else if (!this->iChannel3_CubeImage.empty())
 		shaderFragmentSource += "uniform samplerCube iChannel3;\n";
 
 	shaderFragmentSource += "\
@@ -190,19 +190,19 @@ void Shadertoy::initBuffers() {
 
 void Shadertoy::initTextures() {
     int tc = 0;
-    if (this->iChannel0_Image != "") {
+    if (!this->iChannel0_Image.empty()) {
         this->addTexture(this->iChannel0_Image, &this->iChannel0, tc);
         tc += 1;
     }
-    if (this->iChannel1_Image != "") {
+    if (!this->iChannel1_Image.empty()) {
         this->addTexture(this->iChannel1_Image, &this->iChannel1, tc);
         tc += 1;
     }
-    if (this->iChannel2_Image != "") {
+    if (!this->iChannel2_Image.empty()) {
         this->addTexture(this->iChannel2_Image, &this->iChannel2, tc);
         tc += 1;
     }
-    if (this->iChannel3_Image != "") {
+    if (!this->iChannel3_Image.empty()) {
         this->addTexture(this->iChannel3_Image, &this->iChannel3, tc);
 //        tc += 1;
     }
@@ -274,28 +274,28 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
         glUniform1i(this->vs_InFBO, 1);
 
         GLint tc = 0;
-        if (this->iChannel0_Image != "") {
+        if (!this->iChannel0_Image.empty()) {
             glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel0);
             glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution0[0], this->iChannelResolution0[1], 0.0f);
             tc += 1;
         }
-        if (this->iChannel1_Image != "") {
+        if (!this->iChannel1_Image.empty()) {
             glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel1);
             glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution1[0], this->iChannelResolution1[1], 0.0f);
             tc += 1;
         }
-        if (this->iChannel2_Image != "") {
+        if (!this->iChannel2_Image.empty()) {
             glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel2);
             glUniform1i(static_cast<GLint>(this->iChannel0), tc);
             glUniform3f(this->iChannelResolution[0], this->iChannelResolution2[0], this->iChannelResolution2[1], 0.0f);
             tc += 1;
         }
-        if (this->iChannel3_Image != "") {
+        if (!this->iChannel3_Image.empty()) {
             glActiveTexture(static_cast<GLenum>(GL_TEXTURE0 + tc));
             glBindTexture(GL_TEXTURE_2D, this->iChannel3);
             glUniform1i(static_cast<GLint>(this->iChannel0), tc);

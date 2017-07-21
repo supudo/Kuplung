@@ -270,8 +270,8 @@ void SpaceshipMeshGenerator::generateMeshModel() {
     material.OpticalDensity = 1.0f;
     material.Transparency = 1.0f;
     MeshMaterialTextureImage textureDiffuse = {};
-    textureDiffuse.Image = "";
-    textureDiffuse.Filename = "";
+    textureDiffuse.Image.clear();
+    textureDiffuse.Filename.clear();
     textureDiffuse.Width = 0;
     textureDiffuse.Height = 0;
     textureDiffuse.UseTexture = true;

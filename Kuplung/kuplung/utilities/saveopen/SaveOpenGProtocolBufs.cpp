@@ -21,7 +21,7 @@ void SaveOpenGProtocolBufs::init() {
     this->managerZip = std::make_unique<KuplungApp::Utilities::Miniz::KuplungMiniz>();
 }
 
-void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpenGProtocolBufs::saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces) {
     std::string fileName = file.path;
     if (!this->hasEnding(fileName, ".kuplung"))
         fileName += ".kuplung";
@@ -70,7 +70,7 @@ void SaveOpenGProtocolBufs::saveKuplungFile(FBEntity file, std::unique_ptr<Objec
     boost::filesystem::remove(fileNameScene.c_str());
 }
 
-std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     std::string zPath = file.path;
@@ -756,7 +756,7 @@ MaterialColor* SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::Materia
     return mc;
 }
 
-KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(glm::vec4 v) {
+KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(const glm::vec4& v) {
     KuplungApp::Vec4* gv = new KuplungApp::Vec4();
     gv->set_x(v.x);
     gv->set_y(v.y);
@@ -765,7 +765,7 @@ KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(glm::vec4 v) {
     return gv;
 }
 
-KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(glm::vec3 v) {
+KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(const glm::vec3& v) {
     KuplungApp::Vec3* gv = new KuplungApp::Vec3();
     gv->set_x(v.x);
     gv->set_y(v.y);
@@ -773,7 +773,7 @@ KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(glm::vec3 v) {
     return gv;
 }
 
-KuplungApp::Vec2* SaveOpenGProtocolBufs::getVec2(glm::vec2 v) {
+KuplungApp::Vec2* SaveOpenGProtocolBufs::getVec2(const glm::vec2& v) {
     KuplungApp::Vec2* gv = new KuplungApp::Vec2();
     gv->set_x(v.x);
     gv->set_y(v.y);

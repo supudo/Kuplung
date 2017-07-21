@@ -63,7 +63,7 @@ bool ConfigUtils::readBool(std::string const& configKey) {
 
 int ConfigUtils::readInt(std::string const& configKey) {
     std::string val = this->configData[configKey];
-    if (val != "")
+    if (!val.empty())
         return std::stoi(val);
     else
         return 0;
@@ -71,7 +71,7 @@ int ConfigUtils::readInt(std::string const& configKey) {
 
 float ConfigUtils::readFloat(std::string const& configKey) {
     std::string val = this->configData[configKey];
-    if (val != "")
+    if (!val.empty())
         return std::stof(val);
     else
         return 0;
@@ -296,7 +296,7 @@ void ConfigUtils::readFile() {
                     boost::algorithm::trim(opValue);
                 }
                 else
-                    opValue = "";
+                    opValue.clear();
                 this->configData[opKey] = opValue;
             }
 

@@ -14,7 +14,7 @@
 void SaveOpenBinarySeq::init() {
 }
 
-void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects, std::vector<ModelFaceBase*> meshModelFaces) {
+void SaveOpenBinarySeq::saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces) {
     std::string fileName = file.path + "/" + file.title;
     if (!this->hasEnding(fileName, ".kuplung"))
         fileName += ".kuplung";
@@ -33,7 +33,7 @@ void SaveOpenBinarySeq::saveKuplungFile(FBEntity file, std::unique_ptr<ObjectsMa
     }
 }
 
-std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(FBEntity file, std::unique_ptr<ObjectsManager> &managerObjects) {
+std::vector<ModelFaceData*> SaveOpenBinarySeq::openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects) {
     std::vector<ModelFaceData*> models;
 
     std::ifstream kuplungFile;

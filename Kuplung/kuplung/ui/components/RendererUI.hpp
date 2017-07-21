@@ -28,7 +28,7 @@ private:
     void renderImageTexture(ImageRenderer *imageRenderer, std::vector<ModelFaceBase*> *meshModelFaces);
 
     std::unique_ptr<FileSaver> componentFileSaver;
-    void dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation);
+    void dialogFileSaveProcessFile(const FBEntity& file, FileSaverOperation operation);
     bool showSaveDialog;
     void dialogFileSave();
 

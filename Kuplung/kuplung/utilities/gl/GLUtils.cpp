@@ -191,7 +191,7 @@ std::string GLUtils::readFile(const char *filePath) {
         this->funcLog("Could not read file " + std::string(filePath) + ". File does not exist.");
         return "";
     }
-    std::string line = "";
+    std::string line("");
     while (!fileStream.eof()) {
         std::getline(fileStream, line);
         content.append(line + "\n");

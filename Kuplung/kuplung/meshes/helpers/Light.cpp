@@ -208,7 +208,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
         glEnableVertexAttribArray(2);
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
 
-        if (this->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
+        if (!this->meshModel.ModelMaterial.TextureDiffuse.Image.empty()) {
             std::string matImageLocal = assetsFolder + "/gui/" + this->meshModel.ModelMaterial.TextureDiffuse.Image;
 
             int tWidth, tHeight, tChannels;

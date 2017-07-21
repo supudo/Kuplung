@@ -27,9 +27,9 @@
 namespace KuplungApp { namespace Utilities { namespace Consumption {
 
 void Consumption::init() {
-    this->usageOverall = "";
-    this->usageMemory = "";
-    this->usageCPU = "";
+    this->usageOverall.clear();
+    this->usageMemory.clear();
+    this->usageCPU.clear();
     this->memoryMark();
 }
 
@@ -98,7 +98,7 @@ std::string Consumption::exec(const char* cmd) {
         return "ERROR";
 
     char buffer[128];
-    std::string result = "";
+    std::string result("");
     while (!feof(pipe)) {
         if (fgets(buffer, 128, pipe) != NULL)
             result += buffer;

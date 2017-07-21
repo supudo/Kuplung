@@ -93,7 +93,7 @@ bool GUI_OUI::processEvent(SDL_Event *event) {
     return this->guiImplementation->processEvent(event);
 }
 
-void GUI_OUI::recentFilesAdd(FBEntity file) {
+void GUI_OUI::recentFilesAdd(const FBEntity& file) {
     bool exists = false;
     for (size_t i=0; i<this->recentFiles.size(); i++) {
         if (this->recentFiles[i].path == file.path) {
@@ -112,7 +112,7 @@ void GUI_OUI::recentFilesClear() {
     Settings::Instance()->saveRecentFiles(this->recentFiles);
 }
 
-void GUI_OUI::recentFilesAddImported(FBEntity file) {
+void GUI_OUI::recentFilesAddImported(const FBEntity& file) {
     bool exists = false;
     for (size_t i=0; i<this->recentFilesImported.size(); i++) {
         if (this->recentFilesImported[i].path == file.path) {

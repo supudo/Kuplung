@@ -20,9 +20,9 @@ void PLYParser::init(std::function<void(float)> doProgress) {
 }
 
 std::vector<MeshModel> PLYParser::parse(const FBEntity& file, const std::vector<std::string>& settings) {
-    if (settings.size() > 0 && settings[0] != "")
+    if (settings.size() > 0 && !settings[0].empty())
         this->Setting_Axis_Forward = std::stoi(settings[0]);
-    if (settings.size() > 1 && settings[1] != "")
+    if (settings.size() > 1 && !settings[1].empty())
         this->Setting_Axis_Up = std::stoi(settings[1]);
 
     std::ifstream ply_file_data(file.path.c_str());

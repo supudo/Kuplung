@@ -18,8 +18,8 @@ class KuplungMiniz {
 public:
     ~KuplungMiniz(void);
 
-    void createZipFile(std::string zipFilename);
-    int addFileToArchive(std::string contentPath, std::string zipPath="");
+    void createZipFile(const std::string& zipFilename);
+    int addFileToArchive(const std::string& contentPath, const std::string& zipPath="");
     bool unzipArchive(std::string const& archiveFile, std::string const& archiveFolder);
     void closeZipFile();
 

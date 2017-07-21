@@ -33,7 +33,7 @@ public:
               std::function<void(FBEntity file)> openScene
               );
 
-    void doLog(std::string message);
+    void doLog(const std::string& message);
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
@@ -60,10 +60,10 @@ public:
 
     void setShowControlsGUI(bool showControls);
     void setShowControlsModels(bool showModels);
-    void setRecentFiles(std::vector<FBEntity> files);
-    void setRecentFilesImported(std::vector<FBEntity> files);
-    void recentFilesAdd(FBEntity file);
-    void recentFilesAddImported(FBEntity file);
+    void setRecentFiles(const std::vector<FBEntity>& files);
+    void setRecentFilesImported(const std::vector<FBEntity>& files);
+    void recentFilesAdd(const FBEntity& file);
+    void recentFilesAddImported(const FBEntity& file);
 
     void setParcingPercentage(float value);
 

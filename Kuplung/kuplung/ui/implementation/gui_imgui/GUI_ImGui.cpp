@@ -514,7 +514,7 @@ void GUI_ImGui::popupRecentFileDoesntExists() {
             if (boost::filesystem::exists(this->recentFiles[i].path))
                 recents.push_back(this->recentFiles[i]);
         }
-        this->recentFiles = recents;
+        this->recentFiles = std::move(recents);
         Settings::Instance()->saveRecentFiles(this->recentFiles);
         this->showRecentFileDoesntExists = false;
         ImGui::CloseCurrentPopup();
@@ -532,7 +532,7 @@ void GUI_ImGui::popupRecentFileImportedDoesntExists() {
             if (boost::filesystem::exists(this->recentFilesImported[i].path))
                 recents.push_back(this->recentFilesImported[i]);
         }
-        this->recentFilesImported = recents;
+        this->recentFilesImported = std::move(recents);
         Settings::Instance()->saveRecentFilesImported(this->recentFilesImported);
         this->showRecentFileImportedDoesntExists = false;
         ImGui::CloseCurrentPopup();

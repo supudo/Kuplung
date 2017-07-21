@@ -40,14 +40,14 @@ void ExporterOBJ::exportToFile(const FBEntity& file, const std::vector<ModelFace
 
 std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
     MeshModel model = face.meshModel;
-    std::string meshData = "";
+    std::string meshData("");
     std::string v(""), vt(""), vn(""), f("");
 
 //    int Setting_Axis_Forward = 4;
-//    if (this->objSettings.size() > 0 && this->objSettings[0] != "")
+//    if (this->objSettings.size() > 0 && !this->objSettings[0].empty())
 //        Setting_Axis_Forward = std::stoi(this->objSettings[0]);
 //    int Setting_Axis_Up = 5;
-//    if (this->objSettings.size() > 1 && this->objSettings[1] != "")
+//    if (this->objSettings.size() > 1 && !this->objSettings[1].empty())
 //        Setting_Axis_Up = std::stoi(this->objSettings[1]);
 
     glm::vec3 scale;
@@ -103,8 +103,8 @@ std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
     meshData += vt;
     meshData += vn;
 
-    std::string triangleFace = "";
-    for (size_t k=0, vCounter = 1; k<model.indices.size(); k++, vCounter++) {
+    std::string triangleFace("");
+    for (size_t k=0, vCounterT = 1; k<model.indices.size(); k++, vCounterT++) {
         int j = model.indices[int(k)];
 
         glm::vec3 vertex = model.vertices[j];
@@ -121,9 +121,9 @@ std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
 
         triangleFace += " " + std::to_string(v) + "/" + (vt > -1 ? std::to_string(vt + 1) : "") + "/" + std::to_string(vn);
 
-        if (vCounter % 3 == 0) {
+        if (vCounterT % 3 == 0) {
             f += "f" + triangleFace + this->nlDelimiter;
-            triangleFace = "";
+            triangleFace.clear();
         }
 
         progressCounter += 1;
@@ -154,12 +154,12 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
     this->vnCounter = 1;
 
     std::vector<ModelFaceBase*>::const_iterator faceIterator;
-    for (faceIterator = faces.begin(); faceIterator != faces.end(); faceIterator++) {
+    for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
         fileContents += this->exportMesh(**faceIterator);
     }
     fileContents += this->nlDelimiter;
 
-    if (fileContents != "") {
+    if (!fileContents.empty()) {
         time_t t = time(0);
         struct tm * now = localtime(&t);
 
@@ -175,7 +175,7 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
                                  std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
 
         if (!this->addSuffix)
-            fileSuffix = "";
+            fileSuffix.clear();
         std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
         std::string fileName = this->exportFile.title;
         if (boost::algorithm::ends_with(fileName, ".obj"))
@@ -187,7 +187,7 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
 void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     std::map<std::string, std::string> materials;
     std::vector<ModelFaceBase*>::const_iterator faceIterator;
-    for (faceIterator = faces.begin(); faceIterator != faces.end(); faceIterator++) {
+    for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
         MeshModelMaterial mat = (*faceIterator)->meshModel.ModelMaterial;
         if (materials[mat.MaterialTitle].empty()) {
             materials[mat.MaterialTitle] = this->nlDelimiter;
@@ -202,19 +202,19 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
             materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %g", mat.Transparency) + this->nlDelimiter;
             materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
 
-            if (mat.TextureAmbient.Image != "")
+            if (!mat.TextureAmbient.Image.empty())
                 materials[mat.MaterialTitle] += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;
-            if (mat.TextureDiffuse.Image != "")
+            if (!mat.TextureDiffuse.Image.empty())
                 materials[mat.MaterialTitle] += "map_Kd " + mat.TextureDiffuse.Image + this->nlDelimiter;
-            if (mat.TextureDissolve.Image != "")
+            if (!mat.TextureDissolve.Image.empty())
                 materials[mat.MaterialTitle] += "map_d " + mat.TextureDissolve.Image + this->nlDelimiter;
-            if (mat.TextureBump.Image != "")
+            if (!mat.TextureBump.Image.empty())
                 materials[mat.MaterialTitle] += "map_Bump " + mat.TextureBump.Image + this->nlDelimiter;
-            if (mat.TextureDisplacement.Image != "")
+            if (!mat.TextureDisplacement.Image.empty())
                 materials[mat.MaterialTitle] += "disp " + mat.TextureDisplacement.Image + this->nlDelimiter;
-            if (mat.TextureSpecular.Image != "")
+            if (!mat.TextureSpecular.Image.empty())
                 materials[mat.MaterialTitle] += "map_Ks " + mat.TextureSpecular.Image + this->nlDelimiter;
-            if (mat.TextureSpecularExp.Image != "")
+            if (!mat.TextureSpecularExp.Image.empty())
                 materials[mat.MaterialTitle] += "map_Ns " + mat.TextureSpecularExp.Image + this->nlDelimiter;
         }
     }
@@ -229,7 +229,7 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
 
     fileContents += this->nlDelimiter;
 
-    if (fileContents != "") {
+    if (!fileContents.empty()) {
         std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
         std::string fileName = this->exportFile.title;
         if (boost::algorithm::ends_with(fileName, ".obj"))
@@ -255,19 +255,19 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
 //            materials[mat.MaterialTitle] += Settings::Instance()->string_format("d %f", mat.Transparency) + this->nlDelimiter;
 //            materials[mat.MaterialTitle] += Settings::Instance()->string_format("illum %i", mat.IlluminationMode) + this->nlDelimiter;
 
-//            if (mat.TextureAmbient.Image != "")
+//            if (!mat.TextureAmbient.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Ka " + mat.TextureAmbient.Image + this->nlDelimiter;
-//            if (mat.TextureDiffuse.Image != "")
+//            if (!mat.TextureDiffuse.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Kd " + mat.TextureDiffuse.Image + this->nlDelimiter;
-//            if (mat.TextureDissolve.Image != "")
+//            if (!mat.TextureDissolve.Image.empty())
 //                materials[mat.MaterialTitle] += "map_d " + mat.TextureDissolve.Image + this->nlDelimiter;
-//            if (mat.TextureBump.Image != "")
+//            if (!mat.TextureBump.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Bump " + mat.TextureBump.Image + this->nlDelimiter;
-//            if (mat.TextureDisplacement.Image != "")
+//            if (!mat.TextureDisplacement.Image.empty())
 //                materials[mat.MaterialTitle] += "disp " + mat.TextureDisplacement.Image + this->nlDelimiter;
-//            if (mat.TextureSpecular.Image != "")
+//            if (!mat.TextureSpecular.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Ks " + mat.TextureSpecular.Image + this->nlDelimiter;
-//            if (mat.TextureSpecularExp.Image != "")
+//            if (!mat.TextureSpecularExp.Image.empty())
 //                materials[mat.MaterialTitle] += "map_Ns " + mat.TextureSpecularExp.Image + this->nlDelimiter;
 //        }
 //    }
@@ -282,7 +282,7 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
 
 //    fileContents += this->nlDelimiter;
 
-//    if (fileContents != "") {
+//    if (!fileContents.empty()) {
 //        std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
 //        std::string fileName = this->exportFile.title;
 //        if (boost::algorithm::ends_with(fileName, ".obj"))

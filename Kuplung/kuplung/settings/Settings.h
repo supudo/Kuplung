@@ -36,9 +36,9 @@ public:
     bool isAllowedStyleExtension(std::string fileExtension);
     bool isAllowedImageExtension(std::string fileExtension);
     void setLogFunc(std::function<void(std::string)> doLog);
-    void saveRecentFiles(std::vector<FBEntity> recentFiles);
+    void saveRecentFiles(const std::vector<FBEntity>& recentFiles);
     std::vector<FBEntity> loadRecentFiles();
-    void saveRecentFilesImported(std::vector<FBEntity> recentFiles);
+    void saveRecentFilesImported(const std::vector<FBEntity>& recentFiles);
     std::vector<FBEntity> loadRecentFilesImported();
 
     bool maybeGracefullApplicationQuit;
@@ -61,8 +61,8 @@ public:
     float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
     bool UseCuda;
 
-    void timerStart(std::string msg);
-    void timerEnd(std::string msg);
+    void timerStart(const std::string& msg);
+    void timerEnd(const std::string& msg);
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
     std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;

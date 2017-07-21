@@ -35,8 +35,8 @@ void HeightmapGenerator::initPosition() {
     this->Setting_Seed = 1;
 }
 
-void HeightmapGenerator::generateTerrain(const std::string& assetsFolder, const int& width, const int& height) {
-    this->assetsFolder = assetsFolder;
+void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const int& width, const int& height) {
+    this->assetsFolder = assetFolder;
     this->width = width;
     this->height = height;
 
@@ -215,7 +215,7 @@ void HeightmapGenerator::generateSphereGeometry() {
     this->colors.clear();
     this->indices.clear();
 
-    std::string grapher = "";
+    std::string grapher("");
 
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
@@ -298,7 +298,7 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
     this->colors.clear();
     this->indices.clear();
 
-    std::string grapher = "";
+    std::string grapher("");
 
     const float rr = 1.0f / float(heightmapHeight - 1);
     const float ss = 1.0f / float(heightmapWidth - 1);
@@ -318,7 +318,7 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
 
             c = this->image.GetValue(x, y);
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
-            uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
+            //uv = glm::vec2(glm::clamp(float(x), 0.0f, 1.0f), glm::clamp(float(y), 0.0f, 1.0f));
             uv = glm::vec2(x * ss, y * rr);
             uv2 = glm::vec2((x + 1) * ss, y * rr);
             uv3 = glm::vec2(x * ss, (y + 1) * rr);

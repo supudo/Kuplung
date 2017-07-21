@@ -209,10 +209,10 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std:
     }
 
     int Setting_Axis_Forward = 4;
-    if (settings.size() > 0 && settings[0] != "")
+    if (settings.size() > 0 && !settings[0].empty())
         Setting_Axis_Forward = std::stoi(settings[0]);
     int Setting_Axis_Up = 5;
-    if (settings.size() > 1 && settings[1] != "")
+    if (settings.size() > 1 && !settings[1].empty())
         Setting_Axis_Up = std::stoi(settings[1]);
 
     if (this->models.size() > 0) {
@@ -271,9 +271,9 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std:
                     vertexToOutIndex[packed] = newIndex;
                 }
             }
-            this->models[i].vertices = outVertices;
-            this->models[i].texture_coordinates = outTextureCoordinates;
-            this->models[i].normals = outNormals;
+            this->models[i].vertices = std::move(outVertices);
+            this->models[i].texture_coordinates = std::move(outTextureCoordinates);
+            this->models[i].normals = std::move(outNormals);
             this->models[i].indices = m.indices;
             this->models[i].countIndices = int(m.indices.size());
 
@@ -415,7 +415,7 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
     materialImage.Width = 0;
     materialImage.UseTexture = true;
 
-    if (textureLine.find("-") != std::string::npos) {
+    if (textureLine.find('-') != std::string::npos) {
         std::vector<std::string> lineElements = this->splitString(textureLine, "-");
 
         if (lineElements[0].empty())

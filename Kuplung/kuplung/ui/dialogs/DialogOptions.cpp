@@ -215,11 +215,11 @@ void DialogOptions::loadFonts(bool* needsFontChange) {
     io.Fonts->Clear();
 
     if (this->optionsFontSelected == 0)
-        Settings::Instance()->UIFontFile = "";
+        Settings::Instance()->UIFontFile.clear();
     else if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path))
         Settings::Instance()->UIFontFile = this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path;
 
-    if (Settings::Instance()->UIFontFile != "" && Settings::Instance()->UIFontFile != "-")
+    if (!Settings::Instance()->UIFontFile.empty() && Settings::Instance()->UIFontFile != "-")
         io.Fonts->AddFontFromFileTTF(Settings::Instance()->UIFontFile.c_str(), Settings::Instance()->UIFontSize);
     else
         io.Fonts->AddFontDefault();

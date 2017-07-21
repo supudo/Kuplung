@@ -66,7 +66,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     };
     ImGui::Combo("##988", &this->imageFormat, image_format_items, IM_ARRAYSIZE(image_format_items));
 
-    if (this->currentFileImage != "") {
+    if (!this->currentFileImage.empty()) {
         ImGui::Separator();
         char ifn[1024];
         strcpy(ifn, this->currentFileImage.c_str());
@@ -197,7 +197,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
 
 //    ImGui::Separator();
 
-//    if (this->currentFileImage != "") {
+//    if (!this->currentFileImage.empty()) {
 //        char ifn[1024];
 //        strcpy(ifn, this->currentFileImage.c_str());
 //        ImGui::TextColored(ImVec4(1, 0, 0, 1), "Temp File: "); ImGui::SameLine(); ImGui::InputText("##fileName", ifn, IM_ARRAYSIZE(ifn), ImGuiInputTextFlags_ReadOnly);
@@ -255,7 +255,7 @@ void RendererUI::dialogFileSave() {
     this->componentFileSaver->draw("Save Image", FileSaverOperation_Renderer, &this->showSaveDialog);
 }
 
-void RendererUI::dialogFileSaveProcessFile(FBEntity file, FileSaverOperation operation) {
+void RendererUI::dialogFileSaveProcessFile(const FBEntity& file, FileSaverOperation operation) {
     this->showSaveDialog = false;
     std::string endFile = file.path;
 

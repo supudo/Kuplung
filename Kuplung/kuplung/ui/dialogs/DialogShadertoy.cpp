@@ -166,45 +166,45 @@ void DialogShadertoy::render(bool* p_opened) {
     ImGui::PopStyleVar(2);
 
     if (this->texImage0 > 0) {
-        this->engineShadertoy->iChannel0_CubeImage = "";
+        this->engineShadertoy->iChannel0_CubeImage.clear();
         this->engineShadertoy->iChannel0_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage0 < 10) ? "0" : "") + std::to_string(this->texImage0) + ".jpg";
         this->texImage0 = 0;
     }
     if (this->cubemapImage0 > 0) {
-        this->engineShadertoy->iChannel0_Image = "";
+        this->engineShadertoy->iChannel0_Image.clear();
         this->engineShadertoy->iChannel0_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage0];
         this->cubemapImage0 = 0;
     }
 
     if (this->texImage1 > 0) {
-        this->engineShadertoy->iChannel1_CubeImage = "";
+        this->engineShadertoy->iChannel1_CubeImage.clear();
         this->engineShadertoy->iChannel1_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage1 < 10) ? "0" : "") + std::to_string(this->texImage1) + ".jpg";
         this->texImage1 = 0;
     }
     if (this->cubemapImage1 > 0) {
-        this->engineShadertoy->iChannel1_Image = "";
+        this->engineShadertoy->iChannel1_Image.clear();
         this->engineShadertoy->iChannel1_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage1];
         this->cubemapImage1 = 0;
     }
 
     if (this->texImage2 > 0) {
-        this->engineShadertoy->iChannel2_CubeImage = "";
+        this->engineShadertoy->iChannel2_CubeImage.clear();
         this->engineShadertoy->iChannel2_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage2 < 10) ? "0" : "") + std::to_string(this->texImage2) + ".jpg";
         this->texImage2 = 0;
     }
     if (this->cubemapImage2 > 0) {
-        this->engineShadertoy->iChannel2_Image = "";
+        this->engineShadertoy->iChannel2_Image.clear();
         this->engineShadertoy->iChannel2_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage2];
         this->cubemapImage2 = 0;
     }
 
     if (this->texImage3 > 0) {
-        this->engineShadertoy->iChannel3_CubeImage = "";
+        this->engineShadertoy->iChannel3_CubeImage.clear();
         this->engineShadertoy->iChannel3_Image = Settings::Instance()->appFolder() + "tex" + std::string((this->texImage3 < 10) ? "0" : "") + std::to_string(this->texImage3) + ".jpg";
         this->texImage3 = 0;
     }
     if (this->cubemapImage3 > 0) {
-        this->engineShadertoy->iChannel3_Image = "";
+        this->engineShadertoy->iChannel3_Image.clear();
         this->engineShadertoy->iChannel3_CubeImage = Settings::Instance()->appFolder() + cubemapImages[this->cubemapImage3];
         this->cubemapImage3 = 0;
     }
@@ -300,7 +300,7 @@ std::string DialogShadertoy::exec(const char* cmd) {
         return "ERROR";
 
     char buffer[128];
-    std::string result = "";
+    std::string result("");
     while (!feof(pipe)) {
         if (fgets(buffer, 128, pipe) != NULL)
             result += buffer;
@@ -326,7 +326,7 @@ void DialogShadertoy::getFromClipboard() {
         strcpy(this->shadertoyEditorText, clipboardContents.c_str());
 }
 
-void DialogShadertoy::openExample(std::string fileName) {
+void DialogShadertoy::openExample(const std::string& fileName) {
     std::string fileContents = Settings::Instance()->glUtils->readFile(fileName.c_str());
     strcpy(this->shadertoyEditorText, fileContents.c_str());
     //this->compileShader();

@@ -312,7 +312,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
     int slotsCounter = 0;
 
     ImVec2 nodePosition = ImVec2(40, 50);
-    if (face->meshModel.ModelMaterial.TextureAmbient.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureAmbient.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Ambient, "Ambient Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureAmbient.Filename, face->meshModel.ModelMaterial.TextureAmbient.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -330,7 +330,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    if (face->meshModel.ModelMaterial.TextureDiffuse.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureDiffuse.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Diffuse, "Diffuse Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDiffuse.Filename, face->meshModel.ModelMaterial.TextureDiffuse.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -348,7 +348,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    if (face->meshModel.ModelMaterial.TextureDissolve.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureDissolve.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Dissolve, "Dissolve Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDissolve.Filename, face->meshModel.ModelMaterial.TextureDissolve.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -357,7 +357,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->meshModel.ModelMaterial.TextureSpecular.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureSpecular.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Specular, "Specular Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureSpecular.Filename, face->meshModel.ModelMaterial.TextureSpecular.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -375,7 +375,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
     materialNodesCounter += 1;
 //    slotsCounter += 1;
 
-    if (face->meshModel.ModelMaterial.TextureSpecularExp.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureSpecularExp.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_SpecularExp, "SpecularExp Texture", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureSpecularExp.Filename, face->meshModel.ModelMaterial.TextureSpecularExp.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -384,7 +384,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->meshModel.ModelMaterial.TextureBump.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureBump.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Bump, "Bump Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureBump.Filename, face->meshModel.ModelMaterial.TextureBump.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));
@@ -393,7 +393,7 @@ void MaterialEditor::initMaterialNodes(ModelFaceBase *face) {
         nodePosition.y += (this->style_ShowImages ? 180 : 100);
     }
 
-    if (face->meshModel.ModelMaterial.TextureDisplacement.Image != "") {
+    if (!face->meshModel.ModelMaterial.TextureDisplacement.Image.empty()) {
         MENode_Texture* node = new MENode_Texture(materialNodesCounter, MaterialTextureType_Displacement, "Displacement Map", nodePosition, 1.0f, ImColor(255, 100, 100), 0, 1, face->meshModel.ModelMaterial.TextureDisplacement.Filename, face->meshModel.ModelMaterial.TextureDisplacement.Image);
         this->nodes.push_back(node);
         this->links.push_back(new MELink(node, 0, node0, slotsCounter));

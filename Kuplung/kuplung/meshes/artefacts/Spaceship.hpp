@@ -22,7 +22,7 @@ public:
     Spaceship();
     bool initShaderProgram();
     void initBuffers(const int gridSize);
-    void render(const glm::mat4 matrixProjection, const glm::mat4 matrixCamera, const glm::mat4 matrixModel, const glm::vec3 vecCameraPosition);
+    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition);
     std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
 
     float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;

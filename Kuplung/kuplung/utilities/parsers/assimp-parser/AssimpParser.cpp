@@ -57,7 +57,7 @@ void AssimpParser::processNode(aiNode* node, const aiScene* scene) {
     }
 }
 
-MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::string modelTitle) {
+MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, const std::string& modelTitle) {
     MeshModel entityModel;
     entityModel.ID = this->indexModel;
     entityModel.File = this->file;
@@ -170,7 +170,7 @@ MeshModel AssimpParser::processMesh(aiMesh* mesh, const aiScene* scene, std::str
     else {
         MeshModelMaterial entityMaterial = {};
         entityMaterial.MaterialID = 1;
-        entityMaterial.MaterialTitle = "";
+        entityMaterial.MaterialTitle.clear();
         entityMaterial.DiffuseColor = glm::vec3(0.7, 0.7, 0.7);
         entityMaterial.Transparency = 1.0f;
         entityMaterial.IlluminationMode = 2;

@@ -30,7 +30,7 @@ private:
     void initBase(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename="", std::string const& textureImage="");
     void showImage();
     void createTextureBuffer(int* width, int* height);
-    void dialogFileBrowserProcessFile(FBEntity file);
+    void dialogFileBrowserProcessFile(const FBEntity& file);
 };
 
 #endif /* MENode_Texture_hpp */

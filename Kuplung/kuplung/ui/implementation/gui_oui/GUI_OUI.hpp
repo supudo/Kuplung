@@ -42,9 +42,9 @@ public:
     void doLog(std::string const& message);
     void setSceneSelectedModelObject(int sceneSelectedModelObject);
 
-    void recentFilesAdd(FBEntity file);
+    void recentFilesAdd(const FBEntity& file);
     void recentFilesClear();
-    void recentFilesAddImported(FBEntity file);
+    void recentFilesAddImported(const FBEntity& file);
     void recentFilesClearImported();
     bool isMouseOnGUI();
     void showParsing();
