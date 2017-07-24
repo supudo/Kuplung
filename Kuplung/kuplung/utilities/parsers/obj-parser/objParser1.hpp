@@ -18,7 +18,7 @@
 class objParser1 {
 public:
     ~objParser1();
-    void init(std::function<void(float)> doProgress);
+    void init(const std::function<void(float)>& doProgress);
     std::vector<MeshModel> parse(const FBEntity& fileToParse, const std::vector<std::string>& settings);
 
 private:

@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void ImportFile::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, std::vector<std::string>)> processFile) {
+void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& processFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;

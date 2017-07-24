@@ -31,7 +31,7 @@ ObjectsManager::~ObjectsManager() {
     }
 }
 
-void ObjectsManager::init(std::function<void(float)> doProgress, std::function<void()> addTerrain, std::function<void()> addSpaceship) {
+void ObjectsManager::init(const std::function<void(float)>& doProgress, const std::function<void()>& addTerrain, const std::function<void()>& addSpaceship) {
     this->funcProgress = doProgress;
     this->funcAddTerrain = addTerrain;
     this->funcAddSpaceship = addSpaceship;

@@ -17,7 +17,7 @@ namespace KuplungApp { namespace Utilities { namespace Export {
 ExporterOBJ::~ExporterOBJ() {
 }
 
-void ExporterOBJ::init(std::function<void(float)> doProgress) {
+void ExporterOBJ::init(const std::function<void(float)>& doProgress) {
     this->funcProgress = doProgress;
     this->addSuffix = false;
 #ifdef _WIN32

@@ -76,17 +76,17 @@ GUI_ImGui::~GUI_ImGui() {
 }
 
 void GUI_ImGui::init(SDL_Window *window,
-              std::function<void()> quitApp,
-              std::function<void(FBEntity, std::vector<std::string>)> processImportedFile,
-              std::function<void()> newScene,
-              std::function<void(std::string)> fileShaderCompile,
-              std::function<void(ShapeType)> addShape,
-              std::function<void(LightSourceType)> addLight,
-              std::function<void(FBEntity file, std::vector<std::string>)> exportScene,
-              std::function<void(int)> deleteModel,
-              std::function<void(FBEntity file)> renderScene,
-              std::function<void(FBEntity file)> saveScene,
-              std::function<void(FBEntity file)> openScene
+                     const std::function<void()>& quitApp,
+                     const std::function<void(FBEntity, std::vector<std::string>)>& processImportedFile,
+                     const std::function<void()>& newScene,
+                     const std::function<void(std::string)>& fileShaderCompile,
+                     const std::function<void(ShapeType)>& addShape,
+                     const std::function<void(LightSourceType)>& addLight,
+                     const std::function<void(FBEntity file, std::vector<std::string>)>& exportScene,
+                     const std::function<void(int)>& deleteModel,
+                     const std::function<void(FBEntity file)>& renderScene,
+                     const std::function<void(FBEntity file)>& saveScene,
+                     const std::function<void(FBEntity file)>& openScene
               ) {
     this->sdlWindow = window;
     this->funcQuitApp = quitApp;

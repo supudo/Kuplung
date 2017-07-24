@@ -18,7 +18,7 @@ namespace KuplungApp { namespace Utilities { namespace GL {
 class GLUtils {
 public:
     ~GLUtils();
-    explicit GLUtils(std::function<void(std::string)> logFunction);
+    explicit GLUtils(const std::function<void(std::string)>& logFunction);
     GLUtils();
     bool compileAndAttachShader(GLuint &shaderProgram, GLuint &shader, GLenum shaderType, const char *shader_source);
     bool compileShader(GLuint &shader, GLenum shaderType, const char *shader_source);

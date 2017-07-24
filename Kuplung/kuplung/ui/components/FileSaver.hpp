@@ -24,7 +24,7 @@ typedef enum FileSaverOperation {
 
 class FileSaver {
 public:
-    void init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileSaverOperation)> saveFile);
+    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, FileSaverOperation)>& saveFile);
     void draw(const char* title, FileSaverOperation type, bool* p_opened = NULL);
 
 private:

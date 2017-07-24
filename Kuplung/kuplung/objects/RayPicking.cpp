@@ -145,13 +145,12 @@ void RayPicking::pickVertex(const glm::mat4& matrixProjection, const glm::mat4& 
 }
 
 bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_origin, glm::vec3 const& ray_direction, glm::vec3 const& vertex, glm::mat4 const& mtx, float const& radius) {
-    bool intersected = false;
     float distance = 0.0f;
 
     glm::vec4 vq = glm::vec4(vertex, 1.0) * mtx;
     glm::vec3 v0 = glm::vec3(vq);
 
-    intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
+    bool intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
     if (intersected)
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
                                                                             vID,

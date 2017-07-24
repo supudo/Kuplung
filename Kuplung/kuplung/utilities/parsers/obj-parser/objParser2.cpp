@@ -18,7 +18,7 @@
 objParser2::~objParser2() {
 }
 
-void objParser2::init(std::function<void(float)> doProgress) {
+void objParser2::init(const std::function<void(float)>& doProgress) {
     this->doProgress = doProgress;
     this->objFileLinesCount = 0;
 

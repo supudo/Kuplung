@@ -35,7 +35,7 @@ public:
     bool isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions = std::vector<std::string>());
     bool isAllowedStyleExtension(std::string fileExtension);
     bool isAllowedImageExtension(std::string fileExtension);
-    void setLogFunc(std::function<void(std::string)> doLog);
+    void setLogFunc(const std::function<void(std::string)>& doLog);
     void saveRecentFiles(const std::vector<FBEntity>& recentFiles);
     std::vector<FBEntity> loadRecentFiles();
     void saveRecentFilesImported(const std::vector<FBEntity>& recentFiles);
@@ -86,7 +86,7 @@ private:
     void initSettings();
     std::unique_ptr<ConfigUtils> cfgUtils;
     std::string getTimeNow();
-    void reuseLogFunc(std::string msg);
+    void reuseLogFunc(const std::string& msg);
 };
 
 #endif /* Settings_h */

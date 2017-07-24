@@ -14,7 +14,7 @@
 STLParser::~STLParser() {
 }
 
-void STLParser::init(std::function<void(float)> doProgress) {
+void STLParser::init(const std::function<void(float)>& doProgress) {
     this->doProgress = doProgress;
     this->Setting_Axis_Forward = 4;
     this->Setting_Axis_Up = 5;

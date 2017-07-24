@@ -33,14 +33,12 @@ int FontsList::getSelectedFontSize() {
 }
 
 void FontsList::getFonts() {
-#ifdef _WIN32
+#ifdef WIN32
     return this->loadFontsWindows();
 #elif __APPLE__
     return this->loadFontsOSX();
 #elif linux || __linux
     return this->loadFontsNix();
-#else
-    return {};
 #endif
 }
 

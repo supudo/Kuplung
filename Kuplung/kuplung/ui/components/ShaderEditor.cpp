@@ -42,7 +42,7 @@ void ShaderEditor::init(std::string const& appPath, int positionX, int positionY
     this->managerLua->execute(luaFile);
 }
 
-void ShaderEditor::draw(std::function<void(std::string)> fileShaderCompile, const char* title, bool* p_opened) {
+void ShaderEditor::draw(const std::function<void(std::string)>& fileShaderCompile, const char* title, bool* p_opened) {
     this->doFileShaderCompile = fileShaderCompile;
 
     if (this->width > 0 && this->height > 0)

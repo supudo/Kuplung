@@ -10,18 +10,13 @@
 #include <SDL2/SDL.h>
 #ifdef _WIN32
 #undef main
-#endif
-#include <stdarg.h>
-#include <memory>
-
-#ifdef _WIN32
 #include <boost/filesystem.hpp>
 #include <iostream>
 #else
 #include "CoreFoundation/CoreFoundation.h"
 #endif
-
-#pragma mark - Singleton
+#include <stdarg.h>
+#include <memory>
 
 Settings* Settings::m_pInstance = NULL;
 
@@ -32,8 +27,6 @@ Settings* Settings::Instance() {
     }
     return m_pInstance;
 }
-
-#pragma mark - Init
 
 void Settings::initSettings() {
     m_pInstance->mRayDraw = false;
@@ -111,7 +104,7 @@ void Settings::initSettings() {
     m_pInstance->glUtils = std::make_unique<KuplungApp::Utilities::GL::GLUtils>(std::bind(&Settings::reuseLogFunc, this, std::placeholders::_1));
 }
 
-void Settings::reuseLogFunc(std::string msg) {
+void Settings::reuseLogFunc(const std::string& msg) {
     m_pInstance->funcDoLog(msg);
 }
 
@@ -206,7 +199,7 @@ bool Settings::isAllowedImageExtension(std::string fileExtension) {
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
 
-void Settings::setLogFunc(std::function<void(std::string)> doLog) {
+void Settings::setLogFunc(const std::function<void(std::string)>& doLog) {
     this->funcDoLog = doLog;
 }
 

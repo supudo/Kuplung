@@ -243,7 +243,7 @@ void DialogShadertoy::render(bool* p_opened) {
     ImGui::End();
 }
 
-void DialogShadertoy::init(std::function<void()> fShowErrorMessage) {
+void DialogShadertoy::init(const std::function<void()>& fShowErrorMessage) {
     this->funcShowMessage = fShowErrorMessage;
     this->viewPaddingHorizontal = 20.0f;
     this->viewPaddingVertical = 40.0f;

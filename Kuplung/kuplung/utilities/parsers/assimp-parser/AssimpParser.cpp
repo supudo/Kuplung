@@ -13,7 +13,7 @@
 AssimpParser::~AssimpParser() {
 }
 
-void AssimpParser::init(std::function<void(float)> doProgress) {
+void AssimpParser::init(const std::function<void(float)>& doProgress) {
     this->funcProgress = doProgress;
 
     this->parserUtils = std::make_unique<ParserUtils>();

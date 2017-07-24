@@ -26,7 +26,7 @@ class FileModelManager {
 public:
     ~FileModelManager();
     FileModelManager();
-    void init(std::function<void(float)> doProgress);
+    void init(const std::function<void(float)>& doProgress);
     std::vector<MeshModel> parse(FBEntity file, std::vector<std::string> settings);
 
 private:

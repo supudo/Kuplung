@@ -18,7 +18,7 @@ namespace KuplungApp { namespace Utilities { namespace Export {
 class ExporterOBJ {
 public:
     ~ExporterOBJ();
-    void init(std::function<void(float)> doProgress);
+    void init(const std::function<void(float)>& doProgress);
     void exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings);
 
 private:

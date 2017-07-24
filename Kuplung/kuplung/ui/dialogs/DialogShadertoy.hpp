@@ -15,7 +15,7 @@
 
 class DialogShadertoy {
 public:
-    void init(std::function<void()> fShowErrorMessage);
+    void init(const std::function<void()>& fShowErrorMessage);
     void render(bool* p_opened);
 
     GLuint vboTexture;

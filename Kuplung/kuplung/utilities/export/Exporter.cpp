@@ -18,7 +18,7 @@ Exporter::Exporter() {
     this->exporterOBJ = std::make_unique<ExporterOBJ>();
 }
 
-void Exporter::init(std::function<void(float)> doProgress) {
+void Exporter::init(const std::function<void(float)>& doProgress) {
     this->exporterOBJ->init(doProgress);
 }
 

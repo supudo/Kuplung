@@ -15,7 +15,7 @@
 PLYParser::~PLYParser() {
 }
 
-void PLYParser::init(std::function<void(float)> doProgress) {
+void PLYParser::init(const std::function<void(float)>& doProgress) {
     this->funcProgress = doProgress;
 }
 

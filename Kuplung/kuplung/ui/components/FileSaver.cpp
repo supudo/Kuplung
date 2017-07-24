@@ -17,7 +17,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileSaver::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, FileSaverOperation)> saveFile) {
+void FileSaver::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, FileSaverOperation)>& saveFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;

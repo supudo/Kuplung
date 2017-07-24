@@ -17,7 +17,7 @@
 
 namespace fs = boost::filesystem;
 
-void ExportOBJ::init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, std::vector<std::string>)> saveFile) {
+void ExportOBJ::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& saveFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;

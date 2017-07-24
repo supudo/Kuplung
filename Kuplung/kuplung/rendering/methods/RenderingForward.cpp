@@ -23,6 +23,11 @@ RenderingForward::RenderingForward(ObjectsManager& mo) : managerObjects(&mo) {
 }
 
 RenderingForward::RenderingForward(const RenderingForward& rf) {
+	this->solidLight = new ModelFace_LightSource_Directional();
+	this->lightingPass_DrawMode = -1;
+	this->GLSL_LightSourceNumber_Directional = 0;
+	this->GLSL_LightSourceNumber_Point = 0;
+	this->GLSL_LightSourceNumber_Spot = 0;
     this->managerObjects = rf.managerObjects;
 }
 

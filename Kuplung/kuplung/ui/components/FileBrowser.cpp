@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, MaterialTextureType)> processFile) {
+void FileBrowser::init(bool log, int positionX, int positionY, int width, int height, const std::function<void(FBEntity, MaterialTextureType)>& processFile) {
     this->log = log;
     this->positionX = positionX;
     this->positionY = positionY;

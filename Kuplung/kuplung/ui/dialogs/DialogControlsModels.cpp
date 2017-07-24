@@ -56,7 +56,7 @@ DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects)
     this->componentUVEditor->init(50, 50, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height);
 }
 
-void DialogControlsModels::init(SDL_Window* sdlWindow, std::function<void(ShapeType)> addShape, std::function<void(LightSourceType)> addLight, std::function<void(int)> deleteModel) {
+void DialogControlsModels::init(SDL_Window* sdlWindow, const std::function<void(ShapeType)>& addShape, const std::function<void(LightSourceType)>& addLight, const std::function<void(int)>& deleteModel) {
     this->sdlWindow = sdlWindow;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;

@@ -24,9 +24,9 @@ class DialogControlsModels {
 public:
     explicit DialogControlsModels(ObjectsManager &managerObjects);
     void init(SDL_Window* sdlWindow,
-              std::function<void(ShapeType)> addShape,
-              std::function<void(LightSourceType)> addLight,
-              std::function<void(int)> deleteModel);
+              const std::function<void(ShapeType)>& addShape,
+              const std::function<void(LightSourceType)>& addLight,
+              const std::function<void(int)>& deleteModel);
     void render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * mmfaces, int * sceneSelectedModelObject);
 
     int selectedObject;

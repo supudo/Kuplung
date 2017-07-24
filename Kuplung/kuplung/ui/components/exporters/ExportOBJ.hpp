@@ -19,7 +19,7 @@
 
 class ExportOBJ {
 public:
-    void init(int positionX, int positionY, int width, int height, std::function<void(FBEntity, std::vector<std::string>)> saveFile);
+    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& saveFile);
     void draw(const char* title, bool* p_opened = NULL);
 
 private:

@@ -20,7 +20,7 @@
 class ImportFile {
 public:
     void init(int positionX, int positionY, int width, int height,
-              std::function<void(FBEntity, std::vector<std::string>)> processFile);
+              const std::function<void(FBEntity, std::vector<std::string>)>& processFile);
     void draw(const char* title, bool* p_opened = NULL, int type=0);
 
 private:

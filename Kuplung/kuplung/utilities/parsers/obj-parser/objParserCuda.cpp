@@ -32,7 +32,7 @@ void parseOBJFile(const char* obj_file_contents,
 objParserCuda::~objParserCuda() {
 }
 
-void objParserCuda::init(std::function<void(float)> doProgress) {
+void objParserCuda::init(const std::function<void(float)>& doProgress) {
     this->doProgress = doProgress;
     this->objFileLinesCount = 0;
 }

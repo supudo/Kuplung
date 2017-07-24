@@ -20,7 +20,7 @@
 class AssimpParser {
 public:
     ~AssimpParser();
-    void init(std::function<void(float)> doProgress);
+    void init(const std::function<void(float)>& doProgress);
     std::vector<MeshModel> parse(const FBEntity& file, const std::vector<std::string>& settings);
 
     std::vector<float> vertices, normals;

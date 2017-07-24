@@ -19,7 +19,7 @@
 
 class FileBrowser {
 public:
-    void init(bool log, int positionX, int positionY, int width, int height, std::function<void(FBEntity, MaterialTextureType)> processFile);
+    void init(bool log, int positionX, int positionY, int width, int height, const std::function<void(FBEntity, MaterialTextureType)>& processFile);
     void setStyleBrowser(const bool isStyle);
     void setImageBrowser(const bool isImage);
     void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);

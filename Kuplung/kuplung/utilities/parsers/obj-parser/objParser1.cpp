@@ -16,7 +16,7 @@
 objParser1::~objParser1() {
 }
 
-void objParser1::init(std::function<void(float)> doProgress) {
+void objParser1::init(const std::function<void(float)>& doProgress) {
     this->models = {};
     this->materials = {};
     this->doProgress = doProgress;

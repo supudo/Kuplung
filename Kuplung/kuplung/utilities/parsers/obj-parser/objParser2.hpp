@@ -26,7 +26,7 @@ struct PackedVertex {
 class objParser2 {
 public:
     ~objParser2();
-    void init(std::function<void(float)> doProgress);
+    void init(const std::function<void(float)>& doProgress);
     std::vector<MeshModel> parse(const FBEntity& fileToParse, const std::vector<std::string>& settings);
 
 private:

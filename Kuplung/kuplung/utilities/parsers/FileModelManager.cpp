@@ -30,7 +30,7 @@ FileModelManager::FileModelManager() {
     this->parserAssimp = std::make_unique<AssimpParser>();
 }
 
-void FileModelManager::init(std::function<void(float)> doProgress) {
+void FileModelManager::init(const std::function<void(float)>& doProgress) {
     this->funcProgress = doProgress;
     this->parserOBJ1->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
     this->parserOBJ2->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
