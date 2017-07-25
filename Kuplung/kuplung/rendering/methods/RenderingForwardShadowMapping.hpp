@@ -91,7 +91,7 @@ private:
     GLint glEffect_ToneMapping_ACESFilmRec2020;
 
     // view skin
-    ModelFace_LightSource_Directional *solidLight;
+    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
     GLint glFS_solidSkin_materialColor;
 };
 

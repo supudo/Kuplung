@@ -15,38 +15,15 @@
 #include "kuplung/utilities/stb/stb_image_write.h"
 
 RenderingForward::RenderingForward(ObjectsManager& mo) : managerObjects(&mo) {
-    this->solidLight = new ModelFace_LightSource_Directional();
+	this->managerObjects = &mo;
+    this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
     this->GLSL_LightSourceNumber_Spot = 0;
 }
 
-RenderingForward::RenderingForward(const RenderingForward& rf) {
-	this->solidLight = new ModelFace_LightSource_Directional();
-	this->lightingPass_DrawMode = -1;
-	this->GLSL_LightSourceNumber_Directional = 0;
-	this->GLSL_LightSourceNumber_Point = 0;
-	this->GLSL_LightSourceNumber_Spot = 0;
-    this->managerObjects = rf.managerObjects;
-}
-
 RenderingForward::~RenderingForward() {
-//    if (this->vboTextureAmbient > 0)
-//        glDeleteBuffers(1, &this->vboTextureAmbient);
-//    if (this->vboTextureDiffuse > 0)
-//        glDeleteBuffers(1, &this->vboTextureDiffuse);
-//    if (this->vboTextureSpecular > 0)
-//        glDeleteBuffers(1, &this->vboTextureSpecular);
-//    if (this->vboTextureSpecularExp > 0)
-//        glDeleteBuffers(1, &this->vboTextureSpecularExp);
-//    if (this->vboTextureDissolve > 0)
-//        glDeleteBuffers(1, &this->vboTextureDissolve);
-//    if (this->vboTextureBump > 0)
-//        glDeleteBuffers(1, &this->vboTextureBump);
-//    if (this->vboTextureDisplacement > 0)
-//        glDeleteBuffers(1, &this->vboTextureDisplacement);
-
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
     GLuint colorAttachment;

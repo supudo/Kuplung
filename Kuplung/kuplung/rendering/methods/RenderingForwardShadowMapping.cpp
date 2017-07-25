@@ -16,7 +16,7 @@
 
 RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
     this->managerObjects = managerObjects;
-    this->solidLight = new ModelFace_LightSource_Directional();
+    this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
     this->GLSL_LightSourceNumber_Spot = 0;

@@ -166,29 +166,29 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::unique_ptr<ObjectsM
     bufCamera->set_allocated_view_eye(this->getVec3(managerObjects->camera->eyeSettings->View_Eye));
     bufCamera->set_allocated_view_center(this->getVec3(managerObjects->camera->eyeSettings->View_Center));
     bufCamera->set_allocated_view_up(this->getVec3(managerObjects->camera->eyeSettings->View_Up));
-    bufCamera->set_allocated_positionx(this->getObjectCoordinate2(*managerObjects->camera->positionX));
-    bufCamera->set_allocated_positiony(this->getObjectCoordinate2(*managerObjects->camera->positionY));
-    bufCamera->set_allocated_positionz(this->getObjectCoordinate2(*managerObjects->camera->positionZ));
-    bufCamera->set_allocated_rotatex(this->getObjectCoordinate2(*managerObjects->camera->rotateX));
-    bufCamera->set_allocated_rotatey(this->getObjectCoordinate2(*managerObjects->camera->rotateY));
-    bufCamera->set_allocated_rotatez(this->getObjectCoordinate2(*managerObjects->camera->rotateZ));
-    bufCamera->set_allocated_rotatecenterx(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterX));
-    bufCamera->set_allocated_rotatecentery(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterY));
-    bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate2(*managerObjects->camera->rotateCenterZ));
+    bufCamera->set_allocated_positionx(this->getObjectCoordinate(*managerObjects->camera->positionX));
+    bufCamera->set_allocated_positiony(this->getObjectCoordinate(*managerObjects->camera->positionY));
+    bufCamera->set_allocated_positionz(this->getObjectCoordinate(*managerObjects->camera->positionZ));
+    bufCamera->set_allocated_rotatex(this->getObjectCoordinate(*managerObjects->camera->rotateX));
+    bufCamera->set_allocated_rotatey(this->getObjectCoordinate(*managerObjects->camera->rotateY));
+    bufCamera->set_allocated_rotatez(this->getObjectCoordinate(*managerObjects->camera->rotateZ));
+    bufCamera->set_allocated_rotatecenterx(this->getObjectCoordinate(*managerObjects->camera->rotateCenterX));
+    bufCamera->set_allocated_rotatecentery(this->getObjectCoordinate(*managerObjects->camera->rotateCenterY));
+    bufCamera->set_allocated_rotatecenterz(this->getObjectCoordinate(*managerObjects->camera->rotateCenterZ));
     this->bufGUISettings.set_allocated_camera(bufCamera);
 
     KuplungApp::GridSettings* bufGrid = new KuplungApp::GridSettings();
     bufGrid->set_actasmirror(managerObjects->grid->actAsMirror);
     bufGrid->set_gridsize(managerObjects->grid->gridSize);
-    bufGrid->set_allocated_positionx(this->getObjectCoordinate2(*managerObjects->grid->positionX));
-    bufGrid->set_allocated_positiony(this->getObjectCoordinate2(*managerObjects->grid->positionY));
-    bufGrid->set_allocated_positionz(this->getObjectCoordinate2(*managerObjects->grid->positionZ));
-    bufGrid->set_allocated_rotatex(this->getObjectCoordinate2(*managerObjects->grid->rotateX));
-    bufGrid->set_allocated_rotatey(this->getObjectCoordinate2(*managerObjects->grid->rotateY));
-    bufGrid->set_allocated_rotatez(this->getObjectCoordinate2(*managerObjects->grid->rotateZ));
-    bufGrid->set_allocated_scalex(this->getObjectCoordinate2(*managerObjects->grid->scaleX));
-    bufGrid->set_allocated_scaley(this->getObjectCoordinate2(*managerObjects->grid->scaleY));
-    bufGrid->set_allocated_scalez(this->getObjectCoordinate2(*managerObjects->grid->scaleZ));
+    bufGrid->set_allocated_positionx(this->getObjectCoordinate(*managerObjects->grid->positionX));
+    bufGrid->set_allocated_positiony(this->getObjectCoordinate(*managerObjects->grid->positionY));
+    bufGrid->set_allocated_positionz(this->getObjectCoordinate(*managerObjects->grid->positionZ));
+    bufGrid->set_allocated_rotatex(this->getObjectCoordinate(*managerObjects->grid->rotateX));
+    bufGrid->set_allocated_rotatey(this->getObjectCoordinate(*managerObjects->grid->rotateY));
+    bufGrid->set_allocated_rotatez(this->getObjectCoordinate(*managerObjects->grid->rotateZ));
+    bufGrid->set_allocated_scalex(this->getObjectCoordinate(*managerObjects->grid->scaleX));
+    bufGrid->set_allocated_scaley(this->getObjectCoordinate(*managerObjects->grid->scaleY));
+    bufGrid->set_allocated_scalez(this->getObjectCoordinate(*managerObjects->grid->scaleZ));
     bufGrid->set_transparency(managerObjects->grid->transparency);
     bufGrid->set_showgrid(managerObjects->grid->showGrid);
     this->bufGUISettings.set_allocated_grid(bufGrid);
@@ -260,28 +260,28 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsMa
     managerObjects->camera->eyeSettings->View_Eye = this->setVec3(camera.view_eye());
     managerObjects->camera->eyeSettings->View_Center = this->setVec3(camera.view_center());
     managerObjects->camera->eyeSettings->View_Up = this->setVec3(camera.view_up());
-    managerObjects->camera->positionX = this->setObjectCoordinate2(camera.positionx());
-    managerObjects->camera->positionY = this->setObjectCoordinate2(camera.positiony());
-    managerObjects->camera->positionZ = this->setObjectCoordinate2(camera.positionz());
-    managerObjects->camera->rotateX = this->setObjectCoordinate2(camera.rotatex());
-    managerObjects->camera->rotateY = this->setObjectCoordinate2(camera.rotatey());
-    managerObjects->camera->rotateZ = this->setObjectCoordinate2(camera.rotatez());
-    managerObjects->camera->rotateCenterX = this->setObjectCoordinate2(camera.rotatecenterx());
-    managerObjects->camera->rotateCenterY = this->setObjectCoordinate2(camera.rotatecentery());
-    managerObjects->camera->rotateCenterZ = this->setObjectCoordinate2(camera.rotatecenterz());
+    managerObjects->camera->positionX = this->setObjectCoordinate(camera.positionx());
+    managerObjects->camera->positionY = this->setObjectCoordinate(camera.positiony());
+    managerObjects->camera->positionZ = this->setObjectCoordinate(camera.positionz());
+    managerObjects->camera->rotateX = this->setObjectCoordinate(camera.rotatex());
+    managerObjects->camera->rotateY = this->setObjectCoordinate(camera.rotatey());
+    managerObjects->camera->rotateZ = this->setObjectCoordinate(camera.rotatez());
+    managerObjects->camera->rotateCenterX = this->setObjectCoordinate(camera.rotatecenterx());
+    managerObjects->camera->rotateCenterY = this->setObjectCoordinate(camera.rotatecentery());
+    managerObjects->camera->rotateCenterZ = this->setObjectCoordinate(camera.rotatecenterz());
 
     const KuplungApp::GridSettings& grid = this->bufGUISettings.grid();
     managerObjects->grid->actAsMirror = grid.actasmirror();
     managerObjects->grid->gridSize = grid.gridsize();
-    managerObjects->grid->positionX = this->setObjectCoordinate2(grid.positionx());
-    managerObjects->grid->positionY = this->setObjectCoordinate2(grid.positiony());
-    managerObjects->grid->positionZ = this->setObjectCoordinate2(grid.positionz());
-    managerObjects->grid->rotateX = this->setObjectCoordinate2(grid.rotatex());
-    managerObjects->grid->rotateY = this->setObjectCoordinate2(grid.rotatey());
-    managerObjects->grid->rotateZ = this->setObjectCoordinate2(grid.rotatez());
-    managerObjects->grid->scaleX = this->setObjectCoordinate2(grid.scalex());
-    managerObjects->grid->scaleY = this->setObjectCoordinate2(grid.scaley());
-    managerObjects->grid->scaleZ = this->setObjectCoordinate2(grid.scalez());
+    managerObjects->grid->positionX = this->setObjectCoordinate(grid.positionx());
+    managerObjects->grid->positionY = this->setObjectCoordinate(grid.positiony());
+    managerObjects->grid->positionZ = this->setObjectCoordinate(grid.positionz());
+    managerObjects->grid->rotateX = this->setObjectCoordinate(grid.rotatex());
+    managerObjects->grid->rotateY = this->setObjectCoordinate(grid.rotatey());
+    managerObjects->grid->rotateZ = this->setObjectCoordinate(grid.rotatez());
+    managerObjects->grid->scaleX = this->setObjectCoordinate(grid.scalex());
+    managerObjects->grid->scaleY = this->setObjectCoordinate(grid.scaley());
+    managerObjects->grid->scaleZ = this->setObjectCoordinate(grid.scalez());
     managerObjects->grid->transparency = grid.transparency();
     managerObjects->grid->showGrid = grid.showgrid();
 }
@@ -297,29 +297,29 @@ void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager> &m
         lo->set_showlampobject(l->showLampObject);
         lo->set_showlampdirection(l->showLampDirection);
         lo->set_showinwire(l->showInWire);
-        lo->set_allocated_positionx(this->getObjectCoordinate2(*l->positionX));
-        lo->set_allocated_positiony(this->getObjectCoordinate2(*l->positionY));
-        lo->set_allocated_positionz(this->getObjectCoordinate2(*l->positionZ));
-        lo->set_allocated_directionx(this->getObjectCoordinate2(*l->directionX));
-        lo->set_allocated_directiony(this->getObjectCoordinate2(*l->directionY));
-        lo->set_allocated_directionz(this->getObjectCoordinate2(*l->directionZ));
-        lo->set_allocated_scalex(this->getObjectCoordinate2(*l->scaleX));
-        lo->set_allocated_scaley(this->getObjectCoordinate2(*l->scaleY));
-        lo->set_allocated_scalez(this->getObjectCoordinate2(*l->scaleZ));
-        lo->set_allocated_rotatex(this->getObjectCoordinate2(*l->rotateX));
-        lo->set_allocated_rotatey(this->getObjectCoordinate2(*l->rotateY));
-        lo->set_allocated_rotatez(this->getObjectCoordinate2(*l->rotateZ));
-        lo->set_allocated_rotatecenterx(this->getObjectCoordinate2(*l->rotateCenterX));
-        lo->set_allocated_rotatecentery(this->getObjectCoordinate2(*l->rotateCenterY));
-        lo->set_allocated_rotatecenterz(this->getObjectCoordinate2(*l->rotateCenterZ));
-        lo->set_allocated_ambient(this->getMaterialColor2(*l->ambient));
-        lo->set_allocated_diffuse(this->getMaterialColor2(*l->diffuse));
-        lo->set_allocated_specular(this->getMaterialColor2(*l->specular));
-        lo->set_allocated_lcutoff(this->getObjectCoordinate2(*l->lCutOff));
-        lo->set_allocated_loutercutoff(this->getObjectCoordinate2(*l->lOuterCutOff));
-        lo->set_allocated_lconstant(this->getObjectCoordinate2(*l->lConstant));
-        lo->set_allocated_llinear(this->getObjectCoordinate2(*l->lLinear));
-        lo->set_allocated_lquadratic(this->getObjectCoordinate2(*l->lQuadratic));
+        lo->set_allocated_positionx(this->getObjectCoordinate(*l->positionX));
+        lo->set_allocated_positiony(this->getObjectCoordinate(*l->positionY));
+        lo->set_allocated_positionz(this->getObjectCoordinate(*l->positionZ));
+        lo->set_allocated_directionx(this->getObjectCoordinate(*l->directionX));
+        lo->set_allocated_directiony(this->getObjectCoordinate(*l->directionY));
+        lo->set_allocated_directionz(this->getObjectCoordinate(*l->directionZ));
+        lo->set_allocated_scalex(this->getObjectCoordinate(*l->scaleX));
+        lo->set_allocated_scaley(this->getObjectCoordinate(*l->scaleY));
+        lo->set_allocated_scalez(this->getObjectCoordinate(*l->scaleZ));
+        lo->set_allocated_rotatex(this->getObjectCoordinate(*l->rotateX));
+        lo->set_allocated_rotatey(this->getObjectCoordinate(*l->rotateY));
+        lo->set_allocated_rotatez(this->getObjectCoordinate(*l->rotateZ));
+        lo->set_allocated_rotatecenterx(this->getObjectCoordinate(*l->rotateCenterX));
+        lo->set_allocated_rotatecentery(this->getObjectCoordinate(*l->rotateCenterY));
+        lo->set_allocated_rotatecenterz(this->getObjectCoordinate(*l->rotateCenterZ));
+        lo->set_allocated_ambient(this->getMaterialColor(*l->ambient));
+        lo->set_allocated_diffuse(this->getMaterialColor(*l->diffuse));
+        lo->set_allocated_specular(this->getMaterialColor(*l->specular));
+        lo->set_allocated_lcutoff(this->getObjectCoordinate(*l->lCutOff));
+        lo->set_allocated_loutercutoff(this->getObjectCoordinate(*l->lOuterCutOff));
+        lo->set_allocated_lconstant(this->getObjectCoordinate(*l->lConstant));
+        lo->set_allocated_llinear(this->getObjectCoordinate(*l->lLinear));
+        lo->set_allocated_lquadratic(this->getObjectCoordinate(*l->lQuadratic));
     }
 }
 
@@ -346,29 +346,29 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager> &ma
         l->showLampObject = lo.showlampobject();
         l->showLampDirection = lo.showlampdirection();
         l->showInWire = lo.showinwire();
-        l->positionX = this->setObjectCoordinate2(lo.positionx());
-        l->positionY = this->setObjectCoordinate2(lo.positiony());
-        l->positionZ = this->setObjectCoordinate2(lo.positionz());
-        l->directionX = this->setObjectCoordinate2(lo.directionx());
-        l->directionY = this->setObjectCoordinate2(lo.directiony());
-        l->directionZ = this->setObjectCoordinate2(lo.directionz());
-        l->scaleX = this->setObjectCoordinate2(lo.scalex());
-        l->scaleY = this->setObjectCoordinate2(lo.scaley());
-        l->scaleZ = this->setObjectCoordinate2(lo.scalez());
-        l->rotateX = this->setObjectCoordinate2(lo.rotatex());
-        l->rotateY = this->setObjectCoordinate2(lo.rotatey());
-        l->rotateZ = this->setObjectCoordinate2(lo.rotatez());
-        l->rotateCenterX = this->setObjectCoordinate2(lo.rotatecenterx());
-        l->rotateCenterY = this->setObjectCoordinate2(lo.rotatecentery());
-        l->rotateCenterZ = this->setObjectCoordinate2(lo.rotatecenterz());
-        l->ambient = this->setMaterialColor2(lo.ambient());
-        l->diffuse = this->setMaterialColor2(lo.diffuse());
-        l->specular = this->setMaterialColor2(lo.specular());
-        l->lCutOff = this->setObjectCoordinate2(lo.rotatecenterz());
-        l->lOuterCutOff = this->setObjectCoordinate2(lo.rotatecenterz());
-        l->lConstant = this->setObjectCoordinate2(lo.rotatecenterz());
-        l->lLinear = this->setObjectCoordinate2(lo.rotatecenterz());
-        l->lQuadratic = this->setObjectCoordinate2(lo.rotatecenterz());
+        l->positionX = this->setObjectCoordinate(lo.positionx());
+        l->positionY = this->setObjectCoordinate(lo.positiony());
+        l->positionZ = this->setObjectCoordinate(lo.positionz());
+        l->directionX = this->setObjectCoordinate(lo.directionx());
+        l->directionY = this->setObjectCoordinate(lo.directiony());
+        l->directionZ = this->setObjectCoordinate(lo.directionz());
+        l->scaleX = this->setObjectCoordinate(lo.scalex());
+        l->scaleY = this->setObjectCoordinate(lo.scaley());
+        l->scaleZ = this->setObjectCoordinate(lo.scalez());
+        l->rotateX = this->setObjectCoordinate(lo.rotatex());
+        l->rotateY = this->setObjectCoordinate(lo.rotatey());
+        l->rotateZ = this->setObjectCoordinate(lo.rotatez());
+        l->rotateCenterX = this->setObjectCoordinate(lo.rotatecenterx());
+        l->rotateCenterY = this->setObjectCoordinate(lo.rotatecentery());
+        l->rotateCenterZ = this->setObjectCoordinate(lo.rotatecenterz());
+        l->ambient = this->setMaterialColor(lo.ambient());
+        l->diffuse = this->setMaterialColor(lo.diffuse());
+        l->specular = this->setMaterialColor(lo.specular());
+        l->lCutOff = this->setObjectCoordinate(lo.rotatecenterz());
+        l->lOuterCutOff = this->setObjectCoordinate(lo.rotatecenterz());
+        l->lConstant = this->setObjectCoordinate(lo.rotatecenterz());
+        l->lLinear = this->setObjectCoordinate(lo.rotatecenterz());
+        l->lQuadratic = this->setObjectCoordinate(lo.rotatecenterz());
 
         switch (lo.type()) {
             case 0:
@@ -413,20 +413,20 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
         model->set_setting_usecullface(mf->Setting_UseCullFace);
         model->set_setting_alpha(mf->Setting_Alpha);
         model->set_setting_tessellationsubdivision(mf->Setting_TessellationSubdivision);
-        model->set_allocated_positionx(this->getObjectCoordinate2(*mf->positionX));
-        model->set_allocated_positiony(this->getObjectCoordinate2(*mf->positionY));
-        model->set_allocated_positionz(this->getObjectCoordinate2(*mf->positionZ));
-        model->set_allocated_scalex(this->getObjectCoordinate2(*mf->scaleX));
-        model->set_allocated_scaley(this->getObjectCoordinate2(*mf->scaleY));
-        model->set_allocated_scalez(this->getObjectCoordinate2(*mf->scaleZ));
-        model->set_allocated_rotatex(this->getObjectCoordinate2(*mf->rotateX));
-        model->set_allocated_rotatey(this->getObjectCoordinate2(*mf->rotateY));
-        model->set_allocated_rotatez(this->getObjectCoordinate2(*mf->rotateZ));
-        model->set_allocated_displacex(this->getObjectCoordinate2(*mf->displaceX));
-        model->set_allocated_displacey(this->getObjectCoordinate2(*mf->displaceY));
-        model->set_allocated_displacez(this->getObjectCoordinate2(*mf->displaceZ));
-        model->set_allocated_setting_materialrefraction(this->getObjectCoordinate2(*mf->Setting_MaterialRefraction));
-        model->set_allocated_setting_materialspecularexp(this->getObjectCoordinate2(*mf->Setting_MaterialSpecularExp));
+        model->set_allocated_positionx(this->getObjectCoordinate(*mf->positionX));
+        model->set_allocated_positiony(this->getObjectCoordinate(*mf->positionY));
+        model->set_allocated_positionz(this->getObjectCoordinate(*mf->positionZ));
+        model->set_allocated_scalex(this->getObjectCoordinate(*mf->scaleX));
+        model->set_allocated_scaley(this->getObjectCoordinate(*mf->scaleY));
+        model->set_allocated_scalez(this->getObjectCoordinate(*mf->scaleZ));
+        model->set_allocated_rotatex(this->getObjectCoordinate(*mf->rotateX));
+        model->set_allocated_rotatey(this->getObjectCoordinate(*mf->rotateY));
+        model->set_allocated_rotatez(this->getObjectCoordinate(*mf->rotateZ));
+        model->set_allocated_displacex(this->getObjectCoordinate(*mf->displaceX));
+        model->set_allocated_displacey(this->getObjectCoordinate(*mf->displaceY));
+        model->set_allocated_displacez(this->getObjectCoordinate(*mf->displaceZ));
+        model->set_allocated_setting_materialrefraction(this->getObjectCoordinate(*mf->Setting_MaterialRefraction));
+        model->set_allocated_setting_materialspecularexp(this->getObjectCoordinate(*mf->Setting_MaterialSpecularExp));
         model->set_setting_modelviewskin(mf->Setting_ModelViewSkin);
         model->set_allocated_solidlightskin_materialcolor(this->getVec3(mf->solidLightSkin_MaterialColor));
         model->set_allocated_solidlightskin_ambient(this->getVec3(mf->solidLightSkin_Ambient));
@@ -444,16 +444,16 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
         model->set_setting_lightstrengthdiffuse(mf->Setting_LightStrengthDiffuse);
         model->set_setting_lightstrengthspecular(mf->Setting_LightStrengthSpecular);
         model->set_materialilluminationmodel(mf->materialIlluminationModel);
-        model->set_allocated_displacementheightscale(this->getObjectCoordinate2(*mf->displacementHeightScale));
+        model->set_allocated_displacementheightscale(this->getObjectCoordinate(*mf->displacementHeightScale));
         model->set_showmaterialeditor(mf->showMaterialEditor);
-        model->set_allocated_materialambient(this->getMaterialColor2(*mf->materialAmbient));
-        model->set_allocated_materialdiffuse(this->getMaterialColor2(*mf->materialDiffuse));
-        model->set_allocated_materialspecular(this->getMaterialColor2(*mf->materialSpecular));
-        model->set_allocated_materialemission(this->getMaterialColor2(*mf->materialEmission));
+        model->set_allocated_materialambient(this->getMaterialColor(*mf->materialAmbient));
+        model->set_allocated_materialdiffuse(this->getMaterialColor(*mf->materialDiffuse));
+        model->set_allocated_materialspecular(this->getMaterialColor(*mf->materialSpecular));
+        model->set_allocated_materialemission(this->getMaterialColor(*mf->materialEmission));
         model->set_setting_parallaxmapping(mf->Setting_ParallaxMapping);
         model->set_effect_gblur_mode(mf->Effect_GBlur_Mode);
-        model->set_allocated_effect_gblur_radius(this->getObjectCoordinate2(*mf->Effect_GBlur_Radius));
-        model->set_allocated_effect_gblur_width(this->getObjectCoordinate2(*mf->Effect_GBlur_Width));
+        model->set_allocated_effect_gblur_radius(this->getObjectCoordinate(*mf->Effect_GBlur_Radius));
+        model->set_allocated_effect_gblur_width(this->getObjectCoordinate(*mf->Effect_GBlur_Width));
         model->set_effect_bloom_dobloom(mf->Effect_Bloom_doBloom);
         model->set_effect_bloom_weighta(mf->Effect_Bloom_WeightA);
         model->set_effect_bloom_weightb(mf->Effect_Bloom_WeightB);
@@ -491,20 +491,20 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
         m->Setting_UseCullFace = mm.setting_usecullface();
         m->Setting_Alpha = mm.setting_alpha();
         m->Setting_TessellationSubdivision = mm.setting_tessellationsubdivision();
-        m->positionX = this->setObjectCoordinate2(mm.positionx());
-        m->positionY = this->setObjectCoordinate2(mm.positiony());
-        m->positionZ = this->setObjectCoordinate2(mm.positionz());
-        m->scaleX = this->setObjectCoordinate2(mm.scalex());
-        m->scaleY = this->setObjectCoordinate2(mm.scaley());
-        m->scaleZ = this->setObjectCoordinate2(mm.scalez());
-        m->rotateX = this->setObjectCoordinate2(mm.rotatex());
-        m->rotateY = this->setObjectCoordinate2(mm.rotatey());
-        m->rotateZ = this->setObjectCoordinate2(mm.rotatez());
-        m->displaceX = this->setObjectCoordinate2(mm.displacex());
-        m->displaceY = this->setObjectCoordinate2(mm.displacey());
-        m->displaceZ = this->setObjectCoordinate2(mm.displacez());
-        m->Setting_MaterialRefraction = this->setObjectCoordinate2(mm.setting_materialrefraction());
-        m->Setting_MaterialSpecularExp = this->setObjectCoordinate2(mm.setting_materialspecularexp());
+        m->positionX = this->setObjectCoordinate(mm.positionx());
+        m->positionY = this->setObjectCoordinate(mm.positiony());
+        m->positionZ = this->setObjectCoordinate(mm.positionz());
+        m->scaleX = this->setObjectCoordinate(mm.scalex());
+        m->scaleY = this->setObjectCoordinate(mm.scaley());
+        m->scaleZ = this->setObjectCoordinate(mm.scalez());
+        m->rotateX = this->setObjectCoordinate(mm.rotatex());
+        m->rotateY = this->setObjectCoordinate(mm.rotatey());
+        m->rotateZ = this->setObjectCoordinate(mm.rotatez());
+        m->displaceX = this->setObjectCoordinate(mm.displacex());
+        m->displaceY = this->setObjectCoordinate(mm.displacey());
+        m->displaceZ = this->setObjectCoordinate(mm.displacez());
+        m->Setting_MaterialRefraction = this->setObjectCoordinate(mm.setting_materialrefraction());
+        m->Setting_MaterialSpecularExp = this->setObjectCoordinate(mm.setting_materialspecularexp());
         switch (mm.setting_modelviewskin()) {
             case 0:
                 m->Setting_ModelViewSkin = ViewModelSkin_Solid;
@@ -538,16 +538,16 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
         m->Setting_LightStrengthDiffuse = mm.setting_lightstrengthdiffuse();
         m->Setting_LightStrengthSpecular = mm.setting_lightstrengthspecular();
         m->materialIlluminationModel = mm.materialilluminationmodel();
-        m->displacementHeightScale = this->setObjectCoordinate2(mm.displacementheightscale());
+        m->displacementHeightScale = this->setObjectCoordinate(mm.displacementheightscale());
         m->showMaterialEditor = mm.showmaterialeditor();
-        m->materialAmbient = this->setMaterialColor2(mm.materialambient());
-        m->materialDiffuse = this->setMaterialColor2(mm.materialdiffuse());
-        m->materialSpecular = this->setMaterialColor2(mm.materialspecular());
-        m->materialEmission = this->setMaterialColor2(mm.materialemission());
+        m->materialAmbient = this->setMaterialColor(mm.materialambient());
+        m->materialDiffuse = this->setMaterialColor(mm.materialdiffuse());
+        m->materialSpecular = this->setMaterialColor(mm.materialspecular());
+        m->materialEmission = this->setMaterialColor(mm.materialemission());
         m->Setting_ParallaxMapping = mm.setting_parallaxmapping();
         m->Effect_GBlur_Mode = mm.effect_gblur_mode();
-        m->Effect_GBlur_Radius = this->setObjectCoordinate2(mm.effect_gblur_radius());
-        m->Effect_GBlur_Width = this->setObjectCoordinate2(mm.effect_gblur_width());
+        m->Effect_GBlur_Radius = this->setObjectCoordinate(mm.effect_gblur_radius());
+        m->Effect_GBlur_Width = this->setObjectCoordinate(mm.effect_gblur_width());
         m->Effect_Bloom_doBloom = mm.effect_bloom_dobloom();
         m->Effect_Bloom_WeightA = mm.effect_bloom_weighta();
         m->Effect_Bloom_WeightB = mm.effect_bloom_weightb();
@@ -724,7 +724,7 @@ MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(cons
     return meshMatTexImage;
 }
 
-KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor2(MaterialColor& v) {
+KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor& v) {
     KuplungApp::MaterialColor* mc = new KuplungApp::MaterialColor();
     mc->set_colorpickeropen(v.colorPickerOpen);
     mc->set_animate(v.animate);
@@ -733,27 +733,9 @@ KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor2(MaterialColo
     return mc;
 }
 
-std::unique_ptr<MaterialColor> SaveOpenGProtocolBufs::setMaterialColor2(const KuplungApp::MaterialColor& v) {
+std::unique_ptr<MaterialColor> SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::MaterialColor& v) {
     auto t = std::make_unique<MaterialColor>(v.colorpickeropen(), v.animate(), v.strength(), this->setVec3(v.color()));
     return t;
-}
-
-KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor* v) {
-    KuplungApp::MaterialColor* mc = new KuplungApp::MaterialColor();
-    mc->set_colorpickeropen(v->colorPickerOpen);
-    mc->set_animate(v->animate);
-    mc->set_strength(v->strength);
-    mc->set_allocated_color(this->getVec3(v->color));
-    return mc;
-}
-
-MaterialColor* SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::MaterialColor& v) {
-    MaterialColor* mc = new MaterialColor();
-    mc->colorPickerOpen = v.colorpickeropen();
-    mc->animate = v.animate();
-    mc->strength = v.strength();
-    mc->color = this->setVec3(v.color());
-    return mc;
 }
 
 KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(const glm::vec4& v) {
@@ -773,23 +755,12 @@ KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(const glm::vec3& v) {
     return gv;
 }
 
-KuplungApp::Vec2* SaveOpenGProtocolBufs::getVec2(const glm::vec2& v) {
-    KuplungApp::Vec2* gv = new KuplungApp::Vec2();
-    gv->set_x(v.x);
-    gv->set_y(v.y);
-    return gv;
-}
-
 glm::vec4 SaveOpenGProtocolBufs::setVec4(const KuplungApp::Vec4& v) {
     return glm::vec4(v.x(), v.y(), v.z(), v.w());
 }
 
 glm::vec3 SaveOpenGProtocolBufs::setVec3(const KuplungApp::Vec3& v) {
     return glm::vec3(v.x(), v.y(), v.z());
-}
-
-glm::vec2 SaveOpenGProtocolBufs::setVec2(const KuplungApp::Vec2& v) {
-    return glm::vec2(v.x(), v.y());
 }
 
 //KuplungApp::FloatMatrix* SaveOpenGProtocolBufs::getMatrix(glm::mat4 m) {
@@ -817,27 +788,16 @@ glm::vec2 SaveOpenGProtocolBufs::setVec2(const KuplungApp::Vec2& v) {
 //    return mtx;
 //}
 
-KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate2(ObjectCoordinate& v) {
+KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate& v) {
     KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
     oc->set_animate(v.animate);
     oc->set_point(v.point);
     return oc;
 }
 
-std::unique_ptr<ObjectCoordinate> SaveOpenGProtocolBufs::setObjectCoordinate2(const KuplungApp::ObjectCoordinate& v) {
+std::unique_ptr<ObjectCoordinate> SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) {
     auto t = std::make_unique<ObjectCoordinate>(v.animate(), v.point());
     return t;
-}
-
-KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate* v) {
-    KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
-    oc->set_animate(v->animate);
-    oc->set_point(v->point);
-    return oc;
-}
-
-ObjectCoordinate* SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) {
-    return new ObjectCoordinate(v.animate(), v.point());
 }
 
 bool SaveOpenGProtocolBufs::hasEnding(std::string const &fullString, std::string const &ending) {

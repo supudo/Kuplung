@@ -18,7 +18,6 @@ class RenderingForward {
 public:
     explicit RenderingForward(ObjectsManager& mo);
     ~RenderingForward();
-    RenderingForward(const RenderingForward& rf);
 
     bool init();
     void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
@@ -71,7 +70,7 @@ private:
     GLint glEffect_ToneMapping_ACESFilmRec2020, glEffect_HDR_Tonemapping;
 
     // view skin
-    ModelFace_LightSource_Directional *solidLight;
+    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
     GLint glFS_solidSkin_materialColor;
 
     // PBR
