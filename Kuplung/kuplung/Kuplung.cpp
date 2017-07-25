@@ -264,10 +264,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
             }
         }
 
-        if (this->managerControls->keyPresset_TAB)
-            Settings::Instance()->ShowBoundingBox = false;
-        else
-            Settings::Instance()->ShowBoundingBox = true;
+		if (this->managerControls->keyPresset_TAB)
+			Settings::Instance()->ShowBoundingBox = !Settings::Instance()->ShowBoundingBox;
 
         if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
             this->guiModelDelete(this->sceneSelectedModelObject);

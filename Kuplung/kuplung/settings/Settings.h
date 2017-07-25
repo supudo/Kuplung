@@ -66,6 +66,7 @@ public:
     bool hasEnding(std::string const &fullString, std::string const &ending);
 
     std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
+	std::string getTimeNow();
 
     template <class T>
     inline void printClassAlignment(T *s) {
@@ -85,7 +86,6 @@ private:
 
     void initSettings();
     std::unique_ptr<ConfigUtils> cfgUtils;
-    std::string getTimeNow();
     void reuseLogFunc(const std::string& msg);
 };
 

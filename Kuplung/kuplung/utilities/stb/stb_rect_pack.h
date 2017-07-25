@@ -1,4 +1,4 @@
-// stb_rect_pack.h - v0.10 - public domain - rectangle packing
+// stb_rect_pack.h - v0.11 - public domain - rectangle packing
 // Sean Barrett 2014
 //
 // Useful for e.g. packing rectangular textures into an atlas.
@@ -27,11 +27,14 @@
 //    Sean Barrett
 //  Minor features
 //    Martins Mozeiko
+//    github:IntellectualKitty
+//    
 //  Bugfixes / warning fixes
 //    Jeremy Jaussaud
 //
 // Version history:
 //
+//     0.11  (2017-03-03)  return packing success/fail result
 //     0.10  (2016-10-25)  remove cast-away-const to avoid warnings
 //     0.09  (2016-08-27)  fix compiler warnings
 //     0.08  (2015-09-13)  really fix bug with empty rects (w=0 or h=0)
@@ -43,9 +46,7 @@
 //
 // LICENSE
 //
-//   This software is dual-licensed to the public domain and under the following
-//   license: you are granted a perpetual, irrevocable license to copy, modify,
-//   publish, and distribute this file as you see fit.
+//   See end of file for license information.
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -77,7 +78,7 @@ typedef int            stbrp_coord;
 typedef unsigned short stbrp_coord;
 #endif
 
-STBRP_DEF void stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int num_rects);
+STBRP_DEF int stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int num_rects);
 // Assign packed locations to rectangles. The rectangles are of type
 // 'stbrp_rect' defined below, stored in the array 'rects', and there
 // are 'num_rects' many of them.
@@ -98,18 +99,21 @@ STBRP_DEF void stbrp_pack_rects (stbrp_context *context, stbrp_rect *rects, int 
 // arrays will probably produce worse packing results than calling it
 // a single time with the full rectangle array, but the option is
 // available.
+//
+// The function returns 1 if all of the rectangles were successfully
+// packed and 0 otherwise.
 
 struct stbrp_rect
 {
-    // reserved for your use:
-    int            id;
+   // reserved for your use:
+   int            id;
 
-    // input:
-    stbrp_coord    w, h;
+   // input:
+   stbrp_coord    w, h;
 
-    // output:
-    stbrp_coord    x, y;
-    int            was_packed;  // non-zero if valid packing
+   // output:
+   stbrp_coord    x, y;
+   int            was_packed;  // non-zero if valid packing
 
 }; // 16 bytes, nominally
 
@@ -148,9 +152,9 @@ STBRP_DEF void stbrp_setup_heuristic (stbrp_context *context, int heuristic);
 
 enum
 {
-    STBRP_HEURISTIC_Skyline_default=0,
-    STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,
-    STBRP_HEURISTIC_Skyline_BF_sortHeight
+   STBRP_HEURISTIC_Skyline_default=0,
+   STBRP_HEURISTIC_Skyline_BL_sortHeight = STBRP_HEURISTIC_Skyline_default,
+   STBRP_HEURISTIC_Skyline_BF_sortHeight
 };
 
 
@@ -161,21 +165,21 @@ enum
 
 struct stbrp_node
 {
-    stbrp_coord  x,y;
-    stbrp_node  *next;
+   stbrp_coord  x,y;
+   stbrp_node  *next;
 };
 
 struct stbrp_context
 {
-    int width;
-    int height;
-    int align;
-    int init_mode;
-    int heuristic;
-    int num_nodes;
-    stbrp_node *active_head;
-    stbrp_node *free_head;
-    stbrp_node extra[2]; // we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'
+   int width;
+   int height;
+   int align;
+   int init_mode;
+   int heuristic;
+   int num_nodes;
+   stbrp_node *active_head;
+   stbrp_node *free_head;
+   stbrp_node extra[2]; // we allocate two extra nodes so optimal user-node-count is 'width' not 'width+2'
 };
 
 #ifdef __cplusplus
@@ -208,7 +212,7 @@ struct stbrp_context
 
 enum
 {
-    STBRP__INIT_skyline = 1
+   STBRP__INIT_skyline = 1
 };
 
 STBRP_DEF void stbrp_setup_heuristic(stbrp_context *context, int heuristic)
@@ -216,8 +220,8 @@ STBRP_DEF void stbrp_setup_heuristic(stbrp_context *context, int heuristic)
    switch (context->init_mode) {
       case STBRP__INIT_skyline:
          STBRP_ASSERT(heuristic == STBRP_HEURISTIC_Skyline_BL_sortHeight || heuristic == STBRP_HEURISTIC_Skyline_BF_sortHeight);
-           context->heuristic = heuristic;
-           break;
+         context->heuristic = heuristic;
+         break;
       default:
          STBRP_ASSERT(0);
    }
@@ -286,13 +290,13 @@ static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0
 
    STBRP_ASSERT(first->x <= x0);
 
-#if 0
+   #if 0
    // skip in case we're past the node
    while (node->next->x <= x0)
       ++node;
-#else
+   #else
    STBRP_ASSERT(node->next->x > x0); // we ended up handling this in the caller for efficiency
-#endif
+   #endif
 
    STBRP_ASSERT(node->x <= x0);
 
@@ -328,8 +332,8 @@ static int stbrp__skyline_find_min_y(stbrp_context *c, stbrp_node *first, int x0
 
 typedef struct
 {
-    int x,y;
-    stbrp_node **prev_link;
+   int x,y;
+   stbrp_node **prev_link;
 } stbrp__findresult;
 
 static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int width, int height)
@@ -418,7 +422,7 @@ static stbrp__findresult stbrp__skyline_find_best_pos(stbrp_context *c, int widt
             }
          }
          tail = tail->next;
-      }
+      }         
    }
 
    fr.prev_link = best;
@@ -520,17 +524,6 @@ static int rect_height_compare(const void *a, const void *b)
    return (p->w > q->w) ? -1 : (p->w < q->w);
 }
 
-static int rect_width_compare(const void *a, const void *b)
-{
-   const stbrp_rect *p = (const stbrp_rect *) a;
-   const stbrp_rect *q = (const stbrp_rect *) b;
-   if (p->w > q->w)
-      return -1;
-   if (p->w < q->w)
-      return  1;
-   return (p->h > q->h) ? -1 : (p->h < q->h);
-}
-
 static int rect_original_order(const void *a, const void *b)
 {
    const stbrp_rect *p = (const stbrp_rect *) a;
@@ -544,16 +537,16 @@ static int rect_original_order(const void *a, const void *b)
 #define STBRP__MAXVAL  0xffff
 #endif
 
-STBRP_DEF void stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects)
+STBRP_DEF int stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int num_rects)
 {
-   int i;
+   int i, all_rects_packed = 1;
 
    // we use the 'was_packed' field internally to allow sorting/unsorting
    for (i=0; i < num_rects; ++i) {
       rects[i].was_packed = i;
-#ifndef STBRP_LARGE_RECTS
+      #ifndef STBRP_LARGE_RECTS
       STBRP_ASSERT(rects[i].w <= 0xffff && rects[i].h <= 0xffff);
-#endif
+      #endif
    }
 
    // sort according to heuristic
@@ -576,8 +569,56 @@ STBRP_DEF void stbrp_pack_rects(stbrp_context *context, stbrp_rect *rects, int n
    // unsort
    STBRP_SORT(rects, num_rects, sizeof(rects[0]), rect_original_order);
 
-   // set was_packed flags
-   for (i=0; i < num_rects; ++i)
+   // set was_packed flags and all_rects_packed status
+   for (i=0; i < num_rects; ++i) {
       rects[i].was_packed = !(rects[i].x == STBRP__MAXVAL && rects[i].y == STBRP__MAXVAL);
+      if (!rects[i].was_packed)
+         all_rects_packed = 0;
+   }
+
+   // return the all_rects_packed status
+   return all_rects_packed;
 }
 #endif
+
+/*
+------------------------------------------------------------------------------
+This software is available under 2 licenses -- choose whichever you prefer.
+------------------------------------------------------------------------------
+ALTERNATIVE A - MIT License
+Copyright (c) 2017 Sean Barrett
+Permission is hereby granted, free of charge, to any person obtaining a copy of 
+this software and associated documentation files (the "Software"), to deal in 
+the Software without restriction, including without limitation the rights to 
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies 
+of the Software, and to permit persons to whom the Software is furnished to do 
+so, subject to the following conditions:
+The above copyright notice and this permission notice shall be included in all 
+copies or substantial portions of the Software.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, 
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+------------------------------------------------------------------------------
+ALTERNATIVE B - Public Domain (www.unlicense.org)
+This is free and unencumbered software released into the public domain.
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute this 
+software, either in source code form or as a compiled binary, for any purpose, 
+commercial or non-commercial, and by any means.
+In jurisdictions that recognize copyright laws, the author or authors of this 
+software dedicate any and all copyright interest in the software to the public 
+domain. We make this dedication for the benefit of the public at large and to 
+the detriment of our heirs and successors. We intend this dedication to be an 
+overt act of relinquishment in perpetuity of all present and future rights to 
+this software under copyright law.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR 
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE 
+AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN 
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION 
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+------------------------------------------------------------------------------
+*/
