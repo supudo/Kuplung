@@ -17,6 +17,7 @@
 
 class Skybox {
 public:
+	Skybox();
     ~Skybox();
     void init(const int& gridSize);
     bool initBuffers();

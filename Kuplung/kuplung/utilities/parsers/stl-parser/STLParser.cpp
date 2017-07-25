@@ -11,6 +11,11 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>
 
+STLParser::STLParser() {
+	this->Setting_Axis_Forward = 0;
+	this->Setting_Axis_Up = 0;
+}
+
 STLParser::~STLParser() {
 }
 

@@ -23,6 +23,20 @@ const GLenum SkyboxTextureCubemap[6] = {
     GL_TEXTURE_CUBE_MAP_NEGATIVE_Z, // Front
 };
 
+Skybox::Skybox() {
+	this->Setting_Skybox_Item = -1;
+
+	this->gridSize = 0;
+	this->shaderProgram = GL_ZERO;
+	this->shaderVertex = GL_ZERO;
+	this->shaderFragment = GL_ZERO;
+	this->glVAO = GL_ZERO; 
+	this->vboVertices = GL_ZERO; 
+	this->vboTexture = GL_ZERO;
+	this->glVS_MatrixView = GL_ZERO; 
+	this->glVS_MatrixProjection = GL_ZERO;
+}
+
 Skybox::~Skybox() {
     glDeleteBuffers(1, &this->vboVertices);
 
