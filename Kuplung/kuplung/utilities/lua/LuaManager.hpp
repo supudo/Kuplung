@@ -23,6 +23,7 @@ namespace KuplungApp { namespace Utilities { namespace Lua {
 
 class LuaManager {
 public:
+	LuaManager();
     void initLua();
     void closeLua();
     void checkLuaErrors();

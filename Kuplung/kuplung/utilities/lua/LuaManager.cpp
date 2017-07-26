@@ -10,8 +10,11 @@
 
 namespace KuplungApp { namespace Utilities { namespace Lua {
 
+LuaManager::LuaManager() {
+	this->luaState = luaL_newstate();
+}
+
 void LuaManager::initLua() {
-    this->luaState = luaL_newstate();
     luaL_openlibs(this->luaState);
 }
 

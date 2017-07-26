@@ -10,7 +10,17 @@
 #include <glm/glm.hpp>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
-#pragma mark - Cleanup
+Kuplung::Kuplung() {
+	this->gWindow = NULL;
+	this->glContext = NULL;
+
+	this->gameIsRunning = false;
+	this->objParserThreadFinished = true;
+	this->objParserThreadProcessed = true;
+	this->exporterThreadFinished = true;
+	this->sceneSelectedModelObject = -1;
+	this->objLoadingProgress = 0.0f;
+}
 
 Kuplung::~Kuplung() {
     for (size_t i=0; i<this->meshModelFaces.size(); i++) {
@@ -43,8 +53,6 @@ Kuplung::~Kuplung() {
 
     SDL_Quit();
 }
-
-#pragma mark - run
 
 int Kuplung::run() {
     if (!this->init())
@@ -79,8 +87,6 @@ int Kuplung::run() {
 
     return 0;
 }
-
-#pragma mark - Init
 
 bool Kuplung::init() {
     bool success = true;
@@ -234,8 +240,6 @@ void Kuplung::initFolders() {
         Settings::Instance()->currentFolder = std::move(homeFolder);
 }
 
-#pragma mark - Event processing
-
 void Kuplung::onEvent(SDL_Event *ev) {
     this->managerUI->processEvent(ev);
     this->managerControls->processEvents(ev);
@@ -337,8 +341,6 @@ void Kuplung::onEvent(SDL_Event *ev) {
         }
     }
 }
-
-#pragma mark - Rendering
 
 void Kuplung::addTerrainModel() {
     this->managerObjects->terrain->terrainGenerator->generateTerrain(Settings::Instance()->currentFolder, this->managerObjects->Setting_TerrainWidth, this->managerObjects->Setting_TerrainHeight);
@@ -470,8 +472,6 @@ void Kuplung::renderSceneModels() {
 #endif
 }
 
-#pragma mark - Scene GUI
-
 void Kuplung::initSceneGUI() {
     this->managerObjects->initCamera();
     this->managerObjects->initCameraModel();
@@ -554,8 +554,6 @@ void Kuplung::addShape(const ShapeType type) {
 void Kuplung::addLight(const LightSourceType type) {
     this->managerObjects->addLight(type);
 }
-
-#pragma mark - App GUI
 
 void Kuplung::processRunningThreads() {
     if (this->objParserThreadFinished && !this->objParserThreadProcessed) {

@@ -28,6 +28,7 @@
 
 class Kuplung {
 public:
+	Kuplung();
     ~Kuplung();
     int run();
 
@@ -37,15 +38,12 @@ private:
     void onEvent(SDL_Event* ev);
     void processImportFileAsync(const FBEntity& file, const std::vector<std::string> &settings);
     void processParsedImportedFile();
-    bool hasEnding(std::string const& fullString, std::string const& ending);
     void renderScene();
     void renderSceneModels();
     void initSceneGUI();
     void doLog(std::string const& logMessage);
     void doProgress(float value);
-    std::string readFile(const char *filePath);
     void processRunningThreads();
-    void setShaderEditor(std::function<void(std::string)> fileShaderCompile);
     void addShape(const ShapeType type);
     void addLight(const LightSourceType type);
     void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings);
