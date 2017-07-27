@@ -93,7 +93,7 @@ void LightRay::initBuffers(const glm::vec3& position, const glm::vec3& direction
             vertices.push_back(direction.z);
         }
         else {
-            GLfloat g_vertex_buffer_data[] = {
+            const GLfloat g_vertex_buffer_data[] = {
                  -0.866024971f, 0, 0.5,
                  0.866024971f, 0, -0.5,
                  0, 0, -1,

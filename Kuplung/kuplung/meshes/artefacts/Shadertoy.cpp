@@ -167,7 +167,7 @@ void Shadertoy::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    GLfloat vertices[] = {
+    const GLfloat vertices[] = {
         -1.0f, -1.0f,  0.0f,
          1.0f, -1.0f,  0.0f,
          1.0f,  1.0f,  0.0f,
@@ -305,7 +305,7 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
         glUniform2f(this->vs_ScreenResolution, this->textureWidth, this->textureHeight);
         glUniform3f(this->iResolution, this->textureWidth, this->textureHeight, 0);
         glUniform1f(this->iGlobalTime, seconds);
-        glUniform4f(this->iMouse, float(mouseX), float(mouseY), 0.0f, 0.0f);
+        glUniform4f(this->iMouse, static_cast<float>(mouseX), static_cast<float>(mouseY), 0.0f, 0.0f);
         glUniform1f(this->iChannelTime[0], seconds);
         glUniform1f(this->iChannelTime[1], seconds);
         glUniform1f(this->iChannelTime[2], seconds);
@@ -314,10 +314,11 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
 
         time_t t = time(0);
         struct tm * now = localtime(&t);
-        float iDate_year = float(now->tm_year + 1900);
-        float iDate_month = float(now->tm_mon + 1);
-        float iDate_day = float(now->tm_mday);
-        float iDate_seconds = float(now->tm_sec);
+        float iDate_year = static_cast<float>(now->tm_year + 1900);
+        float iDate_month = static_cast<float>(now->tm_mon + 1);
+        float iDate_day = static_cast<float>(now->tm_mday);
+        float iDate_seconds = static_cast<float>(now->tm_sec);
+		float a = now->tm_sec;
         glUniform4f(this->iDate, iDate_year, iDate_month, iDate_day, iDate_seconds);
 
         glUniform1f(this->iFrameRate, ImGui::GetIO().Framerate);

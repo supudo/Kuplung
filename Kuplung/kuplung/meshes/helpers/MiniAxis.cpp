@@ -87,7 +87,7 @@ void MiniAxis::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    GLfloat g_vertex_buffer_data[] = {
+    const GLfloat g_vertex_buffer_data[] = {
         // X
         -100, 0, 0,
         100, 0, 0,
@@ -101,7 +101,7 @@ void MiniAxis::initBuffers() {
         0, 0, 100
     };
 
-    GLfloat g_color_buffer_data[] = {
+	const GLfloat g_color_buffer_data[] = {
         // X - red
         1.0f, 0.0f, 0.0f, 1.0f,
         1.0f, 0.0f, 0.0f, 1.0f,

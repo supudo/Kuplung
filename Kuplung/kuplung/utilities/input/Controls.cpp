@@ -38,7 +38,7 @@ void Controls::init(SDL_Window* sdlWindow) {
     this->mouseWheel.y = 0;
 }
 
-void Controls::processEvents(SDL_Event* ev) {
+void Controls::processEvents(const SDL_Event* ev) {
     switch (ev->type) {
         case SDL_QUIT:
             this->gameIsRunning = false;
@@ -63,7 +63,7 @@ void Controls::processEvents(SDL_Event* ev) {
 
 #pragma mark - Private
 
-void Controls::handleInput(SDL_Event* ev) {
+void Controls::handleInput(const SDL_Event* ev) {
     this->mouseWheel = {};
     this->mouseWheel.x = 0;
     this->mouseWheel.y = 0;
@@ -76,7 +76,7 @@ void Controls::handleInput(SDL_Event* ev) {
     this->handleMouseMotion(ev);
 }
 
-void Controls::handleKeyDown(SDL_Event* ev) {
+void Controls::handleKeyDown(const SDL_Event* ev) {
     SDL_Keymod m = SDL_GetModState();
     this->keyPressed_ESC = false;
     this->keyPressed_DELETE = false;
@@ -130,7 +130,7 @@ void Controls::handleKeyDown(SDL_Event* ev) {
     }
 }
 
-void Controls::handleMouse(SDL_Event* ev) {
+void Controls::handleMouse(const SDL_Event* ev) {
     if (ev->type == SDL_MOUSEBUTTONDOWN) {
         this->mouseButton_LEFT = false;
         this->mouseButton_MIDDLE = false;
@@ -147,7 +147,7 @@ void Controls::handleMouse(SDL_Event* ev) {
     }
 }
 
-void Controls::handleMouseWheel(SDL_Event* ev) {
+void Controls::handleMouseWheel(const SDL_Event* ev) {
     this->mouseWheel.x = 0;
     this->mouseWheel.y = 0;
     if (ev->type == SDL_MOUSEWHEEL) {
@@ -158,7 +158,7 @@ void Controls::handleMouseWheel(SDL_Event* ev) {
     this->mousePosition.y = ev->motion.y;
 }
 
-void Controls::handleMouseMotion(SDL_Event* ev) {
+void Controls::handleMouseMotion(const SDL_Event* ev) {
     if (ev->type == SDL_MOUSEMOTION) {
         this->mouseGoLeft = false;
         this->mouseGoRight = false;

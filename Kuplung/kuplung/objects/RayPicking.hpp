@@ -35,7 +35,7 @@ private:
     void pickVertex(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const std::vector<ModelFaceBase*>& meshModelFaces, std::unique_ptr<ObjectsManager> &managerObjects, const std::unique_ptr<KuplungApp::Utilities::Input::Controls> &managerControls);
 
     glm::vec2 getNormalizeDeviceCordinates(float X, float Y);
-    glm::vec4 getEyeCoordinates(glm::vec4& coordinates, std::unique_ptr<ObjectsManager> &managerObjects);
+    glm::vec4 getEyeCoordinates(glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects);
     void getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction);
     bool testRayOBBIntersection(const glm::vec3& ray_origin, const glm::vec3& ray_direction, const glm::vec3& aabb_min, const glm::vec3& aabb_max, const glm::mat4& ModelMatrix, float& intersection_distance);
     bool testRaySphereIntersection(int const vID, glm::vec3 const& ray_origin, glm::vec3 const& ray_direction, glm::vec3 const& vertex, glm::mat4 const& mtx, float const& radius);

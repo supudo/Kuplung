@@ -94,9 +94,9 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
     this->dataIndices.clear();
 
     if (!this->isSphere) {
-        float theta = 2 * 3.1415926f / float(this->circleSegments);
-        float c = cosf(theta);
-        float s = sinf(theta);
+		const float theta = 2 * 3.1415926f / float(this->circleSegments);
+		const float c = cosf(theta);
+		const float s = sinf(theta);
         float t;
 
         float r = radius;

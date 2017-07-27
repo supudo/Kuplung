@@ -19,7 +19,7 @@ void DialogStyle::saveDefault(ImGuiStyle& style) {
         this->saveStyles("-", "14.00", defaultStyleFile, style);
 }
 
-void DialogStyle::save(std::string const& fontfile, std::string const& fontsize, ImGuiStyle& style) {
+void DialogStyle::save(std::string const& fontfile, std::string const& fontsize, const ImGuiStyle& style) {
     this->saveStyles(fontfile, fontsize, Settings::Instance()->appFolder() + "/KuplungStyle.style", style);
 }
 
@@ -130,7 +130,7 @@ ImGuiStyle& DialogStyle::loadCurrent() {
     return this->load(Settings::Instance()->appFolder() + "/KuplungStyle.style");
 }
 
-void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, ImGuiStyle& style) {
+void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, const ImGuiStyle& style) {
     std::string style_txt;
 
     style_txt += "# Kuplung (ImGui) styles" + Settings::Instance()->newLineDelimiter;

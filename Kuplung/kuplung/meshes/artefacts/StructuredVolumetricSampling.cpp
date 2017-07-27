@@ -85,7 +85,7 @@ void StructuredVolumetricSampling::initBuffers() {
     glGenVertexArrays(1, &this->glVAO);
     glBindVertexArray(this->glVAO);
 
-    GLfloat vertices[] = {
+    const GLfloat vertices[] = {
         -1.0f, -1.0f,  0.0f,
          1.0f, -1.0f,  0.0f,
          1.0f,  1.0f,  0.0f,

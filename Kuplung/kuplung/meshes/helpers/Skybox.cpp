@@ -140,7 +140,7 @@ bool Skybox::initBuffers() {
         glGenVertexArrays(1, &this->glVAO);
         glBindVertexArray(this->glVAO);
 
-        std::vector<GLfloat> skyboxVertices = {
+		std::vector<GLfloat> skyboxVertices = {
             // Positions
             -1.0f, 1.0f, -1.0f,
             -1.0f, -1.0f, -1.0f,

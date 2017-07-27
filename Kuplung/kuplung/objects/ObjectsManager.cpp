@@ -407,7 +407,7 @@ void ObjectsManager::clearAllLights() {
  * Utilities
  *
  */
-void ObjectsManager::loadSystemModels(std::unique_ptr<FileModelManager> &fileParser) {
+void ObjectsManager::loadSystemModels(const std::unique_ptr<FileModelManager> &fileParser) {
     FBEntity file;
     file.isFile = true;
     file.extension = ".obj";

@@ -38,7 +38,7 @@ public:
     void init(const std::function<void(float)>& doProgress,
               const std::function<void()>& addTerrain,
               const std::function<void()>& addSpaceship);
-    void loadSystemModels(std::unique_ptr<FileModelManager> &fileParser);
+    void loadSystemModels(const std::unique_ptr<FileModelManager> &fileParser);
     void render();
     void renderSkybox();
     void resetPropertiesSystem();

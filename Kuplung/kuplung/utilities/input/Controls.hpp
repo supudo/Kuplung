@@ -25,7 +25,7 @@ class Controls {
 public:
     ~Controls();
     void init(SDL_Window* sdlWindow);
-    void processEvents(SDL_Event* ev);
+    void processEvents(const SDL_Event* ev);
 
     bool gameIsRunning, keyPressed_ESC, keyPressed_DELETE;
 
@@ -43,11 +43,11 @@ public:
 private:
     SDL_Window* sdlWindow;
 
-    void handleInput(SDL_Event* ev);
-    void handleKeyDown(SDL_Event* ev);
-    void handleMouse(SDL_Event* ev);
-    void handleMouseWheel(SDL_Event* ev);
-    void handleMouseMotion(SDL_Event* ev);
+    void handleInput(const SDL_Event* ev);
+    void handleKeyDown(const SDL_Event* ev);
+    void handleMouse(const SDL_Event* ev);
+    void handleMouseWheel(const SDL_Event* ev);
+    void handleMouseMotion(const SDL_Event* ev);
 };
 
 }}}

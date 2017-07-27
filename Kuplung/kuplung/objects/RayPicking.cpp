@@ -65,7 +65,7 @@ void RayPicking::pickModel(const glm::mat4& matrixProjection, const glm::mat4& m
         rl->initBuffers(vFrom, vTo * managerObjects->Setting_PlaneFar);
         if (Settings::Instance()->showPickRaysSingle) {
             for (size_t i=0; i<this->rayLines.size(); i++) {
-                RayLine *mfd = dynamic_cast<RayLine*>(this->rayLines[i]);
+                RayLine *mfd = static_cast<RayLine*>(this->rayLines[i]);
                 delete mfd;
             }
             this->rayLines.clear();
@@ -121,8 +121,8 @@ void RayPicking::pickVertex(const glm::mat4& matrixProjection, const glm::mat4& 
         rl->initBuffers(rayStartPosition, rayDirection * managerObjects->Setting_PlaneFar);
         if (Settings::Instance()->showPickRaysSingle) {
             for (size_t i=0; i<this->rayLines.size(); i++) {
-                RayLine *mfd = dynamic_cast<RayLine*>(this->rayLines[i]);
-                delete mfd;
+                //RayLine *mfd = static_cast<RayLine*>(this->rayLines[i]);
+				//delete mfd;
             }
             this->rayLines.clear();
         }
@@ -173,7 +173,7 @@ glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) {
     return glm::vec2(x, -y);
 }
 
-glm::vec4 RayPicking::getEyeCoordinates(glm::vec4& coordinates, std::unique_ptr<ObjectsManager> &managerObjects) {
+glm::vec4 RayPicking::getEyeCoordinates(glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects) {
     glm::mat4 invertedProjectionMatrix = glm::inverse(managerObjects->matrixProjection);
     glm::vec4 eyeCoordinates = invertedProjectionMatrix * coordinates;
     return glm::vec4(eyeCoordinates.x, eyeCoordinates.y, -1.0f, 0.0f);
