@@ -33,9 +33,8 @@ ModelFaceData::~ModelFaceData() {
 
     GLint maxColorAttachments = 1;
     glGetIntegerv(GL_MAX_COLOR_ATTACHMENTS, &maxColorAttachments);
-    GLuint colorAttachment;
     GLenum att = GL_COLOR_ATTACHMENT0;
-    for (colorAttachment = 0; colorAttachment < static_cast<GLuint>(maxColorAttachments); colorAttachment++) {
+    for (GLuint colorAttachment = 0; colorAttachment < static_cast<GLuint>(maxColorAttachments); colorAttachment++) {
         att += colorAttachment;
         GLint param;
         GLuint objName;

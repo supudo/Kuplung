@@ -41,7 +41,7 @@ private:
     std::unique_ptr<ColorPicker> componentColorPicker;
 
     void animateValue(bool* isFrame, bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus);
-    void animateValueAsync(bool* isFrame, bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus);
+    void animateValueAsync(bool* isFrame, const bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus);
 };
 
 #endif /* UIHelpers_hpp */

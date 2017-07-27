@@ -61,7 +61,7 @@ bool UIHelpers::addControlsFloatSlider(std::string const& title, const int idx, 
 
 bool UIHelpers::addControlsFloatSliderSameLine(std::string const& title, const int idx, const float min, const float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
-    bool result = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit, "%.03f");
+    const bool result = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit, "%.03f");
 	if (!title.empty()) {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());
@@ -79,7 +79,7 @@ bool UIHelpers::addControlsSliderSameLine(std::string const& title, const int id
         ImGui::SameLine();
     }
     std::string s_id = "##10" + std::to_string(idx);
-    bool r = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);;
+    const bool r = ImGui::SliderFloat(s_id.c_str(), *(&animatedValue), min, limit);
     ImGui::SameLine();
     ImGui::Text("%s", title.c_str());
     return r;
@@ -124,7 +124,7 @@ void UIHelpers::animateValue(bool* isFrame, bool* animatedFlag, float* animatedV
     animThread.detach();
 }
 
-void UIHelpers::animateValueAsync(bool* isFrame, bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus) {
+void UIHelpers::animateValueAsync(bool* isFrame, const bool* animatedFlag, float* animatedValue, const float step, const float limit, const bool doMinus) {
     while (*animatedFlag) {
         if (*isFrame) {
             float v = (*animatedValue);
@@ -168,7 +168,7 @@ bool UIHelpers::addControlsFloatDrag(std::string const& title, const int idx, co
 
 bool UIHelpers::addControlsFloatDragSameLine(std::string const& title, const int idx, const float min, const float limit, float* animatedValue) {
     std::string s_id = "##10" + std::to_string(idx);
-    bool result = ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
+    const bool result = ImGui::DragFloat(s_id.c_str(), *(&animatedValue), 0.001f, min, limit, "%.03f");
 	if (!title.empty()) {
         ImGui::SameLine();
         ImGui::Text("%s", title.c_str());

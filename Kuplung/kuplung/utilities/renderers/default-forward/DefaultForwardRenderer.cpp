@@ -291,8 +291,8 @@ void DefaultForwardRenderer::createFBO() {
     this->generateAttachmentTexture(false, false);
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->renderTextureColorBuffer, 0);
 
-    int screenWidth = Settings::Instance()->SDL_Window_Width;
-    int screenHeight = Settings::Instance()->SDL_Window_Height;
+	const int screenWidth = Settings::Instance()->SDL_Window_Width;
+    const int screenHeight = Settings::Instance()->SDL_Window_Height;
 
     glGenRenderbuffers(1, &this->renderRBO);
     glBindRenderbuffer(GL_RENDERBUFFER, this->renderRBO);

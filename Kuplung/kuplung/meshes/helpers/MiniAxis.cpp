@@ -138,8 +138,8 @@ void MiniAxis::render(const glm::mat4& matrixProjection, const glm::mat4& matrix
     if (this->glVAO > 0 && this->showAxis) {
         glUseProgram(this->shaderProgram);
 
-        int axisW = 120, axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
-        int axisX = 10, axisY = 10;
+        const int axisW = 120, axisH = (Settings::Instance()->SDL_Window_Height * axisW) / Settings::Instance()->SDL_Window_Width;
+        const int axisX = 10, axisY = 10;
 
         glViewport(axisX, axisY, axisW, axisH);
 

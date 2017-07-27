@@ -48,8 +48,8 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
     module::Perlin perlinNoiser;
 
     perlinNoiser.SetOctaveCount(this->Setting_Octaves);
-    perlinNoiser.SetFrequency(double(this->Setting_Frequency));
-    perlinNoiser.SetPersistence(double(this->Setting_Persistence));
+    perlinNoiser.SetFrequency(static_cast<double>(this->Setting_Frequency));
+    perlinNoiser.SetPersistence(static_cast<double>(this->Setting_Persistence));
     if (this->Setting_SeedRandom)
         this->Setting_Seed = rand();
     perlinNoiser.SetSeed(this->Setting_Seed);
@@ -60,7 +60,7 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
         heightMapBuilder.SetSourceModule(perlinNoiser);
         heightMapBuilder.SetDestNoiseMap(this->heightMap);
         heightMapBuilder.SetDestSize(this->width, this->height);
-        heightMapBuilder.SetBounds(double(this->position_x1), double(this->position_x2), double(this->position_y1), double(this->position_y2));
+        heightMapBuilder.SetBounds(static_cast<double>(this->position_x1), static_cast<double>(this->position_x2), static_cast<double>(this->position_y1), static_cast<double>(this->position_y2));
         heightMapBuilder.Build();
     }
     else {
@@ -92,14 +92,14 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
     std::string filename;
     if (Settings::Instance()->Terrain_HeightmapImageHistory) {
         time_t t = time(0);
-        struct tm * now = localtime(&t);
+        const struct tm * now = localtime(&t);
 
-        int year = now->tm_year + 1900;
-        int month = now->tm_mon + 1;
-        int day = now->tm_mday;
-        int hour = now->tm_hour;
-        int minute = now->tm_min;
-        int seconds = now->tm_sec;
+		const int year = now->tm_year + 1900;
+		const int month = now->tm_mon + 1;
+		const int day = now->tm_mday;
+		const int hour = now->tm_hour;
+		const int minute = now->tm_min;
+		const int seconds = now->tm_sec;
 
         std::string fileSuffix = std::to_string(year) + std::to_string(month) + std::to_string(day) +
                                  std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
@@ -147,24 +147,24 @@ void HeightmapGenerator::generatePlaneGeometrySmooth() {
     this->indices.clear();
     this->colors.clear();
 
-    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+	const float worldCenter = -1.0f * heightmapWidth / 2.0f;
 
-    const float rr = 1.0f / float(heightmapHeight - 1);
-    const float ss = 1.0f / float(heightmapWidth - 1);
+    const float rr = 1.0f / static_cast<float>(heightmapHeight - 1);
+    const float ss = 1.0f / static_cast<float>(heightmapWidth - 1);
 
-    float p_x, p_y, p_z;
+    float p_x = 0, p_y = 0, p_z = 0;
     glm::vec3 position, color;
     glm::vec2 uv;
     utils::Color c;
     for (unsigned int y=0; y<heightmapHeight; ++y) {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
             p_x = x + worldCenter;
-            p_y = this->heightMap.GetValue(int(x), int(y)) * this->Setting_HeightCoeficient;
+            p_y = this->heightMap.GetValue(static_cast<int>(x), static_cast<int>(y)) * this->Setting_HeightCoeficient;
             p_z = y + worldCenter;
             position = glm::vec3(p_x, p_y, p_z) / this->Setting_ScaleCoeficient;
             uv = glm::vec2(x * ss, 1.0f - y * rr);
 
-            c = this->image.GetValue(int(x), int(y));
+            c = this->image.GetValue(static_cast<int>(x), static_cast<int>(y));
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
             this->vertices.push_back(position);
@@ -217,23 +217,23 @@ void HeightmapGenerator::generateSphereGeometry() {
 
     std::string grapher("");
 
-    const float rr = 1.0f / float(heightmapHeight - 1);
-    const float ss = 1.0f / float(heightmapWidth - 1);
+    const float rr = 1.0f / static_cast<float>(heightmapHeight - 1);
+    const float ss = 1.0f / static_cast<float>(heightmapWidth - 1);
 
     static const double pi = glm::pi<double>();
     static const double pi_2 = glm::half_pi<double>();
 
-    float hmValue;
-    float p_x, p_y, p_z;
+    float hmValue = 0;
+    float p_x = 0, p_y = 0, p_z = 0;
     glm::vec3 position, color;
     glm::vec2 uv;
     utils::Color c;
     for (unsigned int y=0; y<heightmapHeight; ++y) {
         for (unsigned int x=0; x<heightmapWidth; ++x) {
-            hmValue = this->heightMap.GetValue(int(x), int(y));
-            p_x = float(cos(2 * pi * x * ss) * sin(pi * y * rr));
-            p_y = float(sin(-pi_2 + pi * y * rr));
-            p_z = float(sin(2 * pi * x * ss) * sin(pi * y * rr));
+            hmValue = this->heightMap.GetValue(static_cast<int>(x), static_cast<int>(y));
+            p_x = static_cast<float>(cos(2 * pi * x * ss) * sin(pi * y * rr));
+            p_y = static_cast<float>(sin(-pi_2 + pi * y * rr));
+            p_z = static_cast<float>(sin(2 * pi * x * ss) * sin(pi * y * rr));
             position = glm::vec3(p_x, p_y, p_z) * this->Setting_ScaleCoeficient;
             position += glm::normalize(position) * hmValue;
 
@@ -241,7 +241,7 @@ void HeightmapGenerator::generateSphereGeometry() {
                 grapher += Settings::Instance()->string_format("%g,%g,%g\n", position.x, position.y, position.z);
 
             uv = glm::vec2(x * 1.0f / heightmapWidth, y * 1.0f / heightmapHeight);
-            c = this->image.GetValue(int(x), int(y));
+            c = this->image.GetValue(static_cast<int>(x), static_cast<int>(y));
             color = glm::vec3(c.red / 255.0f, c.green / 255.0f, c.blue / 255.0f);
 
             this->vertices.push_back(position);
@@ -289,8 +289,8 @@ void HeightmapGenerator::generateSphereGeometry() {
 }
 
 void HeightmapGenerator::generatePlaneGeometryCubic() {
-    int heightmapHeight = this->heightMap.GetHeight();
-    int heightmapWidth = this->heightMap.GetWidth();
+    const int heightmapHeight = this->heightMap.GetHeight();
+	const int heightmapWidth = this->heightMap.GetWidth();
 
     this->vertices.clear();
     this->uvs.clear();
@@ -300,14 +300,14 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
 
     std::string grapher("");
 
-    const float rr = 1.0f / float(heightmapHeight - 1);
-    const float ss = 1.0f / float(heightmapWidth - 1);
+    const float rr = 1.0f / static_cast<float>(heightmapHeight - 1);
+    const float ss = 1.0f / static_cast<float>(heightmapWidth - 1);
 
     unsigned int vertIndex = 0;
-    float worldCenter = -1.0f * heightmapWidth / 2.0f;
+    const float worldCenter = -1.0f * heightmapWidth / 2.0f;
     glm::vec3 v0, v1, v2, v3, v4, v5, v10, v11, n, n2, n3, color;
     glm::vec2 uv, uv2, uv3;
-    float hmValue, hmValue2, hmValue3;
+    float hmValue = 0, hmValue2 = 0, hmValue3 = 0;
     utils::Color c;
 
     for (int y=0; y<(heightmapHeight - 1) * 3; ++y) {
@@ -512,10 +512,10 @@ void HeightmapGenerator::generateMeshModel() {
     this->modelTerrain.normals = this->normals;
     this->modelTerrain.indices = this->indices;
 
-    this->modelTerrain.countVertices = int(this->vertices.size());
-    this->modelTerrain.countTextureCoordinates = int(this->uvs.size());
-    this->modelTerrain.countNormals = int(this->normals.size());
-    this->modelTerrain.countIndices = int(this->indices.size());
+    this->modelTerrain.countVertices = static_cast<int>(this->vertices.size());
+    this->modelTerrain.countTextureCoordinates = static_cast<int>(this->uvs.size());
+    this->modelTerrain.countNormals = static_cast<int>(this->normals.size());
+    this->modelTerrain.countIndices = static_cast<int>(this->indices.size());
 
     MeshModelMaterial material = {};
     material.MaterialID = 1;

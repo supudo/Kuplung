@@ -42,7 +42,7 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
 
     ImGuiWindow* window = ImGui::GetCurrentWindow();
     const ImGuiIO io = ImGui::GetIO();
-    ImGuiContext& g = *GImGui;
+    const ImGuiContext& g = *GImGui;
     float new_font_scale = ImClamp(this->zoomFactor + g.IO.MouseWheel * 0.10f, 0.50f, 2.50f);
 
     ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_RenderOptions, 0));

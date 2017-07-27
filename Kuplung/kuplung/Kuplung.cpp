@@ -141,7 +141,7 @@ bool Kuplung::init() {
                 }
                 else {
 #ifdef _WIN32
-                    GLenum glewInitCode = glewInit();
+                    const GLenum glewInitCode = glewInit();
                     if (glewInitCode != GLEW_OK) {
                         printf("[Kuplung] Cannot initialize GLEW.\n");
                         exit(EXIT_FAILURE);
@@ -250,8 +250,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
     if (ev->type == SDL_WINDOWEVENT) {
         switch (ev->window.event) {
         case SDL_WINDOWEVENT_SIZE_CHANGED:
-            Settings::Instance()->SDL_Window_Width = int(ev->window.data1);
-            Settings::Instance()->SDL_Window_Height = int(ev->window.data2);
+            Settings::Instance()->SDL_Window_Width = static_cast<int>(ev->window.data1);
+            Settings::Instance()->SDL_Window_Height = static_cast<int>(ev->window.data2);
             Settings::Instance()->saveSettings();
             break;
         }
@@ -450,18 +450,18 @@ void Kuplung::renderSceneModels() {
 
     if (this->managerObjects->Setting_ShowTerrain) {
         Settings::Instance()->sceneCountObjects += 1;
-        Settings::Instance()->sceneCountVertices += int(this->managerObjects->terrain->terrainGenerator->vertices.size());
-        Settings::Instance()->sceneCountIndices += int(this->managerObjects->terrain->terrainGenerator->indices.size());
-        Settings::Instance()->sceneCountTriangles += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 3;
-        Settings::Instance()->sceneCountFaces += int(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 6;
+        Settings::Instance()->sceneCountVertices += static_cast<int>(this->managerObjects->terrain->terrainGenerator->vertices.size());
+        Settings::Instance()->sceneCountIndices += static_cast<int>(this->managerObjects->terrain->terrainGenerator->indices.size());
+        Settings::Instance()->sceneCountTriangles += static_cast<int>(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 3;
+        Settings::Instance()->sceneCountFaces += static_cast<int>(this->managerObjects->terrain->terrainGenerator->vertices.size()) / 6;
     }
 
     if (this->managerObjects->Setting_ShowSpaceship) {
         Settings::Instance()->sceneCountObjects += 1;
-        Settings::Instance()->sceneCountVertices += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size());
-        Settings::Instance()->sceneCountIndices += int(this->managerObjects->spaceship->spaceshipGenerator->indices.size());
-        Settings::Instance()->sceneCountTriangles += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 3;
-        Settings::Instance()->sceneCountFaces += int(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 6;
+        Settings::Instance()->sceneCountVertices += static_cast<int>(this->managerObjects->spaceship->spaceshipGenerator->vertices.size());
+        Settings::Instance()->sceneCountIndices += static_cast<int>(this->managerObjects->spaceship->spaceshipGenerator->indices.size());
+        Settings::Instance()->sceneCountTriangles += static_cast<int>(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 3;
+        Settings::Instance()->sceneCountFaces += static_cast<int>(this->managerObjects->spaceship->spaceshipGenerator->vertices.size()) / 6;
     }
 
 #ifdef DEF_KuplungSetting_UseCuda
@@ -612,7 +612,7 @@ void Kuplung::processParsedImportedFile() {
             mmf->dataTexCoords = this->managerObjects->grid->dataTexCoords;
             mmf->dataNormals = this->managerObjects->grid->dataNormals;
             mmf->dataIndices = this->managerObjects->grid->dataIndices;
-            mmf->ModelID = int(this->meshModelFaces.size()) + int(i);
+            mmf->ModelID = static_cast<int>(this->meshModelFaces.size()) + static_cast<int>(i);
             mmf->init(model, Settings::Instance()->currentFolder);
             mmf->initBoundingBox();
             mmf->initVertexSphere();

@@ -110,7 +110,7 @@ glm::vec3 Camera::createRay(const float mouse_x, const float mouse_y, const floa
 
 PixelDataPoint Camera::getClickData(const int x, const int y, const int height) {
     PixelDataPoint p;
-    glReadPixels(x, height - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, p.color);
+    glReadPixels(x, height - y - 1, 1, 1, GL_RGBA, GL_UNSIGNED_BYTE, &p.color);
     glReadPixels(x, height - y - 1, 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &p.depth);
     glReadPixels(x, height - y - 1, 1, 1, GL_STENCIL_INDEX, GL_UNSIGNED_INT, &p.index);
     return p;

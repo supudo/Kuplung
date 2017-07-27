@@ -414,7 +414,7 @@ void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshMod
             mfd->matrixModel = matrixModel;
             mfd->Setting_ModelViewSkin = this->managerObjects.viewModelSkin;
             mfd->lightSources = this->managerObjects.lightSources;
-            mfd->setOptionsSelected(int(j) == selectedModel);
+            mfd->setOptionsSelected(static_cast<int>(j) == selectedModel);
             mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
             mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
             mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
@@ -450,7 +450,7 @@ void RenderingDeferred::renderLightingPass() {
         switch (light->type) {
             case LightSourceType_Directional: {
                 if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
-                    ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
+                    const ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
 
                     glUniform1i(f->gl_InUse, 1);
 
@@ -473,7 +473,7 @@ void RenderingDeferred::renderLightingPass() {
             }
             case LightSourceType_Point: {
                 if (lightsCount_Point < this->GLSL_LightSourceNumber_Point) {
-                    ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
+                    const ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
 
                     glUniform1i(f->gl_InUse, 1);
 
@@ -501,7 +501,7 @@ void RenderingDeferred::renderLightingPass() {
             }
             case LightSourceType_Spot: {
                 if (lightsCount_Spot < this->GLSL_LightSourceNumber_Spot) {
-                    ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
+                    const ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
 
                     glUniform1i(f->gl_InUse, 1);
 
@@ -550,7 +550,7 @@ void RenderingDeferred::renderLightingPass() {
     // Also send light relevant uniforms
     if (this->managerObjects.Setting_DeferredTestLights) {
         size_t i = 0;
-        for (; i<size_t(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
+        for (; i<static_cast<size_t>(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Position").c_str()), 1, &this->lightPositions[i][0]);
             glUniform3fv(glGetUniformLocation(this->shaderProgram_LightingPass, ("lights[" + std::to_string(i) + "].Color").c_str()), 1, &this->lightColors[i][0]);
 
@@ -609,7 +609,7 @@ void RenderingDeferred::renderLightObjects() {
     glUseProgram(this->shaderProgram_LightBox);
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "projection"), 1, GL_FALSE, glm::value_ptr(this->matrixProject));
     glUniformMatrix4fv(glGetUniformLocation(this->shaderProgram_LightBox, "view"), 1, GL_FALSE, glm::value_ptr(this->matrixCamera));
-    for (size_t i=0; i<size_t(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
+    for (size_t i=0; i<static_cast<size_t>(this->managerObjects.Setting_DeferredTestLightsNumber); i++) {
         glm::mat4 matrixModel = glm::mat4();
         matrixModel = glm::translate(matrixModel, this->lightPositions[i]);
         matrixModel = glm::scale(matrixModel, glm::vec3(0.25f));
@@ -621,7 +621,7 @@ void RenderingDeferred::renderLightObjects() {
 
 void RenderingDeferred::renderQuad() {
     if (this->quadVAO == 0) {
-        GLfloat quadVertices[] = {
+        const GLfloat quadVertices[] = {
             // Positions        // Texture Coords
             -1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
             -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
@@ -646,7 +646,7 @@ void RenderingDeferred::renderQuad() {
 
 void RenderingDeferred::renderCube() {
     if (this->cubeVAO == 0) {
-        GLfloat vertices[] = {
+        const GLfloat vertices[] = {
             // Back face
             -0.5f, -0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 0.0f, 0.0f, // Bottom-left
             0.5f, 0.5f, -0.5f, 0.0f, 0.0f, -1.0f, 1.0f, 1.0f, // top-right

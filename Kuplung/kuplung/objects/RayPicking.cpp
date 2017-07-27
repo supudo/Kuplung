@@ -150,7 +150,7 @@ bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_o
     glm::vec4 vq = glm::vec4(vertex, 1.0) * mtx;
     glm::vec3 v0 = glm::vec3(vq);
 
-    bool intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
+    const bool intersected = glm::intersectRaySphere(ray_origin, ray_direction, v0, radius * radius, distance);
     if (intersected)
         Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[HIT - %i] ||||||||| [CENTER: %g, %g, %g] ||||||||| [VERTEX: %g, %g, %g] ===== %g",
                                                                             vID,
@@ -190,8 +190,8 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
     // Test intersection with the 2 planes perpendicular to the OBB's X axis
     {
         glm::vec3 xaxis(ModelMatrix[0].x, ModelMatrix[0].y, ModelMatrix[0].z);
-        float e = glm::dot(xaxis, delta);
-        float f = glm::dot(ray_direction, xaxis);
+        const float e = glm::dot(xaxis, delta);
+        const float f = glm::dot(ray_direction, xaxis);
 
         if (std::fabs(f) > 0.001f) { // Standard case
             float t1 = (e + aabb_min.x) / f; // Intersection with the "left" plane
@@ -230,15 +230,15 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
     // Exactly the same thing than above.
     {
         glm::vec3 yaxis(ModelMatrix[1].x, ModelMatrix[1].y, ModelMatrix[1].z);
-        float e = glm::dot(yaxis, delta);
-        float f = glm::dot(ray_direction, yaxis);
+        const float e = glm::dot(yaxis, delta);
+		const float f = glm::dot(ray_direction, yaxis);
 
         if (std::fabs(f) > 0.001f) {
             float t1 = (e + aabb_min.y) / f;
             float t2 = (e + aabb_max.y) / f;
 
             if (t1 > t2) {
-                float w = t1;
+				const float w = t1;
                 t1 = t2;
                 t2 = w;
             }
@@ -260,8 +260,8 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
     // Exactly the same thing than above.
     {
         glm::vec3 zaxis(ModelMatrix[2].x, ModelMatrix[2].y, ModelMatrix[2].z);
-        float e = glm::dot(zaxis, delta);
-        float f = glm::dot(ray_direction, zaxis);
+		const float e = glm::dot(zaxis, delta);
+		const float f = glm::dot(ray_direction, zaxis);
 
         if (std::fabs(f) > 0.001f) {
 
@@ -269,7 +269,7 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
             float t2 = (e + aabb_max.z) / f;
 
             if (t1 > t2) {
-                float w = t1;
+				const float w = t1;
                 t1 = t2;
                 t2 = w;
             }
@@ -292,12 +292,12 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
 
 void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) {
     glm::vec4 lRayStart_NDC(
-        (float(mouseX)/float(screenWidth)  - 0.5f) * 2.0f,
-        (float(mouseY)/float(screenHeight) - 0.5f) * 2.0f,
+        (static_cast<float>(mouseX) / static_cast<float>(screenWidth)  - 0.5f) * 2.0f,
+        (static_cast<float>(mouseY) / static_cast<float>(screenHeight) - 0.5f) * 2.0f,
         -1.0, 1.0f);
     glm::vec4 lRayEnd_NDC(
-        (float(mouseX)/float(screenWidth)  - 0.5f) * 2.0f,
-        (float(mouseY)/float(screenHeight) - 0.5f) * 2.0f,
+        (static_cast<float>(mouseX) / static_cast<float>(screenWidth)  - 0.5f) * 2.0f,
+        (static_cast<float>(mouseY) / static_cast<float>(screenHeight) - 0.5f) * 2.0f,
         0.0, 1.0f
     );
 

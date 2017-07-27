@@ -117,14 +117,14 @@ void SpaceshipMeshGenerator::generateFirstHull2() {
 }
 
 void SpaceshipMeshGenerator::generateFirstHull3() {
-    int x = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
-    int y = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
-    int z = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    const int x = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    const int y = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
+    const int z = this->getRandomValue(-1.0f * this->gridSize, this->gridSize);
     int extrude_size = this->getRandomValue(-1.0f * this->gridSize, this->gridSize, false);
 
-    float px = float(x);
-    float py = float(y);
-    float pz = float(z);
+    float px = static_cast<float>(x);
+    float py = static_cast<float>(y);
+    float pz = static_cast<float>(z);
 
     // side 1
     glm::vec3 v0 = glm::vec3(px, py, pz);
@@ -228,7 +228,7 @@ int SpaceshipMeshGenerator::getRandomValue(const float& valueMin, const float& v
     rng.seed(std::random_device()());
     std::uniform_int_distribution<std::mt19937::result_type> distr(static_cast<unsigned int>(valueMin), static_cast<unsigned int>(valueMax));
 
-    int v = int(distr(rng));
+    int v = static_cast<int>(distr(rng));
     if (zeroIsValid)
         return v;
     else {
@@ -255,10 +255,10 @@ void SpaceshipMeshGenerator::generateMeshModel() {
     this->modelSpaceship.normals = this->normals;
     this->modelSpaceship.indices = this->indices;
 
-    this->modelSpaceship.countVertices = int(this->vertices.size());
-    this->modelSpaceship.countTextureCoordinates = int(this->uvs.size());
-    this->modelSpaceship.countNormals = int(this->normals.size());
-    this->modelSpaceship.countIndices = int(this->indices.size());
+    this->modelSpaceship.countVertices = static_cast<int>(this->vertices.size());
+    this->modelSpaceship.countTextureCoordinates = static_cast<int>(this->uvs.size());
+    this->modelSpaceship.countNormals = static_cast<int>(this->normals.size());
+    this->modelSpaceship.countIndices = static_cast<int>(this->indices.size());
 
     MeshModelMaterial material = {};
     material.MaterialID = 1;

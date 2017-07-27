@@ -58,7 +58,7 @@ std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
     glm::decompose(face.matrixModel, scale, rotation, translation, skew, perspective);
 
     this->funcProgress(0.0f);
-    int totalProgress = int(model.indices.size()) * 2;
+    const int totalProgress = int(model.indices.size()) * 2;
     float progressCounter = 0.0f;
 
     meshData += this->nlDelimiter;
@@ -95,8 +95,7 @@ std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
 
         progressCounter += 1;
 
-        float progress = (progressCounter / float(totalProgress)) * 100.0f;
-        this->funcProgress(progress);
+        this->funcProgress((progressCounter / float(totalProgress)) * 100.0f);
     }
 
     meshData += v;
@@ -128,8 +127,7 @@ std::string ExporterOBJ::exportMesh(const ModelFaceBase& face) {
 
         progressCounter += 1;
 
-        float progress = (progressCounter / float(totalProgress)) * 100.0f;
-        this->funcProgress(progress);
+        this->funcProgress((progressCounter / float(totalProgress)) * 100.0f);
     }
 
     meshData += "usemtl " + model.MaterialTitle + this->nlDelimiter;
@@ -161,14 +159,14 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
 
     if (!fileContents.empty()) {
         time_t t = time(0);
-        struct tm * now = localtime(&t);
+        const struct tm * now = localtime(&t);
 
-        int year = now->tm_year + 1900;
-        int month = now->tm_mon + 1;
-        int day = now->tm_mday;
-        int hour = now->tm_hour;
-        int minute = now->tm_min;
-        int seconds = now->tm_sec;
+		const int year = now->tm_year + 1900;
+		const int month = now->tm_mon + 1;
+		const int day = now->tm_mday;
+		const int hour = now->tm_hour;
+		const int minute = now->tm_min;
+		const int seconds = now->tm_sec;
 
         std::string fileSuffix = "_" +
                                  std::to_string(year) + std::to_string(month) + std::to_string(day) +

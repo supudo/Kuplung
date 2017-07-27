@@ -94,10 +94,10 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
     this->dataIndices.clear();
 
     if (!this->isSphere) {
-		const float theta = 2 * 3.1415926f / float(this->circleSegments);
+		const float theta = 2 * 3.1415926f / static_cast<float>(this->circleSegments);
 		const float c = cosf(theta);
 		const float s = sinf(theta);
-        float t;
+        float t = 0;
 
         float r = radius;
         float x = r;
@@ -128,21 +128,21 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
     }
     else {
-        const float rings = 1.0f / float(this->circleSegments - 1);
-        const float sectors = 1.0f / float(this->circleSegments - 1);
+        const float rings = 1.0f / static_cast<float>(this->circleSegments - 1);
+        const float sectors = 1.0f / static_cast<float>(this->circleSegments - 1);
 
         static const double pi = glm::pi<double>();
         static const double pi_2 = glm::half_pi<double>();
-        float p_x, p_y, p_z;
+        float p_x = 0, p_y = 0, p_z = 0;
         glm::vec3 position;
         glm::vec3 v1, v2, v3, normal;
 
         for (size_t i=0; i<meshModel.vertices.size(); i++) {
             for (int y=0; y<this->circleSegments; ++y) {
                 for (int x=0; x<this->circleSegments; ++x) {
-                    p_x = float(cos(2 * pi * x * sectors) * sin(pi * y * rings));
-                    p_y = float(sin(-pi_2 + pi * y * rings));
-                    p_z = float(sin(2 * pi * x * sectors) * sin(pi * y * rings));
+                    p_x = static_cast<float>(cos(2 * pi * x * sectors) * sin(pi * y * rings));
+                    p_y = static_cast<float>(sin(-pi_2 + pi * y * rings));
+                    p_z = static_cast<float>(sin(2 * pi * x * sectors) * sin(pi * y * rings));
                     position = glm::vec3(p_x, p_y, p_z) * radius;
                     position += meshModel.vertices[i];
                     this->dataVertices.push_back(position);
@@ -221,7 +221,7 @@ void VertexSphere::render(const glm::mat4& matrixMVP, const glm::vec4& color) {
         else {
             if (this->showWireframes)
                 glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            glDrawElements(GL_TRIANGLES, int(this->dataIndices.size()), GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, static_cast<int>(this->dataIndices.size()), GL_UNSIGNED_INT, 0);
             if (this->showWireframes)
                 glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }

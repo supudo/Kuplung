@@ -109,6 +109,7 @@
       <LanguageStandard>
       </LanguageStandard>
       <EnablePREfast>true</EnablePREfast>
+      <IgnoreStandardIncludePath>false</IgnoreStandardIncludePath>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;CMAKE_INTDIR=\"Debug\";%(PreprocessorDefinitions)</PreprocessorDefinitions>

@@ -154,7 +154,7 @@ void StructuredVolumetricSampling::render(const int mouseX, const int mouseY, co
         glUniform2f(this->glVS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
         glUniform1f(this->glFS_deltaRunningTime, seconds);
         glUniform3f(this->glFS_screenResolution, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0.0f);
-        glUniform4f(this->glFS_mouseCoordinates, float(mouseX), float(mouseY), 0.0f, 0.0f);
+        glUniform4f(this->glFS_mouseCoordinates, static_cast<float>(mouseX), static_cast<float>(mouseY), 0.0f, 0.0f);
 
         // draw
         glBindVertexArray(this->glVAO);
@@ -187,7 +187,7 @@ void StructuredVolumetricSampling::initFBO(const int windowWidth, const int wind
     glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, *vboTexture, 0);
     glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, this->tRBO);
 
-    GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+    const GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
     if (status != GL_FRAMEBUFFER_COMPLETE)
         Settings::Instance()->funcDoLog("[SVS] - Error creating FBO! - " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
 

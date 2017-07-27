@@ -410,8 +410,8 @@ bool RenderingForwardShadowMapping::initShadowsBuffers() {
     glGenTextures(1, &this->vboDepthMap);
     glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
 
-    int smapWidth = 1024;//Settings::Instance()->SDL_Window_Width;
-    int smapHeight = 1024;//Settings::Instance()->SDL_Window_Height;
+    const int smapWidth = 1024;//Settings::Instance()->SDL_Window_Width;
+    const int smapHeight = 1024;//Settings::Instance()->SDL_Window_Height;
 
     glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, smapWidth, smapHeight, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
@@ -497,7 +497,7 @@ void RenderingForwardShadowMapping::renderDepth() {
     glBindTexture(GL_TEXTURE_2D, this->vboDepthMap);
 
     if (this->depthQuadVAO == 0) {
-        GLfloat quadVertices[] = {
+        const GLfloat quadVertices[] = {
             // Positions        // Texture Coords
             -1.0f,  1.0f, 0.0f,  0.0f, 1.0f,
             -1.0f, -1.0f, 0.0f,  0.0f, 0.0f,
@@ -530,7 +530,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
         ModelFaceData *mfd = meshModelFaces[i];
 
         if (mfd->getOptionsSelected())
-            selectedModelID = int(i);
+            selectedModelID = static_cast<int>(i);
 
         glm::mat4 matrixModel = glm::mat4(1.0);
         matrixModel *= this->managerObjects.grid->matrixModel;
@@ -561,7 +561,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
         mfd->setOptionsFOV(this->managerObjects.Setting_FOV);
         mfd->setOptionsOutlineColor(this->managerObjects.Setting_OutlineColor);
         mfd->setOptionsOutlineThickness(this->managerObjects.Setting_OutlineThickness);
-        mfd->setOptionsSelected(int(i) == selectedModel);
+        mfd->setOptionsSelected(static_cast<int>(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
         if (isShadowPass)
@@ -670,7 +670,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
             switch (light->type) {
                 case LightSourceType_Directional: {
                     if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
-                        ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
+                        const ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -678,9 +678,9 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                         glUniform3f(f->gl_Direction, light->positionX->point, light->positionY->point, light->positionZ->point);
 
                         // color
-						glm::vec3 c_ambient = light->ambient->color;
-						glm::vec3 c_diffuse = light->diffuse->color;
-						glm::vec3 c_specular = light->specular->color;
+						const glm::vec3 c_ambient = light->ambient->color;
+						const glm::vec3 c_diffuse = light->diffuse->color;
+						const glm::vec3 c_specular = light->specular->color;
                         glUniform3f(f->gl_Ambient, c_ambient.r, c_ambient.g, c_ambient.b);
                         glUniform3f(f->gl_Diffuse, c_diffuse.r, c_diffuse.g, c_diffuse.b);
                         glUniform3f(f->gl_Specular, c_specular.r, c_specular.g, c_specular.b);
@@ -696,7 +696,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                 }
                 case LightSourceType_Point: {
                     if (lightsCount_Point < this->GLSL_LightSourceNumber_Point) {
-                        ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
+                        const ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -725,7 +725,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                 }
                 case LightSourceType_Spot: {
                     if (lightsCount_Spot < this->GLSL_LightSourceNumber_Spot) {
-                        ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
+                        const ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -777,10 +777,10 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
         glUniform1i(this->glMaterial_IlluminationModel, static_cast<GLint>(mfd->materialIlluminationModel));
         glUniform1f(this->glMaterial_HeightScale, mfd->displacementHeightScale->point);
 
-		glm::vec3 c_Ambient = mfd->materialAmbient->color;
-		glm::vec3 c_Diffuse = mfd->materialDiffuse->color;
-		glm::vec3 c_Specular = mfd->materialSpecular->color;
-		glm::vec3 c_Emission = mfd->materialEmission->color;
+		const glm::vec3 c_Ambient = mfd->materialAmbient->color;
+		const glm::vec3 c_Diffuse = mfd->materialDiffuse->color;
+		const glm::vec3 c_Specular = mfd->materialSpecular->color;
+		const glm::vec3 c_Emission = mfd->materialEmission->color;
         glUniform3f(this->glMaterial_Ambient, c_Ambient.r, c_Ambient.g, c_Ambient.b);
         glUniform3f(this->glMaterial_Diffuse, c_Diffuse.r, c_Diffuse.g, c_Diffuse.b);
         glUniform3f(this->glMaterial_Specular, c_Specular.r, c_Specular.g, c_Specular.b);

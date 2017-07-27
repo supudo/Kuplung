@@ -161,7 +161,7 @@ void Settings::saveSettings() {
 }
 
 std::string Settings::string_format(const std::string fmt_str, ...) {
-    int final_n, n = ((int)fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
+    int final_n, n = static_cast<int>(fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
     std::unique_ptr<char[]> formatted;
     va_list ap;
     while(1) {
@@ -229,10 +229,10 @@ void Settings::timerEnd(const std::string& msg) {
 
 std::string Settings::getTimeNow() {
     time_t t = time(0);
-    struct tm * now = localtime(&t);
-    int t_hour = int(now->tm_hour);
-    int t_min = int(now->tm_min);
-    int t_sec = int(now->tm_sec);
+    const struct tm * now = localtime(&t);
+    const int t_hour = static_cast<int>(now->tm_hour);
+	const int t_min = static_cast<int>(now->tm_min);
+	const int t_sec = static_cast<int>(now->tm_sec);
     std::string tn("");
     if (t_hour < 10)
         tn += "0";

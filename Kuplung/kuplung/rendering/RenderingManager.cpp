@@ -72,7 +72,7 @@ void RenderingManager::render(const int& selectedModel) {
         this->RenderingTotalFaces += this->RenderingTotalTriangles / 2;
     }
 
-    Settings::Instance()->sceneCountObjects = int(this->meshModelFaces.size());
+    Settings::Instance()->sceneCountObjects = static_cast<int>(this->meshModelFaces.size());
     Settings::Instance()->sceneCountVertices = this->RenderingTotalVertices;
     Settings::Instance()->sceneCountIndices = this->RenderingTotalIndices;
     Settings::Instance()->sceneCountTriangles = this->RenderingTotalTriangles;

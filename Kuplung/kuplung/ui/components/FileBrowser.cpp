@@ -159,7 +159,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
         }
 
         fs::directory_iterator iteratorEnd;
-        bool isAllowedFileExtension;
+        bool isAllowedFileExtension = false;
         for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
             try {
                 fs::file_status fileStatus = iteratorFolder->status();
@@ -191,7 +191,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
                     }
 
                     std::time_t modifiedDate = fs::last_write_time(iteratorFolder->path());
-                    std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
+                    const std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
                     std::string mds = std::to_string((modifiedDateLocal->tm_year + 1900));
                     mds += "-" + std::to_string((modifiedDateLocal->tm_mon + 1));
                     mds += "-" + std::to_string(modifiedDateLocal->tm_mday);
@@ -232,15 +232,15 @@ std::string FileBrowser::convertSize(size_t size) {
         size /= 1024;
     }
 
-    double size_d = double(size) + double(rem) / 1024.0;
+    double size_d = static_cast<double>(size) + static_cast<double>(rem) / 1024.0;
     std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
     return result;
 }
 
 double FileBrowser::roundOff(double n) {
     double d = n * 100.0;
-    int i = int(d + 0.5);
-    d = double(i) / 100.0;
+    int i = static_cast<int>(d + 0.5);
+    d = static_cast<double>(i) / 100.0;
     return d;
 }
 

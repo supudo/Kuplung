@@ -374,17 +374,17 @@ void ObjectsManager::addLight(const LightSourceType type, std::string const& tit
     assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
     switch (type) {
         case LightSourceType_Directional:
-            lightObject->title = ((title.empty()) ? "Directional " + std::to_string(int(this->lightSources.size()) + 1) : title);
+            lightObject->title = ((title.empty()) ? "Directional " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description.empty()) ? "Directional area light source" : description);
             lightObject->setModel(this->systemModels["light_directional"]);
             break;
         case LightSourceType_Point:
-            lightObject->title = ((title.empty()) ? "Point " + std::to_string(int(this->lightSources.size()) + 1) : title);
+            lightObject->title = ((title.empty()) ? "Point " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description.empty()) ? "Omnidirectional point light source" : description);
             lightObject->setModel(this->systemModels["light_point"]);
             break;
         case LightSourceType_Spot:
-            lightObject->title = ((title.empty()) ? "Spot " + std::to_string(int(this->lightSources.size()) + 1) : title);
+            lightObject->title = ((title.empty()) ? "Spot " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
             lightObject->description = ((description.empty()) ? "Directional cone light source" : description);
             lightObject->setModel(this->systemModels["light_spot"]);
             break;

@@ -310,7 +310,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         ModelFaceData *mfd = meshModelFaces[i];
 
         if (mfd->getOptionsSelected())
-            selectedModelID = int(i);
+            selectedModelID = static_cast<int>(i);
 
         glm::mat4 matrixModel = glm::mat4(1.0);
         matrixModel *= this->managerObjects->grid->matrixModel;
@@ -334,7 +334,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
         mfd->setOptionsFOV(this->managerObjects->Setting_FOV);
         mfd->setOptionsOutlineColor(this->managerObjects->Setting_OutlineColor);
         mfd->setOptionsOutlineThickness(this->managerObjects->Setting_OutlineThickness);
-        mfd->setOptionsSelected(int(i) == selectedModel);
+        mfd->setOptionsSelected(static_cast<int>(i) == selectedModel);
 
         glm::mat4 mvpMatrix = this->matrixProjection * this->matrixCamera * matrixModel;
 
@@ -432,7 +432,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             switch (light->type) {
                 case LightSourceType_Directional: {
                     if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
-                        ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
+                        const ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -455,7 +455,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
                 }
                 case LightSourceType_Point: {
                     if (lightsCount_Point < this->GLSL_LightSourceNumber_Point) {
-                        ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
+                        const ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -483,7 +483,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
                 }
                 case LightSourceType_Spot: {
                     if (lightsCount_Spot < this->GLSL_LightSourceNumber_Spot) {
-                        ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
+                        const ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
 
                         glUniform1i(f->gl_InUse, 1);
 

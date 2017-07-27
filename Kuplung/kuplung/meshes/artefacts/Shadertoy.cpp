@@ -149,10 +149,10 @@ void main() {\n\
         this->iChannelResolution[3] = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelResolution[3]");
         this->iMouse = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iMouse");
         this->iDate = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iDate");
-        this->iChannel0 = GLuint(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel0"));
-        this->iChannel1 = GLuint(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel1"));
-        this->iChannel2 = GLuint(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel2"));
-        this->iChannel3 = GLuint(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel3"));
+        this->iChannel0 = static_cast<GLuint>(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel0"));
+        this->iChannel1 = static_cast<GLuint>(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel1"));
+        this->iChannel2 = static_cast<GLuint>(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel2"));
+        this->iChannel3 = static_cast<GLuint>(Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannel3"));
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -242,23 +242,23 @@ void Shadertoy::addTexture(std::string const & textureImage, GLuint* vboTexture,
         stbi_image_free(tPixels);
         switch (textureID) {
             case 0: {
-                this->iChannelResolution0[0] = float(tWidth);
-                this->iChannelResolution0[1] = float(tHeight);
+                this->iChannelResolution0[0] = tWidth;
+                this->iChannelResolution0[1] = tHeight;
                 break;
             }
             case 1: {
-                this->iChannelResolution1[0] = float(tWidth);
-                this->iChannelResolution1[1] = float(tHeight);
+                this->iChannelResolution1[0] = tWidth;
+                this->iChannelResolution1[1] = tHeight;
                 break;
             }
             case 2: {
-                this->iChannelResolution2[0] = float(tWidth);
-                this->iChannelResolution2[1] = float(tHeight);
+                this->iChannelResolution2[0] = tWidth;
+                this->iChannelResolution2[1] = tHeight;
                 break;
             }
             case 3: {
-                this->iChannelResolution3[0] = float(tWidth);
-                this->iChannelResolution3[1] = float(tHeight);
+                this->iChannelResolution3[0] = tWidth;
+                this->iChannelResolution3[1] = tHeight;
                 break;
             }
         }
@@ -313,12 +313,11 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
         glUniform1f(this->iTimeDelta, ImGui::GetIO().DeltaTime);
 
         time_t t = time(0);
-        struct tm * now = localtime(&t);
-        float iDate_year = static_cast<float>(now->tm_year + 1900);
-        float iDate_month = static_cast<float>(now->tm_mon + 1);
-        float iDate_day = static_cast<float>(now->tm_mday);
-        float iDate_seconds = static_cast<float>(now->tm_sec);
-		float a = now->tm_sec;
+        const struct tm * now = localtime(&t);
+		const float iDate_year = static_cast<float>(now->tm_year + 1900);
+		const float iDate_month = static_cast<float>(now->tm_mon + 1);
+		const float iDate_day = static_cast<float>(now->tm_mday);
+        const float iDate_seconds = static_cast<float>(now->tm_sec);
         glUniform4f(this->iDate, iDate_year, iDate_month, iDate_day, iDate_seconds);
 
         glUniform1f(this->iFrameRate, ImGui::GetIO().Framerate);

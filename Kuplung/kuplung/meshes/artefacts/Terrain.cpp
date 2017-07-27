@@ -188,7 +188,7 @@ void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixC
         if (this->Setting_Wireframe)
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-        glDrawElements(GL_TRIANGLES, int(this->terrainGenerator->indices.size()), GL_UNSIGNED_INT, nullptr);
+        glDrawElements(GL_TRIANGLES, static_cast<int>(this->terrainGenerator->indices.size()), GL_UNSIGNED_INT, nullptr);
 
         if (this->Setting_Wireframe)
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
