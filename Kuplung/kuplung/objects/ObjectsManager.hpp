@@ -59,14 +59,14 @@ public:
     void addLight(const LightSourceType type, std::string const& title = "", std::string const& description = "");
     std::vector<Light*> lightSources;
 
-    Camera *camera;
-    CameraModel *cameraModel;
-    WorldGrid *grid;
-    MiniAxis *axisSystem;
-    Skybox *skybox;
-    AxisHelpers *axisHelpers_xMinus, *axisHelpers_xPlus, *axisHelpers_yMinus, *axisHelpers_yPlus, *axisHelpers_zMinus, *axisHelpers_zPlus;
-    Terrain *terrain;
-    Spaceship *spaceship;
+    std::unique_ptr<Camera> camera;
+	std::unique_ptr<CameraModel> cameraModel;
+	std::unique_ptr<WorldGrid> grid;
+	std::unique_ptr<MiniAxis> axisSystem;
+	std::unique_ptr<Skybox> skybox;
+	std::unique_ptr<AxisHelpers> axisHelpers_xMinus, axisHelpers_xPlus, axisHelpers_yMinus, axisHelpers_yPlus, axisHelpers_zMinus, axisHelpers_zPlus;
+	std::unique_ptr<Terrain> terrain;
+	std::unique_ptr<Spaceship> spaceship;
 
     glm::mat4 matrixProjection;
     float Setting_FOV = 45.0;

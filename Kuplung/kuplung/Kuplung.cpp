@@ -67,7 +67,7 @@ int Kuplung::run() {
         }
 
         while (SDL_PollEvent(&ev)) {
-            this->onEvent(&ev);
+            //this->onEvent(&ev);
         }
 
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
@@ -152,12 +152,12 @@ bool Kuplung::init() {
                     this->parser = std::make_unique<FileModelManager>();
                     this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
-                    this->managerObjects = std::make_unique<ObjectsManager>();
+					this->managerObjects = std::make_unique<ObjectsManager>();
                     this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1),
                                                std::bind(&Kuplung::addTerrainModel, this),
                                                std::bind(&Kuplung::addSpaceshipModel, this));
 
-                    this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
+					this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
                     this->managerUI->init(gWindow,
                                           std::bind(&Kuplung::guiQuit, this),
                                           std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2),

@@ -1140,7 +1140,6 @@ bool OuiNanoVG_Implementation::processEvent(SDL_Event *event) {
 UIcontext *uictx;
 
 OuiNanoVG_Implementation::OuiNanoVG_Implementation(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
 }
 
 OuiNanoVG_Implementation::~OuiNanoVG_Implementation() {

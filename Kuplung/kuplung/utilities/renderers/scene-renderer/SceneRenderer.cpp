@@ -13,7 +13,6 @@
 #include "kuplung/utilities/stb/stb_image.h"
 
 SceneRenderer::SceneRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
 }
 
 SceneRenderer::~SceneRenderer() {

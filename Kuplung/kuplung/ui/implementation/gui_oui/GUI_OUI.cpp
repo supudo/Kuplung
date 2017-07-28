@@ -11,7 +11,6 @@
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 
 GUI_OUI::GUI_OUI(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
     this->guiImplementation = std::make_unique<OuiNanoVG_Implementation>(managerObjects);
     this->isFrame = false;
     this->isParsingOpen = false;

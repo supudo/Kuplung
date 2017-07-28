@@ -19,7 +19,6 @@ DialogControlsModels::DialogControlsModels(ObjectsManager &managerObjects)
       helperUI(std::make_unique<UIHelpers>()),
       componentMaterialEditor(std::make_unique<MaterialEditor>()),
       componentUVEditor(std::make_unique<UVEditor>()) {
-    this->managerObjects = managerObjects;
 
     this->cmenu_deleteYn = false;
     this->cmenu_renameModel = false;

@@ -15,7 +15,6 @@
 #include "kuplung/utilities/stb/stb_image_write.h"
 
 RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
     this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;

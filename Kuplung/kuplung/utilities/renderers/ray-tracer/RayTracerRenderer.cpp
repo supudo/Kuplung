@@ -17,7 +17,6 @@
 RayTracerRenderer::RayTracerRenderer(ObjectsManager &managerObjects)
     : fileOutputImage(),
       managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
 }
 
 RayTracerRenderer::~RayTracerRenderer() {

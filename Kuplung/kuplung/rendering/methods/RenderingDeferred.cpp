@@ -11,7 +11,6 @@
 #include <fstream>
 
 RenderingDeferred::RenderingDeferred(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
     this->GLSL_LightSourceNumber_Directional = 0;
     this->GLSL_LightSourceNumber_Point = 0;
     this->GLSL_LightSourceNumber_Spot = 0;

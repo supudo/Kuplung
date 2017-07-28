@@ -15,17 +15,17 @@
  */
 
 ObjectsManager::~ObjectsManager() {
-    delete this->camera;
-    delete this->cameraModel;
-    delete this->grid;
-    delete this->axisHelpers_xMinus;
-    delete this->axisHelpers_xPlus;
-    delete this->axisHelpers_yMinus;
-    delete this->axisHelpers_yPlus;
-    delete this->axisHelpers_zMinus;
-    delete this->axisHelpers_zPlus;
-    delete this->axisSystem;
-    delete this->skybox;
+    this->camera.reset();
+    this->cameraModel.reset();
+    this->grid.reset();
+    this->axisHelpers_xMinus.reset();
+    this->axisHelpers_xPlus.reset();
+    this->axisHelpers_yMinus.reset();
+    this->axisHelpers_yPlus.reset();
+    this->axisHelpers_zMinus.reset();
+    this->axisHelpers_zPlus.reset();
+    this->axisSystem.reset();
+    this->skybox.reset();
     for (size_t i=0; i<this->lightSources.size(); i++) {
         delete this->lightSources[i];
     }
@@ -245,7 +245,7 @@ void ObjectsManager::resetPropertiesSystem() {
  *
  */
 void ObjectsManager::initCamera() {
-    this->camera = new Camera();
+    this->camera = std::make_unique<Camera>();
     this->camera->initProperties();
 }
 
@@ -255,7 +255,7 @@ void ObjectsManager::initCamera() {
  *
  */
 void ObjectsManager::initGrid() {
-    this->grid = new WorldGrid();
+    this->grid = std::make_unique<WorldGrid>();
     this->grid->initShaderProgram();
     this->grid->initBuffers(this->Setting_GridSize, 1);
 }
@@ -266,7 +266,7 @@ void ObjectsManager::initGrid() {
  *
  */
 void ObjectsManager::initCameraModel() {
-    this->cameraModel = new CameraModel();
+    this->cameraModel = std::make_unique<CameraModel>();
     this->cameraModel->initProperties();
     this->cameraModel->initShaderProgram();
     this->cameraModel->setModel(this->systemModels["camera"]);
@@ -279,7 +279,7 @@ void ObjectsManager::initCameraModel() {
  *
  */
 void ObjectsManager::initAxisSystem() {
-    this->axisSystem = new MiniAxis();
+    this->axisSystem = std::make_unique<MiniAxis>();
     this->axisSystem->initShaderProgram();
     this->axisSystem->initBuffers();
 }
@@ -290,32 +290,32 @@ void ObjectsManager::initAxisSystem() {
  *
  */
 void ObjectsManager::initAxisHelpers() {
-    this->axisHelpers_xMinus = new AxisHelpers();
+    this->axisHelpers_xMinus = std::make_unique<AxisHelpers>();
     this->axisHelpers_xMinus->setModel(this->systemModels["axis_x_minus"]);
     this->axisHelpers_xMinus->initShaderProgram();
     this->axisHelpers_xMinus->initBuffers();
 
-    this->axisHelpers_xPlus = new AxisHelpers();
+    this->axisHelpers_xPlus = std::make_unique<AxisHelpers>();
     this->axisHelpers_xPlus->setModel(this->systemModels["axis_x_plus"]);
     this->axisHelpers_xPlus->initShaderProgram();
     this->axisHelpers_xPlus->initBuffers();
 
-    this->axisHelpers_yMinus = new AxisHelpers();
+    this->axisHelpers_yMinus = std::make_unique<AxisHelpers>();
     this->axisHelpers_yMinus->setModel(this->systemModels["axis_y_minus"]);
     this->axisHelpers_yMinus->initShaderProgram();
     this->axisHelpers_yMinus->initBuffers();
 
-    this->axisHelpers_yPlus = new AxisHelpers();
+    this->axisHelpers_yPlus = std::make_unique<AxisHelpers>();
     this->axisHelpers_yPlus->setModel(this->systemModels["axis_y_plus"]);
     this->axisHelpers_yPlus->initShaderProgram();
     this->axisHelpers_yPlus->initBuffers();
 
-    this->axisHelpers_zMinus = new AxisHelpers();
+    this->axisHelpers_zMinus = std::make_unique<AxisHelpers>();
     this->axisHelpers_zMinus->setModel(this->systemModels["axis_z_minus"]);
     this->axisHelpers_zMinus->initShaderProgram();
     this->axisHelpers_zMinus->initBuffers();
 
-    this->axisHelpers_zPlus = new AxisHelpers();
+    this->axisHelpers_zPlus = std::make_unique<AxisHelpers>();
     this->axisHelpers_zPlus->setModel(this->systemModels["axis_z_plus"]);
     this->axisHelpers_zPlus->initShaderProgram();
     this->axisHelpers_zPlus->initBuffers();
@@ -327,7 +327,7 @@ void ObjectsManager::initAxisHelpers() {
  *
  */
 void ObjectsManager::initSkybox() {
-    this->skybox = new Skybox();
+    this->skybox = std::make_unique<Skybox>();
     this->skybox->init(this->Setting_GridSize);
     if (!this->skybox->initBuffers())
         Settings::Instance()->funcDoLog("Skybox cannot be initialized!");
@@ -339,7 +339,7 @@ void ObjectsManager::initSkybox() {
  *
  */
 void ObjectsManager::initTerrain() {
-    this->terrain = new Terrain();
+    this->terrain = std::make_unique<Terrain>();
     this->terrain->initShaderProgram();
 }
 
@@ -353,7 +353,7 @@ void ObjectsManager::generateTerrain() {
  *
  */
 void ObjectsManager::initSpaceship() {
-    this->spaceship = new Spaceship();
+    this->spaceship = std::make_unique<Spaceship>();
     this->spaceship->initShaderProgram();
 }
 

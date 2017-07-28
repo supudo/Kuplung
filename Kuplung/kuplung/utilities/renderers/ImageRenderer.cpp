@@ -9,7 +9,6 @@
 #include "ImageRenderer.hpp"
 
 ImageRenderer::ImageRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
 }
 
 ImageRenderer::~ImageRenderer() {

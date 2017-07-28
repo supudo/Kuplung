@@ -13,7 +13,6 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
 GUI_ImGui::GUI_ImGui(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
     this->isFrame = false;
     this->isParsingOpen = false;
     this->isLoadingOpen = false;

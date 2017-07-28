@@ -9,7 +9,6 @@
 #include "UIManager.hpp"
 
 UIManager::UIManager(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
     this->provider_ImGui = std::make_unique<GUI_ImGui>(managerObjects);
     this->provider_OUI = std::make_unique<GUI_OUI>(managerObjects);
 }

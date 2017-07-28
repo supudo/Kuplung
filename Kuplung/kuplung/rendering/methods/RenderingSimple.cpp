@@ -11,7 +11,6 @@
 #include <glm/gtc/matrix_inverse.hpp>
 
 RenderingSimple::RenderingSimple(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
-    this->managerObjects = managerObjects;
 }
 
 RenderingSimple::~RenderingSimple() {

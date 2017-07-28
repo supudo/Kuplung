@@ -17,7 +17,6 @@
 
 DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects)
     : managerObjects(managerObjects), helperUI(std::make_unique<UIHelpers>()) {
-    this->managerObjects = managerObjects;
 
     this->selectedObject = 0;
     this->selectedObjectLight = -1;

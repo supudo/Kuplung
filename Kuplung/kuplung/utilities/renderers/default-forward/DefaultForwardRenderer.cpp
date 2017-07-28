@@ -17,7 +17,6 @@
 DefaultForwardRenderer::DefaultForwardRenderer(ObjectsManager &managerObjects)
     : fileOutputImage(),
       managerObjects(managerObjects){
-    this->managerObjects = managerObjects;
     this->solidLight = new ModelFace_LightSource_Directional();
     this->lightingPass_DrawMode = -1;
     this->GLSL_LightSourceNumber_Directional = 0;
