@@ -34,9 +34,9 @@ private:
 
     // light
     unsigned int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
-    std::vector<ModelFace_LightSource_Directional *> mfLights_Directional;
-    std::vector<ModelFace_LightSource_Point *> mfLights_Point;
-    std::vector<ModelFace_LightSource_Spot *> mfLights_Spot;
+    std::vector<std::unique_ptr<ModelFace_LightSource_Directional>> mfLights_Directional;
+    std::vector<std::unique_ptr<ModelFace_LightSource_Point>> mfLights_Point;
+    std::vector<std::unique_ptr<ModelFace_LightSource_Spot>> mfLights_Spot;
 
     // model objects
     GLuint shaderProgram;

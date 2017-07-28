@@ -48,13 +48,13 @@ RenderingForward::~RenderingForward() {
     glDeleteProgram(this->shaderProgram);
 
     for (size_t i=0; i<this->mfLights_Directional.size(); i++) {
-        delete this->mfLights_Directional[i];
+        this->mfLights_Directional[i].reset();
     }
     for (size_t i=0; i<this->mfLights_Point.size(); i++) {
-        delete this->mfLights_Point[i];
+		this->mfLights_Point[i].reset();
     }
     for (size_t i=0; i<this->mfLights_Spot.size(); i++) {
-        delete this->mfLights_Spot[i];
+		this->mfLights_Spot[i].reset();
     }
 }
 
@@ -177,7 +177,7 @@ bool RenderingForward::initShaderProgram() {
 
         // light - directional
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Directional; i++) {
-            ModelFace_LightSource_Directional *f = new ModelFace_LightSource_Directional();
+            std::unique_ptr<ModelFace_LightSource_Directional> f = std::make_unique<ModelFace_LightSource_Directional>();
             f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].inUse").c_str());
 
             f->gl_Direction = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].direction").c_str());
@@ -189,12 +189,12 @@ bool RenderingForward::initShaderProgram() {
             f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthAmbient").c_str());
             f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
             f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("directionalLights[" + std::to_string(i) + "].strengthSpecular").c_str());
-            this->mfLights_Directional.push_back(f);
+            this->mfLights_Directional.push_back(std::move(f));
         }
 
         // light - point
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Point; i++) {
-            ModelFace_LightSource_Point *f = new ModelFace_LightSource_Point();
+			std::unique_ptr<ModelFace_LightSource_Point> f = std::make_unique<ModelFace_LightSource_Point>();
             f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].inUse").c_str());
             f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].position").c_str());
 
@@ -209,12 +209,12 @@ bool RenderingForward::initShaderProgram() {
             f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthAmbient").c_str());
             f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
             f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("pointLights[" + std::to_string(i) + "].strengthSpecular").c_str());
-            this->mfLights_Point.push_back(f);
+            this->mfLights_Point.push_back(std::move(f));
         }
 
         // light - spot
         for (unsigned int i=0; i<this->GLSL_LightSourceNumber_Spot; i++) {
-            ModelFace_LightSource_Spot *f = new ModelFace_LightSource_Spot();
+			std::unique_ptr<ModelFace_LightSource_Spot> f = std::make_unique<ModelFace_LightSource_Spot>();
             f->gl_InUse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].inUse").c_str());
 
             f->gl_Position = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].position").c_str());
@@ -234,7 +234,7 @@ bool RenderingForward::initShaderProgram() {
             f->gl_StrengthAmbient = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthAmbient").c_str());
             f->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthDiffuse").c_str());
             f->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, ("spotLights[" + std::to_string(i) + "].strengthSpecular").c_str());
-            this->mfLights_Spot.push_back(f);
+            this->mfLights_Spot.push_back(std::move(f));
         }
 
         // material
@@ -432,7 +432,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
             switch (light->type) {
                 case LightSourceType_Directional: {
                     if (lightsCount_Directional < this->GLSL_LightSourceNumber_Directional) {
-                        const ModelFace_LightSource_Directional *f = this->mfLights_Directional[lightsCount_Directional];
+						const ModelFace_LightSource_Directional* f = this->mfLights_Directional[lightsCount_Directional].get();
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -455,7 +455,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
                 }
                 case LightSourceType_Point: {
                     if (lightsCount_Point < this->GLSL_LightSourceNumber_Point) {
-                        const ModelFace_LightSource_Point *f = this->mfLights_Point[lightsCount_Point];
+                        const ModelFace_LightSource_Point* f = this->mfLights_Point[lightsCount_Point].get();
 
                         glUniform1i(f->gl_InUse, 1);
 
@@ -483,7 +483,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
                 }
                 case LightSourceType_Spot: {
                     if (lightsCount_Spot < this->GLSL_LightSourceNumber_Spot) {
-                        const ModelFace_LightSource_Spot *f = this->mfLights_Spot[lightsCount_Spot];
+						const ModelFace_LightSource_Spot* f = this->mfLights_Spot[lightsCount_Spot].get();
 
                         glUniform1i(f->gl_InUse, 1);
 
