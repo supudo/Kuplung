@@ -331,6 +331,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
 
                 ImGui::Checkbox("Vertex Sphere", &this->managerObjects.Setting_VertexSphere_Visible);
                 if (this->managerObjects.Setting_VertexSphere_Visible) {
+					// TODO: init vertex spheres
                     ImGui::Checkbox("Sphere", &this->managerObjects.Setting_VertexSphere_IsSphere);
                     ImGui::Checkbox("Wireframes", &this->managerObjects.Setting_VertexSphere_ShowWireframes);
                     ImGui::SliderInt("Segments", &this->managerObjects.Setting_VertexSphere_Segments, 3, 32);

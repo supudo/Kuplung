@@ -357,7 +357,7 @@ void Kuplung::addTerrainModel() {
     mmf->ModelID = 1;
     mmf->init(this->managerObjects->terrain->terrainGenerator->modelTerrain, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
-    mmf->initVertexSphere();
+    //mmf->initVertexSphere();
     mmf->initModelProperties();
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
@@ -378,7 +378,7 @@ void Kuplung::addSpaceshipModel() {
     mmf->ModelID = 1;
     mmf->init(this->managerObjects->spaceship->spaceshipGenerator->modelSpaceship, Settings::Instance()->currentFolder);
     mmf->initBoundingBox();
-    mmf->initVertexSphere();
+    //mmf->initVertexSphere();
     mmf->initModelProperties();
     mmf->initBuffers();
     this->meshModelFaces.push_back(mmf);
@@ -615,7 +615,7 @@ void Kuplung::processParsedImportedFile() {
             mmf->ModelID = static_cast<int>(this->meshModelFaces.size()) + static_cast<int>(i);
             mmf->init(model, Settings::Instance()->currentFolder);
             mmf->initBoundingBox();
-            mmf->initVertexSphere();
+            //mmf->initVertexSphere();
             mmf->initModelProperties();
 
             this->managerRendering->meshModelFaces.push_back(mmf);
