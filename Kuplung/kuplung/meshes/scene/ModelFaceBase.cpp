@@ -207,13 +207,14 @@ void ModelFaceBase::initBuffers() {
 void ModelFaceBase::initBoundingBox() {
     this->boundingBox = std::make_unique<BoundingBox>();
     this->boundingBox->initShaderProgram();
-    this->boundingBox->initBuffers(this->meshModel);
+	this->boundingBox->initBuffers(this->meshModel);
 }
 
 void ModelFaceBase::initVertexSphere() {
     this->vertexSphere = std::make_unique<VertexSphere>();
-    this->vertexSphere->initShaderProgram();
-    this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
+	// TODO : init only on vertex selection
+    //this->vertexSphere->initShaderProgram();
+    //this->vertexSphere->initBuffers(this->meshModel, 8, 0.5);
 }
 
 void ModelFaceBase::loadTexture(std::string const& texturesFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject) {
