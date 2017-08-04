@@ -494,7 +494,8 @@ HEADERS += \
     kuplung/utilities/saveopen/KuplungAppScene.pb.h \
     kuplung/utilities/consumption/Consumption.hpp \
     kuplung/utilities/measurement/Timings.hpp \
-    kuplung/utilities/lua/LuaManager.hpp
+    kuplung/utilities/lua/LuaManager.hpp \
+    kuplung/utilities/catch/catch.hpp
 
 DISTFILES += \
 # Lua

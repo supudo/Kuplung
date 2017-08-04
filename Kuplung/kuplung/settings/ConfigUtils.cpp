@@ -58,7 +58,7 @@ void ConfigUtils::saveSettings() {
 #pragma mark - Read
 
 bool ConfigUtils::readBool(std::string const& configKey) {
-    return this->configData[configKey] == "true";
+	return this->configData[configKey] == "true";
 }
 
 int ConfigUtils::readInt(std::string const& configKey) {
