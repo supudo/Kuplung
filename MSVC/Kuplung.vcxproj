@@ -352,6 +352,7 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp" />

@@ -187,6 +187,7 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
 	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
 		cFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
 		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
+		this->currentFolder = cFolder;
 	}
 #endif
 	std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder, type);
@@ -222,7 +223,7 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
 					this->drawFiles(entity.path, type);
 					this->currentFolder = entity.path;
 				}
-				catch (const fs::filesystem_error& e) { }
+				catch (const fs::filesystem_error&) { }
             }
         }
         ImGui::NextColumn();
@@ -297,9 +298,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const&
 					folderContents[entity.path] = entity;
 				}
 			}
-			catch (const std::exception & ex) {
-				Settings::Instance()->funcDoLog("[ImportOBJ] " + iteratorFolder->path().filename().string() + " " + ex.what());
-			}
+			catch (const std::exception &) { }
 		}
 	}
 

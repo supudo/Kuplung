@@ -28,6 +28,7 @@ FileModelManager::FileModelManager() {
     this->parserSTL = std::make_unique<STLParser>();
     this->parserPLY = std::make_unique<PLYParser>();
     this->parserAssimp = std::make_unique<AssimpParser>();
+	this->parserGLTF = std::make_unique<GLTFParser>();
 }
 
 void FileModelManager::init(const std::function<void(float)>& doProgress) {
@@ -40,6 +41,7 @@ void FileModelManager::init(const std::function<void(float)>& doProgress) {
     this->parserSTL->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
     this->parserPLY->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
     this->parserAssimp->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
+	this->parserGLTF->init(std::bind(&FileModelManager::doProgress, this, std::placeholders::_1));
 }
 
 std::vector<MeshModel> FileModelManager::parse(FBEntity file, std::vector<std::string> settings) {
@@ -51,6 +53,8 @@ std::vector<MeshModel> FileModelManager::parse(FBEntity file, std::vector<std::s
             meshModels = this->parserSTL->parse(file, settings);
         else if (Settings::Instance()->hasEnding(file.title, ".ply") || Settings::Instance()->hasEnding(file.path, ".ply"))
             meshModels = this->parserPLY->parse(file, settings);
+		else if (Settings::Instance()->hasEnding(file.title, ".gltf") || Settings::Instance()->hasEnding(file.path, ".gltf"))
+			meshModels = this->parserGLTF->parse(file, settings);
     }
 #ifdef DEF_KuplungSetting_UseCuda
     else if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own_Cuda)

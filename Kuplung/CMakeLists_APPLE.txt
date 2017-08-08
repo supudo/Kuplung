@@ -379,6 +379,7 @@ SET(SOURCE_FILES
     kuplung/utilities/stb/stb_textedit.h
     kuplung/utilities/stb/stb_truetype.h
     kuplung/utilities/catch/catch.hpp
+    kuplung/utilities/json/json.hpp
     # kuplung/cuda/CudaTest.cpp
     # kuplung/cuda/CudaTest.hpp
     kuplung/Kuplung.cpp

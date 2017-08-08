@@ -1,38 +1,37 @@
 //
-//  GlTFParser.cpp
+//  GLTFParser.cpp
 //  Kuplung
 //
 //  Created by Sergey Petrov on 07/08/17.
 //  Copyright © 2016 supudo.net. All rights reserved.
 //
 
-#include "GlTFParser.hpp"
+#include "GLTFParser.hpp"
 #include <sstream>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities/json/json.hpp"
 
-GlTFParser::GlTFParser() {
-	this->Setting_Axis_Forward = 0;
-	this->Setting_Axis_Up = 0;
+GLTFParser::GLTFParser() {
 }
 
-GlTFParser::~GlTFParser() {
+GLTFParser::~GLTFParser() {
 }
 
-void GlTFParser::init(const std::function<void(float)>& doProgress) {
+void GLTFParser::init(const std::function<void(float)>& doProgress) {
     this->doProgress = doProgress;
-    this->Setting_Axis_Forward = 4;
-    this->Setting_Axis_Up = 5;
-    this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-std::vector<MeshModel> GlTFParser::parse(const FBEntity& file, const std::vector<std::string>& settings) {
+std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector<std::string>& settings) {
     this->models = {};
 
-    if (settings.size() > 0 && !settings[0].empty())
-        this->Setting_Axis_Forward = std::stoi(settings[0]);
-    if (settings.size() > 1 && !settings[1].empty())
-        this->Setting_Axis_Up = std::stoi(settings[1]);
+	std::ifstream jsonStream(file.path);
+	if (!jsonStream.is_open()) {
+		Settings::Instance()->funcDoLog("[GLTFParser] Cannot open .gltf file" + file.path + "!");
+		jsonStream.close();
+		return {};
+	}
+	nlohmann::json jsonObj;
+	jsonStream >> jsonObj;
+	printf("jsonObj generator = %s\n", jsonObj.at("asset").at("generator").get<std::string>().c_str());
 
     return this->models;
 }

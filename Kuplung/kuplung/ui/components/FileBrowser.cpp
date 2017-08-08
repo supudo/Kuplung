@@ -154,6 +154,7 @@ void FileBrowser::drawFiles(const std::string& fPath, MaterialTextureType Textur
 	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
 		cFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
 		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
+		this->currentFolder = cFolder;
 	}
 #endif
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder);
@@ -186,7 +187,7 @@ void FileBrowser::drawFiles(const std::string& fPath, MaterialTextureType Textur
 					this->drawFiles(entity.path, TextureType);
 					this->currentFolder = entity.path;
 				}
-				catch (const fs::filesystem_error& e) {}
+				catch (const fs::filesystem_error&) {}
 			}
         }
         ImGui::NextColumn();

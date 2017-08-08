@@ -19,6 +19,7 @@
 #include "kuplung/utilities/parsers/stl-parser/STLParser.hpp"
 #include "kuplung/utilities/parsers/ply-parser/PLYParser.hpp"
 #include "kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp"
+#include "kuplung/utilities/parsers/gltf-parser/GLTFParser.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include <functional>
 
@@ -41,6 +42,7 @@ private:
     std::unique_ptr<STLParser> parserSTL;
     std::unique_ptr<PLYParser> parserPLY;
     std::unique_ptr<AssimpParser> parserAssimp;
+	std::unique_ptr<GLTFParser> parserGLTF;
 };
 
 #endif /* FileModelManager_hpp */

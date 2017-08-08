@@ -501,7 +501,8 @@ HEADERS += \
     kuplung/utilities/consumption/Consumption.hpp \
     kuplung/utilities/measurement/Timings.hpp \
     kuplung/utilities/lua/LuaManager.hpp \
-    kuplung/utilities/catch/catch.hpp
+    kuplung/utilities/catch/catch.hpp \
+    kuplung/utilities/json/json.hpp
 
 DISTFILES += \
 # Lua
