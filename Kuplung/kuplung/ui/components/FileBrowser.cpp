@@ -27,6 +27,9 @@ void FileBrowser::init(bool log, int positionX, int positionY, int width, int he
     this->height = height;
     this->processFile = processFile;
     this->isStyleBrowser = false;
+	this->panelWidth_Options = 200.0f;
+	this->panelWidth_OptionsMin = 200.0f;
+	this->currentFolder = Settings::Instance()->currentFolder;
 }
 
 void FileBrowser::setStyleBrowser(bool isStyle) {
@@ -40,66 +43,120 @@ void FileBrowser::setImageBrowser(bool isImage) {
 }
 
 void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType TextureType) {
-    if (this->width > 0 && this->height > 0)
-        ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
-    else
-        ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
+	if (this->width > 0 && this->height > 0)
+		ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
+	else
+		ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
 
-    if (this->positionX > 0 && this->positionY > 0)
-        ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
+	if (this->positionX > 0 && this->positionY > 0)
+		ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin(title, p_opened);
-    ImGui::Text("Select OBJ file");
-    ImGui::Separator();
-    ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
-    ImGui::Separator();
+	ImGui::Begin(title, p_opened);
 
-    ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-#ifdef DEF_KuplungSetting_UseCuda
-    const char* parserItems[] = {"Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp"};
-#else
-    const char* parserItems[] = {"Kuplung Parsers", "Assimp"};
+	ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_Options, 0));
+	ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
+#ifdef _WIN32
+	ImGui::Separator();
+	ImGui::Text("Select Drive");
+	ImGui::Combo(
+		"##8820",
+		&Settings::Instance()->Setting_SelectedDriveIndex,
+		[](void* vec, int idx, const char** out_text)
+	{
+		auto& vector = *static_cast<std::vector<std::string>*>(vec);
+		if (idx < 0 || idx >= static_cast<int>(vector.size()))
+			return false;
+		*out_text = vector.at(idx).c_str();
+		return true;
+	},
+		static_cast<void*>(&Settings::Instance()->hddDriveList),
+		Settings::Instance()->hddDriveList.size()
+		);
+	ImGui::Separator();
 #endif
-    if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
-        Settings::Instance()->saveSettings();
+	ImGui::EndChild();
 
-    ImGui::Separator();
+	ImGui::SameLine();
 
-    ImGui::BeginChild("scrolling");
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
+	ImGui::GetIO().MouseDrawCursor = true;
+	ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
+	ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+	ImGui::Button("###splitterOptions", ImVec2(8.0f, -1));
+	ImGui::PopStyleColor(3);
+	if (ImGui::IsItemActive()) {
+		this->panelWidth_Options += ImGui::GetIO().MouseDelta.x;
+		if (this->panelWidth_Options < this->panelWidth_OptionsMin)
+			this->panelWidth_Options = this->panelWidth_OptionsMin;
+	}
+	if (ImGui::IsItemHovered())
+		ImGui::SetMouseCursor(4);
 
-    // Basic columns
-    ImGui::Columns(4, "fileColumns");
+	ImGui::SameLine();
 
-    ImGui::Separator();
-    ImGui::Text("ID");
-    ImGui::NextColumn();
-    ImGui::Text("File");
-    ImGui::NextColumn();
-    ImGui::Text("Size");
-    ImGui::NextColumn();
-    ImGui::Text("Last Modified");
-    ImGui::NextColumn();
-    ImGui::Separator();
+	ImGui::BeginChild("Browser", ImVec2(-1.0f, -1.0f), false);
 
-    ImGui::SetColumnOffset(1, 40);
+	ImGui::Text("Select Texture");
+	ImGui::Separator();
+	ImGui::Text("%s", this->currentFolder.c_str());
+	ImGui::Separator();
 
-    this->drawFiles(TextureType);
+	ImGui::Text("Mode File Parser:"); ImGui::SameLine();
+#ifdef DEF_KuplungSetting_UseCuda
+	const char* parserItems[] = { "Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp" };
+#else
+	const char* parserItems[] = { "Kuplung Parsers", "Assimp" };
+#endif
+	if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+		Settings::Instance()->saveSettings();
 
-    ImGui::Columns(1);
+	ImGui::Separator();
 
-    ImGui::Separator();
-    ImGui::Spacing();
+	ImGui::BeginChild("scrolling");
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
 
-    ImGui::PopStyleVar();
-    ImGui::EndChild();
-    ImGui::End();
+	// Basic columns
+	ImGui::Columns(4, "fileColumns");
+
+	ImGui::Separator();
+	ImGui::Text("ID");
+	ImGui::NextColumn();
+	ImGui::Text("File");
+	ImGui::NextColumn();
+	ImGui::Text("Size");
+	ImGui::NextColumn();
+	ImGui::Text("Last Modified");
+	ImGui::NextColumn();
+	ImGui::Separator();
+
+	ImGui::SetColumnOffset(1, 40);
+
+	this->drawFiles(this->currentFolder, TextureType);
+
+	ImGui::Columns(1);
+
+	ImGui::Separator();
+	ImGui::Spacing();
+
+	ImGui::PopStyleVar();
+	ImGui::EndChild();
+
+	ImGui::EndChild();
+
+	ImGui::End();
 }
 
 #pragma mark - Private
 
-void FileBrowser::drawFiles(MaterialTextureType TextureType) {
-    std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder);
+void FileBrowser::drawFiles(const std::string& fPath, MaterialTextureType TextureType) {
+	std::string cFolder = fPath;
+#ifdef _WIN32
+	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
+		cFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
+		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
+	}
+#endif
+    std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder);
     int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -124,10 +181,13 @@ void FileBrowser::drawFiles(MaterialTextureType TextureType) {
                 Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
                 Settings::Instance()->saveSettings();
             }
-            else {
-                Settings::Instance()->currentFolder = entity.path;
-                this->drawFiles(TextureType);
-            }
+			else {
+				try {
+					this->drawFiles(entity.path, TextureType);
+					this->currentFolder = entity.path;
+				}
+				catch (const fs::filesystem_error& e) {}
+			}
         }
         ImGui::NextColumn();
 

@@ -27,7 +27,7 @@ private:
     std::map<std::string, FBEntity> getFolderContents(std::string const& filePath, int type);
     std::function<void(FBEntity, std::vector<std::string>)> processFile;
 
-    void drawFiles(int type);
+    void drawFiles(const std::string& fPath, int type);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);
@@ -37,6 +37,8 @@ private:
     float panelWidth_Options, panelWidth_OptionsMin;
 
     int Setting_Forward, Setting_Up;
+
+	std::string currentFolder;
 };
 
 #endif /* ImportFile_hpp */

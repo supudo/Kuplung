@@ -26,7 +26,7 @@ private:
     std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
     std::function<void(FBEntity, std::vector<std::string>)> funcFileSave;
 
-    void drawFiles();
+    void drawFiles(const std::string& fPath);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);

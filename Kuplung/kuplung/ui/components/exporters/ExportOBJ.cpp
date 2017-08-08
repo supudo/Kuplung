@@ -157,7 +157,7 @@ void ExportOBJ::draw(const char* title, bool* p_opened) {
     ImGui::NextColumn();
     ImGui::Separator();
 
-    this->drawFiles();
+    this->drawFiles(this->currentFolder);
 
     ImGui::Columns(1);
 
@@ -202,14 +202,15 @@ void ExportOBJ::modalNewFolder() {
     ImGui::EndPopup();
 }
 
-void ExportOBJ::drawFiles() {
+void ExportOBJ::drawFiles(const std::string& fPath) {
+	std::string cFolder = fPath;
 #ifdef _WIN32
 	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
-		this->currentFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
+		cFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
 		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
 	}
 #endif
-    std::map<std::string, FBEntity> folderContents = this->getFolderContents(this->currentFolder);
+	std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder);
     int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -218,9 +219,13 @@ void ExportOBJ::drawFiles() {
             selected = i;
             if (entity.isFile)
                 strcpy(this->fileName, entity.title.c_str());
-            else
-                this->currentFolder = entity.path;
-            this->drawFiles();
+			else {
+				try {
+					this->drawFiles(entity.path);
+					this->currentFolder = entity.path;
+				}
+				catch (const fs::filesystem_error& e) {}
+			}
         }
         ImGui::NextColumn();
         ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
