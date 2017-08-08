@@ -31,7 +31,20 @@ std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector
 	}
 	nlohmann::json jsonObj;
 	jsonStream >> jsonObj;
-	printf("jsonObj generator = %s\n", jsonObj.at("asset").at("generator").get<std::string>().c_str());
+	
+	//printf("jsonObj generator = %s\n", jsonObj.at("asset").at("generator").get<std::string>().c_str());
+
+	/*
+	
+	mesh mode :
+		0 - points
+		1 - line
+		2 - line_loop
+		4 - triangles
+		5 - triangles_strip
+		6 - triangles_fan
+	
+	*/
 
     return this->models;
 }
