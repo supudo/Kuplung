@@ -21,6 +21,7 @@
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/importers/ImportFile.hpp"
 #include "kuplung/ui/components/exporters/ExportOBJ.hpp"
+#include "kuplung/ui/components/exporters/ExportGLTF.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/RendererUI.hpp"
@@ -115,12 +116,14 @@ private:
 
     void dialogFileBrowserProcessFile(FBEntity const& file);
     void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
-    void dialogOBJExporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
+    void dialogExporterProcessFileOBJ(FBEntity const& file, std::vector<std::string> settings);
+	void dialogExporterProcessFileGLTF(FBEntity const& file, std::vector<std::string> settings);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
     void dialogImporterBrowser(int type);
-    void dialogOBJExporterBrowser();
+    void dialogExporterBrowserOBJ();
+	void dialogExporterBrowserGLTF();
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -148,6 +151,7 @@ private:
     std::unique_ptr<FileBrowser> componentFileBrowser;
     std::unique_ptr<ImportFile> componentImportFile;
     std::unique_ptr<ExportOBJ> componentExportOBJ;
+	std::unique_ptr<ExportGLTF> componentExportGLTF;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
     std::unique_ptr<DialogStyle> windowStyle;
@@ -163,10 +167,8 @@ private:
 
     bool showDialogStyle;
     bool showDialogFile;
-    bool showFileImporter_OBJ;
-    bool showFileImporter_STL;
-    bool showFileImporter_PLY;
-    bool showOBJExporter;
+    bool showFileImporter_OBJ, showFileImporter_STL, showFileImporter_PLY, showFileImporter_GLTF;
+    bool showExporterOBJ, showExporterGLTF;
     bool showSaveDialog;
     bool showOpenDialog;
     bool showShaderEditor;

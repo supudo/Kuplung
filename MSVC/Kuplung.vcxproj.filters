@@ -305,6 +305,15 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\renderers\ImageRenderer.cpp">
       <Filter>kuplung\utilities\renderers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.cpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.cpp">
+      <Filter>kuplung\utilities\parsers\gltf-parser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -670,6 +679,15 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\catch\catch.hpp">
       <Filter>kuplung\utilities\catch</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.hpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.hpp">
+      <Filter>kuplung\utilities\parsers\gltf-parser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -827,6 +845,9 @@
     </Filter>
     <Filter Include="kuplung\utilities\catch">
       <UniqueIdentifier>{29ce8e51-efd2-4be4-aa0a-ea1330f94a9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\parsers\gltf-parser">
+      <UniqueIdentifier>{41176d3e-7625-408b-a5c5-b85f48d57eee}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

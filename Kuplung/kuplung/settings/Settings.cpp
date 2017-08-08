@@ -48,6 +48,7 @@ void Settings::initSettings() {
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
     if (m_pInstance->ModelFileParser >= Importer_ParserType_Count)
         m_pInstance->ModelFileParser = Importer_ParserType_Own;
+	m_pInstance->ImportExportFormat = static_cast<ImportExportFormats>(m_pInstance->cfgUtils->readInt("ImportExportFormat"));
     m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
     m_pInstance->GUISystem = m_pInstance->cfgUtils->readInt("GUISystem");
 
@@ -102,6 +103,28 @@ void Settings::initSettings() {
 #endif
 
     m_pInstance->glUtils = std::make_unique<KuplungApp::Utilities::GL::GLUtils>(std::bind(&Settings::reuseLogFunc, this, std::placeholders::_1));
+
+#ifdef _WIN32
+	this->Setting_CurrentDriveIndex = 0;
+	this->Setting_SelectedDriveIndex = 0;
+	this->hddDriveList.empty();
+	int dc = 0;
+	DWORD drives = ::GetLogicalDrives();
+	if (drives) {
+		char drive[] = "?";
+		for (int i = 0; i < 26; i++) {
+			if (drives & (1 << i)) {
+				drive[0] = 'A' + i;
+				this->hddDriveList.push_back(drive);
+				if (&Settings::Instance()->currentFolder[0] == drive) {
+					this->Setting_CurrentDriveIndex = dc;
+					this->Setting_SelectedDriveIndex = dc;
+				}
+			}
+			dc += 1;
+		}
+	}
+#endif
 }
 
 void Settings::reuseLogFunc(const std::string& msg) {
@@ -131,6 +154,7 @@ void Settings::saveSettings() {
 
     this->cfgUtils->writeInt("UIFontSize", static_cast<int>(this->UIFontSize));
     this->cfgUtils->writeInt("ModelFileParser", this->ModelFileParser);
+	this->cfgUtils->writeInt("ImportExportFormat", this->ImportExportFormat);
     this->cfgUtils->writeInt("RendererType", this->RendererType);
     this->cfgUtils->writeInt("GUISystem", this->GUISystem);
 

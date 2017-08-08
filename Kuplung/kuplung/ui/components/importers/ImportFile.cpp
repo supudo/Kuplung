@@ -31,6 +31,13 @@ void ImportFile::init(int positionX, int positionY, int width, int height, const
     this->Setting_Up = 4;
 }
 
+static char *convert(const std::string & s)
+{
+	char *pc = new char[s.size() + 1];
+	std::strcpy(pc, s.c_str());
+	return pc;
+}
+
 void ImportFile::draw(const char* title, bool* p_opened, int type) {
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
@@ -44,7 +51,26 @@ void ImportFile::draw(const char* title, bool* p_opened, int type) {
 
     ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_Options, 0));
     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
+#ifdef _WIN32
     ImGui::Separator();
+	ImGui::Text("Select Drive");
+	ImGui::Combo(
+		"##8820",
+		&Settings::Instance()->Setting_SelectedDriveIndex,
+		[](void* vec, int idx, const char** out_text)
+		{
+			auto& vector = *static_cast<std::vector<std::string>*>(vec);
+			if (idx < 0 || idx >= static_cast<int>(vector.size()))
+				return false;
+			*out_text = vector.at(idx).c_str();
+			return true;
+		},
+		static_cast<void*>(&Settings::Instance()->hddDriveList),
+			Settings::Instance()->hddDriveList.size()
+	);
+	ImGui::Separator();
+#endif
+	ImGui::Separator();
     ImGui::PushItemWidth(-1.0f);
     ImGui::Text("Forward");
     const char* forward_items[] = {
@@ -101,6 +127,8 @@ void ImportFile::draw(const char* title, bool* p_opened, int type) {
         ImGui::Text("Select STL file");
     else if (type == 2)
         ImGui::Text("Select PLY file");
+	else if (type == 3)
+		ImGui::Text("Select glTF file");
     ImGui::Separator();
     ImGui::Text("%s", Settings::Instance()->currentFolder.c_str());
     ImGui::Separator();
@@ -153,7 +181,14 @@ void ImportFile::draw(const char* title, bool* p_opened, int type) {
 #pragma mark - Private
 
 void ImportFile::drawFiles(int type) {
-    std::map<std::string, FBEntity> folderContents = this->getFolderContents(Settings::Instance()->currentFolder, type);
+	std::string currentFolder = Settings::Instance()->currentFolder;
+#ifdef _WIN32
+	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
+		currentFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
+		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
+	}
+#endif
+    std::map<std::string, FBEntity> folderContents = this->getFolderContents(currentFolder, type);
     int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
@@ -223,7 +258,9 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const&
                     isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".stl"});
                 else if (type == 2)
                     isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), {".ply"});
-                if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
+				else if (type == 3)
+					isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
+				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
                     FBEntity entity;
                     if (fs::is_directory(fileStatus))
                         entity.isFile = false;

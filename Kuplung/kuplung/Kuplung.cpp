@@ -226,7 +226,7 @@ void Kuplung::initFolders() {
 #ifdef _WIN32
     char const *hdrive = getenv("HOMEDRIVE");
     char const *hpath = getenv("HOMEPATH");
-    std::string homeFolder = std::string(hdrive) + "/" + std::string(hpath);
+    std::string homeFolder = std::string(hdrive) + std::string(hpath);
 #elif defined macintosh // OS 9
     char const *hpath = getenv("HOME");
     std::string homeFolder = std::string(hpath);

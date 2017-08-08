@@ -12,6 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
+#include "kuplung/utilities/export/ExporterGLTF.hpp"
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -24,6 +25,7 @@ public:
 
 private:
     std::unique_ptr<ExporterOBJ> exporterOBJ;
+	std::unique_ptr<ExporterGLTF> exporterGLTF;
 };
 
 }}}

@@ -308,6 +308,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/importers/ImportFile.cpp \
     kuplung/ui/components/exporters/ExportOBJ.cpp \
+    kuplung/ui/components/exporters/ExportGLTF.cpp \
     kuplung/ui/components/FileSaver.cpp \
     kuplung/ui/components/ImageViewer.cpp \
     kuplung/ui/components/RendererUI.cpp \
@@ -350,9 +351,11 @@ SOURCES += main.cpp \
     kuplung/utilities/parsers/obj-parser/objParserCuda.cpp \
     kuplung/utilities/parsers/stl-parser/STLParser.cpp \
     kuplung/utilities/parsers/ply-parser/PLYParser.cpp \
+    kuplung/utilities/parsers/gltf-parser/GLTFParser.cpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
     kuplung/utilities/export/Exporter.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
+    kuplung/utilities/export/ExporterGLTF.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
     kuplung/utilities/renderers/KuplungRendererBase.cpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.cpp \
@@ -417,6 +420,7 @@ HEADERS += \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/importers/ImportFile.hpp \
     kuplung/ui/components/exporters/ExportOBJ.hpp \
+    kuplung/ui/components/exporters/ExportGLTF.hpp \
     kuplung/ui/components/FileSaver.hpp \
     kuplung/ui/components/ImageViewer.hpp \
     kuplung/ui/components/RendererUI.hpp \
@@ -468,6 +472,7 @@ HEADERS += \
     kuplung/utilities/parsers/obj-parser/objParserCuda.hpp \
     kuplung/utilities/parsers/stl-parser/STLParser.hpp \
     kuplung/utilities/parsers/ply-parser/PLYParser.hpp \
+    kuplung/utilities/parsers/gltf-parser/GLTFParser.hpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.hpp \
     kuplung/utilities/stb/stb_image.h \
     kuplung/utilities/stb/stb_image_write.h \
@@ -478,6 +483,7 @@ HEADERS += \
     kuplung/utilities/shapes/Shapes.h \
     kuplung/utilities/export/Exporter.hpp \
     kuplung/utilities/export/ExporterOBJ.hpp \
+    kuplung/utilities/export/ExporterGLTF.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
     kuplung/utilities/renderers/KuplungRendererBase.hpp \
     kuplung/utilities/renderers/default-forward/DefaultForwardRenderer.hpp \

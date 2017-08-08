@@ -12,18 +12,24 @@ namespace KuplungApp { namespace Utilities { namespace Export {
 
 Exporter::~Exporter() {
     this->exporterOBJ.reset();
+	this->exporterGLTF.reset();
 }
 
 Exporter::Exporter() {
     this->exporterOBJ = std::make_unique<ExporterOBJ>();
+	this->exporterGLTF = std::make_unique<ExporterGLTF>();
 }
 
 void Exporter::init(const std::function<void(float)>& doProgress) {
     this->exporterOBJ->init(doProgress);
+	this->exporterGLTF->init(doProgress);
 }
 
 void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
-    this->exporterOBJ->exportToFile(file, faces, settings);
+	if (Settings::Instance()->ImportExportFormat == ImportExportFormat_OBJ)
+		this->exporterOBJ->exportToFile(file, faces, settings);
+	else if (Settings::Instance()->ImportExportFormat == ImportExportFormat_OBJ)
+		this->exporterGLTF->exportToFile(file, faces, settings);
 }
 
 }}}

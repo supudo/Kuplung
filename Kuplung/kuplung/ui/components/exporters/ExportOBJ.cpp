@@ -45,6 +45,25 @@ void ExportOBJ::draw(const char* title, bool* p_opened) {
     // file options
     ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_FileOptions, 0));
     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
+#ifdef _WIN32
+	ImGui::Separator();
+	ImGui::Text("Select Drive");
+	ImGui::Combo(
+		"##8820",
+		&Settings::Instance()->Setting_SelectedDriveIndex,
+		[](void* vec, int idx, const char** out_text)
+	{
+		auto& vector = *static_cast<std::vector<std::string>*>(vec);
+		if (idx < 0 || idx >= static_cast<int>(vector.size()))
+			return false;
+		*out_text = vector.at(idx).c_str();
+		return true;
+	},
+		static_cast<void*>(&Settings::Instance()->hddDriveList),
+		Settings::Instance()->hddDriveList.size()
+		);
+	ImGui::Separator();
+#endif
     ImGui::Separator();
     ImGui::PushItemWidth(-1.0f);
     ImGui::Text("Forward");
@@ -184,6 +203,12 @@ void ExportOBJ::modalNewFolder() {
 }
 
 void ExportOBJ::drawFiles() {
+#ifdef _WIN32
+	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
+		this->currentFolder = Settings::Instance()->hddDriveList[Settings::Instance()->Setting_SelectedDriveIndex] + ":\\";
+		Settings::Instance()->Setting_CurrentDriveIndex = Settings::Instance()->Setting_SelectedDriveIndex;
+	}
+#endif
     std::map<std::string, FBEntity> folderContents = this->getFolderContents(this->currentFolder);
     int i = 0;
     static int selected = -1;

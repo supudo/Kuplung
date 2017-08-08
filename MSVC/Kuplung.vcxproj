@@ -281,6 +281,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\catch\catch.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\meshes\artefacts\Shadertoy.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\meshes\artefacts\Spaceship.hpp" />
@@ -350,6 +351,7 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.hpp" />
@@ -376,6 +378,7 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\miniz\miniz.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\miniz\KuplungMiniz.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.hpp" />
@@ -432,6 +435,7 @@
     <ClCompile Include="..\Kuplung\kuplung\settings\ConfigUtils.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\settings\FontsList.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\settings\Settings.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportOBJ.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\importers\ImportFile.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\materialeditor\MaterialEditor.cpp" />
@@ -464,6 +468,7 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />
@@ -494,6 +499,7 @@
     </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\utilities\miniz\KuplungMiniz.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\assimp-parser\AssimpParser.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser1.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParser2.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\obj-parser\objParserCuda.cpp" />

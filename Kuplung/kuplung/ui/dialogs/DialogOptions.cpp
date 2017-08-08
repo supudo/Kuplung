@@ -20,6 +20,7 @@ void DialogOptions::init() {
     this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
     this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
     this->optionsRendererType = Settings::Instance()->RendererType;
+	this->optionsSceneExporters = Settings::Instance()->ImportExportFormat;
 }
 
 void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool* p_opened, bool* needsFontChange) {
@@ -48,6 +49,17 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         }
         ImGui::EndChild();
         ImGui::PopStyleVar();
+
+		ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+		ImGui::BeginChild("SceneExporter", ImVec2(0.0f, 52.0f), true);
+		ImGui::Text("Default scene export file format");
+		const char* sceneExporterOptions[] = { "OBJ", "glTF" };
+		if (ImGui::Combo("##11830", &this->optionsSceneExporters, sceneExporterOptions, IM_ARRAYSIZE(sceneExporterOptions))) {
+			Settings::Instance()->ImportExportFormat = static_cast<ImportExportFormats>(this->optionsSceneExporters);
+			Settings::Instance()->saveSettings();
+		}
+		ImGui::EndChild();
+		ImGui::PopStyleVar();
 
         ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
         ImGui::BeginChild("RefreshRate", ImVec2(0.0f, 98.0f), true);

@@ -23,7 +23,7 @@ public:
 private:
     std::unique_ptr<FontsList> fontLister;
 
-    int optionsFontSelected, optionsFontSizeSelected, optionsRendererType, optionsGUIProvider;
+    int optionsFontSelected, optionsFontSizeSelected, optionsRendererType, optionsGUIProvider, optionsSceneExporters;
 };
 
 #endif /* DialogOptions_hpp */

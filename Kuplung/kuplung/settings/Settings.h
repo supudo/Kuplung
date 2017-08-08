@@ -60,6 +60,7 @@ public:
     float mRayOriginX, mRayOriginY, mRayOriginZ;
     float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
     bool UseCuda;
+	ImportExportFormats ImportExportFormat;
 
     void timerStart(const std::string& msg);
     void timerEnd(const std::string& msg);
@@ -67,6 +68,9 @@ public:
 
     std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
 	std::string getTimeNow();
+
+	std::vector<std::string> hddDriveList;
+	int Setting_SelectedDriveIndex, Setting_CurrentDriveIndex;
 
     template <class T>
     inline void printClassAlignment(T *s) {

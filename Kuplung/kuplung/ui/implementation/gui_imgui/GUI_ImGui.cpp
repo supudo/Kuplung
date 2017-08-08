@@ -28,7 +28,9 @@ GUI_ImGui::GUI_ImGui(ObjectsManager &managerObjects) : managerObjects(managerObj
     this->showFileImporter_OBJ = false;
     this->showFileImporter_STL = false;
     this->showFileImporter_PLY = false;
-    this->showOBJExporter = false;
+	this->showFileImporter_GLTF = false;
+    this->showExporterOBJ = false;
+	this->showExporterGLTF = false;
     this->showSaveDialog = false;
     this->showOpenDialog = false;
     this->showShaderEditor = false;
@@ -68,6 +70,7 @@ GUI_ImGui::~GUI_ImGui() {
     this->componentRendererUI.reset();
     this->componentImportFile.reset();
     this->componentExportOBJ.reset();
+	this->componentExportGLTF.reset();
     this->componentKuplungIDE.reset();
 #ifdef DEF_KuplungSetting_UseCuda
     this->componentCudaExamples.reset();
@@ -121,11 +124,13 @@ void GUI_ImGui::init(SDL_Window *window,
     this->showAboutImgui = false;
     this->showAboutKuplung = false;
     this->showDemoWindow = false;
-    this->showOBJExporter = false;
+    this->showExporterOBJ = false;
+	this->showExporterGLTF = false;
     this->showImageSave = false;
     this->showFileImporter_OBJ = false;
     this->showFileImporter_STL = false;
     this->showFileImporter_PLY = false;
+	this->showFileImporter_GLTF = false;
     this->showSaveDialog = false;
     this->showOpenDialog = false;
     this->showRenderer = false;
@@ -156,7 +161,10 @@ void GUI_ImGui::init(SDL_Window *window,
     this->componentImportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentExportOBJ = std::make_unique<ExportOBJ>();
-    this->componentExportOBJ->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogOBJExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2));
+    this->componentExportOBJ->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFileOBJ, this, std::placeholders::_1, std::placeholders::_2));
+
+	this->componentExportGLTF = std::make_unique<ExportGLTF>();
+	this->componentExportGLTF->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFileGLTF, this, std::placeholders::_1, std::placeholders::_2));
 
     this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
@@ -261,6 +269,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                 ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showFileImporter_OBJ);
                 ImGui::MenuItem("STereoLithography (.STL)", NULL, &this->showFileImporter_STL);
                 ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showFileImporter_PLY);
+				ImGui::MenuItem("glTF (.gltf)", NULL, &this->showFileImporter_GLTF);
                 ImGui::EndMenu();
             }
 
@@ -285,7 +294,8 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu("   Export")) {
-                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showOBJExporter, true);
+                ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showExporterOBJ, true);
+				ImGui::MenuItem("glTF (.gltf)", NULL, &this->showExporterGLTF, true);
                 ImGui::EndMenu();
             }
 
@@ -396,9 +406,14 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
         this->dialogImporterBrowser(1);
     else if (this->showFileImporter_PLY)
         this->dialogImporterBrowser(2);
+	else if (this->showFileImporter_GLTF)
+		this->dialogImporterBrowser(3);
 
-    if (this->showOBJExporter)
-        this->dialogOBJExporterBrowser();
+    if (this->showExporterOBJ)
+        this->dialogExporterBrowserOBJ();
+
+	if (this->showExporterGLTF)
+		this->dialogExporterBrowserGLTF();
 
     if (this->showDialogStyle)
         this->dialogStyle();
@@ -645,10 +660,16 @@ void GUI_ImGui::dialogImporterBrowser(int type) {
         this->componentImportFile->draw("Import STereoLithography STL file", &this->showFileImporter_STL, 1);
     else if (type == 2)
         this->componentImportFile->draw("Import Stanford PLY file", &this->showFileImporter_PLY, 2);
+	else if (type == 3)
+		this->componentImportFile->draw("Import glTF file", &this->showFileImporter_GLTF, 3);
 }
 
-void GUI_ImGui::dialogOBJExporterBrowser() {
-    this->componentExportOBJ->draw("Export Wavefront OBJ file", &this->showOBJExporter);
+void GUI_ImGui::dialogExporterBrowserOBJ() {
+    this->componentExportOBJ->draw("Export Wavefront OBJ file", &this->showExporterOBJ);
+}
+
+void GUI_ImGui::dialogExporterBrowserGLTF() {
+	this->componentExportGLTF->draw("Export glTF file", &this->showExporterGLTF);
 }
 
 void GUI_ImGui::dialogStyle() {
@@ -769,6 +790,7 @@ void GUI_ImGui::dialogFileBrowserProcessFile(FBEntity const& file) {
     this->showFileImporter_OBJ = false;
     this->showFileImporter_STL = false;
     this->showFileImporter_PLY = false;
+	this->showFileImporter_GLTF = false;
     this->showDialogFile = false;
     this->showDialogStyle = false;
 }
@@ -778,11 +800,17 @@ void GUI_ImGui::dialogImporterProcessFile(FBEntity const& file, std::vector<std:
     this->showFileImporter_OBJ = false;
     this->showFileImporter_STL = false;
     this->showFileImporter_PLY = false;
+	this->showFileImporter_GLTF = false;
 }
 
-void GUI_ImGui::dialogOBJExporterProcessFile(FBEntity const& file, std::vector<std::string> settings) {
+void GUI_ImGui::dialogExporterProcessFileOBJ(FBEntity const& file, std::vector<std::string> settings) {
     this->funcProcessExpoterdFile(file, settings);
-    this->showOBJExporter = false;
+    this->showExporterOBJ = false;
+}
+
+void GUI_ImGui::dialogExporterProcessFileGLTF(FBEntity const& file, std::vector<std::string> settings) {
+	this->funcProcessExpoterdFile(file, settings);
+	this->showExporterGLTF = false;
 }
 
 void GUI_ImGui::dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation operation) {
