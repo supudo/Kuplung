@@ -267,7 +267,7 @@ glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3& rotation) {
     mtx = glm::rotate(mtx, glm::radians(rotation.z), glm::vec3(0, 0, 1));
     mtx = glm::translate(mtx, glm::vec3(0, 0, 0));
 
-    return mtx[3];
+    return glm::vec3(mtx[3].x, mtx[3].y, mtx[3].z);
 }
 
 void Light::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {

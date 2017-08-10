@@ -937,7 +937,11 @@ void DialogControlsGUI::lockCamera() {
         this->managerObjects.camera->rotateX->point = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point + 90.0f;
         this->managerObjects.camera->rotateY->point = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point + 180.0f;
         this->managerObjects.camera->rotateZ->point = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
-        this->managerObjects.camera->cameraPosition = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel[3];
+        this->managerObjects.camera->cameraPosition = glm::vec3(
+            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel[3].x,
+            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel[3].y,
+            this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel[3].z
+        );
         this->managerObjects.camera->matrixCamera = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->matrixModel;
     }
 }

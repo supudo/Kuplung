@@ -11,7 +11,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #include <psapi.h>
-#else
+#elif __APPLE__
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/sysctl.h>
@@ -166,10 +166,12 @@ size_t Consumption::getPeakRSS() {
     PROCESS_MEMORY_COUNTERS info;
     GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info));
     return (size_t)info.PeakWorkingSetSize;
-#else
+#elif __APPLE__
     struct rusage kuplung_resource_usage;
     getrusage(RUSAGE_SELF, &kuplung_resource_usage);
     return size_t(kuplung_resource_usage.ru_maxrss) / (1024.0 * 1024.0);
+#else
+    return 0;
 #endif
 }
 
@@ -178,12 +180,14 @@ size_t Consumption::getCurrentRSS() {
     PROCESS_MEMORY_COUNTERS info;
     GetProcessMemoryInfo(GetCurrentProcess(), &info, sizeof(info));
     return (size_t)info.WorkingSetSize;
-#else
+#elif __APPLE__
     struct mach_task_basic_info info;
     mach_msg_type_number_t infoCount = MACH_TASK_BASIC_INFO_COUNT;
     if (task_info(mach_task_self(), MACH_TASK_BASIC_INFO, (task_info_t)&info, &infoCount) != KERN_SUCCESS)
         return (size_t)0L;
     return (size_t)info.resident_size;
+#else
+    return 0;
 #endif
 }
 

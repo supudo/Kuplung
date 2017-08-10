@@ -12,8 +12,11 @@
 #undef main
 #include <boost/filesystem.hpp>
 #include <iostream>
-#else
+#elif __APPLE__
 #include "CoreFoundation/CoreFoundation.h"
+#else
+#include <boost/filesystem.hpp>
+#include <iostream>
 #endif
 #include <stdarg.h>
 #include <memory>
@@ -134,9 +137,7 @@ void Settings::reuseLogFunc(const std::string& msg) {
 #pragma mark - Public
 
 std::string Settings::appFolder() {
-#ifdef _WIN32
-    return boost::filesystem::current_path().string() + "/resources";
-#else
+#ifdef __APPLE__
     CFBundleRef mainBundle = CFBundleGetMainBundle();
     CFURLRef resourcesURL = CFBundleCopyResourcesDirectoryURL(mainBundle);
     char folder[PATH_MAX];
@@ -144,6 +145,8 @@ std::string Settings::appFolder() {
         printf("Can't open bundle folder!\n");
     CFRelease(resourcesURL);
     return std::string(folder);
+#else
+    return boost::filesystem::current_path().string() + "/resources";
 #endif
 }
 

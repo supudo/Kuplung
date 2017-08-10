@@ -213,6 +213,35 @@ win32|win64 {
     POST_TARGETDEPS += copyfiles
 }
 
+linux {
+    QMAKE_CXXFLAGS += -std=c++14
+
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-parameter
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-declarations
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-but-set-variable
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-misleading-indentation
+
+    INCLUDEPATH += /usr/local/include
+    INCLUDEPATH += /usr/include/lua5.3
+
+    LIBS += -L/usr/lib
+    LIBS += -lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp
+    LIBS += -lboost_system -lboost_filesystem
+    LIBS += -lSDL2
+    LIBS += -lglfw
+    LIBS += -lprotobuf
+    LIBS += -lminizip
+    LIBS += -lassimp -lstdc++ -lz
+    LIBS += -llua5.3
+
+    LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
+    INCLUDEPATH += "$$PWD/../external/libnoise/headers"
+}
+
 # BEGIN Cuda
 
 $$DO_CUDA {

@@ -446,8 +446,8 @@ void RenderingForwardShadowMapping::render(const std::vector<ModelFaceData*>& me
 
 void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
     if (this->managerObjects.lightSources.size() > 0) {
-		glm::vec4 vecpos = this->managerObjects.lightSources[0]->matrixModel[3];
-        glm::vec3 lightPos = glm::vec3(vecpos.x, vecpos.y, vecpos.z);
+        //glm::vec4 vecpos = this->managerObjects.lightSources[0]->matrixModel[3];
+        //glm::vec3 lightPos = glm::vec3(vecpos.x, vecpos.y, vecpos.z);
         glm::mat4 lightProjection = glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,
                                                this->managerObjects.Setting_PlaneClose,
                                                this->managerObjects.Setting_PlaneFar);
@@ -700,7 +700,7 @@ void RenderingForwardShadowMapping::renderModels(const bool& isShadowPass, const
                         glUniform1i(f->gl_InUse, 1);
 
                         // light
-						glm::vec3 vec_pos = light->matrixModel[3];
+                        glm::vec3 vec_pos = glm::vec3(light->matrixModel[3].x, light->matrixModel[3].y, light->matrixModel[3].z);
                         glUniform3f(f->gl_Position, vec_pos.x, vec_pos.y, vec_pos.z);
 
                         // factors
