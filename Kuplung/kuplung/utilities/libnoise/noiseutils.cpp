@@ -22,8 +22,13 @@
 
 #include <fstream>
 
+#ifdef __linux__
+#include <libnoise/interp.h>
+#include <libnoise/mathconsts.h>
+#else
 #include "interp.h"
 #include "mathconsts.h"
+#endif
 
 #include "noiseutils.h"
 

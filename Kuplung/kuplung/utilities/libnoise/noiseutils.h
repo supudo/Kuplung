@@ -27,7 +27,11 @@
 #include <string.h>
 #include <string>
 
+#ifdef __linux__
+#include <libnoise/noise.h>
+#else
 #include "noise.h"
+#endif
 
 using namespace noise;
 

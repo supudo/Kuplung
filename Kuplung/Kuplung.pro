@@ -224,6 +224,7 @@ linux {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-declarations
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-but-set-variable
     QMAKE_CXXFLAGS_WARN_ON += -Wno-misleading-indentation
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-type-limits
 
     INCLUDEPATH += /usr/local/include
     INCLUDEPATH += /usr/include/lua5.3
@@ -237,9 +238,7 @@ linux {
     LIBS += -lminizip
     LIBS += -lassimp -lstdc++ -lz
     LIBS += -llua5.3
-
-    LIBS += -L"$$PWD/../external/libnoise/lib" -lnoise
-    INCLUDEPATH += "$$PWD/../external/libnoise/headers"
+    LIBS +=  -lnoise
 }
 
 # BEGIN Cuda

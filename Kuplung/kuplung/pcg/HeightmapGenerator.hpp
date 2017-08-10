@@ -11,7 +11,11 @@
 
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
+#ifdef __linux__
+#include <libnoise/noise.h>
+#else
 #include "noise.h"
+#endif
 #include "kuplung/utilities/libnoise/noiseutils.h"
 #include <glm/common.hpp>
 
