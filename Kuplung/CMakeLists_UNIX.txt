@@ -1,57 +1,38 @@
-# Win32 CMake file
+# Apple CMake file
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 
 # Warnings
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309")
+# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
 
-# Boost
-LINK_DIRECTORIES("D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lboost_system-vc141-mt-gd-1_64 -lboost_filesystem-vc141-mt-gd-1_64")
-INCLUDE_DIRECTORIES("D:/Libs/boost.1.64.prebuilt")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-local-typedefs")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-parameter")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-variable")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-but-set-variable")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-misleading-indentation")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-type-limits")
 
-# GLM
-INCLUDE_DIRECTORIES("D:/Libs/glm-0.9.8.4")
+LINK_DIRECTORIES(/usr/lib)
+INCLUDE_DIRECTORIES("/usr/local/include")
+INCLUDE_DIRECTORIES("/usr/include/lua5.3")
 
-# Include OpenGL
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lopengl32")
-
-# SDL2
-LINK_DIRECTORIES("D:/Libs/SDL2-2.0.5/lib/x64")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lSDL2main -lSDL2")
-INCLUDE_DIRECTORIES("D:/Libs/SDL2-2.0.5/include")
-
-# GLFW3
-LINK_DIRECTORIES("D:/Libs/GLFW3/lib-vc2015")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLFW3")
-INCLUDE_DIRECTORIES("D:/Libs/GLFW3/include")
-
-# GLEW
-LINK_DIRECTORIES("D:/Libs/glew-2.0.0-win32/lib/Release/x64")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLEW32")
-INCLUDE_DIRECTORIES("D:/Libs/glew-2.0.0-win32/include")
-
-# Assimp
-LINK_DIRECTORIES("D:/Libs/assimp/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lassimp-vc140-mt")
-INCLUDE_DIRECTORIES("D:/Libs/assimp/include")
-
-# Protobuf
-LINK_DIRECTORIES("D:/Libs/protobuf/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -llibprotobufd")
-INCLUDE_DIRECTORIES("D:/Libs/protobuf/include")
-
-# Lua
-LINK_DIRECTORIES("D:/Libs/lua-5.3.4_Win64_vc14_lib/lib")
-SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -llua53")
-INCLUDE_DIRECTORIES("D:/Libs/lua-5.3.4_Win64_vc14_lib/include")
-
-# libnoise
-INCLUDE_DIRECTORIES(../external/libnoise/windows/include)
-LINK_DIRECTORIES(../external/libnoise/windows/lib)
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -L/usr/lib")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lboost_system -lboost_filesystem")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lSDL2")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lglfw")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lprotobuf")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lminizip")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lassimp -lstdc++ -lz")
+SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -llua5.3")
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 
 INCLUDE_DIRECTORIES(.)
 
-ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_4x)
+ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_2x)
 
 SET(SOURCE_FILES
     kuplung/meshes/artefacts/Shadertoy.cpp
@@ -190,8 +171,6 @@ SET(SOURCE_FILES
     kuplung/utilities/measurement/Timings.hpp
     kuplung/utilities/consumption/Consumption.cpp
     kuplung/utilities/consumption/Consumption.hpp
-    kuplung/utilities/consumption/WindowsCPUUsage.cpp
-    kuplung/utilities/consumption/WindowsCPUUsage.hpp
     kuplung/utilities/export/Exporter.cpp
     kuplung/utilities/export/Exporter.hpp
     kuplung/utilities/export/ExporterOBJ.cpp
@@ -524,11 +503,17 @@ SET(Kuplung_OuiNanovVG
 SET(Kuplung_Lua
     resources/lua/test.lua)
 
-SET(Kuplung_RC
-    resources/kuplung.rc)
 
 ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
 
-SET(KuplungResources_PWD_WIN "/resources")
-SET(KuplungResources_DESTDIR_WIN "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources")
-EXECUTE_PROCESS(COMMAND "cmd /c xcopy /S /I /Y ${KuplungResources_PWD_WIN} ${KuplungResources_DESTDIR_WIN}")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lboost_system -lboost_filesystem")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lSDL2")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lglfw")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lprotobuf")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lminizip")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lassimp -lstdc++ -lz")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-llua5.3")
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lnoise")
+
+EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "${CMAKE_SOURCE_DIR}/resources/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources/")

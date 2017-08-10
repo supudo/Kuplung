@@ -154,6 +154,8 @@ ENDIF(CUDA_FOUND)
 
 INCLUDE_DIRECTORIES(.)
 
+ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_4x)
+
 SET(SOURCE_FILES
     kuplung/meshes/artefacts/Shadertoy.cpp
     kuplung/meshes/artefacts/Shadertoy.hpp
