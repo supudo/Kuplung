@@ -29,7 +29,7 @@ public:
 			  const std::function<void(std::string)>& fileShaderCompile,
 			  const std::function<void(ShapeType)>& addShape,
 			  const std::function<void(LightSourceType)>& addLight,
-			  const std::function<void(FBEntity file, std::vector<std::string>)>& exportScene,
+			  const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)>& exportScene,
 			  const std::function<void(int)>& deleteModel,
 			  const std::function<void(FBEntity file)>& renderScene,
 			  const std::function<void(FBEntity file)>& saveScene,
@@ -75,7 +75,7 @@ private:
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
     std::function<void(LightSourceType)> funcAddLight;
-    std::function<void(FBEntity file, std::vector<std::string>)> funcProcessExpoterdFile;
+    std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)> funcProcessExportedFile;
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
     std::function<void(FBEntity file)> funcSaveScene;

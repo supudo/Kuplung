@@ -25,10 +25,10 @@ void Exporter::init(const std::function<void(float)>& doProgress) {
 	this->exporterGLTF->init(doProgress);
 }
 
-void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
-	if (Settings::Instance()->ImportExportFormat == ImportExportFormat_OBJ)
+void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, ImportExportFormats exportFormat) {
+	if (exportFormat == ImportExportFormat_OBJ)
 		this->exporterOBJ->exportToFile(file, faces, settings);
-	else if (Settings::Instance()->ImportExportFormat == ImportExportFormat_OBJ)
+	else if (exportFormat == ImportExportFormat_GLTF)
 		this->exporterGLTF->exportToFile(file, faces, settings);
 }
 

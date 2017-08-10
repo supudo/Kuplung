@@ -12,6 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
+#include "kuplung/utilities/json/json.hpp"
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -26,9 +27,7 @@ private:
     std::unique_ptr<ParserUtils> parserUtils;
 	std::vector<std::string> objSettings;
 
-    void exportGeometry(const std::vector<ModelFaceBase*>& faces);
-    void exportMaterials(const std::vector<ModelFaceBase*>& faces);
-    void saveFile(const std::string& fileContents, const std::string& fileName);
+    void saveFile(const nlohmann::json& jsonObj);
 
     FBEntity exportFile;
     std::string nlDelimiter;

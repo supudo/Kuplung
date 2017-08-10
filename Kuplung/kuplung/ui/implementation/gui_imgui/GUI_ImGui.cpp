@@ -84,7 +84,7 @@ void GUI_ImGui::init(SDL_Window *window,
                      const std::function<void(std::string)>& fileShaderCompile,
                      const std::function<void(ShapeType)>& addShape,
                      const std::function<void(LightSourceType)>& addLight,
-                     const std::function<void(FBEntity file, std::vector<std::string>)>& exportScene,
+                     const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)>& exportScene,
                      const std::function<void(int)>& deleteModel,
                      const std::function<void(FBEntity file)>& renderScene,
                      const std::function<void(FBEntity file)>& saveScene,
@@ -97,7 +97,7 @@ void GUI_ImGui::init(SDL_Window *window,
     this->funcFileShaderCompile = fileShaderCompile;
     this->funcAddShape = addShape;
     this->funcAddLight = addLight;
-    this->funcProcessExpoterdFile = exportScene;
+    this->funcProcessExportedFile = exportScene;
     this->funcDeleteModel = deleteModel;
     this->funcRenderScene = renderScene;
     this->funcSaveScene = saveScene;
@@ -804,12 +804,12 @@ void GUI_ImGui::dialogImporterProcessFile(FBEntity const& file, std::vector<std:
 }
 
 void GUI_ImGui::dialogExporterProcessFileOBJ(FBEntity const& file, std::vector<std::string> settings) {
-    this->funcProcessExpoterdFile(file, settings);
+    this->funcProcessExportedFile(file, settings, ImportExportFormat_OBJ);
     this->showExporterOBJ = false;
 }
 
 void GUI_ImGui::dialogExporterProcessFileGLTF(FBEntity const& file, std::vector<std::string> settings) {
-	this->funcProcessExpoterdFile(file, settings);
+	this->funcProcessExportedFile(file, settings, ImportExportFormat_GLTF);
 	this->showExporterGLTF = false;
 }
 

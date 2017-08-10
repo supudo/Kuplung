@@ -8,6 +8,8 @@
 
 #include "ExporterGLTF.hpp"
 #include <fstream>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -29,24 +31,45 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
 }
 
 void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
-    this->exportFile = file;
-    this->objSettings = settings;
+	this->exportFile = file;
+	this->objSettings = settings;
+
+	nlohmann::json jsonObj;
+	jsonObj["asset"] = { { "generator", "Kuplung" },{ "version", "1.0" } };
+
+
+	this->saveFile(jsonObj);
 }
 
-void ExporterGLTF::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
-}
-
-void ExporterGLTF::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
-}
-
-void ExporterGLTF::saveFile(const std::string& fileContents, const std::string& fileName) {
+void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
 //    printf("--------------------------------------------------------\n");
 //    printf("%s\n", fileName.c_str());
 //    printf("%s\n", fileContents.c_str());
 //    printf("--------------------------------------------------------\n");
 
-    std::ofstream out(fileName);
-    out << fileContents;
+	time_t t = time(0);
+	const struct tm * now = localtime(&t);
+
+	const int year = now->tm_year + 1900;
+	const int month = now->tm_mon + 1;
+	const int day = now->tm_mday;
+	const int hour = now->tm_hour;
+	const int minute = now->tm_min;
+	const int seconds = now->tm_sec;
+
+	std::string fileSuffix = "_" +
+		std::to_string(year) + std::to_string(month) + std::to_string(day) +
+		std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
+
+	if (!this->addSuffix)
+		fileSuffix.clear();
+	std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
+	std::string fileName = this->exportFile.title;
+	if (boost::algorithm::ends_with(fileName, ".gltf"))
+		fileName = fileName.substr(0, fileName.size() - 4);
+
+    std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
+	out << std::setw(4) << jsonObj << std::endl;
     out.close();
 }
 
