@@ -435,15 +435,16 @@ Vec2::Vec2(const Vec2& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
-    reinterpret_cast<char*>(&y_) -
-    reinterpret_cast<char*>(&x_) + sizeof(y_));
+    static_cast<size_t>(reinterpret_cast<char*>(&y_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(y_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec2)
 }
 
 void Vec2::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&x_, 0, reinterpret_cast<char*>(&y_) -
-    reinterpret_cast<char*>(&x_) + sizeof(y_));
+  ::memset(&x_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&y_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(y_));
 }
 
 Vec2::~Vec2() {
@@ -480,8 +481,9 @@ Vec2* Vec2::New(::google::protobuf::Arena* arena) const {
 void Vec2::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec2)
   if (_has_bits_[0 / 32] & 3u) {
-    ::memset(&x_, 0, reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&x_) + sizeof(y_));
+    ::memset(&x_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&y_) -
+        reinterpret_cast<char*>(&x_)) + sizeof(y_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -784,15 +786,16 @@ Vec3::Vec3(const Vec3& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
-    reinterpret_cast<char*>(&z_) -
-    reinterpret_cast<char*>(&x_) + sizeof(z_));
+    static_cast<size_t>(reinterpret_cast<char*>(&z_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(z_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec3)
 }
 
 void Vec3::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&x_, 0, reinterpret_cast<char*>(&z_) -
-    reinterpret_cast<char*>(&x_) + sizeof(z_));
+  ::memset(&x_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&z_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(z_));
 }
 
 Vec3::~Vec3() {
@@ -829,8 +832,9 @@ Vec3* Vec3::New(::google::protobuf::Arena* arena) const {
 void Vec3::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec3)
   if (_has_bits_[0 / 32] & 7u) {
-    ::memset(&x_, 0, reinterpret_cast<char*>(&z_) -
-      reinterpret_cast<char*>(&x_) + sizeof(z_));
+    ::memset(&x_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&z_) -
+        reinterpret_cast<char*>(&x_)) + sizeof(z_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -1194,15 +1198,16 @@ Vec4::Vec4(const Vec4& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&x_, &from.x_,
-    reinterpret_cast<char*>(&w_) -
-    reinterpret_cast<char*>(&x_) + sizeof(w_));
+    static_cast<size_t>(reinterpret_cast<char*>(&w_) -
+    reinterpret_cast<char*>(&x_)) + sizeof(w_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec4)
 }
 
 void Vec4::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&x_, 0, reinterpret_cast<char*>(&w_) -
-    reinterpret_cast<char*>(&x_) + sizeof(w_));
+  ::memset(&x_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&w_) -
+      reinterpret_cast<char*>(&x_)) + sizeof(w_));
 }
 
 Vec4::~Vec4() {
@@ -1239,8 +1244,9 @@ Vec4* Vec4::New(::google::protobuf::Arena* arena) const {
 void Vec4::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec4)
   if (_has_bits_[0 / 32] & 15u) {
-    ::memset(&x_, 0, reinterpret_cast<char*>(&w_) -
-      reinterpret_cast<char*>(&x_) + sizeof(w_));
+    ::memset(&x_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&w_) -
+        reinterpret_cast<char*>(&x_)) + sizeof(w_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -1662,15 +1668,16 @@ ObjectCoordinate::ObjectCoordinate(const ObjectCoordinate& from)
       _cached_size_(0) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   ::memcpy(&animate_, &from.animate_,
-    reinterpret_cast<char*>(&point_) -
-    reinterpret_cast<char*>(&animate_) + sizeof(point_));
+    static_cast<size_t>(reinterpret_cast<char*>(&point_) -
+    reinterpret_cast<char*>(&animate_)) + sizeof(point_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.ObjectCoordinate)
 }
 
 void ObjectCoordinate::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&animate_, 0, reinterpret_cast<char*>(&point_) -
-    reinterpret_cast<char*>(&animate_) + sizeof(point_));
+  ::memset(&animate_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&point_) -
+      reinterpret_cast<char*>(&animate_)) + sizeof(point_));
 }
 
 ObjectCoordinate::~ObjectCoordinate() {
@@ -1707,8 +1714,9 @@ ObjectCoordinate* ObjectCoordinate::New(::google::protobuf::Arena* arena) const 
 void ObjectCoordinate::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.ObjectCoordinate)
   if (_has_bits_[0 / 32] & 3u) {
-    ::memset(&animate_, 0, reinterpret_cast<char*>(&point_) -
-      reinterpret_cast<char*>(&animate_) + sizeof(point_));
+    ::memset(&animate_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&point_) -
+        reinterpret_cast<char*>(&animate_)) + sizeof(point_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -2143,7 +2151,7 @@ bool FBEntity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_path()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->path().data(), this->path().length(),
+            this->path().data(), static_cast<int>(this->path().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.path");
         } else {
@@ -2159,7 +2167,7 @@ bool FBEntity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->title().data(), this->title().length(),
+            this->title().data(), static_cast<int>(this->title().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.title");
         } else {
@@ -2175,7 +2183,7 @@ bool FBEntity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_extension()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->extension().data(), this->extension().length(),
+            this->extension().data(), static_cast<int>(this->extension().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.extension");
         } else {
@@ -2191,7 +2199,7 @@ bool FBEntity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_modifieddate()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->modifieddate().data(), this->modifieddate().length(),
+            this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.modifiedDate");
         } else {
@@ -2207,7 +2215,7 @@ bool FBEntity::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_size()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->size().data(), this->size().length(),
+            this->size().data(), static_cast<int>(this->size().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.size");
         } else {
@@ -2253,7 +2261,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string path = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->path().data(), this->path().length(),
+      this->path().data(), static_cast<int>(this->path().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.path");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -2263,7 +2271,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string title = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), this->title().length(),
+      this->title().data(), static_cast<int>(this->title().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.title");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -2273,7 +2281,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string extension = 4;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->extension().data(), this->extension().length(),
+      this->extension().data(), static_cast<int>(this->extension().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.extension");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -2283,7 +2291,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string modifiedDate = 5;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->modifieddate().data(), this->modifieddate().length(),
+      this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.modifiedDate");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -2293,7 +2301,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string size = 6;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->size().data(), this->size().length(),
+      this->size().data(), static_cast<int>(this->size().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.size");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -2322,7 +2330,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string path = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->path().data(), this->path().length(),
+      this->path().data(), static_cast<int>(this->path().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.path");
     target =
@@ -2333,7 +2341,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string title = 3;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), this->title().length(),
+      this->title().data(), static_cast<int>(this->title().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.title");
     target =
@@ -2344,7 +2352,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string extension = 4;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->extension().data(), this->extension().length(),
+      this->extension().data(), static_cast<int>(this->extension().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.extension");
     target =
@@ -2355,7 +2363,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string modifiedDate = 5;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->modifieddate().data(), this->modifieddate().length(),
+      this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.modifiedDate");
     target =
@@ -2366,7 +2374,7 @@ void FBEntity::SerializeWithCachedSizes(
   // required string size = 6;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->size().data(), this->size().length(),
+      this->size().data(), static_cast<int>(this->size().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.size");
     target =
@@ -2940,15 +2948,16 @@ MaterialColor::MaterialColor(const MaterialColor& from)
     color_ = NULL;
   }
   ::memcpy(&colorpickeropen_, &from.colorpickeropen_,
-    reinterpret_cast<char*>(&strength_) -
-    reinterpret_cast<char*>(&colorpickeropen_) + sizeof(strength_));
+    static_cast<size_t>(reinterpret_cast<char*>(&strength_) -
+    reinterpret_cast<char*>(&colorpickeropen_)) + sizeof(strength_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MaterialColor)
 }
 
 void MaterialColor::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&color_, 0, reinterpret_cast<char*>(&strength_) -
-    reinterpret_cast<char*>(&color_) + sizeof(strength_));
+  ::memset(&color_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&strength_) -
+      reinterpret_cast<char*>(&color_)) + sizeof(strength_));
 }
 
 MaterialColor::~MaterialColor() {
@@ -2992,8 +3001,9 @@ void MaterialColor::Clear() {
     color_->::KuplungApp::Vec3::Clear();
   }
   if (_has_bits_[0 / 32] & 14u) {
-    ::memset(&colorpickeropen_, 0, reinterpret_cast<char*>(&strength_) -
-      reinterpret_cast<char*>(&colorpickeropen_) + sizeof(strength_));
+    ::memset(&colorpickeropen_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&strength_) -
+        reinterpret_cast<char*>(&colorpickeropen_)) + sizeof(strength_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -3457,8 +3467,8 @@ MeshMaterialTextureImage::MeshMaterialTextureImage(const MeshMaterialTextureImag
     image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
   }
   ::memcpy(&width_, &from.width_,
-    reinterpret_cast<char*>(&usetexture_) -
-    reinterpret_cast<char*>(&width_) + sizeof(usetexture_));
+    static_cast<size_t>(reinterpret_cast<char*>(&usetexture_) -
+    reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshMaterialTextureImage)
 }
 
@@ -3466,8 +3476,9 @@ void MeshMaterialTextureImage::SharedCtor() {
   _cached_size_ = 0;
   filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   image_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&width_, 0, reinterpret_cast<char*>(&usetexture_) -
-    reinterpret_cast<char*>(&width_) + sizeof(usetexture_));
+  ::memset(&width_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&usetexture_) -
+      reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
 }
 
 MeshMaterialTextureImage::~MeshMaterialTextureImage() {
@@ -3517,8 +3528,9 @@ void MeshMaterialTextureImage::Clear() {
     }
   }
   if (_has_bits_[0 / 32] & 28u) {
-    ::memset(&width_, 0, reinterpret_cast<char*>(&usetexture_) -
-      reinterpret_cast<char*>(&width_) + sizeof(usetexture_));
+    ::memset(&width_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&usetexture_) -
+        reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -3541,7 +3553,7 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_filename()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->filename().data(), this->filename().length(),
+            this->filename().data(), static_cast<int>(this->filename().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Filename");
         } else {
@@ -3557,7 +3569,7 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_image()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->image().data(), this->image().length(),
+            this->image().data(), static_cast<int>(this->image().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Image");
         } else {
@@ -3616,7 +3628,7 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
                 input, this->add_commands()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
             this->commands(this->commands_size() - 1).data(),
-            this->commands(this->commands_size() - 1).length(),
+            static_cast<int>(this->commands(this->commands_size() - 1).length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Commands");
         } else {
@@ -3657,7 +3669,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // required string Filename = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->filename().data(), this->filename().length(),
+      this->filename().data(), static_cast<int>(this->filename().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Filename");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -3667,7 +3679,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // required string Image = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->image().data(), this->image().length(),
+      this->image().data(), static_cast<int>(this->image().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Image");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -3692,7 +3704,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // repeated string Commands = 6;
   for (int i = 0, n = this->commands_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->commands(i).data(), this->commands(i).length(),
+      this->commands(i).data(), static_cast<int>(this->commands(i).length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Commands");
     ::google::protobuf::internal::WireFormatLite::WriteString(
@@ -3716,7 +3728,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // required string Filename = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->filename().data(), this->filename().length(),
+      this->filename().data(), static_cast<int>(this->filename().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Filename");
     target =
@@ -3727,7 +3739,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // required string Image = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->image().data(), this->image().length(),
+      this->image().data(), static_cast<int>(this->image().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Image");
     target =
@@ -3753,7 +3765,7 @@ void MeshMaterialTextureImage::SerializeWithCachedSizes(
   // repeated string Commands = 6;
   for (int i = 0, n = this->commands_size(); i < n; i++) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->commands(i).data(), this->commands(i).length(),
+      this->commands(i).data(), static_cast<int>(this->commands(i).length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Commands");
     target = ::google::protobuf::internal::WireFormatLite::
@@ -4312,16 +4324,17 @@ MeshModelMaterial::MeshModelMaterial(const MeshModelMaterial& from)
     texturedisplacement_ = NULL;
   }
   ::memcpy(&materialid_, &from.materialid_,
-    reinterpret_cast<char*>(&opticaldensity_) -
-    reinterpret_cast<char*>(&materialid_) + sizeof(opticaldensity_));
+    static_cast<size_t>(reinterpret_cast<char*>(&opticaldensity_) -
+    reinterpret_cast<char*>(&materialid_)) + sizeof(opticaldensity_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModelMaterial)
 }
 
 void MeshModelMaterial::SharedCtor() {
   _cached_size_ = 0;
   materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&ambientcolor_, 0, reinterpret_cast<char*>(&opticaldensity_) -
-    reinterpret_cast<char*>(&ambientcolor_) + sizeof(opticaldensity_));
+  ::memset(&ambientcolor_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&opticaldensity_) -
+      reinterpret_cast<char*>(&ambientcolor_)) + sizeof(opticaldensity_));
 }
 
 MeshModelMaterial::~MeshModelMaterial() {
@@ -4444,8 +4457,9 @@ void MeshModelMaterial::Clear() {
     }
   }
   if (_has_bits_[8 / 32] & 61440u) {
-    ::memset(&materialid_, 0, reinterpret_cast<char*>(&illuminationmode_) -
-      reinterpret_cast<char*>(&materialid_) + sizeof(illuminationmode_));
+    ::memset(&materialid_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&illuminationmode_) -
+        reinterpret_cast<char*>(&materialid_)) + sizeof(illuminationmode_));
   }
   opticaldensity_ = 0;
   _has_bits_.Clear();
@@ -4483,7 +4497,7 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->materialtitle().data(), this->materialtitle().length(),
+            this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.MeshModelMaterial.MaterialTitle");
         } else {
@@ -4717,7 +4731,7 @@ void MeshModelMaterial::SerializeWithCachedSizes(
   // required string MaterialTitle = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->materialtitle().data(), this->materialtitle().length(),
+      this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshModelMaterial.MaterialTitle");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -4832,7 +4846,7 @@ void MeshModelMaterial::SerializeWithCachedSizes(
   // required string MaterialTitle = 2;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->materialtitle().data(), this->materialtitle().length(),
+      this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshModelMaterial.MaterialTitle");
     target =
@@ -6063,8 +6077,8 @@ Mesh::Mesh(const Mesh& from)
     modelmaterial_ = NULL;
   }
   ::memcpy(&id_, &from.id_,
-    reinterpret_cast<char*>(&countindices_) -
-    reinterpret_cast<char*>(&id_) + sizeof(countindices_));
+    static_cast<size_t>(reinterpret_cast<char*>(&countindices_) -
+    reinterpret_cast<char*>(&id_)) + sizeof(countindices_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Mesh)
 }
 
@@ -6072,8 +6086,9 @@ void Mesh::SharedCtor() {
   _cached_size_ = 0;
   modeltitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&file_, 0, reinterpret_cast<char*>(&countindices_) -
-    reinterpret_cast<char*>(&file_) + sizeof(countindices_));
+  ::memset(&file_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&countindices_) -
+      reinterpret_cast<char*>(&file_)) + sizeof(countindices_));
 }
 
 Mesh::~Mesh() {
@@ -6140,8 +6155,9 @@ void Mesh::Clear() {
     }
   }
   if (_has_bits_[0 / 32] & 240u) {
-    ::memset(&id_, 0, reinterpret_cast<char*>(&countnormals_) -
-      reinterpret_cast<char*>(&id_) + sizeof(countnormals_));
+    ::memset(&id_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&countnormals_) -
+        reinterpret_cast<char*>(&id_)) + sizeof(countnormals_));
   }
   countindices_ = 0;
   _has_bits_.Clear();
@@ -6191,7 +6207,7 @@ bool Mesh::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_modeltitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->modeltitle().data(), this->modeltitle().length(),
+            this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.Mesh.ModelTitle");
         } else {
@@ -6207,7 +6223,7 @@ bool Mesh::MergePartialFromCodedStream(
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->materialtitle().data(), this->materialtitle().length(),
+            this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.Mesh.MaterialTitle");
         } else {
@@ -6381,7 +6397,7 @@ void Mesh::SerializeWithCachedSizes(
   // required string ModelTitle = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->modeltitle().data(), this->modeltitle().length(),
+      this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.ModelTitle");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -6391,7 +6407,7 @@ void Mesh::SerializeWithCachedSizes(
   // required string MaterialTitle = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->materialtitle().data(), this->materialtitle().length(),
+      this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.MaterialTitle");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -6425,21 +6441,24 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
-  for (unsigned int i = 0, n = this->vertices_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->vertices_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, this->vertices(i), output);
+      10, this->vertices(static_cast<int>(i)), output);
   }
 
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
-  for (unsigned int i = 0, n = this->texture_coordinates_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->texture_coordinates_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, this->texture_coordinates(i), output);
+      11, this->texture_coordinates(static_cast<int>(i)), output);
   }
 
   // repeated .KuplungApp.Vec3 normals = 12;
-  for (unsigned int i = 0, n = this->normals_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->normals_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, this->normals(i), output);
+      12, this->normals(static_cast<int>(i)), output);
   }
 
   // repeated fixed32 indices = 13;
@@ -6477,7 +6496,7 @@ void Mesh::SerializeWithCachedSizes(
   // required string ModelTitle = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->modeltitle().data(), this->modeltitle().length(),
+      this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.ModelTitle");
     target =
@@ -6488,7 +6507,7 @@ void Mesh::SerializeWithCachedSizes(
   // required string MaterialTitle = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->materialtitle().data(), this->materialtitle().length(),
+      this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.MaterialTitle");
     target =
@@ -6524,24 +6543,27 @@ void Mesh::SerializeWithCachedSizes(
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
-  for (unsigned int i = 0, n = this->vertices_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->vertices_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        10, this->vertices(i), deterministic, target);
+        10, this->vertices(static_cast<int>(i)), deterministic, target);
   }
 
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
-  for (unsigned int i = 0, n = this->texture_coordinates_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->texture_coordinates_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        11, this->texture_coordinates(i), deterministic, target);
+        11, this->texture_coordinates(static_cast<int>(i)), deterministic, target);
   }
 
   // repeated .KuplungApp.Vec3 normals = 12;
-  for (unsigned int i = 0, n = this->normals_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->normals_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        12, this->normals(i), deterministic, target);
+        12, this->normals(static_cast<int>(i)), deterministic, target);
   }
 
   // repeated fixed32 indices = 13;
@@ -6685,40 +6707,40 @@ size_t Mesh::ByteSizeLong() const {
   }
   // repeated .KuplungApp.Vec3 vertices = 10;
   {
-    unsigned int count = this->vertices_size();
+    unsigned int count = static_cast<unsigned int>(this->vertices_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->vertices(i));
+          this->vertices(static_cast<int>(i)));
     }
   }
 
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
   {
-    unsigned int count = this->texture_coordinates_size();
+    unsigned int count = static_cast<unsigned int>(this->texture_coordinates_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->texture_coordinates(i));
+          this->texture_coordinates(static_cast<int>(i)));
     }
   }
 
   // repeated .KuplungApp.Vec3 normals = 12;
   {
-    unsigned int count = this->normals_size();
+    unsigned int count = static_cast<unsigned int>(this->normals_size());
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->normals(i));
+          this->normals(static_cast<int>(i)));
     }
   }
 
   // repeated fixed32 indices = 13;
   {
-    unsigned int count = this->indices_size();
+    unsigned int count = static_cast<unsigned int>(this->indices_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
                   ::google::protobuf::internal::FromIntSize(this->indices_size());
