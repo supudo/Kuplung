@@ -61,6 +61,7 @@ CONFIG(release, debug|release) {
 }
 
 mac {
+    DEFINES += Def_Kuplung_OpenGL_4x
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
 
@@ -165,6 +166,8 @@ mac {
 }
 
 win32|win64 {
+    DEFINES += Def_Kuplung_OpenGL_4x
+
     #QMAKE_CXXFLAGS += /std:c++latest
 
     QMAKE_CXXFLAGS_WARN_ON += -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309
@@ -214,6 +217,7 @@ win32|win64 {
 }
 
 linux {
+    DEFINES += Def_Kuplung_OpenGL_2x
     QMAKE_CXXFLAGS += -std=c++14
 
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-local-typedefs

@@ -65,7 +65,9 @@ bool RenderingSimple::init() {
         return false;
     }
     else {
+#ifdef Def_Kuplung_OpenGL_4x
         glPatchParameteri(GL_PATCH_VERTICES, 3);
+#endif
 
         this->glVS_MVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MVPMatrix");
         this->glVS_WorldMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_WorldMatrix");

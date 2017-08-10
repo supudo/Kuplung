@@ -131,7 +131,9 @@ bool RenderingForward::initShaderProgram() {
         return success = false;
     }
     else {
+#ifdef Def_Kuplung_OpenGL_4x
         glPatchParameteri(GL_PATCH_VERTICES, 3);
+#endif
 
         this->glFS_showShadows = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_showShadows");
         this->glFS_ShadowPass = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_shadowPass");

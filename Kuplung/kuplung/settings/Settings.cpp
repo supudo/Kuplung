@@ -32,6 +32,13 @@ Settings* Settings::Instance() {
 }
 
 void Settings::initSettings() {
+#ifdef Def_Kuplung_OpenGL_4x
+    m_pInstance->OpenGL_MajorVersion = 4;
+    m_pInstance->OpenGL_MinorVersion = 1;
+#else
+    m_pInstance->OpenGL_MajorVersion = 2;
+    m_pInstance->OpenGL_MinorVersion = 1;
+#endif
     m_pInstance->mRayDraw = false;
     m_pInstance->mRayAnimate = false;
     m_pInstance->mRayOriginX = 0.0f;

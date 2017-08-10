@@ -41,6 +41,7 @@ public:
     void saveRecentFilesImported(const std::vector<FBEntity>& recentFiles);
     std::vector<FBEntity> loadRecentFilesImported();
 
+    int OpenGL_MajorVersion, OpenGL_MinorVersion;
     bool maybeGracefullApplicationQuit;
     std::function<void(std::string)> funcDoLog;
     std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
