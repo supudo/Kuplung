@@ -34,19 +34,21 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	this->exportFile = file;
 	this->objSettings = settings;
 
-	nlohmann::json jsonObj;
-	jsonObj["asset"] = { { "generator", "Kuplung" },{ "version", "1.0" } };
+	nlohmann::json j;
+	j["asset"] = { { "generator", "Kuplung" },{ "version", "1.0" } };
+	j["scene"] = 0;
+	j["scenes"] = {};
+	j["nodes"] = {};
+	j["meshes"] = {};
+	j["accessors"] = {};
+	j["materials"] = {};
+	j["bufferViews"] = {};
+	j["buffers"] = {};
 
-
-	this->saveFile(jsonObj);
+	this->saveFile(j);
 }
 
 void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
-//    printf("--------------------------------------------------------\n");
-//    printf("%s\n", fileName.c_str());
-//    printf("%s\n", fileContents.c_str());
-//    printf("--------------------------------------------------------\n");
-
 	time_t t = time(0);
 	const struct tm * now = localtime(&t);
 

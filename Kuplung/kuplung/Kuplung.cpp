@@ -67,7 +67,7 @@ int Kuplung::run() {
         }
 
         while (SDL_PollEvent(&ev)) {
-            //this->onEvent(&ev);
+            this->onEvent(&ev);
         }
 
         glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
