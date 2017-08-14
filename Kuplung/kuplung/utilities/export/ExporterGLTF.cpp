@@ -35,18 +35,48 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	this->objSettings = settings;
 
 	nlohmann::json j;
-	j["asset"] = { { "generator", "Kuplung" },{ "version", "1.0" } };
+	j["asset"] = { { "generator", "Kuplung" }, { "version", "1.0" } };
 	j["scene"] = 0;
-	j["scenes"] = {};
-	j["nodes"] = {};
-	j["meshes"] = {};
-	j["accessors"] = {};
-	j["materials"] = {};
-	j["bufferViews"] = {};
-	j["buffers"] = {};
+
+	j["scenes"] = this->exportScenes(faces);
+	j["nodes"] = this->exportNodes(faces);
+	j["meshes"] = this->exportMeshes(faces);
+	j["accessors"] = this->exportAccessors(faces);
+	j["materials"] = this->exportMaterials(faces);
+	j["bufferViews"] = this->exportBufferViews(faces);
+	j["buffers"] = this->exportBuffers(faces);
 
 	this->saveFile(j);
 }
+
+nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportNodes(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportMeshes(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportAccessors(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportBufferViews(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
+nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& faces) {
+	return {};
+}
+
 
 void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
 	time_t t = time(0);

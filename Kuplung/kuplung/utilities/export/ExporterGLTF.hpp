@@ -27,7 +27,15 @@ private:
     std::unique_ptr<ParserUtils> parserUtils;
 	std::vector<std::string> objSettings;
 
-    void saveFile(const nlohmann::json& jsonObj);
+	nlohmann::json exportScenes(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportNodes(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportMeshes(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportAccessors(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportMaterials(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportBufferViews(const std::vector<ModelFaceBase*>& faces);
+	nlohmann::json exportBuffers(const std::vector<ModelFaceBase*>& faces);
+    
+	void saveFile(const nlohmann::json& jsonObj);
 
     FBEntity exportFile;
     std::string nlDelimiter;
