@@ -29,6 +29,7 @@
 class Settings {
 public:
     static Settings* Instance();
+	void initSettings(const std::string& iniFolder);
     void saveSettings();
     std::string string_format(const std::string fmt_str, ...);
     std::string appFolder();
@@ -44,7 +45,7 @@ public:
     int OpenGL_MajorVersion, OpenGL_MinorVersion;
     bool maybeGracefullApplicationQuit;
     std::function<void(std::string)> funcDoLog;
-    std::string appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
+    std::string ApplicationConfigurationFolder, appVersion, currentFolder, newLineDelimiter, SettingsFile, UIFontFile;
     bool wireframesMode, logDebugInfo, logFileBrowser, ShowBoundingBox, BoundingBoxRefresh, showPickRays;
     bool showPickRaysSingle, Terrain_HeightmapImageHistory, showAllVisualArtefacts;
     InAppRendererType RendererType;
@@ -89,7 +90,6 @@ private:
     Settings& operator=(Settings const&);
     static Settings* m_pInstance;
 
-    void initSettings();
     std::unique_ptr<ConfigUtils> cfgUtils;
     void reuseLogFunc(const std::string& msg);
 };

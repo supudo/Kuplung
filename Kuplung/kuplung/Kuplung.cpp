@@ -10,6 +10,12 @@
 #include <glm/glm.hpp>
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 
+#ifdef _WIN32
+#include <shlobj.h>
+#include <boost/filesystem/operations.hpp>
+#include <boost/filesystem/path.hpp>
+#endif
+
 Kuplung::Kuplung() {
 	this->gWindow = NULL;
 	this->glContext = NULL;
@@ -96,6 +102,8 @@ bool Kuplung::init() {
         success = false;
     }
     else {
+		this->initFolders();
+
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
         SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
         SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
@@ -115,8 +123,6 @@ bool Kuplung::init() {
 
         SDL_DisplayMode current;
         SDL_GetCurrentDisplayMode(0, &current);
-
-        this->initFolders();
 
         if (Settings::Instance()->SDL_Window_Height == 0)
             Settings::Instance()->SDL_Window_Height = current.h - 100;
@@ -215,29 +221,70 @@ bool Kuplung::init() {
 }
 
 void Kuplung::initFolders() {
-//    char *data_path = NULL;
-//    char *base_path = SDL_GetBasePath();
-//    if (base_path)
-//        data_path = base_path;
-//    else
-//        data_path = SDL_strdup("./");
-//    Settings::Instance()->currentFolder = data_path;
+    //char *data_path = NULL;
+    //char *base_path = SDL_GetBasePath();
+    //if (base_path)
+    //    data_path = base_path;
+    //else
+    //    data_path = SDL_strdup("./");
+	//Settings::Instance()->currentFolder = data_path;
 
+	std::string homeFolder(""), iniFolder("");
 #ifdef _WIN32
-    char const *hdrive = getenv("HOMEDRIVE");
-    char const *hpath = getenv("HOMEPATH");
-    std::string homeFolder = std::string(hdrive) + std::string(hpath);
+	char const *hdrive = getenv("HOMEDRIVE");
+	char const *hpath = getenv("HOMEPATH");
+	homeFolder = std::string(hdrive) + std::string(hpath);
+
+	TCHAR szPath[MAX_PATH];
+	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath))) {
+		std::string folderLocalAppData(szPath);
+		folderLocalAppData += "\\supudo.net";
+		if (!boost::filesystem::exists(folderLocalAppData))
+			boost::filesystem::create_directory(folderLocalAppData);
+		folderLocalAppData += "\\Kuplung";
+		if (!boost::filesystem::exists(folderLocalAppData))
+			boost::filesystem::create_directory(folderLocalAppData);
+
+		std::string current_folder = boost::filesystem::current_path().string() + "\\resources";
+		std::string fName("");
+
+		fName = "Kuplung_Settings.ini";
+		std::string iniFileSource(current_folder + "\\" + fName);
+		std::string iniFileDestination = folderLocalAppData + "\\" + fName;
+		if (!boost::filesystem::exists(iniFileDestination))
+			boost::filesystem::copy(iniFileSource, iniFileDestination);
+
+		fName = "Kuplung_RecentFiles.ini";
+		std::string iniFileRecentSource(current_folder + "\\" + fName);
+		std::string iniFileRecentDestination = folderLocalAppData + "\\" + fName;
+		if (!boost::filesystem::exists(iniFileRecentDestination))
+			boost::filesystem::copy(iniFileRecentSource, iniFileRecentDestination);
+
+		fName = "Kuplung_RecentFilesImported.ini";
+		std::string iniFileRecentImportedSource(current_folder + "\\" + fName);
+		std::string iniFileRecentImportedDestination = folderLocalAppData + "\\" + fName;
+		if (!boost::filesystem::exists(iniFileRecentImportedDestination))
+			boost::filesystem::copy(iniFileRecentImportedSource, iniFileRecentImportedDestination);
+
+		iniFolder = folderLocalAppData;
+	}
+	else
+		iniFolder = homeFolder;
 #elif defined macintosh // OS 9
     char const *hpath = getenv("HOME");
-    std::string homeFolder = std::string(hpath);
+    homeFolder = std::string(hpath);
+	iniFolder = homeFolder;
 #else
     char const *hpath = getenv("HOME");
-    std::string homeFolder("");
     if (hpath != NULL)
         homeFolder = std::string(hpath);
+	iniFolder = homeFolder;
 #endif
+	if (Settings::Instance()->ApplicationConfigurationFolder.empty())
+		Settings::Instance()->ApplicationConfigurationFolder = iniFolder;
     if (Settings::Instance()->currentFolder.empty())
-        Settings::Instance()->currentFolder = std::move(homeFolder);
+        Settings::Instance()->currentFolder = homeFolder;
+	Settings::Instance()->initSettings(iniFolder);
 }
 
 void Kuplung::onEvent(SDL_Event *ev) {

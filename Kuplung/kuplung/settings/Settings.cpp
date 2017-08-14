@@ -26,12 +26,12 @@ Settings* Settings::m_pInstance = NULL;
 Settings* Settings::Instance() {
     if (!m_pInstance) {
         m_pInstance = new Settings;
-        m_pInstance->initSettings();
+        //m_pInstance->initSettings();
     }
     return m_pInstance;
 }
 
-void Settings::initSettings() {
+void Settings::initSettings(const std::string& iniFolder) {
 #ifdef Def_Kuplung_OpenGL_4x
     m_pInstance->OpenGL_MajorVersion = 4;
     m_pInstance->OpenGL_MinorVersion = 1;
@@ -49,10 +49,11 @@ void Settings::initSettings() {
     m_pInstance->mRayDirectionZ = 0.0f;
 
     m_pInstance->cfgUtils = std::make_unique<ConfigUtils>();
-    m_pInstance->cfgUtils->init(Settings::Instance()->appFolder());
+	m_pInstance->cfgUtils->init(iniFolder);
 
     m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
-    m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
+	if (!m_pInstance->cfgUtils->readString("currentFolder").empty())
+		m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
     m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
     m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
     m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
@@ -115,9 +116,9 @@ void Settings::initSettings() {
     m_pInstance->glUtils = std::make_unique<KuplungApp::Utilities::GL::GLUtils>(std::bind(&Settings::reuseLogFunc, this, std::placeholders::_1));
 
 #ifdef _WIN32
-	this->Setting_CurrentDriveIndex = 0;
-	this->Setting_SelectedDriveIndex = 0;
-	this->hddDriveList.empty();
+	m_pInstance->Setting_CurrentDriveIndex = 0;
+	m_pInstance->Setting_SelectedDriveIndex = 0;
+	m_pInstance->hddDriveList.empty();
 	int dc = 0;
 	DWORD drives = ::GetLogicalDrives();
 	if (drives) {
@@ -125,16 +126,18 @@ void Settings::initSettings() {
 		for (int i = 0; i < 26; i++) {
 			if (drives & (1 << i)) {
 				drive[0] = 'A' + i;
-				this->hddDriveList.push_back(drive);
+				m_pInstance->hddDriveList.push_back(drive);
 				if (&Settings::Instance()->currentFolder[0] == drive) {
-					this->Setting_CurrentDriveIndex = dc;
-					this->Setting_SelectedDriveIndex = dc;
+					m_pInstance->Setting_CurrentDriveIndex = dc;
+					m_pInstance->Setting_SelectedDriveIndex = dc;
 				}
 			}
 			dc += 1;
 		}
 	}
 #endif
+
+	m_pInstance->ApplicationConfigurationFolder = iniFolder;
 }
 
 void Settings::reuseLogFunc(const std::string& msg) {
@@ -152,6 +155,8 @@ std::string Settings::appFolder() {
         printf("Can't open bundle folder!\n");
     CFRelease(resourcesURL);
     return std::string(folder);
+#elif _WIN32
+	return boost::filesystem::current_path().string() + "/resources";
 #else
     return boost::filesystem::current_path().string() + "/resources";
 #endif
