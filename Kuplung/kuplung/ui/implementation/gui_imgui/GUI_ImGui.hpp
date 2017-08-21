@@ -20,8 +20,7 @@
 #include "kuplung/ui/components/Screenshot.hpp"
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/ui/components/importers/ImportFile.hpp"
-#include "kuplung/ui/components/exporters/ExportOBJ.hpp"
-#include "kuplung/ui/components/exporters/ExportGLTF.hpp"
+#include "kuplung/ui/components/exporters/ExportFile.hpp"
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/ui/components/ImageViewer.hpp"
 #include "kuplung/ui/components/RendererUI.hpp"
@@ -121,9 +120,9 @@ private:
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
-    void dialogImporterBrowser(int type);
-    void dialogExporterBrowserOBJ();
-	void dialogExporterBrowserGLTF();
+	int dialogImportType, dialogExportType;
+    void dialogImporterBrowser(ImportExportFormats type);
+	void dialogExporterBrowser(ImportExportFormats type);
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -150,8 +149,7 @@ private:
     std::unique_ptr<Screenshot> componentScreenshot;
     std::unique_ptr<FileBrowser> componentFileBrowser;
     std::unique_ptr<ImportFile> componentImportFile;
-    std::unique_ptr<ExportOBJ> componentExportOBJ;
-	std::unique_ptr<ExportGLTF> componentExportGLTF;
+	std::unique_ptr<ExportFile> componentExportFile;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
     std::unique_ptr<DialogStyle> windowStyle;

@@ -314,6 +314,9 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.cpp">
       <Filter>kuplung\utilities\parsers\gltf-parser</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.cpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -690,6 +693,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp">
       <Filter>kuplung\utilities\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp">
+      <Filter>kuplung\ui\components\exporters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

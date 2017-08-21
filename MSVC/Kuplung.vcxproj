@@ -281,6 +281,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\catch\catch.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\meshes\artefacts\Shadertoy.hpp" />
@@ -436,6 +437,7 @@
     <ClCompile Include="..\Kuplung\kuplung\settings\ConfigUtils.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\settings\FontsList.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\settings\Settings.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportOBJ.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\components\importers\ImportFile.cpp" />

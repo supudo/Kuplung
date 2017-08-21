@@ -46,7 +46,9 @@ typedef enum InAppRendererType {
 
 typedef enum ImportExportFormats {
 	ImportExportFormat_OBJ,
-	ImportExportFormat_GLTF
+	ImportExportFormat_GLTF,
+	ImportExportFormat_STL,
+	ImportExportFormat_PLY
 } ImportExportFormats;
 
 #endif /* SettingsStructs_h */

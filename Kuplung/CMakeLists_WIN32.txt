@@ -121,6 +121,8 @@ SET(SOURCE_FILES
     kuplung/ui/components/exporters/ExportOBJ.hpp
     kuplung/ui/components/exporters/ExportGLTF.cpp
     kuplung/ui/components/exporters/ExportGLTF.hpp
+    kuplung/ui/components/exporters/ExportFile.cpp
+    kuplung/ui/components/exporters/ExportFile.hpp
     kuplung/ui/components/importers/ImportFile.cpp
     kuplung/ui/components/importers/ImportFile.hpp
     kuplung/ui/components/materialeditor/MaterialEditor.cpp

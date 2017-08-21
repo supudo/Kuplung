@@ -39,149 +39,148 @@ static char *convert(const std::string & s)
 	return pc;
 }
 
-void ImportFile::draw(const char* title, bool* p_opened, int type) {
-    if (this->width > 0 && this->height > 0)
-        ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
-    else
-        ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
+void ImportFile::draw(const char* title, int* dialogImportType, bool* p_opened) {
+	if (this->width > 0 && this->height > 0)
+		ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
+	else
+		ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
 
-    if (this->positionX > 0 && this->positionY > 0)
-        ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
+	if (this->positionX > 0 && this->positionY > 0)
+		ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin(title, p_opened);
+	ImGui::Begin("Import file", p_opened);
+	ImGui::Text("%s", this->currentFolder.c_str());
+	ImGui::Separator();
 
-    ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_Options, 0));
-    ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
+	// file options
+	ImGui::BeginChild("OptionsPanel", ImVec2(this->panelWidth_Options, 0));
+	ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
+	ImGui::Separator();
+	ImGui::PushItemWidth(-1.0f);
+	ImGui::Text("File Format");
+	const char* file_format_items[] = {
+		"Wavefront OBJ",
+		"glTF",
+		"STereoLithography STL",
+		"Stanford PLY"
+	};
+	ImGui::Combo("##982", dialogImportType, file_format_items, IM_ARRAYSIZE(file_format_items));
+	ImGui::PopItemWidth();
+	ImGui::Separator();
 #ifdef _WIN32
-    ImGui::Separator();
+	ImGui::Separator();
 	ImGui::Text("Select Drive");
 	ImGui::Combo(
 		"##8820",
 		&Settings::Instance()->Setting_SelectedDriveIndex,
 		[](void* vec, int idx, const char** out_text)
-		{
-			auto& vector = *static_cast<std::vector<std::string>*>(vec);
-			if (idx < 0 || idx >= static_cast<int>(vector.size()))
-				return false;
-			*out_text = vector.at(idx).c_str();
-			return true;
-		},
+	{
+		auto& vector = *static_cast<std::vector<std::string>*>(vec);
+		if (idx < 0 || idx >= static_cast<int>(vector.size()))
+			return false;
+		*out_text = vector.at(idx).c_str();
+		return true;
+	},
 		static_cast<void*>(&Settings::Instance()->hddDriveList),
-			Settings::Instance()->hddDriveList.size()
-	);
+		Settings::Instance()->hddDriveList.size()
+		);
 	ImGui::Separator();
 #endif
 	ImGui::Separator();
-    ImGui::PushItemWidth(-1.0f);
-    ImGui::Text("Forward");
-    const char* forward_items[] = {
-        "-X Forward",
-        "-Y Forward",
-        "-Z Forward",
-        " X Forward",
-        " Y Forward",
-        " Z Forward"
-    };
-    ImGui::Combo("##987", &this->Setting_Forward, forward_items, IM_ARRAYSIZE(forward_items));
-    ImGui::Separator();
-    ImGui::Text("Up");
-    const char* up_items[] = {
-        "-X Up",
-        "-Y Up",
-        "-Z Up",
-        " X Up",
-        " Y Up",
-        " Z Up"
-    };
-    ImGui::Combo("##988", &this->Setting_Up, up_items, IM_ARRAYSIZE(up_items));
-    ImGui::Separator();
-    if (ImGui::Button("From Blender", ImVec2(-1.0f, 0.0f))) {
-        this->Setting_Forward = 2;
-        this->Setting_Up = 4;
-    }
-    ImGui::PopItemWidth();
-    ImGui::EndChild();
+	ImGui::PushItemWidth(-1.0f);
+	ImGui::Text("Forward");
+	const char* forward_items[] = {
+		"-X Forward",
+		"-Y Forward",
+		"-Z Forward",
+		"X Forward",
+		"Y Forward",
+		"Z Forward"
+	};
+	ImGui::Combo("##987", &this->Setting_Forward, forward_items, IM_ARRAYSIZE(forward_items));
+	ImGui::Separator();
+	ImGui::Text("Up");
+	const char* up_items[] = {
+		"-X Up",
+		"-Y Up",
+		"-Z Up",
+		"X Up",
+		"Y Up",
+		"Z Up"
+	};
+	ImGui::Combo("##988", &this->Setting_Up, up_items, IM_ARRAYSIZE(up_items));
+	ImGui::Separator();
+	if (ImGui::Button("From Blender", ImVec2(-1.0f, 0.0f))) {
+		this->Setting_Forward = 2;
+		this->Setting_Up = 4;
+	}
+	ImGui::PopItemWidth();
+	ImGui::EndChild();
 
-    ImGui::SameLine();
+	ImGui::SameLine();
 
-    ImGui::GetIO().MouseDrawCursor = true;
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
-    ImGui::Button("###splitterOptions", ImVec2(8.0f, -1));
-    ImGui::PopStyleColor(3);
-    if (ImGui::IsItemActive()) {
-        this->panelWidth_Options += ImGui::GetIO().MouseDelta.x;
-        if (this->panelWidth_Options < this->panelWidth_OptionsMin)
-            this->panelWidth_Options = this->panelWidth_OptionsMin;
-    }
-    if (ImGui::IsItemHovered())
-        ImGui::SetMouseCursor(4);
+	ImGui::GetIO().MouseDrawCursor = true;
+	ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
+	ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+	ImGui::Button("###splitterOptions", ImVec2(8.0f, -1));
+	ImGui::PopStyleColor(3);
+	if (ImGui::IsItemActive()) {
+		this->panelWidth_Options += ImGui::GetIO().MouseDelta.x;
+		if (this->panelWidth_Options < this->panelWidth_OptionsMin)
+			this->panelWidth_Options = this->panelWidth_OptionsMin;
+	}
+	if (ImGui::IsItemHovered())
+		ImGui::SetMouseCursor(4);
 
-    ImGui::SameLine();
+	ImGui::SameLine();
 
-    ImGui::BeginChild("Browser", ImVec2(-1.0f, -1.0f), false);
+	// folder browser
+	ImGui::BeginChild("scrolling");
+	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
 
-    if (type == 0)
-        ImGui::Text("Select OBJ file");
-    else if (type == 1)
-        ImGui::Text("Select STL file");
-    else if (type == 2)
-        ImGui::Text("Select PLY file");
-	else if (type == 3)
-		ImGui::Text("Select glTF file");
-    ImGui::Separator();
-    ImGui::Text("%s", this->currentFolder.c_str());
-    ImGui::Separator();
-
-    ImGui::Text("Mode File Parser:"); ImGui::SameLine();
+	ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
+	ImGui::Separator();
+	ImGui::Text("Mode File Parser:"); ImGui::SameLine();
 #ifdef DEF_KuplungSetting_UseCuda
-    const char* parserItems[] = {"Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp"};
+	const char* parserItems[] = { "Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp" };
 #else
-    const char* parserItems[] = {"Kuplung Parsers", "Assimp"};
+	const char* parserItems[] = { "Kuplung Parsers", "Assimp" };
 #endif
-    if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
-        Settings::Instance()->saveSettings();
+	if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+		Settings::Instance()->saveSettings();
 
-    ImGui::Separator();
+	ImGui::Separator();
+	ImGui::PopItemWidth();
+	ImGui::Separator();
 
-    ImGui::BeginChild("scrolling");
-    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
+	// Basic columns
+	ImGui::Columns(3, "fileColumns");
 
-    // Basic columns
-    ImGui::Columns(4, "fileColumns");
+	ImGui::Separator();
+	ImGui::Text("File");
+	ImGui::NextColumn();
+	ImGui::Text("Size");
+	ImGui::NextColumn();
+	ImGui::Text("Last Modified");
+	ImGui::NextColumn();
+	ImGui::Separator();
 
-    ImGui::Separator();
-    ImGui::Text("ID");
-    ImGui::NextColumn();
-    ImGui::Text("File");
-    ImGui::NextColumn();
-    ImGui::Text("Size");
-    ImGui::NextColumn();
-    ImGui::Text("Last Modified");
-    ImGui::NextColumn();
-    ImGui::Separator();
+	this->drawFiles(dialogImportType, this->currentFolder);
 
-    ImGui::SetColumnOffset(1, 40);
+	ImGui::Columns(1);
 
-    this->drawFiles(this->currentFolder, type);
+	ImGui::Separator();
+	ImGui::Spacing();
 
-    ImGui::Columns(1);
-
-    ImGui::Separator();
-    ImGui::Spacing();
-
-    ImGui::PopStyleVar();
-    ImGui::EndChild();
-
-    ImGui::EndChild();
-
-    ImGui::End();
+	ImGui::PopStyleVar();
+	ImGui::EndChild();
+	ImGui::End();
 }
 
 #pragma mark - Private
 
-void ImportFile::drawFiles(const std::string& fPath, int type) {
+void ImportFile::drawFiles(int* dialogImportType, const std::string& fPath) {
 	std::string cFolder = fPath;
 #ifdef _WIN32
 	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
@@ -190,15 +189,12 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
 		this->currentFolder = cFolder;
 	}
 #endif
-	std::map<std::string, FBEntity> folderContents = this->getFolderContents(cFolder, type);
+	std::map<std::string, FBEntity> folderContents = this->getFolderContents(dialogImportType, cFolder);
 	int i = 0;
     static int selected = -1;
     for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
         FBEntity entity = iter->second;
-
-        char label[32];
-        sprintf(label, "%i", i);
-        if (ImGui::Selectable(label, selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
+        if (ImGui::Selectable(entity.title.c_str(), selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
             selected = i;
             if (entity.isFile) {
                 std::vector<std::string> setts;
@@ -220,7 +216,7 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
             }
             else {
 				try {
-					this->drawFiles(entity.path, type);
+					this->drawFiles(dialogImportType, entity.path);
 					this->currentFolder = entity.path;
 				}
 				catch (const fs::filesystem_error&) { }
@@ -228,7 +224,6 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
         }
         ImGui::NextColumn();
 
-        ImGui::Text("%s", entity.title.c_str()); ImGui::NextColumn();
         ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
         ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
 
@@ -236,7 +231,7 @@ void ImportFile::drawFiles(const std::string& fPath, int type) {
     }
 }
 
-std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const& filePath, int type) {
+std::map<std::string, FBEntity> ImportFile::getFolderContents(int* dialogImportType, std::string const& filePath) {
     std::map<std::string, FBEntity> folderContents;
     fs::path currentPath(filePath);
 	
@@ -251,18 +246,24 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(std::string const&
 		}
 
 		fs::directory_iterator iteratorEnd;
-		bool isAllowedFileExtension;
+		bool isAllowedFileExtension = false;
 		for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
 			try {
 				fs::file_status fileStatus = iteratorFolder->status();
-				if (type == 0)
-					isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".obj" });
-				else if (type == 1)
-					isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".stl" });
-				else if (type == 2)
-					isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".ply" });
-				else if (type == 3)
-					isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
+				switch (*dialogImportType) {
+					case 0:
+						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".obj" });
+						break;
+					case 1:
+						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
+						break;
+					case 2:
+						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".stl" });
+						break;
+					case 3:
+						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".ply" });
+						break;
+				}
 				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
 					FBEntity entity;
 					if (fs::is_directory(fileStatus))

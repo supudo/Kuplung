@@ -339,6 +339,7 @@ SOURCES += main.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/importers/ImportFile.cpp \
+    kuplung/ui/components/exporters/ExportFile.cpp \
     kuplung/ui/components/exporters/ExportOBJ.cpp \
     kuplung/ui/components/exporters/ExportGLTF.cpp \
     kuplung/ui/components/FileSaver.cpp \
@@ -451,6 +452,7 @@ HEADERS += \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/importers/ImportFile.hpp \
+    kuplung/ui/components/exporters/ExportFile.hpp \
     kuplung/ui/components/exporters/ExportOBJ.hpp \
     kuplung/ui/components/exporters/ExportGLTF.hpp \
     kuplung/ui/components/FileSaver.hpp \
