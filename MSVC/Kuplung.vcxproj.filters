@@ -861,10 +861,210 @@
     <Filter Include="kuplung\utilities\json">
       <UniqueIdentifier>{d3e111a0-e389-4615-a7e6-e733ab68195e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="resources\shaders">
+      <UniqueIdentifier>{dd070ea5-6ed8-499e-85bb-eaf6f14194a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\shaders\cuda">
+      <UniqueIdentifier>{e3efbe98-2d3d-45cd-a537-93fd7add5e0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\shaders\stoy">
+      <UniqueIdentifier>{aad82ee3-3559-474a-b973-7241512c068f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\Kuplung\resources\kuplung.rc">
       <Filter>resources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Kuplung\resources\shaders\axis.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\axis.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\axis_helpers.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\axis_helpers.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\bounding_box.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\bounding_box.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\camera.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\camera.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_g_buffer.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_g_buffer.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_light_box.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_light_box.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_shading.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\deferred_shading.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\grid.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\grid.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\light.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\light.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\light_ray.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\light_ray.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face.geom">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face.tcs">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face.tes">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_effects.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_lights.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_mapping.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_misc.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_pbr.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_shadow_mapping.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\model_face_vars.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\ray_line.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\ray_line.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\reflection.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\reflection.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_simple.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_simple.geom">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_simple.tcs">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_simple.tes">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_simple.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\shadertoy.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\shadow_mapping_depth.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\shadow_mapping_depth.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\shadows_debug_quad.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\shadows_debug_quad_depth.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\skybox.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\skybox.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\spaceship.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\spaceship.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\structured_vol_sampling.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\structured_vol_sampling.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\terrain.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\terrain.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\vertex_sphere.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\vertex_sphere.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\stoy\4ljGW1.stoy">
+      <Filter>resources\shaders\stoy</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\stoy\4tlSzl.stoy">
+      <Filter>resources\shaders\stoy</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\stoy\Ms2SD1.stoy">
+      <Filter>resources\shaders\stoy</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\stoy\XlfGRj.stoy">
+      <Filter>resources\shaders\stoy</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\stoy\XlSSzK.stoy">
+      <Filter>resources\shaders\stoy</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\cuda\oceanFFT.frag">
+      <Filter>resources\shaders\cuda</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\cuda\oceanFFT.vert">
+      <Filter>resources\shaders\cuda</Filter>
+    </None>
   </ItemGroup>
 </Project>

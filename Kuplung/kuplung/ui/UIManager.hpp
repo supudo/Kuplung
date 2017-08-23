@@ -21,7 +21,7 @@ public:
     ~UIManager();
     void init(SDL_Window *window,
 			  const std::function<void()>& quitApp,
-			  const std::function<void(FBEntity, std::vector<std::string>)>& processImportedFile,
+			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processImportedFile,
 			  const std::function<void()>& newScene,
 			  const std::function<void(std::string)>& fileShaderCompile,
 			  const std::function<void(ShapeType)>& addShape,

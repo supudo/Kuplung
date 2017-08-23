@@ -17,7 +17,7 @@
 
 namespace fs = boost::filesystem;
 
-void ExportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& saveFile) {
+void ExportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& saveFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -143,10 +143,11 @@ void ExportFile::draw(const char* title, int* dialogImportType, bool* p_opened) 
         file.modifiedDate.clear();
         file.size.clear();
         Settings::Instance()->currentFolder = this->currentFolder;
+		Settings::Instance()->saveSettings();
         std::vector<std::string> setts;
         setts.push_back(std::to_string(this->Setting_Forward));
         setts.push_back(std::to_string(this->Setting_Up));
-        this->funcFileSave(file, setts);
+        this->funcFileSave(file, setts, static_cast<ImportExportFormats>(*dialogImportType));
     }
     ImGui::SameLine(0, 10);
     if (ImGui::Button("New Folder"))

@@ -49,7 +49,7 @@ public:
     ~GUI_ImGui();
     void init(SDL_Window *window,
 			  const std::function<void()>& quitApp,
-			  const std::function<void(FBEntity, std::vector<std::string>)>& processImportedFile,
+			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processImportedFile,
 			  const std::function<void()>& newScene,
 			  const std::function<void(std::string)>& fileShaderCompile,
 			  const std::function<void(ShapeType)>& addShape,
@@ -102,7 +102,7 @@ public:
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
-    std::function<void(FBEntity, std::vector<std::string>)> funcProcessImportedFile;
+    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)> funcProcessImportedFile;
     std::function<void()> funcNewScene;
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
@@ -114,15 +114,14 @@ private:
     std::function<void(FBEntity file)> funcOpenScene;
 
     void dialogFileBrowserProcessFile(FBEntity const& file);
-    void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings);
-    void dialogExporterProcessFileOBJ(FBEntity const& file, std::vector<std::string> settings);
-	void dialogExporterProcessFileGLTF(FBEntity const& file, std::vector<std::string> settings);
+    void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat);
+	void dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
 	int dialogImportType, dialogExportType;
-    void dialogImporterBrowser(ImportExportFormats type);
-	void dialogExporterBrowser(ImportExportFormats type);
+    void dialogImporterBrowser();
+	void dialogExporterBrowser();
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -165,8 +164,8 @@ private:
 
     bool showDialogStyle;
     bool showDialogFile;
-    bool showFileImporter_OBJ, showFileImporter_STL, showFileImporter_PLY, showFileImporter_GLTF;
-    bool showExporterOBJ, showExporterGLTF;
+    bool showImporterFile;
+    bool showExporterFile;
     bool showSaveDialog;
     bool showOpenDialog;
     bool showShaderEditor;

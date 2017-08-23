@@ -628,7 +628,6 @@ void Kuplung::processImportFileAsync(const FBEntity& file, const std::vector<std
 }
 
 void Kuplung::guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat) {
-    //    this->managerExporter->exportScene(file, this->meshModelFaces);
     this->managerUI->showExporting();
     this->exporterThreadFinished = false;
     std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces, settings, exportFormat);

@@ -19,12 +19,12 @@
 
 class ImportFile {
 public:
-    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& processFile);
+    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processFile);
     void draw(const char* title, int* dialogImportType, bool* p_opened = NULL);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(int* dialogImportType, std::string const& filePath);
-    std::function<void(FBEntity, std::vector<std::string>)> processFile;
+    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)> processFile;
 
     void drawFiles(int* dialogImportType, const std::string& fPath);
     std::string convertToString(double num);

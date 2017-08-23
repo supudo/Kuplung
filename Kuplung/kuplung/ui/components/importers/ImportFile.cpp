@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>)>& processFile) {
+void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -200,7 +200,7 @@ void ImportFile::drawFiles(int* dialogImportType, const std::string& fPath) {
                 std::vector<std::string> setts;
                 setts.push_back(std::to_string(this->Setting_Forward));
                 setts.push_back(std::to_string(this->Setting_Up));
-                this->processFile(entity, setts);
+                this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType));
 
 #ifdef _WIN32
         std::string folderDelimiter = "\\";
