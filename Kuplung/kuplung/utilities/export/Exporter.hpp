@@ -13,6 +13,7 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/export/ExporterOBJ.hpp"
 #include "kuplung/utilities/export/ExporterGLTF.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -21,7 +22,7 @@ public:
     ~Exporter();
     Exporter();
     void init(const std::function<void(float)>& doProgress);
-    void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, ImportExportFormats exportFormat);
+    void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat);
 
 private:
     std::unique_ptr<ExporterOBJ> exporterOBJ;

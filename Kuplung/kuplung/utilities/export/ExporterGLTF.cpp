@@ -34,7 +34,7 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
+void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
 	this->exportFile = file;
 	this->objSettings = settings;
 
@@ -43,8 +43,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	nlohmann::json j;
 	j["asset"] = { { "generator", "Kuplung" }, { "version", "1.0" } };
 	j["scene"] = 0;
-
-	j["camera"] = this->exportCamera();
+	j["cameras"] = this->exportCameras(managerObjects);
 	j["scenes"] = this->exportScenes(faces);
 	j["nodes"] = this->exportNodes(faces);
 	j["meshes"] = this->exportMeshes(faces);
@@ -59,8 +58,17 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	this->saveFile(j);
 }
 
-nlohmann::json ExporterGLTF::exportCamera() {
+nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &managerObjects) {
 	nlohmann::json j;
+	nlohmann::json viewportCamera;
+	viewportCamera["type"] = "perspective";
+	viewportCamera["perspective"] = {
+		{ "aspectRatio", managerObjects->Setting_RatioWidth / managerObjects->Setting_RatioHeight },
+		{ "yfov", managerObjects->Setting_FOV },
+		{ "zfar", managerObjects->Setting_PlaneClose },
+		{ "znear", managerObjects->Setting_PlaneFar }
+	};
+	j.push_back(viewportCamera);
 	return j;
 }
 

@@ -31,7 +31,7 @@ void ExporterOBJ::init(const std::function<void(float)>& doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 }
 
-void ExporterOBJ::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings) {
+void ExporterOBJ::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->exportFile = file;
     this->objSettings = settings;
     this->exportGeometry(faces);

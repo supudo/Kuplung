@@ -13,6 +13,7 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
 #include "kuplung/utilities/json/json.hpp"
+#include "kuplung/objects/ObjectsManager.hpp"
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -20,7 +21,7 @@ class ExporterGLTF {
 public:
     ~ExporterGLTF();
     void init(const std::function<void(float)>& doProgress);
-    void exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings);
+    void exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
     std::function<void(float)> funcProgress;
@@ -28,7 +29,7 @@ private:
 	std::vector<std::string> objSettings;
 
 	void prepFolderLocation();
-	nlohmann::json exportCamera();
+	nlohmann::json exportCameras(std::unique_ptr<ObjectsManager> &managerObjects);
 	nlohmann::json exportScenes(const std::vector<ModelFaceBase*>& faces);
 	nlohmann::json exportNodes(const std::vector<ModelFaceBase*>& faces);
 	nlohmann::json exportMeshes(const std::vector<ModelFaceBase*>& faces);

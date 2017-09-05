@@ -92,7 +92,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Libs\boost.1.64.prebuilt;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\x64\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Libs\boost_1_65_0;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\x64\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -126,8 +126,8 @@
     </Midl>
     <Link>
       <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
-      <AdditionalDependencies>boost_system-vc141-mt-gd-1_64.lib;boost_filesystem-vc141-mt-gd-1_64.lib;opengl32.lib;SDL2main.lib;SDL2.lib;GLFW3.lib;GLEW32.lib;assimp-vc140-mt.lib;libprotobufd.lib;lua53.lib;noise.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1;D:/Libs/boost.1.64.prebuilt/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/x64/lib;D:/Libs/assimp/x64/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>boost_system-vc141-mt-gd-1_65.lib;boost_filesystem-vc141-mt-gd-1_65.lib;opengl32.lib;SDL2main.lib;SDL2.lib;GLFW3.lib;GLEW32.lib;assimp-vc140-mt.lib;libprotobufd.lib;lua53.lib;noise.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost_1_65_0/lib64-msvc-14.1;D:/Libs/boost_1_65_0/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/x64/lib;D:/Libs/assimp/x64/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.lib</ImportLibrary>
