@@ -317,6 +317,9 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.cpp">
       <Filter>kuplung\ui\components\exporters</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp">
+      <Filter>kuplung\utilities\cpp-base64</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -697,6 +700,9 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp">
       <Filter>kuplung\ui\components\exporters</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h">
+      <Filter>kuplung\utilities\cpp-base64</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -869,6 +875,9 @@
     </Filter>
     <Filter Include="resources\shaders\stoy">
       <UniqueIdentifier>{aad82ee3-3559-474a-b973-7241512c068f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\cpp-base64">
+      <UniqueIdentifier>{0eb6ce27-111f-4481-a24f-faf3acea6291}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

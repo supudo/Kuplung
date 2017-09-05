@@ -405,7 +405,8 @@ SOURCES += main.cpp \
     kuplung/utilities/saveopen/KuplungAppScene.pb.cc \
     kuplung/utilities/consumption/Consumption.cpp \
     kuplung/utilities/measurement/Timings.cpp \
-    kuplung/utilities/lua/LuaManager.cpp
+    kuplung/utilities/lua/LuaManager.cpp \
+    kuplung/utilities/cpp-base64/base64.cpp
 
 HEADERS += \
     kuplung/Kuplung.hpp \
@@ -536,7 +537,8 @@ HEADERS += \
     kuplung/utilities/measurement/Timings.hpp \
     kuplung/utilities/lua/LuaManager.hpp \
     kuplung/utilities/catch/catch.hpp \
-    kuplung/utilities/json/json.hpp
+    kuplung/utilities/json/json.hpp \
+    kuplung/utilities/cpp-base64/base64.h
 
 DISTFILES += \
 # Lua

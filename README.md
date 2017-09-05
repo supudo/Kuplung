@@ -15,6 +15,7 @@ C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo
 - [protobuf](https://github.com/google/protobuf)
 - [libnoise](http://libnoise.sourceforge.net/)
 - [NVIDIA CUDA](https://developer.nvidia.com/cuda-zone)
+- [cpp-base64](https://github.com/ReneNyffenegger/cpp-base64)
 
 #### IDE
 QT Creator

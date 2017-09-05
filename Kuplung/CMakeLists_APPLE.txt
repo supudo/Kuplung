@@ -384,6 +384,8 @@ SET(SOURCE_FILES
     kuplung/utilities/stb/stb_truetype.h
     kuplung/utilities/catch/catch.hpp
     kuplung/utilities/json/json.hpp
+    kuplung/utilities/cpp-base64/base64.cpp
+    kuplung/utilities/cpp-base64/base64.h
     # kuplung/cuda/CudaTest.cpp
     # kuplung/cuda/CudaTest.hpp
     kuplung/Kuplung.cpp

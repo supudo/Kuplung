@@ -352,6 +352,7 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
@@ -471,6 +472,7 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
