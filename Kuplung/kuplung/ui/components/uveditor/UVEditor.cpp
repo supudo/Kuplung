@@ -119,9 +119,9 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     }
 
     ImGui::SameLine(ImGui::GetWindowWidth() * 0.88);
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(3 / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(3 / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(3 / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.6f, 0.6f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.7f, 0.7f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.8f, 0.8f)));
     btnLabel = ICON_FA_CHECK " Apply ";
     if (ImGui::Button(btnLabel.c_str()))
         this->processTextureCoordinates();
@@ -147,7 +147,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
+    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, static_cast<ImVec4>(ImColor(60, 60, 70, 200)));
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
 
     ImGuiWindow* window = ImGui::GetCurrentWindow();

@@ -68,9 +68,9 @@ void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened)
     ImGui::EndChild();
 
     ImGui::SameLine();
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
     ImGui::Button("###splitterOptions", ImVec2(2.0f, -1));
     ImGui::PopStyleColor(3);
     ImGui::SameLine();

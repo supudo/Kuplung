@@ -465,7 +465,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->isParsingOpen)
         ImGui::OpenPopup("Kuplung Parsing");
     if (ImGui::BeginPopupModal("Kuplung Parsing", &this->isParsingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
-        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
         ImGui::Text("Processing ... %0.2f%%\n", double(this->parsingPercentage));
         ImGui::ProgressBar(this->parsingPercentage / 100.0f, ImVec2(0.0f, 0.0f));
         ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);
@@ -483,7 +483,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     if (this->isExportingOpen)
         ImGui::OpenPopup("Kuplung Exporting");
     if (ImGui::BeginPopupModal("Kuplung Exporting", &this->isExportingOpen, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoTitleBar)) {
-        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+        ImGui::PushStyleColor(ImGuiCol_PlotHistogram, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
         ImGui::Text("Exporting ... %0.2f%%\n", double(this->parsingPercentage));
         ImGui::ProgressBar(this->parsingPercentage / 100.0f, ImVec2(0.0f, 0.0f));
         ImGui::SameLine(0.0f, ImGui::GetStyle().ItemInnerSpacing.x);

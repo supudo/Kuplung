@@ -299,9 +299,9 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
     ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
 
     ImGui::BeginChild("tabs_list", ImVec2(-1, this->panelHeight_Tabs));
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
     const char* tabsPanels[] = {
         "\n  " ICON_MD_BUILD "  ",
@@ -350,9 +350,9 @@ void DialogControlsModels::processTexture(ModelFaceBase *mmf) {
 
 void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*> * mmfaces) {
     this->meshModelFaces = mmfaces;
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
         for (size_t i=0; i<this->meshModelFaces->size(); i++) {
             (*this->meshModelFaces)[i]->initModelProperties();
@@ -371,7 +371,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PushItemWidth(-1);
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
-    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(1, 0, 0, 1));
+    ImGui::PushStyleColor(ImGuiCol_FrameBg, static_cast<ImVec4>(ImColor(1, 0, 0, 1)));
     ImGui::ListBox("", &this->selectedObject, &scene_items[0], static_cast<int>(this->meshModelFaces->size()));
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);
@@ -397,9 +397,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::EndChild();
 
     ImGui::GetIO().MouseDrawCursor = true;
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
     ImGui::Button("###splitterModels", ImVec2(-1, 8.0f));
     ImGui::PopStyleColor(3);
     if (ImGui::IsItemActive())
@@ -462,9 +462,9 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
 
         ImGui::Separator();
 
-        ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-        ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+        ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+        ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+        ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
         const char* tabsScene[] = {
             "\n" ICON_MD_TRANSFORM,

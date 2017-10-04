@@ -13,6 +13,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/path.hpp>
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
+#include "kuplung/utilities/cpp-base64/base64.h"
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -149,6 +150,11 @@ nlohmann::json ExporterGLTF::exportBufferViews(const std::vector<ModelFaceBase*>
 nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file) {
 	nlohmann::json j;
 	std::string bufferFile = file.title + ".bin";
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+	}
 	j[0]["byteLength"] = 0;
 	j[0]["uri"] = bufferFile;
 	return j;

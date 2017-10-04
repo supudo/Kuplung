@@ -68,9 +68,9 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     ImGui::SameLine();
 
     ImGui::GetIO().MouseDrawCursor = true;
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
     ImGui::Button("###splitterNodes", ImVec2(8.0f, -1));
     ImGui::PopStyleColor(3);
     if (ImGui::IsItemActive())
@@ -95,7 +95,7 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     ImGui::Checkbox("Show grid", &this->show_grid);
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, ImColor(60, 60, 70, 200));
+    ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, static_cast<ImVec4>(ImColor(60, 60, 70, 200)));
     ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
     ImGui::PushItemWidth(ItemWidth);
 

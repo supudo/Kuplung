@@ -114,15 +114,24 @@ void ImportFile::draw(const char* title, int* dialogImportType, bool* p_opened) 
 		this->Setting_Forward = 2;
 		this->Setting_Up = 4;
 	}
+	ImGui::Separator();
+	ImGui::Text("Parser:");
+#ifdef DEF_KuplungSetting_UseCuda
+	const char* parserItems[] = { "Kuplung", "Kuplung Cuda", "Assimp" };
+#else
+	const char* parserItems[] = { "Kuplung", "Assimp" };
+#endif
+	if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
+		Settings::Instance()->saveSettings();
 	ImGui::PopItemWidth();
 	ImGui::EndChild();
 
 	ImGui::SameLine();
 
 	ImGui::GetIO().MouseDrawCursor = true;
-	ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-	ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+	ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+	ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
 	ImGui::Button("###splitterOptions", ImVec2(8.0f, -1));
 	ImGui::PopStyleColor(3);
 	if (ImGui::IsItemActive()) {
@@ -138,21 +147,6 @@ void ImportFile::draw(const char* title, int* dialogImportType, bool* p_opened) 
 	// folder browser
 	ImGui::BeginChild("scrolling");
 	ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 1));
-
-	ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.70f);
-	ImGui::Separator();
-	ImGui::Text("Mode File Parser:"); ImGui::SameLine();
-#ifdef DEF_KuplungSetting_UseCuda
-	const char* parserItems[] = { "Kuplung Parsers", "Kuplung Parsers - Cuda", "Assimp" };
-#else
-	const char* parserItems[] = { "Kuplung Parsers", "Assimp" };
-#endif
-	if (ImGui::Combo("##00392", &Settings::Instance()->ModelFileParser, parserItems, IM_ARRAYSIZE(parserItems)))
-		Settings::Instance()->saveSettings();
-
-	ImGui::Separator();
-	ImGui::PopItemWidth();
-	ImGui::Separator();
 
 	// Basic columns
 	ImGui::Columns(3, "fileColumns");

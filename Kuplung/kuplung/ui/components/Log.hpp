@@ -15,7 +15,7 @@ class Log {
 public:
     void init(int positionX, int positionY, int width, int height);
     void clear();
-    void addToLog(const char* fmt, ...) IM_PRINTFARGS(2);
+    void addToLog(const char* fmt, ...) IM_FMTARGS(2);
     void draw(const char* title, bool* p_opened = NULL);
 
     ImGuiTextBuffer Buf;

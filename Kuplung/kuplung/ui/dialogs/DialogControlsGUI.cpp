@@ -45,9 +45,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiSetCond_FirstUseEver);
     ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
 
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+    ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
     if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
         this->managerObjects.resetPropertiesSystem();
         if (this->selectedObjectLight > -1) {
@@ -62,7 +62,7 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PopStyleColor(3);
 
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
-    ImGui::PushStyleColor(ImGuiCol_FrameBg, ImColor(255, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_FrameBg, (ImVec4)ImColor(255, 0, 0));
     ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
     ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
     for (int i=0; i<8; i++) {
@@ -183,9 +183,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::PopStyleVar();
 
     ImGui::GetIO().MouseDrawCursor = true;
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
     ImGui::Button("###splitterGUI", ImVec2(-1, 8.0f));
     ImGui::PopStyleColor(3);
     if (ImGui::IsItemActive())
@@ -380,9 +380,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 1: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
             const char* tabsGUICamera[] = {
                 "\n" ICON_MD_REMOVE_RED_EYE,
@@ -444,9 +444,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 2: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
             const char* tabsGUICameraModel[] = {
                 "\n" ICON_MD_TRANSFORM,
@@ -501,9 +501,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 3: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
             const char* tabsGUIGrid[] = {
                 "\n" ICON_MD_TRANSFORM,
@@ -608,9 +608,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             break;
         }
         case 6: {
-            ImGui::PushStyleColor(ImGuiCol_Button, ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-            ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+            ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
 
             const char* tabsGUILight[] = {
                 "\n" ICON_MD_TRANSFORM,

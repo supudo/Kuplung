@@ -183,21 +183,21 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         }
 
         if (ImGui::TreeNode("Colors")) {
-            static ImGuiColorEditMode edit_mode = ImGuiColorEditMode_RGB;
-            ImGui::RadioButton("RGB", &edit_mode, ImGuiColorEditMode_RGB);
+            static ImGuiColorEditFlags edit_mode = ImGuiColorEditFlags_RGB;
+            ImGui::RadioButton("RGB", &edit_mode, ImGuiColorEditFlags_RGB);
             ImGui::SameLine();
-            ImGui::RadioButton("HSV", &edit_mode, ImGuiColorEditMode_HSV);
+            ImGui::RadioButton("HSV", &edit_mode, ImGuiColorEditFlags_HSV);
             ImGui::SameLine();
-            ImGui::RadioButton("HEX", &edit_mode, ImGuiColorEditMode_HEX);
+            ImGui::RadioButton("HEX", &edit_mode, ImGuiColorEditFlags_HEX);
 
             static ImGuiTextFilter filter;
             filter.Draw("Filter colors", 200);
 
             ImGui::BeginChild("#colors", ImVec2(0, 300), true);
             ImGui::PushItemWidth(-160);
-            ImGui::ColorEditMode(edit_mode);
+			ImGui::SetColorEditOptions(edit_mode);
             for (int i = 0; i < ImGuiCol_COUNT; i++) {
-                const char* name = ImGui::GetStyleColName(i);
+                const char* name = ImGui::GetStyleColorName(i);
                 if (!filter.PassFilter(name))
                     continue;
                 ImGui::PushID(i);

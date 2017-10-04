@@ -91,10 +91,10 @@ void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bo
     ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, 255.0), "%s", title.c_str());
     ImGui::ColorEdit3(ce_id.c_str(), (float*)vValue);
     ImGui::SameLine();
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
     if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);
@@ -108,10 +108,10 @@ void UIHelpers::addControlColor4(std::string const& title, glm::vec4* vValue, bo
     ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, vValue->a), "%s", title.c_str());
     ImGui::ColorEdit4(ce_id.c_str(), (float*)vValue, true);
     ImGui::SameLine();
-    ImGui::PushStyleColor(ImGuiCol_Button, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_ButtonActive, ImColor(0, 0, 0, 0));
-    ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0, 0));
+    ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
+    ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0, 0)));
     if (ImGui::Button(icon_id.c_str(), ImVec2(0, 0)))
         *bValue = !*bValue;
     ImGui::PopStyleColor(4);

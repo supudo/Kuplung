@@ -320,6 +320,9 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp">
       <Filter>kuplung\utilities\cpp-base64</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp">
+      <Filter>kuplung\utilities\export</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -702,6 +705,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h">
       <Filter>kuplung\utilities\cpp-base64</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp">
+      <Filter>kuplung\utilities\export</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

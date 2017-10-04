@@ -79,9 +79,9 @@ void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType Te
 	ImGui::SameLine();
 
 	ImGui::GetIO().MouseDrawCursor = true;
-	ImGui::PushStyleColor(ImGuiCol_Button, ImColor(89, 91, 94));
-	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImColor(119, 122, 124));
-	ImGui::PushStyleColor(ImGuiCol_Border, ImColor(0, 0, 0));
+	ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+	ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+	ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
 	ImGui::Button("###splitterOptions", ImVec2(8.0f, -1));
 	ImGui::PopStyleColor(3);
 	if (ImGui::IsItemActive()) {

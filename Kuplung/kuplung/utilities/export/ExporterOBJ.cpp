@@ -21,7 +21,7 @@ void ExporterOBJ::init(const std::function<void(float)>& doProgress) {
     this->funcProgress = doProgress;
     this->addSuffix = false;
 #ifdef _WIN32
-    this->nlDelimiter = "\r\n";
+    this->nlDelimiter = "\n";
 #elif defined macintosh // OS 9
     this->nlDelimiter = "\r";
 #else

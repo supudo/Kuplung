@@ -297,6 +297,8 @@ SET(SOURCE_FILES
     kuplung/utilities/consumption/Consumption.hpp
     kuplung/utilities/export/Exporter.cpp
     kuplung/utilities/export/Exporter.hpp
+    kuplung/utilities/export/ExporterAssimp.cpp
+    kuplung/utilities/export/ExporterAssimp.hpp
     kuplung/utilities/export/ExporterOBJ.cpp
     kuplung/utilities/export/ExporterOBJ.hpp
     kuplung/utilities/export/ExporterGLTF.cpp

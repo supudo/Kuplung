@@ -387,6 +387,7 @@ SOURCES += main.cpp \
     kuplung/utilities/parsers/gltf-parser/GLTFParser.cpp \
     kuplung/utilities/parsers/assimp-parser/AssimpParser.cpp \
     kuplung/utilities/export/Exporter.cpp \
+    kuplung/utilities/export/ExporterAssimp.cpp \
     kuplung/utilities/export/ExporterOBJ.cpp \
     kuplung/utilities/export/ExporterGLTF.cpp \
     kuplung/utilities/renderers/ImageRenderer.cpp \
@@ -517,6 +518,7 @@ HEADERS += \
     kuplung/utilities/gl/GLIncludes.h \
     kuplung/utilities/shapes/Shapes.h \
     kuplung/utilities/export/Exporter.hpp \
+    kuplung/utilities/export/ExporterAssimp.hpp \
     kuplung/utilities/export/ExporterOBJ.hpp \
     kuplung/utilities/export/ExporterGLTF.hpp \
     kuplung/utilities/renderers/ImageRenderer.hpp \
