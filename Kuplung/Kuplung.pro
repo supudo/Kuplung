@@ -181,7 +181,7 @@ win32|win64 {
 
     INCLUDEPATH += "D:\Libs\glm-0.9.8.4"
 
-    LIBS += -lopengl32
+    LIBS += -lopengl32 -lshell32
 
     LIBS += -L"D:/Libs/SDL2-2.0.5/lib/x64" -lSDL2main -lSDL2
     INCLUDEPATH += "D:\Libs\SDL2-2.0.5\include"
@@ -192,8 +192,8 @@ win32|win64 {
     LIBS += -L"D:/Libs/glew-2.0.0-win32/lib/Release/x64" -lGLEW32
     INCLUDEPATH += "D:/Libs/glew-2.0.0-win32/include"
 
-    LIBS += -L"D:\Libs\assimp\lib" -lassimp-vc140-mt
-    INCLUDEPATH += "D:\Libs\assimp\include"
+    LIBS += -L"D:\Libs\assimp\x64\lib" -lassimp-vc140-mt
+    INCLUDEPATH += "D:\Libs\assimp\x64\include"
 
     LIBS += -L"D:\Libs\protobuf\lib" -llibprotobufd
     INCLUDEPATH += "D:\Libs\protobuf\include"

@@ -237,7 +237,14 @@ void Kuplung::initFolders() {
 
 	TCHAR szPath[MAX_PATH];
 	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath))) {
-		std::string folderLocalAppData(szPath);
+        std::string folderLocalAppData("");
+#ifndef UNICODE
+		folderLocalAppData = szPath;
+#else
+		std::wstring folderLocalAppDataW = szPath;
+        folderLocalAppData = std::string(folderLocalAppDataW.begin(), folderLocalAppDataW.end());
+#endif
+        //std::string folderLocalAppData(szPath);
 		folderLocalAppData += "\\supudo.net";
 		if (!boost::filesystem::exists(folderLocalAppData))
 			boost::filesystem::create_directory(folderLocalAppData);
