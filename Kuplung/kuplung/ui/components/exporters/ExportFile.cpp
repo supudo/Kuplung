@@ -29,7 +29,24 @@ void ExportFile::init(int positionX, int positionY, int width, int height, const
     this->showNewFolderModel = false;
 }
 
-void ExportFile::draw(const char* title, int* dialogImportType, bool* p_opened) {
+void ExportFile::draw(ImportExportFormats* dialogExportType, bool* p_opened) {
+	std::string window_title;
+	switch (*dialogExportType) {
+		case ImportExportFormat_OBJ:
+			window_title = "Export Wavefront OBJ file";
+			break;
+		case ImportExportFormat_GLTF:
+			window_title = "Export glTF file";
+			break;
+		case ImportExportFormat_STL:
+			window_title = "Export STereoLithography STL file";
+			break;
+		case ImportExportFormat_PLY:
+			window_title = "Export Stanford PLY file";
+			break;
+	}
+	const char* title = window_title.c_str();
+
     if (this->width > 0 && this->height > 0)
         ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
     else
@@ -54,7 +71,7 @@ void ExportFile::draw(const char* title, int* dialogImportType, bool* p_opened) 
 		"STereoLithography STL",
 		"Stanford PLY"
 	};
-	ImGui::Combo("##982", dialogImportType, file_format_items, IM_ARRAYSIZE(file_format_items));
+	ImGui::Combo("##982", (int*)dialogExportType, file_format_items, IM_ARRAYSIZE(file_format_items));
 	ImGui::PopItemWidth();
 	ImGui::Separator();
 #ifdef _WIN32
@@ -156,7 +173,7 @@ void ExportFile::draw(const char* title, int* dialogImportType, bool* p_opened) 
         std::vector<std::string> setts;
         setts.push_back(std::to_string(this->Setting_Forward));
         setts.push_back(std::to_string(this->Setting_Up));
-        this->funcFileSave(file, setts, static_cast<ImportExportFormats>(*dialogImportType));
+        this->funcFileSave(file, setts, static_cast<ImportExportFormats>(*dialogExportType));
     }
     ImGui::SameLine(0, 10);
     if (ImGui::Button("New Folder"))

@@ -14,6 +14,11 @@
 #include <boost/filesystem/path.hpp>
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/cpp-base64/base64.h"
+#include <glm/gtx/string_cast.hpp>
+#include <boost/archive/iterators/base64_from_binary.hpp>
+#include <boost/archive/iterators/insert_linebreaks.hpp>
+#include <boost/archive/iterators/transform_width.hpp>
+#include <boost/archive/iterators/ostream_iterator.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -154,9 +159,11 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
 	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
 		const ModelFaceBase& face = **faceIterator;
 		MeshModel model = face.meshModel;
+		int base64_vertices_size = model.vertices.size() * sizeof(float);
+		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_vertices_size);
+		j[faceIterator - faces.begin()]["byteLength"] = base64_vertices_size;
+		j[faceIterator - faces.begin()]["uri"] = "data:application/octet-stream;base64," + base64_vertices;
 	}
-	j[0]["byteLength"] = 0;
-	j[0]["uri"] = bufferFile;
 	return j;
 }
 

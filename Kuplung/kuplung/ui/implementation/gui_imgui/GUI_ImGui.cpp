@@ -135,8 +135,8 @@ void GUI_ImGui::init(SDL_Window *window,
     this->showKuplungIDE = false;
     this->showCudaExamples = false;
 
-	this->dialogImportType = -1;
-	this->dialogExportType = -1;
+	this->dialogImportType = ImportExportFormat_UNDEFINED;
+	this->dialogExportType = ImportExportFormat_UNDEFINED;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -257,18 +257,14 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::Separator();
 
             if (ImGui::BeginMenu("   Import")) {
-				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showImporterFile)) {
-					this->dialogImportType = 0;
-				}
-				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showImporterFile)) {
-					this->dialogImportType = 1;
-				}
-				if (ImGui::MenuItem("STereoLithography (.STL)", NULL, &this->showImporterFile)) {
-					this->dialogImportType = 2;
-				}
-				if (ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showImporterFile)) {
-					this->dialogImportType = 3;
-				}
+				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showImporterFile))
+					this->dialogImportType = ImportExportFormat_OBJ;
+				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showImporterFile))
+					this->dialogImportType = ImportExportFormat_GLTF;
+				if (ImGui::MenuItem("STereoLithography (.STL)", NULL, &this->showImporterFile))
+					this->dialogImportType = ImportExportFormat_STL;
+				if (ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showImporterFile))
+					this->dialogImportType = ImportExportFormat_PLY;
                 ImGui::EndMenu();
             }
 
@@ -293,12 +289,14 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu("   Export")) {
-				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showExporterFile)) {
-					this->dialogExportType = 0;
-				}
-				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showExporterFile)) {
-					this->dialogExportType = 1;
-				}
+				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showExporterFile))
+					this->dialogExportType = ImportExportFormat_OBJ;
+				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showExporterFile))
+					this->dialogExportType = ImportExportFormat_GLTF;
+				if (ImGui::MenuItem("STereoLithography (.stl)", NULL, &this->showExporterFile))
+					this->dialogExportType = ImportExportFormat_STL;
+				if (ImGui::MenuItem("Stanford PLY (.ply)", NULL, &this->showExporterFile))
+					this->dialogExportType = ImportExportFormat_PLY;
                 ImGui::EndMenu();
             }
 
@@ -648,31 +646,11 @@ void GUI_ImGui::dialogFileSave(FileSaverOperation operation) {
 }
 
 void GUI_ImGui::dialogImporterBrowser() {
-	switch (this->dialogImportType) {
-		case ImportExportFormat_OBJ:
-			this->componentImportFile->draw("Import Wavefront OBJ file", &this->dialogImportType, &this->showImporterFile);
-			break;
-		case ImportExportFormat_STL:
-			this->componentImportFile->draw("Import STereoLithography STL file", &this->dialogImportType, &this->showImporterFile);
-			break;
-		case ImportExportFormat_PLY:
-			this->componentImportFile->draw("Import Stanford PLY file", &this->dialogImportType, &this->showImporterFile);
-			break;
-		case ImportExportFormat_GLTF:
-			this->componentImportFile->draw("Import glTF file", &this->dialogImportType, &this->showImporterFile);
-			break;
-	}
+	this->componentImportFile->draw(&this->dialogImportType, &this->showImporterFile);
 }
 
 void GUI_ImGui::dialogExporterBrowser() {
-	switch (this->dialogExportType) {
-		case ImportExportFormat_OBJ:
-			this->componentExportFile->draw("Export Wavefront OBJ file", &this->dialogExportType, &this->showExporterFile);
-			break;
-		case ImportExportFormat_GLTF:
-			this->componentExportFile->draw("Export glTF file", &this->dialogExportType, &this->showExporterFile);
-			break;
-	}
+	this->componentExportFile->draw(&this->dialogExportType, &this->showExporterFile);
 }
 
 void GUI_ImGui::dialogStyle() {

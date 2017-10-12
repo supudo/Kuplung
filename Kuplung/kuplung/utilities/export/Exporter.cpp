@@ -29,14 +29,16 @@ void Exporter::init(const std::function<void(float)>& doProgress) {
 }
 
 void Exporter::exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat) {
-	if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own) {
-		if (exportFormat == ImportExportFormat_OBJ)
-			this->exporterOBJ->exportToFile(file, faces, settings, managerObjects);
-		else if (exportFormat == ImportExportFormat_GLTF)
-			this->exporterGLTF->exportToFile(file, faces, settings, managerObjects);
+	if (exportFormat != ImportExportFormat_UNDEFINED) {
+		if (Settings::Instance()->ModelFileParser == Importer_ParserType_Own) {
+			if (exportFormat == ImportExportFormat_OBJ)
+				this->exporterOBJ->exportToFile(file, faces, settings, managerObjects);
+			else if (exportFormat == ImportExportFormat_GLTF)
+				this->exporterGLTF->exportToFile(file, faces, settings, managerObjects);
+		}
+		else
+			this->exporterAssimp->exportToFile(exportFormat, file, faces, settings, managerObjects);
 	}
-	else
-		this->exporterAssimp->exportToFile(file, faces, settings, managerObjects);
 }
 
 }}}

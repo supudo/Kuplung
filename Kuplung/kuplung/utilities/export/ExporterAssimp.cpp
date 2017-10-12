@@ -32,7 +32,7 @@ void ExporterAssimp::init(const std::function<void(float)>& doProgress) {
 	this->exporter = std::make_unique<Assimp::Exporter>();
 }
 
-void ExporterAssimp::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
+void ExporterAssimp::exportToFile(ImportExportFormats exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->exportFile = file;
     this->objSettings = settings;
 
@@ -132,10 +132,10 @@ void ExporterAssimp::exportToFile(const FBEntity& file, const std::vector<ModelF
 		counterMesh += 1;
 	}
 
-	this->saveFile(scene);
+	this->saveFile(exportFormat, scene);
 }
 
-void ExporterAssimp::saveFile(aiScene* scene) {
+void ExporterAssimp::saveFile(ImportExportFormats exportFormat, aiScene* scene) {
 	time_t t = time(0);
 	const struct tm * now = localtime(&t);
 
@@ -154,13 +154,32 @@ void ExporterAssimp::saveFile(aiScene* scene) {
 		fileSuffix.clear();
 	std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
 	std::string fileName = this->exportFile.title;
-	if (boost::algorithm::ends_with(fileName, ".obj"))
-		fileName = fileName.substr(0, fileName.size() - 4);
 	
-	std::string exportFilename = filePath + "/" + fileName + fileSuffix + ".obj";
-	std::string exportFormat = "obj";
+	std::string eFilename(filePath + "/"), eFormat;
+	switch (exportFormat) {
+		case ImportExportFormat_OBJ: {
+			eFilename += fileName + fileSuffix + ".obj";
+			eFormat = "obj";
+			break;
+		}
+		case ImportExportFormat_GLTF: {
+			eFilename += fileName + fileSuffix + ".gltf";
+			eFormat = "gltf2";
+			break;
+		}
+		case ImportExportFormat_PLY: {
+			eFilename += fileName + fileSuffix + ".ply";
+			eFormat = "ply";
+			break;
+		}
+		case ImportExportFormat_STL: {
+			eFilename += fileName + fileSuffix + ".stl";
+			eFormat = "stl";
+			break;
+		}
+	}
 
-	this->exporter->Export(scene, exportFormat.c_str(), exportFilename.c_str(), aiProcess_FlipUVs);
+	this->exporter->Export(scene, eFormat.c_str(), eFilename.c_str(), aiProcess_FlipUVs);
 }
 
 }}}

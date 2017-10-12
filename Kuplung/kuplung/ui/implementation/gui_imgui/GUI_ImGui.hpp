@@ -119,7 +119,7 @@ private:
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
-	int dialogImportType, dialogExportType;
+	ImportExportFormats dialogImportType, dialogExportType;
     void dialogImporterBrowser();
 	void dialogExporterBrowser();
     void dialogStyle();
