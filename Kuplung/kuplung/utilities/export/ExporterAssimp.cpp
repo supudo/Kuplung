@@ -32,7 +32,7 @@ void ExporterAssimp::init(const std::function<void(float)>& doProgress) {
 	this->exporter = std::make_unique<Assimp::Exporter>();
 }
 
-void ExporterAssimp::exportToFile(ImportExportFormats exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
+void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
     this->exportFile = file;
     this->objSettings = settings;
 
@@ -136,7 +136,7 @@ void ExporterAssimp::exportToFile(ImportExportFormats exportFormat, const FBEnti
 	this->saveFile(exportFormat, scene);
 }
 
-void ExporterAssimp::saveFile(ImportExportFormats exportFormat, aiScene* scene) {
+void ExporterAssimp::saveFile(int exportFormat, aiScene* scene) {
 	time_t t = time(0);
 	const struct tm * now = localtime(&t);
 
@@ -156,29 +156,8 @@ void ExporterAssimp::saveFile(ImportExportFormats exportFormat, aiScene* scene) 
 	std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
 	std::string fileName = this->exportFile.title;
 	
-	std::string eFilename(filePath + "/"), eFormat;
-	switch (exportFormat) {
-		case ImportExportFormat_OBJ: {
-			eFilename += fileName + fileSuffix + ".obj";
-			eFormat = "obj";
-			break;
-		}
-		case ImportExportFormat_GLTF: {
-			eFilename += fileName + fileSuffix + ".gltf";
-			eFormat = "gltf";
-			break;
-		}
-		case ImportExportFormat_PLY: {
-			eFilename += fileName + fileSuffix + ".ply";
-			eFormat = "ply";
-			break;
-		}
-		case ImportExportFormat_STL: {
-			eFilename += fileName + fileSuffix + ".stl";
-			eFormat = "stl";
-			break;
-		}
-	}
+	std::string eFilename = filePath + "/" + fileName + fileSuffix + Settings::Instance()->AssimpSupportedFormats_Export[exportFormat].fileExtension;
+	std::string eFormat = Settings::Instance()->AssimpSupportedFormats_Export[exportFormat].id;
 
 	this->exporter->Export(scene, eFormat.c_str(), eFilename.c_str(), aiProcess_FlipUVs);
 }

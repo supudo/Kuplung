@@ -74,6 +74,8 @@ public:
 	std::vector<std::string> hddDriveList;
 	int Setting_SelectedDriveIndex, Setting_CurrentDriveIndex;
 
+	std::vector<SupportedAssimpFormat> AssimpSupportedFormats_Import, AssimpSupportedFormats_Export;
+
     template <class T>
     inline void printClassAlignment(T *s) {
         std::cout << typeid(s).name() << " <-> " << std::alignment_of<T>() << '\n';

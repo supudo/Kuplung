@@ -19,12 +19,12 @@
 
 class ExportFile {
 public:
-    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& saveFile);
-    void draw(ImportExportFormats* dialogExportType, bool* p_opened = NULL);
+    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& saveFile);
+    void draw(ImportExportFormats* dialogExportType, int* dialogExportType_Assimp, bool* p_opened = NULL);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
-    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)> funcFileSave;
+    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)> funcFileSave;
 
     void drawFiles(const std::string& fPath);
     std::string convertToString(double num);
@@ -41,6 +41,7 @@ private:
     int positionX, positionY, width, height;
 
     int Setting_Forward, Setting_Up;
+	std::vector<const char*> assimpExporters;
 };
 
 #endif /* ExportFile_hpp */

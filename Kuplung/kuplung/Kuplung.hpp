@@ -46,7 +46,7 @@ private:
     void processRunningThreads();
     void addShape(const ShapeType type);
     void addLight(const LightSourceType type);
-    void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat);
+    void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
     void exportSceneFinished();
     void addTerrainModel();
     void addSpaceshipModel();
@@ -58,7 +58,7 @@ private:
     void guiClearScreen();
     void guiEditorshaderCompiled(std::string const& fileName);
     void guiModelDelete(const int selectedModel);
-    void guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat);
+    void guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
     void guiRenderScene(const FBEntity& file);
 
     // Screen dimension constants

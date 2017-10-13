@@ -23,7 +23,7 @@ public:
     ~Exporter();
     Exporter();
     void init(const std::function<void(float)>& doProgress);
-    void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat);
+    void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp);
 
 private:
 	std::unique_ptr<ExporterAssimp> exporterAssimp;

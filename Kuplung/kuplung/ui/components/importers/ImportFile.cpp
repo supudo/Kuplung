@@ -19,7 +19,7 @@
 
 namespace fs = boost::filesystem;
 
-void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processFile) {
+void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -30,6 +30,8 @@ void ImportFile::init(int positionX, int positionY, int width, int height, const
     this->Setting_Forward = 2;
     this->Setting_Up = 4;
 	this->currentFolder = Settings::Instance()->currentFolder;
+	for (size_t i = 0; i < Settings::Instance()->AssimpSupportedFormats_Import.size(); i++)
+		this->assimpImporters.push_back(Settings::Instance()->AssimpSupportedFormats_Import[i].description.c_str());
 }
 
 static char *convert(const std::string & s)
@@ -39,20 +41,20 @@ static char *convert(const std::string & s)
 	return pc;
 }
 
-void ImportFile::draw(ImportExportFormats* dialogImportType, bool* p_opened) {
-	std::string window_title = "";
+void ImportFile::draw(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, bool* p_opened) {
+	std::string window_title = "Import ";
 	switch (*dialogImportType) {
 		case ImportExportFormat_OBJ:
-			window_title = "Import Wavefront OBJ file";
+			window_title = "Wavefront OBJ file";
 			break;
 		case ImportExportFormat_STL:
-			window_title = "Import STereoLithography STL file";
+			window_title = "STereoLithography STL file";
 			break;
 		case ImportExportFormat_PLY:
-			window_title = "Import Stanford PLY file";
+			window_title = "Stanford PLY file";
 			break;
 		case ImportExportFormat_GLTF:
-			window_title = "Import glTF file";
+			window_title = "glTF file";
 			break;
 	}
 	const char* title = window_title.c_str();
@@ -74,7 +76,7 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, bool* p_opened) {
 	ImGui::TextColored(ImVec4(1, 0, 0, 1), "Options");
 	ImGui::Separator();
 	ImGui::PushItemWidth(-1.0f);
-	ImGui::Text("File Format");
+	ImGui::Text("Kuplung File Format");
 	const char* file_format_items[] = {
 		"Wavefront OBJ",
 		"glTF",
@@ -82,6 +84,8 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, bool* p_opened) {
 		"Stanford PLY"
 	};
 	ImGui::Combo("##982", (int*)dialogImportType, file_format_items, IM_ARRAYSIZE(file_format_items));
+	ImGui::Text("Assimp File Format");
+	ImGui::Combo("##983", (int*)dialogImportType_Assimp, &this->assimpImporters[0], int(this->assimpImporters.size()));
 	ImGui::PopItemWidth();
 	ImGui::Separator();
 #ifdef _WIN32
@@ -177,7 +181,7 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, bool* p_opened) {
 	ImGui::NextColumn();
 	ImGui::Separator();
 
-	this->drawFiles(dialogImportType, this->currentFolder);
+	this->drawFiles(dialogImportType, dialogImportType_Assimp, this->currentFolder);
 
 	ImGui::Columns(1);
 
@@ -191,7 +195,7 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, bool* p_opened) {
 
 #pragma mark - Private
 
-void ImportFile::drawFiles(ImportExportFormats* dialogImportType, const std::string& fPath) {
+void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, const std::string& fPath) {
 	std::string cFolder = fPath;
 #ifdef _WIN32
 	if (Settings::Instance()->Setting_CurrentDriveIndex != Settings::Instance()->Setting_SelectedDriveIndex) {
@@ -211,7 +215,7 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, const std::str
                 std::vector<std::string> setts;
                 setts.push_back(std::to_string(this->Setting_Forward));
                 setts.push_back(std::to_string(this->Setting_Up));
-                this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType));
+                this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType), *dialogImportType_Assimp);
 
 #ifdef _WIN32
         std::string folderDelimiter = "\\";
@@ -227,7 +231,7 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, const std::str
             }
             else {
 				try {
-					this->drawFiles(dialogImportType, entity.path);
+					this->drawFiles(dialogImportType, dialogImportType_Assimp, entity.path);
 					this->currentFolder = entity.path;
 				}
 				catch (const fs::filesystem_error&) { }
@@ -261,23 +265,29 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 		for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
 			try {
 				fs::file_status fileStatus = iteratorFolder->status();
-				switch (*dialogImportType) {
-					case ImportExportFormat_OBJ: {
-						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".obj" });
-						break;
+				if (*dialogImportType != ImportExportFormat_UNDEFINED) {
+					switch (*dialogImportType) {
+						case ImportExportFormat_OBJ: {
+							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".obj" });
+							break;
+						}
+						case ImportExportFormat_GLTF: {
+							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
+							break;
+						}
+						case ImportExportFormat_PLY: {
+							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".ply" });
+							break;
+						}
+						case ImportExportFormat_STL: {
+							isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".stl" });
+							break;
+						}
 					}
-					case ImportExportFormat_GLTF: {
-						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".gltf" });
-						break;
-					}
-					case ImportExportFormat_PLY: {
-						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".ply" });
-						break;
-					}
-					case ImportExportFormat_STL: {
-						isAllowedFileExtension = Settings::Instance()->isAllowedFileExtension(iteratorFolder->path().extension().string(), { ".stl" });
-						break;
-					}
+				}
+				else {
+					// TODO(sergey): proper check for allowed files
+					isAllowedFileExtension = true;
 				}
 				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
 					FBEntity entity;
@@ -296,10 +306,8 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 
 					if (!entity.isFile)
 						entity.size.clear();
-					else {
-						//std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
+					else
 						entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
-					}
 
 					std::time_t modifiedDate = fs::last_write_time(iteratorFolder->path());
 					std::tm* modifiedDateLocal = std::localtime(&modifiedDate);

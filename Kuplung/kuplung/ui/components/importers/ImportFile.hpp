@@ -19,14 +19,14 @@
 
 class ImportFile {
 public:
-    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processFile);
-    void draw(ImportExportFormats* dialogImportType, bool* p_opened = NULL);
+    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processFile);
+    void draw(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, bool* p_opened = NULL);
 
 private:
     std::map<std::string, FBEntity> getFolderContents(ImportExportFormats* dialogImportType, std::string const& filePath);
-    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)> processFile;
+    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)> processFile;
 
-    void drawFiles(ImportExportFormats* dialogImportType, const std::string& fPath);
+    void drawFiles(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, const std::string& fPath);
     std::string convertToString(double num);
     std::string convertSize(size_t size);
     double roundOff(double n);
@@ -38,6 +38,7 @@ private:
     int Setting_Forward, Setting_Up;
 
 	std::string currentFolder;
+	std::vector<const char*> assimpImporters;
 };
 
 #endif /* ImportFile_hpp */

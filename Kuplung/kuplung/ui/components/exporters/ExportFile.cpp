@@ -17,7 +17,7 @@
 
 namespace fs = boost::filesystem;
 
-void ExportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& saveFile) {
+void ExportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& saveFile) {
     this->positionX = positionX;
     this->positionY = positionY;
     this->width = width;
@@ -27,22 +27,24 @@ void ExportFile::init(int positionX, int positionY, int width, int height, const
     this->panelWidth_FileOptionsMin = 200.0f;
     this->currentFolder = Settings::Instance()->currentFolder;
     this->showNewFolderModel = false;
+	for (size_t i = 0; i < Settings::Instance()->AssimpSupportedFormats_Export.size(); i++)
+		this->assimpExporters.push_back(Settings::Instance()->AssimpSupportedFormats_Export[i].description.c_str());
 }
 
-void ExportFile::draw(ImportExportFormats* dialogExportType, bool* p_opened) {
-	std::string window_title;
+void ExportFile::draw(ImportExportFormats* dialogExportType, int* dialogExportType_Assimp, bool* p_opened) {
+	std::string window_title = "Export ";
 	switch (*dialogExportType) {
 		case ImportExportFormat_OBJ:
-			window_title = "Export Wavefront OBJ file";
+			window_title = "Wavefront OBJ file";
 			break;
 		case ImportExportFormat_GLTF:
-			window_title = "Export glTF file";
+			window_title = "glTF file";
 			break;
 		case ImportExportFormat_STL:
-			window_title = "Export STereoLithography STL file";
+			window_title = "STereoLithography STL file";
 			break;
 		case ImportExportFormat_PLY:
-			window_title = "Export Stanford PLY file";
+			window_title = "Stanford PLY file";
 			break;
 	}
 	const char* title = window_title.c_str();
@@ -72,6 +74,8 @@ void ExportFile::draw(ImportExportFormats* dialogExportType, bool* p_opened) {
 		"Stanford PLY"
 	};
 	ImGui::Combo("##982", (int*)dialogExportType, file_format_items, IM_ARRAYSIZE(file_format_items));
+	ImGui::Text("Assimp File Format");
+	ImGui::Combo("##983", (int*)dialogExportType_Assimp, &this->assimpExporters[0], int(this->assimpExporters.size()));
 	ImGui::PopItemWidth();
 	ImGui::Separator();
 #ifdef _WIN32
@@ -173,7 +177,7 @@ void ExportFile::draw(ImportExportFormats* dialogExportType, bool* p_opened) {
         std::vector<std::string> setts;
         setts.push_back(std::to_string(this->Setting_Forward));
         setts.push_back(std::to_string(this->Setting_Up));
-        this->funcFileSave(file, setts, static_cast<ImportExportFormats>(*dialogExportType));
+        this->funcFileSave(file, setts, static_cast<ImportExportFormats>(*dialogExportType), *dialogExportType_Assimp);
     }
     ImGui::SameLine(0, 10);
     if (ImGui::Button("New Folder"))

@@ -52,4 +52,8 @@ typedef enum ImportExportFormats {
 	ImportExportFormat_PLY = 3
 } ImportExportFormats;
 
+struct SupportedAssimpFormat {
+	std::string id, description, fileExtension;
+};
+
 #endif /* SettingsStructs_h */

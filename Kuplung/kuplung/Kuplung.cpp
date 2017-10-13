@@ -171,7 +171,7 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addShape, this, std::placeholders::_1),
                                           std::bind(&Kuplung::addLight, this, std::placeholders::_1),
-                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3),
+                                          std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),
                                           std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
                                           std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1),
                                           std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
@@ -634,15 +634,15 @@ void Kuplung::processImportFileAsync(const FBEntity& file, const std::vector<std
     this->objParserThreadFinished = true;
 }
 
-void Kuplung::guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat) {
+void Kuplung::guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssinc) {
     this->managerUI->showExporting();
     this->exporterThreadFinished = false;
-    std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces, settings, exportFormat);
+    std::thread exporterThread(&Kuplung::exportSceneAsync, this, file, this->meshModelFaces, settings, exportFormat, exportFormatAssinc);
     exporterThread.detach();
 }
 
-void Kuplung::exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat) {
-    this->managerExporter->exportScene(file, meshModelFaces, settings, this->managerObjects, exportFormat);
+void Kuplung::exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssinc) {
+    this->managerExporter->exportScene(file, meshModelFaces, settings, this->managerObjects, exportFormat, exportFormatAssinc);
     this->exporterThreadFinished = true;
 }
 

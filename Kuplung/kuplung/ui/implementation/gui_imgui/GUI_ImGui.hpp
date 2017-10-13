@@ -49,12 +49,12 @@ public:
     ~GUI_ImGui();
     void init(SDL_Window *window,
 			  const std::function<void()>& quitApp,
-			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processImportedFile,
+			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processImportedFile,
 			  const std::function<void()>& newScene,
 			  const std::function<void(std::string)>& fileShaderCompile,
 			  const std::function<void(ShapeType)>& addShape,
 			  const std::function<void(LightSourceType)>& addLight,
-			  const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)>& exportScene,
+			  const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
 			  const std::function<void(int)>& deleteModel,
 			  const std::function<void(FBEntity file)>& renderScene,
 			  const std::function<void(FBEntity file)>& saveScene,
@@ -102,24 +102,25 @@ public:
 private:
     SDL_Window *sdlWindow;
     std::function<void()> funcQuitApp;
-    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)> funcProcessImportedFile;
+    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)> funcProcessImportedFile;
     std::function<void()> funcNewScene;
     std::function<void(std::string)> funcFileShaderCompile;
     std::function<void(ShapeType)> funcAddShape;
     std::function<void(LightSourceType)> funcAddLight;
-    std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)> funcProcessExportedFile;
+    std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)> funcProcessExportedFile;
     std::function<void(int)> funcDeleteModel;
     std::function<void(FBEntity file)> funcRenderScene;
     std::function<void(FBEntity file)> funcSaveScene;
     std::function<void(FBEntity file)> funcOpenScene;
 
     void dialogFileBrowserProcessFile(FBEntity const& file);
-    void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat);
-	void dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat);
+    void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats importFormat, int importFormatAssimp);
+	void dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat, int exportFormatAssimp);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
 	ImportExportFormats dialogImportType, dialogExportType;
+	int dialogImportType_Assimp, dialogExportType_Assimp;
     void dialogImporterBrowser();
 	void dialogExporterBrowser();
     void dialogStyle();

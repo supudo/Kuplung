@@ -20,6 +20,10 @@
 #endif
 #include <stdarg.h>
 #include <memory>
+#include <assimp/Importer.hpp>
+#include <assimp/Exporter.hpp>
+#include <assimp/importerdesc.h>
+#include <boost/algorithm/string.hpp>
 
 Settings* Settings::m_pInstance = NULL;
 
@@ -138,6 +142,40 @@ void Settings::initSettings(const std::string& iniFolder) {
 #endif
 
 	m_pInstance->ApplicationConfigurationFolder = iniFolder;
+
+	m_pInstance->AssimpSupportedFormats_Import.empty();
+	std::unique_ptr<Assimp::Importer> aImporter = std::make_unique<Assimp::Importer>();
+	size_t aImporter_num = aImporter->GetImporterCount();
+	const aiImporterDesc *aiImporterDesc;
+	std::string delimiter(" ");
+	for (size_t i = 0; i < aImporter_num; i++) {
+		aiImporterDesc = aImporter->GetImporterInfo(i);
+		std::string textensions(aiImporterDesc->mFileExtensions);
+		std::transform(textensions.begin(), textensions.end(), textensions.begin(), ::toupper);
+		std::vector<std::string> elems;
+		boost::split(elems, textensions, boost::is_any_of(" "));
+		std::string extensions("." + elems[0]);
+		for (size_t j = 1; j < elems.size(); j++) {
+			extensions += ", ." + elems[j];
+		}
+
+		SupportedAssimpFormat af = { "", aiImporterDesc->mName, extensions };
+		m_pInstance->AssimpSupportedFormats_Import.push_back(af);
+	}
+	aImporter.release();
+
+	m_pInstance->AssimpSupportedFormats_Export.empty();
+	std::unique_ptr<Assimp::Exporter> aExporter = std::make_unique<Assimp::Exporter>();
+	size_t aExporter_num = aExporter->GetExportFormatCount();
+	const aiExportFormatDesc* aiExporterDesc;
+	for (size_t i = 0; i < aExporter_num; i++) {
+		aiExporterDesc = aExporter->GetExportFormatDescription(i);
+		std::string fe = std::string(aiExporterDesc->fileExtension);
+		std::transform(fe.begin(), fe.end(), fe.begin(), ::toupper);
+		SupportedAssimpFormat af = { aiExporterDesc->id, aiExporterDesc->description, "." + fe };
+		m_pInstance->AssimpSupportedFormats_Export.push_back(af);
+	}
+	aExporter.release();
 }
 
 void Settings::reuseLogFunc(const std::string& msg) {

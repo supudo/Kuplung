@@ -74,12 +74,12 @@ GUI_ImGui::~GUI_ImGui() {
 
 void GUI_ImGui::init(SDL_Window *window,
                      const std::function<void()>& quitApp,
-                     const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat)>& processImportedFile,
+                     const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& processImportedFile,
                      const std::function<void()>& newScene,
                      const std::function<void(std::string)>& fileShaderCompile,
                      const std::function<void(ShapeType)>& addShape,
                      const std::function<void(LightSourceType)>& addLight,
-                     const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat)>& exportScene,
+                     const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
                      const std::function<void(int)>& deleteModel,
                      const std::function<void(FBEntity file)>& renderScene,
                      const std::function<void(FBEntity file)>& saveScene,
@@ -137,6 +137,8 @@ void GUI_ImGui::init(SDL_Window *window,
 
 	this->dialogImportType = ImportExportFormat_UNDEFINED;
 	this->dialogExportType = ImportExportFormat_UNDEFINED;
+	this->dialogImportType_Assimp = -1;
+	this->dialogExportType_Assimp = -1;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
@@ -152,10 +154,10 @@ void GUI_ImGui::init(SDL_Window *window,
     this->componentFileBrowser->init(Settings::Instance()->logFileBrowser, posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogFileBrowserProcessFile, this, std::placeholders::_1));
 
     this->componentImportFile = std::make_unique<ImportFile>();
-    this->componentImportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+    this->componentImportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 
 	this->componentExportFile = std::make_unique<ExportFile>();
-	this->componentExportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3));
+	this->componentExportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 	
     this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
@@ -265,6 +267,15 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 					this->dialogImportType = ImportExportFormat_STL;
 				if (ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showImporterFile))
 					this->dialogImportType = ImportExportFormat_PLY;
+				if (ImGui::BeginMenu("Assimp...")) {
+					for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Import.size(); a++) {
+						SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Import[a];
+						std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
+						if (ImGui::MenuItem(f.c_str(), NULL, &this->showImporterFile))
+							this->dialogImportType_Assimp = static_cast<int>(a);
+					}
+					ImGui::EndMenu();
+				}
                 ImGui::EndMenu();
             }
 
@@ -276,7 +287,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
                         FBEntity file = this->recentFilesImported[i];
                         if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
                             if (boost::filesystem::exists(file.path))
-                                this->funcProcessImportedFile(file, std::vector<std::string>(), static_cast<ImportExportFormats>(this->dialogImportType));
+                                this->funcProcessImportedFile(file, std::vector<std::string>(), static_cast<ImportExportFormats>(this->dialogImportType), dialogImportType_Assimp);
                             else
                                 this->showRecentFileImportedDoesntExists = true;
                         }
@@ -297,6 +308,15 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
 					this->dialogExportType = ImportExportFormat_STL;
 				if (ImGui::MenuItem("Stanford PLY (.ply)", NULL, &this->showExporterFile))
 					this->dialogExportType = ImportExportFormat_PLY;
+				if (ImGui::BeginMenu("Assimp...")) {
+					for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Export.size(); a++) {
+						SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Export[a];
+						std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
+						if (ImGui::MenuItem(f.c_str(), NULL, &this->showExporterFile))
+							this->dialogExportType_Assimp = static_cast<int>(a);
+					}
+					ImGui::EndMenu();
+				}
                 ImGui::EndMenu();
             }
 
@@ -646,11 +666,11 @@ void GUI_ImGui::dialogFileSave(FileSaverOperation operation) {
 }
 
 void GUI_ImGui::dialogImporterBrowser() {
-	this->componentImportFile->draw(&this->dialogImportType, &this->showImporterFile);
+	this->componentImportFile->draw(&this->dialogImportType, &this->dialogImportType_Assimp, &this->showImporterFile);
 }
 
 void GUI_ImGui::dialogExporterBrowser() {
-	this->componentExportFile->draw(&this->dialogExportType, &this->showExporterFile);
+	this->componentExportFile->draw(&this->dialogExportType, &this->dialogExportType_Assimp, &this->showExporterFile);
 }
 
 void GUI_ImGui::dialogStyle() {
@@ -767,19 +787,19 @@ void GUI_ImGui::dialogShadertoyMessageWindow() {
 void GUI_ImGui::dialogFileBrowserProcessFile(FBEntity const& file) {
     if (this->showDialogStyle)
         this->windowStyle->load(file.path);
-    this->funcProcessImportedFile(file, std::vector<std::string>(), ImportExportFormat_OBJ);
+    this->funcProcessImportedFile(file, std::vector<std::string>(), ImportExportFormat_OBJ, -1);
     this->showImporterFile = false;
     this->showDialogFile = false;
     this->showDialogStyle = false;
 }
 
-void GUI_ImGui::dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat) {
-    this->funcProcessImportedFile(file, settings, exportFormat);
+void GUI_ImGui::dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats importFormat, int importFormatAssimp) {
+    this->funcProcessImportedFile(file, settings, importFormat, importFormatAssimp);
     this->showImporterFile = false;
 }
 
-void GUI_ImGui::dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat) {
-    this->funcProcessExportedFile(file, settings, exportFormat);
+void GUI_ImGui::dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat, int exportFormatAssimp) {
+    this->funcProcessExportedFile(file, settings, exportFormat, exportFormatAssimp);
     this->showExporterFile = false;
 }
 

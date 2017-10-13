@@ -25,14 +25,14 @@ class ExporterAssimp {
 public:
 	~ExporterAssimp();
 	void init(const std::function<void(float)>& doProgress);
-	void exportToFile(ImportExportFormats exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects);
+	void exportToFile(int exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects);
 
 private:
 	std::function<void(float)> funcProgress;
 	std::unique_ptr<ParserUtils> parserUtils;
 	std::unique_ptr<Assimp::Exporter> exporter;
 
-	void saveFile(ImportExportFormats exportFormat, aiScene* scene);
+	void saveFile(int exportFormat, aiScene* scene);
 
 	FBEntity exportFile;
 	std::string nlDelimiter;
