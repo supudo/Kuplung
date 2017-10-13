@@ -101,6 +101,7 @@ void ExporterAssimp::exportToFile(ImportExportFormats exportFormat, const FBEnti
 		pMesh->mVertices = new aiVector3D[vVertices.size()];
 		pMesh->mNormals = new aiVector3D[vVertices.size()];
 		pMesh->mNumVertices = vVertices.size();
+		pMesh->mPrimitiveTypes = aiPrimitiveType_TRIANGLE;
 
 		if (model.countTextureCoordinates > 0) {
 			pMesh->mTextureCoords[0] = new aiVector3D[vVertices.size()];
@@ -164,7 +165,7 @@ void ExporterAssimp::saveFile(ImportExportFormats exportFormat, aiScene* scene) 
 		}
 		case ImportExportFormat_GLTF: {
 			eFilename += fileName + fileSuffix + ".gltf";
-			eFormat = "gltf2";
+			eFormat = "gltf";
 			break;
 		}
 		case ImportExportFormat_PLY: {
