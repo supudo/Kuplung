@@ -18,13 +18,25 @@
 // @@protoc_insertion_point(includes)
 
 namespace KuplungApp {
-class GUISettingsDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<GUISettings> {
+class GUISettingsDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<GUISettings>
+     _instance;
 } _GUISettings_default_instance_;
-class CameraSettingsDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<CameraSettings> {
+class CameraSettingsDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<CameraSettings>
+     _instance;
 } _CameraSettings_default_instance_;
-class GridSettingsDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<GridSettings> {
+class GridSettingsDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<GridSettings>
+     _instance;
 } _GridSettings_default_instance_;
-class LightObjectDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<LightObject> {
+class LightObjectDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<LightObject>
+     _instance;
 } _LightObject_default_instance_;
 
 namespace protobuf_KuplungAppSettings_2eproto {
@@ -37,23 +49,23 @@ namespace {
 }  // namespace
 
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTableField
-    const TableStruct::entries[] = {
+    const TableStruct::entries[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   {0, 0, 0, ::google::protobuf::internal::kInvalidMask, 0, 0},
 };
 
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
-    const TableStruct::aux[] = {
+    const TableStruct::aux[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   ::google::protobuf::internal::AuxillaryParseTableField(),
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
-    TableStruct::schema[] = {
-  { NULL, NULL, 0, -1, -1, false },
-  { NULL, NULL, 0, -1, -1, false },
-  { NULL, NULL, 0, -1, -1, false },
-  { NULL, NULL, 0, -1, -1, false },
+    TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
 };
 
-const ::google::protobuf::uint32 TableStruct::offsets[] = {
+const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _has_bits_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GUISettings, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -273,8 +285,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   23,
   24,
 };
-
-static const ::google::protobuf::internal::MigrationSchema schemas[] = {
+static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 49, sizeof(GUISettings)},
   { 93, 111, sizeof(CameraSettings)},
   { 124, 142, sizeof(GridSettings)},
@@ -310,134 +321,126 @@ void protobuf_RegisterTypes(const ::std::string&) {
 }
 
 }  // namespace
-
-void TableStruct::Shutdown() {
-  _GUISettings_default_instance_.Shutdown();
-  delete file_level_metadata[0].reflection;
-  _CameraSettings_default_instance_.Shutdown();
-  delete file_level_metadata[1].reflection;
-  _GridSettings_default_instance_.Shutdown();
-  delete file_level_metadata[2].reflection;
-  _LightObject_default_instance_.Shutdown();
-  delete file_level_metadata[3].reflection;
-}
-
 void TableStruct::InitDefaultsImpl() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   ::google::protobuf::internal::InitProtobufDefaults();
   ::KuplungApp::protobuf_KuplungDefinitions_2eproto::InitDefaults();
-  _GUISettings_default_instance_.DefaultConstruct();
-  _CameraSettings_default_instance_.DefaultConstruct();
-  _GridSettings_default_instance_.DefaultConstruct();
-  _LightObject_default_instance_.DefaultConstruct();
-  _GUISettings_default_instance_.get_mutable()->setting_outlinecolor_ = const_cast< ::KuplungApp::Vec4*>(
+  _GUISettings_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_GUISettings_default_instance_);_CameraSettings_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_CameraSettings_default_instance_);_GridSettings_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_GridSettings_default_instance_);_LightObject_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_LightObject_default_instance_);_GUISettings_default_instance_._instance.get_mutable()->setting_outlinecolor_ = const_cast< ::KuplungApp::Vec4*>(
       ::KuplungApp::Vec4::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->setting_uiambientlight_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->setting_uiambientlight_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->solidlight_direction_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->solidlight_direction_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->solidlight_materialcolor_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->solidlight_materialcolor_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->solidlight_ambient_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->solidlight_ambient_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->solidlight_diffuse_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->solidlight_diffuse_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->solidlight_specular_ = const_cast< ::KuplungApp::Vec3*>(
+  _GUISettings_default_instance_._instance.get_mutable()->solidlight_specular_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->camera_ = const_cast< ::KuplungApp::CameraSettings*>(
+  _GUISettings_default_instance_._instance.get_mutable()->camera_ = const_cast< ::KuplungApp::CameraSettings*>(
       ::KuplungApp::CameraSettings::internal_default_instance());
-  _GUISettings_default_instance_.get_mutable()->grid_ = const_cast< ::KuplungApp::GridSettings*>(
+  _GUISettings_default_instance_._instance.get_mutable()->grid_ = const_cast< ::KuplungApp::GridSettings*>(
       ::KuplungApp::GridSettings::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->cameraposition_ = const_cast< ::KuplungApp::Vec3*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->cameraposition_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->view_eye_ = const_cast< ::KuplungApp::Vec3*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->view_eye_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->view_center_ = const_cast< ::KuplungApp::Vec3*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->view_center_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->view_up_ = const_cast< ::KuplungApp::Vec3*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->view_up_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatecenterx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatecenterx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatecentery_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatecentery_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _CameraSettings_default_instance_.get_mutable()->rotatecenterz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _CameraSettings_default_instance_._instance.get_mutable()->rotatecenterz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _GridSettings_default_instance_.get_mutable()->scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _GridSettings_default_instance_._instance.get_mutable()->scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->positionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->positiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->positionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->directionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->directionx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->directiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->directiony_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->directionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->directionz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->scalex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->scaley_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->scalez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatex_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatey_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatez_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatecenterx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatecenterx_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatecentery_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatecentery_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->rotatecenterz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->rotatecenterz_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->ambient_ = const_cast< ::KuplungApp::MaterialColor*>(
+  _LightObject_default_instance_._instance.get_mutable()->ambient_ = const_cast< ::KuplungApp::MaterialColor*>(
       ::KuplungApp::MaterialColor::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->diffuse_ = const_cast< ::KuplungApp::MaterialColor*>(
+  _LightObject_default_instance_._instance.get_mutable()->diffuse_ = const_cast< ::KuplungApp::MaterialColor*>(
       ::KuplungApp::MaterialColor::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->specular_ = const_cast< ::KuplungApp::MaterialColor*>(
+  _LightObject_default_instance_._instance.get_mutable()->specular_ = const_cast< ::KuplungApp::MaterialColor*>(
       ::KuplungApp::MaterialColor::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->lcutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->lcutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->loutercutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->loutercutoff_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->lconstant_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->lconstant_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->llinear_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->llinear_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
-  _LightObject_default_instance_.get_mutable()->lquadratic_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
+  _LightObject_default_instance_._instance.get_mutable()->lquadratic_ = const_cast< ::KuplungApp::ObjectCoordinate*>(
       ::KuplungApp::ObjectCoordinate::internal_default_instance());
 }
 
@@ -445,9 +448,10 @@ void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
 }
+namespace {
 void AddDescriptorsImpl() {
   InitDefaults();
-  static const char descriptor[] = {
+  static const char descriptor[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
       "\n\030KuplungAppSettings.proto\022\nKuplungApp\032\030"
       "KuplungDefinitions.proto\"\272\014\n\013GUISettings"
       "\022\023\n\013Setting_FOV\030\001 \002(\002\022 \n\030Setting_Outline"
@@ -556,14 +560,14 @@ void AddDescriptorsImpl() {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "KuplungAppSettings.proto", &protobuf_RegisterTypes);
   ::KuplungApp::protobuf_KuplungDefinitions_2eproto::AddDescriptors();
-  ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
+} // anonymous namespace
 
 void AddDescriptors() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
   ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
 }
-// Force AddDescriptors() to be called at static initialization time.
+// Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
   StaticDescriptorInitializer() {
     AddDescriptors();
@@ -687,15 +691,16 @@ GUISettings::GUISettings(const GUISettings& from)
     grid_ = NULL;
   }
   ::memcpy(&setting_fov_, &from.setting_fov_,
-    reinterpret_cast<char*>(&setting_terrainheight_) -
-    reinterpret_cast<char*>(&setting_fov_) + sizeof(setting_terrainheight_));
+    static_cast<size_t>(reinterpret_cast<char*>(&setting_terrainheight_) -
+    reinterpret_cast<char*>(&setting_fov_)) + sizeof(setting_terrainheight_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.GUISettings)
 }
 
 void GUISettings::SharedCtor() {
   heightmapimage_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&setting_outlinecolor_, 0, reinterpret_cast<char*>(&setting_terrainheight_) -
-    reinterpret_cast<char*>(&setting_outlinecolor_) + sizeof(setting_terrainheight_));
+  ::memset(&setting_outlinecolor_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&setting_terrainheight_) -
+      reinterpret_cast<char*>(&setting_outlinecolor_)) + sizeof(setting_terrainheight_));
   _cached_size_ = 0;
 }
 
@@ -706,33 +711,15 @@ GUISettings::~GUISettings() {
 
 void GUISettings::SharedDtor() {
   heightmapimage_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) {
-    delete setting_outlinecolor_;
-  }
-  if (this != internal_default_instance()) {
-    delete setting_uiambientlight_;
-  }
-  if (this != internal_default_instance()) {
-    delete solidlight_direction_;
-  }
-  if (this != internal_default_instance()) {
-    delete solidlight_materialcolor_;
-  }
-  if (this != internal_default_instance()) {
-    delete solidlight_ambient_;
-  }
-  if (this != internal_default_instance()) {
-    delete solidlight_diffuse_;
-  }
-  if (this != internal_default_instance()) {
-    delete solidlight_specular_;
-  }
-  if (this != internal_default_instance()) {
-    delete camera_;
-  }
-  if (this != internal_default_instance()) {
-    delete grid_;
-  }
+  if (this != internal_default_instance()) delete setting_outlinecolor_;
+  if (this != internal_default_instance()) delete setting_uiambientlight_;
+  if (this != internal_default_instance()) delete solidlight_direction_;
+  if (this != internal_default_instance()) delete solidlight_materialcolor_;
+  if (this != internal_default_instance()) delete solidlight_ambient_;
+  if (this != internal_default_instance()) delete solidlight_diffuse_;
+  if (this != internal_default_instance()) delete solidlight_specular_;
+  if (this != internal_default_instance()) delete camera_;
+  if (this != internal_default_instance()) delete grid_;
 }
 
 void GUISettings::SetCachedSize(int size) const {
@@ -760,70 +747,81 @@ GUISettings* GUISettings::New(::google::protobuf::Arena* arena) const {
 
 void GUISettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.GUISettings)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
   lights_.Clear();
-  if (_has_bits_[0 / 32] & 255u) {
-    if (has_heightmapimage()) {
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       GOOGLE_DCHECK(!heightmapimage_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
       (*heightmapimage_.UnsafeRawStringPointer())->clear();
     }
-    if (has_setting_outlinecolor()) {
+    if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(setting_outlinecolor_ != NULL);
       setting_outlinecolor_->::KuplungApp::Vec4::Clear();
     }
-    if (has_setting_uiambientlight()) {
+    if (cached_has_bits & 0x00000004u) {
       GOOGLE_DCHECK(setting_uiambientlight_ != NULL);
       setting_uiambientlight_->::KuplungApp::Vec3::Clear();
     }
-    if (has_solidlight_direction()) {
+    if (cached_has_bits & 0x00000008u) {
       GOOGLE_DCHECK(solidlight_direction_ != NULL);
       solidlight_direction_->::KuplungApp::Vec3::Clear();
     }
-    if (has_solidlight_materialcolor()) {
+    if (cached_has_bits & 0x00000010u) {
       GOOGLE_DCHECK(solidlight_materialcolor_ != NULL);
       solidlight_materialcolor_->::KuplungApp::Vec3::Clear();
     }
-    if (has_solidlight_ambient()) {
+    if (cached_has_bits & 0x00000020u) {
       GOOGLE_DCHECK(solidlight_ambient_ != NULL);
       solidlight_ambient_->::KuplungApp::Vec3::Clear();
     }
-    if (has_solidlight_diffuse()) {
+    if (cached_has_bits & 0x00000040u) {
       GOOGLE_DCHECK(solidlight_diffuse_ != NULL);
       solidlight_diffuse_->::KuplungApp::Vec3::Clear();
     }
-    if (has_solidlight_specular()) {
+    if (cached_has_bits & 0x00000080u) {
       GOOGLE_DCHECK(solidlight_specular_ != NULL);
       solidlight_specular_->::KuplungApp::Vec3::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & 768u) {
-    if (has_camera()) {
+  if (cached_has_bits & 768u) {
+    if (cached_has_bits & 0x00000100u) {
       GOOGLE_DCHECK(camera_ != NULL);
       camera_->::KuplungApp::CameraSettings::Clear();
     }
-    if (has_grid()) {
+    if (cached_has_bits & 0x00000200u) {
       GOOGLE_DCHECK(grid_ != NULL);
       grid_->::KuplungApp::GridSettings::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & 64512u) {
-    ::memset(&setting_fov_, 0, reinterpret_cast<char*>(&setting_planefar_) -
-      reinterpret_cast<char*>(&setting_fov_) + sizeof(setting_planefar_));
+  if (cached_has_bits & 64512u) {
+    ::memset(&setting_fov_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&setting_planefar_) -
+        reinterpret_cast<char*>(&setting_fov_)) + sizeof(setting_planefar_));
   }
-  if (_has_bits_[16 / 32] & 16711680u) {
-    ::memset(&setting_gridsize_, 0, reinterpret_cast<char*>(&setting_deferredtestlightsnumber_) -
-      reinterpret_cast<char*>(&setting_gridsize_) + sizeof(setting_deferredtestlightsnumber_));
+  if (cached_has_bits & 16711680u) {
+    ::memset(&setting_gridsize_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&setting_deferredtestlightsnumber_) -
+        reinterpret_cast<char*>(&setting_gridsize_)) + sizeof(setting_deferredtestlightsnumber_));
   }
-  if (_has_bits_[24 / 32] & 4278190080u) {
-    ::memset(&setting_deferredambientstrength_, 0, reinterpret_cast<char*>(&solidlight_diffuse_strength_) -
-      reinterpret_cast<char*>(&setting_deferredambientstrength_) + sizeof(solidlight_diffuse_strength_));
+  if (cached_has_bits & 4278190080u) {
+    ::memset(&setting_deferredambientstrength_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&solidlight_diffuse_strength_) -
+        reinterpret_cast<char*>(&setting_deferredambientstrength_)) + sizeof(solidlight_diffuse_strength_));
   }
-  if (_has_bits_[32 / 32] & 255u) {
-    ::memset(&solidlight_specular_strength_, 0, reinterpret_cast<char*>(&setting_terrainanimatey_) -
-      reinterpret_cast<char*>(&solidlight_specular_strength_) + sizeof(setting_terrainanimatey_));
+  cached_has_bits = _has_bits_[1];
+  if (cached_has_bits & 255u) {
+    ::memset(&solidlight_specular_strength_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&setting_terrainanimatey_) -
+        reinterpret_cast<char*>(&solidlight_specular_strength_)) + sizeof(setting_terrainanimatey_));
   }
-  if (_has_bits_[40 / 32] & 1792u) {
-    ::memset(&setting_showspaceship_, 0, reinterpret_cast<char*>(&setting_terrainheight_) -
-      reinterpret_cast<char*>(&setting_showspaceship_) + sizeof(setting_terrainheight_));
+  if (cached_has_bits & 1792u) {
+    ::memset(&setting_showspaceship_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&setting_terrainheight_) -
+        reinterpret_cast<char*>(&setting_showspaceship_)) + sizeof(setting_terrainheight_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -842,7 +840,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_FOV = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(13u)) {
+            static_cast< ::google::protobuf::uint8>(13u /* 13 & 0xFF */)) {
           set_has_setting_fov();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -856,7 +854,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_OutlineThickness = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(21u)) {
+            static_cast< ::google::protobuf::uint8>(21u /* 21 & 0xFF */)) {
           set_has_setting_outlinethickness();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -870,7 +868,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_RatioWidth = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(29u)) {
+            static_cast< ::google::protobuf::uint8>(29u /* 29 & 0xFF */)) {
           set_has_setting_ratiowidth();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -884,7 +882,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_RatioHeight = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(37u)) {
+            static_cast< ::google::protobuf::uint8>(37u /* 37 & 0xFF */)) {
           set_has_setting_ratioheight();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -898,7 +896,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_PlaneClose = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(45u)) {
+            static_cast< ::google::protobuf::uint8>(45u /* 45 & 0xFF */)) {
           set_has_setting_planeclose();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -912,7 +910,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_PlaneFar = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(53u)) {
+            static_cast< ::google::protobuf::uint8>(53u /* 53 & 0xFF */)) {
           set_has_setting_planefar();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -926,7 +924,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_GridSize = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(56u)) {
+            static_cast< ::google::protobuf::uint8>(56u /* 56 & 0xFF */)) {
           set_has_setting_gridsize();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -940,7 +938,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_Skybox = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(64u)) {
+            static_cast< ::google::protobuf::uint8>(64u /* 64 & 0xFF */)) {
           set_has_setting_skybox();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -954,7 +952,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u)) {
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_setting_outlinecolor()));
         } else {
@@ -966,7 +964,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u)) {
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_setting_uiambientlight()));
         } else {
@@ -978,7 +976,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_FixedGridWorld = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(88u)) {
+            static_cast< ::google::protobuf::uint8>(88u /* 88 & 0xFF */)) {
           set_has_setting_fixedgridworld();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -992,7 +990,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_OutlineColorPickerOpen = 12;
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(96u)) {
+            static_cast< ::google::protobuf::uint8>(96u /* 96 & 0xFF */)) {
           set_has_setting_outlinecolorpickeropen();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1006,7 +1004,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_ShowAxisHelpers = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u)) {
+            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
           set_has_setting_showaxishelpers();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1020,7 +1018,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Settings_ShowZAxis = 14;
       case 14: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(112u)) {
+            static_cast< ::google::protobuf::uint8>(112u /* 112 & 0xFF */)) {
           set_has_settings_showzaxis();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1034,7 +1032,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_DeferredTestMode = 15;
       case 15: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(120u)) {
+            static_cast< ::google::protobuf::uint8>(120u /* 120 & 0xFF */)) {
           set_has_setting_deferredtestmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1048,7 +1046,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_DeferredTestLights = 16;
       case 16: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(128u)) {
+            static_cast< ::google::protobuf::uint8>(128u /* 128 & 0xFF */)) {
           set_has_setting_deferredtestlights();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1062,7 +1060,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_LightingPass_DrawMode = 17;
       case 17: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(136u)) {
+            static_cast< ::google::protobuf::uint8>(136u /* 136 & 0xFF */)) {
           set_has_setting_lightingpass_drawmode();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1076,7 +1074,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_DeferredTestLightsNumber = 18;
       case 18: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(144u)) {
+            static_cast< ::google::protobuf::uint8>(144u /* 144 & 0xFF */)) {
           set_has_setting_deferredtestlightsnumber();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1090,7 +1088,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float Setting_DeferredAmbientStrength = 19;
       case 19: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(157u)) {
+            static_cast< ::google::protobuf::uint8>(157u /* 157 & 0xFF */)) {
           set_has_setting_deferredambientstrength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1104,7 +1102,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 viewModelSkin = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(160u)) {
+            static_cast< ::google::protobuf::uint8>(160u /* 160 & 0xFF */)) {
           set_has_viewmodelskin();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1118,7 +1116,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 SolidLight_Direction = 21;
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u)) {
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_direction()));
         } else {
@@ -1130,7 +1128,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
       case 22: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(178u)) {
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_materialcolor()));
         } else {
@@ -1142,7 +1140,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
       case 23: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(186u)) {
+            static_cast< ::google::protobuf::uint8>(186u /* 186 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_ambient()));
         } else {
@@ -1154,7 +1152,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
       case 24: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(194u)) {
+            static_cast< ::google::protobuf::uint8>(194u /* 194 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_diffuse()));
         } else {
@@ -1166,7 +1164,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 SolidLight_Specular = 25;
       case 25: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(202u)) {
+            static_cast< ::google::protobuf::uint8>(202u /* 202 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_solidlight_specular()));
         } else {
@@ -1178,7 +1176,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float SolidLight_Ambient_Strength = 26;
       case 26: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(213u)) {
+            static_cast< ::google::protobuf::uint8>(213u /* 213 & 0xFF */)) {
           set_has_solidlight_ambient_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1192,7 +1190,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float SolidLight_Diffuse_Strength = 27;
       case 27: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(221u)) {
+            static_cast< ::google::protobuf::uint8>(221u /* 221 & 0xFF */)) {
           set_has_solidlight_diffuse_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1206,7 +1204,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required float SolidLight_Specular_Strength = 28;
       case 28: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(229u)) {
+            static_cast< ::google::protobuf::uint8>(229u /* 229 & 0xFF */)) {
           set_has_solidlight_specular_strength();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -1220,7 +1218,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool SolidLight_MaterialColor_ColorPicker = 29;
       case 29: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(232u)) {
+            static_cast< ::google::protobuf::uint8>(232u /* 232 & 0xFF */)) {
           set_has_solidlight_materialcolor_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1234,7 +1232,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool SolidLight_Ambient_ColorPicker = 30;
       case 30: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(240u)) {
+            static_cast< ::google::protobuf::uint8>(240u /* 240 & 0xFF */)) {
           set_has_solidlight_ambient_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1248,7 +1246,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool SolidLight_Diffuse_ColorPicker = 31;
       case 31: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(248u)) {
+            static_cast< ::google::protobuf::uint8>(248u /* 248 & 0xFF */)) {
           set_has_solidlight_diffuse_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1262,7 +1260,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool SolidLight_Specular_ColorPicker = 32;
       case 32: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(256u)) {
+            static_cast< ::google::protobuf::uint8>(0u /* 256 & 0xFF */)) {
           set_has_solidlight_specular_colorpicker();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1276,7 +1274,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_ShowTerrain = 33;
       case 33: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(264u)) {
+            static_cast< ::google::protobuf::uint8>(8u /* 264 & 0xFF */)) {
           set_has_setting_showterrain();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1290,7 +1288,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_TerrainModel = 34;
       case 34: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(272u)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 272 & 0xFF */)) {
           set_has_setting_terrainmodel();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1304,7 +1302,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_TerrainAnimateX = 35;
       case 35: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(280u)) {
+            static_cast< ::google::protobuf::uint8>(24u /* 280 & 0xFF */)) {
           set_has_setting_terrainanimatex();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1318,7 +1316,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_TerrainAnimateY = 36;
       case 36: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(288u)) {
+            static_cast< ::google::protobuf::uint8>(32u /* 288 & 0xFF */)) {
           set_has_setting_terrainanimatey();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1332,11 +1330,11 @@ bool GUISettings::MergePartialFromCodedStream(
       // required string heightmapImage = 37;
       case 37: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(298u)) {
+            static_cast< ::google::protobuf::uint8>(42u /* 298 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_heightmapimage()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->heightmapimage().data(), this->heightmapimage().length(),
+            this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.GUISettings.heightmapImage");
         } else {
@@ -1348,7 +1346,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_TerrainWidth = 38;
       case 38: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(304u)) {
+            static_cast< ::google::protobuf::uint8>(48u /* 304 & 0xFF */)) {
           set_has_setting_terrainwidth();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1362,7 +1360,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required int32 Setting_TerrainHeight = 39;
       case 39: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(312u)) {
+            static_cast< ::google::protobuf::uint8>(56u /* 312 & 0xFF */)) {
           set_has_setting_terrainheight();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -1376,7 +1374,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_ShowSpaceship = 40;
       case 40: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(320u)) {
+            static_cast< ::google::protobuf::uint8>(64u /* 320 & 0xFF */)) {
           set_has_setting_showspaceship();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1390,7 +1388,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required bool Setting_GenerateSpaceship = 41;
       case 41: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(328u)) {
+            static_cast< ::google::protobuf::uint8>(72u /* 328 & 0xFF */)) {
           set_has_setting_generatespaceship();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -1404,7 +1402,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.CameraSettings camera = 42;
       case 42: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(338u)) {
+            static_cast< ::google::protobuf::uint8>(82u /* 338 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_camera()));
         } else {
@@ -1416,7 +1414,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // required .KuplungApp.GridSettings grid = 43;
       case 43: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(346u)) {
+            static_cast< ::google::protobuf::uint8>(90u /* 346 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_grid()));
         } else {
@@ -1428,7 +1426,7 @@ bool GUISettings::MergePartialFromCodedStream(
       // repeated .KuplungApp.LightObject lights = 44;
       case 44: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(354u)) {
+            static_cast< ::google::protobuf::uint8>(98u /* 354 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                 input, add_lights()));
         } else {
@@ -1439,13 +1437,11 @@ bool GUISettings::MergePartialFromCodedStream(
 
       default: {
       handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
     }
@@ -1660,7 +1656,7 @@ void GUISettings::SerializeWithCachedSizes(
   // required string heightmapImage = 37;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->heightmapimage().data(), this->heightmapimage().length(),
+      this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.GUISettings.heightmapImage");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -1702,20 +1698,22 @@ void GUISettings::SerializeWithCachedSizes(
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
-  for (unsigned int i = 0, n = this->lights_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->lights_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      44, this->lights(i), output);
+      44, this->lights(static_cast<int>(i)), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.GUISettings)
 }
 
 ::google::protobuf::uint8* GUISettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GUISettings)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1922,7 +1920,7 @@ void GUISettings::SerializeWithCachedSizes(
   // required string heightmapImage = 37;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->heightmapimage().data(), this->heightmapimage().length(),
+      this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.GUISettings.heightmapImage");
     target =
@@ -1967,15 +1965,16 @@ void GUISettings::SerializeWithCachedSizes(
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
-  for (unsigned int i = 0, n = this->lights_size(); i < n; i++) {
+  for (unsigned int i = 0,
+      n = static_cast<unsigned int>(this->lights_size()); i < n; i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageNoVirtualToArray(
-        44, this->lights(i), deterministic, target);
+        44, this->lights(static_cast<int>(i)), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.GUISettings)
   return target;
@@ -2243,7 +2242,7 @@ size_t GUISettings::ByteSizeLong() const {
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+        _internal_metadata_.unknown_fields());
   }
   if ((((_has_bits_[0] & 0xffffffff) ^ 0xffffffff)
          | ((_has_bits_[1] & 0x000007ff) ^ 0x000007ff)) == 0) {  // All required fields are present.
@@ -2415,12 +2414,12 @@ size_t GUISettings::ByteSizeLong() const {
   }
   // repeated .KuplungApp.LightObject lights = 44;
   {
-    unsigned int count = this->lights_size();
+    unsigned int count = static_cast<unsigned int>(this->lights_size());
     total_size += 2UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
         ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->lights(i));
+          this->lights(static_cast<int>(i)));
     }
   }
 
@@ -2658,54 +2657,55 @@ void GUISettings::Swap(GUISettings* other) {
   InternalSwap(other);
 }
 void GUISettings::InternalSwap(GUISettings* other) {
+  using std::swap;
   lights_.InternalSwap(&other->lights_);
   heightmapimage_.Swap(&other->heightmapimage_);
-  std::swap(setting_outlinecolor_, other->setting_outlinecolor_);
-  std::swap(setting_uiambientlight_, other->setting_uiambientlight_);
-  std::swap(solidlight_direction_, other->solidlight_direction_);
-  std::swap(solidlight_materialcolor_, other->solidlight_materialcolor_);
-  std::swap(solidlight_ambient_, other->solidlight_ambient_);
-  std::swap(solidlight_diffuse_, other->solidlight_diffuse_);
-  std::swap(solidlight_specular_, other->solidlight_specular_);
-  std::swap(camera_, other->camera_);
-  std::swap(grid_, other->grid_);
-  std::swap(setting_fov_, other->setting_fov_);
-  std::swap(setting_outlinethickness_, other->setting_outlinethickness_);
-  std::swap(setting_ratiowidth_, other->setting_ratiowidth_);
-  std::swap(setting_ratioheight_, other->setting_ratioheight_);
-  std::swap(setting_planeclose_, other->setting_planeclose_);
-  std::swap(setting_planefar_, other->setting_planefar_);
-  std::swap(setting_gridsize_, other->setting_gridsize_);
-  std::swap(setting_skybox_, other->setting_skybox_);
-  std::swap(setting_fixedgridworld_, other->setting_fixedgridworld_);
-  std::swap(setting_outlinecolorpickeropen_, other->setting_outlinecolorpickeropen_);
-  std::swap(setting_showaxishelpers_, other->setting_showaxishelpers_);
-  std::swap(settings_showzaxis_, other->settings_showzaxis_);
-  std::swap(setting_lightingpass_drawmode_, other->setting_lightingpass_drawmode_);
-  std::swap(setting_deferredtestlightsnumber_, other->setting_deferredtestlightsnumber_);
-  std::swap(setting_deferredambientstrength_, other->setting_deferredambientstrength_);
-  std::swap(viewmodelskin_, other->viewmodelskin_);
-  std::swap(setting_deferredtestmode_, other->setting_deferredtestmode_);
-  std::swap(setting_deferredtestlights_, other->setting_deferredtestlights_);
-  std::swap(solidlight_materialcolor_colorpicker_, other->solidlight_materialcolor_colorpicker_);
-  std::swap(solidlight_ambient_colorpicker_, other->solidlight_ambient_colorpicker_);
-  std::swap(solidlight_ambient_strength_, other->solidlight_ambient_strength_);
-  std::swap(solidlight_diffuse_strength_, other->solidlight_diffuse_strength_);
-  std::swap(solidlight_specular_strength_, other->solidlight_specular_strength_);
-  std::swap(solidlight_diffuse_colorpicker_, other->solidlight_diffuse_colorpicker_);
-  std::swap(solidlight_specular_colorpicker_, other->solidlight_specular_colorpicker_);
-  std::swap(setting_showterrain_, other->setting_showterrain_);
-  std::swap(setting_terrainmodel_, other->setting_terrainmodel_);
-  std::swap(setting_terrainwidth_, other->setting_terrainwidth_);
-  std::swap(setting_terrainanimatex_, other->setting_terrainanimatex_);
-  std::swap(setting_terrainanimatey_, other->setting_terrainanimatey_);
-  std::swap(setting_showspaceship_, other->setting_showspaceship_);
-  std::swap(setting_generatespaceship_, other->setting_generatespaceship_);
-  std::swap(setting_terrainheight_, other->setting_terrainheight_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
-  std::swap(_has_bits_[1], other->_has_bits_[1]);
+  swap(setting_outlinecolor_, other->setting_outlinecolor_);
+  swap(setting_uiambientlight_, other->setting_uiambientlight_);
+  swap(solidlight_direction_, other->solidlight_direction_);
+  swap(solidlight_materialcolor_, other->solidlight_materialcolor_);
+  swap(solidlight_ambient_, other->solidlight_ambient_);
+  swap(solidlight_diffuse_, other->solidlight_diffuse_);
+  swap(solidlight_specular_, other->solidlight_specular_);
+  swap(camera_, other->camera_);
+  swap(grid_, other->grid_);
+  swap(setting_fov_, other->setting_fov_);
+  swap(setting_outlinethickness_, other->setting_outlinethickness_);
+  swap(setting_ratiowidth_, other->setting_ratiowidth_);
+  swap(setting_ratioheight_, other->setting_ratioheight_);
+  swap(setting_planeclose_, other->setting_planeclose_);
+  swap(setting_planefar_, other->setting_planefar_);
+  swap(setting_gridsize_, other->setting_gridsize_);
+  swap(setting_skybox_, other->setting_skybox_);
+  swap(setting_fixedgridworld_, other->setting_fixedgridworld_);
+  swap(setting_outlinecolorpickeropen_, other->setting_outlinecolorpickeropen_);
+  swap(setting_showaxishelpers_, other->setting_showaxishelpers_);
+  swap(settings_showzaxis_, other->settings_showzaxis_);
+  swap(setting_lightingpass_drawmode_, other->setting_lightingpass_drawmode_);
+  swap(setting_deferredtestlightsnumber_, other->setting_deferredtestlightsnumber_);
+  swap(setting_deferredambientstrength_, other->setting_deferredambientstrength_);
+  swap(viewmodelskin_, other->viewmodelskin_);
+  swap(setting_deferredtestmode_, other->setting_deferredtestmode_);
+  swap(setting_deferredtestlights_, other->setting_deferredtestlights_);
+  swap(solidlight_materialcolor_colorpicker_, other->solidlight_materialcolor_colorpicker_);
+  swap(solidlight_ambient_colorpicker_, other->solidlight_ambient_colorpicker_);
+  swap(solidlight_ambient_strength_, other->solidlight_ambient_strength_);
+  swap(solidlight_diffuse_strength_, other->solidlight_diffuse_strength_);
+  swap(solidlight_specular_strength_, other->solidlight_specular_strength_);
+  swap(solidlight_diffuse_colorpicker_, other->solidlight_diffuse_colorpicker_);
+  swap(solidlight_specular_colorpicker_, other->solidlight_specular_colorpicker_);
+  swap(setting_showterrain_, other->setting_showterrain_);
+  swap(setting_terrainmodel_, other->setting_terrainmodel_);
+  swap(setting_terrainwidth_, other->setting_terrainwidth_);
+  swap(setting_terrainanimatex_, other->setting_terrainanimatex_);
+  swap(setting_terrainanimatey_, other->setting_terrainanimatey_);
+  swap(setting_showspaceship_, other->setting_showspaceship_);
+  swap(setting_generatespaceship_, other->setting_generatespaceship_);
+  swap(setting_terrainheight_, other->setting_terrainheight_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(_has_bits_[1], other->_has_bits_[1]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
+  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata GUISettings::GetMetadata() const {
@@ -2923,9 +2923,10 @@ void GUISettings::clear_setting_outlinecolor() {
   clear_has_setting_outlinecolor();
 }
 const ::KuplungApp::Vec4& GUISettings::setting_outlinecolor() const {
+  const ::KuplungApp::Vec4* p = setting_outlinecolor_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_OutlineColor)
-  return setting_outlinecolor_ != NULL ? *setting_outlinecolor_
-                         : *::KuplungApp::Vec4::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec4*>(
+      &::KuplungApp::_Vec4_default_instance_);
 }
 ::KuplungApp::Vec4* GUISettings::mutable_setting_outlinecolor() {
   set_has_setting_outlinecolor();
@@ -2968,9 +2969,10 @@ void GUISettings::clear_setting_uiambientlight() {
   clear_has_setting_uiambientlight();
 }
 const ::KuplungApp::Vec3& GUISettings::setting_uiambientlight() const {
+  const ::KuplungApp::Vec3* p = setting_uiambientlight_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.Setting_UIAmbientLight)
-  return setting_uiambientlight_ != NULL ? *setting_uiambientlight_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_setting_uiambientlight() {
   set_has_setting_uiambientlight();
@@ -3253,9 +3255,10 @@ void GUISettings::clear_solidlight_direction() {
   clear_has_solidlight_direction();
 }
 const ::KuplungApp::Vec3& GUISettings::solidlight_direction() const {
+  const ::KuplungApp::Vec3* p = solidlight_direction_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Direction)
-  return solidlight_direction_ != NULL ? *solidlight_direction_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_solidlight_direction() {
   set_has_solidlight_direction();
@@ -3298,9 +3301,10 @@ void GUISettings::clear_solidlight_materialcolor() {
   clear_has_solidlight_materialcolor();
 }
 const ::KuplungApp::Vec3& GUISettings::solidlight_materialcolor() const {
+  const ::KuplungApp::Vec3* p = solidlight_materialcolor_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_MaterialColor)
-  return solidlight_materialcolor_ != NULL ? *solidlight_materialcolor_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_solidlight_materialcolor() {
   set_has_solidlight_materialcolor();
@@ -3343,9 +3347,10 @@ void GUISettings::clear_solidlight_ambient() {
   clear_has_solidlight_ambient();
 }
 const ::KuplungApp::Vec3& GUISettings::solidlight_ambient() const {
+  const ::KuplungApp::Vec3* p = solidlight_ambient_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Ambient)
-  return solidlight_ambient_ != NULL ? *solidlight_ambient_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_solidlight_ambient() {
   set_has_solidlight_ambient();
@@ -3388,9 +3393,10 @@ void GUISettings::clear_solidlight_diffuse() {
   clear_has_solidlight_diffuse();
 }
 const ::KuplungApp::Vec3& GUISettings::solidlight_diffuse() const {
+  const ::KuplungApp::Vec3* p = solidlight_diffuse_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Diffuse)
-  return solidlight_diffuse_ != NULL ? *solidlight_diffuse_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_solidlight_diffuse() {
   set_has_solidlight_diffuse();
@@ -3433,9 +3439,10 @@ void GUISettings::clear_solidlight_specular() {
   clear_has_solidlight_specular();
 }
 const ::KuplungApp::Vec3& GUISettings::solidlight_specular() const {
+  const ::KuplungApp::Vec3* p = solidlight_specular_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.SolidLight_Specular)
-  return solidlight_specular_ != NULL ? *solidlight_specular_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* GUISettings::mutable_solidlight_specular() {
   set_has_solidlight_specular();
@@ -3901,9 +3908,10 @@ void GUISettings::clear_camera() {
   clear_has_camera();
 }
 const ::KuplungApp::CameraSettings& GUISettings::camera() const {
+  const ::KuplungApp::CameraSettings* p = camera_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.camera)
-  return camera_ != NULL ? *camera_
-                         : *::KuplungApp::CameraSettings::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::CameraSettings*>(
+      &::KuplungApp::_CameraSettings_default_instance_);
 }
 ::KuplungApp::CameraSettings* GUISettings::mutable_camera() {
   set_has_camera();
@@ -3946,9 +3954,10 @@ void GUISettings::clear_grid() {
   clear_has_grid();
 }
 const ::KuplungApp::GridSettings& GUISettings::grid() const {
+  const ::KuplungApp::GridSettings* p = grid_;
   // @@protoc_insertion_point(field_get:KuplungApp.GUISettings.grid)
-  return grid_ != NULL ? *grid_
-                         : *::KuplungApp::GridSettings::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::GridSettings*>(
+      &::KuplungApp::_GridSettings_default_instance_);
 }
 ::KuplungApp::GridSettings* GUISettings::mutable_grid() {
   set_has_grid();
@@ -4110,8 +4119,9 @@ CameraSettings::CameraSettings(const CameraSettings& from)
 
 void CameraSettings::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&cameraposition_, 0, reinterpret_cast<char*>(&rotatecenterz_) -
-    reinterpret_cast<char*>(&cameraposition_) + sizeof(rotatecenterz_));
+  ::memset(&cameraposition_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&rotatecenterz_) -
+      reinterpret_cast<char*>(&cameraposition_)) + sizeof(rotatecenterz_));
 }
 
 CameraSettings::~CameraSettings() {
@@ -4120,45 +4130,19 @@ CameraSettings::~CameraSettings() {
 }
 
 void CameraSettings::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete cameraposition_;
-  }
-  if (this != internal_default_instance()) {
-    delete view_eye_;
-  }
-  if (this != internal_default_instance()) {
-    delete view_center_;
-  }
-  if (this != internal_default_instance()) {
-    delete view_up_;
-  }
-  if (this != internal_default_instance()) {
-    delete positionx_;
-  }
-  if (this != internal_default_instance()) {
-    delete positiony_;
-  }
-  if (this != internal_default_instance()) {
-    delete positionz_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatex_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatey_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatez_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecenterx_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecentery_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecenterz_;
-  }
+  if (this != internal_default_instance()) delete cameraposition_;
+  if (this != internal_default_instance()) delete view_eye_;
+  if (this != internal_default_instance()) delete view_center_;
+  if (this != internal_default_instance()) delete view_up_;
+  if (this != internal_default_instance()) delete positionx_;
+  if (this != internal_default_instance()) delete positiony_;
+  if (this != internal_default_instance()) delete positionz_;
+  if (this != internal_default_instance()) delete rotatex_;
+  if (this != internal_default_instance()) delete rotatey_;
+  if (this != internal_default_instance()) delete rotatez_;
+  if (this != internal_default_instance()) delete rotatecenterx_;
+  if (this != internal_default_instance()) delete rotatecentery_;
+  if (this != internal_default_instance()) delete rotatecenterz_;
 }
 
 void CameraSettings::SetCachedSize(int size) const {
@@ -4186,58 +4170,63 @@ CameraSettings* CameraSettings::New(::google::protobuf::Arena* arena) const {
 
 void CameraSettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.CameraSettings)
-  if (_has_bits_[0 / 32] & 255u) {
-    if (has_cameraposition()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       GOOGLE_DCHECK(cameraposition_ != NULL);
       cameraposition_->::KuplungApp::Vec3::Clear();
     }
-    if (has_view_eye()) {
+    if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(view_eye_ != NULL);
       view_eye_->::KuplungApp::Vec3::Clear();
     }
-    if (has_view_center()) {
+    if (cached_has_bits & 0x00000004u) {
       GOOGLE_DCHECK(view_center_ != NULL);
       view_center_->::KuplungApp::Vec3::Clear();
     }
-    if (has_view_up()) {
+    if (cached_has_bits & 0x00000008u) {
       GOOGLE_DCHECK(view_up_ != NULL);
       view_up_->::KuplungApp::Vec3::Clear();
     }
-    if (has_positionx()) {
+    if (cached_has_bits & 0x00000010u) {
       GOOGLE_DCHECK(positionx_ != NULL);
       positionx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positiony()) {
+    if (cached_has_bits & 0x00000020u) {
       GOOGLE_DCHECK(positiony_ != NULL);
       positiony_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positionz()) {
+    if (cached_has_bits & 0x00000040u) {
       GOOGLE_DCHECK(positionz_ != NULL);
       positionz_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatex()) {
+    if (cached_has_bits & 0x00000080u) {
       GOOGLE_DCHECK(rotatex_ != NULL);
       rotatex_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & 7936u) {
-    if (has_rotatey()) {
+  if (cached_has_bits & 7936u) {
+    if (cached_has_bits & 0x00000100u) {
       GOOGLE_DCHECK(rotatey_ != NULL);
       rotatey_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatez()) {
+    if (cached_has_bits & 0x00000200u) {
       GOOGLE_DCHECK(rotatez_ != NULL);
       rotatez_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatecenterx()) {
+    if (cached_has_bits & 0x00000400u) {
       GOOGLE_DCHECK(rotatecenterx_ != NULL);
       rotatecenterx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatecentery()) {
+    if (cached_has_bits & 0x00000800u) {
       GOOGLE_DCHECK(rotatecentery_ != NULL);
       rotatecentery_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatecenterz()) {
+    if (cached_has_bits & 0x00001000u) {
       GOOGLE_DCHECK(rotatecenterz_ != NULL);
       rotatecenterz_->::KuplungApp::ObjectCoordinate::Clear();
     }
@@ -4259,7 +4248,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 cameraPosition = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u)) {
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_cameraposition()));
         } else {
@@ -4271,7 +4260,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 View_Eye = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u)) {
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_eye()));
         } else {
@@ -4283,7 +4272,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 View_Center = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u)) {
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_center()));
         } else {
@@ -4295,7 +4284,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.Vec3 View_Up = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u)) {
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_view_up()));
         } else {
@@ -4307,7 +4296,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionX = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u)) {
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -4319,7 +4308,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionY = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u)) {
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -4331,7 +4320,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionZ = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u)) {
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -4343,7 +4332,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateX = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(66u)) {
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -4355,7 +4344,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateY = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u)) {
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -4367,7 +4356,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateZ = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u)) {
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -4379,7 +4368,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(90u)) {
+            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterx()));
         } else {
@@ -4391,7 +4380,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(98u)) {
+            static_cast< ::google::protobuf::uint8>(98u /* 98 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecentery()));
         } else {
@@ -4403,7 +4392,7 @@ bool CameraSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(106u)) {
+            static_cast< ::google::protobuf::uint8>(106u /* 106 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterz()));
         } else {
@@ -4414,13 +4403,11 @@ bool CameraSettings::MergePartialFromCodedStream(
 
       default: {
       handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
     }
@@ -4521,13 +4508,14 @@ void CameraSettings::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.CameraSettings)
 }
 
 ::google::protobuf::uint8* CameraSettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.CameraSettings)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -4626,7 +4614,7 @@ void CameraSettings::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.CameraSettings)
   return target;
@@ -4736,7 +4724,7 @@ size_t CameraSettings::ByteSizeLong() const {
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+        _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x00001fff) ^ 0x00001fff) == 0) {  // All required fields are present.
     // required .KuplungApp.Vec3 cameraPosition = 1;
@@ -4945,22 +4933,23 @@ void CameraSettings::Swap(CameraSettings* other) {
   InternalSwap(other);
 }
 void CameraSettings::InternalSwap(CameraSettings* other) {
-  std::swap(cameraposition_, other->cameraposition_);
-  std::swap(view_eye_, other->view_eye_);
-  std::swap(view_center_, other->view_center_);
-  std::swap(view_up_, other->view_up_);
-  std::swap(positionx_, other->positionx_);
-  std::swap(positiony_, other->positiony_);
-  std::swap(positionz_, other->positionz_);
-  std::swap(rotatex_, other->rotatex_);
-  std::swap(rotatey_, other->rotatey_);
-  std::swap(rotatez_, other->rotatez_);
-  std::swap(rotatecenterx_, other->rotatecenterx_);
-  std::swap(rotatecentery_, other->rotatecentery_);
-  std::swap(rotatecenterz_, other->rotatecenterz_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  using std::swap;
+  swap(cameraposition_, other->cameraposition_);
+  swap(view_eye_, other->view_eye_);
+  swap(view_center_, other->view_center_);
+  swap(view_up_, other->view_up_);
+  swap(positionx_, other->positionx_);
+  swap(positiony_, other->positiony_);
+  swap(positionz_, other->positionz_);
+  swap(rotatex_, other->rotatex_);
+  swap(rotatey_, other->rotatey_);
+  swap(rotatez_, other->rotatez_);
+  swap(rotatecenterx_, other->rotatecenterx_);
+  swap(rotatecentery_, other->rotatecentery_);
+  swap(rotatecenterz_, other->rotatecenterz_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
+  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata CameraSettings::GetMetadata() const {
@@ -4986,9 +4975,10 @@ void CameraSettings::clear_cameraposition() {
   clear_has_cameraposition();
 }
 const ::KuplungApp::Vec3& CameraSettings::cameraposition() const {
+  const ::KuplungApp::Vec3* p = cameraposition_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.cameraPosition)
-  return cameraposition_ != NULL ? *cameraposition_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* CameraSettings::mutable_cameraposition() {
   set_has_cameraposition();
@@ -5031,9 +5021,10 @@ void CameraSettings::clear_view_eye() {
   clear_has_view_eye();
 }
 const ::KuplungApp::Vec3& CameraSettings::view_eye() const {
+  const ::KuplungApp::Vec3* p = view_eye_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.View_Eye)
-  return view_eye_ != NULL ? *view_eye_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* CameraSettings::mutable_view_eye() {
   set_has_view_eye();
@@ -5076,9 +5067,10 @@ void CameraSettings::clear_view_center() {
   clear_has_view_center();
 }
 const ::KuplungApp::Vec3& CameraSettings::view_center() const {
+  const ::KuplungApp::Vec3* p = view_center_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.View_Center)
-  return view_center_ != NULL ? *view_center_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* CameraSettings::mutable_view_center() {
   set_has_view_center();
@@ -5121,9 +5113,10 @@ void CameraSettings::clear_view_up() {
   clear_has_view_up();
 }
 const ::KuplungApp::Vec3& CameraSettings::view_up() const {
+  const ::KuplungApp::Vec3* p = view_up_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.View_Up)
-  return view_up_ != NULL ? *view_up_
-                         : *::KuplungApp::Vec3::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::Vec3*>(
+      &::KuplungApp::_Vec3_default_instance_);
 }
 ::KuplungApp::Vec3* CameraSettings::mutable_view_up() {
   set_has_view_up();
@@ -5166,9 +5159,10 @@ void CameraSettings::clear_positionx() {
   clear_has_positionx();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::positionx() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionx_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.positionX)
-  return positionx_ != NULL ? *positionx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_positionx() {
   set_has_positionx();
@@ -5211,9 +5205,10 @@ void CameraSettings::clear_positiony() {
   clear_has_positiony();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::positiony() const {
+  const ::KuplungApp::ObjectCoordinate* p = positiony_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.positionY)
-  return positiony_ != NULL ? *positiony_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_positiony() {
   set_has_positiony();
@@ -5256,9 +5251,10 @@ void CameraSettings::clear_positionz() {
   clear_has_positionz();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::positionz() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionz_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.positionZ)
-  return positionz_ != NULL ? *positionz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_positionz() {
   set_has_positionz();
@@ -5301,9 +5297,10 @@ void CameraSettings::clear_rotatex() {
   clear_has_rotatex();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatex() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatex_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateX)
-  return rotatex_ != NULL ? *rotatex_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatex() {
   set_has_rotatex();
@@ -5346,9 +5343,10 @@ void CameraSettings::clear_rotatey() {
   clear_has_rotatey();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatey() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatey_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateY)
-  return rotatey_ != NULL ? *rotatey_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatey() {
   set_has_rotatey();
@@ -5391,9 +5389,10 @@ void CameraSettings::clear_rotatez() {
   clear_has_rotatez();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatez() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatez_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateZ)
-  return rotatez_ != NULL ? *rotatez_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatez() {
   set_has_rotatez();
@@ -5436,9 +5435,10 @@ void CameraSettings::clear_rotatecenterx() {
   clear_has_rotatecenterx();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatecenterx() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecenterx_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateCenterX)
-  return rotatecenterx_ != NULL ? *rotatecenterx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatecenterx() {
   set_has_rotatecenterx();
@@ -5481,9 +5481,10 @@ void CameraSettings::clear_rotatecentery() {
   clear_has_rotatecentery();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatecentery() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecentery_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateCenterY)
-  return rotatecentery_ != NULL ? *rotatecentery_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatecentery() {
   set_has_rotatecentery();
@@ -5526,9 +5527,10 @@ void CameraSettings::clear_rotatecenterz() {
   clear_has_rotatecenterz();
 }
 const ::KuplungApp::ObjectCoordinate& CameraSettings::rotatecenterz() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecenterz_;
   // @@protoc_insertion_point(field_get:KuplungApp.CameraSettings.rotateCenterZ)
-  return rotatecenterz_ != NULL ? *rotatecenterz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* CameraSettings::mutable_rotatecenterz() {
   set_has_rotatecenterz();
@@ -5636,15 +5638,16 @@ GridSettings::GridSettings(const GridSettings& from)
     scalez_ = NULL;
   }
   ::memcpy(&actasmirror_, &from.actasmirror_,
-    reinterpret_cast<char*>(&showgrid_) -
-    reinterpret_cast<char*>(&actasmirror_) + sizeof(showgrid_));
+    static_cast<size_t>(reinterpret_cast<char*>(&showgrid_) -
+    reinterpret_cast<char*>(&actasmirror_)) + sizeof(showgrid_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.GridSettings)
 }
 
 void GridSettings::SharedCtor() {
   _cached_size_ = 0;
-  ::memset(&positionx_, 0, reinterpret_cast<char*>(&showgrid_) -
-    reinterpret_cast<char*>(&positionx_) + sizeof(showgrid_));
+  ::memset(&positionx_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&showgrid_) -
+      reinterpret_cast<char*>(&positionx_)) + sizeof(showgrid_));
 }
 
 GridSettings::~GridSettings() {
@@ -5653,33 +5656,15 @@ GridSettings::~GridSettings() {
 }
 
 void GridSettings::SharedDtor() {
-  if (this != internal_default_instance()) {
-    delete positionx_;
-  }
-  if (this != internal_default_instance()) {
-    delete positiony_;
-  }
-  if (this != internal_default_instance()) {
-    delete positionz_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatex_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatey_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatez_;
-  }
-  if (this != internal_default_instance()) {
-    delete scalex_;
-  }
-  if (this != internal_default_instance()) {
-    delete scaley_;
-  }
-  if (this != internal_default_instance()) {
-    delete scalez_;
-  }
+  if (this != internal_default_instance()) delete positionx_;
+  if (this != internal_default_instance()) delete positiony_;
+  if (this != internal_default_instance()) delete positionz_;
+  if (this != internal_default_instance()) delete rotatex_;
+  if (this != internal_default_instance()) delete rotatey_;
+  if (this != internal_default_instance()) delete rotatez_;
+  if (this != internal_default_instance()) delete scalex_;
+  if (this != internal_default_instance()) delete scaley_;
+  if (this != internal_default_instance()) delete scalez_;
 }
 
 void GridSettings::SetCachedSize(int size) const {
@@ -5707,47 +5692,53 @@ GridSettings* GridSettings::New(::google::protobuf::Arena* arena) const {
 
 void GridSettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.GridSettings)
-  if (_has_bits_[0 / 32] & 255u) {
-    if (has_positionx()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       GOOGLE_DCHECK(positionx_ != NULL);
       positionx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positiony()) {
+    if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(positiony_ != NULL);
       positiony_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positionz()) {
+    if (cached_has_bits & 0x00000004u) {
       GOOGLE_DCHECK(positionz_ != NULL);
       positionz_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatex()) {
+    if (cached_has_bits & 0x00000008u) {
       GOOGLE_DCHECK(rotatex_ != NULL);
       rotatex_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatey()) {
+    if (cached_has_bits & 0x00000010u) {
       GOOGLE_DCHECK(rotatey_ != NULL);
       rotatey_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatez()) {
+    if (cached_has_bits & 0x00000020u) {
       GOOGLE_DCHECK(rotatez_ != NULL);
       rotatez_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_scalex()) {
+    if (cached_has_bits & 0x00000040u) {
       GOOGLE_DCHECK(scalex_ != NULL);
       scalex_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_scaley()) {
+    if (cached_has_bits & 0x00000080u) {
       GOOGLE_DCHECK(scaley_ != NULL);
       scaley_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (has_scalez()) {
+  if (cached_has_bits & 0x00000100u) {
     GOOGLE_DCHECK(scalez_ != NULL);
     scalez_->::KuplungApp::ObjectCoordinate::Clear();
   }
-  if (_has_bits_[8 / 32] & 7680u) {
-    ::memset(&actasmirror_, 0, reinterpret_cast<char*>(&showgrid_) -
-      reinterpret_cast<char*>(&actasmirror_) + sizeof(showgrid_));
+  if (cached_has_bits & 7680u) {
+    ::memset(&actasmirror_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&showgrid_) -
+        reinterpret_cast<char*>(&actasmirror_)) + sizeof(showgrid_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -5766,7 +5757,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required bool actAsMirror = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(8u)) {
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
           set_has_actasmirror();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -5780,7 +5771,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required int32 gridSize = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(16u)) {
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
           set_has_gridsize();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5794,7 +5785,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionX = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(26u)) {
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -5806,7 +5797,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionY = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(34u)) {
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -5818,7 +5809,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionZ = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(42u)) {
+            static_cast< ::google::protobuf::uint8>(42u /* 42 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -5830,7 +5821,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateX = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(50u)) {
+            static_cast< ::google::protobuf::uint8>(50u /* 50 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -5842,7 +5833,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateY = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u)) {
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -5854,7 +5845,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateZ = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(66u)) {
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -5866,7 +5857,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleX = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u)) {
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalex()));
         } else {
@@ -5878,7 +5869,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleY = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u)) {
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scaley()));
         } else {
@@ -5890,7 +5881,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleZ = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(90u)) {
+            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalez()));
         } else {
@@ -5902,7 +5893,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required float transparency = 12;
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(101u)) {
+            static_cast< ::google::protobuf::uint8>(101u /* 101 & 0xFF */)) {
           set_has_transparency();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
@@ -5916,7 +5907,7 @@ bool GridSettings::MergePartialFromCodedStream(
       // required int32 showGrid = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(104u)) {
+            static_cast< ::google::protobuf::uint8>(104u /* 104 & 0xFF */)) {
           set_has_showgrid();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -5929,13 +5920,11 @@ bool GridSettings::MergePartialFromCodedStream(
 
       default: {
       handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
     }
@@ -6032,13 +6021,14 @@ void GridSettings::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.GridSettings)
 }
 
 ::google::protobuf::uint8* GridSettings::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GridSettings)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -6129,7 +6119,7 @@ void GridSettings::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.GridSettings)
   return target;
@@ -6235,7 +6225,7 @@ size_t GridSettings::ByteSizeLong() const {
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+        _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x00001fff) ^ 0x00001fff) == 0) {  // All required fields are present.
     // required .KuplungApp.ObjectCoordinate positionX = 3;
@@ -6429,22 +6419,23 @@ void GridSettings::Swap(GridSettings* other) {
   InternalSwap(other);
 }
 void GridSettings::InternalSwap(GridSettings* other) {
-  std::swap(positionx_, other->positionx_);
-  std::swap(positiony_, other->positiony_);
-  std::swap(positionz_, other->positionz_);
-  std::swap(rotatex_, other->rotatex_);
-  std::swap(rotatey_, other->rotatey_);
-  std::swap(rotatez_, other->rotatez_);
-  std::swap(scalex_, other->scalex_);
-  std::swap(scaley_, other->scaley_);
-  std::swap(scalez_, other->scalez_);
-  std::swap(actasmirror_, other->actasmirror_);
-  std::swap(gridsize_, other->gridsize_);
-  std::swap(transparency_, other->transparency_);
-  std::swap(showgrid_, other->showgrid_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  using std::swap;
+  swap(positionx_, other->positionx_);
+  swap(positiony_, other->positiony_);
+  swap(positionz_, other->positionz_);
+  swap(rotatex_, other->rotatex_);
+  swap(rotatey_, other->rotatey_);
+  swap(rotatez_, other->rotatez_);
+  swap(scalex_, other->scalex_);
+  swap(scaley_, other->scaley_);
+  swap(scalez_, other->scalez_);
+  swap(actasmirror_, other->actasmirror_);
+  swap(gridsize_, other->gridsize_);
+  swap(transparency_, other->transparency_);
+  swap(showgrid_, other->showgrid_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
+  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata GridSettings::GetMetadata() const {
@@ -6518,9 +6509,10 @@ void GridSettings::clear_positionx() {
   clear_has_positionx();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::positionx() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionx_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.positionX)
-  return positionx_ != NULL ? *positionx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_positionx() {
   set_has_positionx();
@@ -6563,9 +6555,10 @@ void GridSettings::clear_positiony() {
   clear_has_positiony();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::positiony() const {
+  const ::KuplungApp::ObjectCoordinate* p = positiony_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.positionY)
-  return positiony_ != NULL ? *positiony_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_positiony() {
   set_has_positiony();
@@ -6608,9 +6601,10 @@ void GridSettings::clear_positionz() {
   clear_has_positionz();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::positionz() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionz_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.positionZ)
-  return positionz_ != NULL ? *positionz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_positionz() {
   set_has_positionz();
@@ -6653,9 +6647,10 @@ void GridSettings::clear_rotatex() {
   clear_has_rotatex();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::rotatex() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatex_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.rotateX)
-  return rotatex_ != NULL ? *rotatex_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_rotatex() {
   set_has_rotatex();
@@ -6698,9 +6693,10 @@ void GridSettings::clear_rotatey() {
   clear_has_rotatey();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::rotatey() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatey_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.rotateY)
-  return rotatey_ != NULL ? *rotatey_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_rotatey() {
   set_has_rotatey();
@@ -6743,9 +6739,10 @@ void GridSettings::clear_rotatez() {
   clear_has_rotatez();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::rotatez() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatez_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.rotateZ)
-  return rotatez_ != NULL ? *rotatez_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_rotatez() {
   set_has_rotatez();
@@ -6788,9 +6785,10 @@ void GridSettings::clear_scalex() {
   clear_has_scalex();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::scalex() const {
+  const ::KuplungApp::ObjectCoordinate* p = scalex_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.scaleX)
-  return scalex_ != NULL ? *scalex_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_scalex() {
   set_has_scalex();
@@ -6833,9 +6831,10 @@ void GridSettings::clear_scaley() {
   clear_has_scaley();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::scaley() const {
+  const ::KuplungApp::ObjectCoordinate* p = scaley_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.scaleY)
-  return scaley_ != NULL ? *scaley_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_scaley() {
   set_has_scaley();
@@ -6878,9 +6877,10 @@ void GridSettings::clear_scalez() {
   clear_has_scalez();
 }
 const ::KuplungApp::ObjectCoordinate& GridSettings::scalez() const {
+  const ::KuplungApp::ObjectCoordinate* p = scalez_;
   // @@protoc_insertion_point(field_get:KuplungApp.GridSettings.scaleZ)
-  return scalez_ != NULL ? *scalez_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* GridSettings::mutable_scalez() {
   set_has_scalez();
@@ -7130,8 +7130,8 @@ LightObject::LightObject(const LightObject& from)
     lquadratic_ = NULL;
   }
   ::memcpy(&type_, &from.type_,
-    reinterpret_cast<char*>(&showinwire_) -
-    reinterpret_cast<char*>(&type_) + sizeof(showinwire_));
+    static_cast<size_t>(reinterpret_cast<char*>(&showinwire_) -
+    reinterpret_cast<char*>(&type_)) + sizeof(showinwire_));
   // @@protoc_insertion_point(copy_constructor:KuplungApp.LightObject)
 }
 
@@ -7139,8 +7139,9 @@ void LightObject::SharedCtor() {
   _cached_size_ = 0;
   title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&positionx_, 0, reinterpret_cast<char*>(&showinwire_) -
-    reinterpret_cast<char*>(&positionx_) + sizeof(showinwire_));
+  ::memset(&positionx_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&showinwire_) -
+      reinterpret_cast<char*>(&positionx_)) + sizeof(showinwire_));
 }
 
 LightObject::~LightObject() {
@@ -7151,75 +7152,29 @@ LightObject::~LightObject() {
 void LightObject::SharedDtor() {
   title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   description_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) {
-    delete positionx_;
-  }
-  if (this != internal_default_instance()) {
-    delete positiony_;
-  }
-  if (this != internal_default_instance()) {
-    delete positionz_;
-  }
-  if (this != internal_default_instance()) {
-    delete directionx_;
-  }
-  if (this != internal_default_instance()) {
-    delete directiony_;
-  }
-  if (this != internal_default_instance()) {
-    delete directionz_;
-  }
-  if (this != internal_default_instance()) {
-    delete scalex_;
-  }
-  if (this != internal_default_instance()) {
-    delete scaley_;
-  }
-  if (this != internal_default_instance()) {
-    delete scalez_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatex_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatey_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatez_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecenterx_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecentery_;
-  }
-  if (this != internal_default_instance()) {
-    delete rotatecenterz_;
-  }
-  if (this != internal_default_instance()) {
-    delete ambient_;
-  }
-  if (this != internal_default_instance()) {
-    delete diffuse_;
-  }
-  if (this != internal_default_instance()) {
-    delete specular_;
-  }
-  if (this != internal_default_instance()) {
-    delete lcutoff_;
-  }
-  if (this != internal_default_instance()) {
-    delete loutercutoff_;
-  }
-  if (this != internal_default_instance()) {
-    delete lconstant_;
-  }
-  if (this != internal_default_instance()) {
-    delete llinear_;
-  }
-  if (this != internal_default_instance()) {
-    delete lquadratic_;
-  }
+  if (this != internal_default_instance()) delete positionx_;
+  if (this != internal_default_instance()) delete positiony_;
+  if (this != internal_default_instance()) delete positionz_;
+  if (this != internal_default_instance()) delete directionx_;
+  if (this != internal_default_instance()) delete directiony_;
+  if (this != internal_default_instance()) delete directionz_;
+  if (this != internal_default_instance()) delete scalex_;
+  if (this != internal_default_instance()) delete scaley_;
+  if (this != internal_default_instance()) delete scalez_;
+  if (this != internal_default_instance()) delete rotatex_;
+  if (this != internal_default_instance()) delete rotatey_;
+  if (this != internal_default_instance()) delete rotatez_;
+  if (this != internal_default_instance()) delete rotatecenterx_;
+  if (this != internal_default_instance()) delete rotatecentery_;
+  if (this != internal_default_instance()) delete rotatecenterz_;
+  if (this != internal_default_instance()) delete ambient_;
+  if (this != internal_default_instance()) delete diffuse_;
+  if (this != internal_default_instance()) delete specular_;
+  if (this != internal_default_instance()) delete lcutoff_;
+  if (this != internal_default_instance()) delete loutercutoff_;
+  if (this != internal_default_instance()) delete lconstant_;
+  if (this != internal_default_instance()) delete llinear_;
+  if (this != internal_default_instance()) delete lquadratic_;
 }
 
 void LightObject::SetCachedSize(int size) const {
@@ -7247,115 +7202,121 @@ LightObject* LightObject::New(::google::protobuf::Arena* arena) const {
 
 void LightObject::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.LightObject)
-  if (_has_bits_[0 / 32] & 255u) {
-    if (has_title()) {
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  cached_has_bits = _has_bits_[0];
+  if (cached_has_bits & 255u) {
+    if (cached_has_bits & 0x00000001u) {
       GOOGLE_DCHECK(!title_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
       (*title_.UnsafeRawStringPointer())->clear();
     }
-    if (has_description()) {
+    if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(!description_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
       (*description_.UnsafeRawStringPointer())->clear();
     }
-    if (has_positionx()) {
+    if (cached_has_bits & 0x00000004u) {
       GOOGLE_DCHECK(positionx_ != NULL);
       positionx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positiony()) {
+    if (cached_has_bits & 0x00000008u) {
       GOOGLE_DCHECK(positiony_ != NULL);
       positiony_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_positionz()) {
+    if (cached_has_bits & 0x00000010u) {
       GOOGLE_DCHECK(positionz_ != NULL);
       positionz_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_directionx()) {
+    if (cached_has_bits & 0x00000020u) {
       GOOGLE_DCHECK(directionx_ != NULL);
       directionx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_directiony()) {
+    if (cached_has_bits & 0x00000040u) {
       GOOGLE_DCHECK(directiony_ != NULL);
       directiony_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_directionz()) {
+    if (cached_has_bits & 0x00000080u) {
       GOOGLE_DCHECK(directionz_ != NULL);
       directionz_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (_has_bits_[8 / 32] & 65280u) {
-    if (has_scalex()) {
+  if (cached_has_bits & 65280u) {
+    if (cached_has_bits & 0x00000100u) {
       GOOGLE_DCHECK(scalex_ != NULL);
       scalex_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_scaley()) {
+    if (cached_has_bits & 0x00000200u) {
       GOOGLE_DCHECK(scaley_ != NULL);
       scaley_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_scalez()) {
+    if (cached_has_bits & 0x00000400u) {
       GOOGLE_DCHECK(scalez_ != NULL);
       scalez_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatex()) {
+    if (cached_has_bits & 0x00000800u) {
       GOOGLE_DCHECK(rotatex_ != NULL);
       rotatex_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatey()) {
+    if (cached_has_bits & 0x00001000u) {
       GOOGLE_DCHECK(rotatey_ != NULL);
       rotatey_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatez()) {
+    if (cached_has_bits & 0x00002000u) {
       GOOGLE_DCHECK(rotatez_ != NULL);
       rotatez_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatecenterx()) {
+    if (cached_has_bits & 0x00004000u) {
       GOOGLE_DCHECK(rotatecenterx_ != NULL);
       rotatecenterx_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_rotatecentery()) {
+    if (cached_has_bits & 0x00008000u) {
       GOOGLE_DCHECK(rotatecentery_ != NULL);
       rotatecentery_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (_has_bits_[16 / 32] & 16711680u) {
-    if (has_rotatecenterz()) {
+  if (cached_has_bits & 16711680u) {
+    if (cached_has_bits & 0x00010000u) {
       GOOGLE_DCHECK(rotatecenterz_ != NULL);
       rotatecenterz_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_ambient()) {
+    if (cached_has_bits & 0x00020000u) {
       GOOGLE_DCHECK(ambient_ != NULL);
       ambient_->::KuplungApp::MaterialColor::Clear();
     }
-    if (has_diffuse()) {
+    if (cached_has_bits & 0x00040000u) {
       GOOGLE_DCHECK(diffuse_ != NULL);
       diffuse_->::KuplungApp::MaterialColor::Clear();
     }
-    if (has_specular()) {
+    if (cached_has_bits & 0x00080000u) {
       GOOGLE_DCHECK(specular_ != NULL);
       specular_->::KuplungApp::MaterialColor::Clear();
     }
-    if (has_lcutoff()) {
+    if (cached_has_bits & 0x00100000u) {
       GOOGLE_DCHECK(lcutoff_ != NULL);
       lcutoff_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_loutercutoff()) {
+    if (cached_has_bits & 0x00200000u) {
       GOOGLE_DCHECK(loutercutoff_ != NULL);
       loutercutoff_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_lconstant()) {
+    if (cached_has_bits & 0x00400000u) {
       GOOGLE_DCHECK(lconstant_ != NULL);
       lconstant_->::KuplungApp::ObjectCoordinate::Clear();
     }
-    if (has_llinear()) {
+    if (cached_has_bits & 0x00800000u) {
       GOOGLE_DCHECK(llinear_ != NULL);
       llinear_->::KuplungApp::ObjectCoordinate::Clear();
     }
   }
-  if (has_lquadratic()) {
+  if (cached_has_bits & 0x01000000u) {
     GOOGLE_DCHECK(lquadratic_ != NULL);
     lquadratic_->::KuplungApp::ObjectCoordinate::Clear();
   }
-  if (_has_bits_[24 / 32] & 503316480u) {
-    ::memset(&type_, 0, reinterpret_cast<char*>(&showinwire_) -
-      reinterpret_cast<char*>(&type_) + sizeof(showinwire_));
+  if (cached_has_bits & 503316480u) {
+    ::memset(&type_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&showinwire_) -
+        reinterpret_cast<char*>(&type_)) + sizeof(showinwire_));
   }
   _has_bits_.Clear();
   _internal_metadata_.Clear();
@@ -7374,11 +7335,11 @@ bool LightObject::MergePartialFromCodedStream(
       // required string title = 1;
       case 1: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(10u)) {
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->title().data(), this->title().length(),
+            this->title().data(), static_cast<int>(this->title().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.LightObject.title");
         } else {
@@ -7390,11 +7351,11 @@ bool LightObject::MergePartialFromCodedStream(
       // required string description = 2;
       case 2: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(18u)) {
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
                 input, this->mutable_description()));
           ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->description().data(), this->description().length(),
+            this->description().data(), static_cast<int>(this->description().length()),
             ::google::protobuf::internal::WireFormat::PARSE,
             "KuplungApp.LightObject.description");
         } else {
@@ -7406,7 +7367,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required int32 type = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(24u)) {
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
           set_has_type();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
@@ -7420,7 +7381,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required bool showLampObject = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(32u)) {
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
           set_has_showlampobject();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7434,7 +7395,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required bool showLampDirection = 5;
       case 5: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(40u)) {
+            static_cast< ::google::protobuf::uint8>(40u /* 40 & 0xFF */)) {
           set_has_showlampdirection();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7448,7 +7409,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required bool showInWire = 6;
       case 6: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(48u)) {
+            static_cast< ::google::protobuf::uint8>(48u /* 48 & 0xFF */)) {
           set_has_showinwire();
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
@@ -7462,7 +7423,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionX = 7;
       case 7: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(58u)) {
+            static_cast< ::google::protobuf::uint8>(58u /* 58 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionx()));
         } else {
@@ -7474,7 +7435,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionY = 8;
       case 8: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(66u)) {
+            static_cast< ::google::protobuf::uint8>(66u /* 66 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positiony()));
         } else {
@@ -7486,7 +7447,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate positionZ = 9;
       case 9: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(74u)) {
+            static_cast< ::google::protobuf::uint8>(74u /* 74 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_positionz()));
         } else {
@@ -7498,7 +7459,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate directionX = 10;
       case 10: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(82u)) {
+            static_cast< ::google::protobuf::uint8>(82u /* 82 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionx()));
         } else {
@@ -7510,7 +7471,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate directionY = 11;
       case 11: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(90u)) {
+            static_cast< ::google::protobuf::uint8>(90u /* 90 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directiony()));
         } else {
@@ -7522,7 +7483,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate directionZ = 12;
       case 12: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(98u)) {
+            static_cast< ::google::protobuf::uint8>(98u /* 98 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_directionz()));
         } else {
@@ -7534,7 +7495,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleX = 13;
       case 13: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(106u)) {
+            static_cast< ::google::protobuf::uint8>(106u /* 106 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalex()));
         } else {
@@ -7546,7 +7507,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleY = 14;
       case 14: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(114u)) {
+            static_cast< ::google::protobuf::uint8>(114u /* 114 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scaley()));
         } else {
@@ -7558,7 +7519,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate scaleZ = 15;
       case 15: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(122u)) {
+            static_cast< ::google::protobuf::uint8>(122u /* 122 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_scalez()));
         } else {
@@ -7570,7 +7531,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateX = 16;
       case 16: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(130u)) {
+            static_cast< ::google::protobuf::uint8>(130u /* 130 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatex()));
         } else {
@@ -7582,7 +7543,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateY = 17;
       case 17: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(138u)) {
+            static_cast< ::google::protobuf::uint8>(138u /* 138 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatey()));
         } else {
@@ -7594,7 +7555,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateZ = 18;
       case 18: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(146u)) {
+            static_cast< ::google::protobuf::uint8>(146u /* 146 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatez()));
         } else {
@@ -7606,7 +7567,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
       case 19: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(154u)) {
+            static_cast< ::google::protobuf::uint8>(154u /* 154 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterx()));
         } else {
@@ -7618,7 +7579,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
       case 20: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(162u)) {
+            static_cast< ::google::protobuf::uint8>(162u /* 162 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecentery()));
         } else {
@@ -7630,7 +7591,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
       case 21: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(170u)) {
+            static_cast< ::google::protobuf::uint8>(170u /* 170 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_rotatecenterz()));
         } else {
@@ -7642,7 +7603,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.MaterialColor ambient = 22;
       case 22: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(178u)) {
+            static_cast< ::google::protobuf::uint8>(178u /* 178 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_ambient()));
         } else {
@@ -7654,7 +7615,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.MaterialColor diffuse = 23;
       case 23: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(186u)) {
+            static_cast< ::google::protobuf::uint8>(186u /* 186 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_diffuse()));
         } else {
@@ -7666,7 +7627,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.MaterialColor specular = 24;
       case 24: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(194u)) {
+            static_cast< ::google::protobuf::uint8>(194u /* 194 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_specular()));
         } else {
@@ -7678,7 +7639,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate lCutOff = 25;
       case 25: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(202u)) {
+            static_cast< ::google::protobuf::uint8>(202u /* 202 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lcutoff()));
         } else {
@@ -7690,7 +7651,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
       case 26: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(210u)) {
+            static_cast< ::google::protobuf::uint8>(210u /* 210 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_loutercutoff()));
         } else {
@@ -7702,7 +7663,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate lConstant = 27;
       case 27: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(218u)) {
+            static_cast< ::google::protobuf::uint8>(218u /* 218 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lconstant()));
         } else {
@@ -7714,7 +7675,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate lLinear = 28;
       case 28: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(226u)) {
+            static_cast< ::google::protobuf::uint8>(226u /* 226 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_llinear()));
         } else {
@@ -7726,7 +7687,7 @@ bool LightObject::MergePartialFromCodedStream(
       // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
       case 29: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
-            static_cast< ::google::protobuf::uint8>(234u)) {
+            static_cast< ::google::protobuf::uint8>(234u /* 234 & 0xFF */)) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
                input, mutable_lquadratic()));
         } else {
@@ -7737,13 +7698,11 @@ bool LightObject::MergePartialFromCodedStream(
 
       default: {
       handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           goto success;
         }
         DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
     }
@@ -7767,7 +7726,7 @@ void LightObject::SerializeWithCachedSizes(
   // required string title = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), this->title().length(),
+      this->title().data(), static_cast<int>(this->title().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.title");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -7777,7 +7736,7 @@ void LightObject::SerializeWithCachedSizes(
   // required string description = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->description().data(), this->description().length(),
+      this->description().data(), static_cast<int>(this->description().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.description");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
@@ -7944,13 +7903,14 @@ void LightObject::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
+        _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.LightObject)
 }
 
 ::google::protobuf::uint8* LightObject::InternalSerializeWithCachedSizesToArray(
     bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.LightObject)
   ::google::protobuf::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -7959,7 +7919,7 @@ void LightObject::SerializeWithCachedSizes(
   // required string title = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), this->title().length(),
+      this->title().data(), static_cast<int>(this->title().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.title");
     target =
@@ -7970,7 +7930,7 @@ void LightObject::SerializeWithCachedSizes(
   // required string description = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->description().data(), this->description().length(),
+      this->description().data(), static_cast<int>(this->description().length()),
       ::google::protobuf::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.description");
     target =
@@ -8161,7 +8121,7 @@ void LightObject::SerializeWithCachedSizes(
 
   if (_internal_metadata_.have_unknown_fields()) {
     target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
+        _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.LightObject)
   return target;
@@ -8377,7 +8337,7 @@ size_t LightObject::ByteSizeLong() const {
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
       ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
+        _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x1fffffff) ^ 0x1fffffff) == 0) {  // All required fields are present.
     // required string title = 1;
@@ -8745,38 +8705,39 @@ void LightObject::Swap(LightObject* other) {
   InternalSwap(other);
 }
 void LightObject::InternalSwap(LightObject* other) {
+  using std::swap;
   title_.Swap(&other->title_);
   description_.Swap(&other->description_);
-  std::swap(positionx_, other->positionx_);
-  std::swap(positiony_, other->positiony_);
-  std::swap(positionz_, other->positionz_);
-  std::swap(directionx_, other->directionx_);
-  std::swap(directiony_, other->directiony_);
-  std::swap(directionz_, other->directionz_);
-  std::swap(scalex_, other->scalex_);
-  std::swap(scaley_, other->scaley_);
-  std::swap(scalez_, other->scalez_);
-  std::swap(rotatex_, other->rotatex_);
-  std::swap(rotatey_, other->rotatey_);
-  std::swap(rotatez_, other->rotatez_);
-  std::swap(rotatecenterx_, other->rotatecenterx_);
-  std::swap(rotatecentery_, other->rotatecentery_);
-  std::swap(rotatecenterz_, other->rotatecenterz_);
-  std::swap(ambient_, other->ambient_);
-  std::swap(diffuse_, other->diffuse_);
-  std::swap(specular_, other->specular_);
-  std::swap(lcutoff_, other->lcutoff_);
-  std::swap(loutercutoff_, other->loutercutoff_);
-  std::swap(lconstant_, other->lconstant_);
-  std::swap(llinear_, other->llinear_);
-  std::swap(lquadratic_, other->lquadratic_);
-  std::swap(type_, other->type_);
-  std::swap(showlampobject_, other->showlampobject_);
-  std::swap(showlampdirection_, other->showlampdirection_);
-  std::swap(showinwire_, other->showinwire_);
-  std::swap(_has_bits_[0], other->_has_bits_[0]);
+  swap(positionx_, other->positionx_);
+  swap(positiony_, other->positiony_);
+  swap(positionz_, other->positionz_);
+  swap(directionx_, other->directionx_);
+  swap(directiony_, other->directiony_);
+  swap(directionz_, other->directionz_);
+  swap(scalex_, other->scalex_);
+  swap(scaley_, other->scaley_);
+  swap(scalez_, other->scalez_);
+  swap(rotatex_, other->rotatex_);
+  swap(rotatey_, other->rotatey_);
+  swap(rotatez_, other->rotatez_);
+  swap(rotatecenterx_, other->rotatecenterx_);
+  swap(rotatecentery_, other->rotatecentery_);
+  swap(rotatecenterz_, other->rotatecenterz_);
+  swap(ambient_, other->ambient_);
+  swap(diffuse_, other->diffuse_);
+  swap(specular_, other->specular_);
+  swap(lcutoff_, other->lcutoff_);
+  swap(loutercutoff_, other->loutercutoff_);
+  swap(lconstant_, other->lconstant_);
+  swap(llinear_, other->llinear_);
+  swap(lquadratic_, other->lquadratic_);
+  swap(type_, other->type_);
+  swap(showlampobject_, other->showlampobject_);
+  swap(showlampdirection_, other->showlampdirection_);
+  swap(showinwire_, other->showinwire_);
+  swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  std::swap(_cached_size_, other->_cached_size_);
+  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata LightObject::GetMetadata() const {
@@ -9024,9 +8985,10 @@ void LightObject::clear_positionx() {
   clear_has_positionx();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::positionx() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionx_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.positionX)
-  return positionx_ != NULL ? *positionx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_positionx() {
   set_has_positionx();
@@ -9069,9 +9031,10 @@ void LightObject::clear_positiony() {
   clear_has_positiony();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::positiony() const {
+  const ::KuplungApp::ObjectCoordinate* p = positiony_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.positionY)
-  return positiony_ != NULL ? *positiony_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_positiony() {
   set_has_positiony();
@@ -9114,9 +9077,10 @@ void LightObject::clear_positionz() {
   clear_has_positionz();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::positionz() const {
+  const ::KuplungApp::ObjectCoordinate* p = positionz_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.positionZ)
-  return positionz_ != NULL ? *positionz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_positionz() {
   set_has_positionz();
@@ -9159,9 +9123,10 @@ void LightObject::clear_directionx() {
   clear_has_directionx();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::directionx() const {
+  const ::KuplungApp::ObjectCoordinate* p = directionx_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.directionX)
-  return directionx_ != NULL ? *directionx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_directionx() {
   set_has_directionx();
@@ -9204,9 +9169,10 @@ void LightObject::clear_directiony() {
   clear_has_directiony();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::directiony() const {
+  const ::KuplungApp::ObjectCoordinate* p = directiony_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.directionY)
-  return directiony_ != NULL ? *directiony_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_directiony() {
   set_has_directiony();
@@ -9249,9 +9215,10 @@ void LightObject::clear_directionz() {
   clear_has_directionz();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::directionz() const {
+  const ::KuplungApp::ObjectCoordinate* p = directionz_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.directionZ)
-  return directionz_ != NULL ? *directionz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_directionz() {
   set_has_directionz();
@@ -9294,9 +9261,10 @@ void LightObject::clear_scalex() {
   clear_has_scalex();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::scalex() const {
+  const ::KuplungApp::ObjectCoordinate* p = scalex_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.scaleX)
-  return scalex_ != NULL ? *scalex_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_scalex() {
   set_has_scalex();
@@ -9339,9 +9307,10 @@ void LightObject::clear_scaley() {
   clear_has_scaley();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::scaley() const {
+  const ::KuplungApp::ObjectCoordinate* p = scaley_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.scaleY)
-  return scaley_ != NULL ? *scaley_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_scaley() {
   set_has_scaley();
@@ -9384,9 +9353,10 @@ void LightObject::clear_scalez() {
   clear_has_scalez();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::scalez() const {
+  const ::KuplungApp::ObjectCoordinate* p = scalez_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.scaleZ)
-  return scalez_ != NULL ? *scalez_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_scalez() {
   set_has_scalez();
@@ -9429,9 +9399,10 @@ void LightObject::clear_rotatex() {
   clear_has_rotatex();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatex() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatex_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateX)
-  return rotatex_ != NULL ? *rotatex_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatex() {
   set_has_rotatex();
@@ -9474,9 +9445,10 @@ void LightObject::clear_rotatey() {
   clear_has_rotatey();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatey() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatey_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateY)
-  return rotatey_ != NULL ? *rotatey_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatey() {
   set_has_rotatey();
@@ -9519,9 +9491,10 @@ void LightObject::clear_rotatez() {
   clear_has_rotatez();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatez() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatez_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateZ)
-  return rotatez_ != NULL ? *rotatez_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatez() {
   set_has_rotatez();
@@ -9564,9 +9537,10 @@ void LightObject::clear_rotatecenterx() {
   clear_has_rotatecenterx();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatecenterx() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecenterx_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateCenterX)
-  return rotatecenterx_ != NULL ? *rotatecenterx_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatecenterx() {
   set_has_rotatecenterx();
@@ -9609,9 +9583,10 @@ void LightObject::clear_rotatecentery() {
   clear_has_rotatecentery();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatecentery() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecentery_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateCenterY)
-  return rotatecentery_ != NULL ? *rotatecentery_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatecentery() {
   set_has_rotatecentery();
@@ -9654,9 +9629,10 @@ void LightObject::clear_rotatecenterz() {
   clear_has_rotatecenterz();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::rotatecenterz() const {
+  const ::KuplungApp::ObjectCoordinate* p = rotatecenterz_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.rotateCenterZ)
-  return rotatecenterz_ != NULL ? *rotatecenterz_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_rotatecenterz() {
   set_has_rotatecenterz();
@@ -9699,9 +9675,10 @@ void LightObject::clear_ambient() {
   clear_has_ambient();
 }
 const ::KuplungApp::MaterialColor& LightObject::ambient() const {
+  const ::KuplungApp::MaterialColor* p = ambient_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.ambient)
-  return ambient_ != NULL ? *ambient_
-                         : *::KuplungApp::MaterialColor::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::MaterialColor*>(
+      &::KuplungApp::_MaterialColor_default_instance_);
 }
 ::KuplungApp::MaterialColor* LightObject::mutable_ambient() {
   set_has_ambient();
@@ -9744,9 +9721,10 @@ void LightObject::clear_diffuse() {
   clear_has_diffuse();
 }
 const ::KuplungApp::MaterialColor& LightObject::diffuse() const {
+  const ::KuplungApp::MaterialColor* p = diffuse_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.diffuse)
-  return diffuse_ != NULL ? *diffuse_
-                         : *::KuplungApp::MaterialColor::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::MaterialColor*>(
+      &::KuplungApp::_MaterialColor_default_instance_);
 }
 ::KuplungApp::MaterialColor* LightObject::mutable_diffuse() {
   set_has_diffuse();
@@ -9789,9 +9767,10 @@ void LightObject::clear_specular() {
   clear_has_specular();
 }
 const ::KuplungApp::MaterialColor& LightObject::specular() const {
+  const ::KuplungApp::MaterialColor* p = specular_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.specular)
-  return specular_ != NULL ? *specular_
-                         : *::KuplungApp::MaterialColor::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::MaterialColor*>(
+      &::KuplungApp::_MaterialColor_default_instance_);
 }
 ::KuplungApp::MaterialColor* LightObject::mutable_specular() {
   set_has_specular();
@@ -9834,9 +9813,10 @@ void LightObject::clear_lcutoff() {
   clear_has_lcutoff();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::lcutoff() const {
+  const ::KuplungApp::ObjectCoordinate* p = lcutoff_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lCutOff)
-  return lcutoff_ != NULL ? *lcutoff_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_lcutoff() {
   set_has_lcutoff();
@@ -9879,9 +9859,10 @@ void LightObject::clear_loutercutoff() {
   clear_has_loutercutoff();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::loutercutoff() const {
+  const ::KuplungApp::ObjectCoordinate* p = loutercutoff_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lOuterCutOff)
-  return loutercutoff_ != NULL ? *loutercutoff_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_loutercutoff() {
   set_has_loutercutoff();
@@ -9924,9 +9905,10 @@ void LightObject::clear_lconstant() {
   clear_has_lconstant();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::lconstant() const {
+  const ::KuplungApp::ObjectCoordinate* p = lconstant_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lConstant)
-  return lconstant_ != NULL ? *lconstant_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_lconstant() {
   set_has_lconstant();
@@ -9969,9 +9951,10 @@ void LightObject::clear_llinear() {
   clear_has_llinear();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::llinear() const {
+  const ::KuplungApp::ObjectCoordinate* p = llinear_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lLinear)
-  return llinear_ != NULL ? *llinear_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_llinear() {
   set_has_llinear();
@@ -10014,9 +9997,10 @@ void LightObject::clear_lquadratic() {
   clear_has_lquadratic();
 }
 const ::KuplungApp::ObjectCoordinate& LightObject::lquadratic() const {
+  const ::KuplungApp::ObjectCoordinate* p = lquadratic_;
   // @@protoc_insertion_point(field_get:KuplungApp.LightObject.lQuadratic)
-  return lquadratic_ != NULL ? *lquadratic_
-                         : *::KuplungApp::ObjectCoordinate::internal_default_instance();
+  return p != NULL ? *p : *reinterpret_cast<const ::KuplungApp::ObjectCoordinate*>(
+      &::KuplungApp::_ObjectCoordinate_default_instance_);
 }
 ::KuplungApp::ObjectCoordinate* LightObject::mutable_lquadratic() {
   set_has_lquadratic();

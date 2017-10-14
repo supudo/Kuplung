@@ -134,23 +134,23 @@ mac {
 
     LIBS += -framework cocoa -framework OpenGL
 
-    LIBS += -L/usr/local/Cellar/boost/1.64.0_1/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.64.0_1/include
+    LIBS += -L/usr/local/Cellar/boost/1.65.1/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.65.1/include
 
-    LIBS += -L/usr/local/Cellar/glm/0.9.8.4/lib
-    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.4/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.8.5/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.5/include
 
-    LIBS += -L/usr/local/Cellar/sdl2/2.0.5/lib -lSDL2
-    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.5/include
+    LIBS += -L/usr/local/Cellar/sdl2/2.0.6/lib -lSDL2
+    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.6/include
 
     LIBS += -L/usr/local/Cellar/glfw3/3.2.1/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.2.1/include
 
-    LIBS += -L/usr/local/Cellar/assimp/4.0.0/lib -lAssimp
-    INCLUDEPATH += /usr/local/Cellar/assimp/4.0.0/include
+    LIBS += -L/usr/local/Cellar/assimp/4.0.1/lib -lAssimp
+    INCLUDEPATH += /usr/local/Cellar/assimp/4.0.1/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.3.2/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.3.2/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.4.1/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.4.1/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
