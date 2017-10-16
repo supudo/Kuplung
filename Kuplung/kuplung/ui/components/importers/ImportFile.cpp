@@ -286,8 +286,14 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 					}
 				}
 				else {
-					// TODO(sergey): proper check for allowed files
-					isAllowedFileExtension = true;
+					for (size_t i = 0; i < Settings::Instance()->AssimpSupportedFormats_Import.size(); i++) {
+						std::string fe = Settings::Instance()->AssimpSupportedFormats_Import[i].fileExtension;
+						std::string ce = iteratorFolder->path().extension().string();
+						if (fe.find(ce) != std::string::npos) {
+							isAllowedFileExtension = true;
+							break;
+						}
+					}
 				}
 				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
 					FBEntity entity;
