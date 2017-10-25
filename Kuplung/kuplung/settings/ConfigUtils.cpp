@@ -24,7 +24,6 @@ void ConfigUtils::init(std::string const& appFolder) {
     this->configFile = appFolder + "/Kuplung_Settings.ini";
     this->recentFilesFile = appFolder + "/Kuplung_RecentFiles.ini";
     this->recentFilesFileImported = appFolder + "/Kuplung_RecentFilesImported.ini";
-    this->regex_comment = "^#.*";
     this->regex_equalsSign = "=";
     this->readFile();
 }
@@ -33,7 +32,7 @@ void ConfigUtils::init(std::string const& appFolder) {
 
 void ConfigUtils::saveSettings() {
 #ifdef _WIN32
-    std::string nlDelimiter = "\r\n";
+    std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
     std::string nlDelimiter = "\r";
 #else
@@ -101,7 +100,7 @@ void ConfigUtils::writeString(std::string const& configKey, std::string const& c
 
 void ConfigUtils::saveRecentFiles(std::vector<FBEntity> const& recentFiles) {
 #ifdef _WIN32
-        std::string nlDelimiter = "\r\n";
+        std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
         std::string nlDelimiter = "\r";
 #else
@@ -125,7 +124,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
     std::FILE *fp = std::fopen(this->recentFilesFile.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
-        std::string nlDelimiter = "\r\n";
+        std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
         std::string nlDelimiter = "\r";
 #else
@@ -149,7 +148,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
+			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -178,7 +177,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
 
 void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const& recentFilesImported) {
 #ifdef _WIN32
-        std::string nlDelimiter = "\r\n";
+        std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
         std::string nlDelimiter = "\r";
 #else
@@ -188,11 +187,11 @@ void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const& recentFil
     for (size_t i=0; i<recentFilesImported.size(); i++) {
         FBEntity fileEntity = recentFilesImported[i];
         recentFilesLines += "# File" + nlDelimiter;
-        recentFilesLines += fileEntity.title + nlDelimiter;
-        recentFilesLines += fileEntity.path + nlDelimiter;
+        recentFilesLines += (fileEntity.title.empty()  ? "-" : fileEntity.title) + nlDelimiter;
+        recentFilesLines += (fileEntity.path.empty() ? "-" : fileEntity.path) + nlDelimiter;
         recentFilesLines += nlDelimiter;
     }
-    std::ofstream out(this->recentFilesFileImported);
+    std::ofstream out(this->recentFilesFileImported, std::ios_base::trunc);
     out << recentFilesLines;
     out.close();
 }
@@ -202,7 +201,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
     std::FILE *fp = std::fopen(this->recentFilesFileImported.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
-        std::string nlDelimiter = "\r\n";
+        std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
         std::string nlDelimiter = "\r";
 #else
@@ -226,7 +225,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
+			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -259,7 +258,7 @@ void ConfigUtils::readFile() {
     std::FILE *fp = std::fopen(this->configFile.c_str(), "rb");
     if (fp) {
 #ifdef _WIN32
-        std::string nlDelimiter = "\r\n";
+        std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
         std::string nlDelimiter = "\r";
 #else
@@ -281,7 +280,7 @@ void ConfigUtils::readFile() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-            if (singleLine.empty() || std::regex_match(singleLine, this->regex_comment)) {
+			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 continue;
             }

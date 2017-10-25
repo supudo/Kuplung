@@ -42,7 +42,6 @@ private:
     std::string configFile, recentFilesFileImported, recentFilesFile;
     std::map<std::string, std::string> configData;
 
-    std::regex regex_comment;
     std::regex regex_equalsSign;
 
     void readFile();
