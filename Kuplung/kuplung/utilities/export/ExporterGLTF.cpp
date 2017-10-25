@@ -38,6 +38,8 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
 
     this->exportFileFolder = "";
     this->parserUtils = std::make_unique<ParserUtils>();
+	this->defaultSceneName = "KuplungScene";
+	this->defaultMaterialName = "KuplungMaterial";
 }
 
 void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
@@ -48,9 +50,9 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
     nlohmann::json j;
     j["asset"] = { { "generator", "Kuplung" }, { "version", "1.0" } };
-    j["scene"] = 0;
+    j["scene"] = this->defaultSceneName;
+	j["scenes"] = this->exportScenes(faces);
     j["cameras"] = this->exportCameras(managerObjects);
-    j["scenes"] = this->exportScenes(faces);
     j["nodes"] = this->exportNodes(faces);
     j["meshes"] = this->exportMeshes(faces);
     j["accessors"] = this->exportAccessors(faces);
@@ -80,17 +82,64 @@ nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &mana
 
 nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*>& faces) {
     nlohmann::json j;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+		j[this->defaultSceneName]["nodes"][faceIterator - faces.begin()] = model.ModelTitle;
+	}
     return j;
 }
 
 nlohmann::json ExporterGLTF::exportNodes(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    return j;
+	nlohmann::json j;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+		j[model.ModelTitle][faceIterator - faces.begin()] = model.ModelTitle + "_mesh";
+	}
+	return j;
 }
 
 nlohmann::json ExporterGLTF::exportMeshes(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    return j;
+	nlohmann::json j;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+		nlohmann::json jMeshPrimitives;
+		if (model.texture_coordinates.size() > 0) {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", this->defaultMaterialName },
+				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
+				{ "attributes", {
+						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
+						{ "NORMAL", model.ModelTitle + "_mesh_accesor_normals" },
+						{ "TEXCOORD_0", model.ModelTitle + "_mesh_accesor_uvs" }
+					}
+				}
+			};
+		}
+		else {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", this->defaultMaterialName },
+				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
+				{ "attributes", {
+						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
+						{ "NORMAL", model.ModelTitle + "_mesh_accesor_normals" }
+					}
+				}
+			};
+		}
+		j[model.ModelTitle + "_mesh"] = {
+			{ "name", model.ModelTitle + "_mesh" },
+			{ "primitives", jMeshPrimitives }
+		};
+	}
+	return j;
 }
 
 nlohmann::json ExporterGLTF::exportAccessors(const std::vector<ModelFaceBase*>& faces) {
@@ -100,6 +149,11 @@ nlohmann::json ExporterGLTF::exportAccessors(const std::vector<ModelFaceBase*>& 
 
 nlohmann::json ExporterGLTF::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     nlohmann::json j;
+	j[this->defaultMaterialName]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	j[this->defaultMaterialName]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	j[this->defaultMaterialName]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	j[this->defaultMaterialName]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+	j[this->defaultMaterialName]["value"]["shininess"] = 0.0f;
     return j;
 }
 
@@ -159,10 +213,16 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
     for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
         const ModelFaceBase& face = **faceIterator;
         MeshModel model = face.meshModel;
-        int base64_vertices_size = model.vertices.size() * sizeof(float);
-        std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_vertices_size);
-        j[faceIterator - faces.begin()]["byteLength"] = base64_vertices_size;
-        j[faceIterator - faces.begin()]["uri"] = "data:application/octet-stream;base64," + base64_vertices;
+		int base64_size_indices = model.indices.size() * sizeof(float);
+        int base64_size_vertices = model.vertices.size() * sizeof(float);
+		int base64_size_normals = model.normals.size() * sizeof(float);
+		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(float);
+		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
+        std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
+		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
+		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
+        j[faceIterator - faces.begin()]["byteLength"] = base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
+        j[faceIterator - faces.begin()]["uri"] = "data:application/octet-stream;base64," + base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
     }
     return j;
 }

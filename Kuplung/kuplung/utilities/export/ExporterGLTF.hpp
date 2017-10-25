@@ -45,7 +45,7 @@ private:
 	void saveFile(const nlohmann::json& jsonObj);
 
     FBEntity exportFile;
-    std::string nlDelimiter, exportFileFolder;
+    std::string nlDelimiter, exportFileFolder, defaultSceneName, defaultMaterialName;
     bool addSuffix = true;
 };
 
