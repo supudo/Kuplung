@@ -62,6 +62,8 @@ void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const 
 		scene->mMeshes[counterMesh] = new aiMesh();
 		scene->mMeshes[counterMesh]->mMaterialIndex = 0;
 
+		scene->mMeshes[counterMesh]->mName = model.ModelTitle;
+
 		scene->mRootNode->mMeshes[counterMesh] = 0;
 		auto pMesh = scene->mMeshes[counterMesh];
 

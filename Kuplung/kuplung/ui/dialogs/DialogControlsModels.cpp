@@ -372,6 +372,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowMinSize, ImVec2(0, 100));
     ImGui::PushStyleColor(ImGuiCol_FrameBg, static_cast<ImVec4>(ImColor(1, 0, 0, 1)));
+	// TODO: ListBox doesn't work with BeginPopupContextItem
     ImGui::ListBox("", &this->selectedObject, &scene_items[0], static_cast<int>(this->meshModelFaces->size()));
     ImGui::PopStyleColor(1);
     ImGui::PopStyleVar(2);
