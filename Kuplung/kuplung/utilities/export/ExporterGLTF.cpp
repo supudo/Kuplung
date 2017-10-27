@@ -19,6 +19,7 @@
 #include <boost/archive/iterators/insert_linebreaks.hpp>
 #include <boost/archive/iterators/transform_width.hpp>
 #include <boost/archive/iterators/ostream_iterator.hpp>
+#include <boost/endian/conversion.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -210,6 +211,9 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
     nlohmann::json j;
     std::string bufferFile = file.title + ".bin";
     std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	nlohmann::json jBuffer, jBufferViews;
+	int totalBufferLength = 0;
+	std::string bufferData;
     for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
         const ModelFaceBase& face = **faceIterator;
         MeshModel model = face.meshModel;
@@ -221,9 +225,18 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
         std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
 		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
 		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
-        j[faceIterator - faces.begin()]["byteLength"] = base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
-        j[faceIterator - faces.begin()]["uri"] = "data:application/octet-stream;base64," + base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
+		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
+		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
+		jBufferViews[model.ModelTitle + "_view_indices"] = {
+			{ "buffer", "" }
+		};
     }
+	jBuffer["type"] = "arraybuffer";
+	jBuffer["byteLength"] = totalBufferLength;
+	//jBuffer["uri"] = "data:application/octet-stream;base64," + bufferData;
+	this->saveBufferFile(bufferData);
+	jBuffer["uri"] = this->exportFileFolder + "/" + this->exportFile.title + ".bin";
+	j[this->exportFileFolder + "/" + this->exportFile.title + ".gltf"] = jBuffer;
     return j;
 }
 
@@ -263,6 +276,25 @@ void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
     std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
     out << std::setw(4) << jsonObj << std::endl;
     out.close();
+}
+
+void ExporterGLTF::saveBufferFile(std::string buffer) {
+	std::string file = this->exportFileFolder + "/" + this->exportFile.title + ".bin";
+
+	std::string bufferData("");
+	bufferData += "gltf";
+	bufferData += "2";
+	bufferData += std::to_string(("gltf2" + buffer).size());
+	bufferData += std::to_string(buffer.size());
+	bufferData += "BIN";
+	bufferData += buffer;
+
+	std::string d = boost::endian::native_to_little(bufferData);
+
+	std::ofstream out(file, std::ios::out | std::ios::ate | std::ios::binary);
+	//out.write(bufferData.c_str(), bufferData.size());
+	out.write((char*)&d, sizeof(d));
+	out.close();
 }
 
 }}}

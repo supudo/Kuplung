@@ -43,6 +43,7 @@ private:
 	nlohmann::json exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file);
 
 	void saveFile(const nlohmann::json& jsonObj);
+	void saveBufferFile(std::string buffer);
 
     FBEntity exportFile;
     std::string nlDelimiter, exportFileFolder, defaultSceneName, defaultMaterialName;
