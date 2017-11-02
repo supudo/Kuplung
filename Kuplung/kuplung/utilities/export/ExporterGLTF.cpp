@@ -41,6 +41,7 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
     this->parserUtils = std::make_unique<ParserUtils>();
 	this->defaultSceneName = "KuplungScene";
 	this->defaultMaterialName = "KuplungMaterial";
+	this->gltfVersion = "2.0";
 }
 
 void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
@@ -251,7 +252,7 @@ void ExporterGLTF::prepFolderLocation() {
     this->exportFileFolder = newFolder;
 }
 
-void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
+bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
     time_t t = time(0);
     const struct tm * now = localtime(&t);
 
@@ -276,25 +277,45 @@ void ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
     std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
     out << std::setw(4) << jsonObj << std::endl;
     out.close();
+
+	return true;
 }
 
-void ExporterGLTF::saveBufferFile(std::string buffer) {
+bool ExporterGLTF::saveBufferFile(std::string buffer) {
 	std::string file = this->exportFileFolder + "/" + this->exportFile.title + ".bin";
 
-	std::string bufferData("");
-	bufferData += "gltf";
-	bufferData += "2";
-	bufferData += std::to_string(("gltf2" + buffer).size());
+	/*std::string bufferData("");
+	bufferData += "glTF";
+	bufferData += this->gltfVersion;
+	bufferData += std::to_string(("glTF" + this->gltfVersion + buffer).size());
 	bufferData += std::to_string(buffer.size());
 	bufferData += "BIN";
 	bufferData += buffer;
-
 	std::string d = boost::endian::native_to_little(bufferData);
-
 	std::ofstream out(file, std::ios::out | std::ios::ate | std::ios::binary);
-	//out.write(bufferData.c_str(), bufferData.size());
 	out.write((char*)&d, sizeof(d));
-	out.close();
+	out.close();*/
+
+	auto f = fopen(file.c_str(), "wt");
+	if (!f) {
+		Settings::Instance()->funcDoLog("[Kuplung] Could not write glTF binary file!");
+		return false;
+	}
+
+	std::string* err;
+
+	uint32_t magic = 0x46546C67;
+	if (!std::fwrite(&magic, 1, 1, f)) return false;
+
+	uint32_t version = 2;
+	if (!std::fwrite(&version, 1, 1, f)) return false;
+
+	uint32_t length = 12 + 8 + static_cast<int>(buffer.size());
+	if (!std::fwrite(&length, 1, 1, f)) return false;
+
+	std::fwrite((char*)&buffer, 1, (int)buffer.size(), f);
+
+	return true;
 }
 
 }}}

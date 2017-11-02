@@ -42,12 +42,14 @@ private:
 	nlohmann::json exportBufferViews(const std::vector<ModelFaceBase*>& faces);
 	nlohmann::json exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file);
 
-	void saveFile(const nlohmann::json& jsonObj);
-	void saveBufferFile(std::string buffer);
+	bool saveFile(const nlohmann::json& jsonObj);
+	bool saveBufferFile(std::string buffer);
 
     FBEntity exportFile;
     std::string nlDelimiter, exportFileFolder, defaultSceneName, defaultMaterialName;
     bool addSuffix = true;
+
+	std::string gltfVersion;
 };
 
 }}}
