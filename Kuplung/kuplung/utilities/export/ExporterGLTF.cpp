@@ -39,6 +39,7 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
 
     this->exportFileFolder = "";
     this->parserUtils = std::make_unique<ParserUtils>();
+	this->gltfGenerator = "Kuplung";
 	this->defaultSceneName = "KuplungScene";
 	this->defaultMaterialName = "KuplungMaterial";
 	this->gltfVersion = "2.0";
@@ -51,7 +52,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
     this->prepFolderLocation();
 
     nlohmann::json j;
-    j["asset"] = { { "generator", "Kuplung" }, { "version", "1.0" } };
+    j["asset"] = { { "generator", "Kuplung" }, { this->gltfGenerator, this->gltfVersion } };
     j["scene"] = this->defaultSceneName;
 	j["scenes"] = this->exportScenes(faces);
     j["cameras"] = this->exportCameras(managerObjects);
@@ -210,7 +211,6 @@ nlohmann::json ExporterGLTF::exportBufferViews(const std::vector<ModelFaceBase*>
 
 nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file) {
     nlohmann::json j;
-    std::string bufferFile = file.title + ".bin";
     std::vector<ModelFaceBase*>::const_iterator faceIterator;
 	nlohmann::json jBuffer, jBufferViews;
 	int totalBufferLength = 0;
@@ -235,9 +235,10 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
 	jBuffer["type"] = "arraybuffer";
 	jBuffer["byteLength"] = totalBufferLength;
 	//jBuffer["uri"] = "data:application/octet-stream;base64," + bufferData;
-	this->saveBufferFile(bufferData);
-	jBuffer["uri"] = this->exportFileFolder + "/" + this->exportFile.title + ".bin";
-	j[this->exportFileFolder + "/" + this->exportFile.title + ".gltf"] = jBuffer;
+	if (!this->saveBufferFile(bufferData))
+		Settings::Instance()->funcDoLog("[Kuplung] Error occured while writing the BIN glTF file!");
+	jBuffer["uri"] = this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin";
+	j[this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin"] = jBuffer;
     return j;
 }
 
@@ -282,19 +283,7 @@ bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
 }
 
 bool ExporterGLTF::saveBufferFile(std::string buffer) {
-	std::string file = this->exportFileFolder + "/" + this->exportFile.title + ".bin";
-
-	/*std::string bufferData("");
-	bufferData += "glTF";
-	bufferData += this->gltfVersion;
-	bufferData += std::to_string(("glTF" + this->gltfVersion + buffer).size());
-	bufferData += std::to_string(buffer.size());
-	bufferData += "BIN";
-	bufferData += buffer;
-	std::string d = boost::endian::native_to_little(bufferData);
-	std::ofstream out(file, std::ios::out | std::ios::ate | std::ios::binary);
-	out.write((char*)&d, sizeof(d));
-	out.close();*/
+	std::string file = this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin";
 
 	auto f = fopen(file.c_str(), "wt");
 	if (!f) {
@@ -302,18 +291,44 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 		return false;
 	}
 
-	std::string* err;
+	uint32_t buffer_length = buffer.size();
+	if (buffer_length % 4)
+		buffer_length += 4 - buffer_length % 4;
 
+	// 12-byte header
+	// - magic
 	uint32_t magic = 0x46546C67;
-	if (!std::fwrite(&magic, 1, 1, f)) return false;
+	if (!std::fwrite(&magic, 1, 1, f))
+		return false;
 
+	// - version
 	uint32_t version = 2;
-	if (!std::fwrite(&version, 1, 1, f)) return false;
+	if (!std::fwrite(&version, 1, 1, f))
+		return false;
 
-	uint32_t length = 12 + 8 + static_cast<int>(buffer.size());
-	if (!std::fwrite(&length, 1, 1, f)) return false;
+	// - length
+	uint32_t length = 12 + 8 + buffer_length;
+	if (!std::fwrite(&length, 1, 1, f))
+		return false;
 
+	// binary buffer chunk
+	// - chunk length
+	if (!std::fwrite(&buffer_length, 1, 1, f))
+		return false;
+
+	// - chunk type
+	uint32_t chunkType = 0x004E4942;
+	if (!std::fwrite(&chunkType, 1, 1, f))
+		return false;
+
+	// - chunkData
 	std::fwrite((char*)&buffer, 1, (int)buffer.size(), f);
+
+	// padding
+	char pad = 0;
+	for (auto i = 0; i < buffer_length - buffer.size(); i++) {
+		if (!fwrite(&pad, 1, 1, f)) return false;
+	}
 
 	return true;
 }

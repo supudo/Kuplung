@@ -49,7 +49,7 @@ private:
     std::string nlDelimiter, exportFileFolder, defaultSceneName, defaultMaterialName;
     bool addSuffix = true;
 
-	std::string gltfVersion;
+	std::string gltfGenerator, gltfVersion;
 };
 
 }}}
