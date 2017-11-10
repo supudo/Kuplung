@@ -322,12 +322,14 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 		return false;
 
 	// - chunkData
-	std::fwrite((char*)&buffer, 1, (int)buffer.size(), f);
+	if (!std::fwrite((char*)&buffer, 1, (int)buffer.size(), f))
+		return false;
 
 	// padding
 	char pad = 0;
 	for (auto i = 0; i < buffer_length - buffer.size(); i++) {
-		if (!fwrite(&pad, 1, 1, f)) return false;
+		if (!fwrite(&pad, 1, 1, f))
+			return false;
 	}
 
 	return true;
