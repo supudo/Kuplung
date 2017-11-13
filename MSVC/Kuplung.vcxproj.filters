@@ -323,6 +323,9 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp">
       <Filter>kuplung\utilities\export</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp">
+      <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -709,6 +712,9 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp">
       <Filter>kuplung\utilities\export</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h">
+      <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -884,6 +890,9 @@
     </Filter>
     <Filter Include="kuplung\utilities\cpp-base64">
       <UniqueIdentifier>{0eb6ce27-111f-4481-a24f-faf3acea6291}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\imgui\ImGuiColorTextEdit">
+      <UniqueIdentifier>{5f2c34ce-6213-43a6-8afb-f20dc58f689c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

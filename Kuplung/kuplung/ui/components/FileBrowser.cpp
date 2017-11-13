@@ -62,13 +62,13 @@ void FileBrowser::draw(const char* title, bool* p_opened, MaterialTextureType Te
 		"##8820",
 		&Settings::Instance()->Setting_SelectedDriveIndex,
 		[](void* vec, int idx, const char** out_text)
-	{
-		auto& vector = *static_cast<std::vector<std::string>*>(vec);
-		if (idx < 0 || idx >= static_cast<int>(vector.size()))
-			return false;
-		*out_text = vector.at(idx).c_str();
-		return true;
-	},
+			{
+				auto& vector = *static_cast<std::vector<std::string>*>(vec);
+				if (idx < 0 || idx >= static_cast<int>(vector.size()))
+					return false;
+				*out_text = vector.at(idx).c_str();
+				return true;
+			},
 		static_cast<void*>(&Settings::Instance()->hddDriveList),
 		Settings::Instance()->hddDriveList.size()
 		);

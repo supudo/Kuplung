@@ -177,6 +177,7 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
                                           std::bind(&Kuplung::openScene, this, std::placeholders::_1)
                                           );
+					this->managerUI->setMeshModelFaces(&this->meshModelFaces);
                     this->doLog("UI initialized.");
 
                     this->managerObjects->loadSystemModels(this->parser);

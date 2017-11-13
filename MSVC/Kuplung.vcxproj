@@ -355,6 +355,7 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
@@ -476,6 +477,7 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />

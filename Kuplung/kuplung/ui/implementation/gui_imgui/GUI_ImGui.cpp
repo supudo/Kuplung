@@ -371,7 +371,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::Separator();
             if (ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
                 Settings::Instance()->saveSettings();
-//            ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
+            // ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
             ImGui::MenuItem(ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
             ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
@@ -687,7 +687,7 @@ void GUI_ImGui::dialogShaderEditor() {
 }
 
 void GUI_ImGui::dialogKuplungIDE() {
-    this->componentKuplungIDE->draw("IDE", &this->showKuplungIDE);
+    this->componentKuplungIDE->draw("IDE", &this->showKuplungIDE, *this->meshModelFaces);
 }
 
 void GUI_ImGui::dialogLog() {
