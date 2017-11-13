@@ -50,6 +50,7 @@ void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const 
 	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
 		const ModelFaceBase& face = **faceIterator;
 		MeshModel model = face.meshModel;
+		std::string modelTitle = model.ModelTitle + "_" + std::to_string(counterMesh);
 
 		// materials
 
@@ -62,13 +63,12 @@ void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const 
 		scene->mMeshes[counterMesh] = new aiMesh();
 		scene->mMeshes[counterMesh]->mMaterialIndex = 0;
 
-		scene->mMeshes[counterMesh]->mName = model.ModelTitle;
+		scene->mMeshes[counterMesh]->mName = modelTitle;
 
 		scene->mRootNode->mMeshes[counterMesh] = 0;
 		auto pMesh = scene->mMeshes[counterMesh];
 
 		// geometry
-
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec3> normals;
 		std::vector<glm::vec2> uvs;

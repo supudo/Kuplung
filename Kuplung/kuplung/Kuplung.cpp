@@ -545,57 +545,57 @@ void Kuplung::addShape(const ShapeType type) {
     std::string shapeName("");
     assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
     switch (type) {
-    case ShapeType_Cone:
-        shapeName = "cone";
-        break;
-    case ShapeType_Cube:
-        shapeName = "cube";
-        break;
-    case ShapeType_Cylinder:
-        shapeName = "cylinder";
-        break;
-    case ShapeType_Grid:
-        shapeName = "grid";
-        break;
-    case ShapeType_IcoSphere:
-        shapeName = "ico_sphere";
-        break;
-    case ShapeType_MonkeyHead:
-        shapeName = "monkey_head";
-        break;
-    case ShapeType_Plane:
-        shapeName = "plane";
-        break;
-    case ShapeType_Triangle:
-        shapeName = "triangle";
-        break;
-    case ShapeType_Torus:
-        shapeName = "torus";
-        break;
-    case ShapeType_Tube:
-        shapeName = "tube";
-        break;
-    case ShapeType_UVSphere:
-        shapeName = "uv_sphere";
-        break;
-    case ShapeType_BrickWall:
-        shapeName = "brick_wall";
-        break;
-    case ShapeType_PlaneObjects:
-        shapeName = "plane_objects";
-        break;
-    case ShapeType_PlaneObjectsLargePlane:
-        shapeName = "plane_objects_large";
-        break;
-    case ShapeType_MaterialBall:
-        shapeName = "MaterialBall";
-        break;
-    case ShapeType_MaterialBallBlender:
-        shapeName = "MaterialBallBlender";
-        break;
-    case ShapeType_Epcot:
-        shapeName = "epcot";
-        break;
+		case ShapeType_Cone:
+			shapeName = "cone";
+			break;
+		case ShapeType_Cube:
+			shapeName = "cube";
+			break;
+		case ShapeType_Cylinder:
+			shapeName = "cylinder";
+			break;
+		case ShapeType_Grid:
+			shapeName = "grid";
+			break;
+		case ShapeType_IcoSphere:
+			shapeName = "ico_sphere";
+			break;
+		case ShapeType_MonkeyHead:
+			shapeName = "monkey_head";
+			break;
+		case ShapeType_Plane:
+			shapeName = "plane";
+			break;
+		case ShapeType_Triangle:
+			shapeName = "triangle";
+			break;
+		case ShapeType_Torus:
+			shapeName = "torus";
+			break;
+		case ShapeType_Tube:
+			shapeName = "tube";
+			break;
+		case ShapeType_UVSphere:
+			shapeName = "uv_sphere";
+			break;
+		case ShapeType_BrickWall:
+			shapeName = "brick_wall";
+			break;
+		case ShapeType_PlaneObjects:
+			shapeName = "plane_objects";
+			break;
+		case ShapeType_PlaneObjectsLargePlane:
+			shapeName = "plane_objects_large";
+			break;
+		case ShapeType_MaterialBall:
+			shapeName = "MaterialBall";
+			break;
+		case ShapeType_MaterialBallBlender:
+			shapeName = "MaterialBallBlender";
+			break;
+		case ShapeType_Epcot:
+			shapeName = "epcot";
+			break;
     }
     FBEntity shapeFile;
     shapeFile.isFile = true;

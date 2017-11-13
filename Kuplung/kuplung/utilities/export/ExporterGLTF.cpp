@@ -39,34 +39,236 @@ void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
 
     this->exportFileFolder = "";
     this->parserUtils = std::make_unique<ParserUtils>();
-	this->gltfGenerator = "Kuplung";
+	this->gltfGenerator = "Kuplung (https://github.com/supudo/Kuplung)";
 	this->defaultSceneName = "KuplungScene";
 	this->defaultMaterialName = "KuplungMaterial";
 	this->gltfVersion = "2.0";
+	this->BufferInExternalFile = false;
 }
 
 void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
-    this->exportFile = file;
-    this->objSettings = settings;
+	this->exportFile = file;
+	this->objSettings = settings;
 
-    this->prepFolderLocation();
+	this->prepFolderLocation();
 
-    nlohmann::json j;
-    j["asset"] = { { "generator", "Kuplung" }, { this->gltfGenerator, this->gltfVersion } };
-    j["scene"] = this->defaultSceneName;
-	j["scenes"] = this->exportScenes(faces);
-    j["cameras"] = this->exportCameras(managerObjects);
-    j["nodes"] = this->exportNodes(faces);
-    j["meshes"] = this->exportMeshes(faces);
-    j["accessors"] = this->exportAccessors(faces);
-    j["materials"] = this->exportMaterials(faces);
-    j["textures"] = this->exportTextures(faces);
-    j["images"] = this->exportImages(faces);
-    j["samplers"] = this->exportSamplers(faces);
-    j["bufferViews"] = this->exportBufferViews(faces);
-    j["buffers"] = this->exportBuffers(faces, file);
+	nlohmann::json j;
+	j["asset"] = { { "generator", this->gltfGenerator }, { "version", this->gltfVersion } };
+	j["scene"] = this->defaultSceneName;
+	//j["scenes"] = this->exportScenes(faces);
+	j["cameras"] = this->exportCameras(managerObjects);
 
-    this->saveFile(j);
+	std::string meshNameSuffix = "_mesh";
+	std::string suffix_Indices = "_indices";
+	std::string suffix_Vertices = "_vertices";
+	std::string suffix_Normals = "_normals";
+	std::string suffix_UVs = "_uvs";
+	std::string meshAccessorSuffix_Indices = meshNameSuffix + "_accessor" + suffix_Indices;
+	std::string meshAccessorSuffix_Vertices = meshNameSuffix + "_accessor" + suffix_Vertices;
+	std::string meshAccessorSuffix_Normals = meshNameSuffix + "_accessor" + suffix_Normals;
+	std::string meshAccessorSuffix_UVs = meshNameSuffix + "_accessor" + suffix_UVs;
+	std::string bufferViewSuffix = "_view";
+
+	nlohmann::json jBufferViews;
+	int totalBufferLength = 0, meshCounter = 0, nodeCounter = 0;
+	std::string bufferData;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+		MeshModelMaterial mat = model.ModelMaterial;
+		std::string modelTitleLocal = model.ModelTitle + "_" + std::to_string(meshCounter);
+
+		// ---------------------------------------------------------
+		// scenes
+		j["scenes"][this->defaultSceneName]["nodes"].push_back(nodeCounter);
+
+		// ---------------------------------------------------------
+		// nodes
+		j["nodes"].push_back({
+			{ "mesh", meshCounter },
+			{ "name", modelTitleLocal + meshNameSuffix },
+			{ "translation", { face.rotateX->point, face.rotateY->point, face.rotateZ->point } }
+		});
+		
+		// ---------------------------------------------------------
+		// materials
+		j["materials"][model.MaterialTitle]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j["materials"][model.MaterialTitle]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j["materials"][model.MaterialTitle]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j["materials"][model.MaterialTitle]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j["materials"][model.MaterialTitle]["value"]["shininess"] = 0.0f;
+
+		// ---------------------------------------------------------
+		// images
+		if (!mat.TextureAmbient.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureAmbient.Image));
+		if (!mat.TextureBump.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureBump.Image));
+		if (!mat.TextureDiffuse.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureDiffuse.Image));
+		if (!mat.TextureDisplacement.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureDisplacement.Image));
+		if (!mat.TextureDissolve.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureDissolve.Image));
+		if (!mat.TextureSpecular.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureSpecular.Image));
+		if (!mat.TextureSpecularExp.Image.empty())
+			j["images"].push_back(this->copyImage(mat.TextureSpecularExp.Image));
+
+		// ---------------------------------------------------------
+		// meshes
+		nlohmann::json jMeshPrimitives;
+		if (model.texture_coordinates.size() > 0) {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", model.MaterialTitle },
+				{ "indices", modelTitleLocal + meshAccessorSuffix_Indices },
+				{ "attributes",
+					{
+						{ "POSITION", modelTitleLocal + meshAccessorSuffix_Vertices },
+						{ "NORMAL", modelTitleLocal + meshAccessorSuffix_Normals },
+						{ "TEXCOORD_0", modelTitleLocal + meshAccessorSuffix_UVs }
+					}
+				}
+			};
+		}
+		else {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", model.MaterialTitle },
+				{ "indices", modelTitleLocal + meshAccessorSuffix_Indices },
+				{ "attributes",
+					{
+						{ "POSITION", modelTitleLocal + meshAccessorSuffix_Vertices },
+						{ "NORMAL", modelTitleLocal + meshAccessorSuffix_Normals }
+					}
+				}
+			};
+		}
+		j["meshes"].push_back({ { "name", modelTitleLocal + meshNameSuffix }, { "primitives", jMeshPrimitives } });
+
+		// ---------------------------------------------------------
+		// buffers
+		int base64_size_indices = model.indices.size() * sizeof(float);
+		int base64_size_vertices = model.vertices.size() * 3 * sizeof(float);
+		int base64_size_normals = model.normals.size() * 3 * sizeof(float);
+		int base64_size_textureCoordinates = model.texture_coordinates.size() * 2 * sizeof(float);
+		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
+		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
+		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
+		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
+
+		// ---------------------------------------------------------
+		// buffer views
+		// indices
+		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Indices] = {
+			{ "buffer", 0 },
+			{ "byteOffset", totalBufferLength},
+			{ "byteLength", base64_size_indices },
+			{ "target", "34963" }
+		};
+		// vertices
+		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Vertices] = {
+			{ "buffer", 0 },
+			{ "byteOffset", totalBufferLength + base64_size_indices },
+			{ "byteLength", base64_size_vertices },
+			{ "target", "34962" }
+		};
+		// normals
+		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Normals] = {
+			{ "buffer", 0 },
+			{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices) },
+			{ "byteLength", base64_size_normals },
+			{ "target", "34962" }
+		};
+		// uvs
+		if (model.texture_coordinates.size() > 0)
+			jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Normals] = {
+				{ "buffer", 0 },
+				{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices + base64_size_normals) },
+				{ "byteLength", base64_size_textureCoordinates },
+				{ "target", "34962" }
+			};
+
+		// ---------------------------------------------------------
+		// accessors
+		nlohmann::json jAccessors;
+		// indices
+		jAccessors[modelTitleLocal + meshAccessorSuffix_Indices] = {
+			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Indices },
+			{ "byteOffset", 0 },
+			{ "byteStride", 0 },
+			{ "componentType", 5125 },
+			{ "count", model.indices.size() },
+			{ "type", "SCALAR" }
+		};
+		// vertices
+		jAccessors[modelTitleLocal + meshAccessorSuffix_Vertices] = {
+			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Vertices },
+			{ "byteOffset", 0 },
+			{ "byteStride", 0 },
+			{ "componentType", 5126 },
+			{ "count", model.vertices.size() * 3 },
+			{ "type", "VEC3" }
+		};
+		// normals
+		jAccessors[modelTitleLocal + meshAccessorSuffix_Normals] = {
+			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Normals },
+			{ "byteOffset", 0 },
+			{ "byteStride", 0 },
+			{ "componentType", 5126 },
+			{ "count", model.normals.size() * 3 },
+			{ "type", "VEC3" }
+		};
+		// uvs
+		if (model.texture_coordinates.size() > 0)
+			jAccessors[modelTitleLocal + meshAccessorSuffix_UVs] = {
+				{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_UVs },
+				{ "byteOffset", 0 },
+				{ "byteStride", 0 },
+				{ "componentType", 5126 },
+				{ "count", model.texture_coordinates.size() * 2 },
+				{ "type", "VEC2" }
+			};
+		j["accessors"].push_back(jAccessors);
+
+		// ---------------------------------------------------------
+		// misc
+		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
+		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
+
+		if (!this->BufferInExternalFile) {
+			j["buffers"]["type"] = "arraybuffer";
+			j["buffers"]["byteLength"] = totalBufferLength;
+			j["buffers"]["uri"] = "data:application/octet-stream;base64," + bufferData;
+		}
+
+		meshCounter += 1;
+		nodeCounter += 1;
+	}
+
+	j["bufferViews"] = jBufferViews;
+
+	if (this->BufferInExternalFile) {
+		j["buffers"]["byteLength"] = totalBufferLength;
+		j["buffers"]["uri"] = this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin";
+		if (!this->saveBufferFile(bufferData))
+			Settings::Instance()->funcDoLog("[Kuplung] Error occured while writing the BIN glTF file!");
+	}
+
+    //j["nodes"] = this->exportNodes(faces);
+    //j["meshes"] = this->exportMeshes(faces);
+    //j["accessors"] = this->exportAccessors(faces);
+    //j["materials"] = this->exportMaterials(faces);
+    //j["textures"] = this->exportTextures(faces);
+    //j["images"] = this->exportImages(faces);
+    //j["samplers"] = this->exportSamplers(faces);
+    //j["bufferViews"] = this->exportBufferViews(faces);
+    //j["buffers"] = this->exportBuffers(faces, file);
+
+    if (!this->saveFile(j))
+		Settings::Instance()->funcDoLog("[Kuplung] Could not save glTF file!");
 }
 
 nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &managerObjects) {
@@ -76,8 +278,8 @@ nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &mana
     viewportCamera["perspective"] = {
         { "aspectRatio", managerObjects->Setting_RatioWidth / managerObjects->Setting_RatioHeight },
         { "yfov", managerObjects->Setting_FOV },
-        { "zfar", managerObjects->Setting_PlaneClose },
-        { "znear", managerObjects->Setting_PlaneFar }
+        { "zfar", managerObjects->Setting_PlaneFar },
+        { "znear", managerObjects->Setting_PlaneClose }
     };
     j.push_back(viewportCamera);
     return j;
@@ -115,7 +317,7 @@ nlohmann::json ExporterGLTF::exportMeshes(const std::vector<ModelFaceBase*>& fac
 		if (model.texture_coordinates.size() > 0) {
 			jMeshPrimitives[faceIterator - faces.begin()] = {
 				{ "mode", 4 },
-				{ "material", this->defaultMaterialName },
+				{ "material", model.MaterialTitle },
 				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
 				{ "attributes", {
 						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
@@ -128,7 +330,7 @@ nlohmann::json ExporterGLTF::exportMeshes(const std::vector<ModelFaceBase*>& fac
 		else {
 			jMeshPrimitives[faceIterator - faces.begin()] = {
 				{ "mode", 4 },
-				{ "material", this->defaultMaterialName },
+				{ "material", model.MaterialTitle },
 				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
 				{ "attributes", {
 						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
@@ -152,11 +354,16 @@ nlohmann::json ExporterGLTF::exportAccessors(const std::vector<ModelFaceBase*>& 
 
 nlohmann::json ExporterGLTF::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
     nlohmann::json j;
-	j[this->defaultMaterialName]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	j[this->defaultMaterialName]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	j[this->defaultMaterialName]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	j[this->defaultMaterialName]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-	j[this->defaultMaterialName]["value"]["shininess"] = 0.0f;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+		j[model.MaterialTitle]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j[model.MaterialTitle]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j[model.MaterialTitle]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j[model.MaterialTitle]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
+		j[model.MaterialTitle]["value"]["shininess"] = 0.0f;
+	}
     return j;
 }
 
@@ -206,6 +413,11 @@ nlohmann::json ExporterGLTF::exportSamplers(const std::vector<ModelFaceBase*>& f
 
 nlohmann::json ExporterGLTF::exportBufferViews(const std::vector<ModelFaceBase*>& faces) {
     nlohmann::json j;
+	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
+		const ModelFaceBase& face = **faceIterator;
+		MeshModel model = face.meshModel;
+	}
     return j;
 }
 
@@ -219,9 +431,9 @@ nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& fa
         const ModelFaceBase& face = **faceIterator;
         MeshModel model = face.meshModel;
 		int base64_size_indices = model.indices.size() * sizeof(float);
-        int base64_size_vertices = model.vertices.size() * sizeof(float);
-		int base64_size_normals = model.normals.size() * sizeof(float);
-		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(float);
+        int base64_size_vertices = model.vertices.size() * 3 * sizeof(float);
+		int base64_size_normals = model.normals.size() * 3 * sizeof(float);
+		int base64_size_textureCoordinates = model.texture_coordinates.size() * 2 * sizeof(float);
 		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
         std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
 		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
@@ -287,7 +499,7 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 
 	auto f = fopen(file.c_str(), "wt");
 	if (!f) {
-		Settings::Instance()->funcDoLog("[Kuplung] Could not write glTF binary file!");
+		Settings::Instance()->funcDoLog("[Kuplung] Could not create glTF binary file!");
 		return false;
 	}
 
@@ -317,20 +529,22 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 		return false;
 
 	// - chunk type
-	uint32_t chunkType = 0x004E4942;
-	if (!std::fwrite(&chunkType, 1, 1, f))
+	uint32_t bufferType = 0x004E4942;
+	if (!std::fwrite(&bufferType, 1, 1, f))
 		return false;
 
 	// - chunkData
-	if (!std::fwrite((char*)&buffer, 1, (int)buffer.size(), f))
+	if (!std::fwrite((char*)&buffer, 1, buffer.size(), f))
 		return false;
 
 	// padding
 	char pad = 0;
-	for (auto i = 0; i < buffer_length - buffer.size(); i++) {
+	for (auto i = 0; i < buffer_length - buffer_length; i++) {
 		if (!fwrite(&pad, 1, 1, f))
 			return false;
 	}
+
+	std::fclose(f);
 
 	return true;
 }

@@ -23,6 +23,8 @@ public:
     void init(const std::function<void(float)>& doProgress);
     void exportToFile(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects);
 
+	bool BufferInExternalFile;
+
 private:
     std::function<void(float)> funcProgress;
     std::unique_ptr<ParserUtils> parserUtils;
