@@ -100,7 +100,7 @@ void KuplungIDE::init() {
 	this->kuplungEditor.SetLanguageDefinition(lang);
 }
 
-void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBase*> const& meshModelFaces) {
+void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBase*> const& meshModelFaces, ObjectsManager &managerObjects) {
     ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiSetCond_FirstUseEver);
 
@@ -108,15 +108,6 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(.13f, .13f, .13f, 1.0f));
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
 	ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
-
-	if (meshModelFaces.size() > 0) {
-		std::vector<ModelFaceBase*>::const_iterator faceIterator;
-		for (faceIterator = meshModelFaces.begin(); faceIterator != meshModelFaces.end(); ++faceIterator) {
-			const ModelFaceBase& face = **faceIterator;
-			std::string mt = face.meshModel.ModelTitle;
-			this->meshesShadersList.push_back(mt);
-		}
-	}
 
 	ImGui::Combo(
 		"##001",
@@ -134,8 +125,11 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	);
 	ImGui::SameLine();
 	if (ImGui::Button("Load Shader"))
-		this->loadSelectedShader();
+		this->loadSelectedShader(managerObjects);
 	ImGui::Separator();
+
+	if (ImGui::Button("Compile Shaders", ImVec2(-1.0f, 40.0))) {
+	}
 
 	if (ImGui::BeginMenuBar())
 		ImGui::EndMenuBar();
@@ -152,22 +146,19 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	ImGui::PopStyleColor();
 }
 
-void KuplungIDE::loadSelectedShader() {
-	std::string shaderFile = "";
+void KuplungIDE::loadSelectedShader(ObjectsManager &managerObjects) {
+	std::string shaderSource = "";
 	if (Settings::Instance()->RendererType == InAppRendererType_Forward) {
 		if (this->selectedIndex == 0)
-			shaderFile = Settings::Instance()->appFolder() + "/shaders/model_face.vert";
+			shaderSource = managerObjects.shaderSourceVertex;
 		else if (this->selectedIndex == 1)
-			shaderFile = Settings::Instance()->appFolder() + "/shaders/model_face.geom";
+			shaderSource = managerObjects.shaderSourceGeometry;
 		else if (this->selectedIndex == 2)
-			shaderFile = Settings::Instance()->appFolder() + "/shaders/model_face.tcs";
+			shaderSource = managerObjects.shaderSourceTCS;
 		else if (this->selectedIndex == 3)
-			shaderFile = Settings::Instance()->appFolder() + "/shaders/model_face.tes";
+			shaderSource = managerObjects.shaderSourceTES;
 		else if (this->selectedIndex == 4)
-			shaderFile = Settings::Instance()->appFolder() + "/shaders/model_face.frag";
-		std::ifstream t(shaderFile);
-		std::string str((std::istreambuf_iterator<char>(t)),
-			std::istreambuf_iterator<char>());
-		this->kuplungEditor.SetText(str);
+			shaderSource = managerObjects.shaderSourceFragment;
+		this->kuplungEditor.SetText(shaderSource);
 	}
 }

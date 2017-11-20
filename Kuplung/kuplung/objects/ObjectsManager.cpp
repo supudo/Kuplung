@@ -49,6 +49,25 @@ void ObjectsManager::init(const std::function<void(float)>& doProgress, const st
 //    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[2].x, m_m[2].y, m_m[2].z, m_m[2].w);
 //    printf("x = %f, y = %f, z = %f, w = %f\n", m_m[3].x, m_m[3].y, m_m[3].z, m_m[3].w);
 //    printf("===============\n");
+
+	this->shaderSourceVertex = Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.vert").c_str());
+	this->shaderSourceTCS = Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.tcs").c_str());
+	this->shaderSourceTES = Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.tes").c_str());
+	this->shaderSourceGeometry = Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.geom").c_str());
+	this->shaderSourceFragment = "";
+	std::vector<std::string> fragFiles = {
+		"vars",
+		"effects",
+		"lights",
+		"mapping",
+		"shadow_mapping",
+		"misc",
+		"pbr"
+	};
+	for (size_t i = 0; i<fragFiles.size(); i++) {
+		this->shaderSourceFragment += Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag").c_str());
+	}
+	this->shaderSourceFragment += Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.frag").c_str());
 }
 
 void ObjectsManager::render() {

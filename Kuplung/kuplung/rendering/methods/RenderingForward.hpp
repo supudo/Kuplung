@@ -21,6 +21,7 @@ public:
 
     bool init();
     void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
+	void precompileShaders();
 
 private:
     bool initShaderProgram();

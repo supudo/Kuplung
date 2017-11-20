@@ -108,6 +108,8 @@ public:
 
     bool Setting_Rendering_Depth, Setting_DebugShadowTexture;
 
+	std::string shaderSourceVertex, shaderSourceTCS, shaderSourceTES, shaderSourceGeometry, shaderSourceFragment;
+
 private:
     std::function<void(float)> funcProgress;
     std::function<void()> funcAddTerrain;
