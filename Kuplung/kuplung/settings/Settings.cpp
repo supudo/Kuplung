@@ -78,6 +78,7 @@ void Settings::initSettings(const std::string& iniFolder) {
 #else
     m_pInstance->UseCuda = false;
 #endif
+	m_pInstance->shouldRecompileShaders = false;
 
     m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
     m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");

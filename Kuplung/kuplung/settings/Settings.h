@@ -63,6 +63,7 @@ public:
     float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
     bool UseCuda;
 	ImportExportFormats ImportExportFormat;
+	bool shouldRecompileShaders;
 
     void timerStart(const std::string& msg);
     void timerEnd(const std::string& msg);

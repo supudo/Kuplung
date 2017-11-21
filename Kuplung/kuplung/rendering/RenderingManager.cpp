@@ -47,6 +47,10 @@ void RenderingManager::render(const int& selectedModel) {
             this->rendererSimple->render(this->meshModelFaces, selectedModel);
             break;
         case InAppRendererType_Forward:
+			if (Settings::Instance()->shouldRecompileShaders) {
+				this->rendererForward->precompileShaders();
+				Settings::Instance()->shouldRecompileShaders = false;
+			}
             this->rendererForward->render(this->meshModelFaces, selectedModel);
             break;
         case InAppRendererType_ForwardShadowMapping:

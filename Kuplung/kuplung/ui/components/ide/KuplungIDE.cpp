@@ -129,7 +129,21 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	ImGui::Separator();
 
 	if (ImGui::Button("Compile Shaders", ImVec2(-1.0f, 40.0))) {
+		if (Settings::Instance()->RendererType == InAppRendererType_Forward) {
+			if (this->selectedIndex == 0)
+				(&managerObjects)->shaderSourceVertex = this->kuplungEditor.GetText();
+			else if (this->selectedIndex == 1)
+				(&managerObjects)->shaderSourceGeometry = this->kuplungEditor.GetText();
+			else if (this->selectedIndex == 2)
+				(&managerObjects)->shaderSourceTCS = this->kuplungEditor.GetText();
+			else if (this->selectedIndex == 3)
+				(&managerObjects)->shaderSourceTES = this->kuplungEditor.GetText();
+			else if (this->selectedIndex == 4)
+				(&managerObjects)->shaderSourceFragment = this->kuplungEditor.GetText();
+			Settings::Instance()->shouldRecompileShaders = true;
+		}
 	}
+	ImGui::Separator();
 
 	if (ImGui::BeginMenuBar())
 		ImGui::EndMenuBar();
@@ -138,6 +152,8 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 		this->kuplungEditor.IsOverwrite() ? "Ovr" : "Ins",
 		this->kuplungEditor.CanUndo() ? "*" : " ",
 		this->kuplungEditor.GetLanguageDefinition().mName.c_str(), this->meshesShadersList[this->selectedIndex]);
+
+	ImGui::Separator();
 
 	this->kuplungEditor.Render("Kuplung IDE");
 
