@@ -54,8 +54,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
 	nlohmann::json j;
 	j["asset"] = { { "generator", this->gltfGenerator }, { "version", this->gltfVersion } };
-	j["scene"] = this->defaultSceneName;
-	//j["scenes"] = this->exportScenes(faces);
+	j["scene"] = 0;
 	j["cameras"] = this->exportCameras(managerObjects);
 
 	std::string meshNameSuffix = "_mesh";
@@ -69,8 +68,9 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	std::string meshAccessorSuffix_UVs = meshNameSuffix + "_accessor" + suffix_UVs;
 	std::string bufferViewSuffix = "_view";
 
-	nlohmann::json jBufferViews;
+	nlohmann::json jBufferViews, jAccessors, jBuffers, jMaterials, jNodes, jScenes, jMeshes;
 	int totalBufferLength = 0, meshCounter = 0, nodeCounter = 0;
+	int currentBufferCounter = 0, currentAccessorCounter = 0, currentMaterialCounter = 0;
 	std::string bufferData;
 	std::vector<ModelFaceBase*>::const_iterator faceIterator;
 	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
@@ -81,23 +81,36 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
 		// ---------------------------------------------------------
 		// scenes
-		j["scenes"][this->defaultSceneName]["nodes"].push_back(nodeCounter);
+		jScenes.push_back(
+			{
+				{ "nodes", { nodeCounter } }
+			}
+		);
 
 		// ---------------------------------------------------------
 		// nodes
-		j["nodes"].push_back({
+		jNodes.push_back({
 			{ "mesh", meshCounter },
 			{ "name", modelTitleLocal + meshNameSuffix },
 			{ "translation", { face.rotateX->point, face.rotateY->point, face.rotateZ->point } }
 		});
-		
+
 		// ---------------------------------------------------------
 		// materials
-		j["materials"][model.MaterialTitle]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j["materials"][model.MaterialTitle]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j["materials"][model.MaterialTitle]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j["materials"][model.MaterialTitle]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j["materials"][model.MaterialTitle]["value"]["shininess"] = 0.0f;
+		jMaterials.push_back(
+			{
+				{ "name", model.MaterialTitle },
+				{ "values",
+					{
+						{ "ambient", { face.materialAmbient->color.r, face.materialAmbient->color.g, face.materialAmbient->color.b, face.Setting_Alpha } },
+						{ "diffuse", { face.materialDiffuse->color.r, face.materialDiffuse->color.g, face.materialDiffuse->color.b, face.Setting_Alpha } },
+						{ "specular", { face.materialSpecular->color.r, face.materialSpecular->color.g, face.materialSpecular->color.b, face.Setting_Alpha } },
+						{ "emission", { face.materialEmission->color.r, face.materialEmission->color.g, face.materialEmission->color.b, face.Setting_Alpha } },
+						{ "shininess", 0.0f },
+					}
+				}
+			}
+		);
 
 		// ---------------------------------------------------------
 		// images
@@ -117,38 +130,6 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			j["images"].push_back(this->copyImage(mat.TextureSpecularExp.Image));
 
 		// ---------------------------------------------------------
-		// meshes
-		nlohmann::json jMeshPrimitives;
-		if (model.texture_coordinates.size() > 0) {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
-				{ "mode", 4 },
-				{ "material", model.MaterialTitle },
-				{ "indices", modelTitleLocal + meshAccessorSuffix_Indices },
-				{ "attributes",
-					{
-						{ "POSITION", modelTitleLocal + meshAccessorSuffix_Vertices },
-						{ "NORMAL", modelTitleLocal + meshAccessorSuffix_Normals },
-						{ "TEXCOORD_0", modelTitleLocal + meshAccessorSuffix_UVs }
-					}
-				}
-			};
-		}
-		else {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
-				{ "mode", 4 },
-				{ "material", model.MaterialTitle },
-				{ "indices", modelTitleLocal + meshAccessorSuffix_Indices },
-				{ "attributes",
-					{
-						{ "POSITION", modelTitleLocal + meshAccessorSuffix_Vertices },
-						{ "NORMAL", modelTitleLocal + meshAccessorSuffix_Normals }
-					}
-				}
-			};
-		}
-		j["meshes"].push_back({ { "name", modelTitleLocal + meshNameSuffix }, { "primitives", jMeshPrimitives } });
-
-		// ---------------------------------------------------------
 		// buffers
 		int base64_size_indices = model.indices.size() * sizeof(float);
 		int base64_size_vertices = model.vertices.size() * 3 * sizeof(float);
@@ -162,76 +143,123 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		// ---------------------------------------------------------
 		// buffer views
 		// indices
-		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Indices] = {
-			{ "buffer", 0 },
-			{ "byteOffset", totalBufferLength},
-			{ "byteLength", base64_size_indices },
-			{ "target", "34963" }
-		};
+		jBufferViews.push_back(
+			{
+				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Indices },
+				{ "buffer", 0 },
+				{ "byteOffset", totalBufferLength},
+				{ "byteLength", base64_size_indices },
+				{ "target", 34963 }
+			}
+		);
 		// vertices
-		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Vertices] = {
-			{ "buffer", 0 },
-			{ "byteOffset", totalBufferLength + base64_size_indices },
-			{ "byteLength", base64_size_vertices },
-			{ "target", "34962" }
-		};
+		jBufferViews.push_back(
+			{
+				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Vertices },
+				{ "buffer", 0 },
+				{ "byteOffset", totalBufferLength + base64_size_indices },
+				{ "byteLength", base64_size_vertices },
+				{ "target", 34962 }
+			}
+		);
 		// normals
-		jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Normals] = {
-			{ "buffer", 0 },
-			{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices) },
-			{ "byteLength", base64_size_normals },
-			{ "target", "34962" }
-		};
+		jBufferViews.push_back(
+			{
+				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Normals },
+				{ "buffer", 0 },
+				{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices) },
+				{ "byteLength", base64_size_normals },
+				{ "target", 34962 }
+			}
+		);
 		// uvs
 		if (model.texture_coordinates.size() > 0)
-			jBufferViews[modelTitleLocal + bufferViewSuffix + suffix_Normals] = {
-				{ "buffer", 0 },
-				{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices + base64_size_normals) },
-				{ "byteLength", base64_size_textureCoordinates },
-				{ "target", "34962" }
-			};
+			jBufferViews.push_back(
+				{
+					{ "name", modelTitleLocal + bufferViewSuffix + suffix_Normals },
+					{ "buffer", 0 },
+					{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices + base64_size_normals) },
+					{ "byteLength", base64_size_textureCoordinates },
+					{ "target", "34962" }
+				}
+			);
 
 		// ---------------------------------------------------------
 		// accessors
-		nlohmann::json jAccessors;
 		// indices
-		jAccessors[modelTitleLocal + meshAccessorSuffix_Indices] = {
-			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Indices },
-			{ "byteOffset", 0 },
-			{ "byteStride", 0 },
-			{ "componentType", 5125 },
-			{ "count", model.indices.size() },
-			{ "type", "SCALAR" }
-		};
-		// vertices
-		jAccessors[modelTitleLocal + meshAccessorSuffix_Vertices] = {
-			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Vertices },
-			{ "byteOffset", 0 },
-			{ "byteStride", 0 },
-			{ "componentType", 5126 },
-			{ "count", model.vertices.size() * 3 },
-			{ "type", "VEC3" }
-		};
-		// normals
-		jAccessors[modelTitleLocal + meshAccessorSuffix_Normals] = {
-			{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_Normals },
-			{ "byteOffset", 0 },
-			{ "byteStride", 0 },
-			{ "componentType", 5126 },
-			{ "count", model.normals.size() * 3 },
-			{ "type", "VEC3" }
-		};
-		// uvs
-		if (model.texture_coordinates.size() > 0)
-			jAccessors[modelTitleLocal + meshAccessorSuffix_UVs] = {
-				{ "bufferView", modelTitleLocal + bufferViewSuffix + suffix_UVs },
+		jAccessors.push_back(
+			{
+				{ "name", modelTitleLocal + meshAccessorSuffix_Indices },
+				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
-				{ "byteStride", 0 },
+				{ "componentType", 5125 },
+				{ "count", model.indices.size() * sizeof(float) },
+				{ "type", "SCALAR" },
+				{ "min", { *std::min_element(model.indices.begin(), model.indices.end()) } },
+				{ "max", { *std::max_element(model.indices.begin(), model.indices.end()) } }
+			}
+		);
+		currentBufferCounter += 1;
+		// vertices
+		float min_vertex_x = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
+		float min_vertex_y = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
+		float min_vertex_z = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
+		float max_vertex_x = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x > b.x); })).x;
+		float max_vertex_y = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y > b.y); })).y;
+		float max_vertex_z = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z > b.z); })).z;
+		jAccessors.push_back(
+			{
+				{ "name", modelTitleLocal + meshAccessorSuffix_Vertices },
+				{ "bufferView", currentBufferCounter },
+				{ "byteOffset", 0 },
 				{ "componentType", 5126 },
-				{ "count", model.texture_coordinates.size() * 2 },
-				{ "type", "VEC2" }
-			};
-		j["accessors"].push_back(jAccessors);
+				{ "count", model.vertices.size() * 3 * sizeof(float) },
+				{ "type", "VEC3" },
+				{ "min", { min_vertex_x, min_vertex_y, min_vertex_z } },
+				{ "max", { max_vertex_x, max_vertex_y, max_vertex_z } }
+			}
+		);
+		currentBufferCounter += 1;
+		// normals
+		float min_normal_x = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
+		float min_normal_y = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
+		float min_normal_z = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
+		float max_normal_x = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x > b.x); })).x;
+		float max_normal_y = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y > b.y); })).y;
+		float max_normal_z = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z > b.z); })).z;
+		jAccessors.push_back(
+			{
+				{ "name", modelTitleLocal + meshAccessorSuffix_Normals },
+				{ "bufferView", currentBufferCounter },
+				{ "byteOffset", 0 },
+				{ "componentType", 5126 },
+				{ "count", model.normals.size() * 3 * sizeof(float) },
+				{ "type", "VEC3" },
+				{ "min", { min_normal_x, min_normal_y, min_normal_z } },
+				{ "max", { max_normal_x, max_normal_y, max_normal_z } }
+			}
+		);
+		currentBufferCounter += 1;
+		// uvs
+		if (model.texture_coordinates.size() > 0) {
+			float min_uv_s = (*std::min_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.s < b.s); })).s;
+			float min_uv_t = (*std::min_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.t < b.t); })).t;
+			float max_uv_s = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.s > b.s); })).s;
+			float max_uv_t = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.t > b.t); })).t;
+			jAccessors.push_back(
+				{
+					{ "name", modelTitleLocal + meshAccessorSuffix_UVs },
+					{ "bufferView", currentBufferCounter },
+					{ "byteOffset", 0 },
+					{ "componentType", 5126 },
+					{ "count", model.texture_coordinates.size() * 2 * sizeof(float) },
+					{ "type", "VEC2" },
+					{ "min", { min_uv_s, min_uv_t } },
+					{ "max", { max_uv_s, max_uv_t } }
+				}
+			);
+			currentBufferCounter += 1;
+		}
 
 		// ---------------------------------------------------------
 		// misc
@@ -239,16 +267,61 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
 
 		if (!this->BufferInExternalFile) {
-			j["buffers"]["type"] = "arraybuffer";
-			j["buffers"]["byteLength"] = totalBufferLength;
-			j["buffers"]["uri"] = "data:application/octet-stream;base64," + bufferData;
+			jBuffers.push_back(
+				{
+					{ "name", this->defaultSceneName + "_buffer" },
+					{ "byteLength", totalBufferLength },
+					{ "uri", "data:application/octet-stream;base64," + bufferData }
+				}
+			);
 		}
+
+		// ---------------------------------------------------------
+		// meshes
+		nlohmann::json jMeshPrimitives;
+		if (model.texture_coordinates.size() > 0) {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", currentMaterialCounter },
+				{ "indices", currentAccessorCounter + 0 },
+				{ "attributes",
+				{
+					{ "POSITION", currentAccessorCounter + 1 },
+					{ "NORMAL", currentAccessorCounter + 2 },
+					{ "TEXCOORD_0", currentAccessorCounter + 3 }
+				}
+				}
+			};
+			currentAccessorCounter += 3;
+		}
+		else {
+			jMeshPrimitives[faceIterator - faces.begin()] = {
+				{ "mode", 4 },
+				{ "material", currentMaterialCounter },
+				{ "indices", currentAccessorCounter + 0 },
+				{ "attributes",
+				{
+					{ "POSITION", currentAccessorCounter + 1 },
+					{ "NORMAL", currentAccessorCounter + 2 }
+				}
+				}
+			};
+			currentAccessorCounter += 2;
+		}
+		currentMaterialCounter += 1;
+		jMeshes.push_back({ { "name", modelTitleLocal + meshNameSuffix },{ "primitives", jMeshPrimitives } });
 
 		meshCounter += 1;
 		nodeCounter += 1;
 	}
 
+	j["scenes"] = jScenes;
+	j["buffers"] = jBuffers;
 	j["bufferViews"] = jBufferViews;
+	j["accessors"] = jAccessors;
+	j["materials"] = jMaterials;
+	j["nodes"] = jNodes;
+	j["meshes"] = jMeshes;
 
 	if (this->BufferInExternalFile) {
 		j["buffers"]["byteLength"] = totalBufferLength;
