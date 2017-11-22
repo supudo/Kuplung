@@ -148,7 +148,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Indices },
 				{ "buffer", 0 },
 				{ "byteOffset", totalBufferLength},
-				{ "byteLength", base64_size_indices },
+				{ "byteLength", model.indices.size() },
 				{ "target", 34963 }
 			}
 		);
@@ -157,8 +157,8 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			{
 				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Vertices },
 				{ "buffer", 0 },
-				{ "byteOffset", totalBufferLength + base64_size_indices },
-				{ "byteLength", base64_size_vertices },
+				{ "byteOffset", totalBufferLength + model.indices.size() + 1 },
+				{ "byteLength", model.vertices.size() * 3 * sizeof(float) },
 				{ "target", 34962 }
 			}
 		);
@@ -167,8 +167,8 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			{
 				{ "name", modelTitleLocal + bufferViewSuffix + suffix_Normals },
 				{ "buffer", 0 },
-				{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices) },
-				{ "byteLength", base64_size_normals },
+				{ "byteOffset", totalBufferLength + model.indices.size() + (model.vertices.size() * 3 * sizeof(float)) + 1 },
+				{ "byteLength", model.normals.size() * 3 * sizeof(float) },
 				{ "target", 34962 }
 			}
 		);
@@ -178,8 +178,8 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{
 					{ "name", modelTitleLocal + bufferViewSuffix + suffix_Normals },
 					{ "buffer", 0 },
-					{ "byteOffset", totalBufferLength + (base64_size_indices + base64_size_vertices + base64_size_normals) },
-					{ "byteLength", base64_size_textureCoordinates },
+					{ "byteOffset", totalBufferLength + model.indices.size() + (model.vertices.size() * 3 * sizeof(float)) + (model.normals.size() * 3 * sizeof(float)) + 1 },
+					{ "byteLength", model.texture_coordinates.size() },
 					{ "target", "34962" }
 				}
 			);
@@ -193,7 +193,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
 				{ "componentType", 5125 },
-				{ "count", model.indices.size() * sizeof(float) },
+				{ "count", model.indices.size() },
 				{ "type", "SCALAR" },
 				{ "min", { *std::min_element(model.indices.begin(), model.indices.end()) } },
 				{ "max", { *std::max_element(model.indices.begin(), model.indices.end()) } }
@@ -213,7 +213,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
 				{ "componentType", 5126 },
-				{ "count", model.vertices.size() * 3 * sizeof(float) },
+				{ "count", model.vertices.size() },
 				{ "type", "VEC3" },
 				{ "min", { min_vertex_x, min_vertex_y, min_vertex_z } },
 				{ "max", { max_vertex_x, max_vertex_y, max_vertex_z } }
@@ -233,7 +233,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
 				{ "componentType", 5126 },
-				{ "count", model.normals.size() * 3 * sizeof(float) },
+				{ "count", model.normals.size() },
 				{ "type", "VEC3" },
 				{ "min", { min_normal_x, min_normal_y, min_normal_z } },
 				{ "max", { max_normal_x, max_normal_y, max_normal_z } }
@@ -252,7 +252,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 					{ "bufferView", currentBufferCounter },
 					{ "byteOffset", 0 },
 					{ "componentType", 5126 },
-					{ "count", model.texture_coordinates.size() * 2 * sizeof(float) },
+					{ "count", model.texture_coordinates.size() },
 					{ "type", "VEC2" },
 					{ "min", { min_uv_s, min_uv_t } },
 					{ "max", { max_uv_s, max_uv_t } }
@@ -263,7 +263,11 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
 		// ---------------------------------------------------------
 		// misc
-		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
+		totalBufferLength += model.indices.size();
+		totalBufferLength += model.vertices.size() * 3 * sizeof(float);
+		totalBufferLength += model.normals.size() * 3 * sizeof(float);
+		totalBufferLength += model.texture_coordinates.size() * 2 * sizeof(float);
+		totalBufferLength += 1;
 		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
 
 		if (!this->BufferInExternalFile) {
@@ -592,30 +596,16 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 		return false;
 
 	// - length
-	uint32_t length = 12 + 8 + buffer_length;
+	uint32_t length = 12 + buffer_length;
 	if (!std::fwrite(&length, 1, 1, f))
 		return false;
 
-	// binary buffer chunk
-	// - chunk length
-	if (!std::fwrite(&buffer_length, 1, 1, f))
-		return false;
-
-	// - chunk type
-	uint32_t bufferType = 0x004E4942;
-	if (!std::fwrite(&bufferType, 1, 1, f))
-		return false;
-
-	// - chunkData
-	if (!std::fwrite((char*)&buffer, 1, buffer.size(), f))
-		return false;
-
-	// padding
-	char pad = 0;
-	for (auto i = 0; i < buffer_length - buffer_length; i++) {
-		if (!fwrite(&pad, 1, 1, f))
-			return false;
-	}
+	//// padding
+	//char pad = 0;
+	//for (auto i = 0; i < buffer_length - buffer_length; i++) {
+	//	if (!fwrite(&pad, 1, 1, f))
+	//		return false;
+	//}
 
 	std::fclose(f);
 
