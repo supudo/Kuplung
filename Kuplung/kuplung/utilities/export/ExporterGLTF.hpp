@@ -33,16 +33,7 @@ private:
 	void prepFolderLocation();
 	nlohmann::json exportCameras(std::unique_ptr<ObjectsManager> &managerObjects);
 	nlohmann::json exportScenes(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportNodes(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportMeshes(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportAccessors(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportMaterials(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportTextures(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportImages(const std::vector<ModelFaceBase*>& faces);
 	nlohmann::json copyImage(std::string imagePath);
-	nlohmann::json exportSamplers(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportBufferViews(const std::vector<ModelFaceBase*>& faces);
-	nlohmann::json exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file);
 
 	bool saveFile(const nlohmann::json& jsonObj);
 	bool saveBufferFile(std::string buffer);

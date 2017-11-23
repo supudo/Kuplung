@@ -131,10 +131,10 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
 		// ---------------------------------------------------------
 		// buffers
-		int base64_size_indices = model.indices.size() * sizeof(float);
-		int base64_size_vertices = model.vertices.size() * 3 * sizeof(float);
-		int base64_size_normals = model.normals.size() * 3 * sizeof(float);
-		int base64_size_textureCoordinates = model.texture_coordinates.size() * 2 * sizeof(float);
+		int base64_size_indices = model.indices.size() * sizeof(unsigned int);
+		int base64_size_vertices = model.vertices.size() * sizeof(glm::vec3);
+		int base64_size_normals = model.normals.size() * sizeof(glm::vec3);
+		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(glm::vec2);
 		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
 		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
 		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
@@ -334,16 +334,6 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			Settings::Instance()->funcDoLog("[Kuplung] Error occured while writing the BIN glTF file!");
 	}
 
-    //j["nodes"] = this->exportNodes(faces);
-    //j["meshes"] = this->exportMeshes(faces);
-    //j["accessors"] = this->exportAccessors(faces);
-    //j["materials"] = this->exportMaterials(faces);
-    //j["textures"] = this->exportTextures(faces);
-    //j["images"] = this->exportImages(faces);
-    //j["samplers"] = this->exportSamplers(faces);
-    //j["bufferViews"] = this->exportBufferViews(faces);
-    //j["buffers"] = this->exportBuffers(faces, file);
-
     if (!this->saveFile(j))
 		Settings::Instance()->funcDoLog("[Kuplung] Could not save glTF file!");
 }
@@ -373,106 +363,6 @@ nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*>& fac
     return j;
 }
 
-nlohmann::json ExporterGLTF::exportNodes(const std::vector<ModelFaceBase*>& faces) {
-	nlohmann::json j;
-	std::vector<ModelFaceBase*>::const_iterator faceIterator;
-	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-		const ModelFaceBase& face = **faceIterator;
-		MeshModel model = face.meshModel;
-		j[model.ModelTitle][faceIterator - faces.begin()] = model.ModelTitle + "_mesh";
-	}
-	return j;
-}
-
-nlohmann::json ExporterGLTF::exportMeshes(const std::vector<ModelFaceBase*>& faces) {
-	nlohmann::json j;
-	std::vector<ModelFaceBase*>::const_iterator faceIterator;
-	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-		const ModelFaceBase& face = **faceIterator;
-		MeshModel model = face.meshModel;
-		nlohmann::json jMeshPrimitives;
-		if (model.texture_coordinates.size() > 0) {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
-				{ "mode", 4 },
-				{ "material", model.MaterialTitle },
-				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
-				{ "attributes", {
-						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
-						{ "NORMAL", model.ModelTitle + "_mesh_accesor_normals" },
-						{ "TEXCOORD_0", model.ModelTitle + "_mesh_accesor_uvs" }
-					}
-				}
-			};
-		}
-		else {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
-				{ "mode", 4 },
-				{ "material", model.MaterialTitle },
-				{ "indices", model.ModelTitle + "_mesh_accesor_indices" },
-				{ "attributes", {
-						{ "POSITION", model.ModelTitle + "_mesh_accesor_vertices" },
-						{ "NORMAL", model.ModelTitle + "_mesh_accesor_normals" }
-					}
-				}
-			};
-		}
-		j[model.ModelTitle + "_mesh"] = {
-			{ "name", model.ModelTitle + "_mesh" },
-			{ "primitives", jMeshPrimitives }
-		};
-	}
-	return j;
-}
-
-nlohmann::json ExporterGLTF::exportAccessors(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-	std::vector<ModelFaceBase*>::const_iterator faceIterator;
-	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-		const ModelFaceBase& face = **faceIterator;
-		MeshModel model = face.meshModel;
-		j[model.MaterialTitle]["value"]["ambient"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j[model.MaterialTitle]["value"]["diffuse"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j[model.MaterialTitle]["value"]["specular"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j[model.MaterialTitle]["value"]["emission"] = { 0.0f, 0.0f, 0.0f, 1.0f };
-		j[model.MaterialTitle]["value"]["shininess"] = 0.0f;
-	}
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportTextures(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportImages(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    std::vector<ModelFaceBase*>::const_iterator faceIterator;
-    int c = 0;
-    for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-        MeshModelMaterial mat = (*faceIterator)->meshModel.ModelMaterial;
-        if (!mat.TextureAmbient.Image.empty())
-            j.push_back(this->copyImage(mat.TextureAmbient.Image));
-        if (!mat.TextureBump.Image.empty())
-            j.push_back(this->copyImage(mat.TextureBump.Image));
-        if (!mat.TextureDiffuse.Image.empty())
-            j[c] = this->copyImage(mat.TextureDiffuse.Image);
-        if (!mat.TextureDisplacement.Image.empty())
-            j.push_back(this->copyImage(mat.TextureDisplacement.Image));
-        if (!mat.TextureDissolve.Image.empty())
-            j.push_back(this->copyImage(mat.TextureDissolve.Image));
-        if (!mat.TextureSpecular.Image.empty())
-            j.push_back(this->copyImage(mat.TextureSpecular.Image));
-        if (!mat.TextureSpecularExp.Image.empty())
-            j.push_back(this->copyImage(mat.TextureSpecularExp.Image));
-    }
-    return j;
-}
-
 nlohmann::json ExporterGLTF::copyImage(std::string imagePath) {
     nlohmann::json j;
     std::string imageFilename = imagePath.substr(imagePath.find_last_of("\\/"));
@@ -480,54 +370,6 @@ nlohmann::json ExporterGLTF::copyImage(std::string imagePath) {
     std::string newImagePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/")) + "/" + this->exportFile.title + "/" + imageFilename;
     boost::filesystem::copy_file(imagePath, newImagePath, boost::filesystem::copy_option::overwrite_if_exists);
     j["uri"] = imageFilename;
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportSamplers(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportBufferViews(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
-	std::vector<ModelFaceBase*>::const_iterator faceIterator;
-	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-		const ModelFaceBase& face = **faceIterator;
-		MeshModel model = face.meshModel;
-	}
-    return j;
-}
-
-nlohmann::json ExporterGLTF::exportBuffers(const std::vector<ModelFaceBase*>& faces, const FBEntity& file) {
-    nlohmann::json j;
-    std::vector<ModelFaceBase*>::const_iterator faceIterator;
-	nlohmann::json jBuffer, jBufferViews;
-	int totalBufferLength = 0;
-	std::string bufferData;
-    for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
-        const ModelFaceBase& face = **faceIterator;
-        MeshModel model = face.meshModel;
-		int base64_size_indices = model.indices.size() * sizeof(float);
-        int base64_size_vertices = model.vertices.size() * 3 * sizeof(float);
-		int base64_size_normals = model.normals.size() * 3 * sizeof(float);
-		int base64_size_textureCoordinates = model.texture_coordinates.size() * 2 * sizeof(float);
-		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
-        std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
-		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
-		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
-		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
-		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
-		jBufferViews[model.ModelTitle + "_view_indices"] = {
-			{ "buffer", "" }
-		};
-    }
-	jBuffer["type"] = "arraybuffer";
-	jBuffer["byteLength"] = totalBufferLength;
-	//jBuffer["uri"] = "data:application/octet-stream;base64," + bufferData;
-	if (!this->saveBufferFile(bufferData))
-		Settings::Instance()->funcDoLog("[Kuplung] Error occured while writing the BIN glTF file!");
-	jBuffer["uri"] = this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin";
-	j[this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin"] = jBuffer;
     return j;
 }
 
@@ -581,8 +423,6 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 	}
 
 	uint32_t buffer_length = buffer.size();
-	if (buffer_length % 4)
-		buffer_length += 4 - buffer_length % 4;
 
 	// 12-byte header
 	// - magic
@@ -599,13 +439,6 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 	uint32_t length = 12 + buffer_length;
 	if (!std::fwrite(&length, 1, 1, f))
 		return false;
-
-	//// padding
-	//char pad = 0;
-	//for (auto i = 0; i < buffer_length - buffer_length; i++) {
-	//	if (!fwrite(&pad, 1, 1, f))
-	//		return false;
-	//}
 
 	std::fclose(f);
 
