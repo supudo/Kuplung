@@ -140,8 +140,8 @@ mac {
     LIBS += -L/usr/local/Cellar/glm/0.9.8.5/lib
     INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.5/include
 
-    LIBS += -L/usr/local/Cellar/sdl2/2.0.6/lib -lSDL2
-    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.6/include
+    LIBS += -L/usr/local/Cellar/sdl2/2.0.7/lib -lSDL2
+    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.7/include
 
     LIBS += -L/usr/local/Cellar/glfw3/3.2.1/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.2.1/include
@@ -149,8 +149,8 @@ mac {
     LIBS += -L/usr/local/Cellar/assimp/4.0.1/lib -lAssimp
     INCLUDEPATH += /usr/local/Cellar/assimp/4.0.1/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.4.1/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.4.1/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.5.0/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.5.0/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
@@ -372,6 +372,7 @@ SOURCES += main.cpp \
     kuplung/utilities/imgui/imgui.cpp \
     kuplung/utilities/imgui/imgui_demo.cpp \
     kuplung/utilities/imgui/imgui_draw.cpp \
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.cpp \
     kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp \
     kuplung/utilities/nanovg/nanovg.c \
     kuplung/utilities/input/Controls.cpp \
@@ -490,6 +491,7 @@ HEADERS += \
     kuplung/utilities/imgui/imconfig.h \
     kuplung/utilities/imgui/imgui.h \
     kuplung/utilities/imgui/imgui_internal.h \
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.h \
     kuplung/utilities/imgui/imguizmo/ImGuizmo.h \
     kuplung/utilities/nanovg/fontstash.h \
     kuplung/utilities/nanovg/nanovg_gl_utils.h \

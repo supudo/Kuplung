@@ -71,3 +71,6 @@ DerivedData
 .idea/
 *.hmap
 xcuserdata/*
+
+# Manual
+Kuplung/kuplung/utilities/saveopen/*.pb.*

@@ -11,6 +11,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-extern-c-compat")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pic")
 
 IF(APPLE)
     SET(MACOSX_BUNDLE true)
@@ -96,8 +97,9 @@ LINK_DIRECTORIES(../external/libnoise/lib)
 SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 
 # Cuda
+SET(CUDA_ENABLED OFF)
 FIND_PACKAGE(CUDA)
-IF(CUDA_FOUND)
+IF(CUDA_FOUND AND CUDA_ENABLED)
     # Not sure at all if this is correct, actually i'm sure it's incorrect but it works.
     STRING(LENGTH ${CUDA_VERSION_STRING} CUDA_VERSION_LENGTH)
     STRING(SUBSTRING "${CMAKE_CXX_COMPILER_VERSION}" 0 ${CUDA_VERSION_LENGTH} CXX_VERSION)
@@ -107,7 +109,7 @@ IF(CUDA_FOUND)
             MESSAGE("-- WARNING: Cuda doesn't support this Clang version (Cuda - ${CUDA_VERSION_STRING}, Clang - ${CMAKE_CXX_COMPILER_VERSION})!")
             MESSAGE("-- WARNING: Disabling Cuda support...")
         ELSE()
-            MESSAGE("WARNING: Cuda is OK with this Clang version!")
+            MESSAGE("Info: Cuda is OK with this Clang version (Cuda - ${CUDA_VERSION_STRING}, Clang - ${CMAKE_CXX_COMPILER_VERSION})!")
             SET(CUDA_OK TRUE)
         ENDIF()
     ELSE()
@@ -150,7 +152,7 @@ IF(CUDA_FOUND)
         ADD_DEFINITIONS(-DDEF_KuplungSetting_UseCuda)
         ADD_DEFINITIONS(-DGLM_FORCE_CUDA)
     ENDIF(CUDA_OK)
-ENDIF(CUDA_FOUND)
+ENDIF(CUDA_FOUND AND CUDA_ENABLED)
 
 INCLUDE_DIRECTORIES(.)
 
@@ -308,6 +310,8 @@ SET(SOURCE_FILES
     kuplung/utilities/gl/GLIncludes.h
     kuplung/utilities/gl/GLUtils.cpp
     kuplung/utilities/gl/GLUtils.hpp
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.cpp
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.h
     kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp
     kuplung/utilities/imgui/imguizmo/ImGuizmo.h
     kuplung/utilities/imgui/imconfig.h

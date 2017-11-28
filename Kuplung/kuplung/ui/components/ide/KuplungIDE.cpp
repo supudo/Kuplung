@@ -151,7 +151,7 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	ImGui::Text("%6d/%-6d %6d lines  %s %s | %s | %s", cpos.mLine + 1, cpos.mColumn + 1, this->kuplungEditor.GetTotalLines(),
 		this->kuplungEditor.IsOverwrite() ? "Ovr" : "Ins",
 		this->kuplungEditor.CanUndo() ? "*" : " ",
-		this->kuplungEditor.GetLanguageDefinition().mName.c_str(), this->meshesShadersList[this->selectedIndex]);
+		this->kuplungEditor.GetLanguageDefinition().mName.c_str(), this->meshesShadersList[this->selectedIndex].c_str());
 
 	ImGui::Separator();
 

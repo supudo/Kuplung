@@ -186,6 +186,8 @@ SET(SOURCE_FILES
     kuplung/utilities/gl/GLIncludes.h
     kuplung/utilities/gl/GLUtils.cpp
     kuplung/utilities/gl/GLUtils.hpp
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.cpp
+    kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.h
     kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp
     kuplung/utilities/imgui/imguizmo/ImGuizmo.h
     kuplung/utilities/imgui/imconfig.h

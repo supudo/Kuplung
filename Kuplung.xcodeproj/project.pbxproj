@@ -62,6 +62,7 @@
 		8A45C5E11D895FC400E951DF /* StructuredVolumetricSampling.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45C5DF1D895FC400E951DF /* StructuredVolumetricSampling.cpp */; };
 		8A45EDBF1DCA591900383570 /* ParserUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDBD1DCA591900383570 /* ParserUtils.cpp */; };
 		8A45EDC41DCA5A5400383570 /* ExportOBJ.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */; };
+		8A4649411FCDFCF400F4BE8B /* TextEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8A46493F1FCDFCF400F4BE8B /* TextEditor.cpp */; };
 		8A47F7191CBF742200699CAC /* camera.mtl in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7171CBF741800699CAC /* camera.mtl */; };
 		8A47F71A1CBF742200699CAC /* camera.obj in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8A47F7181CBF741800699CAC /* camera.obj */; };
 		8A4FB76C1DFACDEA004EC0EE /* axis_helpers.frag in Copy Files */ = {isa = PBXBuildFile; fileRef = 8ABFC1F61CC92C0800FBCF08 /* axis_helpers.frag */; };
@@ -805,6 +806,8 @@
 		8A45EDBE1DCA591900383570 /* ParserUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ParserUtils.hpp; sourceTree = "<group>"; };
 		8A45EDC21DCA5A5400383570 /* ExportOBJ.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ExportOBJ.cpp; path = exporters/ExportOBJ.cpp; sourceTree = "<group>"; };
 		8A45EDC31DCA5A5400383570 /* ExportOBJ.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ExportOBJ.hpp; path = exporters/ExportOBJ.hpp; sourceTree = "<group>"; };
+		8A46493F1FCDFCF400F4BE8B /* TextEditor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TextEditor.cpp; path = ImGuiColorTextEdit/TextEditor.cpp; sourceTree = "<group>"; };
+		8A4649401FCDFCF400F4BE8B /* TextEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextEditor.h; path = ImGuiColorTextEdit/TextEditor.h; sourceTree = "<group>"; };
 		8A47F7171CBF741800699CAC /* camera.mtl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.mtl; sourceTree = "<group>"; };
 		8A47F7181CBF741800699CAC /* camera.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = camera.obj; sourceTree = "<group>"; };
 		8A47F71B1CBF744800699CAC /* camera.frag */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = camera.frag; sourceTree = "<group>"; };
@@ -1408,6 +1411,15 @@
 			name = exporters;
 			sourceTree = "<group>";
 		};
+		8A46493E1FCDFCE800F4BE8B /* ImGuiColorTextEdit */ = {
+			isa = PBXGroup;
+			children = (
+				8A46493F1FCDFCF400F4BE8B /* TextEditor.cpp */,
+				8A4649401FCDFCF400F4BE8B /* TextEditor.h */,
+			);
+			name = ImGuiColorTextEdit;
+			sourceTree = "<group>";
+		};
 		8A5F5BE01E0BEC9D00BA4FCE /* gui_oui */ = {
 			isa = PBXGroup;
 			children = (
@@ -1571,6 +1583,7 @@
 		8A6E70881C6CACB40085CAE5 /* imgui */ = {
 			isa = PBXGroup;
 			children = (
+				8A46493E1FCDFCE800F4BE8B /* ImGuiColorTextEdit */,
 				8AAF141E1D75B8710075189D /* imguizmo */,
 				8A6E70891C6CACB40085CAE5 /* imconfig.h */,
 				8A6E708A1C6CACB40085CAE5 /* imgui.cpp */,
@@ -2426,6 +2439,7 @@
 				8A3CECFA1C85B217005CB98D /* Maths.cpp in Sources */,
 				8AFDE3DB1DBE0F2B001D7097 /* KuplungRendererBase.cpp in Sources */,
 				8A6E70AA1C6CACB40085CAE5 /* Screenshot.cpp in Sources */,
+				8A4649411FCDFCF400F4BE8B /* TextEditor.cpp in Sources */,
 				8A81DDC21D1A82B5004F3270 /* CameraModel.cpp in Sources */,
 				8A81DDC01D1A82B5004F3270 /* BoundingBox.cpp in Sources */,
 				8A6E70AD1C6CACB40085CAE5 /* DialogStyle.cpp in Sources */,
@@ -2573,11 +2587,11 @@
 					/usr/local/include,
 					/usr/local/Cellar/boost/1.65.1/include/boost,
 					/usr/local/Cellar/glfw3/3.2.1/include,
-					/usr/local/Cellar/sdl2/2.0.6/include,
+					/usr/local/Cellar/sdl2/2.0.7/include,
 					/usr/local/Cellar/glm/0.9.8.5/include,
 					/usr/local/Cellar/assimp/4.0.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/3.4.1/include,
+					/usr/local/Cellar/protobuf/3.5.0/include,
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 					/usr/local/cuda/include,
@@ -2587,10 +2601,10 @@
 					/usr/lib,
 					/usr/local/Cellar/boost/1.65.1/lib,
 					/usr/local/Cellar/glfw3/3.2.1/lib,
-					/usr/local/Cellar/sdl2/2.0.6/lib,
+					/usr/local/Cellar/sdl2/2.0.7/lib,
 					/usr/local/Cellar/assimp/4.0.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/3.4.1/lib,
+					/usr/local/Cellar/protobuf/3.5.0/lib,
 					/usr/local/Cellar/minizip/1.2.11/lib,
 					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
 					/usr/local/cuda/lib,
@@ -2644,11 +2658,11 @@
 					/usr/local/include,
 					/usr/local/Cellar/boost/1.65.1/include/boost,
 					/usr/local/Cellar/glfw3/3.2.1/include,
-					/usr/local/Cellar/sdl2/2.0.6/include,
+					/usr/local/Cellar/sdl2/2.0.7/include,
 					/usr/local/Cellar/glm/0.9.8.5/include,
 					/usr/local/Cellar/assimp/4.0.1/include,
 					"${PROJECT_DIR}/external/libnoise/headers",
-					/usr/local/Cellar/protobuf/3.4.1/include,
+					/usr/local/Cellar/protobuf/3.5.0/include,
 					/usr/local/Cellar/minizip/1.2.11/include,
 					"/usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3",
 					/usr/local/cuda/include,
@@ -2658,10 +2672,10 @@
 					/usr/lib,
 					/usr/local/Cellar/boost/1.65.1/lib,
 					/usr/local/Cellar/glfw3/3.2.1/lib,
-					/usr/local/Cellar/sdl2/2.0.6/lib,
+					/usr/local/Cellar/sdl2/2.0.7/lib,
 					/usr/local/Cellar/assimp/4.0.1/lib,
 					"${PROJECT_DIR}/external/libnoise/lib",
-					/usr/local/Cellar/protobuf/3.4.1/lib,
+					/usr/local/Cellar/protobuf/3.5.0/lib,
 					/usr/local/Cellar/minizip/1.2.11/lib,
 					"/usr/local/Cellar/lua@5.3/5.3.4/lib",
 					/usr/local/cuda/lib,
