@@ -16,5 +16,5 @@ build:
 # scripts to run before build
 before_build:
   - echo Running cmake...
-  - cd c:\projects\Kuplung
+  - cd c:\projects\Kuplung\Kuplung
   - cmake -G "Visual Studio 15 2017 Win64"
