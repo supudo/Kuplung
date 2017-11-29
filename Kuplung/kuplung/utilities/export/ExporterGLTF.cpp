@@ -440,6 +440,9 @@ bool ExporterGLTF::saveBufferFile(std::string buffer) {
 	if (!std::fwrite(&length, 1, 1, f))
 		return false;
 
+	if (!std::fwrite(&buffer, buffer_length, 1, f))
+		return false;
+
 	std::fclose(f);
 
 	return true;
