@@ -11,7 +11,7 @@ platform: x64
 configuration: Release
 
 build:
-  project: INSTALL.vcxproj      # path to Visual Studio solution or project
+  project: c:\projects\Kuplung\Kuplung\Kuplung.vcxproj      # path to Visual Studio solution or project
 
 # scripts to run before build
 before_build:
