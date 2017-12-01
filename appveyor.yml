@@ -1,20 +1,90 @@
+image:
+    - Visual Studio 2017
+
 environment:
-  P: "c:/projects/"
+    global:
+        PROJECT_NAME: Kuplung
 
-branches:
-  only:
-    - master
+test:
+    off
 
-os: Visual Studio 2017
+cache:
+    - c:\projects\libs -> appveyor.yml
+        
+install:
+    #libs folder
+    - ps: mkdir libs
+    - ps: cd libs
 
-platform: x64
-configuration: Release
+    # SDL2
+    - curl https://www.libsdl.org/release/SDL2-devel-2.0.7-VC.zip -OutFile sdl2.zip
+    - ps: Expand-Archive sdl2.zip -DestinationPath sdl2
+    - ps: set LIB="%LIB%;C:\projects\libs\sdl2\SDL2-2.0.7\lib\x64"
+    - ps: del sdl2.zip
+    
+    #GLM
+    - curl https://github.com/g-truc/glm/archive/0.9.9-a2.zip -OutFile glm.zip
+    - ps: Expand-Archive glm.zip -DestinationPath glm
+    - ps: del glm.zip
+
+    # GLFW3
+    - curl https://github.com/glfw/glfw/releases/download/3.2.1/glfw-3.2.1.bin.WIN64.zip -OutFile glfw3.zip
+    - ps: Expand-Archive glfw3.zip -DestinationPath glfw3
+    - ps: set LIB="%LIB%;C:\projects\libs\glfw3\glfw-3.2.1.bin.WIN64\lib-vc2015"
+    - ps: del glfw3.zip
+
+    # Glew
+    - ps: Invoke-WebRequest -Uri https://downloads.sourceforge.net/project/glew/glew/2.1.0/glew-2.1.0-win32.zip -OutFile glew.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - ps: Expand-Archive glew.zip -DestinationPath glew
+    - ps: set LIB="%LIB%;C:\projects\libs\glew\glew-2.1.0\lib\Release\x64"
+    - ps: del glew.zip
+
+    # Assimp
+    - ps: git clone --recursive https://github.com/assimp/assimp
+    - ps: cd assimp
+    - ps: cmake -G "Visual Studio 15 2017 Win64"
+    - ps: msbuild Assimp.sln /p:Platform=x64
+    - ps: set LIB="%LIB%;C:\projects\libs\assimp\bin\Debug"
+
+    # protobuf
+    - ps: mkdir protobuf
+    - ps: cd protobuf
+    - curl https://github.com/google/protobuf/archive/v3.5.0.zip -OutFile protobuf.zip
+    - ps: Expand-Archive protobuf.zip -DestinationPath protobuf
+    - ps: cd protobuf\protobuf-3.5.0
+    - ps: mkdir build_msvc
+    - ps: cd build_msvc
+    - ps: cmake -G "Visual Studio 15 2017 Win64" -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_UNICODE=ON -Dprotobuf_BUILD_TESTS=OFF ../cmake
+    - ps: msbuild protobuf.sln /p:Platform=x64 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - ps: set LIB="%LIB%;C:\projects\libs\protobuf\protobuf\protobuf-3.5.0\build_msvc\Debug"
+
+    # Lua
+    - ps: Invoke-WebRequest -Uri https://downloads.sourceforge.net/project/luabinaries/5.3.4/Windows%20Libraries/Static/lua-5.3.4_Win64_vc14_lib.zip -OutFile lua-5.3.4_Win64_vc14_lib.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - ps: Expand-Archive lua-5.3.4_Win64_vc14_lib.zip -DestinationPath lua
+    - ps: set LIB="%LIB%;C:\projects\libs\lua"
+    - ps: del lua-5.3.4_Win64_vc14_lib.zip
+    
+    #libnoise
+    - ps: Invoke-WebRequest -Uri https://sourceforge.net/projects/libnoise/files/libnoise%20binaries%20%28Win32%29/1.0.0/libnoisedll-1.0.0.zip/download -OutFile libnoisedll-1.0.0.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - ps: Expand-Archive libnoisedll-1.0.0.zip -DestinationPath libnoise
+    - ps: set LIB="%LIB%;C:\projects\libs\libnoise\bin"
+    - ps: del libnoisedll-1.0.0.zip
+    - ps: Invoke-WebRequest -Uri https://sourceforge.net/projects/libnoise/files/libnoise%20headers/1.0.0/libnoiseheaders-1.0.0.zip/download -OutFile libnoiseheaders-1.0.0.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+    - ps: Expand-Archive libnoiseheaders-1.0.0.zip -DestinationPath libnoise
+    - ps: del libnoiseheaders-1.0.0.zip
+
+os:
+    Visual Studio 2017
+
+platform:
+    x64
+
+configuration:
+    Debug
+
+before_build:
+    - cd c:\projects\Kuplung\Kuplung
+    - cmake -G "Visual Studio 15 2017 Win64"
 
 build:
-  project: c:\projects\Kuplung\Kuplung\Kuplung.vcxproj      # path to Visual Studio solution or project
-
-# scripts to run before build
-before_build:
-  - echo Running cmake...
-  - cd c:\projects\Kuplung\Kuplung
-  - cmake -G "Visual Studio 15 2017 Win64"
+    project: c:\projects\Kuplung\Kuplung\Kuplung.vcxproj
