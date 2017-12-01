@@ -40,7 +40,7 @@ install:
     - ps: del glew.zip
 
     # Assimp
-    - ps: git clone --recursive https://github.com/assimp/assimp
+    - ps: git clone --recursive https://github.com/assimp/assimp 2> $null
     - ps: cd assimp
     - ps: cmake -G "Visual Studio 15 2017 Win64"
     - ps: msbuild Assimp.sln /p:Platform=x64
