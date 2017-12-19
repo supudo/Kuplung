@@ -192,7 +192,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "name", modelTitleLocal + meshAccessorSuffix_Indices },
 				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
-				{ "componentType", 5125 },
+				{ "componentType", 5121 },
 				{ "count", model.indices.size() },
 				{ "type", "SCALAR" },
 				{ "min", { *std::min_element(model.indices.begin(), model.indices.end()) } },
@@ -204,9 +204,9 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		float min_vertex_x = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
 		float min_vertex_y = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
 		float min_vertex_z = (*std::min_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
-		float max_vertex_x = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x > b.x); })).x;
-		float max_vertex_y = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y > b.y); })).y;
-		float max_vertex_z = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z > b.z); })).z;
+		float max_vertex_x = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
+		float max_vertex_y = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
+		float max_vertex_z = (*std::max_element(model.vertices.begin(), model.vertices.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
 		jAccessors.push_back(
 			{
 				{ "name", modelTitleLocal + meshAccessorSuffix_Vertices },
@@ -224,9 +224,9 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		float min_normal_x = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
 		float min_normal_y = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
 		float min_normal_z = (*std::min_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
-		float max_normal_x = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x > b.x); })).x;
-		float max_normal_y = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y > b.y); })).y;
-		float max_normal_z = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z > b.z); })).z;
+		float max_normal_x = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.x < b.x); })).x;
+		float max_normal_y = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.y < b.y); })).y;
+		float max_normal_z = (*std::max_element(model.normals.begin(), model.normals.end(), [](const glm::vec3& a, const glm::vec3& b) { return (a.z < b.z); })).z;
 		jAccessors.push_back(
 			{
 				{ "name", modelTitleLocal + meshAccessorSuffix_Normals },
@@ -244,8 +244,8 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		if (model.texture_coordinates.size() > 0) {
 			float min_uv_s = (*std::min_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.s < b.s); })).s;
 			float min_uv_t = (*std::min_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.t < b.t); })).t;
-			float max_uv_s = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.s > b.s); })).s;
-			float max_uv_t = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.t > b.t); })).t;
+			float max_uv_s = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.s < b.s); })).s;
+			float max_uv_t = (*std::max_element(model.texture_coordinates.begin(), model.texture_coordinates.end(), [](const glm::vec2& a, const glm::vec2& b) { return (a.t < b.t); })).t;
 			jAccessors.push_back(
 				{
 					{ "name", modelTitleLocal + meshAccessorSuffix_UVs },
