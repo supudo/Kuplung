@@ -130,17 +130,6 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			j["images"].push_back(this->copyImage(mat.TextureSpecularExp.Image));
 
 		// ---------------------------------------------------------
-		// buffers
-		int base64_size_indices = model.indices.size() * sizeof(unsigned int);
-		int base64_size_vertices = model.vertices.size() * sizeof(glm::vec3);
-		int base64_size_normals = model.normals.size() * sizeof(glm::vec3);
-		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(glm::vec2);
-		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
-		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
-		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
-		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
-
-		// ---------------------------------------------------------
 		// buffer views
 		// indices
 		jBufferViews.push_back(
@@ -262,12 +251,18 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		}
 
 		// ---------------------------------------------------------
+		// buffers
+		int base64_size_indices = model.indices.size() * sizeof(unsigned int);
+		int base64_size_vertices = model.vertices.size() * sizeof(glm::vec3);
+		int base64_size_normals = model.normals.size() * sizeof(glm::vec3);
+		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(glm::vec2);
+		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
+		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
+		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
+		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
+
 		// misc
-		totalBufferLength += model.indices.size();
-		totalBufferLength += model.vertices.size() * 3 * sizeof(float);
-		totalBufferLength += model.normals.size() * 3 * sizeof(float);
-		totalBufferLength += model.texture_coordinates.size() * 2 * sizeof(float);
-		totalBufferLength += 1;
+		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates + 1;
 		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
 
 		if (!this->BufferInExternalFile) {
