@@ -15,11 +15,6 @@
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/cpp-base64/base64.h"
 #include <glm/gtx/string_cast.hpp>
-#include <boost/archive/iterators/base64_from_binary.hpp>
-#include <boost/archive/iterators/insert_linebreaks.hpp>
-#include <boost/archive/iterators/transform_width.hpp>
-#include <boost/archive/iterators/ostream_iterator.hpp>
-#include <boost/endian/conversion.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -73,6 +68,13 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 	int currentBufferCounter = 0, currentAccessorCounter = 0, currentMaterialCounter = 0;
 	std::string bufferData;
 	std::vector<ModelFaceBase*>::const_iterator faceIterator;
+
+	jScenes.push_back(
+		{
+			{ "name", this->defaultSceneName }
+		}
+	);
+
 	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
 		const ModelFaceBase& face = **faceIterator;
 		MeshModel model = face.meshModel;
@@ -81,18 +83,15 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 
 		// ---------------------------------------------------------
 		// scenes
-		jScenes.push_back(
-			{
-				{ "nodes", { nodeCounter } }
-			}
-		);
+		jScenes[0]["nodes"].push_back(nodeCounter);
 
 		// ---------------------------------------------------------
 		// nodes
 		jNodes.push_back({
 			{ "mesh", meshCounter },
-			{ "name", modelTitleLocal + meshNameSuffix },
-			{ "translation", { face.rotateX->point, face.rotateY->point, face.rotateZ->point } }
+			{ "name", modelTitleLocal },
+			{ "translation", { face.positionX->point, face.positionY->point, face.positionZ->point } },
+			{ "rotation", { face.rotateX->point, face.rotateY->point, face.rotateZ->point } },
 		});
 
 		// ---------------------------------------------------------
@@ -265,53 +264,54 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates + 1;
 		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
 
-		if (!this->BufferInExternalFile) {
-			jBuffers.push_back(
-				{
-					{ "name", this->defaultSceneName + "_buffer" },
-					{ "byteLength", totalBufferLength },
-					{ "uri", "data:application/octet-stream;base64," + bufferData }
-				}
-			);
-		}
-
 		// ---------------------------------------------------------
 		// meshes
-		nlohmann::json jMeshPrimitives;
+		nlohmann::json jMesh;
+		jMesh["name"] = modelTitleLocal + meshNameSuffix;
 		if (model.texture_coordinates.size() > 0) {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
+			jMesh["primitives"] = {
 				{ "mode", 4 },
 				{ "material", currentMaterialCounter },
 				{ "indices", currentAccessorCounter + 0 },
 				{ "attributes",
-				{
-					{ "POSITION", currentAccessorCounter + 1 },
-					{ "NORMAL", currentAccessorCounter + 2 },
-					{ "TEXCOORD_0", currentAccessorCounter + 3 }
-				}
+					{
+						{ "POSITION", currentAccessorCounter + 1 },
+						{ "NORMAL", currentAccessorCounter + 2 },
+						{ "TEXCOORD_0", currentAccessorCounter + 3 }
+					}
 				}
 			};
-			currentAccessorCounter += 3;
+			currentAccessorCounter += 4;
 		}
 		else {
-			jMeshPrimitives[faceIterator - faces.begin()] = {
+			jMesh["primitives"].push_back({
 				{ "mode", 4 },
 				{ "material", currentMaterialCounter },
 				{ "indices", currentAccessorCounter + 0 },
 				{ "attributes",
-				{
-					{ "POSITION", currentAccessorCounter + 1 },
-					{ "NORMAL", currentAccessorCounter + 2 }
+					{
+						{ "POSITION", currentAccessorCounter + 1 },
+						{ "NORMAL", currentAccessorCounter + 2 }
+					}
 				}
-				}
-			};
-			currentAccessorCounter += 2;
+			});
+			currentAccessorCounter += 3;
 		}
 		currentMaterialCounter += 1;
-		jMeshes.push_back({ { "name", modelTitleLocal + meshNameSuffix },{ "primitives", jMeshPrimitives } });
+		jMeshes.push_back(jMesh);
 
 		meshCounter += 1;
 		nodeCounter += 1;
+	}
+
+	if (!this->BufferInExternalFile) {
+		jBuffers.push_back(
+			{
+				{ "name", this->defaultSceneName + "_buffer" },
+				{ "byteLength", totalBufferLength },
+				{ "uri", "data:application/octet-stream;base64," + bufferData }
+			}
+		);
 	}
 
 	j["scenes"] = jScenes;

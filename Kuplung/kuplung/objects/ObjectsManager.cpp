@@ -28,7 +28,7 @@ ObjectsManager::~ObjectsManager() {
     this->skybox.reset();
     for (size_t i=0; i<this->lightSources.size(); i++) {
         delete this->lightSources[i];
-    }
+	}
 }
 
 void ObjectsManager::init(const std::function<void(float)>& doProgress, const std::function<void()>& addTerrain, const std::function<void()>& addSpaceship) {
