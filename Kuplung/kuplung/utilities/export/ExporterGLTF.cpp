@@ -15,6 +15,8 @@
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/cpp-base64/base64.h"
 #include <glm/gtx/string_cast.hpp>
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 
@@ -180,7 +182,7 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 				{ "name", modelTitleLocal + meshAccessorSuffix_Indices },
 				{ "bufferView", currentBufferCounter },
 				{ "byteOffset", 0 },
-				{ "componentType", 5121 },
+				{ "componentType", 5125 },
 				{ "count", model.indices.size() },
 				{ "type", "SCALAR" },
 				{ "min", { *std::min_element(model.indices.begin(), model.indices.end()) } },
@@ -255,14 +257,42 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 		int base64_size_vertices = model.vertices.size() * sizeof(glm::vec3);
 		int base64_size_normals = model.normals.size() * sizeof(glm::vec3);
 		int base64_size_textureCoordinates = model.texture_coordinates.size() * sizeof(glm::vec2);
-		std::string base64_indices = base64_encode(reinterpret_cast<unsigned char const *>(model.indices.data()), base64_size_indices);
-		std::string base64_vertices = base64_encode(reinterpret_cast<unsigned char const *>(model.vertices.data()), base64_size_vertices);
-		std::string base64_normals = base64_encode(reinterpret_cast<unsigned char const *>(model.normals.data()), base64_size_normals);
-		std::string base64_textureCoordinates = base64_encode(reinterpret_cast<unsigned char const *>(model.texture_coordinates.data()), base64_size_textureCoordinates);
+
+		std::string base64_indices = "";
+		std::string base64_vertices = "";
+		std::string base64_normals = "";
+		std::string base64_textureCoordinates = "";
+
+		std::vector<unsigned char> buffer_data;
+		for (std::vector<unsigned int>::iterator it = model.indices.begin(); it != model.indices.end(); ++it) {
+			buffer_data.push_back(static_cast<unsigned char>(*it));
+			buffer_data.push_back(static_cast<unsigned char>(*it));
+		}
+
+		for (std::vector<glm::vec3>::iterator it = model.vertices.begin(); it != model.vertices.end(); ++it) {
+			buffer_data.push_back(static_cast<unsigned char>((*it).x));
+			buffer_data.push_back(static_cast<unsigned char>((*it).y));
+			buffer_data.push_back(static_cast<unsigned char>((*it).z));
+		}
+
+		for (std::vector<glm::vec3>::iterator it = model.normals.begin(); it != model.normals.end(); ++it) {
+			buffer_data.push_back(static_cast<unsigned char>((*it).x));
+			buffer_data.push_back(static_cast<unsigned char>((*it).y));
+			buffer_data.push_back(static_cast<unsigned char>((*it).z));
+		}
+
+		if (model.texture_coordinates.size() > 0) {
+			for (std::vector<glm::vec2>::iterator it = model.texture_coordinates.begin(); it != model.texture_coordinates.end(); ++it) {
+				buffer_data.push_back(static_cast<unsigned char>((*it).x));
+				buffer_data.push_back(static_cast<unsigned char>((*it).y));
+			}
+		}
+
+		buffer_data.push_back('\0');
 
 		// misc
-		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates + 1;
-		bufferData += base64_indices + base64_vertices + base64_normals + base64_textureCoordinates;
+		totalBufferLength += base64_size_indices + base64_size_vertices + base64_size_normals + base64_size_textureCoordinates;
+		bufferData = base64_encode(&*buffer_data.begin(), totalBufferLength);
 
 		// ---------------------------------------------------------
 		// meshes
