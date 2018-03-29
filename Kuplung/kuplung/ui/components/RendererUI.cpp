@@ -38,7 +38,8 @@ void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager
     ImGui::SetNextWindowSize(ImVec2(this->wWidth, this->wHeight), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Renderer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	/// MIGRATE : ImGui::Begin("Renderer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::Begin("Renderer", show);
 
     ImGuiWindow* window = ImGui::GetCurrentWindow();
     const ImGuiIO io = ImGui::GetIO();

@@ -43,7 +43,8 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager &managerObjects)
 void DialogControlsGUI::render(bool* show, bool* isFrame) {
     ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiSetCond_FirstUseEver);
-    ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin("GUI Controls", show);
 
     ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
     ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));

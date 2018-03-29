@@ -138,7 +138,7 @@ namespace ImGui {
         selectedIndex = newSelectedIndex;
 
         // Draw tab label while mouse drags it
-        if (draggingTabIndex>=0 && draggingTabIndex<numTabs) {
+        if (draggingTabIndex >= 0 && draggingTabIndex < numTabs) {
             const ImVec2& mp = ImGui::GetIO().MousePos;
             const ImVec2 wp = ImGui::GetWindowPos();
             ImVec2 start(wp.x+mp.x-draggingTabOffset.x-draggingTabSize.x*0.5f,wp.y+mp.y-draggingTabOffset.y-draggingTabSize.y*0.5f);
@@ -146,12 +146,13 @@ namespace ImGui {
             ImDrawList* drawList = ImGui::GetWindowDrawList();
             const float draggedBtnAlpha = 0.65f;
             const ImVec4& btnColor = style.Colors[ImGuiCol_Button];
-            drawList->AddRectFilled(start,end,ImColor(btnColor.x,btnColor.y,btnColor.z,btnColor.w*draggedBtnAlpha),style.FrameRounding);
-            start.x+=style.FramePadding.x;start.y+=style.FramePadding.y;
+            drawList->AddRectFilled(start, end, ImColor(btnColor.x, btnColor.y, btnColor.z, btnColor.w * draggedBtnAlpha), style.FrameRounding);
+            start.x += style.FramePadding.x;
+			start.y += style.FramePadding.y;
             const ImVec4& txtColor = style.Colors[ImGuiCol_Text];
-            drawList->AddText(start,ImColor(txtColor.x,txtColor.y,txtColor.z,txtColor.w*draggedBtnAlpha),tabLabels[pOptionalItemOrdering[draggingTabIndex]]);
+            drawList->AddText(start, ImColor(txtColor.x, txtColor.y, txtColor.z, txtColor.w * draggedBtnAlpha), tabLabels[pOptionalItemOrdering[draggingTabIndex]]);
 
-            ImGui::SetMouseCursor(ImGuiMouseCursor_Move);
+            /// MIGRATE : ImGui::SetMouseCursor(ImGuiMouseCursor_Move);
         }
 
         // Drop tab label

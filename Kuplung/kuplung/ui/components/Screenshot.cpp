@@ -55,7 +55,7 @@ void Screenshot::ShowScreenshotsWindow(bool* open) {
 
     char buf[128];
     sprintf(buf, "%.0f x %.0f", bounds_rect.GetWidth(), bounds_rect.GetHeight());
-    g.OverlayDrawList.AddText(ImGui::GetWindowFont(), ImGui::GetWindowFontSize(), ImVec2(1,1), ImColor(255,255,255), buf);
+    g.OverlayDrawList.AddText(ImGui::GetFont(), ImGui::GetFontSize(), ImVec2(1,1), ImColor(255,255,255), buf);
     g.OverlayDrawList.AddRect(bounds_rect.Min-ImVec2(1,1), bounds_rect.Max+ImVec2(1,1), 0xFFFFFFFF);
 
     capture |= (ImGui::GetIO().KeyAlt && ImGui::IsKeyPressed(ImGui::GetKeyIndex(ImGuiKey_C)));

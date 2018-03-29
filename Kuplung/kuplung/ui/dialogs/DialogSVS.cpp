@@ -18,7 +18,8 @@ void DialogSVS::render(bool* p_opened) {
     ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Structured Volumetric Sampling", p_opened, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin("Structured Volumetric Sampling", p_opened, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin("Structured Volumetric Sampling", p_opened);
 
     this->windowWidth = ImGui::GetWindowWidth();
     this->windowHeight = ImGui::GetWindowHeight();

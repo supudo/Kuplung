@@ -104,7 +104,7 @@ void EditTransform(const Camera& camera, matrix_t& matrix)
 #pragma once
 
 #ifdef USE_IMGUI_API
-#include "kuplung/utilities/imgui/imconfig.h"
+#include "imconfig.h"
 #endif
 #ifndef IMGUI_API
 #define IMGUI_API

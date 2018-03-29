@@ -38,7 +38,8 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Material Editor", p_opened, ImGuiWindowFlags_ShowBorders);
+    /// MIGRATE : ImGui::Begin("Material Editor", p_opened, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin("Material Editor", p_opened);
 
     if (!this->inited || this->selectedModelID != selectedModelID) {
         this->initMaterialNodes(face);

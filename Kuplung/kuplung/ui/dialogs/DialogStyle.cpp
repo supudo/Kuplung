@@ -74,7 +74,7 @@ ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
                     else if (opKey == "AntiAliasedLines")
                         style.AntiAliasedLines = std::stoi(opValue) != 0;
                     else if (opKey == "AntiAliasedShapes")
-                        style.AntiAliasedShapes = std::stoi(opValue) != 0;
+                        style.AntiAliasedFill = std::stoi(opValue) != 0;
                     else if (opKey == "CurveTessellationTol")
                         style.CurveTessellationTol = std::stof(opValue);
                     else if (opKey == "Alpha")
@@ -85,7 +85,7 @@ ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
                     else if (opKey == "WindowRounding")
                         style.WindowRounding = std::stof(opValue);
                     else if (opKey == "ChildWindowRounding")
-                        style.ChildWindowRounding = std::stof(opValue);
+                        style.WindowRounding = std::stof(opValue);
                     else if (opKey == "FramePadding")
                         style.FramePadding = this->tov2(opValue);
                     else if (opKey == "FrameRounding")
@@ -144,7 +144,7 @@ void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fon
 
     style_txt += "# Rendering" + Settings::Instance()->newLineDelimiter;
     style_txt += "AntiAliasedLines = " + std::to_string(style.AntiAliasedLines) + Settings::Instance()->newLineDelimiter;
-    style_txt += "AntiAliasedShapes = " + std::to_string(style.AntiAliasedShapes) + Settings::Instance()->newLineDelimiter;
+    style_txt += "AntiAliasedShapes = " + std::to_string(style.AntiAliasedFill) + Settings::Instance()->newLineDelimiter;
     style_txt += "CurveTessellationTol = " + std::to_string(style.CurveTessellationTol) + Settings::Instance()->newLineDelimiter;
     style_txt += "Alpha = " + std::to_string(style.Alpha) + Settings::Instance()->newLineDelimiter;
     style_txt += Settings::Instance()->newLineDelimiter;
@@ -152,7 +152,7 @@ void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fon
     style_txt += "# Sizes" + Settings::Instance()->newLineDelimiter;
     style_txt += "style.sizes.WindowPadding = " + std::to_string(style.WindowPadding.x) + ", " + std::to_string(style.WindowPadding.y) + Settings::Instance()->newLineDelimiter;
     style_txt += "style.sizes.WindowRounding = " + std::to_string(style.WindowRounding) + Settings::Instance()->newLineDelimiter;
-    style_txt += "style.sizes.ChildWindowRounding = " + std::to_string(style.ChildWindowRounding) + Settings::Instance()->newLineDelimiter;
+    style_txt += "style.sizes.ChildWindowRounding = " + std::to_string(style.WindowRounding) + Settings::Instance()->newLineDelimiter;
     style_txt += "style.sizes.FramePadding = " + std::to_string(style.FramePadding.x) + ", " + std::to_string(style.FramePadding.y) + Settings::Instance()->newLineDelimiter;
     style_txt += "style.sizes.FrameRounding = " + std::to_string(style.FrameRounding) + Settings::Instance()->newLineDelimiter;
     style_txt += "style.sizes.ItemSpacing = " + std::to_string(style.ItemSpacing.x) + ", " + std::to_string(style.ItemSpacing.y) + Settings::Instance()->newLineDelimiter;

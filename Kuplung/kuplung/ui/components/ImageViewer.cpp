@@ -26,7 +26,8 @@ void ImageViewer::showImage(bool* show) {
     ImGui::SetNextWindowSize(ImVec2(winWidth, wintHeight), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin("Image Viewer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	/// MIGRATE : ImGui::Begin("Image Viewer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::Begin("Image Viewer", show);
 
     ImGui::Text("Image: %s", imagePath.c_str());
     ImGui::Text("Image dimensions: %i x %i", this->tWidth, this->tHeight);

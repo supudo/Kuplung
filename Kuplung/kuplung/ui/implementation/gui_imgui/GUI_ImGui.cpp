@@ -165,14 +165,17 @@ void GUI_ImGui::init(SDL_Window *window,
     this->componentFileEditor = std::make_unique<ShaderEditor>();
     this->componentFileEditor->init(Settings::Instance()->appFolder(), posX, posY, 100, 100);
 
-    this->windowStyle = std::make_unique<DialogStyle>();
-    ImGuiStyle& style = ImGui::GetStyle();
-    this->windowStyle->saveDefault(style);
-    style = this->windowStyle->loadCurrent();
-
     this->windowOptions = std::make_unique<DialogOptions>();
     this->windowOptions->init();
+
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
     this->imguiImplementation->ImGui_Implementation_Init();
+
+	this->windowStyle = std::make_unique<DialogStyle>();
+	ImGuiStyle& style = ImGui::GetStyle();
+	this->windowStyle->saveDefault(style);
+	style = this->windowStyle->loadCurrent();
 
     this->windowOptions->loadFonts(&this->needsFontChange);
 
@@ -511,7 +514,7 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     }
 
     if (this->showDemoWindow)
-        ImGui::ShowTestWindow(&this->showDemoWindow);
+        ImGui::ShowTestWindow();
 }
 
 void GUI_ImGui::clearAllLights() {
@@ -574,7 +577,7 @@ void GUI_ImGui::renderEnd() {
     }
 
     ImGui::Render();
-    this->imguiImplementation->ImGui_Implementation_RenderDrawLists();
+    this->imguiImplementation->ImGui_Implementation_RenderDrawData(ImGui::GetDrawData());
 }
 
 void GUI_ImGui::recentFilesAdd(FBEntity file) {
@@ -748,7 +751,7 @@ void GUI_ImGui::dialogSceneStats() {
     ImGui::Separator();
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     ImGui::Text("%d vertices, %d indices (%d triangles)", ImGui::GetIO().MetricsRenderVertices, ImGui::GetIO().MetricsRenderIndices, ImGui::GetIO().MetricsRenderIndices / 3);
-    ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
+    /// MIGRATION : ImGui::Text("%d allocations", ImGui::GetIO().MetricsAllocs);
     ImGui::End();
 }
 

@@ -147,7 +147,8 @@ void MENode_Texture::showImage() {
         default:
             break;
     }
-    ImGui::Begin(title.c_str(), &this->showTextureWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	/// MIGRATE : ImGui::Begin(title.c_str(), &this->showTextureWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::Begin(title.c_str(), &this->showTextureWindow);
 
     ImGui::Text("%s", this->TextureFilename.c_str());
     ImGui::Text("Image dimensions: %i x %i", this->textureWidth, this->textureHeight);

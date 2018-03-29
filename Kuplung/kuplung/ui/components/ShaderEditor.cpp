@@ -53,7 +53,8 @@ void ShaderEditor::draw(const std::function<void(std::string)>& fileShaderCompil
     if (this->positionX > 0 && this->positionY > 0)
         ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin(title, p_opened);
 
     ImGui::Combo("Shader##", &this->shaderFileIndex, GUIEditor_ShaderItems, IM_ARRAYSIZE(GUIEditor_ShaderItems));
     ImGui::SameLine(); if (ImGui::Button("Compile"))

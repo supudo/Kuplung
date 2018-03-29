@@ -107,7 +107,8 @@ void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBa
 	auto cpos = this->kuplungEditor.GetCursorPosition();
 	ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(.13f, .13f, .13f, 1.0f));
 	ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
-	ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
+	/// MIGRATE : ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar | ImGuiWindowFlags_AlwaysVerticalScrollbar);
+	ImGui::Begin(title, p_opened);
 
 	ImGui::Combo(
 		"##001",

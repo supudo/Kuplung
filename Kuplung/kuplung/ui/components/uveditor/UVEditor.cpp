@@ -99,7 +99,8 @@ void UVEditor::draw(const char* title, bool* p_opened) {
     if (this->positionX > 0 && this->positionY > 0)
         ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin(title, p_opened);
     ImGui::BeginChild("UVEditor");
 
     std::string btnLabel = ICON_FA_EYE " Browse ...";

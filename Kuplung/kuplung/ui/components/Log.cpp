@@ -25,7 +25,7 @@ void Log::addToLog(const char* fmt, ...) {
     int old_size = this->Buf.size();
     va_list args;
     va_start(args, fmt);
-    this->Buf.appendv(fmt, args);
+    this->Buf.appendfv(fmt, args);
     va_end(args);
     for (int new_size=this->Buf.size(); old_size<new_size; old_size++)
         if (this->Buf[old_size] == '\n')
@@ -42,7 +42,8 @@ void Log::draw(const char* title, bool* p_opened) {
     if (this->positionX > 0 && this->positionY > 0)
         ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
 
-    ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin(title, p_opened, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin(title, p_opened);
     if (ImGui::Button("Clear"))
         this->clear();
     ImGui::SameLine();

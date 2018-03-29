@@ -280,7 +280,8 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
     ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
 
     title = title + " Texture";
-    ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	/// MIGRATE : ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
+	ImGui::Begin(title.c_str(), showWindow);
 
     ImGui::Text("Image: %s", img.c_str());
     ImGui::Text("Image dimensions: %i x %i", *width, *height);
@@ -296,7 +297,8 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFaceBase*> * mmfaces, int * sceneSelectedModelObject) {
     ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
     ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
-    ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
+	/// MIGRATE : ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
+	ImGui::Begin("Scene Settings", show);
 
     ImGui::BeginChild("tabs_list", ImVec2(-1, this->panelHeight_Tabs));
     ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f)));
