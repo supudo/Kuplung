@@ -145,7 +145,12 @@ void GUI_ImGui::init(SDL_Window *window,
     int posX = 50, posY = 50;
 
     this->imguiImplementation = std::make_unique<SDL2OpenGL32>();
-    this->imguiImplementation->init(this->sdlWindow);
+	this->imguiImplementation->init(this->sdlWindow);
+
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO(); (void)io;
+	this->imguiImplementation->ImGui_Implementation_Init();
+	ImGui::StyleColorsDark();
 
     this->componentLog = std::make_unique<Log>();
     this->componentScreenshot = std::make_unique<Screenshot>();
@@ -167,10 +172,6 @@ void GUI_ImGui::init(SDL_Window *window,
 
     this->windowOptions = std::make_unique<DialogOptions>();
     this->windowOptions->init();
-
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-    this->imguiImplementation->ImGui_Implementation_Init();
 
 	this->windowStyle = std::make_unique<DialogStyle>();
 	ImGuiStyle& style = ImGui::GetStyle();
