@@ -52,6 +52,8 @@ Kuplung::~Kuplung() {
     this->rayPicker.reset();
     this->managerRendering.reset();
 
+	ImGui::DestroyContext();
+
     SDL_GL_DeleteContext(this->glContext);
 
     SDL_DestroyWindow(this->gWindow);

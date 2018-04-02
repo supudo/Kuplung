@@ -65,18 +65,18 @@ void SDL2OpenGL32::ImGui_Implementation_RenderDrawData(ImDrawData* draw_data) {
 	glViewport(0, 0, (GLsizei)fb_width, (GLsizei)fb_height);
 	const float ortho_projection[4][4] =
 	{
-		{ 2.0f / io.DisplaySize.x, 0.0f,                   0.0f, 0.0f },
-	{ 0.0f,                  2.0f / -io.DisplaySize.y, 0.0f, 0.0f },
-	{ 0.0f,                  0.0f,                  -1.0f, 0.0f },
-	{ -1.0f,                  1.0f,                   0.0f, 1.0f },
+		{  2.0f / io.DisplaySize.x,  0.0f,                      0.0f, 0.0f },
+		{  0.0f,                     2.0f / -io.DisplaySize.y,  0.0f, 0.0f },
+		{  0.0f,                     0.0f,                     -1.0f, 0.0f },
+		{ -1.0f,                     1.0f,                      0.0f, 1.0f },
 	};
 	glUseProgram(this->gui_ShaderHandle);
 	glUniform1i(this->gui_AttribLocationTex, 0);
 	glUniformMatrix4fv(this->gui_AttribLocationProjMtx, 1, GL_FALSE, &ortho_projection[0][0]);
 	glBindSampler(0, 0); // Rely on combined texture/sampler state.
 
-						 // Recreate the VAO every time 
-						 // (This is to easily allow multiple GL contexts. VAO are not shared among GL contexts, and we don't track creation/deletion of windows so we don't have an obvious key to use to cache them.)
+	// Recreate the VAO every time 
+	// (This is to easily allow multiple GL contexts. VAO are not shared among GL contexts, and we don't track creation/deletion of windows so we don't have an obvious key to use to cache them.)
 	GLuint vao_handle = 0;
 	glGenVertexArrays(1, &vao_handle);
 	glBindVertexArray(vao_handle);

@@ -150,7 +150,7 @@ void GUI_ImGui::init(SDL_Window *window,
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO(); (void)io;
 	this->imguiImplementation->ImGui_Implementation_Init();
-	ImGui::StyleColorsDark();
+	ImGui::StyleColorsClassic();
 
     this->componentLog = std::make_unique<Log>();
     this->componentScreenshot = std::make_unique<Screenshot>();
