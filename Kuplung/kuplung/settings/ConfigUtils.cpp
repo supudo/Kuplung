@@ -256,7 +256,6 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
 
 void ConfigUtils::readFile() {
     std::FILE *fp = std::fopen(this->configFile.c_str(), "rb");
-    printf("config file = %s", this->configFile.c_str());
     if (fp) {
 #ifdef _WIN32
         std::string nlDelimiter = "\n";
