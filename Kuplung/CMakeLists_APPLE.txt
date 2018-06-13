@@ -86,7 +86,7 @@ ELSE(MINIZIP_FOUND)
 ENDIF(MINIZIP_FOUND)
 
 # Lua
-INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_3/include)
+INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_4/include/lua)
 LINK_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_3/lib)
 #FIND_PACKAGE(Lua REQUIRED)
 #IF(LUA_FOUND)
@@ -159,6 +159,7 @@ ENDIF(CUDA_FOUND AND CUDA_ENABLED)
 INCLUDE_DIRECTORIES(.)
 
 ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_4x)
+ADD_DEFINITIONS(-DGLM_ENABLE_EXPERIMENTAL)
 
 SET(SOURCE_FILES
     kuplung/meshes/artefacts/Shadertoy.cpp
@@ -289,8 +290,10 @@ SET(SOURCE_FILES
     kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.cpp
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.hpp
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.cpp
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.hpp
     kuplung/ui/UIManager.cpp
     kuplung/ui/UIManager.hpp
     kuplung/ui/UIHelpers.cpp
