@@ -57,7 +57,7 @@ void ConfigUtils::saveSettings() {
 #pragma mark - Read
 
 bool ConfigUtils::readBool(std::string const& configKey) {
-	return this->configData[configKey] == "true";
+    return this->configData[configKey] == "true";
 }
 
 int ConfigUtils::readInt(std::string const& configKey) {
@@ -148,7 +148,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+            if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -225,7 +225,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+            if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 fileCounter = 0;
                 continue;
@@ -256,6 +256,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
 
 void ConfigUtils::readFile() {
     std::FILE *fp = std::fopen(this->configFile.c_str(), "rb");
+    printf("config file = %s", this->configFile.c_str());
     if (fp) {
 #ifdef _WIN32
         std::string nlDelimiter = "\n";
@@ -280,7 +281,7 @@ void ConfigUtils::readFile() {
         while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
             singleLine = fileContents.substr(0, pos);
 
-			if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+            if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
                 fileContents.erase(0, pos + nlDelimiter.length());
                 continue;
             }

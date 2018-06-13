@@ -38,7 +38,7 @@ std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector
 	
 	std::string infileBuffer = "data:application/octet-stream;base64,";
 	std::vector<std::string> dataBuffers;
-	for each (auto buffer in j["buffers"]) {
+	for (auto const& buffer : j["buffers"]) {
 		std::string dataURI = buffer.at("uri").get<std::string>();
 		if (boost::starts_with(dataURI, infileBuffer)) {
 			boost::replace_first(dataURI, infileBuffer, "");
@@ -50,9 +50,9 @@ std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector
 	}
 	
 	nlohmann::json jScenes = j["scenes"];
-	for each (auto js in jScenes) {
+	for (auto const& js : jScenes) {
 		nlohmann::json sceneNodes = js["nodes"];
-		for each (int jsNodeIndex in sceneNodes) {
+		for (int const jsNodeIndex : sceneNodes) {
 			nlohmann::json jNode = j["nodes"][jsNodeIndex];
 			
 			MeshModel mm = {};
@@ -63,7 +63,7 @@ std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector
 			int meshIndex = jNode.at("mesh").get<int>();
 			nlohmann::json jnm = j["meshes"][meshIndex];
 			auto jprimitives = jnm["primitives"];
-			for each (auto jp in jprimitives) {
+			for (auto const& jp : jprimitives) {
 				int indexIndices = jp.at("indices").get<int>();
 				int indexMaterial = -1;
 				if (jp.count("material") > 0)

@@ -17,15 +17,15 @@
 #endif
 
 Kuplung::Kuplung() {
-	this->gWindow = NULL;
-	this->glContext = NULL;
+    this->gWindow = NULL;
+    this->glContext = NULL;
 
-	this->gameIsRunning = false;
-	this->objParserThreadFinished = true;
-	this->objParserThreadProcessed = true;
-	this->exporterThreadFinished = true;
-	this->sceneSelectedModelObject = -1;
-	this->objLoadingProgress = 0.0f;
+    this->gameIsRunning = false;
+    this->objParserThreadFinished = true;
+    this->objParserThreadProcessed = true;
+    this->exporterThreadFinished = true;
+    this->sceneSelectedModelObject = -1;
+    this->objLoadingProgress = 0.0f;
 }
 
 Kuplung::~Kuplung() {
@@ -51,6 +51,8 @@ Kuplung::~Kuplung() {
     this->managerObjects.reset();
     this->rayPicker.reset();
     this->managerRendering.reset();
+
+    ImGui::DestroyContext();
 
     SDL_GL_DeleteContext(this->glContext);
 
@@ -102,7 +104,7 @@ bool Kuplung::init() {
         success = false;
     }
     else {
-		this->initFolders();
+        this->initFolders();
 
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
         SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
@@ -146,6 +148,10 @@ bool Kuplung::init() {
                     success = false;
                 }
                 else {
+                    if (SDL_GL_SetSwapInterval(1) < 0) {
+                        printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
+                        success = false;
+                    }
 #ifdef _WIN32
                     const GLenum glewInitCode = glewInit();
                     if (glewInitCode != GLEW_OK) {
@@ -158,13 +164,14 @@ bool Kuplung::init() {
                     this->parser = std::make_unique<FileModelManager>();
                     this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
 
-					this->managerObjects = std::make_unique<ObjectsManager>();
+                    this->managerObjects = std::make_unique<ObjectsManager>();
                     this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1),
                                                std::bind(&Kuplung::addTerrainModel, this),
                                                std::bind(&Kuplung::addSpaceshipModel, this));
 
-					this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
+                    this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
                     this->managerUI->init(gWindow,
+                                          glContext,
                                           std::bind(&Kuplung::guiQuit, this),
                                           std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2),
                                           std::bind(&Kuplung::guiClearScreen, this),
@@ -177,7 +184,7 @@ bool Kuplung::init() {
                                           std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
                                           std::bind(&Kuplung::openScene, this, std::placeholders::_1)
                                           );
-					this->managerUI->setMeshModelFaces(&this->meshModelFaces);
+                    this->managerUI->setMeshModelFaces(&this->meshModelFaces);
                     this->doLog("UI initialized.");
 
                     this->managerObjects->loadSystemModels(this->parser);
@@ -190,11 +197,6 @@ bool Kuplung::init() {
                     this->fontParser = std::make_unique<KuplungApp::Utilities::FontParser::FNTParser>();
                     this->fontParser->init();
                     this->doLog("Font Parser Initialized.");
-
-                    if (SDL_GL_SetSwapInterval(1) < 0) {
-                        printf("Warning: Unable to set VSync! SDL Error: %s\n", SDL_GetError());
-                        success = false;
-                    }
 
                     this->gameIsRunning = true;
                     this->sceneSelectedModelObject = -1;
@@ -228,71 +230,74 @@ void Kuplung::initFolders() {
     //    data_path = base_path;
     //else
     //    data_path = SDL_strdup("./");
-	//Settings::Instance()->currentFolder = data_path;
+    //Settings::Instance()->currentFolder = data_path;
 
-	std::string homeFolder(""), iniFolder("");
+    std::string homeFolder(""), iniFolder("");
 #ifdef _WIN32
-	char const *hdrive = getenv("HOMEDRIVE");
-	char const *hpath = getenv("HOMEPATH");
-	homeFolder = std::string(hdrive) + std::string(hpath);
+    char const *hdrive = getenv("HOMEDRIVE");
+    char const *hpath = getenv("HOMEPATH");
+    homeFolder = std::string(hdrive) + std::string(hpath);
 
-	TCHAR szPath[MAX_PATH];
-	if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath))) {
+    TCHAR szPath[MAX_PATH];
+    if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath))) {
         std::string folderLocalAppData("");
 #ifndef UNICODE
-		folderLocalAppData = szPath;
+        folderLocalAppData = szPath;
 #else
-		std::wstring folderLocalAppDataW = szPath;
+        std::wstring folderLocalAppDataW = szPath;
         folderLocalAppData = std::string(folderLocalAppDataW.begin(), folderLocalAppDataW.end());
 #endif
         //std::string folderLocalAppData(szPath);
-		folderLocalAppData += "\\supudo.net";
-		if (!boost::filesystem::exists(folderLocalAppData))
-			boost::filesystem::create_directory(folderLocalAppData);
-		folderLocalAppData += "\\Kuplung";
-		if (!boost::filesystem::exists(folderLocalAppData))
-			boost::filesystem::create_directory(folderLocalAppData);
+        folderLocalAppData += "\\supudo.net";
+        if (!boost::filesystem::exists(folderLocalAppData))
+            boost::filesystem::create_directory(folderLocalAppData);
+        folderLocalAppData += "\\Kuplung";
+        if (!boost::filesystem::exists(folderLocalAppData))
+            boost::filesystem::create_directory(folderLocalAppData);
 
-		std::string current_folder = boost::filesystem::current_path().string() + "\\resources";
-		std::string fName("");
+        std::string current_folder = boost::filesystem::current_path().string() + "\\resources";
+        std::string fName("");
 
-		fName = "Kuplung_Settings.ini";
-		std::string iniFileSource(current_folder + "\\" + fName);
-		std::string iniFileDestination = folderLocalAppData + "\\" + fName;
-		if (!boost::filesystem::exists(iniFileDestination))
-			boost::filesystem::copy(iniFileSource, iniFileDestination);
+        fName = "Kuplung_Settings.ini";
+        std::string iniFileSource(current_folder + "\\" + fName);
+        std::string iniFileDestination = folderLocalAppData + "\\" + fName;
+        if (!boost::filesystem::exists(iniFileDestination))
+            boost::filesystem::copy(iniFileSource, iniFileDestination);
 
-		fName = "Kuplung_RecentFiles.ini";
-		std::string iniFileRecentSource(current_folder + "\\" + fName);
-		std::string iniFileRecentDestination = folderLocalAppData + "\\" + fName;
-		if (!boost::filesystem::exists(iniFileRecentDestination))
-			boost::filesystem::copy(iniFileRecentSource, iniFileRecentDestination);
+        fName = "Kuplung_RecentFiles.ini";
+        std::string iniFileRecentSource(current_folder + "\\" + fName);
+        std::string iniFileRecentDestination = folderLocalAppData + "\\" + fName;
+        if (!boost::filesystem::exists(iniFileRecentDestination))
+            boost::filesystem::copy(iniFileRecentSource, iniFileRecentDestination);
 
-		fName = "Kuplung_RecentFilesImported.ini";
-		std::string iniFileRecentImportedSource(current_folder + "\\" + fName);
-		std::string iniFileRecentImportedDestination = folderLocalAppData + "\\" + fName;
-		if (!boost::filesystem::exists(iniFileRecentImportedDestination))
-			boost::filesystem::copy(iniFileRecentImportedSource, iniFileRecentImportedDestination);
+        fName = "Kuplung_RecentFilesImported.ini";
+        std::string iniFileRecentImportedSource(current_folder + "\\" + fName);
+        std::string iniFileRecentImportedDestination = folderLocalAppData + "\\" + fName;
+        if (!boost::filesystem::exists(iniFileRecentImportedDestination))
+            boost::filesystem::copy(iniFileRecentImportedSource, iniFileRecentImportedDestination);
 
-		iniFolder = folderLocalAppData;
-	}
-	else
-		iniFolder = homeFolder;
+        iniFolder = folderLocalAppData;
+    }
+    else
+        iniFolder = homeFolder;
 #elif defined macintosh // OS 9
     char const *hpath = getenv("HOME");
     homeFolder = std::string(hpath);
-	iniFolder = homeFolder;
+    iniFolder = homeFolder;
 #else
     char const *hpath = getenv("HOME");
     if (hpath != NULL)
         homeFolder = std::string(hpath);
-	iniFolder = homeFolder;
+    iniFolder = homeFolder;
+    // TODO(sergey): fix properly osx home folder
+    iniFolder = "/Users/supudo/Software/C++/Kuplung/_qt/build-Kuplung-Desktop_Qt_5_11_0_clang_64bit-Debug/resources";
+    homeFolder = "/Users/supudo/Software/C++/Kuplung/_qt/build-Kuplung-Desktop_Qt_5_11_0_clang_64bit-Debug/resources";
 #endif
-	if (Settings::Instance()->ApplicationConfigurationFolder.empty())
-		Settings::Instance()->ApplicationConfigurationFolder = iniFolder;
+    if (Settings::Instance()->ApplicationConfigurationFolder.empty())
+        Settings::Instance()->ApplicationConfigurationFolder = iniFolder;
     if (Settings::Instance()->currentFolder.empty())
         Settings::Instance()->currentFolder = homeFolder;
-	Settings::Instance()->initSettings(iniFolder);
+    Settings::Instance()->initSettings(iniFolder);
 }
 
 void Kuplung::onEvent(SDL_Event *ev) {
@@ -323,8 +328,8 @@ void Kuplung::onEvent(SDL_Event *ev) {
             }
         }
 
-		if (this->managerControls->keyPresset_TAB)
-			Settings::Instance()->ShowBoundingBox = !Settings::Instance()->ShowBoundingBox;
+        if (this->managerControls->keyPresset_TAB)
+            Settings::Instance()->ShowBoundingBox = !Settings::Instance()->ShowBoundingBox;
 
         if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
             this->guiModelDelete(this->sceneSelectedModelObject);
@@ -546,57 +551,57 @@ void Kuplung::addShape(const ShapeType type) {
     std::string shapeName("");
     assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
     switch (type) {
-		case ShapeType_Cone:
-			shapeName = "cone";
-			break;
-		case ShapeType_Cube:
-			shapeName = "cube";
-			break;
-		case ShapeType_Cylinder:
-			shapeName = "cylinder";
-			break;
-		case ShapeType_Grid:
-			shapeName = "grid";
-			break;
-		case ShapeType_IcoSphere:
-			shapeName = "ico_sphere";
-			break;
-		case ShapeType_MonkeyHead:
-			shapeName = "monkey_head";
-			break;
-		case ShapeType_Plane:
-			shapeName = "plane";
-			break;
-		case ShapeType_Triangle:
-			shapeName = "triangle";
-			break;
-		case ShapeType_Torus:
-			shapeName = "torus";
-			break;
-		case ShapeType_Tube:
-			shapeName = "tube";
-			break;
-		case ShapeType_UVSphere:
-			shapeName = "uv_sphere";
-			break;
-		case ShapeType_BrickWall:
-			shapeName = "brick_wall";
-			break;
-		case ShapeType_PlaneObjects:
-			shapeName = "plane_objects";
-			break;
-		case ShapeType_PlaneObjectsLargePlane:
-			shapeName = "plane_objects_large";
-			break;
-		case ShapeType_MaterialBall:
-			shapeName = "MaterialBall";
-			break;
-		case ShapeType_MaterialBallBlender:
-			shapeName = "MaterialBallBlender";
-			break;
-		case ShapeType_Epcot:
-			shapeName = "epcot";
-			break;
+        case ShapeType_Cone:
+            shapeName = "cone";
+            break;
+        case ShapeType_Cube:
+            shapeName = "cube";
+            break;
+        case ShapeType_Cylinder:
+            shapeName = "cylinder";
+            break;
+        case ShapeType_Grid:
+            shapeName = "grid";
+            break;
+        case ShapeType_IcoSphere:
+            shapeName = "ico_sphere";
+            break;
+        case ShapeType_MonkeyHead:
+            shapeName = "monkey_head";
+            break;
+        case ShapeType_Plane:
+            shapeName = "plane";
+            break;
+        case ShapeType_Triangle:
+            shapeName = "triangle";
+            break;
+        case ShapeType_Torus:
+            shapeName = "torus";
+            break;
+        case ShapeType_Tube:
+            shapeName = "tube";
+            break;
+        case ShapeType_UVSphere:
+            shapeName = "uv_sphere";
+            break;
+        case ShapeType_BrickWall:
+            shapeName = "brick_wall";
+            break;
+        case ShapeType_PlaneObjects:
+            shapeName = "plane_objects";
+            break;
+        case ShapeType_PlaneObjectsLargePlane:
+            shapeName = "plane_objects_large";
+            break;
+        case ShapeType_MaterialBall:
+            shapeName = "MaterialBall";
+            break;
+        case ShapeType_MaterialBallBlender:
+            shapeName = "MaterialBallBlender";
+            break;
+        case ShapeType_Epcot:
+            shapeName = "epcot";
+            break;
     }
     FBEntity shapeFile;
     shapeFile.isFile = true;

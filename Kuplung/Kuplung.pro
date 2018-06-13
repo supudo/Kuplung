@@ -62,6 +62,8 @@ CONFIG(release, debug|release) {
 
 mac {
     DEFINES += Def_Kuplung_OpenGL_4x
+    DEFINES += GLM_ENABLE_EXPERIMENTAL
+
     QMAKE_CXXFLAGS += -std=c++14
     QMAKE_CXXFLAGS += -stdlib=libc++
 
@@ -86,6 +88,9 @@ mac {
     QMAKE_CXXFLAGS_WARN_ON += -Wno-extern-c-compat
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unknown-pragmas
     QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-function
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-unused-variable
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-switch
+    QMAKE_CXXFLAGS_WARN_ON += -Wno-multichar
     QMAKE_CXXFLAGS_WARN_ON += -Wno-deprecated-declarations
     QMAKE_CXXFLAGS_WARN_ON += -Wno-#warnings
     # Assimp-specific warning
@@ -134,29 +139,29 @@ mac {
 
     LIBS += -framework cocoa -framework OpenGL
 
-    LIBS += -L/usr/local/Cellar/boost/1.65.1/lib -lboost_system -lboost_filesystem
-    INCLUDEPATH += /usr/local/Cellar/boost/1.65.1/include
+    LIBS += -L/usr/local/Cellar/boost/1.67.0_1/lib -lboost_system -lboost_filesystem
+    INCLUDEPATH += /usr/local/Cellar/boost/1.67.0_1/include
 
-    LIBS += -L/usr/local/Cellar/glm/0.9.8.5/lib
-    INCLUDEPATH += /usr/local/Cellar/glm/0.9.8.5/include
+    LIBS += -L/usr/local/Cellar/glm/0.9.9.0/lib
+    INCLUDEPATH += /usr/local/Cellar/glm/0.9.9.0/include
 
-    LIBS += -L/usr/local/Cellar/sdl2/2.0.7/lib -lSDL2
-    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.7/include
+    LIBS += -L/usr/local/Cellar/sdl2/2.0.8/lib -lSDL2
+    INCLUDEPATH += /usr/local/Cellar/sdl2/2.0.8/include
 
     LIBS += -L/usr/local/Cellar/glfw3/3.2.1/lib -lGLFW3
     INCLUDEPATH += /usr/local/Cellar/glfw3/3.2.1/include
 
-    LIBS += -L/usr/local/Cellar/assimp/4.0.1/lib -lAssimp
-    INCLUDEPATH += /usr/local/Cellar/assimp/4.0.1/include
+    LIBS += -L/usr/local/Cellar/assimp/4.1.0/lib -lAssimp
+    INCLUDEPATH += /usr/local/Cellar/assimp/4.1.0/include
 
-    LIBS += -L/usr/local/Cellar/protobuf/3.5.0/lib -lprotobuf
-    INCLUDEPATH += /usr/local/Cellar/protobuf/3.5.0/include
+    LIBS += -L/usr/local/Cellar/protobuf/3.5.1_1/lib -lprotobuf
+    INCLUDEPATH += /usr/local/Cellar/protobuf/3.5.1_1/include
 
     LIBS += -L/usr/local/Cellar/minizip/1.2.11/lib -lz -lMinizip
     INCLUDEPATH += /usr/local/Cellar/minizip/1.2.11/include
 
-    LIBS += -L/usr/local/Cellar/lua@5.3/5.3.4/lib -lz -llua.5.3 -lm
-    INCLUDEPATH += /usr/local/Cellar/lua@5.3/5.3.4/include/lua-5.3
+    LIBS += -L/usr/local/Cellar/lua/5.3.4_4/lib -lz -llua.5.3.4 -lm
+    INCLUDEPATH += /usr/local/Cellar/lua/5.3.4_4/include/lua
 
 #    LIBS += -L/usr/local/Cellar/unittest-cpp/1.6.1/lib -lUnitTest++
 #    INCLUDEPATH += /usr/local/Cellar/unittest-cpp/1.6.1/include
@@ -335,7 +340,8 @@ SOURCES += main.cpp \
     kuplung/ui/implementation/gui_oui/GUI_OUI.cpp \
     kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.cpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp \
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp \
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.cpp \
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.cpp \
     kuplung/ui/components/ShaderEditor.cpp \
     kuplung/ui/components/FileBrowser.cpp \
     kuplung/ui/components/importers/ImportFile.cpp \
@@ -451,7 +457,8 @@ HEADERS += \
     kuplung/ui/implementation/gui_oui/GUI_OUI.hpp \
     kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp \
     kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp \
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp \
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.hpp \
+    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.hpp \
     kuplung/ui/components/ShaderEditor.hpp \
     kuplung/ui/components/FileBrowser.hpp \
     kuplung/ui/components/importers/ImportFile.hpp \

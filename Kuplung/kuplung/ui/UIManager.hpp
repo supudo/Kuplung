@@ -20,17 +20,18 @@ public:
     explicit UIManager(ObjectsManager &managerObjects);
     ~UIManager();
     void init(SDL_Window *window,
-			  const std::function<void()>& quitApp,
-			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processImportedFile,
-			  const std::function<void()>& newScene,
-			  const std::function<void(std::string)>& fileShaderCompile,
-			  const std::function<void(ShapeType)>& addShape,
-			  const std::function<void(LightSourceType)>& addLight,
-			  const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
-			  const std::function<void(int)>& deleteModel,
-			  const std::function<void(FBEntity file)>& renderScene,
-			  const std::function<void(FBEntity file)>& saveScene,
-			  const std::function<void(FBEntity file)>& openScene
+              SDL_GLContext glContext,
+              const std::function<void()>& quitApp,
+              const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processImportedFile,
+              const std::function<void()>& newScene,
+              const std::function<void(std::string)>& fileShaderCompile,
+              const std::function<void(ShapeType)>& addShape,
+              const std::function<void(LightSourceType)>& addLight,
+              const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
+              const std::function<void(int)>& deleteModel,
+              const std::function<void(FBEntity file)>& renderScene,
+              const std::function<void(FBEntity file)>& saveScene,
+              const std::function<void(FBEntity file)>& openScene
               );
 
     void doLog(const std::string& message);

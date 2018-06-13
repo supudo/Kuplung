@@ -11,7 +11,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-extern-c-compat")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-pic")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
 
 IF(APPLE)
     SET(MACOSX_BUNDLE true)
@@ -86,10 +86,12 @@ ELSE(MINIZIP_FOUND)
 ENDIF(MINIZIP_FOUND)
 
 # Lua
-FIND_PACKAGE(Lua REQUIRED)
-IF(LUA_FOUND)
-    INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-ENDIF(LUA_FOUND)
+INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_3/include)
+LINK_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_3/lib)
+#FIND_PACKAGE(Lua REQUIRED)
+#IF(LUA_FOUND)
+#    INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
+#ENDIF(LUA_FOUND)
 
 # libnoise
 INCLUDE_DIRECTORIES(../external/libnoise/headers)
@@ -685,7 +687,7 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/oui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
         FILE(GLOB Kuplung_OUI_Files "resources/oui/*.*")
         FILE(COPY ${Kuplung_OUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
-        
+
         # Image Assets
         EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/Images.xcassets/AppIcon.appiconset/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
         FILE(GLOB Kuplung_ImageAssets_Files "resources/Images.xcassets/AppIcon.appiconset/*.*")

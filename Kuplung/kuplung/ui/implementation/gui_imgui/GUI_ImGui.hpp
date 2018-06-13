@@ -14,7 +14,8 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 #include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp"
+#include "kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.hpp"
+#include "kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.hpp"
 
 #include "kuplung/ui/components/Log.hpp"
 #include "kuplung/ui/components/Screenshot.hpp"
@@ -48,17 +49,18 @@ public:
     explicit GUI_ImGui(ObjectsManager &managerObjects);
     ~GUI_ImGui();
     void init(SDL_Window *window,
-			  const std::function<void()>& quitApp,
-			  const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processImportedFile,
-			  const std::function<void()>& newScene,
-			  const std::function<void(std::string)>& fileShaderCompile,
-			  const std::function<void(ShapeType)>& addShape,
-			  const std::function<void(LightSourceType)>& addLight,
-			  const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
-			  const std::function<void(int)>& deleteModel,
-			  const std::function<void(FBEntity file)>& renderScene,
-			  const std::function<void(FBEntity file)>& saveScene,
-			  const std::function<void(FBEntity file)>& openScene
+              SDL_GLContext glContext,
+              const std::function<void()>& quitApp,
+              const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processImportedFile,
+              const std::function<void()>& newScene,
+              const std::function<void(std::string)>& fileShaderCompile,
+              const std::function<void(ShapeType)>& addShape,
+              const std::function<void(LightSourceType)>& addLight,
+              const std::function<void(FBEntity file, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& exportScene,
+              const std::function<void(int)>& deleteModel,
+              const std::function<void(FBEntity file)>& renderScene,
+              const std::function<void(FBEntity file)>& saveScene,
+              const std::function<void(FBEntity file)>& openScene
               );
 
     bool processEvent(SDL_Event *event);
@@ -115,14 +117,14 @@ private:
 
     void dialogFileBrowserProcessFile(FBEntity const& file);
     void dialogImporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats importFormat, int importFormatAssimp);
-	void dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat, int exportFormatAssimp);
+    void dialogExporterProcessFile(FBEntity const& file, std::vector<std::string> settings, ImportExportFormats exportFormat, int exportFormatAssimp);
     void dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation type);
     void fileShaderEditorSaved(std::string const& fileName);
 
-	ImportExportFormats dialogImportType, dialogExportType;
-	int dialogImportType_Assimp, dialogExportType_Assimp;
+    ImportExportFormats dialogImportType, dialogExportType;
+    int dialogImportType_Assimp, dialogExportType_Assimp;
     void dialogImporterBrowser();
-	void dialogExporterBrowser();
+    void dialogExporterBrowser();
     void dialogStyle();
     void dialogScreenshot();
     void dialogShaderEditor();
@@ -144,12 +146,13 @@ private:
     void dialogCudaExamples();
 
     ObjectsManager &managerObjects;
-    std::unique_ptr<SDL2OpenGL32> imguiImplementation;
+    std::unique_ptr<ImGui_Implementation_SDL2> imguiImplementationSDL2;
+    std::unique_ptr<ImGui_Implementation_OpenGL32> imguiImplementationOpenGL3;
     std::unique_ptr<Log> componentLog;
     std::unique_ptr<Screenshot> componentScreenshot;
     std::unique_ptr<FileBrowser> componentFileBrowser;
     std::unique_ptr<ImportFile> componentImportFile;
-	std::unique_ptr<ExportFile> componentExportFile;
+    std::unique_ptr<ExportFile> componentExportFile;
     std::unique_ptr<FileSaver> componentFileSaver;
     std::unique_ptr<ShaderEditor> componentFileEditor;
     std::unique_ptr<DialogStyle> windowStyle;

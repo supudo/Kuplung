@@ -49,7 +49,7 @@ GUI_ImGui::GUI_ImGui(ObjectsManager &managerObjects) : managerObjects(managerObj
 }
 
 GUI_ImGui::~GUI_ImGui() {
-    this->imguiImplementation.reset();
+    this->imguiImplementationOpenGL3.reset();
     this->componentLog.reset();
     this->componentScreenshot.reset();
     this->componentFileBrowser.reset();
@@ -65,7 +65,7 @@ GUI_ImGui::~GUI_ImGui() {
     this->componentImageViewer.reset();
     this->componentRendererUI.reset();
     this->componentImportFile.reset();
-	this->componentExportFile.reset();
+    this->componentExportFile.reset();
     this->componentKuplungIDE.reset();
 #ifdef DEF_KuplungSetting_UseCuda
     this->componentCudaExamples.reset();
@@ -73,6 +73,7 @@ GUI_ImGui::~GUI_ImGui() {
 }
 
 void GUI_ImGui::init(SDL_Window *window,
+                     SDL_GLContext glContext,
                      const std::function<void()>& quitApp,
                      const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& processImportedFile,
                      const std::function<void()>& newScene,
@@ -135,22 +136,24 @@ void GUI_ImGui::init(SDL_Window *window,
     this->showKuplungIDE = false;
     this->showCudaExamples = false;
 
-	this->dialogImportType = ImportExportFormat_UNDEFINED;
-	this->dialogExportType = ImportExportFormat_UNDEFINED;
-	this->dialogImportType_Assimp = -1;
-	this->dialogExportType_Assimp = -1;
+    this->dialogImportType = ImportExportFormat_UNDEFINED;
+    this->dialogExportType = ImportExportFormat_UNDEFINED;
+    this->dialogImportType_Assimp = -1;
+    this->dialogExportType_Assimp = -1;
 
     int windowWidth, windowHeight;
     SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
     int posX = 50, posY = 50;
 
-    this->imguiImplementation = std::make_unique<SDL2OpenGL32>();
-	this->imguiImplementation->init(this->sdlWindow);
+    this->imguiImplementationOpenGL3 = std::make_unique<ImGui_Implementation_OpenGL32>();
+    this->imguiImplementationSDL2 = std::make_unique<ImGui_Implementation_SDL2>();
 
-	ImGui::CreateContext();
-	ImGuiIO& io = ImGui::GetIO(); (void)io;
-	this->imguiImplementation->ImGui_Implementation_Init();
-	ImGui::StyleColorsDark();
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    this->imguiImplementationSDL2->InitForOpenGL(this->sdlWindow, glContext);
+    this->imguiImplementationOpenGL3->Init();
+    ImGui::StyleColorsDark();
 
     this->componentLog = std::make_unique<Log>();
     this->componentScreenshot = std::make_unique<Screenshot>();
@@ -161,9 +164,9 @@ void GUI_ImGui::init(SDL_Window *window,
     this->componentImportFile = std::make_unique<ImportFile>();
     this->componentImportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogImporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
 
-	this->componentExportFile = std::make_unique<ExportFile>();
-	this->componentExportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
-	
+    this->componentExportFile = std::make_unique<ExportFile>();
+    this->componentExportFile->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogExporterProcessFile, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4));
+
     this->componentFileSaver = std::make_unique<FileSaver>();
     this->componentFileSaver->init(posX, posY, Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height, std::bind(&GUI_ImGui::dialogFileSaveProcessFile, this, std::placeholders::_1, std::placeholders::_2));
 
@@ -173,10 +176,10 @@ void GUI_ImGui::init(SDL_Window *window,
     this->windowOptions = std::make_unique<DialogOptions>();
     this->windowOptions->init();
 
-	this->windowStyle = std::make_unique<DialogStyle>();
-	ImGuiStyle& style = ImGui::GetStyle();
-	this->windowStyle->saveDefault(style);
-	style = this->windowStyle->loadCurrent();
+    this->windowStyle = std::make_unique<DialogStyle>();
+    ImGuiStyle& style = ImGui::GetStyle();
+    this->windowStyle->saveDefault(style);
+    style = this->windowStyle->loadCurrent();
 
     this->windowOptions->loadFonts(&this->needsFontChange);
 
@@ -220,13 +223,15 @@ void GUI_ImGui::setSceneSelectedModelObject(int sceneSelectedModelObject) {
 }
 
 bool GUI_ImGui::processEvent(SDL_Event *event) {
-    return this->imguiImplementation->ImGui_Implementation_ProcessEvent(event);
+    return this->imguiImplementationOpenGL3->ProcessEvent(event);
 }
 
 void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
     this->isFrame = isFrame;
 
-    this->imguiImplementation->ImGui_Implementation_NewFrame();
+    this->imguiImplementationOpenGL3->NewFrame();
+    this->imguiImplementationSDL2->NewFrame(this->sdlWindow);
+    ImGui::NewFrame();
     ImGuizmo::BeginFrame();
 
     if (ImGui::BeginMainMenuBar()) {
@@ -263,23 +268,23 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             ImGui::Separator();
 
             if (ImGui::BeginMenu("   Import")) {
-				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showImporterFile))
-					this->dialogImportType = ImportExportFormat_OBJ;
-				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showImporterFile))
-					this->dialogImportType = ImportExportFormat_GLTF;
-				if (ImGui::MenuItem("STereoLithography (.STL)", NULL, &this->showImporterFile))
-					this->dialogImportType = ImportExportFormat_STL;
-				if (ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showImporterFile))
-					this->dialogImportType = ImportExportFormat_PLY;
-				if (ImGui::BeginMenu("Assimp...")) {
-					for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Import.size(); a++) {
-						SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Import[a];
-						std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
-						if (ImGui::MenuItem(f.c_str(), NULL, &this->showImporterFile))
-							this->dialogImportType_Assimp = static_cast<int>(a);
-					}
-					ImGui::EndMenu();
-				}
+                if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showImporterFile))
+                    this->dialogImportType = ImportExportFormat_OBJ;
+                if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showImporterFile))
+                    this->dialogImportType = ImportExportFormat_GLTF;
+                if (ImGui::MenuItem("STereoLithography (.STL)", NULL, &this->showImporterFile))
+                    this->dialogImportType = ImportExportFormat_STL;
+                if (ImGui::MenuItem("Stanford (.PLY)", NULL, &this->showImporterFile))
+                    this->dialogImportType = ImportExportFormat_PLY;
+                if (ImGui::BeginMenu("Assimp...")) {
+                    for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Import.size(); a++) {
+                        SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Import[a];
+                        std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
+                        if (ImGui::MenuItem(f.c_str(), NULL, &this->showImporterFile))
+                            this->dialogImportType_Assimp = static_cast<int>(a);
+                    }
+                    ImGui::EndMenu();
+                }
                 ImGui::EndMenu();
             }
 
@@ -304,23 +309,23 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             }
 
             if (ImGui::BeginMenu("   Export")) {
-				if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showExporterFile))
-					this->dialogExportType = ImportExportFormat_OBJ;
-				if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showExporterFile))
-					this->dialogExportType = ImportExportFormat_GLTF;
-				if (ImGui::MenuItem("STereoLithography (.stl)", NULL, &this->showExporterFile))
-					this->dialogExportType = ImportExportFormat_STL;
-				if (ImGui::MenuItem("Stanford PLY (.ply)", NULL, &this->showExporterFile))
-					this->dialogExportType = ImportExportFormat_PLY;
-				if (ImGui::BeginMenu("Assimp...")) {
-					for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Export.size(); a++) {
-						SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Export[a];
-						std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
-						if (ImGui::MenuItem(f.c_str(), NULL, &this->showExporterFile))
-							this->dialogExportType_Assimp = static_cast<int>(a);
-					}
-					ImGui::EndMenu();
-				}
+                if (ImGui::MenuItem("Wavefront (.OBJ)", NULL, &this->showExporterFile))
+                    this->dialogExportType = ImportExportFormat_OBJ;
+                if (ImGui::MenuItem("glTF (.gltf)", NULL, &this->showExporterFile))
+                    this->dialogExportType = ImportExportFormat_GLTF;
+                if (ImGui::MenuItem("STereoLithography (.stl)", NULL, &this->showExporterFile))
+                    this->dialogExportType = ImportExportFormat_STL;
+                if (ImGui::MenuItem("Stanford PLY (.ply)", NULL, &this->showExporterFile))
+                    this->dialogExportType = ImportExportFormat_PLY;
+                if (ImGui::BeginMenu("Assimp...")) {
+                    for (size_t a = 0; a < Settings::Instance()->AssimpSupportedFormats_Export.size(); a++) {
+                        SupportedAssimpFormat format = Settings::Instance()->AssimpSupportedFormats_Export[a];
+                        std::string f = std::string(format.description) + " (" + std::string(format.fileExtension) + ")";
+                        if (ImGui::MenuItem(f.c_str(), NULL, &this->showExporterFile))
+                            this->dialogExportType_Assimp = static_cast<int>(a);
+                    }
+                    ImGui::EndMenu();
+                }
                 ImGui::EndMenu();
             }
 
@@ -376,8 +381,8 @@ void GUI_ImGui::renderStart(bool isFrame, int * sceneSelectedModelObject) {
             if (ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
                 Settings::Instance()->saveSettings();
             // ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
-			if (Settings::Instance()->RendererType == InAppRendererType_Forward)
-				ImGui::MenuItem(ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
+            if (Settings::Instance()->RendererType == InAppRendererType_Forward)
+                ImGui::MenuItem(ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
             ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
             ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
             ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
@@ -574,11 +579,11 @@ void GUI_ImGui::popupRecentFileImportedDoesntExists() {
 void GUI_ImGui::renderEnd() {
     if (this->needsFontChange) {
         this->windowOptions->loadFonts(&this->needsFontChange);
-        this->imguiImplementation->ImGui_Implementation_CreateFontsTexture();
+        this->imguiImplementationOpenGL3->CreateFontsTexture();
     }
 
     ImGui::Render();
-    this->imguiImplementation->ImGui_Implementation_RenderDrawData(ImGui::GetDrawData());
+    this->imguiImplementationOpenGL3->RenderDrawData(ImGui::GetDrawData());
 }
 
 void GUI_ImGui::recentFilesAdd(FBEntity file) {
@@ -671,11 +676,11 @@ void GUI_ImGui::dialogFileSave(FileSaverOperation operation) {
 }
 
 void GUI_ImGui::dialogImporterBrowser() {
-	this->componentImportFile->draw(&this->dialogImportType, &this->dialogImportType_Assimp, &this->showImporterFile);
+    this->componentImportFile->draw(&this->dialogImportType, &this->dialogImportType_Assimp, &this->showImporterFile);
 }
 
 void GUI_ImGui::dialogExporterBrowser() {
-	this->componentExportFile->draw(&this->dialogExportType, &this->dialogExportType_Assimp, &this->showExporterFile);
+    this->componentExportFile->draw(&this->dialogExportType, &this->dialogExportType_Assimp, &this->showExporterFile);
 }
 
 void GUI_ImGui::dialogStyle() {
