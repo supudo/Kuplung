@@ -32,48 +32,48 @@ void ConfigUtils::init(std::string const& appFolder) {
 
 void ConfigUtils::saveSettings() {
 #ifdef _WIN32
-    std::string nlDelimiter = "\n";
+  std::string nlDelimiter = "\n";
 #elif defined macintosh // OS 9
-    std::string nlDelimiter = "\r";
+  std::string nlDelimiter = "\r";
 #else
-    std::string nlDelimiter = "\n";
+  std::string nlDelimiter = "\n";
 #endif
-    std::string configLines("");
-    for (std::map<std::string, std::string>::iterator iter = this->configData.begin(); iter != this->configData.end(); ++iter) {
-        std::string cfgKey = iter->first;
-        std::string cfgValue = iter->second;
-        configLines += cfgKey + " = " + cfgValue + nlDelimiter;
-    }
-    static std::mutex mutex;
-    std::lock_guard<std::mutex> lock(mutex);
+  std::string configLines("");
+  for (std::map<std::string, std::string>::iterator iter = this->configData.begin(); iter != this->configData.end(); ++iter) {
+    std::string cfgKey = iter->first;
+    std::string cfgValue = iter->second;
+    configLines += cfgKey + " = " + cfgValue + nlDelimiter;
+  }
+  static std::mutex mutex;
+  std::lock_guard<std::mutex> lock(mutex);
 
-    std::ofstream out(this->configFile);
-    if (!out.is_open())
-        throw std::runtime_error("[Kuplung] Unable to save settings file!");
-    out << configLines << std::endl;
-    out.close();
+  std::ofstream out(this->configFile);
+  if (!out.is_open())
+    throw std::runtime_error("[Kuplung] Unable to save settings file!");
+  out << configLines << std::endl;
+  out.close();
 }
 
 #pragma mark - Read
 
 bool ConfigUtils::readBool(std::string const& configKey) {
-    return this->configData[configKey] == "true";
+  return this->configData[configKey] == "true";
 }
 
 int ConfigUtils::readInt(std::string const& configKey) {
-    std::string val = this->configData[configKey];
-    if (!val.empty())
-        return std::stoi(val);
-    else
-        return 0;
+  std::string val = this->configData[configKey];
+  if (!val.empty())
+    return std::stoi(val);
+  else
+    return 0;
 }
 
 float ConfigUtils::readFloat(std::string const& configKey) {
-    std::string val = this->configData[configKey];
-    if (!val.empty())
-        return std::stof(val);
-    else
-        return 0;
+  std::string val = this->configData[configKey];
+  if (!val.empty())
+    return std::stof(val);
+  else
+    return 0;
 }
 
 std::string ConfigUtils::readString(std::string const& configKey) {

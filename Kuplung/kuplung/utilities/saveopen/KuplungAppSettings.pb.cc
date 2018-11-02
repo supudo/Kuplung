@@ -7,7 +7,6 @@
 
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/stubs/port.h>
-#include <google/protobuf/stubs/once.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/wire_format_lite_inl.h>
 #include <google/protobuf/descriptor.h>
@@ -19,6 +18,18 @@
 #include "third_party/protobuf/version.h"
 #endif
 // @@protoc_insertion_point(includes)
+
+namespace protobuf_KuplungAppSettings_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungAppSettings_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_GridSettings;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungAppSettings_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_CameraSettings;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungAppSettings_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_LightObject;
+}  // namespace protobuf_KuplungAppSettings_2eproto
+namespace protobuf_KuplungDefinitions_2eproto {
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ObjectCoordinate;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Vec3;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Vec4;
+extern PROTOBUF_INTERNAL_EXPORT_protobuf_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_MaterialColor;
+}  // namespace protobuf_KuplungDefinitions_2eproto
 namespace KuplungApp {
 class GUISettingsDefaultTypeInternal {
  public:
@@ -42,19 +53,9 @@ class LightObjectDefaultTypeInternal {
 } _LightObject_default_instance_;
 }  // namespace KuplungApp
 namespace protobuf_KuplungAppSettings_2eproto {
-void InitDefaultsGUISettingsImpl() {
+static void InitDefaultsGUISettings() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsVec4();
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsVec3();
-  protobuf_KuplungAppSettings_2eproto::InitDefaultsCameraSettings();
-  protobuf_KuplungAppSettings_2eproto::InitDefaultsGridSettings();
-  protobuf_KuplungAppSettings_2eproto::InitDefaultsLightObject();
   {
     void* ptr = &::KuplungApp::_GUISettings_default_instance_;
     new (ptr) ::KuplungApp::GUISettings();
@@ -63,21 +64,17 @@ void InitDefaultsGUISettingsImpl() {
   ::KuplungApp::GUISettings::InitAsDefaultInstance();
 }
 
-void InitDefaultsGUISettings() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGUISettingsImpl);
-}
+::google::protobuf::internal::SCCInfo<5> scc_info_GUISettings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 5, InitDefaultsGUISettings}, {
+      &protobuf_KuplungDefinitions_2eproto::scc_info_Vec4.base,
+      &protobuf_KuplungDefinitions_2eproto::scc_info_Vec3.base,
+      &protobuf_KuplungAppSettings_2eproto::scc_info_CameraSettings.base,
+      &protobuf_KuplungAppSettings_2eproto::scc_info_GridSettings.base,
+      &protobuf_KuplungAppSettings_2eproto::scc_info_LightObject.base,}};
 
-void InitDefaultsCameraSettingsImpl() {
+static void InitDefaultsCameraSettings() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsVec3();
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsObjectCoordinate();
   {
     void* ptr = &::KuplungApp::_CameraSettings_default_instance_;
     new (ptr) ::KuplungApp::CameraSettings();
@@ -86,20 +83,14 @@ void InitDefaultsCameraSettingsImpl() {
   ::KuplungApp::CameraSettings::InitAsDefaultInstance();
 }
 
-void InitDefaultsCameraSettings() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsCameraSettingsImpl);
-}
+::google::protobuf::internal::SCCInfo<2> scc_info_CameraSettings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsCameraSettings}, {
+      &protobuf_KuplungDefinitions_2eproto::scc_info_Vec3.base,
+      &protobuf_KuplungDefinitions_2eproto::scc_info_ObjectCoordinate.base,}};
 
-void InitDefaultsGridSettingsImpl() {
+static void InitDefaultsGridSettings() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsObjectCoordinate();
   {
     void* ptr = &::KuplungApp::_GridSettings_default_instance_;
     new (ptr) ::KuplungApp::GridSettings();
@@ -108,21 +99,13 @@ void InitDefaultsGridSettingsImpl() {
   ::KuplungApp::GridSettings::InitAsDefaultInstance();
 }
 
-void InitDefaultsGridSettings() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsGridSettingsImpl);
-}
+::google::protobuf::internal::SCCInfo<1> scc_info_GridSettings =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsGridSettings}, {
+      &protobuf_KuplungDefinitions_2eproto::scc_info_ObjectCoordinate.base,}};
 
-void InitDefaultsLightObjectImpl() {
+static void InitDefaultsLightObject() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
-#ifdef GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  ::google::protobuf::internal::InitProtobufDefaultsForceUnique();
-#else
-  ::google::protobuf::internal::InitProtobufDefaults();
-#endif  // GOOGLE_PROTOBUF_ENFORCE_UNIQUENESS
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsObjectCoordinate();
-  protobuf_KuplungDefinitions_2eproto::InitDefaultsMaterialColor();
   {
     void* ptr = &::KuplungApp::_LightObject_default_instance_;
     new (ptr) ::KuplungApp::LightObject();
@@ -131,9 +114,16 @@ void InitDefaultsLightObjectImpl() {
   ::KuplungApp::LightObject::InitAsDefaultInstance();
 }
 
-void InitDefaultsLightObject() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &InitDefaultsLightObjectImpl);
+::google::protobuf::internal::SCCInfo<2> scc_info_LightObject =
+    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsLightObject}, {
+      &protobuf_KuplungDefinitions_2eproto::scc_info_ObjectCoordinate.base,
+      &protobuf_KuplungDefinitions_2eproto::scc_info_MaterialColor.base,}};
+
+void InitDefaults() {
+  ::google::protobuf::internal::InitSCC(&scc_info_GUISettings.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_CameraSettings.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_GridSettings.base);
+  ::google::protobuf::internal::InitSCC(&scc_info_LightObject.base);
 }
 
 ::google::protobuf::Metadata file_level_metadata[4];
@@ -374,15 +364,14 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
 
 void protobuf_AssignDescriptors() {
   AddDescriptors();
-  ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "KuplungAppSettings.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "KuplungAppSettings.proto", schemas, file_default_instances, TableStruct::offsets,
       file_level_metadata, NULL, NULL);
 }
 
 void protobuf_AssignDescriptorsOnce() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_PROTOBUF_ATTRIBUTE_COLD;
@@ -505,8 +494,8 @@ void AddDescriptorsImpl() {
 }
 
 void AddDescriptors() {
-  static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  static ::google::protobuf::internal::once_flag once;
+  ::google::protobuf::internal::call_once(once, AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at dynamic initialization time.
 struct StaticDescriptorInitializer {
@@ -616,9 +605,8 @@ const int GUISettings::kLightsFieldNumber;
 
 GUISettings::GUISettings()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_KuplungAppSettings_2eproto::InitDefaultsGUISettings();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_KuplungAppSettings_2eproto::scc_info_GUISettings.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.GUISettings)
 }
@@ -626,8 +614,7 @@ GUISettings::GUISettings(const GUISettings& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
       _has_bits_(from._has_bits_),
-      lights_(from.lights_),
-      _cached_size_(0) {
+      lights_(from.lights_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   heightmapimage_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_heightmapimage()) {
@@ -689,7 +676,6 @@ void GUISettings::SharedCtor() {
   ::memset(&setting_outlinecolor_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&setting_terrainheight_) -
       reinterpret_cast<char*>(&setting_outlinecolor_)) + sizeof(setting_terrainheight_));
-  _cached_size_ = 0;
 }
 
 GUISettings::~GUISettings() {
@@ -711,9 +697,7 @@ void GUISettings::SharedDtor() {
 }
 
 void GUISettings::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* GUISettings::descriptor() {
   ::protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
@@ -721,17 +705,10 @@ const ::google::protobuf::Descriptor* GUISettings::descriptor() {
 }
 
 const GUISettings& GUISettings::default_instance() {
-  ::protobuf_KuplungAppSettings_2eproto::InitDefaultsGUISettings();
+  ::google::protobuf::internal::InitSCC(&protobuf_KuplungAppSettings_2eproto::scc_info_GUISettings.base);
   return *internal_default_instance();
 }
 
-GUISettings* GUISettings::New(::google::protobuf::Arena* arena) const {
-  GUISettings* n = new GUISettings;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void GUISettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.GUISettings)
@@ -743,8 +720,7 @@ void GUISettings::Clear() {
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 255u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!heightmapimage_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*heightmapimage_.UnsafeRawStringPointer())->clear();
+      heightmapimage_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
       GOOGLE_DCHECK(setting_outlinecolor_ != NULL);
@@ -821,7 +797,7 @@ bool GUISettings::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.GUISettings)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -1415,7 +1391,8 @@ bool GUISettings::MergePartialFromCodedStream(
       case 44: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(98u /* 354 & 0xFF */)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(input, add_lights()));
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+                input, add_lights()));
         } else {
           goto handle_unusual;
         }
@@ -1492,13 +1469,13 @@ void GUISettings::SerializeWithCachedSizes(
   // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, *this->setting_outlinecolor_, output);
+      9, this->_internal_setting_outlinecolor(), output);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->setting_uiambientlight_, output);
+      10, this->_internal_setting_uiambientlight(), output);
   }
 
   // required bool Setting_FixedGridWorld = 11;
@@ -1554,31 +1531,31 @@ void GUISettings::SerializeWithCachedSizes(
   // required .KuplungApp.Vec3 SolidLight_Direction = 21;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, *this->solidlight_direction_, output);
+      21, this->_internal_solidlight_direction(), output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, *this->solidlight_materialcolor_, output);
+      22, this->_internal_solidlight_materialcolor(), output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
   if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      23, *this->solidlight_ambient_, output);
+      23, this->_internal_solidlight_ambient(), output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
   if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      24, *this->solidlight_diffuse_, output);
+      24, this->_internal_solidlight_diffuse(), output);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
   if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      25, *this->solidlight_specular_, output);
+      25, this->_internal_solidlight_specular(), output);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
@@ -1675,20 +1652,22 @@ void GUISettings::SerializeWithCachedSizes(
   // required .KuplungApp.CameraSettings camera = 42;
   if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      42, *this->camera_, output);
+      42, this->_internal_camera(), output);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
   if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      43, *this->grid_, output);
+      43, this->_internal_grid(), output);
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->lights_size()); i < n; i++) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      44, this->lights(static_cast<int>(i)), output);
+      44,
+      this->lights(static_cast<int>(i)),
+      output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -1750,14 +1729,14 @@ void GUISettings::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, *this->setting_outlinecolor_, deterministic, target);
+        9, this->_internal_setting_outlinecolor(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->setting_uiambientlight_, deterministic, target);
+        10, this->_internal_setting_uiambientlight(), deterministic, target);
   }
 
   // required bool Setting_FixedGridWorld = 11;
@@ -1814,35 +1793,35 @@ void GUISettings::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, *this->solidlight_direction_, deterministic, target);
+        21, this->_internal_solidlight_direction(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
   if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, *this->solidlight_materialcolor_, deterministic, target);
+        22, this->_internal_solidlight_materialcolor(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
   if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        23, *this->solidlight_ambient_, deterministic, target);
+        23, this->_internal_solidlight_ambient(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
   if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        24, *this->solidlight_diffuse_, deterministic, target);
+        24, this->_internal_solidlight_diffuse(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
   if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        25, *this->solidlight_specular_, deterministic, target);
+        25, this->_internal_solidlight_specular(), deterministic, target);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
@@ -1941,14 +1920,14 @@ void GUISettings::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        42, *this->camera_, deterministic, target);
+        42, this->_internal_camera(), deterministic, target);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
   if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        43, *this->grid_, deterministic, target);
+        43, this->_internal_grid(), deterministic, target);
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
@@ -1982,63 +1961,63 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->setting_outlinecolor_);
+        *setting_outlinecolor_);
   }
 
   if (has_setting_uiambientlight()) {
     // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->setting_uiambientlight_);
+        *setting_uiambientlight_);
   }
 
   if (has_solidlight_direction()) {
     // required .KuplungApp.Vec3 SolidLight_Direction = 21;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_direction_);
+        *solidlight_direction_);
   }
 
   if (has_solidlight_materialcolor()) {
     // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_materialcolor_);
+        *solidlight_materialcolor_);
   }
 
   if (has_solidlight_ambient()) {
     // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_ambient_);
+        *solidlight_ambient_);
   }
 
   if (has_solidlight_diffuse()) {
     // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_diffuse_);
+        *solidlight_diffuse_);
   }
 
   if (has_solidlight_specular()) {
     // required .KuplungApp.Vec3 SolidLight_Specular = 25;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_specular_);
+        *solidlight_specular_);
   }
 
   if (has_camera()) {
     // required .KuplungApp.CameraSettings camera = 42;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->camera_);
+        *camera_);
   }
 
   if (has_grid()) {
     // required .KuplungApp.GridSettings grid = 43;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->grid_);
+        *grid_);
   }
 
   if (has_setting_fov()) {
@@ -2241,47 +2220,47 @@ size_t GUISettings::ByteSizeLong() const {
     // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->setting_outlinecolor_);
+        *setting_outlinecolor_);
 
     // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->setting_uiambientlight_);
+        *setting_uiambientlight_);
 
     // required .KuplungApp.Vec3 SolidLight_Direction = 21;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_direction_);
+        *solidlight_direction_);
 
     // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_materialcolor_);
+        *solidlight_materialcolor_);
 
     // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_ambient_);
+        *solidlight_ambient_);
 
     // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_diffuse_);
+        *solidlight_diffuse_);
 
     // required .KuplungApp.Vec3 SolidLight_Specular = 25;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->solidlight_specular_);
+        *solidlight_specular_);
 
     // required .KuplungApp.CameraSettings camera = 42;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->camera_);
+        *camera_);
 
     // required .KuplungApp.GridSettings grid = 43;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->grid_);
+        *grid_);
 
     // required float Setting_FOV = 1;
     total_size += 1 + 4;
@@ -2411,9 +2390,7 @@ size_t GUISettings::ByteSizeLong() const {
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -2645,8 +2622,9 @@ void GUISettings::Swap(GUISettings* other) {
 }
 void GUISettings::InternalSwap(GUISettings* other) {
   using std::swap;
-  lights_.InternalSwap(&other->lights_);
-  heightmapimage_.Swap(&other->heightmapimage_);
+  CastToBase(&lights_)->InternalSwap(CastToBase(&other->lights_));
+  heightmapimage_.Swap(&other->heightmapimage_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(setting_outlinecolor_, other->setting_outlinecolor_);
   swap(setting_uiambientlight_, other->setting_uiambientlight_);
   swap(solidlight_direction_, other->solidlight_direction_);
@@ -2692,7 +2670,6 @@ void GUISettings::InternalSwap(GUISettings* other) {
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(_has_bits_[1], other->_has_bits_[1]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata GUISettings::GetMetadata() const {
@@ -2801,17 +2778,15 @@ const int CameraSettings::kRotateCenterZFieldNumber;
 
 CameraSettings::CameraSettings()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_KuplungAppSettings_2eproto::InitDefaultsCameraSettings();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_KuplungAppSettings_2eproto::scc_info_CameraSettings.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.CameraSettings)
 }
 CameraSettings::CameraSettings(const CameraSettings& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_cameraposition()) {
     cameraposition_ = new ::KuplungApp::Vec3(*from.cameraposition_);
@@ -2882,7 +2857,6 @@ CameraSettings::CameraSettings(const CameraSettings& from)
 }
 
 void CameraSettings::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&cameraposition_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&rotatecenterz_) -
       reinterpret_cast<char*>(&cameraposition_)) + sizeof(rotatecenterz_));
@@ -2910,9 +2884,7 @@ void CameraSettings::SharedDtor() {
 }
 
 void CameraSettings::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* CameraSettings::descriptor() {
   ::protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
@@ -2920,17 +2892,10 @@ const ::google::protobuf::Descriptor* CameraSettings::descriptor() {
 }
 
 const CameraSettings& CameraSettings::default_instance() {
-  ::protobuf_KuplungAppSettings_2eproto::InitDefaultsCameraSettings();
+  ::google::protobuf::internal::InitSCC(&protobuf_KuplungAppSettings_2eproto::scc_info_CameraSettings.base);
   return *internal_default_instance();
 }
 
-CameraSettings* CameraSettings::New(::google::protobuf::Arena* arena) const {
-  CameraSettings* n = new CameraSettings;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void CameraSettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.CameraSettings)
@@ -3005,7 +2970,7 @@ bool CameraSettings::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.CameraSettings)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -3195,79 +3160,79 @@ void CameraSettings::SerializeWithCachedSizes(
   // required .KuplungApp.Vec3 cameraPosition = 1;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, *this->cameraposition_, output);
+      1, this->_internal_cameraposition(), output);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, *this->view_eye_, output);
+      2, this->_internal_view_eye(), output);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->view_center_, output);
+      3, this->_internal_view_center(), output);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->view_up_, output);
+      4, this->_internal_view_up(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->positionx_, output);
+      5, this->_internal_positionx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
   if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, *this->positiony_, output);
+      6, this->_internal_positiony(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
   if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->positionz_, output);
+      7, this->_internal_positionz(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
   if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, *this->rotatex_, output);
+      8, this->_internal_rotatex(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
   if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, *this->rotatey_, output);
+      9, this->_internal_rotatey(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
   if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->rotatez_, output);
+      10, this->_internal_rotatez(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
   if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->rotatecenterx_, output);
+      11, this->_internal_rotatecenterx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
   if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, *this->rotatecentery_, output);
+      12, this->_internal_rotatecentery(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
   if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, *this->rotatecenterz_, output);
+      13, this->_internal_rotatecenterz(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3289,91 +3254,91 @@ void CameraSettings::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, *this->cameraposition_, deterministic, target);
+        1, this->_internal_cameraposition(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, *this->view_eye_, deterministic, target);
+        2, this->_internal_view_eye(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->view_center_, deterministic, target);
+        3, this->_internal_view_center(), deterministic, target);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *this->view_up_, deterministic, target);
+        4, this->_internal_view_up(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
   if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, *this->positionx_, deterministic, target);
+        5, this->_internal_positionx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
   if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, *this->positiony_, deterministic, target);
+        6, this->_internal_positiony(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
   if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, *this->positionz_, deterministic, target);
+        7, this->_internal_positionz(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
   if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, *this->rotatex_, deterministic, target);
+        8, this->_internal_rotatex(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, *this->rotatey_, deterministic, target);
+        9, this->_internal_rotatey(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
   if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->rotatez_, deterministic, target);
+        10, this->_internal_rotatez(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
   if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, *this->rotatecenterx_, deterministic, target);
+        11, this->_internal_rotatecenterx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
   if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, *this->rotatecentery_, deterministic, target);
+        12, this->_internal_rotatecentery(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
   if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, *this->rotatecenterz_, deterministic, target);
+        13, this->_internal_rotatecenterz(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -3392,91 +3357,91 @@ size_t CameraSettings::RequiredFieldsByteSizeFallback() const {
     // required .KuplungApp.Vec3 cameraPosition = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->cameraposition_);
+        *cameraposition_);
   }
 
   if (has_view_eye()) {
     // required .KuplungApp.Vec3 View_Eye = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_eye_);
+        *view_eye_);
   }
 
   if (has_view_center()) {
     // required .KuplungApp.Vec3 View_Center = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_center_);
+        *view_center_);
   }
 
   if (has_view_up()) {
     // required .KuplungApp.Vec3 View_Up = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_up_);
+        *view_up_);
   }
 
   if (has_positionx()) {
     // required .KuplungApp.ObjectCoordinate positionX = 5;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
   }
 
   if (has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 6;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
   }
 
   if (has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
   }
 
   if (has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
   }
 
   if (has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
   }
 
   if (has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
   }
 
   if (has_rotatecenterx()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterx_);
+        *rotatecenterx_);
   }
 
   if (has_rotatecentery()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecentery_);
+        *rotatecentery_);
   }
 
   if (has_rotatecenterz()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterz_);
+        *rotatecenterz_);
   }
 
   return total_size;
@@ -3494,75 +3459,73 @@ size_t CameraSettings::ByteSizeLong() const {
     // required .KuplungApp.Vec3 cameraPosition = 1;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->cameraposition_);
+        *cameraposition_);
 
     // required .KuplungApp.Vec3 View_Eye = 2;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_eye_);
+        *view_eye_);
 
     // required .KuplungApp.Vec3 View_Center = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_center_);
+        *view_center_);
 
     // required .KuplungApp.Vec3 View_Up = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->view_up_);
+        *view_up_);
 
     // required .KuplungApp.ObjectCoordinate positionX = 5;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
 
     // required .KuplungApp.ObjectCoordinate positionY = 6;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
 
     // required .KuplungApp.ObjectCoordinate positionZ = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
 
     // required .KuplungApp.ObjectCoordinate rotateX = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
 
     // required .KuplungApp.ObjectCoordinate rotateY = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
 
     // required .KuplungApp.ObjectCoordinate rotateZ = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterx_);
+        *rotatecenterx_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecentery_);
+        *rotatecentery_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterz_);
+        *rotatecenterz_);
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -3713,7 +3676,6 @@ void CameraSettings::InternalSwap(CameraSettings* other) {
   swap(rotatecenterz_, other->rotatecenterz_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata CameraSettings::GetMetadata() const {
@@ -3798,17 +3760,15 @@ const int GridSettings::kShowGridFieldNumber;
 
 GridSettings::GridSettings()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_KuplungAppSettings_2eproto::InitDefaultsGridSettings();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_KuplungAppSettings_2eproto::scc_info_GridSettings.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.GridSettings)
 }
 GridSettings::GridSettings(const GridSettings& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   if (from.has_positionx()) {
     positionx_ = new ::KuplungApp::ObjectCoordinate(*from.positionx_);
@@ -3862,7 +3822,6 @@ GridSettings::GridSettings(const GridSettings& from)
 }
 
 void GridSettings::SharedCtor() {
-  _cached_size_ = 0;
   ::memset(&positionx_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&showgrid_) -
       reinterpret_cast<char*>(&positionx_)) + sizeof(showgrid_));
@@ -3886,9 +3845,7 @@ void GridSettings::SharedDtor() {
 }
 
 void GridSettings::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* GridSettings::descriptor() {
   ::protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
@@ -3896,17 +3853,10 @@ const ::google::protobuf::Descriptor* GridSettings::descriptor() {
 }
 
 const GridSettings& GridSettings::default_instance() {
-  ::protobuf_KuplungAppSettings_2eproto::InitDefaultsGridSettings();
+  ::google::protobuf::internal::InitSCC(&protobuf_KuplungAppSettings_2eproto::scc_info_GridSettings.base);
   return *internal_default_instance();
 }
 
-GridSettings* GridSettings::New(::google::protobuf::Arena* arena) const {
-  GridSettings* n = new GridSettings;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void GridSettings::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.GridSettings)
@@ -3968,7 +3918,7 @@ bool GridSettings::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.GridSettings)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -4176,55 +4126,55 @@ void GridSettings::SerializeWithCachedSizes(
   // required .KuplungApp.ObjectCoordinate positionX = 3;
   if (cached_has_bits & 0x00000001u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, *this->positionx_, output);
+      3, this->_internal_positionx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
   if (cached_has_bits & 0x00000002u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, *this->positiony_, output);
+      4, this->_internal_positiony(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, *this->positionz_, output);
+      5, this->_internal_positionz(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, *this->rotatex_, output);
+      6, this->_internal_rotatex(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->rotatey_, output);
+      7, this->_internal_rotatey(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
   if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, *this->rotatez_, output);
+      8, this->_internal_rotatez(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
   if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, *this->scalex_, output);
+      9, this->_internal_scalex(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
   if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->scaley_, output);
+      10, this->_internal_scaley(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
   if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->scalez_, output);
+      11, this->_internal_scalez(), output);
   }
 
   // required float transparency = 12;
@@ -4266,63 +4216,63 @@ void GridSettings::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000001u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, *this->positionx_, deterministic, target);
+        3, this->_internal_positionx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
   if (cached_has_bits & 0x00000002u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, *this->positiony_, deterministic, target);
+        4, this->_internal_positiony(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, *this->positionz_, deterministic, target);
+        5, this->_internal_positionz(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, *this->rotatex_, deterministic, target);
+        6, this->_internal_rotatex(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
   if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, *this->rotatey_, deterministic, target);
+        7, this->_internal_rotatey(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
   if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, *this->rotatez_, deterministic, target);
+        8, this->_internal_rotatez(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
   if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, *this->scalex_, deterministic, target);
+        9, this->_internal_scalex(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
   if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->scaley_, deterministic, target);
+        10, this->_internal_scaley(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, *this->scalez_, deterministic, target);
+        11, this->_internal_scalez(), deterministic, target);
   }
 
   // required float transparency = 12;
@@ -4351,63 +4301,63 @@ size_t GridSettings::RequiredFieldsByteSizeFallback() const {
     // required .KuplungApp.ObjectCoordinate positionX = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
   }
 
   if (has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
   }
 
   if (has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 5;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
   }
 
   if (has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 6;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
   }
 
   if (has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
   }
 
   if (has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
   }
 
   if (has_scalex()) {
     // required .KuplungApp.ObjectCoordinate scaleX = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalex_);
+        *scalex_);
   }
 
   if (has_scaley()) {
     // required .KuplungApp.ObjectCoordinate scaleY = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scaley_);
+        *scaley_);
   }
 
   if (has_scalez()) {
     // required .KuplungApp.ObjectCoordinate scaleZ = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalez_);
+        *scalez_);
   }
 
   if (has_actasmirror()) {
@@ -4449,47 +4399,47 @@ size_t GridSettings::ByteSizeLong() const {
     // required .KuplungApp.ObjectCoordinate positionX = 3;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
 
     // required .KuplungApp.ObjectCoordinate positionY = 4;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
 
     // required .KuplungApp.ObjectCoordinate positionZ = 5;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
 
     // required .KuplungApp.ObjectCoordinate rotateX = 6;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
 
     // required .KuplungApp.ObjectCoordinate rotateY = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
 
     // required .KuplungApp.ObjectCoordinate rotateZ = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
 
     // required .KuplungApp.ObjectCoordinate scaleX = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalex_);
+        *scalex_);
 
     // required .KuplungApp.ObjectCoordinate scaleY = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scaley_);
+        *scaley_);
 
     // required .KuplungApp.ObjectCoordinate scaleZ = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalez_);
+        *scalez_);
 
     // required bool actAsMirror = 1;
     total_size += 1 + 1;
@@ -4511,9 +4461,7 @@ size_t GridSettings::ByteSizeLong() const {
     total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -4653,7 +4601,6 @@ void GridSettings::InternalSwap(GridSettings* other) {
   swap(showgrid_, other->showgrid_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata GridSettings::GetMetadata() const {
@@ -4838,17 +4785,15 @@ const int LightObject::kLQuadraticFieldNumber;
 
 LightObject::LightObject()
   : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    ::protobuf_KuplungAppSettings_2eproto::InitDefaultsLightObject();
-  }
+  ::google::protobuf::internal::InitSCC(
+      &protobuf_KuplungAppSettings_2eproto::scc_info_LightObject.base);
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.LightObject)
 }
 LightObject::LightObject(const LightObject& from)
   : ::google::protobuf::Message(),
       _internal_metadata_(NULL),
-      _has_bits_(from._has_bits_),
-      _cached_size_(0) {
+      _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.has_title()) {
@@ -4980,7 +4925,6 @@ LightObject::LightObject(const LightObject& from)
 }
 
 void LightObject::SharedCtor() {
-  _cached_size_ = 0;
   title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   description_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&positionx_, 0, static_cast<size_t>(
@@ -5022,9 +4966,7 @@ void LightObject::SharedDtor() {
 }
 
 void LightObject::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  _cached_size_.Set(size);
 }
 const ::google::protobuf::Descriptor* LightObject::descriptor() {
   ::protobuf_KuplungAppSettings_2eproto::protobuf_AssignDescriptorsOnce();
@@ -5032,17 +4974,10 @@ const ::google::protobuf::Descriptor* LightObject::descriptor() {
 }
 
 const LightObject& LightObject::default_instance() {
-  ::protobuf_KuplungAppSettings_2eproto::InitDefaultsLightObject();
+  ::google::protobuf::internal::InitSCC(&protobuf_KuplungAppSettings_2eproto::scc_info_LightObject.base);
   return *internal_default_instance();
 }
 
-LightObject* LightObject::New(::google::protobuf::Arena* arena) const {
-  LightObject* n = new LightObject;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
 
 void LightObject::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.LightObject)
@@ -5053,12 +4988,10 @@ void LightObject::Clear() {
   cached_has_bits = _has_bits_[0];
   if (cached_has_bits & 255u) {
     if (cached_has_bits & 0x00000001u) {
-      GOOGLE_DCHECK(!title_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*title_.UnsafeRawStringPointer())->clear();
+      title_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(!description_.IsDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited()));
-      (*description_.UnsafeRawStringPointer())->clear();
+      description_.ClearNonDefaultToEmptyNoArena();
     }
     if (cached_has_bits & 0x00000004u) {
       GOOGLE_DCHECK(positionx_ != NULL);
@@ -5172,7 +5105,7 @@ bool LightObject::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.LightObject)
   for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
@@ -5610,139 +5543,139 @@ void LightObject::SerializeWithCachedSizes(
   // required .KuplungApp.ObjectCoordinate positionX = 7;
   if (cached_has_bits & 0x00000004u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, *this->positionx_, output);
+      7, this->_internal_positionx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (cached_has_bits & 0x00000008u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, *this->positiony_, output);
+      8, this->_internal_positiony(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (cached_has_bits & 0x00000010u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, *this->positionz_, output);
+      9, this->_internal_positionz(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (cached_has_bits & 0x00000020u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, *this->directionx_, output);
+      10, this->_internal_directionx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (cached_has_bits & 0x00000040u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, *this->directiony_, output);
+      11, this->_internal_directiony(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (cached_has_bits & 0x00000080u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, *this->directionz_, output);
+      12, this->_internal_directionz(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (cached_has_bits & 0x00000100u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, *this->scalex_, output);
+      13, this->_internal_scalex(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (cached_has_bits & 0x00000200u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, *this->scaley_, output);
+      14, this->_internal_scaley(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (cached_has_bits & 0x00000400u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, *this->scalez_, output);
+      15, this->_internal_scalez(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (cached_has_bits & 0x00000800u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      16, *this->rotatex_, output);
+      16, this->_internal_rotatex(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (cached_has_bits & 0x00001000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, *this->rotatey_, output);
+      17, this->_internal_rotatey(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (cached_has_bits & 0x00002000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      18, *this->rotatez_, output);
+      18, this->_internal_rotatez(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (cached_has_bits & 0x00004000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      19, *this->rotatecenterx_, output);
+      19, this->_internal_rotatecenterx(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (cached_has_bits & 0x00008000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, *this->rotatecentery_, output);
+      20, this->_internal_rotatecentery(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (cached_has_bits & 0x00010000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, *this->rotatecenterz_, output);
+      21, this->_internal_rotatecenterz(), output);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
   if (cached_has_bits & 0x00020000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, *this->ambient_, output);
+      22, this->_internal_ambient(), output);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
   if (cached_has_bits & 0x00040000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      23, *this->diffuse_, output);
+      23, this->_internal_diffuse(), output);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
   if (cached_has_bits & 0x00080000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      24, *this->specular_, output);
+      24, this->_internal_specular(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
   if (cached_has_bits & 0x00100000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      25, *this->lcutoff_, output);
+      25, this->_internal_lcutoff(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
   if (cached_has_bits & 0x00200000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      26, *this->loutercutoff_, output);
+      26, this->_internal_loutercutoff(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
   if (cached_has_bits & 0x00400000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      27, *this->lconstant_, output);
+      27, this->_internal_lconstant(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
   if (cached_has_bits & 0x00800000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      28, *this->llinear_, output);
+      28, this->_internal_llinear(), output);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
   if (cached_has_bits & 0x01000000u) {
     ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      29, *this->lquadratic_, output);
+      29, this->_internal_lquadratic(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5806,161 +5739,161 @@ void LightObject::SerializeWithCachedSizes(
   if (cached_has_bits & 0x00000004u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, *this->positionx_, deterministic, target);
+        7, this->_internal_positionx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (cached_has_bits & 0x00000008u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, *this->positiony_, deterministic, target);
+        8, this->_internal_positiony(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (cached_has_bits & 0x00000010u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, *this->positionz_, deterministic, target);
+        9, this->_internal_positionz(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (cached_has_bits & 0x00000020u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, *this->directionx_, deterministic, target);
+        10, this->_internal_directionx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (cached_has_bits & 0x00000040u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, *this->directiony_, deterministic, target);
+        11, this->_internal_directiony(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (cached_has_bits & 0x00000080u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, *this->directionz_, deterministic, target);
+        12, this->_internal_directionz(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (cached_has_bits & 0x00000100u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, *this->scalex_, deterministic, target);
+        13, this->_internal_scalex(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (cached_has_bits & 0x00000200u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, *this->scaley_, deterministic, target);
+        14, this->_internal_scaley(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (cached_has_bits & 0x00000400u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        15, *this->scalez_, deterministic, target);
+        15, this->_internal_scalez(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (cached_has_bits & 0x00000800u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        16, *this->rotatex_, deterministic, target);
+        16, this->_internal_rotatex(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (cached_has_bits & 0x00001000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        17, *this->rotatey_, deterministic, target);
+        17, this->_internal_rotatey(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (cached_has_bits & 0x00002000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        18, *this->rotatez_, deterministic, target);
+        18, this->_internal_rotatez(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (cached_has_bits & 0x00004000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        19, *this->rotatecenterx_, deterministic, target);
+        19, this->_internal_rotatecenterx(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (cached_has_bits & 0x00008000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        20, *this->rotatecentery_, deterministic, target);
+        20, this->_internal_rotatecentery(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (cached_has_bits & 0x00010000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, *this->rotatecenterz_, deterministic, target);
+        21, this->_internal_rotatecenterz(), deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
   if (cached_has_bits & 0x00020000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, *this->ambient_, deterministic, target);
+        22, this->_internal_ambient(), deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
   if (cached_has_bits & 0x00040000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        23, *this->diffuse_, deterministic, target);
+        23, this->_internal_diffuse(), deterministic, target);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
   if (cached_has_bits & 0x00080000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        24, *this->specular_, deterministic, target);
+        24, this->_internal_specular(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
   if (cached_has_bits & 0x00100000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        25, *this->lcutoff_, deterministic, target);
+        25, this->_internal_lcutoff(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
   if (cached_has_bits & 0x00200000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        26, *this->loutercutoff_, deterministic, target);
+        26, this->_internal_loutercutoff(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
   if (cached_has_bits & 0x00400000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        27, *this->lconstant_, deterministic, target);
+        27, this->_internal_lconstant(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
   if (cached_has_bits & 0x00800000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        28, *this->llinear_, deterministic, target);
+        28, this->_internal_llinear(), deterministic, target);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
   if (cached_has_bits & 0x01000000u) {
     target = ::google::protobuf::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        29, *this->lquadratic_, deterministic, target);
+        29, this->_internal_lquadratic(), deterministic, target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
@@ -5993,161 +5926,161 @@ size_t LightObject::RequiredFieldsByteSizeFallback() const {
     // required .KuplungApp.ObjectCoordinate positionX = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
   }
 
   if (has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
   }
 
   if (has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
   }
 
   if (has_directionx()) {
     // required .KuplungApp.ObjectCoordinate directionX = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directionx_);
+        *directionx_);
   }
 
   if (has_directiony()) {
     // required .KuplungApp.ObjectCoordinate directionY = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directiony_);
+        *directiony_);
   }
 
   if (has_directionz()) {
     // required .KuplungApp.ObjectCoordinate directionZ = 12;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directionz_);
+        *directionz_);
   }
 
   if (has_scalex()) {
     // required .KuplungApp.ObjectCoordinate scaleX = 13;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalex_);
+        *scalex_);
   }
 
   if (has_scaley()) {
     // required .KuplungApp.ObjectCoordinate scaleY = 14;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scaley_);
+        *scaley_);
   }
 
   if (has_scalez()) {
     // required .KuplungApp.ObjectCoordinate scaleZ = 15;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalez_);
+        *scalez_);
   }
 
   if (has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 16;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
   }
 
   if (has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 17;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
   }
 
   if (has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 18;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
   }
 
   if (has_rotatecenterx()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterx_);
+        *rotatecenterx_);
   }
 
   if (has_rotatecentery()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecentery_);
+        *rotatecentery_);
   }
 
   if (has_rotatecenterz()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterz_);
+        *rotatecenterz_);
   }
 
   if (has_ambient()) {
     // required .KuplungApp.MaterialColor ambient = 22;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->ambient_);
+        *ambient_);
   }
 
   if (has_diffuse()) {
     // required .KuplungApp.MaterialColor diffuse = 23;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->diffuse_);
+        *diffuse_);
   }
 
   if (has_specular()) {
     // required .KuplungApp.MaterialColor specular = 24;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->specular_);
+        *specular_);
   }
 
   if (has_lcutoff()) {
     // required .KuplungApp.ObjectCoordinate lCutOff = 25;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lcutoff_);
+        *lcutoff_);
   }
 
   if (has_loutercutoff()) {
     // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->loutercutoff_);
+        *loutercutoff_);
   }
 
   if (has_lconstant()) {
     // required .KuplungApp.ObjectCoordinate lConstant = 27;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lconstant_);
+        *lconstant_);
   }
 
   if (has_llinear()) {
     // required .KuplungApp.ObjectCoordinate lLinear = 28;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->llinear_);
+        *llinear_);
   }
 
   if (has_lquadratic()) {
     // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lquadratic_);
+        *lquadratic_);
   }
 
   if (has_type()) {
@@ -6197,117 +6130,117 @@ size_t LightObject::ByteSizeLong() const {
     // required .KuplungApp.ObjectCoordinate positionX = 7;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionx_);
+        *positionx_);
 
     // required .KuplungApp.ObjectCoordinate positionY = 8;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positiony_);
+        *positiony_);
 
     // required .KuplungApp.ObjectCoordinate positionZ = 9;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->positionz_);
+        *positionz_);
 
     // required .KuplungApp.ObjectCoordinate directionX = 10;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directionx_);
+        *directionx_);
 
     // required .KuplungApp.ObjectCoordinate directionY = 11;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directiony_);
+        *directiony_);
 
     // required .KuplungApp.ObjectCoordinate directionZ = 12;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->directionz_);
+        *directionz_);
 
     // required .KuplungApp.ObjectCoordinate scaleX = 13;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalex_);
+        *scalex_);
 
     // required .KuplungApp.ObjectCoordinate scaleY = 14;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scaley_);
+        *scaley_);
 
     // required .KuplungApp.ObjectCoordinate scaleZ = 15;
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->scalez_);
+        *scalez_);
 
     // required .KuplungApp.ObjectCoordinate rotateX = 16;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatex_);
+        *rotatex_);
 
     // required .KuplungApp.ObjectCoordinate rotateY = 17;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatey_);
+        *rotatey_);
 
     // required .KuplungApp.ObjectCoordinate rotateZ = 18;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatez_);
+        *rotatez_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterx_);
+        *rotatecenterx_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecentery_);
+        *rotatecentery_);
 
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->rotatecenterz_);
+        *rotatecenterz_);
 
     // required .KuplungApp.MaterialColor ambient = 22;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->ambient_);
+        *ambient_);
 
     // required .KuplungApp.MaterialColor diffuse = 23;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->diffuse_);
+        *diffuse_);
 
     // required .KuplungApp.MaterialColor specular = 24;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->specular_);
+        *specular_);
 
     // required .KuplungApp.ObjectCoordinate lCutOff = 25;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lcutoff_);
+        *lcutoff_);
 
     // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->loutercutoff_);
+        *loutercutoff_);
 
     // required .KuplungApp.ObjectCoordinate lConstant = 27;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lconstant_);
+        *lconstant_);
 
     // required .KuplungApp.ObjectCoordinate lLinear = 28;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->llinear_);
+        *llinear_);
 
     // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
     total_size += 2 +
       ::google::protobuf::internal::WireFormatLite::MessageSize(
-        *this->lquadratic_);
+        *lquadratic_);
 
     // required int32 type = 3;
     total_size += 1 +
@@ -6327,9 +6260,7 @@ size_t LightObject::ByteSizeLong() const {
     total_size += RequiredFieldsByteSizeFallback();
   }
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  SetCachedSize(cached_size);
   return total_size;
 }
 
@@ -6550,8 +6481,10 @@ void LightObject::Swap(LightObject* other) {
 }
 void LightObject::InternalSwap(LightObject* other) {
   using std::swap;
-  title_.Swap(&other->title_);
-  description_.Swap(&other->description_);
+  title_.Swap(&other->title_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
+  description_.Swap(&other->description_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+    GetArenaNoVirtual());
   swap(positionx_, other->positionx_);
   swap(positiony_, other->positiony_);
   swap(positionz_, other->positionz_);
@@ -6581,7 +6514,6 @@ void LightObject::InternalSwap(LightObject* other) {
   swap(showinwire_, other->showinwire_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata LightObject::GetMetadata() const {
@@ -6592,5 +6524,21 @@ void LightObject::InternalSwap(LightObject* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace KuplungApp
+namespace google {
+namespace protobuf {
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::KuplungApp::GUISettings* Arena::CreateMaybeMessage< ::KuplungApp::GUISettings >(Arena* arena) {
+  return Arena::CreateInternal< ::KuplungApp::GUISettings >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::KuplungApp::CameraSettings* Arena::CreateMaybeMessage< ::KuplungApp::CameraSettings >(Arena* arena) {
+  return Arena::CreateInternal< ::KuplungApp::CameraSettings >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::KuplungApp::GridSettings* Arena::CreateMaybeMessage< ::KuplungApp::GridSettings >(Arena* arena) {
+  return Arena::CreateInternal< ::KuplungApp::GridSettings >(arena);
+}
+template<> GOOGLE_PROTOBUF_ATTRIBUTE_NOINLINE ::KuplungApp::LightObject* Arena::CreateMaybeMessage< ::KuplungApp::LightObject >(Arena* arena) {
+  return Arena::CreateInternal< ::KuplungApp::LightObject >(arena);
+}
+}  // namespace protobuf
+}  // namespace google
 
 // @@protoc_insertion_point(global_scope)

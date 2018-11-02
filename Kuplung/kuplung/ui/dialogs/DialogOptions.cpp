@@ -13,13 +13,13 @@
 #include "kuplung/settings/Settings.h"
 
 void DialogOptions::init() {
-    this->fontLister = std::make_unique<FontsList>();
-    this->fontLister->init();
-    this->fontLister->getFonts();
+  this->fontLister = std::make_unique<FontsList>();
+  this->fontLister->init();
+  this->fontLister->getFonts();
 
-    this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
-    this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
-    this->optionsRendererType = Settings::Instance()->RendererType;
+  this->optionsFontSelected = Settings::Instance()->UIFontFileIndex;
+  this->optionsFontSizeSelected = this->fontLister->getSelectedFontSize();
+  this->optionsRendererType = Settings::Instance()->RendererType;
 	this->optionsSceneExporters = Settings::Instance()->ImportExportFormat;
 }
 
@@ -75,7 +75,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         ImGui::Unindent();
     }
 
-    if (ImGui::CollapsingHeader("Rendering", NULL, true, false)) {
+    if (ImGui::CollapsingHeader("Rendering")) {
         ImGui::Indent();
         if (ImGui::Checkbox("Terrain Hieghtmap Image History", &Settings::Instance()->Terrain_HeightmapImageHistory))
             Settings::Instance()->saveSettings();
@@ -96,7 +96,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
         ImGui::Unindent();
     }
 
-    if (ImGui::CollapsingHeader("Look & Feel", NULL, true, false)) {
+    if (ImGui::CollapsingHeader("Look & Feel")) {
         ImGui::Indent();
         ImGuiStyle& style = ImGui::GetStyle();
 
@@ -118,9 +118,8 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool
                 std::string font = "-";
                 if (this->optionsFontSelected > 0 && this->fontLister->fontFileExists(this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected)].path))
                     font = this->fontLister->fonts[static_cast<size_t>(this->optionsFontSelected - 1)].path;
-                std::string fontSize = std::string(this->fontLister->fontSizes[this->optionsFontSizeSelected]);
-                Settings::Instance()->UIFontSize = std::stof(fontSize);
-                wStyle->save(font, fontSize, style);
+                Settings::Instance()->UIFontSize = atof(this->fontLister->fontSizes[this->optionsFontSizeSelected]);
+                wStyle->save(font, this->fontLister->fontSizes[this->optionsFontSizeSelected], style);
                 *needsFontChange = true;
             }
         }

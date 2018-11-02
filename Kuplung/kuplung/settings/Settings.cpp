@@ -28,51 +28,51 @@
 Settings* Settings::m_pInstance = NULL;
 
 Settings* Settings::Instance() {
-    if (!m_pInstance) {
-        m_pInstance = new Settings;
-        //m_pInstance->initSettings();
-    }
-    return m_pInstance;
+  if (!m_pInstance) {
+    m_pInstance = new Settings;
+    //m_pInstance->initSettings();
+  }
+  return m_pInstance;
 }
 
 void Settings::initSettings(const std::string& iniFolder) {
 #ifdef Def_Kuplung_OpenGL_4x
-    m_pInstance->OpenGL_MajorVersion = 4;
-    m_pInstance->OpenGL_MinorVersion = 1;
+  m_pInstance->OpenGL_MajorVersion = 4;
+  m_pInstance->OpenGL_MinorVersion = 1;
 #else
-    m_pInstance->OpenGL_MajorVersion = 2;
-    m_pInstance->OpenGL_MinorVersion = 1;
+  m_pInstance->OpenGL_MajorVersion = 2;
+  m_pInstance->OpenGL_MinorVersion = 1;
 #endif
-    m_pInstance->mRayDraw = false;
-    m_pInstance->mRayAnimate = false;
-    m_pInstance->mRayOriginX = 0.0f;
-    m_pInstance->mRayOriginY = 0.0f;
-    m_pInstance->mRayOriginZ = 0.0f;
-    m_pInstance->mRayDirectionX = 0.0f;
-    m_pInstance->mRayDirectionY = 0.0f;
-    m_pInstance->mRayDirectionZ = 0.0f;
+  m_pInstance->mRayDraw = false;
+  m_pInstance->mRayAnimate = false;
+  m_pInstance->mRayOriginX = 0.0f;
+  m_pInstance->mRayOriginY = 0.0f;
+  m_pInstance->mRayOriginZ = 0.0f;
+  m_pInstance->mRayDirectionX = 0.0f;
+  m_pInstance->mRayDirectionY = 0.0f;
+  m_pInstance->mRayDirectionZ = 0.0f;
 
-    m_pInstance->cfgUtils = std::make_unique<ConfigUtils>();
+  m_pInstance->cfgUtils = std::make_unique<ConfigUtils>();
 	m_pInstance->cfgUtils->init(iniFolder);
 
-    m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
+  m_pInstance->appVersion = m_pInstance->cfgUtils->readString("appVersion");
 	if (!m_pInstance->cfgUtils->readString("currentFolder").empty())
 		m_pInstance->currentFolder = m_pInstance->cfgUtils->readString("currentFolder");
-    m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
-    m_pInstance->UIFontSize = m_pInstance->cfgUtils->readInt("UIFontSize");
-    m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
-    if (m_pInstance->ModelFileParser >= Importer_ParserType_Count)
-        m_pInstance->ModelFileParser = Importer_ParserType_Own;
+  m_pInstance->UIFontFile = m_pInstance->cfgUtils->readString("UIFontFile");
+  m_pInstance->UIFontSize = m_pInstance->cfgUtils->readFloat("UIFontSize");
+  m_pInstance->ModelFileParser = m_pInstance->cfgUtils->readInt("ModelFileParser");
+  if (m_pInstance->ModelFileParser >= Importer_ParserType_Count)
+    m_pInstance->ModelFileParser = Importer_ParserType_Own;
 	m_pInstance->ImportExportFormat = static_cast<ImportExportFormats>(m_pInstance->cfgUtils->readInt("ImportExportFormat"));
-    m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
-    m_pInstance->GUISystem = m_pInstance->cfgUtils->readInt("GUISystem");
+  m_pInstance->RendererType = static_cast<InAppRendererType>(m_pInstance->cfgUtils->readInt("RendererType"));
+  m_pInstance->GUISystem = m_pInstance->cfgUtils->readInt("GUISystem");
 
-    m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
-    m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
-    m_pInstance->logFileBrowser = m_pInstance->cfgUtils->readBool("logFileBrowser");
-    m_pInstance->showPickRays = m_pInstance->cfgUtils->readBool("showPickRays");
-    m_pInstance->showPickRaysSingle = m_pInstance->cfgUtils->readBool("showPickRaysSingle");
-    m_pInstance->Terrain_HeightmapImageHistory = m_pInstance->cfgUtils->readBool("Terrain_HeightmapImageHistory");
+  m_pInstance->wireframesMode = m_pInstance->cfgUtils->readBool("wireframesMode");
+  m_pInstance->logDebugInfo = m_pInstance->cfgUtils->readBool("logDebugInfo");
+  m_pInstance->logFileBrowser = m_pInstance->cfgUtils->readBool("logFileBrowser");
+  m_pInstance->showPickRays = m_pInstance->cfgUtils->readBool("showPickRays");
+  m_pInstance->showPickRaysSingle = m_pInstance->cfgUtils->readBool("showPickRaysSingle");
+  m_pInstance->Terrain_HeightmapImageHistory = m_pInstance->cfgUtils->readBool("Terrain_HeightmapImageHistory");
 #ifdef DEF_KuplungSetting_UseCuda
     m_pInstance->UseCuda = m_pInstance->cfgUtils->readBool("UseCuda");
 #else

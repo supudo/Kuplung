@@ -22,7 +22,7 @@ public:
     int getSelectedFontSize();
 
     std::vector<FBEntity> fonts;
-    const char* fontSizes[11] = {"12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32"};
+    const char* fontSizes[11] = { "12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32" };
 
 private:
     void loadFontsOSX();

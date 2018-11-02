@@ -11,6 +11,12 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-extern-c-compat")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unknown-pragmas")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-function")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-unused-command-line-argument")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-tautological-constant-out-of-range-compare")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-multichar")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-switch")
+#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lGLEW -DIMGUI_IMPL_OPENGL_LOADER_GLEW")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIMGUI_IMPL_OPENGL_LOADER_CUSTOM")
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
 
 IF(APPLE)
@@ -284,16 +290,6 @@ SET(SOURCE_FILES
     kuplung/ui/dialogs/DialogSVS.hpp
     kuplung/ui/iconfonts/IconsFontAwesome.h
     kuplung/ui/iconfonts/IconsMaterialDesign.h
-    kuplung/ui/implementation/gui_oui/GUI_OUI.cpp
-    kuplung/ui/implementation/gui_oui/GUI_OUI.hpp
-    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.cpp
-    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp
-    kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
-    kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
-    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.cpp
-    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_OpenGL32.hpp
-    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.cpp
-    kuplung/ui/implementation/gui_imgui/ImGui_Implementation_SDL2.hpp
     kuplung/ui/UIManager.cpp
     kuplung/ui/UIManager.hpp
     kuplung/ui/UIHelpers.cpp
@@ -325,6 +321,14 @@ SET(SOURCE_FILES
     kuplung/utilities/imgui/imgui_demo.cpp
     kuplung/utilities/imgui/imgui_draw.cpp
     kuplung/utilities/imgui/imgui_internal.h
+    kuplung/utilities/imgui/imgui_widgets.cpp
+		kuplung/utilities/imgui/imstb_rectpack.h
+		kuplung/utilities/imgui/imstb_textedit.h
+		kuplung/utilities/imgui/imstb_truetype.h
+    kuplung/utilities/imgui/imgui_impl_opengl3.cpp
+    kuplung/utilities/imgui/imgui_impl_opengl3.h
+    kuplung/utilities/imgui/imgui_impl_sdl.cpp
+    kuplung/utilities/imgui/imgui_impl_sdl.h
     kuplung/utilities/nanovg/fontstash.h
     kuplung/utilities/nanovg/nanovg.c
     kuplung/utilities/nanovg/nanovg.h
@@ -661,72 +665,73 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         FILE(GLOB Kuplung_Noise16_Files "resources/noise16.png")
         FILE(COPY ${Kuplung_Noise16_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
 
-        # Lua
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/lua/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
-        FILE(GLOB Kuplung_Lua_Files "resources/lua/*.*")
-        FILE(COPY ${Kuplung_Lua_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
+				# Lua
+				# FILE(MAKE_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/lua/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
+        # FILE(GLOB Kuplung_Lua_Files "resources/lua/*.*")
+        # FILE(COPY ${Kuplung_Lua_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
 
-        # Shapes
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shapes/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
-        FILE(GLOB Kuplung_Shapes_Files "resources/shapes/*.*")
-        FILE(COPY ${Kuplung_Shapes_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
+        # # Shapes
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shapes/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
+        # FILE(GLOB Kuplung_Shapes_Files "resources/shapes/*.*")
+        # FILE(COPY ${Kuplung_Shapes_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shapes/")
 
-        # Axis Helpers
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/axis_helpers/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/axis_helpers/")
-        FILE(GLOB Kuplung_Axis_Helpers_Files "resources/axis_helpers/*.*")
-        FILE(COPY ${Kuplung_Axis_Helpers_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/axis_helpers/")
+        # # Axis Helpers
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/axis_helpers/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/axis_helpers/")
+        # FILE(GLOB Kuplung_Axis_Helpers_Files "resources/axis_helpers/*.*")
+        # FILE(COPY ${Kuplung_Axis_Helpers_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/axis_helpers/")
 
-        # Fonts
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/fonts/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/fonts/")
-        FILE(GLOB Kuplung_Fonts_Files "resources/fonts/*.*")
-        FILE(COPY ${Kuplung_Fonts_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/fonts/")
+        # # Fonts
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/fonts/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/fonts/")
+        # FILE(GLOB Kuplung_Fonts_Files "resources/fonts/*.*")
+        # FILE(COPY ${Kuplung_Fonts_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/fonts/")
 
-        # GUI
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/gui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/gui/")
-        FILE(GLOB Kuplung_GUI_Files "resources/gui/*.*")
-        FILE(COPY ${Kuplung_GUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/gui/")
+        # # GUI
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/gui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/gui/")
+        # FILE(GLOB Kuplung_GUI_Files "resources/gui/*.*")
+        # FILE(COPY ${Kuplung_GUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/gui/")
 
-        # Oui / nanovg
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/oui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
-        FILE(GLOB Kuplung_OUI_Files "resources/oui/*.*")
-        FILE(COPY ${Kuplung_OUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
+        # # Oui / nanovg
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/oui/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
+        # FILE(GLOB Kuplung_OUI_Files "resources/oui/*.*")
+        # FILE(COPY ${Kuplung_OUI_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/oui/")
 
-        # Image Assets
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/Images.xcassets/AppIcon.appiconset/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
-        FILE(GLOB Kuplung_ImageAssets_Files "resources/Images.xcassets/AppIcon.appiconset/*.*")
-        FILE(COPY ${Kuplung_ImageAssets_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
+        # # Image Assets
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/Images.xcassets/AppIcon.appiconset/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
+        # FILE(GLOB Kuplung_ImageAssets_Files "resources/Images.xcassets/AppIcon.appiconset/*.*")
+        # FILE(COPY ${Kuplung_ImageAssets_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/Images.xcassets/AppIcon.appiconset/")
 
-        # ProtoBuf
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/protobuf/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/protobuf/")
-        FILE(GLOB Kuplung_ProtoBuf_Files "resources/protobuf/*.*")
-        FILE(COPY ${Kuplung_ProtoBuf_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/protobuf/")
+        # # ProtoBuf
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/protobuf/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/protobuf/")
+        # FILE(GLOB Kuplung_ProtoBuf_Files "resources/protobuf/*.*")
+        # FILE(COPY ${Kuplung_ProtoBuf_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/protobuf/")
 
-        # Shaders
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shaders/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/")
-        FILE(GLOB Kuplung_Shaders_Files "resources/shaders/*.*")
-        FILE(COPY ${Kuplung_Shaders_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/")
+        # # Shaders
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shaders/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/")
+        # FILE(GLOB Kuplung_Shaders_Files "resources/shaders/*.*")
+        # FILE(COPY ${Kuplung_Shaders_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/")
 
-        # Shaders - ShaderToy
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shaders/stoy/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/stoy/")
-        FILE(GLOB Kuplung_Shaders_Stoy_Files "resources/shaders/stoy/*.*")
-        FILE(COPY ${Kuplung_Shaders_Stoy_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/stoy/")
+        # # Shaders - ShaderToy
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shaders/stoy/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/stoy/")
+        # FILE(GLOB Kuplung_Shaders_Stoy_Files "resources/shaders/stoy/*.*")
+        # FILE(COPY ${Kuplung_Shaders_Stoy_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shaders/stoy/")
 
-        # Shaders - ShaderToy Assets
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shadertoy/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shadertoy/")
-        FILE(GLOB Kuplung_Shaders_StoyAssets_Files "resources/shadertoy/*.*")
-        FILE(COPY ${Kuplung_Shaders_StoyAssets_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shadertoy/")
+        # # Shaders - ShaderToy Assets
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/shadertoy/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shadertoy/")
+        # FILE(GLOB Kuplung_Shaders_StoyAssets_Files "resources/shadertoy/*.*")
+        # FILE(COPY ${Kuplung_Shaders_StoyAssets_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/shadertoy/")
 
-        IF (CUDA_FOUND)
-            # Shaders - Cuda
-            EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/cuda/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
-            FILE(GLOB Kuplung_Shaders_Cuda_Files "resources/cuda/*.*")
-            FILE(COPY ${Kuplung_Shaders_Cuda_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
-        ENDIF(CUDA_FOUND)
+        # IF (CUDA_FOUND)
+        #     # Shaders - Cuda
+        #     EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/cuda/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
+        #     FILE(GLOB Kuplung_Shaders_Cuda_Files "resources/cuda/*.*")
+        #     FILE(COPY ${Kuplung_Shaders_Cuda_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/cuda/")
+        # ENDIF(CUDA_FOUND)
 
-        # Skybox
-        EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/skybox/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
-        FILE(GLOB Kuplung_Skybox_Files "resources/skybox/*.*")
-        FILE(COPY ${Kuplung_Skybox_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
+        # # Skybox
+        # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/skybox/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
+        # FILE(GLOB Kuplung_Skybox_Files "resources/skybox/*.*")
+        # FILE(COPY ${Kuplung_Skybox_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/skybox/")
 
         SET_TARGET_PROPERTIES(${PROJECT_NAME} PROPERTIES MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/Info.plist")
 

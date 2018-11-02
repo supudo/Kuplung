@@ -24,18 +24,18 @@ ExporterGLTF::~ExporterGLTF() {
 }
 
 void ExporterGLTF::init(const std::function<void(float)>& doProgress) {
-    this->funcProgress = doProgress;
-    this->addSuffix = false;
+  this->funcProgress = doProgress;
+  this->addSuffix = false;
 #ifdef _WIN32
-    this->nlDelimiter = "\r\n";
+  this->nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
-    this->nlDelimiter = "\r";
+  this->nlDelimiter = "\r";
 #else
-    this->nlDelimiter = "\n";
+  this->nlDelimiter = "\n";
 #endif
 
-    this->exportFileFolder = "";
-    this->parserUtils = std::make_unique<ParserUtils>();
+  this->exportFileFolder = "";
+  this->parserUtils = std::make_unique<ParserUtils>();
 	this->gltfGenerator = "Kuplung (https://github.com/supudo/Kuplung)";
 	this->defaultSceneName = "KuplungScene";
 	this->defaultMaterialName = "KuplungMaterial";

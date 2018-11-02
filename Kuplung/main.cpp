@@ -36,9 +36,9 @@
 /// <a href="http://supudo.net" target="_blank">http://supudo.net</a>
 
 int main() {
-    //FIXME: Remove for prod
-    setbuf(stdout, NULL);
+	//FIXME: Remove for prod
+	setbuf(stdout, NULL);
 
-    Kuplung app;
-    return app.run();
+	Kuplung app;
+	return app.run();
 }
