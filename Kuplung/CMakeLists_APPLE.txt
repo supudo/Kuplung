@@ -92,12 +92,12 @@ ELSE(MINIZIP_FOUND)
 ENDIF(MINIZIP_FOUND)
 
 # Lua
-INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_4/include/lua)
-LINK_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_3/lib)
-#FIND_PACKAGE(Lua REQUIRED)
-#IF(LUA_FOUND)
-#    INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
-#ENDIF(LUA_FOUND)
+#INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_4/include/lua)
+#LINK_DIRECTORIES(/usr/local/Cellar/lua/5.3.5_1/lib/)
+FIND_PACKAGE(Lua REQUIRED)
+IF(LUA_FOUND)
+    INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
+ENDIF(LUA_FOUND)
 
 # libnoise
 INCLUDE_DIRECTORIES(../external/libnoise/headers)

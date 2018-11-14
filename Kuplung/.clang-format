@@ -7,11 +7,11 @@
 
 
 # Common settings
-BasedOnStyle:  WebKit
+BasedOnStyle:  LLVM
 TabWidth:        2
 IndentWidth:     2
-UseTab:          Always
-ColumnLimit: 100
+UseTab:          Never
+ColumnLimit: 100000
 
 # Other languages JavaScript, Proto
 
@@ -60,7 +60,7 @@ BraceWrapping: {
     AfterStruct : 'false'
     AfterUnion : 'false'
     BeforeCatch : 'false'
-    BeforeElse : 'false'
+    BeforeElse : 'true'
     IndentBraces : 'false'
     AfterExternBlock : 'false'
     SplitEmptyFunction : 'false'
@@ -107,7 +107,7 @@ PenaltyReturnTypeOnItsOwnLine: 60
 PointerAlignment: Left
 SpaceAfterCStyleCast: false
 SpaceBeforeAssignmentOperators: true
-SpaceBeforeParens: Never
+SpaceBeforeParens: ControlStatements
 SpaceInEmptyParentheses: false
 SpacesBeforeTrailingComments: 1
 SpacesInAngles:  false

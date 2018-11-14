@@ -85,6 +85,7 @@
 #include <glad/glad.h>
 #else
 //#include IMGUI_IMPL_OPENGL_LOADER_CUSTOM
+#include "kuplung/utilities/gl/GLIncludes.h"
 #endif
 #endif
 

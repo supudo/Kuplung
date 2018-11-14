@@ -67,7 +67,7 @@ private:
     const int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
 
     // SDLs
-    SDL_Window *gWindow = NULL;
+    SDL_Window *sdlWindow = NULL;
     SDL_GLContext glContext;
 
     // Variables
