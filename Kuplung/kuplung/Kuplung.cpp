@@ -334,7 +334,7 @@ void Kuplung::onEvent(SDL_Event* ev) {
     if (this->managerControls->keyPressed_DELETE && this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
       this->guiModelDelete(this->sceneSelectedModelObject);
 
-    if (this->sceneSelectedModelObject > -1 && this->meshModelFaces.size() > 0)
+    if (ev->type == SDL_KEYDOWN && ev->key.keysym.sym == SDLK_TAB)
       this->meshModelFaces[static_cast<size_t>(this->sceneSelectedModelObject)]->Setting_EditMode = this->managerControls->keyPresset_TAB;
 
     // FOV & zoom

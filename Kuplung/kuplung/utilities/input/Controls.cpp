@@ -90,43 +90,43 @@ void Controls::handleKeyDown(const SDL_Event* ev) {
 
 	if(ev->type == SDL_KEYDOWN) {
 		switch(ev->key.keysym.sym) {
-		case SDLK_ESCAPE: {
-			this->keyPressed_ESC = true;
-			this->keyPressed_DELETE = false;
-			this->mouseButton_LEFT = false;
-			this->mouseButton_MIDDLE = false;
-			this->mouseButton_RIGHT = false;
-			this->mouseGoLeft = false;
-			this->mouseGoRight = false;
-			this->mouseGoUp = false;
-			this->mouseGoDown = false;
-			break;
-		}
-		case SDLK_DELETE: {
-			this->keyPressed_ESC = false;
-			this->keyPressed_DELETE = true;
-			this->mouseButton_LEFT = false;
-			this->mouseButton_MIDDLE = false;
-			this->mouseButton_RIGHT = false;
-			this->mouseGoLeft = false;
-			this->mouseGoRight = false;
-			this->mouseGoUp = false;
-			this->mouseGoDown = false;
-			break;
-		}
-		case SDLK_TAB: {
-			this->keyPressed_ESC = false;
-			this->keyPressed_DELETE = false;
-			this->keyPresset_TAB = !this->keyPresset_TAB;
-			this->mouseButton_LEFT = false;
-			this->mouseButton_MIDDLE = false;
-			this->mouseButton_RIGHT = false;
-			this->mouseGoLeft = false;
-			this->mouseGoRight = false;
-			this->mouseGoUp = false;
-			this->mouseGoDown = false;
-			break;
-		}
+      case SDLK_ESCAPE: {
+        this->keyPressed_ESC = true;
+        this->keyPressed_DELETE = false;
+        this->mouseButton_LEFT = false;
+        this->mouseButton_MIDDLE = false;
+        this->mouseButton_RIGHT = false;
+        this->mouseGoLeft = false;
+        this->mouseGoRight = false;
+        this->mouseGoUp = false;
+        this->mouseGoDown = false;
+        break;
+      }
+      case SDLK_DELETE: {
+        this->keyPressed_ESC = false;
+        this->keyPressed_DELETE = true;
+        this->mouseButton_LEFT = false;
+        this->mouseButton_MIDDLE = false;
+        this->mouseButton_RIGHT = false;
+        this->mouseGoLeft = false;
+        this->mouseGoRight = false;
+        this->mouseGoUp = false;
+        this->mouseGoDown = false;
+        break;
+      }
+      case SDLK_TAB: {
+        this->keyPressed_ESC = false;
+        this->keyPressed_DELETE = false;
+        this->keyPresset_TAB = !this->keyPresset_TAB;
+        this->mouseButton_LEFT = false;
+        this->mouseButton_MIDDLE = false;
+        this->mouseButton_RIGHT = false;
+        this->mouseGoLeft = false;
+        this->mouseGoRight = false;
+        this->mouseGoUp = false;
+        this->mouseGoDown = false;
+        break;
+      }
 		}
 	}
 }
