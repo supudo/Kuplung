@@ -19,6 +19,12 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-switch")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DIMGUI_IMPL_OPENGL_LOADER_CUSTOM")
 #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fopenmp")
 
+IF((CMAKE_CXX_COMPILER_ID MATCHES GNU) OR (CMAKE_CXX_COMPILER_ID MATCHES Clang))
+   #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
+   SET(CMAKE_CXX_FLAGS_DEBUG "-O0 -g3")
+   SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
+ENDIF()
+
 IF(APPLE)
     SET(MACOSX_BUNDLE true)
     SET(MACOSX_BUNDLE_BUNDLE_NAME ${MY_APP_NAME})
@@ -78,9 +84,9 @@ ENDIF(assimp_FOUND)
 # Protobuf
 FIND_PACKAGE(Protobuf REQUIRED)
 IF(Protobuf_FOUND)
-    INCLUDE_DIRECTORIES(${Protobuf_INCLUDE_DIRS})
+  INCLUDE_DIRECTORIES(${Protobuf_INCLUDE_DIRS})
 ELSE(Protobuf_FOUND)
-    MESSAGE(FATAL_ERROR "Google ProtoBuf not found!")
+  MESSAGE(FATAL_ERROR "Google ProtoBuf not found!")
 ENDIF(Protobuf_FOUND)
 
 # Minizip
@@ -91,12 +97,21 @@ ELSE(MINIZIP_FOUND)
     MESSAGE(FATAL_ERROR "Minizip not found!")
 ENDIF(MINIZIP_FOUND)
 
+# Google Benchmark
+# INCLUDE(cmake/Findbenchmark.cmake)
+# IF(GBenchmark_FOUND)
+#   INCLUDE_DIRECTORIES(${GBenchmark_INCLUDE_DIR})
+#   SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lbenchmark")
+# ELSE(GBenchmark_FOUND)
+#   MESSAGE(FATAL_ERROR "Google Benchmark not found!")
+# ENDIF(GBenchmark_FOUND)
+
 # Lua
 #INCLUDE_DIRECTORIES(/usr/local/Cellar/lua/5.3.4_4/include/lua)
 #LINK_DIRECTORIES(/usr/local/Cellar/lua/5.3.5_1/lib/)
 FIND_PACKAGE(Lua REQUIRED)
 IF(LUA_FOUND)
-    INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
+  INCLUDE_DIRECTORIES(${LUA_INCLUDE_DIR})
 ENDIF(LUA_FOUND)
 
 # libnoise
@@ -665,7 +680,7 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
         FILE(GLOB Kuplung_Noise16_Files "resources/noise16.png")
         FILE(COPY ${Kuplung_Noise16_Files} DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/")
 
-				# Lua
+        # Lua
 				# FILE(MAKE_DIRECTORY "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
         # EXECUTE_PROCESS(COMMAND ${CMAKE_COMMAND} -E copy_directory "resources/lua/" "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/${PROJECT_NAME}.app/Contents/Resources/lua/")
         # FILE(GLOB Kuplung_Lua_Files "resources/lua/*.*")
