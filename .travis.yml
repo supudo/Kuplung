@@ -8,7 +8,6 @@ before_install:
   - brew update
   - brew install sdl2 glm minizip glfw3 assimp protobuf lua@5.3
   - brew tap caskroom/drivers
-  - brew cask install nvidia-cuda
 
 script:
   - mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug ../Kuplung && cmake --build ./
