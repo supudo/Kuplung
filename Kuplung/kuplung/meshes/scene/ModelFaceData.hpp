@@ -10,6 +10,7 @@
 #define ModelFaceData_hpp
 
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
+#include "kuplung/utilities/imgui/imgui.h"
 
 class ModelFaceData: public ModelFaceBase {
 public:

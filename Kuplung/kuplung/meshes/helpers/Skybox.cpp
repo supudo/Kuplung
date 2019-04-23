@@ -30,10 +30,10 @@ Skybox::Skybox() {
 	this->shaderProgram = GL_ZERO;
 	this->shaderVertex = GL_ZERO;
 	this->shaderFragment = GL_ZERO;
-	this->glVAO = GL_ZERO; 
-	this->vboVertices = GL_ZERO; 
+	this->glVAO = GL_ZERO;
+	this->vboVertices = GL_ZERO;
 	this->vboTexture = GL_ZERO;
-	this->glVS_MatrixView = GL_ZERO; 
+	this->glVS_MatrixView = GL_ZERO;
 	this->glVS_MatrixProjection = GL_ZERO;
 }
 
@@ -57,7 +57,7 @@ Skybox::~Skybox() {
 
 #pragma mark - Initialization
 
-void Skybox::init(const int& gridSize) {
+void Skybox::init(const short int& gridSize) {
     this->gridSize = gridSize;
     this->Setting_Skybox_Item = 0;
 

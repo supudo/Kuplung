@@ -26,20 +26,20 @@ void KuplungIDE::init() {
 
 	static const char* keywords[] = {
 		// types
-		"float", "double", "int", "void", "bool", "true", "false", "mat2", "mat3", "mat4", "dmat2", "dmat3", "dmat4", 
-		"mat2x2", "mat2x3", "mat2x4", "dmat2x2", "dmat2x3", "dmat2x4", "mat3x2", "mat3x3", "mat3x4", "dmat3x2", 
-		"dmat3x3", "dmat3x4", "mat4x2", "mat4x3", "mat4x4", "dmat4x2", "dmat4x3", "dmat4x4", "vec2", "vec3", "vec4", 
-		"ivec2", "ivec3", "ivec4", "bvec2", "bvec3", "bvec4", "dvec2", "dvec3", "dvec4", "uint", "uvec2", "uvec3", 
-		"uvec4", "sampler1D", "sampler2D", "sampler3D", "samplerCube", "sampler1DShadow", "sampler2DShadow", 
-		"samplerCubeShadow", "sampler1DArray", "sampler2DArray", "sampler1DArrayShadow", "sampler2DArrayShadow", 
+		"float", "double", "int", "void", "bool", "true", "false", "mat2", "mat3", "mat4", "dmat2", "dmat3", "dmat4",
+		"mat2x2", "mat2x3", "mat2x4", "dmat2x2", "dmat2x3", "dmat2x4", "mat3x2", "mat3x3", "mat3x4", "dmat3x2",
+		"dmat3x3", "dmat3x4", "mat4x2", "mat4x3", "mat4x4", "dmat4x2", "dmat4x3", "dmat4x4", "vec2", "vec3", "vec4",
+		"ivec2", "ivec3", "ivec4", "bvec2", "bvec3", "bvec4", "dvec2", "dvec3", "dvec4", "uint", "uvec2", "uvec3",
+		"uvec4", "sampler1D", "sampler2D", "sampler3D", "samplerCube", "sampler1DShadow", "sampler2DShadow",
+		"samplerCubeShadow", "sampler1DArray", "sampler2DArray", "sampler1DArrayShadow", "sampler2DArrayShadow",
 		"isampler1D", "isampler2D", "isampler3D", "isamplerCube", "isampler1DArray", "isampler2DArray", "usampler1D",
-		"usampler2D", "usampler3D", "usamplerCube", "usampler1DArray", "usampler2DArray", "sampler2DRect", 
+		"usampler2D", "usampler3D", "usamplerCube", "usampler1DArray", "usampler2DArray", "sampler2DRect",
 		"sampler2DRectShadow", "isampler2DRect", "usampler2DRect", "samplerBuffer", "isamplerBuffer", "usamplerBuffer",
-		"sampler2DMS", "isampler2DMS", "usampler2DMS", "sampler2DMSArray", "isampler2DMSArray", "usampler2DMSArray", 
-		"samplerCubeArray", "samplerCubeArrayShadow", "isamplerCubeArray", "usamplerCubeArray", "image1D", "iimage1D", 
-		"uimage1D", "image2D", "iimage2D", "uimage2D", "image3D", "iimage3D", "uimage3D", "image2DRect", 
+		"sampler2DMS", "isampler2DMS", "usampler2DMS", "sampler2DMSArray", "isampler2DMSArray", "usampler2DMSArray",
+		"samplerCubeArray", "samplerCubeArrayShadow", "isamplerCubeArray", "usamplerCubeArray", "image1D", "iimage1D",
+		"uimage1D", "image2D", "iimage2D", "uimage2D", "image3D", "iimage3D", "uimage3D", "image2DRect",
 		"iimage2DRect", "uimage2DRect", "imageCube", "iimageCube", "uimageCube", "imageBuffer", "iimageBuffer",
-		"uimageBuffer", "image1DArray", "iimage1DArray", "uimage1DArray", "image2DArray", "iimage2DArray", "uimage2DArray", 
+		"uimageBuffer", "image1DArray", "iimage1DArray", "uimage1DArray", "image2DArray", "iimage2DArray", "uimage2DArray",
 		"imageCubeArray", "iimageCubeArray", "uimageCubeArray", "image2DMS", "iimage2DMS", "uimage2DMS", "image2DMSArray",
 		"iimage2DMSArray", "uimage2DMSArray", "long", "short", "half", "fixed", "unsigned", "hvec2", "hvec3", "hvec4",
 		"fvec2", "fvec3", "fvec4", "sampler3DRect",
@@ -54,7 +54,7 @@ void KuplungIDE::init() {
 		// deprecated
 		"gl_FragColor", "gl_FragData", "gl_MaxVarying", "gl_MaxVaryingFloats", "gl_MaxVaryingComponents",
 		//
-		"shared", "packed", "std140", "row_major", "column_major", "ccw", "cw", "equal_spacing", "fractional_even_spacing", 
+		"shared", "packed", "std140", "row_major", "column_major", "ccw", "cw", "equal_spacing", "fractional_even_spacing",
 		"fractional_odd_spacing", "index", "invocations", "isolines", "line_strip", "lines", "lines_adjacency", "location",
 		"binding", "max_vertices", "origin_upper_left", "pixel_center_integer", "point_mode", "points", "quads", "stream",
 		"triangle_strip", "triangles", "triangles_adjacency", "vertices", "local_size_x", "local_size_y", "local_size_z",
@@ -88,14 +88,20 @@ void KuplungIDE::init() {
 		"texture2DRect", "texture2DRectProj", "texture3D", "texture3DProj", "texture3DLod", "texture3DProjLod", "shadow1D", "shadow1DProj",
 		"shadow1DLod", "shadow1DProjLod","shadow2D", "shadow2DProj", "shadow2DLod", "shadow2DProjLod", "textureCube", "textureCubeLod"
 	};
-	for (auto& k : identifiers)
-		lang.mIdentifiers.insert(k);
+	for (int i=0; i<sizeof(identifiers) / sizeof(identifiers[0]); i++) {
+		TextEditor::Identifier teid;
+		teid.mDeclaration = "";
+		lang.mIdentifiers.insert(std::make_pair(std::string(identifiers[i]), teid));
+  }
 
-	static const char* ppnames[] = { 
+	static const char* ppnames[] = {
 		"define", "undef", "if", "ifdef", "ifndef", "else", "elif", "endif", "error", "pragma", "extension", "version", "line"
 	};
-	for (auto i : ppnames)
-		lang.mPreprocIdentifiers.insert(i);
+	for (int i=0; i<sizeof(ppnames) / sizeof(ppnames[0]); i++) {
+		TextEditor::Identifier teid;
+		teid.mDeclaration = "";
+		lang.mPreprocIdentifiers.insert(std::make_pair(std::string(ppnames[i]), teid));
+  }
 
 	this->kuplungEditor.SetLanguageDefinition(lang);
 }

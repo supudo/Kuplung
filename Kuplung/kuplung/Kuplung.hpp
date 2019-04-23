@@ -63,8 +63,8 @@ private:
 
     // Screen dimension constants
     const char *WINDOW_TITLE = "Kuplung";
-    const int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
-    const int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
+    const unsigned int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
+    const unsigned int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
 
     // SDLs
     SDL_Window *sdlWindow = NULL;

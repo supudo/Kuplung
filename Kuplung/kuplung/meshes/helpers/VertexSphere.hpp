@@ -25,7 +25,7 @@ public:
 
     bool isSphere;
     bool showWireframes;
-    int circleSegments;
+    unsigned short int circleSegments;
     std::vector<glm::vec3> dataVertices;
     std::vector<glm::vec3> dataNormals;
     std::vector<GLuint> dataIndices;

@@ -179,6 +179,8 @@ void ModelFaceData::renderModel(const bool useTessellation) {
     else if (this->Setting_Gizmo_Scale)
       gizmo_operation = ImGuizmo::SCALE;
     glm::mat4 mtx = glm::mat4(1.0);
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
     ImGuizmo::Manipulate(glm::value_ptr(this->matrixCamera), glm::value_ptr(this->matrixProjection), gizmo_operation, ImGuizmo::LOCAL, glm::value_ptr(this->matrixModel), glm::value_ptr(mtx));
 
     glm::vec3 scale;

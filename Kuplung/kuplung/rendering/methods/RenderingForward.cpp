@@ -889,6 +889,8 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
 
     glm::mat4 mtx = glm::mat4(1.0);
 
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuizmo::SetRect(0, 0, io.DisplaySize.x, io.DisplaySize.y);
     ImGuizmo::Manipulate(glm::value_ptr(this->managerObjects->camera->matrixCamera), glm::value_ptr(this->managerObjects->matrixProjection), ImGuizmo::TRANSLATE, ImGuizmo::WORLD, glm::value_ptr(matrixVertex), glm::value_ptr(mtx));
 
     glm::vec3 scale;

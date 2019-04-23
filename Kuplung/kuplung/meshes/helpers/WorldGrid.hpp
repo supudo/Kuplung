@@ -28,7 +28,7 @@ public:
     void initBuffers(const int& gridSize, const float& unitSize);
     void initProperties();
     void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const bool& showZAxis);
-    int gridSize;
+    unsigned short int gridSize;
     float transparency;
 
     std::unique_ptr<MirrorSurface> mirrorSurface;

@@ -399,7 +399,7 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
 
   ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
 
-  if (this->selectedObject > -1) {
+  if (this->selectedObject > -1 && sizeof(this->meshModelFaces) > static_cast<size_t>(this->selectedObject)) {
     ModelFaceBase* mmf = (*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)];
     ImGui::TextColored(ImVec4(255, 0, 0, 255), "OBJ File:");
     ImGui::SameLine();

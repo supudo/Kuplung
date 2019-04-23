@@ -19,7 +19,7 @@ class Skybox {
 public:
 	Skybox();
     ~Skybox();
-    void init(const int& gridSize);
+    void init(const short int& gridSize);
     bool initBuffers();
     void render(const glm::mat4& matrixView, const float& plane_close, const float& plane_far, const float& fov);
 
@@ -27,7 +27,7 @@ public:
     int Setting_Skybox_Item;
 
 private:
-    int gridSize;
+    short int gridSize;
 
     GLuint shaderProgram, shaderVertex, shaderFragment;
     GLuint glVAO, vboVertices, vboTexture;

@@ -24,7 +24,7 @@ public:
     void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel);
 
 private:
-    int axisSize;
+    short int axisSize;
     float x, y, z;
 
     GLuint shaderProgram;
