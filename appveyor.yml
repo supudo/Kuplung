@@ -45,6 +45,8 @@ install:
   # - ps: cmake -G "Visual Studio 15 2017 Win64"
   # - ps: msbuild Assimp.sln /p:Platform=x64
   # - ps: set LIB="%LIB%;C:\projects\libs\assimp\bin\Debug"
+  - cmd: if "%platform%"=="Win32" set VCPKG_ARCH=x86-windows
+  - cmd: if "%platform%"=="x64" set VCPKG_ARCH=x64-windows
   - cmd: vcpkg install --recurse --triplet %VCPKG_ARCH% assimp
 
   # protobuf
