@@ -40,11 +40,12 @@ install:
   - ps: del glew.zip
 
   # Assimp
-  - ps: git clone -q https://github.com/assimp/assimp 2> $null
-  - ps: cd assimp
-  - ps: cmake -G "Visual Studio 15 2017 Win64"
-  - ps: msbuild Assimp.sln /p:Platform=x64
-  - ps: set LIB="%LIB%;C:\projects\libs\assimp\bin\Debug"
+  # - ps: git clone -q https://github.com/assimp/assimp 2> $null
+  # - ps: cd assimp
+  # - ps: cmake -G "Visual Studio 15 2017 Win64"
+  # - ps: msbuild Assimp.sln /p:Platform=x64
+  # - ps: set LIB="%LIB%;C:\projects\libs\assimp\bin\Debug"
+  - cmd: vcpkg install --recurse --triplet %VCPKG_ARCH% assimp
 
   # protobuf
   - ps: mkdir protobuf
@@ -84,9 +85,6 @@ configuration:
 
 before_build:
   - cd c:\projects\Kuplung\Kuplung
-  - mkdir build
-  - cd build
-  - cmake --version
   - cmake -G "Visual Studio 15 2017 Win64"
 
 build:
