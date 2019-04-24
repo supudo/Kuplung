@@ -71,7 +71,7 @@ install:
 
   #libnoise
   - ps: Invoke-WebRequest -Uri https://sourceforge.net/projects/libnoise/files/libnoise%20binaries%20%28Win32%29/1.0.0/libnoisedll-1.0.0.zip/download -OutFile libnoisedll-1.0.0.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
-  - ps: Expand-Archive libnoisedll-1.0.0.zip -DestinationPath libnoise
+  - ps: Expand-Archive -Force libnoisedll-1.0.0.zip -DestinationPath libnoise
   - ps: set LIB="%LIB%;C:\projects\libs\libnoise\bin"
   - ps: del libnoisedll-1.0.0.zip
   - ps: Invoke-WebRequest -Uri https://sourceforge.net/projects/libnoise/files/libnoise%20headers/1.0.0/libnoiseheaders-1.0.0.zip/download -OutFile libnoiseheaders-1.0.0.zip -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
