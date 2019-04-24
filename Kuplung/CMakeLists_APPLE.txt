@@ -662,7 +662,7 @@ SET(Kuplung_Lua
   resources/lua/test.lua)
 
 IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AND Protobuf_FOUND AND MINIZIP_FOUND)
-  IF(APPLE)
+  IF (APPLE)
     INCLUDE(CMakeToolsHelpers OPTIONAL)
 
     IF (CUDA_ENABLED)
@@ -671,6 +671,8 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
       ELSE(CUDA_FOUND)
         ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
       ENDIF(CUDA_FOUND)
+    ELSE (CIDA_ENABLED)
+      ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
     ENDIF(CUDA_ENABLED)
 
     # Misc Files
