@@ -84,11 +84,10 @@ configuration:
 
 before_build:
   - cd c:\projects\Kuplung\Kuplung
-  - cmd: |-
-    mkdir build
-    cd build
-    cmake --version
-    cmake -G "Visual Studio 15 2017 Win64"
+  - mkdir build
+  - cd build
+  - cmake --version
+  - cmake -G "Visual Studio 15 2017 Win64"
 
 build:
   project: c:\projects\Kuplung\Kuplung\Kuplung.vcxproj
