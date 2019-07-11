@@ -74,8 +74,11 @@ int Kuplung::run() {
     return 1;
 
   SDL_Event ev;
+  int frameCounter = 0;
 
   while (this->gameIsRunning) {
+    float fts = (1.0 * std::clock() / CLOCKS_PER_SEC);
+
     if (Settings::Instance()->maybeGracefullApplicationQuit) {
       this->gameIsRunning = false;
       break;
@@ -99,6 +102,15 @@ int Kuplung::run() {
 
     if (this->gameIsRunning == false)
       break;
+
+    if (frameCounter == 100) {
+      float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : %f ms (%f seconds)", (fte - fts) * 1000, (fte - fts)));
+      // Settings::Instance()->logTimings(__FILE__, __func__);
+      frameCounter = 0;
+    }
+    else
+      frameCounter += 1;
   }
 
   return 0;
@@ -213,6 +225,7 @@ bool Kuplung::init() {
       }
     }
   }
+  Settings::Instance()->logTimings(__FILE__, __func__);
   return success;
 }
 

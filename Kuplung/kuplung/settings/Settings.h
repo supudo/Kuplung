@@ -41,6 +41,7 @@ public:
   std::vector<FBEntity> loadRecentFiles();
   void saveRecentFilesImported(const std::vector<FBEntity>& recentFiles);
   std::vector<FBEntity> loadRecentFilesImported();
+  void logTimings(const std::string& file, const std::string& method);
 
   unsigned short int OpenGL_MajorVersion, OpenGL_MinorVersion;
   bool maybeGracefullApplicationQuit;
