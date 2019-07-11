@@ -152,7 +152,7 @@ bool Kuplung::init() {
       Settings::Instance()->SDL_Window_Width = current.w - 100;
 
     this->sdlWindow = SDL_CreateWindow(WINDOW_TITLE, WINDOW_POSITION_X, WINDOW_POSITION_Y, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, Settings::Instance()->SDL_Window_Flags | SDL_WINDOW_ALLOW_HIGHDPI);
-    if (this->sdlWindow == NULL) {
+    if (this->sdlWindow == nullptr) {
       printf("Error: Window could not be created! SDL Error: %s\n", SDL_GetError());
       success = false;
     }

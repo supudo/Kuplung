@@ -79,7 +79,7 @@ std::string SceneRenderer::renderImage2(const FBEntity& file, std::vector<ModelF
 
         SDL_Window *gWindow = SDL_CreateWindow("Kuplung", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, Settings::Instance()->SDL_Window_Flags);
         SDL_GLContext glContext;
-        if (gWindow == NULL)
+        if (gWindow == nullptr)
             Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[SceneRenderer] Render Error: Window could not be created! SDL Error: %s\n", SDL_GetError()));
         else {
             glContext = SDL_GL_CreateContext(gWindow);
