@@ -92,7 +92,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\Libs\boost_1_65_0;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.5\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.0.0-win32\include;D:\Libs\assimp\x64\include;D:\Libs\protobuf-release\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Libs\boost_1_70_0;D:\Libs\glm-0.9.8.4;D:\Libs\SDL2-2.0.9\include;D:\Libs\GLFW3\include;D:\Libs\glew-2.1.0\include;D:\Libs\assimp\x64\include;D:\Libs\protobuf\include;D:\Libs\lua-5.3.4_Win64_vc14_lib\include;..\Kuplung\..\external\libnoise\windows\include;..\Kuplung\.;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAs>CompileAsCpp</CompileAs>
@@ -105,7 +105,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;Kuplung_Debug_Timings;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>
       </LanguageStandard>
@@ -126,8 +126,8 @@
     </Midl>
     <Link>
       <AdditionalOptions>%(AdditionalOptions)  /machine:x64</AdditionalOptions>
-      <AdditionalDependencies>boost_system-vc141-mt-gd-1_65.lib;boost_filesystem-vc141-mt-gd-1_65.lib;opengl32.lib;SDL2main.lib;SDL2.lib;GLFW3.lib;GLEW32.lib;assimp-vc140-mt.lib;libprotobufd.lib;lua53.lib;noise.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>D:/Libs/boost_1_65_0/lib64-msvc-14.1;D:/Libs/boost_1_65_0/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.5/lib/x64;D:/Libs/SDL2-2.0.5/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.0.0-win32/lib/Release/x64;D:/Libs/glew-2.0.0-win32/lib/Release/x64/$(Configuration);D:/Libs/assimp/x64/lib;D:/Libs/assimp/x64/lib/$(Configuration);D:/Libs/protobuf-release/lib;D:/Libs/protobuf-release/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>boost_system-vc141-mt-gd-x64-1_70.lib;boost_filesystem-vc141-mt-gd-x64-1_70.lib;opengl32.lib;SDL2main.lib;SDL2.lib;GLFW3.lib;GLEW32.lib;assimp-vc140-mt.lib;libprotobufd.lib;lua53.lib;noise.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>D:/Libs/boost_1_70_0/lib64-msvc-14.1;D:/Libs/boost_1_70_0/lib64-msvc-14.1/$(Configuration);D:/Libs/SDL2-2.0.9/lib/x64;D:/Libs/SDL2-2.0.9/lib/x64/$(Configuration);D:/Libs/GLFW3/lib-vc2015;D:/Libs/GLFW3/lib-vc2015/$(Configuration);D:/Libs/glew-2.1.0/lib/Release/x64;D:/Libs/glew-2.1.0/lib/Release/x64/$(Configuration);D:/Libs/assimp/x64/lib;D:/Libs/assimp/x64/lib/$(Configuration);D:/Libs/protobuf/lib;D:/Libs/protobuf/lib/$(Configuration);D:/Libs/lua-5.3.4_Win64_vc14_lib/lib;D:/Libs/lua-5.3.4_Win64_vc14_lib/lib/$(Configuration);D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib;D:/Software/C++/Kuplung/Kuplung/../external/libnoise/windows/lib/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>Debug</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/Software/C++/Kuplung/MSVC/Release/Debug/Kuplung.lib</ImportLibrary>
@@ -346,16 +346,17 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\dialogs\DialogSVS.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsFontAwesome.h" />
     <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h" />
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.hpp" />
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.hpp" />
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.hpp" />
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\measurement\Timings.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\consumption\Consumption.hpp" />
@@ -468,16 +469,15 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogShadertoy.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogStyle.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogSVS.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.cpp" />
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\measurement\Timings.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\Consumption.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\consumption\WindowsCPUUsage.cpp" />
@@ -534,6 +534,13 @@
     <ResourceCompile Include="..\Kuplung\resources\kuplung.rc" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\Kuplung\resources\Kuplung_RecentFiles.ini" />
+    <None Include="..\Kuplung\resources\Kuplung_RecentFilesImported.ini" />
+    <None Include="..\Kuplung\resources\Kuplung_Settings.ini" />
+    <None Include="..\Kuplung\resources\lua\test.lua" />
+    <None Include="..\Kuplung\resources\protobuf\KuplungAppScene.proto" />
+    <None Include="..\Kuplung\resources\protobuf\KuplungAppSettings.proto" />
+    <None Include="..\Kuplung\resources\protobuf\KuplungDefinitions.proto" />
     <None Include="..\Kuplung\resources\shaders\axis.frag" />
     <None Include="..\Kuplung\resources\shaders\axis.vert" />
     <None Include="..\Kuplung\resources\shaders\axis_helpers.frag" />
@@ -597,6 +604,9 @@
     <None Include="..\Kuplung\resources\shaders\terrain.vert" />
     <None Include="..\Kuplung\resources\shaders\vertex_sphere.frag" />
     <None Include="..\Kuplung\resources\shaders\vertex_sphere.vert" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Kuplung\resources\noise16.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

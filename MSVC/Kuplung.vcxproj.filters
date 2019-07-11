@@ -115,18 +115,6 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\dialogs\DialogSVS.cpp">
       <Filter>kuplung\ui\dialogs</Filter>
     </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.cpp">
-      <Filter>kuplung\ui\implementation\gui_oui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.cpp">
-      <Filter>kuplung\ui\implementation\gui_oui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.cpp">
-      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.cpp">
-      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
-    </ClCompile>
     <ClCompile Include="..\Kuplung\kuplung\ui\components\uveditor\UVEditor.cpp">
       <Filter>kuplung\ui\components\uveditor</Filter>
     </ClCompile>
@@ -326,6 +314,15 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp">
       <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -456,18 +453,6 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\ui\iconfonts\IconsMaterialDesign.h">
       <Filter>kuplung\ui\iconfonts</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\GUI_ImGui.hpp">
-      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_imgui\SDL2OpenGL32.hpp">
-      <Filter>kuplung\ui\implementation\gui_imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_oui\GUI_OUI.hpp">
-      <Filter>kuplung\ui\implementation\gui_oui</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\ui\implementation\gui_oui\OuiNanoVG_Implementation.hpp">
-      <Filter>kuplung\ui\implementation\gui_oui</Filter>
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\ui\components\uveditor\UVEditor.hpp">
       <Filter>kuplung\ui\components\uveditor</Filter>
@@ -715,6 +700,21 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.h">
       <Filter>kuplung\utilities\imgui\ImGuiColorTextEdit</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_opengl3.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imgui_impl_sdl.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_rectpack.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_textedit.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
+      <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -773,15 +773,6 @@
     </Filter>
     <Filter Include="kuplung\ui\iconfonts">
       <UniqueIdentifier>{0d0504fc-fb0f-42e2-95e6-1c11b2f23c6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="kuplung\ui\implementation">
-      <UniqueIdentifier>{5233949e-6636-422f-bcd3-fb2d03a83e16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="kuplung\ui\implementation\gui_imgui">
-      <UniqueIdentifier>{f6ec1e5d-be71-4040-82bf-7e879efbbd5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="kuplung\ui\implementation\gui_oui">
-      <UniqueIdentifier>{e6e19278-ef2d-4ed6-8334-d148c521cf49}</UniqueIdentifier>
     </Filter>
     <Filter Include="kuplung\utilities">
       <UniqueIdentifier>{55242600-0b5a-467f-a0a4-443217e10f9d}</UniqueIdentifier>
@@ -893,6 +884,12 @@
     </Filter>
     <Filter Include="kuplung\utilities\imgui\ImGuiColorTextEdit">
       <UniqueIdentifier>{5f2c34ce-6213-43a6-8afb-f20dc58f689c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\protobuf">
+      <UniqueIdentifier>{2bd5f11e-7362-4529-8880-4f2e2960b8f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\lua">
+      <UniqueIdentifier>{c8c1aa96-6f40-493e-b546-7a944dcbf4fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1090,5 +1087,31 @@
     <None Include="..\Kuplung\resources\shaders\cuda\oceanFFT.vert">
       <Filter>resources\shaders\cuda</Filter>
     </None>
+    <None Include="..\Kuplung\resources\protobuf\KuplungDefinitions.proto">
+      <Filter>resources\protobuf</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\protobuf\KuplungAppScene.proto">
+      <Filter>resources\protobuf</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\protobuf\KuplungAppSettings.proto">
+      <Filter>resources\protobuf</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\lua\test.lua">
+      <Filter>resources\lua</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\Kuplung_RecentFiles.ini">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\Kuplung_RecentFilesImported.ini">
+      <Filter>resources</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\Kuplung_Settings.ini">
+      <Filter>resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Kuplung\resources\noise16.png">
+      <Filter>resources</Filter>
+    </Image>
   </ItemGroup>
 </Project>
