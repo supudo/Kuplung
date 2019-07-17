@@ -7,6 +7,7 @@
 //
 
 #include "FontsList.hpp"
+#include <algorithm>
 #include <stdio.h>
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/filesystem.hpp>

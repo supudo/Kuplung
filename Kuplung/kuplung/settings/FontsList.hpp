@@ -9,7 +9,6 @@
 #ifndef FontsList_hpp
 #define FontsList_hpp
 
-#include <algorithm>
 #include <string>
 #include <vector>
 #include "Settings.h"

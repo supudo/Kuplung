@@ -10,7 +10,6 @@
 #define Settings_h
 
 #include <string>
-#include <algorithm>
 #include <vector>
 #include <iostream>
 #include <type_traits>

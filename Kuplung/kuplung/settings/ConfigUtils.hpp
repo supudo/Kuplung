@@ -9,7 +9,6 @@
 #ifndef ConfigUtils_hpp
 #define ConfigUtils_hpp
 
-#include <map>
 #include <regex>
 #include <string>
 #include <vector>
