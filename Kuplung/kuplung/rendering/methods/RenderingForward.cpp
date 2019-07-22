@@ -504,10 +504,11 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
   glUseProgram(this->shaderProgram);
 
   int selectedModelID = -1;
-  for (size_t i = 0; i < meshModelFaces.size(); i++) {
-    ModelFaceData* mfd = meshModelFaces[i];
+  int i = -1;
+  for (ModelFaceData* mfd : meshModelFaces) {
+    i += 1;
 
-    if (mfd->getOptionsSelected())
+    // if (mfd->getOptionsSelected())
       selectedModelID = static_cast<int>(i);
 
     glm::mat4 matrixModel = glm::mat4(1.0);

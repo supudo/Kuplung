@@ -111,6 +111,10 @@ int Kuplung::run() {
     }
     else
       frameCounter += 1;
+
+    // GLenum error = glGetError();
+    // if (error != GL_NO_ERROR)
+    //   Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung / run] glError = %i", error));
   }
 
   return 0;
