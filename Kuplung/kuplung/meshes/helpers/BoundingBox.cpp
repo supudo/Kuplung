@@ -12,8 +12,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-BoundingBox::BoundingBox()
-    : meshModel() {}
+BoundingBox::BoundingBox() : meshModel() {
+  this->min_x = 0;
+  this->max_x = 0;
+  this->min_y = 0;
+  this->max_y = 0;
+  this->min_z = 0;
+  this->max_z = 0;
+}
 
 BoundingBox::~BoundingBox() {
   glDetachShader(this->shaderProgram, this->shaderVertex);
@@ -145,8 +151,8 @@ void BoundingBox::render(const glm::mat4& matrixMVP, const glm::vec4& outlineCol
     glUniform3f(this->glUniformColor, outlineColor.r, outlineColor.g, outlineColor.b);
 
     glBindVertexArray(this->glVAO);
-    size_t firstIndex = 0;
-    size_t indexDataSize = sizeof(GLuint);
+    const size_t firstIndex = 0;
+    const size_t indexDataSize = sizeof(GLuint);
     glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(firstIndex * indexDataSize));
     glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(4 * indexDataSize));
     glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, reinterpret_cast<const GLvoid*>(8 * indexDataSize));

@@ -32,6 +32,8 @@ Shadertoy::~Shadertoy() {
   glDeleteShader(this->shaderFragment);
 
   glDeleteVertexArrays(1, &this->glVAO);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 Shadertoy::Shadertoy() {
@@ -160,6 +162,8 @@ void main() {\n\
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+
   return success;
 }
 
@@ -179,6 +183,8 @@ void Shadertoy::initBuffers() {
   this->initTextures();
 
   glBindVertexArray(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::initTextures() {
@@ -197,7 +203,7 @@ void Shadertoy::initTextures() {
   }
   if (!this->iChannel3_Image.empty()) {
     this->addTexture(this->iChannel3_Image, &this->iChannel3, tc);
-    //        tc += 1;
+    //tc += 1;
   }
 }
 
@@ -234,28 +240,30 @@ void Shadertoy::addTexture(std::string const& textureImage, GLuint* vboTexture, 
     glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
     stbi_image_free(tPixels);
     switch (textureID) {
-    case 0: {
-      this->iChannelResolution0[0] = tWidth;
-      this->iChannelResolution0[1] = tHeight;
-      break;
-    }
-    case 1: {
-      this->iChannelResolution1[0] = tWidth;
-      this->iChannelResolution1[1] = tHeight;
-      break;
-    }
-    case 2: {
-      this->iChannelResolution2[0] = tWidth;
-      this->iChannelResolution2[1] = tHeight;
-      break;
-    }
-    case 3: {
-      this->iChannelResolution3[0] = tWidth;
-      this->iChannelResolution3[1] = tHeight;
-      break;
-    }
+      case 0: {
+        this->iChannelResolution0[0] = tWidth;
+        this->iChannelResolution0[1] = tHeight;
+        break;
+      }
+      case 1: {
+        this->iChannelResolution1[0] = tWidth;
+        this->iChannelResolution1[1] = tHeight;
+        break;
+      }
+      case 2: {
+        this->iChannelResolution2[0] = tWidth;
+        this->iChannelResolution2[1] = tHeight;
+        break;
+      }
+      case 3: {
+        this->iChannelResolution3[0] = tWidth;
+        this->iChannelResolution3[1] = tHeight;
+        break;
+      }
     }
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) {
@@ -323,6 +331,8 @@ void Shadertoy::render(const int mouseX, const int mouseY, const float seconds) 
 
     glUseProgram(0);
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::initFBO(const int windowWidth, const int windowHeight, GLuint* vboTexture) {
@@ -355,11 +365,15 @@ void Shadertoy::initFBO(const int windowWidth, const int windowHeight, GLuint* v
     Settings::Instance()->funcDoLog("[Shadertoy] - Error creating FBO! - " + std::to_string(glCheckFramebufferStatus(GL_FRAMEBUFFER)));
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::bindFBO() {
   glBindFramebuffer(GL_FRAMEBUFFER, this->tFBO);
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::unbindFBO(GLuint* vboTexture) {
@@ -367,6 +381,8 @@ void Shadertoy::unbindFBO(GLuint* vboTexture) {
   glBindTexture(GL_TEXTURE_2D, *vboTexture);
   glGenerateMipmap(GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, 0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void Shadertoy::renderToTexture(const int mouseX, const int mouseY, const float seconds, GLuint* vboTexture) {

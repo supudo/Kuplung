@@ -78,7 +78,9 @@ void Settings::initSettings(const std::string& iniFolder) {
 #else
   m_pInstance->UseCuda = false;
 #endif
-  m_pInstance->shouldRecompileShaders = false;
+  m_pInstance->shouldRecompileShaders = m_pInstance->cfgUtils->readBool("shouldRecompileShaders");
+  m_pInstance->showGLErrors = m_pInstance->cfgUtils->readBool("showGLErrors");
+  m_pInstance->showFrameRenderTime = m_pInstance->cfgUtils->readBool("showFrameRenderTime");
 
   m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
   m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
@@ -219,6 +221,9 @@ void Settings::saveSettings() {
   this->cfgUtils->writeBool("showPickRaysSingle", this->showPickRaysSingle);
   this->cfgUtils->writeBool("Terrain_HeightmapImageHistory", this->Terrain_HeightmapImageHistory);
   this->cfgUtils->writeBool("UseCuda", this->UseCuda);
+  this->cfgUtils->writeBool("shouldRecompileShaders", this->shouldRecompileShaders);
+  this->cfgUtils->writeBool("showGLErrors", this->showGLErrors);
+  this->cfgUtils->writeBool("showFrameRenderTime", this->showFrameRenderTime);
 
   this->cfgUtils->writeBool("ShowBoundingBox", this->ShowBoundingBox);
   this->cfgUtils->writeFloat("BoundingBoxPadding", this->BoundingBoxPadding);
@@ -238,7 +243,7 @@ void Settings::saveSettings() {
   this->cfgUtils->saveSettings();
 }
 
-std::string Settings::string_format(const std::string fmt_str, ...) {
+std::string Settings::string_format(const std::string& fmt_str, ...) {
   int final_n, n = static_cast<int>(fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
   std::unique_ptr<char[]> formatted;
   va_list ap;

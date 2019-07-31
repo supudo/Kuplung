@@ -15,93 +15,82 @@
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 typedef enum ViewModelSkin {
-    ViewModelSkin_Solid,
-    ViewModelSkin_Material,
-    ViewModelSkin_Texture,
-    ViewModelSkin_Wireframe,
-    ViewModelSkin_Rendered
+  ViewModelSkin_Solid,
+  ViewModelSkin_Material,
+  ViewModelSkin_Texture,
+  ViewModelSkin_Wireframe,
+  ViewModelSkin_Rendered
 } ViewModelSkin;
 
 typedef enum LightSourceType {
-    LightSourceType_Directional,
-    LightSourceType_Point,
-    LightSourceType_Spot
+  LightSourceType_Directional,
+  LightSourceType_Point,
+  LightSourceType_Spot
 } LightSourceType;
 
 typedef enum MaterialTextureType {
-    MaterialTextureType_Undefined,
-    MaterialTextureType_Ambient,
-    MaterialTextureType_Diffuse,
-    MaterialTextureType_Dissolve,
-    MaterialTextureType_Bump,
-    MaterialTextureType_Specular,
-    MaterialTextureType_SpecularExp,
-    MaterialTextureType_Displacement
+  MaterialTextureType_Undefined,
+  MaterialTextureType_Ambient,
+  MaterialTextureType_Diffuse,
+  MaterialTextureType_Dissolve,
+  MaterialTextureType_Bump,
+  MaterialTextureType_Specular,
+  MaterialTextureType_SpecularExp,
+  MaterialTextureType_Displacement
 } MaterialTextureType;
 
 struct PixelDataPoint {
-    GLbyte color[4];
-    GLuint index;
-    GLfloat depth;
+  GLbyte color[4];
+  GLuint index;
+  GLfloat depth;
 };
 
 struct ObjectCoordinate {
-    bool animate;
-    float point;
-    ObjectCoordinate() { this->animate = false; this->point = 0.0f; }
-    ObjectCoordinate(bool a, float p) : animate(a), point(p) { this->animate = a; this->point = p; }
+  bool animate;
+  float point;
+  ObjectCoordinate() : animate(false), point(0.0f) { }
+  ObjectCoordinate(bool a, float p) : animate(a), point(p) { }
 };
 
 struct ObjectEye {
-    glm::vec3 View_Eye;
-    glm::vec3 View_Center;
-    glm::vec3 View_Up;
+  glm::vec3 View_Eye;
+  glm::vec3 View_Center;
+  glm::vec3 View_Up;
 };
 
 struct MaterialColor {
-    bool colorPickerOpen;
-    bool animate;
-    float strength;
-    glm::vec3 color;
-    MaterialColor()
-        { this->colorPickerOpen = false; this->animate = false; this->strength = 0.0f; this->color = glm::vec3(1, 1, 1); }
-    MaterialColor(bool cpo, bool a, float s, glm::vec3 c) : colorPickerOpen(cpo), animate(a), strength(s), color(c)
-        { this->colorPickerOpen = cpo; this->animate = a; this->strength = s; this->color = c; }
+  bool colorPickerOpen;
+  bool animate;
+  float strength;
+  glm::vec3 color;
+  MaterialColor() : colorPickerOpen(false), animate(false), strength(0.0f), color(glm::vec3(1, 1, 1)) {}
+  MaterialColor(bool cpo, bool a, float s, glm::vec3 c) : colorPickerOpen(cpo), animate(a), strength(s), color(c) {}
 };
 
 struct Skybox_Item {
-    std::string title;
-    std::vector<std::string> images;
+  std::string title;
+  std::vector<std::string> images;
 };
 
 std::string static Kuplung_getTextureName(MaterialTextureType texType) {
-    std::string texName("");
-    switch (texType) {
-        case MaterialTextureType_Ambient:
-            texName = "Ambient";
-            break;
-        case MaterialTextureType_Diffuse:
-            texName = "Diffuse";
-            break;
-        case MaterialTextureType_Dissolve:
-            texName = "Dissolve";
-            break;
-        case MaterialTextureType_Bump:
-            texName = "Normal";
-            break;
-        case MaterialTextureType_Specular:
-            texName = "Specular";
-            break;
-        case MaterialTextureType_SpecularExp:
-            texName = "Specular Exp";
-            break;
-        case MaterialTextureType_Displacement:
-            texName = "Displacement";
-            break;
-        default:
-            break;
-    }
-    return texName;
+  switch (texType) {
+    case MaterialTextureType_Ambient:
+      return "Ambient";
+    case MaterialTextureType_Diffuse:
+      return "Diffuse";
+    case MaterialTextureType_Dissolve:
+      return "Dissolve";
+    case MaterialTextureType_Bump:
+      return "Normal";
+    case MaterialTextureType_Specular:
+      return "Specular";
+    case MaterialTextureType_SpecularExp:
+      return "Specular Exp";
+    case MaterialTextureType_Displacement:
+      return "Displacement";
+    default:
+      return "";
+  }
 }
 
 #endif /* ObjectDefinitions_h */

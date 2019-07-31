@@ -33,6 +33,8 @@ Spaceship::~Spaceship() {
   glDeleteShader(this->shaderFragment);
 
   glDeleteVertexArrays(1, &this->glVAO);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 #pragma mark - Initialization
@@ -105,6 +107,8 @@ bool Spaceship::initShaderProgram() {
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+
   return success;
 }
 
@@ -152,6 +156,8 @@ void Spaceship::initBuffers(const int gridSize) {
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, this->spaceshipGenerator->indices.size() * sizeof(GLuint), &this->spaceshipGenerator->indices[0], GL_STATIC_DRAW);
 
   glBindVertexArray(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 #pragma mark - Render
@@ -194,4 +200,6 @@ void Spaceship::render(const glm::mat4& matrixProjection, const glm::mat4& matri
 
     glUseProgram(0);
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }

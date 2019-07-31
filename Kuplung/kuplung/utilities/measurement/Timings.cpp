@@ -8,29 +8,33 @@
 
 #include "Timings.hpp"
 
-namespace KuplungApp { namespace Utilities { namespace Measurement {
+namespace KuplungApp {
+namespace Utilities {
+namespace Measurement {
 
 std::chrono::high_resolution_clock::time_point tStart;
 std::chrono::high_resolution_clock::time_point tEnd;
 
 void timingStart() {
-    tStart = std::chrono::high_resolution_clock::now();
+  tStart = std::chrono::high_resolution_clock::now();
 }
 
 void timingEnd() {
-    tEnd = std::chrono::high_resolution_clock::now();
+  tEnd = std::chrono::high_resolution_clock::now();
 }
 
 void timingPrint() {
-    auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
-    auto duration_seconds = durationMS * pow(10, -6);
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f seconds", duration_seconds));
+  auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
+  auto duration_seconds = durationMS * pow(10, -6);
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f seconds", duration_seconds));
 }
 
 void timingPrintPretty(const char* fileName, const char* functionName, const int lineNumber) {
-    auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
-    auto durationS = durationMS * pow(10, -6);
-    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f s: [%s] @ [%s] on line [%i]", durationS, fileName, functionName, lineNumber));
+  auto durationMS = std::chrono::duration_cast<std::chrono::microseconds>(tEnd - tStart).count();
+  auto durationS = durationMS * pow(10, -6);
+  Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] %f s: [%s] @ [%s] on line [%i]", durationS, fileName, functionName, lineNumber));
 }
 
-}}}
+} // namespace Measurement
+} // namespace Utilities
+} // namespace KuplungApp

@@ -10,8 +10,7 @@
 #include <fstream>
 #include <glm/gtc/type_ptr.hpp>
 
-RenderingDeferred::RenderingDeferred(ObjectsManager& managerObjects)
-    : managerObjects(managerObjects) {
+RenderingDeferred::RenderingDeferred(ObjectsManager& managerObjects) : managerObjects(managerObjects) {
   this->GLSL_LightSourceNumber_Directional = 0;
   this->GLSL_LightSourceNumber_Point = 0;
   this->GLSL_LightSourceNumber_Spot = 0;
@@ -43,6 +42,8 @@ RenderingDeferred::~RenderingDeferred() {
   for (size_t i = 0; i < this->mfLights_Spot.size(); i++) {
     this->mfLights_Spot[i].reset();
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 bool RenderingDeferred::init() {
@@ -91,6 +92,8 @@ bool RenderingDeferred::initGeometryPass() {
   this->gl_GeometryPass_Texture_Diffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_diffuse");
   this->gl_GeometryPass_Texture_Specular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram_GeometryPass, "texture_specular");
 
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+
   return true;
 }
 
@@ -119,6 +122,8 @@ bool RenderingDeferred::initLighingPass() {
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram_LightingPass);
     return false;
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 
   return true;
 }
@@ -149,6 +154,8 @@ bool RenderingDeferred::initLightObjects() {
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram_LightBox);
     return false;
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
   return true;
 }
 
@@ -198,6 +205,8 @@ bool RenderingDeferred::initProps() {
     GLfloat bColor = ((rand() % 100) / 200.0f) + 0.5f; // Between 0.5 and 1.0
     this->lightColors.push_back(glm::vec3(rColor, gColor, bColor));
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 
   return result;
 }
@@ -254,6 +263,8 @@ bool RenderingDeferred::initGBuffer() {
   }
 
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 
   return result;
 }
@@ -323,6 +334,8 @@ bool RenderingDeferred::initLights() {
     this->mfLights_Spot.push_back(std::move(f));
   }
 
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+
   return result;
 }
 
@@ -342,6 +355,8 @@ void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces
     glBlitFramebuffer(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
@@ -420,6 +435,8 @@ void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshMod
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void RenderingDeferred::renderLightingPass() {
@@ -583,6 +600,8 @@ void RenderingDeferred::renderLightingPass() {
   glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "ambientStrength"), this->managerObjects.Setting_DeferredAmbientStrength);
   glUniform1f(glGetUniformLocation(this->shaderProgram_LightingPass, "gammaCoeficient"), this->managerObjects.Setting_GammaCoeficient);
   this->renderQuad();
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void RenderingDeferred::renderLightObjects() {
@@ -607,6 +626,8 @@ void RenderingDeferred::renderLightObjects() {
     glUniform3fv(glGetUniformLocation(this->shaderProgram_LightBox, "lightColor"), 1, &this->lightColors[i][0]);
     this->renderCube();
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void RenderingDeferred::renderQuad() {
@@ -629,6 +650,8 @@ void RenderingDeferred::renderQuad() {
   glBindVertexArray(this->quadVAO);
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glBindVertexArray(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 void RenderingDeferred::renderCube() {
@@ -697,4 +720,6 @@ void RenderingDeferred::renderCube() {
   glBindVertexArray(this->cubeVAO);
   glDrawArrays(GL_TRIANGLES, 0, 36);
   glBindVertexArray(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }

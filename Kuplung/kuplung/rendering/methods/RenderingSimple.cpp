@@ -10,8 +10,7 @@
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-RenderingSimple::RenderingSimple(ObjectsManager& managerObjects)
-    : managerObjects(managerObjects) {}
+RenderingSimple::RenderingSimple(ObjectsManager& managerObjects) : managerObjects(managerObjects) {}
 
 RenderingSimple::~RenderingSimple() {
   glDeleteProgram(this->shaderProgram);
@@ -88,6 +87,8 @@ bool RenderingSimple::init() {
     this->solidLight->gl_StrengthDiffuse = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthDiffuse");
     this->solidLight->gl_StrengthSpecular = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "solidSkin_Light.strengthSpecular");
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
   return true;
 }
 
@@ -154,4 +155,6 @@ void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, 
   }
 
   glUseProgram(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }

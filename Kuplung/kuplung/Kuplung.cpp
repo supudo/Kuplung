@@ -74,7 +74,7 @@ int Kuplung::run() {
     return 1;
 
   SDL_Event ev;
-  int frameCounter = 0;
+  int frameCounter = 1;
 
   while (this->gameIsRunning) {
     float fts = (1.0 * std::clock() / CLOCKS_PER_SEC);
@@ -103,18 +103,16 @@ int Kuplung::run() {
     if (this->gameIsRunning == false)
       break;
 
-    if (frameCounter == 100) {
-      float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
-      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : %f ms (%f seconds)", (fte - fts) * 1000, (fte - fts)));
-      // Settings::Instance()->logTimings(__FILE__, __func__);
-      frameCounter = 0;
+    if (Settings::Instance()->showFrameRenderTime) {
+      if (frameCounter > ImGui::GetIO().Framerate) {
+        float fte = (1.0 * std::clock() / CLOCKS_PER_SEC);
+        Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[TIMINGS] FRAME draw time : %f ms (%f seconds)", (fte - fts) * 1000, (fte - fts)));
+        // Settings::Instance()->logTimings(__FILE__, __func__);
+        frameCounter = 1;
+      }
+      else
+        frameCounter += 1;
     }
-    else
-      frameCounter += 1;
-
-    // GLenum error = glGetError();
-    // if (error != GL_NO_ERROR)
-    //   Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung / run] glError = %i", error));
   }
 
   return 0;
@@ -194,18 +192,18 @@ bool Kuplung::init() {
           this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
           this->managerUI->init(this->sdlWindow, this->glContext, std::bind(&Kuplung::guiQuit, this), std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Kuplung::guiClearScreen, this), std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1), std::bind(&Kuplung::addShape, this, std::placeholders::_1), std::bind(&Kuplung::addLight, this, std::placeholders::_1), std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4), std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1), std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1), std::bind(&Kuplung::saveScene, this, std::placeholders::_1), std::bind(&Kuplung::openScene, this, std::placeholders::_1));
           this->managerUI->meshModelFaces = &this->meshModelFaces;
-          this->doLog("UI initialized.");
+          this->doLog("[INIT] UI initialized.");
 
           this->managerObjects->loadSystemModels(this->parser);
-          this->doLog("Objects Manager initialized.");
+          this->doLog("[INIT] Objects Manager initialized.");
 
           this->managerControls = std::make_unique<KuplungApp::Utilities::Input::Controls>();
           this->managerControls->init(this->sdlWindow);
-          this->doLog("Input Control Manager initialized.");
+          this->doLog("[INIT] Input Control Manager initialized.");
 
           this->fontParser = std::make_unique<KuplungApp::Utilities::FontParser::FNTParser>();
           this->fontParser->init();
-          this->doLog("Font Parser Initialized.");
+          this->doLog("[INIT] Font Parser Initialized.");
 
           this->gameIsRunning = true;
           this->sceneSelectedModelObject = -1;
@@ -568,57 +566,57 @@ void Kuplung::addShape(const ShapeType type) {
   std::string shapeName("");
   assert(type >= ShapeType_BrickWall && type <= ShapeType_UVSphere);
   switch (type) {
-  case ShapeType_Cone:
-    shapeName = "cone";
-    break;
-  case ShapeType_Cube:
-    shapeName = "cube";
-    break;
-  case ShapeType_Cylinder:
-    shapeName = "cylinder";
-    break;
-  case ShapeType_Grid:
-    shapeName = "grid";
-    break;
-  case ShapeType_IcoSphere:
-    shapeName = "ico_sphere";
-    break;
-  case ShapeType_MonkeyHead:
-    shapeName = "monkey_head";
-    break;
-  case ShapeType_Plane:
-    shapeName = "plane";
-    break;
-  case ShapeType_Triangle:
-    shapeName = "triangle";
-    break;
-  case ShapeType_Torus:
-    shapeName = "torus";
-    break;
-  case ShapeType_Tube:
-    shapeName = "tube";
-    break;
-  case ShapeType_UVSphere:
-    shapeName = "uv_sphere";
-    break;
-  case ShapeType_BrickWall:
-    shapeName = "brick_wall";
-    break;
-  case ShapeType_PlaneObjects:
-    shapeName = "plane_objects";
-    break;
-  case ShapeType_PlaneObjectsLargePlane:
-    shapeName = "plane_objects_large";
-    break;
-  case ShapeType_MaterialBall:
-    shapeName = "MaterialBall";
-    break;
-  case ShapeType_MaterialBallBlender:
-    shapeName = "MaterialBallBlender";
-    break;
-  case ShapeType_Epcot:
-    shapeName = "epcot";
-    break;
+    case ShapeType_Cone:
+      shapeName = "cone";
+      break;
+    case ShapeType_Cube:
+      shapeName = "cube";
+      break;
+    case ShapeType_Cylinder:
+      shapeName = "cylinder";
+      break;
+    case ShapeType_Grid:
+      shapeName = "grid";
+      break;
+    case ShapeType_IcoSphere:
+      shapeName = "ico_sphere";
+      break;
+    case ShapeType_MonkeyHead:
+      shapeName = "monkey_head";
+      break;
+    case ShapeType_Plane:
+      shapeName = "plane";
+      break;
+    case ShapeType_Triangle:
+      shapeName = "triangle";
+      break;
+    case ShapeType_Torus:
+      shapeName = "torus";
+      break;
+    case ShapeType_Tube:
+      shapeName = "tube";
+      break;
+    case ShapeType_UVSphere:
+      shapeName = "uv_sphere";
+      break;
+    case ShapeType_BrickWall:
+      shapeName = "brick_wall";
+      break;
+    case ShapeType_PlaneObjects:
+      shapeName = "plane_objects";
+      break;
+    case ShapeType_PlaneObjectsLargePlane:
+      shapeName = "plane_objects_large";
+      break;
+    case ShapeType_MaterialBall:
+      shapeName = "MaterialBall";
+      break;
+    case ShapeType_MaterialBallBlender:
+      shapeName = "MaterialBallBlender";
+      break;
+    case ShapeType_Epcot:
+      shapeName = "epcot";
+      break;
   }
   FBEntity shapeFile;
   shapeFile.isFile = true;
@@ -647,7 +645,7 @@ void Kuplung::guiProcessImportedFile(const FBEntity& file, const std::vector<std
   this->objParserThreadProcessed = false;
   std::thread filejParserThread(&Kuplung::processImportFileAsync, this, file, settings);
   filejParserThread.detach();
-  this->doLog("Starting parsing " + file.title);
+  this->doLog("[LOADER] Starting parsing " + file.title);
 }
 
 void Kuplung::processImportFileAsync(const FBEntity& file, const std::vector<std::string>& settings) {
@@ -675,7 +673,7 @@ void Kuplung::exportSceneFinished() {
 
 void Kuplung::processParsedImportedFile() {
   if (this->objFiles.size() > 0) {
-    this->doLog(this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
+    this->doLog("[LOADER]" + this->objFiles[this->objFiles.size() - 1].title + " was parsed successfully.");
     this->managerUI->hideParsing();
     this->managerUI->showLoading();
     this->managerUI->recentFilesAddImported(this->objFiles[this->objFiles.size() - 1]);

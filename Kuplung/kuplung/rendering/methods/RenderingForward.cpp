@@ -56,6 +56,8 @@ RenderingForward::~RenderingForward() {
   for (size_t i = 0; i < this->mfLights_Spot.size(); i++) {
     this->mfLights_Spot[i].reset();
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 bool RenderingForward::init() {
@@ -260,6 +262,8 @@ bool RenderingForward::initShaderProgram() {
     this->glPBR_Rougness = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_Roughness");
     this->glPBR_AO = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_PBR_AO");
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 
   return success;
 }
@@ -921,4 +925,6 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
   }
 
   glUseProgram(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }

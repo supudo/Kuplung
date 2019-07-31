@@ -9,21 +9,21 @@
 #ifndef DialogOptions_hpp
 #define DialogOptions_hpp
 
-#include "kuplung/utilities/imgui/imgui.h"
-#include "kuplung/ui/dialogs/DialogStyle.hpp"
-#include "kuplung/settings/Settings.h"
 #include "kuplung/settings/FontsList.hpp"
+#include "kuplung/settings/Settings.h"
+#include "kuplung/ui/dialogs/DialogStyle.hpp"
+#include "kuplung/utilities/imgui/imgui.h"
 
 class DialogOptions {
 public:
-    void init();
-    void showOptionsWindow(ImGuiStyle* ref, DialogStyle *wStyle, bool* p_opened = NULL, bool* needsFontChange = NULL);
-    void loadFonts(bool* needsFontChange = NULL);
+  void init();
+  void showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool* p_opened = NULL, bool* needsFontChange = NULL);
+  void loadFonts(bool* needsFontChange = NULL);
 
 private:
-    std::unique_ptr<FontsList> fontLister;
+  std::unique_ptr<FontsList> fontLister;
 
-    int optionsFontSelected, optionsFontSizeSelected, optionsRendererType, optionsGUIProvider, optionsSceneExporters;
+  int optionsFontSelected, optionsFontSizeSelected, optionsRendererType, optionsGUIProvider, optionsSceneExporters;
 };
 
 #endif /* DialogOptions_hpp */

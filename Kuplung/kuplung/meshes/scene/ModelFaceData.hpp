@@ -13,22 +13,22 @@
 
 class ModelFaceData: public ModelFaceBase {
 public:
-    ~ModelFaceData();
-    void init(MeshModel const& model, std::string const& assetsFolder);
-    void initBuffers();
-    void renderModel(const bool useTessellation);
+  ~ModelFaceData();
+  void init(MeshModel const& model, std::string const& assetsFolder);
+  void initBuffers();
+  void renderModel(const bool useTessellation);
 
-    bool vertexSphereVisible, vertexSphereIsSphere, vertexSphereShowWireframes;
-    float vertexSphereRadius;
-    int vertexSphereSegments;
-    glm::vec4 vertexSphereColor;
-    GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
+  bool vertexSphereVisible, vertexSphereIsSphere, vertexSphereShowWireframes;
+  float vertexSphereRadius;
+  int vertexSphereSegments;
+  glm::vec4 vertexSphereColor;
+  GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
 
-    glm::mat4 matrixGrid;
+  glm::mat4 matrixGrid;
 
 private:
-    GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
+  GLuint glVAO;
+  GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
 };
 
 #endif /* ModelFaceData_hpp */

@@ -26,8 +26,7 @@ AxisHelpers::~AxisHelpers() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-AxisHelpers::AxisHelpers()
-    : meshModel() {
+AxisHelpers::AxisHelpers() : meshModel() {
   this->initProperties();
 }
 

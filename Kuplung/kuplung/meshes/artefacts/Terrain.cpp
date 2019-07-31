@@ -33,6 +33,8 @@ Terrain::~Terrain() {
   glDeleteShader(this->shaderFragment);
 
   glDeleteVertexArrays(1, &this->glVAO);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 #pragma mark - Initialization
@@ -90,6 +92,8 @@ bool Terrain::initShaderProgram() {
   glDisable(GL_BLEND);
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
+
   return success;
 }
 
@@ -136,21 +140,21 @@ void Terrain::initBuffers(std::string const& assetsFolder, const int width, cons
     glGenerateMipmap(GL_TEXTURE_2D);
     GLint textureFormat = 0;
     switch (tChannels) {
-    case 1:
-      textureFormat = GL_LUMINANCE;
-      break;
-    case 2:
-      textureFormat = GL_LUMINANCE_ALPHA;
-      break;
-    case 3:
-      textureFormat = GL_RGB;
-      break;
-    case 4:
-      textureFormat = GL_RGBA;
-      break;
-    default:
-      textureFormat = GL_RGB;
-      break;
+      case 1:
+        textureFormat = GL_LUMINANCE;
+        break;
+      case 2:
+        textureFormat = GL_LUMINANCE_ALPHA;
+        break;
+      case 3:
+        textureFormat = GL_RGB;
+        break;
+      case 4:
+        textureFormat = GL_RGBA;
+        break;
+      default:
+        textureFormat = GL_RGB;
+        break;
     }
     glTexImage2D(GL_TEXTURE_2D, 0, textureFormat, tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
     stbi_image_free(tPixels);
@@ -169,6 +173,8 @@ void Terrain::initBuffers(std::string const& assetsFolder, const int width, cons
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->terrainGenerator->indices.size() * sizeof(GLuint)), &this->terrainGenerator->indices[0], GL_STATIC_DRAW);
 
   glBindVertexArray(0);
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
 #pragma mark - Render
@@ -200,4 +206,6 @@ void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixC
 
     glUseProgram(0);
   }
+
+  Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }

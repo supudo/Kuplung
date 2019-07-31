@@ -30,7 +30,7 @@ public:
   static Settings* Instance();
 	void initSettings(const std::string& iniFolder);
   void saveSettings();
-  std::string string_format(const std::string fmt_str, ...);
+  std::string string_format(const std::string& fmt_str, ...);
   std::string appFolder();
   bool isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions = std::vector<std::string>());
   bool isAllowedStyleExtension(std::string fileExtension);
@@ -63,7 +63,8 @@ public:
   float mRayDirectionX, mRayDirectionY, mRayDirectionZ;
   bool UseCuda;
 	ImportExportFormats ImportExportFormat;
-	bool shouldRecompileShaders;
+  bool showFrameRenderTime;
+	bool shouldRecompileShaders, showGLErrors;
 
   void timerStart(const std::string& msg);
   void timerEnd(const std::string& msg);
