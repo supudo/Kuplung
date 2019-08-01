@@ -46,7 +46,8 @@ ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
       if (singleLine.empty() || std::regex_match(singleLine, regex_comment)) {
         fileContents.erase(0, pos + Settings::Instance()->newLineDelimiter.length());
         continue;
-      } else {
+      }
+      else {
         std::string opKey, opValue;
         std::vector<std::string> lineElements = this->splitString(singleLine, regex_equalsSign);
         opKey = lineElements[0];
@@ -55,7 +56,8 @@ ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
         if (lineElements.size() > 1) {
           opValue = lineElements[1];
           boost::algorithm::trim(opValue);
-        } else
+        }
+        else
           opValue.clear();
 
         boost::replace_all(opKey, "style.rendering.", "");
@@ -186,10 +188,16 @@ std::vector<std::string> DialogStyle::splitString(const std::string& s, const st
 
 ImVec4 DialogStyle::tov4(const std::string& opValue) {
   std::vector<std::string> values = this->splitString(opValue, std::regex(","));
-  return ImVec4(std::stof(values[0]), std::stof(values[1]), std::stof(values[2]), std::stof(values[3]));
+  if (values.size() == 4)
+    return ImVec4(std::stof(values[0]), std::stof(values[1]), std::stof(values[2]), std::stof(values[3]));
+  else
+    return ImVec4(0, 0, 0, 0);
 }
 
 ImVec2 DialogStyle::tov2(const std::string& opValue) {
   std::vector<std::string> values = this->splitString(opValue, std::regex(","));
-  return ImVec2(std::stof(values[0]), std::stof(values[1]));
+  if (values.size() == 2)
+    return ImVec2(std::stof(values[0]), std::stof(values[1]));
+  else
+    return ImVec2(0, 0);
 }
