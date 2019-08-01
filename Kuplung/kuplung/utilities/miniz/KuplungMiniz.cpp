@@ -16,55 +16,49 @@ KuplungMiniz::~KuplungMiniz(void) {
 }
 
 void KuplungMiniz::closeZipFile() {
-    mz_zip_writer_finalize_archive(&this->zipFile);
-    mz_zip_writer_end(&this->zipFile);
+  mz_zip_writer_finalize_archive(&this->zipFile);
+  mz_zip_writer_end(&this->zipFile);
 }
 
 void KuplungMiniz::createZipFile(const std::string& zipFilename) {
-    memset(&this->zipFile, 0, sizeof(mz_zip_archive));
-    mz_zip_writer_init_file(&this->zipFile, zipFilename.c_str(), 0);
-
+  memset(&this->zipFile, 0, sizeof(mz_zip_archive));
+  mz_zip_writer_init_file(&this->zipFile, zipFilename.c_str(), 0);
 }
 
 int KuplungMiniz::addFileToArchive(const std::string& contentPath, const std::string& zipPath) {
-    if (!mz_zip_writer_add_file(&this->zipFile, zipPath.c_str(), contentPath.c_str(), "", 0, MZ_BEST_COMPRESSION)) {
-        Settings::Instance()->funcDoLog("[Kuplung-Miniz-Add] failed!");
-        return 1;
-    }
-    return 0;
+  if (!mz_zip_writer_add_file(&this->zipFile, zipPath.c_str(), contentPath.c_str(), "", 0, MZ_BEST_COMPRESSION)) {
+    Settings::Instance()->funcDoLog("[Kuplung-Miniz-Add] failed!");
+    return 1;
+  }
+  return 0;
 }
 
 bool KuplungMiniz::unzipArchive(std::string const& archiveFile, std::string const& archiveFolder) {
-    std::string fullArchivePath = archiveFolder + "/" + archiveFile;
-    std::ifstream zipFileStream(fullArchivePath, std::ios::binary | std::ios::in);
-    if (zipFileStream) {
-        zipFileStream.seekg(0, std::ios::end);
-        std::streampos filesize = zipFileStream.tellg();
-        zipFileStream.seekg(0, std::ios::beg);
+  std::string fullArchivePath = archiveFolder + "/" + archiveFile;
+  std::ifstream zipFileStream(fullArchivePath, std::ios::binary | std::ios::in);
+  if (zipFileStream) {
+    zipFileStream.seekg(0, std::ios::end);
+    std::streampos filesize = zipFileStream.tellg();
+    zipFileStream.seekg(0, std::ios::beg);
 
-        uint8_t* _buffer = new uint8_t[(uint32_t)filesize];
-        zipFileStream.read((char*)_buffer, filesize);
+    uint8_t* _buffer = new uint8_t[(uint32_t)filesize];
+    zipFileStream.read((char*)_buffer, filesize);
 
-        mz_zip_archive zipFile;
-        memset(&zipFile, 0, sizeof(mz_zip_archive));
-        if (mz_zip_reader_init_mem(&zipFile, _buffer, (size_t)filesize, 0) != 0) {
+    mz_zip_archive zipFile;
+    memset(&zipFile, 0, sizeof(mz_zip_archive));
+    if (mz_zip_reader_init_mem(&zipFile, _buffer, (size_t)filesize, 0) != 0) {
+      for (int i = 0, len = (int)mz_zip_reader_get_num_files(&zipFile); i < len; i++) {
+        mz_zip_archive_file_stat file_stat;
+        if (!mz_zip_reader_file_stat(&zipFile, i, &file_stat))
+          Settings::Instance()->funcDoLog("[Kuplung-Miniz-unzipArchive] mz_zip_reader_file_stat failed!");
 
-            for (int i = 0, len = (int)mz_zip_reader_get_num_files(&zipFile); i < len; i++) {
-                mz_zip_archive_file_stat file_stat;
-                if (!mz_zip_reader_file_stat(&zipFile, i, &file_stat))
-                    Settings::Instance()->funcDoLog("[Kuplung-Miniz-unzipArchive] mz_zip_reader_file_stat failed!");
-
-
-                std::string unzippedFile = archiveFolder + "/" + std::string(file_stat.m_filename);
-                if (!mz_zip_reader_extract_to_file(&zipFile, i, unzippedFile.c_str(), 0))
-                    Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] unzippedFile failed - %s!", unzippedFile.c_str()));
-            }
-        }
+        std::string unzippedFile = archiveFolder + "/" + std::string(file_stat.m_filename);
+        if (!mz_zip_reader_extract_to_file(&zipFile, i, unzippedFile.c_str(), 0))
+          Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[Kuplung-Miniz-unzipArchive] unzippedFile failed - %s!", unzippedFile.c_str()));
+      }
     }
-    return true;
-
-
-
+  }
+  return true;
 
 
     /*

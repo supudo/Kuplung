@@ -15,7 +15,7 @@
 #include <glm/gtx/matrix_decompose.hpp>
 
 RenderingForwardShadowMapping::RenderingForwardShadowMapping(ObjectsManager& managerObjects)
-    : managerObjects(managerObjects) {
+    : managerObjects(managerObjects)  {
   this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
   this->GLSL_LightSourceNumber_Directional = 0;
   this->GLSL_LightSourceNumber_Point = 0;

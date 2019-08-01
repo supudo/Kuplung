@@ -137,10 +137,9 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
     return false;
   }
 
-  int currentModelID = 0;
   MeshModel entityModel;
   entityModel.File = file;
-  entityModel.ID = currentModelID;
+  entityModel.ID = 0;
   entityModel.ModelTitle = file.title;
   entityModel.countVertices = 0;
   entityModel.countTextureCoordinates = 0;
@@ -209,7 +208,6 @@ bool STLParser::loadBinaryFile(const FBEntity& file, unsigned int fileSize) {
   entityModel.countNormals = int(entityModel.normals.size());
   entityModel.countVertices = int(entityModel.vertices.size());
 
-  currentModelID += 1;
   this->models.push_back(entityModel);
 
   stl_file_data.close();
@@ -222,10 +220,9 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
 
   bool result = true;
 
-  int currentModelID = 0;
   MeshModel entityModel;
   entityModel.File = file;
-  entityModel.ID = currentModelID;
+  entityModel.ID = 0;
   entityModel.ModelTitle = file.title;
   entityModel.countVertices = 0;
   entityModel.countTextureCoordinates = 0;
@@ -273,7 +270,6 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
   entityModel.countNormals = int(entityModel.normals.size());
   entityModel.countVertices = int(entityModel.vertices.size());
 
-  currentModelID += 1;
   this->models.push_back(entityModel);
 
   return result;

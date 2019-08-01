@@ -126,10 +126,10 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->Setting_CurrentDriveIndex = 0;
   m_pInstance->Setting_SelectedDriveIndex = 0;
   m_pInstance->hddDriveList.empty();
-  int dc = 0;
   DWORD drives = ::GetLogicalDrives();
   if (drives) {
     char drive[] = "?";
+    int dc = 0;
     for (int i = 0; i < 26; i++) {
       if (drives & (1 << i)) {
         drive[0] = 'A' + i;
@@ -149,10 +149,8 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->AssimpSupportedFormats_Import.empty();
   std::unique_ptr<Assimp::Importer> aImporter = std::make_unique<Assimp::Importer>();
   size_t aImporter_num = aImporter->GetImporterCount();
-  const aiImporterDesc* aiImporterDesc;
-  std::string delimiter(" ");
   for (size_t i = 0; i < aImporter_num; i++) {
-    aiImporterDesc = aImporter->GetImporterInfo(i);
+    const aiImporterDesc* aiImporterDesc = aImporter->GetImporterInfo(i);
     std::string textensions(aiImporterDesc->mFileExtensions);
     std::transform(textensions.begin(), textensions.end(), textensions.begin(), ::toupper);
     std::vector<std::string> elems;
@@ -170,9 +168,8 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->AssimpSupportedFormats_Export.empty();
   std::unique_ptr<Assimp::Exporter> aExporter = std::make_unique<Assimp::Exporter>();
   size_t aExporter_num = aExporter->GetExportFormatCount();
-  const aiExportFormatDesc* aiExporterDesc;
   for (size_t i = 0; i < aExporter_num; i++) {
-    aiExporterDesc = aExporter->GetExportFormatDescription(i);
+    const aiExportFormatDesc* aiExporterDesc = aExporter->GetExportFormatDescription(i);
     std::string fe = std::string(aiExporterDesc->fileExtension);
     std::transform(fe.begin(), fe.end(), fe.begin(), ::toupper);
     SupportedAssimpFormat af = {aiExporterDesc->id, aiExporterDesc->description, "." + fe};
@@ -244,14 +241,14 @@ void Settings::saveSettings() {
 }
 
 std::string Settings::string_format(const std::string& fmt_str, ...) {
-  int final_n, n = static_cast<int>(fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
+  int n = static_cast<int>(fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
   std::unique_ptr<char[]> formatted;
   va_list ap;
   while (1) {
     formatted.reset(new char[n]); /* Wrap the plain char array into the unique_ptr */
     strcpy(&formatted[0], fmt_str.c_str());
     va_start(ap, fmt_str);
-    final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
+    int final_n = vsnprintf(&formatted[0], n, fmt_str.c_str(), ap);
     va_end(ap);
     if (final_n < 0 || final_n >= n)
       n += abs(final_n - n + 1);
