@@ -107,10 +107,11 @@ ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) {
           else if (opKey == "GrabRounding")
             style.GrabRounding = std::stof(opValue);
 
-          else
+          else if (opKey != "" && opKey.substr(0, 1) != "#")
             style.Colors[std::stoi(opKey)] = this->tov4(opValue);
         } catch (...) {
-          Settings::Instance()->funcDoLog("[GUI Style] Can't load default GUI styles - [" + opKey + "] with value [" + opValue + "]!");
+          if (opKey != "" && opKey.substr(0, 1) != "#")
+            Settings::Instance()->funcDoLog("[GUI Style] Can't load default GUI styles - [" + opKey + "] with value [" + opValue + "]!");
         }
       }
 
