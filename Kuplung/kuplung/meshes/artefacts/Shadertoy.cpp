@@ -140,7 +140,7 @@ void main() {\n\
     this->iGlobalTime = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iGlobalTime");
     this->iTimeDelta = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iTimeDelta");
     this->iFrameRate = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iFrameRate");
-    this->iFrame = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "iFrame");
+    this->iFrame = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iFrame");
     this->iChannelTime[0] = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[0]");
     this->iChannelTime[1] = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[1]");
     this->iChannelTime[2] = Settings::Instance()->glUtils->glGetUniformNoWarning(this->shaderProgram, "iChannelTime[2]");
