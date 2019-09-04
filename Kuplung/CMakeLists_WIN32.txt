@@ -537,7 +537,16 @@ SET(Kuplung_Lua
 SET(Kuplung_RC
     resources/kuplung.rc)
 
-ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
+# protobuf generation
+FILE(GLOB PROTOBUF_DEFINITION_FILES "resources/protobuf/*.proto")
+SET(PROTOBUF_INPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/resources/protobuf/")
+SET(PROTOBUF_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/kuplung/utilities/saveopen/")
+FOREACH(PROTO_FILE ${PROTOBUF_DEFINITION_FILES})
+  EXECUTE_PROCESS(COMMAND protoc --proto_path=${PROTOBUF_INPUT_DIRECTORY} --cpp_out=${PROTOBUF_OUTPUT_DIRECTORY} ${PROTO_FILE})
+ENDFOREACH()
+FILE(GLOB PROTOBUF_MODELS "kuplung/utilities/saveopen/*.pb.cc" "kuplung/utilities/saveopen/*.hpp")
+
+ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} ${PROTOBUF_MODELS} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
 
 SET(KuplungResources_PWD_WIN "/resources")
 SET(KuplungResources_DESTDIR_WIN "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/resources")

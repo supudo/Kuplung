@@ -29,70 +29,70 @@
 class Kuplung {
 public:
 	Kuplung();
-    ~Kuplung();
-    int run();
+  ~Kuplung();
+  int run();
 
 private:
-    bool init();
-    void initFolders();
-    void onEvent(SDL_Event* ev);
-    void processImportFileAsync(const FBEntity& file, const std::vector<std::string> &settings);
-    void processParsedImportedFile();
-    void renderScene();
-    void renderSceneModels();
-    void initSceneGUI();
-    void doLog(std::string const& logMessage);
-    void doProgress(float value);
-    void processRunningThreads();
-    void addShape(const ShapeType type);
-    void addLight(const LightSourceType type);
-    void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
-    void exportSceneFinished();
-    void addTerrainModel();
-    void addSpaceshipModel();
-    void saveScene(const FBEntity& file);
-    void openScene(const FBEntity& file);
+  bool init();
+  void initFolders();
+  void onEvent(SDL_Event* ev);
+  void processImportFileAsync(const FBEntity& file, const std::vector<std::string> &settings);
+  void processParsedImportedFile();
+  void renderScene();
+  void renderSceneModels();
+  void initSceneGUI();
+  void doLog(std::string const& logMessage);
+  void doProgress(float value);
+  void processRunningThreads();
+  void addShape(const ShapeType type);
+  void addLight(const LightSourceType type);
+  void exportSceneAsync(const FBEntity& file, std::vector<ModelFaceBase*> const& meshModelFaces, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
+  void exportSceneFinished();
+  void addTerrainModel();
+  void addSpaceshipModel();
+  void saveScene(const FBEntity& file);
+  void openScene(const FBEntity& file);
 
-    void guiQuit();
-    void guiProcessImportedFile(const FBEntity& file, const std::vector<std::string> &settings);
-    void guiClearScreen();
-    void guiEditorshaderCompiled(std::string const& fileName);
-    void guiModelDelete(const int selectedModel);
-    void guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
-    void guiRenderScene(const FBEntity& file);
+  void guiQuit();
+  void guiProcessImportedFile(const FBEntity& file, const std::vector<std::string> &settings);
+  void guiClearScreen();
+  void guiEditorshaderCompiled(std::string const& fileName);
+  void guiModelDelete(const int selectedModel);
+  void guiSceneExport(const FBEntity& file, const std::vector<std::string> &settings, ImportExportFormats exportFormat, int exportFormatAssimp);
+  void guiRenderScene(const FBEntity& file);
 
-    // Screen dimension constants
-    const char *WINDOW_TITLE = "Kuplung";
-    const unsigned int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
-    const unsigned int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
+  // Screen dimension constants
+  const char *WINDOW_TITLE = "Kuplung";
+  const unsigned int WINDOW_POSITION_X = SDL_WINDOWPOS_CENTERED;
+  const unsigned int WINDOW_POSITION_Y = SDL_WINDOWPOS_CENTERED;
 
-    // SDLs
-    SDL_Window *sdlWindow = NULL;
-    SDL_GLContext glContext;
+  // SDLs
+  SDL_Window *sdlWindow = NULL;
+  SDL_GLContext glContext;
 
-    // Variables
-    bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed, exporterThreadFinished;
-    int sceneSelectedModelObject;
-    float objLoadingProgress;
+  // Variables
+  bool gameIsRunning = false, objParserThreadFinished, objParserThreadProcessed, exporterThreadFinished;
+  int sceneSelectedModelObject;
+  float objLoadingProgress;
 
-    //objParser *parser;
-    std::unique_ptr<FileModelManager> parser;
-    std::unique_ptr<SaveOpen> managerSaveOpen;
+  //objParser *parser;
+  std::unique_ptr<FileModelManager> parser;
+  std::unique_ptr<SaveOpen> managerSaveOpen;
 
-    // Customs
-    std::unique_ptr<KuplungApp::Utilities::Input::Controls> managerControls;
-    std::unique_ptr<UIManager> managerUI;
-    std::unique_ptr<KuplungApp::Utilities::FontParser::FNTParser> fontParser;
-    std::unique_ptr<KuplungApp::Utilities::Export::Exporter> managerExporter;
-    std::unique_ptr<ImageRenderer> imageRenderer;
-    std::unique_ptr<ObjectsManager> managerObjects;
-    std::unique_ptr<RayPicking> rayPicker;
-    std::unique_ptr<RenderingManager> managerRendering;
+  // Customs
+  std::unique_ptr<KuplungApp::Utilities::Input::Controls> managerControls;
+  std::unique_ptr<UIManager> managerUI;
+  std::unique_ptr<KuplungApp::Utilities::FontParser::FNTParser> fontParser;
+  std::unique_ptr<KuplungApp::Utilities::Export::Exporter> managerExporter;
+  std::unique_ptr<ImageRenderer> imageRenderer;
+  std::unique_ptr<ObjectsManager> managerObjects;
+  std::unique_ptr<RayPicking> rayPicker;
+  std::unique_ptr<RenderingManager> managerRendering;
 
-    std::vector<FBEntity> objFiles;
-    std::vector<MeshModel> meshModels, meshModelsNew;
-    std::vector<ModelFaceBase*> meshModelFaces;
-    std::vector<RayLine*> rayLines;
+  std::vector<FBEntity> objFiles;
+  std::vector<MeshModel> meshModels, meshModelsNew;
+  std::vector<ModelFaceBase*> meshModelFaces;
+  std::vector<RayLine*> rayLines;
 };
 
 #endif /* Kuplung_hpp */

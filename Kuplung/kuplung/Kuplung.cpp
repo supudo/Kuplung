@@ -190,7 +190,19 @@ bool Kuplung::init() {
           this->managerObjects->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1), std::bind(&Kuplung::addTerrainModel, this), std::bind(&Kuplung::addSpaceshipModel, this));
 
           this->managerUI = std::make_unique<UIManager>(*this->managerObjects);
-          this->managerUI->init(this->sdlWindow, this->glContext, std::bind(&Kuplung::guiQuit, this), std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2), std::bind(&Kuplung::guiClearScreen, this), std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1), std::bind(&Kuplung::addShape, this, std::placeholders::_1), std::bind(&Kuplung::addLight, this, std::placeholders::_1), std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4), std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1), std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1), std::bind(&Kuplung::saveScene, this, std::placeholders::_1), std::bind(&Kuplung::openScene, this, std::placeholders::_1));
+          this->managerUI->init(this->sdlWindow,
+                                this->glContext,
+                                std::bind(&Kuplung::guiQuit, this),
+                                std::bind(&Kuplung::guiProcessImportedFile, this, std::placeholders::_1, std::placeholders::_2),
+                                std::bind(&Kuplung::guiClearScreen, this),
+                                std::bind(&Kuplung::guiEditorshaderCompiled, this, std::placeholders::_1),
+                                std::bind(&Kuplung::addShape, this, std::placeholders::_1),
+                                std::bind(&Kuplung::addLight, this, std::placeholders::_1),
+                                std::bind(&Kuplung::guiSceneExport, this, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4),
+                                std::bind(&Kuplung::guiModelDelete, this, std::placeholders::_1),
+                                std::bind(&Kuplung::guiRenderScene, this, std::placeholders::_1),
+                                std::bind(&Kuplung::saveScene, this, std::placeholders::_1),
+                                std::bind(&Kuplung::openScene, this, std::placeholders::_1));
           this->managerUI->meshModelFaces = &this->meshModelFaces;
           this->doLog("[INIT] UI initialized.");
 

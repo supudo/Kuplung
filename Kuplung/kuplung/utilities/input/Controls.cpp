@@ -41,25 +41,25 @@ void Controls::init(SDL_Window* sdlWindow) {
 
 void Controls::processEvents(const SDL_Event* ev) {
 	switch(ev->type) {
-	case SDL_QUIT:
-		this->gameIsRunning = false;
-		break;
-	case SDL_KEYDOWN:
-		this->handleInput(ev);
-		break;
-	case SDL_MOUSEBUTTONDOWN:
-		this->handleInput(ev);
-		break;
-	case SDL_MOUSEBUTTONUP:
-		this->handleInput(ev);
-		break;
-	case SDL_MOUSEMOTION:
-		this->handleInput(ev);
-		break;
-	case SDL_MOUSEWHEEL:
-		this->handleInput(ev);
-		break;
-	}
+    case SDL_QUIT:
+      this->gameIsRunning = false;
+      break;
+    case SDL_KEYDOWN:
+      this->handleInput(ev);
+      break;
+    case SDL_MOUSEBUTTONDOWN:
+      this->handleInput(ev);
+      break;
+    case SDL_MOUSEBUTTONUP:
+      this->handleInput(ev);
+      break;
+    case SDL_MOUSEMOTION:
+      this->handleInput(ev);
+      break;
+    case SDL_MOUSEWHEEL:
+      this->handleInput(ev);
+      break;
+    }
 }
 
 #pragma mark - Private

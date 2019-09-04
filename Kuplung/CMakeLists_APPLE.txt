@@ -400,12 +400,12 @@ SET(SOURCE_FILES
   kuplung/utilities/renderers/ImageRenderer.hpp
   kuplung/utilities/renderers/KuplungRendererBase.cpp
   kuplung/utilities/renderers/KuplungRendererBase.hpp
-  kuplung/utilities/saveopen/KuplungAppScene.pb.cc
-  kuplung/utilities/saveopen/KuplungAppScene.pb.h
-  kuplung/utilities/saveopen/KuplungAppSettings.pb.cc
-  kuplung/utilities/saveopen/KuplungAppSettings.pb.h
-  kuplung/utilities/saveopen/KuplungDefinitions.pb.cc
-  kuplung/utilities/saveopen/KuplungDefinitions.pb.h
+  # kuplung/utilities/saveopen/KuplungAppScene.pb.cc
+  # kuplung/utilities/saveopen/KuplungAppScene.pb.h
+  # kuplung/utilities/saveopen/KuplungAppSettings.pb.cc
+  # kuplung/utilities/saveopen/KuplungAppSettings.pb.h
+  # kuplung/utilities/saveopen/KuplungDefinitions.pb.cc
+  # kuplung/utilities/saveopen/KuplungDefinitions.pb.h
   kuplung/utilities/saveopen/SaveOpen.cpp
   kuplung/utilities/saveopen/SaveOpen.hpp
   kuplung/utilities/saveopen/SaveOpenBinarySeq.cpp
@@ -669,14 +669,23 @@ IF (Boost_FOUND AND GLM_FOUND AND SDL2_FOUND AND GLFW3_FOUND AND assimp_FOUND AN
   IF (APPLE)
     INCLUDE(CMakeToolsHelpers OPTIONAL)
 
+    # protobuf generation
+    FILE(GLOB PROTOBUF_DEFINITION_FILES "resources/protobuf/*.proto")
+    SET(PROTOBUF_INPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/resources/protobuf/")
+    SET(PROTOBUF_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/kuplung/utilities/saveopen/")
+    FOREACH(PROTO_FILE ${PROTOBUF_DEFINITION_FILES})
+      EXECUTE_PROCESS(COMMAND protoc --proto_path=${PROTOBUF_INPUT_DIRECTORY} --cpp_out=${PROTOBUF_OUTPUT_DIRECTORY} ${PROTO_FILE})
+    ENDFOREACH()
+    FILE(GLOB PROTOBUF_MODELS "kuplung/utilities/saveopen/*.pb.cc" "kuplung/utilities/saveopen/*.hpp")
+
     IF (CUDA_ENABLED)
       IF (CUDA_FOUND)
-        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${CUDA_SOURCES_CPP} kuplung/utilities/nanovg/nanovg.c ${CUDA_COMPILED_FILES})
+        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${PROTOBUF_MODELS} ${CUDA_SOURCES_CPP} kuplung/utilities/nanovg/nanovg.c ${CUDA_COMPILED_FILES})
       ELSE(CUDA_FOUND)
-        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
+        ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${PROTOBUF_MODELS}  kuplung/utilities/nanovg/nanovg.c)
       ENDIF(CUDA_FOUND)
     ELSE (CIDA_ENABLED)
-      ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c)
+      ADD_EXECUTABLE(${PROJECT_NAME} MACOSX_BUNDLE ${SOURCE_FILES} ${PROTOBUF_MODELS}  kuplung/utilities/nanovg/nanovg.c)
     ENDIF(CUDA_ENABLED)
 
     # Misc Files

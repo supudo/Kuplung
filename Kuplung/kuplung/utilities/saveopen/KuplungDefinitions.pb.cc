@@ -8,207 +8,194 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto;
 namespace KuplungApp {
 class Vec2DefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Vec2> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec2> _instance;
 } _Vec2_default_instance_;
 class Vec3DefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Vec3> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec3> _instance;
 } _Vec3_default_instance_;
 class Vec4DefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Vec4> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec4> _instance;
 } _Vec4_default_instance_;
 class ObjectCoordinateDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<ObjectCoordinate> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ObjectCoordinate> _instance;
 } _ObjectCoordinate_default_instance_;
 class FBEntityDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<FBEntity> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FBEntity> _instance;
 } _FBEntity_default_instance_;
 class MaterialColorDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<MaterialColor> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MaterialColor> _instance;
 } _MaterialColor_default_instance_;
 class MeshMaterialTextureImageDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<MeshMaterialTextureImage> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MeshMaterialTextureImage> _instance;
 } _MeshMaterialTextureImage_default_instance_;
 class MeshModelMaterialDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<MeshModelMaterial> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MeshModelMaterial> _instance;
 } _MeshModelMaterial_default_instance_;
 class MeshDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Mesh> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Mesh> _instance;
 } _Mesh_default_instance_;
 }  // namespace KuplungApp
-static void InitDefaultsVec2_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec2_default_instance_;
-    new (ptr) ::KuplungApp::Vec2();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec2::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsVec2_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsVec3_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec3_default_instance_;
-    new (ptr) ::KuplungApp::Vec3();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec3::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsVec3_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsVec4_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec4_default_instance_;
-    new (ptr) ::KuplungApp::Vec4();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec4::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_Vec4_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsVec4_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsObjectCoordinate_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_ObjectCoordinate_default_instance_;
-    new (ptr) ::KuplungApp::ObjectCoordinate();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::ObjectCoordinate::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_ObjectCoordinate_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsObjectCoordinate_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsFBEntity_KuplungDefinitions_2eproto() {
+static void InitDefaultsscc_info_FBEntity_KuplungDefinitions_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::KuplungApp::_FBEntity_default_instance_;
     new (ptr) ::KuplungApp::FBEntity();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::KuplungApp::FBEntity::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsFBEntity_KuplungDefinitions_2eproto}, {}};
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_FBEntity_KuplungDefinitions_2eproto}, {}};
 
-static void InitDefaultsMaterialColor_KuplungDefinitions_2eproto() {
+static void InitDefaultsscc_info_MaterialColor_KuplungDefinitions_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::KuplungApp::_MaterialColor_default_instance_;
     new (ptr) ::KuplungApp::MaterialColor();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::KuplungApp::MaterialColor::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<1> scc_info_MaterialColor_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsMaterialColor_KuplungDefinitions_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MaterialColor_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_MaterialColor_KuplungDefinitions_2eproto}, {
       &scc_info_Vec3_KuplungDefinitions_2eproto.base,}};
 
-static void InitDefaultsMeshMaterialTextureImage_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_MeshMaterialTextureImage_default_instance_;
-    new (ptr) ::KuplungApp::MeshMaterialTextureImage();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::MeshMaterialTextureImage::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsMeshMaterialTextureImage_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsMeshModelMaterial_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_MeshModelMaterial_default_instance_;
-    new (ptr) ::KuplungApp::MeshModelMaterial();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::MeshModelMaterial::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsMeshModelMaterial_KuplungDefinitions_2eproto}, {
-      &scc_info_Vec3_KuplungDefinitions_2eproto.base,
-      &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base,}};
-
-static void InitDefaultsMesh_KuplungDefinitions_2eproto() {
+static void InitDefaultsscc_info_Mesh_KuplungDefinitions_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::KuplungApp::_Mesh_default_instance_;
     new (ptr) ::KuplungApp::Mesh();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::KuplungApp::Mesh::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<4> scc_info_Mesh_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsMesh_KuplungDefinitions_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Mesh_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsscc_info_Mesh_KuplungDefinitions_2eproto}, {
       &scc_info_FBEntity_KuplungDefinitions_2eproto.base,
       &scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base,
       &scc_info_Vec3_KuplungDefinitions_2eproto.base,
       &scc_info_Vec2_KuplungDefinitions_2eproto.base,}};
 
-void InitDefaults_KuplungDefinitions_2eproto() {
-  ::google::protobuf::internal::InitSCC(&scc_info_Vec2_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_Vec3_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_Vec4_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_FBEntity_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_Mesh_KuplungDefinitions_2eproto.base);
+static void InitDefaultsscc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_MeshMaterialTextureImage_default_instance_;
+    new (ptr) ::KuplungApp::MeshMaterialTextureImage();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::MeshMaterialTextureImage::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata_KuplungDefinitions_2eproto[9];
-constexpr ::google::protobuf::EnumDescriptor const** file_level_enum_descriptors_KuplungDefinitions_2eproto = nullptr;
-constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_KuplungDefinitions_2eproto = nullptr;
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto}, {}};
 
-const ::google::protobuf::uint32 TableStruct_KuplungDefinitions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static void InitDefaultsscc_info_MeshModelMaterial_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_MeshModelMaterial_default_instance_;
+    new (ptr) ::KuplungApp::MeshModelMaterial();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::MeshModelMaterial::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_MeshModelMaterial_KuplungDefinitions_2eproto}, {
+      &scc_info_Vec3_KuplungDefinitions_2eproto.base,
+      &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base,}};
+
+static void InitDefaultsscc_info_ObjectCoordinate_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_ObjectCoordinate_default_instance_;
+    new (ptr) ::KuplungApp::ObjectCoordinate();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::ObjectCoordinate::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ObjectCoordinate_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_ObjectCoordinate_KuplungDefinitions_2eproto}, {}};
+
+static void InitDefaultsscc_info_Vec2_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_Vec2_default_instance_;
+    new (ptr) ::KuplungApp::Vec2();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::Vec2::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Vec2_KuplungDefinitions_2eproto}, {}};
+
+static void InitDefaultsscc_info_Vec3_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_Vec3_default_instance_;
+    new (ptr) ::KuplungApp::Vec3();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::Vec3::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Vec3_KuplungDefinitions_2eproto}, {}};
+
+static void InitDefaultsscc_info_Vec4_KuplungDefinitions_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_Vec4_default_instance_;
+    new (ptr) ::KuplungApp::Vec4();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::Vec4::InitAsDefaultInstance();
+}
+
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec4_KuplungDefinitions_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, InitDefaultsscc_info_Vec4_KuplungDefinitions_2eproto}, {}};
+
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_KuplungDefinitions_2eproto[9];
+static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_KuplungDefinitions_2eproto = nullptr;
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_KuplungDefinitions_2eproto = nullptr;
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_KuplungDefinitions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -369,7 +356,7 @@ const ::google::protobuf::uint32 TableStruct_KuplungDefinitions_2eproto::offsets
   ~0u,
   ~0u,
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 7, sizeof(::KuplungApp::Vec2)},
   { 9, 17, sizeof(::KuplungApp::Vec3)},
   { 20, 29, sizeof(::KuplungApp::Vec4)},
@@ -381,25 +368,19 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SE
   { 128, 146, sizeof(::KuplungApp::Mesh)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_Vec2_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_Vec3_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_Vec4_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_ObjectCoordinate_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_FBEntity_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_MaterialColor_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_MeshMaterialTextureImage_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_MeshModelMaterial_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_Mesh_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec2_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec3_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec4_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_ObjectCoordinate_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_FBEntity_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MaterialColor_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MeshMaterialTextureImage_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MeshModelMaterial_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Mesh_default_instance_),
 };
 
-::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_KuplungDefinitions_2eproto = {
-  {}, AddDescriptors_KuplungDefinitions_2eproto, "KuplungDefinitions.proto", schemas,
-  file_default_instances, TableStruct_KuplungDefinitions_2eproto::offsets,
-  file_level_metadata_KuplungDefinitions_2eproto, 9, file_level_enum_descriptors_KuplungDefinitions_2eproto, file_level_service_descriptors_KuplungDefinitions_2eproto,
-};
-
-const char descriptor_table_protodef_KuplungDefinitions_2eproto[] =
+const char descriptor_table_protodef_KuplungDefinitions_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\030KuplungDefinitions.proto\022\nKuplungApp\"\034"
   "\n\004Vec2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\'\n\004Vec3\022\t\n\001"
   "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
@@ -444,49 +425,54 @@ const char descriptor_table_protodef_KuplungDefinitions_2eproto[] =
   "s\030\013 \003(\0132\020.KuplungApp.Vec2\022!\n\007normals\030\014 \003"
   "(\0132\020.KuplungApp.Vec3\022\017\n\007indices\030\r \003(\007"
   ;
-::google::protobuf::internal::DescriptorTable descriptor_table_KuplungDefinitions_2eproto = {
-  false, InitDefaults_KuplungDefinitions_2eproto, 
-  descriptor_table_protodef_KuplungDefinitions_2eproto,
-  "KuplungDefinitions.proto", &assign_descriptors_table_KuplungDefinitions_2eproto, 1717,
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_KuplungDefinitions_2eproto_deps[1] = {
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_KuplungDefinitions_2eproto_sccs[9] = {
+  &scc_info_FBEntity_KuplungDefinitions_2eproto.base,
+  &scc_info_MaterialColor_KuplungDefinitions_2eproto.base,
+  &scc_info_Mesh_KuplungDefinitions_2eproto.base,
+  &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base,
+  &scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base,
+  &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,
+  &scc_info_Vec2_KuplungDefinitions_2eproto.base,
+  &scc_info_Vec3_KuplungDefinitions_2eproto.base,
+  &scc_info_Vec4_KuplungDefinitions_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_KuplungDefinitions_2eproto_once;
+static bool descriptor_table_KuplungDefinitions_2eproto_initialized = false;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_KuplungDefinitions_2eproto = {
+  &descriptor_table_KuplungDefinitions_2eproto_initialized, descriptor_table_protodef_KuplungDefinitions_2eproto, "KuplungDefinitions.proto", 1717,
+  &descriptor_table_KuplungDefinitions_2eproto_once, descriptor_table_KuplungDefinitions_2eproto_sccs, descriptor_table_KuplungDefinitions_2eproto_deps, 9, 0,
+  schemas, file_default_instances, TableStruct_KuplungDefinitions_2eproto::offsets,
+  file_level_metadata_KuplungDefinitions_2eproto, 9, file_level_enum_descriptors_KuplungDefinitions_2eproto, file_level_service_descriptors_KuplungDefinitions_2eproto,
 };
 
-void AddDescriptors_KuplungDefinitions_2eproto() {
-  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
-  {
-  };
- ::google::protobuf::internal::AddDescriptors(&descriptor_table_KuplungDefinitions_2eproto, deps, 0);
-}
-
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_KuplungDefinitions_2eproto = []() { AddDescriptors_KuplungDefinitions_2eproto(); return true; }();
+static bool dynamic_init_dummy_KuplungDefinitions_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_KuplungDefinitions_2eproto), true);
 namespace KuplungApp {
 
 // ===================================================================
 
 void Vec2::InitAsDefaultInstance() {
 }
-class Vec2::HasBitSetters {
+class Vec2::_Internal {
  public:
-  static void set_has_x(Vec2* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  using HasBits = decltype(std::declval<Vec2>()._has_bits_);
+  static void set_has_x(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_y(Vec2* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_y(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Vec2::kXFieldNumber;
-const int Vec2::kYFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 Vec2::Vec2()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Vec2)
 }
 Vec2::Vec2(const Vec2& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -514,14 +500,14 @@ void Vec2::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const Vec2& Vec2::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Vec2_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec2_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void Vec2::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec2)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -536,65 +522,67 @@ void Vec2::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Vec2::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Vec2*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* Vec2::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required float x = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
-        msg->set_x(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
+          _Internal::set_has_x(&has_bits);
+          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float y = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
-        msg->set_y(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
+          _Internal::set_has_y(&has_bits);
+          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Vec2::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.Vec2)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
-          HasBitSetters::set_has_x(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (13 & 0xFF)) {
+          _Internal::set_has_x(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
         } else {
           goto handle_unusual;
@@ -604,10 +592,10 @@ bool Vec2::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
-          HasBitSetters::set_has_y(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
+          _Internal::set_has_y(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
         } else {
           goto handle_unusual;
@@ -620,7 +608,7 @@ bool Vec2::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -637,48 +625,48 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Vec2::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec2)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.Vec2)
 }
 
-::google::protobuf::uint8* Vec2::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* Vec2::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec2)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec2)
@@ -707,7 +695,7 @@ size_t Vec2::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
@@ -720,24 +708,24 @@ size_t Vec2::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void Vec2::MergeFrom(const ::google::protobuf::Message& from) {
+void Vec2::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec2)
   GOOGLE_DCHECK_NE(&from, this);
   const Vec2* source =
-      ::google::protobuf::DynamicCastToGenerated<Vec2>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec2>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec2)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec2)
     MergeFrom(*source);
@@ -748,7 +736,7 @@ void Vec2::MergeFrom(const Vec2& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec2)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -763,7 +751,7 @@ void Vec2::MergeFrom(const Vec2& from) {
   }
 }
 
-void Vec2::CopyFrom(const ::google::protobuf::Message& from) {
+void Vec2::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec2)
   if (&from == this) return;
   Clear();
@@ -782,10 +770,6 @@ bool Vec2::IsInitialized() const {
   return true;
 }
 
-void Vec2::Swap(Vec2* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Vec2::InternalSwap(Vec2* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -794,9 +778,8 @@ void Vec2::InternalSwap(Vec2* other) {
   swap(y_, other->y_);
 }
 
-::google::protobuf::Metadata Vec2::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata Vec2::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -804,32 +787,27 @@ void Vec2::InternalSwap(Vec2* other) {
 
 void Vec3::InitAsDefaultInstance() {
 }
-class Vec3::HasBitSetters {
+class Vec3::_Internal {
  public:
-  static void set_has_x(Vec3* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  using HasBits = decltype(std::declval<Vec3>()._has_bits_);
+  static void set_has_x(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_y(Vec3* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_y(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_z(Vec3* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_z(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Vec3::kXFieldNumber;
-const int Vec3::kYFieldNumber;
-const int Vec3::kZFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 Vec3::Vec3()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Vec3)
 }
 Vec3::Vec3(const Vec3& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -857,14 +835,14 @@ void Vec3::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const Vec3& Vec3::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Vec3_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec3_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void Vec3::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec3)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -879,72 +857,75 @@ void Vec3::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Vec3::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Vec3*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* Vec3::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required float x = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
-        msg->set_x(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
+          _Internal::set_has_x(&has_bits);
+          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float y = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
-        msg->set_y(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
+          _Internal::set_has_y(&has_bits);
+          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float z = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
-        msg->set_z(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          _Internal::set_has_z(&has_bits);
+          z_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Vec3::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.Vec3)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
-          HasBitSetters::set_has_x(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (13 & 0xFF)) {
+          _Internal::set_has_x(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
         } else {
           goto handle_unusual;
@@ -954,10 +935,10 @@ bool Vec3::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
-          HasBitSetters::set_has_y(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
+          _Internal::set_has_y(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
         } else {
           goto handle_unusual;
@@ -967,10 +948,10 @@ bool Vec3::MergePartialFromCodedStream(
 
       // required float z = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
-          HasBitSetters::set_has_z(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
+          _Internal::set_has_z(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &z_)));
         } else {
           goto handle_unusual;
@@ -983,7 +964,7 @@ bool Vec3::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -1000,58 +981,58 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Vec3::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec3)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.Vec3)
 }
 
-::google::protobuf::uint8* Vec3::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* Vec3::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec3)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec3)
@@ -1085,7 +1066,7 @@ size_t Vec3::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
@@ -1101,24 +1082,24 @@ size_t Vec3::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void Vec3::MergeFrom(const ::google::protobuf::Message& from) {
+void Vec3::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec3)
   GOOGLE_DCHECK_NE(&from, this);
   const Vec3* source =
-      ::google::protobuf::DynamicCastToGenerated<Vec3>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec3>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec3)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec3)
     MergeFrom(*source);
@@ -1129,7 +1110,7 @@ void Vec3::MergeFrom(const Vec3& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec3)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -1147,7 +1128,7 @@ void Vec3::MergeFrom(const Vec3& from) {
   }
 }
 
-void Vec3::CopyFrom(const ::google::protobuf::Message& from) {
+void Vec3::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec3)
   if (&from == this) return;
   Clear();
@@ -1166,10 +1147,6 @@ bool Vec3::IsInitialized() const {
   return true;
 }
 
-void Vec3::Swap(Vec3* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Vec3::InternalSwap(Vec3* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1179,9 +1156,8 @@ void Vec3::InternalSwap(Vec3* other) {
   swap(z_, other->z_);
 }
 
-::google::protobuf::Metadata Vec3::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata Vec3::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1189,36 +1165,30 @@ void Vec3::InternalSwap(Vec3* other) {
 
 void Vec4::InitAsDefaultInstance() {
 }
-class Vec4::HasBitSetters {
+class Vec4::_Internal {
  public:
-  static void set_has_x(Vec4* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  using HasBits = decltype(std::declval<Vec4>()._has_bits_);
+  static void set_has_x(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_y(Vec4* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_y(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_z(Vec4* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_z(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
-  static void set_has_w(Vec4* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_w(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Vec4::kXFieldNumber;
-const int Vec4::kYFieldNumber;
-const int Vec4::kZFieldNumber;
-const int Vec4::kWFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 Vec4::Vec4()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Vec4)
 }
 Vec4::Vec4(const Vec4& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1246,14 +1216,14 @@ void Vec4::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const Vec4& Vec4::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Vec4_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec4_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void Vec4::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec4)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1268,79 +1238,83 @@ void Vec4::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Vec4::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Vec4*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* Vec4::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required float x = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 13) goto handle_unusual;
-        msg->set_x(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
+          _Internal::set_has_x(&has_bits);
+          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float y = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
-        msg->set_y(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
+          _Internal::set_has_y(&has_bits);
+          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float z = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
-        msg->set_z(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          _Internal::set_has_z(&has_bits);
+          z_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float w = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
-        msg->set_w(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          _Internal::set_has_w(&has_bits);
+          w_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Vec4::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.Vec4)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required float x = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (13 & 0xFF)) {
-          HasBitSetters::set_has_x(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (13 & 0xFF)) {
+          _Internal::set_has_x(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &x_)));
         } else {
           goto handle_unusual;
@@ -1350,10 +1324,10 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float y = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
-          HasBitSetters::set_has_y(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
+          _Internal::set_has_y(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &y_)));
         } else {
           goto handle_unusual;
@@ -1363,10 +1337,10 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float z = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
-          HasBitSetters::set_has_z(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
+          _Internal::set_has_z(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &z_)));
         } else {
           goto handle_unusual;
@@ -1376,10 +1350,10 @@ bool Vec4::MergePartialFromCodedStream(
 
       // required float w = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (37 & 0xFF)) {
-          HasBitSetters::set_has_w(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (37 & 0xFF)) {
+          _Internal::set_has_w(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &w_)));
         } else {
           goto handle_unusual;
@@ -1392,7 +1366,7 @@ bool Vec4::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -1409,68 +1383,68 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Vec4::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Vec4)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(1, this->x(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(1, this->x(), output);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->y(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->y(), output);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->z(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(3, this->z(), output);
   }
 
   // required float w = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(4, this->w(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(4, this->w(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.Vec4)
 }
 
-::google::protobuf::uint8* Vec4::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* Vec4::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec4)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->y(), target);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->z(), target);
   }
 
   // required float w = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(4, this->w(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->w(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec4)
@@ -1509,7 +1483,7 @@ size_t Vec4::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
@@ -1528,24 +1502,24 @@ size_t Vec4::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void Vec4::MergeFrom(const ::google::protobuf::Message& from) {
+void Vec4::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec4)
   GOOGLE_DCHECK_NE(&from, this);
   const Vec4* source =
-      ::google::protobuf::DynamicCastToGenerated<Vec4>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec4>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec4)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec4)
     MergeFrom(*source);
@@ -1556,7 +1530,7 @@ void Vec4::MergeFrom(const Vec4& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec4)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -1577,7 +1551,7 @@ void Vec4::MergeFrom(const Vec4& from) {
   }
 }
 
-void Vec4::CopyFrom(const ::google::protobuf::Message& from) {
+void Vec4::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec4)
   if (&from == this) return;
   Clear();
@@ -1596,10 +1570,6 @@ bool Vec4::IsInitialized() const {
   return true;
 }
 
-void Vec4::Swap(Vec4* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Vec4::InternalSwap(Vec4* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1610,9 +1580,8 @@ void Vec4::InternalSwap(Vec4* other) {
   swap(w_, other->w_);
 }
 
-::google::protobuf::Metadata Vec4::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata Vec4::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1620,28 +1589,24 @@ void Vec4::InternalSwap(Vec4* other) {
 
 void ObjectCoordinate::InitAsDefaultInstance() {
 }
-class ObjectCoordinate::HasBitSetters {
+class ObjectCoordinate::_Internal {
  public:
-  static void set_has_animate(ObjectCoordinate* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  using HasBits = decltype(std::declval<ObjectCoordinate>()._has_bits_);
+  static void set_has_animate(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_point(ObjectCoordinate* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_point(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int ObjectCoordinate::kAnimateFieldNumber;
-const int ObjectCoordinate::kPointFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 ObjectCoordinate::ObjectCoordinate()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.ObjectCoordinate)
 }
 ObjectCoordinate::ObjectCoordinate(const ObjectCoordinate& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1669,14 +1634,14 @@ void ObjectCoordinate::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const ObjectCoordinate& ObjectCoordinate::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void ObjectCoordinate::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.ObjectCoordinate)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1691,65 +1656,67 @@ void ObjectCoordinate::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* ObjectCoordinate::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<ObjectCoordinate*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* ObjectCoordinate::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required bool animate = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_animate(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_animate(&has_bits);
+          animate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float point = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 21) goto handle_unusual;
-        msg->set_point(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
+          _Internal::set_has_point(&has_bits);
+          point_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool ObjectCoordinate::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.ObjectCoordinate)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool animate = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_animate(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_animate(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &animate_)));
         } else {
           goto handle_unusual;
@@ -1759,10 +1726,10 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
 
       // required float point = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (21 & 0xFF)) {
-          HasBitSetters::set_has_point(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
+          _Internal::set_has_point(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &point_)));
         } else {
           goto handle_unusual;
@@ -1775,7 +1742,7 @@ bool ObjectCoordinate::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -1792,48 +1759,48 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void ObjectCoordinate::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.ObjectCoordinate)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool animate = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->animate(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->animate(), output);
   }
 
   // required float point = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(2, this->point(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->point(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.ObjectCoordinate)
 }
 
-::google::protobuf::uint8* ObjectCoordinate::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* ObjectCoordinate::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ObjectCoordinate)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool animate = 1;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->animate(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->animate(), target);
   }
 
   // required float point = 2;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(2, this->point(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->point(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.ObjectCoordinate)
@@ -1862,7 +1829,7 @@ size_t ObjectCoordinate::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
@@ -1875,24 +1842,24 @@ size_t ObjectCoordinate::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void ObjectCoordinate::MergeFrom(const ::google::protobuf::Message& from) {
+void ObjectCoordinate::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.ObjectCoordinate)
   GOOGLE_DCHECK_NE(&from, this);
   const ObjectCoordinate* source =
-      ::google::protobuf::DynamicCastToGenerated<ObjectCoordinate>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ObjectCoordinate>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.ObjectCoordinate)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.ObjectCoordinate)
     MergeFrom(*source);
@@ -1903,7 +1870,7 @@ void ObjectCoordinate::MergeFrom(const ObjectCoordinate& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.ObjectCoordinate)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -1918,7 +1885,7 @@ void ObjectCoordinate::MergeFrom(const ObjectCoordinate& from) {
   }
 }
 
-void ObjectCoordinate::CopyFrom(const ::google::protobuf::Message& from) {
+void ObjectCoordinate::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.ObjectCoordinate)
   if (&from == this) return;
   Clear();
@@ -1937,10 +1904,6 @@ bool ObjectCoordinate::IsInitialized() const {
   return true;
 }
 
-void ObjectCoordinate::Swap(ObjectCoordinate* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void ObjectCoordinate::InternalSwap(ObjectCoordinate* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -1949,9 +1912,8 @@ void ObjectCoordinate::InternalSwap(ObjectCoordinate* other) {
   swap(point_, other->point_);
 }
 
-::google::protobuf::Metadata ObjectCoordinate::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata ObjectCoordinate::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -1959,79 +1921,70 @@ void ObjectCoordinate::InternalSwap(ObjectCoordinate* other) {
 
 void FBEntity::InitAsDefaultInstance() {
 }
-class FBEntity::HasBitSetters {
+class FBEntity::_Internal {
  public:
-  static void set_has_isfile(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+  using HasBits = decltype(std::declval<FBEntity>()._has_bits_);
+  static void set_has_isfile(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
   }
-  static void set_has_path(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  static void set_has_path(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_title(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_title(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_extension(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_extension(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
-  static void set_has_modifieddate(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_modifieddate(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
-  static void set_has_size(FBEntity* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
+  static void set_has_size(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int FBEntity::kIsFileFieldNumber;
-const int FBEntity::kPathFieldNumber;
-const int FBEntity::kTitleFieldNumber;
-const int FBEntity::kExtensionFieldNumber;
-const int FBEntity::kModifiedDateFieldNumber;
-const int FBEntity::kSizeFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 FBEntity::FBEntity()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.FBEntity)
 }
 FBEntity::FBEntity(const FBEntity& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  path_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_path()) {
-    path_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.path_);
+    path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.path_);
   }
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_title()) {
-    title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+    title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.title_);
   }
-  extension_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  extension_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_extension()) {
-    extension_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.extension_);
+    extension_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.extension_);
   }
-  modifieddate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  modifieddate_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_modifieddate()) {
-    modifieddate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
+    modifieddate_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
   }
-  size_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  size_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_size()) {
-    size_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.size_);
+    size_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.size_);
   }
   isfile_ = from.isfile_;
   // @@protoc_insertion_point(copy_constructor:KuplungApp.FBEntity)
 }
 
 void FBEntity::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_FBEntity_KuplungDefinitions_2eproto.base);
-  path_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  title_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  extension_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  modifieddate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  size_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FBEntity_KuplungDefinitions_2eproto.base);
+  path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  extension_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  modifieddate_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  size_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   isfile_ = false;
 }
 
@@ -2041,25 +1994,25 @@ FBEntity::~FBEntity() {
 }
 
 void FBEntity::SharedDtor() {
-  path_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  title_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  extension_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  modifieddate_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  size_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  path_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  extension_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  modifieddate_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  size_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void FBEntity::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const FBEntity& FBEntity::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_FBEntity_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FBEntity_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void FBEntity::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.FBEntity)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -2087,145 +2040,94 @@ void FBEntity::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* FBEntity::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<FBEntity*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* FBEntity::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required bool isFile = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_isfile(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_isfile(&has_bits);
+          isfile_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string path = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.FBEntity.path");
-        object = msg->mutable_path();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_path(), ptr, ctx, "KuplungApp.FBEntity.path");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string title = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.FBEntity.title");
-        object = msg->mutable_title();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_title(), ptr, ctx, "KuplungApp.FBEntity.title");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string extension = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.FBEntity.extension");
-        object = msg->mutable_extension();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_extension(), ptr, ctx, "KuplungApp.FBEntity.extension");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string modifiedDate = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.FBEntity.modifiedDate");
-        object = msg->mutable_modifieddate();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_modifieddate(), ptr, ctx, "KuplungApp.FBEntity.modifiedDate");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string size = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.FBEntity.size");
-        object = msg->mutable_size();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_size(), ptr, ctx, "KuplungApp.FBEntity.size");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
-string_till_end:
-  static_cast<::std::string*>(object)->clear();
-  static_cast<::std::string*>(object)->reserve(size);
-  goto len_delim_till_end;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool FBEntity::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.FBEntity)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool isFile = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_isfile(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_isfile(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &isfile_)));
         } else {
           goto handle_unusual;
@@ -2235,12 +2137,12 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string path = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_path()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->path().data(), static_cast<int>(this->path().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.path");
         } else {
           goto handle_unusual;
@@ -2250,12 +2152,12 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string title = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_title()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->title().data(), static_cast<int>(this->title().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.title");
         } else {
           goto handle_unusual;
@@ -2265,12 +2167,12 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string extension = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_extension()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->extension().data(), static_cast<int>(this->extension().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.extension");
         } else {
           goto handle_unusual;
@@ -2280,12 +2182,12 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string modifiedDate = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_modifieddate()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.modifiedDate");
         } else {
           goto handle_unusual;
@@ -2295,12 +2197,12 @@ bool FBEntity::MergePartialFromCodedStream(
 
       // required string size = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_size()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->size().data(), static_cast<int>(this->size().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.FBEntity.size");
         } else {
           goto handle_unusual;
@@ -2313,7 +2215,7 @@ bool FBEntity::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -2330,143 +2232,143 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void FBEntity::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.FBEntity)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool isFile = 1;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->isfile(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->isfile(), output);
   }
 
   // required string path = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), static_cast<int>(this->path().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.path");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->path(), output);
   }
 
   // required string title = 3;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.title");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->title(), output);
   }
 
   // required string extension = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->extension().data(), static_cast<int>(this->extension().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.extension");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->extension(), output);
   }
 
   // required string modifiedDate = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.modifiedDate");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       5, this->modifieddate(), output);
   }
 
   // required string size = 6;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->size().data(), static_cast<int>(this->size().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.size");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       6, this->size(), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.FBEntity)
 }
 
-::google::protobuf::uint8* FBEntity::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* FBEntity::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.FBEntity)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool isFile = 1;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->isfile(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->isfile(), target);
   }
 
   // required string path = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->path().data(), static_cast<int>(this->path().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.path");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         2, this->path(), target);
   }
 
   // required string title = 3;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->title().data(), static_cast<int>(this->title().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.title");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         3, this->title(), target);
   }
 
   // required string extension = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->extension().data(), static_cast<int>(this->extension().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.extension");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         4, this->extension(), target);
   }
 
   // required string modifiedDate = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modifieddate().data(), static_cast<int>(this->modifieddate().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.modifiedDate");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         5, this->modifieddate(), target);
   }
 
   // required string size = 6;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->size().data(), static_cast<int>(this->size().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.FBEntity.size");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         6, this->size(), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.FBEntity)
@@ -2480,35 +2382,35 @@ size_t FBEntity::RequiredFieldsByteSizeFallback() const {
   if (has_path()) {
     // required string path = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->path());
   }
 
   if (has_title()) {
     // required string title = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->title());
   }
 
   if (has_extension()) {
     // required string extension = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->extension());
   }
 
   if (has_modifieddate()) {
     // required string modifiedDate = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->modifieddate());
   }
 
   if (has_size()) {
     // required string size = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->size());
   }
 
@@ -2525,33 +2427,33 @@ size_t FBEntity::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
     // required string path = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->path());
 
     // required string title = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->title());
 
     // required string extension = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->extension());
 
     // required string modifiedDate = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->modifieddate());
 
     // required string size = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->size());
 
     // required bool isFile = 1;
@@ -2560,24 +2462,24 @@ size_t FBEntity::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void FBEntity::MergeFrom(const ::google::protobuf::Message& from) {
+void FBEntity::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.FBEntity)
   GOOGLE_DCHECK_NE(&from, this);
   const FBEntity* source =
-      ::google::protobuf::DynamicCastToGenerated<FBEntity>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FBEntity>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.FBEntity)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.FBEntity)
     MergeFrom(*source);
@@ -2588,30 +2490,30 @@ void FBEntity::MergeFrom(const FBEntity& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.FBEntity)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
       _has_bits_[0] |= 0x00000001u;
-      path_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.path_);
+      path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.path_);
     }
     if (cached_has_bits & 0x00000002u) {
       _has_bits_[0] |= 0x00000002u;
-      title_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.title_);
+      title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.title_);
     }
     if (cached_has_bits & 0x00000004u) {
       _has_bits_[0] |= 0x00000004u;
-      extension_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.extension_);
+      extension_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.extension_);
     }
     if (cached_has_bits & 0x00000008u) {
       _has_bits_[0] |= 0x00000008u;
-      modifieddate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
+      modifieddate_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
     }
     if (cached_has_bits & 0x00000010u) {
       _has_bits_[0] |= 0x00000010u;
-      size_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.size_);
+      size_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.size_);
     }
     if (cached_has_bits & 0x00000020u) {
       isfile_ = from.isfile_;
@@ -2620,7 +2522,7 @@ void FBEntity::MergeFrom(const FBEntity& from) {
   }
 }
 
-void FBEntity::CopyFrom(const ::google::protobuf::Message& from) {
+void FBEntity::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.FBEntity)
   if (&from == this) return;
   Clear();
@@ -2639,30 +2541,25 @@ bool FBEntity::IsInitialized() const {
   return true;
 }
 
-void FBEntity::Swap(FBEntity* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void FBEntity::InternalSwap(FBEntity* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  path_.Swap(&other->path_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  path_.Swap(&other->path_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  title_.Swap(&other->title_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  title_.Swap(&other->title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  extension_.Swap(&other->extension_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  extension_.Swap(&other->extension_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  modifieddate_.Swap(&other->modifieddate_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  modifieddate_.Swap(&other->modifieddate_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  size_.Swap(&other->size_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  size_.Swap(&other->size_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(isfile_, other->isfile_);
 }
 
-::google::protobuf::Metadata FBEntity::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata FBEntity::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -2672,41 +2569,35 @@ void MaterialColor::InitAsDefaultInstance() {
   ::KuplungApp::_MaterialColor_default_instance_._instance.get_mutable()->color_ = const_cast< ::KuplungApp::Vec3*>(
       ::KuplungApp::Vec3::internal_default_instance());
 }
-class MaterialColor::HasBitSetters {
+class MaterialColor::_Internal {
  public:
-  static void set_has_colorpickeropen(MaterialColor* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  using HasBits = decltype(std::declval<MaterialColor>()._has_bits_);
+  static void set_has_colorpickeropen(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_animate(MaterialColor* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_animate(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
-  static void set_has_strength(MaterialColor* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_strength(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
   static const ::KuplungApp::Vec3& color(const MaterialColor* msg);
-  static void set_has_color(MaterialColor* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  static void set_has_color(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
 };
 
 const ::KuplungApp::Vec3&
-MaterialColor::HasBitSetters::color(const MaterialColor* msg) {
+MaterialColor::_Internal::color(const MaterialColor* msg) {
   return *msg->color_;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MaterialColor::kColorPickerOpenFieldNumber;
-const int MaterialColor::kAnimateFieldNumber;
-const int MaterialColor::kStrengthFieldNumber;
-const int MaterialColor::kColorFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 MaterialColor::MaterialColor()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.MaterialColor)
 }
 MaterialColor::MaterialColor(const MaterialColor& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -2722,8 +2613,7 @@ MaterialColor::MaterialColor(const MaterialColor& from)
 }
 
 void MaterialColor::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
   ::memset(&color_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&strength_) -
       reinterpret_cast<char*>(&color_)) + sizeof(strength_));
@@ -2742,14 +2632,14 @@ void MaterialColor::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const MaterialColor& MaterialColor::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void MaterialColor::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MaterialColor)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -2768,88 +2658,82 @@ void MaterialColor::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* MaterialColor::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<MaterialColor*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* MaterialColor::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required bool colorPickerOpen = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_colorpickeropen(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_colorpickeropen(&has_bits);
+          colorpickeropen_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool animate = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
-        msg->set_animate(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          _Internal::set_has_animate(&has_bits);
+          animate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float strength = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 29) goto handle_unusual;
-        msg->set_strength(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
+          _Internal::set_has_strength(&has_bits);
+          strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 color = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_color();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(mutable_color(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool MaterialColor::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.MaterialColor)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required bool colorPickerOpen = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_colorpickeropen(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_colorpickeropen(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &colorpickeropen_)));
         } else {
           goto handle_unusual;
@@ -2859,10 +2743,10 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required bool animate = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
-          HasBitSetters::set_has_animate(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+          _Internal::set_has_animate(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &animate_)));
         } else {
           goto handle_unusual;
@@ -2872,10 +2756,10 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required float strength = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (29 & 0xFF)) {
-          HasBitSetters::set_has_strength(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
+          _Internal::set_has_strength(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &strength_)));
         } else {
           goto handle_unusual;
@@ -2885,8 +2769,8 @@ bool MaterialColor::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 color = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_color()));
         } else {
           goto handle_unusual;
@@ -2899,7 +2783,7 @@ bool MaterialColor::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -2916,71 +2800,71 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void MaterialColor::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MaterialColor)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool colorPickerOpen = 1;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(1, this->colorpickeropen(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->colorpickeropen(), output);
   }
 
   // required bool animate = 2;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->animate(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(2, this->animate(), output);
   }
 
   // required float strength = 3;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(3, this->strength(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(3, this->strength(), output);
   }
 
   // required .KuplungApp.Vec3 color = 4;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, HasBitSetters::color(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, _Internal::color(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.MaterialColor)
 }
 
-::google::protobuf::uint8* MaterialColor::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* MaterialColor::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MaterialColor)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required bool colorPickerOpen = 1;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(1, this->colorpickeropen(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->colorpickeropen(), target);
   }
 
   // required bool animate = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->animate(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->animate(), target);
   }
 
   // required float strength = 3;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(3, this->strength(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->strength(), target);
   }
 
   // required .KuplungApp.Vec3 color = 4;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, HasBitSetters::color(this), target);
+        4, _Internal::color(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MaterialColor)
@@ -2994,7 +2878,7 @@ size_t MaterialColor::RequiredFieldsByteSizeFallback() const {
   if (has_color()) {
     // required .KuplungApp.Vec3 color = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *color_);
   }
 
@@ -3021,13 +2905,13 @@ size_t MaterialColor::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
     // required .KuplungApp.Vec3 color = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *color_);
 
     // required bool colorPickerOpen = 1;
@@ -3042,24 +2926,24 @@ size_t MaterialColor::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void MaterialColor::MergeFrom(const ::google::protobuf::Message& from) {
+void MaterialColor::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MaterialColor)
   GOOGLE_DCHECK_NE(&from, this);
   const MaterialColor* source =
-      ::google::protobuf::DynamicCastToGenerated<MaterialColor>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MaterialColor>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MaterialColor)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MaterialColor)
     MergeFrom(*source);
@@ -3070,7 +2954,7 @@ void MaterialColor::MergeFrom(const MaterialColor& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MaterialColor)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -3091,7 +2975,7 @@ void MaterialColor::MergeFrom(const MaterialColor& from) {
   }
 }
 
-void MaterialColor::CopyFrom(const ::google::protobuf::Message& from) {
+void MaterialColor::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MaterialColor)
   if (&from == this) return;
   Clear();
@@ -3113,10 +2997,6 @@ bool MaterialColor::IsInitialized() const {
   return true;
 }
 
-void MaterialColor::Swap(MaterialColor* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void MaterialColor::InternalSwap(MaterialColor* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -3127,9 +3007,8 @@ void MaterialColor::InternalSwap(MaterialColor* other) {
   swap(strength_, other->strength_);
 }
 
-::google::protobuf::Metadata MaterialColor::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata MaterialColor::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3137,52 +3016,44 @@ void MaterialColor::InternalSwap(MaterialColor* other) {
 
 void MeshMaterialTextureImage::InitAsDefaultInstance() {
 }
-class MeshMaterialTextureImage::HasBitSetters {
+class MeshMaterialTextureImage::_Internal {
  public:
-  static void set_has_filename(MeshMaterialTextureImage* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  using HasBits = decltype(std::declval<MeshMaterialTextureImage>()._has_bits_);
+  static void set_has_filename(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_image(MeshMaterialTextureImage* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_image(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_width(MeshMaterialTextureImage* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_width(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
-  static void set_has_height(MeshMaterialTextureImage* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_height(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
-  static void set_has_usetexture(MeshMaterialTextureImage* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
+  static void set_has_usetexture(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
   }
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MeshMaterialTextureImage::kFilenameFieldNumber;
-const int MeshMaterialTextureImage::kImageFieldNumber;
-const int MeshMaterialTextureImage::kWidthFieldNumber;
-const int MeshMaterialTextureImage::kHeightFieldNumber;
-const int MeshMaterialTextureImage::kUseTextureFieldNumber;
-const int MeshMaterialTextureImage::kCommandsFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 MeshMaterialTextureImage::MeshMaterialTextureImage()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.MeshMaterialTextureImage)
 }
 MeshMaterialTextureImage::MeshMaterialTextureImage(const MeshMaterialTextureImage& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_),
       commands_(from.commands_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filename_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_filename()) {
-    filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
+    filename_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.filename_);
   }
-  image_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  image_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_image()) {
-    image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
+    image_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.image_);
   }
   ::memcpy(&width_, &from.width_,
     static_cast<size_t>(reinterpret_cast<char*>(&usetexture_) -
@@ -3191,10 +3062,9 @@ MeshMaterialTextureImage::MeshMaterialTextureImage(const MeshMaterialTextureImag
 }
 
 void MeshMaterialTextureImage::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
-  filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  image_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
+  filename_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  image_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&width_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&usetexture_) -
       reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
@@ -3206,22 +3076,22 @@ MeshMaterialTextureImage::~MeshMaterialTextureImage() {
 }
 
 void MeshMaterialTextureImage::SharedDtor() {
-  filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  image_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filename_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  image_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
 }
 
 void MeshMaterialTextureImage::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const MeshMaterialTextureImage& MeshMaterialTextureImage::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void MeshMaterialTextureImage::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshMaterialTextureImage)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -3245,132 +3115,103 @@ void MeshMaterialTextureImage::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* MeshMaterialTextureImage::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<MeshMaterialTextureImage*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* MeshMaterialTextureImage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required string Filename = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.MeshMaterialTextureImage.Filename");
-        object = msg->mutable_filename();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_filename(), ptr, ctx, "KuplungApp.MeshMaterialTextureImage.Filename");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string Image = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.MeshMaterialTextureImage.Image");
-        object = msg->mutable_image();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_image(), ptr, ctx, "KuplungApp.MeshMaterialTextureImage.Image");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 Width = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_width(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          _Internal::set_has_width(&has_bits);
+          width_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 Height = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
-        msg->set_height(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          _Internal::set_has_height(&has_bits);
+          height_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool UseTexture = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
-        msg->set_usetexture(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          _Internal::set_has_usetexture(&has_bits);
+          usetexture_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // repeated string Commands = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
-        do {
-          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-          ctx->extra_parse_data().SetFieldName("KuplungApp.MeshMaterialTextureImage.Commands");
-          object = msg->add_commands();
-          if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-            parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-            goto string_till_end;
-          }
-          GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-          ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-          ptr += size;
-          if (ptr >= end) break;
-        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 50 && (ptr += 1));
-        break;
-      }
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(add_commands(), ptr, ctx, "KuplungApp.MeshMaterialTextureImage.Commands");
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 50);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
-string_till_end:
-  static_cast<::std::string*>(object)->clear();
-  static_cast<::std::string*>(object)->reserve(size);
-  goto len_delim_till_end;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool MeshMaterialTextureImage::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.MeshMaterialTextureImage)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required string Filename = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_filename()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->filename().data(), static_cast<int>(this->filename().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Filename");
         } else {
           goto handle_unusual;
@@ -3380,12 +3221,12 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required string Image = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_image()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->image().data(), static_cast<int>(this->image().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Image");
         } else {
           goto handle_unusual;
@@ -3395,10 +3236,10 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required int32 Width = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-          HasBitSetters::set_has_width(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
+          _Internal::set_has_width(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &width_)));
         } else {
           goto handle_unusual;
@@ -3408,10 +3249,10 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required int32 Height = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
-          HasBitSetters::set_has_height(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
+          _Internal::set_has_height(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &height_)));
         } else {
           goto handle_unusual;
@@ -3421,10 +3262,10 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // required bool UseTexture = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
-          HasBitSetters::set_has_usetexture(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
+          _Internal::set_has_usetexture(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &usetexture_)));
         } else {
           goto handle_unusual;
@@ -3434,13 +3275,13 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
 
       // repeated string Commands = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->add_commands()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->commands(this->commands_size() - 1).data(),
             static_cast<int>(this->commands(this->commands_size() - 1).length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.MeshMaterialTextureImage.Commands");
         } else {
           goto handle_unusual;
@@ -3453,7 +3294,7 @@ bool MeshMaterialTextureImage::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -3470,120 +3311,120 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void MeshMaterialTextureImage::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MeshMaterialTextureImage)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required string Filename = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), static_cast<int>(this->filename().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Filename");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       1, this->filename(), output);
   }
 
   // required string Image = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->image().data(), static_cast<int>(this->image().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Image");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->image(), output);
   }
 
   // required int32 Width = 3;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->width(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->width(), output);
   }
 
   // required int32 Height = 4;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->height(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(4, this->height(), output);
   }
 
   // required bool UseTexture = 5;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->usetexture(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(5, this->usetexture(), output);
   }
 
   // repeated string Commands = 6;
   for (int i = 0, n = this->commands_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->commands(i).data(), static_cast<int>(this->commands(i).length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Commands");
-    ::google::protobuf::internal::WireFormatLite::WriteString(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteString(
       6, this->commands(i), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.MeshMaterialTextureImage)
 }
 
-::google::protobuf::uint8* MeshMaterialTextureImage::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* MeshMaterialTextureImage::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshMaterialTextureImage)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required string Filename = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->filename().data(), static_cast<int>(this->filename().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Filename");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         1, this->filename(), target);
   }
 
   // required string Image = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->image().data(), static_cast<int>(this->image().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Image");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         2, this->image(), target);
   }
 
   // required int32 Width = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->width(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->width(), target);
   }
 
   // required int32 Height = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->height(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->height(), target);
   }
 
   // required bool UseTexture = 5;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->usetexture(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->usetexture(), target);
   }
 
   // repeated string Commands = 6;
   for (int i = 0, n = this->commands_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->commands(i).data(), static_cast<int>(this->commands(i).length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshMaterialTextureImage.Commands");
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       WriteStringToArray(6, this->commands(i), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshMaterialTextureImage)
@@ -3597,28 +3438,28 @@ size_t MeshMaterialTextureImage::RequiredFieldsByteSizeFallback() const {
   if (has_filename()) {
     // required string Filename = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->filename());
   }
 
   if (has_image()) {
     // required string Image = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->image());
   }
 
   if (has_width()) {
     // required int32 Width = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->width());
   }
 
   if (has_height()) {
     // required int32 Height = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->height());
   }
 
@@ -3635,28 +3476,28 @@ size_t MeshMaterialTextureImage::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
     // required string Filename = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->filename());
 
     // required string Image = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->image());
 
     // required int32 Width = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->width());
 
     // required int32 Height = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->height());
 
     // required bool UseTexture = 5;
@@ -3665,32 +3506,32 @@ size_t MeshMaterialTextureImage::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated string Commands = 6;
   total_size += 1 *
-      ::google::protobuf::internal::FromIntSize(this->commands_size());
+      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->commands_size());
   for (int i = 0, n = this->commands_size(); i < n; i++) {
-    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
       this->commands(i));
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void MeshMaterialTextureImage::MergeFrom(const ::google::protobuf::Message& from) {
+void MeshMaterialTextureImage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshMaterialTextureImage)
   GOOGLE_DCHECK_NE(&from, this);
   const MeshMaterialTextureImage* source =
-      ::google::protobuf::DynamicCastToGenerated<MeshMaterialTextureImage>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MeshMaterialTextureImage>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MeshMaterialTextureImage)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshMaterialTextureImage)
     MergeFrom(*source);
@@ -3701,7 +3542,7 @@ void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshMaterialTextureImage)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   commands_.MergeFrom(from.commands_);
@@ -3709,11 +3550,11 @@ void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
   if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
       _has_bits_[0] |= 0x00000001u;
-      filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
+      filename_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.filename_);
     }
     if (cached_has_bits & 0x00000002u) {
       _has_bits_[0] |= 0x00000002u;
-      image_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.image_);
+      image_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.image_);
     }
     if (cached_has_bits & 0x00000004u) {
       width_ = from.width_;
@@ -3728,7 +3569,7 @@ void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
   }
 }
 
-void MeshMaterialTextureImage::CopyFrom(const ::google::protobuf::Message& from) {
+void MeshMaterialTextureImage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MeshMaterialTextureImage)
   if (&from == this) return;
   Clear();
@@ -3747,27 +3588,22 @@ bool MeshMaterialTextureImage::IsInitialized() const {
   return true;
 }
 
-void MeshMaterialTextureImage::Swap(MeshMaterialTextureImage* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void MeshMaterialTextureImage::InternalSwap(MeshMaterialTextureImage* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   commands_.InternalSwap(CastToBase(&other->commands_));
-  filename_.Swap(&other->filename_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  filename_.Swap(&other->filename_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  image_.Swap(&other->image_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  image_.Swap(&other->image_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(width_, other->width_);
   swap(height_, other->height_);
   swap(usetexture_, other->usetexture_);
 }
 
-::google::protobuf::Metadata MeshMaterialTextureImage::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata MeshMaterialTextureImage::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -3797,149 +3633,130 @@ void MeshModelMaterial::InitAsDefaultInstance() {
   ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturedisplacement_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
       ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
 }
-class MeshModelMaterial::HasBitSetters {
+class MeshModelMaterial::_Internal {
  public:
-  static void set_has_materialid(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00001000u;
+  using HasBits = decltype(std::declval<MeshModelMaterial>()._has_bits_);
+  static void set_has_materialid(HasBits* has_bits) {
+    (*has_bits)[0] |= 4096u;
   }
-  static void set_has_materialtitle(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  static void set_has_materialtitle(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
   static const ::KuplungApp::Vec3& ambientcolor(const MeshModelMaterial* msg);
-  static void set_has_ambientcolor(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_ambientcolor(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
   static const ::KuplungApp::Vec3& diffusecolor(const MeshModelMaterial* msg);
-  static void set_has_diffusecolor(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_diffusecolor(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
   static const ::KuplungApp::Vec3& specularcolor(const MeshModelMaterial* msg);
-  static void set_has_specularcolor(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_specularcolor(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
   static const ::KuplungApp::Vec3& emissioncolor(const MeshModelMaterial* msg);
-  static void set_has_emissioncolor(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
+  static void set_has_emissioncolor(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
   }
-  static void set_has_specularexp(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00002000u;
+  static void set_has_specularexp(HasBits* has_bits) {
+    (*has_bits)[0] |= 8192u;
   }
-  static void set_has_transparency(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00004000u;
+  static void set_has_transparency(HasBits* has_bits) {
+    (*has_bits)[0] |= 16384u;
   }
-  static void set_has_illuminationmode(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00008000u;
+  static void set_has_illuminationmode(HasBits* has_bits) {
+    (*has_bits)[0] |= 32768u;
   }
-  static void set_has_opticaldensity(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00010000u;
+  static void set_has_opticaldensity(HasBits* has_bits) {
+    (*has_bits)[0] |= 65536u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& textureambient(const MeshModelMaterial* msg);
-  static void set_has_textureambient(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+  static void set_has_textureambient(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturediffuse(const MeshModelMaterial* msg);
-  static void set_has_texturediffuse(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000040u;
+  static void set_has_texturediffuse(HasBits* has_bits) {
+    (*has_bits)[0] |= 64u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturespecular(const MeshModelMaterial* msg);
-  static void set_has_texturespecular(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
+  static void set_has_texturespecular(HasBits* has_bits) {
+    (*has_bits)[0] |= 128u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturespecularexp(const MeshModelMaterial* msg);
-  static void set_has_texturespecularexp(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000100u;
+  static void set_has_texturespecularexp(HasBits* has_bits) {
+    (*has_bits)[0] |= 256u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturedissolve(const MeshModelMaterial* msg);
-  static void set_has_texturedissolve(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000200u;
+  static void set_has_texturedissolve(HasBits* has_bits) {
+    (*has_bits)[0] |= 512u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturebump(const MeshModelMaterial* msg);
-  static void set_has_texturebump(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000400u;
+  static void set_has_texturebump(HasBits* has_bits) {
+    (*has_bits)[0] |= 1024u;
   }
   static const ::KuplungApp::MeshMaterialTextureImage& texturedisplacement(const MeshModelMaterial* msg);
-  static void set_has_texturedisplacement(MeshModelMaterial* msg) {
-    msg->_has_bits_[0] |= 0x00000800u;
+  static void set_has_texturedisplacement(HasBits* has_bits) {
+    (*has_bits)[0] |= 2048u;
   }
 };
 
 const ::KuplungApp::Vec3&
-MeshModelMaterial::HasBitSetters::ambientcolor(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::ambientcolor(const MeshModelMaterial* msg) {
   return *msg->ambientcolor_;
 }
 const ::KuplungApp::Vec3&
-MeshModelMaterial::HasBitSetters::diffusecolor(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::diffusecolor(const MeshModelMaterial* msg) {
   return *msg->diffusecolor_;
 }
 const ::KuplungApp::Vec3&
-MeshModelMaterial::HasBitSetters::specularcolor(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::specularcolor(const MeshModelMaterial* msg) {
   return *msg->specularcolor_;
 }
 const ::KuplungApp::Vec3&
-MeshModelMaterial::HasBitSetters::emissioncolor(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::emissioncolor(const MeshModelMaterial* msg) {
   return *msg->emissioncolor_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::textureambient(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::textureambient(const MeshModelMaterial* msg) {
   return *msg->textureambient_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturediffuse(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturediffuse(const MeshModelMaterial* msg) {
   return *msg->texturediffuse_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturespecular(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturespecular(const MeshModelMaterial* msg) {
   return *msg->texturespecular_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturespecularexp(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturespecularexp(const MeshModelMaterial* msg) {
   return *msg->texturespecularexp_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturedissolve(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturedissolve(const MeshModelMaterial* msg) {
   return *msg->texturedissolve_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturebump(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturebump(const MeshModelMaterial* msg) {
   return *msg->texturebump_;
 }
 const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::HasBitSetters::texturedisplacement(const MeshModelMaterial* msg) {
+MeshModelMaterial::_Internal::texturedisplacement(const MeshModelMaterial* msg) {
   return *msg->texturedisplacement_;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MeshModelMaterial::kMaterialIDFieldNumber;
-const int MeshModelMaterial::kMaterialTitleFieldNumber;
-const int MeshModelMaterial::kAmbientColorFieldNumber;
-const int MeshModelMaterial::kDiffuseColorFieldNumber;
-const int MeshModelMaterial::kSpecularColorFieldNumber;
-const int MeshModelMaterial::kEmissionColorFieldNumber;
-const int MeshModelMaterial::kSpecularExpFieldNumber;
-const int MeshModelMaterial::kTransparencyFieldNumber;
-const int MeshModelMaterial::kIlluminationModeFieldNumber;
-const int MeshModelMaterial::kOpticalDensityFieldNumber;
-const int MeshModelMaterial::kTextureAmbientFieldNumber;
-const int MeshModelMaterial::kTextureDiffuseFieldNumber;
-const int MeshModelMaterial::kTextureSpecularFieldNumber;
-const int MeshModelMaterial::kTextureSpecularExpFieldNumber;
-const int MeshModelMaterial::kTextureDissolveFieldNumber;
-const int MeshModelMaterial::kTextureBumpFieldNumber;
-const int MeshModelMaterial::kTextureDisplacementFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 MeshModelMaterial::MeshModelMaterial()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.MeshModelMaterial)
 }
 MeshModelMaterial::MeshModelMaterial(const MeshModelMaterial& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_materialtitle()) {
-    materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+    materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
   }
   if (from.has_ambientcolor()) {
     ambientcolor_ = new ::KuplungApp::Vec3(*from.ambientcolor_);
@@ -4003,9 +3820,8 @@ MeshModelMaterial::MeshModelMaterial(const MeshModelMaterial& from)
 }
 
 void MeshModelMaterial::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
-  materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
+  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&ambientcolor_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&opticaldensity_) -
       reinterpret_cast<char*>(&ambientcolor_)) + sizeof(opticaldensity_));
@@ -4017,7 +3833,7 @@ MeshModelMaterial::~MeshModelMaterial() {
 }
 
 void MeshModelMaterial::SharedDtor() {
-  materialtitle_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  materialtitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete ambientcolor_;
   if (this != internal_default_instance()) delete diffusecolor_;
   if (this != internal_default_instance()) delete specularcolor_;
@@ -4035,14 +3851,14 @@ void MeshModelMaterial::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const MeshModelMaterial& MeshModelMaterial::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void MeshModelMaterial::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshModelMaterial)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -4109,252 +3925,175 @@ void MeshModelMaterial::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* MeshModelMaterial::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<MeshModelMaterial*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* MeshModelMaterial::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required int32 MaterialID = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_materialid(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_materialid(&has_bits);
+          materialid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string MaterialTitle = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.MeshModelMaterial.MaterialTitle");
-        object = msg->mutable_materialtitle();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_materialtitle(), ptr, ctx, "KuplungApp.MeshModelMaterial.MaterialTitle");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 AmbientColor = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_ambientcolor();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(mutable_ambientcolor(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 DiffuseColor = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_diffusecolor();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ctx->ParseMessage(mutable_diffusecolor(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 SpecularColor = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 42) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_specularcolor();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
+          ptr = ctx->ParseMessage(mutable_specularcolor(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 EmissionColor = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 50) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_emissioncolor();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
+          ptr = ctx->ParseMessage(mutable_emissioncolor(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float SpecularExp = 7;
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
-        msg->set_specularexp(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          _Internal::set_has_specularexp(&has_bits);
+          specularexp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Transparency = 8;
-      case 8: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 69) goto handle_unusual;
-        msg->set_transparency(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 69)) {
+          _Internal::set_has_transparency(&has_bits);
+          transparency_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required fixed32 IlluminationMode = 9;
-      case 9: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 77) goto handle_unusual;
-        msg->set_illuminationmode(::google::protobuf::io::UnalignedLoad<::google::protobuf::uint32>(ptr));
-        ptr += sizeof(::google::protobuf::uint32);
-        break;
-      }
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 77)) {
+          _Internal::set_has_illuminationmode(&has_bits);
+          illuminationmode_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint32>(ptr);
+          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint32);
+        } else goto handle_unusual;
+        continue;
       // required float OpticalDensity = 10;
-      case 10: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 85) goto handle_unusual;
-        msg->set_opticaldensity(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 85)) {
+          _Internal::set_has_opticaldensity(&has_bits);
+          opticaldensity_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-      case 11: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 90) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_textureambient();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(mutable_textureambient(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-      case 12: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 98) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturediffuse();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(mutable_texturediffuse(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-      case 13: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturespecular();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          ptr = ctx->ParseMessage(mutable_texturespecular(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-      case 14: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 114) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturespecularexp();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
+          ptr = ctx->ParseMessage(mutable_texturespecularexp(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-      case 15: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 122) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturedissolve();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 122)) {
+          ptr = ctx->ParseMessage(mutable_texturedissolve(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-      case 16: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 130) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturebump();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
+          ptr = ctx->ParseMessage(mutable_texturebump(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-      case 17: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 138) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshMaterialTextureImage::_InternalParse;
-        object = msg->mutable_texturedisplacement();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 17:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 138)) {
+          ptr = ctx->ParseMessage(mutable_texturedisplacement(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
-string_till_end:
-  static_cast<::std::string*>(object)->clear();
-  static_cast<::std::string*>(object)->reserve(size);
-  goto len_delim_till_end;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool MeshModelMaterial::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.MeshModelMaterial)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 MaterialID = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_materialid(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_materialid(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &materialid_)));
         } else {
           goto handle_unusual;
@@ -4364,12 +4103,12 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required string MaterialTitle = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.MeshModelMaterial.MaterialTitle");
         } else {
           goto handle_unusual;
@@ -4379,8 +4118,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 AmbientColor = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_ambientcolor()));
         } else {
           goto handle_unusual;
@@ -4390,8 +4129,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 DiffuseColor = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_diffusecolor()));
         } else {
           goto handle_unusual;
@@ -4401,8 +4140,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 SpecularColor = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (42 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_specularcolor()));
         } else {
           goto handle_unusual;
@@ -4412,8 +4151,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 EmissionColor = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (50 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_emissioncolor()));
         } else {
           goto handle_unusual;
@@ -4423,10 +4162,10 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float SpecularExp = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
-          HasBitSetters::set_has_specularexp(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (61 & 0xFF)) {
+          _Internal::set_has_specularexp(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &specularexp_)));
         } else {
           goto handle_unusual;
@@ -4436,10 +4175,10 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float Transparency = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (69 & 0xFF)) {
-          HasBitSetters::set_has_transparency(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (69 & 0xFF)) {
+          _Internal::set_has_transparency(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &transparency_)));
         } else {
           goto handle_unusual;
@@ -4449,10 +4188,10 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required fixed32 IlluminationMode = 9;
       case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (77 & 0xFF)) {
-          HasBitSetters::set_has_illuminationmode(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (77 & 0xFF)) {
+          _Internal::set_has_illuminationmode(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FIXED32>(
                  input, &illuminationmode_)));
         } else {
           goto handle_unusual;
@@ -4462,10 +4201,10 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required float OpticalDensity = 10;
       case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (85 & 0xFF)) {
-          HasBitSetters::set_has_opticaldensity(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (85 & 0xFF)) {
+          _Internal::set_has_opticaldensity(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &opticaldensity_)));
         } else {
           goto handle_unusual;
@@ -4475,8 +4214,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
       case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_textureambient()));
         } else {
           goto handle_unusual;
@@ -4486,8 +4225,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
       case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (98 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturediffuse()));
         } else {
           goto handle_unusual;
@@ -4497,8 +4236,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
       case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (106 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (106 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturespecular()));
         } else {
           goto handle_unusual;
@@ -4508,8 +4247,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
       case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (114 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (114 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturespecularexp()));
         } else {
           goto handle_unusual;
@@ -4519,8 +4258,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
       case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (122 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (122 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturedissolve()));
         } else {
           goto handle_unusual;
@@ -4530,8 +4269,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
       case 16: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (130 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (130 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturebump()));
         } else {
           goto handle_unusual;
@@ -4541,8 +4280,8 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
       case 17: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (138 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (138 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_texturedisplacement()));
         } else {
           goto handle_unusual;
@@ -4555,7 +4294,7 @@ bool MeshModelMaterial::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -4572,242 +4311,242 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void MeshModelMaterial::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MeshModelMaterial)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 MaterialID = 1;
   if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->materialid(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->materialid(), output);
   }
 
   // required string MaterialTitle = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshModelMaterial.MaterialTitle");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       2, this->materialtitle(), output);
   }
 
   // required .KuplungApp.Vec3 AmbientColor = 3;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, HasBitSetters::ambientcolor(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      3, _Internal::ambientcolor(this), output);
   }
 
   // required .KuplungApp.Vec3 DiffuseColor = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, HasBitSetters::diffusecolor(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      4, _Internal::diffusecolor(this), output);
   }
 
   // required .KuplungApp.Vec3 SpecularColor = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, HasBitSetters::specularcolor(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      5, _Internal::specularcolor(this), output);
   }
 
   // required .KuplungApp.Vec3 EmissionColor = 6;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, HasBitSetters::emissioncolor(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      6, _Internal::emissioncolor(this), output);
   }
 
   // required float SpecularExp = 7;
   if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->specularexp(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(7, this->specularexp(), output);
   }
 
   // required float Transparency = 8;
   if (cached_has_bits & 0x00004000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(8, this->transparency(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(8, this->transparency(), output);
   }
 
   // required fixed32 IlluminationMode = 9;
   if (cached_has_bits & 0x00008000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(9, this->illuminationmode(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed32(9, this->illuminationmode(), output);
   }
 
   // required float OpticalDensity = 10;
   if (cached_has_bits & 0x00010000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(10, this->opticaldensity(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(10, this->opticaldensity(), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, HasBitSetters::textureambient(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, _Internal::textureambient(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, HasBitSetters::texturediffuse(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, _Internal::texturediffuse(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, HasBitSetters::texturespecular(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      13, _Internal::texturespecular(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
   if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, HasBitSetters::texturespecularexp(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      14, _Internal::texturespecularexp(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
   if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, HasBitSetters::texturedissolve(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      15, _Internal::texturedissolve(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
   if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      16, HasBitSetters::texturebump(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      16, _Internal::texturebump(this), output);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
   if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, HasBitSetters::texturedisplacement(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, _Internal::texturedisplacement(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.MeshModelMaterial)
 }
 
-::google::protobuf::uint8* MeshModelMaterial::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* MeshModelMaterial::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModelMaterial)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 MaterialID = 1;
   if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->materialid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->materialid(), target);
   }
 
   // required string MaterialTitle = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.MeshModelMaterial.MaterialTitle");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         2, this->materialtitle(), target);
   }
 
   // required .KuplungApp.Vec3 AmbientColor = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, HasBitSetters::ambientcolor(this), target);
+        3, _Internal::ambientcolor(this), target);
   }
 
   // required .KuplungApp.Vec3 DiffuseColor = 4;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, HasBitSetters::diffusecolor(this), target);
+        4, _Internal::diffusecolor(this), target);
   }
 
   // required .KuplungApp.Vec3 SpecularColor = 5;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, HasBitSetters::specularcolor(this), target);
+        5, _Internal::specularcolor(this), target);
   }
 
   // required .KuplungApp.Vec3 EmissionColor = 6;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, HasBitSetters::emissioncolor(this), target);
+        6, _Internal::emissioncolor(this), target);
   }
 
   // required float SpecularExp = 7;
   if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->specularexp(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->specularexp(), target);
   }
 
   // required float Transparency = 8;
   if (cached_has_bits & 0x00004000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(8, this->transparency(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(8, this->transparency(), target);
   }
 
   // required fixed32 IlluminationMode = 9;
   if (cached_has_bits & 0x00008000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFixed32ToArray(9, this->illuminationmode(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed32ToArray(9, this->illuminationmode(), target);
   }
 
   // required float OpticalDensity = 10;
   if (cached_has_bits & 0x00010000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(10, this->opticaldensity(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(10, this->opticaldensity(), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, HasBitSetters::textureambient(this), target);
+        11, _Internal::textureambient(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, HasBitSetters::texturediffuse(this), target);
+        12, _Internal::texturediffuse(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, HasBitSetters::texturespecular(this), target);
+        13, _Internal::texturespecular(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
   if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, HasBitSetters::texturespecularexp(this), target);
+        14, _Internal::texturespecularexp(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
   if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        15, HasBitSetters::texturedissolve(this), target);
+        15, _Internal::texturedissolve(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
   if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        16, HasBitSetters::texturebump(this), target);
+        16, _Internal::texturebump(this), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
   if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        17, HasBitSetters::texturedisplacement(this), target);
+        17, _Internal::texturedisplacement(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModelMaterial)
@@ -4821,91 +4560,91 @@ size_t MeshModelMaterial::RequiredFieldsByteSizeFallback() const {
   if (has_materialtitle()) {
     // required string MaterialTitle = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->materialtitle());
   }
 
   if (has_ambientcolor()) {
     // required .KuplungApp.Vec3 AmbientColor = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *ambientcolor_);
   }
 
   if (has_diffusecolor()) {
     // required .KuplungApp.Vec3 DiffuseColor = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *diffusecolor_);
   }
 
   if (has_specularcolor()) {
     // required .KuplungApp.Vec3 SpecularColor = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *specularcolor_);
   }
 
   if (has_emissioncolor()) {
     // required .KuplungApp.Vec3 EmissionColor = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *emissioncolor_);
   }
 
   if (has_textureambient()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *textureambient_);
   }
 
   if (has_texturediffuse()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturediffuse_);
   }
 
   if (has_texturespecular()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturespecular_);
   }
 
   if (has_texturespecularexp()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturespecularexp_);
   }
 
   if (has_texturedissolve()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturedissolve_);
   }
 
   if (has_texturebump()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturebump_);
   }
 
   if (has_texturedisplacement()) {
     // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturedisplacement_);
   }
 
   if (has_materialid()) {
     // required int32 MaterialID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->materialid());
   }
 
@@ -4937,73 +4676,73 @@ size_t MeshModelMaterial::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x0001ffff) ^ 0x0001ffff) == 0) {  // All required fields are present.
     // required string MaterialTitle = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->materialtitle());
 
     // required .KuplungApp.Vec3 AmbientColor = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *ambientcolor_);
 
     // required .KuplungApp.Vec3 DiffuseColor = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *diffusecolor_);
 
     // required .KuplungApp.Vec3 SpecularColor = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *specularcolor_);
 
     // required .KuplungApp.Vec3 EmissionColor = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *emissioncolor_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *textureambient_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturediffuse_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturespecular_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturespecularexp_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturedissolve_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturebump_);
 
     // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *texturedisplacement_);
 
     // required int32 MaterialID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->materialid());
 
     // required float SpecularExp = 7;
@@ -5021,24 +4760,24 @@ size_t MeshModelMaterial::ByteSizeLong() const {
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void MeshModelMaterial::MergeFrom(const ::google::protobuf::Message& from) {
+void MeshModelMaterial::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshModelMaterial)
   GOOGLE_DCHECK_NE(&from, this);
   const MeshModelMaterial* source =
-      ::google::protobuf::DynamicCastToGenerated<MeshModelMaterial>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MeshModelMaterial>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MeshModelMaterial)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshModelMaterial)
     MergeFrom(*source);
@@ -5049,14 +4788,14 @@ void MeshModelMaterial::MergeFrom(const MeshModelMaterial& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModelMaterial)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
       _has_bits_[0] |= 0x00000001u;
-      materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+      materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
     }
     if (cached_has_bits & 0x00000002u) {
       mutable_ambientcolor()->::KuplungApp::Vec3::MergeFrom(from.ambientcolor());
@@ -5112,7 +4851,7 @@ void MeshModelMaterial::MergeFrom(const MeshModelMaterial& from) {
   }
 }
 
-void MeshModelMaterial::CopyFrom(const ::google::protobuf::Message& from) {
+void MeshModelMaterial::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MeshModelMaterial)
   if (&from == this) return;
   Clear();
@@ -5164,15 +4903,11 @@ bool MeshModelMaterial::IsInitialized() const {
   return true;
 }
 
-void MeshModelMaterial::Swap(MeshModelMaterial* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void MeshModelMaterial::InternalSwap(MeshModelMaterial* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
-  materialtitle_.Swap(&other->materialtitle_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  materialtitle_.Swap(&other->materialtitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(ambientcolor_, other->ambientcolor_);
   swap(diffusecolor_, other->diffusecolor_);
@@ -5192,9 +4927,8 @@ void MeshModelMaterial::InternalSwap(MeshModelMaterial* other) {
   swap(opticaldensity_, other->opticaldensity_);
 }
 
-::google::protobuf::Metadata MeshModelMaterial::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata MeshModelMaterial::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -5206,70 +4940,55 @@ void Mesh::InitAsDefaultInstance() {
   ::KuplungApp::_Mesh_default_instance_._instance.get_mutable()->modelmaterial_ = const_cast< ::KuplungApp::MeshModelMaterial*>(
       ::KuplungApp::MeshModelMaterial::internal_default_instance());
 }
-class Mesh::HasBitSetters {
+class Mesh::_Internal {
  public:
-  static void set_has_id(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
+  using HasBits = decltype(std::declval<Mesh>()._has_bits_);
+  static void set_has_id(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
   }
   static const ::KuplungApp::FBEntity& file(const Mesh* msg);
-  static void set_has_file(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_file(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
-  static void set_has_modeltitle(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  static void set_has_modeltitle(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
-  static void set_has_materialtitle(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_materialtitle(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
-  static void set_has_countvertices(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+  static void set_has_countvertices(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
   }
-  static void set_has_counttexturecoordinates(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000040u;
+  static void set_has_counttexturecoordinates(HasBits* has_bits) {
+    (*has_bits)[0] |= 64u;
   }
-  static void set_has_countnormals(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
+  static void set_has_countnormals(HasBits* has_bits) {
+    (*has_bits)[0] |= 128u;
   }
-  static void set_has_countindices(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000100u;
+  static void set_has_countindices(HasBits* has_bits) {
+    (*has_bits)[0] |= 256u;
   }
   static const ::KuplungApp::MeshModelMaterial& modelmaterial(const Mesh* msg);
-  static void set_has_modelmaterial(Mesh* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_modelmaterial(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
 };
 
 const ::KuplungApp::FBEntity&
-Mesh::HasBitSetters::file(const Mesh* msg) {
+Mesh::_Internal::file(const Mesh* msg) {
   return *msg->file_;
 }
 const ::KuplungApp::MeshModelMaterial&
-Mesh::HasBitSetters::modelmaterial(const Mesh* msg) {
+Mesh::_Internal::modelmaterial(const Mesh* msg) {
   return *msg->modelmaterial_;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Mesh::kIDFieldNumber;
-const int Mesh::kFileFieldNumber;
-const int Mesh::kModelTitleFieldNumber;
-const int Mesh::kMaterialTitleFieldNumber;
-const int Mesh::kCountVerticesFieldNumber;
-const int Mesh::kCountTextureCoordinatesFieldNumber;
-const int Mesh::kCountNormalsFieldNumber;
-const int Mesh::kCountIndicesFieldNumber;
-const int Mesh::kModelMaterialFieldNumber;
-const int Mesh::kVerticesFieldNumber;
-const int Mesh::kTextureCoordinatesFieldNumber;
-const int Mesh::kNormalsFieldNumber;
-const int Mesh::kIndicesFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 Mesh::Mesh()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Mesh)
 }
 Mesh::Mesh(const Mesh& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_),
       vertices_(from.vertices_),
@@ -5277,13 +4996,13 @@ Mesh::Mesh(const Mesh& from)
       normals_(from.normals_),
       indices_(from.indices_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  modeltitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  modeltitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_modeltitle()) {
-    modeltitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
+    modeltitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
   }
-  materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (from.has_materialtitle()) {
-    materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+    materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
   }
   if (from.has_file()) {
     file_ = new ::KuplungApp::FBEntity(*from.file_);
@@ -5302,10 +5021,9 @@ Mesh::Mesh(const Mesh& from)
 }
 
 void Mesh::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_Mesh_KuplungDefinitions_2eproto.base);
-  modeltitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  materialtitle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Mesh_KuplungDefinitions_2eproto.base);
+  modeltitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   ::memset(&file_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&countindices_) -
       reinterpret_cast<char*>(&file_)) + sizeof(countindices_));
@@ -5317,8 +5035,8 @@ Mesh::~Mesh() {
 }
 
 void Mesh::SharedDtor() {
-  modeltitle_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  materialtitle_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  modeltitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+  materialtitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
   if (this != internal_default_instance()) delete file_;
   if (this != internal_default_instance()) delete modelmaterial_;
 }
@@ -5327,14 +5045,14 @@ void Mesh::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const Mesh& Mesh::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Mesh_KuplungDefinitions_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Mesh_KuplungDefinitions_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void Mesh::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Mesh)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -5370,219 +5088,170 @@ void Mesh::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Mesh::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Mesh*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* Mesh::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required int32 ID = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_id(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_id(&has_bits);
+          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.FBEntity File = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::FBEntity::_InternalParse;
-        object = msg->mutable_file();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(mutable_file(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string ModelTitle = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.Mesh.ModelTitle");
-        object = msg->mutable_modeltitle();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_modeltitle(), ptr, ctx, "KuplungApp.Mesh.ModelTitle");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required string MaterialTitle = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 34) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        ctx->extra_parse_data().SetFieldName("KuplungApp.Mesh.MaterialTitle");
-        object = msg->mutable_materialtitle();
-        if (size > end - ptr + ::google::protobuf::internal::ParseContext::kSlopBytes) {
-          parser_till_end = ::google::protobuf::internal::GreedyStringParserUTF8Verify;
-          goto string_till_end;
-        }
-        GOOGLE_PROTOBUF_PARSER_ASSERT(::google::protobuf::internal::StringCheckUTF8Verify(ptr, size, ctx));
-        ::google::protobuf::internal::InlineGreedyStringParser(object, ptr, size, ctx);
-        ptr += size;
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_materialtitle(), ptr, ctx, "KuplungApp.Mesh.MaterialTitle");
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 countVertices = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
-        msg->set_countvertices(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          _Internal::set_has_countvertices(&has_bits);
+          countvertices_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 countTextureCoordinates = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
-        msg->set_counttexturecoordinates(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          _Internal::set_has_counttexturecoordinates(&has_bits);
+          counttexturecoordinates_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 countNormals = 7;
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
-        msg->set_countnormals(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          _Internal::set_has_countnormals(&has_bits);
+          countnormals_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 countIndices = 8;
-      case 8: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 64) goto handle_unusual;
-        msg->set_countindices(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          _Internal::set_has_countindices(&has_bits);
+          countindices_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-      case 9: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MeshModelMaterial::_InternalParse;
-        object = msg->mutable_modelmaterial();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
+          ptr = ctx->ParseMessage(mutable_modelmaterial(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // repeated .KuplungApp.Vec3 vertices = 10;
-      case 10: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 82) goto handle_unusual;
-        do {
-          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-          parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-          object = msg->add_vertices();
-          if (size > end - ptr) goto len_delim_till_end;
-          ptr += size;
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-              {parser_till_end, object}, ptr - size, ptr));
-          if (ptr >= end) break;
-        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 82 && (ptr += 1));
-        break;
-      }
-      // repeated .KuplungApp.Vec2 texture_coordinates = 11;
-      case 11: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 90) goto handle_unusual;
-        do {
-          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-          parser_till_end = ::KuplungApp::Vec2::_InternalParse;
-          object = msg->add_texture_coordinates();
-          if (size > end - ptr) goto len_delim_till_end;
-          ptr += size;
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-              {parser_till_end, object}, ptr - size, ptr));
-          if (ptr >= end) break;
-        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 90 && (ptr += 1));
-        break;
-      }
-      // repeated .KuplungApp.Vec3 normals = 12;
-      case 12: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 98) goto handle_unusual;
-        do {
-          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-          parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-          object = msg->add_normals();
-          if (size > end - ptr) goto len_delim_till_end;
-          ptr += size;
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-              {parser_till_end, object}, ptr - size, ptr));
-          if (ptr >= end) break;
-        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 98 && (ptr += 1));
-        break;
-      }
-      // repeated fixed32 indices = 13;
-      case 13: {
-        if (static_cast<::google::protobuf::uint8>(tag) == 109) {
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr -= 1;
           do {
-            msg->add_indices(::google::protobuf::io::UnalignedLoad<::google::protobuf::uint32>(ptr));
-            ptr += sizeof(::google::protobuf::uint32);
-            if (ptr >= end) break;
-          } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 109 && (ptr += 1));
-          break;
-        } else if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::google::protobuf::internal::PackedFixed32Parser;
-        object = msg->mutable_indices();
-        if (size > end - ptr) goto len_delim_till_end;
-        auto newend = ptr + size;
-        if (size) ptr = parser_till_end(ptr, newend, object, ctx);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr == newend);
-        break;
-      }
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_vertices(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 82);
+        } else goto handle_unusual;
+        continue;
+      // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_texture_coordinates(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 90);
+        } else goto handle_unusual;
+        continue;
+      // repeated .KuplungApp.Vec3 normals = 12;
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_normals(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 98);
+        } else goto handle_unusual;
+        continue;
+      // repeated fixed32 indices = 13;
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 109)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            add_indices(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint32>(ptr));
+            ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint32);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 109);
+        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106) {
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFixed32Parser(mutable_indices(), ptr, ctx);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
+  _has_bits_.Or(has_bits);
   return ptr;
-string_till_end:
-  static_cast<::std::string*>(object)->clear();
-  static_cast<::std::string*>(object)->reserve(size);
-  goto len_delim_till_end;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Mesh::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.Mesh)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 ID = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_id(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_id(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &id_)));
         } else {
           goto handle_unusual;
@@ -5592,8 +5261,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required .KuplungApp.FBEntity File = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_file()));
         } else {
           goto handle_unusual;
@@ -5603,12 +5272,12 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required string ModelTitle = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_modeltitle()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.Mesh.ModelTitle");
         } else {
           goto handle_unusual;
@@ -5618,12 +5287,12 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required string MaterialTitle = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
                 input, this->mutable_materialtitle()));
-          ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
             this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-            ::google::protobuf::internal::WireFormat::PARSE,
+            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
             "KuplungApp.Mesh.MaterialTitle");
         } else {
           goto handle_unusual;
@@ -5633,10 +5302,10 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countVertices = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
-          HasBitSetters::set_has_countvertices(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
+          _Internal::set_has_countvertices(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &countvertices_)));
         } else {
           goto handle_unusual;
@@ -5646,10 +5315,10 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countTextureCoordinates = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
-          HasBitSetters::set_has_counttexturecoordinates(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (48 & 0xFF)) {
+          _Internal::set_has_counttexturecoordinates(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &counttexturecoordinates_)));
         } else {
           goto handle_unusual;
@@ -5659,10 +5328,10 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countNormals = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (56 & 0xFF)) {
-          HasBitSetters::set_has_countnormals(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (56 & 0xFF)) {
+          _Internal::set_has_countnormals(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &countnormals_)));
         } else {
           goto handle_unusual;
@@ -5672,10 +5341,10 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required int32 countIndices = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
-          HasBitSetters::set_has_countindices(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (64 & 0xFF)) {
+          _Internal::set_has_countindices(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &countindices_)));
         } else {
           goto handle_unusual;
@@ -5685,8 +5354,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
       case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_modelmaterial()));
         } else {
           goto handle_unusual;
@@ -5696,8 +5365,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // repeated .KuplungApp.Vec3 vertices = 10;
       case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                 input, add_vertices()));
         } else {
           goto handle_unusual;
@@ -5707,8 +5376,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // repeated .KuplungApp.Vec2 texture_coordinates = 11;
       case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                 input, add_texture_coordinates()));
         } else {
           goto handle_unusual;
@@ -5718,8 +5387,8 @@ bool Mesh::MergePartialFromCodedStream(
 
       // repeated .KuplungApp.Vec3 normals = 12;
       case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (98 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                 input, add_normals()));
         } else {
           goto handle_unusual;
@@ -5729,13 +5398,13 @@ bool Mesh::MergePartialFromCodedStream(
 
       // repeated fixed32 indices = 13;
       case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (109 & 0xFF)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (109 & 0xFF)) {
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadRepeatedPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FIXED32>(
                  1, 109u, input, this->mutable_indices())));
-        } else if (static_cast< ::google::protobuf::uint8>(tag) == (106 & 0xFF)) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_FIXED32>(
+        } else if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (106 & 0xFF)) {
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPackedPrimitiveNoInline<
+                   ::PROTOBUF_NAMESPACE_ID::uint32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FIXED32>(
                  input, this->mutable_indices())));
         } else {
           goto handle_unusual;
@@ -5748,7 +5417,7 @@ bool Mesh::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -5765,73 +5434,73 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Mesh::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Mesh)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 ID = 1;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->id(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->id(), output);
   }
 
   // required .KuplungApp.FBEntity File = 2;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, HasBitSetters::file(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      2, _Internal::file(this), output);
   }
 
   // required string ModelTitle = 3;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.ModelTitle");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->modeltitle(), output);
   }
 
   // required string MaterialTitle = 4;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.MaterialTitle");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
       4, this->materialtitle(), output);
   }
 
   // required int32 countVertices = 5;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->countvertices(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(5, this->countvertices(), output);
   }
 
   // required int32 countTextureCoordinates = 6;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(6, this->counttexturecoordinates(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(6, this->counttexturecoordinates(), output);
   }
 
   // required int32 countNormals = 7;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(7, this->countnormals(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(7, this->countnormals(), output);
   }
 
   // required int32 countIndices = 8;
   if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->countindices(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(8, this->countindices(), output);
   }
 
   // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, HasBitSetters::modelmaterial(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, _Internal::modelmaterial(this), output);
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->vertices_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       10,
       this->vertices(static_cast<int>(i)),
       output);
@@ -5840,7 +5509,7 @@ void Mesh::SerializeWithCachedSizes(
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->texture_coordinates_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       11,
       this->texture_coordinates(static_cast<int>(i)),
       output);
@@ -5849,7 +5518,7 @@ void Mesh::SerializeWithCachedSizes(
   // repeated .KuplungApp.Vec3 normals = 12;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->normals_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       12,
       this->normals(static_cast<int>(i)),
       output);
@@ -5857,89 +5526,89 @@ void Mesh::SerializeWithCachedSizes(
 
   // repeated fixed32 indices = 13;
   for (int i = 0, n = this->indices_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteFixed32(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed32(
       13, this->indices(i), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.Mesh)
 }
 
-::google::protobuf::uint8* Mesh::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* Mesh::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Mesh)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 ID = 1;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->id(), target);
   }
 
   // required .KuplungApp.FBEntity File = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, HasBitSetters::file(this), target);
+        2, _Internal::file(this), target);
   }
 
   // required string ModelTitle = 3;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->modeltitle().data(), static_cast<int>(this->modeltitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.ModelTitle");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         3, this->modeltitle(), target);
   }
 
   // required string MaterialTitle = 4;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->materialtitle().data(), static_cast<int>(this->materialtitle().length()),
-      ::google::protobuf::internal::WireFormat::SERIALIZE,
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.Mesh.MaterialTitle");
     target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
         4, this->materialtitle(), target);
   }
 
   // required int32 countVertices = 5;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->countvertices(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->countvertices(), target);
   }
 
   // required int32 countTextureCoordinates = 6;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(6, this->counttexturecoordinates(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->counttexturecoordinates(), target);
   }
 
   // required int32 countNormals = 7;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(7, this->countnormals(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->countnormals(), target);
   }
 
   // required int32 countIndices = 8;
   if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->countindices(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->countindices(), target);
   }
 
   // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, HasBitSetters::modelmaterial(this), target);
+        9, _Internal::modelmaterial(this), target);
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->vertices_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         10, this->vertices(static_cast<int>(i)), target);
   }
@@ -5947,7 +5616,7 @@ void Mesh::SerializeWithCachedSizes(
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->texture_coordinates_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         11, this->texture_coordinates(static_cast<int>(i)), target);
   }
@@ -5955,17 +5624,17 @@ void Mesh::SerializeWithCachedSizes(
   // repeated .KuplungApp.Vec3 normals = 12;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->normals_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         12, this->normals(static_cast<int>(i)), target);
   }
 
   // repeated fixed32 indices = 13;
-  target = ::google::protobuf::internal::WireFormatLite::
+  target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
     WriteFixed32ToArray(13, this->indices_, target);
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Mesh)
@@ -5979,63 +5648,63 @@ size_t Mesh::RequiredFieldsByteSizeFallback() const {
   if (has_modeltitle()) {
     // required string ModelTitle = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->modeltitle());
   }
 
   if (has_materialtitle()) {
     // required string MaterialTitle = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->materialtitle());
   }
 
   if (has_file()) {
     // required .KuplungApp.FBEntity File = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *file_);
   }
 
   if (has_modelmaterial()) {
     // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *modelmaterial_);
   }
 
   if (has_id()) {
     // required int32 ID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->id());
   }
 
   if (has_countvertices()) {
     // required int32 countVertices = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countvertices());
   }
 
   if (has_counttexturecoordinates()) {
     // required int32 countTextureCoordinates = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->counttexturecoordinates());
   }
 
   if (has_countnormals()) {
     // required int32 countNormals = 7;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countnormals());
   }
 
   if (has_countindices()) {
     // required int32 countIndices = 8;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countindices());
   }
 
@@ -6047,59 +5716,59 @@ size_t Mesh::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if (((_has_bits_[0] & 0x000001ff) ^ 0x000001ff) == 0) {  // All required fields are present.
     // required string ModelTitle = 3;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->modeltitle());
 
     // required string MaterialTitle = 4;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->materialtitle());
 
     // required .KuplungApp.FBEntity File = 2;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *file_);
 
     // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *modelmaterial_);
 
     // required int32 ID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->id());
 
     // required int32 countVertices = 5;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countvertices());
 
     // required int32 countTextureCoordinates = 6;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->counttexturecoordinates());
 
     // required int32 countNormals = 7;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countnormals());
 
     // required int32 countIndices = 8;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->countindices());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -6109,7 +5778,7 @@ size_t Mesh::ByteSizeLong() const {
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           this->vertices(static_cast<int>(i)));
     }
   }
@@ -6120,7 +5789,7 @@ size_t Mesh::ByteSizeLong() const {
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           this->texture_coordinates(static_cast<int>(i)));
     }
   }
@@ -6131,7 +5800,7 @@ size_t Mesh::ByteSizeLong() const {
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           this->normals(static_cast<int>(i)));
     }
   }
@@ -6141,24 +5810,24 @@ size_t Mesh::ByteSizeLong() const {
     unsigned int count = static_cast<unsigned int>(this->indices_size());
     size_t data_size = 4UL * count;
     total_size += 1 *
-                  ::google::protobuf::internal::FromIntSize(this->indices_size());
+                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->indices_size());
     total_size += data_size;
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void Mesh::MergeFrom(const ::google::protobuf::Message& from) {
+void Mesh::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Mesh)
   GOOGLE_DCHECK_NE(&from, this);
   const Mesh* source =
-      ::google::protobuf::DynamicCastToGenerated<Mesh>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Mesh>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Mesh)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Mesh)
     MergeFrom(*source);
@@ -6169,7 +5838,7 @@ void Mesh::MergeFrom(const Mesh& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Mesh)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   vertices_.MergeFrom(from.vertices_);
@@ -6180,11 +5849,11 @@ void Mesh::MergeFrom(const Mesh& from) {
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
       _has_bits_[0] |= 0x00000001u;
-      modeltitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
+      modeltitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
     }
     if (cached_has_bits & 0x00000002u) {
       _has_bits_[0] |= 0x00000002u;
-      materialtitle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+      materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
     }
     if (cached_has_bits & 0x00000004u) {
       mutable_file()->::KuplungApp::FBEntity::MergeFrom(from.file());
@@ -6211,7 +5880,7 @@ void Mesh::MergeFrom(const Mesh& from) {
   }
 }
 
-void Mesh::CopyFrom(const ::google::protobuf::Message& from) {
+void Mesh::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Mesh)
   if (&from == this) return;
   Clear();
@@ -6227,9 +5896,9 @@ void Mesh::CopyFrom(const Mesh& from) {
 
 bool Mesh::IsInitialized() const {
   if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->vertices())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->texture_coordinates())) return false;
-  if (!::google::protobuf::internal::AllAreInitialized(this->normals())) return false;
+  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->vertices())) return false;
+  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->texture_coordinates())) return false;
+  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->normals())) return false;
   if (has_file()) {
     if (!this->file_->IsInitialized()) return false;
   }
@@ -6239,10 +5908,6 @@ bool Mesh::IsInitialized() const {
   return true;
 }
 
-void Mesh::Swap(Mesh* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Mesh::InternalSwap(Mesh* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -6251,9 +5916,9 @@ void Mesh::InternalSwap(Mesh* other) {
   CastToBase(&texture_coordinates_)->InternalSwap(CastToBase(&other->texture_coordinates_));
   CastToBase(&normals_)->InternalSwap(CastToBase(&other->normals_));
   indices_.InternalSwap(&other->indices_);
-  modeltitle_.Swap(&other->modeltitle_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  modeltitle_.Swap(&other->modeltitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
-  materialtitle_.Swap(&other->materialtitle_, &::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  materialtitle_.Swap(&other->materialtitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(file_, other->file_);
   swap(modelmaterial_, other->modelmaterial_);
@@ -6264,16 +5929,14 @@ void Mesh::InternalSwap(Mesh* other) {
   swap(countindices_, other->countindices_);
 }
 
-::google::protobuf::Metadata Mesh::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungDefinitions_2eproto);
-  return ::file_level_metadata_KuplungDefinitions_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata Mesh::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace KuplungApp
-namespace google {
-namespace protobuf {
+PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::KuplungApp::Vec2* Arena::CreateMaybeMessage< ::KuplungApp::Vec2 >(Arena* arena) {
   return Arena::CreateInternal< ::KuplungApp::Vec2 >(arena);
 }
@@ -6301,8 +5964,7 @@ template<> PROTOBUF_NOINLINE ::KuplungApp::MeshModelMaterial* Arena::CreateMaybe
 template<> PROTOBUF_NOINLINE ::KuplungApp::Mesh* Arena::CreateMaybeMessage< ::KuplungApp::Mesh >(Arena* arena) {
   return Arena::CreateInternal< ::KuplungApp::Mesh >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 #include <google/protobuf/port_undef.inc>

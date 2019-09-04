@@ -8,72 +8,66 @@
 #include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite_inl.h>
+#include <google/protobuf/wire_format_lite.h>
 #include <google/protobuf/descriptor.h>
 #include <google/protobuf/generated_message_reflection.h>
 #include <google/protobuf/reflection_ops.h>
 #include <google/protobuf/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <google/protobuf/port_def.inc>
-
-extern PROTOBUF_INTERNAL_EXPORT_KuplungAppScene_2eproto ::google::protobuf::internal::SCCInfo<4> scc_info_MeshModel_KuplungAppScene_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_ObjectCoordinate_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<1> scc_info_MaterialColor_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::google::protobuf::internal::SCCInfo<4> scc_info_Mesh_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MaterialColor_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Mesh_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungAppScene_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_MeshModel_KuplungAppScene_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ObjectCoordinate_KuplungDefinitions_2eproto;
+extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto;
 namespace KuplungApp {
 class SceneDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<Scene> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Scene> _instance;
 } _Scene_default_instance_;
 class MeshModelDefaultTypeInternal {
  public:
-  ::google::protobuf::internal::ExplicitlyConstructed<MeshModel> _instance;
+  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MeshModel> _instance;
 } _MeshModel_default_instance_;
 }  // namespace KuplungApp
-static void InitDefaultsScene_KuplungAppScene_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Scene_default_instance_;
-    new (ptr) ::KuplungApp::Scene();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Scene::InitAsDefaultInstance();
-}
-
-::google::protobuf::internal::SCCInfo<1> scc_info_Scene_KuplungAppScene_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsScene_KuplungAppScene_2eproto}, {
-      &scc_info_MeshModel_KuplungAppScene_2eproto.base,}};
-
-static void InitDefaultsMeshModel_KuplungAppScene_2eproto() {
+static void InitDefaultsscc_info_MeshModel_KuplungAppScene_2eproto() {
   GOOGLE_PROTOBUF_VERIFY_VERSION;
 
   {
     void* ptr = &::KuplungApp::_MeshModel_default_instance_;
     new (ptr) ::KuplungApp::MeshModel();
-    ::google::protobuf::internal::OnShutdownDestroyMessage(ptr);
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
   }
   ::KuplungApp::MeshModel::InitAsDefaultInstance();
 }
 
-::google::protobuf::internal::SCCInfo<4> scc_info_MeshModel_KuplungAppScene_2eproto =
-    {{ATOMIC_VAR_INIT(::google::protobuf::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsMeshModel_KuplungAppScene_2eproto}, {
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_MeshModel_KuplungAppScene_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, InitDefaultsscc_info_MeshModel_KuplungAppScene_2eproto}, {
       &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,
       &scc_info_Vec3_KuplungDefinitions_2eproto.base,
       &scc_info_MaterialColor_KuplungDefinitions_2eproto.base,
       &scc_info_Mesh_KuplungDefinitions_2eproto.base,}};
 
-void InitDefaults_KuplungAppScene_2eproto() {
-  ::google::protobuf::internal::InitSCC(&scc_info_Scene_KuplungAppScene_2eproto.base);
-  ::google::protobuf::internal::InitSCC(&scc_info_MeshModel_KuplungAppScene_2eproto.base);
+static void InitDefaultsscc_info_Scene_KuplungAppScene_2eproto() {
+  GOOGLE_PROTOBUF_VERIFY_VERSION;
+
+  {
+    void* ptr = &::KuplungApp::_Scene_default_instance_;
+    new (ptr) ::KuplungApp::Scene();
+    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
+  }
+  ::KuplungApp::Scene::InitAsDefaultInstance();
 }
 
-::google::protobuf::Metadata file_level_metadata_KuplungAppScene_2eproto[2];
-constexpr ::google::protobuf::EnumDescriptor const** file_level_enum_descriptors_KuplungAppScene_2eproto = nullptr;
-constexpr ::google::protobuf::ServiceDescriptor const** file_level_service_descriptors_KuplungAppScene_2eproto = nullptr;
+::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_Scene_KuplungAppScene_2eproto =
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_Scene_KuplungAppScene_2eproto}, {
+      &scc_info_MeshModel_KuplungAppScene_2eproto.base,}};
 
-const ::google::protobuf::uint32 TableStruct_KuplungAppScene_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_KuplungAppScene_2eproto[2];
+static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_KuplungAppScene_2eproto = nullptr;
+static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_KuplungAppScene_2eproto = nullptr;
+
+const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_KuplungAppScene_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   PROTOBUF_FIELD_OFFSET(::KuplungApp::Scene, _has_bits_),
   PROTOBUF_FIELD_OFFSET(::KuplungApp::Scene, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -203,23 +197,17 @@ const ::google::protobuf::uint32 TableStruct_KuplungAppScene_2eproto::offsets[] 
   57,
   30,
 };
-static const ::google::protobuf::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
   { 0, 6, sizeof(::KuplungApp::Scene)},
   { 7, 70, sizeof(::KuplungApp::MeshModel)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_Scene_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&::KuplungApp::_MeshModel_default_instance_),
+static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Scene_default_instance_),
+  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MeshModel_default_instance_),
 };
 
-::google::protobuf::internal::AssignDescriptorsTable assign_descriptors_table_KuplungAppScene_2eproto = {
-  {}, AddDescriptors_KuplungAppScene_2eproto, "KuplungAppScene.proto", schemas,
-  file_default_instances, TableStruct_KuplungAppScene_2eproto::offsets,
-  file_level_metadata_KuplungAppScene_2eproto, 2, file_level_enum_descriptors_KuplungAppScene_2eproto, file_level_service_descriptors_KuplungAppScene_2eproto,
-};
-
-const char descriptor_table_protodef_KuplungAppScene_2eproto[] =
+const char descriptor_table_protodef_KuplungAppScene_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
   "\n\025KuplungAppScene.proto\022\nKuplungApp\032\030Kup"
   "lungDefinitions.proto\".\n\005Scene\022%\n\006models"
   "\030\001 \003(\0132\025.KuplungApp.MeshModel\"\252\023\n\tMeshMo"
@@ -286,43 +274,42 @@ const char descriptor_table_protodef_KuplungAppScene_2eproto[] =
   "_LightingPass_DrawMode\0309 \002(\005\022$\n\nmeshObje"
   "ct\030: \002(\0132\020.KuplungApp.Mesh"
   ;
-::google::protobuf::internal::DescriptorTable descriptor_table_KuplungAppScene_2eproto = {
-  false, InitDefaults_KuplungAppScene_2eproto, 
-  descriptor_table_protodef_KuplungAppScene_2eproto,
-  "KuplungAppScene.proto", &assign_descriptors_table_KuplungAppScene_2eproto, 2586,
+static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_KuplungAppScene_2eproto_deps[1] = {
+  &::descriptor_table_KuplungDefinitions_2eproto,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_KuplungAppScene_2eproto_sccs[2] = {
+  &scc_info_MeshModel_KuplungAppScene_2eproto.base,
+  &scc_info_Scene_KuplungAppScene_2eproto.base,
+};
+static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_KuplungAppScene_2eproto_once;
+static bool descriptor_table_KuplungAppScene_2eproto_initialized = false;
+const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_KuplungAppScene_2eproto = {
+  &descriptor_table_KuplungAppScene_2eproto_initialized, descriptor_table_protodef_KuplungAppScene_2eproto, "KuplungAppScene.proto", 2586,
+  &descriptor_table_KuplungAppScene_2eproto_once, descriptor_table_KuplungAppScene_2eproto_sccs, descriptor_table_KuplungAppScene_2eproto_deps, 2, 1,
+  schemas, file_default_instances, TableStruct_KuplungAppScene_2eproto::offsets,
+  file_level_metadata_KuplungAppScene_2eproto, 2, file_level_enum_descriptors_KuplungAppScene_2eproto, file_level_service_descriptors_KuplungAppScene_2eproto,
 };
 
-void AddDescriptors_KuplungAppScene_2eproto() {
-  static constexpr ::google::protobuf::internal::InitFunc deps[1] =
-  {
-    ::AddDescriptors_KuplungDefinitions_2eproto,
-  };
- ::google::protobuf::internal::AddDescriptors(&descriptor_table_KuplungAppScene_2eproto, deps, 1);
-}
-
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_KuplungAppScene_2eproto = []() { AddDescriptors_KuplungAppScene_2eproto(); return true; }();
+static bool dynamic_init_dummy_KuplungAppScene_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_KuplungAppScene_2eproto), true);
 namespace KuplungApp {
 
 // ===================================================================
 
 void Scene::InitAsDefaultInstance() {
 }
-class Scene::HasBitSetters {
+class Scene::_Internal {
  public:
+  using HasBits = decltype(std::declval<Scene>()._has_bits_);
 };
 
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int Scene::kModelsFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 Scene::Scene()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.Scene)
 }
 Scene::Scene(const Scene& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_),
       models_(from.models_) {
@@ -331,8 +318,7 @@ Scene::Scene(const Scene& from)
 }
 
 void Scene::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_Scene_KuplungAppScene_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Scene_KuplungAppScene_2eproto.base);
 }
 
 Scene::~Scene() {
@@ -347,14 +333,14 @@ void Scene::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const Scene& Scene::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_Scene_KuplungAppScene_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Scene_KuplungAppScene_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void Scene::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Scene)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -364,68 +350,59 @@ void Scene::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* Scene::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<Scene*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* Scene::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // repeated .KuplungApp.MeshModel models = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
-        do {
-          ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-          parser_till_end = ::KuplungApp::MeshModel::_InternalParse;
-          object = msg->add_models();
-          if (size > end - ptr) goto len_delim_till_end;
-          ptr += size;
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-              {parser_till_end, object}, ptr - size, ptr));
-          if (ptr >= end) break;
-        } while ((::google::protobuf::io::UnalignedLoad<::google::protobuf::uint64>(ptr) & 255) == 10 && (ptr += 1));
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr -= 1;
+          do {
+            ptr += 1;
+            ptr = ctx->ParseMessage(add_models(), ptr);
+            CHK_(ptr);
+            if (!ctx->DataAvailable(ptr)) break;
+          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint8>(ptr) == 10);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
   return ptr;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool Scene::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.Scene)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // repeated .KuplungApp.MeshModel models = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                 input, add_models()));
         } else {
           goto handle_unusual;
@@ -438,7 +415,7 @@ bool Scene::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -455,43 +432,43 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void Scene::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.Scene)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .KuplungApp.MeshModel models = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->models_size()); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
       1,
       this->models(static_cast<int>(i)),
       output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.Scene)
 }
 
-::google::protobuf::uint8* Scene::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* Scene::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   // repeated .KuplungApp.MeshModel models = 1;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->models_size()); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
         1, this->models(static_cast<int>(i)), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Scene)
@@ -504,10 +481,10 @@ size_t Scene::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -517,25 +494,25 @@ size_t Scene::ByteSizeLong() const {
     total_size += 1UL * count;
     for (unsigned int i = 0; i < count; i++) {
       total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSize(
+        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           this->models(static_cast<int>(i)));
     }
   }
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void Scene::MergeFrom(const ::google::protobuf::Message& from) {
+void Scene::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Scene)
   GOOGLE_DCHECK_NE(&from, this);
   const Scene* source =
-      ::google::protobuf::DynamicCastToGenerated<Scene>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Scene>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Scene)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Scene)
     MergeFrom(*source);
@@ -546,13 +523,13 @@ void Scene::MergeFrom(const Scene& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Scene)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   models_.MergeFrom(from.models_);
 }
 
-void Scene::CopyFrom(const ::google::protobuf::Message& from) {
+void Scene::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Scene)
   if (&from == this) return;
   Clear();
@@ -567,14 +544,10 @@ void Scene::CopyFrom(const Scene& from) {
 }
 
 bool Scene::IsInitialized() const {
-  if (!::google::protobuf::internal::AllAreInitialized(this->models())) return false;
+  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->models())) return false;
   return true;
 }
 
-void Scene::Swap(Scene* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void Scene::InternalSwap(Scene* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -582,9 +555,8 @@ void Scene::InternalSwap(Scene* other) {
   CastToBase(&models_)->InternalSwap(CastToBase(&other->models_));
 }
 
-::google::protobuf::Metadata Scene::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungAppScene_2eproto);
-  return ::file_level_metadata_KuplungAppScene_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata Scene::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
@@ -654,337 +626,338 @@ void MeshModel::InitAsDefaultInstance() {
   ::KuplungApp::_MeshModel_default_instance_._instance.get_mutable()->meshobject_ = const_cast< ::KuplungApp::Mesh*>(
       ::KuplungApp::Mesh::internal_default_instance());
 }
-class MeshModel::HasBitSetters {
+class MeshModel::_Internal {
  public:
-  static void set_has_modelid(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x80000000u;
+  using HasBits = decltype(std::declval<MeshModel>()._has_bits_);
+  static void set_has_modelid(HasBits* has_bits) {
+    (*has_bits)[0] |= 2147483648u;
   }
-  static void set_has_settings_deferredrender(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000001u;
+  static void set_has_settings_deferredrender(HasBits* has_bits) {
+    (*has_bits)[1] |= 1u;
   }
-  static void set_has_setting_celshading(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000002u;
+  static void set_has_setting_celshading(HasBits* has_bits) {
+    (*has_bits)[1] |= 2u;
   }
-  static void set_has_setting_wireframe(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000004u;
+  static void set_has_setting_wireframe(HasBits* has_bits) {
+    (*has_bits)[1] |= 4u;
   }
-  static void set_has_setting_usetessellation(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000008u;
+  static void set_has_setting_usetessellation(HasBits* has_bits) {
+    (*has_bits)[1] |= 8u;
   }
-  static void set_has_setting_usecullface(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000400u;
+  static void set_has_setting_usecullface(HasBits* has_bits) {
+    (*has_bits)[1] |= 1024u;
   }
-  static void set_has_setting_alpha(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000010u;
+  static void set_has_setting_alpha(HasBits* has_bits) {
+    (*has_bits)[1] |= 16u;
   }
-  static void set_has_setting_tessellationsubdivision(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000020u;
+  static void set_has_setting_tessellationsubdivision(HasBits* has_bits) {
+    (*has_bits)[1] |= 32u;
   }
   static const ::KuplungApp::ObjectCoordinate& positionx(const MeshModel* msg);
-  static void set_has_positionx(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000001u;
+  static void set_has_positionx(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
   }
   static const ::KuplungApp::ObjectCoordinate& positiony(const MeshModel* msg);
-  static void set_has_positiony(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000002u;
+  static void set_has_positiony(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
   }
   static const ::KuplungApp::ObjectCoordinate& positionz(const MeshModel* msg);
-  static void set_has_positionz(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000004u;
+  static void set_has_positionz(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
   }
   static const ::KuplungApp::ObjectCoordinate& scalex(const MeshModel* msg);
-  static void set_has_scalex(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000008u;
+  static void set_has_scalex(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
   }
   static const ::KuplungApp::ObjectCoordinate& scaley(const MeshModel* msg);
-  static void set_has_scaley(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000010u;
+  static void set_has_scaley(HasBits* has_bits) {
+    (*has_bits)[0] |= 16u;
   }
   static const ::KuplungApp::ObjectCoordinate& scalez(const MeshModel* msg);
-  static void set_has_scalez(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000020u;
+  static void set_has_scalez(HasBits* has_bits) {
+    (*has_bits)[0] |= 32u;
   }
   static const ::KuplungApp::ObjectCoordinate& rotatex(const MeshModel* msg);
-  static void set_has_rotatex(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000040u;
+  static void set_has_rotatex(HasBits* has_bits) {
+    (*has_bits)[0] |= 64u;
   }
   static const ::KuplungApp::ObjectCoordinate& rotatey(const MeshModel* msg);
-  static void set_has_rotatey(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000080u;
+  static void set_has_rotatey(HasBits* has_bits) {
+    (*has_bits)[0] |= 128u;
   }
   static const ::KuplungApp::ObjectCoordinate& rotatez(const MeshModel* msg);
-  static void set_has_rotatez(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000100u;
+  static void set_has_rotatez(HasBits* has_bits) {
+    (*has_bits)[0] |= 256u;
   }
   static const ::KuplungApp::ObjectCoordinate& displacex(const MeshModel* msg);
-  static void set_has_displacex(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000200u;
+  static void set_has_displacex(HasBits* has_bits) {
+    (*has_bits)[0] |= 512u;
   }
   static const ::KuplungApp::ObjectCoordinate& displacey(const MeshModel* msg);
-  static void set_has_displacey(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000400u;
+  static void set_has_displacey(HasBits* has_bits) {
+    (*has_bits)[0] |= 1024u;
   }
   static const ::KuplungApp::ObjectCoordinate& displacez(const MeshModel* msg);
-  static void set_has_displacez(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00000800u;
+  static void set_has_displacez(HasBits* has_bits) {
+    (*has_bits)[0] |= 2048u;
   }
   static const ::KuplungApp::ObjectCoordinate& setting_materialrefraction(const MeshModel* msg);
-  static void set_has_setting_materialrefraction(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00001000u;
+  static void set_has_setting_materialrefraction(HasBits* has_bits) {
+    (*has_bits)[0] |= 4096u;
   }
   static const ::KuplungApp::ObjectCoordinate& setting_materialspecularexp(const MeshModel* msg);
-  static void set_has_setting_materialspecularexp(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00002000u;
+  static void set_has_setting_materialspecularexp(HasBits* has_bits) {
+    (*has_bits)[0] |= 8192u;
   }
-  static void set_has_setting_modelviewskin(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000040u;
+  static void set_has_setting_modelviewskin(HasBits* has_bits) {
+    (*has_bits)[1] |= 64u;
   }
   static const ::KuplungApp::Vec3& solidlightskin_materialcolor(const MeshModel* msg);
-  static void set_has_solidlightskin_materialcolor(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00004000u;
+  static void set_has_solidlightskin_materialcolor(HasBits* has_bits) {
+    (*has_bits)[0] |= 16384u;
   }
   static const ::KuplungApp::Vec3& solidlightskin_ambient(const MeshModel* msg);
-  static void set_has_solidlightskin_ambient(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00008000u;
+  static void set_has_solidlightskin_ambient(HasBits* has_bits) {
+    (*has_bits)[0] |= 32768u;
   }
   static const ::KuplungApp::Vec3& solidlightskin_diffuse(const MeshModel* msg);
-  static void set_has_solidlightskin_diffuse(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00010000u;
+  static void set_has_solidlightskin_diffuse(HasBits* has_bits) {
+    (*has_bits)[0] |= 65536u;
   }
   static const ::KuplungApp::Vec3& solidlightskin_specular(const MeshModel* msg);
-  static void set_has_solidlightskin_specular(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00020000u;
+  static void set_has_solidlightskin_specular(HasBits* has_bits) {
+    (*has_bits)[0] |= 131072u;
   }
-  static void set_has_solidlightskin_ambient_strength(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000080u;
+  static void set_has_solidlightskin_ambient_strength(HasBits* has_bits) {
+    (*has_bits)[1] |= 128u;
   }
-  static void set_has_solidlightskin_diffuse_strength(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000100u;
+  static void set_has_solidlightskin_diffuse_strength(HasBits* has_bits) {
+    (*has_bits)[1] |= 256u;
   }
-  static void set_has_solidlightskin_specular_strength(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000200u;
+  static void set_has_solidlightskin_specular_strength(HasBits* has_bits) {
+    (*has_bits)[1] |= 512u;
   }
   static const ::KuplungApp::Vec3& setting_lightposition(const MeshModel* msg);
-  static void set_has_setting_lightposition(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00040000u;
+  static void set_has_setting_lightposition(HasBits* has_bits) {
+    (*has_bits)[0] |= 262144u;
   }
   static const ::KuplungApp::Vec3& setting_lightdirection(const MeshModel* msg);
-  static void set_has_setting_lightdirection(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00080000u;
+  static void set_has_setting_lightdirection(HasBits* has_bits) {
+    (*has_bits)[0] |= 524288u;
   }
   static const ::KuplungApp::Vec3& setting_lightambient(const MeshModel* msg);
-  static void set_has_setting_lightambient(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00100000u;
+  static void set_has_setting_lightambient(HasBits* has_bits) {
+    (*has_bits)[0] |= 1048576u;
   }
   static const ::KuplungApp::Vec3& setting_lightdiffuse(const MeshModel* msg);
-  static void set_has_setting_lightdiffuse(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00200000u;
+  static void set_has_setting_lightdiffuse(HasBits* has_bits) {
+    (*has_bits)[0] |= 2097152u;
   }
   static const ::KuplungApp::Vec3& setting_lightspecular(const MeshModel* msg);
-  static void set_has_setting_lightspecular(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00400000u;
+  static void set_has_setting_lightspecular(HasBits* has_bits) {
+    (*has_bits)[0] |= 4194304u;
   }
-  static void set_has_setting_lightstrengthambient(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00004000u;
+  static void set_has_setting_lightstrengthambient(HasBits* has_bits) {
+    (*has_bits)[1] |= 16384u;
   }
-  static void set_has_setting_lightstrengthdiffuse(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00008000u;
+  static void set_has_setting_lightstrengthdiffuse(HasBits* has_bits) {
+    (*has_bits)[1] |= 32768u;
   }
-  static void set_has_setting_lightstrengthspecular(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00010000u;
+  static void set_has_setting_lightstrengthspecular(HasBits* has_bits) {
+    (*has_bits)[1] |= 65536u;
   }
-  static void set_has_materialilluminationmodel(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00020000u;
+  static void set_has_materialilluminationmodel(HasBits* has_bits) {
+    (*has_bits)[1] |= 131072u;
   }
   static const ::KuplungApp::ObjectCoordinate& displacementheightscale(const MeshModel* msg);
-  static void set_has_displacementheightscale(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x00800000u;
+  static void set_has_displacementheightscale(HasBits* has_bits) {
+    (*has_bits)[0] |= 8388608u;
   }
-  static void set_has_showmaterialeditor(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00000800u;
+  static void set_has_showmaterialeditor(HasBits* has_bits) {
+    (*has_bits)[1] |= 2048u;
   }
   static const ::KuplungApp::MaterialColor& materialambient(const MeshModel* msg);
-  static void set_has_materialambient(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x01000000u;
+  static void set_has_materialambient(HasBits* has_bits) {
+    (*has_bits)[0] |= 16777216u;
   }
   static const ::KuplungApp::MaterialColor& materialdiffuse(const MeshModel* msg);
-  static void set_has_materialdiffuse(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x02000000u;
+  static void set_has_materialdiffuse(HasBits* has_bits) {
+    (*has_bits)[0] |= 33554432u;
   }
   static const ::KuplungApp::MaterialColor& materialspecular(const MeshModel* msg);
-  static void set_has_materialspecular(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x04000000u;
+  static void set_has_materialspecular(HasBits* has_bits) {
+    (*has_bits)[0] |= 67108864u;
   }
   static const ::KuplungApp::MaterialColor& materialemission(const MeshModel* msg);
-  static void set_has_materialemission(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x08000000u;
+  static void set_has_materialemission(HasBits* has_bits) {
+    (*has_bits)[0] |= 134217728u;
   }
-  static void set_has_setting_parallaxmapping(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00001000u;
+  static void set_has_setting_parallaxmapping(HasBits* has_bits) {
+    (*has_bits)[1] |= 4096u;
   }
-  static void set_has_effect_gblur_mode(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00040000u;
+  static void set_has_effect_gblur_mode(HasBits* has_bits) {
+    (*has_bits)[1] |= 262144u;
   }
   static const ::KuplungApp::ObjectCoordinate& effect_gblur_radius(const MeshModel* msg);
-  static void set_has_effect_gblur_radius(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x10000000u;
+  static void set_has_effect_gblur_radius(HasBits* has_bits) {
+    (*has_bits)[0] |= 268435456u;
   }
   static const ::KuplungApp::ObjectCoordinate& effect_gblur_width(const MeshModel* msg);
-  static void set_has_effect_gblur_width(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x20000000u;
+  static void set_has_effect_gblur_width(HasBits* has_bits) {
+    (*has_bits)[0] |= 536870912u;
   }
-  static void set_has_effect_bloom_dobloom(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00002000u;
+  static void set_has_effect_bloom_dobloom(HasBits* has_bits) {
+    (*has_bits)[1] |= 8192u;
   }
-  static void set_has_effect_bloom_weighta(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00080000u;
+  static void set_has_effect_bloom_weighta(HasBits* has_bits) {
+    (*has_bits)[1] |= 524288u;
   }
-  static void set_has_effect_bloom_weightb(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00100000u;
+  static void set_has_effect_bloom_weightb(HasBits* has_bits) {
+    (*has_bits)[1] |= 1048576u;
   }
-  static void set_has_effect_bloom_weightc(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00200000u;
+  static void set_has_effect_bloom_weightc(HasBits* has_bits) {
+    (*has_bits)[1] |= 2097152u;
   }
-  static void set_has_effect_bloom_weightd(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00400000u;
+  static void set_has_effect_bloom_weightd(HasBits* has_bits) {
+    (*has_bits)[1] |= 4194304u;
   }
-  static void set_has_effect_bloom_vignette(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x00800000u;
+  static void set_has_effect_bloom_vignette(HasBits* has_bits) {
+    (*has_bits)[1] |= 8388608u;
   }
-  static void set_has_effect_bloom_vignetteatt(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x01000000u;
+  static void set_has_effect_bloom_vignetteatt(HasBits* has_bits) {
+    (*has_bits)[1] |= 16777216u;
   }
-  static void set_has_setting_lightingpass_drawmode(MeshModel* msg) {
-    msg->_has_bits_[1] |= 0x02000000u;
+  static void set_has_setting_lightingpass_drawmode(HasBits* has_bits) {
+    (*has_bits)[1] |= 33554432u;
   }
   static const ::KuplungApp::Mesh& meshobject(const MeshModel* msg);
-  static void set_has_meshobject(MeshModel* msg) {
-    msg->_has_bits_[0] |= 0x40000000u;
+  static void set_has_meshobject(HasBits* has_bits) {
+    (*has_bits)[0] |= 1073741824u;
   }
 };
 
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::positionx(const MeshModel* msg) {
+MeshModel::_Internal::positionx(const MeshModel* msg) {
   return *msg->positionx_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::positiony(const MeshModel* msg) {
+MeshModel::_Internal::positiony(const MeshModel* msg) {
   return *msg->positiony_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::positionz(const MeshModel* msg) {
+MeshModel::_Internal::positionz(const MeshModel* msg) {
   return *msg->positionz_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::scalex(const MeshModel* msg) {
+MeshModel::_Internal::scalex(const MeshModel* msg) {
   return *msg->scalex_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::scaley(const MeshModel* msg) {
+MeshModel::_Internal::scaley(const MeshModel* msg) {
   return *msg->scaley_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::scalez(const MeshModel* msg) {
+MeshModel::_Internal::scalez(const MeshModel* msg) {
   return *msg->scalez_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::rotatex(const MeshModel* msg) {
+MeshModel::_Internal::rotatex(const MeshModel* msg) {
   return *msg->rotatex_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::rotatey(const MeshModel* msg) {
+MeshModel::_Internal::rotatey(const MeshModel* msg) {
   return *msg->rotatey_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::rotatez(const MeshModel* msg) {
+MeshModel::_Internal::rotatez(const MeshModel* msg) {
   return *msg->rotatez_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::displacex(const MeshModel* msg) {
+MeshModel::_Internal::displacex(const MeshModel* msg) {
   return *msg->displacex_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::displacey(const MeshModel* msg) {
+MeshModel::_Internal::displacey(const MeshModel* msg) {
   return *msg->displacey_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::displacez(const MeshModel* msg) {
+MeshModel::_Internal::displacez(const MeshModel* msg) {
   return *msg->displacez_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::setting_materialrefraction(const MeshModel* msg) {
+MeshModel::_Internal::setting_materialrefraction(const MeshModel* msg) {
   return *msg->setting_materialrefraction_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::setting_materialspecularexp(const MeshModel* msg) {
+MeshModel::_Internal::setting_materialspecularexp(const MeshModel* msg) {
   return *msg->setting_materialspecularexp_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::solidlightskin_materialcolor(const MeshModel* msg) {
+MeshModel::_Internal::solidlightskin_materialcolor(const MeshModel* msg) {
   return *msg->solidlightskin_materialcolor_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::solidlightskin_ambient(const MeshModel* msg) {
+MeshModel::_Internal::solidlightskin_ambient(const MeshModel* msg) {
   return *msg->solidlightskin_ambient_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::solidlightskin_diffuse(const MeshModel* msg) {
+MeshModel::_Internal::solidlightskin_diffuse(const MeshModel* msg) {
   return *msg->solidlightskin_diffuse_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::solidlightskin_specular(const MeshModel* msg) {
+MeshModel::_Internal::solidlightskin_specular(const MeshModel* msg) {
   return *msg->solidlightskin_specular_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::setting_lightposition(const MeshModel* msg) {
+MeshModel::_Internal::setting_lightposition(const MeshModel* msg) {
   return *msg->setting_lightposition_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::setting_lightdirection(const MeshModel* msg) {
+MeshModel::_Internal::setting_lightdirection(const MeshModel* msg) {
   return *msg->setting_lightdirection_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::setting_lightambient(const MeshModel* msg) {
+MeshModel::_Internal::setting_lightambient(const MeshModel* msg) {
   return *msg->setting_lightambient_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::setting_lightdiffuse(const MeshModel* msg) {
+MeshModel::_Internal::setting_lightdiffuse(const MeshModel* msg) {
   return *msg->setting_lightdiffuse_;
 }
 const ::KuplungApp::Vec3&
-MeshModel::HasBitSetters::setting_lightspecular(const MeshModel* msg) {
+MeshModel::_Internal::setting_lightspecular(const MeshModel* msg) {
   return *msg->setting_lightspecular_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::displacementheightscale(const MeshModel* msg) {
+MeshModel::_Internal::displacementheightscale(const MeshModel* msg) {
   return *msg->displacementheightscale_;
 }
 const ::KuplungApp::MaterialColor&
-MeshModel::HasBitSetters::materialambient(const MeshModel* msg) {
+MeshModel::_Internal::materialambient(const MeshModel* msg) {
   return *msg->materialambient_;
 }
 const ::KuplungApp::MaterialColor&
-MeshModel::HasBitSetters::materialdiffuse(const MeshModel* msg) {
+MeshModel::_Internal::materialdiffuse(const MeshModel* msg) {
   return *msg->materialdiffuse_;
 }
 const ::KuplungApp::MaterialColor&
-MeshModel::HasBitSetters::materialspecular(const MeshModel* msg) {
+MeshModel::_Internal::materialspecular(const MeshModel* msg) {
   return *msg->materialspecular_;
 }
 const ::KuplungApp::MaterialColor&
-MeshModel::HasBitSetters::materialemission(const MeshModel* msg) {
+MeshModel::_Internal::materialemission(const MeshModel* msg) {
   return *msg->materialemission_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::effect_gblur_radius(const MeshModel* msg) {
+MeshModel::_Internal::effect_gblur_radius(const MeshModel* msg) {
   return *msg->effect_gblur_radius_;
 }
 const ::KuplungApp::ObjectCoordinate&
-MeshModel::HasBitSetters::effect_gblur_width(const MeshModel* msg) {
+MeshModel::_Internal::effect_gblur_width(const MeshModel* msg) {
   return *msg->effect_gblur_width_;
 }
 const ::KuplungApp::Mesh&
-MeshModel::HasBitSetters::meshobject(const MeshModel* msg) {
+MeshModel::_Internal::meshobject(const MeshModel* msg) {
   return *msg->meshobject_;
 }
 void MeshModel::clear_positionx() {
@@ -1111,74 +1084,13 @@ void MeshModel::clear_meshobject() {
   if (meshobject_ != nullptr) meshobject_->Clear();
   _has_bits_[0] &= ~0x40000000u;
 }
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int MeshModel::kModelIDFieldNumber;
-const int MeshModel::kSettingsDeferredRenderFieldNumber;
-const int MeshModel::kSettingCelShadingFieldNumber;
-const int MeshModel::kSettingWireframeFieldNumber;
-const int MeshModel::kSettingUseTessellationFieldNumber;
-const int MeshModel::kSettingUseCullFaceFieldNumber;
-const int MeshModel::kSettingAlphaFieldNumber;
-const int MeshModel::kSettingTessellationSubdivisionFieldNumber;
-const int MeshModel::kPositionXFieldNumber;
-const int MeshModel::kPositionYFieldNumber;
-const int MeshModel::kPositionZFieldNumber;
-const int MeshModel::kScaleXFieldNumber;
-const int MeshModel::kScaleYFieldNumber;
-const int MeshModel::kScaleZFieldNumber;
-const int MeshModel::kRotateXFieldNumber;
-const int MeshModel::kRotateYFieldNumber;
-const int MeshModel::kRotateZFieldNumber;
-const int MeshModel::kDisplaceXFieldNumber;
-const int MeshModel::kDisplaceYFieldNumber;
-const int MeshModel::kDisplaceZFieldNumber;
-const int MeshModel::kSettingMaterialRefractionFieldNumber;
-const int MeshModel::kSettingMaterialSpecularExpFieldNumber;
-const int MeshModel::kSettingModelViewSkinFieldNumber;
-const int MeshModel::kSolidLightSkinMaterialColorFieldNumber;
-const int MeshModel::kSolidLightSkinAmbientFieldNumber;
-const int MeshModel::kSolidLightSkinDiffuseFieldNumber;
-const int MeshModel::kSolidLightSkinSpecularFieldNumber;
-const int MeshModel::kSolidLightSkinAmbientStrengthFieldNumber;
-const int MeshModel::kSolidLightSkinDiffuseStrengthFieldNumber;
-const int MeshModel::kSolidLightSkinSpecularStrengthFieldNumber;
-const int MeshModel::kSettingLightPositionFieldNumber;
-const int MeshModel::kSettingLightDirectionFieldNumber;
-const int MeshModel::kSettingLightAmbientFieldNumber;
-const int MeshModel::kSettingLightDiffuseFieldNumber;
-const int MeshModel::kSettingLightSpecularFieldNumber;
-const int MeshModel::kSettingLightStrengthAmbientFieldNumber;
-const int MeshModel::kSettingLightStrengthDiffuseFieldNumber;
-const int MeshModel::kSettingLightStrengthSpecularFieldNumber;
-const int MeshModel::kMaterialIlluminationModelFieldNumber;
-const int MeshModel::kDisplacementHeightScaleFieldNumber;
-const int MeshModel::kShowMaterialEditorFieldNumber;
-const int MeshModel::kMaterialAmbientFieldNumber;
-const int MeshModel::kMaterialDiffuseFieldNumber;
-const int MeshModel::kMaterialSpecularFieldNumber;
-const int MeshModel::kMaterialEmissionFieldNumber;
-const int MeshModel::kSettingParallaxMappingFieldNumber;
-const int MeshModel::kEffectGBlurModeFieldNumber;
-const int MeshModel::kEffectGBlurRadiusFieldNumber;
-const int MeshModel::kEffectGBlurWidthFieldNumber;
-const int MeshModel::kEffectBloomDoBloomFieldNumber;
-const int MeshModel::kEffectBloomWeightAFieldNumber;
-const int MeshModel::kEffectBloomWeightBFieldNumber;
-const int MeshModel::kEffectBloomWeightCFieldNumber;
-const int MeshModel::kEffectBloomWeightDFieldNumber;
-const int MeshModel::kEffectBloomVignetteFieldNumber;
-const int MeshModel::kEffectBloomVignetteAttFieldNumber;
-const int MeshModel::kSettingLightingPassDrawModeFieldNumber;
-const int MeshModel::kMeshObjectFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
 MeshModel::MeshModel()
-  : ::google::protobuf::Message(), _internal_metadata_(nullptr) {
+  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
   SharedCtor();
   // @@protoc_insertion_point(constructor:KuplungApp.MeshModel)
 }
 MeshModel::MeshModel(const MeshModel& from)
-  : ::google::protobuf::Message(),
+  : ::PROTOBUF_NAMESPACE_ID::Message(),
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
@@ -1344,8 +1256,7 @@ MeshModel::MeshModel(const MeshModel& from)
 }
 
 void MeshModel::SharedCtor() {
-  ::google::protobuf::internal::InitSCC(
-      &scc_info_MeshModel_KuplungAppScene_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MeshModel_KuplungAppScene_2eproto.base);
   ::memset(&positionx_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&setting_lightingpass_drawmode_) -
       reinterpret_cast<char*>(&positionx_)) + sizeof(setting_lightingpass_drawmode_));
@@ -1394,14 +1305,14 @@ void MeshModel::SetCachedSize(int size) const {
   _cached_size_.Set(size);
 }
 const MeshModel& MeshModel::default_instance() {
-  ::google::protobuf::internal::InitSCC(&::scc_info_MeshModel_KuplungAppScene_2eproto.base);
+  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MeshModel_KuplungAppScene_2eproto.base);
   return *internal_default_instance();
 }
 
 
 void MeshModel::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshModel)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
@@ -1565,646 +1476,482 @@ void MeshModel::Clear() {
 }
 
 #if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-const char* MeshModel::_InternalParse(const char* begin, const char* end, void* object,
-                  ::google::protobuf::internal::ParseContext* ctx) {
-  auto msg = static_cast<MeshModel*>(object);
-  ::google::protobuf::int32 size; (void)size;
-  int depth; (void)depth;
-  ::google::protobuf::uint32 tag;
-  ::google::protobuf::internal::ParseFunc parser_till_end; (void)parser_till_end;
-  auto ptr = begin;
-  while (ptr < end) {
-    ptr = ::google::protobuf::io::Parse32(ptr, &tag);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+const char* MeshModel::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
+#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+  while (!ctx->Done(&ptr)) {
+    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
+    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
+    CHK_(ptr);
     switch (tag >> 3) {
       // required int32 ModelID = 1;
-      case 1: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 8) goto handle_unusual;
-        msg->set_modelid(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 1:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
+          _Internal::set_has_modelid(&_has_bits_);
+          modelid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Settings_DeferredRender = 2;
-      case 2: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 16) goto handle_unusual;
-        msg->set_settings_deferredrender(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 2:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
+          _Internal::set_has_settings_deferredrender(&_has_bits_);
+          settings_deferredrender_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Setting_CelShading = 3;
-      case 3: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 24) goto handle_unusual;
-        msg->set_setting_celshading(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 3:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
+          _Internal::set_has_setting_celshading(&_has_bits_);
+          setting_celshading_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Setting_Wireframe = 4;
-      case 4: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 32) goto handle_unusual;
-        msg->set_setting_wireframe(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 4:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
+          _Internal::set_has_setting_wireframe(&_has_bits_);
+          setting_wireframe_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Setting_UseTessellation = 5;
-      case 5: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 40) goto handle_unusual;
-        msg->set_setting_usetessellation(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 5:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
+          _Internal::set_has_setting_usetessellation(&_has_bits_);
+          setting_usetessellation_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Setting_UseCullFace = 6;
-      case 6: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 48) goto handle_unusual;
-        msg->set_setting_usecullface(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 6:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
+          _Internal::set_has_setting_usecullface(&_has_bits_);
+          setting_usecullface_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float Setting_Alpha = 7;
-      case 7: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 61) goto handle_unusual;
-        msg->set_setting_alpha(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 7:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
+          _Internal::set_has_setting_alpha(&_has_bits_);
+          setting_alpha_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required int32 Setting_TessellationSubdivision = 8;
-      case 8: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 64) goto handle_unusual;
-        msg->set_setting_tessellationsubdivision(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 8:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
+          _Internal::set_has_setting_tessellationsubdivision(&_has_bits_);
+          setting_tessellationsubdivision_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate positionX = 9;
-      case 9: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 74) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_positionx();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 9:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
+          ptr = ctx->ParseMessage(mutable_positionx(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate positionY = 10;
-      case 10: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 82) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_positiony();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 10:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr = ctx->ParseMessage(mutable_positiony(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate positionZ = 11;
-      case 11: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 90) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_positionz();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 11:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(mutable_positionz(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate scaleX = 12;
-      case 12: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 98) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_scalex();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 12:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(mutable_scalex(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate scaleY = 13;
-      case 13: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_scaley();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 13:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          ptr = ctx->ParseMessage(mutable_scaley(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-      case 14: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 114) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_scalez();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 14:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
+          ptr = ctx->ParseMessage(mutable_scalez(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate rotateX = 15;
-      case 15: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 122) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_rotatex();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 15:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 122)) {
+          ptr = ctx->ParseMessage(mutable_rotatex(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate rotateY = 16;
-      case 16: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 130) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_rotatey();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 16:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
+          ptr = ctx->ParseMessage(mutable_rotatey(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-      case 17: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 138) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_rotatez();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 17:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 138)) {
+          ptr = ctx->ParseMessage(mutable_rotatez(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate displaceX = 18;
-      case 18: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 146) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_displacex();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 18:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 146)) {
+          ptr = ctx->ParseMessage(mutable_displacex(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate displaceY = 19;
-      case 19: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 154) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_displacey();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 19:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 154)) {
+          ptr = ctx->ParseMessage(mutable_displacey(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate displaceZ = 20;
-      case 20: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 162) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_displacez();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 20:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 162)) {
+          ptr = ctx->ParseMessage(mutable_displacez(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
-      case 21: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 170) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_setting_materialrefraction();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 21:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 170)) {
+          ptr = ctx->ParseMessage(mutable_setting_materialrefraction(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
-      case 22: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 178) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_setting_materialspecularexp();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 22:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 178)) {
+          ptr = ctx->ParseMessage(mutable_setting_materialspecularexp(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 Setting_ModelViewSkin = 23;
-      case 23: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 184) goto handle_unusual;
-        msg->set_setting_modelviewskin(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 23:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 184)) {
+          _Internal::set_has_setting_modelviewskin(&_has_bits_);
+          setting_modelviewskin_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
-      case 24: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 194) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_solidlightskin_materialcolor();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 24:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 194)) {
+          ptr = ctx->ParseMessage(mutable_solidlightskin_materialcolor(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
-      case 25: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 202) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_solidlightskin_ambient();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 25:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 202)) {
+          ptr = ctx->ParseMessage(mutable_solidlightskin_ambient(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
-      case 26: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 210) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_solidlightskin_diffuse();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 26:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 210)) {
+          ptr = ctx->ParseMessage(mutable_solidlightskin_diffuse(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
-      case 27: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 218) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_solidlightskin_specular();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 27:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 218)) {
+          ptr = ctx->ParseMessage(mutable_solidlightskin_specular(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float solidLightSkin_Ambient_Strength = 28;
-      case 28: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 229) goto handle_unusual;
-        msg->set_solidlightskin_ambient_strength(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 28:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 229)) {
+          _Internal::set_has_solidlightskin_ambient_strength(&_has_bits_);
+          solidlightskin_ambient_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float solidLightSkin_Diffuse_Strength = 29;
-      case 29: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 237) goto handle_unusual;
-        msg->set_solidlightskin_diffuse_strength(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 29:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 237)) {
+          _Internal::set_has_solidlightskin_diffuse_strength(&_has_bits_);
+          solidlightskin_diffuse_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float solidLightSkin_Specular_Strength = 30;
-      case 30: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 245) goto handle_unusual;
-        msg->set_solidlightskin_specular_strength(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 30:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 245)) {
+          _Internal::set_has_solidlightskin_specular_strength(&_has_bits_);
+          solidlightskin_specular_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 Setting_LightPosition = 31;
-      case 31: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 250) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_setting_lightposition();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 31:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 250)) {
+          ptr = ctx->ParseMessage(mutable_setting_lightposition(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 Setting_LightDirection = 32;
-      case 32: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 2) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_setting_lightdirection();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 32:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 2)) {
+          ptr = ctx->ParseMessage(mutable_setting_lightdirection(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
-      case 33: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 10) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_setting_lightambient();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 33:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
+          ptr = ctx->ParseMessage(mutable_setting_lightambient(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
-      case 34: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 18) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_setting_lightdiffuse();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 34:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
+          ptr = ctx->ParseMessage(mutable_setting_lightdiffuse(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
-      case 35: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 26) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Vec3::_InternalParse;
-        object = msg->mutable_setting_lightspecular();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 35:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
+          ptr = ctx->ParseMessage(mutable_setting_lightspecular(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float Setting_LightStrengthAmbient = 36;
-      case 36: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 37) goto handle_unusual;
-        msg->set_setting_lightstrengthambient(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 36:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
+          _Internal::set_has_setting_lightstrengthambient(&_has_bits_);
+          setting_lightstrengthambient_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Setting_LightStrengthDiffuse = 37;
-      case 37: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 45) goto handle_unusual;
-        msg->set_setting_lightstrengthdiffuse(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 37:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 45)) {
+          _Internal::set_has_setting_lightstrengthdiffuse(&_has_bits_);
+          setting_lightstrengthdiffuse_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Setting_LightStrengthSpecular = 38;
-      case 38: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 53) goto handle_unusual;
-        msg->set_setting_lightstrengthspecular(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 38:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 53)) {
+          _Internal::set_has_setting_lightstrengthspecular(&_has_bits_);
+          setting_lightstrengthspecular_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required int32 materialIlluminationModel = 39;
-      case 39: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 56) goto handle_unusual;
-        msg->set_materialilluminationmodel(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 39:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
+          _Internal::set_has_materialilluminationmodel(&_has_bits_);
+          materialilluminationmodel_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
-      case 40: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 66) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_displacementheightscale();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 40:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
+          ptr = ctx->ParseMessage(mutable_displacementheightscale(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool showMaterialEditor = 41;
-      case 41: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 72) goto handle_unusual;
-        msg->set_showmaterialeditor(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 41:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 72)) {
+          _Internal::set_has_showmaterialeditor(&_has_bits_);
+          showmaterialeditor_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MaterialColor materialAmbient = 42;
-      case 42: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 82) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MaterialColor::_InternalParse;
-        object = msg->mutable_materialambient();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 42:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
+          ptr = ctx->ParseMessage(mutable_materialambient(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MaterialColor materialDiffuse = 43;
-      case 43: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 90) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MaterialColor::_InternalParse;
-        object = msg->mutable_materialdiffuse();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 43:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
+          ptr = ctx->ParseMessage(mutable_materialdiffuse(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MaterialColor materialSpecular = 44;
-      case 44: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 98) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MaterialColor::_InternalParse;
-        object = msg->mutable_materialspecular();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 44:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
+          ptr = ctx->ParseMessage(mutable_materialspecular(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.MaterialColor materialEmission = 45;
-      case 45: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 106) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::MaterialColor::_InternalParse;
-        object = msg->mutable_materialemission();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 45:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
+          ptr = ctx->ParseMessage(mutable_materialemission(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Setting_ParallaxMapping = 46;
-      case 46: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 112) goto handle_unusual;
-        msg->set_setting_parallaxmapping(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 46:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 112)) {
+          _Internal::set_has_setting_parallaxmapping(&_has_bits_);
+          setting_parallaxmapping_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required int32 Effect_GBlur_Mode = 47;
-      case 47: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 120) goto handle_unusual;
-        msg->set_effect_gblur_mode(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 47:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 120)) {
+          _Internal::set_has_effect_gblur_mode(&_has_bits_);
+          effect_gblur_mode_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
-      case 48: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 130) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_effect_gblur_radius();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 48:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
+          ptr = ctx->ParseMessage(mutable_effect_gblur_radius(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
-      case 49: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 138) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::ObjectCoordinate::_InternalParse;
-        object = msg->mutable_effect_gblur_width();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 49:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 138)) {
+          ptr = ctx->ParseMessage(mutable_effect_gblur_width(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required bool Effect_Bloom_doBloom = 50;
-      case 50: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 144) goto handle_unusual;
-        msg->set_effect_bloom_dobloom(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 50:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 144)) {
+          _Internal::set_has_effect_bloom_dobloom(&_has_bits_);
+          effect_bloom_dobloom_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_WeightA = 51;
-      case 51: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 157) goto handle_unusual;
-        msg->set_effect_bloom_weighta(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 51:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 157)) {
+          _Internal::set_has_effect_bloom_weighta(&_has_bits_);
+          effect_bloom_weighta_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_WeightB = 52;
-      case 52: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 165) goto handle_unusual;
-        msg->set_effect_bloom_weightb(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 52:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 165)) {
+          _Internal::set_has_effect_bloom_weightb(&_has_bits_);
+          effect_bloom_weightb_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_WeightC = 53;
-      case 53: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 173) goto handle_unusual;
-        msg->set_effect_bloom_weightc(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 53:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 173)) {
+          _Internal::set_has_effect_bloom_weightc(&_has_bits_);
+          effect_bloom_weightc_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_WeightD = 54;
-      case 54: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 181) goto handle_unusual;
-        msg->set_effect_bloom_weightd(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 54:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 181)) {
+          _Internal::set_has_effect_bloom_weightd(&_has_bits_);
+          effect_bloom_weightd_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_Vignette = 55;
-      case 55: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 189) goto handle_unusual;
-        msg->set_effect_bloom_vignette(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 55:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 189)) {
+          _Internal::set_has_effect_bloom_vignette(&_has_bits_);
+          effect_bloom_vignette_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required float Effect_Bloom_VignetteAtt = 56;
-      case 56: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 197) goto handle_unusual;
-        msg->set_effect_bloom_vignetteatt(::google::protobuf::io::UnalignedLoad<float>(ptr));
-        ptr += sizeof(float);
-        break;
-      }
+      case 56:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 197)) {
+          _Internal::set_has_effect_bloom_vignetteatt(&_has_bits_);
+          effect_bloom_vignetteatt_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
+          ptr += sizeof(float);
+        } else goto handle_unusual;
+        continue;
       // required int32 Setting_LightingPass_DrawMode = 57;
-      case 57: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 200) goto handle_unusual;
-        msg->set_setting_lightingpass_drawmode(::google::protobuf::internal::ReadVarint(&ptr));
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        break;
-      }
+      case 57:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 200)) {
+          _Internal::set_has_setting_lightingpass_drawmode(&_has_bits_);
+          setting_lightingpass_drawmode_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       // required .KuplungApp.Mesh meshObject = 58;
-      case 58: {
-        if (static_cast<::google::protobuf::uint8>(tag) != 210) goto handle_unusual;
-        ptr = ::google::protobuf::io::ReadSize(ptr, &size);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
-        parser_till_end = ::KuplungApp::Mesh::_InternalParse;
-        object = msg->mutable_meshobject();
-        if (size > end - ptr) goto len_delim_till_end;
-        ptr += size;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ctx->ParseExactRange(
-            {parser_till_end, object}, ptr - size, ptr));
-        break;
-      }
+      case 58:
+        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 210)) {
+          ptr = ctx->ParseMessage(mutable_meshobject(), ptr);
+          CHK_(ptr);
+        } else goto handle_unusual;
+        continue;
       default: {
       handle_unusual:
         if ((tag & 7) == 4 || tag == 0) {
-          ctx->EndGroup(tag);
-          return ptr;
+          ctx->SetLastTag(tag);
+          goto success;
         }
-        auto res = UnknownFieldParse(tag, {_InternalParse, msg},
-          ptr, end, msg->_internal_metadata_.mutable_unknown_fields(), ctx);
-        ptr = res.first;
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
-        if (res.second) return ptr;
+        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
+        CHK_(ptr != nullptr);
+        continue;
       }
     }  // switch
   }  // while
+success:
   return ptr;
-len_delim_till_end:
-  return ctx->StoreAndTailCall(ptr, end, {_InternalParse, msg},
-                               {parser_till_end, object}, size);
+failure:
+  ptr = nullptr;
+  goto success;
+#undef CHK_
 }
 #else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 bool MeshModel::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
 #define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
+  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
   // @@protoc_insertion_point(parse_start:KuplungApp.MeshModel)
   for (;;) {
-    ::std::pair<::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
+    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
     tag = p.first;
     if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
       // required int32 ModelID = 1;
       case 1: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (8 & 0xFF)) {
-          HasBitSetters::set_has_modelid(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
+          _Internal::set_has_modelid(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &modelid_)));
         } else {
           goto handle_unusual;
@@ -2214,10 +1961,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Settings_DeferredRender = 2;
       case 2: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (16 & 0xFF)) {
-          HasBitSetters::set_has_settings_deferredrender(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
+          _Internal::set_has_settings_deferredrender(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &settings_deferredrender_)));
         } else {
           goto handle_unusual;
@@ -2227,10 +1974,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Setting_CelShading = 3;
       case 3: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (24 & 0xFF)) {
-          HasBitSetters::set_has_setting_celshading(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
+          _Internal::set_has_setting_celshading(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_celshading_)));
         } else {
           goto handle_unusual;
@@ -2240,10 +1987,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Setting_Wireframe = 4;
       case 4: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (32 & 0xFF)) {
-          HasBitSetters::set_has_setting_wireframe(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
+          _Internal::set_has_setting_wireframe(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_wireframe_)));
         } else {
           goto handle_unusual;
@@ -2253,10 +2000,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Setting_UseTessellation = 5;
       case 5: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (40 & 0xFF)) {
-          HasBitSetters::set_has_setting_usetessellation(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
+          _Internal::set_has_setting_usetessellation(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_usetessellation_)));
         } else {
           goto handle_unusual;
@@ -2266,10 +2013,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Setting_UseCullFace = 6;
       case 6: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (48 & 0xFF)) {
-          HasBitSetters::set_has_setting_usecullface(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (48 & 0xFF)) {
+          _Internal::set_has_setting_usecullface(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_usecullface_)));
         } else {
           goto handle_unusual;
@@ -2279,10 +2026,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Setting_Alpha = 7;
       case 7: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (61 & 0xFF)) {
-          HasBitSetters::set_has_setting_alpha(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (61 & 0xFF)) {
+          _Internal::set_has_setting_alpha(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_alpha_)));
         } else {
           goto handle_unusual;
@@ -2292,10 +2039,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required int32 Setting_TessellationSubdivision = 8;
       case 8: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (64 & 0xFF)) {
-          HasBitSetters::set_has_setting_tessellationsubdivision(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (64 & 0xFF)) {
+          _Internal::set_has_setting_tessellationsubdivision(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_tessellationsubdivision_)));
         } else {
           goto handle_unusual;
@@ -2305,8 +2052,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionX = 9;
       case 9: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_positionx()));
         } else {
           goto handle_unusual;
@@ -2316,8 +2063,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionY = 10;
       case 10: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_positiony()));
         } else {
           goto handle_unusual;
@@ -2327,8 +2074,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate positionZ = 11;
       case 11: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_positionz()));
         } else {
           goto handle_unusual;
@@ -2338,8 +2085,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleX = 12;
       case 12: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (98 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_scalex()));
         } else {
           goto handle_unusual;
@@ -2349,8 +2096,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleY = 13;
       case 13: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (106 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (106 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_scaley()));
         } else {
           goto handle_unusual;
@@ -2360,8 +2107,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate scaleZ = 14;
       case 14: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (114 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (114 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_scalez()));
         } else {
           goto handle_unusual;
@@ -2371,8 +2118,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateX = 15;
       case 15: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (122 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (122 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_rotatex()));
         } else {
           goto handle_unusual;
@@ -2382,8 +2129,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateY = 16;
       case 16: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (130 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (130 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_rotatey()));
         } else {
           goto handle_unusual;
@@ -2393,8 +2140,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate rotateZ = 17;
       case 17: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (138 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (138 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_rotatez()));
         } else {
           goto handle_unusual;
@@ -2404,8 +2151,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate displaceX = 18;
       case 18: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (146 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (146 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_displacex()));
         } else {
           goto handle_unusual;
@@ -2415,8 +2162,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate displaceY = 19;
       case 19: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (154 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (154 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_displacey()));
         } else {
           goto handle_unusual;
@@ -2426,8 +2173,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate displaceZ = 20;
       case 20: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (162 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (162 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_displacez()));
         } else {
           goto handle_unusual;
@@ -2437,8 +2184,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
       case 21: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (170 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (170 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_materialrefraction()));
         } else {
           goto handle_unusual;
@@ -2448,8 +2195,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
       case 22: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (178 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (178 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_materialspecularexp()));
         } else {
           goto handle_unusual;
@@ -2459,10 +2206,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required int32 Setting_ModelViewSkin = 23;
       case 23: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (184 & 0xFF)) {
-          HasBitSetters::set_has_setting_modelviewskin(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (184 & 0xFF)) {
+          _Internal::set_has_setting_modelviewskin(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_modelviewskin_)));
         } else {
           goto handle_unusual;
@@ -2472,8 +2219,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
       case 24: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (194 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (194 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_solidlightskin_materialcolor()));
         } else {
           goto handle_unusual;
@@ -2483,8 +2230,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
       case 25: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (202 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (202 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_solidlightskin_ambient()));
         } else {
           goto handle_unusual;
@@ -2494,8 +2241,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
       case 26: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (210 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (210 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_solidlightskin_diffuse()));
         } else {
           goto handle_unusual;
@@ -2505,8 +2252,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
       case 27: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (218 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (218 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_solidlightskin_specular()));
         } else {
           goto handle_unusual;
@@ -2516,10 +2263,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float solidLightSkin_Ambient_Strength = 28;
       case 28: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (229 & 0xFF)) {
-          HasBitSetters::set_has_solidlightskin_ambient_strength(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (229 & 0xFF)) {
+          _Internal::set_has_solidlightskin_ambient_strength(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_ambient_strength_)));
         } else {
           goto handle_unusual;
@@ -2529,10 +2276,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float solidLightSkin_Diffuse_Strength = 29;
       case 29: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (237 & 0xFF)) {
-          HasBitSetters::set_has_solidlightskin_diffuse_strength(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (237 & 0xFF)) {
+          _Internal::set_has_solidlightskin_diffuse_strength(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_diffuse_strength_)));
         } else {
           goto handle_unusual;
@@ -2542,10 +2289,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float solidLightSkin_Specular_Strength = 30;
       case 30: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (245 & 0xFF)) {
-          HasBitSetters::set_has_solidlightskin_specular_strength(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (245 & 0xFF)) {
+          _Internal::set_has_solidlightskin_specular_strength(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &solidlightskin_specular_strength_)));
         } else {
           goto handle_unusual;
@@ -2555,8 +2302,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_LightPosition = 31;
       case 31: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (250 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (250 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_lightposition()));
         } else {
           goto handle_unusual;
@@ -2566,8 +2313,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_LightDirection = 32;
       case 32: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (258 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (258 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_lightdirection()));
         } else {
           goto handle_unusual;
@@ -2577,8 +2324,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
       case 33: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (266 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (266 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_lightambient()));
         } else {
           goto handle_unusual;
@@ -2588,8 +2335,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
       case 34: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (274 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (274 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_lightdiffuse()));
         } else {
           goto handle_unusual;
@@ -2599,8 +2346,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
       case 35: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (282 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (282 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_setting_lightspecular()));
         } else {
           goto handle_unusual;
@@ -2610,10 +2357,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Setting_LightStrengthAmbient = 36;
       case 36: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (293 & 0xFF)) {
-          HasBitSetters::set_has_setting_lightstrengthambient(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (293 & 0xFF)) {
+          _Internal::set_has_setting_lightstrengthambient(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthambient_)));
         } else {
           goto handle_unusual;
@@ -2623,10 +2370,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Setting_LightStrengthDiffuse = 37;
       case 37: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (301 & 0xFF)) {
-          HasBitSetters::set_has_setting_lightstrengthdiffuse(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (301 & 0xFF)) {
+          _Internal::set_has_setting_lightstrengthdiffuse(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthdiffuse_)));
         } else {
           goto handle_unusual;
@@ -2636,10 +2383,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Setting_LightStrengthSpecular = 38;
       case 38: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (309 & 0xFF)) {
-          HasBitSetters::set_has_setting_lightstrengthspecular(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (309 & 0xFF)) {
+          _Internal::set_has_setting_lightstrengthspecular(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &setting_lightstrengthspecular_)));
         } else {
           goto handle_unusual;
@@ -2649,10 +2396,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required int32 materialIlluminationModel = 39;
       case 39: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (312 & 0xFF)) {
-          HasBitSetters::set_has_materialilluminationmodel(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (312 & 0xFF)) {
+          _Internal::set_has_materialilluminationmodel(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &materialilluminationmodel_)));
         } else {
           goto handle_unusual;
@@ -2662,8 +2409,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
       case 40: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (322 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (322 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_displacementheightscale()));
         } else {
           goto handle_unusual;
@@ -2673,10 +2420,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool showMaterialEditor = 41;
       case 41: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (328 & 0xFF)) {
-          HasBitSetters::set_has_showmaterialeditor(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (328 & 0xFF)) {
+          _Internal::set_has_showmaterialeditor(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &showmaterialeditor_)));
         } else {
           goto handle_unusual;
@@ -2686,8 +2433,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor materialAmbient = 42;
       case 42: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (338 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (338 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_materialambient()));
         } else {
           goto handle_unusual;
@@ -2697,8 +2444,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor materialDiffuse = 43;
       case 43: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (346 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (346 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_materialdiffuse()));
         } else {
           goto handle_unusual;
@@ -2708,8 +2455,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor materialSpecular = 44;
       case 44: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (354 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (354 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_materialspecular()));
         } else {
           goto handle_unusual;
@@ -2719,8 +2466,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.MaterialColor materialEmission = 45;
       case 45: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (362 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (362 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_materialemission()));
         } else {
           goto handle_unusual;
@@ -2730,10 +2477,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Setting_ParallaxMapping = 46;
       case 46: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (368 & 0xFF)) {
-          HasBitSetters::set_has_setting_parallaxmapping(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (368 & 0xFF)) {
+          _Internal::set_has_setting_parallaxmapping(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &setting_parallaxmapping_)));
         } else {
           goto handle_unusual;
@@ -2743,10 +2490,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required int32 Effect_GBlur_Mode = 47;
       case 47: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (376 & 0xFF)) {
-          HasBitSetters::set_has_effect_gblur_mode(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (376 & 0xFF)) {
+          _Internal::set_has_effect_gblur_mode(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &effect_gblur_mode_)));
         } else {
           goto handle_unusual;
@@ -2756,8 +2503,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
       case 48: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (386 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (386 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_effect_gblur_radius()));
         } else {
           goto handle_unusual;
@@ -2767,8 +2514,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
       case 49: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (394 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (394 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_effect_gblur_width()));
         } else {
           goto handle_unusual;
@@ -2778,10 +2525,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required bool Effect_Bloom_doBloom = 50;
       case 50: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (400 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_dobloom(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::google::protobuf::internal::WireFormatLite::TYPE_BOOL>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (400 & 0xFF)) {
+          _Internal::set_has_effect_bloom_dobloom(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
                  input, &effect_bloom_dobloom_)));
         } else {
           goto handle_unusual;
@@ -2791,10 +2538,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_WeightA = 51;
       case 51: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (413 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_weighta(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (413 & 0xFF)) {
+          _Internal::set_has_effect_bloom_weighta(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weighta_)));
         } else {
           goto handle_unusual;
@@ -2804,10 +2551,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_WeightB = 52;
       case 52: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (421 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_weightb(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (421 & 0xFF)) {
+          _Internal::set_has_effect_bloom_weightb(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightb_)));
         } else {
           goto handle_unusual;
@@ -2817,10 +2564,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_WeightC = 53;
       case 53: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (429 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_weightc(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (429 & 0xFF)) {
+          _Internal::set_has_effect_bloom_weightc(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightc_)));
         } else {
           goto handle_unusual;
@@ -2830,10 +2577,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_WeightD = 54;
       case 54: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (437 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_weightd(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (437 & 0xFF)) {
+          _Internal::set_has_effect_bloom_weightd(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_weightd_)));
         } else {
           goto handle_unusual;
@@ -2843,10 +2590,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_Vignette = 55;
       case 55: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (445 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_vignette(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (445 & 0xFF)) {
+          _Internal::set_has_effect_bloom_vignette(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_vignette_)));
         } else {
           goto handle_unusual;
@@ -2856,10 +2603,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required float Effect_Bloom_VignetteAtt = 56;
       case 56: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (453 & 0xFF)) {
-          HasBitSetters::set_has_effect_bloom_vignetteatt(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   float, ::google::protobuf::internal::WireFormatLite::TYPE_FLOAT>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (453 & 0xFF)) {
+          _Internal::set_has_effect_bloom_vignetteatt(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
                  input, &effect_bloom_vignetteatt_)));
         } else {
           goto handle_unusual;
@@ -2869,10 +2616,10 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required int32 Setting_LightingPass_DrawMode = 57;
       case 57: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (456 & 0xFF)) {
-          HasBitSetters::set_has_setting_lightingpass_drawmode(this);
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (456 & 0xFF)) {
+          _Internal::set_has_setting_lightingpass_drawmode(&_has_bits_);
+          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
+                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
                  input, &setting_lightingpass_drawmode_)));
         } else {
           goto handle_unusual;
@@ -2882,8 +2629,8 @@ bool MeshModel::MergePartialFromCodedStream(
 
       // required .KuplungApp.Mesh meshObject = 58;
       case 58: {
-        if (static_cast< ::google::protobuf::uint8>(tag) == (466 & 0xFF)) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessage(
+        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (466 & 0xFF)) {
+          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
                input, mutable_meshobject()));
         } else {
           goto handle_unusual;
@@ -2896,7 +2643,7 @@ bool MeshModel::MergePartialFromCodedStream(
         if (tag == 0) {
           goto success;
         }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
+        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
               input, tag, _internal_metadata_.mutable_unknown_fields()));
         break;
       }
@@ -2913,729 +2660,729 @@ failure:
 #endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 
 void MeshModel::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
+    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
   // @@protoc_insertion_point(serialize_start:KuplungApp.MeshModel)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 ModelID = 1;
   if (cached_has_bits & 0x80000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->modelid(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(1, this->modelid(), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Settings_DeferredRender = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(2, this->settings_deferredrender(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(2, this->settings_deferredrender(), output);
   }
 
   // required bool Setting_CelShading = 3;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(3, this->setting_celshading(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(3, this->setting_celshading(), output);
   }
 
   // required bool Setting_Wireframe = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(4, this->setting_wireframe(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(4, this->setting_wireframe(), output);
   }
 
   // required bool Setting_UseTessellation = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(5, this->setting_usetessellation(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(5, this->setting_usetessellation(), output);
   }
 
   // required bool Setting_UseCullFace = 6;
   if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(6, this->setting_usecullface(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(6, this->setting_usecullface(), output);
   }
 
   // required float Setting_Alpha = 7;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(7, this->setting_alpha(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(7, this->setting_alpha(), output);
   }
 
   // required int32 Setting_TessellationSubdivision = 8;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(8, this->setting_tessellationsubdivision(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(8, this->setting_tessellationsubdivision(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate positionX = 9;
   if (cached_has_bits & 0x00000001u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, HasBitSetters::positionx(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      9, _Internal::positionx(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 10;
   if (cached_has_bits & 0x00000002u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, HasBitSetters::positiony(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      10, _Internal::positiony(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 11;
   if (cached_has_bits & 0x00000004u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, HasBitSetters::positionz(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      11, _Internal::positionz(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 12;
   if (cached_has_bits & 0x00000008u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, HasBitSetters::scalex(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      12, _Internal::scalex(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 13;
   if (cached_has_bits & 0x00000010u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, HasBitSetters::scaley(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      13, _Internal::scaley(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 14;
   if (cached_has_bits & 0x00000020u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, HasBitSetters::scalez(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      14, _Internal::scalez(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 15;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, HasBitSetters::rotatex(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      15, _Internal::rotatex(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 16;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      16, HasBitSetters::rotatey(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      16, _Internal::rotatey(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 17;
   if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, HasBitSetters::rotatez(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      17, _Internal::rotatez(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceX = 18;
   if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      18, HasBitSetters::displacex(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      18, _Internal::displacex(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceY = 19;
   if (cached_has_bits & 0x00000400u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      19, HasBitSetters::displacey(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      19, _Internal::displacey(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceZ = 20;
   if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, HasBitSetters::displacez(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      20, _Internal::displacez(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
   if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, HasBitSetters::setting_materialrefraction(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      21, _Internal::setting_materialrefraction(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
   if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, HasBitSetters::setting_materialspecularexp(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      22, _Internal::setting_materialspecularexp(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required int32 Setting_ModelViewSkin = 23;
   if (cached_has_bits & 0x00000040u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(23, this->setting_modelviewskin(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(23, this->setting_modelviewskin(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
   if (cached_has_bits & 0x00004000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      24, HasBitSetters::solidlightskin_materialcolor(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      24, _Internal::solidlightskin_materialcolor(this), output);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
   if (cached_has_bits & 0x00008000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      25, HasBitSetters::solidlightskin_ambient(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      25, _Internal::solidlightskin_ambient(this), output);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
   if (cached_has_bits & 0x00010000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      26, HasBitSetters::solidlightskin_diffuse(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      26, _Internal::solidlightskin_diffuse(this), output);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
   if (cached_has_bits & 0x00020000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      27, HasBitSetters::solidlightskin_specular(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      27, _Internal::solidlightskin_specular(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float solidLightSkin_Ambient_Strength = 28;
   if (cached_has_bits & 0x00000080u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(28, this->solidlightskin_ambient_strength(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(28, this->solidlightskin_ambient_strength(), output);
   }
 
   // required float solidLightSkin_Diffuse_Strength = 29;
   if (cached_has_bits & 0x00000100u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(29, this->solidlightskin_diffuse_strength(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(29, this->solidlightskin_diffuse_strength(), output);
   }
 
   // required float solidLightSkin_Specular_Strength = 30;
   if (cached_has_bits & 0x00000200u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(30, this->solidlightskin_specular_strength(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(30, this->solidlightskin_specular_strength(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 Setting_LightPosition = 31;
   if (cached_has_bits & 0x00040000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      31, HasBitSetters::setting_lightposition(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      31, _Internal::setting_lightposition(this), output);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDirection = 32;
   if (cached_has_bits & 0x00080000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      32, HasBitSetters::setting_lightdirection(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      32, _Internal::setting_lightdirection(this), output);
   }
 
   // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
   if (cached_has_bits & 0x00100000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      33, HasBitSetters::setting_lightambient(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      33, _Internal::setting_lightambient(this), output);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
   if (cached_has_bits & 0x00200000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      34, HasBitSetters::setting_lightdiffuse(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      34, _Internal::setting_lightdiffuse(this), output);
   }
 
   // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
   if (cached_has_bits & 0x00400000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      35, HasBitSetters::setting_lightspecular(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      35, _Internal::setting_lightspecular(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float Setting_LightStrengthAmbient = 36;
   if (cached_has_bits & 0x00004000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(36, this->setting_lightstrengthambient(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(36, this->setting_lightstrengthambient(), output);
   }
 
   // required float Setting_LightStrengthDiffuse = 37;
   if (cached_has_bits & 0x00008000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(37, this->setting_lightstrengthdiffuse(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(37, this->setting_lightstrengthdiffuse(), output);
   }
 
   // required float Setting_LightStrengthSpecular = 38;
   if (cached_has_bits & 0x00010000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(38, this->setting_lightstrengthspecular(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(38, this->setting_lightstrengthspecular(), output);
   }
 
   // required int32 materialIlluminationModel = 39;
   if (cached_has_bits & 0x00020000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(39, this->materialilluminationmodel(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(39, this->materialilluminationmodel(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
   if (cached_has_bits & 0x00800000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      40, HasBitSetters::displacementheightscale(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      40, _Internal::displacementheightscale(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool showMaterialEditor = 41;
   if (cached_has_bits & 0x00000800u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(41, this->showmaterialeditor(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(41, this->showmaterialeditor(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.MaterialColor materialAmbient = 42;
   if (cached_has_bits & 0x01000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      42, HasBitSetters::materialambient(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      42, _Internal::materialambient(this), output);
   }
 
   // required .KuplungApp.MaterialColor materialDiffuse = 43;
   if (cached_has_bits & 0x02000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      43, HasBitSetters::materialdiffuse(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      43, _Internal::materialdiffuse(this), output);
   }
 
   // required .KuplungApp.MaterialColor materialSpecular = 44;
   if (cached_has_bits & 0x04000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      44, HasBitSetters::materialspecular(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      44, _Internal::materialspecular(this), output);
   }
 
   // required .KuplungApp.MaterialColor materialEmission = 45;
   if (cached_has_bits & 0x08000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      45, HasBitSetters::materialemission(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      45, _Internal::materialemission(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Setting_ParallaxMapping = 46;
   if (cached_has_bits & 0x00001000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(46, this->setting_parallaxmapping(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(46, this->setting_parallaxmapping(), output);
   }
 
   // required int32 Effect_GBlur_Mode = 47;
   if (cached_has_bits & 0x00040000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(47, this->effect_gblur_mode(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(47, this->effect_gblur_mode(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
   if (cached_has_bits & 0x10000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      48, HasBitSetters::effect_gblur_radius(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      48, _Internal::effect_gblur_radius(this), output);
   }
 
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
   if (cached_has_bits & 0x20000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      49, HasBitSetters::effect_gblur_width(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      49, _Internal::effect_gblur_width(this), output);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Effect_Bloom_doBloom = 50;
   if (cached_has_bits & 0x00002000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteBool(50, this->effect_bloom_dobloom(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(50, this->effect_bloom_dobloom(), output);
   }
 
   // required float Effect_Bloom_WeightA = 51;
   if (cached_has_bits & 0x00080000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(51, this->effect_bloom_weighta(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(51, this->effect_bloom_weighta(), output);
   }
 
   // required float Effect_Bloom_WeightB = 52;
   if (cached_has_bits & 0x00100000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(52, this->effect_bloom_weightb(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(52, this->effect_bloom_weightb(), output);
   }
 
   // required float Effect_Bloom_WeightC = 53;
   if (cached_has_bits & 0x00200000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(53, this->effect_bloom_weightc(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(53, this->effect_bloom_weightc(), output);
   }
 
   // required float Effect_Bloom_WeightD = 54;
   if (cached_has_bits & 0x00400000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(54, this->effect_bloom_weightd(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(54, this->effect_bloom_weightd(), output);
   }
 
   // required float Effect_Bloom_Vignette = 55;
   if (cached_has_bits & 0x00800000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(55, this->effect_bloom_vignette(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(55, this->effect_bloom_vignette(), output);
   }
 
   // required float Effect_Bloom_VignetteAtt = 56;
   if (cached_has_bits & 0x01000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteFloat(56, this->effect_bloom_vignetteatt(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(56, this->effect_bloom_vignetteatt(), output);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 57;
   if (cached_has_bits & 0x02000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(57, this->setting_lightingpass_drawmode(), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(57, this->setting_lightingpass_drawmode(), output);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Mesh meshObject = 58;
   if (cached_has_bits & 0x40000000u) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      58, HasBitSetters::meshobject(this), output);
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
+      58, _Internal::meshobject(this), output);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
         _internal_metadata_.unknown_fields(), output);
   }
   // @@protoc_insertion_point(serialize_end:KuplungApp.MeshModel)
 }
 
-::google::protobuf::uint8* MeshModel::InternalSerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
+::PROTOBUF_NAMESPACE_ID::uint8* MeshModel::InternalSerializeWithCachedSizesToArray(
+    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModel)
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = _has_bits_[0];
   // required int32 ModelID = 1;
   if (cached_has_bits & 0x80000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->modelid(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->modelid(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Settings_DeferredRender = 2;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(2, this->settings_deferredrender(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->settings_deferredrender(), target);
   }
 
   // required bool Setting_CelShading = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(3, this->setting_celshading(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(3, this->setting_celshading(), target);
   }
 
   // required bool Setting_Wireframe = 4;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(4, this->setting_wireframe(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->setting_wireframe(), target);
   }
 
   // required bool Setting_UseTessellation = 5;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(5, this->setting_usetessellation(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->setting_usetessellation(), target);
   }
 
   // required bool Setting_UseCullFace = 6;
   if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(6, this->setting_usecullface(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(6, this->setting_usecullface(), target);
   }
 
   // required float Setting_Alpha = 7;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(7, this->setting_alpha(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->setting_alpha(), target);
   }
 
   // required int32 Setting_TessellationSubdivision = 8;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(8, this->setting_tessellationsubdivision(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->setting_tessellationsubdivision(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate positionX = 9;
   if (cached_has_bits & 0x00000001u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, HasBitSetters::positionx(this), target);
+        9, _Internal::positionx(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 10;
   if (cached_has_bits & 0x00000002u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, HasBitSetters::positiony(this), target);
+        10, _Internal::positiony(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 11;
   if (cached_has_bits & 0x00000004u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, HasBitSetters::positionz(this), target);
+        11, _Internal::positionz(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 12;
   if (cached_has_bits & 0x00000008u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, HasBitSetters::scalex(this), target);
+        12, _Internal::scalex(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 13;
   if (cached_has_bits & 0x00000010u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, HasBitSetters::scaley(this), target);
+        13, _Internal::scaley(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 14;
   if (cached_has_bits & 0x00000020u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, HasBitSetters::scalez(this), target);
+        14, _Internal::scalez(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 15;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        15, HasBitSetters::rotatex(this), target);
+        15, _Internal::rotatex(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 16;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        16, HasBitSetters::rotatey(this), target);
+        16, _Internal::rotatey(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 17;
   if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        17, HasBitSetters::rotatez(this), target);
+        17, _Internal::rotatez(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceX = 18;
   if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        18, HasBitSetters::displacex(this), target);
+        18, _Internal::displacex(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceY = 19;
   if (cached_has_bits & 0x00000400u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        19, HasBitSetters::displacey(this), target);
+        19, _Internal::displacey(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceZ = 20;
   if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        20, HasBitSetters::displacez(this), target);
+        20, _Internal::displacez(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
   if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, HasBitSetters::setting_materialrefraction(this), target);
+        21, _Internal::setting_materialrefraction(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
   if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, HasBitSetters::setting_materialspecularexp(this), target);
+        22, _Internal::setting_materialspecularexp(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required int32 Setting_ModelViewSkin = 23;
   if (cached_has_bits & 0x00000040u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(23, this->setting_modelviewskin(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(23, this->setting_modelviewskin(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
   if (cached_has_bits & 0x00004000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        24, HasBitSetters::solidlightskin_materialcolor(this), target);
+        24, _Internal::solidlightskin_materialcolor(this), target);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
   if (cached_has_bits & 0x00008000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        25, HasBitSetters::solidlightskin_ambient(this), target);
+        25, _Internal::solidlightskin_ambient(this), target);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
   if (cached_has_bits & 0x00010000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        26, HasBitSetters::solidlightskin_diffuse(this), target);
+        26, _Internal::solidlightskin_diffuse(this), target);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
   if (cached_has_bits & 0x00020000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        27, HasBitSetters::solidlightskin_specular(this), target);
+        27, _Internal::solidlightskin_specular(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float solidLightSkin_Ambient_Strength = 28;
   if (cached_has_bits & 0x00000080u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(28, this->solidlightskin_ambient_strength(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(28, this->solidlightskin_ambient_strength(), target);
   }
 
   // required float solidLightSkin_Diffuse_Strength = 29;
   if (cached_has_bits & 0x00000100u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(29, this->solidlightskin_diffuse_strength(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(29, this->solidlightskin_diffuse_strength(), target);
   }
 
   // required float solidLightSkin_Specular_Strength = 30;
   if (cached_has_bits & 0x00000200u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(30, this->solidlightskin_specular_strength(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(30, this->solidlightskin_specular_strength(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 Setting_LightPosition = 31;
   if (cached_has_bits & 0x00040000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        31, HasBitSetters::setting_lightposition(this), target);
+        31, _Internal::setting_lightposition(this), target);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDirection = 32;
   if (cached_has_bits & 0x00080000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        32, HasBitSetters::setting_lightdirection(this), target);
+        32, _Internal::setting_lightdirection(this), target);
   }
 
   // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
   if (cached_has_bits & 0x00100000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        33, HasBitSetters::setting_lightambient(this), target);
+        33, _Internal::setting_lightambient(this), target);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
   if (cached_has_bits & 0x00200000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        34, HasBitSetters::setting_lightdiffuse(this), target);
+        34, _Internal::setting_lightdiffuse(this), target);
   }
 
   // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
   if (cached_has_bits & 0x00400000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        35, HasBitSetters::setting_lightspecular(this), target);
+        35, _Internal::setting_lightspecular(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float Setting_LightStrengthAmbient = 36;
   if (cached_has_bits & 0x00004000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(36, this->setting_lightstrengthambient(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(36, this->setting_lightstrengthambient(), target);
   }
 
   // required float Setting_LightStrengthDiffuse = 37;
   if (cached_has_bits & 0x00008000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(37, this->setting_lightstrengthdiffuse(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(37, this->setting_lightstrengthdiffuse(), target);
   }
 
   // required float Setting_LightStrengthSpecular = 38;
   if (cached_has_bits & 0x00010000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(38, this->setting_lightstrengthspecular(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(38, this->setting_lightstrengthspecular(), target);
   }
 
   // required int32 materialIlluminationModel = 39;
   if (cached_has_bits & 0x00020000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(39, this->materialilluminationmodel(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(39, this->materialilluminationmodel(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
   if (cached_has_bits & 0x00800000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        40, HasBitSetters::displacementheightscale(this), target);
+        40, _Internal::displacementheightscale(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool showMaterialEditor = 41;
   if (cached_has_bits & 0x00000800u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(41, this->showmaterialeditor(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(41, this->showmaterialeditor(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.MaterialColor materialAmbient = 42;
   if (cached_has_bits & 0x01000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        42, HasBitSetters::materialambient(this), target);
+        42, _Internal::materialambient(this), target);
   }
 
   // required .KuplungApp.MaterialColor materialDiffuse = 43;
   if (cached_has_bits & 0x02000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        43, HasBitSetters::materialdiffuse(this), target);
+        43, _Internal::materialdiffuse(this), target);
   }
 
   // required .KuplungApp.MaterialColor materialSpecular = 44;
   if (cached_has_bits & 0x04000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        44, HasBitSetters::materialspecular(this), target);
+        44, _Internal::materialspecular(this), target);
   }
 
   // required .KuplungApp.MaterialColor materialEmission = 45;
   if (cached_has_bits & 0x08000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        45, HasBitSetters::materialemission(this), target);
+        45, _Internal::materialemission(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Setting_ParallaxMapping = 46;
   if (cached_has_bits & 0x00001000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(46, this->setting_parallaxmapping(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(46, this->setting_parallaxmapping(), target);
   }
 
   // required int32 Effect_GBlur_Mode = 47;
   if (cached_has_bits & 0x00040000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(47, this->effect_gblur_mode(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(47, this->effect_gblur_mode(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
   if (cached_has_bits & 0x10000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        48, HasBitSetters::effect_gblur_radius(this), target);
+        48, _Internal::effect_gblur_radius(this), target);
   }
 
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
   if (cached_has_bits & 0x20000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        49, HasBitSetters::effect_gblur_width(this), target);
+        49, _Internal::effect_gblur_width(this), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool Effect_Bloom_doBloom = 50;
   if (cached_has_bits & 0x00002000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteBoolToArray(50, this->effect_bloom_dobloom(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(50, this->effect_bloom_dobloom(), target);
   }
 
   // required float Effect_Bloom_WeightA = 51;
   if (cached_has_bits & 0x00080000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(51, this->effect_bloom_weighta(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(51, this->effect_bloom_weighta(), target);
   }
 
   // required float Effect_Bloom_WeightB = 52;
   if (cached_has_bits & 0x00100000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(52, this->effect_bloom_weightb(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(52, this->effect_bloom_weightb(), target);
   }
 
   // required float Effect_Bloom_WeightC = 53;
   if (cached_has_bits & 0x00200000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(53, this->effect_bloom_weightc(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(53, this->effect_bloom_weightc(), target);
   }
 
   // required float Effect_Bloom_WeightD = 54;
   if (cached_has_bits & 0x00400000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(54, this->effect_bloom_weightd(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(54, this->effect_bloom_weightd(), target);
   }
 
   // required float Effect_Bloom_Vignette = 55;
   if (cached_has_bits & 0x00800000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(55, this->effect_bloom_vignette(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(55, this->effect_bloom_vignette(), target);
   }
 
   // required float Effect_Bloom_VignetteAtt = 56;
   if (cached_has_bits & 0x01000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteFloatToArray(56, this->effect_bloom_vignetteatt(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(56, this->effect_bloom_vignetteatt(), target);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 57;
   if (cached_has_bits & 0x02000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(57, this->setting_lightingpass_drawmode(), target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(57, this->setting_lightingpass_drawmode(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Mesh meshObject = 58;
   if (cached_has_bits & 0x40000000u) {
-    target = ::google::protobuf::internal::WireFormatLite::
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        58, HasBitSetters::meshobject(this), target);
+        58, _Internal::meshobject(this), target);
   }
 
   if (_internal_metadata_.have_unknown_fields()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields(), target);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModel)
@@ -3649,224 +3396,224 @@ size_t MeshModel::RequiredFieldsByteSizeFallback() const {
   if (has_positionx()) {
     // required .KuplungApp.ObjectCoordinate positionX = 9;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionx_);
   }
 
   if (has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 10;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positiony_);
   }
 
   if (has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 11;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionz_);
   }
 
   if (has_scalex()) {
     // required .KuplungApp.ObjectCoordinate scaleX = 12;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalex_);
   }
 
   if (has_scaley()) {
     // required .KuplungApp.ObjectCoordinate scaleY = 13;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scaley_);
   }
 
   if (has_scalez()) {
     // required .KuplungApp.ObjectCoordinate scaleZ = 14;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalez_);
   }
 
   if (has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 15;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatex_);
   }
 
   if (has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 16;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatey_);
   }
 
   if (has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 17;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatez_);
   }
 
   if (has_displacex()) {
     // required .KuplungApp.ObjectCoordinate displaceX = 18;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacex_);
   }
 
   if (has_displacey()) {
     // required .KuplungApp.ObjectCoordinate displaceY = 19;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacey_);
   }
 
   if (has_displacez()) {
     // required .KuplungApp.ObjectCoordinate displaceZ = 20;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacez_);
   }
 
   if (has_setting_materialrefraction()) {
     // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_materialrefraction_);
   }
 
   if (has_setting_materialspecularexp()) {
     // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_materialspecularexp_);
   }
 
   if (has_solidlightskin_materialcolor()) {
     // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_materialcolor_);
   }
 
   if (has_solidlightskin_ambient()) {
     // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_ambient_);
   }
 
   if (has_solidlightskin_diffuse()) {
     // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_diffuse_);
   }
 
   if (has_solidlightskin_specular()) {
     // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_specular_);
   }
 
   if (has_setting_lightposition()) {
     // required .KuplungApp.Vec3 Setting_LightPosition = 31;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightposition_);
   }
 
   if (has_setting_lightdirection()) {
     // required .KuplungApp.Vec3 Setting_LightDirection = 32;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightdirection_);
   }
 
   if (has_setting_lightambient()) {
     // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightambient_);
   }
 
   if (has_setting_lightdiffuse()) {
     // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightdiffuse_);
   }
 
   if (has_setting_lightspecular()) {
     // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightspecular_);
   }
 
   if (has_displacementheightscale()) {
     // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacementheightscale_);
   }
 
   if (has_materialambient()) {
     // required .KuplungApp.MaterialColor materialAmbient = 42;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialambient_);
   }
 
   if (has_materialdiffuse()) {
     // required .KuplungApp.MaterialColor materialDiffuse = 43;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialdiffuse_);
   }
 
   if (has_materialspecular()) {
     // required .KuplungApp.MaterialColor materialSpecular = 44;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialspecular_);
   }
 
   if (has_materialemission()) {
     // required .KuplungApp.MaterialColor materialEmission = 45;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialemission_);
   }
 
   if (has_effect_gblur_radius()) {
     // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *effect_gblur_radius_);
   }
 
   if (has_effect_gblur_width()) {
     // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *effect_gblur_width_);
   }
 
   if (has_meshobject()) {
     // required .KuplungApp.Mesh meshObject = 58;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *meshobject_);
   }
 
   if (has_modelid()) {
     // required int32 ModelID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->modelid());
   }
 
@@ -3898,14 +3645,14 @@ size_t MeshModel::RequiredFieldsByteSizeFallback() const {
   if (has_setting_tessellationsubdivision()) {
     // required int32 Setting_TessellationSubdivision = 8;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_tessellationsubdivision());
   }
 
   if (has_setting_modelviewskin()) {
     // required int32 Setting_ModelViewSkin = 23;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_modelviewskin());
   }
 
@@ -3962,14 +3709,14 @@ size_t MeshModel::RequiredFieldsByteSizeFallback() const {
   if (has_materialilluminationmodel()) {
     // required int32 materialIlluminationModel = 39;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->materialilluminationmodel());
   }
 
   if (has_effect_gblur_mode()) {
     // required int32 Effect_GBlur_Mode = 47;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->effect_gblur_mode());
   }
 
@@ -4006,7 +3753,7 @@ size_t MeshModel::RequiredFieldsByteSizeFallback() const {
   if (has_setting_lightingpass_drawmode()) {
     // required int32 Setting_LightingPass_DrawMode = 57;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_lightingpass_drawmode());
   }
 
@@ -4018,169 +3765,169 @@ size_t MeshModel::ByteSizeLong() const {
 
   if (_internal_metadata_.have_unknown_fields()) {
     total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
         _internal_metadata_.unknown_fields());
   }
   if ((((_has_bits_[0] & 0xffffffff) ^ 0xffffffff)
        | ((_has_bits_[1] & 0x03ffffff) ^ 0x03ffffff)) == 0) {  // All required fields are present.
     // required .KuplungApp.ObjectCoordinate positionX = 9;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionx_);
 
     // required .KuplungApp.ObjectCoordinate positionY = 10;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positiony_);
 
     // required .KuplungApp.ObjectCoordinate positionZ = 11;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionz_);
 
     // required .KuplungApp.ObjectCoordinate scaleX = 12;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalex_);
 
     // required .KuplungApp.ObjectCoordinate scaleY = 13;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scaley_);
 
     // required .KuplungApp.ObjectCoordinate scaleZ = 14;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalez_);
 
     // required .KuplungApp.ObjectCoordinate rotateX = 15;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatex_);
 
     // required .KuplungApp.ObjectCoordinate rotateY = 16;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatey_);
 
     // required .KuplungApp.ObjectCoordinate rotateZ = 17;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatez_);
 
     // required .KuplungApp.ObjectCoordinate displaceX = 18;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacex_);
 
     // required .KuplungApp.ObjectCoordinate displaceY = 19;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacey_);
 
     // required .KuplungApp.ObjectCoordinate displaceZ = 20;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacez_);
 
     // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_materialrefraction_);
 
     // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_materialspecularexp_);
 
     // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_materialcolor_);
 
     // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_ambient_);
 
     // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_diffuse_);
 
     // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlightskin_specular_);
 
     // required .KuplungApp.Vec3 Setting_LightPosition = 31;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightposition_);
 
     // required .KuplungApp.Vec3 Setting_LightDirection = 32;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightdirection_);
 
     // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightambient_);
 
     // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightdiffuse_);
 
     // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_lightspecular_);
 
     // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *displacementheightscale_);
 
     // required .KuplungApp.MaterialColor materialAmbient = 42;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialambient_);
 
     // required .KuplungApp.MaterialColor materialDiffuse = 43;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialdiffuse_);
 
     // required .KuplungApp.MaterialColor materialSpecular = 44;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialspecular_);
 
     // required .KuplungApp.MaterialColor materialEmission = 45;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *materialemission_);
 
     // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *effect_gblur_radius_);
 
     // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *effect_gblur_width_);
 
     // required .KuplungApp.Mesh meshObject = 58;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::MessageSize(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *meshobject_);
 
     // required int32 ModelID = 1;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->modelid());
 
     // required bool Settings_DeferredRender = 2;
@@ -4200,12 +3947,12 @@ size_t MeshModel::ByteSizeLong() const {
 
     // required int32 Setting_TessellationSubdivision = 8;
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_tessellationsubdivision());
 
     // required int32 Setting_ModelViewSkin = 23;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_modelviewskin());
 
     // required float solidLightSkin_Ambient_Strength = 28;
@@ -4240,12 +3987,12 @@ size_t MeshModel::ByteSizeLong() const {
 
     // required int32 materialIlluminationModel = 39;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->materialilluminationmodel());
 
     // required int32 Effect_GBlur_Mode = 47;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->effect_gblur_mode());
 
     // required float Effect_Bloom_WeightA = 51;
@@ -4268,30 +4015,30 @@ size_t MeshModel::ByteSizeLong() const {
 
     // required int32 Setting_LightingPass_DrawMode = 57;
     total_size += 2 +
-      ::google::protobuf::internal::WireFormatLite::Int32Size(
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->setting_lightingpass_drawmode());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
   }
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
 }
 
-void MeshModel::MergeFrom(const ::google::protobuf::Message& from) {
+void MeshModel::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshModel)
   GOOGLE_DCHECK_NE(&from, this);
   const MeshModel* source =
-      ::google::protobuf::DynamicCastToGenerated<MeshModel>(
+      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MeshModel>(
           &from);
   if (source == nullptr) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MeshModel)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
   } else {
   // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshModel)
     MergeFrom(*source);
@@ -4302,7 +4049,7 @@ void MeshModel::MergeFrom(const MeshModel& from) {
 // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModel)
   GOOGLE_DCHECK_NE(&from, this);
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::google::protobuf::uint32 cached_has_bits = 0;
+  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
 
   cached_has_bits = from._has_bits_[0];
@@ -4504,7 +4251,7 @@ void MeshModel::MergeFrom(const MeshModel& from) {
   }
 }
 
-void MeshModel::CopyFrom(const ::google::protobuf::Message& from) {
+void MeshModel::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
 // @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MeshModel)
   if (&from == this) return;
   Clear();
@@ -4617,10 +4364,6 @@ bool MeshModel::IsInitialized() const {
   return true;
 }
 
-void MeshModel::Swap(MeshModel* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
 void MeshModel::InternalSwap(MeshModel* other) {
   using std::swap;
   _internal_metadata_.Swap(&other->_internal_metadata_);
@@ -4686,24 +4429,21 @@ void MeshModel::InternalSwap(MeshModel* other) {
   swap(setting_lightingpass_drawmode_, other->setting_lightingpass_drawmode_);
 }
 
-::google::protobuf::Metadata MeshModel::GetMetadata() const {
-  ::google::protobuf::internal::AssignDescriptors(&::assign_descriptors_table_KuplungAppScene_2eproto);
-  return ::file_level_metadata_KuplungAppScene_2eproto[kIndexInFileMessages];
+::PROTOBUF_NAMESPACE_ID::Metadata MeshModel::GetMetadata() const {
+  return GetMetadataStatic();
 }
 
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace KuplungApp
-namespace google {
-namespace protobuf {
+PROTOBUF_NAMESPACE_OPEN
 template<> PROTOBUF_NOINLINE ::KuplungApp::Scene* Arena::CreateMaybeMessage< ::KuplungApp::Scene >(Arena* arena) {
   return Arena::CreateInternal< ::KuplungApp::Scene >(arena);
 }
 template<> PROTOBUF_NOINLINE ::KuplungApp::MeshModel* Arena::CreateMaybeMessage< ::KuplungApp::MeshModel >(Arena* arena) {
   return Arena::CreateInternal< ::KuplungApp::MeshModel >(arena);
 }
-}  // namespace protobuf
-}  // namespace google
+PROTOBUF_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 #include <google/protobuf/port_undef.inc>

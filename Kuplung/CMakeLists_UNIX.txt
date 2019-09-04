@@ -512,8 +512,16 @@ SET(Kuplung_OuiNanovVG
 SET(Kuplung_Lua
     resources/lua/test.lua)
 
+# protobuf generation
+FILE(GLOB PROTOBUF_DEFINITION_FILES "resources/protobuf/*.proto")
+SET(PROTOBUF_INPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/resources/protobuf/")
+SET(PROTOBUF_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/kuplung/utilities/saveopen/")
+FOREACH(PROTO_FILE ${PROTOBUF_DEFINITION_FILES})
+  EXECUTE_PROCESS(COMMAND protoc --proto_path=${PROTOBUF_INPUT_DIRECTORY} --cpp_out=${PROTOBUF_OUTPUT_DIRECTORY} ${PROTO_FILE})
+ENDFOREACH()
+FILE(GLOB PROTOBUF_MODELS "kuplung/utilities/saveopen/*.pb.cc" "kuplung/utilities/saveopen/*.hpp")
 
-ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
+ADD_EXECUTABLE(${PROJECT_NAME} ${SOURCE_FILES} ${PROTOBUF_MODELS} kuplung/utilities/nanovg/nanovg.c kuplung/utilities/miniz/miniz.c)
 
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lGLEW -lGLU -lm -lGL -lm -lpthread -ldl -ldrm -lXdamage -lXfixes -lX11-xcb -lxcb-glx -lxcb-dri2 -lXxf86vm -lXext -lX11 -lpthread -lxcb -lXau -lXdmcp")
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} "-lboost_system -lboost_filesystem")
