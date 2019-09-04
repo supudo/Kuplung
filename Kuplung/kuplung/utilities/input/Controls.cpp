@@ -14,6 +14,31 @@ namespace Input {
 
 Controls::~Controls() {}
 
+Controls::Controls() {
+  this->gameIsRunning = false;
+  this->keyPressed_ESC = false;
+  this->keyPressed_DELETE = false;
+
+  this->mouseButton_LEFT = false;
+  this->mouseButton_MIDDLE = false;
+  this->mouseButton_RIGHT = false;
+  this->mouseGoLeft = false;
+  this->mouseGoRight = false;
+  this->mouseGoUp = false;
+  this->mouseGoDown = false;
+
+  this->keyPressed_LALT = false;
+  this->keyPressed_LSHIFT = false;
+  this->keyPressed_LCTRL = false;
+  this->keyPressed_RALT = false;
+  this->keyPressed_RSHIFT = false;
+  this->keyPressed_RCTRL = false;
+  this->keyPresset_TAB = false;
+
+  this->xrel = 0;
+  this->yrel = 0;
+}
+
 void Controls::init(SDL_Window* sdlWindow) {
 	this->sdlWindow = sdlWindow;
 

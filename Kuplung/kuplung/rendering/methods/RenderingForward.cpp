@@ -905,7 +905,7 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
     glm::vec4 perspective;
     glm::decompose(mtx, scale, rotation, translation, skew, perspective);
 
-    glm::vec3 v = this->managerObjects->VertexEditorMode;
+    // glm::vec3 v = this->managerObjects->VertexEditorMode;
     this->managerObjects->VertexEditorMode.x += translation.x;
     this->managerObjects->VertexEditorMode.y += -1.0f * translation.y;
     this->managerObjects->VertexEditorMode.z += translation.z;
@@ -913,12 +913,12 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
       mfd->meshModel.vertices[static_cast<size_t>(this->managerObjects->VertexEditorModeID)] = this->managerObjects->VertexEditorMode;
     else if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Line) {
     }
-    else if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Face) {
-      for (size_t i = 0; i < mfd->meshModel.vertices.size(); i++) {
-        if (mfd->meshModel.vertices[i] == v)
-          mfd->meshModel.vertices[i] = v;
-      }
-    }
+    // else if (this->managerObjects->Setting_GeometryEditMode == GeometryEditMode_Face) {
+    //   for (size_t i = 0; i < mfd->meshModel.vertices.size(); i++) {
+    //     if (mfd->meshModel.vertices[i] == v)
+    //       mfd->meshModel.vertices[i] = v;
+    //   }
+    // }
     //TODO: not good for drawing... reuploading the buffers again .... should find a better way - immediate draw or GL_STREAM_DRAW?
     mfd->initBuffers();
     mfd->Setting_EditMode = true;

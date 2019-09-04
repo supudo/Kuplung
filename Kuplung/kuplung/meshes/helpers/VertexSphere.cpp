@@ -97,7 +97,6 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
     const float theta = 2 * 3.1415926f / static_cast<float>(this->circleSegments);
     const float c = cosf(theta);
     const float s = sinf(theta);
-    float t = 0;
 
     float r = radius;
     float x = r;
@@ -109,9 +108,8 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
         this->dataVertices.push_back(glm::vec3(x + vertex.x, y + vertex.y, vertex.z));
         this->dataIndices.push_back(static_cast<unsigned int>(i));
 
-        t = x;
         x = c * x - s * y;
-        y = s * t + c * y;
+        y = s * x + c * y;
       }
     }
 
@@ -133,16 +131,15 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
 
     static const double pi = glm::pi<double>();
     static const double pi_2 = glm::half_pi<double>();
-    float p_x = 0, p_y = 0, p_z = 0;
     glm::vec3 position;
     glm::vec3 v1, v2, v3, normal;
 
     for (size_t i = 0; i < meshModel.vertices.size(); i++) {
       for (int y = 0; y < this->circleSegments; ++y) {
         for (int x = 0; x < this->circleSegments; ++x) {
-          p_x = static_cast<float>(cos(2 * pi * x * sectors) * sin(pi * y * rings));
-          p_y = static_cast<float>(sin(-pi_2 + pi * y * rings));
-          p_z = static_cast<float>(sin(2 * pi * x * sectors) * sin(pi * y * rings));
+          float p_x = static_cast<float>(cos(2 * pi * x * sectors) * sin(pi * y * rings));
+          float p_y = static_cast<float>(sin(-pi_2 + pi * y * rings));
+          float p_z = static_cast<float>(sin(2 * pi * x * sectors) * sin(pi * y * rings));
           position = glm::vec3(p_x, p_y, p_z) * radius;
           position += meshModel.vertices[i];
           this->dataVertices.push_back(position);

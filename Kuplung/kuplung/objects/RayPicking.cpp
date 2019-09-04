@@ -14,6 +14,10 @@
 #include <glm/gtx/quaternion.hpp>
 #include <glm/gtx/intersect.hpp>
 
+RayPicking::RayPicking() {
+  this->sceneSelectedModelObject = 0;
+}
+
 RayPicking::~RayPicking() {
 }
 
@@ -173,7 +177,7 @@ glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) {
   return glm::vec2(x, -y);
 }
 
-glm::vec4 RayPicking::getEyeCoordinates(glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects) {
+glm::vec4 RayPicking::getEyeCoordinates(const glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects) {
   glm::mat4 invertedProjectionMatrix = glm::inverse(managerObjects->matrixProjection);
   glm::vec4 eyeCoordinates = invertedProjectionMatrix * coordinates;
   return glm::vec4(eyeCoordinates.x, eyeCoordinates.y, -1.0f, 0.0f);
