@@ -20,6 +20,11 @@ C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo
 #### IDE
 QT Creator
 
+#### Ports
+- Python - [Kuplung-Py](https://github.com/supudo/Kuplung-Py)
+- Vulkan - [KuplungVK](https://github.com/supudo/KuplungVK)
+- Rust - [Kuplung-Rust](https://github.com/supudo/Kuplung-Rust)
+
 #### TODO
 
 - Renderers (WIP)
