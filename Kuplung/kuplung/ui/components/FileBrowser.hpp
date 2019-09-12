@@ -19,24 +19,24 @@
 
 class FileBrowser {
 public:
-    void init(bool log, int positionX, int positionY, int width, int height, const std::function<void(FBEntity, MaterialTextureType)>& processFile);
-    void setStyleBrowser(const bool isStyle);
-    void setImageBrowser(const bool isImage);
-    void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);
+  void init(bool log, int positionX, int positionY, int width, int height, const std::function<void(FBEntity, MaterialTextureType)>& processFile);
+  void setStyleBrowser(const bool isStyle);
+  void setImageBrowser(const bool isImage);
+  void draw(const char* title, bool* p_opened = NULL, MaterialTextureType TextureType = MaterialTextureType_Undefined);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
-    std::function<void(FBEntity, MaterialTextureType)> processFile;
+  std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
+  std::function<void(FBEntity, MaterialTextureType)> processFile;
 
-    void drawFiles(const std::string& fPath, MaterialTextureType TextureType = MaterialTextureType_Undefined);
-    std::string convertToString(double num);
-    std::string convertSize(size_t size);
-    double roundOff(double n);
-    void logMessage(std::string const& logMessage);
-    bool isHidden(const boost::filesystem::path &p);
+  void drawFiles(const std::string& fPath, MaterialTextureType TextureType = MaterialTextureType_Undefined);
+  std::string convertToString(double num);
+  std::string convertSize(size_t size);
+  double roundOff(double n);
+  void logMessage(std::string const& logMessage);
+  bool isHidden(const boost::filesystem::path &p);
 
-    bool log, isStyleBrowser, isImageBrowser;
-    int positionX, positionY, width, height;
+  bool log, isStyleBrowser, isImageBrowser;
+  int positionX, positionY, width, height;
 	std::string currentFolder;
 	float panelWidth_Options, panelWidth_OptionsMin;
 };

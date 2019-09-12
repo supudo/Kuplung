@@ -37,8 +37,6 @@ Spaceship::~Spaceship() {
   Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
-#pragma mark - Initialization
-
 Spaceship::Spaceship() {
   this->spaceshipGenerator = std::make_unique<SpaceshipMeshGenerator>();
 
@@ -49,8 +47,6 @@ Spaceship::Spaceship() {
   this->solidLightSkin_Diffuse_Strength = 0.0f;
   this->solidLightSkin_Specular_Strength = 0.0f;
 }
-
-#pragma mark - Public
 
 bool Spaceship::initShaderProgram() {
   bool success = true;
@@ -159,8 +155,6 @@ void Spaceship::initBuffers(const int gridSize) {
 
   Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
-
-#pragma mark - Render
 
 void Spaceship::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition) {
   if (this->glVAO > 0) {

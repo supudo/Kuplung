@@ -291,8 +291,6 @@ std::vector<MeshModelMaterial> objParser1::loadMaterial(std::string const& mater
     return current_materials;
 }
 
-#pragma mark - Helpers
-
 MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textureLine) {
     MeshMaterialTextureImage materialImage;
 

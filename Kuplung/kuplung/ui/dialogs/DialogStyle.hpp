@@ -16,17 +16,17 @@
 
 class DialogStyle {
 public:
-    void saveDefault(ImGuiStyle& style);
-    void save(std::string const& fontfile, std::string const& fontsize, const ImGuiStyle& style);
-    ImGuiStyle& loadCurrent();
-    ImGuiStyle& load(const std::string& styleFilePath);
-    ImGuiStyle& loadDefault();
+  void saveDefault(ImGuiStyle& style) const;
+  void save(std::string const& fontfile, std::string const& fontsize, const ImGuiStyle& style) const;
+  const ImGuiStyle& loadCurrent() const;
+  const ImGuiStyle& load(const std::string& styleFilePath) const;
+  const ImGuiStyle& loadDefault() const;
 
 private:
-    void saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, const ImGuiStyle& style);
-    std::vector<std::string> splitString(const std::string &s, const std::regex& delimiter);
-    ImVec4 tov4(const std::string& opValue);
-    ImVec2 tov2(const std::string& opValue);
+  void saveStyles(std::string const& fontfile, std::string const& fontsize, std::string const& styleFilePath, const ImGuiStyle& style) const;
+  const std::vector<std::string> splitString(const std::string &s, const std::regex& delimiter) const;
+  const ImVec4 tov4(const std::string& opValue) const;
+  const ImVec2 tov2(const std::string& opValue) const;
 };
 
 #endif /* DialogStyle_hpp */

@@ -84,7 +84,7 @@ void CameraModel::initProperties() {
   this->showInWire = false;
 }
 
-bool CameraModel::initShaderProgram() {
+const bool CameraModel::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/camera.vert";

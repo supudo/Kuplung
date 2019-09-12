@@ -194,7 +194,7 @@ void SaveOpenGProtocolBufs::storeObjectsManagerSettings(std::unique_ptr<ObjectsM
   this->bufGUISettings.set_allocated_grid(bufGrid);
 }
 
-void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsManager>& managerObjects) {
+void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsManager>& managerObjects) const {
   managerObjects->Setting_FOV = this->bufGUISettings.setting_fov();
   managerObjects->Setting_OutlineThickness = this->bufGUISettings.setting_outlinethickness();
   managerObjects->Setting_RatioWidth = this->bufGUISettings.setting_ratiowidth();
@@ -210,23 +210,23 @@ void SaveOpenGProtocolBufs::readObjectsManagerSettings(std::unique_ptr<ObjectsMa
   managerObjects->Setting_ShowAxisHelpers = this->bufGUISettings.setting_showaxishelpers();
   managerObjects->Settings_ShowZAxis = this->bufGUISettings.settings_showzaxis();
   switch (this->bufGUISettings.viewmodelskin()) {
-  case 0:
-    managerObjects->viewModelSkin = ViewModelSkin_Solid;
-    break;
-  case 1:
-    managerObjects->viewModelSkin = ViewModelSkin_Material;
-    break;
-  case 2:
-    managerObjects->viewModelSkin = ViewModelSkin_Texture;
-    break;
-  case 3:
-    managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
-    break;
-  case 4:
-    managerObjects->viewModelSkin = ViewModelSkin_Rendered;
-    break;
-  default:
-    break;
+    case 0:
+      managerObjects->viewModelSkin = ViewModelSkin_Solid;
+      break;
+    case 1:
+      managerObjects->viewModelSkin = ViewModelSkin_Material;
+      break;
+    case 2:
+      managerObjects->viewModelSkin = ViewModelSkin_Texture;
+      break;
+    case 3:
+      managerObjects->viewModelSkin = ViewModelSkin_Wireframe;
+      break;
+    case 4:
+      managerObjects->viewModelSkin = ViewModelSkin_Rendered;
+      break;
+    default:
+      break;
   }
   managerObjects->SolidLight_Direction = this->setVec3(this->bufGUISettings.solidlight_direction());
   managerObjects->SolidLight_MaterialColor = this->setVec3(this->bufGUISettings.solidlight_materialcolor());
@@ -323,21 +323,21 @@ void SaveOpenGProtocolBufs::storeGlobalLights(std::unique_ptr<ObjectsManager>& m
   }
 }
 
-void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager>& managerObjects) {
+void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager>& managerObjects) const {
   for (int i = 0; i < this->bufGUISettings.lights_size(); i++) {
     KuplungApp::LightObject lo = this->bufGUISettings.lights(i);
 
     LightSourceType t = LightSourceType_Directional;
     switch (lo.type()) {
-    case 0:
-      t = LightSourceType_Directional;
-      break;
-    case 1:
-      t = LightSourceType_Point;
-      break;
-    case 2:
-      t = LightSourceType_Spot;
-      break;
+      case 0:
+        t = LightSourceType_Directional;
+        break;
+      case 1:
+        t = LightSourceType_Point;
+        break;
+      case 2:
+        t = LightSourceType_Spot;
+        break;
     }
     Light* l = new Light();
     l->title = lo.title();
@@ -371,26 +371,26 @@ void SaveOpenGProtocolBufs::readGlobalLights(std::unique_ptr<ObjectsManager>& ma
     l->lQuadratic = this->setObjectCoordinate(lo.rotatecenterz());
 
     switch (lo.type()) {
-    case 0:
-      l->type = LightSourceType_Directional;
-      break;
-    case 1:
-      l->type = LightSourceType_Point;
-      break;
-    case 2:
-      l->type = LightSourceType_Spot;
-      break;
+      case 0:
+        l->type = LightSourceType_Directional;
+        break;
+      case 1:
+        l->type = LightSourceType_Point;
+        break;
+      case 2:
+        l->type = LightSourceType_Spot;
+        break;
     }
 
     switch (l->type) {
-    case LightSourceType_Directional:
-      l->setModel(managerObjects->systemModels["light_directional"]);
-      break;
-    case LightSourceType_Point:
-      l->setModel(managerObjects->systemModels["light_point"]);
-      break;
-    case LightSourceType_Spot:
-      l->setModel(managerObjects->systemModels["light_spot"]);
+      case LightSourceType_Directional:
+        l->setModel(managerObjects->systemModels["light_directional"]);
+        break;
+      case LightSourceType_Point:
+        l->setModel(managerObjects->systemModels["light_point"]);
+        break;
+      case LightSourceType_Spot:
+        l->setModel(managerObjects->systemModels["light_spot"]);
     }
 
     l->initShaderProgram();
@@ -466,7 +466,7 @@ void SaveOpenGProtocolBufs::storeObjects(std::vector<ModelFaceBase*> meshModelFa
   }
 }
 
-std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<ObjectsManager>& managerObjects) {
+const std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<ObjectsManager>& managerObjects) const {
   std::vector<ModelFaceData*> models;
 
   for (int i = 0; i < this->bufScene.models_size(); i++) {
@@ -506,21 +506,21 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
     m->Setting_MaterialRefraction = this->setObjectCoordinate(mm.setting_materialrefraction());
     m->Setting_MaterialSpecularExp = this->setObjectCoordinate(mm.setting_materialspecularexp());
     switch (mm.setting_modelviewskin()) {
-    case 0:
-      m->Setting_ModelViewSkin = ViewModelSkin_Solid;
-      break;
-    case 1:
-      m->Setting_ModelViewSkin = ViewModelSkin_Material;
-      break;
-    case 2:
-      m->Setting_ModelViewSkin = ViewModelSkin_Texture;
-      break;
-    case 3:
-      m->Setting_ModelViewSkin = ViewModelSkin_Wireframe;
-      break;
-    case 4:
-      m->Setting_ModelViewSkin = ViewModelSkin_Rendered;
-      break;
+      case 0:
+        m->Setting_ModelViewSkin = ViewModelSkin_Solid;
+        break;
+      case 1:
+        m->Setting_ModelViewSkin = ViewModelSkin_Material;
+        break;
+      case 2:
+        m->Setting_ModelViewSkin = ViewModelSkin_Texture;
+        break;
+      case 3:
+        m->Setting_ModelViewSkin = ViewModelSkin_Wireframe;
+        break;
+      case 4:
+        m->Setting_ModelViewSkin = ViewModelSkin_Rendered;
+        break;
     }
     m->solidLightSkin_MaterialColor = this->setVec3(mm.solidlightskin_materialcolor());
     m->solidLightSkin_Ambient = this->setVec3(mm.solidlightskin_ambient());
@@ -565,7 +565,7 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::readObjects(std::unique_ptr<O
   return models;
 }
 
-KuplungApp::Mesh* SaveOpenGProtocolBufs::getMesh(MeshModel ent) {
+KuplungApp::Mesh* SaveOpenGProtocolBufs::getMesh(MeshModel ent) const {
   KuplungApp::Mesh* mesh = new KuplungApp::Mesh();
   mesh->set_id(ent.ID);
   mesh->set_allocated_file(this->getFBEntity(ent.File));
@@ -602,7 +602,7 @@ KuplungApp::Mesh* SaveOpenGProtocolBufs::getMesh(MeshModel ent) {
   return mesh;
 }
 
-MeshModel SaveOpenGProtocolBufs::setMesh(const KuplungApp::Mesh& ent) {
+MeshModel SaveOpenGProtocolBufs::setMesh(const KuplungApp::Mesh& ent) const {
   MeshModel mm;
   mm.ID = ent.id();
   mm.File = this->setFBEntity(ent.file());
@@ -631,7 +631,7 @@ MeshModel SaveOpenGProtocolBufs::setMesh(const KuplungApp::Mesh& ent) {
   return mm;
 }
 
-KuplungApp::MeshModelMaterial* SaveOpenGProtocolBufs::getMeshModelMaterial(MeshModelMaterial ent) {
+KuplungApp::MeshModelMaterial* SaveOpenGProtocolBufs::getMeshModelMaterial(MeshModelMaterial ent) const {
   KuplungApp::MeshModelMaterial* m = new KuplungApp::MeshModelMaterial();
   m->set_materialid(ent.MaterialID);
   m->set_materialtitle(ent.MaterialTitle);
@@ -653,7 +653,7 @@ KuplungApp::MeshModelMaterial* SaveOpenGProtocolBufs::getMeshModelMaterial(MeshM
   return m;
 }
 
-MeshModelMaterial SaveOpenGProtocolBufs::setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent) {
+MeshModelMaterial SaveOpenGProtocolBufs::setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent) const {
   MeshModelMaterial m;
   m.MaterialID = ent.materialid();
   m.MaterialTitle = ent.materialtitle();
@@ -675,7 +675,7 @@ MeshModelMaterial SaveOpenGProtocolBufs::setMeshModelMaterial(const KuplungApp::
   return m;
 }
 
-KuplungApp::FBEntity* SaveOpenGProtocolBufs::getFBEntity(FBEntity ent) {
+KuplungApp::FBEntity* SaveOpenGProtocolBufs::getFBEntity(FBEntity ent) const {
   KuplungApp::FBEntity* fb = new KuplungApp::FBEntity();
   fb->set_extension(ent.extension);
   fb->set_isfile(ent.isFile);
@@ -686,7 +686,7 @@ KuplungApp::FBEntity* SaveOpenGProtocolBufs::getFBEntity(FBEntity ent) {
   return fb;
 }
 
-FBEntity SaveOpenGProtocolBufs::setFBEntity(const KuplungApp::FBEntity& ent) {
+FBEntity SaveOpenGProtocolBufs::setFBEntity(const KuplungApp::FBEntity& ent) const {
   FBEntity fb;
   fb.extension = ent.extension();
   fb.isFile = ent.isfile();
@@ -697,7 +697,7 @@ FBEntity SaveOpenGProtocolBufs::setFBEntity(const KuplungApp::FBEntity& ent) {
   return fb;
 }
 
-KuplungApp::MeshMaterialTextureImage* SaveOpenGProtocolBufs::getMeshMaterialTextureImage(MeshMaterialTextureImage ent) {
+KuplungApp::MeshMaterialTextureImage* SaveOpenGProtocolBufs::getMeshMaterialTextureImage(MeshMaterialTextureImage ent) const {
   KuplungApp::MeshMaterialTextureImage* meshMatTexImage = new KuplungApp::MeshMaterialTextureImage();
   meshMatTexImage->set_filename(ent.Filename);
   meshMatTexImage->set_image(ent.Image);
@@ -711,7 +711,7 @@ KuplungApp::MeshMaterialTextureImage* SaveOpenGProtocolBufs::getMeshMaterialText
   return meshMatTexImage;
 }
 
-MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent) {
+const MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent) const {
   MeshMaterialTextureImage meshMatTexImage;
   meshMatTexImage.Filename = ent.filename();
   meshMatTexImage.Image = ent.image();
@@ -724,7 +724,7 @@ MeshMaterialTextureImage SaveOpenGProtocolBufs::setMeshMaterialTextureImage(cons
   return meshMatTexImage;
 }
 
-KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor& v) {
+KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor& v) const {
   KuplungApp::MaterialColor* mc = new KuplungApp::MaterialColor();
   mc->set_colorpickeropen(v.colorPickerOpen);
   mc->set_animate(v.animate);
@@ -733,12 +733,12 @@ KuplungApp::MaterialColor* SaveOpenGProtocolBufs::getMaterialColor(MaterialColor
   return mc;
 }
 
-std::unique_ptr<MaterialColor> SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::MaterialColor& v) {
+std::unique_ptr<MaterialColor> SaveOpenGProtocolBufs::setMaterialColor(const KuplungApp::MaterialColor& v) const {
   auto t = std::make_unique<MaterialColor>(v.colorpickeropen(), v.animate(), v.strength(), this->setVec3(v.color()));
   return t;
 }
 
-KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(const glm::vec4& v) {
+KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(const glm::vec4& v) const {
   KuplungApp::Vec4* gv = new KuplungApp::Vec4();
   gv->set_x(v.x);
   gv->set_y(v.y);
@@ -747,7 +747,7 @@ KuplungApp::Vec4* SaveOpenGProtocolBufs::getVec4(const glm::vec4& v) {
   return gv;
 }
 
-KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(const glm::vec3& v) {
+KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(const glm::vec3& v) const {
   KuplungApp::Vec3* gv = new KuplungApp::Vec3();
   gv->set_x(v.x);
   gv->set_y(v.y);
@@ -755,11 +755,11 @@ KuplungApp::Vec3* SaveOpenGProtocolBufs::getVec3(const glm::vec3& v) {
   return gv;
 }
 
-glm::vec4 SaveOpenGProtocolBufs::setVec4(const KuplungApp::Vec4& v) {
+glm::vec4 SaveOpenGProtocolBufs::setVec4(const KuplungApp::Vec4& v) const {
   return glm::vec4(v.x(), v.y(), v.z(), v.w());
 }
 
-glm::vec3 SaveOpenGProtocolBufs::setVec3(const KuplungApp::Vec3& v) {
+glm::vec3 SaveOpenGProtocolBufs::setVec3(const KuplungApp::Vec3& v) const {
   return glm::vec3(v.x(), v.y(), v.z());
 }
 
@@ -788,19 +788,19 @@ glm::vec3 SaveOpenGProtocolBufs::setVec3(const KuplungApp::Vec3& v) {
 //    return mtx;
 //}
 
-KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate& v) {
+KuplungApp::ObjectCoordinate* SaveOpenGProtocolBufs::getObjectCoordinate(ObjectCoordinate& v) const {
   KuplungApp::ObjectCoordinate* oc = new KuplungApp::ObjectCoordinate();
   oc->set_animate(v.animate);
   oc->set_point(v.point);
   return oc;
 }
 
-std::unique_ptr<ObjectCoordinate> SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) {
+std::unique_ptr<ObjectCoordinate> SaveOpenGProtocolBufs::setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) const {
   auto t = std::make_unique<ObjectCoordinate>(v.animate(), v.point());
   return t;
 }
 
-bool SaveOpenGProtocolBufs::hasEnding(std::string const& fullString, std::string const& ending) {
+const bool SaveOpenGProtocolBufs::hasEnding(std::string const& fullString, std::string const& ending) const {
   if (fullString.length() >= ending.length())
     return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
   else

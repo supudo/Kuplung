@@ -35,9 +35,7 @@ VertexSphere::~VertexSphere() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Public
-
-bool VertexSphere::initShaderProgram() {
+const bool VertexSphere::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/vertex_sphere.vert";
@@ -198,8 +196,6 @@ void VertexSphere::initBuffers(MeshModel const& meshModel, const int& circleSegm
 
   glBindVertexArray(0);
 }
-
-#pragma mark - Render
 
 void VertexSphere::render(const glm::mat4& matrixMVP, const glm::vec4& color) {
   if (this->glVAO > 0) {

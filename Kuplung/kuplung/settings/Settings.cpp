@@ -182,8 +182,6 @@ void Settings::reuseLogFunc(const std::string& msg) {
   m_pInstance->funcDoLog(msg);
 }
 
-#pragma mark - Public
-
 std::string Settings::appFolder() {
 #ifdef __APPLE__
   CFBundleRef mainBundle = CFBundleGetMainBundle();
@@ -258,7 +256,7 @@ std::string Settings::string_format(const std::string& fmt_str, ...) {
   return std::string(formatted.get());
 }
 
-bool Settings::isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions) {
+bool Settings::isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions) const {
   if (allowedExtensions.size() > 0) {
     std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
     return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
@@ -267,13 +265,13 @@ bool Settings::isAllowedFileExtension(std::string fileExtension, const std::vect
     return true;
 }
 
-bool Settings::isAllowedStyleExtension(std::string fileExtension) {
+bool Settings::isAllowedStyleExtension(std::string fileExtension) const {
   std::string allowedExtensions[] = {".style"};
   std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
   return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
 }
 
-bool Settings::isAllowedImageExtension(std::string fileExtension) {
+bool Settings::isAllowedImageExtension(std::string fileExtension) const {
   std::string allowedExtensions[] = {".png", ".jpg", ".bmp", ".jpeg", ".tga"};
   std::transform(fileExtension.begin(), fileExtension.end(), fileExtension.begin(), ::tolower);
   return std::find(std::begin(allowedExtensions), std::end(allowedExtensions), fileExtension) != std::end(allowedExtensions);
@@ -307,7 +305,7 @@ void Settings::timerEnd(const std::string& msg) {
   this->funcDoLog(this->string_format("[Timer END] %s - %s", msg.c_str(), this->getTimeNow().c_str()));
 }
 
-std::string Settings::getTimeNow() {
+const std::string Settings::getTimeNow() const {
   time_t t = time(0);
   const struct tm* now = localtime(&t);
   const int t_hour = static_cast<int>(now->tm_hour);
@@ -326,7 +324,7 @@ std::string Settings::getTimeNow() {
   return tn;
 }
 
-bool Settings::hasEnding(std::string const& fullString, std::string const& ending) {
+const bool Settings::hasEnding(std::string const& fullString, std::string const& ending) const {
   if (fullString.length() >= ending.length())
     return (0 == fullString.compare(fullString.length() - ending.length(), ending.length(), ending));
   return false;

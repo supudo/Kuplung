@@ -21,23 +21,23 @@ typedef unsigned int uint;
 
 class RayLine {
 public:
-    ~RayLine();
-    void init();
-    bool initShaderProgram();
-    void initBuffers(const glm::vec3& vecFrom, const glm::vec3& vecTo);
-    void initProperties();
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
+  ~RayLine();
+  void init();
+  const bool initShaderProgram();
+  void initBuffers(const glm::vec3& vecFrom, const glm::vec3& vecTo);
+  void initProperties();
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
 
-    glm::mat4 matrixModel;
+  glm::mat4 matrixModel;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboColors, vboIndices;
-    GLint glUniformMVPMatrix, glUniformColor;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO, vboVertices, vboColors, vboIndices;
+  GLint glUniformMVPMatrix, glUniformColor;
 
-    std::vector<float> dataVertices, dataColors;
-    std::vector<uint> dataIndices;
+  std::vector<float> dataVertices, dataColors;
+  std::vector<uint> dataIndices;
 };
 
 #endif /* RayLine_hpp */

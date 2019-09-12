@@ -15,7 +15,7 @@ LuaManager::LuaManager() {
 }
 
 void LuaManager::initLua() {
-    // luaL_openlibs(this->luaState);
+  // luaL_openlibs(this->luaState);
 }
 
 void LuaManager::execute(const std::string& fileName) {
@@ -52,14 +52,14 @@ void LuaManager::execute(const std::string& fileName) {
 }
 
 void LuaManager::checkLuaErrors() {
-    // const char* message = lua_tostring(this->luaState, -1);
-    // if (message != NULL)
-    //     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Error occured: %s!\n", message));
-    // lua_pop(this->luaState, 1);
+  // const char* message = lua_tostring(this->luaState, -1);
+  // if (message != NULL)
+  //     Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[LuaManager] Error occured: %s!\n", message));
+  // lua_pop(this->luaState, 1);
 }
 
 void LuaManager::closeLua() {
-    // lua_close(this->luaState);
+  // lua_close(this->luaState);
 }
 
 }}}

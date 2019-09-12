@@ -15,38 +15,38 @@
 namespace KuplungApp { namespace Utilities { namespace FontParser {
 
 struct KuplungFontMapCharacter {
-    int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
-    std::string letter;
+  int id, x, y, width, height, xoffset, yoffset, xadvance, page, chnl;
+  std::string letter;
 };
 
 struct KuplungFontMap {
-    int count;
-    int size, bold, italic, unicode, stretchH, smooth, aa;
-    int pageid, lineHeight, base, scaleW, scaleH, pages, packed;
-    int paddingTop, paddingRight, paddingBottom, paddingLeft;
-    int spacingHorizontal, spacingVertical;
-    std::string fontName, charset, file;
-    std::vector<KuplungFontMapCharacter> characters;
+  int count;
+  int size, bold, italic, unicode, stretchH, smooth, aa;
+  int pageid, lineHeight, base, scaleW, scaleH, pages, packed;
+  int paddingTop, paddingRight, paddingBottom, paddingLeft;
+  int spacingHorizontal, spacingVertical;
+  std::string fontName, charset, file;
+  std::vector<KuplungFontMapCharacter> characters;
 };
 
 class FNTParser {
 public:
-    ~FNTParser();
-    void init();
-    KuplungFontMap parse(FBEntity const& file);
+  ~FNTParser();
+  void init();
+  const KuplungFontMap parse(FBEntity const& file);
 
 private:
-    KuplungFontMap fm;
+  KuplungFontMap fm;
 
-    std::regex regex_whiteSpace; // whitespace
-    std::regex regex_equals; // equals
-    std::regex regex_info; // info
-    std::regex regex_common; // common
-    std::regex regex_page; // page
-    std::regex regex_chars; // chars
-    std::regex regex_char; // char
+  std::regex regex_whiteSpace; // whitespace
+  std::regex regex_equals; // equals
+  std::regex regex_info; // info
+  std::regex regex_common; // common
+  std::regex regex_page; // page
+  std::regex regex_chars; // chars
+  std::regex regex_char; // char
 
-    std::vector<std::string> splitString(const std::string &s, std::regex delimiter);
+  const std::vector<std::string> splitString(const std::string &s, std::regex delimiter) const;
 };
 
 }}}

@@ -18,28 +18,28 @@
 
 class Spaceship {
 public:
-    ~Spaceship();
-    Spaceship();
-    bool initShaderProgram();
-    void initBuffers(const int gridSize);
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition);
-    std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
+  ~Spaceship();
+  Spaceship();
+  bool initShaderProgram();
+  void initBuffers(const int gridSize);
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel, const glm::vec3& vecCameraPosition);
+  std::unique_ptr<SpaceshipMeshGenerator> spaceshipGenerator;
 
-    float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
-    bool Setting_UseTexture, Setting_Wireframe;
-    glm::vec3 lightDirection;
-    glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
+  float solidLightSkin_Ambient_Strength, solidLightSkin_Diffuse_Strength, solidLightSkin_Specular_Strength;
+  bool Setting_UseTexture, Setting_Wireframe;
+  glm::vec3 lightDirection;
+  glm::vec3 solidLightSkin_MaterialColor, solidLightSkin_Ambient, solidLightSkin_Diffuse, solidLightSkin_Specular;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
-    GLuint glUniformMVPMatrix, glUniformMMatrix, glAttributeVertexPosition, glAttributeVertexNormal;
-    GLuint glAttributeColor, glFS_CameraPosition;
-    GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
+  GLuint glUniformMVPMatrix, glUniformMMatrix, glAttributeVertexPosition, glAttributeVertexNormal;
+  GLuint glAttributeColor, glFS_CameraPosition;
+  GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 
-    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
+  std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 
 #endif /* Spaceship_hpp */

@@ -55,8 +55,6 @@ Skybox::~Skybox() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Initialization
-
 void Skybox::init(const short int& gridSize) {
   this->gridSize = gridSize;
   this->Setting_Skybox_Item = 0;
@@ -82,7 +80,7 @@ void Skybox::init(const short int& gridSize) {
   this->skyboxItems.push_back(si_StormyDays);
 }
 
-bool Skybox::initBuffers() {
+const bool Skybox::initBuffers() {
   // vertex shader
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/skybox.vert";
   std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
@@ -173,8 +171,6 @@ bool Skybox::initBuffers() {
 
   return true;
 }
-
-#pragma mark - Render
 
 void Skybox::render(const glm::mat4& matrixView, const float& plane_close, const float& plane_far, const float& fov) {
   if (this->glVAO > 0 && this->Setting_Skybox_Item > 0) {

@@ -359,36 +359,36 @@ void ExporterGLTF::exportToFile(const FBEntity& file, const std::vector<ModelFac
 			Settings::Instance()->funcDoLog("[Kuplung] Error occured while writing the BIN glTF file!");
 	}
 
-    if (!this->saveFile(j))
-		Settings::Instance()->funcDoLog("[Kuplung] Could not save glTF file!");
+  if (!this->saveFile(j))
+    Settings::Instance()->funcDoLog("[Kuplung] Could not save glTF file!");
 }
 
-nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &managerObjects) {
-    nlohmann::json j;
-    nlohmann::json viewportCamera;
-    viewportCamera["type"] = "perspective";
-    viewportCamera["perspective"] = {
-        { "aspectRatio", managerObjects->Setting_RatioWidth / managerObjects->Setting_RatioHeight },
-        { "yfov", managerObjects->Setting_FOV },
-        { "zfar", managerObjects->Setting_PlaneFar },
-        { "znear", managerObjects->Setting_PlaneClose }
-    };
-    j.push_back(viewportCamera);
-    return j;
+const nlohmann::json ExporterGLTF::exportCameras(std::unique_ptr<ObjectsManager> &managerObjects) const {
+  nlohmann::json j;
+  nlohmann::json viewportCamera;
+  viewportCamera["type"] = "perspective";
+  viewportCamera["perspective"] = {
+    { "aspectRatio", managerObjects->Setting_RatioWidth / managerObjects->Setting_RatioHeight },
+    { "yfov", managerObjects->Setting_FOV },
+    { "zfar", managerObjects->Setting_PlaneFar },
+    { "znear", managerObjects->Setting_PlaneClose }
+  };
+  j.push_back(viewportCamera);
+  return j;
 }
 
-nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*>& faces) {
-    nlohmann::json j;
+const nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*>& faces) const {
+  nlohmann::json j;
 	std::vector<ModelFaceBase*>::const_iterator faceIterator;
 	for (faceIterator = faces.begin(); faceIterator != faces.end(); ++faceIterator) {
 		const ModelFaceBase& face = **faceIterator;
 		MeshModel model = face.meshModel;
 		j[this->defaultSceneName]["nodes"][faceIterator - faces.begin()] = model.ModelTitle;
 	}
-    return j;
+  return j;
 }
 
-nlohmann::json ExporterGLTF::copyImage(std::string imagePath) {
+const nlohmann::json ExporterGLTF::copyImage(std::string imagePath) const {
     nlohmann::json j;
     std::string imageFilename = imagePath.substr(imagePath.find_last_of("\\/"));
     boost::replace_all(imageFilename, "/", "");
@@ -399,46 +399,46 @@ nlohmann::json ExporterGLTF::copyImage(std::string imagePath) {
 }
 
 void ExporterGLTF::prepFolderLocation() {
-    std::string folder = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
-    std::string newFolder = folder + "/" + this->exportFile.title;
-    if (!boost::filesystem::exists(newFolder)) {
-        boost::filesystem::path dir(newFolder);
-        if (!boost::filesystem::create_directory(dir))
-            Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ExportGLTF] Cannot create destination folder : %s!", newFolder.c_str()));
-    }
-    this->exportFileFolder = newFolder;
+  std::string folder = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
+  std::string newFolder = folder + "/" + this->exportFile.title;
+  if (!boost::filesystem::exists(newFolder)) {
+    boost::filesystem::path dir(newFolder);
+    if (!boost::filesystem::create_directory(dir))
+      Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ExportGLTF] Cannot create destination folder : %s!", newFolder.c_str()));
+  }
+  this->exportFileFolder = newFolder;
 }
 
-bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) {
-    time_t t = time(0);
-    const struct tm * now = localtime(&t);
+const bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) const {
+  time_t t = time(0);
+  const struct tm * now = localtime(&t);
 
-    const int year = now->tm_year + 1900;
-    const int month = now->tm_mon + 1;
-    const int day = now->tm_mday;
-    const int hour = now->tm_hour;
-    const int minute = now->tm_min;
-    const int seconds = now->tm_sec;
+  const int year = now->tm_year + 1900;
+  const int month = now->tm_mon + 1;
+  const int day = now->tm_mday;
+  const int hour = now->tm_hour;
+  const int minute = now->tm_min;
+  const int seconds = now->tm_sec;
 
-    std::string fileSuffix = "_" +
-        std::to_string(year) + std::to_string(month) + std::to_string(day) +
-        std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
+  std::string fileSuffix = "_" +
+    std::to_string(year) + std::to_string(month) + std::to_string(day) +
+    std::to_string(hour) + std::to_string(minute) + std::to_string(seconds);
 
-    if (!this->addSuffix)
-        fileSuffix.clear();
-    std::string filePath = this->exportFileFolder;
-    std::string fileName = this->exportFile.title;
-    if (boost::algorithm::ends_with(fileName, ".gltf"))
-        fileName = fileName.substr(0, fileName.size() - 4);
+  if (!this->addSuffix)
+    fileSuffix.clear();
+  std::string filePath = this->exportFileFolder;
+  std::string fileName = this->exportFile.title;
+  if (boost::algorithm::ends_with(fileName, ".gltf"))
+    fileName = fileName.substr(0, fileName.size() - 4);
 
-    std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
-    out << std::setw(4) << jsonObj << std::endl;
-    out.close();
+  std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
+  out << std::setw(4) << jsonObj << std::endl;
+  out.close();
 
 	return true;
 }
 
-bool ExporterGLTF::saveBufferFile(std::string buffer) {
+const bool ExporterGLTF::saveBufferFile(std::string buffer) const {
 	std::string file = this->exportFileFolder + "/" + this->exportFile.title + ".gltf.bin";
 
 	auto f = fopen(file.c_str(), "wt");

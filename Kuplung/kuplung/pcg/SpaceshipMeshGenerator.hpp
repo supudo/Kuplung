@@ -16,26 +16,26 @@
 
 class SpaceshipMeshGenerator {
 public:
-    void generate(const int& gridSize);
+  void generate(const int& gridSize);
 
-    std::vector<glm::vec3> vertices, normals, colors;
-    std::vector<glm::vec2> uvs;
-    std::vector<unsigned int> indices;
+  std::vector<glm::vec3> vertices, normals, colors;
+  std::vector<glm::vec2> uvs;
+  std::vector<unsigned int> indices;
 
-    MeshModel modelSpaceship;
+  MeshModel modelSpaceship;
 
 private:
-    int gridSize;
+  int gridSize;
 
-    std::unique_ptr<FileModelManager> fileParser;
+  std::unique_ptr<FileModelManager> fileParser;
 
-    void generateMeshModel();
-    void generateFirstHull();
-    void generateFirstHull2();
-    void generateFirstHull3();
-    int getRandomValue(const float& valueMin, const float& valueMax, bool zeroIsValid = true);
+  void generateMeshModel();
+  void generateFirstHull();
+  void generateFirstHull2();
+  void generateFirstHull3();
+  int getRandomValue(const float& valueMin, const float& valueMax, bool zeroIsValid = true);
 
-    void extrudeMesh();
+  void extrudeMesh();
 };
 
 #endif /* SpaceshipMeshGenerator_hpp */

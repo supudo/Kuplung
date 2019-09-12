@@ -12,19 +12,19 @@ namespace KuplungApp { namespace Utilities { namespace Export {
 
 Exporter::~Exporter() {
 	this->exporterAssimp.reset();
-    this->exporterOBJ.reset();
+  this->exporterOBJ.reset();
 	this->exporterGLTF.reset();
 }
 
 Exporter::Exporter() {
 	this->exporterAssimp = std::make_unique<ExporterAssimp>();
-    this->exporterOBJ = std::make_unique<ExporterOBJ>();
+  this->exporterOBJ = std::make_unique<ExporterOBJ>();
 	this->exporterGLTF = std::make_unique<ExporterGLTF>();
 }
 
 void Exporter::init(const std::function<void(float)>& doProgress) {
 	this->exporterAssimp->init(doProgress);
-    this->exporterOBJ->init(doProgress);
+  this->exporterOBJ->init(doProgress);
 	this->exporterGLTF->init(doProgress);
 }
 

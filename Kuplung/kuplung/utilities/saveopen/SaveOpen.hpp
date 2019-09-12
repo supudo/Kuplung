@@ -17,13 +17,13 @@
 
 class SaveOpen {
 public:
-    void init();
-    void saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces);
-    std::vector<ModelFaceData*> openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects);
+  void init();
+  void saveKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects, const std::vector<ModelFaceBase*>& meshModelFaces);
+  const std::vector<ModelFaceData*> openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager> &managerObjects) const;
 
 private:
-    std::unique_ptr<SaveOpenBinarySeq> entBinarySeq;
-    std::unique_ptr<SaveOpenGProtocolBufs> entGProtocolBufs;
+  std::unique_ptr<SaveOpenBinarySeq> entBinarySeq;
+  std::unique_ptr<SaveOpenGProtocolBufs> entGProtocolBufs;
 };
 
 #endif /* SaveOpen_hpp */

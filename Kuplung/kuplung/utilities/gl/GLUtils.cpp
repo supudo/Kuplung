@@ -71,8 +71,6 @@ void GLUtils::CheckForGLErrors(const std::string& message) {
   }
 }
 
-#pragma mark - Variables
-
 GLint GLUtils::glGetAttribute(GLuint program, const char* var_name) {
   GLint var = glGetAttribLocation(program, var_name);
   if (var == -1)
@@ -94,8 +92,6 @@ GLint GLUtils::glGetAttributeNoWarning(GLuint program, const char* var_name) {
 GLint GLUtils::glGetUniformNoWarning(GLuint program, const char* var_name) {
   return glGetUniformLocation(program, var_name);
 }
-
-#pragma mark - Printing
 
 void GLUtils::printProgramLog(GLuint program) {
   if (glIsProgram(program)) {
@@ -177,25 +173,23 @@ bool GLUtils::logOpenGLError(const char* file, int line) {
 
 GLsizei GLUtils::getGLTypeSize(GLenum type) {
   switch (type) {
-  case GL_BYTE:
-    return sizeof(GLbyte);
-  case GL_UNSIGNED_BYTE:
-    return sizeof(GLubyte);
-  case GL_SHORT:
-    return sizeof(GLshort);
-  case GL_UNSIGNED_SHORT:
-    return sizeof(GLushort);
-  case GL_INT:
-    return sizeof(GLint);
-  case GL_UNSIGNED_INT:
-    return sizeof(GLuint);
-  case GL_FLOAT:
-    return sizeof(GLfloat);
+    case GL_BYTE:
+      return sizeof(GLbyte);
+    case GL_UNSIGNED_BYTE:
+      return sizeof(GLubyte);
+    case GL_SHORT:
+      return sizeof(GLshort);
+    case GL_UNSIGNED_SHORT:
+      return sizeof(GLushort);
+    case GL_INT:
+      return sizeof(GLint);
+    case GL_UNSIGNED_INT:
+      // return sizeof(GLuint);
+    case GL_FLOAT:
+      return sizeof(GLfloat);
   }
   return 0;
 }
-
-#pragma mark - Utilities
 
 std::string GLUtils::readFile(const char* filePath) {
   std::string content;

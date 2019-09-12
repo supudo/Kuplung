@@ -16,66 +16,66 @@
 
 class RenderingForward {
 public:
-    explicit RenderingForward(ObjectsManager& mo);
-    ~RenderingForward();
+  explicit RenderingForward(ObjectsManager& mo);
+  ~RenderingForward();
 
-    bool init();
-    void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
+  bool init();
+  void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 	void precompileShaders();
 
 private:
-    bool initShaderProgram();
-    void renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
+  bool initShaderProgram();
+  void renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
-    ObjectsManager* managerObjects;
+  ObjectsManager* managerObjects;
 
-    glm::mat4 matrixProjection, matrixCamera;
-    glm::vec3 vecCameraPosition, uiAmbientLight;
-    int lightingPass_DrawMode;
+  glm::mat4 matrixProjection, matrixCamera;
+  glm::vec3 vecCameraPosition, uiAmbientLight;
+  int lightingPass_DrawMode;
 
-    // light
-    unsigned int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
-    std::vector<std::unique_ptr<ModelFace_LightSource_Directional>> mfLights_Directional;
-    std::vector<std::unique_ptr<ModelFace_LightSource_Point>> mfLights_Point;
-    std::vector<std::unique_ptr<ModelFace_LightSource_Spot>> mfLights_Spot;
+  // light
+  unsigned int GLSL_LightSourceNumber_Directional, GLSL_LightSourceNumber_Point, GLSL_LightSourceNumber_Spot;
+  std::vector<std::unique_ptr<ModelFace_LightSource_Directional>> mfLights_Directional;
+  std::vector<std::unique_ptr<ModelFace_LightSource_Point>> mfLights_Point;
+  std::vector<std::unique_ptr<ModelFace_LightSource_Spot>> mfLights_Spot;
 
-    // model objects
-    GLuint shaderProgram;
+  // model objects
+  GLuint shaderProgram;
 
-    // variables
-    GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
+  // variables
+  GLint glVS_MVPMatrix, glFS_MMatrix, glVS_WorldMatrix, glVS_NormalMatrix, glFS_MVMatrix;
 
-    // general
-    GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
-    GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
-    GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
-    GLint glFS_GammaCoeficient, glFS_showShadows, glFS_ShadowPass;
+  // general
+  GLint glGS_GeomDisplacementLocation, glFS_AlphaBlending, glFS_CameraPosition, glFS_CelShading;
+  GLint glFS_OutlineColor, glVS_IsBorder, glFS_ScreenResX, glFS_ScreenResY, glFS_UIAmbient;
+  GLint glTCS_UseCullFace, glTCS_UseTessellation, glTCS_TessellationSubdivision, gl_ModelViewSkin;
+  GLint glFS_GammaCoeficient, glFS_showShadows, glFS_ShadowPass;
 
-    // depth color
-    GLint glFS_planeClose, glFS_planeFar, glFS_showDepthColor;
+  // depth color
+  GLint glFS_planeClose, glFS_planeFar, glFS_showDepthColor;
 
-    // material
-    GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
-    GLint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel, glMaterial_HeightScale;
-    GLint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
-    GLint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
-    GLint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
-    GLint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
-    GLint glMaterial_ParallaxMapping;
+  // material
+  GLint glMaterial_Ambient, glMaterial_Diffuse, glMaterial_Specular, glMaterial_SpecularExp;
+  GLint glMaterial_Emission, glMaterial_Refraction, glMaterial_IlluminationModel, glMaterial_HeightScale;
+  GLint glMaterial_SamplerAmbient, glMaterial_SamplerDiffuse, glMaterial_SamplerSpecular;
+  GLint glMaterial_SamplerSpecularExp, glMaterial_SamplerDissolve, glMaterial_SamplerBump, glMaterial_SamplerDisplacement;
+  GLint glMaterial_HasTextureAmbient, glMaterial_HasTextureDiffuse, glMaterial_HasTextureSpecular;
+  GLint glMaterial_HasTextureSpecularExp, glMaterial_HasTextureDissolve, glMaterial_HasTextureBump, glMaterial_HasTextureDisplacement;
+  GLint glMaterial_ParallaxMapping;
 
-    // effects - gaussian blur
-    GLint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
-    // effects - bloom
-    GLint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
-    // effects - tone mapping
-    GLint glEffect_ToneMapping_ACESFilmRec2020, glEffect_HDR_Tonemapping;
+  // effects - gaussian blur
+  GLint glEffect_GB_W, glEffect_GB_Radius, glEffect_GB_Mode;
+  // effects - bloom
+  GLint glEffect_Bloom_doBloom, glEffect_Bloom_WeightA, glEffect_Bloom_WeightB, glEffect_Bloom_WeightC, glEffect_Bloom_WeightD, glEffect_Bloom_Vignette, glEffect_Bloom_VignetteAtt;
+  // effects - tone mapping
+  GLint glEffect_ToneMapping_ACESFilmRec2020, glEffect_HDR_Tonemapping;
 
-    // view skin
-    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
-    GLint glFS_solidSkin_materialColor;
+  // view skin
+  std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
+  GLint glFS_solidSkin_materialColor;
 
-    // PBR
-    GLuint glPBR_UsePBR, glPBR_Metallic, glPBR_Rougness, glPBR_AO;
+  // PBR
+  GLuint glPBR_UsePBR, glPBR_Metallic, glPBR_Rougness, glPBR_AO;
 };
 
 #endif /* RenderingForward_hpp */

@@ -13,12 +13,12 @@
 
 class MELink {
 public:
-    MELink(MENode *nodeOut, int slotOut, MENode *nodeIn, int slotIn);
+  MELink(MENode *nodeOut, int slotOut, MENode *nodeIn, int slotIn);
 
-    MENode *NodeOutput;
-    int SlotOutput;
-    MENode *NodeInput;
-    int SlotInput;
+  MENode *NodeOutput;
+  int SlotOutput;
+  MENode *NodeInput;
+  int SlotInput;
 };
 
 #endif /* MELink_hpp */

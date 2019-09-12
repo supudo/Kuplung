@@ -148,7 +148,7 @@ void RayPicking::pickVertex(const glm::mat4& matrixProjection, const glm::mat4& 
   }
 }
 
-bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_origin, glm::vec3 const& ray_direction, glm::vec3 const& vertex, glm::mat4 const& mtx, float const& radius) {
+const bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_origin, glm::vec3 const& ray_direction, glm::vec3 const& vertex, glm::mat4 const& mtx, float const& radius) const {
   float distance = 0.0f;
 
   const glm::vec4 vq = glm::vec4(vertex, 1.0) * mtx;
@@ -171,19 +171,19 @@ bool RayPicking::testRaySphereIntersection(int const vID, glm::vec3 const& ray_o
   return intersected;
 }
 
-glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) {
+const glm::vec2 RayPicking::getNormalizeDeviceCordinates(float X, float Y) const {
   float x = (2 * X) / Settings::Instance()->SDL_Window_Width - 1;
   float y = (2 * Y) / Settings::Instance()->SDL_Window_Height - 1;
   return glm::vec2(x, -y);
 }
 
-glm::vec4 RayPicking::getEyeCoordinates(const glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects) {
+const glm::vec4 RayPicking::getEyeCoordinates(const glm::vec4& coordinates, const std::unique_ptr<ObjectsManager> &managerObjects) const {
   glm::mat4 invertedProjectionMatrix = glm::inverse(managerObjects->matrixProjection);
   glm::vec4 eyeCoordinates = invertedProjectionMatrix * coordinates;
   return glm::vec4(eyeCoordinates.x, eyeCoordinates.y, -1.0f, 0.0f);
 }
 
-bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::vec3& ray_direction, const glm::vec3& aabb_min, const glm::vec3& aabb_max, const glm::mat4& ModelMatrix, float& intersection_distance) {
+const bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::vec3& ray_direction, const glm::vec3& aabb_min, const glm::vec3& aabb_max, const glm::mat4& ModelMatrix, float& intersection_distance) const {
   float tMin = 0.0f;
   float tMax = 100000.0f;
 
@@ -293,7 +293,7 @@ bool RayPicking::testRayOBBIntersection(const glm::vec3& ray_origin, const glm::
   return true;
 }
 
-void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) {
+void RayPicking::getRay(int mouseX, int mouseY, int screenWidth, int screenHeight, const glm::mat4& ViewMatrix, const glm::mat4& ProjectionMatrix, glm::vec3& out_origin, glm::vec3& out_direction) const {
   glm::vec4 lRayStart_NDC(
     (static_cast<float>(mouseX) / static_cast<float>(screenWidth)  - 0.5f) * 2.0f,
     (static_cast<float>(mouseY) / static_cast<float>(screenHeight) - 0.5f) * 2.0f,

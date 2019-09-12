@@ -16,9 +16,9 @@
 class FontsList {
 public:
   void init();
-  bool fontFileExists(std::string const& font);
+  const bool fontFileExists(std::string const& font) const;
   void getFonts();
-  int getSelectedFontSize();
+  const int getSelectedFontSize() const;
 
   std::vector<FBEntity> fonts;
   const char* fontSizes[11] = {"12", "14", "16", "18", "20", "22", "24", "26", "28", "30", "32"};

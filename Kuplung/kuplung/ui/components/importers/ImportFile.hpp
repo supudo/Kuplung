@@ -19,23 +19,23 @@
 
 class ImportFile {
 public:
-    void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processFile);
-    void draw(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, bool* p_opened = NULL);
+  void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processFile);
+  void draw(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, bool* p_opened = NULL);
 
 private:
-    std::map<std::string, FBEntity> getFolderContents(ImportExportFormats* dialogImportType, std::string const& filePath);
-    std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)> processFile;
+  std::map<std::string, FBEntity> getFolderContents(ImportExportFormats* dialogImportType, std::string const& filePath);
+  std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)> processFile;
 
-    void drawFiles(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, const std::string& fPath);
-    std::string convertToString(double num);
-    std::string convertSize(size_t size);
-    double roundOff(double n);
-    bool isHidden(const boost::filesystem::path &p);
+  void drawFiles(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, const std::string& fPath);
+  const std::string convertToString(double num) const;
+  const std::string convertSize(size_t size) const;
+  const double roundOff(double n) const;
+  const bool isHidden(const boost::filesystem::path &p) const;
 
-    int positionX, positionY, width, height;
-    float panelWidth_Options, panelWidth_OptionsMin;
+  int positionX, positionY, width, height;
+  float panelWidth_Options, panelWidth_OptionsMin;
 
-    int Setting_Forward, Setting_Up;
+  int Setting_Forward, Setting_Up;
 
 	std::string currentFolder;
 	std::vector<const char*> assimpImporters;

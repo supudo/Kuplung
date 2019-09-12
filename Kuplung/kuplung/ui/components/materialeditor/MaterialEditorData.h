@@ -13,9 +13,9 @@
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 
 typedef enum MaterialEditor_NodeType {
-    MaterialEditor_NodeType_Combine,
-    MaterialEditor_NodeType_Color,
-    MaterialEditor_NodeType_Image
+  MaterialEditor_NodeType_Combine,
+  MaterialEditor_NodeType_Color,
+  MaterialEditor_NodeType_Image
 } MaterialEditor_NodeType;
 
 #endif /* MaterialEditorData_hpp */

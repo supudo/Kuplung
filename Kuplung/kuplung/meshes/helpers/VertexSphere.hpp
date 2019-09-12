@@ -17,26 +17,26 @@
 
 class VertexSphere {
 public:
-    VertexSphere();
-    ~VertexSphere();
-    bool initShaderProgram();
-    void initBuffers(MeshModel const& meshModel, const int& circleSegments, const float& radius);
-    void render(const glm::mat4& matrixMVP, const glm::vec4& color);
+  VertexSphere();
+  ~VertexSphere();
+  const bool initShaderProgram();
+  void initBuffers(MeshModel const& meshModel, const int& circleSegments, const float& radius);
+  void render(const glm::mat4& matrixMVP, const glm::vec4& color);
 
-    bool isSphere;
-    bool showWireframes;
-    unsigned short int circleSegments;
-    std::vector<glm::vec3> dataVertices;
-    std::vector<glm::vec3> dataNormals;
-    std::vector<GLuint> dataIndices;
+  bool isSphere;
+  bool showWireframes;
+  unsigned short int circleSegments;
+  std::vector<glm::vec3> dataVertices;
+  std::vector<glm::vec3> dataNormals;
+  std::vector<GLuint> dataIndices;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboIndices;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboNormals, vboIndices;
 
-    GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
+  GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
 };
 
 #endif /* VertexSphere_hpp */

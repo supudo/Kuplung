@@ -37,9 +37,7 @@ BoundingBox::~BoundingBox() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Public
-
-bool BoundingBox::initShaderProgram() {
+const bool BoundingBox::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/bounding_box.vert";
@@ -137,8 +135,6 @@ void BoundingBox::initBuffers(const MeshModel& meshModel) {
 
   Settings::Instance()->BoundingBoxRefresh = false;
 }
-
-#pragma mark - Render
 
 void BoundingBox::render(const glm::mat4& matrixMVP, const glm::vec4& outlineColor) {
   if (Settings::Instance()->BoundingBoxRefresh)

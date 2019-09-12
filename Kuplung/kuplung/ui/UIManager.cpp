@@ -571,7 +571,7 @@ void UIManager::renderEnd() {
   ImGui::Render();
 }
 
-void UIManager::renderPostEnd() {
+void UIManager::renderPostEnd() const {
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
@@ -613,7 +613,7 @@ void UIManager::recentFilesClearImported() {
   Settings::Instance()->saveRecentFilesImported(this->recentFilesImported);
 }
 
-bool UIManager::isMouseOnGUI() {
+bool UIManager::isMouseOnGUI() const {
   return ImGui::IsMouseHoveringAnyWindow();
 }
 
@@ -641,25 +641,23 @@ void UIManager::hideExporting() {
   this->isExportingOpen = false;
 }
 
-#pragma mark - Private Methods
-
 void UIManager::dialogFileSave(FileSaverOperation operation) {
   std::string title = "...";
   bool* wType = nullptr;
   assert(operation == FileSaverOperation_SaveScene || operation == FileSaverOperation_OpenScene || operation == FileSaverOperation_Renderer);
   switch (operation) {
-  case FileSaverOperation_SaveScene:
-    title = "Save Scene";
-    wType = &this->showSaveDialog;
-    break;
-  case FileSaverOperation_OpenScene:
-    title = "Open Scene";
-    wType = &this->showOpenDialog;
-    break;
-  case FileSaverOperation_Renderer:
-    title = "Render Scene";
-    wType = &this->showRenderer;
-    break;
+    case FileSaverOperation_SaveScene:
+      title = "Save Scene";
+      wType = &this->showSaveDialog;
+      break;
+    case FileSaverOperation_OpenScene:
+      title = "Open Scene";
+      wType = &this->showOpenDialog;
+      break;
+    case FileSaverOperation_Renderer:
+      title = "Render Scene";
+      wType = &this->showRenderer;
+      break;
   }
   this->componentFileSaver->draw(title.c_str(), operation, wType);
 }
@@ -805,15 +803,15 @@ void UIManager::dialogExporterProcessFile(FBEntity const& file, std::vector<std:
 void UIManager::dialogFileSaveProcessFile(FBEntity const& file, FileSaverOperation operation) {
   assert(operation == FileSaverOperation_SaveScene || operation == FileSaverOperation_OpenScene || operation == FileSaverOperation_Renderer);
   switch (operation) {
-  case FileSaverOperation_SaveScene:
-    this->funcSaveScene(file);
-    break;
-  case FileSaverOperation_OpenScene:
-    this->funcOpenScene(file);
-    break;
-  case FileSaverOperation_Renderer:
-    this->funcRenderScene(file);
-    break;
+    case FileSaverOperation_SaveScene:
+      this->funcSaveScene(file);
+      break;
+    case FileSaverOperation_OpenScene:
+      this->funcOpenScene(file);
+      break;
+    case FileSaverOperation_Renderer:
+      this->funcRenderScene(file);
+      break;
   }
   this->showImageSave = false;
   this->showSaveDialog = false;

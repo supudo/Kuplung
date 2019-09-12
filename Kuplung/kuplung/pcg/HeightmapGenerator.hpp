@@ -20,43 +20,43 @@
 #include <glm/common.hpp>
 
 typedef enum GeometryTerrainType {
-    GeometryTerrainType_Smooth,
-    GeometryTerrainType_Cubic,
-    GeometryTerrainType_Sphere
+  GeometryTerrainType_Smooth,
+  GeometryTerrainType_Cubic,
+  GeometryTerrainType_Sphere
 } GeometryTerrainType;
 
 class HeightmapGenerator {
 public:
-    void initPosition();
-    void generateTerrain(const std::string& assetsFolder, const int& width, const int& height);
+  void initPosition();
+  void generateTerrain(const std::string& assetsFolder, const int& width, const int& height);
 
-    std::vector<glm::vec3> vertices, normals, colors;
-    std::vector<glm::vec2> uvs;
-    std::vector<unsigned int> indices;
-    std::string heightmapImage;
+  std::vector<glm::vec3> vertices, normals, colors;
+  std::vector<glm::vec2> uvs;
+  std::vector<unsigned int> indices;
+  std::string heightmapImage;
 
-    int Setting_Octaves;
-    float Setting_Frequency, Setting_Persistence, Setting_ScaleCoeficient, Setting_HeightCoeficient;
-    float Setting_OffsetHorizontal, Setting_OffsetVertical;
-    bool Setting_ColorTerrain, Setting_SeedRandom;
-    int Setting_TerrainType, Setting_Seed;
-    MeshModel modelTerrain;
+  int Setting_Octaves;
+  float Setting_Frequency, Setting_Persistence, Setting_ScaleCoeficient, Setting_HeightCoeficient;
+  float Setting_OffsetHorizontal, Setting_OffsetVertical;
+  bool Setting_ColorTerrain, Setting_SeedRandom;
+  int Setting_TerrainType, Setting_Seed;
+  MeshModel modelTerrain;
 
 private:
-    std::string assetsFolder;
-    int width, height;
-    float position_x1;
-    float position_x2;
-    float position_y1;
-    float position_y2;
+  std::string assetsFolder;
+  int width, height;
+  float position_x1;
+  float position_x2;
+  float position_y1;
+  float position_y2;
 
-    utils::NoiseMap heightMap;
-    utils::Image image;
+  utils::NoiseMap heightMap;
+  utils::Image image;
 
-    void generateMeshModel();
-    void generatePlaneGeometrySmooth();
-    void generatePlaneGeometryCubic();
-    void generateSphereGeometry();
+  void generateMeshModel();
+  void generatePlaneGeometrySmooth();
+  void generatePlaneGeometryCubic();
+  void generateSphereGeometry();
 };
 
 #endif /* HeightmapGenerator_hpp */

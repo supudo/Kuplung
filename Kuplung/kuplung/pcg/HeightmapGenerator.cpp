@@ -120,15 +120,15 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
   writer.WriteDestFile();
 
   switch (this->Setting_TerrainType) {
-  case GeometryTerrainType_Cubic:
-    this->generatePlaneGeometryCubic();
-    break;
-  case GeometryTerrainType_Sphere:
-    this->generateSphereGeometry();
-    break;
-  default:
-    this->generatePlaneGeometrySmooth();
-    break;
+    case GeometryTerrainType_Cubic:
+      this->generatePlaneGeometryCubic();
+      break;
+    case GeometryTerrainType_Sphere:
+      this->generateSphereGeometry();
+      break;
+    default:
+      this->generatePlaneGeometrySmooth();
+      break;
   }
 }
 

@@ -29,9 +29,7 @@ LightRay::LightRay() {
   this->z = -1;
 }
 
-#pragma mark - Public
-
-bool LightRay::initShaderProgram() {
+const bool LightRay::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light_ray.vert";
@@ -120,8 +118,6 @@ void LightRay::initBuffers(const glm::vec3& position, const glm::vec3& direction
     glBindVertexArray(0);
   }
 }
-
-#pragma mark - Render
 
 void LightRay::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel) {
   if (this->glVAO > 0) {

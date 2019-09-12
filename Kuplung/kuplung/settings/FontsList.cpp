@@ -24,11 +24,11 @@ void FontsList::init() {
   this->fonts.clear();
 }
 
-bool FontsList::fontFileExists(std::string const& font) {
+const bool FontsList::fontFileExists(std::string const& font)const {
   return boost::filesystem::exists(font);
 }
 
-int FontsList::getSelectedFontSize() {
+const int FontsList::getSelectedFontSize() const {
   for (size_t i=0; i<sizeof(this->fontSizes[0]); i++) {
     if (atof(this->fontSizes[i]) < Settings::Instance()->UIFontSize)
       return static_cast<int>(i);

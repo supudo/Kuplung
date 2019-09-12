@@ -20,14 +20,14 @@ namespace KuplungApp { namespace Utilities { namespace Export {
 
 class Exporter {
 public:
-    ~Exporter();
-    Exporter();
-    void init(const std::function<void(float)>& doProgress);
-    void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp);
+  ~Exporter();
+  Exporter();
+  void init(const std::function<void(float)>& doProgress);
+  void exportScene(const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects, ImportExportFormats exportFormat, int exportFormatAssimp);
 
 private:
 	std::unique_ptr<ExporterAssimp> exporterAssimp;
-    std::unique_ptr<ExporterOBJ> exporterOBJ;
+  std::unique_ptr<ExporterOBJ> exporterOBJ;
 	std::unique_ptr<ExporterGLTF> exporterGLTF;
 };
 

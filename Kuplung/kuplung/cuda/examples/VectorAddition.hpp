@@ -18,12 +18,12 @@
 
 class VectorAddition {
 public:
-    ~VectorAddition();
-    void init();
-    void doVectorAddition();
+  ~VectorAddition();
+  void init();
+  void doVectorAddition();
 
 private:
-    std::string printArray(const float* a, const unsigned int n);
+  std::string printArray(const float* a, const unsigned int n);
 };
 
 #endif /* VectorAddition_hpp */

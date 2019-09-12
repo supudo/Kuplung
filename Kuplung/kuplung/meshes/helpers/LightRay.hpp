@@ -17,20 +17,20 @@
 
 class LightRay {
 public:
-    LightRay();
-    ~LightRay();
-    bool initShaderProgram();
-    void initBuffers(const glm::vec3& position, const glm::vec3& direction, const bool simple);
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel);
+  LightRay();
+  ~LightRay();
+  const bool initShaderProgram();
+  void initBuffers(const glm::vec3& position, const glm::vec3& direction, const bool simple);
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel);
 
 private:
-    short int axisSize;
-    float x, y, z;
+  short int axisSize;
+  float x, y, z;
 
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboIndices;
-    GLint glUniformMVPMatrix;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO, vboVertices, vboIndices;
+  GLint glUniformMVPMatrix;
 };
 
 #endif /* LightRay_hpp */

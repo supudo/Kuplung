@@ -44,7 +44,7 @@ private:
   std::regex regex_equalsSign;
 
   void readFile();
-  std::vector<std::string> splitString(const std::string& s, std::regex const& delimiter);
+  const std::vector<std::string> splitString(const std::string& s, std::regex const& delimiter) const;
 };
 
 #endif /* ConfigUtils_hpp */

@@ -15,8 +15,8 @@
 
 class KuplungIDE {
 public:
-    void init();
-    void draw(const char* title, bool* p_opened, std::vector<ModelFaceBase*> const& meshModelFaces, ObjectsManager &managerObjects);
+  void init();
+  void draw(const char* title, bool* p_opened, std::vector<ModelFaceBase*> const& meshModelFaces, ObjectsManager &managerObjects);
 
 private:
 	TextEditor kuplungEditor;

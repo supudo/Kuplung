@@ -18,18 +18,18 @@
 
 class ShaderEditor {
 public:
-    void init(std::string const& appPath, int positionX, int positionY, int width, int height);
-    void draw(const std::function<void(std::string)>& fileShaderCompile, const char* title, bool* p_opened = NULL);
+  void init(std::string const& appPath, int positionX, int positionY, int width, int height);
+  void draw(const std::function<void(std::string)>& fileShaderCompile, const char* title, bool* p_opened = NULL);
 
 private:
-    std::function<void(std::string)> doFileShaderCompile;
-    void compileShader();
+  std::function<void(std::string)> doFileShaderCompile;
+  void compileShader();
 
-    std::string appPath, fileContents, currentFileName;
-    int positionX, positionY, width, height, shaderFileIndex;
-    char guiEditorText[1024 * 16];
+  std::string appPath, fileContents, currentFileName;
+  int positionX, positionY, width, height, shaderFileIndex;
+  char guiEditorText[1024 * 16];
 
-    std::unique_ptr<KuplungApp::Utilities::Lua::LuaManager> managerLua;
+  std::unique_ptr<KuplungApp::Utilities::Lua::LuaManager> managerLua;
 };
 
 #endif /* ShaderEditor_hpp */

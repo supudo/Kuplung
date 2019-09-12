@@ -36,7 +36,7 @@ void AxisHelpers::setModel(const MeshModel& meshModel) {
 
 void AxisHelpers::initProperties() {}
 
-bool AxisHelpers::initShaderProgram() {
+const bool AxisHelpers::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/axis_helpers.vert";

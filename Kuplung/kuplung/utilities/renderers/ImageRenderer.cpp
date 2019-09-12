@@ -15,31 +15,31 @@ ImageRenderer::~ImageRenderer() {
 }
 
 void ImageRenderer::init() {
-    this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
-    this->rendererScene->init();
+  this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
+  this->rendererScene->init();
 
-    this->rendererDefaultForward = std::make_unique<DefaultForwardRenderer>(this->managerObjects);
-    this->rendererDefaultForward->init();
+  this->rendererDefaultForward = std::make_unique<DefaultForwardRenderer>(this->managerObjects);
+  this->rendererDefaultForward->init();
 
-    this->rendererRayTracer = std::make_unique<RayTracerRenderer>(this->managerObjects);
-    this->rendererRayTracer->init();
+  this->rendererRayTracer = std::make_unique<RayTracerRenderer>(this->managerObjects);
+  this->rendererRayTracer->init();
 }
 
-std::string ImageRenderer::renderImage(ImageRendererType type, const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) {
-    if (type == ImageRendererType_Scene)
-        return this->rendererScene->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_DefaultForward)
-        return this->rendererDefaultForward->renderImage(file, meshModelFaces);
-    else if (type == ImageRendererType_RayTracer)
-        return this->rendererRayTracer->renderImage(file, meshModelFaces);
-    return "";
+const std::string ImageRenderer::renderImage(ImageRendererType type, const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) const {
+  if (type == ImageRendererType_Scene)
+    return this->rendererScene->renderImage(file, meshModelFaces);
+  else if (type == ImageRendererType_DefaultForward)
+    return this->rendererDefaultForward->renderImage(file, meshModelFaces);
+  else if (type == ImageRendererType_RayTracer)
+    return this->rendererRayTracer->renderImage(file, meshModelFaces);
+  return "";
 }
 
-void ImageRenderer::showSpecificSettings(ImageRendererType type) {
-    if (type == ImageRendererType_Scene)
-        return this->rendererScene->showSpecificSettings();
-    else if (type == ImageRendererType_DefaultForward)
-        return this->rendererDefaultForward->showSpecificSettings();
-    else if (type == ImageRendererType_RayTracer)
-        return this->rendererRayTracer->showSpecificSettings();
+void ImageRenderer::showSpecificSettings(ImageRendererType type) const {
+  if (type == ImageRendererType_Scene)
+    return this->rendererScene->showSpecificSettings();
+  else if (type == ImageRendererType_DefaultForward)
+    return this->rendererDefaultForward->showSpecificSettings();
+  else if (type == ImageRendererType_RayTracer)
+    return this->rendererRayTracer->showSpecificSettings();
 }

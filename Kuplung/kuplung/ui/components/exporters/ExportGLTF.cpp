@@ -142,8 +142,6 @@ void ExportGLTF::draw(const char* title, bool* p_opened) {
 	ImGui::End();
 }
 
-#pragma mark - Private
-
 void ExportGLTF::modalNewFolder() {
 	ImGui::OpenPopup("New Folder");
 	ImGui::BeginPopupModal("New Folder", NULL, ImGuiWindowFlags_AlwaysAutoResize);
@@ -272,13 +270,13 @@ std::map<std::string, FBEntity> ExportGLTF::getFolderContents(std::string const&
 	return folderContents;
 }
 
-std::string ExportGLTF::convertToString(double num) {
+const std::string ExportGLTF::convertToString(double num) const {
 	std::ostringstream convert;
 	convert << num;
 	return convert.str();
 }
 
-std::string ExportGLTF::convertSize(size_t size) {
+const std::string ExportGLTF::convertSize(size_t size) const {
 	static const char *SIZES[] = { "B", "KB", "MB", "GB" };
 	int div = 0;
 	size_t rem = 0;
@@ -294,14 +292,14 @@ std::string ExportGLTF::convertSize(size_t size) {
 	return result;
 }
 
-double ExportGLTF::roundOff(double n) {
+const double ExportGLTF::roundOff(double n) const {
 	double d = n * 100.0;
 	int i = d + 0.5;
 	d = (float)i / 100.0;
 	return d;
 }
 
-bool ExportGLTF::isHidden(const fs::path &p) {
+const bool ExportGLTF::isHidden(const fs::path &p) const {
 	std::string name = p.filename().string();
 	if (name == ".." || name == "." || boost::starts_with(name, "."))
 		return true;

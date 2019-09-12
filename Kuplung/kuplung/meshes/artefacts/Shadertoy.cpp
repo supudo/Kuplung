@@ -221,21 +221,21 @@ void Shadertoy::addTexture(std::string const& textureImage, GLuint* vboTexture, 
 
     GLenum textureFormat = 0;
     switch (tChannels) {
-    case 1:
-      textureFormat = GL_LUMINANCE;
-      break;
-    case 2:
-      textureFormat = GL_LUMINANCE_ALPHA;
-      break;
-    case 3:
-      textureFormat = GL_RGB;
-      break;
-    case 4:
-      textureFormat = GL_RGBA;
-      break;
-    default:
-      textureFormat = GL_RGB;
-      break;
+      case 1:
+        textureFormat = GL_LUMINANCE;
+        break;
+      case 2:
+        textureFormat = GL_LUMINANCE_ALPHA;
+        break;
+      case 3:
+        textureFormat = GL_RGB;
+        break;
+      case 4:
+        textureFormat = GL_RGBA;
+        break;
+      default:
+        textureFormat = GL_RGB;
+        break;
     }
     glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
     stbi_image_free(tPixels);

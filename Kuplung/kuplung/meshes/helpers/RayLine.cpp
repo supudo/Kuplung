@@ -28,8 +28,6 @@ RayLine::~RayLine() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Initialization
-
 void RayLine::init() {
   this->initProperties();
 }
@@ -38,9 +36,7 @@ void RayLine::initProperties() {
   this->matrixModel = glm::mat4(1.0);
 }
 
-#pragma mark - Public
-
-bool RayLine::initShaderProgram() {
+const bool RayLine::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/ray_line.vert";
@@ -108,8 +104,6 @@ void RayLine::initBuffers(const glm::vec3& vecFrom, const glm::vec3& vecTo) {
 
   glBindVertexArray(0);
 }
-
-#pragma mark - Render
 
 void RayLine::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
   if (this->glVAO > 0) {

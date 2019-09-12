@@ -29,8 +29,6 @@ MiniAxis::~MiniAxis() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Initialization
-
 MiniAxis::MiniAxis() {
   this->axisSize = 6;
   this->initProperties();
@@ -46,9 +44,7 @@ void MiniAxis::initProperties() {
   this->matrixModel = glm::mat4(1.0);
 }
 
-#pragma mark - Public
-
-bool MiniAxis::initShaderProgram() {
+const bool MiniAxis::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/axis.vert";
@@ -157,8 +153,6 @@ void MiniAxis::initBuffers() {
 
   glBindVertexArray(0);
 }
-
-#pragma mark - Render
 
 void MiniAxis::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
   if (this->glVAO > 0 && this->showAxis) {

@@ -18,44 +18,44 @@
 
 class Light {
 public:
-    ~Light();
-    void init();
-    void setModel(const MeshModel& meshModel);
-    void initProperties(LightSourceType type = LightSourceType_Directional);
-    bool initShaderProgram();
-    void initBuffers(std::string const& assetsFolder);
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
-    glm::vec3 getNewPositionAfterRotation(const glm::vec3& rotation);
-    bool turnOff_Position;
+  ~Light();
+  void init();
+  void setModel(const MeshModel& meshModel);
+  void initProperties(LightSourceType type = LightSourceType_Directional);
+  const bool initShaderProgram();
+  void initBuffers(std::string const& assetsFolder);
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
+  const glm::vec3 getNewPositionAfterRotation(const glm::vec3& rotation) const;
+  bool turnOff_Position;
 
-    MeshModel meshModel;
+  MeshModel meshModel;
 
-    std::string title;
-    std::string description;
-    LightSourceType type;
-    bool showLampObject, showLampDirection;
+  std::string title;
+  std::string description;
+  LightSourceType type;
+  bool showLampObject, showLampDirection;
 
-    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
-    std::unique_ptr<ObjectCoordinate> directionX, directionY, directionZ;
-    std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
-    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
-    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
-    std::unique_ptr<MaterialColor> ambient, diffuse, specular;
-    std::unique_ptr<ObjectCoordinate> lCutOff, lOuterCutOff;
-    std::unique_ptr<ObjectCoordinate> lConstant, lLinear, lQuadratic;
-    bool showInWire;
+  std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+  std::unique_ptr<ObjectCoordinate> directionX, directionY, directionZ;
+  std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
+  std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+  std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
+  std::unique_ptr<MaterialColor> ambient, diffuse, specular;
+  std::unique_ptr<ObjectCoordinate> lCutOff, lOuterCutOff;
+  std::unique_ptr<ObjectCoordinate> lConstant, lLinear, lQuadratic;
+  bool showInWire;
 
-    glm::mat4 matrixModel;
+  glm::mat4 matrixModel;
 
 private:
-    std::unique_ptr<RayLine> lightDirectionRay;
+  std::unique_ptr<RayLine> lightDirectionRay;
 
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
-    GLuint vboTextureDiffuse;
-    GLint glUniformMVPMatrix, glUniformSampler, glUniformUseColor, glUniformColor;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices;
+  GLuint vboTextureDiffuse;
+  GLint glUniformMVPMatrix, glUniformSampler, glUniformUseColor, glUniformColor;
 };
 
 #endif /* Light_hpp */

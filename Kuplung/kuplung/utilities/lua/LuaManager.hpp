@@ -24,15 +24,15 @@ namespace KuplungApp { namespace Utilities { namespace Lua {
 class LuaManager {
 public:
 	LuaManager();
-    void initLua();
-    void closeLua();
-    void checkLuaErrors();
+  void initLua();
+  void closeLua();
+  void checkLuaErrors();
 
-    void execute(const std::string& fileName);
-    static int testFromLua(lua_State *state);
+  void execute(const std::string& fileName);
+  static int testFromLua(lua_State *state);
 
 private:
-    lua_State *luaState;
+  lua_State *luaState;
 };
 
 }}}

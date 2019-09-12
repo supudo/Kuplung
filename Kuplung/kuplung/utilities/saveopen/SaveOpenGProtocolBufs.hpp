@@ -27,42 +27,42 @@ private:
   std::unique_ptr<KuplungApp::Utilities::Miniz::KuplungMiniz> managerZip;
 
   void storeObjectsManagerSettings(std::unique_ptr<ObjectsManager>& managerObjects);
-  void readObjectsManagerSettings(std::unique_ptr<ObjectsManager>& managerObjects);
+  void readObjectsManagerSettings(std::unique_ptr<ObjectsManager>& managerObjects) const;
 
   void storeGlobalLights(std::unique_ptr<ObjectsManager>& managerObjects);
-  void readGlobalLights(std::unique_ptr<ObjectsManager>& managerObjects);
+  void readGlobalLights(std::unique_ptr<ObjectsManager>& managerObjects) const;
 
   void storeObjects(std::vector<ModelFaceBase*> meshModelFaces);
-  std::vector<ModelFaceData*> readObjects(std::unique_ptr<ObjectsManager>& managerObjects);
+  const std::vector<ModelFaceData*> readObjects(std::unique_ptr<ObjectsManager>& managerObjects) const;
 
   KuplungApp::GUISettings bufGUISettings;
   KuplungApp::Scene bufScene;
 
-  bool hasEnding(std::string const& fullString, std::string const& ending);
+  const bool hasEnding(std::string const& fullString, std::string const& ending) const;
 
-  KuplungApp::Vec4* getVec4(const glm::vec4& v);
-  KuplungApp::Vec3* getVec3(const glm::vec3& v);
+  KuplungApp::Vec4* getVec4(const glm::vec4& v) const;
+  KuplungApp::Vec3* getVec3(const glm::vec3& v) const;
 
-  glm::vec4 setVec4(const KuplungApp::Vec4& v);
-  glm::vec3 setVec3(const KuplungApp::Vec3& v);
+  glm::vec4 setVec4(const KuplungApp::Vec4& v) const;
+  glm::vec3 setVec3(const KuplungApp::Vec3& v) const;
 
-  KuplungApp::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate& v);
-  std::unique_ptr<ObjectCoordinate> setObjectCoordinate(const KuplungApp::ObjectCoordinate& v);
+  KuplungApp::ObjectCoordinate* getObjectCoordinate(ObjectCoordinate& v) const;
+  std::unique_ptr<ObjectCoordinate> setObjectCoordinate(const KuplungApp::ObjectCoordinate& v) const;
 
-  KuplungApp::MaterialColor* getMaterialColor(MaterialColor& v);
-  std::unique_ptr<MaterialColor> setMaterialColor(const KuplungApp::MaterialColor& v);
+  KuplungApp::MaterialColor* getMaterialColor(MaterialColor& v) const;
+  std::unique_ptr<MaterialColor> setMaterialColor(const KuplungApp::MaterialColor& v) const;
 
-  KuplungApp::Mesh* getMesh(MeshModel ent);
-  MeshModel setMesh(const KuplungApp::Mesh& ent);
+  KuplungApp::Mesh* getMesh(MeshModel ent) const;
+  MeshModel setMesh(const KuplungApp::Mesh& ent) const;
 
-  KuplungApp::MeshModelMaterial* getMeshModelMaterial(MeshModelMaterial ent);
-  MeshModelMaterial setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent);
+  KuplungApp::MeshModelMaterial* getMeshModelMaterial(MeshModelMaterial ent) const ;
+  MeshModelMaterial setMeshModelMaterial(const KuplungApp::MeshModelMaterial& ent) const ;
 
-  KuplungApp::FBEntity* getFBEntity(FBEntity ent);
-  FBEntity setFBEntity(const KuplungApp::FBEntity& ent);
+  KuplungApp::FBEntity* getFBEntity(FBEntity ent) const;
+  FBEntity setFBEntity(const KuplungApp::FBEntity& ent) const;
 
-  KuplungApp::MeshMaterialTextureImage* getMeshMaterialTextureImage(MeshMaterialTextureImage ent);
-  MeshMaterialTextureImage setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent);
+  KuplungApp::MeshMaterialTextureImage* getMeshMaterialTextureImage(MeshMaterialTextureImage ent) const;
+  const MeshMaterialTextureImage setMeshMaterialTextureImage(const KuplungApp::MeshMaterialTextureImage& ent) const;
 };
 
 #endif /* SaveOpenGProtocolBufs_hpp */

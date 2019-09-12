@@ -13,7 +13,7 @@
 
 class VoronoiGenerator {
 public:
-    ~VoronoiGenerator();
+  ~VoronoiGenerator();
 
 private:
 };

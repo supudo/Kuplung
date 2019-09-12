@@ -37,16 +37,12 @@ Terrain::~Terrain() {
   Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
 
-#pragma mark - Initialization
-
 Terrain::Terrain()
     : terrainGenerator(std::make_unique<HeightmapGenerator>())
     , Setting_UseTexture(false)
     , Setting_Wireframe(false) {
   this->terrainGenerator->initPosition();
 }
-
-#pragma mark - Public
 
 bool Terrain::initShaderProgram() {
   bool success = true;
@@ -176,8 +172,6 @@ void Terrain::initBuffers(std::string const& assetsFolder, const int width, cons
 
   Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
 }
-
-#pragma mark - Render
 
 void Terrain::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel) {
   if (this->glVAO > 0) {

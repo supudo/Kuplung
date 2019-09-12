@@ -18,21 +18,21 @@
 
 class AxisHelpers {
 public:
-    ~AxisHelpers();
-    AxisHelpers();
-    void setModel(const MeshModel& meshModel);
-    void initProperties();
-    bool initShaderProgram();
-    void initBuffers();
-    void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::vec3& position);
-    MeshModel meshModel;
+  ~AxisHelpers();
+  AxisHelpers();
+  void setModel(const MeshModel& meshModel);
+  void initProperties();
+  const bool initShaderProgram();
+  void initBuffers();
+  void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::vec3& position);
+  MeshModel meshModel;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboIndices;
-    GLint glUniformMVPMatrix, glUniformColor;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboIndices;
+  GLint glUniformMVPMatrix, glUniformColor;
 };
 
 #endif /* AxisHelpers_hpp */

@@ -41,8 +41,6 @@ WorldGrid::~WorldGrid() {
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
-#pragma mark - Initialization
-
 WorldGrid::WorldGrid() {
   this->gridSize = 10;
   this->gridSizeVertex = 10;
@@ -80,9 +78,7 @@ void WorldGrid::initProperties() {
   this->mirrorSurface->rotateZ = 0.0f;
 }
 
-#pragma mark - Public
-
-bool WorldGrid::initShaderProgram() {
+const bool WorldGrid::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/grid.vert";
@@ -286,8 +282,6 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
 
   glBindVertexArray(0);
 }
-
-#pragma mark - Render
 
 void WorldGrid::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const bool& showZAxis) {
   if (this->glVAO > 0 && this->showGrid) {

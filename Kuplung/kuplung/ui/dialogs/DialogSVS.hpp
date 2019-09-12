@@ -15,18 +15,18 @@
 
 class DialogSVS {
 public:
-    void init();
-    void render(bool* p_opened);
+  void init();
+  void render(bool* p_opened);
 
-    GLuint vboTexture;
-    float windowWidth, windowHeight;
-    float viewPaddingHorizontal, viewPaddingVertical;
+  GLuint vboTexture;
+  float windowWidth, windowHeight;
+  float viewPaddingHorizontal, viewPaddingVertical;
 
 private:
-    int textureWidth, textureHeight;
-    ImVec2 scrolling = ImVec2(0.0f, 0.0f);
+  int textureWidth, textureHeight;
+  ImVec2 scrolling = ImVec2(0.0f, 0.0f);
 
-    std::unique_ptr<StructuredVolumetricSampling> structured_Volumetric_Sampling;
+  std::unique_ptr<StructuredVolumetricSampling> structured_Volumetric_Sampling;
 };
 
 #endif /* DialogSVS_hpp */

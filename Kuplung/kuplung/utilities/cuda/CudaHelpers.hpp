@@ -22,12 +22,12 @@
 
 class CudaHelpers {
 public:
-    int findCudaDevice();
-    int findCudaGLDevice();
+  int findCudaDevice();
+  int findCudaGLDevice();
 
 private:
-    int gpuGetMaxGflopsDeviceId();
-    int _ConvertSMVer2Cores(int major, int minor);
+  int gpuGetMaxGflopsDeviceId();
+  int _ConvertSMVer2Cores(int major, int minor);
 };
 
 #endif /* CudaHelpers_hpp */

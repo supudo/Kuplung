@@ -17,20 +17,20 @@
 
 class RayTracerRenderer: public KuplungRendererBase {
 public:
-    explicit RayTracerRenderer(ObjectsManager &managerObjects);
-    ~RayTracerRenderer();
-    void init();
-    std::string renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);
+  explicit RayTracerRenderer(ObjectsManager &managerObjects);
+  ~RayTracerRenderer();
+  void init();
+  std::string renderImage(FBEntity const& file, std::vector<ModelFaceBase*> *meshModelFaces);
 
 private:
-    FBEntity fileOutputImage;
+  FBEntity fileOutputImage;
 
-    ObjectsManager &managerObjects;
+  ObjectsManager &managerObjects;
 
-    GLuint renderFBO, renderRBO, renderTextureColorBuffer;
-    void createFBO();
-    void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
-    void renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces);
+  GLuint renderFBO, renderRBO, renderTextureColorBuffer;
+  void createFBO();
+  void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
+  void renderSceneToFBO(std::vector<ModelFaceBase*> *meshModelFaces) const;
 };
 
 #endif /* RayTracerRenderer_hpp */

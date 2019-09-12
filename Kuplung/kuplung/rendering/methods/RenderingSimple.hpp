@@ -14,23 +14,23 @@
 
 class RenderingSimple {
 public:
-    explicit RenderingSimple(ObjectsManager &managerObjects);
-    explicit RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
-    ~RenderingSimple();
+  explicit RenderingSimple(ObjectsManager &managerObjects);
+  explicit RenderingSimple(std::unique_ptr<ObjectsManager> &managerObjects);
+  ~RenderingSimple();
 
-    bool init();
-    void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
+  bool init();
+  void render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel);
 
 private:
-    ObjectsManager &managerObjects;
+  ObjectsManager &managerObjects;
 
-    glm::mat4 matrixProjection, matrixCamera;
-    glm::vec3 vecCameraPosition, uiAmbientLight;
+  glm::mat4 matrixProjection, matrixCamera;
+  glm::vec3 vecCameraPosition, uiAmbientLight;
 
-    GLuint shaderProgram;
-    GLint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
-    GLint glFS_CameraPosition, glFS_UIAmbient;
-    std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
+  GLuint shaderProgram;
+  GLint glVS_MVPMatrix, glVS_WorldMatrix, glFS_SamplerTexture, glFS_HasSamplerTexture;
+  GLint glFS_CameraPosition, glFS_UIAmbient;
+  std::unique_ptr<ModelFace_LightSource_Directional> solidLight;
 };
 
 #endif /* RenderingSimple_hpp */

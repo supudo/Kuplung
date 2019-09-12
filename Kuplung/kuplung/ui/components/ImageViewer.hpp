@@ -15,15 +15,15 @@
 
 class ImageViewer {
 public:
-    void showImage(bool* show);
-    bool genTexture;
-    std::string imagePath;
-    int wWidth, wHeight;
+  void showImage(bool* show);
+  bool genTexture;
+  std::string imagePath;
+  int wWidth, wHeight;
 
 private:
-    GLuint vboBuffer;
-    int tWidth, tHeight;
-    void createTextureBuffer();
+  GLuint vboBuffer;
+  int tWidth, tHeight;
+  void createTextureBuffer();
 
 };
 

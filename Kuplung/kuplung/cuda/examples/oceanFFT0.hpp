@@ -62,79 +62,79 @@
 
 class oceanFFT0 {
 public:
-    ~oceanFFT0();
-    void init();
-    GLuint draw(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
+  ~oceanFFT0();
+  void init();
+  GLuint draw(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
 
 private:
-    GLuint shaderProgram;
-    GLuint glVAO;
-    GLuint renderFBO, renderTextureColorBuffer, renderRBO;
+  GLuint shaderProgram;
+  GLuint glVAO;
+  GLuint renderFBO, renderTextureColorBuffer, renderRBO;
 
-    glm::mat4 matrixModel;
+  glm::mat4 matrixModel;
 
-    bool initShaderProgram();
-    void initBuffers();
-    void createFBO();
-    void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
+  bool initShaderProgram();
+  void initBuffers();
+  void createFBO();
+  void generateAttachmentTexture(GLboolean depth, GLboolean stencil);
 
-    ////////////////////////////////////////////////////////////////////////////////
-    // constants
-    const unsigned int meshSize = 256;
-    const unsigned int spectrumW = meshSize + 4;
-    const unsigned int spectrumH = meshSize + 1;
-    const float heightModifier = 1.0;
+  ////////////////////////////////////////////////////////////////////////////////
+  // constants
+  const unsigned int meshSize = 256;
+  const unsigned int spectrumW = meshSize + 4;
+  const unsigned int spectrumH = meshSize + 1;
+  const float heightModifier = 1.0;
 
-    // OpenGL vertex buffers
-    GLuint posVertexBuffer;
-    GLuint heightVertexBuffer, slopeVertexBuffer, indexBuffer;
-    struct cudaGraphicsResource *cuda_posVB_resource, *cuda_heightVB_resource, *cuda_slopeVB_resource; // handles OpenGL-CUDA exchange
+  // OpenGL vertex buffers
+  GLuint posVertexBuffer;
+  GLuint heightVertexBuffer, slopeVertexBuffer, indexBuffer;
+  struct cudaGraphicsResource *cuda_posVB_resource, *cuda_heightVB_resource, *cuda_slopeVB_resource; // handles OpenGL-CUDA exchange
 
-    bool animate = true;
-    bool drawPoints = false;
-    bool wireFrame = false;
+  bool animate = true;
+  bool drawPoints = false;
+  bool wireFrame = false;
 
-    // FFT data
-    cufftHandle fftPlan;
-    float2 *d_h0 = 0;   // heightfield at time 0
-    float2 *h_h0 = 0;
-    float2 *d_ht = 0;   // heightfield at time t
-    float2 *d_slope = 0;
+  // FFT data
+  cufftHandle fftPlan;
+  float2 *d_h0 = 0;   // heightfield at time 0
+  float2 *h_h0 = 0;
+  float2 *d_ht = 0;   // heightfield at time t
+  float2 *d_slope = 0;
 
-    // pointers to device object
-    float *g_hptr = NULL;
-    float2 *g_sptr = NULL;
+  // pointers to device object
+  float *g_hptr = NULL;
+  float2 *g_sptr = NULL;
 
-    // simulation parameters
-    const float g = 9.81f;              // gravitational constant
-    const float A = 1e-7f;              // wave scale factor
-    const float patchSize = 100;        // patch size
-    float windSpeed = 100.0f;
-    float windDir = CUDART_PI_F / 3.0f;
-    float dirDepend = 0.07f;
+  // simulation parameters
+  const float g = 9.81f;              // gravitational constant
+  const float A = 1e-7f;              // wave scale factor
+  const float patchSize = 100;        // patch size
+  float windSpeed = 100.0f;
+  float windDir = CUDART_PI_F / 3.0f;
+  float dirDepend = 0.07f;
 
-    StopWatchInterface *timer = NULL;
-    float animTime = 0.0f;
-    float prevTime = 0.0f;
-    float animationRate = -0.001f;
+  StopWatchInterface *timer = NULL;
+  float animTime = 0.0f;
+  float prevTime = 0.0f;
+  float animationRate = -0.001f;
 
-    bool runAutoTest();
-    void runGraphicsTest();
+  bool runAutoTest();
+  void runGraphicsTest();
 
-    // GL functionality
-    void timerEvent(int value);
+  // GL functionality
+  void timerEvent(int value);
 
-    // Cuda functionality
-    void runCuda();
-    void runCudaTest();
-    void generate_h0(float2 *h0);
+  // Cuda functionality
+  void runCuda();
+  void runCudaTest();
+  void generate_h0(float2 *h0);
 
-    float phillips(float Kx, float Ky, float Vdir, float V, float A, float dir_depend);
-    float gauss();
-    float urand();
-    void renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
+  float phillips(float Kx, float Ky, float Vdir, float V, float A, float dir_depend);
+  float gauss();
+  float urand();
+  void renderCuda(glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid);
 
-    void timerEvent();
+  void timerEvent();
 };
 
 #endif /* oceanFFT0_hpp */

@@ -55,8 +55,6 @@ Light::~Light() {
   this->lQuadratic.reset();
 }
 
-#pragma mark - Initialization
-
 void Light::init() {
   this->lightDirectionRay = std::make_unique<RayLine>();
 }
@@ -95,33 +93,33 @@ void Light::initProperties(LightSourceType type) {
 
   assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
   switch (type) {
-  case LightSourceType_Directional: {
-    this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
-    this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
-    this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
-    break;
-  }
-  case LightSourceType_Point: {
-    this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
-    this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.2f);
-    this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.05f);
-    this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
-    this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
-    this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
-    break;
-  }
-  case LightSourceType_Spot: {
-    this->lConstant = std::make_unique<ObjectCoordinate>(false, 1.0f);
-    this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.09f);
-    this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.032f);
-    this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
-    this->lCutOff = std::make_unique<ObjectCoordinate>(false, 12.5f);
-    this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 15.0f);
-    break;
-  }
+    case LightSourceType_Directional: {
+      this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
+      this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.0f);
+      this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.0f);
+      this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
+      this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
+      this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
+      break;
+    }
+    case LightSourceType_Point: {
+      this->lConstant = std::make_unique<ObjectCoordinate>(false, 0.0f);
+      this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.2f);
+      this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.05f);
+      this->specular = std::make_unique<MaterialColor>(false, false, 0.0f, glm::vec3(1.0, 1.0, 1.0));
+      this->lCutOff = std::make_unique<ObjectCoordinate>(false, -180.0f);
+      this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 160.0f);
+      break;
+    }
+    case LightSourceType_Spot: {
+      this->lConstant = std::make_unique<ObjectCoordinate>(false, 1.0f);
+      this->lLinear = std::make_unique<ObjectCoordinate>(false, 0.09f);
+      this->lQuadratic = std::make_unique<ObjectCoordinate>(false, 0.032f);
+      this->specular = std::make_unique<MaterialColor>(false, false, 1.0f, glm::vec3(1.0, 1.0, 1.0));
+      this->lCutOff = std::make_unique<ObjectCoordinate>(false, 12.5f);
+      this->lOuterCutOff = std::make_unique<ObjectCoordinate>(false, 15.0f);
+      break;
+    }
   }
 
   this->matrixModel = glm::mat4(1.0);
@@ -135,9 +133,7 @@ void Light::initProperties(LightSourceType type) {
   this->turnOff_Position = false;
 }
 
-#pragma mark - Public
-
-bool Light::initShaderProgram() {
+const bool Light::initShaderProgram() {
   bool success = true;
 
   std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/light.vert";
@@ -226,21 +222,21 @@ void Light::initBuffers(std::string const& assetsFolder) {
 
         GLenum textureFormat = 0;
         switch (tChannels) {
-        case 1:
-          textureFormat = GL_LUMINANCE;
-          break;
-        case 2:
-          textureFormat = GL_LUMINANCE_ALPHA;
-          break;
-        case 3:
-          textureFormat = GL_RGB;
-          break;
-        case 4:
-          textureFormat = GL_RGBA;
-          break;
-        default:
-          textureFormat = GL_RGB;
-          break;
+          case 1:
+            textureFormat = GL_LUMINANCE;
+            break;
+          case 2:
+            textureFormat = GL_LUMINANCE_ALPHA;
+            break;
+          case 3:
+            textureFormat = GL_RGB;
+            break;
+          case 4:
+            textureFormat = GL_RGBA;
+            break;
+          default:
+            textureFormat = GL_RGB;
+            break;
         }
         glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(textureFormat), tWidth, tHeight, 0, textureFormat, GL_UNSIGNED_BYTE, tPixels);
         stbi_image_free(tPixels);
@@ -256,9 +252,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
   glBindVertexArray(0);
 }
 
-#pragma mark - Render
-
-glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3& rotation) {
+const glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3& rotation) const {
   glm::mat4 mtx = this->matrixModel;
 
   mtx = glm::translate(mtx, glm::vec3(0, 0, 0));

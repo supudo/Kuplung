@@ -18,30 +18,30 @@
 
 class CameraModel {
 public:
-    ~CameraModel();
-    CameraModel();
-    void setModel(MeshModel const& meshModel);
-    void initProperties();
-    bool initShaderProgram();
-    void initBuffers();
-    void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4& mtxGrid, const bool& fixedGridWorld);
-    MeshModel meshModel;
+  ~CameraModel();
+  CameraModel();
+  void setModel(MeshModel const& meshModel);
+  void initProperties();
+  const bool initShaderProgram();
+  void initBuffers();
+  void render(const glm::mat4& mtxProjection, const glm::mat4& mtxCamera, const glm::mat4& mtxGrid, const bool& fixedGridWorld);
+  MeshModel meshModel;
 
-    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
-    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
-    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
-    std::unique_ptr<ObjectCoordinate> innerLightDirectionX, innerLightDirectionY, innerLightDirectionZ;
-    std::unique_ptr<ObjectCoordinate> colorR, colorG, colorB;
-    bool showCameraObject, showInWire;
+  std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+  std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+  std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
+  std::unique_ptr<ObjectCoordinate> innerLightDirectionX, innerLightDirectionY, innerLightDirectionZ;
+  std::unique_ptr<ObjectCoordinate> colorR, colorG, colorB;
+  bool showCameraObject, showInWire;
 
-    glm::mat4 matrixModel;
+  glm::mat4 matrixModel;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboNormals, vboIndices;
-    GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboNormals, vboIndices;
+  GLint glUniformMVPMatrix, glUniformInnerLightDirection, glUniformColor;
 };
 
 #endif /* CameraModel_hpp */

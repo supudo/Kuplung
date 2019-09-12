@@ -32,9 +32,9 @@ public:
   void saveSettings();
   std::string string_format(const std::string& fmt_str, ...);
   std::string appFolder();
-  bool isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions = std::vector<std::string>());
-  bool isAllowedStyleExtension(std::string fileExtension);
-  bool isAllowedImageExtension(std::string fileExtension);
+  bool isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions = std::vector<std::string>()) const;
+  bool isAllowedStyleExtension(std::string fileExtension) const;
+  bool isAllowedImageExtension(std::string fileExtension) const;
   void setLogFunc(const std::function<void(std::string)>& doLog);
   void saveRecentFiles(const std::vector<FBEntity>& recentFiles);
   std::vector<FBEntity> loadRecentFiles();
@@ -68,10 +68,10 @@ public:
 
   void timerStart(const std::string& msg);
   void timerEnd(const std::string& msg);
-  bool hasEnding(std::string const &fullString, std::string const &ending);
+  const bool hasEnding(std::string const &fullString, std::string const &ending) const;
 
   std::unique_ptr<KuplungApp::Utilities::GL::GLUtils> glUtils;
-	std::string getTimeNow();
+	const std::string getTimeNow() const;
 
 	std::vector<std::string> hddDriveList;
 	int Setting_SelectedDriveIndex, Setting_CurrentDriveIndex;

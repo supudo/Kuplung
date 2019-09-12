@@ -18,23 +18,23 @@ ExporterAssimp::~ExporterAssimp() {
 }
 
 void ExporterAssimp::init(const std::function<void(float)>& doProgress) {
-    this->funcProgress = doProgress;
-    this->addSuffix = false;
+  this->funcProgress = doProgress;
+  this->addSuffix = false;
 #ifdef _WIN32
-    this->nlDelimiter = "\r\n";
+  this->nlDelimiter = "\r\n";
 #elif defined macintosh // OS 9
-    this->nlDelimiter = "\r";
+  this->nlDelimiter = "\r";
 #else
-    this->nlDelimiter = "\n";
+  this->nlDelimiter = "\n";
 #endif
 
-    this->parserUtils = std::make_unique<ParserUtils>();
+  this->parserUtils = std::make_unique<ParserUtils>();
 	this->exporter = std::make_unique<Assimp::Exporter>();
 }
 
 void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const std::vector<ModelFaceBase*>& faces, const std::vector<std::string>& settings, std::unique_ptr<ObjectsManager> &managerObjects) {
-    this->exportFile = file;
-    this->objSettings = settings;
+  this->exportFile = file;
+  this->objSettings = settings;
 
 	aiScene* scene = new aiScene();
 	scene->mRootNode = new aiNode();
@@ -111,8 +111,7 @@ void ExporterAssimp::exportToFile(int exportFormat, const FBEntity& file, const 
 		}
 
 		int j = 0;
-		for (auto itr = vVertices.begin(); itr != vVertices.end(); ++itr)
-		{
+		for (auto itr = vVertices.begin(); itr != vVertices.end(); ++itr) {
 			pMesh->mVertices[itr - vVertices.begin()] = aiVector3D(vVertices[j].x, vVertices[j].y, vVertices[j].z);
 			pMesh->mNormals[itr - vVertices.begin()] = aiVector3D(normals[j].x, normals[j].y, normals[j].z);
 			if (model.countTextureCoordinates > 0)
@@ -157,7 +156,7 @@ void ExporterAssimp::saveFile(int exportFormat, aiScene* scene) {
 		fileSuffix.clear();
 	std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
 	std::string fileName = this->exportFile.title;
-	
+
 	std::string eFilename = filePath + "/" + fileName + fileSuffix + Settings::Instance()->AssimpSupportedFormats_Export[exportFormat].fileExtension;
 	std::string eFormat = Settings::Instance()->AssimpSupportedFormats_Export[exportFormat].id;
 

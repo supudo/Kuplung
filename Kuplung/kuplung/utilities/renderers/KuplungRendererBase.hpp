@@ -14,12 +14,12 @@
 
 class KuplungRendererBase {
 public:
-    virtual ~KuplungRendererBase();
-    virtual void init();
-    virtual std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
-    virtual void showSpecificSettings();
+  virtual ~KuplungRendererBase();
+  virtual void init();
+  virtual std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
+  virtual void showSpecificSettings();
 
-    bool Setting_RenderSkybox;
+  bool Setting_RenderSkybox;
 };
 
 #endif /* KuplungRendererBase_hpp */

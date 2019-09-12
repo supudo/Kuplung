@@ -17,25 +17,25 @@ static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return Im
 //static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x-rhs.x, lhs.y-rhs.y); }
 
 MENode_Combine::MENode_Combine(int id, std::string const& name, const ImVec2& pos, float value, const ImVec4& color, int inputs_count, int outputs_count, std::string const& textureFilename, std::string const& textureImage) {
-    MENode::init(id, MaterialEditor_NodeType_Combine, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
+  MENode::init(id, MaterialEditor_NodeType_Combine, name, pos, value, color, inputs_count, outputs_count, textureFilename, textureImage);
 }
 
 void MENode_Combine::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool showPreview, float scale) {
-    ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
-    ImGui::BeginGroup();
+  ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
+  ImGui::BeginGroup();
 
-    ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiSetCond_Always);
-    if (ImGui::TreeNode(this, "%s", "")) {
-        ImGui::TreePop();
-        this->IsExpanded = true;
-    }
-    else
-        this->IsExpanded = false;
-    ImGui::SameLine(0,0);
-    ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
+  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiSetCond_Always);
+  if (ImGui::TreeNode(this, "%s", "")) {
+    ImGui::TreePop();
+    this->IsExpanded = true;
+  }
+  else
+    this->IsExpanded = false;
+  ImGui::SameLine(0,0);
+  ImGui::TextColored(ImColor(255, 0, 0), "%s", this->Name.c_str());
 
-    if (this->IsExpanded)
-        ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
+  if (this->IsExpanded)
+    ImGui::SliderFloat("##value", &this->Value, 0.0f, 1.0f, "Alpha %.2f");
 
-    ImGui::EndGroup();
+  ImGui::EndGroup();
 }

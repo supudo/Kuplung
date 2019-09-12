@@ -17,24 +17,24 @@
 
 class MiniAxis {
 public:
-    ~MiniAxis();
-    MiniAxis();
-    void initProperties();
-    bool initShaderProgram();
-    void initBuffers(); // 0 = x, 1 = y, 2 = z
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
+  ~MiniAxis();
+  MiniAxis();
+  void initProperties();
+  const bool initShaderProgram();
+  void initBuffers(); // 0 = x, 1 = y, 2 = z
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera);
 
-    bool showAxis;
-    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
-    glm::mat4 matrixModel;
+  bool showAxis;
+  std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+  glm::mat4 matrixModel;
 
 private:
-    int axisSize;
+  int axisSize;
 
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO, vboVertices, vboColors;
-    GLint glUniformMVPMatrix;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO, vboVertices, vboColors;
+  GLint glUniformMVPMatrix;
 };
 
 #endif /* MiniAxis_hpp */

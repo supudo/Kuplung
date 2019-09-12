@@ -18,7 +18,7 @@
 
 class Screenshot {
 public:
-    void ShowScreenshotsWindow(bool* open);
+  void ShowScreenshotsWindow(bool* open);
 };
 
 #endif /* Screenshot_hpp */

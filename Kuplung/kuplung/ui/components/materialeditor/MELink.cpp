@@ -9,8 +9,8 @@
 #include "kuplung/ui/components/materialeditor/MELink.hpp"
 
 MELink::MELink(MENode *nodeOut, int slotOut, MENode *nodeIn, int slotIn) {
-    this->NodeOutput = nodeOut;
-    this->SlotOutput = slotOut;
-    this->NodeInput = nodeIn;
-    this->SlotInput = slotIn;
+  this->NodeOutput = nodeOut;
+  this->SlotOutput = slotOut;
+  this->NodeInput = nodeIn;
+  this->SlotInput = slotIn;
 }

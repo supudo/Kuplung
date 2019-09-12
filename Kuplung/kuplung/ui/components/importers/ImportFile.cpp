@@ -20,22 +20,21 @@
 namespace fs = boost::filesystem;
 
 void ImportFile::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats importFormat, int importFormatAssimp)>& processFile) {
-    this->positionX = positionX;
-    this->positionY = positionY;
-    this->width = width;
-    this->height = height;
-    this->processFile = processFile;
-    this->panelWidth_Options = 200.0f;
-    this->panelWidth_OptionsMin = 200.0f;
-    this->Setting_Forward = 2;
-    this->Setting_Up = 4;
+  this->positionX = positionX;
+  this->positionY = positionY;
+  this->width = width;
+  this->height = height;
+  this->processFile = processFile;
+  this->panelWidth_Options = 200.0f;
+  this->panelWidth_OptionsMin = 200.0f;
+  this->Setting_Forward = 2;
+  this->Setting_Up = 4;
 	this->currentFolder = Settings::Instance()->currentFolder;
 	for (size_t i = 0; i < Settings::Instance()->AssimpSupportedFormats_Import.size(); i++)
 		this->assimpImporters.push_back(Settings::Instance()->AssimpSupportedFormats_Import[i].description.c_str());
 }
 
-static char *convert(const std::string & s)
-{
+static char *convert(const std::string & s) {
 	char *pc = new char[s.size() + 1];
 	std::strcpy(pc, s.c_str());
 	return pc;
@@ -193,8 +192,6 @@ void ImportFile::draw(ImportExportFormats* dialogImportType, int* dialogImportTy
 	ImGui::End();
 }
 
-#pragma mark - Private
-
 void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImportType_Assimp, const std::string& fPath) {
 	std::string cFolder = fPath;
 #ifdef _WIN32
@@ -206,50 +203,50 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImp
 #endif
 	std::map<std::string, FBEntity> folderContents = this->getFolderContents(dialogImportType, cFolder);
 	int i = 0;
-    static int selected = -1;
-    for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
-        FBEntity entity = iter->second;
-        if (ImGui::Selectable(entity.title.c_str(), selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
-            selected = i;
-            if (entity.isFile) {
-                std::vector<std::string> setts;
-                setts.push_back(std::to_string(this->Setting_Forward));
-                setts.push_back(std::to_string(this->Setting_Up));
-                this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType), *dialogImportType_Assimp);
+  static int selected = -1;
+  for (std::map<std::string, FBEntity>::iterator iter = folderContents.begin(); iter != folderContents.end(); ++iter) {
+    FBEntity entity = iter->second;
+    if (ImGui::Selectable(entity.title.c_str(), selected == i, ImGuiSelectableFlags_SpanAllColumns)) {
+      selected = i;
+      if (entity.isFile) {
+        std::vector<std::string> setts;
+        setts.push_back(std::to_string(this->Setting_Forward));
+        setts.push_back(std::to_string(this->Setting_Up));
+        this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType), *dialogImportType_Assimp);
 
 #ifdef _WIN32
         std::string folderDelimiter = "\\";
 #else
         std::string folderDelimiter = "/";
 #endif
-                std::vector<std::string> elems;
-                boost::split(elems, entity.path, boost::is_any_of(folderDelimiter));
-                elems.pop_back();
+        std::vector<std::string> elems;
+        boost::split(elems, entity.path, boost::is_any_of(folderDelimiter));
+        elems.pop_back();
 
-                Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
-                Settings::Instance()->saveSettings();
-            }
-            else {
-				try {
-					this->drawFiles(dialogImportType, dialogImportType_Assimp, entity.path);
-					this->currentFolder = entity.path;
-				}
-				catch (const fs::filesystem_error&) { }
-            }
+        Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
+        Settings::Instance()->saveSettings();
+      }
+      else {
+        try {
+          this->drawFiles(dialogImportType, dialogImportType_Assimp, entity.path);
+          this->currentFolder = entity.path;
         }
-        ImGui::NextColumn();
-
-        ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
-        ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
-
-        i += 1;
+        catch (const fs::filesystem_error&) { }
+      }
     }
+    ImGui::NextColumn();
+
+    ImGui::Text("%s", entity.size.c_str()); ImGui::NextColumn();
+    ImGui::Text("%s", entity.modifiedDate.c_str()); ImGui::NextColumn();
+
+    i += 1;
+  }
 }
 
 std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormats* dialogImportType, std::string const& filePath) {
-    std::map<std::string, FBEntity> folderContents;
-    fs::path currentPath(filePath);
-	
+  std::map<std::string, FBEntity> folderContents;
+  fs::path currentPath(filePath);
+
 	if (fs::is_directory(currentPath)) {
 		if (currentPath.has_parent_path()) {
 			FBEntity entity;
@@ -332,41 +329,41 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 		}
 	}
 
-    return folderContents;
+  return folderContents;
 }
 
-std::string ImportFile::convertToString(double num) {
-    std::ostringstream convert;
-    convert << num;
-    return convert.str();
+const std::string ImportFile::convertToString(double num) const {
+  std::ostringstream convert;
+  convert << num;
+  return convert.str();
 }
 
-std::string ImportFile::convertSize(size_t size) {
-    static const char *SIZES[] = { "B", "KB", "MB", "GB" };
-    int div = 0;
-    size_t rem = 0;
+const std::string ImportFile::convertSize(size_t size) const {
+  static const char *SIZES[] = { "B", "KB", "MB", "GB" };
+  int div = 0;
+  size_t rem = 0;
 
-    while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
-        rem = (size % 1024);
-        div++;
-        size /= 1024;
-    }
+  while (size >= 1024 && div < (int)(sizeof SIZES / sizeof *SIZES)) {
+    rem = (size % 1024);
+    div++;
+    size /= 1024;
+  }
 
-    double size_d = (float)size + (float)rem / 1024.0;
-    std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
-    return result;
+  double size_d = (float)size + (float)rem / 1024.0;
+  std::string result = this->convertToString(roundOff(size_d)) + " " + SIZES[div];
+  return result;
 }
 
-double ImportFile::roundOff(double n) {
-    double d = n * 100.0;
-    int i = d + 0.5;
-    d = (float)i / 100.0;
-    return d;
+const double ImportFile::roundOff(double n) const {
+  double d = n * 100.0;
+  int i = d + 0.5;
+  d = (float)i / 100.0;
+  return d;
 }
 
-bool ImportFile::isHidden(const fs::path &p) {
-    std::string name = p.filename().string();
-    if (name == ".." || name == "."  || boost::starts_with(name, "."))
-       return true;
-    return false;
+const bool ImportFile::isHidden(const fs::path &p) const {
+  std::string name = p.filename().string();
+  if (name == ".." || name == "."  || boost::starts_with(name, "."))
+    return true;
+  return false;
 }

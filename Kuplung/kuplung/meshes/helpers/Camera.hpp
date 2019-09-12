@@ -16,20 +16,20 @@
 
 class Camera {
 public:
-    ~Camera();
-    Camera();
-    void initProperties();
-    void render();
-    glm::vec3 createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float pNear, const float pFar);
-    PixelDataPoint getClickData(const int x, const int y, const int height);
+  ~Camera();
+  Camera();
+  void initProperties();
+  void render();
+  const glm::vec3 createRay(const float mouse_x, const float mouse_y, const float fov, const float ratio, const float pNear, const float pFar);
+  const PixelDataPoint getClickData(const int x, const int y, const int height) const;
 
-    std::unique_ptr<ObjectEye> eyeSettings;
-    std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
-    std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
-    std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
+  std::unique_ptr<ObjectEye> eyeSettings;
+  std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
+  std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
+  std::unique_ptr<ObjectCoordinate> rotateCenterX, rotateCenterY, rotateCenterZ;
 
-    glm::vec3 cameraPosition;
-    glm::mat4 matrixCamera;
+  glm::vec3 cameraPosition;
+  glm::mat4 matrixCamera;
 };
 
 #endif /* Camera_hpp */

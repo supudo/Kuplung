@@ -16,23 +16,23 @@
 
 class Terrain {
 public:
-    ~Terrain();
-    Terrain();
-    bool initShaderProgram();
-    void initBuffers(std::string const& assetsFolder, const int width, const int height);
-    void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel);
-    std::string heightmapImage;
-    std::unique_ptr<HeightmapGenerator> terrainGenerator;
+  ~Terrain();
+  Terrain();
+  bool initShaderProgram();
+  void initBuffers(std::string const& assetsFolder, const int width, const int height);
+  void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const glm::mat4& matrixModel);
+  std::string heightmapImage;
+  std::unique_ptr<HeightmapGenerator> terrainGenerator;
 
-    bool Setting_UseTexture, Setting_Wireframe;
+  bool Setting_UseTexture, Setting_Wireframe;
 
 private:
-    GLuint shaderProgram;
-    GLuint shaderVertex, shaderFragment;
-    GLuint glVAO;
-    GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
-    GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
-    GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
+  GLuint shaderProgram;
+  GLuint shaderVertex, shaderFragment;
+  GLuint glVAO;
+  GLuint vboVertices, vboTextureCoordinates, vboTextureDiffuse, vboNormals, vboColors, vboIndices;
+  GLuint glUniformMVPMatrix, glAttributeVertexPosition, glAttributeVertexNormal, glAttributeColor;
+  GLint glAttributeTextureCoord, glUniformHasTexture, glUniformSamplerTexture;
 };
 
 #endif /* Terrain_hpp */

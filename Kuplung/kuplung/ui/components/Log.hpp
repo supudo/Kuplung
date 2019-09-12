@@ -13,18 +13,18 @@
 
 class Log {
 public:
-    void init(int positionX, int positionY, int width, int height);
-    void clear();
-    void addToLog(const char* fmt, ...) IM_FMTARGS(2);
-    void draw(const char* title, bool* p_opened = NULL);
+  void init(int positionX, int positionY, int width, int height);
+  void clear();
+  void addToLog(const char* fmt, ...) IM_FMTARGS(2);
+  void draw(const char* title, bool* p_opened = NULL);
 
-    ImGuiTextBuffer Buf;
-    ImGuiTextFilter Filter;
-    ImVector<int> LineOffsets;
-    bool ScrollToBottom;
+  ImGuiTextBuffer Buf;
+  ImGuiTextFilter Filter;
+  ImVector<int> LineOffsets;
+  bool ScrollToBottom;
 
 private:
-    int positionX, positionY, width, height;
+  int positionX, positionY, width, height;
 };
 
 #endif /* Log_hpp */

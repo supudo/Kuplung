@@ -16,14 +16,14 @@
 
 class SceneRenderer: public KuplungRendererBase {
 public:
-    explicit SceneRenderer(ObjectsManager &managerObjects);
-    ~SceneRenderer();
-    void init();
-    std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
-    std::string renderImage2(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
+  explicit SceneRenderer(ObjectsManager &managerObjects);
+  ~SceneRenderer();
+  void init();
+  const std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) const;
+  const std::string renderImage2(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) const;
 
 private:
-    ObjectsManager &managerObjects;
+  ObjectsManager &managerObjects;
 };
 
 #endif /* SceneRenderer_hpp */

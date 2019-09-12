@@ -69,8 +69,6 @@ ModelFaceBase::~ModelFaceBase() {
   this->vertexSphere.reset();
 }
 
-#pragma mark - Initialization
-
 void ModelFaceBase::init(MeshModel const& model, std::string const& assetFolder) {
   this->mathHelper = std::make_unique<KuplungApp::Utilities::Math::Maths>();
 
@@ -294,8 +292,6 @@ void ModelFaceBase::render(const glm::mat4& matrixProjection, const glm::mat4& m
   this->uiAmbientLight = uiAmbientLight;
 }
 
-#pragma mark - Scene Options
-
 void ModelFaceBase::setOptionsFOV(float fov) {
   this->so_fov = fov;
 }
@@ -312,14 +308,14 @@ void ModelFaceBase::setOptionsOutlineThickness(float thickness) {
   this->so_outlineThickness = thickness;
 }
 
-bool ModelFaceBase::getOptionsSelected() {
+const bool ModelFaceBase::getOptionsSelected() const {
   return this->so_selectedYn;
 }
 
-glm::vec4 ModelFaceBase::getOptionsOutlineColor() {
+const glm::vec4 ModelFaceBase::getOptionsOutlineColor() const {
   return this->so_outlineColor;
 }
 
-float ModelFaceBase::getOptionsOutlineThickness() {
+const float ModelFaceBase::getOptionsOutlineThickness() const {
   return this->so_outlineThickness;
 }

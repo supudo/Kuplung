@@ -19,25 +19,25 @@
 
 class RenderingManager {
 public:
-    explicit RenderingManager(ObjectsManager &managerObjects);
-    ~RenderingManager();
-    void init();
-    void render(const int& selectedModel);
+  explicit RenderingManager(ObjectsManager &managerObjects);
+  ~RenderingManager();
+  void init();
+  void render(const int& selectedModel);
 
-    int RenderingTotalVertices;
-    int RenderingTotalIndices;
-    int RenderingTotalTriangles;
-    int RenderingTotalFaces;
+  int RenderingTotalVertices;
+  int RenderingTotalIndices;
+  int RenderingTotalTriangles;
+  int RenderingTotalFaces;
 
-    std::vector<ModelFaceData*> meshModelFaces;
+  std::vector<ModelFaceData*> meshModelFaces;
 
 private:
-    ObjectsManager &managerObjects;
+  ObjectsManager &managerObjects;
 
-    std::unique_ptr<RenderingSimple> rendererSimple;
-    std::unique_ptr<RenderingForward> rendererForward;
-    std::unique_ptr<RenderingForwardShadowMapping> rendererForwardShadowMapping;
-    std::unique_ptr<RenderingDeferred> rendererDeferred;
+  std::unique_ptr<RenderingSimple> rendererSimple;
+  std::unique_ptr<RenderingForward> rendererForward;
+  std::unique_ptr<RenderingForwardShadowMapping> rendererForwardShadowMapping;
+  std::unique_ptr<RenderingDeferred> rendererDeferred;
 };
 
 #endif /* RenderingManager_hpp */

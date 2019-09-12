@@ -65,8 +65,8 @@ public:
     bool processEvent(SDL_Event *event);
     void renderStart(bool isFrame, int * sceneSelectedModelObject);
     void renderEnd();
-    void renderPostEnd();
-    bool isMouseOnGUI();
+    void renderPostEnd() const;
+    bool isMouseOnGUI() const;
     void showParsing();
     void hideParsing();
     void showLoading();
