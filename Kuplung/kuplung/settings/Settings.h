@@ -65,6 +65,7 @@ public:
 	ImportExportFormats ImportExportFormat;
   bool showFrameRenderTime;
 	bool shouldRecompileShaders, showGLErrors;
+  bool grOcclusionCulling;
 
   void timerStart(const std::string& msg);
   void timerEnd(const std::string& msg);

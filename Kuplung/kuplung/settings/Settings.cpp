@@ -112,6 +112,8 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->showAllVisualArtefacts = true;
   m_pInstance->maybeGracefullApplicationQuit = false;
 
+  m_pInstance->grOcclusionCulling = false;
+
 #ifdef _WIN32
   m_pInstance->newLineDelimiter = "\r\n";
 #elif defined macintosh // OS 9

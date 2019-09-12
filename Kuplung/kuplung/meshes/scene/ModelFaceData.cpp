@@ -140,6 +140,8 @@ void ModelFaceData::initBuffers() {
     glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
   }
 
+  glGenQueries(1, &this->occQuery);
+
   glBindVertexArray(0);
 
   Settings::Instance()->glUtils->CheckForGLErrors(Settings::Instance()->string_format("%s - %s", __FILE__, __func__));
@@ -149,12 +151,18 @@ void ModelFaceData::renderModel(const bool useTessellation) {
   if (this->Setting_Wireframe || Settings::Instance()->wireframesMode || this->Setting_ModelViewSkin == ViewModelSkin_Wireframe)
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
+  if (Settings::Instance()->grOcclusionCulling)
+    glBeginConditionalRender(this->occQuery, GL_QUERY_BY_REGION_WAIT);
+
   glBindVertexArray(this->glVAO);
 
   if (useTessellation)
     glDrawElements(GL_PATCHES, this->meshModel.countIndices, GL_UNSIGNED_INT, nullptr);
   else
     glDrawElements(GL_TRIANGLES, this->meshModel.countIndices, GL_UNSIGNED_INT, 0);
+
+  if (Settings::Instance()->grOcclusionCulling)
+    glEndConditionalRender();
 
   glBindVertexArray(0);
 

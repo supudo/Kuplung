@@ -22,12 +22,13 @@ public:
   float vertexSphereRadius;
   int vertexSphereSegments;
   glm::vec4 vertexSphereColor;
+  GLuint glVAO;
   GLuint vboTextureAmbient, vboTextureDiffuse, vboTextureSpecular, vboTextureSpecularExp, vboTextureDissolve, vboTextureBump, vboTextureDisplacement;
+  GLuint occQuery;
 
   glm::mat4 matrixGrid;
 
 private:
-  GLuint glVAO;
   GLuint vboVertices, vboNormals, vboTextureCoordinates, vboIndices, vboTangents, vboBitangents;
 };
 

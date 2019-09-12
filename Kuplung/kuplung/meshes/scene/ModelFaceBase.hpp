@@ -126,6 +126,7 @@ protected:
   glm::vec3 uiAmbientLight;
   WorldGrid *grid;
 
+    // TODO: get this out of here!
   std::unique_ptr<KuplungApp::Utilities::Math::Maths> mathHelper;
 };
 

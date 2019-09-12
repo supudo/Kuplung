@@ -83,6 +83,8 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
       Settings::Instance()->saveSettings();
     if (ImGui::Checkbox("Show OpenGL Errors", &Settings::Instance()->showGLErrors))
       Settings::Instance()->saveSettings();
+    if (ImGui::Checkbox("Occlusion Culling", &Settings::Instance()->grOcclusionCulling))
+      Settings::Instance()->saveSettings();
 
     const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Deferred"};
     if (ImGui::Combo("Renderer", &this->optionsRendererType, rendererItems, IM_ARRAYSIZE(rendererItems))) {

@@ -507,13 +507,39 @@ void RenderingForward::render(const std::vector<ModelFaceData*>& meshModelFaces,
 void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
   glUseProgram(this->shaderProgram);
 
+  const int querycount = 5;
+  GLuint queries[querycount];
+  int current_query = 0;
+  glGenQueries(querycount, queries);
+
+  glBeginQuery(GL_TIME_ELAPSED, queries[current_query]);
+
   int selectedModelID = -1;
   int i = -1;
   for (ModelFaceData* mfd : meshModelFaces) {
     i += 1;
 
+    int j = 0;
+    if (Settings::Instance()->grOcclusionCulling) {
+      glDisable(GL_CULL_FACE);
+      glDepthMask(GL_FALSE);
+      glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+      /*for (; j < meshModelFaces.size() && glm::distance(meshModelFaces[j].center, position) < maxdist; ++j) {
+        glm::vec4 projected = this->matrixProjection * glm::vec4(chunks[j].center, 1);
+        if ((glm::distance(chunks[j].center, position) > chunksize) && (std::max(std::abs(projected.x), std::abs(projected.y)) > projected.w + chunksize))
+          continue;*/
+      for (; j < meshModelFaces.size(); ++j) {
+        glBeginQuery(GL_ANY_SAMPLES_PASSED, mfd->occQuery);
+        glBindVertexArray(mfd->glVAO);
+        glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_INT, 0);
+        glEndQuery(GL_ANY_SAMPLES_PASSED);
+      }
+      j = i;
+    }
+    glEnable(GL_CULL_FACE);
+
     // if (mfd->getOptionsSelected())
-      selectedModelID = static_cast<int>(i);
+    selectedModelID = static_cast<int>(i);
 
     glm::mat4 matrixModel = glm::mat4(1.0);
     matrixModel *= this->managerObjects->grid->matrixModel;
@@ -880,6 +906,15 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
       mfd->Setting_Wireframe = false;
     }
   }
+
+  glEndQuery(GL_TIME_ELAPSED);
+
+  if (GL_TRUE == glIsQuery(queries[(current_query + 1) % querycount])) {
+    GLuint64 result;
+    glGetQueryObjectui64v(queries[(current_query + 1) % querycount], GL_QUERY_RESULT, &result);
+    Settings::Instance()->funcDoLog("[RenderingForward - renderModels] OccQuery = " + std::to_string(result * 1.e-6) + " ms/frame");
+  }
+  current_query = (current_query + 1) % querycount;
 
   // edit mode
   if (this->managerObjects->VertexEditorMode != glm::vec3(0.0) && selectedModelID > -1) {
