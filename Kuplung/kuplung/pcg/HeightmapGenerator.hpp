@@ -9,12 +9,24 @@
 #ifndef HeightmapGenerator_hpp
 #define HeightmapGenerator_hpp
 
+#ifdef _WIN32
+#  if NOISE_STATIC
+#    define NOISE_EXPORT
+#  elif NOISE_BUILD_DLL
+#    define NOISE_EXPORT __declspec(dllexport)
+#  else
+#    define NOISE_EXPORT __declspec(dllimport)
+#  endif
+#else
+#define NOISE_EXPORT
+#endif
+
 #include "kuplung/settings/Settings.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #ifdef __linux__
 #include <libnoise/noise.h>
 #elif WIN32
-#include "noise/noise.h"
+#include <noise/noise.h>
 #else
 #include "noise.h"
 #endif

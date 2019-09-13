@@ -22,12 +22,24 @@
 
 #include <fstream>
 
+#ifdef _WIN32
+#  if NOISE_STATIC
+#    define NOISE_EXPORT
+#  elif NOISE_BUILD_DLL
+#    define NOISE_EXPORT __declspec(dllexport)
+#  else
+#    define NOISE_EXPORT __declspec(dllimport)
+#  endif
+#else
+#define NOISE_EXPORT
+#endif
+
 #ifdef __linux__
 #include <libnoise/interp.h>
 #include <libnoise/mathconsts.h>
 #elif WIN32
-#include "noise/nterp.h"
-#include "noise/mathconsts.h"
+#include <noise/interp.h>
+#include <noise/mathconsts.h>
 #else
 #include "interp.h"
 #include "mathconsts.h"
