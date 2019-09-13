@@ -26,7 +26,7 @@
 #include <libnoise/interp.h>
 #include <libnoise/mathconsts.h>
 #elif WIN32
-#include "noise/nterp.h"
+#include "noise/interp.h"
 #include "noise/mathconsts.h"
 #else
 #include "interp.h"
