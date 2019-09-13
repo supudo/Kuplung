@@ -31,17 +31,17 @@ ImGui::Begin("Shadertoy.com", p_opened);
   this->textureHeight = int(this->windowHeight - this->viewPaddingVertical);
 
   if (this->heightTopPanel < this->engineShadertoy->textureHeight || this->heightTopPanel > this->engineShadertoy->textureHeight)
-      this->engineShadertoy->initFBO(
-              int(this->windowWidth),
-              int(this->heightTopPanel),
-              &this->vboTexture);
+    this->engineShadertoy->initFBO(
+      int(this->windowWidth),
+      int(this->heightTopPanel),
+      &this->vboTexture);
 
   this->engineShadertoy->renderToTexture(
-              int(ImGui::GetIO().MousePos.x),
-              int(ImGui::GetIO().MousePos.y),
-              (SDL_GetTicks() / 1000.0f),
-              &this->vboTexture
-              );
+    int(ImGui::GetIO().MousePos.x),
+    int(ImGui::GetIO().MousePos.y),
+    (SDL_GetTicks() / 1000.0f),
+    &this->vboTexture
+    );
 
   // BEGIN preview
   ImGui::BeginChild("Preview", ImVec2(0, this->heightTopPanel), true);

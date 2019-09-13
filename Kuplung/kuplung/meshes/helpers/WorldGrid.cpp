@@ -221,41 +221,20 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
   }
   else {
     this->actAsMirrorNeedsChange = false;
-
     float planePoint = static_cast<float>(this->gridSize / 2);
-
     this->dataVertices = {planePoint, 0.0, planePoint, planePoint, 0.0, -1 * planePoint, -1 * planePoint, 0.0, -1 * planePoint, -1 * planePoint, 0.0, planePoint, planePoint, 0.0, planePoint, -1 * planePoint, 0.0, -1 * planePoint};
-
     this->dataTexCoords = {0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f};
-
     this->dataNormals = {
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
     };
-
     this->dataColors = {
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
-        0.7f,
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
     };
 
     this->dataIndices = {0, 1, 2, 3, 4, 5};
@@ -318,6 +297,7 @@ void WorldGrid::render(const glm::mat4& matrixProjection, const glm::mat4& matri
       glUniform1f(this->glAttributeAlpha, 1.0);
       glUniform1i(this->glAttributeActAsMirror, 0);
 
+      // TODO: minimize draw calls - make it 1!
       for (int i = 0; i < this->gridSizeVertex * 2; i++)
         glDrawArrays(GL_LINE_STRIP, this->gridSizeVertex * i, this->gridSizeVertex);
       for (int i = 0; i < this->gridSizeVertex; i++)
