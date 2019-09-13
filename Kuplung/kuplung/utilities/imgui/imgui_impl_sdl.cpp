@@ -44,8 +44,14 @@
 
 // SDL
 // (the multi-viewports feature requires SDL features supported from SDL 2.0.5+)
+#ifdef WIN32
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_syswm.h>
+#else
 #include <SDL.h>
 #include <SDL_syswm.h>
+#endif
+
 #if defined(__APPLE__)
 #include "TargetConditionals.h"
 #endif

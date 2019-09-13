@@ -563,6 +563,7 @@ void Kuplung::initSceneGUI() {
   this->managerObjects->initCamera();
   this->managerObjects->initCameraModel();
   this->managerObjects->initGrid();
+  this->managerObjects->initGrid2D();
   this->managerObjects->initAxisSystem();
   this->managerObjects->initAxisHelpers();
   this->managerObjects->initSkybox();

@@ -18,6 +18,7 @@ ObjectsManager::~ObjectsManager() {
   this->camera.reset();
   this->cameraModel.reset();
   this->grid.reset();
+  this->grid2d.reset();
   this->axisHelpers_xMinus.reset();
   this->axisHelpers_xPlus.reset();
   this->axisHelpers_yMinus.reset();
@@ -71,6 +72,8 @@ void ObjectsManager::render() {
     if (this->Setting_GridSize != this->grid->gridSize) {
       this->grid->gridSize = this->Setting_GridSize;
       this->grid->initBuffers(this->Setting_GridSize, 1);
+      this->grid2d->gridSize = this->Setting_GridSize;
+      this->grid2d->initBuffers(this->Setting_GridSize, 1);
       this->skybox->init(this->Setting_GridSize);
       this->axisHelpers_xMinus->initBuffers();
       this->axisHelpers_xPlus->initBuffers();
@@ -80,7 +83,8 @@ void ObjectsManager::render() {
       this->axisHelpers_zPlus->initBuffers();
     }
 
-    this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+    //this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+    this->grid2d->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
 
     if (this->Setting_ShowAxisHelpers) {
       float ahPosition = 0;
@@ -243,6 +247,8 @@ void ObjectsManager::resetPropertiesSystem() {
     this->cameraModel->initProperties();
   if (this->grid)
     this->grid->initProperties();
+  if (this->grid2d)
+    this->grid2d->initProperties();
   if (this->axisSystem)
     this->axisSystem->initProperties();
   for (size_t i = 0; i < this->lightSources.size(); i++) {
@@ -269,6 +275,17 @@ void ObjectsManager::initGrid() {
   this->grid = std::make_unique<WorldGrid>();
   this->grid->initShaderProgram();
   this->grid->initBuffers(this->Setting_GridSize, 1);
+}
+
+/*
+ *
+ * Grid2D
+ *
+ */
+void ObjectsManager::initGrid2D() {
+  this->grid2d = std::make_unique<Grid2D>();
+  this->grid2d->initShaderProgram();
+  this->grid2d->initBuffers(this->Setting_GridSize, 1);
 }
 
 /*

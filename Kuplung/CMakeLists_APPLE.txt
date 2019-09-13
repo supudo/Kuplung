@@ -221,6 +221,8 @@ SET(SOURCE_FILES
   kuplung/meshes/helpers/VertexSphere.hpp
   kuplung/meshes/helpers/WorldGrid.cpp
   kuplung/meshes/helpers/WorldGrid.hpp
+  kuplung/meshes/helpers/Grid2D.cpp
+  kuplung/meshes/helpers/Grid2D.hpp
   kuplung/meshes/scene/ModelFaceBase.cpp
   kuplung/meshes/scene/ModelFaceBase.hpp
   kuplung/meshes/scene/ModelFaceData.cpp
@@ -537,6 +539,8 @@ SET(Kuplung_Shaders
   resources/shaders/deferred_shading.vert
   resources/shaders/grid.frag
   resources/shaders/grid.vert
+  resources/shaders/grid2d.frag
+  resources/shaders/grid2d.vert
   resources/shaders/light.frag
   resources/shaders/light.vert
   resources/shaders/light_ray.frag
