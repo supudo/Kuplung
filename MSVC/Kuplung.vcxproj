@@ -281,6 +281,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\catch\catch.hpp" />
@@ -419,6 +420,7 @@
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\BoundingBox.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Camera.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\CameraModel.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Light.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\LightRay.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\MiniAxis.cpp" />
@@ -559,6 +561,8 @@
     <None Include="..\Kuplung\resources\shaders\deferred_shading.vert" />
     <None Include="..\Kuplung\resources\shaders\grid.frag" />
     <None Include="..\Kuplung\resources\shaders\grid.vert" />
+    <None Include="..\Kuplung\resources\shaders\grid2d.frag" />
+    <None Include="..\Kuplung\resources\shaders\grid2d.vert" />
     <None Include="..\Kuplung\resources\shaders\light.frag" />
     <None Include="..\Kuplung\resources\shaders\light.vert" />
     <None Include="..\Kuplung\resources\shaders\light_ray.frag" />

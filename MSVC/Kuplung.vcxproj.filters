@@ -323,6 +323,9 @@
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\imgui_widgets.cpp">
       <Filter>kuplung\utilities\imgui</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -714,6 +717,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\imgui\imstb_truetype.h">
       <Filter>kuplung\utilities\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1107,6 +1113,12 @@
     </None>
     <None Include="..\Kuplung\resources\Kuplung_Settings.ini">
       <Filter>resources</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\grid2d.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\grid2d.vert">
+      <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
