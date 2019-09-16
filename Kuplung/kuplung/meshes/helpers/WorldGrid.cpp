@@ -134,15 +134,14 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
     this->dataColors.clear();
     this->dataIndices.clear();
 
-    int gridMinus = this->gridSizeVertex / 2;
+    const int gridMinus = this->gridSizeVertex / 2;
     std::vector<GridMeshPoint3D> verticesData;
-    bool h;
+    int indc = 0;
     for (int i = 0; i < (this->gridSizeVertex * 2); i++) {
       for (int j = 0; j < this->gridSizeVertex; j++) {
-        h = true;
-        if (i >= this->gridSizeVertex)
-          h = false;
-        if (h) {
+        this->dataIndices.push_back(indc);
+        indc++;
+        if (i >= this->gridSizeVertex) {
           GridMeshPoint3D p;
           p.x = (j - gridMinus) * unitSize;
           p.y = 0;
@@ -179,7 +178,7 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
       }
     }
 
-    this->zIndex = static_cast<int>(verticesData.size());
+    this->zIndex = (int)verticesData.size();
 
     GridMeshPoint3D p_z_Minus_Down;
     p_z_Minus_Down.x = 0.0f;
@@ -214,10 +213,12 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
     // indices
-    // TODO: fix - division by zero on Windows
+    // TODO: fix for windows!
+#ifndef _WIN32
     glGenBuffers(1, &this->vboIndices);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
+#endif
   }
   else {
     this->actAsMirrorNeedsChange = false;

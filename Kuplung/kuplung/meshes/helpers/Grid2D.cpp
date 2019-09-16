@@ -197,9 +197,11 @@ void Grid2D::initBuffers(const int& gridSize, const float& unitSize) {
 
   // indices
   // TODO: fix - division by zero on Windows
+#ifndef _WIN32
   glGenBuffers(1, &this->vboIndices);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
   glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
+#endif
 
   glBindVertexArray(0);
 }
