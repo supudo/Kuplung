@@ -50,6 +50,10 @@ Grid2D::Grid2D() {
 
 void Grid2D::initProperties() {
   this->showGrid = true;
+  this->actAsMirror = false;
+  this->actAsMirrorNeedsChange = true;
+  this->transparency = 0.5;
+
   this->positionX = std::make_unique<ObjectCoordinate>(false, 0.0f);
   this->positionY = std::make_unique<ObjectCoordinate>(false, 0.0f);
   this->positionZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
@@ -63,16 +67,25 @@ void Grid2D::initProperties() {
   this->rotateZ = std::make_unique<ObjectCoordinate>(false, 0.0f);
 
   this->matrixModel = glm::mat4(1.0);
+
+  this->mirrorSurface = std::make_unique<MirrorSurface>();
+
+  this->mirrorSurface->translateX = 0.0;
+  this->mirrorSurface->translateY = 5.0;
+  this->mirrorSurface->translateZ = -5.0;
+  this->mirrorSurface->rotateX = 90.0f;
+  this->mirrorSurface->rotateY = 0.0f;
+  this->mirrorSurface->rotateZ = 0.0f;
 }
 
 const bool Grid2D::initShaderProgram() {
   bool success = true;
 
-  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/grid2d.vert";
+  std::string shaderPath = Settings::Instance()->appFolder() + "/shaders/grid.vert";
   std::string shaderSourceVertex = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
   const char* shader_vertex = shaderSourceVertex.c_str();
 
-  shaderPath = Settings::Instance()->appFolder() + "/shaders/grid2d.frag";
+  shaderPath = Settings::Instance()->appFolder() + "/shaders/grid.frag";
   std::string shaderSourceFragment = Settings::Instance()->glUtils->readFile(shaderPath.c_str());
   const char* shader_fragment = shaderSourceFragment.c_str();
 
@@ -94,8 +107,11 @@ const bool Grid2D::initShaderProgram() {
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
     return success = false;
   }
-  else
+  else {
+    this->glAttributeActAsMirror = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "a_actAsMirror");
+    this->glAttributeAlpha = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "a_alpha");
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+  }
 
   return success;
 }
@@ -104,104 +120,149 @@ void Grid2D::initBuffers(const int& gridSize, const float& unitSize) {
   glGenVertexArrays(1, &this->glVAO);
   glBindVertexArray(this->glVAO);
 
-  this->gridSize = gridSize;
-  this->gridSizeVertex = this->gridSize;
+  if (!this->actAsMirror) {
+    this->actAsMirrorNeedsChange = true;
+    this->gridSize = gridSize;
+    this->gridSizeVertex = this->gridSize;
 
-  if (this->gridSizeVertex % 2 == 0)
-    this->gridSizeVertex += 1;
+    if (this->gridSizeVertex % 2 == 0)
+      this->gridSizeVertex += 1;
 
-  this->dataVertices.clear();
-  this->dataTexCoords.clear();
-  this->dataNormals.clear();
-  this->dataColors.clear();
-  this->dataIndices.clear();
+    this->dataVertices.clear();
+    this->dataTexCoords.clear();
+    this->dataNormals.clear();
+    this->dataColors.clear();
+    this->dataIndices.clear();
 
-  int gridMinus = this->gridSizeVertex / 2;
-  std::vector<GridMeshPoint3D> verticesData;
-  bool h;
-  for (int i = 0; i < (this->gridSizeVertex * 2); i++) {
-    for (int j = 0; j < this->gridSizeVertex; j++) {
-      h = true;
-      if (i >= this->gridSizeVertex)
-        h = false;
-      if (h) {
-        GridMeshPoint3D p;
-        p.x = (j - gridMinus) * unitSize;
-        p.y = 0;
-        p.z = (i - gridMinus) * unitSize;
-        verticesData.push_back(p);
-        if (p.z < 0 || p.z > 0) {
-          this->dataColors.push_back(0.7f);
-          this->dataColors.push_back(0.7f);
-          this->dataColors.push_back(0.7f);
+    const int gridMinus = this->gridSizeVertex / 2;
+    std::vector<GridMeshPoint3D> verticesData;
+    int indicesCounter = 0;
+    for (int i = 0; i < (this->gridSizeVertex * 2); i++) {
+      for (int j = 0; j < this->gridSizeVertex; j++) {
+        if (i < this->gridSizeVertex) {
+          GridMeshPoint3D p;
+          p.x = (j - gridMinus) * unitSize;
+          p.y = 0;
+          p.z = (i - gridMinus) * unitSize;
+          verticesData.push_back(p);
+          if (p.z < 0 || p.z > 0) {
+            this->dataColors.push_back(0.7f);
+            this->dataColors.push_back(0.7f);
+            this->dataColors.push_back(0.7f);
+          }
+          else {
+            this->dataColors.push_back(1.0f);
+            this->dataColors.push_back(0.0f);
+            this->dataColors.push_back(0.0f);
+          }
         }
         else {
-          this->dataColors.push_back(1.0f);
-          this->dataColors.push_back(0.0f);
-          this->dataColors.push_back(0.0f);
+          GridMeshPoint3D p;
+          p.x = (i - this->gridSizeVertex - gridMinus) * unitSize;
+          p.y = 0;
+          p.z = (j - gridMinus) * unitSize;
+          verticesData.push_back(p);
+          if (p.x < 0 || p.x > 0) {
+            this->dataColors.push_back(0.7f);
+            this->dataColors.push_back(0.7f);
+            this->dataColors.push_back(0.7f);
+          }
+          else {
+            this->dataColors.push_back(0.0f);
+            this->dataColors.push_back(0.0f);
+            this->dataColors.push_back(1.0f);
+          }
         }
-      }
-      else {
-        GridMeshPoint3D p;
-        p.x = (i - this->gridSizeVertex - gridMinus) * unitSize;
-        p.y = 0;
-        p.z = (j - gridMinus) * unitSize;
-        verticesData.push_back(p);
-        if (p.x < 0 || p.x > 0) {
-          this->dataColors.push_back(0.7f);
-          this->dataColors.push_back(0.7f);
-          this->dataColors.push_back(0.7f);
-        }
-        else {
-          this->dataColors.push_back(0.0f);
-          this->dataColors.push_back(0.0f);
-          this->dataColors.push_back(1.0f);
-        }
+        this->dataIndices.push_back(indicesCounter);
+        indicesCounter += 1; 
       }
     }
+
+    this->zIndex = (int)verticesData.size();
+
+    GridMeshPoint3D p_z_Minus_Down;
+    p_z_Minus_Down.x = 0.0f;
+    p_z_Minus_Down.y = static_cast<float>(-1.0f * gridMinus);
+    p_z_Minus_Down.z = 0.0f;
+    verticesData.push_back(p_z_Minus_Down);
+    this->dataColors.push_back(0.0f);
+    this->dataColors.push_back(1.0f);
+    this->dataColors.push_back(0.0f);
+    this->dataIndices.push_back(indicesCounter);
+    indicesCounter += 1;
+
+    GridMeshPoint3D p_z_Plus_Up;
+    p_z_Plus_Up.x = 0.0f;
+    p_z_Plus_Up.y = static_cast<float>(gridMinus);
+    p_z_Plus_Up.z = 0.0f;
+    verticesData.push_back(p_z_Plus_Up);
+    this->dataColors.push_back(0.0f);
+    this->dataColors.push_back(1.0f);
+    this->dataColors.push_back(0.0f);
+    this->dataIndices.push_back(indicesCounter);
+    indicesCounter += 1;
+
+    // vertices
+    glGenBuffers(1, &this->vboVertices);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(verticesData.size() * sizeof(GridMeshPoint3D)), &verticesData[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // colors
+    glGenBuffers(1, &this->vboColors);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+
+    // indices
+    // TODO: fix for windows!
+//#ifndef _WIN32
+    glGenBuffers(1, &this->vboIndices);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
+//#endif
   }
+  else {
+    this->actAsMirrorNeedsChange = false;
+    float planePoint = static_cast<float>(this->gridSize / 2);
+    this->dataVertices = { planePoint, 0.0, planePoint, planePoint, 0.0, -1 * planePoint, -1 * planePoint, 0.0, -1 * planePoint, -1 * planePoint, 0.0, planePoint, planePoint, 0.0, planePoint, -1 * planePoint, 0.0, -1 * planePoint };
+    this->dataTexCoords = { 0.0f, 1.0f, 1.0f, 1.0f, 1.0f, 0.0f, 0.0f, 0.0f };
+    this->dataNormals = {
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+    };
+    this->dataColors = {
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
+      0.7f, 0.7f, 0.7f,
+    };
 
-  this->zIndex = static_cast<int>(verticesData.size());
+    this->dataIndices = { 0, 1, 2, 3, 4, 5 };
 
-  GridMeshPoint3D p_z_Minus_Down;
-  p_z_Minus_Down.x = 0.0f;
-  p_z_Minus_Down.y = static_cast<float>(-1.0f * gridMinus);
-  p_z_Minus_Down.z = 0.0f;
-  verticesData.push_back(p_z_Minus_Down);
-  this->dataColors.push_back(0.0f);
-  this->dataColors.push_back(1.0f);
-  this->dataColors.push_back(0.0f);
+    // vertices
+    glGenBuffers(1, &this->vboVertices);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataVertices.size() * sizeof(GLfloat)), &this->dataVertices[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
-  GridMeshPoint3D p_z_Plus_Up;
-  p_z_Plus_Up.x = 0.0f;
-  p_z_Plus_Up.y = static_cast<float>(gridMinus);
-  p_z_Plus_Up.z = 0.0f;
-  verticesData.push_back(p_z_Plus_Up);
-  this->dataColors.push_back(0.0f);
-  this->dataColors.push_back(1.0f);
-  this->dataColors.push_back(0.0f);
+    // colors
+    glGenBuffers(1, &this->vboColors);
+    glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
+    glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
 
-  // vertices
-  glGenBuffers(1, &this->vboVertices);
-  glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
-  glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(verticesData.size() * sizeof(GridMeshPoint3D)), &verticesData[0], GL_STATIC_DRAW);
-  glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-  // colors
-  glGenBuffers(1, &this->vboColors);
-  glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
-  glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->dataColors.size() * sizeof(GLfloat)), &this->dataColors[0], GL_STATIC_DRAW);
-  glEnableVertexAttribArray(1);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
-
-  // indices
-  // TODO: fix - division by zero on Windows
-#ifndef _WIN32
-  glGenBuffers(1, &this->vboIndices);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
-#endif
+    // indices
+    glGenBuffers(1, &this->vboIndices);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, this->vboIndices);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, static_cast<GLuint>(this->dataIndices.size() * sizeof(GLuint)), &this->dataIndices[0], GL_STATIC_DRAW);
+  }
 
   glBindVertexArray(0);
 }
@@ -225,20 +286,47 @@ void Grid2D::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCa
     // draw
     glBindVertexArray(this->glVAO);
 
-    glLineWidth(1.0f);
+    if (this->actAsMirror && this->actAsMirrorNeedsChange)
+      this->initBuffers(this->gridSize, 1.0);
+    else if (!this->actAsMirror && !this->actAsMirrorNeedsChange)
+      this->initBuffers(this->gridSize, 1.0);
 
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glDisable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    if (!this->actAsMirror) {
+      glLineWidth(1.0f);
 
-    // TODO: minimize draw calls - make it 1!
-    for (int i = 0; i < this->gridSizeVertex * 2; i++)
-      glDrawArrays(GL_LINE_STRIP, this->gridSizeVertex * i, this->gridSizeVertex);
-    for (int i = 0; i < this->gridSizeVertex; i++)
-      glDrawArrays(GL_LINE_STRIP, 0, this->gridSizeVertex);
-    if (showZAxis)
-      glDrawArrays(GL_LINES, this->zIndex, 2);
+      glEnable(GL_DEPTH_TEST);
+      glDepthFunc(GL_LESS);
+      glDisable(GL_BLEND);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+      glUniform1f(this->glAttributeAlpha, 1.0);
+      glUniform1i(this->glAttributeActAsMirror, 0);
+
+      // TODO: minimize draw calls - make it 1!
+      for (int i = 0; i < this->gridSizeVertex * 2; i++)
+        glDrawArrays(GL_LINE_STRIP, this->gridSizeVertex * i, this->gridSizeVertex);
+      for (int i = 0; i < this->gridSizeVertex; i++)
+        glDrawArrays(GL_LINE_STRIP, 0, this->gridSizeVertex);
+      if (showZAxis)
+        glDrawArrays(GL_LINES, this->zIndex, 2);
+    }
+    else {
+      glEnable(GL_DEPTH_TEST);
+      glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+      glEnable(GL_BLEND);
+
+      glUniform1f(this->glAttributeAlpha, this->transparency);
+      glUniform1i(this->glAttributeActAsMirror, 1);
+
+      glDepthMask(GL_FALSE);
+
+      glDrawElements(GL_TRIANGLES, sizeof(this->dataIndices), GL_UNSIGNED_INT, nullptr);
+
+      glDepthMask(GL_TRUE);
+
+      glDisable(GL_BLEND);
+      glEnable(GL_DEPTH_TEST);
+    }
 
     glBindVertexArray(0);
 

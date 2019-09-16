@@ -15,6 +15,7 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/Objects.h"
+#include "kuplung/objects/ObjectDefinitions.h"
 
 class Grid2D {
 public:
@@ -25,8 +26,10 @@ public:
   void initProperties();
   void render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera, const bool& showZAxis);
   unsigned short int gridSize;
+  float transparency;
 
-  bool showGrid;
+  std::unique_ptr<MirrorSurface> mirrorSurface;
+  bool showGrid, actAsMirror;
   std::unique_ptr<ObjectCoordinate> positionX, positionY, positionZ;
   std::unique_ptr<ObjectCoordinate> scaleX, scaleY, scaleZ;
   std::unique_ptr<ObjectCoordinate> rotateX, rotateY, rotateZ;
@@ -43,8 +46,9 @@ private:
   GLuint shaderProgram;
   GLuint shaderVertex, shaderFragment;
   GLuint glVAO, vboVertices, vboColors, vboIndices;
-  GLint glUniformMVPMatrix;
+  GLint glUniformMVPMatrix, glAttributeActAsMirror, glAttributeAlpha;
 
+  bool actAsMirrorNeedsChange;
   int gridSizeVertex;
   int zIndex;
 };

@@ -136,12 +136,9 @@ void WorldGrid::initBuffers(const int& gridSize, const float& unitSize) {
 
     const int gridMinus = this->gridSizeVertex / 2;
     std::vector<GridMeshPoint3D> verticesData;
-    int indc = 0;
     for (int i = 0; i < (this->gridSizeVertex * 2); i++) {
       for (int j = 0; j < this->gridSizeVertex; j++) {
-        this->dataIndices.push_back(indc);
-        indc++;
-        if (i >= this->gridSizeVertex) {
+        if (i < this->gridSizeVertex) {
           GridMeshPoint3D p;
           p.x = (j - gridMinus) * unitSize;
           p.y = 0;

@@ -93,4 +93,8 @@ std::string static Kuplung_getTextureName(MaterialTextureType texType) {
   }
 }
 
+struct MirrorSurface {
+  float translateX, translateY, translateZ, rotateX, rotateY, rotateZ;
+};
+
 #endif /* ObjectDefinitions_h */

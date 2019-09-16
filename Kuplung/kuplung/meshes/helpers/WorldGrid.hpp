@@ -15,10 +15,7 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/Objects.h"
-
-struct MirrorSurface {
-  float translateX,translateY, translateZ, rotateX, rotateY, rotateZ;
-};
+#include "kuplung/objects/ObjectDefinitions.h"
 
 class WorldGrid {
 public:
