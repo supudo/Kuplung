@@ -281,6 +281,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp" />
+    <ClInclude Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportGLTF.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\catch\catch.hpp" />
@@ -437,6 +438,7 @@
     <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingDeferred.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingForward.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingForwardShadowMapping.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingSimple.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\rendering\RenderingManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\settings\ConfigUtils.cpp" />
@@ -582,6 +584,8 @@
     <None Include="..\Kuplung\resources\shaders\ray_line.vert" />
     <None Include="..\Kuplung\resources\shaders\reflection.frag" />
     <None Include="..\Kuplung\resources\shaders\reflection.vert" />
+    <None Include="..\Kuplung\resources\shaders\rendering_shadow_mapping.frag" />
+    <None Include="..\Kuplung\resources\shaders\rendering_shadow_mapping.vert" />
     <None Include="..\Kuplung\resources\shaders\rendering_simple.frag" />
     <None Include="..\Kuplung\resources\shaders\rendering_simple.geom" />
     <None Include="..\Kuplung\resources\shaders\rendering_simple.tcs" />

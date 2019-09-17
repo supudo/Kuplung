@@ -31,6 +31,10 @@ void RenderingManager::init() {
   if (!this->rendererForwardShadowMapping->init())
     Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingForwardShadowMapping::init()!");
 
+  this->rendererShadowMapping = std::make_unique<RenderingShadowMapping>(this->managerObjects);
+  if (!this->rendererShadowMapping->init())
+    Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingShadowMapping::init()!");
+
   this->rendererDeferred = std::make_unique<RenderingDeferred>(this->managerObjects);
   if (!this->rendererDeferred->init())
     Settings::Instance()->funcDoLog("[RenderingManager] Error RenderingDeferred::init()!");
@@ -55,6 +59,9 @@ void RenderingManager::render(const int& selectedModel) {
       break;
     case InAppRendererType_ForwardShadowMapping:
       this->rendererForwardShadowMapping->render(this->meshModelFaces, selectedModel);
+      break;
+    case InAppRendererType_ShadowMapping:
+      this->rendererShadowMapping->render(this->meshModelFaces, selectedModel);
       break;
     case InAppRendererType_Deferred:
       this->rendererDeferred->render(this->meshModelFaces, selectedModel);

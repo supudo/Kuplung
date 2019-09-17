@@ -86,7 +86,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
     if (ImGui::Checkbox("Occlusion Culling", &Settings::Instance()->grOcclusionCulling))
       Settings::Instance()->saveSettings();
 
-    const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Deferred"};
+    const char* rendererItems[] = {"Simple", "Forward", "Forward with Shadow Mapping", "Shadow Mapping", "Deferred"};
     if (ImGui::Combo("Renderer", &this->optionsRendererType, rendererItems, IM_ARRAYSIZE(rendererItems))) {
       Settings::Instance()->RendererType = static_cast<InAppRendererType>(this->optionsRendererType);
       Settings::Instance()->saveSettings();

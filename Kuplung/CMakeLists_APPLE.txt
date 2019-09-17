@@ -245,6 +245,8 @@ SET(SOURCE_FILES
   kuplung/rendering/methods/RenderingForward.hpp
   kuplung/rendering/methods/RenderingForwardShadowMapping.cpp
   kuplung/rendering/methods/RenderingForwardShadowMapping.hpp
+  kuplung/rendering/methods/RenderingShadowMapping.cpp
+  kuplung/rendering/methods/RenderingShadowMapping.hpp
   kuplung/rendering/methods/RenderingSimple.cpp
   kuplung/rendering/methods/RenderingSimple.hpp
   kuplung/rendering/RenderingManager.cpp
@@ -571,6 +573,8 @@ SET(Kuplung_Shaders
   resources/shaders/spaceship.vert
   resources/shaders/structured_vol_sampling.frag
   resources/shaders/structured_vol_sampling.vert
+  resources/shaders/rendering_shadow_mapping.frag
+  resources/shaders/rendering_shadow_mapping.vert
   resources/shaders/terrain.frag
   resources/shaders/terrain.vert
   resources/shaders/vertex_sphere.frag

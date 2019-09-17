@@ -37,9 +37,21 @@ static int Importer_ParserType_Count = 3;
 static int Importer_ParserType_Count = 2;
 #endif
 
-typedef enum InAppRendererType { InAppRendererType_Simple, InAppRendererType_Forward, InAppRendererType_ForwardShadowMapping, InAppRendererType_Deferred } InAppRendererType;
+typedef enum InAppRendererType {
+  InAppRendererType_Simple,
+  InAppRendererType_Forward,
+  InAppRendererType_ForwardShadowMapping,
+  InAppRendererType_ShadowMapping,
+  InAppRendererType_Deferred
+} InAppRendererType;
 
-typedef enum ImportExportFormats { ImportExportFormat_UNDEFINED = -1, ImportExportFormat_OBJ = 0, ImportExportFormat_GLTF = 1, ImportExportFormat_STL = 2, ImportExportFormat_PLY = 3 } ImportExportFormats;
+typedef enum ImportExportFormats {
+  ImportExportFormat_UNDEFINED = -1,
+  ImportExportFormat_OBJ = 0,
+  ImportExportFormat_GLTF = 1,
+  ImportExportFormat_STL = 2,
+  ImportExportFormat_PLY = 3
+} ImportExportFormats;
 
 struct SupportedAssimpFormat {
   std::string id, description, fileExtension;

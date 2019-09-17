@@ -326,6 +326,9 @@
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.cpp">
       <Filter>kuplung\meshes\helpers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.cpp">
+      <Filter>kuplung\rendering\methods</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -720,6 +723,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp">
       <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.hpp">
+      <Filter>kuplung\rendering\methods</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1118,6 +1124,12 @@
       <Filter>resources\shaders</Filter>
     </None>
     <None Include="..\Kuplung\resources\shaders\grid2d.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_shadow_mapping.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\rendering_shadow_mapping.vert">
       <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>

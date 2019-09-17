@@ -12,6 +12,7 @@
 #include "kuplung/rendering/methods/RenderingSimple.hpp"
 #include "kuplung/rendering/methods/RenderingForward.hpp"
 #include "kuplung/rendering/methods/RenderingForwardShadowMapping.hpp"
+#include "kuplung/rendering/methods/RenderingShadowMapping.hpp"
 #include "kuplung/rendering/methods/RenderingDeferred.hpp"
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/objects/ObjectsManager.hpp"
@@ -37,6 +38,7 @@ private:
   std::unique_ptr<RenderingSimple> rendererSimple;
   std::unique_ptr<RenderingForward> rendererForward;
   std::unique_ptr<RenderingForwardShadowMapping> rendererForwardShadowMapping;
+  std::unique_ptr<RenderingShadowMapping> rendererShadowMapping;
   std::unique_ptr<RenderingDeferred> rendererDeferred;
 };
 
