@@ -19,6 +19,7 @@
 #include "kuplung/meshes/helpers/CameraModel.hpp"
 #include "kuplung/meshes/helpers/Light.hpp"
 #include "kuplung/meshes/helpers/AxisHelpers.hpp"
+#include "kuplung/meshes/helpers/AxisLabels.hpp"
 #include "kuplung/meshes/helpers/MiniAxis.hpp"
 #include "kuplung/meshes/helpers/Skybox.hpp"
 #include "kuplung/meshes/helpers/WorldGrid.hpp"
@@ -54,6 +55,7 @@ public:
   void initGrid2D();
   void initAxisSystem();
   void initAxisHelpers();
+  void initAxisLabels();
   void initSkybox();
   void initTerrain();
   void initSpaceship();
@@ -68,6 +70,7 @@ public:
 	std::unique_ptr<MiniAxis> axisSystem;
 	std::unique_ptr<Skybox> skybox;
 	std::unique_ptr<AxisHelpers> axisHelpers_xMinus, axisHelpers_xPlus, axisHelpers_yMinus, axisHelpers_yPlus, axisHelpers_zMinus, axisHelpers_zPlus;
+  std::unique_ptr<AxisLabels> axisLabels;
 	std::unique_ptr<Terrain> terrain;
 	std::unique_ptr<Spaceship> spaceship;
 

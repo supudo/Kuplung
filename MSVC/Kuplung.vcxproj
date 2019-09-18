@@ -280,6 +280,7 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\Grid2D.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp" />
@@ -417,6 +418,7 @@
     <ClCompile Include="..\Kuplung\kuplung\meshes\artefacts\StructuredVolumetricSampling.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\artefacts\Terrain.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\AxisHelpers.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\BoundingBox.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\Camera.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\CameraModel.cpp" />
@@ -548,6 +550,8 @@
     <None Include="..\Kuplung\resources\shaders\axis.vert" />
     <None Include="..\Kuplung\resources\shaders\axis_helpers.frag" />
     <None Include="..\Kuplung\resources\shaders\axis_helpers.vert" />
+    <None Include="..\Kuplung\resources\shaders\axis_labels.frag" />
+    <None Include="..\Kuplung\resources\shaders\axis_labels.vert" />
     <None Include="..\Kuplung\resources\shaders\bounding_box.frag" />
     <None Include="..\Kuplung\resources\shaders\bounding_box.vert" />
     <None Include="..\Kuplung\resources\shaders\camera.frag" />

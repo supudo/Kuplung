@@ -566,6 +566,7 @@ void Kuplung::initSceneGUI() {
   this->managerObjects->initGrid2D();
   this->managerObjects->initAxisSystem();
   this->managerObjects->initAxisHelpers();
+  this->managerObjects->initAxisLabels();
   this->managerObjects->initSkybox();
   this->managerObjects->initTerrain();
   this->managerObjects->initSpaceship();

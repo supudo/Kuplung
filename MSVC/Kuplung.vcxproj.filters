@@ -329,6 +329,9 @@
     <ClCompile Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.cpp">
       <Filter>kuplung\rendering\methods</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.cpp">
+      <Filter>kuplung\meshes\helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -726,6 +729,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\rendering\methods\RenderingShadowMapping.hpp">
       <Filter>kuplung\rendering\methods</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.hpp">
+      <Filter>kuplung\meshes\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1130,6 +1136,12 @@
       <Filter>resources\shaders</Filter>
     </None>
     <None Include="..\Kuplung\resources\shaders\rendering_shadow_mapping.vert">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\axis_labels.frag">
+      <Filter>resources\shaders</Filter>
+    </None>
+    <None Include="..\Kuplung\resources\shaders\axis_labels.vert">
       <Filter>resources\shaders</Filter>
     </None>
   </ItemGroup>

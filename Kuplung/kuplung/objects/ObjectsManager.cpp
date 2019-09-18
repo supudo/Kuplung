@@ -25,10 +25,11 @@ ObjectsManager::~ObjectsManager() {
   this->axisHelpers_yPlus.reset();
   this->axisHelpers_zMinus.reset();
   this->axisHelpers_zPlus.reset();
+  this->axisLabels.reset();
   this->axisSystem.reset();
   this->skybox.reset();
   for (size_t i = 0; i < this->lightSources.size(); i++) {
-    delete this->lightSources.at(i);
+    delete this->lightSources[i];
   }
 }
 
@@ -81,6 +82,7 @@ void ObjectsManager::render() {
       this->axisHelpers_yPlus->initBuffers();
       this->axisHelpers_zMinus->initBuffers();
       this->axisHelpers_zPlus->initBuffers();
+      this->axisLabels->initBuffers();
     }
 
     if (this->Setting_UseWorldGrid)
@@ -94,14 +96,16 @@ void ObjectsManager::render() {
       ahPosition /= 2;
       //ahPosition += 1;
 
-      this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(-ahPosition, 0, 0));
+      /*this->axisHelpers_xMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(-ahPosition, 0, 0));
       this->axisHelpers_xPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(ahPosition, 0, 0));
 
       this->axisHelpers_yMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, -ahPosition, 0));
       this->axisHelpers_yPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, ahPosition, 0));
 
       this->axisHelpers_zMinus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, -ahPosition));
-      this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition));
+      this->axisHelpers_zPlus->render(this->matrixProjection, this->camera->matrixCamera, glm::vec3(0, 0, ahPosition));*/
+
+      this->axisLabels->render(this->matrixProjection, this->camera->matrixCamera, ahPosition);
     }
     this->axisSystem->render(this->matrixProjection, this->camera->matrixCamera);
 
@@ -354,6 +358,20 @@ void ObjectsManager::initAxisHelpers() {
 
 /*
  *
+ * Axis Labels
+ *
+ */
+void ObjectsManager::initAxisLabels() {
+  this->axisLabels = std::make_unique<AxisLabels>();
+  this->axisLabels->setModels(this->systemModels["axis_x_plus"], this->systemModels["axis_x_minus"], this->systemModels["axis_y_plus"],
+                              this->systemModels["axis_y_minus"], this->systemModels["axis_z_plus"], this->systemModels["axis_z_minus"],
+                              this->Setting_GridSize / 2);
+  this->axisLabels->initShaderProgram();
+  this->axisLabels->initBuffers();
+}
+
+/*
+ *
  * Skybox
  *
  */
@@ -398,7 +416,7 @@ void ObjectsManager::generateSpaceship() {
  *
  */
 void ObjectsManager::addLight(const LightSourceType type, std::string const& title, std::string const& description) {
-  std::shared_ptr<Light> lightObject = std::make_unique<Light>();
+  Light* lightObject = new Light();
   lightObject->init();
   lightObject->initProperties(type);
   lightObject->type = type;
@@ -427,7 +445,7 @@ void ObjectsManager::addLight(const LightSourceType type, std::string const& tit
 
 void ObjectsManager::clearAllLights() {
   for (size_t i = 0; i < this->lightSources.size(); i++) {
-    Light* l = this->lightSources.at(i);
+    Light* l = this->lightSources[i];
     delete l;
   }
   this->lightSources.clear();

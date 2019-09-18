@@ -201,6 +201,8 @@ SET(SOURCE_FILES
   kuplung/meshes/artefacts/Terrain.hpp
   kuplung/meshes/helpers/AxisHelpers.cpp
   kuplung/meshes/helpers/AxisHelpers.hpp
+  kuplung/meshes/helpers/AxisLabels.cpp
+  kuplung/meshes/helpers/AxisLabels.hpp
   kuplung/meshes/helpers/BoundingBox.cpp
   kuplung/meshes/helpers/BoundingBox.hpp
   kuplung/meshes/helpers/Camera.cpp
@@ -529,6 +531,8 @@ SET(Kuplung_Shaders
   resources/shaders/axis.vert
   resources/shaders/axis_helpers.frag
   resources/shaders/axis_helpers.vert
+  resources/shaders/axis_labels.frag
+  resources/shaders/axis_labels.vert
   resources/shaders/bounding_box.frag
   resources/shaders/bounding_box.vert
   resources/shaders/camera.frag
