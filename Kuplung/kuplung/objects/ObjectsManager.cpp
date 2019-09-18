@@ -28,7 +28,7 @@ ObjectsManager::~ObjectsManager() {
   this->axisSystem.reset();
   this->skybox.reset();
   for (size_t i = 0; i < this->lightSources.size(); i++) {
-    delete this->lightSources[i];
+    delete this->lightSources.at(i);
   }
 }
 
@@ -58,7 +58,7 @@ void ObjectsManager::init(const std::function<void(float)>& doProgress, const st
   this->shaderSourceFragment = "";
   std::vector<std::string> fragFiles = {"vars", "effects", "lights", "mapping", "shadow_mapping", "misc", "pbr"};
   for (size_t i = 0; i < fragFiles.size(); i++) {
-    this->shaderSourceFragment += Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles[i] + ".frag").c_str());
+    this->shaderSourceFragment += Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face_" + fragFiles.at(i) + ".frag").c_str());
   }
   this->shaderSourceFragment += Settings::Instance()->glUtils->readFile((Settings::Instance()->appFolder() + "/shaders/model_face.frag").c_str());
 }
@@ -143,31 +143,31 @@ void ObjectsManager::render() {
         this->Setting_GenerateSpaceship = false;
       }
 
-      //            this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
-      //            bool doSolidLight = true;
-      //            for (size_t i=0; i<this->lightSources.size(); i++) {
-      //                if (this->lightSources[i]->type == LightSourceType_Directional) {
-      //                    this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
-      //                    this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
-      //                    this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
-      //                    this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
-      //                    this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
-      //                    this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
-      //                    this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
-      //                    doSolidLight = false;
-      //                    break;
-      //                }
-      //            }
-      //            if (doSolidLight) {
-      //                this->spaceship->lightDirection = this->camera->cameraPosition;
-      //                this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
-      //                this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
-      //                this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
-      //                this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
-      //                this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
-      //                this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
-      //            }
-      //            this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
+      //this->spaceship->solidLightSkin_MaterialColor = this->SolidLight_MaterialColor;
+      //bool doSolidLight = true;
+      //for (size_t i=0; i<this->lightSources.size(); i++) {
+      //    if (this->lightSources[i]->type == LightSourceType_Directional) {
+      //        this->spaceship->lightDirection = glm::vec3(this->lightSources[i]->positionX->point, this->lightSources[i]->positionY->point, this->lightSources[i]->positionZ->point);
+      //        this->spaceship->solidLightSkin_Ambient = this->lightSources[i]->ambient->color;
+      //        this->spaceship->solidLightSkin_Diffuse = this->lightSources[i]->diffuse->color;
+      //        this->spaceship->solidLightSkin_Specular = this->lightSources[i]->specular->color;
+      //        this->spaceship->solidLightSkin_Ambient_Strength = this->lightSources[i]->ambient->strength;
+      //        this->spaceship->solidLightSkin_Diffuse_Strength = this->lightSources[i]->diffuse->strength;
+      //        this->spaceship->solidLightSkin_Specular_Strength = this->lightSources[i]->specular->strength;
+      //        doSolidLight = false;
+      //        break;
+      //    }
+      //}
+      //if (doSolidLight) {
+      //    this->spaceship->lightDirection = this->camera->cameraPosition;
+      //    this->spaceship->solidLightSkin_Ambient = this->SolidLight_Ambient;
+      //    this->spaceship->solidLightSkin_Diffuse = this->SolidLight_Diffuse;
+      //    this->spaceship->solidLightSkin_Specular = this->SolidLight_Specular;
+      //    this->spaceship->solidLightSkin_Ambient_Strength = this->SolidLight_Ambient_Strength;
+      //    this->spaceship->solidLightSkin_Diffuse_Strength = this->SolidLight_Diffuse_Strength;
+      //    this->spaceship->solidLightSkin_Specular_Strength = this->SolidLight_Specular_Strength;
+      //}
+      //this->spaceship->render(this->matrixProjection, this->camera->matrixCamera, this->grid->matrixModel, this->camera->cameraPosition);
     }
   }
 }
@@ -398,24 +398,24 @@ void ObjectsManager::generateSpaceship() {
  *
  */
 void ObjectsManager::addLight(const LightSourceType type, std::string const& title, std::string const& description) {
-  Light* lightObject = new Light();
+  std::shared_ptr<Light> lightObject = std::make_unique<Light>();
   lightObject->init();
   lightObject->initProperties(type);
   lightObject->type = type;
   assert(type == LightSourceType_Directional || type == LightSourceType_Point || type == LightSourceType_Spot);
   switch (type) {
     case LightSourceType_Directional:
-      lightObject->title = ((title.empty()) ? "Directional " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
+      lightObject->title = ((title.empty()) ? "Directional " + std::to_string(this->lightSources.size() + 1) : title);
       lightObject->description = ((description.empty()) ? "Directional area light source" : description);
       lightObject->setModel(this->systemModels["light_directional"]);
       break;
     case LightSourceType_Point:
-      lightObject->title = ((title.empty()) ? "Point " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
+      lightObject->title = ((title.empty()) ? "Point " + std::to_string(this->lightSources.size() + 1) : title);
       lightObject->description = ((description.empty()) ? "Omnidirectional point light source" : description);
       lightObject->setModel(this->systemModels["light_point"]);
       break;
     case LightSourceType_Spot:
-      lightObject->title = ((title.empty()) ? "Spot " + std::to_string(static_cast<int>(this->lightSources.size()) + 1) : title);
+      lightObject->title = ((title.empty()) ? "Spot " + std::to_string(this->lightSources.size() + 1) : title);
       lightObject->description = ((description.empty()) ? "Directional cone light source" : description);
       lightObject->setModel(this->systemModels["light_spot"]);
       break;
@@ -427,7 +427,7 @@ void ObjectsManager::addLight(const LightSourceType type, std::string const& tit
 
 void ObjectsManager::clearAllLights() {
   for (size_t i = 0; i < this->lightSources.size(); i++) {
-    Light* l = this->lightSources[i];
+    Light* l = this->lightSources.at(i);
     delete l;
   }
   this->lightSources.clear();
