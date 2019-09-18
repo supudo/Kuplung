@@ -36,11 +36,11 @@ public:
 
   glm::mat4 matrixModel;
 
-  std::vector<GLfloat> dataVertices;
+  std::vector<glm::vec3> dataVertices;
   std::vector<GLfloat> dataTexCoords;
   std::vector<GLfloat> dataNormals;
-  std::vector<GLfloat> dataColors;
-  std::vector<GLuint> dataIndices;
+  std::vector<glm::vec3> dataColors;
+  std::vector<unsigned int> dataIndices;
 
 private:
   GLuint shaderProgram;

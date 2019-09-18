@@ -83,8 +83,10 @@ void ObjectsManager::render() {
       this->axisHelpers_zPlus->initBuffers();
     }
 
-    //this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
-    this->grid2d->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+    if (this->Setting_UseWorldGrid)
+      this->grid->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
+    else
+      this->grid2d->render(this->matrixProjection, this->camera->matrixCamera, this->Settings_ShowZAxis);
 
     if (this->Setting_ShowAxisHelpers) {
       float ahPosition = 0;
@@ -185,6 +187,7 @@ void ObjectsManager::resetSettings() {
   this->Setting_OutlineColor = glm::vec4(1.0, 0.0, 0.0, 1.0);
   this->Setting_UIAmbientLight = glm::vec3(0.2f);
   this->Setting_FixedGridWorld = true;
+  this->Setting_UseWorldGrid = false;
   this->Setting_OutlineColorPickerOpen = false;
   this->Setting_ShowAxisHelpers = true;
   this->Settings_ShowZAxis = true;

@@ -80,6 +80,7 @@ public:
   glm::vec4 Setting_OutlineColor;
   glm::vec3 Setting_UIAmbientLight;
   bool Setting_FixedGridWorld = true, Setting_OutlineColorPickerOpen = false, Setting_ShowAxisHelpers = true;
+  bool Setting_UseWorldGrid = false;
   bool Settings_ShowZAxis = true;
   bool Setting_DeferredTestMode, Setting_DeferredTestLights, Setting_DeferredRandomizeLightPositions;
   int Setting_LightingPass_DrawMode, Setting_DeferredTestLightsNumber;
