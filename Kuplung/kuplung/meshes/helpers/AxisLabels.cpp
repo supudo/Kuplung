@@ -86,7 +86,7 @@ void AxisLabels::initBuffers() {
     return vertex * glm::vec3(pos, 0, 0);
   };
 
-  std::for_each(std::begin(this->meshModel_PosX.vertices), std::end(this->meshModel_PosX.vertices), &fixPosition);
+  std::for_each(std::begin(this->meshModel_PosX.vertices), std::end(this->meshModel_PosX.vertices), fixPosition);
 
   // TODO(supudo): convert directly the ahPosition into the vertices
   this->dataVertices.insert(this->dataVertices.end(), this->meshModel_PosX.vertices.begin(), this->meshModel_PosX.vertices.end());
