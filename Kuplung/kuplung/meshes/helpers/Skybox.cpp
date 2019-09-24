@@ -45,12 +45,7 @@ Skybox::~Skybox() {
 
   glDisableVertexAttribArray(0);
 
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
 
   glDeleteVertexArrays(1, &this->glVAO);
 }
@@ -112,6 +107,11 @@ const bool Skybox::initBuffers() {
 
   this->glVS_MatrixView = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixView");
   this->glVS_MatrixProjection = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_MatrixProjection");
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   if (this->Setting_Skybox_Item > 0) {
     glGenVertexArrays(1, &this->glVAO);

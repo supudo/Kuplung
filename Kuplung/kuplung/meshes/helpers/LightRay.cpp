@@ -12,14 +12,11 @@
 #include <glm/gtc/type_ptr.hpp>
 
 LightRay::~LightRay() {
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteVertexArrays(1, &this->glVAO);
+  glDeleteBuffers(1, &this->glVAO);
+  glDeleteBuffers(1, &this->vboVertices);
+  glDeleteBuffers(1, &this->vboIndices);
 }
 
 LightRay::LightRay() {
@@ -58,9 +55,13 @@ const bool LightRay::initShaderProgram() {
     Settings::Instance()->glUtils->printProgramLog(this->shaderProgram);
     return success = false;
   }
-  else {
+  else
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
-  }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   this->x = 999;
   this->y = 999;

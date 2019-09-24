@@ -31,12 +31,7 @@ WorldGrid::~WorldGrid() {
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
 
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
 
   glDeleteVertexArrays(1, &this->glVAO);
 }
@@ -112,6 +107,11 @@ const bool WorldGrid::initShaderProgram() {
     this->glAttributeAlpha = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "a_alpha");
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   return success;
 }

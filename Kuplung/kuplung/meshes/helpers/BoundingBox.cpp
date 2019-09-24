@@ -22,18 +22,10 @@ BoundingBox::BoundingBox() : meshModel() {
 }
 
 BoundingBox::~BoundingBox() {
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
   glDisableVertexAttribArray(0);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteBuffers(1, &this->vboVertices);
   glDeleteBuffers(1, &this->vboIndices);
-
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -70,6 +62,11 @@ const bool BoundingBox::initShaderProgram() {
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   return success;
 }

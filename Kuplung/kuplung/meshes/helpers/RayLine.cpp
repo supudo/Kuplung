@@ -15,16 +15,8 @@ RayLine::~RayLine() {
   glDeleteBuffers(1, &this->vboVertices);
   glDeleteBuffers(1, &this->vboIndices);
   glDeleteBuffers(1, &this->vboColors);
-
   glDisableVertexAttribArray(0);
-
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -69,6 +61,11 @@ const bool RayLine::initShaderProgram() {
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
     this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   return success;
 }

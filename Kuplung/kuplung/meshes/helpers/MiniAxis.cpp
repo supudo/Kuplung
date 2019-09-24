@@ -18,14 +18,10 @@ MiniAxis::~MiniAxis() {
 
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
-
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
+  glDeleteBuffers(1, &this->glVAO);
+  glDeleteBuffers(1, &this->vboVertices);
+  glDeleteBuffers(1, &this->vboColors);
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -76,6 +72,11 @@ const bool MiniAxis::initShaderProgram() {
   else
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
 
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
+
   return success;
 }
 
@@ -84,58 +85,21 @@ void MiniAxis::initBuffers() {
   glBindVertexArray(this->glVAO);
 
   const GLfloat g_vertex_buffer_data[] = {// X
-                                          -100,
-                                          0,
-                                          0,
-                                          100,
-                                          0,
-                                          0,
-
+                                          -100, 0, 0,
+                                          100, 0, 0,
                                           // Y
-                                          0,
-                                          -100,
-                                          0,
-                                          0,
-                                          100,
-                                          0,
-
+                                          0, -100, 0,
+                                          0, 100, 0,
                                           // Z
-                                          0,
-                                          0,
-                                          -100,
-                                          0,
-                                          0,
-                                          100};
+                                          0, 0, -100,
+                                          0, 0, 100};
 
   const GLfloat g_color_buffer_data[] = {// X - red
-                                         1.0f,
-                                         0.0f,
-                                         0.0f,
-                                         1.0f,
-                                         1.0f,
-                                         0.0f,
-                                         0.0f,
-                                         1.0f,
-
+                                         1.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f,
                                          // Y - green
-                                         0.0f,
-                                         1.0f,
-                                         0.0f,
-                                         1.0f,
-                                         0.0f,
-                                         1.0f,
-                                         0.0f,
-                                         1.0f,
-
+                                         0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0.0f, 1.0f,
                                          // Z - blue
-                                         0.0f,
-                                         0.0f,
-                                         1.0f,
-                                         1.0f,
-                                         0.0f,
-                                         0.0f,
-                                         1.0f,
-                                         1.0f};
+                                         0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1.0f};
 
   // vertices
   glGenBuffers(1, &this->vboVertices);

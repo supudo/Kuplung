@@ -22,12 +22,7 @@ VertexSphere::~VertexSphere() {
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
 
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
 
   glDeleteBuffers(1, &this->vboVertices);
   glDeleteBuffers(1, &this->vboIndices);
@@ -69,6 +64,11 @@ const bool VertexSphere::initShaderProgram() {
     this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     this->glUniformInnerLightDirection = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   this->isSphere = true;
   this->showWireframes = true;

@@ -14,17 +14,38 @@
 #include <glm/gtx/matrix_decompose.hpp>
 
 AxisLabels::~AxisLabels() {
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glUseProgram(0);
   glDeleteProgram(this->shaderProgram);
-
-  glDisableVertexAttribArray(0);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteVertexArrays(1, &this->glVAO_PosX);
   glDeleteVertexArrays(1, &this->glVAO_NegX);
+  glDeleteVertexArrays(1, &this->glVAO_PosY);
+  glDeleteVertexArrays(1, &this->glVAO_NegY);
+  glDeleteVertexArrays(1, &this->glVAO_PosZ);
+  glDeleteVertexArrays(1, &this->glVAO_NegZ);
+  glDeleteBuffers(1, &this->vboVertices_PosX);
+  glDeleteBuffers(1, &this->vboColors_PosX);
+  glDeleteBuffers(1, &this->vboIndices_PosX);
+  glDeleteBuffers(1, &this->vboVertices_NegX);
+  glDeleteBuffers(1, &this->vboColors_NegX);
+  glDeleteBuffers(1, &this->vboIndices_NegX);
+  glDeleteBuffers(1, &this->vboVertices_PosY);
+  glDeleteBuffers(1, &this->vboColors_PosY);
+  glDeleteBuffers(1, &this->vboIndices_PosY);
+  glDeleteBuffers(1, &this->vboVertices_NegY);
+  glDeleteBuffers(1, &this->vboColors_NegY);
+  glDeleteBuffers(1, &this->vboIndices_NegY);
+  glDeleteBuffers(1, &this->vboVertices_PosZ);
+  glDeleteBuffers(1, &this->vboColors_PosZ);
+  glDeleteBuffers(1, &this->vboIndices_PosZ);
+  glDeleteBuffers(1, &this->vboVertices_NegZ);
+  glDeleteBuffers(1, &this->vboColors_NegZ);
+  glDeleteBuffers(1, &this->vboIndices_NegZ);
+  glDeleteVertexArrays(1, &this->glVAO_PosX);
+  glDeleteVertexArrays(1, &this->glVAO_NegX);
+  glDeleteVertexArrays(1, &this->glVAO_PosY);
+  glDeleteVertexArrays(1, &this->glVAO_NegY);
+  glDeleteVertexArrays(1, &this->glVAO_PosZ);
+  glDeleteVertexArrays(1, &this->glVAO_NegZ);
 }
 
 AxisLabels::AxisLabels() {
@@ -75,6 +96,11 @@ const bool AxisLabels::initShaderProgram() {
   }
   else
     this->glUniformMVPMatrix = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "u_MVPMatrix");
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   return success;
 }

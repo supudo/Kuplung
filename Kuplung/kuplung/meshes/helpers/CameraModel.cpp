@@ -34,16 +34,13 @@ CameraModel::~CameraModel() {
   this->colorG.reset();
   this->colorB.reset();
 
+  glDeleteBuffers(1, &this->vboVertices);
+  glDeleteBuffers(1, &this->vboNormals);
+  glDeleteBuffers(1, &this->vboIndices);
+
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
-
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteVertexArrays(1, &this->glVAO);
 }
 
@@ -118,6 +115,11 @@ const bool CameraModel::initShaderProgram() {
     this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
     this->glUniformInnerLightDirection = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_innerLightDirection");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);

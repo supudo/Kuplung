@@ -20,15 +20,13 @@ Light::~Light() {
   glDisableVertexAttribArray(0);
   glDisableVertexAttribArray(1);
   glDisableVertexAttribArray(2);
-
-  glDetachShader(this->shaderProgram, this->shaderVertex);
-  glDetachShader(this->shaderProgram, this->shaderFragment);
   glDeleteProgram(this->shaderProgram);
-
-  glDeleteShader(this->shaderVertex);
-  glDeleteShader(this->shaderFragment);
-
   glDeleteVertexArrays(1, &this->glVAO);
+  glDeleteBuffers(1, &this->vboVertices);
+  glDeleteBuffers(1, &this->vboNormals);
+  glDeleteBuffers(1, &this->vboTextureCoordinates);
+  glDeleteBuffers(1, &this->vboIndices);
+  GLuint vboTextureDiffuse;
 
   this->positionX.reset();
   this->positionY.reset();
@@ -169,6 +167,11 @@ const bool Light::initShaderProgram() {
     this->glUniformUseColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_useColor");
     this->glUniformColor = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "fs_color");
   }
+
+  glDetachShader(this->shaderProgram, this->shaderVertex);
+  glDetachShader(this->shaderProgram, this->shaderFragment);
+  glDeleteShader(this->shaderVertex);
+  glDeleteShader(this->shaderFragment);
 
   glEnable(GL_DEPTH_TEST);
   glDepthFunc(GL_LESS);
