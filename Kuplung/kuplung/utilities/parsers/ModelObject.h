@@ -64,6 +64,13 @@ struct MeshModel {
     std::vector<glm::vec2> texture_coordinates;
     std::vector<glm::vec3> normals;
     std::vector<unsigned int> indices;
+
+    const unsigned int dataCountVertices() const { return countVertices * sizeof(glm::vec3); }
+    const unsigned int dataCountTextureCoordinates() const { return countTextureCoordinates * sizeof(glm::vec2); }
+    const unsigned int dataCountNormals() const { return countNormals * sizeof(glm::vec3); }
+    const unsigned int dataCountIndices() const { return countIndices; }
+    const unsigned int dataCount() const { return dataCountVertices() + dataCountTextureCoordinates() + dataCountNormals() + dataCountIndices(); }
+    const unsigned int dataCountBillboard(const bool includeColors) const { return dataCountVertices() + (includeColors ? dataCountVertices() : 0) + dataCountIndices(); }
 };
 
 void static Kuplung_printObjModels(const std::vector<MeshModel>& models, bool byIndices) {
