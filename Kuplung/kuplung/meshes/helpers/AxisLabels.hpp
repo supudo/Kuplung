@@ -10,7 +10,6 @@
 #define AxisLabels_hpp
 
 #include <string>
-#include <glm/gtc/matrix_transform.hpp>
 #include "kuplung/utilities/gl/GLIncludes.h"
 #include "kuplung/utilities/parsers/ModelObject.h"
 #include "kuplung/objects/ObjectDefinitions.h"
