@@ -21,8 +21,8 @@ public:
   ~AxisLabels();
   AxisLabels();
   void setModels(const MeshModel& meshModel_PosX, const MeshModel& meshModel_NegX, const MeshModel& meshModel_PosY,
-                 const MeshModel& meshModel_NegY, const MeshModel& meshModel_PosZ, const MeshModel& meshModel_NegZ,
-                 int position);
+    const MeshModel& meshModel_NegY, const MeshModel& meshModel_PosZ, const MeshModel& meshModel_NegZ,
+    int position);
   void initProperties();
   const bool initShaderProgram();
   void initBuffers();
@@ -32,13 +32,14 @@ public:
 private:
   GLuint shaderProgram;
   GLuint shaderVertex, shaderFragment;
-  GLuint glVAO;
-  GLuint vboVertices, vboColors, vboIndices;
+  GLuint glVAO_PosX, glVAO_NegX, glVAO_PosY, glVAO_NegY, glVAO_PosZ, glVAO_NegZ;
+  GLuint vboVertices_PosX, vboColors_PosX, vboIndices_PosX;
+  GLuint vboVertices_NegX, vboColors_NegX, vboIndices_NegX;
+  GLuint vboVertices_PosY, vboColors_PosY, vboIndices_PosY;
+  GLuint vboVertices_NegY, vboColors_NegY, vboIndices_NegY;
+  GLuint vboVertices_PosZ, vboColors_PosZ, vboIndices_PosZ;
+  GLuint vboVertices_NegZ, vboColors_NegZ, vboIndices_NegZ;
   GLint glUniformMVPMatrix;
-
-  std::vector<glm::vec3> dataVertices;
-  std::vector<glm::vec3> dataColors;
-  std::vector<unsigned int> dataIndices;
 
   int ahPosition;
 };
