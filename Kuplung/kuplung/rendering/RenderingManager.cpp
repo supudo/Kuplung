@@ -16,7 +16,13 @@ RenderingManager::RenderingManager(ObjectsManager& managerObjects)
   this->RenderingTotalFaces = 0;
 }
 
-RenderingManager::~RenderingManager() {}
+RenderingManager::~RenderingManager() {
+  this->rendererSimple.reset();
+  this->rendererForward.reset();
+  this->rendererForwardShadowMapping.reset();
+  this->rendererShadowMapping.reset();
+  this->rendererDeferred.reset();
+}
 
 void RenderingManager::init() {
   this->rendererSimple = std::make_unique<RenderingSimple>(this->managerObjects);

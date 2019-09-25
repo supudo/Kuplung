@@ -60,13 +60,7 @@ RenderingForwardShadowMapping::~RenderingForwardShadowMapping() {
   }
 
   glDeleteProgram(this->shaderProgram);
-
-  glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
-  glDetachShader(this->shaderProgramShadows, this->shaderShadowsFragment);
   glDeleteProgram(this->shaderProgramShadows);
-
-  glDeleteShader(this->shaderShadowsVertex);
-  glDeleteShader(this->shaderShadowsFragment);
 
   for (size_t i = 0; i < this->mfLights_Directional.size(); i++) {
     this->mfLights_Directional[i].reset();
@@ -151,6 +145,11 @@ bool RenderingForwardShadowMapping::initShaderProgram() {
 #ifdef Def_Kuplung_OpenGL_4x
     glPatchParameteri(GL_PATCH_VERTICES, 3);
 #endif
+
+    glDetachShader(this->shaderProgramShadows, this->shaderShadowsVertex);
+    glDetachShader(this->shaderProgramShadows, this->shaderShadowsFragment);
+    glDeleteShader(this->shaderShadowsVertex);
+    glDeleteShader(this->shaderShadowsFragment);
 
     this->glGS_GeomDisplacementLocation = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "vs_displacementLocation");
     this->glTCS_UseCullFace = Settings::Instance()->glUtils->glGetUniform(this->shaderProgram, "tcs_UseCullFace");
