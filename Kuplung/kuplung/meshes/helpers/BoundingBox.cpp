@@ -12,7 +12,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-BoundingBox::BoundingBox() : meshModel() {
+BoundingBox::BoundingBox() noexcept : meshModel() {
   this->min_x = 0;
   this->max_x = 0;
   this->min_y = 0;
