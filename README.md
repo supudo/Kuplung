@@ -3,6 +3,10 @@
 C/C++/OpenGL Model Viewer (Experiments).
 
 [![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung)
+<a href="https://scan.coverity.com/projects/supudo-kuplung">
+  <img alt="Coverity Scan Build Status"
+       src="https://scan.coverity.com/projects/11374/badge.svg"/>
+</a>
 
 #### Using/Including
 
