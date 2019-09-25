@@ -1,6 +1,6 @@
 # Kuplung
 
-C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo/Kuplung-Py).
+C/C++/OpenGL Model Viewer (Experiments).
 
 [![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung)
 
@@ -16,9 +16,6 @@ C/C++/OpenGL Model Viewer (Experiments). [Python port](https://github.com/supudo
 - [libnoise](http://libnoise.sourceforge.net/)
 - [NVIDIA CUDA](https://developer.nvidia.com/cuda-zone)
 - [cpp-base64](https://github.com/ReneNyffenegger/cpp-base64)
-
-#### IDE
-QT Creator
 
 #### Ports
 - Python - [Kuplung-Py](https://github.com/supudo/Kuplung-Py)

@@ -18,7 +18,7 @@
 class BoundingBox {
 public:
   ~BoundingBox();
-  BoundingBox();
+  BoundingBox() noexcept;
   const bool initShaderProgram();
   void initBuffers(const MeshModel& meshModel);
   void render(const glm::mat4& matrixMVP, const glm::vec4& outlineColor);

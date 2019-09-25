@@ -116,7 +116,7 @@ void BoundingBox::initBuffers(const MeshModel& meshModel) {
       this->max_z = this->meshModel.vertices[i].z;
   }
 
-  float padding = Settings::Instance()->BoundingBoxPadding;
+  const float padding = Settings::Instance()->BoundingBoxPadding;
   this->min_x = (this->min_x > 0) ? this->min_x + padding : this->min_x - padding;
   this->max_x = (this->max_x > 0) ? this->max_x + padding : this->max_x - padding;
   this->min_y = (this->min_y > 0) ? this->min_y + padding : this->min_y - padding;
