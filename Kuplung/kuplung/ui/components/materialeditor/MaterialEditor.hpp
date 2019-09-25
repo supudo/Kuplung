@@ -30,7 +30,7 @@ struct DragNode {
 class MaterialEditor {
 public:
   void init();
-  void draw(const int selectedModelID, ModelFaceBase *face, bool* p_opened = NULL);
+  void draw(const int selectedModelID, ModelFaceBase *face, bool* p_opened = nullptr);
 
 private:
   void initMaterialNodes(ModelFaceBase *face);

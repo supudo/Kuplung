@@ -23,7 +23,7 @@ GLUtils::GLUtils() {}
 bool GLUtils::compileAndAttachShader(GLuint& shaderProgram, GLuint& shader, GLenum shaderType, const char* shader_source) {
   shader = glCreateShader(shaderType);
 
-  glShaderSource(shader, 1, &shader_source, NULL);
+  glShaderSource(shader, 1, &shader_source, nullptr);
   glCompileShader(shader);
 
   GLint isShaderCompiled = GL_FALSE;
@@ -41,7 +41,7 @@ bool GLUtils::compileAndAttachShader(GLuint& shaderProgram, GLuint& shader, GLen
 
 bool GLUtils::compileShader(GLuint& shaderProgram, GLenum shaderType, const char* shader_source) {
   GLuint shader = glCreateShader(shaderType);
-  glShaderSource(shader, 1, &shader_source, NULL);
+  glShaderSource(shader, 1, &shader_source, nullptr);
   glCompileShader(shader);
 
   GLint isOK = GL_FALSE;

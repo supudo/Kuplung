@@ -177,7 +177,7 @@ void Shadertoy::initBuffers() {
   glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
   this->iChannel0_Image = Settings::Instance()->appFolder() + "/noise16.png";
   this->initTextures();

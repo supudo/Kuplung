@@ -138,7 +138,7 @@ private:
     void dialogAppMetrics();
     void dialogAboutImGui();
     void dialogAboutKuplung();
-    void dialogOptions(ImGuiStyle* ref = NULL);
+    void dialogOptions(ImGuiStyle* ref = nullptr);
     void dialogSceneStats();
     void dialogControlsGUI();
     void dialogControlsModels(int * sceneSelectedModelObject);

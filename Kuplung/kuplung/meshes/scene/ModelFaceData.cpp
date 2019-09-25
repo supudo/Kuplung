@@ -38,7 +38,7 @@ ModelFaceData::~ModelFaceData() {
   for (GLuint colorAttachment = 0; colorAttachment < static_cast<GLuint>(maxColorAttachments); colorAttachment++) {
     att += colorAttachment;
     GLint param;
-    GLuint objName;
+    GLuint objName = -1;
     glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_TYPE, &param);
     if (GL_RENDERBUFFER == param) {
       glGetFramebufferAttachmentParameteriv(GL_FRAMEBUFFER, att, GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME, &param);
@@ -76,14 +76,14 @@ void ModelFaceData::initBuffers() {
   glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
   glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.vertices.size() * sizeof(glm::vec3)), &this->meshModel.vertices[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // normals
   glGenBuffers(1, &this->vboNormals);
   glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
   glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.normals.size() * sizeof(glm::vec3)), &this->meshModel.normals[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(1);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // textures and colors
   if (this->meshModel.texture_coordinates.size() > 0) {
@@ -91,7 +91,7 @@ void ModelFaceData::initBuffers() {
     glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(this->meshModel.texture_coordinates.size() * sizeof(glm::vec2)), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), nullptr);
 
     // ambient texture image
     ModelFaceBase::loadTexture(this->assetsFolder, this->meshModel.ModelMaterial.TextureAmbient, objMaterialImageType_Bump, &this->vboTextureAmbient);
@@ -130,14 +130,14 @@ void ModelFaceData::initBuffers() {
     glBindBuffer(GL_ARRAY_BUFFER, this->vboTangents);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(tangents.size() * sizeof(glm::vec3)), &tangents[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(3);
-    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(3, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
     // bitangents
     glGenBuffers(1, &this->vboBitangents);
     glBindBuffer(GL_ARRAY_BUFFER, this->vboBitangents);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLsizeiptr>(bitangents.size() * sizeof(glm::vec3)), &bitangents[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(4);
-    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(4, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
   }
 
   glGenQueries(1, &this->occQuery);

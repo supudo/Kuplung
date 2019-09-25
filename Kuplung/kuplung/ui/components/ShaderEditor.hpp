@@ -19,7 +19,7 @@
 class ShaderEditor {
 public:
   void init(std::string const& appPath, int positionX, int positionY, int width, int height);
-  void draw(const std::function<void(std::string)>& fileShaderCompile, const char* title, bool* p_opened = NULL);
+  void draw(const std::function<void(std::string)>& fileShaderCompile, const char* title, bool* p_opened = nullptr);
 
 private:
   std::function<void(std::string)> doFileShaderCompile;

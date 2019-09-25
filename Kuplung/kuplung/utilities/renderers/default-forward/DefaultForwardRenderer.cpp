@@ -310,9 +310,9 @@ void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolea
   glGenTextures(1, &this->renderTextureColorBuffer);
   glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
   if (!depth && !stencil)
-    glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(attachment_type), screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(attachment_type), screenWidth, screenHeight, 0, attachment_type, GL_UNSIGNED_BYTE, nullptr);
   else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, screenWidth, screenHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH24_STENCIL8, screenWidth, screenHeight, 0, GL_DEPTH_STENCIL, GL_UNSIGNED_INT_24_8, nullptr);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glBindTexture(GL_TEXTURE_2D, 0);

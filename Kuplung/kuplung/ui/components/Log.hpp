@@ -16,7 +16,7 @@ public:
   void init(int positionX, int positionY, int width, int height);
   void clear();
   void addToLog(const char* fmt, ...) IM_FMTARGS(2);
-  void draw(const char* title, bool* p_opened = NULL);
+  void draw(const char* title, bool* p_opened = nullptr);
 
   ImGuiTextBuffer Buf;
   ImGuiTextFilter Filter;

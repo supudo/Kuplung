@@ -37,7 +37,7 @@ class UVEditor {
 public:
   void init(int positionX, int positionY, int width, int height);
   void setModel(ModelFaceBase *mmf, MaterialTextureType texType, std::string const& texturePath, const std::function<void(ModelFaceBase*)>& funcProcessTexture);
-  void draw(const char* title, bool* p_opened = NULL);
+  void draw(const char* title, bool* p_opened = nullptr);
 
 private:
   std::function<void(ModelFaceBase*)> funcProcessTexture;

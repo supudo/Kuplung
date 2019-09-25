@@ -94,7 +94,7 @@ void StructuredVolumetricSampling::initBuffers() {
   glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
   glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), &vertices[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(this->glAttributeVertexPosition);
-  glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+  glVertexAttribPointer(this->glAttributeVertexPosition, 3, GL_FLOAT, GL_FALSE, 0, nullptr);
 
   this->initNoiseTexture();
 

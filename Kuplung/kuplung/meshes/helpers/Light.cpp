@@ -190,14 +190,14 @@ void Light::initBuffers(std::string const& assetsFolder) {
   glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
   glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.vertices.size() * sizeof(glm::vec3)), &this->meshModel.vertices[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // normals
   glGenBuffers(1, &this->vboNormals);
   glBindBuffer(GL_ARRAY_BUFFER, this->vboNormals);
   glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.normals.size() * sizeof(glm::vec3)), &this->meshModel.normals[0], GL_STATIC_DRAW);
   glEnableVertexAttribArray(1);
-  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // textures and colors
   if (this->meshModel.texture_coordinates.size() > 0) {
@@ -205,7 +205,7 @@ void Light::initBuffers(std::string const& assetsFolder) {
     glBindBuffer(GL_ARRAY_BUFFER, this->vboTextureCoordinates);
     glBufferData(GL_ARRAY_BUFFER, static_cast<GLuint>(this->meshModel.texture_coordinates.size() * sizeof(glm::vec3)), &this->meshModel.texture_coordinates[0], GL_STATIC_DRAW);
     glEnableVertexAttribArray(2);
-    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), NULL);
+    glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), nullptr);
 
     if (!this->meshModel.ModelMaterial.TextureDiffuse.Image.empty()) {
       std::string matImageLocal = assetsFolder + "/gui/" + this->meshModel.ModelMaterial.TextureDiffuse.Image;

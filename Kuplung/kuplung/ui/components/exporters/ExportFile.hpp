@@ -20,7 +20,7 @@
 class ExportFile {
 public:
   void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, std::vector<std::string>, ImportExportFormats exportFormat, int exportFormatAssimp)>& saveFile);
-  void draw(ImportExportFormats* dialogExportType, int* dialogExportType_Assimp, bool* p_opened = NULL);
+  void draw(ImportExportFormats* dialogExportType, int* dialogExportType_Assimp, bool* p_opened = nullptr);
 
 private:
   std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);

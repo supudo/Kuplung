@@ -106,14 +106,14 @@ void MiniAxis::initBuffers() {
   glBindBuffer(GL_ARRAY_BUFFER, this->vboVertices);
   glBufferData(GL_ARRAY_BUFFER, std::extent<decltype(g_vertex_buffer_data)>::value * sizeof(GLfloat), g_vertex_buffer_data, GL_STATIC_DRAW);
   glEnableVertexAttribArray(0);
-  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), nullptr);
 
   // colors
   glGenBuffers(1, &this->vboColors);
   glBindBuffer(GL_ARRAY_BUFFER, this->vboColors);
   glBufferData(GL_ARRAY_BUFFER, std::extent<decltype(g_color_buffer_data)>::value * sizeof(GLfloat), g_color_buffer_data, GL_STATIC_DRAW);
   glEnableVertexAttribArray(1);
-  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), NULL);
+  glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nullptr);
 
   glBindVertexArray(0);
 }

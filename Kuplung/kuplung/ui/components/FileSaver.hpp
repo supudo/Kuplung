@@ -25,7 +25,7 @@ typedef enum FileSaverOperation {
 class FileSaver {
 public:
   void init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, FileSaverOperation)>& saveFile);
-  void draw(const char* title, FileSaverOperation type, bool* p_opened = NULL);
+  void draw(const char* title, FileSaverOperation type, bool* p_opened = nullptr);
 
 private:
   std::map<std::string, FBEntity> getFolderContents(std::string const& filePath);
