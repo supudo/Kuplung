@@ -66,6 +66,8 @@ SET(SOURCE_FILES
     kuplung/meshes/artefacts/Terrain.hpp
     kuplung/meshes/helpers/AxisHelpers.cpp
     kuplung/meshes/helpers/AxisHelpers.hpp
+  	kuplung/meshes/helpers/AxisLabels.cpp
+  	kuplung/meshes/helpers/AxisLabels.hpp
     kuplung/meshes/helpers/BoundingBox.cpp
     kuplung/meshes/helpers/BoundingBox.hpp
     kuplung/meshes/helpers/Camera.cpp
@@ -86,6 +88,8 @@ SET(SOURCE_FILES
     kuplung/meshes/helpers/VertexSphere.hpp
     kuplung/meshes/helpers/WorldGrid.cpp
     kuplung/meshes/helpers/WorldGrid.hpp
+  	kuplung/meshes/helpers/Grid2D.cpp
+  	kuplung/meshes/helpers/Grid2D.hpp
     kuplung/meshes/scene/ModelFaceBase.cpp
     kuplung/meshes/scene/ModelFaceBase.hpp
     kuplung/meshes/scene/ModelFaceData.cpp
@@ -108,6 +112,8 @@ SET(SOURCE_FILES
     kuplung/rendering/methods/RenderingForward.hpp
     kuplung/rendering/methods/RenderingForwardShadowMapping.cpp
     kuplung/rendering/methods/RenderingForwardShadowMapping.hpp
+  	kuplung/rendering/methods/RenderingShadowMapping.cpp
+  	kuplung/rendering/methods/RenderingShadowMapping.hpp
     kuplung/rendering/methods/RenderingSimple.cpp
     kuplung/rendering/methods/RenderingSimple.hpp
     kuplung/rendering/RenderingManager.cpp
@@ -178,14 +184,6 @@ SET(SOURCE_FILES
     kuplung/ui/dialogs/DialogSVS.hpp
     kuplung/ui/iconfonts/IconsFontAwesome.h
     kuplung/ui/iconfonts/IconsMaterialDesign.h
-    kuplung/ui/implementation/gui_oui/GUI_OUI.cpp
-    kuplung/ui/implementation/gui_oui/GUI_OUI.hpp
-    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.cpp
-    kuplung/ui/implementation/gui_oui/OuiNanoVG_Implementation.hpp
-    kuplung/ui/implementation/gui_imgui/GUI_ImGui.cpp
-    kuplung/ui/implementation/gui_imgui/GUI_ImGui.hpp
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.cpp
-    kuplung/ui/implementation/gui_imgui/SDL2OpenGL32.hpp
     kuplung/ui/UIManager.cpp
     kuplung/ui/UIManager.hpp
     kuplung/ui/UIHelpers.cpp
@@ -219,6 +217,14 @@ SET(SOURCE_FILES
     kuplung/utilities/imgui/imgui_demo.cpp
     kuplung/utilities/imgui/imgui_draw.cpp
     kuplung/utilities/imgui/imgui_internal.h
+  	kuplung/utilities/imgui/imgui_widgets.cpp
+  	kuplung/utilities/imgui/imstb_rectpack.h
+  	kuplung/utilities/imgui/imstb_textedit.h
+  	kuplung/utilities/imgui/imstb_truetype.h
+  	kuplung/utilities/imgui/imgui_impl_opengl3.cpp
+  	kuplung/utilities/imgui/imgui_impl_opengl3.h
+  	kuplung/utilities/imgui/imgui_impl_sdl.cpp
+  	kuplung/utilities/imgui/imgui_impl_sdl.h
     kuplung/utilities/nanovg/fontstash.h
     kuplung/utilities/nanovg/nanovg.c
     kuplung/utilities/nanovg/nanovg.h
@@ -392,6 +398,8 @@ SET(Kuplung_Shaders
     resources/shaders/axis.vert
     resources/shaders/axis_helpers.frag
     resources/shaders/axis_helpers.vert
+  	resources/shaders/axis_labels.frag
+  	resources/shaders/axis_labels.vert
     resources/shaders/bounding_box.frag
     resources/shaders/bounding_box.vert
     resources/shaders/camera.frag
@@ -404,6 +412,8 @@ SET(Kuplung_Shaders
     resources/shaders/deferred_shading.vert
     resources/shaders/grid.frag
     resources/shaders/grid.vert
+  	resources/shaders/grid2d.frag
+  	resources/shaders/grid2d.vert
     resources/shaders/light.frag
     resources/shaders/light.vert
     resources/shaders/light_ray.frag
@@ -434,6 +444,8 @@ SET(Kuplung_Shaders
     resources/shaders/spaceship.vert
     resources/shaders/structured_vol_sampling.frag
     resources/shaders/structured_vol_sampling.vert
+  	resources/shaders/rendering_shadow_mapping.frag
+  	resources/shaders/rendering_shadow_mapping.vert
     resources/shaders/terrain.frag
     resources/shaders/terrain.vert
     resources/shaders/vertex_sphere.frag
