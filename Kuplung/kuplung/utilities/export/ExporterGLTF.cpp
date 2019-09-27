@@ -462,11 +462,15 @@ const bool ExporterGLTF::saveBufferFile(std::string buffer) const {
 
 	// - length
 	uint32_t length = 12 + buffer_length;
-	if (!std::fwrite(&length, 1, 1, f))
-		return false;
+  if (!std::fwrite(&length, 1, 1, f)) {
+    std::fclose(f);
+    return false;
+  }
 
-	if (!std::fwrite(&buffer, buffer_length, 1, f))
-		return false;
+  if (!std::fwrite(&buffer, buffer_length, 1, f)) {
+    std::fclose(f);
+    return false;
+  }
 
 	std::fclose(f);
 
