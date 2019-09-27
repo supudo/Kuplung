@@ -2,11 +2,7 @@
 
 C/C++/OpenGL Model Viewer (Experiments).
 
-[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung)
-<a href="https://scan.coverity.com/projects/supudo-kuplung">
-  <img alt="Coverity Scan Build Status"
-       src="https://scan.coverity.com/projects/11374/badge.svg"/>
-</a>
+[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2db452b3ec7a420ea5a0f743e34ac748)](https://www.codacy.com/manual/supudo/Kuplung?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=supudo/Kuplung&amp;utm_campaign=Badge_Grade)
 
 #### Using/Including
 
@@ -44,3 +40,7 @@ Each library uses comes with its own license. See LICENSE.md.
 **Use on your own risk.**
 
 Drop me a line if you think i fail miserably in licensing.
+
+<a href="https://twitter.com/intent/follow?screen_name=supudo">
+  <img src="https://img.shields.io/twitter/follow/supudo?style=social&logo=twitter" alt="follow on Twitter">
+</a>
