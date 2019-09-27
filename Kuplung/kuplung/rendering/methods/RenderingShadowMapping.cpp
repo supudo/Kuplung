@@ -16,7 +16,6 @@
 
 RenderingShadowMapping::RenderingShadowMapping(ObjectsManager& managerObjects)
   : managerObjects(managerObjects) {
-  this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
   this->GLSL_LightSourceNumber_Directional = 0;
   this->GLSL_LightSourceNumber_Point = 0;
   this->GLSL_LightSourceNumber_Spot = 0;
@@ -76,6 +75,8 @@ RenderingShadowMapping::~RenderingShadowMapping() {
 }
 
 bool RenderingShadowMapping::init() {
+  this->solidLight = std::make_unique<ModelFace_LightSource_Directional>();
+
   this->GLSL_LightSourceNumber_Directional = 8;
   this->GLSL_LightSourceNumber_Point = 4;
   this->GLSL_LightSourceNumber_Spot = 4;
