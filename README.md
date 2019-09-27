@@ -2,7 +2,7 @@
 
 C/C++/OpenGL Model Viewer (Experiments).
 
-[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung)
+[![Build Status](https://travis-ci.org/supudo/Kuplung.svg?branch=master)](https://travis-ci.org/supudo/Kuplung) [![Build status](https://ci.appveyor.com/api/projects/status/h1l8gy09eeo7rykp?svg=true)](https://ci.appveyor.com/project/supudo/kuplung) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/2db452b3ec7a420ea5a0f743e34ac748)](https://www.codacy.com/manual/supudo/Kuplung?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=supudo/Kuplung&amp;utm_campaign=Badge_Grade)
 
 #### Using/Including
 
