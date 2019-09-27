@@ -40,3 +40,7 @@ Each library uses comes with its own license. See LICENSE.md.
 **Use on your own risk.**
 
 Drop me a line if you think i fail miserably in licensing.
+
+<a href="https://twitter.com/intent/follow?screen_name=supudo">
+  <img src="https://img.shields.io/twitter/follow/supudo?style=social&logo=twitter" alt="follow on Twitter">
+</a>
