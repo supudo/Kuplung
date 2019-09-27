@@ -240,6 +240,7 @@ void Settings::saveSettings() {
   this->cfgUtils->saveSettings();
 }
 
+#ifdef __APPLE__
 std::string Settings::string_format(const std::string& fmt_str, ...) {
   int n = static_cast<int>(fmt_str.size()) * 2; /* Reserve two times as much as the length of the fmt_str */
   std::unique_ptr<char[]> formatted;
@@ -257,6 +258,7 @@ std::string Settings::string_format(const std::string& fmt_str, ...) {
   }
   return std::string(formatted.get());
 }
+#endif
 
 bool Settings::isAllowedFileExtension(std::string fileExtension, const std::vector<std::string>& allowedExtensions) const {
   if (allowedExtensions.size() > 0) {
