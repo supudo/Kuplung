@@ -5,7 +5,6 @@
 
 #include <algorithm>
 
-#include <google/protobuf/stubs/common.h>
 #include <google/protobuf/io/coded_stream.h>
 #include <google/protobuf/extension_set.h>
 #include <google/protobuf/wire_format_lite.h>
@@ -52,7 +51,7 @@ static void InitDefaultsscc_info_CameraSettings_KuplungAppSettings_2eproto() {
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_CameraSettings_KuplungAppSettings_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_CameraSettings_KuplungAppSettings_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_CameraSettings_KuplungAppSettings_2eproto}, {
       &scc_info_Vec3_KuplungDefinitions_2eproto.base,
       &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,}};
 
@@ -68,7 +67,7 @@ static void InitDefaultsscc_info_GUISettings_KuplungAppSettings_2eproto() {
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<5> scc_info_GUISettings_KuplungAppSettings_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 5, InitDefaultsscc_info_GUISettings_KuplungAppSettings_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 5, 0, InitDefaultsscc_info_GUISettings_KuplungAppSettings_2eproto}, {
       &scc_info_Vec4_KuplungDefinitions_2eproto.base,
       &scc_info_Vec3_KuplungDefinitions_2eproto.base,
       &scc_info_CameraSettings_KuplungAppSettings_2eproto.base,
@@ -87,7 +86,7 @@ static void InitDefaultsscc_info_GridSettings_KuplungAppSettings_2eproto() {
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_GridSettings_KuplungAppSettings_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, InitDefaultsscc_info_GridSettings_KuplungAppSettings_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_GridSettings_KuplungAppSettings_2eproto}, {
       &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,}};
 
 static void InitDefaultsscc_info_LightObject_KuplungAppSettings_2eproto() {
@@ -102,7 +101,7 @@ static void InitDefaultsscc_info_LightObject_KuplungAppSettings_2eproto() {
 }
 
 ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_LightObject_KuplungAppSettings_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, InitDefaultsscc_info_LightObject_KuplungAppSettings_2eproto}, {
+    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_LightObject_KuplungAppSettings_2eproto}, {
       &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,
       &scc_info_MaterialColor_KuplungDefinitions_2eproto.base,}};
 
@@ -711,50 +710,50 @@ GUISettings::GUISettings(const GUISettings& from)
       lights_(from.lights_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   heightmapimage_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_heightmapimage()) {
+  if (from._internal_has_heightmapimage()) {
     heightmapimage_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.heightmapimage_);
   }
-  if (from.has_setting_outlinecolor()) {
+  if (from._internal_has_setting_outlinecolor()) {
     setting_outlinecolor_ = new ::KuplungApp::Vec4(*from.setting_outlinecolor_);
   } else {
     setting_outlinecolor_ = nullptr;
   }
-  if (from.has_setting_uiambientlight()) {
+  if (from._internal_has_setting_uiambientlight()) {
     setting_uiambientlight_ = new ::KuplungApp::Vec3(*from.setting_uiambientlight_);
   } else {
     setting_uiambientlight_ = nullptr;
   }
-  if (from.has_solidlight_direction()) {
+  if (from._internal_has_solidlight_direction()) {
     solidlight_direction_ = new ::KuplungApp::Vec3(*from.solidlight_direction_);
   } else {
     solidlight_direction_ = nullptr;
   }
-  if (from.has_solidlight_materialcolor()) {
+  if (from._internal_has_solidlight_materialcolor()) {
     solidlight_materialcolor_ = new ::KuplungApp::Vec3(*from.solidlight_materialcolor_);
   } else {
     solidlight_materialcolor_ = nullptr;
   }
-  if (from.has_solidlight_ambient()) {
+  if (from._internal_has_solidlight_ambient()) {
     solidlight_ambient_ = new ::KuplungApp::Vec3(*from.solidlight_ambient_);
   } else {
     solidlight_ambient_ = nullptr;
   }
-  if (from.has_solidlight_diffuse()) {
+  if (from._internal_has_solidlight_diffuse()) {
     solidlight_diffuse_ = new ::KuplungApp::Vec3(*from.solidlight_diffuse_);
   } else {
     solidlight_diffuse_ = nullptr;
   }
-  if (from.has_solidlight_specular()) {
+  if (from._internal_has_solidlight_specular()) {
     solidlight_specular_ = new ::KuplungApp::Vec3(*from.solidlight_specular_);
   } else {
     solidlight_specular_ = nullptr;
   }
-  if (from.has_camera()) {
+  if (from._internal_has_camera()) {
     camera_ = new ::KuplungApp::CameraSettings(*from.camera_);
   } else {
     camera_ = nullptr;
   }
-  if (from.has_grid()) {
+  if (from._internal_has_grid()) {
     grid_ = new ::KuplungApp::GridSettings(*from.grid_);
   } else {
     grid_ = nullptr;
@@ -881,7 +880,6 @@ void GUISettings::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
@@ -956,14 +954,14 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ctx->ParseMessage(mutable_setting_outlinecolor(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_setting_outlinecolor(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr = ctx->ParseMessage(mutable_setting_uiambientlight(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_setting_uiambientlight(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1050,35 +1048,35 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required .KuplungApp.Vec3 SolidLight_Direction = 21;
       case 21:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 170)) {
-          ptr = ctx->ParseMessage(mutable_solidlight_direction(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_solidlight_direction(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
       case 22:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 178)) {
-          ptr = ctx->ParseMessage(mutable_solidlight_materialcolor(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_solidlight_materialcolor(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
       case 23:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 186)) {
-          ptr = ctx->ParseMessage(mutable_solidlight_ambient(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_solidlight_ambient(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
       case 24:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 194)) {
-          ptr = ctx->ParseMessage(mutable_solidlight_diffuse(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_solidlight_diffuse(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 SolidLight_Specular = 25;
       case 25:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 202)) {
-          ptr = ctx->ParseMessage(mutable_solidlight_specular(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_solidlight_specular(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1173,7 +1171,7 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required string heightmapImage = 37;
       case 37:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_heightmapimage(), ptr, ctx, "KuplungApp.GUISettings.heightmapImage");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_heightmapimage(), ptr, ctx, "KuplungApp.GUISettings.heightmapImage");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1212,14 +1210,14 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required .KuplungApp.CameraSettings camera = 42;
       case 42:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr = ctx->ParseMessage(mutable_camera(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_camera(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.GridSettings grid = 43;
       case 43:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr = ctx->ParseMessage(mutable_grid(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_grid(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1229,10 +1227,10 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
           ptr -= 2;
           do {
             ptr += 2;
-            ptr = ctx->ParseMessage(add_lights(), ptr);
+            ptr = ctx->ParseMessage(_internal_add_lights(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint16>(ptr) == 738);
+          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<354>(ptr));
         } else goto handle_unusual;
         continue;
       default: {
@@ -1254,852 +1252,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool GUISettings::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.GUISettings)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required float Setting_FOV = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (13 & 0xFF)) {
-          _Internal::set_has_setting_fov(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_fov_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_OutlineThickness = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (21 & 0xFF)) {
-          _Internal::set_has_setting_outlinethickness(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_outlinethickness_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_RatioWidth = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (29 & 0xFF)) {
-          _Internal::set_has_setting_ratiowidth(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_ratiowidth_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_RatioHeight = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (37 & 0xFF)) {
-          _Internal::set_has_setting_ratioheight(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_ratioheight_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_PlaneClose = 5;
-      case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (45 & 0xFF)) {
-          _Internal::set_has_setting_planeclose(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_planeclose_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_PlaneFar = 6;
-      case 6: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (53 & 0xFF)) {
-          _Internal::set_has_setting_planefar(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_planefar_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_GridSize = 7;
-      case 7: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (56 & 0xFF)) {
-          _Internal::set_has_setting_gridsize(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_gridsize_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_Skybox = 8;
-      case 8: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (64 & 0xFF)) {
-          _Internal::set_has_setting_skybox(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_skybox_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
-      case 9: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_setting_outlinecolor()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_setting_uiambientlight()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_FixedGridWorld = 11;
-      case 11: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (88 & 0xFF)) {
-          _Internal::set_has_setting_fixedgridworld(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_fixedgridworld_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_OutlineColorPickerOpen = 12;
-      case 12: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (96 & 0xFF)) {
-          _Internal::set_has_setting_outlinecolorpickeropen(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_outlinecolorpickeropen_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_ShowAxisHelpers = 13;
-      case 13: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (104 & 0xFF)) {
-          _Internal::set_has_setting_showaxishelpers(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_showaxishelpers_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Settings_ShowZAxis = 14;
-      case 14: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (112 & 0xFF)) {
-          _Internal::set_has_settings_showzaxis(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &settings_showzaxis_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_DeferredTestMode = 15;
-      case 15: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (120 & 0xFF)) {
-          _Internal::set_has_setting_deferredtestmode(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_deferredtestmode_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_DeferredTestLights = 16;
-      case 16: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (128 & 0xFF)) {
-          _Internal::set_has_setting_deferredtestlights(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_deferredtestlights_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_LightingPass_DrawMode = 17;
-      case 17: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (136 & 0xFF)) {
-          _Internal::set_has_setting_lightingpass_drawmode(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_lightingpass_drawmode_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_DeferredTestLightsNumber = 18;
-      case 18: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (144 & 0xFF)) {
-          _Internal::set_has_setting_deferredtestlightsnumber(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_deferredtestlightsnumber_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float Setting_DeferredAmbientStrength = 19;
-      case 19: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (157 & 0xFF)) {
-          _Internal::set_has_setting_deferredambientstrength(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &setting_deferredambientstrength_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 viewModelSkin = 20;
-      case 20: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (160 & 0xFF)) {
-          _Internal::set_has_viewmodelskin(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &viewmodelskin_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 SolidLight_Direction = 21;
-      case 21: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (170 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_solidlight_direction()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
-      case 22: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (178 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_solidlight_materialcolor()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
-      case 23: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (186 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_solidlight_ambient()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
-      case 24: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (194 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_solidlight_diffuse()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 SolidLight_Specular = 25;
-      case 25: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (202 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_solidlight_specular()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float SolidLight_Ambient_Strength = 26;
-      case 26: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (213 & 0xFF)) {
-          _Internal::set_has_solidlight_ambient_strength(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &solidlight_ambient_strength_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float SolidLight_Diffuse_Strength = 27;
-      case 27: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (221 & 0xFF)) {
-          _Internal::set_has_solidlight_diffuse_strength(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &solidlight_diffuse_strength_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float SolidLight_Specular_Strength = 28;
-      case 28: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (229 & 0xFF)) {
-          _Internal::set_has_solidlight_specular_strength(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &solidlight_specular_strength_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool SolidLight_MaterialColor_ColorPicker = 29;
-      case 29: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (232 & 0xFF)) {
-          _Internal::set_has_solidlight_materialcolor_colorpicker(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solidlight_materialcolor_colorpicker_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool SolidLight_Ambient_ColorPicker = 30;
-      case 30: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (240 & 0xFF)) {
-          _Internal::set_has_solidlight_ambient_colorpicker(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solidlight_ambient_colorpicker_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool SolidLight_Diffuse_ColorPicker = 31;
-      case 31: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (248 & 0xFF)) {
-          _Internal::set_has_solidlight_diffuse_colorpicker(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solidlight_diffuse_colorpicker_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool SolidLight_Specular_ColorPicker = 32;
-      case 32: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (256 & 0xFF)) {
-          _Internal::set_has_solidlight_specular_colorpicker(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &solidlight_specular_colorpicker_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_ShowTerrain = 33;
-      case 33: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (264 & 0xFF)) {
-          _Internal::set_has_setting_showterrain(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_showterrain_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_TerrainModel = 34;
-      case 34: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (272 & 0xFF)) {
-          _Internal::set_has_setting_terrainmodel(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_terrainmodel_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_TerrainAnimateX = 35;
-      case 35: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (280 & 0xFF)) {
-          _Internal::set_has_setting_terrainanimatex(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_terrainanimatex_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_TerrainAnimateY = 36;
-      case 36: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (288 & 0xFF)) {
-          _Internal::set_has_setting_terrainanimatey(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_terrainanimatey_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string heightmapImage = 37;
-      case 37: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (298 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_heightmapimage()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "KuplungApp.GUISettings.heightmapImage");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_TerrainWidth = 38;
-      case 38: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (304 & 0xFF)) {
-          _Internal::set_has_setting_terrainwidth(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_terrainwidth_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 Setting_TerrainHeight = 39;
-      case 39: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (312 & 0xFF)) {
-          _Internal::set_has_setting_terrainheight(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &setting_terrainheight_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_ShowSpaceship = 40;
-      case 40: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (320 & 0xFF)) {
-          _Internal::set_has_setting_showspaceship(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_showspaceship_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool Setting_GenerateSpaceship = 41;
-      case 41: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (328 & 0xFF)) {
-          _Internal::set_has_setting_generatespaceship(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &setting_generatespaceship_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.CameraSettings camera = 42;
-      case 42: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (338 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_camera()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.GridSettings grid = 43;
-      case 43: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (346 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_grid()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // repeated .KuplungApp.LightObject lights = 44;
-      case 44: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (354 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-                input, add_lights()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.GUISettings)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.GUISettings)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void GUISettings::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.GUISettings)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required float Setting_FOV = 1;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(1, this->setting_fov(), output);
-  }
-
-  // required float Setting_OutlineThickness = 2;
-  if (cached_has_bits & 0x00000800u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(2, this->setting_outlinethickness(), output);
-  }
-
-  // required float Setting_RatioWidth = 3;
-  if (cached_has_bits & 0x00001000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(3, this->setting_ratiowidth(), output);
-  }
-
-  // required float Setting_RatioHeight = 4;
-  if (cached_has_bits & 0x00002000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(4, this->setting_ratioheight(), output);
-  }
-
-  // required float Setting_PlaneClose = 5;
-  if (cached_has_bits & 0x00004000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(5, this->setting_planeclose(), output);
-  }
-
-  // required float Setting_PlaneFar = 6;
-  if (cached_has_bits & 0x00008000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(6, this->setting_planefar(), output);
-  }
-
-  // required int32 Setting_GridSize = 7;
-  if (cached_has_bits & 0x00010000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(7, this->setting_gridsize(), output);
-  }
-
-  // required int32 Setting_Skybox = 8;
-  if (cached_has_bits & 0x00020000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(8, this->setting_skybox(), output);
-  }
-
-  // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, _Internal::setting_outlinecolor(this), output);
-  }
-
-  // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, _Internal::setting_uiambientlight(this), output);
-  }
-
-  // required bool Setting_FixedGridWorld = 11;
-  if (cached_has_bits & 0x00040000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(11, this->setting_fixedgridworld(), output);
-  }
-
-  // required bool Setting_OutlineColorPickerOpen = 12;
-  if (cached_has_bits & 0x00080000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(12, this->setting_outlinecolorpickeropen(), output);
-  }
-
-  // required bool Setting_ShowAxisHelpers = 13;
-  if (cached_has_bits & 0x00100000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(13, this->setting_showaxishelpers(), output);
-  }
-
-  // required bool Settings_ShowZAxis = 14;
-  if (cached_has_bits & 0x00200000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(14, this->settings_showzaxis(), output);
-  }
-
-  // required bool Setting_DeferredTestMode = 15;
-  if (cached_has_bits & 0x04000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(15, this->setting_deferredtestmode(), output);
-  }
-
-  // required bool Setting_DeferredTestLights = 16;
-  if (cached_has_bits & 0x08000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(16, this->setting_deferredtestlights(), output);
-  }
-
-  // required int32 Setting_LightingPass_DrawMode = 17;
-  if (cached_has_bits & 0x00400000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(17, this->setting_lightingpass_drawmode(), output);
-  }
-
-  // required int32 Setting_DeferredTestLightsNumber = 18;
-  if (cached_has_bits & 0x00800000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(18, this->setting_deferredtestlightsnumber(), output);
-  }
-
-  // required float Setting_DeferredAmbientStrength = 19;
-  if (cached_has_bits & 0x01000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(19, this->setting_deferredambientstrength(), output);
-  }
-
-  // required int32 viewModelSkin = 20;
-  if (cached_has_bits & 0x02000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(20, this->viewmodelskin(), output);
-  }
-
-  // required .KuplungApp.Vec3 SolidLight_Direction = 21;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, _Internal::solidlight_direction(this), output);
-  }
-
-  // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, _Internal::solidlight_materialcolor(this), output);
-  }
-
-  // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      23, _Internal::solidlight_ambient(this), output);
-  }
-
-  // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      24, _Internal::solidlight_diffuse(this), output);
-  }
-
-  // required .KuplungApp.Vec3 SolidLight_Specular = 25;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      25, _Internal::solidlight_specular(this), output);
-  }
-
-  // required float SolidLight_Ambient_Strength = 26;
-  if (cached_has_bits & 0x40000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(26, this->solidlight_ambient_strength(), output);
-  }
-
-  // required float SolidLight_Diffuse_Strength = 27;
-  if (cached_has_bits & 0x80000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(27, this->solidlight_diffuse_strength(), output);
-  }
-
-  cached_has_bits = _has_bits_[1];
-  // required float SolidLight_Specular_Strength = 28;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(28, this->solidlight_specular_strength(), output);
-  }
-
-  cached_has_bits = _has_bits_[0];
-  // required bool SolidLight_MaterialColor_ColorPicker = 29;
-  if (cached_has_bits & 0x10000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(29, this->solidlight_materialcolor_colorpicker(), output);
-  }
-
-  // required bool SolidLight_Ambient_ColorPicker = 30;
-  if (cached_has_bits & 0x20000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(30, this->solidlight_ambient_colorpicker(), output);
-  }
-
-  cached_has_bits = _has_bits_[1];
-  // required bool SolidLight_Diffuse_ColorPicker = 31;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(31, this->solidlight_diffuse_colorpicker(), output);
-  }
-
-  // required bool SolidLight_Specular_ColorPicker = 32;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(32, this->solidlight_specular_colorpicker(), output);
-  }
-
-  // required bool Setting_ShowTerrain = 33;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(33, this->setting_showterrain(), output);
-  }
-
-  // required bool Setting_TerrainModel = 34;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(34, this->setting_terrainmodel(), output);
-  }
-
-  // required bool Setting_TerrainAnimateX = 35;
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(35, this->setting_terrainanimatex(), output);
-  }
-
-  // required bool Setting_TerrainAnimateY = 36;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(36, this->setting_terrainanimatey(), output);
-  }
-
-  cached_has_bits = _has_bits_[0];
-  // required string heightmapImage = 37;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.GUISettings.heightmapImage");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      37, this->heightmapimage(), output);
-  }
-
-  cached_has_bits = _has_bits_[1];
-  // required int32 Setting_TerrainWidth = 38;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(38, this->setting_terrainwidth(), output);
-  }
-
-  // required int32 Setting_TerrainHeight = 39;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(39, this->setting_terrainheight(), output);
-  }
-
-  // required bool Setting_ShowSpaceship = 40;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(40, this->setting_showspaceship(), output);
-  }
-
-  // required bool Setting_GenerateSpaceship = 41;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(41, this->setting_generatespaceship(), output);
-  }
-
-  cached_has_bits = _has_bits_[0];
-  // required .KuplungApp.CameraSettings camera = 42;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      42, _Internal::camera(this), output);
-  }
-
-  // required .KuplungApp.GridSettings grid = 43;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      43, _Internal::grid(this), output);
-  }
-
-  // repeated .KuplungApp.LightObject lights = 44;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->lights_size()); i < n; i++) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      44,
-      this->lights(static_cast<int>(i)),
-      output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.GUISettings)
-}
 
 ::PROTOBUF_NAMESPACE_ID::uint8* GUISettings::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GUISettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -2107,260 +1262,301 @@ void GUISettings::SerializeWithCachedSizes(
   cached_has_bits = _has_bits_[0];
   // required float Setting_FOV = 1;
   if (cached_has_bits & 0x00000400u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->setting_fov(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_setting_fov(), target);
   }
 
   // required float Setting_OutlineThickness = 2;
   if (cached_has_bits & 0x00000800u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->setting_outlinethickness(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_setting_outlinethickness(), target);
   }
 
   // required float Setting_RatioWidth = 3;
   if (cached_has_bits & 0x00001000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->setting_ratiowidth(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_setting_ratiowidth(), target);
   }
 
   // required float Setting_RatioHeight = 4;
   if (cached_has_bits & 0x00002000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->setting_ratioheight(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_setting_ratioheight(), target);
   }
 
   // required float Setting_PlaneClose = 5;
   if (cached_has_bits & 0x00004000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->setting_planeclose(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_setting_planeclose(), target);
   }
 
   // required float Setting_PlaneFar = 6;
   if (cached_has_bits & 0x00008000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->setting_planefar(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_setting_planefar(), target);
   }
 
   // required int32 Setting_GridSize = 7;
   if (cached_has_bits & 0x00010000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->setting_gridsize(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_setting_gridsize(), target);
   }
 
   // required int32 Setting_Skybox = 8;
   if (cached_has_bits & 0x00020000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->setting_skybox(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_setting_skybox(), target);
   }
 
   // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
   if (cached_has_bits & 0x00000002u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, _Internal::setting_outlinecolor(this), target);
+        9, _Internal::setting_outlinecolor(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
   if (cached_has_bits & 0x00000004u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, _Internal::setting_uiambientlight(this), target);
+        10, _Internal::setting_uiambientlight(this), target, stream);
   }
 
   // required bool Setting_FixedGridWorld = 11;
   if (cached_has_bits & 0x00040000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->setting_fixedgridworld(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_setting_fixedgridworld(), target);
   }
 
   // required bool Setting_OutlineColorPickerOpen = 12;
   if (cached_has_bits & 0x00080000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(12, this->setting_outlinecolorpickeropen(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(12, this->_internal_setting_outlinecolorpickeropen(), target);
   }
 
   // required bool Setting_ShowAxisHelpers = 13;
   if (cached_has_bits & 0x00100000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(13, this->setting_showaxishelpers(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(13, this->_internal_setting_showaxishelpers(), target);
   }
 
   // required bool Settings_ShowZAxis = 14;
   if (cached_has_bits & 0x00200000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(14, this->settings_showzaxis(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(14, this->_internal_settings_showzaxis(), target);
   }
 
   // required bool Setting_DeferredTestMode = 15;
   if (cached_has_bits & 0x04000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(15, this->setting_deferredtestmode(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(15, this->_internal_setting_deferredtestmode(), target);
   }
 
   // required bool Setting_DeferredTestLights = 16;
   if (cached_has_bits & 0x08000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(16, this->setting_deferredtestlights(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(16, this->_internal_setting_deferredtestlights(), target);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 17;
   if (cached_has_bits & 0x00400000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(17, this->setting_lightingpass_drawmode(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(17, this->_internal_setting_lightingpass_drawmode(), target);
   }
 
   // required int32 Setting_DeferredTestLightsNumber = 18;
   if (cached_has_bits & 0x00800000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(18, this->setting_deferredtestlightsnumber(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(18, this->_internal_setting_deferredtestlightsnumber(), target);
   }
 
   // required float Setting_DeferredAmbientStrength = 19;
   if (cached_has_bits & 0x01000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(19, this->setting_deferredambientstrength(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(19, this->_internal_setting_deferredambientstrength(), target);
   }
 
   // required int32 viewModelSkin = 20;
   if (cached_has_bits & 0x02000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(20, this->viewmodelskin(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(20, this->_internal_viewmodelskin(), target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Direction = 21;
   if (cached_has_bits & 0x00000008u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, _Internal::solidlight_direction(this), target);
+        21, _Internal::solidlight_direction(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
   if (cached_has_bits & 0x00000010u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, _Internal::solidlight_materialcolor(this), target);
+        22, _Internal::solidlight_materialcolor(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
   if (cached_has_bits & 0x00000020u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        23, _Internal::solidlight_ambient(this), target);
+        23, _Internal::solidlight_ambient(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
   if (cached_has_bits & 0x00000040u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        24, _Internal::solidlight_diffuse(this), target);
+        24, _Internal::solidlight_diffuse(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
   if (cached_has_bits & 0x00000080u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        25, _Internal::solidlight_specular(this), target);
+        25, _Internal::solidlight_specular(this), target, stream);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
   if (cached_has_bits & 0x40000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(26, this->solidlight_ambient_strength(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(26, this->_internal_solidlight_ambient_strength(), target);
   }
 
   // required float SolidLight_Diffuse_Strength = 27;
   if (cached_has_bits & 0x80000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(27, this->solidlight_diffuse_strength(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(27, this->_internal_solidlight_diffuse_strength(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float SolidLight_Specular_Strength = 28;
   if (cached_has_bits & 0x00000001u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(28, this->solidlight_specular_strength(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(28, this->_internal_solidlight_specular_strength(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required bool SolidLight_MaterialColor_ColorPicker = 29;
   if (cached_has_bits & 0x10000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(29, this->solidlight_materialcolor_colorpicker(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(29, this->_internal_solidlight_materialcolor_colorpicker(), target);
   }
 
   // required bool SolidLight_Ambient_ColorPicker = 30;
   if (cached_has_bits & 0x20000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(30, this->solidlight_ambient_colorpicker(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(30, this->_internal_solidlight_ambient_colorpicker(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool SolidLight_Diffuse_ColorPicker = 31;
   if (cached_has_bits & 0x00000002u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(31, this->solidlight_diffuse_colorpicker(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(31, this->_internal_solidlight_diffuse_colorpicker(), target);
   }
 
   // required bool SolidLight_Specular_ColorPicker = 32;
   if (cached_has_bits & 0x00000004u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(32, this->solidlight_specular_colorpicker(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(32, this->_internal_solidlight_specular_colorpicker(), target);
   }
 
   // required bool Setting_ShowTerrain = 33;
   if (cached_has_bits & 0x00000008u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(33, this->setting_showterrain(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(33, this->_internal_setting_showterrain(), target);
   }
 
   // required bool Setting_TerrainModel = 34;
   if (cached_has_bits & 0x00000010u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(34, this->setting_terrainmodel(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(34, this->_internal_setting_terrainmodel(), target);
   }
 
   // required bool Setting_TerrainAnimateX = 35;
   if (cached_has_bits & 0x00000040u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(35, this->setting_terrainanimatex(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(35, this->_internal_setting_terrainanimatex(), target);
   }
 
   // required bool Setting_TerrainAnimateY = 36;
   if (cached_has_bits & 0x00000080u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(36, this->setting_terrainanimatey(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(36, this->_internal_setting_terrainanimatey(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required string heightmapImage = 37;
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->heightmapimage().data(), static_cast<int>(this->heightmapimage().length()),
+      this->_internal_heightmapimage().data(), static_cast<int>(this->_internal_heightmapimage().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.GUISettings.heightmapImage");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        37, this->heightmapimage(), target);
+    target = stream->WriteStringMaybeAliased(
+        37, this->_internal_heightmapimage(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required int32 Setting_TerrainWidth = 38;
   if (cached_has_bits & 0x00000020u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(38, this->setting_terrainwidth(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(38, this->_internal_setting_terrainwidth(), target);
   }
 
   // required int32 Setting_TerrainHeight = 39;
   if (cached_has_bits & 0x00000400u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(39, this->setting_terrainheight(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(39, this->_internal_setting_terrainheight(), target);
   }
 
   // required bool Setting_ShowSpaceship = 40;
   if (cached_has_bits & 0x00000100u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(40, this->setting_showspaceship(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(40, this->_internal_setting_showspaceship(), target);
   }
 
   // required bool Setting_GenerateSpaceship = 41;
   if (cached_has_bits & 0x00000200u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(41, this->setting_generatespaceship(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(41, this->_internal_setting_generatespaceship(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.CameraSettings camera = 42;
   if (cached_has_bits & 0x00000100u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        42, _Internal::camera(this), target);
+        42, _Internal::camera(this), target, stream);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
   if (cached_has_bits & 0x00000200u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        43, _Internal::grid(this), target);
+        43, _Internal::grid(this), target, stream);
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
   for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->lights_size()); i < n; i++) {
+      n = static_cast<unsigned int>(this->_internal_lights_size()); i < n; i++) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
-        44, this->lights(static_cast<int>(i)), target);
+      InternalWriteMessageToArray(44, this->_internal_lights(i), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.GUISettings)
   return target;
@@ -2374,7 +1570,7 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required string heightmapImage = 37;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->heightmapimage());
+        this->_internal_heightmapimage());
   }
 
   if (has_setting_outlinecolor()) {
@@ -2474,14 +1670,14 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required int32 Setting_GridSize = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_gridsize());
+        this->_internal_setting_gridsize());
   }
 
   if (has_setting_skybox()) {
     // required int32 Setting_Skybox = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_skybox());
+        this->_internal_setting_skybox());
   }
 
   if (has_setting_fixedgridworld()) {
@@ -2508,14 +1704,14 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required int32 Setting_LightingPass_DrawMode = 17;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_lightingpass_drawmode());
+        this->_internal_setting_lightingpass_drawmode());
   }
 
   if (has_setting_deferredtestlightsnumber()) {
     // required int32 Setting_DeferredTestLightsNumber = 18;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_deferredtestlightsnumber());
+        this->_internal_setting_deferredtestlightsnumber());
   }
 
   if (has_setting_deferredambientstrength()) {
@@ -2527,7 +1723,7 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required int32 viewModelSkin = 20;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->viewmodelskin());
+        this->_internal_viewmodelskin());
   }
 
   if (has_setting_deferredtestmode()) {
@@ -2589,7 +1785,7 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required int32 Setting_TerrainWidth = 38;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_terrainwidth());
+        this->_internal_setting_terrainwidth());
   }
 
   if (has_setting_terrainanimatex()) {
@@ -2616,7 +1812,7 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
     // required int32 Setting_TerrainHeight = 39;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_terrainheight());
+        this->_internal_setting_terrainheight());
   }
 
   return total_size;
@@ -2625,17 +1821,12 @@ size_t GUISettings::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.GUISettings)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if ((((_has_bits_[0] & 0xffffffff) ^ 0xffffffff)
        | ((_has_bits_[1] & 0x000007ff) ^ 0x000007ff)) == 0) {  // All required fields are present.
     // required string heightmapImage = 37;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->heightmapimage());
+        this->_internal_heightmapimage());
 
     // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
     total_size += 1 +
@@ -2703,12 +1894,12 @@ size_t GUISettings::ByteSizeLong() const {
     // required int32 Setting_GridSize = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_gridsize());
+        this->_internal_setting_gridsize());
 
     // required int32 Setting_Skybox = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_skybox());
+        this->_internal_setting_skybox());
 
     // required bool Setting_FixedGridWorld = 11;
     total_size += 1 + 1;
@@ -2725,12 +1916,12 @@ size_t GUISettings::ByteSizeLong() const {
     // required int32 Setting_LightingPass_DrawMode = 17;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_lightingpass_drawmode());
+        this->_internal_setting_lightingpass_drawmode());
 
     // required int32 Setting_DeferredTestLightsNumber = 18;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_deferredtestlightsnumber());
+        this->_internal_setting_deferredtestlightsnumber());
 
     // required float Setting_DeferredAmbientStrength = 19;
     total_size += 2 + 4;
@@ -2738,7 +1929,7 @@ size_t GUISettings::ByteSizeLong() const {
     // required int32 viewModelSkin = 20;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->viewmodelskin());
+        this->_internal_viewmodelskin());
 
     // required bool Setting_DeferredTestMode = 15;
     total_size += 1 + 1;
@@ -2776,7 +1967,7 @@ size_t GUISettings::ByteSizeLong() const {
     // required int32 Setting_TerrainWidth = 38;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_terrainwidth());
+        this->_internal_setting_terrainwidth());
 
     // required bool Setting_TerrainAnimateX = 35;
     total_size += 2 + 1;
@@ -2793,7 +1984,7 @@ size_t GUISettings::ByteSizeLong() const {
     // required int32 Setting_TerrainHeight = 39;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->setting_terrainheight());
+        this->_internal_setting_terrainheight());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -2803,16 +1994,16 @@ size_t GUISettings::ByteSizeLong() const {
   (void) cached_has_bits;
 
   // repeated .KuplungApp.LightObject lights = 44;
-  {
-    unsigned int count = static_cast<unsigned int>(this->lights_size());
-    total_size += 2UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-          this->lights(static_cast<int>(i)));
-    }
+  total_size += 2UL * this->_internal_lights_size();
+  for (const auto& msg : this->lights_) {
+    total_size +=
+      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -2848,33 +2039,33 @@ void GUISettings::MergeFrom(const GUISettings& from) {
       heightmapimage_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.heightmapimage_);
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_setting_outlinecolor()->::KuplungApp::Vec4::MergeFrom(from.setting_outlinecolor());
+      _internal_mutable_setting_outlinecolor()->::KuplungApp::Vec4::MergeFrom(from._internal_setting_outlinecolor());
     }
     if (cached_has_bits & 0x00000004u) {
-      mutable_setting_uiambientlight()->::KuplungApp::Vec3::MergeFrom(from.setting_uiambientlight());
+      _internal_mutable_setting_uiambientlight()->::KuplungApp::Vec3::MergeFrom(from._internal_setting_uiambientlight());
     }
     if (cached_has_bits & 0x00000008u) {
-      mutable_solidlight_direction()->::KuplungApp::Vec3::MergeFrom(from.solidlight_direction());
+      _internal_mutable_solidlight_direction()->::KuplungApp::Vec3::MergeFrom(from._internal_solidlight_direction());
     }
     if (cached_has_bits & 0x00000010u) {
-      mutable_solidlight_materialcolor()->::KuplungApp::Vec3::MergeFrom(from.solidlight_materialcolor());
+      _internal_mutable_solidlight_materialcolor()->::KuplungApp::Vec3::MergeFrom(from._internal_solidlight_materialcolor());
     }
     if (cached_has_bits & 0x00000020u) {
-      mutable_solidlight_ambient()->::KuplungApp::Vec3::MergeFrom(from.solidlight_ambient());
+      _internal_mutable_solidlight_ambient()->::KuplungApp::Vec3::MergeFrom(from._internal_solidlight_ambient());
     }
     if (cached_has_bits & 0x00000040u) {
-      mutable_solidlight_diffuse()->::KuplungApp::Vec3::MergeFrom(from.solidlight_diffuse());
+      _internal_mutable_solidlight_diffuse()->::KuplungApp::Vec3::MergeFrom(from._internal_solidlight_diffuse());
     }
     if (cached_has_bits & 0x00000080u) {
-      mutable_solidlight_specular()->::KuplungApp::Vec3::MergeFrom(from.solidlight_specular());
+      _internal_mutable_solidlight_specular()->::KuplungApp::Vec3::MergeFrom(from._internal_solidlight_specular());
     }
   }
   if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      mutable_camera()->::KuplungApp::CameraSettings::MergeFrom(from.camera());
+      _internal_mutable_camera()->::KuplungApp::CameraSettings::MergeFrom(from._internal_camera());
     }
     if (cached_has_bits & 0x00000200u) {
-      mutable_grid()->::KuplungApp::GridSettings::MergeFrom(from.grid());
+      _internal_mutable_grid()->::KuplungApp::GridSettings::MergeFrom(from._internal_grid());
     }
     if (cached_has_bits & 0x00000400u) {
       setting_fov_ = from.setting_fov_;
@@ -3045,7 +2236,7 @@ void GUISettings::InternalSwap(GUISettings* other) {
   _internal_metadata_.Swap(&other->_internal_metadata_);
   swap(_has_bits_[0], other->_has_bits_[0]);
   swap(_has_bits_[1], other->_has_bits_[1]);
-  CastToBase(&lights_)->InternalSwap(CastToBase(&other->lights_));
+  lights_.InternalSwap(&other->lights_);
   heightmapimage_.Swap(&other->heightmapimage_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
     GetArenaNoVirtual());
   swap(setting_outlinecolor_, other->setting_outlinecolor_);
@@ -3298,67 +2489,67 @@ CameraSettings::CameraSettings(const CameraSettings& from)
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_cameraposition()) {
+  if (from._internal_has_cameraposition()) {
     cameraposition_ = new ::KuplungApp::Vec3(*from.cameraposition_);
   } else {
     cameraposition_ = nullptr;
   }
-  if (from.has_view_eye()) {
+  if (from._internal_has_view_eye()) {
     view_eye_ = new ::KuplungApp::Vec3(*from.view_eye_);
   } else {
     view_eye_ = nullptr;
   }
-  if (from.has_view_center()) {
+  if (from._internal_has_view_center()) {
     view_center_ = new ::KuplungApp::Vec3(*from.view_center_);
   } else {
     view_center_ = nullptr;
   }
-  if (from.has_view_up()) {
+  if (from._internal_has_view_up()) {
     view_up_ = new ::KuplungApp::Vec3(*from.view_up_);
   } else {
     view_up_ = nullptr;
   }
-  if (from.has_positionx()) {
+  if (from._internal_has_positionx()) {
     positionx_ = new ::KuplungApp::ObjectCoordinate(*from.positionx_);
   } else {
     positionx_ = nullptr;
   }
-  if (from.has_positiony()) {
+  if (from._internal_has_positiony()) {
     positiony_ = new ::KuplungApp::ObjectCoordinate(*from.positiony_);
   } else {
     positiony_ = nullptr;
   }
-  if (from.has_positionz()) {
+  if (from._internal_has_positionz()) {
     positionz_ = new ::KuplungApp::ObjectCoordinate(*from.positionz_);
   } else {
     positionz_ = nullptr;
   }
-  if (from.has_rotatex()) {
+  if (from._internal_has_rotatex()) {
     rotatex_ = new ::KuplungApp::ObjectCoordinate(*from.rotatex_);
   } else {
     rotatex_ = nullptr;
   }
-  if (from.has_rotatey()) {
+  if (from._internal_has_rotatey()) {
     rotatey_ = new ::KuplungApp::ObjectCoordinate(*from.rotatey_);
   } else {
     rotatey_ = nullptr;
   }
-  if (from.has_rotatez()) {
+  if (from._internal_has_rotatez()) {
     rotatez_ = new ::KuplungApp::ObjectCoordinate(*from.rotatez_);
   } else {
     rotatez_ = nullptr;
   }
-  if (from.has_rotatecenterx()) {
+  if (from._internal_has_rotatecenterx()) {
     rotatecenterx_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecenterx_);
   } else {
     rotatecenterx_ = nullptr;
   }
-  if (from.has_rotatecentery()) {
+  if (from._internal_has_rotatecentery()) {
     rotatecentery_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecentery_);
   } else {
     rotatecentery_ = nullptr;
   }
-  if (from.has_rotatecenterz()) {
+  if (from._internal_has_rotatecenterz()) {
     rotatecenterz_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecenterz_);
   } else {
     rotatecenterz_ = nullptr;
@@ -3470,7 +2661,6 @@ void CameraSettings::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* CameraSettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -3482,91 +2672,91 @@ const char* CameraSettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE
       // required .KuplungApp.Vec3 cameraPosition = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ctx->ParseMessage(mutable_cameraposition(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_cameraposition(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 View_Eye = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ctx->ParseMessage(mutable_view_eye(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_view_eye(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 View_Center = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_view_center(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_view_center(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.Vec3 View_Up = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ctx->ParseMessage(mutable_view_up(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_view_up(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionX = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ctx->ParseMessage(mutable_positionx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionY = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          ptr = ctx->ParseMessage(mutable_positiony(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positiony(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionZ = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
-          ptr = ctx->ParseMessage(mutable_positionz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateX = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
-          ptr = ctx->ParseMessage(mutable_rotatex(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatex(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateY = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ctx->ParseMessage(mutable_rotatey(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatey(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateZ = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr = ctx->ParseMessage(mutable_rotatez(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatez(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
       case 11:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr = ctx->ParseMessage(mutable_rotatecenterx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecenterx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
       case 12:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
-          ptr = ctx->ParseMessage(mutable_rotatecentery(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecentery(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
       case 13:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
-          ptr = ctx->ParseMessage(mutable_rotatecenterz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecenterz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -3590,275 +2780,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool CameraSettings::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.CameraSettings)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required .KuplungApp.Vec3 cameraPosition = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_cameraposition()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 View_Eye = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_view_eye()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 View_Center = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_view_center()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.Vec3 View_Up = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_view_up()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionX = 5;
-      case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionY = 6;
-      case 6: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positiony()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionZ = 7;
-      case 7: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (58 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateX = 8;
-      case 8: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (66 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatex()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateY = 9;
-      case 9: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatey()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateZ = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatez()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
-      case 11: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecenterx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
-      case 12: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecentery()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
-      case 13: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (106 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecenterz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.CameraSettings)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.CameraSettings)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void CameraSettings::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.CameraSettings)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required .KuplungApp.Vec3 cameraPosition = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, _Internal::cameraposition(this), output);
-  }
-
-  // required .KuplungApp.Vec3 View_Eye = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      2, _Internal::view_eye(this), output);
-  }
-
-  // required .KuplungApp.Vec3 View_Center = 3;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, _Internal::view_center(this), output);
-  }
-
-  // required .KuplungApp.Vec3 View_Up = 4;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, _Internal::view_up(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionX = 5;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, _Internal::positionx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionY = 6;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, _Internal::positiony(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionZ = 7;
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, _Internal::positionz(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateX = 8;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, _Internal::rotatex(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateY = 9;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, _Internal::rotatey(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateZ = 10;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, _Internal::rotatez(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, _Internal::rotatecenterx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
-  if (cached_has_bits & 0x00000800u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, _Internal::rotatecentery(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
-  if (cached_has_bits & 0x00001000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, _Internal::rotatecenterz(this), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.CameraSettings)
-}
 
 ::PROTOBUF_NAMESPACE_ID::uint8* CameraSettings::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.CameraSettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -3866,98 +2790,111 @@ void CameraSettings::SerializeWithCachedSizes(
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 cameraPosition = 1;
   if (cached_has_bits & 0x00000001u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        1, _Internal::cameraposition(this), target);
+        1, _Internal::cameraposition(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
   if (cached_has_bits & 0x00000002u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        2, _Internal::view_eye(this), target);
+        2, _Internal::view_eye(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
   if (cached_has_bits & 0x00000004u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, _Internal::view_center(this), target);
+        3, _Internal::view_center(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
   if (cached_has_bits & 0x00000008u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, _Internal::view_up(this), target);
+        4, _Internal::view_up(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
   if (cached_has_bits & 0x00000010u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, _Internal::positionx(this), target);
+        5, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
   if (cached_has_bits & 0x00000020u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, _Internal::positiony(this), target);
+        6, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
   if (cached_has_bits & 0x00000040u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, _Internal::positionz(this), target);
+        7, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
   if (cached_has_bits & 0x00000080u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, _Internal::rotatex(this), target);
+        8, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
   if (cached_has_bits & 0x00000100u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, _Internal::rotatey(this), target);
+        9, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
   if (cached_has_bits & 0x00000200u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, _Internal::rotatez(this), target);
+        10, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
   if (cached_has_bits & 0x00000400u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, _Internal::rotatecenterx(this), target);
+        11, _Internal::rotatecenterx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
   if (cached_has_bits & 0x00000800u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, _Internal::rotatecentery(this), target);
+        12, _Internal::rotatecentery(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
   if (cached_has_bits & 0x00001000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, _Internal::rotatecenterz(this), target);
+        13, _Internal::rotatecenterz(this), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.CameraSettings)
   return target;
@@ -4064,11 +3001,6 @@ size_t CameraSettings::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.CameraSettings)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x00001fff) ^ 0x00001fff) == 0) {  // All required fields are present.
     // required .KuplungApp.Vec3 cameraPosition = 1;
     total_size += 1 +
@@ -4142,6 +3074,10 @@ size_t CameraSettings::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -4172,45 +3108,45 @@ void CameraSettings::MergeFrom(const CameraSettings& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      mutable_cameraposition()->::KuplungApp::Vec3::MergeFrom(from.cameraposition());
+      _internal_mutable_cameraposition()->::KuplungApp::Vec3::MergeFrom(from._internal_cameraposition());
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_view_eye()->::KuplungApp::Vec3::MergeFrom(from.view_eye());
+      _internal_mutable_view_eye()->::KuplungApp::Vec3::MergeFrom(from._internal_view_eye());
     }
     if (cached_has_bits & 0x00000004u) {
-      mutable_view_center()->::KuplungApp::Vec3::MergeFrom(from.view_center());
+      _internal_mutable_view_center()->::KuplungApp::Vec3::MergeFrom(from._internal_view_center());
     }
     if (cached_has_bits & 0x00000008u) {
-      mutable_view_up()->::KuplungApp::Vec3::MergeFrom(from.view_up());
+      _internal_mutable_view_up()->::KuplungApp::Vec3::MergeFrom(from._internal_view_up());
     }
     if (cached_has_bits & 0x00000010u) {
-      mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
+      _internal_mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionx());
     }
     if (cached_has_bits & 0x00000020u) {
-      mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
+      _internal_mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positiony());
     }
     if (cached_has_bits & 0x00000040u) {
-      mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
+      _internal_mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionz());
     }
     if (cached_has_bits & 0x00000080u) {
-      mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
+      _internal_mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatex());
     }
   }
   if (cached_has_bits & 0x00001f00u) {
     if (cached_has_bits & 0x00000100u) {
-      mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
+      _internal_mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatey());
     }
     if (cached_has_bits & 0x00000200u) {
-      mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
+      _internal_mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatez());
     }
     if (cached_has_bits & 0x00000400u) {
-      mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterx());
+      _internal_mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecenterx());
     }
     if (cached_has_bits & 0x00000800u) {
-      mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecentery());
+      _internal_mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecentery());
     }
     if (cached_has_bits & 0x00001000u) {
-      mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterz());
+      _internal_mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecenterz());
     }
   }
 }
@@ -4454,47 +3390,47 @@ GridSettings::GridSettings(const GridSettings& from)
       _internal_metadata_(nullptr),
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.has_positionx()) {
+  if (from._internal_has_positionx()) {
     positionx_ = new ::KuplungApp::ObjectCoordinate(*from.positionx_);
   } else {
     positionx_ = nullptr;
   }
-  if (from.has_positiony()) {
+  if (from._internal_has_positiony()) {
     positiony_ = new ::KuplungApp::ObjectCoordinate(*from.positiony_);
   } else {
     positiony_ = nullptr;
   }
-  if (from.has_positionz()) {
+  if (from._internal_has_positionz()) {
     positionz_ = new ::KuplungApp::ObjectCoordinate(*from.positionz_);
   } else {
     positionz_ = nullptr;
   }
-  if (from.has_rotatex()) {
+  if (from._internal_has_rotatex()) {
     rotatex_ = new ::KuplungApp::ObjectCoordinate(*from.rotatex_);
   } else {
     rotatex_ = nullptr;
   }
-  if (from.has_rotatey()) {
+  if (from._internal_has_rotatey()) {
     rotatey_ = new ::KuplungApp::ObjectCoordinate(*from.rotatey_);
   } else {
     rotatey_ = nullptr;
   }
-  if (from.has_rotatez()) {
+  if (from._internal_has_rotatez()) {
     rotatez_ = new ::KuplungApp::ObjectCoordinate(*from.rotatez_);
   } else {
     rotatez_ = nullptr;
   }
-  if (from.has_scalex()) {
+  if (from._internal_has_scalex()) {
     scalex_ = new ::KuplungApp::ObjectCoordinate(*from.scalex_);
   } else {
     scalex_ = nullptr;
   }
-  if (from.has_scaley()) {
+  if (from._internal_has_scaley()) {
     scaley_ = new ::KuplungApp::ObjectCoordinate(*from.scaley_);
   } else {
     scaley_ = nullptr;
   }
-  if (from.has_scalez()) {
+  if (from._internal_has_scalez()) {
     scalez_ = new ::KuplungApp::ObjectCoordinate(*from.scalez_);
   } else {
     scalez_ = nullptr;
@@ -4592,7 +3528,6 @@ void GridSettings::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* GridSettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -4620,63 +3555,63 @@ const char* GridSettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_I
       // required .KuplungApp.ObjectCoordinate positionX = 3;
       case 3:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(mutable_positionx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionY = 4;
       case 4:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ctx->ParseMessage(mutable_positiony(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positiony(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionZ = 5;
       case 5:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ctx->ParseMessage(mutable_positionz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateX = 6;
       case 6:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          ptr = ctx->ParseMessage(mutable_rotatex(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatex(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateY = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
-          ptr = ctx->ParseMessage(mutable_rotatey(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatey(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateZ = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
-          ptr = ctx->ParseMessage(mutable_rotatez(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatez(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleX = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ctx->ParseMessage(mutable_scalex(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scalex(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleY = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr = ctx->ParseMessage(mutable_scaley(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scaley(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleZ = 11;
       case 11:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr = ctx->ParseMessage(mutable_scalez(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scalez(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4716,279 +3651,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool GridSettings::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.GridSettings)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bool actAsMirror = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (8 & 0xFF)) {
-          _Internal::set_has_actasmirror(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &actasmirror_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 gridSize = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (16 & 0xFF)) {
-          _Internal::set_has_gridsize(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &gridsize_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionX = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (26 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionY = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (34 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positiony()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionZ = 5;
-      case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (42 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateX = 6;
-      case 6: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (50 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatex()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateY = 7;
-      case 7: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (58 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatey()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateZ = 8;
-      case 8: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (66 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatez()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleX = 9;
-      case 9: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scalex()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleY = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scaley()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleZ = 11;
-      case 11: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scalez()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required float transparency = 12;
-      case 12: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (101 & 0xFF)) {
-          _Internal::set_has_transparency(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   float, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_FLOAT>(
-                 input, &transparency_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 showGrid = 13;
-      case 13: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (104 & 0xFF)) {
-          _Internal::set_has_showgrid(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &showgrid_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.GridSettings)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.GridSettings)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void GridSettings::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.GridSettings)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required bool actAsMirror = 1;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(1, this->actasmirror(), output);
-  }
-
-  // required int32 gridSize = 2;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(2, this->gridsize(), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionX = 3;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      3, _Internal::positionx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionY = 4;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      4, _Internal::positiony(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionZ = 5;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      5, _Internal::positionz(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateX = 6;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      6, _Internal::rotatex(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateY = 7;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, _Internal::rotatey(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateZ = 8;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, _Internal::rotatez(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleX = 9;
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, _Internal::scalex(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleY = 10;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, _Internal::scaley(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleZ = 11;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, _Internal::scalez(this), output);
-  }
-
-  // required float transparency = 12;
-  if (cached_has_bits & 0x00000800u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloat(12, this->transparency(), output);
-  }
-
-  // required int32 showGrid = 13;
-  if (cached_has_bits & 0x00001000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(13, this->showgrid(), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.GridSettings)
-}
 
 ::PROTOBUF_NAMESPACE_ID::uint8* GridSettings::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GridSettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -4996,90 +3661,103 @@ void GridSettings::SerializeWithCachedSizes(
   cached_has_bits = _has_bits_[0];
   // required bool actAsMirror = 1;
   if (cached_has_bits & 0x00000200u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->actasmirror(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_actasmirror(), target);
   }
 
   // required int32 gridSize = 2;
   if (cached_has_bits & 0x00000400u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->gridsize(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_gridsize(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 3;
   if (cached_has_bits & 0x00000001u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        3, _Internal::positionx(this), target);
+        3, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
   if (cached_has_bits & 0x00000002u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        4, _Internal::positiony(this), target);
+        4, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
   if (cached_has_bits & 0x00000004u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        5, _Internal::positionz(this), target);
+        5, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
   if (cached_has_bits & 0x00000008u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        6, _Internal::rotatex(this), target);
+        6, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
   if (cached_has_bits & 0x00000010u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, _Internal::rotatey(this), target);
+        7, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
   if (cached_has_bits & 0x00000020u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, _Internal::rotatez(this), target);
+        8, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
   if (cached_has_bits & 0x00000040u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, _Internal::scalex(this), target);
+        9, _Internal::scalex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
   if (cached_has_bits & 0x00000080u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, _Internal::scaley(this), target);
+        10, _Internal::scaley(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
   if (cached_has_bits & 0x00000100u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, _Internal::scalez(this), target);
+        11, _Internal::scalez(this), target, stream);
   }
 
   // required float transparency = 12;
   if (cached_has_bits & 0x00000800u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(12, this->transparency(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(12, this->_internal_transparency(), target);
   }
 
   // required int32 showGrid = 13;
   if (cached_has_bits & 0x00001000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(13, this->showgrid(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(13, this->_internal_showgrid(), target);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.GridSettings)
   return target;
@@ -5161,7 +3839,7 @@ size_t GridSettings::RequiredFieldsByteSizeFallback() const {
     // required int32 gridSize = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->gridsize());
+        this->_internal_gridsize());
   }
 
   if (has_transparency()) {
@@ -5173,7 +3851,7 @@ size_t GridSettings::RequiredFieldsByteSizeFallback() const {
     // required int32 showGrid = 13;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->showgrid());
+        this->_internal_showgrid());
   }
 
   return total_size;
@@ -5182,11 +3860,6 @@ size_t GridSettings::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.GridSettings)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x00001fff) ^ 0x00001fff) == 0) {  // All required fields are present.
     // required .KuplungApp.ObjectCoordinate positionX = 3;
     total_size += 1 +
@@ -5239,7 +3912,7 @@ size_t GridSettings::ByteSizeLong() const {
     // required int32 gridSize = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->gridsize());
+        this->_internal_gridsize());
 
     // required float transparency = 12;
     total_size += 1 + 4;
@@ -5247,7 +3920,7 @@ size_t GridSettings::ByteSizeLong() const {
     // required int32 showGrid = 13;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->showgrid());
+        this->_internal_showgrid());
 
   } else {
     total_size += RequiredFieldsByteSizeFallback();
@@ -5256,6 +3929,10 @@ size_t GridSettings::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -5286,33 +3963,33 @@ void GridSettings::MergeFrom(const GridSettings& from) {
   cached_has_bits = from._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
+      _internal_mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionx());
     }
     if (cached_has_bits & 0x00000002u) {
-      mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
+      _internal_mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positiony());
     }
     if (cached_has_bits & 0x00000004u) {
-      mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
+      _internal_mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionz());
     }
     if (cached_has_bits & 0x00000008u) {
-      mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
+      _internal_mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatex());
     }
     if (cached_has_bits & 0x00000010u) {
-      mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
+      _internal_mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatey());
     }
     if (cached_has_bits & 0x00000020u) {
-      mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
+      _internal_mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatez());
     }
     if (cached_has_bits & 0x00000040u) {
-      mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalex());
+      _internal_mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scalex());
     }
     if (cached_has_bits & 0x00000080u) {
-      mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scaley());
+      _internal_mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scaley());
     }
   }
   if (cached_has_bits & 0x00001f00u) {
     if (cached_has_bits & 0x00000100u) {
-      mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalez());
+      _internal_mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scalez());
     }
     if (cached_has_bits & 0x00000200u) {
       actasmirror_ = from.actasmirror_;
@@ -5760,124 +4437,124 @@ LightObject::LightObject(const LightObject& from)
       _has_bits_(from._has_bits_) {
   _internal_metadata_.MergeFrom(from._internal_metadata_);
   title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_title()) {
+  if (from._internal_has_title()) {
     title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.title_);
   }
   description_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from.has_description()) {
+  if (from._internal_has_description()) {
     description_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.description_);
   }
-  if (from.has_positionx()) {
+  if (from._internal_has_positionx()) {
     positionx_ = new ::KuplungApp::ObjectCoordinate(*from.positionx_);
   } else {
     positionx_ = nullptr;
   }
-  if (from.has_positiony()) {
+  if (from._internal_has_positiony()) {
     positiony_ = new ::KuplungApp::ObjectCoordinate(*from.positiony_);
   } else {
     positiony_ = nullptr;
   }
-  if (from.has_positionz()) {
+  if (from._internal_has_positionz()) {
     positionz_ = new ::KuplungApp::ObjectCoordinate(*from.positionz_);
   } else {
     positionz_ = nullptr;
   }
-  if (from.has_directionx()) {
+  if (from._internal_has_directionx()) {
     directionx_ = new ::KuplungApp::ObjectCoordinate(*from.directionx_);
   } else {
     directionx_ = nullptr;
   }
-  if (from.has_directiony()) {
+  if (from._internal_has_directiony()) {
     directiony_ = new ::KuplungApp::ObjectCoordinate(*from.directiony_);
   } else {
     directiony_ = nullptr;
   }
-  if (from.has_directionz()) {
+  if (from._internal_has_directionz()) {
     directionz_ = new ::KuplungApp::ObjectCoordinate(*from.directionz_);
   } else {
     directionz_ = nullptr;
   }
-  if (from.has_scalex()) {
+  if (from._internal_has_scalex()) {
     scalex_ = new ::KuplungApp::ObjectCoordinate(*from.scalex_);
   } else {
     scalex_ = nullptr;
   }
-  if (from.has_scaley()) {
+  if (from._internal_has_scaley()) {
     scaley_ = new ::KuplungApp::ObjectCoordinate(*from.scaley_);
   } else {
     scaley_ = nullptr;
   }
-  if (from.has_scalez()) {
+  if (from._internal_has_scalez()) {
     scalez_ = new ::KuplungApp::ObjectCoordinate(*from.scalez_);
   } else {
     scalez_ = nullptr;
   }
-  if (from.has_rotatex()) {
+  if (from._internal_has_rotatex()) {
     rotatex_ = new ::KuplungApp::ObjectCoordinate(*from.rotatex_);
   } else {
     rotatex_ = nullptr;
   }
-  if (from.has_rotatey()) {
+  if (from._internal_has_rotatey()) {
     rotatey_ = new ::KuplungApp::ObjectCoordinate(*from.rotatey_);
   } else {
     rotatey_ = nullptr;
   }
-  if (from.has_rotatez()) {
+  if (from._internal_has_rotatez()) {
     rotatez_ = new ::KuplungApp::ObjectCoordinate(*from.rotatez_);
   } else {
     rotatez_ = nullptr;
   }
-  if (from.has_rotatecenterx()) {
+  if (from._internal_has_rotatecenterx()) {
     rotatecenterx_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecenterx_);
   } else {
     rotatecenterx_ = nullptr;
   }
-  if (from.has_rotatecentery()) {
+  if (from._internal_has_rotatecentery()) {
     rotatecentery_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecentery_);
   } else {
     rotatecentery_ = nullptr;
   }
-  if (from.has_rotatecenterz()) {
+  if (from._internal_has_rotatecenterz()) {
     rotatecenterz_ = new ::KuplungApp::ObjectCoordinate(*from.rotatecenterz_);
   } else {
     rotatecenterz_ = nullptr;
   }
-  if (from.has_ambient()) {
+  if (from._internal_has_ambient()) {
     ambient_ = new ::KuplungApp::MaterialColor(*from.ambient_);
   } else {
     ambient_ = nullptr;
   }
-  if (from.has_diffuse()) {
+  if (from._internal_has_diffuse()) {
     diffuse_ = new ::KuplungApp::MaterialColor(*from.diffuse_);
   } else {
     diffuse_ = nullptr;
   }
-  if (from.has_specular()) {
+  if (from._internal_has_specular()) {
     specular_ = new ::KuplungApp::MaterialColor(*from.specular_);
   } else {
     specular_ = nullptr;
   }
-  if (from.has_lcutoff()) {
+  if (from._internal_has_lcutoff()) {
     lcutoff_ = new ::KuplungApp::ObjectCoordinate(*from.lcutoff_);
   } else {
     lcutoff_ = nullptr;
   }
-  if (from.has_loutercutoff()) {
+  if (from._internal_has_loutercutoff()) {
     loutercutoff_ = new ::KuplungApp::ObjectCoordinate(*from.loutercutoff_);
   } else {
     loutercutoff_ = nullptr;
   }
-  if (from.has_lconstant()) {
+  if (from._internal_has_lconstant()) {
     lconstant_ = new ::KuplungApp::ObjectCoordinate(*from.lconstant_);
   } else {
     lconstant_ = nullptr;
   }
-  if (from.has_llinear()) {
+  if (from._internal_has_llinear()) {
     llinear_ = new ::KuplungApp::ObjectCoordinate(*from.llinear_);
   } else {
     llinear_ = nullptr;
   }
-  if (from.has_lquadratic()) {
+  if (from._internal_has_lquadratic()) {
     lquadratic_ = new ::KuplungApp::ObjectCoordinate(*from.lquadratic_);
   } else {
     lquadratic_ = nullptr;
@@ -6059,7 +4736,6 @@ void LightObject::Clear() {
   _internal_metadata_.Clear();
 }
 
-#if GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
 const char* LightObject::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
 #define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
   _Internal::HasBits has_bits{};
@@ -6071,14 +4747,14 @@ const char* LightObject::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required string title = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_title(), ptr, ctx, "KuplungApp.LightObject.title");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_title(), ptr, ctx, "KuplungApp.LightObject.title");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required string description = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(mutable_description(), ptr, ctx, "KuplungApp.LightObject.description");
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_description(), ptr, ctx, "KuplungApp.LightObject.description");
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -6117,161 +4793,161 @@ const char* LightObject::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required .KuplungApp.ObjectCoordinate positionX = 7;
       case 7:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 58)) {
-          ptr = ctx->ParseMessage(mutable_positionx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionY = 8;
       case 8:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 66)) {
-          ptr = ctx->ParseMessage(mutable_positiony(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positiony(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate positionZ = 9;
       case 9:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ctx->ParseMessage(mutable_positionz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_positionz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate directionX = 10;
       case 10:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr = ctx->ParseMessage(mutable_directionx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_directionx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate directionY = 11;
       case 11:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr = ctx->ParseMessage(mutable_directiony(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_directiony(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate directionZ = 12;
       case 12:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
-          ptr = ctx->ParseMessage(mutable_directionz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_directionz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleX = 13;
       case 13:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
-          ptr = ctx->ParseMessage(mutable_scalex(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scalex(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleY = 14;
       case 14:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
-          ptr = ctx->ParseMessage(mutable_scaley(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scaley(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate scaleZ = 15;
       case 15:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 122)) {
-          ptr = ctx->ParseMessage(mutable_scalez(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_scalez(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateX = 16;
       case 16:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
-          ptr = ctx->ParseMessage(mutable_rotatex(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatex(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateY = 17;
       case 17:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 138)) {
-          ptr = ctx->ParseMessage(mutable_rotatey(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatey(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateZ = 18;
       case 18:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 146)) {
-          ptr = ctx->ParseMessage(mutable_rotatez(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatez(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
       case 19:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 154)) {
-          ptr = ctx->ParseMessage(mutable_rotatecenterx(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecenterx(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
       case 20:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 162)) {
-          ptr = ctx->ParseMessage(mutable_rotatecentery(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecentery(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
       case 21:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 170)) {
-          ptr = ctx->ParseMessage(mutable_rotatecenterz(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_rotatecenterz(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.MaterialColor ambient = 22;
       case 22:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 178)) {
-          ptr = ctx->ParseMessage(mutable_ambient(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_ambient(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.MaterialColor diffuse = 23;
       case 23:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 186)) {
-          ptr = ctx->ParseMessage(mutable_diffuse(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_diffuse(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.MaterialColor specular = 24;
       case 24:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 194)) {
-          ptr = ctx->ParseMessage(mutable_specular(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_specular(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate lCutOff = 25;
       case 25:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 202)) {
-          ptr = ctx->ParseMessage(mutable_lcutoff(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_lcutoff(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
       case 26:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 210)) {
-          ptr = ctx->ParseMessage(mutable_loutercutoff(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_loutercutoff(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate lConstant = 27;
       case 27:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 218)) {
-          ptr = ctx->ParseMessage(mutable_lconstant(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_lconstant(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate lLinear = 28;
       case 28:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 226)) {
-          ptr = ctx->ParseMessage(mutable_llinear(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_llinear(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
       case 29:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 234)) {
-          ptr = ctx->ParseMessage(mutable_lquadratic(), ptr);
+          ptr = ctx->ParseMessage(_internal_mutable_lquadratic(), ptr);
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -6295,567 +4971,9 @@ failure:
   goto success;
 #undef CHK_
 }
-#else  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-bool LightObject::MergePartialFromCodedStream(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!PROTOBUF_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-  // @@protoc_insertion_point(parse_start:KuplungApp.LightObject)
-  for (;;) {
-    ::std::pair<::PROTOBUF_NAMESPACE_ID::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(16383u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required string title = 1;
-      case 1: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (10 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_title()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->title().data(), static_cast<int>(this->title().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "KuplungApp.LightObject.title");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required string description = 2;
-      case 2: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (18 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadString(
-                input, this->mutable_description()));
-          ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-            this->description().data(), static_cast<int>(this->description().length()),
-            ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::PARSE,
-            "KuplungApp.LightObject.description");
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required int32 type = 3;
-      case 3: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (24 & 0xFF)) {
-          _Internal::set_has_type(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   ::PROTOBUF_NAMESPACE_ID::int32, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_INT32>(
-                 input, &type_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool showLampObject = 4;
-      case 4: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (32 & 0xFF)) {
-          _Internal::set_has_showlampobject(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &showlampobject_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool showLampDirection = 5;
-      case 5: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (40 & 0xFF)) {
-          _Internal::set_has_showlampdirection(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &showlampdirection_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required bool showInWire = 6;
-      case 6: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (48 & 0xFF)) {
-          _Internal::set_has_showinwire(&_has_bits_);
-          DO_((::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadPrimitive<
-                   bool, ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::TYPE_BOOL>(
-                 input, &showinwire_)));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionX = 7;
-      case 7: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (58 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionY = 8;
-      case 8: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (66 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positiony()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate positionZ = 9;
-      case 9: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (74 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_positionz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate directionX = 10;
-      case 10: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (82 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_directionx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate directionY = 11;
-      case 11: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (90 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_directiony()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate directionZ = 12;
-      case 12: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (98 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_directionz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleX = 13;
-      case 13: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (106 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scalex()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleY = 14;
-      case 14: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (114 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scaley()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate scaleZ = 15;
-      case 15: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (122 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_scalez()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateX = 16;
-      case 16: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (130 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatex()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateY = 17;
-      case 17: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (138 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatey()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateZ = 18;
-      case 18: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (146 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatez()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
-      case 19: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (154 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecenterx()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
-      case 20: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (162 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecentery()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
-      case 21: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (170 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_rotatecenterz()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.MaterialColor ambient = 22;
-      case 22: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (178 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_ambient()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.MaterialColor diffuse = 23;
-      case 23: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (186 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_diffuse()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.MaterialColor specular = 24;
-      case 24: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (194 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_specular()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate lCutOff = 25;
-      case 25: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (202 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_lcutoff()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
-      case 26: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (210 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_loutercutoff()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate lConstant = 27;
-      case 27: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (218 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_lconstant()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate lLinear = 28;
-      case 28: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (226 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_llinear()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
-      case 29: {
-        if (static_cast< ::PROTOBUF_NAMESPACE_ID::uint8>(tag) == (234 & 0xFF)) {
-          DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::ReadMessage(
-               input, mutable_lquadratic()));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0) {
-          goto success;
-        }
-        DO_(::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SkipField(
-              input, tag, _internal_metadata_.mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:KuplungApp.LightObject)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:KuplungApp.LightObject)
-  return false;
-#undef DO_
-}
-#endif  // GOOGLE_PROTOBUF_ENABLE_EXPERIMENTAL_PARSER
-
-void LightObject::SerializeWithCachedSizes(
-    ::PROTOBUF_NAMESPACE_ID::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:KuplungApp.LightObject)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _has_bits_[0];
-  // required string title = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), static_cast<int>(this->title().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.LightObject.title");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->title(), output);
-  }
-
-  // required string description = 2;
-  if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->description().data(), static_cast<int>(this->description().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.LightObject.description");
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->description(), output);
-  }
-
-  // required int32 type = 3;
-  if (cached_has_bits & 0x02000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32(3, this->type(), output);
-  }
-
-  // required bool showLampObject = 4;
-  if (cached_has_bits & 0x04000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(4, this->showlampobject(), output);
-  }
-
-  // required bool showLampDirection = 5;
-  if (cached_has_bits & 0x08000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(5, this->showlampdirection(), output);
-  }
-
-  // required bool showInWire = 6;
-  if (cached_has_bits & 0x10000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBool(6, this->showinwire(), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionX = 7;
-  if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      7, _Internal::positionx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionY = 8;
-  if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      8, _Internal::positiony(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate positionZ = 9;
-  if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      9, _Internal::positionz(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate directionX = 10;
-  if (cached_has_bits & 0x00000020u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      10, _Internal::directionx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate directionY = 11;
-  if (cached_has_bits & 0x00000040u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      11, _Internal::directiony(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate directionZ = 12;
-  if (cached_has_bits & 0x00000080u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      12, _Internal::directionz(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleX = 13;
-  if (cached_has_bits & 0x00000100u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      13, _Internal::scalex(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleY = 14;
-  if (cached_has_bits & 0x00000200u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      14, _Internal::scaley(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate scaleZ = 15;
-  if (cached_has_bits & 0x00000400u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      15, _Internal::scalez(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateX = 16;
-  if (cached_has_bits & 0x00000800u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      16, _Internal::rotatex(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateY = 17;
-  if (cached_has_bits & 0x00001000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      17, _Internal::rotatey(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateZ = 18;
-  if (cached_has_bits & 0x00002000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      18, _Internal::rotatez(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
-  if (cached_has_bits & 0x00004000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      19, _Internal::rotatecenterx(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
-  if (cached_has_bits & 0x00008000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      20, _Internal::rotatecentery(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
-  if (cached_has_bits & 0x00010000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      21, _Internal::rotatecenterz(this), output);
-  }
-
-  // required .KuplungApp.MaterialColor ambient = 22;
-  if (cached_has_bits & 0x00020000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      22, _Internal::ambient(this), output);
-  }
-
-  // required .KuplungApp.MaterialColor diffuse = 23;
-  if (cached_has_bits & 0x00040000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      23, _Internal::diffuse(this), output);
-  }
-
-  // required .KuplungApp.MaterialColor specular = 24;
-  if (cached_has_bits & 0x00080000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      24, _Internal::specular(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate lCutOff = 25;
-  if (cached_has_bits & 0x00100000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      25, _Internal::lcutoff(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
-  if (cached_has_bits & 0x00200000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      26, _Internal::loutercutoff(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate lConstant = 27;
-  if (cached_has_bits & 0x00400000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      27, _Internal::lconstant(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate lLinear = 28;
-  if (cached_has_bits & 0x00800000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      28, _Internal::llinear(this), output);
-  }
-
-  // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
-  if (cached_has_bits & 0x01000000u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteMessageMaybeToArray(
-      29, _Internal::lquadratic(this), output);
-  }
-
-  if (_internal_metadata_.have_unknown_fields()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFields(
-        _internal_metadata_.unknown_fields(), output);
-  }
-  // @@protoc_insertion_point(serialize_end:KuplungApp.LightObject)
-}
 
 ::PROTOBUF_NAMESPACE_ID::uint8* LightObject::InternalSerializeWithCachedSizesToArray(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target) const {
+    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.LightObject)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
   (void) cached_has_bits;
@@ -6864,209 +4982,234 @@ void LightObject::SerializeWithCachedSizes(
   // required string title = 1;
   if (cached_has_bits & 0x00000001u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->title().data(), static_cast<int>(this->title().length()),
+      this->_internal_title().data(), static_cast<int>(this->_internal_title().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.title");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        1, this->title(), target);
+    target = stream->WriteStringMaybeAliased(
+        1, this->_internal_title(), target);
   }
 
   // required string description = 2;
   if (cached_has_bits & 0x00000002u) {
     ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->description().data(), static_cast<int>(this->description().length()),
+      this->_internal_description().data(), static_cast<int>(this->_internal_description().length()),
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "KuplungApp.LightObject.description");
-    target =
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteStringToArray(
-        2, this->description(), target);
+    target = stream->WriteStringMaybeAliased(
+        2, this->_internal_description(), target);
   }
 
   // required int32 type = 3;
   if (cached_has_bits & 0x02000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->type(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_type(), target);
   }
 
   // required bool showLampObject = 4;
   if (cached_has_bits & 0x04000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->showlampobject(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->_internal_showlampobject(), target);
   }
 
   // required bool showLampDirection = 5;
   if (cached_has_bits & 0x08000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->showlampdirection(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_showlampdirection(), target);
   }
 
   // required bool showInWire = 6;
   if (cached_has_bits & 0x10000000u) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(6, this->showinwire(), target);
+    stream->EnsureSpace(&target);
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(6, this->_internal_showinwire(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 7;
   if (cached_has_bits & 0x00000004u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        7, _Internal::positionx(this), target);
+        7, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (cached_has_bits & 0x00000008u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        8, _Internal::positiony(this), target);
+        8, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (cached_has_bits & 0x00000010u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        9, _Internal::positionz(this), target);
+        9, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (cached_has_bits & 0x00000020u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        10, _Internal::directionx(this), target);
+        10, _Internal::directionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (cached_has_bits & 0x00000040u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        11, _Internal::directiony(this), target);
+        11, _Internal::directiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (cached_has_bits & 0x00000080u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        12, _Internal::directionz(this), target);
+        12, _Internal::directionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (cached_has_bits & 0x00000100u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        13, _Internal::scalex(this), target);
+        13, _Internal::scalex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (cached_has_bits & 0x00000200u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        14, _Internal::scaley(this), target);
+        14, _Internal::scaley(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (cached_has_bits & 0x00000400u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        15, _Internal::scalez(this), target);
+        15, _Internal::scalez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (cached_has_bits & 0x00000800u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        16, _Internal::rotatex(this), target);
+        16, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (cached_has_bits & 0x00001000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        17, _Internal::rotatey(this), target);
+        17, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (cached_has_bits & 0x00002000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        18, _Internal::rotatez(this), target);
+        18, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (cached_has_bits & 0x00004000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        19, _Internal::rotatecenterx(this), target);
+        19, _Internal::rotatecenterx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (cached_has_bits & 0x00008000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        20, _Internal::rotatecentery(this), target);
+        20, _Internal::rotatecentery(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (cached_has_bits & 0x00010000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        21, _Internal::rotatecenterz(this), target);
+        21, _Internal::rotatecenterz(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
   if (cached_has_bits & 0x00020000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        22, _Internal::ambient(this), target);
+        22, _Internal::ambient(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
   if (cached_has_bits & 0x00040000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        23, _Internal::diffuse(this), target);
+        23, _Internal::diffuse(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
   if (cached_has_bits & 0x00080000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        24, _Internal::specular(this), target);
+        24, _Internal::specular(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
   if (cached_has_bits & 0x00100000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        25, _Internal::lcutoff(this), target);
+        25, _Internal::lcutoff(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
   if (cached_has_bits & 0x00200000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        26, _Internal::loutercutoff(this), target);
+        26, _Internal::loutercutoff(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
   if (cached_has_bits & 0x00400000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        27, _Internal::lconstant(this), target);
+        27, _Internal::lconstant(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
   if (cached_has_bits & 0x00800000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        28, _Internal::llinear(this), target);
+        28, _Internal::llinear(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
   if (cached_has_bits & 0x01000000u) {
+    stream->EnsureSpace(&target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessageToArray(
-        29, _Internal::lquadratic(this), target);
+        29, _Internal::lquadratic(this), target, stream);
   }
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target);
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
+        _internal_metadata_.unknown_fields(), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.LightObject)
   return target;
@@ -7080,14 +5223,14 @@ size_t LightObject::RequiredFieldsByteSizeFallback() const {
     // required string title = 1;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->title());
+        this->_internal_title());
   }
 
   if (has_description()) {
     // required string description = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->description());
+        this->_internal_description());
   }
 
   if (has_positionx()) {
@@ -7255,7 +5398,7 @@ size_t LightObject::RequiredFieldsByteSizeFallback() const {
     // required int32 type = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->type());
+        this->_internal_type());
   }
 
   if (has_showlampobject()) {
@@ -7279,21 +5422,16 @@ size_t LightObject::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.LightObject)
   size_t total_size = 0;
 
-  if (_internal_metadata_.have_unknown_fields()) {
-    total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::ComputeUnknownFieldsSize(
-        _internal_metadata_.unknown_fields());
-  }
   if (((_has_bits_[0] & 0x1fffffff) ^ 0x1fffffff) == 0) {  // All required fields are present.
     // required string title = 1;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->title());
+        this->_internal_title());
 
     // required string description = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->description());
+        this->_internal_description());
 
     // required .KuplungApp.ObjectCoordinate positionX = 7;
     total_size += 1 +
@@ -7413,7 +5551,7 @@ size_t LightObject::ByteSizeLong() const {
     // required int32 type = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->type());
+        this->_internal_type());
 
     // required bool showLampObject = 4;
     total_size += 1 + 1;
@@ -7431,6 +5569,10 @@ size_t LightObject::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
+  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
+        _internal_metadata_, total_size, &_cached_size_);
+  }
   int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
   SetCachedSize(cached_size);
   return total_size;
@@ -7469,79 +5611,79 @@ void LightObject::MergeFrom(const LightObject& from) {
       description_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.description_);
     }
     if (cached_has_bits & 0x00000004u) {
-      mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionx());
+      _internal_mutable_positionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionx());
     }
     if (cached_has_bits & 0x00000008u) {
-      mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positiony());
+      _internal_mutable_positiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positiony());
     }
     if (cached_has_bits & 0x00000010u) {
-      mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.positionz());
+      _internal_mutable_positionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_positionz());
     }
     if (cached_has_bits & 0x00000020u) {
-      mutable_directionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directionx());
+      _internal_mutable_directionx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_directionx());
     }
     if (cached_has_bits & 0x00000040u) {
-      mutable_directiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directiony());
+      _internal_mutable_directiony()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_directiony());
     }
     if (cached_has_bits & 0x00000080u) {
-      mutable_directionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.directionz());
+      _internal_mutable_directionz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_directionz());
     }
   }
   if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalex());
+      _internal_mutable_scalex()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scalex());
     }
     if (cached_has_bits & 0x00000200u) {
-      mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scaley());
+      _internal_mutable_scaley()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scaley());
     }
     if (cached_has_bits & 0x00000400u) {
-      mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.scalez());
+      _internal_mutable_scalez()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_scalez());
     }
     if (cached_has_bits & 0x00000800u) {
-      mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatex());
+      _internal_mutable_rotatex()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatex());
     }
     if (cached_has_bits & 0x00001000u) {
-      mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatey());
+      _internal_mutable_rotatey()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatey());
     }
     if (cached_has_bits & 0x00002000u) {
-      mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatez());
+      _internal_mutable_rotatez()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatez());
     }
     if (cached_has_bits & 0x00004000u) {
-      mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterx());
+      _internal_mutable_rotatecenterx()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecenterx());
     }
     if (cached_has_bits & 0x00008000u) {
-      mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecentery());
+      _internal_mutable_rotatecentery()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecentery());
     }
   }
   if (cached_has_bits & 0x00ff0000u) {
     if (cached_has_bits & 0x00010000u) {
-      mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from.rotatecenterz());
+      _internal_mutable_rotatecenterz()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_rotatecenterz());
     }
     if (cached_has_bits & 0x00020000u) {
-      mutable_ambient()->::KuplungApp::MaterialColor::MergeFrom(from.ambient());
+      _internal_mutable_ambient()->::KuplungApp::MaterialColor::MergeFrom(from._internal_ambient());
     }
     if (cached_has_bits & 0x00040000u) {
-      mutable_diffuse()->::KuplungApp::MaterialColor::MergeFrom(from.diffuse());
+      _internal_mutable_diffuse()->::KuplungApp::MaterialColor::MergeFrom(from._internal_diffuse());
     }
     if (cached_has_bits & 0x00080000u) {
-      mutable_specular()->::KuplungApp::MaterialColor::MergeFrom(from.specular());
+      _internal_mutable_specular()->::KuplungApp::MaterialColor::MergeFrom(from._internal_specular());
     }
     if (cached_has_bits & 0x00100000u) {
-      mutable_lcutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lcutoff());
+      _internal_mutable_lcutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_lcutoff());
     }
     if (cached_has_bits & 0x00200000u) {
-      mutable_loutercutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from.loutercutoff());
+      _internal_mutable_loutercutoff()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_loutercutoff());
     }
     if (cached_has_bits & 0x00400000u) {
-      mutable_lconstant()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lconstant());
+      _internal_mutable_lconstant()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_lconstant());
     }
     if (cached_has_bits & 0x00800000u) {
-      mutable_llinear()->::KuplungApp::ObjectCoordinate::MergeFrom(from.llinear());
+      _internal_mutable_llinear()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_llinear());
     }
   }
   if (cached_has_bits & 0x1f000000u) {
     if (cached_has_bits & 0x01000000u) {
-      mutable_lquadratic()->::KuplungApp::ObjectCoordinate::MergeFrom(from.lquadratic());
+      _internal_mutable_lquadratic()->::KuplungApp::ObjectCoordinate::MergeFrom(from._internal_lquadratic());
     }
     if (cached_has_bits & 0x02000000u) {
       type_ = from.type_;

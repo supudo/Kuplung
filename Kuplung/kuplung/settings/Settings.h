@@ -50,6 +50,7 @@ public:
   InAppRendererType RendererType;
   Color guiClearColor;
   int SDL_Window_Flags, SDL_Window_Width, SDL_Window_Height;
+  int SDL_DrawableSize_Width, SDL_DrawableSize_Height;
   int frameLog_Width, frameLog_Height;
   int frameFileBrowser_Width, frameFileBrowser_Height;
   int UIFontFileIndex, ModelFileParser;
