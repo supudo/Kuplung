@@ -85,6 +85,9 @@ void Settings::initSettings(const std::string& iniFolder) {
   m_pInstance->SDL_Window_Width = m_pInstance->cfgUtils->readInt("SDL_Window_Width");
   m_pInstance->SDL_Window_Height = m_pInstance->cfgUtils->readInt("SDL_Window_Height");
 
+  m_pInstance->SDL_DrawableSize_Width = m_pInstance->cfgUtils->readInt("SDL_DrawableSize_Width");
+  m_pInstance->SDL_DrawableSize_Height = m_pInstance->cfgUtils->readInt("SDL_DrawableSize_Height");
+
   m_pInstance->ShowBoundingBox = m_pInstance->cfgUtils->readBool("ShowBoundingBox");
   m_pInstance->BoundingBoxPadding = m_pInstance->cfgUtils->readFloat("BoundingBoxPadding");
   m_pInstance->BoundingBoxRefresh = false;
@@ -233,6 +236,9 @@ void Settings::saveSettings() {
 
   this->cfgUtils->writeInt("SDL_Window_Width", this->SDL_Window_Width);
   this->cfgUtils->writeInt("SDL_Window_Height", this->SDL_Window_Height);
+
+  this->cfgUtils->writeInt("SDL_DrawableSize_Width", this->SDL_DrawableSize_Width);
+  this->cfgUtils->writeInt("SDL_DrawableSize_Height", this->SDL_DrawableSize_Height);
 
   this->cfgUtils->writeInt("Consumption_Interval_CPU", this->Consumption_Interval_CPU);
   this->cfgUtils->writeInt("Consumption_Interval_Memory", this->Consumption_Interval_Memory);

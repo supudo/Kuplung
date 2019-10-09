@@ -617,8 +617,8 @@ void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModel
     glUniform3f(this->glFS_CameraPosition, this->vecCameraPosition.x, this->vecCameraPosition.y, this->vecCameraPosition.z);
 
     // screen size
-    glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
-    glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
+    glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_DrawableSize_Width);
+    glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_DrawableSize_Height);
 
     // Outline color
     glUniform3f(this->glFS_OutlineColor, mfd->getOptionsOutlineColor().r, mfd->getOptionsOutlineColor().g, mfd->getOptionsOutlineColor().b);

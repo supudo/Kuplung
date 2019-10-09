@@ -459,7 +459,7 @@ void RenderingForwardShadowMapping::renderShadows(const std::vector<ModelFaceDat
     this->matrixLightSpace = lightProjection * matrixLightView;
 
     glUseProgram(this->shaderProgramShadows);
-    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+    glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
     glBindFramebuffer(GL_FRAMEBUFFER, this->fboDepthMap);
     glClear(GL_DEPTH_BUFFER_BIT);
     this->renderModels(true, this->shaderProgramShadows, meshModelFaces, selectedModel);

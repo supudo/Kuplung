@@ -88,7 +88,7 @@ int Kuplung::run() {
       this->onEvent(&ev);
     }
 
-    glViewport(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+    glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
     glClearColor(Settings::Instance()->guiClearColor.r, Settings::Instance()->guiClearColor.g, Settings::Instance()->guiClearColor.b, Settings::Instance()->guiClearColor.w);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
@@ -143,7 +143,7 @@ bool Kuplung::init() {
 #endif
 
     SDL_SetHint(SDL_HINT_MAC_CTRL_CLICK_EMULATE_RIGHT_CLICK, "1");
-    SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "1");
+    SDL_SetHint(SDL_HINT_VIDEO_HIGHDPI_DISABLED, "0");
 
     SDL_DisplayMode current;
     SDL_GetCurrentDisplayMode(0, &current);
@@ -182,6 +182,8 @@ bool Kuplung::init() {
           }
 #endif
           Settings::Instance()->setLogFunc(std::bind(&Kuplung::doLog, this, std::placeholders::_1));
+
+          SDL_GL_GetDrawableSize(this->sdlWindow, &Settings::Instance()->SDL_DrawableSize_Width, &Settings::Instance()->SDL_DrawableSize_Height);
 
           this->parser = std::make_unique<FileModelManager>();
           this->parser->init(std::bind(&Kuplung::doProgress, this, std::placeholders::_1));
