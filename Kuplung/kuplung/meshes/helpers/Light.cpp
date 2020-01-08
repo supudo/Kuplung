@@ -269,6 +269,8 @@ const glm::vec3 Light::getNewPositionAfterRotation(const glm::vec3& rotation) co
 
 void Light::render(const glm::mat4& matrixProjection, const glm::mat4& matrixCamera) {
   if (this->glVAO > 0 && this->showLampObject) {
+    glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
+
     glUseProgram(this->shaderProgram);
 
     this->matrixModel = glm::mat4(1.0);
