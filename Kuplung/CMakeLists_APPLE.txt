@@ -2,6 +2,7 @@
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++ -Os")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -S -emit-llvm")
+# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftime-trace")
 
 ADD_DEFINITIONS(-DKuplung_Debug_Timings)
 ADD_DEFINITIONS(-DCMAKE_CXX_CPPCHECK)

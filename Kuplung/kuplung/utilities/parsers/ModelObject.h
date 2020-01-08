@@ -15,7 +15,15 @@
 #  include <string>
 #  include <vector>
 
-typedef enum objMaterialImageType { objMaterialImageType_Ambient, objMaterialImageType_Diffuse, objMaterialImageType_Specular, objMaterialImageType_SpecularExp, objMaterialImageType_Dissolve, objMaterialImageType_Bump, objMaterialImageType_Displacement } objMaterialImageType;
+typedef enum objMaterialImageType {
+  objMaterialImageType_Ambient,
+  objMaterialImageType_Diffuse,
+  objMaterialImageType_Specular,
+  objMaterialImageType_SpecularExp,
+  objMaterialImageType_Dissolve,
+  objMaterialImageType_Bump,
+  objMaterialImageType_Displacement
+} objMaterialImageType;
 
 struct MeshMaterialTextureImage {
   int Width, Height;

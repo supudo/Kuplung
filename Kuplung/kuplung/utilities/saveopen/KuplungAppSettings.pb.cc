@@ -1171,7 +1171,11 @@ const char* GUISettings::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required string heightmapImage = 37;
       case 37:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_heightmapimage(), ptr, ctx, "KuplungApp.GUISettings.heightmapImage");
+          auto str = _internal_mutable_heightmapimage();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.GUISettings.heightmapImage");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -1253,7 +1257,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* GUISettings::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* GUISettings::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GUISettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -1262,234 +1266,234 @@ failure:
   cached_has_bits = _has_bits_[0];
   // required float Setting_FOV = 1;
   if (cached_has_bits & 0x00000400u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_setting_fov(), target);
   }
 
   // required float Setting_OutlineThickness = 2;
   if (cached_has_bits & 0x00000800u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_setting_outlinethickness(), target);
   }
 
   // required float Setting_RatioWidth = 3;
   if (cached_has_bits & 0x00001000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_setting_ratiowidth(), target);
   }
 
   // required float Setting_RatioHeight = 4;
   if (cached_has_bits & 0x00002000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_setting_ratioheight(), target);
   }
 
   // required float Setting_PlaneClose = 5;
   if (cached_has_bits & 0x00004000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(5, this->_internal_setting_planeclose(), target);
   }
 
   // required float Setting_PlaneFar = 6;
   if (cached_has_bits & 0x00008000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(6, this->_internal_setting_planefar(), target);
   }
 
   // required int32 Setting_GridSize = 7;
   if (cached_has_bits & 0x00010000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_setting_gridsize(), target);
   }
 
   // required int32 Setting_Skybox = 8;
   if (cached_has_bits & 0x00020000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_setting_skybox(), target);
   }
 
   // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
   if (cached_has_bits & 0x00000002u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         9, _Internal::setting_outlinecolor(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
   if (cached_has_bits & 0x00000004u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         10, _Internal::setting_uiambientlight(this), target, stream);
   }
 
   // required bool Setting_FixedGridWorld = 11;
   if (cached_has_bits & 0x00040000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(11, this->_internal_setting_fixedgridworld(), target);
   }
 
   // required bool Setting_OutlineColorPickerOpen = 12;
   if (cached_has_bits & 0x00080000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(12, this->_internal_setting_outlinecolorpickeropen(), target);
   }
 
   // required bool Setting_ShowAxisHelpers = 13;
   if (cached_has_bits & 0x00100000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(13, this->_internal_setting_showaxishelpers(), target);
   }
 
   // required bool Settings_ShowZAxis = 14;
   if (cached_has_bits & 0x00200000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(14, this->_internal_settings_showzaxis(), target);
   }
 
   // required bool Setting_DeferredTestMode = 15;
   if (cached_has_bits & 0x04000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(15, this->_internal_setting_deferredtestmode(), target);
   }
 
   // required bool Setting_DeferredTestLights = 16;
   if (cached_has_bits & 0x08000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(16, this->_internal_setting_deferredtestlights(), target);
   }
 
   // required int32 Setting_LightingPass_DrawMode = 17;
   if (cached_has_bits & 0x00400000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(17, this->_internal_setting_lightingpass_drawmode(), target);
   }
 
   // required int32 Setting_DeferredTestLightsNumber = 18;
   if (cached_has_bits & 0x00800000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(18, this->_internal_setting_deferredtestlightsnumber(), target);
   }
 
   // required float Setting_DeferredAmbientStrength = 19;
   if (cached_has_bits & 0x01000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(19, this->_internal_setting_deferredambientstrength(), target);
   }
 
   // required int32 viewModelSkin = 20;
   if (cached_has_bits & 0x02000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(20, this->_internal_viewmodelskin(), target);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Direction = 21;
   if (cached_has_bits & 0x00000008u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         21, _Internal::solidlight_direction(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         22, _Internal::solidlight_materialcolor(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
   if (cached_has_bits & 0x00000020u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         23, _Internal::solidlight_ambient(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
   if (cached_has_bits & 0x00000040u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         24, _Internal::solidlight_diffuse(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 SolidLight_Specular = 25;
   if (cached_has_bits & 0x00000080u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         25, _Internal::solidlight_specular(this), target, stream);
   }
 
   // required float SolidLight_Ambient_Strength = 26;
   if (cached_has_bits & 0x40000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(26, this->_internal_solidlight_ambient_strength(), target);
   }
 
   // required float SolidLight_Diffuse_Strength = 27;
   if (cached_has_bits & 0x80000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(27, this->_internal_solidlight_diffuse_strength(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required float SolidLight_Specular_Strength = 28;
   if (cached_has_bits & 0x00000001u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(28, this->_internal_solidlight_specular_strength(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required bool SolidLight_MaterialColor_ColorPicker = 29;
   if (cached_has_bits & 0x10000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(29, this->_internal_solidlight_materialcolor_colorpicker(), target);
   }
 
   // required bool SolidLight_Ambient_ColorPicker = 30;
   if (cached_has_bits & 0x20000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(30, this->_internal_solidlight_ambient_colorpicker(), target);
   }
 
   cached_has_bits = _has_bits_[1];
   // required bool SolidLight_Diffuse_ColorPicker = 31;
   if (cached_has_bits & 0x00000002u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(31, this->_internal_solidlight_diffuse_colorpicker(), target);
   }
 
   // required bool SolidLight_Specular_ColorPicker = 32;
   if (cached_has_bits & 0x00000004u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(32, this->_internal_solidlight_specular_colorpicker(), target);
   }
 
   // required bool Setting_ShowTerrain = 33;
   if (cached_has_bits & 0x00000008u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(33, this->_internal_setting_showterrain(), target);
   }
 
   // required bool Setting_TerrainModel = 34;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(34, this->_internal_setting_terrainmodel(), target);
   }
 
   // required bool Setting_TerrainAnimateX = 35;
   if (cached_has_bits & 0x00000040u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(35, this->_internal_setting_terrainanimatex(), target);
   }
 
   // required bool Setting_TerrainAnimateY = 36;
   if (cached_has_bits & 0x00000080u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(36, this->_internal_setting_terrainanimatey(), target);
   }
 
@@ -1507,51 +1511,51 @@ failure:
   cached_has_bits = _has_bits_[1];
   // required int32 Setting_TerrainWidth = 38;
   if (cached_has_bits & 0x00000020u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(38, this->_internal_setting_terrainwidth(), target);
   }
 
   // required int32 Setting_TerrainHeight = 39;
   if (cached_has_bits & 0x00000400u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(39, this->_internal_setting_terrainheight(), target);
   }
 
   // required bool Setting_ShowSpaceship = 40;
   if (cached_has_bits & 0x00000100u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(40, this->_internal_setting_showspaceship(), target);
   }
 
   // required bool Setting_GenerateSpaceship = 41;
   if (cached_has_bits & 0x00000200u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(41, this->_internal_setting_generatespaceship(), target);
   }
 
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.CameraSettings camera = 42;
   if (cached_has_bits & 0x00000100u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         42, _Internal::camera(this), target, stream);
   }
 
   // required .KuplungApp.GridSettings grid = 43;
   if (cached_has_bits & 0x00000200u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         43, _Internal::grid(this), target, stream);
   }
 
   // repeated .KuplungApp.LightObject lights = 44;
   for (unsigned int i = 0,
       n = static_cast<unsigned int>(this->_internal_lights_size()); i < n; i++) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(44, this->_internal_lights(i), target, stream);
+      InternalWriteMessage(44, this->_internal_lights(i), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1566,249 +1570,249 @@ size_t GUISettings::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.GUISettings)
   size_t total_size = 0;
 
-  if (has_heightmapimage()) {
+  if (_internal_has_heightmapimage()) {
     // required string heightmapImage = 37;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_heightmapimage());
   }
 
-  if (has_setting_outlinecolor()) {
+  if (_internal_has_setting_outlinecolor()) {
     // required .KuplungApp.Vec4 Setting_OutlineColor = 9;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_outlinecolor_);
   }
 
-  if (has_setting_uiambientlight()) {
+  if (_internal_has_setting_uiambientlight()) {
     // required .KuplungApp.Vec3 Setting_UIAmbientLight = 10;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *setting_uiambientlight_);
   }
 
-  if (has_solidlight_direction()) {
+  if (_internal_has_solidlight_direction()) {
     // required .KuplungApp.Vec3 SolidLight_Direction = 21;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlight_direction_);
   }
 
-  if (has_solidlight_materialcolor()) {
+  if (_internal_has_solidlight_materialcolor()) {
     // required .KuplungApp.Vec3 SolidLight_MaterialColor = 22;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlight_materialcolor_);
   }
 
-  if (has_solidlight_ambient()) {
+  if (_internal_has_solidlight_ambient()) {
     // required .KuplungApp.Vec3 SolidLight_Ambient = 23;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlight_ambient_);
   }
 
-  if (has_solidlight_diffuse()) {
+  if (_internal_has_solidlight_diffuse()) {
     // required .KuplungApp.Vec3 SolidLight_Diffuse = 24;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlight_diffuse_);
   }
 
-  if (has_solidlight_specular()) {
+  if (_internal_has_solidlight_specular()) {
     // required .KuplungApp.Vec3 SolidLight_Specular = 25;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *solidlight_specular_);
   }
 
-  if (has_camera()) {
+  if (_internal_has_camera()) {
     // required .KuplungApp.CameraSettings camera = 42;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *camera_);
   }
 
-  if (has_grid()) {
+  if (_internal_has_grid()) {
     // required .KuplungApp.GridSettings grid = 43;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *grid_);
   }
 
-  if (has_setting_fov()) {
+  if (_internal_has_setting_fov()) {
     // required float Setting_FOV = 1;
     total_size += 1 + 4;
   }
 
-  if (has_setting_outlinethickness()) {
+  if (_internal_has_setting_outlinethickness()) {
     // required float Setting_OutlineThickness = 2;
     total_size += 1 + 4;
   }
 
-  if (has_setting_ratiowidth()) {
+  if (_internal_has_setting_ratiowidth()) {
     // required float Setting_RatioWidth = 3;
     total_size += 1 + 4;
   }
 
-  if (has_setting_ratioheight()) {
+  if (_internal_has_setting_ratioheight()) {
     // required float Setting_RatioHeight = 4;
     total_size += 1 + 4;
   }
 
-  if (has_setting_planeclose()) {
+  if (_internal_has_setting_planeclose()) {
     // required float Setting_PlaneClose = 5;
     total_size += 1 + 4;
   }
 
-  if (has_setting_planefar()) {
+  if (_internal_has_setting_planefar()) {
     // required float Setting_PlaneFar = 6;
     total_size += 1 + 4;
   }
 
-  if (has_setting_gridsize()) {
+  if (_internal_has_setting_gridsize()) {
     // required int32 Setting_GridSize = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_setting_gridsize());
   }
 
-  if (has_setting_skybox()) {
+  if (_internal_has_setting_skybox()) {
     // required int32 Setting_Skybox = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_setting_skybox());
   }
 
-  if (has_setting_fixedgridworld()) {
+  if (_internal_has_setting_fixedgridworld()) {
     // required bool Setting_FixedGridWorld = 11;
     total_size += 1 + 1;
   }
 
-  if (has_setting_outlinecolorpickeropen()) {
+  if (_internal_has_setting_outlinecolorpickeropen()) {
     // required bool Setting_OutlineColorPickerOpen = 12;
     total_size += 1 + 1;
   }
 
-  if (has_setting_showaxishelpers()) {
+  if (_internal_has_setting_showaxishelpers()) {
     // required bool Setting_ShowAxisHelpers = 13;
     total_size += 1 + 1;
   }
 
-  if (has_settings_showzaxis()) {
+  if (_internal_has_settings_showzaxis()) {
     // required bool Settings_ShowZAxis = 14;
     total_size += 1 + 1;
   }
 
-  if (has_setting_lightingpass_drawmode()) {
+  if (_internal_has_setting_lightingpass_drawmode()) {
     // required int32 Setting_LightingPass_DrawMode = 17;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_setting_lightingpass_drawmode());
   }
 
-  if (has_setting_deferredtestlightsnumber()) {
+  if (_internal_has_setting_deferredtestlightsnumber()) {
     // required int32 Setting_DeferredTestLightsNumber = 18;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_setting_deferredtestlightsnumber());
   }
 
-  if (has_setting_deferredambientstrength()) {
+  if (_internal_has_setting_deferredambientstrength()) {
     // required float Setting_DeferredAmbientStrength = 19;
     total_size += 2 + 4;
   }
 
-  if (has_viewmodelskin()) {
+  if (_internal_has_viewmodelskin()) {
     // required int32 viewModelSkin = 20;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_viewmodelskin());
   }
 
-  if (has_setting_deferredtestmode()) {
+  if (_internal_has_setting_deferredtestmode()) {
     // required bool Setting_DeferredTestMode = 15;
     total_size += 1 + 1;
   }
 
-  if (has_setting_deferredtestlights()) {
+  if (_internal_has_setting_deferredtestlights()) {
     // required bool Setting_DeferredTestLights = 16;
     total_size += 2 + 1;
   }
 
-  if (has_solidlight_materialcolor_colorpicker()) {
+  if (_internal_has_solidlight_materialcolor_colorpicker()) {
     // required bool SolidLight_MaterialColor_ColorPicker = 29;
     total_size += 2 + 1;
   }
 
-  if (has_solidlight_ambient_colorpicker()) {
+  if (_internal_has_solidlight_ambient_colorpicker()) {
     // required bool SolidLight_Ambient_ColorPicker = 30;
     total_size += 2 + 1;
   }
 
-  if (has_solidlight_ambient_strength()) {
+  if (_internal_has_solidlight_ambient_strength()) {
     // required float SolidLight_Ambient_Strength = 26;
     total_size += 2 + 4;
   }
 
-  if (has_solidlight_diffuse_strength()) {
+  if (_internal_has_solidlight_diffuse_strength()) {
     // required float SolidLight_Diffuse_Strength = 27;
     total_size += 2 + 4;
   }
 
-  if (has_solidlight_specular_strength()) {
+  if (_internal_has_solidlight_specular_strength()) {
     // required float SolidLight_Specular_Strength = 28;
     total_size += 2 + 4;
   }
 
-  if (has_solidlight_diffuse_colorpicker()) {
+  if (_internal_has_solidlight_diffuse_colorpicker()) {
     // required bool SolidLight_Diffuse_ColorPicker = 31;
     total_size += 2 + 1;
   }
 
-  if (has_solidlight_specular_colorpicker()) {
+  if (_internal_has_solidlight_specular_colorpicker()) {
     // required bool SolidLight_Specular_ColorPicker = 32;
     total_size += 2 + 1;
   }
 
-  if (has_setting_showterrain()) {
+  if (_internal_has_setting_showterrain()) {
     // required bool Setting_ShowTerrain = 33;
     total_size += 2 + 1;
   }
 
-  if (has_setting_terrainmodel()) {
+  if (_internal_has_setting_terrainmodel()) {
     // required bool Setting_TerrainModel = 34;
     total_size += 2 + 1;
   }
 
-  if (has_setting_terrainwidth()) {
+  if (_internal_has_setting_terrainwidth()) {
     // required int32 Setting_TerrainWidth = 38;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_setting_terrainwidth());
   }
 
-  if (has_setting_terrainanimatex()) {
+  if (_internal_has_setting_terrainanimatex()) {
     // required bool Setting_TerrainAnimateX = 35;
     total_size += 2 + 1;
   }
 
-  if (has_setting_terrainanimatey()) {
+  if (_internal_has_setting_terrainanimatey()) {
     // required bool Setting_TerrainAnimateY = 36;
     total_size += 2 + 1;
   }
 
-  if (has_setting_showspaceship()) {
+  if (_internal_has_setting_showspaceship()) {
     // required bool Setting_ShowSpaceship = 40;
     total_size += 2 + 1;
   }
 
-  if (has_setting_generatespaceship()) {
+  if (_internal_has_setting_generatespaceship()) {
     // required bool Setting_GenerateSpaceship = 41;
     total_size += 2 + 1;
   }
 
-  if (has_setting_terrainheight()) {
+  if (_internal_has_setting_terrainheight()) {
     // required int32 Setting_TerrainHeight = 39;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
@@ -2200,33 +2204,33 @@ void GUISettings::CopyFrom(const GUISettings& from) {
 bool GUISettings::IsInitialized() const {
   if ((_has_bits_[0] & 0xffffffff) != 0xffffffff) return false;
   if ((_has_bits_[1] & 0x000007ff) != 0x000007ff) return false;
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(this->lights())) return false;
-  if (has_setting_outlinecolor()) {
-    if (!this->setting_outlinecolor_->IsInitialized()) return false;
+  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(lights_)) return false;
+  if (_internal_has_setting_outlinecolor()) {
+    if (!setting_outlinecolor_->IsInitialized()) return false;
   }
-  if (has_setting_uiambientlight()) {
-    if (!this->setting_uiambientlight_->IsInitialized()) return false;
+  if (_internal_has_setting_uiambientlight()) {
+    if (!setting_uiambientlight_->IsInitialized()) return false;
   }
-  if (has_solidlight_direction()) {
-    if (!this->solidlight_direction_->IsInitialized()) return false;
+  if (_internal_has_solidlight_direction()) {
+    if (!solidlight_direction_->IsInitialized()) return false;
   }
-  if (has_solidlight_materialcolor()) {
-    if (!this->solidlight_materialcolor_->IsInitialized()) return false;
+  if (_internal_has_solidlight_materialcolor()) {
+    if (!solidlight_materialcolor_->IsInitialized()) return false;
   }
-  if (has_solidlight_ambient()) {
-    if (!this->solidlight_ambient_->IsInitialized()) return false;
+  if (_internal_has_solidlight_ambient()) {
+    if (!solidlight_ambient_->IsInitialized()) return false;
   }
-  if (has_solidlight_diffuse()) {
-    if (!this->solidlight_diffuse_->IsInitialized()) return false;
+  if (_internal_has_solidlight_diffuse()) {
+    if (!solidlight_diffuse_->IsInitialized()) return false;
   }
-  if (has_solidlight_specular()) {
-    if (!this->solidlight_specular_->IsInitialized()) return false;
+  if (_internal_has_solidlight_specular()) {
+    if (!solidlight_specular_->IsInitialized()) return false;
   }
-  if (has_camera()) {
-    if (!this->camera_->IsInitialized()) return false;
+  if (_internal_has_camera()) {
+    if (!camera_->IsInitialized()) return false;
   }
-  if (has_grid()) {
-    if (!this->grid_->IsInitialized()) return false;
+  if (_internal_has_grid()) {
+    if (!grid_->IsInitialized()) return false;
   }
   return true;
 }
@@ -2781,7 +2785,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* CameraSettings::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* CameraSettings::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.CameraSettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -2790,105 +2794,105 @@ failure:
   cached_has_bits = _has_bits_[0];
   // required .KuplungApp.Vec3 cameraPosition = 1;
   if (cached_has_bits & 0x00000001u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         1, _Internal::cameraposition(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Eye = 2;
   if (cached_has_bits & 0x00000002u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         2, _Internal::view_eye(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Center = 3;
   if (cached_has_bits & 0x00000004u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         3, _Internal::view_center(this), target, stream);
   }
 
   // required .KuplungApp.Vec3 View_Up = 4;
   if (cached_has_bits & 0x00000008u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         4, _Internal::view_up(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 5;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         5, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 6;
   if (cached_has_bits & 0x00000020u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         6, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 7;
   if (cached_has_bits & 0x00000040u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         7, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 8;
   if (cached_has_bits & 0x00000080u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         8, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 9;
   if (cached_has_bits & 0x00000100u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         9, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 10;
   if (cached_has_bits & 0x00000200u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         10, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
   if (cached_has_bits & 0x00000400u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         11, _Internal::rotatecenterx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
   if (cached_has_bits & 0x00000800u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         12, _Internal::rotatecentery(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
   if (cached_has_bits & 0x00001000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         13, _Internal::rotatecenterz(this), target, stream);
   }
 
@@ -2904,91 +2908,91 @@ size_t CameraSettings::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.CameraSettings)
   size_t total_size = 0;
 
-  if (has_cameraposition()) {
+  if (_internal_has_cameraposition()) {
     // required .KuplungApp.Vec3 cameraPosition = 1;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *cameraposition_);
   }
 
-  if (has_view_eye()) {
+  if (_internal_has_view_eye()) {
     // required .KuplungApp.Vec3 View_Eye = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *view_eye_);
   }
 
-  if (has_view_center()) {
+  if (_internal_has_view_center()) {
     // required .KuplungApp.Vec3 View_Center = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *view_center_);
   }
 
-  if (has_view_up()) {
+  if (_internal_has_view_up()) {
     // required .KuplungApp.Vec3 View_Up = 4;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *view_up_);
   }
 
-  if (has_positionx()) {
+  if (_internal_has_positionx()) {
     // required .KuplungApp.ObjectCoordinate positionX = 5;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionx_);
   }
 
-  if (has_positiony()) {
+  if (_internal_has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 6;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positiony_);
   }
 
-  if (has_positionz()) {
+  if (_internal_has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionz_);
   }
 
-  if (has_rotatex()) {
+  if (_internal_has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatex_);
   }
 
-  if (has_rotatey()) {
+  if (_internal_has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 9;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatey_);
   }
 
-  if (has_rotatez()) {
+  if (_internal_has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 10;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatez_);
   }
 
-  if (has_rotatecenterx()) {
+  if (_internal_has_rotatecenterx()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 11;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatecenterx_);
   }
 
-  if (has_rotatecentery()) {
+  if (_internal_has_rotatecentery()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 12;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatecentery_);
   }
 
-  if (has_rotatecenterz()) {
+  if (_internal_has_rotatecenterz()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 13;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -3167,44 +3171,44 @@ void CameraSettings::CopyFrom(const CameraSettings& from) {
 
 bool CameraSettings::IsInitialized() const {
   if ((_has_bits_[0] & 0x00001fff) != 0x00001fff) return false;
-  if (has_cameraposition()) {
-    if (!this->cameraposition_->IsInitialized()) return false;
+  if (_internal_has_cameraposition()) {
+    if (!cameraposition_->IsInitialized()) return false;
   }
-  if (has_view_eye()) {
-    if (!this->view_eye_->IsInitialized()) return false;
+  if (_internal_has_view_eye()) {
+    if (!view_eye_->IsInitialized()) return false;
   }
-  if (has_view_center()) {
-    if (!this->view_center_->IsInitialized()) return false;
+  if (_internal_has_view_center()) {
+    if (!view_center_->IsInitialized()) return false;
   }
-  if (has_view_up()) {
-    if (!this->view_up_->IsInitialized()) return false;
+  if (_internal_has_view_up()) {
+    if (!view_up_->IsInitialized()) return false;
   }
-  if (has_positionx()) {
-    if (!this->positionx_->IsInitialized()) return false;
+  if (_internal_has_positionx()) {
+    if (!positionx_->IsInitialized()) return false;
   }
-  if (has_positiony()) {
-    if (!this->positiony_->IsInitialized()) return false;
+  if (_internal_has_positiony()) {
+    if (!positiony_->IsInitialized()) return false;
   }
-  if (has_positionz()) {
-    if (!this->positionz_->IsInitialized()) return false;
+  if (_internal_has_positionz()) {
+    if (!positionz_->IsInitialized()) return false;
   }
-  if (has_rotatex()) {
-    if (!this->rotatex_->IsInitialized()) return false;
+  if (_internal_has_rotatex()) {
+    if (!rotatex_->IsInitialized()) return false;
   }
-  if (has_rotatey()) {
-    if (!this->rotatey_->IsInitialized()) return false;
+  if (_internal_has_rotatey()) {
+    if (!rotatey_->IsInitialized()) return false;
   }
-  if (has_rotatez()) {
-    if (!this->rotatez_->IsInitialized()) return false;
+  if (_internal_has_rotatez()) {
+    if (!rotatez_->IsInitialized()) return false;
   }
-  if (has_rotatecenterx()) {
-    if (!this->rotatecenterx_->IsInitialized()) return false;
+  if (_internal_has_rotatecenterx()) {
+    if (!rotatecenterx_->IsInitialized()) return false;
   }
-  if (has_rotatecentery()) {
-    if (!this->rotatecentery_->IsInitialized()) return false;
+  if (_internal_has_rotatecentery()) {
+    if (!rotatecentery_->IsInitialized()) return false;
   }
-  if (has_rotatecenterz()) {
-    if (!this->rotatecenterz_->IsInitialized()) return false;
+  if (_internal_has_rotatecenterz()) {
+    if (!rotatecenterz_->IsInitialized()) return false;
   }
   return true;
 }
@@ -3652,7 +3656,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* GridSettings::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* GridSettings::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.GridSettings)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -3661,97 +3665,97 @@ failure:
   cached_has_bits = _has_bits_[0];
   // required bool actAsMirror = 1;
   if (cached_has_bits & 0x00000200u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_actasmirror(), target);
   }
 
   // required int32 gridSize = 2;
   if (cached_has_bits & 0x00000400u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(2, this->_internal_gridsize(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 3;
   if (cached_has_bits & 0x00000001u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         3, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 4;
   if (cached_has_bits & 0x00000002u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         4, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 5;
   if (cached_has_bits & 0x00000004u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         5, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 6;
   if (cached_has_bits & 0x00000008u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         6, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 7;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         7, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 8;
   if (cached_has_bits & 0x00000020u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         8, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 9;
   if (cached_has_bits & 0x00000040u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         9, _Internal::scalex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 10;
   if (cached_has_bits & 0x00000080u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         10, _Internal::scaley(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 11;
   if (cached_has_bits & 0x00000100u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         11, _Internal::scalez(this), target, stream);
   }
 
   // required float transparency = 12;
   if (cached_has_bits & 0x00000800u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(12, this->_internal_transparency(), target);
   }
 
   // required int32 showGrid = 13;
   if (cached_has_bits & 0x00001000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(13, this->_internal_showgrid(), target);
   }
 
@@ -3767,87 +3771,87 @@ size_t GridSettings::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.GridSettings)
   size_t total_size = 0;
 
-  if (has_positionx()) {
+  if (_internal_has_positionx()) {
     // required .KuplungApp.ObjectCoordinate positionX = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionx_);
   }
 
-  if (has_positiony()) {
+  if (_internal_has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 4;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positiony_);
   }
 
-  if (has_positionz()) {
+  if (_internal_has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 5;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionz_);
   }
 
-  if (has_rotatex()) {
+  if (_internal_has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 6;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatex_);
   }
 
-  if (has_rotatey()) {
+  if (_internal_has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatey_);
   }
 
-  if (has_rotatez()) {
+  if (_internal_has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatez_);
   }
 
-  if (has_scalex()) {
+  if (_internal_has_scalex()) {
     // required .KuplungApp.ObjectCoordinate scaleX = 9;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalex_);
   }
 
-  if (has_scaley()) {
+  if (_internal_has_scaley()) {
     // required .KuplungApp.ObjectCoordinate scaleY = 10;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scaley_);
   }
 
-  if (has_scalez()) {
+  if (_internal_has_scalez()) {
     // required .KuplungApp.ObjectCoordinate scaleZ = 11;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalez_);
   }
 
-  if (has_actasmirror()) {
+  if (_internal_has_actasmirror()) {
     // required bool actAsMirror = 1;
     total_size += 1 + 1;
   }
 
-  if (has_gridsize()) {
+  if (_internal_has_gridsize()) {
     // required int32 gridSize = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_gridsize());
   }
 
-  if (has_transparency()) {
+  if (_internal_has_transparency()) {
     // required float transparency = 12;
     total_size += 1 + 4;
   }
 
-  if (has_showgrid()) {
+  if (_internal_has_showgrid()) {
     // required int32 showGrid = 13;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
@@ -4023,32 +4027,32 @@ void GridSettings::CopyFrom(const GridSettings& from) {
 
 bool GridSettings::IsInitialized() const {
   if ((_has_bits_[0] & 0x00001fff) != 0x00001fff) return false;
-  if (has_positionx()) {
-    if (!this->positionx_->IsInitialized()) return false;
+  if (_internal_has_positionx()) {
+    if (!positionx_->IsInitialized()) return false;
   }
-  if (has_positiony()) {
-    if (!this->positiony_->IsInitialized()) return false;
+  if (_internal_has_positiony()) {
+    if (!positiony_->IsInitialized()) return false;
   }
-  if (has_positionz()) {
-    if (!this->positionz_->IsInitialized()) return false;
+  if (_internal_has_positionz()) {
+    if (!positionz_->IsInitialized()) return false;
   }
-  if (has_rotatex()) {
-    if (!this->rotatex_->IsInitialized()) return false;
+  if (_internal_has_rotatex()) {
+    if (!rotatex_->IsInitialized()) return false;
   }
-  if (has_rotatey()) {
-    if (!this->rotatey_->IsInitialized()) return false;
+  if (_internal_has_rotatey()) {
+    if (!rotatey_->IsInitialized()) return false;
   }
-  if (has_rotatez()) {
-    if (!this->rotatez_->IsInitialized()) return false;
+  if (_internal_has_rotatez()) {
+    if (!rotatez_->IsInitialized()) return false;
   }
-  if (has_scalex()) {
-    if (!this->scalex_->IsInitialized()) return false;
+  if (_internal_has_scalex()) {
+    if (!scalex_->IsInitialized()) return false;
   }
-  if (has_scaley()) {
-    if (!this->scaley_->IsInitialized()) return false;
+  if (_internal_has_scaley()) {
+    if (!scaley_->IsInitialized()) return false;
   }
-  if (has_scalez()) {
-    if (!this->scalez_->IsInitialized()) return false;
+  if (_internal_has_scalez()) {
+    if (!scalez_->IsInitialized()) return false;
   }
   return true;
 }
@@ -4747,14 +4751,22 @@ const char* LightObject::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID
       // required string title = 1;
       case 1:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_title(), ptr, ctx, "KuplungApp.LightObject.title");
+          auto str = _internal_mutable_title();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.LightObject.title");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
       // required string description = 2;
       case 2:
         if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParserUTF8Verify(_internal_mutable_description(), ptr, ctx, "KuplungApp.LightObject.description");
+          auto str = _internal_mutable_description();
+          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
+          #ifndef NDEBUG
+          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.LightObject.description");
+          #endif  // !NDEBUG
           CHK_(ptr);
         } else goto handle_unusual;
         continue;
@@ -4972,7 +4984,7 @@ failure:
 #undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* LightObject::InternalSerializeWithCachedSizesToArray(
+::PROTOBUF_NAMESPACE_ID::uint8* LightObject::_InternalSerialize(
     ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.LightObject)
   ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
@@ -5001,209 +5013,209 @@ failure:
 
   // required int32 type = 3;
   if (cached_has_bits & 0x02000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_type(), target);
   }
 
   // required bool showLampObject = 4;
   if (cached_has_bits & 0x04000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(4, this->_internal_showlampobject(), target);
   }
 
   // required bool showLampDirection = 5;
   if (cached_has_bits & 0x08000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_showlampdirection(), target);
   }
 
   // required bool showInWire = 6;
   if (cached_has_bits & 0x10000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(6, this->_internal_showinwire(), target);
   }
 
   // required .KuplungApp.ObjectCoordinate positionX = 7;
   if (cached_has_bits & 0x00000004u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         7, _Internal::positionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 8;
   if (cached_has_bits & 0x00000008u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         8, _Internal::positiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 9;
   if (cached_has_bits & 0x00000010u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         9, _Internal::positionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionX = 10;
   if (cached_has_bits & 0x00000020u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         10, _Internal::directionx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionY = 11;
   if (cached_has_bits & 0x00000040u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         11, _Internal::directiony(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate directionZ = 12;
   if (cached_has_bits & 0x00000080u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         12, _Internal::directionz(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 13;
   if (cached_has_bits & 0x00000100u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         13, _Internal::scalex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 14;
   if (cached_has_bits & 0x00000200u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         14, _Internal::scaley(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 15;
   if (cached_has_bits & 0x00000400u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         15, _Internal::scalez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 16;
   if (cached_has_bits & 0x00000800u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         16, _Internal::rotatex(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 17;
   if (cached_has_bits & 0x00001000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         17, _Internal::rotatey(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 18;
   if (cached_has_bits & 0x00002000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         18, _Internal::rotatez(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
   if (cached_has_bits & 0x00004000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         19, _Internal::rotatecenterx(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
   if (cached_has_bits & 0x00008000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         20, _Internal::rotatecentery(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
   if (cached_has_bits & 0x00010000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         21, _Internal::rotatecenterz(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor ambient = 22;
   if (cached_has_bits & 0x00020000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         22, _Internal::ambient(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor diffuse = 23;
   if (cached_has_bits & 0x00040000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         23, _Internal::diffuse(this), target, stream);
   }
 
   // required .KuplungApp.MaterialColor specular = 24;
   if (cached_has_bits & 0x00080000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         24, _Internal::specular(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lCutOff = 25;
   if (cached_has_bits & 0x00100000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         25, _Internal::lcutoff(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
   if (cached_has_bits & 0x00200000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         26, _Internal::loutercutoff(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lConstant = 27;
   if (cached_has_bits & 0x00400000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         27, _Internal::lconstant(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lLinear = 28;
   if (cached_has_bits & 0x00800000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         28, _Internal::llinear(this), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
   if (cached_has_bits & 0x01000000u) {
-    stream->EnsureSpace(&target);
+    target = stream->EnsureSpace(target);
     target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessageToArray(
+      InternalWriteMessage(
         29, _Internal::lquadratic(this), target, stream);
   }
 
@@ -5219,199 +5231,199 @@ size_t LightObject::RequiredFieldsByteSizeFallback() const {
 // @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.LightObject)
   size_t total_size = 0;
 
-  if (has_title()) {
+  if (_internal_has_title()) {
     // required string title = 1;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_title());
   }
 
-  if (has_description()) {
+  if (_internal_has_description()) {
     // required string description = 2;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_description());
   }
 
-  if (has_positionx()) {
+  if (_internal_has_positionx()) {
     // required .KuplungApp.ObjectCoordinate positionX = 7;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionx_);
   }
 
-  if (has_positiony()) {
+  if (_internal_has_positiony()) {
     // required .KuplungApp.ObjectCoordinate positionY = 8;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positiony_);
   }
 
-  if (has_positionz()) {
+  if (_internal_has_positionz()) {
     // required .KuplungApp.ObjectCoordinate positionZ = 9;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *positionz_);
   }
 
-  if (has_directionx()) {
+  if (_internal_has_directionx()) {
     // required .KuplungApp.ObjectCoordinate directionX = 10;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *directionx_);
   }
 
-  if (has_directiony()) {
+  if (_internal_has_directiony()) {
     // required .KuplungApp.ObjectCoordinate directionY = 11;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *directiony_);
   }
 
-  if (has_directionz()) {
+  if (_internal_has_directionz()) {
     // required .KuplungApp.ObjectCoordinate directionZ = 12;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *directionz_);
   }
 
-  if (has_scalex()) {
+  if (_internal_has_scalex()) {
     // required .KuplungApp.ObjectCoordinate scaleX = 13;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalex_);
   }
 
-  if (has_scaley()) {
+  if (_internal_has_scaley()) {
     // required .KuplungApp.ObjectCoordinate scaleY = 14;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scaley_);
   }
 
-  if (has_scalez()) {
+  if (_internal_has_scalez()) {
     // required .KuplungApp.ObjectCoordinate scaleZ = 15;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *scalez_);
   }
 
-  if (has_rotatex()) {
+  if (_internal_has_rotatex()) {
     // required .KuplungApp.ObjectCoordinate rotateX = 16;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatex_);
   }
 
-  if (has_rotatey()) {
+  if (_internal_has_rotatey()) {
     // required .KuplungApp.ObjectCoordinate rotateY = 17;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatey_);
   }
 
-  if (has_rotatez()) {
+  if (_internal_has_rotatez()) {
     // required .KuplungApp.ObjectCoordinate rotateZ = 18;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatez_);
   }
 
-  if (has_rotatecenterx()) {
+  if (_internal_has_rotatecenterx()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterX = 19;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatecenterx_);
   }
 
-  if (has_rotatecentery()) {
+  if (_internal_has_rotatecentery()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterY = 20;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatecentery_);
   }
 
-  if (has_rotatecenterz()) {
+  if (_internal_has_rotatecenterz()) {
     // required .KuplungApp.ObjectCoordinate rotateCenterZ = 21;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *rotatecenterz_);
   }
 
-  if (has_ambient()) {
+  if (_internal_has_ambient()) {
     // required .KuplungApp.MaterialColor ambient = 22;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *ambient_);
   }
 
-  if (has_diffuse()) {
+  if (_internal_has_diffuse()) {
     // required .KuplungApp.MaterialColor diffuse = 23;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *diffuse_);
   }
 
-  if (has_specular()) {
+  if (_internal_has_specular()) {
     // required .KuplungApp.MaterialColor specular = 24;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *specular_);
   }
 
-  if (has_lcutoff()) {
+  if (_internal_has_lcutoff()) {
     // required .KuplungApp.ObjectCoordinate lCutOff = 25;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *lcutoff_);
   }
 
-  if (has_loutercutoff()) {
+  if (_internal_has_loutercutoff()) {
     // required .KuplungApp.ObjectCoordinate lOuterCutOff = 26;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *loutercutoff_);
   }
 
-  if (has_lconstant()) {
+  if (_internal_has_lconstant()) {
     // required .KuplungApp.ObjectCoordinate lConstant = 27;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *lconstant_);
   }
 
-  if (has_llinear()) {
+  if (_internal_has_llinear()) {
     // required .KuplungApp.ObjectCoordinate lLinear = 28;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *llinear_);
   }
 
-  if (has_lquadratic()) {
+  if (_internal_has_lquadratic()) {
     // required .KuplungApp.ObjectCoordinate lQuadratic = 29;
     total_size += 2 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *lquadratic_);
   }
 
-  if (has_type()) {
+  if (_internal_has_type()) {
     // required int32 type = 3;
     total_size += 1 +
       ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
         this->_internal_type());
   }
 
-  if (has_showlampobject()) {
+  if (_internal_has_showlampobject()) {
     // required bool showLampObject = 4;
     total_size += 1 + 1;
   }
 
-  if (has_showlampdirection()) {
+  if (_internal_has_showlampdirection()) {
     // required bool showLampDirection = 5;
     total_size += 1 + 1;
   }
 
-  if (has_showinwire()) {
+  if (_internal_has_showinwire()) {
     // required bool showInWire = 6;
     total_size += 1 + 1;
   }
@@ -5717,74 +5729,74 @@ void LightObject::CopyFrom(const LightObject& from) {
 
 bool LightObject::IsInitialized() const {
   if ((_has_bits_[0] & 0x1fffffff) != 0x1fffffff) return false;
-  if (has_positionx()) {
-    if (!this->positionx_->IsInitialized()) return false;
+  if (_internal_has_positionx()) {
+    if (!positionx_->IsInitialized()) return false;
   }
-  if (has_positiony()) {
-    if (!this->positiony_->IsInitialized()) return false;
+  if (_internal_has_positiony()) {
+    if (!positiony_->IsInitialized()) return false;
   }
-  if (has_positionz()) {
-    if (!this->positionz_->IsInitialized()) return false;
+  if (_internal_has_positionz()) {
+    if (!positionz_->IsInitialized()) return false;
   }
-  if (has_directionx()) {
-    if (!this->directionx_->IsInitialized()) return false;
+  if (_internal_has_directionx()) {
+    if (!directionx_->IsInitialized()) return false;
   }
-  if (has_directiony()) {
-    if (!this->directiony_->IsInitialized()) return false;
+  if (_internal_has_directiony()) {
+    if (!directiony_->IsInitialized()) return false;
   }
-  if (has_directionz()) {
-    if (!this->directionz_->IsInitialized()) return false;
+  if (_internal_has_directionz()) {
+    if (!directionz_->IsInitialized()) return false;
   }
-  if (has_scalex()) {
-    if (!this->scalex_->IsInitialized()) return false;
+  if (_internal_has_scalex()) {
+    if (!scalex_->IsInitialized()) return false;
   }
-  if (has_scaley()) {
-    if (!this->scaley_->IsInitialized()) return false;
+  if (_internal_has_scaley()) {
+    if (!scaley_->IsInitialized()) return false;
   }
-  if (has_scalez()) {
-    if (!this->scalez_->IsInitialized()) return false;
+  if (_internal_has_scalez()) {
+    if (!scalez_->IsInitialized()) return false;
   }
-  if (has_rotatex()) {
-    if (!this->rotatex_->IsInitialized()) return false;
+  if (_internal_has_rotatex()) {
+    if (!rotatex_->IsInitialized()) return false;
   }
-  if (has_rotatey()) {
-    if (!this->rotatey_->IsInitialized()) return false;
+  if (_internal_has_rotatey()) {
+    if (!rotatey_->IsInitialized()) return false;
   }
-  if (has_rotatez()) {
-    if (!this->rotatez_->IsInitialized()) return false;
+  if (_internal_has_rotatez()) {
+    if (!rotatez_->IsInitialized()) return false;
   }
-  if (has_rotatecenterx()) {
-    if (!this->rotatecenterx_->IsInitialized()) return false;
+  if (_internal_has_rotatecenterx()) {
+    if (!rotatecenterx_->IsInitialized()) return false;
   }
-  if (has_rotatecentery()) {
-    if (!this->rotatecentery_->IsInitialized()) return false;
+  if (_internal_has_rotatecentery()) {
+    if (!rotatecentery_->IsInitialized()) return false;
   }
-  if (has_rotatecenterz()) {
-    if (!this->rotatecenterz_->IsInitialized()) return false;
+  if (_internal_has_rotatecenterz()) {
+    if (!rotatecenterz_->IsInitialized()) return false;
   }
-  if (has_ambient()) {
-    if (!this->ambient_->IsInitialized()) return false;
+  if (_internal_has_ambient()) {
+    if (!ambient_->IsInitialized()) return false;
   }
-  if (has_diffuse()) {
-    if (!this->diffuse_->IsInitialized()) return false;
+  if (_internal_has_diffuse()) {
+    if (!diffuse_->IsInitialized()) return false;
   }
-  if (has_specular()) {
-    if (!this->specular_->IsInitialized()) return false;
+  if (_internal_has_specular()) {
+    if (!specular_->IsInitialized()) return false;
   }
-  if (has_lcutoff()) {
-    if (!this->lcutoff_->IsInitialized()) return false;
+  if (_internal_has_lcutoff()) {
+    if (!lcutoff_->IsInitialized()) return false;
   }
-  if (has_loutercutoff()) {
-    if (!this->loutercutoff_->IsInitialized()) return false;
+  if (_internal_has_loutercutoff()) {
+    if (!loutercutoff_->IsInitialized()) return false;
   }
-  if (has_lconstant()) {
-    if (!this->lconstant_->IsInitialized()) return false;
+  if (_internal_has_lconstant()) {
+    if (!lconstant_->IsInitialized()) return false;
   }
-  if (has_llinear()) {
-    if (!this->llinear_->IsInitialized()) return false;
+  if (_internal_has_llinear()) {
+    if (!llinear_->IsInitialized()) return false;
   }
-  if (has_lquadratic()) {
-    if (!this->lquadratic_->IsInitialized()) return false;
+  if (_internal_has_lquadratic()) {
+    if (!lquadratic_->IsInitialized()) return false;
   }
   return true;
 }
