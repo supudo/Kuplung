@@ -505,6 +505,8 @@ void RenderingForward::render(const std::vector<ModelFaceData*>& meshModelFaces,
 }
 
 void RenderingForward::renderModels(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
+
   glUseProgram(this->shaderProgram);
 
   const int querycount = 5;

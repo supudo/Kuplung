@@ -93,6 +93,8 @@ bool RenderingSimple::init() {
 }
 
 void RenderingSimple::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
+
   this->matrixProjection = this->managerObjects.matrixProjection;
   this->matrixCamera = this->managerObjects.camera->matrixCamera;
   this->vecCameraPosition = this->managerObjects.camera->cameraPosition;
