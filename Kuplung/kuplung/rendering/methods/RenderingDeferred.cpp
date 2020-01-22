@@ -225,7 +225,7 @@ bool RenderingDeferred::initGBuffer() {
   // - Position color buffer
   glGenTextures(1, &this->gPosition);
   glBindTexture(GL_TEXTURE_2D, this->gPosition);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, nullptr);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, GL_RGB, GL_FLOAT, nullptr);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->gPosition, 0);
@@ -233,7 +233,7 @@ bool RenderingDeferred::initGBuffer() {
   // - Normal color buffer
   glGenTextures(1, &this->gNormal);
   glBindTexture(GL_TEXTURE_2D, this->gNormal);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGB, GL_FLOAT, nullptr);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB16F, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, GL_RGB, GL_FLOAT, nullptr);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT1, GL_TEXTURE_2D, this->gNormal, 0);
@@ -241,7 +241,7 @@ bool RenderingDeferred::initGBuffer() {
   // - Color + Specular color buffer
   glGenTextures(1, &this->gAlbedoSpec);
   glBindTexture(GL_TEXTURE_2D, this->gAlbedoSpec);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, GL_RGBA, GL_UNSIGNED_BYTE, nullptr);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT2, GL_TEXTURE_2D, this->gAlbedoSpec, 0);
@@ -254,7 +254,7 @@ bool RenderingDeferred::initGBuffer() {
   GLuint rboDepth;
   glGenRenderbuffers(1, &rboDepth);
   glBindRenderbuffer(GL_RENDERBUFFER, rboDepth);
-  glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height);
+  glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   glFramebufferRenderbuffer(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, rboDepth);
   // - Finally check if framebuffer is complete
   if (glCheckFramebufferStatus(GL_FRAMEBUFFER) != GL_FRAMEBUFFER_COMPLETE) {
@@ -340,6 +340,7 @@ bool RenderingDeferred::initLights() {
 }
 
 void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   if (this->managerObjects.Setting_DeferredRandomizeLightPositions) {
     this->init();
     this->managerObjects.Setting_DeferredRandomizeLightPositions = false;
@@ -352,7 +353,7 @@ void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces
   else {
     glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
     glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
-    glBlitFramebuffer(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+    glBlitFramebuffer(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
 
@@ -360,6 +361,7 @@ void RenderingDeferred::render(const std::vector<ModelFaceData*>& meshModelFaces
 }
 
 void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshModelFaces, const int& selectedModel) {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
   // 1. Geometry Pass: render scene's geometry/color data into gbuffer
@@ -440,6 +442,7 @@ void RenderingDeferred::renderGBuffer(const std::vector<ModelFaceData*>& meshMod
 }
 
 void RenderingDeferred::renderLightingPass() {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   // 2. Lighting Pass: calculate lighting by iterating over a screen filled quad pixel-by-pixel using the gbuffer's content.
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   glUseProgram(this->shaderProgram_LightingPass);
@@ -605,13 +608,14 @@ void RenderingDeferred::renderLightingPass() {
 }
 
 void RenderingDeferred::renderLightObjects() {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   // 2.5. Copy content of geometry's depth buffer to default framebuffer's depth buffer
   glBindFramebuffer(GL_READ_FRAMEBUFFER, this->gBuffer);
   glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0); // Write to default framebuffer
   // blit to default framebuffer. Note that this may or may not work as the internal formats of both the FBO and default framebuffer have to match.
   // the internal formats are implementation defined. This works on all of my systems, but if it doesn't on yours you'll likely have to write to the
   // depth buffer in another stage (or somehow see to match the default framebuffer's internal format with the FBO's internal format).
-  glBlitFramebuffer(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+  glBlitFramebuffer(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
   glBindFramebuffer(GL_FRAMEBUFFER, 0);
 
   // 3. Render lights on top of scene, by blitting
@@ -631,6 +635,7 @@ void RenderingDeferred::renderLightObjects() {
 }
 
 void RenderingDeferred::renderQuad() {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   if (this->quadVAO == 0) {
     const GLfloat quadVertices[] = {
         // Positions        // Texture Coords
@@ -655,6 +660,7 @@ void RenderingDeferred::renderQuad() {
 }
 
 void RenderingDeferred::renderCube() {
+  glViewport(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height);
   if (this->cubeVAO == 0) {
     const GLfloat vertices[] = {
       // Back face
