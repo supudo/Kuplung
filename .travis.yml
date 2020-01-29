@@ -12,7 +12,7 @@ compiler:
 before_install:
   - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - brew update
-  - brew install sdl2 glm minizip glfw3 assimp protobuf lua@5.3
+  - brew install sdl2 glm minizip glfw3 assimp lua@5.3
   - brew tap caskroom/drivers
 
 addons:
