@@ -506,7 +506,7 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
   }
 
   if (this->showDemoWindow)
-    ImGui::ShowTestWindow();
+    ImGui::ShowDemoWindow();
 }
 
 void UIManager::clearAllLights() {
@@ -614,7 +614,7 @@ void UIManager::recentFilesClearImported() {
 }
 
 bool UIManager::isMouseOnGUI() const {
-  return ImGui::IsMouseHoveringAnyWindow();
+  return ImGui::IsAnyWindowHovered();
 }
 
 void UIManager::showParsing() {
@@ -701,7 +701,7 @@ void UIManager::dialogAppMetrics() {
 }
 
 void UIManager::dialogAboutImGui() {
-  ImGui::SetNextWindowPosCenter();
+  ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width / 2, Settings::Instance()->SDL_Window_Height / 2), 0, ImVec2(0.5, 0.5));
   ImGui::Begin("About ImGui", &this->showAboutImgui, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("ImGui %s", ImGui::GetVersion());
   ImGui::Separator();
@@ -711,7 +711,7 @@ void UIManager::dialogAboutImGui() {
 }
 
 void UIManager::dialogAboutKuplung() {
-  ImGui::SetNextWindowPosCenter();
+  ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width / 2, Settings::Instance()->SDL_Window_Height / 2), 0, ImVec2(0.5, 0.5));
   ImGui::Begin("About Kuplung", &this->showAboutKuplung, ImGuiWindowFlags_AlwaysAutoResize);
   ImGui::Text("Kuplung %s", Settings::Instance()->appVersion.c_str());
   ImGui::Separator();
@@ -733,8 +733,8 @@ void UIManager::dialogSceneStats() {
   SDL_GetWindowSize(this->sdlWindow, &windowWidth, &windowHeight);
   int posX = 10;
   int posY = windowHeight - 200;
-  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
-  ImGui::Begin("Scene Stats", &this->showSceneStats, ImVec2(0, 0), 0.3f, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
+  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiCond_FirstUseEver);
+  ImGui::Begin("Scene Stats", &this->showSceneStats, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoSavedSettings);
   ImGui::Text("OpenGL version: 4.1 (%s)", glGetString(GL_VERSION));
   ImGui::Text("GLSL version: 4.10 (%s)", glGetString(GL_SHADING_LANGUAGE_VERSION));
   ImGui::Text("Vendor: %s", glGetString(GL_VENDOR));

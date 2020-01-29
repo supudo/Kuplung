@@ -34,6 +34,7 @@ SET(CMAKE_CXX_LINK_FLAGS "${CMAKE_CXX_LINK_FLAGS} -lnoise")
 INCLUDE_DIRECTORIES(.)
 
 ADD_DEFINITIONS(-DDef_Kuplung_OpenGL_2x)
+ADD_DEFINITIONS(-DIMGUI_IMPL_OPENGL_LOADER_CUSTOM="${CMAKE_SOURCE_DIR}/kuplung/utilities/gl/GLIncludes.h")
 
 SET(SOURCE_FILES
     kuplung/meshes/artefacts/Shadertoy.cpp

@@ -116,7 +116,7 @@ IMGUI_API bool TabLabels(int numTabs, const char** tabLabels, int& selectedIndex
         sumX += style.ItemSpacing.x + ImGui::GetItemRectSize().x;
     }
 
-    if (ImGui::IsItemHoveredRect()) {
+    if (ImGui::IsItemHovered()) {
       if (pOptionalHoveredIndex)
         *pOptionalHoveredIndex = i;
       if (tabLabelTooltips && tabLabelTooltips[i] && strlen(tabLabelTooltips[i]) > 0)

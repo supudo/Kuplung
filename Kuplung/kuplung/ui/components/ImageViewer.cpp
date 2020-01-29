@@ -23,8 +23,8 @@ void ImageViewer::showImage(bool* show) {
   if (this->tHeight > this->wHeight)
     wintHeight = this->wHeight - 80;
 
-  ImGui::SetNextWindowSize(ImVec2(winWidth, wintHeight), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(winWidth, wintHeight), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiCond_FirstUseEver);
 
   /// MIGRATE : ImGui::Begin("Image Viewer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
   ImGui::Begin("Image Viewer", show);

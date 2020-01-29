@@ -107,8 +107,8 @@ void KuplungIDE::init() {
 }
 
 void KuplungIDE::draw(const char* title, bool* p_opened, std::vector<ModelFaceBase*> const& meshModelFaces, ObjectsManager &managerObjects) {
-  ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
 
 	auto cpos = this->kuplungEditor.GetCursorPosition();
 	ImGui::PushStyleColor(ImGuiCol_FrameBg, ImVec4(.13f, .13f, .13f, 1.0f));

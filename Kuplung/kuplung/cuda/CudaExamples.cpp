@@ -31,8 +31,8 @@ void CudaExamples::init() {
 }
 
 void CudaExamples::draw(bool* p_opened, glm::mat4 matrixProjection, glm::mat4 matrixCamera, glm::mat4 matrixGrid) {
-  ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameLog_Width, Settings::Instance()->frameLog_Height), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(40, 40), ImGuiCond_FirstUseEver);
 
   if (ImGui::Begin("Cuda Examples", p_opened, ImGuiWindowFlags_ShowBorders)) {
     ImGui::TextColored(ImVec4(1, 0, 0, 1), "Select example:");

@@ -24,8 +24,8 @@ void DialogOptions::init() {
 }
 
 void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool* p_opened, bool* needsFontChange) {
-  ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiCond_FirstUseEver);
 
   /// MIGRATE : ImGui::Begin("Options", p_opened, ImGuiWindowFlags_ShowBorders);
   ImGui::Begin("Options", p_opened);
@@ -39,7 +39,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
       Settings::Instance()->saveSettings();
 #endif
 
-    ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.0f);
     ImGui::BeginChild("GUIProvider", ImVec2(0.0f, 52.0f), true);
     ImGui::Text("GUI Provider (requires restart)");
     const char* guiSystems[] = {"ImGui", "OUI"};
@@ -51,7 +51,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
     ImGui::EndChild();
     ImGui::PopStyleVar();
 
-    ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.0f);
     ImGui::BeginChild("SceneExporter", ImVec2(0.0f, 52.0f), true);
     ImGui::Text("Default scene export file format");
     const char* sceneExporterOptions[] = {"OBJ", "glTF"};
@@ -62,7 +62,7 @@ void DialogOptions::showOptionsWindow(ImGuiStyle* ref, DialogStyle* wStyle, bool
     ImGui::EndChild();
     ImGui::PopStyleVar();
 
-    ImGui::PushStyleVar(ImGuiStyleVar_ChildWindowRounding, 5.0f);
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 5.0f);
     ImGui::BeginChild("RefreshRate", ImVec2(0.0f, 98.0f), true);
     ImGui::Text("Consumption Refresh Interval (in seconds, 0 - disabled)");
     ImGui::SliderInt("Memory", &Settings::Instance()->Consumption_Interval_Memory, 0, 100);

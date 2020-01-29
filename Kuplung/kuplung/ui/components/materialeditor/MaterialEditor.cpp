@@ -35,8 +35,8 @@ void MaterialEditor::init() {
 }
 
 void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* p_opened) {
-  ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(700,600), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(100, 100), ImGuiCond_FirstUseEver);
 
   /// MIGRATE : ImGui::Begin("Material Editor", p_opened, ImGuiWindowFlags_ShowBorders);
 	ImGui::Begin("Material Editor", p_opened);
@@ -96,7 +96,7 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
   ImGui::Checkbox("Show grid", &this->show_grid);
   ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(1, 1));
   ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-  ImGui::PushStyleColor(ImGuiCol_ChildWindowBg, static_cast<ImVec4>(ImColor(60, 60, 70, 200)));
+  ImGui::PushStyleColor(ImGuiCol_WindowBg, static_cast<ImVec4>(ImColor(60, 60, 70, 200)));
   ImGui::BeginChild("scrolling_region", ImVec2(0, 0), true, ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoMove);
   ImGui::PushItemWidth(ItemWidth);
 
@@ -256,7 +256,7 @@ void MaterialEditor::draw(const int selectedModelID, ModelFaceBase *face, bool* 
     this->dragNode.node = NULL;
 
   // Open context menu
-  if (!ImGui::IsAnyItemHovered() && ImGui::IsMouseHoveringWindow() && ImGui::IsMouseClicked(1)) {
+  if (!ImGui::IsAnyItemHovered() && ImGui::IsWindowHovered() && ImGui::IsMouseClicked(1)) {
     this->node_selected = node_hovered_in_list = node_hovered_in_scene = -1;
     open_context_menu = true;
   }

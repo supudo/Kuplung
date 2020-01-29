@@ -19,8 +19,8 @@ static inline ImVec2 operator+(const ImVec2& lhs, const ImVec2& rhs) { return Im
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) { return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y); }
 
 void DialogShadertoy::render(bool* p_opened) {
-  ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(400, 500), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(200, 200), ImGuiCond_FirstUseEver);
 
 /// MIGRATE : ImGui::Begin("Shadertoy.com", p_opened, ImGuiWindowFlags_ShowBorders);
 ImGui::Begin("Shadertoy.com", p_opened);

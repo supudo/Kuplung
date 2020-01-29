@@ -1,6 +1,7 @@
 # Win32 CMake file
 
 ADD_DEFINITIONS(-DKuplung_Debug_Timings)
+ADD_DEFINITIONS(-DIMGUI_IMPL_OPENGL_LOADER_CUSTOM="${CMAKE_SOURCE_DIR}/kuplung/utilities/gl/GLIncludes.h")
 
 # Warnings
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -wd4244 -wd4100 -wd4068 -wd4267 -wd4305 -wd4838 -wd4477 -wd4305 -wd4996 -wd4309")
