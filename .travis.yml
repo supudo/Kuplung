@@ -1,7 +1,5 @@
 env:
   global:
-   # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
-   #   via the "travis encrypt" command using the project repo's public key
    - secure: "pxjms1QSZMRZHTdZKdLBhUaqMav/AV8WYRwLDRlywpMIT+13BCS6iII2WFyxK2Lx6si7jq6sRdd/HjtYl4eiXv9NkWLTZqW+1CfRm8Ns57F60+6zCHOby/2zTJgNt6d7uGtXc2dbud9+HWBnZVrZ4KyihFj9niTh3+sm7iSe5GmGL1gMN87JEheS3zZIEAIN1cBjn5LY7O2jcERH4lLuHrjv6fWuLXE06KhcZ1cSqn/1ebhS+LaGuMzBzD5CjYZ4DLN63IupNrOvLdNECW5bUrVZ3pvvt8phmyOiP5N7W2CeOSuycJowEkKt3u7Qrh5i87Uq4tvYbZarx2jN2w8PhUeY5JzZQGKX/wlXCmLJKrqk9JiF2rsDu4Re4E73AGcs/Wv50NLIsXd/tHHUWneC/WKF+wqce9lAltl87HB+ZNSnsvi2jvxxDJp8gc7D2ryWm5olAqW58nNYOlQeBDDg+jxVnGwBhY4Gd46iZAlthmvzewBupfjR7yajm5qfxlK9IPkIDwnWzuVZUoS2GUIqNTSMSb8lM0LDlwx/h4wIAyiKaQEVpIGUj8JJZ3TbN1WiF2eztc7/sXYpv3XdYX8To6sq8Jnk/bmUIeJSsNfzVm2lcw2nft+YeNM/DHpmcYqWCXc1GfA0Lle8NjThRd9wmwRvXgSuShFysldWaBBLQu8="
 
 language: cpp
@@ -13,7 +11,7 @@ before_install:
   - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
   - brew update
   - brew install sdl2 glm minizip glfw3 assimp lua@5.3
-  - brew tap caskroom/drivers
+  #- brew tap caskroom/drivers
 
 addons:
   coverity_scan:
