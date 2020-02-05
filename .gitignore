@@ -10,6 +10,7 @@
 *.dll
 *.dylib
 
+
 # Qt-es
 
 /.qmake.cache
@@ -38,18 +39,22 @@ build/
 *.qmlproject.user
 *.qmlproject.user.*
 
-# VS 2015
+# Visual Studio
 *.tlog
 VS2015/packages/*
 VS2015/Kuplung.VC.opendb
 VS2015/Kuplung.sdf
-
-# VS 2017
 *.sdf
 MSVC/resources/*
 MSVC/.vs/*
 MSVC/Kuplung.dir/*
+Kuplung.dir/*
 MSVC/Release/*
+external/*
+Kuplung/CMakeFiles/*
+*.vcxproj.user
+*.aps
+
 
 # VSCode
 .vscode
@@ -73,5 +78,6 @@ DerivedData
 *.hmap
 xcuserdata/*
 
-# Manual
-Kuplung/kuplung/utilities/saveopen/*.pb.*
+# protobuf generated files
+Kuplung/kuplung/utilities/saveopen/*.pb.h
+Kuplung/kuplung/utilities/saveopen/*.pb.cc
