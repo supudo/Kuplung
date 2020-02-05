@@ -21,6 +21,7 @@ C/C++/OpenGL Model Viewer (Experiments).
 - Python - [Kuplung-Py](https://github.com/supudo/Kuplung-Py)
 - Vulkan - [KuplungVK](https://github.com/supudo/KuplungVK)
 - Rust - [Kuplung-Rust](https://github.com/supudo/Kuplung-Rust)
+- Go - [Kuplung-Go](https://github.com/supudo/Kuplung-Go)
 
 #### TODO
 

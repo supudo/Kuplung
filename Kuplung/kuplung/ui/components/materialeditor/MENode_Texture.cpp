@@ -46,7 +46,7 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
   ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
   ImGui::BeginGroup();
 
-  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiSetCond_Always);
+  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiCond_Always);
   if (ImGui::TreeNode(this, "%s", "")) {
     ImGui::TreePop();
     this->IsExpanded = true;
@@ -118,8 +118,8 @@ void MENode_Texture::showImage() {
   posX = ImGui::GetMousePos().x + 20;
   posY = 20;
 
-  ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiCond_FirstUseEver);
 
   std::string title;
   switch (this->TextureType) {

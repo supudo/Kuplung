@@ -179,7 +179,7 @@ void Skybox::render(const glm::mat4& matrixView, const float& plane_close, const
 
     glUniformMatrix4fv(this->glVS_MatrixView, 1, GL_FALSE, glm::value_ptr(matrixView));
 
-    glm::mat4 matrixProjection = glm::perspective(fov, static_cast<float>(Settings::Instance()->SDL_Window_Width) / static_cast<float>(Settings::Instance()->SDL_Window_Height), plane_close, plane_far);
+    glm::mat4 matrixProjection = glm::perspective(fov, static_cast<float>(Settings::Instance()->SDL_DrawableSize_Width) / static_cast<float>(Settings::Instance()->SDL_DrawableSize_Height), plane_close, plane_far);
     glUniformMatrix4fv(this->glVS_MatrixProjection, 1, GL_FALSE, glm::value_ptr(matrixProjection));
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, this->vboTexture);

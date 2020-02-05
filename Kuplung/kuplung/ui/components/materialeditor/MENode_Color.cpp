@@ -24,7 +24,7 @@ void MENode_Color::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool s
   ImGui::SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
   ImGui::BeginGroup();
 
-  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiSetCond_Always);
+  ImGui::SetNextTreeNodeOpen(this->IsExpanded, ImGuiCond_Always);
   if (ImGui::TreeNode(this, "%s", "")) {
     ImGui::TreePop();
     this->IsExpanded = true;

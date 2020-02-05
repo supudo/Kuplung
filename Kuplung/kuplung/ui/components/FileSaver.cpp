@@ -30,12 +30,12 @@ void FileSaver::init(int positionX, int positionY, int width, int height, const 
 
 void FileSaver::draw(const char* title, FileSaverOperation type, bool* p_opened) {
   if (this->width > 0 && this->height > 0)
-    ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(this->width, this->height), ImGuiCond_FirstUseEver);
   else
-    ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowSize(ImVec2(Settings::Instance()->frameFileBrowser_Width, Settings::Instance()->frameFileBrowser_Height), ImGuiCond_FirstUseEver);
 
   if (this->positionX > 0 && this->positionY > 0)
-    ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiSetCond_FirstUseEver);
+    ImGui::SetNextWindowPos(ImVec2(this->positionX, this->positionY), ImGuiCond_FirstUseEver);
 
   ImGui::Begin(title, p_opened);
   ImGui::Text("%s", this->currentFolder.c_str());

@@ -282,8 +282,8 @@ void DefaultForwardRenderer::createFBO() {
   this->generateAttachmentTexture(false, false);
   glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, this->renderTextureColorBuffer, 0);
 
-  const int screenWidth = Settings::Instance()->SDL_Window_Width;
-  const int screenHeight = Settings::Instance()->SDL_Window_Height;
+  const int screenWidth = Settings::Instance()->SDL_DrawableSize_Width;
+  const int screenHeight = Settings::Instance()->SDL_DrawableSize_Height;
 
   glGenRenderbuffers(1, &this->renderRBO);
   glBindRenderbuffer(GL_RENDERBUFFER, this->renderRBO);
@@ -304,8 +304,8 @@ void DefaultForwardRenderer::generateAttachmentTexture(GLboolean depth, GLboolea
   else if (!depth && stencil)
     attachment_type = GL_STENCIL_INDEX;
 
-  int screenWidth = Settings::Instance()->SDL_Window_Width;
-  int screenHeight = Settings::Instance()->SDL_Window_Height;
+  int screenWidth = Settings::Instance()->SDL_DrawableSize_Width;
+  int screenHeight = Settings::Instance()->SDL_DrawableSize_Height;
 
   glGenTextures(1, &this->renderTextureColorBuffer);
   glBindTexture(GL_TEXTURE_2D, this->renderTextureColorBuffer);
@@ -322,8 +322,8 @@ std::string DefaultForwardRenderer::renderImage(const FBEntity& file, std::vecto
   this->fileOutputImage = file;
   std::string endFile;
 
-  int width = Settings::Instance()->SDL_Window_Width;
-  int height = Settings::Instance()->SDL_Window_Height;
+  int width = Settings::Instance()->SDL_DrawableSize_Width;
+  int height = Settings::Instance()->SDL_DrawableSize_Height;
 
   this->createFBO();
 
@@ -339,7 +339,7 @@ std::string DefaultForwardRenderer::renderImage(const FBEntity& file, std::vecto
   unsigned char* pixels = new unsigned char[3 * width * height];
 
   glBindFramebuffer(GL_READ_FRAMEBUFFER, this->renderFBO);
-  glBlitFramebuffer(0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, 0, 0, Settings::Instance()->SDL_Window_Width, Settings::Instance()->SDL_Window_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
+  glBlitFramebuffer(0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, 0, 0, Settings::Instance()->SDL_DrawableSize_Width, Settings::Instance()->SDL_DrawableSize_Height, GL_DEPTH_BUFFER_BIT, GL_NEAREST);
   glReadBuffer(GL_COLOR_ATTACHMENT0);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
   glReadPixels(0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, pixels);
@@ -448,8 +448,8 @@ void DefaultForwardRenderer::renderSceneToFBO(std::vector<ModelFaceBase*>* meshM
     glUniform3f(this->glFS_CameraPosition, this->vecCameraPosition.x, this->vecCameraPosition.y, this->vecCameraPosition.z);
 
     // screen size
-    glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_Window_Width);
-    glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_Window_Height);
+    glUniform1f(this->glFS_ScreenResX, Settings::Instance()->SDL_DrawableSize_Width);
+    glUniform1f(this->glFS_ScreenResY, Settings::Instance()->SDL_DrawableSize_Height);
 
     // Outline color
     glUniform3f(this->glFS_OutlineColor, mfd->getOptionsOutlineColor().r, mfd->getOptionsOutlineColor().g, mfd->getOptionsOutlineColor().b);

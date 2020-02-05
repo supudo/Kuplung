@@ -264,8 +264,8 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
   posX = gw->Pos.x + gw->Rect().GetWidth() + 20;
   posY = 20;
 
-  ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(tWidth, tHeight), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(posX, posY), ImGuiCond_FirstUseEver);
 
   title = title + " Texture";
   /// MIGRATE : ImGui::Begin(title.c_str(), showWindow, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
@@ -283,8 +283,8 @@ void DialogControlsModels::showTextureImage(ModelFaceBase* mmf, MaterialTextureT
 }
 
 void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFaceBase*>* mmfaces, int* sceneSelectedModelObject) {
-  ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(300, 660), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(10, 28), ImGuiCond_FirstUseEver);
   /// MIGRATE : ImGui::Begin("Scene Settings", show, ImGuiWindowFlags_ShowBorders);
   ImGui::Begin("Scene Settings", show);
 

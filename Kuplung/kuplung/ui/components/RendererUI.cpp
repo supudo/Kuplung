@@ -37,8 +37,8 @@ void RendererUI::init(SDL_Window* sdlWindow) {
 }
 
 void RendererUI::render(bool* show, ImageRenderer* imageRenderer, ObjectsManager* managerObjects, std::vector<ModelFaceBase*>* meshModelFaces) {
-  ImGui::SetNextWindowSize(ImVec2(this->wWidth, this->wHeight), ImGuiSetCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiSetCond_FirstUseEver);
+  ImGui::SetNextWindowSize(ImVec2(this->wWidth, this->wHeight), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiCond_FirstUseEver);
 
   /// MIGRATE : ImGui::Begin("Renderer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
   ImGui::Begin("Renderer", show);
@@ -159,8 +159,8 @@ void RendererUI::render(bool* show, ImageRenderer* imageRenderer, ObjectsManager
 }
 
 //void RendererUI::render(bool* show, ImageRenderer *imageRenderer, ObjectsManager *managerObjects, std::vector<ModelFaceBase*> *meshModelFaces) {
-//    ImGui::SetNextWindowSize(ImVec2(this->wWidth, this->wHeight), ImGuiSetCond_FirstUseEver);
-//    ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiSetCond_FirstUseEver);
+//    ImGui::SetNextWindowSize(ImVec2(this->wWidth, this->wHeight), ImGuiCond_FirstUseEver);
+//    ImGui::SetNextWindowPos(ImVec2(40.0f, 40.0f), ImGuiCond_FirstUseEver);
 
 //    ImGui::Begin("Renderer", show, ImGuiWindowFlags_ShowBorders | ImGuiWindowFlags_HorizontalScrollbar);
 
