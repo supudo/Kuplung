@@ -50,7 +50,6 @@ MSVC/.vs/*
 MSVC/Kuplung.dir/*
 Kuplung.dir/*
 MSVC/Release/*
-external/*
 Kuplung/CMakeFiles/*
 *.vcxproj.user
 *.aps
