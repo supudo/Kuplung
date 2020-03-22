@@ -26,7 +26,7 @@ void SpaceshipMeshGenerator::generate(const int& gridSize) {
   this->generateFirstHull2();
   this->generateMeshModel();
   models.push_back(this->modelSpaceship);
-  Kuplung_printObjModels(models, false);
+  //Kuplung_printObjModels(models, false);
 }
 
 void SpaceshipMeshGenerator::generateFirstHull() {

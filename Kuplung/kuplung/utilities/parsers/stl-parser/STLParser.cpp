@@ -35,7 +35,11 @@ std::vector<MeshModel> STLParser::parse(const FBEntity& file, const std::vector<
 
   unsigned int fileSize;
 
-  FILE* fp = fopen(file.path.c_str(), "rb");
+  auto fp = fopen(file.path.c_str(), "rb");
+	if (!fp) {
+		Settings::Instance()->funcDoLog("[Kuplung] Could not parse STL file!");
+    return this->models;
+	}
   fseek(fp, 0, SEEK_END);
   fileSize = ftell(fp);
   char* stl_data_buffer = new char[fileSize + 1];

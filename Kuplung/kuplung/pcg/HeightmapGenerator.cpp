@@ -278,8 +278,10 @@ void HeightmapGenerator::generateSphereGeometry() {
 
   if (Settings::Instance()->logDebugInfo) {
     std::ofstream out(this->assetsFolder + "/terrain.txt");
-    out << grapher;
-    out.close();
+    if (out.is_open()) {
+      out << grapher;
+      out.close();
+    }
   }
 }
 
@@ -483,8 +485,10 @@ void HeightmapGenerator::generatePlaneGeometryCubic() {
 
   if (Settings::Instance()->logDebugInfo) {
     std::ofstream out(this->assetsFolder + "/terrain.txt");
-    out << grapher;
-    out.close();
+    if (out.is_open()) {
+      out << grapher;
+      out.close();
+    }
   }
 }
 

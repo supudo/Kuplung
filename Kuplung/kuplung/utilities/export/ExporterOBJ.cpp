@@ -295,8 +295,10 @@ void ExporterOBJ::saveFile(const std::string& fileContents, const std::string& f
   //    printf("--------------------------------------------------------\n");
 
   std::ofstream out(fileName);
-  out << fileContents;
-  out.close();
+  if (out.is_open()) {
+    out << fileContents;
+    out.close();
+  }
 }
 
 } // namespace Export

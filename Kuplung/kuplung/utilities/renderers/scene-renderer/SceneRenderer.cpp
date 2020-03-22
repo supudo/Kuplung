@@ -15,9 +15,6 @@
 SceneRenderer::SceneRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
 }
 
-SceneRenderer::~SceneRenderer() {
-}
-
 void SceneRenderer::init() {
 }
 

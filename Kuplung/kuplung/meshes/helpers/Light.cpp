@@ -26,7 +26,6 @@ Light::~Light() {
   glDeleteBuffers(1, &this->vboNormals);
   glDeleteBuffers(1, &this->vboTextureCoordinates);
   glDeleteBuffers(1, &this->vboIndices);
-  GLuint vboTextureDiffuse;
 
   this->positionX.reset();
   this->positionY.reset();

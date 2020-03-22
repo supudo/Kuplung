@@ -14,7 +14,7 @@
 
 class KuplungRendererBase {
 public:
-  virtual ~KuplungRendererBase();
+  virtual ~KuplungRendererBase() = default;
   virtual void init();
   virtual std::string renderImage(const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces);
   virtual void showSpecificSettings();

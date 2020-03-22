@@ -41,32 +41,7 @@ DialogControlsGUI::DialogControlsGUI(ObjectsManager& managerObjects)
   this->lockCameraWithLight = false;
 }
 
-void DialogControlsGUI::render(bool* show, bool* isFrame) {
-  ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiCond_FirstUseEver);
-  ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiCond_FirstUseEver);
-  /// MIGRATE : ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
-  ImGui::Begin("GUI Controls", show);
-
-  ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
-  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
-  ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
-  if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
-    this->managerObjects.resetPropertiesSystem();
-    if (this->selectedObjectLight > -1) {
-      this->lightRotateX = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
-      this->lightRotateY = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
-      this->lightRotateZ = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
-    }
-#ifdef DEF_KuplungSetting_UseCuda
-    this->cudaOceanFFT->initParameters();
-#endif
-  }
-  ImGui::PopStyleColor(3);
-
-  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
-  ImGui::PushStyleColor(ImGuiCol_FrameBg, (ImVec4)ImColor(255, 0, 0));
-  ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
-  ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
+void DialogControlsGUI::drawGlobalItems() {
   for (int i = 0; i < 8; i++) {
     switch (i) {
       case 0: {
@@ -143,15 +118,6 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         }
         break;
       }
-      //            case 7: {
-      //                ImGui::Indent();
-      //                if (ImGui::Selectable(ICON_FA_ALIGN_CENTER "Terrain", this->selectedObject == i)) {
-      //                    this->selectedObject = i;
-      //                    this->selectedObjectLight = -1;
-      //                }
-      //                ImGui::Unindent();
-      //                break;
-      //            }
       case 7: {
         if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Artefacts")) {
           ImGui::Bullet();
@@ -179,27 +145,9 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
         break;
     }
   }
-  ImGui::EndChild();
-  ImGui::PopItemWidth();
-  ImGui::PopStyleColor();
-  ImGui::PopStyleVar();
+}
 
-  ImGui::GetIO().MouseDrawCursor = true;
-  ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
-  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
-  ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
-  ImGui::Button("###splitterGUI", ImVec2(-1, 8.0f));
-  ImGui::PopStyleColor(3);
-  if (ImGui::IsItemActive())
-    this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
-  if (ImGui::IsItemHovered())
-    ImGui::SetMouseCursor(3);
-  else
-    ImGui::GetIO().MouseDrawCursor = false;
-
-  ImGui::BeginChild("Properties Pane", ImVec2(0, 0), false);
-
-  ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
+void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
   switch (this->selectedObject) {
     case 0: {
       if (ImGui::CollapsingHeader("View Options")) {
@@ -303,10 +251,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
           ImGui::PopStyleColor();
         }
-        else {
-          if (ImGui::Button("Vertex", ImVec2(width, 0)))
+        else if (ImGui::Button("Vertex", ImVec2(width, 0)))
             this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Vertex;
-        }
 
         ImGui::SameLine();
 
@@ -316,10 +262,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
           ImGui::PopStyleColor();
         }
-        else {
-          if (ImGui::Button("Line", ImVec2(width, 0)))
-            this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
-        }
+        else if (ImGui::Button("Line", ImVec2(width, 0)))
+          this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Line;
 
         ImGui::SameLine();
 
@@ -329,10 +273,8 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
             this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
           ImGui::PopStyleColor();
         }
-        else {
-          if (ImGui::Button("Face", ImVec2(width, 0)))
-            this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
-        }
+        else if (ImGui::Button("Face", ImVec2(width, 0)))
+          this->managerObjects.Setting_GeometryEditMode = GeometryEditMode_Face;
 
         ImGui::EndGroup();
         ImGui::Separator();
@@ -514,10 +456,10 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
       const char* tabsGUIGrid[] = {
-          "\n" ICON_MD_TRANSFORM,
-          "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
-          "\n" ICON_MD_3D_ROTATION,
-          "\n" ICON_MD_OPEN_WITH,
+        "\n" ICON_MD_TRANSFORM,
+        "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+        "\n" ICON_MD_3D_ROTATION,
+        "\n" ICON_MD_OPEN_WITH,
       };
       const char* tabsLabelsGUIGrid[] = {"General", "Scale", "Rotate", "Translate"};
       const int numTabsGUIGrid = sizeof(tabsGUIGrid) / sizeof(tabsGUIGrid[0]);
@@ -895,6 +837,57 @@ void DialogControlsGUI::render(bool* show, bool* isFrame) {
     default:
       break;
   }
+}
+
+void DialogControlsGUI::render(bool* show, bool* isFrame) {
+  ImGui::SetNextWindowSize(ImVec2(300, 600), ImGuiCond_FirstUseEver);
+  ImGui::SetNextWindowPos(ImVec2(Settings::Instance()->SDL_Window_Width - 310, 28), ImGuiCond_FirstUseEver);
+  /// MIGRATE : ImGui::Begin("GUI Controls", show, ImGuiWindowFlags_ShowBorders);
+  ImGui::Begin("GUI Controls", show);
+
+  ImGui::PushStyleColor(ImGuiCol_Button, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.6f, 0.6f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f));
+  ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
+  if (ImGui::Button("Reset values to default", ImVec2(-1, 0))) {
+    this->managerObjects.resetPropertiesSystem();
+    if (this->selectedObjectLight > -1) {
+      this->lightRotateX = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateX->point;
+      this->lightRotateY = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateY->point;
+      this->lightRotateZ = this->managerObjects.lightSources[size_t(this->selectedObjectLight)]->rotateZ->point;
+    }
+#ifdef DEF_KuplungSetting_UseCuda
+    this->cudaOceanFFT->initParameters();
+#endif
+  }
+  ImGui::PopStyleColor(3);
+
+  ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 6));
+  ImGui::PushStyleColor(ImGuiCol_FrameBg, (ImVec4)ImColor(255, 0, 0));
+  ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.95f);
+  ImGui::BeginChild("Global Items", ImVec2(0, this->heightTopPanel), true);
+  this->drawGlobalItems();
+  ImGui::EndChild();
+  ImGui::PopItemWidth();
+  ImGui::PopStyleColor();
+  ImGui::PopStyleVar();
+
+  ImGui::GetIO().MouseDrawCursor = true;
+  ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor(89, 91, 94)));
+  ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor(119, 122, 124)));
+  ImGui::PushStyleColor(ImGuiCol_Border, static_cast<ImVec4>(ImColor(0, 0, 0)));
+  ImGui::Button("###splitterGUI", ImVec2(-1, 8.0f));
+  ImGui::PopStyleColor(3);
+  if (ImGui::IsItemActive())
+    this->heightTopPanel += ImGui::GetIO().MouseDelta.y;
+  if (ImGui::IsItemHovered())
+    ImGui::SetMouseCursor(3);
+  else
+    ImGui::GetIO().MouseDrawCursor = false;
+
+  ImGui::BeginChild("Properties Pane", ImVec2(0, 0), false);
+
+  ImGui::PushItemWidth(ImGui::GetWindowWidth() * 0.75f);
+  this->drawPropertiesPane(isFrame);
   ImGui::PopItemWidth();
   ImGui::EndChild();
   ImGui::End();

@@ -41,7 +41,7 @@ Kuplung::~Kuplung() {
   for (size_t i = 0; i < this->rayLines.size(); i++) {
     RayLine* rl = this->rayLines[i];
     delete rl;
-  }
+  } 
 
   this->managerUI.reset();
   this->parser.reset();

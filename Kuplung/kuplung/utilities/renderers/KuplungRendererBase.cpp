@@ -8,9 +8,6 @@
 
 #include "KuplungRendererBase.hpp"
 
-KuplungRendererBase::~KuplungRendererBase() {
-}
-
 void KuplungRendererBase::init() {
 }
 
