@@ -182,8 +182,10 @@ void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const& recentFil
     recentFilesLines += nlDelimiter;
   }
   std::ofstream out(this->recentFilesFileImported, std::ios_base::trunc);
-  out << recentFilesLines;
-  out.close();
+  if (out.is_open()) {
+    out << recentFilesLines;
+    out.close();
+  }
 }
 
 std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {

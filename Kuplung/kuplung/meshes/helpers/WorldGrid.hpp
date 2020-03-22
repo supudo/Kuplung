@@ -15,7 +15,6 @@
 #include "kuplung/objects/ObjectDefinitions.h"
 #include "kuplung/settings/Settings.h"
 #include "kuplung/objects/Objects.h"
-#include "kuplung/objects/ObjectDefinitions.h"
 
 class WorldGrid {
 public:
