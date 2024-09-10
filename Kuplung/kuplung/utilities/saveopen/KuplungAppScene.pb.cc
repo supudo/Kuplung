@@ -13,7 +13,6 @@
 #include "google/protobuf/wire_format.h"
 #include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-<<<<<<< HEAD
 
 // Must be included last.
 #include "google/protobuf/port_def.inc"
@@ -109,29 +108,11 @@ PROTOBUF_CONSTEXPR Scene::Scene(::_pbi::ConstantInitialized)
     : _impl_(::_pbi::ConstantInitialized()) {}
 struct SceneDefaultTypeInternal {
   PROTOBUF_CONSTEXPR SceneDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
-=======
-#include <google/protobuf/port_def.inc>
-
-PROTOBUF_PRAGMA_INIT_SEG
-
-namespace _pb = ::PROTOBUF_NAMESPACE_ID;
-namespace _pbi = _pb::internal;
-
-namespace KuplungApp {
-PROTOBUF_CONSTEXPR Scene::Scene(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.models_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
-struct SceneDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR SceneDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   ~SceneDefaultTypeInternal() {}
   union {
     Scene _instance;
   };
 };
-<<<<<<< HEAD
 
 PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
     PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SceneDefaultTypeInternal _Scene_default_instance_;
@@ -395,311 +376,6 @@ PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_KuplungA
 // Force running AddDescriptors() at dynamic initialization time.
 PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_KuplungAppScene_2eproto(&descriptor_table_KuplungAppScene_2eproto);
-=======
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SceneDefaultTypeInternal _Scene_default_instance_;
-PROTOBUF_CONSTEXPR MeshModel::MeshModel(
-    ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_._has_bits_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}
-  , /*decltype(_impl_.positionx_)*/nullptr
-  , /*decltype(_impl_.positiony_)*/nullptr
-  , /*decltype(_impl_.positionz_)*/nullptr
-  , /*decltype(_impl_.scalex_)*/nullptr
-  , /*decltype(_impl_.scaley_)*/nullptr
-  , /*decltype(_impl_.scalez_)*/nullptr
-  , /*decltype(_impl_.rotatex_)*/nullptr
-  , /*decltype(_impl_.rotatey_)*/nullptr
-  , /*decltype(_impl_.rotatez_)*/nullptr
-  , /*decltype(_impl_.displacex_)*/nullptr
-  , /*decltype(_impl_.displacey_)*/nullptr
-  , /*decltype(_impl_.displacez_)*/nullptr
-  , /*decltype(_impl_.setting_materialrefraction_)*/nullptr
-  , /*decltype(_impl_.setting_materialspecularexp_)*/nullptr
-  , /*decltype(_impl_.solidlightskin_materialcolor_)*/nullptr
-  , /*decltype(_impl_.solidlightskin_ambient_)*/nullptr
-  , /*decltype(_impl_.solidlightskin_diffuse_)*/nullptr
-  , /*decltype(_impl_.solidlightskin_specular_)*/nullptr
-  , /*decltype(_impl_.setting_lightposition_)*/nullptr
-  , /*decltype(_impl_.setting_lightdirection_)*/nullptr
-  , /*decltype(_impl_.setting_lightambient_)*/nullptr
-  , /*decltype(_impl_.setting_lightdiffuse_)*/nullptr
-  , /*decltype(_impl_.setting_lightspecular_)*/nullptr
-  , /*decltype(_impl_.displacementheightscale_)*/nullptr
-  , /*decltype(_impl_.materialambient_)*/nullptr
-  , /*decltype(_impl_.materialdiffuse_)*/nullptr
-  , /*decltype(_impl_.materialspecular_)*/nullptr
-  , /*decltype(_impl_.materialemission_)*/nullptr
-  , /*decltype(_impl_.effect_gblur_radius_)*/nullptr
-  , /*decltype(_impl_.effect_gblur_width_)*/nullptr
-  , /*decltype(_impl_.meshobject_)*/nullptr
-  , /*decltype(_impl_.modelid_)*/0
-  , /*decltype(_impl_.settings_deferredrender_)*/false
-  , /*decltype(_impl_.setting_celshading_)*/false
-  , /*decltype(_impl_.setting_wireframe_)*/false
-  , /*decltype(_impl_.setting_usetessellation_)*/false
-  , /*decltype(_impl_.setting_alpha_)*/0
-  , /*decltype(_impl_.setting_tessellationsubdivision_)*/0
-  , /*decltype(_impl_.setting_modelviewskin_)*/0
-  , /*decltype(_impl_.solidlightskin_ambient_strength_)*/0
-  , /*decltype(_impl_.solidlightskin_diffuse_strength_)*/0
-  , /*decltype(_impl_.solidlightskin_specular_strength_)*/0
-  , /*decltype(_impl_.setting_usecullface_)*/false
-  , /*decltype(_impl_.showmaterialeditor_)*/false
-  , /*decltype(_impl_.setting_parallaxmapping_)*/false
-  , /*decltype(_impl_.effect_bloom_dobloom_)*/false
-  , /*decltype(_impl_.setting_lightstrengthambient_)*/0
-  , /*decltype(_impl_.setting_lightstrengthdiffuse_)*/0
-  , /*decltype(_impl_.setting_lightstrengthspecular_)*/0
-  , /*decltype(_impl_.materialilluminationmodel_)*/0
-  , /*decltype(_impl_.effect_gblur_mode_)*/0
-  , /*decltype(_impl_.effect_bloom_weighta_)*/0
-  , /*decltype(_impl_.effect_bloom_weightb_)*/0
-  , /*decltype(_impl_.effect_bloom_weightc_)*/0
-  , /*decltype(_impl_.effect_bloom_weightd_)*/0
-  , /*decltype(_impl_.effect_bloom_vignette_)*/0
-  , /*decltype(_impl_.effect_bloom_vignetteatt_)*/0
-  , /*decltype(_impl_.setting_lightingpass_drawmode_)*/0} {}
-struct MeshModelDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR MeshModelDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~MeshModelDefaultTypeInternal() {}
-  union {
-    MeshModel _instance;
-  };
-};
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MeshModelDefaultTypeInternal _MeshModel_default_instance_;
-}  // namespace KuplungApp
-static ::_pb::Metadata file_level_metadata_KuplungAppScene_2eproto[2];
-static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_KuplungAppScene_2eproto = nullptr;
-static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_KuplungAppScene_2eproto = nullptr;
-
-const uint32_t TableStruct_KuplungAppScene_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Scene, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Scene, _impl_.models_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_._has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.modelid_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.settings_deferredrender_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_celshading_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_wireframe_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_usetessellation_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_usecullface_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_alpha_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_tessellationsubdivision_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.positionx_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.positiony_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.positionz_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.scalex_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.scaley_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.scalez_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.rotatex_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.rotatey_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.rotatez_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.displacex_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.displacey_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.displacez_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_materialrefraction_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_materialspecularexp_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_modelviewskin_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_materialcolor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_ambient_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_diffuse_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_specular_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_ambient_strength_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_diffuse_strength_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.solidlightskin_specular_strength_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightposition_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightdirection_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightambient_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightdiffuse_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightspecular_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightstrengthambient_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightstrengthdiffuse_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightstrengthspecular_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.materialilluminationmodel_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.displacementheightscale_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.showmaterialeditor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.materialambient_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.materialdiffuse_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.materialspecular_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.materialemission_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_parallaxmapping_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_gblur_mode_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_gblur_radius_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_gblur_width_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_dobloom_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_weighta_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_weightb_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_weightc_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_weightd_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_vignette_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.effect_bloom_vignetteatt_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.setting_lightingpass_drawmode_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModel, _impl_.meshobject_),
-  31,
-  32,
-  33,
-  34,
-  35,
-  42,
-  36,
-  37,
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  12,
-  13,
-  38,
-  14,
-  15,
-  16,
-  17,
-  39,
-  40,
-  41,
-  18,
-  19,
-  20,
-  21,
-  22,
-  46,
-  47,
-  48,
-  49,
-  23,
-  43,
-  24,
-  25,
-  26,
-  27,
-  44,
-  50,
-  28,
-  29,
-  45,
-  51,
-  52,
-  53,
-  54,
-  55,
-  56,
-  57,
-  30,
-};
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::KuplungApp::Scene)},
-  { 7, 71, -1, sizeof(::KuplungApp::MeshModel)},
-};
-
-static const ::_pb::Message* const file_default_instances[] = {
-  &::KuplungApp::_Scene_default_instance_._instance,
-  &::KuplungApp::_MeshModel_default_instance_._instance,
-};
-
-const char descriptor_table_protodef_KuplungAppScene_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\025KuplungAppScene.proto\022\nKuplungApp\032\030Kup"
-  "lungDefinitions.proto\".\n\005Scene\022%\n\006models"
-  "\030\001 \003(\0132\025.KuplungApp.MeshModel\"\252\023\n\tMeshMo"
-  "del\022\017\n\007ModelID\030\001 \002(\005\022\037\n\027Settings_Deferre"
-  "dRender\030\002 \002(\010\022\032\n\022Setting_CelShading\030\003 \002("
-  "\010\022\031\n\021Setting_Wireframe\030\004 \002(\010\022\037\n\027Setting_"
-  "UseTessellation\030\005 \002(\010\022\033\n\023Setting_UseCull"
-  "Face\030\006 \002(\010\022\025\n\rSetting_Alpha\030\007 \002(\002\022\'\n\037Set"
-  "ting_TessellationSubdivision\030\010 \002(\005\022/\n\tpo"
-  "sitionX\030\t \002(\0132\034.KuplungApp.ObjectCoordin"
-  "ate\022/\n\tpositionY\030\n \002(\0132\034.KuplungApp.Obje"
-  "ctCoordinate\022/\n\tpositionZ\030\013 \002(\0132\034.Kuplun"
-  "gApp.ObjectCoordinate\022,\n\006scaleX\030\014 \002(\0132\034."
-  "KuplungApp.ObjectCoordinate\022,\n\006scaleY\030\r "
-  "\002(\0132\034.KuplungApp.ObjectCoordinate\022,\n\006sca"
-  "leZ\030\016 \002(\0132\034.KuplungApp.ObjectCoordinate\022"
-  "-\n\007rotateX\030\017 \002(\0132\034.KuplungApp.ObjectCoor"
-  "dinate\022-\n\007rotateY\030\020 \002(\0132\034.KuplungApp.Obj"
-  "ectCoordinate\022-\n\007rotateZ\030\021 \002(\0132\034.Kuplung"
-  "App.ObjectCoordinate\022/\n\tdisplaceX\030\022 \002(\0132"
-  "\034.KuplungApp.ObjectCoordinate\022/\n\tdisplac"
-  "eY\030\023 \002(\0132\034.KuplungApp.ObjectCoordinate\022/"
-  "\n\tdisplaceZ\030\024 \002(\0132\034.KuplungApp.ObjectCoo"
-  "rdinate\022@\n\032Setting_MaterialRefraction\030\025 "
-  "\002(\0132\034.KuplungApp.ObjectCoordinate\022A\n\033Set"
-  "ting_MaterialSpecularExp\030\026 \002(\0132\034.Kuplung"
-  "App.ObjectCoordinate\022\035\n\025Setting_ModelVie"
-  "wSkin\030\027 \002(\005\0226\n\034solidLightSkin_MaterialCo"
-  "lor\030\030 \002(\0132\020.KuplungApp.Vec3\0220\n\026solidLigh"
-  "tSkin_Ambient\030\031 \002(\0132\020.KuplungApp.Vec3\0220\n"
-  "\026solidLightSkin_Diffuse\030\032 \002(\0132\020.KuplungA"
-  "pp.Vec3\0221\n\027solidLightSkin_Specular\030\033 \002(\013"
-  "2\020.KuplungApp.Vec3\022\'\n\037solidLightSkin_Amb"
-  "ient_Strength\030\034 \002(\002\022\'\n\037solidLightSkin_Di"
-  "ffuse_Strength\030\035 \002(\002\022(\n solidLightSkin_S"
-  "pecular_Strength\030\036 \002(\002\022/\n\025Setting_LightP"
-  "osition\030\037 \002(\0132\020.KuplungApp.Vec3\0220\n\026Setti"
-  "ng_LightDirection\030  \002(\0132\020.KuplungApp.Vec"
-  "3\022.\n\024Setting_LightAmbient\030! \002(\0132\020.Kuplun"
-  "gApp.Vec3\022.\n\024Setting_LightDiffuse\030\" \002(\0132"
-  "\020.KuplungApp.Vec3\022/\n\025Setting_LightSpecul"
-  "ar\030# \002(\0132\020.KuplungApp.Vec3\022$\n\034Setting_Li"
-  "ghtStrengthAmbient\030$ \002(\002\022$\n\034Setting_Ligh"
-  "tStrengthDiffuse\030% \002(\002\022%\n\035Setting_LightS"
-  "trengthSpecular\030& \002(\002\022!\n\031materialIllumin"
-  "ationModel\030\' \002(\005\022=\n\027displacementHeightSc"
-  "ale\030( \002(\0132\034.KuplungApp.ObjectCoordinate\022"
-  "\032\n\022showMaterialEditor\030) \002(\010\0222\n\017materialA"
-  "mbient\030* \002(\0132\031.KuplungApp.MaterialColor\022"
-  "2\n\017materialDiffuse\030+ \002(\0132\031.KuplungApp.Ma"
-  "terialColor\0223\n\020materialSpecular\030, \002(\0132\031."
-  "KuplungApp.MaterialColor\0223\n\020materialEmis"
-  "sion\030- \002(\0132\031.KuplungApp.MaterialColor\022\037\n"
-  "\027Setting_ParallaxMapping\030. \002(\010\022\031\n\021Effect"
-  "_GBlur_Mode\030/ \002(\005\0229\n\023Effect_GBlur_Radius"
-  "\0300 \002(\0132\034.KuplungApp.ObjectCoordinate\0228\n\022"
-  "Effect_GBlur_Width\0301 \002(\0132\034.KuplungApp.Ob"
-  "jectCoordinate\022\034\n\024Effect_Bloom_doBloom\0302"
-  " \002(\010\022\034\n\024Effect_Bloom_WeightA\0303 \002(\002\022\034\n\024Ef"
-  "fect_Bloom_WeightB\0304 \002(\002\022\034\n\024Effect_Bloom"
-  "_WeightC\0305 \002(\002\022\034\n\024Effect_Bloom_WeightD\0306"
-  " \002(\002\022\035\n\025Effect_Bloom_Vignette\0307 \002(\002\022 \n\030E"
-  "ffect_Bloom_VignetteAtt\0308 \002(\002\022%\n\035Setting"
-  "_LightingPass_DrawMode\0309 \002(\005\022$\n\nmeshObje"
-  "ct\030: \002(\0132\020.KuplungApp.Mesh"
-  ;
-static const ::_pbi::DescriptorTable* const descriptor_table_KuplungAppScene_2eproto_deps[1] = {
-  &::descriptor_table_KuplungDefinitions_2eproto,
-};
-static ::_pbi::once_flag descriptor_table_KuplungAppScene_2eproto_once;
-const ::_pbi::DescriptorTable descriptor_table_KuplungAppScene_2eproto = {
-    false, false, 2586, descriptor_table_protodef_KuplungAppScene_2eproto,
-    "KuplungAppScene.proto",
-    &descriptor_table_KuplungAppScene_2eproto_once, descriptor_table_KuplungAppScene_2eproto_deps, 1, 2,
-    schemas, file_default_instances, TableStruct_KuplungAppScene_2eproto::offsets,
-    file_level_metadata_KuplungAppScene_2eproto, file_level_enum_descriptors_KuplungAppScene_2eproto,
-    file_level_service_descriptors_KuplungAppScene_2eproto,
-};
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_KuplungAppScene_2eproto_getter() {
-  return &descriptor_table_KuplungAppScene_2eproto;
-}
-
-// Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_KuplungAppScene_2eproto(&descriptor_table_KuplungAppScene_2eproto);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 namespace KuplungApp {
 // ===================================================================
 
@@ -707,7 +383,6 @@ class Scene::_Internal {
  public:
 };
 
-<<<<<<< HEAD
 Scene::Scene(::google::protobuf::Arena* arena)
     : ::google::protobuf::Message(arena) {
   SharedCtor(arena);
@@ -729,22 +404,6 @@ Scene::Scene(
       from._internal_metadata_);
   new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
 
-=======
-Scene::Scene(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:KuplungApp.Scene)
-}
-Scene::Scene(const Scene& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  Scene* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.models_){from._impl_.models_}
-    , /*decltype(_impl_._cached_size_)*/{}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Scene)
 }
 inline PROTOBUF_NDEBUG_INLINE Scene::Impl_::Impl_(
@@ -753,23 +412,11 @@ inline PROTOBUF_NDEBUG_INLINE Scene::Impl_::Impl_(
       : models_{visibility, arena},
         _cached_size_{0} {}
 
-<<<<<<< HEAD
 inline void Scene::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
-=======
-inline void Scene::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.models_){arena}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 }
 Scene::~Scene() {
   // @@protoc_insertion_point(destructor:KuplungApp.Scene)
-<<<<<<< HEAD
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -782,32 +429,10 @@ PROTOBUF_NOINLINE void Scene::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Scene)
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ::uint32_t cached_has_bits = 0;
-=======
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void Scene::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.models_.~RepeatedPtrField();
-}
-
-void Scene::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void Scene::Clear() {
-// @@protoc_insertion_point(message_clear_start:KuplungApp.Scene)
-  uint32_t cached_has_bits = 0;
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   _impl_.models_.Clear();
-<<<<<<< HEAD
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -854,81 +479,19 @@ const ::_pbi::TcParseTable<0, 1, 1, 0, 2> Scene::_table_ = {
   // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
   ::uint32_t cached_has_bits = 0;
   (void)cached_has_bits;
-=======
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* Scene::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // repeated .KuplungApp.MeshModel models = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_models(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* Scene::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Scene)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 
   // repeated .KuplungApp.MeshModel models = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_models_size()); i < n; i++) {
-<<<<<<< HEAD
     const auto& repfield = this->_internal_models().Get(i);
     target = ::google::protobuf::internal::WireFormatLite::
-=======
-    const auto& repfield = this->_internal_models(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         InternalWriteMessage(1, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-<<<<<<< HEAD
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-=======
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Scene)
   return target;
@@ -938,25 +501,16 @@ uint8_t* Scene::_InternalSerialize(
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Scene)
   ::size_t total_size = 0;
 
-<<<<<<< HEAD
   ::uint32_t cached_has_bits = 0;
-=======
-  uint32_t cached_has_bits = 0;
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated .KuplungApp.MeshModel models = 1;
   total_size += 1UL * this->_internal_models_size();
-<<<<<<< HEAD
   for (const auto& msg : this->_internal_models()) {
-=======
-  for (const auto& msg : this->_impl_.models_) {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
     total_size +=
       ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-<<<<<<< HEAD
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -979,29 +533,6 @@ void Scene::MergeImpl(::google::protobuf::Message& to_msg, const ::google::proto
   _this->_internal_mutable_models()->MergeFrom(
       from._internal_models());
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-=======
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Scene::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    Scene::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Scene::GetClassData() const { return &_class_data_; }
-
-
-void Scene::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<Scene*>(&to_msg);
-  auto& from = static_cast<const Scene&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Scene)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  _this->_impl_.models_.MergeFrom(from._impl_.models_);
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 }
 
 void Scene::CopyFrom(const Scene& from) {
@@ -1011,13 +542,8 @@ void Scene::CopyFrom(const Scene& from) {
   MergeFrom(from);
 }
 
-<<<<<<< HEAD
 PROTOBUF_NOINLINE bool Scene::IsInitialized() const {
   if (!::google::protobuf::internal::AllAreInitialized(_internal_models()))
-=======
-bool Scene::IsInitialized() const {
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(_impl_.models_))
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
     return false;
   return true;
 }
@@ -1031,29 +557,18 @@ void Scene::InternalSwap(Scene* PROTOBUF_RESTRICT other) {
   _impl_.models_.InternalSwap(&other->_impl_.models_);
 }
 
-<<<<<<< HEAD
 ::google::protobuf::Metadata Scene::GetMetadata() const {
-=======
-::PROTOBUF_NAMESPACE_ID::Metadata Scene::GetMetadata() const {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   return ::_pbi::AssignDescriptors(
       &descriptor_table_KuplungAppScene_2eproto_getter, &descriptor_table_KuplungAppScene_2eproto_once,
       file_level_metadata_KuplungAppScene_2eproto[0]);
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 // ===================================================================
 
 class MeshModel::_Internal {
  public:
   using HasBits = decltype(std::declval<MeshModel>()._impl_._has_bits_);
-<<<<<<< HEAD
   static constexpr ::int32_t kHasBitsOffset =
     8 * PROTOBUF_FIELD_OFFSET(MeshModel, _impl_._has_bits_);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   static void set_has_modelid(HasBits* has_bits) {
     (*has_bits)[0] |= 2147483648u;
   }
@@ -1265,7 +780,6 @@ class MeshModel::_Internal {
   }
 };
 
-<<<<<<< HEAD
 const ::KuplungApp::ObjectCoordinate& MeshModel::_Internal::positionx(const MeshModel* msg) {
   return *msg->_impl_.positionx_;
 }
@@ -1361,370 +875,155 @@ const ::KuplungApp::Mesh& MeshModel::_Internal::meshobject(const MeshModel* msg)
 }
 void MeshModel::clear_positionx() {
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::positionx(const MeshModel* msg) {
-  return *msg->_impl_.positionx_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::positiony(const MeshModel* msg) {
-  return *msg->_impl_.positiony_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::positionz(const MeshModel* msg) {
-  return *msg->_impl_.positionz_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::scalex(const MeshModel* msg) {
-  return *msg->_impl_.scalex_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::scaley(const MeshModel* msg) {
-  return *msg->_impl_.scaley_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::scalez(const MeshModel* msg) {
-  return *msg->_impl_.scalez_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::rotatex(const MeshModel* msg) {
-  return *msg->_impl_.rotatex_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::rotatey(const MeshModel* msg) {
-  return *msg->_impl_.rotatey_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::rotatez(const MeshModel* msg) {
-  return *msg->_impl_.rotatez_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::displacex(const MeshModel* msg) {
-  return *msg->_impl_.displacex_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::displacey(const MeshModel* msg) {
-  return *msg->_impl_.displacey_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::displacez(const MeshModel* msg) {
-  return *msg->_impl_.displacez_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::setting_materialrefraction(const MeshModel* msg) {
-  return *msg->_impl_.setting_materialrefraction_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::setting_materialspecularexp(const MeshModel* msg) {
-  return *msg->_impl_.setting_materialspecularexp_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::solidlightskin_materialcolor(const MeshModel* msg) {
-  return *msg->_impl_.solidlightskin_materialcolor_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::solidlightskin_ambient(const MeshModel* msg) {
-  return *msg->_impl_.solidlightskin_ambient_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::solidlightskin_diffuse(const MeshModel* msg) {
-  return *msg->_impl_.solidlightskin_diffuse_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::solidlightskin_specular(const MeshModel* msg) {
-  return *msg->_impl_.solidlightskin_specular_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::setting_lightposition(const MeshModel* msg) {
-  return *msg->_impl_.setting_lightposition_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::setting_lightdirection(const MeshModel* msg) {
-  return *msg->_impl_.setting_lightdirection_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::setting_lightambient(const MeshModel* msg) {
-  return *msg->_impl_.setting_lightambient_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::setting_lightdiffuse(const MeshModel* msg) {
-  return *msg->_impl_.setting_lightdiffuse_;
-}
-const ::KuplungApp::Vec3&
-MeshModel::_Internal::setting_lightspecular(const MeshModel* msg) {
-  return *msg->_impl_.setting_lightspecular_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::displacementheightscale(const MeshModel* msg) {
-  return *msg->_impl_.displacementheightscale_;
-}
-const ::KuplungApp::MaterialColor&
-MeshModel::_Internal::materialambient(const MeshModel* msg) {
-  return *msg->_impl_.materialambient_;
-}
-const ::KuplungApp::MaterialColor&
-MeshModel::_Internal::materialdiffuse(const MeshModel* msg) {
-  return *msg->_impl_.materialdiffuse_;
-}
-const ::KuplungApp::MaterialColor&
-MeshModel::_Internal::materialspecular(const MeshModel* msg) {
-  return *msg->_impl_.materialspecular_;
-}
-const ::KuplungApp::MaterialColor&
-MeshModel::_Internal::materialemission(const MeshModel* msg) {
-  return *msg->_impl_.materialemission_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::effect_gblur_radius(const MeshModel* msg) {
-  return *msg->_impl_.effect_gblur_radius_;
-}
-const ::KuplungApp::ObjectCoordinate&
-MeshModel::_Internal::effect_gblur_width(const MeshModel* msg) {
-  return *msg->_impl_.effect_gblur_width_;
-}
-const ::KuplungApp::Mesh&
-MeshModel::_Internal::meshobject(const MeshModel* msg) {
-  return *msg->_impl_.meshobject_;
-}
-void MeshModel::clear_positionx() {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.positionx_ != nullptr) _impl_.positionx_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 void MeshModel::clear_positiony() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.positiony_ != nullptr) _impl_.positiony_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 void MeshModel::clear_positionz() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.positionz_ != nullptr) _impl_.positionz_->Clear();
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 void MeshModel::clear_scalex() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.scalex_ != nullptr) _impl_.scalex_->Clear();
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
 void MeshModel::clear_scaley() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.scaley_ != nullptr) _impl_.scaley_->Clear();
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
 void MeshModel::clear_scalez() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.scalez_ != nullptr) _impl_.scalez_->Clear();
   _impl_._has_bits_[0] &= ~0x00000020u;
 }
 void MeshModel::clear_rotatex() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.rotatex_ != nullptr) _impl_.rotatex_->Clear();
   _impl_._has_bits_[0] &= ~0x00000040u;
 }
 void MeshModel::clear_rotatey() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.rotatey_ != nullptr) _impl_.rotatey_->Clear();
   _impl_._has_bits_[0] &= ~0x00000080u;
 }
 void MeshModel::clear_rotatez() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.rotatez_ != nullptr) _impl_.rotatez_->Clear();
   _impl_._has_bits_[0] &= ~0x00000100u;
 }
 void MeshModel::clear_displacex() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.displacex_ != nullptr) _impl_.displacex_->Clear();
   _impl_._has_bits_[0] &= ~0x00000200u;
 }
 void MeshModel::clear_displacey() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.displacey_ != nullptr) _impl_.displacey_->Clear();
   _impl_._has_bits_[0] &= ~0x00000400u;
 }
 void MeshModel::clear_displacez() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.displacez_ != nullptr) _impl_.displacez_->Clear();
   _impl_._has_bits_[0] &= ~0x00000800u;
 }
 void MeshModel::clear_setting_materialrefraction() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_materialrefraction_ != nullptr) _impl_.setting_materialrefraction_->Clear();
   _impl_._has_bits_[0] &= ~0x00001000u;
 }
 void MeshModel::clear_setting_materialspecularexp() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_materialspecularexp_ != nullptr) _impl_.setting_materialspecularexp_->Clear();
   _impl_._has_bits_[0] &= ~0x00002000u;
 }
 void MeshModel::clear_solidlightskin_materialcolor() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.solidlightskin_materialcolor_ != nullptr) _impl_.solidlightskin_materialcolor_->Clear();
   _impl_._has_bits_[0] &= ~0x00004000u;
 }
 void MeshModel::clear_solidlightskin_ambient() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.solidlightskin_ambient_ != nullptr) _impl_.solidlightskin_ambient_->Clear();
   _impl_._has_bits_[0] &= ~0x00008000u;
 }
 void MeshModel::clear_solidlightskin_diffuse() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.solidlightskin_diffuse_ != nullptr) _impl_.solidlightskin_diffuse_->Clear();
   _impl_._has_bits_[0] &= ~0x00010000u;
 }
 void MeshModel::clear_solidlightskin_specular() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.solidlightskin_specular_ != nullptr) _impl_.solidlightskin_specular_->Clear();
   _impl_._has_bits_[0] &= ~0x00020000u;
 }
 void MeshModel::clear_setting_lightposition() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_lightposition_ != nullptr) _impl_.setting_lightposition_->Clear();
   _impl_._has_bits_[0] &= ~0x00040000u;
 }
 void MeshModel::clear_setting_lightdirection() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_lightdirection_ != nullptr) _impl_.setting_lightdirection_->Clear();
   _impl_._has_bits_[0] &= ~0x00080000u;
 }
 void MeshModel::clear_setting_lightambient() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_lightambient_ != nullptr) _impl_.setting_lightambient_->Clear();
   _impl_._has_bits_[0] &= ~0x00100000u;
 }
 void MeshModel::clear_setting_lightdiffuse() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_lightdiffuse_ != nullptr) _impl_.setting_lightdiffuse_->Clear();
   _impl_._has_bits_[0] &= ~0x00200000u;
 }
 void MeshModel::clear_setting_lightspecular() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.setting_lightspecular_ != nullptr) _impl_.setting_lightspecular_->Clear();
   _impl_._has_bits_[0] &= ~0x00400000u;
 }
 void MeshModel::clear_displacementheightscale() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.displacementheightscale_ != nullptr) _impl_.displacementheightscale_->Clear();
   _impl_._has_bits_[0] &= ~0x00800000u;
 }
 void MeshModel::clear_materialambient() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.materialambient_ != nullptr) _impl_.materialambient_->Clear();
   _impl_._has_bits_[0] &= ~0x01000000u;
 }
 void MeshModel::clear_materialdiffuse() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.materialdiffuse_ != nullptr) _impl_.materialdiffuse_->Clear();
   _impl_._has_bits_[0] &= ~0x02000000u;
 }
 void MeshModel::clear_materialspecular() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.materialspecular_ != nullptr) _impl_.materialspecular_->Clear();
   _impl_._has_bits_[0] &= ~0x04000000u;
 }
 void MeshModel::clear_materialemission() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.materialemission_ != nullptr) _impl_.materialemission_->Clear();
   _impl_._has_bits_[0] &= ~0x08000000u;
 }
 void MeshModel::clear_effect_gblur_radius() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.effect_gblur_radius_ != nullptr) _impl_.effect_gblur_radius_->Clear();
   _impl_._has_bits_[0] &= ~0x10000000u;
 }
 void MeshModel::clear_effect_gblur_width() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
-=======
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   if (_impl_.effect_gblur_width_ != nullptr) _impl_.effect_gblur_width_->Clear();
   _impl_._has_bits_[0] &= ~0x20000000u;
 }
 void MeshModel::clear_meshobject() {
-<<<<<<< HEAD
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   if (_impl_.meshobject_ != nullptr) _impl_.meshobject_->Clear();
   _impl_._has_bits_[0] &= ~0x40000000u;
@@ -1851,179 +1150,6 @@ MeshModel::MeshModel(
                offsetof(Impl_, modelid_) +
                sizeof(Impl_::setting_lightingpass_drawmode_));
 
-=======
-  if (_impl_.meshobject_ != nullptr) _impl_.meshobject_->Clear();
-  _impl_._has_bits_[0] &= ~0x40000000u;
-}
-MeshModel::MeshModel(::PROTOBUF_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:KuplungApp.MeshModel)
-}
-MeshModel::MeshModel(const MeshModel& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
-  MeshModel* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){from._impl_._has_bits_}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.positionx_){nullptr}
-    , decltype(_impl_.positiony_){nullptr}
-    , decltype(_impl_.positionz_){nullptr}
-    , decltype(_impl_.scalex_){nullptr}
-    , decltype(_impl_.scaley_){nullptr}
-    , decltype(_impl_.scalez_){nullptr}
-    , decltype(_impl_.rotatex_){nullptr}
-    , decltype(_impl_.rotatey_){nullptr}
-    , decltype(_impl_.rotatez_){nullptr}
-    , decltype(_impl_.displacex_){nullptr}
-    , decltype(_impl_.displacey_){nullptr}
-    , decltype(_impl_.displacez_){nullptr}
-    , decltype(_impl_.setting_materialrefraction_){nullptr}
-    , decltype(_impl_.setting_materialspecularexp_){nullptr}
-    , decltype(_impl_.solidlightskin_materialcolor_){nullptr}
-    , decltype(_impl_.solidlightskin_ambient_){nullptr}
-    , decltype(_impl_.solidlightskin_diffuse_){nullptr}
-    , decltype(_impl_.solidlightskin_specular_){nullptr}
-    , decltype(_impl_.setting_lightposition_){nullptr}
-    , decltype(_impl_.setting_lightdirection_){nullptr}
-    , decltype(_impl_.setting_lightambient_){nullptr}
-    , decltype(_impl_.setting_lightdiffuse_){nullptr}
-    , decltype(_impl_.setting_lightspecular_){nullptr}
-    , decltype(_impl_.displacementheightscale_){nullptr}
-    , decltype(_impl_.materialambient_){nullptr}
-    , decltype(_impl_.materialdiffuse_){nullptr}
-    , decltype(_impl_.materialspecular_){nullptr}
-    , decltype(_impl_.materialemission_){nullptr}
-    , decltype(_impl_.effect_gblur_radius_){nullptr}
-    , decltype(_impl_.effect_gblur_width_){nullptr}
-    , decltype(_impl_.meshobject_){nullptr}
-    , decltype(_impl_.modelid_){}
-    , decltype(_impl_.settings_deferredrender_){}
-    , decltype(_impl_.setting_celshading_){}
-    , decltype(_impl_.setting_wireframe_){}
-    , decltype(_impl_.setting_usetessellation_){}
-    , decltype(_impl_.setting_alpha_){}
-    , decltype(_impl_.setting_tessellationsubdivision_){}
-    , decltype(_impl_.setting_modelviewskin_){}
-    , decltype(_impl_.solidlightskin_ambient_strength_){}
-    , decltype(_impl_.solidlightskin_diffuse_strength_){}
-    , decltype(_impl_.solidlightskin_specular_strength_){}
-    , decltype(_impl_.setting_usecullface_){}
-    , decltype(_impl_.showmaterialeditor_){}
-    , decltype(_impl_.setting_parallaxmapping_){}
-    , decltype(_impl_.effect_bloom_dobloom_){}
-    , decltype(_impl_.setting_lightstrengthambient_){}
-    , decltype(_impl_.setting_lightstrengthdiffuse_){}
-    , decltype(_impl_.setting_lightstrengthspecular_){}
-    , decltype(_impl_.materialilluminationmodel_){}
-    , decltype(_impl_.effect_gblur_mode_){}
-    , decltype(_impl_.effect_bloom_weighta_){}
-    , decltype(_impl_.effect_bloom_weightb_){}
-    , decltype(_impl_.effect_bloom_weightc_){}
-    , decltype(_impl_.effect_bloom_weightd_){}
-    , decltype(_impl_.effect_bloom_vignette_){}
-    , decltype(_impl_.effect_bloom_vignetteatt_){}
-    , decltype(_impl_.setting_lightingpass_drawmode_){}};
-
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  if (from._internal_has_positionx()) {
-    _this->_impl_.positionx_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.positionx_);
-  }
-  if (from._internal_has_positiony()) {
-    _this->_impl_.positiony_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.positiony_);
-  }
-  if (from._internal_has_positionz()) {
-    _this->_impl_.positionz_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.positionz_);
-  }
-  if (from._internal_has_scalex()) {
-    _this->_impl_.scalex_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.scalex_);
-  }
-  if (from._internal_has_scaley()) {
-    _this->_impl_.scaley_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.scaley_);
-  }
-  if (from._internal_has_scalez()) {
-    _this->_impl_.scalez_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.scalez_);
-  }
-  if (from._internal_has_rotatex()) {
-    _this->_impl_.rotatex_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.rotatex_);
-  }
-  if (from._internal_has_rotatey()) {
-    _this->_impl_.rotatey_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.rotatey_);
-  }
-  if (from._internal_has_rotatez()) {
-    _this->_impl_.rotatez_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.rotatez_);
-  }
-  if (from._internal_has_displacex()) {
-    _this->_impl_.displacex_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.displacex_);
-  }
-  if (from._internal_has_displacey()) {
-    _this->_impl_.displacey_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.displacey_);
-  }
-  if (from._internal_has_displacez()) {
-    _this->_impl_.displacez_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.displacez_);
-  }
-  if (from._internal_has_setting_materialrefraction()) {
-    _this->_impl_.setting_materialrefraction_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.setting_materialrefraction_);
-  }
-  if (from._internal_has_setting_materialspecularexp()) {
-    _this->_impl_.setting_materialspecularexp_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.setting_materialspecularexp_);
-  }
-  if (from._internal_has_solidlightskin_materialcolor()) {
-    _this->_impl_.solidlightskin_materialcolor_ = new ::KuplungApp::Vec3(*from._impl_.solidlightskin_materialcolor_);
-  }
-  if (from._internal_has_solidlightskin_ambient()) {
-    _this->_impl_.solidlightskin_ambient_ = new ::KuplungApp::Vec3(*from._impl_.solidlightskin_ambient_);
-  }
-  if (from._internal_has_solidlightskin_diffuse()) {
-    _this->_impl_.solidlightskin_diffuse_ = new ::KuplungApp::Vec3(*from._impl_.solidlightskin_diffuse_);
-  }
-  if (from._internal_has_solidlightskin_specular()) {
-    _this->_impl_.solidlightskin_specular_ = new ::KuplungApp::Vec3(*from._impl_.solidlightskin_specular_);
-  }
-  if (from._internal_has_setting_lightposition()) {
-    _this->_impl_.setting_lightposition_ = new ::KuplungApp::Vec3(*from._impl_.setting_lightposition_);
-  }
-  if (from._internal_has_setting_lightdirection()) {
-    _this->_impl_.setting_lightdirection_ = new ::KuplungApp::Vec3(*from._impl_.setting_lightdirection_);
-  }
-  if (from._internal_has_setting_lightambient()) {
-    _this->_impl_.setting_lightambient_ = new ::KuplungApp::Vec3(*from._impl_.setting_lightambient_);
-  }
-  if (from._internal_has_setting_lightdiffuse()) {
-    _this->_impl_.setting_lightdiffuse_ = new ::KuplungApp::Vec3(*from._impl_.setting_lightdiffuse_);
-  }
-  if (from._internal_has_setting_lightspecular()) {
-    _this->_impl_.setting_lightspecular_ = new ::KuplungApp::Vec3(*from._impl_.setting_lightspecular_);
-  }
-  if (from._internal_has_displacementheightscale()) {
-    _this->_impl_.displacementheightscale_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.displacementheightscale_);
-  }
-  if (from._internal_has_materialambient()) {
-    _this->_impl_.materialambient_ = new ::KuplungApp::MaterialColor(*from._impl_.materialambient_);
-  }
-  if (from._internal_has_materialdiffuse()) {
-    _this->_impl_.materialdiffuse_ = new ::KuplungApp::MaterialColor(*from._impl_.materialdiffuse_);
-  }
-  if (from._internal_has_materialspecular()) {
-    _this->_impl_.materialspecular_ = new ::KuplungApp::MaterialColor(*from._impl_.materialspecular_);
-  }
-  if (from._internal_has_materialemission()) {
-    _this->_impl_.materialemission_ = new ::KuplungApp::MaterialColor(*from._impl_.materialemission_);
-  }
-  if (from._internal_has_effect_gblur_radius()) {
-    _this->_impl_.effect_gblur_radius_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.effect_gblur_radius_);
-  }
-  if (from._internal_has_effect_gblur_width()) {
-    _this->_impl_.effect_gblur_width_ = new ::KuplungApp::ObjectCoordinate(*from._impl_.effect_gblur_width_);
-  }
-  if (from._internal_has_meshobject()) {
-    _this->_impl_.meshobject_ = new ::KuplungApp::Mesh(*from._impl_.meshobject_);
-  }
-  ::memcpy(&_impl_.modelid_, &from._impl_.modelid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.setting_lightingpass_drawmode_) -
-    reinterpret_cast<char*>(&_impl_.modelid_)) + sizeof(_impl_.setting_lightingpass_drawmode_));
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModel)
 }
 inline PROTOBUF_NDEBUG_INLINE MeshModel::Impl_::Impl_(
@@ -2031,7 +1157,6 @@ inline PROTOBUF_NDEBUG_INLINE MeshModel::Impl_::Impl_(
     ::google::protobuf::Arena* arena)
       : _cached_size_{0} {}
 
-<<<<<<< HEAD
 inline void MeshModel::SharedCtor(::_pb::Arena* arena) {
   new (&_impl_) Impl_(internal_visibility(), arena);
   ::memset(reinterpret_cast<char *>(&_impl_) +
@@ -2040,78 +1165,9 @@ inline void MeshModel::SharedCtor(::_pb::Arena* arena) {
            offsetof(Impl_, setting_lightingpass_drawmode_) -
                offsetof(Impl_, positionx_) +
                sizeof(Impl_::setting_lightingpass_drawmode_));
-=======
-inline void MeshModel::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_._has_bits_){}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , decltype(_impl_.positionx_){nullptr}
-    , decltype(_impl_.positiony_){nullptr}
-    , decltype(_impl_.positionz_){nullptr}
-    , decltype(_impl_.scalex_){nullptr}
-    , decltype(_impl_.scaley_){nullptr}
-    , decltype(_impl_.scalez_){nullptr}
-    , decltype(_impl_.rotatex_){nullptr}
-    , decltype(_impl_.rotatey_){nullptr}
-    , decltype(_impl_.rotatez_){nullptr}
-    , decltype(_impl_.displacex_){nullptr}
-    , decltype(_impl_.displacey_){nullptr}
-    , decltype(_impl_.displacez_){nullptr}
-    , decltype(_impl_.setting_materialrefraction_){nullptr}
-    , decltype(_impl_.setting_materialspecularexp_){nullptr}
-    , decltype(_impl_.solidlightskin_materialcolor_){nullptr}
-    , decltype(_impl_.solidlightskin_ambient_){nullptr}
-    , decltype(_impl_.solidlightskin_diffuse_){nullptr}
-    , decltype(_impl_.solidlightskin_specular_){nullptr}
-    , decltype(_impl_.setting_lightposition_){nullptr}
-    , decltype(_impl_.setting_lightdirection_){nullptr}
-    , decltype(_impl_.setting_lightambient_){nullptr}
-    , decltype(_impl_.setting_lightdiffuse_){nullptr}
-    , decltype(_impl_.setting_lightspecular_){nullptr}
-    , decltype(_impl_.displacementheightscale_){nullptr}
-    , decltype(_impl_.materialambient_){nullptr}
-    , decltype(_impl_.materialdiffuse_){nullptr}
-    , decltype(_impl_.materialspecular_){nullptr}
-    , decltype(_impl_.materialemission_){nullptr}
-    , decltype(_impl_.effect_gblur_radius_){nullptr}
-    , decltype(_impl_.effect_gblur_width_){nullptr}
-    , decltype(_impl_.meshobject_){nullptr}
-    , decltype(_impl_.modelid_){0}
-    , decltype(_impl_.settings_deferredrender_){false}
-    , decltype(_impl_.setting_celshading_){false}
-    , decltype(_impl_.setting_wireframe_){false}
-    , decltype(_impl_.setting_usetessellation_){false}
-    , decltype(_impl_.setting_alpha_){0}
-    , decltype(_impl_.setting_tessellationsubdivision_){0}
-    , decltype(_impl_.setting_modelviewskin_){0}
-    , decltype(_impl_.solidlightskin_ambient_strength_){0}
-    , decltype(_impl_.solidlightskin_diffuse_strength_){0}
-    , decltype(_impl_.solidlightskin_specular_strength_){0}
-    , decltype(_impl_.setting_usecullface_){false}
-    , decltype(_impl_.showmaterialeditor_){false}
-    , decltype(_impl_.setting_parallaxmapping_){false}
-    , decltype(_impl_.effect_bloom_dobloom_){false}
-    , decltype(_impl_.setting_lightstrengthambient_){0}
-    , decltype(_impl_.setting_lightstrengthdiffuse_){0}
-    , decltype(_impl_.setting_lightstrengthspecular_){0}
-    , decltype(_impl_.materialilluminationmodel_){0}
-    , decltype(_impl_.effect_gblur_mode_){0}
-    , decltype(_impl_.effect_bloom_weighta_){0}
-    , decltype(_impl_.effect_bloom_weightb_){0}
-    , decltype(_impl_.effect_bloom_weightc_){0}
-    , decltype(_impl_.effect_bloom_weightd_){0}
-    , decltype(_impl_.effect_bloom_vignette_){0}
-    , decltype(_impl_.effect_bloom_vignetteatt_){0}
-    , decltype(_impl_.setting_lightingpass_drawmode_){0}
-  };
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 }
 MeshModel::~MeshModel() {
   // @@protoc_insertion_point(destructor:KuplungApp.MeshModel)
-<<<<<<< HEAD
   _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
@@ -2155,64 +1211,12 @@ PROTOBUF_NOINLINE void MeshModel::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshModel)
   PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
   ::uint32_t cached_has_bits = 0;
-=======
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void MeshModel::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  if (this != internal_default_instance()) delete _impl_.positionx_;
-  if (this != internal_default_instance()) delete _impl_.positiony_;
-  if (this != internal_default_instance()) delete _impl_.positionz_;
-  if (this != internal_default_instance()) delete _impl_.scalex_;
-  if (this != internal_default_instance()) delete _impl_.scaley_;
-  if (this != internal_default_instance()) delete _impl_.scalez_;
-  if (this != internal_default_instance()) delete _impl_.rotatex_;
-  if (this != internal_default_instance()) delete _impl_.rotatey_;
-  if (this != internal_default_instance()) delete _impl_.rotatez_;
-  if (this != internal_default_instance()) delete _impl_.displacex_;
-  if (this != internal_default_instance()) delete _impl_.displacey_;
-  if (this != internal_default_instance()) delete _impl_.displacez_;
-  if (this != internal_default_instance()) delete _impl_.setting_materialrefraction_;
-  if (this != internal_default_instance()) delete _impl_.setting_materialspecularexp_;
-  if (this != internal_default_instance()) delete _impl_.solidlightskin_materialcolor_;
-  if (this != internal_default_instance()) delete _impl_.solidlightskin_ambient_;
-  if (this != internal_default_instance()) delete _impl_.solidlightskin_diffuse_;
-  if (this != internal_default_instance()) delete _impl_.solidlightskin_specular_;
-  if (this != internal_default_instance()) delete _impl_.setting_lightposition_;
-  if (this != internal_default_instance()) delete _impl_.setting_lightdirection_;
-  if (this != internal_default_instance()) delete _impl_.setting_lightambient_;
-  if (this != internal_default_instance()) delete _impl_.setting_lightdiffuse_;
-  if (this != internal_default_instance()) delete _impl_.setting_lightspecular_;
-  if (this != internal_default_instance()) delete _impl_.displacementheightscale_;
-  if (this != internal_default_instance()) delete _impl_.materialambient_;
-  if (this != internal_default_instance()) delete _impl_.materialdiffuse_;
-  if (this != internal_default_instance()) delete _impl_.materialspecular_;
-  if (this != internal_default_instance()) delete _impl_.materialemission_;
-  if (this != internal_default_instance()) delete _impl_.effect_gblur_radius_;
-  if (this != internal_default_instance()) delete _impl_.effect_gblur_width_;
-  if (this != internal_default_instance()) delete _impl_.meshobject_;
-}
-
-void MeshModel::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void MeshModel::Clear() {
-// @@protoc_insertion_point(message_clear_start:KuplungApp.MeshModel)
-  uint32_t cached_has_bits = 0;
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-<<<<<<< HEAD
       ABSL_DCHECK(_impl_.positionx_ != nullptr);
       _impl_.positionx_->Clear();
     }
@@ -2242,43 +1246,11 @@ void MeshModel::Clear() {
     }
     if (cached_has_bits & 0x00000080u) {
       ABSL_DCHECK(_impl_.rotatey_ != nullptr);
-=======
-      GOOGLE_DCHECK(_impl_.positionx_ != nullptr);
-      _impl_.positionx_->Clear();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(_impl_.positiony_ != nullptr);
-      _impl_.positiony_->Clear();
-    }
-    if (cached_has_bits & 0x00000004u) {
-      GOOGLE_DCHECK(_impl_.positionz_ != nullptr);
-      _impl_.positionz_->Clear();
-    }
-    if (cached_has_bits & 0x00000008u) {
-      GOOGLE_DCHECK(_impl_.scalex_ != nullptr);
-      _impl_.scalex_->Clear();
-    }
-    if (cached_has_bits & 0x00000010u) {
-      GOOGLE_DCHECK(_impl_.scaley_ != nullptr);
-      _impl_.scaley_->Clear();
-    }
-    if (cached_has_bits & 0x00000020u) {
-      GOOGLE_DCHECK(_impl_.scalez_ != nullptr);
-      _impl_.scalez_->Clear();
-    }
-    if (cached_has_bits & 0x00000040u) {
-      GOOGLE_DCHECK(_impl_.rotatex_ != nullptr);
-      _impl_.rotatex_->Clear();
-    }
-    if (cached_has_bits & 0x00000080u) {
-      GOOGLE_DCHECK(_impl_.rotatey_ != nullptr);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
       _impl_.rotatey_->Clear();
     }
   }
   if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-<<<<<<< HEAD
       ABSL_DCHECK(_impl_.rotatez_ != nullptr);
       _impl_.rotatez_->Clear();
     }
@@ -2308,43 +1280,11 @@ void MeshModel::Clear() {
     }
     if (cached_has_bits & 0x00008000u) {
       ABSL_DCHECK(_impl_.solidlightskin_ambient_ != nullptr);
-=======
-      GOOGLE_DCHECK(_impl_.rotatez_ != nullptr);
-      _impl_.rotatez_->Clear();
-    }
-    if (cached_has_bits & 0x00000200u) {
-      GOOGLE_DCHECK(_impl_.displacex_ != nullptr);
-      _impl_.displacex_->Clear();
-    }
-    if (cached_has_bits & 0x00000400u) {
-      GOOGLE_DCHECK(_impl_.displacey_ != nullptr);
-      _impl_.displacey_->Clear();
-    }
-    if (cached_has_bits & 0x00000800u) {
-      GOOGLE_DCHECK(_impl_.displacez_ != nullptr);
-      _impl_.displacez_->Clear();
-    }
-    if (cached_has_bits & 0x00001000u) {
-      GOOGLE_DCHECK(_impl_.setting_materialrefraction_ != nullptr);
-      _impl_.setting_materialrefraction_->Clear();
-    }
-    if (cached_has_bits & 0x00002000u) {
-      GOOGLE_DCHECK(_impl_.setting_materialspecularexp_ != nullptr);
-      _impl_.setting_materialspecularexp_->Clear();
-    }
-    if (cached_has_bits & 0x00004000u) {
-      GOOGLE_DCHECK(_impl_.solidlightskin_materialcolor_ != nullptr);
-      _impl_.solidlightskin_materialcolor_->Clear();
-    }
-    if (cached_has_bits & 0x00008000u) {
-      GOOGLE_DCHECK(_impl_.solidlightskin_ambient_ != nullptr);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
       _impl_.solidlightskin_ambient_->Clear();
     }
   }
   if (cached_has_bits & 0x00ff0000u) {
     if (cached_has_bits & 0x00010000u) {
-<<<<<<< HEAD
       ABSL_DCHECK(_impl_.solidlightskin_diffuse_ != nullptr);
       _impl_.solidlightskin_diffuse_->Clear();
     }
@@ -2374,43 +1314,11 @@ void MeshModel::Clear() {
     }
     if (cached_has_bits & 0x00800000u) {
       ABSL_DCHECK(_impl_.displacementheightscale_ != nullptr);
-=======
-      GOOGLE_DCHECK(_impl_.solidlightskin_diffuse_ != nullptr);
-      _impl_.solidlightskin_diffuse_->Clear();
-    }
-    if (cached_has_bits & 0x00020000u) {
-      GOOGLE_DCHECK(_impl_.solidlightskin_specular_ != nullptr);
-      _impl_.solidlightskin_specular_->Clear();
-    }
-    if (cached_has_bits & 0x00040000u) {
-      GOOGLE_DCHECK(_impl_.setting_lightposition_ != nullptr);
-      _impl_.setting_lightposition_->Clear();
-    }
-    if (cached_has_bits & 0x00080000u) {
-      GOOGLE_DCHECK(_impl_.setting_lightdirection_ != nullptr);
-      _impl_.setting_lightdirection_->Clear();
-    }
-    if (cached_has_bits & 0x00100000u) {
-      GOOGLE_DCHECK(_impl_.setting_lightambient_ != nullptr);
-      _impl_.setting_lightambient_->Clear();
-    }
-    if (cached_has_bits & 0x00200000u) {
-      GOOGLE_DCHECK(_impl_.setting_lightdiffuse_ != nullptr);
-      _impl_.setting_lightdiffuse_->Clear();
-    }
-    if (cached_has_bits & 0x00400000u) {
-      GOOGLE_DCHECK(_impl_.setting_lightspecular_ != nullptr);
-      _impl_.setting_lightspecular_->Clear();
-    }
-    if (cached_has_bits & 0x00800000u) {
-      GOOGLE_DCHECK(_impl_.displacementheightscale_ != nullptr);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
       _impl_.displacementheightscale_->Clear();
     }
   }
   if (cached_has_bits & 0x7f000000u) {
     if (cached_has_bits & 0x01000000u) {
-<<<<<<< HEAD
       ABSL_DCHECK(_impl_.materialambient_ != nullptr);
       _impl_.materialambient_->Clear();
     }
@@ -2436,76 +1344,32 @@ void MeshModel::Clear() {
     }
     if (cached_has_bits & 0x40000000u) {
       ABSL_DCHECK(_impl_.meshobject_ != nullptr);
-=======
-      GOOGLE_DCHECK(_impl_.materialambient_ != nullptr);
-      _impl_.materialambient_->Clear();
-    }
-    if (cached_has_bits & 0x02000000u) {
-      GOOGLE_DCHECK(_impl_.materialdiffuse_ != nullptr);
-      _impl_.materialdiffuse_->Clear();
-    }
-    if (cached_has_bits & 0x04000000u) {
-      GOOGLE_DCHECK(_impl_.materialspecular_ != nullptr);
-      _impl_.materialspecular_->Clear();
-    }
-    if (cached_has_bits & 0x08000000u) {
-      GOOGLE_DCHECK(_impl_.materialemission_ != nullptr);
-      _impl_.materialemission_->Clear();
-    }
-    if (cached_has_bits & 0x10000000u) {
-      GOOGLE_DCHECK(_impl_.effect_gblur_radius_ != nullptr);
-      _impl_.effect_gblur_radius_->Clear();
-    }
-    if (cached_has_bits & 0x20000000u) {
-      GOOGLE_DCHECK(_impl_.effect_gblur_width_ != nullptr);
-      _impl_.effect_gblur_width_->Clear();
-    }
-    if (cached_has_bits & 0x40000000u) {
-      GOOGLE_DCHECK(_impl_.meshobject_ != nullptr);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
       _impl_.meshobject_->Clear();
     }
   }
   _impl_.modelid_ = 0;
   cached_has_bits = _impl_._has_bits_[1];
   if (cached_has_bits & 0x000000ffu) {
-<<<<<<< HEAD
     ::memset(&_impl_.settings_deferredrender_, 0, static_cast<::size_t>(
-=======
-    ::memset(&_impl_.settings_deferredrender_, 0, static_cast<size_t>(
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         reinterpret_cast<char*>(&_impl_.solidlightskin_ambient_strength_) -
         reinterpret_cast<char*>(&_impl_.settings_deferredrender_)) + sizeof(_impl_.solidlightskin_ambient_strength_));
   }
   if (cached_has_bits & 0x0000ff00u) {
-<<<<<<< HEAD
     ::memset(&_impl_.solidlightskin_diffuse_strength_, 0, static_cast<::size_t>(
-=======
-    ::memset(&_impl_.solidlightskin_diffuse_strength_, 0, static_cast<size_t>(
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         reinterpret_cast<char*>(&_impl_.setting_lightstrengthdiffuse_) -
         reinterpret_cast<char*>(&_impl_.solidlightskin_diffuse_strength_)) + sizeof(_impl_.setting_lightstrengthdiffuse_));
   }
   if (cached_has_bits & 0x00ff0000u) {
-<<<<<<< HEAD
     ::memset(&_impl_.setting_lightstrengthspecular_, 0, static_cast<::size_t>(
-=======
-    ::memset(&_impl_.setting_lightstrengthspecular_, 0, static_cast<size_t>(
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         reinterpret_cast<char*>(&_impl_.effect_bloom_vignette_) -
         reinterpret_cast<char*>(&_impl_.setting_lightstrengthspecular_)) + sizeof(_impl_.effect_bloom_vignette_));
   }
   if (cached_has_bits & 0x03000000u) {
-<<<<<<< HEAD
     ::memset(&_impl_.effect_bloom_vignetteatt_, 0, static_cast<::size_t>(
-=======
-    ::memset(&_impl_.effect_bloom_vignetteatt_, 0, static_cast<size_t>(
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         reinterpret_cast<char*>(&_impl_.setting_lightingpass_drawmode_) -
         reinterpret_cast<char*>(&_impl_.effect_bloom_vignetteatt_)) + sizeof(_impl_.setting_lightingpass_drawmode_));
   }
   _impl_._has_bits_.Clear();
-<<<<<<< HEAD
   _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
@@ -2835,789 +1699,154 @@ const ::_pbi::TcParseTable<5, 58, 31, 0, 9> MeshModel::_table_ = {
     target = ::google::protobuf::internal::WireFormatLite::
         WriteInt32ToArrayWithField<1>(
             stream, this->_internal_modelid(), target);
-=======
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* MeshModel::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // required int32 ModelID = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          _Internal::set_has_modelid(&_impl_._has_bits_);
-          _impl_.modelid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Settings_DeferredRender = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _Internal::set_has_settings_deferredrender(&_impl_._has_bits_);
-          _impl_.settings_deferredrender_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Setting_CelShading = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _Internal::set_has_setting_celshading(&_impl_._has_bits_);
-          _impl_.setting_celshading_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Setting_Wireframe = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
-          _Internal::set_has_setting_wireframe(&_impl_._has_bits_);
-          _impl_.setting_wireframe_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Setting_UseTessellation = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          _Internal::set_has_setting_usetessellation(&_impl_._has_bits_);
-          _impl_.setting_usetessellation_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Setting_UseCullFace = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          _Internal::set_has_setting_usecullface(&_impl_._has_bits_);
-          _impl_.setting_usecullface_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Setting_Alpha = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 61)) {
-          _Internal::set_has_setting_alpha(&_impl_._has_bits_);
-          _impl_.setting_alpha_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required int32 Setting_TessellationSubdivision = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
-          _Internal::set_has_setting_tessellationsubdivision(&_impl_._has_bits_);
-          _impl_.setting_tessellationsubdivision_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate positionX = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
-          ptr = ctx->ParseMessage(_internal_mutable_positionx(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate positionY = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
-          ptr = ctx->ParseMessage(_internal_mutable_positiony(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate positionZ = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
-          ptr = ctx->ParseMessage(_internal_mutable_positionz(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate scaleX = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
-          ptr = ctx->ParseMessage(_internal_mutable_scalex(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate scaleY = 13;
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
-          ptr = ctx->ParseMessage(_internal_mutable_scaley(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-      case 14:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 114)) {
-          ptr = ctx->ParseMessage(_internal_mutable_scalez(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate rotateX = 15;
-      case 15:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
-          ptr = ctx->ParseMessage(_internal_mutable_rotatex(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate rotateY = 16;
-      case 16:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
-          ptr = ctx->ParseMessage(_internal_mutable_rotatey(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-      case 17:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 138)) {
-          ptr = ctx->ParseMessage(_internal_mutable_rotatez(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate displaceX = 18;
-      case 18:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 146)) {
-          ptr = ctx->ParseMessage(_internal_mutable_displacex(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate displaceY = 19;
-      case 19:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 154)) {
-          ptr = ctx->ParseMessage(_internal_mutable_displacey(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate displaceZ = 20;
-      case 20:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 162)) {
-          ptr = ctx->ParseMessage(_internal_mutable_displacez(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
-      case 21:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 170)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_materialrefraction(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
-      case 22:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 178)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_materialspecularexp(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required int32 Setting_ModelViewSkin = 23;
-      case 23:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 184)) {
-          _Internal::set_has_setting_modelviewskin(&_impl_._has_bits_);
-          _impl_.setting_modelviewskin_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
-      case 24:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 194)) {
-          ptr = ctx->ParseMessage(_internal_mutable_solidlightskin_materialcolor(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
-      case 25:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 202)) {
-          ptr = ctx->ParseMessage(_internal_mutable_solidlightskin_ambient(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
-      case 26:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 210)) {
-          ptr = ctx->ParseMessage(_internal_mutable_solidlightskin_diffuse(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
-      case 27:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 218)) {
-          ptr = ctx->ParseMessage(_internal_mutable_solidlightskin_specular(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float solidLightSkin_Ambient_Strength = 28;
-      case 28:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 229)) {
-          _Internal::set_has_solidlightskin_ambient_strength(&_impl_._has_bits_);
-          _impl_.solidlightskin_ambient_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float solidLightSkin_Diffuse_Strength = 29;
-      case 29:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 237)) {
-          _Internal::set_has_solidlightskin_diffuse_strength(&_impl_._has_bits_);
-          _impl_.solidlightskin_diffuse_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float solidLightSkin_Specular_Strength = 30;
-      case 30:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 245)) {
-          _Internal::set_has_solidlightskin_specular_strength(&_impl_._has_bits_);
-          _impl_.solidlightskin_specular_strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 Setting_LightPosition = 31;
-      case 31:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 250)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_lightposition(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 Setting_LightDirection = 32;
-      case 32:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 2)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_lightdirection(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
-      case 33:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_lightambient(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
-      case 34:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_lightdiffuse(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
-      case 35:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_setting_lightspecular(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Setting_LightStrengthAmbient = 36;
-      case 36:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 37)) {
-          _Internal::set_has_setting_lightstrengthambient(&_impl_._has_bits_);
-          _impl_.setting_lightstrengthambient_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Setting_LightStrengthDiffuse = 37;
-      case 37:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 45)) {
-          _Internal::set_has_setting_lightstrengthdiffuse(&_impl_._has_bits_);
-          _impl_.setting_lightstrengthdiffuse_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Setting_LightStrengthSpecular = 38;
-      case 38:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 53)) {
-          _Internal::set_has_setting_lightstrengthspecular(&_impl_._has_bits_);
-          _impl_.setting_lightstrengthspecular_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required int32 materialIlluminationModel = 39;
-      case 39:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
-          _Internal::set_has_materialilluminationmodel(&_impl_._has_bits_);
-          _impl_.materialilluminationmodel_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
-      case 40:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
-          ptr = ctx->ParseMessage(_internal_mutable_displacementheightscale(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool showMaterialEditor = 41;
-      case 41:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
-          _Internal::set_has_showmaterialeditor(&_impl_._has_bits_);
-          _impl_.showmaterialeditor_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.MaterialColor materialAmbient = 42;
-      case 42:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
-          ptr = ctx->ParseMessage(_internal_mutable_materialambient(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.MaterialColor materialDiffuse = 43;
-      case 43:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
-          ptr = ctx->ParseMessage(_internal_mutable_materialdiffuse(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.MaterialColor materialSpecular = 44;
-      case 44:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
-          ptr = ctx->ParseMessage(_internal_mutable_materialspecular(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.MaterialColor materialEmission = 45;
-      case 45:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
-          ptr = ctx->ParseMessage(_internal_mutable_materialemission(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Setting_ParallaxMapping = 46;
-      case 46:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 112)) {
-          _Internal::set_has_setting_parallaxmapping(&_impl_._has_bits_);
-          _impl_.setting_parallaxmapping_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required int32 Effect_GBlur_Mode = 47;
-      case 47:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 120)) {
-          _Internal::set_has_effect_gblur_mode(&_impl_._has_bits_);
-          _impl_.effect_gblur_mode_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
-      case 48:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
-          ptr = ctx->ParseMessage(_internal_mutable_effect_gblur_radius(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
-      case 49:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 138)) {
-          ptr = ctx->ParseMessage(_internal_mutable_effect_gblur_width(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required bool Effect_Bloom_doBloom = 50;
-      case 50:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 144)) {
-          _Internal::set_has_effect_bloom_dobloom(&_impl_._has_bits_);
-          _impl_.effect_bloom_dobloom_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_WeightA = 51;
-      case 51:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 157)) {
-          _Internal::set_has_effect_bloom_weighta(&_impl_._has_bits_);
-          _impl_.effect_bloom_weighta_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_WeightB = 52;
-      case 52:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 165)) {
-          _Internal::set_has_effect_bloom_weightb(&_impl_._has_bits_);
-          _impl_.effect_bloom_weightb_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_WeightC = 53;
-      case 53:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 173)) {
-          _Internal::set_has_effect_bloom_weightc(&_impl_._has_bits_);
-          _impl_.effect_bloom_weightc_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_WeightD = 54;
-      case 54:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 181)) {
-          _Internal::set_has_effect_bloom_weightd(&_impl_._has_bits_);
-          _impl_.effect_bloom_weightd_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_Vignette = 55;
-      case 55:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 189)) {
-          _Internal::set_has_effect_bloom_vignette(&_impl_._has_bits_);
-          _impl_.effect_bloom_vignette_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required float Effect_Bloom_VignetteAtt = 56;
-      case 56:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 197)) {
-          _Internal::set_has_effect_bloom_vignetteatt(&_impl_._has_bits_);
-          _impl_.effect_bloom_vignetteatt_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else
-          goto handle_unusual;
-        continue;
-      // required int32 Setting_LightingPass_DrawMode = 57;
-      case 57:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 200)) {
-          _Internal::set_has_setting_lightingpass_drawmode(&_impl_._has_bits_);
-          _impl_.setting_lightingpass_drawmode_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // required .KuplungApp.Mesh meshObject = 58;
-      case 58:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 210)) {
-          ptr = ctx->ParseMessage(_internal_mutable_meshobject(), ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
-message_done:
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* MeshModel::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModel)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
-
-  cached_has_bits = _impl_._has_bits_[0];
-  // required int32 ModelID = 1;
-  if (cached_has_bits & 0x80000000u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_modelid(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[1];
   // required bool Settings_DeferredRender = 2;
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         2, this->_internal_settings_deferredrender(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(2, this->_internal_settings_deferredrender(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required bool Setting_CelShading = 3;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         3, this->_internal_setting_celshading(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(3, this->_internal_setting_celshading(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required bool Setting_Wireframe = 4;
   if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         4, this->_internal_setting_wireframe(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_setting_wireframe(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required bool Setting_UseTessellation = 5;
   if (cached_has_bits & 0x00000008u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         5, this->_internal_setting_usetessellation(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_setting_usetessellation(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required bool Setting_UseCullFace = 6;
   if (cached_has_bits & 0x00000400u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         6, this->_internal_setting_usecullface(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(6, this->_internal_setting_usecullface(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Setting_Alpha = 7;
   if (cached_has_bits & 0x00000010u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         7, this->_internal_setting_alpha(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(7, this->_internal_setting_alpha(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required int32 Setting_TessellationSubdivision = 8;
   if (cached_has_bits & 0x00000020u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::
         WriteInt32ToArrayWithField<8>(
             stream, this->_internal_setting_tessellationsubdivision(), target);
-=======
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(8, this->_internal_setting_tessellationsubdivision(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.ObjectCoordinate positionX = 9;
   if (cached_has_bits & 0x00000001u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         9, _Internal::positionx(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(9, _Internal::positionx(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::positionx(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionY = 10;
   if (cached_has_bits & 0x00000002u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         10, _Internal::positiony(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(10, _Internal::positiony(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::positiony(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate positionZ = 11;
   if (cached_has_bits & 0x00000004u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         11, _Internal::positionz(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(11, _Internal::positionz(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::positionz(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleX = 12;
   if (cached_has_bits & 0x00000008u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         12, _Internal::scalex(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(12, _Internal::scalex(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::scalex(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleY = 13;
   if (cached_has_bits & 0x00000010u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         13, _Internal::scaley(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(13, _Internal::scaley(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::scaley(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate scaleZ = 14;
   if (cached_has_bits & 0x00000020u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         14, _Internal::scalez(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(14, _Internal::scalez(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::scalez(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateX = 15;
   if (cached_has_bits & 0x00000040u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         15, _Internal::rotatex(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(15, _Internal::rotatex(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::rotatex(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateY = 16;
   if (cached_has_bits & 0x00000080u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         16, _Internal::rotatey(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(16, _Internal::rotatey(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::rotatey(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate rotateZ = 17;
   if (cached_has_bits & 0x00000100u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         17, _Internal::rotatez(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(17, _Internal::rotatez(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::rotatez(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceX = 18;
   if (cached_has_bits & 0x00000200u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         18, _Internal::displacex(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(18, _Internal::displacex(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::displacex(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceY = 19;
   if (cached_has_bits & 0x00000400u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         19, _Internal::displacey(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(19, _Internal::displacey(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::displacey(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate displaceZ = 20;
   if (cached_has_bits & 0x00000800u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         20, _Internal::displacez(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(20, _Internal::displacez(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::displacez(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
   if (cached_has_bits & 0x00001000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         21, _Internal::setting_materialrefraction(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(21, _Internal::setting_materialrefraction(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_materialrefraction(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
   if (cached_has_bits & 0x00002000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         22, _Internal::setting_materialspecularexp(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(22, _Internal::setting_materialspecularexp(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_materialspecularexp(this).GetCachedSize(), target, stream);
   }
 
@@ -3625,60 +1854,36 @@ uint8_t* MeshModel::_InternalSerialize(
   // required int32 Setting_ModelViewSkin = 23;
   if (cached_has_bits & 0x00000040u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
         23, this->_internal_setting_modelviewskin(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(23, this->_internal_setting_modelviewskin(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
   if (cached_has_bits & 0x00004000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         24, _Internal::solidlightskin_materialcolor(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(24, _Internal::solidlightskin_materialcolor(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::solidlightskin_materialcolor(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
   if (cached_has_bits & 0x00008000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         25, _Internal::solidlightskin_ambient(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(25, _Internal::solidlightskin_ambient(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::solidlightskin_ambient(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
   if (cached_has_bits & 0x00010000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         26, _Internal::solidlightskin_diffuse(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(26, _Internal::solidlightskin_diffuse(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::solidlightskin_diffuse(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
   if (cached_has_bits & 0x00020000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         27, _Internal::solidlightskin_specular(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(27, _Internal::solidlightskin_specular(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::solidlightskin_specular(this).GetCachedSize(), target, stream);
   }
 
@@ -3686,94 +1891,57 @@ uint8_t* MeshModel::_InternalSerialize(
   // required float solidLightSkin_Ambient_Strength = 28;
   if (cached_has_bits & 0x00000080u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         28, this->_internal_solidlightskin_ambient_strength(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(28, this->_internal_solidlightskin_ambient_strength(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float solidLightSkin_Diffuse_Strength = 29;
   if (cached_has_bits & 0x00000100u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         29, this->_internal_solidlightskin_diffuse_strength(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(29, this->_internal_solidlightskin_diffuse_strength(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float solidLightSkin_Specular_Strength = 30;
   if (cached_has_bits & 0x00000200u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         30, this->_internal_solidlightskin_specular_strength(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(30, this->_internal_solidlightskin_specular_strength(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.Vec3 Setting_LightPosition = 31;
   if (cached_has_bits & 0x00040000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         31, _Internal::setting_lightposition(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(31, _Internal::setting_lightposition(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_lightposition(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDirection = 32;
   if (cached_has_bits & 0x00080000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         32, _Internal::setting_lightdirection(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(32, _Internal::setting_lightdirection(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_lightdirection(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
   if (cached_has_bits & 0x00100000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         33, _Internal::setting_lightambient(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(33, _Internal::setting_lightambient(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_lightambient(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
   if (cached_has_bits & 0x00200000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         34, _Internal::setting_lightdiffuse(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(34, _Internal::setting_lightdiffuse(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_lightdiffuse(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
   if (cached_has_bits & 0x00400000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         35, _Internal::setting_lightspecular(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(35, _Internal::setting_lightspecular(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::setting_lightspecular(this).GetCachedSize(), target, stream);
   }
 
@@ -3781,57 +1949,36 @@ uint8_t* MeshModel::_InternalSerialize(
   // required float Setting_LightStrengthAmbient = 36;
   if (cached_has_bits & 0x00004000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         36, this->_internal_setting_lightstrengthambient(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(36, this->_internal_setting_lightstrengthambient(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Setting_LightStrengthDiffuse = 37;
   if (cached_has_bits & 0x00008000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         37, this->_internal_setting_lightstrengthdiffuse(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(37, this->_internal_setting_lightstrengthdiffuse(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Setting_LightStrengthSpecular = 38;
   if (cached_has_bits & 0x00010000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         38, this->_internal_setting_lightstrengthspecular(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(38, this->_internal_setting_lightstrengthspecular(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required int32 materialIlluminationModel = 39;
   if (cached_has_bits & 0x00020000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
         39, this->_internal_materialilluminationmodel(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(39, this->_internal_materialilluminationmodel(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
   if (cached_has_bits & 0x00800000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         40, _Internal::displacementheightscale(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(40, _Internal::displacementheightscale(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::displacementheightscale(this).GetCachedSize(), target, stream);
   }
 
@@ -3839,60 +1986,36 @@ uint8_t* MeshModel::_InternalSerialize(
   // required bool showMaterialEditor = 41;
   if (cached_has_bits & 0x00000800u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         41, this->_internal_showmaterialeditor(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(41, this->_internal_showmaterialeditor(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.MaterialColor materialAmbient = 42;
   if (cached_has_bits & 0x01000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         42, _Internal::materialambient(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(42, _Internal::materialambient(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::materialambient(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MaterialColor materialDiffuse = 43;
   if (cached_has_bits & 0x02000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         43, _Internal::materialdiffuse(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(43, _Internal::materialdiffuse(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::materialdiffuse(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MaterialColor materialSpecular = 44;
   if (cached_has_bits & 0x04000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         44, _Internal::materialspecular(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(44, _Internal::materialspecular(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::materialspecular(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MaterialColor materialEmission = 45;
   if (cached_has_bits & 0x08000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         45, _Internal::materialemission(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(45, _Internal::materialemission(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::materialemission(this).GetCachedSize(), target, stream);
   }
 
@@ -3900,47 +2023,29 @@ uint8_t* MeshModel::_InternalSerialize(
   // required bool Setting_ParallaxMapping = 46;
   if (cached_has_bits & 0x00001000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         46, this->_internal_setting_parallaxmapping(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(46, this->_internal_setting_parallaxmapping(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required int32 Effect_GBlur_Mode = 47;
   if (cached_has_bits & 0x00040000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
         47, this->_internal_effect_gblur_mode(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(47, this->_internal_effect_gblur_mode(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
   if (cached_has_bits & 0x10000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         48, _Internal::effect_gblur_radius(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(48, _Internal::effect_gblur_radius(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::effect_gblur_radius(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
   if (cached_has_bits & 0x20000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         49, _Internal::effect_gblur_width(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(49, _Internal::effect_gblur_width(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::effect_gblur_width(this).GetCachedSize(), target, stream);
   }
 
@@ -3948,493 +2053,80 @@ uint8_t* MeshModel::_InternalSerialize(
   // required bool Effect_Bloom_doBloom = 50;
   if (cached_has_bits & 0x00002000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteBoolToArray(
         50, this->_internal_effect_bloom_dobloom(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(50, this->_internal_effect_bloom_dobloom(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_WeightA = 51;
   if (cached_has_bits & 0x00080000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         51, this->_internal_effect_bloom_weighta(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(51, this->_internal_effect_bloom_weighta(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_WeightB = 52;
   if (cached_has_bits & 0x00100000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         52, this->_internal_effect_bloom_weightb(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(52, this->_internal_effect_bloom_weightb(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_WeightC = 53;
   if (cached_has_bits & 0x00200000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         53, this->_internal_effect_bloom_weightc(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(53, this->_internal_effect_bloom_weightc(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_WeightD = 54;
   if (cached_has_bits & 0x00400000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         54, this->_internal_effect_bloom_weightd(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(54, this->_internal_effect_bloom_weightd(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_Vignette = 55;
   if (cached_has_bits & 0x00800000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         55, this->_internal_effect_bloom_vignette(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(55, this->_internal_effect_bloom_vignette(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required float Effect_Bloom_VignetteAtt = 56;
   if (cached_has_bits & 0x01000000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteFloatToArray(
         56, this->_internal_effect_bloom_vignetteatt(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteFloatToArray(56, this->_internal_effect_bloom_vignetteatt(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   // required int32 Setting_LightingPass_DrawMode = 57;
   if (cached_has_bits & 0x02000000u) {
     target = stream->EnsureSpace(target);
-<<<<<<< HEAD
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(
         57, this->_internal_setting_lightingpass_drawmode(), target);
-=======
-    target = ::_pbi::WireFormatLite::WriteInt32ToArray(57, this->_internal_setting_lightingpass_drawmode(), target);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
 
   cached_has_bits = _impl_._has_bits_[0];
   // required .KuplungApp.Mesh meshObject = 58;
   if (cached_has_bits & 0x40000000u) {
-<<<<<<< HEAD
     target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
         58, _Internal::meshobject(this),
-=======
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(58, _Internal::meshobject(this),
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
         _Internal::meshobject(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-<<<<<<< HEAD
     target =
         ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
             _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
-=======
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModel)
   return target;
 }
 
-<<<<<<< HEAD
 ::size_t MeshModel::ByteSizeLong() const {
-=======
-size_t MeshModel::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.MeshModel)
-  size_t total_size = 0;
-
-  if (_internal_has_positionx()) {
-    // required .KuplungApp.ObjectCoordinate positionX = 9;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positionx_);
-  }
-
-  if (_internal_has_positiony()) {
-    // required .KuplungApp.ObjectCoordinate positionY = 10;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positiony_);
-  }
-
-  if (_internal_has_positionz()) {
-    // required .KuplungApp.ObjectCoordinate positionZ = 11;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positionz_);
-  }
-
-  if (_internal_has_scalex()) {
-    // required .KuplungApp.ObjectCoordinate scaleX = 12;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scalex_);
-  }
-
-  if (_internal_has_scaley()) {
-    // required .KuplungApp.ObjectCoordinate scaleY = 13;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scaley_);
-  }
-
-  if (_internal_has_scalez()) {
-    // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scalez_);
-  }
-
-  if (_internal_has_rotatex()) {
-    // required .KuplungApp.ObjectCoordinate rotateX = 15;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatex_);
-  }
-
-  if (_internal_has_rotatey()) {
-    // required .KuplungApp.ObjectCoordinate rotateY = 16;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatey_);
-  }
-
-  if (_internal_has_rotatez()) {
-    // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatez_);
-  }
-
-  if (_internal_has_displacex()) {
-    // required .KuplungApp.ObjectCoordinate displaceX = 18;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacex_);
-  }
-
-  if (_internal_has_displacey()) {
-    // required .KuplungApp.ObjectCoordinate displaceY = 19;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacey_);
-  }
-
-  if (_internal_has_displacez()) {
-    // required .KuplungApp.ObjectCoordinate displaceZ = 20;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacez_);
-  }
-
-  if (_internal_has_setting_materialrefraction()) {
-    // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_materialrefraction_);
-  }
-
-  if (_internal_has_setting_materialspecularexp()) {
-    // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_materialspecularexp_);
-  }
-
-  if (_internal_has_solidlightskin_materialcolor()) {
-    // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_materialcolor_);
-  }
-
-  if (_internal_has_solidlightskin_ambient()) {
-    // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_ambient_);
-  }
-
-  if (_internal_has_solidlightskin_diffuse()) {
-    // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_diffuse_);
-  }
-
-  if (_internal_has_solidlightskin_specular()) {
-    // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_specular_);
-  }
-
-  if (_internal_has_setting_lightposition()) {
-    // required .KuplungApp.Vec3 Setting_LightPosition = 31;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightposition_);
-  }
-
-  if (_internal_has_setting_lightdirection()) {
-    // required .KuplungApp.Vec3 Setting_LightDirection = 32;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightdirection_);
-  }
-
-  if (_internal_has_setting_lightambient()) {
-    // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightambient_);
-  }
-
-  if (_internal_has_setting_lightdiffuse()) {
-    // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightdiffuse_);
-  }
-
-  if (_internal_has_setting_lightspecular()) {
-    // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightspecular_);
-  }
-
-  if (_internal_has_displacementheightscale()) {
-    // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacementheightscale_);
-  }
-
-  if (_internal_has_materialambient()) {
-    // required .KuplungApp.MaterialColor materialAmbient = 42;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialambient_);
-  }
-
-  if (_internal_has_materialdiffuse()) {
-    // required .KuplungApp.MaterialColor materialDiffuse = 43;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialdiffuse_);
-  }
-
-  if (_internal_has_materialspecular()) {
-    // required .KuplungApp.MaterialColor materialSpecular = 44;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialspecular_);
-  }
-
-  if (_internal_has_materialemission()) {
-    // required .KuplungApp.MaterialColor materialEmission = 45;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialemission_);
-  }
-
-  if (_internal_has_effect_gblur_radius()) {
-    // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.effect_gblur_radius_);
-  }
-
-  if (_internal_has_effect_gblur_width()) {
-    // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.effect_gblur_width_);
-  }
-
-  if (_internal_has_meshobject()) {
-    // required .KuplungApp.Mesh meshObject = 58;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.meshobject_);
-  }
-
-  if (_internal_has_modelid()) {
-    // required int32 ModelID = 1;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_modelid());
-  }
-
-  if (_internal_has_settings_deferredrender()) {
-    // required bool Settings_DeferredRender = 2;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_setting_celshading()) {
-    // required bool Setting_CelShading = 3;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_setting_wireframe()) {
-    // required bool Setting_Wireframe = 4;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_setting_usetessellation()) {
-    // required bool Setting_UseTessellation = 5;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_setting_alpha()) {
-    // required float Setting_Alpha = 7;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_setting_tessellationsubdivision()) {
-    // required int32 Setting_TessellationSubdivision = 8;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_setting_tessellationsubdivision());
-  }
-
-  if (_internal_has_setting_modelviewskin()) {
-    // required int32 Setting_ModelViewSkin = 23;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_setting_modelviewskin());
-  }
-
-  if (_internal_has_solidlightskin_ambient_strength()) {
-    // required float solidLightSkin_Ambient_Strength = 28;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_solidlightskin_diffuse_strength()) {
-    // required float solidLightSkin_Diffuse_Strength = 29;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_solidlightskin_specular_strength()) {
-    // required float solidLightSkin_Specular_Strength = 30;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_setting_usecullface()) {
-    // required bool Setting_UseCullFace = 6;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_showmaterialeditor()) {
-    // required bool showMaterialEditor = 41;
-    total_size += 2 + 1;
-  }
-
-  if (_internal_has_setting_parallaxmapping()) {
-    // required bool Setting_ParallaxMapping = 46;
-    total_size += 2 + 1;
-  }
-
-  if (_internal_has_effect_bloom_dobloom()) {
-    // required bool Effect_Bloom_doBloom = 50;
-    total_size += 2 + 1;
-  }
-
-  if (_internal_has_setting_lightstrengthambient()) {
-    // required float Setting_LightStrengthAmbient = 36;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_setting_lightstrengthdiffuse()) {
-    // required float Setting_LightStrengthDiffuse = 37;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_setting_lightstrengthspecular()) {
-    // required float Setting_LightStrengthSpecular = 38;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_materialilluminationmodel()) {
-    // required int32 materialIlluminationModel = 39;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_materialilluminationmodel());
-  }
-
-  if (_internal_has_effect_gblur_mode()) {
-    // required int32 Effect_GBlur_Mode = 47;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_effect_gblur_mode());
-  }
-
-  if (_internal_has_effect_bloom_weighta()) {
-    // required float Effect_Bloom_WeightA = 51;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_effect_bloom_weightb()) {
-    // required float Effect_Bloom_WeightB = 52;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_effect_bloom_weightc()) {
-    // required float Effect_Bloom_WeightC = 53;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_effect_bloom_weightd()) {
-    // required float Effect_Bloom_WeightD = 54;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_effect_bloom_vignette()) {
-    // required float Effect_Bloom_Vignette = 55;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_effect_bloom_vignetteatt()) {
-    // required float Effect_Bloom_VignetteAtt = 56;
-    total_size += 2 + 4;
-  }
-
-  if (_internal_has_setting_lightingpass_drawmode()) {
-    // required int32 Setting_LightingPass_DrawMode = 57;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_setting_lightingpass_drawmode());
-  }
-
-  return total_size;
-}
-size_t MeshModel::ByteSizeLong() const {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.MeshModel)
   ::size_t total_size = 0;
 
-<<<<<<< HEAD
   ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -4801,277 +2493,6 @@ void MeshModel::MergeImpl(::google::protobuf::Message& to_msg, const ::google::p
   // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModel)
   ABSL_DCHECK_NE(&from, _this);
   ::uint32_t cached_has_bits = 0;
-=======
-  if ((((_impl_._has_bits_[0] & 0xffffffff) ^ 0xffffffff)
-       | ((_impl_._has_bits_[1] & 0x03ffffff) ^ 0x03ffffff)) == 0) {  // All required fields are present.
-    // required .KuplungApp.ObjectCoordinate positionX = 9;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positionx_);
-
-    // required .KuplungApp.ObjectCoordinate positionY = 10;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positiony_);
-
-    // required .KuplungApp.ObjectCoordinate positionZ = 11;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.positionz_);
-
-    // required .KuplungApp.ObjectCoordinate scaleX = 12;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scalex_);
-
-    // required .KuplungApp.ObjectCoordinate scaleY = 13;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scaley_);
-
-    // required .KuplungApp.ObjectCoordinate scaleZ = 14;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.scalez_);
-
-    // required .KuplungApp.ObjectCoordinate rotateX = 15;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatex_);
-
-    // required .KuplungApp.ObjectCoordinate rotateY = 16;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatey_);
-
-    // required .KuplungApp.ObjectCoordinate rotateZ = 17;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.rotatez_);
-
-    // required .KuplungApp.ObjectCoordinate displaceX = 18;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacex_);
-
-    // required .KuplungApp.ObjectCoordinate displaceY = 19;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacey_);
-
-    // required .KuplungApp.ObjectCoordinate displaceZ = 20;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacez_);
-
-    // required .KuplungApp.ObjectCoordinate Setting_MaterialRefraction = 21;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_materialrefraction_);
-
-    // required .KuplungApp.ObjectCoordinate Setting_MaterialSpecularExp = 22;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_materialspecularexp_);
-
-    // required .KuplungApp.Vec3 solidLightSkin_MaterialColor = 24;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_materialcolor_);
-
-    // required .KuplungApp.Vec3 solidLightSkin_Ambient = 25;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_ambient_);
-
-    // required .KuplungApp.Vec3 solidLightSkin_Diffuse = 26;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_diffuse_);
-
-    // required .KuplungApp.Vec3 solidLightSkin_Specular = 27;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.solidlightskin_specular_);
-
-    // required .KuplungApp.Vec3 Setting_LightPosition = 31;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightposition_);
-
-    // required .KuplungApp.Vec3 Setting_LightDirection = 32;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightdirection_);
-
-    // required .KuplungApp.Vec3 Setting_LightAmbient = 33;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightambient_);
-
-    // required .KuplungApp.Vec3 Setting_LightDiffuse = 34;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightdiffuse_);
-
-    // required .KuplungApp.Vec3 Setting_LightSpecular = 35;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.setting_lightspecular_);
-
-    // required .KuplungApp.ObjectCoordinate displacementHeightScale = 40;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.displacementheightscale_);
-
-    // required .KuplungApp.MaterialColor materialAmbient = 42;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialambient_);
-
-    // required .KuplungApp.MaterialColor materialDiffuse = 43;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialdiffuse_);
-
-    // required .KuplungApp.MaterialColor materialSpecular = 44;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialspecular_);
-
-    // required .KuplungApp.MaterialColor materialEmission = 45;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.materialemission_);
-
-    // required .KuplungApp.ObjectCoordinate Effect_GBlur_Radius = 48;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.effect_gblur_radius_);
-
-    // required .KuplungApp.ObjectCoordinate Effect_GBlur_Width = 49;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.effect_gblur_width_);
-
-    // required .KuplungApp.Mesh meshObject = 58;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *_impl_.meshobject_);
-
-    // required int32 ModelID = 1;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_modelid());
-
-    // required bool Settings_DeferredRender = 2;
-    total_size += 1 + 1;
-
-    // required bool Setting_CelShading = 3;
-    total_size += 1 + 1;
-
-    // required bool Setting_Wireframe = 4;
-    total_size += 1 + 1;
-
-    // required bool Setting_UseTessellation = 5;
-    total_size += 1 + 1;
-
-    // required float Setting_Alpha = 7;
-    total_size += 1 + 4;
-
-    // required int32 Setting_TessellationSubdivision = 8;
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_setting_tessellationsubdivision());
-
-    // required int32 Setting_ModelViewSkin = 23;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_setting_modelviewskin());
-
-    // required float solidLightSkin_Ambient_Strength = 28;
-    total_size += 2 + 4;
-
-    // required float solidLightSkin_Diffuse_Strength = 29;
-    total_size += 2 + 4;
-
-    // required float solidLightSkin_Specular_Strength = 30;
-    total_size += 2 + 4;
-
-    // required bool Setting_UseCullFace = 6;
-    total_size += 1 + 1;
-
-    // required bool showMaterialEditor = 41;
-    total_size += 2 + 1;
-
-    // required bool Setting_ParallaxMapping = 46;
-    total_size += 2 + 1;
-
-    // required bool Effect_Bloom_doBloom = 50;
-    total_size += 2 + 1;
-
-    // required float Setting_LightStrengthAmbient = 36;
-    total_size += 2 + 4;
-
-    // required float Setting_LightStrengthDiffuse = 37;
-    total_size += 2 + 4;
-
-    // required float Setting_LightStrengthSpecular = 38;
-    total_size += 2 + 4;
-
-    // required int32 materialIlluminationModel = 39;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_materialilluminationmodel());
-
-    // required int32 Effect_GBlur_Mode = 47;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_effect_gblur_mode());
-
-    // required float Effect_Bloom_WeightA = 51;
-    total_size += 2 + 4;
-
-    // required float Effect_Bloom_WeightB = 52;
-    total_size += 2 + 4;
-
-    // required float Effect_Bloom_WeightC = 53;
-    total_size += 2 + 4;
-
-    // required float Effect_Bloom_WeightD = 54;
-    total_size += 2 + 4;
-
-    // required float Effect_Bloom_Vignette = 55;
-    total_size += 2 + 4;
-
-    // required float Effect_Bloom_VignetteAtt = 56;
-    total_size += 2 + 4;
-
-    // required int32 Setting_LightingPass_DrawMode = 57;
-    total_size += 2 +
-      ::_pbi::WireFormatLite::Int32Size(
-        this->_internal_setting_lightingpass_drawmode());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
-
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData MeshModel::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    MeshModel::MergeImpl
-};
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*MeshModel::GetClassData() const { return &_class_data_; }
-
-
-void MeshModel::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<MeshModel*>(&to_msg);
-  auto& from = static_cast<const MeshModel&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModel)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   (void) cached_has_bits;
 
   cached_has_bits = from._impl_._has_bits_[0];
@@ -5302,11 +2723,7 @@ void MeshModel::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
     }
     _this->_impl_._has_bits_[1] |= cached_has_bits;
   }
-<<<<<<< HEAD
   _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
-=======
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 }
 
 void MeshModel::CopyFrom(const MeshModel& from) {
@@ -5316,7 +2733,6 @@ void MeshModel::CopyFrom(const MeshModel& from) {
   MergeFrom(from);
 }
 
-<<<<<<< HEAD
 PROTOBUF_NOINLINE bool MeshModel::IsInitialized() const {
   if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
     return false;
@@ -5412,101 +2828,6 @@ PROTOBUF_NOINLINE bool MeshModel::IsInitialized() const {
     if (!_impl_.effect_gblur_width_->IsInitialized()) return false;
   }
   if ((_impl_._has_bits_[0] & 0x40000000u) != 0) {
-=======
-bool MeshModel::IsInitialized() const {
-  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) return false;
-  if (_internal_has_positionx()) {
-    if (!_impl_.positionx_->IsInitialized()) return false;
-  }
-  if (_internal_has_positiony()) {
-    if (!_impl_.positiony_->IsInitialized()) return false;
-  }
-  if (_internal_has_positionz()) {
-    if (!_impl_.positionz_->IsInitialized()) return false;
-  }
-  if (_internal_has_scalex()) {
-    if (!_impl_.scalex_->IsInitialized()) return false;
-  }
-  if (_internal_has_scaley()) {
-    if (!_impl_.scaley_->IsInitialized()) return false;
-  }
-  if (_internal_has_scalez()) {
-    if (!_impl_.scalez_->IsInitialized()) return false;
-  }
-  if (_internal_has_rotatex()) {
-    if (!_impl_.rotatex_->IsInitialized()) return false;
-  }
-  if (_internal_has_rotatey()) {
-    if (!_impl_.rotatey_->IsInitialized()) return false;
-  }
-  if (_internal_has_rotatez()) {
-    if (!_impl_.rotatez_->IsInitialized()) return false;
-  }
-  if (_internal_has_displacex()) {
-    if (!_impl_.displacex_->IsInitialized()) return false;
-  }
-  if (_internal_has_displacey()) {
-    if (!_impl_.displacey_->IsInitialized()) return false;
-  }
-  if (_internal_has_displacez()) {
-    if (!_impl_.displacez_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_materialrefraction()) {
-    if (!_impl_.setting_materialrefraction_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_materialspecularexp()) {
-    if (!_impl_.setting_materialspecularexp_->IsInitialized()) return false;
-  }
-  if (_internal_has_solidlightskin_materialcolor()) {
-    if (!_impl_.solidlightskin_materialcolor_->IsInitialized()) return false;
-  }
-  if (_internal_has_solidlightskin_ambient()) {
-    if (!_impl_.solidlightskin_ambient_->IsInitialized()) return false;
-  }
-  if (_internal_has_solidlightskin_diffuse()) {
-    if (!_impl_.solidlightskin_diffuse_->IsInitialized()) return false;
-  }
-  if (_internal_has_solidlightskin_specular()) {
-    if (!_impl_.solidlightskin_specular_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_lightposition()) {
-    if (!_impl_.setting_lightposition_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_lightdirection()) {
-    if (!_impl_.setting_lightdirection_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_lightambient()) {
-    if (!_impl_.setting_lightambient_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_lightdiffuse()) {
-    if (!_impl_.setting_lightdiffuse_->IsInitialized()) return false;
-  }
-  if (_internal_has_setting_lightspecular()) {
-    if (!_impl_.setting_lightspecular_->IsInitialized()) return false;
-  }
-  if (_internal_has_displacementheightscale()) {
-    if (!_impl_.displacementheightscale_->IsInitialized()) return false;
-  }
-  if (_internal_has_materialambient()) {
-    if (!_impl_.materialambient_->IsInitialized()) return false;
-  }
-  if (_internal_has_materialdiffuse()) {
-    if (!_impl_.materialdiffuse_->IsInitialized()) return false;
-  }
-  if (_internal_has_materialspecular()) {
-    if (!_impl_.materialspecular_->IsInitialized()) return false;
-  }
-  if (_internal_has_materialemission()) {
-    if (!_impl_.materialemission_->IsInitialized()) return false;
-  }
-  if (_internal_has_effect_gblur_radius()) {
-    if (!_impl_.effect_gblur_radius_->IsInitialized()) return false;
-  }
-  if (_internal_has_effect_gblur_width()) {
-    if (!_impl_.effect_gblur_width_->IsInitialized()) return false;
-  }
-  if (_internal_has_meshobject()) {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
     if (!_impl_.meshobject_->IsInitialized()) return false;
   }
   return true;
@@ -5520,11 +2841,7 @@ void MeshModel::InternalSwap(MeshModel* PROTOBUF_RESTRICT other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_._has_bits_[1], other->_impl_._has_bits_[1]);
-<<<<<<< HEAD
   ::google::protobuf::internal::memswap<
-=======
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
       PROTOBUF_FIELD_OFFSET(MeshModel, _impl_.setting_lightingpass_drawmode_)
       + sizeof(MeshModel::_impl_.setting_lightingpass_drawmode_)
       - PROTOBUF_FIELD_OFFSET(MeshModel, _impl_.positionx_)>(
@@ -5532,37 +2849,16 @@ void MeshModel::InternalSwap(MeshModel* PROTOBUF_RESTRICT other) {
           reinterpret_cast<char*>(&other->_impl_.positionx_));
 }
 
-<<<<<<< HEAD
 ::google::protobuf::Metadata MeshModel::GetMetadata() const {
-=======
-::PROTOBUF_NAMESPACE_ID::Metadata MeshModel::GetMetadata() const {
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
   return ::_pbi::AssignDescriptors(
       &descriptor_table_KuplungAppScene_2eproto_getter, &descriptor_table_KuplungAppScene_2eproto_once,
       file_level_metadata_KuplungAppScene_2eproto[1]);
 }
-<<<<<<< HEAD
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace KuplungApp
 namespace google {
 namespace protobuf {
 }  // namespace protobuf
 }  // namespace google
-=======
-
-// @@protoc_insertion_point(namespace_scope)
-}  // namespace KuplungApp
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::KuplungApp::Scene*
-Arena::CreateMaybeMessage< ::KuplungApp::Scene >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::KuplungApp::Scene >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::MeshModel*
-Arena::CreateMaybeMessage< ::KuplungApp::MeshModel >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::KuplungApp::MeshModel >(arena);
-}
-PROTOBUF_NAMESPACE_CLOSE
-
->>>>>>> b2efe68945cdd9d7d4246400f54bf32870bec47b
 // @@protoc_insertion_point(global_scope)
 #include "google/protobuf/port_undef.inc"
