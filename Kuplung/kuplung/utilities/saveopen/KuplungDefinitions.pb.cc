@@ -4,676 +4,758 @@
 #include "KuplungDefinitions.pb.h"
 
 #include <algorithm>
-
-#include <google/protobuf/io/coded_stream.h>
-#include <google/protobuf/extension_set.h>
-#include <google/protobuf/wire_format_lite.h>
-#include <google/protobuf/descriptor.h>
-#include <google/protobuf/generated_message_reflection.h>
-#include <google/protobuf/reflection_ops.h>
-#include <google/protobuf/wire_format.h>
+#include "google/protobuf/io/coded_stream.h"
+#include "google/protobuf/extension_set.h"
+#include "google/protobuf/wire_format_lite.h"
+#include "google/protobuf/descriptor.h"
+#include "google/protobuf/generated_message_reflection.h"
+#include "google/protobuf/reflection_ops.h"
+#include "google/protobuf/wire_format.h"
+#include "google/protobuf/generated_message_tctable_impl.h"
 // @@protoc_insertion_point(includes)
-#include <google/protobuf/port_def.inc>
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto;
-extern PROTOBUF_INTERNAL_EXPORT_KuplungDefinitions_2eproto ::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto;
+
+// Must be included last.
+#include "google/protobuf/port_def.inc"
+PROTOBUF_PRAGMA_INIT_SEG
+namespace _pb = ::google::protobuf;
+namespace _pbi = ::google::protobuf::internal;
+namespace _fl = ::google::protobuf::internal::field_layout;
 namespace KuplungApp {
-class Vec2DefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec2> _instance;
-} _Vec2_default_instance_;
-class Vec3DefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec3> _instance;
-} _Vec3_default_instance_;
-class Vec4DefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Vec4> _instance;
-} _Vec4_default_instance_;
-class ObjectCoordinateDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<ObjectCoordinate> _instance;
-} _ObjectCoordinate_default_instance_;
-class FBEntityDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<FBEntity> _instance;
-} _FBEntity_default_instance_;
-class MaterialColorDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MaterialColor> _instance;
-} _MaterialColor_default_instance_;
-class MeshMaterialTextureImageDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MeshMaterialTextureImage> _instance;
-} _MeshMaterialTextureImage_default_instance_;
-class MeshModelMaterialDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<MeshModelMaterial> _instance;
-} _MeshModelMaterial_default_instance_;
-class MeshDefaultTypeInternal {
- public:
-  ::PROTOBUF_NAMESPACE_ID::internal::ExplicitlyConstructed<Mesh> _instance;
-} _Mesh_default_instance_;
+
+inline constexpr Vec4::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        x_{0},
+        y_{0},
+        z_{0},
+        w_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Vec4::Vec4(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct Vec4DefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Vec4DefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Vec4DefaultTypeInternal() {}
+  union {
+    Vec4 _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Vec4DefaultTypeInternal _Vec4_default_instance_;
+
+inline constexpr Vec3::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        x_{0},
+        y_{0},
+        z_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Vec3::Vec3(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct Vec3DefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Vec3DefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Vec3DefaultTypeInternal() {}
+  union {
+    Vec3 _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Vec3DefaultTypeInternal _Vec3_default_instance_;
+
+inline constexpr Vec2::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        x_{0},
+        y_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Vec2::Vec2(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct Vec2DefaultTypeInternal {
+  PROTOBUF_CONSTEXPR Vec2DefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~Vec2DefaultTypeInternal() {}
+  union {
+    Vec2 _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 Vec2DefaultTypeInternal _Vec2_default_instance_;
+
+inline constexpr ObjectCoordinate::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        animate_{false},
+        point_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR ObjectCoordinate::ObjectCoordinate(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct ObjectCoordinateDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR ObjectCoordinateDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~ObjectCoordinateDefaultTypeInternal() {}
+  union {
+    ObjectCoordinate _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ObjectCoordinateDefaultTypeInternal _ObjectCoordinate_default_instance_;
+
+inline constexpr MeshMaterialTextureImage::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        commands_{},
+        filename_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        image_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        width_{0},
+        height_{0},
+        usetexture_{false} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR MeshMaterialTextureImage::MeshMaterialTextureImage(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct MeshMaterialTextureImageDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MeshMaterialTextureImageDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MeshMaterialTextureImageDefaultTypeInternal() {}
+  union {
+    MeshMaterialTextureImage _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MeshMaterialTextureImageDefaultTypeInternal _MeshMaterialTextureImage_default_instance_;
+
+inline constexpr FBEntity::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        path_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        title_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        extension_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        modifieddate_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        size_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        isfile_{false} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR FBEntity::FBEntity(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct FBEntityDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR FBEntityDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~FBEntityDefaultTypeInternal() {}
+  union {
+    FBEntity _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FBEntityDefaultTypeInternal _FBEntity_default_instance_;
+
+inline constexpr MeshModelMaterial::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        materialtitle_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        ambientcolor_{nullptr},
+        diffusecolor_{nullptr},
+        specularcolor_{nullptr},
+        emissioncolor_{nullptr},
+        textureambient_{nullptr},
+        texturediffuse_{nullptr},
+        texturespecular_{nullptr},
+        texturespecularexp_{nullptr},
+        texturedissolve_{nullptr},
+        texturebump_{nullptr},
+        texturedisplacement_{nullptr},
+        materialid_{0},
+        specularexp_{0},
+        transparency_{0},
+        illuminationmode_{0u},
+        opticaldensity_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR MeshModelMaterial::MeshModelMaterial(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct MeshModelMaterialDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MeshModelMaterialDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MeshModelMaterialDefaultTypeInternal() {}
+  union {
+    MeshModelMaterial _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MeshModelMaterialDefaultTypeInternal _MeshModelMaterial_default_instance_;
+
+inline constexpr MaterialColor::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        color_{nullptr},
+        colorpickeropen_{false},
+        animate_{false},
+        strength_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR MaterialColor::MaterialColor(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct MaterialColorDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MaterialColorDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MaterialColorDefaultTypeInternal() {}
+  union {
+    MaterialColor _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MaterialColorDefaultTypeInternal _MaterialColor_default_instance_;
+
+inline constexpr Mesh::Impl_::Impl_(
+    ::_pbi::ConstantInitialized) noexcept
+      : _cached_size_{0},
+        vertices_{},
+        texture_coordinates_{},
+        normals_{},
+        indices_{},
+        modeltitle_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        materialtitle_(
+            &::google::protobuf::internal::fixed_address_empty_string,
+            ::_pbi::ConstantInitialized()),
+        file_{nullptr},
+        modelmaterial_{nullptr},
+        id_{0},
+        countvertices_{0},
+        counttexturecoordinates_{0},
+        countnormals_{0},
+        countindices_{0} {}
+
+template <typename>
+PROTOBUF_CONSTEXPR Mesh::Mesh(::_pbi::ConstantInitialized)
+    : _impl_(::_pbi::ConstantInitialized()) {}
+struct MeshDefaultTypeInternal {
+  PROTOBUF_CONSTEXPR MeshDefaultTypeInternal() : _instance(::_pbi::ConstantInitialized{}) {}
+  ~MeshDefaultTypeInternal() {}
+  union {
+    Mesh _instance;
+  };
+};
+
+PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
+    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 MeshDefaultTypeInternal _Mesh_default_instance_;
 }  // namespace KuplungApp
-static void InitDefaultsscc_info_FBEntity_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_FBEntity_default_instance_;
-    new (ptr) ::KuplungApp::FBEntity();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::FBEntity::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_FBEntity_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_FBEntity_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsscc_info_MaterialColor_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_MaterialColor_default_instance_;
-    new (ptr) ::KuplungApp::MaterialColor();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::MaterialColor::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<1> scc_info_MaterialColor_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 1, 0, InitDefaultsscc_info_MaterialColor_KuplungDefinitions_2eproto}, {
-      &scc_info_Vec3_KuplungDefinitions_2eproto.base,}};
-
-static void InitDefaultsscc_info_Mesh_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Mesh_default_instance_;
-    new (ptr) ::KuplungApp::Mesh();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Mesh::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<4> scc_info_Mesh_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 4, 0, InitDefaultsscc_info_Mesh_KuplungDefinitions_2eproto}, {
-      &scc_info_FBEntity_KuplungDefinitions_2eproto.base,
-      &scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base,
-      &scc_info_Vec3_KuplungDefinitions_2eproto.base,
-      &scc_info_Vec2_KuplungDefinitions_2eproto.base,}};
-
-static void InitDefaultsscc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_MeshMaterialTextureImage_default_instance_;
-    new (ptr) ::KuplungApp::MeshMaterialTextureImage();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::MeshMaterialTextureImage::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsscc_info_MeshModelMaterial_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_MeshModelMaterial_default_instance_;
-    new (ptr) ::KuplungApp::MeshModelMaterial();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::MeshModelMaterial::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<2> scc_info_MeshModelMaterial_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 2, 0, InitDefaultsscc_info_MeshModelMaterial_KuplungDefinitions_2eproto}, {
-      &scc_info_Vec3_KuplungDefinitions_2eproto.base,
-      &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base,}};
-
-static void InitDefaultsscc_info_ObjectCoordinate_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_ObjectCoordinate_default_instance_;
-    new (ptr) ::KuplungApp::ObjectCoordinate();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::ObjectCoordinate::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_ObjectCoordinate_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_ObjectCoordinate_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsscc_info_Vec2_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec2_default_instance_;
-    new (ptr) ::KuplungApp::Vec2();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec2::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec2_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Vec2_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsscc_info_Vec3_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec3_default_instance_;
-    new (ptr) ::KuplungApp::Vec3();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec3::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec3_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Vec3_KuplungDefinitions_2eproto}, {}};
-
-static void InitDefaultsscc_info_Vec4_KuplungDefinitions_2eproto() {
-  GOOGLE_PROTOBUF_VERIFY_VERSION;
-
-  {
-    void* ptr = &::KuplungApp::_Vec4_default_instance_;
-    new (ptr) ::KuplungApp::Vec4();
-    ::PROTOBUF_NAMESPACE_ID::internal::OnShutdownDestroyMessage(ptr);
-  }
-  ::KuplungApp::Vec4::InitAsDefaultInstance();
-}
-
-::PROTOBUF_NAMESPACE_ID::internal::SCCInfo<0> scc_info_Vec4_KuplungDefinitions_2eproto =
-    {{ATOMIC_VAR_INIT(::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase::kUninitialized), 0, 0, InitDefaultsscc_info_Vec4_KuplungDefinitions_2eproto}, {}};
-
-static ::PROTOBUF_NAMESPACE_ID::Metadata file_level_metadata_KuplungDefinitions_2eproto[9];
-static constexpr ::PROTOBUF_NAMESPACE_ID::EnumDescriptor const** file_level_enum_descriptors_KuplungDefinitions_2eproto = nullptr;
-static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_KuplungDefinitions_2eproto = nullptr;
-
-const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_KuplungDefinitions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, x_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, y_),
-  0,
-  1,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, x_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, y_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, z_),
-  0,
-  1,
-  2,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, x_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, y_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, z_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, w_),
-  0,
-  1,
-  2,
-  3,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, animate_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, point_),
-  0,
-  1,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, isfile_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, path_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, title_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, extension_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, modifieddate_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, size_),
-  5,
-  0,
-  1,
-  2,
-  3,
-  4,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, colorpickeropen_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, animate_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, strength_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, color_),
-  1,
-  2,
-  3,
-  0,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, filename_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, image_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, width_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, height_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, usetexture_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, commands_),
-  0,
-  1,
-  2,
-  3,
-  4,
-  ~0u,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, materialid_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, materialtitle_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, ambientcolor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, diffusecolor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, specularcolor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, emissioncolor_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, specularexp_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, transparency_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, illuminationmode_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, opticaldensity_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, textureambient_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturediffuse_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturespecular_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturespecularexp_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturedissolve_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturebump_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, texturedisplacement_),
-  12,
-  0,
-  1,
-  2,
-  3,
-  4,
-  13,
-  14,
-  15,
-  16,
-  5,
-  6,
-  7,
-  8,
-  9,
-  10,
-  11,
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _has_bits_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, id_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, file_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, modeltitle_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, materialtitle_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, countvertices_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, counttexturecoordinates_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, countnormals_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, countindices_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, modelmaterial_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, vertices_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, texture_coordinates_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, normals_),
-  PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, indices_),
-  4,
-  2,
-  0,
-  1,
-  5,
-  6,
-  7,
-  8,
-  3,
-  ~0u,
-  ~0u,
-  ~0u,
-  ~0u,
-};
-static const ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 7, sizeof(::KuplungApp::Vec2)},
-  { 9, 17, sizeof(::KuplungApp::Vec3)},
-  { 20, 29, sizeof(::KuplungApp::Vec4)},
-  { 33, 40, sizeof(::KuplungApp::ObjectCoordinate)},
-  { 42, 53, sizeof(::KuplungApp::FBEntity)},
-  { 59, 68, sizeof(::KuplungApp::MaterialColor)},
-  { 72, 83, sizeof(::KuplungApp::MeshMaterialTextureImage)},
-  { 89, 111, sizeof(::KuplungApp::MeshModelMaterial)},
-  { 128, 146, sizeof(::KuplungApp::Mesh)},
+static ::_pb::Metadata file_level_metadata_KuplungDefinitions_2eproto[9];
+static constexpr const ::_pb::EnumDescriptor**
+    file_level_enum_descriptors_KuplungDefinitions_2eproto = nullptr;
+static constexpr const ::_pb::ServiceDescriptor**
+    file_level_service_descriptors_KuplungDefinitions_2eproto = nullptr;
+const ::uint32_t TableStruct_KuplungDefinitions_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(
+    protodesc_cold) = {
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _impl_.x_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec2, _impl_.y_),
+    0,
+    1,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _impl_.x_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _impl_.y_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec3, _impl_.z_),
+    0,
+    1,
+    2,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _impl_.x_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _impl_.y_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _impl_.z_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Vec4, _impl_.w_),
+    0,
+    1,
+    2,
+    3,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _impl_.animate_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::ObjectCoordinate, _impl_.point_),
+    0,
+    1,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.isfile_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.path_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.title_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.extension_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.modifieddate_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::FBEntity, _impl_.size_),
+    5,
+    0,
+    1,
+    2,
+    3,
+    4,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _impl_.colorpickeropen_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _impl_.animate_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _impl_.strength_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MaterialColor, _impl_.color_),
+    1,
+    2,
+    3,
+    0,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.filename_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.image_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.width_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.height_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.usetexture_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshMaterialTextureImage, _impl_.commands_),
+    0,
+    1,
+    2,
+    3,
+    4,
+    ~0u,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.materialid_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.materialtitle_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.ambientcolor_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.diffusecolor_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.specularcolor_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.emissioncolor_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.specularexp_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.transparency_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.illuminationmode_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.opticaldensity_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.textureambient_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturediffuse_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturespecular_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturespecularexp_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturedissolve_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturebump_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::MeshModelMaterial, _impl_.texturedisplacement_),
+    12,
+    0,
+    1,
+    2,
+    3,
+    4,
+    13,
+    14,
+    15,
+    16,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_._has_bits_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _split_
+    ~0u,  // no sizeof(Split)
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.id_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.file_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.modeltitle_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.materialtitle_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.countvertices_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.counttexturecoordinates_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.countnormals_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.countindices_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.modelmaterial_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.vertices_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.texture_coordinates_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.normals_),
+    PROTOBUF_FIELD_OFFSET(::KuplungApp::Mesh, _impl_.indices_),
+    4,
+    2,
+    0,
+    1,
+    5,
+    6,
+    7,
+    8,
+    3,
+    ~0u,
+    ~0u,
+    ~0u,
+    ~0u,
 };
 
-static ::PROTOBUF_NAMESPACE_ID::Message const * const file_default_instances[] = {
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec2_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec3_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Vec4_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_ObjectCoordinate_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_FBEntity_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MaterialColor_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MeshMaterialTextureImage_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_MeshModelMaterial_default_instance_),
-  reinterpret_cast<const ::PROTOBUF_NAMESPACE_ID::Message*>(&::KuplungApp::_Mesh_default_instance_),
+static const ::_pbi::MigrationSchema
+    schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+        {0, 10, -1, sizeof(::KuplungApp::Vec2)},
+        {12, 23, -1, sizeof(::KuplungApp::Vec3)},
+        {26, 38, -1, sizeof(::KuplungApp::Vec4)},
+        {42, 52, -1, sizeof(::KuplungApp::ObjectCoordinate)},
+        {54, 68, -1, sizeof(::KuplungApp::FBEntity)},
+        {74, 86, -1, sizeof(::KuplungApp::MaterialColor)},
+        {90, 104, -1, sizeof(::KuplungApp::MeshMaterialTextureImage)},
+        {110, 135, -1, sizeof(::KuplungApp::MeshModelMaterial)},
+        {152, 173, -1, sizeof(::KuplungApp::Mesh)},
 };
 
-const char descriptor_table_protodef_KuplungDefinitions_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
-  "\n\030KuplungDefinitions.proto\022\nKuplungApp\"\034"
-  "\n\004Vec2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\'\n\004Vec3\022\t\n\001"
-  "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
-  "\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001w\030\004 \002("
-  "\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001 \002(\010\022\r"
-  "\n\005point\030\002 \002(\002\"n\n\010FBEntity\022\016\n\006isFile\030\001 \002("
-  "\010\022\014\n\004path\030\002 \002(\t\022\r\n\005title\030\003 \002(\t\022\021\n\textens"
-  "ion\030\004 \002(\t\022\024\n\014modifiedDate\030\005 \002(\t\022\014\n\004size\030"
-  "\006 \002(\t\"l\n\rMaterialColor\022\027\n\017colorPickerOpe"
-  "n\030\001 \002(\010\022\017\n\007animate\030\002 \002(\010\022\020\n\010strength\030\003 \002"
-  "(\002\022\037\n\005color\030\004 \002(\0132\020.KuplungApp.Vec3\"\200\001\n\030"
-  "MeshMaterialTextureImage\022\020\n\010Filename\030\001 \002"
-  "(\t\022\r\n\005Image\030\002 \002(\t\022\r\n\005Width\030\003 \002(\005\022\016\n\006Heig"
-  "ht\030\004 \002(\005\022\022\n\nUseTexture\030\005 \002(\010\022\020\n\010Commands"
-  "\030\006 \003(\t\"\367\005\n\021MeshModelMaterial\022\022\n\nMaterial"
-  "ID\030\001 \002(\005\022\025\n\rMaterialTitle\030\002 \002(\t\022&\n\014Ambie"
-  "ntColor\030\003 \002(\0132\020.KuplungApp.Vec3\022&\n\014Diffu"
-  "seColor\030\004 \002(\0132\020.KuplungApp.Vec3\022\'\n\rSpecu"
-  "larColor\030\005 \002(\0132\020.KuplungApp.Vec3\022\'\n\rEmis"
-  "sionColor\030\006 \002(\0132\020.KuplungApp.Vec3\022\023\n\013Spe"
-  "cularExp\030\007 \002(\002\022\024\n\014Transparency\030\010 \002(\002\022\030\n\020"
-  "IlluminationMode\030\t \002(\007\022\026\n\016OpticalDensity"
-  "\030\n \002(\002\022<\n\016TextureAmbient\030\013 \002(\0132$.Kuplung"
-  "App.MeshMaterialTextureImage\022<\n\016TextureD"
-  "iffuse\030\014 \002(\0132$.KuplungApp.MeshMaterialTe"
-  "xtureImage\022=\n\017TextureSpecular\030\r \002(\0132$.Ku"
-  "plungApp.MeshMaterialTextureImage\022@\n\022Tex"
-  "tureSpecularExp\030\016 \002(\0132$.KuplungApp.MeshM"
-  "aterialTextureImage\022=\n\017TextureDissolve\030\017"
-  " \002(\0132$.KuplungApp.MeshMaterialTextureIma"
-  "ge\0229\n\013TextureBump\030\020 \002(\0132$.KuplungApp.Mes"
-  "hMaterialTextureImage\022A\n\023TextureDisplace"
-  "ment\030\021 \002(\0132$.KuplungApp.MeshMaterialText"
-  "ureImage\"\202\003\n\004Mesh\022\n\n\002ID\030\001 \002(\005\022\"\n\004File\030\002 "
-  "\002(\0132\024.KuplungApp.FBEntity\022\022\n\nModelTitle\030"
-  "\003 \002(\t\022\025\n\rMaterialTitle\030\004 \002(\t\022\025\n\rcountVer"
-  "tices\030\005 \002(\005\022\037\n\027countTextureCoordinates\030\006"
-  " \002(\005\022\024\n\014countNormals\030\007 \002(\005\022\024\n\014countIndic"
-  "es\030\010 \002(\005\0224\n\rModelMaterial\030\t \002(\0132\035.Kuplun"
-  "gApp.MeshModelMaterial\022\"\n\010vertices\030\n \003(\013"
-  "2\020.KuplungApp.Vec3\022-\n\023texture_coordinate"
-  "s\030\013 \003(\0132\020.KuplungApp.Vec2\022!\n\007normals\030\014 \003"
-  "(\0132\020.KuplungApp.Vec3\022\017\n\007indices\030\r \003(\007"
-  ;
-static const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable*const descriptor_table_KuplungDefinitions_2eproto_deps[1] = {
+static const ::_pb::Message* const file_default_instances[] = {
+    &::KuplungApp::_Vec2_default_instance_._instance,
+    &::KuplungApp::_Vec3_default_instance_._instance,
+    &::KuplungApp::_Vec4_default_instance_._instance,
+    &::KuplungApp::_ObjectCoordinate_default_instance_._instance,
+    &::KuplungApp::_FBEntity_default_instance_._instance,
+    &::KuplungApp::_MaterialColor_default_instance_._instance,
+    &::KuplungApp::_MeshMaterialTextureImage_default_instance_._instance,
+    &::KuplungApp::_MeshModelMaterial_default_instance_._instance,
+    &::KuplungApp::_Mesh_default_instance_._instance,
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::SCCInfoBase*const descriptor_table_KuplungDefinitions_2eproto_sccs[9] = {
-  &scc_info_FBEntity_KuplungDefinitions_2eproto.base,
-  &scc_info_MaterialColor_KuplungDefinitions_2eproto.base,
-  &scc_info_Mesh_KuplungDefinitions_2eproto.base,
-  &scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base,
-  &scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base,
-  &scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base,
-  &scc_info_Vec2_KuplungDefinitions_2eproto.base,
-  &scc_info_Vec3_KuplungDefinitions_2eproto.base,
-  &scc_info_Vec4_KuplungDefinitions_2eproto.base,
+const char descriptor_table_protodef_KuplungDefinitions_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+    "\n\030KuplungDefinitions.proto\022\nKuplungApp\"\034"
+    "\n\004Vec2\022\t\n\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\"\'\n\004Vec3\022\t\n\001"
+    "x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\"2\n\004Vec4\022\t\n"
+    "\001x\030\001 \002(\002\022\t\n\001y\030\002 \002(\002\022\t\n\001z\030\003 \002(\002\022\t\n\001w\030\004 \002("
+    "\002\"2\n\020ObjectCoordinate\022\017\n\007animate\030\001 \002(\010\022\r"
+    "\n\005point\030\002 \002(\002\"n\n\010FBEntity\022\016\n\006isFile\030\001 \002("
+    "\010\022\014\n\004path\030\002 \002(\t\022\r\n\005title\030\003 \002(\t\022\021\n\textens"
+    "ion\030\004 \002(\t\022\024\n\014modifiedDate\030\005 \002(\t\022\014\n\004size\030"
+    "\006 \002(\t\"l\n\rMaterialColor\022\027\n\017colorPickerOpe"
+    "n\030\001 \002(\010\022\017\n\007animate\030\002 \002(\010\022\020\n\010strength\030\003 \002"
+    "(\002\022\037\n\005color\030\004 \002(\0132\020.KuplungApp.Vec3\"\200\001\n\030"
+    "MeshMaterialTextureImage\022\020\n\010Filename\030\001 \002"
+    "(\t\022\r\n\005Image\030\002 \002(\t\022\r\n\005Width\030\003 \002(\005\022\016\n\006Heig"
+    "ht\030\004 \002(\005\022\022\n\nUseTexture\030\005 \002(\010\022\020\n\010Commands"
+    "\030\006 \003(\t\"\367\005\n\021MeshModelMaterial\022\022\n\nMaterial"
+    "ID\030\001 \002(\005\022\025\n\rMaterialTitle\030\002 \002(\t\022&\n\014Ambie"
+    "ntColor\030\003 \002(\0132\020.KuplungApp.Vec3\022&\n\014Diffu"
+    "seColor\030\004 \002(\0132\020.KuplungApp.Vec3\022\'\n\rSpecu"
+    "larColor\030\005 \002(\0132\020.KuplungApp.Vec3\022\'\n\rEmis"
+    "sionColor\030\006 \002(\0132\020.KuplungApp.Vec3\022\023\n\013Spe"
+    "cularExp\030\007 \002(\002\022\024\n\014Transparency\030\010 \002(\002\022\030\n\020"
+    "IlluminationMode\030\t \002(\007\022\026\n\016OpticalDensity"
+    "\030\n \002(\002\022<\n\016TextureAmbient\030\013 \002(\0132$.Kuplung"
+    "App.MeshMaterialTextureImage\022<\n\016TextureD"
+    "iffuse\030\014 \002(\0132$.KuplungApp.MeshMaterialTe"
+    "xtureImage\022=\n\017TextureSpecular\030\r \002(\0132$.Ku"
+    "plungApp.MeshMaterialTextureImage\022@\n\022Tex"
+    "tureSpecularExp\030\016 \002(\0132$.KuplungApp.MeshM"
+    "aterialTextureImage\022=\n\017TextureDissolve\030\017"
+    " \002(\0132$.KuplungApp.MeshMaterialTextureIma"
+    "ge\0229\n\013TextureBump\030\020 \002(\0132$.KuplungApp.Mes"
+    "hMaterialTextureImage\022A\n\023TextureDisplace"
+    "ment\030\021 \002(\0132$.KuplungApp.MeshMaterialText"
+    "ureImage\"\202\003\n\004Mesh\022\n\n\002ID\030\001 \002(\005\022\"\n\004File\030\002 "
+    "\002(\0132\024.KuplungApp.FBEntity\022\022\n\nModelTitle\030"
+    "\003 \002(\t\022\025\n\rMaterialTitle\030\004 \002(\t\022\025\n\rcountVer"
+    "tices\030\005 \002(\005\022\037\n\027countTextureCoordinates\030\006"
+    " \002(\005\022\024\n\014countNormals\030\007 \002(\005\022\024\n\014countIndic"
+    "es\030\010 \002(\005\0224\n\rModelMaterial\030\t \002(\0132\035.Kuplun"
+    "gApp.MeshModelMaterial\022\"\n\010vertices\030\n \003(\013"
+    "2\020.KuplungApp.Vec3\022-\n\023texture_coordinate"
+    "s\030\013 \003(\0132\020.KuplungApp.Vec2\022!\n\007normals\030\014 \003"
+    "(\0132\020.KuplungApp.Vec3\022\017\n\007indices\030\r \003(\007"
 };
-static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_KuplungDefinitions_2eproto_once;
-static bool descriptor_table_KuplungDefinitions_2eproto_initialized = false;
-const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_KuplungDefinitions_2eproto = {
-  &descriptor_table_KuplungDefinitions_2eproto_initialized, descriptor_table_protodef_KuplungDefinitions_2eproto, "KuplungDefinitions.proto", 1717,
-  &descriptor_table_KuplungDefinitions_2eproto_once, descriptor_table_KuplungDefinitions_2eproto_sccs, descriptor_table_KuplungDefinitions_2eproto_deps, 9, 0,
-  schemas, file_default_instances, TableStruct_KuplungDefinitions_2eproto::offsets,
-  file_level_metadata_KuplungDefinitions_2eproto, 9, file_level_enum_descriptors_KuplungDefinitions_2eproto, file_level_service_descriptors_KuplungDefinitions_2eproto,
+static ::absl::once_flag descriptor_table_KuplungDefinitions_2eproto_once;
+const ::_pbi::DescriptorTable descriptor_table_KuplungDefinitions_2eproto = {
+    false,
+    false,
+    1717,
+    descriptor_table_protodef_KuplungDefinitions_2eproto,
+    "KuplungDefinitions.proto",
+    &descriptor_table_KuplungDefinitions_2eproto_once,
+    nullptr,
+    0,
+    9,
+    schemas,
+    file_default_instances,
+    TableStruct_KuplungDefinitions_2eproto::offsets,
+    file_level_metadata_KuplungDefinitions_2eproto,
+    file_level_enum_descriptors_KuplungDefinitions_2eproto,
+    file_level_service_descriptors_KuplungDefinitions_2eproto,
 };
 
+// This function exists to be marked as weak.
+// It can significantly speed up compilation by breaking up LLVM's SCC
+// in the .pb.cc translation units. Large translation units see a
+// reduction of more than 35% of walltime for optimized builds. Without
+// the weak attribute all the messages in the file, including all the
+// vtables and everything they use become part of the same SCC through
+// a cycle like:
+// GetMetadata -> descriptor table -> default instances ->
+//   vtables -> GetMetadata
+// By adding a weak function here we break the connection from the
+// individual vtables back into the descriptor table.
+PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_KuplungDefinitions_2eproto_getter() {
+  return &descriptor_table_KuplungDefinitions_2eproto;
+}
 // Force running AddDescriptors() at dynamic initialization time.
-static bool dynamic_init_dummy_KuplungDefinitions_2eproto = (  ::PROTOBUF_NAMESPACE_ID::internal::AddDescriptors(&descriptor_table_KuplungDefinitions_2eproto), true);
+PROTOBUF_ATTRIBUTE_INIT_PRIORITY2
+static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_KuplungDefinitions_2eproto(&descriptor_table_KuplungDefinitions_2eproto);
 namespace KuplungApp {
-
 // ===================================================================
 
-void Vec2::InitAsDefaultInstance() {
-}
 class Vec2::_Internal {
  public:
-  using HasBits = decltype(std::declval<Vec2>()._has_bits_);
+  using HasBits = decltype(std::declval<Vec2>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(Vec2, _impl_._has_bits_);
   static void set_has_x(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
   static void set_has_y(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000003) ^ 0x00000003) != 0;
+  }
 };
 
-Vec2::Vec2()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.Vec2)
+Vec2::Vec2(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.Vec2)
 }
-Vec2::Vec2(const Vec2& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&y_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(y_));
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec2)
+Vec2::Vec2(
+    ::google::protobuf::Arena* arena, const Vec2& from)
+    : Vec2(arena) {
+  MergeFrom(from);
 }
+inline PROTOBUF_NDEBUG_INLINE Vec2::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-void Vec2::SharedCtor() {
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&y_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(y_));
+inline void Vec2::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, x_),
+           0,
+           offsetof(Impl_, y_) -
+               offsetof(Impl_, x_) +
+               sizeof(Impl_::y_));
 }
-
 Vec2::~Vec2() {
   // @@protoc_insertion_point(destructor:KuplungApp.Vec2)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Vec2::SharedDtor() {
+inline void Vec2::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
 }
 
-void Vec2::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const Vec2& Vec2::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec2_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void Vec2::Clear() {
+PROTOBUF_NOINLINE void Vec2::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec2)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
-    ::memset(&x_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&y_) -
-        reinterpret_cast<char*>(&x_)) + sizeof(y_));
+    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.y_) -
+        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.y_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* Vec2::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required float x = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
-          _Internal::set_has_x(&has_bits);
-          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float y = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_y(&has_bits);
-          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* Vec2::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* Vec2::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec2)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> Vec2::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Vec2, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Vec2_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // required float y = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 1, 0, PROTOBUF_FIELD_OFFSET(Vec2, _impl_.y_)}},
+    // required float x = 1;
+    {::_pbi::TcParser::FastF32S1,
+     {13, 0, 0, PROTOBUF_FIELD_OFFSET(Vec2, _impl_.x_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required float x = 1;
+    {PROTOBUF_FIELD_OFFSET(Vec2, _impl_.x_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float y = 2;
+    {PROTOBUF_FIELD_OFFSET(Vec2, _impl_.y_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+::uint8_t* Vec2::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec2)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_x(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        1, this->_internal_x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_y(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        2, this->_internal_y(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec2)
   return target;
 }
 
-size_t Vec2::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.Vec2)
-  size_t total_size = 0;
-
-  if (_internal_has_x()) {
-    // required float x = 1;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_y()) {
-    // required float y = 2;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t Vec2::ByteSizeLong() const {
+::size_t Vec2::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Vec2)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required float x = 1;
-    total_size += 1 + 4;
-
-    // required float y = 2;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // required float x = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 5;
+    }
+
+    // required float y = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 5;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Vec2::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec2)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Vec2* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec2>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec2)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec2)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData Vec2::_class_data_ = {
+    Vec2::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* Vec2::GetClassData() const {
+  return &_class_data_;
 }
 
-void Vec2::MergeFrom(const Vec2& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec2)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void Vec2::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Vec2*>(&to_msg);
+  auto& from = static_cast<const Vec2&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec2)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      x_ = from.x_;
+      _this->_impl_.x_ = from._impl_.x_;
     }
     if (cached_has_bits & 0x00000002u) {
-      y_ = from.y_;
+      _this->_impl_.y_ = from._impl_.y_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void Vec2::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec2)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Vec2::CopyFrom(const Vec2& from) {
@@ -683,31 +765,40 @@ void Vec2::CopyFrom(const Vec2& from) {
   MergeFrom(from);
 }
 
-bool Vec2::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+PROTOBUF_NOINLINE bool Vec2::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void Vec2::InternalSwap(Vec2* other) {
+::_pbi::CachedSize* Vec2::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void Vec2::InternalSwap(Vec2* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(x_, other->x_);
-  swap(y_, other->y_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Vec2, _impl_.y_)
+      + sizeof(Vec2::_impl_.y_)
+      - PROTOBUF_FIELD_OFFSET(Vec2, _impl_.x_)>(
+          reinterpret_cast<char*>(&_impl_.x_),
+          reinterpret_cast<char*>(&other->_impl_.x_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Vec2::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata Vec2::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[0]);
 }
-
-
 // ===================================================================
 
-void Vec3::InitAsDefaultInstance() {
-}
 class Vec3::_Internal {
  public:
-  using HasBits = decltype(std::declval<Vec3>()._has_bits_);
+  using HasBits = decltype(std::declval<Vec3>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(Vec3, _impl_._has_bits_);
   static void set_has_x(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -717,242 +808,209 @@ class Vec3::_Internal {
   static void set_has_z(HasBits* has_bits) {
     (*has_bits)[0] |= 4u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000007) ^ 0x00000007) != 0;
+  }
 };
 
-Vec3::Vec3()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.Vec3)
+Vec3::Vec3(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.Vec3)
 }
-Vec3::Vec3(const Vec3& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&z_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(z_));
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec3)
+Vec3::Vec3(
+    ::google::protobuf::Arena* arena, const Vec3& from)
+    : Vec3(arena) {
+  MergeFrom(from);
 }
+inline PROTOBUF_NDEBUG_INLINE Vec3::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-void Vec3::SharedCtor() {
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&z_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(z_));
+inline void Vec3::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, x_),
+           0,
+           offsetof(Impl_, z_) -
+               offsetof(Impl_, x_) +
+               sizeof(Impl_::z_));
 }
-
 Vec3::~Vec3() {
   // @@protoc_insertion_point(destructor:KuplungApp.Vec3)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Vec3::SharedDtor() {
+inline void Vec3::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
 }
 
-void Vec3::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const Vec3& Vec3::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec3_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void Vec3::Clear() {
+PROTOBUF_NOINLINE void Vec3::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec3)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
-    ::memset(&x_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&z_) -
-        reinterpret_cast<char*>(&x_)) + sizeof(z_));
+    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.z_) -
+        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.z_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* Vec3::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required float x = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
-          _Internal::set_has_x(&has_bits);
-          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float y = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_y(&has_bits);
-          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float z = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
-          _Internal::set_has_z(&has_bits);
-          z_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* Vec3::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* Vec3::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec3)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 3, 0, 0, 2> Vec3::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Vec3, _impl_._has_bits_),
+    0, // no _extensions_
+    3, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967288,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    3,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Vec3_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // required float x = 1;
+    {::_pbi::TcParser::FastF32S1,
+     {13, 0, 0, PROTOBUF_FIELD_OFFSET(Vec3, _impl_.x_)}},
+    // required float y = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 1, 0, PROTOBUF_FIELD_OFFSET(Vec3, _impl_.y_)}},
+    // required float z = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 2, 0, PROTOBUF_FIELD_OFFSET(Vec3, _impl_.z_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required float x = 1;
+    {PROTOBUF_FIELD_OFFSET(Vec3, _impl_.x_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float y = 2;
+    {PROTOBUF_FIELD_OFFSET(Vec3, _impl_.y_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float z = 3;
+    {PROTOBUF_FIELD_OFFSET(Vec3, _impl_.z_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+::uint8_t* Vec3::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec3)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_x(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        1, this->_internal_x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_y(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        2, this->_internal_y(), target);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_z(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        3, this->_internal_z(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec3)
   return target;
 }
 
-size_t Vec3::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.Vec3)
-  size_t total_size = 0;
-
-  if (_internal_has_x()) {
-    // required float x = 1;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_y()) {
-    // required float y = 2;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_z()) {
-    // required float z = 3;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t Vec3::ByteSizeLong() const {
+::size_t Vec3::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Vec3)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000007) ^ 0x00000007) == 0) {  // All required fields are present.
-    // required float x = 1;
-    total_size += 1 + 4;
-
-    // required float y = 2;
-    total_size += 1 + 4;
-
-    // required float z = 3;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000007u) {
+    // required float x = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 5;
+    }
+
+    // required float y = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 5;
+    }
+
+    // required float z = 3;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 5;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Vec3::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec3)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Vec3* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec3>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec3)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec3)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData Vec3::_class_data_ = {
+    Vec3::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* Vec3::GetClassData() const {
+  return &_class_data_;
 }
 
-void Vec3::MergeFrom(const Vec3& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec3)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void Vec3::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Vec3*>(&to_msg);
+  auto& from = static_cast<const Vec3&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec3)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000007u) {
     if (cached_has_bits & 0x00000001u) {
-      x_ = from.x_;
+      _this->_impl_.x_ = from._impl_.x_;
     }
     if (cached_has_bits & 0x00000002u) {
-      y_ = from.y_;
+      _this->_impl_.y_ = from._impl_.y_;
     }
     if (cached_has_bits & 0x00000004u) {
-      z_ = from.z_;
+      _this->_impl_.z_ = from._impl_.z_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void Vec3::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec3)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Vec3::CopyFrom(const Vec3& from) {
@@ -962,32 +1020,40 @@ void Vec3::CopyFrom(const Vec3& from) {
   MergeFrom(from);
 }
 
-bool Vec3::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+PROTOBUF_NOINLINE bool Vec3::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void Vec3::InternalSwap(Vec3* other) {
+::_pbi::CachedSize* Vec3::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void Vec3::InternalSwap(Vec3* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  swap(z_, other->z_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Vec3, _impl_.z_)
+      + sizeof(Vec3::_impl_.z_)
+      - PROTOBUF_FIELD_OFFSET(Vec3, _impl_.x_)>(
+          reinterpret_cast<char*>(&_impl_.x_),
+          reinterpret_cast<char*>(&other->_impl_.x_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Vec3::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata Vec3::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[1]);
 }
-
-
 // ===================================================================
 
-void Vec4::InitAsDefaultInstance() {
-}
 class Vec4::_Internal {
  public:
-  using HasBits = decltype(std::declval<Vec4>()._has_bits_);
+  using HasBits = decltype(std::declval<Vec4>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(Vec4, _impl_._has_bits_);
   static void set_has_x(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -1000,267 +1066,229 @@ class Vec4::_Internal {
   static void set_has_w(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0000000f) ^ 0x0000000f) != 0;
+  }
 };
 
-Vec4::Vec4()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.Vec4)
+Vec4::Vec4(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.Vec4)
 }
-Vec4::Vec4(const Vec4& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&x_, &from.x_,
-    static_cast<size_t>(reinterpret_cast<char*>(&w_) -
-    reinterpret_cast<char*>(&x_)) + sizeof(w_));
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.Vec4)
+Vec4::Vec4(
+    ::google::protobuf::Arena* arena, const Vec4& from)
+    : Vec4(arena) {
+  MergeFrom(from);
 }
+inline PROTOBUF_NDEBUG_INLINE Vec4::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-void Vec4::SharedCtor() {
-  ::memset(&x_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&w_) -
-      reinterpret_cast<char*>(&x_)) + sizeof(w_));
+inline void Vec4::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, x_),
+           0,
+           offsetof(Impl_, w_) -
+               offsetof(Impl_, x_) +
+               sizeof(Impl_::w_));
 }
-
 Vec4::~Vec4() {
   // @@protoc_insertion_point(destructor:KuplungApp.Vec4)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Vec4::SharedDtor() {
+inline void Vec4::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
 }
 
-void Vec4::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const Vec4& Vec4::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Vec4_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void Vec4::Clear() {
+PROTOBUF_NOINLINE void Vec4::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Vec4)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x0000000fu) {
-    ::memset(&x_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&w_) -
-        reinterpret_cast<char*>(&x_)) + sizeof(w_));
+    ::memset(&_impl_.x_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.w_) -
+        reinterpret_cast<char*>(&_impl_.x_)) + sizeof(_impl_.w_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* Vec4::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required float x = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 13)) {
-          _Internal::set_has_x(&has_bits);
-          x_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float y = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_y(&has_bits);
-          y_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float z = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
-          _Internal::set_has_z(&has_bits);
-          z_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float w = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 37)) {
-          _Internal::set_has_w(&has_bits);
-          w_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* Vec4::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* Vec4::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec4)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 0, 0, 2> Vec4::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Vec4, _impl_._has_bits_),
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_Vec4_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // required float w = 4;
+    {::_pbi::TcParser::FastF32S1,
+     {37, 3, 0, PROTOBUF_FIELD_OFFSET(Vec4, _impl_.w_)}},
+    // required float x = 1;
+    {::_pbi::TcParser::FastF32S1,
+     {13, 0, 0, PROTOBUF_FIELD_OFFSET(Vec4, _impl_.x_)}},
+    // required float y = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 1, 0, PROTOBUF_FIELD_OFFSET(Vec4, _impl_.y_)}},
+    // required float z = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 2, 0, PROTOBUF_FIELD_OFFSET(Vec4, _impl_.z_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required float x = 1;
+    {PROTOBUF_FIELD_OFFSET(Vec4, _impl_.x_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float y = 2;
+    {PROTOBUF_FIELD_OFFSET(Vec4, _impl_.y_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float z = 3;
+    {PROTOBUF_FIELD_OFFSET(Vec4, _impl_.z_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float w = 4;
+    {PROTOBUF_FIELD_OFFSET(Vec4, _impl_.w_), _Internal::kHasBitsOffset + 3, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+::uint8_t* Vec4::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Vec4)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required float x = 1;
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(1, this->_internal_x(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        1, this->_internal_x(), target);
   }
 
   // required float y = 2;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_y(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        2, this->_internal_y(), target);
   }
 
   // required float z = 3;
   if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_z(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        3, this->_internal_z(), target);
   }
 
   // required float w = 4;
   if (cached_has_bits & 0x00000008u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(4, this->_internal_w(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        4, this->_internal_w(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Vec4)
   return target;
 }
 
-size_t Vec4::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.Vec4)
-  size_t total_size = 0;
-
-  if (_internal_has_x()) {
-    // required float x = 1;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_y()) {
-    // required float y = 2;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_z()) {
-    // required float z = 3;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_w()) {
-    // required float w = 4;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t Vec4::ByteSizeLong() const {
+::size_t Vec4::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Vec4)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required float x = 1;
-    total_size += 1 + 4;
-
-    // required float y = 2;
-    total_size += 1 + 4;
-
-    // required float z = 3;
-    total_size += 1 + 4;
-
-    // required float w = 4;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    // required float x = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 5;
+    }
+
+    // required float y = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 5;
+    }
+
+    // required float z = 3;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 5;
+    }
+
+    // required float w = 4;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 5;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Vec4::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Vec4)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Vec4* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Vec4>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Vec4)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Vec4)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData Vec4::_class_data_ = {
+    Vec4::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* Vec4::GetClassData() const {
+  return &_class_data_;
 }
 
-void Vec4::MergeFrom(const Vec4& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec4)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void Vec4::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Vec4*>(&to_msg);
+  auto& from = static_cast<const Vec4&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Vec4)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
-      x_ = from.x_;
+      _this->_impl_.x_ = from._impl_.x_;
     }
     if (cached_has_bits & 0x00000002u) {
-      y_ = from.y_;
+      _this->_impl_.y_ = from._impl_.y_;
     }
     if (cached_has_bits & 0x00000004u) {
-      z_ = from.z_;
+      _this->_impl_.z_ = from._impl_.z_;
     }
     if (cached_has_bits & 0x00000008u) {
-      w_ = from.w_;
+      _this->_impl_.w_ = from._impl_.w_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void Vec4::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Vec4)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Vec4::CopyFrom(const Vec4& from) {
@@ -1270,250 +1298,227 @@ void Vec4::CopyFrom(const Vec4& from) {
   MergeFrom(from);
 }
 
-bool Vec4::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
+PROTOBUF_NOINLINE bool Vec4::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void Vec4::InternalSwap(Vec4* other) {
+::_pbi::CachedSize* Vec4::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void Vec4::InternalSwap(Vec4* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(x_, other->x_);
-  swap(y_, other->y_);
-  swap(z_, other->z_);
-  swap(w_, other->w_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Vec4, _impl_.w_)
+      + sizeof(Vec4::_impl_.w_)
+      - PROTOBUF_FIELD_OFFSET(Vec4, _impl_.x_)>(
+          reinterpret_cast<char*>(&_impl_.x_),
+          reinterpret_cast<char*>(&other->_impl_.x_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Vec4::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata Vec4::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[2]);
 }
-
-
 // ===================================================================
 
-void ObjectCoordinate::InitAsDefaultInstance() {
-}
 class ObjectCoordinate::_Internal {
  public:
-  using HasBits = decltype(std::declval<ObjectCoordinate>()._has_bits_);
+  using HasBits = decltype(std::declval<ObjectCoordinate>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_._has_bits_);
   static void set_has_animate(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
   static void set_has_point(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x00000003) ^ 0x00000003) != 0;
+  }
 };
 
-ObjectCoordinate::ObjectCoordinate()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.ObjectCoordinate)
+ObjectCoordinate::ObjectCoordinate(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.ObjectCoordinate)
 }
-ObjectCoordinate::ObjectCoordinate(const ObjectCoordinate& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::memcpy(&animate_, &from.animate_,
-    static_cast<size_t>(reinterpret_cast<char*>(&point_) -
-    reinterpret_cast<char*>(&animate_)) + sizeof(point_));
-  // @@protoc_insertion_point(copy_constructor:KuplungApp.ObjectCoordinate)
+ObjectCoordinate::ObjectCoordinate(
+    ::google::protobuf::Arena* arena, const ObjectCoordinate& from)
+    : ObjectCoordinate(arena) {
+  MergeFrom(from);
 }
+inline PROTOBUF_NDEBUG_INLINE ObjectCoordinate::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-void ObjectCoordinate::SharedCtor() {
-  ::memset(&animate_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&point_) -
-      reinterpret_cast<char*>(&animate_)) + sizeof(point_));
+inline void ObjectCoordinate::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, animate_),
+           0,
+           offsetof(Impl_, point_) -
+               offsetof(Impl_, animate_) +
+               sizeof(Impl_::point_));
 }
-
 ObjectCoordinate::~ObjectCoordinate() {
   // @@protoc_insertion_point(destructor:KuplungApp.ObjectCoordinate)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void ObjectCoordinate::SharedDtor() {
+inline void ObjectCoordinate::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.~Impl_();
 }
 
-void ObjectCoordinate::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const ObjectCoordinate& ObjectCoordinate::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_ObjectCoordinate_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void ObjectCoordinate::Clear() {
+PROTOBUF_NOINLINE void ObjectCoordinate::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.ObjectCoordinate)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
-    ::memset(&animate_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&point_) -
-        reinterpret_cast<char*>(&animate_)) + sizeof(point_));
+    ::memset(&_impl_.animate_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.point_) -
+        reinterpret_cast<char*>(&_impl_.animate_)) + sizeof(_impl_.point_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* ObjectCoordinate::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required bool animate = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_animate(&has_bits);
-          animate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required float point = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 21)) {
-          _Internal::set_has_point(&has_bits);
-          point_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* ObjectCoordinate::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* ObjectCoordinate::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ObjectCoordinate)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<1, 2, 0, 0, 2> ObjectCoordinate::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_._has_bits_),
+    0, // no _extensions_
+    2, 8,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967292,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    2,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_ObjectCoordinate_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // required float point = 2;
+    {::_pbi::TcParser::FastF32S1,
+     {21, 1, 0, PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.point_)}},
+    // required bool animate = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(ObjectCoordinate, _impl_.animate_), 0>(),
+     {8, 0, 0, PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.animate_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required bool animate = 1;
+    {PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.animate_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // required float point = 2;
+    {PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.point_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+  }},
+  // no aux_entries
+  {{
+  }},
+};
+
+::uint8_t* ObjectCoordinate::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.ObjectCoordinate)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required bool animate = 1;
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_animate(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        1, this->_internal_animate(), target);
   }
 
   // required float point = 2;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(2, this->_internal_point(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        2, this->_internal_point(), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.ObjectCoordinate)
   return target;
 }
 
-size_t ObjectCoordinate::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.ObjectCoordinate)
-  size_t total_size = 0;
-
-  if (_internal_has_animate()) {
-    // required bool animate = 1;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_point()) {
-    // required float point = 2;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t ObjectCoordinate::ByteSizeLong() const {
+::size_t ObjectCoordinate::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.ObjectCoordinate)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x00000003) ^ 0x00000003) == 0) {  // All required fields are present.
-    // required bool animate = 1;
-    total_size += 1 + 1;
-
-    // required float point = 2;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // required bool animate = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 2;
+    }
+
+    // required float point = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 5;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void ObjectCoordinate::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.ObjectCoordinate)
-  GOOGLE_DCHECK_NE(&from, this);
-  const ObjectCoordinate* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<ObjectCoordinate>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.ObjectCoordinate)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.ObjectCoordinate)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData ObjectCoordinate::_class_data_ = {
+    ObjectCoordinate::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* ObjectCoordinate::GetClassData() const {
+  return &_class_data_;
 }
 
-void ObjectCoordinate::MergeFrom(const ObjectCoordinate& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.ObjectCoordinate)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void ObjectCoordinate::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<ObjectCoordinate*>(&to_msg);
+  auto& from = static_cast<const ObjectCoordinate&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.ObjectCoordinate)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      animate_ = from.animate_;
+      _this->_impl_.animate_ = from._impl_.animate_;
     }
     if (cached_has_bits & 0x00000002u) {
-      point_ = from.point_;
+      _this->_impl_.point_ = from._impl_.point_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void ObjectCoordinate::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.ObjectCoordinate)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void ObjectCoordinate::CopyFrom(const ObjectCoordinate& from) {
@@ -1523,31 +1528,40 @@ void ObjectCoordinate::CopyFrom(const ObjectCoordinate& from) {
   MergeFrom(from);
 }
 
-bool ObjectCoordinate::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+PROTOBUF_NOINLINE bool ObjectCoordinate::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void ObjectCoordinate::InternalSwap(ObjectCoordinate* other) {
+::_pbi::CachedSize* ObjectCoordinate::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void ObjectCoordinate::InternalSwap(ObjectCoordinate* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(animate_, other->animate_);
-  swap(point_, other->point_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.point_)
+      + sizeof(ObjectCoordinate::_impl_.point_)
+      - PROTOBUF_FIELD_OFFSET(ObjectCoordinate, _impl_.animate_)>(
+          reinterpret_cast<char*>(&_impl_.animate_),
+          reinterpret_cast<char*>(&other->_impl_.animate_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata ObjectCoordinate::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata ObjectCoordinate::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[3]);
 }
-
-
 // ===================================================================
 
-void FBEntity::InitAsDefaultInstance() {
-}
 class FBEntity::_Internal {
  public:
-  using HasBits = decltype(std::declval<FBEntity>()._has_bits_);
+  using HasBits = decltype(std::declval<FBEntity>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(FBEntity, _impl_._has_bits_);
   static void set_has_isfile(HasBits* has_bits) {
     (*has_bits)[0] |= 32u;
   }
@@ -1566,417 +1580,327 @@ class FBEntity::_Internal {
   static void set_has_size(HasBits* has_bits) {
     (*has_bits)[0] |= 16u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0000003f) ^ 0x0000003f) != 0;
+  }
 };
 
-FBEntity::FBEntity()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.FBEntity)
+FBEntity::FBEntity(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.FBEntity)
 }
-FBEntity::FBEntity(const FBEntity& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_path()) {
-    path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.path_);
-  }
-  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_title()) {
-    title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.title_);
-  }
-  extension_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_extension()) {
-    extension_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.extension_);
-  }
-  modifieddate_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_modifieddate()) {
-    modifieddate_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
-  }
-  size_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_size()) {
-    size_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.size_);
-  }
-  isfile_ = from.isfile_;
+inline PROTOBUF_NDEBUG_INLINE FBEntity::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        path_(arena, from.path_),
+        title_(arena, from.title_),
+        extension_(arena, from.extension_),
+        modifieddate_(arena, from.modifieddate_),
+        size_(arena, from.size_) {}
+
+FBEntity::FBEntity(
+    ::google::protobuf::Arena* arena,
+    const FBEntity& from)
+    : ::google::protobuf::Message(arena) {
+  FBEntity* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  _impl_.isfile_ = from._impl_.isfile_;
+
   // @@protoc_insertion_point(copy_constructor:KuplungApp.FBEntity)
 }
+inline PROTOBUF_NDEBUG_INLINE FBEntity::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        path_(arena),
+        title_(arena),
+        extension_(arena),
+        modifieddate_(arena),
+        size_(arena) {}
 
-void FBEntity::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_FBEntity_KuplungDefinitions_2eproto.base);
-  path_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  title_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  extension_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  modifieddate_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  size_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  isfile_ = false;
+inline void FBEntity::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  _impl_.isfile_ = {};
 }
-
 FBEntity::~FBEntity() {
   // @@protoc_insertion_point(destructor:KuplungApp.FBEntity)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void FBEntity::SharedDtor() {
-  path_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  title_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  extension_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  modifieddate_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  size_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+inline void FBEntity::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.path_.Destroy();
+  _impl_.title_.Destroy();
+  _impl_.extension_.Destroy();
+  _impl_.modifieddate_.Destroy();
+  _impl_.size_.Destroy();
+  _impl_.~Impl_();
 }
 
-void FBEntity::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const FBEntity& FBEntity::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_FBEntity_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void FBEntity::Clear() {
+PROTOBUF_NOINLINE void FBEntity::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.FBEntity)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
-      path_.ClearNonDefaultToEmptyNoArena();
+      _impl_.path_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      title_.ClearNonDefaultToEmptyNoArena();
+      _impl_.title_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000004u) {
-      extension_.ClearNonDefaultToEmptyNoArena();
+      _impl_.extension_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000008u) {
-      modifieddate_.ClearNonDefaultToEmptyNoArena();
+      _impl_.modifieddate_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000010u) {
-      size_.ClearNonDefaultToEmptyNoArena();
+      _impl_.size_.ClearNonDefaultToEmpty();
     }
   }
-  isfile_ = false;
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_.isfile_ = false;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* FBEntity::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required bool isFile = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_isfile(&has_bits);
-          isfile_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string path = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_path();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.FBEntity.path");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string title = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          auto str = _internal_mutable_title();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.FBEntity.title");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string extension = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          auto str = _internal_mutable_extension();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.FBEntity.extension");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string modifiedDate = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          auto str = _internal_mutable_modifieddate();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.FBEntity.modifiedDate");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string size = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          auto str = _internal_mutable_size();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.FBEntity.size");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* FBEntity::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* FBEntity::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.FBEntity)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<3, 6, 0, 62, 2> FBEntity::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(FBEntity, _impl_._has_bits_),
+    0, // no _extensions_
+    6, 56,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967232,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    6,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_FBEntity_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // required bool isFile = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(FBEntity, _impl_.isfile_), 5>(),
+     {8, 5, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.isfile_)}},
+    // required string path = 2;
+    {::_pbi::TcParser::FastSS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.path_)}},
+    // required string title = 3;
+    {::_pbi::TcParser::FastSS1,
+     {26, 1, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.title_)}},
+    // required string extension = 4;
+    {::_pbi::TcParser::FastSS1,
+     {34, 2, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.extension_)}},
+    // required string modifiedDate = 5;
+    {::_pbi::TcParser::FastSS1,
+     {42, 3, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.modifieddate_)}},
+    // required string size = 6;
+    {::_pbi::TcParser::FastSS1,
+     {50, 4, 0, PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.size_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required bool isFile = 1;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.isfile_), _Internal::kHasBitsOffset + 5, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // required string path = 2;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.path_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string title = 3;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.title_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string extension = 4;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.extension_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string modifiedDate = 5;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.modifieddate_), _Internal::kHasBitsOffset + 3, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string size = 6;
+    {PROTOBUF_FIELD_OFFSET(FBEntity, _impl_.size_), _Internal::kHasBitsOffset + 4, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+  }},
+  // no aux_entries
+  {{
+    "\23\0\4\5\11\14\4\0"
+    "KuplungApp.FBEntity"
+    "path"
+    "title"
+    "extension"
+    "modifiedDate"
+    "size"
+  }},
+};
+
+::uint8_t* FBEntity::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.FBEntity)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required bool isFile = 1;
   if (cached_has_bits & 0x00000020u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_isfile(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        1, this->_internal_isfile(), target);
   }
 
   // required string path = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_path().data(), static_cast<int>(this->_internal_path().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.FBEntity.path");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_path(), target);
+    const std::string& _s = this->_internal_path();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.FBEntity.path");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // required string title = 3;
   if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_title().data(), static_cast<int>(this->_internal_title().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.FBEntity.title");
-    target = stream->WriteStringMaybeAliased(
-        3, this->_internal_title(), target);
+    const std::string& _s = this->_internal_title();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.FBEntity.title");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   // required string extension = 4;
   if (cached_has_bits & 0x00000004u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_extension().data(), static_cast<int>(this->_internal_extension().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.FBEntity.extension");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_extension(), target);
+    const std::string& _s = this->_internal_extension();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.FBEntity.extension");
+    target = stream->WriteStringMaybeAliased(4, _s, target);
   }
 
   // required string modifiedDate = 5;
   if (cached_has_bits & 0x00000008u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_modifieddate().data(), static_cast<int>(this->_internal_modifieddate().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.FBEntity.modifiedDate");
-    target = stream->WriteStringMaybeAliased(
-        5, this->_internal_modifieddate(), target);
+    const std::string& _s = this->_internal_modifieddate();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.FBEntity.modifiedDate");
+    target = stream->WriteStringMaybeAliased(5, _s, target);
   }
 
   // required string size = 6;
   if (cached_has_bits & 0x00000010u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_size().data(), static_cast<int>(this->_internal_size().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.FBEntity.size");
-    target = stream->WriteStringMaybeAliased(
-        6, this->_internal_size(), target);
+    const std::string& _s = this->_internal_size();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.FBEntity.size");
+    target = stream->WriteStringMaybeAliased(6, _s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.FBEntity)
   return target;
 }
 
-size_t FBEntity::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.FBEntity)
-  size_t total_size = 0;
-
-  if (_internal_has_path()) {
-    // required string path = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_path());
-  }
-
-  if (_internal_has_title()) {
-    // required string title = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_title());
-  }
-
-  if (_internal_has_extension()) {
-    // required string extension = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_extension());
-  }
-
-  if (_internal_has_modifieddate()) {
-    // required string modifiedDate = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_modifieddate());
-  }
-
-  if (_internal_has_size()) {
-    // required string size = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_size());
-  }
-
-  if (_internal_has_isfile()) {
-    // required bool isFile = 1;
-    total_size += 1 + 1;
-  }
-
-  return total_size;
-}
-size_t FBEntity::ByteSizeLong() const {
+::size_t FBEntity::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.FBEntity)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000003f) ^ 0x0000003f) == 0) {  // All required fields are present.
-    // required string path = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_path());
-
-    // required string title = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_title());
-
-    // required string extension = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_extension());
-
-    // required string modifiedDate = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_modifieddate());
-
-    // required string size = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_size());
-
-    // required bool isFile = 1;
-    total_size += 1 + 1;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000003fu) {
+    // required string path = 2;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_path());
+    }
+
+    // required string title = 3;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_title());
+    }
+
+    // required string extension = 4;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_extension());
+    }
+
+    // required string modifiedDate = 5;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_modifieddate());
+    }
+
+    // required string size = 6;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_size());
+    }
+
+    // required bool isFile = 1;
+    if (cached_has_bits & 0x00000020u) {
+      total_size += 2;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void FBEntity::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.FBEntity)
-  GOOGLE_DCHECK_NE(&from, this);
-  const FBEntity* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<FBEntity>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.FBEntity)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.FBEntity)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData FBEntity::_class_data_ = {
+    FBEntity::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* FBEntity::GetClassData() const {
+  return &_class_data_;
 }
 
-void FBEntity::MergeFrom(const FBEntity& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.FBEntity)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void FBEntity::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<FBEntity*>(&to_msg);
+  auto& from = static_cast<const FBEntity&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.FBEntity)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      path_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.path_);
+      _this->_internal_set_path(from._internal_path());
     }
     if (cached_has_bits & 0x00000002u) {
-      _has_bits_[0] |= 0x00000002u;
-      title_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.title_);
+      _this->_internal_set_title(from._internal_title());
     }
     if (cached_has_bits & 0x00000004u) {
-      _has_bits_[0] |= 0x00000004u;
-      extension_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.extension_);
+      _this->_internal_set_extension(from._internal_extension());
     }
     if (cached_has_bits & 0x00000008u) {
-      _has_bits_[0] |= 0x00000008u;
-      modifieddate_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modifieddate_);
+      _this->_internal_set_modifieddate(from._internal_modifieddate());
     }
     if (cached_has_bits & 0x00000010u) {
-      _has_bits_[0] |= 0x00000010u;
-      size_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.size_);
+      _this->_internal_set_size(from._internal_size());
     }
     if (cached_has_bits & 0x00000020u) {
-      isfile_ = from.isfile_;
+      _this->_impl_.isfile_ = from._impl_.isfile_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void FBEntity::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.FBEntity)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FBEntity::CopyFrom(const FBEntity& from) {
@@ -1986,42 +1910,42 @@ void FBEntity::CopyFrom(const FBEntity& from) {
   MergeFrom(from);
 }
 
-bool FBEntity::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000003f) != 0x0000003f) return false;
+PROTOBUF_NOINLINE bool FBEntity::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void FBEntity::InternalSwap(FBEntity* other) {
+::_pbi::CachedSize* FBEntity::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void FBEntity::InternalSwap(FBEntity* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  path_.Swap(&other->path_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  title_.Swap(&other->title_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  extension_.Swap(&other->extension_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  modifieddate_.Swap(&other->modifieddate_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  size_.Swap(&other->size_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(isfile_, other->isfile_);
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.path_, &other->_impl_.path_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.title_, &other->_impl_.title_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.extension_, &other->_impl_.extension_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.modifieddate_, &other->_impl_.modifieddate_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.size_, &other->_impl_.size_, arena);
+        swap(_impl_.isfile_, other->_impl_.isfile_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata FBEntity::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata FBEntity::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[4]);
 }
-
-
 // ===================================================================
 
-void MaterialColor::InitAsDefaultInstance() {
-  ::KuplungApp::_MaterialColor_default_instance_._instance.get_mutable()->color_ = const_cast< ::KuplungApp::Vec3*>(
-      ::KuplungApp::Vec3::internal_default_instance());
-}
 class MaterialColor::_Internal {
  public:
-  using HasBits = decltype(std::declval<MaterialColor>()._has_bits_);
+  using HasBits = decltype(std::declval<MaterialColor>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_._has_bits_);
   static void set_has_colorpickeropen(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
@@ -2035,287 +1959,263 @@ class MaterialColor::_Internal {
   static void set_has_color(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0000000f) ^ 0x0000000f) != 0;
+  }
 };
 
-const ::KuplungApp::Vec3&
-MaterialColor::_Internal::color(const MaterialColor* msg) {
-  return *msg->color_;
+const ::KuplungApp::Vec3& MaterialColor::_Internal::color(const MaterialColor* msg) {
+  return *msg->_impl_.color_;
 }
-MaterialColor::MaterialColor()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.MaterialColor)
+MaterialColor::MaterialColor(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.MaterialColor)
 }
-MaterialColor::MaterialColor(const MaterialColor& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from._internal_has_color()) {
-    color_ = new ::KuplungApp::Vec3(*from.color_);
-  } else {
-    color_ = nullptr;
-  }
-  ::memcpy(&colorpickeropen_, &from.colorpickeropen_,
-    static_cast<size_t>(reinterpret_cast<char*>(&strength_) -
-    reinterpret_cast<char*>(&colorpickeropen_)) + sizeof(strength_));
+inline PROTOBUF_NDEBUG_INLINE MaterialColor::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0} {}
+
+MaterialColor::MaterialColor(
+    ::google::protobuf::Arena* arena,
+    const MaterialColor& from)
+    : ::google::protobuf::Message(arena) {
+  MaterialColor* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.color_ = (cached_has_bits & 0x00000001u)
+                ? CreateMaybeMessage<::KuplungApp::Vec3>(arena, *from._impl_.color_)
+                : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, colorpickeropen_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, colorpickeropen_),
+           offsetof(Impl_, strength_) -
+               offsetof(Impl_, colorpickeropen_) +
+               sizeof(Impl_::strength_));
+
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MaterialColor)
 }
+inline PROTOBUF_NDEBUG_INLINE MaterialColor::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0} {}
 
-void MaterialColor::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
-  ::memset(&color_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&strength_) -
-      reinterpret_cast<char*>(&color_)) + sizeof(strength_));
+inline void MaterialColor::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, color_),
+           0,
+           offsetof(Impl_, strength_) -
+               offsetof(Impl_, color_) +
+               sizeof(Impl_::strength_));
 }
-
 MaterialColor::~MaterialColor() {
   // @@protoc_insertion_point(destructor:KuplungApp.MaterialColor)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void MaterialColor::SharedDtor() {
-  if (this != internal_default_instance()) delete color_;
+inline void MaterialColor::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  delete _impl_.color_;
+  _impl_.~Impl_();
 }
 
-void MaterialColor::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const MaterialColor& MaterialColor::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MaterialColor_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void MaterialColor::Clear() {
+PROTOBUF_NOINLINE void MaterialColor::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MaterialColor)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000001u) {
-    GOOGLE_DCHECK(color_ != nullptr);
-    color_->Clear();
+    ABSL_DCHECK(_impl_.color_ != nullptr);
+    _impl_.color_->Clear();
   }
   if (cached_has_bits & 0x0000000eu) {
-    ::memset(&colorpickeropen_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&strength_) -
-        reinterpret_cast<char*>(&colorpickeropen_)) + sizeof(strength_));
+    ::memset(&_impl_.colorpickeropen_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.strength_) -
+        reinterpret_cast<char*>(&_impl_.colorpickeropen_)) + sizeof(_impl_.strength_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* MaterialColor::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required bool colorPickerOpen = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_colorpickeropen(&has_bits);
-          colorpickeropen_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required bool animate = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 16)) {
-          _Internal::set_has_animate(&has_bits);
-          animate_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required float strength = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 29)) {
-          _Internal::set_has_strength(&has_bits);
-          strength_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 color = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_color(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* MaterialColor::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* MaterialColor::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MaterialColor)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<2, 4, 1, 0, 2> MaterialColor::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_._has_bits_),
+    0, // no _extensions_
+    4, 24,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967280,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    4,  // num_field_entries
+    1,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_MaterialColor_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    // required .KuplungApp.Vec3 color = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 0, 0, PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.color_)}},
+    // required bool colorPickerOpen = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(MaterialColor, _impl_.colorpickeropen_), 1>(),
+     {8, 1, 0, PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.colorpickeropen_)}},
+    // required bool animate = 2;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(MaterialColor, _impl_.animate_), 2>(),
+     {16, 2, 0, PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.animate_)}},
+    // required float strength = 3;
+    {::_pbi::TcParser::FastF32S1,
+     {29, 3, 0, PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.strength_)}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required bool colorPickerOpen = 1;
+    {PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.colorpickeropen_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // required bool animate = 2;
+    {PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.animate_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // required float strength = 3;
+    {PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.strength_), _Internal::kHasBitsOffset + 3, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required .KuplungApp.Vec3 color = 4;
+    {PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.color_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+  }}, {{
+  }},
+};
+
+::uint8_t* MaterialColor::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MaterialColor)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required bool colorPickerOpen = 1;
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(1, this->_internal_colorpickeropen(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        1, this->_internal_colorpickeropen(), target);
   }
 
   // required bool animate = 2;
   if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(2, this->_internal_animate(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        2, this->_internal_animate(), target);
   }
 
   // required float strength = 3;
   if (cached_has_bits & 0x00000008u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(3, this->_internal_strength(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        3, this->_internal_strength(), target);
   }
 
   // required .KuplungApp.Vec3 color = 4;
   if (cached_has_bits & 0x00000001u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        4, _Internal::color(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        4, _Internal::color(this),
+        _Internal::color(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MaterialColor)
   return target;
 }
 
-size_t MaterialColor::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.MaterialColor)
-  size_t total_size = 0;
-
-  if (_internal_has_color()) {
-    // required .KuplungApp.Vec3 color = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *color_);
-  }
-
-  if (_internal_has_colorpickeropen()) {
-    // required bool colorPickerOpen = 1;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_animate()) {
-    // required bool animate = 2;
-    total_size += 1 + 1;
-  }
-
-  if (_internal_has_strength()) {
-    // required float strength = 3;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t MaterialColor::ByteSizeLong() const {
+::size_t MaterialColor::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.MaterialColor)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000000f) ^ 0x0000000f) == 0) {  // All required fields are present.
-    // required .KuplungApp.Vec3 color = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *color_);
-
-    // required bool colorPickerOpen = 1;
-    total_size += 1 + 1;
-
-    // required bool animate = 2;
-    total_size += 1 + 1;
-
-    // required float strength = 3;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    // required .KuplungApp.Vec3 color = 4;
+    if (cached_has_bits & 0x00000001u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.color_);
+    }
+
+    // required bool colorPickerOpen = 1;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 2;
+    }
+
+    // required bool animate = 2;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 2;
+    }
+
+    // required float strength = 3;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 5;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void MaterialColor::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MaterialColor)
-  GOOGLE_DCHECK_NE(&from, this);
-  const MaterialColor* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MaterialColor>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MaterialColor)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MaterialColor)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData MaterialColor::_class_data_ = {
+    MaterialColor::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* MaterialColor::GetClassData() const {
+  return &_class_data_;
 }
 
-void MaterialColor::MergeFrom(const MaterialColor& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MaterialColor)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void MaterialColor::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<MaterialColor*>(&to_msg);
+  auto& from = static_cast<const MaterialColor&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MaterialColor)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
-      _internal_mutable_color()->::KuplungApp::Vec3::MergeFrom(from._internal_color());
+      _this->_internal_mutable_color()->::KuplungApp::Vec3::MergeFrom(
+          from._internal_color());
     }
     if (cached_has_bits & 0x00000002u) {
-      colorpickeropen_ = from.colorpickeropen_;
+      _this->_impl_.colorpickeropen_ = from._impl_.colorpickeropen_;
     }
     if (cached_has_bits & 0x00000004u) {
-      animate_ = from.animate_;
+      _this->_impl_.animate_ = from._impl_.animate_;
     }
     if (cached_has_bits & 0x00000008u) {
-      strength_ = from.strength_;
+      _this->_impl_.strength_ = from._impl_.strength_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void MaterialColor::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MaterialColor)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void MaterialColor::CopyFrom(const MaterialColor& from) {
@@ -2325,36 +2225,43 @@ void MaterialColor::CopyFrom(const MaterialColor& from) {
   MergeFrom(from);
 }
 
-bool MaterialColor::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000000f) != 0x0000000f) return false;
-  if (_internal_has_color()) {
-    if (!color_->IsInitialized()) return false;
+PROTOBUF_NOINLINE bool MaterialColor::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
+  if ((_impl_._has_bits_[0] & 0x00000001u) != 0) {
+    if (!_impl_.color_->IsInitialized()) return false;
   }
   return true;
 }
 
-void MaterialColor::InternalSwap(MaterialColor* other) {
+::_pbi::CachedSize* MaterialColor::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void MaterialColor::InternalSwap(MaterialColor* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  swap(color_, other->color_);
-  swap(colorpickeropen_, other->colorpickeropen_);
-  swap(animate_, other->animate_);
-  swap(strength_, other->strength_);
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.strength_)
+      + sizeof(MaterialColor::_impl_.strength_)
+      - PROTOBUF_FIELD_OFFSET(MaterialColor, _impl_.color_)>(
+          reinterpret_cast<char*>(&_impl_.color_),
+          reinterpret_cast<char*>(&other->_impl_.color_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata MaterialColor::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata MaterialColor::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[5]);
 }
-
-
 // ===================================================================
 
-void MeshMaterialTextureImage::InitAsDefaultInstance() {
-}
 class MeshMaterialTextureImage::_Internal {
  public:
-  using HasBits = decltype(std::declval<MeshMaterialTextureImage>()._has_bits_);
+  using HasBits = decltype(std::declval<MeshMaterialTextureImage>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_._has_bits_);
   static void set_has_filename(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
@@ -2370,382 +2277,321 @@ class MeshMaterialTextureImage::_Internal {
   static void set_has_usetexture(HasBits* has_bits) {
     (*has_bits)[0] |= 16u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0000001f) ^ 0x0000001f) != 0;
+  }
 };
 
-MeshMaterialTextureImage::MeshMaterialTextureImage()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.MeshMaterialTextureImage)
+MeshMaterialTextureImage::MeshMaterialTextureImage(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.MeshMaterialTextureImage)
 }
-MeshMaterialTextureImage::MeshMaterialTextureImage(const MeshMaterialTextureImage& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_),
-      commands_(from.commands_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  filename_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_filename()) {
-    filename_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.filename_);
-  }
-  image_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_image()) {
-    image_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.image_);
-  }
-  ::memcpy(&width_, &from.width_,
-    static_cast<size_t>(reinterpret_cast<char*>(&usetexture_) -
-    reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
+inline PROTOBUF_NDEBUG_INLINE MeshMaterialTextureImage::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        commands_{visibility, arena, from.commands_},
+        filename_(arena, from.filename_),
+        image_(arena, from.image_) {}
+
+MeshMaterialTextureImage::MeshMaterialTextureImage(
+    ::google::protobuf::Arena* arena,
+    const MeshMaterialTextureImage& from)
+    : ::google::protobuf::Message(arena) {
+  MeshMaterialTextureImage* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, width_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, width_),
+           offsetof(Impl_, usetexture_) -
+               offsetof(Impl_, width_) +
+               sizeof(Impl_::usetexture_));
+
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshMaterialTextureImage)
 }
+inline PROTOBUF_NDEBUG_INLINE MeshMaterialTextureImage::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        commands_{visibility, arena},
+        filename_(arena),
+        image_(arena) {}
 
-void MeshMaterialTextureImage::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
-  filename_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  image_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&width_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&usetexture_) -
-      reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
+inline void MeshMaterialTextureImage::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, width_),
+           0,
+           offsetof(Impl_, usetexture_) -
+               offsetof(Impl_, width_) +
+               sizeof(Impl_::usetexture_));
 }
-
 MeshMaterialTextureImage::~MeshMaterialTextureImage() {
   // @@protoc_insertion_point(destructor:KuplungApp.MeshMaterialTextureImage)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void MeshMaterialTextureImage::SharedDtor() {
-  filename_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  image_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
+inline void MeshMaterialTextureImage::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.filename_.Destroy();
+  _impl_.image_.Destroy();
+  _impl_.~Impl_();
 }
 
-void MeshMaterialTextureImage::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const MeshMaterialTextureImage& MeshMaterialTextureImage::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MeshMaterialTextureImage_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void MeshMaterialTextureImage::Clear() {
+PROTOBUF_NOINLINE void MeshMaterialTextureImage::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshMaterialTextureImage)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  commands_.Clear();
-  cached_has_bits = _has_bits_[0];
+  _impl_.commands_.Clear();
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x00000003u) {
     if (cached_has_bits & 0x00000001u) {
-      filename_.ClearNonDefaultToEmptyNoArena();
+      _impl_.filename_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      image_.ClearNonDefaultToEmptyNoArena();
+      _impl_.image_.ClearNonDefaultToEmpty();
     }
   }
   if (cached_has_bits & 0x0000001cu) {
-    ::memset(&width_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&usetexture_) -
-        reinterpret_cast<char*>(&width_)) + sizeof(usetexture_));
+    ::memset(&_impl_.width_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.usetexture_) -
+        reinterpret_cast<char*>(&_impl_.width_)) + sizeof(_impl_.usetexture_));
   }
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* MeshMaterialTextureImage::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required string Filename = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 10)) {
-          auto str = _internal_mutable_filename();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.MeshMaterialTextureImage.Filename");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string Image = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_image();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.MeshMaterialTextureImage.Image");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 Width = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 24)) {
-          _Internal::set_has_width(&has_bits);
-          width_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 Height = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 32)) {
-          _Internal::set_has_height(&has_bits);
-          height_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required bool UseTexture = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          _Internal::set_has_usetexture(&has_bits);
-          usetexture_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated string Commands = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_commands();
-            ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-            #ifndef NDEBUG
-            ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.MeshMaterialTextureImage.Commands");
-            #endif  // !NDEBUG
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<50>(ptr));
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* MeshMaterialTextureImage::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* MeshMaterialTextureImage::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshMaterialTextureImage)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<3, 6, 0, 65, 2> MeshMaterialTextureImage::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_._has_bits_),
+    0, // no _extensions_
+    6, 56,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294967232,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    6,  // num_field_entries
+    0,  // num_aux_entries
+    offsetof(decltype(_table_), field_names),  // no aux_entries
+    &_MeshMaterialTextureImage_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // required string Filename = 1;
+    {::_pbi::TcParser::FastSS1,
+     {10, 0, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.filename_)}},
+    // required string Image = 2;
+    {::_pbi::TcParser::FastSS1,
+     {18, 1, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.image_)}},
+    // required int32 Width = 3;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MeshMaterialTextureImage, _impl_.width_), 2>(),
+     {24, 2, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.width_)}},
+    // required int32 Height = 4;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MeshMaterialTextureImage, _impl_.height_), 3>(),
+     {32, 3, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.height_)}},
+    // required bool UseTexture = 5;
+    {::_pbi::TcParser::SingularVarintNoZag1<bool, offsetof(MeshMaterialTextureImage, _impl_.usetexture_), 4>(),
+     {40, 4, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.usetexture_)}},
+    // repeated string Commands = 6;
+    {::_pbi::TcParser::FastSR1,
+     {50, 63, 0, PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.commands_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required string Filename = 1;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.filename_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string Image = 2;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.image_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required int32 Width = 3;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.width_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required int32 Height = 4;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.height_), _Internal::kHasBitsOffset + 3, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required bool UseTexture = 5;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.usetexture_), _Internal::kHasBitsOffset + 4, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kBool)},
+    // repeated string Commands = 6;
+    {PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.commands_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kRawString | ::_fl::kRepSString)},
+  }},
+  // no aux_entries
+  {{
+    "\43\10\5\0\0\0\10\0"
+    "KuplungApp.MeshMaterialTextureImage"
+    "Filename"
+    "Image"
+    "Commands"
+  }},
+};
+
+::uint8_t* MeshMaterialTextureImage::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshMaterialTextureImage)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required string Filename = 1;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_filename().data(), static_cast<int>(this->_internal_filename().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.MeshMaterialTextureImage.Filename");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_filename(), target);
+    const std::string& _s = this->_internal_filename();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.MeshMaterialTextureImage.Filename");
+    target = stream->WriteStringMaybeAliased(1, _s, target);
   }
 
   // required string Image = 2;
   if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_image().data(), static_cast<int>(this->_internal_image().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.MeshMaterialTextureImage.Image");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_image(), target);
+    const std::string& _s = this->_internal_image();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.MeshMaterialTextureImage.Image");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // required int32 Width = 3;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(3, this->_internal_width(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<3>(
+            stream, this->_internal_width(), target);
   }
 
   // required int32 Height = 4;
   if (cached_has_bits & 0x00000008u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(4, this->_internal_height(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<4>(
+            stream, this->_internal_height(), target);
   }
 
   // required bool UseTexture = 5;
   if (cached_has_bits & 0x00000010u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteBoolToArray(5, this->_internal_usetexture(), target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(
+        5, this->_internal_usetexture(), target);
   }
 
   // repeated string Commands = 6;
-  for (int i = 0, n = this->_internal_commands_size(); i < n; i++) {
-    const auto& s = this->_internal_commands(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.MeshMaterialTextureImage.Commands");
+  for (int i = 0, n = this->_internal_commands_size(); i < n; ++i) {
+    const auto& s = this->_internal_commands().Get(i);
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(s.data(), static_cast<int>(s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.MeshMaterialTextureImage.Commands");
     target = stream->WriteString(6, s, target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshMaterialTextureImage)
   return target;
 }
 
-size_t MeshMaterialTextureImage::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.MeshMaterialTextureImage)
-  size_t total_size = 0;
-
-  if (_internal_has_filename()) {
-    // required string Filename = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_filename());
-  }
-
-  if (_internal_has_image()) {
-    // required string Image = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_image());
-  }
-
-  if (_internal_has_width()) {
-    // required int32 Width = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_width());
-  }
-
-  if (_internal_has_height()) {
-    // required int32 Height = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_height());
-  }
-
-  if (_internal_has_usetexture()) {
-    // required bool UseTexture = 5;
-    total_size += 1 + 1;
-  }
-
-  return total_size;
-}
-size_t MeshMaterialTextureImage::ByteSizeLong() const {
+::size_t MeshMaterialTextureImage::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.MeshMaterialTextureImage)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0000001f) ^ 0x0000001f) == 0) {  // All required fields are present.
-    // required string Filename = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_filename());
-
-    // required string Image = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_image());
-
-    // required int32 Width = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_width());
-
-    // required int32 Height = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_height());
-
-    // required bool UseTexture = 5;
-    total_size += 1 + 1;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated string Commands = 6;
-  total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(commands_.size());
-  for (int i = 0, n = commands_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      commands_.Get(i));
+  total_size += 1 * ::google::protobuf::internal::FromIntSize(_internal_commands().size());
+  for (int i = 0, n = _internal_commands().size(); i < n; ++i) {
+    total_size += ::google::protobuf::internal::WireFormatLite::StringSize(
+        _internal_commands().Get(i));
   }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000001fu) {
+    // required string Filename = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_filename());
+    }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+    // required string Image = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_image());
+    }
+
+    // required int32 Width = 3;
+    if (cached_has_bits & 0x00000004u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_width());
+    }
+
+    // required int32 Height = 4;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_height());
+    }
+
+    // required bool UseTexture = 5;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += 2;
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void MeshMaterialTextureImage::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshMaterialTextureImage)
-  GOOGLE_DCHECK_NE(&from, this);
-  const MeshMaterialTextureImage* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MeshMaterialTextureImage>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MeshMaterialTextureImage)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshMaterialTextureImage)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData MeshMaterialTextureImage::_class_data_ = {
+    MeshMaterialTextureImage::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* MeshMaterialTextureImage::GetClassData() const {
+  return &_class_data_;
 }
 
-void MeshMaterialTextureImage::MergeFrom(const MeshMaterialTextureImage& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshMaterialTextureImage)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void MeshMaterialTextureImage::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<MeshMaterialTextureImage*>(&to_msg);
+  auto& from = static_cast<const MeshMaterialTextureImage&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshMaterialTextureImage)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  commands_.MergeFrom(from.commands_);
-  cached_has_bits = from._has_bits_[0];
+  _this->_internal_mutable_commands()->MergeFrom(from._internal_commands());
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x0000001fu) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      filename_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.filename_);
+      _this->_internal_set_filename(from._internal_filename());
     }
     if (cached_has_bits & 0x00000002u) {
-      _has_bits_[0] |= 0x00000002u;
-      image_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.image_);
+      _this->_internal_set_image(from._internal_image());
     }
     if (cached_has_bits & 0x00000004u) {
-      width_ = from.width_;
+      _this->_impl_.width_ = from._impl_.width_;
     }
     if (cached_has_bits & 0x00000008u) {
-      height_ = from.height_;
+      _this->_impl_.height_ = from._impl_.height_;
     }
     if (cached_has_bits & 0x00000010u) {
-      usetexture_ = from.usetexture_;
+      _this->_impl_.usetexture_ = from._impl_.usetexture_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
-}
-
-void MeshMaterialTextureImage::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MeshMaterialTextureImage)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void MeshMaterialTextureImage::CopyFrom(const MeshMaterialTextureImage& from) {
@@ -2755,59 +2601,45 @@ void MeshMaterialTextureImage::CopyFrom(const MeshMaterialTextureImage& from) {
   MergeFrom(from);
 }
 
-bool MeshMaterialTextureImage::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0000001f) != 0x0000001f) return false;
+PROTOBUF_NOINLINE bool MeshMaterialTextureImage::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
+  }
   return true;
 }
 
-void MeshMaterialTextureImage::InternalSwap(MeshMaterialTextureImage* other) {
+::_pbi::CachedSize* MeshMaterialTextureImage::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void MeshMaterialTextureImage::InternalSwap(MeshMaterialTextureImage* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  commands_.InternalSwap(&other->commands_);
-  filename_.Swap(&other->filename_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  image_.Swap(&other->image_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(width_, other->width_);
-  swap(height_, other->height_);
-  swap(usetexture_, other->usetexture_);
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.commands_.InternalSwap(&other->_impl_.commands_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.filename_, &other->_impl_.filename_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.image_, &other->_impl_.image_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.usetexture_)
+      + sizeof(MeshMaterialTextureImage::_impl_.usetexture_)
+      - PROTOBUF_FIELD_OFFSET(MeshMaterialTextureImage, _impl_.width_)>(
+          reinterpret_cast<char*>(&_impl_.width_),
+          reinterpret_cast<char*>(&other->_impl_.width_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata MeshMaterialTextureImage::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata MeshMaterialTextureImage::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[6]);
 }
-
-
 // ===================================================================
 
-void MeshModelMaterial::InitAsDefaultInstance() {
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->ambientcolor_ = const_cast< ::KuplungApp::Vec3*>(
-      ::KuplungApp::Vec3::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->diffusecolor_ = const_cast< ::KuplungApp::Vec3*>(
-      ::KuplungApp::Vec3::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->specularcolor_ = const_cast< ::KuplungApp::Vec3*>(
-      ::KuplungApp::Vec3::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->emissioncolor_ = const_cast< ::KuplungApp::Vec3*>(
-      ::KuplungApp::Vec3::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->textureambient_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturediffuse_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturespecular_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturespecularexp_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturedissolve_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturebump_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-  ::KuplungApp::_MeshModelMaterial_default_instance_._instance.get_mutable()->texturedisplacement_ = const_cast< ::KuplungApp::MeshMaterialTextureImage*>(
-      ::KuplungApp::MeshMaterialTextureImage::internal_default_instance());
-}
 class MeshModelMaterial::_Internal {
  public:
-  using HasBits = decltype(std::declval<MeshModelMaterial>()._has_bits_);
+  using HasBits = decltype(std::declval<MeshModelMaterial>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_._has_bits_);
   static void set_has_materialid(HasBits* has_bits) {
     (*has_bits)[0] |= 4096u;
   }
@@ -2870,834 +2702,712 @@ class MeshModelMaterial::_Internal {
   static void set_has_texturedisplacement(HasBits* has_bits) {
     (*has_bits)[0] |= 2048u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x0001ffff) ^ 0x0001ffff) != 0;
+  }
 };
 
-const ::KuplungApp::Vec3&
-MeshModelMaterial::_Internal::ambientcolor(const MeshModelMaterial* msg) {
-  return *msg->ambientcolor_;
+const ::KuplungApp::Vec3& MeshModelMaterial::_Internal::ambientcolor(const MeshModelMaterial* msg) {
+  return *msg->_impl_.ambientcolor_;
 }
-const ::KuplungApp::Vec3&
-MeshModelMaterial::_Internal::diffusecolor(const MeshModelMaterial* msg) {
-  return *msg->diffusecolor_;
+const ::KuplungApp::Vec3& MeshModelMaterial::_Internal::diffusecolor(const MeshModelMaterial* msg) {
+  return *msg->_impl_.diffusecolor_;
 }
-const ::KuplungApp::Vec3&
-MeshModelMaterial::_Internal::specularcolor(const MeshModelMaterial* msg) {
-  return *msg->specularcolor_;
+const ::KuplungApp::Vec3& MeshModelMaterial::_Internal::specularcolor(const MeshModelMaterial* msg) {
+  return *msg->_impl_.specularcolor_;
 }
-const ::KuplungApp::Vec3&
-MeshModelMaterial::_Internal::emissioncolor(const MeshModelMaterial* msg) {
-  return *msg->emissioncolor_;
+const ::KuplungApp::Vec3& MeshModelMaterial::_Internal::emissioncolor(const MeshModelMaterial* msg) {
+  return *msg->_impl_.emissioncolor_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::textureambient(const MeshModelMaterial* msg) {
-  return *msg->textureambient_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::textureambient(const MeshModelMaterial* msg) {
+  return *msg->_impl_.textureambient_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturediffuse(const MeshModelMaterial* msg) {
-  return *msg->texturediffuse_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturediffuse(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturediffuse_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturespecular(const MeshModelMaterial* msg) {
-  return *msg->texturespecular_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturespecular(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturespecular_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturespecularexp(const MeshModelMaterial* msg) {
-  return *msg->texturespecularexp_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturespecularexp(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturespecularexp_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturedissolve(const MeshModelMaterial* msg) {
-  return *msg->texturedissolve_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturedissolve(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturedissolve_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturebump(const MeshModelMaterial* msg) {
-  return *msg->texturebump_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturebump(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturebump_;
 }
-const ::KuplungApp::MeshMaterialTextureImage&
-MeshModelMaterial::_Internal::texturedisplacement(const MeshModelMaterial* msg) {
-  return *msg->texturedisplacement_;
+const ::KuplungApp::MeshMaterialTextureImage& MeshModelMaterial::_Internal::texturedisplacement(const MeshModelMaterial* msg) {
+  return *msg->_impl_.texturedisplacement_;
 }
-MeshModelMaterial::MeshModelMaterial()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.MeshModelMaterial)
+MeshModelMaterial::MeshModelMaterial(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.MeshModelMaterial)
 }
-MeshModelMaterial::MeshModelMaterial(const MeshModelMaterial& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_materialtitle()) {
-    materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
-  }
-  if (from._internal_has_ambientcolor()) {
-    ambientcolor_ = new ::KuplungApp::Vec3(*from.ambientcolor_);
-  } else {
-    ambientcolor_ = nullptr;
-  }
-  if (from._internal_has_diffusecolor()) {
-    diffusecolor_ = new ::KuplungApp::Vec3(*from.diffusecolor_);
-  } else {
-    diffusecolor_ = nullptr;
-  }
-  if (from._internal_has_specularcolor()) {
-    specularcolor_ = new ::KuplungApp::Vec3(*from.specularcolor_);
-  } else {
-    specularcolor_ = nullptr;
-  }
-  if (from._internal_has_emissioncolor()) {
-    emissioncolor_ = new ::KuplungApp::Vec3(*from.emissioncolor_);
-  } else {
-    emissioncolor_ = nullptr;
-  }
-  if (from._internal_has_textureambient()) {
-    textureambient_ = new ::KuplungApp::MeshMaterialTextureImage(*from.textureambient_);
-  } else {
-    textureambient_ = nullptr;
-  }
-  if (from._internal_has_texturediffuse()) {
-    texturediffuse_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturediffuse_);
-  } else {
-    texturediffuse_ = nullptr;
-  }
-  if (from._internal_has_texturespecular()) {
-    texturespecular_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturespecular_);
-  } else {
-    texturespecular_ = nullptr;
-  }
-  if (from._internal_has_texturespecularexp()) {
-    texturespecularexp_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturespecularexp_);
-  } else {
-    texturespecularexp_ = nullptr;
-  }
-  if (from._internal_has_texturedissolve()) {
-    texturedissolve_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturedissolve_);
-  } else {
-    texturedissolve_ = nullptr;
-  }
-  if (from._internal_has_texturebump()) {
-    texturebump_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturebump_);
-  } else {
-    texturebump_ = nullptr;
-  }
-  if (from._internal_has_texturedisplacement()) {
-    texturedisplacement_ = new ::KuplungApp::MeshMaterialTextureImage(*from.texturedisplacement_);
-  } else {
-    texturedisplacement_ = nullptr;
-  }
-  ::memcpy(&materialid_, &from.materialid_,
-    static_cast<size_t>(reinterpret_cast<char*>(&opticaldensity_) -
-    reinterpret_cast<char*>(&materialid_)) + sizeof(opticaldensity_));
+inline PROTOBUF_NDEBUG_INLINE MeshModelMaterial::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        materialtitle_(arena, from.materialtitle_) {}
+
+MeshModelMaterial::MeshModelMaterial(
+    ::google::protobuf::Arena* arena,
+    const MeshModelMaterial& from)
+    : ::google::protobuf::Message(arena) {
+  MeshModelMaterial* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.ambientcolor_ = (cached_has_bits & 0x00000002u)
+                ? CreateMaybeMessage<::KuplungApp::Vec3>(arena, *from._impl_.ambientcolor_)
+                : nullptr;
+  _impl_.diffusecolor_ = (cached_has_bits & 0x00000004u)
+                ? CreateMaybeMessage<::KuplungApp::Vec3>(arena, *from._impl_.diffusecolor_)
+                : nullptr;
+  _impl_.specularcolor_ = (cached_has_bits & 0x00000008u)
+                ? CreateMaybeMessage<::KuplungApp::Vec3>(arena, *from._impl_.specularcolor_)
+                : nullptr;
+  _impl_.emissioncolor_ = (cached_has_bits & 0x00000010u)
+                ? CreateMaybeMessage<::KuplungApp::Vec3>(arena, *from._impl_.emissioncolor_)
+                : nullptr;
+  _impl_.textureambient_ = (cached_has_bits & 0x00000020u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.textureambient_)
+                : nullptr;
+  _impl_.texturediffuse_ = (cached_has_bits & 0x00000040u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturediffuse_)
+                : nullptr;
+  _impl_.texturespecular_ = (cached_has_bits & 0x00000080u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturespecular_)
+                : nullptr;
+  _impl_.texturespecularexp_ = (cached_has_bits & 0x00000100u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturespecularexp_)
+                : nullptr;
+  _impl_.texturedissolve_ = (cached_has_bits & 0x00000200u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturedissolve_)
+                : nullptr;
+  _impl_.texturebump_ = (cached_has_bits & 0x00000400u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturebump_)
+                : nullptr;
+  _impl_.texturedisplacement_ = (cached_has_bits & 0x00000800u)
+                ? CreateMaybeMessage<::KuplungApp::MeshMaterialTextureImage>(arena, *from._impl_.texturedisplacement_)
+                : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, materialid_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, materialid_),
+           offsetof(Impl_, opticaldensity_) -
+               offsetof(Impl_, materialid_) +
+               sizeof(Impl_::opticaldensity_));
+
   // @@protoc_insertion_point(copy_constructor:KuplungApp.MeshModelMaterial)
 }
+inline PROTOBUF_NDEBUG_INLINE MeshModelMaterial::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        materialtitle_(arena) {}
 
-void MeshModelMaterial::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
-  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&ambientcolor_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&opticaldensity_) -
-      reinterpret_cast<char*>(&ambientcolor_)) + sizeof(opticaldensity_));
+inline void MeshModelMaterial::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, ambientcolor_),
+           0,
+           offsetof(Impl_, opticaldensity_) -
+               offsetof(Impl_, ambientcolor_) +
+               sizeof(Impl_::opticaldensity_));
 }
-
 MeshModelMaterial::~MeshModelMaterial() {
   // @@protoc_insertion_point(destructor:KuplungApp.MeshModelMaterial)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void MeshModelMaterial::SharedDtor() {
-  materialtitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete ambientcolor_;
-  if (this != internal_default_instance()) delete diffusecolor_;
-  if (this != internal_default_instance()) delete specularcolor_;
-  if (this != internal_default_instance()) delete emissioncolor_;
-  if (this != internal_default_instance()) delete textureambient_;
-  if (this != internal_default_instance()) delete texturediffuse_;
-  if (this != internal_default_instance()) delete texturespecular_;
-  if (this != internal_default_instance()) delete texturespecularexp_;
-  if (this != internal_default_instance()) delete texturedissolve_;
-  if (this != internal_default_instance()) delete texturebump_;
-  if (this != internal_default_instance()) delete texturedisplacement_;
+inline void MeshModelMaterial::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.materialtitle_.Destroy();
+  delete _impl_.ambientcolor_;
+  delete _impl_.diffusecolor_;
+  delete _impl_.specularcolor_;
+  delete _impl_.emissioncolor_;
+  delete _impl_.textureambient_;
+  delete _impl_.texturediffuse_;
+  delete _impl_.texturespecular_;
+  delete _impl_.texturespecularexp_;
+  delete _impl_.texturedissolve_;
+  delete _impl_.texturebump_;
+  delete _impl_.texturedisplacement_;
+  _impl_.~Impl_();
 }
 
-void MeshModelMaterial::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const MeshModelMaterial& MeshModelMaterial::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_MeshModelMaterial_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void MeshModelMaterial::Clear() {
+PROTOBUF_NOINLINE void MeshModelMaterial::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.MeshModelMaterial)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      materialtitle_.ClearNonDefaultToEmptyNoArena();
+      _impl_.materialtitle_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      GOOGLE_DCHECK(ambientcolor_ != nullptr);
-      ambientcolor_->Clear();
+      ABSL_DCHECK(_impl_.ambientcolor_ != nullptr);
+      _impl_.ambientcolor_->Clear();
     }
     if (cached_has_bits & 0x00000004u) {
-      GOOGLE_DCHECK(diffusecolor_ != nullptr);
-      diffusecolor_->Clear();
+      ABSL_DCHECK(_impl_.diffusecolor_ != nullptr);
+      _impl_.diffusecolor_->Clear();
     }
     if (cached_has_bits & 0x00000008u) {
-      GOOGLE_DCHECK(specularcolor_ != nullptr);
-      specularcolor_->Clear();
+      ABSL_DCHECK(_impl_.specularcolor_ != nullptr);
+      _impl_.specularcolor_->Clear();
     }
     if (cached_has_bits & 0x00000010u) {
-      GOOGLE_DCHECK(emissioncolor_ != nullptr);
-      emissioncolor_->Clear();
+      ABSL_DCHECK(_impl_.emissioncolor_ != nullptr);
+      _impl_.emissioncolor_->Clear();
     }
     if (cached_has_bits & 0x00000020u) {
-      GOOGLE_DCHECK(textureambient_ != nullptr);
-      textureambient_->Clear();
+      ABSL_DCHECK(_impl_.textureambient_ != nullptr);
+      _impl_.textureambient_->Clear();
     }
     if (cached_has_bits & 0x00000040u) {
-      GOOGLE_DCHECK(texturediffuse_ != nullptr);
-      texturediffuse_->Clear();
+      ABSL_DCHECK(_impl_.texturediffuse_ != nullptr);
+      _impl_.texturediffuse_->Clear();
     }
     if (cached_has_bits & 0x00000080u) {
-      GOOGLE_DCHECK(texturespecular_ != nullptr);
-      texturespecular_->Clear();
+      ABSL_DCHECK(_impl_.texturespecular_ != nullptr);
+      _impl_.texturespecular_->Clear();
     }
   }
   if (cached_has_bits & 0x00000f00u) {
     if (cached_has_bits & 0x00000100u) {
-      GOOGLE_DCHECK(texturespecularexp_ != nullptr);
-      texturespecularexp_->Clear();
+      ABSL_DCHECK(_impl_.texturespecularexp_ != nullptr);
+      _impl_.texturespecularexp_->Clear();
     }
     if (cached_has_bits & 0x00000200u) {
-      GOOGLE_DCHECK(texturedissolve_ != nullptr);
-      texturedissolve_->Clear();
+      ABSL_DCHECK(_impl_.texturedissolve_ != nullptr);
+      _impl_.texturedissolve_->Clear();
     }
     if (cached_has_bits & 0x00000400u) {
-      GOOGLE_DCHECK(texturebump_ != nullptr);
-      texturebump_->Clear();
+      ABSL_DCHECK(_impl_.texturebump_ != nullptr);
+      _impl_.texturebump_->Clear();
     }
     if (cached_has_bits & 0x00000800u) {
-      GOOGLE_DCHECK(texturedisplacement_ != nullptr);
-      texturedisplacement_->Clear();
+      ABSL_DCHECK(_impl_.texturedisplacement_ != nullptr);
+      _impl_.texturedisplacement_->Clear();
     }
   }
   if (cached_has_bits & 0x0000f000u) {
-    ::memset(&materialid_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&illuminationmode_) -
-        reinterpret_cast<char*>(&materialid_)) + sizeof(illuminationmode_));
+    ::memset(&_impl_.materialid_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.illuminationmode_) -
+        reinterpret_cast<char*>(&_impl_.materialid_)) + sizeof(_impl_.illuminationmode_));
   }
-  opticaldensity_ = 0;
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_.opticaldensity_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* MeshModelMaterial::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required int32 MaterialID = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_materialid(&has_bits);
-          materialid_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string MaterialTitle = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          auto str = _internal_mutable_materialtitle();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.MeshModelMaterial.MaterialTitle");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 AmbientColor = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          ptr = ctx->ParseMessage(_internal_mutable_ambientcolor(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 DiffuseColor = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          ptr = ctx->ParseMessage(_internal_mutable_diffusecolor(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 SpecularColor = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 42)) {
-          ptr = ctx->ParseMessage(_internal_mutable_specularcolor(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.Vec3 EmissionColor = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 50)) {
-          ptr = ctx->ParseMessage(_internal_mutable_emissioncolor(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required float SpecularExp = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 61)) {
-          _Internal::set_has_specularexp(&has_bits);
-          specularexp_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required float Transparency = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 69)) {
-          _Internal::set_has_transparency(&has_bits);
-          transparency_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required fixed32 IlluminationMode = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 77)) {
-          _Internal::set_has_illuminationmode(&has_bits);
-          illuminationmode_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint32>(ptr);
-          ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint32);
-        } else goto handle_unusual;
-        continue;
-      // required float OpticalDensity = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 85)) {
-          _Internal::set_has_opticaldensity(&has_bits);
-          opticaldensity_ = ::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
-          ptr += sizeof(float);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr = ctx->ParseMessage(_internal_mutable_textureambient(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturediffuse(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturespecular(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-      case 14:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 114)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturespecularexp(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-      case 15:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 122)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturedissolve(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-      case 16:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 130)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturebump(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-      case 17:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 138)) {
-          ptr = ctx->ParseMessage(_internal_mutable_texturedisplacement(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* MeshModelMaterial::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* MeshModelMaterial::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModelMaterial)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<5, 17, 11, 66, 2> MeshModelMaterial::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_._has_bits_),
+    0, // no _extensions_
+    17, 248,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294836224,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    17,  // num_field_entries
+    11,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_MeshModelMaterial_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // required int32 MaterialID = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(MeshModelMaterial, _impl_.materialid_), 12>(),
+     {8, 12, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.materialid_)}},
+    // required string MaterialTitle = 2;
+    {::_pbi::TcParser::FastSS1,
+     {18, 0, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.materialtitle_)}},
+    // required .KuplungApp.Vec3 AmbientColor = 3;
+    {::_pbi::TcParser::FastMtS1,
+     {26, 1, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.ambientcolor_)}},
+    // required .KuplungApp.Vec3 DiffuseColor = 4;
+    {::_pbi::TcParser::FastMtS1,
+     {34, 2, 1, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.diffusecolor_)}},
+    // required .KuplungApp.Vec3 SpecularColor = 5;
+    {::_pbi::TcParser::FastMtS1,
+     {42, 3, 2, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.specularcolor_)}},
+    // required .KuplungApp.Vec3 EmissionColor = 6;
+    {::_pbi::TcParser::FastMtS1,
+     {50, 4, 3, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.emissioncolor_)}},
+    // required float SpecularExp = 7;
+    {::_pbi::TcParser::FastF32S1,
+     {61, 13, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.specularexp_)}},
+    // required float Transparency = 8;
+    {::_pbi::TcParser::FastF32S1,
+     {69, 14, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.transparency_)}},
+    // required fixed32 IlluminationMode = 9;
+    {::_pbi::TcParser::FastF32S1,
+     {77, 15, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.illuminationmode_)}},
+    // required float OpticalDensity = 10;
+    {::_pbi::TcParser::FastF32S1,
+     {85, 16, 0, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.opticaldensity_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+    {::_pbi::TcParser::FastMtS1,
+     {90, 5, 4, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.textureambient_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+    {::_pbi::TcParser::FastMtS1,
+     {98, 6, 5, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturediffuse_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+    {::_pbi::TcParser::FastMtS1,
+     {106, 7, 6, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturespecular_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+    {::_pbi::TcParser::FastMtS1,
+     {114, 8, 7, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturespecularexp_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+    {::_pbi::TcParser::FastMtS1,
+     {122, 9, 8, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturedissolve_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+    {::_pbi::TcParser::FastMtS2,
+     {386, 10, 9, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturebump_)}},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+    {::_pbi::TcParser::FastMtS2,
+     {394, 11, 10, PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturedisplacement_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required int32 MaterialID = 1;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.materialid_), _Internal::kHasBitsOffset + 12, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required string MaterialTitle = 2;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.materialtitle_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required .KuplungApp.Vec3 AmbientColor = 3;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.ambientcolor_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.Vec3 DiffuseColor = 4;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.diffusecolor_), _Internal::kHasBitsOffset + 2, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.Vec3 SpecularColor = 5;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.specularcolor_), _Internal::kHasBitsOffset + 3, 2,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.Vec3 EmissionColor = 6;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.emissioncolor_), _Internal::kHasBitsOffset + 4, 3,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required float SpecularExp = 7;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.specularexp_), _Internal::kHasBitsOffset + 13, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required float Transparency = 8;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.transparency_), _Internal::kHasBitsOffset + 14, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required fixed32 IlluminationMode = 9;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.illuminationmode_), _Internal::kHasBitsOffset + 15, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFixed32)},
+    // required float OpticalDensity = 10;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.opticaldensity_), _Internal::kHasBitsOffset + 16, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kFloat)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.textureambient_), _Internal::kHasBitsOffset + 5, 4,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturediffuse_), _Internal::kHasBitsOffset + 6, 5,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturespecular_), _Internal::kHasBitsOffset + 7, 6,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturespecularexp_), _Internal::kHasBitsOffset + 8, 7,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturedissolve_), _Internal::kHasBitsOffset + 9, 8,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturebump_), _Internal::kHasBitsOffset + 10, 9,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+    {PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.texturedisplacement_), _Internal::kHasBitsOffset + 11, 10,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshMaterialTextureImage>()},
+  }}, {{
+    "\34\0\15\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0"
+    "KuplungApp.MeshModelMaterial"
+    "MaterialTitle"
+  }},
+};
+
+::uint8_t* MeshModelMaterial::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.MeshModelMaterial)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required int32 MaterialID = 1;
   if (cached_has_bits & 0x00001000u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_materialid(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_materialid(), target);
   }
 
   // required string MaterialTitle = 2;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_materialtitle().data(), static_cast<int>(this->_internal_materialtitle().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.MeshModelMaterial.MaterialTitle");
-    target = stream->WriteStringMaybeAliased(
-        2, this->_internal_materialtitle(), target);
+    const std::string& _s = this->_internal_materialtitle();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.MeshModelMaterial.MaterialTitle");
+    target = stream->WriteStringMaybeAliased(2, _s, target);
   }
 
   // required .KuplungApp.Vec3 AmbientColor = 3;
   if (cached_has_bits & 0x00000002u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        3, _Internal::ambientcolor(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        3, _Internal::ambientcolor(this),
+        _Internal::ambientcolor(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 DiffuseColor = 4;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        4, _Internal::diffusecolor(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        4, _Internal::diffusecolor(this),
+        _Internal::diffusecolor(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 SpecularColor = 5;
   if (cached_has_bits & 0x00000008u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        5, _Internal::specularcolor(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        5, _Internal::specularcolor(this),
+        _Internal::specularcolor(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.Vec3 EmissionColor = 6;
   if (cached_has_bits & 0x00000010u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        6, _Internal::emissioncolor(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        6, _Internal::emissioncolor(this),
+        _Internal::emissioncolor(this).GetCachedSize(), target, stream);
   }
 
   // required float SpecularExp = 7;
   if (cached_has_bits & 0x00002000u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(7, this->_internal_specularexp(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        7, this->_internal_specularexp(), target);
   }
 
   // required float Transparency = 8;
   if (cached_has_bits & 0x00004000u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(8, this->_internal_transparency(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        8, this->_internal_transparency(), target);
   }
 
   // required fixed32 IlluminationMode = 9;
   if (cached_has_bits & 0x00008000u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed32ToArray(9, this->_internal_illuminationmode(), target);
+    target = ::_pbi::WireFormatLite::WriteFixed32ToArray(
+        9, this->_internal_illuminationmode(), target);
   }
 
   // required float OpticalDensity = 10;
   if (cached_has_bits & 0x00010000u) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFloatToArray(10, this->_internal_opticaldensity(), target);
+    target = ::_pbi::WireFormatLite::WriteFloatToArray(
+        10, this->_internal_opticaldensity(), target);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
   if (cached_has_bits & 0x00000020u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        11, _Internal::textureambient(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        11, _Internal::textureambient(this),
+        _Internal::textureambient(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
   if (cached_has_bits & 0x00000040u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        12, _Internal::texturediffuse(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        12, _Internal::texturediffuse(this),
+        _Internal::texturediffuse(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
   if (cached_has_bits & 0x00000080u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        13, _Internal::texturespecular(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        13, _Internal::texturespecular(this),
+        _Internal::texturespecular(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
   if (cached_has_bits & 0x00000100u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        14, _Internal::texturespecularexp(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        14, _Internal::texturespecularexp(this),
+        _Internal::texturespecularexp(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
   if (cached_has_bits & 0x00000200u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        15, _Internal::texturedissolve(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        15, _Internal::texturedissolve(this),
+        _Internal::texturedissolve(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
   if (cached_has_bits & 0x00000400u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        16, _Internal::texturebump(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        16, _Internal::texturebump(this),
+        _Internal::texturebump(this).GetCachedSize(), target, stream);
   }
 
   // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
   if (cached_has_bits & 0x00000800u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        17, _Internal::texturedisplacement(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        17, _Internal::texturedisplacement(this),
+        _Internal::texturedisplacement(this).GetCachedSize(), target, stream);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.MeshModelMaterial)
   return target;
 }
 
-size_t MeshModelMaterial::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.MeshModelMaterial)
-  size_t total_size = 0;
-
-  if (_internal_has_materialtitle()) {
-    // required string MaterialTitle = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_materialtitle());
-  }
-
-  if (_internal_has_ambientcolor()) {
-    // required .KuplungApp.Vec3 AmbientColor = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *ambientcolor_);
-  }
-
-  if (_internal_has_diffusecolor()) {
-    // required .KuplungApp.Vec3 DiffuseColor = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *diffusecolor_);
-  }
-
-  if (_internal_has_specularcolor()) {
-    // required .KuplungApp.Vec3 SpecularColor = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *specularcolor_);
-  }
-
-  if (_internal_has_emissioncolor()) {
-    // required .KuplungApp.Vec3 EmissionColor = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *emissioncolor_);
-  }
-
-  if (_internal_has_textureambient()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *textureambient_);
-  }
-
-  if (_internal_has_texturediffuse()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturediffuse_);
-  }
-
-  if (_internal_has_texturespecular()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturespecular_);
-  }
-
-  if (_internal_has_texturespecularexp()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturespecularexp_);
-  }
-
-  if (_internal_has_texturedissolve()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturedissolve_);
-  }
-
-  if (_internal_has_texturebump()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturebump_);
-  }
-
-  if (_internal_has_texturedisplacement()) {
-    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturedisplacement_);
-  }
-
-  if (_internal_has_materialid()) {
-    // required int32 MaterialID = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_materialid());
-  }
-
-  if (_internal_has_specularexp()) {
-    // required float SpecularExp = 7;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_transparency()) {
-    // required float Transparency = 8;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_illuminationmode()) {
-    // required fixed32 IlluminationMode = 9;
-    total_size += 1 + 4;
-  }
-
-  if (_internal_has_opticaldensity()) {
-    // required float OpticalDensity = 10;
-    total_size += 1 + 4;
-  }
-
-  return total_size;
-}
-size_t MeshModelMaterial::ByteSizeLong() const {
+::size_t MeshModelMaterial::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.MeshModelMaterial)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x0001ffff) ^ 0x0001ffff) == 0) {  // All required fields are present.
-    // required string MaterialTitle = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_materialtitle());
-
-    // required .KuplungApp.Vec3 AmbientColor = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *ambientcolor_);
-
-    // required .KuplungApp.Vec3 DiffuseColor = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *diffusecolor_);
-
-    // required .KuplungApp.Vec3 SpecularColor = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *specularcolor_);
-
-    // required .KuplungApp.Vec3 EmissionColor = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *emissioncolor_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *textureambient_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturediffuse_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturespecular_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturespecularexp_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturedissolve_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturebump_);
-
-    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
-    total_size += 2 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *texturedisplacement_);
-
-    // required int32 MaterialID = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_materialid());
-
-    // required float SpecularExp = 7;
-    total_size += 1 + 4;
-
-    // required float Transparency = 8;
-    total_size += 1 + 4;
-
-    // required fixed32 IlluminationMode = 9;
-    total_size += 1 + 4;
-
-    // required float OpticalDensity = 10;
-    total_size += 1 + 4;
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    // required string MaterialTitle = 2;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_materialtitle());
+    }
+
+    // required .KuplungApp.Vec3 AmbientColor = 3;
+    if (cached_has_bits & 0x00000002u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.ambientcolor_);
+    }
+
+    // required .KuplungApp.Vec3 DiffuseColor = 4;
+    if (cached_has_bits & 0x00000004u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.diffusecolor_);
+    }
+
+    // required .KuplungApp.Vec3 SpecularColor = 5;
+    if (cached_has_bits & 0x00000008u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.specularcolor_);
+    }
+
+    // required .KuplungApp.Vec3 EmissionColor = 6;
+    if (cached_has_bits & 0x00000010u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.emissioncolor_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureAmbient = 11;
+    if (cached_has_bits & 0x00000020u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.textureambient_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureDiffuse = 12;
+    if (cached_has_bits & 0x00000040u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturediffuse_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecular = 13;
+    if (cached_has_bits & 0x00000080u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturespecular_);
+    }
+
   }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  if (cached_has_bits & 0x0000ff00u) {
+    // required .KuplungApp.MeshMaterialTextureImage TextureSpecularExp = 14;
+    if (cached_has_bits & 0x00000100u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturespecularexp_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureDissolve = 15;
+    if (cached_has_bits & 0x00000200u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturedissolve_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureBump = 16;
+    if (cached_has_bits & 0x00000400u) {
+      total_size +=
+          2 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturebump_);
+    }
+
+    // required .KuplungApp.MeshMaterialTextureImage TextureDisplacement = 17;
+    if (cached_has_bits & 0x00000800u) {
+      total_size +=
+          2 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.texturedisplacement_);
+    }
+
+    // required int32 MaterialID = 1;
+    if (cached_has_bits & 0x00001000u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_materialid());
+    }
+
+    // required float SpecularExp = 7;
+    if (cached_has_bits & 0x00002000u) {
+      total_size += 5;
+    }
+
+    // required float Transparency = 8;
+    if (cached_has_bits & 0x00004000u) {
+      total_size += 5;
+    }
+
+    // required fixed32 IlluminationMode = 9;
+    if (cached_has_bits & 0x00008000u) {
+      total_size += 5;
+    }
+
+  }
+  // required float OpticalDensity = 10;
+  if (cached_has_bits & 0x00010000u) {
+    total_size += 5;
+  }
+
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void MeshModelMaterial::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.MeshModelMaterial)
-  GOOGLE_DCHECK_NE(&from, this);
-  const MeshModelMaterial* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<MeshModelMaterial>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.MeshModelMaterial)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.MeshModelMaterial)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData MeshModelMaterial::_class_data_ = {
+    MeshModelMaterial::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* MeshModelMaterial::GetClassData() const {
+  return &_class_data_;
 }
 
-void MeshModelMaterial::MergeFrom(const MeshModelMaterial& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModelMaterial)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void MeshModelMaterial::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<MeshModelMaterial*>(&to_msg);
+  auto& from = static_cast<const MeshModelMaterial&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.MeshModelMaterial)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  cached_has_bits = from._has_bits_[0];
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+      _this->_internal_set_materialtitle(from._internal_materialtitle());
     }
     if (cached_has_bits & 0x00000002u) {
-      _internal_mutable_ambientcolor()->::KuplungApp::Vec3::MergeFrom(from._internal_ambientcolor());
+      _this->_internal_mutable_ambientcolor()->::KuplungApp::Vec3::MergeFrom(
+          from._internal_ambientcolor());
     }
     if (cached_has_bits & 0x00000004u) {
-      _internal_mutable_diffusecolor()->::KuplungApp::Vec3::MergeFrom(from._internal_diffusecolor());
+      _this->_internal_mutable_diffusecolor()->::KuplungApp::Vec3::MergeFrom(
+          from._internal_diffusecolor());
     }
     if (cached_has_bits & 0x00000008u) {
-      _internal_mutable_specularcolor()->::KuplungApp::Vec3::MergeFrom(from._internal_specularcolor());
+      _this->_internal_mutable_specularcolor()->::KuplungApp::Vec3::MergeFrom(
+          from._internal_specularcolor());
     }
     if (cached_has_bits & 0x00000010u) {
-      _internal_mutable_emissioncolor()->::KuplungApp::Vec3::MergeFrom(from._internal_emissioncolor());
+      _this->_internal_mutable_emissioncolor()->::KuplungApp::Vec3::MergeFrom(
+          from._internal_emissioncolor());
     }
     if (cached_has_bits & 0x00000020u) {
-      _internal_mutable_textureambient()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_textureambient());
+      _this->_internal_mutable_textureambient()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_textureambient());
     }
     if (cached_has_bits & 0x00000040u) {
-      _internal_mutable_texturediffuse()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturediffuse());
+      _this->_internal_mutable_texturediffuse()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturediffuse());
     }
     if (cached_has_bits & 0x00000080u) {
-      _internal_mutable_texturespecular()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturespecular());
+      _this->_internal_mutable_texturespecular()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturespecular());
     }
   }
   if (cached_has_bits & 0x0000ff00u) {
     if (cached_has_bits & 0x00000100u) {
-      _internal_mutable_texturespecularexp()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturespecularexp());
+      _this->_internal_mutable_texturespecularexp()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturespecularexp());
     }
     if (cached_has_bits & 0x00000200u) {
-      _internal_mutable_texturedissolve()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturedissolve());
+      _this->_internal_mutable_texturedissolve()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturedissolve());
     }
     if (cached_has_bits & 0x00000400u) {
-      _internal_mutable_texturebump()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturebump());
+      _this->_internal_mutable_texturebump()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturebump());
     }
     if (cached_has_bits & 0x00000800u) {
-      _internal_mutable_texturedisplacement()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(from._internal_texturedisplacement());
+      _this->_internal_mutable_texturedisplacement()->::KuplungApp::MeshMaterialTextureImage::MergeFrom(
+          from._internal_texturedisplacement());
     }
     if (cached_has_bits & 0x00001000u) {
-      materialid_ = from.materialid_;
+      _this->_impl_.materialid_ = from._impl_.materialid_;
     }
     if (cached_has_bits & 0x00002000u) {
-      specularexp_ = from.specularexp_;
+      _this->_impl_.specularexp_ = from._impl_.specularexp_;
     }
     if (cached_has_bits & 0x00004000u) {
-      transparency_ = from.transparency_;
+      _this->_impl_.transparency_ = from._impl_.transparency_;
     }
     if (cached_has_bits & 0x00008000u) {
-      illuminationmode_ = from.illuminationmode_;
+      _this->_impl_.illuminationmode_ = from._impl_.illuminationmode_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 0x00010000u) {
-    _internal_set_opticaldensity(from._internal_opticaldensity());
+    _this->_internal_set_opticaldensity(from._internal_opticaldensity());
   }
-}
-
-void MeshModelMaterial::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.MeshModelMaterial)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void MeshModelMaterial::CopyFrom(const MeshModelMaterial& from) {
@@ -3707,84 +3417,76 @@ void MeshModelMaterial::CopyFrom(const MeshModelMaterial& from) {
   MergeFrom(from);
 }
 
-bool MeshModelMaterial::IsInitialized() const {
-  if ((_has_bits_[0] & 0x0001ffff) != 0x0001ffff) return false;
-  if (_internal_has_ambientcolor()) {
-    if (!ambientcolor_->IsInitialized()) return false;
+PROTOBUF_NOINLINE bool MeshModelMaterial::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
   }
-  if (_internal_has_diffusecolor()) {
-    if (!diffusecolor_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000002u) != 0) {
+    if (!_impl_.ambientcolor_->IsInitialized()) return false;
   }
-  if (_internal_has_specularcolor()) {
-    if (!specularcolor_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000004u) != 0) {
+    if (!_impl_.diffusecolor_->IsInitialized()) return false;
   }
-  if (_internal_has_emissioncolor()) {
-    if (!emissioncolor_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000008u) != 0) {
+    if (!_impl_.specularcolor_->IsInitialized()) return false;
   }
-  if (_internal_has_textureambient()) {
-    if (!textureambient_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000010u) != 0) {
+    if (!_impl_.emissioncolor_->IsInitialized()) return false;
   }
-  if (_internal_has_texturediffuse()) {
-    if (!texturediffuse_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000020u) != 0) {
+    if (!_impl_.textureambient_->IsInitialized()) return false;
   }
-  if (_internal_has_texturespecular()) {
-    if (!texturespecular_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000040u) != 0) {
+    if (!_impl_.texturediffuse_->IsInitialized()) return false;
   }
-  if (_internal_has_texturespecularexp()) {
-    if (!texturespecularexp_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000080u) != 0) {
+    if (!_impl_.texturespecular_->IsInitialized()) return false;
   }
-  if (_internal_has_texturedissolve()) {
-    if (!texturedissolve_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000100u) != 0) {
+    if (!_impl_.texturespecularexp_->IsInitialized()) return false;
   }
-  if (_internal_has_texturebump()) {
-    if (!texturebump_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000200u) != 0) {
+    if (!_impl_.texturedissolve_->IsInitialized()) return false;
   }
-  if (_internal_has_texturedisplacement()) {
-    if (!texturedisplacement_->IsInitialized()) return false;
+  if ((_impl_._has_bits_[0] & 0x00000400u) != 0) {
+    if (!_impl_.texturebump_->IsInitialized()) return false;
+  }
+  if ((_impl_._has_bits_[0] & 0x00000800u) != 0) {
+    if (!_impl_.texturedisplacement_->IsInitialized()) return false;
   }
   return true;
 }
 
-void MeshModelMaterial::InternalSwap(MeshModelMaterial* other) {
+::_pbi::CachedSize* MeshModelMaterial::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void MeshModelMaterial::InternalSwap(MeshModelMaterial* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  materialtitle_.Swap(&other->materialtitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(ambientcolor_, other->ambientcolor_);
-  swap(diffusecolor_, other->diffusecolor_);
-  swap(specularcolor_, other->specularcolor_);
-  swap(emissioncolor_, other->emissioncolor_);
-  swap(textureambient_, other->textureambient_);
-  swap(texturediffuse_, other->texturediffuse_);
-  swap(texturespecular_, other->texturespecular_);
-  swap(texturespecularexp_, other->texturespecularexp_);
-  swap(texturedissolve_, other->texturedissolve_);
-  swap(texturebump_, other->texturebump_);
-  swap(texturedisplacement_, other->texturedisplacement_);
-  swap(materialid_, other->materialid_);
-  swap(specularexp_, other->specularexp_);
-  swap(transparency_, other->transparency_);
-  swap(illuminationmode_, other->illuminationmode_);
-  swap(opticaldensity_, other->opticaldensity_);
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.materialtitle_, &other->_impl_.materialtitle_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.opticaldensity_)
+      + sizeof(MeshModelMaterial::_impl_.opticaldensity_)
+      - PROTOBUF_FIELD_OFFSET(MeshModelMaterial, _impl_.ambientcolor_)>(
+          reinterpret_cast<char*>(&_impl_.ambientcolor_),
+          reinterpret_cast<char*>(&other->_impl_.ambientcolor_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata MeshModelMaterial::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata MeshModelMaterial::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[7]);
 }
-
-
 // ===================================================================
 
-void Mesh::InitAsDefaultInstance() {
-  ::KuplungApp::_Mesh_default_instance_._instance.get_mutable()->file_ = const_cast< ::KuplungApp::FBEntity*>(
-      ::KuplungApp::FBEntity::internal_default_instance());
-  ::KuplungApp::_Mesh_default_instance_._instance.get_mutable()->modelmaterial_ = const_cast< ::KuplungApp::MeshModelMaterial*>(
-      ::KuplungApp::MeshModelMaterial::internal_default_instance());
-}
 class Mesh::_Internal {
  public:
-  using HasBits = decltype(std::declval<Mesh>()._has_bits_);
+  using HasBits = decltype(std::declval<Mesh>()._impl_._has_bits_);
+  static constexpr ::int32_t kHasBitsOffset =
+    8 * PROTOBUF_FIELD_OFFSET(Mesh, _impl_._has_bits_);
   static void set_has_id(HasBits* has_bits) {
     (*has_bits)[0] |= 16u;
   }
@@ -3814,619 +3516,518 @@ class Mesh::_Internal {
   static void set_has_modelmaterial(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
+  static bool MissingRequiredFields(const HasBits& has_bits) {
+    return ((has_bits[0] & 0x000001ff) ^ 0x000001ff) != 0;
+  }
 };
 
-const ::KuplungApp::FBEntity&
-Mesh::_Internal::file(const Mesh* msg) {
-  return *msg->file_;
+const ::KuplungApp::FBEntity& Mesh::_Internal::file(const Mesh* msg) {
+  return *msg->_impl_.file_;
 }
-const ::KuplungApp::MeshModelMaterial&
-Mesh::_Internal::modelmaterial(const Mesh* msg) {
-  return *msg->modelmaterial_;
+const ::KuplungApp::MeshModelMaterial& Mesh::_Internal::modelmaterial(const Mesh* msg) {
+  return *msg->_impl_.modelmaterial_;
 }
-Mesh::Mesh()
-  : ::PROTOBUF_NAMESPACE_ID::Message(), _internal_metadata_(nullptr) {
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:KuplungApp.Mesh)
+Mesh::Mesh(::google::protobuf::Arena* arena)
+    : ::google::protobuf::Message(arena) {
+  SharedCtor(arena);
+  // @@protoc_insertion_point(arena_constructor:KuplungApp.Mesh)
 }
-Mesh::Mesh(const Mesh& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message(),
-      _internal_metadata_(nullptr),
-      _has_bits_(from._has_bits_),
-      vertices_(from.vertices_),
-      texture_coordinates_(from.texture_coordinates_),
-      normals_(from.normals_),
-      indices_(from.indices_) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  modeltitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_modeltitle()) {
-    modeltitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
-  }
-  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (from._internal_has_materialtitle()) {
-    materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
-  }
-  if (from._internal_has_file()) {
-    file_ = new ::KuplungApp::FBEntity(*from.file_);
-  } else {
-    file_ = nullptr;
-  }
-  if (from._internal_has_modelmaterial()) {
-    modelmaterial_ = new ::KuplungApp::MeshModelMaterial(*from.modelmaterial_);
-  } else {
-    modelmaterial_ = nullptr;
-  }
-  ::memcpy(&id_, &from.id_,
-    static_cast<size_t>(reinterpret_cast<char*>(&countindices_) -
-    reinterpret_cast<char*>(&id_)) + sizeof(countindices_));
+inline PROTOBUF_NDEBUG_INLINE Mesh::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility, ::google::protobuf::Arena* arena,
+    const Impl_& from)
+      : _has_bits_{from._has_bits_},
+        _cached_size_{0},
+        vertices_{visibility, arena, from.vertices_},
+        texture_coordinates_{visibility, arena, from.texture_coordinates_},
+        normals_{visibility, arena, from.normals_},
+        indices_{visibility, arena, from.indices_},
+        modeltitle_(arena, from.modeltitle_),
+        materialtitle_(arena, from.materialtitle_) {}
+
+Mesh::Mesh(
+    ::google::protobuf::Arena* arena,
+    const Mesh& from)
+    : ::google::protobuf::Message(arena) {
+  Mesh* const _this = this;
+  (void)_this;
+  _internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(
+      from._internal_metadata_);
+  new (&_impl_) Impl_(internal_visibility(), arena, from._impl_);
+  ::uint32_t cached_has_bits = _impl_._has_bits_[0];
+  _impl_.file_ = (cached_has_bits & 0x00000004u)
+                ? CreateMaybeMessage<::KuplungApp::FBEntity>(arena, *from._impl_.file_)
+                : nullptr;
+  _impl_.modelmaterial_ = (cached_has_bits & 0x00000008u)
+                ? CreateMaybeMessage<::KuplungApp::MeshModelMaterial>(arena, *from._impl_.modelmaterial_)
+                : nullptr;
+  ::memcpy(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, id_),
+           reinterpret_cast<const char *>(&from._impl_) +
+               offsetof(Impl_, id_),
+           offsetof(Impl_, countindices_) -
+               offsetof(Impl_, id_) +
+               sizeof(Impl_::countindices_));
+
   // @@protoc_insertion_point(copy_constructor:KuplungApp.Mesh)
 }
+inline PROTOBUF_NDEBUG_INLINE Mesh::Impl_::Impl_(
+    ::google::protobuf::internal::InternalVisibility visibility,
+    ::google::protobuf::Arena* arena)
+      : _cached_size_{0},
+        vertices_{visibility, arena},
+        texture_coordinates_{visibility, arena},
+        normals_{visibility, arena},
+        indices_{visibility, arena},
+        modeltitle_(arena),
+        materialtitle_(arena) {}
 
-void Mesh::SharedCtor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&scc_info_Mesh_KuplungDefinitions_2eproto.base);
-  modeltitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  materialtitle_.UnsafeSetDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  ::memset(&file_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&countindices_) -
-      reinterpret_cast<char*>(&file_)) + sizeof(countindices_));
+inline void Mesh::SharedCtor(::_pb::Arena* arena) {
+  new (&_impl_) Impl_(internal_visibility(), arena);
+  ::memset(reinterpret_cast<char *>(&_impl_) +
+               offsetof(Impl_, file_),
+           0,
+           offsetof(Impl_, countindices_) -
+               offsetof(Impl_, file_) +
+               sizeof(Impl_::countindices_));
 }
-
 Mesh::~Mesh() {
   // @@protoc_insertion_point(destructor:KuplungApp.Mesh)
+  _internal_metadata_.Delete<::google::protobuf::UnknownFieldSet>();
   SharedDtor();
 }
-
-void Mesh::SharedDtor() {
-  modeltitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  materialtitle_.DestroyNoArena(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited());
-  if (this != internal_default_instance()) delete file_;
-  if (this != internal_default_instance()) delete modelmaterial_;
+inline void Mesh::SharedDtor() {
+  ABSL_DCHECK(GetArena() == nullptr);
+  _impl_.modeltitle_.Destroy();
+  _impl_.materialtitle_.Destroy();
+  delete _impl_.file_;
+  delete _impl_.modelmaterial_;
+  _impl_.~Impl_();
 }
 
-void Mesh::SetCachedSize(int size) const {
-  _cached_size_.Set(size);
-}
-const Mesh& Mesh::default_instance() {
-  ::PROTOBUF_NAMESPACE_ID::internal::InitSCC(&::scc_info_Mesh_KuplungDefinitions_2eproto.base);
-  return *internal_default_instance();
-}
-
-
-void Mesh::Clear() {
+PROTOBUF_NOINLINE void Mesh::Clear() {
 // @@protoc_insertion_point(message_clear_start:KuplungApp.Mesh)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  PROTOBUF_TSAN_WRITE(&_impl_._tsan_detect_race);
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  vertices_.Clear();
-  texture_coordinates_.Clear();
-  normals_.Clear();
-  indices_.Clear();
-  cached_has_bits = _has_bits_[0];
+  _impl_.vertices_.Clear();
+  _impl_.texture_coordinates_.Clear();
+  _impl_.normals_.Clear();
+  _impl_.indices_.Clear();
+  cached_has_bits = _impl_._has_bits_[0];
   if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
-      modeltitle_.ClearNonDefaultToEmptyNoArena();
+      _impl_.modeltitle_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000002u) {
-      materialtitle_.ClearNonDefaultToEmptyNoArena();
+      _impl_.materialtitle_.ClearNonDefaultToEmpty();
     }
     if (cached_has_bits & 0x00000004u) {
-      GOOGLE_DCHECK(file_ != nullptr);
-      file_->Clear();
+      ABSL_DCHECK(_impl_.file_ != nullptr);
+      _impl_.file_->Clear();
     }
     if (cached_has_bits & 0x00000008u) {
-      GOOGLE_DCHECK(modelmaterial_ != nullptr);
-      modelmaterial_->Clear();
+      ABSL_DCHECK(_impl_.modelmaterial_ != nullptr);
+      _impl_.modelmaterial_->Clear();
     }
   }
   if (cached_has_bits & 0x000000f0u) {
-    ::memset(&id_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&countnormals_) -
-        reinterpret_cast<char*>(&id_)) + sizeof(countnormals_));
+    ::memset(&_impl_.id_, 0, static_cast<::size_t>(
+        reinterpret_cast<char*>(&_impl_.countnormals_) -
+        reinterpret_cast<char*>(&_impl_.id_)) + sizeof(_impl_.countnormals_));
   }
-  countindices_ = 0;
-  _has_bits_.Clear();
-  _internal_metadata_.Clear();
+  _impl_.countindices_ = 0;
+  _impl_._has_bits_.Clear();
+  _internal_metadata_.Clear<::google::protobuf::UnknownFieldSet>();
 }
 
-const char* Mesh::_InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
-  _Internal::HasBits has_bits{};
-  while (!ctx->Done(&ptr)) {
-    ::PROTOBUF_NAMESPACE_ID::uint32 tag;
-    ptr = ::PROTOBUF_NAMESPACE_ID::internal::ReadTag(ptr, &tag);
-    CHK_(ptr);
-    switch (tag >> 3) {
-      // required int32 ID = 1;
-      case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 8)) {
-          _Internal::set_has_id(&has_bits);
-          id_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.FBEntity File = 2;
-      case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 18)) {
-          ptr = ctx->ParseMessage(_internal_mutable_file(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string ModelTitle = 3;
-      case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 26)) {
-          auto str = _internal_mutable_modeltitle();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.Mesh.ModelTitle");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required string MaterialTitle = 4;
-      case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 34)) {
-          auto str = _internal_mutable_materialtitle();
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::InlineGreedyStringParser(str, ptr, ctx);
-          #ifndef NDEBUG
-          ::PROTOBUF_NAMESPACE_ID::internal::VerifyUTF8(str, "KuplungApp.Mesh.MaterialTitle");
-          #endif  // !NDEBUG
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 countVertices = 5;
-      case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 40)) {
-          _Internal::set_has_countvertices(&has_bits);
-          countvertices_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 countTextureCoordinates = 6;
-      case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 48)) {
-          _Internal::set_has_counttexturecoordinates(&has_bits);
-          counttexturecoordinates_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 countNormals = 7;
-      case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 56)) {
-          _Internal::set_has_countnormals(&has_bits);
-          countnormals_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required int32 countIndices = 8;
-      case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 64)) {
-          _Internal::set_has_countindices(&has_bits);
-          countindices_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint(&ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-      case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 74)) {
-          ptr = ctx->ParseMessage(_internal_mutable_modelmaterial(), ptr);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      // repeated .KuplungApp.Vec3 vertices = 10;
-      case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 82)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_vertices(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<82>(ptr));
-        } else goto handle_unusual;
-        continue;
-      // repeated .KuplungApp.Vec2 texture_coordinates = 11;
-      case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 90)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_texture_coordinates(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<90>(ptr));
-        } else goto handle_unusual;
-        continue;
-      // repeated .KuplungApp.Vec3 normals = 12;
-      case 12:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 98)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            ptr = ctx->ParseMessage(_internal_add_normals(), ptr);
-            CHK_(ptr);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<98>(ptr));
-        } else goto handle_unusual;
-        continue;
-      // repeated fixed32 indices = 13;
-      case 13:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 109)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            _internal_add_indices(::PROTOBUF_NAMESPACE_ID::internal::UnalignedLoad<::PROTOBUF_NAMESPACE_ID::uint32>(ptr));
-            ptr += sizeof(::PROTOBUF_NAMESPACE_ID::uint32);
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<109>(ptr));
-        } else if (static_cast<::PROTOBUF_NAMESPACE_ID::uint8>(tag) == 106) {
-          ptr = ::PROTOBUF_NAMESPACE_ID::internal::PackedFixed32Parser(_internal_mutable_indices(), ptr, ctx);
-          CHK_(ptr);
-        } else goto handle_unusual;
-        continue;
-      default: {
-      handle_unusual:
-        if ((tag & 7) == 4 || tag == 0) {
-          ctx->SetLastTag(tag);
-          goto success;
-        }
-        ptr = UnknownFieldParse(tag, &_internal_metadata_, ptr, ctx);
-        CHK_(ptr != nullptr);
-        continue;
-      }
-    }  // switch
-  }  // while
-success:
-  _has_bits_.Or(has_bits);
+const char* Mesh::_InternalParse(
+    const char* ptr, ::_pbi::ParseContext* ctx) {
+  ptr = ::_pbi::TcParser::ParseLoop(this, ptr, ctx, &_table_.header);
   return ptr;
-failure:
-  ptr = nullptr;
-  goto success;
-#undef CHK_
 }
 
-::PROTOBUF_NAMESPACE_ID::uint8* Mesh::_InternalSerialize(
-    ::PROTOBUF_NAMESPACE_ID::uint8* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Mesh)
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
-  (void) cached_has_bits;
 
-  cached_has_bits = _has_bits_[0];
+PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1
+const ::_pbi::TcParseTable<4, 13, 5, 55, 2> Mesh::_table_ = {
+  {
+    PROTOBUF_FIELD_OFFSET(Mesh, _impl_._has_bits_),
+    0, // no _extensions_
+    13, 120,  // max_field_number, fast_idx_mask
+    offsetof(decltype(_table_), field_lookup_table),
+    4294959104,  // skipmap
+    offsetof(decltype(_table_), field_entries),
+    13,  // num_field_entries
+    5,  // num_aux_entries
+    offsetof(decltype(_table_), aux_entries),
+    &_Mesh_default_instance_._instance,
+    ::_pbi::TcParser::GenericFallback,  // fallback
+  }, {{
+    {::_pbi::TcParser::MiniParse, {}},
+    // required int32 ID = 1;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mesh, _impl_.id_), 4>(),
+     {8, 4, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.id_)}},
+    // required .KuplungApp.FBEntity File = 2;
+    {::_pbi::TcParser::FastMtS1,
+     {18, 2, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.file_)}},
+    // required string ModelTitle = 3;
+    {::_pbi::TcParser::FastSS1,
+     {26, 0, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.modeltitle_)}},
+    // required string MaterialTitle = 4;
+    {::_pbi::TcParser::FastSS1,
+     {34, 1, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.materialtitle_)}},
+    // required int32 countVertices = 5;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mesh, _impl_.countvertices_), 5>(),
+     {40, 5, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countvertices_)}},
+    // required int32 countTextureCoordinates = 6;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mesh, _impl_.counttexturecoordinates_), 6>(),
+     {48, 6, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.counttexturecoordinates_)}},
+    // required int32 countNormals = 7;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mesh, _impl_.countnormals_), 7>(),
+     {56, 7, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countnormals_)}},
+    // required int32 countIndices = 8;
+    {::_pbi::TcParser::SingularVarintNoZag1<::uint32_t, offsetof(Mesh, _impl_.countindices_), 8>(),
+     {64, 8, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countindices_)}},
+    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+    {::_pbi::TcParser::FastMtS1,
+     {74, 3, 1, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.modelmaterial_)}},
+    // repeated .KuplungApp.Vec3 vertices = 10;
+    {::_pbi::TcParser::FastMtR1,
+     {82, 63, 2, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.vertices_)}},
+    // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+    {::_pbi::TcParser::FastMtR1,
+     {90, 63, 3, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.texture_coordinates_)}},
+    // repeated .KuplungApp.Vec3 normals = 12;
+    {::_pbi::TcParser::FastMtR1,
+     {98, 63, 4, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.normals_)}},
+    // repeated fixed32 indices = 13;
+    {::_pbi::TcParser::FastF32R1,
+     {109, 63, 0, PROTOBUF_FIELD_OFFSET(Mesh, _impl_.indices_)}},
+    {::_pbi::TcParser::MiniParse, {}},
+    {::_pbi::TcParser::MiniParse, {}},
+  }}, {{
+    65535, 65535
+  }}, {{
+    // required int32 ID = 1;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.id_), _Internal::kHasBitsOffset + 4, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required .KuplungApp.FBEntity File = 2;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.file_), _Internal::kHasBitsOffset + 2, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // required string ModelTitle = 3;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.modeltitle_), _Internal::kHasBitsOffset + 0, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required string MaterialTitle = 4;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.materialtitle_), _Internal::kHasBitsOffset + 1, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kRawString | ::_fl::kRepAString)},
+    // required int32 countVertices = 5;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countvertices_), _Internal::kHasBitsOffset + 5, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required int32 countTextureCoordinates = 6;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.counttexturecoordinates_), _Internal::kHasBitsOffset + 6, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required int32 countNormals = 7;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countnormals_), _Internal::kHasBitsOffset + 7, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required int32 countIndices = 8;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countindices_), _Internal::kHasBitsOffset + 8, 0,
+    (0 | ::_fl::kFcOptional | ::_fl::kInt32)},
+    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.modelmaterial_), _Internal::kHasBitsOffset + 3, 1,
+    (0 | ::_fl::kFcOptional | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .KuplungApp.Vec3 vertices = 10;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.vertices_), -1, 2,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .KuplungApp.Vec2 texture_coordinates = 11;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.texture_coordinates_), -1, 3,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated .KuplungApp.Vec3 normals = 12;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.normals_), -1, 4,
+    (0 | ::_fl::kFcRepeated | ::_fl::kMessage | ::_fl::kTvTable)},
+    // repeated fixed32 indices = 13;
+    {PROTOBUF_FIELD_OFFSET(Mesh, _impl_.indices_), -1, 0,
+    (0 | ::_fl::kFcRepeated | ::_fl::kFixed32)},
+  }}, {{
+    {::_pbi::TcParser::GetTable<::KuplungApp::FBEntity>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::MeshModelMaterial>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec2>()},
+    {::_pbi::TcParser::GetTable<::KuplungApp::Vec3>()},
+  }}, {{
+    "\17\0\0\12\15\0\0\0\0\0\0\0\0\0\0\0"
+    "KuplungApp.Mesh"
+    "ModelTitle"
+    "MaterialTitle"
+  }},
+};
+
+::uint8_t* Mesh::_InternalSerialize(
+    ::uint8_t* target,
+    ::google::protobuf::io::EpsCopyOutputStream* stream) const {
+  // @@protoc_insertion_point(serialize_to_array_start:KuplungApp.Mesh)
+  ::uint32_t cached_has_bits = 0;
+  (void)cached_has_bits;
+
+  cached_has_bits = _impl_._has_bits_[0];
   // required int32 ID = 1;
   if (cached_has_bits & 0x00000010u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(1, this->_internal_id(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<1>(
+            stream, this->_internal_id(), target);
   }
 
   // required .KuplungApp.FBEntity File = 2;
   if (cached_has_bits & 0x00000004u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        2, _Internal::file(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        2, _Internal::file(this),
+        _Internal::file(this).GetCachedSize(), target, stream);
   }
 
   // required string ModelTitle = 3;
   if (cached_has_bits & 0x00000001u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_modeltitle().data(), static_cast<int>(this->_internal_modeltitle().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.Mesh.ModelTitle");
-    target = stream->WriteStringMaybeAliased(
-        3, this->_internal_modeltitle(), target);
+    const std::string& _s = this->_internal_modeltitle();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.Mesh.ModelTitle");
+    target = stream->WriteStringMaybeAliased(3, _s, target);
   }
 
   // required string MaterialTitle = 4;
   if (cached_has_bits & 0x00000002u) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_materialtitle().data(), static_cast<int>(this->_internal_materialtitle().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "KuplungApp.Mesh.MaterialTitle");
-    target = stream->WriteStringMaybeAliased(
-        4, this->_internal_materialtitle(), target);
+    const std::string& _s = this->_internal_materialtitle();
+    ::google::protobuf::internal::WireFormat::VerifyUTF8StringNamedField(_s.data(), static_cast<int>(_s.length()), ::google::protobuf::internal::WireFormat::SERIALIZE,
+                                "KuplungApp.Mesh.MaterialTitle");
+    target = stream->WriteStringMaybeAliased(4, _s, target);
   }
 
   // required int32 countVertices = 5;
   if (cached_has_bits & 0x00000020u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(5, this->_internal_countvertices(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<5>(
+            stream, this->_internal_countvertices(), target);
   }
 
   // required int32 countTextureCoordinates = 6;
   if (cached_has_bits & 0x00000040u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(6, this->_internal_counttexturecoordinates(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<6>(
+            stream, this->_internal_counttexturecoordinates(), target);
   }
 
   // required int32 countNormals = 7;
   if (cached_has_bits & 0x00000080u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(7, this->_internal_countnormals(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<7>(
+            stream, this->_internal_countnormals(), target);
   }
 
   // required int32 countIndices = 8;
   if (cached_has_bits & 0x00000100u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteInt32ToArray(8, this->_internal_countindices(), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+        WriteInt32ToArrayWithField<8>(
+            stream, this->_internal_countindices(), target);
   }
 
   // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
   if (cached_has_bits & 0x00000008u) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(
-        9, _Internal::modelmaterial(this), target, stream);
+    target = ::google::protobuf::internal::WireFormatLite::InternalWriteMessage(
+        9, _Internal::modelmaterial(this),
+        _Internal::modelmaterial(this).GetCachedSize(), target, stream);
   }
 
   // repeated .KuplungApp.Vec3 vertices = 10;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_vertices_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(10, this->_internal_vertices(i), target, stream);
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_vertices_size()); i < n; i++) {
+    const auto& repfield = this->_internal_vertices().Get(i);
+    target = ::google::protobuf::internal::WireFormatLite::
+        InternalWriteMessage(10, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_texture_coordinates_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(11, this->_internal_texture_coordinates(i), target, stream);
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_texture_coordinates_size()); i < n; i++) {
+    const auto& repfield = this->_internal_texture_coordinates().Get(i);
+    target = ::google::protobuf::internal::WireFormatLite::
+        InternalWriteMessage(11, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated .KuplungApp.Vec3 normals = 12;
-  for (unsigned int i = 0,
-      n = static_cast<unsigned int>(this->_internal_normals_size()); i < n; i++) {
-    target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(12, this->_internal_normals(i), target, stream);
+  for (unsigned i = 0,
+      n = static_cast<unsigned>(this->_internal_normals_size()); i < n; i++) {
+    const auto& repfield = this->_internal_normals().Get(i);
+    target = ::google::protobuf::internal::WireFormatLite::
+        InternalWriteMessage(12, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated fixed32 indices = 13;
-  for (int i = 0, n = this->_internal_indices_size(); i < n; i++) {
+  for (int i = 0, n = this->_internal_indices_size(); i < n; ++i) {
     target = stream->EnsureSpace(target);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::WriteFixed32ToArray(13, this->_internal_indices(i), target);
+    target = ::_pbi::WireFormatLite::WriteFixed32ToArray(
+        13, this->_internal_indices().Get(i), target);
   }
 
   if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields(), target, stream);
+    target =
+        ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:KuplungApp.Mesh)
   return target;
 }
 
-size_t Mesh::RequiredFieldsByteSizeFallback() const {
-// @@protoc_insertion_point(required_fields_byte_size_fallback_start:KuplungApp.Mesh)
-  size_t total_size = 0;
-
-  if (_internal_has_modeltitle()) {
-    // required string ModelTitle = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_modeltitle());
-  }
-
-  if (_internal_has_materialtitle()) {
-    // required string MaterialTitle = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_materialtitle());
-  }
-
-  if (_internal_has_file()) {
-    // required .KuplungApp.FBEntity File = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *file_);
-  }
-
-  if (_internal_has_modelmaterial()) {
-    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *modelmaterial_);
-  }
-
-  if (_internal_has_id()) {
-    // required int32 ID = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_id());
-  }
-
-  if (_internal_has_countvertices()) {
-    // required int32 countVertices = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countvertices());
-  }
-
-  if (_internal_has_counttexturecoordinates()) {
-    // required int32 countTextureCoordinates = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_counttexturecoordinates());
-  }
-
-  if (_internal_has_countnormals()) {
-    // required int32 countNormals = 7;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countnormals());
-  }
-
-  if (_internal_has_countindices()) {
-    // required int32 countIndices = 8;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countindices());
-  }
-
-  return total_size;
-}
-size_t Mesh::ByteSizeLong() const {
+::size_t Mesh::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:KuplungApp.Mesh)
-  size_t total_size = 0;
+  ::size_t total_size = 0;
 
-  if (((_has_bits_[0] & 0x000001ff) ^ 0x000001ff) == 0) {  // All required fields are present.
-    // required string ModelTitle = 3;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_modeltitle());
-
-    // required string MaterialTitle = 4;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_materialtitle());
-
-    // required .KuplungApp.FBEntity File = 2;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *file_);
-
-    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
-        *modelmaterial_);
-
-    // required int32 ID = 1;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_id());
-
-    // required int32 countVertices = 5;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countvertices());
-
-    // required int32 countTextureCoordinates = 6;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_counttexturecoordinates());
-
-    // required int32 countNormals = 7;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countnormals());
-
-    // required int32 countIndices = 8;
-    total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::Int32Size(
-        this->_internal_countindices());
-
-  } else {
-    total_size += RequiredFieldsByteSizeFallback();
-  }
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+  ::uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
   // repeated .KuplungApp.Vec3 vertices = 10;
   total_size += 1UL * this->_internal_vertices_size();
-  for (const auto& msg : this->vertices_) {
+  for (const auto& msg : this->_internal_vertices()) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // repeated .KuplungApp.Vec2 texture_coordinates = 11;
   total_size += 1UL * this->_internal_texture_coordinates_size();
-  for (const auto& msg : this->texture_coordinates_) {
+  for (const auto& msg : this->_internal_texture_coordinates()) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // repeated .KuplungApp.Vec3 normals = 12;
   total_size += 1UL * this->_internal_normals_size();
-  for (const auto& msg : this->normals_) {
+  for (const auto& msg : this->_internal_normals()) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::google::protobuf::internal::WireFormatLite::MessageSize(msg);
   }
-
   // repeated fixed32 indices = 13;
   {
-    unsigned int count = static_cast<unsigned int>(this->_internal_indices_size());
-    size_t data_size = 4UL * count;
-    total_size += 1 *
-                  ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(this->_internal_indices_size());
-    total_size += data_size;
+    std::size_t data_size = std::size_t{4} *
+        ::_pbi::FromIntSize(this->_internal_indices_size())
+    ;
+    std::size_t tag_size = std::size_t{1} *
+        ::_pbi::FromIntSize(this->_internal_indices_size());
+    ;
+    total_size += tag_size + data_size;
+  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x000000ffu) {
+    // required string ModelTitle = 3;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_modeltitle());
+    }
+
+    // required string MaterialTitle = 4;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 + ::google::protobuf::internal::WireFormatLite::StringSize(
+                                      this->_internal_materialtitle());
+    }
+
+    // required .KuplungApp.FBEntity File = 2;
+    if (cached_has_bits & 0x00000004u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.file_);
+    }
+
+    // required .KuplungApp.MeshModelMaterial ModelMaterial = 9;
+    if (cached_has_bits & 0x00000008u) {
+      total_size +=
+          1 + ::google::protobuf::internal::WireFormatLite::MessageSize(*_impl_.modelmaterial_);
+    }
+
+    // required int32 ID = 1;
+    if (cached_has_bits & 0x00000010u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_id());
+    }
+
+    // required int32 countVertices = 5;
+    if (cached_has_bits & 0x00000020u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_countvertices());
+    }
+
+    // required int32 countTextureCoordinates = 6;
+    if (cached_has_bits & 0x00000040u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_counttexturecoordinates());
+    }
+
+    // required int32 countNormals = 7;
+    if (cached_has_bits & 0x00000080u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+          this->_internal_countnormals());
+    }
+
+  }
+  // required int32 countIndices = 8;
+  if (cached_has_bits & 0x00000100u) {
+    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(
+        this->_internal_countindices());
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    return ::PROTOBUF_NAMESPACE_ID::internal::ComputeUnknownFieldsSize(
-        _internal_metadata_, total_size, &_cached_size_);
-  }
-  int cached_size = ::PROTOBUF_NAMESPACE_ID::internal::ToCachedSize(total_size);
-  SetCachedSize(cached_size);
-  return total_size;
+  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-void Mesh::MergeFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:KuplungApp.Mesh)
-  GOOGLE_DCHECK_NE(&from, this);
-  const Mesh* source =
-      ::PROTOBUF_NAMESPACE_ID::DynamicCastToGenerated<Mesh>(
-          &from);
-  if (source == nullptr) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:KuplungApp.Mesh)
-    ::PROTOBUF_NAMESPACE_ID::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:KuplungApp.Mesh)
-    MergeFrom(*source);
-  }
+const ::google::protobuf::Message::ClassData Mesh::_class_data_ = {
+    Mesh::MergeImpl,
+    nullptr,  // OnDemandRegisterArenaDtor
+};
+const ::google::protobuf::Message::ClassData* Mesh::GetClassData() const {
+  return &_class_data_;
 }
 
-void Mesh::MergeFrom(const Mesh& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Mesh)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::uint32 cached_has_bits = 0;
+void Mesh::MergeImpl(::google::protobuf::Message& to_msg, const ::google::protobuf::Message& from_msg) {
+  auto* const _this = static_cast<Mesh*>(&to_msg);
+  auto& from = static_cast<const Mesh&>(from_msg);
+  // @@protoc_insertion_point(class_specific_merge_from_start:KuplungApp.Mesh)
+  ABSL_DCHECK_NE(&from, _this);
+  ::uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  vertices_.MergeFrom(from.vertices_);
-  texture_coordinates_.MergeFrom(from.texture_coordinates_);
-  normals_.MergeFrom(from.normals_);
-  indices_.MergeFrom(from.indices_);
-  cached_has_bits = from._has_bits_[0];
+  _this->_internal_mutable_vertices()->MergeFrom(
+      from._internal_vertices());
+  _this->_internal_mutable_texture_coordinates()->MergeFrom(
+      from._internal_texture_coordinates());
+  _this->_internal_mutable_normals()->MergeFrom(
+      from._internal_normals());
+  _this->_internal_mutable_indices()->MergeFrom(from._internal_indices());
+  cached_has_bits = from._impl_._has_bits_[0];
   if (cached_has_bits & 0x000000ffu) {
     if (cached_has_bits & 0x00000001u) {
-      _has_bits_[0] |= 0x00000001u;
-      modeltitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.modeltitle_);
+      _this->_internal_set_modeltitle(from._internal_modeltitle());
     }
     if (cached_has_bits & 0x00000002u) {
-      _has_bits_[0] |= 0x00000002u;
-      materialtitle_.AssignWithDefault(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), from.materialtitle_);
+      _this->_internal_set_materialtitle(from._internal_materialtitle());
     }
     if (cached_has_bits & 0x00000004u) {
-      _internal_mutable_file()->::KuplungApp::FBEntity::MergeFrom(from._internal_file());
+      _this->_internal_mutable_file()->::KuplungApp::FBEntity::MergeFrom(
+          from._internal_file());
     }
     if (cached_has_bits & 0x00000008u) {
-      _internal_mutable_modelmaterial()->::KuplungApp::MeshModelMaterial::MergeFrom(from._internal_modelmaterial());
+      _this->_internal_mutable_modelmaterial()->::KuplungApp::MeshModelMaterial::MergeFrom(
+          from._internal_modelmaterial());
     }
     if (cached_has_bits & 0x00000010u) {
-      id_ = from.id_;
+      _this->_impl_.id_ = from._impl_.id_;
     }
     if (cached_has_bits & 0x00000020u) {
-      countvertices_ = from.countvertices_;
+      _this->_impl_.countvertices_ = from._impl_.countvertices_;
     }
     if (cached_has_bits & 0x00000040u) {
-      counttexturecoordinates_ = from.counttexturecoordinates_;
+      _this->_impl_.counttexturecoordinates_ = from._impl_.counttexturecoordinates_;
     }
     if (cached_has_bits & 0x00000080u) {
-      countnormals_ = from.countnormals_;
+      _this->_impl_.countnormals_ = from._impl_.countnormals_;
     }
-    _has_bits_[0] |= cached_has_bits;
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
   if (cached_has_bits & 0x00000100u) {
-    _internal_set_countindices(from._internal_countindices());
+    _this->_internal_set_countindices(from._internal_countindices());
   }
-}
-
-void Mesh::CopyFrom(const ::PROTOBUF_NAMESPACE_ID::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:KuplungApp.Mesh)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+  _this->_internal_metadata_.MergeFrom<::google::protobuf::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Mesh::CopyFrom(const Mesh& from) {
@@ -4436,77 +4037,58 @@ void Mesh::CopyFrom(const Mesh& from) {
   MergeFrom(from);
 }
 
-bool Mesh::IsInitialized() const {
-  if ((_has_bits_[0] & 0x000001ff) != 0x000001ff) return false;
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(vertices_)) return false;
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(texture_coordinates_)) return false;
-  if (!::PROTOBUF_NAMESPACE_ID::internal::AllAreInitialized(normals_)) return false;
-  if (_internal_has_file()) {
-    if (!file_->IsInitialized()) return false;
+PROTOBUF_NOINLINE bool Mesh::IsInitialized() const {
+  if (_Internal::MissingRequiredFields(_impl_._has_bits_)) {
+    return false;
   }
-  if (_internal_has_modelmaterial()) {
-    if (!modelmaterial_->IsInitialized()) return false;
+  if (!::google::protobuf::internal::AllAreInitialized(_internal_vertices()))
+    return false;
+  if (!::google::protobuf::internal::AllAreInitialized(_internal_texture_coordinates()))
+    return false;
+  if (!::google::protobuf::internal::AllAreInitialized(_internal_normals()))
+    return false;
+  if ((_impl_._has_bits_[0] & 0x00000004u) != 0) {
+    if (!_impl_.file_->IsInitialized()) return false;
+  }
+  if ((_impl_._has_bits_[0] & 0x00000008u) != 0) {
+    if (!_impl_.modelmaterial_->IsInitialized()) return false;
   }
   return true;
 }
 
-void Mesh::InternalSwap(Mesh* other) {
+::_pbi::CachedSize* Mesh::AccessCachedSize() const {
+  return &_impl_._cached_size_;
+}
+void Mesh::InternalSwap(Mesh* PROTOBUF_RESTRICT other) {
   using std::swap;
-  _internal_metadata_.Swap(&other->_internal_metadata_);
-  swap(_has_bits_[0], other->_has_bits_[0]);
-  vertices_.InternalSwap(&other->vertices_);
-  texture_coordinates_.InternalSwap(&other->texture_coordinates_);
-  normals_.InternalSwap(&other->normals_);
-  indices_.InternalSwap(&other->indices_);
-  modeltitle_.Swap(&other->modeltitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  materialtitle_.Swap(&other->materialtitle_, &::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(),
-    GetArenaNoVirtual());
-  swap(file_, other->file_);
-  swap(modelmaterial_, other->modelmaterial_);
-  swap(id_, other->id_);
-  swap(countvertices_, other->countvertices_);
-  swap(counttexturecoordinates_, other->counttexturecoordinates_);
-  swap(countnormals_, other->countnormals_);
-  swap(countindices_, other->countindices_);
+  auto* arena = GetArena();
+  ABSL_DCHECK_EQ(arena, other->GetArena());
+  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
+  _impl_.vertices_.InternalSwap(&other->_impl_.vertices_);
+  _impl_.texture_coordinates_.InternalSwap(&other->_impl_.texture_coordinates_);
+  _impl_.normals_.InternalSwap(&other->_impl_.normals_);
+  _impl_.indices_.InternalSwap(&other->_impl_.indices_);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.modeltitle_, &other->_impl_.modeltitle_, arena);
+  ::_pbi::ArenaStringPtr::InternalSwap(&_impl_.materialtitle_, &other->_impl_.materialtitle_, arena);
+  ::google::protobuf::internal::memswap<
+      PROTOBUF_FIELD_OFFSET(Mesh, _impl_.countindices_)
+      + sizeof(Mesh::_impl_.countindices_)
+      - PROTOBUF_FIELD_OFFSET(Mesh, _impl_.file_)>(
+          reinterpret_cast<char*>(&_impl_.file_),
+          reinterpret_cast<char*>(&other->_impl_.file_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Mesh::GetMetadata() const {
-  return GetMetadataStatic();
+::google::protobuf::Metadata Mesh::GetMetadata() const {
+  return ::_pbi::AssignDescriptors(
+      &descriptor_table_KuplungDefinitions_2eproto_getter, &descriptor_table_KuplungDefinitions_2eproto_once,
+      file_level_metadata_KuplungDefinitions_2eproto[8]);
 }
-
-
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace KuplungApp
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::KuplungApp::Vec2* Arena::CreateMaybeMessage< ::KuplungApp::Vec2 >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::Vec2 >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::Vec3* Arena::CreateMaybeMessage< ::KuplungApp::Vec3 >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::Vec3 >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::Vec4* Arena::CreateMaybeMessage< ::KuplungApp::Vec4 >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::Vec4 >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::ObjectCoordinate* Arena::CreateMaybeMessage< ::KuplungApp::ObjectCoordinate >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::ObjectCoordinate >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::FBEntity* Arena::CreateMaybeMessage< ::KuplungApp::FBEntity >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::FBEntity >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::MaterialColor* Arena::CreateMaybeMessage< ::KuplungApp::MaterialColor >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::MaterialColor >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::MeshMaterialTextureImage* Arena::CreateMaybeMessage< ::KuplungApp::MeshMaterialTextureImage >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::MeshMaterialTextureImage >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::MeshModelMaterial* Arena::CreateMaybeMessage< ::KuplungApp::MeshModelMaterial >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::MeshModelMaterial >(arena);
-}
-template<> PROTOBUF_NOINLINE ::KuplungApp::Mesh* Arena::CreateMaybeMessage< ::KuplungApp::Mesh >(Arena* arena) {
-  return Arena::CreateInternal< ::KuplungApp::Mesh >(arena);
-}
-PROTOBUF_NAMESPACE_CLOSE
-
+namespace google {
+namespace protobuf {
+}  // namespace protobuf
+}  // namespace google
 // @@protoc_insertion_point(global_scope)
-#include <google/protobuf/port_undef.inc>
+#include "google/protobuf/port_undef.inc"
