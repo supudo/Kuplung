@@ -50,7 +50,11 @@ std::vector<MeshModel> objParserCuda::parse(const FBEntity& file, const std::vec
     ifs.close();
 
     std::string objFileContents;
-    FILE *fp = fopen(this->file.path.c_str(), "rb");
+    auto fp = fopen(this->file.path.c_str(), "rb");
+    if (!f) {
+      Settings::Instance()->funcDoLog("[Kuplung] Could not parse obj file!");
+      return false;
+    }
     fseek(fp, 0, SEEK_END);
     int file_size = ftell(fp);
     char *buf = new char[file_size + 1];

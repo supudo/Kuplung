@@ -173,8 +173,10 @@ void DialogStyle::saveStyles(std::string const& fontfile, std::string const& fon
   }
 
   std::ofstream out(styleFilePath);
-  out << style_txt;
-  out.close();
+  if (out.is_open()) {
+    out << style_txt;
+    out.close();
+  }
 }
 
 const std::vector<std::string> DialogStyle::splitString(const std::string& s, const std::regex& delimiter) const {

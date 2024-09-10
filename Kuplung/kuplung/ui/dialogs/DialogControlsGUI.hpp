@@ -41,6 +41,9 @@ private:
   oceanFFT* cudaOceanFFT;
 #endif
 
+  void drawGlobalItems();
+  void drawPropertiesPane(bool* isFrame);
+
   void setHeightmapImage(std::string const& heightmapImage);
   std::string heightmapImage;
   int heightmapWidth, heightmapHeight;

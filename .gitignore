@@ -78,5 +78,5 @@ DerivedData
 xcuserdata/*
 
 # protobuf generated files
-Kuplung/kuplung/utilities/saveopen/*.pb.h
-Kuplung/kuplung/utilities/saveopen/*.pb.cc
+Kuplung/**/*.pb.h
+Kuplung/**/*.pb.cc

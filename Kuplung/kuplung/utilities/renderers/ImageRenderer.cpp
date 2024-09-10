@@ -11,9 +11,6 @@
 ImageRenderer::ImageRenderer(ObjectsManager &managerObjects) : managerObjects(managerObjects) {
 }
 
-ImageRenderer::~ImageRenderer() {
-}
-
 void ImageRenderer::init() {
   this->rendererScene = std::make_unique<SceneRenderer>(this->managerObjects);
   this->rendererScene->init();

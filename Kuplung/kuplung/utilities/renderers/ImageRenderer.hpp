@@ -26,7 +26,6 @@ typedef enum ImageRendererType {
 class ImageRenderer {
 public:
   explicit ImageRenderer(ObjectsManager &managerObjects);
-  ~ImageRenderer();
   void init();
   const std::string renderImage(ImageRendererType type, const FBEntity& file, std::vector<ModelFaceBase*> *meshModelFaces) const;
   void showSpecificSettings(ImageRendererType type) const;

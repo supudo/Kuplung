@@ -138,7 +138,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
     while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
       singleLine = fileContents.substr(0, pos);
 
-      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine == "\\r\\n") {
         fileContents.erase(0, pos + nlDelimiter.length());
         fileCounter = 0;
         continue;
@@ -182,8 +182,10 @@ void ConfigUtils::saveRecentFilesImported(std::vector<FBEntity> const& recentFil
     recentFilesLines += nlDelimiter;
   }
   std::ofstream out(this->recentFilesFileImported, std::ios_base::trunc);
-  out << recentFilesLines;
-  out.close();
+  if (out.is_open()) {
+    out << recentFilesLines;
+    out.close();
+  }
 }
 
 std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
@@ -215,7 +217,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
     while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
       singleLine = fileContents.substr(0, pos);
 
-      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine == "\\r\\n") {
         fileContents.erase(0, pos + nlDelimiter.length());
         fileCounter = 0;
         continue;
@@ -268,7 +270,7 @@ void ConfigUtils::readFile() {
     while ((pos = fileContents.find(nlDelimiter)) != std::string::npos) {
       singleLine = fileContents.substr(0, pos);
 
-      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine.at(0) == '\r\n') {
+      if (singleLine.empty() || singleLine.at(0) == '#' || singleLine.at(0) == '\n' || singleLine.at(0) == '\r' || singleLine == "\\r\\n") {
         fileContents.erase(0, pos + nlDelimiter.length());
         continue;
       }

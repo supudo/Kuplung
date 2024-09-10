@@ -393,7 +393,7 @@ const nlohmann::json ExporterGLTF::copyImage(std::string imagePath) const {
     std::string imageFilename = imagePath.substr(imagePath.find_last_of("\\/"));
     boost::replace_all(imageFilename, "/", "");
     std::string newImagePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/")) + "/" + this->exportFile.title + "/" + imageFilename;
-    boost::filesystem::copy_file(imagePath, newImagePath, boost::filesystem::copy_option::overwrite_if_exists);
+    boost::filesystem::copy_file(imagePath, newImagePath, boost::filesystem::copy_options::overwrite_existing);
     j["uri"] = imageFilename;
     return j;
 }
@@ -432,8 +432,10 @@ const bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) const {
     fileName = fileName.substr(0, fileName.size() - 4);
 
   std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");
-  out << std::setw(4) << jsonObj << std::endl;
-  out.close();
+  if (out.is_open()) {
+    out << std::setw(4) << jsonObj << std::endl;
+    out.close();
+  }
 
 	return true;
 }
