@@ -15,7 +15,7 @@
 #include <functional>
 #include <map>
 #include <string>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 class ExportOBJ {
 public:
@@ -31,7 +31,7 @@ private:
   const std::string convertSize(size_t size) const;
   const double roundOff(double n) const;
   void modalNewFolder();
-  const bool isHidden(const boost::filesystem::path &p) const;
+  const bool isHidden(const std::filesystem::path &p) const;
 
   bool showNewFolderModel;
   float panelWidth_FileOptions, panelWidth_FileOptionsMin;

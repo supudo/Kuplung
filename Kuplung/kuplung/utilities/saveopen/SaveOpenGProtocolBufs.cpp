@@ -66,8 +66,8 @@ void SaveOpenGProtocolBufs::saveKuplungFile(const FBEntity& file, std::unique_pt
   this->managerZip->addFileToArchive(fileNameScene.c_str(), fileNameZipScene.c_str());
   this->managerZip->closeZipFile();
 
-  boost::filesystem::remove(fileNameSettings.c_str());
-  boost::filesystem::remove(fileNameScene.c_str());
+  std::filesystem::remove(fileNameSettings.c_str());
+  std::filesystem::remove(fileNameScene.c_str());
 }
 
 std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(const FBEntity& file, std::unique_ptr<ObjectsManager>& managerObjects) {
@@ -107,8 +107,8 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(const FBEntit
       kuplungFileScene.close();
     }
 
-    boost::filesystem::remove(fileNameSettings.c_str());
-    boost::filesystem::remove(fileNameScene.c_str());
+    std::filesystem::remove(fileNameSettings.c_str());
+    std::filesystem::remove(fileNameScene.c_str());
   }
   else
     Settings::Instance()->funcDoLog("[KuplungSave Protobuf] Cannot unzip .kuplung file!");

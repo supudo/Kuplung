@@ -10,7 +10,7 @@
 #include <fstream>
 #include <numeric>
 #include <sstream>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <boost/algorithm/string.hpp>
 
 objParser1::~objParser1() {
@@ -323,7 +323,7 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
 
     std::string folderPath = this->file.path;
     boost::replace_all(folderPath, this->file.title, "");
-    if (!boost::filesystem::exists(materialImage.Image) && !boost::filesystem::path(materialImage.Image).is_absolute())
+    if (!std::filesystem::exists(materialImage.Image) && !std::filesystem::path(materialImage.Image).is_absolute())
         materialImage.Image = folderPath + materialImage.Image;
 
     std::regex pathSeparator("/");

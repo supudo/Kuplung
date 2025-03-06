@@ -8,16 +8,8 @@
 
 #include "Settings.h"
 #include <SDL2/SDL.h>
-#ifdef _WIN32
-#undef main
-#include <boost/filesystem.hpp>
 #include <iostream>
-#elif __APPLE__
-#include "CoreFoundation/CoreFoundation.h"
-#else
-#include <boost/filesystem.hpp>
-#include <iostream>
-#endif
+#include <filesystem>
 #include <assimp/Exporter.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/importerdesc.h>
@@ -196,10 +188,8 @@ std::string Settings::appFolder() {
     printf("Can't open bundle folder!\n");
   CFRelease(resourcesURL);
   return std::string(folder);
-#elif _WIN32
-  return boost::filesystem::current_path().string() + "/resources";
 #else
-  return boost::filesystem::current_path().string() + "/resources";
+  return std::filesystem::current_path().string() + "/resources";
 #endif
 }
 

@@ -12,7 +12,7 @@
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 DialogControlsModels::DialogControlsModels(ObjectsManager& managerObjects)
     : managerObjects(managerObjects)
@@ -63,7 +63,7 @@ void DialogControlsModels::init(SDL_Window* sdlWindow, const std::function<void(
 }
 
 void DialogControlsModels::createTextureBuffer(std::string imageFile, GLuint* vboBuffer, int* width, int* height) const {
-  if (!boost::filesystem::exists(imageFile))
+  if (!std::filesystem::exists(imageFile))
     imageFile = Settings::Instance()->currentFolder + "/" + imageFile;
   int tChannels;
   unsigned char* tPixels = stbi_load(imageFile.c_str(), width, height, &tChannels, 0);
@@ -160,7 +160,7 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
     if (ImGui::IsItemHovered())
       ImGui::SetTooltip("%s", ("Show/Hide " + title + " Texture").c_str());
     ImGui::SameLine();
-    if (ImGui::Button((ICON_FA_TIMES + chkLabel).c_str())) {
+    if (ImGui::Button(((char*)ICON_FA_TIMES + chkLabel).c_str())) {
       *loadTexture = false;
       assert(texType == MaterialTextureType_Ambient || texType == MaterialTextureType_Dissolve || texType == MaterialTextureType_Bump || texType == MaterialTextureType_Specular || texType == MaterialTextureType_SpecularExp || texType == MaterialTextureType_Displacement || texType == MaterialTextureType_Undefined);
       switch (texType) {
@@ -205,12 +205,12 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
       }
     }
     ImGui::SameLine();
-    if (ImGui::Button((ICON_FA_EYE + chkLabel).c_str())) {
+    if (ImGui::Button(((char*)ICON_FA_EYE + chkLabel).c_str())) {
       *showWindow = !*showWindow;
       *loadTexture = true;
     }
     ImGui::SameLine();
-    if (ImGui::Button((ICON_FA_PENCIL + chkLabel).c_str())) {
+    if (ImGui::Button(((char*)ICON_FA_PENCIL + chkLabel).c_str())) {
       this->componentUVEditor->setModel((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)], texType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
       this->showUVEditor = true;
     }
@@ -221,7 +221,7 @@ void DialogControlsModels::showTextureLine(std::string const& chkLabel, Material
     ImGui::Text("%s: %s", title.c_str(), image.c_str());
   }
   else {
-    std::string btnLabel = ICON_FA_EYE " Add Texture " + Kuplung_getTextureName(texType);
+    std::string btnLabel = (char*)ICON_FA_EYE " Add Texture " + Kuplung_getTextureName(texType);
     if (ImGui::Button(btnLabel.c_str())) {
       this->showUVEditor = true;
       this->componentUVEditor->setModel((*this->meshModelFaces)[static_cast<size_t>(this->selectedObject)], texType, "", std::bind(&DialogControlsModels::processTexture, this, std::placeholders::_1));
@@ -293,7 +293,7 @@ void DialogControlsModels::render(bool* show, bool* isFrame, std::vector<ModelFa
   ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.7f, 0.7f)));
   ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
-  const char* tabsPanels[] = {"\n  " ICON_MD_BUILD "  ", "\n  " ICON_MD_ADD "  "};
+  const char* tabsPanels[] = {(char*)"\n  " ICON_MD_BUILD "  ", (char*)"\n  " ICON_MD_ADD "  "};
   const char* tabsPanelsLabels[] = {"Models", "Create"};
   const int numTabsPanels = sizeof(tabsPanels) / sizeof(tabsPanels[0]);
   ImGui::TabLabels(numTabsPanels, tabsPanels, this->selectedTabPanel, ImVec2(50.0, 30.0), tabsPanelsLabels);
@@ -461,14 +461,14 @@ void DialogControlsModels::drawModels(bool* isFrame, std::vector<ModelFaceBase*>
     ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
     const char* tabsScene[] = {
-      "\n" ICON_MD_TRANSFORM,
-      "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
-      "\n" ICON_MD_3D_ROTATION,
-      "\n" ICON_MD_OPEN_WITH,
-      "\n" ICON_MD_TOLL,
-      "\n" ICON_MD_FORMAT_PAINT,
-      "\n" ICON_MD_BLUR_ON,
-      "\n" ICON_MD_LIGHTBULB_OUTLINE,
+      (char*)"\n" ICON_MD_TRANSFORM,
+      (char*)"\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+      (char*)"\n" ICON_MD_3D_ROTATION,
+      (char*)"\n" ICON_MD_OPEN_WITH,
+      (char*)"\n" ICON_MD_TOLL,
+      (char*)"\n" ICON_MD_FORMAT_PAINT,
+      (char*)"\n" ICON_MD_BLUR_ON,
+      (char*)"\n" ICON_MD_LIGHTBULB_OUTLINE,
     };
     const char* tabsLabelsScene[] = {"General", "Scale", "Rotate", "Translate", "Displace", "Material", "Effects", "Illumination"};
     const int numTabsScene = sizeof(tabsScene) / sizeof(tabsScene[0]);

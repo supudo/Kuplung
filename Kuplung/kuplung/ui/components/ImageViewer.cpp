@@ -9,7 +9,7 @@
 #include "ImageViewer.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 void ImageViewer::showImage(bool* show) {
   if (this->genTexture)
@@ -41,7 +41,7 @@ void ImageViewer::showImage(bool* show) {
 }
 
 void ImageViewer::createTextureBuffer() {
-  if (!boost::filesystem::exists(this->imagePath))
+  if (!std::filesystem::exists(this->imagePath))
     this->imagePath = Settings::Instance()->currentFolder + "/" + this->imagePath;
   int tChannels;
   unsigned char* tPixels = stbi_load(this->imagePath.c_str(), &this->tWidth, &this->tHeight, &tChannels, 0);

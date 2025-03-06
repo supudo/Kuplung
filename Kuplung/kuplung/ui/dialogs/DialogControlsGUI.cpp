@@ -46,7 +46,7 @@ void DialogControlsGUI::drawGlobalItems() {
     switch (i) {
       case 0: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_ASTERISK " General", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_ASTERISK " General", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -55,7 +55,7 @@ void DialogControlsGUI::drawGlobalItems() {
       }
       case 1: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_EYE " Camera", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_EYE " Camera", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -64,7 +64,7 @@ void DialogControlsGUI::drawGlobalItems() {
       }
       case 2: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_VIDEO_CAMERA " Camera ModelFace", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_VIDEO_CAMERA " Camera ModelFace", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -73,7 +73,7 @@ void DialogControlsGUI::drawGlobalItems() {
       }
       case 3: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_BARS " Grid", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_BARS " Grid", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -82,7 +82,7 @@ void DialogControlsGUI::drawGlobalItems() {
       }
       case 4: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_SUN_O " Scene Lights", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_SUN_O " Scene Lights", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -91,7 +91,7 @@ void DialogControlsGUI::drawGlobalItems() {
       }
       case 5: {
         ImGui::Indent();
-        if (ImGui::Selectable(ICON_FA_TREE " Skybox", this->selectedObject == i)) {
+        if (ImGui::Selectable((char*)ICON_FA_TREE " Skybox", this->selectedObject == i)) {
           this->selectedObject = i;
           this->selectedObjectLight = -1;
         }
@@ -101,11 +101,11 @@ void DialogControlsGUI::drawGlobalItems() {
       case 6: {
         if (this->managerObjects.lightSources.size() == 0) {
           ImGui::Indent();
-          ImGui::Text(ICON_FA_LIGHTBULB_O " Lights");
+          ImGui::Text((char*)ICON_FA_LIGHTBULB_O " Lights");
           ImGui::Unindent();
         }
         else {
-          if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Lights")) {
+          if (ImGui::TreeNode((char*)ICON_FA_LIGHTBULB_O " Lights")) {
             for (size_t j = 0; j < this->managerObjects.lightSources.size(); j++) {
               ImGui::Bullet();
               if (ImGui::Selectable(this->managerObjects.lightSources[j]->title.c_str(), this->selectedObjectLight == int(j))) {
@@ -119,7 +119,7 @@ void DialogControlsGUI::drawGlobalItems() {
         break;
       }
       case 7: {
-        if (ImGui::TreeNode(ICON_FA_LIGHTBULB_O " Artefacts")) {
+        if (ImGui::TreeNode((char*)ICON_FA_LIGHTBULB_O " Artefacts")) {
           ImGui::Bullet();
           if (ImGui::Selectable("Terrain", this->selectedObjectArtefact == 0)) {
             this->selectedObjectArtefact = 0;
@@ -335,9 +335,9 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
       const char* tabsGUICamera[] = {
-        "\n" ICON_MD_REMOVE_RED_EYE,
-        "\n" ICON_MD_3D_ROTATION,
-        "\n" ICON_MD_OPEN_WITH,
+          (char*)"\n" ICON_MD_REMOVE_RED_EYE,
+          (char*)"\n" ICON_MD_3D_ROTATION,
+          (char*)"\n" ICON_MD_OPEN_WITH,
       };
       const char* tabsLabelsGUICamera[] = {"Look At", "Rotate", "Translate"};
       const int numTabsGUICamera = sizeof(tabsGUICamera) / sizeof(tabsGUICamera[0]);
@@ -399,9 +399,9 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
       const char* tabsGUICameraModel[] = {
-        "\n" ICON_MD_TRANSFORM,
-        "\n" ICON_MD_OPEN_WITH,
-        "\n" ICON_MD_3D_ROTATION,
+          (char*)"\n" ICON_MD_TRANSFORM,
+          (char*)"\n" ICON_MD_OPEN_WITH,
+          (char*)"\n" ICON_MD_3D_ROTATION,
       };
       const char* tabsLabelsGUICameraModel[] = {"General", "Position", "Rotate"};
       const int numTabsGUICameraModel = sizeof(tabsGUICameraModel) / sizeof(tabsGUICameraModel[0]);
@@ -456,10 +456,10 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f)));
 
       const char* tabsGUIGrid[] = {
-        "\n" ICON_MD_TRANSFORM,
-        "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
-        "\n" ICON_MD_3D_ROTATION,
-        "\n" ICON_MD_OPEN_WITH,
+          (char*)"\n" ICON_MD_TRANSFORM,
+          (char*)"\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+          (char*)"\n" ICON_MD_3D_ROTATION,
+          (char*)"\n" ICON_MD_OPEN_WITH,
       };
       const char* tabsLabelsGUIGrid[] = {"General", "Scale", "Rotate", "Translate"};
       const int numTabsGUIGrid = sizeof(tabsGUIGrid) / sizeof(tabsGUIGrid[0]);
@@ -566,11 +566,11 @@ void DialogControlsGUI::drawPropertiesPane(bool* isFrame) {
       ImGui::PushStyleColor(ImGuiCol_ButtonActive, (ImVec4)ImColor::HSV(0.1f / 7.0f, 0.8f, 0.8f));
 
       const char* tabsGUILight[] = {
-        "\n" ICON_MD_TRANSFORM,
-        "\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
-        "\n" ICON_MD_3D_ROTATION,
-        "\n" ICON_MD_OPEN_WITH,
-        "\n" ICON_MD_COLOR_LENS,
+          (char*)"\n" ICON_MD_TRANSFORM,
+          (char*)"\n" ICON_MD_PHOTO_SIZE_SELECT_SMALL,
+          (char*)"\n" ICON_MD_3D_ROTATION,
+          (char*)"\n" ICON_MD_OPEN_WITH,
+          (char*)"\n" ICON_MD_COLOR_LENS,
       };
       const char* tabsLabelsGUILight[] = {"General", "Scale", "Rotate", "Translate", "Colors"};
       const int numTabsGUILight = sizeof(tabsGUILight) / sizeof(tabsGUILight[0]);

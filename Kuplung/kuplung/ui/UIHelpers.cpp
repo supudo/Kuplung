@@ -86,7 +86,7 @@ const bool UIHelpers::addControlsSliderSameLine(std::string const& title, const 
 
 void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bool* bValue) const {
   std::string ce_id = "##101" + title;
-  std::string icon_id = ICON_MD_COLORIZE + ce_id;
+  std::string icon_id = (char*)ICON_MD_COLORIZE + ce_id;
   ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, 255.0), "%s", title.c_str());
   ImGui::ColorEdit3(ce_id.c_str(), (float*)vValue);
   ImGui::SameLine();
@@ -103,7 +103,7 @@ void UIHelpers::addControlColor3(std::string const& title, glm::vec3* vValue, bo
 
 void UIHelpers::addControlColor4(std::string const& title, glm::vec4* vValue, bool* bValue) const {
   std::string ce_id = "##101" + title;
-  std::string icon_id = ICON_MD_COLORIZE + ce_id;
+  std::string icon_id = (char*)ICON_MD_COLORIZE + ce_id;
   ImGui::TextColored(ImVec4(vValue->r, vValue->g, vValue->b, vValue->a), "%s", title.c_str());
   ImGui::ColorEdit4(ce_id.c_str(), (float*)vValue, true);
   ImGui::SameLine();

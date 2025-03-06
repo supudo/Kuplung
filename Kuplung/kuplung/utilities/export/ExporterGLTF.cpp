@@ -10,7 +10,7 @@
 #include <fstream>
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <boost/filesystem/path.hpp>
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/cpp-base64/base64.h"
@@ -393,7 +393,7 @@ const nlohmann::json ExporterGLTF::copyImage(std::string imagePath) const {
     std::string imageFilename = imagePath.substr(imagePath.find_last_of("\\/"));
     boost::replace_all(imageFilename, "/", "");
     std::string newImagePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/")) + "/" + this->exportFile.title + "/" + imageFilename;
-    boost::filesystem::copy_file(imagePath, newImagePath, boost::filesystem::copy_option::overwrite_if_exists);
+    std::filesystem::copy_file(imagePath, newImagePath, std::filesystem::copy_options::overwrite_existing);
     j["uri"] = imageFilename;
     return j;
 }
@@ -401,9 +401,9 @@ const nlohmann::json ExporterGLTF::copyImage(std::string imagePath) const {
 void ExporterGLTF::prepFolderLocation() {
   std::string folder = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
   std::string newFolder = folder + "/" + this->exportFile.title;
-  if (!boost::filesystem::exists(newFolder)) {
-    boost::filesystem::path dir(newFolder);
-    if (!boost::filesystem::create_directory(dir))
+  if (!std::filesystem::exists(newFolder)) {
+    std::filesystem::path dir(newFolder);
+    if (!std::filesystem::create_directory(dir))
       Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[ExportGLTF] Cannot create destination folder : %s!", newFolder.c_str()));
   }
   this->exportFileFolder = newFolder;

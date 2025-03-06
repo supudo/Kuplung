@@ -12,15 +12,6 @@
 #include "kuplung/utilities/imgui/imguizmo/ImGuizmo.h"
 #include <glm/glm.hpp>
 
-#ifdef _WIN32
-#  include <boost/filesystem/operations.hpp>
-#  include <boost/filesystem/path.hpp>
-#  include <shlobj.h>
-#elif defined(__APPLE__)
-#  include <CoreFoundation/CoreFoundation.h>
-#  include <boost/algorithm/string/replace.hpp>
-#endif
-
 Kuplung::Kuplung() {
   this->sdlWindow = NULL;
   this->glContext = NULL;
@@ -246,62 +237,51 @@ bool Kuplung::init() {
 }
 
 void Kuplung::initFolders() {
-  //char *data_path = NULL;
-  //char *base_path = SDL_GetBasePath();
-  //if (base_path)
-  //    data_path = base_path;
-  //else
-  //    data_path = SDL_strdup("./");
-  //Settings::Instance()->currentFolder = data_path;
 
   std::string homeFolder(""), iniFolder("");
 #ifdef _WIN32
-  char const* hdrive = getenv("HOMEDRIVE");
-  char const* hpath = getenv("HOMEPATH");
-  homeFolder = std::string(hdrive) + std::string(hpath);
+  homeFolder.append(getenv("LOCALAPPDATA"));
+  homeFolder.append("\\supudo.net");
+  std::filesystem::path supudoFolder(homeFolder.c_str());
+  if (!std::filesystem::exists(supudoFolder))
+    std::filesystem::create_directory(supudoFolder);
+  homeFolder += "\\Kuplung";
+  std::filesystem::path supudoFolderKuplung(homeFolder.c_str());
+  if (!std::filesystem::exists(supudoFolderKuplung))
+    std::filesystem::create_directory(supudoFolderKuplung);
 
-  TCHAR szPath[MAX_PATH];
-  if (SUCCEEDED(SHGetFolderPath(NULL, CSIDL_LOCAL_APPDATA, NULL, 0, szPath))) {
-    std::string folderLocalAppData("");
-#  ifndef UNICODE
-    folderLocalAppData = szPath;
-#  else
-    std::wstring folderLocalAppDataW = szPath;
-    folderLocalAppData = std::string(folderLocalAppDataW.begin(), folderLocalAppDataW.end());
-#  endif
-    //std::string folderLocalAppData(szPath);
-    folderLocalAppData += "\\supudo.net";
-    if (!boost::filesystem::exists(folderLocalAppData))
-      boost::filesystem::create_directory(folderLocalAppData);
-    folderLocalAppData += "\\Kuplung";
-    if (!boost::filesystem::exists(folderLocalAppData))
-      boost::filesystem::create_directory(folderLocalAppData);
-
-    std::string current_folder = boost::filesystem::current_path().string() + "\\resources";
-    std::string fName("");
-
-    fName = "Kuplung_Settings.ini";
-    std::string iniFileSource(current_folder + "\\" + fName);
-    std::string iniFileDestination = folderLocalAppData + "\\" + fName;
-    if (!boost::filesystem::exists(iniFileDestination))
-      boost::filesystem::copy(iniFileSource, iniFileDestination);
-
-    fName = "Kuplung_RecentFiles.ini";
-    std::string iniFileRecentSource(current_folder + "\\" + fName);
-    std::string iniFileRecentDestination = folderLocalAppData + "\\" + fName;
-    if (!boost::filesystem::exists(iniFileRecentDestination))
-      boost::filesystem::copy(iniFileRecentSource, iniFileRecentDestination);
-
-    fName = "Kuplung_RecentFilesImported.ini";
-    std::string iniFileRecentImportedSource(current_folder + "\\" + fName);
-    std::string iniFileRecentImportedDestination = folderLocalAppData + "\\" + fName;
-    if (!boost::filesystem::exists(iniFileRecentImportedDestination))
-      boost::filesystem::copy(iniFileRecentImportedSource, iniFileRecentImportedDestination);
-
-    iniFolder = folderLocalAppData;
-  }
+  char* data_path = NULL;
+  char* base_path = SDL_GetBasePath();
+  if (base_path)
+    data_path = base_path;
   else
-    iniFolder = homeFolder;
+    data_path = SDL_strdup("./");
+  Settings::Instance()->currentFolder = data_path;
+
+  std::string current_path = Settings::Instance()->currentFolder + "resources";
+  std::string fName("");
+
+  fName = "Kuplung_Settings.ini";
+  std::string iniFileSource(current_path + "\\" + fName);
+  std::string iniFileDestination = homeFolder + "\\" + fName;
+  std::filesystem::path p3 = std::filesystem::path(iniFileDestination.c_str());
+
+  if (!std::filesystem::exists(iniFileDestination))
+    std::filesystem::copy(iniFileSource, iniFileDestination);
+
+  fName = "Kuplung_RecentFiles.ini";
+  std::string iniFileRecentSource(current_path + "\\" + fName);
+  std::string iniFileRecentDestination = homeFolder + "\\" + fName;
+  if (!std::filesystem::exists(iniFileRecentDestination))
+    std::filesystem::copy(iniFileRecentSource, iniFileRecentDestination);
+
+  fName = "Kuplung_RecentFilesImported.ini";
+  std::string iniFileRecentImportedSource(current_path + "\\" + fName);
+  std::string iniFileRecentImportedDestination = homeFolder + "\\" + fName;
+  if (!std::filesystem::exists(iniFileRecentImportedDestination))
+    std::filesystem::copy(iniFileRecentImportedSource, iniFileRecentImportedDestination);
+
+  iniFolder = homeFolder;
 #elif defined macintosh // OS 9
   char const* hpath = getenv("HOME");
   homeFolder = std::string(hpath);
@@ -317,8 +297,8 @@ void Kuplung::initFolders() {
   const char* filePath = CFStringGetCStringPtr(filePathRef, kCFStringEncodingUTF8);
   iniFolder = std::string(filePath);
   homeFolder = std::string(filePath);
-  boost::replace_all(iniFolder, "Kuplung_Settings.ini", "");
-  boost::replace_all(homeFolder, "Kuplung_Settings.ini", "");
+  std::replace_all(iniFolder, "Kuplung_Settings.ini", "");
+  std::replace_all(homeFolder, "Kuplung_Settings.ini", "");
   CFRelease(filePathRef);
   CFRelease(appUrlRef);
 #endif

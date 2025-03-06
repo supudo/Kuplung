@@ -11,7 +11,7 @@
 #include "kuplung/utilities/stb/stb_image.h"
 #include "kuplung/utilities/stb/stb_image_write.h"
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) {
   return ImVec2(lhs.x - rhs.x, lhs.y - rhs.y);
@@ -214,7 +214,7 @@ void RendererUI::renderImageTexture(ImageRenderer* imageRenderer, std::vector<Mo
   file.extension = ".bmp";
   file.isFile = true;
 
-  boost::filesystem::path tempDir = boost::filesystem::temp_directory_path();
+  std::filesystem::path tempDir = std::filesystem::temp_directory_path();
   this->currentFileImage = tempDir.string() + "KuplungRendererUI_TempImage.bmp";
   file.path = this->currentFileImage;
 
@@ -225,7 +225,7 @@ void RendererUI::renderImageTexture(ImageRenderer* imageRenderer, std::vector<Mo
 }
 
 void RendererUI::createTextureBuffer() {
-  if (!boost::filesystem::exists(this->currentFileImage))
+  if (!std::filesystem::exists(this->currentFileImage))
     this->currentFileImage = Settings::Instance()->currentFolder + "/" + this->currentFileImage;
   int tChannels;
   unsigned char* tPixels = stbi_load(this->currentFileImage.c_str(), &this->tWidth, &this->tHeight, &tChannels, 0);

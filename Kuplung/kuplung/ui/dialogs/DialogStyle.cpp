@@ -10,12 +10,12 @@
 #include "kuplung/settings/Settings.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <fstream>
 
 void DialogStyle::saveDefault(ImGuiStyle& style) const {
   std::string defaultStyleFile = Settings::Instance()->appFolder() + "/KuplungStyleDefault.style";
-  if (!boost::filesystem::exists(defaultStyleFile))
+  if (!std::filesystem::exists(defaultStyleFile))
     this->saveStyles("-", "14.00", defaultStyleFile, style);
 }
 

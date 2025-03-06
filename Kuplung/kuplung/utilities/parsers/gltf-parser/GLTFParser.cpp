@@ -8,7 +8,7 @@
 
 #include "GLTFParser.hpp"
 #include <sstream>
-#include "kuplung/utilities/json/json.hpp"
+#include <nlohmann/json.hpp>
 #include "kuplung/utilities/cpp-base64/base64.h"
 #include <boost/algorithm/string/predicate.hpp>
 #include <boost/algorithm/string/replace.hpp>

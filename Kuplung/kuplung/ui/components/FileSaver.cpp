@@ -9,13 +9,15 @@
 #include "kuplung/ui/components/FileSaver.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem/path.hpp>
+#include <filesystem>
 #include <boost/lexical_cast.hpp>
 #include <ctime>
 #include <iostream>
 #include <sstream>
+#include <format>
+#include <kuplung/utilities/datetimes/DateTimes.h>
 
-namespace fs = boost::filesystem;
+namespace fs = std::filesystem;
 
 void FileSaver::init(int positionX, int positionY, int width, int height, const std::function<void(FBEntity, FileSaverOperation)>& saveFile) {
   this->positionX = positionX;
@@ -153,9 +155,9 @@ void FileSaver::modalNewFolder() {
 
   if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth() * 0.5f, 0))) {
     std::string newDir = this->currentFolder + "/" + this->newFolderName;
-    if (!boost::filesystem::exists(newDir)) {
-      boost::filesystem::path dir(newDir);
-      if (!boost::filesystem::create_directory(dir))
+    if (!std::filesystem::exists(newDir)) {
+      std::filesystem::path dir(newDir);
+      if (!std::filesystem::create_directory(dir))
         Settings::Instance()->funcDoLog("[FileSaver] Cannot create new folder!");
     }
     ImGui::CloseCurrentPopup();
@@ -249,18 +251,10 @@ std::map<std::string, FBEntity> FileSaver::getFolderContents(std::string const& 
             entity.size.clear();
           else {
             //                        std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
-            entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
+            entity.size = this->convertSize(std::filesystem::file_size(iteratorFolder->path()));
           }
 
-          std::time_t modifiedDate = fs::last_write_time(iteratorFolder->path());
-          const std::tm* modifiedDateLocal = std::localtime(&modifiedDate);
-          std::string mds = std::to_string((modifiedDateLocal->tm_year + 1900));
-          mds += "-" + std::to_string((modifiedDateLocal->tm_mon + 1));
-          mds += "-" + std::to_string(modifiedDateLocal->tm_mday);
-          mds += " " + std::to_string(modifiedDateLocal->tm_hour);
-          mds += ":" + std::to_string(modifiedDateLocal->tm_min);
-          mds += "." + std::to_string(modifiedDateLocal->tm_sec);
-          entity.modifiedDate = std::move(mds);
+          entity.modifiedDate = getDateToString(fs::last_write_time(iteratorFolder->path()).time_since_epoch());
 
           folderContents[entity.path] = entity;
         }

@@ -9,23 +9,20 @@
 #include "FontsList.hpp"
 #include <algorithm>
 #include <stdio.h>
+#include <filesystem>
 #include <boost/algorithm/string/replace.hpp>
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/path.hpp>
 #include "kuplung/settings/Settings.h"
 
 #ifdef WIN32
 #include <shlobj.h>
 #endif
 
-namespace fs = boost::filesystem;
-
 void FontsList::init() {
   this->fonts.clear();
 }
 
 const bool FontsList::fontFileExists(std::string const& font)const {
-  return boost::filesystem::exists(font);
+  return std::filesystem::exists(font);
 }
 
 const int FontsList::getSelectedFontSize() const {
@@ -53,16 +50,16 @@ void FontsList::loadFontsOSX() {
   //| /Network/Library/Fonts - Fonts shared for users on a network.
 
   std::string fontsAdditionalPath = "/Library/Fonts/";
-  fs::path currentPath(fontsAdditionalPath);
+  std::filesystem::path currentPath(fontsAdditionalPath);
 
-  if (fs::is_directory(currentPath)) {
-    fs::directory_iterator iteratorEnd;
+  if (std::filesystem::is_directory(currentPath)) {
+    std::filesystem::directory_iterator iteratorEnd;
     int i = 1;
-    for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
+    for (std::filesystem::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
       try {
         std::string fileExtension = iteratorFolder->path().extension().string();
-        fs::file_status fileStatus = iteratorFolder->status();
-        if (fileExtension == ".ttf" && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus))) {
+        std::filesystem::file_status fileStatus = iteratorFolder->status();
+        if (fileExtension == ".ttf" && (std::filesystem::is_directory(fileStatus) || std::filesystem::is_regular_file(fileStatus))) {
           FBEntity fontFile;
           fontFile.isFile = true;
           fontFile.extension = "ttf";
@@ -97,16 +94,16 @@ void FontsList::loadFontsWindows() {
     fontsFolder = std::string(folderLocalAppDataW.begin(), folderLocalAppDataW.end());
 #  endif
     fontsFolder += "\\fonts";
-    fs::path currentPath(fontsFolder);
+    std::filesystem::path currentPath(fontsFolder);
 
-    if (fs::is_directory(currentPath)) {
-      fs::directory_iterator iteratorEnd;
+    if (std::filesystem::is_directory(currentPath)) {
+      std::filesystem::directory_iterator iteratorEnd;
       int i = 1;
-      for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
+      for (std::filesystem::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
         try {
           std::string fileExtension = iteratorFolder->path().extension().string();
-          fs::file_status fileStatus = iteratorFolder->status();
-          if (fileExtension == ".ttf" && (fs::is_directory(fileStatus) || fs::is_regular_file(fileStatus))) {
+          std::filesystem::file_status fileStatus = iteratorFolder->status();
+          if (fileExtension == ".ttf" && (std::filesystem::is_directory(fileStatus) || std::filesystem::is_regular_file(fileStatus))) {
             FBEntity fontFile;
             fontFile.isFile = true;
             fontFile.extension = "ttf";

@@ -11,7 +11,7 @@
 #include "kuplung/ui/iconfonts/IconsFontAwesome.h"
 #include "kuplung/ui/iconfonts/IconsMaterialDesign.h"
 #include "kuplung/utilities/imgui/imgui_internal.h"
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include "kuplung/utilities/stb/stb_image.h"
 
 // NB: You can use math functions/operators on ImVec2 if you #define IMGUI_DEFINE_MATH_OPERATORS and #include "imgui_internal.h"
@@ -66,7 +66,7 @@ void MENode_Texture::draw(ImVec2 node_rect_min, ImVec2 NODE_WINDOW_PADDING, bool
     ImGui::Combo("##987", &this->TextureType, texture_type_items, IM_ARRAYSIZE(texture_type_items));
     ImGui::PopStyleColor(3);
 
-    std::string btnLabel = ICON_FA_EYE;
+    std::string btnLabel = (char*)ICON_FA_EYE;
     if (ImGui::Button(btnLabel.c_str())) {
       this->showTextureWindow = !this->showTextureWindow;
       this->loadTexture = true;
@@ -163,7 +163,7 @@ void MENode_Texture::showImage() {
 }
 
 void MENode_Texture::createTextureBuffer(int* width, int* height) {
-  if (!boost::filesystem::exists(this->TextureImage))
+  if (!std::filesystem::exists(this->TextureImage))
     this->TextureImage = Settings::Instance()->currentFolder + "/" + this->TextureImage;
   int tChannels;
   unsigned char* tPixels = stbi_load(this->TextureImage.c_str(), width, height, &tChannels, 0);

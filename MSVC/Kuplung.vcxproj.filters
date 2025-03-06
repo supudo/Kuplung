@@ -694,9 +694,6 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\parsers\gltf-parser\GLTFParser.hpp">
       <Filter>kuplung\utilities\parsers\gltf-parser</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\json\json.hpp">
-      <Filter>kuplung\utilities\json</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\ui\components\exporters\ExportFile.hpp">
       <Filter>kuplung\ui\components\exporters</Filter>
     </ClInclude>
@@ -732,6 +729,9 @@
     </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.hpp">
       <Filter>kuplung\meshes\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\datetimes\DateTimes.h">
+      <Filter>kuplung\utilities\datetimes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -885,9 +885,6 @@
     <Filter Include="kuplung\utilities\parsers\gltf-parser">
       <UniqueIdentifier>{41176d3e-7625-408b-a5c5-b85f48d57eee}</UniqueIdentifier>
     </Filter>
-    <Filter Include="kuplung\utilities\json">
-      <UniqueIdentifier>{d3e111a0-e389-4615-a7e6-e733ab68195e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="resources\shaders">
       <UniqueIdentifier>{dd070ea5-6ed8-499e-85bb-eaf6f14194a2}</UniqueIdentifier>
     </Filter>
@@ -908,6 +905,9 @@
     </Filter>
     <Filter Include="resources\lua">
       <UniqueIdentifier>{c8c1aa96-6f40-493e-b546-7a944dcbf4fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\datetimes">
+      <UniqueIdentifier>{1bb7531b-6e6f-49d3-bbc6-7902d7345a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

@@ -104,13 +104,13 @@ void UVEditor::draw(const char* title, bool* p_opened) {
   ImGui::Begin(title, p_opened);
   ImGui::BeginChild("UVEditor");
 
-  std::string btnLabel = ICON_FA_EYE " Browse ...";
+  std::string btnLabel = (char*)ICON_FA_EYE " Browse ...";
   if (ImGui::Button(btnLabel.c_str()))
     this->showFileBrowser = true;
 
   ImGui::SameLine();
 
-  btnLabel = ICON_FA_TIMES " Clear";
+  btnLabel = (char*)ICON_FA_TIMES " Clear";
   if (ImGui::Button(btnLabel.c_str())) {
     this->textureLoaded = false;
     this->textureFilename.clear();
@@ -124,7 +124,7 @@ void UVEditor::draw(const char* title, bool* p_opened) {
   ImGui::PushStyleColor(ImGuiCol_Button, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.6f, 0.6f)));
   ImGui::PushStyleColor(ImGuiCol_ButtonHovered, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.7f, 0.7f)));
   ImGui::PushStyleColor(ImGuiCol_ButtonActive, static_cast<ImVec4>(ImColor::HSV(3 / 7.0f, 0.8f, 0.8f)));
-  btnLabel = ICON_FA_CHECK " Apply ";
+  btnLabel = (char*)ICON_FA_CHECK " Apply ";
   if (ImGui::Button(btnLabel.c_str()))
     this->processTextureCoordinates();
   ImGui::PopStyleColor(3);
@@ -427,7 +427,7 @@ void UVEditor::initTextureBuffer() {
   this->textureHeight = 0;
 
   if (!this->textureImage.empty()) {
-    if (!boost::filesystem::exists(this->textureImage))
+    if (!std::filesystem::exists(this->textureImage))
       this->textureImage = Settings::Instance()->currentFolder + "/" + this->textureImage;
     int tChannels;
     unsigned char* tPixels = stbi_load(this->textureImage.c_str(), &this->textureWidth, &this->textureHeight, &tChannels, 0);

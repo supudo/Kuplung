@@ -15,7 +15,7 @@
 #include <functional>
 #include <map>
 #include <string>
-#include <boost/filesystem.hpp>
+#include <filesystem>
 
 class FileBrowser {
 public:
@@ -33,7 +33,7 @@ private:
   std::string convertSize(size_t size);
   double roundOff(double n);
   void logMessage(std::string const& logMessage);
-  bool isHidden(const boost::filesystem::path &p);
+  bool isHidden(const std::filesystem::path &p);
 
   bool log, isStyleBrowser, isImageBrowser;
   int positionX, positionY, width, height;

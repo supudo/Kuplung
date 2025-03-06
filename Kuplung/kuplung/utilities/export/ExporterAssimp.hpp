@@ -12,7 +12,7 @@
 #include "kuplung/settings/Settings.h"
 #include "kuplung/meshes/scene/ModelFaceBase.hpp"
 #include "kuplung/utilities/parsers/ParserUtils.hpp"
-#include "kuplung/utilities/json/json.hpp"
+#include <nlohmann/json.hpp>
 #include "kuplung/objects/ObjectsManager.hpp"
 #include <assimp/Exporter.hpp>
 #include <assimp/scene.h>

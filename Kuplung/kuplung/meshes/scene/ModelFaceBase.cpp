@@ -7,7 +7,7 @@
 //
 
 #include "ModelFaceBase.hpp"
-#include <boost/filesystem.hpp>
+#include <filesystem>
 #include <fstream>
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -217,7 +217,7 @@ void ModelFaceBase::initVertexSphere() {
 void ModelFaceBase::loadTexture(std::string const& texturesFolder, MeshMaterialTextureImage const& materialImage, const objMaterialImageType& type, GLuint* vboObject) {
   if (!materialImage.Image.empty()) {
     std::string matImageLocal = materialImage.Image;
-    if (!boost::filesystem::exists(matImageLocal))
+    if (!std::filesystem::exists(matImageLocal))
       matImageLocal = texturesFolder + "/" + materialImage.Image;
 
     int tWidth, tHeight, tChannels;

@@ -279,8 +279,8 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
         const size_t filename_length = std::strlen(filename);
         if (filename[filename_length - 1] == '/') {
             printf("dir:%s\n", filename);
-            boost::filesystem::path zFolder(filename);
-            if (!boost::filesystem::create_directory(zFolder))
+            std::filesystem::path zFolder(filename);
+            if (!std::filesystem::create_directory(zFolder))
                 Settings::Instance()->funcDoLog(Settings::Instance()->string_format("[KuplungMinizip] Can't create folder - %s", zFolder.c_str()));
         }
         else {

@@ -230,20 +230,20 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
 
   if (ImGui::BeginMainMenuBar()) {
     if (ImGui::BeginMenu("File")) {
-      if (ImGui::MenuItem(ICON_FA_FILE_O " New"))
+      if (ImGui::MenuItem((char*)ICON_FA_FILE_O " New"))
         this->funcNewScene();
 
-      if (ImGui::MenuItem(ICON_FA_FOLDER_OPEN_O " Open..."))
+      if (ImGui::MenuItem((char*)ICON_FA_FOLDER_OPEN_O " Open..."))
         this->showOpenDialog = true;
 
-      if (ImGui::BeginMenu(ICON_FA_FILES_O " Open Recent")) {
+      if (ImGui::BeginMenu((char*)ICON_FA_FILES_O " Open Recent")) {
         if (this->recentFiles.size() == 0)
           ImGui::MenuItem("No recent files", NULL, false, false);
         else {
           for (size_t i = 0; i < this->recentFiles.size(); i++) {
             FBEntity file = this->recentFiles[i];
             if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
-              if (boost::filesystem::exists(file.path))
+              if (std::filesystem::exists(file.path))
                 this->funcOpenScene(file);
               else
                 this->showRecentFileDoesntExists = true;
@@ -256,7 +256,7 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
         ImGui::EndMenu();
       }
 
-      if (ImGui::MenuItem(ICON_FA_FLOPPY_O " Save..."))
+      if (ImGui::MenuItem((char*)ICON_FA_FLOPPY_O " Save..."))
         this->showSaveDialog = true;
 
       ImGui::Separator();
@@ -282,14 +282,14 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
         ImGui::EndMenu();
       }
 
-      if (ImGui::BeginMenu(ICON_FA_FILES_O " Import Recent")) {
+      if (ImGui::BeginMenu((char*)ICON_FA_FILES_O " Import Recent")) {
         if (this->recentFilesImported.size() == 0)
           ImGui::MenuItem("No recent files", NULL, false, false);
         else {
           for (size_t i = 0; i < this->recentFilesImported.size(); i++) {
             FBEntity file = this->recentFilesImported[i];
             if (ImGui::MenuItem(file.title.c_str(), NULL, false, true)) {
-              if (boost::filesystem::exists(file.path))
+              if (std::filesystem::exists(file.path))
                 this->funcProcessImportedFile(file, std::vector<std::string>(), static_cast<ImportExportFormats>(this->dialogImportType), dialogImportType_Assimp);
               else
                 this->showRecentFileImportedDoesntExists = true;
@@ -325,18 +325,18 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
 
       ImGui::Separator();
 #ifdef _WIN32
-      if (ImGui::MenuItem(ICON_FA_POWER_OFF " Quit", "Alt+F4"))
+      if (ImGui::MenuItem((char*)ICON_FA_POWER_OFF " Quit", "Alt+F4"))
 #else
-      if (ImGui::MenuItem(ICON_FA_POWER_OFF " Quit", "Cmd+Q"))
+      if (ImGui::MenuItem((char*)ICON_FA_POWER_OFF " Quit", "Cmd+Q"))
 #endif
         this->funcQuitApp();
       ImGui::EndMenu();
     }
 
     if (ImGui::BeginMenu("Scene")) {
-      //            ImGui::MenuItem(ICON_FA_GLOBE " Display Terrain", NULL, &this->showTerrain);
+      //            ImGui::MenuItem((char*)ICON_FA_GLOBE " Display Terrain", NULL, &this->showTerrain);
       //            ImGui::Separator();
-      if (ImGui::BeginMenu(ICON_FA_LIGHTBULB_O " Add Light")) {
+      if (ImGui::BeginMenu((char*)ICON_FA_LIGHTBULB_O " Add Light")) {
         if (ImGui::MenuItem("Directional (Sun)"))
           this->managerObjects.addLight(LightSourceType_Directional);
         if (ImGui::MenuItem("Point (Light bulb)"))
@@ -346,7 +346,7 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
         ImGui::EndMenu();
       }
       ImGui::Separator();
-      if (ImGui::BeginMenu(ICON_FA_CERTIFICATE " Scene Rendering")) {
+      if (ImGui::BeginMenu((char*)ICON_FA_CERTIFICATE " Scene Rendering")) {
         if (ImGui::MenuItem("Solid", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Solid))
           this->managerObjects.viewModelSkin = ViewModelSkin_Solid;
         if (ImGui::MenuItem("Material", NULL, this->managerObjects.viewModelSkin == ViewModelSkin_Material))
@@ -362,38 +362,38 @@ void UIManager::renderStart(bool isFrame, int* sceneSelectedModelObject) {
         ImGui::EndMenu();
       }
       ImGui::Separator();
-      ImGui::MenuItem(ICON_FA_FILE_IMAGE_O " Render Image", NULL, &this->showImageSave);
-      ImGui::MenuItem(ICON_FA_CUBES " Renderer UI", NULL, &this->showRendererUI);
+      ImGui::MenuItem((char*)ICON_FA_FILE_IMAGE_O " Render Image", NULL, &this->showImageSave);
+      ImGui::MenuItem((char*)ICON_FA_CUBES " Renderer UI", NULL, &this->showRendererUI);
       ImGui::EndMenu();
     }
 
     if (ImGui::BeginMenu("View")) {
-      ImGui::MenuItem(this->showControlsGUI ? ICON_FA_TOGGLE_ON " GUI Controls" : ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->showControlsGUI);
-      ImGui::MenuItem(this->showControlsModels ? ICON_FA_TOGGLE_ON " Scene Controls" : ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->showControlsModels);
-      ImGui::MenuItem(Settings::Instance()->showAllVisualArtefacts ? ICON_FA_TOGGLE_OFF " Hide Visual Artefacts" : ICON_FA_TOGGLE_ON " Show Visual Artefacts", NULL, &Settings::Instance()->showAllVisualArtefacts);
+      ImGui::MenuItem(this->showControlsGUI ? (char*)ICON_FA_TOGGLE_ON " GUI Controls" : (char*)ICON_FA_TOGGLE_OFF " GUI Controls", NULL, &this->showControlsGUI);
+      ImGui::MenuItem(this->showControlsModels ? (char*)ICON_FA_TOGGLE_ON " Scene Controls" : (char*)ICON_FA_TOGGLE_OFF " Scene Controls", NULL, &this->showControlsModels);
+      ImGui::MenuItem(Settings::Instance()->showAllVisualArtefacts ? (char*)ICON_FA_TOGGLE_OFF " Hide Visual Artefacts" : (char*)ICON_FA_TOGGLE_ON " Show Visual Artefacts", NULL, &Settings::Instance()->showAllVisualArtefacts);
       ImGui::Separator();
-      if (ImGui::MenuItem(ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
+      if (ImGui::MenuItem((char*)ICON_FA_BUG " Show Log Window", NULL, &Settings::Instance()->logDebugInfo))
         Settings::Instance()->saveSettings();
-      // ImGui::MenuItem(ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
+      // ImGui::MenuItem((char*)ICON_FA_PENCIL " Editor", NULL, &this->showShaderEditor);
       if (Settings::Instance()->RendererType == InAppRendererType_Forward)
-        ImGui::MenuItem(ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
-      ImGui::MenuItem(ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
-      ImGui::MenuItem(ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
-      ImGui::MenuItem(ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
-      ImGui::MenuItem(ICON_FA_BICYCLE " Shadertoy", NULL, &this->showShadertoy);
+        ImGui::MenuItem((char*)ICON_FA_PENCIL " IDE", NULL, &this->showKuplungIDE);
+      ImGui::MenuItem((char*)ICON_FA_DESKTOP " Screenshot", NULL, &this->showScreenshotWindow);
+      ImGui::MenuItem((char*)ICON_FA_TACHOMETER " Scene Statistics", NULL, &this->showSceneStats);
+      ImGui::MenuItem((char*)ICON_FA_PAPER_PLANE_O " Structured Volumetric Sampling", NULL, &this->showSVS);
+      ImGui::MenuItem((char*)ICON_FA_BICYCLE " Shadertoy", NULL, &this->showShadertoy);
 #ifdef DEF_KuplungSetting_UseCuda
       if (Settings::Instance()->UseCuda)
-        ImGui::MenuItem(ICON_FA_SPACE_SHUTTLE " Cuda Examples", NULL, &this->showCudaExamples);
+        ImGui::MenuItem((char*)ICON_FA_SPACE_SHUTTLE " Cuda Examples", NULL, &this->showCudaExamples);
 #endif
       ImGui::Separator();
-      ImGui::MenuItem(ICON_FA_COG " Options", NULL, &this->showOptions);
+      ImGui::MenuItem((char*)ICON_FA_COG " Options", NULL, &this->showOptions);
       ImGui::EndMenu();
     }
 
     if (ImGui::BeginMenu("Help")) {
-      ImGui::MenuItem(ICON_FA_INFO " Metrics", NULL, &this->showAppMetrics);
-      ImGui::MenuItem(ICON_FA_INFO_CIRCLE " About ImGui", NULL, &this->showAboutImgui);
-      ImGui::MenuItem(ICON_FA_INFO_CIRCLE " About Kuplung", NULL, &this->showAboutKuplung);
+      ImGui::MenuItem((char*)ICON_FA_INFO " Metrics", NULL, &this->showAppMetrics);
+      ImGui::MenuItem((char*)ICON_FA_INFO_CIRCLE " About ImGui", NULL, &this->showAboutImgui);
+      ImGui::MenuItem((char*)ICON_FA_INFO_CIRCLE " About Kuplung", NULL, &this->showAboutKuplung);
       ImGui::Separator();
       ImGui::MenuItem("   ImGui Demo Window", NULL, &this->showDemoWindow);
       ImGui::EndMenu();
@@ -533,7 +533,7 @@ void UIManager::popupRecentFileDoesntExists() {
   if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFiles.size(); i++) {
-      if (boost::filesystem::exists(this->recentFiles[i].path))
+      if (std::filesystem::exists(this->recentFiles[i].path))
         recents.push_back(this->recentFiles[i]);
     }
     this->recentFiles = std::move(recents);
@@ -551,7 +551,7 @@ void UIManager::popupRecentFileImportedDoesntExists() {
   if (ImGui::Button("OK", ImVec2(ImGui::GetContentRegionAvailWidth(), 0))) {
     std::vector<FBEntity> recents;
     for (size_t i = 0; i < this->recentFilesImported.size(); i++) {
-      if (boost::filesystem::exists(this->recentFilesImported[i].path))
+      if (std::filesystem::exists(this->recentFilesImported[i].path))
         recents.push_back(this->recentFilesImported[i]);
     }
     this->recentFilesImported = std::move(recents);
