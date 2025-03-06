@@ -79,4 +79,3 @@ xcuserdata/*
 
 # protobuf generated files
 Kuplung/**/*.pb.h
-Kuplung/**/*.pb.cc

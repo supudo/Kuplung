@@ -1,9 +1,8 @@
 # Apple CMake file
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++ -O3")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -S -emit-llvm")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftime-trace")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fanalyzer")
 
 ADD_DEFINITIONS(-DKuplung_Debug_Timings)
 ADD_DEFINITIONS(-DCMAKE_CXX_CPPCHECK)
