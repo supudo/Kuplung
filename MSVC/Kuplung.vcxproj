@@ -105,7 +105,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;GLM_ENABLE_EXPERIMENTAL;Kuplung_Debug_Timings;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;_CRT_NO_VA_START_VALIDATION;GLEW_STATIC;IMGUI_IMPL_OPENGL_LOADER_CUSTOM="kuplung\utilities\gl\GLIncludes.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;CMAKE_INTDIR="Debug";Def_Kuplung_DEBUG_BUILD;Def_Kuplung_OpenGL_4x;DEF_KuplungSetting_UseCuda;GLM_ENABLE_EXPERIMENTAL;Kuplung_Debug_Timings;IMGUI_IMPL_OPENGL_LOADER_CUSTOM;_CRT_NO_VA_START_VALIDATION;GLEW_STATIC;IMGUI_IMPL_OPENGL_LOADER_CUSTOM="kuplung\utilities\gl\GLIncludes.h";%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <EnablePREfast>false</EnablePREfast>
@@ -351,6 +351,7 @@
     <ClInclude Include="..\Kuplung\kuplung\ui\UIManager.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\ui\UIHelpers.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.h" />
+    <ClInclude Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\datetimes\DateTimes.h" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.hpp" />
     <ClInclude Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.hpp" />
@@ -477,6 +478,7 @@
     <ClCompile Include="..\Kuplung\kuplung\ui\UIManager.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\ui\UIHelpers.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\cpp-base64\base64.cpp" />
+    <ClCompile Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterAssimp.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\export\ExporterGLTF.cpp" />
     <ClCompile Include="..\Kuplung\kuplung\utilities\imgui\ImGuiColorTextEdit\TextEditor.cpp" />

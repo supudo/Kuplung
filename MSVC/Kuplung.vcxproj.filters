@@ -332,6 +332,9 @@
     <ClCompile Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.cpp">
       <Filter>kuplung\meshes\helpers</Filter>
     </ClCompile>
+    <ClCompile Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.cpp">
+      <Filter>kuplung\utilities\cuda</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Kuplung\kuplung\objects\ObjectDefinitions.h">
@@ -733,6 +736,9 @@
     <ClInclude Include="..\Kuplung\kuplung\utilities\datetimes\DateTimes.h">
       <Filter>kuplung\utilities\datetimes</Filter>
     </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.hpp">
+      <Filter>kuplung\utilities\cuda</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="kuplung">
@@ -908,6 +914,9 @@
     </Filter>
     <Filter Include="kuplung\utilities\datetimes">
       <UniqueIdentifier>{1bb7531b-6e6f-49d3-bbc6-7902d7345a32}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\cuda">
+      <UniqueIdentifier>{bdbd5da6-963c-4bba-b5bc-6c840aa8760f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
