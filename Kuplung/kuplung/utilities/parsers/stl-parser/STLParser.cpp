@@ -7,8 +7,7 @@
 //
 
 #include "STLParser.hpp"
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <sstream>
 
 STLParser::STLParser() {
@@ -244,13 +243,13 @@ bool STLParser::loadAsciiFile(const FBEntity& file) {
   std::string singleLine;
   glm::vec3 normal;
   while (std::getline(stl_file_data, singleLine)) {
-    if (boost::starts_with(singleLine, "facet")) {
-      boost::replace_first(singleLine, "facet normal ", "");
+    if (singleLine.starts_with("facet normal ")) {
+      singleLine = singleLine.replace(singleLine.find("facet normal "), 13, "");
       std::stringstream valReader(singleLine);
       valReader >> normal.x >> normal.y >> normal.z;
     }
-    else if (boost::starts_with(singleLine, "vertex")) {
-      boost::replace_first(singleLine, "vertex ", "");
+    else if (singleLine.starts_with("vertex ")) {
+      singleLine = singleLine.replace(singleLine.find("vertex "), 7, "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;

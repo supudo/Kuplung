@@ -7,11 +7,10 @@
 //
 
 #include "FontsList.hpp"
+#include "kuplung/settings/Settings.h"
 #include <algorithm>
 #include <stdio.h>
 #include <filesystem>
-#include <boost/algorithm/string/replace.hpp>
-#include "kuplung/settings/Settings.h"
 
 #ifdef WIN32
 #include <shlobj.h>
@@ -65,7 +64,8 @@ void FontsList::loadFontsOSX() {
           fontFile.extension = "ttf";
           fontFile.path = fontsAdditionalPath + iteratorFolder->path().filename().string();
           fontFile.title = iteratorFolder->path().filename().string();
-          boost::replace_all(fontFile.title, ".ttf", "");
+          if (fontFile.title.find(".ttf") != std::string::npos)
+           fontFile.title = fontFile.title.replace(fontFile.title.find(".ttf"), 4, "");
           this->fonts.push_back(fontFile);
           if (fontFile.path == Settings::Instance()->UIFontFile)
             Settings::Instance()->UIFontFileIndex = i;
@@ -93,7 +93,7 @@ void FontsList::loadFontsWindows() {
     std::wstring folderLocalAppDataW = szPath;
     fontsFolder = std::string(folderLocalAppDataW.begin(), folderLocalAppDataW.end());
 #  endif
-    fontsFolder += "\\fonts";
+    fontsFolder += "\\fonts\\";
     std::filesystem::path currentPath(fontsFolder);
 
     if (std::filesystem::is_directory(currentPath)) {
@@ -109,7 +109,8 @@ void FontsList::loadFontsWindows() {
             fontFile.extension = "ttf";
             fontFile.path = fontsFolder + iteratorFolder->path().filename().string();
             fontFile.title = iteratorFolder->path().filename().string();
-            boost::replace_all(fontFile.title, ".ttf", "");
+            if (fontFile.title.find(".ttf") != std::string::npos)
+              fontFile.title = fontFile.title.replace(fontFile.title.find(".ttf"), 4, "");
             this->fonts.push_back(fontFile);
             if (fontFile.path == Settings::Instance()->UIFontFile)
               Settings::Instance()->UIFontFileIndex = i;

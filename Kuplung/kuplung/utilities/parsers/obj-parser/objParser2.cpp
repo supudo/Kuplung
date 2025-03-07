@@ -7,9 +7,7 @@
 //
 
 #include "objParser2.hpp"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <filesystem>
 #include <fstream>
 #include <numeric>
@@ -77,17 +75,16 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std:
   int modelCounter = 0, currentModelID = 0, progressStageCounter = 0;
   std::string singleLine;
   while (std::getline(ifs, singleLine)) {
-    if (boost::starts_with(singleLine, this->id_materialFile)) {
-      boost::replace_first(singleLine, this->id_materialFile, "");
+    if (singleLine.starts_with(this->id_materialFile)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialFile), this->id_materialFile.length(), "");
       this->loadMaterialFile(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_objTitle)) {
+    else if (singleLine.starts_with(this->id_objTitle)) {
       currentModelID = modelCounter;
       MeshModel entityModel;
       entityModel.File = file;
       entityModel.ID = currentModelID;
-      entityModel.ModelTitle = singleLine;
-      boost::replace_first(entityModel.ModelTitle, this->id_objTitle, "");
+      entityModel.ModelTitle = singleLine.replace(singleLine.find(this->id_objTitle), this->id_objTitle.length(), "");
       entityModel.countVertices = 0;
       entityModel.countTextureCoordinates = 0;
       entityModel.countNormals = 0;
@@ -95,34 +92,34 @@ std::vector<MeshModel> objParser2::parse(const FBEntity& fileToParse, const std:
       modelCounter += 1;
       this->models.push_back(entityModel);
     }
-    else if (boost::starts_with(singleLine, this->id_geometricVertices)) {
-      boost::replace_first(singleLine, this->id_geometricVertices, "");
+    else if (singleLine.starts_with(this->id_geometricVertices)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_geometricVertices), this->id_geometricVertices.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       vVertices.push_back(v);
     }
-    else if (boost::starts_with(singleLine, this->id_textureCoordinates)) {
-      boost::replace_first(singleLine, this->id_textureCoordinates, "");
+    else if (singleLine.starts_with(this->id_textureCoordinates)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_textureCoordinates), this->id_textureCoordinates.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec2 v;
       valReader >> v.x >> v.y;
       vTextureCoordinates.push_back(v);
     }
-    else if (boost::starts_with(singleLine, this->id_vertexNormals)) {
-      boost::replace_first(singleLine, this->id_vertexNormals, "");
+    else if (singleLine.starts_with(this->id_vertexNormals)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_vertexNormals), this->id_vertexNormals.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       vNormals.push_back(v);
     }
-    else if (boost::starts_with(singleLine, this->id_useMaterial)) {
-      boost::replace_first(singleLine, this->id_useMaterial, "");
+    else if (singleLine.starts_with(this->id_useMaterial)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_useMaterial), this->id_useMaterial.length(), "");
       this->models[static_cast<size_t>(currentModelID)].ModelMaterial = this->materials[singleLine];
       this->models[static_cast<size_t>(currentModelID)].MaterialTitle = this->models[static_cast<size_t>(currentModelID)].ModelMaterial.MaterialTitle;
     }
-    else if (boost::starts_with(singleLine, this->id_face)) {
-      std::vector<std::string> ft = this->splitString(singleLine, " ");
+    else if (singleLine.starts_with(this->id_face)) {
+      std::vector<std::string> ft = Kuplung::Helpers::splitString(singleLine, ' ');
       if (ft.size() == 5) {
         unsigned int tri_vertexIndex[4], tri_uvIndex[4], tri_normalIndex[4];
         std::string face = this->id_face + "%d/%d/%d %d/%d/%d %d/%d/%d %d/%d/%d";
@@ -312,9 +309,8 @@ void objParser2::loadMaterialFile(const std::string& materialFile) {
   int MaterialID = 0;
   std::string singleLine, currentMaterialTitle;
   while (std::getline(ifs, singleLine)) {
-    if (boost::starts_with(singleLine, this->id_materialNew)) {
-      currentMaterialTitle = singleLine;
-      boost::replace_first(currentMaterialTitle, this->id_materialNew, "");
+    if (singleLine.starts_with(this->id_materialNew)) {
+      currentMaterialTitle = singleLine.replace(singleLine.find(this->id_materialNew), this->id_materialNew.length(), "");
       MeshModelMaterial entityMaterial = {};
       entityMaterial.MaterialID = MaterialID;
       entityMaterial.MaterialTitle = currentMaterialTitle;
@@ -329,79 +325,79 @@ void objParser2::loadMaterialFile(const std::string& materialFile) {
       MaterialID += 1;
       this->materials[currentMaterialTitle] = entityMaterial;
     }
-    else if (boost::starts_with(singleLine, this->id_materialAmbientColor)) {
-      boost::replace_first(singleLine, this->id_materialAmbientColor, "");
+    else if (singleLine.starts_with(this->id_materialAmbientColor)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialAmbientColor), this->id_materialAmbientColor.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       this->materials[currentMaterialTitle].AmbientColor = v;
     }
-    else if (boost::starts_with(singleLine, this->id_materialDiffuseColor)) {
-      boost::replace_first(singleLine, this->id_materialDiffuseColor, "");
+    else if (singleLine.starts_with(this->id_materialDiffuseColor)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialDiffuseColor), this->id_materialDiffuseColor.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       this->materials[currentMaterialTitle].DiffuseColor = v;
     }
-    else if (boost::starts_with(singleLine, this->id_materialSpecularColor)) {
-      boost::replace_first(singleLine, this->id_materialSpecularColor, "");
+    else if (singleLine.starts_with(this->id_materialSpecularColor)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialSpecularColor), this->id_materialSpecularColor.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       this->materials[currentMaterialTitle].SpecularColor = v;
     }
-    else if (boost::starts_with(singleLine, this->id_materialEmissionColor)) {
-      boost::replace_first(singleLine, this->id_materialEmissionColor, "");
+    else if (singleLine.starts_with(this->id_materialEmissionColor)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialEmissionColor), this->id_materialEmissionColor.length(), "");
       std::stringstream valReader(singleLine);
       glm::vec3 v;
       valReader >> v.x >> v.y >> v.z;
       this->materials[currentMaterialTitle].EmissionColor = v;
     }
-    else if (boost::starts_with(singleLine, this->id_materialSpecularExp)) {
-      boost::replace_first(singleLine, this->id_materialSpecularExp, "");
+    else if (singleLine.starts_with(this->id_materialSpecularExp)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialSpecularExp), this->id_materialSpecularExp.length(), "");
       this->materials[currentMaterialTitle].SpecularExp = std::stof(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTransperant1) || boost::starts_with(singleLine, this->id_materialTransperant2)) {
-      if (boost::starts_with(singleLine, this->id_materialTransperant1))
-        boost::replace_first(singleLine, this->id_materialTransperant1, "");
+    else if (singleLine.starts_with(this->id_materialTransperant1) || singleLine.starts_with(this->id_materialTransperant2)) {
+      if (singleLine.starts_with(this->id_materialTransperant1))
+        singleLine = singleLine.replace(singleLine.find(this->id_materialTransperant1), this->id_materialTransperant1.length(), "");
       else
-        boost::replace_first(singleLine, this->id_materialTransperant2, "");
+        singleLine = singleLine.replace(singleLine.find(this->id_materialTransperant2), this->id_materialTransperant2.length(), "");
       this->materials[currentMaterialTitle].Transparency = std::stof(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialOpticalDensity)) {
-      boost::replace_first(singleLine, this->id_materialOpticalDensity, "");
+    else if (singleLine.starts_with(this->id_materialOpticalDensity)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialOpticalDensity), this->id_materialOpticalDensity.length(), "");
       this->materials[currentMaterialTitle].OpticalDensity = std::stof(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialIllumination)) {
-      boost::replace_first(singleLine, this->id_materialIllumination, "");
+    else if (singleLine.starts_with(this->id_materialIllumination)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialIllumination), this->id_materialIllumination.length(), "");
       this->materials[currentMaterialTitle].IlluminationMode = std::stoi(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureAmbient)) {
-      boost::replace_first(singleLine, this->id_materialTextureAmbient, "");
+    else if (singleLine.starts_with(this->id_materialTextureAmbient)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureAmbient), this->id_materialTextureAmbient.length(), "");
       this->materials[currentMaterialTitle].TextureAmbient = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureBump)) {
-      boost::replace_first(singleLine, this->id_materialTextureBump, "");
+    else if (singleLine.starts_with(this->id_materialTextureBump)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureBump), this->id_materialTextureBump.length(), "");
       this->materials[currentMaterialTitle].TextureBump = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureDiffuse)) {
-      boost::replace_first(singleLine, this->id_materialTextureDiffuse, "");
+    else if (singleLine.starts_with(this->id_materialTextureDiffuse)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureDiffuse), this->id_materialTextureDiffuse.length(), "");
       this->materials[currentMaterialTitle].TextureDiffuse = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureDisplacement)) {
-      boost::replace_first(singleLine, this->id_materialTextureDisplacement, "");
+    else if (singleLine.starts_with(this->id_materialTextureDisplacement)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureDisplacement), this->id_materialTextureDisplacement.length(), "");
       this->materials[currentMaterialTitle].TextureDisplacement = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureDissolve)) {
-      boost::replace_first(singleLine, this->id_materialTextureDissolve, "");
+    else if (singleLine.starts_with(this->id_materialTextureDissolve)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureDissolve), this->id_materialTextureDissolve.length(), "");
       this->materials[currentMaterialTitle].TextureDissolve = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureSpecular)) {
-      boost::replace_first(singleLine, this->id_materialTextureSpecular, "");
+    else if (singleLine.starts_with(this->id_materialTextureSpecular)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureSpecular), this->id_materialTextureSpecular.length(), "");
       this->materials[currentMaterialTitle].TextureSpecular = this->parseTextureImage(singleLine);
     }
-    else if (boost::starts_with(singleLine, this->id_materialTextureSpecularExp)) {
-      boost::replace_first(singleLine, this->id_materialTextureSpecularExp, "");
+    else if (singleLine.starts_with(this->id_materialTextureSpecularExp)) {
+      singleLine = singleLine.replace(singleLine.find(this->id_materialTextureSpecularExp), this->id_materialTextureSpecularExp.length(), "");
       this->materials[currentMaterialTitle].TextureSpecularExp = this->parseTextureImage(singleLine);
     }
   }
@@ -415,12 +411,12 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
   materialImage.UseTexture = true;
 
   if (textureLine.find('-') != std::string::npos) {
-    std::vector<std::string> lineElements = this->splitString(textureLine, "-");
+    std::vector<std::string> lineElements = Kuplung::Helpers::splitString(textureLine, '-');
 
     if (lineElements[0].empty())
       lineElements.erase(lineElements.begin());
 
-    std::vector<std::string> lastElements = this->splitString(lineElements[lineElements.size() - 1], " ");
+    std::vector<std::string> lastElements = Kuplung::Helpers::splitString(lineElements[lineElements.size() - 1], ' ');
     materialImage.Image = lastElements[lastElements.size() - 1];
     lastElements.erase(lastElements.end() - 1);
 
@@ -435,20 +431,15 @@ MeshMaterialTextureImage objParser2::parseTextureImage(const std::string& textur
   }
   else
     materialImage.Image = textureLine;
-  boost::algorithm::trim(materialImage.Image);
+  materialImage.Image = Kuplung::Helpers::trim(materialImage.Image);
 
   std::string folderPath = this->file.path;
-  boost::replace_all(folderPath, this->file.title, "");
+  if (folderPath.find(this->file.title) != std::string::npos)
+    folderPath = folderPath.replace(folderPath.find(this->file.title), this->file.title.length(), "");
   if (!std::filesystem::exists(materialImage.Image) && !std::filesystem::path(materialImage.Image).is_absolute())
     materialImage.Image = folderPath + materialImage.Image;
 
-  std::vector<std::string> fileElements = this->splitString(materialImage.Image, "/");
+  std::vector<std::string> fileElements = Kuplung::Helpers::splitString(materialImage.Image, '/');
   materialImage.Filename = fileElements[fileElements.size() - 1];
   return materialImage;
-}
-
-std::vector<std::string> objParser2::splitString(const std::string& s, const std::string& delimiter) {
-  std::vector<std::string> elements;
-  boost::split(elements, s, boost::is_any_of(delimiter));
-  return elements;
 }

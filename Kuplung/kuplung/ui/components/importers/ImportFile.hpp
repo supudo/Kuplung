@@ -30,7 +30,6 @@ private:
   const std::string convertToString(double num) const;
   const std::string convertSize(size_t size) const;
   const double roundOff(double n) const;
-  const bool isHidden(const std::filesystem::path &p) const;
 
   int positionX, positionY, width, height;
   float panelWidth_Options, panelWidth_OptionsMin;

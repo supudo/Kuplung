@@ -10,7 +10,6 @@
 // http://www.rastertek.com/tertut02.html
 
 #include "HeightmapGenerator.hpp"
-#include <boost/algorithm/string/replace.hpp>
 #include <fstream>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -110,10 +109,9 @@ void HeightmapGenerator::generateTerrain(const std::string& assetFolder, const i
 
   Settings::Instance()->funcDoLog(Settings::Instance()->string_format("Generating terrain [O = %i, F = %f, P = %f] = %s", this->Setting_Octaves, double(this->Setting_Frequency), double(this->Setting_Persistence), this->heightmapImage.c_str()));
 
-#ifdef _WIN32
-#else
-  boost::replace_all(this->assetsFolder, "Kuplung.app/Contents/Resources", "");
-#endif
+  std::string afPrefix("Kuplung.app/Contents/Resources");
+  if (this->assetsFolder.find("Kuplung.app/Contents/Resources") != std::string::npos)
+    this->assetsFolder = this->assetsFolder.replace(this->assetsFolder.find("Kuplung.app/Contents/Resources"), afPrefix.length(), "");
   utils::WriterBMP writer;
   writer.SetSourceImage(this->image);
   writer.SetDestFilename(this->heightmapImage);

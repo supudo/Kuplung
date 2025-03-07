@@ -8,16 +8,12 @@
 
 #include "kuplung/ui/components/FileBrowser.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/join.hpp>
-#include <boost/algorithm/string/predicate.hpp>
+#include "kuplung/utilities/helpers/Helpers.h"
 #include <filesystem>
-#include <boost/lexical_cast.hpp>
 #include <ctime>
 #include <iostream>
 #include <sstream>
 #include <format>
-#include <kuplung/utilities/datetimes/DateTimes.h>
 
 namespace fs = std::filesystem;
 
@@ -170,15 +166,13 @@ void FileBrowser::drawFiles(const std::string& fPath, MaterialTextureType Textur
         this->processFile(entity, TextureType);
 
 #ifdef _WIN32
-        std::string folderDelimiter = "\\";
+        char folderDelimiter = '\\';
 #else
-        std::string folderDelimiter = "/";
+        char folderDelimiter = "/";
 #endif
-        std::vector<std::string> elems;
-        boost::split(elems, entity.path, boost::is_any_of(folderDelimiter));
+        std::vector<std::string> elems = Kuplung::Helpers::splitString(entity.path, folderDelimiter);
         elems.pop_back();
-
-        Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
+        Settings::Instance()->currentFolder = Kuplung::Helpers::joinElementsToString(elems, folderDelimiter);
         Settings::Instance()->saveSettings();
       }
       else {
@@ -231,7 +225,7 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
           isAllowedFileExtension = Settings::Instance()->isAllowedStyleExtension(iteratorFolder->path().extension().string());
         else if (this->isImageBrowser)
           isAllowedFileExtension = Settings::Instance()->isAllowedImageExtension(iteratorFolder->path().extension().string());
-        if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
+        if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !Kuplung::Helpers::isHidden(iteratorFolder->path().string()))) {
           FBEntity entity;
           if (fs::is_directory(fileStatus))
             entity.isFile = false;
@@ -248,12 +242,10 @@ std::map<std::string, FBEntity> FileBrowser::getFolderContents(std::string const
 
           if (!entity.isFile)
             entity.size.clear();
-          else {
-            //std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
+          else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
-          }
 
-          entity.modifiedDate = getDateToString(fs::last_write_time(iteratorFolder->path()).time_since_epoch());
+          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
           folderContents[entity.path] = entity;
 
@@ -301,11 +293,4 @@ double FileBrowser::roundOff(double n) {
 void FileBrowser::logMessage(std::string const& logMessage) {
   if (this->log)
     Settings::Instance()->funcDoLog("[FileBrowser] " + logMessage);
-}
-
-bool FileBrowser::isHidden(const fs::path& p) {
-  std::string name = p.filename().string();
-  if (name == ".." || name == "." || boost::starts_with(name, "."))
-    return true;
-  return false;
 }

@@ -7,13 +7,11 @@
 //
 
 #include "ExporterGLTF.hpp"
-#include <fstream>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <filesystem>
-#include <boost/filesystem/path.hpp>
 #include "kuplung/meshes/scene/ModelFaceData.hpp"
 #include "kuplung/utilities/cpp-base64/base64.h"
+#include "kuplung/utilities/helpers/Strings.h"
+#include <fstream>
+#include <filesystem>
 #include <glm/gtx/string_cast.hpp>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
@@ -391,7 +389,8 @@ const nlohmann::json ExporterGLTF::exportScenes(const std::vector<ModelFaceBase*
 const nlohmann::json ExporterGLTF::copyImage(std::string imagePath) const {
     nlohmann::json j;
     std::string imageFilename = imagePath.substr(imagePath.find_last_of("\\/"));
-    boost::replace_all(imageFilename, "/", "");
+    if (imageFilename.find("/") != std::string::npos)
+      imageFilename = imageFilename.replace(imageFilename.find("/"), 1, "");
     std::string newImagePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/")) + "/" + this->exportFile.title + "/" + imageFilename;
     std::filesystem::copy_file(imagePath, newImagePath, std::filesystem::copy_options::overwrite_existing);
     j["uri"] = imageFilename;
@@ -428,7 +427,7 @@ const bool ExporterGLTF::saveFile(const nlohmann::json& jsonObj) const {
     fileSuffix.clear();
   std::string filePath = this->exportFileFolder;
   std::string fileName = this->exportFile.title;
-  if (boost::algorithm::ends_with(fileName, ".gltf"))
+  if (fileName.ends_with(".gltf"))
     fileName = fileName.substr(0, fileName.size() - 4);
 
   std::ofstream out(filePath + "/" + fileName + fileSuffix + ".gltf");

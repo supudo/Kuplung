@@ -733,11 +733,14 @@
     <ClInclude Include="..\Kuplung\kuplung\meshes\helpers\AxisLabels.hpp">
       <Filter>kuplung\meshes\helpers</Filter>
     </ClInclude>
-    <ClInclude Include="..\Kuplung\kuplung\utilities\datetimes\DateTimes.h">
-      <Filter>kuplung\utilities\datetimes</Filter>
-    </ClInclude>
     <ClInclude Include="..\Kuplung\kuplung\utilities\cuda\CudaHelpers.hpp">
       <Filter>kuplung\utilities\cuda</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\DateTimes.h">
+      <Filter>kuplung\utilities\helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Kuplung\kuplung\utilities\helpers\Strings.h">
+      <Filter>kuplung\utilities\helpers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -912,11 +915,11 @@
     <Filter Include="resources\lua">
       <UniqueIdentifier>{c8c1aa96-6f40-493e-b546-7a944dcbf4fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="kuplung\utilities\datetimes">
-      <UniqueIdentifier>{1bb7531b-6e6f-49d3-bbc6-7902d7345a32}</UniqueIdentifier>
-    </Filter>
     <Filter Include="kuplung\utilities\cuda">
       <UniqueIdentifier>{bdbd5da6-963c-4bba-b5bc-6c840aa8760f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="kuplung\utilities\helpers">
+      <UniqueIdentifier>{1bb7531b-6e6f-49d3-bbc6-7902d7345a32}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

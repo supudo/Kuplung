@@ -1,6 +1,6 @@
 # Apple CMake file
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -stdlib=libc++")
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20 -stdlib=libc++")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -S -emit-llvm")
 # SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ftime-trace")
 
@@ -26,7 +26,6 @@ ADD_DEFINITIONS(-DCMAKE_CXX_CPPCHECK)
 ADD_DEFINITIONS(-DIMGUI_IMPL_OPENGL_LOADER_CUSTOM="${CMAKE_SOURCE_DIR}/kuplung/utilities/gl/GLIncludes.h")
 
 IF((CMAKE_CXX_COMPILER_ID MATCHES GNU) OR (CMAKE_CXX_COMPILER_ID MATCHES Clang))
-  #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
   SET(CMAKE_CXX_FLAGS_DEBUG "-O3 -g3")
   SET(CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG")
 ENDIF()
@@ -340,6 +339,10 @@ SET(SOURCE_FILES
   kuplung/utilities/gl/GLIncludes.h
   kuplung/utilities/gl/GLUtils.cpp
   kuplung/utilities/gl/GLUtils.hpp
+  kuplung/utilities/helpers/DateTimes.h
+  kuplung/utilities/helpers/Files.h
+  kuplung/utilities/helpers/Strings.h
+  kuplung/utilities/helpers/Helpers.h
   kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.cpp
   kuplung/utilities/imgui/ImGuiColorTextEdit/TextEditor.h
   kuplung/utilities/imgui/imguizmo/ImGuizmo.cpp

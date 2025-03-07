@@ -8,8 +8,7 @@
 
 #include "DialogStyle.hpp"
 #include "kuplung/settings/Settings.h"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities//helpers/Strings.h"
 #include <filesystem>
 #include <fstream>
 
@@ -50,21 +49,21 @@ const ImGuiStyle& DialogStyle::load(const std::string& styleFilePath) const {
       else {
         std::string opKey, opValue;
         std::vector<std::string> lineElements = this->splitString(singleLine, regex_equalsSign);
-        opKey = lineElements[0];
-        boost::algorithm::trim(opKey);
+        opKey = Kuplung::Helpers::trim(lineElements[0]);
 
-        if (lineElements.size() > 1) {
-          opValue = lineElements[1];
-          boost::algorithm::trim(opValue);
-        }
+        if (lineElements.size() > 1)
+          opValue = Kuplung::Helpers::trim(lineElements[1]);
         else
           opValue.clear();
 
-        boost::replace_all(opKey, "style.rendering.", "");
-        boost::replace_all(opKey, "style.sizes.", "");
-        boost::replace_all(opKey, "style.colors.", "");
-        boost::trim_right(opKey);
-        boost::trim_right(opValue);
+        if (opKey.find("style.rendering.") != std::string::npos)
+          opKey = opKey.replace(opKey.find("style.rendering."), 16, "");
+        if (opKey.find("style.sizes.") != std::string::npos)
+          opKey = opKey.replace(opKey.find("style.sizes."), 12, "");
+        if (opKey.find("style.colors.") != std::string::npos)
+          opKey = opKey.replace(opKey.find("style.colors."), 13, "");
+        opKey = Kuplung::Helpers::trimRight(opKey);
+        opValue = Kuplung::Helpers::trimRight(opValue);
 
         try {
           if (opKey == "Font")

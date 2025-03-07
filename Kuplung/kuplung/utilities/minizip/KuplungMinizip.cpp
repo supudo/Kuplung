@@ -42,8 +42,6 @@ bool KuplungMinizip::UnzipFile(std::string const& unzipFolder) {
 #include "KuplungMinizip.hpp"
 #include "kuplung/settings/Settings.h"
 #include <iostream>
-#include <boost/filesystem/path.hpp>
-#include <boost/filesystem/operations.hpp>
 
 #include <stdio.h>
 #include <stdlib.h>

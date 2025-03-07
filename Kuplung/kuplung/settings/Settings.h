@@ -23,8 +23,6 @@
 #include <memory>
 #endif
 
-#define BOOST_FILESYSTEM_NO_DEPRECATED
-
 class Settings {
 public:
   static Settings* Instance();

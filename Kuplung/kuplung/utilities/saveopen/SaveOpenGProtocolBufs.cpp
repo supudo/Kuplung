@@ -7,7 +7,7 @@
 //
 
 #include "SaveOpenGProtocolBufs.hpp"
-#include <boost/algorithm/string/replace.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <fstream>
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
@@ -74,7 +74,8 @@ std::vector<ModelFaceData*> SaveOpenGProtocolBufs::openKuplungFile(const FBEntit
   std::vector<ModelFaceData*> models;
 
   std::string zPath = file.path;
-  boost::replace_all(zPath, file.title, "");
+  if (zPath.find(file.title) != std::string::npos)
+    zPath = zPath.replace(zPath.find(file.title), file.title.length(), "");
   if (this->managerZip->unzipArchive(file.title, zPath)) {
     std::string fileNameSettings = file.path + ".settings";
     std::string fileNameScene = file.path + ".scene";

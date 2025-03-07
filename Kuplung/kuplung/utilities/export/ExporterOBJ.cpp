@@ -7,8 +7,7 @@
 //
 
 #include "ExporterOBJ.hpp"
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
 
@@ -142,7 +141,8 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
   std::string fileContents = "# Kuplung v1.0 OBJ File Export" + this->nlDelimiter;
   fileContents += "# http://www.github.com/supudo/kuplung/" + this->nlDelimiter;
   std::string fn = this->exportFile.title;
-  boost::replace_all(fn, ".obj", "");
+  if (fn.find(".obj") != std::string::npos)
+    fn = fn.replace(fn.find(".obj"), 4, "");
   fileContents += "mtllib " + fn + ".mtl" + this->nlDelimiter;
 
   this->uniqueVertices.clear();
@@ -175,7 +175,7 @@ void ExporterOBJ::exportGeometry(const std::vector<ModelFaceBase*>& faces) {
       fileSuffix.clear();
     std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
     std::string fileName = this->exportFile.title;
-    if (boost::algorithm::ends_with(fileName, ".obj"))
+    if (fileName.ends_with(".obj"))
       fileName = fileName.substr(0, fileName.size() - 4);
     this->saveFile(fileContents, filePath + "/" + fileName + fileSuffix + ".obj");
   }
@@ -229,7 +229,7 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
   if (!fileContents.empty()) {
     std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
     std::string fileName = this->exportFile.title;
-    if (boost::algorithm::ends_with(fileName, ".obj"))
+    if (fileName.ends_with(".obj"))
       fileName = fileName.substr(0, fileName.size() - 4);
     this->saveFile(fileContents, filePath + "/" + fileName + ".mtl");
   }
@@ -282,7 +282,7 @@ void ExporterOBJ::exportMaterials(const std::vector<ModelFaceBase*>& faces) {
 //    if (!fileContents.empty()) {
 //        std::string filePath = this->exportFile.path.substr(0, this->exportFile.path.find_last_of("\\/"));
 //        std::string fileName = this->exportFile.title;
-//        if (boost::algorithm::ends_with(fileName, ".obj"))
+//        if (fileName.ends_with(".obj"))
 //            fileName = fileName.substr(0, fileName.size() - 4);
 //        this->saveFile(fileContents, filePath + "/" + fileName + ".mtl");
 //    }

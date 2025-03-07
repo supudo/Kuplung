@@ -33,7 +33,6 @@ private:
   std::string convertSize(size_t size);
   double roundOff(double n);
   void logMessage(std::string const& logMessage);
-  bool isHidden(const std::filesystem::path &p);
 
   bool log, isStyleBrowser, isImageBrowser;
   int positionX, positionY, width, height;

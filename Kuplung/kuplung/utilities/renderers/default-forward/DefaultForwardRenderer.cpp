@@ -8,7 +8,6 @@
 
 #include "DefaultForwardRenderer.hpp"
 #include "kuplung/utilities/stb/stb_image_write.h"
-#include <boost/algorithm/string/predicate.hpp>
 #include <filesystem>
 #include <glm/gtc/matrix_inverse.hpp>
 #include <glm/gtc/type_ptr.hpp>

@@ -7,7 +7,7 @@
 //
 
 #include "AssimpParser.hpp"
-#include <boost/algorithm/string.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <filesystem>
 
 AssimpParser::~AssimpParser() {
@@ -201,7 +201,8 @@ std::vector<MeshMaterialTextureImage> AssimpParser::loadMaterialTextures(aiMater
             texture.Image = std::string(str.C_Str());
 
             std::string folderPath = this->file.path;
-            boost::replace_all(folderPath, this->file.title, "");
+            if (folderPath.find(this->file.title) != std::string::npos)
+              folderPath = folderPath.replace(folderPath.find(this->file.title), this->file.title.length(), "");
             if (!std::filesystem::exists(texture.Image) && !std::filesystem::path(texture.Image).is_absolute())
                 texture.Image = folderPath + texture.Image;
 

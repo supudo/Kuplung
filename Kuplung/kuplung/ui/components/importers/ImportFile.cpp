@@ -8,16 +8,11 @@
 
 #include "ImportFile.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
+#include "kuplung/utilities/helpers/Helpers.h"
 #include <ctime>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/join.hpp>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <sstream>
 #include <format>
-#include <kuplung/utilities/datetimes/DateTimes.h>
 
 namespace fs = std::filesystem;
 
@@ -217,15 +212,13 @@ void ImportFile::drawFiles(ImportExportFormats* dialogImportType, int* dialogImp
         this->processFile(entity, setts, static_cast<ImportExportFormats>(*dialogImportType), *dialogImportType_Assimp);
 
 #ifdef _WIN32
-        std::string folderDelimiter = "\\";
+        char folderDelimiter = '\\';
 #else
-        std::string folderDelimiter = "/";
+        char folderDelimiter = '/';
 #endif
-        std::vector<std::string> elems;
-        boost::split(elems, entity.path, boost::is_any_of(folderDelimiter));
+        std::vector<std::string> elems = Kuplung::Helpers::splitString(entity.path, folderDelimiter);
         elems.pop_back();
-
-        Settings::Instance()->currentFolder = boost::algorithm::join(elems, folderDelimiter);
+        Settings::Instance()->currentFolder = Kuplung::Helpers::joinElementsToString(elems, folderDelimiter);
         Settings::Instance()->saveSettings();
       }
       else {
@@ -294,7 +287,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 						}
 					}
 				}
-				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !this->isHidden(iteratorFolder->path()))) {
+				if (isAllowedFileExtension || (fs::is_directory(fileStatus) && !Kuplung::Helpers::isHidden(iteratorFolder->path().string()))) {
 					FBEntity entity;
 					if (fs::is_directory(fileStatus))
 						entity.isFile = false;
@@ -314,7 +307,7 @@ std::map<std::string, FBEntity> ImportFile::getFolderContents(ImportExportFormat
 					else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
 
-          entity.modifiedDate = getDateToString(fs::last_write_time(iteratorFolder->path()).time_since_epoch());
+          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
 					folderContents[entity.path] = entity;
 				}
@@ -353,11 +346,4 @@ const double ImportFile::roundOff(double n) const {
   int i = d + 0.5;
   d = (float)i / 100.0;
   return d;
-}
-
-const bool ImportFile::isHidden(const fs::path &p) const {
-  std::string name = p.filename().string();
-  if (name == ".." || name == "."  || boost::starts_with(name, "."))
-    return true;
-  return false;
 }

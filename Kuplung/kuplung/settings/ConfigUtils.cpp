@@ -7,7 +7,7 @@
 //
 
 #include "ConfigUtils.hpp"
-#include <boost/algorithm/string.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include <fstream>
 #include <mutex>
 #include <stdexcept>
@@ -149,11 +149,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFiles() {
         else if (fileCounter == 1) {
           fileEntity.isFile = true;
           fileEntity.path = singleLine;
-
-          std::vector<std::string> elems;
-          boost::split(elems, fileEntity.path, boost::is_any_of("."));
-          fileEntity.extension = elems[elems.size() - 1];
-
+          fileEntity.extension = fileEntity.path.substr(fileEntity.path.find_last_of(".") + 1);
           recentFiles.push_back(fileEntity);
         }
         fileCounter += 1;
@@ -228,11 +224,7 @@ std::vector<FBEntity> ConfigUtils::loadRecentFilesImported() {
         else if (fileCounter == 1) {
           fileEntity.isFile = true;
           fileEntity.path = singleLine;
-
-          std::vector<std::string> elems;
-          boost::split(elems, fileEntity.path, boost::is_any_of("."));
-          fileEntity.extension = elems[elems.size() - 1];
-
+          fileEntity.extension = fileEntity.path.substr(fileEntity.path.find_last_of(".") + 1);
           recentFiles.push_back(fileEntity);
         }
         fileCounter += 1;
@@ -278,11 +270,11 @@ void ConfigUtils::readFile() {
         std::string opKey, opValue;
         std::vector<std::string> lineElements = this->splitString(singleLine, this->regex_equalsSign);
         opKey = lineElements[0];
-        boost::algorithm::trim(opKey);
+        opKey = Kuplung::Helpers::trim(opKey);
 
         if (lineElements.size() > 1) {
           opValue = lineElements[1];
-          boost::algorithm::trim(opValue);
+          opValue = Kuplung::Helpers::trim(opValue);
         }
         else
           opValue.clear();

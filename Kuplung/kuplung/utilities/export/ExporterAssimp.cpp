@@ -9,8 +9,6 @@
 #include "ExporterAssimp.hpp"
 #include <fstream>
 #include <glm/gtx/matrix_decompose.hpp>
-#include <boost/algorithm/string.hpp>
-#include <boost/algorithm/string/predicate.hpp>
 
 namespace KuplungApp { namespace Utilities { namespace Export {
 

@@ -7,13 +7,13 @@
 //
 
 #include "Settings.h"
+#include "kuplung/utilities/helpers/Strings.h"
 #include <SDL2/SDL.h>
 #include <iostream>
 #include <filesystem>
 #include <assimp/Exporter.hpp>
 #include <assimp/Importer.hpp>
 #include <assimp/importerdesc.h>
-#include <boost/algorithm/string.hpp>
 #include <memory>
 #include <stdarg.h>
 
@@ -150,8 +150,7 @@ void Settings::initSettings(const std::string& iniFolder) {
     const aiImporterDesc* aiImporterDesc = aImporter->GetImporterInfo(i);
     std::string textensions(aiImporterDesc->mFileExtensions);
     std::transform(textensions.begin(), textensions.end(), textensions.begin(), ::toupper);
-    std::vector<std::string> elems;
-    boost::split(elems, textensions, boost::is_any_of(" "));
+    std::vector<std::string> elems = Kuplung::Helpers::splitString(textensions, ' ');
     std::string extensions("." + elems[0]);
     for (size_t j = 1; j < elems.size(); j++) {
       extensions += ", ." + elems[j];

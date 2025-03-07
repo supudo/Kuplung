@@ -14,7 +14,6 @@
 /// <li><a href="https://github.com/ocornut/imgui" target="_blank">ImGui</a></li>
 /// <li><a href="https://github.com/CedricGuillemet/ImGuizmo" target="_blank">ImGuizmo</a></li>
 /// <li><a href="https://github.com/nothings/stb" target="_blank">STB libs</a></li>
-/// <li><a href="http://www.boost.org/" target="_blank">Boost</a></li>
 /// <li><a href="http://glm.g-truc.net/" target="_blank">GLM</a></li>
 /// <li><a href="https://www.libsdl.org/" target="_blank">SDL2</a></li>
 /// <li><a href="https://github.com/google/protobuf" target="_blank">protobuf</a></li>

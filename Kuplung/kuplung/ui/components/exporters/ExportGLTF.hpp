@@ -31,7 +31,6 @@ private:
   const std::string convertSize(size_t size) const;
   const double roundOff(double n) const;
   void modalNewFolder();
-  const bool isHidden(const std::filesystem::path &p) const;
 
   bool showNewFolderModel;
   float panelWidth_FileOptions, panelWidth_FileOptionsMin;

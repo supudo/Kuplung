@@ -8,14 +8,11 @@
 
 #include "ExportOBJ.hpp"
 #include "kuplung/utilities/imgui/imgui_internal.h"
+#include "kuplung/utilities/helpers/Helpers.h"
 #include <ctime>
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/filesystem/path.hpp>
-#include <boost/lexical_cast.hpp>
 #include <iostream>
 #include <sstream>
 #include <format>
-#include <kuplung/utilities/datetimes/DateTimes.h>
 
 namespace fs = std::filesystem;
 
@@ -256,7 +253,7 @@ std::map<std::string, FBEntity> ExportOBJ::getFolderContents(std::string const& 
     for (fs::directory_iterator iteratorFolder(currentPath); iteratorFolder != iteratorEnd; ++iteratorFolder) {
       try {
         fs::file_status fileStatus = iteratorFolder->status();
-        if (!this->isHidden(iteratorFolder->path())) {
+        if (!Kuplung::Helpers::isHidden(iteratorFolder->path().string())) {
           FBEntity entity;
           if (fs::is_directory(fileStatus))
             entity.isFile = false;
@@ -275,12 +272,10 @@ std::map<std::string, FBEntity> ExportOBJ::getFolderContents(std::string const& 
 
           if (!entity.isFile)
             entity.size.clear();
-          else {
-            // std::string size = boost::lexical_cast<std::string>(fs::file_size(iteratorFolder->path()));
+          else
             entity.size = this->convertSize(fs::file_size(iteratorFolder->path()));
-          }
 
-          entity.modifiedDate = getDateToString(fs::last_write_time(iteratorFolder->path()).time_since_epoch());
+          entity.modifiedDate = Kuplung::Helpers::getDateToStringFormatted(fs::last_write_time(iteratorFolder->path()).time_since_epoch(), "%Y-%m-%d %H:%M:%S");
 
           folderContents[entity.path] = entity;
         }
@@ -321,11 +316,4 @@ const double ExportOBJ::roundOff(double n) const {
   int i = d + 0.5;
   d = (float)i / 100.0;
   return d;
-}
-
-const bool ExportOBJ::isHidden(const fs::path &p) const {
-  std::string name = p.filename().string();
-  if (name == ".." || name == "."  || boost::starts_with(name, "."))
-    return true;
-  return false;
 }

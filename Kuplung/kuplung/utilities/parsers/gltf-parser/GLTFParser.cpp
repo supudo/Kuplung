@@ -7,12 +7,10 @@
 //
 
 #include "GLTFParser.hpp"
+#include "kuplung/utilities/cpp-base64/base64.h"
+#include "kuplung/utilities/helpers/Strings.h"
 #include <sstream>
 #include <nlohmann/json.hpp>
-#include "kuplung/utilities/cpp-base64/base64.h"
-#include <boost/algorithm/string/predicate.hpp>
-#include <boost/algorithm/string/replace.hpp>
-#include <boost/algorithm/string.hpp>
 
 GLTFParser::GLTFParser() {
 }
@@ -40,8 +38,9 @@ std::vector<MeshModel> GLTFParser::parse(const FBEntity& file, const std::vector
 	std::vector<std::string> dataBuffers;
 	for (auto const& buffer : j["buffers"]) {
 		std::string dataURI = buffer.at("uri").get<std::string>();
-		if (boost::starts_with(dataURI, infileBuffer)) {
-			boost::replace_first(dataURI, infileBuffer, "");
+    if (dataURI.starts_with(infileBuffer)) {
+      if (dataURI.find(infileBuffer) != std::string::npos)
+        dataURI = dataURI.replace(dataURI.find(infileBuffer), infileBuffer.length(), "");
 			dataBuffers.push_back(base64_decode(dataURI));
 		}
 		else {

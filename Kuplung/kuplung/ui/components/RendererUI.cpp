@@ -7,10 +7,10 @@
 //
 
 #include "RendererUI.hpp"
+#include "kuplung/utilities/helpers/Strings.h"
 #include "kuplung/utilities/imgui/imgui_internal.h"
 #include "kuplung/utilities/stb/stb_image.h"
 #include "kuplung/utilities/stb/stb_image_write.h"
-#include <boost/algorithm/string/predicate.hpp>
 #include <filesystem>
 
 static inline ImVec2 operator-(const ImVec2& lhs, const ImVec2& rhs) {
@@ -273,17 +273,17 @@ void RendererUI::dialogFileSaveProcessFile(const FBEntity& file, FileSaverOperat
   }
 
   if (this->imageFormat == 0) {
-    if (!boost::ends_with(endFile, ".bmp"))
+    if (!endFile.ends_with(".bmp"))
       endFile += ".bmp";
     stbi_write_bmp(endFile.c_str(), width, height, 3, pixels);
   }
   else if (this->imageFormat == 1) {
-    if (!boost::ends_with(endFile, ".png"))
+    if (!endFile.ends_with(".png"))
       endFile += ".png";
     stbi_write_png(endFile.c_str(), width, height, 3, pixels, width * 3);
   }
   else if (this->imageFormat == 2) {
-    if (!boost::ends_with(endFile, ".tga"))
+    if (!endFile.ends_with(".tga"))
       endFile += ".tga";
     stbi_write_tga(endFile.c_str(), width, height, 3, pixels);
   }

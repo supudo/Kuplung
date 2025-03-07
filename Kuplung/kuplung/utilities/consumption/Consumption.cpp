@@ -21,7 +21,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <boost/algorithm/string.hpp>
+#include "kuplung/utilities/helpers/Strings.h"
 #include "kuplung/utilities/gl/GLIncludes.h"
 
 namespace KuplungApp { namespace Utilities { namespace Consumption {
@@ -208,10 +208,7 @@ std::string Consumption::getCPULoad() {
     std::string c = Settings::Instance()->string_format("ps -p %i -o pcpu", int(p));
     const char* com = c.c_str();
     std::string res = this->exec(com);
-
-    std::vector<std::string> elems;
-    boost::split(elems, res, boost::is_any_of("\n"));
-
+    std::vector<std::string> elems = Kuplung::Helpers::splitString(res, '\n');
     this->usageCPU = "CPU:" + elems[1] + "%";
   }
   return this->usageCPU;

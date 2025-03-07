@@ -7,11 +7,11 @@
 //
 
 #include "objParser1.hpp"
+#include "kuplung/utilities/helpers/Strings.h"
 #include <fstream>
 #include <numeric>
 #include <sstream>
 #include <filesystem>
-#include <boost/algorithm/string.hpp>
 
 objParser1::~objParser1() {
 }
@@ -133,7 +133,8 @@ std::vector<MeshModel> objParser1::parse(const FBEntity& fileToParse, const std:
             }
             else if (std::regex_match(singleLine, this->regex_useMaterial)) {
                 this->models[static_cast<size_t>(indexModel)].MaterialTitle = singleLine;
-                boost::replace_all(this->models[static_cast<size_t>(indexModel)].MaterialTitle, "usemtl ", "");
+              if (this->models[static_cast<size_t>(indexModel)].MaterialTitle.find("usemtl ") != std::string::npos)
+                  this->models[static_cast<size_t>(indexModel)].MaterialTitle = this->models[static_cast<size_t>(indexModel)].MaterialTitle.replace(this->models[static_cast<size_t>(indexModel)].MaterialTitle.find("usemtl "), 7, "");
             }
             else if (std::regex_match(singleLine, this->regex_polygonalFaces)) {
                 std::vector<std::string> singleFaceElements = this->splitString(singleLine, this->regex_whiteSpace);
@@ -322,7 +323,8 @@ MeshMaterialTextureImage objParser1::parseTextureImage(std::string const& textur
         materialImage.Image = textureLine;
 
     std::string folderPath = this->file.path;
-    boost::replace_all(folderPath, this->file.title, "");
+    if (folderPath.find(this->file.title) != std::string::npos)
+      folderPath = folderPath.replace(folderPath.find(this->file.title), this->file.title.length(), "");
     if (!std::filesystem::exists(materialImage.Image) && !std::filesystem::path(materialImage.Image).is_absolute())
         materialImage.Image = folderPath + materialImage.Image;
 
